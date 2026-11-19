@@ -46,6 +46,12 @@ impl Menu {
                 out.push(Action::Sound("misc/menu3.wav"));
                 return;
             }
+            Run::EditHud => {
+                self.open(Screen::HudEditor);
+                self.hud_edit.open();
+                out.push(Action::Sound("misc/menu2.wav"));
+                return;
+            }
             Run::PreviewHit | Run::PreviewKill => {
                 let cue = if run == Run::PreviewHit { "hit" } else { "kill" };
                 out.push(Action::Command(format!("hitfeedback_preview {cue}\n")));

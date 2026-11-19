@@ -183,8 +183,8 @@ Options → Tilgjengelighet:
 - Fargeblindfiltre.
 - Justerbart trådkors: form, størrelse, kontur og fargeendring på mål eller
   ved drap; valgfrie treffmarkører.
-- **Lydteksting** og meldingsinnstillinger (Meldinger og teksting),
-  tekstskalering.
+- **Lydteksting**; plassering, størrelse og visningstid for meldinger og
+  teksting stilles inn i HUD-redigeringen.
 - Angrep og løp av/på (i stedet for å holde).
 - En glidebryter for spillfart som senker farten i hele spillet.
 - Autosikting med mållåsindikator, innstillinger for kjegle og rekkevidde.

@@ -103,9 +103,6 @@ hu Környezeti takarás
 @ Ammo Counts
 hu Lőszerszámlálók
 
-@ Ammo Counts Position
-hu Lőszerszámlálók helye
-
 @ Ammo Pickups
 hu Felvett lőszer
 
@@ -120,9 +117,6 @@ hu Alkalmazás erre
 
 @ Armor
 hu Páncél
-
-@ Armor Position
-hu Páncél helye
 
 @ Ask
 hu Kérdezzen
@@ -220,9 +214,6 @@ hu Kausztika
 @ Center
 hu Közép
 
-@ Center Message Position
-hu Középső üzenet helye
-
 @ Center Message Time
 hu Középső üzenet ideje
 
@@ -282,9 +273,6 @@ hu Célkereszt mérete
 
 @ Current Ammo
 hu Aktuális lőszer
-
-@ Current Ammo Position
-hu Aktuális lőszer helye
 
 @ Customize This Game
 hu A játék testreszabása
@@ -469,17 +457,11 @@ hu Giroszkópos célzás
 @ HUD
 hu HUD
 
-@ HUD Style
-hu HUD stílusa
-
 @ Health
 hu Életerő
 
 @ Health Pickups
 hu Felvett életerő
-
-@ Health Position
-hu Életerő helye
 
 @ Health Regeneration
 hu Életerő-regeneráció
@@ -589,9 +571,6 @@ hu Ugrások
 @ Keys & Powerups
 hu Kulcsok és bónuszok
 
-@ Keys & Powerups Position
-hu Kulcsok és bónuszok helye
-
 @ Kill Bonus (x)
 hu Ölési bónusz (x)
 
@@ -661,15 +640,6 @@ hu Max. hatótáv
 @ Melee only
 hu Csak közelharc
 
-@ Message Background
-hu Üzenet háttere
-
-@ Message Text Size
-hu Üzenetek betűmérete
-
-@ Messages & Captions
-hu Üzenetek és feliratok
-
 @ Meter Duration (real seconds)
 hu Mérő időtartama (valós mp)
 
@@ -681,9 +651,6 @@ hu Mód
 
 @ Modern Console
 hu Modern konzol
-
-@ Modern HUD Layout
-hu Modern HUD-elrendezés
 
 @ Most recent save
 hu Legutóbbi mentés
@@ -732,9 +699,6 @@ hu Zajszűrő
 
 @ Normal Color
 hu Normál szín
-
-@ Notify Message Position
-hu Értesítések helye
 
 @ Notify Message Time
 hu Értesítések ideje
@@ -928,17 +892,11 @@ hu váll balra
 @ Shoulder right
 hu váll jobbra
 
-@ Show FPS
-hu FPS kijelzése
-
 @ Show Face
 hu Arc megjelenítése
 
 @ Shrapnel
 hu Repeszek
-
-@ Size of on-screen messages and captions
-hu A képernyőüzenetek és feliratok mérete
 
 @ Skill
 hu Nehézség
@@ -1108,15 +1066,6 @@ hu Lassítás a fegyverkeréknél
 @ Weapons
 hu Fegyverek
 
-@ Weapons Position
-hu Fegyverek helye
-
-@ Where center-screen messages appear
-hu Hol jelennek meg a középső üzenetek
-
-@ Where pickup and event messages appear
-hu Hol jelennek meg a felvételi és eseményüzenetek
-
 @ White
 hu Fehér
 
@@ -1156,9 +1105,6 @@ hu doboz
 
 @ broken square
 hu tört négyzet
-
-@ classic
-hu klasszikus
 
 @ coarse
 hu durva
@@ -1247,29 +1193,17 @@ hu intenzív
 @ large
 hu nagy
 
-@ larger
-hu nagyobb
-
-@ largest
-hu legnagyobb
-
 @ linear
 hu lineáris
 
 @ low
 hu alacsony
 
-@ lower
-hu alsó
-
 @ magenta
 hu bíbor
 
 @ medium
 hu közepes
-
-@ middle
-hu közép
 
 @ middle left
 hu középen balra
@@ -1357,9 +1291,6 @@ hu tripla
 
 @ tritanopia
 hu tritanópia
-
-@ upper
-hu felső
 
 @ white
 hu fehér
@@ -1491,9 +1422,6 @@ hu Idő és statisztika
 @ Clock
 hu Óra
 
-@ Clock Position
-hu Óra helye
-
 @ Level Timer
 hu Pályaidőzítő
 
@@ -1506,17 +1434,11 @@ hu Csúcs típusa
 @ Personal Best Color
 hu Csúcs színe
 
-@ Timer Position
-hu Időzítő helye
-
 @ Kills
 hu Ölések
 
 @ Secrets
 hu Titkok
-
-@ Kills & Secrets Position
-hu Ölések és titkok helye
 
 @ 24-hour
 hu 24 órás
@@ -1564,8 +1486,139 @@ hu GPU-idő
 @ Video Memory
 hu Videomemória
 
-@ Metrics Position
-hu Mutatók helye
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+hu Hozzáadás
+
+@ Ammo
+hu Lőszer
+
+@ Ammo Bar
+hu Lőszersáv
+
+@ Armor Bar
+hu Páncélsáv
+
+@ Background
+hu Háttér
+
+@ Cells
+hu Cellák
+
+@ Center Message
+hu Középső üzenet
+
+@ Columns
+hu Oszlopok
+
+@ Edit HUD
+hu HUD szerkesztése
+
+@ FPS
+hu FPS
+
+@ Face
+hu Arc
+
+@ Fill Width
+hu Teljes szélesség
+
+@ Font
+hu Betűtípus
+
+@ Format
+hu Formátum
+
+@ HUD Editor
+hu HUD-szerkesztő
+
+@ Health Bar
+hu Életerősáv
+
+@ Inventory
+hu Felszerelés
+
+@ Keys
+hu Kulcsok
+
+@ Nails
+hu Szögek
+
+@ Notify Messages
+hu Értesítések
+
+@ Position
+hu Pozíció
+
+@ Powerups
+hu Bónuszok
+
+@ Precision
+hu Pontosság
+
+@ Quake
+hu Quake
+
+@ Rockets
+hu Rakéták
+
+@ Scale
+hu Méretarány
+
+@ Sections
+hu Részek
+
+@ Shells
+hu Sörét
+
+@ Show As
+hu Megjelenítés mint
+
+@ Show Icon
+hu Ikon megjelenítése
+
+@ Show Value
+hu Érték megjelenítése
+
+@ Sigils
+hu Rúnák
+
+@ Status
+hu Állapot
+
+@ Status Bar
+hu Állapotsáv
+
+@ Visibility
+hu Láthatóság
+
+@ big numbers
+hu nagy számjegyek
+
+@ center
+hu közép
+
+@ status + inventory
+hu állapot + felszerelés
+
+@ status only
+hu csak állapot
+
+@ Text Color
+hu Szöveg színe
+
+@ Label Color
+hu Címkék színe
+
+@ HUD Preset
+hu HUD-sablon
+
+@ custom
+hu egyéni
+
+@ classic
+hu klasszikus
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ hu Korlátozza a nyomok számát és élettartamát, a repülő cseppeket és a 
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 hu A shader bemenetét a kimeneti méretre korlátozza, így a 200%-os renderelési skála négyszeres shaderköltség nélkül tartja meg a 3D élességét; a kis skálák alacsony felbontásúak maradnak
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-hu Klasszikus: az eredeti állapotsáv; modern: kompakt elemek a képernyő szélein
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 hu A bevonat-atlasz felbontása, újraépítési gyakorisága és shaderrészletessége: az alacsony kisebb bevonatokat ritkábban épít gyors árnyalással; a magas teljes részletességű
 
@@ -1629,9 +1679,6 @@ hu A railgun spirális csóvájának színe; osztott képernyőn minden játéko
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 hu A railgun sebzése minden ellenségen, amelyen áthalad (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-hu Sötét háttér a képernyőüzenetek mögött az olvashatóságért
 
 @ Dark border keeps the crosshair visible on any background
 hu A sötét keret bármilyen háttéren láthatóvá teszi a célkeresztet
@@ -1879,17 +1926,11 @@ hu Hullámzó fényminták a víz és a nyálka alatti felületeken
 @ Scales all damage you take; above 100% is harder
 hu Minden elszenvedett sebzést skáláz; 100% fölött nehezebb
 
-@ Screen edge for this element; elements on the same spot stack
-hu Az elem képernyőszéle; az azonos helyen lévő elemek egymásra kerülnek
-
 @ Seconds a monster hit by the boomerang stays stunned
 hu Ennyi másodpercig marad kábult a bumeránggal eltalált szörny
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 hu Ennyi másodpercig maradnak a becsapódásnyomok és beállt szögek, mielőtt elhalványulnak; független a Részecskék minőségétől
-
-@ Seconds messages at the top of the screen stay up
-hu Ennyi másodpercig látszanak a képernyő tetején az üzenetek
 
 @ Seconds the flick stick snap takes; lower is faster
 hu A flick stick ugrásának ideje másodpercben; a kisebb gyorsabb
@@ -2063,9 +2104,6 @@ hu A napszakot mutatja a választott formában
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 hu A pálya ideje, mint a szünetképernyőn; szünetnél és a kijáratnál megáll
 
-@ Your best time on this map and skill, next to the timer (single player)
-hu A legjobb időd ezen a pályán és nehézségen, az időzítő mellett (egyjátékos)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 hu any%: bármilyen befejezés; 100%: minden ölés és titok. A mentéskártyák ezt mutatják előbb
 
@@ -2074,9 +2112,6 @@ hu Az egyéni csúcs színe a HUD-on és a mentéskártyákon
 
 @ Shown as a count or as a percentage of the level's total
 hu Darabszámként vagy a pálya összesének százalékaként
-
-@ Where this goes on screen; items at the same position share a line
-hu Hol jelenik meg a képernyőn; az azonos helyen lévők egy sort osztanak meg
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 hu Megtartja minden új egyéni csúcsot hozó pálya demóját; a régiek maradnak. Automatikus felvétel nélkül is rögzít
@@ -2099,6 +2134,12 @@ hu Videokártya-idő képkockánként ezredmásodpercben
 
 @ Video memory in use and what the driver allows, where it reports it
 hu Használt videomemória és amennyit az illesztőprogram enged, ha jelzi
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+hu HUD-elemek mozgatása, átméretezése, hozzáadása és eltávolítása: életerő, lőszer, fegyverek, időzítők, üzenetek és más
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+hu Modern: tömör elemek a képernyő szélein; klasszikus: az eredeti állapotsáv. Választásuk visszaállítja a HUD-ot; a HUD szerkesztése menüben tett változtatások egyénivé teszik
 
 # ==== ui.txt ====
 

@@ -24,9 +24,8 @@ def capture(engine, basedir, addon):
     work.mkdir(parents=True, exist_ok=True)
     settings = {
         "custom_enable": 1, f"addon_{addon}": 1, "skill": 2, "scr_centertime": 0,
-        "con_notifytime": 0, "scr_showfps": 0, "scr_hudstyle": 1,
-        "hud_health": 0, "hud_armor": 0, "hud_ammo": 0, "hud_ammolist": 0,
-        "hud_weapons": 0, "hud_items": 0, "hud_face": 0, "crosshair": 1,
+        # a HUD layout with only the (permanent) messages
+        "con_notifytime": 0, "hud_layout": "center@mc", "crosshair": 1,
         "host_maxfps": 120, "r_drawviewmodel": 1, "v_flashscale": 0,
         "sv_autosave_keep": 0, "volume": 0, "bgmvolume": 0,
     }

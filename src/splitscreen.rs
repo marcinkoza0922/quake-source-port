@@ -23,7 +23,7 @@ pub struct Guest {
     pub input: qinput::Input,
     /// SDL id of the gamepad that plays this guest; `None` until one joins.
     pub pad: Option<u32>,
-    pub hud_fade: crate::sbar::HudFade,
+    pub hud_fade: crate::hud::Fade,
     pub(crate) feedback: crate::host::feedback::Feedback,
     pub(crate) pending_feedback: Option<bool>,
     /// Sound events this frame; the host plays those player 1's client

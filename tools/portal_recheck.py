@@ -23,9 +23,7 @@ def capture(job, args):
                '+sv_autosave', '0', '+r_teleportwindows', '1', '+r_drawviewmodel', '0',
                '+viewsize', '120', '+con_notifytime', '0', '+crosshair', '0',
                '+r_motionblur', '0', '+scr_centertime', '0', '+v_flashscale', '0',
-               '+hud_health', '0', '+hud_armor', '0', '+hud_ammo', '0',
-               '+hud_ammolist', '0', '+hud_weapons', '0', '+hud_items', '0',
-               '+hud_face', '0', '+map', mapname,
+               '+hud_layout', 'center@mc', '+map', mapname,
                '+delay 0.5 god', '+delay 0.6 noclip']
     results = []
     for n, (portal, original) in enumerate(portals):

@@ -9,6 +9,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         Item::ShaderParam(_) => return Some(qcore::t!("A setting of the chosen shader; arrows step it, Enter is not needed")),
         Item::Language => return Some(qcore::t!("Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language")),
         Item::Text { cvar: "_export_name", .. } => return Some(qcore::t!("Name of the video file; the extension follows the video format, and a file of the same name is replaced")),
+        Item::Run { run: Run::EditHud, .. } => return Some(qcore::t!("Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more")),
         Item::Text { cvar: "_demo_rename", .. } => return Some(qcore::t!("New name of the demo; if another demo has it, a number is added")),
         _ => return None,
     };
@@ -175,10 +176,6 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "crosshair_outline" => "Dark border keeps the crosshair visible on any background",
         "menu_music" => "Plays the Quake theme in the main menu when no game is running",
         "cl_captions" => "Shows text for important sounds: doors, alerted enemies, secrets, pickups",
-        "scr_textscale" => "Size of on-screen messages and captions",
-        "scr_textbg" => "Dark backdrop behind on-screen messages for readability",
-        "scr_centertime" => "Seconds a center-screen message stays up",
-        "con_notifytime" => "Seconds messages at the top of the screen stay up",
         "in_toggleattack" => "Press attack once to keep firing, again to stop",
         "in_togglerun" => "Press run once to switch between running and walking",
         "modifier_damagetaken" => "Scales all damage you take; above 100% is harder",
@@ -194,30 +191,8 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "modifier_noselfdamage" => "Your own rockets and grenades don't hurt you; rocket jumps still work",
         "modifier_regen" => "Slowly heals up to 100 health after 5 seconds without being hit",
         "modifier_jumps" => "Jump again in mid-air",
-        "scr_hudstyle" => "Classic: the original status bar; modern: compact elements at the screen edges",
-        "scr_centerpos" => "Where center-screen messages appear",
-        "con_notifypos" => "Where pickup and event messages appear",
         "con_modern" => "Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console",
-        "hud_face" => "Shows the player face next to the health number",
-        "hud_clock" => "Shows the time of day in the chosen format",
-        "hud_timer" => "The level time, as on the intermission screen; it stops while paused and at the exit",
-        "hud_pb" => "Your best time on this map and skill, next to the timer (single player)",
-        "hud_pb_100" => "any%: any finish; 100%: every kill and secret. Save cards show this one first",
-        "hud_pb_color" => "Color of the personal best on the HUD and save cards",
-        "hud_kills" | "hud_secrets" => "Shown as a count or as a percentage of the level's total",
-        "scr_showfps" => "Frames per second, averaged over half a second",
-        "scr_showframetime" => "Average time per frame in milliseconds, and the slowest frame",
-        "scr_showcpu" => "How busy the game keeps the processor, as a share of all its cores",
-        "scr_showram" => "Memory the game uses",
-        "scr_showgpu" => "Graphics card time per frame in milliseconds",
-        "scr_showvram" => "Video memory in use and what the driver allows, where it reports it",
-        "hud_clock_pos" | "hud_timer_pos" | "hud_stats_pos" | "scr_metrics_pos" => "Where this goes on screen; items at the same position share a line",
-        "hud_health" | "hud_armor" | "hud_ammo" | "hud_ammolist" | "hud_weapons" | "hud_items" => {
-            "Immersive: appears for a few seconds only when its value changes"
-        }
-        "hud_health_pos" | "hud_armor_pos" | "hud_ammo_pos" | "hud_ammolist_pos" | "hud_weapons_pos" | "hud_items_pos" => {
-            "Screen edge for this element; elements on the same spot stack"
-        }
+        "hud_preset" => "Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom",
         "a11y_gamespeed" => "Slows the whole game down; single player only. Saves and demos stay compatible with other ports",
         _ => return None,
     })
@@ -270,10 +245,6 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Accessibility => ACCESSIBILITY,
         Page::Hud => HUD,
         Page::Crosshair => CROSSHAIR,
-        Page::HudLayout => HUD_LAYOUT,
-        Page::TimeHud => super::time_page::TIME,
-        Page::Metrics => super::time_page::METRICS,
-        Page::Messages => MESSAGES,
         Page::Water => WATER,
         Page::Bloom => BLOOM,
         Page::RtLights => RT_LIGHTS,
@@ -314,10 +285,6 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Modifiers => "Gameplay Modifiers",
         Page::AutoAim => "Auto-aim Settings",
         Page::GrenadeArc => "Grenade Arc Settings",
-        Page::HudLayout => "Modern HUD Layout",
-        Page::TimeHud => "Time & Stats",
-        Page::Metrics => "Performance Metrics",
-        Page::Messages => "Messages & Captions",
         Page::Water => "Water Settings",
         Page::Bloom => "Bloom Settings",
         Page::RtLights => "Real-time Light Settings",
@@ -370,7 +337,6 @@ pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
     (page == Page::AutoAim && cv.value_of("assist_autoaim") == 0.0)
         || (page == Page::GrenadeArc && cv.value_of("assist_grenadearc") == 0.0)
         || (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
-        || (page == Page::HudLayout && cv.value_of("scr_hudstyle") == 0.0)
         || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
         || (page == Page::Bloom && cv.value_of("r_bloom") == 0.0)
         || (page == Page::RtLights && cv.value_of("r_shadow_realtime_dlight") == 0.0)

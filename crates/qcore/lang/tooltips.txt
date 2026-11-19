@@ -113,13 +113,6 @@ it Limita l'ingresso dello shader alla dimensione di uscita, così una scala di 
 es Limita la entrada del sombreador al tamaño de salida, así una escala de renderizado del 200 % mantiene la nitidez 3D sin cuadruplicar su coste; las escalas bajas siguen en baja resolución
 ru Ограничивает вход шейдера размером вывода: масштаб рендеринга 200% сохраняет чёткость 3D без четырёхкратной нагрузки; малые масштабы остаются в низком разрешении
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-fr Classique : la barre d'état d'origine ; moderne : éléments compacts sur les bords de l'écran
-de Klassisch: die originale Statusleiste; modern: kompakte Elemente an den Bildrändern
-it Classico: la barra di stato originale; moderno: elementi compatti ai bordi dello schermo
-es Clásico: la barra de estado original; moderno: elementos compactos en los bordes de la pantalla
-ru Классический: исходная строка состояния; современный: компактные элементы по краям экрана
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 fr Résolution de l'atlas des couches, fréquence de reconstruction et détail du shader : faible crée des couches plus petites moins souvent avec un ombrage rapide ; élevée utilise tout le détail
 de Auflösung des Beschichtungsatlas, Neuaufbaurate und Shader-Detail: niedrig baut kleinere Schichten seltener mit schneller Schattierung; hoch nutzt volle Details
@@ -140,13 +133,6 @@ de Schaden der Railgun an jedem durchschlagenen Gegner (Quake III: 100)
 it Danni del railgun a ogni nemico trapassato (Quake III: 100)
 es Daño que inflige el railgun a cada enemigo que atraviesa (Quake III: 100)
 ru Урон рейлгана каждому пробитому врагу (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-fr Fond sombre derrière les messages à l'écran pour la lisibilité
-de Dunkler Hintergrund hinter Bildschirmnachrichten für bessere Lesbarkeit
-it Sfondo scuro dietro i messaggi su schermo per la leggibilità
-es Fondo oscuro tras los mensajes en pantalla para leerlos mejor
-ru Тёмная подложка под экранными сообщениями для читаемости
 
 @ Dark border keeps the crosshair visible on any background
 fr Un contour sombre garde le réticule visible sur tout fond
@@ -722,13 +708,6 @@ it Scala tutti i danni subiti; oltre il 100% è più difficile
 es Escala todo el daño que recibes; por encima del 100 % es más difícil
 ru Масштабирует весь получаемый урон; выше 100% — сложнее
 
-@ Screen edge for this element; elements on the same spot stack
-fr Bord de l'écran pour cet élément ; les éléments au même endroit s'empilent
-de Bildschirmrand für dieses Element; Elemente an derselben Stelle stapeln sich
-it Bordo dello schermo per questo elemento; gli elementi nello stesso punto si impilano
-es Borde de la pantalla para este elemento; los elementos en el mismo sitio se apilan
-ru Край экрана для этого элемента; элементы в одном месте складываются стопкой
-
 @ Seconds a monster hit by the boomerang stays stunned
 fr Secondes d'étourdissement d'un monstre touché par le boomerang
 de Sekunden, die ein vom Bumerang getroffenes Monster betäubt bleibt
@@ -742,13 +721,6 @@ de Sekunden, die Einschläge und steckende Nägel bleiben, bevor sie verblassen;
 it Secondi di permanenza di impatti e chiodi conficcati prima di sfumare; indipendente da Qualità delle particelle
 es Segundos que permanecen los impactos y clavos clavados antes de desvanecerse; independiente de Calidad de las partículas
 ru Сколько секунд держатся следы попаданий и застрявшие гвозди; не зависит от качества частиц
-
-@ Seconds messages at the top of the screen stay up
-fr Secondes d'affichage des messages en haut de l'écran
-de Sekunden, die Nachrichten oben am Bildschirm bleiben
-it Secondi di permanenza dei messaggi in cima allo schermo
-es Segundos que permanecen los mensajes en la parte superior de la pantalla
-ru Сколько секунд держатся сообщения вверху экрана
 
 @ Seconds the flick stick snap takes; lower is faster
 fr Durée du pivot du flick stick, en secondes ; plus bas est plus rapide
@@ -1150,13 +1122,6 @@ it Il tempo del livello, come nella schermata di intervallo; si ferma in pausa e
 es El tiempo del nivel, como en la pantalla de intermedio; se detiene en pausa y en la salida
 ru Время уровня, как на экране итогов; останавливается на паузе и на выходе
 
-@ Your best time on this map and skill, next to the timer (single player)
-fr Votre meilleur temps sur cette carte et ce niveau de difficulté, à côté du chrono (solo)
-de Deine Bestzeit auf dieser Karte und Stufe, neben dem Timer (Einzelspieler)
-it Il tuo miglior tempo su questa mappa e difficoltà, accanto al timer (giocatore singolo)
-es Tu mejor tiempo en este mapa y dificultad, junto al cronómetro (un jugador)
-ru Ваше лучшее время на этой карте и сложности, рядом с таймером (одиночная игра)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 fr any% : toute fin ; 100% : tous les ennemis et secrets. Les fiches de sauvegarde montrent celui-ci en premier
 de any%: jedes Ende; 100%: alle Kills und Geheimnisse. Spielstandkarten zeigen diese zuerst
@@ -1177,13 +1142,6 @@ de Als Anzahl oder als Prozent der Gesamtzahl des Levels
 it Mostrato come numero o come percentuale del totale del livello
 es Se muestra como cantidad o como porcentaje del total del nivel
 ru Числом или процентом от общего количества на уровне
-
-@ Where this goes on screen; items at the same position share a line
-fr Où cela s'affiche ; les éléments à la même position partagent une ligne
-de Wo es auf dem Bildschirm erscheint; Elemente an derselben Position teilen sich eine Zeile
-it Dove appare sullo schermo; gli elementi nella stessa posizione condividono una riga
-es Dónde aparece en pantalla; los elementos en la misma posición comparten una línea
-ru Где это на экране; элементы в одном положении делят строку
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 fr Garde la démo de chaque niveau qui bat un record personnel ; les anciennes restent. Enregistre même sans démos auto
@@ -1235,3 +1193,17 @@ de Belegter Videospeicher und was der Treiber erlaubt, sofern er es meldet
 it Memoria video in uso e quanta ne consente il driver, se lo indica
 es Memoria de vídeo en uso y la que permite el controlador, si lo indica
 ru Занятая видеопамять и доступный от драйвера объём, если он его сообщает
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+fr Déplacer, redimensionner, ajouter et retirer des éléments de l'ATH : santé, munitions, armes, chronomètres, messages et plus
+de HUD-Elemente verschieben, skalieren, hinzufügen und entfernen: Gesundheit, Munition, Waffen, Timer, Nachrichten und mehr
+it Sposta, ridimensiona, aggiungi e rimuovi elementi dell'interfaccia: salute, munizioni, armi, timer, messaggi e altro
+es Mueve, redimensiona, añade y quita elementos de la interfaz: salud, munición, armas, temporizadores, mensajes y más
+ru Перемещайте, масштабируйте, добавляйте и убирайте элементы интерфейса: здоровье, боеприпасы, оружие, таймеры, сообщения и другое
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+fr Moderne : éléments compacts sur les bords de l'écran ; classique : la barre d'état d'origine. En choisir un réinitialise l'ATH ; toute modification dans Modifier l'ATH le rend personnalisé
+de Modern: kompakte Elemente an den Bildschirmrändern; klassisch: die originale Statusleiste. Eine Auswahl setzt das HUD zurück; Änderungen in „HUD bearbeiten“ machen es zu „eigenes“
+it Moderna: elementi compatti ai bordi dello schermo; classica: la barra di stato originale. Sceglierne una ripristina l'interfaccia; le modifiche in Modifica interfaccia la rendono personalizzata
+es Moderna: elementos compactos en los bordes de la pantalla; clásica: la barra de estado original. Elegir una restablece la interfaz; los cambios en Editar interfaz la vuelven personalizada
+ru Современный: компактные элементы по краям экрана; классический: исходная строка состояния. Выбор шаблона сбрасывает интерфейс; изменения в «Изменить интерфейс» делают его своим

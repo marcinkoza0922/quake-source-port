@@ -192,8 +192,8 @@ Options → Aksesueshmëria:
 - Filtra për daltonizmin.
 - Shënjestër e konfigurueshme: forma, madhësia, kontura dhe ndryshimi i
   ngjyrës mbi shenjë ose kur vret; shenja goditjeje opsionale.
-- **Titrat e tingujve** dhe cilësimet e mesazheve (Mesazhet & titrat),
-  shkallëzimi i tekstit.
+- **Titrat e tingujve**; pozicioni, madhësia dhe kohëzgjatja e mesazheve dhe
+  titrave caktohen te redaktori i HUD-it.
 - Sulm dhe vrap me ndërrim (në vend të mbajtjes).
 - Një rrëshqitës i shpejtësisë së lojës për ta ngadalësuar gjithë lojën.
 - Shënjim automatik me tregues kapjeje, cilësime për konin dhe rrezen.

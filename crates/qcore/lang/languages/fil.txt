@@ -103,9 +103,6 @@ fil Ambient Occlusion
 @ Ammo Counts
 fil Bilang ng Bala
 
-@ Ammo Counts Position
-fil Posisyon ng Bilang ng Bala
-
 @ Ammo Pickups
 fil Napulot na Bala
 
@@ -120,9 +117,6 @@ fil Ilapat Sa
 
 @ Armor
 fil Armor
-
-@ Armor Position
-fil Posisyon ng Armor
 
 @ Ask
 fil Itanong
@@ -220,9 +214,6 @@ fil Caustics
 @ Center
 fil Gitna
 
-@ Center Message Position
-fil Posisyon ng Gitnang Mensahe
-
 @ Center Message Time
 fil Tagal ng Gitnang Mensahe
 
@@ -282,9 +273,6 @@ fil Laki ng Crosshair
 
 @ Current Ammo
 fil Kasalukuyang Bala
-
-@ Current Ammo Position
-fil Posisyon ng Kasalukuyang Bala
 
 @ Customize This Game
 fil I-customize ang Larong Ito
@@ -469,17 +457,11 @@ fil Gyro na Puntirya
 @ HUD
 fil HUD
 
-@ HUD Style
-fil Istilo ng HUD
-
 @ Health
 fil Health
 
 @ Health Pickups
 fil Napulot na Health
-
-@ Health Position
-fil Posisyon ng Health
 
 @ Health Regeneration
 fil Pagbawi ng Health
@@ -589,9 +571,6 @@ fil Talon
 @ Keys & Powerups
 fil Susi at Powerup
 
-@ Keys & Powerups Position
-fil Posisyon ng Susi at Powerup
-
 @ Kill Bonus (x)
 fil Bonus sa Pagpatay (x)
 
@@ -661,15 +640,6 @@ fil Max na Abot
 @ Melee only
 fil Melee lang
 
-@ Message Background
-fil Background ng Mensahe
-
-@ Message Text Size
-fil Laki ng Teksto ng Mensahe
-
-@ Messages & Captions
-fil Mensahe at Caption
-
 @ Meter Duration (real seconds)
 fil Tagal ng Meter (totoong segundo)
 
@@ -681,9 +651,6 @@ fil Mode
 
 @ Modern Console
 fil Modernong Console
-
-@ Modern HUD Layout
-fil Modernong Layout ng HUD
 
 @ Most recent save
 fil Pinakabagong save
@@ -732,9 +699,6 @@ fil Filter ng Noise
 
 @ Normal Color
 fil Normal na Kulay
-
-@ Notify Message Position
-fil Posisyon ng Notification
 
 @ Notify Message Time
 fil Tagal ng Notification
@@ -928,17 +892,11 @@ fil kaliwang balikat
 @ Shoulder right
 fil kanang balikat
 
-@ Show FPS
-fil Ipakita ang FPS
-
 @ Show Face
 fil Ipakita ang Mukha
 
 @ Shrapnel
 fil Shrapnel
-
-@ Size of on-screen messages and captions
-fil Laki ng mensahe at caption sa screen
 
 @ Skill
 fil Hirap
@@ -1108,15 +1066,6 @@ fil Pagbagal sa Weapon Wheel
 @ Weapons
 fil Mga Armas
 
-@ Weapons Position
-fil Posisyon ng Armas
-
-@ Where center-screen messages appear
-fil Kung saan lumalabas ang mensahe sa gitna ng screen
-
-@ Where pickup and event messages appear
-fil Kung saan lumalabas ang mensahe ng pulot at pangyayari
-
 @ White
 fil Puti
 
@@ -1156,9 +1105,6 @@ fil kahon
 
 @ broken square
 fil sirang parisukat
-
-@ classic
-fil klasiko
 
 @ coarse
 fil magaspang
@@ -1247,29 +1193,17 @@ fil matindi
 @ large
 fil malaki
 
-@ larger
-fil mas malaki
-
-@ largest
-fil pinakamalaki
-
 @ linear
 fil linear
 
 @ low
 fil mababa
 
-@ lower
-fil ibaba
-
 @ magenta
 fil magenta
 
 @ medium
 fil katamtaman
-
-@ middle
-fil gitna
 
 @ middle left
 fil gitna kaliwa
@@ -1357,9 +1291,6 @@ fil triple
 
 @ tritanopia
 fil tritanopia
-
-@ upper
-fil itaas
 
 @ white
 fil puti
@@ -1491,9 +1422,6 @@ fil Oras at Istatistika
 @ Clock
 fil Orasan
 
-@ Clock Position
-fil Posisyon ng Orasan
-
 @ Level Timer
 fil Timer ng Level
 
@@ -1506,17 +1434,11 @@ fil Uri ng Personal Best
 @ Personal Best Color
 fil Kulay ng Personal Best
 
-@ Timer Position
-fil Posisyon ng Timer
-
 @ Kills
 fil Napatay
 
 @ Secrets
 fil Mga Lihim
-
-@ Kills & Secrets Position
-fil Posisyon ng Napatay at Lihim
 
 @ 24-hour
 fil 24-oras
@@ -1564,8 +1486,139 @@ fil Oras ng GPU
 @ Video Memory
 fil Video Memory
 
-@ Metrics Position
-fil Posisyon ng mga Sukatan
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+fil Idagdag
+
+@ Ammo
+fil Bala
+
+@ Ammo Bar
+fil Bar ng Bala
+
+@ Armor Bar
+fil Bar ng Armor
+
+@ Background
+fil Background
+
+@ Cells
+fil Cells
+
+@ Center Message
+fil Gitnang Mensahe
+
+@ Columns
+fil Mga Column
+
+@ Edit HUD
+fil I-edit ang HUD
+
+@ FPS
+fil FPS
+
+@ Face
+fil Mukha
+
+@ Fill Width
+fil Buong Lapad
+
+@ Font
+fil Font
+
+@ Format
+fil Format
+
+@ HUD Editor
+fil HUD Editor
+
+@ Health Bar
+fil Bar ng Kalusugan
+
+@ Inventory
+fil Imbentaryo
+
+@ Keys
+fil Mga Susi
+
+@ Nails
+fil Nails
+
+@ Notify Messages
+fil Mga Notification
+
+@ Position
+fil Posisyon
+
+@ Powerups
+fil Mga Powerup
+
+@ Precision
+fil Katumpakan
+
+@ Quake
+fil Quake
+
+@ Rockets
+fil Rockets
+
+@ Scale
+fil Laki
+
+@ Sections
+fil Mga Seksiyon
+
+@ Shells
+fil Shells
+
+@ Show As
+fil Ipakita Bilang
+
+@ Show Icon
+fil Ipakita ang Icon
+
+@ Show Value
+fil Ipakita ang Halaga
+
+@ Sigils
+fil Mga Sigil
+
+@ Status
+fil Status
+
+@ Status Bar
+fil Status Bar
+
+@ Visibility
+fil Visibility
+
+@ big numbers
+fil malalaking numero
+
+@ center
+fil gitna
+
+@ status + inventory
+fil status + imbentaryo
+
+@ status only
+fil status lang
+
+@ Text Color
+fil Kulay ng Teksto
+
+@ Label Color
+fil Kulay ng Label
+
+@ HUD Preset
+fil HUD Preset
+
+@ custom
+fil custom
+
+@ classic
+fil klasiko
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ fil Nililimitahan ang bilang at tagal ng marka, patak sa ere at mantsa ng sugat/
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 fil Nililimitahan ang input ng shader sa laki ng output para malinaw ang 3D sa 200% na render scale nang walang 4x na gastos sa shader; mababa pa rin ang resolusyon sa mababang scale
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-fil Klasiko: ang orihinal na status bar; moderno: maliliit na elemento sa gilid ng screen
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 fil Resolusyon ng coat atlas, dalas ng rebuild at detalye ng shader: mas maliit at mas madalang na coat na may mabilis na shading sa mababa; buong detalye sa mataas
 
@@ -1629,9 +1679,6 @@ fil Kulay ng paikot na bakas ng railgun; sa split-screen, kukunin ng bawat manla
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 fil Pinsala ng railgun sa bawat kalabang tinatagusan nito (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-fil Madilim na background sa likod ng mga mensahe sa screen para madaling mabasa
 
 @ Dark border keeps the crosshair visible on any background
 fil Pinananatiling kita ng madilim na balangkas ang crosshair sa anumang background
@@ -1879,17 +1926,11 @@ fil Kumakaway na pattern ng ilaw sa ibabaw sa ilalim ng tubig at slime
 @ Scales all damage you take; above 100% is harder
 fil Ina-adjust ang lahat ng pinsalang natatanggap mo; mas mahirap kapag lampas 100%
 
-@ Screen edge for this element; elements on the same spot stack
-fil Gilid ng screen para sa elementong ito; nagpapatong ang mga elemento sa iisang puwesto
-
 @ Seconds a monster hit by the boomerang stays stunned
 fil Ilang segundong naka-stun ang halimaw na tinamaan ng boomerang
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 fil Ilang segundong nananatili ang marka ng tama at nakabaong pako bago maglaho; hiwalay sa Kalidad ng Particle
-
-@ Seconds messages at the top of the screen stay up
-fil Ilang segundong nakikita ang mga mensahe sa itaas ng screen
 
 @ Seconds the flick stick snap takes; lower is faster
 fil Ilang segundo ang snap ng flick stick; mas mabilis kapag mas mababa
@@ -2063,9 +2104,6 @@ fil Ipinapakita ang oras sa napiling format
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 fil Ang oras ng level, gaya sa intermission screen; humihinto kapag naka-pause at sa labasan
 
-@ Your best time on this map and skill, next to the timer (single player)
-fil Ang pinakamabilis mong oras sa mapang ito at hirap, katabi ng timer (single player)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 fil any%: anumang pagtatapos; 100%: lahat ng napatay at lihim. Ito muna ang ipinapakita ng mga save card
 
@@ -2074,9 +2112,6 @@ fil Kulay ng personal best sa HUD at mga save card
 
 @ Shown as a count or as a percentage of the level's total
 fil Bilang o porsiyento ng kabuuan ng level
-
-@ Where this goes on screen; items at the same position share a line
-fil Kung saan ito sa screen; ang mga item sa parehong posisyon ay nasa iisang linya
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 fil Itinatago ang demo ng bawat level na may bagong personal best; nananatili ang mga luma. Nagre-record kahit naka-off ang auto-record
@@ -2099,6 +2134,12 @@ fil Oras ng graphics card bawat frame sa millisecond
 
 @ Video memory in use and what the driver allows, where it reports it
 fil Ginagamit na video memory at ang pinapayagan ng driver, kung iniuulat nito
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+fil Ilipat, baguhin ang laki, idagdag at alisin ang mga bahagi ng HUD: kalusugan, bala, armas, timer, mensahe at iba pa
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+fil Moderno: maliliit na bahagi sa mga gilid ng screen; klasiko: ang orihinal na status bar. Nire-reset ng pagpili ang HUD; nagiging custom ito kapag binago sa I-edit ang HUD
 
 # ==== ui.txt ====
 

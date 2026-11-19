@@ -1,11 +1,6 @@
 use super::*;
 
 impl Host {
-    /// scr_hudstyle 0: classic full-width status bar below the 3D view.
-    pub(super) fn classic_hud(&self) -> bool {
-        self.cv("scr_hudstyle") == 0.0
-    }
-
     /// Toys usable this frame: this game has add-ons, a local non-deathmatch game and
     /// no remote clients. Empty (no allocation) when add-ons are off.
     pub(super) fn allowed_toys(&self) -> Vec<qserver::addons::Toy> {
@@ -411,9 +406,10 @@ impl Host {
             if self.toy.held.is_some() { cv.viewmodel = crate::view::weapon::Alignment::Hidden; }
             let (mut v, g) = self.view.calc_refdef(&mut self.cl, &cv, &self.level, ft);
             self.place_camera(None, &mut v, ft);
-            if self.classic_hud() && self.cl.intermission == 0 {
+            let reserve = self.hud_reserve();
+            if reserve > 0.0 && self.cl.intermission == 0 {
                 let (_, h) = self.r.size();
-                v.reserve_bottom = (CLASSIC_SBAR_LINES * crate::draw::Canvas::new(1, h).scale) as u32;
+                v.reserve_bottom = (reserve * crate::draw::Canvas::new(1, h).scale) as u32;
             }
             (Some(v), g)
         } else {

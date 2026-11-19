@@ -183,8 +183,8 @@ Options → Pristupačnost:
 - Filtri za sljepoću za boje.
 - Podesiv nišan: oblik, veličina, obrub i promjena boje na meti ili pri
   ubojstvu; neobavezne oznake pogotka.
-- **Titlovi zvukova** i postavke poruka (Poruke i titlovi), veličina
-  teksta.
+- **Titlovi zvukova**; položaj, veličina i trajanje poruka i titlova
+  postavljaju se u uređivaču HUD-a.
 - Napad i trčanje prekidačem (umjesto držanja).
 - Klizač brzine igre za usporavanje cijele igre.
 - Automatsko ciljanje s pokazivačem zahvata te postavkama stošca i dometa.

@@ -103,9 +103,6 @@ ms Oklusi Ambien
 @ Ammo Counts
 ms Kiraan Peluru
 
-@ Ammo Counts Position
-ms Kedudukan Kiraan Peluru
-
 @ Ammo Pickups
 ms Peluru Dikutip
 
@@ -120,9 +117,6 @@ ms Guna Pada
 
 @ Armor
 ms Perisai
-
-@ Armor Position
-ms Kedudukan Perisai
 
 @ Ask
 ms Tanya
@@ -220,9 +214,6 @@ ms Kaustik
 @ Center
 ms Tengah
 
-@ Center Message Position
-ms Kedudukan Mesej Tengah
-
 @ Center Message Time
 ms Tempoh Mesej Tengah
 
@@ -282,9 +273,6 @@ ms Saiz Rerambut Silang
 
 @ Current Ammo
 ms Peluru Semasa
-
-@ Current Ammo Position
-ms Kedudukan Peluru Semasa
 
 @ Customize This Game
 ms Ubah Suai Permainan Ini
@@ -469,17 +457,11 @@ ms Bidikan Giro
 @ HUD
 ms HUD
 
-@ HUD Style
-ms Gaya HUD
-
 @ Health
 ms Kesihatan
 
 @ Health Pickups
 ms Kesihatan Dikutip
-
-@ Health Position
-ms Kedudukan Kesihatan
 
 @ Health Regeneration
 ms Pemulihan Kesihatan
@@ -589,9 +571,6 @@ ms Lompatan
 @ Keys & Powerups
 ms Kunci & Kuasa
 
-@ Keys & Powerups Position
-ms Kedudukan Kunci & Kuasa
-
 @ Kill Bonus (x)
 ms Bonus Bunuh (x)
 
@@ -661,15 +640,6 @@ ms Jarak Maksimum
 @ Melee only
 ms Jarak dekat sahaja
 
-@ Message Background
-ms Latar Mesej
-
-@ Message Text Size
-ms Saiz Teks Mesej
-
-@ Messages & Captions
-ms Mesej & Sari Kata
-
 @ Meter Duration (real seconds)
 ms Tempoh Meter (saat sebenar)
 
@@ -681,9 +651,6 @@ ms Mod
 
 @ Modern Console
 ms Konsol Moden
-
-@ Modern HUD Layout
-ms Susun Atur HUD Moden
 
 @ Most recent save
 ms Simpanan terbaru
@@ -732,9 +699,6 @@ ms Penapis Hingar
 
 @ Normal Color
 ms Warna Biasa
-
-@ Notify Message Position
-ms Kedudukan Pemberitahuan
 
 @ Notify Message Time
 ms Tempoh Pemberitahuan
@@ -928,17 +892,11 @@ ms Bahu kiri
 @ Shoulder right
 ms Bahu kanan
 
-@ Show FPS
-ms Papar FPS
-
 @ Show Face
 ms Papar Wajah
 
 @ Shrapnel
 ms Serpihan Letupan
-
-@ Size of on-screen messages and captions
-ms Saiz mesej dan sari kata pada skrin
 
 @ Skill
 ms Tahap Kesukaran
@@ -1108,15 +1066,6 @@ ms Perlahan Roda Senjata
 @ Weapons
 ms Senjata
 
-@ Weapons Position
-ms Kedudukan Senjata
-
-@ Where center-screen messages appear
-ms Tempat mesej tengah skrin dipaparkan
-
-@ Where pickup and event messages appear
-ms Tempat mesej kutipan dan peristiwa dipaparkan
-
 @ White
 ms Putih
 
@@ -1156,9 +1105,6 @@ ms kotak
 
 @ broken square
 ms segi empat putus
-
-@ classic
-ms klasik
 
 @ coarse
 ms kasar
@@ -1247,29 +1193,17 @@ ms sengit
 @ large
 ms besar
 
-@ larger
-ms lebih besar
-
-@ largest
-ms terbesar
-
 @ linear
 ms linear
 
 @ low
 ms rendah
 
-@ lower
-ms bawah
-
 @ magenta
 ms magenta
 
 @ medium
 ms sederhana
-
-@ middle
-ms tengah
 
 @ middle left
 ms tengah kiri
@@ -1357,9 +1291,6 @@ ms tiga kali
 
 @ tritanopia
 ms tritanopia
-
-@ upper
-ms atas
 
 @ white
 ms putih
@@ -1491,9 +1422,6 @@ ms Masa & Statistik
 @ Clock
 ms Jam
 
-@ Clock Position
-ms Kedudukan Jam
-
 @ Level Timer
 ms Pemasa Peringkat
 
@@ -1506,17 +1434,11 @@ ms Jenis Rekod
 @ Personal Best Color
 ms Warna Rekod
 
-@ Timer Position
-ms Kedudukan Pemasa
-
 @ Kills
 ms Bunuhan
 
 @ Secrets
 ms Rahsia
-
-@ Kills & Secrets Position
-ms Kedudukan Bunuhan & Rahsia
 
 @ 24-hour
 ms 24 jam
@@ -1564,8 +1486,139 @@ ms Masa GPU
 @ Video Memory
 ms Memori Video
 
-@ Metrics Position
-ms Kedudukan Metrik
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+ms Tambah
+
+@ Ammo
+ms Peluru
+
+@ Ammo Bar
+ms Bar Peluru
+
+@ Armor Bar
+ms Bar Perisai
+
+@ Background
+ms Latar
+
+@ Cells
+ms Sel
+
+@ Center Message
+ms Mesej Tengah
+
+@ Columns
+ms Lajur
+
+@ Edit HUD
+ms Edit HUD
+
+@ FPS
+ms FPS
+
+@ Face
+ms Wajah
+
+@ Fill Width
+ms Lebar Penuh
+
+@ Font
+ms Fon
+
+@ Format
+ms Format
+
+@ HUD Editor
+ms Editor HUD
+
+@ Health Bar
+ms Bar Kesihatan
+
+@ Inventory
+ms Inventori
+
+@ Keys
+ms Kunci
+
+@ Nails
+ms Paku
+
+@ Notify Messages
+ms Mesej Pemberitahuan
+
+@ Position
+ms Kedudukan
+
+@ Powerups
+ms Kuasa
+
+@ Precision
+ms Kepersisan
+
+@ Quake
+ms Quake
+
+@ Rockets
+ms Roket
+
+@ Scale
+ms Skala
+
+@ Sections
+ms Bahagian
+
+@ Shells
+ms Kelongsong
+
+@ Show As
+ms Papar Sebagai
+
+@ Show Icon
+ms Papar Ikon
+
+@ Show Value
+ms Papar Nilai
+
+@ Sigils
+ms Sigil
+
+@ Status
+ms Status
+
+@ Status Bar
+ms Bar Status
+
+@ Visibility
+ms Keterlihatan
+
+@ big numbers
+ms nombor besar
+
+@ center
+ms tengah
+
+@ status + inventory
+ms status + inventori
+
+@ status only
+ms status sahaja
+
+@ Text Color
+ms Warna Teks
+
+@ Label Color
+ms Warna Label
+
+@ HUD Preset
+ms Praset HUD
+
+@ custom
+ms tersuai
+
+@ classic
+ms klasik
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ ms Mengehadkan bilangan dan jangka hayat kesan, titisan di udara dan kesan luka/
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 ms Mengehadkan input shader pada saiz output supaya skala render 200% mengekalkan ketajaman 3D tanpa kos shader 4x; skala rendah kekal beresolusi rendah
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-ms Klasik: bar status asal; moden: elemen padat di tepi skrin
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 ms Resolusi atlas salutan, kadar bina semula dan perincian shader: rendah membina salutan lebih kecil dengan lebih jarang dan pelorekan pantas; tinggi guna perincian penuh
 
@@ -1629,9 +1679,6 @@ ms Warna jejak lingkaran railgun; dalam skrin pisah, setiap pemain mendapat warn
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 ms Kerosakan railgun pada setiap musuh yang ditembusinya (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-ms Latar gelap di belakang mesej pada skrin supaya mudah dibaca
 
 @ Dark border keeps the crosshair visible on any background
 ms Garis luar gelap memastikan rerambut silang kelihatan pada sebarang latar
@@ -1879,17 +1926,11 @@ ms Corak cahaya beralun pada permukaan di bawah air dan lendir
 @ Scales all damage you take; above 100% is harder
 ms Menskalakan semua kerosakan yang anda terima; melebihi 100% lebih sukar
 
-@ Screen edge for this element; elements on the same spot stack
-ms Tepi skrin bagi elemen ini; elemen di tempat yang sama disusun bertindan
-
 @ Seconds a monster hit by the boomerang stays stunned
 ms Saat raksasa yang terkena bumerang kekal pengsan
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 ms Saat kesan hentaman dan paku tertancap kekal sebelum pudar; bebas daripada Kualiti Zarah
-
-@ Seconds messages at the top of the screen stay up
-ms Saat mesej di bahagian atas skrin dipaparkan
 
 @ Seconds the flick stick snap takes; lower is faster
 ms Saat yang diambil oleh hentakan flick stick; lebih rendah lebih pantas
@@ -2063,9 +2104,6 @@ ms Menunjukkan waktu dalam format yang dipilih
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 ms Masa peringkat, seperti pada skrin rehat; berhenti semasa jeda dan di pintu keluar
 
-@ Your best time on this map and skill, next to the timer (single player)
-ms Masa terbaik anda pada peta dan tahap kesukaran ini, di sebelah pemasa (pemain tunggal)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 ms any%: apa-apa penamat; 100%: semua bunuhan dan rahsia. Kad simpanan menunjukkan ini dahulu
 
@@ -2074,9 +2112,6 @@ ms Warna rekod peribadi pada HUD dan kad simpanan
 
 @ Shown as a count or as a percentage of the level's total
 ms Sebagai bilangan atau peratus daripada jumlah peringkat
-
-@ Where this goes on screen; items at the same position share a line
-ms Kedudukannya pada skrin; item pada kedudukan yang sama berkongsi satu baris
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 ms Menyimpan demo setiap peringkat yang mencipta rekod peribadi; yang lama kekal. Merakam walaupun rakaman automatik dimatikan
@@ -2099,6 +2134,12 @@ ms Masa kad grafik setiap bingkai dalam milisaat
 
 @ Video memory in use and what the driver allows, where it reports it
 ms Memori video yang digunakan dan had pemacu, jika dilaporkan
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+ms Alih, ubah saiz, tambah dan buang elemen HUD: kesihatan, peluru, senjata, pemasa, mesej dan banyak lagi
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+ms Moden: elemen padat di tepi skrin; klasik: bar status asal. Memilih satu menetapkan semula HUD; perubahan dalam Edit HUD menjadikannya tersuai
 
 # ==== ui.txt ====
 

@@ -103,9 +103,6 @@ pt-BR Oclusão de ambiente
 @ Ammo Counts
 pt-BR Contadores de munição
 
-@ Ammo Counts Position
-pt-BR Posição dos contadores de munição
-
 @ Ammo Pickups
 pt-BR Munição coletada
 
@@ -120,9 +117,6 @@ pt-BR Aplicar a
 
 @ Armor
 pt-BR Armadura
-
-@ Armor Position
-pt-BR Posição da armadura
 
 @ Ask
 pt-BR Perguntar
@@ -220,9 +214,6 @@ pt-BR Cáusticas
 @ Center
 pt-BR Centro
 
-@ Center Message Position
-pt-BR Posição das mensagens centrais
-
 @ Center Message Time
 pt-BR Duração das mensagens centrais
 
@@ -282,9 +273,6 @@ pt-BR Tamanho da mira
 
 @ Current Ammo
 pt-BR Munição atual
-
-@ Current Ammo Position
-pt-BR Posição da munição atual
 
 @ Customize This Game
 pt-BR Personalizar este jogo
@@ -469,17 +457,11 @@ pt-BR Mira por giroscópio
 @ HUD
 pt-BR HUD
 
-@ HUD Style
-pt-BR Estilo do HUD
-
 @ Health
 pt-BR Vida
 
 @ Health Pickups
 pt-BR Vida coletada
-
-@ Health Position
-pt-BR Posição da vida
 
 @ Health Regeneration
 pt-BR Regeneração de vida
@@ -589,9 +571,6 @@ pt-BR Pulos
 @ Keys & Powerups
 pt-BR Chaves e power-ups
 
-@ Keys & Powerups Position
-pt-BR Posição de chaves e power-ups
-
 @ Kill Bonus (x)
 pt-BR Bônus por abate (x)
 
@@ -661,15 +640,6 @@ pt-BR Alcance máximo
 @ Melee only
 pt-BR Só corpo a corpo
 
-@ Message Background
-pt-BR Fundo das mensagens
-
-@ Message Text Size
-pt-BR Tamanho do texto das mensagens
-
-@ Messages & Captions
-pt-BR Mensagens e legendas
-
 @ Meter Duration (real seconds)
 pt-BR Duração do medidor (segundos reais)
 
@@ -681,9 +651,6 @@ pt-BR Modo
 
 @ Modern Console
 pt-BR Console moderno
-
-@ Modern HUD Layout
-pt-BR Layout do HUD moderno
 
 @ Most recent save
 pt-BR Jogo salvo mais recente
@@ -732,9 +699,6 @@ pt-BR Filtro de ruído
 
 @ Normal Color
 pt-BR Cor normal
-
-@ Notify Message Position
-pt-BR Posição das notificações
 
 @ Notify Message Time
 pt-BR Duração das notificações
@@ -928,17 +892,11 @@ pt-BR ombro esquerdo
 @ Shoulder right
 pt-BR ombro direito
 
-@ Show FPS
-pt-BR Mostrar FPS
-
 @ Show Face
 pt-BR Mostrar rosto
 
 @ Shrapnel
 pt-BR Estilhaços
-
-@ Size of on-screen messages and captions
-pt-BR Tamanho das mensagens e legendas na tela
 
 @ Skill
 pt-BR Dificuldade
@@ -1108,15 +1066,6 @@ pt-BR Desaceleração da roda de armas
 @ Weapons
 pt-BR Armas
 
-@ Weapons Position
-pt-BR Posição das armas
-
-@ Where center-screen messages appear
-pt-BR Onde aparecem as mensagens centrais
-
-@ Where pickup and event messages appear
-pt-BR Onde aparecem as mensagens de itens e eventos
-
 @ White
 pt-BR Branco
 
@@ -1156,9 +1105,6 @@ pt-BR caixa
 
 @ broken square
 pt-BR quadrado partido
-
-@ classic
-pt-BR clássico
 
 @ coarse
 pt-BR grosso
@@ -1247,29 +1193,17 @@ pt-BR intenso
 @ large
 pt-BR grande
 
-@ larger
-pt-BR maior
-
-@ largest
-pt-BR máximo
-
 @ linear
 pt-BR linear
 
 @ low
 pt-BR baixa
 
-@ lower
-pt-BR abaixo
-
 @ magenta
 pt-BR magenta
 
 @ medium
 pt-BR média
-
-@ middle
-pt-BR meio
 
 @ middle left
 pt-BR meio à esquerda
@@ -1357,9 +1291,6 @@ pt-BR triplo
 
 @ tritanopia
 pt-BR tritanopia
-
-@ upper
-pt-BR acima
 
 @ white
 pt-BR branco
@@ -1491,9 +1422,6 @@ pt-BR Tempo e estatísticas
 @ Clock
 pt-BR Relógio
 
-@ Clock Position
-pt-BR Posição do relógio
-
 @ Level Timer
 pt-BR Cronômetro da fase
 
@@ -1506,17 +1434,11 @@ pt-BR Tipo de recorde
 @ Personal Best Color
 pt-BR Cor do recorde
 
-@ Timer Position
-pt-BR Posição do cronômetro
-
 @ Kills
 pt-BR Abates
 
 @ Secrets
 pt-BR Segredos
-
-@ Kills & Secrets Position
-pt-BR Posição de abates e segredos
 
 @ 24-hour
 pt-BR 24 horas
@@ -1564,8 +1486,139 @@ pt-BR Tempo da GPU
 @ Video Memory
 pt-BR Memória de vídeo
 
-@ Metrics Position
-pt-BR Posição das métricas
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+pt-BR Adicionar
+
+@ Ammo
+pt-BR Munição
+
+@ Ammo Bar
+pt-BR Barra de munição
+
+@ Armor Bar
+pt-BR Barra de armadura
+
+@ Background
+pt-BR Fundo
+
+@ Cells
+pt-BR Células
+
+@ Center Message
+pt-BR Mensagem central
+
+@ Columns
+pt-BR Colunas
+
+@ Edit HUD
+pt-BR Editar HUD
+
+@ FPS
+pt-BR FPS
+
+@ Face
+pt-BR Rosto
+
+@ Fill Width
+pt-BR Largura total
+
+@ Font
+pt-BR Fonte
+
+@ Format
+pt-BR Formato
+
+@ HUD Editor
+pt-BR Editor de HUD
+
+@ Health Bar
+pt-BR Barra de saúde
+
+@ Inventory
+pt-BR Inventário
+
+@ Keys
+pt-BR Chaves
+
+@ Nails
+pt-BR Pregos
+
+@ Notify Messages
+pt-BR Notificações
+
+@ Position
+pt-BR Posição
+
+@ Powerups
+pt-BR Power-ups
+
+@ Precision
+pt-BR Precisão
+
+@ Quake
+pt-BR Quake
+
+@ Rockets
+pt-BR Foguetes
+
+@ Scale
+pt-BR Escala
+
+@ Sections
+pt-BR Seções
+
+@ Shells
+pt-BR Cartuchos
+
+@ Show As
+pt-BR Mostrar como
+
+@ Show Icon
+pt-BR Mostrar ícone
+
+@ Show Value
+pt-BR Mostrar valor
+
+@ Sigils
+pt-BR Runas
+
+@ Status
+pt-BR Status
+
+@ Status Bar
+pt-BR Barra de status
+
+@ Visibility
+pt-BR Visibilidade
+
+@ big numbers
+pt-BR números grandes
+
+@ center
+pt-BR centro
+
+@ status + inventory
+pt-BR status + inventário
+
+@ status only
+pt-BR só status
+
+@ Text Color
+pt-BR Cor do texto
+
+@ Label Color
+pt-BR Cor dos rótulos
+
+@ HUD Preset
+pt-BR Predefinição de HUD
+
+@ custom
+pt-BR personalizado
+
+@ classic
+pt-BR clássico
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ pt-BR Limita quantidade e duração das marcas, gotas no ar e manchas de ferimen
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 pt-BR Limita a entrada do shader ao tamanho de saída, então 200% de escala de renderização mantém a nitidez 3D sem custo 4x no shader; escalas baixas continuam em baixa resolução
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-pt-BR Clássico: a barra de status original; moderno: elementos compactos nas bordas da tela
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 pt-BR Resolução do atlas de camadas, taxa de reconstrução e detalhe do shader: baixa cria camadas menores com menos frequência e sombreamento rápido; alta usa detalhe total
 
@@ -1629,9 +1679,6 @@ pt-BR Cor do rastro em espiral do railgun; em tela dividida cada jogador recebe 
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 pt-BR Dano que o railgun causa a cada inimigo que atravessa (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-pt-BR Fundo escuro atrás das mensagens na tela para facilitar a leitura
 
 @ Dark border keeps the crosshair visible on any background
 pt-BR Uma borda escura mantém a mira visível em qualquer fundo
@@ -1879,17 +1926,11 @@ pt-BR Padrões de luz ondulantes em superfícies debaixo d'água e de limo
 @ Scales all damage you take; above 100% is harder
 pt-BR Escala todo o dano que você recebe; acima de 100% é mais difícil
 
-@ Screen edge for this element; elements on the same spot stack
-pt-BR Borda da tela para este elemento; elementos no mesmo lugar se empilham
-
 @ Seconds a monster hit by the boomerang stays stunned
 pt-BR Segundos que um monstro atingido pelo bumerangue fica atordoado
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 pt-BR Segundos que marcas de impacto e pregos fixados ficam antes de sumir; independente de Qualidade das partículas
-
-@ Seconds messages at the top of the screen stay up
-pt-BR Segundos que as mensagens no topo da tela ficam visíveis
 
 @ Seconds the flick stick snap takes; lower is faster
 pt-BR Segundos que leva o giro do flick stick; menor é mais rápido
@@ -2063,9 +2104,6 @@ pt-BR Mostra a hora do dia no formato escolhido
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 pt-BR O tempo da fase, como na tela de intervalo; para na pausa e na saída
 
-@ Your best time on this map and skill, next to the timer (single player)
-pt-BR Seu melhor tempo neste mapa e dificuldade, ao lado do cronômetro (um jogador)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 pt-BR any%: qualquer final; 100%: todos os abates e segredos. Os cartões de saves mostram este primeiro
 
@@ -2074,9 +2112,6 @@ pt-BR Cor do recorde pessoal no HUD e nos cartões de saves
 
 @ Shown as a count or as a percentage of the level's total
 pt-BR Como quantidade ou porcentagem do total da fase
-
-@ Where this goes on screen; items at the same position share a line
-pt-BR Onde aparece na tela; itens na mesma posição dividem uma linha
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 pt-BR Guarda a demo de cada fase com novo recorde pessoal; as antigas ficam. Grava mesmo sem demos automáticas
@@ -2099,6 +2134,12 @@ pt-BR Tempo da placa de vídeo por quadro em milissegundos
 
 @ Video memory in use and what the driver allows, where it reports it
 pt-BR Memória de vídeo em uso e o que o driver permite, quando ele informa
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+pt-BR Mova, redimensione, adicione e remova elementos do HUD: saúde, munição, armas, cronômetros, mensagens e mais
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+pt-BR Moderno: elementos compactos nas bordas da tela; clássico: a barra de status original. Escolher um redefine o HUD; mudanças em Editar HUD o tornam personalizado
 
 # ==== ui.txt ====
 

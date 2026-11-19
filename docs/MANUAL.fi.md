@@ -200,8 +200,8 @@ Options → Esteettömyys:
 - Värisokeussuotimet.
 - Säädettävä tähtäin: muoto, koko, ääriviiva ja värinvaihto kohteen päällä
   tai tapossa; valinnaiset osumamerkit.
-- **Äänitekstitykset** ja viestiasetukset (Viestit ja tekstitykset),
-  tekstin koko.
+- **Äänitekstitykset**; viestien ja tekstitysten sijainti, koko ja
+  näkymisaika säädetään HUD-editorissa.
 - Hyökkäys ja juoksu päälle/pois-tilassa (pohjassa pitämisen sijaan).
 - Pelinopeuden liukusäädin koko pelin hidastamiseen.
 - Automaattitähtäys lukituksen ilmaisimella sekä kartion ja kantaman

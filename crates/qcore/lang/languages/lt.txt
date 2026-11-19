@@ -103,9 +103,6 @@ lt Aplinkos užtamsinimas
 @ Ammo Counts
 lt Šaudmenų kiekiai
 
-@ Ammo Counts Position
-lt Šaudmenų kiekių padėtis
-
 @ Ammo Pickups
 lt Šaudmenų radiniai
 
@@ -120,9 +117,6 @@ lt Taikyti
 
 @ Armor
 lt Šarvai
-
-@ Armor Position
-lt Šarvų padėtis
 
 @ Ask
 lt Klausti
@@ -220,9 +214,6 @@ lt Kaustika
 @ Center
 lt Centre
 
-@ Center Message Position
-lt Centrinių pranešimų padėtis
-
 @ Center Message Time
 lt Centrinių pranešimų trukmė
 
@@ -282,9 +273,6 @@ lt Taikiklio dydis
 
 @ Current Ammo
 lt Dabartiniai šaudmenys
-
-@ Current Ammo Position
-lt Dabartinių šaudmenų padėtis
 
 @ Customize This Game
 lt Pritaikyti šį žaidimą
@@ -469,17 +457,11 @@ lt Taikymas giroskopu
 @ HUD
 lt HUD
 
-@ HUD Style
-lt HUD stilius
-
 @ Health
 lt Sveikata
 
 @ Health Pickups
 lt Sveikatos radiniai
-
-@ Health Position
-lt Sveikatos padėtis
 
 @ Health Regeneration
 lt Sveikatos atsistatymas
@@ -589,9 +571,6 @@ lt Šuoliai
 @ Keys & Powerups
 lt Raktai ir sustiprinimai
 
-@ Keys & Powerups Position
-lt Raktų ir sustiprinimų padėtis
-
 @ Kill Bonus (x)
 lt Nužudymo premija (x)
 
@@ -661,15 +640,6 @@ lt Didžiausias nuotolis
 @ Melee only
 lt Tik artima kova
 
-@ Message Background
-lt Pranešimų fonas
-
-@ Message Text Size
-lt Pranešimų teksto dydis
-
-@ Messages & Captions
-lt Pranešimai ir subtitrai
-
 @ Meter Duration (real seconds)
 lt Juostos trukmė (realiomis sekundėmis)
 
@@ -681,9 +651,6 @@ lt Režimas
 
 @ Modern Console
 lt Moderni konsolė
-
-@ Modern HUD Layout
-lt Modernus HUD išdėstymas
 
 @ Most recent save
 lt Naujausias išsaugojimas
@@ -732,9 +699,6 @@ lt Triukšmo filtras
 
 @ Normal Color
 lt Įprasta spalva
-
-@ Notify Message Position
-lt Pranešimų padėtis
 
 @ Notify Message Time
 lt Pranešimų trukmė
@@ -928,17 +892,11 @@ lt Per petį kairėje
 @ Shoulder right
 lt Per petį dešinėje
 
-@ Show FPS
-lt Rodyti FPS
-
 @ Show Face
 lt Rodyti veidą
 
 @ Shrapnel
 lt Skeveldros
-
-@ Size of on-screen messages and captions
-lt Ekrano pranešimų ir subtitrų dydis
 
 @ Skill
 lt Sunkumas
@@ -1108,15 +1066,6 @@ lt Ginklų rato sulėtinimas
 @ Weapons
 lt Ginklai
 
-@ Weapons Position
-lt Ginklų padėtis
-
-@ Where center-screen messages appear
-lt Kur rodomi pranešimai ekrano centre
-
-@ Where pickup and event messages appear
-lt Kur rodomi radinių ir įvykių pranešimai
-
 @ White
 lt Balta
 
@@ -1156,9 +1105,6 @@ lt kvadratas
 
 @ broken square
 lt nutrauktas kvadratas
-
-@ classic
-lt klasikinis
 
 @ coarse
 lt stambus
@@ -1247,29 +1193,17 @@ lt intensyvus
 @ large
 lt didelis
 
-@ larger
-lt didesnis
-
-@ largest
-lt didžiausias
-
 @ linear
 lt tiesinis
 
 @ low
 lt žema
 
-@ lower
-lt apačioje
-
 @ magenta
 lt purpurinė
 
 @ medium
 lt vidutinė
-
-@ middle
-lt viduryje
 
 @ middle left
 lt viduryje kairėje
@@ -1357,9 +1291,6 @@ lt trigubas
 
 @ tritanopia
 lt tritanopija
-
-@ upper
-lt viršuje
 
 @ white
 lt balta
@@ -1491,9 +1422,6 @@ lt Laikas ir statistika
 @ Clock
 lt Laikrodis
 
-@ Clock Position
-lt Laikrodžio vieta
-
 @ Level Timer
 lt Lygio laikmatis
 
@@ -1506,17 +1434,11 @@ lt Rekordo tipas
 @ Personal Best Color
 lt Rekordo spalva
 
-@ Timer Position
-lt Laikmačio vieta
-
 @ Kills
 lt Nužudyta
 
 @ Secrets
 lt Paslaptys
-
-@ Kills & Secrets Position
-lt Nužudymų ir paslapčių vieta
 
 @ 24-hour
 lt 24 valandų
@@ -1564,8 +1486,139 @@ lt GPU laikas
 @ Video Memory
 lt Vaizdo atmintis
 
-@ Metrics Position
-lt Rodiklių vieta
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+lt Pridėti
+
+@ Ammo
+lt Šaudmenys
+
+@ Ammo Bar
+lt Šaudmenų juosta
+
+@ Armor Bar
+lt Šarvų juosta
+
+@ Background
+lt Fonas
+
+@ Cells
+lt Elementai
+
+@ Center Message
+lt Centrinis pranešimas
+
+@ Columns
+lt Stulpeliai
+
+@ Edit HUD
+lt Redaguoti HUD
+
+@ FPS
+lt FPS
+
+@ Face
+lt Veidas
+
+@ Fill Width
+lt Visas plotis
+
+@ Font
+lt Šriftas
+
+@ Format
+lt Formatas
+
+@ HUD Editor
+lt HUD rengyklė
+
+@ Health Bar
+lt Sveikatos juosta
+
+@ Inventory
+lt Inventorius
+
+@ Keys
+lt Raktai
+
+@ Nails
+lt Vinys
+
+@ Notify Messages
+lt Pranešimai
+
+@ Position
+lt Padėtis
+
+@ Powerups
+lt Sustiprinimai
+
+@ Precision
+lt Tikslumas
+
+@ Quake
+lt Quake
+
+@ Rockets
+lt Raketos
+
+@ Scale
+lt Mastelis
+
+@ Sections
+lt Dalys
+
+@ Shells
+lt Šratai
+
+@ Show As
+lt Rodyti kaip
+
+@ Show Icon
+lt Rodyti piktogramą
+
+@ Show Value
+lt Rodyti reikšmę
+
+@ Sigils
+lt Runos
+
+@ Status
+lt Būsena
+
+@ Status Bar
+lt Būsenos juosta
+
+@ Visibility
+lt Matomumas
+
+@ big numbers
+lt dideli skaitmenys
+
+@ center
+lt centras
+
+@ status + inventory
+lt būsena + inventorius
+
+@ status only
+lt tik būsena
+
+@ Text Color
+lt Teksto spalva
+
+@ Label Color
+lt Etikečių spalva
+
+@ HUD Preset
+lt HUD šablonas
+
+@ custom
+lt savas
+
+@ classic
+lt klasikinis
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ lt Riboja žymių skaičių, trukmę, lašus ore ir žaizdų bei kūno gabalų d
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 lt Riboja šešėliuoklio įvestį išvesties dydžiu, kad 200 % atvaizdavimo mastelis išlaikytų 3D ryškumą be keturgubos kainos; maži masteliai lieka žemos raiškos
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-lt Klasikinis: originali būsenos juosta; modernus: kompaktiški elementai ekrano kraštuose
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 lt Dangos atlaso raiška, atnaujinimo dažnis ir šešėliavimo detalumas: žema rečiau kuria mažesnes dangas su greitu šešėliavimu; aukšta naudoja visą detalumą
 
@@ -1629,9 +1679,6 @@ lt Railgun spiralinio pėdsako spalva; padalytame ekrane kiekvienas žaidėjas g
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 lt Žala, kurią railgun padaro kiekvienam pramuštam priešui (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-lt Tamsus fonas už ekrano pranešimų, kad būtų lengviau skaityti
 
 @ Dark border keeps the crosshair visible on any background
 lt Tamsus kraštas palieka taikiklį matomą ant bet kokio fono
@@ -1879,17 +1926,11 @@ lt Raibuliuojantys šviesos raštai ant paviršių po vandeniu ir gleivėmis
 @ Scales all damage you take; above 100% is harder
 lt Keičia visą gaunamą žalą; virš 100 % sunkiau
 
-@ Screen edge for this element; elements on the same spot stack
-lt Šio elemento vieta ekrane; toje pačioje vietoje esantys elementai sudedami vienas po kito
-
 @ Seconds a monster hit by the boomerang stays stunned
 lt Kiek sekundžių bumerango pataikytas monstras lieka apsvaigęs
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 lt Kiek sekundžių smūgio žymės ir įsmigusios vinys išlieka prieš išblukdamos; nepriklauso nuo dalelių kokybės
-
-@ Seconds messages at the top of the screen stay up
-lt Kiek sekundžių rodomi pranešimai ekrano viršuje
 
 @ Seconds the flick stick snap takes; lower is faster
 lt Kiek sekundžių trunka flick stick posūkis; mažiau – greičiau
@@ -2063,9 +2104,6 @@ lt Rodo paros laiką pasirinktu formatu
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 lt Lygio laikas, kaip pertraukos ekrane; sustoja per pauzę ir prie išėjimo
 
-@ Your best time on this map and skill, next to the timer (single player)
-lt Jūsų geriausias laikas šiame žemėlapyje ir sunkumo lygyje, šalia laikmačio (vienas žaidėjas)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 lt any%: bet kokia pabaiga; 100%: visi nužudymai ir paslaptys. Išsaugojimų kortelės pirma rodo šį
 
@@ -2074,9 +2112,6 @@ lt Asmeninio rekordo spalva HUD ir išsaugojimų kortelėse
 
 @ Shown as a count or as a percentage of the level's total
 lt Kaip skaičius arba kaip lygio visumos procentas
-
-@ Where this goes on screen; items at the same position share a line
-lt Kur tai ekrane; toje pačioje vietoje esantys elementai dalijasi eilute
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 lt Saugo kiekvieno lygio su nauju asmeniniu rekordu demonstraciją; senos lieka. Įrašo net išjungus automatinį įrašymą
@@ -2099,6 +2134,12 @@ lt Vaizdo plokštės laikas kadrui milisekundėmis
 
 @ Video memory in use and what the driver allows, where it reports it
 lt Naudojama vaizdo atmintis ir kiek leidžia tvarkyklė, jei ji tai praneša
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+lt Perkelkite, keiskite dydį, pridėkite ir šalinkite HUD elementus: sveikatą, šaudmenis, ginklus, laikmačius, pranešimus ir kt.
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+lt Modernus: kompaktiški elementai ekrano kraštuose; klasikinis: originali būsenos juosta. Pasirinkus atkuriamas HUD; pakeitimai skiltyje Redaguoti HUD paverčia jį savu
 
 # ==== ui.txt ====
 

@@ -103,9 +103,6 @@ nb Ambient okklusjon
 @ Ammo Counts
 nb Ammotellere
 
-@ Ammo Counts Position
-nb Plassering av ammotellere
-
 @ Ammo Pickups
 nb Ammunisjonsfunn
 
@@ -120,9 +117,6 @@ nb Bruk på
 
 @ Armor
 nb Rustning
-
-@ Armor Position
-nb Plassering av rustning
 
 @ Ask
 nb Spør
@@ -220,9 +214,6 @@ nb Kaustikk
 @ Center
 nb Midten
 
-@ Center Message Position
-nb Plassering av midtmeldinger
-
 @ Center Message Time
 nb Varighet for midtmeldinger
 
@@ -282,9 +273,6 @@ nb Trådkorsstørrelse
 
 @ Current Ammo
 nb Gjeldende ammo
-
-@ Current Ammo Position
-nb Plassering av gjeldende ammo
 
 @ Customize This Game
 nb Tilpass dette spillet
@@ -469,17 +457,11 @@ nb Gyrosikting
 @ HUD
 nb HUD
 
-@ HUD Style
-nb HUD-stil
-
 @ Health
 nb Helse
 
 @ Health Pickups
 nb Helsefunn
-
-@ Health Position
-nb Plassering av helse
 
 @ Health Regeneration
 nb Helseregenerering
@@ -589,9 +571,6 @@ nb Hopp
 @ Keys & Powerups
 nb Nøkler og power-ups
 
-@ Keys & Powerups Position
-nb Plassering av nøkler og power-ups
-
 @ Kill Bonus (x)
 nb Drapsbonus (x)
 
@@ -661,15 +640,6 @@ nb Maks rekkevidde
 @ Melee only
 nb Kun nærkamp
 
-@ Message Background
-nb Meldingsbakgrunn
-
-@ Message Text Size
-nb Tekststørrelse for meldinger
-
-@ Messages & Captions
-nb Meldinger og teksting
-
 @ Meter Duration (real seconds)
 nb Målervarighet (ekte sekunder)
 
@@ -681,9 +651,6 @@ nb Modus
 
 @ Modern Console
 nb Moderne konsoll
-
-@ Modern HUD Layout
-nb Moderne HUD-oppsett
 
 @ Most recent save
 nb Nyeste lagring
@@ -732,9 +699,6 @@ nb Støyfilter
 
 @ Normal Color
 nb Normal farge
-
-@ Notify Message Position
-nb Plassering av varsler
 
 @ Notify Message Time
 nb Varighet for varsler
@@ -928,17 +892,11 @@ nb Skulder venstre
 @ Shoulder right
 nb Skulder høyre
 
-@ Show FPS
-nb Vis FPS
-
 @ Show Face
 nb Vis ansikt
 
 @ Shrapnel
 nb Splinter
-
-@ Size of on-screen messages and captions
-nb Størrelse på skjermmeldinger og teksting
 
 @ Skill
 nb Vanskelighet
@@ -1108,15 +1066,6 @@ nb Våpenhjul-nedbremsing
 @ Weapons
 nb Våpen
 
-@ Weapons Position
-nb Plassering av våpen
-
-@ Where center-screen messages appear
-nb Hvor meldinger midt på skjermen vises
-
-@ Where pickup and event messages appear
-nb Hvor funn- og hendelsesmeldinger vises
-
 @ White
 nb Hvit
 
@@ -1156,9 +1105,6 @@ nb boks
 
 @ broken square
 nb brutt firkant
-
-@ classic
-nb klassisk
 
 @ coarse
 nb grov
@@ -1247,29 +1193,17 @@ nb intens
 @ large
 nb stor
 
-@ larger
-nb større
-
-@ largest
-nb størst
-
 @ linear
 nb lineær
 
 @ low
 nb lav
 
-@ lower
-nb nedre
-
 @ magenta
 nb magenta
 
 @ medium
 nb middels
-
-@ middle
-nb midten
 
 @ middle left
 nb midt venstre
@@ -1357,9 +1291,6 @@ nb trippel
 
 @ tritanopia
 nb tritanopi
-
-@ upper
-nb øvre
 
 @ white
 nb hvit
@@ -1491,9 +1422,6 @@ nb Tid og statistikk
 @ Clock
 nb Klokke
 
-@ Clock Position
-nb Klokkens plassering
-
 @ Level Timer
 nb Banetidtaker
 
@@ -1506,17 +1434,11 @@ nb Rekordtype
 @ Personal Best Color
 nb Rekordfarge
 
-@ Timer Position
-nb Tidtakerens plassering
-
 @ Kills
 nb Drap
 
 @ Secrets
 nb Hemmeligheter
-
-@ Kills & Secrets Position
-nb Plassering av drap og hemmeligheter
 
 @ 24-hour
 nb 24 timer
@@ -1564,8 +1486,139 @@ nb GPU-tid
 @ Video Memory
 nb Videominne
 
-@ Metrics Position
-nb Plassering av målinger
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+nb Legg til
+
+@ Ammo
+nb Ammunisjon
+
+@ Ammo Bar
+nb Ammunisjonslinje
+
+@ Armor Bar
+nb Rustningslinje
+
+@ Background
+nb Bakgrunn
+
+@ Cells
+nb Celler
+
+@ Center Message
+nb Midtmelding
+
+@ Columns
+nb Kolonner
+
+@ Edit HUD
+nb Rediger HUD
+
+@ FPS
+nb FPS
+
+@ Face
+nb Ansikt
+
+@ Fill Width
+nb Full bredde
+
+@ Font
+nb Skrift
+
+@ Format
+nb Format
+
+@ HUD Editor
+nb HUD-redigering
+
+@ Health Bar
+nb Helselinje
+
+@ Inventory
+nb Inventar
+
+@ Keys
+nb Nøkler
+
+@ Nails
+nb Spiker
+
+@ Notify Messages
+nb Varsler
+
+@ Position
+nb Plassering
+
+@ Powerups
+nb Power-ups
+
+@ Precision
+nb Presisjon
+
+@ Quake
+nb Quake
+
+@ Rockets
+nb Raketter
+
+@ Scale
+nb Skala
+
+@ Sections
+nb Deler
+
+@ Shells
+nb Hagl
+
+@ Show As
+nb Vis som
+
+@ Show Icon
+nb Vis ikon
+
+@ Show Value
+nb Vis verdi
+
+@ Sigils
+nb Runer
+
+@ Status
+nb Status
+
+@ Status Bar
+nb Statuslinje
+
+@ Visibility
+nb Synlighet
+
+@ big numbers
+nb store tall
+
+@ center
+nb midten
+
+@ status + inventory
+nb status + inventar
+
+@ status only
+nb bare status
+
+@ Text Color
+nb Tekstfarge
+
+@ Label Color
+nb Etikettfarge
+
+@ HUD Preset
+nb HUD-forhåndsvalg
+
+@ custom
+nb egendefinert
+
+@ classic
+nb klassisk
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ nb Begrenser antall merker, levetid, dråper i luften og sår/kjøttbitflekker; 
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 nb Begrenser shaderens inndata til utgangsstørrelsen, så 200 % gjengivelsesskala beholder 3D-skarpheten uten 4x shaderkostnad; lave skalaer forblir lavoppløste
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-nb Klassisk: den originale statuslinjen; moderne: kompakte elementer langs skjermkantene
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 nb Atlasoppløsning, oppdateringsrate og shaderdetalj for belegg: lav bygger mindre belegg sjeldnere med rask skyggelegging; høy bruker full detalj
 
@@ -1629,9 +1679,6 @@ nb Fargen på railgunens spiralspor; spillere på delt skjerm får hver sin nest
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 nb Skaden railgunen gjør på hver fiende den går gjennom (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-nb Mørk bakgrunn bak skjermmeldinger for bedre lesbarhet
 
 @ Dark border keeps the crosshair visible on any background
 nb Mørk kant holder trådkorset synlig på enhver bakgrunn
@@ -1879,17 +1926,11 @@ nb Bølgende lysmønstre på flater under vann og slim
 @ Scales all damage you take; above 100% is harder
 nb Skalerer all skade du tar; over 100 % er vanskeligere
 
-@ Screen edge for this element; elements on the same spot stack
-nb Skjermkant for dette elementet; elementer på samme sted stables
-
 @ Seconds a monster hit by the boomerang stays stunned
 nb Sekunder et monster truffet av bumerangen forblir lammet
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 nb Sekunder treffmerker og fastsittende spiker blir værende før de tones ut; uavhengig av Partikkelkvalitet
-
-@ Seconds messages at the top of the screen stay up
-nb Sekunder meldinger øverst på skjermen vises
 
 @ Seconds the flick stick snap takes; lower is faster
 nb Sekunder flick-stick-vendingen tar; lavere er raskere
@@ -2063,9 +2104,6 @@ nb Viser klokkeslettet i valgt format
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 nb Banens tid, som på mellomskjermen; den stopper ved pause og ved utgangen
 
-@ Your best time on this map and skill, next to the timer (single player)
-nb Din beste tid på dette kartet og vanskelighetsgraden, ved siden av tidtakeren (én spiller)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 nb any%: hvilken som helst fullføring; 100%: alle drap og hemmeligheter. Lagringskort viser denne først
 
@@ -2074,9 +2112,6 @@ nb Farge på personlig rekord i HUD og på lagringskort
 
 @ Shown as a count or as a percentage of the level's total
 nb Som antall eller som prosent av banens totale
-
-@ Where this goes on screen; items at the same position share a line
-nb Hvor det vises på skjermen; elementer på samme plassering deler linje
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 nb Beholder demoen fra hver bane med ny personlig rekord; gamle blir. Tar opp også uten automatiske demoer
@@ -2099,6 +2134,12 @@ nb Skjermkorttid per bilde i millisekunder
 
 @ Video memory in use and what the driver allows, where it reports it
 nb Brukt videominne og hva driveren tillater, der den oppgir det
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+nb Flytt, endre størrelse, legg til og fjern HUD-elementer: helse, ammunisjon, våpen, tidtakere, meldinger og mer
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+nb Moderne: kompakte elementer langs skjermkantene; klassisk: den opprinnelige statuslinjen. Et valg tilbakestiller HUD-en; endringer i Rediger HUD gjør den egendefinert
 
 # ==== ui.txt ====
 

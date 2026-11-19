@@ -103,9 +103,6 @@ lv Apkārtnes aizēnojums
 @ Ammo Counts
 lv Munīcijas skaitītāji
 
-@ Ammo Counts Position
-lv Munīcijas skaitītāju vieta
-
 @ Ammo Pickups
 lv Munīcijas atradumi
 
@@ -120,9 +117,6 @@ lv Lietot
 
 @ Armor
 lv Bruņas
-
-@ Armor Position
-lv Bruņu vieta
 
 @ Ask
 lv Jautāt
@@ -220,9 +214,6 @@ lv Kaustika
 @ Center
 lv Centrā
 
-@ Center Message Position
-lv Centra ziņu vieta
-
 @ Center Message Time
 lv Centra ziņu ilgums
 
@@ -282,9 +273,6 @@ lv Tēmekļa izmērs
 
 @ Current Ammo
 lv Pašreizējā munīcija
-
-@ Current Ammo Position
-lv Pašreizējās munīcijas vieta
 
 @ Customize This Game
 lv Pielāgot šo spēli
@@ -469,17 +457,11 @@ lv Žiro tēmēšana
 @ HUD
 lv HUD
 
-@ HUD Style
-lv HUD stils
-
 @ Health
 lv Veselība
 
 @ Health Pickups
 lv Veselības atradumi
-
-@ Health Position
-lv Veselības vieta
 
 @ Health Regeneration
 lv Veselības atjaunošanās
@@ -589,9 +571,6 @@ lv Lēcieni
 @ Keys & Powerups
 lv Atslēgas & spēkpapildinājumi
 
-@ Keys & Powerups Position
-lv Atslēgu & spēkpapild. vieta
-
 @ Kill Bonus (x)
 lv Nogalināšanas bonuss (x)
 
@@ -661,15 +640,6 @@ lv Maksimālais attālums
 @ Melee only
 lv Tikai tuvcīņa
 
-@ Message Background
-lv Ziņu fons
-
-@ Message Text Size
-lv Ziņu teksta izmērs
-
-@ Messages & Captions
-lv Ziņas & subtitri
-
 @ Meter Duration (real seconds)
 lv Joslas ilgums (reālas sekundes)
 
@@ -681,9 +651,6 @@ lv Režīms
 
 @ Modern Console
 lv Modernā konsole
-
-@ Modern HUD Layout
-lv Moderns HUD izkārtojums
 
 @ Most recent save
 lv Jaunākais saglabājums
@@ -732,9 +699,6 @@ lv Trokšņu filtrs
 
 @ Normal Color
 lv Parastā krāsa
-
-@ Notify Message Position
-lv Paziņojumu vieta
 
 @ Notify Message Time
 lv Paziņojumu ilgums
@@ -928,17 +892,11 @@ lv Pār kreiso plecu
 @ Shoulder right
 lv Pār labo plecu
 
-@ Show FPS
-lv Rādīt FPS
-
 @ Show Face
 lv Rādīt seju
 
 @ Shrapnel
 lv Šķembas
-
-@ Size of on-screen messages and captions
-lv Ekrāna ziņu un subtitru izmērs
 
 @ Skill
 lv Grūtība
@@ -1108,15 +1066,6 @@ lv Ieroču ripas palēninājums
 @ Weapons
 lv Ieroči
 
-@ Weapons Position
-lv Ieroču vieta
-
-@ Where center-screen messages appear
-lv Kur parādās ziņas ekrāna centrā
-
-@ Where pickup and event messages appear
-lv Kur parādās atradumu un notikumu ziņas
-
 @ White
 lv Balta
 
@@ -1156,9 +1105,6 @@ lv kaste
 
 @ broken square
 lv lauzts kvadrāts
-
-@ classic
-lv klasisks
 
 @ coarse
 lv rupjš
@@ -1247,29 +1193,17 @@ lv intensīvs
 @ large
 lv liels
 
-@ larger
-lv lielāks
-
-@ largest
-lv vislielākais
-
 @ linear
 lv lineārs
 
 @ low
 lv zems
 
-@ lower
-lv apakšā
-
 @ magenta
 lv fuksīns
 
 @ medium
 lv vidējs
-
-@ middle
-lv vidū
 
 @ middle left
 lv vidū pa kreisi
@@ -1357,9 +1291,6 @@ lv trīskāršs
 
 @ tritanopia
 lv tritanopija
-
-@ upper
-lv augšā
 
 @ white
 lv balts
@@ -1491,9 +1422,6 @@ lv Laiks un statistika
 @ Clock
 lv Pulkstenis
 
-@ Clock Position
-lv Pulksteņa novietojums
-
 @ Level Timer
 lv Līmeņa taimeris
 
@@ -1506,17 +1434,11 @@ lv Rekorda veids
 @ Personal Best Color
 lv Rekorda krāsa
 
-@ Timer Position
-lv Taimera novietojums
-
 @ Kills
 lv Nogalināti
 
 @ Secrets
 lv Noslēpumi
-
-@ Kills & Secrets Position
-lv Nogalināto un noslēpumu novietojums
 
 @ 24-hour
 lv 24 stundu
@@ -1564,8 +1486,139 @@ lv GPU laiks
 @ Video Memory
 lv Video atmiņa
 
-@ Metrics Position
-lv Rādītāju novietojums
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+lv Pievienot
+
+@ Ammo
+lv Munīcija
+
+@ Ammo Bar
+lv Munīcijas josla
+
+@ Armor Bar
+lv Bruņu josla
+
+@ Background
+lv Fons
+
+@ Cells
+lv Elementi
+
+@ Center Message
+lv Centra ziņa
+
+@ Columns
+lv Kolonnas
+
+@ Edit HUD
+lv Rediģēt HUD
+
+@ FPS
+lv FPS
+
+@ Face
+lv Seja
+
+@ Fill Width
+lv Pilns platums
+
+@ Font
+lv Fonts
+
+@ Format
+lv Formāts
+
+@ HUD Editor
+lv HUD redaktors
+
+@ Health Bar
+lv Veselības josla
+
+@ Inventory
+lv Inventārs
+
+@ Keys
+lv Atslēgas
+
+@ Nails
+lv Naglas
+
+@ Notify Messages
+lv Paziņojumi
+
+@ Position
+lv Pozīcija
+
+@ Powerups
+lv Spēkpapildinājumi
+
+@ Precision
+lv Precizitāte
+
+@ Quake
+lv Quake
+
+@ Rockets
+lv Raķetes
+
+@ Scale
+lv Mērogs
+
+@ Sections
+lv Daļas
+
+@ Shells
+lv Patronas
+
+@ Show As
+lv Rādīt kā
+
+@ Show Icon
+lv Rādīt ikonu
+
+@ Show Value
+lv Rādīt vērtību
+
+@ Sigils
+lv Rūnas
+
+@ Status
+lv Stāvoklis
+
+@ Status Bar
+lv Stāvokļa josla
+
+@ Visibility
+lv Redzamība
+
+@ big numbers
+lv lieli cipari
+
+@ center
+lv centrs
+
+@ status + inventory
+lv stāvoklis + inventārs
+
+@ status only
+lv tikai stāvoklis
+
+@ Text Color
+lv Teksta krāsa
+
+@ Label Color
+lv Etiķešu krāsa
+
+@ HUD Preset
+lv HUD sagatave
+
+@ custom
+lv pielāgots
+
+@ classic
+lv klasisks
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ lv Ierobežo pēdu skaitu, ilgumu, pilienus gaisā un brūču/miesas gabalu trai
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 lv Ierobežo šeidera ievadi līdz izvades izmēram, lai 200% renderēšanas mērogs saglabā 3D asumu bez 4× šeidera izmaksām; mazi mērogi paliek zemā izšķirtspējā
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-lv Klasisks: oriģinālā statusa josla; moderns: kompakti elementi ekrāna malās
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 lv Pārklājumu atlanta izšķirtspēja, pārbūves biežums un šeidera detaļas: zems būvē mazākus pārklājumus retāk ar ātru ēnošanu; augsts izmanto pilnas detaļas
 
@@ -1629,9 +1679,6 @@ lv Railgun spirālveida sliedes krāsa; dalītā ekrānā katrs spēlētājs sa�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 lv Bojājumi, ko railgun nodara katram caurdurtajam ienaidniekam (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-lv Tumšs fons aiz ekrāna ziņām labākai lasāmībai
 
 @ Dark border keeps the crosshair visible on any background
 lv Tumša mala padara tēmekli redzamu uz jebkura fona
@@ -1879,17 +1926,11 @@ lv Viļņojoši gaismas raksti uz virsmām zem ūdens un gļotām
 @ Scales all damage you take; above 100% is harder
 lv Mērogo visus saņemtos bojājumus; virs 100% ir grūtāk
 
-@ Screen edge for this element; elements on the same spot stack
-lv Šī elementa ekrāna mala; elementi vienā vietā tiek sakrauti
-
 @ Seconds a monster hit by the boomerang stays stunned
 lv Cik sekundes bumeranga trāpīts monstrs paliek apdullināts
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 lv Cik sekundes trieciena pēdas un iestrēgušas naglas paliek pirms izgaišanas; neatkarīgi no daļiņu kvalitātes
-
-@ Seconds messages at the top of the screen stay up
-lv Cik sekundes ziņas ekrāna augšā paliek redzamas
 
 @ Seconds the flick stick snap takes; lower is faster
 lv Cik sekundes ilgst flick stick pagrieziens; mazāk ir ātrāk
@@ -2063,9 +2104,6 @@ lv Rāda diennakts laiku izvēlētajā formātā
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 lv Līmeņa laiks kā starpekrānā; apstājas pauzē un pie izejas
 
-@ Your best time on this map and skill, next to the timer (single player)
-lv Tavs labākais laiks šajā kartē un grūtībā, blakus taimerim (viens spēlētājs)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 lv any%: jebkuras beigas; 100%: visi nogalinātie un noslēpumi. Saglabājumu kartītes rāda šo vispirms
 
@@ -2074,9 +2112,6 @@ lv Personīgā rekorda krāsa HUD un saglabājumu kartītēs
 
 @ Shown as a count or as a percentage of the level's total
 lv Kā skaits vai kā procenti no līmeņa kopskaita
-
-@ Where this goes on screen; items at the same position share a line
-lv Kur tas ir ekrānā; vienuviet novietoti vienumi dala rindu
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 lv Saglabā katra līmeņa demo ar jaunu personīgo rekordu; vecie paliek. Ieraksta arī bez automātiskās ierakstīšanas
@@ -2099,6 +2134,12 @@ lv Videokartes laiks kadram milisekundēs
 
 @ Video memory in use and what the driver allows, where it reports it
 lv Izmantotā video atmiņa un draivera atļautais, ja tas to ziņo
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+lv Pārvietojiet, mainiet izmēru, pievienojiet un noņemiet HUD elementus: veselību, munīciju, ieročus, taimerus, ziņas un citu
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+lv Moderns: kompakti elementi ekrāna malās; klasisks: oriģinālā stāvokļa josla. Izvēle atiestata HUD; izmaiņas sadaļā Rediģēt HUD padara to pielāgotu
 
 # ==== ui.txt ====
 

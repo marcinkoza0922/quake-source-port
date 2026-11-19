@@ -103,9 +103,6 @@ pt Oclusão ambiente
 @ Ammo Counts
 pt Contadores de munições
 
-@ Ammo Counts Position
-pt Posição dos contadores
-
 @ Ammo Pickups
 pt Munições apanhadas
 
@@ -120,9 +117,6 @@ pt Aplicar a
 
 @ Armor
 pt Armadura
-
-@ Armor Position
-pt Posição da armadura
 
 @ Ask
 pt Perguntar
@@ -220,9 +214,6 @@ pt Cáusticas
 @ Center
 pt Centro
 
-@ Center Message Position
-pt Posição das mensagens centrais
-
 @ Center Message Time
 pt Duração das mensagens centrais
 
@@ -282,9 +273,6 @@ pt Tamanho da mira
 
 @ Current Ammo
 pt Munições atuais
-
-@ Current Ammo Position
-pt Posição das munições atuais
 
 @ Customize This Game
 pt Personalizar este jogo
@@ -469,17 +457,11 @@ pt Mira com giroscópio
 @ HUD
 pt HUD
 
-@ HUD Style
-pt Estilo do HUD
-
 @ Health
 pt Vida
 
 @ Health Pickups
 pt Vida apanhada
-
-@ Health Position
-pt Posição da vida
 
 @ Health Regeneration
 pt Regeneração de vida
@@ -589,9 +571,6 @@ pt Saltos
 @ Keys & Powerups
 pt Chaves e power-ups
 
-@ Keys & Powerups Position
-pt Posição das chaves e power-ups
-
 @ Kill Bonus (x)
 pt Bónus por abate (x)
 
@@ -661,15 +640,6 @@ pt Alcance máximo
 @ Melee only
 pt Só corpo a corpo
 
-@ Message Background
-pt Fundo das mensagens
-
-@ Message Text Size
-pt Tamanho do texto
-
-@ Messages & Captions
-pt Mensagens e legendas
-
 @ Meter Duration (real seconds)
 pt Duração do medidor (segundos reais)
 
@@ -681,9 +651,6 @@ pt Modo
 
 @ Modern Console
 pt Consola moderna
-
-@ Modern HUD Layout
-pt Disposição do HUD moderno
 
 @ Most recent save
 pt Gravação mais recente
@@ -732,9 +699,6 @@ pt Filtro de ruído
 
 @ Normal Color
 pt Cor normal
-
-@ Notify Message Position
-pt Posição das notificações
 
 @ Notify Message Time
 pt Duração das notificações
@@ -928,17 +892,11 @@ pt ombro esquerdo
 @ Shoulder right
 pt ombro direito
 
-@ Show FPS
-pt Mostrar FPS
-
 @ Show Face
 pt Mostrar cara
 
 @ Shrapnel
 pt Estilhaços
-
-@ Size of on-screen messages and captions
-pt Tamanho das mensagens e legendas no ecrã
 
 @ Skill
 pt Dificuldade
@@ -1108,15 +1066,6 @@ pt Abrandamento da roda de armas
 @ Weapons
 pt Armas
 
-@ Weapons Position
-pt Posição das armas
-
-@ Where center-screen messages appear
-pt Onde aparecem as mensagens centrais
-
-@ Where pickup and event messages appear
-pt Onde aparecem as mensagens de itens e eventos
-
 @ White
 pt Branco
 
@@ -1156,9 +1105,6 @@ pt caixa
 
 @ broken square
 pt quadrado partido
-
-@ classic
-pt clássico
 
 @ coarse
 pt grosso
@@ -1247,29 +1193,17 @@ pt intenso
 @ large
 pt grande
 
-@ larger
-pt maior
-
-@ largest
-pt o maior
-
 @ linear
 pt linear
 
 @ low
 pt baixa
 
-@ lower
-pt em baixo
-
 @ magenta
 pt magenta
 
 @ medium
 pt média
-
-@ middle
-pt meio
 
 @ middle left
 pt ao meio à esquerda
@@ -1357,9 +1291,6 @@ pt triplo
 
 @ tritanopia
 pt tritanopia
-
-@ upper
-pt em cima
 
 @ white
 pt branco
@@ -1491,9 +1422,6 @@ pt Tempo e estatísticas
 @ Clock
 pt Relógio
 
-@ Clock Position
-pt Posição do relógio
-
 @ Level Timer
 pt Cronómetro do nível
 
@@ -1506,17 +1434,11 @@ pt Tipo de recorde
 @ Personal Best Color
 pt Cor do recorde
 
-@ Timer Position
-pt Posição do cronómetro
-
 @ Kills
 pt Mortes
 
 @ Secrets
 pt Segredos
-
-@ Kills & Secrets Position
-pt Posição de mortes e segredos
 
 @ 24-hour
 pt 24 horas
@@ -1564,8 +1486,139 @@ pt Tempo da GPU
 @ Video Memory
 pt Memória de vídeo
 
-@ Metrics Position
-pt Posição das métricas
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+pt Adicionar
+
+@ Ammo
+pt Munições
+
+@ Ammo Bar
+pt Barra de munições
+
+@ Armor Bar
+pt Barra de armadura
+
+@ Background
+pt Fundo
+
+@ Cells
+pt Células
+
+@ Center Message
+pt Mensagem central
+
+@ Columns
+pt Colunas
+
+@ Edit HUD
+pt Editar HUD
+
+@ FPS
+pt FPS
+
+@ Face
+pt Rosto
+
+@ Fill Width
+pt Largura total
+
+@ Font
+pt Tipo de letra
+
+@ Format
+pt Formato
+
+@ HUD Editor
+pt Editor do HUD
+
+@ Health Bar
+pt Barra de saúde
+
+@ Inventory
+pt Inventário
+
+@ Keys
+pt Chaves
+
+@ Nails
+pt Pregos
+
+@ Notify Messages
+pt Notificações
+
+@ Position
+pt Posição
+
+@ Powerups
+pt Power-ups
+
+@ Precision
+pt Precisão
+
+@ Quake
+pt Quake
+
+@ Rockets
+pt Foguetes
+
+@ Scale
+pt Escala
+
+@ Sections
+pt Secções
+
+@ Shells
+pt Cartuchos
+
+@ Show As
+pt Mostrar como
+
+@ Show Icon
+pt Mostrar ícone
+
+@ Show Value
+pt Mostrar valor
+
+@ Sigils
+pt Runas
+
+@ Status
+pt Estado
+
+@ Status Bar
+pt Barra de estado
+
+@ Visibility
+pt Visibilidade
+
+@ big numbers
+pt números grandes
+
+@ center
+pt centro
+
+@ status + inventory
+pt estado + inventário
+
+@ status only
+pt só estado
+
+@ Text Color
+pt Cor do texto
+
+@ Label Color
+pt Cor das etiquetas
+
+@ HUD Preset
+pt Predefinição do HUD
+
+@ custom
+pt personalizado
+
+@ classic
+pt clássico
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ pt Limita o número e a duração das marcas, as gotas no ar e as manchas de fer
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 pt Limita a entrada do shader ao tamanho de saída, para que a escala de renderização a 200% mantenha a nitidez 3D sem quadruplicar o custo do shader; escalas baixas continuam em baixa resolução
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-pt Clássico: a barra de estado original; moderno: elementos compactos nas margens do ecrã
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 pt Resolução do atlas de camadas, frequência de reconstrução e detalhe do shader: baixa cria camadas mais pequenas com menos frequência e sombreamento rápido; alta usa todo o detalhe
 
@@ -1629,9 +1679,6 @@ pt Cor do rasto em espiral da railgun; em ecrã dividido cada jogador recebe a c
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 pt Dano que a railgun causa a cada inimigo que atravessa (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-pt Fundo escuro atrás das mensagens no ecrã para melhor leitura
 
 @ Dark border keeps the crosshair visible on any background
 pt Um contorno escuro mantém a mira visível sobre qualquer fundo
@@ -1879,17 +1926,11 @@ pt Padrões de luz ondulantes em superfícies debaixo de água e lodo
 @ Scales all damage you take; above 100% is harder
 pt Ajusta todo o dano que sofres; acima de 100% é mais difícil
 
-@ Screen edge for this element; elements on the same spot stack
-pt Margem do ecrã para este elemento; elementos no mesmo sítio empilham-se
-
 @ Seconds a monster hit by the boomerang stays stunned
 pt Segundos que um monstro atingido pelo bumerangue fica atordoado
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 pt Segundos que as marcas de impacto e os pregos espetados ficam antes de desvanecer; independente de Qualidade das partículas
-
-@ Seconds messages at the top of the screen stay up
-pt Segundos que as mensagens no topo do ecrã ficam visíveis
 
 @ Seconds the flick stick snap takes; lower is faster
 pt Segundos que demora a viragem do flick stick; menos é mais rápido
@@ -2063,9 +2104,6 @@ pt Mostra a hora do dia no formato escolhido
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 pt O tempo do nível, como no ecrã de intervalo; para em pausa e na saída
 
-@ Your best time on this map and skill, next to the timer (single player)
-pt O seu melhor tempo neste mapa e dificuldade, ao lado do cronómetro (um jogador)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 pt any%: qualquer final; 100%: todas as mortes e segredos. Os cartões de gravações mostram este primeiro
 
@@ -2074,9 +2112,6 @@ pt Cor do recorde pessoal no HUD e nos cartões de gravações
 
 @ Shown as a count or as a percentage of the level's total
 pt Como número ou percentagem do total do nível
-
-@ Where this goes on screen; items at the same position share a line
-pt Onde aparece no ecrã; itens na mesma posição partilham uma linha
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 pt Guarda a demo de cada nível com novo recorde pessoal; as antigas ficam. Grava mesmo sem demos automáticas
@@ -2099,6 +2134,12 @@ pt Tempo da placa gráfica por fotograma em milissegundos
 
 @ Video memory in use and what the driver allows, where it reports it
 pt Memória de vídeo em uso e o que o controlador permite, quando o indica
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+pt Mova, redimensione, adicione e remova elementos do HUD: saúde, munições, armas, temporizadores, mensagens e mais
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+pt Moderno: elementos compactos nas margens do ecrã; clássico: a barra de estado original. Escolher um repõe o HUD; alterações em Editar HUD tornam-no personalizado
 
 # ==== ui.txt ====
 

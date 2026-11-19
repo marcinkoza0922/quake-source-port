@@ -103,9 +103,6 @@ fa انسداد محیطی
 @ Ammo Counts
 fa تعداد مهمات
 
-@ Ammo Counts Position
-fa جای تعداد مهمات
-
 @ Ammo Pickups
 fa برداشتن مهمات
 
@@ -120,9 +117,6 @@ fa اعمال روی
 
 @ Armor
 fa زره
-
-@ Armor Position
-fa جای زره
 
 @ Ask
 fa پرسیدن
@@ -220,9 +214,6 @@ fa سوسوی نور آب
 @ Center
 fa وسط
 
-@ Center Message Position
-fa جای پیام وسط
-
 @ Center Message Time
 fa مدت پیام وسط
 
@@ -282,9 +273,6 @@ fa اندازه‌ی نشانگر
 
 @ Current Ammo
 fa مهمات فعلی
-
-@ Current Ammo Position
-fa جای مهمات فعلی
 
 @ Customize This Game
 fa سفارشی‌سازی این بازی
@@ -469,17 +457,11 @@ fa نشانه‌گیری ژیروسکوپی
 @ HUD
 fa HUD
 
-@ HUD Style
-fa سبک HUD
-
 @ Health
 fa سلامت
 
 @ Health Pickups
 fa برداشتن سلامت
-
-@ Health Position
-fa جای سلامت
 
 @ Health Regeneration
 fa بازیابی سلامت
@@ -589,9 +571,6 @@ fa پرش‌ها
 @ Keys & Powerups
 fa کلیدها و نیروزاها
 
-@ Keys & Powerups Position
-fa جای کلیدها و نیروزاها
-
 @ Kill Bonus (x)
 fa پاداش کشتن (×)
 
@@ -661,15 +640,6 @@ fa بیشینه‌ی برد
 @ Melee only
 fa فقط نبرد تن‌به‌تن
 
-@ Message Background
-fa پس‌زمینه‌ی پیام
-
-@ Message Text Size
-fa اندازه‌ی متن پیام
-
-@ Messages & Captions
-fa پیام‌ها و زیرنویس‌ها
-
 @ Meter Duration (real seconds)
 fa مدت نوار (ثانیه‌ی واقعی)
 
@@ -681,9 +651,6 @@ fa حالت
 
 @ Modern Console
 fa کنسول مدرن
-
-@ Modern HUD Layout
-fa چیدمان مدرن HUD
 
 @ Most recent save
 fa آخرین ذخیره
@@ -732,9 +699,6 @@ fa فیلتر نویز
 
 @ Normal Color
 fa رنگ عادی
-
-@ Notify Message Position
-fa جای پیام اعلان
 
 @ Notify Message Time
 fa مدت پیام اعلان
@@ -928,17 +892,11 @@ fa شانه‌ی چپ
 @ Shoulder right
 fa شانه‌ی راست
 
-@ Show FPS
-fa نمایش FPS
-
 @ Show Face
 fa نمایش چهره
 
 @ Shrapnel
 fa ترکش
-
-@ Size of on-screen messages and captions
-fa اندازه‌ی پیام‌ها و زیرنویس‌های روی صفحه
 
 @ Skill
 fa سختی
@@ -1108,15 +1066,6 @@ fa کندی چرخ سلاح
 @ Weapons
 fa سلاح‌ها
 
-@ Weapons Position
-fa جای سلاح‌ها
-
-@ Where center-screen messages appear
-fa جای نمایش پیام‌های وسط صفحه
-
-@ Where pickup and event messages appear
-fa جای نمایش پیام‌های برداشتن و رویدادها
-
 @ White
 fa سفید
 
@@ -1156,9 +1105,6 @@ fa مربع
 
 @ broken square
 fa مربع شکسته
-
-@ classic
-fa کلاسیک
 
 @ coarse
 fa درشت
@@ -1247,29 +1193,17 @@ fa شدید
 @ large
 fa بزرگ
 
-@ larger
-fa بزرگ‌تر
-
-@ largest
-fa بزرگ‌ترین
-
 @ linear
 fa خطی
 
 @ low
 fa کم
 
-@ lower
-fa پایین
-
 @ magenta
 fa سرخابی
 
 @ medium
 fa متوسط
-
-@ middle
-fa وسط
 
 @ middle left
 fa وسط چپ
@@ -1357,9 +1291,6 @@ fa سه‌تایی
 
 @ tritanopia
 fa تریتانوپی
-
-@ upper
-fa بالا
 
 @ white
 fa سفید
@@ -1491,9 +1422,6 @@ fa زمان و آمار
 @ Clock
 fa ساعت
 
-@ Clock Position
-fa جای ساعت
-
 @ Level Timer
 fa زمان‌سنج مرحله
 
@@ -1506,17 +1434,11 @@ fa نوع رکورد
 @ Personal Best Color
 fa رنگ رکورد
 
-@ Timer Position
-fa جای زمان‌سنج
-
 @ Kills
 fa کشته‌ها
 
 @ Secrets
 fa رازها
-
-@ Kills & Secrets Position
-fa جای کشته‌ها و رازها
 
 @ 24-hour
 fa ۲۴ ساعته
@@ -1564,8 +1486,139 @@ fa زمان GPU
 @ Video Memory
 fa حافظهٔ ویدئویی
 
-@ Metrics Position
-fa جای معیارها
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+fa افزودن
+
+@ Ammo
+fa مهمات
+
+@ Ammo Bar
+fa نوار مهمات
+
+@ Armor Bar
+fa نوار زره
+
+@ Background
+fa پس‌زمینه
+
+@ Cells
+fa سلول
+
+@ Center Message
+fa پیام وسط
+
+@ Columns
+fa ستون‌ها
+
+@ Edit HUD
+fa ویرایش HUD
+
+@ FPS
+fa FPS
+
+@ Face
+fa چهره
+
+@ Fill Width
+fa تمام عرض
+
+@ Font
+fa قلم
+
+@ Format
+fa قالب
+
+@ HUD Editor
+fa ویرایشگر HUD
+
+@ Health Bar
+fa نوار سلامت
+
+@ Inventory
+fa موجودی
+
+@ Keys
+fa کلیدها
+
+@ Nails
+fa میخ
+
+@ Notify Messages
+fa پیام‌های اعلان
+
+@ Position
+fa جایگاه
+
+@ Powerups
+fa نیروزاها
+
+@ Precision
+fa دقت
+
+@ Quake
+fa Quake
+
+@ Rockets
+fa موشک
+
+@ Scale
+fa مقیاس
+
+@ Sections
+fa بخش‌ها
+
+@ Shells
+fa فشنگ
+
+@ Show As
+fa نمایش به صورت
+
+@ Show Icon
+fa نمایش نماد
+
+@ Show Value
+fa نمایش مقدار
+
+@ Sigils
+fa نشان‌ها
+
+@ Status
+fa وضعیت
+
+@ Status Bar
+fa نوار وضعیت
+
+@ Visibility
+fa نمایانی
+
+@ big numbers
+fa ارقام بزرگ
+
+@ center
+fa وسط
+
+@ status + inventory
+fa وضعیت + موجودی
+
+@ status only
+fa فقط وضعیت
+
+@ Text Color
+fa رنگ متن
+
+@ Label Color
+fa رنگ برچسب‌ها
+
+@ HUD Preset
+fa پیش‌تنظیم HUD
+
+@ custom
+fa سفارشی
+
+@ classic
+fa کلاسیک
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ fa تعداد نشان‌ها، ماندگاری، قطره‌های معلق و
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 fa ورودی سایه‌زن را به اندازه‌ی خروجی محدود می‌کند تا مقیاس رندر 200% تیزی سه‌بعدی را بدون هزینه‌ی 4 برابری سایه‌زن نگه دارد؛ مقیاس‌های پایین کم‌وضوح می‌مانند
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-fa کلاسیک: نوار وضعیت اصلی؛ مدرن: اجزای فشرده در لبه‌های صفحه
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 fa وضوح اطلس پوشش، نرخ بازسازی و جزئیات سایه‌زن: کم پوشش‌های کوچک‌تر را کمتر می‌سازد و سایه‌زنی سریع دارد؛ زیاد جزئیات کامل دارد
 
@@ -1629,9 +1679,6 @@ fa رنگ دنباله‌ی مارپیچ ریل‌گان؛ هر بازیکن ص�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 fa آسیبی که ریل‌گان به هر دشمن در مسیرش می‌زند (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-fa پس‌زمینه‌ی تیره پشت پیام‌های روی صفحه برای خوانایی
 
 @ Dark border keeps the crosshair visible on any background
 fa حاشیه‌ی تیره نشانگر را روی هر پس‌زمینه‌ای دیدنی نگه می‌دارد
@@ -1879,17 +1926,11 @@ fa نقش‌های نوری موج‌دار روی سطوح زیر آب و لج�
 @ Scales all damage you take; above 100% is harder
 fa همه‌ی آسیب‌های دریافتی را مقیاس می‌دهد؛ بالای 100% سخت‌تر است
 
-@ Screen edge for this element; elements on the same spot stack
-fa لبه‌ی صفحه برای این جزء؛ اجزای هم‌جا روی هم چیده می‌شوند
-
 @ Seconds a monster hit by the boomerang stays stunned
 fa چند ثانیه هیولای خورده به بومرنگ گیج می‌ماند
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 fa چند ثانیه نشان‌های اصابت و میخ‌های فرورفته پیش از محو شدن می‌مانند؛ مستقل از کیفیت ذرات
-
-@ Seconds messages at the top of the screen stay up
-fa چند ثانیه پیام‌های بالای صفحه می‌مانند
 
 @ Seconds the flick stick snap takes; lower is faster
 fa چند ثانیه چرخش سریع فلیک استیک طول می‌کشد؛ کمتر سریع‌تر است
@@ -2063,9 +2104,6 @@ fa ساعت روز را با قالب انتخاب‌شده نشان می‌ده
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 fa زمان مرحله، مانند صفحهٔ میان‌پرده؛ هنگام توقف و در خروجی می‌ایستد
 
-@ Your best time on this map and skill, next to the timer (single player)
-fa بهترین زمان شما در این نقشه و سختی، کنار زمان‌سنج (تک‌نفره)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 fa any%: هر پایانی؛ 100%: همهٔ کشته‌ها و رازها. کارت‌های ذخیره این را اول نشان می‌دهند
 
@@ -2074,9 +2112,6 @@ fa رنگ رکورد شخصی در HUD و کارت‌های ذخیره
 
 @ Shown as a count or as a percentage of the level's total
 fa به‌صورت تعداد یا درصدی از کل مرحله
-
-@ Where this goes on screen; items at the same position share a line
-fa جای آن روی صفحه؛ موارد هم‌جا یک خط را با هم دارند
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 fa دموی هر مرحله‌ای را که رکورد شخصی بزند نگه می‌دارد؛ قدیمی‌ها می‌مانند. حتی بدون ضبط خودکار ضبط می‌کند
@@ -2099,6 +2134,12 @@ fa زمان کارت گرافیک برای هر فریم به میلی‌ثان�
 
 @ Video memory in use and what the driver allows, where it reports it
 fa حافظهٔ ویدئویی مصرفی و سقف مجاز درایور، اگر گزارش دهد
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+fa جابه‌جایی، تغییر اندازه، افزودن و حذف اجزای HUD: سلامت، مهمات، سلاح‌ها، زمان‌سنج‌ها، پیام‌ها و بیشتر
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+fa مدرن: اجزای جمع‌وجور در لبه‌های صفحه؛ کلاسیک: نوار وضعیت اصلی. انتخاب یکی HUD را بازنشانی می‌کند؛ تغییر در ویرایش HUD آن را سفارشی می‌کند
 
 # ==== ui.txt ====
 

@@ -103,9 +103,6 @@ ka ამბიენტური დაჩრდილვა
 @ Ammo Counts
 ka ვაზნების მთვლელები
 
-@ Ammo Counts Position
-ka ვაზნების მთვლელების პოზიცია
-
 @ Ammo Pickups
 ka ვაზნების აღება
 
@@ -120,9 +117,6 @@ ka გამოყენება
 
 @ Armor
 ka ჯავშანი
-
-@ Armor Position
-ka ჯავშნის პოზიცია
 
 @ Ask
 ka კითხვა
@@ -220,9 +214,6 @@ ka კაუსტიკა
 @ Center
 ka ცენტრი
 
-@ Center Message Position
-ka ცენტრ. შეტყობინების პოზიცია
-
 @ Center Message Time
 ka ცენტრ. შეტყობინების დრო
 
@@ -282,9 +273,6 @@ ka სამიზნის ზომა
 
 @ Current Ammo
 ka მიმდინარე ვაზნები
-
-@ Current Ammo Position
-ka მიმდინარე ვაზნების პოზიცია
 
 @ Customize This Game
 ka ამ თამაშის მორგება
@@ -469,17 +457,11 @@ ka გიროსკოპით დამიზნება
 @ HUD
 ka HUD
 
-@ HUD Style
-ka HUD-ის სტილი
-
 @ Health
 ka ჯანმრთელობა
 
 @ Health Pickups
 ka ჯანმრთელობის აღება
-
-@ Health Position
-ka ჯანმრთელობის პოზიცია
 
 @ Health Regeneration
 ka ჯანმრთელობის აღდგენა
@@ -589,9 +571,6 @@ ka ხტომები
 @ Keys & Powerups
 ka გასაღებები და გაძლიერებები
 
-@ Keys & Powerups Position
-ka გასაღებების და გაძლიერებების პოზიცია
-
 @ Kill Bonus (x)
 ka მოკვლის ბონუსი (x)
 
@@ -661,15 +640,6 @@ ka მაქს. მანძილი
 @ Melee only
 ka მხოლოდ ახლო ბრძოლა
 
-@ Message Background
-ka შეტყობინების ფონი
-
-@ Message Text Size
-ka შეტყობინების ტექსტის ზომა
-
-@ Messages & Captions
-ka შეტყობინებები და სუბტიტრები
-
 @ Meter Duration (real seconds)
 ka შკალის ხანგრძლივობა (რეალური წამი)
 
@@ -681,9 +651,6 @@ ka რეჟიმი
 
 @ Modern Console
 ka თანამედროვე კონსოლი
-
-@ Modern HUD Layout
-ka თანამედროვე HUD-ის განლაგება
 
 @ Most recent save
 ka ბოლო შენახვა
@@ -732,9 +699,6 @@ ka ხმაურის ფილტრი
 
 @ Normal Color
 ka ჩვეულებრივი ფერი
-
-@ Notify Message Position
-ka შეტყობინებების პოზიცია
 
 @ Notify Message Time
 ka შეტყობინებების დრო
@@ -928,17 +892,11 @@ ka მარცხენა მხრიდან
 @ Shoulder right
 ka მარჯვენა მხრიდან
 
-@ Show FPS
-ka FPS-ის ჩვენება
-
 @ Show Face
 ka სახის ჩვენება
 
 @ Shrapnel
 ka შრაპნელი
-
-@ Size of on-screen messages and captions
-ka ეკრანული შეტყობინებების და სუბტიტრების ზომა
 
 @ Skill
 ka სირთულე
@@ -1108,15 +1066,6 @@ ka ბორბლის შენელება
 @ Weapons
 ka იარაღი
 
-@ Weapons Position
-ka იარაღის პოზიცია
-
-@ Where center-screen messages appear
-ka სად ჩნდება შეტყობინებები ეკრანის ცენტრში
-
-@ Where pickup and event messages appear
-ka სად ჩნდება აღებისა და მოვლენების შეტყობინებები
-
 @ White
 ka თეთრი
 
@@ -1156,9 +1105,6 @@ ka ჩარჩო
 
 @ broken square
 ka გაწყვეტილი კვადრატი
-
-@ classic
-ka კლასიკური
 
 @ coarse
 ka უხეში
@@ -1247,29 +1193,17 @@ ka ძლიერი
 @ large
 ka დიდი
 
-@ larger
-ka უფრო დიდი
-
-@ largest
-ka უდიდესი
-
 @ linear
 ka წრფივი
 
 @ low
 ka დაბალი
 
-@ lower
-ka ქვედა
-
 @ magenta
 ka ფუქსია
 
 @ medium
 ka საშუალო
-
-@ middle
-ka შუა
 
 @ middle left
 ka შუა მარცხნივ
@@ -1357,9 +1291,6 @@ ka სამმაგი
 
 @ tritanopia
 ka ტრიტანოპია
-
-@ upper
-ka ზედა
 
 @ white
 ka თეთრი
@@ -1491,9 +1422,6 @@ ka დრო და სტატისტიკა
 @ Clock
 ka საათი
 
-@ Clock Position
-ka საათის მდებარეობა
-
 @ Level Timer
 ka დონის ტაიმერი
 
@@ -1506,17 +1434,11 @@ ka რეკორდის ტიპი
 @ Personal Best Color
 ka რეკორდის ფერი
 
-@ Timer Position
-ka ტაიმერის მდებარეობა
-
 @ Kills
 ka მოკლულები
 
 @ Secrets
 ka საიდუმლოებები
-
-@ Kills & Secrets Position
-ka მოკლულებისა და საიდუმლოებების მდებარეობა
 
 @ 24-hour
 ka 24-საათიანი
@@ -1564,8 +1486,139 @@ ka GPU-ის დრო
 @ Video Memory
 ka ვიდეომეხსიერება
 
-@ Metrics Position
-ka მაჩვენებლების მდებარეობა
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+ka დამატება
+
+@ Ammo
+ka საბრძოლო მასალა
+
+@ Ammo Bar
+ka საბრძოლო მასალის ზოლი
+
+@ Armor Bar
+ka ჯავშნის ზოლი
+
+@ Background
+ka ფონი
+
+@ Cells
+ka ელემენტები
+
+@ Center Message
+ka ცენტრალური შეტყობინება
+
+@ Columns
+ka სვეტები
+
+@ Edit HUD
+ka HUD-ის რედაქტირება
+
+@ FPS
+ka FPS
+
+@ Face
+ka სახე
+
+@ Fill Width
+ka სრული სიგანე
+
+@ Font
+ka შრიფტი
+
+@ Format
+ka ფორმატი
+
+@ HUD Editor
+ka HUD-ის რედაქტორი
+
+@ Health Bar
+ka ჯანმრთელობის ზოლი
+
+@ Inventory
+ka ინვენტარი
+
+@ Keys
+ka გასაღებები
+
+@ Nails
+ka ლურსმნები
+
+@ Notify Messages
+ka შეტყობინებები
+
+@ Position
+ka პოზიცია
+
+@ Powerups
+ka გაძლიერებები
+
+@ Precision
+ka სიზუსტე
+
+@ Quake
+ka Quake
+
+@ Rockets
+ka რაკეტები
+
+@ Scale
+ka მასშტაბი
+
+@ Sections
+ka ნაწილები
+
+@ Shells
+ka საფანტი
+
+@ Show As
+ka ჩვენება როგორც
+
+@ Show Icon
+ka ხატულის ჩვენება
+
+@ Show Value
+ka მნიშვნელობის ჩვენება
+
+@ Sigils
+ka რუნები
+
+@ Status
+ka მდგომარეობა
+
+@ Status Bar
+ka მდგომარეობის ზოლი
+
+@ Visibility
+ka ხილვადობა
+
+@ big numbers
+ka დიდი ციფრები
+
+@ center
+ka ცენტრი
+
+@ status + inventory
+ka მდგომარეობა + ინვენტარი
+
+@ status only
+ka მხოლოდ მდგომარეობა
+
+@ Text Color
+ka ტექსტის ფერი
+
+@ Label Color
+ka წარწერების ფერი
+
+@ HUD Preset
+ka HUD-ის შაბლონი
+
+@ custom
+ka საკუთარი
+
+@ classic
+ka კლასიკური
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ ka ზღუდავს კვალის რაოდენობას, ხ�
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 ka ზღუდავს შეიდერის შესავალს გამოსავლის ზომით, ასე რომ 200% რენდერის მასშტაბი 3D სიმკვეთრეს ინარჩუნებს შეიდერის 4-ჯერადი დანახარჯის გარეშე; დაბალი მასშტაბები დაბალი გარჩევადობით რჩება
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-ka კლასიკური: ორიგინალური სტატუსის ზოლი; თანამედროვე: კომპაქტური ელემენტები ეკრანის კიდეებზე
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 ka საფარის ატლასის გარჩევადობა, აღდგენის სიხშირე და შეიდერის დეტალიზაცია: დაბალი აგებს პატარა საფარს უფრო იშვიათად სწრაფი დაჩრდილვით; მაღალი იყენებს სრულ დეტალიზაციას
 
@@ -1629,9 +1679,6 @@ ka რეილგანის სპირალური კვალის �
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 ka დაზიანება, რომელსაც რეილგანი თითოეულ გახვრეტილ მტერს აყენებს (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-ka მუქი ფონი ეკრანული შეტყობინებების ქვეშ წაკითხვადობისთვის
 
 @ Dark border keeps the crosshair visible on any background
 ka მუქი კონტური სამიზნეს ნებისმიერ ფონზე ხილულს ხდის
@@ -1879,17 +1926,11 @@ ka სინათლის ტალღოვანი ნახატები
 @ Scales all damage you take; above 100% is harder
 ka მიღებული დაზიანების მასშტაბი; 100%-ზე მეტი უფრო რთულია
 
-@ Screen edge for this element; elements on the same spot stack
-ka ეკრანის კიდე ამ ელემენტისთვის; ერთსა და იმავე ადგილზე ელემენტები ერთმანეთზე ლაგდება
-
 @ Seconds a monster hit by the boomerang stays stunned
 ka რამდენ წამს რჩება ბუმერანგით დარტყმული მონსტრი გაბრუებული
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 ka რამდენ წამს რჩება მოხვედრის კვალი და ჩარჭობილი ლურსმნები გაქრობამდე; ნაწილაკების ხარისხისგან დამოუკიდებელია
-
-@ Seconds messages at the top of the screen stay up
-ka რამდენ წამს რჩება შეტყობინებები ეკრანის ზედა ნაწილში
 
 @ Seconds the flick stick snap takes; lower is faster
 ka ფლიკ-სტიკის მობრუნების დრო წამებში; ნაკლები უფრო სწრაფია
@@ -2063,9 +2104,6 @@ ka აჩვენებს დღის დროს არჩეულ ფო�
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 ka დონის დრო, როგორც შუალედურ ეკრანზე; ჩერდება პაუზისას და გასასვლელთან
 
-@ Your best time on this map and skill, next to the timer (single player)
-ka თქვენი საუკეთესო დრო ამ რუკაზე და სირთულეზე, ტაიმერის გვერდით (ერთი მოთამაშე)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 ka any%: ნებისმიერი დასრულება; 100%: ყველა მოკლული და საიდუმლოება. შენახვის ბარათები ამას აჩვენებს პირველად
 
@@ -2074,9 +2112,6 @@ ka პირადი რეკორდის ფერი HUD-სა და �
 
 @ Shown as a count or as a percentage of the level's total
 ka რაოდენობით ან დონის ჯამის პროცენტით
-
-@ Where this goes on screen; items at the same position share a line
-ka სად არის ეკრანზე; ერთ მდებარეობაზე მყოფი ელემენტები ერთ ხაზს იზიარებენ
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 ka ინახავს ყოველი დონის დემოს ახალი პირადი რეკორდით; ძველები რჩება. იწერს ავტოჩაწერის გარეშეც
@@ -2099,6 +2134,12 @@ ka ვიდეობარათის დრო კადრზე მილ�
 
 @ Video memory in use and what the driver allows, where it reports it
 ka გამოყენებული ვიდეომეხსიერება და დრაივერის დაშვებული ოდენობა, თუ ის ამას აცნობებს
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+ka გადაადგილეთ, შეცვალეთ ზომა, დაამატეთ და წაშალეთ HUD-ის ელემენტები: ჯანმრთელობა, საბრძოლო მასალა, იარაღი, ტაიმერები, შეტყობინებები და სხვა
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+ka თანამედროვე: კომპაქტური ელემენტები ეკრანის კიდეებზე; კლასიკური: ორიგინალი მდგომარეობის ზოლი. არჩევა HUD-ს აღადგენს; ცვლილებები „HUD-ის რედაქტირებაში“ მას საკუთარს ხდის
 
 # ==== ui.txt ====
 

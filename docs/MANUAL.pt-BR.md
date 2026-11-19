@@ -198,8 +198,8 @@ Options → Acessibilidade:
 - Filtros para daltonismo.
 - Mira configurável: formato, tamanho, contorno e mudança de cor sobre o
   alvo ou ao matar; marcadores de acerto opcionais.
-- **Legendas de sons** e configurações de mensagens (Mensagens e legendas),
-  tamanho do texto.
+- **Legendas de sons**; a posição, o tamanho e a duração das mensagens e
+  legendas são ajustados no editor de HUD.
 - Atacar e correr no modo alternar (em vez de segurar).
 - Um controle deslizante de velocidade do jogo para desacelerar o jogo
   inteiro.

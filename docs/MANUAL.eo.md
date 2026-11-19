@@ -191,8 +191,8 @@ Options → Alirebleco:
 - Filtriloj por kolorblindeco.
 - Agordebla celilo: formo, grando, konturo, kaj kolorŝanĝoj sur celo aŭ ĉe
   mortigo; nedevigaj trafmarkoj.
-- **Sonaj subtekstoj** kaj agordoj de mesaĝoj (Mesaĝoj kaj subtekstoj),
-  skalado de teksto.
+- **Sonaj subtekstoj**; la pozicion, grandon kaj daŭron de mesaĝoj kaj
+  subtekstoj oni agordas en la HUD-redaktilo.
 - Baskuli (anstataŭ teni) por ataki kaj kuri.
 - Ŝovilo de ludrapido por malrapidigi la tutan ludon.
 - Aŭtomata celado kun indikilo de celkapto kaj agordoj de konuso kaj atingo.

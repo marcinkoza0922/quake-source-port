@@ -195,8 +195,8 @@ Options → Dostępność:
 - Filtry dla daltonistów.
 - Konfigurowalny celownik: kształt, rozmiar, obrys oraz zmiana koloru na
   celu lub przy zabiciu; opcjonalne znaczniki trafień.
-- **Napisy dźwiękowe** i ustawienia komunikatów (Komunikaty i napisy),
-  skalowanie tekstu.
+- **Napisy dźwiękowe**; położenie, rozmiar i czas wyświetlania komunikatów i
+  napisów ustawia się w edytorze HUD.
 - Przełączanie (zamiast przytrzymywania) ataku i biegu.
 - Suwak tempa gry, który spowalnia całą grę.
 - Automatyczne celowanie ze wskaźnikiem namierzenia oraz ustawieniami

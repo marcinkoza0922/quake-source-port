@@ -195,8 +195,8 @@ Options → Erişilebilirlik:
 - Renk körlüğü filtreleri.
 - Ayarlanabilir nişangah: şekil, boyut, dış çizgi ve hedefteyken ya da
   öldürünce renk değişimi; isteğe bağlı isabet işaretleri.
-- **Ses Altyazıları** ve mesaj ayarları (Mesajlar ve Altyazılar), yazı
-  ölçekleme.
+- **Ses Altyazıları**; mesajların ve altyazıların konumu, boyutu ve süresi
+  HUD düzenleyicisinde ayarlanır.
 - Saldırı ve koşma için aç/kapat (basılı tutmak yerine).
 - Tüm oyunu yavaşlatmak için bir oyun hızı kaydırıcısı.
 - Kilit göstergesi, koni ve menzil ayarlarıyla otomatik nişan.

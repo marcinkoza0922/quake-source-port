@@ -103,9 +103,6 @@ ko 앰비언트 오클루전
 @ Ammo Counts
 ko 탄약 수
 
-@ Ammo Counts Position
-ko 탄약 수 위치
-
 @ Ammo Pickups
 ko 탄약 획득량
 
@@ -120,9 +117,6 @@ ko 적용 대상
 
 @ Armor
 ko 아머
-
-@ Armor Position
-ko 아머 위치
 
 @ Ask
 ko 묻기
@@ -220,9 +214,6 @@ ko 커스틱
 @ Center
 ko 중앙
 
-@ Center Message Position
-ko 중앙 메시지 위치
-
 @ Center Message Time
 ko 중앙 메시지 시간
 
@@ -282,9 +273,6 @@ ko 조준점 크기
 
 @ Current Ammo
 ko 현재 탄약
-
-@ Current Ammo Position
-ko 현재 탄약 위치
 
 @ Customize This Game
 ko 이 게임 커스터마이즈
@@ -469,17 +457,11 @@ ko 자이로 조준
 @ HUD
 ko HUD
 
-@ HUD Style
-ko HUD 스타일
-
 @ Health
 ko 체력
 
 @ Health Pickups
 ko 체력 획득량
-
-@ Health Position
-ko 체력 위치
 
 @ Health Regeneration
 ko 체력 재생
@@ -589,9 +571,6 @@ ko 점프 횟수
 @ Keys & Powerups
 ko 열쇠 & 파워업
 
-@ Keys & Powerups Position
-ko 열쇠 & 파워업 위치
-
 @ Kill Bonus (x)
 ko 처치 보너스 (x)
 
@@ -661,15 +640,6 @@ ko 최대 사거리
 @ Melee only
 ko 근접만
 
-@ Message Background
-ko 메시지 배경
-
-@ Message Text Size
-ko 메시지 글자 크기
-
-@ Messages & Captions
-ko 메시지 & 자막
-
 @ Meter Duration (real seconds)
 ko 게이지 지속 시간 (실제 초)
 
@@ -681,9 +651,6 @@ ko 모드
 
 @ Modern Console
 ko 현대식 콘솔
-
-@ Modern HUD Layout
-ko 현대식 HUD 배치
 
 @ Most recent save
 ko 가장 최근 저장
@@ -732,9 +699,6 @@ ko 노이즈 필터
 
 @ Normal Color
 ko 기본 색상
-
-@ Notify Message Position
-ko 알림 메시지 위치
 
 @ Notify Message Time
 ko 알림 메시지 시간
@@ -928,17 +892,11 @@ ko 왼쪽 어깨
 @ Shoulder right
 ko 오른쪽 어깨
 
-@ Show FPS
-ko FPS 표시
-
 @ Show Face
 ko 얼굴 표시
 
 @ Shrapnel
 ko 파편탄
-
-@ Size of on-screen messages and captions
-ko 화면 메시지와 자막의 크기
 
 @ Skill
 ko 난이도
@@ -1108,15 +1066,6 @@ ko 무기 휠 감속
 @ Weapons
 ko 무기
 
-@ Weapons Position
-ko 무기 위치
-
-@ Where center-screen messages appear
-ko 화면 중앙 메시지가 나타나는 위치
-
-@ Where pickup and event messages appear
-ko 획득 및 이벤트 메시지가 나타나는 위치
-
 @ White
 ko 흰색
 
@@ -1156,9 +1105,6 @@ ko 상자
 
 @ broken square
 ko 끊긴 사각형
-
-@ classic
-ko 클래식
 
 @ coarse
 ko 거침
@@ -1247,29 +1193,17 @@ ko 강렬
 @ large
 ko 큼
 
-@ larger
-ko 더 큼
-
-@ largest
-ko 가장 큼
-
 @ linear
 ko 선형
 
 @ low
 ko 낮음
 
-@ lower
-ko 아래
-
 @ magenta
 ko 자홍
 
 @ medium
 ko 중간
-
-@ middle
-ko 중앙
 
 @ middle left
 ko 왼쪽 중앙
@@ -1357,9 +1291,6 @@ ko 삼중
 
 @ tritanopia
 ko 청색맹
-
-@ upper
-ko 위
 
 @ white
 ko 흰색
@@ -1491,9 +1422,6 @@ ko 시간 및 통계
 @ Clock
 ko 시계
 
-@ Clock Position
-ko 시계 위치
-
 @ Level Timer
 ko 레벨 타이머
 
@@ -1506,17 +1434,11 @@ ko 최고 기록 종류
 @ Personal Best Color
 ko 최고 기록 색상
 
-@ Timer Position
-ko 타이머 위치
-
 @ Kills
 ko 처치
 
 @ Secrets
 ko 비밀
-
-@ Kills & Secrets Position
-ko 처치 및 비밀 위치
 
 @ 24-hour
 ko 24시간
@@ -1564,8 +1486,139 @@ ko GPU 시간
 @ Video Memory
 ko 비디오 메모리
 
-@ Metrics Position
-ko 지표 위치
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+ko 추가
+
+@ Ammo
+ko 탄약
+
+@ Ammo Bar
+ko 탄약 막대
+
+@ Armor Bar
+ko 방어구 막대
+
+@ Background
+ko 배경
+
+@ Cells
+ko 셀
+
+@ Center Message
+ko 중앙 메시지
+
+@ Columns
+ko 열
+
+@ Edit HUD
+ko HUD 편집
+
+@ FPS
+ko FPS
+
+@ Face
+ko 얼굴
+
+@ Fill Width
+ko 전체 너비
+
+@ Font
+ko 글꼴
+
+@ Format
+ko 형식
+
+@ HUD Editor
+ko HUD 편집기
+
+@ Health Bar
+ko 체력 막대
+
+@ Inventory
+ko 소지품
+
+@ Keys
+ko 열쇠
+
+@ Nails
+ko 못
+
+@ Notify Messages
+ko 알림 메시지
+
+@ Position
+ko 위치
+
+@ Powerups
+ko 파워업
+
+@ Precision
+ko 정밀도
+
+@ Quake
+ko Quake
+
+@ Rockets
+ko 로켓
+
+@ Scale
+ko 배율
+
+@ Sections
+ko 구성
+
+@ Shells
+ko 산탄
+
+@ Show As
+ko 표시 방식
+
+@ Show Icon
+ko 아이콘 표시
+
+@ Show Value
+ko 값 표시
+
+@ Sigils
+ko 시질
+
+@ Status
+ko 상태
+
+@ Status Bar
+ko 상태 표시줄
+
+@ Visibility
+ko 표시 여부
+
+@ big numbers
+ko 큰 숫자
+
+@ center
+ko 중앙
+
+@ status + inventory
+ko 상태 + 소지품
+
+@ status only
+ko 상태만
+
+@ Text Color
+ko 글자 색
+
+@ Label Color
+ko 라벨 색
+
+@ HUD Preset
+ko HUD 프리셋
+
+@ custom
+ko 사용자 지정
+
+@ classic
+ko 클래식
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ ko 자국 수, 지속 시간, 공중의 핏방울, 상처/살점 얼룩을 제�
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 ko 셰이더 입력을 출력 크기로 제한해 200% 렌더링 배율에서도 4배의 셰이더 비용 없이 3D 선명도를 유지합니다. 낮은 배율은 저해상도로 남습니다
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-ko 클래식: 원작 상태 표시줄. 모던: 화면 가장자리에 작은 요소로 표시
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 ko 코팅 아틀라스 해상도, 재생성 빈도, 셰이더 디테일입니다. 낮음은 더 작은 코팅을 덜 자주 만들고 빠른 셰이딩을 쓰며, 높음은 전체 디테일을 씁니다
 
@@ -1629,9 +1679,6 @@ ko 레일건 나선 궤적의 색상입니다. 분할 화면의 각 플레이어
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 ko 레일건이 관통하는 각 적에게 주는 피해 (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-ko 가독성을 위해 화면 메시지 뒤에 어두운 배경을 깝니다
 
 @ Dark border keeps the crosshair visible on any background
 ko 어두운 테두리로 어떤 배경에서도 조준점이 잘 보이게 합니다
@@ -1879,17 +1926,11 @@ ko 물과 슬라임 아래 표면에 일렁이는 빛 무늬
 @ Scales all damage you take; above 100% is harder
 ko 받는 모든 피해의 배율입니다. 100% 초과는 더 어렵습니다
 
-@ Screen edge for this element; elements on the same spot stack
-ko 이 요소를 둘 화면 가장자리입니다. 같은 위치의 요소는 겹쳐 쌓입니다
-
 @ Seconds a monster hit by the boomerang stays stunned
 ko 부메랑에 맞은 몬스터가 기절해 있는 시간(초)
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 ko 탄흔과 박힌 못이 사라지기 전까지 남는 시간(초)입니다. 파티클 품질과 무관합니다
-
-@ Seconds messages at the top of the screen stay up
-ko 화면 상단 메시지가 표시되는 시간(초)
 
 @ Seconds the flick stick snap takes; lower is faster
 ko 플릭 스틱 회전에 걸리는 시간(초)입니다. 낮을수록 빠릅니다
@@ -2063,9 +2104,6 @@ ko 현재 시각을 선택한 형식으로 표시합니다
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 ko 인터미션 화면과 같은 레벨 시간입니다. 일시 정지 중과 출구에서 멈춥니다
 
-@ Your best time on this map and skill, next to the timer (single player)
-ko 이 맵과 난이도에서의 최고 기록을 타이머 옆에 표시합니다 (싱글 플레이)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 ko any%: 어떤 클리어든, 100%: 모든 처치와 비밀. 저장 카드에 이것이 먼저 표시됩니다
 
@@ -2074,9 +2112,6 @@ ko HUD와 저장 카드에 표시되는 최고 기록 색상
 
 @ Shown as a count or as a percentage of the level's total
 ko 개수 또는 레벨 전체에 대한 백분율로 표시
-
-@ Where this goes on screen; items at the same position share a line
-ko 화면에서의 위치입니다. 같은 위치의 항목은 한 줄에 나란히 표시됩니다
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 ko 개인 최고 기록을 세운 레벨의 데모를 모두 보관하며 이전 것도 남깁니다. 자동 녹화가 꺼져 있어도 녹화합니다
@@ -2099,6 +2134,12 @@ ko 프레임당 그래픽 카드 시간(밀리초)
 
 @ Video memory in use and what the driver allows, where it reports it
 ko 사용 중인 비디오 메모리와 드라이버가 허용하는 양 (보고되는 경우)
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+ko HUD 요소 이동, 크기 조절, 추가 및 제거: 체력, 탄약, 무기, 타이머, 메시지 등
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+ko 모던: 화면 가장자리의 간결한 요소, 클래식: 원래 상태 표시줄. 하나를 고르면 HUD가 초기화되고, HUD 편집에서 바꾸면 사용자 지정이 됩니다
 
 # ==== ui.txt ====
 

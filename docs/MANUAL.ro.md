@@ -195,8 +195,8 @@ Options → Accesibilitate:
 - Filtre pentru daltonism.
 - Cătare configurabilă: formă, mărime, contur și schimbarea culorii pe
   țintă sau la eliminare; marcaje de lovire opționale.
-- **Subtitrări sunete** și setări pentru mesaje (Mesaje și subtitrări),
-  scalarea textului.
+- **Subtitrări sunete**; poziția, mărimea și durata mesajelor și
+  subtitrărilor se setează în editorul HUD.
 - Atac și alergare comutate (în loc de menținute).
 - Un glisor pentru viteza jocului, ca să încetinești tot jocul.
 - Țintire automată cu indicator de fixare, setări de con și rază.

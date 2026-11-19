@@ -103,9 +103,6 @@ sq Okluzioni ambiental
 @ Ammo Counts
 sq Numëruesit e municionit
 
-@ Ammo Counts Position
-sq Pozicioni i numëruesve
-
 @ Ammo Pickups
 sq Municion i mbledhur
 
@@ -120,9 +117,6 @@ sq Zbato për
 
 @ Armor
 sq Parzmorja
-
-@ Armor Position
-sq Pozicioni i parzmores
 
 @ Ask
 sq Pyet
@@ -220,9 +214,6 @@ sq Kaustika
 @ Center
 sq Qendër
 
-@ Center Message Position
-sq Pozicioni i mesazheve qendrore
-
 @ Center Message Time
 sq Kohëzgjatja e mesazheve qendrore
 
@@ -282,9 +273,6 @@ sq Madhësia e shënjestrës
 
 @ Current Ammo
 sq Municioni aktual
-
-@ Current Ammo Position
-sq Pozicioni i municionit aktual
 
 @ Customize This Game
 sq Përshtat këtë lojë
@@ -469,17 +457,11 @@ sq Shënjim me xhiro
 @ HUD
 sq HUD
 
-@ HUD Style
-sq Stili i HUD-it
-
 @ Health
 sq Shëndeti
 
 @ Health Pickups
 sq Shëndet i mbledhur
-
-@ Health Position
-sq Pozicioni i shëndetit
 
 @ Health Regeneration
 sq Rigjenerimi i shëndetit
@@ -589,9 +571,6 @@ sq Kërcimet
 @ Keys & Powerups
 sq Çelësat & fuqizimet
 
-@ Keys & Powerups Position
-sq Pozicioni i çelësave & fuqizimeve
-
 @ Kill Bonus (x)
 sq Bonusi i vrasjes (x)
 
@@ -661,15 +640,6 @@ sq Rrezja maksimale
 @ Melee only
 sq Vetëm trupazi
 
-@ Message Background
-sq Sfondi i mesazheve
-
-@ Message Text Size
-sq Madhësia e tekstit të mesazheve
-
-@ Messages & Captions
-sq Mesazhet & titrat
-
 @ Meter Duration (real seconds)
 sq Kohëzgjatja e matësit (sekonda reale)
 
@@ -681,9 +651,6 @@ sq Modaliteti
 
 @ Modern Console
 sq Konsolë moderne
-
-@ Modern HUD Layout
-sq Paraqitje moderne e HUD-it
 
 @ Most recent save
 sq Ruajtja më e fundit
@@ -732,9 +699,6 @@ sq Filtri i zhurmës
 
 @ Normal Color
 sq Ngjyra normale
-
-@ Notify Message Position
-sq Pozicioni i njoftimeve
 
 @ Notify Message Time
 sq Kohëzgjatja e njoftimeve
@@ -928,17 +892,11 @@ sq Supi majtas
 @ Shoulder right
 sq Supi djathtas
 
-@ Show FPS
-sq Shfaq FPS
-
 @ Show Face
 sq Shfaq fytyrën
 
 @ Shrapnel
 sq Ashklat
-
-@ Size of on-screen messages and captions
-sq Madhësia e mesazheve dhe titrave në ekran
 
 @ Skill
 sq Vështirësia
@@ -1108,15 +1066,6 @@ sq Ngadalësimi i rrotës së armëve
 @ Weapons
 sq Armët
 
-@ Weapons Position
-sq Pozicioni i armëve
-
-@ Where center-screen messages appear
-sq Ku shfaqen mesazhet në qendër të ekranit
-
-@ Where pickup and event messages appear
-sq Ku shfaqen mesazhet e mbledhjes dhe ngjarjeve
-
 @ White
 sq E bardhë
 
@@ -1156,9 +1105,6 @@ sq kuti
 
 @ broken square
 sq katror i ndërprerë
-
-@ classic
-sq klasik
 
 @ coarse
 sq i trashë
@@ -1247,29 +1193,17 @@ sq intensiv
 @ large
 sq i madh
 
-@ larger
-sq më i madh
-
-@ largest
-sq më i madhi
-
 @ linear
 sq linear
 
 @ low
 sq e ulët
 
-@ lower
-sq poshtë
-
 @ magenta
 sq magenta
 
 @ medium
 sq mesatare
-
-@ middle
-sq mes
 
 @ middle left
 sq mes majtas
@@ -1357,9 +1291,6 @@ sq trefish
 
 @ tritanopia
 sq tritanopi
-
-@ upper
-sq lart
 
 @ white
 sq e bardhë
@@ -1491,9 +1422,6 @@ sq Koha dhe statistika
 @ Clock
 sq Ora
 
-@ Clock Position
-sq Pozicioni i orës
-
 @ Level Timer
 sq Kohëmatësi i nivelit
 
@@ -1506,17 +1434,11 @@ sq Lloji i rekordit
 @ Personal Best Color
 sq Ngjyra e rekordit
 
-@ Timer Position
-sq Pozicioni i kohëmatësit
-
 @ Kills
 sq Vrasje
 
 @ Secrets
 sq Sekrete
-
-@ Kills & Secrets Position
-sq Pozicioni i vrasjeve dhe sekreteve
 
 @ 24-hour
 sq 24-orësh
@@ -1564,8 +1486,139 @@ sq Koha e GPU-së
 @ Video Memory
 sq Memoria video
 
-@ Metrics Position
-sq Pozicioni i matjeve
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+sq Shto
+
+@ Ammo
+sq Municion
+
+@ Ammo Bar
+sq Shiriti i municionit
+
+@ Armor Bar
+sq Shiriti i armaturës
+
+@ Background
+sq Sfondi
+
+@ Cells
+sq Qeliza
+
+@ Center Message
+sq Mesazh qendror
+
+@ Columns
+sq Kolona
+
+@ Edit HUD
+sq Ndrysho HUD-in
+
+@ FPS
+sq FPS
+
+@ Face
+sq Fytyra
+
+@ Fill Width
+sq Gjerësi e plotë
+
+@ Font
+sq Shkronja
+
+@ Format
+sq Formati
+
+@ HUD Editor
+sq Redaktori i HUD-it
+
+@ Health Bar
+sq Shiriti i shëndetit
+
+@ Inventory
+sq Inventari
+
+@ Keys
+sq Çelësat
+
+@ Nails
+sq Gozhdë
+
+@ Notify Messages
+sq Njoftime
+
+@ Position
+sq Pozicioni
+
+@ Powerups
+sq Fuqizimet
+
+@ Precision
+sq Saktësia
+
+@ Quake
+sq Quake
+
+@ Rockets
+sq Raketa
+
+@ Scale
+sq Shkalla
+
+@ Sections
+sq Pjesët
+
+@ Shells
+sq Fishekë
+
+@ Show As
+sq Shfaq si
+
+@ Show Icon
+sq Shfaq ikonën
+
+@ Show Value
+sq Shfaq vlerën
+
+@ Sigils
+sq Runat
+
+@ Status
+sq Gjendja
+
+@ Status Bar
+sq Shiriti i gjendjes
+
+@ Visibility
+sq Dukshmëria
+
+@ big numbers
+sq shifra të mëdha
+
+@ center
+sq qendër
+
+@ status + inventory
+sq gjendja + inventari
+
+@ status only
+sq vetëm gjendja
+
+@ Text Color
+sq Ngjyra e tekstit
+
+@ Label Color
+sq Ngjyra e etiketave
+
+@ HUD Preset
+sq Paracaktim i HUD-it
+
+@ custom
+sq i personalizuar
+
+@ classic
+sq klasik
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ sq Kufizon numrin dhe kohëzgjatjen e gjurmëve, pikat në ajër dhe njollat e p
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 sq Kufizon hyrjen e shaderit në madhësinë e daljes, që shkalla 200% të ruajë mprehtësinë 3D pa koston 4× të shaderit; shkallët e ulëta mbeten me rezolucion të ulët
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-sq Klasik: shiriti origjinal i gjendjes; modern: elemente kompakte në skajet e ekranit
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 sq Rezolucioni i atlasit të shtresave, ritmi i rindërtimit dhe detajet e shaderit: e ulët ndërton shtresa më të vogla më rrallë me hijezim të shpejtë; e lartë përdor detaje të plota
 
@@ -1629,9 +1679,6 @@ sq Ngjyra e gjurmës spirale të railgun-it; në ekran të ndarë çdo lojtar me
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 sq Dëmi që railgun-i i shkakton çdo armiku që përshkon (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-sq Sfond i errët pas mesazheve në ekran për lexueshmëri
 
 @ Dark border keeps the crosshair visible on any background
 sq Kontura e errët e mban shënjestrën të dukshme në çdo sfond
@@ -1879,17 +1926,11 @@ sq Motive drite që valëzohen në sipërfaqe nën ujë dhe llum
 @ Scales all damage you take; above 100% is harder
 sq Shkallëzon gjithë dëmin që merr; mbi 100% është më e vështirë
 
-@ Screen edge for this element; elements on the same spot stack
-sq Skaji i ekranit për këtë element; elementet në të njëjtin vend grumbullohen
-
 @ Seconds a monster hit by the boomerang stays stunned
 sq Sekonda që një përbindësh i goditur nga bumerangu mbetet i shtangur
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 sq Sekonda që gjurmët e goditjeve dhe gozhdët e ngecura qëndrojnë para se të zbehen; i pavarur nga Cilësia e grimcave
-
-@ Seconds messages at the top of the screen stay up
-sq Sekonda që mesazhet në krye të ekranit qëndrojnë
 
 @ Seconds the flick stick snap takes; lower is faster
 sq Sekonda që zgjat kthimi i flick stick; më pak është më shpejt
@@ -2063,9 +2104,6 @@ sq Shfaq orën në formatin e zgjedhur
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 sq Koha e nivelit, si në ekranin e ndërmjetëm; ndalon gjatë pauzës dhe te dalja
 
-@ Your best time on this map and skill, next to the timer (single player)
-sq Koha jote më e mirë në këtë hartë dhe vështirësi, pranë kohëmatësit (një lojtar)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 sq any%: çdo përfundim; 100%: të gjitha vrasjet dhe sekretet. Kartat e ruajtjeve e tregojnë këtë të parin
 
@@ -2074,9 +2112,6 @@ sq Ngjyra e rekordit personal në HUD dhe në kartat e ruajtjeve
 
 @ Shown as a count or as a percentage of the level's total
 sq Si numër ose si përqindje e totalit të nivelit
-
-@ Where this goes on screen; items at the same position share a line
-sq Ku shfaqet në ekran; elementet në të njëjtin pozicion ndajnë një rresht
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 sq Mban demon e çdo niveli me rekord të ri personal; të vjetrat mbeten. Regjistron edhe pa regjistrim automatik
@@ -2099,6 +2134,12 @@ sq Koha e kartës grafike për kuadër në milisekonda
 
 @ Video memory in use and what the driver allows, where it reports it
 sq Memoria video në përdorim dhe sa lejon drajveri, kur e raporton
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+sq Lëviz, ndrysho madhësinë, shto dhe hiq elemente të HUD-it: shëndet, municion, armë, kohëmatës, mesazhe dhe më shumë
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+sq Modern: elemente kompakte në skajet e ekranit; klasik: shiriti origjinal i gjendjes. Zgjedhja rivendos HUD-in; ndryshimet te Ndrysho HUD-in e bëjnë të personalizuar
 
 # ==== ui.txt ====
 

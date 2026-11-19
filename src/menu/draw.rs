@@ -7,6 +7,10 @@ impl Menu {
             return;
         }
         sync_addon_binds(cv, self.game_running);
+        // the HUD editor shows the HUD as it is, under its dialog
+        if self.screen == Screen::HudEditor {
+            return self.hud_edit.draw(c, cv);
+        }
         c.fade_screen();
         let base_scale = c.scale;
         c.menu_layout();
@@ -182,7 +186,7 @@ impl Menu {
                     txt(c, 168.0, y + 4.0, &format!("{}. {}", i + 1, qcore::lang::tr(label)));
                 }
             }
-            Screen::None => {}
+            Screen::None | Screen::HudEditor => {}
         }
         c.menu_layout();
         if !matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons)) {

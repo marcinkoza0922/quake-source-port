@@ -180,8 +180,8 @@ Options → Trợ năng:
 - Bộ lọc cho người mù màu.
 - Tâm ngắm tùy chỉnh: hình dạng, kích cỡ, viền, và đổi màu khi nhắm trúng
   hoặc khi hạ gục; dấu trúng tùy chọn.
-- **Phụ đề âm thanh** và cài đặt thông báo (Thông báo & Phụ đề), phóng to
-  chữ.
+- **Phụ đề âm thanh**; vị trí, cỡ chữ và thời gian hiển thị của thông báo và
+  phụ đề được chỉnh trong trình sửa HUD.
 - Tấn công và chạy kiểu bật/tắt (thay vì giữ).
 - Thanh trượt tốc độ trò chơi để làm chậm toàn bộ trò chơi.
 - Tự động ngắm với chỉ báo khóa mục tiêu, cài đặt nón và tầm.

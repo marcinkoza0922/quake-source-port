@@ -103,9 +103,6 @@ th Ambient Occlusion
 @ Ammo Counts
 th จำนวน​กระสุน
 
-@ Ammo Counts Position
-th ตำแหน่ง​จำนวน​กระสุน
-
 @ Ammo Pickups
 th กระสุน​ที่​เก็บ​ได้
 
@@ -120,9 +117,6 @@ th ใช้​กับ
 
 @ Armor
 th เกราะ
-
-@ Armor Position
-th ตำแหน่ง​เกราะ
 
 @ Ask
 th ถาม
@@ -220,9 +214,6 @@ th ลาย​แสง​น้ำ
 @ Center
 th กลาง
 
-@ Center Message Position
-th ตำแหน่ง​ข้อความ​กลาง​จอ
-
 @ Center Message Time
 th เวลา​ข้อความ​กลาง​จอ
 
@@ -282,9 +273,6 @@ th ขนาด​เป้า​เล็ง
 
 @ Current Ammo
 th กระสุน​ปัจจุบัน
-
-@ Current Ammo Position
-th ตำแหน่ง​กระสุน​ปัจจุบัน
 
 @ Customize This Game
 th ปรับแต่ง​เกม​นี้
@@ -469,17 +457,11 @@ th เล็ง​ด้วย​ไจโร
 @ HUD
 th HUD
 
-@ HUD Style
-th รูปแบบ HUD
-
 @ Health
 th พลัง​ชีวิต
 
 @ Health Pickups
 th พลัง​ชีวิต​ที่​เก็บ​ได้
-
-@ Health Position
-th ตำแหน่ง​พลัง​ชีวิต
 
 @ Health Regeneration
 th ฟื้น​พลัง​ชีวิต
@@ -589,9 +571,6 @@ th จำนวน​กระโดด
 @ Keys & Powerups
 th กุญแจ​และ​พาวเวอร์อัป
 
-@ Keys & Powerups Position
-th ตำแหน่ง​กุญแจ​และ​พาวเวอร์อัป
-
 @ Kill Bonus (x)
 th โบนัส​การ​ฆ่า (x)
 
@@ -661,15 +640,6 @@ th ระยะ​สูงสุด
 @ Melee only
 th ระยะ​ประชิด​เท่านั้น
 
-@ Message Background
-th พื้น​หลัง​ข้อความ
-
-@ Message Text Size
-th ขนาด​ข้อความ
-
-@ Messages & Captions
-th ข้อความ​และ​คำ​บรรยาย
-
 @ Meter Duration (real seconds)
 th ระยะ​เวลา​มาตร​วัด (วินาที​จริง)
 
@@ -681,9 +651,6 @@ th โหมด
 
 @ Modern Console
 th คอนโซล​แบบ​ใหม่
-
-@ Modern HUD Layout
-th เค้าโครง HUD แบบ​ใหม่
 
 @ Most recent save
 th บันทึก​ล่าสุด
@@ -732,9 +699,6 @@ th ฟิลเตอร์​นอยส์
 
 @ Normal Color
 th สี​ปกติ
-
-@ Notify Message Position
-th ตำแหน่ง​ข้อความ​แจ้ง​เตือน
 
 @ Notify Message Time
 th เวลา​ข้อความ​แจ้ง​เตือน
@@ -928,17 +892,11 @@ th ไหล่​ซ้าย
 @ Shoulder right
 th ไหล่​ขวา
 
-@ Show FPS
-th แสดง FPS
-
 @ Show Face
 th แสดง​ใบหน้า
 
 @ Shrapnel
 th สะเก็ด​ระเบิด
-
-@ Size of on-screen messages and captions
-th ขนาด​ข้อความ​และ​คำ​บรรยาย​บน​จอ
 
 @ Skill
 th ระดับ​ความ​ยาก
@@ -1108,15 +1066,6 @@ th ชะลอ​เวลา​วงล้อ​อาวุธ
 @ Weapons
 th อาวุธ
 
-@ Weapons Position
-th ตำแหน่ง​อาวุธ
-
-@ Where center-screen messages appear
-th ตำแหน่ง​ที่​ข้อความ​กลาง​จอ​ปรากฏ
-
-@ Where pickup and event messages appear
-th ตำแหน่ง​ที่​ข้อความ​เก็บ​ของ​และ​เหตุการณ์​ปรากฏ
-
 @ White
 th ขาว
 
@@ -1156,9 +1105,6 @@ th กล่อง
 
 @ broken square
 th สี่เหลี่ยม​เว้า​มุม
-
-@ classic
-th คลาสสิก
 
 @ coarse
 th หยาบ
@@ -1247,29 +1193,17 @@ th เข้มข้น
 @ large
 th ใหญ่
 
-@ larger
-th ใหญ่​ขึ้น
-
-@ largest
-th ใหญ่​ที่สุด
-
 @ linear
 th เชิง​เส้น
 
 @ low
 th ต่ำ
 
-@ lower
-th ต่ำ​ลง
-
 @ magenta
 th ม่วง​แดง
 
 @ medium
 th ปาน​กลาง
-
-@ middle
-th ตรง​กลาง
 
 @ middle left
 th กลาง​ซ้าย
@@ -1357,9 +1291,6 @@ th สาม​ชั้น
 
 @ tritanopia
 th ตา​บอด​สี​น้ำเงิน
-
-@ upper
-th บน
 
 @ white
 th ขาว
@@ -1491,9 +1422,6 @@ th เวลา​และ​สถิติ
 @ Clock
 th นาฬิกา
 
-@ Clock Position
-th ตำแหน่ง​นาฬิกา
-
 @ Level Timer
 th ตัว​จับ​เวลา​ด่าน
 
@@ -1506,17 +1434,11 @@ th ประเภท​สถิติ
 @ Personal Best Color
 th สี​สถิติ
 
-@ Timer Position
-th ตำแหน่ง​ตัว​จับ​เวลา
-
 @ Kills
 th การ​สังหาร
 
 @ Secrets
 th ความลับ
-
-@ Kills & Secrets Position
-th ตำแหน่ง​การ​สังหาร​และ​ความลับ
 
 @ 24-hour
 th 24 ชั่วโมง
@@ -1564,8 +1486,139 @@ th เวลา GPU
 @ Video Memory
 th หน่วย​ความ​จำ​วิดีโอ
 
-@ Metrics Position
-th ตำแหน่ง​ตัว​ชี้​วัด
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+th เพิ่ม
+
+@ Ammo
+th กระสุน
+
+@ Ammo Bar
+th แถบ​กระสุน
+
+@ Armor Bar
+th แถบ​เกราะ
+
+@ Background
+th พื้น​หลัง
+
+@ Cells
+th เซลล์
+
+@ Center Message
+th ข้อความ​กลาง​จอ
+
+@ Columns
+th คอลัมน์
+
+@ Edit HUD
+th แก้ไข​ HUD
+
+@ FPS
+th FPS
+
+@ Face
+th ใบหน้า
+
+@ Fill Width
+th เต็ม​ความ​กว้าง
+
+@ Font
+th แบบ​อักษร
+
+@ Format
+th รูปแบบ
+
+@ HUD Editor
+th ตัว​แก้ไข​ HUD
+
+@ Health Bar
+th แถบ​พลัง​ชีวิต
+
+@ Inventory
+th ของ​ที่​มี
+
+@ Keys
+th กุญแจ
+
+@ Nails
+th ตะปู
+
+@ Notify Messages
+th ข้อความ​แจ้ง​เตือน
+
+@ Position
+th ตำแหน่ง
+
+@ Powerups
+th พาวเวอร์อัป
+
+@ Precision
+th ความ​ละเอียด
+
+@ Quake
+th Quake
+
+@ Rockets
+th จรวด
+
+@ Scale
+th ขนาด
+
+@ Sections
+th ส่วน
+
+@ Shells
+th ลูก​ซอง
+
+@ Show As
+th แสดง​เป็น
+
+@ Show Icon
+th แสดง​ไอคอน
+
+@ Show Value
+th แสดง​ค่า
+
+@ Sigils
+th ซิจิล
+
+@ Status
+th สถานะ
+
+@ Status Bar
+th แถบ​สถานะ
+
+@ Visibility
+th การ​มองเห็น
+
+@ big numbers
+th ตัวเลข​ใหญ่
+
+@ center
+th กลาง
+
+@ status + inventory
+th สถานะ + ของ​ที่​มี
+
+@ status only
+th สถานะ​เท่านั้น
+
+@ Text Color
+th สี​ข้อความ
+
+@ Label Color
+th สี​ป้าย​กำกับ
+
+@ HUD Preset
+th ชุด​ HUD
+
+@ custom
+th กำหนด​เอง
+
+@ classic
+th คลาสสิก
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ th จำกัด​จำนวน​รอย อายุ หยด​ใน
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 th จำกัด​อินพุต​เชดเดอร์​ที่​ขนาด​ภาพ​ออก ให้​สเกล 200% คม​ชัด​โดย​ไม่​ต้อง​เสีย​แรง​เชดเดอร์ 4 เท่า; สเกล​ต่ำ​ยัง​คง​ความ​ละเอียด​ต่ำ
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-th คลาสสิก: แถบ​สถานะ​ดั้งเดิม; ทันสมัย: องค์ประกอบ​กะทัดรัด​ที่​ขอบ​จอ
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 th ความ​ละเอียด​แผนที่​การ​เคลือบ อัตรา​สร้าง​ใหม่​และ​รายละเอียด​เชดเดอร์: ต่ำ​สร้าง​น้อย​และ​เล็ก​กว่า​ด้วย​การ​แรเงา​เร็ว; สูง​ใช้​รายละเอียด​เต็ม
 
@@ -1629,9 +1679,6 @@ th สี​ของ​เส้น​เกลียว​เรลกัน; 
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 th ความ​เสียหาย​ที่​เรลกัน​ทำ​ต่อ​ศัตรู​แต่ละ​ตัว​ที่​ทะลุ (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-th พื้น​หลัง​มืด​หลัง​ข้อความ​บน​จอ​เพื่อ​อ่าน​ง่าย
 
 @ Dark border keeps the crosshair visible on any background
 th ขอบ​สี​เข้ม​ทำให้​เห็น​เป้า​เล็ง​บน​พื้น​หลัง​ทุก​แบบ
@@ -1879,17 +1926,11 @@ th ลาย​แสง​ระยิบ​บน​พื้นผิว​�
 @ Scales all damage you take; above 100% is harder
 th ปรับ​สเกล​ความ​เสียหาย​ทั้งหมด​ที่​คุณ​ได้รับ; เกิน 100% ยาก​ขึ้น
 
-@ Screen edge for this element; elements on the same spot stack
-th ขอบ​จอ​สำหรับ​องค์ประกอบ​นี้; องค์ประกอบ​ที่​อยู่​จุด​เดียว​กัน​จะ​ซ้อน​กัน
-
 @ Seconds a monster hit by the boomerang stays stunned
 th จำนวน​วินาที​ที่​มอนสเตอร์​ถูก​บูมเมอแรง​แล้ว​มึน​งง
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 th จำนวน​วินาที​ที่​รอย​กระทบ​และ​ตะปู​ที่​ปัก​อยู่​ก่อน​จาง​หาย; ไม่​ขึ้น​กับ​คุณภาพ​อนุภาค
-
-@ Seconds messages at the top of the screen stay up
-th จำนวน​วินาที​ที่​ข้อความ​ด้าน​บน​จอ​แสดง​อยู่
 
 @ Seconds the flick stick snap takes; lower is faster
 th จำนวน​วินาที​ที่ Flick Stick ใช้​หัน; ค่า​ต่ำ​เร็ว​กว่า
@@ -2063,9 +2104,6 @@ th แสดง​เวลา​ของ​วัน​ใน​รูปแ�
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 th เวลา​ของ​ด่าน เหมือน​หน้าจอ​พัก​ระหว่าง​ด่าน หยุด​เมื่อ​พัก​เกม​และ​ที่​ทาง​ออก
 
-@ Your best time on this map and skill, next to the timer (single player)
-th เวลา​ที่​ดี​ที่สุด​ของ​คุณ​ใน​แผนที่​และ​ระดับ​ความ​ยาก​นี้ ข้าง​ตัว​จับ​เวลา (ผู้​เล่น​คน​เดียว)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 th any%: จบ​แบบ​ใด​ก็ได้ 100%: สังหาร​ทั้งหมด​และ​ความลับ​ทั้งหมด การ์ด​เซฟ​แสดง​อัน​นี้​ก่อน
 
@@ -2074,9 +2112,6 @@ th สี​ของ​สถิติ​ส่วนตัว​บน HUD แ
 
 @ Shown as a count or as a percentage of the level's total
 th แสดง​เป็น​จำนวน​หรือ​เปอร์เซ็นต์​ของ​ทั้ง​ด่าน
-
-@ Where this goes on screen; items at the same position share a line
-th ตำแหน่ง​บน​หน้าจอ รายการ​ที่​ตำแหน่ง​เดียวกัน​ใช้​บรรทัด​ร่วม​กัน
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 th เก็บ​เดโม​ของ​ทุก​ด่าน​ที่​ทำ​สถิติ​ส่วนตัว อัน​เก่า​ยัง​อยู่ บันทึก​แม้​ปิด​การ​บันทึก​อัตโนมัติ
@@ -2099,6 +2134,12 @@ th เวลา​การ์ด​จอ​ต่อ​เฟรม​เป�
 
 @ Video memory in use and what the driver allows, where it reports it
 th หน่วย​ความ​จำ​วิดีโอ​ที่​ใช้​และ​ที่​ไดรเวอร์​อนุญาต หาก​มี​การ​รายงาน
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+th ย้าย ปรับ​ขนาด เพิ่ม​และ​ลบ​องค์ประกอบ​ HUD: พลัง​ชีวิต กระสุน อาวุธ ตัว​จับ​เวลา ข้อความ และ​อื่น​ๆ
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+th สมัยใหม่: องค์ประกอบ​กะทัดรัด​ที่​ขอบ​จอ คลาสสิก: แถบ​สถานะ​ดั้งเดิม การ​เลือก​จะ​รีเซ็ต​ HUD และ​การ​แก้ไข​ใน​ แก้ไข​ HUD จะ​ทำให้​เป็น​แบบ​กำหนด​เอง
 
 # ==== ui.txt ====
 

@@ -103,9 +103,6 @@ nl Ambient occlusion
 @ Ammo Counts
 nl Munitietellers
 
-@ Ammo Counts Position
-nl Positie munitietellers
-
 @ Ammo Pickups
 nl Opgepakte munitie
 
@@ -120,9 +117,6 @@ nl Toepassen op
 
 @ Armor
 nl Pantser
-
-@ Armor Position
-nl Positie pantser
 
 @ Ask
 nl Vragen
@@ -220,9 +214,6 @@ nl Caustieken
 @ Center
 nl Midden
 
-@ Center Message Position
-nl Positie middenberichten
-
 @ Center Message Time
 nl Duur middenberichten
 
@@ -282,9 +273,6 @@ nl Viziergrootte
 
 @ Current Ammo
 nl Huidige munitie
-
-@ Current Ammo Position
-nl Positie huidige munitie
 
 @ Customize This Game
 nl Dit spel aanpassen
@@ -469,17 +457,11 @@ nl Gyro-richten
 @ HUD
 nl HUD
 
-@ HUD Style
-nl HUD-stijl
-
 @ Health
 nl Gezondheid
 
 @ Health Pickups
 nl Opgepakte gezondheid
-
-@ Health Position
-nl Positie gezondheid
 
 @ Health Regeneration
 nl Gezondheidsherstel
@@ -589,9 +571,6 @@ nl Sprongen
 @ Keys & Powerups
 nl Sleutels & power-ups
 
-@ Keys & Powerups Position
-nl Positie sleutels & power-ups
-
 @ Kill Bonus (x)
 nl Killbonus (x)
 
@@ -661,15 +640,6 @@ nl Max. bereik
 @ Melee only
 nl Alleen melee
 
-@ Message Background
-nl Berichtachtergrond
-
-@ Message Text Size
-nl Tekstgrootte berichten
-
-@ Messages & Captions
-nl Berichten & ondertitels
-
 @ Meter Duration (real seconds)
 nl Meterduur (echte seconden)
 
@@ -681,9 +651,6 @@ nl Modus
 
 @ Modern Console
 nl Moderne console
-
-@ Modern HUD Layout
-nl Moderne HUD-indeling
 
 @ Most recent save
 nl Meest recente save
@@ -732,9 +699,6 @@ nl Ruisfilter
 
 @ Normal Color
 nl Normale kleur
-
-@ Notify Message Position
-nl Positie meldingen
 
 @ Notify Message Time
 nl Duur meldingen
@@ -928,17 +892,11 @@ nl Schouder links
 @ Shoulder right
 nl Schouder rechts
 
-@ Show FPS
-nl FPS tonen
-
 @ Show Face
 nl Gezicht tonen
 
 @ Shrapnel
 nl Granaatscherven
-
-@ Size of on-screen messages and captions
-nl Grootte van berichten en ondertitels in beeld
 
 @ Skill
 nl Moeilijkheid
@@ -1108,15 +1066,6 @@ nl Vertraging wapenwiel
 @ Weapons
 nl Wapens
 
-@ Weapons Position
-nl Positie wapens
-
-@ Where center-screen messages appear
-nl Waar berichten midden in beeld verschijnen
-
-@ Where pickup and event messages appear
-nl Waar oppak- en gebeurtenisberichten verschijnen
-
 @ White
 nl Wit
 
@@ -1156,9 +1105,6 @@ nl vierkant
 
 @ broken square
 nl onderbroken vierkant
-
-@ classic
-nl klassiek
 
 @ coarse
 nl grof
@@ -1247,29 +1193,17 @@ nl intens
 @ large
 nl groot
 
-@ larger
-nl groter
-
-@ largest
-nl grootst
-
 @ linear
 nl lineair
 
 @ low
 nl laag
 
-@ lower
-nl onder
-
 @ magenta
 nl magenta
 
 @ medium
 nl gemiddeld
-
-@ middle
-nl midden
 
 @ middle left
 nl midden links
@@ -1357,9 +1291,6 @@ nl drievoudig
 
 @ tritanopia
 nl tritanopie
-
-@ upper
-nl boven
 
 @ white
 nl wit
@@ -1491,9 +1422,6 @@ nl Tijd en statistieken
 @ Clock
 nl Klok
 
-@ Clock Position
-nl Positie van klok
-
 @ Level Timer
 nl Leveltimer
 
@@ -1506,17 +1434,11 @@ nl Soort record
 @ Personal Best Color
 nl Kleur van record
 
-@ Timer Position
-nl Positie van timer
-
 @ Kills
 nl Kills
 
 @ Secrets
 nl Geheimen
-
-@ Kills & Secrets Position
-nl Positie van kills en geheimen
 
 @ 24-hour
 nl 24-uurs
@@ -1564,8 +1486,139 @@ nl GPU-tijd
 @ Video Memory
 nl Videogeheugen
 
-@ Metrics Position
-nl Positie van metingen
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+nl Toevoegen
+
+@ Ammo
+nl Munitie
+
+@ Ammo Bar
+nl Munitiebalk
+
+@ Armor Bar
+nl Pantserbalk
+
+@ Background
+nl Achtergrond
+
+@ Cells
+nl Cellen
+
+@ Center Message
+nl Middenbericht
+
+@ Columns
+nl Kolommen
+
+@ Edit HUD
+nl HUD bewerken
+
+@ FPS
+nl FPS
+
+@ Face
+nl Gezicht
+
+@ Fill Width
+nl Volledige breedte
+
+@ Font
+nl Lettertype
+
+@ Format
+nl Notatie
+
+@ HUD Editor
+nl HUD-editor
+
+@ Health Bar
+nl Gezondheidsbalk
+
+@ Inventory
+nl Inventaris
+
+@ Keys
+nl Sleutels
+
+@ Nails
+nl Spijkers
+
+@ Notify Messages
+nl Meldingen
+
+@ Position
+nl Positie
+
+@ Powerups
+nl Power-ups
+
+@ Precision
+nl Precisie
+
+@ Quake
+nl Quake
+
+@ Rockets
+nl Raketten
+
+@ Scale
+nl Schaal
+
+@ Sections
+nl Onderdelen
+
+@ Shells
+nl Patronen
+
+@ Show As
+nl Tonen als
+
+@ Show Icon
+nl Pictogram tonen
+
+@ Show Value
+nl Waarde tonen
+
+@ Sigils
+nl Runen
+
+@ Status
+nl Status
+
+@ Status Bar
+nl Statusbalk
+
+@ Visibility
+nl Zichtbaarheid
+
+@ big numbers
+nl grote cijfers
+
+@ center
+nl midden
+
+@ status + inventory
+nl status + inventaris
+
+@ status only
+nl alleen status
+
+@ Text Color
+nl Tekstkleur
+
+@ Label Color
+nl Labelkleur
+
+@ HUD Preset
+nl HUD-voorinstelling
+
+@ custom
+nl aangepast
+
+@ classic
+nl klassiek
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ nl Begrenst aantal sporen, levensduur, druppels in de lucht en wond-/gibvlekken;
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 nl Begrenst de shaderinvoer tot de uitvoergrootte, zodat 200% renderschaal 3D scherp houdt zonder 4× shaderkosten; lage schalen blijven lage resolutie
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-nl Klassiek: de originele statusbalk; modern: compacte elementen aan de schermranden
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 nl Atlasresolutie, bijwerktempo en shaderdetail van de laag: laag bouwt kleinere lagen minder vaak met snelle shading; hoog gebruikt volledig detail
 
@@ -1629,9 +1679,6 @@ nl Kleur van het spiraalspoor van de railgun; spelers op gesplitst scherm krijge
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 nl Schade die de railgun doet aan elke vijand waar hij doorheen gaat (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-nl Donkere achtergrond achter berichten in beeld voor betere leesbaarheid
 
 @ Dark border keeps the crosshair visible on any background
 nl Donkere rand houdt het vizier zichtbaar op elke achtergrond
@@ -1879,17 +1926,11 @@ nl Golvende lichtpatronen op oppervlakken onder water en slijm
 @ Scales all damage you take; above 100% is harder
 nl Schaalt alle schade die je krijgt; boven 100% is moeilijker
 
-@ Screen edge for this element; elements on the same spot stack
-nl Schermrand voor dit element; elementen op dezelfde plek worden gestapeld
-
 @ Seconds a monster hit by the boomerang stays stunned
 nl Seconden dat een door de boemerang geraakt monster verdoofd blijft
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 nl Seconden dat inslagsporen en vastzittende spijkers blijven voordat ze vervagen; los van Deeltjeskwaliteit
-
-@ Seconds messages at the top of the screen stay up
-nl Seconden dat berichten boven in beeld blijven staan
 
 @ Seconds the flick stick snap takes; lower is faster
 nl Seconden die de flick-stick-sprong duurt; lager is sneller
@@ -2063,9 +2104,6 @@ nl Toont de tijd van de dag in het gekozen formaat
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 nl De leveltijd, zoals op het tussenscherm; stopt bij pauze en bij de uitgang
 
-@ Your best time on this map and skill, next to the timer (single player)
-nl Je beste tijd op deze map en moeilijkheid, naast de timer (singleplayer)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 nl any%: elk einde; 100%: alle kills en geheimen. Opslagkaarten tonen deze eerst
 
@@ -2074,9 +2112,6 @@ nl Kleur van het persoonlijk record in de HUD en op opslagkaarten
 
 @ Shown as a count or as a percentage of the level's total
 nl Als aantal of als percentage van het totaal van het level
-
-@ Where this goes on screen; items at the same position share a line
-nl Waar het op het scherm staat; items op dezelfde positie delen een regel
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 nl Bewaart de demo van elk level met een nieuw persoonlijk record; oude blijven. Neemt ook op zonder automatische demo's
@@ -2099,6 +2134,12 @@ nl Videokaarttijd per frame in milliseconden
 
 @ Video memory in use and what the driver allows, where it reports it
 nl Gebruikt videogeheugen en wat het stuurprogramma toestaat, als het dat meldt
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+nl Verplaats, verschaal, voeg toe en verwijder HUD-onderdelen: gezondheid, munitie, wapens, timers, berichten en meer
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+nl Modern: compacte onderdelen aan de schermranden; klassiek: de originele statusbalk. Een keuze zet de HUD terug; wijzigingen in HUD bewerken maken hem aangepast
 
 # ==== ui.txt ====
 

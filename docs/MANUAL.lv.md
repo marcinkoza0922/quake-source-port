@@ -191,8 +191,8 @@ Options → Pieejamība:
 - Krāsu akluma filtri.
 - Pielāgojams tēmeklis: forma, izmērs, kontūra un krāsas maiņa, esot uz
   mērķa vai nogalinot; neobligāti trāpījumu marķieri.
-- **Skaņu subtitri** un ziņu iestatījumi (Ziņas & subtitri), teksta
-  mērogošana.
+- **Skaņu subtitri**; ziņu un subtitru vietu, izmēru un rādīšanas laiku
+  iestata HUD redaktorā.
 - Uzbrukuma un skriešanas pārslēgšana (turēšanas vietā).
 - Spēles ātruma slīdnis visas spēles palēnināšanai.
 - Autotēmēšana ar fiksācijas indikatoru, konusa un attāluma iestatījumiem.

@@ -103,9 +103,6 @@ id Ambient Occlusion
 @ Ammo Counts
 id Jumlah Amunisi
 
-@ Ammo Counts Position
-id Posisi Jumlah Amunisi
-
 @ Ammo Pickups
 id Amunisi Diambil
 
@@ -120,9 +117,6 @@ id Terapkan Ke
 
 @ Armor
 id Zirah
-
-@ Armor Position
-id Posisi Zirah
 
 @ Ask
 id Tanya
@@ -220,9 +214,6 @@ id Kaustik
 @ Center
 id Tengah
 
-@ Center Message Position
-id Posisi Pesan Tengah
-
 @ Center Message Time
 id Durasi Pesan Tengah
 
@@ -282,9 +273,6 @@ id Ukuran Crosshair
 
 @ Current Ammo
 id Amunisi Saat Ini
-
-@ Current Ammo Position
-id Posisi Amunisi Saat Ini
 
 @ Customize This Game
 id Sesuaikan Game Ini
@@ -469,17 +457,11 @@ id Bidik Giroskop
 @ HUD
 id HUD
 
-@ HUD Style
-id Gaya HUD
-
 @ Health
 id Kesehatan
 
 @ Health Pickups
 id Kesehatan Diambil
-
-@ Health Position
-id Posisi Kesehatan
 
 @ Health Regeneration
 id Regenerasi Kesehatan
@@ -589,9 +571,6 @@ id Lompatan
 @ Keys & Powerups
 id Kunci & Power-up
 
-@ Keys & Powerups Position
-id Posisi Kunci & Power-up
-
 @ Kill Bonus (x)
 id Bonus Bunuh (x)
 
@@ -661,15 +640,6 @@ id Jangkauan Maks
 @ Melee only
 id Hanya jarak dekat
 
-@ Message Background
-id Latar Pesan
-
-@ Message Text Size
-id Ukuran Teks Pesan
-
-@ Messages & Captions
-id Pesan & Teks
-
 @ Meter Duration (real seconds)
 id Durasi Meter (detik nyata)
 
@@ -681,9 +651,6 @@ id Mode
 
 @ Modern Console
 id Konsol Modern
-
-@ Modern HUD Layout
-id Tata Letak HUD Modern
 
 @ Most recent save
 id Simpanan terbaru
@@ -732,9 +699,6 @@ id Filter Derau
 
 @ Normal Color
 id Warna Normal
-
-@ Notify Message Position
-id Posisi Notifikasi
 
 @ Notify Message Time
 id Durasi Notifikasi
@@ -928,17 +892,11 @@ id bahu kiri
 @ Shoulder right
 id bahu kanan
 
-@ Show FPS
-id Tampilkan FPS
-
 @ Show Face
 id Tampilkan Wajah
 
 @ Shrapnel
 id Serpihan
-
-@ Size of on-screen messages and captions
-id Ukuran pesan dan teks di layar
 
 @ Skill
 id Kesulitan
@@ -1108,15 +1066,6 @@ id Perlambatan Roda Senjata
 @ Weapons
 id Senjata
 
-@ Weapons Position
-id Posisi Senjata
-
-@ Where center-screen messages appear
-id Letak pesan di tengah layar
-
-@ Where pickup and event messages appear
-id Letak pesan pengambilan dan peristiwa
-
 @ White
 id Putih
 
@@ -1156,9 +1105,6 @@ id kotak
 
 @ broken square
 id persegi putus
-
-@ classic
-id klasik
 
 @ coarse
 id kasar
@@ -1247,29 +1193,17 @@ id intens
 @ large
 id besar
 
-@ larger
-id lebih besar
-
-@ largest
-id terbesar
-
 @ linear
 id linear
 
 @ low
 id rendah
 
-@ lower
-id bawah
-
 @ magenta
 id magenta
 
 @ medium
 id sedang
-
-@ middle
-id tengah
 
 @ middle left
 id kiri tengah
@@ -1357,9 +1291,6 @@ id tripel
 
 @ tritanopia
 id tritanopia
-
-@ upper
-id atas
 
 @ white
 id putih
@@ -1491,9 +1422,6 @@ id Waktu & Statistik
 @ Clock
 id Jam
 
-@ Clock Position
-id Posisi Jam
-
 @ Level Timer
 id Pengatur Waktu Level
 
@@ -1506,17 +1434,11 @@ id Jenis Rekor
 @ Personal Best Color
 id Warna Rekor
 
-@ Timer Position
-id Posisi Pengatur Waktu
-
 @ Kills
 id Pembunuhan
 
 @ Secrets
 id Rahasia
-
-@ Kills & Secrets Position
-id Posisi Pembunuhan & Rahasia
 
 @ 24-hour
 id 24 jam
@@ -1564,8 +1486,139 @@ id Waktu GPU
 @ Video Memory
 id Memori Video
 
-@ Metrics Position
-id Posisi Metrik
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+id Tambah
+
+@ Ammo
+id Amunisi
+
+@ Ammo Bar
+id Bilah Amunisi
+
+@ Armor Bar
+id Bilah Zirah
+
+@ Background
+id Latar
+
+@ Cells
+id Sel
+
+@ Center Message
+id Pesan Tengah
+
+@ Columns
+id Kolom
+
+@ Edit HUD
+id Edit HUD
+
+@ FPS
+id FPS
+
+@ Face
+id Wajah
+
+@ Fill Width
+id Lebar Penuh
+
+@ Font
+id Fon
+
+@ Format
+id Format
+
+@ HUD Editor
+id Editor HUD
+
+@ Health Bar
+id Bilah Kesehatan
+
+@ Inventory
+id Inventaris
+
+@ Keys
+id Kunci
+
+@ Nails
+id Paku
+
+@ Notify Messages
+id Pesan Notifikasi
+
+@ Position
+id Posisi
+
+@ Powerups
+id Power-up
+
+@ Precision
+id Presisi
+
+@ Quake
+id Quake
+
+@ Rockets
+id Roket
+
+@ Scale
+id Skala
+
+@ Sections
+id Bagian
+
+@ Shells
+id Selongsong
+
+@ Show As
+id Tampilkan Sebagai
+
+@ Show Icon
+id Tampilkan Ikon
+
+@ Show Value
+id Tampilkan Nilai
+
+@ Sigils
+id Sigil
+
+@ Status
+id Status
+
+@ Status Bar
+id Bilah Status
+
+@ Visibility
+id Visibilitas
+
+@ big numbers
+id angka besar
+
+@ center
+id tengah
+
+@ status + inventory
+id status + inventaris
+
+@ status only
+id status saja
+
+@ Text Color
+id Warna Teks
+
+@ Label Color
+id Warna Label
+
+@ HUD Preset
+id Preset HUD
+
+@ custom
+id kustom
+
+@ classic
+id klasik
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ id Membatasi jumlah dan durasi noda, tetesan di udara, serta noda luka/potongan 
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 id Membatasi input shader ke ukuran output agar skala render 200% tetap tajam tanpa biaya shader 4x; skala rendah tetap beresolusi rendah
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-id Klasik: bilah status asli; modern: elemen ringkas di tepi layar
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 id Resolusi atlas lapisan, laju pembuatan ulang, dan detail shader: rendah membuat lapisan lebih kecil lebih jarang dengan shading cepat; tinggi memakai detail penuh
 
@@ -1629,9 +1679,6 @@ id Warna jejak spiral railgun; tiap pemain layar terbagi mendapat warna berikutn
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 id Kerusakan railgun pada setiap musuh yang ditembusnya (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-id Latar gelap di belakang pesan di layar agar mudah dibaca
 
 @ Dark border keeps the crosshair visible on any background
 id Tepi gelap menjaga crosshair tetap terlihat di latar apa pun
@@ -1879,17 +1926,11 @@ id Pola cahaya beriak pada permukaan di bawah air dan lendir
 @ Scales all damage you take; above 100% is harder
 id Mengatur skala semua kerusakan yang Anda terima; di atas 100% lebih sulit
 
-@ Screen edge for this element; elements on the same spot stack
-id Tepi layar untuk elemen ini; elemen di posisi yang sama akan bertumpuk
-
 @ Seconds a monster hit by the boomerang stays stunned
 id Lama monster pingsan setelah terkena bumerang (detik)
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 id Lama bekas hantaman dan paku yang menancap bertahan sebelum memudar (detik); tidak bergantung pada Kualitas Partikel
-
-@ Seconds messages at the top of the screen stay up
-id Lama pesan di bagian atas layar ditampilkan (detik)
 
 @ Seconds the flick stick snap takes; lower is faster
 id Lama gerakan flick stick (detik); lebih rendah lebih cepat
@@ -2063,9 +2104,6 @@ id Menampilkan jam dalam format yang dipilih
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 id Waktu level, seperti di layar jeda antarlevel; berhenti saat dijeda dan di pintu keluar
 
-@ Your best time on this map and skill, next to the timer (single player)
-id Waktu terbaikmu di peta dan tingkat kesulitan ini, di samping pengatur waktu (pemain tunggal)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 id any%: selesai dengan cara apa pun; 100%: semua pembunuhan dan rahasia. Kartu simpanan menampilkan ini lebih dulu
 
@@ -2074,9 +2112,6 @@ id Warna rekor pribadi di HUD dan kartu simpanan
 
 @ Shown as a count or as a percentage of the level's total
 id Ditampilkan sebagai jumlah atau persentase dari total level
-
-@ Where this goes on screen; items at the same position share a line
-id Letaknya di layar; item di posisi yang sama berbagi satu baris
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 id Menyimpan demo setiap level yang mencetak rekor pribadi; yang lama tetap ada. Merekam meski rekam otomatis mati
@@ -2099,6 +2134,12 @@ id Waktu kartu grafis per frame dalam milidetik
 
 @ Video memory in use and what the driver allows, where it reports it
 id Memori video yang dipakai dan batas dari driver, jika dilaporkan
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+id Pindahkan, ubah ukuran, tambah dan hapus elemen HUD: kesehatan, amunisi, senjata, pengatur waktu, pesan, dan lainnya
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+id Modern: elemen ringkas di tepi layar; klasik: bilah status asli. Memilih salah satu mengatur ulang HUD; perubahan di Edit HUD membuatnya kustom
 
 # ==== ui.txt ====
 

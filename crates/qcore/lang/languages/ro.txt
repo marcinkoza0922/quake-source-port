@@ -103,9 +103,6 @@ ro Ocluzie ambientală
 @ Ammo Counts
 ro Contoare muniție
 
-@ Ammo Counts Position
-ro Poziție contoare muniție
-
 @ Ammo Pickups
 ro Muniție colectată
 
@@ -120,9 +117,6 @@ ro Aplică la
 
 @ Armor
 ro Armură
-
-@ Armor Position
-ro Poziție armură
 
 @ Ask
 ro Întreabă
@@ -220,9 +214,6 @@ ro Caustice
 @ Center
 ro Centru
 
-@ Center Message Position
-ro Poziție mesaje centrale
-
 @ Center Message Time
 ro Durată mesaje centrale
 
@@ -282,9 +273,6 @@ ro Mărime cătare
 
 @ Current Ammo
 ro Muniție curentă
-
-@ Current Ammo Position
-ro Poziție muniție curentă
 
 @ Customize This Game
 ro Personalizează acest joc
@@ -469,17 +457,11 @@ ro Țintire cu giroscop
 @ HUD
 ro HUD
 
-@ HUD Style
-ro Stil HUD
-
 @ Health
 ro Viață
 
 @ Health Pickups
 ro Viață colectată
-
-@ Health Position
-ro Poziție viață
 
 @ Health Regeneration
 ro Regenerare viață
@@ -589,9 +571,6 @@ ro Salturi
 @ Keys & Powerups
 ro Chei și bonusuri
 
-@ Keys & Powerups Position
-ro Poziție chei și bonusuri
-
 @ Kill Bonus (x)
 ro Bonus eliminare (x)
 
@@ -661,15 +640,6 @@ ro Rază maximă
 @ Melee only
 ro Doar corp la corp
 
-@ Message Background
-ro Fundal mesaje
-
-@ Message Text Size
-ro Mărime text mesaje
-
-@ Messages & Captions
-ro Mesaje și subtitrări
-
 @ Meter Duration (real seconds)
 ro Durată bară (secunde reale)
 
@@ -681,9 +651,6 @@ ro Mod
 
 @ Modern Console
 ro Consolă modernă
-
-@ Modern HUD Layout
-ro Aspect HUD modern
 
 @ Most recent save
 ro Cea mai recentă salvare
@@ -732,9 +699,6 @@ ro Filtru de zgomot
 
 @ Normal Color
 ro Culoare normală
-
-@ Notify Message Position
-ro Poziție notificări
 
 @ Notify Message Time
 ro Durată notificări
@@ -928,17 +892,11 @@ ro umăr stânga
 @ Shoulder right
 ro umăr dreapta
 
-@ Show FPS
-ro Afișează FPS
-
 @ Show Face
 ro Afișează fața
 
 @ Shrapnel
 ro Schije
-
-@ Size of on-screen messages and captions
-ro Mărimea mesajelor și subtitrărilor de pe ecran
 
 @ Skill
 ro Dificultate
@@ -1108,15 +1066,6 @@ ro Încetinire la roata armelor
 @ Weapons
 ro Arme
 
-@ Weapons Position
-ro Poziție arme
-
-@ Where center-screen messages appear
-ro Unde apar mesajele din centrul ecranului
-
-@ Where pickup and event messages appear
-ro Unde apar mesajele de colectare și evenimente
-
 @ White
 ro Alb
 
@@ -1156,9 +1105,6 @@ ro cutie
 
 @ broken square
 ro pătrat întrerupt
-
-@ classic
-ro clasic
 
 @ coarse
 ro grosier
@@ -1247,29 +1193,17 @@ ro intens
 @ large
 ro mare
 
-@ larger
-ro mai mare
-
-@ largest
-ro cea mai mare
-
 @ linear
 ro liniar
 
 @ low
 ro scăzută
 
-@ lower
-ro jos
-
 @ magenta
 ro magenta
 
 @ medium
 ro medie
-
-@ middle
-ro mijloc
 
 @ middle left
 ro mijloc stânga
@@ -1357,9 +1291,6 @@ ro triplu
 
 @ tritanopia
 ro tritanopie
-
-@ upper
-ro sus
 
 @ white
 ro alb
@@ -1491,9 +1422,6 @@ ro Timp și statistici
 @ Clock
 ro Ceas
 
-@ Clock Position
-ro Poziția ceasului
-
 @ Level Timer
 ro Cronometrul nivelului
 
@@ -1506,17 +1434,11 @@ ro Tipul recordului
 @ Personal Best Color
 ro Culoarea recordului
 
-@ Timer Position
-ro Poziția cronometrului
-
 @ Kills
 ro Ucideri
 
 @ Secrets
 ro Secrete
-
-@ Kills & Secrets Position
-ro Poziția uciderilor și secretelor
 
 @ 24-hour
 ro 24 de ore
@@ -1564,8 +1486,139 @@ ro Timp GPU
 @ Video Memory
 ro Memorie video
 
-@ Metrics Position
-ro Poziția indicatorilor
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+ro Adaugă
+
+@ Ammo
+ro Muniție
+
+@ Ammo Bar
+ro Bară de muniție
+
+@ Armor Bar
+ro Bară de armură
+
+@ Background
+ro Fundal
+
+@ Cells
+ro Celule
+
+@ Center Message
+ro Mesaj central
+
+@ Columns
+ro Coloane
+
+@ Edit HUD
+ro Editează HUD
+
+@ FPS
+ro FPS
+
+@ Face
+ro Față
+
+@ Fill Width
+ro Lățime completă
+
+@ Font
+ro Font
+
+@ Format
+ro Format
+
+@ HUD Editor
+ro Editor HUD
+
+@ Health Bar
+ro Bară de sănătate
+
+@ Inventory
+ro Inventar
+
+@ Keys
+ro Chei
+
+@ Nails
+ro Cuie
+
+@ Notify Messages
+ro Notificări
+
+@ Position
+ro Poziție
+
+@ Powerups
+ro Bonusuri
+
+@ Precision
+ro Precizie
+
+@ Quake
+ro Quake
+
+@ Rockets
+ro Rachete
+
+@ Scale
+ro Scară
+
+@ Sections
+ro Secțiuni
+
+@ Shells
+ro Cartușe
+
+@ Show As
+ro Afișează ca
+
+@ Show Icon
+ro Afișează pictograma
+
+@ Show Value
+ro Afișează valoarea
+
+@ Sigils
+ro Rune
+
+@ Status
+ro Stare
+
+@ Status Bar
+ro Bară de stare
+
+@ Visibility
+ro Vizibilitate
+
+@ big numbers
+ro cifre mari
+
+@ center
+ro centru
+
+@ status + inventory
+ro stare + inventar
+
+@ status only
+ro doar stare
+
+@ Text Color
+ro Culoarea textului
+
+@ Label Color
+ro Culoarea etichetelor
+
+@ HUD Preset
+ro Presetare HUD
+
+@ custom
+ro personalizat
+
+@ classic
+ro clasic
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ ro Limitează numărul și durata urmelor, picăturile din aer și petele de ră
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 ro Limitează intrarea shaderului la mărimea ieșirii, astfel că o scală de randare de 200% păstrează claritatea 3D fără a cvadrupla costul shaderului; scalele mici rămân la rezoluție mică
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-ro Clasic: bara de stare originală; modern: elemente compacte la marginile ecranului
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 ro Rezoluția atlasului de straturi, frecvența de reconstruire și detaliul shaderului: scăzută creează straturi mai mici mai rar, cu umbrire rapidă; ridicată folosește detaliul complet
 
@@ -1629,9 +1679,6 @@ ro Culoarea dârei în spirală a railgunului; în ecran împărțit fiecare juc
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 ro Daunele provocate de railgun fiecărui inamic străpuns (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-ro Fundal întunecat în spatele mesajelor de pe ecran, pentru lizibilitate
 
 @ Dark border keeps the crosshair visible on any background
 ro Conturul întunecat păstrează cătarea vizibilă pe orice fundal
@@ -1879,17 +1926,11 @@ ro Modele de lumină unduitoare pe suprafețele de sub apă și mâl toxic
 @ Scales all damage you take; above 100% is harder
 ro Scalează toate daunele primite; peste 100% e mai greu
 
-@ Screen edge for this element; elements on the same spot stack
-ro Marginea ecranului pentru acest element; elementele din același loc se stivuiesc
-
 @ Seconds a monster hit by the boomerang stays stunned
 ro Secunde cât rămâne amețit un monstru lovit de bumerang
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 ro Secunde cât rămân urmele de impact și cuiele înfipte înainte să se estompeze; independent de Calitate particule
-
-@ Seconds messages at the top of the screen stay up
-ro Secunde cât rămân afișate mesajele din partea de sus a ecranului
 
 @ Seconds the flick stick snap takes; lower is faster
 ro Durata întoarcerii flick stick, în secunde; mai mic e mai rapid
@@ -2063,9 +2104,6 @@ ro Arată ora din zi în formatul ales
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 ro Timpul nivelului, ca pe ecranul de pauză dintre niveluri; se oprește la pauză și la ieșire
 
-@ Your best time on this map and skill, next to the timer (single player)
-ro Cel mai bun timp al tău pe această hartă și dificultate, lângă cronometru (un jucător)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 ro any%: orice final; 100%: toate uciderile și secretele. Cardurile salvărilor îl arată primul
 
@@ -2074,9 +2112,6 @@ ro Culoarea recordului personal în HUD și pe cardurile salvărilor
 
 @ Shown as a count or as a percentage of the level's total
 ro Ca număr sau ca procent din totalul nivelului
-
-@ Where this goes on screen; items at the same position share a line
-ro Unde apare pe ecran; elementele în aceeași poziție împart un rând
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 ro Păstrează demo-ul fiecărui nivel cu un nou record personal; cele vechi rămân. Înregistrează și fără demo-uri automate
@@ -2099,6 +2134,12 @@ ro Timpul plăcii video pe cadru în milisecunde
 
 @ Video memory in use and what the driver allows, where it reports it
 ro Memoria video folosită și cât permite driverul, unde o raportează
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+ro Mută, redimensionează, adaugă și elimină elemente HUD: sănătate, muniție, arme, cronometre, mesaje și altele
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+ro Modern: elemente compacte la marginile ecranului; clasic: bara de stare originală. Alegerea uneia resetează HUD-ul; modificările din Editează HUD îl fac personalizat
 
 # ==== ui.txt ====
 

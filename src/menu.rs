@@ -9,7 +9,6 @@ use crate::glyphs::{Family, Glyphs, is_pad_key};
 use crate::modmenu::{self, ModMenu};
 use crate::sbar::PicFn;
 mod pages;
-mod time_page;
 pub use pages::*;
 mod draw_util;
 pub use draw_util::*;
@@ -65,6 +64,8 @@ pub enum Screen {
     Help,
     /// Main menu → Demos: saved and automatic demos.
     Demos,
+    /// Options → HUD → Edit HUD.
+    HudEditor,
 }
 
 /// Options sub-pages.
@@ -89,10 +90,6 @@ pub enum Page {
     Autosave,
     AutoAim,
     GrenadeArc,
-    HudLayout,
-    TimeHud,
-    Metrics,
-    Messages,
     Water,
     Bloom,
     RtLights,
@@ -138,7 +135,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, addon_settings::HITSTOP, addon_settings::HITSTOP_ADVANCED, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, GEL, WASHER, HOOKSHOT, CABLE, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, HUD_LAYOUT, MESSAGES, ENHANCEMENTS, WATER, BLOOM, RT_LIGHTS, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, MODIFIERS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GYRO, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY, demos::DEMOS, demos::VIDEO].into_iter().flatten().filter_map(|i| match *i {
+    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, addon_settings::HITSTOP, addon_settings::HITSTOP_ADVANCED, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, GEL, WASHER, HOOKSHOT, CABLE, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, ENHANCEMENTS, WATER, BLOOM, RT_LIGHTS, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, MODIFIERS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GYRO, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY, demos::DEMOS, demos::VIDEO].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
@@ -194,6 +191,8 @@ pub struct Menu {
     sub_return: Option<(Page, Page, usize)>,
     pub mods: ModMenu,
     pub demos: demos::DemoBrowser,
+    /// Options → HUD → Edit HUD.
+    pub hud_edit: crate::hud::editor::Editor,
     /// Export dialog: where Back goes; export and rename dialogs: info lines.
     export_back: Screen,
     dialog_info: Vec<String>,
@@ -323,6 +322,7 @@ impl Menu {
             sub_return: None,
             mods: ModMenu::default(),
             demos: Default::default(),
+            hud_edit: Default::default(),
             export_back: Screen::None,
             dialog_info: Vec::new(),
             rename_from: String::new(),
@@ -386,6 +386,9 @@ impl Menu {
 
     /// Typed text goes to a text field under the cursor.
     pub fn text(&mut self, ch: char, cv: &mut Cvars) {
+        if self.screen == Screen::HudEditor {
+            return self.hud_edit.text(ch);
+        }
         let Screen::OptionsPage(p) = self.screen else { return };
         if self.drop.is_some() || !(' '..='~').contains(&ch) || ch == '"' || ch == ';' {
             return;
@@ -484,7 +487,7 @@ impl Menu {
                 .position(|&bx| x >= bx && x < bx + QUIT_BTN.0 && y >= QUIT_BTN_Y && y < QUIT_BTN_Y + QUIT_BTN.1),
             Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.item_at(self.mods_page(), (x, y)),
             Screen::Help => self.help.item_at((x, y)),
-            Screen::Demos | Screen::None => None,
+            Screen::Demos | Screen::None | Screen::HudEditor => None,
         }
     }
 
@@ -512,7 +515,7 @@ impl Menu {
             }
             // hovering doesn't switch sections; a click does
             Screen::Help => None,
-            Screen::Demos | Screen::None => None,
+            Screen::Demos | Screen::None | Screen::HudEditor => None,
         }
     }
 

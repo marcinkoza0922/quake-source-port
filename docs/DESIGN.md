@@ -24,21 +24,86 @@ are independent. Audio → Hit Sounds edits the synthesized hit and kill cues.
 See [HIT_FEEDBACK.md](HIT_FEEDBACK.md) for settings, target detection, event
 capture, synthesis, and diagnostic commands.
 
+### HUD layout and editor
+
+The HUD is a free layout of elements (`src/hud.rs`, `src/hud/`), kept in the archived
+`hud_layout` cvar and edited in Options → HUD → Edit HUD (`menu_hudedit` opens it). The
+text form is one token per element, separated by spaces: `kind@anchor` plus `,<key><value>`
+fields that differ from the kind's defaults (`x`/`y` offset, `s` scale, `o` opacity, `f`
+font b/q/m, `z` size, `i` immersive, `g` background, `t`/`k` text and label colour as a
+crosshair palette index (255, the default, keeps the element's own colours), `a`/`b` kind
+options, `l` bar length),
+e.g. `health@bl,a0 clock@tr,a3,fm`. Unknown kinds and fields are skipped (`layout.rs`).
+
+- **Kinds** (`kind.rs`, the editor's Add tree): Status (health, armor, face, health and
+  armor bars), Ammo (current ammo, ammo bar, ammo counts, shells/nails/rockets/cells),
+  Inventory (weapon grid with `a` columns, keys & powerups, keys, powerups, sigils),
+  Classic (the Quake status bar: `a` 0 status only / 1 with the inventory strip, `b` fill
+  width with backtile), Time & Stats (clock, level timer, personal best, kills, secrets)
+  and Performance Metrics (FPS, frame time, CPU, RAM, GPU, VRAM). Numbers take the big
+  status bar digits, Quake 8×8 text or the modern TTF; text takes Quake or modern.
+  Immersive elements (`Fade`) show for 3 s after their value changes, then fade over
+  0.5 s; low health always shows.
+- **Messages are permanent**: the center message, notify lines and sound captions are
+  always in the layout (`Layout::ensure_permanent`) and can be moved and sized but not
+  deleted. The console and captions draw at their rectangles (`MsgPlace`,
+  `Console::center_place` / `notify_place`, `Captions::draw` centre, bottom and colour); their
+  durations and `cl_captions` stay cvars and are edited from the elements.
+- **Placement** (`place.rs`): an element's anchor is one of nine screen points
+  (8 units in from the edges); its matching corner, edge midpoint or centre sits there,
+  plus its offset. Each element reserves a fixed box, the widest its settings can show
+  (`draw::size`: "888", the longest clock and timer text, every weapon slot of the pack
+  plus enabled add-ons), so a layout that fits stays fitting in play. Elements never
+  overlap: `place_all` places them in list order and moves one that would overlap an
+  earlier one to the nearest free spot on screen (candidates line up with the wish, the
+  screen edges or another element's edges). The result is cached per layout, sizes and
+  screen. A full-width status bar touching the bottom makes the 3D view end above it
+  (`reserve_bottom` → `View::reserve_bottom`).
+- **Editor** (`editor.rs`, `editor_rows.rs`, `editor_popup.rs`, `editor_draw.rs`): a
+  dialog that can be dragged by its title bar but not closed. It lists every element with
+  scale and offset, buttons (Add, Delete, Reset to Defaults with a confirm, Done), and the
+  selected element's settings: font, size, scale, opacity, visibility, background, text
+colour (values and numbers, tinting the big digit pictures; alerts stay red, owned ammo
+types gold; the personal best keeps `hud_pb_color`), label colour ("FPS", "K", ...), the
+  position button (a 3×3 grid that snaps to an anchor with no offset), X and Y (typed or
+  stepped) and the kind's options, with help under the dialog. Elements on screen can be
+  clicked and dragged. While editing, the HUD is a preview with a sample player
+  (`sample_client`), the selected element gives way when elements would overlap, and the
+  settled offsets are written back (`Hud::settled`), so the dialog shows where things
+  really are. Keyboard and pad: arrows move and step, Enter/A acts, Esc/B leaves,
+  Del/X deletes, Ins/Y adds.
+- **Presets**: HUD → HUD Preset (`hud_preset`, archived: 0 modern, default; 1 classic;
+  2 custom), above Edit HUD. Picking modern or classic sets `hud_layout` to `default` or
+  `classic`, which the host turns into that layout (`Layout::default_layout`, the old
+  modern defaults; `classic_layout`, a full-width status bar and the messages). Any change
+  the editor saves sets custom; its Reset to Defaults sets modern. The host acts on a
+  changed `hud_preset` only once the configs have run (`Host::hud_preset`), and once at
+  startup checks the saved layout against its preset: a different one makes it custom
+  (layouts saved before presets existed). ironwail's `hudstyle 0` picks classic, and
+  `hudstyle 1`/`2` picks modern only from classic, so a custom HUD stays.
+- **First run**: an empty `hud_layout` becomes the layout the old settings describe
+  (`Layout::from_legacy`: `scr_hudstyle`, `hud_<elem>` modes and `_pos` anchors,
+  `hud_face`, Time & Stats, `scr_show*` metrics, `scr_centerpos`, `con_notifypos`,
+  `scr_textscale`, `scr_textbg`; elements sharing an anchor are stacked by
+  `place::stack`), once the configs have run, and `hud_preset` is set to the preset
+  it matches (else custom). Those cvars are still registered, so old
+  configs load, but no longer saved. Reset to Defaults sets `hud_layout default`, which
+  becomes the fresh-install layout the same way. Tools that need no HUD set
+  `hud_layout center@mc` (only the messages).
+- Player elements hide with the scoreboard and at death (the scoreboard then shows at
+  the top unless a status bar shows it); Time & Stats hide with the scoreboard. In split
+  screen each cell places the layout for its own size and draws the player elements; the
+  metrics then go over everything, as outside the in-game HUD.
+
 ### Time & Stats and personal bests
 
-HUD → Time & Stats (`src/sbar/time.rs`, `src/host/level_time.rs`, all archived) draws up to
-three items: a clock (`hud_clock` 0 off, 1 24-hour, 2 with seconds, 3 12-hour, 4 with seconds;
-local time from `qplatform::local_time`), the level timer (`hud_timer` 0 off, 1–3 = whole
-seconds, tenths, hundredths) with the personal best on the same line (`hud_pb` default 1,
-`hud_pb_100` 0 any% / 1 100%, `hud_pb_color` a crosshair palette index, default 2 green),
-and kills + secrets on one item (`hud_kills`, `hud_secrets`: 0 off, 1 count, 2 percent).
-Each item has an anchor (`hud_clock_pos`, `hud_timer_pos`, `hud_stats_pos`, `HudAnchor`
-values, default 5 top right). Items sharing an anchor flow onto one line while it stays
-within 40% of the screen width, then wrap into rows (`time::flow`). They stack after the
-modern HUD's boxes at that anchor (`draw_modern` returns the space used per anchor), above
-the classic status bar, under the FPS counter at top right, and lift with the HUD over the
-demo bar. Hidden with the scoreboard, in split screen and at intermission; deathmatch shows
-only the clock and timer. The timer is the client clock, as on the intermission screen
+The HUD's Time & Stats elements (`src/sbar/time.rs` formats, `src/host/level_time.rs`
+`level_info`): the clock (local time from `qplatform::local_time`; 24- or 12-hour, with or
+without seconds), the level timer (whole seconds, tenths or hundredths), the personal best
+(its own precision; `hud_pb_100` 0 any% / 1 100% and `hud_pb_color`, a crosshair palette
+index, default 2 green, are cvars shared with the save cards), and kills and secrets (count
+or percent). Deathmatch shows only the clock and timer. The timer is the client clock, as
+on the intermission screen
 (server time starts at 1 s, stops while paused or in the single-player menu, and freezes at
 `completed_time`); a loaded save goes on from its saved time, and such runs still count.
 Personal bests live in `qsp_stats.json` per map as `pb_any` / `pb_100` arrays indexed by
@@ -50,19 +115,17 @@ the PB colour, `hud_pb_100`'s category first, falling back to the other one.
 
 ### Performance metrics
 
-HUD → Performance Metrics (`src/host/metrics.rs`, all archived, default off): `scr_showfps`
-(moved here from the HUD page), `scr_showframetime` (average and slowest frame, ms),
-`scr_showcpu` (process CPU time over wall time, as a share of all logical cores),
-`scr_showram` (resident memory), `scr_showgpu` (GPU ms per frame: the sum of the renderer's
+The HUD's Performance Metrics elements (`src/host/metrics.rs`): FPS, frame time (average
+and slowest frame, ms), CPU (process CPU time over wall time, as a share of all logical
+cores), RAM (resident memory), GPU (ms per frame: the sum of the renderer's
 pass timestamps via `take_gpu_times`, which turns `gpu_times_wanted` on; skipped while
-`prof_start` owns the timestamps) and `scr_showvram` (device-local heap usage / budget from
+`prof_start` owns the timestamps) and VRAM (device-local heap usage / budget from
 VK_EXT_memory_budget, enabled when the device has it; `Renderer::vram`, None on the wgpu
-backend). Values are sampled every 0.5 s. CPU and RAM come from `qcore::procstat`
-(`/proc/self/stat` and `status` on Linux and Android, `GetProcessTimes` and
-`K32GetProcessMemoryInfo` on Windows, unavailable elsewhere, shown as "n/a"). The items go to
-`scr_metrics_pos` (default top right) through the Time & Stats layout, ahead of those items,
-so they share lines with them. Outside the in-game HUD (menus without a game, intermission,
-split screen) they are drawn on top of everything instead.
+backend). Values are sampled every 0.5 s while the layout has any of them. CPU and RAM come
+from `qcore::procstat` (`/proc/self/stat` and `status` on Linux and Android,
+`GetProcessTimes` and `K32GetProcessMemoryInfo` on Windows, unavailable elsewhere, shown as
+"n/a"). Outside the in-game HUD (menus without a game, intermission, split screen) they are
+drawn on top of everything.
 
 ## Decisions (interview, 2026-11-10)
 
@@ -148,7 +211,7 @@ Parity rules found by the spawn/run parity sweeps against ironwail (2026-11-17, 
 - `AngleVectors`, `vectoangles`, `vectoyaw`, `walkmove` reproduce C's float/double rounding (double `sin`/`cos`/`atan2` of float inputs, results stored as float); f32 math flipped an `(int)` truncation in AD.
 - `PR_SetEngineString("")` is non-null; entity keys and values keep at most 1023 bytes (COM_Parse); savegames write strings raw (`"%s"`, newlines included), replacing only `"`.
 - A `-dedicated` server runs `autoexec.cfg` and the command line, never the game's `quake.rc` (AD's sets `temp1 1024`).
-- Console commands mods stuff from QC or set in their configs, as in ironwail/vkQuake: `v_cshift r g b percent` (`cshift_empty`, the contents shift outside liquids; sky no longer gets the water tint), `sky <name>` (runtime skybox), `hudstyle` (ironwail's cvar name, mapped onto `scr_hudstyle`), `play`/`playvol`/`stopsound`, `chase_active` with `chase_back`/`chase_up`/`chase_right` (a `Camera::Chase` mode), `freecam [0|1]` / `freecam x y z [pitch yaw]` (our own; `host/freecam.rs`: a `Camera::Free` that flies noclip-style through walls with the movement keys and mouse while player 1 stands still and the game runs; demos or a local game with no remote players, not splitscreen; ends on map change; the local server adds the camera's fat PVS to player 1's entity filter via `Client::extra_view`), `pause` as Host_Pause_f (server side, `pausable`, broadcast, `svc_setpause`; pauses a playing demo), `host_framerate`/`host_timescale`, quiet `sys_ticrate`, sky wind (see Renderer), `v_idlescale` with `v_iyaw/iroll/ipitch_cycle/_level` (V_AddIdle sway; the gun takes it back out as CalcGunAngle does, twice for pitch, and intermissions always sway at scale 1), `gl_polyblend` and `gl_cshiftpercent` plus QuakeSpasm's `gl_cshiftpercent_contents/damage/bonus/powerup` (V_CalcBlend; during intermission only the contents shift shows), `cl_nolerp` (CL_LerpPoint returns 1 after clamping time), `scr_conalpha` (classic console background; default 1 keeps our opaque look, ironwail's is 0.5) and `fly` (Host_Fly_f). Mapper/debug commands: `mapname`, `maps [filter]`, `path`, `find`/`apropos`, `entities` (CL_PrintEntities_f), `edict n`/`edicts`/`edictcount` (host commands printing `Server::edict_text` etc., since a listen server's log only echoes diagnostics) and `pointfile [leak]` (`maps/<map>.pts` with collinear points merged, drawn as depth-tested arrows through the `r_showbboxes` line geometry; cleared on map load).
+- Console commands mods stuff from QC or set in their configs, as in ironwail/vkQuake: `v_cshift r g b percent` (`cshift_empty`, the contents shift outside liquids; sky no longer gets the water tint), `sky <name>` (runtime skybox), `hudstyle` (ironwail's cvar name: 0 picks the classic HUD preset, 1/2 modern unless the HUD is custom), `play`/`playvol`/`stopsound`, `chase_active` with `chase_back`/`chase_up`/`chase_right` (a `Camera::Chase` mode), `freecam [0|1]` / `freecam x y z [pitch yaw]` (our own; `host/freecam.rs`: a `Camera::Free` that flies noclip-style through walls with the movement keys and mouse while player 1 stands still and the game runs; demos or a local game with no remote players, not splitscreen; ends on map change; the local server adds the camera's fat PVS to player 1's entity filter via `Client::extra_view`), `pause` as Host_Pause_f (server side, `pausable`, broadcast, `svc_setpause`; pauses a playing demo), `host_framerate`/`host_timescale`, quiet `sys_ticrate`, sky wind (see Renderer), `v_idlescale` with `v_iyaw/iroll/ipitch_cycle/_level` (V_AddIdle sway; the gun takes it back out as CalcGunAngle does, twice for pitch, and intermissions always sway at scale 1), `gl_polyblend` and `gl_cshiftpercent` plus QuakeSpasm's `gl_cshiftpercent_contents/damage/bonus/powerup` (V_CalcBlend; during intermission only the contents shift shows), `cl_nolerp` (CL_LerpPoint returns 1 after clamping time), `scr_conalpha` (classic console background; default 1 keeps our opaque look, ironwail's is 0.5) and `fly` (Host_Fly_f). Mapper/debug commands: `mapname`, `maps [filter]`, `path`, `find`/`apropos`, `entities` (CL_PrintEntities_f), `edict n`/`edicts`/`edictcount` (host commands printing `Server::edict_text` etc., since a listen server's log only echoes diagnostics) and `pointfile [leak]` (`maps/<map>.pts` with collinear points merged, drawn as depth-tested arrows through the `r_showbboxes` line geometry; cleared on map load).
 - Savegames: version 5, and KEX version 6 (a game-dir line after the version; refused for another game). `load` falls back to the re-release's save folder (`qcore::fs::kex_save_dirs`: Windows `Saved Games\Nightdive Studios\Quake`, or the Steam Proton prefix of app 2310) for a KEX save of the running game, and to saves vkQuake/QuakeSpasm (`<basedir>/<game>`) and ironwail (`~/.ironwail/<game>`) left. The Load menu lists those after our own saves (`Host::external_saves`, same folder order as `load`, our names win), labelled with their source (`SaveSource`), without thumbnails and without Delete; `saveinfo` previews KEX v6 files too. The dead-player check uses active clients' edicts (a dedicated server or a client still in signon can save).
 
 ### Input and aim assist
@@ -598,7 +661,7 @@ Port of vkQuake/QSS's entity delta protocol, layered on 15/666/999. It is needed
 - Source layout: modules over ~500 lines are split along logical seams into submodules declared from the parent (`src/host.rs` + `src/host/*.rs`, `src/menu.rs` + `src/menu/*.rs`, `crates/qrender/src/lib.rs` + `lib/*.rs` via `#[path]`). Moved code keeps its behaviour; moved items are `pub(super)` so siblings can reach them.
 - User data (config.cfg, saves, default screenshots) lives in `$XDG_DATA_HOME/quake-source-port/<game>/` (default `~/.local/share`), which is added as a top-priority search path. The game data dir is never written (user decision 2026-11-11).
 - Graphics presets (`src/host/presets.rs`): `graphics_preset classic|enhanced|lowend` sets every visual option at once from one shared base list (enhancement masters and their sub-options, MSAA, anisotropy, render scale, dynamic lights, quality tiers), so switching never leaves a stray effect behind. **Classic** = the re-release look (enhanced models, MSAA 4x, every enhancement off); **Enhanced** = every enhancement on at its top tier (SSAO high, motion + speed blur, Enhanced FX/particles at high, impacts at spectacle with decals/nails/scorches, blood high, all water effects, see-through teleporters with high portal quality, debris high, MSAA 8x clamped to the device; render scale and supersampling untouched); **Low-End** = Classic with original models, no MSAA, 4x anisotropy and every quality tier at low. First run: when a game has no user `config.cfg` and none to inherit (`Host::inherited_config`), `Menu::preset_pending` makes `sync_menu_ui` open the pop-up (`src/menu/preset.rs`, `Prompt::Preset`) the first time the main menu shows (never in headless runs). Picking runs the command; Escape keeps the defaults. Either way the config written on quit means it isn't asked again. `menu_preset` reopens it.
-- Modules: `main` (args, SDL/renderer/audio setup, frame pacing), `host` (cbuf/commands/cvars, loopback server+client, frame), `assets` (precache → qrender/qsound incl. `b_*.bsp` brush models via `load_level`, worldspawn fog/sky), `view` (V_CalcRefdef, colour shifts, viewmodel, entity/particle/dlight lists, alias frame lerp (`r_lerpmodels`) and MOVESTEP move lerp (`r_lerpmove`, R_SetupEntityTransform) tracked per entity; the view consumes `LERP_RESETANIM`/`LERP_RESETMOVE`), `sbar` (`scr_hudstyle` 1 = modern HUD, default; 0 = classic bar drawn in a full-width backtile strip below the 3D view via `View::reserve_bottom`. The modern HUD is six elements (`HudElem`: health, armor, ammo, ammolist, weapons, items), each with `hud_<elem>` 0 off / 1 on / 2 immersive and `hud_<elem>_pos` anchor (`HudAnchor` 0..7: bottom L/C/R, top L/C/R, middle L/R); elements sharing an anchor stack away from the edge in `HudElem::ALL` order. Immersive elements (`HudFade`) show for 3 s after their value signature changes, then fade over 0.5 s; health under 26 always shows. `hud_face` toggles the face. The Options → HUD page holds style, crosshair, weapon wheel slowdown, `scr_centerpos` (center message upper/middle/lower) and `con_notifypos` (notify top-left/top-center/bottom-left); its Modern HUD Layout sub-page holds the per-element settings; `menu_options hud|hudlayout|messages` opens them. Messages & Captions (positions, times, text size, background, captions) is one sub-page linked from both HUD and Accessibility; `Menu::sub_return` sends Back to the page it was entered from), `console` (`con_modern` 1 = modern terminal console, default, archived, Options → HUD "Modern Console"; 0 = classic 8×8 conchars console. Modern console (`src/console/{ansi,vt,complete,edit,shell,modern_draw}.rs`) renders monospace cells with bundled `DejaVuSansMono.ttf` via `Canvas::mono_str` with 16/256/TrueColor ANSI SGR styling, floating fuzzy/prefix autocomplete popup + ghost preview for commands/aliases/cvars (with current and default values) and context-aware arguments (`map`/`changelevel` `.bsp`, `exec` `.cfg`, `playdemo`/`timedemo` `.dem`, `game`/`menu_mods` gamedirs, `load` saves), readline editing (`Ctrl+A/E/W/U/K/L`, `Ctrl+Left/Right`, `Ctrl+R` reverse history search, `Shift+PgUp/PgDn` height), mouse drag selection + SDL3 clipboard copy/paste (`Ctrl+C`/`Ctrl+V`), persistent `<user_dir("id1")>/console_history.txt`, interactive `bash`/`sh` PTY subshell (`VtGrid` VT100/alt-screen, `openpty`) in `fs.basedir()` with `QUAKE_BASEDIR`/`QUAKE_GAMEDIR`/`QUAKE_USERDIR`/`QUAKE_MAP`, `!cmd` one-shot shell commands, and `quake_cmd | bash_cmd` piping via `Console::begin_capture`/`end_capture` into `ShellJob`), `menu` (basic menus only; the mod menu goes elsewhere; Options is a hub of Gameplay/HUD/Controls/Input/Graphics/Enhancements/Audio/Accessibility pages built from typed `Item`s (slider, toggle, choice, display mode, resolution, apply, sub-page); `Item::Sub` rows open nested pages (Input → Mouse & Keyboard / Controller, Gameplay → Autosave Settings) and Escape returns to the parent row (`parent_page`); display mode/resolution are pending until Apply runs `vid_apply`; `menu_options <page>` opens a page (also `mouse`, `controller`, `autosave`, `gel`, `washer`); every option cvar is archived; menus are laid out in a 16:9 640×360 virtual area (`Canvas::menu_layout`, integer scale `floor(min(h/360, w/640))`, 3x at 1080p) with the classic 320×200 screens centred in it and the options pages drawn as a wide panel with a highlight bar; pages longer than `PAGE_ROWS` (20) show a window that follows the cursor (`Menu::page_scroll`; wheel/arrows move the cursor) with a scrollbar on the panel's right edge; option values with more than two choices (choice cvars, display mode, resolution) open a scrolling dropdown on Enter/click, while Left/Right still cycle; the quit prompt has clickable (Y)es / (N)o buttons (Left/Right + Enter, Y/N keys, Escape); mouse hover/click/wheel via `HostEvent::MousePos` mapped into that 640×360 space, click or drag to set option sliders; `Item::Sub` rows are drawn as tinted gold strips with an arrow), `draw` (2D canvas in 320-wide virtual units, `scale = floor(h/240)`), `font` (modern UI text: submenus, the options hub, quit prompt, mod menu, save cards and every button prompt use a bundled OFL TTF (Inter default; Rajdhani, Titillium, Kreon via `ui_menufont` 0..3, or any file via `ui_fontfile`), rasterised with ab_glyph at the exact pixel size drawn (em size × menu scale, pen positions rounded) into a 1024² CPU atlas that `Renderer::update_pic` / `update_pic_rows` re-uploads without stalling (`PendingPicUpload` stages rows into the next frame's command buffer and frees the staging buffer once its fence retires; `resize_pic` reallocates when dimensions change) when glyphs or gel coats update. Vector shapes (rounded boxes as nine slices, PS symbols, arrows) use the same atlas. `Canvas::text/text_w/text_center/text_right/shape/round_box`, `Canvas::clip` cuts draws vertically. Main, Single Player and Multiplayer keep the classic conchars and lmp pictures; console/HUD stay conchars. Button glyphs follow padwight's overlay look: discs with 13/24-height labels, rounded tags, 1 px edge), `platform` (SurfaceProvider, SDL→`InputEvent`), `png`, `default.cfg` (Quakespasm's, used when `default.cfg` is missing as in the 2021 re-release).
+- Modules: `main` (args, SDL/renderer/audio setup, frame pacing), `host` (cbuf/commands/cvars, loopback server+client, frame), `assets` (precache → qrender/qsound incl. `b_*.bsp` brush models via `load_level`, worldspawn fog/sky), `view` (V_CalcRefdef, colour shifts, viewmodel, entity/particle/dlight lists, alias frame lerp (`r_lerpmodels`) and MOVESTEP move lerp (`r_lerpmove`, R_SetupEntityTransform) tracked per entity; the view consumes `LERP_RESETANIM`/`LERP_RESETMOVE`), `sbar` (status bar pieces: the classic bar and inventory strip, weapon and item rows, scoreboards, intermission and finale; drawn as HUD elements by `hud`, see "HUD layout and editor"), `hud` (the HUD layout, its placement and the HUD editor), `console` (`con_modern` 1 = modern terminal console, default, archived, Options → HUD "Modern Console"; 0 = classic 8×8 conchars console. Modern console (`src/console/{ansi,vt,complete,edit,shell,modern_draw}.rs`) renders monospace cells with bundled `DejaVuSansMono.ttf` via `Canvas::mono_str` with 16/256/TrueColor ANSI SGR styling, floating fuzzy/prefix autocomplete popup + ghost preview for commands/aliases/cvars (with current and default values) and context-aware arguments (`map`/`changelevel` `.bsp`, `exec` `.cfg`, `playdemo`/`timedemo` `.dem`, `game`/`menu_mods` gamedirs, `load` saves), readline editing (`Ctrl+A/E/W/U/K/L`, `Ctrl+Left/Right`, `Ctrl+R` reverse history search, `Shift+PgUp/PgDn` height), mouse drag selection + SDL3 clipboard copy/paste (`Ctrl+C`/`Ctrl+V`), persistent `<user_dir("id1")>/console_history.txt`, interactive `bash`/`sh` PTY subshell (`VtGrid` VT100/alt-screen, `openpty`) in `fs.basedir()` with `QUAKE_BASEDIR`/`QUAKE_GAMEDIR`/`QUAKE_USERDIR`/`QUAKE_MAP`, `!cmd` one-shot shell commands, and `quake_cmd | bash_cmd` piping via `Console::begin_capture`/`end_capture` into `ShellJob`), `menu` (basic menus only; the mod menu goes elsewhere; Options is a hub of Gameplay/HUD/Controls/Input/Graphics/Enhancements/Audio/Accessibility pages built from typed `Item`s (slider, toggle, choice, display mode, resolution, apply, sub-page); `Item::Sub` rows open nested pages (Input → Mouse & Keyboard / Controller, Gameplay → Autosave Settings) and Escape returns to the parent row (`parent_page`); display mode/resolution are pending until Apply runs `vid_apply`; `menu_options <page>` opens a page (also `mouse`, `controller`, `autosave`, `gel`, `washer`); every option cvar is archived; menus are laid out in a 16:9 640×360 virtual area (`Canvas::menu_layout`, integer scale `floor(min(h/360, w/640))`, 3x at 1080p) with the classic 320×200 screens centred in it and the options pages drawn as a wide panel with a highlight bar; pages longer than `PAGE_ROWS` (20) show a window that follows the cursor (`Menu::page_scroll`; wheel/arrows move the cursor) with a scrollbar on the panel's right edge; option values with more than two choices (choice cvars, display mode, resolution) open a scrolling dropdown on Enter/click, while Left/Right still cycle; the quit prompt has clickable (Y)es / (N)o buttons (Left/Right + Enter, Y/N keys, Escape); mouse hover/click/wheel via `HostEvent::MousePos` mapped into that 640×360 space, click or drag to set option sliders; `Item::Sub` rows are drawn as tinted gold strips with an arrow), `draw` (2D canvas in 320-wide virtual units, `scale = floor(h/240)`), `font` (modern UI text: submenus, the options hub, quit prompt, mod menu, save cards and every button prompt use a bundled OFL TTF (Inter default; Rajdhani, Titillium, Kreon via `ui_menufont` 0..3, or any file via `ui_fontfile`), rasterised with ab_glyph at the exact pixel size drawn (em size × menu scale, pen positions rounded) into a 1024² CPU atlas that `Renderer::update_pic` / `update_pic_rows` re-uploads without stalling (`PendingPicUpload` stages rows into the next frame's command buffer and frees the staging buffer once its fence retires; `resize_pic` reallocates when dimensions change) when glyphs or gel coats update. Vector shapes (rounded boxes as nine slices, PS symbols, arrows) use the same atlas. `Canvas::text/text_w/text_center/text_right/shape/round_box`, `Canvas::clip` cuts draws vertically. Main, Single Player and Multiplayer keep the classic conchars and lmp pictures; console/HUD stay conchars. Button glyphs follow padwight's overlay look: discs with 13/24-height labels, rounded tags, 1 px edge), `platform` (SurfaceProvider, SDL→`InputEvent`), `png`, `default.cfg` (Quakespasm's, used when `default.cfg` is missing as in the 2021 re-release).
 - `qw` (QuakeWorld connection): `QwClient` owns its UDP socket, resends `getchallenge`/`connect` (4 tries, 2.5 s apart; the userinfo carries name, topcolor, bottomcolor, rate 25000, msg 1 and a random qport), then runs `Netchan` and `QwState`. `poll` returns NQ messages for `Host::deliver` and console lines; precache checks every model and `sound/` file with `Fs::exists` and downloads missing ones (`download`/`nextdl`, written via a `.tmp` rename into the user data dir of the server's gamedir, which is mounted on the search path), then computes the map's checksum2 and a `CollisionModel` for prediction. `send_cmd` is called once per host server tic (msec from wall time; zero movement before the game is active). The host keeps it in `qw_client` beside `net_client` (`remote()` covers both): string commands from the NQ client are forwarded except the NQ signon replies and name/color, which `send_userinfo` turns into `setinfo`; after `ClientState::frame` the predicted origin replaces the view entity's (`cl_nopred 1` uses the last server position) and scoreboard pings come from `svc_updateping`. `cmd <text>` forwards text to any server. A QW `svc_disconnect`, a 60 s timeout or a rejection ends the connection with a console message.
 - One cvar registry: the host's `CmdContext::cvars` is `server.core.cvars`. Lines go to host commands/aliases/cvars, then to server commands (`Server::has_command`), else to the local client as a string command.
 - Frame: input every frame (`base_move` updates view angles), server tic at 72 Hz when `host_maxfps` > 72 (else every frame); attack/jump/impulse are latched until a tic sends them. `connect_local` signs on directly, so client signon string commands (and name/color) aren't forwarded.

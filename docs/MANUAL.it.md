@@ -199,8 +199,8 @@ Options → Accessibilità:
 - Filtri per il daltonismo.
 - Mirino configurabile: forma, dimensione, contorno e cambio di colore sul
   bersaglio o all'uccisione; indicatori di colpo facoltativi.
-- **Didascalie dei suoni** e impostazioni dei messaggi (Messaggi e
-  didascalie), dimensione del testo.
+- **Didascalie dei suoni**; posizione, dimensione e durata di messaggi e
+  sottotitoli si impostano nell'editor dell'interfaccia.
 - Attacco e corsa a commutazione (invece di tenere premuto).
 - Un cursore della velocità di gioco per rallentare tutta la partita.
 - Mira automatica con indicatore di aggancio e impostazioni di cono e

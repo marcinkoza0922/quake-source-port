@@ -103,9 +103,6 @@ et Ümbritsev varjestus
 @ Ammo Counts
 et Laskemoona loendurid
 
-@ Ammo Counts Position
-et Loendurite asukoht
-
 @ Ammo Pickups
 et Laskemoona korjamine
 
@@ -120,9 +117,6 @@ et Kehtib
 
 @ Armor
 et Soomus
-
-@ Armor Position
-et Soomuse asukoht
 
 @ Ask
 et Küsi
@@ -220,9 +214,6 @@ et Kaustika
 @ Center
 et Keskel
 
-@ Center Message Position
-et Keskteadete asukoht
-
 @ Center Message Time
 et Keskteadete kestus
 
@@ -282,9 +273,6 @@ et Sihiku suurus
 
 @ Current Ammo
 et Praegune moon
-
-@ Current Ammo Position
-et Praeguse mooni asukoht
 
 @ Customize This Game
 et Kohanda seda mängu
@@ -469,17 +457,11 @@ et Güro-sihtimine
 @ HUD
 et HUD
 
-@ HUD Style
-et HUD-i stiil
-
 @ Health
 et Tervis
 
 @ Health Pickups
 et Tervise korjamine
-
-@ Health Position
-et Tervise asukoht
 
 @ Health Regeneration
 et Tervise taastumine
@@ -589,9 +571,6 @@ et Hüpped
 @ Keys & Powerups
 et Võtmed ja võimendid
 
-@ Keys & Powerups Position
-et Võtmete ja võimendite asukoht
-
 @ Kill Bonus (x)
 et Tapuboonus (x)
 
@@ -661,15 +640,6 @@ et Max ulatus
 @ Melee only
 et Ainult lähivõitlus
 
-@ Message Background
-et Teadete taust
-
-@ Message Text Size
-et Teadete teksti suurus
-
-@ Messages & Captions
-et Teated ja subtiitrid
-
 @ Meter Duration (real seconds)
 et Näidiku kestus (päris sekundit)
 
@@ -681,9 +651,6 @@ et Režiim
 
 @ Modern Console
 et Moodne konsool
-
-@ Modern HUD Layout
-et Moodne HUD-i paigutus
 
 @ Most recent save
 et Viimane salvestus
@@ -732,9 +699,6 @@ et Mürafilter
 
 @ Normal Color
 et Tavaline värv
-
-@ Notify Message Position
-et Teavituste asukoht
 
 @ Notify Message Time
 et Teavituste kestus
@@ -928,17 +892,11 @@ et Õla tagant vasakult
 @ Shoulder right
 et Õla tagant paremalt
 
-@ Show FPS
-et Näita FPS-i
-
 @ Show Face
 et Näita nägu
 
 @ Shrapnel
 et Killud
-
-@ Size of on-screen messages and captions
-et Ekraaniteadete ja subtiitrite suurus
 
 @ Skill
 et Raskusaste
@@ -1108,15 +1066,6 @@ et Relvaratta aeglustus
 @ Weapons
 et Relvad
 
-@ Weapons Position
-et Relvade asukoht
-
-@ Where center-screen messages appear
-et Kus keskteated ilmuvad
-
-@ Where pickup and event messages appear
-et Kus korjamis- ja sündmusteated ilmuvad
-
 @ White
 et Valge
 
@@ -1156,9 +1105,6 @@ et kast
 
 @ broken square
 et katkine ruut
-
-@ classic
-et klassikaline
 
 @ coarse
 et jäme
@@ -1247,29 +1193,17 @@ et intensiivne
 @ large
 et suur
 
-@ larger
-et suurem
-
-@ largest
-et suurim
-
 @ linear
 et lineaarne
 
 @ low
 et madal
 
-@ lower
-et all
-
 @ magenta
 et magenta
 
 @ medium
 et keskmine
-
-@ middle
-et keskel
 
 @ middle left
 et keskel vasakul
@@ -1357,9 +1291,6 @@ et kolmekordne
 
 @ tritanopia
 et tritanoopia
-
-@ upper
-et üleval
 
 @ white
 et valge
@@ -1491,9 +1422,6 @@ et Aeg ja statistika
 @ Clock
 et Kell
 
-@ Clock Position
-et Kella asukoht
-
 @ Level Timer
 et Taseme taimer
 
@@ -1506,17 +1434,11 @@ et Rekordi tüüp
 @ Personal Best Color
 et Rekordi värv
 
-@ Timer Position
-et Taimeri asukoht
-
 @ Kills
 et Tapetud
 
 @ Secrets
 et Saladused
-
-@ Kills & Secrets Position
-et Tapetute ja saladuste asukoht
 
 @ 24-hour
 et 24-tunnine
@@ -1564,8 +1486,139 @@ et GPU aeg
 @ Video Memory
 et Videomälu
 
-@ Metrics Position
-et Näitajate asukoht
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+et Lisa
+
+@ Ammo
+et Laskemoon
+
+@ Ammo Bar
+et Laskemoonariba
+
+@ Armor Bar
+et Soomusriba
+
+@ Background
+et Taust
+
+@ Cells
+et Elemendid
+
+@ Center Message
+et Keskteade
+
+@ Columns
+et Veerud
+
+@ Edit HUD
+et Muuda HUD-i
+
+@ FPS
+et FPS
+
+@ Face
+et Nägu
+
+@ Fill Width
+et Täislaius
+
+@ Font
+et Font
+
+@ Format
+et Vorming
+
+@ HUD Editor
+et HUD-i redaktor
+
+@ Health Bar
+et Tervisriba
+
+@ Inventory
+et Inventar
+
+@ Keys
+et Võtmed
+
+@ Nails
+et Naelad
+
+@ Notify Messages
+et Teavitused
+
+@ Position
+et Asukoht
+
+@ Powerups
+et Võimendid
+
+@ Precision
+et Täpsus
+
+@ Quake
+et Quake
+
+@ Rockets
+et Raketid
+
+@ Scale
+et Skaala
+
+@ Sections
+et Osad
+
+@ Shells
+et Padrunid
+
+@ Show As
+et Näita kui
+
+@ Show Icon
+et Näita ikooni
+
+@ Show Value
+et Näita väärtust
+
+@ Sigils
+et Ruunid
+
+@ Status
+et Olek
+
+@ Status Bar
+et Olekuriba
+
+@ Visibility
+et Nähtavus
+
+@ big numbers
+et suured numbrid
+
+@ center
+et keskel
+
+@ status + inventory
+et olek + inventar
+
+@ status only
+et ainult olek
+
+@ Text Color
+et Teksti värv
+
+@ Label Color
+et Siltide värv
+
+@ HUD Preset
+et HUD-i eelseade
+
+@ custom
+et kohandatud
+
+@ classic
+et klassikaline
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ et Piirab jälgede arvu, eluiga, lendavaid piisku ning haavade ja lihatükkide p
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 et Piirab varjutaja sisendi väljundi suurusega, nii et 200% renderdusskaala säilitab 3D-teravuse ilma neljakordse varjutajakuluta; madalad skaalad jäävad madala eraldusvõimega
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-et Klassikaline: algne olekuriba; moodne: kompaktsed elemendid ekraani servades
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 et Kattekihtide atlase eraldusvõime, uuendussagedus ja varjutaja detail: madal loob väiksemaid kihte harvemini ja kiire varjutusega; kõrge kasutab täit detaili
 
@@ -1629,9 +1679,6 @@ et Railguni spiraaljälje värv; jagatud ekraanil saab iga mängija järgmise v�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 et Kahju, mida railgun teeb igale läbistatud vaenlasele (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-et Tume taust ekraaniteadete taga parema loetavuse jaoks
 
 @ Dark border keeps the crosshair visible on any background
 et Tume ääris hoiab sihiku igal taustal nähtavana
@@ -1879,17 +1926,11 @@ et Lainetavad valgusmustrid pindadel vee ja lima all
 @ Scales all damage you take; above 100% is harder
 et Skaleerib kogu saadud kahju; üle 100% on raskem
 
-@ Screen edge for this element; elements on the same spot stack
-et Selle elemendi ekraaniserv; samas kohas olevad elemendid lähevad virna
-
 @ Seconds a monster hit by the boomerang stays stunned
 et Mitu sekundit bumerangiga tabatud koletis uimas püsib
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 et Mitu sekundit tabamusjäljed ja kinni jäänud naelad püsivad enne hääbumist; osakeste kvaliteedist sõltumatu
-
-@ Seconds messages at the top of the screen stay up
-et Mitu sekundit ekraani ülaosa teated püsivad
 
 @ Seconds the flick stick snap takes; lower is faster
 et Flick stick'i pöörde kestus sekundites; väiksem on kiirem
@@ -2063,9 +2104,6 @@ et Näitab kellaaega valitud vormingus
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 et Taseme aeg nagu vaheekraanil; peatub pausi ajal ja väljapääsul
 
-@ Your best time on this map and skill, next to the timer (single player)
-et Sinu parim aeg sellel kaardil ja raskusastmel, taimeri kõrval (üksikmäng)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 et any%: mis tahes lõpp; 100%: kõik tapetud ja saladused. Salvestuskaardid näitavad seda esimesena
 
@@ -2074,9 +2112,6 @@ et Isikliku rekordi värv HUD-is ja salvestuskaartidel
 
 @ Shown as a count or as a percentage of the level's total
 et Arvuna või protsendina taseme koguarvust
-
-@ Where this goes on screen; items at the same position share a line
-et Kus see ekraanil on; samas asukohas olevad üksused jagavad rida
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 et Hoiab iga uue isikliku rekordiga taseme demo; vanad jäävad. Salvestab ka ilma automaatsalvestuseta
@@ -2099,6 +2134,12 @@ et Graafikakaardi aeg kaadri kohta millisekundites
 
 @ Video memory in use and what the driver allows, where it reports it
 et Kasutatud videomälu ja draiveri lubatud hulk, kui see seda teatab
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+et Liiguta, muuda suurust, lisa ja eemalda HUD-i elemente: tervis, laskemoon, relvad, taimerid, teated ja muu
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+et Moodne: kompaktsed elemendid ekraani servades; klassikaline: algne olekuriba. Valik lähtestab HUD-i; muudatused jaotises Muuda HUD-i teevad selle kohandatuks
 
 # ==== ui.txt ====
 

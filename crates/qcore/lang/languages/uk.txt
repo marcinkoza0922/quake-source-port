@@ -103,9 +103,6 @@ uk Фонове затінення
 @ Ammo Counts
 uk Лічильники боєприпасів
 
-@ Ammo Counts Position
-uk Позиція лічильників боєприпасів
-
 @ Ammo Pickups
 uk Підбір набоїв
 
@@ -120,9 +117,6 @@ uk Застосувати до
 
 @ Armor
 uk Броня
-
-@ Armor Position
-uk Позиція броні
 
 @ Ask
 uk Питати
@@ -220,9 +214,6 @@ uk Каустика
 @ Center
 uk По центру
 
-@ Center Message Position
-uk Позиція повідомлень по центру
-
 @ Center Message Time
 uk Час повідомлень по центру
 
@@ -282,9 +273,6 @@ uk Розмір прицілу
 
 @ Current Ammo
 uk Поточні набої
-
-@ Current Ammo Position
-uk Позиція поточних набоїв
 
 @ Customize This Game
 uk Налаштувати цю гру
@@ -469,17 +457,11 @@ uk Прицілювання гіроскопом
 @ HUD
 uk Інтерфейс
 
-@ HUD Style
-uk Стиль інтерфейсу
-
 @ Health
 uk Здоров’я
 
 @ Health Pickups
 uk Підбір аптечок
-
-@ Health Position
-uk Позиція здоров’я
 
 @ Health Regeneration
 uk Регенерація здоров’я
@@ -589,9 +571,6 @@ uk Стрибки
 @ Keys & Powerups
 uk Ключі та підсилення
 
-@ Keys & Powerups Position
-uk Позиція ключів і підсилень
-
 @ Kill Bonus (x)
 uk Бонус за вбивство (x)
 
@@ -661,15 +640,6 @@ uk Максимальна дальність
 @ Melee only
 uk Лише ближній бій
 
-@ Message Background
-uk Тло повідомлень
-
-@ Message Text Size
-uk Розмір тексту повідомлень
-
-@ Messages & Captions
-uk Повідомлення і субтитри
-
 @ Meter Duration (real seconds)
 uk Тривалість шкали (реальні секунди)
 
@@ -681,9 +651,6 @@ uk Режим
 
 @ Modern Console
 uk Сучасна консоль
-
-@ Modern HUD Layout
-uk Розкладка сучасного інтерфейсу
 
 @ Most recent save
 uk Останнє збереження
@@ -732,9 +699,6 @@ uk Фільтр шуму
 
 @ Normal Color
 uk Звичайний колір
-
-@ Notify Message Position
-uk Позиція сповіщень
 
 @ Notify Message Time
 uk Час сповіщень
@@ -928,17 +892,11 @@ uk з-за лівого плеча
 @ Shoulder right
 uk з-за правого плеча
 
-@ Show FPS
-uk Показувати FPS
-
 @ Show Face
 uk Показувати обличчя
 
 @ Shrapnel
 uk Шрапнель
-
-@ Size of on-screen messages and captions
-uk Розмір екранних повідомлень і субтитрів
 
 @ Skill
 uk Складність
@@ -1108,15 +1066,6 @@ uk Сповільнення при колесі зброї
 @ Weapons
 uk Зброя
 
-@ Weapons Position
-uk Позиція зброї
-
-@ Where center-screen messages appear
-uk Де з’являються повідомлення по центру екрана
-
-@ Where pickup and event messages appear
-uk Де з’являються повідомлення про підбір і події
-
 @ White
 uk Білий
 
@@ -1156,9 +1105,6 @@ uk рамка
 
 @ broken square
 uk розірваний квадрат
-
-@ classic
-uk класичний
 
 @ coarse
 uk грубий
@@ -1247,29 +1193,17 @@ uk сильний
 @ large
 uk великий
 
-@ larger
-uk більший
-
-@ largest
-uk найбільший
-
 @ linear
 uk лінійна
 
 @ low
 uk низька
 
-@ lower
-uk нижче
-
 @ magenta
 uk пурпуровий
 
 @ medium
 uk середня
-
-@ middle
-uk посередині
 
 @ middle left
 uk посередині ліворуч
@@ -1357,9 +1291,6 @@ uk потрійний
 
 @ tritanopia
 uk тританопія
-
-@ upper
-uk вище
 
 @ white
 uk білий
@@ -1491,9 +1422,6 @@ uk Час і статистика
 @ Clock
 uk Годинник
 
-@ Clock Position
-uk Положення годинника
-
 @ Level Timer
 uk Таймер рівня
 
@@ -1506,17 +1434,11 @@ uk Тип рекорду
 @ Personal Best Color
 uk Колір рекорду
 
-@ Timer Position
-uk Положення таймера
-
 @ Kills
 uk Вбивства
 
 @ Secrets
 uk Секрети
-
-@ Kills & Secrets Position
-uk Положення вбивств і секретів
 
 @ 24-hour
 uk 24 години
@@ -1564,8 +1486,139 @@ uk Час ГП
 @ Video Memory
 uk Відеопам'ять
 
-@ Metrics Position
-uk Положення показників
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+uk Додати
+
+@ Ammo
+uk Набої
+
+@ Ammo Bar
+uk Смуга набоїв
+
+@ Armor Bar
+uk Смуга броні
+
+@ Background
+uk Тло
+
+@ Cells
+uk Комірки
+
+@ Center Message
+uk Повідомлення по центру
+
+@ Columns
+uk Стовпці
+
+@ Edit HUD
+uk Змінити інтерфейс
+
+@ FPS
+uk FPS
+
+@ Face
+uk Обличчя
+
+@ Fill Width
+uk На всю ширину
+
+@ Font
+uk Шрифт
+
+@ Format
+uk Формат
+
+@ HUD Editor
+uk Редактор інтерфейсу
+
+@ Health Bar
+uk Смуга здоров'я
+
+@ Inventory
+uk Інвентар
+
+@ Keys
+uk Ключі
+
+@ Nails
+uk Цвяхи
+
+@ Notify Messages
+uk Сповіщення
+
+@ Position
+uk Позиція
+
+@ Powerups
+uk Підсилення
+
+@ Precision
+uk Точність
+
+@ Quake
+uk Quake
+
+@ Rockets
+uk Ракети
+
+@ Scale
+uk Масштаб
+
+@ Sections
+uk Розділи
+
+@ Shells
+uk Дріб
+
+@ Show As
+uk Показувати як
+
+@ Show Icon
+uk Показувати значок
+
+@ Show Value
+uk Показувати значення
+
+@ Sigils
+uk Руни
+
+@ Status
+uk Стан
+
+@ Status Bar
+uk Рядок стану
+
+@ Visibility
+uk Видимість
+
+@ big numbers
+uk великі цифри
+
+@ center
+uk центр
+
+@ status + inventory
+uk стан + інвентар
+
+@ status only
+uk лише стан
+
+@ Text Color
+uk Колір тексту
+
+@ Label Color
+uk Колір підписів
+
+@ HUD Preset
+uk Шаблон інтерфейсу
+
+@ custom
+uk власний
+
+@ classic
+uk класичний
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ uk Обмежує кількість і час життя слідів, крап
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 uk Обмежує вхід шейдера розміром виводу: масштаб рендерингу 200% зберігає чіткість 3D без чотирикратного навантаження; малі масштаби лишаються в низькій роздільності
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-uk Класичний: оригінальний рядок стану; сучасний: компактні елементи по краях екрана
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 uk Роздільність атласу покриття, частота перебудови й деталізація шейдера: низька будує менші покриття рідше і зі швидким затіненням; висока — повна деталізація
 
@@ -1629,9 +1679,6 @@ uk Колір спірального сліду рейлгана; на розд�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 uk Шкода рейлгана кожному пробитому ворогу (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-uk Темна підкладка під екранними повідомленнями для кращої читабельності
 
 @ Dark border keeps the crosshair visible on any background
 uk Темне обведення робить приціл помітним на будь-якому тлі
@@ -1879,17 +1926,11 @@ uk Мерехтливі світлові візерунки на поверхн�
 @ Scales all damage you take; above 100% is harder
 uk Масштабує всю отримувану шкоду; понад 100% — складніше
 
-@ Screen edge for this element; elements on the same spot stack
-uk Край екрана для цього елемента; елементи в одному місці складаються стосом
-
 @ Seconds a monster hit by the boomerang stays stunned
 uk Скільки секунд оглушений монстр, якого зачепив бумеранг
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 uk Скільки секунд тримаються сліди влучань і застряглі цвяхи; не залежить від якості частинок
-
-@ Seconds messages at the top of the screen stay up
-uk Скільки секунд тримаються повідомлення вгорі екрана
 
 @ Seconds the flick stick snap takes; lower is faster
 uk Тривалість розвороту флік-стіка в секундах; менше — швидше
@@ -2063,9 +2104,6 @@ uk Показує час доби у вибраному форматі
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 uk Час рівня, як на екрані підсумків; зупиняється на паузі та на виході
 
-@ Your best time on this map and skill, next to the timer (single player)
-uk Ваш найкращий час на цій мапі та складності, поруч із таймером (одиночна гра)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 uk any%: будь-яке проходження; 100%: усі вбивства й секрети. Картки збережень показують його першим
 
@@ -2074,9 +2112,6 @@ uk Колір особистого рекорду в HUD і на картках 
 
 @ Shown as a count or as a percentage of the level's total
 uk Кількістю або відсотком від загального на рівні
-
-@ Where this goes on screen; items at the same position share a line
-uk Де це на екрані; елементи в одному положенні ділять рядок
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 uk Зберігає демо кожного рівня з новим особистим рекордом; старі лишаються. Записує навіть без автозапису
@@ -2099,6 +2134,12 @@ uk Час відеокарти на кадр у мілісекундах
 
 @ Video memory in use and what the driver allows, where it reports it
 uk Зайнята відеопам'ять і доступний від драйвера обсяг, якщо він його повідомляє
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+uk Переміщуйте, масштабуйте, додавайте й прибирайте елементи інтерфейсу: здоров'я, набої, зброю, таймери, повідомлення та інше
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+uk Сучасний: компактні елементи по краях екрана; класичний: оригінальний рядок стану. Вибір шаблону скидає інтерфейс; зміни в «Змінити інтерфейс» роблять його власним
 
 # ==== ui.txt ====
 

@@ -103,9 +103,6 @@ km ស្រមោល​បរិយាកាស
 @ Ammo Counts
 km ចំនួន​គ្រាប់
 
-@ Ammo Counts Position
-km ទីតាំង​ចំនួន​គ្រាប់
-
 @ Ammo Pickups
 km គ្រាប់​ដែល​រើស​បាន
 
@@ -120,9 +117,6 @@ km អនុវត្ត​ចំពោះ
 
 @ Armor
 km អាវ​ក្រោះ
-
-@ Armor Position
-km ទីតាំង​អាវ​ក្រោះ
 
 @ Ask
 km សួរ
@@ -220,9 +214,6 @@ km ពន្លឺ​ក្រោម​ទឹក
 @ Center
 km កណ្ដាល
 
-@ Center Message Position
-km ទីតាំង​សារ​កណ្ដាល
-
 @ Center Message Time
 km រយៈ​ពេល​សារ​កណ្ដាល
 
@@ -282,9 +273,6 @@ km ទំហំ​សញ្ញា​តម្រង់
 
 @ Current Ammo
 km គ្រាប់​បច្ចុប្បន្ន
-
-@ Current Ammo Position
-km ទីតាំង​គ្រាប់​បច្ចុប្បន្ន
 
 @ Customize This Game
 km ប្ដូរ​ហ្គេម​នេះ​តាម​បំណង
@@ -469,17 +457,11 @@ km តម្រង់​ដោយ​ជីរ៉ូ
 @ HUD
 km HUD
 
-@ HUD Style
-km រចនា​ប័ទ្ម HUD
-
 @ Health
 km សុខភាព
 
 @ Health Pickups
 km សុខភាព​ដែល​រើស​បាន
-
-@ Health Position
-km ទីតាំង​សុខភាព
 
 @ Health Regeneration
 km ការ​ស្ដារ​សុខភាព
@@ -589,9 +571,6 @@ km ការ​លោត
 @ Keys & Powerups
 km កូនសោ & ថាមពល​បន្ថែម
 
-@ Keys & Powerups Position
-km ទីតាំង​កូនសោ & ថាមពល​បន្ថែម
-
 @ Kill Bonus (x)
 km រង្វាន់​សម្លាប់ (x)
 
@@ -661,15 +640,6 @@ km ចម្ងាយ​អតិបរមា
 @ Melee only
 km តែ​ប្រយុទ្ធ​ជិត
 
-@ Message Background
-km ផ្ទៃ​ខាង​ក្រោយ​សារ
-
-@ Message Text Size
-km ទំហំ​អក្សរ​សារ
-
-@ Messages & Captions
-km សារ & អក្សរ​ពិពណ៌នា
-
 @ Meter Duration (real seconds)
 km រយៈ​ពេល​របារ (វិនាទី​ពិត)
 
@@ -681,9 +651,6 @@ km របៀប
 
 @ Modern Console
 km កុងសូល​ទំនើប
-
-@ Modern HUD Layout
-km ប្លង់ HUD ទំនើប
 
 @ Most recent save
 km ការ​រក្សា​ទុក​ចុង​ក្រោយ
@@ -732,9 +699,6 @@ km តម្រង​សញ្ញា​រំខាន
 
 @ Normal Color
 km ពណ៌​ធម្មតា
-
-@ Notify Message Position
-km ទីតាំង​សារ​ជូន​ដំណឹង
 
 @ Notify Message Time
 km រយៈ​ពេល​សារ​ជូន​ដំណឹង
@@ -928,17 +892,11 @@ km ស្មា​ឆ្វេង
 @ Shoulder right
 km ស្មា​ស្ដាំ
 
-@ Show FPS
-km បង្ហាញ FPS
-
 @ Show Face
 km បង្ហាញ​មុខ
 
 @ Shrapnel
 km បំណែក​ផ្ទុះ
-
-@ Size of on-screen messages and captions
-km ទំហំ​សារ​និង​អក្សរ​ពិពណ៌នា​លើ​អេក្រង់
 
 @ Skill
 km កម្រិត​លំបាក
@@ -1108,15 +1066,6 @@ km កង់​អាវុធ​បន្ថយ​ល្បឿន
 @ Weapons
 km អាវុធ
 
-@ Weapons Position
-km ទីតាំង​អាវុធ
-
-@ Where center-screen messages appear
-km ទីតាំង​ដែល​សារ​កណ្ដាល​អេក្រង់​បង្ហាញ
-
-@ Where pickup and event messages appear
-km ទីតាំង​ដែល​សារ​រើស​វត្ថុ​និង​ព្រឹត្តិការណ៍​បង្ហាញ
-
 @ White
 km ស
 
@@ -1156,9 +1105,6 @@ km ប្រអប់
 
 @ broken square
 km ការ៉េ​ដាច់
-
-@ classic
-km បុរាណ
 
 @ coarse
 km គ្រើម
@@ -1247,29 +1193,17 @@ km ខ្លាំង
 @ large
 km ធំ
 
-@ larger
-km ធំ​ជាង
-
-@ largest
-km ធំ​បំផុត
-
 @ linear
 km លីនេអ៊ែរ
 
 @ low
 km ទាប
 
-@ lower
-km ទាប​ជាង
-
 @ magenta
 km ស្វាយ​ក្រហម
 
 @ medium
 km មធ្យម
-
-@ middle
-km កណ្ដាល
 
 @ middle left
 km កណ្ដាល​ឆ្វេង
@@ -1357,9 +1291,6 @@ km បី​ដង
 
 @ tritanopia
 km ខ្វាក់​ពណ៌​ខៀវ
-
-@ upper
-km ខ្ពស់​ជាង
 
 @ white
 km ស
@@ -1491,9 +1422,6 @@ km ពេលវេលា​និង​ស្ថិតិ
 @ Clock
 km នាឡិកា
 
-@ Clock Position
-km ទីតាំង​នាឡិកា
-
 @ Level Timer
 km នាឡិកា​ចាប់​ម៉ោង​កម្រិត
 
@@ -1506,17 +1434,11 @@ km ប្រភេទ​កំណត់ត្រា
 @ Personal Best Color
 km ពណ៌​កំណត់ត្រា
 
-@ Timer Position
-km ទីតាំង​នាឡិកា​ចាប់​ម៉ោង
-
 @ Kills
 km ការ​សម្លាប់
 
 @ Secrets
 km អាថ៌កំបាំង
-
-@ Kills & Secrets Position
-km ទីតាំង​ការ​សម្លាប់​និង​អាថ៌កំបាំង
 
 @ 24-hour
 km 24 ម៉ោង
@@ -1564,8 +1486,139 @@ km ពេល GPU
 @ Video Memory
 km អង្គ​ចងចាំ​វីដេអូ
 
-@ Metrics Position
-km ទីតាំង​រង្វាស់
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+km បន្ថែម
+
+@ Ammo
+km គ្រាប់​រំសេវ
+
+@ Ammo Bar
+km របារ​គ្រាប់​រំសេវ
+
+@ Armor Bar
+km របារ​គ្រឿង​ការពារ
+
+@ Background
+km ផ្ទៃ​ខាង​ក្រោយ
+
+@ Cells
+km ថ្ម​ថាមពល
+
+@ Center Message
+km សារ​កណ្ដាល
+
+@ Columns
+km ជួរ​ឈរ
+
+@ Edit HUD
+km កែ​ HUD
+
+@ FPS
+km FPS
+
+@ Face
+km មុខ
+
+@ Fill Width
+km ទទឹង​ពេញ
+
+@ Font
+km ពុម្ព​អក្សរ
+
+@ Format
+km ទម្រង់
+
+@ HUD Editor
+km កម្មវិធី​កែ​ HUD
+
+@ Health Bar
+km របារ​សុខភាព
+
+@ Inventory
+km សម្ភារ
+
+@ Keys
+km កូនសោ
+
+@ Nails
+km ដែក​គោល
+
+@ Notify Messages
+km សារ​ជូន​ដំណឹង
+
+@ Position
+km ទីតាំង
+
+@ Powerups
+km ថាមពល​បន្ថែម
+
+@ Precision
+km ភាព​ជាក់លាក់
+
+@ Quake
+km Quake
+
+@ Rockets
+km រ៉ុក្កែត
+
+@ Scale
+km មាត្រដ្ឋាន
+
+@ Sections
+km ផ្នែក
+
+@ Shells
+km សំបក​គ្រាប់
+
+@ Show As
+km បង្ហាញ​ជា
+
+@ Show Icon
+km បង្ហាញ​រូបតំណាង
+
+@ Show Value
+km បង្ហាញ​តម្លៃ
+
+@ Sigils
+km សញ្ញា​វេទមន្ត
+
+@ Status
+km ស្ថានភាព
+
+@ Status Bar
+km របារ​ស្ថានភាព
+
+@ Visibility
+km ភាព​មើល​ឃើញ
+
+@ big numbers
+km លេខ​ធំ
+
+@ center
+km កណ្ដាល
+
+@ status + inventory
+km ស្ថានភាព + សម្ភារ
+
+@ status only
+km តែ​ស្ថានភាព
+
+@ Text Color
+km ពណ៌​អក្សរ
+
+@ Label Color
+km ពណ៌​ស្លាក
+
+@ HUD Preset
+km ការ​កំណត់​ជាមុន​ HUD
+
+@ custom
+km ផ្ទាល់​ខ្លួន
+
+@ classic
+km បុរាណ
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ km កំណត់​ចំនួន​ស្នាម អាយុ​កាល 
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 km កំណត់​ការ​បញ្ចូល shader ត្រឹម​ទំហំ​លទ្ធផល ដូច្នេះ​មាត្រដ្ឋាន​បង្ហាញ 200% រក្សា​ភាព​ច្បាស់ 3D ដោយ​គ្មាន​តម្លៃ shader 4x; មាត្រដ្ឋាន​ទាប​នៅ​តែ​ច្បាស់​ទាប
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-km បុរាណ: របារ​ស្ថានភាព​ដើម; ទំនើប: ធាតុ​តូចៗ​នៅ​គែម​អេក្រង់
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 km គុណភាព​បង្ហាញ​អាត្លាស​ស្រទាប់ អត្រា​បង្កើត​ឡើង​វិញ និង​លម្អិត shader: ទាប​បង្កើត​ស្រទាប់​តូចៗ​តិច​ដង​ជាមួយ​ការ​ដាក់​ស្រមោល​លឿន; ខ្ពស់​ប្រើ​លម្អិត​ពេញ​លេញ
 
@@ -1629,9 +1679,6 @@ km ពណ៌​ស្នាម​រមួល​របស់​រ៉េលហ�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 km ការ​ខូចខាត​ដែល​រ៉េលហ្គាន​ធ្វើ​លើ​សត្រូវ​នីមួយៗ​ដែល​វា​ឆ្លង​កាត់ (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-km ផ្ទៃ​ងងឹត​នៅ​ពី​ក្រោយ​សារ​លើ​អេក្រង់​ដើម្បី​ងាយ​អាន
 
 @ Dark border keeps the crosshair visible on any background
 km គែម​ងងឹត​ធ្វើ​ឱ្យ​សញ្ញា​តម្រង់​មើល​ឃើញ​លើ​ផ្ទៃ​ណា​ក៏​ដោយ
@@ -1879,17 +1926,11 @@ km លំនាំ​ពន្លឺ​រលក​លើ​ផ្ទៃ​ក�
 @ Scales all damage you take; above 100% is harder
 km កំណត់​មាត្រដ្ឋាន​ការ​ខូចខាត​ទាំង​អស់​ដែល​អ្នក​ទទួល; លើស 100% ពិបាក​ជាង
 
-@ Screen edge for this element; elements on the same spot stack
-km គែម​អេក្រង់​សម្រាប់​ធាតុ​នេះ; ធាតុ​នៅ​កន្លែង​ដូច​គ្នា​តម្រៀប​លើ​គ្នា
-
 @ Seconds a monster hit by the boomerang stays stunned
 km ចំនួន​វិនាទី​ដែល​បិសាច​ត្រូវ​ប៊ូមឺរ៉ង់​នៅ​ស្រឹក
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 km ចំនួន​វិនាទី​ដែល​ស្នាម​ប៉ះ​និង​ដែក​គោល​ដោត​នៅ​មុន​រសាត់​បាត់; មិន​ពឹង​លើ គុណភាព​ភាគ​ល្អិត
-
-@ Seconds messages at the top of the screen stay up
-km ចំនួន​វិនាទី​ដែល​សារ​នៅ​ផ្នែក​ខាង​លើ​អេក្រង់​នៅ​បង្ហាញ
 
 @ Seconds the flick stick snap takes; lower is faster
 km ចំនួន​វិនាទី​ដែល​ការ​បង្វែរ​ដង​បញ្ជា​ផ្លិច​ប្រើ; ទាប​ជាង​គឺ​លឿន​ជាង
@@ -2063,9 +2104,6 @@ km បង្ហាញ​ម៉ោង​ក្នុង​ទម្រង់​�
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 km ពេល​នៃ​កម្រិត ដូច​អេក្រង់​សម្រាក ឈប់​ពេល​ផ្អាក​និង​នៅ​ច្រក​ចេញ
 
-@ Your best time on this map and skill, next to the timer (single player)
-km ពេល​ល្អ​បំផុត​របស់​អ្នក​លើ​ផែនទី​និង​កម្រិត​លំបាក​នេះ ក្បែរ​នាឡិកា (អ្នក​លេង​ម្នាក់)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 km any%: បញ្ចប់​បែប​ណា​ក៏​បាន 100%: សម្លាប់​ទាំងអស់​និង​អាថ៌កំបាំង​ទាំងអស់ កាត​រក្សាទុក​បង្ហាញ​អា​នេះ​មុន
 
@@ -2074,9 +2112,6 @@ km ពណ៌​កំណត់ត្រា​ផ្ទាល់ខ្លួន�
 
 @ Shown as a count or as a percentage of the level's total
 km ជា​ចំនួន ឬ​ជា​ភាគរយ​នៃ​សរុប​កម្រិត
-
-@ Where this goes on screen; items at the same position share a line
-km ទីតាំង​លើ​អេក្រង់ ធាតុ​នៅ​ទីតាំង​ដូចគ្នា​ចែក​បន្ទាត់​គ្នា
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 km រក្សា​ដេមូ​គ្រប់​កម្រិត​ដែល​បង្កើត​កំណត់ត្រា​ផ្ទាល់ខ្លួន ចាស់ៗ​នៅ​ដដែល ថត​ទោះ​បិទ​ការ​ថត​ស្វ័យប្រវត្តិ
@@ -2099,6 +2134,12 @@ km ពេល​កាត​ក្រាហ្វិក​ក្នុង​ម�
 
 @ Video memory in use and what the driver allows, where it reports it
 km អង្គ​ចងចាំ​វីដេអូ​កំពុង​ប្រើ​និង​ដែល​កម្មវិធី​បញ្ជា​អនុញ្ញាត បើ​វា​រាយការណ៍
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+km ផ្លាស់ទី ប្ដូរ​ទំហំ បន្ថែម និង​ដក​ធាតុ​ HUD៖ សុខភាព គ្រាប់​រំសេវ អាវុធ កម្មវិធី​កំណត់​ម៉ោង សារ និង​ច្រើន​ទៀត
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+km ទំនើប៖ ធាតុ​តូច​ៗ​នៅ​គែម​អេក្រង់ បុរាណ៖ របារ​ស្ថានភាព​ដើម។ ការ​ជ្រើស​មួយ​កំណត់ HUD ឡើង​វិញ ការ​ផ្លាស់ប្ដូរ​ក្នុង​ កែ​ HUD ធ្វើ​ឱ្យ​វា​ក្លាយ​ជា​ផ្ទាល់​ខ្លួន
 
 # ==== ui.txt ====
 

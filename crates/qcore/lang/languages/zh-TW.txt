@@ -103,9 +103,6 @@ zh-TW 環境光遮蔽
 @ Ammo Counts
 zh-TW 彈藥數量
 
-@ Ammo Counts Position
-zh-TW 彈藥數量位置
-
 @ Ammo Pickups
 zh-TW 彈藥拾取
 
@@ -120,9 +117,6 @@ zh-TW 套用至
 
 @ Armor
 zh-TW 護甲
-
-@ Armor Position
-zh-TW 護甲位置
 
 @ Ask
 zh-TW 詢問
@@ -220,9 +214,6 @@ zh-TW 焦散
 @ Center
 zh-TW 置中
 
-@ Center Message Position
-zh-TW 中央訊息位置
-
 @ Center Message Time
 zh-TW 中央訊息時間
 
@@ -282,9 +273,6 @@ zh-TW 準星大小
 
 @ Current Ammo
 zh-TW 目前彈藥
-
-@ Current Ammo Position
-zh-TW 目前彈藥位置
 
 @ Customize This Game
 zh-TW 自訂這場遊戲
@@ -469,17 +457,11 @@ zh-TW 陀螺儀瞄準
 @ HUD
 zh-TW HUD
 
-@ HUD Style
-zh-TW HUD樣式
-
 @ Health
 zh-TW 生命值
 
 @ Health Pickups
 zh-TW 生命值拾取
-
-@ Health Position
-zh-TW 生命值位置
 
 @ Health Regeneration
 zh-TW 生命值回復
@@ -589,9 +571,6 @@ zh-TW 跳躍次數
 @ Keys & Powerups
 zh-TW 鑰匙與強化道具
 
-@ Keys & Powerups Position
-zh-TW 鑰匙與強化道具位置
-
 @ Kill Bonus (x)
 zh-TW 擊殺加成（倍）
 
@@ -661,15 +640,6 @@ zh-TW 最大射程
 @ Melee only
 zh-TW 僅限近戰
 
-@ Message Background
-zh-TW 訊息背景
-
-@ Message Text Size
-zh-TW 訊息文字大小
-
-@ Messages & Captions
-zh-TW 訊息與字幕
-
 @ Meter Duration (real seconds)
 zh-TW 計量條時間（真實秒）
 
@@ -681,9 +651,6 @@ zh-TW 模式
 
 @ Modern Console
 zh-TW 現代主控台
-
-@ Modern HUD Layout
-zh-TW 現代HUD配置
 
 @ Most recent save
 zh-TW 最新存檔
@@ -732,9 +699,6 @@ zh-TW 雜訊過濾
 
 @ Normal Color
 zh-TW 一般顏色
-
-@ Notify Message Position
-zh-TW 通知訊息位置
 
 @ Notify Message Time
 zh-TW 通知訊息時間
@@ -928,17 +892,11 @@ zh-TW 左肩視角
 @ Shoulder right
 zh-TW 右肩視角
 
-@ Show FPS
-zh-TW 顯示FPS
-
 @ Show Face
 zh-TW 顯示臉部
 
 @ Shrapnel
 zh-TW 破片
-
-@ Size of on-screen messages and captions
-zh-TW 畫面訊息與字幕的大小
 
 @ Skill
 zh-TW 難度
@@ -1108,15 +1066,6 @@ zh-TW 武器輪盤減速
 @ Weapons
 zh-TW 武器
 
-@ Weapons Position
-zh-TW 武器位置
-
-@ Where center-screen messages appear
-zh-TW 畫面中央訊息的顯示位置
-
-@ Where pickup and event messages appear
-zh-TW 拾取與事件訊息的顯示位置
-
 @ White
 zh-TW 白
 
@@ -1156,9 +1105,6 @@ zh-TW 方框
 
 @ broken square
 zh-TW 斷線方框
-
-@ classic
-zh-TW 經典
 
 @ coarse
 zh-TW 粗略
@@ -1247,29 +1193,17 @@ zh-TW 強烈
 @ large
 zh-TW 大
 
-@ larger
-zh-TW 較大
-
-@ largest
-zh-TW 最大
-
 @ linear
 zh-TW 線性
 
 @ low
 zh-TW 低
 
-@ lower
-zh-TW 下方
-
 @ magenta
 zh-TW 洋紅
 
 @ medium
 zh-TW 中
-
-@ middle
-zh-TW 中央
 
 @ middle left
 zh-TW 左側中央
@@ -1357,9 +1291,6 @@ zh-TW 三段跳
 
 @ tritanopia
 zh-TW 藍色盲
-
-@ upper
-zh-TW 上方
 
 @ white
 zh-TW 白
@@ -1491,9 +1422,6 @@ zh-TW 時間與統計
 @ Clock
 zh-TW 時鐘
 
-@ Clock Position
-zh-TW 時鐘位置
-
 @ Level Timer
 zh-TW 關卡計時器
 
@@ -1506,17 +1434,11 @@ zh-TW 個人最佳類型
 @ Personal Best Color
 zh-TW 個人最佳顏色
 
-@ Timer Position
-zh-TW 計時器位置
-
 @ Kills
 zh-TW 擊殺
 
 @ Secrets
 zh-TW 秘密
-
-@ Kills & Secrets Position
-zh-TW 擊殺與秘密位置
 
 @ 24-hour
 zh-TW 24 小時制
@@ -1564,8 +1486,139 @@ zh-TW GPU 時間
 @ Video Memory
 zh-TW 顯示記憶體
 
-@ Metrics Position
-zh-TW 指標位置
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+zh-TW 新增
+
+@ Ammo
+zh-TW 彈藥
+
+@ Ammo Bar
+zh-TW 彈藥條
+
+@ Armor Bar
+zh-TW 護甲條
+
+@ Background
+zh-TW 背景
+
+@ Cells
+zh-TW 電池
+
+@ Center Message
+zh-TW 中央訊息
+
+@ Columns
+zh-TW 欄數
+
+@ Edit HUD
+zh-TW 編輯 HUD
+
+@ FPS
+zh-TW FPS
+
+@ Face
+zh-TW 頭像
+
+@ Fill Width
+zh-TW 全寬
+
+@ Font
+zh-TW 字型
+
+@ Format
+zh-TW 格式
+
+@ HUD Editor
+zh-TW HUD 編輯器
+
+@ Health Bar
+zh-TW 生命條
+
+@ Inventory
+zh-TW 物品欄
+
+@ Keys
+zh-TW 鑰匙
+
+@ Nails
+zh-TW 鐵釘
+
+@ Notify Messages
+zh-TW 通知訊息
+
+@ Position
+zh-TW 位置
+
+@ Powerups
+zh-TW 強化道具
+
+@ Precision
+zh-TW 精確度
+
+@ Quake
+zh-TW Quake
+
+@ Rockets
+zh-TW 火箭彈
+
+@ Scale
+zh-TW 縮放
+
+@ Sections
+zh-TW 組成
+
+@ Shells
+zh-TW 霰彈
+
+@ Show As
+zh-TW 顯示為
+
+@ Show Icon
+zh-TW 顯示圖示
+
+@ Show Value
+zh-TW 顯示數值
+
+@ Sigils
+zh-TW 符印
+
+@ Status
+zh-TW 狀態
+
+@ Status Bar
+zh-TW 狀態列
+
+@ Visibility
+zh-TW 可見度
+
+@ big numbers
+zh-TW 大數字
+
+@ center
+zh-TW 中間
+
+@ status + inventory
+zh-TW 狀態＋物品欄
+
+@ status only
+zh-TW 僅狀態
+
+@ Text Color
+zh-TW 文字顏色
+
+@ Label Color
+zh-TW 標籤顏色
+
+@ HUD Preset
+zh-TW HUD 預設
+
+@ custom
+zh-TW 自訂
+
+@ classic
+zh-TW 經典
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ zh-TW 限制痕跡數量、存留時間、空中血滴與傷口／碎肉血漬�
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 zh-TW 將著色器輸入限制在輸出尺寸，讓200%渲染比例保有3D清晰度而不需4倍著色器負擔；低比例則維持低解析度
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-zh-TW 經典：原版狀態列；現代：位於畫面邊緣的精簡元素
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 zh-TW 塗層圖集解析度、重建頻率與著色細節：低會以較低頻率建立較小的塗層並使用快速著色；高則使用完整細節
 
@@ -1629,9 +1679,6 @@ zh-TW 磁軌砲螺旋軌跡的顏色；分割畫面中每位玩家依序使用�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 zh-TW 磁軌砲對每個貫穿敵人造成的傷害（Quake III：100）
-
-@ Dark backdrop behind on-screen messages for readability
-zh-TW 在畫面訊息後方加上深色底，方便閱讀
 
 @ Dark border keeps the crosshair visible on any background
 zh-TW 深色外框讓準星在任何背景上都清晰可見
@@ -1879,17 +1926,11 @@ zh-TW 水與黏液下方表面的波動光紋
 @ Scales all damage you take; above 100% is harder
 zh-TW 調整你承受的所有傷害；高於100%會更困難
 
-@ Screen edge for this element; elements on the same spot stack
-zh-TW 此元素所在的畫面邊緣；位置相同的元素會堆疊
-
 @ Seconds a monster hit by the boomerang stays stunned
 zh-TW 被迴力鏢擊中的怪物暈眩的秒數
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 zh-TW 彈痕與插著的鐵釘在淡出前存留的秒數；與粒子品質無關
-
-@ Seconds messages at the top of the screen stay up
-zh-TW 畫面上方訊息的停留秒數
 
 @ Seconds the flick stick snap takes; lower is faster
 zh-TW 甩桿轉向所需的秒數；越低越快
@@ -2063,9 +2104,6 @@ zh-TW 以所選格式顯示目前時間
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 zh-TW 關卡時間，與過場畫面相同；暫停時和抵達出口時停止
 
-@ Your best time on this map and skill, next to the timer (single player)
-zh-TW 你在此地圖和難度下的最佳時間，顯示在計時器旁（單人遊戲）
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 zh-TW any%：任意通關；100%：全部擊殺和秘密。存檔卡片優先顯示此項
 
@@ -2074,9 +2112,6 @@ zh-TW HUD 和存檔卡片上個人最佳的顏色
 
 @ Shown as a count or as a percentage of the level's total
 zh-TW 以數量或關卡總數的百分比顯示
-
-@ Where this goes on screen; items at the same position share a line
-zh-TW 在畫面上的位置；同一位置的項目共用一行
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 zh-TW 保留每個創下個人最佳的關卡示範；舊的也會保留。即使關閉自動錄製也會錄製
@@ -2099,6 +2134,12 @@ zh-TW 每影格顯示卡耗時（毫秒）
 
 @ Video memory in use and what the driver allows, where it reports it
 zh-TW 已用顯示記憶體和驅動程式允許的上限（若驅動程式提供）
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+zh-TW 移動、縮放、新增和移除 HUD 元素：生命、彈藥、武器、計時器、訊息等
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+zh-TW 現代：螢幕邊緣的精簡元素；經典：原版狀態列。選擇預設會重設 HUD；在編輯 HUD 中修改後會變為自訂
 
 # ==== ui.txt ====
 

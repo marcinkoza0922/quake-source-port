@@ -103,9 +103,6 @@ vi Che bóng môi trường
 @ Ammo Counts
 vi Số đạn
 
-@ Ammo Counts Position
-vi Vị trí số đạn
-
 @ Ammo Pickups
 vi Nhặt đạn
 
@@ -120,9 +117,6 @@ vi Áp dụng cho
 
 @ Armor
 vi Giáp
-
-@ Armor Position
-vi Vị trí giáp
 
 @ Ask
 vi Hỏi
@@ -220,9 +214,6 @@ vi Tụ quang
 @ Center
 vi Giữa
 
-@ Center Message Position
-vi Vị trí thông báo giữa
-
 @ Center Message Time
 vi Thời gian thông báo giữa
 
@@ -282,9 +273,6 @@ vi Cỡ tâm ngắm
 
 @ Current Ammo
 vi Đạn hiện tại
-
-@ Current Ammo Position
-vi Vị trí đạn hiện tại
 
 @ Customize This Game
 vi Tùy chỉnh ván chơi này
@@ -469,17 +457,11 @@ vi Ngắm bằng con quay
 @ HUD
 vi HUD
 
-@ HUD Style
-vi Kiểu HUD
-
 @ Health
 vi Máu
 
 @ Health Pickups
 vi Nhặt máu
-
-@ Health Position
-vi Vị trí máu
 
 @ Health Regeneration
 vi Hồi máu
@@ -589,9 +571,6 @@ vi Số lần nhảy
 @ Keys & Powerups
 vi Chìa khóa & Vật phẩm
 
-@ Keys & Powerups Position
-vi Vị trí chìa khóa & vật phẩm
-
 @ Kill Bonus (x)
 vi Thưởng hạ gục (x)
 
@@ -661,15 +640,6 @@ vi Tầm tối đa
 @ Melee only
 vi Chỉ cận chiến
 
-@ Message Background
-vi Nền thông báo
-
-@ Message Text Size
-vi Cỡ chữ thông báo
-
-@ Messages & Captions
-vi Thông báo & Phụ đề
-
 @ Meter Duration (real seconds)
 vi Thời lượng thanh (giây thực)
 
@@ -681,9 +651,6 @@ vi Chế độ
 
 @ Modern Console
 vi Console hiện đại
-
-@ Modern HUD Layout
-vi Bố cục HUD hiện đại
 
 @ Most recent save
 vi Bản lưu mới nhất
@@ -732,9 +699,6 @@ vi Lọc nhiễu
 
 @ Normal Color
 vi Màu thường
-
-@ Notify Message Position
-vi Vị trí thông báo nhanh
 
 @ Notify Message Time
 vi Thời gian thông báo nhanh
@@ -928,17 +892,11 @@ vi Qua vai trái
 @ Shoulder right
 vi Qua vai phải
 
-@ Show FPS
-vi Hiện FPS
-
 @ Show Face
 vi Hiện khuôn mặt
 
 @ Shrapnel
 vi Mảnh văng
-
-@ Size of on-screen messages and captions
-vi Cỡ thông báo và phụ đề trên màn hình
 
 @ Skill
 vi Độ khó
@@ -1108,15 +1066,6 @@ vi Chậm khi mở vòng vũ khí
 @ Weapons
 vi Vũ khí
 
-@ Weapons Position
-vi Vị trí vũ khí
-
-@ Where center-screen messages appear
-vi Vị trí hiện thông báo giữa màn hình
-
-@ Where pickup and event messages appear
-vi Vị trí hiện thông báo nhặt đồ và sự kiện
-
 @ White
 vi Trắng
 
@@ -1156,9 +1105,6 @@ vi hộp
 
 @ broken square
 vi vuông hở
-
-@ classic
-vi cổ điển
 
 @ coarse
 vi thô
@@ -1247,29 +1193,17 @@ vi mạnh
 @ large
 vi lớn
 
-@ larger
-vi lớn hơn
-
-@ largest
-vi lớn nhất
-
 @ linear
 vi tuyến tính
 
 @ low
 vi thấp
 
-@ lower
-vi dưới
-
 @ magenta
 vi đỏ tươi
 
 @ medium
 vi trung bình
-
-@ middle
-vi giữa
 
 @ middle left
 vi giữa trái
@@ -1357,9 +1291,6 @@ vi ba
 
 @ tritanopia
 vi mù màu lam
-
-@ upper
-vi trên
 
 @ white
 vi trắng
@@ -1491,9 +1422,6 @@ vi Thời gian & Thống kê
 @ Clock
 vi Đồng hồ
 
-@ Clock Position
-vi Vị trí đồng hồ
-
 @ Level Timer
 vi Đồng hồ bấm giờ màn chơi
 
@@ -1506,17 +1434,11 @@ vi Loại kỷ lục
 @ Personal Best Color
 vi Màu kỷ lục
 
-@ Timer Position
-vi Vị trí đồng hồ bấm giờ
-
 @ Kills
 vi Hạ gục
 
 @ Secrets
 vi Bí mật
-
-@ Kills & Secrets Position
-vi Vị trí hạ gục & bí mật
 
 @ 24-hour
 vi 24 giờ
@@ -1564,8 +1486,139 @@ vi Thời gian GPU
 @ Video Memory
 vi Bộ nhớ video
 
-@ Metrics Position
-vi Vị trí chỉ số
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+vi Thêm
+
+@ Ammo
+vi Đạn dược
+
+@ Ammo Bar
+vi Thanh đạn
+
+@ Armor Bar
+vi Thanh giáp
+
+@ Background
+vi Nền
+
+@ Cells
+vi Pin
+
+@ Center Message
+vi Thông báo giữa
+
+@ Columns
+vi Số cột
+
+@ Edit HUD
+vi Sửa HUD
+
+@ FPS
+vi FPS
+
+@ Face
+vi Khuôn mặt
+
+@ Fill Width
+vi Toàn chiều rộng
+
+@ Font
+vi Phông chữ
+
+@ Format
+vi Định dạng
+
+@ HUD Editor
+vi Trình sửa HUD
+
+@ Health Bar
+vi Thanh máu
+
+@ Inventory
+vi Hành trang
+
+@ Keys
+vi Chìa khóa
+
+@ Nails
+vi Đinh
+
+@ Notify Messages
+vi Thông báo nhanh
+
+@ Position
+vi Vị trí
+
+@ Powerups
+vi Vật phẩm tăng sức
+
+@ Precision
+vi Độ chính xác
+
+@ Quake
+vi Quake
+
+@ Rockets
+vi Tên lửa
+
+@ Scale
+vi Tỉ lệ
+
+@ Sections
+vi Thành phần
+
+@ Shells
+vi Đạn ghém
+
+@ Show As
+vi Hiển thị dạng
+
+@ Show Icon
+vi Hiện biểu tượng
+
+@ Show Value
+vi Hiện giá trị
+
+@ Sigils
+vi Ấn phù
+
+@ Status
+vi Trạng thái
+
+@ Status Bar
+vi Thanh trạng thái
+
+@ Visibility
+vi Hiển thị
+
+@ big numbers
+vi số lớn
+
+@ center
+vi giữa
+
+@ status + inventory
+vi trạng thái + hành trang
+
+@ status only
+vi chỉ trạng thái
+
+@ Text Color
+vi Màu chữ
+
+@ Label Color
+vi Màu nhãn
+
+@ HUD Preset
+vi Mẫu HUD
+
+@ custom
+vi tùy chỉnh
+
+@ classic
+vi cổ điển
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ vi Giới hạn số vết, thời gian tồn tại, giọt bay trong không kh�
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 vi Giới hạn đầu vào shader ở kích thước đầu ra để tỷ lệ kết xuất 200% giữ độ nét 3D mà không tốn gấp 4 lần shader; tỷ lệ thấp vẫn ở độ phân giải thấp
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-vi Cổ điển: thanh trạng thái gốc; hiện đại: các thành phần gọn ở rìa màn hình
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 vi Độ phân giải atlas lớp phủ, tần suất dựng lại và chi tiết shader: thấp dựng lớp nhỏ hơn, ít thường xuyên hơn với đổ bóng nhanh; cao dùng chi tiết đầy đủ
 
@@ -1629,9 +1679,6 @@ vi Màu vệt xoắn ốc của railgun; khi chia màn hình, mỗi người ch�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 vi Sát thương railgun gây cho mỗi kẻ địch mà nó xuyên qua (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-vi Nền tối phía sau thông báo trên màn hình để dễ đọc
 
 @ Dark border keeps the crosshair visible on any background
 vi Viền tối giúp tâm ngắm luôn dễ thấy trên mọi nền
@@ -1879,17 +1926,11 @@ vi Vân sáng gợn sóng trên bề mặt dưới nước và chất nhờn
 @ Scales all damage you take; above 100% is harder
 vi Điều chỉnh mọi sát thương bạn nhận; trên 100% là khó hơn
 
-@ Screen edge for this element; elements on the same spot stack
-vi Rìa màn hình cho thành phần này; các thành phần cùng vị trí sẽ xếp chồng
-
 @ Seconds a monster hit by the boomerang stays stunned
 vi Số giây quái vật bị boomerang trúng vẫn bị choáng
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 vi Số giây vết đạn và đinh cắm tồn tại trước khi mờ đi; độc lập với Chất lượng hạt
-
-@ Seconds messages at the top of the screen stay up
-vi Số giây thông báo ở đầu màn hình hiển thị
 
 @ Seconds the flick stick snap takes; lower is faster
 vi Số giây cho cú vẩy của flick stick; thấp hơn thì nhanh hơn
@@ -2063,9 +2104,6 @@ vi Hiện giờ trong ngày theo định dạng đã chọn
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 vi Thời gian màn chơi, như trên màn hình tổng kết; dừng khi tạm dừng và ở lối ra
 
-@ Your best time on this map and skill, next to the timer (single player)
-vi Thời gian tốt nhất của bạn ở bản đồ và độ khó này, cạnh đồng hồ bấm giờ (chơi đơn)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 vi any%: hoàn thành bất kỳ; 100%: hạ gục mọi kẻ địch và tìm mọi bí mật. Thẻ lưu game hiện loại này trước
 
@@ -2074,9 +2112,6 @@ vi Màu kỷ lục cá nhân trên HUD và thẻ lưu game
 
 @ Shown as a count or as a percentage of the level's total
 vi Hiện dưới dạng số lượng hoặc phần trăm tổng của màn chơi
-
-@ Where this goes on screen; items at the same position share a line
-vi Vị trí trên màn hình; các mục cùng vị trí dùng chung một dòng
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 vi Giữ demo của mỗi màn chơi lập kỷ lục cá nhân; bản cũ vẫn còn. Ghi cả khi tắt tự động ghi
@@ -2099,6 +2134,12 @@ vi Thời gian card đồ họa cho mỗi khung hình tính bằng mili giây
 
 @ Video memory in use and what the driver allows, where it reports it
 vi Bộ nhớ video đang dùng và mức trình điều khiển cho phép, nếu có báo
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+vi Di chuyển, đổi cỡ, thêm và gỡ các thành phần HUD: máu, đạn, vũ khí, đồng hồ, thông báo và hơn nữa
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+vi Hiện đại: các thành phần gọn ở mép màn hình; cổ điển: thanh trạng thái gốc. Chọn một mẫu sẽ đặt lại HUD; thay đổi trong Sửa HUD khiến nó thành tùy chỉnh
 
 # ==== ui.txt ====
 

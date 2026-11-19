@@ -1,6 +1,6 @@
 //! Level exits and personal bests: the per-mod `qsp_stats.json` record,
 //! personal bests per map, skill and category (any%, 100%: every kill and
-//! secret), the HUD Time & Stats items (`sbar::time`) and keeping a new
+//! secret), what the HUD's Time & Stats elements show (`crate::hud`) and keeping a new
 //! PB's auto-demo as a saved demo (`cl_autodemo_pb`).
 //!
 //! The level time is the client clock, as on the intermission screen: it
@@ -47,15 +47,13 @@ impl Host {
         self.pb.record.flatten()
     }
 
-    /// The HUD Time & Stats items this frame (empty when all are off).
-    pub(super) fn time_hud_items(&mut self) -> Vec<time::Item> {
+    /// What the HUD's Time & Stats elements show this frame; the
+    /// personal best is looked up only when `want_pb`.
+    pub(super) fn level_info(&mut self, want_pb: bool) -> time::LevelInfo {
         use qnet::protocol::{STAT_MONSTERS, STAT_SECRETS, STAT_TOTALMONSTERS, STAT_TOTALSECRETS};
-        let cfg = time::TimeConfig::from_cvars(&self.server.core.cvars);
-        if cfg.clock == 0 && cfg.timer == 0 && cfg.kills == 0 && cfg.secrets == 0 {
-            return Vec::new();
-        }
-        let pb = match (cfg.timer > 0 && cfg.pb && self.pb_allowed(), self.pb.skill) {
-            (true, Some(skill)) => Some(self.map_record().and_then(|r| r.pb(skill, cfg.pb_full))),
+        let full = self.cv("hud_pb_100") != 0.0;
+        let pb = match (want_pb && self.pb_allowed(), self.pb.skill) {
+            (true, Some(skill)) => Some(self.map_record().and_then(|r| r.pb(skill, full))),
             _ => None,
         };
         let secs = qcore::time::SystemTime::now().duration_since(qcore::time::UNIX_EPOCH).map_or(0, |d| d.as_secs());
@@ -64,15 +62,14 @@ impl Host {
             None => ((secs / 3600 % 24) as u32, (secs / 60 % 60) as u32, (secs % 60) as u32),
         };
         let st = &self.cl.stats;
-        let info = time::LevelInfo {
+        time::LevelInfo {
             time: if self.cl.intermission != 0 { self.cl.completed_time } else { self.cl.time },
             pb,
             kills: (st[STAT_MONSTERS], st[STAT_TOTALMONSTERS]),
             secrets: (st[STAT_SECRETS], st[STAT_TOTALSECRETS]),
             deathmatch: self.cl.gametype == 1,
             clock,
-        };
-        time::items(&cfg, &info)
+        }
     }
 
     /// Level exit (intermission or finale): merge kills/secrets/time and

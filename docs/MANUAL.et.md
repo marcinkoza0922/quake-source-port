@@ -189,8 +189,8 @@ Options → Juurdepääsetavus:
 - Värvipimeduse filtrid.
 - Seadistatav sihik: kuju, suurus, kontuur ja värvimuutus sihtmärgil või
   tapmisel; valikulised tabamusmärgid.
-- **Helisubtiitrid** ja teadete seaded (Teated ja subtiitrid), teksti
-  skaleerimine.
+- **Helisubtiitrid**; teadete ja subtiitrite asukoht, suurus ja kestus
+  määratakse HUD-i redaktoris.
 - Rünnaku ja jooksmise lüliti (hoidmise asemel).
 - Mängu kiiruse liugur kogu mängu aeglustamiseks.
 - Automaatsihtimine lukustuse näidiku, koonuse ja ulatuse seadetega.

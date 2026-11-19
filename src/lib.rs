@@ -36,6 +36,7 @@ mod png;
 mod quaddicted;
 mod qw;
 mod sbar;
+mod hud;
 mod skywind;
 mod saveinfo;
 mod splitscreen;

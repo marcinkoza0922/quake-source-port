@@ -146,7 +146,7 @@ impl Host {
         f("arch", js(std::env::consts::ARCH));
         f("recent_console", format!("[{}]", self.con.lines.iter().rev().take(30).collect::<Vec<_>>().into_iter().rev()
             .map(|l| js(String::from_utf8_lossy(l).trim_end())).collect::<Vec<_>>().join(", ")));
-        let changed: Vec<String> = ["fov", "r_enhancedwater", "r_debris", "scr_hudstyle"].iter()
+        let changed: Vec<String> = ["fov", "r_enhancedwater", "r_debris", "hud_layout"].iter()
             .filter_map(|n| cv.by_name(n).map(|c| format!("{}: {}", js(n), js(&c.string)))).collect();
         f("key_cvars", format!("{{{}}}", changed.join(", ")));
         f("files", format!("{{\"save\": {}, \"config\": \"config.cfg\", \"screenshot\": {}, \"demo\": {}}}", save.map_or("null".into(), js), if shot { "\"screenshot.png\"" } else { "null" }, if demo { "\"demo.dem\"" } else { "null" }));

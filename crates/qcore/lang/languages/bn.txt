@@ -103,9 +103,6 @@ bn অ্যাম্বিয়েন্ট অক্লুশন
 @ Ammo Counts
 bn গুলির সংখ্যা
 
-@ Ammo Counts Position
-bn গুলির সংখ্যার অবস্থান
-
 @ Ammo Pickups
 bn গুলি সংগ্রহ
 
@@ -120,9 +117,6 @@ bn প্রয়োগ করুন
 
 @ Armor
 bn বর্ম
-
-@ Armor Position
-bn বর্মের অবস্থান
 
 @ Ask
 bn জিজ্ঞাসা করুন
@@ -220,9 +214,6 @@ bn কস্টিক
 @ Center
 bn কেন্দ্র
 
-@ Center Message Position
-bn কেন্দ্র বার্তার অবস্থান
-
 @ Center Message Time
 bn কেন্দ্র বার্তার সময়
 
@@ -282,9 +273,6 @@ bn ক্রসহেয়ারের আকার
 
 @ Current Ammo
 bn বর্তমান গুলি
-
-@ Current Ammo Position
-bn বর্তমান গুলির অবস্থান
 
 @ Customize This Game
 bn এই গেম কাস্টমাইজ করুন
@@ -469,17 +457,11 @@ bn জাইরো লক্ষ্য
 @ HUD
 bn HUD
 
-@ HUD Style
-bn HUD শৈলী
-
 @ Health
 bn স্বাস্থ্য
 
 @ Health Pickups
 bn স্বাস্থ্য সংগ্রহ
-
-@ Health Position
-bn স্বাস্থ্যের অবস্থান
 
 @ Health Regeneration
 bn স্বাস্থ্য পুনরুদ্ধার
@@ -589,9 +571,6 @@ bn লাফ
 @ Keys & Powerups
 bn চাবি ও পাওয়ারআপ
 
-@ Keys & Powerups Position
-bn চাবি ও পাওয়ারআপের অবস্থান
-
 @ Kill Bonus (x)
 bn হত্যা বোনাস (x)
 
@@ -661,15 +640,6 @@ bn সর্বোচ্চ পাল্লা
 @ Melee only
 bn শুধু হাতাহাতি
 
-@ Message Background
-bn বার্তার পটভূমি
-
-@ Message Text Size
-bn বার্তার লেখার আকার
-
-@ Messages & Captions
-bn বার্তা ও ক্যাপশন
-
 @ Meter Duration (real seconds)
 bn মিটারের সময়কাল (প্রকৃত সেকেন্ড)
 
@@ -681,9 +651,6 @@ bn মোড
 
 @ Modern Console
 bn আধুনিক কনসোল
-
-@ Modern HUD Layout
-bn আধুনিক HUD বিন্যাস
 
 @ Most recent save
 bn সর্বশেষ সেভ
@@ -732,9 +699,6 @@ bn নয়েজ ফিল্টার
 
 @ Normal Color
 bn সাধারণ রং
-
-@ Notify Message Position
-bn বিজ্ঞপ্তি বার্তার অবস্থান
 
 @ Notify Message Time
 bn বিজ্ঞপ্তি বার্তার সময়
@@ -928,17 +892,11 @@ bn বাম কাঁধ
 @ Shoulder right
 bn ডান কাঁধ
 
-@ Show FPS
-bn FPS দেখান
-
 @ Show Face
 bn মুখ দেখান
 
 @ Shrapnel
 bn শ্র্যাপনেল
-
-@ Size of on-screen messages and captions
-bn পর্দার বার্তা ও ক্যাপশনের আকার
 
 @ Skill
 bn কঠিনতা
@@ -1108,15 +1066,6 @@ bn অস্ত্র চাকায় ধীরগতি
 @ Weapons
 bn অস্ত্র
 
-@ Weapons Position
-bn অস্ত্রের অবস্থান
-
-@ Where center-screen messages appear
-bn পর্দার মাঝের বার্তা কোথায় দেখায়
-
-@ Where pickup and event messages appear
-bn সংগ্রহ ও ঘটনার বার্তা কোথায় দেখায়
-
 @ White
 bn সাদা
 
@@ -1156,9 +1105,6 @@ bn বাক্স
 
 @ broken square
 bn ভাঙা বর্গ
-
-@ classic
-bn ক্লাসিক
 
 @ coarse
 bn মোটা
@@ -1247,29 +1193,17 @@ bn তীব্র
 @ large
 bn বড়
 
-@ larger
-bn আরও বড়
-
-@ largest
-bn সবচেয়ে বড়
-
 @ linear
 bn লিনিয়ার
 
 @ low
 bn নিম্ন
 
-@ lower
-bn নিচে
-
 @ magenta
 bn ম্যাজেন্টা
 
 @ medium
 bn মাঝারি
-
-@ middle
-bn মাঝে
 
 @ middle left
 bn মাঝে বামে
@@ -1357,9 +1291,6 @@ bn তিনগুণ
 
 @ tritanopia
 bn ট্রাইটানোপিয়া
-
-@ upper
-bn উপরে
 
 @ white
 bn সাদা
@@ -1491,9 +1422,6 @@ bn সময় ও পরিসংখ্যান
 @ Clock
 bn ঘড়ি
 
-@ Clock Position
-bn ঘড়ির অবস্থান
-
 @ Level Timer
 bn লেভেল টাইমার
 
@@ -1506,17 +1434,11 @@ bn সেরার ধরন
 @ Personal Best Color
 bn সেরার রং
 
-@ Timer Position
-bn টাইমারের অবস্থান
-
 @ Kills
 bn হত্যা
 
 @ Secrets
 bn রহস্য
-
-@ Kills & Secrets Position
-bn হত্যা ও রহস্যের অবস্থান
 
 @ 24-hour
 bn ২৪ ঘণ্টা
@@ -1564,8 +1486,139 @@ bn GPU সময়
 @ Video Memory
 bn ভিডিও মেমরি
 
-@ Metrics Position
-bn মাপকাঠির অবস্থান
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+bn যোগ করুন
+
+@ Ammo
+bn গোলাবারুদ
+
+@ Ammo Bar
+bn গোলাবারুদ বার
+
+@ Armor Bar
+bn বর্ম বার
+
+@ Background
+bn পটভূমি
+
+@ Cells
+bn সেল
+
+@ Center Message
+bn কেন্দ্র বার্তা
+
+@ Columns
+bn কলাম
+
+@ Edit HUD
+bn HUD সম্পাদনা
+
+@ FPS
+bn FPS
+
+@ Face
+bn মুখ
+
+@ Fill Width
+bn পূর্ণ প্রস্থ
+
+@ Font
+bn ফন্ট
+
+@ Format
+bn বিন্যাস
+
+@ HUD Editor
+bn HUD সম্পাদক
+
+@ Health Bar
+bn স্বাস্থ্য বার
+
+@ Inventory
+bn তালিকা
+
+@ Keys
+bn চাবি
+
+@ Nails
+bn নেইল
+
+@ Notify Messages
+bn বিজ্ঞপ্তি বার্তা
+
+@ Position
+bn অবস্থান
+
+@ Powerups
+bn পাওয়ারআপ
+
+@ Precision
+bn নির্ভুলতা
+
+@ Quake
+bn Quake
+
+@ Rockets
+bn রকেট
+
+@ Scale
+bn মাপ
+
+@ Sections
+bn অংশ
+
+@ Shells
+bn শেল
+
+@ Show As
+bn যেভাবে দেখাবে
+
+@ Show Icon
+bn আইকন দেখান
+
+@ Show Value
+bn মান দেখান
+
+@ Sigils
+bn সিগিল
+
+@ Status
+bn অবস্থা
+
+@ Status Bar
+bn অবস্থা বার
+
+@ Visibility
+bn দৃশ্যমানতা
+
+@ big numbers
+bn বড় সংখ্যা
+
+@ center
+bn কেন্দ্র
+
+@ status + inventory
+bn অবস্থা + তালিকা
+
+@ status only
+bn শুধু অবস্থা
+
+@ Text Color
+bn লেখার রং
+
+@ Label Color
+bn লেবেলের রং
+
+@ HUD Preset
+bn HUD প্রিসেট
+
+@ custom
+bn নিজস্ব
+
+@ classic
+bn ক্লাসিক
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ bn দাগের সংখ্যা, স্থায়িত্ব, বাত
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 bn শেডারের ইনপুট আউটপুট আকারে সীমিত রাখে, তাই 200% রেন্ডার স্কেল 4x শেডার খরচ ছাড়াই 3D স্পষ্টতা রাখে; কম স্কেল কম রেজোলিউশনেই থাকে
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-bn ক্লাসিক: মূল স্ট্যাটাস বার; আধুনিক: পর্দার কিনারায় ছোট উপাদান
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 bn আবরণ অ্যাটলাসের রেজোলিউশন, পুনর্গঠনের হার ও শেডারের বিস্তারিত: নিম্ন দ্রুত শেডিং দিয়ে ছোট আবরণ কম ঘনঘন তৈরি করে; উচ্চ পূর্ণ বিস্তারিত ব্যবহার করে
 
@@ -1629,9 +1679,6 @@ bn রেলগানের সর্পিল রেখার রং; স্প
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 bn রেলগান যে প্রতিটি শত্রুকে ভেদ করে তাকে যত ক্ষতি করে (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-bn পড়তে সুবিধার জন্য পর্দার বার্তার পিছনে গাঢ় পটভূমি
 
 @ Dark border keeps the crosshair visible on any background
 bn গাঢ় সীমানা যেকোনো পটভূমিতে ক্রসহেয়ার দৃশ্যমান রাখে
@@ -1879,17 +1926,11 @@ bn জল ও স্লাইমের নিচের পৃষ্ঠে তর
 @ Scales all damage you take; above 100% is harder
 bn আপনার পাওয়া সব ক্ষতির মাত্রা বদলায়; 100% এর বেশি কঠিনতর
 
-@ Screen edge for this element; elements on the same spot stack
-bn এই উপাদানের জন্য পর্দার কিনারা; একই জায়গার উপাদান একটির উপর আরেকটি সাজানো হয়
-
 @ Seconds a monster hit by the boomerang stays stunned
 bn বুমেরাংয়ে আঘাত পাওয়া দানব কত সেকেন্ড অচেতন থাকে
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 bn আঘাতের দাগ ও গাঁথা পেরেক মিলিয়ে যাওয়ার আগে কত সেকেন্ড থাকে; কণার মান থেকে স্বাধীন
-
-@ Seconds messages at the top of the screen stay up
-bn পর্দার উপরের বার্তা কত সেকেন্ড থাকে
 
 @ Seconds the flick stick snap takes; lower is faster
 bn ফ্লিক স্টিক ঘোরাতে কত সেকেন্ড লাগে; কম মানে দ্রুত
@@ -2063,9 +2104,6 @@ bn বেছে নেওয়া বিন্যাসে দিনের স�
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 bn লেভেলের সময়, বিরতির পর্দার মতো; থামালে ও প্রস্থানে থেমে যায়
 
-@ Your best time on this map and skill, next to the timer (single player)
-bn এই মানচিত্র ও কঠিনতায় আপনার সেরা সময়, টাইমারের পাশে (একক খেলোয়াড়)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 bn any%: যেকোনো সমাপ্তি; 100%: সব হত্যা ও রহস্য। সেভ কার্ড আগে এটিই দেখায়
 
@@ -2074,9 +2112,6 @@ bn HUD ও সেভ কার্ডে ব্যক্তিগত সেরা
 
 @ Shown as a count or as a percentage of the level's total
 bn সংখ্যা হিসেবে বা লেভেলের মোটের শতাংশ হিসেবে
-
-@ Where this goes on screen; items at the same position share a line
-bn এটি পর্দায় কোথায়; একই অবস্থানের আইটেম এক লাইন ভাগ করে
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 bn ব্যক্তিগত সেরা গড়া প্রতিটি লেভেলের ডেমো রাখে; পুরোনোগুলো থাকে। স্বয়ং রেকর্ড বন্ধ থাকলেও রেকর্ড করে
@@ -2099,6 +2134,12 @@ bn প্রতি ফ্রেমে গ্রাফিক্স কার্�
 
 @ Video memory in use and what the driver allows, where it reports it
 bn ব্যবহৃত ভিডিও মেমরি ও ড্রাইভারের অনুমতি, যেখানে এটি জানায়
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+bn HUD উপাদান সরান, আকার বদলান, যোগ করুন ও মুছুন: স্বাস্থ্য, গোলাবারুদ, অস্ত্র, টাইমার, বার্তা এবং আরও
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+bn আধুনিক: পর্দার কিনারায় ছোট উপাদান; ক্লাসিক: আসল অবস্থা বার। একটি বাছলে HUD রিসেট হয়; HUD সম্পাদনায় পরিবর্তন করলে তা নিজস্ব হয়ে যায়
 
 # ==== ui.txt ====
 

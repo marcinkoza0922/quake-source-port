@@ -5,9 +5,7 @@ use qnet::protocol::*;
 use qrender::PicId;
 
 use crate::draw::Canvas;
-mod hud;
-pub use hud::*;
-mod modern;
+mod rows;
 mod classic;
 mod screens;
 pub use screens::*;
@@ -74,7 +72,7 @@ impl Pack {
         p
     }
 
-    fn ammo_pic(self, items: i32) -> Option<&'static str> {
+    pub fn ammo_pic(self, items: i32) -> Option<&'static str> {
         let mut t = vec![];
         if self == Pack::Rogue {
             t.extend([(RIT_SHELLS, "sb_shells"), (RIT_NAILS, "sb_nails"), (RIT_ROCKETS, "sb_rocket"), (RIT_CELLS, "sb_cells")]);
@@ -86,8 +84,13 @@ impl Pack {
         t.into_iter().find(|(b, _)| items & b != 0).map(|(_, n)| n)
     }
 
+    /// Item bits of shells, nails, rockets and cells.
+    pub fn ammo_bits(self) -> [i32; 4] {
+        if self == Pack::Rogue { [RIT_SHELLS, RIT_NAILS, RIT_ROCKETS, RIT_CELLS] } else { [IT_SHELLS, IT_NAILS, IT_ROCKETS, IT_CELLS] }
+    }
+
     /// Sbar_ArmorPic.
-    fn armor_pic(self, items: i32) -> Option<&'static str> {
+    pub fn armor_pic(self, items: i32) -> Option<&'static str> {
         if items & IT_INVULNERABILITY != 0 {
             return Some("disc");
         }
@@ -105,7 +108,7 @@ impl Pack {
     }
 
     /// Extra pack items: (item bit, pic).
-    fn extra_items(self) -> &'static [(u32, &'static str)] {
+    pub fn extra_items(self) -> &'static [(u32, &'static str)] {
         match self {
             Pack::Hipnotic => &[(24, HIP_ITEMS[0]), (25, HIP_ITEMS[1])],
             Pack::Rogue => &[(29, ROGUE_ITEMS[0]), (30, ROGUE_ITEMS[1])],
@@ -165,65 +168,7 @@ fn hip_weapons(cl: &ClientState) -> Vec<(usize, String, bool)> {
 }
 
 const WEAPONS: [&str; 7] = ["shotgun", "sshotgun", "nailgun", "snailgun", "rlaunch", "srlaunch", "lightng"];
-const ITEMS: [&str; 6] = ["sb_key1", "sb_key2", "sb_invis", "sb_invuln", "sb_suit", "sb_quad"];
-
-impl HudConfig {
-    pub fn from_cvars(cv: &qcore::cvar::Cvars) -> Self {
-        let mut c = HudConfig { mode: [HudMode::On; 6], anchor: [HudAnchor::BottomLeft; 6], face: cv.value_of("hud_face") != 0.0 };
-        for e in HudElem::ALL {
-            c.mode[e as usize] = HudMode::from_cvar(cv.value_of(&format!("hud_{}", e.name())));
-            c.anchor[e as usize] = HudAnchor::from_cvar(cv.value_of(&format!("hud_{}_pos", e.name())));
-        }
-        c
-    }
-}
-
-/// Seconds an immersive element stays fully visible, then fades.
-const IMMERSIVE_HOLD: f64 = 3.0;
-const IMMERSIVE_FADE: f64 = 0.5;
-
-/// Change tracking for immersive HUD elements.
-#[derive(Default)]
-pub struct HudFade {
-    last: [Option<i64>; 6],
-    changed: [f64; 6],
-    last_addons: Option<(Vec<crate::wheel::Entry>, Option<qserver::addons::Toy>)>,
-}
-
-impl HudFade {
-    fn signature(cl: &ClientState, e: HudElem) -> i64 {
-        let st = &cl.stats;
-        let it = cl.items as i64 & 0xffff_ffff;
-        match e {
-            HudElem::Health => st[STAT_HEALTH] as i64,
-            HudElem::Armor => (st[STAT_ARMOR] as i64) << 32 | it,
-            HudElem::Ammo => (st[STAT_AMMO] as i64) << 32 | st[STAT_ACTIVEWEAPON] as i64 & 0xffff_ffff,
-            HudElem::AmmoList => (0..4).fold(0i64, |h, i| h << 16 | (st[STAT_SHELLS + i] as i64 & 0xffff)),
-            HudElem::Weapons => it << 32 ^ st[STAT_ACTIVEWEAPON] as i64,
-            HudElem::Items => it,
-        }
-    }
-
-    /// Records value changes; the first sighting counts as a change.
-    pub fn update(&mut self, cl: &ClientState, now: f64) {
-        for e in HudElem::ALL {
-            let s = Self::signature(cl, e);
-            if self.last[e as usize] != Some(s) {
-                self.last[e as usize] = Some(s);
-                self.changed[e as usize] = now;
-            }
-        }
-    }
-
-    pub fn alpha(&self, e: HudElem, now: f64) -> f32 {
-        let t = now - self.changed[e as usize];
-        if t < IMMERSIVE_HOLD {
-            1.0
-        } else {
-            (1.0 - (t - IMMERSIVE_HOLD) / IMMERSIVE_FADE).max(0.0) as f32
-        }
-    }
-}
+pub const ITEMS: [&str; 6] = ["sb_key1", "sb_key2", "sb_invis", "sb_invuln", "sb_suit", "sb_quad"];
 
 pub struct Sbar<'a, 'b> {
     pub c: &'a mut Canvas,
@@ -232,8 +177,10 @@ pub struct Sbar<'a, 'b> {
     /// Top of the status bar in virtual units.
     y0: f32,
     x0: f32,
-    /// Opacity for the element being drawn (immersive fade).
+    /// Opacity of the pictures drawn.
     alpha: f32,
+    /// Classic bar: the inventory strip above the status bar.
+    pub inventory: bool,
     /// Local `teamplay` cvar (rogue CTF modes 4..6 replace the face).
     pub teamplay: f32,
     pub addon_weapons: Vec<crate::wheel::Entry>,
@@ -245,26 +192,21 @@ impl<'a, 'b> Sbar<'a, 'b> {
         c.reset_origin();
         let x0 = ((c.vw() - 320.0) / 2.0).floor();
         let y0 = c.vh() - 24.0;
-        Self { c, pack, pic, y0, x0, alpha: 1.0, teamplay: 0.0, addon_weapons: Vec::new(), held_addon: None }
+        Self { c, pack, pic, y0, x0, alpha: 1.0, inventory: true, teamplay: 0.0, addon_weapons: Vec::new(), held_addon: None }
     }
-    /// Classic layout: fills the strip below the 3D view (`lines` virtual
-    /// rows) edge to edge with the backtile before drawing the bar.
-    pub fn backtile(&mut self, lines: f32) {
-        let Some((id, tw, th)) = (self.pic)("backtile") else { return };
-        let (vw, vh) = (self.c.vw(), self.c.vh());
-        let (tw, th) = (tw.max(1) as f32, th.max(1) as f32);
-        let mut y = vh - lines;
-        while y < vh {
-            let mut x = 0.0;
-            while x < vw {
-                self.c.pic(x, y, Some((id, tw as u32, th as u32)));
-                x += tw;
-            }
-            y += th;
-        }
+    /// Draws at the canvas origin as it is (a HUD element's own origin):
+    /// the status bar's top left at (0, `top`).
+    pub fn at(c: &'a mut Canvas, pic: &'a mut PicFn<'b>, pack: Pack, top: f32) -> Self {
+        Self { c, pack, pic, y0: top, x0: 0.0, alpha: 1.0, inventory: true, teamplay: 0.0, addon_weapons: Vec::new(), held_addon: None }
+    }
+    /// The scoreboard strip at the top centre (no status bar on screen).
+    pub fn draw_scores_top(&mut self, cl: &ClientState) {
+        self.y0 = 0.0;
+        self.draw_pic(0.0, 0.0, "scorebar");
+        self.solo_scoreboard(cl);
     }
 
-    fn face_name(cl: &ClientState, face_anim: bool) -> String {
+    pub fn face_name(cl: &ClientState, face_anim: bool) -> String {
         let items = cl.items;
         if items & (IT_INVISIBILITY | IT_INVULNERABILITY) == IT_INVISIBILITY | IT_INVULNERABILITY {
             "face_inv2".to_string()

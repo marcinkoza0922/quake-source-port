@@ -21,7 +21,7 @@ use crate::draw::Canvas;
 
 pub(crate) const MAX_LINES: usize = 4096;
 const NUM_NOTIFY: usize = 4;
-/// Backdrop colour behind messages when `text_bg` is on.
+/// Backdrop colour behind messages with a background.
 pub const TEXT_BG: [f32; 4] = [0.0, 0.0, 0.0, 0.65];
 
 #[derive(Default)]
@@ -50,14 +50,10 @@ pub struct Console {
     pub width: usize,
     /// con_notifytime: seconds notify lines stay up.
     pub notify_time: f64,
-    /// scr_textbg: dark backdrop behind notify and centerprint text.
-    pub text_bg: bool,
-    /// scr_textscale: size multiplier for notify and centerprint text.
-    pub text_scale: f32,
-    /// Center message position: 0 upper (classic), 1 middle, 2 lower.
-    pub center_pos: u8,
-    /// Notify line position: 0 top-left, 1 top-center, 2 bottom-left.
-    pub notify_pos: u8,
+    /// Where the notify lines and the centerprint go (the HUD layout's
+    /// message elements); an empty rectangle uses the classic spots.
+    pub notify_place: crate::hud::MsgPlace,
+    pub center_place: crate::hud::MsgPlace,
     /// `con_modern`: use modern terminal console (default true).
     pub modern: bool,
     /// scr_conalpha: classic console background opacity (forced-up
@@ -91,7 +87,6 @@ impl Console {
         Self {
             width: 78,
             notify_time: 3.0,
-            text_scale: 1.0,
             modern: true,
             alpha: 1.0,
             height_frac: 0.58,
@@ -323,19 +318,19 @@ impl Console {
             }
         } else if show_notify {
             let base = c.scale;
-            c.scale = (base * self.text_scale.clamp(1.0, 3.0)).round().max(1.0);
+            let p = self.notify_place;
+            c.scale = (base * p.scale.clamp(1.0, 3.0)).round().max(1.0);
             let live: Vec<&Vec<u8>> =
                 self.notify.iter().filter(|(t, _)| self.realtime - t <= self.notify_time).map(|(_, l)| l).collect();
-            let (svw, svh) = (c.vw(), c.vh());
-            // bottom-left sits above the modern HUD's health/armor stack
-            let mut y = if self.notify_pos == 2 { (svh * 0.7).floor() - live.len() as f32 * 8.0 } else { 0.0 };
+            let (rx, ry, rw, rh) = place_rect(&p, base / c.scale, (8.0, 0.0, c.vw() - 16.0, 32.0));
+            let mut y = if p.up { ry + rh - live.len() as f32 * 8.0 } else { ry };
             for l in live {
                 let w = c.qtext_w(l);
-                let x = if self.notify_pos == 1 { ((svw - w) / 2.0).floor() } else { 8.0 };
-                if self.text_bg && !l.is_empty() {
+                let x = align_x(p.align, rx, rw, w);
+                if p.bg && !l.is_empty() {
                     c.fill(x - 2.0, y - 1.0, w + 4.0, 10.0, TEXT_BG);
                 }
-                c.qtext(x, y, l, crate::draw::WHITE);
+                c.qtext(x, y, l, p.color);
                 y += 8.0;
             }
             c.scale = base;
@@ -348,30 +343,32 @@ impl Console {
     /// SCR_DrawCenterString; `max_chars` limits revealed characters (finale).
     pub fn draw_center(&self, c: &mut Canvas, max_chars: usize) {
         let base = c.scale;
-        c.scale = (base * self.text_scale.clamp(1.0, 3.0)).round().max(1.0);
-        self.draw_center_scaled(c, max_chars);
+        c.scale = (base * self.center_place.scale.clamp(1.0, 3.0)).round().max(1.0);
+        self.draw_center_scaled(c, max_chars, base / c.scale);
         c.scale = base;
     }
 
-    fn draw_center_scaled(&self, c: &mut Canvas, max_chars: usize) {
+    /// `k` turns HUD units into the scaled text's units.
+    fn draw_center_scaled(&self, c: &mut Canvas, max_chars: usize, k: f32) {
         let (vw, vh) = (c.vw(), c.vh());
+        let p = self.center_place;
         let n = self.centerprint.len();
-        let mut y = match self.center_pos {
-            _ if n > 4 => 48.0,
-            1 => ((vh - n as f32 * 8.0) / 2.0).floor(),
-            2 => (vh * 0.68).floor() - n as f32 * 8.0,
-            _ => (vh * 0.35).floor(),
-        };
+        let (rx, ry, rw, rh) = place_rect(&p, k, (0.0, (vh * 0.35).floor(), vw, 32.0));
+        let align = if p.rect.w > 0.0 { p.align } else { 1 };
+        let h = n as f32 * 8.0;
+        // a long message (a level's story) still fits on screen
+        let y0 = if p.up { ry + rh - h } else { ry };
+        let mut y = y0.min(vh - h - 4.0).max(4.0).floor();
         let lines: Vec<Vec<u8>> = self.centerprint.iter().map(|l| qcore::text::encode(l)).collect();
-        if self.text_bg && n > 0 {
+        if p.bg && n > 0 {
             let w = lines.iter().map(|l| c.qtext_w(l)).fold(0.0, f32::max);
-            c.fill(((vw - w) / 2.0).floor() - 4.0, y - 3.0, w + 8.0, n as f32 * 8.0 + 6.0, TEXT_BG);
+            c.fill(align_x(align, rx, rw, w) - 4.0, y - 3.0, w + 8.0, h + 6.0, TEXT_BG);
         }
         let mut left = max_chars;
         for l in &lines {
-            let x = ((vw - c.qtext_w(l)) / 2.0).floor();
+            let x = align_x(align, rx, rw, c.qtext_w(l));
             let shown = crate::draw::glyph_prefix(l, left);
-            c.qtext(x, y, shown, crate::draw::WHITE);
+            c.qtext(x, y, shown, p.color);
             left -= crate::draw::glyph_count(shown);
             if left == 0 {
                 return;
@@ -379,6 +376,23 @@ impl Console {
             y += 8.0;
         }
     }
+}
+
+/// The place's rectangle in text units (`k` per HUD unit), or `classic`
+/// when the layout gave none.
+fn place_rect(p: &crate::hud::MsgPlace, k: f32, classic: (f32, f32, f32, f32)) -> (f32, f32, f32, f32) {
+    let r = p.rect;
+    if r.w <= 0.0 { classic } else { (r.x * k, r.y * k, r.w * k, r.h * k) }
+}
+
+/// Left edge of a line `w` wide in the span `x..x + room`.
+fn align_x(align: usize, x: f32, room: f32, w: f32) -> f32 {
+    match align {
+        0 => x,
+        1 => x + ((room - w) / 2.0).floor(),
+        _ => x + room - w,
+    }
+    .floor()
 }
 
 /// SCR_GetCenterPrintWrapLimit: columns for a menu canvas `vw` units wide.

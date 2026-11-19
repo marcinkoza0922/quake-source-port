@@ -103,9 +103,6 @@ cy Occlwsiwn amgylchol
 @ Ammo Counts
 cy Nifer bwledi
 
-@ Ammo Counts Position
-cy Safle nifer bwledi
-
 @ Ammo Pickups
 cy Bwledi a gasglwyd
 
@@ -120,9 +117,6 @@ cy Cymhwyso i
 
 @ Armor
 cy Arfwisg
-
-@ Armor Position
-cy Safle'r arfwisg
 
 @ Ask
 cy Gofyn
@@ -220,9 +214,6 @@ cy Costigau
 @ Center
 cy Canol
 
-@ Center Message Position
-cy Safle negeseuon canol
-
 @ Center Message Time
 cy Amser negeseuon canol
 
@@ -282,9 +273,6 @@ cy Maint croesflew
 
 @ Current Ammo
 cy Bwledi cyfredol
-
-@ Current Ammo Position
-cy Safle bwledi cyfredol
 
 @ Customize This Game
 cy Addasu'r gêm hon
@@ -469,17 +457,11 @@ cy Anelu gyro
 @ HUD
 cy HUD
 
-@ HUD Style
-cy Arddull HUD
-
 @ Health
 cy Iechyd
 
 @ Health Pickups
 cy Iechyd a gasglwyd
-
-@ Health Position
-cy Safle iechyd
 
 @ Health Regeneration
 cy Adfywio iechyd
@@ -589,9 +571,6 @@ cy Neidiau
 @ Keys & Powerups
 cy Allweddi a hwbiau
 
-@ Keys & Powerups Position
-cy Safle allweddi a hwbiau
-
 @ Kill Bonus (x)
 cy Bonws lladd (x)
 
@@ -661,15 +640,6 @@ cy Pellter mwyaf
 @ Melee only
 cy Ymladd agos yn unig
 
-@ Message Background
-cy Cefndir negeseuon
-
-@ Message Text Size
-cy Maint testun negeseuon
-
-@ Messages & Captions
-cy Negeseuon a chapsiynau
-
 @ Meter Duration (real seconds)
 cy Hyd y mesurydd (eiliadau go iawn)
 
@@ -681,9 +651,6 @@ cy Modd
 
 @ Modern Console
 cy Consol modern
-
-@ Modern HUD Layout
-cy Cynllun HUD modern
 
 @ Most recent save
 cy Y cadw diweddaraf
@@ -732,9 +699,6 @@ cy Hidlydd sŵn
 
 @ Normal Color
 cy Lliw arferol
-
-@ Notify Message Position
-cy Safle hysbysiadau
 
 @ Notify Message Time
 cy Amser hysbysiadau
@@ -928,17 +892,11 @@ cy ysgwydd chwith
 @ Shoulder right
 cy ysgwydd dde
 
-@ Show FPS
-cy Dangos FPS
-
 @ Show Face
 cy Dangos wyneb
 
 @ Shrapnel
 cy Shrapnel
-
-@ Size of on-screen messages and captions
-cy Maint negeseuon a chapsiynau ar y sgrin
 
 @ Skill
 cy Anhawster
@@ -1108,15 +1066,6 @@ cy Arafu olwyn arfau
 @ Weapons
 cy Arfau
 
-@ Weapons Position
-cy Safle arfau
-
-@ Where center-screen messages appear
-cy Lle mae negeseuon canol y sgrin yn ymddangos
-
-@ Where pickup and event messages appear
-cy Lle mae negeseuon casglu a digwyddiadau'n ymddangos
-
 @ White
 cy Gwyn
 
@@ -1156,9 +1105,6 @@ cy blwch
 
 @ broken square
 cy sgwâr toredig
-
-@ classic
-cy clasurol
 
 @ coarse
 cy bras
@@ -1247,29 +1193,17 @@ cy dwys
 @ large
 cy mawr
 
-@ larger
-cy mwy
-
-@ largest
-cy mwyaf
-
 @ linear
 cy llinol
 
 @ low
 cy isel
 
-@ lower
-cy is
-
 @ magenta
 cy magenta
 
 @ medium
 cy canolig
-
-@ middle
-cy canol
 
 @ middle left
 cy canol chwith
@@ -1357,9 +1291,6 @@ cy triphlyg
 
 @ tritanopia
 cy tritanopia
-
-@ upper
-cy uwch
 
 @ white
 cy gwyn
@@ -1491,9 +1422,6 @@ cy Amser ac Ystadegau
 @ Clock
 cy Cloc
 
-@ Clock Position
-cy Safle'r Cloc
-
 @ Level Timer
 cy Amserydd y Lefel
 
@@ -1506,17 +1434,11 @@ cy Math o Orau Personol
 @ Personal Best Color
 cy Lliw'r Gorau Personol
 
-@ Timer Position
-cy Safle'r Amserydd
-
 @ Kills
 cy Lladdiadau
 
 @ Secrets
 cy Cyfrinachau
-
-@ Kills & Secrets Position
-cy Safle Lladdiadau a Chyfrinachau
 
 @ 24-hour
 cy 24 awr
@@ -1564,8 +1486,139 @@ cy Amser GPU
 @ Video Memory
 cy Cof Fideo
 
-@ Metrics Position
-cy Safle'r Mesuriadau
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+cy Ychwanegu
+
+@ Ammo
+cy Bwledi
+
+@ Ammo Bar
+cy Bar bwledi
+
+@ Armor Bar
+cy Bar arfwisg
+
+@ Background
+cy Cefndir
+
+@ Cells
+cy Celloedd
+
+@ Center Message
+cy Neges ganol
+
+@ Columns
+cy Colofnau
+
+@ Edit HUD
+cy Golygu'r HUD
+
+@ FPS
+cy FPS
+
+@ Face
+cy Wyneb
+
+@ Fill Width
+cy Lled llawn
+
+@ Font
+cy Ffont
+
+@ Format
+cy Fformat
+
+@ HUD Editor
+cy Golygydd HUD
+
+@ Health Bar
+cy Bar iechyd
+
+@ Inventory
+cy Rhestr eiddo
+
+@ Keys
+cy Allweddi
+
+@ Nails
+cy Hoelion
+
+@ Notify Messages
+cy Hysbysiadau
+
+@ Position
+cy Safle
+
+@ Powerups
+cy Hwbiau
+
+@ Precision
+cy Manylder
+
+@ Quake
+cy Quake
+
+@ Rockets
+cy Rocedi
+
+@ Scale
+cy Graddfa
+
+@ Sections
+cy Adrannau
+
+@ Shells
+cy Cetris
+
+@ Show As
+cy Dangos fel
+
+@ Show Icon
+cy Dangos eicon
+
+@ Show Value
+cy Dangos gwerth
+
+@ Sigils
+cy Rhuniau
+
+@ Status
+cy Statws
+
+@ Status Bar
+cy Bar statws
+
+@ Visibility
+cy Gwelededd
+
+@ big numbers
+cy rhifau mawr
+
+@ center
+cy canol
+
+@ status + inventory
+cy statws + rhestr eiddo
+
+@ status only
+cy statws yn unig
+
+@ Text Color
+cy Lliw testun
+
+@ Label Color
+cy Lliw labeli
+
+@ HUD Preset
+cy Rhagosodiad HUD
+
+@ custom
+cy personol
+
+@ classic
+cy clasurol
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ cy Cyfyngu ar nifer ac oes olion, diferion yn yr awyr a staeniau clwyfau/darnau 
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 cy Cyfyngu mewnbwn yr arlliwiwr i faint yr allbwn fel bod graddfa rendro 200% yn cadw miniogrwydd 3D heb gost 4x i'r arlliwiwr; mae graddfeydd isel yn aros yn gydraniad isel
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-cy Clasurol: y bar statws gwreiddiol; modern: elfennau cryno ar ymylon y sgrin
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 cy Cydraniad atlas yr haenau, cyfradd ailadeiladu a manylder yr arlliwiwr: mae isel yn creu haenau llai yn llai aml gydag arlliwio cyflym; mae uchel yn defnyddio'r manylder llawn
 
@@ -1629,9 +1679,6 @@ cy Lliw trywydd troellog y railgun; mae pob chwaraewr ar sgrin hollt yn cael y l
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 cy Difrod mae'r railgun yn ei wneud i bob gelyn mae'n mynd drwyddo (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-cy Cefndir tywyll y tu ôl i negeseuon ar y sgrin i'w gwneud yn haws eu darllen
 
 @ Dark border keeps the crosshair visible on any background
 cy Mae ymyl dywyll yn cadw'r croesflew yn weladwy ar unrhyw gefndir
@@ -1879,17 +1926,11 @@ cy Patrymau golau crychlyd ar arwynebau o dan ddŵr a llysnafedd
 @ Scales all damage you take; above 100% is harder
 cy Graddio pob difrod a gewch; mae dros 100% yn anoddach
 
-@ Screen edge for this element; elements on the same spot stack
-cy Ymyl y sgrin ar gyfer yr elfen hon; mae elfennau yn yr un man yn pentyrru
-
 @ Seconds a monster hit by the boomerang stays stunned
 cy Eiliadau mae anghenfil a darawyd gan y bwmerang yn aros wedi'i syfrdanu
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 cy Eiliadau mae olion trawiad a hoelion sownd yn aros cyn pylu; yn annibynnol ar Ansawdd gronynnau
-
-@ Seconds messages at the top of the screen stay up
-cy Eiliadau mae negeseuon ar frig y sgrin yn aros
 
 @ Seconds the flick stick snap takes; lower is faster
 cy Eiliadau mae naid y flick stick yn ei gymryd; mae is yn gyflymach
@@ -2063,9 +2104,6 @@ cy Yn dangos amser y dydd yn y fformat a ddewiswyd
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 cy Amser y lefel, fel ar y sgrin egwyl; mae'n stopio wrth oedi ac wrth yr allanfa
 
-@ Your best time on this map and skill, next to the timer (single player)
-cy Eich amser gorau ar y map a'r anhawster hwn, wrth ymyl yr amserydd (un chwaraewr)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 cy any%: unrhyw ddiwedd; 100%: pob lladdiad a chyfrinach. Mae cardiau cadw yn dangos hwn yn gyntaf
 
@@ -2074,9 +2112,6 @@ cy Lliw'r gorau personol ar yr HUD a'r cardiau cadw
 
 @ Shown as a count or as a percentage of the level's total
 cy Fel nifer neu fel canran o gyfanswm y lefel
-
-@ Where this goes on screen; items at the same position share a line
-cy Ble mae ar y sgrin; mae eitemau yn yr un safle yn rhannu llinell
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 cy Yn cadw demo pob lefel sy'n gosod gorau personol; mae'r hen rai yn aros. Yn recordio hyd yn oed heb recordio awtomatig
@@ -2099,6 +2134,12 @@ cy Amser y cerdyn graffeg fesul ffrâm mewn milieiliadau
 
 @ Video memory in use and what the driver allows, where it reports it
 cy Cof fideo sy'n cael ei ddefnyddio a'r hyn mae'r gyrrwr yn ei ganiatáu, lle mae'n ei adrodd
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+cy Symud, newid maint, ychwanegu a thynnu elfennau'r HUD: iechyd, bwledi, arfau, amseryddion, negeseuon a mwy
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+cy Modern: elfennau cryno ar ymylon y sgrin; clasurol: y bar statws gwreiddiol. Mae dewis un yn ailosod yr HUD; mae newidiadau yn Golygu'r HUD yn ei wneud yn bersonol
 
 # ==== ui.txt ====
 

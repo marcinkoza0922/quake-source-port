@@ -103,9 +103,6 @@ eo Ĉirkaŭa ombrigo
 @ Ammo Counts
 eo Municikvantoj
 
-@ Ammo Counts Position
-eo Pozicio de municikvantoj
-
 @ Ammo Pickups
 eo Municiaj prenaĵoj
 
@@ -120,9 +117,6 @@ eo Apliki al
 
 @ Armor
 eo Kiraso
-
-@ Armor Position
-eo Pozicio de kiraso
 
 @ Ask
 eo Demandi
@@ -220,9 +214,6 @@ eo Kaŭstikoj
 @ Center
 eo Centre
 
-@ Center Message Position
-eo Pozicio de centra mesaĝo
-
 @ Center Message Time
 eo Daŭro de centra mesaĝo
 
@@ -282,9 +273,6 @@ eo Grando de celilo
 
 @ Current Ammo
 eo Nuna municio
-
-@ Current Ammo Position
-eo Pozicio de nuna municio
 
 @ Customize This Game
 eo Adapti ĉi tiun ludon
@@ -469,17 +457,11 @@ eo Giroskopa celado
 @ HUD
 eo HUD
 
-@ HUD Style
-eo HUD-stilo
-
 @ Health
 eo Sano
 
 @ Health Pickups
 eo Sanaj prenaĵoj
-
-@ Health Position
-eo Pozicio de sano
 
 @ Health Regeneration
 eo Sanregenerado
@@ -589,9 +571,6 @@ eo Saltoj
 @ Keys & Powerups
 eo Ŝlosiloj kaj plifortigiloj
 
-@ Keys & Powerups Position
-eo Pozicio de ŝlosiloj kaj plifortigiloj
-
 @ Kill Bonus (x)
 eo Mortigbonuso (x)
 
@@ -661,15 +640,6 @@ eo Maks. atingo
 @ Melee only
 eo Nur proksima batalo
 
-@ Message Background
-eo Fono de mesaĝoj
-
-@ Message Text Size
-eo Teksta grando de mesaĝoj
-
-@ Messages & Captions
-eo Mesaĝoj kaj subtekstoj
-
 @ Meter Duration (real seconds)
 eo Daŭro de mezurilo (realaj sekundoj)
 
@@ -681,9 +651,6 @@ eo Reĝimo
 
 @ Modern Console
 eo Moderna konzolo
-
-@ Modern HUD Layout
-eo Moderna HUD-aranĝo
 
 @ Most recent save
 eo Plej lasta konservo
@@ -732,9 +699,6 @@ eo Brufiltrilo
 
 @ Normal Color
 eo Normala koloro
-
-@ Notify Message Position
-eo Pozicio de sciigoj
 
 @ Notify Message Time
 eo Daŭro de sciigoj
@@ -928,17 +892,11 @@ eo maldekstra ŝultro
 @ Shoulder right
 eo dekstra ŝultro
 
-@ Show FPS
-eo Montri FPS
-
 @ Show Face
 eo Montri vizaĝon
 
 @ Shrapnel
 eo Ŝrapnelo
-
-@ Size of on-screen messages and captions
-eo Grando de surekranaj mesaĝoj kaj subtekstoj
 
 @ Skill
 eo Malfacileco
@@ -1108,15 +1066,6 @@ eo Malrapidigo de armila rado
 @ Weapons
 eo Armiloj
 
-@ Weapons Position
-eo Pozicio de armiloj
-
-@ Where center-screen messages appear
-eo Kie aperas centraj mesaĝoj
-
-@ Where pickup and event messages appear
-eo Kie aperas mesaĝoj pri prenaĵoj kaj eventoj
-
 @ White
 eo Blanka
 
@@ -1156,9 +1105,6 @@ eo kadro
 
 @ broken square
 eo rompita kvadrato
-
-@ classic
-eo klasika
 
 @ coarse
 eo kruda
@@ -1247,29 +1193,17 @@ eo intensa
 @ large
 eo granda
 
-@ larger
-eo pli granda
-
-@ largest
-eo plej granda
-
 @ linear
 eo lineara
 
 @ low
 eo malalta
 
-@ lower
-eo malsupra
-
 @ magenta
 eo magenta
 
 @ medium
 eo meza
-
-@ middle
-eo mezo
 
 @ middle left
 eo meze maldekstre
@@ -1357,9 +1291,6 @@ eo triobla
 
 @ tritanopia
 eo tritanopio
-
-@ upper
-eo supra
 
 @ white
 eo blanka
@@ -1491,9 +1422,6 @@ eo Tempo kaj statistiko
 @ Clock
 eo Horloĝo
 
-@ Clock Position
-eo Pozicio de horloĝo
-
 @ Level Timer
 eo Nivela tempomezurilo
 
@@ -1506,17 +1434,11 @@ eo Speco de rekordo
 @ Personal Best Color
 eo Koloro de rekordo
 
-@ Timer Position
-eo Pozicio de tempomezurilo
-
 @ Kills
 eo Mortigoj
 
 @ Secrets
 eo Sekretoj
-
-@ Kills & Secrets Position
-eo Pozicio de mortigoj kaj sekretoj
 
 @ 24-hour
 eo 24-hora
@@ -1564,8 +1486,139 @@ eo GPU-tempo
 @ Video Memory
 eo Videomemoro
 
-@ Metrics Position
-eo Pozicio de mezuroj
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+eo Aldoni
+
+@ Ammo
+eo Municio
+
+@ Ammo Bar
+eo Municia stango
+
+@ Armor Bar
+eo Kirasa stango
+
+@ Background
+eo Fono
+
+@ Cells
+eo Ĉeloj
+
+@ Center Message
+eo Centra mesaĝo
+
+@ Columns
+eo Kolumnoj
+
+@ Edit HUD
+eo Redakti HUD
+
+@ FPS
+eo FPS
+
+@ Face
+eo Vizaĝo
+
+@ Fill Width
+eo Plena larĝo
+
+@ Font
+eo Tiparo
+
+@ Format
+eo Formato
+
+@ HUD Editor
+eo HUD-redaktilo
+
+@ Health Bar
+eo Sana stango
+
+@ Inventory
+eo Inventaro
+
+@ Keys
+eo Ŝlosiloj
+
+@ Nails
+eo Najloj
+
+@ Notify Messages
+eo Sciigoj
+
+@ Position
+eo Pozicio
+
+@ Powerups
+eo Plifortigiloj
+
+@ Precision
+eo Precizeco
+
+@ Quake
+eo Quake
+
+@ Rockets
+eo Raketoj
+
+@ Scale
+eo Skalo
+
+@ Sections
+eo Sekcioj
+
+@ Shells
+eo Kartoĉoj
+
+@ Show As
+eo Montri kiel
+
+@ Show Icon
+eo Montri piktogramon
+
+@ Show Value
+eo Montri valoron
+
+@ Sigils
+eo Runoj
+
+@ Status
+eo Stato
+
+@ Status Bar
+eo Statobreto
+
+@ Visibility
+eo Videbleco
+
+@ big numbers
+eo grandaj ciferoj
+
+@ center
+eo centro
+
+@ status + inventory
+eo stato + inventaro
+
+@ status only
+eo nur stato
+
+@ Text Color
+eo Teksta koloro
+
+@ Label Color
+eo Etikeda koloro
+
+@ HUD Preset
+eo HUD-antaŭagordo
+
+@ custom
+eo propra
+
+@ classic
+eo klasika
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ eo Limigas nombron de makuloj, ilian daŭron, flugantajn gutojn kaj pentradon de
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 eo Limigas la enigon de la ombrigilo al la eliga grando, por ke 200% bildiga skalo tenu 3D-akrecon sen 4-obla kosto; malaltaj skaloj restas malaltdistingivaj
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-eo Klasika: la originala statusbreto; moderna: kompaktaj elementoj ĉe la ekranrandoj
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 eo Distingivo de la tegaĵa atlaso, rekonstrua rapido kaj detaleco de ombrigilo: malalta konstruas pli malgrandajn tegaĵojn malpli ofte kun rapida ombrigo; alta uzas plenan detalecon
 
@@ -1629,9 +1679,6 @@ eo Koloro de la spirala spuro de la relpafilo; ĉiu ludanto en dividita ekrano r
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 eo Damaĝo, kiun la relpafilo kaŭzas al ĉiu trapikita malamiko (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-eo Malhela fono malantaŭ surekranaj mesaĝoj por pli bona legebleco
 
 @ Dark border keeps the crosshair visible on any background
 eo Malhela bordero tenas la celilon videbla sur ajna fono
@@ -1879,17 +1926,11 @@ eo Ondantaj lumdesegnoj sur surfacoj sub akvo kaj ŝlimo
 @ Scales all damage you take; above 100% is harder
 eo Skalas ĉiun damaĝon, kiun vi ricevas; super 100% estas pli malfacile
 
-@ Screen edge for this element; elements on the same spot stack
-eo Ekranrando por ĉi tiu elemento; elementoj en la sama loko stakiĝas
-
 @ Seconds a monster hit by the boomerang stays stunned
 eo Sekundoj dum kiuj monstro trafita de la bumerango restas svenigita
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 eo Sekundoj dum kiuj trafmakuloj kaj enfiksitaj najloj restas antaŭ ol forvelki; sendepende de Kvalito de partikloj
-
-@ Seconds messages at the top of the screen stay up
-eo Sekundoj dum kiuj mesaĝoj supre de la ekrano restas videblaj
 
 @ Seconds the flick stick snap takes; lower is faster
 eo Sekundoj, kiujn daŭras la flick stick-turno; malpli estas pli rapide
@@ -2063,9 +2104,6 @@ eo Montras la horon laŭ la elektita formato
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 eo La tempo de la nivelo, kiel sur la interakta ekrano; ĝi haltas dum paŭzo kaj ĉe la elirejo
 
-@ Your best time on this map and skill, next to the timer (single player)
-eo Via plej bona tempo en ĉi tiu mapo kaj malfacileco, apud la tempomezurilo (unu ludanto)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 eo any%: ajna fino; 100%: ĉiuj mortigoj kaj sekretoj. Konservaj kartoj montras ĉi tiun unue
 
@@ -2074,9 +2112,6 @@ eo Koloro de la persona rekordo en la HUD kaj konservaj kartoj
 
 @ Shown as a count or as a percentage of the level's total
 eo Kiel nombro aŭ kiel procento de la tuto de la nivelo
-
-@ Where this goes on screen; items at the same position share a line
-eo Kie ĝi estas sur la ekrano; eroj ĉe la sama pozicio dividas linion
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 eo Konservas la demonstraĵon de ĉiu nivelo kun nova persona rekordo; malnovaj restas. Registras eĉ sen aŭtomata registrado
@@ -2099,6 +2134,12 @@ eo Tempo de grafika karto por kadro en milisekundoj
 
 @ Video memory in use and what the driver allows, where it reports it
 eo Uzata videomemoro kaj kiom la pelilo permesas, kie ĝi raportas tion
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+eo Movu, regrandigu, aldonu kaj forigu HUD-elementojn: sano, municio, armiloj, tempomezuriloj, mesaĝoj kaj pli
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+eo Moderna: kompaktaj elementoj ĉe la ekranrandoj; klasika: la originala statobreto. Elekto de unu restarigas la HUD; ŝanĝoj en Redakti HUD faras ĝin propra
 
 # ==== ui.txt ====
 

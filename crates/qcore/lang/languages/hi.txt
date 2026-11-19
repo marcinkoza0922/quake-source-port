@@ -103,9 +103,6 @@ hi एम्बिएंट ऑक्लूज़न
 @ Ammo Counts
 hi एम्मो गिनती
 
-@ Ammo Counts Position
-hi एम्मो गिनती की जगह
-
 @ Ammo Pickups
 hi एम्मो पिकअप
 
@@ -120,9 +117,6 @@ hi इन पर लागू
 
 @ Armor
 hi आर्मर
-
-@ Armor Position
-hi आर्मर की जगह
 
 @ Ask
 hi पूछें
@@ -220,9 +214,6 @@ hi कॉस्टिक्स
 @ Center
 hi बीच में
 
-@ Center Message Position
-hi केंद्र संदेश की जगह
-
 @ Center Message Time
 hi केंद्र संदेश का समय
 
@@ -282,9 +273,6 @@ hi क्रॉसहेयर आकार
 
 @ Current Ammo
 hi मौजूदा एम्मो
-
-@ Current Ammo Position
-hi मौजूदा एम्मो की जगह
 
 @ Customize This Game
 hi इस गेम को कस्टमाइज़ करें
@@ -469,17 +457,11 @@ hi जाइरो निशाना
 @ HUD
 hi HUD
 
-@ HUD Style
-hi HUD शैली
-
 @ Health
 hi हेल्थ
 
 @ Health Pickups
 hi हेल्थ पिकअप
-
-@ Health Position
-hi हेल्थ की जगह
 
 @ Health Regeneration
 hi हेल्थ रीजनरेशन
@@ -589,9 +571,6 @@ hi छलाँगें
 @ Keys & Powerups
 hi चाबियाँ और पावरअप
 
-@ Keys & Powerups Position
-hi चाबियों और पावरअप की जगह
-
 @ Kill Bonus (x)
 hi किल बोनस (x)
 
@@ -661,15 +640,6 @@ hi अधिकतम रेंज
 @ Melee only
 hi केवल हाथापाई
 
-@ Message Background
-hi संदेश पृष्ठभूमि
-
-@ Message Text Size
-hi संदेश टेक्स्ट आकार
-
-@ Messages & Captions
-hi संदेश और कैप्शन
-
 @ Meter Duration (real seconds)
 hi मीटर अवधि (असली सेकंड)
 
@@ -681,9 +651,6 @@ hi मोड
 
 @ Modern Console
 hi आधुनिक कंसोल
-
-@ Modern HUD Layout
-hi आधुनिक HUD लेआउट
 
 @ Most recent save
 hi सबसे नया सेव
@@ -732,9 +699,6 @@ hi नॉइज़ फ़िल्टर
 
 @ Normal Color
 hi सामान्य रंग
-
-@ Notify Message Position
-hi सूचना संदेश की जगह
 
 @ Notify Message Time
 hi सूचना संदेश का समय
@@ -928,17 +892,11 @@ hi बायाँ कंधा
 @ Shoulder right
 hi दायाँ कंधा
 
-@ Show FPS
-hi FPS दिखाएँ
-
 @ Show Face
 hi चेहरा दिखाएँ
 
 @ Shrapnel
 hi छर्रे
-
-@ Size of on-screen messages and captions
-hi ऑन-स्क्रीन संदेशों और कैप्शन का आकार
 
 @ Skill
 hi कठिनाई
@@ -1108,15 +1066,6 @@ hi हथियार व्हील पर धीमापन
 @ Weapons
 hi हथियार
 
-@ Weapons Position
-hi हथियारों की जगह
-
-@ Where center-screen messages appear
-hi स्क्रीन के बीच वाले संदेश कहाँ दिखते हैं
-
-@ Where pickup and event messages appear
-hi पिकअप और घटना संदेश कहाँ दिखते हैं
-
 @ White
 hi सफ़ेद
 
@@ -1156,9 +1105,6 @@ hi बॉक्स
 
 @ broken square
 hi टूटा वर्ग
-
-@ classic
-hi क्लासिक
 
 @ coarse
 hi मोटा
@@ -1247,29 +1193,17 @@ hi तीव्र
 @ large
 hi बड़ा
 
-@ larger
-hi और बड़ा
-
-@ largest
-hi सबसे बड़ा
-
 @ linear
 hi लीनियर
 
 @ low
 hi निम्न
 
-@ lower
-hi नीचे
-
 @ magenta
 hi मैजेंटा
 
 @ medium
 hi मध्यम
-
-@ middle
-hi बीच
 
 @ middle left
 hi बीच बाएँ
@@ -1357,9 +1291,6 @@ hi तिहरा
 
 @ tritanopia
 hi ट्राइटानोपिया
-
-@ upper
-hi ऊपर
 
 @ white
 hi सफ़ेद
@@ -1491,9 +1422,6 @@ hi समय और आँकड़े
 @ Clock
 hi घड़ी
 
-@ Clock Position
-hi घड़ी की जगह
-
 @ Level Timer
 hi लेवल टाइमर
 
@@ -1506,17 +1434,11 @@ hi सर्वश्रेष्ठ का प्रकार
 @ Personal Best Color
 hi सर्वश्रेष्ठ का रंग
 
-@ Timer Position
-hi टाइमर की जगह
-
 @ Kills
 hi किल
 
 @ Secrets
 hi रहस्य
-
-@ Kills & Secrets Position
-hi किल और रहस्यों की जगह
 
 @ 24-hour
 hi 24 घंटे
@@ -1564,8 +1486,139 @@ hi GPU समय
 @ Video Memory
 hi वीडियो मेमोरी
 
-@ Metrics Position
-hi मापदंडों की जगह
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+hi जोड़ें
+
+@ Ammo
+hi गोला-बारूद
+
+@ Ammo Bar
+hi गोला-बारूद पट्टी
+
+@ Armor Bar
+hi कवच पट्टी
+
+@ Background
+hi पृष्ठभूमि
+
+@ Cells
+hi सेल
+
+@ Center Message
+hi केंद्र संदेश
+
+@ Columns
+hi कॉलम
+
+@ Edit HUD
+hi HUD संपादित करें
+
+@ FPS
+hi FPS
+
+@ Face
+hi चेहरा
+
+@ Fill Width
+hi पूरी चौड़ाई
+
+@ Font
+hi फ़ॉन्ट
+
+@ Format
+hi प्रारूप
+
+@ HUD Editor
+hi HUD संपादक
+
+@ Health Bar
+hi स्वास्थ्य पट्टी
+
+@ Inventory
+hi सामान
+
+@ Keys
+hi चाबियाँ
+
+@ Nails
+hi कीलें
+
+@ Notify Messages
+hi सूचना संदेश
+
+@ Position
+hi स्थिति
+
+@ Powerups
+hi पावरअप
+
+@ Precision
+hi सटीकता
+
+@ Quake
+hi Quake
+
+@ Rockets
+hi रॉकेट
+
+@ Scale
+hi पैमाना
+
+@ Sections
+hi भाग
+
+@ Shells
+hi शेल
+
+@ Show As
+hi ऐसे दिखाएँ
+
+@ Show Icon
+hi आइकन दिखाएँ
+
+@ Show Value
+hi मान दिखाएँ
+
+@ Sigils
+hi सिगिल
+
+@ Status
+hi स्थिति जानकारी
+
+@ Status Bar
+hi स्थिति पट्टी
+
+@ Visibility
+hi दृश्यता
+
+@ big numbers
+hi बड़े अंक
+
+@ center
+hi केंद्र
+
+@ status + inventory
+hi स्थिति + सामान
+
+@ status only
+hi केवल स्थिति
+
+@ Text Color
+hi टेक्स्ट का रंग
+
+@ Label Color
+hi लेबल का रंग
+
+@ HUD Preset
+hi HUD प्रीसेट
+
+@ custom
+hi कस्टम
+
+@ classic
+hi क्लासिक
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ hi निशानों की संख्या, अवधि, हवा म�
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 hi शेडर इनपुट को आउटपुट आकार तक सीमित करता है ताकि 200% रेंडर स्केल पर 3D तीखा रहे पर शेडर का खर्च 4x न हो; कम स्केल कम रिज़ॉल्यूशन पर ही रहते हैं
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-hi क्लासिक: मूल स्टेटस बार; आधुनिक: स्क्रीन के किनारों पर छोटे तत्व
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 hi जेल परत एटलस का रिज़ॉल्यूशन, दोबारा बनाने की दर और शेडर विवरण: निम्न छोटी परतें कम बार और तेज़ शेडिंग से बनाता है; उच्च पूरा विवरण इस्तेमाल करता है
 
@@ -1629,9 +1679,6 @@ hi रेलगन की सर्पिल ट्रेल का रंग; �
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 hi रेलगन जिस भी दुश्मन को भेदती है उसे होने वाला डैमेज (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-hi पढ़ने में आसानी के लिए ऑन-स्क्रीन संदेशों के पीछे गहरी पृष्ठभूमि
 
 @ Dark border keeps the crosshair visible on any background
 hi गहरी किनारी से क्रॉसहेयर हर पृष्ठभूमि पर दिखता रहता है
@@ -1879,17 +1926,11 @@ hi पानी और स्लाइम के नीचे सतहों �
 @ Scales all damage you take; above 100% is harder
 hi आपको मिलने वाले सारे डैमेज को घटाता-बढ़ाता है; 100% से ऊपर ज़्यादा कठिन है
 
-@ Screen edge for this element; elements on the same spot stack
-hi इस तत्व के लिए स्क्रीन का किनारा; एक ही जगह के तत्व एक के ऊपर एक लगते हैं
-
 @ Seconds a monster hit by the boomerang stays stunned
 hi बूमरैंग लगने पर मॉन्स्टर कितने सेकंड स्टन रहता है
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 hi प्रहार के निशान और धँसी कीलें मिटने से पहले कितने सेकंड रहती हैं; पार्टिकल गुणवत्ता से स्वतंत्र
-
-@ Seconds messages at the top of the screen stay up
-hi स्क्रीन के ऊपर संदेश कितने सेकंड दिखते हैं
 
 @ Seconds the flick stick snap takes; lower is faster
 hi फ़्लिक स्टिक से मुड़ने में लगने वाले सेकंड; कम यानी तेज़
@@ -2063,9 +2104,6 @@ hi चुने गए प्रारूप में दिन का सम�
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 hi लेवल का समय, इंटरमिशन स्क्रीन की तरह; रोकने पर और निकास पर थम जाता है
 
-@ Your best time on this map and skill, next to the timer (single player)
-hi इस मैप और कठिनाई पर आपका सबसे अच्छा समय, टाइमर के पास (एकल खिलाड़ी)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 hi any%: कोई भी अंत; 100%: सारे किल और रहस्य। सेव कार्ड पहले यही दिखाते हैं
 
@@ -2074,9 +2112,6 @@ hi HUD और सेव कार्ड पर निजी सर्वश्�
 
 @ Shown as a count or as a percentage of the level's total
 hi संख्या के रूप में या लेवल के कुल के प्रतिशत के रूप में
-
-@ Where this goes on screen; items at the same position share a line
-hi यह स्क्रीन पर कहाँ है; एक ही जगह की चीज़ें एक पंक्ति साझा करती हैं
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 hi निजी सर्वश्रेष्ठ बनाने वाले हर लेवल का डेमो रखता है; पुराने बने रहते हैं। स्वतः रिकॉर्ड बंद होने पर भी रिकॉर्ड करता है
@@ -2099,6 +2134,12 @@ hi प्रति फ़्रेम ग्राफ़िक्स कार�
 
 @ Video memory in use and what the driver allows, where it reports it
 hi उपयोग में वीडियो मेमोरी और ड्राइवर की अनुमति, जहाँ वह बताता है
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+hi HUD तत्वों को हिलाएँ, आकार बदलें, जोड़ें और हटाएँ: स्वास्थ्य, गोला-बारूद, हथियार, टाइमर, संदेश और भी बहुत कुछ
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+hi आधुनिक: स्क्रीन के किनारों पर छोटे तत्व; क्लासिक: मूल स्थिति पट्टी। एक चुनने से HUD रीसेट हो जाता है; HUD संपादित करें में बदलाव इसे कस्टम बना देते हैं
 
 # ==== ui.txt ====
 

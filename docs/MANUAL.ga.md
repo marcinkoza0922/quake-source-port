@@ -206,8 +206,8 @@ Options → Inrochtaineacht:
 - Scagairí do dhathdhaille.
 - Crosribe inchumraithe: cruth, méid, imlíne, agus athrú datha ar sprioc nó
   ar mharú; marcóirí buailte roghnacha.
-- **Fotheidil Fuaime** agus socruithe teachtaireachtaí (Teachtaireachtaí &
-  Fotheidil), scálú téacs.
+- **Fotheidil Fuaime**; socraítear suíomh, méid agus fad teachtaireachtaí
+  agus fotheideal san eagarthóir HUD.
 - Ionsaí agus rith le scoránú (seachas coinneáil).
 - Sleamhnán luas an chluiche chun an cluiche ar fad a mhoilliú.
 - Uathaimsiú le táscaire glasála, agus socruithe cóin agus raoin.

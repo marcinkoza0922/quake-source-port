@@ -188,8 +188,8 @@ Options → Aðgengi:
 - Síur fyrir litblindu.
 - Stillanlegur miðkross: lögun, stærð, útlína og litaskipti á skotmarki eða
   við dráp; valfrjáls hittmerki.
-- **Hljóðskjátextar** og stillingar skilaboða (Skilaboð og skjátextar),
-  stærð texta.
+- **Hljóðskjátextar**; staðsetning, stærð og birtingartími skilaboða og
+  skjátexta eru stillt í HUD-ritlinum.
 - Árás og hlaup af/á (í stað þess að halda inni).
 - Sleði fyrir leikhraða til að hægja á öllum leiknum.
 - Sjálfvirk miðun með læsingarvísi og stillingum fyrir keilu og drægni.

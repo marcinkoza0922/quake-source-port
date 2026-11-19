@@ -188,8 +188,8 @@ Options → Tillgänglighet:
 - Färgblindhetsfilter.
 - Anpassningsbart hårkors: form, storlek, kontur och färgbyte vid mål
   eller vid dödande; valfria träffmarkörer.
-- **Ljudtextning** och meddelandeinställningar (Meddelanden & undertexter),
-  textskalning.
+- **Ljudtextning**; position, storlek och visningstid för meddelanden och
+  undertexter ställs in i HUD-redigeraren.
 - Växla (i stället för att hålla) attack och spring.
 - Ett reglage för spelhastighet som saktar ner hela spelet.
 - Autosikte med låsindikator och inställningar för kon och räckvidd.

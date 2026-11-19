@@ -2,6 +2,7 @@
 
 mod menu_controller;
 mod demo_seek;
+mod hud_preset;
 
 mod relaunch_tests {
     #[test]

@@ -103,9 +103,6 @@ gl Oclusión ambiental
 @ Ammo Counts
 gl Contadores de munición
 
-@ Ammo Counts Position
-gl Posición dos contadores de munición
-
 @ Ammo Pickups
 gl Munición recollida
 
@@ -120,9 +117,6 @@ gl Aplicar a
 
 @ Armor
 gl Armadura
-
-@ Armor Position
-gl Posición da armadura
 
 @ Ask
 gl Preguntar
@@ -220,9 +214,6 @@ gl Cáusticas
 @ Center
 gl Centro
 
-@ Center Message Position
-gl Posición das mensaxes centrais
-
 @ Center Message Time
 gl Duración das mensaxes centrais
 
@@ -282,9 +273,6 @@ gl Tamaño do punto de mira
 
 @ Current Ammo
 gl Munición actual
-
-@ Current Ammo Position
-gl Posición da munición actual
 
 @ Customize This Game
 gl Personalizar esta partida
@@ -469,17 +457,11 @@ gl Puntaría con xiroscopio
 @ HUD
 gl Interface
 
-@ HUD Style
-gl Estilo da interface
-
 @ Health
 gl Saúde
 
 @ Health Pickups
 gl Saúde recollida
-
-@ Health Position
-gl Posición da saúde
 
 @ Health Regeneration
 gl Rexeneración de saúde
@@ -589,9 +571,6 @@ gl Saltos
 @ Keys & Powerups
 gl Chaves e potenciadores
 
-@ Keys & Powerups Position
-gl Posición de chaves e potenciadores
-
 @ Kill Bonus (x)
 gl Bonificación por baixa (x)
 
@@ -661,15 +640,6 @@ gl Alcance máximo
 @ Melee only
 gl Só corpo a corpo
 
-@ Message Background
-gl Fondo das mensaxes
-
-@ Message Text Size
-gl Tamaño do texto das mensaxes
-
-@ Messages & Captions
-gl Mensaxes e subtítulos
-
 @ Meter Duration (real seconds)
 gl Duración do medidor (segundos reais)
 
@@ -681,9 +651,6 @@ gl Modo
 
 @ Modern Console
 gl Consola moderna
-
-@ Modern HUD Layout
-gl Deseño da interface moderna
 
 @ Most recent save
 gl Partida gardada máis recente
@@ -732,9 +699,6 @@ gl Filtro de ruído
 
 @ Normal Color
 gl Cor normal
-
-@ Notify Message Position
-gl Posición das notificacións
 
 @ Notify Message Time
 gl Duración das notificacións
@@ -928,17 +892,11 @@ gl ombreiro esquerdo
 @ Shoulder right
 gl ombreiro dereito
 
-@ Show FPS
-gl Mostrar FPS
-
 @ Show Face
 gl Mostrar a cara
 
 @ Shrapnel
 gl Metralla
-
-@ Size of on-screen messages and captions
-gl Tamaño das mensaxes e subtítulos en pantalla
 
 @ Skill
 gl Dificultade
@@ -1108,15 +1066,6 @@ gl Ralentización do selector de armas
 @ Weapons
 gl Armas
 
-@ Weapons Position
-gl Posición das armas
-
-@ Where center-screen messages appear
-gl Onde aparecen as mensaxes centrais
-
-@ Where pickup and event messages appear
-gl Onde aparecen as mensaxes de obxectos e eventos
-
 @ White
 gl Branco
 
@@ -1156,9 +1105,6 @@ gl caixa
 
 @ broken square
 gl cadrado roto
-
-@ classic
-gl clásico
 
 @ coarse
 gl groso
@@ -1247,29 +1193,17 @@ gl intenso
 @ large
 gl grande
 
-@ larger
-gl máis grande
-
-@ largest
-gl o máis grande
-
 @ linear
 gl lineal
 
 @ low
 gl baixa
 
-@ lower
-gl abaixo
-
 @ magenta
 gl maxenta
 
 @ medium
 gl media
-
-@ middle
-gl no medio
 
 @ middle left
 gl no medio á esquerda
@@ -1357,9 +1291,6 @@ gl triplo
 
 @ tritanopia
 gl tritanopía
-
-@ upper
-gl arriba
 
 @ white
 gl branco
@@ -1491,9 +1422,6 @@ gl Tempo e estatísticas
 @ Clock
 gl Reloxo
 
-@ Clock Position
-gl Posición do reloxo
-
 @ Level Timer
 gl Cronómetro do nivel
 
@@ -1506,17 +1434,11 @@ gl Tipo de marca
 @ Personal Best Color
 gl Cor da marca
 
-@ Timer Position
-gl Posición do cronómetro
-
 @ Kills
 gl Mortes
 
 @ Secrets
 gl Segredos
-
-@ Kills & Secrets Position
-gl Posición de mortes e segredos
 
 @ 24-hour
 gl 24 horas
@@ -1564,8 +1486,139 @@ gl Tempo da GPU
 @ Video Memory
 gl Memoria de vídeo
 
-@ Metrics Position
-gl Posición das métricas
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+gl Engadir
+
+@ Ammo
+gl Munición
+
+@ Ammo Bar
+gl Barra de munición
+
+@ Armor Bar
+gl Barra de armadura
+
+@ Background
+gl Fondo
+
+@ Cells
+gl Celas
+
+@ Center Message
+gl Mensaxe central
+
+@ Columns
+gl Columnas
+
+@ Edit HUD
+gl Editar a interface
+
+@ FPS
+gl FPS
+
+@ Face
+gl Cara
+
+@ Fill Width
+gl Ancho completo
+
+@ Font
+gl Tipo de letra
+
+@ Format
+gl Formato
+
+@ HUD Editor
+gl Editor da interface
+
+@ Health Bar
+gl Barra de saúde
+
+@ Inventory
+gl Inventario
+
+@ Keys
+gl Chaves
+
+@ Nails
+gl Cravos
+
+@ Notify Messages
+gl Notificacións
+
+@ Position
+gl Posición
+
+@ Powerups
+gl Potenciadores
+
+@ Precision
+gl Precisión
+
+@ Quake
+gl Quake
+
+@ Rockets
+gl Foguetes
+
+@ Scale
+gl Escala
+
+@ Sections
+gl Seccións
+
+@ Shells
+gl Cartuchos
+
+@ Show As
+gl Amosar como
+
+@ Show Icon
+gl Amosar icona
+
+@ Show Value
+gl Amosar valor
+
+@ Sigils
+gl Runas
+
+@ Status
+gl Estado
+
+@ Status Bar
+gl Barra de estado
+
+@ Visibility
+gl Visibilidade
+
+@ big numbers
+gl números grandes
+
+@ center
+gl centro
+
+@ status + inventory
+gl estado + inventario
+
+@ status only
+gl só estado
+
+@ Text Color
+gl Cor do texto
+
+@ Label Color
+gl Cor das etiquetas
+
+@ HUD Preset
+gl Predefinición da interface
+
+@ custom
+gl personalizada
+
+@ classic
+gl clásico
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ gl Limita o número e a duración das marcas, as pingas no aire e as manchas de 
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 gl Limita a entrada do sombreador ao tamaño de saída, así unha escala de renderizado do 200 % mantén a nitidez 3D sen cuadriplicar o seu custo; as escalas baixas seguen en baixa resolución
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-gl Clásico: a barra de estado orixinal; moderno: elementos compactos nos bordos da pantalla
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 gl Resolución do atlas de capas, frecuencia de reconstrución e detalle do sombreador: baixa crea capas máis pequenas con menos frecuencia e sombreado rápido; alta usa todo o detalle
 
@@ -1629,9 +1679,6 @@ gl Cor da estela en espiral do railgun; en pantalla dividida cada xogador recibe
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 gl Dano que inflixe o railgun a cada inimigo que atravesa (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-gl Fondo escuro tras as mensaxes en pantalla para lelas mellor
 
 @ Dark border keeps the crosshair visible on any background
 gl Un bordo escuro mantén visible o punto de mira sobre calquera fondo
@@ -1879,17 +1926,11 @@ gl Reflexos de luz ondulantes en superficies baixo a auga e o limo
 @ Scales all damage you take; above 100% is harder
 gl Escala todo o dano que recibes; por riba do 100 % é máis difícil
 
-@ Screen edge for this element; elements on the same spot stack
-gl Bordo da pantalla para este elemento; os elementos no mesmo sitio apílanse
-
 @ Seconds a monster hit by the boomerang stays stunned
 gl Segundos que queda atordado un monstro golpeado polo bumerán
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 gl Segundos que permanecen os impactos e os cravos cravados antes de esvaecerse; independente de Calidade das partículas
-
-@ Seconds messages at the top of the screen stay up
-gl Segundos que permanecen as mensaxes na parte superior da pantalla
 
 @ Seconds the flick stick snap takes; lower is faster
 gl Segundos que tarda o xiro do flick stick; menos é máis rápido
@@ -2063,9 +2104,6 @@ gl Mostra a hora do día no formato escollido
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 gl O tempo do nivel, como na pantalla de intermedio; detense en pausa e na saída
 
-@ Your best time on this map and skill, next to the timer (single player)
-gl O teu mellor tempo neste mapa e dificultade, xunto ao cronómetro (un xogador)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 gl any%: calquera final; 100%: todas as mortes e segredos. As fichas de partidas mostran esta primeiro
 
@@ -2074,9 +2112,6 @@ gl Cor da marca persoal no HUD e nas fichas de partidas
 
 @ Shown as a count or as a percentage of the level's total
 gl Como número ou como porcentaxe do total do nivel
-
-@ Where this goes on screen; items at the same position share a line
-gl Onde aparece na pantalla; os elementos na mesma posición comparten unha liña
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 gl Garda a demo de cada nivel que logra unha marca persoal; as antigas quedan. Grava mesmo sen demos automáticas
@@ -2099,6 +2134,12 @@ gl Tempo da tarxeta gráfica por fotograma en milisegundos
 
 @ Video memory in use and what the driver allows, where it reports it
 gl Memoria de vídeo en uso e a que permite o controlador, se o indica
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+gl Move, redimensiona, engade e quita elementos da interface: saúde, munición, armas, temporizadores, mensaxes e máis
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+gl Moderna: elementos compactos nos bordos da pantalla; clásica: a barra de estado orixinal. Escoller unha restablece a interface; os cambios en Editar a interface fana personalizada
 
 # ==== ui.txt ====
 

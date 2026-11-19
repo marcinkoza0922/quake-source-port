@@ -103,9 +103,6 @@ mk Амбиентна оклузија
 @ Ammo Counts
 mk Бројачи на муниција
 
-@ Ammo Counts Position
-mk Позиција на бројачите
-
 @ Ammo Pickups
 mk Подигање муниција
 
@@ -120,9 +117,6 @@ mk Примени на
 
 @ Armor
 mk Оклоп
-
-@ Armor Position
-mk Позиција на оклопот
 
 @ Ask
 mk Прашај
@@ -220,9 +214,6 @@ mk Каустика
 @ Center
 mk Центар
 
-@ Center Message Position
-mk Позиција на пораките во центар
-
 @ Center Message Time
 mk Време на пораките во центар
 
@@ -282,9 +273,6 @@ mk Големина на нишанот
 
 @ Current Ammo
 mk Тековна муниција
-
-@ Current Ammo Position
-mk Позиција на тековната муниција
 
 @ Customize This Game
 mk Прилагоди ја играва
@@ -469,17 +457,11 @@ mk Нишанење со жироскоп
 @ HUD
 mk HUD
 
-@ HUD Style
-mk Стил на HUD
-
 @ Health
 mk Здравје
 
 @ Health Pickups
 mk Подигање здравје
-
-@ Health Position
-mk Позиција на здравјето
 
 @ Health Regeneration
 mk Обновување здравје
@@ -589,9 +571,6 @@ mk Скокови
 @ Keys & Powerups
 mk Клучеви и засилувања
 
-@ Keys & Powerups Position
-mk Позиција на клучевите
-
 @ Kill Bonus (x)
 mk Бонус за убиство (x)
 
@@ -661,15 +640,6 @@ mk Максимален дострел
 @ Melee only
 mk Само близок бој
 
-@ Message Background
-mk Позадина на пораките
-
-@ Message Text Size
-mk Големина на текстот
-
-@ Messages & Captions
-mk Пораки и титлови
-
 @ Meter Duration (real seconds)
 mk Траење на скалата (реални секунди)
 
@@ -681,9 +651,6 @@ mk Режим
 
 @ Modern Console
 mk Модерна конзола
-
-@ Modern HUD Layout
-mk Модерен распоред на HUD
 
 @ Most recent save
 mk Последно зачувување
@@ -732,9 +699,6 @@ mk Филтер за шум
 
 @ Normal Color
 mk Нормална боја
-
-@ Notify Message Position
-mk Позиција на известувањата
 
 @ Notify Message Time
 mk Време на известувањата
@@ -928,17 +892,11 @@ mk Рамо лево
 @ Shoulder right
 mk Рамо десно
 
-@ Show FPS
-mk Прикажи FPS
-
 @ Show Face
 mk Прикажи лице
 
 @ Shrapnel
 mk Шрапнели
-
-@ Size of on-screen messages and captions
-mk Големина на пораките и титловите на екранот
 
 @ Skill
 mk Тежина
@@ -1108,15 +1066,6 @@ mk Забавување со тркалото
 @ Weapons
 mk Оружја
 
-@ Weapons Position
-mk Позиција на оружјата
-
-@ Where center-screen messages appear
-mk Каде се појавуваат пораките во центар
-
-@ Where pickup and event messages appear
-mk Каде се појавуваат пораките за предмети и настани
-
 @ White
 mk Бела
 
@@ -1156,9 +1105,6 @@ mk рамка
 
 @ broken square
 mk прекинат квадрат
-
-@ classic
-mk класичен
 
 @ coarse
 mk груб
@@ -1247,29 +1193,17 @@ mk силно
 @ large
 mk големо
 
-@ larger
-mk поголемо
-
-@ largest
-mk најголемо
-
 @ linear
 mk линеарно
 
 @ low
 mk ниско
 
-@ lower
-mk пониско
-
 @ magenta
 mk магента
 
 @ medium
 mk средно
-
-@ middle
-mk средина
 
 @ middle left
 mk средина лево
@@ -1357,9 +1291,6 @@ mk троен
 
 @ tritanopia
 mk тританопија
-
-@ upper
-mk погоре
 
 @ white
 mk бела
@@ -1491,9 +1422,6 @@ mk Време и статистика
 @ Clock
 mk Часовник
 
-@ Clock Position
-mk Позиција на часовникот
-
 @ Level Timer
 mk Тајмер на нивото
 
@@ -1506,17 +1434,11 @@ mk Вид рекорд
 @ Personal Best Color
 mk Боја на рекордот
 
-@ Timer Position
-mk Позиција на тајмерот
-
 @ Kills
 mk Убиства
 
 @ Secrets
 mk Тајни
-
-@ Kills & Secrets Position
-mk Позиција на убиства и тајни
 
 @ 24-hour
 mk 24-часовен
@@ -1564,8 +1486,139 @@ mk GPU време
 @ Video Memory
 mk Видео меморија
 
-@ Metrics Position
-mk Позиција на показателите
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+mk Додај
+
+@ Ammo
+mk Муниција
+
+@ Ammo Bar
+mk Лента за муниција
+
+@ Armor Bar
+mk Лента за оклоп
+
+@ Background
+mk Позадина
+
+@ Cells
+mk Ќелии
+
+@ Center Message
+mk Порака во центар
+
+@ Columns
+mk Колони
+
+@ Edit HUD
+mk Уреди HUD
+
+@ FPS
+mk FPS
+
+@ Face
+mk Лице
+
+@ Fill Width
+mk Цела ширина
+
+@ Font
+mk Фонт
+
+@ Format
+mk Формат
+
+@ HUD Editor
+mk Уредувач на HUD
+
+@ Health Bar
+mk Лента за здравје
+
+@ Inventory
+mk Инвентар
+
+@ Keys
+mk Клучеви
+
+@ Nails
+mk Клинци
+
+@ Notify Messages
+mk Известувања
+
+@ Position
+mk Позиција
+
+@ Powerups
+mk Засилувања
+
+@ Precision
+mk Прецизност
+
+@ Quake
+mk Quake
+
+@ Rockets
+mk Ракети
+
+@ Scale
+mk Размер
+
+@ Sections
+mk Делови
+
+@ Shells
+mk Сачми
+
+@ Show As
+mk Прикажи како
+
+@ Show Icon
+mk Прикажи икона
+
+@ Show Value
+mk Прикажи вредност
+
+@ Sigils
+mk Руни
+
+@ Status
+mk Состојба
+
+@ Status Bar
+mk Лента за состојба
+
+@ Visibility
+mk Видливост
+
+@ big numbers
+mk големи цифри
+
+@ center
+mk центар
+
+@ status + inventory
+mk состојба + инвентар
+
+@ status only
+mk само состојба
+
+@ Text Color
+mk Боја на текстот
+
+@ Label Color
+mk Боја на ознаките
+
+@ HUD Preset
+mk Шаблон на HUD
+
+@ custom
+mk сопствен
+
+@ classic
+mk класичен
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ mk Ограничува број траги, траење, капки во во�
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 mk Го ограничува влезот на шејдерот на излезната големина, така 200% скала на рендерирање ја задржува 3D острината без 4x цена на шејдерот; ниските скали остануваат со ниска резолуција
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-mk Класичен: оригиналната статусна лента; модерен: компактни елементи на рабовите на екранот
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 mk Резолуција на атласот на премазот, брзина на обновување и детали на шејдерот: ниско гради помали премази поретко со брзо сенчење; високо користи полни детали
 
@@ -1629,9 +1679,6 @@ mk Боја на спиралната трага на рејлганот; сек
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 mk Штета што рејлганот ја нанесува на секој непријател низ кој минува (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-mk Темна позадина зад пораките на екранот за подобра читливост
 
 @ Dark border keeps the crosshair visible on any background
 mk Темен раб го држи нишанот видлив на секоја позадина
@@ -1879,17 +1926,11 @@ mk Брановидни светлосни шари на површините п
 @ Scales all damage you take; above 100% is harder
 mk Ја скалира целата штета што ја примаш; над 100% е потешко
 
-@ Screen edge for this element; elements on the same spot stack
-mk Раб на екранот за овој елемент; елементите на исто место се редат еден до друг
-
 @ Seconds a monster hit by the boomerang stays stunned
 mk Секунди колку чудовиштето погодено со бумерангот останува зашеметено
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 mk Секунди колку трагите од удари и забиените клинци остануваат пред да избледат; независно од Квалитет на честичките
-
-@ Seconds messages at the top of the screen stay up
-mk Секунди колку остануваат пораките на врвот на екранот
 
 @ Seconds the flick stick snap takes; lower is faster
 mk Секунди за свртувањето на флик-стикот; помалку е побрзо
@@ -2063,9 +2104,6 @@ mk Го прикажува времето во избраниот формат
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 mk Времето на нивото, како на екранот со резултати; запира при пауза и на излезот
 
-@ Your best time on this map and skill, next to the timer (single player)
-mk Вашето најдобро време на оваа мапа и тежина, до тајмерот (еден играч)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 mk any%: секое завршување; 100%: сите убиства и тајни. Картичките на зачувувањата го прикажуваат ова прво
 
@@ -2074,9 +2112,6 @@ mk Боја на личниот рекорд на HUD и на картичкит
 
 @ Shown as a count or as a percentage of the level's total
 mk Како број или како процент од вкупното на нивото
-
-@ Where this goes on screen; items at the same position share a line
-mk Каде е на екранот; ставките на иста позиција делат ред
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 mk Го чува демото на секое ниво со нов личен рекорд; старите остануваат. Снима и без автоматско снимање
@@ -2099,6 +2134,12 @@ mk Време на графичката картичка по кадар во м
 
 @ Video memory in use and what the driver allows, where it reports it
 mk Зафатена видео меморија и колку дозволува драјверот, ако го пријавува
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+mk Преместувајте, менувајте големина, додавајте и отстранувајте елементи на HUD: здравје, муниција, оружја, тајмери, пораки и повеќе
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+mk Модерен: компактни елементи на рабовите на екранот; класичен: оригиналната лента за состојба. Изборот го ресетира HUD; промените во Уреди HUD го прават сопствен
 
 # ==== ui.txt ====
 

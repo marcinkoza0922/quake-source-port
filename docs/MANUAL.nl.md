@@ -195,8 +195,8 @@ Options → Toegankelijkheid:
 - Kleurenblindheidsfilters.
 - Instelbaar vizier: vorm, grootte, rand en kleurwissel op een doelwit of
   bij een kill; optionele hitmarkers.
-- **Geluidsondertitels** en berichtinstellingen (Berichten & ondertitels),
-  tekstschaal.
+- **Geluidsondertitels**; positie, grootte en duur van berichten en
+  ondertitels stel je in de HUD-editor in.
 - Aanvallen en rennen aan/uit (in plaats van vasthouden).
 - Een schuifregelaar voor spelsnelheid om het hele spel te vertragen.
 - Auto-richten met een lock-on-indicator en instellingen voor kegel en

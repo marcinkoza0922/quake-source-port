@@ -189,8 +189,8 @@ Options → Tilgængelighed:
 - Farveblindhedsfiltre.
 - Konfigurerbart sigtekorn: form, størrelse, omrids og farveskift på et
   mål eller ved et drab; valgfrie træfmarkører.
-- **Lydundertekster** og beskedindstillinger (Beskeder & undertekster),
-  tekstskalering.
+- **Lydundertekster**; placering, størrelse og visningstid for beskeder og
+  undertekster indstilles i HUD-editoren.
 - Angreb og løb som til/fra (i stedet for at holde).
 - En skyder for spilhastighed, der sænker hele spillets tempo.
 - Automatisk sigte med låseindikator samt indstillinger for kegle og

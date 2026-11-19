@@ -41,6 +41,7 @@ mod render;
 mod speed;
 mod level_time;
 mod metrics;
+mod hud_frame;
 mod split;
 mod split_input;
 #[cfg(test)]
@@ -70,8 +71,6 @@ mod touch;
 /// Server tic rate when rendering faster (ironwail-style decoupling).
 const SERVER_TIC: f64 = 1.0 / 72.0;
 
-/// Virtual rows taken by the classic status bar + inventory bar.
-const CLASSIC_SBAR_LINES: f32 = 48.0;
 
 /// Quakespasm's default.cfg for games without one (the 2021 re-release).
 const DEFAULT_CFG: &str = include_str!("default.cfg");
@@ -148,7 +147,7 @@ pub struct Host {
     /// Player 1's weapon selection.
     toy: crate::addons::WeaponSelection,
     captions: crate::captions::Captions,
-    hud_fade: crate::sbar::HudFade,
+    hud: crate::hud::Hud,
     feedback: feedback::Feedback,
     feedback_sounds: feedback::CueCache,
     portal_fx: crate::addons::portal_fx::Presentation,
@@ -315,7 +314,7 @@ impl Host {
             wheel: Default::default(),
             toy: Default::default(),
             captions: Default::default(),
-            hud_fade: Default::default(),
+            hud: Default::default(),
             feedback: Default::default(),
             feedback_sounds: Default::default(),
             portal_fx: Default::default(),

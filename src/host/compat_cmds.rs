@@ -23,15 +23,21 @@ pub(super) fn register(c: &mut Commands<Host>) {
     });
     register_skywind(c);
     // ironwail's HUD style cvar is `hudstyle` (0 classic, 1/2 modern
-    // variants, 3 QuakeWorld); qbj3's QC stuffs it from an impulse.
+    // variants, 3 QuakeWorld); qbj3's QC stuffs it from an impulse. It
+    // picks our classic or modern preset; a custom HUD only gives way to
+    // classic.
     c.add("hudstyle", |h, a| {
+        let preset = h.cv("hud_preset") as i32;
         if a.argc() < 2 {
-            let v = h.cv("scr_hudstyle");
-            h.print(&format!("\"hudstyle\" is \"{}\" (scr_hudstyle)\n", v as i32));
+            h.print(&format!("\"hudstyle\" is \"{}\" (hud_preset)\n", i32::from(preset != 1)));
             return;
         }
         let v = qcore::cvar::q_atof(a.argv(1)) as i32;
-        h.exec_line(&format!("scr_hudstyle {}", i32::from(v == 1 || v == 2)));
+        if v == 0 {
+            h.exec_line("hud_preset 1");
+        } else if preset == 1 {
+            h.exec_line("hud_preset 0");
+        }
     });
     // S_Play / S_PlayVol / S_StopAllSoundsC: QC stuffs these too
     // (func_mapjam3, Mjolnir). A missing extension means ".wav".

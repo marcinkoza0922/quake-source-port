@@ -103,9 +103,6 @@ pa ਐਂਬੀਐਂਟ ਔਕਲੂਜ਼ਨ
 @ Ammo Counts
 pa ਗੋਲੀ-ਸਿੱਕੇ ਦੀ ਗਿਣਤੀ
 
-@ Ammo Counts Position
-pa ਗੋਲੀ-ਸਿੱਕਾ ਗਿਣਤੀ ਦੀ ਥਾਂ
-
 @ Ammo Pickups
 pa ਗੋਲੀ-ਸਿੱਕਾ ਪਿਕਅੱਪ
 
@@ -120,9 +117,6 @@ pa ਕਿਸ 'ਤੇ ਲਾਗੂ
 
 @ Armor
 pa ਕਵਚ
-
-@ Armor Position
-pa ਕਵਚ ਦੀ ਥਾਂ
 
 @ Ask
 pa ਪੁੱਛੋ
@@ -220,9 +214,6 @@ pa ਕੌਸਟਿਕਸ
 @ Center
 pa ਵਿਚਕਾਰ
 
-@ Center Message Position
-pa ਵਿਚਕਾਰਲੇ ਸੁਨੇਹੇ ਦੀ ਥਾਂ
-
 @ Center Message Time
 pa ਵਿਚਕਾਰਲੇ ਸੁਨੇਹੇ ਦਾ ਸਮਾਂ
 
@@ -282,9 +273,6 @@ pa ਕ੍ਰਾਸਹੇਅਰ ਆਕਾਰ
 
 @ Current Ammo
 pa ਮੌਜੂਦਾ ਗੋਲੀ-ਸਿੱਕਾ
-
-@ Current Ammo Position
-pa ਮੌਜੂਦਾ ਗੋਲੀ-ਸਿੱਕੇ ਦੀ ਥਾਂ
 
 @ Customize This Game
 pa ਇਹ ਗੇਮ ਕਸਟਮਾਈਜ਼ ਕਰੋ
@@ -469,17 +457,11 @@ pa ਜਾਇਰੋ ਨਿਸ਼ਾਨਾ
 @ HUD
 pa HUD
 
-@ HUD Style
-pa HUD ਸ਼ੈਲੀ
-
 @ Health
 pa ਸਿਹਤ
 
 @ Health Pickups
 pa ਸਿਹਤ ਪਿਕਅੱਪ
-
-@ Health Position
-pa ਸਿਹਤ ਦੀ ਥਾਂ
 
 @ Health Regeneration
 pa ਸਿਹਤ ਮੁੜ-ਭਰਾਈ
@@ -589,9 +571,6 @@ pa ਛਾਲਾਂ
 @ Keys & Powerups
 pa ਚਾਬੀਆਂ ਅਤੇ ਪਾਵਰ-ਅੱਪ
 
-@ Keys & Powerups Position
-pa ਚਾਬੀਆਂ ਅਤੇ ਪਾਵਰ-ਅੱਪ ਦੀ ਥਾਂ
-
 @ Kill Bonus (x)
 pa ਮਾਰਨ ਦਾ ਬੋਨਸ (x)
 
@@ -661,15 +640,6 @@ pa ਵੱਧ ਤੋਂ ਵੱਧ ਰੇਂਜ
 @ Melee only
 pa ਸਿਰਫ਼ ਹੱਥੋ-ਹੱਥ
 
-@ Message Background
-pa ਸੁਨੇਹੇ ਦੀ ਪਿੱਠਭੂਮੀ
-
-@ Message Text Size
-pa ਸੁਨੇਹੇ ਦੇ ਅੱਖਰਾਂ ਦਾ ਆਕਾਰ
-
-@ Messages & Captions
-pa ਸੁਨੇਹੇ ਅਤੇ ਕੈਪਸ਼ਨ
-
 @ Meter Duration (real seconds)
 pa ਮੀਟਰ ਮਿਆਦ (ਅਸਲ ਸਕਿੰਟ)
 
@@ -681,9 +651,6 @@ pa ਮੋਡ
 
 @ Modern Console
 pa ਆਧੁਨਿਕ ਕੰਸੋਲ
-
-@ Modern HUD Layout
-pa ਆਧੁਨਿਕ HUD ਖਾਕਾ
 
 @ Most recent save
 pa ਸਭ ਤੋਂ ਤਾਜ਼ਾ ਸੇਵ
@@ -732,9 +699,6 @@ pa ਨੌਇਜ਼ ਫ਼ਿਲਟਰ
 
 @ Normal Color
 pa ਆਮ ਰੰਗ
-
-@ Notify Message Position
-pa ਸੂਚਨਾ ਸੁਨੇਹੇ ਦੀ ਥਾਂ
 
 @ Notify Message Time
 pa ਸੂਚਨਾ ਸੁਨੇਹੇ ਦਾ ਸਮਾਂ
@@ -928,17 +892,11 @@ pa ਖੱਬੇ ਮੋਢੇ ਤੋਂ
 @ Shoulder right
 pa ਸੱਜੇ ਮੋਢੇ ਤੋਂ
 
-@ Show FPS
-pa FPS ਦਿਖਾਓ
-
 @ Show Face
 pa ਚਿਹਰਾ ਦਿਖਾਓ
 
 @ Shrapnel
 pa ਛੱਰੇ
-
-@ Size of on-screen messages and captions
-pa ਸਕ੍ਰੀਨ 'ਤੇ ਸੁਨੇਹਿਆਂ ਅਤੇ ਕੈਪਸ਼ਨਾਂ ਦਾ ਆਕਾਰ
 
 @ Skill
 pa ਮੁਸ਼ਕਲ
@@ -1108,15 +1066,6 @@ pa ਹਥਿਆਰ ਪਹੀਆ ਹੌਲੀ
 @ Weapons
 pa ਹਥਿਆਰ
 
-@ Weapons Position
-pa ਹਥਿਆਰਾਂ ਦੀ ਥਾਂ
-
-@ Where center-screen messages appear
-pa ਵਿਚਕਾਰਲੇ ਸੁਨੇਹੇ ਕਿੱਥੇ ਦਿਸਦੇ ਹਨ
-
-@ Where pickup and event messages appear
-pa ਪਿਕਅੱਪ ਅਤੇ ਘਟਨਾ ਸੁਨੇਹੇ ਕਿੱਥੇ ਦਿਸਦੇ ਹਨ
-
 @ White
 pa ਚਿੱਟਾ
 
@@ -1156,9 +1105,6 @@ pa ਡੱਬਾ
 
 @ broken square
 pa ਟੁੱਟਿਆ ਵਰਗ
-
-@ classic
-pa ਕਲਾਸਿਕ
 
 @ coarse
 pa ਮੋਟਾ
@@ -1247,29 +1193,17 @@ pa ਤੀਬਰ
 @ large
 pa ਵੱਡਾ
 
-@ larger
-pa ਹੋਰ ਵੱਡਾ
-
-@ largest
-pa ਸਭ ਤੋਂ ਵੱਡਾ
-
 @ linear
 pa ਲੀਨੀਅਰ
 
 @ low
 pa ਘੱਟ
 
-@ lower
-pa ਹੇਠਲਾ
-
 @ magenta
 pa ਮੈਜੈਂਟਾ
 
 @ medium
 pa ਦਰਮਿਆਨਾ
-
-@ middle
-pa ਵਿਚਕਾਰ
 
 @ middle left
 pa ਵਿਚਕਾਰ ਖੱਬੇ
@@ -1357,9 +1291,6 @@ pa ਤੀਹਰਾ
 
 @ tritanopia
 pa ਟ੍ਰਾਈਟਾਨੋਪੀਆ
-
-@ upper
-pa ਉੱਪਰਲਾ
 
 @ white
 pa ਚਿੱਟਾ
@@ -1491,9 +1422,6 @@ pa ਸਮਾਂ ਅਤੇ ਅੰਕੜੇ
 @ Clock
 pa ਘੜੀ
 
-@ Clock Position
-pa ਘੜੀ ਦੀ ਥਾਂ
-
 @ Level Timer
 pa ਲੈਵਲ ਟਾਈਮਰ
 
@@ -1506,17 +1434,11 @@ pa ਸਰਵੋਤਮ ਦੀ ਕਿਸਮ
 @ Personal Best Color
 pa ਸਰਵੋਤਮ ਦਾ ਰੰਗ
 
-@ Timer Position
-pa ਟਾਈਮਰ ਦੀ ਥਾਂ
-
 @ Kills
 pa ਮਾਰੇ ਗਏ
 
 @ Secrets
 pa ਭੇਤ
-
-@ Kills & Secrets Position
-pa ਮਾਰੇ ਗਏ ਅਤੇ ਭੇਤਾਂ ਦੀ ਥਾਂ
 
 @ 24-hour
 pa 24 ਘੰਟੇ
@@ -1564,8 +1486,139 @@ pa GPU ਸਮਾਂ
 @ Video Memory
 pa ਵੀਡੀਓ ਮੈਮਰੀ
 
-@ Metrics Position
-pa ਮਾਪਾਂ ਦੀ ਥਾਂ
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+pa ਸ਼ਾਮਲ ਕਰੋ
+
+@ Ammo
+pa ਗੋਲਾ-ਬਾਰੂਦ
+
+@ Ammo Bar
+pa ਗੋਲਾ-ਬਾਰੂਦ ਪੱਟੀ
+
+@ Armor Bar
+pa ਕਵਚ ਪੱਟੀ
+
+@ Background
+pa ਪਿੱਠਭੂਮੀ
+
+@ Cells
+pa ਸੈੱਲ
+
+@ Center Message
+pa ਵਿਚਕਾਰਲਾ ਸੁਨੇਹਾ
+
+@ Columns
+pa ਕਾਲਮ
+
+@ Edit HUD
+pa HUD ਸੋਧੋ
+
+@ FPS
+pa FPS
+
+@ Face
+pa ਚਿਹਰਾ
+
+@ Fill Width
+pa ਪੂਰੀ ਚੌੜਾਈ
+
+@ Font
+pa ਫੌਂਟ
+
+@ Format
+pa ਫਾਰਮੈਟ
+
+@ HUD Editor
+pa HUD ਸੰਪਾਦਕ
+
+@ Health Bar
+pa ਸਿਹਤ ਪੱਟੀ
+
+@ Inventory
+pa ਸਮਾਨ
+
+@ Keys
+pa ਚਾਬੀਆਂ
+
+@ Nails
+pa ਕਿੱਲ
+
+@ Notify Messages
+pa ਸੂਚਨਾ ਸੁਨੇਹੇ
+
+@ Position
+pa ਸਥਿਤੀ
+
+@ Powerups
+pa ਪਾਵਰ-ਅੱਪ
+
+@ Precision
+pa ਸ਼ੁੱਧਤਾ
+
+@ Quake
+pa Quake
+
+@ Rockets
+pa ਰਾਕਟ
+
+@ Scale
+pa ਪੈਮਾਨਾ
+
+@ Sections
+pa ਹਿੱਸੇ
+
+@ Shells
+pa ਕਾਰਤੂਸ
+
+@ Show As
+pa ਇੰਝ ਦਿਖਾਓ
+
+@ Show Icon
+pa ਆਈਕਨ ਦਿਖਾਓ
+
+@ Show Value
+pa ਮੁੱਲ ਦਿਖਾਓ
+
+@ Sigils
+pa ਸਿਗਿਲ
+
+@ Status
+pa ਹਾਲਤ
+
+@ Status Bar
+pa ਹਾਲਤ ਪੱਟੀ
+
+@ Visibility
+pa ਦਿੱਖ
+
+@ big numbers
+pa ਵੱਡੇ ਅੰਕ
+
+@ center
+pa ਵਿਚਕਾਰ
+
+@ status + inventory
+pa ਹਾਲਤ + ਸਮਾਨ
+
+@ status only
+pa ਸਿਰਫ਼ ਹਾਲਤ
+
+@ Text Color
+pa ਲਿਖਤ ਦਾ ਰੰਗ
+
+@ Label Color
+pa ਲੇਬਲ ਦਾ ਰੰਗ
+
+@ HUD Preset
+pa HUD ਪ੍ਰੀਸੈੱਟ
+
+@ custom
+pa ਆਪਣਾ
+
+@ classic
+pa ਕਲਾਸਿਕ
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ pa ਨਿਸ਼ਾਨਾਂ ਦੀ ਗਿਣਤੀ, ਉਮਰ, ਹਵਾ ਵਿ�
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 pa ਸ਼ੇਡਰ ਇਨਪੁਟ ਨੂੰ ਆਉਟਪੁਟ ਆਕਾਰ ਤੱਕ ਸੀਮਤ ਕਰਦਾ ਹੈ ਤਾਂ ਜੋ 200% ਰੈਂਡਰ ਪੈਮਾਨਾ 4x ਸ਼ੇਡਰ ਖ਼ਰਚ ਬਿਨਾਂ 3D ਤਿੱਖਾਪਨ ਰੱਖੇ; ਘੱਟ ਪੈਮਾਨੇ ਘੱਟ ਰੈਜ਼ੋਲਿਊਸ਼ਨ ਰਹਿੰਦੇ ਹਨ
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-pa ਕਲਾਸਿਕ: ਅਸਲ ਸਟੇਟਸ ਬਾਰ; ਆਧੁਨਿਕ: ਸਕ੍ਰੀਨ ਦੇ ਕਿਨਾਰਿਆਂ 'ਤੇ ਛੋਟੇ ਤੱਤ
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 pa ਪਰਤ ਐਟਲਸ ਰੈਜ਼ੋਲਿਊਸ਼ਨ, ਮੁੜ-ਬਣਾਉਣ ਦੀ ਦਰ ਅਤੇ ਸ਼ੇਡਰ ਵੇਰਵਾ: ਘੱਟ ਛੋਟੀਆਂ ਪਰਤਾਂ ਘੱਟ ਵਾਰ ਤੇਜ਼ ਸ਼ੇਡਿੰਗ ਨਾਲ ਬਣਾਉਂਦਾ ਹੈ; ਉੱਚ ਪੂਰਾ ਵੇਰਵਾ ਵਰਤਦਾ ਹੈ
 
@@ -1629,9 +1679,6 @@ pa ਰੇਲਗੰਨ ਦੀ ਚੱਕਰਦਾਰ ਲਕੀਰ ਦਾ ਰੰਗ
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 pa ਰੇਲਗੰਨ ਜਿਸ ਵੀ ਦੁਸ਼ਮਣ ਵਿੱਚੋਂ ਲੰਘਦੀ ਹੈ ਉਸ ਨੂੰ ਹੋਣ ਵਾਲਾ ਨੁਕਸਾਨ (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-pa ਪੜ੍ਹਨ ਵਿੱਚ ਆਸਾਨੀ ਲਈ ਸਕ੍ਰੀਨ ਸੁਨੇਹਿਆਂ ਪਿੱਛੇ ਗੂੜ੍ਹੀ ਪਿੱਠਭੂਮੀ
 
 @ Dark border keeps the crosshair visible on any background
 pa ਗੂੜ੍ਹਾ ਕਿਨਾਰਾ ਕ੍ਰਾਸਹੇਅਰ ਨੂੰ ਕਿਸੇ ਵੀ ਪਿੱਠਭੂਮੀ 'ਤੇ ਦਿਸਦਾ ਰੱਖਦਾ ਹੈ
@@ -1879,17 +1926,11 @@ pa ਪਾਣੀ ਅਤੇ ਚਿੱਕੜ ਹੇਠਲੀਆਂ ਸਤ੍ਹਾ�
 @ Scales all damage you take; above 100% is harder
 pa ਤੁਹਾਨੂੰ ਹੋਣ ਵਾਲੇ ਸਾਰੇ ਨੁਕਸਾਨ ਦਾ ਪੈਮਾਨਾ; 100% ਤੋਂ ਵੱਧ ਔਖਾ ਹੈ
 
-@ Screen edge for this element; elements on the same spot stack
-pa ਇਸ ਤੱਤ ਲਈ ਸਕ੍ਰੀਨ ਦਾ ਕਿਨਾਰਾ; ਇੱਕੋ ਥਾਂ ਵਾਲੇ ਤੱਤ ਇੱਕ ਦੂਜੇ ਉੱਤੇ ਲੱਗਦੇ ਹਨ
-
 @ Seconds a monster hit by the boomerang stays stunned
 pa ਬੂਮਰੈਂਗ ਲੱਗਣ 'ਤੇ ਰਾਖਸ਼ ਕਿੰਨੇ ਸਕਿੰਟ ਬੇਹੋਸ਼ ਰਹਿੰਦਾ ਹੈ
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 pa ਟੱਕਰ ਦੇ ਨਿਸ਼ਾਨ ਅਤੇ ਖੁੱਭੇ ਕਿੱਲ ਫਿੱਕੇ ਪੈਣ ਤੋਂ ਪਹਿਲਾਂ ਕਿੰਨੇ ਸਕਿੰਟ ਰਹਿੰਦੇ ਹਨ; ਕਣਾਂ ਦੀ ਗੁਣਵੱਤਾ ਤੋਂ ਅਲੱਗ
-
-@ Seconds messages at the top of the screen stay up
-pa ਸਕ੍ਰੀਨ ਦੇ ਉੱਪਰਲੇ ਸੁਨੇਹੇ ਕਿੰਨੇ ਸਕਿੰਟ ਦਿਸਦੇ ਹਨ
 
 @ Seconds the flick stick snap takes; lower is faster
 pa ਫ਼ਲਿੱਕ ਸਟਿੱਕ ਦੇ ਝਟਕੇ ਨੂੰ ਲੱਗਦੇ ਸਕਿੰਟ; ਘੱਟ ਵੱਧ ਤੇਜ਼ ਹੈ
@@ -2063,9 +2104,6 @@ pa ਚੁਣੇ ਫਾਰਮੈਟ ਵਿੱਚ ਦਿਨ ਦਾ ਸਮਾਂ �
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 pa ਲੈਵਲ ਦਾ ਸਮਾਂ, ਵਿਚਕਾਰਲੀ ਸਕ੍ਰੀਨ ਵਾਂਗ; ਰੋਕਣ ਤੇ ਅਤੇ ਬਾਹਰ ਨਿਕਲਣ ਤੇ ਰੁਕ ਜਾਂਦਾ ਹੈ
 
-@ Your best time on this map and skill, next to the timer (single player)
-pa ਇਸ ਨਕਸ਼ੇ ਅਤੇ ਔਖਿਆਈ ਤੇ ਤੁਹਾਡਾ ਸਭ ਤੋਂ ਵਧੀਆ ਸਮਾਂ, ਟਾਈਮਰ ਦੇ ਕੋਲ (ਇਕੱਲਾ ਖਿਡਾਰੀ)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 pa any%: ਕੋਈ ਵੀ ਅੰਤ; 100%: ਸਾਰੇ ਮਾਰੇ ਗਏ ਅਤੇ ਭੇਤ। ਸੇਵ ਕਾਰਡ ਪਹਿਲਾਂ ਇਹੀ ਦਿਖਾਉਂਦੇ ਹਨ
 
@@ -2074,9 +2112,6 @@ pa HUD ਅਤੇ ਸੇਵ ਕਾਰਡਾਂ ਤੇ ਨਿੱਜੀ ਸਰਵ�
 
 @ Shown as a count or as a percentage of the level's total
 pa ਗਿਣਤੀ ਵਜੋਂ ਜਾਂ ਲੈਵਲ ਦੇ ਕੁੱਲ ਦੇ ਪ੍ਰਤੀਸ਼ਤ ਵਜੋਂ
-
-@ Where this goes on screen; items at the same position share a line
-pa ਇਹ ਸਕ੍ਰੀਨ ਤੇ ਕਿੱਥੇ ਹੈ; ਇੱਕੋ ਥਾਂ ਦੀਆਂ ਚੀਜ਼ਾਂ ਇੱਕ ਲਾਈਨ ਸਾਂਝੀ ਕਰਦੀਆਂ ਹਨ
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 pa ਨਿੱਜੀ ਸਰਵੋਤਮ ਬਣਾਉਣ ਵਾਲੇ ਹਰ ਲੈਵਲ ਦਾ ਡੈਮੋ ਰੱਖਦਾ ਹੈ; ਪੁਰਾਣੇ ਰਹਿੰਦੇ ਹਨ। ਆਟੋ ਰਿਕਾਰਡ ਬੰਦ ਹੋਣ ਤੇ ਵੀ ਰਿਕਾਰਡ ਕਰਦਾ ਹੈ
@@ -2099,6 +2134,12 @@ pa ਪ੍ਰਤੀ ਫ੍ਰੇਮ ਗ੍ਰਾਫਿਕਸ ਕਾਰਡ ਦਾ 
 
 @ Video memory in use and what the driver allows, where it reports it
 pa ਵਰਤੋਂ ਵਿੱਚ ਵੀਡੀਓ ਮੈਮਰੀ ਅਤੇ ਡਰਾਈਵਰ ਦੀ ਇਜਾਜ਼ਤ, ਜਿੱਥੇ ਇਹ ਦੱਸਦਾ ਹੈ
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+pa HUD ਤੱਤਾਂ ਨੂੰ ਹਿਲਾਓ, ਆਕਾਰ ਬਦਲੋ, ਸ਼ਾਮਲ ਕਰੋ ਅਤੇ ਹਟਾਓ: ਸਿਹਤ, ਗੋਲਾ-ਬਾਰੂਦ, ਹਥਿਆਰ, ਟਾਈਮਰ, ਸੁਨੇਹੇ ਅਤੇ ਹੋਰ
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+pa ਆਧੁਨਿਕ: ਸਕ੍ਰੀਨ ਦੇ ਕਿਨਾਰਿਆਂ 'ਤੇ ਛੋਟੇ ਤੱਤ; ਕਲਾਸਿਕ: ਮੂਲ ਹਾਲਤ ਪੱਟੀ। ਇੱਕ ਚੁਣਨ ਨਾਲ HUD ਰੀਸੈੱਟ ਹੁੰਦਾ ਹੈ; HUD ਸੋਧੋ ਵਿੱਚ ਬਦਲਾਅ ਇਸਨੂੰ ਆਪਣਾ ਬਣਾਉਂਦੇ ਹਨ
 
 # ==== ui.txt ====
 

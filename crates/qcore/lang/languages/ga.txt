@@ -103,9 +103,6 @@ ga Coimhthiú Comhthimpeallach
 @ Ammo Counts
 ga Áireamh Armlóin
 
-@ Ammo Counts Position
-ga Suíomh Áireamh Armlóin
-
 @ Ammo Pickups
 ga Armlón a Phiocadh
 
@@ -120,9 +117,6 @@ ga Cuir i bhFeidhm Ar
 
 @ Armor
 ga Armúr
-
-@ Armor Position
-ga Suíomh an Armúir
 
 @ Ask
 ga Fiafraigh
@@ -220,9 +214,6 @@ ga Cáistic
 @ Center
 ga Lár
 
-@ Center Message Position
-ga Suíomh Teachtaireachtaí Láir
-
 @ Center Message Time
 ga Am Teachtaireachtaí Láir
 
@@ -282,9 +273,6 @@ ga Méid an Chrosribe
 
 @ Current Ammo
 ga Armlón Reatha
-
-@ Current Ammo Position
-ga Suíomh an Armlóin Reatha
 
 @ Customize This Game
 ga Saincheap an Cluiche Seo
@@ -469,17 +457,11 @@ ga Aimsiú Gíreascóip
 @ HUD
 ga HUD
 
-@ HUD Style
-ga Stíl HUD
-
 @ Health
 ga Sláinte
 
 @ Health Pickups
 ga Sláinte a Phiocadh
-
-@ Health Position
-ga Suíomh na Sláinte
 
 @ Health Regeneration
 ga Athghiniúint Sláinte
@@ -589,9 +571,6 @@ ga Léimeanna
 @ Keys & Powerups
 ga Eochracha & Cumhachtaí
 
-@ Keys & Powerups Position
-ga Suíomh Eochracha & Cumhachtaí
-
 @ Kill Bonus (x)
 ga Bónas Maraithe (x)
 
@@ -661,15 +640,6 @@ ga Uasraon
 @ Melee only
 ga Cóngarach amháin
 
-@ Message Background
-ga Cúlra Teachtaireachta
-
-@ Message Text Size
-ga Méid Téacs Teachtaireachta
-
-@ Messages & Captions
-ga Teachtaireachtaí & Fotheidil
-
 @ Meter Duration (real seconds)
 ga Fad an Mhéadair (fíorshoicindí)
 
@@ -681,9 +651,6 @@ ga Mód
 
 @ Modern Console
 ga Consól Nua-aimseartha
-
-@ Modern HUD Layout
-ga Leagan Amach Nua-aimseartha HUD
 
 @ Most recent save
 ga An sábháil is déanaí
@@ -732,9 +699,6 @@ ga Scagaire Torainn
 
 @ Normal Color
 ga Gnáthdhath
-
-@ Notify Message Position
-ga Suíomh Fógraí
 
 @ Notify Message Time
 ga Am Fógraí
@@ -928,17 +892,11 @@ ga Gualainn chlé
 @ Shoulder right
 ga Gualainn dheas
 
-@ Show FPS
-ga Taispeáin FPS
-
 @ Show Face
 ga Taispeáin Aghaidh
 
 @ Shrapnel
 ga Sceanfhéar
-
-@ Size of on-screen messages and captions
-ga Méid teachtaireachtaí agus fotheideal ar an scáileán
 
 @ Skill
 ga Deacracht
@@ -1108,15 +1066,6 @@ ga Moilliú an Rotha Arm
 @ Weapons
 ga Airm
 
-@ Weapons Position
-ga Suíomh na nArm
-
-@ Where center-screen messages appear
-ga An áit a dtaispeántar teachtaireachtaí i lár an scáileáin
-
-@ Where pickup and event messages appear
-ga An áit a dtaispeántar teachtaireachtaí piocála agus imeachtaí
-
 @ White
 ga Bán
 
@@ -1156,9 +1105,6 @@ ga bosca
 
 @ broken square
 ga cearnóg bhriste
-
-@ classic
-ga clasaiceach
 
 @ coarse
 ga garbh
@@ -1247,29 +1193,17 @@ ga dian
 @ large
 ga mór
 
-@ larger
-ga níos mó
-
-@ largest
-ga is mó
-
 @ linear
 ga líneach
 
 @ low
 ga íseal
 
-@ lower
-ga íochtar
-
 @ magenta
 ga maigeanta
 
 @ medium
 ga meánach
-
-@ middle
-ga lár
 
 @ middle left
 ga lár ar clé
@@ -1357,9 +1291,6 @@ ga faoi thrí
 
 @ tritanopia
 ga tritanóipe
-
-@ upper
-ga uachtar
 
 @ white
 ga bán
@@ -1491,9 +1422,6 @@ ga Am agus Staitisticí
 @ Clock
 ga Clog
 
-@ Clock Position
-ga Suíomh an Chloig
-
 @ Level Timer
 ga Amadóir an Leibhéil
 
@@ -1506,17 +1434,11 @@ ga Cineál Curiarrachta
 @ Personal Best Color
 ga Dath na Curiarrachta
 
-@ Timer Position
-ga Suíomh an Amadóra
-
 @ Kills
 ga Maruithe
 
 @ Secrets
 ga Rúin
-
-@ Kills & Secrets Position
-ga Suíomh na Maruithe agus na Rún
 
 @ 24-hour
 ga 24 uair
@@ -1564,8 +1486,139 @@ ga Am an GPU
 @ Video Memory
 ga Cuimhne Físe
 
-@ Metrics Position
-ga Suíomh na Méadrachtaí
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+ga Cuir leis
+
+@ Ammo
+ga Lón lámhaigh
+
+@ Ammo Bar
+ga Barra lóin
+
+@ Armor Bar
+ga Barra armúir
+
+@ Background
+ga Cúlra
+
+@ Cells
+ga Cealla
+
+@ Center Message
+ga Teachtaireacht Láir
+
+@ Columns
+ga Colúin
+
+@ Edit HUD
+ga Cuir an HUD in eagar
+
+@ FPS
+ga FPS
+
+@ Face
+ga Aghaidh
+
+@ Fill Width
+ga Leithead iomlán
+
+@ Font
+ga Cló
+
+@ Format
+ga Formáid
+
+@ HUD Editor
+ga Eagarthóir HUD
+
+@ Health Bar
+ga Barra sláinte
+
+@ Inventory
+ga Fardal
+
+@ Keys
+ga Eochracha
+
+@ Nails
+ga Tairní
+
+@ Notify Messages
+ga Fógraí
+
+@ Position
+ga Suíomh
+
+@ Powerups
+ga Cumhachtaí
+
+@ Precision
+ga Beachtas
+
+@ Quake
+ga Quake
+
+@ Rockets
+ga Roicéid
+
+@ Scale
+ga Scála
+
+@ Sections
+ga Codanna
+
+@ Shells
+ga Sliogáin
+
+@ Show As
+ga Taispeáin mar
+
+@ Show Icon
+ga Taispeáin deilbhín
+
+@ Show Value
+ga Taispeáin luach
+
+@ Sigils
+ga Rúin
+
+@ Status
+ga Stádas
+
+@ Status Bar
+ga Barra stádais
+
+@ Visibility
+ga Infheictheacht
+
+@ big numbers
+ga uimhreacha móra
+
+@ center
+ga lár
+
+@ status + inventory
+ga stádas + fardal
+
+@ status only
+ga stádas amháin
+
+@ Text Color
+ga Dath an téacs
+
+@ Label Color
+ga Dath na lipéad
+
+@ HUD Preset
+ga Réamhshocrú HUD
+
+@ custom
+ga saincheaptha
+
+@ classic
+ga clasaiceach
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ ga Teorannaíonn sé líon na rianta, a saolré, braonta san aer agus smálú cr
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 ga Teorannaíonn sé ionchur an scáthóra ag méid an aschuir, ionas go gcoinníonn scála rindreála 200% géire 3T gan costas scáthóra x4; fanann scálaí ísle ar thaifeach íseal
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-ga Clasaiceach: an barra stádais bunaidh; nua-aimseartha: eilimintí dlútha ag imill an scáileáin
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 ga Taifeach an atlais bratanna, ráta atógála agus mionsonraí scáthóra: tógann íseal bratanna níos lú níos annaimhe le scáthú tapa; úsáideann ard mionsonraí iomlána
 
@@ -1629,9 +1679,6 @@ ga Dath rian bíse an railgun; faigheann gach imreoir ar scáileán scoilte an c
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 ga An damáiste a dhéanann an railgun do gach namhaid a dtéann sé tríd (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-ga Cúlra dorcha taobh thiar de theachtaireachtaí ar an scáileán le go mbeidh siad soléite
 
 @ Dark border keeps the crosshair visible on any background
 ga Coinníonn imlíne dhorcha an crosribe le feiceáil ar aon chúlra
@@ -1879,17 +1926,11 @@ ga Patrúin solais chuilitheacha ar dhromchlaí faoi uisce agus faoi shláim
 @ Scales all damage you take; above 100% is harder
 ga Scálaíonn sé gach damáiste a fhaigheann tú; tá os cionn 100% níos deacra
 
-@ Screen edge for this element; elements on the same spot stack
-ga Imeall an scáileáin don eilimint seo; cruachtar eilimintí ar an láthair chéanna
-
 @ Seconds a monster hit by the boomerang stays stunned
 ga Soicindí a fhanann arracht a bhuail an búmarang i néal
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 ga Soicindí a fhanann rianta tuairte agus tairní greamaithe sula dtéann siad i léig; neamhspleách ar Cháilíocht na gCáithníní
-
-@ Seconds messages at the top of the screen stay up
-ga Soicindí a fhanann teachtaireachtaí ag barr an scáileáin
 
 @ Seconds the flick stick snap takes; lower is faster
 ga Soicindí a thógann léim an smeach-mhaide; is tapúla níos ísle
@@ -2063,9 +2104,6 @@ ga Taispeánann sé an t-am den lá san fhormáid roghnaithe
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 ga Am an leibhéil, mar a bhíonn ar an scáileán idirlinne; stopann sé le linn sosa agus ag an mbealach amach
 
-@ Your best time on this map and skill, next to the timer (single player)
-ga An t-am is fearr agat ar an léarscáil agus ar an deacracht seo, in aice leis an amadóir (imreoir aonair)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 ga any%: críoch ar bith; 100%: gach marú agus rún. Taispeánann cártaí sábhála é seo ar dtús
 
@@ -2074,9 +2112,6 @@ ga Dath na curiarrachta pearsanta ar an HUD agus ar chártaí sábhála
 
 @ Shown as a count or as a percentage of the level's total
 ga Mar líon nó mar chéatadán d'iomlán an leibhéil
-
-@ Where this goes on screen; items at the same position share a line
-ga Cá bhfuil sé ar an scáileán; roinneann míreanna sa suíomh céanna líne
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 ga Coinníonn sé taispeántas gach leibhéil a shocraíonn curiarracht phearsanta; fanann na seanchinn. Taifeadann sé fiú gan taifeadadh uathoibríoch
@@ -2099,6 +2134,12 @@ ga Am an chárta grafaice in aghaidh an fhráma i milleasoicindí
 
 @ Video memory in use and what the driver allows, where it reports it
 ga Cuimhne físe in úsáid agus an méid a cheadaíonn an tiománaí, nuair a thuairiscíonn sé é
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+ga Bog, athraigh méid, cuir leis agus bain eilimintí an HUD: sláinte, lón, airm, amadóirí, teachtaireachtaí agus tuilleadh
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+ga Nua-aimseartha: eilimintí dlútha ar imill an scáileáin; clasaiceach: an barra stádais bunaidh. Athshocraíonn rogha an HUD; déanann athruithe in Cuir an HUD in eagar saincheaptha é
 
 # ==== ui.txt ====
 

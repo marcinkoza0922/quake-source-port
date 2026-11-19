@@ -1,19 +1,15 @@
-//! HUD → Performance Metrics: frame rate (`scr_showfps`), frame time
-//! (`scr_showframetime`, average and worst frame), process CPU and memory
-//! (`scr_showcpu`, `scr_showram`, `qcore::procstat`), GPU time per frame
-//! (`scr_showgpu`, the renderer's pass timestamps) and video memory
-//! (`scr_showvram`, VK_EXT_memory_budget). Sampled every half second and
-//! drawn as `sbar::time` items at `scr_metrics_pos`, so they share lines
-//! with each other and with the Time & Stats items.
+//! The HUD's Performance Metrics elements (`crate::hud`): frame rate,
+//! frame time (average and worst frame), process CPU and memory
+//! (`qcore::procstat`), GPU time per frame (the renderer's pass
+//! timestamps) and video memory (VK_EXT_memory_budget). Sampled every half
+//! second while the layout has any of them.
 
 use super::*;
-use crate::sbar::time::{Item, Span};
+use crate::hud::kind::Kind;
 use qcore::procstat::{self, ProcStat};
 
 /// Seconds between samples.
 const PERIOD: f64 = 0.5;
-const LABEL: [f32; 4] = [0.85, 0.7, 0.35, 1.0];
-const VALUE: [f32; 4] = crate::draw::WHITE;
 
 #[derive(Default)]
 pub(super) struct Metrics {
@@ -55,21 +51,16 @@ fn mib(bytes: u64) -> u64 {
     (bytes + (1 << 19)) >> 20
 }
 
-fn item(anchor: crate::sbar::HudAnchor, label: &str, value: String) -> Item {
-    let span = |text: String, color| Span { text, color };
-    Item { anchor, spans: vec![span(format!("{label} "), LABEL), span(value, VALUE)] }
-}
-
 impl Host {
     fn metrics_shown(&self) -> Shown {
-        let on = |n: &str| self.cv(n) != 0.0;
+        let on = |k: Kind| self.hud.layout.elems.iter().any(|e| e.kind == k);
         Shown {
-            fps: on("scr_showfps"),
-            frame: on("scr_showframetime"),
-            cpu: on("scr_showcpu"),
-            ram: on("scr_showram"),
-            gpu: on("scr_showgpu"),
-            vram: on("scr_showvram"),
+            fps: on(Kind::Fps),
+            frame: on(Kind::FrameTime),
+            cpu: on(Kind::Cpu),
+            ram: on(Kind::Ram),
+            gpu: on(Kind::Gpu),
+            vram: on(Kind::Vram),
         }
     }
 
@@ -111,34 +102,17 @@ impl Host {
         }
     }
 
-    /// The metrics items to draw this frame.
-    pub(super) fn metrics_items(&self) -> Vec<Item> {
-        let shown = self.metrics_shown();
-        if !shown.any() {
-            return Vec::new();
-        }
-        let a = crate::sbar::HudAnchor::from_cvar(self.cv("scr_metrics_pos"));
+    /// The metric elements' values, `Kind::Fps` order.
+    pub(super) fn metric_values(&self) -> [String; 6] {
         let m = &self.metrics;
         let na = || "n/a".to_string();
-        let mut out = Vec::new();
-        if shown.fps {
-            out.push(item(a, "FPS", format!("{:.0}", m.fps)));
-        }
-        if shown.frame {
-            out.push(item(a, "Frame", format!("{:.1} ms, max {:.1}", m.frame_ms, m.worst_ms)));
-        }
-        if shown.cpu {
-            out.push(item(a, "CPU", m.cpu.map_or_else(na, |c| format!("{c:.0}%"))));
-        }
-        if shown.ram {
-            out.push(item(a, "RAM", m.rss.map_or_else(na, |r| format!("{} MB", mib(r)))));
-        }
-        if shown.gpu {
-            out.push(item(a, "GPU", m.gpu_ms.map_or_else(na, |g| format!("{g:.1} ms"))));
-        }
-        if shown.vram {
-            out.push(item(a, "VRAM", m.vram.map_or_else(na, |(used, budget)| format!("{}/{} MB", mib(used), mib(budget)))));
-        }
-        out
+        [
+            format!("{:.0}", m.fps),
+            format!("{:.1} ms, max {:.1}", m.frame_ms, m.worst_ms),
+            m.cpu.map_or_else(na, |c| format!("{c:.0}%")),
+            m.rss.map_or_else(na, |r| format!("{} MB", mib(r))),
+            m.gpu_ms.map_or_else(na, |g| format!("{g:.1} ms")),
+            m.vram.map_or_else(na, |(used, budget)| format!("{}/{} MB", mib(used), mib(budget))),
+        ]
     }
 }

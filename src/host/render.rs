@@ -6,10 +6,6 @@ impl Host {
         let (w, h) = self.r.size();
         let mut c = Canvas::new(w, h);
         self.con.notify_time = self.cv("con_notifytime").max(0.0) as f64;
-        self.con.text_bg = self.cv("scr_textbg") != 0.0;
-        self.con.text_scale = self.cv("scr_textscale");
-        self.con.center_pos = self.cv("scr_centerpos").clamp(0.0, 2.0) as u8;
-        self.con.notify_pos = self.cv("con_notifypos").clamp(0.0, 2.0) as u8;
         self.con.modern = self.cv("con_modern") != 0.0;
         self.con.alpha = self.cv("scr_conalpha");
         self.sync_shell_env();
@@ -165,10 +161,9 @@ impl Host {
         let equip_key = self.equip_wheel_key();
         let bullet_meter = self.cv("addon_bullet_time_meter") != 0.0;
         self.update_metrics(ft);
-        let metrics_items = self.metrics_items();
         let mut metrics_drawn = false;
         let speed = self.speedometer();
-        let classic = self.classic_hud();
+        let reserve = self.hud_reserve();
         let rays: Vec<_> = std::iter::once(&self.cl).chain(self.guests.iter().filter(|g| g.cl.signon == 4).map(|g| &g.cl))
             .map(|cl| {
                 let origin = cl.entities.get(cl.viewentity).map_or([0.0; 3], |e| e.origin);
@@ -179,10 +174,10 @@ impl Host {
             self.server.reticle_on_target(id, eye, dir)).collect();
         let addon_entries: Vec<_> = crate::wheel::inventory(&self.server.core.cvars, &self.allowed_toys())
             .into_iter().filter(|e| matches!(e.weapon, crate::wheel::Weapon::Addon(_))).collect();
-        let hud_cfg = crate::sbar::HudConfig::from_cvars(&self.server.core.cvars);
-        let time_items = if self.show_scores { Vec::new() } else { self.time_hud_items() };
-        // metrics first: nearest the screen edge
-        let hud_items: Vec<_> = metrics_items.iter().cloned().chain(time_items).collect();
+        let hud = self.hud_frame(&c, &addon_entries);
+        self.hud.fade.update(&self.hud.layout, &self.cl, (&addon_entries, self.toy.held), self.realtime);
+        let teamplay = self.server.core.cvars.value_of("teamplay");
+        let captions = self.caption_place().filter(|_| self.cv("cl_captions") != 0.0 && !hud.edit);
         let demo_bar = self.demo_bar();
         let demo_peek = self.demo_peek();
         let exporting = self.exporting();
@@ -204,39 +199,39 @@ impl Host {
                     3 => self.con.draw_center(&mut c, usize::MAX),
                     // Split-screen: each player's HUD in their own cell.
                     _ if !splits.is_empty() => {
-                        let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
-                        let teamplay = self.server.core.cvars.value_of("teamplay");
                         let live: Vec<usize> = (0..self.guests.len()).filter(|&k| self.guests[k].cl.signon == 4).collect();
                         for (i, sv) in splits.iter().enumerate() {
                             let [x, y, w, h] = sv.rect;
                             let mut cc = Canvas::new(w, h);
                             cc.ui = c.ui.clone();
+                            let room = crate::hud::draw::Room { vw: cc.vw(), ..hud.room };
+                            let cell_sizes = super::hud_frame::sizes(&cc, &self.hud.layout, &room);
+                            let cell_rects = crate::hud::place::place_all(&self.hud.layout.elems, &cell_sizes, cc.vw(), cc.vh(), None);
+                            let cell_reserve = crate::hud::reserve_bottom(&self.hud.layout, &cell_rects, cc.vh());
                             let damage_view = if i == 0 { &self.view } else { &self.guests[live[i - 1]].view };
-                            let damage_height = cc.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
+                            let damage_height = cc.vh() - cell_reserve;
                             damage_view.draw_damage(&mut cc, damage_height, self.server.core.cvars.value_of("hud_damageindicator") != 0.0, self.server.core.cvars.value_of("v_flashscale"));
                             let feedback = if i == 0 { &self.feedback } else { &self.guests[live[i - 1]].feedback };
                             let marker = (feedback.remaining(self.realtime), feedback.kill);
                             let (cl, fade, face, locked, active, held_addon) = if i == 0 {
-                                (&self.cl, &mut self.hud_fade, self.view.face_anim_time > self.cl.time, self.input.lockon.target.is_some(), self.input.lockon.active, self.toy.held)
+                                (&self.cl, &mut self.hud.fade, self.view.face_anim_time > self.cl.time, self.input.lockon.target.is_some(), self.input.lockon.active, self.toy.held)
                             } else {
                                 let Some(g) = live.get(i - 1).and_then(|&k| self.guests.get_mut(k)) else { continue };
                                 let face = g.view.face_anim_time > g.cl.time;
                                 (&g.cl, &mut g.hud_fade, face, g.input.lockon.target.is_some(), g.input.lockon.active, g.toy.held)
                             };
+                            if i > 0 {
+                                fade.update(&self.hud.layout, cl, (&addon_entries, held_addon), self.realtime);
+                            }
                             if cl.intermission == 0 {
-                                let vh = cc.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
+                                let vh = cc.vh() - cell_reserve;
                                 let color = reticle::color(&self.server.core.cvars, target_colors[i], marker.1 && marker.0 > 0.0);
                                 draw_crosshair(&mut cc, vh, &self.server.core.cvars, locked, active, color);
                                 hitmarker::draw_hitmarker(&mut cc, vh, &self.server.core.cvars, marker.0, color);
                             }
-                            let mut sb = crate::sbar::Sbar::new(&mut cc, &mut pf, pack);
-                            sb.teamplay = teamplay;
-                            sb.addon_weapons = addon_entries.clone();
-                            sb.held_addon = held_addon;
-                            if classic {
-                                sb.draw(cl, self.show_scores, face);
-                            } else {
-                                sb.draw_modern(cl, self.show_scores, face, &hud_cfg, fade, self.realtime);
+                            if !hud.edit {
+                                let ctx = hud.ctx(cl, face, teamplay, &addon_entries, held_addon, self.show_scores);
+                                crate::hud::draw_layout(&mut cc, &mut pf, &self.hud.layout, &cell_rects, &ctx, Some(fade), self.realtime, crate::hud::kind::Kind::is_player);
                             }
                             if self.show_scores && cl.gametype == 1 {
                                 crate::sbar::deathmatch_overlay(&mut cc, &mut pf, cl);
@@ -245,7 +240,10 @@ impl Host {
                             if con.realtime < con.center_time && !self.con.open {
                                 let mut cp = crate::console::Console::new();
                                 cp.centerprint.clone_from(&con.centerprint);
-                                (cp.text_bg, cp.text_scale, cp.center_pos) = (self.con.text_bg, self.con.text_scale, self.con.center_pos);
+                                let at = self.hud.layout.elems.iter().position(|e| e.kind == crate::hud::kind::Kind::Center);
+                                if let Some(k) = at.filter(|&k| k < cell_rects.len()) {
+                                    cp.center_place = crate::hud::MsgPlace::of(&self.hud.layout.elems[k], cell_rects[k]);
+                                }
                                 cp.draw_center(&mut cc, usize::MAX);
                             }
                             let (wheel, wcl) = if i == 0 { (&self.wheel, &self.cl) } else { (&self.guests[live[i - 1]].wheel, &self.guests[live[i - 1]].cl) };
@@ -256,7 +254,7 @@ impl Host {
                         }
                     }
                     _ => {
-                        let scene_h = c.vh() - if classic { CLASSIC_SBAR_LINES } else { 0.0 };
+                        let scene_h = c.vh() - reserve;
                         self.view.draw_damage(&mut c, scene_h, self.server.core.cvars.value_of("hud_damageindicator") != 0.0, self.server.core.cvars.value_of("v_flashscale"));
                         {
                             let color = reticle::color(&self.server.core.cvars, target_colors[0], self.feedback.kill && self.feedback.remaining(self.realtime) > 0.0);
@@ -264,21 +262,11 @@ impl Host {
                             hitmarker::draw_hitmarker(&mut c, scene_h, &self.server.core.cvars, self.feedback.remaining(self.realtime), color);
                         }
                         let face = self.view.face_anim_time > self.cl.time;
-                        let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
                         let hud_start = c.list.len();
-                        let mut sb = crate::sbar::Sbar::new(&mut c, &mut pf, pack);
-                        sb.teamplay = self.server.core.cvars.value_of("teamplay");
-                        sb.addon_weapons = addon_entries.clone();
-                        sb.held_addon = self.toy.held;
-                        let used = if classic {
-                            sb.backtile(CLASSIC_SBAR_LINES);
-                            sb.draw(&self.cl, self.show_scores, face);
-                            Default::default()
-                        } else {
-                            sb.draw_modern(&self.cl, self.show_scores, face, &hud_cfg, &mut self.hud_fade, self.realtime)
-                        };
-                        let bottom = if classic { CLASSIC_SBAR_LINES } else { 0.0 };
-                        crate::sbar::time::draw(&mut c, &hud_items, crate::sbar::time::Reserved { used, bottom });
+                        if !hud.edit {
+                            let ctx = hud.ctx(&self.cl, face, teamplay, &addon_entries, self.toy.held, self.show_scores);
+                            crate::hud::draw_layout(&mut c, &mut pf, &self.hud.layout, &self.hud.rects, &ctx, Some(&self.hud.fade), self.realtime, |_| true);
+                        }
                         metrics_drawn = true;
                         // the demo bar takes the bottom of the screen: lift the HUD over it
                         if demo_bar.is_some() {
@@ -291,10 +279,8 @@ impl Host {
                         self.bullet_time.draw(&mut c, bullet_meter);
                         self.wheel.draw(&mut c, &mut pf, &glyphs, &self.cl, pad_ui, wheel_key);
                         self.goggles.wheel.draw(&mut c, &glyphs, &self.goggles.equip, pad_ui, equip_key);
-                        if self.server.core.cvars.value_of("cl_captions") != 0.0 {
-                            let bottom = if classic { scene_h - 4.0 } else { c.vh() - 44.0 };
-                            let ts = self.server.core.cvars.value_of("scr_textscale");
-                            self.captions.draw(&mut c, self.realtime, bottom, ts);
+                        if let Some((at, ts, color)) = captions {
+                            self.captions.draw(&mut c, self.realtime, at, ts, color);
                         }
                     }
                 }
@@ -334,11 +320,17 @@ impl Host {
                 super::demo_bar::draw_peek(&mut c, p);
             }
             self.menu.mods.online.poll();
+            // the HUD editor's preview, under its dialog
+            if hud.edit {
+                let ctx = hud.ctx(&self.cl, false, teamplay, &addon_entries, None, false);
+                crate::hud::draw_layout(&mut c, &mut pf, &self.hud.layout, &self.hud.rects, &ctx, None, self.realtime, |_| true);
+            }
             self.menu.draw(&mut c, &mut pf, &self.server.core.cvars, self.realtime);
             // outside the in-game HUD (menus, intermission, split screen) the
             // metrics go over everything
-            if !metrics_drawn {
-                crate::sbar::time::draw(&mut c, &metrics_items, Default::default());
+            if !metrics_drawn && !hud.edit {
+                let ctx = hud.ctx(&self.cl, false, teamplay, &addon_entries, None, false);
+                crate::hud::draw_layout(&mut c, &mut pf, &self.hud.layout, &self.hud.rects, &ctx, None, self.realtime, crate::hud::kind::Kind::is_metric);
             }
             if let Some(s) = speed.filter(|_| ingame && !self.menu.active()) {
                 // Just below the crosshair, centred (ironwail's CANVAS_CROSSHAIR).

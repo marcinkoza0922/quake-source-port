@@ -103,9 +103,6 @@ eu Giro-oklusioa
 @ Ammo Counts
 eu Munizio-kontagailuak
 
-@ Ammo Counts Position
-eu Munizio-kontagailuen kokapena
-
 @ Ammo Pickups
 eu Jasotako munizioa
 
@@ -120,9 +117,6 @@ eu Aplikatu honi
 
 @ Armor
 eu Armadura
-
-@ Armor Position
-eu Armaduraren kokapena
 
 @ Ask
 eu Galdetu
@@ -220,9 +214,6 @@ eu Kaustikoak
 @ Center
 eu Erdian
 
-@ Center Message Position
-eu Erdiko mezuen kokapena
-
 @ Center Message Time
 eu Erdiko mezuen iraupena
 
@@ -282,9 +273,6 @@ eu Miraren tamaina
 
 @ Current Ammo
 eu Uneko munizioa
-
-@ Current Ammo Position
-eu Uneko munizioaren kokapena
 
 @ Customize This Game
 eu Pertsonalizatu partida hau
@@ -469,17 +457,11 @@ eu Giroskopio bidezko xedea
 @ HUD
 eu HUD
 
-@ HUD Style
-eu HUD estiloa
-
 @ Health
 eu Osasuna
 
 @ Health Pickups
 eu Jasotako osasuna
-
-@ Health Position
-eu Osasunaren kokapena
 
 @ Health Regeneration
 eu Osasunaren berroneratzea
@@ -589,9 +571,6 @@ eu Jauziak
 @ Keys & Powerups
 eu Giltzak eta indargarriak
 
-@ Keys & Powerups Position
-eu Giltzen eta indargarrien kokapena
-
 @ Kill Bonus (x)
 eu Hilketa-saria (x)
 
@@ -661,15 +640,6 @@ eu Irismen maximoa
 @ Melee only
 eu Gertuko erasoak soilik
 
-@ Message Background
-eu Mezuen atzeko planoa
-
-@ Message Text Size
-eu Mezuen testu-tamaina
-
-@ Messages & Captions
-eu Mezuak eta azpitituluak
-
 @ Meter Duration (real seconds)
 eu Neurgailuaren iraupena (benetako segundoak)
 
@@ -681,9 +651,6 @@ eu Modua
 
 @ Modern Console
 eu Kontsola modernoa
-
-@ Modern HUD Layout
-eu HUD diseinu modernoa
 
 @ Most recent save
 eu Gordetako azkena
@@ -732,9 +699,6 @@ eu Zarata-iragazkia
 
 @ Normal Color
 eu Kolore normala
-
-@ Notify Message Position
-eu Jakinarazpenen kokapena
 
 @ Notify Message Time
 eu Jakinarazpenen iraupena
@@ -928,17 +892,11 @@ eu sorbalda ezkerra
 @ Shoulder right
 eu sorbalda eskuina
 
-@ Show FPS
-eu Erakutsi FPSak
-
 @ Show Face
 eu Erakutsi aurpegia
 
 @ Shrapnel
 eu Metraila
-
-@ Size of on-screen messages and captions
-eu Pantailako mezuen eta azpitituluen tamaina
 
 @ Skill
 eu Zailtasuna
@@ -1108,15 +1066,6 @@ eu Arma-gurpilaren moteltzea
 @ Weapons
 eu Armak
 
-@ Weapons Position
-eu Armen kokapena
-
-@ Where center-screen messages appear
-eu Non agertzen diren erdiko mezuak
-
-@ Where pickup and event messages appear
-eu Non agertzen diren objektu- eta gertaera-mezuak
-
 @ White
 eu Zuria
 
@@ -1156,9 +1105,6 @@ eu kutxa
 
 @ broken square
 eu karratu etena
-
-@ classic
-eu klasikoa
 
 @ coarse
 eu lodia
@@ -1247,29 +1193,17 @@ eu bizia
 @ large
 eu handia
 
-@ larger
-eu handiagoa
-
-@ largest
-eu handiena
-
 @ linear
 eu lineala
 
 @ low
 eu baxua
 
-@ lower
-eu behean
-
 @ magenta
 eu magenta
 
 @ medium
 eu ertaina
-
-@ middle
-eu erdian
 
 @ middle left
 eu erdian ezkerrean
@@ -1357,9 +1291,6 @@ eu hirukoitza
 
 @ tritanopia
 eu tritanopia
-
-@ upper
-eu goian
 
 @ white
 eu zuria
@@ -1491,9 +1422,6 @@ eu Denbora eta estatistikak
 @ Clock
 eu Erlojua
 
-@ Clock Position
-eu Erlojuaren kokapena
-
 @ Level Timer
 eu Mailaren kronometroa
 
@@ -1506,17 +1434,11 @@ eu Marka mota
 @ Personal Best Color
 eu Markaren kolorea
 
-@ Timer Position
-eu Kronometroaren kokapena
-
 @ Kills
 eu Hilketak
 
 @ Secrets
 eu Sekretuak
-
-@ Kills & Secrets Position
-eu Hilketen eta sekretuen kokapena
 
 @ 24-hour
 eu 24 ordukoa
@@ -1564,8 +1486,139 @@ eu GPU denbora
 @ Video Memory
 eu Bideo-memoria
 
-@ Metrics Position
-eu Neurrien kokapena
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+eu Gehitu
+
+@ Ammo
+eu Munizioa
+
+@ Ammo Bar
+eu Munizio-barra
+
+@ Armor Bar
+eu Armadura-barra
+
+@ Background
+eu Atzeko planoa
+
+@ Cells
+eu Zelulak
+
+@ Center Message
+eu Erdiko mezua
+
+@ Columns
+eu Zutabeak
+
+@ Edit HUD
+eu Editatu HUDa
+
+@ FPS
+eu FPS
+
+@ Face
+eu Aurpegia
+
+@ Fill Width
+eu Zabalera osoa
+
+@ Font
+eu Letra-tipoa
+
+@ Format
+eu Formatua
+
+@ HUD Editor
+eu HUD editorea
+
+@ Health Bar
+eu Osasun-barra
+
+@ Inventory
+eu Inbentarioa
+
+@ Keys
+eu Giltzak
+
+@ Nails
+eu Iltzeak
+
+@ Notify Messages
+eu Jakinarazpenak
+
+@ Position
+eu Kokapena
+
+@ Powerups
+eu Indargarriak
+
+@ Precision
+eu Zehaztasuna
+
+@ Quake
+eu Quake
+
+@ Rockets
+eu Suziriak
+
+@ Scale
+eu Eskala
+
+@ Sections
+eu Atalak
+
+@ Shells
+eu Kartutxoak
+
+@ Show As
+eu Erakutsi honela
+
+@ Show Icon
+eu Erakutsi ikonoa
+
+@ Show Value
+eu Erakutsi balioa
+
+@ Sigils
+eu Errunak
+
+@ Status
+eu Egoera
+
+@ Status Bar
+eu Egoera-barra
+
+@ Visibility
+eu Ikusgarritasuna
+
+@ big numbers
+eu zenbaki handiak
+
+@ center
+eu erdia
+
+@ status + inventory
+eu egoera + inbentarioa
+
+@ status only
+eu egoera soilik
+
+@ Text Color
+eu Testuaren kolorea
+
+@ Label Color
+eu Etiketen kolorea
+
+@ HUD Preset
+eu HUD aurrezarpena
+
+@ custom
+eu pertsonalizatua
+
+@ classic
+eu klasikoa
 
 # ==== tooltips.txt ====
 
@@ -1618,9 +1671,6 @@ eu Marken kopurua, iraupena, airean dauden tantak eta zauri/haragi-pusken orbana
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 eu Shaderraren sarrera irteera-tamainara mugatzen du; horrela % 200eko errendatze-eskalak 3D garbitasuna mantentzen du shaderraren 4x kostua gabe; eskala baxuek bereizmen baxua mantentzen dute
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-eu Klasikoa: jatorrizko egoera-barra; modernoa: elementu trinkoak pantailaren ertzetan
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 eu Geruza-atlasaren bereizmena, berreraikitze-maiztasuna eta shader-xehetasuna: baxuak geruza txikiagoak sortzen ditu gutxiagotan, itzaldura azkarrarekin; altuak xehetasun osoa erabiltzen du
 
@@ -1629,9 +1679,6 @@ eu Railgunaren arrasto espiralaren kolorea; pantaila zatituan jokalari bakoitzak
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 eu Railgunak zeharkatzen duen etsai bakoitzari eragiten dion kaltea (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-eu Atzeko plano iluna pantailako mezuen atzean, irakurtzeko errazago
 
 @ Dark border keeps the crosshair visible on any background
 eu Ertz ilunak mira ikusgai mantentzen du edozein atzeko planotan
@@ -1879,17 +1926,11 @@ eu Argi-eredu uhinduak ur eta lohi azpiko gainazaletan
 @ Scales all damage you take; above 100% is harder
 eu Jasotzen duzun kalte guztia eskalatzen du; % 100etik gora zailagoa da
 
-@ Screen edge for this element; elements on the same spot stack
-eu Elementu honen pantaila-ertza; leku berean dauden elementuak pilatu egiten dira
-
 @ Seconds a monster hit by the boomerang stays stunned
 eu Bumeranak jotako munstroa zorabiatuta geratzen den segundoak
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 eu Talka-markek eta iltzatutako iltzeek itzali aurretik irauten duten segundoak; Partikulen kalitatea aukeratik independentea
-
-@ Seconds messages at the top of the screen stay up
-eu Pantailaren goiko mezuek irauten duten segundoak
 
 @ Seconds the flick stick snap takes; lower is faster
 eu Flick stick-en jauziak behar dituen segundoak; txikiagoa azkarragoa da
@@ -2063,9 +2104,6 @@ eu Eguneko ordua erakusten du aukeratutako formatuan
 @ The level time, as on the intermission screen; it stops while paused and at the exit
 eu Mailaren denbora, tarteko pantailan bezala; pausan eta irteeran gelditzen da
 
-@ Your best time on this map and skill, next to the timer (single player)
-eu Mapa eta zailtasun honetako zure denborarik onena, kronometroaren ondoan (jokalari bakarra)
-
 @ any%: any finish; 100%: every kill and secret. Save cards show this one first
 eu any%: edozein amaiera; 100%: hilketa eta sekretu guztiak. Gordetako partiden txartelek hau erakusten dute lehenik
 
@@ -2074,9 +2112,6 @@ eu Marka pertsonalaren kolorea HUDean eta gordetako partiden txarteletan
 
 @ Shown as a count or as a percentage of the level's total
 eu Kopuru gisa edo mailaren guztizkoaren ehuneko gisa
-
-@ Where this goes on screen; items at the same position share a line
-eu Pantailan non dagoen; kokapen bereko elementuek lerro bat partekatzen dute
 
 @ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
 eu Marka pertsonala ezartzen duen maila bakoitzaren demoa gordetzen du; zaharrak geratzen dira. Grabazio automatikorik gabe ere grabatzen du
@@ -2099,6 +2134,12 @@ eu Txartel grafikoaren denbora fotograma bakoitzeko milisegundotan
 
 @ Video memory in use and what the driver allows, where it reports it
 eu Erabilitako bideo-memoria eta kontrolatzaileak uzten duena, jakinarazten badu
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+eu Mugitu, tamainaz aldatu, gehitu eta kendu HUDeko elementuak: osasuna, munizioa, armak, tenporizadoreak, mezuak eta gehiago
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+eu Modernoa: elementu trinkoak pantailaren ertzetan; klasikoa: jatorrizko egoera-barra. Bat aukeratzeak HUDa berrezartzen du; Editatu HUDa ataleko aldaketek pertsonalizatu egiten dute
 
 # ==== ui.txt ====
 

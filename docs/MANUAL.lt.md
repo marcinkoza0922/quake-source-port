@@ -198,8 +198,8 @@ Options → Prieinamumas:
 - Filtrai daltonikams.
 - Konfigūruojamas taikiklis: forma, dydis, kontūras ir spalvos keitimas
   taikantis ar nužudžius; pasirinktiniai pataikymo žymekliai.
-- **Garsų subtitrai** ir pranešimų nustatymai (Pranešimai ir subtitrai),
-  teksto dydis.
+- **Garsų subtitrai**; pranešimų ir subtitrų padėtis, dydis ir rodymo trukmė
+  nustatomi HUD rengyklėje.
 - Puolimo ir bėgimo perjungimas (vietoj laikymo).
 - Žaidimo greičio slankiklis visam žaidimui sulėtinti.
 - Automatinis taikymas su fiksavimo indikatoriumi, kūgio ir nuotolio

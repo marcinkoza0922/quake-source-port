@@ -196,7 +196,7 @@ Options → Kebolehcapaian:
 - Rerambut silang boleh dikonfigurasi: bentuk, saiz, garis luar, dan
   perubahan warna apabila pada sasaran atau semasa membunuh; penanda kena
   pilihan.
-- **Sari Kata Bunyi** dan tetapan mesej (Mesej & Sari Kata), skala teks.
+- **Sari Kata Bunyi**; kedudukan, saiz dan tempoh mesej serta sari kata ditetapkan dalam editor HUD.
 - Serang dan lari secara togol (bukannya tahan).
 - Peleret kelajuan permainan untuk memperlahankan seluruh permainan.
 - Bidikan auto dengan penunjuk kunci sasaran, serta tetapan kon dan jarak.
