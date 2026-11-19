@@ -1484,6 +1484,89 @@ sq Si dritarja
 @ GPU Encoding
 sq Kodim me GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+sq Koha dhe statistika
+
+@ Clock
+sq Ora
+
+@ Clock Position
+sq Pozicioni i orës
+
+@ Level Timer
+sq Kohëmatësi i nivelit
+
+@ Personal Best
+sq Rekordi personal
+
+@ Personal Best Type
+sq Lloji i rekordit
+
+@ Personal Best Color
+sq Ngjyra e rekordit
+
+@ Timer Position
+sq Pozicioni i kohëmatësit
+
+@ Kills
+sq Vrasje
+
+@ Secrets
+sq Sekrete
+
+@ Kills & Secrets Position
+sq Pozicioni i vrasjeve dhe sekreteve
+
+@ 24-hour
+sq 24-orësh
+
+@ 24-hour + seconds
+sq 24-orësh + sekonda
+
+@ 12-hour
+sq 12-orësh
+
+@ 12-hour + seconds
+sq 12-orësh + sekonda
+
+@ count
+sq numër
+
+@ percent
+sq përqindje
+
+@ any% and 100%
+sq any% dhe 100%
+
+@ Keep Personal Best Demos
+sq Mbaj demot e rekordeve
+
+@ any%
+sq any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+sq Matjet e performancës
+
+@ Frame Time
+sq Koha e kuadrit
+
+@ CPU Usage
+sq Përdorimi i CPU-së
+
+@ Memory Usage
+sq Përdorimi i memories
+
+@ GPU Time
+sq Koha e GPU-së
+
+@ Video Memory
+sq Memoria video
+
+@ Metrics Position
+sq Pozicioni i matjeve
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ sq Madhësia e videos; kuadrot shkallëzohen nga madhësia e dritares (me shirit
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 sq Kodon në kartën grafike (NVIDIA NVENC, AMD ose Intel përmes VA-API, AMF ose Quick Sync, Apple VideoToolbox) kur ffmpeg mund ta përdorë, duke e lënë procesorin të lirë; përndryshe kodon procesori
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+sq Shfaq orën në formatin e zgjedhur
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+sq Koha e nivelit, si në ekranin e ndërmjetëm; ndalon gjatë pauzës dhe te dalja
+
+@ Your best time on this map and skill, next to the timer (single player)
+sq Koha jote më e mirë në këtë hartë dhe vështirësi, pranë kohëmatësit (një lojtar)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+sq any%: çdo përfundim; 100%: të gjitha vrasjet dhe sekretet. Kartat e ruajtjeve e tregojnë këtë të parin
+
+@ Color of the personal best on the HUD and save cards
+sq Ngjyra e rekordit personal në HUD dhe në kartat e ruajtjeve
+
+@ Shown as a count or as a percentage of the level's total
+sq Si numër ose si përqindje e totalit të nivelit
+
+@ Where this goes on screen; items at the same position share a line
+sq Ku shfaqet në ekran; elementet në të njëjtin pozicion ndajnë një rresht
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+sq Mban demon e çdo niveli me rekord të ri personal; të vjetrat mbeten. Regjistron edhe pa regjistrim automatik
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+sq Kuadro në sekondë, mesatare për gjysmë sekonde
+
+@ Average time per frame in milliseconds, and the slowest frame
+sq Koha mesatare për kuadër në milisekonda dhe kuadri më i ngadaltë
+
+@ How busy the game keeps the processor, as a share of all its cores
+sq Sa e ngarkon loja procesorin, si pjesë e të gjitha bërthamave
+
+@ Memory the game uses
+sq Memoria që përdor loja
+
+@ Graphics card time per frame in milliseconds
+sq Koha e kartës grafike për kuadër në milisekonda
+
+@ Video memory in use and what the driver allows, where it reports it
+sq Memoria video në përdorim dhe sa lejon drajveri, kur e raporton
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ sq Po eksportohet videoja
 @ Preparing...
 sq Po përgatitet...
 
+# Save cards: personal best.
+@ PB {} {}
+sq PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ sq U shkrua {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 sq ffmpeg nuk u gjet: u shkruan {} kuadro PNG dhe një WAV në {}
+
+# Personal bests.
+@ New personal best ({}): {}
+sq Rekord i ri personal ({}): {}

@@ -9,6 +9,7 @@ use crate::glyphs::{Family, Glyphs, is_pad_key};
 use crate::modmenu::{self, ModMenu};
 use crate::sbar::PicFn;
 mod pages;
+mod time_page;
 pub use pages::*;
 mod draw_util;
 pub use draw_util::*;
@@ -26,7 +27,7 @@ use page_info::*;
 mod scroll;
 mod prompt;
 mod cards;
-pub use cards::{SaveSlot, SaveSource};
+pub use cards::{SavePb, SaveSlot, SaveSource};
 use cards::clean_title;
 use prompt::Prompt;
 mod navigation;
@@ -89,6 +90,8 @@ pub enum Page {
     AutoAim,
     GrenadeArc,
     HudLayout,
+    TimeHud,
+    Metrics,
     Messages,
     Water,
     Bloom,
@@ -176,6 +179,7 @@ pub struct Menu {
     /// Modal confirmation or skill picker over the current screen.
     prompt: Option<Prompt>,
     pub save_inventory: crate::save_inventory::Inventory,
+    pub save_pb: cards::SavePb,
     prev: Screen,
     /// Cursor position in 640x360 menu units, when the mouse has moved.
     mouse: Option<(f32, f32)>,
@@ -310,6 +314,7 @@ impl Menu {
             autosaves: false,
             prompt: None,
             save_inventory: Default::default(),
+            save_pb: Default::default(),
             prev: Screen::None,
             mouse: None,
             drag: None,

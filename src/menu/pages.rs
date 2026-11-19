@@ -476,10 +476,11 @@ pub(super) const HUD: &[Item] = &[
     Item::Choice { label: "HUD Style", cvar: "scr_hudstyle", choices: HUD_STYLE },
     Item::Sub { label: "Modern HUD Layout", page: Page::HudLayout },
     Item::Sub { label: "Crosshair", page: Page::Crosshair },
+    Item::Sub { label: "Time & Stats", page: Page::TimeHud },
+    Item::Sub { label: "Performance Metrics", page: Page::Metrics },
     toggle("Directional Damage", "hud_damageindicator"),
     Item::Sub { label: "Messages & Captions", page: Page::Messages },
     Item::Choice { label: "Weapon Wheel Slowdown", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
-    toggle("Show FPS", "scr_showfps"),
     toggle("Modern Console", "con_modern"),
 ];
 

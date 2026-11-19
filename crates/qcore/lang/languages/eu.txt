@@ -1484,6 +1484,89 @@ eu Leihoaren berdina
 @ GPU Encoding
 eu GPU bidezko kodeketa
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+eu Denbora eta estatistikak
+
+@ Clock
+eu Erlojua
+
+@ Clock Position
+eu Erlojuaren kokapena
+
+@ Level Timer
+eu Mailaren kronometroa
+
+@ Personal Best
+eu Marka pertsonala
+
+@ Personal Best Type
+eu Marka mota
+
+@ Personal Best Color
+eu Markaren kolorea
+
+@ Timer Position
+eu Kronometroaren kokapena
+
+@ Kills
+eu Hilketak
+
+@ Secrets
+eu Sekretuak
+
+@ Kills & Secrets Position
+eu Hilketen eta sekretuen kokapena
+
+@ 24-hour
+eu 24 ordukoa
+
+@ 24-hour + seconds
+eu 24 ordukoa + segundoak
+
+@ 12-hour
+eu 12 ordukoa
+
+@ 12-hour + seconds
+eu 12 ordukoa + segundoak
+
+@ count
+eu kopurua
+
+@ percent
+eu ehunekoa
+
+@ any% and 100%
+eu any% eta 100%
+
+@ Keep Personal Best Demos
+eu Gorde marken demoak
+
+@ any%
+eu any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+eu Errendimendu-neurriak
+
+@ Frame Time
+eu Fotograma-denbora
+
+@ CPU Usage
+eu PUZaren erabilera
+
+@ Memory Usage
+eu Memoriaren erabilera
+
+@ GPU Time
+eu GPU denbora
+
+@ Video Memory
+eu Bideo-memoria
+
+@ Metrics Position
+eu Neurrien kokapena
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ eu Bideoaren tamaina; fotogramak leihoaren tamainatik eskalatzen dira (forma gor
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 eu Txartel grafikoan kodetzen du (NVIDIA NVENC, AMD edo Intel VA-API bidez, AMF edo Quick Sync, Apple VideoToolbox) ffmpeg-ek erabil dezakeenean, prozesadorea libre utziz; bestela prozesadoreak kodetzen du
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+eu Eguneko ordua erakusten du aukeratutako formatuan
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+eu Mailaren denbora, tarteko pantailan bezala; pausan eta irteeran gelditzen da
+
+@ Your best time on this map and skill, next to the timer (single player)
+eu Mapa eta zailtasun honetako zure denborarik onena, kronometroaren ondoan (jokalari bakarra)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+eu any%: edozein amaiera; 100%: hilketa eta sekretu guztiak. Gordetako partiden txartelek hau erakusten dute lehenik
+
+@ Color of the personal best on the HUD and save cards
+eu Marka pertsonalaren kolorea HUDean eta gordetako partiden txarteletan
+
+@ Shown as a count or as a percentage of the level's total
+eu Kopuru gisa edo mailaren guztizkoaren ehuneko gisa
+
+@ Where this goes on screen; items at the same position share a line
+eu Pantailan non dagoen; kokapen bereko elementuek lerro bat partekatzen dute
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+eu Marka pertsonala ezartzen duen maila bakoitzaren demoa gordetzen du; zaharrak geratzen dira. Grabazio automatikorik gabe ere grabatzen du
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+eu Fotogramak segundoko, segundo erdiko batez bestekoa
+
+@ Average time per frame in milliseconds, and the slowest frame
+eu Fotograma bakoitzeko batez besteko denbora milisegundotan, eta fotogramarik motelena
+
+@ How busy the game keeps the processor, as a share of all its cores
+eu Jokoak prozesadorea zenbat okupatzen duen, nukleo guztien zati gisa
+
+@ Memory the game uses
+eu Jokoak erabiltzen duen memoria
+
+@ Graphics card time per frame in milliseconds
+eu Txartel grafikoaren denbora fotograma bakoitzeko milisegundotan
+
+@ Video memory in use and what the driver allows, where it reports it
+eu Erabilitako bideo-memoria eta kontrolatzaileak uzten duena, jakinarazten badu
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ eu Bideoa esportatzen
 @ Preparing...
 eu Prestatzen...
 
+# Save cards: personal best.
+@ PB {} {}
+eu PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ eu Idatzita {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 eu Ez da ffmpeg aurkitu: {} PNG fotograma eta WAV bat idatzi dira hemen: {}
+
+# Personal bests.
+@ New personal best ({}): {}
+eu Marka pertsonal berria ({}): {}

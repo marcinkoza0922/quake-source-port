@@ -1484,6 +1484,89 @@ am እንደ መስኮቱ
 @ GPU Encoding
 am የGPU ኢንኮዲንግ
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+am ጊዜ እና ስታቲስቲክስ
+
+@ Clock
+am ሰዓት
+
+@ Clock Position
+am የሰዓት ቦታ
+
+@ Level Timer
+am የደረጃ ሰዓት ቆጣሪ
+
+@ Personal Best
+am የግል ምርጥ
+
+@ Personal Best Type
+am የምርጥ አይነት
+
+@ Personal Best Color
+am የምርጥ ቀለም
+
+@ Timer Position
+am የሰዓት ቆጣሪ ቦታ
+
+@ Kills
+am ግድያዎች
+
+@ Secrets
+am ምስጢሮች
+
+@ Kills & Secrets Position
+am የግድያዎች እና ምስጢሮች ቦታ
+
+@ 24-hour
+am 24 ሰዓት
+
+@ 24-hour + seconds
+am 24 ሰዓት + ሰከንድ
+
+@ 12-hour
+am 12 ሰዓት
+
+@ 12-hour + seconds
+am 12 ሰዓት + ሰከንድ
+
+@ count
+am ብዛት
+
+@ percent
+am መቶኛ
+
+@ any% and 100%
+am any% እና 100%
+
+@ Keep Personal Best Demos
+am የግል ምርጥ ዴሞዎችን አቆይ
+
+@ any%
+am any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+am የአፈጻጸም መለኪያዎች
+
+@ Frame Time
+am የፍሬም ጊዜ
+
+@ CPU Usage
+am የCPU አጠቃቀም
+
+@ Memory Usage
+am የማህደረ ትውስታ አጠቃቀም
+
+@ GPU Time
+am የGPU ጊዜ
+
+@ Video Memory
+am የቪዲዮ ማህደረ ትውስታ
+
+@ Metrics Position
+am የመለኪያዎች ቦታ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ am የቪዲዮ መጠን፤ ፍሬሞቹ ከመስኮቱ መጠን ይሰፋሉ
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 am ffmpeg ሲጠቀምበት በግራፊክስ ካርዱ ላይ ኢንኮድ ያደርጋል (NVIDIA NVENC፣ AMD ወይም Intel በVA-API፣ AMF ወይም Quick Sync፣ Apple VideoToolbox) እና ፕሮሰሰሩን ነፃ ያደርጋል፤ ካልሆነ ፕሮሰሰሩ ኢንኮድ ያደርጋል
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+am የቀኑን ሰዓት በተመረጠው ቅርጸት ያሳያል
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+am የደረጃው ጊዜ፣ እንደ የእረፍት ማያ፤ ሲቆም እና በመውጫው ላይ ይቆማል
+
+@ Your best time on this map and skill, next to the timer (single player)
+am በዚህ ካርታ እና ችግር ላይ ምርጥ ጊዜዎ፣ ከሰዓት ቆጣሪው አጠገብ (አንድ ተጫዋች)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+am any%: ማንኛውም ማጠናቀቂያ፤ 100%: ሁሉም ግድያዎች እና ምስጢሮች። የማስቀመጫ ካርዶች ይህንን መጀመሪያ ያሳያሉ
+
+@ Color of the personal best on the HUD and save cards
+am በHUD እና በማስቀመጫ ካርዶች ላይ የግል ምርጥ ቀለም
+
+@ Shown as a count or as a percentage of the level's total
+am እንደ ብዛት ወይም ከደረጃው ጠቅላላ መቶኛ
+
+@ Where this goes on screen; items at the same position share a line
+am በማያ ገጹ ላይ የት እንዳለ፤ በአንድ ቦታ ያሉ ነገሮች አንድ መስመር ይጋራሉ
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+am የግል ምርጥ የሚያስመዘግብ የእያንዳንዱን ደረጃ ዴሞ ያቆያል፤ የቆዩት ይቀራሉ። ራስ-ሰር ቅጂ ቢጠፋም ይቀርጻል
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+am ፍሬሞች በሰከንድ፣ የግማሽ ሰከንድ አማካይ
+
+@ Average time per frame in milliseconds, and the slowest frame
+am በአንድ ፍሬም አማካይ ጊዜ በሚሊሰከንድ፣ እና በጣም ቀርፋፋው ፍሬም
+
+@ How busy the game keeps the processor, as a share of all its cores
+am ጨዋታው ፕሮሰሰሩን ምን ያህል እንደሚያስጠምድ፣ ከሁሉም ኮሮች ድርሻ
+
+@ Memory the game uses
+am ጨዋታው የሚጠቀመው ማህደረ ትውስታ
+
+@ Graphics card time per frame in milliseconds
+am በአንድ ፍሬም የግራፊክስ ካርድ ጊዜ በሚሊሰከንድ
+
+@ Video memory in use and what the driver allows, where it reports it
+am በጥቅም ላይ ያለ የቪዲዮ ማህደረ ትውስታ እና ሾፌሩ የሚፈቅደው፣ ሪፖርት ሲያደርግ
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ am ቪዲዮ እየተላከ ነው
 @ Preparing...
 am በዝግጅት ላይ...
 
+# Save cards: personal best.
+@ PB {} {}
+am PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ am {} ተጽፏል ({} ሰ.)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 am ffmpeg አልተገኘም፦ {} PNG ፍሬሞችና አንድ WAV ወደ {} ተጽፈዋል
+
+# Personal bests.
+@ New personal best ({}): {}
+am አዲስ የግል ምርጥ ({}): {}

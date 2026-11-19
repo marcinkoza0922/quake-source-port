@@ -1133,3 +1133,105 @@ de Kodiert auf der Grafikkarte (NVIDIA NVENC, AMD oder Intel über VA-API, AMF o
 it Codifica sulla scheda grafica (NVIDIA NVENC, AMD o Intel tramite VA-API, AMF o Quick Sync, Apple VideoToolbox) quando ffmpeg può usarla, lasciando libero il processore; altrimenti codifica il processore
 es Codifica en la tarjeta gráfica (NVIDIA NVENC, AMD o Intel mediante VA-API, AMF o Quick Sync, Apple VideoToolbox) cuando ffmpeg puede usarla, dejando libre el procesador; si no, codifica el procesador
 ru Кодирует на видеокарте (NVIDIA NVENC, AMD или Intel через VA-API, AMF или Quick Sync, Apple VideoToolbox), если ffmpeg может её использовать, освобождая процессор; иначе кодирует процессор
+
+# HUD > Time & Stats, and personal-best demos.
+
+@ Shows the time of day in the chosen format
+fr Affiche l'heure dans le format choisi
+de Zeigt die Uhrzeit im gewählten Format
+it Mostra l'ora del giorno nel formato scelto
+es Muestra la hora del día en el formato elegido
+ru Показывает время суток в выбранном формате
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+fr Le temps du niveau, comme à l'écran d'entracte ; il s'arrête en pause et à la sortie
+de Die Levelzeit wie auf dem Zwischenbildschirm; sie hält bei Pause und am Ausgang an
+it Il tempo del livello, come nella schermata di intervallo; si ferma in pausa e all'uscita
+es El tiempo del nivel, como en la pantalla de intermedio; se detiene en pausa y en la salida
+ru Время уровня, как на экране итогов; останавливается на паузе и на выходе
+
+@ Your best time on this map and skill, next to the timer (single player)
+fr Votre meilleur temps sur cette carte et ce niveau de difficulté, à côté du chrono (solo)
+de Deine Bestzeit auf dieser Karte und Stufe, neben dem Timer (Einzelspieler)
+it Il tuo miglior tempo su questa mappa e difficoltà, accanto al timer (giocatore singolo)
+es Tu mejor tiempo en este mapa y dificultad, junto al cronómetro (un jugador)
+ru Ваше лучшее время на этой карте и сложности, рядом с таймером (одиночная игра)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+fr any% : toute fin ; 100% : tous les ennemis et secrets. Les fiches de sauvegarde montrent celui-ci en premier
+de any%: jedes Ende; 100%: alle Kills und Geheimnisse. Spielstandkarten zeigen diese zuerst
+it any%: qualsiasi finale; 100%: tutte le uccisioni e i segreti. Le schede dei salvataggi mostrano prima questo
+es any%: cualquier final; 100%: todas las muertes y secretos. Las fichas de partidas muestran esta primero
+ru any%: любое прохождение; 100%: все убийства и секреты. Карточки сохранений показывают его первым
+
+@ Color of the personal best on the HUD and save cards
+fr Couleur du record personnel sur le HUD et les fiches de sauvegarde
+de Farbe der Bestzeit im HUD und auf Spielstandkarten
+it Colore del record personale nell'HUD e nelle schede dei salvataggi
+es Color de la mejor marca en el HUD y en las fichas de partidas
+ru Цвет личного рекорда в HUD и на карточках сохранений
+
+@ Shown as a count or as a percentage of the level's total
+fr Affiché en nombre ou en pourcentage du total du niveau
+de Als Anzahl oder als Prozent der Gesamtzahl des Levels
+it Mostrato come numero o come percentuale del totale del livello
+es Se muestra como cantidad o como porcentaje del total del nivel
+ru Числом или процентом от общего количества на уровне
+
+@ Where this goes on screen; items at the same position share a line
+fr Où cela s'affiche ; les éléments à la même position partagent une ligne
+de Wo es auf dem Bildschirm erscheint; Elemente an derselben Position teilen sich eine Zeile
+it Dove appare sullo schermo; gli elementi nella stessa posizione condividono una riga
+es Dónde aparece en pantalla; los elementos en la misma posición comparten una línea
+ru Где это на экране; элементы в одном положении делят строку
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+fr Garde la démo de chaque niveau qui bat un record personnel ; les anciennes restent. Enregistre même sans démos auto
+de Behält die Demo jedes Levels mit neuer Bestzeit; alte bleiben. Nimmt auch ohne automatische Aufnahme auf
+it Conserva la demo di ogni livello che stabilisce un record personale; le vecchie restano. Registra anche senza demo automatiche
+es Guarda la demo de cada nivel que logra una mejor marca personal; las antiguas se quedan. Graba aunque las demos automáticas estén desactivadas
+ru Сохраняет демо каждого уровня с новым личным рекордом; старые остаются. Записывает даже без автозаписи
+
+# HUD > Performance Metrics.
+
+@ Frames per second, averaged over half a second
+fr Images par seconde, en moyenne sur une demi-seconde
+de Bilder pro Sekunde, gemittelt über eine halbe Sekunde
+it Fotogrammi al secondo, in media su mezzo secondo
+es Fotogramas por segundo, de media en medio segundo
+ru Кадров в секунду, в среднем за полсекунды
+
+@ Average time per frame in milliseconds, and the slowest frame
+fr Temps moyen par image en millisecondes, et l'image la plus lente
+de Mittlere Zeit pro Bild in Millisekunden und das langsamste Bild
+it Tempo medio per fotogramma in millisecondi, e il fotogramma più lento
+es Tiempo medio por fotograma en milisegundos y el fotograma más lento
+ru Среднее время кадра в миллисекундах и самый медленный кадр
+
+@ How busy the game keeps the processor, as a share of all its cores
+fr La charge que le jeu impose au processeur, en part de tous ses cœurs
+de Wie stark das Spiel den Prozessor auslastet, als Anteil aller Kerne
+it Quanto il gioco impegna il processore, come quota di tutti i suoi core
+es Cuánto ocupa el juego el procesador, como parte de todos sus núcleos
+ru Насколько игра загружает процессор, как доля всех его ядер
+
+@ Memory the game uses
+fr La mémoire utilisée par le jeu
+de Vom Spiel belegter Arbeitsspeicher
+it Memoria usata dal gioco
+es Memoria que usa el juego
+ru Память, которую использует игра
+
+@ Graphics card time per frame in milliseconds
+fr Temps de la carte graphique par image en millisecondes
+de Grafikkartenzeit pro Bild in Millisekunden
+it Tempo della scheda grafica per fotogramma in millisecondi
+es Tiempo de la tarjeta gráfica por fotograma en milisegundos
+ru Время видеокарты на кадр в миллисекундах
+
+@ Video memory in use and what the driver allows, where it reports it
+fr Mémoire vidéo utilisée et ce que le pilote permet, s'il l'indique
+de Belegter Videospeicher und was der Treiber erlaubt, sofern er es meldet
+it Memoria video in uso e quanta ne consente il driver, se lo indica
+es Memoria de vídeo en uso y la que permite el controlador, si lo indica
+ru Занятая видеопамять и доступный от драйвера объём, если он его сообщает

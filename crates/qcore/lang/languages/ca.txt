@@ -1484,6 +1484,89 @@ ca Com la finestra
 @ GPU Encoding
 ca Codificació per GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ca Temps i estadístiques
+
+@ Clock
+ca Rellotge
+
+@ Clock Position
+ca Posició del rellotge
+
+@ Level Timer
+ca Cronòmetre del nivell
+
+@ Personal Best
+ca Rècord personal
+
+@ Personal Best Type
+ca Tipus de rècord
+
+@ Personal Best Color
+ca Color del rècord
+
+@ Timer Position
+ca Posició del cronòmetre
+
+@ Kills
+ca Morts
+
+@ Secrets
+ca Secrets
+
+@ Kills & Secrets Position
+ca Posició de morts i secrets
+
+@ 24-hour
+ca 24 hores
+
+@ 24-hour + seconds
+ca 24 hores + segons
+
+@ 12-hour
+ca 12 hores
+
+@ 12-hour + seconds
+ca 12 hores + segons
+
+@ count
+ca nombre
+
+@ percent
+ca percentatge
+
+@ any% and 100%
+ca any% i 100%
+
+@ Keep Personal Best Demos
+ca Conserva les demos de rècords
+
+@ any%
+ca any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ca Mètriques de rendiment
+
+@ Frame Time
+ca Temps de fotograma
+
+@ CPU Usage
+ca Ús de la CPU
+
+@ Memory Usage
+ca Ús de memòria
+
+@ GPU Time
+ca Temps de GPU
+
+@ Video Memory
+ca Memòria de vídeo
+
+@ Metrics Position
+ca Posició de les mètriques
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ ca Mida del vídeo; els fotogrames s'escalen des de la mida de la finestra (amb 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ca Codifica a la targeta gràfica (NVIDIA NVENC, AMD o Intel mitjançant VA-API, AMF o Quick Sync, Apple VideoToolbox) quan ffmpeg la pot fer servir, deixant lliure el processador; si no, codifica el processador
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ca Mostra l'hora del dia en el format triat
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ca El temps del nivell, com a la pantalla d'intermedi; s'atura en pausa i a la sortida
+
+@ Your best time on this map and skill, next to the timer (single player)
+ca El teu millor temps en aquest mapa i dificultat, al costat del cronòmetre (un jugador)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ca any%: qualsevol final; 100%: totes les morts i secrets. Les fitxes de partides mostren aquest primer
+
+@ Color of the personal best on the HUD and save cards
+ca Color del rècord personal a l'HUD i a les fitxes de partides
+
+@ Shown as a count or as a percentage of the level's total
+ca Com a nombre o com a percentatge del total del nivell
+
+@ Where this goes on screen; items at the same position share a line
+ca On apareix a la pantalla; els elements a la mateixa posició comparteixen una línia
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ca Conserva la demo de cada nivell que fa un rècord personal; les antigues es queden. Enregistra fins i tot sense demos automàtiques
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ca Fotogrames per segon, mitjana de mig segon
+
+@ Average time per frame in milliseconds, and the slowest frame
+ca Temps mitjà per fotograma en mil·lisegons i el fotograma més lent
+
+@ How busy the game keeps the processor, as a share of all its cores
+ca Com d'ocupat té el joc el processador, com a part de tots els nuclis
+
+@ Memory the game uses
+ca Memòria que fa servir el joc
+
+@ Graphics card time per frame in milliseconds
+ca Temps de la targeta gràfica per fotograma en mil·lisegons
+
+@ Video memory in use and what the driver allows, where it reports it
+ca Memòria de vídeo en ús i la que permet el controlador, si ho indica
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ ca S'està exportant el vídeo
 @ Preparing...
 ca S'està preparant...
 
+# Save cards: personal best.
+@ PB {} {}
+ca PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ ca S'ha escrit {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ca No s'ha trobat ffmpeg: s'han escrit {} fotogrames PNG i un WAV a {}
+
+# Personal bests.
+@ New personal best ({}): {}
+ca Nou rècord personal ({}): {}

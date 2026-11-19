@@ -1484,6 +1484,89 @@ yue 同視窗一樣
 @ GPU Encoding
 yue GPU 編碼
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+yue 時間同統計
+
+@ Clock
+yue 時鐘
+
+@ Clock Position
+yue 時鐘位置
+
+@ Level Timer
+yue 關卡計時器
+
+@ Personal Best
+yue 個人最佳
+
+@ Personal Best Type
+yue 個人最佳類型
+
+@ Personal Best Color
+yue 個人最佳顏色
+
+@ Timer Position
+yue 計時器位置
+
+@ Kills
+yue 擊殺
+
+@ Secrets
+yue 秘密
+
+@ Kills & Secrets Position
+yue 擊殺同秘密位置
+
+@ 24-hour
+yue 24 小時制
+
+@ 24-hour + seconds
+yue 24 小時制 + 秒
+
+@ 12-hour
+yue 12 小時制
+
+@ 12-hour + seconds
+yue 12 小時制 + 秒
+
+@ count
+yue 數量
+
+@ percent
+yue 百分比
+
+@ any% and 100%
+yue any% 同 100%
+
+@ Keep Personal Best Demos
+yue 保留個人最佳示範
+
+@ any%
+yue any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+yue 效能指標
+
+@ Frame Time
+yue 影格時間
+
+@ CPU Usage
+yue CPU 使用率
+
+@ Memory Usage
+yue 記憶體用量
+
+@ GPU Time
+yue GPU 時間
+
+@ Video Memory
+yue 顯示記憶體
+
+@ Metrics Position
+yue 指標位置
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ yue 影片尺寸；影格係由視窗尺寸縮放出嚟（加黑邊保持比例�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 yue ffmpeg 用得到嘅話就喺顯示卡度編碼（NVIDIA NVENC、經 VA-API 嘅 AMD 或者 Intel、AMF 或者 Quick Sync、Apple VideoToolbox），等處理器得閒；否則由處理器編碼
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+yue 用揀咗嘅格式顯示而家幾點
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+yue 關卡時間，同過場畫面一樣；暫停同到出口嗰陣會停
+
+@ Your best time on this map and skill, next to the timer (single player)
+yue 你喺呢張地圖同難度嘅最佳時間，喺計時器隔籬顯示（單人遊戲）
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+yue any%：點樣通關都得；100%：全部擊殺同秘密。存檔卡片會先顯示呢個
+
+@ Color of the personal best on the HUD and save cards
+yue HUD 同存檔卡片上個人最佳嘅顏色
+
+@ Shown as a count or as a percentage of the level's total
+yue 用數量或者關卡總數嘅百分比顯示
+
+@ Where this goes on screen; items at the same position share a line
+yue 喺畫面上嘅位置；同一位置嘅項目共用一行
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+yue 保留每個破個人最佳嘅關卡示範；舊嘅都會留低。就算熄咗自動錄影都會錄
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+yue 每秒影格數，攞半秒平均
+
+@ Average time per frame in milliseconds, and the slowest frame
+yue 每格平均用時（毫秒）同最慢嗰格
+
+@ How busy the game keeps the processor, as a share of all its cores
+yue 遊戲用咗處理器幾多，以全部核心嘅比例計
+
+@ Memory the game uses
+yue 遊戲用緊嘅記憶體
+
+@ Graphics card time per frame in milliseconds
+yue 每格顯示卡用時（毫秒）
+
+@ Video memory in use and what the driver allows, where it reports it
+yue 用緊嘅顯示記憶體同驅動程式容許嘅上限（如果有報告）
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ yue 匯出緊影片
 @ Preparing...
 yue 準備緊...
 
+# Save cards: personal best.
+@ PB {} {}
+yue PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ yue 寫咗 {}（{} 秒）
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 yue 搵唔到 ffmpeg：寫咗 {} 格 PNG 同一個 WAV 去 {}
+
+# Personal bests.
+@ New personal best ({}): {}
+yue 新嘅個人最佳（{}）：{}

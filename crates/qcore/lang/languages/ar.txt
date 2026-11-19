@@ -1484,6 +1484,89 @@ ar مثل النافذة
 @ GPU Encoding
 ar ترميز GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ar الوقت والإحصاءات
+
+@ Clock
+ar الساعة
+
+@ Clock Position
+ar موضع الساعة
+
+@ Level Timer
+ar مؤقت المرحلة
+
+@ Personal Best
+ar أفضل رقم شخصي
+
+@ Personal Best Type
+ar نوع أفضل رقم
+
+@ Personal Best Color
+ar لون أفضل رقم
+
+@ Timer Position
+ar موضع المؤقت
+
+@ Kills
+ar القتلى
+
+@ Secrets
+ar الأسرار
+
+@ Kills & Secrets Position
+ar موضع القتلى والأسرار
+
+@ 24-hour
+ar 24 ساعة
+
+@ 24-hour + seconds
+ar 24 ساعة + ثوانٍ
+
+@ 12-hour
+ar 12 ساعة
+
+@ 12-hour + seconds
+ar 12 ساعة + ثوانٍ
+
+@ count
+ar عدد
+
+@ percent
+ar نسبة مئوية
+
+@ any% and 100%
+ar any% و100%
+
+@ Keep Personal Best Demos
+ar الاحتفاظ بعروض أفضل الأرقام
+
+@ any%
+ar any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ar مقاييس الأداء
+
+@ Frame Time
+ar زمن الإطار
+
+@ CPU Usage
+ar استخدام المعالج
+
+@ Memory Usage
+ar استخدام الذاكرة
+
+@ GPU Time
+ar زمن معالج الرسوميات
+
+@ Video Memory
+ar ذاكرة الفيديو
+
+@ Metrics Position
+ar موضع المقاييس
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ ar حجم الفيديو؛ تُحجَّم الإطارات من حجم النا�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ar يرمّز على بطاقة الرسوميات (NVIDIA NVENC، أو AMD أو Intel عبر VA-API، أو AMF أو Quick Sync، أو Apple VideoToolbox) عندما يستطيع ffmpeg استخدامها، فيبقى المعالج حرًّا؛ وإلا فالمعالج يرمّز
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ar يعرض الوقت بالتنسيق المختار
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ar وقت المرحلة كما في شاشة الاستراحة؛ يتوقف عند الإيقاف المؤقت وعند المخرج
+
+@ Your best time on this map and skill, next to the timer (single player)
+ar أفضل وقت لك في هذه الخريطة والصعوبة، بجانب المؤقت (لاعب واحد)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ar any%: أي إنهاء؛ 100%: كل القتلى والأسرار. بطاقات الحفظ تعرض هذا أولًا
+
+@ Color of the personal best on the HUD and save cards
+ar لون أفضل رقم شخصي في الواجهة وبطاقات الحفظ
+
+@ Shown as a count or as a percentage of the level's total
+ar كعدد أو كنسبة مئوية من مجموع المرحلة
+
+@ Where this goes on screen; items at the same position share a line
+ar مكانه على الشاشة؛ العناصر في الموضع نفسه تتشارك سطرًا
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ar يحتفظ بعرض كل مرحلة تحقق أفضل رقم شخصي؛ تبقى القديمة. يسجل حتى مع إيقاف التسجيل التلقائي
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ar الإطارات في الثانية، بمتوسط نصف ثانية
+
+@ Average time per frame in milliseconds, and the slowest frame
+ar متوسط زمن الإطار بالملّي ثانية، وأبطأ إطار
+
+@ How busy the game keeps the processor, as a share of all its cores
+ar مقدار انشغال المعالج باللعبة، كنسبة من كل أنويته
+
+@ Memory the game uses
+ar الذاكرة التي تستخدمها اللعبة
+
+@ Graphics card time per frame in milliseconds
+ar زمن بطاقة الرسوميات لكل إطار بالملّي ثانية
+
+@ Video memory in use and what the driver allows, where it reports it
+ar ذاكرة الفيديو المستخدمة وما يسمح به التعريف، حيث يبلّغ عنها
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ ar جارٍ تصدير الفيديو
 @ Preparing...
 ar جارٍ التحضير...
 
+# Save cards: personal best.
+@ PB {} {}
+ar PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ ar كُتب {} ({} ث)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ar لم يُعثر على ffmpeg: كُتب {} إطار PNG وملف WAV في {}
+
+# Personal bests.
+@ New personal best ({}): {}
+ar أفضل رقم شخصي جديد ({}): {}

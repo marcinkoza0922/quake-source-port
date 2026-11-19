@@ -1484,6 +1484,89 @@ bg Като прозореца
 @ GPU Encoding
 bg Кодиране с GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+bg Време и статистика
+
+@ Clock
+bg Часовник
+
+@ Clock Position
+bg Позиция на часовника
+
+@ Level Timer
+bg Таймер на нивото
+
+@ Personal Best
+bg Личен рекорд
+
+@ Personal Best Type
+bg Вид рекорд
+
+@ Personal Best Color
+bg Цвят на рекорда
+
+@ Timer Position
+bg Позиция на таймера
+
+@ Kills
+bg Убийства
+
+@ Secrets
+bg Тайни
+
+@ Kills & Secrets Position
+bg Позиция на убийства и тайни
+
+@ 24-hour
+bg 24-часов
+
+@ 24-hour + seconds
+bg 24-часов + секунди
+
+@ 12-hour
+bg 12-часов
+
+@ 12-hour + seconds
+bg 12-часов + секунди
+
+@ count
+bg брой
+
+@ percent
+bg процент
+
+@ any% and 100%
+bg any% и 100%
+
+@ Keep Personal Best Demos
+bg Пазене на демота с рекорди
+
+@ any%
+bg any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+bg Показатели за производителност
+
+@ Frame Time
+bg Време за кадър
+
+@ CPU Usage
+bg Натоварване на процесора
+
+@ Memory Usage
+bg Използвана памет
+
+@ GPU Time
+bg Време на GPU
+
+@ Video Memory
+bg Видеопамет
+
+@ Metrics Position
+bg Позиция на показателите
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ bg Размер на видеото; кадрите се мащабират от
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 bg Кодира на видеокартата (NVIDIA NVENC, AMD или Intel чрез VA-API, AMF или Quick Sync, Apple VideoToolbox), когато ffmpeg може да я използва, и оставя процесора свободен; иначе кодира процесорът
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+bg Показва часа в избрания формат
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+bg Времето на нивото, както на екрана с резултатите; спира при пауза и на изхода
+
+@ Your best time on this map and skill, next to the timer (single player)
+bg Най-доброто ви време на тази карта и трудност, до таймера (един играч)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+bg any%: всяко завършване; 100%: всички убийства и тайни. Картите на записите показват него първо
+
+@ Color of the personal best on the HUD and save cards
+bg Цвят на личния рекорд в HUD и на картите на записите
+
+@ Shown as a count or as a percentage of the level's total
+bg Като брой или процент от общото за нивото
+
+@ Where this goes on screen; items at the same position share a line
+bg Къде е на екрана; елементите на една позиция делят ред
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+bg Пази демото на всяко ниво с нов личен рекорд; старите остават. Записва и без автоматичен запис
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+bg Кадри в секунда, средно за половин секунда
+
+@ Average time per frame in milliseconds, and the slowest frame
+bg Средно време за кадър в милисекунди и най-бавният кадър
+
+@ How busy the game keeps the processor, as a share of all its cores
+bg Колко играта натоварва процесора, като дял от всичките му ядра
+
+@ Memory the game uses
+bg Паметта, която играта използва
+
+@ Graphics card time per frame in milliseconds
+bg Време на видеокартата за кадър в милисекунди
+
+@ Video memory in use and what the driver allows, where it reports it
+bg Заета видеопамет и колко позволява драйверът, ако го съобщава
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ bg Експорт на видео
 @ Preparing...
 bg Подготовка...
 
+# Save cards: personal best.
+@ PB {} {}
+bg PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ bg Записано {} ({} с)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 bg ffmpeg не е намерен: записани {} PNG кадъра и WAV в {}
+
+# Personal bests.
+@ New personal best ({}): {}
+bg Нов личен рекорд ({}): {}

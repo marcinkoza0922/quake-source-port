@@ -1484,6 +1484,89 @@ sr Као прозор
 @ GPU Encoding
 sr GPU кодирање
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+sr Време и статистика
+
+@ Clock
+sr Сат
+
+@ Clock Position
+sr Положај сата
+
+@ Level Timer
+sr Мерач времена нивоа
+
+@ Personal Best
+sr Лични рекорд
+
+@ Personal Best Type
+sr Врста рекорда
+
+@ Personal Best Color
+sr Боја рекорда
+
+@ Timer Position
+sr Положај мерача
+
+@ Kills
+sr Убиства
+
+@ Secrets
+sr Тајне
+
+@ Kills & Secrets Position
+sr Положај убистава и тајни
+
+@ 24-hour
+sr 24-часовни
+
+@ 24-hour + seconds
+sr 24-часовни + секунде
+
+@ 12-hour
+sr 12-часовни
+
+@ 12-hour + seconds
+sr 12-часовни + секунде
+
+@ count
+sr број
+
+@ percent
+sr проценат
+
+@ any% and 100%
+sr any% и 100%
+
+@ Keep Personal Best Demos
+sr Чувај демо снимке рекорда
+
+@ any%
+sr any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+sr Показатељи перформанси
+
+@ Frame Time
+sr Време кадра
+
+@ CPU Usage
+sr Коришћење процесора
+
+@ Memory Usage
+sr Коришћење меморије
+
+@ GPU Time
+sr GPU време
+
+@ Video Memory
+sr Видео меморија
+
+@ Metrics Position
+sr Положај показатеља
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ sr Величина видеа; кадрови се скалирају из ве
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 sr Кодира на графичкој картици (NVIDIA NVENC, AMD или Intel преко VA-API, AMF или Quick Sync, Apple VideoToolbox) када ffmpeg може да је користи, па процесор остаје слободан; иначе кодира процесор
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+sr Приказује доба дана у изабраном облику
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+sr Време нивоа, као на екрану међупрегледа; стаје током паузе и на излазу
+
+@ Your best time on this map and skill, next to the timer (single player)
+sr Ваше најбоље време на овој мапи и тежини, поред мерача (један играч)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+sr any%: било који завршетак; 100%: сва убиства и тајне. Картице снимљених игара приказују овај први
+
+@ Color of the personal best on the HUD and save cards
+sr Боја личног рекорда на HUD-у и картицама снимљених игара
+
+@ Shown as a count or as a percentage of the level's total
+sr Као број или као проценат укупног на нивоу
+
+@ Where this goes on screen; items at the same position share a line
+sr Где је то на екрану; ставке на истом положају деле ред
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+sr Чува демо снимак сваког нивоа са новим личним рекордом; стари остају. Снима и без аутоматског снимања
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+sr Кадрова у секунди, просек за пола секунде
+
+@ Average time per frame in milliseconds, and the slowest frame
+sr Просечно време кадра у милисекундама и најспорији кадар
+
+@ How busy the game keeps the processor, as a share of all its cores
+sr Колико игра оптерећује процесор, као удео свих језгара
+
+@ Memory the game uses
+sr Меморија коју игра користи
+
+@ Graphics card time per frame in milliseconds
+sr Време графичке картице по кадру у милисекундама
+
+@ Video memory in use and what the driver allows, where it reports it
+sr Заузета видео меморија и колико управљачки програм дозвољава, ако то јавља
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ sr Извоз видеа
 @ Preparing...
 sr Припрема...
 
+# Save cards: personal best.
+@ PB {} {}
+sr PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ sr Уписано {} ({} с)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 sr ffmpeg није пронађен: уписано {} PNG кадрова и WAV у {}
+
+# Personal bests.
+@ New personal best ({}): {}
+sr Нови лични рекорд ({}): {}

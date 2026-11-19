@@ -1484,6 +1484,89 @@ et Nagu aken
 @ GPU Encoding
 et GPU kodeerimine
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+et Aeg ja statistika
+
+@ Clock
+et Kell
+
+@ Clock Position
+et Kella asukoht
+
+@ Level Timer
+et Taseme taimer
+
+@ Personal Best
+et Isiklik rekord
+
+@ Personal Best Type
+et Rekordi tüüp
+
+@ Personal Best Color
+et Rekordi värv
+
+@ Timer Position
+et Taimeri asukoht
+
+@ Kills
+et Tapetud
+
+@ Secrets
+et Saladused
+
+@ Kills & Secrets Position
+et Tapetute ja saladuste asukoht
+
+@ 24-hour
+et 24-tunnine
+
+@ 24-hour + seconds
+et 24-tunnine + sekundid
+
+@ 12-hour
+et 12-tunnine
+
+@ 12-hour + seconds
+et 12-tunnine + sekundid
+
+@ count
+et arv
+
+@ percent
+et protsent
+
+@ any% and 100%
+et any% ja 100%
+
+@ Keep Personal Best Demos
+et Hoia rekordite demosid
+
+@ any%
+et any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+et Jõudlusnäitajad
+
+@ Frame Time
+et Kaadri aeg
+
+@ CPU Usage
+et Protsessori kasutus
+
+@ Memory Usage
+et Mälu kasutus
+
+@ GPU Time
+et GPU aeg
+
+@ Video Memory
+et Videomälu
+
+@ Metrics Position
+et Näitajate asukoht
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ et Video suurus; kaadrid skaleeritakse akna suurusest (kujuga säilitavate ribad
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 et Kodeerib videokaardil (NVIDIA NVENC, AMD või Intel VA-API kaudu, AMF või Quick Sync, Apple VideoToolbox), kui ffmpeg saab seda kasutada, jättes protsessori vabaks; muidu kodeerib protsessor
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+et Näitab kellaaega valitud vormingus
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+et Taseme aeg nagu vaheekraanil; peatub pausi ajal ja väljapääsul
+
+@ Your best time on this map and skill, next to the timer (single player)
+et Sinu parim aeg sellel kaardil ja raskusastmel, taimeri kõrval (üksikmäng)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+et any%: mis tahes lõpp; 100%: kõik tapetud ja saladused. Salvestuskaardid näitavad seda esimesena
+
+@ Color of the personal best on the HUD and save cards
+et Isikliku rekordi värv HUD-is ja salvestuskaartidel
+
+@ Shown as a count or as a percentage of the level's total
+et Arvuna või protsendina taseme koguarvust
+
+@ Where this goes on screen; items at the same position share a line
+et Kus see ekraanil on; samas asukohas olevad üksused jagavad rida
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+et Hoiab iga uue isikliku rekordiga taseme demo; vanad jäävad. Salvestab ka ilma automaatsalvestuseta
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+et Kaadrit sekundis, poole sekundi keskmine
+
+@ Average time per frame in milliseconds, and the slowest frame
+et Keskmine kaadri aeg millisekundites ja aeglaseim kaader
+
+@ How busy the game keeps the processor, as a share of all its cores
+et Kui palju mäng protsessorit koormab, kõigi tuumade osana
+
+@ Memory the game uses
+et Mängu kasutatav mälu
+
+@ Graphics card time per frame in milliseconds
+et Graafikakaardi aeg kaadri kohta millisekundites
+
+@ Video memory in use and what the driver allows, where it reports it
+et Kasutatud videomälu ja draiveri lubatud hulk, kui see seda teatab
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ et Video eksportimine
 @ Preparing...
 et Ettevalmistus...
 
+# Save cards: personal best.
+@ PB {} {}
+et PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ et Kirjutatud {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 et ffmpegi ei leitud: {} PNG-kaadrit ja WAV kirjutati asukohta {}
+
+# Personal bests.
+@ New personal best ({}): {}
+et Uus isiklik rekord ({}): {}

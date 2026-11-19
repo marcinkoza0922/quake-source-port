@@ -1484,6 +1484,89 @@ km ដូច​បង្អួច
 @ GPU Encoding
 km អ៊ិនកូដ​ដោយ GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+km ពេលវេលា​និង​ស្ថិតិ
+
+@ Clock
+km នាឡិកា
+
+@ Clock Position
+km ទីតាំង​នាឡិកា
+
+@ Level Timer
+km នាឡិកា​ចាប់​ម៉ោង​កម្រិត
+
+@ Personal Best
+km កំណត់ត្រា​ផ្ទាល់ខ្លួន
+
+@ Personal Best Type
+km ប្រភេទ​កំណត់ត្រា
+
+@ Personal Best Color
+km ពណ៌​កំណត់ត្រា
+
+@ Timer Position
+km ទីតាំង​នាឡិកា​ចាប់​ម៉ោង
+
+@ Kills
+km ការ​សម្លាប់
+
+@ Secrets
+km អាថ៌កំបាំង
+
+@ Kills & Secrets Position
+km ទីតាំង​ការ​សម្លាប់​និង​អាថ៌កំបាំង
+
+@ 24-hour
+km 24 ម៉ោង
+
+@ 24-hour + seconds
+km 24 ម៉ោង + វិនាទី
+
+@ 12-hour
+km 12 ម៉ោង
+
+@ 12-hour + seconds
+km 12 ម៉ោង + វិនាទី
+
+@ count
+km ចំនួន
+
+@ percent
+km ភាគរយ
+
+@ any% and 100%
+km any% និង 100%
+
+@ Keep Personal Best Demos
+km រក្សា​ដេមូ​កំណត់ត្រា​ផ្ទាល់ខ្លួន
+
+@ any%
+km any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+km រង្វាស់​ដំណើរការ
+
+@ Frame Time
+km ពេល​ស៊ុម
+
+@ CPU Usage
+km ការ​ប្រើ CPU
+
+@ Memory Usage
+km ការ​ប្រើ​អង្គ​ចងចាំ
+
+@ GPU Time
+km ពេល GPU
+
+@ Video Memory
+km អង្គ​ចងចាំ​វីដេអូ
+
+@ Metrics Position
+km ទីតាំង​រង្វាស់
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ km ទំហំ​វីដេអូ ស៊ុម​ត្រូវ​បាន�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 km អ៊ិនកូដ​នៅ​លើ​កាត​ក្រាហ្វិក (NVIDIA NVENC, AMD ឬ Intel តាម VA-API, AMF ឬ Quick Sync, Apple VideoToolbox) ពេល ffmpeg អាច​ប្រើ​វា​បាន ដោយ​ទុក​ឲ្យ​ប្រព័ន្ធ​ដំណើរការ​ទំនេរ បើ​មិន​ដូច្នេះ​ទេ ប្រព័ន្ធ​ដំណើរការ​អ៊ិនកូដ
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+km បង្ហាញ​ម៉ោង​ក្នុង​ទម្រង់​ដែល​បាន​ជ្រើស
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+km ពេល​នៃ​កម្រិត ដូច​អេក្រង់​សម្រាក ឈប់​ពេល​ផ្អាក​និង​នៅ​ច្រក​ចេញ
+
+@ Your best time on this map and skill, next to the timer (single player)
+km ពេល​ល្អ​បំផុត​របស់​អ្នក​លើ​ផែនទី​និង​កម្រិត​លំបាក​នេះ ក្បែរ​នាឡិកា (អ្នក​លេង​ម្នាក់)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+km any%: បញ្ចប់​បែប​ណា​ក៏​បាន 100%: សម្លាប់​ទាំងអស់​និង​អាថ៌កំបាំង​ទាំងអស់ កាត​រក្សាទុក​បង្ហាញ​អា​នេះ​មុន
+
+@ Color of the personal best on the HUD and save cards
+km ពណ៌​កំណត់ត្រា​ផ្ទាល់ខ្លួន​លើ HUD និង​កាត​រក្សាទុក
+
+@ Shown as a count or as a percentage of the level's total
+km ជា​ចំនួន ឬ​ជា​ភាគរយ​នៃ​សរុប​កម្រិត
+
+@ Where this goes on screen; items at the same position share a line
+km ទីតាំង​លើ​អេក្រង់ ធាតុ​នៅ​ទីតាំង​ដូចគ្នា​ចែក​បន្ទាត់​គ្នា
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+km រក្សា​ដេមូ​គ្រប់​កម្រិត​ដែល​បង្កើត​កំណត់ត្រា​ផ្ទាល់ខ្លួន ចាស់ៗ​នៅ​ដដែល ថត​ទោះ​បិទ​ការ​ថត​ស្វ័យប្រវត្តិ
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+km ស៊ុម​ក្នុង​មួយ​វិនាទី មធ្យម​កន្លះ​វិនាទី
+
+@ Average time per frame in milliseconds, and the slowest frame
+km ពេល​មធ្យម​ក្នុង​មួយ​ស៊ុម​ជា​មិល្លី​វិនាទី និង​ស៊ុម​យឺត​បំផុត
+
+@ How busy the game keeps the processor, as a share of all its cores
+km ហ្គេម​ប្រើ​ខួរក្បាល​ប៉ុណ្ណា ជា​ចំណែក​នៃ​ស្នូល​ទាំងអស់
+
+@ Memory the game uses
+km អង្គ​ចងចាំ​ដែល​ហ្គេម​ប្រើ
+
+@ Graphics card time per frame in milliseconds
+km ពេល​កាត​ក្រាហ្វិក​ក្នុង​មួយ​ស៊ុម​ជា​មិល្លី​វិនាទី
+
+@ Video memory in use and what the driver allows, where it reports it
+km អង្គ​ចងចាំ​វីដេអូ​កំពុង​ប្រើ​និង​ដែល​កម្មវិធី​បញ្ជា​អនុញ្ញាត បើ​វា​រាយការណ៍
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ km កំពុង​នាំចេញ​វីដេអូ
 @ Preparing...
 km កំពុង​រៀបចំ...
 
+# Save cards: personal best.
+@ PB {} {}
+km PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ km បាន​សរសេរ {} ({} វិ)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 km រក​មិន​ឃើញ ffmpeg៖ បាន​សរសេរ​ស៊ុម PNG {} និង WAV មួយ​ទៅ {}
+
+# Personal bests.
+@ New personal best ({}): {}
+km កំណត់ត្រា​ផ្ទាល់ខ្លួន​ថ្មី ({}): {}

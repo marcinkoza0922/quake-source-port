@@ -1484,6 +1484,89 @@ th เหมือน​หน้าต่าง
 @ GPU Encoding
 th เข้ารหัส​ด้วย GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+th เวลา​และ​สถิติ
+
+@ Clock
+th นาฬิกา
+
+@ Clock Position
+th ตำแหน่ง​นาฬิกา
+
+@ Level Timer
+th ตัว​จับ​เวลา​ด่าน
+
+@ Personal Best
+th สถิติ​ส่วนตัว
+
+@ Personal Best Type
+th ประเภท​สถิติ
+
+@ Personal Best Color
+th สี​สถิติ
+
+@ Timer Position
+th ตำแหน่ง​ตัว​จับ​เวลา
+
+@ Kills
+th การ​สังหาร
+
+@ Secrets
+th ความลับ
+
+@ Kills & Secrets Position
+th ตำแหน่ง​การ​สังหาร​และ​ความลับ
+
+@ 24-hour
+th 24 ชั่วโมง
+
+@ 24-hour + seconds
+th 24 ชั่วโมง + วินาที
+
+@ 12-hour
+th 12 ชั่วโมง
+
+@ 12-hour + seconds
+th 12 ชั่วโมง + วินาที
+
+@ count
+th จำนวน
+
+@ percent
+th เปอร์เซ็นต์
+
+@ any% and 100%
+th any% และ 100%
+
+@ Keep Personal Best Demos
+th เก็บ​เดโม​สถิติ​ส่วนตัว
+
+@ any%
+th any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+th ตัว​ชี้​วัด​ประสิทธิภาพ
+
+@ Frame Time
+th เวลา​ต่อ​เฟรม
+
+@ CPU Usage
+th การ​ใช้ CPU
+
+@ Memory Usage
+th การ​ใช้​หน่วย​ความ​จำ
+
+@ GPU Time
+th เวลา GPU
+
+@ Video Memory
+th หน่วย​ความ​จำ​วิดีโอ
+
+@ Metrics Position
+th ตำแหน่ง​ตัว​ชี้​วัด
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ th ขนาด​วิดีโอ เฟรม​ถูก​ปรับ​�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 th เข้ารหัส​ด้วย​การ์ด​จอ (NVIDIA NVENC, AMD หรือ Intel ผ่าน VA-API, AMF หรือ Quick Sync, Apple VideoToolbox) เมื่อ ffmpeg ใช้​ได้ ทำให้​หน่วย​ประมวลผล​ว่าง ไม่​เช่นนั้น​หน่วย​ประมวลผล​จะ​เข้ารหัส​เอง
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+th แสดง​เวลา​ของ​วัน​ใน​รูปแบบ​ที่​เลือก
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+th เวลา​ของ​ด่าน เหมือน​หน้าจอ​พัก​ระหว่าง​ด่าน หยุด​เมื่อ​พัก​เกม​และ​ที่​ทาง​ออก
+
+@ Your best time on this map and skill, next to the timer (single player)
+th เวลา​ที่​ดี​ที่สุด​ของ​คุณ​ใน​แผนที่​และ​ระดับ​ความ​ยาก​นี้ ข้าง​ตัว​จับ​เวลา (ผู้​เล่น​คน​เดียว)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+th any%: จบ​แบบ​ใด​ก็ได้ 100%: สังหาร​ทั้งหมด​และ​ความลับ​ทั้งหมด การ์ด​เซฟ​แสดง​อัน​นี้​ก่อน
+
+@ Color of the personal best on the HUD and save cards
+th สี​ของ​สถิติ​ส่วนตัว​บน HUD และ​การ์ด​เซฟ
+
+@ Shown as a count or as a percentage of the level's total
+th แสดง​เป็น​จำนวน​หรือ​เปอร์เซ็นต์​ของ​ทั้ง​ด่าน
+
+@ Where this goes on screen; items at the same position share a line
+th ตำแหน่ง​บน​หน้าจอ รายการ​ที่​ตำแหน่ง​เดียวกัน​ใช้​บรรทัด​ร่วม​กัน
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+th เก็บ​เดโม​ของ​ทุก​ด่าน​ที่​ทำ​สถิติ​ส่วนตัว อัน​เก่า​ยัง​อยู่ บันทึก​แม้​ปิด​การ​บันทึก​อัตโนมัติ
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+th เฟรม​ต่อ​วินาที เฉลี่ย​ครึ่ง​วินาที
+
+@ Average time per frame in milliseconds, and the slowest frame
+th เวลา​เฉลี่ย​ต่อ​เฟรม​เป็น​มิลลิ​วินาที และ​เฟรม​ที่​ช้า​ที่สุด
+
+@ How busy the game keeps the processor, as a share of all its cores
+th เกม​ใช้​โปรเซสเซอร์​มาก​แค่ไหน เป็น​สัดส่วน​ของ​ทุก​คอร์
+
+@ Memory the game uses
+th หน่วย​ความ​จำ​ที่​เกม​ใช้
+
+@ Graphics card time per frame in milliseconds
+th เวลา​การ์ด​จอ​ต่อ​เฟรม​เป็น​มิลลิ​วินาที
+
+@ Video memory in use and what the driver allows, where it reports it
+th หน่วย​ความ​จำ​วิดีโอ​ที่​ใช้​และ​ที่​ไดรเวอร์​อนุญาต หาก​มี​การ​รายงาน
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ th กำลัง​ส่งออก​วิดีโอ
 @ Preparing...
 th กำลัง​เตรียม...
 
+# Save cards: personal best.
+@ PB {} {}
+th PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ th เขียน {} แล้ว ({} วินาที)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 th ไม่พบ ffmpeg: เขียน​เฟรม PNG {} เฟรม​และ WAV หนึ่ง​ไฟล์​ไป​ที่ {}
+
+# Personal bests.
+@ New personal best ({}): {}
+th สถิติ​ส่วนตัว​ใหม่ ({}): {}

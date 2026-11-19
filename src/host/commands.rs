@@ -168,6 +168,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "hitsound" => Some(Page::HitSound),
             "killsound" => Some(Page::KillSound),
             "hudlayout" | "layout" => Some(Page::HudLayout),
+            "time" | "timehud" => Some(Page::TimeHud),
+            "metrics" | "performance" => Some(Page::Metrics),
             "messages" => Some(Page::Messages),
             "accessibility" => Some(Page::Accessibility),
             "graphics" => Some(Page::Graphics),

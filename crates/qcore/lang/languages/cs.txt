@@ -1484,6 +1484,89 @@ cs Jako okno
 @ GPU Encoding
 cs Kódování na GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+cs Čas a statistiky
+
+@ Clock
+cs Hodiny
+
+@ Clock Position
+cs Pozice hodin
+
+@ Level Timer
+cs Časovač úrovně
+
+@ Personal Best
+cs Osobní rekord
+
+@ Personal Best Type
+cs Typ rekordu
+
+@ Personal Best Color
+cs Barva rekordu
+
+@ Timer Position
+cs Pozice časovače
+
+@ Kills
+cs Zabití
+
+@ Secrets
+cs Tajemství
+
+@ Kills & Secrets Position
+cs Pozice zabití a tajemství
+
+@ 24-hour
+cs 24hodinový
+
+@ 24-hour + seconds
+cs 24hodinový + sekundy
+
+@ 12-hour
+cs 12hodinový
+
+@ 12-hour + seconds
+cs 12hodinový + sekundy
+
+@ count
+cs počet
+
+@ percent
+cs procenta
+
+@ any% and 100%
+cs any% a 100%
+
+@ Keep Personal Best Demos
+cs Uchovávat dema rekordů
+
+@ any%
+cs any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+cs Ukazatele výkonu
+
+@ Frame Time
+cs Čas snímku
+
+@ CPU Usage
+cs Využití procesoru
+
+@ Memory Usage
+cs Využití paměti
+
+@ GPU Time
+cs Čas GPU
+
+@ Video Memory
+cs Videopaměť
+
+@ Metrics Position
+cs Pozice ukazatelů
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ cs Velikost videa; snímky se škálují z velikosti okna (s pruhy pro zachován
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 cs Kóduje na grafické kartě (NVIDIA NVENC, AMD nebo Intel přes VA-API, AMF či Quick Sync, Apple VideoToolbox), pokud ji ffmpeg umí použít, a nechává procesor volný; jinak kóduje procesor
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+cs Zobrazuje denní čas ve zvoleném formátu
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+cs Čas úrovně jako na obrazovce přestávky; zastaví se při pauze a u východu
+
+@ Your best time on this map and skill, next to the timer (single player)
+cs Váš nejlepší čas na této mapě a obtížnosti vedle časovače (hra jednoho hráče)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+cs any%: jakékoli dokončení; 100%: všechna zabití a tajemství. Karty uložených her ukazují tento první
+
+@ Color of the personal best on the HUD and save cards
+cs Barva osobního rekordu v HUD a na kartách uložených her
+
+@ Shown as a count or as a percentage of the level's total
+cs Jako počet nebo procento z celku úrovně
+
+@ Where this goes on screen; items at the same position share a line
+cs Kde to na obrazovce je; položky na stejné pozici sdílejí řádek
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+cs Uchová demo každé úrovně s novým osobním rekordem; stará zůstávají. Nahrává i bez automatických dem
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+cs Snímky za sekundu, průměr za půl sekundy
+
+@ Average time per frame in milliseconds, and the slowest frame
+cs Průměrný čas snímku v milisekundách a nejpomalejší snímek
+
+@ How busy the game keeps the processor, as a share of all its cores
+cs Jak moc hra vytěžuje procesor, jako podíl všech jader
+
+@ Memory the game uses
+cs Paměť, kterou hra používá
+
+@ Graphics card time per frame in milliseconds
+cs Čas grafické karty na snímek v milisekundách
+
+@ Video memory in use and what the driver allows, where it reports it
+cs Použitá videopaměť a kolik ovladač dovoluje, pokud to hlásí
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ cs Export videa
 @ Preparing...
 cs Příprava...
 
+# Save cards: personal best.
+@ PB {} {}
+cs PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ cs Zapsáno {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 cs ffmpeg nenalezen: zapsáno {} snímků PNG a WAV do {}
+
+# Personal bests.
+@ New personal best ({}): {}
+cs Nový osobní rekord ({}): {}

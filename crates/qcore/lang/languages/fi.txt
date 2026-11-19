@@ -1484,6 +1484,89 @@ fi Kuten ikkuna
 @ GPU Encoding
 fi GPU-koodaus
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+fi Aika ja tilastot
+
+@ Clock
+fi Kello
+
+@ Clock Position
+fi Kellon sijainti
+
+@ Level Timer
+fi Tason ajastin
+
+@ Personal Best
+fi Oma ennätys
+
+@ Personal Best Type
+fi Ennätyksen tyyppi
+
+@ Personal Best Color
+fi Ennätyksen väri
+
+@ Timer Position
+fi Ajastimen sijainti
+
+@ Kills
+fi Tapot
+
+@ Secrets
+fi Salaisuudet
+
+@ Kills & Secrets Position
+fi Tappojen ja salaisuuksien sijainti
+
+@ 24-hour
+fi 24 tuntia
+
+@ 24-hour + seconds
+fi 24 tuntia + sekunnit
+
+@ 12-hour
+fi 12 tuntia
+
+@ 12-hour + seconds
+fi 12 tuntia + sekunnit
+
+@ count
+fi määrä
+
+@ percent
+fi prosentti
+
+@ any% and 100%
+fi any% ja 100%
+
+@ Keep Personal Best Demos
+fi Säilytä ennätysdemot
+
+@ any%
+fi any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+fi Suorituskykymittarit
+
+@ Frame Time
+fi Kuva-aika
+
+@ CPU Usage
+fi Suorittimen käyttö
+
+@ Memory Usage
+fi Muistin käyttö
+
+@ GPU Time
+fi GPU-aika
+
+@ Video Memory
+fi Videomuisti
+
+@ Metrics Position
+fi Mittarien sijainti
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ fi Videon koko; kuvat skaalataan ikkunan koosta (reunoilla, jotta muoto säilyy)
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 fi Koodaa näytönohjaimella (NVIDIA NVENC, AMD tai Intel VA-API:n kautta, AMF tai Quick Sync, Apple VideoToolbox), kun ffmpeg voi käyttää sitä, jolloin suoritin jää vapaaksi; muuten suoritin koodaa
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+fi Näyttää kellonajan valitussa muodossa
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+fi Tason aika kuten väliruudussa; pysähtyy tauolla ja uloskäynnillä
+
+@ Your best time on this map and skill, next to the timer (single player)
+fi Paras aikasi tällä kartalla ja vaikeustasolla ajastimen vieressä (yksinpeli)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+fi any%: mikä tahansa läpäisy; 100%: kaikki tapot ja salaisuudet. Tallennuskortit näyttävät tämän ensin
+
+@ Color of the personal best on the HUD and save cards
+fi Oman ennätyksen väri HUD:ssa ja tallennuskorteissa
+
+@ Shown as a count or as a percentage of the level's total
+fi Määränä tai prosenttina tason kokonaismäärästä
+
+@ Where this goes on screen; items at the same position share a line
+fi Missä se näkyy ruudulla; samassa sijainnissa olevat jakavat rivin
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+fi Säilyttää jokaisen uuden oman ennätyksen tason demon; vanhat jäävät. Nauhoittaa myös ilman automaattidemoja
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+fi Kuvaa sekunnissa, puolen sekunnin keskiarvo
+
+@ Average time per frame in milliseconds, and the slowest frame
+fi Keskimääräinen kuva-aika millisekunteina ja hitain kuva
+
+@ How busy the game keeps the processor, as a share of all its cores
+fi Kuinka paljon peli kuormittaa suoritinta, osuutena kaikista ytimistä
+
+@ Memory the game uses
+fi Pelin käyttämä muisti
+
+@ Graphics card time per frame in milliseconds
+fi Näytönohjaimen aika kuvaa kohden millisekunteina
+
+@ Video memory in use and what the driver allows, where it reports it
+fi Käytetty videomuisti ja ajurin sallima määrä, jos ajuri ilmoittaa sen
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ fi Viedään videota
 @ Preparing...
 fi Valmistellaan...
 
+# Save cards: personal best.
+@ PB {} {}
+fi PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ fi Kirjoitettu {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 fi ffmpegiä ei löytynyt: {} PNG-kuvaa ja WAV kirjoitettu kohteeseen {}
+
+# Personal bests.
+@ New personal best ({}): {}
+fi Uusi oma ennätys ({}): {}

@@ -1484,6 +1484,89 @@ ta சாளரம் போல
 @ GPU Encoding
 ta GPU குறியாக்கம்
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ta நேரம் & புள்ளிவிவரம்
+
+@ Clock
+ta கடிகாரம்
+
+@ Clock Position
+ta கடிகார இடம்
+
+@ Level Timer
+ta நிலை நேரமானி
+
+@ Personal Best
+ta தனிப்பட்ட சிறந்தது
+
+@ Personal Best Type
+ta சிறந்ததின் வகை
+
+@ Personal Best Color
+ta சிறந்ததின் நிறம்
+
+@ Timer Position
+ta நேரமானி இடம்
+
+@ Kills
+ta கொலைகள்
+
+@ Secrets
+ta ரகசியங்கள்
+
+@ Kills & Secrets Position
+ta கொலைகள் & ரகசியங்கள் இடம்
+
+@ 24-hour
+ta 24 மணி
+
+@ 24-hour + seconds
+ta 24 மணி + வினாடிகள்
+
+@ 12-hour
+ta 12 மணி
+
+@ 12-hour + seconds
+ta 12 மணி + வினாடிகள்
+
+@ count
+ta எண்ணிக்கை
+
+@ percent
+ta சதவீதம்
+
+@ any% and 100%
+ta any% மற்றும் 100%
+
+@ Keep Personal Best Demos
+ta தனிப்பட்ட சிறந்த டெமோக்களை வை
+
+@ any%
+ta any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ta செயல்திறன் அளவீடுகள்
+
+@ Frame Time
+ta சட்ட நேரம்
+
+@ CPU Usage
+ta CPU பயன்பாடு
+
+@ Memory Usage
+ta நினைவக பயன்பாடு
+
+@ GPU Time
+ta GPU நேரம்
+
+@ Video Memory
+ta வீடியோ நினைவகம்
+
+@ Metrics Position
+ta அளவீடுகளின் இடம்
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ ta வீடியோ அளவு; சட்டகங்கள் சாளர 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ta ffmpeg பயன்படுத்த முடிந்தால் கிராபிக்ஸ் அட்டையில் குறியாக்கம் செய்யும் (NVIDIA NVENC, VA-API வழியாக AMD அல்லது Intel, AMF அல்லது Quick Sync, Apple VideoToolbox), செயலியை விடுவிக்கும்; இல்லையெனில் செயலி குறியாக்கம் செய்யும்
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ta தேர்ந்தெடுத்த வடிவில் நேரத்தைக் காட்டும்
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ta நிலையின் நேரம், இடைவேளைத் திரையில் போல; இடைநிறுத்தும்போதும் வெளியேறும் இடத்திலும் நிற்கும்
+
+@ Your best time on this map and skill, next to the timer (single player)
+ta இந்த வரைபடம் மற்றும் கடினத்தில் உங்கள் சிறந்த நேரம், நேரமானிக்கு அருகில் (ஒற்றை வீரர்)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ta any%: எந்த முடிவும்; 100%: எல்லாக் கொலைகளும் ரகசியங்களும். சேமிப்பு அட்டைகள் இதை முதலில் காட்டும்
+
+@ Color of the personal best on the HUD and save cards
+ta HUD மற்றும் சேமிப்பு அட்டைகளில் தனிப்பட்ட சிறந்ததின் நிறம்
+
+@ Shown as a count or as a percentage of the level's total
+ta எண்ணிக்கையாக அல்லது நிலையின் மொத்தத்தின் சதவீதமாக
+
+@ Where this goes on screen; items at the same position share a line
+ta இது திரையில் எங்கே; ஒரே இடத்தில் உள்ளவை ஒரு வரியைப் பகிரும்
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ta தனிப்பட்ட சிறந்ததை அமைக்கும் ஒவ்வொரு நிலையின் டெமோவையும் வைக்கும்; பழையவை இருக்கும். தானியங்கு பதிவு அணைத்திருந்தாலும் பதிவு செய்யும்
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ta வினாடிக்குச் சட்டங்கள், அரை வினாடி சராசரி
+
+@ Average time per frame in milliseconds, and the slowest frame
+ta ஒரு சட்டத்துக்கான சராசரி நேரம் மில்லிவினாடிகளில், மற்றும் மெதுவான சட்டம்
+
+@ How busy the game keeps the processor, as a share of all its cores
+ta விளையாட்டு செயலியை எவ்வளவு பயன்படுத்துகிறது, எல்லா கோர்களின் பங்காக
+
+@ Memory the game uses
+ta விளையாட்டு பயன்படுத்தும் நினைவகம்
+
+@ Graphics card time per frame in milliseconds
+ta ஒரு சட்டத்துக்கான கிராபிக்ஸ் அட்டை நேரம் மில்லிவினாடிகளில்
+
+@ Video memory in use and what the driver allows, where it reports it
+ta பயன்பாட்டில் உள்ள வீடியோ நினைவகம் மற்றும் இயக்கி அனுமதிப்பது, அது தெரிவிக்கும் இடத்தில்
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ ta வீடியோ ஏற்றுமதியாகிறது
 @ Preparing...
 ta தயாராகிறது...
 
+# Save cards: personal best.
+@ PB {} {}
+ta PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ ta {} எழுதப்பட்டது ({} வி.)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ta ffmpeg கிடைக்கவில்லை: {} PNG சட்டகங்களும் ஒரு WAV உம் {} இல் எழுதப்பட்டன
+
+# Personal bests.
+@ New personal best ({}): {}
+ta புதிய தனிப்பட்ட சிறந்தது ({}): {}

@@ -1484,6 +1484,89 @@ hi विंडो जैसा
 @ GPU Encoding
 hi GPU एनकोडिंग
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+hi समय और आँकड़े
+
+@ Clock
+hi घड़ी
+
+@ Clock Position
+hi घड़ी की जगह
+
+@ Level Timer
+hi लेवल टाइमर
+
+@ Personal Best
+hi निजी सर्वश्रेष्ठ
+
+@ Personal Best Type
+hi सर्वश्रेष्ठ का प्रकार
+
+@ Personal Best Color
+hi सर्वश्रेष्ठ का रंग
+
+@ Timer Position
+hi टाइमर की जगह
+
+@ Kills
+hi किल
+
+@ Secrets
+hi रहस्य
+
+@ Kills & Secrets Position
+hi किल और रहस्यों की जगह
+
+@ 24-hour
+hi 24 घंटे
+
+@ 24-hour + seconds
+hi 24 घंटे + सेकंड
+
+@ 12-hour
+hi 12 घंटे
+
+@ 12-hour + seconds
+hi 12 घंटे + सेकंड
+
+@ count
+hi संख्या
+
+@ percent
+hi प्रतिशत
+
+@ any% and 100%
+hi any% और 100%
+
+@ Keep Personal Best Demos
+hi निजी सर्वश्रेष्ठ डेमो रखें
+
+@ any%
+hi any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+hi प्रदर्शन मापदंड
+
+@ Frame Time
+hi फ़्रेम समय
+
+@ CPU Usage
+hi CPU उपयोग
+
+@ Memory Usage
+hi मेमोरी उपयोग
+
+@ GPU Time
+hi GPU समय
+
+@ Video Memory
+hi वीडियो मेमोरी
+
+@ Metrics Position
+hi मापदंडों की जगह
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ hi वीडियो का आकार; फ़्रेम विंडो �
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 hi ffmpeg इस्तेमाल कर सके तो ग्राफ़िक्स कार्ड पर एनकोड करता है (NVIDIA NVENC, VA-API से AMD या Intel, AMF या Quick Sync, Apple VideoToolbox) और प्रोसेसर को खाली रखता है; नहीं तो प्रोसेसर एनकोड करता है
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+hi चुने गए प्रारूप में दिन का समय दिखाता है
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+hi लेवल का समय, इंटरमिशन स्क्रीन की तरह; रोकने पर और निकास पर थम जाता है
+
+@ Your best time on this map and skill, next to the timer (single player)
+hi इस मैप और कठिनाई पर आपका सबसे अच्छा समय, टाइमर के पास (एकल खिलाड़ी)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+hi any%: कोई भी अंत; 100%: सारे किल और रहस्य। सेव कार्ड पहले यही दिखाते हैं
+
+@ Color of the personal best on the HUD and save cards
+hi HUD और सेव कार्ड पर निजी सर्वश्रेष्ठ का रंग
+
+@ Shown as a count or as a percentage of the level's total
+hi संख्या के रूप में या लेवल के कुल के प्रतिशत के रूप में
+
+@ Where this goes on screen; items at the same position share a line
+hi यह स्क्रीन पर कहाँ है; एक ही जगह की चीज़ें एक पंक्ति साझा करती हैं
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+hi निजी सर्वश्रेष्ठ बनाने वाले हर लेवल का डेमो रखता है; पुराने बने रहते हैं। स्वतः रिकॉर्ड बंद होने पर भी रिकॉर्ड करता है
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+hi प्रति सेकंड फ़्रेम, आधे सेकंड का औसत
+
+@ Average time per frame in milliseconds, and the slowest frame
+hi प्रति फ़्रेम औसत समय मिलीसेकंड में, और सबसे धीमा फ़्रेम
+
+@ How busy the game keeps the processor, as a share of all its cores
+hi गेम प्रोसेसर को कितना व्यस्त रखता है, सभी कोर के हिस्से के रूप में
+
+@ Memory the game uses
+hi गेम द्वारा इस्तेमाल की गई मेमोरी
+
+@ Graphics card time per frame in milliseconds
+hi प्रति फ़्रेम ग्राफ़िक्स कार्ड का समय मिलीसेकंड में
+
+@ Video memory in use and what the driver allows, where it reports it
+hi उपयोग में वीडियो मेमोरी और ड्राइवर की अनुमति, जहाँ वह बताता है
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ hi वीडियो निर्यात हो रहा है
 @ Preparing...
 hi तैयारी हो रही है...
 
+# Save cards: personal best.
+@ PB {} {}
+hi PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ hi {} लिखा गया ({} से.)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 hi ffmpeg नहीं मिला: {} PNG फ़्रेम और एक WAV {} में लिखे गए
+
+# Personal bests.
+@ New personal best ({}): {}
+hi नया निजी सर्वश्रेष्ठ ({}): {}

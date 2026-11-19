@@ -1484,6 +1484,89 @@ el Όπως το παράθυρο
 @ GPU Encoding
 el Κωδικοποίηση GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+el Χρόνος και στατιστικά
+
+@ Clock
+el Ρολόι
+
+@ Clock Position
+el Θέση ρολογιού
+
+@ Level Timer
+el Χρονόμετρο πίστας
+
+@ Personal Best
+el Προσωπικό ρεκόρ
+
+@ Personal Best Type
+el Τύπος ρεκόρ
+
+@ Personal Best Color
+el Χρώμα ρεκόρ
+
+@ Timer Position
+el Θέση χρονομέτρου
+
+@ Kills
+el Σκοτωμοί
+
+@ Secrets
+el Μυστικά
+
+@ Kills & Secrets Position
+el Θέση σκοτωμών και μυστικών
+
+@ 24-hour
+el 24ωρο
+
+@ 24-hour + seconds
+el 24ωρο + δευτερόλεπτα
+
+@ 12-hour
+el 12ωρο
+
+@ 12-hour + seconds
+el 12ωρο + δευτερόλεπτα
+
+@ count
+el πλήθος
+
+@ percent
+el ποσοστό
+
+@ any% and 100%
+el any% και 100%
+
+@ Keep Personal Best Demos
+el Διατήρηση demo ρεκόρ
+
+@ any%
+el any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+el Μετρήσεις επιδόσεων
+
+@ Frame Time
+el Χρόνος καρέ
+
+@ CPU Usage
+el Χρήση CPU
+
+@ Memory Usage
+el Χρήση μνήμης
+
+@ GPU Time
+el Χρόνος GPU
+
+@ Video Memory
+el Μνήμη βίντεο
+
+@ Metrics Position
+el Θέση μετρήσεων
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ el Μέγεθος βίντεο· τα καρέ κλιμακώνονται από
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 el Κωδικοποιεί στην κάρτα γραφικών (NVIDIA NVENC, AMD ή Intel μέσω VA-API, AMF ή Quick Sync, Apple VideoToolbox) όταν το ffmpeg μπορεί να τη χρησιμοποιήσει, αφήνοντας ελεύθερο τον επεξεργαστή· αλλιώς κωδικοποιεί ο επεξεργαστής
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+el Δείχνει την ώρα στη μορφή που επιλέξατε
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+el Ο χρόνος της πίστας, όπως στην οθόνη διαλείμματος· σταματά στην παύση και στην έξοδο
+
+@ Your best time on this map and skill, next to the timer (single player)
+el Ο καλύτερος χρόνος σας σε αυτόν τον χάρτη και τη δυσκολία, δίπλα στο χρονόμετρο (ένας παίκτης)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+el any%: οποιοδήποτε τέλος· 100%: όλοι οι σκοτωμοί και τα μυστικά. Οι κάρτες αποθήκευσης δείχνουν αυτό πρώτα
+
+@ Color of the personal best on the HUD and save cards
+el Χρώμα του προσωπικού ρεκόρ στο HUD και στις κάρτες αποθήκευσης
+
+@ Shown as a count or as a percentage of the level's total
+el Ως πλήθος ή ως ποσοστό του συνόλου της πίστας
+
+@ Where this goes on screen; items at the same position share a line
+el Πού εμφανίζεται στην οθόνη· στοιχεία στην ίδια θέση μοιράζονται γραμμή
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+el Κρατά το demo κάθε πίστας με νέο προσωπικό ρεκόρ· τα παλιά μένουν. Καταγράφει ακόμη και χωρίς αυτόματη εγγραφή
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+el Καρέ ανά δευτερόλεπτο, μέσος όρος μισού δευτερολέπτου
+
+@ Average time per frame in milliseconds, and the slowest frame
+el Μέσος χρόνος ανά καρέ σε χιλιοστά του δευτερολέπτου και το πιο αργό καρέ
+
+@ How busy the game keeps the processor, as a share of all its cores
+el Πόσο απασχολεί το παιχνίδι τον επεξεργαστή, ως μερίδιο όλων των πυρήνων
+
+@ Memory the game uses
+el Η μνήμη που χρησιμοποιεί το παιχνίδι
+
+@ Graphics card time per frame in milliseconds
+el Χρόνος κάρτας γραφικών ανά καρέ σε χιλιοστά του δευτερολέπτου
+
+@ Video memory in use and what the driver allows, where it reports it
+el Μνήμη βίντεο σε χρήση και όσο επιτρέπει ο οδηγός, όπου το αναφέρει
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ el Εξαγωγή βίντεο
 @ Preparing...
 el Προετοιμασία...
 
+# Save cards: personal best.
+@ PB {} {}
+el PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ el Γράφτηκε {} ({} δ)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 el Δεν βρέθηκε ffmpeg: γράφτηκαν {} καρέ PNG και ένα WAV στο {}
+
+# Personal bests.
+@ New personal best ({}): {}
+el Νέο προσωπικό ρεκόρ ({}): {}

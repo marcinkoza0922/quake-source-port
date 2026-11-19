@@ -1484,6 +1484,89 @@ uk Як вікно
 @ GPU Encoding
 uk Кодування на GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+uk Час і статистика
+
+@ Clock
+uk Годинник
+
+@ Clock Position
+uk Положення годинника
+
+@ Level Timer
+uk Таймер рівня
+
+@ Personal Best
+uk Особистий рекорд
+
+@ Personal Best Type
+uk Тип рекорду
+
+@ Personal Best Color
+uk Колір рекорду
+
+@ Timer Position
+uk Положення таймера
+
+@ Kills
+uk Вбивства
+
+@ Secrets
+uk Секрети
+
+@ Kills & Secrets Position
+uk Положення вбивств і секретів
+
+@ 24-hour
+uk 24 години
+
+@ 24-hour + seconds
+uk 24 години + секунди
+
+@ 12-hour
+uk 12 годин
+
+@ 12-hour + seconds
+uk 12 годин + секунди
+
+@ count
+uk кількість
+
+@ percent
+uk відсоток
+
+@ any% and 100%
+uk any% і 100%
+
+@ Keep Personal Best Demos
+uk Зберігати демо рекордів
+
+@ any%
+uk any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+uk Показники продуктивності
+
+@ Frame Time
+uk Час кадру
+
+@ CPU Usage
+uk Завантаження ЦП
+
+@ Memory Usage
+uk Використання пам'яті
+
+@ GPU Time
+uk Час ГП
+
+@ Video Memory
+uk Відеопам'ять
+
+@ Metrics Position
+uk Положення показників
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ uk Розмір відео; кадри масштабуються з розмі�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 uk Кодує на відеокарті (NVIDIA NVENC, AMD чи Intel через VA-API, AMF або Quick Sync, Apple VideoToolbox), якщо ffmpeg може її використати, звільняючи процесор; інакше кодує процесор
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+uk Показує час доби у вибраному форматі
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+uk Час рівня, як на екрані підсумків; зупиняється на паузі та на виході
+
+@ Your best time on this map and skill, next to the timer (single player)
+uk Ваш найкращий час на цій мапі та складності, поруч із таймером (одиночна гра)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+uk any%: будь-яке проходження; 100%: усі вбивства й секрети. Картки збережень показують його першим
+
+@ Color of the personal best on the HUD and save cards
+uk Колір особистого рекорду в HUD і на картках збережень
+
+@ Shown as a count or as a percentage of the level's total
+uk Кількістю або відсотком від загального на рівні
+
+@ Where this goes on screen; items at the same position share a line
+uk Де це на екрані; елементи в одному положенні ділять рядок
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+uk Зберігає демо кожного рівня з новим особистим рекордом; старі лишаються. Записує навіть без автозапису
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+uk Кадрів на секунду, у середньому за пів секунди
+
+@ Average time per frame in milliseconds, and the slowest frame
+uk Середній час кадру в мілісекундах і найповільніший кадр
+
+@ How busy the game keeps the processor, as a share of all its cores
+uk Наскільки гра завантажує процесор, як частка всіх його ядер
+
+@ Memory the game uses
+uk Пам'ять, яку використовує гра
+
+@ Graphics card time per frame in milliseconds
+uk Час відеокарти на кадр у мілісекундах
+
+@ Video memory in use and what the driver allows, where it reports it
+uk Зайнята відеопам'ять і доступний від драйвера обсяг, якщо він його повідомляє
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ uk Експорт відео
 @ Preparing...
 uk Підготовка...
 
+# Save cards: personal best.
+@ PB {} {}
+uk PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ uk Записано {} ({} с)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 uk ffmpeg не знайдено: {} кадрів PNG і WAV записано до {}
+
+# Personal bests.
+@ New personal best ({}): {}
+uk Новий особистий рекорд ({}): {}

@@ -39,6 +39,8 @@ mod capture;
 mod mapswitch;
 mod render;
 mod speed;
+mod level_time;
+mod metrics;
 mod split;
 mod split_input;
 #[cfg(test)]
@@ -200,12 +202,14 @@ pub struct Host {
     pub window: Option<qplatform::Window>,
     cmdline: Vec<String>,
     last_vol: (f32, f32),
-    fps: (f64, u32, f32),
+    metrics: metrics::Metrics,
     shader: shader::ShaderState,
     fs_snapshot: (PathBuf, Vec<String>),
     stuffed: bool,
     /// The current level's exit was already written to qsp_stats.json.
     stats_recorded: bool,
+    /// Personal-best state for the HUD timer and PB demos (`level_time`).
+    pb: level_time::LevelPb,
     /// The main menu theme is playing (`menu_music`); a CD track replaces it.
     menu_music: bool,
     /// The demo being played (cls.demoplayback).
@@ -351,11 +355,12 @@ impl Host {
             window: None,
             cmdline,
             last_vol: (-1.0, -1.0),
-            fps: (0.0, 0, 0.0),
+            metrics: Default::default(),
             shader: Default::default(),
             fs_snapshot,
             stuffed: false,
             stats_recorded: false,
+            pb: Default::default(),
             menu_music: false,
             console_sound_id: 0,
             qd_cli: None,
@@ -455,32 +460,6 @@ impl Host {
         let sp = self.local.is_some() && self.server.core.maxclients() == 1 && self.demo.is_none();
         let speed = if sp { self.cv("a11y_gamespeed").clamp(0.25, 1.0) } else { 1.0 };
         if self.wheel.open && sp { self.cv("cl_wheel_timescale").clamp(0.05, 1.0) * speed } else { speed }
-    }
-
-    /// Level exit (intermission or finale): merge kills/secrets/time into
-    /// the mod's qsp_stats.json. Not for deathmatch, customized games
-    /// (modifiers and add-ons change the run) or headless tool runs.
-    fn record_level_stats(&mut self) {
-        use qnet::protocol::{STAT_MONSTERS, STAT_SECRETS, STAT_TOTALMONSTERS, STAT_TOTALSECRETS};
-        if self.headless || self.demo.is_some() || self.cv("deathmatch") != 0.0 || self.level.mapname.is_empty()
-            || self.server.core.custom {
-            return;
-        }
-        let st = |i: usize| self.cl.stats[i].max(0) as u32;
-        let run = qui::stats::MapStats {
-            kills: st(STAT_MONSTERS),
-            total_kills: st(STAT_TOTALMONSTERS),
-            secrets: st(STAT_SECRETS),
-            total_secrets: st(STAT_TOTALSECRETS),
-            best_time: self.cl.completed_time as f32,
-            completions: 0,
-        };
-        let dir = self.user_dir();
-        let mut stats = qui::stats::Stats::load(&dir);
-        stats.record(&self.level.mapname, run);
-        if let Err(e) = stats.save(&dir) {
-            self.con.print(&qcore::ctr!("couldn't write {}: {}\n", qui::stats::FILE_NAME, e));
-        }
     }
 
     /// CL_Disconnect: shut down the local server and the client.

@@ -1484,6 +1484,89 @@ hu Mint az ablak
 @ GPU Encoding
 hu GPU-kódolás
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+hu Idő és statisztika
+
+@ Clock
+hu Óra
+
+@ Clock Position
+hu Óra helye
+
+@ Level Timer
+hu Pályaidőzítő
+
+@ Personal Best
+hu Egyéni csúcs
+
+@ Personal Best Type
+hu Csúcs típusa
+
+@ Personal Best Color
+hu Csúcs színe
+
+@ Timer Position
+hu Időzítő helye
+
+@ Kills
+hu Ölések
+
+@ Secrets
+hu Titkok
+
+@ Kills & Secrets Position
+hu Ölések és titkok helye
+
+@ 24-hour
+hu 24 órás
+
+@ 24-hour + seconds
+hu 24 órás + másodperc
+
+@ 12-hour
+hu 12 órás
+
+@ 12-hour + seconds
+hu 12 órás + másodperc
+
+@ count
+hu darabszám
+
+@ percent
+hu százalék
+
+@ any% and 100%
+hu any% és 100%
+
+@ Keep Personal Best Demos
+hu Egyéni csúcs demók megtartása
+
+@ any%
+hu any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+hu Teljesítménymutatók
+
+@ Frame Time
+hu Képkockaidő
+
+@ CPU Usage
+hu Processzorhasználat
+
+@ Memory Usage
+hu Memóriahasználat
+
+@ GPU Time
+hu GPU-idő
+
+@ Video Memory
+hu Videomemória
+
+@ Metrics Position
+hu Mutatók helye
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ hu Videóméret; a képkockák az ablak méretéből skálázódnak (sávokkal, 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 hu A videokártyán kódol (NVIDIA NVENC, AMD vagy Intel VA-API-n át, AMF vagy Quick Sync, Apple VideoToolbox), ha az ffmpeg használni tudja, így a processzor szabad marad; különben a processzor kódol
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+hu A napszakot mutatja a választott formában
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+hu A pálya ideje, mint a szünetképernyőn; szünetnél és a kijáratnál megáll
+
+@ Your best time on this map and skill, next to the timer (single player)
+hu A legjobb időd ezen a pályán és nehézségen, az időzítő mellett (egyjátékos)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+hu any%: bármilyen befejezés; 100%: minden ölés és titok. A mentéskártyák ezt mutatják előbb
+
+@ Color of the personal best on the HUD and save cards
+hu Az egyéni csúcs színe a HUD-on és a mentéskártyákon
+
+@ Shown as a count or as a percentage of the level's total
+hu Darabszámként vagy a pálya összesének százalékaként
+
+@ Where this goes on screen; items at the same position share a line
+hu Hol jelenik meg a képernyőn; az azonos helyen lévők egy sort osztanak meg
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+hu Megtartja minden új egyéni csúcsot hozó pálya demóját; a régiek maradnak. Automatikus felvétel nélkül is rögzít
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+hu Képkocka másodpercenként, fél másodperc átlaga
+
+@ Average time per frame in milliseconds, and the slowest frame
+hu Átlagos képkockaidő ezredmásodpercben és a leglassabb képkocka
+
+@ How busy the game keeps the processor, as a share of all its cores
+hu Mennyire terheli a játék a processzort, az összes mag arányában
+
+@ Memory the game uses
+hu A játék által használt memória
+
+@ Graphics card time per frame in milliseconds
+hu Videokártya-idő képkockánként ezredmásodpercben
+
+@ Video memory in use and what the driver allows, where it reports it
+hu Használt videomemória és amennyit az illesztőprogram enged, ha jelzi
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ hu Videó exportálása
 @ Preparing...
 hu Előkészítés...
 
+# Save cards: personal best.
+@ PB {} {}
+hu PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ hu Kiírva: {} ({} mp)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 hu Az ffmpeg nem található: {} PNG-képkocka és egy WAV kiírva ide: {}
+
+# Personal bests.
+@ New personal best ({}): {}
+hu Új egyéni csúcs ({}): {}

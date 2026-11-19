@@ -1484,6 +1484,89 @@ gl Como a xanela
 @ GPU Encoding
 gl Codificación por GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+gl Tempo e estatísticas
+
+@ Clock
+gl Reloxo
+
+@ Clock Position
+gl Posición do reloxo
+
+@ Level Timer
+gl Cronómetro do nivel
+
+@ Personal Best
+gl Marca persoal
+
+@ Personal Best Type
+gl Tipo de marca
+
+@ Personal Best Color
+gl Cor da marca
+
+@ Timer Position
+gl Posición do cronómetro
+
+@ Kills
+gl Mortes
+
+@ Secrets
+gl Segredos
+
+@ Kills & Secrets Position
+gl Posición de mortes e segredos
+
+@ 24-hour
+gl 24 horas
+
+@ 24-hour + seconds
+gl 24 horas + segundos
+
+@ 12-hour
+gl 12 horas
+
+@ 12-hour + seconds
+gl 12 horas + segundos
+
+@ count
+gl número
+
+@ percent
+gl porcentaxe
+
+@ any% and 100%
+gl any% e 100%
+
+@ Keep Personal Best Demos
+gl Gardar demos de marcas
+
+@ any%
+gl any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+gl Métricas de rendemento
+
+@ Frame Time
+gl Tempo de fotograma
+
+@ CPU Usage
+gl Uso da CPU
+
+@ Memory Usage
+gl Uso de memoria
+
+@ GPU Time
+gl Tempo da GPU
+
+@ Video Memory
+gl Memoria de vídeo
+
+@ Metrics Position
+gl Posición das métricas
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ gl Tamaño do vídeo; os fotogramas escálanse desde o tamaño da xanela (con ba
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 gl Codifica na tarxeta gráfica (NVIDIA NVENC, AMD ou Intel mediante VA-API, AMF ou Quick Sync, Apple VideoToolbox) cando ffmpeg pode usala, deixando libre o procesador; se non, codifica o procesador
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+gl Mostra a hora do día no formato escollido
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+gl O tempo do nivel, como na pantalla de intermedio; detense en pausa e na saída
+
+@ Your best time on this map and skill, next to the timer (single player)
+gl O teu mellor tempo neste mapa e dificultade, xunto ao cronómetro (un xogador)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+gl any%: calquera final; 100%: todas as mortes e segredos. As fichas de partidas mostran esta primeiro
+
+@ Color of the personal best on the HUD and save cards
+gl Cor da marca persoal no HUD e nas fichas de partidas
+
+@ Shown as a count or as a percentage of the level's total
+gl Como número ou como porcentaxe do total do nivel
+
+@ Where this goes on screen; items at the same position share a line
+gl Onde aparece na pantalla; os elementos na mesma posición comparten unha liña
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+gl Garda a demo de cada nivel que logra unha marca persoal; as antigas quedan. Grava mesmo sen demos automáticas
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+gl Fotogramas por segundo, media de medio segundo
+
+@ Average time per frame in milliseconds, and the slowest frame
+gl Tempo medio por fotograma en milisegundos e o fotograma máis lento
+
+@ How busy the game keeps the processor, as a share of all its cores
+gl Canto ocupa o xogo o procesador, como parte de todos os núcleos
+
+@ Memory the game uses
+gl Memoria que usa o xogo
+
+@ Graphics card time per frame in milliseconds
+gl Tempo da tarxeta gráfica por fotograma en milisegundos
+
+@ Video memory in use and what the driver allows, where it reports it
+gl Memoria de vídeo en uso e a que permite o controlador, se o indica
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ gl Exportando vídeo
 @ Preparing...
 gl Preparando...
 
+# Save cards: personal best.
+@ PB {} {}
+gl PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ gl Escrito {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 gl Non se atopou ffmpeg: escribíronse {} fotogramas PNG e un WAV en {}
+
+# Personal bests.
+@ New personal best ({}): {}
+gl Nova marca persoal ({}): {}

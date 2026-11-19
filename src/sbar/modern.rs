@@ -16,13 +16,14 @@ impl<'a, 'b> Sbar<'a, 'b> {
     /// Modern HUD: each element (`HudElem`) is drawn in a box at its
     /// configured anchor; elements sharing an anchor stack away from the
     /// screen edge in `HudElem::ALL` order. Immersive elements show only for
-    /// a few seconds after their value changes.
-    pub fn draw_modern(&mut self, cl: &ClientState, show_scores: bool, face_anim: bool, cfg: &HudConfig, fade: &mut HudFade, now: f64) {
+    /// a few seconds after their value changes. Returns the space used at
+    /// each anchor, so more items can stack after them.
+    pub fn draw_modern(&mut self, cl: &ClientState, show_scores: bool, face_anim: bool, cfg: &HudConfig, fade: &mut HudFade, now: f64) -> [f32; HudAnchor::COUNT] {
         let st = &cl.stats;
         if show_scores || st[STAT_HEALTH] <= 0 {
             self.draw_pic(0.0, 0.0, "scorebar");
             self.solo_scoreboard(cl);
-            return;
+            return [0.0; HudAnchor::COUNT];
         }
         let (vw, vh) = (self.c.vw(), self.c.vh());
         // screen-corner coordinates
@@ -97,6 +98,7 @@ impl<'a, 'b> Sbar<'a, 'b> {
             self.draw_elem(cl, e, x, y, w, right, face_anim, cfg.face, &weapons, &items);
         }
         self.alpha = 1.0;
+        used
     }
 
     #[allow(clippy::too_many_arguments)]

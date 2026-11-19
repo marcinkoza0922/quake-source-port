@@ -1484,6 +1484,89 @@ ja ウィンドウと同じ
 @ GPU Encoding
 ja GPU エンコード
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ja 時間と統計
+
+@ Clock
+ja 時計
+
+@ Clock Position
+ja 時計の位置
+
+@ Level Timer
+ja レベルタイマー
+
+@ Personal Best
+ja 自己ベスト
+
+@ Personal Best Type
+ja 自己ベストの種類
+
+@ Personal Best Color
+ja 自己ベストの色
+
+@ Timer Position
+ja タイマーの位置
+
+@ Kills
+ja 撃破数
+
+@ Secrets
+ja シークレット
+
+@ Kills & Secrets Position
+ja 撃破数とシークレットの位置
+
+@ 24-hour
+ja 24時間
+
+@ 24-hour + seconds
+ja 24時間＋秒
+
+@ 12-hour
+ja 12時間
+
+@ 12-hour + seconds
+ja 12時間＋秒
+
+@ count
+ja 数
+
+@ percent
+ja 割合
+
+@ any% and 100%
+ja any%と100%
+
+@ Keep Personal Best Demos
+ja 自己ベストのデモを保存
+
+@ any%
+ja any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ja パフォーマンス指標
+
+@ Frame Time
+ja フレーム時間
+
+@ CPU Usage
+ja CPU使用率
+
+@ Memory Usage
+ja メモリ使用量
+
+@ GPU Time
+ja GPU時間
+
+@ Video Memory
+ja ビデオメモリ
+
+@ Metrics Position
+ja 指標の位置
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ ja ビデオのサイズ。フレームはウィンドウのサイズから拡�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ja ffmpeg が使える場合はグラフィックカード（NVIDIA NVENC、AMD や Intel の VA-API、AMF、Quick Sync、Apple VideoToolbox）でエンコードし、CPU を空けます。使えない場合は CPU でエンコードします
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ja 現在時刻を選んだ形式で表示します
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ja インターミッション画面と同じレベル時間。ポーズ中と出口で止まります
+
+@ Your best time on this map and skill, next to the timer (single player)
+ja このマップと難易度での自己ベストをタイマーの横に表示（シングルプレイ）
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ja any%: どんなクリアでも、100%: 全撃破と全シークレット。セーブカードはこちらを先に表示
+
+@ Color of the personal best on the HUD and save cards
+ja HUDとセーブカードでの自己ベストの色
+
+@ Shown as a count or as a percentage of the level's total
+ja 数、またはレベル全体に対する割合で表示
+
+@ Where this goes on screen; items at the same position share a line
+ja 画面上の位置。同じ位置の項目は1行に並びます
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ja 自己ベストを出したレベルのデモをすべて保存し、古いものも残します。自動録画がオフでも録画します
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ja 1秒あたりのフレーム数（0.5秒間の平均）
+
+@ Average time per frame in milliseconds, and the slowest frame
+ja 1フレームあたりの平均時間（ミリ秒）と最も遅いフレーム
+
+@ How busy the game keeps the processor, as a share of all its cores
+ja ゲームがプロセッサーをどれだけ使っているか（全コアに対する割合）
+
+@ Memory the game uses
+ja ゲームが使っているメモリ
+
+@ Graphics card time per frame in milliseconds
+ja 1フレームあたりのグラフィックカードの時間（ミリ秒）
+
+@ Video memory in use and what the driver allows, where it reports it
+ja 使用中のビデオメモリとドライバーが許す量（報告される場合）
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ ja ビデオを書き出し中
 @ Preparing...
 ja 準備中...
 
+# Save cards: personal best.
+@ PB {} {}
+ja PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ ja {}を書き出しました（{}秒）
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ja ffmpeg が見つかりません：{}枚の PNG フレームと WAV を{}に書き出しました
+
+# Personal bests.
+@ New personal best ({}): {}
+ja 自己ベスト更新（{}）: {}

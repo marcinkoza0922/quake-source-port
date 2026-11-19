@@ -3451,3 +3451,196 @@ de GPU-Kodierung
 it Codifica GPU
 es Codificación por GPU
 ru Кодирование на GPU
+
+# HUD > Time & Stats, and personal-best demos.
+
+@ Time & Stats
+fr Temps et stats
+de Zeit & Statistik
+it Tempo e statistiche
+es Tiempo y estadísticas
+ru Время и статистика
+
+@ Clock
+fr Horloge
+de Uhr
+it Orologio
+es Reloj
+ru Часы
+
+@ Clock Position
+fr Position de l'horloge
+de Position der Uhr
+it Posizione dell'orologio
+es Posición del reloj
+ru Положение часов
+
+@ Level Timer
+fr Chrono du niveau
+de Level-Timer
+it Timer del livello
+es Cronómetro del nivel
+ru Таймер уровня
+
+@ Personal Best
+fr Record personnel
+de Persönliche Bestzeit
+it Record personale
+es Mejor marca personal
+ru Личный рекорд
+
+@ Personal Best Type
+fr Type de record
+de Art der Bestzeit
+it Tipo di record
+es Tipo de marca
+ru Тип рекорда
+
+@ Personal Best Color
+fr Couleur du record
+de Farbe der Bestzeit
+it Colore del record
+es Color de la marca
+ru Цвет рекорда
+
+@ Timer Position
+fr Position du chrono
+de Position des Timers
+it Posizione del timer
+es Posición del cronómetro
+ru Положение таймера
+
+@ Kills
+fr Ennemis tués
+de Kills
+it Uccisioni
+es Muertes
+ru Убийства
+
+@ Secrets
+fr Secrets
+de Geheimnisse
+it Segreti
+es Secretos
+ru Секреты
+
+@ Kills & Secrets Position
+fr Position des ennemis et secrets
+de Position von Kills & Geheimnissen
+it Posizione di uccisioni e segreti
+es Posición de muertes y secretos
+ru Положение убийств и секретов
+
+@ 24-hour
+fr 24 heures
+de 24 Stunden
+it 24 ore
+es 24 horas
+ru 24 часа
+
+@ 24-hour + seconds
+fr 24 heures + secondes
+de 24 Stunden + Sekunden
+it 24 ore + secondi
+es 24 horas + segundos
+ru 24 часа + секунды
+
+@ 12-hour
+fr 12 heures
+de 12 Stunden
+it 12 ore
+es 12 horas
+ru 12 часов
+
+@ 12-hour + seconds
+fr 12 heures + secondes
+de 12 Stunden + Sekunden
+it 12 ore + secondi
+es 12 horas + segundos
+ru 12 часов + секунды
+
+@ count
+fr nombre
+de Anzahl
+it numero
+es cantidad
+ru число
+
+@ percent
+fr pourcentage
+de Prozent
+it percentuale
+es porcentaje
+ru процент
+
+@ any% and 100%
+fr any% et 100%
+de any% und 100%
+it any% e 100%
+es any% y 100%
+ru any% и 100%
+
+@ Keep Personal Best Demos
+fr Garder les démos de record
+de Bestzeit-Demos behalten
+it Conserva demo dei record
+es Guardar demos de marcas
+ru Сохранять демо рекордов
+
+@ any%
+fr any%
+de any%
+it any%
+es any%
+ru any%
+
+# HUD > Performance Metrics.
+
+@ Performance Metrics
+fr Mesures de performance
+de Leistungswerte
+it Metriche di prestazione
+es Métricas de rendimiento
+ru Показатели производительности
+
+@ Frame Time
+fr Temps d'image
+de Bildzeit
+it Tempo per fotogramma
+es Tiempo de fotograma
+ru Время кадра
+
+@ CPU Usage
+fr Utilisation du processeur
+de CPU-Auslastung
+it Uso della CPU
+es Uso de CPU
+ru Загрузка ЦП
+
+@ Memory Usage
+fr Utilisation de la mémoire
+de Speichernutzung
+it Uso della memoria
+es Uso de memoria
+ru Использование памяти
+
+@ GPU Time
+fr Temps GPU
+de GPU-Zeit
+it Tempo GPU
+es Tiempo de GPU
+ru Время ГП
+
+@ Video Memory
+fr Mémoire vidéo
+de Videospeicher
+it Memoria video
+es Memoria de vídeo
+ru Видеопамять
+
+@ Metrics Position
+fr Position des mesures
+de Position der Leistungswerte
+it Posizione delle metriche
+es Posición de las métricas
+ru Положение показателей

@@ -294,6 +294,11 @@ impl Renderer {
         &self.name
     }
 
+    /// Video memory use is not reported by this backend.
+    pub fn vram(&self) -> Option<(u64, u64)> {
+        None
+    }
+
     pub fn size(&self) -> (u32, u32) {
         (self.width, self.height)
     }

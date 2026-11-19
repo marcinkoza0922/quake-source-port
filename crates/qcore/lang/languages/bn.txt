@@ -1484,6 +1484,89 @@ bn উইন্ডোর মতো
 @ GPU Encoding
 bn GPU এনকোডিং
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+bn সময় ও পরিসংখ্যান
+
+@ Clock
+bn ঘড়ি
+
+@ Clock Position
+bn ঘড়ির অবস্থান
+
+@ Level Timer
+bn লেভেল টাইমার
+
+@ Personal Best
+bn ব্যক্তিগত সেরা
+
+@ Personal Best Type
+bn সেরার ধরন
+
+@ Personal Best Color
+bn সেরার রং
+
+@ Timer Position
+bn টাইমারের অবস্থান
+
+@ Kills
+bn হত্যা
+
+@ Secrets
+bn রহস্য
+
+@ Kills & Secrets Position
+bn হত্যা ও রহস্যের অবস্থান
+
+@ 24-hour
+bn ২৪ ঘণ্টা
+
+@ 24-hour + seconds
+bn ২৪ ঘণ্টা + সেকেন্ড
+
+@ 12-hour
+bn ১২ ঘণ্টা
+
+@ 12-hour + seconds
+bn ১২ ঘণ্টা + সেকেন্ড
+
+@ count
+bn সংখ্যা
+
+@ percent
+bn শতাংশ
+
+@ any% and 100%
+bn any% ও 100%
+
+@ Keep Personal Best Demos
+bn ব্যক্তিগত সেরার ডেমো রাখুন
+
+@ any%
+bn any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+bn কর্মক্ষমতার মাপকাঠি
+
+@ Frame Time
+bn ফ্রেম সময়
+
+@ CPU Usage
+bn CPU ব্যবহার
+
+@ Memory Usage
+bn মেমরি ব্যবহার
+
+@ GPU Time
+bn GPU সময়
+
+@ Video Memory
+bn ভিডিও মেমরি
+
+@ Metrics Position
+bn মাপকাঠির অবস্থান
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ bn ভিডিওর আকার; ফ্রেম উইন্ডোর আক
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 bn ffmpeg ব্যবহার করতে পারলে গ্রাফিক্স কার্ডে এনকোড করে (NVIDIA NVENC, VA-API দিয়ে AMD বা Intel, AMF বা Quick Sync, Apple VideoToolbox) এবং প্রসেসরকে মুক্ত রাখে; না পারলে প্রসেসর এনকোড করে
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+bn বেছে নেওয়া বিন্যাসে দিনের সময় দেখায়
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+bn লেভেলের সময়, বিরতির পর্দার মতো; থামালে ও প্রস্থানে থেমে যায়
+
+@ Your best time on this map and skill, next to the timer (single player)
+bn এই মানচিত্র ও কঠিনতায় আপনার সেরা সময়, টাইমারের পাশে (একক খেলোয়াড়)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+bn any%: যেকোনো সমাপ্তি; 100%: সব হত্যা ও রহস্য। সেভ কার্ড আগে এটিই দেখায়
+
+@ Color of the personal best on the HUD and save cards
+bn HUD ও সেভ কার্ডে ব্যক্তিগত সেরার রং
+
+@ Shown as a count or as a percentage of the level's total
+bn সংখ্যা হিসেবে বা লেভেলের মোটের শতাংশ হিসেবে
+
+@ Where this goes on screen; items at the same position share a line
+bn এটি পর্দায় কোথায়; একই অবস্থানের আইটেম এক লাইন ভাগ করে
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+bn ব্যক্তিগত সেরা গড়া প্রতিটি লেভেলের ডেমো রাখে; পুরোনোগুলো থাকে। স্বয়ং রেকর্ড বন্ধ থাকলেও রেকর্ড করে
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+bn প্রতি সেকেন্ডে ফ্রেম, আধা সেকেন্ডের গড়
+
+@ Average time per frame in milliseconds, and the slowest frame
+bn প্রতি ফ্রেমে গড় সময় মিলিসেকেন্ডে, এবং সবচেয়ে ধীর ফ্রেম
+
+@ How busy the game keeps the processor, as a share of all its cores
+bn গেম প্রসেসরকে কতটা ব্যস্ত রাখে, সব কোরের অংশ হিসেবে
+
+@ Memory the game uses
+bn গেম যে মেমরি ব্যবহার করে
+
+@ Graphics card time per frame in milliseconds
+bn প্রতি ফ্রেমে গ্রাফিক্স কার্ডের সময় মিলিসেকেন্ডে
+
+@ Video memory in use and what the driver allows, where it reports it
+bn ব্যবহৃত ভিডিও মেমরি ও ড্রাইভারের অনুমতি, যেখানে এটি জানায়
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ bn ভিডিও রপ্তানি হচ্ছে
 @ Preparing...
 bn প্রস্তুত হচ্ছে...
 
+# Save cards: personal best.
+@ PB {} {}
+bn PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ bn {} লেখা হয়েছে ({} সে.)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 bn ffmpeg পাওয়া যায়নি: {}টি PNG ফ্রেম ও একটি WAV {}-এ লেখা হয়েছে
+
+# Personal bests.
+@ New personal best ({}): {}
+bn নতুন ব্যক্তিগত সেরা ({}): {}

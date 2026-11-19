@@ -1484,6 +1484,89 @@ mk Како прозорецот
 @ GPU Encoding
 mk GPU кодирање
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+mk Време и статистика
+
+@ Clock
+mk Часовник
+
+@ Clock Position
+mk Позиција на часовникот
+
+@ Level Timer
+mk Тајмер на нивото
+
+@ Personal Best
+mk Личен рекорд
+
+@ Personal Best Type
+mk Вид рекорд
+
+@ Personal Best Color
+mk Боја на рекордот
+
+@ Timer Position
+mk Позиција на тајмерот
+
+@ Kills
+mk Убиства
+
+@ Secrets
+mk Тајни
+
+@ Kills & Secrets Position
+mk Позиција на убиства и тајни
+
+@ 24-hour
+mk 24-часовен
+
+@ 24-hour + seconds
+mk 24-часовен + секунди
+
+@ 12-hour
+mk 12-часовен
+
+@ 12-hour + seconds
+mk 12-часовен + секунди
+
+@ count
+mk број
+
+@ percent
+mk процент
+
+@ any% and 100%
+mk any% и 100%
+
+@ Keep Personal Best Demos
+mk Чувај демоа на рекорди
+
+@ any%
+mk any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+mk Показатели за перформанси
+
+@ Frame Time
+mk Време на кадар
+
+@ CPU Usage
+mk Користење на процесорот
+
+@ Memory Usage
+mk Користење на меморијата
+
+@ GPU Time
+mk GPU време
+
+@ Video Memory
+mk Видео меморија
+
+@ Metrics Position
+mk Позиција на показателите
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ mk Големина на видеото; сликите се скалираат 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 mk Кодира на графичката картичка (NVIDIA NVENC, AMD или Intel преку VA-API, AMF или Quick Sync, Apple VideoToolbox) кога ffmpeg може да ја користи, оставајќи го процесорот слободен; инаку кодира процесорот
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+mk Го прикажува времето во избраниот формат
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+mk Времето на нивото, како на екранот со резултати; запира при пауза и на излезот
+
+@ Your best time on this map and skill, next to the timer (single player)
+mk Вашето најдобро време на оваа мапа и тежина, до тајмерот (еден играч)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+mk any%: секое завршување; 100%: сите убиства и тајни. Картичките на зачувувањата го прикажуваат ова прво
+
+@ Color of the personal best on the HUD and save cards
+mk Боја на личниот рекорд на HUD и на картичките на зачувувањата
+
+@ Shown as a count or as a percentage of the level's total
+mk Како број или како процент од вкупното на нивото
+
+@ Where this goes on screen; items at the same position share a line
+mk Каде е на екранот; ставките на иста позиција делат ред
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+mk Го чува демото на секое ниво со нов личен рекорд; старите остануваат. Снима и без автоматско снимање
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+mk Кадри во секунда, просек за половина секунда
+
+@ Average time per frame in milliseconds, and the slowest frame
+mk Просечно време на кадар во милисекунди и најбавниот кадар
+
+@ How busy the game keeps the processor, as a share of all its cores
+mk Колку играта го оптоварува процесорот, како удел од сите јадра
+
+@ Memory the game uses
+mk Меморијата што ја користи играта
+
+@ Graphics card time per frame in milliseconds
+mk Време на графичката картичка по кадар во милисекунди
+
+@ Video memory in use and what the driver allows, where it reports it
+mk Зафатена видео меморија и колку дозволува драјверот, ако го пријавува
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ mk Се извезува видео
 @ Preparing...
 mk Се подготвува...
 
+# Save cards: personal best.
+@ PB {} {}
+mk PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ mk Запишано {} ({} с)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 mk ffmpeg не е пронајден: запишани {} PNG слики и WAV во {}
+
+# Personal bests.
+@ New personal best ({}): {}
+mk Нов личен рекорд ({}): {}

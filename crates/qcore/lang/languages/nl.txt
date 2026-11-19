@@ -1484,6 +1484,89 @@ nl Zoals het venster
 @ GPU Encoding
 nl GPU-codering
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+nl Tijd en statistieken
+
+@ Clock
+nl Klok
+
+@ Clock Position
+nl Positie van klok
+
+@ Level Timer
+nl Leveltimer
+
+@ Personal Best
+nl Persoonlijk record
+
+@ Personal Best Type
+nl Soort record
+
+@ Personal Best Color
+nl Kleur van record
+
+@ Timer Position
+nl Positie van timer
+
+@ Kills
+nl Kills
+
+@ Secrets
+nl Geheimen
+
+@ Kills & Secrets Position
+nl Positie van kills en geheimen
+
+@ 24-hour
+nl 24-uurs
+
+@ 24-hour + seconds
+nl 24-uurs + seconden
+
+@ 12-hour
+nl 12-uurs
+
+@ 12-hour + seconds
+nl 12-uurs + seconden
+
+@ count
+nl aantal
+
+@ percent
+nl percentage
+
+@ any% and 100%
+nl any% en 100%
+
+@ Keep Personal Best Demos
+nl Recorddemo's bewaren
+
+@ any%
+nl any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+nl Prestatiemetingen
+
+@ Frame Time
+nl Frametijd
+
+@ CPU Usage
+nl CPU-gebruik
+
+@ Memory Usage
+nl Geheugengebruik
+
+@ GPU Time
+nl GPU-tijd
+
+@ Video Memory
+nl Videogeheugen
+
+@ Metrics Position
+nl Positie van metingen
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ nl Videogrootte; beelden worden geschaald vanaf de venstergrootte (met balken om
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 nl Codeert op de videokaart (NVIDIA NVENC, AMD of Intel via VA-API, AMF of Quick Sync, Apple VideoToolbox) als ffmpeg die kan gebruiken, zodat de processor vrij blijft; anders codeert de processor
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+nl Toont de tijd van de dag in het gekozen formaat
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+nl De leveltijd, zoals op het tussenscherm; stopt bij pauze en bij de uitgang
+
+@ Your best time on this map and skill, next to the timer (single player)
+nl Je beste tijd op deze map en moeilijkheid, naast de timer (singleplayer)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+nl any%: elk einde; 100%: alle kills en geheimen. Opslagkaarten tonen deze eerst
+
+@ Color of the personal best on the HUD and save cards
+nl Kleur van het persoonlijk record in de HUD en op opslagkaarten
+
+@ Shown as a count or as a percentage of the level's total
+nl Als aantal of als percentage van het totaal van het level
+
+@ Where this goes on screen; items at the same position share a line
+nl Waar het op het scherm staat; items op dezelfde positie delen een regel
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+nl Bewaart de demo van elk level met een nieuw persoonlijk record; oude blijven. Neemt ook op zonder automatische demo's
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+nl Frames per seconde, gemiddeld over een halve seconde
+
+@ Average time per frame in milliseconds, and the slowest frame
+nl Gemiddelde tijd per frame in milliseconden, en de traagste frame
+
+@ How busy the game keeps the processor, as a share of all its cores
+nl Hoe zwaar het spel de processor belast, als deel van alle kernen
+
+@ Memory the game uses
+nl Geheugen dat het spel gebruikt
+
+@ Graphics card time per frame in milliseconds
+nl Videokaarttijd per frame in milliseconden
+
+@ Video memory in use and what the driver allows, where it reports it
+nl Gebruikt videogeheugen en wat het stuurprogramma toestaat, als het dat meldt
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ nl Video exporteren
 @ Preparing...
 nl Voorbereiden...
 
+# Save cards: personal best.
+@ PB {} {}
+nl PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ nl {} geschreven ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 nl ffmpeg niet gevonden: {} PNG-beelden en een WAV geschreven naar {}
+
+# Personal bests.
+@ New personal best ({}): {}
+nl Nieuw persoonlijk record ({}): {}

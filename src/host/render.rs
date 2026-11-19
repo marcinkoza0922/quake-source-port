@@ -164,7 +164,9 @@ impl Host {
             .unwrap_or(qinput::keys::K_XBUTTON);
         let equip_key = self.equip_wheel_key();
         let bullet_meter = self.cv("addon_bullet_time_meter") != 0.0;
-        let showfps = self.cv("scr_showfps") != 0.0;
+        self.update_metrics(ft);
+        let metrics_items = self.metrics_items();
+        let mut metrics_drawn = false;
         let speed = self.speedometer();
         let classic = self.classic_hud();
         let rays: Vec<_> = std::iter::once(&self.cl).chain(self.guests.iter().filter(|g| g.cl.signon == 4).map(|g| &g.cl))
@@ -178,6 +180,9 @@ impl Host {
         let addon_entries: Vec<_> = crate::wheel::inventory(&self.server.core.cvars, &self.allowed_toys())
             .into_iter().filter(|e| matches!(e.weapon, crate::wheel::Weapon::Addon(_))).collect();
         let hud_cfg = crate::sbar::HudConfig::from_cvars(&self.server.core.cvars);
+        let time_items = if self.show_scores { Vec::new() } else { self.time_hud_items() };
+        // metrics first: nearest the screen edge
+        let hud_items: Vec<_> = metrics_items.iter().cloned().chain(time_items).collect();
         let demo_bar = self.demo_bar();
         let demo_peek = self.demo_peek();
         let exporting = self.exporting();
@@ -265,12 +270,16 @@ impl Host {
                         sb.teamplay = self.server.core.cvars.value_of("teamplay");
                         sb.addon_weapons = addon_entries.clone();
                         sb.held_addon = self.toy.held;
-                        if classic {
+                        let used = if classic {
                             sb.backtile(CLASSIC_SBAR_LINES);
                             sb.draw(&self.cl, self.show_scores, face);
+                            Default::default()
                         } else {
-                            sb.draw_modern(&self.cl, self.show_scores, face, &hud_cfg, &mut self.hud_fade, self.realtime);
-                        }
+                            sb.draw_modern(&self.cl, self.show_scores, face, &hud_cfg, &mut self.hud_fade, self.realtime)
+                        };
+                        let bottom = if classic { CLASSIC_SBAR_LINES } else { 0.0 };
+                        crate::sbar::time::draw(&mut c, &hud_items, crate::sbar::time::Reserved { used, bottom });
+                        metrics_drawn = true;
                         // the demo bar takes the bottom of the screen: lift the HUD over it
                         if demo_bar.is_some() {
                             let dy = -super::demo_bar::lift() * c.scale;
@@ -326,17 +335,10 @@ impl Host {
             }
             self.menu.mods.online.poll();
             self.menu.draw(&mut c, &mut pf, &self.server.core.cvars, self.realtime);
-            if showfps {
-                self.fps.0 += ft as f64;
-                self.fps.1 += 1;
-                if self.fps.0 >= 0.5 {
-                    self.fps.2 = (self.fps.1 as f64 / self.fps.0) as f32;
-                    self.fps = (0.0, 0, self.fps.2);
-                }
-                let s = format!("{:4.0} fps", self.fps.2);
-                c.reset_origin();
-                let x = c.vw() - c.ptext_w(&s) - 8.0;
-                c.ptext(x, 8.0, &s, crate::draw::WHITE);
+            // outside the in-game HUD (menus, intermission, split screen) the
+            // metrics go over everything
+            if !metrics_drawn {
+                crate::sbar::time::draw(&mut c, &metrics_items, Default::default());
             }
             if let Some(s) = speed.filter(|_| ingame && !self.menu.active()) {
                 // Just below the crosshair, centred (ironwail's CANVAS_CROSSHAIR).

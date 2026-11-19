@@ -1484,6 +1484,89 @@ fil Kapareho ng window
 @ GPU Encoding
 fil GPU encoding
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+fil Oras at Istatistika
+
+@ Clock
+fil Orasan
+
+@ Clock Position
+fil Posisyon ng Orasan
+
+@ Level Timer
+fil Timer ng Level
+
+@ Personal Best
+fil Personal Best
+
+@ Personal Best Type
+fil Uri ng Personal Best
+
+@ Personal Best Color
+fil Kulay ng Personal Best
+
+@ Timer Position
+fil Posisyon ng Timer
+
+@ Kills
+fil Napatay
+
+@ Secrets
+fil Mga Lihim
+
+@ Kills & Secrets Position
+fil Posisyon ng Napatay at Lihim
+
+@ 24-hour
+fil 24-oras
+
+@ 24-hour + seconds
+fil 24-oras + segundo
+
+@ 12-hour
+fil 12-oras
+
+@ 12-hour + seconds
+fil 12-oras + segundo
+
+@ count
+fil bilang
+
+@ percent
+fil porsiyento
+
+@ any% and 100%
+fil any% at 100%
+
+@ Keep Personal Best Demos
+fil Itago ang mga Demo ng Personal Best
+
+@ any%
+fil any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+fil Mga Sukatan ng Performance
+
+@ Frame Time
+fil Oras ng Frame
+
+@ CPU Usage
+fil Paggamit ng CPU
+
+@ Memory Usage
+fil Paggamit ng Memorya
+
+@ GPU Time
+fil Oras ng GPU
+
+@ Video Memory
+fil Video Memory
+
+@ Metrics Position
+fil Posisyon ng mga Sukatan
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ fil Laki ng video; ini-scale ang mga frame mula sa laki ng window (may mga bar p
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 fil Nag-e-encode sa graphics card (NVIDIA NVENC, AMD o Intel sa VA-API, AMF o Quick Sync, Apple VideoToolbox) kapag magagamit ito ng ffmpeg, para malaya ang processor; kung hindi, ang processor ang mag-e-encode
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+fil Ipinapakita ang oras sa napiling format
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+fil Ang oras ng level, gaya sa intermission screen; humihinto kapag naka-pause at sa labasan
+
+@ Your best time on this map and skill, next to the timer (single player)
+fil Ang pinakamabilis mong oras sa mapang ito at hirap, katabi ng timer (single player)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+fil any%: anumang pagtatapos; 100%: lahat ng napatay at lihim. Ito muna ang ipinapakita ng mga save card
+
+@ Color of the personal best on the HUD and save cards
+fil Kulay ng personal best sa HUD at mga save card
+
+@ Shown as a count or as a percentage of the level's total
+fil Bilang o porsiyento ng kabuuan ng level
+
+@ Where this goes on screen; items at the same position share a line
+fil Kung saan ito sa screen; ang mga item sa parehong posisyon ay nasa iisang linya
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+fil Itinatago ang demo ng bawat level na may bagong personal best; nananatili ang mga luma. Nagre-record kahit naka-off ang auto-record
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+fil Mga frame bawat segundo, average sa kalahating segundo
+
+@ Average time per frame in milliseconds, and the slowest frame
+fil Karaniwang oras bawat frame sa millisecond, at ang pinakamabagal na frame
+
+@ How busy the game keeps the processor, as a share of all its cores
+fil Gaano ginagamit ng laro ang processor, bilang bahagi ng lahat ng core nito
+
+@ Memory the game uses
+fil Memoryang ginagamit ng laro
+
+@ Graphics card time per frame in milliseconds
+fil Oras ng graphics card bawat frame sa millisecond
+
+@ Video memory in use and what the driver allows, where it reports it
+fil Ginagamit na video memory at ang pinapayagan ng driver, kung iniuulat nito
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ fil Ine-export ang video
 @ Preparing...
 fil Inihahanda...
 
+# Save cards: personal best.
+@ PB {} {}
+fil PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ fil Naisulat ang {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 fil Hindi nakita ang ffmpeg: naisulat ang {} PNG frame at isang WAV sa {}
+
+# Personal bests.
+@ New personal best ({}): {}
+fil Bagong personal best ({}): {}

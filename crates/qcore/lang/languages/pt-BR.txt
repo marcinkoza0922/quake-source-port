@@ -1484,6 +1484,89 @@ pt-BR Como a janela
 @ GPU Encoding
 pt-BR Codificação na GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+pt-BR Tempo e estatísticas
+
+@ Clock
+pt-BR Relógio
+
+@ Clock Position
+pt-BR Posição do relógio
+
+@ Level Timer
+pt-BR Cronômetro da fase
+
+@ Personal Best
+pt-BR Recorde pessoal
+
+@ Personal Best Type
+pt-BR Tipo de recorde
+
+@ Personal Best Color
+pt-BR Cor do recorde
+
+@ Timer Position
+pt-BR Posição do cronômetro
+
+@ Kills
+pt-BR Abates
+
+@ Secrets
+pt-BR Segredos
+
+@ Kills & Secrets Position
+pt-BR Posição de abates e segredos
+
+@ 24-hour
+pt-BR 24 horas
+
+@ 24-hour + seconds
+pt-BR 24 horas + segundos
+
+@ 12-hour
+pt-BR 12 horas
+
+@ 12-hour + seconds
+pt-BR 12 horas + segundos
+
+@ count
+pt-BR quantidade
+
+@ percent
+pt-BR porcentagem
+
+@ any% and 100%
+pt-BR any% e 100%
+
+@ Keep Personal Best Demos
+pt-BR Guardar demos de recordes
+
+@ any%
+pt-BR any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+pt-BR Métricas de desempenho
+
+@ Frame Time
+pt-BR Tempo de quadro
+
+@ CPU Usage
+pt-BR Uso da CPU
+
+@ Memory Usage
+pt-BR Uso de memória
+
+@ GPU Time
+pt-BR Tempo da GPU
+
+@ Video Memory
+pt-BR Memória de vídeo
+
+@ Metrics Position
+pt-BR Posição das métricas
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ pt-BR Tamanho do vídeo; os quadros são redimensionados a partir do tamanho da 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 pt-BR Codifica na placa de vídeo (NVIDIA NVENC, AMD ou Intel via VA-API, AMF ou Quick Sync, Apple VideoToolbox) quando o ffmpeg consegue usá-la, deixando o processador livre; senão, o processador codifica
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+pt-BR Mostra a hora do dia no formato escolhido
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+pt-BR O tempo da fase, como na tela de intervalo; para na pausa e na saída
+
+@ Your best time on this map and skill, next to the timer (single player)
+pt-BR Seu melhor tempo neste mapa e dificuldade, ao lado do cronômetro (um jogador)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+pt-BR any%: qualquer final; 100%: todos os abates e segredos. Os cartões de saves mostram este primeiro
+
+@ Color of the personal best on the HUD and save cards
+pt-BR Cor do recorde pessoal no HUD e nos cartões de saves
+
+@ Shown as a count or as a percentage of the level's total
+pt-BR Como quantidade ou porcentagem do total da fase
+
+@ Where this goes on screen; items at the same position share a line
+pt-BR Onde aparece na tela; itens na mesma posição dividem uma linha
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+pt-BR Guarda a demo de cada fase com novo recorde pessoal; as antigas ficam. Grava mesmo sem demos automáticas
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+pt-BR Quadros por segundo, média de meio segundo
+
+@ Average time per frame in milliseconds, and the slowest frame
+pt-BR Tempo médio por quadro em milissegundos e o quadro mais lento
+
+@ How busy the game keeps the processor, as a share of all its cores
+pt-BR Quanto o jogo ocupa o processador, como parte de todos os núcleos
+
+@ Memory the game uses
+pt-BR Memória usada pelo jogo
+
+@ Graphics card time per frame in milliseconds
+pt-BR Tempo da placa de vídeo por quadro em milissegundos
+
+@ Video memory in use and what the driver allows, where it reports it
+pt-BR Memória de vídeo em uso e o que o driver permite, quando ele informa
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ pt-BR Exportando vídeo
 @ Preparing...
 pt-BR Preparando...
 
+# Save cards: personal best.
+@ PB {} {}
+pt-BR PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ pt-BR Gravado {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 pt-BR ffmpeg não encontrado: {} quadros PNG e um WAV gravados em {}
+
+# Personal bests.
+@ New personal best ({}): {}
+pt-BR Novo recorde pessoal ({}): {}

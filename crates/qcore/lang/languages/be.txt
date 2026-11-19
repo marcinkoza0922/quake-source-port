@@ -1484,6 +1484,89 @@ be Як акно
 @ GPU Encoding
 be Кадаванне на GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+be Час і статыстыка
+
+@ Clock
+be Гадзіннік
+
+@ Clock Position
+be Становішча гадзінніка
+
+@ Level Timer
+be Таймер узроўню
+
+@ Personal Best
+be Асабісты рэкорд
+
+@ Personal Best Type
+be Тып рэкорду
+
+@ Personal Best Color
+be Колер рэкорду
+
+@ Timer Position
+be Становішча таймера
+
+@ Kills
+be Забойствы
+
+@ Secrets
+be Сакрэты
+
+@ Kills & Secrets Position
+be Становішча забойстваў і сакрэтаў
+
+@ 24-hour
+be 24 гадзіны
+
+@ 24-hour + seconds
+be 24 гадзіны + секунды
+
+@ 12-hour
+be 12 гадзін
+
+@ 12-hour + seconds
+be 12 гадзін + секунды
+
+@ count
+be колькасць
+
+@ percent
+be працэнт
+
+@ any% and 100%
+be any% і 100%
+
+@ Keep Personal Best Demos
+be Захоўваць дэма рэкордаў
+
+@ any%
+be any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+be Паказчыкі прадукцыйнасці
+
+@ Frame Time
+be Час кадра
+
+@ CPU Usage
+be Загрузка ЦП
+
+@ Memory Usage
+be Выкарыстанне памяці
+
+@ GPU Time
+be Час ГП
+
+@ Video Memory
+be Відэапамяць
+
+@ Metrics Position
+be Становішча паказчыкаў
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ be Памер відэа; кадры маштабуюцца з памеру ак
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 be Кадуе на відэакарце (NVIDIA NVENC, AMD ці Intel праз VA-API, AMF або Quick Sync, Apple VideoToolbox), калі ffmpeg можа яе выкарыстаць, вызваляючы працэсар; інакш кадуе працэсар
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+be Паказвае час сутак у выбраным фармаце
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+be Час узроўню, як на экране вынікаў; спыняецца на паўзе і на выхадзе
+
+@ Your best time on this map and skill, next to the timer (single player)
+be Ваш лепшы час на гэтай мапе і складанасці, побач з таймерам (адзіночная гульня)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+be any%: любое праходжанне; 100%: усе забойствы і сакрэты. Карткі захаванняў паказваюць яго першым
+
+@ Color of the personal best on the HUD and save cards
+be Колер асабістага рэкорду ў HUD і на картках захаванняў
+
+@ Shown as a count or as a percentage of the level's total
+be Колькасцю або працэнтам ад агульнага на ўзроўні
+
+@ Where this goes on screen; items at the same position share a line
+be Дзе гэта на экране; элементы ў адным становішчы дзеляць радок
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+be Захоўвае дэма кожнага ўзроўню з новым асабістым рэкордам; старыя застаюцца. Запісвае нават без аўтазапісу
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+be Кадраў у секунду, у сярэднім за паўсекунды
+
+@ Average time per frame in milliseconds, and the slowest frame
+be Сярэдні час кадра ў мілісекундах і самы павольны кадр
+
+@ How busy the game keeps the processor, as a share of all its cores
+be Наколькі гульня загружае працэсар, як доля ўсіх яго ядраў
+
+@ Memory the game uses
+be Памяць, якую выкарыстоўвае гульня
+
+@ Graphics card time per frame in milliseconds
+be Час відэакарты на кадр у мілісекундах
+
+@ Video memory in use and what the driver allows, where it reports it
+be Занятая відэапамяць і даступны ад драйвера аб'ём, калі ён яго паведамляе
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ be Экспарт відэа
 @ Preparing...
 be Падрыхтоўка...
 
+# Save cards: personal best.
+@ PB {} {}
+be PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ be Запісана {} ({} с)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 be ffmpeg не знойдзены: {} кадраў PNG і WAV запісаны ў {}
+
+# Personal bests.
+@ New personal best ({}): {}
+be Новы асабісты рэкорд ({}): {}

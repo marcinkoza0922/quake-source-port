@@ -1484,6 +1484,89 @@ sv Som fönstret
 @ GPU Encoding
 sv GPU-kodning
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+sv Tid och statistik
+
+@ Clock
+sv Klocka
+
+@ Clock Position
+sv Klockans position
+
+@ Level Timer
+sv Banans tidtagare
+
+@ Personal Best
+sv Personbästa
+
+@ Personal Best Type
+sv Typ av personbästa
+
+@ Personal Best Color
+sv Personbästas färg
+
+@ Timer Position
+sv Tidtagarens position
+
+@ Kills
+sv Dödade
+
+@ Secrets
+sv Hemligheter
+
+@ Kills & Secrets Position
+sv Position för dödade och hemligheter
+
+@ 24-hour
+sv 24-timmars
+
+@ 24-hour + seconds
+sv 24-timmars + sekunder
+
+@ 12-hour
+sv 12-timmars
+
+@ 12-hour + seconds
+sv 12-timmars + sekunder
+
+@ count
+sv antal
+
+@ percent
+sv procent
+
+@ any% and 100%
+sv any% och 100%
+
+@ Keep Personal Best Demos
+sv Spara demor med personbästa
+
+@ any%
+sv any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+sv Prestandamått
+
+@ Frame Time
+sv Bildtid
+
+@ CPU Usage
+sv CPU-användning
+
+@ Memory Usage
+sv Minnesanvändning
+
+@ GPU Time
+sv GPU-tid
+
+@ Video Memory
+sv Videominne
+
+@ Metrics Position
+sv Måttens position
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ sv Videostorlek; bilderna skalas från fönstrets storlek (med svarta kanter som
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 sv Kodar på grafikkortet (NVIDIA NVENC, AMD eller Intel via VA-API, AMF eller Quick Sync, Apple VideoToolbox) när ffmpeg kan använda det, så att processorn blir ledig; annars kodar processorn
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+sv Visar tiden på dygnet i valt format
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+sv Banans tid, som på mellanskärmen; den står still vid paus och vid utgången
+
+@ Your best time on this map and skill, next to the timer (single player)
+sv Din bästa tid på den här kartan och svårighetsgraden, bredvid tidtagaren (en spelare)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+sv any%: valfritt slut; 100%: alla dödade och hemligheter. Sparkort visar denna först
+
+@ Color of the personal best on the HUD and save cards
+sv Färg på personbästa i HUD och på sparkort
+
+@ Shown as a count or as a percentage of the level's total
+sv Som antal eller som procent av banans totala
+
+@ Where this goes on screen; items at the same position share a line
+sv Var det visas på skärmen; saker på samma position delar rad
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+sv Sparar demon för varje bana som ger nytt personbästa; gamla finns kvar. Spelar in även utan automatiska demor
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+sv Bilder per sekund, medelvärde över en halv sekund
+
+@ Average time per frame in milliseconds, and the slowest frame
+sv Genomsnittlig tid per bild i millisekunder och den långsammaste bilden
+
+@ How busy the game keeps the processor, as a share of all its cores
+sv Hur hårt spelet belastar processorn, som andel av alla kärnor
+
+@ Memory the game uses
+sv Minne som spelet använder
+
+@ Graphics card time per frame in milliseconds
+sv Grafikkortstid per bild i millisekunder
+
+@ Video memory in use and what the driver allows, where it reports it
+sv Använt videominne och vad drivrutinen tillåter, där den rapporterar det
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ sv Exporterar video
 @ Preparing...
 sv Förbereder...
 
+# Save cards: personal best.
+@ PB {} {}
+sv PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ sv Skrev {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 sv ffmpeg hittades inte: skrev {} PNG-bilder och en WAV till {}
+
+# Personal bests.
+@ New personal best ({}): {}
+sv Nytt personbästa ({}): {}

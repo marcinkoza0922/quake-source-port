@@ -1484,6 +1484,89 @@ he כמו החלון
 @ GPU Encoding
 he קידוד GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+he זמן וסטטיסטיקה
+
+@ Clock
+he שעון
+
+@ Clock Position
+he מיקום השעון
+
+@ Level Timer
+he טיימר שלב
+
+@ Personal Best
+he שיא אישי
+
+@ Personal Best Type
+he סוג השיא
+
+@ Personal Best Color
+he צבע השיא
+
+@ Timer Position
+he מיקום הטיימר
+
+@ Kills
+he הריגות
+
+@ Secrets
+he סודות
+
+@ Kills & Secrets Position
+he מיקום הריגות וסודות
+
+@ 24-hour
+he 24 שעות
+
+@ 24-hour + seconds
+he 24 שעות + שניות
+
+@ 12-hour
+he 12 שעות
+
+@ 12-hour + seconds
+he 12 שעות + שניות
+
+@ count
+he מספר
+
+@ percent
+he אחוז
+
+@ any% and 100%
+he any% ו-100%
+
+@ Keep Personal Best Demos
+he שמירת הדגמות שיא
+
+@ any%
+he any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+he מדדי ביצועים
+
+@ Frame Time
+he זמן פריים
+
+@ CPU Usage
+he ניצול מעבד
+
+@ Memory Usage
+he שימוש בזיכרון
+
+@ GPU Time
+he זמן GPU
+
+@ Video Memory
+he זיכרון וידאו
+
+@ Metrics Position
+he מיקום המדדים
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ he גודל הווידאו; הפריימים מוגדלים מגודל החלו�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 he מקודד בכרטיס המסך (NVIDIA NVENC, ‏AMD או Intel דרך VA-API, ‏AMF או Quick Sync, ‏Apple VideoToolbox) כש-ffmpeg יכול להשתמש בו, וכך המעבד נשאר פנוי; אחרת המעבד מקודד
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+he מציג את השעה בתבנית שנבחרה
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+he זמן השלב, כמו במסך הביניים; נעצר בהשהיה וביציאה
+
+@ Your best time on this map and skill, next to the timer (single player)
+he הזמן הטוב ביותר שלך במפה ובקושי האלה, ליד הטיימר (שחקן יחיד)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+he any%: כל סיום; 100%: כל ההריגות והסודות. כרטיסי השמירה מציגים אותו ראשון
+
+@ Color of the personal best on the HUD and save cards
+he צבע השיא האישי בממשק ובכרטיסי השמירה
+
+@ Shown as a count or as a percentage of the level's total
+he כמספר או כאחוז מסך השלב
+
+@ Where this goes on screen; items at the same position share a line
+he איפה זה על המסך; פריטים באותו מיקום חולקים שורה
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+he שומר את ההדגמה של כל שלב שקובע שיא אישי; הישנות נשארות. מקליט גם בלי הקלטה אוטומטית
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+he פריימים לשנייה, ממוצע על פני חצי שנייה
+
+@ Average time per frame in milliseconds, and the slowest frame
+he זמן ממוצע לפריים במילישניות, והפריים האיטי ביותר
+
+@ How busy the game keeps the processor, as a share of all its cores
+he כמה המשחק מעסיק את המעבד, כחלק מכל הליבות
+
+@ Memory the game uses
+he הזיכרון שהמשחק משתמש בו
+
+@ Graphics card time per frame in milliseconds
+he זמן כרטיס המסך לפריים במילישניות
+
+@ Video memory in use and what the driver allows, where it reports it
+he זיכרון וידאו בשימוש ומה שמנהל ההתקן מתיר, היכן שהוא מדווח
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ he מייצא וידאו
 @ Preparing...
 he מתכונן...
 
+# Save cards: personal best.
+@ PB {} {}
+he PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ he נכתב {} ({} ש׳)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 he ffmpeg לא נמצא: נכתבו {} פריימים של PNG וקובץ WAV אל {}
+
+# Personal bests.
+@ New personal best ({}): {}
+he שיא אישי חדש ({}): {}

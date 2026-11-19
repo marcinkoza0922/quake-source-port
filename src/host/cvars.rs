@@ -122,11 +122,21 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("_mp_timelimit", "0", CVAR_ARCHIVE),
     ("_mp_map", "", CVAR_ARCHIVE),
     ("scr_showfps", "0", CVAR_ARCHIVE),
+    // HUD > Performance Metrics (host/metrics.rs), drawn at scr_metrics_pos
+    // (sbar::HudAnchor, default top right) beside scr_showfps.
+    ("scr_showframetime", "0", CVAR_ARCHIVE),
+    ("scr_showcpu", "0", CVAR_ARCHIVE),
+    ("scr_showram", "0", CVAR_ARCHIVE),
+    ("scr_showgpu", "0", CVAR_ARCHIVE),
+    ("scr_showvram", "0", CVAR_ARCHIVE),
+    ("scr_metrics_pos", "5", CVAR_ARCHIVE),
     // Horizontal speed under the crosshair; _ofs moves it down (ironwail).
     ("scr_showspeed", "0", CVAR_ARCHIVE),
     // Demos (Options > Demos): auto-recording, playback bar, video capture
     ("cl_autodemo", "1", CVAR_ARCHIVE),
     ("cl_autodemo_slots", "10", CVAR_ARCHIVE),
+    // keep a level's demo when it sets a personal best: 1 any%, 2 100%, 3 both
+    ("cl_autodemo_pb", "0", CVAR_ARCHIVE),
     ("cl_demobar", "2", CVAR_ARCHIVE),
     ("cl_demo_endpause", "1", CVAR_ARCHIVE),
     ("capture_fps", "60", CVAR_ARCHIVE),
@@ -190,6 +200,19 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("hud_items", "1", CVAR_ARCHIVE),
     ("hud_items_pos", "2", CVAR_ARCHIVE),
     ("hud_face", "1", CVAR_ARCHIVE),
+    // HUD > Time & Stats (sbar::time): clock format, timer decimals + 1,
+    // personal best beside the timer (any% or 100%, palette colour),
+    // kills/secrets as count or percent; each with an anchor.
+    ("hud_clock", "0", CVAR_ARCHIVE),
+    ("hud_clock_pos", "5", CVAR_ARCHIVE),
+    ("hud_timer", "0", CVAR_ARCHIVE),
+    ("hud_pb", "1", CVAR_ARCHIVE),
+    ("hud_pb_100", "0", CVAR_ARCHIVE),
+    ("hud_pb_color", "2", CVAR_ARCHIVE),
+    ("hud_timer_pos", "5", CVAR_ARCHIVE),
+    ("hud_kills", "0", CVAR_ARCHIVE),
+    ("hud_secrets", "0", CVAR_ARCHIVE),
+    ("hud_stats_pos", "5", CVAR_ARCHIVE),
     ("scr_centerpos", "0", CVAR_ARCHIVE),
     ("con_notifypos", "0", CVAR_ARCHIVE),
     ("crosshair_color", "6", CVAR_ARCHIVE),

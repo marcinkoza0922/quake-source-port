@@ -1484,6 +1484,89 @@ da Som vinduet
 @ GPU Encoding
 da GPU-kodning
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+da Tid og statistik
+
+@ Clock
+da Ur
+
+@ Clock Position
+da Urets placering
+
+@ Level Timer
+da Banetimer
+
+@ Personal Best
+da Personlig rekord
+
+@ Personal Best Type
+da Rekordtype
+
+@ Personal Best Color
+da Rekordfarve
+
+@ Timer Position
+da Timerens placering
+
+@ Kills
+da Drab
+
+@ Secrets
+da Hemmeligheder
+
+@ Kills & Secrets Position
+da Placering af drab og hemmeligheder
+
+@ 24-hour
+da 24 timer
+
+@ 24-hour + seconds
+da 24 timer + sekunder
+
+@ 12-hour
+da 12 timer
+
+@ 12-hour + seconds
+da 12 timer + sekunder
+
+@ count
+da antal
+
+@ percent
+da procent
+
+@ any% and 100%
+da any% og 100%
+
+@ Keep Personal Best Demos
+da Behold rekorddemoer
+
+@ any%
+da any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+da Ydelsesmålinger
+
+@ Frame Time
+da Billedtid
+
+@ CPU Usage
+da CPU-forbrug
+
+@ Memory Usage
+da Hukommelsesforbrug
+
+@ GPU Time
+da GPU-tid
+
+@ Video Memory
+da Videohukommelse
+
+@ Metrics Position
+da Målingernes placering
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ da Videostørrelse; billederne skaleres fra vinduets størrelse (med bjælker, s
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 da Koder på grafikkortet (NVIDIA NVENC, AMD eller Intel via VA-API, AMF eller Quick Sync, Apple VideoToolbox), når ffmpeg kan bruge det, så processoren er fri; ellers koder processoren
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+da Viser klokkeslættet i det valgte format
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+da Banens tid, som på mellemskærmen; den stopper ved pause og ved udgangen
+
+@ Your best time on this map and skill, next to the timer (single player)
+da Din bedste tid på dette kort og denne sværhedsgrad, ved siden af timeren (én spiller)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+da any%: enhver afslutning; 100%: alle drab og hemmeligheder. Gemmekort viser denne først
+
+@ Color of the personal best on the HUD and save cards
+da Farve på personlig rekord i HUD og på gemmekort
+
+@ Shown as a count or as a percentage of the level's total
+da Som antal eller som procent af banens samlede
+
+@ Where this goes on screen; items at the same position share a line
+da Hvor det vises på skærmen; elementer på samme placering deler linje
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+da Beholder demoen fra hver bane med ny personlig rekord; gamle bliver. Optager også uden automatiske demoer
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+da Billeder pr. sekund, gennemsnit over et halvt sekund
+
+@ Average time per frame in milliseconds, and the slowest frame
+da Gennemsnitlig tid pr. billede i millisekunder og det langsomste billede
+
+@ How busy the game keeps the processor, as a share of all its cores
+da Hvor hårdt spillet belaster processoren, som andel af alle kerner
+
+@ Memory the game uses
+da Hukommelse, som spillet bruger
+
+@ Graphics card time per frame in milliseconds
+da Grafikkorttid pr. billede i millisekunder
+
+@ Video memory in use and what the driver allows, where it reports it
+da Brugt videohukommelse og hvad driveren tillader, hvor den oplyser det
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ da Eksporterer video
 @ Preparing...
 da Forbereder...
 
+# Save cards: personal best.
+@ PB {} {}
+da PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ da Skrev {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 da ffmpeg ikke fundet: skrev {} PNG-billeder og en WAV til {}
+
+# Personal bests.
+@ New personal best ({}): {}
+da Ny personlig rekord ({}): {}

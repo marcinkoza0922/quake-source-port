@@ -1484,6 +1484,89 @@ mt Bħat-tieqa
 @ GPU Encoding
 mt Kodifikazzjoni GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+mt Ħin u Statistika
+
+@ Clock
+mt Arloġġ
+
+@ Clock Position
+mt Pożizzjoni tal-Arloġġ
+
+@ Level Timer
+mt Tajmer tal-Livell
+
+@ Personal Best
+mt L-Aħjar Personali
+
+@ Personal Best Type
+mt Tip tal-Aħjar Personali
+
+@ Personal Best Color
+mt Kulur tal-Aħjar Personali
+
+@ Timer Position
+mt Pożizzjoni tat-Tajmer
+
+@ Kills
+mt Qtil
+
+@ Secrets
+mt Sigrieti
+
+@ Kills & Secrets Position
+mt Pożizzjoni tal-Qtil u s-Sigrieti
+
+@ 24-hour
+mt 24 siegħa
+
+@ 24-hour + seconds
+mt 24 siegħa + sekondi
+
+@ 12-hour
+mt 12-il siegħa
+
+@ 12-hour + seconds
+mt 12-il siegħa + sekondi
+
+@ count
+mt għadd
+
+@ percent
+mt perċentwal
+
+@ any% and 100%
+mt any% u 100%
+
+@ Keep Personal Best Demos
+mt Żomm id-Demos tal-Aħjar Personali
+
+@ any%
+mt any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+mt Metriċi tal-Prestazzjoni
+
+@ Frame Time
+mt Ħin tal-Qafas
+
+@ CPU Usage
+mt Użu tas-CPU
+
+@ Memory Usage
+mt Użu tal-Memorja
+
+@ GPU Time
+mt Ħin tal-GPU
+
+@ Video Memory
+mt Memorja tal-Vidjo
+
+@ Metrics Position
+mt Pożizzjoni tal-Metriċi
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ mt Daqs tal-vidjo; il-frejms jiġu skalati mid-daqs tat-tieqa (b'faxex biex tin�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 mt Jikkodifika fuq il-kard grafika (NVIDIA NVENC, AMD jew Intel permezz ta' VA-API, AMF jew Quick Sync, Apple VideoToolbox) meta ffmpeg jista' jużaha, u b'hekk il-proċessur jibqa' ħieles; inkella jikkodifika l-proċessur
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+mt Juri l-ħin tal-ġurnata fil-format magħżul
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+mt Il-ħin tal-livell, bħal fuq l-iskrin tal-intervall; jieqaf waqt il-pawża u fil-ħruġ
+
+@ Your best time on this map and skill, next to the timer (single player)
+mt L-aħjar ħin tiegħek f'din il-mappa u diffikultà, ħdejn it-tajmer (plejer wieħed)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+mt any%: kwalunkwe tmiem; 100%: kull qtil u sigriet. Il-kards tas-salvataġġi juru dan l-ewwel
+
+@ Color of the personal best on the HUD and save cards
+mt Kulur tal-aħjar personali fuq il-HUD u l-kards tas-salvataġġi
+
+@ Shown as a count or as a percentage of the level's total
+mt Bħala għadd jew perċentwal tat-total tal-livell
+
+@ Where this goes on screen; items at the same position share a line
+mt Fejn jidher fuq l-iskrin; oġġetti fl-istess pożizzjoni jaqsmu linja
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+mt Iżomm id-demo ta' kull livell b'aħjar personali ġdid; il-qodma jibqgħu. Jirrekordja anki bir-reġistrazzjoni awtomatika mitfija
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+mt Oqfsa kull sekonda, medja fuq nofs sekonda
+
+@ Average time per frame in milliseconds, and the slowest frame
+mt Ħin medju għal kull qafas f'millisekondi, u l-iktar qafas bil-mod
+
+@ How busy the game keeps the processor, as a share of all its cores
+mt Kemm il-logħba żżomm il-proċessur okkupat, bħala sehem mill-qlub kollha
+
+@ Memory the game uses
+mt Il-memorja li tuża l-logħba
+
+@ Graphics card time per frame in milliseconds
+mt Ħin tal-karta grafika għal kull qafas f'millisekondi
+
+@ Video memory in use and what the driver allows, where it reports it
+mt Memorja tal-vidjo fl-użu u kemm jippermetti d-driver, fejn jirrapporta
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ mt Qed jiġi esportat il-vidjo
 @ Preparing...
 mt Qed jipprepara...
 
+# Save cards: personal best.
+@ PB {} {}
+mt PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ mt Inkiteb {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 mt ffmpeg ma nstabx: inkitbu {} frejms PNG u WAV f'{}
+
+# Personal bests.
+@ New personal best ({}): {}
+mt Aħjar personali ġdid ({}): {}

@@ -1484,6 +1484,89 @@ la Ut fenestra
 @ GPU Encoding
 la Codificatio GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+la Tempus et numeri
+
+@ Clock
+la Horologium
+
+@ Clock Position
+la Locus horologii
+
+@ Level Timer
+la Chronometrum gradus
+
+@ Personal Best
+la Optimum proprium
+
+@ Personal Best Type
+la Genus optimi
+
+@ Personal Best Color
+la Color optimi
+
+@ Timer Position
+la Locus chronometri
+
+@ Kills
+la Caedes
+
+@ Secrets
+la Arcana
+
+@ Kills & Secrets Position
+la Locus caedium et arcanorum
+
+@ 24-hour
+la Horae XXIV
+
+@ 24-hour + seconds
+la Horae XXIV + secunda
+
+@ 12-hour
+la Horae XII
+
+@ 12-hour + seconds
+la Horae XII + secunda
+
+@ count
+la numerus
+
+@ percent
+la centesimae
+
+@ any% and 100%
+la any% et 100%
+
+@ Keep Personal Best Demos
+la Serva demonstrationes optimorum
+
+@ any%
+la any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+la Mensurae efficientiae
+
+@ Frame Time
+la Tempus imaginis
+
+@ CPU Usage
+la Usus processoris
+
+@ Memory Usage
+la Usus memoriae
+
+@ GPU Time
+la Tempus GPU
+
+@ Video Memory
+la Memoria video
+
+@ Metrics Position
+la Locus mensurarum
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ la Magnitudo pelliculae; imagines ex magnitudine fenestrae mutantur (cum fasciis
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 la In charta graphica codificat (NVIDIA NVENC, AMD vel Intel per VA-API, AMF vel Quick Sync, Apple VideoToolbox) cum ffmpeg ea uti potest, processorem liberum relinquens; aliter processor codificat
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+la Horam diei forma electa ostendit
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+la Tempus gradus, ut in tabula intermissionis; in pausa et ad exitum consistit
+
+@ Your best time on this map and skill, next to the timer (single player)
+la Tempus tuum optimum in hac tabula et difficultate, iuxta chronometrum (lusor unus)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+la any%: quilibet finis; 100%: omnes caedes et arcana. Chartae servatorum hoc primum ostendunt
+
+@ Color of the personal best on the HUD and save cards
+la Color optimi proprii in HUD et chartis servatorum
+
+@ Shown as a count or as a percentage of the level's total
+la Ut numerus vel ut pars centesima summae gradus
+
+@ Where this goes on screen; items at the same position share a line
+la Ubi in tabula ostenditur; res eodem loco lineam communicant
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+la Demonstrationem cuiusque gradus novum optimum facientis servat; veteres manent. Etiam sine demonstrationibus automaticis inscribit
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+la Imagines per secundum, media dimidii secundi
+
+@ Average time per frame in milliseconds, and the slowest frame
+la Tempus medium cuiusque imaginis in millesimis secundi, et imago tardissima
+
+@ How busy the game keeps the processor, as a share of all its cores
+la Quantum ludus processorem occupat, ut pars omnium nucleorum
+
+@ Memory the game uses
+la Memoria quam ludus adhibet
+
+@ Graphics card time per frame in milliseconds
+la Tempus chartae graphicae per imaginem in millesimis secundi
+
+@ Video memory in use and what the driver allows, where it reports it
+la Memoria video in usu et quantum rector permittit, ubi id nuntiat
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ la Pellicula exportatur
 @ Preparing...
 la Paratur...
 
+# Save cards: personal best.
+@ PB {} {}
+la PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ la Scriptum {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 la ffmpeg non inventum: {} imagines PNG et WAV in {} scriptae
+
+# Personal bests.
+@ New personal best ({}): {}
+la Novum optimum proprium ({}): {}

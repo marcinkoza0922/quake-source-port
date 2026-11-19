@@ -1484,6 +1484,89 @@ ur ونڈو جیسا
 @ GPU Encoding
 ur GPU انکوڈنگ
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ur وقت اور اعداد و شمار
+
+@ Clock
+ur گھڑی
+
+@ Clock Position
+ur گھڑی کی جگہ
+
+@ Level Timer
+ur لیول ٹائمر
+
+@ Personal Best
+ur ذاتی بہترین
+
+@ Personal Best Type
+ur ذاتی بہترین کی قسم
+
+@ Personal Best Color
+ur ذاتی بہترین کا رنگ
+
+@ Timer Position
+ur ٹائمر کی جگہ
+
+@ Kills
+ur ہلاکتیں
+
+@ Secrets
+ur راز
+
+@ Kills & Secrets Position
+ur ہلاکتوں اور رازوں کی جگہ
+
+@ 24-hour
+ur 24 گھنٹے
+
+@ 24-hour + seconds
+ur 24 گھنٹے + سیکنڈ
+
+@ 12-hour
+ur 12 گھنٹے
+
+@ 12-hour + seconds
+ur 12 گھنٹے + سیکنڈ
+
+@ count
+ur تعداد
+
+@ percent
+ur فیصد
+
+@ any% and 100%
+ur any% اور 100%
+
+@ Keep Personal Best Demos
+ur ذاتی بہترین ڈیمو رکھیں
+
+@ any%
+ur any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ur کارکردگی کے پیمانے
+
+@ Frame Time
+ur فریم کا وقت
+
+@ CPU Usage
+ur CPU کا استعمال
+
+@ Memory Usage
+ur میموری کا استعمال
+
+@ GPU Time
+ur GPU کا وقت
+
+@ Video Memory
+ur ویڈیو میموری
+
+@ Metrics Position
+ur پیمانوں کی جگہ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ ur ویڈیو کا سائز؛ فریم ونڈو کے سائز سے بڑے کیے
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ur جب ffmpeg استعمال کر سکے تو گرافکس کارڈ پر انکوڈ کرتا ہے (NVIDIA NVENC، VA-API کے ذریعے AMD یا Intel، AMF یا Quick Sync، Apple VideoToolbox) اور پروسیسر کو آزاد رکھتا ہے؛ ورنہ پروسیسر انکوڈ کرتا ہے
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ur دن کا وقت منتخب انداز میں دکھاتا ہے
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ur لیول کا وقت، وقفے کی اسکرین کی طرح؛ رکنے پر اور باہر نکلنے پر تھم جاتا ہے
+
+@ Your best time on this map and skill, next to the timer (single player)
+ur اس نقشے اور مشکل پر آپ کا بہترین وقت، ٹائمر کے ساتھ (ایک کھلاڑی)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ur any%: کوئی بھی اختتام؛ 100%: تمام ہلاکتیں اور راز۔ محفوظ کارڈ پہلے یہی دکھاتے ہیں
+
+@ Color of the personal best on the HUD and save cards
+ur HUD اور محفوظ کارڈز پر ذاتی بہترین کا رنگ
+
+@ Shown as a count or as a percentage of the level's total
+ur تعداد کے طور پر یا لیول کے کل کے فیصد کے طور پر
+
+@ Where this goes on screen; items at the same position share a line
+ur یہ اسکرین پر کہاں ہے؛ ایک ہی جگہ کی چیزیں ایک سطر بانٹتی ہیں
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ur ہر اس لیول کا ڈیمو رکھتا ہے جو ذاتی بہترین بنائے؛ پرانے رہتے ہیں۔ خودکار ریکارڈنگ بند ہو تب بھی ریکارڈ کرتا ہے
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ur فی سیکنڈ فریم، آدھے سیکنڈ کا اوسط
+
+@ Average time per frame in milliseconds, and the slowest frame
+ur فی فریم اوسط وقت ملی سیکنڈ میں، اور سب سے سست فریم
+
+@ How busy the game keeps the processor, as a share of all its cores
+ur گیم پروسیسر کو کتنا مصروف رکھتا ہے، تمام کورز کے حصے کے طور پر
+
+@ Memory the game uses
+ur گیم کی استعمال کردہ میموری
+
+@ Graphics card time per frame in milliseconds
+ur فی فریم گرافکس کارڈ کا وقت ملی سیکنڈ میں
+
+@ Video memory in use and what the driver allows, where it reports it
+ur استعمال شدہ ویڈیو میموری اور ڈرائیور کی اجازت، جہاں وہ بتاتا ہو
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ ur ویڈیو برآمد ہو رہی ہے
 @ Preparing...
 ur تیاری ہو رہی ہے...
 
+# Save cards: personal best.
+@ PB {} {}
+ur PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ ur {} لکھا گیا ({} سیکنڈ)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ur ffmpeg نہیں ملا: {} PNG فریم اور ایک WAV {} میں لکھے گئے
+
+# Personal bests.
+@ New personal best ({}): {}
+ur نیا ذاتی بہترین ({}): {}

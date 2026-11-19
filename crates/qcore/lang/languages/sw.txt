@@ -1484,6 +1484,89 @@ sw Kama dirisha
 @ GPU Encoding
 sw Usimbaji wa GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+sw Muda na Takwimu
+
+@ Clock
+sw Saa
+
+@ Clock Position
+sw Mahali pa Saa
+
+@ Level Timer
+sw Kipima Muda cha Kiwango
+
+@ Personal Best
+sw Rekodi Binafsi
+
+@ Personal Best Type
+sw Aina ya Rekodi
+
+@ Personal Best Color
+sw Rangi ya Rekodi
+
+@ Timer Position
+sw Mahali pa Kipima Muda
+
+@ Kills
+sw Mauaji
+
+@ Secrets
+sw Siri
+
+@ Kills & Secrets Position
+sw Mahali pa Mauaji na Siri
+
+@ 24-hour
+sw saa 24
+
+@ 24-hour + seconds
+sw saa 24 + sekunde
+
+@ 12-hour
+sw saa 12
+
+@ 12-hour + seconds
+sw saa 12 + sekunde
+
+@ count
+sw idadi
+
+@ percent
+sw asilimia
+
+@ any% and 100%
+sw any% na 100%
+
+@ Keep Personal Best Demos
+sw Hifadhi Demo za Rekodi
+
+@ any%
+sw any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+sw Vipimo vya Utendaji
+
+@ Frame Time
+sw Muda wa Fremu
+
+@ CPU Usage
+sw Matumizi ya CPU
+
+@ Memory Usage
+sw Matumizi ya Kumbukumbu
+
+@ GPU Time
+sw Muda wa GPU
+
+@ Video Memory
+sw Kumbukumbu ya Video
+
+@ Metrics Position
+sw Mahali pa Vipimo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ sw Ukubwa wa video; fremu hubadilishwa ukubwa kutoka ukubwa wa dirisha (pamoja n
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 sw Husimba kwenye kadi ya michoro (NVIDIA NVENC, AMD au Intel kupitia VA-API, AMF au Quick Sync, Apple VideoToolbox) ffmpeg inapoweza kuitumia, na kuacha kichakataji huru; vinginevyo kichakataji husimba
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+sw Huonyesha saa ya siku katika muundo uliochaguliwa
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+sw Muda wa kiwango, kama kwenye skrini ya mapumziko; husimama ukisitisha na kwenye mlango wa kutoka
+
+@ Your best time on this map and skill, next to the timer (single player)
+sw Muda wako bora kwenye ramani na ugumu huu, kando ya kipima muda (mchezaji mmoja)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+sw any%: mwisho wowote; 100%: mauaji yote na siri zote. Kadi za hifadhi huonyesha hii kwanza
+
+@ Color of the personal best on the HUD and save cards
+sw Rangi ya rekodi binafsi kwenye HUD na kadi za hifadhi
+
+@ Shown as a count or as a percentage of the level's total
+sw Kama idadi au kama asilimia ya jumla ya kiwango
+
+@ Where this goes on screen; items at the same position share a line
+sw Mahali kilipo kwenye skrini; vitu vilivyo mahali pamoja hushiriki mstari
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+sw Huhifadhi demo ya kila kiwango kinachoweka rekodi binafsi; za zamani hubaki. Hurekodi hata kurekodi kiotomatiki kukiwa kumezimwa
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+sw Fremu kwa sekunde, wastani wa nusu sekunde
+
+@ Average time per frame in milliseconds, and the slowest frame
+sw Muda wa wastani kwa kila fremu kwa milisekunde, na fremu ya polepole zaidi
+
+@ How busy the game keeps the processor, as a share of all its cores
+sw Jinsi mchezo unavyoshughulisha kichakataji, kama sehemu ya viini vyake vyote
+
+@ Memory the game uses
+sw Kumbukumbu ambayo mchezo unatumia
+
+@ Graphics card time per frame in milliseconds
+sw Muda wa kadi ya michoro kwa kila fremu kwa milisekunde
+
+@ Video memory in use and what the driver allows, where it reports it
+sw Kumbukumbu ya video inayotumika na kiasi dereva anachoruhusu, pale anaporipoti
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ sw Inahamisha video
 @ Preparing...
 sw Inaandaa...
 
+# Save cards: personal best.
+@ PB {} {}
+sw PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ sw Imeandika {} (sek {})
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 sw ffmpeg haikupatikana: imeandika fremu {} za PNG na WAV moja kwenye {}
+
+# Personal bests.
+@ New personal best ({}): {}
+sw Rekodi binafsi mpya ({}): {}

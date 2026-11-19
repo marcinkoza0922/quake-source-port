@@ -1484,6 +1484,89 @@ ka როგორც ფანჯარა
 @ GPU Encoding
 ka GPU კოდირება
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ka დრო და სტატისტიკა
+
+@ Clock
+ka საათი
+
+@ Clock Position
+ka საათის მდებარეობა
+
+@ Level Timer
+ka დონის ტაიმერი
+
+@ Personal Best
+ka პირადი რეკორდი
+
+@ Personal Best Type
+ka რეკორდის ტიპი
+
+@ Personal Best Color
+ka რეკორდის ფერი
+
+@ Timer Position
+ka ტაიმერის მდებარეობა
+
+@ Kills
+ka მოკლულები
+
+@ Secrets
+ka საიდუმლოებები
+
+@ Kills & Secrets Position
+ka მოკლულებისა და საიდუმლოებების მდებარეობა
+
+@ 24-hour
+ka 24-საათიანი
+
+@ 24-hour + seconds
+ka 24-საათიანი + წამები
+
+@ 12-hour
+ka 12-საათიანი
+
+@ 12-hour + seconds
+ka 12-საათიანი + წამები
+
+@ count
+ka რაოდენობა
+
+@ percent
+ka პროცენტი
+
+@ any% and 100%
+ka any% და 100%
+
+@ Keep Personal Best Demos
+ka პირადი რეკორდების დემოების შენახვა
+
+@ any%
+ka any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ka წარმადობის მაჩვენებლები
+
+@ Frame Time
+ka კადრის დრო
+
+@ CPU Usage
+ka CPU-ის გამოყენება
+
+@ Memory Usage
+ka მეხსიერების გამოყენება
+
+@ GPU Time
+ka GPU-ის დრო
+
+@ Video Memory
+ka ვიდეომეხსიერება
+
+@ Metrics Position
+ka მაჩვენებლების მდებარეობა
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ ka ვიდეოს ზომა; კადრები ფანჯრის 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ka კოდირებს ვიდეობარათზე (NVIDIA NVENC, AMD ან Intel VA-API-ით, AMF ან Quick Sync, Apple VideoToolbox), როცა ffmpeg-ს შეუძლია მისი გამოყენება, და პროცესორს თავისუფალს ტოვებს; სხვა შემთხვევაში კოდირებს პროცესორი
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ka აჩვენებს დღის დროს არჩეულ ფორმატში
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ka დონის დრო, როგორც შუალედურ ეკრანზე; ჩერდება პაუზისას და გასასვლელთან
+
+@ Your best time on this map and skill, next to the timer (single player)
+ka თქვენი საუკეთესო დრო ამ რუკაზე და სირთულეზე, ტაიმერის გვერდით (ერთი მოთამაშე)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ka any%: ნებისმიერი დასრულება; 100%: ყველა მოკლული და საიდუმლოება. შენახვის ბარათები ამას აჩვენებს პირველად
+
+@ Color of the personal best on the HUD and save cards
+ka პირადი რეკორდის ფერი HUD-სა და შენახვის ბარათებზე
+
+@ Shown as a count or as a percentage of the level's total
+ka რაოდენობით ან დონის ჯამის პროცენტით
+
+@ Where this goes on screen; items at the same position share a line
+ka სად არის ეკრანზე; ერთ მდებარეობაზე მყოფი ელემენტები ერთ ხაზს იზიარებენ
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ka ინახავს ყოველი დონის დემოს ახალი პირადი რეკორდით; ძველები რჩება. იწერს ავტოჩაწერის გარეშეც
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ka კადრები წამში, ნახევარი წამის საშუალო
+
+@ Average time per frame in milliseconds, and the slowest frame
+ka კადრის საშუალო დრო მილიწამებში და ყველაზე ნელი კადრი
+
+@ How busy the game keeps the processor, as a share of all its cores
+ka რამდენად ტვირთავს თამაში პროცესორს, ყველა ბირთვის წილით
+
+@ Memory the game uses
+ka თამაშის მიერ გამოყენებული მეხსიერება
+
+@ Graphics card time per frame in milliseconds
+ka ვიდეობარათის დრო კადრზე მილიწამებში
+
+@ Video memory in use and what the driver allows, where it reports it
+ka გამოყენებული ვიდეომეხსიერება და დრაივერის დაშვებული ოდენობა, თუ ის ამას აცნობებს
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ ka ვიდეოს ექსპორტი
 @ Preparing...
 ka მომზადება...
 
+# Save cards: personal best.
+@ PB {} {}
+ka PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ ka ჩაიწერა {} ({} წმ)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ka ffmpeg ვერ მოიძებნა: {} PNG კადრი და WAV ჩაიწერა {}-ში
+
+# Personal bests.
+@ New personal best ({}): {}
+ka ახალი პირადი რეკორდი ({}): {}

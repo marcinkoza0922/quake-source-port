@@ -1484,6 +1484,89 @@ vi Giống cửa sổ
 @ GPU Encoding
 vi Mã hóa bằng GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+vi Thời gian & Thống kê
+
+@ Clock
+vi Đồng hồ
+
+@ Clock Position
+vi Vị trí đồng hồ
+
+@ Level Timer
+vi Đồng hồ bấm giờ màn chơi
+
+@ Personal Best
+vi Kỷ lục cá nhân
+
+@ Personal Best Type
+vi Loại kỷ lục
+
+@ Personal Best Color
+vi Màu kỷ lục
+
+@ Timer Position
+vi Vị trí đồng hồ bấm giờ
+
+@ Kills
+vi Hạ gục
+
+@ Secrets
+vi Bí mật
+
+@ Kills & Secrets Position
+vi Vị trí hạ gục & bí mật
+
+@ 24-hour
+vi 24 giờ
+
+@ 24-hour + seconds
+vi 24 giờ + giây
+
+@ 12-hour
+vi 12 giờ
+
+@ 12-hour + seconds
+vi 12 giờ + giây
+
+@ count
+vi số lượng
+
+@ percent
+vi phần trăm
+
+@ any% and 100%
+vi any% và 100%
+
+@ Keep Personal Best Demos
+vi Giữ demo kỷ lục cá nhân
+
+@ any%
+vi any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+vi Chỉ số hiệu năng
+
+@ Frame Time
+vi Thời gian khung hình
+
+@ CPU Usage
+vi Mức dùng CPU
+
+@ Memory Usage
+vi Mức dùng bộ nhớ
+
+@ GPU Time
+vi Thời gian GPU
+
+@ Video Memory
+vi Bộ nhớ video
+
+@ Metrics Position
+vi Vị trí chỉ số
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ vi Kích thước video; khung hình được co giãn từ kích thước cửa
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 vi Mã hóa bằng card đồ họa (NVIDIA NVENC, AMD hoặc Intel qua VA-API, AMF hoặc Quick Sync, Apple VideoToolbox) khi ffmpeg dùng được, để bộ xử lý rảnh; nếu không thì bộ xử lý mã hóa
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+vi Hiện giờ trong ngày theo định dạng đã chọn
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+vi Thời gian màn chơi, như trên màn hình tổng kết; dừng khi tạm dừng và ở lối ra
+
+@ Your best time on this map and skill, next to the timer (single player)
+vi Thời gian tốt nhất của bạn ở bản đồ và độ khó này, cạnh đồng hồ bấm giờ (chơi đơn)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+vi any%: hoàn thành bất kỳ; 100%: hạ gục mọi kẻ địch và tìm mọi bí mật. Thẻ lưu game hiện loại này trước
+
+@ Color of the personal best on the HUD and save cards
+vi Màu kỷ lục cá nhân trên HUD và thẻ lưu game
+
+@ Shown as a count or as a percentage of the level's total
+vi Hiện dưới dạng số lượng hoặc phần trăm tổng của màn chơi
+
+@ Where this goes on screen; items at the same position share a line
+vi Vị trí trên màn hình; các mục cùng vị trí dùng chung một dòng
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+vi Giữ demo của mỗi màn chơi lập kỷ lục cá nhân; bản cũ vẫn còn. Ghi cả khi tắt tự động ghi
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+vi Số khung hình mỗi giây, trung bình trong nửa giây
+
+@ Average time per frame in milliseconds, and the slowest frame
+vi Thời gian trung bình mỗi khung hình tính bằng mili giây, và khung hình chậm nhất
+
+@ How busy the game keeps the processor, as a share of all its cores
+vi Trò chơi dùng bộ xử lý bao nhiêu, tính theo tỉ lệ trên mọi nhân
+
+@ Memory the game uses
+vi Bộ nhớ trò chơi đang dùng
+
+@ Graphics card time per frame in milliseconds
+vi Thời gian card đồ họa cho mỗi khung hình tính bằng mili giây
+
+@ Video memory in use and what the driver allows, where it reports it
+vi Bộ nhớ video đang dùng và mức trình điều khiển cho phép, nếu có báo
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ vi Đang xuất video
 @ Preparing...
 vi Đang chuẩn bị...
 
+# Save cards: personal best.
+@ PB {} {}
+vi PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ vi Đã ghi {} ({} giây)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 vi Không tìm thấy ffmpeg: đã ghi {} khung hình PNG và một tệp WAV vào {}
+
+# Personal bests.
+@ New personal best ({}): {}
+vi Kỷ lục cá nhân mới ({}): {}

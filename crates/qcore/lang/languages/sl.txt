@@ -1484,6 +1484,89 @@ sl Kot okno
 @ GPU Encoding
 sl Kodiranje z GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+sl Čas in statistika
+
+@ Clock
+sl Ura
+
+@ Clock Position
+sl Položaj ure
+
+@ Level Timer
+sl Časovnik stopnje
+
+@ Personal Best
+sl Osebni rekord
+
+@ Personal Best Type
+sl Vrsta rekorda
+
+@ Personal Best Color
+sl Barva rekorda
+
+@ Timer Position
+sl Položaj časovnika
+
+@ Kills
+sl Uboji
+
+@ Secrets
+sl Skrivnosti
+
+@ Kills & Secrets Position
+sl Položaj ubojev in skrivnosti
+
+@ 24-hour
+sl 24-urni
+
+@ 24-hour + seconds
+sl 24-urni + sekunde
+
+@ 12-hour
+sl 12-urni
+
+@ 12-hour + seconds
+sl 12-urni + sekunde
+
+@ count
+sl število
+
+@ percent
+sl odstotek
+
+@ any% and 100%
+sl any% in 100%
+
+@ Keep Personal Best Demos
+sl Ohrani posnetke rekordov
+
+@ any%
+sl any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+sl Kazalniki zmogljivosti
+
+@ Frame Time
+sl Čas sličice
+
+@ CPU Usage
+sl Uporaba procesorja
+
+@ Memory Usage
+sl Uporaba pomnilnika
+
+@ GPU Time
+sl Čas GPU
+
+@ Video Memory
+sl Video pomnilnik
+
+@ Metrics Position
+sl Položaj kazalnikov
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ sl Velikost videa; sličice se razširijo iz velikosti okna (s pasovi, da obdrž
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 sl Kodira na grafični kartici (NVIDIA NVENC, AMD ali Intel prek VA-API, AMF ali Quick Sync, Apple VideoToolbox), ko jo ffmpeg lahko uporabi, in pusti procesor prost; sicer kodira procesor
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+sl Prikaže uro v izbrani obliki
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+sl Čas stopnje, kot na vmesnem zaslonu; ustavi se med premorom in na izhodu
+
+@ Your best time on this map and skill, next to the timer (single player)
+sl Vaš najboljši čas na tej mapi in težavnosti, ob časovniku (en igralec)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+sl any%: kakršen koli konec; 100%: vsi uboji in skrivnosti. Kartice shranjenih iger najprej prikažejo tega
+
+@ Color of the personal best on the HUD and save cards
+sl Barva osebnega rekorda na HUD-u in karticah shranjenih iger
+
+@ Shown as a count or as a percentage of the level's total
+sl Kot število ali kot odstotek celote stopnje
+
+@ Where this goes on screen; items at the same position share a line
+sl Kje je na zaslonu; elementi na istem položaju si delijo vrstico
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+sl Ohrani posnetek vsake stopnje z novim osebnim rekordom; stari ostanejo. Snema tudi brez samodejnega snemanja
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+sl Sličice na sekundo, povprečje pol sekunde
+
+@ Average time per frame in milliseconds, and the slowest frame
+sl Povprečni čas sličice v milisekundah in najpočasnejša sličica
+
+@ How busy the game keeps the processor, as a share of all its cores
+sl Kako zelo igra obremenjuje procesor, kot delež vseh jeder
+
+@ Memory the game uses
+sl Pomnilnik, ki ga uporablja igra
+
+@ Graphics card time per frame in milliseconds
+sl Čas grafične kartice na sličico v milisekundah
+
+@ Video memory in use and what the driver allows, where it reports it
+sl Zaseden video pomnilnik in koliko dovoli gonilnik, če to sporoča
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ sl Izvažanje videa
 @ Preparing...
 sl Pripravljanje...
 
+# Save cards: personal best.
+@ PB {} {}
+sl PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ sl Zapisano {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 sl ffmpeg ni najden: zapisanih {} sličic PNG in WAV v {}
+
+# Personal bests.
+@ New personal best ({}): {}
+sl Nov osebni rekord ({}): {}

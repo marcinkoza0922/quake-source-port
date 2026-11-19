@@ -1484,6 +1484,89 @@ mr विंडोसारखे
 @ GPU Encoding
 mr GPU एन्कोडिंग
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+mr वेळ आणि आकडेवारी
+
+@ Clock
+mr घड्याळ
+
+@ Clock Position
+mr घड्याळाचे स्थान
+
+@ Level Timer
+mr स्तर टायमर
+
+@ Personal Best
+mr वैयक्तिक सर्वोत्तम
+
+@ Personal Best Type
+mr सर्वोत्तमाचा प्रकार
+
+@ Personal Best Color
+mr सर्वोत्तमाचा रंग
+
+@ Timer Position
+mr टायमरचे स्थान
+
+@ Kills
+mr मारलेले
+
+@ Secrets
+mr रहस्ये
+
+@ Kills & Secrets Position
+mr मारलेले आणि रहस्यांचे स्थान
+
+@ 24-hour
+mr 24 तास
+
+@ 24-hour + seconds
+mr 24 तास + सेकंद
+
+@ 12-hour
+mr 12 तास
+
+@ 12-hour + seconds
+mr 12 तास + सेकंद
+
+@ count
+mr संख्या
+
+@ percent
+mr टक्के
+
+@ any% and 100%
+mr any% आणि 100%
+
+@ Keep Personal Best Demos
+mr वैयक्तिक सर्वोत्तम डेमो ठेवा
+
+@ any%
+mr any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+mr कामगिरी मापदंड
+
+@ Frame Time
+mr फ्रेम वेळ
+
+@ CPU Usage
+mr CPU वापर
+
+@ Memory Usage
+mr मेमरी वापर
+
+@ GPU Time
+mr GPU वेळ
+
+@ Video Memory
+mr व्हिडिओ मेमरी
+
+@ Metrics Position
+mr मापदंडांचे स्थान
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ mr व्हिडिओचा आकार; फ्रेम विंडोच�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 mr ffmpeg वापरू शकत असल्यास ग्राफिक्स कार्डवर एन्कोड करते (NVIDIA NVENC, VA-API द्वारे AMD किंवा Intel, AMF किंवा Quick Sync, Apple VideoToolbox) आणि प्रोसेसर मोकळा ठेवते; नाहीतर प्रोसेसर एन्कोड करतो
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+mr निवडलेल्या स्वरूपात दिवसाची वेळ दाखवते
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+mr स्तराची वेळ, मध्यंतर स्क्रीनप्रमाणे; थांबवल्यावर आणि बाहेर पडताना थांबते
+
+@ Your best time on this map and skill, next to the timer (single player)
+mr या नकाशावर आणि अडचणीवर तुमची सर्वोत्तम वेळ, टायमरशेजारी (एकल खेळाडू)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+mr any%: कोणताही शेवट; 100%: सर्व मारलेले आणि रहस्ये. सेव्ह कार्ड आधी हेच दाखवतात
+
+@ Color of the personal best on the HUD and save cards
+mr HUD आणि सेव्ह कार्डवरील वैयक्तिक सर्वोत्तमाचा रंग
+
+@ Shown as a count or as a percentage of the level's total
+mr संख्या म्हणून किंवा स्तराच्या एकूणच्या टक्केवारी म्हणून
+
+@ Where this goes on screen; items at the same position share a line
+mr हे स्क्रीनवर कुठे आहे; एकाच स्थानावरील घटक एक ओळ वाटून घेतात
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+mr वैयक्तिक सर्वोत्तम करणाऱ्या प्रत्येक स्तराचा डेमो ठेवते; जुने राहतात. स्वयं रेकॉर्ड बंद असतानाही रेकॉर्ड करते
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+mr प्रति सेकंद फ्रेम, अर्ध्या सेकंदाची सरासरी
+
+@ Average time per frame in milliseconds, and the slowest frame
+mr प्रति फ्रेम सरासरी वेळ मिलिसेकंदात, आणि सर्वात संथ फ्रेम
+
+@ How busy the game keeps the processor, as a share of all its cores
+mr खेळ प्रोसेसरला किती व्यस्त ठेवतो, सर्व कोअरच्या वाट्याच्या रूपात
+
+@ Memory the game uses
+mr खेळ वापरत असलेली मेमरी
+
+@ Graphics card time per frame in milliseconds
+mr प्रति फ्रेम ग्राफिक्स कार्डचा वेळ मिलिसेकंदात
+
+@ Video memory in use and what the driver allows, where it reports it
+mr वापरातील व्हिडिओ मेमरी आणि ड्रायव्हरची मर्यादा, तो सांगत असल्यास
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ mr व्हिडिओ निर्यात होत आहे
 @ Preparing...
 mr तयारी सुरू आहे...
 
+# Save cards: personal best.
+@ PB {} {}
+mr PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ mr {} लिहिले ({} से.)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 mr ffmpeg सापडले नाही: {} PNG फ्रेम आणि एक WAV {} मध्ये लिहिले
+
+# Personal bests.
+@ New personal best ({}): {}
+mr नवीन वैयक्तिक सर्वोत्तम ({}): {}

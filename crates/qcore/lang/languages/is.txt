@@ -1484,6 +1484,89 @@ is Eins og glugginn
 @ GPU Encoding
 is GPU-kóðun
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+is Tími og tölfræði
+
+@ Clock
+is Klukka
+
+@ Clock Position
+is Staðsetning klukku
+
+@ Level Timer
+is Tímamælir borðs
+
+@ Personal Best
+is Persónulegt met
+
+@ Personal Best Type
+is Tegund mets
+
+@ Personal Best Color
+is Litur mets
+
+@ Timer Position
+is Staðsetning tímamælis
+
+@ Kills
+is Dráp
+
+@ Secrets
+is Leyndarmál
+
+@ Kills & Secrets Position
+is Staðsetning drápa og leyndarmála
+
+@ 24-hour
+is 24 tíma
+
+@ 24-hour + seconds
+is 24 tíma + sekúndur
+
+@ 12-hour
+is 12 tíma
+
+@ 12-hour + seconds
+is 12 tíma + sekúndur
+
+@ count
+is fjöldi
+
+@ percent
+is prósenta
+
+@ any% and 100%
+is any% og 100%
+
+@ Keep Personal Best Demos
+is Geyma metdemó
+
+@ any%
+is any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+is Afkastamælingar
+
+@ Frame Time
+is Rammatími
+
+@ CPU Usage
+is Örgjörvanotkun
+
+@ Memory Usage
+is Minnisnotkun
+
+@ GPU Time
+is GPU-tími
+
+@ Video Memory
+is Myndminni
+
+@ Metrics Position
+is Staðsetning mælinga
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ is Stærð myndbands; rammar eru kvarðaðir úr stærð gluggans (með röndum 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 is Kóðar á skjákortinu (NVIDIA NVENC, AMD eða Intel um VA-API, AMF eða Quick Sync, Apple VideoToolbox) þegar ffmpeg getur notað það, svo örgjörvinn sé laus; annars kóðar örgjörvinn
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+is Sýnir klukkuna á völdu sniði
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+is Tími borðsins, eins og á millisíðunni; stöðvast í hléi og við útganginn
+
+@ Your best time on this map and skill, next to the timer (single player)
+is Besti tíminn þinn á þessu korti og erfiðleikastigi, við hlið tímamælisins (einn spilari)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+is any%: hvaða lok sem er; 100%: öll dráp og leyndarmál. Vistunarspjöld sýna þetta fyrst
+
+@ Color of the personal best on the HUD and save cards
+is Litur persónulegs mets á HUD og vistunarspjöldum
+
+@ Shown as a count or as a percentage of the level's total
+is Sem fjöldi eða prósenta af heildinni í borðinu
+
+@ Where this goes on screen; items at the same position share a line
+is Hvar þetta er á skjánum; atriði á sama stað deila línu
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+is Geymir demó hvers borðs sem setur persónulegt met; gömul halda sér. Tekur upp jafnvel án sjálfvirkrar upptöku
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+is Rammar á sekúndu, meðaltal yfir hálfa sekúndu
+
+@ Average time per frame in milliseconds, and the slowest frame
+is Meðaltími á ramma í millisekúndum og hægasti ramminn
+
+@ How busy the game keeps the processor, as a share of all its cores
+is Hversu mikið leikurinn notar örgjörvann, sem hlutfall af öllum kjörnum
+
+@ Memory the game uses
+is Minni sem leikurinn notar
+
+@ Graphics card time per frame in milliseconds
+is Tími skjákorts á ramma í millisekúndum
+
+@ Video memory in use and what the driver allows, where it reports it
+is Notað myndminni og það sem rekillinn leyfir, þar sem hann gefur það upp
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ is Flyt út myndband
 @ Preparing...
 is Undirbý...
 
+# Save cards: personal best.
+@ PB {} {}
+is PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ is Skrifaði {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 is ffmpeg fannst ekki: skrifaði {} PNG-ramma og WAV í {}
+
+# Personal bests.
+@ New personal best ({}): {}
+is Nýtt persónulegt met ({}): {}

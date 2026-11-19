@@ -1484,6 +1484,89 @@ sk Ako okno
 @ GPU Encoding
 sk Kódovanie na GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+sk Čas a štatistiky
+
+@ Clock
+sk Hodiny
+
+@ Clock Position
+sk Pozícia hodín
+
+@ Level Timer
+sk Časovač úrovne
+
+@ Personal Best
+sk Osobný rekord
+
+@ Personal Best Type
+sk Typ rekordu
+
+@ Personal Best Color
+sk Farba rekordu
+
+@ Timer Position
+sk Pozícia časovača
+
+@ Kills
+sk Zabitia
+
+@ Secrets
+sk Tajomstvá
+
+@ Kills & Secrets Position
+sk Pozícia zabití a tajomstiev
+
+@ 24-hour
+sk 24-hodinový
+
+@ 24-hour + seconds
+sk 24-hodinový + sekundy
+
+@ 12-hour
+sk 12-hodinový
+
+@ 12-hour + seconds
+sk 12-hodinový + sekundy
+
+@ count
+sk počet
+
+@ percent
+sk percentá
+
+@ any% and 100%
+sk any% a 100%
+
+@ Keep Personal Best Demos
+sk Uchovávať demá rekordov
+
+@ any%
+sk any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+sk Ukazovatele výkonu
+
+@ Frame Time
+sk Čas snímky
+
+@ CPU Usage
+sk Využitie procesora
+
+@ Memory Usage
+sk Využitie pamäte
+
+@ GPU Time
+sk Čas GPU
+
+@ Video Memory
+sk Videopamäť
+
+@ Metrics Position
+sk Pozícia ukazovateľov
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ sk Veľkosť videa; snímky sa škálujú z veľkosti okna (s pásmi na zachovan
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 sk Kóduje na grafickej karte (NVIDIA NVENC, AMD alebo Intel cez VA-API, AMF či Quick Sync, Apple VideoToolbox), ak ju ffmpeg vie použiť, a necháva procesor voľný; inak kóduje procesor
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+sk Zobrazuje denný čas vo zvolenom formáte
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+sk Čas úrovne ako na obrazovke prestávky; zastaví sa pri pauze a pri východe
+
+@ Your best time on this map and skill, next to the timer (single player)
+sk Váš najlepší čas na tejto mape a obtiažnosti vedľa časovača (hra jedného hráča)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+sk any%: akékoľvek dokončenie; 100%: všetky zabitia a tajomstvá. Karty uložených hier ukazujú tento prvý
+
+@ Color of the personal best on the HUD and save cards
+sk Farba osobného rekordu v HUD a na kartách uložených hier
+
+@ Shown as a count or as a percentage of the level's total
+sk Ako počet alebo percento z celku úrovne
+
+@ Where this goes on screen; items at the same position share a line
+sk Kde to na obrazovke je; položky na rovnakej pozícii zdieľajú riadok
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+sk Uchová demo každej úrovne s novým osobným rekordom; staré zostávajú. Nahráva aj bez automatických dem
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+sk Snímky za sekundu, priemer za pol sekundy
+
+@ Average time per frame in milliseconds, and the slowest frame
+sk Priemerný čas snímky v milisekundách a najpomalšia snímka
+
+@ How busy the game keeps the processor, as a share of all its cores
+sk Ako veľmi hra vyťažuje procesor, ako podiel všetkých jadier
+
+@ Memory the game uses
+sk Pamäť, ktorú hra používa
+
+@ Graphics card time per frame in milliseconds
+sk Čas grafickej karty na snímku v milisekundách
+
+@ Video memory in use and what the driver allows, where it reports it
+sk Použitá videopamäť a koľko ovládač dovoľuje, ak to hlási
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ sk Export videa
 @ Preparing...
 sk Príprava...
 
+# Save cards: personal best.
+@ PB {} {}
+sk PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ sk Zapísané {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 sk ffmpeg sa nenašiel: zapísaných {} snímok PNG a WAV do {}
+
+# Personal bests.
+@ New personal best ({}): {}
+sk Nový osobný rekord ({}): {}

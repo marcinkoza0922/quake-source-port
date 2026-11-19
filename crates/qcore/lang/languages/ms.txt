@@ -1484,6 +1484,89 @@ ms Sama seperti tetingkap
 @ GPU Encoding
 ms Pengekodan GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ms Masa & Statistik
+
+@ Clock
+ms Jam
+
+@ Clock Position
+ms Kedudukan Jam
+
+@ Level Timer
+ms Pemasa Peringkat
+
+@ Personal Best
+ms Rekod Peribadi
+
+@ Personal Best Type
+ms Jenis Rekod
+
+@ Personal Best Color
+ms Warna Rekod
+
+@ Timer Position
+ms Kedudukan Pemasa
+
+@ Kills
+ms Bunuhan
+
+@ Secrets
+ms Rahsia
+
+@ Kills & Secrets Position
+ms Kedudukan Bunuhan & Rahsia
+
+@ 24-hour
+ms 24 jam
+
+@ 24-hour + seconds
+ms 24 jam + saat
+
+@ 12-hour
+ms 12 jam
+
+@ 12-hour + seconds
+ms 12 jam + saat
+
+@ count
+ms bilangan
+
+@ percent
+ms peratus
+
+@ any% and 100%
+ms any% dan 100%
+
+@ Keep Personal Best Demos
+ms Simpan Demo Rekod
+
+@ any%
+ms any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ms Metrik Prestasi
+
+@ Frame Time
+ms Masa Bingkai
+
+@ CPU Usage
+ms Penggunaan CPU
+
+@ Memory Usage
+ms Penggunaan Memori
+
+@ GPU Time
+ms Masa GPU
+
+@ Video Memory
+ms Memori Video
+
+@ Metrics Position
+ms Kedudukan Metrik
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ ms Saiz video; bingkai diskalakan daripada saiz tetingkap (dengan jalur untuk me
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ms Mengekod pada kad grafik (NVIDIA NVENC, AMD atau Intel melalui VA-API, AMF atau Quick Sync, Apple VideoToolbox) apabila ffmpeg boleh menggunakannya, supaya pemproses lapang; jika tidak, pemproses yang mengekod
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ms Menunjukkan waktu dalam format yang dipilih
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ms Masa peringkat, seperti pada skrin rehat; berhenti semasa jeda dan di pintu keluar
+
+@ Your best time on this map and skill, next to the timer (single player)
+ms Masa terbaik anda pada peta dan tahap kesukaran ini, di sebelah pemasa (pemain tunggal)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ms any%: apa-apa penamat; 100%: semua bunuhan dan rahsia. Kad simpanan menunjukkan ini dahulu
+
+@ Color of the personal best on the HUD and save cards
+ms Warna rekod peribadi pada HUD dan kad simpanan
+
+@ Shown as a count or as a percentage of the level's total
+ms Sebagai bilangan atau peratus daripada jumlah peringkat
+
+@ Where this goes on screen; items at the same position share a line
+ms Kedudukannya pada skrin; item pada kedudukan yang sama berkongsi satu baris
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ms Menyimpan demo setiap peringkat yang mencipta rekod peribadi; yang lama kekal. Merakam walaupun rakaman automatik dimatikan
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ms Bingkai sesaat, purata setengah saat
+
+@ Average time per frame in milliseconds, and the slowest frame
+ms Purata masa setiap bingkai dalam milisaat, dan bingkai paling perlahan
+
+@ How busy the game keeps the processor, as a share of all its cores
+ms Sejauh mana permainan menyibukkan pemproses, sebagai bahagian semua terasnya
+
+@ Memory the game uses
+ms Memori yang digunakan permainan
+
+@ Graphics card time per frame in milliseconds
+ms Masa kad grafik setiap bingkai dalam milisaat
+
+@ Video memory in use and what the driver allows, where it reports it
+ms Memori video yang digunakan dan had pemacu, jika dilaporkan
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ ms Mengeksport video
 @ Preparing...
 ms Menyediakan...
 
+# Save cards: personal best.
+@ PB {} {}
+ms PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ ms Menulis {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ms ffmpeg tidak dijumpai: menulis {} bingkai PNG dan satu WAV ke {}
+
+# Personal bests.
+@ New personal best ({}): {}
+ms Rekod peribadi baharu ({}): {}

@@ -1484,6 +1484,89 @@ id Sama dengan jendela
 @ GPU Encoding
 id Enkode GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+id Waktu & Statistik
+
+@ Clock
+id Jam
+
+@ Clock Position
+id Posisi Jam
+
+@ Level Timer
+id Pengatur Waktu Level
+
+@ Personal Best
+id Rekor Pribadi
+
+@ Personal Best Type
+id Jenis Rekor
+
+@ Personal Best Color
+id Warna Rekor
+
+@ Timer Position
+id Posisi Pengatur Waktu
+
+@ Kills
+id Pembunuhan
+
+@ Secrets
+id Rahasia
+
+@ Kills & Secrets Position
+id Posisi Pembunuhan & Rahasia
+
+@ 24-hour
+id 24 jam
+
+@ 24-hour + seconds
+id 24 jam + detik
+
+@ 12-hour
+id 12 jam
+
+@ 12-hour + seconds
+id 12 jam + detik
+
+@ count
+id jumlah
+
+@ percent
+id persen
+
+@ any% and 100%
+id any% dan 100%
+
+@ Keep Personal Best Demos
+id Simpan Demo Rekor
+
+@ any%
+id any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+id Metrik Performa
+
+@ Frame Time
+id Waktu Frame
+
+@ CPU Usage
+id Penggunaan CPU
+
+@ Memory Usage
+id Penggunaan Memori
+
+@ GPU Time
+id Waktu GPU
+
+@ Video Memory
+id Memori Video
+
+@ Metrics Position
+id Posisi Metrik
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ id Ukuran video; bingkai diskalakan dari ukuran jendela (dengan bilah agar bentu
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 id Mengenkode di kartu grafis (NVIDIA NVENC, AMD atau Intel lewat VA-API, AMF atau Quick Sync, Apple VideoToolbox) bila ffmpeg dapat memakainya, sehingga prosesor tetap lega; jika tidak, prosesor yang mengenkode
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+id Menampilkan jam dalam format yang dipilih
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+id Waktu level, seperti di layar jeda antarlevel; berhenti saat dijeda dan di pintu keluar
+
+@ Your best time on this map and skill, next to the timer (single player)
+id Waktu terbaikmu di peta dan tingkat kesulitan ini, di samping pengatur waktu (pemain tunggal)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+id any%: selesai dengan cara apa pun; 100%: semua pembunuhan dan rahasia. Kartu simpanan menampilkan ini lebih dulu
+
+@ Color of the personal best on the HUD and save cards
+id Warna rekor pribadi di HUD dan kartu simpanan
+
+@ Shown as a count or as a percentage of the level's total
+id Ditampilkan sebagai jumlah atau persentase dari total level
+
+@ Where this goes on screen; items at the same position share a line
+id Letaknya di layar; item di posisi yang sama berbagi satu baris
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+id Menyimpan demo setiap level yang mencetak rekor pribadi; yang lama tetap ada. Merekam meski rekam otomatis mati
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+id Frame per detik, rata-rata setengah detik
+
+@ Average time per frame in milliseconds, and the slowest frame
+id Rata-rata waktu per frame dalam milidetik, dan frame paling lambat
+
+@ How busy the game keeps the processor, as a share of all its cores
+id Seberapa sibuk game membuat prosesor, sebagai bagian dari semua intinya
+
+@ Memory the game uses
+id Memori yang dipakai game
+
+@ Graphics card time per frame in milliseconds
+id Waktu kartu grafis per frame dalam milidetik
+
+@ Video memory in use and what the driver allows, where it reports it
+id Memori video yang dipakai dan batas dari driver, jika dilaporkan
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ id Mengekspor video
 @ Preparing...
 id Menyiapkan...
 
+# Save cards: personal best.
+@ PB {} {}
+id PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ id Menulis {} ({} d)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 id ffmpeg tidak ditemukan: menulis {} bingkai PNG dan satu WAV ke {}
+
+# Personal bests.
+@ New personal best ({}): {}
+id Rekor pribadi baru ({}): {}

@@ -1484,6 +1484,89 @@ hr Kao prozor
 @ GPU Encoding
 hr GPU kodiranje
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+hr Vrijeme i statistika
+
+@ Clock
+hr Sat
+
+@ Clock Position
+hr Položaj sata
+
+@ Level Timer
+hr Mjerač vremena razine
+
+@ Personal Best
+hr Osobni rekord
+
+@ Personal Best Type
+hr Vrsta rekorda
+
+@ Personal Best Color
+hr Boja rekorda
+
+@ Timer Position
+hr Položaj mjerača
+
+@ Kills
+hr Ubojstva
+
+@ Secrets
+hr Tajne
+
+@ Kills & Secrets Position
+hr Položaj ubojstava i tajni
+
+@ 24-hour
+hr 24-satni
+
+@ 24-hour + seconds
+hr 24-satni + sekunde
+
+@ 12-hour
+hr 12-satni
+
+@ 12-hour + seconds
+hr 12-satni + sekunde
+
+@ count
+hr broj
+
+@ percent
+hr postotak
+
+@ any% and 100%
+hr any% i 100%
+
+@ Keep Personal Best Demos
+hr Čuvaj demo snimke rekorda
+
+@ any%
+hr any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+hr Pokazatelji performansi
+
+@ Frame Time
+hr Vrijeme sličice
+
+@ CPU Usage
+hr Upotreba procesora
+
+@ Memory Usage
+hr Upotreba memorije
+
+@ GPU Time
+hr GPU vrijeme
+
+@ Video Memory
+hr Video memorija
+
+@ Metrics Position
+hr Položaj pokazatelja
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ hr Veličina videa; sličice se skaliraju iz veličine prozora (s trakama da se 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 hr Kodira na grafičkoj kartici (NVIDIA NVENC, AMD ili Intel putem VA-API, AMF ili Quick Sync, Apple VideoToolbox) kad je ffmpeg može koristiti, pa procesor ostaje slobodan; inače kodira procesor
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+hr Prikazuje doba dana u odabranom obliku
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+hr Vrijeme razine, kao na zaslonu međuprikaza; staje tijekom pauze i na izlazu
+
+@ Your best time on this map and skill, next to the timer (single player)
+hr Vaše najbolje vrijeme na ovoj mapi i težini, uz mjerač (jedan igrač)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+hr any%: bilo koji završetak; 100%: sva ubojstva i tajne. Kartice spremanja prikazuju ovaj prvi
+
+@ Color of the personal best on the HUD and save cards
+hr Boja osobnog rekorda na HUD-u i karticama spremanja
+
+@ Shown as a count or as a percentage of the level's total
+hr Kao broj ili kao postotak ukupnog na razini
+
+@ Where this goes on screen; items at the same position share a line
+hr Gdje je to na zaslonu; stavke na istom položaju dijele redak
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+hr Čuva demo snimku svake razine s novim osobnim rekordom; stare ostaju. Snima i bez automatskog snimanja
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+hr Sličice u sekundi, prosjek kroz pola sekunde
+
+@ Average time per frame in milliseconds, and the slowest frame
+hr Prosječno vrijeme sličice u milisekundama i najsporija sličica
+
+@ How busy the game keeps the processor, as a share of all its cores
+hr Koliko igra opterećuje procesor, kao udio svih jezgri
+
+@ Memory the game uses
+hr Memorija koju igra koristi
+
+@ Graphics card time per frame in milliseconds
+hr Vrijeme grafičke kartice po sličici u milisekundama
+
+@ Video memory in use and what the driver allows, where it reports it
+hr Zauzeta video memorija i koliko upravljački program dopušta, ako to javlja
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ hr Izvoz videa
 @ Preparing...
 hr Priprema...
 
+# Save cards: personal best.
+@ PB {} {}
+hr PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ hr Zapisano {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 hr ffmpeg nije pronađen: zapisano {} PNG sličica i WAV u {}
+
+# Personal bests.
+@ New personal best ({}): {}
+hr Novi osobni rekord ({}): {}

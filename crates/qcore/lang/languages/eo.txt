@@ -1484,6 +1484,89 @@ eo Kiel la fenestro
 @ GPU Encoding
 eo GPU-kodigo
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+eo Tempo kaj statistiko
+
+@ Clock
+eo Horloĝo
+
+@ Clock Position
+eo Pozicio de horloĝo
+
+@ Level Timer
+eo Nivela tempomezurilo
+
+@ Personal Best
+eo Persona rekordo
+
+@ Personal Best Type
+eo Speco de rekordo
+
+@ Personal Best Color
+eo Koloro de rekordo
+
+@ Timer Position
+eo Pozicio de tempomezurilo
+
+@ Kills
+eo Mortigoj
+
+@ Secrets
+eo Sekretoj
+
+@ Kills & Secrets Position
+eo Pozicio de mortigoj kaj sekretoj
+
+@ 24-hour
+eo 24-hora
+
+@ 24-hour + seconds
+eo 24-hora + sekundoj
+
+@ 12-hour
+eo 12-hora
+
+@ 12-hour + seconds
+eo 12-hora + sekundoj
+
+@ count
+eo nombro
+
+@ percent
+eo procento
+
+@ any% and 100%
+eo any% kaj 100%
+
+@ Keep Personal Best Demos
+eo Konservi rekordajn demonstraĵojn
+
+@ any%
+eo any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+eo Rendimentaj mezuroj
+
+@ Frame Time
+eo Kadra tempo
+
+@ CPU Usage
+eo Uzo de ĉefprocesoro
+
+@ Memory Usage
+eo Uzo de memoro
+
+@ GPU Time
+eo GPU-tempo
+
+@ Video Memory
+eo Videomemoro
+
+@ Metrics Position
+eo Pozicio de mezuroj
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ eo Videogrando; la kadroj skaliĝas de la fenestra grando (kun strioj por konser
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 eo Kodigas per la grafika karto (NVIDIA NVENC, AMD aŭ Intel per VA-API, AMF aŭ Quick Sync, Apple VideoToolbox) kiam ffmpeg povas uzi ĝin, lasante la procesoron libera; alie la procesoro kodigas
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+eo Montras la horon laŭ la elektita formato
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+eo La tempo de la nivelo, kiel sur la interakta ekrano; ĝi haltas dum paŭzo kaj ĉe la elirejo
+
+@ Your best time on this map and skill, next to the timer (single player)
+eo Via plej bona tempo en ĉi tiu mapo kaj malfacileco, apud la tempomezurilo (unu ludanto)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+eo any%: ajna fino; 100%: ĉiuj mortigoj kaj sekretoj. Konservaj kartoj montras ĉi tiun unue
+
+@ Color of the personal best on the HUD and save cards
+eo Koloro de la persona rekordo en la HUD kaj konservaj kartoj
+
+@ Shown as a count or as a percentage of the level's total
+eo Kiel nombro aŭ kiel procento de la tuto de la nivelo
+
+@ Where this goes on screen; items at the same position share a line
+eo Kie ĝi estas sur la ekrano; eroj ĉe la sama pozicio dividas linion
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+eo Konservas la demonstraĵon de ĉiu nivelo kun nova persona rekordo; malnovaj restas. Registras eĉ sen aŭtomata registrado
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+eo Kadroj sekunde, mezumo dum duona sekundo
+
+@ Average time per frame in milliseconds, and the slowest frame
+eo Meza tempo por kadro en milisekundoj, kaj la plej malrapida kadro
+
+@ How busy the game keeps the processor, as a share of all its cores
+eo Kiom la ludo okupas la procesoron, kiel parto de ĉiuj kernoj
+
+@ Memory the game uses
+eo Memoro, kiun la ludo uzas
+
+@ Graphics card time per frame in milliseconds
+eo Tempo de grafika karto por kadro en milisekundoj
+
+@ Video memory in use and what the driver allows, where it reports it
+eo Uzata videomemoro kaj kiom la pelilo permesas, kie ĝi raportas tion
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ eo Eksportante videon
 @ Preparing...
 eo Preparante...
 
+# Save cards: personal best.
+@ PB {} {}
+eo PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ eo Skribis {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 eo ffmpeg ne trovita: skribis {} PNG-kadrojn kaj WAV al {}
+
+# Personal bests.
+@ New personal best ({}): {}
+eo Nova persona rekordo ({}): {}

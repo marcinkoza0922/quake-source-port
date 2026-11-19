@@ -1484,6 +1484,89 @@ cy Fel y ffenestr
 @ GPU Encoding
 cy Amgodio GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+cy Amser ac Ystadegau
+
+@ Clock
+cy Cloc
+
+@ Clock Position
+cy Safle'r Cloc
+
+@ Level Timer
+cy Amserydd y Lefel
+
+@ Personal Best
+cy Gorau Personol
+
+@ Personal Best Type
+cy Math o Orau Personol
+
+@ Personal Best Color
+cy Lliw'r Gorau Personol
+
+@ Timer Position
+cy Safle'r Amserydd
+
+@ Kills
+cy Lladdiadau
+
+@ Secrets
+cy Cyfrinachau
+
+@ Kills & Secrets Position
+cy Safle Lladdiadau a Chyfrinachau
+
+@ 24-hour
+cy 24 awr
+
+@ 24-hour + seconds
+cy 24 awr + eiliadau
+
+@ 12-hour
+cy 12 awr
+
+@ 12-hour + seconds
+cy 12 awr + eiliadau
+
+@ count
+cy nifer
+
+@ percent
+cy canran
+
+@ any% and 100%
+cy any% a 100%
+
+@ Keep Personal Best Demos
+cy Cadw Demos Gorau Personol
+
+@ any%
+cy any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+cy Mesuriadau Perfformiad
+
+@ Frame Time
+cy Amser Ffrâm
+
+@ CPU Usage
+cy Defnydd CPU
+
+@ Memory Usage
+cy Defnydd Cof
+
+@ GPU Time
+cy Amser GPU
+
+@ Video Memory
+cy Cof Fideo
+
+@ Metrics Position
+cy Safle'r Mesuriadau
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ cy Maint y fideo; caiff fframiau eu graddio o faint y ffenestr (gyda barrau i ga
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 cy Mae'n amgodio ar y cerdyn graffeg (NVIDIA NVENC, AMD neu Intel drwy VA-API, AMF neu Quick Sync, Apple VideoToolbox) pan all ffmpeg ei ddefnyddio, gan adael y prosesydd yn rhydd; fel arall mae'r prosesydd yn amgodio
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+cy Yn dangos amser y dydd yn y fformat a ddewiswyd
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+cy Amser y lefel, fel ar y sgrin egwyl; mae'n stopio wrth oedi ac wrth yr allanfa
+
+@ Your best time on this map and skill, next to the timer (single player)
+cy Eich amser gorau ar y map a'r anhawster hwn, wrth ymyl yr amserydd (un chwaraewr)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+cy any%: unrhyw ddiwedd; 100%: pob lladdiad a chyfrinach. Mae cardiau cadw yn dangos hwn yn gyntaf
+
+@ Color of the personal best on the HUD and save cards
+cy Lliw'r gorau personol ar yr HUD a'r cardiau cadw
+
+@ Shown as a count or as a percentage of the level's total
+cy Fel nifer neu fel canran o gyfanswm y lefel
+
+@ Where this goes on screen; items at the same position share a line
+cy Ble mae ar y sgrin; mae eitemau yn yr un safle yn rhannu llinell
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+cy Yn cadw demo pob lefel sy'n gosod gorau personol; mae'r hen rai yn aros. Yn recordio hyd yn oed heb recordio awtomatig
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+cy Fframiau yr eiliad, cyfartaledd dros hanner eiliad
+
+@ Average time per frame in milliseconds, and the slowest frame
+cy Amser cyfartalog fesul ffrâm mewn milieiliadau, a'r ffrâm arafaf
+
+@ How busy the game keeps the processor, as a share of all its cores
+cy Pa mor brysur mae'r gêm yn cadw'r prosesydd, fel cyfran o'i holl greiddiau
+
+@ Memory the game uses
+cy Cof mae'r gêm yn ei ddefnyddio
+
+@ Graphics card time per frame in milliseconds
+cy Amser y cerdyn graffeg fesul ffrâm mewn milieiliadau
+
+@ Video memory in use and what the driver allows, where it reports it
+cy Cof fideo sy'n cael ei ddefnyddio a'r hyn mae'r gyrrwr yn ei ganiatáu, lle mae'n ei adrodd
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ cy Yn allforio fideo
 @ Preparing...
 cy Yn paratoi...
 
+# Save cards: personal best.
+@ PB {} {}
+cy PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ cy Ysgrifennwyd {} ({} e)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 cy Heb ddod o hyd i ffmpeg: ysgrifennwyd {} ffrâm PNG a WAV i {}
+
+# Personal bests.
+@ New personal best ({}): {}
+cy Gorau personol newydd ({}): {}

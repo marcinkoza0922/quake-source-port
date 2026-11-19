@@ -1484,6 +1484,89 @@ lv Kā logs
 @ GPU Encoding
 lv GPU kodēšana
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+lv Laiks un statistika
+
+@ Clock
+lv Pulkstenis
+
+@ Clock Position
+lv Pulksteņa novietojums
+
+@ Level Timer
+lv Līmeņa taimeris
+
+@ Personal Best
+lv Personīgais rekords
+
+@ Personal Best Type
+lv Rekorda veids
+
+@ Personal Best Color
+lv Rekorda krāsa
+
+@ Timer Position
+lv Taimera novietojums
+
+@ Kills
+lv Nogalināti
+
+@ Secrets
+lv Noslēpumi
+
+@ Kills & Secrets Position
+lv Nogalināto un noslēpumu novietojums
+
+@ 24-hour
+lv 24 stundu
+
+@ 24-hour + seconds
+lv 24 stundu + sekundes
+
+@ 12-hour
+lv 12 stundu
+
+@ 12-hour + seconds
+lv 12 stundu + sekundes
+
+@ count
+lv skaits
+
+@ percent
+lv procenti
+
+@ any% and 100%
+lv any% un 100%
+
+@ Keep Personal Best Demos
+lv Saglabāt rekordu demo
+
+@ any%
+lv any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+lv Veiktspējas rādītāji
+
+@ Frame Time
+lv Kadra laiks
+
+@ CPU Usage
+lv CPU noslodze
+
+@ Memory Usage
+lv Atmiņas lietojums
+
+@ GPU Time
+lv GPU laiks
+
+@ Video Memory
+lv Video atmiņa
+
+@ Metrics Position
+lv Rādītāju novietojums
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ lv Video izmērs; kadri tiek mērogoti no loga izmēra (ar joslām, lai saglabā
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 lv Kodē ar videokarti (NVIDIA NVENC, AMD vai Intel caur VA-API, AMF vai Quick Sync, Apple VideoToolbox), ja ffmpeg to var izmantot, atstājot procesoru brīvu; citādi kodē procesors
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+lv Rāda diennakts laiku izvēlētajā formātā
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+lv Līmeņa laiks kā starpekrānā; apstājas pauzē un pie izejas
+
+@ Your best time on this map and skill, next to the timer (single player)
+lv Tavs labākais laiks šajā kartē un grūtībā, blakus taimerim (viens spēlētājs)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+lv any%: jebkuras beigas; 100%: visi nogalinātie un noslēpumi. Saglabājumu kartītes rāda šo vispirms
+
+@ Color of the personal best on the HUD and save cards
+lv Personīgā rekorda krāsa HUD un saglabājumu kartītēs
+
+@ Shown as a count or as a percentage of the level's total
+lv Kā skaits vai kā procenti no līmeņa kopskaita
+
+@ Where this goes on screen; items at the same position share a line
+lv Kur tas ir ekrānā; vienuviet novietoti vienumi dala rindu
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+lv Saglabā katra līmeņa demo ar jaunu personīgo rekordu; vecie paliek. Ieraksta arī bez automātiskās ierakstīšanas
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+lv Kadri sekundē, pussekundes vidējais
+
+@ Average time per frame in milliseconds, and the slowest frame
+lv Vidējais kadra laiks milisekundēs un lēnākais kadrs
+
+@ How busy the game keeps the processor, as a share of all its cores
+lv Cik ļoti spēle noslogo procesoru, kā daļa no visiem kodoliem
+
+@ Memory the game uses
+lv Spēles izmantotā atmiņa
+
+@ Graphics card time per frame in milliseconds
+lv Videokartes laiks kadram milisekundēs
+
+@ Video memory in use and what the driver allows, where it reports it
+lv Izmantotā video atmiņa un draivera atļautais, ja tas to ziņo
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ lv Eksportē video
 @ Preparing...
 lv Sagatavo...
 
+# Save cards: personal best.
+@ PB {} {}
+lv PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ lv Ierakstīts {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 lv ffmpeg nav atrasts: {} PNG kadri un WAV ierakstīti {}
+
+# Personal bests.
+@ New personal best ({}): {}
+lv Jauns personīgais rekords ({}): {}

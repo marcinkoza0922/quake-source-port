@@ -1484,6 +1484,89 @@ ga Mar an fhuinneog
 @ GPU Encoding
 ga Ionchódú GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ga Am agus Staitisticí
+
+@ Clock
+ga Clog
+
+@ Clock Position
+ga Suíomh an Chloig
+
+@ Level Timer
+ga Amadóir an Leibhéil
+
+@ Personal Best
+ga Curiarracht Phearsanta
+
+@ Personal Best Type
+ga Cineál Curiarrachta
+
+@ Personal Best Color
+ga Dath na Curiarrachta
+
+@ Timer Position
+ga Suíomh an Amadóra
+
+@ Kills
+ga Maruithe
+
+@ Secrets
+ga Rúin
+
+@ Kills & Secrets Position
+ga Suíomh na Maruithe agus na Rún
+
+@ 24-hour
+ga 24 uair
+
+@ 24-hour + seconds
+ga 24 uair + soicindí
+
+@ 12-hour
+ga 12 uair
+
+@ 12-hour + seconds
+ga 12 uair + soicindí
+
+@ count
+ga líon
+
+@ percent
+ga céatadán
+
+@ any% and 100%
+ga any% agus 100%
+
+@ Keep Personal Best Demos
+ga Coinnigh Taispeántais Churiarrachta
+
+@ any%
+ga any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ga Méadrachtaí Feidhmíochta
+
+@ Frame Time
+ga Am Fráma
+
+@ CPU Usage
+ga Úsáid an LAP
+
+@ Memory Usage
+ga Úsáid Cuimhne
+
+@ GPU Time
+ga Am an GPU
+
+@ Video Memory
+ga Cuimhne Físe
+
+@ Metrics Position
+ga Suíomh na Méadrachtaí
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ ga Méid an fhíseáin; scálaítear na frámaí ó mhéid na fuinneoige (le bar
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ga Ionchódaíonn sé ar an gcárta grafaicí (NVIDIA NVENC, AMD nó Intel trí VA-API, AMF nó Quick Sync, Apple VideoToolbox) nuair is féidir le ffmpeg é a úsáid, rud a fhágann an próiseálaí saor; murach sin, ionchódaíonn an próiseálaí
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ga Taispeánann sé an t-am den lá san fhormáid roghnaithe
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ga Am an leibhéil, mar a bhíonn ar an scáileán idirlinne; stopann sé le linn sosa agus ag an mbealach amach
+
+@ Your best time on this map and skill, next to the timer (single player)
+ga An t-am is fearr agat ar an léarscáil agus ar an deacracht seo, in aice leis an amadóir (imreoir aonair)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ga any%: críoch ar bith; 100%: gach marú agus rún. Taispeánann cártaí sábhála é seo ar dtús
+
+@ Color of the personal best on the HUD and save cards
+ga Dath na curiarrachta pearsanta ar an HUD agus ar chártaí sábhála
+
+@ Shown as a count or as a percentage of the level's total
+ga Mar líon nó mar chéatadán d'iomlán an leibhéil
+
+@ Where this goes on screen; items at the same position share a line
+ga Cá bhfuil sé ar an scáileán; roinneann míreanna sa suíomh céanna líne
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ga Coinníonn sé taispeántas gach leibhéil a shocraíonn curiarracht phearsanta; fanann na seanchinn. Taifeadann sé fiú gan taifeadadh uathoibríoch
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ga Frámaí in aghaidh an tsoicind, meán thar leathshoicind
+
+@ Average time per frame in milliseconds, and the slowest frame
+ga Meánam in aghaidh an fhráma i milleasoicindí, agus an fráma is moille
+
+@ How busy the game keeps the processor, as a share of all its cores
+ga Cé chomh gnóthach a choinníonn an cluiche an próiseálaí, mar sciar dá chroíthe go léir
+
+@ Memory the game uses
+ga An chuimhne a úsáideann an cluiche
+
+@ Graphics card time per frame in milliseconds
+ga Am an chárta grafaice in aghaidh an fhráma i milleasoicindí
+
+@ Video memory in use and what the driver allows, where it reports it
+ga Cuimhne físe in úsáid agus an méid a cheadaíonn an tiománaí, nuair a thuairiscíonn sé é
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ ga Físeán á easpórtáil
 @ Preparing...
 ga Á ullmhú...
 
+# Save cards: personal best.
+@ PB {} {}
+ga PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ ga Scríobhadh {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ga Níor aimsíodh ffmpeg: scríobhadh {} fráma PNG agus WAV go {}
+
+# Personal bests.
+@ New personal best ({}): {}
+ga Curiarracht phearsanta nua ({}): {}

@@ -1484,6 +1484,89 @@ fa مثل پنجره
 @ GPU Encoding
 fa رمزگذاری با GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+fa زمان و آمار
+
+@ Clock
+fa ساعت
+
+@ Clock Position
+fa جای ساعت
+
+@ Level Timer
+fa زمان‌سنج مرحله
+
+@ Personal Best
+fa بهترین رکورد شخصی
+
+@ Personal Best Type
+fa نوع رکورد
+
+@ Personal Best Color
+fa رنگ رکورد
+
+@ Timer Position
+fa جای زمان‌سنج
+
+@ Kills
+fa کشته‌ها
+
+@ Secrets
+fa رازها
+
+@ Kills & Secrets Position
+fa جای کشته‌ها و رازها
+
+@ 24-hour
+fa ۲۴ ساعته
+
+@ 24-hour + seconds
+fa ۲۴ ساعته + ثانیه
+
+@ 12-hour
+fa ۱۲ ساعته
+
+@ 12-hour + seconds
+fa ۱۲ ساعته + ثانیه
+
+@ count
+fa تعداد
+
+@ percent
+fa درصد
+
+@ any% and 100%
+fa any% و 100%
+
+@ Keep Personal Best Demos
+fa نگه‌داشتن دموهای رکورد
+
+@ any%
+fa any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+fa معیارهای کارایی
+
+@ Frame Time
+fa زمان فریم
+
+@ CPU Usage
+fa مصرف پردازنده
+
+@ Memory Usage
+fa مصرف حافظه
+
+@ GPU Time
+fa زمان GPU
+
+@ Video Memory
+fa حافظهٔ ویدئویی
+
+@ Metrics Position
+fa جای معیارها
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ fa اندازهٔ ویدیو؛ فریم‌ها از اندازهٔ پنجره م
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 fa وقتی ffmpeg بتواند، روی کارت گرافیک رمزگذاری می‌کند (NVIDIA NVENC، AMD یا Intel از طریق VA-API، AMF یا Quick Sync، Apple VideoToolbox) و پردازنده را آزاد می‌گذارد؛ وگرنه پردازنده رمزگذاری می‌کند
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+fa ساعت روز را با قالب انتخاب‌شده نشان می‌دهد
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+fa زمان مرحله، مانند صفحهٔ میان‌پرده؛ هنگام توقف و در خروجی می‌ایستد
+
+@ Your best time on this map and skill, next to the timer (single player)
+fa بهترین زمان شما در این نقشه و سختی، کنار زمان‌سنج (تک‌نفره)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+fa any%: هر پایانی؛ 100%: همهٔ کشته‌ها و رازها. کارت‌های ذخیره این را اول نشان می‌دهند
+
+@ Color of the personal best on the HUD and save cards
+fa رنگ رکورد شخصی در HUD و کارت‌های ذخیره
+
+@ Shown as a count or as a percentage of the level's total
+fa به‌صورت تعداد یا درصدی از کل مرحله
+
+@ Where this goes on screen; items at the same position share a line
+fa جای آن روی صفحه؛ موارد هم‌جا یک خط را با هم دارند
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+fa دموی هر مرحله‌ای را که رکورد شخصی بزند نگه می‌دارد؛ قدیمی‌ها می‌مانند. حتی بدون ضبط خودکار ضبط می‌کند
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+fa فریم بر ثانیه، میانگین نیم ثانیه
+
+@ Average time per frame in milliseconds, and the slowest frame
+fa میانگین زمان هر فریم به میلی‌ثانیه و کندترین فریم
+
+@ How busy the game keeps the processor, as a share of all its cores
+fa میزان مشغول‌کردن پردازنده توسط بازی، به‌صورت سهمی از همهٔ هسته‌ها
+
+@ Memory the game uses
+fa حافظه‌ای که بازی مصرف می‌کند
+
+@ Graphics card time per frame in milliseconds
+fa زمان کارت گرافیک برای هر فریم به میلی‌ثانیه
+
+@ Video memory in use and what the driver allows, where it reports it
+fa حافظهٔ ویدئویی مصرفی و سقف مجاز درایور، اگر گزارش دهد
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ fa در حال خروجی گرفتن ویدیو
 @ Preparing...
 fa در حال آماده‌سازی...
 
+# Save cards: personal best.
+@ PB {} {}
+fa PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ fa {} نوشته شد ({} ث)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 fa ffmpeg پیدا نشد: {} فریم PNG و یک WAV در {} نوشته شد
+
+# Personal bests.
+@ New personal best ({}): {}
+fa رکورد شخصی تازه ({}): {}

@@ -1484,6 +1484,89 @@ pa ਵਿੰਡੋ ਵਾਂਗ
 @ GPU Encoding
 pa GPU ਐਨਕੋਡਿੰਗ
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+pa ਸਮਾਂ ਅਤੇ ਅੰਕੜੇ
+
+@ Clock
+pa ਘੜੀ
+
+@ Clock Position
+pa ਘੜੀ ਦੀ ਥਾਂ
+
+@ Level Timer
+pa ਲੈਵਲ ਟਾਈਮਰ
+
+@ Personal Best
+pa ਨਿੱਜੀ ਸਰਵੋਤਮ
+
+@ Personal Best Type
+pa ਸਰਵੋਤਮ ਦੀ ਕਿਸਮ
+
+@ Personal Best Color
+pa ਸਰਵੋਤਮ ਦਾ ਰੰਗ
+
+@ Timer Position
+pa ਟਾਈਮਰ ਦੀ ਥਾਂ
+
+@ Kills
+pa ਮਾਰੇ ਗਏ
+
+@ Secrets
+pa ਭੇਤ
+
+@ Kills & Secrets Position
+pa ਮਾਰੇ ਗਏ ਅਤੇ ਭੇਤਾਂ ਦੀ ਥਾਂ
+
+@ 24-hour
+pa 24 ਘੰਟੇ
+
+@ 24-hour + seconds
+pa 24 ਘੰਟੇ + ਸਕਿੰਟ
+
+@ 12-hour
+pa 12 ਘੰਟੇ
+
+@ 12-hour + seconds
+pa 12 ਘੰਟੇ + ਸਕਿੰਟ
+
+@ count
+pa ਗਿਣਤੀ
+
+@ percent
+pa ਪ੍ਰਤੀਸ਼ਤ
+
+@ any% and 100%
+pa any% ਅਤੇ 100%
+
+@ Keep Personal Best Demos
+pa ਨਿੱਜੀ ਸਰਵੋਤਮ ਡੈਮੋ ਰੱਖੋ
+
+@ any%
+pa any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+pa ਕਾਰਗੁਜ਼ਾਰੀ ਮਾਪ
+
+@ Frame Time
+pa ਫ੍ਰੇਮ ਸਮਾਂ
+
+@ CPU Usage
+pa CPU ਵਰਤੋਂ
+
+@ Memory Usage
+pa ਮੈਮਰੀ ਵਰਤੋਂ
+
+@ GPU Time
+pa GPU ਸਮਾਂ
+
+@ Video Memory
+pa ਵੀਡੀਓ ਮੈਮਰੀ
+
+@ Metrics Position
+pa ਮਾਪਾਂ ਦੀ ਥਾਂ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ pa ਵੀਡੀਓ ਦਾ ਆਕਾਰ; ਫ੍ਰੇਮ ਵਿੰਡੋ ਦੇ �
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 pa ffmpeg ਵਰਤ ਸਕੇ ਤਾਂ ਗ੍ਰਾਫਿਕਸ ਕਾਰਡ 'ਤੇ ਐਨਕੋਡ ਕਰਦਾ ਹੈ (NVIDIA NVENC, VA-API ਰਾਹੀਂ AMD ਜਾਂ Intel, AMF ਜਾਂ Quick Sync, Apple VideoToolbox) ਅਤੇ ਪ੍ਰੋਸੈਸਰ ਨੂੰ ਖਾਲੀ ਰੱਖਦਾ ਹੈ; ਨਹੀਂ ਤਾਂ ਪ੍ਰੋਸੈਸਰ ਐਨਕੋਡ ਕਰਦਾ ਹੈ
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+pa ਚੁਣੇ ਫਾਰਮੈਟ ਵਿੱਚ ਦਿਨ ਦਾ ਸਮਾਂ ਦਿਖਾਉਂਦਾ ਹੈ
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+pa ਲੈਵਲ ਦਾ ਸਮਾਂ, ਵਿਚਕਾਰਲੀ ਸਕ੍ਰੀਨ ਵਾਂਗ; ਰੋਕਣ ਤੇ ਅਤੇ ਬਾਹਰ ਨਿਕਲਣ ਤੇ ਰੁਕ ਜਾਂਦਾ ਹੈ
+
+@ Your best time on this map and skill, next to the timer (single player)
+pa ਇਸ ਨਕਸ਼ੇ ਅਤੇ ਔਖਿਆਈ ਤੇ ਤੁਹਾਡਾ ਸਭ ਤੋਂ ਵਧੀਆ ਸਮਾਂ, ਟਾਈਮਰ ਦੇ ਕੋਲ (ਇਕੱਲਾ ਖਿਡਾਰੀ)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+pa any%: ਕੋਈ ਵੀ ਅੰਤ; 100%: ਸਾਰੇ ਮਾਰੇ ਗਏ ਅਤੇ ਭੇਤ। ਸੇਵ ਕਾਰਡ ਪਹਿਲਾਂ ਇਹੀ ਦਿਖਾਉਂਦੇ ਹਨ
+
+@ Color of the personal best on the HUD and save cards
+pa HUD ਅਤੇ ਸੇਵ ਕਾਰਡਾਂ ਤੇ ਨਿੱਜੀ ਸਰਵੋਤਮ ਦਾ ਰੰਗ
+
+@ Shown as a count or as a percentage of the level's total
+pa ਗਿਣਤੀ ਵਜੋਂ ਜਾਂ ਲੈਵਲ ਦੇ ਕੁੱਲ ਦੇ ਪ੍ਰਤੀਸ਼ਤ ਵਜੋਂ
+
+@ Where this goes on screen; items at the same position share a line
+pa ਇਹ ਸਕ੍ਰੀਨ ਤੇ ਕਿੱਥੇ ਹੈ; ਇੱਕੋ ਥਾਂ ਦੀਆਂ ਚੀਜ਼ਾਂ ਇੱਕ ਲਾਈਨ ਸਾਂਝੀ ਕਰਦੀਆਂ ਹਨ
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+pa ਨਿੱਜੀ ਸਰਵੋਤਮ ਬਣਾਉਣ ਵਾਲੇ ਹਰ ਲੈਵਲ ਦਾ ਡੈਮੋ ਰੱਖਦਾ ਹੈ; ਪੁਰਾਣੇ ਰਹਿੰਦੇ ਹਨ। ਆਟੋ ਰਿਕਾਰਡ ਬੰਦ ਹੋਣ ਤੇ ਵੀ ਰਿਕਾਰਡ ਕਰਦਾ ਹੈ
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+pa ਪ੍ਰਤੀ ਸਕਿੰਟ ਫ੍ਰੇਮ, ਅੱਧੇ ਸਕਿੰਟ ਦੀ ਔਸਤ
+
+@ Average time per frame in milliseconds, and the slowest frame
+pa ਪ੍ਰਤੀ ਫ੍ਰੇਮ ਔਸਤ ਸਮਾਂ ਮਿਲੀਸਕਿੰਟਾਂ ਵਿੱਚ, ਅਤੇ ਸਭ ਤੋਂ ਹੌਲੀ ਫ੍ਰੇਮ
+
+@ How busy the game keeps the processor, as a share of all its cores
+pa ਖੇਡ ਪ੍ਰੋਸੈਸਰ ਨੂੰ ਕਿੰਨਾ ਰੁੱਝਿਆ ਰੱਖਦੀ ਹੈ, ਸਾਰੇ ਕੋਰਾਂ ਦੇ ਹਿੱਸੇ ਵਜੋਂ
+
+@ Memory the game uses
+pa ਖੇਡ ਵੱਲੋਂ ਵਰਤੀ ਮੈਮਰੀ
+
+@ Graphics card time per frame in milliseconds
+pa ਪ੍ਰਤੀ ਫ੍ਰੇਮ ਗ੍ਰਾਫਿਕਸ ਕਾਰਡ ਦਾ ਸਮਾਂ ਮਿਲੀਸਕਿੰਟਾਂ ਵਿੱਚ
+
+@ Video memory in use and what the driver allows, where it reports it
+pa ਵਰਤੋਂ ਵਿੱਚ ਵੀਡੀਓ ਮੈਮਰੀ ਅਤੇ ਡਰਾਈਵਰ ਦੀ ਇਜਾਜ਼ਤ, ਜਿੱਥੇ ਇਹ ਦੱਸਦਾ ਹੈ
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ pa ਵੀਡੀਓ ਨਿਰਯਾਤ ਹੋ ਰਹੀ ਹੈ
 @ Preparing...
 pa ਤਿਆਰੀ ਹੋ ਰਹੀ ਹੈ...
 
+# Save cards: personal best.
+@ PB {} {}
+pa PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ pa {} ਲਿਖਿਆ ਗਿਆ ({} ਸਕਿੰ.)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 pa ffmpeg ਨਹੀਂ ਮਿਲਿਆ: {} PNG ਫ੍ਰੇਮ ਅਤੇ ਇੱਕ WAV {} ਵਿੱਚ ਲਿਖੇ ਗਏ
+
+# Personal bests.
+@ New personal best ({}): {}
+pa ਨਵਾਂ ਨਿੱਜੀ ਸਰਵੋਤਮ ({}): {}

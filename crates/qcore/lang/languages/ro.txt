@@ -1484,6 +1484,89 @@ ro Ca fereastra
 @ GPU Encoding
 ro Codare pe GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ro Timp și statistici
+
+@ Clock
+ro Ceas
+
+@ Clock Position
+ro Poziția ceasului
+
+@ Level Timer
+ro Cronometrul nivelului
+
+@ Personal Best
+ro Record personal
+
+@ Personal Best Type
+ro Tipul recordului
+
+@ Personal Best Color
+ro Culoarea recordului
+
+@ Timer Position
+ro Poziția cronometrului
+
+@ Kills
+ro Ucideri
+
+@ Secrets
+ro Secrete
+
+@ Kills & Secrets Position
+ro Poziția uciderilor și secretelor
+
+@ 24-hour
+ro 24 de ore
+
+@ 24-hour + seconds
+ro 24 de ore + secunde
+
+@ 12-hour
+ro 12 ore
+
+@ 12-hour + seconds
+ro 12 ore + secunde
+
+@ count
+ro număr
+
+@ percent
+ro procent
+
+@ any% and 100%
+ro any% și 100%
+
+@ Keep Personal Best Demos
+ro Păstrează demo-urile record
+
+@ any%
+ro any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ro Indicatori de performanță
+
+@ Frame Time
+ro Timp pe cadru
+
+@ CPU Usage
+ro Utilizare CPU
+
+@ Memory Usage
+ro Utilizare memorie
+
+@ GPU Time
+ro Timp GPU
+
+@ Video Memory
+ro Memorie video
+
+@ Metrics Position
+ro Poziția indicatorilor
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ ro Dimensiunea videoclipului; cadrele sunt scalate din dimensiunea ferestrei (cu
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ro Codează pe placa video (NVIDIA NVENC, AMD sau Intel prin VA-API, AMF sau Quick Sync, Apple VideoToolbox) când ffmpeg o poate folosi, lăsând procesorul liber; altfel codează procesorul
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ro Arată ora din zi în formatul ales
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ro Timpul nivelului, ca pe ecranul de pauză dintre niveluri; se oprește la pauză și la ieșire
+
+@ Your best time on this map and skill, next to the timer (single player)
+ro Cel mai bun timp al tău pe această hartă și dificultate, lângă cronometru (un jucător)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ro any%: orice final; 100%: toate uciderile și secretele. Cardurile salvărilor îl arată primul
+
+@ Color of the personal best on the HUD and save cards
+ro Culoarea recordului personal în HUD și pe cardurile salvărilor
+
+@ Shown as a count or as a percentage of the level's total
+ro Ca număr sau ca procent din totalul nivelului
+
+@ Where this goes on screen; items at the same position share a line
+ro Unde apare pe ecran; elementele în aceeași poziție împart un rând
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ro Păstrează demo-ul fiecărui nivel cu un nou record personal; cele vechi rămân. Înregistrează și fără demo-uri automate
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ro Cadre pe secundă, medie pe o jumătate de secundă
+
+@ Average time per frame in milliseconds, and the slowest frame
+ro Timpul mediu pe cadru în milisecunde și cel mai lent cadru
+
+@ How busy the game keeps the processor, as a share of all its cores
+ro Cât de ocupat ține jocul procesorul, ca parte din toate nucleele
+
+@ Memory the game uses
+ro Memoria folosită de joc
+
+@ Graphics card time per frame in milliseconds
+ro Timpul plăcii video pe cadru în milisecunde
+
+@ Video memory in use and what the driver allows, where it reports it
+ro Memoria video folosită și cât permite driverul, unde o raportează
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ ro Se exportă videoclipul
 @ Preparing...
 ro Se pregătește...
 
+# Save cards: personal best.
+@ PB {} {}
+ro PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ ro Scris {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ro ffmpeg nu a fost găsit: s-au scris {} cadre PNG și un WAV în {}
+
+# Personal bests.
+@ New personal best ({}): {}
+ro Nou record personal ({}): {}

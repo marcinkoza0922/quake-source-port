@@ -14,6 +14,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
     };
     Some(match cvar {
         "cl_autodemo" => "Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced",
+        "cl_autodemo_pb" => "Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off",
         "cl_autodemo_slots" => "How many automatic demos are kept before the oldest is deleted; kept demos never count",
         "cl_demobar" => "Shows the playback bar (time, speed, timeline) after a control key, always, or never",
         "cl_demo_endpause" => "A demo you play stops on its last frame instead of returning to the menu, so you can rewind",
@@ -198,6 +199,19 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "con_notifypos" => "Where pickup and event messages appear",
         "con_modern" => "Modern terminal console with autocomplete popup, history search, ANSI colors, bash shell and piping; off uses the classic Quake console",
         "hud_face" => "Shows the player face next to the health number",
+        "hud_clock" => "Shows the time of day in the chosen format",
+        "hud_timer" => "The level time, as on the intermission screen; it stops while paused and at the exit",
+        "hud_pb" => "Your best time on this map and skill, next to the timer (single player)",
+        "hud_pb_100" => "any%: any finish; 100%: every kill and secret. Save cards show this one first",
+        "hud_pb_color" => "Color of the personal best on the HUD and save cards",
+        "hud_kills" | "hud_secrets" => "Shown as a count or as a percentage of the level's total",
+        "scr_showfps" => "Frames per second, averaged over half a second",
+        "scr_showframetime" => "Average time per frame in milliseconds, and the slowest frame",
+        "scr_showcpu" => "How busy the game keeps the processor, as a share of all its cores",
+        "scr_showram" => "Memory the game uses",
+        "scr_showgpu" => "Graphics card time per frame in milliseconds",
+        "scr_showvram" => "Video memory in use and what the driver allows, where it reports it",
+        "hud_clock_pos" | "hud_timer_pos" | "hud_stats_pos" | "scr_metrics_pos" => "Where this goes on screen; items at the same position share a line",
         "hud_health" | "hud_armor" | "hud_ammo" | "hud_ammolist" | "hud_weapons" | "hud_items" => {
             "Immersive: appears for a few seconds only when its value changes"
         }
@@ -257,6 +271,8 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Hud => HUD,
         Page::Crosshair => CROSSHAIR,
         Page::HudLayout => HUD_LAYOUT,
+        Page::TimeHud => super::time_page::TIME,
+        Page::Metrics => super::time_page::METRICS,
         Page::Messages => MESSAGES,
         Page::Water => WATER,
         Page::Bloom => BLOOM,
@@ -299,6 +315,8 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::AutoAim => "Auto-aim Settings",
         Page::GrenadeArc => "Grenade Arc Settings",
         Page::HudLayout => "Modern HUD Layout",
+        Page::TimeHud => "Time & Stats",
+        Page::Metrics => "Performance Metrics",
         Page::Messages => "Messages & Captions",
         Page::Water => "Water Settings",
         Page::Bloom => "Bloom Settings",

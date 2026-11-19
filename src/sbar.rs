@@ -11,6 +11,7 @@ mod modern;
 mod classic;
 mod screens;
 pub use screens::*;
+pub mod time;
 
 pub type PicFn<'a> = dyn FnMut(&str) -> Option<(PicId, u32, u32)> + 'a;
 

@@ -1484,6 +1484,89 @@ pl Jak okno
 @ GPU Encoding
 pl Kodowanie na GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+pl Czas i statystyki
+
+@ Clock
+pl Zegar
+
+@ Clock Position
+pl Pozycja zegara
+
+@ Level Timer
+pl Licznik czasu poziomu
+
+@ Personal Best
+pl Rekord osobisty
+
+@ Personal Best Type
+pl Rodzaj rekordu
+
+@ Personal Best Color
+pl Kolor rekordu
+
+@ Timer Position
+pl Pozycja licznika czasu
+
+@ Kills
+pl Zabici
+
+@ Secrets
+pl Sekrety
+
+@ Kills & Secrets Position
+pl Pozycja zabitych i sekretów
+
+@ 24-hour
+pl 24-godzinny
+
+@ 24-hour + seconds
+pl 24-godzinny + sekundy
+
+@ 12-hour
+pl 12-godzinny
+
+@ 12-hour + seconds
+pl 12-godzinny + sekundy
+
+@ count
+pl liczba
+
+@ percent
+pl procent
+
+@ any% and 100%
+pl any% i 100%
+
+@ Keep Personal Best Demos
+pl Zachowuj dema rekordów
+
+@ any%
+pl any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+pl Wskaźniki wydajności
+
+@ Frame Time
+pl Czas klatki
+
+@ CPU Usage
+pl Użycie procesora
+
+@ Memory Usage
+pl Użycie pamięci
+
+@ GPU Time
+pl Czas GPU
+
+@ Video Memory
+pl Pamięć wideo
+
+@ Metrics Position
+pl Pozycja wskaźników
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ pl Rozmiar wideo; klatki są skalowane z rozmiaru okna (z pasami zachowującymi 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 pl Koduje na karcie graficznej (NVIDIA NVENC, AMD lub Intel przez VA-API, AMF albo Quick Sync, Apple VideoToolbox), gdy ffmpeg może jej użyć, odciążając procesor; w przeciwnym razie koduje procesor
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+pl Pokazuje godzinę w wybranym formacie
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+pl Czas poziomu, jak na ekranie podsumowania; zatrzymuje się w pauzie i przy wyjściu
+
+@ Your best time on this map and skill, next to the timer (single player)
+pl Twój najlepszy czas na tej mapie i poziomie trudności, obok licznika (gra jednoosobowa)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+pl any%: dowolne ukończenie; 100%: wszyscy zabici i wszystkie sekrety. Karty zapisów pokazują ten najpierw
+
+@ Color of the personal best on the HUD and save cards
+pl Kolor rekordu osobistego w HUD i na kartach zapisów
+
+@ Shown as a count or as a percentage of the level's total
+pl Jako liczba lub procent całości poziomu
+
+@ Where this goes on screen; items at the same position share a line
+pl Gdzie to jest na ekranie; elementy w tej samej pozycji dzielą wiersz
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+pl Zachowuje demo każdego poziomu z nowym rekordem osobistym; stare zostają. Nagrywa nawet bez automatycznych dem
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+pl Klatki na sekundę, uśrednione z pół sekundy
+
+@ Average time per frame in milliseconds, and the slowest frame
+pl Średni czas klatki w milisekundach i najwolniejsza klatka
+
+@ How busy the game keeps the processor, as a share of all its cores
+pl Jak bardzo gra obciąża procesor, jako część wszystkich rdzeni
+
+@ Memory the game uses
+pl Pamięć używana przez grę
+
+@ Graphics card time per frame in milliseconds
+pl Czas karty graficznej na klatkę w milisekundach
+
+@ Video memory in use and what the driver allows, where it reports it
+pl Używana pamięć wideo i ile pozwala sterownik, jeśli to podaje
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ pl Eksportowanie wideo
 @ Preparing...
 pl Przygotowywanie...
 
+# Save cards: personal best.
+@ PB {} {}
+pl PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ pl Zapisano {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 pl Nie znaleziono ffmpeg: zapisano {} klatek PNG i plik WAV w {}
+
+# Personal bests.
+@ New personal best ({}): {}
+pl Nowy rekord osobisty ({}): {}

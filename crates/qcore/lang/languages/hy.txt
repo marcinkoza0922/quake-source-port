@@ -1484,6 +1484,89 @@ hy Ինչպես պատուհանը
 @ GPU Encoding
 hy GPU կոդավորում
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+hy Ժամանակ և վիճակագրություն
+
+@ Clock
+hy Ժամացույց
+
+@ Clock Position
+hy Ժամացույցի դիրքը
+
+@ Level Timer
+hy Մակարդակի վայրկյանաչափ
+
+@ Personal Best
+hy Անձնական ռեկորդ
+
+@ Personal Best Type
+hy Ռեկորդի տեսակը
+
+@ Personal Best Color
+hy Ռեկորդի գույնը
+
+@ Timer Position
+hy Վայրկյանաչափի դիրքը
+
+@ Kills
+hy Սպանություններ
+
+@ Secrets
+hy Գաղտնիքներ
+
+@ Kills & Secrets Position
+hy Սպանությունների և գաղտնիքների դիրքը
+
+@ 24-hour
+hy 24-ժամյա
+
+@ 24-hour + seconds
+hy 24-ժամյա + վայրկյաններ
+
+@ 12-hour
+hy 12-ժամյա
+
+@ 12-hour + seconds
+hy 12-ժամյա + վայրկյաններ
+
+@ count
+hy քանակ
+
+@ percent
+hy տոկոս
+
+@ any% and 100%
+hy any% և 100%
+
+@ Keep Personal Best Demos
+hy Պահել ռեկորդների ցուցադրումները
+
+@ any%
+hy any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+hy Արտադրողականության ցուցանիշներ
+
+@ Frame Time
+hy Կադրի ժամանակ
+
+@ CPU Usage
+hy Պրոցեսորի օգտագործում
+
+@ Memory Usage
+hy Հիշողության օգտագործում
+
+@ GPU Time
+hy GPU ժամանակ
+
+@ Video Memory
+hy Տեսահիշողություն
+
+@ Metrics Position
+hy Ցուցանիշների դիրքը
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ hy Տեսանյութի չափ․ կադրերը մասշտաբավորվում 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 hy Կոդավորում է վիդեոքարտով (NVIDIA NVENC, AMD կամ Intel՝ VA-API-ով, AMF կամ Quick Sync, Apple VideoToolbox), երբ ffmpeg-ը կարող է այն օգտագործել, պրոցեսորն ազատ թողնելով, այլապես կոդավորում է պրոցեսորը
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+hy Ցույց է տալիս օրվա ժամը ընտրված ձևաչափով
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+hy Մակարդակի ժամանակը, ինչպես ընդմիջման էկրանին․ կանգնում է դադարի ժամանակ և ելքում
+
+@ Your best time on this map and skill, next to the timer (single player)
+hy Ձեր լավագույն ժամանակը այս քարտեզում և դժվարությամբ, վայրկյանաչափի կողքին (մեկ խաղացող)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+hy any%՝ ցանկացած ավարտ, 100%՝ բոլոր սպանություններն ու գաղտնիքները։ Պահպանումների քարտերը սա են ցույց տալիս առաջինը
+
+@ Color of the personal best on the HUD and save cards
+hy Անձնական ռեկորդի գույնը HUD-ում և պահպանումների քարտերում
+
+@ Shown as a count or as a percentage of the level's total
+hy Որպես քանակ կամ մակարդակի ընդհանուրի տոկոս
+
+@ Where this goes on screen; items at the same position share a line
+hy Որտեղ է այն էկրանին․ նույն դիրքի տարրերը կիսում են մեկ տող
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+hy Պահում է նոր անձնական ռեկորդով յուրաքանչյուր մակարդակի ցուցադրումը․ հները մնում են։ Ձայնագրում է նույնիսկ առանց ավտոմատ ձայնագրման
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+hy Կադրեր վայրկյանում, կես վայրկյանի միջինը
+
+@ Average time per frame in milliseconds, and the slowest frame
+hy Կադրի միջին ժամանակը միլիվայրկյաններով և ամենադանդաղ կադրը
+
+@ How busy the game keeps the processor, as a share of all its cores
+hy Որքան է խաղը ծանրաբեռնում պրոցեսորը՝ բոլոր միջուկների մասով
+
+@ Memory the game uses
+hy Խաղի օգտագործած հիշողությունը
+
+@ Graphics card time per frame in milliseconds
+hy Գրաֆիկական քարտի ժամանակը մեկ կադրի համար՝ միլիվայրկյաններով
+
+@ Video memory in use and what the driver allows, where it reports it
+hy Օգտագործվող տեսահիշողությունը և դրայվերի թույլատրածը, եթե այն հաղորդում է
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ hy Տեսանյութի արտահանում
 @ Preparing...
 hy Պատրաստում...
 
+# Save cards: personal best.
+@ PB {} {}
+hy PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ hy Գրվեց {} ({} վ)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 hy ffmpeg-ը չգտնվեց․ {} PNG կադր և WAV գրվեցին {}-ում
+
+# Personal bests.
+@ New personal best ({}): {}
+hy Նոր անձնական ռեկորդ ({}): {}

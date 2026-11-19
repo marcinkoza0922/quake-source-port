@@ -1484,6 +1484,89 @@ zh-TW 與視窗相同
 @ GPU Encoding
 zh-TW GPU 編碼
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+zh-TW 時間與統計
+
+@ Clock
+zh-TW 時鐘
+
+@ Clock Position
+zh-TW 時鐘位置
+
+@ Level Timer
+zh-TW 關卡計時器
+
+@ Personal Best
+zh-TW 個人最佳
+
+@ Personal Best Type
+zh-TW 個人最佳類型
+
+@ Personal Best Color
+zh-TW 個人最佳顏色
+
+@ Timer Position
+zh-TW 計時器位置
+
+@ Kills
+zh-TW 擊殺
+
+@ Secrets
+zh-TW 秘密
+
+@ Kills & Secrets Position
+zh-TW 擊殺與秘密位置
+
+@ 24-hour
+zh-TW 24 小時制
+
+@ 24-hour + seconds
+zh-TW 24 小時制 + 秒
+
+@ 12-hour
+zh-TW 12 小時制
+
+@ 12-hour + seconds
+zh-TW 12 小時制 + 秒
+
+@ count
+zh-TW 數量
+
+@ percent
+zh-TW 百分比
+
+@ any% and 100%
+zh-TW any% 和 100%
+
+@ Keep Personal Best Demos
+zh-TW 保留個人最佳示範
+
+@ any%
+zh-TW any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+zh-TW 效能指標
+
+@ Frame Time
+zh-TW 影格時間
+
+@ CPU Usage
+zh-TW CPU 使用率
+
+@ Memory Usage
+zh-TW 記憶體使用量
+
+@ GPU Time
+zh-TW GPU 時間
+
+@ Video Memory
+zh-TW 顯示記憶體
+
+@ Metrics Position
+zh-TW 指標位置
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ zh-TW 影片尺寸；影格由視窗尺寸縮放而來（加黑邊保持比例�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 zh-TW ffmpeg 能用時在顯示卡上編碼（NVIDIA NVENC、透過 VA-API 的 AMD 或 Intel、AMF 或 Quick Sync、Apple VideoToolbox），讓處理器空閒；否則由處理器編碼
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+zh-TW 以所選格式顯示目前時間
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+zh-TW 關卡時間，與過場畫面相同；暫停時和抵達出口時停止
+
+@ Your best time on this map and skill, next to the timer (single player)
+zh-TW 你在此地圖和難度下的最佳時間，顯示在計時器旁（單人遊戲）
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+zh-TW any%：任意通關；100%：全部擊殺和秘密。存檔卡片優先顯示此項
+
+@ Color of the personal best on the HUD and save cards
+zh-TW HUD 和存檔卡片上個人最佳的顏色
+
+@ Shown as a count or as a percentage of the level's total
+zh-TW 以數量或關卡總數的百分比顯示
+
+@ Where this goes on screen; items at the same position share a line
+zh-TW 在畫面上的位置；同一位置的項目共用一行
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+zh-TW 保留每個創下個人最佳的關卡示範；舊的也會保留。即使關閉自動錄製也會錄製
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+zh-TW 每秒影格數，取半秒平均
+
+@ Average time per frame in milliseconds, and the slowest frame
+zh-TW 每影格平均耗時（毫秒）和最慢的影格
+
+@ How busy the game keeps the processor, as a share of all its cores
+zh-TW 遊戲占用處理器的程度，以全部核心的比例計
+
+@ Memory the game uses
+zh-TW 遊戲使用的記憶體
+
+@ Graphics card time per frame in milliseconds
+zh-TW 每影格顯示卡耗時（毫秒）
+
+@ Video memory in use and what the driver allows, where it reports it
+zh-TW 已用顯示記憶體和驅動程式允許的上限（若驅動程式提供）
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ zh-TW 正在匯出影片
 @ Preparing...
 zh-TW 準備中...
 
+# Save cards: personal best.
+@ PB {} {}
+zh-TW PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ zh-TW 已寫入 {}（{} 秒）
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 zh-TW 找不到 ffmpeg：已將 {} 格 PNG 和一個 WAV 寫入 {}
+
+# Personal bests.
+@ New personal best ({}): {}
+zh-TW 新的個人最佳（{}）：{}

@@ -1484,6 +1484,89 @@ ko 창과 같게
 @ GPU Encoding
 ko GPU 인코딩
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ko 시간 및 통계
+
+@ Clock
+ko 시계
+
+@ Clock Position
+ko 시계 위치
+
+@ Level Timer
+ko 레벨 타이머
+
+@ Personal Best
+ko 개인 최고 기록
+
+@ Personal Best Type
+ko 최고 기록 종류
+
+@ Personal Best Color
+ko 최고 기록 색상
+
+@ Timer Position
+ko 타이머 위치
+
+@ Kills
+ko 처치
+
+@ Secrets
+ko 비밀
+
+@ Kills & Secrets Position
+ko 처치 및 비밀 위치
+
+@ 24-hour
+ko 24시간
+
+@ 24-hour + seconds
+ko 24시간 + 초
+
+@ 12-hour
+ko 12시간
+
+@ 12-hour + seconds
+ko 12시간 + 초
+
+@ count
+ko 개수
+
+@ percent
+ko 백분율
+
+@ any% and 100%
+ko any% 및 100%
+
+@ Keep Personal Best Demos
+ko 최고 기록 데모 보관
+
+@ any%
+ko any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ko 성능 지표
+
+@ Frame Time
+ko 프레임 시간
+
+@ CPU Usage
+ko CPU 사용률
+
+@ Memory Usage
+ko 메모리 사용량
+
+@ GPU Time
+ko GPU 시간
+
+@ Video Memory
+ko 비디오 메모리
+
+@ Metrics Position
+ko 지표 위치
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ ko 비디오 크기입니다. 프레임은 창 크기에서 확대·축소되므
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ko ffmpeg가 사용할 수 있으면 그래픽 카드(NVIDIA NVENC, VA-API를 통한 AMD나 Intel, AMF, Quick Sync, Apple VideoToolbox)로 인코딩해 프로세서를 비워 둡니다. 아니면 프로세서가 인코딩합니다
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ko 현재 시각을 선택한 형식으로 표시합니다
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ko 인터미션 화면과 같은 레벨 시간입니다. 일시 정지 중과 출구에서 멈춥니다
+
+@ Your best time on this map and skill, next to the timer (single player)
+ko 이 맵과 난이도에서의 최고 기록을 타이머 옆에 표시합니다 (싱글 플레이)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ko any%: 어떤 클리어든, 100%: 모든 처치와 비밀. 저장 카드에 이것이 먼저 표시됩니다
+
+@ Color of the personal best on the HUD and save cards
+ko HUD와 저장 카드에 표시되는 최고 기록 색상
+
+@ Shown as a count or as a percentage of the level's total
+ko 개수 또는 레벨 전체에 대한 백분율로 표시
+
+@ Where this goes on screen; items at the same position share a line
+ko 화면에서의 위치입니다. 같은 위치의 항목은 한 줄에 나란히 표시됩니다
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ko 개인 최고 기록을 세운 레벨의 데모를 모두 보관하며 이전 것도 남깁니다. 자동 녹화가 꺼져 있어도 녹화합니다
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ko 초당 프레임 수 (0.5초 평균)
+
+@ Average time per frame in milliseconds, and the slowest frame
+ko 프레임당 평균 시간(밀리초)과 가장 느린 프레임
+
+@ How busy the game keeps the processor, as a share of all its cores
+ko 게임이 프로세서를 얼마나 사용하는지, 전체 코어 대비 비율
+
+@ Memory the game uses
+ko 게임이 사용하는 메모리
+
+@ Graphics card time per frame in milliseconds
+ko 프레임당 그래픽 카드 시간(밀리초)
+
+@ Video memory in use and what the driver allows, where it reports it
+ko 사용 중인 비디오 메모리와 드라이버가 허용하는 양 (보고되는 경우)
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ ko 비디오 내보내는 중
 @ Preparing...
 ko 준비 중...
 
+# Save cards: personal best.
+@ PB {} {}
+ko PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ ko {} 저장됨 ({}초)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ko ffmpeg를 찾을 수 없음: PNG 프레임 {}장과 WAV를 {}에 저장했습니다
+
+# Personal bests.
+@ New personal best ({}): {}
+ko 새 개인 최고 기록 ({}): {}

@@ -1484,6 +1484,89 @@ lt Kaip langas
 @ GPU Encoding
 lt GPU kodavimas
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+lt Laikas ir statistika
+
+@ Clock
+lt Laikrodis
+
+@ Clock Position
+lt Laikrodžio vieta
+
+@ Level Timer
+lt Lygio laikmatis
+
+@ Personal Best
+lt Asmeninis rekordas
+
+@ Personal Best Type
+lt Rekordo tipas
+
+@ Personal Best Color
+lt Rekordo spalva
+
+@ Timer Position
+lt Laikmačio vieta
+
+@ Kills
+lt Nužudyta
+
+@ Secrets
+lt Paslaptys
+
+@ Kills & Secrets Position
+lt Nužudymų ir paslapčių vieta
+
+@ 24-hour
+lt 24 valandų
+
+@ 24-hour + seconds
+lt 24 valandų + sekundės
+
+@ 12-hour
+lt 12 valandų
+
+@ 12-hour + seconds
+lt 12 valandų + sekundės
+
+@ count
+lt skaičius
+
+@ percent
+lt procentai
+
+@ any% and 100%
+lt any% ir 100%
+
+@ Keep Personal Best Demos
+lt Saugoti rekordų demonstracijas
+
+@ any%
+lt any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+lt Našumo rodikliai
+
+@ Frame Time
+lt Kadro laikas
+
+@ CPU Usage
+lt CPU naudojimas
+
+@ Memory Usage
+lt Atminties naudojimas
+
+@ GPU Time
+lt GPU laikas
+
+@ Video Memory
+lt Vaizdo atmintis
+
+@ Metrics Position
+lt Rodiklių vieta
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1972,6 +2055,50 @@ lt Vaizdo dydis; kadrai keičiami iš lango dydžio (su juostomis formai išlaik
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 lt Koduoja vaizdo plokšte (NVIDIA NVENC, AMD ar Intel per VA-API, AMF ar Quick Sync, Apple VideoToolbox), kai ffmpeg gali ją naudoti, ir palieka procesorių laisvą; kitaip koduoja procesorius
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+lt Rodo paros laiką pasirinktu formatu
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+lt Lygio laikas, kaip pertraukos ekrane; sustoja per pauzę ir prie išėjimo
+
+@ Your best time on this map and skill, next to the timer (single player)
+lt Jūsų geriausias laikas šiame žemėlapyje ir sunkumo lygyje, šalia laikmačio (vienas žaidėjas)
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+lt any%: bet kokia pabaiga; 100%: visi nužudymai ir paslaptys. Išsaugojimų kortelės pirma rodo šį
+
+@ Color of the personal best on the HUD and save cards
+lt Asmeninio rekordo spalva HUD ir išsaugojimų kortelėse
+
+@ Shown as a count or as a percentage of the level's total
+lt Kaip skaičius arba kaip lygio visumos procentas
+
+@ Where this goes on screen; items at the same position share a line
+lt Kur tai ekrane; toje pačioje vietoje esantys elementai dalijasi eilute
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+lt Saugo kiekvieno lygio su nauju asmeniniu rekordu demonstraciją; senos lieka. Įrašo net išjungus automatinį įrašymą
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+lt Kadrai per sekundę, pusės sekundės vidurkis
+
+@ Average time per frame in milliseconds, and the slowest frame
+lt Vidutinis kadro laikas milisekundėmis ir lėčiausias kadras
+
+@ How busy the game keeps the processor, as a share of all its cores
+lt Kiek žaidimas apkrauna procesorių, kaip visų branduolių dalis
+
+@ Memory the game uses
+lt Žaidimo naudojama atmintis
+
+@ Graphics card time per frame in milliseconds
+lt Vaizdo plokštės laikas kadrui milisekundėmis
+
+@ Video memory in use and what the driver allows, where it reports it
+lt Naudojama vaizdo atmintis ir kiek leidžia tvarkyklė, jei ji tai praneša
 
 # ==== ui.txt ====
 
@@ -2886,6 +3013,10 @@ lt Eksportuojamas vaizdo įrašas
 @ Preparing...
 lt Ruošiama...
 
+# Save cards: personal best.
+@ PB {} {}
+lt PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3443,3 +3574,7 @@ lt Įrašyta {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 lt ffmpeg nerastas: {} PNG kadrų ir WAV įrašyti į {}
+
+# Personal bests.
+@ New personal best ({}): {}
+lt Naujas asmeninis rekordas ({}): {}
