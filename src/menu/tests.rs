@@ -687,3 +687,53 @@ fn gameplay_user_data_dir_opens_explorer_and_autosave_has_key_toggle() {
     assert_eq!(m.screen, Screen::OptionsPage(Page::Gameplay));
     assert_eq!(m.opt_cursor, row);
 }
+
+#[test]
+fn audio_enhancements_subpage_gating_and_soundtrack_picker() {
+    for cvar in [
+        "snd_waterfx", "s_reverb", "s_reverb_amount", "s_hrtf", "s_occlusion",
+        "s_footsteps", "s_footsteps_volume", "s_music_crossfade",
+        "s_vol_ambient", "s_vol_weapons", "s_vol_monsters", "s_vol_world",
+    ] {
+        assert!(option_cvars().any(|c| c == cvar), "missing archived option cvar {cvar}");
+    }
+    let mut cv = Cvars::default();
+    cv.register("s_reverb", "0", 0);
+    cv.register("s_reverb_amount", "1", 0);
+    cv.register("s_footsteps", "0", 0);
+    cv.register("s_footsteps_volume", "0.6", 0);
+    cv.register("s_soundtrack", "", 0);
+    let mut m = Menu::new();
+    m.soundtracks = vec![("id1".into(), "Original (id1)".into()), ("q64".into(), "Quake 64".into())];
+    m.open(Screen::OptionsPage(Page::Audio));
+
+    // Reverb Amount and Footstep Volume stay locked while their toggles are off.
+    let rev_amt = AUDIO.iter().copied().find(|i| matches!(i, Item::Slider { cvar: "s_reverb_amount", .. })).unwrap();
+    let step_vol = AUDIO.iter().copied().find(|i| matches!(i, Item::Slider { cvar: "s_footsteps_volume", .. })).unwrap();
+    assert!(m.item_disabled(rev_amt, &cv));
+    assert!(m.item_disabled(step_vol, &cv));
+    cv.set("s_reverb", "1");
+    cv.set("s_footsteps", "1");
+    assert!(!m.item_disabled(rev_amt, &cv));
+    assert!(!m.item_disabled(step_vol, &cv));
+
+    // Soundtrack dropdown cycles Default -> id1 -> q64 -> Default.
+    let st_item = Item::Soundtrack;
+    let mut out = Vec::new();
+    assert_eq!(m.soundtrack_index(&cv), 0);
+    assert!(m.adjust(st_item, 1, false, &mut cv, &mut out));
+    assert_eq!(cv.by_name("s_soundtrack").unwrap().string, "id1");
+    assert!(m.adjust(st_item, 1, false, &mut cv, &mut out));
+    assert_eq!(cv.by_name("s_soundtrack").unwrap().string, "q64");
+    assert!(m.adjust(st_item, 1, false, &mut cv, &mut out));
+    assert_eq!(cv.by_name("s_soundtrack").unwrap().string, "");
+
+    // Volume Mix sub-page opens and returns to the same Audio row.
+    let mix_row = AUDIO.iter().position(|i| matches!(i, Item::Sub { page: Page::AudioMix, .. })).unwrap();
+    m.opt_cursor = mix_row;
+    m.key(K_ENTER, &mut cv, false);
+    assert_eq!(m.screen, Screen::OptionsPage(Page::AudioMix));
+    m.key(K_ESCAPE, &mut cv, false);
+    assert_eq!(m.screen, Screen::OptionsPage(Page::Audio));
+    assert_eq!(m.opt_cursor, mix_row);
+}

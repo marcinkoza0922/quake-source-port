@@ -1639,6 +1639,49 @@ sr Сачувај при узимању кључа
 @ User Data Directory
 sr Фасцикла корисничких података
 
+# Audio enhancements.
+@ Volume Mix
+sr Миксер јачине
+
+@ Soundtrack
+sr Музичка подлога
+
+@ Music Crossfade
+sr Претапање музике
+
+@ Underwater Muffling
+sr Пригушење под водом
+
+@ Environmental Reverb
+sr Просторни одјек
+
+@ Reverb Amount
+sr Јачина одјека
+
+@ 3D Binaural Audio
+sr 3D бинаурални звук
+
+@ Sound Occlusion
+sr Оклузија звука
+
+@ Footsteps
+sr Кораци
+
+@ Footstep Volume
+sr Јачина корака
+
+@ Ambient
+sr Амбијент
+
+@ Weapons & Player
+sr Оружје и играч
+
+@ Monsters
+sr Чудовишта
+
+@ World & Pickups
+sr Свет и предмети
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ sr Аутоматски чува када покупите кључ
 
 @ Where saves, configs, demos and downloaded map packs are stored
 sr Где се чувају снимљене игре, подешавања, демои и преузети пакети мапа
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+sr Музички пакет за нивое: Подразумевано користи активни мод, или изаберите други инсталирани Quake саундтрек или своју фасциклу у <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+sr Пригушује звук дубоким нископропусним филтером под водом
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+sr Додаје просторни одјек у реалном времену према величини и материјалима околног простора
+
+@ How strongly environmental room reverb mixes into world sounds
+sr Колико снажно се просторни одјек меша са звуцима света
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+sr Бинаурални 3D звук за слушалице са кашњењем ушију, сенком главе и смеровима напред/назад/висина
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+sr Пригушује и утишава звуке иза чврстих зидова и затворених врата
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+sr Пушта синтетизоване кораке и доскоке играча за камен, метал, дрво, земљу и течности
+
+@ Volume of synthesized player footsteps and landings
+sr Јачина синтетизованих корака и доскока играча
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+sr Секунде глатког претапања између музичких нумера; 0 пребацује одмах
+
+@ Volume of map ambient loops such as wind, water and static world hums
+sr Јачина амбијенталних петљи мапе као што су ветар, вода и статично зујање
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+sr Јачина пуцњаве, гласова играча, корака и додатне опреме
+
+@ Volume of monster alerts, attacks, pain and death sounds
+sr Јачина узбуна, напада, бола и смрти чудовишта
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+sr Јачина врата, лифтова, прекидача, купљења предмета и других ефеката света
 
 # ==== ui.txt ====
 

@@ -14,8 +14,10 @@ impl Mixer {
                 let Some(i) = self.pick_channel(entity, channel) else {
                     return;
                 };
+                let category = classify_sound(&sfx.name);
                 let ch = &mut self.channels[i];
                 *ch = Channel {
+                    category,
                     entity,
                     entchannel: channel,
                     origin,
@@ -50,14 +52,27 @@ impl Mixer {
             }
             SoundEvent::Local(sfx) => {
                 let view = self.listener.view_entity;
-                self.event(SoundEvent::Start {
+                let Some(i) = self.pick_channel(view, -1) else {
+                    return;
+                };
+                let category = match classify_sound(&sfx.name) {
+                    SoundCategory::Ui => SoundCategory::Ui,
+                    // Local sounds from menus/feedback stay dry UI; others keep their mix bucket.
+                    _ => SoundCategory::Ui,
+                };
+                let ch = &mut self.channels[i];
+                *ch = Channel {
+                    sfx: Some(sfx),
+                    category,
                     entity: view,
-                    channel: -1,
-                    sfx,
+                    entchannel: -1,
                     origin: self.listener.origin,
-                    volume: 1.0,
-                    attenuation: 0.0,
-                });
+                    dist_mult: 0.0,
+                    master_vol: 255,
+                    left: 255,
+                    right: 255,
+                    ..Default::default()
+                };
             }
             SoundEvent::Stop { entity, channel } => {
                 for ch in &mut self.channels[NUM_AMBIENTS..NUM_AMBIENTS + MAX_DYNAMIC_CHANNELS] {
@@ -79,6 +94,7 @@ impl Mixer {
                 self.total += 1;
                 self.channels[i] = Channel {
                     sfx: Some(sfx),
+                    category: SoundCategory::Ambient,
                     entity: -1,
                     origin,
                     dist_mult: attenuation / SOUND_NOMINAL_CLIP_DIST,
@@ -94,6 +110,7 @@ impl Mixer {
                 }
                 self.total = NUM_AMBIENTS + MAX_DYNAMIC_CHANNELS;
                 self.ambient_vol = [0.0; NUM_AMBIENTS];
+                self.reverb.clear();
             }
             SoundEvent::StopDynamic => {
                 for ch in &mut self.channels[NUM_AMBIENTS..NUM_AMBIENTS + MAX_DYNAMIC_CHANNELS] {
@@ -116,6 +133,7 @@ impl Mixer {
         let l = self.listener;
         for a in 0..NUM_AMBIENTS {
             let ch = &mut self.channels[a];
+            ch.category = SoundCategory::Ambient;
             let Some(levels) = l.ambient_levels else {
                 ch.sfx = None;
                 self.ambient_vol[a] = 0.0;

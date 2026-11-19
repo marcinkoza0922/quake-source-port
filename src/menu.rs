@@ -85,6 +85,7 @@ pub enum Page {
     Graphics,
     Enhancements,
     Audio,
+    AudioMix,
     HitSound,
     KillSound,
     Accessibility,
@@ -143,7 +144,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, addon_settings::HITSTOP, addon_settings::HITSTOP_ADVANCED, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, GEL, WASHER, HOOKSHOT, CABLE, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, ENHANCEMENTS, WATER, BLOOM, RT_LIGHTS, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, MODIFIERS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GYRO, GRAPHICS, AUDIO, HIT_SOUND, KILL_SOUND, ACCESSIBILITY, demos::DEMOS, demos::VIDEO].into_iter().flatten().filter_map(|i| match *i {
+    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, addon_settings::HITSTOP, addon_settings::HITSTOP_ADVANCED, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, GEL, WASHER, HOOKSHOT, CABLE, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, ENHANCEMENTS, WATER, BLOOM, RT_LIGHTS, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, MODIFIERS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GYRO, GRAPHICS, AUDIO, AUDIO_MIX, HIT_SOUND, KILL_SOUND, ACCESSIBILITY, demos::DEMOS, demos::VIDEO].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
@@ -217,6 +218,8 @@ pub struct Menu {
     /// parameters (both filled by the host).
     pub shader_presets: Vec<String>,
     pub shader_params: Vec<qrender::ShaderParam>,
+    /// Soundtrack packs `(id, label)` for Options → Audio (filled by the host).
+    pub soundtracks: Vec<(String, String)>,
     /// LAN search results and whether a search is running.
     pub servers: Vec<ServerEntry>,
     pub searching: bool,
@@ -353,6 +356,7 @@ impl Menu {
             net_maps: Vec::new(),
             shader_presets: Vec::new(),
             shader_params: Vec::new(),
+            soundtracks: Vec::new(),
             servers: Vec::new(),
             searching: false,
             bindings: vec![None; MAX_KEYS],

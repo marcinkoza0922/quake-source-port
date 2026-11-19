@@ -1237,3 +1237,96 @@ it Dove sono archiviati salvataggi, configurazioni, demo e pacchetti di mappe sc
 es Dónde se almacenan las partidas, configuraciones, demos y paquetes de mapas descargados
 ru Где хранятся сохранения, настройки, демки и загруженные наборы карт
 
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+fr Pack musical pour les pistes de niveau : Par défaut utilise le mod actif, ou choisissez une autre bande sonore Quake installée ou un dossier personnalisé dans <user data>/music
+de Musikpaket für Level-Titel: Standard nutzt den aktiven Mod, oder wählen Sie einen anderen installierten Quake-Soundtrack oder einen eigenen Ordner in <user data>/music
+it Pacchetto musicale per i brani dei livelli: Predefinito usa il mod attivo, oppure scegli un'altra colonna sonora Quake installata o una cartella personalizzata in <user data>/music
+es Paquete de música para las pistas de nivel: Predeterminado usa el mod activo, o elige otra banda sonora de Quake instalada o una carpeta personalizada en <user data>/music
+ru Музыкальный набор для треков уровней: «По умолчанию» использует активный мод, или выберите другой установленный саундтрек Quake или свою папку в <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+fr Étouffe le son avec un filtre passe-bas profond sous l'eau
+de Dämpft den Ton unter Wasser mit einem tiefen Tiefpassfilter
+it Attenua il suono con un filtro passa-basso profondo sott'acqua
+es Amortigua el sonido con un filtro paso bajo profundo bajo el agua
+ru Приглушает звук глубоким фильтром низких частот под водой
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+fr Ajoute une réverbération en temps réel adaptée à la taille et aux matériaux de la pièce
+de Fügt Echtzeit-Raumhall hinzu, angepasst an Größe und Materialien des umgebenden Raums
+it Aggiunge riverbero in tempo reale modellato su dimensioni e materiali dello spazio circostante
+es Añade reverberación en tiempo real adaptada al tamaño y materiales del espacio circundante
+ru Добавляет реверберацию в реальном времени по размеру и материалам окружающего помещения
+
+@ How strongly environmental room reverb mixes into world sounds
+fr Intensité du mélange de la réverbération ambiante dans les sons du monde
+de Wie stark der Raumhall den Weltgeräuschen beigemischt wird
+it Quanto intensamente il riverbero ambientale si mescola ai suoni del mondo
+es Con qué intensidad se mezcla la reverberación ambiental en los sonidos del mundo
+ru Насколько сильно реверберация помещения подмешивается к звукам мира
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+fr Spatialisation binaurale 3D pour casque avec délai interaural, ombre de la tête et indices avant/arrière/hauteur
+de Binaurale 3D-Räumlichkeit für Kopfhörer mit Laufzeitdifferenz, Kopfschatten und Vorn/Hinten/Höhen-Hinweisen
+it Spazializzazione binaurale 3D per cuffie con ritardo interaurale, ombra della testa e indizi fronte/retro/altezza
+es Espacialización binaural 3D para auriculares con retardo interaural, sombra cefálica e indicios de frente/atrás/altura
+ru Бинауральная 3D-локализация для наушников с задержкой между ушами, тенью головы и ориентирами спереди/сзади/по высоте
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+fr Étouffe et atténue les sons venant de derrière les murs pleins et les portes fermées
+de Dämpft und verringert Geräusche hinter massiven Wänden und geschlossenen Türen
+it Attenua e abbassa i suoni provenienti da dietro muri solidi e porte chiuse
+es Amortigua y atenúa los sonidos que vienen detrás de muros sólidos y puertas cerradas
+ru Приглушает и ослабляет звуки, доносящиеся из-за сплошных стен и закрытых дверей
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+fr Joue des bruits de pas et d'atterrissage synthétisés adaptés aux sols en pierre, métal, bois, terre et liquides
+de Spielt synthetisierte Schritte und Landungen passend zu Stein-, Metall-, Holz-, Erd- und Flüssigkeitsböden ab
+it Riproduce passi e atterraggi sintetizzati adatti a superfici in pietra, metallo, legno, terra e liquidi
+es Reproduce pasos y aterrizajes sintetizados según el suelo de piedra, metal, madera, tierra o líquido
+ru Воспроизводит синтезированные шаги и приземления игрока для камня, металла, дерева, земли и жидкостей
+
+@ Volume of synthesized player footsteps and landings
+fr Volume des bruits de pas et d'atterrissage synthétisés du joueur
+de Lautstärke der synthetisierten Spielerschritte und Landungen
+it Volume dei passi e degli atterraggi sintetizzati del giocatore
+es Volumen de los pasos y aterrizajes sintetizados del jugador
+ru Громкость синтезированных шагов и приземлений игрока
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+fr Secondes de fondu fluide entre les pistes musicales ; 0 coupe immédiatement
+de Sekunden für sanftes Überblenden zwischen Musiktiteln; 0 wechselt sofort
+it Secondi per sfumare dolcemente tra i brani musicali; 0 cambia subito
+es Segundos para fundir suavemente entre pistas de música; 0 corta al instante
+ru Секунды плавного перехода между музыкальными треками; 0 — мгновенное переключение
+
+@ Volume of map ambient loops such as wind, water and static world hums
+fr Volume des boucles d'ambiance de carte comme le vent, l'eau et les bourdonnements statiques
+de Lautstärke von Karten-Umgebungsschleifen wie Wind, Wasser und statischem Brummen
+it Volume dei loop ambientali della mappa come vento, acqua e ronzii statici del mondo
+es Volumen de los bucles ambientales del mapa como viento, agua y zumbidos estáticos
+ru Громкость фоновых звуков карты: ветра, воды и статического гула
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+fr Volume des tirs d'armes, voix du joueur, bruits de pas et équipement additionnel
+de Lautstärke von Waffenfeuer, Spielerstimmen, Schritten und Add-on-Ausrüstung
+it Volume di spari, voci del giocatore, passi ed equipaggiamento aggiuntivo
+es Volumen de disparos, voces del jugador, pasos y equipo adicional
+ru Громкость выстрелов, голоса игрока, шагов и дополнительного снаряжения
+
+@ Volume of monster alerts, attacks, pain and death sounds
+fr Volume des alertes, attaques, douleurs et morts des monstres
+de Lautstärke von Alarm-, Angriffs-, Schmerz- und Todesgeräuschen der Monster
+it Volume di allerta, attacchi, dolore e morte dei mostri
+es Volumen de alertas, ataques, dolor y muerte de los monstruos
+ru Громкость криков, атак, боли и смерти монстров
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+fr Volume des portes, ascenseurs, interrupteurs, objets ramassés et autres effets du monde
+de Lautstärke von Türen, Aufzügen, Schaltern, Gegenständen und anderen Welteffekten
+it Volume di porte, ascensori, interruttori, oggetti raccolti e altri effetti del mondo
+es Volumen de puertas, ascensores, interruptores, objetos recogidos y otros efectos del mundo
+ru Громкость дверей, лифтов, переключателей, подбора предметов и прочих звуков мира
+
+

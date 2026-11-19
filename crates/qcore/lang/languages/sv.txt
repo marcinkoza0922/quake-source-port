@@ -1639,6 +1639,49 @@ sv Spara vid nyckelupplockning
 @ User Data Directory
 sv Användardatamapp
 
+# Audio enhancements.
+@ Volume Mix
+sv Volymmix
+
+@ Soundtrack
+sv Soundtrack
+
+@ Music Crossfade
+sv Musikövertoning
+
+@ Underwater Muffling
+sv Undervattensdämpning
+
+@ Environmental Reverb
+sv Rumsreverb
+
+@ Reverb Amount
+sv Reverbmängd
+
+@ 3D Binaural Audio
+sv 3D-binauralt ljud
+
+@ Sound Occlusion
+sv Ljudocklusion
+
+@ Footsteps
+sv Fotsteg
+
+@ Footstep Volume
+sv Fotstegsvolym
+
+@ Ambient
+sv Miljö
+
+@ Weapons & Player
+sv Vapen och spelare
+
+@ Monsters
+sv Monster
+
+@ World & Pickups
+sv Värld och föremål
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ sv Sparar automatiskt när du plockar upp en nyckel
 
 @ Where saves, configs, demos and downloaded map packs are stored
 sv Var sparfiler, inställningar, demon och hämtade kartpaket lagras
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+sv Musikpaket för banor: Standard använder aktiv modd, eller välj ett annat installerat Quake-soundtrack eller egen mapp i <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+sv Dämpar ljud med ett djupt lågpassfilter under vatten
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+sv Lägger till rumsreverb i realtid format efter storlek och material i omgivningen
+
+@ How strongly environmental room reverb mixes into world sounds
+sv Hur starkt rumsreverb blandas in i världsljud
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+sv Binaural 3D-ljudbild för hörlurar med öronfördröjning, huvudskugga och fram/bak/höjd-signaler
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+sv Dämpar och sänker ljud bakom solida väggar och stängda dörrar
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+sv Spelar syntetiserade fotsteg och landningar anpassade till sten, metall, trä, jord och vätska
+
+@ Volume of synthesized player footsteps and landings
+sv Volym för syntetiserade fotsteg och landningar
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+sv Sekunder för mjuk övertoning mellan musikspår; 0 byter direkt
+
+@ Volume of map ambient loops such as wind, water and static world hums
+sv Volym för kartans miljöloopar som vind, vatten och statiskt brum
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+sv Volym för vapeneld, spelarröster, fotsteg och tilläggsutrustning
+
+@ Volume of monster alerts, attacks, pain and death sounds
+sv Volym för monsters varningar, attacker, smärta och dödsljud
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+sv Volym för dörrar, hissar, knappar, föremål och andra världseffekter
 
 # ==== ui.txt ====
 

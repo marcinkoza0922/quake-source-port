@@ -1639,6 +1639,49 @@ pt Guardar ao apanhar uma chave
 @ User Data Directory
 pt Diretório de dados do utilizador
 
+# Audio enhancements.
+@ Volume Mix
+pt Mistura de volume
+
+@ Soundtrack
+pt Banda sonora
+
+@ Music Crossfade
+pt Transição de música
+
+@ Underwater Muffling
+pt Abafamento subaquático
+
+@ Environmental Reverb
+pt Reverberação ambiental
+
+@ Reverb Amount
+pt Nível de reverberação
+
+@ 3D Binaural Audio
+pt Áudio binaural 3D
+
+@ Sound Occlusion
+pt Oclusão sonora
+
+@ Footsteps
+pt Passos
+
+@ Footstep Volume
+pt Volume dos passos
+
+@ Ambient
+pt Ambiente
+
+@ Weapons & Player
+pt Armas e jogador
+
+@ Monsters
+pt Monstros
+
+@ World & Pickups
+pt Mundo e itens
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ pt Guarda automaticamente quando apanhas uma chave
 
 @ Where saves, configs, demos and downloaded map packs are stored
 pt Onde são guardados os jogos, configurações, demos e pacotes de mapas transferidos
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+pt Pacote musical para faixas de nível: Predefinido usa o mod ativo, ou escolha outra banda sonora Quake instalada ou pasta própria em <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+pt Abafa o som com um filtro passa-baixo profundo debaixo de água
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+pt Adiciona reverberação em tempo real moldada pelo tamanho e materiais do espaço envolvente
+
+@ How strongly environmental room reverb mixes into world sounds
+pt Intensidade com que a reverberação ambiental se mistura nos sons do mundo
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+pt Espacialização binaural 3D para auscultadores com atraso entre ouvidos, sombra da cabeça e pistas frente/trás/altura
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+pt Abafa e reduz sons vindos de trás de paredes sólidas e portas fechadas
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+pt Reproduz passos e aterragens sintetizados ajustados a pedra, metal, madeira, terra e líquidos
+
+@ Volume of synthesized player footsteps and landings
+pt Volume dos passos e aterragens sintetizados do jogador
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+pt Segundos para transição suave entre faixas musicais; 0 muda de imediato
+
+@ Volume of map ambient loops such as wind, water and static world hums
+pt Volume dos sons ambientais do mapa como vento, água e zumbidos estáticos
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+pt Volume de disparos, vozes do jogador, passos e equipamento adicional
+
+@ Volume of monster alerts, attacks, pain and death sounds
+pt Volume de alertas, ataques, dor e morte dos monstros
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+pt Volume de portas, elevadores, interruptores, recolhas de itens e outros efeitos do mundo
 
 # ==== ui.txt ====
 

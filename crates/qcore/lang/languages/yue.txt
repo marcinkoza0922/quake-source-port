@@ -1639,6 +1639,49 @@ yue 執起鎖匙時儲存
 @ User Data Directory
 yue 用戶資料目錄
 
+# Audio enhancements.
+@ Volume Mix
+yue 音量混合
+
+@ Soundtrack
+yue 原聲配樂
+
+@ Music Crossfade
+yue 音樂淡入淡出
+
+@ Underwater Muffling
+yue 水底悶音
+
+@ Environmental Reverb
+yue 環境殘響
+
+@ Reverb Amount
+yue 殘響強度
+
+@ 3D Binaural Audio
+yue 3D雙耳音效
+
+@ Sound Occlusion
+yue 聲音遮擋
+
+@ Footsteps
+yue 腳步聲
+
+@ Footstep Volume
+yue 腳步聲音量
+
+@ Ambient
+yue 環境聲
+
+@ Weapons & Player
+yue 武器同玩家
+
+@ Monsters
+yue 怪物
+
+@ World & Pickups
+yue 世界同物品
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ yue 執起鎖匙時會自動儲存
 
 @ Where saves, configs, demos and downloaded map packs are stored
 yue 存放存檔、設定、錄影同埋下載地圖包嘅位置
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+yue 關卡音樂包：預設用緊嘅模組，亦可以揀其他裝咗嘅 Quake 配樂或者 <user data>/music 裡面嘅自訂資料夾
+
+@ Muffles sound with a deep low-pass filter while underwater
+yue 喺水底用深層低通濾波令聲音變悶
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+yue 根據周圍空間大細同材質加入即時房間殘響
+
+@ How strongly environmental room reverb mixes into world sounds
+yue 環境房間殘響混入世界聲音嘅強度
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+yue 畀耳機用嘅3D雙耳空間音效，有雙耳時間差、頭部聲影同前後上下方向提示
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+yue 令來自實心牆同閂埋道門後面嘅聲音變悶同細聲
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+yue 跟住石頭、金屬、木頭、泥土同液體地面播合成腳步聲同落地聲
+
+@ Volume of synthesized player footsteps and landings
+yue 合成玩家腳步聲同落地聲嘅音量
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+yue 音樂之間平滑淡入淡出嘅秒數；0 會即刻切換
+
+@ Volume of map ambient loops such as wind, water and static world hums
+yue 地圖風聲、水聲同靜態背景循環聲嘅音量
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+yue 武器開火、玩家聲、腳步聲同附加裝備嘅音量
+
+@ Volume of monster alerts, attacks, pain and death sounds
+yue 怪物發現、攻擊、受傷同死亡聲嘅音量
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+yue 門、升降機、開關、執嘢同其他世界音效嘅音量
 
 # ==== ui.txt ====
 

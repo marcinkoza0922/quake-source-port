@@ -1639,6 +1639,49 @@ bg Запис при вземане на ключ
 @ User Data Directory
 bg Папка с потребителски данни
 
+# Audio enhancements.
+@ Volume Mix
+bg Микс на силата
+
+@ Soundtrack
+bg Саундтрак
+
+@ Music Crossfade
+bg Плавен преход на музика
+
+@ Underwater Muffling
+bg Заглушаване под вода
+
+@ Environmental Reverb
+bg Околна реверберация
+
+@ Reverb Amount
+bg Сила на реверберацията
+
+@ 3D Binaural Audio
+bg 3D бинаурален звук
+
+@ Sound Occlusion
+bg Оклузия на звука
+
+@ Footsteps
+bg Стъпки
+
+@ Footstep Volume
+bg Сила на стъпките
+
+@ Ambient
+bg Околна среда
+
+@ Weapons & Player
+bg Оръжия и играч
+
+@ Monsters
+bg Чудовища
+
+@ World & Pickups
+bg Свят и предмети
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ bg Автоматично запазва при вземане на ключ
 
 @ Where saves, configs, demos and downloaded map packs are stored
 bg Къде се съхраняват записите, настройките, демотата и изтеглените пакети с карти
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+bg Музикален пакет за нивата: По подразбиране ползва активния мод, или изберете друг инсталиран саундтрак за Quake или своя папка в <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+bg Заглушава звука с дълбок нискочестотен филтър под вода
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+bg Добавя реверберация в реално време според размера и материалите на околното пространство
+
+@ How strongly environmental room reverb mixes into world sounds
+bg Колко силно се смесва околната реверберация със звуците от света
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+bg Бинаурален 3D пространствен звук за слушалки със закъснение между ушите, сянка на главата и посоки отпред/отзад/височина
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+bg Заглушава и намалява звуци, идващи зад плътни стени и затворени врати
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+bg Възпроизвежда синтезирани стъпки и приземявания според камък, метал, дърво, пръст и течности
+
+@ Volume of synthesized player footsteps and landings
+bg Сила на синтезираните стъпки и приземявания на играча
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+bg Секунди за плавен преход между музикалните писти; 0 сменя незабавно
+
+@ Volume of map ambient loops such as wind, water and static world hums
+bg Сила на фоновите цикли на картата като вятър, вода и статично бучене
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+bg Сила на стрелба, гласове на играча, стъпки и допълнително снаряжение
+
+@ Volume of monster alerts, attacks, pain and death sounds
+bg Сила на предупреждения, атаки, болка и смърт на чудовища
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+bg Сила на врати, асансьори, превключватели, предмети и други световни ефекти
 
 # ==== ui.txt ====
 

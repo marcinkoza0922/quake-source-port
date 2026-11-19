@@ -1639,6 +1639,49 @@ gl Gardar ao recoller unha chave
 @ User Data Directory
 gl Cartafol de datos de usuario
 
+# Audio enhancements.
+@ Volume Mix
+gl Mestura de volume
+
+@ Soundtrack
+gl Banda sonora
+
+@ Music Crossfade
+gl Transición de música
+
+@ Underwater Muffling
+gl Abafamento subacuático
+
+@ Environmental Reverb
+gl Reverberación ambiental
+
+@ Reverb Amount
+gl Nivel de reverberación
+
+@ 3D Binaural Audio
+gl Audio binaural 3D
+
+@ Sound Occlusion
+gl Oclusión sonora
+
+@ Footsteps
+gl Pasos
+
+@ Footstep Volume
+gl Volume dos pasos
+
+@ Ambient
+gl Ambiente
+
+@ Weapons & Player
+gl Armas e xogador
+
+@ Monsters
+gl Monstros
+
+@ World & Pickups
+gl Mundo e obxectos
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ gl Garda automaticamente cando recolles unha chave
 
 @ Where saves, configs, demos and downloaded map packs are stored
 gl Onde se gardan as partidas, configuracións, demos e paquetes de mapas descargados
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+gl Paquete musical para os niveis: Predeterminado usa o mod activo, ou escolle outra banda sonora de Quake ou un cartafol en <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+gl Abafa o son cun filtro paso baixo profundo debaixo da auga
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+gl Engade reverberación de sala en tempo real segundo o tamaño e os materiais do espazo circundante
+
+@ How strongly environmental room reverb mixes into world sounds
+gl Con canta forza se mestura a reverberación ambiental nos sons do mundo
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+gl Espacialización binaural 3D para auriculares con atraso entre oídos, sombra cefálica e indicios diante/detrás/altura
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+gl Abafa e baixa os sons que chegan detrás de muros sólidos e portas pechadas
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+gl Reproduce pasos e aterraxes sintetizados adaptados a pedra, metal, madeira, terra e líquidos
+
+@ Volume of synthesized player footsteps and landings
+gl Volume dos pasos e aterraxes sintetizados do xogador
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+gl Segundos para fundir suavemente entre pistas musicais; 0 cambia ao instante
+
+@ Volume of map ambient loops such as wind, water and static world hums
+gl Volume dos bucles ambientais do mapa como vento, auga e zumbidos estáticos
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+gl Volume de disparos, voces do xogador, pasos e equipamento adicional
+
+@ Volume of monster alerts, attacks, pain and death sounds
+gl Volume de alertas, ataques, dor e morte dos monstros
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+gl Volume de portas, ascensores, interruptores, recollida de obxectos e outros efectos do mundo
 
 # ==== ui.txt ====
 

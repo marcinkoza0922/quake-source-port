@@ -1639,6 +1639,49 @@ lv Saglabāt, paņemot atslēgu
 @ User Data Directory
 lv Lietotāja datu mape
 
+# Audio enhancements.
+@ Volume Mix
+lv Skaļuma mikseris
+
+@ Soundtrack
+lv Skaņu celiņš
+
+@ Music Crossfade
+lv Mūzikas pāreja
+
+@ Underwater Muffling
+lv Slāpēšana zem ūdens
+
+@ Environmental Reverb
+lv Vides atbalss
+
+@ Reverb Amount
+lv Atbalss stiprums
+
+@ 3D Binaural Audio
+lv 3D binaurālā skaņa
+
+@ Sound Occlusion
+lv Skaņas aizsegšana
+
+@ Footsteps
+lv Soļi
+
+@ Footstep Volume
+lv Soļu skaļums
+
+@ Ambient
+lv Vide
+
+@ Weapons & Player
+lv Ieroči un spēlētājs
+
+@ Monsters
+lv Briesmoņi
+
+@ World & Pickups
+lv Pasaule un priekšmeti
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ lv Automātiski saglabā, kad paņemat atslēgu
 
 @ Where saves, configs, demos and downloaded map packs are stored
 lv Kur tiek glabāti saglabājumi, konfigurācijas, demo un lejupielādētās karšu pakotnes
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+lv Līmeņu mūzikas paka: Noklusējums lieto aktīvo modu, vai izvēlies citu uzstādītu Quake skaņu celiņu vai savu mapi <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+lv Slāpē skaņu zem ūdens ar dziļu zemfrekvenču filtru
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+lv Pievieno reāllaika telpas atbalsi pēc apkārtējās telpas izmēra un materiāliem
+
+@ How strongly environmental room reverb mixes into world sounds
+lv Cik spēcīgi vides telpas atbalss saplūst ar pasaules skaņām
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+lv Binaurālā 3D telpiskā skaņa austiņām ar ausu aizturi, galvas ēnu un priekšas/aizmugures/augstuma norādēm
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+lv Slāpē un klusina skaņas aiz blīvām sienām un aizvērtām durvīm
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+lv Atskaņo sintezētus soļus un piezemēšanos atbilstoši akmens, metāla, koka, zemes un šķidruma virsmām
+
+@ Volume of synthesized player footsteps and landings
+lv Sintezēto spēlētāja soļu un piezemēšanās skaļums
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+lv Sekundes plūstošai pārejai starp mūzikas ierakstiem; 0 pārslēdz uzreiz
+
+@ Volume of map ambient loops such as wind, water and static world hums
+lv Kartes vides cilpu, piemēram, vēja, ūdens un statiskas dūkoņas skaļums
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+lv Ieroču šāvienu, spēlētāja balsu, soļu un papildu aprīkojuma skaļums
+
+@ Volume of monster alerts, attacks, pain and death sounds
+lv Briesmoņu brīdinājumu, uzbrukumu, sāpju un nāves skaņu skaļums
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+lv Durvju, liftu, slēdžu, priekšmetu pacelšanas un citu pasaules efektu skaļums
 
 # ==== ui.txt ====
 

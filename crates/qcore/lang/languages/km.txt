@@ -1639,6 +1639,49 @@ km រក្សាទុក​ពេល​រើស​សោ
 @ User Data Directory
 km ថត​ទិន្នន័យ​អ្នកប្រើប្រាស់
 
+# Audio enhancements.
+@ Volume Mix
+km លាយ​កម្រិត​សំឡេង
+
+@ Soundtrack
+km ភ្លេង​ប្រកប
+
+@ Music Crossfade
+km ប្តូរ​ភ្លេង​រលូន
+
+@ Underwater Muffling
+km សំឡេង​អាប់​ក្រោម​ទឹក
+
+@ Environmental Reverb
+km សំឡេង​លាន់​បរិស្ថាន
+
+@ Reverb Amount
+km កម្រិត​សំឡេង​លាន់
+
+@ 3D Binaural Audio
+km សំឡេង​ 3D ពីរ​ត្រចៀក
+
+@ Sound Occlusion
+km ការ​បាំង​សំឡេង
+
+@ Footsteps
+km សំឡេង​ជំហាន
+
+@ Footstep Volume
+km កម្រិត​សំឡេង​ជំហាន
+
+@ Ambient
+km បរិស្ថាន
+
+@ Weapons & Player
+km អាវុធ​ និង​អ្នក​លេង
+
+@ Monsters
+km បិសាច
+
+@ World & Pickups
+km ពិភព​ និង​វត្ថុ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ km រក្សាទុក​ស្វ័យប្រវត្តិ​នៅ�
 
 @ Where saves, configs, demos and downloaded map packs are stored
 km កន្លែង​រក្សាទុក​ការរក្សាទុក ការកំណត់ ដេម៉ូ និង​កញ្ចប់​ផែនទី​ដែល​បាន​ទាញយក
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+km កញ្ចប់​ភ្លេង​សម្រាប់​ដំណាក់: លំនាំ​ដើម​ប្រើ​ម៉ូដ​សកម្ម ឬ​ជ្រើស​ភ្លេង​ Quake ផ្សេង ឬ​ថត​ក្នុង <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+km ធ្វើ​ឱ្យ​សំឡេង​អាប់​ដោយ​តម្រង​ប្រេកង់​ទាប​ពេល​នៅ​ក្រោម​ទឹក
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+km បន្ថែម​សំឡេង​លាន់​បន្ទប់​ផ្ទាល់​តាម​ទំហំ​ និង​សម្ភារៈ​នៃ​ទីធ្លា​ជុំវិញ
+
+@ How strongly environmental room reverb mixes into world sounds
+km កម្រិត​ខ្លាំង​នៃ​សំឡេង​លាន់​បរិស្ថាន​ដែល​លាយ​ចូល​សំឡេង​ពិភព
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+km សំឡេង​ 3D សម្រាប់​កាស​មាន​គម្លាត​ពេល​ត្រចៀក ស្រមោល​ក្បាល និង​ទិស​មុខ/ក្រោយ/កម្ពស់
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+km ធ្វើ​ឱ្យ​សំឡេង​ពី​ក្រោយ​ជញ្ជាំង​រឹង​ និង​ទ្វារ​បិទ​អាប់​ និង​ខ្សោយ​ចុះ
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+km ចាក់​សំឡេង​ជំហាន​ និង​ការ​ចុះ​ដី​សំយោគ​តាម​ផ្ទៃ​ថ្ម ដែក ឈើ ដី និង​វត្ថុ​រាវ
+
+@ Volume of synthesized player footsteps and landings
+km កម្រិត​សំឡេង​ជំហាន​ និង​ការ​ចុះ​ដី​សំយោគ​របស់​អ្នក​លេង
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+km វិនាទី​សម្រាប់​ប្តូរ​ភ្លេង​រលូន​រវាង​បទ; 0 ប្តូរ​ភ្លាមៗ
+
+@ Volume of map ambient loops such as wind, water and static world hums
+km កម្រិត​សំឡេង​បរិស្ថាន​ផែនទី ដូចជា ខ្យល់ ទឹក និង​សំឡេង​រងំ​ថេរ
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+km កម្រិត​សំឡេង​បាញ់​អាវុធ សំឡេង​អ្នក​លេង ជំហាន និង​ឧបករណ៍​បន្ថែម
+
+@ Volume of monster alerts, attacks, pain and death sounds
+km កម្រិត​សំឡេង​ព្រមាន វាយ​ប្រហារ ឈឺ​ចាប់ និង​ស្លាប់​របស់​បិសាច
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+km កម្រិត​សំឡេង​ទ្វារ ជណ្តើរ​យន្ត កុងតាក់ រើស​វត្ថុ និង​ផល​ពិភព​ផ្សេងៗ
 
 # ==== ui.txt ====
 

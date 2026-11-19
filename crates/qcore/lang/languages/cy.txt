@@ -1639,6 +1639,49 @@ cy Cadw wrth godi allwedd
 @ User Data Directory
 cy Cyfeiriadur Data Defnyddiwr
 
+# Audio enhancements.
+@ Volume Mix
+cy Cymysgedd Sain
+
+@ Soundtrack
+cy Trac Sain
+
+@ Music Crossfade
+cy Trawsbylu Cerddoriaeth
+
+@ Underwater Muffling
+cy Tewi Dan Ddŵr
+
+@ Environmental Reverb
+cy Atseinio Amgylcheddol
+
+@ Reverb Amount
+cy Cryfder Atseinio
+
+@ 3D Binaural Audio
+cy Sain Ddeuglust 3D
+
+@ Sound Occlusion
+cy Rhwystro Sain
+
+@ Footsteps
+cy Camau
+
+@ Footstep Volume
+cy Lefel Camau
+
+@ Ambient
+cy Amgylchedd
+
+@ Weapons & Player
+cy Arfau a Chwaraewr
+
+@ Monsters
+cy Anghenfilod
+
+@ World & Pickups
+cy Byd ac Eitemau
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ cy Yn awto-gadw pan fyddwch yn codi allwedd
 
 @ Where saves, configs, demos and downloaded map packs are stored
 cy Lle mae cadwadau, ffurfweddiadau, demos a phecynnau mapiau wedi'u lawrlwytho yn cael eu storio
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+cy Pecyn cerddoriaeth ar gyfer lefelau: mae Rhagosodedig yn defnyddio'r mod gweithredol, neu dewiswch drac sain Quake arall neu ffolder yn <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+cy Yn tewi sain gyda hidlydd pas-isel dwfn dan ddŵr
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+cy Yn ychwanegu atseinio ystafell amser real yn ôl maint a deunyddiau'r gofod o'ch cwmpas
+
+@ How strongly environmental room reverb mixes into world sounds
+cy Pa mor gryf mae atseinio'r ystafell yn cymysgu i synau'r byd
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+cy Sain ofodol ddeuglust 3D ar gyfer clustffonau gydag oedi clust, cysgod pen ac arwyddion blaen/cefn/uchder
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+cy Yn tewi ac yn gostwng synau sy'n dod o du ôl i waliau solet a drysau caeëdig
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+cy Yn chwarae camau a glaniadau synthetig wedi'u paru â charreg, metel, pren, pridd a hylifau
+
+@ Volume of synthesized player footsteps and landings
+cy Lefel sain camau a glaniadau synthetig y chwaraewr
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+cy Eiliadau i bylu'n llyfn rhwng traciau cerddoriaeth; mae 0 yn newid ar unwaith
+
+@ Volume of map ambient loops such as wind, water and static world hums
+cy Lefel dolenni amgylcheddol y map fel gwynt, dŵr a suo statig
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+cy Lefel tanio arfau, lleisiau'r chwaraewr, camau ac offer ychwanegol
+
+@ Volume of monster alerts, attacks, pain and death sounds
+cy Lefel rhybuddion, ymosodiadau, poen a marwolaeth anghenfilod
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+cy Lefel drysau, lifftiau, switshis, codi eitemau ac effeithiau byd eraill
 
 # ==== ui.txt ====
 

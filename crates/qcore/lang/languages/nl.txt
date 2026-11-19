@@ -1639,6 +1639,49 @@ nl Opslaan bij oppakken sleutel
 @ User Data Directory
 nl Gebruikersgegevensmap
 
+# Audio enhancements.
+@ Volume Mix
+nl Volumemix
+
+@ Soundtrack
+nl Soundtrack
+
+@ Music Crossfade
+nl Muziek-overvloeiing
+
+@ Underwater Muffling
+nl Onderwaterdemping
+
+@ Environmental Reverb
+nl Omgevingsgalm
+
+@ Reverb Amount
+nl Galmsterkte
+
+@ 3D Binaural Audio
+nl 3D-binaurale audio
+
+@ Sound Occlusion
+nl Geluidsocclusie
+
+@ Footsteps
+nl Voetstappen
+
+@ Footstep Volume
+nl Voetstapvolume
+
+@ Ambient
+nl Omgeving
+
+@ Weapons & Player
+nl Wapens en speler
+
+@ Monsters
+nl Monsters
+
+@ World & Pickups
+nl Wereld en voorwerpen
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ nl Slaat automatisch op wanneer je een sleutel oppakt
 
 @ Where saves, configs, demos and downloaded map packs are stored
 nl Waar opslagbestanden, instellingen, demo's en gedownloade mappakketten worden opgeslagen
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+nl Muziekpakket voor levelnummers: Standaard gebruikt de actieve mod, of kies een andere geïnstalleerde Quake-soundtrack of eigen map in <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+nl Dempt geluid onder water met een diep laagdoorlaatfilter
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+nl Voegt realtime ruimtegalm toe op basis van de grootte en materialen van de omgeving
+
+@ How strongly environmental room reverb mixes into world sounds
+nl Hoe sterk omgevingsgalm wordt gemengd in wereldgeluiden
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+nl Binaurale 3D-ruimtelijkheid voor koptelefoons met oorvertraging, hoofdschaduw en voor/achter/hoogte-aanwijzingen
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+nl Dempt en verzacht geluiden achter massieve muren en gesloten deuren
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+nl Speelt gesynthetiseerde voetstappen en landingen af voor steen, metaal, hout, aarde en vloeistof
+
+@ Volume of synthesized player footsteps and landings
+nl Volume van gesynthetiseerde voetstappen en landingen
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+nl Seconden om vloeiend over te gaan tussen muzieknummers; 0 schakelt direct
+
+@ Volume of map ambient loops such as wind, water and static world hums
+nl Volume van omgevingsloops zoals wind, water en statisch gezoem
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+nl Volume van wapenvuur, spelerstemmen, voetstappen en extra uitrusting
+
+@ Volume of monster alerts, attacks, pain and death sounds
+nl Volume van waarschuwingen, aanvallen, pijn en doodsgeluiden van monsters
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+nl Volume van deuren, liften, schakelaars, voorwerpen en andere wereldeffecten
 
 # ==== ui.txt ====
 

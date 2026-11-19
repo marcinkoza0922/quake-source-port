@@ -1639,6 +1639,49 @@ pa ਚਾਬੀ ਚੁੱਕਣ 'ਤੇ ਸੇਵ ਕਰੋ
 @ User Data Directory
 pa ਯੂਜ਼ਰ ਡਾਟਾ ਡਾਇਰੈਕਟਰੀ
 
+# Audio enhancements.
+@ Volume Mix
+pa ਵਾਲੀਅਮ ਮਿਕਸ
+
+@ Soundtrack
+pa ਸਾਊਂਡਟ੍ਰੈਕ
+
+@ Music Crossfade
+pa ਸੰਗੀਤ ਕਰਾਸਫੇਡ
+
+@ Underwater Muffling
+pa ਪਾਣੀ ਹੇਠਾਂ ਦੱਬੀ ਆਵਾਜ਼
+
+@ Environmental Reverb
+pa ਮਾਹੌਲ ਗੂੰਜ
+
+@ Reverb Amount
+pa ਗੂੰਜ ਦੀ ਮਾਤਰਾ
+
+@ 3D Binaural Audio
+pa 3D ਬਾਈਨੌਰਲ ਆਡੀਓ
+
+@ Sound Occlusion
+pa ਆਵਾਜ਼ ਰੁਕਾਵਟ
+
+@ Footsteps
+pa ਕਦਮਾਂ ਦੀ ਆਵਾਜ਼
+
+@ Footstep Volume
+pa ਕਦਮਾਂ ਦਾ ਵਾਲੀਅਮ
+
+@ Ambient
+pa ਮਾਹੌਲ
+
+@ Weapons & Player
+pa ਹਥਿਆਰ ਅਤੇ ਖਿਡਾਰੀ
+
+@ Monsters
+pa ਰਾਖਸ਼
+
+@ World & Pickups
+pa ਦੁਨੀਆ ਅਤੇ ਚੀਜ਼ਾਂ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ pa ਚਾਬੀ ਚੁੱਕਣ 'ਤੇ ਆਪਣੇ ਆਪ ਸੇਵ ਕਰਦ�
 
 @ Where saves, configs, demos and downloaded map packs are stored
 pa ਜਿੱਥੇ ਸੇਵ, ਕੌਨਫਿਗ, ਡੈਮੋ ਅਤੇ ਡਾਊਨਲੋਡ ਕੀਤੇ ਮੈਪ ਪੈਕ ਸਟੋਰ ਹੁੰਦੇ ਹਨ
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+pa ਲੈਵਲ ਟਰੈਕਾਂ ਲਈ ਸੰਗੀਤ ਪੈਕ: ਡਿਫਾਲਟ ਸਰਗਰਮ ਮੋਡ ਵਰਤਦਾ ਹੈ, ਜਾਂ ਕੋਈ ਹੋਰ Quake ਸਾਊਂਡਟ੍ਰੈਕ ਜਾਂ <user data>/music ਫੋਲਡਰ ਚੁਣੋ
+
+@ Muffles sound with a deep low-pass filter while underwater
+pa ਪਾਣੀ ਦੇ ਅੰਦਰ ਡੂੰਘੇ ਲੋ-ਪਾਸ ਫਿਲਟਰ ਨਾਲ ਆਵਾਜ਼ ਨੂੰ ਦਬਾਉਂਦਾ ਹੈ
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+pa ਆਲੇ-ਦੁਆਲੇ ਦੀ ਥਾਂ ਦੇ ਆਕਾਰ ਅਤੇ ਸਮੱਗਰੀ ਅਨੁਸਾਰ ਰੀਅਲ-ਟਾਈਮ ਕਮਰੇ ਦੀ ਗੂੰਜ ਜੋੜਦਾ ਹੈ
+
+@ How strongly environmental room reverb mixes into world sounds
+pa ਮਾਹੌਲ ਦੀ ਗੂੰਜ ਦੁਨੀਆ ਦੀਆਂ ਆਵਾਜ਼ਾਂ ਵਿੱਚ ਕਿੰਨੀ ਤੇਜ਼ੀ ਨਾਲ ਮਿਲਦੀ ਹੈ
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+pa ਹੈੱਡਫੋਨਾਂ ਲਈ ਕੰਨਾਂ ਦੇ ਸਮੇਂ, ਸਿਰ ਦੇ ਪਰਛਾਵੇਂ ਅਤੇ ਅੱਗੇ/ਪਿੱਛੇ/ਉਚਾਈ ਦੇ ਸੰਕੇਤਾਂ ਨਾਲ 3D ਆਵਾਜ਼
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+pa ਠੋਸ ਕੰਧਾਂ ਅਤੇ ਬੰਦ ਦਰਵਾਜ਼ਿਆਂ ਦੇ ਪਿੱਛੇ ਤੋਂ ਆਉਂਦੀਆਂ ਆਵਾਜ਼ਾਂ ਨੂੰ ਦਬਾਉਂਦਾ ਅਤੇ ਧੀਮਾ ਕਰਦਾ ਹੈ
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+pa ਪੱਥਰ, ਧਾਤ, ਲੱਕੜ, ਮਿੱਟੀ ਅਤੇ ਤਰਲ ਫਰਸ਼ ਅਨੁਸਾਰ ਤਿਆਰ ਕਦਮਾਂ ਅਤੇ ਉਤਰਨ ਦੀਆਂ ਆਵਾਜ਼ਾਂ ਚਲਾਉਂਦਾ ਹੈ
+
+@ Volume of synthesized player footsteps and landings
+pa ਖਿਡਾਰੀ ਦੇ ਤਿਆਰ ਕਦਮਾਂ ਅਤੇ ਉਤਰਨ ਦਾ ਵਾਲੀਅਮ
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+pa ਸੰਗੀਤ ਟਰੈਕਾਂ ਵਿਚਕਾਰ ਨਰਮ ਬਦਲਾਅ ਦੇ ਸਕਿੰਟ; 0 ਤੁਰੰਤ ਬਦਲਦਾ ਹੈ
+
+@ Volume of map ambient loops such as wind, water and static world hums
+pa ਨਕਸ਼ੇ ਦੀ ਹਵਾ, ਪਾਣੀ ਅਤੇ ਸਥਿਰ ਗੂੰਜ ਵਰਗੀਆਂ ਮਾਹੌਲ ਆਵਾਜ਼ਾਂ ਦਾ ਵਾਲੀਅਮ
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+pa ਹਥਿਆਰਾਂ ਦੀ ਫਾਇਰਿੰਗ, ਖਿਡਾਰੀ ਦੀਆਂ ਆਵਾਜ਼ਾਂ, ਕਦਮਾਂ ਅਤੇ ਵਾਧੂ ਸਾਜ਼ੋ-ਸਾਮਾਨ ਦਾ ਵਾਲੀਅਮ
+
+@ Volume of monster alerts, attacks, pain and death sounds
+pa ਰਾਖਸ਼ਾਂ ਦੀਆਂ ਚੇਤਾਵਨੀਆਂ, ਹਮਲਿਆਂ, ਦਰਦ ਅਤੇ ਮੌਤ ਦੀਆਂ ਆਵਾਜ਼ਾਂ ਦਾ ਵਾਲੀਅਮ
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+pa ਦਰਵਾਜ਼ਿਆਂ, ਲਿਫਟਾਂ, ਸਵਿੱਚਾਂ, ਚੀਜ਼ਾਂ ਚੁੱਕਣ ਅਤੇ ਹੋਰ ਦੁਨੀਆ ਦੇ ਪ੍ਰਭਾਵਾਂ ਦਾ ਵਾਲੀਅਮ
 
 # ==== ui.txt ====
 

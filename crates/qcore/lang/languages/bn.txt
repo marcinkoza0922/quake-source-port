@@ -1639,6 +1639,49 @@ bn চাবি তোলার সময় সংরক্ষণ
 @ User Data Directory
 bn ব্যবহারকারীর ডেটা ডিরেক্টরি
 
+# Audio enhancements.
+@ Volume Mix
+bn ভলিউম মিক্স
+
+@ Soundtrack
+bn সাউন্ডট্র্যাক
+
+@ Music Crossfade
+bn সঙ্গীত ক্রসফেড
+
+@ Underwater Muffling
+bn পানির নিচে চাপা শব্দ
+
+@ Environmental Reverb
+bn পরিবেশ প্রতিধ্বনি
+
+@ Reverb Amount
+bn প্রতিধ্বনির মাত্রা
+
+@ 3D Binaural Audio
+bn 3D বাইনরাল অডিও
+
+@ Sound Occlusion
+bn শব্দ বাধা
+
+@ Footsteps
+bn পায়ের শব্দ
+
+@ Footstep Volume
+bn পায়ের শব্দের মাত্রা
+
+@ Ambient
+bn পরিবেশ
+
+@ Weapons & Player
+bn অস্ত্র ও খেলোয়াড়
+
+@ Monsters
+bn দানব
+
+@ World & Pickups
+bn জগৎ ও সামগ্রী
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ bn চাবি তুললে স্বয়ংক্রিয়ভাবে
 
 @ Where saves, configs, demos and downloaded map packs are stored
 bn যেখানে সেভ, কনফিগ, ডেমো এবং ডাউনলোড করা ম্যাপ প্যাক সংরক্ষিত হয়
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+bn লেভেল গানের মিউজিক প্যাক: ডিফল্ট সক্রিয় মড ব্যবহার করে, অথবা অন্য Quake সাউন্ডট্র্যাক বা <user data>/music ফোল্ডার বেছে নিন
+
+@ Muffles sound with a deep low-pass filter while underwater
+bn পানির নিচে গভীর লো-পাস ফিল্টার দিয়ে শব্দ চাপা করে দেয়
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+bn চারপাশের স্থানের আকার ও উপাদান অনুযায়ী রিয়েল-টাইম ঘরের প্রতিধ্বনি যোগ করে
+
+@ How strongly environmental room reverb mixes into world sounds
+bn পরিবেশের প্রতিধ্বনি জগতের শব্দের সাথে কতটা মিশে যায়
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+bn হেডফোনের জন্য কানের সময়, মাথার ছায়া ও সামনে/পিছনে/উচ্চতার ইঙ্গিতসহ 3D বাইনরাল শব্দ
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+bn শক্ত দেয়াল ও বন্ধ দরজার পেছন থেকে আসা শব্দ চাপা ও মৃদু করে
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+bn পাথর, ধাতু, কাঠ, মাটি ও তরল মেঝে অনুযায়ী তৈরি পায়ের শব্দ ও নামার ধ্বনি বাজায়
+
+@ Volume of synthesized player footsteps and landings
+bn খেলোয়াড়ের তৈরি পায়ের শব্দ ও নামার ভলিউম
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+bn সঙ্গীত ট্র্যাকের মধ্যে মসৃণ পরিবর্তনের সেকেন্ড; 0 সাথে সাথে বদলায়
+
+@ Volume of map ambient loops such as wind, water and static world hums
+bn মানচিত্রের বাতাস, পানি ও স্থির গুঞ্জনের মতো পরিবেশ লুপের ভলিউম
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+bn অস্ত্রের গুলি, খেলোয়াড়ের কণ্ঠ, পায়ের শব্দ ও অতিরিক্ত সরঞ্জামের ভলিউম
+
+@ Volume of monster alerts, attacks, pain and death sounds
+bn দানবদের সতর্কতা, আক্রমণ, ব্যথা ও মৃত্যুর শব্দের ভলিউম
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+bn দরজা, লিফট, সুইচ, বস্তু সংগ্রহ ও অন্যান্য জগতের শব্দের ভলিউম
 
 # ==== ui.txt ====
 

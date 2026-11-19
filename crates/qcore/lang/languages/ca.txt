@@ -1639,6 +1639,49 @@ ca Desa en recollir una clau
 @ User Data Directory
 ca Directori de dades d'usuari
 
+# Audio enhancements.
+@ Volume Mix
+ca Mescla de volum
+
+@ Soundtrack
+ca Banda sonora
+
+@ Music Crossfade
+ca Transició de música
+
+@ Underwater Muffling
+ca Esmorteïment subaquàtic
+
+@ Environmental Reverb
+ca Reverberació ambiental
+
+@ Reverb Amount
+ca Intensitat de reverberació
+
+@ 3D Binaural Audio
+ca Àudio binaural 3D
+
+@ Sound Occlusion
+ca Oclusió sonora
+
+@ Footsteps
+ca Passos
+
+@ Footstep Volume
+ca Volum dels passos
+
+@ Ambient
+ca Ambient
+
+@ Weapons & Player
+ca Armes i jugador
+
+@ Monsters
+ca Monstres
+
+@ World & Pickups
+ca Món i objectes
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ ca Desa automàticament quan reculls una clau
 
 @ Where saves, configs, demos and downloaded map packs are stored
 ca On es desen les partides, configuracions, demos i paquets de mapes baixats
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+ca Paquet musical per als nivells: Per defecte usa el mod actiu, o tria una altra banda sonora de Quake o una carpeta a <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+ca Esmorteeix el so amb un filtre passabaix profund sota l'aigua
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+ca Afegeix reverberació de sala en temps real segons la mida i els materials de l'espai circumdant
+
+@ How strongly environmental room reverb mixes into world sounds
+ca Amb quina força es mescla la reverberació ambiental als sons del món
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+ca Espacialització binaural 3D per a auriculars amb retard entre orelles, ombra del cap i pistes davant/darrere/alçada
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+ca Esmorteeix i abaixa els sons que provenen de darrere de parets sòlides i portes tancades
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ca Reprodueix passos i aterratges sintetitzats adaptats a pedra, metall, fusta, terra i líquids
+
+@ Volume of synthesized player footsteps and landings
+ca Volum dels passos i aterratges sintetitzats del jugador
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+ca Segons per fondre suaument entre pistes musicals; 0 canvia a l'instant
+
+@ Volume of map ambient loops such as wind, water and static world hums
+ca Volum dels bucles ambientals del mapa com vent, aigua i brunzits estàtics
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+ca Volum dels trets d'armes, veus del jugador, passos i equipament addicional
+
+@ Volume of monster alerts, attacks, pain and death sounds
+ca Volum d'alertes, atacs, dolor i mort dels monstres
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+ca Volum de portes, ascensors, interruptors, recollida d'objectes i altres efectes del món
 
 # ==== ui.txt ====
 

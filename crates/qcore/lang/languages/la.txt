@@ -1639,6 +1639,49 @@ la Serva clave capta
 @ User Data Directory
 la Directorium Datorum Usoris
 
+# Audio enhancements.
+@ Volume Mix
+la Mixtura Voluminis
+
+@ Soundtrack
+la Musica Operis
+
+@ Music Crossfade
+la Transitio Musicae
+
+@ Underwater Muffling
+la Suppressio Subaquatica
+
+@ Environmental Reverb
+la Resonantia Ambientis
+
+@ Reverb Amount
+la Vis Resonantiae
+
+@ 3D Binaural Audio
+la Sonus Binauralis 3D
+
+@ Sound Occlusion
+la Occlusio Soni
+
+@ Footsteps
+la Passus
+
+@ Footstep Volume
+la Volumen Passuum
+
+@ Ambient
+la Ambiens
+
+@ Weapons & Player
+la Arma et Lusor
+
+@ Monsters
+la Monstra
+
+@ World & Pickups
+la Mundus et Res
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ la Sponte servat cum clavem capis
 
 @ Where saves, configs, demos and downloaded map packs are stored
 la Ubi servata, configurationes, demonstrationes et fasciculi tabularum conduntur
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+la Fasciculus musicus pro gradibus: Praedefinitus modum activum adhibet, vel aliam musicam Quake aut capsam in <user data>/music elige
+
+@ Muffles sound with a deep low-pass filter while underwater
+la Sonum sub aqua filtro profundo sonorum gravium hebetat
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+la Resonantiam conclavis in tempore reali secundum magnitudinem et materias spatii addit
+
+@ How strongly environmental room reverb mixes into world sounds
+la Quam fortiter resonantia ambientis sonis mundi misceatur
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+la Spatialisatio binauralis 3D pro auricularibus cum mora aurium, umbra capitis et indiciis ante/retro/altitudinis
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+la Sonos post muros solidos et ianuas clausas hebetat et minuit
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+la Passus et casus syntheticos pro lapide, metallo, ligno, terra et liquidis edit
+
+@ Volume of synthesized player footsteps and landings
+la Volumen passuum et casuum syntheticorum lusoris
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+la Secunda ad transitum lenem inter carmina; 0 statim mutat
+
+@ Volume of map ambient loops such as wind, water and static world hums
+la Volumen sonorum ambientium tabulae ut venti, aquae et fremitus statici
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+la Volumen telorum, vocum lusoris, passuum et apparatus additi
+
+@ Volume of monster alerts, attacks, pain and death sounds
+la Volumen clamorum, impetuum, doloris et mortis monstrorum
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+la Volumen ianuarum, elevatorum, clavium, rerum captarum et aliorum effectuum mundi
 
 # ==== ui.txt ====
 

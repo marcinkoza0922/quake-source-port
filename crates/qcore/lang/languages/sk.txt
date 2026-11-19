@@ -1639,6 +1639,49 @@ sk Uložiť pri zobratí kľúča
 @ User Data Directory
 sk Priečinok používateľských údajov
 
+# Audio enhancements.
+@ Volume Mix
+sk Mix hlasitosti
+
+@ Soundtrack
+sk Soundtrack
+
+@ Music Crossfade
+sk Prelínanie hudby
+
+@ Underwater Muffling
+sk Tlmenie pod vodou
+
+@ Environmental Reverb
+sk Priestorový dozvuk
+
+@ Reverb Amount
+sk Sila dozvuku
+
+@ 3D Binaural Audio
+sk 3D binaurálny zvuk
+
+@ Sound Occlusion
+sk Oklúzia zvuku
+
+@ Footsteps
+sk Kroky
+
+@ Footstep Volume
+sk Hlasitosť krokov
+
+@ Ambient
+sk Prostredie
+
+@ Weapons & Player
+sk Zbrane a hráč
+
+@ Monsters
+sk Príšery
+
+@ World & Pickups
+sk Svet a predmety
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ sk Automaticky uloží hru pri zobratí kľúča
 
 @ Where saves, configs, demos and downloaded map packs are stored
 sk Kde sú uložené pozície, nastavenia, demá a stiahnuté balíky máp
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+sk Hudobný balík pre úrovne: Predvolený použije aktívny mod, alebo vyberte iný soundtrack Quake či vlastný priečinok v <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+sk Tlmí zvuk hlbokým dolnopriepustným filtrom pod vodou
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+sk Pridáva dozvuk v reálnom čase tvarovaný veľkosťou a materiálmi okolitého priestoru
+
+@ How strongly environmental room reverb mixes into world sounds
+sk Ako silno sa priestorový dozvuk mieša do zvukov sveta
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+sk Binaurálny 3D priestorový zvuk pre slúchadlá s časovaním uší, tieňom hlavy a smerom vpred/vzad/výška
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+sk Tlmí a stišuje zvuky prichádzajúce spoza pevných stien a zatvorených dverí
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+sk Prehráva syntetizované kroky a dopady hráča podľa kameňa, kovu, dreva, zeme a kvapalín
+
+@ Volume of synthesized player footsteps and landings
+sk Hlasitosť syntetizovaných krokov a dopadov hráča
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+sk Sekundy plynulého prelínania medzi skladbami; 0 prepne okamžite
+
+@ Volume of map ambient loops such as wind, water and static world hums
+sk Hlasitosť okolitých slučiek mapy ako vietor, voda a statické hučanie
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+sk Hlasitosť streľby, hlasov hráča, krokov a doplnkovej výbavy
+
+@ Volume of monster alerts, attacks, pain and death sounds
+sk Hlasitosť varovaní, útokov, bolesti a smrti príšer
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+sk Hlasitosť dverí, výťahov, spínačov, zbierania predmetov a iných efektov sveta
 
 # ==== ui.txt ====
 

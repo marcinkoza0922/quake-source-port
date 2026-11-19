@@ -1639,6 +1639,49 @@ zh-CN 拾取钥匙时保存
 @ User Data Directory
 zh-CN 用户数据目录
 
+# Audio enhancements.
+@ Volume Mix
+zh-CN 音量混合
+
+@ Soundtrack
+zh-CN 原声音乐
+
+@ Music Crossfade
+zh-CN 音乐淡入淡出
+
+@ Underwater Muffling
+zh-CN 水下闷音
+
+@ Environmental Reverb
+zh-CN 环境混响
+
+@ Reverb Amount
+zh-CN 混响强度
+
+@ 3D Binaural Audio
+zh-CN 3D双耳音效
+
+@ Sound Occlusion
+zh-CN 声音遮挡
+
+@ Footsteps
+zh-CN 脚步声
+
+@ Footstep Volume
+zh-CN 脚步声音量
+
+@ Ambient
+zh-CN 环境音
+
+@ Weapons & Player
+zh-CN 武器与玩家
+
+@ Monsters
+zh-CN 怪物
+
+@ World & Pickups
+zh-CN 世界与物品
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ zh-CN 拾取钥匙时自动保存
 
 @ Where saves, configs, demos and downloaded map packs are stored
 zh-CN 存档、配置、录像和已下载地图包的保存位置
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+zh-CN 关卡音乐包：默认使用当前模组，也可选择其他已安装的 Quake 原声或 <user data>/music 中的自定义文件夹
+
+@ Muffles sound with a deep low-pass filter while underwater
+zh-CN 在水下使用深度低通滤波器使声音变闷
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+zh-CN 根据周围空间的大小与材质添加实时房间混响
+
+@ How strongly environmental room reverb mixes into world sounds
+zh-CN 环境房间混响混入世界声音的强度
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+zh-CN 面向耳机的3D双耳空间音效，具备双耳时间差、头部声影与前后上下定位提示
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+zh-CN 使来自实体墙壁和关闭门后的声音变闷并变小
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+zh-CN 根据石头、金属、木头、泥土与液体地面播放合成脚步声和落地声
+
+@ Volume of synthesized player footsteps and landings
+zh-CN 合成玩家脚步声和落地声的音量
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+zh-CN 音乐曲目之间平滑淡入淡出的秒数；0 为立即切换
+
+@ Volume of map ambient loops such as wind, water and static world hums
+zh-CN 地图风声、水声和静态环境循环音的音量
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+zh-CN 武器开火、玩家语音、脚步声和附加装备的音量
+
+@ Volume of monster alerts, attacks, pain and death sounds
+zh-CN 怪物警觉、攻击、受伤和死亡音效的音量
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+zh-CN 门、升降梯、开关、物品拾取及其他世界音效的音量
 
 # ==== ui.txt ====
 

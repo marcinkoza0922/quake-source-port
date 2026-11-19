@@ -1639,6 +1639,49 @@ fi Tallenna avainta poimiessa
 @ User Data Directory
 fi Käyttäjätietokansio
 
+# Audio enhancements.
+@ Volume Mix
+fi Äänenvoimakkuusmiksaus
+
+@ Soundtrack
+fi Ääniraita
+
+@ Music Crossfade
+fi Musiikin häivytys
+
+@ Underwater Muffling
+fi Vedenalainen vaimennus
+
+@ Environmental Reverb
+fi Ympäristökaiku
+
+@ Reverb Amount
+fi Kaiun määrä
+
+@ 3D Binaural Audio
+fi 3D-binauraalinen ääni
+
+@ Sound Occlusion
+fi Äänen peitto
+
+@ Footsteps
+fi Askeleet
+
+@ Footstep Volume
+fi Askelten voimakkuus
+
+@ Ambient
+fi Ympäristö
+
+@ Weapons & Player
+fi Aseet ja pelaaja
+
+@ Monsters
+fi Hirviöt
+
+@ World & Pickups
+fi Maailma ja esineet
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ fi Tallentaa automaattisesti, kun poimit avaimen
 
 @ Where saves, configs, demos and downloaded map packs are stored
 fi Missä tallennukset, asetukset, demot ja ladatut karttapaketit sijaitsevat
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+fi Tason musiikkipaketti: Oletus käyttää aktiivista modia, tai valitse toinen asennettu Quake-ääniraita tai oma kansio polussa <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+fi Vaimentaa ääntä syvällä alipäästösuotimella veden alla
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+fi Lisää reaaliaikaisen tilakaiun ympäröivän tilan koon ja materiaalien mukaan
+
+@ How strongly environmental room reverb mixes into world sounds
+fi Kuinka voimakkaasti tilakaiku sekoittuu maailman ääniin
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+fi Binauraalinen 3D-tilaääni kuulokkeille korvaviiveellä, pään varjostuksella ja etu/taka/korkeusvihjeillä
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+fi Vaimentaa ja hiljentää ääniä kiinteiden seinien ja suljettujen ovien takaa
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+fi Toistaa syntetisoidut askeleet ja laskeutumiset kivi-, metalli-, puu-, maa- ja nestepinnoille
+
+@ Volume of synthesized player footsteps and landings
+fi Syntetisoitujen askelten ja laskeutumisten äänenvoimakkuus
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+fi Sekuntia pehmeään ristiinhäivytykseen kappaleiden välillä; 0 vaihtaa heti
+
+@ Volume of map ambient loops such as wind, water and static world hums
+fi Kartan ympäristösilmukoiden, kuten tuulen, veden ja hurinan voimakkuus
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+fi Aseiden tulituksen, pelaajan äänten, askelten ja lisävarusteiden voimakkuus
+
+@ Volume of monster alerts, attacks, pain and death sounds
+fi Hirviöiden hälytysten, hyökkäysten, kivun ja kuoleman äänten voimakkuus
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+fi Ovien, hissien, kytkinten, esineiden poiminnan ja muiden maailman tehosteiden voimakkuus
 
 # ==== ui.txt ====
 

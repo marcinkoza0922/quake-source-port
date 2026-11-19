@@ -1639,6 +1639,49 @@ he שמירה בעת איסוף מפתח
 @ User Data Directory
 he תיקיית נתוני משתמש
 
+# Audio enhancements.
+@ Volume Mix
+he מיקס עוצמות
+
+@ Soundtrack
+he פסקול
+
+@ Music Crossfade
+he מעבר מוזיקה חלק
+
+@ Underwater Muffling
+he עמעום מתחת למים
+
+@ Environmental Reverb
+he הדהוד סביבתי
+
+@ Reverb Amount
+he עוצמת הדהוד
+
+@ 3D Binaural Audio
+he שמע תלת-ממדי בינאורלי
+
+@ Sound Occlusion
+he חסימת קול
+
+@ Footsteps
+he צעדים
+
+@ Footstep Volume
+he עוצמת צעדים
+
+@ Ambient
+he סביבה
+
+@ Weapons & Player
+he נשקים ושחקן
+
+@ Monsters
+he מפלצות
+
+@ World & Pickups
+he עולם ופריטים
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ he שומר אוטומטית בעת איסוף מפתח
 
 @ Where saves, configs, demos and downloaded map packs are stored
 he היכן נשמרים קובצי שמירה, הגדרות, הדגמות וחבילות מפות שהורדו
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+he חבילת מוזיקה לשלבים: ברירת מחדל משתמשת במוד הפעיל, או בחר פסקול Quake מותקן אחר או תיקייה מותאמת ב-<user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+he מעמעם צליל באמצעות מסנן תדרים נמוכים עמוק מתחת למים
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+he מוסיף הדהוד חדר בזמן אמת המעוצב לפי גודל וחומרי החלל הסובב
+
+@ How strongly environmental room reverb mixes into world sounds
+he עד כמה חזק הדהוד הסביבה מתערבב בצלילי העולם
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+he מיקום שמע תלת-ממדי לאוזניות עם הפרשי זמן באוזניים, צל ראש ורמזי קדימה/אחורה/גובה
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+he מעמעם ומנמיך צלילים המגיעים מאחורי קירות מוצקים ודלתות סגורות
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+he משמיע צעדי שחקן ונחיתות מסונתזים המתאימים לאבן, מתכת, עץ, עפר ונוזלים
+
+@ Volume of synthesized player footsteps and landings
+he עוצמת הצעדים והנחיתות המסונתזים של השחקן
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+he שניות למעבר חלק בין רצועות מוזיקה; 0 מחליף מיד
+
+@ Volume of map ambient loops such as wind, water and static world hums
+he עוצמת לולאות סביבה במפה כגון רוח, מים וזמזום קבוע
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+he עוצמת ירי נשקים, קולות שחקן, צעדים וציוד נוסף
+
+@ Volume of monster alerts, attacks, pain and death sounds
+he עוצמת התראות, התקפות, כאב ומוות של מפלצות
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+he עוצמת דלתות, מעליות, מתגים, איסוף פריטים ואפקטים אחרים בעולם
 
 # ==== ui.txt ====
 

@@ -1639,6 +1639,49 @@ fil I-save kapag kumuha ng susi
 @ User Data Directory
 fil Direktoryo ng Data ng User
 
+# Audio enhancements.
+@ Volume Mix
+fil Halo ng Lakas
+
+@ Soundtrack
+fil Soundtrack
+
+@ Music Crossfade
+fil Crossfade ng Musika
+
+@ Underwater Muffling
+fil Pampahina sa Ilalim ng Tubig
+
+@ Environmental Reverb
+fil Reverb ng Paligid
+
+@ Reverb Amount
+fil Lakas ng Reverb
+
+@ 3D Binaural Audio
+fil 3D Binaural na Audio
+
+@ Sound Occlusion
+fil Pagharang ng Tunog
+
+@ Footsteps
+fil Mga Hakbang
+
+@ Footstep Volume
+fil Lakas ng Hakbang
+
+@ Ambient
+fil Paligid
+
+@ Weapons & Player
+fil Sandata at Manlalaro
+
+@ Monsters
+fil Mga Halimaw
+
+@ World & Pickups
+fil Mundo at Item
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ fil Awtomatikong nagse-save kapag kumuha ka ng susi
 
 @ Where saves, configs, demos and downloaded map packs are stored
 fil Kung saan nakaimbak ang mga save, config, demo, at na-download na map pack
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+fil Pack ng musika para sa mga level: Default ang aktibong mod, o pumili ng ibang Quake soundtrack o sariling folder sa <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+fil Pinapahina at pinapalalim ang tunog gamit ang low-pass filter sa ilalim ng tubig
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+fil Nagdaragdag ng real-time na reverb ayon sa laki at materyales ng paligid
+
+@ How strongly environmental room reverb mixes into world sounds
+fil Gaano kalakas humahalo ang reverb ng paligid sa mga tunog ng mundo
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+fil 3D binaural spatialization para sa headphones na may oras ng tainga, anino ng ulo, at harap/likod/taas
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+fil Pinapahina at pinapalamig ang mga tunog sa likod ng matibay na pader at nakasarang pinto
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+fil Nagpapatugtog ng sintetikong hakbang at paglapag para sa bato, metal, kahoy, lupa at likido
+
+@ Volume of synthesized player footsteps and landings
+fil Lakas ng sintetikong hakbang at paglapag ng manlalaro
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+fil Segundo ng maayos na paglipat sa pagitan ng mga tugtog; 0 ang agarang palit
+
+@ Volume of map ambient loops such as wind, water and static world hums
+fil Lakas ng mga ambient loop ng mapa tulad ng hangin, tubig at ugong
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+fil Lakas ng putok ng sandata, boses ng manlalaro, hakbang at dagdag na gamit
+
+@ Volume of monster alerts, attacks, pain and death sounds
+fil Lakas ng babala, atake, sakit at pagkamatay ng mga halimaw
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+fil Lakas ng mga pinto, lift, switch, pagkuha ng item at iba pang tunog ng mundo
 
 # ==== ui.txt ====
 

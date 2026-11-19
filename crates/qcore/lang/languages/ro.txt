@@ -1639,6 +1639,49 @@ ro Salvează la ridicarea unei chei
 @ User Data Directory
 ro Director de date utilizator
 
+# Audio enhancements.
+@ Volume Mix
+ro Mix volum
+
+@ Soundtrack
+ro Coloană sonoră
+
+@ Music Crossfade
+ro Tranziție muzică
+
+@ Underwater Muffling
+ro Atenuare subacvatică
+
+@ Environmental Reverb
+ro Reverberație ambientală
+
+@ Reverb Amount
+ro Intensitate reverberație
+
+@ 3D Binaural Audio
+ro Audio binaural 3D
+
+@ Sound Occlusion
+ro Ocluzie sonoră
+
+@ Footsteps
+ro Pași
+
+@ Footstep Volume
+ro Volum pași
+
+@ Ambient
+ro Ambient
+
+@ Weapons & Player
+ro Arme și jucător
+
+@ Monsters
+ro Monștri
+
+@ World & Pickups
+ro Lume și obiecte
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ ro Salvează automat când ridici o cheie
 
 @ Where saves, configs, demos and downloaded map packs are stored
 ro Unde sunt stocate salvările, configurările, demo-urile și pachetele de hărți descărcate
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+ro Pachet muzical pentru niveluri: Implicit folosește modul activ, sau alege altă coloană sonoră Quake instalată ori un folder propriu în <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+ro Înăbușă sunetul cu un filtru trece-jos profund sub apă
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+ro Adaugă reverberație în timp real modelată după dimensiunea și materialele spațiului din jur
+
+@ How strongly environmental room reverb mixes into world sounds
+ro Cât de puternic se amestecă reverberația camerei în sunetele lumii
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+ro Spațializare binaurală 3D pentru căști cu întârziere între urechi, umbra capului și indicii față/spate/înălțime
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+ro Înăbușă și scade sunetele care vin din spatele pereților plini și ușilor închise
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ro Redă pași și aterizări sintetizate adaptate la piatră, metal, lemn, pământ și lichide
+
+@ Volume of synthesized player footsteps and landings
+ro Volumul pașilor și aterizărilor sintetizate ale jucătorului
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+ro Secunde de tranziție lină între piese muzicale; 0 taie imediat
+
+@ Volume of map ambient loops such as wind, water and static world hums
+ro Volumul buclelor ambientale ale hărții precum vânt, apă și zumzet static
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+ro Volumul focurilor de armă, vocilor jucătorului, pașilor și echipamentului suplimentar
+
+@ Volume of monster alerts, attacks, pain and death sounds
+ro Volumul alertelor, atacurilor, durerii și morții monștrilor
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+ro Volumul ușilor, lifturilor, comutatoarelor, obiectelor culese și altor efecte ale lumii
 
 # ==== ui.txt ====
 

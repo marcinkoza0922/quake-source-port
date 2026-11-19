@@ -1639,6 +1639,49 @@ ka შენახვა გასაღების აღებისას
 @ User Data Directory
 ka მომხმარებლის მონაცემთა საქაღალდე
 
+# Audio enhancements.
+@ Volume Mix
+ka ხმის მიქსერი
+
+@ Soundtrack
+ka საუნდტრეკი
+
+@ Music Crossfade
+ka მუსიკის გლუვი გადასვლა
+
+@ Underwater Muffling
+ka წყალქვეშა ჩახშობა
+
+@ Environmental Reverb
+ka გარემოს რევერბერაცია
+
+@ Reverb Amount
+ka რევერბერაციის ძალა
+
+@ 3D Binaural Audio
+ka 3D ბინაურალური აუდიო
+
+@ Sound Occlusion
+ka ხმის დახშობა
+
+@ Footsteps
+ka ნაბიჯები
+
+@ Footstep Volume
+ka ნაბიჯების ხმა
+
+@ Ambient
+ka გარემო
+
+@ Weapons & Player
+ka იარაღი და მოთამაშე
+
+@ Monsters
+ka მონსტრები
+
+@ World & Pickups
+ka სამყარო და ნივთები
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ ka ავტომატურად ინახავს გასაღებ
 
 @ Where saves, configs, demos and downloaded map packs are stored
 ka სად ინახება შენახვები, კონფიგურაციები, დემოები და გადმოწერილი რუკების პაკეტები
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+ka დონეების მუსიკის პაკეტი: ნაგულისხმევი იყენებს აქტიურ მოდს, ან აირჩიეთ სხვა Quake საუნდტრეკი ან საქაღალდე <user data>/music-ში
+
+@ Muffles sound with a deep low-pass filter while underwater
+ka წყალქვეშ ახშობს ხმას ღრმა დაბალი სიხშირის ფილტრით
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+ka ამატებს რეალურ დროში ოთახის ექოს გარემოს ზომისა და მასალების მიხედვით
+
+@ How strongly environmental room reverb mixes into world sounds
+ka რამდენად ძლიერად ერევა გარემოს რევერბერაცია სამყაროს ხმებს
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+ka 3D ბინაურალური სივრცული აუდიო ყურსასმენებისთვის ყურების დაყოვნებით, თავის ჩრდილით და წინ/უკან/სიმაღლის მინიშნებით
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+ka ახშობს და ასუსტებს მყარი კედლებისა და დაკეტილი კარების მიღმა მომავალ ხმებს
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ka უკრავს სინთეზირებულ ნაბიჯებსა და დაშვებას ქვის, მეტალის, ხის, მიწისა და სითხის იატაკზე
+
+@ Volume of synthesized player footsteps and landings
+ka მოთამაშის სინთეზირებული ნაბიჯებისა და დაშვების ხმის სიმაღლე
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+ka წამები მუსიკალურ ტრეკებს შორის გლუვი გადასვლისთვის; 0 მაშინვე ცვლის
+
+@ Volume of map ambient loops such as wind, water and static world hums
+ka რუკის გარემოს ხმების, ქარის, წყლისა და სტატიკური ზუზუნის სიმაღლე
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+ka სროლის, მოთამაშის ხმების, ნაბიჯებისა და დამატებითი აღჭურვილობის ხმის სიმაღლე
+
+@ Volume of monster alerts, attacks, pain and death sounds
+ka მონსტრების განგაშის, შეტევის, ტკივილისა და სიკვდილის ხმების სიმაღლე
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+ka კარების, ლიფტების, გადამრთველების, ნივთების აღებისა და სხვა სამყაროს ეფექტების ხმა
 
 # ==== ui.txt ====
 

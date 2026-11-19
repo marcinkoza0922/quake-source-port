@@ -1639,6 +1639,49 @@ sl Shrani ob pobiranju ključa
 @ User Data Directory
 sl Mapa uporabniških podatkov
 
+# Audio enhancements.
+@ Volume Mix
+sl Mešalnik glasnosti
+
+@ Soundtrack
+sl Glasbena podlaga
+
+@ Music Crossfade
+sl Prelivanje glasbe
+
+@ Underwater Muffling
+sl Dušenje pod vodo
+
+@ Environmental Reverb
+sl Prostorski odmev
+
+@ Reverb Amount
+sl Jakost odmeva
+
+@ 3D Binaural Audio
+sl 3D binavralni zvok
+
+@ Sound Occlusion
+sl Okluzija zvoka
+
+@ Footsteps
+sl Koraki
+
+@ Footstep Volume
+sl Glasnost korakov
+
+@ Ambient
+sl Okolje
+
+@ Weapons & Player
+sl Orožje in igralec
+
+@ Monsters
+sl Pošasti
+
+@ World & Pickups
+sl Svet in predmeti
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ sl Samodejno shrani, ko pobereš ključ
 
 @ Where saves, configs, demos and downloaded map packs are stored
 sl Kjer so shranjeni shranjeni položaji, nastavitve, demo posnetki in preneseni paketi map
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+sl Glasbeni paket za stopnje: Privzeto uporablja aktivni mod, ali izberite drugo glasbo Quake oziroma lastno mapo v <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+sl Pod vodo zaduši zvok z globokim nizkoprepustnim filtrom
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+sl Doda sprotni prostorski odmev glede na velikost in materiale okoliškega prostora
+
+@ How strongly environmental room reverb mixes into world sounds
+sl Kako močno se prostorski odmev meša z zvoki sveta
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+sl Binavralni 3D prostorski zvok za slušalke z zakasnitvijo ušes, senco glave in smermi spredaj/zadaj/višina
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+sl Zaduši in utiša zvoke za polnimi stenami in zaprtimi vrati
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+sl Predvaja sintetizirane korake in pristanke za kamen, kovino, les, zemljo in tekočine
+
+@ Volume of synthesized player footsteps and landings
+sl Glasnost sintetiziranih korakov in pristankov igralca
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+sl Sekunde za gladko prelivanje med skladbami; 0 preklopi takoj
+
+@ Volume of map ambient loops such as wind, water and static world hums
+sl Glasnost okoljskih zank zemljevida, kot so veter, voda in statično brnenje
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+sl Glasnost streljanja, glasov igralca, korakov in dodatne opreme
+
+@ Volume of monster alerts, attacks, pain and death sounds
+sl Glasnost opozoril, napadov, bolečine in smrti pošasti
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+sl Glasnost vrat, dvigal, stikal, pobiranja predmetov in drugih učinkov sveta
 
 # ==== ui.txt ====
 

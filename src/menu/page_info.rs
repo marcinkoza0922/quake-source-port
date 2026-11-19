@@ -9,6 +9,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         Item::ShaderParam(_) => return Some(qcore::t!("A setting of the chosen shader; arrows step it, Enter is not needed")),
         Item::Language => return Some(qcore::t!("Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language")),
         Item::UserDataDir => return Some(qcore::t!("Where saves, configs, demos and downloaded map packs are stored")),
+        Item::Soundtrack => return Some(qcore::t!("Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music")),
         Item::Text { cvar: "_export_name", .. } => return Some(qcore::t!("Name of the video file; the extension follows the video format, and a file of the same name is replaced")),
         Item::Run { run: Run::EditHud, .. } => return Some(qcore::t!("Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more")),
         Item::Text { cvar: "_demo_rename", .. } => return Some(qcore::t!("New name of the demo; if another demo has it, a number is added")),
@@ -179,6 +180,18 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "s_hit_reverb" | "s_kill_reverb" => "Add a ringing room tail after the cue",
         "crosshair_outline" => "Dark border keeps the crosshair visible on any background",
         "menu_music" => "Plays the Quake theme in the main menu when no game is running",
+        "snd_waterfx" => "Muffles sound with a deep low-pass filter while underwater",
+        "s_reverb" => "Adds real-time room reverb shaped by the size and materials of the surrounding space",
+        "s_reverb_amount" => "How strongly environmental room reverb mixes into world sounds",
+        "s_hrtf" => "Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues",
+        "s_occlusion" => "Muffles and quiets sounds coming from behind solid walls and closed doors",
+        "s_footsteps" => "Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors",
+        "s_footsteps_volume" => "Volume of synthesized player footsteps and landings",
+        "s_music_crossfade" => "Seconds to smoothly fade between music tracks; 0 cuts immediately",
+        "s_vol_ambient" => "Volume of map ambient loops such as wind, water and static world hums",
+        "s_vol_weapons" => "Volume of weapon fire, player voices, footsteps and add-on gear",
+        "s_vol_monsters" => "Volume of monster alerts, attacks, pain and death sounds",
+        "s_vol_world" => "Volume of doors, lifts, switches, item pickups and other world effects",
         "cl_captions" => "Shows text for important sounds: doors, alerted enemies, secrets, pickups",
         "in_toggleattack" => "Press attack once to keep firing, again to stop",
         "in_togglerun" => "Press run once to switch between running and walking",
@@ -240,6 +253,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Enhancements => ENHANCEMENTS,
         Page::Impacts => IMPACTS,
         Page::Audio => AUDIO,
+        Page::AudioMix => AUDIO_MIX,
         Page::Demos => super::demos::DEMOS,
         Page::Video => super::demos::VIDEO,
         Page::Export => super::demos::EXPORT,
@@ -271,6 +285,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
 pub(super) fn page_name(p: Page) -> &'static str {
     match p {
         Page::Crosshair => "Crosshair",
+        Page::AudioMix => "Volume Mix",
         Page::HitSound => "Hit Sound",
         Page::KillSound => "Kill Sound",
         Page::Join => "Join Game",
@@ -373,6 +388,8 @@ impl Menu {
             || (matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
             && (cv.value_of("r_enhancedwater") == 0.0 || cv.value_of("r_watertranslucency") == 0.0))
             || (matches!(item, Item::Slider { cvar: "r_water_reflections_amount", .. }) && cv.value_of("r_water_reflections") == 0.0)
+            || (matches!(item, Item::Slider { cvar: "s_reverb_amount", .. }) && cv.value_of("s_reverb") == 0.0)
+            || (matches!(item, Item::Slider { cvar: "s_footsteps_volume", .. }) && cv.value_of("s_footsteps") == 0.0)
             || (matches!(item, Item::Choice { cvar: "r_waterwarp", .. }) && cv.value_of("r_enhancedwater") != 0.0)
             || (matches!(item, Item::Choice { cvar: "r_particles", .. }) && cv.value_of("r_enhancedparticles") != 0.0)
             || (matches!(item, Item::Choice { cvar: "r_drawviewmodel", .. }) && cv.value_of("cl_camera") != 0.0)

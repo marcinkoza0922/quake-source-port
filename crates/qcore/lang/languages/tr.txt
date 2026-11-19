@@ -1639,6 +1639,49 @@ tr Anahtar alınca kaydet
 @ User Data Directory
 tr Kullanıcı Veri Dizini
 
+# Audio enhancements.
+@ Volume Mix
+tr Ses Karışımı
+
+@ Soundtrack
+tr Müzik Paketi
+
+@ Music Crossfade
+tr Müzik Geçişi
+
+@ Underwater Muffling
+tr Su Altı Boğukluğu
+
+@ Environmental Reverb
+tr Ortam Yankısı
+
+@ Reverb Amount
+tr Yankı Miktarı
+
+@ 3D Binaural Audio
+tr 3B Binaural Ses
+
+@ Sound Occlusion
+tr Ses Engelleme
+
+@ Footsteps
+tr Adım Sesleri
+
+@ Footstep Volume
+tr Adım Sesi Düzeyi
+
+@ Ambient
+tr Ortam
+
+@ Weapons & Player
+tr Silahlar ve Oyuncu
+
+@ Monsters
+tr Canavarlar
+
+@ World & Pickups
+tr Dünya ve Eşyalar
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ tr Bir anahtar aldığınızda otomatik kaydeder
 
 @ Where saves, configs, demos and downloaded map packs are stored
 tr Kayıtların, ayarların, demoların ve indirilen harita paketlerinin saklandığı yer
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+tr Bölüm müzikleri paketi: Varsayılan etkin modu kullanır, ya da kurulu başka bir Quake müziği veya <user data>/music içindeki özel klasörü seçin
+
+@ Muffles sound with a deep low-pass filter while underwater
+tr Su altındayken derin alçak geçiren filtreyle sesi boğuklaştırır
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+tr Çevredeki alanın boyutuna ve malzemelerine göre gerçek zamanlı oda yankısı ekler
+
+@ How strongly environmental room reverb mixes into world sounds
+tr Ortam oda yankısının dünya seslerine ne kadar karıştığı
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+tr Kulaklıklar için kulak zamanlaması, baş gölgesi ve ön/arka/yükseklik ipuçlarıyla 3B binaural ses
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+tr Kalın duvarların ve kapalı kapıların arkasından gelen sesleri boğuklaştırır ve kısar
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+tr Taş, metal, ahşap, toprak ve sıvı zeminlere uygun sentezlenmiş adım ve iniş sesleri çalar
+
+@ Volume of synthesized player footsteps and landings
+tr Sentezlenmiş oyuncu adım ve iniş seslerinin düzeyi
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+tr Müzik parçaları arasında yumuşak geçiş süresi (saniye); 0 anında değiştirir
+
+@ Volume of map ambient loops such as wind, water and static world hums
+tr Rüzgar, su ve sabit dünya uğultusu gibi harita ortam döngülerinin sesi
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+tr Silah ateşi, oyuncu sesleri, adımlar ve eklenti teçhizatının sesi
+
+@ Volume of monster alerts, attacks, pain and death sounds
+tr Canavar uyarı, saldırı, acı ve ölüm seslerinin düzeyi
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+tr Kapılar, asansörler, düğmeler, eşya toplama ve diğer dünya efektlerinin sesi
 
 # ==== ui.txt ====
 

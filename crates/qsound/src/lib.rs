@@ -1,10 +1,16 @@
 //! qsound — sound cache, channels, spatialization, mixer and music streaming.
-//! Port of ironwail snd_dma.c / snd_mix.c / snd_mem.c / bgmusic.c. No device code:
-//! the platform audio callback calls [`Mixer::paint`]; the game thread drives
-//! [`SoundSystem`], which sends commands through a short-lock queue.
+//! Port of ironwail snd_dma.c / snd_mix.c / snd_mem.c / bgmusic.c, extended with
+//! optional 3D binaural (HRTF) spatialization, occlusion, environmental reverb,
+//! procedural footsteps, per-category volume mixing and music crossfading.
+//! No device code: the platform audio callback calls [`Mixer::paint`]; the game
+//! thread drives [`SoundSystem`], which sends commands through a short-lock queue.
 
 pub mod music;
 pub mod feedback;
+pub mod category;
+pub mod reverb;
+pub mod hrtf;
+pub mod footsteps;
 pub mod gel;
 pub mod cable;
 pub mod hookshot;
@@ -15,7 +21,14 @@ pub mod rail;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
+pub use category::{CategoryVolumes, SoundCategory, classify_sound};
+pub use footsteps::FootstepSurface;
 pub use music::{MusicStream, cd_track_paths};
+pub use reverb::ReverbParams;
+#[path = "lib/mixer.rs"]
+mod mixer;
+pub use mixer::Mixer;
+use mixer::{Channel, advance, wrap};
 #[path = "lib/paint.rs"]
 mod paint;
 #[path = "lib/mixer_events.rs"]
@@ -38,10 +51,10 @@ pub const AMBIENT_SOUNDS: [Option<&str>; NUM_AMBIENTS] = [
 
 pub type Vec3 = [f32; 3];
 
-fn sub(a: Vec3, b: Vec3) -> Vec3 {
+pub(crate) fn sub(a: Vec3, b: Vec3) -> Vec3 {
     [a[0] - b[0], a[1] - b[1], a[2] - b[2]]
 }
-fn dot(a: Vec3, b: Vec3) -> f32 {
+pub(crate) fn dot(a: Vec3, b: Vec3) -> f32 {
     a[0] * b[0] + a[1] * b[1] + a[2] * b[2]
 }
 
@@ -90,7 +103,9 @@ pub fn load_sfx(name: &str, bytes: &[u8], out_rate: u32) -> Option<Sfx> {
 #[derive(Clone, Copy, Debug, Default)]
 pub struct Listener {
     pub origin: Vec3,
+    pub forward: Vec3,
     pub right: Vec3,
+    pub up: Vec3,
     /// View entity; sounds from it are not spatialized.
     pub view_entity: i32,
     /// `ambient_sound_level` of the leaf the view is in; `None` outside a map.
@@ -141,9 +156,23 @@ enum Cmd {
     Listener(Listener),
     Volume(f32),
     BgmVolume(f32),
+    CategoryVolumes(CategoryVolumes),
     WaterFx(bool),
+    Reverb(ReverbParams),
+    Hrtf(bool),
+    Occlusion(bool),
+    SetOcclusion {
+        entity: i32,
+        channel: i32,
+        value: f32,
+    },
+    Occlusions {
+        dynamic: Vec<(i32, i32, f32)>,
+        statics: Vec<(usize, f32)>,
+    },
     Music(Option<Box<MusicStream>>),
     MusicPause(bool),
+    MusicCrossfade(f32),
 }
 
 type Loader = Box<dyn FnMut(&str) -> Option<Vec<u8>> + Send>;
@@ -210,9 +239,49 @@ impl SoundSystem {
     pub fn set_bgm_volume(&self, v: f32) {
         self.push(Cmd::BgmVolume(v.clamp(0.0, 1.0)));
     }
+    /// Per-category SFX volume multipliers (`s_vol_*`).
+    pub fn set_category_volumes(&self, v: CategoryVolumes) {
+        self.push(Cmd::CategoryVolumes(v.clamped()));
+    }
     /// `snd_waterfx`: underwater lowpass.
     pub fn set_water_fx(&self, on: bool) {
         self.push(Cmd::WaterFx(on));
+    }
+    /// Environmental reverb parameters from the host room probe.
+    pub fn set_reverb(&self, params: ReverbParams) {
+        self.push(Cmd::Reverb(params.clamped()));
+    }
+    /// `s_hrtf`: 3D binaural spatialization.
+    pub fn set_hrtf(&self, on: bool) {
+        self.push(Cmd::Hrtf(on));
+    }
+    /// `s_occlusion`: wall muffling for occluded sounds.
+    pub fn set_occlusion(&self, on: bool) {
+        self.push(Cmd::Occlusion(on));
+    }
+    /// Set immediate occlusion for a just-started channel (0 = clear, 1 = blocked).
+    pub fn set_channel_occlusion(&self, entity: i32, channel: i32, value: f32) {
+        self.push(Cmd::SetOcclusion {
+            entity,
+            channel,
+            value: value.clamp(0.0, 1.0),
+        });
+    }
+    /// Batch-update occlusion for active dynamic and static channels.
+    pub fn update_occlusions(&self, dynamic: Vec<(i32, i32, f32)>, statics: Vec<(usize, f32)>) {
+        self.push(Cmd::Occlusions { dynamic, statics });
+    }
+    /// `s_music_crossfade`: crossfade duration in seconds (0 = instant cut).
+    pub fn set_music_crossfade(&self, secs: f32) {
+        self.push(Cmd::MusicCrossfade(secs.clamp(0.0, 5.0)));
+    }
+    /// Play decoded music from raw file bytes (used by the soundtrack switcher).
+    pub fn play_music_bytes(&self, bytes: Vec<u8>, ext: &str, looping: bool) -> bool {
+        if let Some(m) = MusicStream::new(bytes, ext, looping, self.rate) {
+            self.push(Cmd::Music(Some(Box::new(m))));
+            return true;
+        }
+        false
     }
     /// Play `music/<name>.(ogg|mp3|flac|wav)` (or `name` with an extension).
     pub fn play_music(&mut self, name: &str, looping: bool) -> bool {
@@ -244,217 +313,4 @@ impl SoundSystem {
     pub fn pause_music(&self, paused: bool) {
         self.push(Cmd::MusicPause(paused));
     }
-}
-
-#[derive(Clone, Default)]
-struct Channel {
-    sfx: Option<Arc<Sfx>>,
-    entity: i32,
-    entchannel: i32,
-    origin: Vec3,
-    dist_mult: f32,
-    master_vol: i32,
-    left: i32,
-    right: i32,
-    pos: usize,
-    /// Static/ambient sounds loop from 0 if the sfx has no loop point.
-    force_loop: bool,
-}
-
-/// Audio-thread side. Call [`Mixer::paint`] from the device callback.
-pub struct Mixer {
-    rate: u32,
-    queue: Queue,
-    pending: Vec<Cmd>,
-    channels: Vec<Channel>,
-    total: usize,
-    ambient_sfx: [Option<Arc<Sfx>>; NUM_AMBIENTS],
-    ambient_vol: [f32; NUM_AMBIENTS],
-    listener: Listener,
-    volume: f32,
-    bgm_volume: f32,
-    water_fx: bool,
-    water_mix: f32,
-    lp_state: [f32; 2],
-    music: Option<Box<MusicStream>>,
-    buf: Vec<[i32; 2]>,
-    rng: u32,
-}
-
-impl Mixer {
-    fn new(rate: u32, queue: Queue, ambient_sfx: [Option<Arc<Sfx>>; NUM_AMBIENTS]) -> Self {
-        Self {
-            rate,
-            queue,
-            pending: Vec::new(),
-            channels: vec![Channel::default(); MAX_CHANNELS],
-            total: NUM_AMBIENTS + MAX_DYNAMIC_CHANNELS,
-            ambient_sfx,
-            ambient_vol: [0.0; NUM_AMBIENTS],
-            listener: Listener::default(),
-            volume: 0.7,
-            bgm_volume: 1.0,
-            water_fx: true,
-            water_mix: 0.0,
-            lp_state: [0.0; 2],
-            music: None,
-            buf: Vec::new(),
-            rng: 0x1234_5678,
-        }
-    }
-
-    /// Number of channels currently playing.
-    pub fn active_channels(&self) -> usize {
-        self.channels[..self.total]
-            .iter()
-            .filter(|c| c.sfx.is_some())
-            .count()
-    }
-
-    /// Entities and entity channels of playing dynamic channels.
-    pub fn dynamic_channels(&self) -> Vec<(i32, i32, String)> {
-        self.channels[NUM_AMBIENTS..NUM_AMBIENTS + MAX_DYNAMIC_CHANNELS]
-            .iter()
-            .filter_map(|c| {
-                c.sfx
-                    .as_ref()
-                    .map(|s| (c.entity, c.entchannel, s.name.clone()))
-            })
-            .collect()
-    }
-
-    /// Current (left, right) volume of the dynamic channel playing on `entity`/`entchannel`.
-    pub fn channel_volume(&self, entity: i32, entchannel: i32) -> Option<(i32, i32)> {
-        self.channels[NUM_AMBIENTS..NUM_AMBIENTS + MAX_DYNAMIC_CHANNELS]
-            .iter()
-            .find(|c| c.sfx.is_some() && c.entity == entity && c.entchannel == entchannel)
-            .map(|c| (c.left, c.right))
-    }
-
-    pub fn music_playing(&self) -> bool {
-        self.music.as_ref().is_some_and(|m| !m.finished)
-    }
-
-    /// Apply queued commands without painting.
-    pub fn process_commands(&mut self) {
-        // Short lock: swap the queue out.
-        if let Ok(mut q) = self.queue.lock() {
-            std::mem::swap(&mut *q, &mut self.pending);
-        }
-        let mut cmds = std::mem::take(&mut self.pending);
-        for c in cmds.drain(..) {
-            self.apply(c);
-        }
-        self.pending = cmds;
-    }
-
-    fn apply(&mut self, c: Cmd) {
-        match c {
-            Cmd::Event(e) => self.event(e),
-            Cmd::Listener(l) => {
-                self.listener = l;
-                self.update_ambients();
-                for i in NUM_AMBIENTS..self.total {
-                    if self.channels[i].sfx.is_some() {
-                        self.spatialize(i);
-                    }
-                }
-            }
-            Cmd::Volume(v) => self.volume = v,
-            Cmd::BgmVolume(v) => self.bgm_volume = v,
-            Cmd::WaterFx(b) => self.water_fx = b,
-            Cmd::Music(m) => self.music = m,
-            Cmd::MusicPause(p) => {
-                if let Some(m) = &mut self.music {
-                    m.paused = p;
-                }
-            }
-        }
-    }
-
-    /// SND_Spatialize.
-    fn spatialize(&mut self, i: usize) {
-        let l = self.listener;
-        let ch = &mut self.channels[i];
-        let others = &l.others[..l.num_others.min(MAX_OTHER_LISTENERS)];
-        if ch.entity == l.view_entity || ch.dist_mult == 0.0 || others.iter().any(|o| o.1 == ch.entity) {
-            ch.left = ch.master_vol;
-            ch.right = ch.master_vol;
-            return;
-        }
-        let mut v = sub(ch.origin, l.origin);
-        let len = dot(v, v).sqrt();
-        if len > 0.0 {
-            v = v.map(|x| x / len);
-        }
-        let dist = len * ch.dist_mult;
-        let d = dot(l.right, v);
-        let (rscale, lscale) = (1.0 + d, 1.0 - d);
-        let mv = ch.master_vol as f32;
-        ch.right = ((mv * (1.0 - dist) * rscale) as i32).max(0);
-        ch.left = ((mv * (1.0 - dist) * lscale) as i32).max(0);
-        for (o, _) in others {
-            let d = sub(ch.origin, *o);
-            let mono = ((mv * (1.0 - dot(d, d).sqrt() * ch.dist_mult)) as i32).max(0);
-            ch.left = ch.left.max(mono);
-            ch.right = ch.right.max(mono);
-        }
-    }
-
-    /// SND_PickChannel.
-    fn pick_channel(&mut self, entity: i32, entchannel: i32) -> Option<usize> {
-        let view = self.listener.view_entity;
-        let mut best = None;
-        let mut life_left = usize::MAX;
-        for i in NUM_AMBIENTS..NUM_AMBIENTS + MAX_DYNAMIC_CHANNELS {
-            let ch = &self.channels[i];
-            // channel 0 never overrides
-            if entchannel != 0
-                && ch.entity == entity
-                && (ch.entchannel == entchannel || entchannel == -1)
-            {
-                best = Some(i);
-                break;
-            }
-            // don't let monster sounds override player sounds
-            if ch.entity == view && entity != view && ch.sfx.is_some() {
-                continue;
-            }
-            let left = ch
-                .sfx
-                .as_ref()
-                .map_or(0, |s| s.data.len().saturating_sub(ch.pos));
-            if left < life_left {
-                life_left = left;
-                best = Some(i);
-            }
-        }
-        if let Some(i) = best {
-            self.channels[i].sfx = None;
-        }
-        best
-    }
-
-}
-
-/// Wrap a channel at end of data. Returns false if it should stop.
-fn wrap(ch: &mut Channel, sfx: &Sfx) -> bool {
-    match sfx.loop_start {
-        Some(l) if l < sfx.data.len() => ch.pos = l,
-        _ if ch.force_loop && !sfx.data.is_empty() => ch.pos = 0,
-        _ => return false,
-    }
-    true
-}
-
-fn advance(ch: &mut Channel, sfx: &Sfx, mut n: usize) -> bool {
-    while n > 0 {
-        if ch.pos >= sfx.data.len() && !wrap(ch, sfx) {
-            return false;
-        }
-        let k = (sfx.data.len() - ch.pos).min(n);
-        ch.pos += k;
-        n -= k;
-    }
-    true
 }

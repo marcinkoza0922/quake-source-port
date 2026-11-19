@@ -1639,6 +1639,49 @@ el Αποθήκευση κατά τη συλλογή κλειδιού
 @ User Data Directory
 el Φάκελος δεδομένων χρήστη
 
+# Audio enhancements.
+@ Volume Mix
+el Μίξη έντασης
+
+@ Soundtrack
+el Μουσική επένδυση
+
+@ Music Crossfade
+el Ομαλή μετάβαση μουσικής
+
+@ Underwater Muffling
+el Υποβρύχια απόσβεση
+
+@ Environmental Reverb
+el Αντήχηση χώρου
+
+@ Reverb Amount
+el Ένταση αντήχησης
+
+@ 3D Binaural Audio
+el Τρισδιάστατος αμφιωτικός ήχος
+
+@ Sound Occlusion
+el Απόφραξη ήχου
+
+@ Footsteps
+el Βήματα
+
+@ Footstep Volume
+el Ένταση βημάτων
+
+@ Ambient
+el Περιβάλλον
+
+@ Weapons & Player
+el Όπλα και παίκτης
+
+@ Monsters
+el Τέρατα
+
+@ World & Pickups
+el Κόσμος και αντικείμενα
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ el Αποθηκεύει αυτόματα όταν παίρνετε ένα κλε
 
 @ Where saves, configs, demos and downloaded map packs are stored
 el Πού αποθηκεύονται οι αποθηκεύσεις, ρυθμίσεις, demos και τα πακέτα χαρτών
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+el Πακέτο μουσικής για κομμάτια επιπέδων: Το Προεπιλογή χρησιμοποιεί το ενεργό mod, ή επιλέξτε άλλο εγκατεστημένο soundtrack Quake ή φάκελο στο <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+el Πνίγει τον ήχο με βαθύ χαμηλοπερατό φίλτρο κάτω από το νερό
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+el Προσθέτει αντήχηση χώρου σε πραγματικό χρόνο ανάλογα με το μέγεθος και τα υλικά του περιβάλλοντος
+
+@ How strongly environmental room reverb mixes into world sounds
+el Πόσο έντονα αναμειγνύεται η αντήχηση χώρου στους ήχους του κόσμου
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+el Αμφιωτικός τρισδιάστατος ήχος για ακουστικά με χρονισμό αυτιών, σκιά κεφαλιού και ενδείξεις εμπρός/πίσω/ύψους
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+el Πνίγει και χαμηλώνει ήχους που έρχονται πίσω από συμπαγείς τοίχους και κλειστές πόρτες
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+el Αναπαράγει συνθετικά βήματα και προσγειώσεις για πέτρα, μέταλλο, ξύλο, χώμα και υγρά
+
+@ Volume of synthesized player footsteps and landings
+el Ένταση των συνθετικών βημάτων και προσγειώσεων του παίκτη
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+el Δευτερόλεπτα ομαλής μετάβασης μεταξύ μουσικών κομματιών· το 0 κόβει αμέσως
+
+@ Volume of map ambient loops such as wind, water and static world hums
+el Ένταση των ήχων περιβάλλοντος όπως άνεμος, νερό και στατικό βουητό
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+el Ένταση πυροβολισμών, φωνών παίκτη, βημάτων και πρόσθετου εξοπλισμού
+
+@ Volume of monster alerts, attacks, pain and death sounds
+el Ένταση ειδοποιήσεων, επιθέσεων, πόνου και θανάτου των τεράτων
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+el Ένταση θυρών, ανελκυστήρων, διακοπτών, αντικειμένων και άλλων εφέ του κόσμου
 
 # ==== ui.txt ====
 

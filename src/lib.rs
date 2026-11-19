@@ -9,6 +9,7 @@
 
 mod addons;
 mod assets;
+mod audio;
 mod autosave;
 mod captions;
 mod console;

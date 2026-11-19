@@ -1639,6 +1639,49 @@ ta சாவி எடுக்கும்போது சேமி
 @ User Data Directory
 ta பயனர் தரவு அடைவு
 
+# Audio enhancements.
+@ Volume Mix
+ta ஒலி கலவை
+
+@ Soundtrack
+ta இசைத்தொகுப்பு
+
+@ Music Crossfade
+ta இசை மென்மாற்றம்
+
+@ Underwater Muffling
+ta நீரடி ஒலி மங்கல்
+
+@ Environmental Reverb
+ta சூழல் எதிரொலி
+
+@ Reverb Amount
+ta எதிரொலி அளவு
+
+@ 3D Binaural Audio
+ta 3D இருகாது ஒலி
+
+@ Sound Occlusion
+ta ஒலி தடுப்பு
+
+@ Footsteps
+ta காலடிகள்
+
+@ Footstep Volume
+ta காலடி ஒலி அளவு
+
+@ Ambient
+ta சூழல்
+
+@ Weapons & Player
+ta ஆயுதங்கள் & வீரர்
+
+@ Monsters
+ta அரக்கர்கள்
+
+@ World & Pickups
+ta உலகம் & பொருட்கள்
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ ta சாவியை எடுக்கும்போது தானாகச
 
 @ Where saves, configs, demos and downloaded map packs are stored
 ta சேமிப்புகள், அமைப்புகள், டெமோக்கள் மற்றும் பதிவிறக்கிய வரைபடத் தொகுப்புகள் சேமிக்கப்படும் இடம்
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+ta நிலை இசைக்கான தொகுப்பு: இயல்புநிலை செயலில் உள்ள மாடைப் பயன்படுத்தும், அல்லது மற்றொரு Quake இசைத்தொகுப்பு அல்லது <user data>/music கோப்புறையைத் தேர்ந்தெடுக்கவும்
+
+@ Muffles sound with a deep low-pass filter while underwater
+ta நீருக்கு அடியில் ஆழமான குறைந்த-அலை வடிகட்டியால் ஒலியை மங்கச் செய்கிறது
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+ta சுற்றியுள்ள இடத்தின் அளவு மற்றும் பொருட்களுக்கு ஏற்ப நேரடி அறை எதிரொலியைச் சேர்க்கிறது
+
+@ How strongly environmental room reverb mixes into world sounds
+ta சூழல் எதிரொலி உலக ஒலிகளுடன் எவ்வளவு வலுவாகக் கலக்கிறது
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+ta ஹெட்ஃபோன்களுக்கு காது நேர வேறுபாடு, தலை நிழல் மற்றும் முன்/பின்/உயர குறிப்புகளுடன் 3D ஒலி
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+ta திட சுவர்கள் மற்றும் மூடிய கதவுகளுக்குப் பின்னால் வரும் ஒலிகளை மங்கவும் மெதுவாகவும் செய்கிறது
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ta கல், உலோகம், மரம், மண் மற்றும் திரவத் தரைகளுக்கு ஏற்ப உருவாக்கப்பட்ட காலடி மற்றும் தரையிறங்கும் ஒலிகளை இயக்குகிறது
+
+@ Volume of synthesized player footsteps and landings
+ta வீரரின் உருவாக்கப்பட்ட காலடி மற்றும் தரையிறங்கும் ஒலியின் அளவு
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+ta இசைத் தடங்களுக்கிடையே மென்மையாக மாறும் விநாடிகள்; 0 உடனடியாக மாற்றும்
+
+@ Volume of map ambient loops such as wind, water and static world hums
+ta காற்று, நீர் மற்றும் நிலையான முணுமுணுப்பு போன்ற வரைபட சூழல் ஒலிகளின் அளவு
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+ta ஆயுதச் சூடு, வீரர் குரல்கள், காலடிகள் மற்றும் கூடுதல் கருவிகளின் ஒலி அளவு
+
+@ Volume of monster alerts, attacks, pain and death sounds
+ta அரக்கர்களின் எச்சரிக்கை, தாக்குதல், வலி மற்றும் மரண ஒலிகளின் அளவு
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+ta கதவுகள், மின்தூக்கிகள், பொத்தான்கள், பொருள் எடுத்தல் மற்றும் பிற உலக ஒலிகளின் அளவு
 
 # ==== ui.txt ====
 

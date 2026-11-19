@@ -1639,6 +1639,49 @@ pl Zapisz po podniesieniu klucza
 @ User Data Directory
 pl Katalog danych użytkownika
 
+# Audio enhancements.
+@ Volume Mix
+pl Mikser głośności
+
+@ Soundtrack
+pl Ścieżka dźwiękowa
+
+@ Music Crossfade
+pl Płynne przejście muzyki
+
+@ Underwater Muffling
+pl Tłumienie pod wodą
+
+@ Environmental Reverb
+pl Pogłos otoczenia
+
+@ Reverb Amount
+pl Siła pogłosu
+
+@ 3D Binaural Audio
+pl Dźwięk binauralny 3D
+
+@ Sound Occlusion
+pl Okluzja dźwięku
+
+@ Footsteps
+pl Kroki
+
+@ Footstep Volume
+pl Głośność kroków
+
+@ Ambient
+pl Otoczenie
+
+@ Weapons & Player
+pl Broń i gracz
+
+@ Monsters
+pl Potwory
+
+@ World & Pickups
+pl Świat i przedmioty
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ pl Automatycznie zapisuje po podniesieniu klucza
 
 @ Where saves, configs, demos and downloaded map packs are stored
 pl Miejsce przechowywania zapisów, konfiguracji, dem i pobranych paczek map
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+pl Pakiet muzyki dla poziomów: Domyślny używa aktywnego moda lub wybierz inną zainstalowaną ścieżkę Quake albo własny folder w <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+pl Tłumi dźwięk głębokim filtrem dolnoprzepustowym pod wodą
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+pl Dodaje pogłos w czasie rzeczywistym dopasowany do rozmiaru i materiałów otoczenia
+
+@ How strongly environmental room reverb mixes into world sounds
+pl Jak mocno pogłos pomieszczenia miesza się z dźwiękami świata
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+pl Przestrzenny dźwięk binauralny 3D dla słuchawek z opóźnieniem uszu, cieniem głowy oraz kierunkiem przód/tył i wysokością
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+pl Tłumi i ścisza dźwięki dochodzące zza pełnych ścian i zamkniętych drzwi
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+pl Odtwarza syntetyzowane kroki i lądowania dopasowane do kamienia, metalu, drewna, ziemi i cieczy
+
+@ Volume of synthesized player footsteps and landings
+pl Głośność syntetyzowanych kroków i lądowań gracza
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+pl Sekundy płynnego przejścia między utworami muzycznymi; 0 przełącza natychmiast
+
+@ Volume of map ambient loops such as wind, water and static world hums
+pl Głośność pętli otoczenia mapy, takich jak wiatr, woda i statyczne buczenie
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+pl Głośność strzałów, głosu gracza, kroków i dodatkowego sprzętu
+
+@ Volume of monster alerts, attacks, pain and death sounds
+pl Głośność okrzyków, ataków, bólu i śmierci potworów
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+pl Głośność drzwi, wind, przełączników, podnoszenia przedmiotów i innych efektów świata
 
 # ==== ui.txt ====
 

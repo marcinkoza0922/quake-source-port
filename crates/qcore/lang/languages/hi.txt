@@ -1639,6 +1639,49 @@ hi चाबी उठाने पर सहेजें
 @ User Data Directory
 hi उपयोगकर्ता डेटा निर्देशिका
 
+# Audio enhancements.
+@ Volume Mix
+hi वॉल्यूम मिक्स
+
+@ Soundtrack
+hi साउंडट्रैक
+
+@ Music Crossfade
+hi संगीत क्रॉसफ़ेड
+
+@ Underwater Muffling
+hi पानी के नीचे दबी ध्वनि
+
+@ Environmental Reverb
+hi परिवेश गूंज
+
+@ Reverb Amount
+hi गूंज की मात्रा
+
+@ 3D Binaural Audio
+hi 3D बाइनॉरल ऑडियो
+
+@ Sound Occlusion
+hi ध्वनि अवरोधन
+
+@ Footsteps
+hi कदमों की आवाज़
+
+@ Footstep Volume
+hi कदमों का वॉल्यूम
+
+@ Ambient
+hi परिवेश
+
+@ Weapons & Player
+hi हथियार और खिलाड़ी
+
+@ Monsters
+hi राक्षस
+
+@ World & Pickups
+hi दुनिया और वस्तुएँ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ hi चाबी उठाने पर स्वतः सहेजता है
 
 @ Where saves, configs, demos and downloaded map packs are stored
 hi जहाँ सेव, कॉन्फ़िग, डेमो और डाउनलोड किए गए मैप पैक संग्रहीत होते हैं
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+hi स्तर के गीतों के लिए संगीत पैक: डिफ़ॉल्ट सक्रिय मॉड उपयोग करता है, या कोई अन्य स्थापित Quake साउंडट्रैक या <user data>/music का फ़ोल्डर चुनें
+
+@ Muffles sound with a deep low-pass filter while underwater
+hi पानी के नीचे गहरे लो-पास फ़िल्टर से ध्वनि को दबा देता है
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+hi आसपास के स्थान के आकार और सामग्री के अनुसार रीयल-टाइम कमरे की गूंज जोड़ता है
+
+@ How strongly environmental room reverb mixes into world sounds
+hi परिवेश की गूंज दुनिया की ध्वनियों में कितनी गहराई से मिलती है
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+hi हेडफ़ोन के लिए कान के समय, सिर की छाया और आगे/पीछे/ऊँचाई संकेतों के साथ 3D बाइनॉरल ध्वनि
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+hi ठोस दीवारों और बंद दरवाज़ों के पीछे से आने वाली ध्वनियों को दबा और धीमा करता है
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+hi पत्थर, धातु, लकड़ी, मिट्टी और तरल फर्श के अनुसार संश्लेषित कदम और उतरने की ध्वनि बजाता है
+
+@ Volume of synthesized player footsteps and landings
+hi खिलाड़ी के संश्लेषित कदमों और उतरने का वॉल्यूम
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+hi संगीत ट्रैकों के बीच सहज बदलाव के सेकंड; 0 तुरंत बदलता है
+
+@ Volume of map ambient loops such as wind, water and static world hums
+hi नक्शे की हवा, पानी और स्थिर गुंजन जैसी परिवेश ध्वनियों का वॉल्यूम
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+hi हथियार चलाने, खिलाड़ी की आवाज़, कदमों और अतिरिक्त उपकरणों का वॉल्यूम
+
+@ Volume of monster alerts, attacks, pain and death sounds
+hi राक्षसों की चेतावनी, हमले, दर्द और मृत्यु की ध्वनियों का वॉल्यूम
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+hi दरवाज़ों, लिफ़्ट, स्विच, वस्तुएँ उठाने और अन्य विश्व प्रभावों का वॉल्यूम
 
 # ==== ui.txt ====
 

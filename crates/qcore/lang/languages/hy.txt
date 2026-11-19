@@ -1639,6 +1639,49 @@ hy Պահպանել բանալի վերցնելիս
 @ User Data Directory
 hy Օգտատիրոջ տվյալների պանակ
 
+# Audio enhancements.
+@ Volume Mix
+hy Ձայնի միքսեր
+
+@ Soundtrack
+hy Սաունդթրեք
+
+@ Music Crossfade
+hy Երաժշտության սահուն անցում
+
+@ Underwater Muffling
+hy Ստորջրյա խլացում
+
+@ Environmental Reverb
+hy Միջավայրի արձագանք
+
+@ Reverb Amount
+hy Արձագանքի ուժգնություն
+
+@ 3D Binaural Audio
+hy 3D բինաուրալ ձայն
+
+@ Sound Occlusion
+hy Ձայնի փակում
+
+@ Footsteps
+hy Քայլեր
+
+@ Footstep Volume
+hy Քայլերի ձայնը
+
+@ Ambient
+hy Միջավայր
+
+@ Weapons & Player
+hy Զենք և խաղացող
+
+@ Monsters
+hy Հրեշներ
+
+@ World & Pickups
+hy Աշխարհ և առարկաներ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ hy Ինքնաշխատ պահպանում է բանալի վերցնելիս
 
 @ Where saves, configs, demos and downloaded map packs are stored
 hy Որտեղ պահվում են պահպանումները, կարգավորումները, դեմոները և ներբեռնված քարտեզների փաթեթները
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+hy Մակարդակների երաժշտական փաթեթ. Լռելյայնը օգտագործում է ակտիվ մոդը, կամ ընտրեք այլ Quake սաունդթրեք կամ թղթապանակ <user data>/music-ում
+
+@ Muffles sound with a deep low-pass filter while underwater
+hy Խլացնում է ձայնը խորը ցածրահաճախական ֆիլտրով ջրի տակ
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+hy Ավելացնում է իրական ժամանակի սենյակի արձագանք՝ ըստ շրջակա տարածքի չափի և նյութերի
+
+@ How strongly environmental room reverb mixes into world sounds
+hy Որքան ուժեղ է միջավայրի արձագանքը խառնվում աշխարհի ձայներին
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+hy 3D բինաուրալ տարածական ձայն ականջակալների համար՝ ականջների ուշացումով, գլխի ստվերով և առջև/ետև/բարձրություն կողմնորոշմամբ
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+hy Խլացնում և նվազեցնում է պինդ պատերի ու փակ դռների հետևից եկող ձայները
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+hy Նվագարկում է սինթեզված քայլեր և վայրէջքներ քարե, մետաղական, փայտե, հողե և հեղուկ հատակների համար
+
+@ Volume of synthesized player footsteps and landings
+hy Խաղացողի սինթեզված քայլերի և վայրէջքների ձայնի ուժգնությունը
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+hy Վայրկյաններ երաժշտական թրեքների միջև սահուն անցման համար. 0-ն անմիջապես փոխում է
+
+@ Volume of map ambient loops such as wind, water and static world hums
+hy Քարտեզի ֆոնային ձայների՝ քամու, ջրի և ստատիկ բզզոցի ուժգնությունը
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+hy Կրակոցների, խաղացողի ձայների, քայլերի և լրացուցիչ սարքավորման ուժգնությունը
+
+@ Volume of monster alerts, attacks, pain and death sounds
+hy Հրեշների ազդանշանների, հարձակումների, ցավի և մահվան ձայների ուժգնությունը
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+hy Դռների, վերելակների, անջատիչների, առարկաների և աշխարհի այլ էֆեկտների ուժգնությունը
 
 # ==== ui.txt ====
 

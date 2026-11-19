@@ -67,6 +67,11 @@ impl Menu {
                 let i = (language_index(cv) as i32 + dir).rem_euclid(n) as usize;
                 set_language(cv, i);
             }
+            Item::Soundtrack => {
+                let n = self.soundtracks.len() as i32 + 1;
+                let i = (self.soundtrack_index(cv) as i32 + dir).rem_euclid(n) as usize;
+                self.set_soundtrack(i, cv);
+            }
             Item::Text { .. } | Item::Run { .. } | Item::Server(_) | Item::Bind { .. } | Item::ResetBinds | Item::ResetShaderParams | Item::Sub { .. } | Item::UserDataDir => return false,
             Item::Apply => {
                 if !enter || !self.display_dirty(cv) {
@@ -102,6 +107,7 @@ impl Menu {
                 .collect(),
             Item::ShaderPreset => self.preset_options(),
             Item::Language => language_options(),
+            Item::Soundtrack => self.soundtrack_options(),
             _ => Vec::new(),
         }
     }
@@ -116,6 +122,7 @@ impl Menu {
             Item::Map => self.host_map(cv).and_then(|m| self.net_maps.iter().position(|x| x.name == m)).unwrap_or(0),
             Item::ShaderPreset => self.preset_index(cv),
             Item::Language => language_index(cv),
+            Item::Soundtrack => self.soundtrack_index(cv),
             _ => 0,
         }
     }
@@ -135,6 +142,7 @@ impl Menu {
             }
             Item::ShaderPreset => self.set_preset(i, cv),
             Item::Language => set_language(cv, i),
+            Item::Soundtrack => self.set_soundtrack(i, cv),
             _ => {}
         }
     }
@@ -214,6 +222,32 @@ impl Menu {
     pub(super) fn display_dirty(&self, cv: &Cvars) -> bool {
         self.pending_mode != cv.value_of("vid_fullscreen") as usize
             || self.pending_mode != 2 && self.pending_res != (cv.value_of("vid_width") as u32, cv.value_of("vid_height") as u32)
+    }
+
+    /// Soundtrack dropdown entries: Default (active mod) followed by discovered packs.
+    pub(super) fn soundtrack_options(&self) -> Vec<String> {
+        std::iter::once(qcore::t!("Default").to_string())
+            .chain(self.soundtracks.iter().map(|(_, label)| label.clone()))
+            .collect()
+    }
+
+    pub(super) fn soundtrack_index(&self, cv: &Cvars) -> usize {
+        let cur = cv.by_name("s_soundtrack").map_or("", |c| c.string.trim());
+        if cur.is_empty() {
+            return 0;
+        }
+        self.soundtracks
+            .iter()
+            .position(|(id, _)| id.eq_ignore_ascii_case(cur))
+            .map_or(0, |i| i + 1)
+    }
+
+    pub(super) fn set_soundtrack(&self, i: usize, cv: &mut Cvars) {
+        let id = i
+            .checked_sub(1)
+            .and_then(|k| self.soundtracks.get(k))
+            .map_or("", |(id, _)| id.as_str());
+        cv.set("s_soundtrack", id);
     }
 }
 

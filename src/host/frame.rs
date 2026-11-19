@@ -455,18 +455,18 @@ impl Host {
     }
 
     pub(super) fn update_sound(&mut self, view: Option<&qrender::View>, ft: f32) {
+        self.last_audio_view = view.cloned();
         let vol = (self.cv("volume"), self.cv("bgmvolume"));
-        let Some(snd) = &self.snd else { return };
-        if vol != self.last_vol {
-            snd.set_volume(vol.0);
-            snd.set_bgm_volume(vol.1);
-            self.last_vol = vol;
+        if self.snd.is_none() {
+            return;
         }
         let mut l = Listener { view_entity: self.cl.viewentity as i32, frametime: ft, ..Default::default() };
         if let Some(v) = view {
             l.origin = v.origin;
-            let (_, r, _) = angle_vectors(Vec3::from_array(v.angles));
+            let (f, r, u) = angle_vectors(Vec3::from_array(v.angles));
+            l.forward = f.to_array();
             l.right = r.to_array();
+            l.up = u.to_array();
             if let Some(bsp) = &self.level.bsp {
                 let leaf = bsp_leaf(bsp, v.origin);
                 l.ambient_levels = bsp.leafs.get(leaf).map(|lf| lf.ambient_level);
@@ -480,7 +480,27 @@ impl Host {
             l.others[l.num_others] = (ear, g.cl.viewentity as i32);
             l.num_others += 1;
         }
-        snd.set_water_fx(l.underwater);
+        let paused = self.cl.paused || self.demo_seeking || self.menu.active();
+        let Some(snd) = &mut self.snd else { return };
+        if vol != self.last_vol {
+            snd.set_volume(vol.0);
+            snd.set_bgm_volume(vol.1);
+            self.last_vol = vol;
+        }
+        let mut brushes = None;
+        self.audio_fx.frame(
+            &self.server.core.cvars,
+            &self.server.core.fs,
+            &self.cl,
+            &self.guests,
+            &self.level,
+            &mut brushes,
+            view,
+            l.underwater,
+            self.realtime,
+            paused,
+            snd,
+        );
         snd.update(l);
     }
 

@@ -325,6 +325,17 @@ impl Menu {
                 let s: String = self.preset_options()[self.preset_index(cv)].chars().take(13).collect();
                 { txt(c, VALUE_X, y, &s); }
             }
+            Item::Soundtrack => {
+                label(c, "Soundtrack");
+                let opts = self.soundtrack_options();
+                let idx = self.soundtrack_index(cv);
+                let s: String = opts[idx].chars().take(18).collect();
+                if idx == 0 {
+                    c.text(VALUE_X, y, &s, TXT, FG);
+                } else {
+                    c.text_raw(VALUE_X, y, &s, TXT, FG);
+                }
+            }
             Item::ShaderParam(k) => self.draw_shader_param(c, y, k, cv),
             Item::Map => {
                 label(c, "Map");

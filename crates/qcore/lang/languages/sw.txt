@@ -1639,6 +1639,49 @@ sw Hifadhi unapochukua ufunguo
 @ User Data Directory
 sw Saraka ya Data ya Mtumiaji
 
+# Audio enhancements.
+@ Volume Mix
+sw Mchanganyiko wa Sauti
+
+@ Soundtrack
+sw Muziki wa Mchezo
+
+@ Music Crossfade
+sw Mpito Laini wa Muziki
+
+@ Underwater Muffling
+sw Kufifisha Chini ya Maji
+
+@ Environmental Reverb
+sw Mwangwi wa Mazingira
+
+@ Reverb Amount
+sw Kiwango cha Mwangwi
+
+@ 3D Binaural Audio
+sw Sauti ya 3D ya Masikio Mawili
+
+@ Sound Occlusion
+sw Kuzuiwa kwa Sauti
+
+@ Footsteps
+sw Hatua za Miguu
+
+@ Footstep Volume
+sw Sauti ya Hatua
+
+@ Ambient
+sw Mazingira
+
+@ Weapons & Player
+sw Silaha na Mchezaji
+
+@ Monsters
+sw Wanyama Wakali
+
+@ World & Pickups
+sw Ulimwengu na Vitu
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ sw Huhifadhi kiotomatiki unapochukua ufunguo
 
 @ Where saves, configs, demos and downloaded map packs are stored
 sw Mahali ambapo hifadhi, mipangilio, demo na vifurushi vya ramani vilivyopakuliwa huhifadhiwa
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+sw Kifurushi cha muziki wa viwango: Chaguo-msingi hutumia mod iliyo hai, au chagua muziki mwingine wa Quake au folda yako kwenye <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+sw Hufifisha sauti kwa kichujio kirefu cha masafa ya chini ukiwa chini ya maji
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+sw Huongeza mwangwi wa chumba wa papo hapo kulingana na ukubwa na vifaa vya eneo linalokuzunguka
+
+@ How strongly environmental room reverb mixes into world sounds
+sw Kiasi ambacho mwangwi wa mazingira unachanganyika na sauti za ulimwengu
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+sw Sauti ya anga ya 3D kwa vipokea sauti yenye muda wa masikio, kivuli cha kichwa na ishara za mbele/nyuma/juu
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+sw Hufifisha na kupunguza sauti zinazotoka nyuma ya kuta imara na milango iliyofungwa
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+sw Hucheza sauti za hatua na kutua zilizoundwa kwa sakafu za mawe, chuma, mbao, udongo na maji
+
+@ Volume of synthesized player footsteps and landings
+sw Kiwango cha sauti ya hatua na kutua za mchezaji
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+sw Sekunde za kubadili muziki kwa upole kati ya nyimbo; 0 hubadili mara moja
+
+@ Volume of map ambient loops such as wind, water and static world hums
+sw Sauti ya mizunguko ya mazingira ya ramani kama upepo, maji na mvumo
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+sw Sauti ya risasi, sauti za mchezaji, hatua na vifaa vya nyongeza
+
+@ Volume of monster alerts, attacks, pain and death sounds
+sw Sauti ya tahadhari, mashambulizi, maumivu na kifo cha wanyama wakali
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+sw Sauti ya milango, lifti, swichi, kuchukua vitu na athari nyingine za ulimwengu
 
 # ==== ui.txt ====
 

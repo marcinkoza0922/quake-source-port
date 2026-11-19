@@ -1639,6 +1639,49 @@ uk Зберігати при підборі ключа
 @ User Data Directory
 uk Тека даних користувача
 
+# Audio enhancements.
+@ Volume Mix
+uk Мікшер гучності
+
+@ Soundtrack
+uk Саундтрек
+
+@ Music Crossfade
+uk Плавний перехід музики
+
+@ Underwater Muffling
+uk Приглушення під водою
+
+@ Environmental Reverb
+uk Реверберація оточення
+
+@ Reverb Amount
+uk Сила реверберації
+
+@ 3D Binaural Audio
+uk 3D бінауральний звук
+
+@ Sound Occlusion
+uk Оклюзія звуку
+
+@ Footsteps
+uk Кроки
+
+@ Footstep Volume
+uk Гучність кроків
+
+@ Ambient
+uk Оточення
+
+@ Weapons & Player
+uk Зброя і гравець
+
+@ Monsters
+uk Монстри
+
+@ World & Pickups
+uk Світ і предмети
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ uk Автозбереження під час підбору ключа
 
 @ Where saves, configs, demos and downloaded map packs are stored
 uk Де зберігаються збереження, налаштування, демо та завантажені набори мап
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+uk Музичний набір для рівнів: «За замовчуванням» використовує активний мод, або оберіть інший саундтрек Quake чи власну теку в <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+uk Приглушує звук глибоким фільтром низьких частот під водою
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+uk Додає реверберацію в реальному часі відповідно до розміру та матеріалів приміщення
+
+@ How strongly environmental room reverb mixes into world sounds
+uk Наскільки сильно реверберація приміщення змішується зі звуками світу
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+uk Бінауральна 3D-локалізація для навушників із затримкою між вухами, тінню голови та орієнтирами спереду/ззаду/по висоті
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+uk Приглушує і зменшує звуки з-за суцільних стін та зачинених дверей
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+uk Відтворює синтезовані кроки й приземлення гравця для каменю, металу, дерева, землі та рідин
+
+@ Volume of synthesized player footsteps and landings
+uk Гучність синтезованих кроків і приземлень гравця
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+uk Секунди плавного переходу між музичними треками; 0 перемикає миттєво
+
+@ Volume of map ambient loops such as wind, water and static world hums
+uk Гучність фонових звуків мапи, як-от вітер, вода та статичний гул
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+uk Гучність пострілів, голосу гравця, кроків і додаткового спорядження
+
+@ Volume of monster alerts, attacks, pain and death sounds
+uk Гучність вигуків, атак, болю та смерті монстрів
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+uk Гучність дверей, ліфтів, перемикачів, підбирання предметів та інших ефектів світу
 
 # ==== ui.txt ====
 
