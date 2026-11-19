@@ -1632,6 +1632,13 @@ cy personol
 @ classic
 cy clasurol
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+cy Cadw wrth godi allwedd
+
+@ User Data Directory
+cy Cyfeiriadur Data Defnyddiwr
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ cy Symud, newid maint, ychwanegu a thynnu elfennau'r HUD: iechyd, bwledi, arfau,
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 cy Modern: elfennau cryno ar ymylon y sgrin; clasurol: y bar statws gwreiddiol. Mae dewis un yn ailosod yr HUD; mae newidiadau yn Golygu'r HUD yn ei wneud yn bersonol
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+cy Yn awto-gadw pan fyddwch yn codi allwedd
+
+@ Where saves, configs, demos and downloaded map packs are stored
+cy Lle mae cadwadau, ffurfweddiadau, demos a phecynnau mapiau wedi'u lawrlwytho yn cael eu storio
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ cy ADDASEDIG
 
 @ Customize Experience
 cy Addasu'r profiad
-
-@ Disable All
-cy Analluogi'r cyfan
 
 @ Disable All Modifications
 cy Analluogi pob addasiad
@@ -3003,17 +3014,11 @@ cy Does dim demo'n cyfateb i'r hidlydd. Mae Backspace neu Esc yn ei glirio.
 @ Renaming an automatic demo moves it to the saved demos.
 cy Mae ailenwi demo awtomatig yn ei symud i'r demos a gadwyd.
 
-@ Sort
-cy Trefnu
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 cy Wrth i demo chwarae: mae A yn oedi, mae'r pad cyfeiriad yn sgrolio ac yn newid y cyflymder, mae LT ac RT yn marcio clip ac mae X yn ei allforio.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 cy Bwlch saib | Chwith/De sgrolio | I fyny/I lawr cyflymder | PgUp/PgDn 10 e | I/O marc | E allforio
-
-@ Switch List
-cy Newid rhestr
 
 @ This can't be undone.
 cy Does dim modd dadwneud hyn.
@@ -3060,6 +3065,43 @@ cy Yn paratoi...
 # Save cards: personal best.
 @ PB {} {}
 cy PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+cy Allwedd wedi'i chodi
+
+@ Select User Data Directory
+cy Dewis Cyfeiriadur Data Defnyddiwr
+
+@ Data folder: {}
+cy Ffolder data: {}
+
+@ Parent Folder
+cy Ffolder Rhiant
+
+@ Unable to read directory
+cy Methu darllen y cyfeiriadur
+
+@ No subfolders
+cy Dim is-ffolderi
+
+@ Select Folder
+cy Dewis Ffolder
+
+@ Show Hidden
+cy Dangos Cudd
+
+@ Copy existing user data?
+cy Copïo data defnyddiwr presennol?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+cy Gellir copïo cadwadau, ffurfweddiadau, demos a phecynnau mapiau i'r ffolder newydd.
+
+@ Copy Data
+cy Copïo Data
+
+@ Switch Only
+cy Newid yn Unig
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ cy Heb ddod o hyd i ffmpeg: ysgrifennwyd {} ffrâm PNG a WAV i {}
 # Personal bests.
 @ New personal best ({}): {}
 cy Gorau personol newydd ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+cy Cyfeiriadur data defnyddiwr wedi'i osod i {}
+
+@ User data directory error: {}
+cy Gwall cyfeiriadur data defnyddiwr: {}

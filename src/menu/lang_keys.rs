@@ -29,6 +29,7 @@ pub(crate) fn menu_keys() -> Vec<&'static str> {
                 out.push(label);
                 out.extend(choices.iter().map(|c| c.0));
             }
+            Item::UserDataDir => out.push("User Data Directory"),
             _ => {}
         }
         out.extend(tooltip(item));

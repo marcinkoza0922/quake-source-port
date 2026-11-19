@@ -54,9 +54,12 @@ impl Host {
         }
         let want = base_name(&r.stem);
         // a game dir, not a stray folder (a failed install's readme)
-        qcore::vfs::read_dir(&self.fs_snapshot.0).ok()?.into_iter().filter(|e| e.is_dir && qui::mods::is_game_dir(&e.path)).find_map(|e| {
-            let n = e.path.file_name()?.to_string_lossy().into_owned();
-            (base_name(&n) == want).then_some(n)
+        let mods_dir = crate::user_mods_dir();
+        [self.fs_snapshot.0.as_path(), mods_dir.as_path()].into_iter().find_map(|root| {
+            qcore::vfs::read_dir(root).ok()?.into_iter().filter(|e| e.is_dir && qui::mods::is_game_dir(&e.path)).find_map(|e| {
+                let n = e.path.file_name()?.to_string_lossy().into_owned();
+                (base_name(&n) == want).then_some(n)
+            })
         })
     }
 

@@ -619,3 +619,19 @@ de Neue Bestzeit ({}): {}
 it Nuovo record personale ({}): {}
 es Nueva mejor marca personal ({}): {}
 ru Новый личный рекорд ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+fr Dossier des données utilisateur défini sur {}
+de Benutzerdatenverzeichnis festgelegt auf {}
+it Cartella dati utente impostata su {}
+es Carpeta de datos de usuario establecida en {}
+ru Папка пользовательских данных задана: {}
+
+@ User data directory error: {}
+fr Erreur du dossier des données utilisateur : {}
+de Fehler beim Benutzerdatenverzeichnis: {}
+it Errore cartella dati utente: {}
+es Error de carpeta de datos de usuario: {}
+ru Ошибка папки пользовательских данных: {}
+

@@ -31,11 +31,7 @@ impl Menu {
         }
         if page == Page::NewGameAddons {
             c.round_box(24.0, 264.0, 172.0, 22.0, 2.0, HILITE, Some(BORDER));
-            if self.pad_ui {
-                self.glyphs.hints_centered(c, 110.0, 268.0, &[(K_YBUTTON, "Play")]);
-            } else {
-                c.text_center(110.0, 271.0, "Play", TXT, GOLD_FG);
-            }
+            self.glyphs.button_label(c, [24.0, 264.0, 172.0, 22.0], self.pad_ui.then_some(K_YBUTTON), "Play", TXT, GOLD_FG);
         }
         let a = self.selected_addon();
         super::addon_preview::draw(c, pic, a.id, time, [216.0, 50.0, 404.0, 116.0]);

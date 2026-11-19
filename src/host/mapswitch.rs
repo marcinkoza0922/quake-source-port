@@ -31,7 +31,8 @@ impl Host {
             }
             return;
         }
-        let Some(info) = qui::mods::scan(&basedir).into_iter().find(|m| m.dir.eq_ignore_ascii_case(dir)) else {
+        let mods_dir = crate::user_mods_dir();
+        let Some(info) = qui::mods::scan_roots(&[&basedir, &mods_dir]).into_iter().find(|m| m.dir.eq_ignore_ascii_case(dir)) else {
             self.con.print(&qcore::ctr!("game: no game dir \"{}\" in {}\n", dir, basedir.display()));
             return;
         };
@@ -66,7 +67,8 @@ impl Host {
 
     /// Fills the mod menu's list (`_mods`).
     pub(super) fn scan_mods(&mut self) {
-        let mods = qui::mods::scan(&self.fs_snapshot.0);
+        let mods_dir = crate::user_mods_dir();
+        let mods = qui::mods::scan_roots(&[&self.fs_snapshot.0, &mods_dir]);
         let times: Vec<u64> = mods
             .iter()
             .map(|m| {
@@ -84,13 +86,15 @@ impl Host {
     /// Starts loading the Quaddicted index for Map Packs > Get more maps.
     pub(super) fn open_quaddicted(&mut self, force: bool) {
         let basedir = self.fs_snapshot.0.clone();
-        let cache = crate::user_dir("id1").parent().map_or_else(|| basedir.join("quaddicted"), |p| p.join("quaddicted"));
-        self.menu.mods.online.data.open(&basedir, &cache, force);
+        let install_root = crate::user_mods_dir();
+        let cache = crate::quaddicted_cache_dir();
+        self.menu.mods.online.data.open(&basedir, &install_root, &cache, force);
     }
 
     /// Fills the mod menu's map page for one mod (`_modmaps <dir>`).
     pub(super) fn scan_mod_maps(&mut self, dir: &str) {
-        let maps = qui::mods::maps(&self.fs_snapshot.0, dir);
+        let mods_dir = crate::user_mods_dir();
+        let maps = qui::mods::maps_roots(&[&self.fs_snapshot.0, &mods_dir], dir);
         let stats = qui::stats::Stats::load(&crate::user_dir(dir));
         self.menu.set_mod_maps(maps, stats);
     }

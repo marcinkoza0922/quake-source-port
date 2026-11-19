@@ -3793,3 +3793,19 @@ de klassisch
 it classico
 es clásico
 ru классический
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+fr Sauvegarder au ramassage d'une clé
+de Beim Aufheben eines Schlüssels speichern
+it Salva alla raccolta di una chiave
+es Guardar al recoger una llave
+ru Сохранять при подборе ключа
+
+@ User Data Directory
+fr Dossier des données utilisateur
+de Benutzerdatenverzeichnis
+it Cartella dati utente
+es Carpeta de datos de usuario
+ru Папка пользовательских данных
+

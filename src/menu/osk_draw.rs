@@ -8,16 +8,27 @@ impl Menu {
     }
 
     pub(super) fn osk_key(&mut self, key: i32, mut o: Osk, cv: &mut Cvars, out: &mut Vec<Action>) {
-        // a text row, or the Options hub's search field
-        let search = match self.screen {
-            Screen::Options => true,
-            Screen::OptionsPage(p) if matches!(self.page_item(p, self.opt_cursor), Item::Text { .. }) => false,
+        // a text row, the Options hub's search field, or a mod/map filter box
+        #[derive(Clone, Copy)]
+        enum Target {
+            Search,
+            Mods(modmenu::Page),
+            Text,
+        }
+        let target = match self.screen {
+            Screen::Options => Target::Search,
+            Screen::Mods | Screen::ModMaps | Screen::ModOnline => Target::Mods(self.mods_page()),
+            Screen::OptionsPage(p) if matches!(self.page_item(p, self.opt_cursor), Item::Text { .. }) => Target::Text,
             _ => {
                 self.osk = None;
                 return;
             }
         };
-        let backspace = |m: &mut Self, cv: &mut Cvars| if search { m.search_backspace() } else { m.text_delete(false, cv) };
+        let backspace = |m: &mut Self, cv: &mut Cvars| match target {
+            Target::Search => m.search_backspace(),
+            Target::Mods(p) => m.mods.filter_pop(p),
+            Target::Text => m.text_delete(false, cv),
+        };
         let n = OSK_ACTIONS.len();
         match key {
             K_UPARROW | K_DPAD_UP => o.row = (o.row + 4) % 5,
@@ -74,6 +85,7 @@ impl Menu {
         }
         let aw = kw * 10.0 / OSK_ACTIONS.len() as f32;
         let y = OSK_Y + 4.0 * kh;
+        const ACTION_KEYS: [Option<i32>; 4] = [Some(K_YBUTTON), None, Some(K_XBUTTON), Some(K_BBUTTON)];
         for (i, label) in OSK_ACTIONS.iter().enumerate() {
             let x = x0 + i as f32 * aw;
             if o.row == 4 && o.action() == i {
@@ -81,7 +93,8 @@ impl Menu {
             }
             c.frame(x + 1.0, y + 1.0, aw - 2.0, kh - 2.0, [0.35, 0.27, 0.16, 0.9]);
             let col = if i == 0 && o.shift { GOLD_FG } else { FG };
-            c.text_center(x + aw / 2.0, crate::glyphs::center_text_y(y, kh, TXT), label, TXT, col);
+            let key = self.pad_ui.then_some(ACTION_KEYS[i]).flatten();
+            self.glyphs.button_label(c, [x, y, aw, kh], key, label, TXT, col);
         }
     }
 }

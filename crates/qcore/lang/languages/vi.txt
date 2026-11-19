@@ -1632,6 +1632,13 @@ vi tùy chỉnh
 @ classic
 vi cổ điển
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+vi Lưu khi nhặt chìa khóa
+
+@ User Data Directory
+vi Thư mục dữ liệu người dùng
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ vi Di chuyển, đổi cỡ, thêm và gỡ các thành phần HUD: máu, đạn
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 vi Hiện đại: các thành phần gọn ở mép màn hình; cổ điển: thanh trạng thái gốc. Chọn một mẫu sẽ đặt lại HUD; thay đổi trong Sửa HUD khiến nó thành tùy chỉnh
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+vi Tự động lưu khi bạn nhặt được chìa khóa
+
+@ Where saves, configs, demos and downloaded map packs are stored
+vi Nơi lưu tệp lưu, cấu hình, demo và gói bản đồ đã tải xuống
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ vi TÙY CHỈNH
 
 @ Customize Experience
 vi Tùy chỉnh trải nghiệm
-
-@ Disable All
-vi Tắt tất cả
 
 @ Disable All Modifications
 vi Tắt mọi thay đổi
@@ -3003,17 +3014,11 @@ vi Không có demo nào khớp bộ lọc. Backspace hoặc Esc sẽ xóa nó.
 @ Renaming an automatic demo moves it to the saved demos.
 vi Đổi tên demo tự động sẽ chuyển nó sang các demo đã lưu.
 
-@ Sort
-vi Sắp xếp
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 vi Khi đang phát demo: A tạm dừng, d-pad tua và đổi tốc độ, LT và RT đánh dấu đoạn cắt và X xuất nó.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 vi Space tạm dừng | Trái/Phải tua | Lên/Xuống tốc độ | PgUp/PgDn 10 giây | I/O đánh dấu | E xuất
-
-@ Switch List
-vi Đổi danh sách
 
 @ This can't be undone.
 vi Không thể hoàn tác.
@@ -3060,6 +3065,43 @@ vi Đang chuẩn bị...
 # Save cards: personal best.
 @ PB {} {}
 vi PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+vi Đã nhặt chìa khóa
+
+@ Select User Data Directory
+vi Chọn thư mục dữ liệu người dùng
+
+@ Data folder: {}
+vi Thư mục dữ liệu: {}
+
+@ Parent Folder
+vi Thư mục cha
+
+@ Unable to read directory
+vi Không thể đọc thư mục
+
+@ No subfolders
+vi Không có thư mục con
+
+@ Select Folder
+vi Chọn thư mục
+
+@ Show Hidden
+vi Hiện mục ẩn
+
+@ Copy existing user data?
+vi Sao chép dữ liệu người dùng hiện có?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+vi Tệp lưu, cấu hình, demo và gói bản đồ đã tải có thể được sao chép sang thư mục mới.
+
+@ Copy Data
+vi Sao chép dữ liệu
+
+@ Switch Only
+vi Chỉ chuyển đổi
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ vi Không tìm thấy ffmpeg: đã ghi {} khung hình PNG và một tệp WAV v�
 # Personal bests.
 @ New personal best ({}): {}
 vi Kỷ lục cá nhân mới ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+vi Đã đặt thư mục dữ liệu người dùng thành {}
+
+@ User data directory error: {}
+vi Lỗi thư mục dữ liệu người dùng: {}

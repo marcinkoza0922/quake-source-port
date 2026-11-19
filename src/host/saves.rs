@@ -76,6 +76,44 @@ impl Host {
         crate::user_dir(self.fs_snapshot.1.last().map_or("id1", String::as_str))
     }
 
+    /// Switches the active user data directory (optionally copying existing
+    /// user data first) and updates live filesystem, config and mod state.
+    pub(super) fn apply_user_data_dir(&mut self, parent: PathBuf, copy: bool) {
+        let old_root = crate::userdata::root();
+        let target_root = crate::userdata::resolve_root(&parent);
+        if copy
+            && let Err(e) = crate::userdata::copy_data(&old_root, &target_root)
+        {
+            self.print(&qcore::ctr!("User data directory error: {}\n", e));
+            return;
+        }
+        let root = match crate::userdata::set_parent(&parent, !self.headless) {
+            Ok(r) => r,
+            Err(e) => {
+                self.print(&qcore::ctr!("User data directory error: {}\n", e));
+                return;
+            }
+        };
+        // Drop any startup `-userdir <path>` so mod relaunches use the new choice.
+        let mut cleaned = Vec::with_capacity(self.cmdline.len());
+        let mut it = self.cmdline.iter();
+        while let Some(a) = it.next() {
+            if a.eq_ignore_ascii_case("-userdir") {
+                it.next();
+            } else {
+                cleaned.push(a.clone());
+            }
+        }
+        self.cmdline = cleaned;
+        self.server.core.fs.set_mod_roots(vec![crate::user_mods_dir()]);
+        self.server.core.fs.replace_user_dir(self.user_dir());
+        self.con.shell_env.userdir = self.user_dir();
+        self.save_thumbs.clear();
+        self.write_config();
+        self.scan_mods();
+        self.print(&qcore::ctr!("User data directory set to {}\n", root.display()));
+    }
+
     /// Where a save called `name` is written: `.qsa` for a game with
     /// add-ons (no other port can load it), `.sav` otherwise.
     pub(super) fn savegame_path(&self, name: &str) -> PathBuf {
@@ -171,9 +209,9 @@ impl Host {
         let cv = &self.server.core.cvars;
         let on = cv.value_of("sv_autosave") != 0.0;
         let keep = if on { cv.value_of("sv_autosave_keep").clamp(0.0, crate::autosave::MAX as f32) as usize } else { 0 };
-        let flags = ["entry", "secret", "monsters", "secrets"].map(|n| cv.value_of(&format!("sv_autosave_{n}")) != 0.0);
+        let flags = ["entry", "secret", "monsters", "secrets", "key"].map(|n| cv.value_of(&format!("sv_autosave_{n}")) != 0.0);
         let interval = cv.value_of("sv_autosave_interval").max(0.0) as f64 * 60.0;
-        let reason = self.autosave.update(self.server.time(), self.server.stats(), self.server.core.sv.loadgame, flags, interval);
+        let reason = self.autosave.update(self.server.time(), self.server.stats(), self.server.player_keys(), self.server.core.sv.loadgame, flags, interval);
         if let Some(reason) = reason.filter(|_| keep > 0) {
             let text = self.server.save_game();
             // The v5 description is ignored by the loader; preserve the trigger in the save itself.
@@ -332,6 +370,12 @@ pub(super) fn register(c: &mut Commands<Host>) {
         }
     });
     c.add("_scansaves", |h, _| h.scan_saves());
+    c.add("menu_dirbrowser", |h, _| h.menu.open_dir_browser());
+    c.add("_apply_user_data_dir", |h, _| {
+        if let Some((parent, copy)) = h.menu.pending_user_data_dir.take() {
+            h.apply_user_data_dir(parent, copy);
+        }
+    });
     c.add("_deletesave", |h, a| {
         let name = a.argv(1);
         if !valid_save_name(name) { return; }

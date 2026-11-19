@@ -276,6 +276,34 @@ impl Server {
         }
     }
 
+    /// Keys currently held by player 1 (standard keys plus AD/Keep/QBJ3 keys).
+    pub fn player_keys(&self) -> KeyState {
+        let Some(l) = &self.level else { return KeyState::default() };
+        if self.core.clients.is_empty() {
+            return KeyState::default();
+        }
+        let f = &self.core.sv.fields;
+        let items = l.vm.ent_f(1, f.items) as u32;
+        let mut mask = (items >> 17) & 0b11;
+        if let (Some(mi), Some(_)) = (f.moditems, f.ckeyname1) {
+            let moditems = l.vm.ent_f(1, mi) as u32;
+            mask |= ((moditems >> 13) & 0b1111) << 2;
+        }
+        if let (Some(i2), Some(_)) = (f.items2, f.weaponismoditems) {
+            let items2 = l.vm.ent_f(1, i2) as u32;
+            if items2 & (1 << 16) != 0 {
+                mask |= 1 << 6;
+            }
+        }
+        let counts = if let (Some(_), Some(wt)) = (f.items_qbj, f.worldtype) {
+            let w = l.vm.ent_f(1, wt) as u32;
+            [(w & 0xf) as u8, ((w >> 4) & 0xf) as u8]
+        } else {
+            [0, 0]
+        };
+        KeyState { mask, counts }
+    }
+
     /// Take queued console text (QC `localcmd`, changelevel) so a host with
     /// a single shared command buffer can run it.
     pub fn take_text(&mut self) -> String {

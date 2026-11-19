@@ -1632,6 +1632,13 @@ nb egendefinert
 @ classic
 nb klassisk
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+nb Lagre ved nøkkelopplukking
+
+@ User Data Directory
+nb Brukerdatamappe
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ nb Flytt, endre størrelse, legg til og fjern HUD-elementer: helse, ammunisjon, 
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 nb Moderne: kompakte elementer langs skjermkantene; klassisk: den opprinnelige statuslinjen. Et valg tilbakestiller HUD-en; endringer i Rediger HUD gjør den egendefinert
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+nb Lagrer automatisk når du plukker opp en nøkkel
+
+@ Where saves, configs, demos and downloaded map packs are stored
+nb Hvor lagringer, innstillinger, demoer og nedlastede kartpakker lagres
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ nb TILPASSET
 
 @ Customize Experience
 nb Tilpass opplevelsen
-
-@ Disable All
-nb Slå av alt
 
 @ Disable All Modifications
 nb Slå av alle endringer
@@ -3003,17 +3014,11 @@ nb Ingen demoer passer filteret. Tilbake eller Esc tømmer det.
 @ Renaming an automatic demo moves it to the saved demos.
 nb En automatisk demo som får nytt navn, flyttes til de lagrede demoene.
 
-@ Sort
-nb Sorter
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 nb Under en demo: A pauser, styrekorset spoler og endrer hastighet, LT og RT merker et klipp, og X eksporterer det.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 nb Mellomrom pause | Venstre/Høyre spol | Opp/Ned hastighet | PgUp/PgDn 10 s | I/O merk | E eksporter
-
-@ Switch List
-nb Bytt liste
 
 @ This can't be undone.
 nb Dette kan ikke angres.
@@ -3060,6 +3065,43 @@ nb Forbereder...
 # Save cards: personal best.
 @ PB {} {}
 nb PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+nb Nøkkel plukket opp
+
+@ Select User Data Directory
+nb Velg brukerdatamappe
+
+@ Data folder: {}
+nb Datamappe: {}
+
+@ Parent Folder
+nb Overordnet mappe
+
+@ Unable to read directory
+nb Kan ikke lese mappen
+
+@ No subfolders
+nb Ingen undermapper
+
+@ Select Folder
+nb Velg mappe
+
+@ Show Hidden
+nb Vis skjulte
+
+@ Copy existing user data?
+nb Kopiere eksisterende brukerdata?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+nb Lagringer, innstillinger, demoer og nedlastede kartpakker kan kopieres til den nye mappen.
+
+@ Copy Data
+nb Kopier data
+
+@ Switch Only
+nb Bare bytt
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ nb Fant ikke ffmpeg: skrev {} PNG-bilder og en WAV til {}
 # Personal bests.
 @ New personal best ({}): {}
 nb Ny personlig rekord ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+nb Brukerdatamappe satt til {}
+
+@ User data directory error: {}
+nb Feil med brukerdatamappe: {}

@@ -1632,6 +1632,13 @@ pa ਆਪਣਾ
 @ classic
 pa ਕਲਾਸਿਕ
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+pa ਚਾਬੀ ਚੁੱਕਣ 'ਤੇ ਸੇਵ ਕਰੋ
+
+@ User Data Directory
+pa ਯੂਜ਼ਰ ਡਾਟਾ ਡਾਇਰੈਕਟਰੀ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ pa HUD ਤੱਤਾਂ ਨੂੰ ਹਿਲਾਓ, ਆਕਾਰ ਬਦਲੋ, ਸ
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 pa ਆਧੁਨਿਕ: ਸਕ੍ਰੀਨ ਦੇ ਕਿਨਾਰਿਆਂ 'ਤੇ ਛੋਟੇ ਤੱਤ; ਕਲਾਸਿਕ: ਮੂਲ ਹਾਲਤ ਪੱਟੀ। ਇੱਕ ਚੁਣਨ ਨਾਲ HUD ਰੀਸੈੱਟ ਹੁੰਦਾ ਹੈ; HUD ਸੋਧੋ ਵਿੱਚ ਬਦਲਾਅ ਇਸਨੂੰ ਆਪਣਾ ਬਣਾਉਂਦੇ ਹਨ
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+pa ਚਾਬੀ ਚੁੱਕਣ 'ਤੇ ਆਪਣੇ ਆਪ ਸੇਵ ਕਰਦਾ ਹੈ
+
+@ Where saves, configs, demos and downloaded map packs are stored
+pa ਜਿੱਥੇ ਸੇਵ, ਕੌਨਫਿਗ, ਡੈਮੋ ਅਤੇ ਡਾਊਨਲੋਡ ਕੀਤੇ ਮੈਪ ਪੈਕ ਸਟੋਰ ਹੁੰਦੇ ਹਨ
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ pa ਕਸਟਮ
 
 @ Customize Experience
 pa ਤਜਰਬਾ ਕਸਟਮਾਈਜ਼ ਕਰੋ
-
-@ Disable All
-pa ਸਭ ਬੰਦ ਕਰੋ
 
 @ Disable All Modifications
 pa ਸਾਰੀਆਂ ਤਬਦੀਲੀਆਂ ਬੰਦ ਕਰੋ
@@ -3003,17 +3014,11 @@ pa ਫਿਲਟਰ ਨਾਲ ਕੋਈ ਡੈਮੋ ਮੇਲ ਨਹੀਂ ਖ�
 @ Renaming an automatic demo moves it to the saved demos.
 pa ਆਪਣੇ-ਆਪ ਬਣੇ ਡੈਮੋ ਦਾ ਨਾਮ ਬਦਲਣ ਨਾਲ ਉਹ ਸੰਭਾਲੇ ਡੈਮੋ ਵਿੱਚ ਚਲਾ ਜਾਂਦਾ ਹੈ।
 
-@ Sort
-pa ਕ੍ਰਮ
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 pa ਡੈਮੋ ਚੱਲਦੇ ਸਮੇਂ: A ਰੋਕਦਾ ਹੈ, ਡੀ-ਪੈਡ ਸਰਕਾਉਂਦਾ ਅਤੇ ਗਤੀ ਬਦਲਦਾ ਹੈ, LT ਅਤੇ RT ਕਲਿੱਪ ਨਿਸ਼ਾਨਬੱਧ ਕਰਦੇ ਹਨ ਅਤੇ X ਉਸਨੂੰ ਨਿਰਯਾਤ ਕਰਦਾ ਹੈ।
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 pa Space ਰੋਕੋ | ਖੱਬੇ/ਸੱਜੇ ਸਰਕਾਓ | ਉੱਪਰ/ਹੇਠਾਂ ਗਤੀ | PgUp/PgDn 10 ਸਕਿੰ. | I/O ਨਿਸ਼ਾਨ | E ਨਿਰਯਾਤ
-
-@ Switch List
-pa ਸੂਚੀ ਬਦਲੋ
 
 @ This can't be undone.
 pa ਇਸਨੂੰ ਵਾਪਸ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।
@@ -3060,6 +3065,43 @@ pa ਤਿਆਰੀ ਹੋ ਰਹੀ ਹੈ...
 # Save cards: personal best.
 @ PB {} {}
 pa PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+pa ਚਾਬੀ ਚੁੱਕੀ ਗਈ
+
+@ Select User Data Directory
+pa ਯੂਜ਼ਰ ਡਾਟਾ ਡਾਇਰੈਕਟਰੀ ਚੁਣੋ
+
+@ Data folder: {}
+pa ਡਾਟਾ ਫੋਲਡਰ: {}
+
+@ Parent Folder
+pa ਮੂਲ ਫੋਲਡਰ
+
+@ Unable to read directory
+pa ਡਾਇਰੈਕਟਰੀ ਪੜ੍ਹੀ ਨਹੀਂ ਜਾ ਸਕੀ
+
+@ No subfolders
+pa ਕੋਈ ਸਬ-ਫੋਲਡਰ ਨਹੀਂ
+
+@ Select Folder
+pa ਫੋਲਡਰ ਚੁਣੋ
+
+@ Show Hidden
+pa ਲੁਕਵੇਂ ਦਿਖਾਓ
+
+@ Copy existing user data?
+pa ਮੌਜੂਦਾ ਯੂਜ਼ਰ ਡਾਟਾ ਕਾਪੀ ਕਰਨਾ ਹੈ?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+pa ਸੇਵ, ਕੌਨਫਿਗ, ਡੈਮੋ ਅਤੇ ਡਾਊਨਲੋਡ ਕੀਤੇ ਮੈਪ ਪੈਕ ਨਵੇਂ ਫੋਲਡਰ ਵਿੱਚ ਕਾਪੀ ਕੀਤੇ ਜਾ ਸਕਦੇ ਹਨ।
+
+@ Copy Data
+pa ਡਾਟਾ ਕਾਪੀ ਕਰੋ
+
+@ Switch Only
+pa ਸਿਰਫ਼ ਬਦਲੋ
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ pa ffmpeg ਨਹੀਂ ਮਿਲਿਆ: {} PNG ਫ੍ਰੇਮ ਅਤੇ ਇੱ�
 # Personal bests.
 @ New personal best ({}): {}
 pa ਨਵਾਂ ਨਿੱਜੀ ਸਰਵੋਤਮ ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+pa ਯੂਜ਼ਰ ਡਾਟਾ ਡਾਇਰੈਕਟਰੀ {} 'ਤੇ ਸੈੱਟ ਕੀਤੀ ਗਈ
+
+@ User data directory error: {}
+pa ਯੂਜ਼ਰ ਡਾਟਾ ਡਾਇਰੈਕਟਰੀ ਗਲਤੀ: {}

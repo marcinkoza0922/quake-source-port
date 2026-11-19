@@ -49,7 +49,8 @@ impl Host {
             .into_iter()
             .map(|p| p.strip_suffix(".dem").unwrap_or(&p).to_string())
             .collect();
-        let mods: Vec<String> = qui::mods::scan(fs.basedir()).into_iter().map(|m| m.dir).collect();
+        let mods_dir = crate::user_mods_dir();
+        let mods: Vec<String> = qui::mods::scan_roots(&[fs.basedir(), &mods_dir]).into_iter().map(|m| m.dir).collect();
         let mut saves = Vec::new();
         if let Ok(rd) = qcore::vfs::read_dir(&self.user_dir()) {
             for e in rd {

@@ -1632,6 +1632,13 @@ sw maalum
 @ classic
 sw asili
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+sw Hifadhi unapochukua ufunguo
+
+@ User Data Directory
+sw Saraka ya Data ya Mtumiaji
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ sw Sogeza, badilisha ukubwa, ongeza na ondoa vipengele vya HUD: afya, risasi, si
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 sw Kisasa: vipengele vidogo kwenye kingo za skrini; kawaida: upau wa hali wa asili. Kuchagua mmoja huweka upya HUD; mabadiliko katika Hariri HUD huifanya kuwa maalum
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+sw Huhifadhi kiotomatiki unapochukua ufunguo
+
+@ Where saves, configs, demos and downloaded map packs are stored
+sw Mahali ambapo hifadhi, mipangilio, demo na vifurushi vya ramani vilivyopakuliwa huhifadhiwa
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ sw MAALUM
 
 @ Customize Experience
 sw Binafsisha Uzoefu
-
-@ Disable All
-sw Zima Zote
 
 @ Disable All Modifications
 sw Zima Mabadiliko Yote
@@ -3003,17 +3014,11 @@ sw Hakuna demo inayolingana na kichujio. Backspace au Esc hukifuta.
 @ Renaming an automatic demo moves it to the saved demos.
 sw Kubadilisha jina la demo ya kiotomatiki huihamishia kwenye demo zilizohifadhiwa.
 
-@ Sort
-sw Panga
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 sw Wakati demo inacheza: A husitisha, d-pad husogeza na kubadili kasi, LT na RT huweka alama ya kipande na X hukihamisha.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sw Nafasi sitisha | Kushoto/Kulia sogeza | Juu/Chini kasi | PgUp/PgDn sek 10 | I/O alama | E hamisha
-
-@ Switch List
-sw Badili orodha
 
 @ This can't be undone.
 sw Hili haliwezi kutenduliwa.
@@ -3060,6 +3065,43 @@ sw Inaandaa...
 # Save cards: personal best.
 @ PB {} {}
 sw PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+sw Ufunguo umechukuliwa
+
+@ Select User Data Directory
+sw Chagua Saraka ya Data ya Mtumiaji
+
+@ Data folder: {}
+sw Folda ya data: {}
+
+@ Parent Folder
+sw Folda Kuu
+
+@ Unable to read directory
+sw Haiwezi kusoma saraka
+
+@ No subfolders
+sw Hakuna folda ndogo
+
+@ Select Folder
+sw Chagua Folda
+
+@ Show Hidden
+sw Onyesha Zilizofichwa
+
+@ Copy existing user data?
+sw Nakili data iliyopo ya mtumiaji?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+sw Hifadhi, mipangilio, demo na vifurushi vya ramani vilivyopakuliwa vinaweza kunakiliwa kwenye folda mpya.
+
+@ Copy Data
+sw Nakili Data
+
+@ Switch Only
+sw Badilisha Tu
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ sw ffmpeg haikupatikana: imeandika fremu {} za PNG na WAV moja kwenye {}
 # Personal bests.
 @ New personal best ({}): {}
 sw Rekodi binafsi mpya ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+sw Saraka ya data ya mtumiaji imewekwa kuwa {}
+
+@ User data directory error: {}
+sw Hitilafu ya saraka ya data ya mtumiaji: {}

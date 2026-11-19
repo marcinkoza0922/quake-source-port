@@ -1632,6 +1632,13 @@ da brugerdefineret
 @ classic
 da klassisk
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+da Gem ved opsamling af nøgle
+
+@ User Data Directory
+da Brugerdatamappe
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ da Flyt, skalér, tilføj og fjern HUD-elementer: helbred, ammunition, våben, t
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 da Moderne: kompakte elementer langs skærmkanterne; klassisk: den oprindelige statuslinje. Et valg nulstiller HUD'en; ændringer i Rediger HUD gør den brugerdefineret
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+da Gemmer automatisk, når du samler en nøgle op
+
+@ Where saves, configs, demos and downloaded map packs are stored
+da Hvor gemte spil, indstillinger, demoer og hentede kortpakker gemmes
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ da TILPASSET
 
 @ Customize Experience
 da Tilpas oplevelsen
-
-@ Disable All
-da Slå alt fra
 
 @ Disable All Modifications
 da Slå alle ændringer fra
@@ -3003,17 +3014,11 @@ da Ingen demoer passer til filteret. Backspace eller Esc rydder det.
 @ Renaming an automatic demo moves it to the saved demos.
 da En automatisk demo, der omdøbes, flyttes til de gemte demoer.
 
-@ Sort
-da Sortér
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 da Under en demo: A sætter på pause, retningsknapperne spoler og ændrer hastighed, LT og RT markerer et klip, og X eksporterer det.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 da Mellemrum pause | Venstre/Højre spol | Op/Ned hastighed | PgUp/PgDn 10 s | I/O markér | E eksportér
-
-@ Switch List
-da Skift liste
 
 @ This can't be undone.
 da Det kan ikke fortrydes.
@@ -3060,6 +3065,43 @@ da Forbereder...
 # Save cards: personal best.
 @ PB {} {}
 da PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+da Nøgle opsamlet
+
+@ Select User Data Directory
+da Vælg brugerdatamappe
+
+@ Data folder: {}
+da Datamappe: {}
+
+@ Parent Folder
+da Overordnet mappe
+
+@ Unable to read directory
+da Kan ikke læse mappen
+
+@ No subfolders
+da Ingen undermapper
+
+@ Select Folder
+da Vælg mappe
+
+@ Show Hidden
+da Vis skjulte
+
+@ Copy existing user data?
+da Kopiér eksisterende brugerdata?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+da Gemte spil, indstillinger, demoer og hentede kortpakker kan kopieres til den nye mappe.
+
+@ Copy Data
+da Kopiér data
+
+@ Switch Only
+da Skift kun
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ da ffmpeg ikke fundet: skrev {} PNG-billeder og en WAV til {}
 # Personal bests.
 @ New personal best ({}): {}
 da Ny personlig rekord ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+da Brugerdatamappe sat til {}
+
+@ User data directory error: {}
+da Fejl i brugerdatamappe: {}

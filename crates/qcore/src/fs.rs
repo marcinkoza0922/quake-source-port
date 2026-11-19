@@ -18,6 +18,7 @@ pub use pack::*;
 pub struct SearchPath {
     /// Index into `Fs::game_dirs` (0 = first added, usually id1).
     pub game: usize,
+    is_user_dir: bool,
     source: Source,
 }
 
@@ -48,6 +49,8 @@ pub struct FileOrigin {
 #[derive(Debug)]
 pub struct Fs {
     basedir: PathBuf,
+    /// Extra roots searched after `basedir` by `add_game_dir` (e.g. user `mods/`).
+    mod_roots: Vec<PathBuf>,
     game_dirs: Vec<String>,
     /// Lowest priority first; searched in reverse.
     paths: Vec<SearchPath>,
@@ -64,7 +67,7 @@ pub const WEB_USER_ROOT: &str = "/quake-user";
 
 impl Fs {
     pub fn new(basedir: impl Into<PathBuf>) -> Self {
-        Self { basedir: basedir.into(), game_dirs: Vec::new(), paths: Vec::new() }
+        Self { basedir: basedir.into(), mod_roots: Vec::new(), game_dirs: Vec::new(), paths: Vec::new() }
     }
 
     /// `QUAKE_BASEDIR`, local data (two child levels), or an installed Quake.
@@ -87,6 +90,26 @@ impl Fs {
         &self.basedir
     }
 
+    /// Registers an additional root directory searched by `add_game_dir`
+    /// after `basedir` (e.g. `<user data>/mods` for Quaddicted map packs).
+    pub fn add_mod_root(&mut self, dir: impl Into<PathBuf>) {
+        let dir = dir.into();
+        if dir != self.basedir && !self.mod_roots.contains(&dir) {
+            self.mod_roots.push(dir);
+        }
+    }
+
+    pub fn set_mod_roots(&mut self, roots: Vec<PathBuf>) {
+        self.mod_roots.clear();
+        for r in roots {
+            self.add_mod_root(r);
+        }
+    }
+
+    pub fn mod_roots(&self) -> &[PathBuf] {
+        &self.mod_roots
+    }
+
     /// Gamedir names in add order (lowest priority first).
     pub fn game_dirs(&self) -> &[String] {
         &self.game_dirs
@@ -105,16 +128,24 @@ impl Fs {
     /// gamedir (ironwail `-userdir` style: user configs/saves override data).
     pub fn add_user_dir(&mut self, dir: impl Into<PathBuf>) {
         let game = self.game_dirs.len().saturating_sub(1);
-        self.paths.push(SearchPath { game, source: Source::Dir(dir.into()) });
+        self.paths.push(SearchPath { game, is_user_dir: true, source: Source::Dir(dir.into()) });
+    }
+
+    /// Replaces any previously added user dirs with `dir` at top priority.
+    pub fn replace_user_dir(&mut self, dir: impl Into<PathBuf>) {
+        self.paths.retain(|p| !p.is_user_dir);
+        self.add_user_dir(dir);
     }
 
     /// COM_AddGameDirectory. Ignored if already added (case-insensitive).
-    /// Returns false if the directory doesn't exist.
+    /// Searches `basedir` and any `mod_roots`; mounts every existing copy in
+    /// order so user-installed overlays (e.g. map packs for `ad`) layer cleanly
+    /// on top of `basedir`. Returns false if none exist.
     pub fn add_game_dir(&mut self, name: &str) -> bool {
         if self.game_dirs.iter().any(|g| g.eq_ignore_ascii_case(name)) {
             return true;
         }
-        let dir = if name.eq_ignore_ascii_case("id1")
+        let base_dir = if name.eq_ignore_ascii_case("id1")
             && !vfs::is_dir(&self.basedir.join(name))
             && discovery::has_pak(&self.basedir)
         {
@@ -122,17 +153,34 @@ impl Fs {
         } else {
             self.basedir.join(name)
         };
-        if !vfs::is_dir(&dir) {
+        let mut dirs = Vec::new();
+        if vfs::is_dir(&base_dir) {
+            dirs.push(base_dir);
+        }
+        for root in &self.mod_roots {
+            let d = root.join(name);
+            if vfs::is_dir(&d) && !dirs.contains(&d) {
+                dirs.push(d);
+            }
+        }
+        if dirs.is_empty() {
             return false;
         }
         let game = self.game_dirs.len();
         self.game_dirs.push(name.to_string());
-        self.paths.push(SearchPath { game, source: Source::Dir(dir.clone()) });
+        for dir in dirs {
+            self.mount_dir(game, dir);
+        }
+        true
+    }
+
+    fn mount_dir(&mut self, game: usize, dir: PathBuf) {
+        self.paths.push(SearchPath { game, is_user_dir: false, source: Source::Dir(dir.clone()) });
         for i in 0.. {
             // Case-insensitive like loose files (e.g. func_mapjam3 ships PAK0.PAK).
             let pak = resolve_loose(&dir, &format!("pak{i}.pak"));
             match pak.and_then(|p| Pack::load_pak(&p)) {
-                Some(p) => self.paths.push(SearchPath { game, source: Source::Pack(p) }),
+                Some(p) => self.paths.push(SearchPath { game, is_user_dir: false, source: Source::Pack(p) }),
                 None => break,
             }
         }
@@ -146,10 +194,9 @@ impl Fs {
         pk3s.sort();
         for p in pk3s {
             if let Some(p) = Pack::load_pk3(&p) {
-                self.paths.push(SearchPath { game, source: Source::Pack(p) });
+                self.paths.push(SearchPath { game, is_user_dir: false, source: Source::Pack(p) });
             }
         }
-        true
     }
 
     /// Drop all gamedirs above the first `keep` (COM_ResetGameDirectories).
@@ -412,6 +459,31 @@ mod tests {
         assert!(fs.add_game_dir("id1"));
         assert_eq!(fs.game_dir(), Some("id1"));
         assert_eq!(fs.open("progs.dat").as_deref(), Some(&b"flat"[..]));
+        let _ = std::fs::remove_dir_all(b);
+    }
+
+    #[test]
+    fn mod_roots_and_replace_user_dir() {
+        let b = tmpdir("modroots");
+        let (base, mods, u1, u2) = (b.join("base"), b.join("mods"), b.join("u1"), b.join("u2"));
+        for d in [base.join("id1"), base.join("ad/maps"), mods.join("ad/maps"), mods.join("pack/maps"), u1.clone(), u2.clone()] {
+            std::fs::create_dir_all(d).unwrap();
+        }
+        std::fs::write(base.join("ad/maps/base.bsp"), "b").unwrap();
+        std::fs::write(mods.join("ad/maps/extra.bsp"), "e").unwrap();
+        std::fs::write(mods.join("pack/maps/p.bsp"), "p").unwrap();
+        std::fs::write(u1.join("config.cfg"), "u1").unwrap();
+        std::fs::write(u2.join("config.cfg"), "u2").unwrap();
+        let mut fs = Fs::new(&base);
+        fs.add_mod_root(&mods);
+        assert!(fs.add_game_dir("id1") && fs.add_game_dir("ad") && fs.add_game_dir("pack"));
+        assert_eq!(fs.open("maps/base.bsp").as_deref(), Some(&b"b"[..]));
+        assert_eq!(fs.open("maps/extra.bsp").as_deref(), Some(&b"e"[..]));
+        assert_eq!(fs.open("maps/p.bsp").as_deref(), Some(&b"p"[..]));
+        fs.add_user_dir(&u1);
+        assert_eq!(fs.open("config.cfg").as_deref(), Some(&b"u1"[..]));
+        fs.replace_user_dir(&u2);
+        assert_eq!(fs.open("config.cfg").as_deref(), Some(&b"u2"[..]));
         let _ = std::fs::remove_dir_all(b);
     }
 

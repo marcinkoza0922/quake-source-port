@@ -1632,6 +1632,13 @@ mr सानुकूल
 @ classic
 mr क्लासिक
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+mr किल्ली उचलल्यावर जतन करा
+
+@ User Data Directory
+mr वापरकर्ता डेटा निर्देशिका
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ mr HUD घटक हलवा, आकार बदला, जोडा आणि
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 mr आधुनिक: पडद्याच्या कडांवर छोटे घटक; क्लासिक: मूळ स्थिती पट्टी. एक निवडल्यास HUD रीसेट होतो; HUD संपादित करा मधील बदल त्याला सानुकूल करतात
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+mr किल्ली उचलल्यावर आपोआप जतन करते
+
+@ Where saves, configs, demos and downloaded map packs are stored
+mr जेथे सेव्ह, कॉन्फिग, डेमो आणि डाउनलोड केलेले नकाशा पॅक साठवले जातात
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ mr सानुकूल
 
 @ Customize Experience
 mr अनुभव सानुकूलित करा
-
-@ Disable All
-mr सर्व बंद करा
 
 @ Disable All Modifications
 mr सर्व बदल बंद करा
@@ -3003,17 +3014,11 @@ mr फिल्टरशी कोणताही डेमो जुळत न�
 @ Renaming an automatic demo moves it to the saved demos.
 mr स्वयंचलित डेमोचे नाव बदलल्यास तो जतन केलेल्या डेमोमध्ये जातो.
 
-@ Sort
-mr क्रम
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 mr डेमो चालू असताना: A थांबवते, डी-पॅड सरकवते आणि गती बदलते, LT आणि RT क्लिपची खूण करतात आणि X ती निर्यात करते.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 mr Space थांबवा | डावे/उजवे सरकवा | वर/खाली गती | PgUp/PgDn 10 से. | I/O खूण | E निर्यात
-
-@ Switch List
-mr यादी बदला
 
 @ This can't be undone.
 mr हे पूर्ववत करता येत नाही.
@@ -3060,6 +3065,43 @@ mr तयारी सुरू आहे...
 # Save cards: personal best.
 @ PB {} {}
 mr PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+mr किल्ली उचलली
+
+@ Select User Data Directory
+mr वापरकर्ता डेटा निर्देशिका निवडा
+
+@ Data folder: {}
+mr डेटा फोल्डर: {}
+
+@ Parent Folder
+mr मूळ फोल्डर
+
+@ Unable to read directory
+mr निर्देशिका वाचता आली नाही
+
+@ No subfolders
+mr उपफोल्डर नाहीत
+
+@ Select Folder
+mr फोल्डर निवडा
+
+@ Show Hidden
+mr लपवलेले दाखवा
+
+@ Copy existing user data?
+mr विद्यमान वापरकर्ता डेटा कॉपी करायचा का?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+mr सेव्ह, कॉन्फिग, डेमो आणि डाउनलोड केलेले नकाशा पॅक नवीन फोल्डरमध्ये कॉपी करता येतात.
+
+@ Copy Data
+mr डेटा कॉपी करा
+
+@ Switch Only
+mr फक्त बदला
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ mr ffmpeg सापडले नाही: {} PNG फ्रेम आणि ए�
 # Personal bests.
 @ New personal best ({}): {}
 mr नवीन वैयक्तिक सर्वोत्तम ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+mr वापरकर्ता डेटा निर्देशिका {} वर सेट केली
+
+@ User data directory error: {}
+mr वापरकर्ता डेटा निर्देशिका त्रुटी: {}

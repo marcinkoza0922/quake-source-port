@@ -1632,6 +1632,13 @@ th กำหนด​เอง
 @ classic
 th คลาสสิก
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+th บันทึก​เมื่อ​เก็บ​กุญแจ
+
+@ User Data Directory
+th โฟลเดอร์​ข้อมูล​ผู้ใช้
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ th ย้าย ปรับ​ขนาด เพิ่ม​และ​ลบ
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 th สมัยใหม่: องค์ประกอบ​กะทัดรัด​ที่​ขอบ​จอ คลาสสิก: แถบ​สถานะ​ดั้งเดิม การ​เลือก​จะ​รีเซ็ต​ HUD และ​การ​แก้ไข​ใน​ แก้ไข​ HUD จะ​ทำให้​เป็น​แบบ​กำหนด​เอง
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+th บันทึก​อัตโนมัติ​เมื่อ​คุณ​เก็บ​กุญแจ
+
+@ Where saves, configs, demos and downloaded map packs are stored
+th ตำแหน่ง​ที่​จัดเก็บ​เซฟ การ​ตั้งค่า เดโม และ​ชุด​แผนที่​ที่​ดาวน์โหลด
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ th กำหนด​เอง
 
 @ Customize Experience
 th ปรับแต่ง​ประสบการณ์
-
-@ Disable All
-th ปิด​ทั้งหมด
 
 @ Disable All Modifications
 th ปิด​การ​ปรับแต่ง​ทั้งหมด
@@ -3003,17 +3014,11 @@ th ไม่มี​เดโม​ที่​ตรง​กับ​ตั�
 @ Renaming an automatic demo moves it to the saved demos.
 th การ​เปลี่ยน​ชื่อ​เดโม​อัตโนมัติ​จะ​ย้าย​ไป​ไว้​ใน​เดโม​ที่​บันทึก​ไว้
 
-@ Sort
-th เรียง
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 th ระหว่าง​เล่น​เดโม: A หยุด​ชั่วคราว ปุ่ม​ทิศทาง​ใช้​กรอ​และ​เปลี่ยน​ความเร็ว LT และ RT มาร์ก​คลิป และ X ส่งออก​คลิป
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 th Space หยุด | ซ้าย/ขวา กรอ | ขึ้น/ลง ความเร็ว | PgUp/PgDn 10 วินาที | I/O มาร์ก | E ส่งออก
-
-@ Switch List
-th สลับ​รายการ
 
 @ This can't be undone.
 th ย้อน​กลับ​ไม่ได้
@@ -3060,6 +3065,43 @@ th กำลัง​เตรียม...
 # Save cards: personal best.
 @ PB {} {}
 th PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+th เก็บ​กุญแจ​แล้ว
+
+@ Select User Data Directory
+th เลือก​โฟลเดอร์​ข้อมูล​ผู้ใช้
+
+@ Data folder: {}
+th โฟลเดอร์​ข้อมูล: {}
+
+@ Parent Folder
+th โฟลเดอร์​ก่อนหน้า
+
+@ Unable to read directory
+th ไม่สามารถ​อ่าน​โฟลเดอร์​ได้
+
+@ No subfolders
+th ไม่มี​โฟลเดอร์​ย่อย
+
+@ Select Folder
+th เลือก​โฟลเดอร์
+
+@ Show Hidden
+th แสดง​รายการ​ที่​ซ่อน
+
+@ Copy existing user data?
+th คัดลอก​ข้อมูล​ผู้ใช้​ที่​มีอยู่​หรือไม่?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+th สามารถ​คัดลอก​เซฟ การ​ตั้งค่า เดโม และ​ชุด​แผนที่​ที่​ดาวน์โหลด​ไป​ยัง​โฟลเดอร์​ใหม่​ได้
+
+@ Copy Data
+th คัดลอก​ข้อมูล
+
+@ Switch Only
+th เปลี่ยน​เท่านั้น
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ th ไม่พบ ffmpeg: เขียน​เฟรม PNG {} เฟรม​
 # Personal bests.
 @ New personal best ({}): {}
 th สถิติ​ส่วนตัว​ใหม่ ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+th ตั้งค่า​โฟลเดอร์​ข้อมูล​ผู้ใช้​เป็น {}
+
+@ User data directory error: {}
+th ข้อผิดพลาด​ของ​โฟลเดอร์​ข้อมูล​ผู้ใช้: {}

@@ -1632,6 +1632,13 @@ pt-BR personalizado
 @ classic
 pt-BR clássico
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+pt-BR Salvar ao pegar uma chave
+
+@ User Data Directory
+pt-BR Pasta de dados do usuário
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ pt-BR Mova, redimensione, adicione e remova elementos do HUD: saúde, munição,
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 pt-BR Moderno: elementos compactos nas bordas da tela; clássico: a barra de status original. Escolher um redefine o HUD; mudanças em Editar HUD o tornam personalizado
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+pt-BR Salva automaticamente quando você pega uma chave
+
+@ Where saves, configs, demos and downloaded map packs are stored
+pt-BR Onde ficam salvos jogos, configurações, demos e pacotes de mapas baixados
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ pt-BR PERSONALIZADO
 
 @ Customize Experience
 pt-BR Personalizar a experiência
-
-@ Disable All
-pt-BR Desativar tudo
 
 @ Disable All Modifications
 pt-BR Desativar todas as modificações
@@ -3003,17 +3014,11 @@ pt-BR Nenhuma demo corresponde ao filtro. Backspace ou Esc o limpa.
 @ Renaming an automatic demo moves it to the saved demos.
 pt-BR Renomear uma demo automática a move para as demos guardadas.
 
-@ Sort
-pt-BR Ordenar
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 pt-BR Durante uma demo: A pausa, o direcional percorre e muda a velocidade, LT e RT marcam um trecho e X o exporta.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 pt-BR Espaço pausa | Esq./Dir. percorrer | Cima/Baixo velocidade | PgUp/PgDn 10 s | I/O marcar | E exportar
-
-@ Switch List
-pt-BR Trocar lista
 
 @ This can't be undone.
 pt-BR Isso não pode ser desfeito.
@@ -3060,6 +3065,43 @@ pt-BR Preparando...
 # Save cards: personal best.
 @ PB {} {}
 pt-BR PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+pt-BR Chave coletada
+
+@ Select User Data Directory
+pt-BR Selecionar pasta de dados do usuário
+
+@ Data folder: {}
+pt-BR Pasta de dados: {}
+
+@ Parent Folder
+pt-BR Pasta anterior
+
+@ Unable to read directory
+pt-BR Não foi possível ler a pasta
+
+@ No subfolders
+pt-BR Nenhuma subpasta
+
+@ Select Folder
+pt-BR Selecionar pasta
+
+@ Show Hidden
+pt-BR Mostrar ocultas
+
+@ Copy existing user data?
+pt-BR Copiar os dados de usuário existentes?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+pt-BR Jogos salvos, configurações, demos e pacotes de mapas baixados podem ser copiados para a nova pasta.
+
+@ Copy Data
+pt-BR Copiar dados
+
+@ Switch Only
+pt-BR Apenas trocar
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ pt-BR ffmpeg não encontrado: {} quadros PNG e um WAV gravados em {}
 # Personal bests.
 @ New personal best ({}): {}
 pt-BR Novo recorde pessoal ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+pt-BR Pasta de dados do usuário definida para {}
+
+@ User data directory error: {}
+pt-BR Erro na pasta de dados do usuário: {}

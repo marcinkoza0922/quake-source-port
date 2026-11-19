@@ -1632,6 +1632,13 @@ sq i personalizuar
 @ classic
 sq klasik
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+sq Ruaj kur merr një çelës
+
+@ User Data Directory
+sq Dosja e të dhënave të përdoruesit
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ sq Lëviz, ndrysho madhësinë, shto dhe hiq elemente të HUD-it: shëndet, muni
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 sq Modern: elemente kompakte në skajet e ekranit; klasik: shiriti origjinal i gjendjes. Zgjedhja rivendos HUD-in; ndryshimet te Ndrysho HUD-in e bëjnë të personalizuar
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+sq Ruan automatikisht kur merr një çelës
+
+@ Where saves, configs, demos and downloaded map packs are stored
+sq Ku ruhen ruajtjet, konfigurimet, demot dhe paketat e hartave të shkarkuara
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ sq E PËRSHTATUR
 
 @ Customize Experience
 sq Përshtat përvojën
-
-@ Disable All
-sq Çaktivizo të gjitha
 
 @ Disable All Modifications
 sq Çaktivizo të gjitha ndryshimet
@@ -3003,17 +3014,11 @@ sq Asnjë demo nuk përputhet me filtrin. Backspace ose Esc e pastron.
 @ Renaming an automatic demo moves it to the saved demos.
 sq Riemërtimi i një demoje automatike e zhvendos te demot e ruajtura.
 
-@ Sort
-sq Rendit
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 sq Gjatë një demoje: A bën pauzë, d-pad-i lëviz dhe ndryshon shpejtësinë, LT dhe RT shënojnë një klip dhe X e eksporton.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sq Hapësirë pauzë | Majtas/Djathtas lëviz | Lart/Poshtë shpejtësi | PgUp/PgDn 10 s | I/O shenjë | E eksporto
-
-@ Switch List
-sq Ndrysho listën
 
 @ This can't be undone.
 sq Kjo nuk mund të zhbëhet.
@@ -3060,6 +3065,43 @@ sq Po përgatitet...
 # Save cards: personal best.
 @ PB {} {}
 sq PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+sq Çelësi u mor
+
+@ Select User Data Directory
+sq Zgjidh dosjen e të dhënave të përdoruesit
+
+@ Data folder: {}
+sq Dosja e të dhënave: {}
+
+@ Parent Folder
+sq Dosja prind
+
+@ Unable to read directory
+sq Nuk mund të lexohet dosja
+
+@ No subfolders
+sq Nuk ka nëndosje
+
+@ Select Folder
+sq Zgjidh dosjen
+
+@ Show Hidden
+sq Shfaq të fshehurat
+
+@ Copy existing user data?
+sq Të kopjohen të dhënat ekzistuese të përdoruesit?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+sq Ruajtjet, konfigurimet, demot dhe paketat e hartave të shkarkuara mund të kopjohen në dosjen e re.
+
+@ Copy Data
+sq Kopjo të dhënat
+
+@ Switch Only
+sq Vetëm ndërro
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ sq ffmpeg nuk u gjet: u shkruan {} kuadro PNG dhe një WAV në {}
 # Personal bests.
 @ New personal best ({}): {}
 sq Rekord i ri personal ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+sq Dosja e të dhënave të përdoruesit u vendos në {}
+
+@ User data directory error: {}
+sq Gabim i dosjes së të dhënave të përdoruesit: {}

@@ -323,7 +323,7 @@ impl Host {
                 super::demo_bar::draw(&mut c, b, &glyphs);
             }
             if let Some(p) = &demo_peek {
-                super::demo_bar::draw_peek(&mut c, p);
+                super::demo_bar::draw_peek(&mut c, p, &glyphs);
             }
             self.menu.mods.online.poll();
             // the HUD editor's preview, under its dialog

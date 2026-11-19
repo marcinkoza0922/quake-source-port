@@ -58,13 +58,13 @@ fn mod_content_stays_in_the_mod_and_needs_it() {
     let (p, _) = plan(&r.install, &names(&["b.bsp"]), "b");
     assert_eq!(p[0].0, "ad/maps/b.bsp");
     let none = std::path::Path::new("/nonexistent-basedir");
-    assert_eq!(missing_mods(&p, none, "b"), ["ad"]);
+    assert_eq!(missing_mods(&p, &[none], "b"), ["ad"]);
     // a whole mod in its own folder installs as itself
     let r = release(r#"{"sha256":"x","urls":["u/c.zip"],"tags":[],"install":{"extract":"{base}/"}}"#);
     let (p, _) = plan(&r.install, &names(&["copper/progs.dat", "copper/maps/start.bsp", "readme.txt"]), "c");
     let dests: Vec<&str> = p.iter().map(|(d, _)| d.as_str()).collect();
     assert_eq!(dests, ["copper/progs.dat", "copper/maps/start.bsp", "c/readme.txt"]);
-    assert!(missing_mods(&p, none, "c").is_empty());
+    assert!(missing_mods(&p, &[none], "c").is_empty());
 }
 
 #[test]
@@ -107,7 +107,7 @@ fn live_install() {
         std::fs::create_dir_all(&base).unwrap();
         let ok = std::process::Command::new("curl").args(["-fsSL", "-o"]).arg(&zip).arg(&r.url).status().unwrap();
         assert!(ok.success());
-        let res = install(r, &zip, &base);
+        let res = install(r, &zip, &base, &base);
         eprintln!("{stem}: {res:?}");
     }
     assert!(qui::mods::is_game_dir(&base.join("002blue")));
@@ -136,9 +136,12 @@ fn a_mod_that_needs_quoth_gets_it_as_base() {
     std::fs::write(&zip, stored_zip("bluemonday/progs.dat", b"progs")).unwrap();
     let r = release(r#"{"sha256":"x","urls":["u/bluemonday_v2.zip"],"tags":["title=Blue Monday Jam","dependency=quoth2pt2full_2"],"install":{"extract":"{base}/"}}"#);
     let base = dir.join("base");
+    let mods = dir.join("mods");
     std::fs::create_dir_all(base.join("quoth")).unwrap();
-    assert_eq!(install(&r, &zip, &base).unwrap(), "bluemonday");
-    let info = std::fs::read_to_string(base.join("bluemonday/modinfo.txt")).unwrap();
+    assert_eq!(install(&r, &zip, &mods, &base).unwrap(), "bluemonday");
+    // Installs into the user mods root, leaving basedir untouched.
+    assert!(!base.join("bluemonday").exists());
+    let info = std::fs::read_to_string(mods.join("bluemonday/modinfo.txt")).unwrap();
     assert!(info.contains("base quoth"), "{info}");
     let _ = std::fs::remove_dir_all(&dir);
 }

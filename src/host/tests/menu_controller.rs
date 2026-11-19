@@ -115,3 +115,119 @@ fn hud_editor_controller_events_and_button_glyphs() {
     press(&mut h, GamepadButton::Start);
     assert_eq!(h.menu.screen, Screen::OptionsPage(crate::menu::Page::Hud));
 }
+
+#[test]
+fn clickable_buttons_render_controller_glyphs_across_menus() {
+    let mut fs = qcore::fs::Fs::new(qcore::fs::Fs::default_basedir());
+    if !fs.add_game_dir("id1") { return; }
+    let Some(pal) = fs.open("gfx/palette.lmp").and_then(|d| qformats::image::parse_palette(&d).ok()) else { return };
+    let Ok(renderer) = Renderer::headless(1280, 720, &pal) else { return };
+    let mut h = Host::new(fs, renderer, None, Vec::new());
+    h.headless = true;
+    h.handle_event(HostEvent::Input(InputEvent::GamepadConnected(true)));
+
+    // Options hub: [B] Back button + Y opens OSK with [Y] Shift, [X] Del, [B] Done
+    h.exec_line("menu_options");
+    h.sync_key_dest();
+    press(&mut h, GamepadButton::DpadDown);
+    assert!(h.menu.pad_ui);
+    capture(&mut h, "btn-options-pad");
+    press(&mut h, GamepadButton::North);
+    capture(&mut h, "btn-osk-pad");
+    press(&mut h, GamepadButton::East);
+
+    // Quit prompt: Yes and [B] No
+    h.menu.open(Screen::Quit);
+    h.sync_key_dest();
+    capture(&mut h, "btn-quit-pad");
+
+    // Demos screen: populate Saved + Automatic demos so every button & tab is enabled
+    let demo = |name: &str, auto: bool| crate::demo::library::DemoFile {
+        path: std::path::PathBuf::from(format!("/tmp/{name}.dem")),
+        name: name.into(),
+        auto,
+        bytes: 4096,
+        modified: 1_700_000_000,
+        map: Some("e1m1".into()),
+        duration: Some(95.0),
+    };
+    h.menu.demos.set(vec![demo("speedrun", false)], vec![demo("20240101-120000_e1m1", true)], true);
+    h.menu.open(Screen::Demos);
+    h.sync_key_dest();
+    // Switch to Automatic tab so Keep is enabled too
+    press(&mut h, GamepadButton::RightShoulder);
+    assert_eq!(h.menu.demos.tab, 1);
+    capture(&mut h, "btn-demos-pad-xbox");
+    h.exec_line("joy_glyphs 2");
+    h.sync_menu_ui();
+    capture(&mut h, "btn-demos-pad-ps");
+    h.exec_line("joy_glyphs 1");
+    h.sync_menu_ui();
+
+    // Directory browser: [X] Select Folder, Default, [Y] Show Hidden, [B] Cancel
+    h.menu.open_dir_browser();
+    h.sync_key_dest();
+    capture(&mut h, "btn-dirbrowser-pad");
+
+    // Load screen with a synthetic own save: [X] Delete on card, [B] Back, and Confirm modal with [B] Cancel
+    let sv = crate::menu::SaveSlot {
+        name: "s0".into(),
+        info: crate::saveinfo::SaveInfo {
+            level: "The Slipgate Complex".into(),
+            map: "e1m1".into(),
+            skill: 1,
+            time: 83.0,
+            modified: None,
+            health: 100,
+            armor: 50,
+            items: 0,
+            kills: (12, 30),
+            secrets: (2, 6),
+            reason: None,
+            addons: None,
+            players: (1, 1),
+            player: Default::default(),
+        },
+        thumb: None,
+        source: crate::menu::SaveSource::Own,
+    };
+    h.menu.saves = vec![sv.clone()];
+    h.menu.latest = Some(sv);
+    h.menu.open(Screen::Load);
+    h.sync_key_dest();
+    capture(&mut h, "btn-load-pad");
+    // X opens Delete confirmation modal with [B] Cancel
+    press(&mut h, GamepadButton::West);
+    capture(&mut h, "btn-confirm-pad");
+    press(&mut h, GamepadButton::East);
+
+    // Help screen: single controller prompt keymap (and none in keyboard mode)
+    h.menu.open(Screen::Help);
+    h.sync_key_dest();
+    capture(&mut h, "btn-help-pad");
+
+    // Map Packs & Level Select: [Y] filter box + OSK, [RT] sort button, [B] Back
+    let m = |d: &str, t: &str| qui::mods::ModInfo { dir: d.into(), title: t.into(), base: qui::mods::Base::Id, blurb: vec![] };
+    h.menu.set_mods(vec![m("id1", "Quake"), m("ad", "Arcane Dimensions"), m("mg1", "Dimension of the Machine")], "id1");
+    h.menu.set_mod_maps(
+        vec![
+            qui::mods::MapInfo { name: "e1m1".into(), title: "The Slipgate Complex".into() },
+            qui::mods::MapInfo { name: "e1m2".into(), title: "Castle of the Damned".into() },
+        ],
+        qui::stats::Stats::default(),
+    );
+    h.menu.open(Screen::Mods);
+    h.sync_key_dest();
+    capture(&mut h, "btn-mods-pad");
+    // RT cycles sort, Y opens OSK for filtering
+    h.handle_event(HostEvent::Pad(7, InputEvent::GamepadAxis { axis: GamepadAxis::RightTrigger, value: 1.0 }));
+    h.handle_event(HostEvent::Pad(7, InputEvent::GamepadAxis { axis: GamepadAxis::RightTrigger, value: 0.0 }));
+    h.sync_menu_ui();
+    press(&mut h, GamepadButton::North);
+    capture(&mut h, "btn-mods-osk-pad");
+    press(&mut h, GamepadButton::East);
+    // Level Select (ModMaps)
+    h.menu.open(Screen::ModMaps);
+    h.sync_key_dest();
+    capture(&mut h, "btn-levels-pad");
+}

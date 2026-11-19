@@ -5,7 +5,7 @@
 
 use qinput::keys::*;
 
-use super::{INFO, LIST, ROW_H, ROWS, TOP, box_, center, center_gold, clamp_scroll, clip, draw_filter_bar, fuzzy_score, wrap};
+use super::{INFO, LIST, ROW_H, ROWS, SORT_W_ONLINE, TOP, box_, center, center_gold, clamp_scroll, clip, draw_filter_bar, fuzzy_score, wrap};
 use crate::draw::Canvas;
 use crate::menu::{Action, FG, GOLD_FG, HILITE, MUTED, TXT, txt, txt_gold};
 use crate::quaddicted::{Job, Online, Release, Status};
@@ -99,9 +99,26 @@ impl OnlinePage {
         self.rebuild();
     }
 
+    pub fn has_filter(&self) -> bool {
+        !self.filter.is_empty()
+    }
+
+    pub fn filter_push(&mut self, ch: char) {
+        if (' '..='~').contains(&ch) {
+            self.filter.push(ch);
+            self.rebuild();
+        }
+    }
+
+    pub fn filter_pop(&mut self) {
+        if self.filter.pop().is_some() {
+            self.rebuild();
+        }
+    }
+
     /// Returns false to leave the page (back to the mod list).
     pub fn key(&mut self, key: i32, out: &mut Vec<Action>) -> bool {
-        if key == K_TAB {
+        if matches!(key, K_TAB | K_RTRIGGER) {
             self.cycle_sort();
             out.push(Action::Sound("misc/menu3.wav"));
             return true;
@@ -149,7 +166,7 @@ impl OnlinePage {
             }
             return true;
         }
-        if key == K_ESCAPE && !self.filter.is_empty() {
+        if matches!(key, K_ESCAPE | K_BBUTTON | K_MOUSE2) && !self.filter.is_empty() {
             self.filter.clear();
             self.rebuild();
             out.push(Action::Sound("misc/menu1.wav"));
@@ -184,7 +201,7 @@ impl OnlinePage {
         self.data.installed(&r.sha).map(|_| (qcore::tr!("installed"), GOLD_FG))
     }
 
-    pub fn draw(&self, c: &mut Canvas) {
+    pub fn draw(&self, c: &mut Canvas, pad: bool, glyphs: &crate::glyphs::Glyphs) {
         center_gold(c, 24.0, "Quaddicted Map Archive");
         let sub = match self.data.status() {
             Status::Idle | Status::Loading => qcore::tr!("Loading the map list..."),
@@ -194,7 +211,7 @@ impl OnlinePage {
         };
         center(c, 36.0, &sub);
         let (x, w) = LIST;
-        draw_filter_bar(c, x, w, 88.0, &self.filter, self.sort.label());
+        draw_filter_bar(c, x, w, SORT_W_ONLINE, &self.filter, self.sort.label(), pad, glyphs);
         box_(c, x, w, ROWS);
         for i in (self.scroll..self.rows()).take(ROWS) {
             let Some(r) = self.at(i) else { continue };

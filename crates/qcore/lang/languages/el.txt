@@ -1632,6 +1632,13 @@ el προσαρμοσμένο
 @ classic
 el κλασικό
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+el Αποθήκευση κατά τη συλλογή κλειδιού
+
+@ User Data Directory
+el Φάκελος δεδομένων χρήστη
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ el Μετακινήστε, αλλάξτε μέγεθος, προσθέστε κ�
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 el Σύγχρονο: συμπαγή στοιχεία στις άκρες της οθόνης· κλασικό: η αρχική γραμμή κατάστασης. Η επιλογή μιας επαναφέρει το HUD· οι αλλαγές στην Επεξεργασία HUD το κάνουν προσαρμοσμένο
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+el Αποθηκεύει αυτόματα όταν παίρνετε ένα κλειδί
+
+@ Where saves, configs, demos and downloaded map packs are stored
+el Πού αποθηκεύονται οι αποθηκεύσεις, ρυθμίσεις, demos και τα πακέτα χαρτών
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ el ΠΡΟΣΑΡΜΟΣΜΕΝΟ
 
 @ Customize Experience
 el Προσαρμογή εμπειρίας
-
-@ Disable All
-el Απενεργοποίηση όλων
 
 @ Disable All Modifications
 el Απενεργοποίηση όλων των αλλαγών
@@ -3003,17 +3014,11 @@ el Κανένα demo δεν ταιριάζει στο φίλτρο. Το Backspa
 @ Renaming an automatic demo moves it to the saved demos.
 el Η μετονομασία ενός αυτόματου demo το μεταφέρει στα αποθηκευμένα.
 
-@ Sort
-el Ταξινόμηση
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 el Κατά την αναπαραγωγή demo: το A κάνει παύση, το d-pad κυλά και αλλάζει ταχύτητα, τα LT και RT σημειώνουν ένα απόσπασμα και το X το εξάγει.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 el Διάστημα παύση | Αριστερά/Δεξιά κύλιση | Πάνω/Κάτω ταχύτητα | PgUp/PgDn 10 δ | I/O σημάδι | E εξαγωγή
-
-@ Switch List
-el Αλλαγή λίστας
 
 @ This can't be undone.
 el Αυτό δεν αναιρείται.
@@ -3060,6 +3065,43 @@ el Προετοιμασία...
 # Save cards: personal best.
 @ PB {} {}
 el PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+el Κλειδί συλλέχθηκε
+
+@ Select User Data Directory
+el Επιλογή φακέλου δεδομένων χρήστη
+
+@ Data folder: {}
+el Φάκελος δεδομένων: {}
+
+@ Parent Folder
+el Γονικός φάκελος
+
+@ Unable to read directory
+el Αδύνατη η ανάγνωση του φακέλου
+
+@ No subfolders
+el Δεν υπάρχουν υποφάκελοι
+
+@ Select Folder
+el Επιλογή φακέλου
+
+@ Show Hidden
+el Εμφάνιση κρυφών
+
+@ Copy existing user data?
+el Αντιγραφή υπαρχόντων δεδομένων χρήστη;
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+el Οι αποθηκεύσεις, ρυθμίσεις, demos και τα πακέτα χαρτών μπορούν να αντιγραφούν στον νέο φάκελο.
+
+@ Copy Data
+el Αντιγραφή δεδομένων
+
+@ Switch Only
+el Μόνο αλλαγή
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ el Δεν βρέθηκε ffmpeg: γράφτηκαν {} καρέ PNG και έν�
 # Personal bests.
 @ New personal best ({}): {}
 el Νέο προσωπικό ρεκόρ ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+el Ο φάκελος δεδομένων χρήστη ορίστηκε σε {}
+
+@ User data directory error: {}
+el Σφάλμα φακέλου δεδομένων χρήστη: {}

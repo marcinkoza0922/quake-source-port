@@ -14,7 +14,7 @@ impl Menu {
         c.fade_screen();
         let base_scale = c.scale;
         c.menu_layout();
-        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Load | Screen::Save | Screen::Help | Screen::Demos) {
+        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Load | Screen::Save | Screen::Help | Screen::Demos | Screen::DirBrowser) {
             c.ox += CLASSIC.0;
             c.oy += CLASSIC.1;
         }
@@ -49,14 +49,12 @@ impl Menu {
                 let d = dot(pic);
                 c.pic(54.0, 32.0 + self.main_cursor as f32 * 20.0, d);
             }
-            Screen::Help => {
-                self.help.draw(c);
-                self.boxed_hints(c, 334.0, &[(K_DPAD_UP, "Section"), (K_RSHOULDER, "Scroll"), (K_BBUTTON, "Back")]);
-            }
-            Screen::Mods => self.mods.draw(c, modmenu::Page::List),
-            Screen::Demos => self.demos.draw(c, self.mouse, self.pad_ui),
-            Screen::ModMaps => self.mods.draw(c, modmenu::Page::Maps),
-            Screen::ModOnline => self.mods.draw(c, modmenu::Page::Online),
+            Screen::Help => self.help.draw(c),
+            Screen::Mods => self.mods.draw(c, modmenu::Page::List, self.pad_ui, &self.glyphs),
+            Screen::Demos => self.demos.draw(c, self.mouse, self.pad_ui, &self.glyphs),
+            Screen::DirBrowser => self.dir_browser.draw(c, self.drag.is_some(), self.pad_ui, &self.glyphs),
+            Screen::ModMaps => self.mods.draw(c, modmenu::Page::Maps, self.pad_ui, &self.glyphs),
+            Screen::ModOnline => self.mods.draw(c, modmenu::Page::Online, self.pad_ui, &self.glyphs),
             Screen::SinglePlayer => {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(16.0, 4.0, p);
@@ -94,9 +92,6 @@ impl Menu {
                         let y = ROW0 + i as f32 * ROW_H + 2.0;
                         c.text_center(320.0, y, label, TXT, FG);
                     }
-                }
-                if let Some(o) = self.osk {
-                    self.draw_osk(c, o);
                 }
             }
             Screen::OptionsPage(page) if matches!(page, Page::Addons | Page::NewGameAddons) => {
@@ -154,9 +149,6 @@ impl Menu {
                 if let Some(d) = self.drop {
                     self.draw_drop(c, cv, self.page_item(page, d.item), d);
                 }
-                if let Some(o) = self.osk {
-                    self.draw_osk(c, o);
-                }
             }
             Screen::Quit => {
                 let (bx, by, bw, bh) = QUIT_BOX;
@@ -166,22 +158,28 @@ impl Menu {
                 c.text_center(320.0, by + 12.0, msg, TXT * 1.2, FG);
                 for (i, (&x, (key, word))) in QUIT_BUTTONS.iter().zip([("Y", qcore::t!("Yes")), ("N", qcore::t!("No"))]).enumerate() {
                     let (w, h) = QUIT_BTN;
-                    if i == self.quit_cursor {
+                    let on = i == self.quit_cursor;
+                    if on {
                         c.fill(x, QUIT_BTN_Y, w, h, HILITE);
                     }
                     c.frame(x, QUIT_BTN_Y, w, h, BORDER);
-                    // "(Y)es" in English; other languages keep the Y/N keys: "(Y) Oui"
-                    let tail = if qcore::lang::current() == qcore::lang::Lang::English {
-                        format!("){}", &word[1..])
+                    if self.pad_ui {
+                        let pad_key = (i == 1).then_some(K_BBUTTON);
+                        self.glyphs.button_label(c, [x, QUIT_BTN_Y, w, h], pad_key, word, TXT, if on { GOLD_FG } else { FG });
                     } else {
-                        format!(") {}", qcore::lang::tr(word))
-                    };
-                    let tx = x + ((w - c.text_w_raw(&format!("({key}{tail}"), TXT)) / 2.0).floor();
-                    // gold hotkey letter
-                    let ty = QUIT_BTN_Y + 3.0;
-                    let mut cx = tx + txt(c, tx, ty, "(");
-                    cx += txt_gold(c, cx, ty, key);
-                    txt(c, cx, ty, &tail);
+                        // "(Y)es" in English; other languages keep the Y/N keys: "(Y) Oui"
+                        let tail = if qcore::lang::current() == qcore::lang::Lang::English {
+                            format!("){}", &word[1..])
+                        } else {
+                            format!(") {}", qcore::lang::tr(word))
+                        };
+                        let tx = x + ((w - c.text_w_raw(&format!("({key}{tail}"), TXT)) / 2.0).floor();
+                        // gold hotkey letter
+                        let ty = QUIT_BTN_Y + 3.0;
+                        let mut cx = tx + txt(c, tx, ty, "(");
+                        cx += txt_gold(c, cx, ty, key);
+                        txt(c, cx, ty, &tail);
+                    }
                 }
             }
             Screen::Death => {
@@ -197,6 +195,9 @@ impl Menu {
             Screen::None | Screen::HudEditor => {}
         }
         c.menu_layout();
+        if let Some(o) = self.osk {
+            self.draw_osk(c, o);
+        }
         if !matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons)) {
             self.draw_tooltip(c, cv);
             self.draw_hints(c);
@@ -308,6 +309,16 @@ impl Menu {
             Item::Language => {
                 label(c, "Language");
                 txt(c, VALUE_X, y, &super::options::language_options()[super::options::language_index(cv)]);
+            }
+            Item::UserDataDir => {
+                label(c, "User Data Directory");
+                let bx = VALUE_X - 3.0;
+                let bw = PANEL_X + PANEL_W - 14.0 - bx;
+                c.fill(bx, y - 1.0, bw, BOX_H, [0.0, 0.0, 0.0, 0.5]);
+                c.frame(bx, y - 1.0, bw, BOX_H, BORDER);
+                let path = crate::userdata::parent().to_string_lossy().into_owned();
+                let shown = dir_browser::fit_path_tail(c, &path, bw - 8.0, TXT);
+                c.text_raw(VALUE_X, y, &shown, TXT, if cfg!(target_arch = "wasm32") { MUTED } else { GOLD_FG });
             }
             Item::ShaderPreset => {
                 label(c, "Preset");

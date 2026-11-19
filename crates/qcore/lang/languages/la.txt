@@ -1632,6 +1632,13 @@ la propria
 @ classic
 la classicus
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+la Serva clave capta
+
+@ User Data Directory
+la Directorium Datorum Usoris
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ la Move, magnitudinem muta, adde et remove partes HUD: valetudinem, tela, arma, 
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 la Moderna: partes compactae ad oras visorii; classica: virga status originalis. Electio HUD restituit; mutationes in HUD muta eam propriam faciunt
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+la Sponte servat cum clavem capis
+
+@ Where saves, configs, demos and downloaded map packs are stored
+la Ubi servata, configurationes, demonstrationes et fasciculi tabularum conduntur
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ la PROPRIUM
 
 @ Customize Experience
 la Experientiam accommodare
-
-@ Disable All
-la Omnia tollere
 
 @ Disable All Modifications
 la Omnes modificationes tollere
@@ -3003,17 +3014,11 @@ la Nulla demonstratio colatorio congruit. Backspace aut Esc id purgat.
 @ Renaming an automatic demo moves it to the saved demos.
 la Demonstratio automatica renominata ad servatas transfertur.
 
-@ Sort
-la Ordina
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 la Dum demonstratio luditur: A pausam facit, crux directionis volvit et celeritatem mutat, LT et RT fragmentum notant, et X id exportat.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 la Spatium pausa | Sinistra/Dextra volve | Sursum/Deorsum celeritas | PgUp/PgDn 10 s | I/O nota | E exporta
-
-@ Switch List
-la Indicem muta
 
 @ This can't be undone.
 la Hoc revocari non potest.
@@ -3060,6 +3065,43 @@ la Paratur...
 # Save cards: personal best.
 @ PB {} {}
 la PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+la Clavis capta
+
+@ Select User Data Directory
+la Elige Directorium Datorum Usoris
+
+@ Data folder: {}
+la Scriniolum datorum: {}
+
+@ Parent Folder
+la Scriniolum Superius
+
+@ Unable to read directory
+la Directorium legi non potest
+
+@ No subfolders
+la Nulla subscriniola
+
+@ Select Folder
+la Elige Scriniolum
+
+@ Show Hidden
+la Ostende Occulta
+
+@ Copy existing user data?
+la Exscribere data usoris exstantia?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+la Servata, configurationes, demonstrationes et fasciculi tabularum in novum scriniolum exscribi possunt.
+
+@ Copy Data
+la Exscribe Data
+
+@ Switch Only
+la Muta Tantum
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ la ffmpeg non inventum: {} imagines PNG et WAV in {} scriptae
 # Personal bests.
 @ New personal best ({}): {}
 la Novum optimum proprium ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+la Directorium datorum usoris positum est in {}
+
+@ User data directory error: {}
+la Error directorii datorum usoris: {}

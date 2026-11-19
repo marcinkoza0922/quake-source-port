@@ -65,6 +65,7 @@ pub(super) fn item_label(item: Item) -> Option<&'static str> {
         Item::Resolution => "Resolution",
         Item::Apply => "Apply Display Changes",
         Item::Language => "Language",
+        Item::UserDataDir => "User Data Directory",
         Item::ShaderPreset => "Preset",
         Item::ResetBinds => "Reset to Defaults",
         Item::ResetShaderParams => "Reset Shader Settings",
@@ -225,10 +226,14 @@ impl Menu {
         self.search = Search::default();
     }
 
-    /// Character typed on the on-screen keyboard: the hub's search field, or
-    /// a page's text row.
+    /// Character typed on the on-screen keyboard: the hub's search field, a
+    /// mod/map filter box, or a page's text row.
     pub(super) fn osk_char(&mut self, ch: char, cv: &mut Cvars) {
-        if self.screen == Screen::Options { self.search_type(ch) } else { self.text(ch, cv) }
+        match self.screen {
+            Screen::Options => self.search_type(ch),
+            Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.filter_push(self.mods_page(), ch),
+            _ => self.text(ch, cv),
+        }
     }
 
     /// Hub keys for the search; true when handled.
@@ -350,17 +355,25 @@ impl Menu {
         c.fill(PANEL_X, BAR_Y, PANEL_W, BAR_H, [0.0, 0.0, 0.0, 0.8]);
         c.frame(PANEL_X, BAR_Y, PANEL_W, BAR_H, BORDER);
         let y = BAR_Y + 2.0;
+        let tx = if self.pad_ui {
+            let gh = crate::glyphs::H.min(BAR_H - 2.0);
+            let gw = self.glyphs.key_h(c, PANEL_X + 3.0, BAR_Y + (BAR_H - gh) / 2.0, K_YBUTTON, gh);
+            PANEL_X + 3.0 + gw + 3.0
+        } else {
+            PANEL_X + 6.0
+        };
         if self.search.query.is_empty() {
-            c.text(PANEL_X + 6.0, y, "Type to search settings...", TXT, MUTED);
+            c.text(tx, y, "Type to search settings...", TXT, MUTED);
             return;
         }
+        let max_w = (PANEL_X + PANEL_W - tx - 10.0).max(20.0);
         let mut q: &str = &self.search.query;
-        while c.text_w_raw(q, TXT) > PANEL_W - 16.0 && !q.is_empty() {
+        while c.text_w_raw(q, TXT) > max_w && !q.is_empty() {
             q = &q[1..];
         }
-        let tw = c.text_raw(PANEL_X + 6.0, y, q, TXT, FG);
+        let tw = c.text_raw(tx, y, q, TXT, FG);
         if (realtime * 4.0) as i64 & 1 == 0 {
-            c.fill(PANEL_X + 7.0 + tw, y, 1.0, 8.0, FG);
+            c.fill(tx + 1.0 + tw, y, 1.0, 8.0, FG);
         }
     }
 

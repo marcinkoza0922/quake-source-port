@@ -43,6 +43,14 @@ pub struct LevelStats {
     pub killed_monsters: i32,
 }
 
+/// Keys held by player 1 (vanilla silver/gold, AD custom keys, Keep skeleton
+/// key, and QBJ3 counted keys), used for autosave-on-key-pickup.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub struct KeyState {
+    pub mask: u32,
+    pub counts: [u8; 2],
+}
+
 /// Per-level server state (`server_t` minus the VM and world).
 #[derive(Debug, Default)]
 pub struct Sv {

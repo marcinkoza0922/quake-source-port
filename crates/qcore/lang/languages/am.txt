@@ -1632,6 +1632,13 @@ am ብጁ
 @ classic
 am ክላሲክ
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+am ቁልፍ ሲወሰድ አስቀምጥ
+
+@ User Data Directory
+am የተጠቃሚ ውሂብ አቃፊ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ am የHUD ክፍሎችን አንቀሳቅስ፣ መጠናቸውን ቀይር፣ 
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 am ዘመናዊ፦ በማያ ገጹ ጠርዞች ያሉ የታመቁ ክፍሎች፤ ክላሲክ፦ የመጀመሪያው የሁኔታ አሞሌ። አንዱን መምረጥ HUDን ዳግም ያስጀምራል፤ በHUD አርትዕ ውስጥ የሚደረጉ ለውጦች ብጁ ያደርጉታል
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+am ቁልፍ ሲወስዱ በራስ-ሰር ያስቀምጣል
+
+@ Where saves, configs, demos and downloaded map packs are stored
+am ቅምጦች፣ ቅንብሮች፣ ዴሞዎች እና የወረዱ የካርታ ጥቅሎች የሚቀመጡበት ቦታ
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ am ብጁ
 
 @ Customize Experience
 am ተሞክሮውን አብጅ
-
-@ Disable All
-am ሁሉንም አሰናክል
 
 @ Disable All Modifications
 am ሁሉንም ለውጦች አሰናክል
@@ -3003,17 +3014,11 @@ am ከማጣሪያው ጋር የሚዛመድ ዴሞ የለም። Backspace ወ�
 @ Renaming an automatic demo moves it to the saved demos.
 am የራስ-ሰር ዴሞ ስም መቀየር ወደ የተቀመጡ ዴሞዎች ያዛውረዋል።
 
-@ Sort
-am ደርድር
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 am ዴሞ ሲጫወት፦ A ለአፍታ ያቆማል፣ ዲ-ፓድ ያጠነጥናል ፍጥነትም ይቀይራል፣ LT እና RT ቅንጥብ ያመለክታሉ፣ X ደግሞ ይልከዋል።
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 am Space አቁም | ግራ/ቀኝ አጠንጥን | ላይ/ታች ፍጥነት | PgUp/PgDn 10 ሰ. | I/O ምልክት | E ላክ
-
-@ Switch List
-am ዝርዝር ቀይር
 
 @ This can't be undone.
 am ይህ ሊቀለበስ አይችልም።
@@ -3060,6 +3065,43 @@ am በዝግጅት ላይ...
 # Save cards: personal best.
 @ PB {} {}
 am PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+am ቁልፍ ተወስዷል
+
+@ Select User Data Directory
+am የተጠቃሚ ውሂብ አቃፊ ይምረጡ
+
+@ Data folder: {}
+am የውሂብ አቃፊ: {}
+
+@ Parent Folder
+am የላይኛው አቃፊ
+
+@ Unable to read directory
+am አቃፊውን ማንበብ አልተቻለም
+
+@ No subfolders
+am ንዑስ አቃፊዎች የሉም
+
+@ Select Folder
+am አቃፊ ምረጥ
+
+@ Show Hidden
+am የተደበቁ አሳይ
+
+@ Copy existing user data?
+am ያለውን የተጠቃሚ ውሂብ ይገልበጥ?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+am ቅምጦች፣ ቅንብሮች፣ ዴሞዎች እና የወረዱ የካርታ ጥቅሎች ወደ አዲሱ አቃፊ ሊገለበጡ ይችላሉ።
+
+@ Copy Data
+am ውሂብ ገልብጥ
+
+@ Switch Only
+am ቀይር ብቻ
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ am ffmpeg አልተገኘም፦ {} PNG ፍሬሞችና አንድ WAV ወደ {} �
 # Personal bests.
 @ New personal best ({}): {}
 am አዲስ የግል ምርጥ ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+am የተጠቃሚ ውሂብ አቃፊ ወደ {} ተቀናብሯል
+
+@ User data directory error: {}
+am የተጠቃሚ ውሂብ አቃፊ ስህተት: {}

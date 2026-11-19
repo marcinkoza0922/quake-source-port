@@ -1221,3 +1221,19 @@ de Modern: kompakte Elemente an den Bildschirmrändern; klassisch: die originale
 it Moderna: elementi compatti ai bordi dello schermo; classica: la barra di stato originale. Sceglierne una ripristina l'interfaccia; le modifiche in Modifica interfaccia la rendono personalizzata
 es Moderna: elementos compactos en los bordes de la pantalla; clásica: la barra de estado original. Elegir una restablece la interfaz; los cambios en Editar interfaz la vuelven personalizada
 ru Современный: компактные элементы по краям экрана; классический: исходная строка состояния. Выбор шаблона сбрасывает интерфейс; изменения в «Изменить интерфейс» делают его своим
+
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+fr Sauvegarde automatiquement lorsque vous ramassez une clé
+de Speichert automatisch, wenn ein Schlüssel aufgehoben wird
+it Salva automaticamente quando raccogli una chiave
+es Guarda automáticamente al recoger una llave
+ru Автосохранение при подборе ключа
+
+@ Where saves, configs, demos and downloaded map packs are stored
+fr Emplacement des sauvegardes, configurations, démos et packs de cartes téléchargés
+de Speicherort für Spielstände, Konfigurationen, Demos und heruntergeladene Kartenpakete
+it Dove sono archiviati salvataggi, configurazioni, demo e pacchetti di mappe scaricati
+es Dónde se almacenan las partidas, configuraciones, demos y paquetes de mapas descargados
+ru Где хранятся сохранения, настройки, демки и загруженные наборы карт
+

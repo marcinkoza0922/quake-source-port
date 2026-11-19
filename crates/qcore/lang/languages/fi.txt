@@ -1632,6 +1632,13 @@ fi oma
 @ classic
 fi klassinen
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+fi Tallenna avainta poimiessa
+
+@ User Data Directory
+fi Käyttäjätietokansio
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ fi Siirrä, muuta kokoa, lisää ja poista HUD-elementtejä: terveys, ammukset, 
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 fi Moderni: tiiviit elementit näytön reunoilla; klassinen: alkuperäinen tilapalkki. Valinta palauttaa HUDin; muutokset kohdassa Muokkaa HUDia tekevät siitä oman
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+fi Tallentaa automaattisesti, kun poimit avaimen
+
+@ Where saves, configs, demos and downloaded map packs are stored
+fi Missä tallennukset, asetukset, demot ja ladatut karttapaketit sijaitsevat
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ fi MUKAUTETTU
 
 @ Customize Experience
 fi Mukauta pelikokemusta
-
-@ Disable All
-fi Poista kaikki käytöstä
 
 @ Disable All Modifications
 fi Poista kaikki muutokset käytöstä
@@ -3003,17 +3014,11 @@ fi Mikään demo ei vastaa suodatinta. Askelpalautin tai Esc tyhjentää sen.
 @ Renaming an automatic demo moves it to the saved demos.
 fi Automaattisen demon uudelleennimeäminen siirtää sen tallennettuihin demoihin.
 
-@ Sort
-fi Lajittele
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 fi Demon aikana: A pysäyttää, ristiohjain kelaa ja muuttaa nopeutta, LT ja RT merkitsevät leikkeen ja X vie sen.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 fi Välilyönti tauko | Vasen/Oikea kelaus | Ylös/Alas nopeus | PgUp/PgDn 10 s | I/O merkki | E vie
-
-@ Switch List
-fi Vaihda luetteloa
 
 @ This can't be undone.
 fi Tätä ei voi perua.
@@ -3060,6 +3065,43 @@ fi Valmistellaan...
 # Save cards: personal best.
 @ PB {} {}
 fi PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+fi Avain poimittu
+
+@ Select User Data Directory
+fi Valitse käyttäjätietokansio
+
+@ Data folder: {}
+fi Tietokansio: {}
+
+@ Parent Folder
+fi Yläkansio
+
+@ Unable to read directory
+fi Kansiota ei voi lukea
+
+@ No subfolders
+fi Ei alikansioita
+
+@ Select Folder
+fi Valitse kansio
+
+@ Show Hidden
+fi Näytä piilotetut
+
+@ Copy existing user data?
+fi Kopioidaanko nykyiset käyttäjätiedot?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+fi Tallennukset, asetukset, demot ja ladatut karttapaketit voidaan kopioida uuteen kansioon.
+
+@ Copy Data
+fi Kopioi tiedot
+
+@ Switch Only
+fi Vain vaihda
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ fi ffmpegiä ei löytynyt: {} PNG-kuvaa ja WAV kirjoitettu kohteeseen {}
 # Personal bests.
 @ New personal best ({}): {}
 fi Uusi oma ennätys ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+fi Käyttäjätietokansio asetettu kohteeseen {}
+
+@ User data directory error: {}
+fi Käyttäjätietokansion virhe: {}

@@ -1632,6 +1632,13 @@ sr прилагођено
 @ classic
 sr класично
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+sr Сачувај при узимању кључа
+
+@ User Data Directory
+sr Фасцикла корисничких података
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ sr Померајте, мењајте величину, додајте и укл
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 sr Модерно: компактни елементи уз ивице екрана; класично: оригинална трака стања. Избор ресетује HUD; измене у Уреди HUD га чине прилагођеним
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+sr Аутоматски чува када покупите кључ
+
+@ Where saves, configs, demos and downloaded map packs are stored
+sr Где се чувају снимљене игре, подешавања, демои и преузети пакети мапа
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ sr ПРИЛАГОЂЕНО
 
 @ Customize Experience
 sr Прилагоди искуство
-
-@ Disable All
-sr Онемогући све
 
 @ Disable All Modifications
 sr Онемогући све измене
@@ -3003,17 +3014,11 @@ sr Ниједан демо не одговара филтеру. Backspace ил�
 @ Renaming an automatic demo moves it to the saved demos.
 sr Преименовање аутоматског демоа премешта га међу сачуване.
 
-@ Sort
-sr Поређај
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 sr Током демоа: A паузира, D-pad премотава и мења брзину, LT и RT означавају исечак, а X га извози.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sr Размак пауза | Лево/Десно премотавање | Горе/Доле брзина | PgUp/PgDn 10 с | I/O ознака | E извоз
-
-@ Switch List
-sr Промени списак
 
 @ This can't be undone.
 sr Ово се не може поништити.
@@ -3060,6 +3065,43 @@ sr Припрема...
 # Save cards: personal best.
 @ PB {} {}
 sr PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+sr Кључ узет
+
+@ Select User Data Directory
+sr Изаберите фасциклу корисничких података
+
+@ Data folder: {}
+sr Фасцикла података: {}
+
+@ Parent Folder
+sr Надређена фасцикла
+
+@ Unable to read directory
+sr Није могуће прочитати фасциклу
+
+@ No subfolders
+sr Нема подфасцикли
+
+@ Select Folder
+sr Изабери фасциклу
+
+@ Show Hidden
+sr Прикажи скривене
+
+@ Copy existing user data?
+sr Копирати постојеће корисничке податке?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+sr Снимљене игре, подешавања, демои и преузети пакети мапа могу се копирати у нову фасциклу.
+
+@ Copy Data
+sr Копирај податке
+
+@ Switch Only
+sr Само промени
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ sr ffmpeg није пронађен: уписано {} PNG кадрова и WAV
 # Personal bests.
 @ New personal best ({}): {}
 sr Нови лични рекорд ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+sr Фасцикла корисничких података постављена на {}
+
+@ User data directory error: {}
+sr Грешка фасцикле корисничких података: {}

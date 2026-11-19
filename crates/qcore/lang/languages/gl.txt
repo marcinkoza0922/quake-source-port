@@ -1632,6 +1632,13 @@ gl personalizada
 @ classic
 gl clásico
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+gl Gardar ao recoller unha chave
+
+@ User Data Directory
+gl Cartafol de datos de usuario
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ gl Move, redimensiona, engade e quita elementos da interface: saúde, munición,
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 gl Moderna: elementos compactos nos bordos da pantalla; clásica: a barra de estado orixinal. Escoller unha restablece a interface; os cambios en Editar a interface fana personalizada
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+gl Garda automaticamente cando recolles unha chave
+
+@ Where saves, configs, demos and downloaded map packs are stored
+gl Onde se gardan as partidas, configuracións, demos e paquetes de mapas descargados
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ gl PERSONALIZADA
 
 @ Customize Experience
 gl Personalizar a experiencia
-
-@ Disable All
-gl Desactivar todo
 
 @ Disable All Modifications
 gl Desactivar todas as modificacións
@@ -3003,17 +3014,11 @@ gl Ningunha demo coincide co filtro. Retroceso ou Esc bórrao.
 @ Renaming an automatic demo moves it to the saved demos.
 gl Renomear unha demo automática móvea ás demos gardadas.
 
-@ Sort
-gl Ordenar
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 gl Durante unha demo: A pausa, a cruceta despraza e cambia a velocidade, LT e RT marcan un clip e X expórtao.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 gl Espazo pausa | Esq./Der. desprazar | Arriba/Abaixo velocidade | RePáx/AvPáx 10 s | I/O marcar | E exportar
-
-@ Switch List
-gl Cambiar de lista
 
 @ This can't be undone.
 gl Non se pode desfacer.
@@ -3060,6 +3065,43 @@ gl Preparando...
 # Save cards: personal best.
 @ PB {} {}
 gl PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+gl Chave recollida
+
+@ Select User Data Directory
+gl Seleccionar cartafol de datos de usuario
+
+@ Data folder: {}
+gl Cartafol de datos: {}
+
+@ Parent Folder
+gl Cartafol superior
+
+@ Unable to read directory
+gl Non se pode ler o cartafol
+
+@ No subfolders
+gl Sen subcartafoles
+
+@ Select Folder
+gl Seleccionar cartafol
+
+@ Show Hidden
+gl Mostrar ocultos
+
+@ Copy existing user data?
+gl Copiar os datos de usuario existentes?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+gl As partidas, configuracións, demos e paquetes de mapas descargados pódense copiar ao novo cartafol.
+
+@ Copy Data
+gl Copiar datos
+
+@ Switch Only
+gl Só cambiar
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ gl Non se atopou ffmpeg: escribíronse {} fotogramas PNG e un WAV en {}
 # Personal bests.
 @ New personal best ({}): {}
 gl Nova marca persoal ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+gl Cartafol de datos de usuario establecido en {}
+
+@ User data directory error: {}
+gl Erro do cartafol de datos de usuario: {}

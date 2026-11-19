@@ -1632,6 +1632,13 @@ mt personalizzat
 @ classic
 mt klassiku
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+mt Issejvja meta taqbad ċavetta
+
+@ User Data Directory
+mt Fowlder tad-dejta tal-utent
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ mt Mexxi, ibdel id-daqs, żid u neħħi elementi tal-HUD: saħħa, munizzjon, ar
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 mt Modern: elementi kompatti fit-truf tal-iskrin; klassiku: il-virga tal-istat oriġinali. L-għażla terġa' tissettja l-HUD; bidliet f'Editja l-HUD jagħmluh personalizzat
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+mt Issejvja awtomatikament meta taqbad ċavetta
+
+@ Where saves, configs, demos and downloaded map packs are stored
+mt Fejn jinħażnu s-saves, il-konfigurazzjonijiet, id-demos u l-pakketti tal-mapep imniżżla
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ mt PERSONALIZZATA
 
 @ Customize Experience
 mt Personalizza l-esperjenza
-
-@ Disable All
-mt Itfi kollox
 
 @ Disable All Modifications
 mt Itfi l-modifiki kollha
@@ -3003,17 +3014,11 @@ mt L-ebda demo ma taqbel mal-filtru. Backspace jew Esc iħassruh.
 @ Renaming an automatic demo moves it to the saved demos.
 mt Meta tissemma mill-ġdid, demo awtomatika titmexxa mad-demos salvati.
 
-@ Sort
-mt Ordna
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 mt Waqt demo: A jagħmel pawża, id-d-pad jiskorri u jibdel il-veloċità, LT u RT jimmarkaw klip u X jesportah.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 mt Spazju pawża | Xellug/Lemin skorri | Fuq/Isfel veloċità | PgUp/PgDn 10 s | I/O immarka | E esporta
-
-@ Switch List
-mt Ibdel il-lista
 
 @ This can't be undone.
 mt Dan ma jistax jitreġġa' lura.
@@ -3060,6 +3065,43 @@ mt Qed jipprepara...
 # Save cards: personal best.
 @ PB {} {}
 mt PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+mt Ċavetta maqbuda
+
+@ Select User Data Directory
+mt Agħżel il-fowlder tad-dejta tal-utent
+
+@ Data folder: {}
+mt Fowlder tad-dejta: {}
+
+@ Parent Folder
+mt Fowlder ta' fuq
+
+@ Unable to read directory
+mt Ma jistax jinqara d-direttorju
+
+@ No subfolders
+mt L-ebda subfowlder
+
+@ Select Folder
+mt Agħżel Fowlder
+
+@ Show Hidden
+mt Uri Moħbija
+
+@ Copy existing user data?
+mt Tikkopja d-dejta tal-utent eżistenti?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+mt Saves, konfigurazzjonijiet, demos u pakketti tal-mapep imniżżla jistgħu jiġu kkupjati fil-fowlder il-ġdid.
+
+@ Copy Data
+mt Ikkopja d-Dejta
+
+@ Switch Only
+mt Ibdel Biss
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ mt ffmpeg ma nstabx: inkitbu {} frejms PNG u WAV f'{}
 # Personal bests.
 @ New personal best ({}): {}
 mt Aħjar personali ġdid ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+mt Il-fowlder tad-dejta tal-utent ġie ssettjat għal {}
+
+@ User data directory error: {}
+mt Żball fil-fowlder tad-dejta tal-utent: {}

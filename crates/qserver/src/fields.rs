@@ -43,6 +43,8 @@ offsets!(Fields, field_ofs,
     opt {
         gravity = "gravity", items2 = "items2", alpha = "alpha", scale = "scale",
         traileffectnum = "traileffectnum", emiteffectnum = "emiteffectnum",
+        moditems = "moditems", ckeyname1 = "ckeyname1",
+        weaponismoditems = "weaponismoditems", items_qbj = "items_qbj", worldtype = "worldtype",
     }
 );
 

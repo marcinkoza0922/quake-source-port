@@ -234,9 +234,9 @@ pub fn plan(install: &Install, names: &[String], own: &str) -> (Vec<(String, Str
     (out, base)
 }
 
-/// Game dirs that a plan writes to but that do not exist yet and would only
-/// get maps: these are mods the release needs installed first.
-pub fn missing_mods(planned: &[(String, String)], basedir: &Path, own: &str) -> Vec<String> {
+/// Game dirs that a plan writes to but that do not exist yet in any root and
+/// would only get maps: these are mods the release needs installed first.
+pub fn missing_mods(planned: &[(String, String)], roots: &[&Path], own: &str) -> Vec<String> {
     let mut dirs: HashMap<&str, bool> = HashMap::new();
     for (p, _) in planned {
         let (d, rest) = p.split_once('/').unwrap_or((p, ""));
@@ -245,40 +245,43 @@ pub fn missing_mods(planned: &[(String, String)], basedir: &Path, own: &str) -> 
     }
     let mut v: Vec<String> = dirs
         .into_iter()
-        .filter(|&(d, maps_only)| maps_only && d != own && !basedir.join(d).is_dir())
+        .filter(|&(d, maps_only)| maps_only && d != own && !roots.iter().any(|r| r.join(d).is_dir()))
         .map(|(d, _)| d.to_string())
         .collect();
     v.sort();
     v
 }
 
-/// Unpacks `zip` into `basedir`; returns the game dir to show the release
-/// under. A `modinfo.txt` names the own dir (and its base).
-pub fn install(r: &Release, zip: &Path, basedir: &Path) -> Result<String, String> {
+/// Unpacks `zip` into `install_root` (the user data `mods/` folder), checking
+/// `basedir` and `install_root` for already-installed dependencies; returns the
+/// game dir to show the release under. A `modinfo.txt` names the own dir (and
+/// its base).
+pub fn install(r: &Release, zip: &Path, install_root: &Path, basedir: &Path) -> Result<String, String> {
     let pack = qcore::fs::Pack::load_pk3(zip).ok_or(qcore::t!("the download is not a valid zip"))?;
     let own = r.stem.clone();
     let (planned, base) = plan(&r.install, pack.names(), &own);
     if planned.is_empty() {
         return Err(qcore::t!("nothing to install for this engine").into());
     }
-    let missing = missing_mods(&planned, basedir, &own);
+    let roots = [basedir, install_root];
+    let missing = missing_mods(&planned, &roots, &own);
     if !missing.is_empty() {
         return Err(qcore::tr!("needs {} installed first", missing.join(", ")));
     }
     let existed: Vec<String> = planned
         .iter()
         .filter_map(|(d, _)| d.split('/').next())
-        .filter(|d| basedir.join(d).is_dir())
+        .filter(|d| roots.iter().any(|r| r.join(d).is_dir()))
         .map(str::to_string)
         .collect();
     // a mod built on a mission pack or another mod (deps like
     // quoth2pt2full_2, ad_v1_80p1final) needs it mounted
-    let installed: Vec<String> = qui::mods::scan(basedir).into_iter().map(|m| m.dir).collect();
+    let installed: Vec<String> = qui::mods::scan_roots(&roots).into_iter().map(|m| m.dir).collect();
     let dep_base = dep_base(&r.deps, &installed, &own);
     let base = base.map(str::to_string).or_else(|| dep_base.clone());
     for (dest, name) in &planned {
         let data = pack.read(name).ok_or_else(|| qcore::tr!("couldn't unpack {}", name))?;
-        let path: PathBuf = basedir.join(dest);
+        let path: PathBuf = install_root.join(dest);
         if let Some(p) = path.parent() {
             std::fs::create_dir_all(p).map_err(|e| format!("{}: {e}", p.display()))?;
         }
@@ -289,7 +292,7 @@ pub fn install(r: &Release, zip: &Path, basedir: &Path) -> Result<String, String
         *counts.entry(d.split('/').next().unwrap_or("")).or_default() += 1;
     }
     // the own dir counts only when it is playable (not just a stray readme)
-    if qui::mods::is_game_dir(&basedir.join(&own)) {
+    if qui::mods::is_game_dir(&install_root.join(&own)) {
         let q = |t: &str| t.replace('"', "'");
         let mut info = format!("title \"{}\"\n", q(&r.title));
         if let Some(b) = base {
@@ -298,7 +301,7 @@ pub fn install(r: &Release, zip: &Path, basedir: &Path) -> Result<String, String
         if !r.description.is_empty() {
             info += &format!("description \"{}\"\n", q(&r.description));
         }
-        std::fs::write(basedir.join(&own).join("modinfo.txt"), info).map_err(|e| e.to_string())?;
+        std::fs::write(install_root.join(&own).join("modinfo.txt"), info).map_err(|e| e.to_string())?;
         return Ok(own);
     }
     counts.remove(own.as_str());
@@ -309,11 +312,11 @@ pub fn install(r: &Release, zip: &Path, basedir: &Path) -> Result<String, String
         && !existed.contains(&shown)
         && !BASES.contains(&shown.as_str())
         && !shown.eq_ignore_ascii_case(&b)
-        && qui::mods::is_game_dir(&basedir.join(&shown))
-        && !basedir.join(&shown).join("modinfo.txt").exists()
+        && qui::mods::is_game_dir(&install_root.join(&shown))
+        && !install_root.join(&shown).join("modinfo.txt").exists()
     {
         let info = format!("title \"{}\"\nbase {b}\n", r.title.replace('"', "'"));
-        std::fs::write(basedir.join(&shown).join("modinfo.txt"), info).map_err(|e| e.to_string())?;
+        std::fs::write(install_root.join(&shown).join("modinfo.txt"), info).map_err(|e| e.to_string())?;
     }
     Ok(shown)
 }

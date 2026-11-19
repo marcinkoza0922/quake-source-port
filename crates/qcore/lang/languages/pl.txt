@@ -1632,6 +1632,13 @@ pl własny
 @ classic
 pl klasyczny
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+pl Zapisz po podniesieniu klucza
+
+@ User Data Directory
+pl Katalog danych użytkownika
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ pl Przesuwaj, skaluj, dodawaj i usuwaj elementy HUD: zdrowie, amunicję, broń, 
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 pl Nowoczesny: zwarte elementy przy krawędziach ekranu; klasyczny: oryginalny pasek stanu. Wybór szablonu resetuje HUD; zmiany w Edytuj HUD czynią go własnym
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+pl Automatycznie zapisuje po podniesieniu klucza
+
+@ Where saves, configs, demos and downloaded map packs are stored
+pl Miejsce przechowywania zapisów, konfiguracji, dem i pobranych paczek map
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ pl WŁASNA
 
 @ Customize Experience
 pl Dostosuj rozgrywkę
-
-@ Disable All
-pl Wyłącz wszystko
 
 @ Disable All Modifications
 pl Wyłącz wszystkie modyfikacje
@@ -3003,17 +3014,11 @@ pl Żadne demo nie pasuje do filtra. Backspace lub Esc go czyści.
 @ Renaming an automatic demo moves it to the saved demos.
 pl Zmiana nazwy automatycznego dema przenosi je do zapisanych dem.
 
-@ Sort
-pl Sortuj
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 pl Podczas dema: A wstrzymuje, krzyżak przewija i zmienia prędkość, LT i RT zaznaczają fragment, a X go eksportuje.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 pl Spacja pauza | Lewo/Prawo przewijanie | Góra/Dół prędkość | PgUp/PgDn 10 s | I/O znacznik | E eksport
-
-@ Switch List
-pl Zmień listę
 
 @ This can't be undone.
 pl Tego nie można cofnąć.
@@ -3060,6 +3065,43 @@ pl Przygotowywanie...
 # Save cards: personal best.
 @ PB {} {}
 pl PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+pl Podniesiono klucz
+
+@ Select User Data Directory
+pl Wybierz katalog danych użytkownika
+
+@ Data folder: {}
+pl Folder danych: {}
+
+@ Parent Folder
+pl Folder nadrzędny
+
+@ Unable to read directory
+pl Nie można odczytać katalogu
+
+@ No subfolders
+pl Brak podfolderów
+
+@ Select Folder
+pl Wybierz folder
+
+@ Show Hidden
+pl Pokaż ukryte
+
+@ Copy existing user data?
+pl Skopiować istniejące dane użytkownika?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+pl Zapisy, konfiguracje, dema i pobrane paczki map można skopiować do nowego folderu.
+
+@ Copy Data
+pl Kopiuj dane
+
+@ Switch Only
+pl Tylko zmień
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ pl Nie znaleziono ffmpeg: zapisano {} klatek PNG i plik WAV w {}
 # Personal bests.
 @ New personal best ({}): {}
 pl Nowy rekord osobisty ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+pl Ustawiono katalog danych użytkownika na {}
+
+@ User data directory error: {}
+pl Błąd katalogu danych użytkownika: {}

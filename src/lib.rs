@@ -41,6 +41,7 @@ mod skywind;
 mod saveinfo;
 mod splitscreen;
 mod save_inventory;
+mod userdata;
 mod view;
 mod vwep;
 #[cfg(target_arch = "wasm32")]
@@ -82,30 +83,31 @@ impl Opts {
     }
 }
 
-/// `$XDG_DATA_HOME/quake-source-port/<game>` (default `~/.local/share/...`);
-/// `/quake-user/<game>` in the web build.
+/// Per-game user data directory (`<user data root>/<game>`).
 pub fn user_dir(game: &str) -> PathBuf {
-    if cfg!(target_arch = "wasm32") {
-        return PathBuf::from(qcore::fs::WEB_USER_ROOT).join(game.to_ascii_lowercase());
-    }
-    if cfg!(target_os = "android") && std::env::var_os("XDG_DATA_HOME").is_none() {
-        return PathBuf::from(qcore::fs::ANDROID_DATA_DIR).join("userdata").join(game.to_ascii_lowercase());
-    }
-    let root = std::env::var_os("XDG_DATA_HOME")
-        .map(PathBuf::from)
-        .or_else(|| std::env::var_os("HOME").map(|h| PathBuf::from(h).join(".local/share")))
-        .unwrap_or_else(|| PathBuf::from("."));
-    root.join("quake-source-port").join(game.to_ascii_lowercase())
+    userdata::game_dir(game)
+}
+
+/// User-installed map packs / Quaddicted installs (`<user data root>/mods`).
+pub fn user_mods_dir() -> PathBuf {
+    userdata::mods_dir()
+}
+
+/// Quaddicted cache directory (`<user data root>/quaddicted`).
+pub fn quaddicted_cache_dir() -> PathBuf {
+    userdata::quaddicted_cache_dir()
 }
 
 /// Game search paths from -basedir/-game/-hipnotic/-rogue/-quoth plus the
 /// user dir, and the game palette.
 fn open_game(o: &Opts) -> Result<(Fs, PathBuf, [[u8; 3]; 256]), String> {
+    userdata::init(o.val("-userdir").map(std::path::Path::new));
     let basedir = o
         .val("-basedir")
         .map(PathBuf::from)
         .unwrap_or_else(Fs::default_basedir);
     let mut fs = Fs::new(&basedir);
+    fs.add_mod_root(user_mods_dir());
     if !fs.add_game_dir("id1") {
         return Err(format!("Couldn't find Quake game data in {}.\n\nCopy this port next to your Quake folder (the one containing id1/pak0.pak), or start it with -basedir DIR or the QUAKE_BASEDIR environment variable.", basedir.display()));
     }
@@ -136,6 +138,9 @@ type Sound = (Option<qplatform::AudioStream>, Option<SoundSystem>, Option<std::s
 /// the mixer is shared so video capture can paint it (`SharedMixer`).
 fn open_sound(p: &qplatform::Platform, basedir: &std::path::Path, fs: &Fs) -> Sound {
     let mut sfs = Fs::new(basedir);
+    for r in fs.mod_roots() {
+        sfs.add_mod_root(r);
+    }
     for g in fs.game_dirs() {
         sfs.add_game_dir(g);
     }

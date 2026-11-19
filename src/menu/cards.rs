@@ -111,8 +111,9 @@ impl Menu {
         self.save_at(i).filter(|s| s.source == SaveSource::Own)?;
         let y = self.card_y(i) + CARD_H - DEL.1 - 5.0;
         let (top, bottom) = if i < self.card_sticky() { (CARD_Y0, CARD_Y0 + CARD_H) } else { (self.card_top(), CARD_BOTTOM) };
+        let w = if self.pad_ui { DEL.0 + 14.0 } else { DEL.0 };
         (self.card_visible(i) && y >= top && y + DEL.1 <= bottom)
-            .then_some((CARD_X + CARD_W - 12.0 - THUMB.0 - 8.0 - DEL.0, y, DEL.0, DEL.1))
+            .then_some((CARD_X + CARD_W - 12.0 - THUMB.0 - 8.0 - w, y, w, DEL.1))
     }
 
     pub(super) fn on_delete_button(&self, (x, y): (f32, f32)) -> bool {
@@ -260,7 +261,7 @@ impl Menu {
         if let Some((bx, by, bw, bh)) = self.delete_button() {
             let hover = self.mouse.is_some_and(|m| self.on_delete_button(m));
             c.round_box(bx, by, bw, bh, 3.0, if hover { [0.55, 0.12, 0.08, 0.95] } else { [0.0, 0.0, 0.0, 0.6] }, Some(BORDER));
-            c.text_center(bx + bw / 2.0, by + 2.0, "Delete", small, if hover { GOLD_FG } else { MUTED });
+            self.glyphs.button_label(c, [bx, by, bw, bh], self.pad_ui.then_some(K_XBUTTON), "Delete", small, if hover { GOLD_FG } else { MUTED });
         }
         if !self.pad_ui && self.save_at(self.load_cursor).is_some_and(|s| s.source == SaveSource::Own) {
             c.text_right(CARD_X + CARD_W, CARD_BOTTOM + 8.0, "Del: delete save", TXT, MUTED);

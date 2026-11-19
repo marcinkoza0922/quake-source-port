@@ -6,6 +6,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("sv_autosave_keep", "5", CVAR_ARCHIVE),
     ("sv_autosave_entry", "1", CVAR_ARCHIVE),
     ("sv_autosave_secret", "0", CVAR_ARCHIVE),
+    ("sv_autosave_key", "0", CVAR_ARCHIVE),
     ("sv_autosave_monsters", "0", CVAR_ARCHIVE),
     ("sv_autosave_secrets", "0", CVAR_ARCHIVE),
     ("sv_autosave_interval", "0", CVAR_ARCHIVE),

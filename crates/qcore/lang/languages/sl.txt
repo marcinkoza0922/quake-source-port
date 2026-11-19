@@ -1632,6 +1632,13 @@ sl po meri
 @ classic
 sl klasično
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+sl Shrani ob pobiranju ključa
+
+@ User Data Directory
+sl Mapa uporabniških podatkov
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ sl Premikajte, spreminjajte velikost, dodajajte in odstranjujte elemente HUD: zd
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 sl Sodobno: kompaktni elementi ob robovih zaslona; klasično: izvirna vrstica stanja. Izbira ponastavi HUD; spremembe v Uredi HUD ga naredijo po meri
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+sl Samodejno shrani, ko pobereš ključ
+
+@ Where saves, configs, demos and downloaded map packs are stored
+sl Kjer so shranjeni shranjeni položaji, nastavitve, demo posnetki in preneseni paketi map
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ sl PRILAGOJENO
 
 @ Customize Experience
 sl Prilagodi izkušnjo
-
-@ Disable All
-sl Onemogoči vse
 
 @ Disable All Modifications
 sl Onemogoči vse spremembe
@@ -3003,17 +3014,11 @@ sl Filtru ne ustreza noben posnetek. Vračalka ali Esc ga počisti.
 @ Renaming an automatic demo moves it to the saved demos.
 sl Preimenovanje samodejnega posnetka ga premakne med shranjene.
 
-@ Sort
-sl Razvrsti
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 sl Med posnetkom: A ustavi, smerni gumbi previjajo in spreminjajo hitrost, LT in RT označita izsek, X pa ga izvozi.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sl Preslednica premor | Levo/Desno previjanje | Gor/Dol hitrost | PgUp/PgDn 10 s | I/O oznaka | E izvoz
-
-@ Switch List
-sl Zamenjaj seznam
 
 @ This can't be undone.
 sl Tega ni mogoče razveljaviti.
@@ -3060,6 +3065,43 @@ sl Pripravljanje...
 # Save cards: personal best.
 @ PB {} {}
 sl PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+sl Ključ pobran
+
+@ Select User Data Directory
+sl Izberi mapo uporabniških podatkov
+
+@ Data folder: {}
+sl Podatkovna mapa: {}
+
+@ Parent Folder
+sl Nadrejena mapa
+
+@ Unable to read directory
+sl Mape ni mogoče prebrati
+
+@ No subfolders
+sl Ni podmap
+
+@ Select Folder
+sl Izberi mapo
+
+@ Show Hidden
+sl Prikaži skrite
+
+@ Copy existing user data?
+sl Kopiraj obstoječe uporabniške podatke?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+sl Shranjene igre, nastavitve, demo posnetke in prenesene pakete map lahko kopirate v novo mapo.
+
+@ Copy Data
+sl Kopiraj podatke
+
+@ Switch Only
+sl Samo preklopi
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ sl ffmpeg ni najden: zapisanih {} sličic PNG in WAV v {}
 # Personal bests.
 @ New personal best ({}): {}
 sl Nov osebni rekord ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+sl Mapa uporabniških podatkov nastavljena na {}
+
+@ User data directory error: {}
+sl Napaka mape uporabniških podatkov: {}

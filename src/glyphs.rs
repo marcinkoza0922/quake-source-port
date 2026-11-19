@@ -271,6 +271,57 @@ impl Glyphs {
         let w = self.hints(c, 0.0, y, items, false);
         self.hints(c, (cx - w / 2.0).floor(), y, items, true);
     }
+
+    /// Draws a clickable button's label centred in `rect` (`[x, y, w, h]`),
+    /// with an optional controller button glyph inline to its left. `label` is
+    /// translated ([`qcore::lang::tr`]); use [`Self::button_label_raw`] for
+    /// already-translated or formatted text.
+    pub fn button_label(&self, c: &mut Canvas, rect: [f32; 4], key: Option<i32>, label: &str, size: f32, fg: [f32; 4]) {
+        self.button_label_raw(c, rect, key, &qcore::lang::tr(label), size, fg);
+    }
+
+    /// Like [`Self::button_label`], without translation lookup.
+    pub fn button_label_raw(&self, c: &mut Canvas, rect: [f32; 4], key: Option<i32>, label: &str, size: f32, fg: [f32; 4]) {
+        let [rx, ry, rw, rh] = rect;
+        let pad = 3.0;
+        let ty = center_text_y(ry, rh, size);
+        let (gh, gap, gw) = match key {
+            Some(k) => {
+                let gh = H.min((rh - 2.0).max(7.0));
+                (gh, 3.0, width(c, k, self.family, gh))
+            }
+            None => (0.0, 0.0, 0.0),
+        };
+        let max_tw = (rw - 2.0 * pad - if key.is_some() { gw + gap } else { 0.0 }).max(0.0);
+        let shown = fit_label(c, label, max_tw, size);
+        let tw = c.text_w_raw(&shown, size);
+        let total = if key.is_some() { gw + gap + tw } else { tw };
+        let x = (rx + (rw - total) / 2.0).max(rx + pad).floor();
+        if let Some(k) = key {
+            self.key_h(c, x, ry + (rh - gh) / 2.0, k, gh);
+            c.text_raw(x + gw + gap, ty, &shown, size, fg);
+        } else {
+            c.text_raw(x, ty, &shown, size, fg);
+        }
+    }
+}
+
+/// Truncates `s` with a trailing `~` so its rendered width fits within `max_w`.
+fn fit_label(c: &Canvas, s: &str, max_w: f32, size: f32) -> String {
+    if s.is_empty() || c.text_w_raw(s, size) <= max_w {
+        return s.to_string();
+    }
+    let mut out = String::new();
+    for ch in s.chars() {
+        let mut cand = out.clone();
+        cand.push(ch);
+        cand.push('~');
+        if c.text_w_raw(&cand, size) > max_w {
+            break;
+        }
+        out.push(ch);
+    }
+    if out.is_empty() { String::new() } else { out + "~" }
 }
 
 #[cfg(test)]
@@ -285,5 +336,19 @@ mod tests {
         assert!(matches!(pad_shape(K_LTRIGGER, Family::Nintendo), Some(Shape::Tag(t)) if t == "ZL"));
         assert!(pad_shape(b'w' as i32, Family::Xbox).is_none());
         assert_eq!(key_name(b'w' as i32), "W");
+    }
+
+    #[test]
+    fn button_label_draws_glyph_only_when_mapped_and_clips_long_text() {
+        let g = Glyphs { family: Family::Xbox };
+        let mut c = Canvas::new(640, 360);
+        c.ui = Some(Default::default());
+        g.button_label(&mut c, [10.0, 10.0, 80.0, 16.0], None, "Cancel", 9.0, [1.0; 4]);
+        let without = c.list.len();
+        c.list.clear();
+        g.button_label(&mut c, [10.0, 10.0, 80.0, 16.0], Some(K_BBUTTON), "Cancel", 9.0, [1.0; 4]);
+        assert!(c.list.len() > without, "mapped controller key should emit glyph geometry");
+        let clipped = fit_label(&c, "A very long translated button label", 30.0, 9.0);
+        assert!(clipped.ends_with('~') && c.text_w_raw(&clipped, 9.0) <= 30.0);
     }
 }

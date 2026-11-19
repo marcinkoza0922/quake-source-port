@@ -1632,6 +1632,13 @@ ka საკუთარი
 @ classic
 ka კლასიკური
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ka შენახვა გასაღების აღებისას
+
+@ User Data Directory
+ka მომხმარებლის მონაცემთა საქაღალდე
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ ka გადაადგილეთ, შეცვალეთ ზომა, დ
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 ka თანამედროვე: კომპაქტური ელემენტები ეკრანის კიდეებზე; კლასიკური: ორიგინალი მდგომარეობის ზოლი. არჩევა HUD-ს აღადგენს; ცვლილებები „HUD-ის რედაქტირებაში“ მას საკუთარს ხდის
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+ka ავტომატურად ინახავს გასაღების აღებისას
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ka სად ინახება შენახვები, კონფიგურაციები, დემოები და გადმოწერილი რუკების პაკეტები
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ ka მორგებული
 
 @ Customize Experience
 ka გამოცდილების მორგება
-
-@ Disable All
-ka ყველას გამორთვა
 
 @ Disable All Modifications
 ka ყველა ცვლილების გამორთვა
@@ -3003,17 +3014,11 @@ ka ფილტრს არცერთი დემო არ შეესა�
 @ Renaming an automatic demo moves it to the saved demos.
 ka ავტომატური დემოს გადარქმევა მას შენახულ დემოებში გადაიტანს.
 
-@ Sort
-ka დალაგება
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 ka დემოს დროს: A აპაუზებს, d-pad გადაახვევს და სიჩქარეს ცვლის, LT და RT ნიშნავს კლიპს, X კი მას ექსპორტს უკეთებს.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ka Space პაუზა | მარცხ./მარჯვ. გადახვევა | ზემოთ/ქვემოთ სიჩქარე | PgUp/PgDn 10 წმ | I/O ნიშნული | E ექსპორტი
-
-@ Switch List
-ka სიის შეცვლა
 
 @ This can't be undone.
 ka ამის გაუქმება შეუძლებელია.
@@ -3060,6 +3065,43 @@ ka მომზადება...
 # Save cards: personal best.
 @ PB {} {}
 ka PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+ka გასაღები აღებულია
+
+@ Select User Data Directory
+ka აირჩიეთ მომხმარებლის მონაცემთა საქაღალდე
+
+@ Data folder: {}
+ka მონაცემთა საქაღალდე: {}
+
+@ Parent Folder
+ka მშობელი საქაღალდე
+
+@ Unable to read directory
+ka საქაღალდის წაკითხვა ვერ მოხერხდა
+
+@ No subfolders
+ka ქვესაქაღალდეები არ არის
+
+@ Select Folder
+ka საქაღალდის არჩევა
+
+@ Show Hidden
+ka დამალულების ჩვენება
+
+@ Copy existing user data?
+ka დაკოპირდეს არსებული მომხმარებლის მონაცემები?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ka შენახვები, კონფიგურაციები, დემოები და გადმოწერილი რუკები შეიძლება დაკოპირდეს ახალ საქაღალდეში.
+
+@ Copy Data
+ka მონაცემთა კოპირება
+
+@ Switch Only
+ka მხოლოდ შეცვლა
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ ka ffmpeg ვერ მოიძებნა: {} PNG კადრი და WAV 
 # Personal bests.
 @ New personal best ({}): {}
 ka ახალი პირადი რეკორდი ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+ka მომხმარებლის მონაცემთა საქაღალდე დაყენდა: {}
+
+@ User data directory error: {}
+ka მომხმარებლის მონაცემთა საქაღალდის შეცდომა: {}

@@ -33,6 +33,10 @@ const LIST: (f32, f32) = (40.0, 264.0);
 const INFO: (f32, f32) = (312.0, 288.0);
 /// Map page panel.
 const MAPS: (f32, f32) = (40.0, 560.0);
+/// Sort button widths per page (wide enough for controller glyphs).
+const SORT_W_LIST: f32 = 96.0;
+const SORT_W_MAPS: f32 = 104.0;
+const SORT_W_ONLINE: f32 = 96.0;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum ModSort {
@@ -345,15 +349,59 @@ impl ModMenu {
         }
     }
 
+    /// Whether the active page currently has a non-empty filter query.
+    pub fn has_filter(&self, page: Page) -> bool {
+        match page {
+            Page::List => !self.mod_filter.is_empty(),
+            Page::Maps => !self.map_filter.is_empty(),
+            Page::Online => self.online.has_filter(),
+        }
+    }
+
+    /// Appends a character to the active page's filter (used by the on-screen keyboard).
+    pub fn filter_push(&mut self, page: Page, ch: char) {
+        if !(' '..='~').contains(&ch) {
+            return;
+        }
+        match page {
+            Page::List => {
+                self.mod_filter.push(ch);
+                self.rebuild_mod_view();
+            }
+            Page::Maps => {
+                self.map_filter.push(ch);
+                self.rebuild_map_view();
+            }
+            Page::Online => self.online.filter_push(ch),
+        }
+    }
+
+    /// Removes the last character from the active page's filter.
+    pub fn filter_pop(&mut self, page: Page) {
+        match page {
+            Page::List => {
+                if self.mod_filter.pop().is_some() {
+                    self.rebuild_mod_view();
+                }
+            }
+            Page::Maps => {
+                if self.map_filter.pop().is_some() {
+                    self.rebuild_map_view();
+                }
+            }
+            Page::Online => self.online.filter_pop(),
+        }
+    }
+
     /// Handles clicks on the search/sort bar.
     pub fn click(&mut self, page: Page, (x, y): (f32, f32), out: &mut Vec<Action>) -> bool {
         if !(BAR_Y..BAR_Y + BAR_H).contains(&y) {
             return false;
         }
         let (bx, bw, sw) = match page {
-            Page::List => (LIST.0, LIST.1, 78.0),
-            Page::Maps => (MAPS.0, MAPS.1, 88.0),
-            Page::Online => (LIST.0, LIST.1, 88.0),
+            Page::List => (LIST.0, LIST.1, SORT_W_LIST),
+            Page::Maps => (MAPS.0, MAPS.1, SORT_W_MAPS),
+            Page::Online => (LIST.0, LIST.1, SORT_W_ONLINE),
         };
         let sx = bx + bw - sw;
         if (sx..sx + sw).contains(&x) {
@@ -369,7 +417,7 @@ impl ModMenu {
         if page == Page::Online {
             return Some(if self.online.key(key, out) { Page::Online } else { Page::List });
         }
-        if key == K_TAB {
+        if matches!(key, K_TAB | K_RTRIGGER) {
             self.cycle_sort(page);
             out.push(Action::Sound("misc/menu3.wav"));
             return Some(page);
@@ -423,13 +471,13 @@ impl ModMenu {
         let enter = matches!(key, K_ENTER | K_KP_ENTER | K_ABUTTON | K_MOUSE1);
         let back = matches!(key, K_ESCAPE | K_BBUTTON | K_MOUSE2);
         match page {
-            Page::List if key == K_ESCAPE && !self.mod_filter.is_empty() => {
+            Page::List if back && !self.mod_filter.is_empty() => {
                 self.mod_filter.clear();
                 self.rebuild_mod_view();
                 out.push(Action::Sound("misc/menu1.wav"));
                 Some(Page::List)
             }
-            Page::Maps if key == K_ESCAPE && !self.map_filter.is_empty() => {
+            Page::Maps if back && !self.map_filter.is_empty() => {
                 self.map_filter.clear();
                 self.rebuild_map_view();
                 out.push(Action::Sound("misc/menu1.wav"));
@@ -490,15 +538,15 @@ impl ModMenu {
         }
     }
 
-    pub fn draw(&self, c: &mut Canvas, page: Page) {
+    pub fn draw(&self, c: &mut Canvas, page: Page, pad: bool, glyphs: &crate::glyphs::Glyphs) {
         match page {
-            Page::List => self.draw_list(c),
-            Page::Maps => self.draw_maps(c),
-            Page::Online => self.online.draw(c),
+            Page::List => self.draw_list(c, pad, glyphs),
+            Page::Maps => self.draw_maps(c, pad, glyphs),
+            Page::Online => self.online.draw(c, pad, glyphs),
         }
     }
 
-    fn draw_list(&self, c: &mut Canvas) {
+    fn draw_list(&self, c: &mut Canvas, pad: bool, glyphs: &crate::glyphs::Glyphs) {
         center_gold(c, 24.0, "Map Packs");
         let count = if self.mod_filter.is_empty() {
             qcore::tr!("{} installed", self.mods.len())
@@ -507,7 +555,7 @@ impl ModMenu {
         };
         center(c, 36.0, &count);
         let (x, w) = LIST;
-        draw_filter_bar(c, x, w, 78.0, &self.mod_filter, self.mod_sort.label());
+        draw_filter_bar(c, x, w, SORT_W_LIST, &self.mod_filter, self.mod_sort.label(), pad, glyphs);
         box_(c, x, w, ROWS);
         for i in (self.scroll..self.rows(Page::List)).take(ROWS) {
             let y = TOP + (i - self.scroll) as f32 * ROW_H;
@@ -572,7 +620,7 @@ impl ModMenu {
         }
     }
 
-    fn draw_maps(&self, c: &mut Canvas) {
+    fn draw_maps(&self, c: &mut Canvas, pad: bool, glyphs: &crate::glyphs::Glyphs) {
         let Some(m) = self.selected() else { return };
         center_gold(c, 24.0, &clip(&m.title, 70));
         let done = self.maps.iter().filter(|x| self.stats.get(&x.name).is_some_and(|s| s.completions > 0)).count();
@@ -583,7 +631,7 @@ impl ModMenu {
         };
         center(c, 36.0, &subtitle);
         let (x, w) = MAPS;
-        draw_filter_bar(c, x, w, 88.0, &self.map_filter, self.map_sort.label());
+        draw_filter_bar(c, x, w, SORT_W_MAPS, &self.map_filter, self.map_sort.label(), pad, glyphs);
         box_(c, x, w, ROWS);
         let stat_x = x + w - 176.0;
         let total = self.rows(Page::Maps);
@@ -627,25 +675,49 @@ impl ModMenu {
     }
 }
 
-fn draw_filter_bar(c: &mut Canvas, x: f32, w: f32, sort_w: f32, filter: &str, sort_label: &str) {
-    filter_bar_at(c, x, BAR_Y, w, sort_w, filter, sort_label);
+#[allow(clippy::too_many_arguments)]
+fn draw_filter_bar(c: &mut Canvas, x: f32, w: f32, sort_w: f32, filter: &str, sort_label: &str, pad: bool, glyphs: &crate::glyphs::Glyphs) {
+    filter_bar_at(c, x, BAR_Y, w, sort_w, filter, sort_label, pad.then_some((Some(K_YBUTTON), Some(K_RTRIGGER), glyphs)));
 }
 
 /// The type-to-filter box and the sort button at its right, `BAR_H` tall at `y`.
-pub(crate) fn filter_bar_at(c: &mut Canvas, x: f32, y: f32, w: f32, sort_w: f32, filter: &str, sort_label: &str) {
+/// `pad_glyphs` optionally supplies `(filter_key, sort_key, glyphs)` to draw
+/// controller glyphs directly inside those controls.
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn filter_bar_at(
+    c: &mut Canvas,
+    x: f32,
+    y: f32,
+    w: f32,
+    sort_w: f32,
+    filter: &str,
+    sort_label: &str,
+    pad_glyphs: Option<(Option<i32>, Option<i32>, &crate::glyphs::Glyphs)>,
+) {
     let fw = w - sort_w - 4.0;
     c.fill(x, y, fw, BAR_H, [0.0, 0.0, 0.0, 0.8]);
     c.frame(x, y, fw, BAR_H, BORDER);
-    let cols = ((fw - 12.0) / 6.0) as usize;
+    let mut tx = x + 6.0;
+    if let Some((Some(fk), _, glyphs)) = pad_glyphs {
+        let gh = crate::glyphs::H.min(BAR_H - 2.0);
+        let gw = glyphs.key_h(c, x + 3.0, y + (BAR_H - gh) / 2.0, fk, gh);
+        tx = x + 3.0 + gw + 3.0;
+    }
+    let cols = (((x + fw - tx - 4.0).max(6.0)) / 6.0) as usize;
     if filter.is_empty() {
-        c.text(x + 6.0, y + 2.0, "Type to filter...", TXT, MUTED);
+        c.text(tx, y + 2.0, "Type to filter...", TXT, MUTED);
     } else {
-        txt(c, x + 6.0, y + 2.0, &clip(&format!("{filter}_"), cols));
+        txt(c, tx, y + 2.0, &clip(&format!("{filter}_"), cols));
     }
     let sx = x + w - sort_w;
     c.fill(sx, y, sort_w, BAR_H, [0.08, 0.08, 0.08, 0.9]);
     c.frame(sx, y, sort_w, BAR_H, BORDER);
-    c.text_center(sx + sort_w * 0.5, y + 2.0, &qcore::tr!("Sort: {}", qcore::lang::tr(sort_label)), TXT, GOLD_FG);
+    let label = qcore::tr!("Sort: {}", qcore::lang::tr(sort_label));
+    if let Some((_, Some(sk), glyphs)) = pad_glyphs {
+        glyphs.button_label_raw(c, [sx, y, sort_w, BAR_H], Some(sk), &label, TXT, GOLD_FG);
+    } else {
+        c.text_center(sx + sort_w * 0.5, y + 2.0, &label, TXT, GOLD_FG);
+    }
 }
 
 const OFFICIAL_EXPANSIONS: &[&str] = &["hipnotic", "rogue", "dopa", "mg1", "mg3"];

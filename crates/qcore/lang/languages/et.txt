@@ -1632,6 +1632,13 @@ et kohandatud
 @ classic
 et klassikaline
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+et Salvesta võtme üleskorjamisel
+
+@ User Data Directory
+et Kasutajaandmete kaust
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ et Liiguta, muuda suurust, lisa ja eemalda HUD-i elemente: tervis, laskemoon, re
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 et Moodne: kompaktsed elemendid ekraani servades; klassikaline: algne olekuriba. Valik lähtestab HUD-i; muudatused jaotises Muuda HUD-i teevad selle kohandatuks
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+et Salvestab automaatselt võtme üleskorjamisel
+
+@ Where saves, configs, demos and downloaded map packs are stored
+et Kuhu salvestatakse mänguseisud, seaded, demod ja allalaaditud kaardipakid
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ et KOHANDATUD
 
 @ Customize Experience
 et Kohanda kogemust
-
-@ Disable All
-et Keela kõik
 
 @ Disable All Modifications
 et Keela kõik muudatused
@@ -3003,17 +3014,11 @@ et Filtrile ei vasta ükski demo. Backspace või Esc tühjendab selle.
 @ Renaming an automatic demo moves it to the saved demos.
 et Automaatse demo ümbernimetamine viib selle salvestatud demode hulka.
 
-@ Sort
-et Sordi
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 et Demo ajal: A peatab, suunanupud keritavad ja muudavad kiirust, LT ja RT märgivad klipi ning X ekspordib selle.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 et Tühik paus | Vasak/Parem kerimine | Üles/Alla kiirus | PgUp/PgDn 10 s | I/O märk | E eksport
-
-@ Switch List
-et Vaheta loendit
 
 @ This can't be undone.
 et Seda ei saa tagasi võtta.
@@ -3060,6 +3065,43 @@ et Ettevalmistus...
 # Save cards: personal best.
 @ PB {} {}
 et PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+et Võti üles korjatud
+
+@ Select User Data Directory
+et Vali kasutajaandmete kaust
+
+@ Data folder: {}
+et Andmekaust: {}
+
+@ Parent Folder
+et Ülemkaust
+
+@ Unable to read directory
+et Kausta ei saa lugeda
+
+@ No subfolders
+et Alamkaustu pole
+
+@ Select Folder
+et Vali kaust
+
+@ Show Hidden
+et Näita peidetud
+
+@ Copy existing user data?
+et Kopeerida olemasolevad kasutajaandmed?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+et Mänguseisud, seaded, demod ja allalaaditud kaardipakid saab uude kausta kopeerida.
+
+@ Copy Data
+et Kopeeri andmed
+
+@ Switch Only
+et Ainult vaheta
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ et ffmpegi ei leitud: {} PNG-kaadrit ja WAV kirjutati asukohta {}
 # Personal bests.
 @ New personal best ({}): {}
 et Uus isiklik rekord ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+et Kasutajaandmete kaust määrati asukohta {}
+
+@ User data directory error: {}
+et Kasutajaandmete kausta viga: {}

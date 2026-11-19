@@ -1632,6 +1632,13 @@ bg собствен
 @ classic
 bg класически
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+bg Запис при вземане на ключ
+
+@ User Data Directory
+bg Папка с потребителски данни
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ bg Местете, оразмерявайте, добавяйте и према�
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 bg Модерен: компактни елементи по краищата на екрана; класически: оригиналната лента за състояние. Изборът на шаблон нулира HUD; промените в „Редактиране на HUD“ го правят собствен
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+bg Автоматично запазва при вземане на ключ
+
+@ Where saves, configs, demos and downloaded map packs are stored
+bg Къде се съхраняват записите, настройките, демотата и изтеглените пакети с карти
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ bg СОБСТВЕНО
 
 @ Customize Experience
 bg Персонализирай играта
-
-@ Disable All
-bg Изключи всичко
 
 @ Disable All Modifications
 bg Изключи всички промени
@@ -3003,17 +3014,11 @@ bg Няма демо, отговарящо на филтъра. Backspace или
 @ Renaming an automatic demo moves it to the saved demos.
 bg Преименуването на автоматично демо го премества при запазените.
 
-@ Sort
-bg Подреди
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 bg По време на демо: A поставя пауза, кръстачката превърта и сменя скоростта, LT и RT маркират клип, а X го експортира.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 bg Интервал пауза | Ляво/Дясно превъртане | Горе/Долу скорост | PgUp/PgDn 10 с | I/O маркер | E експорт
-
-@ Switch List
-bg Смяна на списъка
 
 @ This can't be undone.
 bg Това не може да бъде отменено.
@@ -3060,6 +3065,43 @@ bg Подготовка...
 # Save cards: personal best.
 @ PB {} {}
 bg PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+bg Ключът е взет
+
+@ Select User Data Directory
+bg Избор на папка с потребителски данни
+
+@ Data folder: {}
+bg Папка с данни: {}
+
+@ Parent Folder
+bg Родителска папка
+
+@ Unable to read directory
+bg Папката не може да бъде прочетена
+
+@ No subfolders
+bg Няма подпапки
+
+@ Select Folder
+bg Избери папка
+
+@ Show Hidden
+bg Покажи скрити
+
+@ Copy existing user data?
+bg Копиране на съществуващите потребителски данни?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+bg Записите, настройките, демотата и изтеглените пакети с карти могат да бъдат копирани в новата папка.
+
+@ Copy Data
+bg Копирай данни
+
+@ Switch Only
+bg Само смени
 
 # ==== hud.txt ====
 
@@ -3622,3 +3664,10 @@ bg ffmpeg не е намерен: записани {} PNG кадъра и WAV в
 # Personal bests.
 @ New personal best ({}): {}
 bg Нов личен рекорд ({}): {}
+
+# User data directory and autosave on key pickup.
+@ User data directory set to {}
+bg Папката с потребителски данни е зададена на {}
+
+@ User data directory error: {}
+bg Грешка в папката с потребителски данни: {}

@@ -1,5 +1,5 @@
 //! Single-player autosave event tracking and bounded, crash-safe slot rotation.
-use qserver::LevelStats;
+use qserver::{KeyState, LevelStats};
 use qcore::vfs;
 use std::{io, path::Path};
 
@@ -37,22 +37,27 @@ pub fn find(dir: &Path, name: &str) -> Option<std::path::PathBuf> {
 
 #[derive(Default)]
 pub struct Tracker {
-    previous: Option<(f64, LevelStats)>,
+    previous: Option<(f64, LevelStats, KeyState)>,
     last_save: f64,
 }
 
 impl Tracker {
     pub fn reset(&mut self) { *self = Self::default(); }
 
-    /// Flags: level entry, secret, all monsters, all secrets. Zero disables timer.
-    pub fn update(&mut self, time: f64, stats: LevelStats, loaded: bool, flags: [bool; 4], interval: f64) -> Option<&'static str> {
-        let previous = self.previous.replace((time, stats));
-        let Some((_, old)) = previous.filter(|(t, _)| *t <= time) else {
+    /// Flags: level entry, secret, all monsters, all secrets, key pickup. Zero disables timer.
+    pub fn update(&mut self, time: f64, stats: LevelStats, keys: KeyState, loaded: bool, flags: [bool; 5], interval: f64) -> Option<&'static str> {
+        let previous = self.previous.replace((time, stats, keys));
+        let Some((_, old, old_keys)) = previous.filter(|(t, _, _)| *t <= time) else {
             self.last_save = time;
             return (!loaded && flags[0]).then_some(qcore::t!("Level entry"));
         };
+        let picked_key = (keys.mask & !old_keys.mask) != 0
+            || keys.counts[0] > old_keys.counts[0]
+            || keys.counts[1] > old_keys.counts[1];
         let reason = if flags[1] && stats.found_secrets > old.found_secrets {
             Some(qcore::t!("Secret found"))
+        } else if flags[4] && picked_key {
+            Some(qcore::t!("Key picked up"))
         } else if flags[2] && stats.total_monsters > 0 && stats.killed_monsters >= stats.total_monsters
             && old.killed_monsters < stats.total_monsters {
             Some(qcore::t!("All enemies killed"))
@@ -117,32 +122,55 @@ mod tests {
     fn triggers_and_load_baseline() {
         let mut t = Tracker::default();
         let s = LevelStats { total_monsters: 2, total_secrets: 2, ..Default::default() };
-        assert!(t.update(1.0, s, false, [true; 4], 60.0).is_some());
-        assert!(t.update(2.0, s, false, [true; 4], 60.0).is_none());
+        let k = KeyState::default();
+        assert!(t.update(1.0, s, k, false, [true; 5], 60.0).is_some());
+        assert!(t.update(2.0, s, k, false, [true; 5], 60.0).is_none());
         let s = LevelStats { found_secrets: 1, ..s };
-        assert!(t.update(3.0, s, false, [true; 4], 60.0).is_some());
+        assert!(t.update(3.0, s, k, false, [true; 5], 60.0).is_some());
         let s = LevelStats { killed_monsters: 2, ..s };
-        assert!(t.update(4.0, s, false, [true; 4], 60.0).is_some());
-        assert!(t.update(5.0, s, false, [true; 4], 60.0).is_none());
-        assert!(t.update(64.0, s, false, [true; 4], 60.0).is_some());
+        assert!(t.update(4.0, s, k, false, [true; 5], 60.0).is_some());
+        assert!(t.update(5.0, s, k, false, [true; 5], 60.0).is_none());
+        assert!(t.update(64.0, s, k, false, [true; 5], 60.0).is_some());
         t.reset();
-        assert!(t.update(64.0, s, true, [true; 4], 60.0).is_none());
-        assert!(t.update(65.0, s, true, [true; 4], 60.0).is_none());
-        assert!(t.update(66.0, LevelStats { found_secrets: 2, ..s }, true, [true; 4], 60.0).is_some());
+        assert!(t.update(64.0, s, k, true, [true; 5], 60.0).is_none());
+        assert!(t.update(65.0, s, k, true, [true; 5], 60.0).is_none());
+        assert!(t.update(66.0, LevelStats { found_secrets: 2, ..s }, k, true, [true; 5], 60.0).is_some());
+    }
+    #[test]
+    fn key_pickup_triggers_for_standard_custom_and_counted_keys() {
+        let mut t = Tracker::default();
+        let s = LevelStats::default();
+        let flags = [false, false, false, false, true];
+        assert!(t.update(1.0, s, KeyState::default(), false, flags, 0.0).is_none());
+        // Silver key picked up
+        let k1 = KeyState { mask: 0b01, counts: [0, 0] };
+        assert_eq!(t.update(2.0, s, k1, false, flags, 0.0), Some(qcore::t!("Key picked up")));
+        assert!(t.update(3.0, s, k1, false, flags, 0.0).is_none());
+        // Used key (cleared) must not trigger; picking another up triggers again
+        assert!(t.update(4.0, s, KeyState::default(), false, flags, 0.0).is_none());
+        assert_eq!(t.update(5.0, s, k1, false, flags, 0.0), Some(qcore::t!("Key picked up")));
+        // Counted key (e.g. QBJ3 second silver key)
+        let k2 = KeyState { mask: 0b01, counts: [2, 0] };
+        assert_eq!(t.update(6.0, s, k2, false, flags, 0.0), Some(qcore::t!("Key picked up")));
+        // Loading a save with a key already held must not trigger
+        t.reset();
+        assert!(t.update(6.0, s, k2, true, flags, 0.0).is_none());
+        assert!(t.update(7.0, s, k2, true, flags, 0.0).is_none());
     }
     #[test]
     fn disabled_events_and_new_level_baselines() {
         let mut tracker = Tracker::default();
         let empty = LevelStats::default();
-        assert!(tracker.update(1.0, empty, false, [false; 4], 0.0).is_none());
+        let k = KeyState::default();
+        assert!(tracker.update(1.0, empty, k, false, [false; 5], 0.0).is_none());
         let complete = LevelStats { total_secrets: 1, found_secrets: 1, total_monsters: 2, killed_monsters: 2 };
-        assert!(tracker.update(2.0, complete, false, [false; 4], 0.0).is_none());
+        assert!(tracker.update(2.0, complete, k, false, [false; 5], 0.0).is_none());
         // Enabling a completion trigger after the event must not save repeatedly.
-        assert!(tracker.update(3.0, complete, false, [false, false, true, true], 0.0).is_none());
+        assert!(tracker.update(3.0, complete, k, false, [false, false, true, true, false], 0.0).is_none());
         tracker.reset();
-        assert_eq!(tracker.update(1.0, empty, false, [true; 4], 0.0), Some(qcore::t!("Level entry")));
-        assert!(tracker.update(2.0, empty, false, [true; 4], 0.0).is_none());
-        assert_eq!(tracker.update(3.0, complete, false, [false, false, true, false], 0.0), Some(qcore::t!("All enemies killed")));
+        assert_eq!(tracker.update(1.0, empty, k, false, [true; 5], 0.0), Some(qcore::t!("Level entry")));
+        assert!(tracker.update(2.0, empty, k, false, [true; 5], 0.0).is_none());
+        assert_eq!(tracker.update(3.0, complete, k, false, [false, false, true, false, false], 0.0), Some(qcore::t!("All enemies killed")));
     }
 
     #[test]

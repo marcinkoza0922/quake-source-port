@@ -131,12 +131,25 @@ pub fn is_game_dir(path: &Path) -> bool {
 
 /// All mods under `basedir`: id1 first, then by title.
 pub fn scan(basedir: &Path) -> Vec<ModInfo> {
-    let mut out: Vec<ModInfo> = qcore::vfs::read_dir(basedir)
-        .into_iter()
-        .flatten()
-        .filter(|e| e.is_dir && is_game_dir(&e.path))
-        .filter_map(|e| e.path.file_name()?.to_str().map(|d| info(&e.path, d)))
-        .collect();
+    scan_roots(&[basedir])
+}
+
+/// All mods across `roots` (e.g. `basedir` and `<user data>/mods`): id1 first,
+/// then by title. A dir present in more than one root is merged into one entry.
+pub fn scan_roots(roots: &[&Path]) -> Vec<ModInfo> {
+    let mut out: Vec<ModInfo> = Vec::new();
+    let mut paths: Vec<Vec<std::path::PathBuf>> = Vec::new();
+    for root in roots {
+        for e in qcore::vfs::read_dir(root).into_iter().flatten().filter(|e| e.is_dir && is_game_dir(&e.path)) {
+            let Some(d) = e.path.file_name().and_then(|n| n.to_str()) else { continue };
+            if let Some(idx) = out.iter().position(|m| m.dir.eq_ignore_ascii_case(d)) {
+                paths[idx].push(e.path);
+            } else {
+                out.push(info(&e.path, d));
+                paths.push(vec![e.path]);
+            }
+        }
+    }
     // a modinfo base that isn't installed would fail to mount: run on id1
     let dirs: Vec<String> = out.iter().map(|m| m.dir.to_ascii_lowercase()).collect();
     for m in &mut out {
@@ -149,11 +162,12 @@ pub fn scan(basedir: &Path) -> Vec<ModInfo> {
     // map packs for another mod (no progs, no modinfo base)
     let found: Vec<Option<Base>> = out
         .iter()
-        .map(|m| {
-            if m.base != Base::Id || has_progs(&basedir.join(&m.dir)) {
+        .zip(&paths)
+        .map(|(m, ps)| {
+            if m.base != Base::Id || ps.iter().any(|p| has_progs(p)) {
                 return None;
             }
-            let need = text_files(&basedir.join(&m.dir)).iter().find_map(|t| needed_mod(t))?;
+            let need = ps.iter().flat_map(|p| text_files(p)).find_map(|t| needed_mod(&t))?;
             needed_dir(&need, &out, &m.dir).map(|d| Base::from_name(&d).unwrap_or(Base::Mod(d)))
         })
         .collect();
@@ -303,7 +317,16 @@ pub struct MapInfo {
 /// pack): a map is playable when it has an `info_player_*` entity. `start`
 /// comes first, then by name.
 pub fn maps(basedir: &Path, dir: &str) -> Vec<MapInfo> {
-    let mut fs = Fs::new(basedir);
+    maps_roots(&[basedir], dir)
+}
+
+/// Playable maps shipped by `dir` across `roots` (e.g. `basedir` + user `mods/`).
+pub fn maps_roots(roots: &[&Path], dir: &str) -> Vec<MapInfo> {
+    let Some((&first, rest)) = roots.split_first() else { return Vec::new() };
+    let mut fs = Fs::new(first);
+    for r in rest {
+        fs.add_mod_root(r);
+    }
     if !fs.add_game_dir(dir) {
         return Vec::new();
     }
@@ -385,6 +408,24 @@ mod tests {
         assert_eq!(needed_dir("AD 1.80", &mods, "oxy").as_deref(), Some("ad"));
         assert_eq!(needed_dir("Quake", &mods, "oxy"), None);
         assert_eq!(needed_dir("Something else", &mods, "oxy"), None);
+    }
+
+    #[test]
+    fn scan_roots_merges_and_resolves_cross_root_base() {
+        let base = std::env::temp_dir().join(format!("qui-mods-roots-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&base);
+        let (b, u) = (base.join("base"), base.join("mods"));
+        for d in [b.join("id1/maps"), b.join("ad/maps"), u.join("ad/maps"), u.join("pack/maps")] {
+            std::fs::create_dir_all(d).unwrap();
+        }
+        std::fs::write(b.join("ad/progs.dat"), "p").unwrap();
+        std::fs::write(u.join("pack/modinfo.txt"), "title \"User Pack\"\nbase ad\n").unwrap();
+        let mods = scan_roots(&[&b, &u]);
+        assert_eq!(mods.iter().filter(|m| m.dir == "ad").count(), 1, "merged into one entry");
+        let pack = mods.iter().find(|m| m.dir == "pack").unwrap();
+        assert_eq!(pack.title, "User Pack");
+        assert_eq!(pack.base, Base::Mod("ad".into()));
+        let _ = std::fs::remove_dir_all(&base);
     }
 
     #[test]
