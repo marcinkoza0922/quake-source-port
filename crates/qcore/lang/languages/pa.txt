@@ -1397,6 +1397,93 @@ pa ਸਿਰਫ਼ ਇਲੈਕਟ੍ਰਾਨਿਕਸ ਨਹੀਂ, ਕੋਈ 
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 pa ਹਰ ਸਕਿੰਟ ਦੇ ਦਸਵੇਂ ਹਿੱਸੇ ਵਿੱਚ ਬਿਜਲੀ ਦਾ ਨੁਕਸਾਨ (ਆਮ ਲਾਈਟਨਿੰਗ ਗਨ 30 ਦਿੰਦੀ ਹੈ)
 
+# Demos and video recording.
+@ AV1 (MP4)
+pa AV1 (MP4)
+
+@ Auto-Demo Slots
+pa ਆਟੋ-ਡੈਮੋ ਸਲਾਟ
+
+@ Auto-Record Demos
+pa ਡੈਮੋ ਆਪਣੇ-ਆਪ ਰਿਕਾਰਡ ਕਰੋ
+
+@ Frame Rate
+pa ਫ੍ਰੇਮ ਦਰ
+
+@ H.264 (MP4)
+pa H.264 (MP4)
+
+@ H.265 (MP4)
+pa H.265 (MP4)
+
+@ Pause at End
+pa ਅੰਤ 'ਤੇ ਰੋਕੋ
+
+@ Playback Bar
+pa ਪਲੇਬੈਕ ਪੱਟੀ
+
+@ Quality
+pa ਗੁਣਵੱਤਾ
+
+@ Record Audio
+pa ਆਵਾਜ਼ ਰਿਕਾਰਡ ਕਰੋ
+
+@ VP9 (WebM)
+pa VP9 (WebM)
+
+@ Video Format
+pa ਵੀਡੀਓ ਫਾਰਮੈਟ
+
+@ Video Recording
+pa ਵੀਡੀਓ ਰਿਕਾਰਡਿੰਗ
+
+@ ffmpeg Program
+pa ffmpeg ਪ੍ਰੋਗਰਾਮ
+
+@ small file
+pa ਛੋਟੀ ਫ਼ਾਈਲ
+
+@ unlimited
+pa ਅਸੀਮਤ
+
+# Demos and video recording.
+@ 1080p
+pa 1080p
+
+@ 1440p
+pa 1440p
+
+@ 4K
+pa 4K
+
+@ 720p
+pa 720p
+
+@ Destination
+pa ਮੰਜ਼ਿਲ
+
+@ File Name
+pa ਫ਼ਾਈਲ ਦਾ ਨਾਮ
+
+@ Rename
+pa ਨਾਮ ਬਦਲੋ
+
+@ Rename Demo
+pa ਡੈਮੋ ਦਾ ਨਾਮ ਬਦਲੋ
+
+@ Export Highlighted Clip
+pa ਨਿਸ਼ਾਨਬੱਧ ਕਲਿੱਪ ਨਿਰਯਾਤ ਕਰੋ
+
+@ Export Whole Demo
+pa ਪੂਰਾ ਡੈਮੋ ਨਿਰਯਾਤ ਕਰੋ
+
+@ Same as window
+pa ਵਿੰਡੋ ਵਾਂਗ
+
+# Demos and video recording.
+@ GPU Encoding
+pa GPU ਐਨਕੋਡਿੰਗ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ pa ਕਿਹੜੇ ਹਥਿਆਰ ਰੁਕਾਅ ਸ਼ੁਰੂ ਕਰਦੇ 
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 pa ਤੁਹਾਡੇ ਆਪਣੇ ਰਾਕਟ ਅਤੇ ਗ੍ਰਨੇਡ ਤੁਹਾਨੂੰ ਸੱਟ ਨਹੀਂ ਮਾਰਦੇ; ਰਾਕਟ ਜੰਪ ਫਿਰ ਵੀ ਕੰਮ ਕਰਦੇ ਹਨ
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+pa ਤੁਹਾਡਾ ਚਲਾਇਆ ਡੈਮੋ ਮੀਨੂ 'ਤੇ ਵਾਪਸ ਜਾਣ ਦੀ ਬਜਾਏ ਆਖਰੀ ਫ੍ਰੇਮ 'ਤੇ ਰੁਕ ਜਾਂਦਾ ਹੈ, ਤਾਂ ਜੋ ਤੁਸੀਂ ਉਸਨੂੰ ਪਿੱਛੇ ਲਿਜਾ ਸਕੋ
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+pa ਵੀਡੀਓ ਦੇ ਪ੍ਰਤੀ ਸਕਿੰਟ ਫ੍ਰੇਮ; ਰਿਕਾਰਡਿੰਗ ਦੌਰਾਨ ਗੇਮ ਬਿਲਕੁਲ ਇਸੇ ਦਰ ਨਾਲ ਚੱਲਦੀ ਹੈ
+
+@ High keeps the most detail; small file saves disk space
+pa ਉੱਚ ਸਭ ਤੋਂ ਵੱਧ ਵੇਰਵਾ ਰੱਖਦਾ ਹੈ; ਛੋਟੀ ਫ਼ਾਈਲ ਡਿਸਕ ਦੀ ਥਾਂ ਬਚਾਉਂਦੀ ਹੈ
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+pa ਸਭ ਤੋਂ ਪੁਰਾਣਾ ਮਿਟਾਉਣ ਤੋਂ ਪਹਿਲਾਂ ਕਿੰਨੇ ਆਪਣੇ-ਆਪ ਡੈਮੋ ਰੱਖੇ ਜਾਂਦੇ ਹਨ; ਰੱਖੇ ਡੈਮੋ ਗਿਣੇ ਨਹੀਂ ਜਾਂਦੇ
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+pa ਤੁਹਾਡਾ ਖੇਡਿਆ ਹਰ ਲੈਵਲ ਮੁੱਖ ਮੀਨੂ > ਡੈਮੋ ਦੀ ਆਪਣੇ-ਆਪ ਸੂਚੀ ਵਿੱਚ ਰਿਕਾਰਡ ਕਰਦਾ ਹੈ; ਜੋ ਚਾਹੋ ਰੱਖੋ, ਸਭ ਤੋਂ ਪੁਰਾਣੇ ਬਦਲ ਦਿੱਤੇ ਜਾਂਦੇ ਹਨ
+
+@ Records game sound and music into the video
+pa ਗੇਮ ਦੀਆਂ ਆਵਾਜ਼ਾਂ ਅਤੇ ਸੰਗੀਤ ਵੀਡੀਓ ਵਿੱਚ ਰਿਕਾਰਡ ਕਰਦਾ ਹੈ
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+pa ਪਲੇਬੈਕ ਪੱਟੀ (ਸਮਾਂ, ਗਤੀ, ਟਾਈਮਲਾਈਨ) ਕਿਸੇ ਕੰਟਰੋਲ ਕੁੰਜੀ ਤੋਂ ਬਾਅਦ, ਹਮੇਸ਼ਾ, ਜਾਂ ਕਦੇ ਨਹੀਂ ਦਿਖਾਉਂਦਾ ਹੈ
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+pa ਵੀਡੀਓ ਫਾਰਮੈਟ; ਉਸ ਐਨਕੋਡਰ ਵਾਲਾ ffmpeg ਚਾਹੀਦਾ ਹੈ, ਨਹੀਂ ਤਾਂ ਫ੍ਰੇਮ PNG ਤਸਵੀਰਾਂ ਵਜੋਂ ਸੰਭਾਲੇ ਜਾਂਦੇ ਹਨ
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+pa ਕੋਈ ਕਲਿੱਪ ਨਿਸ਼ਾਨਬੱਧ ਨਹੀਂ: ਡੈਮੋ ਚੱਲਦੇ ਸਮੇਂ ਟਾਈਮਲਾਈਨ 'ਤੇ ਖਿੱਚੋ ਜਾਂ I ਅਤੇ O ਦਬਾਓ (ਕੰਟਰੋਲਰ ਉੱਤੇ LT ਅਤੇ RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+pa ਵੀਡੀਓ ਫ਼ਾਈਲ ਦਾ ਨਾਮ; ਐਕਸਟੈਂਸ਼ਨ ਵੀਡੀਓ ਫ਼ਾਰਮੈਟ ਮੁਤਾਬਕ ਹੁੰਦੀ ਹੈ, ਅਤੇ ਉਸੇ ਨਾਮ ਵਾਲੀ ਫ਼ਾਈਲ ਬਦਲ ਦਿੱਤੀ ਜਾਂਦੀ ਹੈ
+
+@ New name of the demo; if another demo has it, a number is added
+pa ਡੈਮੋ ਦਾ ਨਵਾਂ ਨਾਮ; ਜੇ ਕਿਸੇ ਹੋਰ ਡੈਮੋ ਦਾ ਇਹੀ ਨਾਮ ਹੈ ਤਾਂ ਇੱਕ ਨੰਬਰ ਜੋੜਿਆ ਜਾਂਦਾ ਹੈ
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+pa ਵੀਡੀਓ ਦਾ ਆਕਾਰ; ਫ੍ਰੇਮ ਵਿੰਡੋ ਦੇ ਆਕਾਰ ਤੋਂ ਵੱਡੇ ਕੀਤੇ ਜਾਂਦੇ ਹਨ (ਸ਼ਕਲ ਬਣਾਈ ਰੱਖਣ ਲਈ ਪੱਟੀਆਂ ਨਾਲ), ਇਸ ਲਈ ਵੱਡਾ ਆਕਾਰ ਵੇਰਵਾ ਨਹੀਂ ਵਧਾਉਂਦਾ
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+pa ffmpeg ਵਰਤ ਸਕੇ ਤਾਂ ਗ੍ਰਾਫਿਕਸ ਕਾਰਡ 'ਤੇ ਐਨਕੋਡ ਕਰਦਾ ਹੈ (NVIDIA NVENC, VA-API ਰਾਹੀਂ AMD ਜਾਂ Intel, AMF ਜਾਂ Quick Sync, Apple VideoToolbox) ਅਤੇ ਪ੍ਰੋਸੈਸਰ ਨੂੰ ਖਾਲੀ ਰੱਖਦਾ ਹੈ; ਨਹੀਂ ਤਾਂ ਪ੍ਰੋਸੈਸਰ ਐਨਕੋਡ ਕਰਦਾ ਹੈ
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ pa ਸੇਵ
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 pa ਪਹੁੰਚ ਵਿੱਚ ਚਮਕਦੇ ਇਲੈਕਟ੍ਰਾਨਿਕ ਪੈਨਲ ਉੱਤੇ ਬਦਲਵਾਂ ਫ਼ਾਇਰ ਇੱਕ ਸਿਰਾ ਲਾ ਦਿੰਦਾ ਹੈ; ਫਿਰ ਦੂਜਾ ਸਿਰਾ ਬੇਅੰਤ ਗੋਲਾ-ਬਾਰੂਦ ਨਾਲ ਬਿਜਲੀ ਛੱਡਦਾ ਹੈ। ਕੇਬਲ ਤੁਹਾਨੂੰ ਸਾਕਟ ਨਾਲ ਬੰਨ੍ਹ ਦਿੰਦੀ ਹੈ ਅਤੇ ਕੋਨਿਆਂ ਵਿੱਚ ਅੜ ਜਾਂਦੀ ਹੈ। ਬਦਲਵਾਂ ਫ਼ਾਇਰ ਜਾਂ ਹਥਿਆਰ ਬਦਲਣਾ ਇਸਨੂੰ ਖਿੱਚ ਕੱਢਦਾ ਹੈ।
 
+@ From the game folder
+pa ਗੇਮ ਫੋਲਡਰ ਤੋਂ
+
+@ From ironwail
+pa ironwail ਤੋਂ
+
+@ From the 2021 re-release
+pa 2021 ਰੀ-ਰਿਲੀਜ਼ ਤੋਂ
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+pa ਆਪਣੇ-ਆਪ ਡੈਮੋ ਬੰਦ ਹਨ। ਹਰ ਖੇਡਿਆ ਲੈਵਲ ਰਿਕਾਰਡ ਕਰਨ ਲਈ ਵਿਕਲਪ > ਡੈਮੋ ਵਿੱਚ ਡੈਮੋ ਆਪਣੇ-ਆਪ ਰਿਕਾਰਡ ਕਰੋ ਚਾਲੂ ਕਰੋ।
+
+@ Automatic: replaced when the slots are full
+pa ਆਪਣੇ-ਆਪ: ਸਲਾਟ ਭਰਨ 'ਤੇ ਬਦਲ ਦਿੱਤਾ ਜਾਂਦਾ ਹੈ
+
+@ Delete {}?
+pa {} ਮਿਟਾਉਣਾ ਹੈ?
+
+@ Demos
+pa ਡੈਮੋ
+
+@ End of demo
+pa ਡੈਮੋ ਦਾ ਅੰਤ
+
+@ Export Video
+pa ਵੀਡੀਓ ਨਿਰਯਾਤ ਕਰੋ
+
+@ Fast forward
+pa ਤੇਜ਼ ਅੱਗੇ
+
+@ Fast forward {}x
+pa ਅੱਗੇ {}x
+
+@ Indexing...
+pa ਸੂਚੀਬੱਧ ਹੋ ਰਿਹਾ ਹੈ...
+
+@ K keep
+pa K ਰੱਖੋ
+
+@ Keep
+pa ਰੱਖੋ
+
+@ Length: {}
+pa ਲੰਬਾਈ: {}
+
+@ Map: {}
+pa ਨਕਸ਼ਾ: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+pa ਅਜੇ ਕੋਈ ਆਪਣੇ-ਆਪ ਡੈਮੋ ਨਹੀਂ। ਤੁਹਾਡਾ ਖੇਡਿਆ ਹਰ ਲੈਵਲ ਇੱਥੇ ਰਿਕਾਰਡ ਹੁੰਦਾ ਹੈ।
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+pa ਅਜੇ ਕੋਈ ਸੰਭਾਲਿਆ ਡੈਮੋ ਨਹੀਂ। ਕੰਸੋਲ ਕਮਾਂਡ 'record <name>' ਨਾਲ ਇੱਕ ਰਿਕਾਰਡ ਕਰੋ, ਜਾਂ ਕੋਈ ਆਪਣੇ-ਆਪ ਡੈਮੋ ਰੱਖੋ।
+
+@ Pause
+pa ਰੋਕੋ
+
+@ Paused
+pa ਰੁਕਿਆ ਹੋਇਆ
+
+@ Play {}x
+pa ਚੱਲ ਰਿਹਾ {}x
+
+@ Quake - exporting video {}%
+pa Quake - ਵੀਡੀਓ ਨਿਰਯਾਤ ਹੋ ਰਹੀ ਹੈ {}%
+
+@ Recorded: {}
+pa ਰਿਕਾਰਡ ਹੋਇਆ: {}
+
+@ Rewind
+pa ਪਿੱਛੇ ਲਿਜਾਓ
+
+@ Rewind {}x
+pa ਪਿੱਛੇ {}x
+
+@ Size: {} KB
+pa ਆਕਾਰ: {} KB
+
+@ Skip 10 s
+pa 10 ਸਕਿੰ. ਛੱਡੋ
+
+@ Back 10 s
+pa 10 ਸਕਿੰ. ਪਿੱਛੇ
+
+@ Length
+pa ਲੰਬਾਈ
+
+@ Mark in
+pa ਸ਼ੁਰੂਆਤ ਨਿਸ਼ਾਨਬੱਧ ਕਰੋ
+
+@ Mark out
+pa ਅੰਤ ਨਿਸ਼ਾਨਬੱਧ ਕਰੋ
+
+@ Next level
+pa ਅਗਲਾ ਲੈਵਲ
+
+@ No demos match the filter. Backspace or Esc clears it.
+pa ਫਿਲਟਰ ਨਾਲ ਕੋਈ ਡੈਮੋ ਮੇਲ ਨਹੀਂ ਖਾਂਦਾ। Backspace ਜਾਂ Esc ਇਸਨੂੰ ਸਾਫ਼ ਕਰਦਾ ਹੈ।
+
+@ Renaming an automatic demo moves it to the saved demos.
+pa ਆਪਣੇ-ਆਪ ਬਣੇ ਡੈਮੋ ਦਾ ਨਾਮ ਬਦਲਣ ਨਾਲ ਉਹ ਸੰਭਾਲੇ ਡੈਮੋ ਵਿੱਚ ਚਲਾ ਜਾਂਦਾ ਹੈ।
+
+@ Restart
+pa ਸ਼ੁਰੂ ਤੋਂ
+
+@ Sort
+pa ਕ੍ਰਮ
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+pa ਡੈਮੋ ਚੱਲਦੇ ਸਮੇਂ: A ਰੋਕਦਾ ਹੈ, ਡੀ-ਪੈਡ ਸਰਕਾਉਂਦਾ ਅਤੇ ਗਤੀ ਬਦਲਦਾ ਹੈ, LT ਅਤੇ RT ਕਲਿੱਪ ਨਿਸ਼ਾਨਬੱਧ ਕਰਦੇ ਹਨ ਅਤੇ X ਉਸਨੂੰ ਨਿਰਯਾਤ ਕਰਦਾ ਹੈ।
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+pa Space ਰੋਕੋ | ਖੱਬੇ/ਸੱਜੇ ਸਰਕਾਓ | ਉੱਪਰ/ਹੇਠਾਂ ਗਤੀ | PgUp/PgDn 10 ਸਕਿੰ. | I/O ਨਿਸ਼ਾਨ | E ਨਿਰਯਾਤ
+
+@ Speed
+pa ਗਤੀ
+
+@ Switch List
+pa ਸੂਚੀ ਬਦਲੋ
+
+@ This can't be undone.
+pa ਇਸਨੂੰ ਵਾਪਸ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+pa ਡੈਮੋ ਚੱਲਦੇ ਸਮੇਂ: Space ਰੋਕਦਾ ਹੈ, ਤੀਰ ਸਰਕਾਉਂਦੇ ਅਤੇ ਗਤੀ ਬਦਲਦੇ ਹਨ, I ਅਤੇ O ਕਲਿੱਪ ਨਿਸ਼ਾਨਬੱਧ ਕਰਦੇ ਹਨ ਅਤੇ E ਉਸਨੂੰ ਨਿਰਯਾਤ ਕਰਦਾ ਹੈ।
+
+@ Saved
+pa ਸੰਭਾਲੇ ਹੋਏ
+
+@ Automatic
+pa ਆਪਣੇ-ਆਪ
+
+# Demos and video recording.
+@ Export
+pa ਨਿਰਯਾਤ
+
+@ H hide
+pa H ਲੁਕਾਓ
+
+@ Hide
+pa ਲੁਕਾਓ
+
+# Demos and video recording.
+@ Demo: {}
+pa ਡੈਮੋ: {}
+
+@ Highlighted clip: {} to {} ({})
+pa ਨਿਸ਼ਾਨਬੱਧ ਕਲਿੱਪ: {} ਤੋਂ {} ({})
+
+@ Show controls
+pa ਕੰਟਰੋਲ ਦਿਖਾਓ
+
+# Demos and video recording.
+@ About {} left
+pa ਲਗਭਗ {} ਬਾਕੀ
+
+@ Exporting video
+pa ਵੀਡੀਓ ਨਿਰਯਾਤ ਹੋ ਰਹੀ ਹੈ
+
+@ Preparing...
+pa ਤਿਆਰੀ ਹੋ ਰਹੀ ਹੈ...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ pa ਸਿਰਫ਼ ਸਰਵਰ changelevel ਕਰ ਸਕਦਾ ਹੈ
 @ {} renamed to {}
 pa {} ਦਾ ਨਾਂ ਬਦਲ ਕੇ {} ਹੋਇਆ
 
-@ From the game folder
-pa ਗੇਮ ਫੋਲਡਰ ਤੋਂ
+@ Already recording video.
+pa ਵੀਡੀਓ ਪਹਿਲਾਂ ਹੀ ਰਿਕਾਰਡ ਹੋ ਰਹੀ ਹੈ।
 
-@ From ironwail
-pa ironwail ਤੋਂ
+@ Export cancelled.
+pa ਨਿਰਯਾਤ ਰੱਦ ਹੋਇਆ।
 
-@ From the 2021 re-release
-pa 2021 ਰੀ-ਰਿਲੀਜ਼ ਤੋਂ
+@ Exporting {} to video
+pa {} ਨੂੰ ਵੀਡੀਓ ਵਿੱਚ ਨਿਰਯਾਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ
+
+@ Kept demo {}
+pa ਡੈਮੋ ਰੱਖਿਆ ਗਿਆ: {}
+
+@ Not a valid demo name.
+pa ਡੈਮੋ ਦਾ ਨਾਮ ਠੀਕ ਨਹੀਂ ਹੈ।
+
+@ Renamed demo to {}
+pa ਡੈਮੋ ਦਾ ਨਾਮ ਬਦਲ ਕੇ {} ਕੀਤਾ ਗਿਆ
+
+@ No auto-demo to keep.
+pa ਰੱਖਣ ਲਈ ਕੋਈ ਆਟੋ-ਡੈਮੋ ਨਹੀਂ।
+
+@ Not playing a demo.
+pa ਕੋਈ ਡੈਮੋ ਨਹੀਂ ਚੱਲ ਰਿਹਾ।
+
+@ Not recording video.
+pa ਕੋਈ ਵੀਡੀਓ ਰਿਕਾਰਡ ਨਹੀਂ ਹੋ ਰਹੀ।
+
+@ Recording video to {}
+pa ਵੀਡੀਓ {} ਵਿੱਚ ਰਿਕਾਰਡ ਹੋ ਰਹੀ ਹੈ
+
+@ This demo is already saved.
+pa ਇਹ ਡੈਮੋ ਪਹਿਲਾਂ ਹੀ ਸੰਭਾਲਿਆ ਹੋਇਆ ਹੈ।
+
+@ This level's demo will be kept when it ends.
+pa ਇਸ ਲੈਵਲ ਦਾ ਡੈਮੋ ਇਸਦੇ ਖਤਮ ਹੋਣ 'ਤੇ ਰੱਖਿਆ ਜਾਵੇਗਾ।
+
+@ Video capture is not available in this build.
+pa ਇਸ ਬਿਲਡ ਵਿੱਚ ਵੀਡੀਓ ਰਿਕਾਰਡਿੰਗ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।
+
+@ Wrote {} ({}s)
+pa {} ਲਿਖਿਆ ਗਿਆ ({} ਸਕਿੰ.)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+pa ffmpeg ਨਹੀਂ ਮਿਲਿਆ: {} PNG ਫ੍ਰੇਮ ਅਤੇ ਇੱਕ WAV {} ਵਿੱਚ ਲਿਖੇ ਗਏ

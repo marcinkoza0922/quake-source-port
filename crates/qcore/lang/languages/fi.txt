@@ -1397,6 +1397,93 @@ fi Mikä tahansa metallipinta käy pistokkeelle, ei vain elektroniikka
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 fi Salaman vahinko joka sekunnin kymmenesosa (tavallinen salamatykki tekee 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+fi AV1 (MP4)
+
+@ Auto-Demo Slots
+fi Autodemopaikat
+
+@ Auto-Record Demos
+fi Tallenna demot automaattisesti
+
+@ Frame Rate
+fi Kuvataajuus
+
+@ H.264 (MP4)
+fi H.264 (MP4)
+
+@ H.265 (MP4)
+fi H.265 (MP4)
+
+@ Pause at End
+fi Tauko lopussa
+
+@ Playback Bar
+fi Toistopalkki
+
+@ Quality
+fi Laatu
+
+@ Record Audio
+fi Tallenna ääni
+
+@ VP9 (WebM)
+fi VP9 (WebM)
+
+@ Video Format
+fi Videomuoto
+
+@ Video Recording
+fi Videon tallennus
+
+@ ffmpeg Program
+fi ffmpeg-ohjelma
+
+@ small file
+fi pieni tiedosto
+
+@ unlimited
+fi rajaton
+
+# Demos and video recording.
+@ 1080p
+fi 1080p
+
+@ 1440p
+fi 1440p
+
+@ 4K
+fi 4K
+
+@ 720p
+fi 720p
+
+@ Destination
+fi Kohde
+
+@ File Name
+fi Tiedostonimi
+
+@ Rename
+fi Nimeä uudelleen
+
+@ Rename Demo
+fi Nimeä demo uudelleen
+
+@ Export Highlighted Clip
+fi Vie korostettu leike
+
+@ Export Whole Demo
+fi Vie koko demo
+
+@ Same as window
+fi Kuten ikkuna
+
+# Demos and video recording.
+@ GPU Encoding
+fi GPU-koodaus
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ fi Mitkä aseet laukaisevat jäädytyksen; lähitaistelu kattaa kirveen ja kaikk
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 fi Omat rakettisi ja kranaattisi eivät vahingoita sinua; rakettihypyt toimivat yhä
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+fi Käynnistämäsi demo pysähtyy viimeiseen kuvaan eikä palaa valikkoon, joten voit kelata sitä taaksepäin
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+fi Videon kuvat sekunnissa; peli pyörii tallennuksen aikana täsmälleen tällä nopeudella
+
+@ High keeps the most detail; small file saves disk space
+fi Korkea säilyttää eniten yksityiskohtia; pieni tiedosto säästää levytilaa
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+fi Kuinka monta automaattista demoa säilytetään ennen vanhimman poistamista; säilytetyt demot eivät lasketa
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+fi Tallentaa jokaisen pelaamasi tason Automaattiset-luetteloon kohdassa Päävalikko > Demot; säilytä haluamasi, vanhimmat korvataan
+
+@ Records game sound and music into the video
+fi Tallentaa pelin äänet ja musiikin videoon
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+fi Näyttää toistopalkin (aika, nopeus, aikajana) ohjausnäppäimen jälkeen, aina tai ei koskaan
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+fi Videomuoto; vaatii ffmpegin ja sen kooderin, muuten kuvat tallennetaan PNG-kuvina
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+fi Leikettä ei ole korostettu: vedä demon aikana aikajanan yli tai paina I ja O (LT ja RT ohjaimessa)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+fi Videotiedoston nimi; pääte määräytyy videomuodon mukaan, ja samanniminen tiedosto korvataan
+
+@ New name of the demo; if another demo has it, a number is added
+fi Demon uusi nimi; jos toisella demolla on jo sama nimi, siihen lisätään numero
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+fi Videon koko; kuvat skaalataan ikkunan koosta (reunoilla, jotta muoto säilyy), joten suurempi koko ei tuo lisää yksityiskohtia
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+fi Koodaa näytönohjaimella (NVIDIA NVENC, AMD tai Intel VA-API:n kautta, AMF tai Quick Sync, Apple VideoToolbox), kun ffmpeg voi käyttää sitä, jolloin suoritin jää vapaaksi; muuten suoritin koodaa
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ fi Tallennus
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 fi Vaihtoehtoinen tuli hehkuvaan elektroniikkapaneeliin ulottuvilla kytkee toisen pään; toinen pää ampuu sitten salamoita rajattomilla ammuksilla. Kaapeli sitoo sinut pistorasiaan ja tarttuu kulmiin. Vaihtoehtoinen tuli tai aseen vaihto repäisee sen irti.
 
+@ From the game folder
+fi Pelikansiosta
+
+@ From ironwail
+fi ironwailista
+
+@ From the 2021 re-release
+fi Vuoden 2021 uusintajulkaisusta
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+fi Automaattiset demot ovat pois päältä. Ota Tallenna demot automaattisesti käyttöön kohdassa Asetukset > Demot tallentaaksesi jokaisen pelaamasi tason.
+
+@ Automatic: replaced when the slots are full
+fi Automaattinen: korvataan, kun paikat ovat täynnä
+
+@ Delete {}?
+fi Poistetaanko {}?
+
+@ Demos
+fi Demot
+
+@ End of demo
+fi Demon loppu
+
+@ Export Video
+fi Vie videoksi
+
+@ Fast forward
+fi Pikakelaus eteen
+
+@ Fast forward {}x
+fi Eteen {}x
+
+@ Indexing...
+fi Indeksoidaan...
+
+@ K keep
+fi K säilytä
+
+@ Keep
+fi Säilytä
+
+@ Length: {}
+fi Kesto: {}
+
+@ Map: {}
+fi Kartta: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+fi Ei vielä automaattisia demoja. Jokainen pelaamasi taso tallennetaan tänne.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+fi Ei vielä tallennettuja demoja. Tallenna sellainen konsolikomennolla 'record <name>' tai säilytä automaattinen demo.
+
+@ Pause
+fi Tauko
+
+@ Paused
+fi Tauolla
+
+@ Play {}x
+fi Toisto {}x
+
+@ Quake - exporting video {}%
+fi Quake - viedään videota {} %
+
+@ Recorded: {}
+fi Tallennettu: {}
+
+@ Rewind
+fi Kelaa taakse
+
+@ Rewind {}x
+fi Taakse {}x
+
+@ Size: {} KB
+fi Koko: {} kt
+
+@ Skip 10 s
+fi Ohita 10 s
+
+@ Back 10 s
+fi Taaksepäin 10 s
+
+@ Length
+fi Kesto
+
+@ Mark in
+fi Merkitse alku
+
+@ Mark out
+fi Merkitse loppu
+
+@ Next level
+fi Seuraava taso
+
+@ No demos match the filter. Backspace or Esc clears it.
+fi Mikään demo ei vastaa suodatinta. Askelpalautin tai Esc tyhjentää sen.
+
+@ Renaming an automatic demo moves it to the saved demos.
+fi Automaattisen demon uudelleennimeäminen siirtää sen tallennettuihin demoihin.
+
+@ Restart
+fi Alusta
+
+@ Sort
+fi Lajittele
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+fi Demon aikana: A pysäyttää, ristiohjain kelaa ja muuttaa nopeutta, LT ja RT merkitsevät leikkeen ja X vie sen.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+fi Välilyönti tauko | Vasen/Oikea kelaus | Ylös/Alas nopeus | PgUp/PgDn 10 s | I/O merkki | E vie
+
+@ Speed
+fi Nopeus
+
+@ Switch List
+fi Vaihda luetteloa
+
+@ This can't be undone.
+fi Tätä ei voi perua.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+fi Demon aikana: Välilyönti pysäyttää, nuolet kelaavat ja muuttavat nopeutta, I ja O merkitsevät leikkeen ja E vie sen.
+
+@ Saved
+fi Tallennetut
+
+@ Automatic
+fi Automaattiset
+
+# Demos and video recording.
+@ Export
+fi Vie
+
+@ H hide
+fi H piilota
+
+@ Hide
+fi Piilota
+
+# Demos and video recording.
+@ Demo: {}
+fi Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+fi Korostettu leike: {}–{} ({})
+
+@ Show controls
+fi Näytä ohjaimet
+
+# Demos and video recording.
+@ About {} left
+fi Noin {} jäljellä
+
+@ Exporting video
+fi Viedään videota
+
+@ Preparing...
+fi Valmistellaan...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ fi Vain palvelin voi käyttää changelevel-komentoa
 @ {} renamed to {}
 fi {} vaihtoi nimekseen {}
 
-@ From the game folder
-fi Pelikansiosta
+@ Already recording video.
+fi Videota tallennetaan jo.
 
-@ From ironwail
-fi ironwailista
+@ Export cancelled.
+fi Vienti peruttu.
 
-@ From the 2021 re-release
-fi Vuoden 2021 uusintajulkaisusta
+@ Exporting {} to video
+fi Viedään {} videoksi
+
+@ Kept demo {}
+fi Demo säilytetty: {}
+
+@ Not a valid demo name.
+fi Virheellinen demon nimi.
+
+@ Renamed demo to {}
+fi Demo nimettiin uudelleen: {}
+
+@ No auto-demo to keep.
+fi Ei säilytettävää autodemoa.
+
+@ Not playing a demo.
+fi Demoa ei toisteta.
+
+@ Not recording video.
+fi Videota ei tallenneta.
+
+@ Recording video to {}
+fi Tallennetaan videota kohteeseen {}
+
+@ This demo is already saved.
+fi Tämä demo on jo tallennettu.
+
+@ This level's demo will be kept when it ends.
+fi Tämän tason demo säilytetään, kun taso päättyy.
+
+@ Video capture is not available in this build.
+fi Videon tallennus ei ole käytettävissä tässä versiossa.
+
+@ Wrote {} ({}s)
+fi Kirjoitettu {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+fi ffmpegiä ei löytynyt: {} PNG-kuvaa ja WAV kirjoitettu kohteeseen {}

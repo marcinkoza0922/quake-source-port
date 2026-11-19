@@ -1397,6 +1397,93 @@ zh-TW 不只電子設備，任何金屬表面都能插入插頭
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 zh-TW 每 0.1 秒的閃電傷害（原版雷電槍為 30）
 
+# Demos and video recording.
+@ AV1 (MP4)
+zh-TW AV1 (MP4)
+
+@ Auto-Demo Slots
+zh-TW 自動示範欄位
+
+@ Auto-Record Demos
+zh-TW 自動錄製示範
+
+@ Frame Rate
+zh-TW 影格率
+
+@ H.264 (MP4)
+zh-TW H.264 (MP4)
+
+@ H.265 (MP4)
+zh-TW H.265 (MP4)
+
+@ Pause at End
+zh-TW 結尾暫停
+
+@ Playback Bar
+zh-TW 播放列
+
+@ Quality
+zh-TW 品質
+
+@ Record Audio
+zh-TW 錄製聲音
+
+@ VP9 (WebM)
+zh-TW VP9 (WebM)
+
+@ Video Format
+zh-TW 影片格式
+
+@ Video Recording
+zh-TW 影片錄製
+
+@ ffmpeg Program
+zh-TW ffmpeg 程式
+
+@ small file
+zh-TW 小檔案
+
+@ unlimited
+zh-TW 無限制
+
+# Demos and video recording.
+@ 1080p
+zh-TW 1080p
+
+@ 1440p
+zh-TW 1440p
+
+@ 4K
+zh-TW 4K
+
+@ 720p
+zh-TW 720p
+
+@ Destination
+zh-TW 儲存位置
+
+@ File Name
+zh-TW 檔案名稱
+
+@ Rename
+zh-TW 重新命名
+
+@ Rename Demo
+zh-TW 重新命名示範
+
+@ Export Highlighted Clip
+zh-TW 匯出標示的片段
+
+@ Export Whole Demo
+zh-TW 匯出整個示範
+
+@ Same as window
+zh-TW 與視窗相同
+
+# Demos and video recording.
+@ GPU Encoding
+zh-TW GPU 編碼
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ zh-TW 哪些武器會觸發凍結；近戰包含斧頭，以及任何不耗彈�
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 zh-TW 自己的火箭彈與榴彈不會傷到你；火箭跳仍然有效
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+zh-TW 你播放的示範會停在最後一格而不是回到選單，方便你倒轉
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+zh-TW 錄製影片的每秒影格數；錄製時遊戲會嚴格以此速率執行
+
+@ High keeps the most detail; small file saves disk space
+zh-TW 高保留最多細節；小檔案節省磁碟空間
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+zh-TW 刪除最舊的自動示範之前保留的數量；已保留的示範不計入
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+zh-TW 將你玩的每一關錄製到 主選單 > 示範 的自動清單；保留你想要的，最舊的會被取代
+
+@ Records game sound and music into the video
+zh-TW 將遊戲音效和音樂錄進影片
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+zh-TW 在按下控制鍵後、永遠或從不顯示播放列（時間、速度、時間軸）
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+zh-TW 影片格式；需要帶有該編碼器的 ffmpeg，否則影格會儲存為 PNG 圖片
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+zh-TW 沒有標示的片段：播放示範時在時間軸上拖曳，或按 I 和 O（控制器上為 LT 和 RT）
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+zh-TW 影片檔案名稱；副檔名依影片格式而定，同名檔案會被取代
+
+@ New name of the demo; if another demo has it, a number is added
+zh-TW 示範的新名稱；若已有其他示範使用此名稱，會加上編號
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+zh-TW 影片尺寸；影格由視窗尺寸縮放而來（加黑邊保持比例），所以較大的尺寸不會增加細節
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+zh-TW ffmpeg 能用時在顯示卡上編碼（NVIDIA NVENC、透過 VA-API 的 AMD 或 Intel、AMF 或 Quick Sync、Apple VideoToolbox），讓處理器空閒；否則由處理器編碼
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ zh-TW 存檔
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 zh-TW 對觸手可及的發光電子面板使用副開火可插入一端；另一端隨即以無限彈藥發射閃電。線纜會把你拴在插座上，並會掛住轉角。副開火或切換武器會將其拔出。
 
+@ From the game folder
+zh-TW 來自遊戲資料夾
+
+@ From ironwail
+zh-TW 來自 ironwail
+
+@ From the 2021 re-release
+zh-TW 來自2021年重製版
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+zh-TW 自動示範已關閉。在 選項 > 示範 中開啟「自動錄製示範」，即可錄製你玩的每一關。
+
+@ Automatic: replaced when the slots are full
+zh-TW 自動：欄位滿時會被取代
+
+@ Delete {}?
+zh-TW 刪除 {}？
+
+@ Demos
+zh-TW 示範
+
+@ End of demo
+zh-TW 示範結束
+
+@ Export Video
+zh-TW 匯出影片
+
+@ Fast forward
+zh-TW 快轉
+
+@ Fast forward {}x
+zh-TW 快轉 {}x
+
+@ Indexing...
+zh-TW 正在建立索引...
+
+@ K keep
+zh-TW K 保留
+
+@ Keep
+zh-TW 保留
+
+@ Length: {}
+zh-TW 長度：{}
+
+@ Map: {}
+zh-TW 地圖：{}
+
+@ No automatic demos yet. Each level you play is recorded here.
+zh-TW 還沒有自動示範。你玩的每一關都會錄製在這裡。
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+zh-TW 還沒有儲存的示範。用主控台指令 'record <name>' 錄製一個，或保留一個自動示範。
+
+@ Pause
+zh-TW 暫停
+
+@ Paused
+zh-TW 已暫停
+
+@ Play {}x
+zh-TW 播放 {}x
+
+@ Quake - exporting video {}%
+zh-TW Quake - 正在匯出影片 {}%
+
+@ Recorded: {}
+zh-TW 錄製於：{}
+
+@ Rewind
+zh-TW 倒轉
+
+@ Rewind {}x
+zh-TW 倒轉 {}x
+
+@ Size: {} KB
+zh-TW 大小：{} KB
+
+@ Skip 10 s
+zh-TW 跳過 10 秒
+
+@ Back 10 s
+zh-TW 倒退 10 秒
+
+@ Length
+zh-TW 長度
+
+@ Mark in
+zh-TW 標記起點
+
+@ Mark out
+zh-TW 標記終點
+
+@ Next level
+zh-TW 下一關
+
+@ No demos match the filter. Backspace or Esc clears it.
+zh-TW 沒有符合篩選的示範。Backspace 或 Esc 清除篩選。
+
+@ Renaming an automatic demo moves it to the saved demos.
+zh-TW 重新命名自動示範會將其移到已儲存的示範中。
+
+@ Restart
+zh-TW 從頭開始
+
+@ Sort
+zh-TW 排序
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+zh-TW 播放示範時：A 暫停，方向鍵拖曳和改變速度，LT 和 RT 標記片段，X 匯出該片段。
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+zh-TW Space 暫停 | ←/→ 拖曳 | ↑/↓ 速度 | PgUp/PgDn 10 秒 | I/O 標記 | E 匯出
+
+@ Speed
+zh-TW 速度
+
+@ Switch List
+zh-TW 切換清單
+
+@ This can't be undone.
+zh-TW 此操作無法復原。
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+zh-TW 播放示範時：Space 暫停，方向鍵拖曳和改變速度，I 和 O 標記片段，E 匯出該片段。
+
+@ Saved
+zh-TW 已儲存
+
+@ Automatic
+zh-TW 自動
+
+# Demos and video recording.
+@ Export
+zh-TW 匯出
+
+@ H hide
+zh-TW H 隱藏
+
+@ Hide
+zh-TW 隱藏
+
+# Demos and video recording.
+@ Demo: {}
+zh-TW 示範：{}
+
+@ Highlighted clip: {} to {} ({})
+zh-TW 標示的片段：{} 至 {}（{}）
+
+@ Show controls
+zh-TW 顯示控制列
+
+# Demos and video recording.
+@ About {} left
+zh-TW 剩餘約 {}
+
+@ Exporting video
+zh-TW 正在匯出影片
+
+@ Preparing...
+zh-TW 準備中...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ zh-TW 只有伺服器可以使用changelevel
 @ {} renamed to {}
 zh-TW {}已改名為{}
 
-@ From the game folder
-zh-TW 來自遊戲資料夾
+@ Already recording video.
+zh-TW 已經在錄製影片。
 
-@ From ironwail
-zh-TW 來自 ironwail
+@ Export cancelled.
+zh-TW 已取消匯出。
 
-@ From the 2021 re-release
-zh-TW 來自2021年重製版
+@ Exporting {} to video
+zh-TW 正在將 {} 匯出為影片
+
+@ Kept demo {}
+zh-TW 已保留示範：{}
+
+@ Not a valid demo name.
+zh-TW 示範名稱無效。
+
+@ Renamed demo to {}
+zh-TW 示範已重新命名為 {}
+
+@ No auto-demo to keep.
+zh-TW 沒有可保留的自動示範。
+
+@ Not playing a demo.
+zh-TW 沒有正在播放的示範。
+
+@ Not recording video.
+zh-TW 沒有在錄製影片。
+
+@ Recording video to {}
+zh-TW 正在錄製影片到 {}
+
+@ This demo is already saved.
+zh-TW 這個示範已經儲存。
+
+@ This level's demo will be kept when it ends.
+zh-TW 本關的示範會在本關結束時保留。
+
+@ Video capture is not available in this build.
+zh-TW 此版本不支援影片錄製。
+
+@ Wrote {} ({}s)
+zh-TW 已寫入 {}（{} 秒）
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+zh-TW 找不到 ffmpeg：已將 {} 格 PNG 和一個 WAV 寫入 {}

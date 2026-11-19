@@ -30,6 +30,12 @@ mod global_cfg;
 use commands::*;
 mod net;
 mod demo;
+mod demo_bar;
+mod demo_play;
+mod demo_mouse;
+mod export_ui;
+mod autodemo;
+mod capture;
 mod mapswitch;
 mod render;
 mod speed;
@@ -101,6 +107,22 @@ pub struct Host {
     pub r: Renderer,
     pics: Pics,
     pub snd: Option<SoundSystem>,
+    /// The mixer shared with the audio device, for video capture.
+    pub mixer: Option<std::sync::Arc<qsound::SharedMixer>>,
+    /// Video recording or clip export in progress.
+    capture: Option<capture::CaptureState>,
+    /// Export dialog open: what it would export.
+    pending_export: Option<capture::ExportReq>,
+    /// Export screen: the still under the panel, and when it was last drawn.
+    export_pic: Option<(qrender::PicId, u32, u32)>,
+    export_ui_at: Option<qcore::time::Instant>,
+    /// The last frame's renderer settings (the export panel reuses them).
+    last_settings: Option<qrender::Settings>,
+    /// `cl_autodemo`: this level's recording, and the last finished one.
+    autodemo: Option<autodemo::AutoDemo>,
+    last_autodemo: Option<PathBuf>,
+    /// Headless export done: quit once background jobs have finished.
+    quit_after_jobs: bool,
     level: Level,
     view: ViewState,
     debris: crate::debris::Debris,
@@ -201,6 +223,11 @@ pub struct Host {
     /// and the signon they reach (loopback may batch several stages).
     demo_head: Vec<Vec<u8>>,
     demo_head_signon: u32,
+    /// Demo seek in progress: sounds and one-shot effects are skipped.
+    demo_seeking: bool,
+    /// Mouse on the demo playback bar, and the relative-mouse state applied.
+    demo_ui: demo_mouse::Pointer,
+    mouse_relative: Option<bool>,
     /// timedemo: frame count and wall-clock start at the second frame.
     timedemo: Option<(u32, qcore::time::Instant)>,
     /// UDP listen socket while maxplayers > 1 (listen or dedicated server).
@@ -263,6 +290,7 @@ impl Host {
             r,
             pics,
             snd,
+            mixer: None,
             level: Level::default(),
             view: ViewState::default(),
             debris: crate::debris::Debris::default(),
@@ -339,6 +367,17 @@ impl Host {
             pending_record: None,
             demo_head: Vec::new(),
             demo_head_signon: 0,
+            capture: None,
+            pending_export: None,
+            export_pic: None,
+            export_ui_at: None,
+            last_settings: None,
+            autodemo: None,
+            last_autodemo: None,
+            quit_after_jobs: false,
+            demo_seeking: false,
+            demo_ui: Default::default(),
+            mouse_relative: None,
             timedemo: None,
             net_server: None,
             net_client: None,

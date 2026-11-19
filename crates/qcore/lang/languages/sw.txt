@@ -1397,6 +1397,93 @@ sw Uso wowote wa chuma unakubali plagi, si vifaa vya kielektroniki pekee
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 sw Uharibifu wa radi kila sehemu ya kumi ya sekunde (bunduki ya radi ya kawaida hufanya 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+sw AV1 (MP4)
+
+@ Auto-Demo Slots
+sw Nafasi za demo za kiotomatiki
+
+@ Auto-Record Demos
+sw Rekodi demo kiotomatiki
+
+@ Frame Rate
+sw Kasi ya fremu
+
+@ H.264 (MP4)
+sw H.264 (MP4)
+
+@ H.265 (MP4)
+sw H.265 (MP4)
+
+@ Pause at End
+sw Sitisha mwishoni
+
+@ Playback Bar
+sw Upau wa kucheza
+
+@ Quality
+sw Ubora
+
+@ Record Audio
+sw Rekodi sauti
+
+@ VP9 (WebM)
+sw VP9 (WebM)
+
+@ Video Format
+sw Muundo wa video
+
+@ Video Recording
+sw Kurekodi video
+
+@ ffmpeg Program
+sw Programu ya ffmpeg
+
+@ small file
+sw faili ndogo
+
+@ unlimited
+sw bila kikomo
+
+# Demos and video recording.
+@ 1080p
+sw 1080p
+
+@ 1440p
+sw 1440p
+
+@ 4K
+sw 4K
+
+@ 720p
+sw 720p
+
+@ Destination
+sw Mahali pa kuhifadhi
+
+@ File Name
+sw Jina la faili
+
+@ Rename
+sw Badilisha jina
+
+@ Rename Demo
+sw Badilisha jina la demo
+
+@ Export Highlighted Clip
+sw Hamisha kipande kilichowekwa alama
+
+@ Export Whole Demo
+sw Hamisha demo nzima
+
+@ Same as window
+sw Kama dirisha
+
+# Demos and video recording.
+@ GPU Encoding
+sw Usimbaji wa GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ sw Silaha zipi husababisha kuganda; ana kwa ana inajumuisha shoka na silaha yoyo
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 sw Roketi na maguruneti yako hayakudhuru; kuruka kwa roketi bado kunafanya kazi
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+sw Demo unayocheza husimama kwenye fremu ya mwisho badala ya kurudi kwenye menyu, ili uweze kuirudisha nyuma
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+sw Fremu kwa sekunde za video; wakati wa kurekodi mchezo huenda kwa kasi hii hasa
+
+@ High keeps the most detail; small file saves disk space
+sw Juu huhifadhi maelezo mengi zaidi; faili ndogo huokoa nafasi ya diski
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+sw Demo ngapi za kiotomatiki huhifadhiwa kabla ya ile ya zamani zaidi kufutwa; demo zilizobakizwa hazihesabiwi
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+sw Hurekodi kila kiwango unachocheza kwenye orodha ya Kiotomatiki katika Menyu kuu > Demo; bakiza unazotaka, za zamani zaidi hubadilishwa
+
+@ Records game sound and music into the video
+sw Hurekodi sauti na muziki wa mchezo kwenye video
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+sw Huonyesha upau wa kucheza (muda, kasi, ratiba) baada ya kitufe cha kudhibiti, kila mara, au kamwe
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+sw Muundo wa video; unahitaji ffmpeg yenye kisimbaji hicho, la sivyo fremu huhifadhiwa kama picha za PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+sw Hakuna kipande kilichowekwa alama: demo ikicheza, buruta juu ya ratiba au bonyeza I na O (LT na RT kwenye kidhibiti)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+sw Jina la faili ya video; kiendelezi hufuata umbizo la video, na faili yenye jina hilo hilo hubadilishwa
+
+@ New name of the demo; if another demo has it, a number is added
+sw Jina jipya la demo; ikiwa demo nyingine tayari inalo, nambari huongezwa
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+sw Ukubwa wa video; fremu hubadilishwa ukubwa kutoka ukubwa wa dirisha (pamoja na mistari ili kudumisha umbo), hivyo ukubwa mkubwa hauongezi maelezo
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+sw Husimba kwenye kadi ya michoro (NVIDIA NVENC, AMD au Intel kupitia VA-API, AMF au Quick Sync, Apple VideoToolbox) ffmpeg inapoweza kuitumia, na kuacha kichakataji huru; vinginevyo kichakataji husimba
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ sw Hifadhi
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 sw Risasi mbadala kwenye paneli ya kielektroniki inayong'aa iliyo karibu huchomeka ncha moja; ncha nyingine kisha hurusha radi kwa risasi zisizo na kikomo. Kebo inakufunga kwenye soketi na hunasa kwenye kona. Risasi mbadala au kubadili silaha huichomoa.
 
+@ From the game folder
+sw Kutoka kwenye folda ya mchezo
+
+@ From ironwail
+sw Kutoka ironwail
+
+@ From the 2021 re-release
+sw Kutoka toleo jipya la 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+sw Demo za kiotomatiki zimezimwa. Washa Rekodi demo kiotomatiki katika Chaguo > Demo ili kurekodi kila kiwango unachocheza.
+
+@ Automatic: replaced when the slots are full
+sw Kiotomatiki: hubadilishwa nafasi zikijaa
+
+@ Delete {}?
+sw Ufute {}?
+
+@ Demos
+sw Demo
+
+@ End of demo
+sw Mwisho wa demo
+
+@ Export Video
+sw Hamisha video
+
+@ Fast forward
+sw Songa mbele haraka
+
+@ Fast forward {}x
+sw Mbele {}x
+
+@ Indexing...
+sw Inaorodhesha...
+
+@ K keep
+sw K baki
+
+@ Keep
+sw Bakiza
+
+@ Length: {}
+sw Urefu: {}
+
+@ Map: {}
+sw Ramani: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+sw Bado hakuna demo za kiotomatiki. Kila kiwango unachocheza hurekodiwa hapa.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+sw Bado hakuna demo zilizohifadhiwa. Rekodi moja kwa amri ya konsoli 'record <name>', au bakiza demo ya kiotomatiki.
+
+@ Pause
+sw Sitisha
+
+@ Paused
+sw Imesitishwa
+
+@ Play {}x
+sw Inacheza {}x
+
+@ Quake - exporting video {}%
+sw Quake - inahamisha video {}%
+
+@ Recorded: {}
+sw Imerekodiwa: {}
+
+@ Rewind
+sw Rudisha nyuma
+
+@ Rewind {}x
+sw Nyuma {}x
+
+@ Size: {} KB
+sw Ukubwa: {} KB
+
+@ Skip 10 s
+sw Ruka sekunde 10
+
+@ Back 10 s
+sw Rudi sekunde 10
+
+@ Length
+sw Urefu
+
+@ Mark in
+sw Weka mwanzo
+
+@ Mark out
+sw Weka mwisho
+
+@ Next level
+sw Kiwango kinachofuata
+
+@ No demos match the filter. Backspace or Esc clears it.
+sw Hakuna demo inayolingana na kichujio. Backspace au Esc hukifuta.
+
+@ Renaming an automatic demo moves it to the saved demos.
+sw Kubadilisha jina la demo ya kiotomatiki huihamishia kwenye demo zilizohifadhiwa.
+
+@ Restart
+sw Anza upya
+
+@ Sort
+sw Panga
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+sw Wakati demo inacheza: A husitisha, d-pad husogeza na kubadili kasi, LT na RT huweka alama ya kipande na X hukihamisha.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+sw Nafasi sitisha | Kushoto/Kulia sogeza | Juu/Chini kasi | PgUp/PgDn sek 10 | I/O alama | E hamisha
+
+@ Speed
+sw Kasi
+
+@ Switch List
+sw Badili orodha
+
+@ This can't be undone.
+sw Hili haliwezi kutenduliwa.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+sw Wakati demo inacheza: Nafasi husitisha, mishale husogeza na kubadili kasi, I na O huweka alama ya kipande na E hukihamisha.
+
+@ Saved
+sw Zilizohifadhiwa
+
+@ Automatic
+sw Kiotomatiki
+
+# Demos and video recording.
+@ Export
+sw Hamisha
+
+@ H hide
+sw H ficha
+
+@ Hide
+sw Ficha
+
+# Demos and video recording.
+@ Demo: {}
+sw Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+sw Kipande kilichowekwa alama: {} hadi {} ({})
+
+@ Show controls
+sw Onyesha vidhibiti
+
+# Demos and video recording.
+@ About {} left
+sw Takriban {} zimebaki
+
+@ Exporting video
+sw Inahamisha video
+
+@ Preparing...
+sw Inaandaa...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ sw Seva pekee inaweza kubadilisha ngazi
 @ {} renamed to {}
 sw {} amebadilisha jina kuwa {}
 
-@ From the game folder
-sw Kutoka kwenye folda ya mchezo
+@ Already recording video.
+sw Video tayari inarekodiwa.
 
-@ From ironwail
-sw Kutoka ironwail
+@ Export cancelled.
+sw Uhamishaji umeghairiwa.
 
-@ From the 2021 re-release
-sw Kutoka toleo jipya la 2021
+@ Exporting {} to video
+sw Inahamisha {} kuwa video
+
+@ Kept demo {}
+sw Demo imebakizwa: {}
+
+@ Not a valid demo name.
+sw Jina la demo si sahihi.
+
+@ Renamed demo to {}
+sw Jina la demo limebadilishwa kuwa {}
+
+@ No auto-demo to keep.
+sw Hakuna demo ya kiotomatiki ya kubakiza.
+
+@ Not playing a demo.
+sw Hakuna demo inayochezwa.
+
+@ Not recording video.
+sw Hakuna video inayorekodiwa.
+
+@ Recording video to {}
+sw Inarekodi video kwenda {}
+
+@ This demo is already saved.
+sw Demo hii tayari imehifadhiwa.
+
+@ This level's demo will be kept when it ends.
+sw Demo ya kiwango hiki itabakizwa kitakapoisha.
+
+@ Video capture is not available in this build.
+sw Kurekodi video hakupatikani katika toleo hili.
+
+@ Wrote {} ({}s)
+sw Imeandika {} (sek {})
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+sw ffmpeg haikupatikana: imeandika fremu {} za PNG na WAV moja kwenye {}

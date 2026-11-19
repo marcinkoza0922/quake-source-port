@@ -160,6 +160,34 @@ un mod usa efectos de partículas que outros ports non saben mostrar, a
 versión completa gárdase como `<nome>.qsd` (`playdemo <nome>.qsd`).
 `demo_convert <nome>` converte unha demo máis antiga.
 
+Menú principal → Demos mostra as túas demos gardadas e, con Opcións → Demos
+→ Gravar demos automaticamente activado, unha demo automática de cada nivel
+que xogues; as máis antigas substitúense cando os espazos están cheos.
+Escribe para filtrar as listas e preme Tab para cambiar a orde; os botóns
+xunto á lista reproducen, exportan, renomean, gardan ou borran a demo
+escollida, e renomear unha demo automática gárdaa. Os informes de erros
+inclúen a demo automática do nivel actual.
+
+Durante unha demo, Espazo pausa, manter Esquerda ou Dereita rebobina ou
+avanza rápido, Arriba e Abaixo cambian a velocidade, RePáx e AvPáx saltan 10
+segundos, e Inicio e Fin van ao comezo e ao mapa seguinte. I e O marcan un
+clip; E expórtao, ou a demo enteira, ao cartafol `videos`. Os controis
+quedan na pantalla; H ou Ocultar agóchaos, e sinalar o bordo inferior amosa
+unha franxa que os trae de volta. Preme os botóns, preme na liña de tempo
+para saltar alí ou arrastra sobre ela para resaltar un clip; Exportar pide
+os fotogramas por segundo, o tamaño, o formato e o ficheiro, e se exportar o
+clip resaltado ou a demo enteira.
+
+No mando, A pausa, a cruceta rebobina, avanza e cambia a velocidade, LB e RB
+saltan 10 segundos e os botóns dos sticks van ao inicio e ao seguinte mapa.
+LT e RT marcan un clip, B bórrao, X exporta, Y garda unha demo automática e
+View oculta os controis.
+
+`capture` inicia e detén a gravación dun vídeo mentres xogas. Os fotogramas
+por segundo, o formato e a calidade están en Opcións → Demos → Gravación de
+vídeo. Os vídeos precisan ffmpeg; sen el, os fotogramas gárdanse como imaxes
+PNG cun ficheiro WAV.
+
 ## Accesibilidade
 
 Options → Accesibilidade:

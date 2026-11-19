@@ -1397,6 +1397,93 @@ cy Mae unrhyw arwyneb metel yn derbyn y plwg, nid electroneg yn unig
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 cy Difrod mellt bob degfed ran o eiliad (mae'r gwn mellt arferol yn gwneud 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+cy AV1 (MP4)
+
+@ Auto-Demo Slots
+cy Slotiau demo awtomatig
+
+@ Auto-Record Demos
+cy Recordio demos yn awtomatig
+
+@ Frame Rate
+cy Cyfradd fframiau
+
+@ H.264 (MP4)
+cy H.264 (MP4)
+
+@ H.265 (MP4)
+cy H.265 (MP4)
+
+@ Pause at End
+cy Saib ar y diwedd
+
+@ Playback Bar
+cy Bar chwarae
+
+@ Quality
+cy Ansawdd
+
+@ Record Audio
+cy Recordio sain
+
+@ VP9 (WebM)
+cy VP9 (WebM)
+
+@ Video Format
+cy Fformat fideo
+
+@ Video Recording
+cy Recordio fideo
+
+@ ffmpeg Program
+cy Rhaglen ffmpeg
+
+@ small file
+cy ffeil fach
+
+@ unlimited
+cy diderfyn
+
+# Demos and video recording.
+@ 1080p
+cy 1080p
+
+@ 1440p
+cy 1440p
+
+@ 4K
+cy 4K
+
+@ 720p
+cy 720p
+
+@ Destination
+cy Cyrchfan
+
+@ File Name
+cy Enw'r ffeil
+
+@ Rename
+cy Ailenwi
+
+@ Rename Demo
+cy Ailenwi'r demo
+
+@ Export Highlighted Clip
+cy Allforio'r clip wedi'i amlygu
+
+@ Export Whole Demo
+cy Allforio'r demo cyfan
+
+@ Same as window
+cy Fel y ffenestr
+
+# Demos and video recording.
+@ GPU Encoding
+cy Amgodio GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ cy Pa arfau sy'n achosi'r rhewi; mae ymladd agos yn cynnwys y fwyell ac unrhyw a
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 cy Nid yw eich rocedi a'ch grenadau eich hun yn eich brifo; mae neidiau roced yn dal i weithio
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+cy Mae demo rydych yn ei chwarae yn stopio ar y ffrâm olaf yn lle mynd yn ôl i'r ddewislen, fel y gallwch ei weindio'n ôl
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+cy Fframiau yr eiliad yn y fideo; wrth recordio mae'r gêm yn rhedeg ar union y gyfradd hon
+
+@ High keeps the most detail; small file saves disk space
+cy Mae uchel yn cadw'r mwyaf o fanylion; mae ffeil fach yn arbed lle ar y ddisg
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+cy Faint o demos awtomatig sy'n cael eu cadw cyn dileu'r hynaf; nid yw demos a gadwyd yn cyfrif
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+cy Mae'n recordio pob lefel rydych yn ei chwarae i'r rhestr Awtomatig yn Prif ddewislen > Demos; cadwch y rhai rydych eu heisiau, mae'r hynaf yn cael eu disodli
+
+@ Records game sound and music into the video
+cy Mae'n recordio synau a cherddoriaeth y gêm yn y fideo
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+cy Mae'n dangos y bar chwarae (amser, cyflymder, llinell amser) ar ôl bysell reoli, bob amser, neu byth
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+cy Fformat fideo; mae angen ffmpeg gyda'r amgodiwr hwnnw, fel arall caiff y fframiau eu cadw fel delweddau PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+cy Dim clip wedi'i amlygu: wrth i'r demo chwarae, llusgwch ar draws y llinell amser neu pwyswch I ac O (LT ac RT ar y rheolydd)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+cy Enw'r ffeil fideo; mae'r estyniad yn dilyn y fformat fideo, a chaiff ffeil â'r un enw ei disodli
+
+@ New name of the demo; if another demo has it, a number is added
+cy Enw newydd y demo; os oes gan demo arall yr enw'n barod, ychwanegir rhif
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+cy Maint y fideo; caiff fframiau eu graddio o faint y ffenestr (gyda barrau i gadw'r siâp), felly nid yw maint mwy'n ychwanegu manylion
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+cy Mae'n amgodio ar y cerdyn graffeg (NVIDIA NVENC, AMD neu Intel drwy VA-API, AMF neu Quick Sync, Apple VideoToolbox) pan all ffmpeg ei ddefnyddio, gan adael y prosesydd yn rhydd; fel arall mae'r prosesydd yn amgodio
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ cy Cadw
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 cy Mae tân eilaidd ar banel electronig disglair o fewn cyrraedd yn plygio un pen i mewn; mae'r pen arall wedyn yn saethu mellt gydag ammo diderfyn. Mae'r cebl yn eich clymu i'r soced ac yn bachu ar gorneli. Mae tân eilaidd neu newid arf yn ei rwygo allan.
 
+@ From the game folder
+cy O ffolder y gêm
+
+@ From ironwail
+cy O ironwail
+
+@ From the 2021 re-release
+cy O ail-ryddhad 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+cy Mae demos awtomatig wedi'u diffodd. Trowch Recordio demos yn awtomatig ymlaen yn Opsiynau > Demos i recordio pob lefel rydych yn ei chwarae.
+
+@ Automatic: replaced when the slots are full
+cy Awtomatig: yn cael ei ddisodli pan fydd y slotiau'n llawn
+
+@ Delete {}?
+cy Dileu {}?
+
+@ Demos
+cy Demos
+
+@ End of demo
+cy Diwedd y demo
+
+@ Export Video
+cy Allforio fideo
+
+@ Fast forward
+cy Cyflym ymlaen
+
+@ Fast forward {}x
+cy Ymlaen {}x
+
+@ Indexing...
+cy Yn mynegeio...
+
+@ K keep
+cy K cadw
+
+@ Keep
+cy Cadw
+
+@ Length: {}
+cy Hyd: {}
+
+@ Map: {}
+cy Map: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+cy Dim demos awtomatig eto. Mae pob lefel rydych yn ei chwarae yn cael ei recordio yma.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+cy Dim demos wedi'u cadw eto. Recordiwch un gyda'r gorchymyn consol 'record <name>', neu cadwch demo awtomatig.
+
+@ Pause
+cy Saib
+
+@ Paused
+cy Wedi oedi
+
+@ Play {}x
+cy Chwarae {}x
+
+@ Quake - exporting video {}%
+cy Quake - yn allforio fideo {}%
+
+@ Recorded: {}
+cy Recordiwyd: {}
+
+@ Rewind
+cy Weindio'n ôl
+
+@ Rewind {}x
+cy Yn ôl {}x
+
+@ Size: {} KB
+cy Maint: {} KB
+
+@ Skip 10 s
+cy Neidio 10 e
+
+@ Back 10 s
+cy Yn ôl 10 e
+
+@ Length
+cy Hyd
+
+@ Mark in
+cy Marcio'r dechrau
+
+@ Mark out
+cy Marcio'r diwedd
+
+@ Next level
+cy Y lefel nesaf
+
+@ No demos match the filter. Backspace or Esc clears it.
+cy Does dim demo'n cyfateb i'r hidlydd. Mae Backspace neu Esc yn ei glirio.
+
+@ Renaming an automatic demo moves it to the saved demos.
+cy Mae ailenwi demo awtomatig yn ei symud i'r demos a gadwyd.
+
+@ Restart
+cy O'r dechrau
+
+@ Sort
+cy Trefnu
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+cy Wrth i demo chwarae: mae A yn oedi, mae'r pad cyfeiriad yn sgrolio ac yn newid y cyflymder, mae LT ac RT yn marcio clip ac mae X yn ei allforio.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+cy Bwlch saib | Chwith/De sgrolio | I fyny/I lawr cyflymder | PgUp/PgDn 10 e | I/O marc | E allforio
+
+@ Speed
+cy Cyflymder
+
+@ Switch List
+cy Newid rhestr
+
+@ This can't be undone.
+cy Does dim modd dadwneud hyn.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+cy Wrth i demo chwarae: mae Bwlch yn oedi, mae'r saethau'n sgrolio ac yn newid y cyflymder, mae I ac O yn marcio clip ac mae E yn ei allforio.
+
+@ Saved
+cy Wedi'u cadw
+
+@ Automatic
+cy Awtomatig
+
+# Demos and video recording.
+@ Export
+cy Allforio
+
+@ H hide
+cy H cuddio
+
+@ Hide
+cy Cuddio
+
+# Demos and video recording.
+@ Demo: {}
+cy Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+cy Clip wedi'i amlygu: {} i {} ({})
+
+@ Show controls
+cy Dangos rheolyddion
+
+# Demos and video recording.
+@ About {} left
+cy Tua {} ar ôl
+
+@ Exporting video
+cy Yn allforio fideo
+
+@ Preparing...
+cy Yn paratoi...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ cy Dim ond y gweinydd all wneud changelevel
 @ {} renamed to {}
 cy {} wedi newid enw: {}
 
-@ From the game folder
-cy O ffolder y gêm
+@ Already recording video.
+cy Mae fideo yn cael ei recordio eisoes.
 
-@ From ironwail
-cy O ironwail
+@ Export cancelled.
+cy Canslwyd yr allforio.
 
-@ From the 2021 re-release
-cy O ail-ryddhad 2021
+@ Exporting {} to video
+cy Yn allforio {} fel fideo
+
+@ Kept demo {}
+cy Cadwyd y demo: {}
+
+@ Not a valid demo name.
+cy Enw demo annilys.
+
+@ Renamed demo to {}
+cy Ailenwyd y demo yn {}
+
+@ No auto-demo to keep.
+cy Does dim demo awtomatig i'w gadw.
+
+@ Not playing a demo.
+cy Does dim demo yn chwarae.
+
+@ Not recording video.
+cy Does dim fideo'n cael ei recordio.
+
+@ Recording video to {}
+cy Yn recordio fideo i {}
+
+@ This demo is already saved.
+cy Mae'r demo hwn wedi'i gadw eisoes.
+
+@ This level's demo will be kept when it ends.
+cy Bydd demo'r lefel hon yn cael ei gadw pan fydd yn gorffen.
+
+@ Video capture is not available in this build.
+cy Nid yw recordio fideo ar gael yn y fersiwn hon.
+
+@ Wrote {} ({}s)
+cy Ysgrifennwyd {} ({} e)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+cy Heb ddod o hyd i ffmpeg: ysgrifennwyd {} ffrâm PNG a WAV i {}

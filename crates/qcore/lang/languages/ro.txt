@@ -1397,6 +1397,93 @@ ro Orice suprafață metalică acceptă ștecherul, nu doar electronica
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 ro Daune de fulger la fiecare zecime de secundă (tunul cu fulgere obișnuit dă 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+ro AV1 (MP4)
+
+@ Auto-Demo Slots
+ro Locuri pentru demo-uri automate
+
+@ Auto-Record Demos
+ro Înregistrare automată demo
+
+@ Frame Rate
+ro Cadre pe secundă
+
+@ H.264 (MP4)
+ro H.264 (MP4)
+
+@ H.265 (MP4)
+ro H.265 (MP4)
+
+@ Pause at End
+ro Pauză la final
+
+@ Playback Bar
+ro Bară de redare
+
+@ Quality
+ro Calitate
+
+@ Record Audio
+ro Înregistrează sunetul
+
+@ VP9 (WebM)
+ro VP9 (WebM)
+
+@ Video Format
+ro Format video
+
+@ Video Recording
+ro Înregistrare video
+
+@ ffmpeg Program
+ro Program ffmpeg
+
+@ small file
+ro fișier mic
+
+@ unlimited
+ro nelimitat
+
+# Demos and video recording.
+@ 1080p
+ro 1080p
+
+@ 1440p
+ro 1440p
+
+@ 4K
+ro 4K
+
+@ 720p
+ro 720p
+
+@ Destination
+ro Destinație
+
+@ File Name
+ro Nume fișier
+
+@ Rename
+ro Redenumește
+
+@ Rename Demo
+ro Redenumește demo
+
+@ Export Highlighted Clip
+ro Exportă clipul evidențiat
+
+@ Export Whole Demo
+ro Exportă tot demo-ul
+
+@ Same as window
+ro Ca fereastra
+
+# Demos and video recording.
+@ GPU Encoding
+ro Codare pe GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ ro Ce arme declanșează înghețarea; corp la corp include toporul și orice ar
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 ro Propriile rachete și grenade nu te rănesc; săriturile cu racheta funcționează în continuare
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+ro Un demo pe care îl redai se oprește la ultimul cadru în loc să revină la meniu, ca să-l poți derula înapoi
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+ro Cadre pe secundă ale videoclipului; în timpul înregistrării jocul rulează exact la această rată
+
+@ High keeps the most detail; small file saves disk space
+ro Ridicată păstrează cele mai multe detalii; fișier mic economisește spațiu pe disc
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+ro Câte demo-uri automate se păstrează înainte de a-l șterge pe cel mai vechi; demo-urile păstrate nu se numără
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+ro Înregistrează fiecare nivel jucat în lista Automate din Meniu principal > Demo-uri; păstrează-le pe cele dorite, cele mai vechi sunt înlocuite
+
+@ Records game sound and music into the video
+ro Înregistrează sunetele și muzica jocului în video
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+ro Arată bara de redare (timp, viteză, cronologie) după o tastă de control, mereu sau niciodată
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+ro Format video; necesită ffmpeg cu acel encoder, altfel cadrele se salvează ca imagini PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+ro Niciun clip evidențiat: în timpul demo-ului trage peste cronologie sau apasă I și O (LT și RT pe controler)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+ro Numele fișierului video; extensia urmează formatul video, iar un fișier cu același nume este înlocuit
+
+@ New name of the demo; if another demo has it, a number is added
+ro Noul nume al demo-ului; dacă îl are deja alt demo, se adaugă un număr
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+ro Dimensiunea videoclipului; cadrele sunt scalate din dimensiunea ferestrei (cu benzi ca să păstreze forma), deci o dimensiune mai mare nu adaugă detalii
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+ro Codează pe placa video (NVIDIA NVENC, AMD sau Intel prin VA-API, AMF sau Quick Sync, Apple VideoToolbox) când ffmpeg o poate folosi, lăsând procesorul liber; altfel codează procesorul
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ ro Salvare
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 ro Focul secundar pe un panou electronic luminos la îndemână conectează un capăt; celălalt trage apoi fulgere cu muniție nelimitată. Cablul te leagă de priză și se agață de colțuri. Focul secundar sau schimbarea armei îl smulge.
 
+@ From the game folder
+ro Din dosarul jocului
+
+@ From ironwail
+ro Din ironwail
+
+@ From the 2021 re-release
+ro Din reeditarea din 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+ro Demo-urile automate sunt dezactivate. Activează Înregistrare automată demo din Opțiuni > Demo-uri pentru a înregistra fiecare nivel jucat.
+
+@ Automatic: replaced when the slots are full
+ro Automat: înlocuit când locurile sunt pline
+
+@ Delete {}?
+ro Ștergi {}?
+
+@ Demos
+ro Demo-uri
+
+@ End of demo
+ro Sfârșitul demo-ului
+
+@ Export Video
+ro Exportă video
+
+@ Fast forward
+ro Derulare înainte
+
+@ Fast forward {}x
+ro Înainte {}x
+
+@ Indexing...
+ro Indexare...
+
+@ K keep
+ro K păstrează
+
+@ Keep
+ro Păstrează
+
+@ Length: {}
+ro Durată: {}
+
+@ Map: {}
+ro Hartă: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+ro Încă nu există demo-uri automate. Fiecare nivel jucat se înregistrează aici.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+ro Încă nu există demo-uri salvate. Înregistrează unul cu comanda de consolă 'record <name>' sau păstrează un demo automat.
+
+@ Pause
+ro Pauză
+
+@ Paused
+ro În pauză
+
+@ Play {}x
+ro Redare {}x
+
+@ Quake - exporting video {}%
+ro Quake - export video {}%
+
+@ Recorded: {}
+ro Înregistrat: {}
+
+@ Rewind
+ro Derulare înapoi
+
+@ Rewind {}x
+ro Înapoi {}x
+
+@ Size: {} KB
+ro Dimensiune: {} KB
+
+@ Skip 10 s
+ro Sari 10 s
+
+@ Back 10 s
+ro Înapoi 10 s
+
+@ Length
+ro Durată
+
+@ Mark in
+ro Marchează început
+
+@ Mark out
+ro Marchează sfârșit
+
+@ Next level
+ro Nivelul următor
+
+@ No demos match the filter. Backspace or Esc clears it.
+ro Niciun demo nu se potrivește filtrului. Backspace sau Esc îl șterge.
+
+@ Renaming an automatic demo moves it to the saved demos.
+ro Redenumirea unui demo automat îl mută la demo-urile salvate.
+
+@ Restart
+ro De la început
+
+@ Sort
+ro Sortează
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+ro În timpul unui demo: A pune pauză, d-pad-ul derulează și schimbă viteza, LT și RT marchează un clip, iar X îl exportă.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+ro Spațiu pauză | Stânga/Dreapta derulare | Sus/Jos viteză | PgUp/PgDn 10 s | I/O marcaj | E export
+
+@ Speed
+ro Viteză
+
+@ Switch List
+ro Schimbă lista
+
+@ This can't be undone.
+ro Acțiunea nu poate fi anulată.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+ro În timpul unui demo: Spațiu pune pauză, săgețile derulează și schimbă viteza, I și O marchează un clip, iar E îl exportă.
+
+@ Saved
+ro Salvate
+
+@ Automatic
+ro Automate
+
+# Demos and video recording.
+@ Export
+ro Exportă
+
+@ H hide
+ro H ascunde
+
+@ Hide
+ro Ascunde
+
+# Demos and video recording.
+@ Demo: {}
+ro Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+ro Clip evidențiat: {} – {} ({})
+
+@ Show controls
+ro Arată comenzile
+
+# Demos and video recording.
+@ About {} left
+ro Mai sunt aproximativ {}
+
+@ Exporting video
+ro Se exportă videoclipul
+
+@ Preparing...
+ro Se pregătește...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ ro Doar serverul poate folosi changelevel
 @ {} renamed to {}
 ro {} a fost redenumit {}
 
-@ From the game folder
-ro Din dosarul jocului
+@ Already recording video.
+ro Se înregistrează deja video.
 
-@ From ironwail
-ro Din ironwail
+@ Export cancelled.
+ro Export anulat.
 
-@ From the 2021 re-release
-ro Din reeditarea din 2021
+@ Exporting {} to video
+ro Se exportă {} ca video
+
+@ Kept demo {}
+ro Demo păstrat: {}
+
+@ Not a valid demo name.
+ro Nume de demo invalid.
+
+@ Renamed demo to {}
+ro Demo redenumit în {}
+
+@ No auto-demo to keep.
+ro Niciun demo automat de păstrat.
+
+@ Not playing a demo.
+ro Nu rulează niciun demo.
+
+@ Not recording video.
+ro Nu se înregistrează video.
+
+@ Recording video to {}
+ro Se înregistrează video în {}
+
+@ This demo is already saved.
+ro Acest demo este deja salvat.
+
+@ This level's demo will be kept when it ends.
+ro Demo-ul acestui nivel va fi păstrat când se termină.
+
+@ Video capture is not available in this build.
+ro Înregistrarea video nu este disponibilă în această versiune.
+
+@ Wrote {} ({}s)
+ro Scris {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+ro ffmpeg nu a fost găsit: s-au scris {} cadre PNG și un WAV în {}

@@ -164,6 +164,35 @@ saben mostrar, la versió completa es conserva com a `<nom>.qsd`
 (`playdemo <nom>.qsd`). `demo_convert <nom>` converteix una demo més
 antiga.
 
+Menú principal → Demos mostra les demos desades i, amb Opcions → Demos →
+Grava demos automàticament activat, una demo automàtica de cada nivell que
+jugues; les més antigues es reemplacen quan els espais són plens. Escriu
+per filtrar les llistes i prem Tab per canviar l'ordre; els botons del
+costat de la llista reprodueixen, exporten, canvien el nom, guarden o
+suprimeixen la demo triada, i canviar el nom d'una demo automàtica la
+guarda. Els informes d'errors inclouen la demo automàtica del nivell
+actual.
+
+Durant una demo, Espai fa pausa, mantenir Esquerra o Dreta rebobina o avança
+ràpid, Amunt i Avall canvien la velocitat, RePàg i AvPàg salten 10 segons, i
+Inici i Fi van al començament i al mapa següent. I i O marquen un clip; E
+l'exporta, o tota la demo, a la carpeta `videos`. Els controls es queden a
+la pantalla; H o Amaga els amaga, i assenyalar la vora inferior mostra una
+franja que els fa tornar. Fes clic als botons, fes clic a la línia de temps
+per saltar-hi o arrossega-hi a sobre per ressaltar un clip; Exporta demana
+els fotogrames per segon, la mida, el format i el fitxer, i si cal exportar
+el clip ressaltat o tota la demo.
+
+Al comandament, A fa pausa, la creueta rebobina, avança i canvia la
+velocitat, LB i RB salten 10 segons i els botons dels joysticks van a
+l'inici i al mapa següent. LT i RT marquen un clip, B l'esborra, X exporta,
+Y guarda una demo automàtica i View amaga els controls.
+
+`capture` inicia i atura la gravació d'un vídeo mentre jugues. Els
+fotogrames per segon, el format i la qualitat són a Opcions → Demos →
+Gravació de vídeo. Els vídeos necessiten ffmpeg; sense, els fotogrames es
+desen com a imatges PNG amb un fitxer WAV.
+
 ## Accessibilitat
 
 Options → Accessibilitat:

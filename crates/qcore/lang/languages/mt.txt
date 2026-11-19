@@ -1397,6 +1397,93 @@ mt Kull wiċċ tal-metall jieħu l-plagg, mhux biss l-elettronika
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 mt Ħsara tas-sajjetta kull għaxar ta' sekonda (il-pistola tas-sajjetti normali tagħmel 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+mt AV1 (MP4)
+
+@ Auto-Demo Slots
+mt Slots tad-demo awtomatiċi
+
+@ Auto-Record Demos
+mt Irrekordja d-demos awtomatikament
+
+@ Frame Rate
+mt Rata tal-frejms
+
+@ H.264 (MP4)
+mt H.264 (MP4)
+
+@ H.265 (MP4)
+mt H.265 (MP4)
+
+@ Pause at End
+mt Pawża fl-aħħar
+
+@ Playback Bar
+mt Bar tad-daqq
+
+@ Quality
+mt Kwalità
+
+@ Record Audio
+mt Irrekordja l-ħoss
+
+@ VP9 (WebM)
+mt VP9 (WebM)
+
+@ Video Format
+mt Format tal-vidjo
+
+@ Video Recording
+mt Reġistrazzjoni tal-vidjo
+
+@ ffmpeg Program
+mt Programm ffmpeg
+
+@ small file
+mt fajl żgħir
+
+@ unlimited
+mt bla limitu
+
+# Demos and video recording.
+@ 1080p
+mt 1080p
+
+@ 1440p
+mt 1440p
+
+@ 4K
+mt 4K
+
+@ 720p
+mt 720p
+
+@ Destination
+mt Destinazzjoni
+
+@ File Name
+mt Isem tal-fajl
+
+@ Rename
+mt Semmi mill-ġdid
+
+@ Rename Demo
+mt Semmi d-demo mill-ġdid
+
+@ Export Highlighted Clip
+mt Esporta l-klip immarkat
+
+@ Export Whole Demo
+mt Esporta d-demo kollu
+
+@ Same as window
+mt Bħat-tieqa
+
+# Demos and video recording.
+@ GPU Encoding
+mt Kodifikazzjoni GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ mt Liema armi jqanqlu l-iffriżar; ġlied mill-qrib ikopri l-mannara u kull arma
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 mt Ir-rokits u l-granati tiegħek ma jweġġgħukx; ir-rocket jumps xorta jaħdmu
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+mt Demo li tilgħab jieqaf fl-aħħar frejm minflok jirritorna għall-menu, biex tkun tista' tirrewindjah
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+mt Frejms kull sekonda tal-vidjo; waqt ir-reġistrazzjoni l-logħba taħdem eżatt b'din ir-rata
+
+@ High keeps the most detail; small file saves disk space
+mt Għolja żżomm l-iktar dettall; fajl żgħir jiffranka spazju fuq id-diska
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+mt Kemm demos awtomatiċi jinżammu qabel jitħassar l-eqdem; id-demos miżmuma ma jgħoddux
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+mt Jirrekordja kull livell li tilgħab fil-lista Awtomatiċi f'Menu prinċipali > Demos; żomm dawk li trid, l-eqdem jinbidlu
+
+@ Records game sound and music into the video
+mt Jirrekordja l-ħsejjes u l-mużika tal-logħba fil-vidjo
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+mt Juri l-bar tad-daqq (ħin, veloċità, kronoloġija) wara buttuna tal-kontroll, dejjem, jew qatt
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+mt Format tal-vidjo; jeħtieġ ffmpeg b'dak l-encoder, inkella l-frejms jiġu salvati bħala stampi PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+mt L-ebda klip immarkat: waqt id-demo, iddreggja fuq il-kronoloġija jew agħfas I u O (LT u RT fuq il-kontrollur)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+mt Isem il-fajl tal-vidjo; l-estensjoni ssegwi l-format tal-vidjo, u fajl bl-istess isem jiġi sostitwit
+
+@ New name of the demo; if another demo has it, a number is added
+mt Isem ġdid tad-demo; jekk demo oħra diġà għandha dan l-isem, jiżdied numru
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+mt Daqs tal-vidjo; il-frejms jiġu skalati mid-daqs tat-tieqa (b'faxex biex tinżamm il-forma), għalhekk daqs akbar ma jżidx dettall
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+mt Jikkodifika fuq il-kard grafika (NVIDIA NVENC, AMD jew Intel permezz ta' VA-API, AMF jew Quick Sync, Apple VideoToolbox) meta ffmpeg jista' jużaha, u b'hekk il-proċessur jibqa' ħieles; inkella jikkodifika l-proċessur
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ mt Salvataġġ
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 mt In-nar sekondarju fuq pannell elettroniku jixgħel fil-qrib idaħħal tarf wieħed; it-tarf l-ieħor imbagħad jispara sajjetti b'munizzjon bla limitu. Il-kejbil jorbtok mas-sokit u jinqabad fil-kantunieri. In-nar sekondarju jew il-bdil tal-arma jaqilgħu.
 
+@ From the game folder
+mt Mill-folder tal-logħba
+
+@ From ironwail
+mt Minn ironwail
+
+@ From the 2021 re-release
+mt Mill-edizzjoni l-ġdida tal-2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+mt Id-demos awtomatiċi huma mitfija. Ixgħel Irrekordja d-demos awtomatikament f'Għażliet > Demos biex tirrekordja kull livell li tilgħab.
+
+@ Automatic: replaced when the slots are full
+mt Awtomatiku: jinbidel meta s-slots ikunu mimlija
+
+@ Delete {}?
+mt Tħassar {}?
+
+@ Demos
+mt Demos
+
+@ End of demo
+mt Tmiem id-demo
+
+@ Export Video
+mt Esporta vidjo
+
+@ Fast forward
+mt Għaġġel 'il quddiem
+
+@ Fast forward {}x
+mt 'Il quddiem {}x
+
+@ Indexing...
+mt Qed jiġi indiċjat...
+
+@ K keep
+mt K żomm
+
+@ Keep
+mt Żomm
+
+@ Length: {}
+mt Tul: {}
+
+@ Map: {}
+mt Mappa: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+mt Għad m'hemmx demos awtomatiċi. Kull livell li tilgħab jiġi rrekordjat hawn.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+mt Għad m'hemmx demos salvati. Irrekordja wieħed bil-kmand tal-console 'record <name>', jew żomm demo awtomatiku.
+
+@ Pause
+mt Pawża
+
+@ Paused
+mt Fil-pawża
+
+@ Play {}x
+mt Qed jindaqq {}x
+
+@ Quake - exporting video {}%
+mt Quake - qed jiġi esportat vidjo {}%
+
+@ Recorded: {}
+mt Irrekordjat: {}
+
+@ Rewind
+mt Irrewindja
+
+@ Rewind {}x
+mt Lura {}x
+
+@ Size: {} KB
+mt Daqs: {} KB
+
+@ Skip 10 s
+mt Aqbeż 10 s
+
+@ Back 10 s
+mt Lura 10 s
+
+@ Length
+mt Tul
+
+@ Mark in
+mt Immarka l-bidu
+
+@ Mark out
+mt Immarka t-tmiem
+
+@ Next level
+mt Il-livell li jmiss
+
+@ No demos match the filter. Backspace or Esc clears it.
+mt L-ebda demo ma taqbel mal-filtru. Backspace jew Esc iħassruh.
+
+@ Renaming an automatic demo moves it to the saved demos.
+mt Meta tissemma mill-ġdid, demo awtomatika titmexxa mad-demos salvati.
+
+@ Restart
+mt Mill-bidu
+
+@ Sort
+mt Ordna
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+mt Waqt demo: A jagħmel pawża, id-d-pad jiskorri u jibdel il-veloċità, LT u RT jimmarkaw klip u X jesportah.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+mt Spazju pawża | Xellug/Lemin skorri | Fuq/Isfel veloċità | PgUp/PgDn 10 s | I/O immarka | E esporta
+
+@ Speed
+mt Veloċità
+
+@ Switch List
+mt Ibdel il-lista
+
+@ This can't be undone.
+mt Dan ma jistax jitreġġa' lura.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+mt Waqt demo: Spazju jagħmel pawża, il-vleġeġ jiskorru u jibdlu l-veloċità, I u O jimmarkaw klip u E jesportah.
+
+@ Saved
+mt Salvati
+
+@ Automatic
+mt Awtomatiċi
+
+# Demos and video recording.
+@ Export
+mt Esporta
+
+@ H hide
+mt H aħbi
+
+@ Hide
+mt Aħbi
+
+# Demos and video recording.
+@ Demo: {}
+mt Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+mt Klip immarkat: {} sa {} ({})
+
+@ Show controls
+mt Uri l-kontrolli
+
+# Demos and video recording.
+@ About {} left
+mt Fadal madwar {}
+
+@ Exporting video
+mt Qed jiġi esportat il-vidjo
+
+@ Preparing...
+mt Qed jipprepara...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ mt Is-server biss jista' jagħmel changelevel
 @ {} renamed to {}
 mt {} biddel ismu għal {}
 
-@ From the game folder
-mt Mill-folder tal-logħba
+@ Already recording video.
+mt Diġà qed jiġi rrekordjat vidjo.
 
-@ From ironwail
-mt Minn ironwail
+@ Export cancelled.
+mt L-esportazzjoni ġiet ikkanċellata.
 
-@ From the 2021 re-release
-mt Mill-edizzjoni l-ġdida tal-2021
+@ Exporting {} to video
+mt Qed jiġi esportat {} bħala vidjo
+
+@ Kept demo {}
+mt Demo miżmum: {}
+
+@ Not a valid demo name.
+mt Isem tad-demo mhux validu.
+
+@ Renamed demo to {}
+mt Id-demo issemmiet {}
+
+@ No auto-demo to keep.
+mt M'hemmx demo awtomatiku x'jinżamm.
+
+@ Not playing a demo.
+mt L-ebda demo mhu qed jindaqq.
+
+@ Not recording video.
+mt L-ebda vidjo mhu qed jiġi rrekordjat.
+
+@ Recording video to {}
+mt Qed jiġi rrekordjat vidjo f'{}
+
+@ This demo is already saved.
+mt Dan id-demo diġà salvat.
+
+@ This level's demo will be kept when it ends.
+mt Id-demo ta' dan il-livell se jinżamm meta jintemm.
+
+@ Video capture is not available in this build.
+mt Ir-reġistrazzjoni tal-vidjo mhix disponibbli f'din il-verżjoni.
+
+@ Wrote {} ({}s)
+mt Inkiteb {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+mt ffmpeg ma nstabx: inkitbu {} frejms PNG u WAV f'{}

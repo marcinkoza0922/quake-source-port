@@ -1397,6 +1397,93 @@ nb Enhver metallflate tar pluggen, ikke bare elektronikk
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 nb Lynskade hvert tiendedels sekund (den vanlige lynkanonen gjør 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+nb AV1 (MP4)
+
+@ Auto-Demo Slots
+nb Plasser for autodemoer
+
+@ Auto-Record Demos
+nb Ta opp demoer automatisk
+
+@ Frame Rate
+nb Bildefrekvens
+
+@ H.264 (MP4)
+nb H.264 (MP4)
+
+@ H.265 (MP4)
+nb H.265 (MP4)
+
+@ Pause at End
+nb Pause på slutten
+
+@ Playback Bar
+nb Avspillingslinje
+
+@ Quality
+nb Kvalitet
+
+@ Record Audio
+nb Ta opp lyd
+
+@ VP9 (WebM)
+nb VP9 (WebM)
+
+@ Video Format
+nb Videoformat
+
+@ Video Recording
+nb Videoopptak
+
+@ ffmpeg Program
+nb ffmpeg-program
+
+@ small file
+nb liten fil
+
+@ unlimited
+nb ubegrenset
+
+# Demos and video recording.
+@ 1080p
+nb 1080p
+
+@ 1440p
+nb 1440p
+
+@ 4K
+nb 4K
+
+@ 720p
+nb 720p
+
+@ Destination
+nb Mål
+
+@ File Name
+nb Filnavn
+
+@ Rename
+nb Gi nytt navn
+
+@ Rename Demo
+nb Gi demoen nytt navn
+
+@ Export Highlighted Clip
+nb Eksporter markert klipp
+
+@ Export Whole Demo
+nb Eksporter hele demoen
+
+@ Same as window
+nb Som vinduet
+
+# Demos and video recording.
+@ GPU Encoding
+nb GPU-koding
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ nb Hvilke våpen som utløser frysingen; nærkamp dekker øksa og alle modvåpen
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 nb Dine egne raketter og granater skader deg ikke; rakettopp virker fortsatt
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+nb En demo du spiller av, stopper på siste bilde i stedet for å gå tilbake til menyen, så du kan spole tilbake
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+nb Bilder per sekund i videoen; spillet kjører nøyaktig i dette tempoet under opptak
+
+@ High keeps the most detail; small file saves disk space
+nb Høy beholder flest detaljer; liten fil sparer diskplass
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+nb Hvor mange automatiske demoer som beholdes før den eldste slettes; beholdte demoer teller ikke
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+nb Tar opp hvert brett du spiller i listen Automatiske under Hovedmeny > Demoer; behold de du vil ha, de eldste erstattes
+
+@ Records game sound and music into the video
+nb Tar opp spillets lyd og musikk i videoen
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+nb Viser avspillingslinjen (tid, hastighet, tidslinje) etter en kontrolltast, alltid eller aldri
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+nb Videoformat; krever ffmpeg med den koderen, ellers lagres bildene som PNG-bilder
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+nb Ingen klipp markert: dra over tidslinjen eller trykk I og O mens demoen spilles (LT og RT på kontrolleren)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+nb Navnet på videofilen; filendelsen følger videoformatet, og en fil med samme navn erstattes
+
+@ New name of the demo; if another demo has it, a number is added
+nb Demoens nye navn; hvis en annen demo har det, legges det til et nummer
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+nb Videostørrelse; bildene skaleres fra vindusstørrelsen (med svarte felt som beholder formen), så en større størrelse gir ikke flere detaljer
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+nb Koder på grafikkortet (NVIDIA NVENC, AMD eller Intel via VA-API, AMF eller Quick Sync, Apple VideoToolbox) når ffmpeg kan bruke det, så prosessoren blir ledig; ellers koder prosessoren
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ nb Lagring
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 nb Sekundærild mot et lysende elektronikkpanel innen rekkevidde plugger inn den ene enden; den andre skyter da lyn med ubegrenset ammunisjon. Kabelen binder deg til kontakten og henger seg opp i hjørner. Sekundærild eller våpenbytte river den ut.
 
+@ From the game folder
+nb Fra spillmappen
+
+@ From ironwail
+nb Fra ironwail
+
+@ From the 2021 re-release
+nb Fra 2021-utgaven
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+nb Automatiske demoer er slått av. Slå på Ta opp demoer automatisk under Innstillinger > Demoer for å ta opp hvert brett du spiller.
+
+@ Automatic: replaced when the slots are full
+nb Automatisk: erstattes når plassene er fulle
+
+@ Delete {}?
+nb Slette {}?
+
+@ Demos
+nb Demoer
+
+@ End of demo
+nb Slutt på demoen
+
+@ Export Video
+nb Eksporter video
+
+@ Fast forward
+nb Spol fremover
+
+@ Fast forward {}x
+nb Fremover {}x
+
+@ Indexing...
+nb Indekserer...
+
+@ K keep
+nb K behold
+
+@ Keep
+nb Behold
+
+@ Length: {}
+nb Lengde: {}
+
+@ Map: {}
+nb Brett: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+nb Ingen automatiske demoer ennå. Hvert brett du spiller, tas opp her.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+nb Ingen lagrede demoer ennå. Ta opp en med konsollkommandoen 'record <name>', eller behold en automatisk demo.
+
+@ Pause
+nb Pause
+
+@ Paused
+nb Pauset
+
+@ Play {}x
+nb Spiller av {}x
+
+@ Quake - exporting video {}%
+nb Quake - eksporterer video {} %
+
+@ Recorded: {}
+nb Tatt opp: {}
+
+@ Rewind
+nb Spol tilbake
+
+@ Rewind {}x
+nb Tilbake {}x
+
+@ Size: {} KB
+nb Størrelse: {} KB
+
+@ Skip 10 s
+nb Hopp 10 s
+
+@ Back 10 s
+nb Tilbake 10 s
+
+@ Length
+nb Lengde
+
+@ Mark in
+nb Merk start
+
+@ Mark out
+nb Merk slutt
+
+@ Next level
+nb Neste brett
+
+@ No demos match the filter. Backspace or Esc clears it.
+nb Ingen demoer passer filteret. Tilbake eller Esc tømmer det.
+
+@ Renaming an automatic demo moves it to the saved demos.
+nb En automatisk demo som får nytt navn, flyttes til de lagrede demoene.
+
+@ Restart
+nb Start på nytt
+
+@ Sort
+nb Sorter
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+nb Under en demo: A pauser, styrekorset spoler og endrer hastighet, LT og RT merker et klipp, og X eksporterer det.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+nb Mellomrom pause | Venstre/Høyre spol | Opp/Ned hastighet | PgUp/PgDn 10 s | I/O merk | E eksporter
+
+@ Speed
+nb Hastighet
+
+@ Switch List
+nb Bytt liste
+
+@ This can't be undone.
+nb Dette kan ikke angres.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+nb Under en demo: Mellomrom pauser, piltastene spoler og endrer hastighet, I og O merker et klipp, og E eksporterer det.
+
+@ Saved
+nb Lagrede
+
+@ Automatic
+nb Automatiske
+
+# Demos and video recording.
+@ Export
+nb Eksporter
+
+@ H hide
+nb H skjul
+
+@ Hide
+nb Skjul
+
+# Demos and video recording.
+@ Demo: {}
+nb Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+nb Markert klipp: {} til {} ({})
+
+@ Show controls
+nb Vis kontroller
+
+# Demos and video recording.
+@ About {} left
+nb Omtrent {} igjen
+
+@ Exporting video
+nb Eksporterer video
+
+@ Preparing...
+nb Forbereder...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ nb Bare serveren kan bruke changelevel
 @ {} renamed to {}
 nb {} har byttet navn til {}
 
-@ From the game folder
-nb Fra spillmappen
+@ Already recording video.
+nb Video tas allerede opp.
 
-@ From ironwail
-nb Fra ironwail
+@ Export cancelled.
+nb Eksport avbrutt.
 
-@ From the 2021 re-release
-nb Fra 2021-utgaven
+@ Exporting {} to video
+nb Eksporterer {} til video
+
+@ Kept demo {}
+nb Demo beholdt: {}
+
+@ Not a valid demo name.
+nb Ugyldig demonavn.
+
+@ Renamed demo to {}
+nb Demoen har fått nytt navn: {}
+
+@ No auto-demo to keep.
+nb Ingen autodemo å beholde.
+
+@ Not playing a demo.
+nb Ingen demo spilles av.
+
+@ Not recording video.
+nb Ingen video tas opp.
+
+@ Recording video to {}
+nb Tar opp video til {}
+
+@ This demo is already saved.
+nb Denne demoen er allerede lagret.
+
+@ This level's demo will be kept when it ends.
+nb Brettets demo beholdes når det er ferdig.
+
+@ Video capture is not available in this build.
+nb Videoopptak er ikke tilgjengelig i denne versjonen.
+
+@ Wrote {} ({}s)
+nb Skrev {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+nb Fant ikke ffmpeg: skrev {} PNG-bilder og en WAV til {}

@@ -100,7 +100,9 @@ impl Debris {
                 }
                 self.bodies.push(b);
                 gibs += 1;
-                cl.debris_owned[i] = true;
+                if let Some(o) = cl.debris_owned.get_mut(i) {
+                    *o = true;
+                }
                 continue;
             }
             let at_death = match set.start {
@@ -163,7 +165,9 @@ impl Debris {
                 doll,
                 gib: None,
             });
-            cl.debris_owned[i] = true;
+            if let Some(o) = cl.debris_owned.get_mut(i) {
+                    *o = true;
+                }
         }
         let (ents, mtime) = (&cl.entities, cl.mtime[0]);
         self.tracks.retain(|&i, t| ents.get(i).is_some_and(|e| e.model == t.model && e.msgtime == mtime));

@@ -1036,3 +1036,100 @@ de Eigene Raketen und Granaten verletzen dich nicht; Raketensprünge funktionier
 it I tuoi razzi e le tue granate non ti feriscono; i rocket jump funzionano comunque
 es Tus propios cohetes y granadas no te hieren; los saltos con cohete siguen funcionando
 ru Ваши ракеты и гранаты вас не ранят; рокет-джампы по-прежнему работают
+
+# Demos and video recording.
+
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+fr Une démo que vous lancez s'arrête sur sa dernière image au lieu de revenir au menu, pour pouvoir la rembobiner
+de Eine selbst gestartete Demo hält beim letzten Bild an, statt zum Menü zurückzukehren, damit du zurückspulen kannst
+it Una demo che avvii si ferma sull'ultimo fotogramma invece di tornare al menu, così puoi riavvolgerla
+es Una demo que reproduces se detiene en su último fotograma en lugar de volver al menú, para que puedas rebobinar
+ru Запущенное вами демо останавливается на последнем кадре, а не возвращается в меню, чтобы его можно было перемотать назад
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+fr Images par seconde de la vidéo ; le jeu tourne exactement à ce rythme pendant l'enregistrement
+de Bilder pro Sekunde des Videos; das Spiel läuft während der Aufnahme genau mit dieser Rate
+it Fotogrammi al secondo del video; durante la registrazione il gioco gira esattamente a questa frequenza
+es Fotogramas por segundo del vídeo; el juego funciona exactamente a este ritmo mientras graba
+ru Кадров в секунду в видео; во время записи игра идёт ровно с этой частотой
+
+@ High keeps the most detail; small file saves disk space
+fr Haute garde le plus de détails ; petit fichier économise de l'espace disque
+de Hoch behält die meisten Details; kleine Datei spart Speicherplatz
+it Alta conserva più dettagli; file piccolo risparmia spazio su disco
+es Alta conserva más detalle; archivo pequeño ahorra espacio en disco
+ru Высокое сохраняет больше деталей; маленький файл экономит место на диске
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+fr Nombre de démos automatiques conservées avant de supprimer la plus ancienne ; les démos gardées ne comptent pas
+de Wie viele automatische Demos behalten werden, bevor die älteste gelöscht wird; behaltene Demos zählen nicht
+it Quante demo automatiche tenere prima di eliminare la più vecchia; le demo conservate non contano
+es Cuántas demos automáticas se guardan antes de borrar la más antigua; las demos conservadas no cuentan
+ru Сколько автоматических демо хранится, прежде чем удаляется самое старое; сохранённые демо не считаются
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+fr Enregistre chaque niveau joué dans la liste Automatique de Menu principal > Démos ; gardez celles que vous voulez, les plus anciennes sont remplacées
+de Nimmt jedes gespielte Level in die Liste Automatisch unter Hauptmenü > Demos auf; behalte die gewünschten, die ältesten werden ersetzt
+it Registra ogni livello giocato nella lista Automatiche di Menu principale > Demo; conserva quelle che vuoi, le più vecchie vengono sostituite
+es Graba cada nivel que juegues en la lista Automáticas de Menú principal > Demos; conserva las que quieras, las más antiguas se reemplazan
+ru Записывает каждый пройденный уровень в список «Автоматические» в Главное меню > Демо; сохраняйте нужные, самые старые заменяются
+
+@ Records game sound and music into the video
+fr Enregistre les sons et la musique du jeu dans la vidéo
+de Nimmt Spielsound und Musik ins Video auf
+it Registra suoni e musica del gioco nel video
+es Graba los sonidos y la música del juego en el vídeo
+ru Записывает звуки и музыку игры в видео
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+fr Affiche la barre de lecture (temps, vitesse, chronologie) après une touche de contrôle, toujours, ou jamais
+de Zeigt die Wiedergabeleiste (Zeit, Tempo, Zeitleiste) nach einer Steuertaste, immer oder nie
+it Mostra la barra di riproduzione (tempo, velocità, timeline) dopo un tasto di controllo, sempre o mai
+es Muestra la barra de reproducción (tiempo, velocidad, línea de tiempo) tras una tecla de control, siempre o nunca
+ru Показывает панель воспроизведения (время, скорость, шкала) после клавиши управления, всегда или никогда
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+fr Format vidéo ; nécessite ffmpeg avec cet encodeur, sinon les images sont enregistrées en PNG
+de Videoformat; braucht ffmpeg mit diesem Encoder, sonst werden die Bilder als PNG gespeichert
+it Formato video; richiede ffmpeg con quell'encoder, altrimenti i fotogrammi vengono salvati come immagini PNG
+es Formato de vídeo; necesita ffmpeg con ese codificador, si no los fotogramas se guardan como imágenes PNG
+ru Формат видео; нужен ffmpeg с этим кодировщиком, иначе кадры сохраняются как изображения PNG
+
+# Demos and video recording.
+
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+fr Aucun extrait surligné : pendant la démo, faites glisser sur la chronologie ou appuyez sur I et O (LT et RT à la manette)
+de Kein Clip markiert: ziehe während der Demo über die Zeitleiste oder drücke I und O (LT und RT am Controller)
+it Nessuna clip evidenziata: durante la demo, trascina sulla timeline o premi I e O (LT e RT sul controller)
+es Ningún clip resaltado: durante la demo, arrastra sobre la línea de tiempo o pulsa I y O (LT y RT en el mando)
+ru Фрагмент не выделен: во время демо протяните по шкале или нажмите I и O (LT и RT на геймпаде)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+fr Nom du fichier vidéo ; l'extension suit le format vidéo, et un fichier du même nom est remplacé
+de Name der Videodatei; die Endung folgt dem Videoformat, eine gleichnamige Datei wird ersetzt
+it Nome del file video; l'estensione segue il formato video e un file con lo stesso nome viene sostituito
+es Nombre del archivo de vídeo; la extensión sigue el formato de vídeo y se sustituye un archivo con el mismo nombre
+ru Имя видеофайла; расширение зависит от формата видео, файл с таким же именем заменяется
+
+@ New name of the demo; if another demo has it, a number is added
+fr Nouveau nom de la démo ; si une autre démo le porte déjà, un numéro est ajouté
+de Neuer Name der Demo; trägt ihn schon eine andere Demo, wird eine Nummer angehängt
+it Nuovo nome della demo; se un'altra demo lo usa già, viene aggiunto un numero
+es Nuevo nombre de la demo; si otra demo ya lo tiene, se añade un número
+ru Новое имя демо; если оно уже занято, добавляется номер
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+fr Taille de la vidéo ; les images sont mises à l'échelle depuis la taille de la fenêtre (avec des bandes pour garder la forme), une plus grande taille n'ajoute donc aucun détail
+de Videogröße; die Bilder werden aus der Fenstergröße skaliert (mit Balken für die Form), eine größere Größe bringt also keine Details
+it Dimensione del video; i fotogrammi sono scalati dalla dimensione della finestra (con bande per mantenere la forma), quindi una dimensione maggiore non aggiunge dettagli
+es Tamaño del vídeo; los fotogramas se escalan desde el tamaño de la ventana (con bandas para mantener la forma), así que un tamaño mayor no añade detalle
+ru Размер видео; кадры масштабируются из размера окна (с полосами для сохранения пропорций), поэтому больший размер не добавляет деталей
+
+# Demos and video recording.
+
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+fr Encode sur la carte graphique (NVIDIA NVENC, AMD ou Intel via VA-API, AMF ou Quick Sync, Apple VideoToolbox) quand ffmpeg peut l'utiliser, ce qui libère le processeur ; sinon le processeur encode
+de Kodiert auf der Grafikkarte (NVIDIA NVENC, AMD oder Intel über VA-API, AMF oder Quick Sync, Apple VideoToolbox), wenn ffmpeg sie nutzen kann, und hält den Prozessor frei; sonst kodiert der Prozessor
+it Codifica sulla scheda grafica (NVIDIA NVENC, AMD o Intel tramite VA-API, AMF o Quick Sync, Apple VideoToolbox) quando ffmpeg può usarla, lasciando libero il processore; altrimenti codifica il processore
+es Codifica en la tarjeta gráfica (NVIDIA NVENC, AMD o Intel mediante VA-API, AMF o Quick Sync, Apple VideoToolbox) cuando ffmpeg puede usarla, dejando libre el procesador; si no, codifica el procesador
+ru Кодирует на видеокарте (NVIDIA NVENC, AMD или Intel через VA-API, AMF или Quick Sync, Apple VideoToolbox), если ffmpeg может её использовать, освобождая процессор; иначе кодирует процессор

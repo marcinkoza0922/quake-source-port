@@ -207,7 +207,7 @@ impl Debris {
         }
         if !set.ragdolls {
             for c in self.corpses.drain(..) {
-                cl.debris_owned[c.ent] = false;
+                release(&mut cl.debris_owned, c.ent);
             }
         }
         self.release(cl);
@@ -261,7 +261,7 @@ impl Debris {
         if live {
             self.gibbed.insert(c.ent, (c.model, None));
         } else {
-            cl.debris_owned[c.ent] = false;
+            release(&mut cl.debris_owned, c.ent);
         }
     }
 
@@ -365,7 +365,7 @@ impl Debris {
                 if live {
                     self.gibbed.insert(c.ent, (c.model, None));
                 } else {
-                    cl.debris_owned[c.ent] = false;
+                    release(&mut cl.debris_owned, c.ent);
                 }
             } else {
                 i += 1;
@@ -444,5 +444,12 @@ impl Debris {
                 ..Default::default()
             });
         }
+    }
+}
+
+/// Shows entity `ent` again; the list may be shorter after a demo seek.
+fn release(owned: &mut [bool], ent: usize) {
+    if let Some(o) = owned.get_mut(ent) {
+        *o = false;
     }
 }

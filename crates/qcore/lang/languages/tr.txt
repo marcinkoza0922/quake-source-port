@@ -1397,6 +1397,93 @@ tr Fiş yalnızca elektroniğe değil, her metal yüzeye takılır
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 tr Saniyenin her onda birinde yıldırım hasarı (standart yıldırım silahı 30 verir)
 
+# Demos and video recording.
+@ AV1 (MP4)
+tr AV1 (MP4)
+
+@ Auto-Demo Slots
+tr Otomatik demo yuvaları
+
+@ Auto-Record Demos
+tr Demoları otomatik kaydet
+
+@ Frame Rate
+tr Kare hızı
+
+@ H.264 (MP4)
+tr H.264 (MP4)
+
+@ H.265 (MP4)
+tr H.265 (MP4)
+
+@ Pause at End
+tr Sonda duraklat
+
+@ Playback Bar
+tr Oynatma çubuğu
+
+@ Quality
+tr Kalite
+
+@ Record Audio
+tr Sesi kaydet
+
+@ VP9 (WebM)
+tr VP9 (WebM)
+
+@ Video Format
+tr Video biçimi
+
+@ Video Recording
+tr Video kaydı
+
+@ ffmpeg Program
+tr ffmpeg programı
+
+@ small file
+tr küçük dosya
+
+@ unlimited
+tr sınırsız
+
+# Demos and video recording.
+@ 1080p
+tr 1080p
+
+@ 1440p
+tr 1440p
+
+@ 4K
+tr 4K
+
+@ 720p
+tr 720p
+
+@ Destination
+tr Hedef
+
+@ File Name
+tr Dosya adı
+
+@ Rename
+tr Yeniden adlandır
+
+@ Rename Demo
+tr Demoyu yeniden adlandır
+
+@ Export Highlighted Clip
+tr İşaretli klibi dışa aktar
+
+@ Export Whole Demo
+tr Tüm demoyu dışa aktar
+
+@ Same as window
+tr Pencereyle aynı
+
+# Demos and video recording.
+@ GPU Encoding
+tr GPU ile kodlama
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ tr Hangi silahların donmayı tetiklediği; yakın dövüş baltayı ve cephanes
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 tr Kendi roketleriniz ve bombalarınız size zarar vermez; roket zıplamaları yine çalışır
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+tr Oynattığınız bir demo menüye dönmek yerine son karede durur, böylece geri sarabilirsiniz
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+tr Kaydedilen videonun saniyedeki kare sayısı; kayıt sırasında oyun tam olarak bu hızda çalışır
+
+@ High keeps the most detail; small file saves disk space
+tr Yüksek en çok ayrıntıyı korur; küçük dosya disk alanından tasarruf eder
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+tr En eskisi silinmeden önce kaç otomatik demo tutulur; saklanan demolar sayılmaz
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+tr Oynadığınız her bölümü Ana menü > Demolar altındaki Otomatik listesine kaydeder; istediklerinizi saklayın, en eskiler değiştirilir
+
+@ Records game sound and music into the video
+tr Oyunun seslerini ve müziğini videoya kaydeder
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+tr Oynatma çubuğunu (süre, hız, zaman çizelgesi) bir kontrol tuşundan sonra, her zaman ya da hiçbir zaman gösterir
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+tr Video biçimi; o kodlayıcıya sahip ffmpeg gerekir, yoksa kareler PNG resmi olarak kaydedilir
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+tr İşaretli klip yok: demo oynarken zaman çizelgesi üzerinde sürükleyin ya da I ve O'ya basın (kumandada LT ve RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+tr Video dosyasının adı; uzantı video biçimine göre belirlenir ve aynı adlı dosyanın yerine yazılır
+
+@ New name of the demo; if another demo has it, a number is added
+tr Demonun yeni adı; başka bir demo bu adı kullanıyorsa sonuna numara eklenir
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+tr Video boyutu; kareler pencere boyutundan ölçeklenir (biçimi korumak için kenar boşluklarıyla), bu yüzden daha büyük boyut ayrıntı eklemez
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+tr ffmpeg kullanabildiğinde ekran kartında kodlar (NVIDIA NVENC, VA-API üzerinden AMD veya Intel, AMF veya Quick Sync, Apple VideoToolbox) ve işlemciyi boş bırakır; yoksa işlemci kodlar
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ tr Kayıt
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 tr Erişim mesafesindeki parlayan bir elektronik panele ikincil ateş, bir ucu takar; diğer uç sınırsız cephaneyle yıldırım atar. Kablo seni prize bağlar ve köşelere takılır. İkincil ateş ya da silah değiştirmek onu söker.
 
+@ From the game folder
+tr Oyun klasöründen
+
+@ From ironwail
+tr ironwail'den
+
+@ From the 2021 re-release
+tr 2021 yeniden sürümünden
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+tr Otomatik demolar kapalı. Oynadığınız her bölümü kaydetmek için Seçenekler > Demolar'da Demoları otomatik kaydet'i açın.
+
+@ Automatic: replaced when the slots are full
+tr Otomatik: yuvalar dolunca değiştirilir
+
+@ Delete {}?
+tr {} silinsin mi?
+
+@ Demos
+tr Demolar
+
+@ End of demo
+tr Demonun sonu
+
+@ Export Video
+tr Video olarak dışa aktar
+
+@ Fast forward
+tr İleri sar
+
+@ Fast forward {}x
+tr İleri {}x
+
+@ Indexing...
+tr Dizinleniyor...
+
+@ K keep
+tr K sakla
+
+@ Keep
+tr Sakla
+
+@ Length: {}
+tr Süre: {}
+
+@ Map: {}
+tr Harita: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+tr Henüz otomatik demo yok. Oynadığınız her bölüm buraya kaydedilir.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+tr Henüz kayıtlı demo yok. 'record <name>' konsol komutuyla bir tane kaydedin ya da otomatik bir demoyu saklayın.
+
+@ Pause
+tr Duraklat
+
+@ Paused
+tr Duraklatıldı
+
+@ Play {}x
+tr Oynatma {}x
+
+@ Quake - exporting video {}%
+tr Quake - video dışa aktarılıyor %{}
+
+@ Recorded: {}
+tr Kaydedildi: {}
+
+@ Rewind
+tr Geri sar
+
+@ Rewind {}x
+tr Geri {}x
+
+@ Size: {} KB
+tr Boyut: {} KB
+
+@ Skip 10 s
+tr 10 sn atla
+
+@ Back 10 s
+tr 10 sn geri
+
+@ Length
+tr Süre
+
+@ Mark in
+tr Başlangıcı işaretle
+
+@ Mark out
+tr Bitişi işaretle
+
+@ Next level
+tr Sonraki bölüm
+
+@ No demos match the filter. Backspace or Esc clears it.
+tr Filtreye uyan demo yok. Geri tuşu veya Esc filtreyi temizler.
+
+@ Renaming an automatic demo moves it to the saved demos.
+tr Otomatik bir demoyu yeniden adlandırmak onu kayıtlı demolara taşır.
+
+@ Restart
+tr Baştan
+
+@ Sort
+tr Sırala
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+tr Demo oynarken: A duraklatır, yön tuşları sarar ve hızı değiştirir, LT ve RT bir klibi işaretler, X onu dışa aktarır.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+tr Boşluk duraklat | Sol/Sağ sar | Yukarı/Aşağı hız | PgUp/PgDn 10 sn | I/O işaret | E dışa aktar
+
+@ Speed
+tr Hız
+
+@ Switch List
+tr Listeyi değiştir
+
+@ This can't be undone.
+tr Bu işlem geri alınamaz.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+tr Demo oynarken: Boşluk duraklatır, oklar sarar ve hızı değiştirir, I ve O bir klibi işaretler, E onu dışa aktarır.
+
+@ Saved
+tr Kayıtlı
+
+@ Automatic
+tr Otomatik
+
+# Demos and video recording.
+@ Export
+tr Dışa aktar
+
+@ H hide
+tr H gizle
+
+@ Hide
+tr Gizle
+
+# Demos and video recording.
+@ Demo: {}
+tr Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+tr İşaretli klip: {} – {} ({})
+
+@ Show controls
+tr Kontrolleri göster
+
+# Demos and video recording.
+@ About {} left
+tr Yaklaşık {} kaldı
+
+@ Exporting video
+tr Video dışa aktarılıyor
+
+@ Preparing...
+tr Hazırlanıyor...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ tr Yalnızca sunucu changelevel kullanabilir
 @ {} renamed to {}
 tr {} adını {} olarak değiştirdi
 
-@ From the game folder
-tr Oyun klasöründen
+@ Already recording video.
+tr Zaten video kaydediliyor.
 
-@ From ironwail
-tr ironwail'den
+@ Export cancelled.
+tr Dışa aktarma iptal edildi.
 
-@ From the 2021 re-release
-tr 2021 yeniden sürümünden
+@ Exporting {} to video
+tr {} videoya aktarılıyor
+
+@ Kept demo {}
+tr Demo saklandı: {}
+
+@ Not a valid demo name.
+tr Geçersiz demo adı.
+
+@ Renamed demo to {}
+tr Demonun adı {} olarak değiştirildi
+
+@ No auto-demo to keep.
+tr Saklanacak otomatik demo yok.
+
+@ Not playing a demo.
+tr Oynatılan demo yok.
+
+@ Not recording video.
+tr Video kaydedilmiyor.
+
+@ Recording video to {}
+tr Video {} konumuna kaydediliyor
+
+@ This demo is already saved.
+tr Bu demo zaten kayıtlı.
+
+@ This level's demo will be kept when it ends.
+tr Bu bölümün demosu bölüm bitince saklanacak.
+
+@ Video capture is not available in this build.
+tr Video kaydı bu sürümde kullanılamıyor.
+
+@ Wrote {} ({}s)
+tr {} yazıldı ({} sn)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+tr ffmpeg bulunamadı: {} PNG karesi ve bir WAV {} konumuna yazıldı

@@ -1397,6 +1397,93 @@ ja 電子機器だけでなく、あらゆる金属面にプラグを差し込�
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 ja 0.1秒ごとの稲妻ダメージ（通常のライトニングガンは30）
 
+# Demos and video recording.
+@ AV1 (MP4)
+ja AV1 (MP4)
+
+@ Auto-Demo Slots
+ja 自動デモの枠数
+
+@ Auto-Record Demos
+ja デモを自動録画
+
+@ Frame Rate
+ja フレームレート
+
+@ H.264 (MP4)
+ja H.264 (MP4)
+
+@ H.265 (MP4)
+ja H.265 (MP4)
+
+@ Pause at End
+ja 最後で一時停止
+
+@ Playback Bar
+ja 再生バー
+
+@ Quality
+ja 品質
+
+@ Record Audio
+ja 音声を録音
+
+@ VP9 (WebM)
+ja VP9 (WebM)
+
+@ Video Format
+ja ビデオ形式
+
+@ Video Recording
+ja ビデオ録画
+
+@ ffmpeg Program
+ja ffmpeg プログラム
+
+@ small file
+ja 小さいファイル
+
+@ unlimited
+ja 無制限
+
+# Demos and video recording.
+@ 1080p
+ja 1080p
+
+@ 1440p
+ja 1440p
+
+@ 4K
+ja 4K
+
+@ 720p
+ja 720p
+
+@ Destination
+ja 保存先
+
+@ File Name
+ja ファイル名
+
+@ Rename
+ja 名前を変更
+
+@ Rename Demo
+ja デモの名前を変更
+
+@ Export Highlighted Clip
+ja ハイライトしたクリップを書き出し
+
+@ Export Whole Demo
+ja デモ全体を書き出し
+
+@ Same as window
+ja ウィンドウと同じ
+
+# Demos and video recording.
+@ GPU Encoding
+ja GPU エンコード
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ ja 停止を発生させる武器。近接には斧と、弾薬を使わず至�
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 ja 自分のロケットやグレネードでダメージを受けません。ロケットジャンプは可能です
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+ja 自分で再生したデモはメニューに戻らず最後のフレームで止まり、巻き戻せます
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+ja 録画ビデオの毎秒フレーム数。録画中はゲームがちょうどこの速さで動きます
+
+@ High keeps the most detail; small file saves disk space
+ja 高は最も細部を残し、小さいファイルはディスク容量を節約します
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+ja 最も古いものを削除するまでに残す自動デモの数。保存したデモは数えません
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+ja プレイしたすべてのレベルをメインメニュー > デモの自動リストに録画します。残したいものを保存すると、古いものから置き換えられます
+
+@ Records game sound and music into the video
+ja ゲームの効果音と音楽をビデオに録音します
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+ja 再生バー（時間、速度、タイムライン）を操作キーの後に表示するか、常に表示するか、表示しないかを選びます
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+ja ビデオ形式。そのエンコーダー付きの ffmpeg が必要で、ない場合はフレームを PNG 画像として保存します
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+ja クリップがハイライトされていません。デモ再生中にタイムラインをドラッグするか、I と O を押してください（コントローラーでは LT と RT）
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+ja 動画ファイルの名前。拡張子は動画形式に合わせて決まり、同じ名前のファイルは置き換えられます
+
+@ New name of the demo; if another demo has it, a number is added
+ja デモの新しい名前。ほかのデモが同じ名前なら番号が付きます
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+ja ビデオのサイズ。フレームはウィンドウのサイズから拡大縮小され（形を保つために黒帯が付きます）、大きくしても細部は増えません
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+ja ffmpeg が使える場合はグラフィックカード（NVIDIA NVENC、AMD や Intel の VA-API、AMF、Quick Sync、Apple VideoToolbox）でエンコードし、CPU を空けます。使えない場合は CPU でエンコードします
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ ja セーブ
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 ja 手の届く範囲で光っている電子パネルにサブ射撃を当てると片方の端を差し込みます。もう片方の端は弾数無制限で稲妻を放ちます。ケーブルはあなたを差し込み口につなぎ止め、角に引っ掛かります。サブ射撃か武器の切り替えで引き抜きます。
 
+@ From the game folder
+ja ゲームフォルダーから
+
+@ From ironwail
+ja ironwailから
+
+@ From the 2021 re-release
+ja 2021年リマスター版から
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+ja 自動デモはオフです。オプション > デモで「デモを自動録画」をオンにすると、プレイしたすべてのレベルを録画します。
+
+@ Automatic: replaced when the slots are full
+ja 自動：枠がいっぱいになると置き換えられます
+
+@ Delete {}?
+ja {}を削除しますか？
+
+@ Demos
+ja デモ
+
+@ End of demo
+ja デモの終わり
+
+@ Export Video
+ja ビデオに書き出し
+
+@ Fast forward
+ja 早送り
+
+@ Fast forward {}x
+ja 早送り {}x
+
+@ Indexing...
+ja 索引作成中...
+
+@ K keep
+ja K 保存
+
+@ Keep
+ja 保存
+
+@ Length: {}
+ja 長さ：{}
+
+@ Map: {}
+ja マップ：{}
+
+@ No automatic demos yet. Each level you play is recorded here.
+ja 自動デモはまだありません。プレイしたレベルはすべてここに録画されます。
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+ja 保存したデモはまだありません。コンソールコマンド 'record <name>' で録画するか、自動デモを保存してください。
+
+@ Pause
+ja 一時停止
+
+@ Paused
+ja 一時停止中
+
+@ Play {}x
+ja 再生 {}x
+
+@ Quake - exporting video {}%
+ja Quake - ビデオを書き出し中 {}%
+
+@ Recorded: {}
+ja 録画日時：{}
+
+@ Rewind
+ja 巻き戻し
+
+@ Rewind {}x
+ja 巻き戻し {}x
+
+@ Size: {} KB
+ja サイズ：{} KB
+
+@ Skip 10 s
+ja 10秒スキップ
+
+@ Back 10 s
+ja 10秒戻る
+
+@ Length
+ja 長さ
+
+@ Mark in
+ja 開始点
+
+@ Mark out
+ja 終了点
+
+@ Next level
+ja 次のレベル
+
+@ No demos match the filter. Backspace or Esc clears it.
+ja フィルターに合うデモはありません。Backspace か Esc で消去します。
+
+@ Renaming an automatic demo moves it to the saved demos.
+ja 自動デモの名前を変えると保存済みデモに移動します。
+
+@ Restart
+ja 最初から
+
+@ Sort
+ja 並べ替え
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+ja デモ再生中：A で一時停止、十字キーでスクラブと速度変更、LT と RT でクリップを指定し、X で書き出します。
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+ja Space 一時停止 | ←/→ スクラブ | ↑/↓ 速度 | PgUp/PgDn 10秒 | I/O マーク | E 書き出し
+
+@ Speed
+ja 速度
+
+@ Switch List
+ja リストを切り替え
+
+@ This can't be undone.
+ja 元に戻せません。
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+ja デモ再生中：Space で一時停止、矢印キーでスクラブと速度変更、I と O でクリップを指定し、E で書き出します。
+
+@ Saved
+ja 保存済み
+
+@ Automatic
+ja 自動
+
+# Demos and video recording.
+@ Export
+ja 書き出し
+
+@ H hide
+ja H 隠す
+
+@ Hide
+ja 隠す
+
+# Demos and video recording.
+@ Demo: {}
+ja デモ：{}
+
+@ Highlighted clip: {} to {} ({})
+ja ハイライトしたクリップ：{}〜{}（{}）
+
+@ Show controls
+ja 操作バーを表示
+
+# Demos and video recording.
+@ About {} left
+ja 残り約 {}
+
+@ Exporting video
+ja ビデオを書き出し中
+
+@ Preparing...
+ja 準備中...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ ja changelevelはサーバーのみ使用できます
 @ {} renamed to {}
 ja {}が{}に改名しました
 
-@ From the game folder
-ja ゲームフォルダーから
+@ Already recording video.
+ja すでにビデオを録画中です。
 
-@ From ironwail
-ja ironwailから
+@ Export cancelled.
+ja 書き出しを中止しました。
 
-@ From the 2021 re-release
-ja 2021年リマスター版から
+@ Exporting {} to video
+ja {}をビデオに書き出し中
+
+@ Kept demo {}
+ja デモを保存しました：{}
+
+@ Not a valid demo name.
+ja デモ名が正しくありません。
+
+@ Renamed demo to {}
+ja デモの名前を {} に変更しました
+
+@ No auto-demo to keep.
+ja 保存できる自動デモがありません。
+
+@ Not playing a demo.
+ja デモを再生していません。
+
+@ Not recording video.
+ja ビデオを録画していません。
+
+@ Recording video to {}
+ja ビデオを{}に録画中
+
+@ This demo is already saved.
+ja このデモはすでに保存されています。
+
+@ This level's demo will be kept when it ends.
+ja このレベルのデモは終了時に保存されます。
+
+@ Video capture is not available in this build.
+ja このビルドではビデオ録画は使えません。
+
+@ Wrote {} ({}s)
+ja {}を書き出しました（{}秒）
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+ja ffmpeg が見つかりません：{}枚の PNG フレームと WAV を{}に書き出しました

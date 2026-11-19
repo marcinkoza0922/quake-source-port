@@ -27,7 +27,7 @@ const OFFICIAL_FG: [f32; 4] = [0.62, 0.80, 0.95, 1.0];
 const TOP: f32 = 64.0;
 const ROWS: usize = 27;
 const BAR_Y: f32 = 46.0;
-const BAR_H: f32 = 12.0;
+pub(crate) const BAR_H: f32 = 12.0;
 /// Mod list column and info panel (menu units, 640x360).
 const LIST: (f32, f32) = (40.0, 264.0);
 const INFO: (f32, f32) = (312.0, 288.0);
@@ -628,19 +628,24 @@ impl ModMenu {
 }
 
 fn draw_filter_bar(c: &mut Canvas, x: f32, w: f32, sort_w: f32, filter: &str, sort_label: &str) {
+    filter_bar_at(c, x, BAR_Y, w, sort_w, filter, sort_label);
+}
+
+/// The type-to-filter box and the sort button at its right, `BAR_H` tall at `y`.
+pub(crate) fn filter_bar_at(c: &mut Canvas, x: f32, y: f32, w: f32, sort_w: f32, filter: &str, sort_label: &str) {
     let fw = w - sort_w - 4.0;
-    c.fill(x, BAR_Y, fw, BAR_H, [0.0, 0.0, 0.0, 0.8]);
-    c.frame(x, BAR_Y, fw, BAR_H, BORDER);
+    c.fill(x, y, fw, BAR_H, [0.0, 0.0, 0.0, 0.8]);
+    c.frame(x, y, fw, BAR_H, BORDER);
     let cols = ((fw - 12.0) / 6.0) as usize;
     if filter.is_empty() {
-        c.text(x + 6.0, BAR_Y + 2.0, "Type to filter...", TXT, MUTED);
+        c.text(x + 6.0, y + 2.0, "Type to filter...", TXT, MUTED);
     } else {
-        txt(c, x + 6.0, BAR_Y + 2.0, &clip(&format!("{filter}_"), cols));
+        txt(c, x + 6.0, y + 2.0, &clip(&format!("{filter}_"), cols));
     }
     let sx = x + w - sort_w;
-    c.fill(sx, BAR_Y, sort_w, BAR_H, [0.08, 0.08, 0.08, 0.9]);
-    c.frame(sx, BAR_Y, sort_w, BAR_H, BORDER);
-    c.text_center(sx + sort_w * 0.5, BAR_Y + 2.0, &qcore::tr!("Sort: {}", qcore::lang::tr(sort_label)), TXT, GOLD_FG);
+    c.fill(sx, y, sort_w, BAR_H, [0.08, 0.08, 0.08, 0.9]);
+    c.frame(sx, y, sort_w, BAR_H, BORDER);
+    c.text_center(sx + sort_w * 0.5, y + 2.0, &qcore::tr!("Sort: {}", qcore::lang::tr(sort_label)), TXT, GOLD_FG);
 }
 
 const OFFICIAL_EXPANSIONS: &[&str] = &["hipnotic", "rogue", "dopa", "mg1", "mg3"];
@@ -662,7 +667,7 @@ fn mod_fallback_key(m: &ModInfo) -> (u8, usize, String) {
 }
 
 /// Case-insensitive fuzzy subsequence score; `None` if `query` does not match.
-fn fuzzy_score(query: &str, target: &str) -> Option<i32> {
+pub(crate) fn fuzzy_score(query: &str, target: &str) -> Option<i32> {
     if query.is_empty() {
         return Some(0);
     }
@@ -711,7 +716,7 @@ fn center_gold(c: &mut Canvas, y: f32, s: &str) {
 
 /// At most `n` columns (wide CJK characters count two), with a trailing
 /// `~` when cut; control characters are dropped.
-fn clip(s: &str, n: usize) -> String {
+pub(crate) fn clip(s: &str, n: usize) -> String {
     let s: String = s.chars().filter(|c| !c.is_control()).collect();
     if n == 0 || qcore::lang::wrap::cols(&s) <= n {
         return s;

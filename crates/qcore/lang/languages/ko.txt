@@ -1397,6 +1397,93 @@ ko 전자 장비뿐 아니라 모든 금속 표면에 플러그를 꽂을 수 �
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 ko 0.1초마다 주는 번개 피해(기본 번개총은 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+ko AV1 (MP4)
+
+@ Auto-Demo Slots
+ko 자동 데모 슬롯
+
+@ Auto-Record Demos
+ko 데모 자동 녹화
+
+@ Frame Rate
+ko 프레임 속도
+
+@ H.264 (MP4)
+ko H.264 (MP4)
+
+@ H.265 (MP4)
+ko H.265 (MP4)
+
+@ Pause at End
+ko 끝에서 일시 정지
+
+@ Playback Bar
+ko 재생 막대
+
+@ Quality
+ko 품질
+
+@ Record Audio
+ko 소리 녹음
+
+@ VP9 (WebM)
+ko VP9 (WebM)
+
+@ Video Format
+ko 비디오 형식
+
+@ Video Recording
+ko 비디오 녹화
+
+@ ffmpeg Program
+ko ffmpeg 프로그램
+
+@ small file
+ko 작은 파일
+
+@ unlimited
+ko 무제한
+
+# Demos and video recording.
+@ 1080p
+ko 1080p
+
+@ 1440p
+ko 1440p
+
+@ 4K
+ko 4K
+
+@ 720p
+ko 720p
+
+@ Destination
+ko 저장 위치
+
+@ File Name
+ko 파일 이름
+
+@ Rename
+ko 이름 바꾸기
+
+@ Rename Demo
+ko 데모 이름 바꾸기
+
+@ Export Highlighted Clip
+ko 강조한 클립 내보내기
+
+@ Export Whole Demo
+ko 데모 전체 내보내기
+
+@ Same as window
+ko 창과 같게
+
+# Demos and video recording.
+@ GPU Encoding
+ko GPU 인코딩
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ ko 정지를 일으키는 무기입니다. 근접은 도끼와, 탄약 없이 �
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 ko 자신의 로켓과 유탄에 다치지 않습니다. 로켓 점프는 여전히 가능합니다
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+ko 직접 재생한 데모는 메뉴로 돌아가지 않고 마지막 프레임에서 멈춰서 되감을 수 있습니다
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+ko 녹화 비디오의 초당 프레임 수입니다. 녹화하는 동안 게임이 정확히 이 속도로 진행됩니다
+
+@ High keeps the most detail; small file saves disk space
+ko 높음은 디테일을 가장 많이 남기고, 작은 파일은 디스크 공간을 아낍니다
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+ko 가장 오래된 것을 지우기 전에 보관할 자동 데모 수입니다. 보관한 데모는 세지 않습니다
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+ko 플레이하는 모든 레벨을 메인 메뉴 > 데모의 자동 목록에 녹화합니다. 원하는 것은 보관하고, 가장 오래된 것부터 교체됩니다
+
+@ Records game sound and music into the video
+ko 게임 효과음과 음악을 비디오에 녹음합니다
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+ko 조작 키를 누른 뒤, 항상, 또는 표시 안 함 중에서 재생 막대(시간, 속도, 타임라인) 표시 방식을 고릅니다
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+ko 비디오 형식입니다. 해당 인코더가 있는 ffmpeg가 필요하며, 없으면 프레임을 PNG 이미지로 저장합니다
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+ko 강조한 클립이 없습니다. 데모 재생 중에 타임라인을 드래그하거나 I와 O를 누르세요 (컨트롤러에서는 LT와 RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+ko 동영상 파일 이름입니다. 확장자는 동영상 형식을 따르며 같은 이름의 파일은 대체됩니다
+
+@ New name of the demo; if another demo has it, a number is added
+ko 데모의 새 이름입니다. 다른 데모가 이미 사용 중이면 번호가 붙습니다
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+ko 비디오 크기입니다. 프레임은 창 크기에서 확대·축소되므로(모양을 유지하도록 여백이 생김) 크게 해도 디테일이 늘지 않습니다
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+ko ffmpeg가 사용할 수 있으면 그래픽 카드(NVIDIA NVENC, VA-API를 통한 AMD나 Intel, AMF, Quick Sync, Apple VideoToolbox)로 인코딩해 프로세서를 비워 둡니다. 아니면 프로세서가 인코딩합니다
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ ko 수동 저장
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 ko 손이 닿는 거리의 빛나는 전자 패널에 보조 사격을 하면 한쪽 끝을 꽂습니다. 다른 쪽 끝은 무제한 탄약으로 번개를 쏩니다. 케이블은 당신을 콘센트에 묶어 두고 모서리에 걸립니다. 보조 사격이나 무기 교체로 뽑습니다.
 
+@ From the game folder
+ko 게임 폴더에서
+
+@ From ironwail
+ko ironwail에서
+
+@ From the 2021 re-release
+ko 2021 리마스터에서
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+ko 자동 데모가 꺼져 있습니다. 옵션 > 데모에서 데모 자동 녹화를 켜면 플레이하는 모든 레벨을 녹화합니다.
+
+@ Automatic: replaced when the slots are full
+ko 자동: 슬롯이 가득 차면 교체됩니다
+
+@ Delete {}?
+ko {}을(를) 삭제할까요?
+
+@ Demos
+ko 데모
+
+@ End of demo
+ko 데모 끝
+
+@ Export Video
+ko 비디오로 내보내기
+
+@ Fast forward
+ko 빨리 감기
+
+@ Fast forward {}x
+ko 빨리 감기 {}x
+
+@ Indexing...
+ko 색인 생성 중...
+
+@ K keep
+ko K 보관
+
+@ Keep
+ko 보관
+
+@ Length: {}
+ko 길이: {}
+
+@ Map: {}
+ko 맵: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+ko 아직 자동 데모가 없습니다. 플레이하는 모든 레벨이 여기에 녹화됩니다.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+ko 아직 저장한 데모가 없습니다. 콘솔 명령 'record <name>'으로 녹화하거나 자동 데모를 보관하세요.
+
+@ Pause
+ko 일시 정지
+
+@ Paused
+ko 일시 정지됨
+
+@ Play {}x
+ko 재생 {}x
+
+@ Quake - exporting video {}%
+ko Quake - 비디오 내보내는 중 {}%
+
+@ Recorded: {}
+ko 녹화: {}
+
+@ Rewind
+ko 되감기
+
+@ Rewind {}x
+ko 되감기 {}x
+
+@ Size: {} KB
+ko 크기: {} KB
+
+@ Skip 10 s
+ko 10초 건너뛰기
+
+@ Back 10 s
+ko 10초 뒤로
+
+@ Length
+ko 길이
+
+@ Mark in
+ko 시작 지점
+
+@ Mark out
+ko 끝 지점
+
+@ Next level
+ko 다음 레벨
+
+@ No demos match the filter. Backspace or Esc clears it.
+ko 필터와 일치하는 데모가 없습니다. Backspace나 Esc로 지웁니다.
+
+@ Renaming an automatic demo moves it to the saved demos.
+ko 자동 데모의 이름을 바꾸면 저장된 데모로 옮겨집니다.
+
+@ Restart
+ko 처음부터
+
+@ Sort
+ko 정렬
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+ko 데모 재생 중: A로 일시 정지, 방향 패드로 탐색과 속도 변경, LT와 RT로 클립 구간을 표시하고 X로 내보냅니다.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+ko Space 일시 정지 | ←/→ 탐색 | ↑/↓ 속도 | PgUp/PgDn 10초 | I/O 표시 | E 내보내기
+
+@ Speed
+ko 속도
+
+@ Switch List
+ko 목록 전환
+
+@ This can't be undone.
+ko 되돌릴 수 없습니다.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+ko 데모 재생 중: Space로 일시 정지, 화살표로 탐색과 속도 변경, I와 O로 클립 구간을 표시하고 E로 내보냅니다.
+
+@ Saved
+ko 저장됨
+
+@ Automatic
+ko 자동
+
+# Demos and video recording.
+@ Export
+ko 내보내기
+
+@ H hide
+ko H 숨기기
+
+@ Hide
+ko 숨기기
+
+# Demos and video recording.
+@ Demo: {}
+ko 데모: {}
+
+@ Highlighted clip: {} to {} ({})
+ko 강조한 클립: {}~{} ({})
+
+@ Show controls
+ko 조작 막대 표시
+
+# Demos and video recording.
+@ About {} left
+ko 약 {} 남음
+
+@ Exporting video
+ko 비디오 내보내는 중
+
+@ Preparing...
+ko 준비 중...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ ko changelevel은 서버만 할 수 있습니다
 @ {} renamed to {}
 ko {}의 이름이 {}(으)로 바뀌었습니다
 
-@ From the game folder
-ko 게임 폴더에서
+@ Already recording video.
+ko 이미 비디오를 녹화하고 있습니다.
 
-@ From ironwail
-ko ironwail에서
+@ Export cancelled.
+ko 내보내기를 취소했습니다.
 
-@ From the 2021 re-release
-ko 2021 리마스터에서
+@ Exporting {} to video
+ko {}을(를) 비디오로 내보내는 중
+
+@ Kept demo {}
+ko 데모 보관됨: {}
+
+@ Not a valid demo name.
+ko 올바른 데모 이름이 아닙니다.
+
+@ Renamed demo to {}
+ko 데모 이름을 {}(으)로 바꿨습니다
+
+@ No auto-demo to keep.
+ko 보관할 자동 데모가 없습니다.
+
+@ Not playing a demo.
+ko 재생 중인 데모가 없습니다.
+
+@ Not recording video.
+ko 녹화 중인 비디오가 없습니다.
+
+@ Recording video to {}
+ko {}에 비디오 녹화 중
+
+@ This demo is already saved.
+ko 이 데모는 이미 저장되어 있습니다.
+
+@ This level's demo will be kept when it ends.
+ko 이 레벨의 데모는 레벨이 끝나면 보관됩니다.
+
+@ Video capture is not available in this build.
+ko 이 빌드에서는 비디오 녹화를 사용할 수 없습니다.
+
+@ Wrote {} ({}s)
+ko {} 저장됨 ({}초)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+ko ffmpeg를 찾을 수 없음: PNG 프레임 {}장과 WAV를 {}에 저장했습니다

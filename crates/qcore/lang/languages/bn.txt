@@ -1397,6 +1397,93 @@ bn শুধু ইলেকট্রনিক্স নয়, যেকোন�
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 bn প্রতি এক-দশমাংশ সেকেন্ডে বজ্রের ক্ষতি (সাধারণ লাইটনিং গান 30 দেয়)
 
+# Demos and video recording.
+@ AV1 (MP4)
+bn AV1 (MP4)
+
+@ Auto-Demo Slots
+bn স্বয়ংক্রিয় ডেমোর স্লট
+
+@ Auto-Record Demos
+bn ডেমো স্বয়ংক্রিয়ভাবে রেকর্ড করুন
+
+@ Frame Rate
+bn ফ্রেম রেট
+
+@ H.264 (MP4)
+bn H.264 (MP4)
+
+@ H.265 (MP4)
+bn H.265 (MP4)
+
+@ Pause at End
+bn শেষে বিরতি
+
+@ Playback Bar
+bn প্লেব্যাক বার
+
+@ Quality
+bn মান
+
+@ Record Audio
+bn শব্দ রেকর্ড করুন
+
+@ VP9 (WebM)
+bn VP9 (WebM)
+
+@ Video Format
+bn ভিডিও ফরম্যাট
+
+@ Video Recording
+bn ভিডিও রেকর্ডিং
+
+@ ffmpeg Program
+bn ffmpeg প্রোগ্রাম
+
+@ small file
+bn ছোট ফাইল
+
+@ unlimited
+bn সীমাহীন
+
+# Demos and video recording.
+@ 1080p
+bn 1080p
+
+@ 1440p
+bn 1440p
+
+@ 4K
+bn 4K
+
+@ 720p
+bn 720p
+
+@ Destination
+bn গন্তব্য
+
+@ File Name
+bn ফাইলের নাম
+
+@ Rename
+bn নাম বদলান
+
+@ Rename Demo
+bn ডেমোর নাম বদলান
+
+@ Export Highlighted Clip
+bn চিহ্নিত ক্লিপ রপ্তানি করুন
+
+@ Export Whole Demo
+bn পুরো ডেমো রপ্তানি করুন
+
+@ Same as window
+bn উইন্ডোর মতো
+
+# Demos and video recording.
+@ GPU Encoding
+bn GPU এনকোডিং
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ bn কোন অস্ত্র থামা ঘটায়; হাতাহা
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 bn আপনার নিজের রকেট ও গ্রেনেড আপনাকে আঘাত করে না; রকেট জাম্প তবুও কাজ করে
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+bn আপনার চালানো ডেমো মেনুতে ফেরার বদলে শেষ ফ্রেমে থেমে যায়, যাতে আপনি পিছিয়ে নিতে পারেন
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+bn ভিডিওর প্রতি সেকেন্ডে ফ্রেম; রেকর্ডিংয়ের সময় গেম ঠিক এই হারে চলে
+
+@ High keeps the most detail; small file saves disk space
+bn উচ্চ সবচেয়ে বেশি খুঁটিনাটি রাখে; ছোট ফাইল ডিস্কের জায়গা বাঁচায়
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+bn সবচেয়ে পুরোনোটি মোছার আগে কতগুলো স্বয়ংক্রিয় ডেমো রাখা হয়; রেখে দেওয়া ডেমো গোনা হয় না
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+bn আপনার খেলা প্রতিটি লেভেল মূল মেনু > ডেমো-র স্বয়ংক্রিয় তালিকায় রেকর্ড করে; যেগুলো চান রাখুন, সবচেয়ে পুরোনোগুলো বদলে যায়
+
+@ Records game sound and music into the video
+bn গেমের শব্দ আর সংগীত ভিডিওতে রেকর্ড করে
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+bn প্লেব্যাক বার (সময়, গতি, টাইমলাইন) কোনো নিয়ন্ত্রণ কী-র পরে, সবসময়, বা কখনোই দেখায় না
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+bn ভিডিও ফরম্যাট; সেই এনকোডারসহ ffmpeg লাগে, না হলে ফ্রেমগুলো PNG ছবি হিসেবে সংরক্ষিত হয়
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+bn কোনো ক্লিপ চিহ্নিত নেই: ডেমো চলার সময় টাইমলাইনের ওপর টানুন বা I ও O চাপুন (কন্ট্রোলারে LT ও RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+bn ভিডিও ফাইলের নাম; এক্সটেনশন ভিডিও ফরম্যাট অনুযায়ী হয়, আর একই নামের ফাইল প্রতিস্থাপিত হয়
+
+@ New name of the demo; if another demo has it, a number is added
+bn ডেমোর নতুন নাম; অন্য কোনো ডেমোর এই নাম থাকলে একটি সংখ্যা যোগ হয়
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+bn ভিডিওর আকার; ফ্রেম উইন্ডোর আকার থেকে বড় করা হয় (আকৃতি রাখতে পাশে ফিতা দিয়ে), তাই বড় আকারে খুঁটিনাটি বাড়ে না
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+bn ffmpeg ব্যবহার করতে পারলে গ্রাফিক্স কার্ডে এনকোড করে (NVIDIA NVENC, VA-API দিয়ে AMD বা Intel, AMF বা Quick Sync, Apple VideoToolbox) এবং প্রসেসরকে মুক্ত রাখে; না পারলে প্রসেসর এনকোড করে
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ bn সেভ
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 bn নাগালের মধ্যে জ্বলজ্বলে ইলেকট্রনিক প্যানেলে বিকল্প ফায়ার একটি প্রান্ত লাগিয়ে দেয়; তারপর অন্য প্রান্ত সীমাহীন গোলাবারুদে বজ্র ছোড়ে। কেবল আপনাকে সকেটের সাথে বেঁধে রাখে এবং কোণে আটকে যায়। বিকল্প ফায়ার বা অস্ত্র বদলালে এটি খুলে যায়।
 
+@ From the game folder
+bn গেম ফোল্ডার থেকে
+
+@ From ironwail
+bn ironwail থেকে
+
+@ From the 2021 re-release
+bn 2021 রি-রিলিজ থেকে
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+bn স্বয়ংক্রিয় ডেমো বন্ধ আছে। খেলা প্রতিটি লেভেল রেকর্ড করতে অপশন > ডেমো-তে ডেমো স্বয়ংক্রিয়ভাবে রেকর্ড করুন চালু করুন।
+
+@ Automatic: replaced when the slots are full
+bn স্বয়ংক্রিয়: স্লট ভরে গেলে বদলে যায়
+
+@ Delete {}?
+bn {} মুছবেন?
+
+@ Demos
+bn ডেমো
+
+@ End of demo
+bn ডেমোর শেষ
+
+@ Export Video
+bn ভিডিও রপ্তানি
+
+@ Fast forward
+bn দ্রুত সামনে
+
+@ Fast forward {}x
+bn সামনে {}x
+
+@ Indexing...
+bn সূচি তৈরি হচ্ছে...
+
+@ K keep
+bn K রাখুন
+
+@ Keep
+bn রাখুন
+
+@ Length: {}
+bn দৈর্ঘ্য: {}
+
+@ Map: {}
+bn ম্যাপ: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+bn এখনও কোনো স্বয়ংক্রিয় ডেমো নেই। আপনার খেলা প্রতিটি লেভেল এখানে রেকর্ড হয়।
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+bn এখনও কোনো সংরক্ষিত ডেমো নেই। কনসোল কমান্ড 'record <name>' দিয়ে একটি রেকর্ড করুন, অথবা একটি স্বয়ংক্রিয় ডেমো রাখুন।
+
+@ Pause
+bn বিরতি
+
+@ Paused
+bn বিরতিতে
+
+@ Play {}x
+bn চলছে {}x
+
+@ Quake - exporting video {}%
+bn Quake - ভিডিও রপ্তানি হচ্ছে {}%
+
+@ Recorded: {}
+bn রেকর্ড হয়েছে: {}
+
+@ Rewind
+bn পিছিয়ে নিন
+
+@ Rewind {}x
+bn পিছনে {}x
+
+@ Size: {} KB
+bn আকার: {} KB
+
+@ Skip 10 s
+bn 10 সে. এড়িয়ে যান
+
+@ Back 10 s
+bn 10 সে. পিছনে
+
+@ Length
+bn দৈর্ঘ্য
+
+@ Mark in
+bn শুরু চিহ্নিত করুন
+
+@ Mark out
+bn শেষ চিহ্নিত করুন
+
+@ Next level
+bn পরের লেভেল
+
+@ No demos match the filter. Backspace or Esc clears it.
+bn ফিল্টারের সাথে কোনো ডেমো মেলে না। Backspace বা Esc এটি মুছে দেয়।
+
+@ Renaming an automatic demo moves it to the saved demos.
+bn স্বয়ংক্রিয় ডেমোর নাম বদলালে সেটি সংরক্ষিত ডেমোতে চলে যায়।
+
+@ Restart
+bn শুরু থেকে
+
+@ Sort
+bn সাজান
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+bn ডেমো চলার সময়: A বিরতি দেয়, ডি-প্যাড সরায় ও গতি বদলায়, LT আর RT একটি ক্লিপ চিহ্নিত করে এবং X সেটি রপ্তানি করে।
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+bn Space বিরতি | বাঁ/ডান সরান | উপর/নিচ গতি | PgUp/PgDn 10 সে. | I/O চিহ্ন | E রপ্তানি
+
+@ Speed
+bn গতি
+
+@ Switch List
+bn তালিকা বদলান
+
+@ This can't be undone.
+bn এটি আর ফেরানো যাবে না।
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+bn ডেমো চলার সময়: Space বিরতি দেয়, তীর সরায় ও গতি বদলায়, I আর O একটি ক্লিপ চিহ্নিত করে এবং E সেটি রপ্তানি করে।
+
+@ Saved
+bn সংরক্ষিত
+
+@ Automatic
+bn স্বয়ংক্রিয়
+
+# Demos and video recording.
+@ Export
+bn রপ্তানি
+
+@ H hide
+bn H লুকান
+
+@ Hide
+bn লুকান
+
+# Demos and video recording.
+@ Demo: {}
+bn ডেমো: {}
+
+@ Highlighted clip: {} to {} ({})
+bn চিহ্নিত ক্লিপ: {} থেকে {} ({})
+
+@ Show controls
+bn নিয়ন্ত্রণ দেখান
+
+# Demos and video recording.
+@ About {} left
+bn প্রায় {} বাকি
+
+@ Exporting video
+bn ভিডিও রপ্তানি হচ্ছে
+
+@ Preparing...
+bn প্রস্তুত হচ্ছে...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ bn শুধু সার্ভার changelevel করতে পারে
 @ {} renamed to {}
 bn {} এর নতুন নাম {}
 
-@ From the game folder
-bn গেম ফোল্ডার থেকে
+@ Already recording video.
+bn ভিডিও আগে থেকেই রেকর্ড হচ্ছে।
 
-@ From ironwail
-bn ironwail থেকে
+@ Export cancelled.
+bn রপ্তানি বাতিল হয়েছে।
 
-@ From the 2021 re-release
-bn 2021 রি-রিলিজ থেকে
+@ Exporting {} to video
+bn {} ভিডিওতে রপ্তানি হচ্ছে
+
+@ Kept demo {}
+bn ডেমো রাখা হয়েছে: {}
+
+@ Not a valid demo name.
+bn ডেমোর নাম বৈধ নয়।
+
+@ Renamed demo to {}
+bn ডেমোর নাম বদলে {} করা হয়েছে
+
+@ No auto-demo to keep.
+bn রাখার মতো কোনো স্বয়ংক্রিয় ডেমো নেই।
+
+@ Not playing a demo.
+bn কোনো ডেমো চলছে না।
+
+@ Not recording video.
+bn কোনো ভিডিও রেকর্ড হচ্ছে না।
+
+@ Recording video to {}
+bn ভিডিও {}-এ রেকর্ড হচ্ছে
+
+@ This demo is already saved.
+bn এই ডেমো আগেই সংরক্ষিত।
+
+@ This level's demo will be kept when it ends.
+bn এই লেভেলের ডেমো শেষ হলে রাখা হবে।
+
+@ Video capture is not available in this build.
+bn এই বিল্ডে ভিডিও রেকর্ডিং নেই।
+
+@ Wrote {} ({}s)
+bn {} লেখা হয়েছে ({} সে.)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+bn ffmpeg পাওয়া যায়নি: {}টি PNG ফ্রেম ও একটি WAV {}-এ লেখা হয়েছে

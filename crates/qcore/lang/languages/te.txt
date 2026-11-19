@@ -1397,6 +1397,93 @@ te ఎలక్ట్రానిక్స్ మాత్రమే కాదు
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 te ప్రతి పదో వంతు సెకనుకు మెరుపు నష్టం (సాధారణ మెరుపు తుపాకీ 30 ఇస్తుంది)
 
+# Demos and video recording.
+@ AV1 (MP4)
+te AV1 (MP4)
+
+@ Auto-Demo Slots
+te ఆటో-డెమో స్లాట్‌లు
+
+@ Auto-Record Demos
+te డెమోలను స్వయంచాలకంగా రికార్డ్ చేయి
+
+@ Frame Rate
+te ఫ్రేమ్ రేటు
+
+@ H.264 (MP4)
+te H.264 (MP4)
+
+@ H.265 (MP4)
+te H.265 (MP4)
+
+@ Pause at End
+te చివరిలో పాజ్
+
+@ Playback Bar
+te ప్లేబ్యాక్ బార్
+
+@ Quality
+te నాణ్యత
+
+@ Record Audio
+te ధ్వనిని రికార్డ్ చేయి
+
+@ VP9 (WebM)
+te VP9 (WebM)
+
+@ Video Format
+te వీడియో ఫార్మాట్
+
+@ Video Recording
+te వీడియో రికార్డింగ్
+
+@ ffmpeg Program
+te ffmpeg ప్రోగ్రామ్
+
+@ small file
+te చిన్న ఫైల్
+
+@ unlimited
+te అపరిమితం
+
+# Demos and video recording.
+@ 1080p
+te 1080p
+
+@ 1440p
+te 1440p
+
+@ 4K
+te 4K
+
+@ 720p
+te 720p
+
+@ Destination
+te గమ్యం
+
+@ File Name
+te ఫైల్ పేరు
+
+@ Rename
+te పేరు మార్చు
+
+@ Rename Demo
+te డెమో పేరు మార్చు
+
+@ Export Highlighted Clip
+te గుర్తించిన క్లిప్‌ను ఎగుమతి చేయి
+
+@ Export Whole Demo
+te మొత్తం డెమోను ఎగుమతి చేయి
+
+@ Same as window
+te విండో లాగే
+
+# Demos and video recording.
+@ GPU Encoding
+te GPU ఎన్‌కోడింగ్
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ te ఏ ఆయుధాలు ఫ్రీజ్‌ను ప్రేరేప�
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 te మీ సొంత రాకెట్‌లు, గ్రెనేడ్‌లు మీకు హాని చేయవు; రాకెట్ జంప్‌లు ఇంకా పనిచేస్తాయి
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+te మీరు ప్లే చేసిన డెమో మెనూకి తిరిగి వెళ్లకుండా చివరి ఫ్రేమ్‌లో ఆగుతుంది, కాబట్టి మీరు దాన్ని వెనక్కి తిప్పవచ్చు
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+te వీడియో యొక్క సెకనుకు ఫ్రేమ్‌లు; రికార్డింగ్ సమయంలో ఆట సరిగ్గా ఈ రేటులో నడుస్తుంది
+
+@ High keeps the most detail; small file saves disk space
+te అధికం ఎక్కువ వివరాలను ఉంచుతుంది; చిన్న ఫైల్ డిస్క్ స్థలాన్ని ఆదా చేస్తుంది
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+te పాతదాన్ని తొలగించే ముందు ఎన్ని స్వయంచాలక డెమోలు ఉంచబడతాయి; ఉంచిన డెమోలు లెక్కలోకి రావు
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+te మీరు ఆడే ప్రతి స్థాయిని ప్రధాన మెనూ > డెమోలలోని స్వయంచాలక జాబితాలో రికార్డ్ చేస్తుంది; కావలసినవి ఉంచండి, పాతవి మార్చబడతాయి
+
+@ Records game sound and music into the video
+te ఆట ధ్వనులు మరియు సంగీతాన్ని వీడియోలో రికార్డ్ చేస్తుంది
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+te ప్లేబ్యాక్ బార్‌ను (సమయం, వేగం, టైమ్‌లైన్) నియంత్రణ కీ తర్వాత, ఎల్లప్పుడూ, లేదా ఎప్పుడూ చూపదు
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+te వీడియో ఫార్మాట్; ఆ ఎన్‌కోడర్‌తో ffmpeg అవసరం, లేకుంటే ఫ్రేమ్‌లు PNG చిత్రాలుగా సేవ్ అవుతాయి
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+te క్లిప్ ఏదీ గుర్తించలేదు: డెమో ప్లే అవుతున్నప్పుడు టైమ్‌లైన్‌పై లాగండి లేదా I, O నొక్కండి (కంట్రోలర్‌పై LT మరియు RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+te వీడియో ఫైల్ పేరు; ఎక్స్‌టెన్షన్ వీడియో ఫార్మాట్‌ను అనుసరిస్తుంది, అదే పేరున్న ఫైల్ భర్తీ అవుతుంది
+
+@ New name of the demo; if another demo has it, a number is added
+te డెమో కొత్త పేరు; మరో డెమోకు ఇదే పేరు ఉంటే ఒక సంఖ్య జోడించబడుతుంది
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+te వీడియో పరిమాణం; ఫ్రేమ్‌లు విండో పరిమాణం నుండి స్కేల్ చేయబడతాయి (ఆకారం నిలిచేలా పట్టీలతో), కాబట్టి పెద్ద పరిమాణం వివరాలను జోడించదు
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+te ffmpeg ఉపయోగించగలిగితే గ్రాఫిక్స్ కార్డుపై ఎన్‌కోడ్ చేస్తుంది (NVIDIA NVENC, VA-API ద్వారా AMD లేదా Intel, AMF లేదా Quick Sync, Apple VideoToolbox), ప్రాసెసర్‌ను ఖాళీగా ఉంచుతుంది; లేకపోతే ప్రాసెసర్ ఎన్‌కోడ్ చేస్తుంది
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ te సేవ్
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 te అందుబాటులో మెరుస్తున్న ఎలక్ట్రానిక్ ప్యానెల్‌పై ప్రత్యామ్నాయ కాల్పు ఒక చివరను ప్లగ్ చేస్తుంది; మరో చివర అప్పుడు అపరిమిత మందుగుండుతో మెరుపులు కాలుస్తుంది. కేబుల్ మిమ్మల్ని సాకెట్‌కు కట్టి మూలల్లో చిక్కుకుంటుంది. ప్రత్యామ్నాయ కాల్పు లేదా ఆయుధం మార్చడం దాన్ని లాగేస్తుంది.
 
+@ From the game folder
+te గేమ్ ఫోల్డర్ నుండి
+
+@ From ironwail
+te ironwail నుండి
+
+@ From the 2021 re-release
+te 2021 రీ-రిలీజ్ నుండి
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+te స్వయంచాలక డెమోలు ఆఫ్‌లో ఉన్నాయి. మీరు ఆడే ప్రతి స్థాయిని రికార్డ్ చేయడానికి ఎంపికలు > డెమోలలో డెమోలను స్వయంచాలకంగా రికార్డ్ చేయి ఆన్ చేయండి.
+
+@ Automatic: replaced when the slots are full
+te స్వయంచాలకం: స్లాట్‌లు నిండితే మార్చబడుతుంది
+
+@ Delete {}?
+te {} తొలగించాలా?
+
+@ Demos
+te డెమోలు
+
+@ End of demo
+te డెమో ముగింపు
+
+@ Export Video
+te వీడియోగా ఎగుమతి
+
+@ Fast forward
+te వేగంగా ముందుకు
+
+@ Fast forward {}x
+te ముందుకు {}x
+
+@ Indexing...
+te సూచిక తయారవుతోంది...
+
+@ K keep
+te K ఉంచు
+
+@ Keep
+te ఉంచు
+
+@ Length: {}
+te నిడివి: {}
+
+@ Map: {}
+te మ్యాప్: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+te ఇంకా స్వయంచాలక డెమోలు లేవు. మీరు ఆడే ప్రతి స్థాయి ఇక్కడ రికార్డ్ అవుతుంది.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+te ఇంకా సేవ్ చేసిన డెమోలు లేవు. 'record <name>' కన్సోల్ ఆదేశంతో ఒకటి రికార్డ్ చేయండి, లేదా ఒక స్వయంచాలక డెమోను ఉంచండి.
+
+@ Pause
+te పాజ్
+
+@ Paused
+te పాజ్ చేయబడింది
+
+@ Play {}x
+te ప్లే {}x
+
+@ Quake - exporting video {}%
+te Quake - వీడియో ఎగుమతి అవుతోంది {}%
+
+@ Recorded: {}
+te రికార్డ్ అయినది: {}
+
+@ Rewind
+te వెనక్కి తిప్పు
+
+@ Rewind {}x
+te వెనక్కి {}x
+
+@ Size: {} KB
+te పరిమాణం: {} KB
+
+@ Skip 10 s
+te 10 సె. దాటవేయి
+
+@ Back 10 s
+te 10 సె. వెనక్కి
+
+@ Length
+te నిడివి
+
+@ Mark in
+te ప్రారంభాన్ని గుర్తించు
+
+@ Mark out
+te ముగింపును గుర్తించు
+
+@ Next level
+te తదుపరి స్థాయి
+
+@ No demos match the filter. Backspace or Esc clears it.
+te ఫిల్టర్‌కు ఏ డెమో సరిపోలలేదు. Backspace లేదా Esc దాన్ని తొలగిస్తుంది.
+
+@ Renaming an automatic demo moves it to the saved demos.
+te స్వయంచాలక డెమో పేరు మారిస్తే అది సేవ్ చేసిన డెమోలకు వెళ్తుంది.
+
+@ Restart
+te మొదటి నుంచి
+
+@ Sort
+te క్రమం
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+te డెమో ప్లే అవుతున్నప్పుడు: A పాజ్ చేస్తుంది, డి-ప్యాడ్ జరుపుతుంది మరియు వేగం మారుస్తుంది, LT మరియు RT ఒక క్లిప్‌ను గుర్తిస్తాయి, X దాన్ని ఎగుమతి చేస్తుంది.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+te Space పాజ్ | ఎడమ/కుడి జరుపు | పైకి/కిందికి వేగం | PgUp/PgDn 10 సె. | I/O గుర్తు | E ఎగుమతి
+
+@ Speed
+te వేగం
+
+@ Switch List
+te జాబితా మార్చు
+
+@ This can't be undone.
+te దీన్ని రద్దు చేయలేరు.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+te డెమో ప్లే అవుతున్నప్పుడు: Space పాజ్ చేస్తుంది, బాణాలు జరుపుతాయి మరియు వేగం మారుస్తాయి, I మరియు O ఒక క్లిప్‌ను గుర్తిస్తాయి, E దాన్ని ఎగుమతి చేస్తుంది.
+
+@ Saved
+te సేవ్ చేసినవి
+
+@ Automatic
+te స్వయంచాలకం
+
+# Demos and video recording.
+@ Export
+te ఎగుమతి
+
+@ H hide
+te H దాచు
+
+@ Hide
+te దాచు
+
+# Demos and video recording.
+@ Demo: {}
+te డెమో: {}
+
+@ Highlighted clip: {} to {} ({})
+te గుర్తించిన క్లిప్: {} నుండి {} ({})
+
+@ Show controls
+te నియంత్రణలను చూపు
+
+# Demos and video recording.
+@ About {} left
+te సుమారు {} మిగిలి ఉంది
+
+@ Exporting video
+te వీడియో ఎగుమతి అవుతోంది
+
+@ Preparing...
+te సిద్ధమవుతోంది...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ te సర్వర్ మాత్రమే changelevel చేయగలదు
 @ {} renamed to {}
 te {} పేరు {} గా మార్చబడింది
 
-@ From the game folder
-te గేమ్ ఫోల్డర్ నుండి
+@ Already recording video.
+te వీడియో ఇప్పటికే రికార్డ్ అవుతోంది.
 
-@ From ironwail
-te ironwail నుండి
+@ Export cancelled.
+te ఎగుమతి రద్దయింది.
 
-@ From the 2021 re-release
-te 2021 రీ-రిలీజ్ నుండి
+@ Exporting {} to video
+te {} వీడియోగా ఎగుమతి అవుతోంది
+
+@ Kept demo {}
+te డెమో ఉంచబడింది: {}
+
+@ Not a valid demo name.
+te డెమో పేరు చెల్లదు.
+
+@ Renamed demo to {}
+te డెమో పేరు {}గా మార్చబడింది
+
+@ No auto-demo to keep.
+te ఉంచడానికి ఆటో-డెమో లేదు.
+
+@ Not playing a demo.
+te ఏ డెమో ప్లే కావడం లేదు.
+
+@ Not recording video.
+te ఏ వీడియో రికార్డ్ కావడం లేదు.
+
+@ Recording video to {}
+te వీడియో {} లోకి రికార్డ్ అవుతోంది
+
+@ This demo is already saved.
+te ఈ డెమో ఇప్పటికే సేవ్ అయింది.
+
+@ This level's demo will be kept when it ends.
+te ఈ స్థాయి డెమో అది ముగిసినప్పుడు ఉంచబడుతుంది.
+
+@ Video capture is not available in this build.
+te ఈ బిల్డ్‌లో వీడియో రికార్డింగ్ అందుబాటులో లేదు.
+
+@ Wrote {} ({}s)
+te {} రాయబడింది ({} సె.)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+te ffmpeg కనబడలేదు: {} PNG ఫ్రేమ్‌లు మరియు ఒక WAV {} లో రాయబడ్డాయి

@@ -163,6 +163,37 @@ versiones monstrare non possunt, forma plena ut `<nomen>.qsd` servatur
 (`playdemo <nomen>.qsd`). `demo_convert <nomen>` demonstrationem
 vetustiorem convertit.
 
+Index principalis → Demonstrationes servatas tuas ostendit et, si Optiones →
+Demonstrationes → Demonstrationes sponte inscribere accensum est,
+demonstrationem automaticam omnis gradus quem ludis; vetustissimae
+substituuntur cum loci pleni sunt. Scribe ut indices coles, et Tab preme ut
+ordinem mutes; bullae iuxta indicem demonstrationem electam ludunt,
+exportant, renominant, servant aut delent, et demonstratio automatica
+renominata servatur. Relationes errorum demonstrationem automaticam gradus
+praesentis continent.
+
+Dum demonstratio luditur, Spatium pausam facit, Sinistram vel Dextram
+tenendo retro vel celeriter prorsus volvis, Sursum et Deorsum celeritatem
+mutant, PgUp et PgDn decem secunda saliunt, Home et End ad initium et ad
+chartam proximam eunt. I et O fragmentum notant; E id, vel totam
+demonstrationem, in plicam `videos` exportat. Imperia in visu manent; H vel
+Cela ea celat, et ad marginem imam monstrando taenia apparet quae ea
+reducit. Premes bullas, temporis lineam preme ut eo salias, aut trahe per
+eam ut fragmentum notes; Exporta rogat imagines per secundum, magnitudinem,
+formam et documentum, et utrum fragmentum notatum an totam demonstrationem
+exportes.
+
+In moderatore A pausam facit, crux directionis retro et prorsus volvit et
+celeritatem mutat, LB et RB decem secundas saliunt, et bullae vectium ad
+initium et ad tabulam proximam ducunt. LT et RT fragmentum notant, B id
+purgat, X exportat, Y demonstrationem automaticam servat et View imperia
+celat.
+
+`capture` dum ludis inscriptionem pelliculae incipit et sistit. Imagines per
+secundum, forma et qualitas sunt in Optiones → Demonstrationes → Inscriptio
+pelliculae. Pelliculae ffmpeg requirunt; sine eo imagines ut picturae PNG
+cum documento WAV servantur.
+
 ## Accessibilitas
 
 Options → Accessibilitas:

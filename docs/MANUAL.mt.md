@@ -157,6 +157,34 @@ Jekk mod juża effetti tal-partiċelli li ports oħra ma jistgħux juru,
 il-verżjoni sħiħa tinżamm bħala `<isem>.qsd` (`playdemo <isem>.qsd`).
 `demo_convert <isem>` jikkonverti demo eqdem.
 
+Menu prinċipali → Demos juri d-demos salvati tiegħek u, meta Għażliet →
+Demos → Irrekordja d-demos awtomatikament ikun mixgħul, demo awtomatiku ta'
+kull livell li tilgħab; l-eqdem jinbidlu meta s-slots ikunu mimlija.
+Ittajpja biex tiffiltra l-listi u agħfas Tab biex tibdel l-ordni; il-buttuni
+ħdejn il-lista jdoqqu, jesportaw, isemmu mill-ġdid, iżommu jew iħassru
+d-demo magħżula, u meta tissemma mill-ġdid demo awtomatika tinżamm.
+Ir-rapporti tal-bugs jinkludu d-demo awtomatiku tal-livell kurrenti.
+
+Waqt demo, Spazju jagħmel pawża, iż-żamma ta' Xellug jew Lemin tirrewindja
+jew tgħaġġel 'il quddiem, Fuq u Isfel jibdlu l-veloċità, PgUp u PgDn jaqbżu
+10 sekondi, u Home u End imorru fil-bidu u għall-mappa li jmiss. I u O
+jimmarkaw klip; E jesportah, jew id-demo kollu, fil-folder `videos`.
+Il-kontrolli jibqgħu fuq l-iskrin; H jew Aħbi jaħbihom, u meta tipponta lejn
+it-tarf t'isfel tidher strixxa li terġa' ġġibhom. Ikklikkja l-buttuni,
+ikklikkja l-kronoloġija biex taqbeż hemm, jew iddreggja fuqha biex timmarka
+klip; Esporta jistaqsi r-rata tal-frejms, id-daqs, il-format u l-fajl, u
+jekk tesportax il-klip immarkat jew id-demo kollu.
+
+Fuq kontrollur, A jagħmel pawża, id-d-pad imur lura, 'il quddiem u jibdel
+il-veloċità, LB u RB jaqbżu 10 sekondi, u l-buttuni tal-isticks imorru
+għall-bidu u għall-mappa li jmiss. LT u RT jimmarkaw klip, B iħassru, X
+jesporta, Y iżomm demo awtomatika u View jaħbi l-kontrolli.
+
+`capture` jibda u jwaqqaf ir-reġistrazzjoni ta' vidjo waqt li tilgħab.
+Ir-rata tal-frejms, il-format u l-kwalità jinsabu f'Għażliet → Demos →
+Reġistrazzjoni tal-vidjo. Il-vidjows jeħtieġu ffmpeg; mingħajru l-frejms
+jiġu salvati bħala stampi PNG flimkien ma' fajl WAV.
+
 ## Aċċessibbiltà
 
 Options → Aċċessibbiltà:

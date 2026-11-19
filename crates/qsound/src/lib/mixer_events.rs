@@ -95,6 +95,11 @@ impl Mixer {
                 self.total = NUM_AMBIENTS + MAX_DYNAMIC_CHANNELS;
                 self.ambient_vol = [0.0; NUM_AMBIENTS];
             }
+            SoundEvent::StopDynamic => {
+                for ch in &mut self.channels[NUM_AMBIENTS..NUM_AMBIENTS + MAX_DYNAMIC_CHANNELS] {
+                    *ch = Channel::default();
+                }
+            }
             SoundEvent::ClearStatic => {
                 for ch in &mut self.channels[NUM_AMBIENTS + MAX_DYNAMIC_CHANNELS..] {
                     *ch = Channel::default();

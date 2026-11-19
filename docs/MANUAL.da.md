@@ -153,6 +153,34 @@ bruger partikeleffekter, som andre porte ikke kan vise, gemmes den fulde
 version som `<navn>.qsd` (`playdemo <navn>.qsd`). `demo_convert <navn>`
 konverterer en ældre demo.
 
+Hovedmenu → Demoer viser dine gemte demoer og, med Indstillinger → Demoer →
+Optag demoer automatisk slået til, en automatisk demo af hver bane, du
+spiller; de ældste erstattes, når pladserne er fulde. Skriv for at filtrere
+listerne, og tryk Tab for at skifte sortering; knapperne ved siden af
+listen afspiller, eksporterer, omdøber, beholder eller sletter den valgte
+demo, og en automatisk demo, der omdøbes, beholdes. Fejlrapporter
+indeholder den aktuelle banes automatiske demo.
+
+Under en demo sætter Mellemrum på pause, at holde Venstre eller Højre spoler
+tilbage eller frem, Op og Ned ændrer hastigheden, PgUp og PgDn springer 10
+sekunder, og Home og End går til starten og til næste bane. I og O markerer
+et klip; E eksporterer det, eller hele demoen, til mappen `videos`.
+Knapperne bliver på skærmen; H eller Skjul skjuler dem, og når du peger på
+den nederste kant, vises en bjælke, der henter dem tilbage. Klik på
+knapperne, klik på tidslinjen for at hoppe dertil, eller træk hen over den
+for at markere et klip; Eksportér spørger om billedfrekvens, størrelse,
+format og fil, og om det markerede klip eller hele demoen skal eksporteres.
+
+På en controller sætter A på pause, retningsknapperne spoler tilbage og frem
+og ændrer hastigheden, LB og RB springer 10 sekunder, og pindenes knapper
+går til starten og til næste bane. LT og RT markerer et klip, B rydder det,
+X eksporterer, Y beholder en automatisk demo, og View skjuler kontrollerne.
+
+`capture` starter og stopper en videooptagelse, mens du spiller.
+Billedfrekvens, format og kvalitet findes under Indstillinger → Demoer →
+Videooptagelse. Video kræver ffmpeg; uden det gemmes billederne som
+PNG-billeder med en WAV-fil.
+
 ## Tilgængelighed
 
 Options → Tilgængelighed:

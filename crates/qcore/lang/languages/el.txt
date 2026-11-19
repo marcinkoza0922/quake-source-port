@@ -1397,6 +1397,93 @@ el Κάθε μεταλλική επιφάνεια δέχεται το βύσμα
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 el Ζημιά κεραυνού κάθε δέκατο του δευτερολέπτου (το κανονικό όπλο κεραυνών κάνει 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+el AV1 (MP4)
+
+@ Auto-Demo Slots
+el Θέσεις αυτόματων demo
+
+@ Auto-Record Demos
+el Αυτόματη εγγραφή demo
+
+@ Frame Rate
+el Ρυθμός καρέ
+
+@ H.264 (MP4)
+el H.264 (MP4)
+
+@ H.265 (MP4)
+el H.265 (MP4)
+
+@ Pause at End
+el Παύση στο τέλος
+
+@ Playback Bar
+el Μπάρα αναπαραγωγής
+
+@ Quality
+el Ποιότητα
+
+@ Record Audio
+el Εγγραφή ήχου
+
+@ VP9 (WebM)
+el VP9 (WebM)
+
+@ Video Format
+el Μορφή βίντεο
+
+@ Video Recording
+el Εγγραφή βίντεο
+
+@ ffmpeg Program
+el Πρόγραμμα ffmpeg
+
+@ small file
+el μικρό αρχείο
+
+@ unlimited
+el απεριόριστα
+
+# Demos and video recording.
+@ 1080p
+el 1080p
+
+@ 1440p
+el 1440p
+
+@ 4K
+el 4K
+
+@ 720p
+el 720p
+
+@ Destination
+el Προορισμός
+
+@ File Name
+el Όνομα αρχείου
+
+@ Rename
+el Μετονομασία
+
+@ Rename Demo
+el Μετονομασία demo
+
+@ Export Highlighted Clip
+el Εξαγωγή επισημασμένου αποσπάσματος
+
+@ Export Whole Demo
+el Εξαγωγή όλου του demo
+
+@ Same as window
+el Όπως το παράθυρο
+
+# Demos and video recording.
+@ GPU Encoding
+el Κωδικοποίηση GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ el Ποια όπλα προκαλούν πάγωμα· το σώμα με σώμ
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 el Οι δικές σου ρουκέτες και χειροβομβίδες δεν σε τραυματίζουν· τα rocket jumps λειτουργούν ακόμη
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+el Ένα demo που αναπαράγετε σταματά στο τελευταίο καρέ αντί να επιστρέψει στο μενού, ώστε να μπορείτε να το γυρίσετε πίσω
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+el Καρέ ανά δευτερόλεπτο του βίντεο· κατά την εγγραφή το παιχνίδι τρέχει ακριβώς με αυτόν τον ρυθμό
+
+@ High keeps the most detail; small file saves disk space
+el Η υψηλή κρατά τις περισσότερες λεπτομέρειες· το μικρό αρχείο εξοικονομεί χώρο στον δίσκο
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+el Πόσα αυτόματα demo κρατούνται πριν διαγραφεί το παλαιότερο· τα demo που κρατήσατε δεν μετρούν
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+el Καταγράφει κάθε πίστα που παίζετε στη λίστα Αυτόματα στο Κύριο μενού > Demo· κρατήστε όσα θέλετε, τα παλαιότερα αντικαθίστανται
+
+@ Records game sound and music into the video
+el Καταγράφει τους ήχους και τη μουσική του παιχνιδιού στο βίντεο
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+el Δείχνει τη μπάρα αναπαραγωγής (χρόνος, ταχύτητα, χρονολόγιο) μετά από πλήκτρο ελέγχου, πάντα ή ποτέ
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+el Μορφή βίντεο· χρειάζεται ffmpeg με αυτόν τον κωδικοποιητή, αλλιώς τα καρέ αποθηκεύονται ως εικόνες PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+el Κανένα επισημασμένο απόσπασμα: κατά το demo σύρετε πάνω στο χρονολόγιο ή πατήστε I και O (LT και RT στο χειριστήριο)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+el Όνομα του αρχείου βίντεο· η επέκταση ακολουθεί τη μορφή βίντεο και ένα αρχείο με το ίδιο όνομα αντικαθίσταται
+
+@ New name of the demo; if another demo has it, a number is added
+el Νέο όνομα του demo· αν το έχει ήδη άλλο demo, προστίθεται ένας αριθμός
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+el Μέγεθος βίντεο· τα καρέ κλιμακώνονται από το μέγεθος του παραθύρου (με λωρίδες για να μείνει το σχήμα), οπότε μεγαλύτερο μέγεθος δεν προσθέτει λεπτομέρεια
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+el Κωδικοποιεί στην κάρτα γραφικών (NVIDIA NVENC, AMD ή Intel μέσω VA-API, AMF ή Quick Sync, Apple VideoToolbox) όταν το ffmpeg μπορεί να τη χρησιμοποιήσει, αφήνοντας ελεύθερο τον επεξεργαστή· αλλιώς κωδικοποιεί ο επεξεργαστής
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ el Αποθήκευση
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 el Η δευτερεύουσα βολή σε φωτεινό ηλεκτρονικό πάνελ σε απόσταση χεριού συνδέει τη μία άκρη· η άλλη ρίχνει τότε κεραυνούς με απεριόριστα πυρομαχικά. Το καλώδιο σε δένει στην υποδοχή και πιάνεται στις γωνίες. Η δευτερεύουσα βολή ή η αλλαγή όπλου το ξεριζώνει.
 
+@ From the game folder
+el Από τον φάκελο του παιχνιδιού
+
+@ From ironwail
+el Από το ironwail
+
+@ From the 2021 re-release
+el Από την επανέκδοση του 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+el Τα αυτόματα demo είναι απενεργοποιημένα. Ενεργοποιήστε την Αυτόματη εγγραφή demo στις Ρυθμίσεις > Demo για να καταγράφεται κάθε πίστα που παίζετε.
+
+@ Automatic: replaced when the slots are full
+el Αυτόματο: αντικαθίσταται όταν γεμίσουν οι θέσεις
+
+@ Delete {}?
+el Διαγραφή {};
+
+@ Demos
+el Demo
+
+@ End of demo
+el Τέλος του demo
+
+@ Export Video
+el Εξαγωγή βίντεο
+
+@ Fast forward
+el Γρήγορη κίνηση εμπρός
+
+@ Fast forward {}x
+el Εμπρός {}x
+
+@ Indexing...
+el Ευρετηρίαση...
+
+@ K keep
+el K κράτηση
+
+@ Keep
+el Κράτηση
+
+@ Length: {}
+el Διάρκεια: {}
+
+@ Map: {}
+el Πίστα: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+el Δεν υπάρχουν ακόμη αυτόματα demo. Κάθε πίστα που παίζετε καταγράφεται εδώ.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+el Δεν υπάρχουν ακόμη αποθηκευμένα demo. Καταγράψτε ένα με την εντολή κονσόλας 'record <name>' ή κρατήστε ένα αυτόματο demo.
+
+@ Pause
+el Παύση
+
+@ Paused
+el Σε παύση
+
+@ Play {}x
+el Αναπαραγωγή {}x
+
+@ Quake - exporting video {}%
+el Quake - εξαγωγή βίντεο {}%
+
+@ Recorded: {}
+el Εγγράφηκε: {}
+
+@ Rewind
+el Γύρισμα πίσω
+
+@ Rewind {}x
+el Πίσω {}x
+
+@ Size: {} KB
+el Μέγεθος: {} KB
+
+@ Skip 10 s
+el Παράλειψη 10 δ
+
+@ Back 10 s
+el Πίσω 10 δ
+
+@ Length
+el Διάρκεια
+
+@ Mark in
+el Σημείο αρχής
+
+@ Mark out
+el Σημείο τέλους
+
+@ Next level
+el Επόμενη πίστα
+
+@ No demos match the filter. Backspace or Esc clears it.
+el Κανένα demo δεν ταιριάζει στο φίλτρο. Το Backspace ή το Esc το καθαρίζει.
+
+@ Renaming an automatic demo moves it to the saved demos.
+el Η μετονομασία ενός αυτόματου demo το μεταφέρει στα αποθηκευμένα.
+
+@ Restart
+el Από την αρχή
+
+@ Sort
+el Ταξινόμηση
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+el Κατά την αναπαραγωγή demo: το A κάνει παύση, το d-pad κυλά και αλλάζει ταχύτητα, τα LT και RT σημειώνουν ένα απόσπασμα και το X το εξάγει.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+el Διάστημα παύση | Αριστερά/Δεξιά κύλιση | Πάνω/Κάτω ταχύτητα | PgUp/PgDn 10 δ | I/O σημάδι | E εξαγωγή
+
+@ Speed
+el Ταχύτητα
+
+@ Switch List
+el Αλλαγή λίστας
+
+@ This can't be undone.
+el Αυτό δεν αναιρείται.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+el Κατά την αναπαραγωγή demo: το Διάστημα κάνει παύση, τα βέλη κυλούν και αλλάζουν ταχύτητα, τα I και O σημειώνουν ένα απόσπασμα και το E το εξάγει.
+
+@ Saved
+el Αποθηκευμένα
+
+@ Automatic
+el Αυτόματα
+
+# Demos and video recording.
+@ Export
+el Εξαγωγή
+
+@ H hide
+el H απόκρυψη
+
+@ Hide
+el Απόκρυψη
+
+# Demos and video recording.
+@ Demo: {}
+el Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+el Επισημασμένο απόσπασμα: {} έως {} ({})
+
+@ Show controls
+el Εμφάνιση χειριστηρίων
+
+# Demos and video recording.
+@ About {} left
+el Απομένουν περίπου {}
+
+@ Exporting video
+el Εξαγωγή βίντεο
+
+@ Preparing...
+el Προετοιμασία...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ el Μόνο ο διακομιστής μπορεί να κάνει changelevel
 @ {} renamed to {}
 el Ο {} μετονομάστηκε σε {}
 
-@ From the game folder
-el Από τον φάκελο του παιχνιδιού
+@ Already recording video.
+el Η εγγραφή βίντεο είναι ήδη σε εξέλιξη.
 
-@ From ironwail
-el Από το ironwail
+@ Export cancelled.
+el Η εξαγωγή ακυρώθηκε.
 
-@ From the 2021 re-release
-el Από την επανέκδοση του 2021
+@ Exporting {} to video
+el Εξαγωγή του {} σε βίντεο
+
+@ Kept demo {}
+el Το demo κρατήθηκε: {}
+
+@ Not a valid demo name.
+el Μη έγκυρο όνομα demo.
+
+@ Renamed demo to {}
+el Το demo μετονομάστηκε σε {}
+
+@ No auto-demo to keep.
+el Δεν υπάρχει αυτόματο demo για κράτηση.
+
+@ Not playing a demo.
+el Δεν αναπαράγεται demo.
+
+@ Not recording video.
+el Δεν γίνεται εγγραφή βίντεο.
+
+@ Recording video to {}
+el Εγγραφή βίντεο στο {}
+
+@ This demo is already saved.
+el Αυτό το demo είναι ήδη αποθηκευμένο.
+
+@ This level's demo will be kept when it ends.
+el Το demo αυτής της πίστας θα κρατηθεί όταν τελειώσει.
+
+@ Video capture is not available in this build.
+el Η εγγραφή βίντεο δεν είναι διαθέσιμη σε αυτή την έκδοση.
+
+@ Wrote {} ({}s)
+el Γράφτηκε {} ({} δ)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+el Δεν βρέθηκε ffmpeg: γράφτηκαν {} καρέ PNG και ένα WAV στο {}

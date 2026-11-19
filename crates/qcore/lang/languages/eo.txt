@@ -1397,6 +1397,93 @@ eo Ĉiu metala surfaco akceptas la ŝtopilon, ne nur elektroniko
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 eo Fulma damaĝo ĉiun dekonon de sekundo (la ordinara fulmpafilo faras 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+eo AV1 (MP4)
+
+@ Auto-Demo Slots
+eo Lokoj por aŭtomataj demonstraĵoj
+
+@ Auto-Record Demos
+eo Aŭtomate registri demonstraĵojn
+
+@ Frame Rate
+eo Kadrorapido
+
+@ H.264 (MP4)
+eo H.264 (MP4)
+
+@ H.265 (MP4)
+eo H.265 (MP4)
+
+@ Pause at End
+eo Paŭzi ĉe la fino
+
+@ Playback Bar
+eo Ludada breto
+
+@ Quality
+eo Kvalito
+
+@ Record Audio
+eo Registri sonon
+
+@ VP9 (WebM)
+eo VP9 (WebM)
+
+@ Video Format
+eo Videoformato
+
+@ Video Recording
+eo Videoregistrado
+
+@ ffmpeg Program
+eo Programo ffmpeg
+
+@ small file
+eo malgranda dosiero
+
+@ unlimited
+eo senlima
+
+# Demos and video recording.
+@ 1080p
+eo 1080p
+
+@ 1440p
+eo 1440p
+
+@ 4K
+eo 4K
+
+@ 720p
+eo 720p
+
+@ Destination
+eo Celo
+
+@ File Name
+eo Dosiernomo
+
+@ Rename
+eo Alinomi
+
+@ Rename Demo
+eo Alinomi demonstraĵon
+
+@ Export Highlighted Clip
+eo Eksporti la markitan eltranĉaĵon
+
+@ Export Whole Demo
+eo Eksporti la tutan demonstraĵon
+
+@ Same as window
+eo Kiel la fenestro
+
+# Demos and video recording.
+@ GPU Encoding
+eo GPU-kodigo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ eo Kiuj armiloj ekigas la froston; proksima batalo kovras la hakilon kaj ajnan m
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 eo Viaj propraj raketoj kaj granatoj ne vundas vin; raketsaltoj ankoraŭ funkcias
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+eo Demonstraĵo, kiun vi ludigas, haltas ĉe la lasta kadro anstataŭ reveni al la menuo, por ke vi povu rebobeni ĝin
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+eo Kadroj sekunde de la video; dum registrado la ludo funkcias ĝuste je ĉi tiu rapido
+
+@ High keeps the most detail; small file saves disk space
+eo Alta konservas plej multe da detaloj; malgranda dosiero ŝparas diskospacon
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+eo Kiom da aŭtomataj demonstraĵoj restas antaŭ ol la plej malnova estas forigita; konservitaj ne kalkuliĝas
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+eo Registras ĉiun nivelon, kiun vi ludas, en la liston Aŭtomataj en Ĉefa menuo > Demonstraĵoj; konservu tiujn, kiujn vi volas, la plej malnovaj estas anstataŭigataj
+
+@ Records game sound and music into the video
+eo Registras la sonojn kaj muzikon de la ludo en la videon
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+eo Montras la ludadan breton (tempo, rapido, templinio) post regklavo, ĉiam, aŭ neniam
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+eo Videoformato; bezonas ffmpeg kun tiu kodilo, alie la kadroj konserviĝas kiel PNG-bildoj
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+eo Neniu eltranĉaĵo markita: dum la demonstraĵo, trenu trans la templinion aŭ premu I kaj O (LT kaj RT ĉe la regilo)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+eo Nomo de la videodosiero; la sufikso sekvas la videoformaton, kaj samnoma dosiero estas anstataŭigita
+
+@ New name of the demo; if another demo has it, a number is added
+eo Nova nomo de la demonstraĵo; se alia demonstraĵo jam havas ĝin, numero estas aldonita
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+eo Videogrando; la kadroj skaliĝas de la fenestra grando (kun strioj por konservi la formon), do pli granda grando ne aldonas detalojn
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+eo Kodigas per la grafika karto (NVIDIA NVENC, AMD aŭ Intel per VA-API, AMF aŭ Quick Sync, Apple VideoToolbox) kiam ffmpeg povas uzi ĝin, lasante la procesoron libera; alie la procesoro kodigas
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ eo Konservi
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 eo Alterna pafo sur lumantan elektronikan panelon atingeblan ŝtopas unu finon; la alia fino tiam pafas fulmojn kun senlima municio. La kablo ligas vin al la ingo kaj kroĉiĝas ĉe anguloj. Alterna pafo aŭ armila ŝanĝo elŝiras ĝin.
 
+@ From the game folder
+eo El la luda dosierujo
+
+@ From ironwail
+eo El ironwail
+
+@ From the 2021 re-release
+eo El la reeldono de 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+eo Aŭtomataj demonstraĵoj estas malŝaltitaj. Ŝaltu Aŭtomate registri demonstraĵojn en Agordoj > Demonstraĵoj por registri ĉiun nivelon, kiun vi ludas.
+
+@ Automatic: replaced when the slots are full
+eo Aŭtomata: anstataŭigata kiam la lokoj plenas
+
+@ Delete {}?
+eo Ĉu forigi {}?
+
+@ Demos
+eo Demonstraĵoj
+
+@ End of demo
+eo Fino de la demonstraĵo
+
+@ Export Video
+eo Eksporti videon
+
+@ Fast forward
+eo Rapide antaŭen
+
+@ Fast forward {}x
+eo Antaŭen {}x
+
+@ Indexing...
+eo Indeksante...
+
+@ K keep
+eo K konservi
+
+@ Keep
+eo Konservi
+
+@ Length: {}
+eo Daŭro: {}
+
+@ Map: {}
+eo Mapo: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+eo Ankoraŭ neniuj aŭtomataj demonstraĵoj. Ĉiu nivelo, kiun vi ludas, registriĝas ĉi tie.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+eo Ankoraŭ neniuj konservitaj demonstraĵoj. Registru unu per la konzola komando 'record <name>', aŭ konservu aŭtomatan demonstraĵon.
+
+@ Pause
+eo Paŭzo
+
+@ Paused
+eo Paŭzita
+
+@ Play {}x
+eo Ludado {}x
+
+@ Quake - exporting video {}%
+eo Quake - eksportante videon {}%
+
+@ Recorded: {}
+eo Registrita: {}
+
+@ Rewind
+eo Rebobeni
+
+@ Rewind {}x
+eo Malantaŭen {}x
+
+@ Size: {} KB
+eo Grando: {} KB
+
+@ Skip 10 s
+eo Salti 10 s
+
+@ Back 10 s
+eo Malantaŭen 10 s
+
+@ Length
+eo Daŭro
+
+@ Mark in
+eo Marki komencon
+
+@ Mark out
+eo Marki finon
+
+@ Next level
+eo Sekva nivelo
+
+@ No demos match the filter. Backspace or Esc clears it.
+eo Neniu demonstraĵo kongruas kun la filtrilo. Retropaŝo aŭ Esc forigas ĝin.
+
+@ Renaming an automatic demo moves it to the saved demos.
+eo Alinomi aŭtomatan demonstraĵon movas ĝin al la konservitaj.
+
+@ Restart
+eo De la komenco
+
+@ Sort
+eo Ordigi
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+eo Dum demonstraĵo: A paŭzigas, la direktokruco rulumas kaj ŝanĝas la rapidon, LT kaj RT markas eltranĉaĵon kaj X eksportas ĝin.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+eo Spaco paŭzo | Maldekstren/Dekstren rulumi | Supren/Malsupren rapido | PgUp/PgDn 10 s | I/O marko | E eksporti
+
+@ Speed
+eo Rapido
+
+@ Switch List
+eo Ŝanĝi liston
+
+@ This can't be undone.
+eo Tio ne malfareblas.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+eo Dum demonstraĵo: Spaco paŭzigas, la sagoj rulumas kaj ŝanĝas la rapidon, I kaj O markas eltranĉaĵon kaj E eksportas ĝin.
+
+@ Saved
+eo Konservitaj
+
+@ Automatic
+eo Aŭtomataj
+
+# Demos and video recording.
+@ Export
+eo Eksporti
+
+@ H hide
+eo H kaŝi
+
+@ Hide
+eo Kaŝi
+
+# Demos and video recording.
+@ Demo: {}
+eo Demonstraĵo: {}
+
+@ Highlighted clip: {} to {} ({})
+eo Markita eltranĉaĵo: {} ĝis {} ({})
+
+@ Show controls
+eo Montri regilojn
+
+# Demos and video recording.
+@ About {} left
+eo Restas ĉirkaŭ {}
+
+@ Exporting video
+eo Eksportante videon
+
+@ Preparing...
+eo Preparante...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ eo Nur la servilo rajtas uzi changelevel
 @ {} renamed to {}
 eo {} ŝanĝis sian nomon al {}
 
-@ From the game folder
-eo El la luda dosierujo
+@ Already recording video.
+eo Video jam registriĝas.
 
-@ From ironwail
-eo El ironwail
+@ Export cancelled.
+eo Eksporto nuligita.
 
-@ From the 2021 re-release
-eo El la reeldono de 2021
+@ Exporting {} to video
+eo Eksportante {} al video
+
+@ Kept demo {}
+eo Demonstraĵo konservita: {}
+
+@ Not a valid demo name.
+eo Nevalida nomo de demonstraĵo.
+
+@ Renamed demo to {}
+eo Demonstraĵo alinomita al {}
+
+@ No auto-demo to keep.
+eo Neniu aŭtomata demonstraĵo por konservi.
+
+@ Not playing a demo.
+eo Neniu demonstraĵo ludiĝas.
+
+@ Not recording video.
+eo Neniu video registriĝas.
+
+@ Recording video to {}
+eo Registrante videon al {}
+
+@ This demo is already saved.
+eo Ĉi tiu demonstraĵo jam estas konservita.
+
+@ This level's demo will be kept when it ends.
+eo La demonstraĵo de ĉi tiu nivelo estos konservita kiam ĝi finiĝos.
+
+@ Video capture is not available in this build.
+eo Videoregistrado ne disponeblas en ĉi tiu versio.
+
+@ Wrote {} ({}s)
+eo Skribis {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+eo ffmpeg ne trovita: skribis {} PNG-kadrojn kaj WAV al {}

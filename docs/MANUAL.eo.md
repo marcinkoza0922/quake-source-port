@@ -153,6 +153,36 @@ modo uzas partiklajn efektojn, kiujn aliaj motoroj ne povas montri, la plena
 versio estas konservata kiel `<name>.qsd` (`playdemo <name>.qsd`).
 `demo_convert <name>` konvertas pli malnovan demon.
 
+Ĉefa menuo → Demonstraĵoj montras viajn konservitajn demonstraĵojn kaj, kiam
+Agordoj → Demonstraĵoj → Aŭtomate registri demonstraĵojn estas ŝaltita,
+aŭtomatan demonstraĵon de ĉiu nivelo, kiun vi ludas; la plej malnovaj estas
+anstataŭigataj kiam la lokoj plenas. Tajpu por filtri la listojn kaj premu
+Tab por ŝanĝi la ordon; la butonoj apud la listo ludas, eksportas, alinomas,
+konservas aŭ forigas la elektitan demonstraĵon, kaj alinomi aŭtomatan
+demonstraĵon konservas ĝin. Cimraportoj enhavas la aŭtomatan demonstraĵon de
+la nuna nivelo.
+
+Dum demonstraĵo, Spaco paŭzigas, teni Maldekstren aŭ Dekstren rebobenas aŭ
+rapidigas antaŭen, Supren kaj Malsupren ŝanĝas la rapidon, PgUp kaj PgDn
+saltas 10 sekundojn, kaj Home kaj End iras al la komenco kaj al la sekva
+mapo. I kaj O markas eltranĉaĵon; E eksportas ĝin, aŭ la tutan demonstraĵon,
+al la dosierujo `videos`. La regiloj restas surekrane; H aŭ Kaŝi kaŝas ilin,
+kaj montri al la suba rando aperigas strion, kiu reaperigas ilin. Alklaku la
+butonojn, alklaku la templinion por salti tien, aŭ trenu trans ĝin por marki
+eltranĉaĵon; Eksporti demandas la kadrorapidon, grandon, formaton kaj
+dosieron, kaj ĉu eksporti la markitan eltranĉaĵon aŭ la tutan demonstraĵon.
+
+Ĉe regilo, A paŭzigas, la direktokruco rebobenas, rapidigas kaj ŝanĝas la
+rapidon, LB kaj RB saltas 10 sekundojn, kaj la stirstangaj butonoj iras al
+la komenco kaj al la sekva mapo. LT kaj RT markas eltranĉaĵon, B forigas
+ĝin, X eksportas, Y konservas aŭtomatan demonstraĵon kaj View kaŝas la
+regilojn.
+
+`capture` komencas kaj ĉesigas videoregistradon dum vi ludas. Kadrorapido,
+formato kaj kvalito troviĝas en Agordoj → Demonstraĵoj → Videoregistrado.
+Videoj bezonas ffmpeg; sen ĝi la kadroj konserviĝas kiel PNG-bildoj kun
+WAV-dosiero.
+
 ## Alirebleco
 
 Options → Alirebleco:

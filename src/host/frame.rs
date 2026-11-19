@@ -162,6 +162,9 @@ impl Host {
         self.con.modern = self.cv("con_modern") != 0.0;
         self.con.poll_shell();
         self.poll_demo_jobs();
+        if self.quit_after_jobs && self.demo_jobs.is_empty() {
+            self.quit = true;
+        }
         for e in events {
             self.handle_event(e);
         }
@@ -384,8 +387,9 @@ impl Host {
             g.cl.cl_nolerp = nolerp;
         }
         if self.cl.signon > 0 {
-            let demo_paused = self.demo.as_ref().is_some_and(|d| d.paused);
-            self.cl.frame(if demo_paused { 0.0 } else { dt * timescale });
+            // Demos run at their playback speed (rewinding seeks instead).
+            let cdt = if self.demo.is_some() { dt * f64::from(self.demo_speed()).max(0.0) } else { dt * timescale };
+            self.cl.frame(cdt);
             self.apply_qw_prediction();
         }
         for g in &mut self.guests {
@@ -416,15 +420,26 @@ impl Host {
             (None, None)
         };
         self.update_sound(view.as_ref(), ft);
+        self.update_export();
         self.prof_mark(4);
-        if self.screenshot.is_some() || self.thumb.is_some() {
+        let capture = self.wants_capture();
+        let exporting = self.exporting();
+        if capture {
             self.r.request_capture();
+        }
+        // export frames go offscreen; the window shows the export screen
+        if exporting {
+            self.r.present_next(false);
         }
         if !self.dedicated {
             self.render(view, gun, ft);
         }
-        if self.screenshot.is_some() || self.thumb.is_some() {
+        if capture {
             self.write_captures();
+        }
+        if exporting && self.exporting() {
+            let p = self.export_progress();
+            self.render_export_ui(p, false);
         }
         if let Some(p) = &mut self.prof {
             p.mark(5);

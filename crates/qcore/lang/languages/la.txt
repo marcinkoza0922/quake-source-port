@@ -1397,6 +1397,93 @@ la Omnis superficies metallica obturamentum accipit, non solum electronica
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 la Damnum fulminis singulis decimis partibus secundae (fulminator solitus 30 facit)
 
+# Demos and video recording.
+@ AV1 (MP4)
+la AV1 (MP4)
+
+@ Auto-Demo Slots
+la Loci demonstrationum automaticarum
+
+@ Auto-Record Demos
+la Demonstrationes sponte inscribere
+
+@ Frame Rate
+la Imagines per secundum
+
+@ H.264 (MP4)
+la H.264 (MP4)
+
+@ H.265 (MP4)
+la H.265 (MP4)
+
+@ Pause at End
+la Pausa in fine
+
+@ Playback Bar
+la Taenia ludendi
+
+@ Quality
+la Qualitas
+
+@ Record Audio
+la Sonum inscribere
+
+@ VP9 (WebM)
+la VP9 (WebM)
+
+@ Video Format
+la Forma pelliculae
+
+@ Video Recording
+la Inscriptio pelliculae
+
+@ ffmpeg Program
+la Programma ffmpeg
+
+@ small file
+la parvum documentum
+
+@ unlimited
+la sine fine
+
+# Demos and video recording.
+@ 1080p
+la 1080p
+
+@ 1440p
+la 1440p
+
+@ 4K
+la 4K
+
+@ 720p
+la 720p
+
+@ Destination
+la Destinatio
+
+@ File Name
+la Nomen fasciculi
+
+@ Rename
+la Renomina
+
+@ Rename Demo
+la Renomina demonstrationem
+
+@ Export Highlighted Clip
+la Fragmentum notatum exportare
+
+@ Export Whole Demo
+la Totam demonstrationem exportare
+
+@ Same as window
+la Ut fenestra
+
+# Demos and video recording.
+@ GPU Encoding
+la Codificatio GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ la Quae tela congelationem excitent; comminus securim et omne telum modi comminu
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 la Rochetae et pyroboli tui te non laedunt; saltus rochetarum adhuc valent
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+la Demonstratio quam ludis in ultima imagine consistit nec ad indicem redit, ut eam retro volvere possis
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+la Imagines per secundum pelliculae; dum inscribitur, ludus hac ipsa celeritate currit
+
+@ High keeps the most detail; small file saves disk space
+la Alta plurima singula servat; parvum documentum spatium disci servat
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+la Quot demonstrationes automaticae servantur antequam vetustissima deletur; servatae non numerantur
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+la Omnem gradum quem ludis in indicem Automaticae inscribit, in Index principalis > Demonstrationes; serva quas vis, vetustissimae substituuntur
+
+@ Records game sound and music into the video
+la Sonos et musicam ludi in pelliculam inscribit
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+la Taeniam ludendi (tempus, celeritatem, temporis lineam) post clavem moderandi, semper, aut numquam ostendit
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+la Forma pelliculae; ffmpeg cum illo codificatore requirit, aliter imagines ut picturae PNG servantur
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+la Nullum fragmentum notatum: dum demonstratio luditur, per temporis lineam trahe aut I et O preme (LT et RT in moderatore)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+la Nomen fasciculi pelliculae; extensio formam pelliculae sequitur, et fasciculus eiusdem nominis substituitur
+
+@ New name of the demo; if another demo has it, a number is added
+la Novum nomen demonstrationis; si alia demonstratio iam id habet, numerus additur
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+la Magnitudo pelliculae; imagines ex magnitudine fenestrae mutantur (cum fasciis ut forma servetur), itaque maior magnitudo nihil subtilitatis addit
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+la In charta graphica codificat (NVIDIA NVENC, AMD vel Intel per VA-API, AMF vel Quick Sync, Apple VideoToolbox) cum ffmpeg ea uti potest, processorem liberum relinquens; aliter processor codificat
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ la Servatio
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 la Ictus alter in tabulam electronicam lucentem intra manum unum caput inserit; alterum tum fulmina cum missilibus infinitis iacit. Funis te capsulae alligat et angulis haeret. Ictus alter aut armorum mutatio eum evellit.
 
+@ From the game folder
+la Ex folliculo ludi
+
+@ From ironwail
+la Ex ironwail
+
+@ From the 2021 re-release
+la Ex editione anni 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+la Demonstrationes automaticae exstinctae sunt. Accende Demonstrationes sponte inscribere in Optiones > Demonstrationes ut omnem gradum quem ludis inscribas.
+
+@ Automatic: replaced when the slots are full
+la Automatica: substituitur cum loci pleni sunt
+
+@ Delete {}?
+la Delerene {}?
+
+@ Demos
+la Demonstrationes
+
+@ End of demo
+la Finis demonstrationis
+
+@ Export Video
+la Pelliculam exportare
+
+@ Fast forward
+la Celeriter progredi
+
+@ Fast forward {}x
+la Prorsus {}x
+
+@ Indexing...
+la Indicem facio...
+
+@ K keep
+la K serva
+
+@ Keep
+la Serva
+
+@ Length: {}
+la Longitudo: {}
+
+@ Map: {}
+la Charta: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+la Nondum sunt demonstrationes automaticae. Omnis gradus quem ludis hic inscribitur.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+la Nondum sunt demonstrationes servatae. Inscribe unam iussu consolatorii 'record <name>', aut serva demonstrationem automaticam.
+
+@ Pause
+la Pausa
+
+@ Paused
+la In pausa
+
+@ Play {}x
+la Ludit {}x
+
+@ Quake - exporting video {}%
+la Quake - pellicula exportatur {}%
+
+@ Recorded: {}
+la Inscripta: {}
+
+@ Rewind
+la Retro volvere
+
+@ Rewind {}x
+la Retro {}x
+
+@ Size: {} KB
+la Magnitudo: {} KB
+
+@ Skip 10 s
+la Transili 10 s
+
+@ Back 10 s
+la Retro 10 s
+
+@ Length
+la Longitudo
+
+@ Mark in
+la Initium nota
+
+@ Mark out
+la Finem nota
+
+@ Next level
+la Gradus proximus
+
+@ No demos match the filter. Backspace or Esc clears it.
+la Nulla demonstratio colatorio congruit. Backspace aut Esc id purgat.
+
+@ Renaming an automatic demo moves it to the saved demos.
+la Demonstratio automatica renominata ad servatas transfertur.
+
+@ Restart
+la Ab initio
+
+@ Sort
+la Ordina
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+la Dum demonstratio luditur: A pausam facit, crux directionis volvit et celeritatem mutat, LT et RT fragmentum notant, et X id exportat.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+la Spatium pausa | Sinistra/Dextra volve | Sursum/Deorsum celeritas | PgUp/PgDn 10 s | I/O nota | E exporta
+
+@ Speed
+la Celeritas
+
+@ Switch List
+la Indicem muta
+
+@ This can't be undone.
+la Hoc revocari non potest.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+la Dum demonstratio luditur: Spatium pausam facit, sagittae volvunt et celeritatem mutant, I et O fragmentum notant, et E id exportat.
+
+@ Saved
+la Servatae
+
+@ Automatic
+la Automaticae
+
+# Demos and video recording.
+@ Export
+la Exporta
+
+@ H hide
+la H cela
+
+@ Hide
+la Cela
+
+# Demos and video recording.
+@ Demo: {}
+la Demonstratio: {}
+
+@ Highlighted clip: {} to {} ({})
+la Fragmentum notatum: {} ad {} ({})
+
+@ Show controls
+la Imperia ostende
+
+# Demos and video recording.
+@ About {} left
+la Circiter {} restant
+
+@ Exporting video
+la Pellicula exportatur
+
+@ Preparing...
+la Paratur...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ la Solum ministratrum changelevel adhibere potest
 @ {} renamed to {}
 la {} nunc appellatur {}
 
-@ From the game folder
-la Ex folliculo ludi
+@ Already recording video.
+la Pellicula iam inscribitur.
 
-@ From ironwail
-la Ex ironwail
+@ Export cancelled.
+la Exportatio abrogata.
 
-@ From the 2021 re-release
-la Ex editione anni 2021
+@ Exporting {} to video
+la {} in pelliculam exportatur
+
+@ Kept demo {}
+la Demonstratio servata: {}
+
+@ Not a valid demo name.
+la Nomen demonstrationis non validum.
+
+@ Renamed demo to {}
+la Demonstratio renominata est {}
+
+@ No auto-demo to keep.
+la Nulla demonstratio automatica servanda.
+
+@ Not playing a demo.
+la Nulla demonstratio luditur.
+
+@ Not recording video.
+la Nulla pellicula inscribitur.
+
+@ Recording video to {}
+la Pellicula inscribitur in {}
+
+@ This demo is already saved.
+la Haec demonstratio iam servata est.
+
+@ This level's demo will be kept when it ends.
+la Demonstratio huius gradus servabitur cum finietur.
+
+@ Video capture is not available in this build.
+la Inscriptio pelliculae in hac versione non adest.
+
+@ Wrote {} ({}s)
+la Scriptum {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+la ffmpeg non inventum: {} imagines PNG et WAV in {} scriptae

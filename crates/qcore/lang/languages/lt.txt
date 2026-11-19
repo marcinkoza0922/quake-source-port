@@ -1397,6 +1397,93 @@ lt Kištuką priima bet koks metalinis paviršius, ne tik elektronika
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 lt Žaibo žala kas dešimtąją sekundės dalį (įprastas žaibų pabūklas daro 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+lt AV1 (MP4)
+
+@ Auto-Demo Slots
+lt Automatinių demo vietos
+
+@ Auto-Record Demos
+lt Automatiškai įrašyti demo
+
+@ Frame Rate
+lt Kadrų dažnis
+
+@ H.264 (MP4)
+lt H.264 (MP4)
+
+@ H.265 (MP4)
+lt H.265 (MP4)
+
+@ Pause at End
+lt Pauzė pabaigoje
+
+@ Playback Bar
+lt Grojimo juosta
+
+@ Quality
+lt Kokybė
+
+@ Record Audio
+lt Įrašyti garsą
+
+@ VP9 (WebM)
+lt VP9 (WebM)
+
+@ Video Format
+lt Vaizdo formatas
+
+@ Video Recording
+lt Vaizdo įrašymas
+
+@ ffmpeg Program
+lt ffmpeg programa
+
+@ small file
+lt mažas failas
+
+@ unlimited
+lt neribotai
+
+# Demos and video recording.
+@ 1080p
+lt 1080p
+
+@ 1440p
+lt 1440p
+
+@ 4K
+lt 4K
+
+@ 720p
+lt 720p
+
+@ Destination
+lt Paskirtis
+
+@ File Name
+lt Failo pavadinimas
+
+@ Rename
+lt Pervadinti
+
+@ Rename Demo
+lt Pervadinti demo
+
+@ Export Highlighted Clip
+lt Eksportuoti pažymėtą klipą
+
+@ Export Whole Demo
+lt Eksportuoti visą demo
+
+@ Same as window
+lt Kaip langas
+
+# Demos and video recording.
+@ GPU Encoding
+lt GPU kodavimas
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ lt Kurie ginklai sukelia sustingdymą; artima kova apima kirvį ir bet kurį mod
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 lt Jūsų pačių raketos ir granatos jūsų nežeidžia; raketų šuoliai vis tiek veikia
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+lt Jūsų paleistas demo sustoja ties paskutiniu kadru, užuot grįžęs į meniu, kad galėtumėte jį atsukti atgal
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+lt Vaizdo įrašo kadrų per sekundę skaičius; įrašant žaidimas veikia lygiai tokiu dažniu
+
+@ High keeps the most detail; small file saves disk space
+lt Aukšta išsaugo daugiausia detalių; mažas failas taupo vietą diske
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+lt Kiek automatinių demo laikoma, kol ištrinamas seniausias; pasilikti demo nesiskaičiuoja
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+lt Įrašo kiekvieną žaistą lygį į sąrašą Automatiniai skiltyje Pagrindinis meniu > Demo; pasilikite norimus, seniausi pakeičiami
+
+@ Records game sound and music into the video
+lt Įrašo žaidimo garsus ir muziką į vaizdo įrašą
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+lt Rodo grojimo juostą (laikas, greitis, laiko juosta) po valdymo klavišo, visada arba niekada
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+lt Vaizdo formatas; reikia ffmpeg su tuo koduotuvu, kitaip kadrai išsaugomi kaip PNG paveikslėliai
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+lt Klipas nepažymėtas: leidžiant demo vilkite per laiko juostą arba spauskite I ir O (valdiklyje LT ir RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+lt Vaizdo failo pavadinimas; plėtinys atitinka vaizdo formatą, o tokio pat pavadinimo failas pakeičiamas
+
+@ New name of the demo; if another demo has it, a number is added
+lt Naujas demo pavadinimas; jei jį jau turi kitas demo, pridedamas numeris
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+lt Vaizdo dydis; kadrai keičiami iš lango dydžio (su juostomis formai išlaikyti), todėl didesnis dydis neprideda detalių
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+lt Koduoja vaizdo plokšte (NVIDIA NVENC, AMD ar Intel per VA-API, AMF ar Quick Sync, Apple VideoToolbox), kai ffmpeg gali ją naudoti, ir palieka procesorių laisvą; kitaip koduoja procesorius
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ lt Išsaugojimas
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 lt Antrinė ugnis į šviečiantį pasiekiamą elektronikos skydelį įjungia vieną galą; kitas tada šaudo žaibais su neribota amunicija. Kabelis pririša jus prie lizdo ir kliūva už kampų. Antrinė ugnis ar ginklo keitimas jį ištraukia.
 
+@ From the game folder
+lt Iš žaidimo aplanko
+
+@ From ironwail
+lt Iš ironwail
+
+@ From the 2021 re-release
+lt Iš 2021 m. pakartotinio leidimo
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+lt Automatiniai demo išjungti. Įjunkite Automatiškai įrašyti demo skiltyje Parinktys > Demo, kad būtų įrašomas kiekvienas žaistas lygis.
+
+@ Automatic: replaced when the slots are full
+lt Automatinis: pakeičiamas, kai vietos užpildytos
+
+@ Delete {}?
+lt Ištrinti {}?
+
+@ Demos
+lt Demo
+
+@ End of demo
+lt Demo pabaiga
+
+@ Export Video
+lt Eksportuoti vaizdo įrašą
+
+@ Fast forward
+lt Prasukti pirmyn
+
+@ Fast forward {}x
+lt Pirmyn {}x
+
+@ Indexing...
+lt Indeksuojama...
+
+@ K keep
+lt K pasilikti
+
+@ Keep
+lt Pasilikti
+
+@ Length: {}
+lt Trukmė: {}
+
+@ Map: {}
+lt Žemėlapis: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+lt Automatinių demo dar nėra. Čia įrašomas kiekvienas žaistas lygis.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+lt Išsaugotų demo dar nėra. Įrašykite jį konsolės komanda 'record <name>' arba pasilikite automatinį demo.
+
+@ Pause
+lt Pauzė
+
+@ Paused
+lt Pristabdyta
+
+@ Play {}x
+lt Leidžiama {}x
+
+@ Quake - exporting video {}%
+lt Quake - eksportuojamas vaizdo įrašas {} %
+
+@ Recorded: {}
+lt Įrašyta: {}
+
+@ Rewind
+lt Atsukti atgal
+
+@ Rewind {}x
+lt Atgal {}x
+
+@ Size: {} KB
+lt Dydis: {} KB
+
+@ Skip 10 s
+lt Praleisti 10 s
+
+@ Back 10 s
+lt Atgal 10 s
+
+@ Length
+lt Trukmė
+
+@ Mark in
+lt Žymėti pradžią
+
+@ Mark out
+lt Žymėti pabaigą
+
+@ Next level
+lt Kitas lygis
+
+@ No demos match the filter. Backspace or Esc clears it.
+lt Filtrą atitinkančių demo nėra. Backspace arba Esc jį išvalo.
+
+@ Renaming an automatic demo moves it to the saved demos.
+lt Pervadintas automatinis demo perkeliamas į išsaugotus.
+
+@ Restart
+lt Iš pradžių
+
+@ Sort
+lt Rikiuoti
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+lt Leidžiant demo: A pristabdo, kryžminis mygtukas suka ir keičia greitį, LT ir RT pažymi klipą, o X jį eksportuoja.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+lt Tarpas pauzė | Kairėn/Dešinėn sukti | Aukštyn/Žemyn greitis | PgUp/PgDn 10 s | I/O žymė | E eksportas
+
+@ Speed
+lt Greitis
+
+@ Switch List
+lt Keisti sąrašą
+
+@ This can't be undone.
+lt To negalima atšaukti.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+lt Leidžiant demo: Tarpas pristabdo, rodyklės suka ir keičia greitį, I ir O pažymi klipą, o E jį eksportuoja.
+
+@ Saved
+lt Išsaugoti
+
+@ Automatic
+lt Automatiniai
+
+# Demos and video recording.
+@ Export
+lt Eksportuoti
+
+@ H hide
+lt H slėpti
+
+@ Hide
+lt Slėpti
+
+# Demos and video recording.
+@ Demo: {}
+lt Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+lt Pažymėtas klipas: {}–{} ({})
+
+@ Show controls
+lt Rodyti valdiklius
+
+# Demos and video recording.
+@ About {} left
+lt Liko apie {}
+
+@ Exporting video
+lt Eksportuojamas vaizdo įrašas
+
+@ Preparing...
+lt Ruošiama...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ lt Tik serveris gali vykdyti changelevel
 @ {} renamed to {}
 lt {} dabar vadinasi {}
 
-@ From the game folder
-lt Iš žaidimo aplanko
+@ Already recording video.
+lt Vaizdo įrašas jau įrašomas.
 
-@ From ironwail
-lt Iš ironwail
+@ Export cancelled.
+lt Eksportas atšauktas.
 
-@ From the 2021 re-release
-lt Iš 2021 m. pakartotinio leidimo
+@ Exporting {} to video
+lt {} eksportuojamas į vaizdo įrašą
+
+@ Kept demo {}
+lt Demo pasiliktas: {}
+
+@ Not a valid demo name.
+lt Netinkamas demo pavadinimas.
+
+@ Renamed demo to {}
+lt Demo pervadintas į {}
+
+@ No auto-demo to keep.
+lt Nėra automatinio demo, kurį būtų galima pasilikti.
+
+@ Not playing a demo.
+lt Demo neleidžiamas.
+
+@ Not recording video.
+lt Vaizdo įrašas neįrašomas.
+
+@ Recording video to {}
+lt Vaizdo įrašas įrašomas į {}
+
+@ This demo is already saved.
+lt Šis demo jau išsaugotas.
+
+@ This level's demo will be kept when it ends.
+lt Šio lygio demo bus pasiliktas, kai jis baigsis.
+
+@ Video capture is not available in this build.
+lt Vaizdo įrašymas šioje versijoje negalimas.
+
+@ Wrote {} ({}s)
+lt Įrašyta {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+lt ffmpeg nerastas: {} PNG kadrų ir WAV įrašyti į {}

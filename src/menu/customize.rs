@@ -85,7 +85,7 @@ impl Menu {
         self.screen = Screen::OptionsPage(if new_game { Page::NewGameCustomize } else { Page::Customize });
     }
 
-    /// Main menu rows: the classic five, Map Packs, and Customize while a
+    /// Main menu rows: the classic five, Map Packs, Demos, and Customize while a
     /// customized game runs.
     pub(super) fn main_items(&self) -> usize {
         MAIN_ITEMS + usize::from(self.custom_running)

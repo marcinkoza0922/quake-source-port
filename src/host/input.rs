@@ -34,6 +34,8 @@ impl Host {
                     if let Some(snd) = self.menu.mouse_move(pos, &mut self.server.core.cvars) {
                         self.local_sound(snd);
                     }
+                } else if self.key_dest() == KeyDest::Game && (self.demo_cursor() || self.exporting()) {
+                    self.demo_pointer_move((px / c.scale, py / c.scale), (c.vw(), c.vh()));
                 } else if self.key_dest() == KeyDest::Console && self.con.modern {
                     let cell = self.con.hit_cell(px / c.scale, py / c.scale);
                     self.con.hover_cell = cell;
@@ -45,6 +47,18 @@ impl Host {
                 }
             }
             HostEvent::Input(ie) => {
+                // the export screen takes every key and button (Esc included)
+                if self.exporting() {
+                    return self.export_input(&ie);
+                }
+                // the demo cursor: buttons and the wheel work the bar, not binds
+                if self.key_dest() == KeyDest::Game && self.demo_cursor() {
+                    match ie {
+                        InputEvent::MouseButton { button, down } => return self.demo_pointer_button(button, down),
+                        InputEvent::MouseWheel { .. } | InputEvent::MouseMotion { .. } => return,
+                        _ => {}
+                    }
+                }
                 if let InputEvent::MouseButton { button: 1, down } = ie {
                     if down {
                         if self.key_dest() == KeyDest::Console
@@ -79,6 +93,26 @@ impl Host {
                     && (c == '`' || c == '~')
                 {
                     return;
+                }
+                // Demo playback controls.
+                let pad_key = match ie {
+                    InputEvent::Key { key, down } => Some((key, down)),
+                    InputEvent::GamepadButton { button, down } => Some((button.key(), down)),
+                    _ => None,
+                };
+                if let Some((key, down)) = pad_key
+                    && self.demo_key(key, down)
+                {
+                    return;
+                }
+                // triggers are axes: their presses mark a demo clip (the
+                // event still reaches the binds, which a demo ignores)
+                if let InputEvent::GamepadAxis { axis: a @ (qinput::GamepadAxis::LeftTrigger | qinput::GamepadAxis::RightTrigger), value } = ie {
+                    let i = usize::from(a == qinput::GamepadAxis::RightTrigger);
+                    let on = value > self.cv("joy_deadzone_trigger");
+                    if std::mem::replace(&mut self.demo_ui.triggers[i], on) != on && on {
+                        self.demo_key([qinput::keys::K_LTRIGGER, qinput::keys::K_RTRIGGER][i], true);
+                    }
                 }
                 // Key_Event: in a demo, a key in game mode brings up the menu.
                 if let InputEvent::Key { key, down: true } = ie

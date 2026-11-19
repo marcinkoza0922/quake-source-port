@@ -1,54 +1,6 @@
 use super::*;
 
 impl Host {
-    /// CL_GetMessage for demos: feed recorded messages until the client
-    /// clock catches up with the newest one (everything before signon).
-    pub(super) fn read_demo(&mut self, dt: f64) {
-        if self.demo.as_ref().is_some_and(|d| d.paused) {
-            return;
-        }
-        let mut ended = false;
-        let mut n = 0;
-        while self.demo.is_some() {
-            if self.cl.signon == 4 {
-                if let Some(td) = &mut self.timedemo {
-                    // One message per frame; frame 1 (loading) doesn't count.
-                    if n > 0 {
-                        break;
-                    }
-                    td.0 += 1;
-                    if td.0 == 2 {
-                        td.1 = qcore::time::Instant::now();
-                    }
-                } else if self.cl.time + dt <= self.cl.mtime[0] {
-                    break;
-                }
-            }
-            n += 1;
-            let Some((angles, data)) = self.demo.as_mut().and_then(|d| d.next_message()).map(|m| (m.angles, m.data.to_vec())) else {
-                ended = true;
-                break;
-            };
-            self.cl.mviewangles[1] = self.cl.mviewangles[0];
-            self.cl.mviewangles[0] = angles;
-            let r = self.cl.parse_server_message(&data);
-            self.cl.take_reliable_out();
-            if let Err(e) = r {
-                self.con.print(&format!("demo: bad message: {e:?}\n"));
-                ended = true;
-                break;
-            }
-            // NewMap must load models before entities parsed later use them.
-            self.process_client_events();
-            if self.demo.is_none() {
-                return;
-            }
-        }
-        if ended {
-            self.end_demo();
-        }
-    }
-
     /// CL_StopPlayback + CL_NextDemo.
     pub(super) fn end_demo(&mut self) {
         self.demo = None;
@@ -73,7 +25,7 @@ impl Host {
             }
         }
         let name = self.demos[self.demonum as usize].clone();
-        self.cbuf.insert_text(&format!("playdemo {name}\n"));
+        self.cbuf.insert_text(&format!("_playdemo_loop {name}\n"));
         self.demonum += 1;
         true
     }
@@ -92,7 +44,21 @@ impl Host {
         self.con.print(&qcore::ctr!("Playing demo from {}.\n", file));
         self.cl = ClientState::new();
         self.cl.demoplayback = true;
-        self.demo = Some(crate::demo::Demo::new(data));
+        let mut demo = crate::demo::Demo::new(data);
+        demo.play.name = file.clone();
+        demo.play.auto = file.starts_with(&format!("{}/", crate::demo::library::AUTO_DIR));
+        // The timeline scan replays the file once more without effects.
+        let data = demo.data();
+        if cfg!(target_arch = "wasm32") {
+            demo.play.index = Some(std::sync::Arc::new(crate::demo::index::scan(&data)));
+        } else {
+            let (tx, rx) = std::sync::mpsc::channel();
+            std::thread::spawn(move || {
+                let _ = tx.send(crate::demo::index::scan(&data));
+            });
+            demo.play.index_rx = Some(rx);
+        }
+        self.demo = Some(demo);
         self.con.forced = false;
     }
 
@@ -314,6 +280,9 @@ pub(super) fn register(c: &mut Commands<Host>) {
             h.print("playdemo <demoname> : plays a demo\n");
             return;
         }
+        // a demo the player picked ends the attract loop
+        h.demonum = -1;
         h.play_demo(a.argv(1));
     });
+    c.add("_playdemo_loop", |h, a| h.play_demo(a.argv(1)));
 }

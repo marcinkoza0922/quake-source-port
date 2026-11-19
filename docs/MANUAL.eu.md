@@ -169,6 +169,38 @@ dituzten partikula-efektuak erabiltzen baditu, bertsio osoa `<name>.qsd`
 gisa gordetzen da (`playdemo <name>.qsd`). `demo_convert <name>` komandoak
 demo zaharrago bat bihurtzen du.
 
+Menu nagusia → Demoak atalak gordetako demoak erakusten ditu eta, Aukerak →
+Demoak → Grabatu demoak automatikoki aktibatuta badago, jokatzen duzun maila
+bakoitzaren demo automatikoa ere bai; zaharrenak ordezten dira tokiak beteta
+daudenean. Idatzi zerrendak iragazteko eta sakatu Tab ordena aldatzeko;
+zerrendaren ondoko botoiek hautatutako demoa erreproduzitu, esportatu,
+izenez aldatu, gorde edo ezabatzen dute, eta demo automatiko baten izena
+aldatzean gorde egiten da. Akats-txostenek uneko mailaren demo automatikoa
+dute.
+
+Demo bat erreproduzitzean, Zuriuneak pausatzen du, Ezkerra edo Eskuina
+sakatuta edukitzeak atzera edo aurrera eramaten du, Gora eta Behera abiadura
+aldatzen dute, PgUp eta PgDn 10 segundo jauzi egiten dute, eta Home eta End
+hasierara eta hurrengo mapara doaz. I eta O-k klip bat markatzen dute; E-k
+hura, edo demo osoa, `videos` karpetara esportatzen du. Kontrolak pantailan
+geratzen dira; H edo Ezkutatu sakatuta ezkutatzen dira, eta beheko ertza
+seinalatuz gero itzultzen dituen zerrenda bat agertzen da. Egin klik
+botoietan, egin klik denbora-lerroan hara jauzi egiteko, edo arrastatu haren
+gainean klip bat nabarmentzeko; Esportatu aukerak fotograma-abiadura,
+tamaina, formatua eta fitxategia galdetzen ditu, baita nabarmendutako klipa
+ala demo osoa esportatu ere.
+
+Kontrolagailuan, A-k pausatzen du, d-pad-ak atzera eta aurrera egiten du eta
+abiadura aldatzen du, LB eta RB-k 10 segundo jauzi egiten dute, eta makilen
+botoiek hasierara eta hurrengo mapara eramaten dute. LT eta RT-k klip bat
+markatzen dute, B-k garbitzen du, X-k esportatzen du, Y-k demo automatiko
+bat gordetzen du eta View-k kontrolak ezkutatzen ditu.
+
+`capture`-k jokatzen ari zaren bitartean bideo-grabazioa hasi eta gelditzen
+du. Fotograma-abiadura, formatua eta kalitatea Aukerak → Demoak →
+Bideo-grabazioa atalean daude. Bideoek ffmpeg behar dute; hura gabe
+fotogramak PNG irudi gisa gordetzen dira WAV fitxategi batekin.
+
 ## Irisgarritasuna
 
 Options → Irisgarritasuna:

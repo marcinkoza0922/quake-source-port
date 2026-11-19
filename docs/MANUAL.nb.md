@@ -148,6 +148,33 @@ bruker partikkeleffekter som andre porter ikke kan vise, beholdes den fulle
 versjonen som `<name>.qsd` (`playdemo <name>.qsd`). `demo_convert <name>`
 konverterer en eldre demo.
 
+Hovedmeny → Demoer viser de lagrede demoene dine og, med Innstillinger →
+Demoer → Ta opp demoer automatisk slått på, en automatisk demo av hvert
+brett du spiller; de eldste erstattes når plassene er fulle. Skriv for å
+filtrere listene, og trykk Tab for å bytte sortering; knappene ved siden av
+listen spiller av, eksporterer, gir nytt navn til, beholder eller sletter
+valgt demo, og en automatisk demo som får nytt navn, beholdes.
+Feilrapporter inneholder det gjeldende brettets automatiske demo.
+
+Under en demo pauser Mellomrom, å holde Venstre eller Høyre spoler tilbake
+eller frem, Opp og Ned endrer hastigheten, PgUp og PgDn hopper 10 sekunder,
+og Home og End går til starten og til neste brett. I og O merker et klipp; E
+eksporterer det, eller hele demoen, til mappen `videos`. Kontrollene blir
+værende på skjermen; H eller Skjul skjuler dem, og når du peker på
+nederkanten, vises en stripe som henter dem tilbake. Klikk på knappene,
+klikk på tidslinjen for å hoppe dit, eller dra over den for å markere et
+klipp; Eksporter spør om bildefrekvens, størrelse, format og fil, og om det
+markerte klippet eller hele demoen skal eksporteres.
+
+På en kontroller pauser A, styrekorset spoler bakover og forover og endrer
+hastigheten, LB og RB hopper 10 sekunder, og spakknappene går til starten og
+til neste brett. LT og RT merker et klipp, B fjerner det, X eksporterer, Y
+beholder en automatisk demo, og View skjuler kontrollene.
+
+`capture` starter og stopper et videoopptak mens du spiller. Bildefrekvens,
+format og kvalitet finner du under Innstillinger → Demoer → Videoopptak.
+Video krever ffmpeg; uten det lagres bildene som PNG-bilder med en WAV-fil.
+
 ## Tilgjengelighet
 
 Options → Tilgjengelighet:

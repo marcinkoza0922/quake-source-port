@@ -10,7 +10,7 @@ impl Menu {
         c.fade_screen();
         let base_scale = c.scale;
         c.menu_layout();
-        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Load | Screen::Save | Screen::Help) {
+        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Load | Screen::Save | Screen::Help | Screen::Demos) {
             c.ox += CLASSIC.0;
             c.oy += CLASSIC.1;
         }
@@ -35,7 +35,7 @@ impl Menu {
                 let p = pic("gfx/mainmenu.lmp");
                 c.pic(72.0, 32.0, p);
                 // extra entries under the classic graphic
-                let extra: &[&str] = if self.custom_running { &[qcore::t!("Map Packs"), qcore::t!("Customize")] } else { &[qcore::t!("Map Packs")] };
+                let extra: &[&str] = if self.custom_running { &[qcore::t!("Map Packs"), qcore::t!("Demos"), qcore::t!("Customize")] } else { &[qcore::t!("Map Packs"), qcore::t!("Demos")] };
                 for (k, &label) in extra.iter().enumerate() {
                     let (y, w) = (32.0 + (5 + k) as f32 * 20.0 + 2.0, 112.0);
                     c.fill(72.0, y, w, 16.0, [0.0, 0.0, 0.0, 0.55]);
@@ -50,6 +50,7 @@ impl Menu {
                 self.boxed_hints(c, 334.0, &[(K_DPAD_UP, "Section"), (K_RSHOULDER, "Scroll"), (K_BBUTTON, "Back")]);
             }
             Screen::Mods => self.mods.draw(c, modmenu::Page::List),
+            Screen::Demos => self.demos.draw(c, self.mouse, self.pad_ui),
             Screen::ModMaps => self.mods.draw(c, modmenu::Page::Maps),
             Screen::ModOnline => self.mods.draw(c, modmenu::Page::Online),
             Screen::SinglePlayer => {
@@ -129,6 +130,7 @@ impl Menu {
                 }
                 if page == Page::Crosshair { crate::reticle::preview(c, cv); }
                 self.draw_custom_notes(c, cv, page, n);
+                if matches!(page, Page::Export | Page::RenameDemo) { self.draw_dialog_notes(c, n); }
                 if page == Page::Join && self.servers.is_empty() && !self.searching {
                     let s = "no servers found yet";
                     c.text_center(320.0, PAGE_ROW0 + n as f32 * ROW_H + 8.0, s, TXT, MUTED);
@@ -283,13 +285,28 @@ impl Menu {
             Item::Text { label: l, cvar, max } => {
                 label(c, l);
                 let v = cv.by_name(cvar).map_or("", |c| c.string.as_str());
-                // fits inside the panel: 20 visible characters at most
-                let w = (max.min(20) as f32 * 7.0 + 14.0).min(PANEL_X + PANEL_W - VALUE_X - 4.0);
+                // fits inside the panel: 20 visible characters, or for long
+                // fields (paths) the panel's width with the start cut off
+                let w = if max > 40 { PANEL_X + PANEL_W - VALUE_X - 4.0 } else { (max.min(20) as f32 * 7.0 + 14.0).min(PANEL_X + PANEL_W - VALUE_X - 4.0) };
                 c.fill(VALUE_X - 3.0, y - 1.0, w, BOX_H, [0.0, 0.0, 0.0, 0.5]);
-                let shown: String = v.chars().skip(v.len().saturating_sub(20)).collect();
+                // the export file name's extension follows the video format
+                let ext = (cvar == "_export_name").then(|| crate::capture::Codec::from_cvar(cv.value_of("capture_codec")).extension());
+                let ext_w = ext.map_or(0.0, |e| c.text_w_raw(e, TXT) + 3.0);
+                let shown: String = if max > 40 {
+                    let mut t: &str = v;
+                    while c.text_w_raw(t, TXT) > w - 12.0 - ext_w && !t.is_empty() {
+                        t = &t[t.char_indices().nth(1).map_or(t.len(), |(i, _)| i)..];
+                    }
+                    if t.len() < v.len() { format!("…{t}") } else { t.to_string() }
+                } else {
+                    v.chars().skip(v.chars().count().saturating_sub(20)).collect()
+                };
                 let tw = txt(c, VALUE_X, y, &shown);
                 if blink {
                     c.fill(VALUE_X + tw + 1.0, y, 1.0, 8.0, FG);
+                }
+                if let Some(e) = ext {
+                    c.text_raw(VALUE_X + tw + 3.0, y, e, TXT, MUTED);
                 }
             }
             Item::Color { label: l, high } => {
@@ -320,7 +337,7 @@ impl Menu {
             }
             Item::Run { label: l, run } => {
                 let l = if run == Run::Search && self.searching { qcore::t!("Searching...") } else { l };
-                c.text_center(320.0, y, l, TXT, GOLD_FG);
+                c.text_center(320.0, y, l, TXT, if self.item_disabled(item, cv) { MUTED } else { GOLD_FG });
             }
             Item::Server(k) => {
                 if let Some(s) = self.servers.get(k) {

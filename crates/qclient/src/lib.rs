@@ -19,6 +19,7 @@ mod parse;
 pub mod qw;
 mod rail;
 mod relink;
+mod snapshot;
 mod state;
 
 pub use effects::{Beam, Dlight, PT_BLOB, PT_BLOB2, PT_EXPLODE, PT_EXPLODE2, PT_FIRE, PT_GRAV, PT_SLOWGRAV, PT_STATIC, QRand, TempEntity};

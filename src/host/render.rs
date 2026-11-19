@@ -178,6 +178,9 @@ impl Host {
         let addon_entries: Vec<_> = crate::wheel::inventory(&self.server.core.cvars, &self.allowed_toys())
             .into_iter().filter(|e| matches!(e.weapon, crate::wheel::Weapon::Addon(_))).collect();
         let hud_cfg = crate::sbar::HudConfig::from_cvars(&self.server.core.cvars);
+        let demo_bar = self.demo_bar();
+        let demo_peek = self.demo_peek();
+        let exporting = self.exporting();
         {
             let fs = &self.server.core.fs;
             let pics = &mut self.pics;
@@ -257,6 +260,7 @@ impl Host {
                         }
                         let face = self.view.face_anim_time > self.cl.time;
                         let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
+                        let hud_start = c.list.len();
                         let mut sb = crate::sbar::Sbar::new(&mut c, &mut pf, pack);
                         sb.teamplay = self.server.core.cvars.value_of("teamplay");
                         sb.addon_weapons = addon_entries.clone();
@@ -266,6 +270,11 @@ impl Host {
                             sb.draw(&self.cl, self.show_scores, face);
                         } else {
                             sb.draw_modern(&self.cl, self.show_scores, face, &hud_cfg, &mut self.hud_fade, self.realtime);
+                        }
+                        // the demo bar takes the bottom of the screen: lift the HUD over it
+                        if demo_bar.is_some() {
+                            let dy = -super::demo_bar::lift() * c.scale;
+                            crate::draw::translate(&mut c.list[hud_start..], 0.0, dy);
                         }
                         if self.show_scores && self.cl.gametype == 1 {
                             crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
@@ -297,7 +306,8 @@ impl Host {
             // Split screen draws center prints in each player's cell.
             let center = ingame && !self.menu.active() && splits.is_empty();
             if !(self.clean_shot && self.screenshot.is_some()) && self.thumb.is_none() {
-                self.con.draw(&mut c, conback, ingame && !self.menu.active(), center);
+                // exported video keeps centerprints but not console messages
+                self.con.draw(&mut c, conback, ingame && !self.menu.active() && !exporting, center);
             }
             if self.server.core.sv.paused && view.is_some() {
                 let p = pf("gfx/pause.lmp");
@@ -307,6 +317,12 @@ impl Host {
             }
             if self.cl.intermission == 0 {
                 touch::draw_touch(&mut c, &self.input, &self.server.core.cvars);
+            }
+            if let Some(b) = &demo_bar {
+                super::demo_bar::draw(&mut c, b, &self.menu.glyphs);
+            }
+            if let Some(p) = &demo_peek {
+                super::demo_bar::draw_peek(&mut c, p);
             }
             self.menu.mods.online.poll();
             self.menu.draw(&mut c, &mut pf, &self.server.core.cvars, self.realtime);
@@ -413,17 +429,8 @@ impl Host {
             goggles,
             ..Settings::default()
         };
-        {
-            let mut ui = self.ui_text.borrow_mut();
-            if ui.dirty
-                && let Some(pic) = ui.pic
-            {
-                if let Err(e) = self.r.update_pic(pic, &ui.px) {
-                    self.con.print(&format!("ui text upload: {e:?}\n"));
-                }
-                ui.after_upload();
-            }
-        }
+        self.upload_ui_text();
+        self.last_settings = Some(settings);
         let impacts = std::mem::take(&mut self.cl.shot_impacts);
         self.cl.blood_hits.clear();
         self.cl.weapon_impacts.clear();
@@ -453,6 +460,21 @@ impl Host {
         }
         if view.is_some() {
             self.fte.recycle_geometry(fte);
+        }
+    }
+}
+
+impl Host {
+    /// Sends the UI text atlas to the renderer when it changed.
+    pub(super) fn upload_ui_text(&mut self) {
+        let mut ui = self.ui_text.borrow_mut();
+        if ui.dirty
+            && let Some(pic) = ui.pic
+        {
+            if let Err(e) = self.r.update_pic(pic, &ui.px) {
+                self.con.print(&format!("ui text upload: {e:?}\n"));
+            }
+            ui.after_upload();
         }
     }
 }

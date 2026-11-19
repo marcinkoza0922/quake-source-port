@@ -164,6 +164,36 @@ savent pas afficher, la version complète est conservée sous `<nom>.qsd`
 (`playdemo <nom>.qsd`). `demo_convert <nom>` convertit une démo plus
 ancienne.
 
+Menu principal → Démos liste vos démos enregistrées et, avec Options → Démos
+→ Enregistrer les démos auto activé, une démo automatique de chaque niveau
+joué ; les plus anciennes sont remplacées quand les emplacements sont
+pleins. Tapez pour filtrer les listes et appuyez sur Tab pour changer le tri
+; les boutons à côté de la liste lisent, exportent, renomment, gardent ou
+suppriment la démo choisie, et renommer une démo automatique la garde. Les
+rapports de bug incluent la démo automatique du niveau en cours.
+
+Pendant une démo, Espace met en pause, maintenir Gauche ou Droite rembobine
+ou avance rapidement, Haut et Bas changent la vitesse, PgUp et PgDn sautent
+de 10 secondes, et Début et Fin vont au début et à la carte suivante. I et O
+marquent un extrait ; E l'exporte, ou toute la démo, dans le dossier
+`videos`. Les commandes restent à l'écran ; H ou Masquer les cache, et
+pointer le bord inférieur affiche une bande qui les fait revenir. Cliquez
+sur les boutons, cliquez sur la chronologie pour y sauter, ou faites-y
+glisser la souris pour surligner un extrait ; Exporter demande la fréquence
+d'images, la taille, le format et le fichier, et s'il faut exporter
+l'extrait surligné ou toute la démo.
+
+À la manette, A met en pause, la croix directionnelle recule, avance
+rapidement et change la vitesse, LB et RB sautent de 10 secondes, et les
+clics des sticks vont au début et à la carte suivante. LT et RT marquent un
+extrait, B l'efface, X exporte, Y garde une démo automatique et View masque
+les commandes.
+
+`capture` démarre et arrête l'enregistrement d'une vidéo pendant que vous
+jouez. Fréquence d'images, format et qualité sont dans Options → Démos →
+Enregistrement vidéo. Les vidéos nécessitent ffmpeg ; sans lui, les images
+sont enregistrées en PNG avec un fichier WAV.
+
 ## Accessibilité
 
 Options → Accessibilité :

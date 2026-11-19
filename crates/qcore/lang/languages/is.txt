@@ -1397,6 +1397,93 @@ is Allir málmfletir taka við klónni, ekki bara rafeindabúnaður
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 is Eldingartjón á hverjum tíunda úr sekúndu (venjulega eldingabyssan gerir 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+is AV1 (MP4)
+
+@ Auto-Demo Slots
+is Pláss fyrir sjálfvirkar kynningar
+
+@ Auto-Record Demos
+is Taka kynningar upp sjálfkrafa
+
+@ Frame Rate
+is Rammatíðni
+
+@ H.264 (MP4)
+is H.264 (MP4)
+
+@ H.265 (MP4)
+is H.265 (MP4)
+
+@ Pause at End
+is Hlé í lokin
+
+@ Playback Bar
+is Spilunarstika
+
+@ Quality
+is Gæði
+
+@ Record Audio
+is Taka upp hljóð
+
+@ VP9 (WebM)
+is VP9 (WebM)
+
+@ Video Format
+is Myndsnið
+
+@ Video Recording
+is Myndbandsupptaka
+
+@ ffmpeg Program
+is ffmpeg-forrit
+
+@ small file
+is lítil skrá
+
+@ unlimited
+is ótakmarkað
+
+# Demos and video recording.
+@ 1080p
+is 1080p
+
+@ 1440p
+is 1440p
+
+@ 4K
+is 4K
+
+@ 720p
+is 720p
+
+@ Destination
+is Áfangastaður
+
+@ File Name
+is Skráarheiti
+
+@ Rename
+is Endurnefna
+
+@ Rename Demo
+is Endurnefna kynningu
+
+@ Export Highlighted Clip
+is Flytja út merktan bút
+
+@ Export Whole Demo
+is Flytja út alla kynninguna
+
+@ Same as window
+is Eins og glugginn
+
+# Demos and video recording.
+@ GPU Encoding
+is GPU-kóðun
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ is Hvaða vopn kalla fram frystinguna; návígi nær yfir exina og hvert mod-vop
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 is Þínar eigin eldflaugar og handsprengjur meiða þig ekki; eldflaugastökk virka samt
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+is Kynning sem þú spilar stöðvast á síðasta ramma í stað þess að fara aftur í valmyndina, svo þú getir spólað til baka
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+is Rammar á sekúndu í myndbandinu; á meðan upptaka stendur gengur leikurinn nákvæmlega á þessum hraða
+
+@ High keeps the most detail; small file saves disk space
+is Há heldur flestum smáatriðum; lítil skrá sparar diskpláss
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+is Hversu margar sjálfvirkar kynningar eru geymdar áður en sú elsta er eytt; geymdar kynningar teljast ekki með
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+is Tekur upp hvert borð sem þú spilar í listann Sjálfvirkar undir Aðalvalmynd > Kynningar; geymdu þær sem þú vilt, þær elstu víkja
+
+@ Records game sound and music into the video
+is Tekur upp hljóð og tónlist leiksins í myndbandið
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+is Sýnir spilunarstikuna (tíma, hraða, tímalínu) eftir stjórnhnapp, alltaf eða aldrei
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+is Myndsnið; krefst ffmpeg með þeim kóðara, annars eru rammarnir vistaðir sem PNG-myndir
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+is Enginn bútur merktur: dragðu yfir tímalínuna eða ýttu á I og O meðan kynningin spilast (LT og RT á fjarstýringu)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+is Heiti myndskeiðsskrárinnar; endingin fylgir myndsniðinu og skrá með sama heiti er skipt út
+
+@ New name of the demo; if another demo has it, a number is added
+is Nýtt heiti kynningarinnar; ef önnur kynning ber það þegar er númeri bætt við
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+is Stærð myndbands; rammar eru kvarðaðir úr stærð gluggans (með röndum svo lögunin haldist), svo stærri stærð bætir ekki við smáatriðum
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+is Kóðar á skjákortinu (NVIDIA NVENC, AMD eða Intel um VA-API, AMF eða Quick Sync, Apple VideoToolbox) þegar ffmpeg getur notað það, svo örgjörvinn sé laus; annars kóðar örgjörvinn
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ is Vistun
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 is Aukaskot á glóandi rafeindaborð innan seilingar stingur öðrum endanum í; hinn endinn skýtur þá eldingum með ótakmörkuðum skotfærum. Kapallinn bindur þig við innstunguna og festist á hornum. Aukaskot eða vopnaskipti rífa hann út.
 
+@ From the game folder
+is Úr leikjamöppunni
+
+@ From ironwail
+is Úr ironwail
+
+@ From the 2021 re-release
+is Úr endurútgáfunni frá 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+is Sjálfvirkar kynningar eru óvirkar. Kveiktu á Taka kynningar upp sjálfkrafa í Stillingar > Kynningar til að taka upp hvert borð sem þú spilar.
+
+@ Automatic: replaced when the slots are full
+is Sjálfvirk: skipt út þegar plássin eru full
+
+@ Delete {}?
+is Eyða {}?
+
+@ Demos
+is Kynningar
+
+@ End of demo
+is Lok kynningar
+
+@ Export Video
+is Flytja út myndband
+
+@ Fast forward
+is Spóla áfram
+
+@ Fast forward {}x
+is Áfram {}x
+
+@ Indexing...
+is Skrái...
+
+@ K keep
+is K geyma
+
+@ Keep
+is Geyma
+
+@ Length: {}
+is Lengd: {}
+
+@ Map: {}
+is Kort: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+is Engar sjálfvirkar kynningar enn. Hvert borð sem þú spilar er tekið upp hér.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+is Engar vistaðar kynningar enn. Taktu eina upp með skipuninni 'record <name>' í stjórnborðinu, eða geymdu sjálfvirka kynningu.
+
+@ Pause
+is Hlé
+
+@ Paused
+is Í hléi
+
+@ Play {}x
+is Spilun {}x
+
+@ Quake - exporting video {}%
+is Quake - flyt út myndband {}%
+
+@ Recorded: {}
+is Tekin upp: {}
+
+@ Rewind
+is Spóla til baka
+
+@ Rewind {}x
+is Til baka {}x
+
+@ Size: {} KB
+is Stærð: {} KB
+
+@ Skip 10 s
+is Sleppa 10 s
+
+@ Back 10 s
+is Til baka 10 s
+
+@ Length
+is Lengd
+
+@ Mark in
+is Merkja upphaf
+
+@ Mark out
+is Merkja endi
+
+@ Next level
+is Næsta borð
+
+@ No demos match the filter. Backspace or Esc clears it.
+is Engin kynning passar við síuna. Backspace eða Esc hreinsar hana.
+
+@ Renaming an automatic demo moves it to the saved demos.
+is Sjálfvirk kynning sem er endurnefnd færist í vistaðar kynningar.
+
+@ Restart
+is Frá byrjun
+
+@ Sort
+is Raða
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+is Meðan kynning er spiluð: A gerir hlé, stefnuhnapparnir spóla og breyta hraða, LT og RT merkja bút og X flytur hann út.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+is Bil hlé | Vinstri/Hægri spóla | Upp/Niður hraði | PgUp/PgDn 10 s | I/O merki | E flytja út
+
+@ Speed
+is Hraði
+
+@ Switch List
+is Skipta um lista
+
+@ This can't be undone.
+is Ekki er hægt að afturkalla þetta.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+is Meðan kynning er spiluð: Bil gerir hlé, örvarnar spóla og breyta hraða, I og O merkja bút og E flytur hann út.
+
+@ Saved
+is Vistaðar
+
+@ Automatic
+is Sjálfvirkar
+
+# Demos and video recording.
+@ Export
+is Flytja út
+
+@ H hide
+is H fela
+
+@ Hide
+is Fela
+
+# Demos and video recording.
+@ Demo: {}
+is Kynning: {}
+
+@ Highlighted clip: {} to {} ({})
+is Merktur bútur: {} til {} ({})
+
+@ Show controls
+is Sýna stjórnstiku
+
+# Demos and video recording.
+@ About {} left
+is Um {} eftir
+
+@ Exporting video
+is Flyt út myndband
+
+@ Preparing...
+is Undirbý...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ is Aðeins þjónninn má nota changelevel
 @ {} renamed to {}
 is {} heitir nú {}
 
-@ From the game folder
-is Úr leikjamöppunni
+@ Already recording video.
+is Myndband er þegar í upptöku.
 
-@ From ironwail
-is Úr ironwail
+@ Export cancelled.
+is Hætt við útflutning.
 
-@ From the 2021 re-release
-is Úr endurútgáfunni frá 2021
+@ Exporting {} to video
+is Flyt {} út sem myndband
+
+@ Kept demo {}
+is Kynning geymd: {}
+
+@ Not a valid demo name.
+is Ógilt heiti kynningar.
+
+@ Renamed demo to {}
+is Kynning endurnefnd sem {}
+
+@ No auto-demo to keep.
+is Engin sjálfvirk kynning til að geyma.
+
+@ Not playing a demo.
+is Engin kynning í spilun.
+
+@ Not recording video.
+is Ekkert myndband í upptöku.
+
+@ Recording video to {}
+is Tek upp myndband í {}
+
+@ This demo is already saved.
+is Þessi kynning er þegar vistuð.
+
+@ This level's demo will be kept when it ends.
+is Kynning þessa borðs verður geymd þegar því lýkur.
+
+@ Video capture is not available in this build.
+is Myndbandsupptaka er ekki í boði í þessari útgáfu.
+
+@ Wrote {} ({}s)
+is Skrifaði {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+is ffmpeg fannst ekki: skrifaði {} PNG-ramma og WAV í {}

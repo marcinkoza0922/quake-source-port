@@ -1397,6 +1397,93 @@ et Pistik sobib igale metallpinnale, mitte ainult elektroonikale
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 et Välgu kahju iga sekundi kümnendiku järel (tavaline välgukahur teeb 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+et AV1 (MP4)
+
+@ Auto-Demo Slots
+et Automaatdemode kohad
+
+@ Auto-Record Demos
+et Salvesta demod automaatselt
+
+@ Frame Rate
+et Kaadrisagedus
+
+@ H.264 (MP4)
+et H.264 (MP4)
+
+@ H.265 (MP4)
+et H.265 (MP4)
+
+@ Pause at End
+et Paus lõpus
+
+@ Playback Bar
+et Esitusriba
+
+@ Quality
+et Kvaliteet
+
+@ Record Audio
+et Salvesta heli
+
+@ VP9 (WebM)
+et VP9 (WebM)
+
+@ Video Format
+et Videovorming
+
+@ Video Recording
+et Video salvestamine
+
+@ ffmpeg Program
+et ffmpegi programm
+
+@ small file
+et väike fail
+
+@ unlimited
+et piiramatu
+
+# Demos and video recording.
+@ 1080p
+et 1080p
+
+@ 1440p
+et 1440p
+
+@ 4K
+et 4K
+
+@ 720p
+et 720p
+
+@ Destination
+et Sihtkoht
+
+@ File Name
+et Faili nimi
+
+@ Rename
+et Nimeta ümber
+
+@ Rename Demo
+et Nimeta demo ümber
+
+@ Export Highlighted Clip
+et Ekspordi esiletõstetud klipp
+
+@ Export Whole Demo
+et Ekspordi kogu demo
+
+@ Same as window
+et Nagu aken
+
+# Demos and video recording.
+@ GPU Encoding
+et GPU kodeerimine
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ et Millised relvad külmutuse käivitavad; lähivõitlus hõlmab kirvest ja iga 
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 et Sinu enda raketid ja granaadid ei tee sulle haiget; raketihüpped töötavad endiselt
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+et Sinu käivitatud demo peatub viimasel kaadril, selle asemel et menüüsse naasta, et saaksid seda tagasi kerida
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+et Salvestatud video kaadrite arv sekundis; salvestamise ajal töötab mäng täpselt selle kiirusega
+
+@ High keeps the most detail; small file saves disk space
+et Kõrge säilitab kõige rohkem detaile; väike fail säästab kettaruumi
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+et Mitu automaatset demot hoitakse enne vanima kustutamist; alles jäetud demosid ei loeta
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+et Salvestab iga mängitud taseme loendisse Automaatsed menüüs Peamenüü > Demod; jäta alles need, mida soovid, vanimad asendatakse
+
+@ Records game sound and music into the video
+et Salvestab mängu helid ja muusika videosse
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+et Näitab esitusriba (aeg, kiirus, ajatelg) pärast juhtklahvi, alati või mitte kunagi
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+et Videovorming; vajab selle kodeerijaga ffmpegi, muidu salvestatakse kaadrid PNG-piltidena
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+et Klippi pole esile tõstetud: lohista demo ajal üle ajatelje või vajuta I ja O (puldil LT ja RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+et Videofaili nimi; laiend järgib videovormingut ja sama nimega fail asendatakse
+
+@ New name of the demo; if another demo has it, a number is added
+et Demo uus nimi; kui see on juba teisel demol, lisatakse number
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+et Video suurus; kaadrid skaleeritakse akna suurusest (kujuga säilitavate ribadega), seega suurem suurus ei lisa detaile
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+et Kodeerib videokaardil (NVIDIA NVENC, AMD või Intel VA-API kaudu, AMF või Quick Sync, Apple VideoToolbox), kui ffmpeg saab seda kasutada, jättes protsessori vabaks; muidu kodeerib protsessor
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ et Salvestus
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 et Teisene tuli käeulatuses helendavale elektroonikapaneelile ühendab ühe otsa; teine ots tulistab siis piiramatu laskemoonaga välke. Kaabel seob su pesa külge ja jääb nurkade taha kinni. Teisene tuli või relvavahetus tõmbab selle välja.
 
+@ From the game folder
+et Mängu kaustast
+
+@ From ironwail
+et ironwailist
+
+@ From the 2021 re-release
+et 2021. aasta uusväljaandest
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+et Automaatsed demod on välja lülitatud. Lülita Salvesta demod automaatselt sisse menüüs Valikud > Demod, et salvestada iga mängitud tase.
+
+@ Automatic: replaced when the slots are full
+et Automaatne: asendatakse, kui kohad on täis
+
+@ Delete {}?
+et Kas kustutada {}?
+
+@ Demos
+et Demod
+
+@ End of demo
+et Demo lõpp
+
+@ Export Video
+et Ekspordi video
+
+@ Fast forward
+et Edasikerimine
+
+@ Fast forward {}x
+et Edasi {}x
+
+@ Indexing...
+et Indekseerimine...
+
+@ K keep
+et K jäta alles
+
+@ Keep
+et Jäta alles
+
+@ Length: {}
+et Pikkus: {}
+
+@ Map: {}
+et Kaart: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+et Automaatseid demosid veel pole. Iga mängitud tase salvestatakse siia.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+et Salvestatud demosid veel pole. Salvesta üks konsooli käsuga 'record <name>' või jäta alles automaatne demo.
+
+@ Pause
+et Paus
+
+@ Paused
+et Peatatud
+
+@ Play {}x
+et Esitus {}x
+
+@ Quake - exporting video {}%
+et Quake - video eksportimine {}%
+
+@ Recorded: {}
+et Salvestatud: {}
+
+@ Rewind
+et Tagasikerimine
+
+@ Rewind {}x
+et Tagasi {}x
+
+@ Size: {} KB
+et Suurus: {} KB
+
+@ Skip 10 s
+et Jäta vahele 10 s
+
+@ Back 10 s
+et 10 s tagasi
+
+@ Length
+et Pikkus
+
+@ Mark in
+et Märgi algus
+
+@ Mark out
+et Märgi lõpp
+
+@ Next level
+et Järgmine tase
+
+@ No demos match the filter. Backspace or Esc clears it.
+et Filtrile ei vasta ükski demo. Backspace või Esc tühjendab selle.
+
+@ Renaming an automatic demo moves it to the saved demos.
+et Automaatse demo ümbernimetamine viib selle salvestatud demode hulka.
+
+@ Restart
+et Algusest
+
+@ Sort
+et Sordi
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+et Demo ajal: A peatab, suunanupud keritavad ja muudavad kiirust, LT ja RT märgivad klipi ning X ekspordib selle.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+et Tühik paus | Vasak/Parem kerimine | Üles/Alla kiirus | PgUp/PgDn 10 s | I/O märk | E eksport
+
+@ Speed
+et Kiirus
+
+@ Switch List
+et Vaheta loendit
+
+@ This can't be undone.
+et Seda ei saa tagasi võtta.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+et Demo ajal: Tühik peatab, nooled keritavad ja muudavad kiirust, I ja O märgivad klipi ning E ekspordib selle.
+
+@ Saved
+et Salvestatud
+
+@ Automatic
+et Automaatsed
+
+# Demos and video recording.
+@ Export
+et Ekspordi
+
+@ H hide
+et H peida
+
+@ Hide
+et Peida
+
+# Demos and video recording.
+@ Demo: {}
+et Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+et Esiletõstetud klipp: {}–{} ({})
+
+@ Show controls
+et Näita juhtnuppe
+
+# Demos and video recording.
+@ About {} left
+et Jäänud umbes {}
+
+@ Exporting video
+et Video eksportimine
+
+@ Preparing...
+et Ettevalmistus...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ et Ainult server võib kasutada changelevel'it
 @ {} renamed to {}
 et {} on nüüd {}
 
-@ From the game folder
-et Mängu kaustast
+@ Already recording video.
+et Videot juba salvestatakse.
 
-@ From ironwail
-et ironwailist
+@ Export cancelled.
+et Eksport tühistati.
 
-@ From the 2021 re-release
-et 2021. aasta uusväljaandest
+@ Exporting {} to video
+et {} eksportimine videoks
+
+@ Kept demo {}
+et Demo jäeti alles: {}
+
+@ Not a valid demo name.
+et Vigane demo nimi.
+
+@ Renamed demo to {}
+et Demo uus nimi: {}
+
+@ No auto-demo to keep.
+et Pole automaatset demot, mida alles jätta.
+
+@ Not playing a demo.
+et Ühtegi demot ei esitata.
+
+@ Not recording video.
+et Videot ei salvestata.
+
+@ Recording video to {}
+et Video salvestamine asukohta {}
+
+@ This demo is already saved.
+et See demo on juba salvestatud.
+
+@ This level's demo will be kept when it ends.
+et Selle taseme demo jäetakse alles, kui tase lõpeb.
+
+@ Video capture is not available in this build.
+et Video salvestamine pole selles versioonis saadaval.
+
+@ Wrote {} ({}s)
+et Kirjutatud {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+et ffmpegi ei leitud: {} PNG-kaadrit ja WAV kirjutati asukohta {}

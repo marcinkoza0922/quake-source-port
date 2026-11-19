@@ -71,7 +71,8 @@ impl Renderer {
         self.init_gpu_times(fr.splits.len().max(1))?;
         self.collect_gpu_times(fi);
         let mut img_idx = 0u32;
-        if let (Some(s), Some(f)) = (&self.swap, &self.gpu.swapchain_fn) {
+        let present = self.presenting();
+        if present && let (Some(s), Some(f)) = (&self.swap, &self.gpu.swapchain_fn) {
             // SAFETY: valid swapchain/semaphore.
             match unsafe { f.acquire_next_image(s.sc, u64::MAX, acquire, vk::Fence::null()) } {
                 Ok((i, _)) => img_idx = i,
@@ -1003,7 +1004,7 @@ impl Renderer {
                 dev.cmd_write_timestamp(cmd, vk::PipelineStageFlags::BOTTOM_OF_PIPE, q, ts_base + k);
             }
         };
-        let has_output = self.swap.is_some() || self.targets.as_ref().is_some_and(|t| t.out.is_some());
+        let has_output = present || self.targets.as_ref().is_some_and(|t| t.out.is_some());
         if self.targets.is_none() || self.lightmap.is_none() || !has_output {
             return Ok(());
         }
@@ -1043,7 +1044,7 @@ impl Renderer {
                 );
             }
             // post: gamma/contrast/polyblend to the output
-            let (out_img, out_view) = match (&self.swap, &t.out) {
+            let (out_img, out_view) = match (self.swap.as_ref().filter(|_| present), &t.out) {
                 (Some(s), _) => (s.images[img_idx as usize], s.views[img_idx as usize]),
                 (None, Some((o, _))) => (o.image, o.view),
                 _ => return Ok(()),
@@ -1861,7 +1862,7 @@ impl Renderer {
                 }
             }
             dev.cmd_end_rendering(cmd);
-            if let Some(sw) = &self.swap {
+            if let Some(sw) = self.swap.as_ref().filter(|_| present) {
                 let mut last = vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL;
                 if std::mem::take(&mut self.capture_requested) && sw.readable {
                     if let Some((b, _, _)) = self.capture.take() {
@@ -1957,7 +1958,7 @@ impl Renderer {
             let cmds = [cmd];
             let wait_stage = [vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT];
             let wait = [acquire];
-            if let (Some(s), Some(scf)) = (&self.swap, &self.gpu.swapchain_fn) {
+            if present && let (Some(s), Some(scf)) = (&self.swap, &self.gpu.swapchain_fn) {
                 let sig = [s.render_sems[img_idx as usize]];
                 let si = [vk::SubmitInfo::default()
                     .wait_semaphores(&wait)

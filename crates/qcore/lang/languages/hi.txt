@@ -1397,6 +1397,93 @@ hi सिर्फ़ इलेक्ट्रॉनिक्स नहीं, �
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 hi हर सेकंड के दसवें हिस्से में बिजली की क्षति (सामान्य लाइटनिंग गन 30 देती है)
 
+# Demos and video recording.
+@ AV1 (MP4)
+hi AV1 (MP4)
+
+@ Auto-Demo Slots
+hi ऑटो-डेमो स्लॉट
+
+@ Auto-Record Demos
+hi डेमो अपने-आप रिकॉर्ड करें
+
+@ Frame Rate
+hi फ़्रेम दर
+
+@ H.264 (MP4)
+hi H.264 (MP4)
+
+@ H.265 (MP4)
+hi H.265 (MP4)
+
+@ Pause at End
+hi अंत में रोकें
+
+@ Playback Bar
+hi प्लेबैक बार
+
+@ Quality
+hi गुणवत्ता
+
+@ Record Audio
+hi ध्वनि रिकॉर्ड करें
+
+@ VP9 (WebM)
+hi VP9 (WebM)
+
+@ Video Format
+hi वीडियो प्रारूप
+
+@ Video Recording
+hi वीडियो रिकॉर्डिंग
+
+@ ffmpeg Program
+hi ffmpeg प्रोग्राम
+
+@ small file
+hi छोटी फ़ाइल
+
+@ unlimited
+hi असीमित
+
+# Demos and video recording.
+@ 1080p
+hi 1080p
+
+@ 1440p
+hi 1440p
+
+@ 4K
+hi 4K
+
+@ 720p
+hi 720p
+
+@ Destination
+hi गंतव्य
+
+@ File Name
+hi फ़ाइल नाम
+
+@ Rename
+hi नाम बदलें
+
+@ Rename Demo
+hi डेमो का नाम बदलें
+
+@ Export Highlighted Clip
+hi चिह्नित क्लिप निर्यात करें
+
+@ Export Whole Demo
+hi पूरा डेमो निर्यात करें
+
+@ Same as window
+hi विंडो जैसा
+
+# Demos and video recording.
+@ GPU Encoding
+hi GPU एनकोडिंग
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ hi कौन-से हथियार फ़्रीज़ करते है
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 hi आपके अपने रॉकेट और ग्रेनेड आपको चोट नहीं पहुँचाते; रॉकेट जंप फिर भी काम करते हैं
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+hi आपका चलाया डेमो मेनू पर लौटने के बजाय आखिरी फ़्रेम पर रुकता है, ताकि आप उसे पीछे कर सकें
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+hi वीडियो के प्रति सेकंड फ़्रेम; रिकॉर्डिंग के दौरान गेम ठीक इसी दर पर चलता है
+
+@ High keeps the most detail; small file saves disk space
+hi उच्च सबसे ज़्यादा बारीकी रखता है; छोटी फ़ाइल डिस्क की जगह बचाती है
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+hi सबसे पुराना हटाने से पहले कितने अपने-आप डेमो रखे जाते हैं; रखे गए डेमो गिने नहीं जाते
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+hi आपका खेला हर लेवल मुख्य मेनू > डेमो की अपने-आप सूची में रिकॉर्ड करता है; जो चाहें रखें, सबसे पुराने बदल दिए जाते हैं
+
+@ Records game sound and music into the video
+hi गेम की ध्वनियाँ और संगीत वीडियो में रिकॉर्ड करता है
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+hi प्लेबैक बार (समय, गति, टाइमलाइन) को किसी नियंत्रण कुंजी के बाद, हमेशा, या कभी नहीं दिखाता है
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+hi वीडियो प्रारूप; उस एनकोडर वाला ffmpeg चाहिए, नहीं तो फ़्रेम PNG चित्रों के रूप में सहेजे जाते हैं
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+hi कोई क्लिप चिह्नित नहीं: डेमो चलते समय टाइमलाइन पर खींचें या I और O दबाएँ (कंट्रोलर पर LT और RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+hi वीडियो फ़ाइल का नाम; एक्सटेंशन वीडियो फ़ॉर्मेट के अनुसार होता है, और उसी नाम की फ़ाइल बदल दी जाती है
+
+@ New name of the demo; if another demo has it, a number is added
+hi डेमो का नया नाम; अगर किसी और डेमो का यही नाम है, तो एक संख्या जोड़ी जाती है
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+hi वीडियो का आकार; फ़्रेम विंडो के आकार से बड़े किए जाते हैं (आकृति बनाए रखने के लिए पट्टियों के साथ), इसलिए बड़ा आकार बारीकी नहीं बढ़ाता
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+hi ffmpeg इस्तेमाल कर सके तो ग्राफ़िक्स कार्ड पर एनकोड करता है (NVIDIA NVENC, VA-API से AMD या Intel, AMF या Quick Sync, Apple VideoToolbox) और प्रोसेसर को खाली रखता है; नहीं तो प्रोसेसर एनकोड करता है
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ hi सेव
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 hi पहुँच के भीतर चमकते इलेक्ट्रॉनिक पैनल पर वैकल्पिक फ़ायर एक सिरा लगा देता है; फिर दूसरा सिरा असीमित गोला-बारूद के साथ बिजली छोड़ता है। केबल आपको सॉकेट से बाँध देती है और कोनों में अटक जाती है। वैकल्पिक फ़ायर या हथियार बदलने से यह निकल जाती है।
 
+@ From the game folder
+hi गेम फ़ोल्डर से
+
+@ From ironwail
+hi ironwail से
+
+@ From the 2021 re-release
+hi 2021 री-रिलीज़ से
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+hi अपने-आप डेमो बंद हैं। हर खेला गया लेवल रिकॉर्ड करने के लिए विकल्प > डेमो में डेमो अपने-आप रिकॉर्ड करें चालू करें।
+
+@ Automatic: replaced when the slots are full
+hi अपने-आप: स्लॉट भरने पर बदल दिया जाता है
+
+@ Delete {}?
+hi {} हटाएँ?
+
+@ Demos
+hi डेमो
+
+@ End of demo
+hi डेमो का अंत
+
+@ Export Video
+hi वीडियो निर्यात करें
+
+@ Fast forward
+hi तेज़ आगे
+
+@ Fast forward {}x
+hi आगे {}x
+
+@ Indexing...
+hi अनुक्रमण हो रहा है...
+
+@ K keep
+hi K रखें
+
+@ Keep
+hi रखें
+
+@ Length: {}
+hi अवधि: {}
+
+@ Map: {}
+hi मानचित्र: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+hi अभी कोई अपने-आप डेमो नहीं। आपका खेला हर लेवल यहाँ रिकॉर्ड होता है।
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+hi अभी कोई सहेजा डेमो नहीं। कंसोल कमांड 'record <name>' से एक रिकॉर्ड करें, या कोई अपने-आप डेमो रखें।
+
+@ Pause
+hi रोकें
+
+@ Paused
+hi रुका हुआ
+
+@ Play {}x
+hi चल रहा {}x
+
+@ Quake - exporting video {}%
+hi Quake - वीडियो निर्यात हो रहा है {}%
+
+@ Recorded: {}
+hi रिकॉर्ड हुआ: {}
+
+@ Rewind
+hi पीछे करें
+
+@ Rewind {}x
+hi पीछे {}x
+
+@ Size: {} KB
+hi आकार: {} KB
+
+@ Skip 10 s
+hi 10 से. छोड़ें
+
+@ Back 10 s
+hi 10 से. पीछे
+
+@ Length
+hi अवधि
+
+@ Mark in
+hi शुरुआत चिह्नित करें
+
+@ Mark out
+hi अंत चिह्नित करें
+
+@ Next level
+hi अगला लेवल
+
+@ No demos match the filter. Backspace or Esc clears it.
+hi फ़िल्टर से कोई डेमो मेल नहीं खाता। Backspace या Esc उसे साफ़ करता है।
+
+@ Renaming an automatic demo moves it to the saved demos.
+hi स्वचालित डेमो का नाम बदलने से वह सहेजे गए डेमो में चला जाता है।
+
+@ Restart
+hi शुरू से
+
+@ Sort
+hi क्रम
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+hi डेमो चलते समय: A रोकता है, डी-पैड खिसकाता और गति बदलता है, LT और RT क्लिप चिह्नित करते हैं और X उसे निर्यात करता है।
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+hi Space रोकें | बाएँ/दाएँ खिसकाएँ | ऊपर/नीचे गति | PgUp/PgDn 10 से. | I/O निशान | E निर्यात
+
+@ Speed
+hi गति
+
+@ Switch List
+hi सूची बदलें
+
+@ This can't be undone.
+hi इसे पूर्ववत नहीं किया जा सकता।
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+hi डेमो चलते समय: Space रोकता है, तीर खिसकाते और गति बदलते हैं, I और O क्लिप चिह्नित करते हैं और E उसे निर्यात करता है।
+
+@ Saved
+hi सहेजे गए
+
+@ Automatic
+hi अपने-आप
+
+# Demos and video recording.
+@ Export
+hi निर्यात
+
+@ H hide
+hi H छिपाएँ
+
+@ Hide
+hi छिपाएँ
+
+# Demos and video recording.
+@ Demo: {}
+hi डेमो: {}
+
+@ Highlighted clip: {} to {} ({})
+hi चिह्नित क्लिप: {} से {} ({})
+
+@ Show controls
+hi नियंत्रण दिखाएँ
+
+# Demos and video recording.
+@ About {} left
+hi लगभग {} बाकी
+
+@ Exporting video
+hi वीडियो निर्यात हो रहा है
+
+@ Preparing...
+hi तैयारी हो रही है...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ hi केवल सर्वर ही changelevel कर सकता है
 @ {} renamed to {}
 hi {} का नाम बदलकर {} हुआ
 
-@ From the game folder
-hi गेम फ़ोल्डर से
+@ Already recording video.
+hi वीडियो पहले से रिकॉर्ड हो रहा है।
 
-@ From ironwail
-hi ironwail से
+@ Export cancelled.
+hi निर्यात रद्द हुआ।
 
-@ From the 2021 re-release
-hi 2021 री-रिलीज़ से
+@ Exporting {} to video
+hi {} को वीडियो में निर्यात किया जा रहा है
+
+@ Kept demo {}
+hi डेमो रखा गया: {}
+
+@ Not a valid demo name.
+hi डेमो का नाम मान्य नहीं है।
+
+@ Renamed demo to {}
+hi डेमो का नाम बदलकर {} किया गया
+
+@ No auto-demo to keep.
+hi रखने के लिए कोई ऑटो-डेमो नहीं।
+
+@ Not playing a demo.
+hi कोई डेमो नहीं चल रहा।
+
+@ Not recording video.
+hi कोई वीडियो रिकॉर्ड नहीं हो रहा।
+
+@ Recording video to {}
+hi वीडियो {} में रिकॉर्ड हो रहा है
+
+@ This demo is already saved.
+hi यह डेमो पहले से सहेजा हुआ है।
+
+@ This level's demo will be kept when it ends.
+hi इस लेवल का डेमो उसके खत्म होने पर रखा जाएगा।
+
+@ Video capture is not available in this build.
+hi इस बिल्ड में वीडियो रिकॉर्डिंग उपलब्ध नहीं है।
+
+@ Wrote {} ({}s)
+hi {} लिखा गया ({} से.)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+hi ffmpeg नहीं मिला: {} PNG फ़्रेम और एक WAV {} में लिखे गए

@@ -315,6 +315,14 @@ impl Renderer {
     /// Copies the next presented frame for [`Renderer::take_capture`]
     /// (headless renderers copy every frame). Ignored while a capture is
     /// still being read back.
+    /// Offscreen export frames: not supported here (no video capture on
+    /// the web); every frame is presented.
+    pub fn set_offscreen(&mut self, _on: bool) -> Result<()> {
+        Ok(())
+    }
+
+    pub fn present_next(&mut self, _present: bool) {}
+
     pub fn request_capture(&mut self) {
         self.capture_req = self.surface.is_some() && self.capture.is_none();
     }

@@ -43,6 +43,10 @@ Beyond a faithful, fast Quake, this port adds a few things of its own:
 - **A real mod menu.** It browses every installed mod with its
   description, lists each mod's maps, tracks your best kills, secrets and
   time per map, and keeps a separate config per mod.
+- **Demo and video tools.** Pause, scrub, rewind and seek through demos
+  with a timeline; record every level automatically and keep the runs you
+  want; render a demo or a marked clip to MP4/WebM with ffmpeg, or record
+  video while you play. Bug reports carry the level's demo.
 - **FTE scripted particles** and the QuakeWorld protocol, alongside
   NetQuake protocols 15, 666 (FitzQuake) and 999 (RMQ).
 

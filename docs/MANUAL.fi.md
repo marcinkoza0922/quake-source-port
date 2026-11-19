@@ -163,6 +163,35 @@ käyttää partikkelitehosteita, joita muut portit eivät osaa näyttää, täys
 versio säilytetään nimellä `<nimi>.qsd` (`playdemo <nimi>.qsd`).
 `demo_convert <nimi>` muuntaa vanhemman demon.
 
+Päävalikko → Demot listaa tallennetut demosi ja, kun Asetukset → Demot →
+Tallenna demot automaattisesti on päällä, automaattisen demon jokaisesta
+pelaamastasi tasosta; vanhimmat korvataan, kun paikat ovat täynnä.
+Kirjoita suodattaaksesi listoja ja paina Tab vaihtaaksesi järjestystä;
+listan vieressä olevat painikkeet toistavat, vievät, nimeävät uudelleen,
+säilyttävät tai poistavat valitun demon, ja uudelleennimetty
+automaattinen demo säilytetään. Virheraportit sisältävät nykyisen tason
+automaattisen demon.
+
+Demon aikana Välilyönti pysäyttää, Vasemman tai Oikean pitäminen kelaa
+taakse tai eteen, Ylös ja Alas muuttavat nopeutta, PgUp ja PgDn hyppäävät 10
+sekuntia, ja Home ja End vievät alkuun ja seuraavaan karttaan. I ja O
+merkitsevät leikkeen; E vie sen tai koko demon kansioon `videos`. Ohjaimet
+pysyvät näkyvissä; H tai Piilota piilottaa ne, ja alareunaan osoittaminen
+näyttää palkin, joka tuo ne takaisin. Napsauta painikkeita, napsauta
+aikajanaa hypätäksesi siihen tai vedä sen yli korostaaksesi leikkeen; Vie
+kysyy kuvataajuuden, koon, muodon ja tiedoston sekä sen, viedäänkö
+korostettu leike vai koko demo.
+
+Ohjaimella A pysäyttää, ristiohjain kelaa taakse ja eteen ja muuttaa
+nopeutta, LB ja RB hyppäävät 10 sekuntia, ja sauvojen painallukset vievät
+alkuun ja seuraavaan karttaan. LT ja RT merkitsevät leikkeen, B tyhjentää
+sen, X vie, Y säilyttää automaattisen demon ja View piilottaa ohjaimet.
+
+`capture` aloittaa ja lopettaa videon tallennuksen pelatessa. Kuvataajuus,
+muoto ja laatu ovat kohdassa Asetukset → Demot → Videon tallennus. Videot
+tarvitsevat ffmpegin; ilman sitä kuvat tallennetaan PNG-kuvina WAV-tiedoston
+kanssa.
+
 ## Esteettömyys
 
 Options → Esteettömyys:

@@ -1397,6 +1397,93 @@ lv Spraudni pieņem jebkura metāla virsma, ne tikai elektronika
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 lv Zibens bojājumi katrā sekundes desmitdaļā (parastais zibens lielgabals dara 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+lv AV1 (MP4)
+
+@ Auto-Demo Slots
+lv Automātisko demo vietas
+
+@ Auto-Record Demos
+lv Automātiski ierakstīt demo
+
+@ Frame Rate
+lv Kadru ātrums
+
+@ H.264 (MP4)
+lv H.264 (MP4)
+
+@ H.265 (MP4)
+lv H.265 (MP4)
+
+@ Pause at End
+lv Pauze beigās
+
+@ Playback Bar
+lv Atskaņošanas josla
+
+@ Quality
+lv Kvalitāte
+
+@ Record Audio
+lv Ierakstīt skaņu
+
+@ VP9 (WebM)
+lv VP9 (WebM)
+
+@ Video Format
+lv Video formāts
+
+@ Video Recording
+lv Video ierakstīšana
+
+@ ffmpeg Program
+lv ffmpeg programma
+
+@ small file
+lv mazs fails
+
+@ unlimited
+lv neierobežoti
+
+# Demos and video recording.
+@ 1080p
+lv 1080p
+
+@ 1440p
+lv 1440p
+
+@ 4K
+lv 4K
+
+@ 720p
+lv 720p
+
+@ Destination
+lv Galamērķis
+
+@ File Name
+lv Faila nosaukums
+
+@ Rename
+lv Pārdēvēt
+
+@ Rename Demo
+lv Pārdēvēt demo
+
+@ Export Highlighted Clip
+lv Eksportēt iezīmēto klipu
+
+@ Export Whole Demo
+lv Eksportēt visu demo
+
+@ Same as window
+lv Kā logs
+
+# Demos and video recording.
+@ GPU Encoding
+lv GPU kodēšana
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ lv Kuri ieroči izraisa sasalšanu; tuvcīņa ietver cirvi un jebkuru moda ieroc
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 lv Tavas raķetes un granātas tevi neievaino; raķešu lēcieni joprojām darbojas
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+lv Jūsu atskaņots demo apstājas pie pēdējā kadra, nevis atgriežas izvēlnē, lai to varētu attīt atpakaļ
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+lv Ierakstītā video kadri sekundē; ierakstīšanas laikā spēle darbojas tieši ar šo ātrumu
+
+@ High keeps the most detail; small file saves disk space
+lv Augsta saglabā visvairāk detaļu; mazs fails ietaupa vietu diskā
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+lv Cik automātisko demo tiek glabāts, pirms tiek dzēsts vecākais; paturētie demo netiek skaitīti
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+lv Ieraksta katru spēlēto līmeni sarakstā Automātiskie sadaļā Galvenā izvēlne > Demo; paturiet vajadzīgos, vecākie tiek aizstāti
+
+@ Records game sound and music into the video
+lv Ieraksta spēles skaņas un mūziku video
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+lv Rāda atskaņošanas joslu (laiks, ātrums, laika josla) pēc vadības taustiņa, vienmēr vai nekad
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+lv Video formāts; vajag ffmpeg ar šo kodētāju, citādi kadri tiek saglabāti kā PNG attēli
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+lv Nav iezīmēta klipa: demo laikā velciet pa laika joslu vai nospiediet I un O (kontrolierī LT un RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+lv Video faila nosaukums; paplašinājums atbilst video formātam, un fails ar tādu pašu nosaukumu tiek aizstāts
+
+@ New name of the demo; if another demo has it, a number is added
+lv Jaunais demo nosaukums; ja tas jau ir citam demo, tiek pievienots numurs
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+lv Video izmērs; kadri tiek mērogoti no loga izmēra (ar joslām, lai saglabātu formu), tāpēc lielāks izmērs nepievieno detaļas
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+lv Kodē ar videokarti (NVIDIA NVENC, AMD vai Intel caur VA-API, AMF vai Quick Sync, Apple VideoToolbox), ja ffmpeg to var izmantot, atstājot procesoru brīvu; citādi kodē procesors
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ lv Saglabājums
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 lv Sekundārā uguns uz spīdoša elektronikas paneļa sniedzamības robežās iesprauž vienu galu; otrs tad šauj zibeņus ar neierobežotu munīciju. Kabelis piesien jūs ligzdai un aizķeras aiz stūriem. Sekundārā uguns vai ieroča maiņa to izrauj.
 
+@ From the game folder
+lv No spēles mapes
+
+@ From ironwail
+lv No ironwail
+
+@ From the 2021 re-release
+lv No 2021. gada atkārtotā izdevuma
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+lv Automātiskie demo ir izslēgti. Ieslēdziet Automātiski ierakstīt demo sadaļā Opcijas > Demo, lai ierakstītu katru spēlēto līmeni.
+
+@ Automatic: replaced when the slots are full
+lv Automātisks: tiek aizstāts, kad vietas ir pilnas
+
+@ Delete {}?
+lv Dzēst {}?
+
+@ Demos
+lv Demo
+
+@ End of demo
+lv Demo beigas
+
+@ Export Video
+lv Eksportēt video
+
+@ Fast forward
+lv Pārtīt uz priekšu
+
+@ Fast forward {}x
+lv Uz priekšu {}x
+
+@ Indexing...
+lv Indeksē...
+
+@ K keep
+lv K paturēt
+
+@ Keep
+lv Paturēt
+
+@ Length: {}
+lv Ilgums: {}
+
+@ Map: {}
+lv Karte: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+lv Automātisko demo vēl nav. Šeit tiek ierakstīts katrs spēlētais līmenis.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+lv Saglabātu demo vēl nav. Ierakstiet to ar konsoles komandu 'record <name>' vai paturiet automātisko demo.
+
+@ Pause
+lv Pauze
+
+@ Paused
+lv Pauzēts
+
+@ Play {}x
+lv Atskaņo {}x
+
+@ Quake - exporting video {}%
+lv Quake - eksportē video {}%
+
+@ Recorded: {}
+lv Ierakstīts: {}
+
+@ Rewind
+lv Attīt atpakaļ
+
+@ Rewind {}x
+lv Atpakaļ {}x
+
+@ Size: {} KB
+lv Izmērs: {} KB
+
+@ Skip 10 s
+lv Izlaist 10 s
+
+@ Back 10 s
+lv Atpakaļ 10 s
+
+@ Length
+lv Ilgums
+
+@ Mark in
+lv Atzīmēt sākumu
+
+@ Mark out
+lv Atzīmēt beigas
+
+@ Next level
+lv Nākamais līmenis
+
+@ No demos match the filter. Backspace or Esc clears it.
+lv Filtram neatbilst neviens demo. Backspace vai Esc to notīra.
+
+@ Renaming an automatic demo moves it to the saved demos.
+lv Pārdēvējot automātisko demo, tas tiek pārvietots uz saglabātajiem.
+
+@ Restart
+lv No sākuma
+
+@ Sort
+lv Kārtot
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+lv Demo laikā: A pauzē, krustveida pogas tin un maina ātrumu, LT un RT atzīmē klipu, un X to eksportē.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+lv Atstarpe pauze | Pa kreisi/Pa labi tīt | Augšup/Lejup ātrums | PgUp/PgDn 10 s | I/O atzīme | E eksports
+
+@ Speed
+lv Ātrums
+
+@ Switch List
+lv Mainīt sarakstu
+
+@ This can't be undone.
+lv To nevar atsaukt.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+lv Demo laikā: Atstarpe pauzē, bultiņas tin un maina ātrumu, I un O atzīmē klipu, un E to eksportē.
+
+@ Saved
+lv Saglabātie
+
+@ Automatic
+lv Automātiskie
+
+# Demos and video recording.
+@ Export
+lv Eksportēt
+
+@ H hide
+lv H paslēpt
+
+@ Hide
+lv Paslēpt
+
+# Demos and video recording.
+@ Demo: {}
+lv Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+lv Iezīmētais klips: {}–{} ({})
+
+@ Show controls
+lv Rādīt vadīklas
+
+# Demos and video recording.
+@ About {} left
+lv Atlicis apmēram {}
+
+@ Exporting video
+lv Eksportē video
+
+@ Preparing...
+lv Sagatavo...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ lv Tikai serveris drīkst izmantot changelevel
 @ {} renamed to {}
 lv {} — jaunais vārds: {}
 
-@ From the game folder
-lv No spēles mapes
+@ Already recording video.
+lv Video jau tiek ierakstīts.
 
-@ From ironwail
-lv No ironwail
+@ Export cancelled.
+lv Eksportēšana atcelta.
 
-@ From the 2021 re-release
-lv No 2021. gada atkārtotā izdevuma
+@ Exporting {} to video
+lv {} tiek eksportēts video
+
+@ Kept demo {}
+lv Demo paturēts: {}
+
+@ Not a valid demo name.
+lv Nederīgs demo nosaukums.
+
+@ Renamed demo to {}
+lv Demo pārdēvēts par {}
+
+@ No auto-demo to keep.
+lv Nav automātiskā demo, ko paturēt.
+
+@ Not playing a demo.
+lv Netiek atskaņots neviens demo.
+
+@ Not recording video.
+lv Video netiek ierakstīts.
+
+@ Recording video to {}
+lv Ieraksta video uz {}
+
+@ This demo is already saved.
+lv Šis demo jau ir saglabāts.
+
+@ This level's demo will be kept when it ends.
+lv Šī līmeņa demo tiks paturēts, kad tas beigsies.
+
+@ Video capture is not available in this build.
+lv Video ierakstīšana šajā versijā nav pieejama.
+
+@ Wrote {} ({}s)
+lv Ierakstīts {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+lv ffmpeg nav atrasts: {} PNG kadri un WAV ierakstīti {}

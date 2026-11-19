@@ -1397,6 +1397,93 @@ mk Секоја метална површина го прифаќа приклу
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 mk Штета од молња секоја десетинка од секунда (обичниот молњомет нанесува 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+mk AV1 (MP4)
+
+@ Auto-Demo Slots
+mk Места за авто-демо
+
+@ Auto-Record Demos
+mk Автоматски снимај демо
+
+@ Frame Rate
+mk Слики во секунда
+
+@ H.264 (MP4)
+mk H.264 (MP4)
+
+@ H.265 (MP4)
+mk H.265 (MP4)
+
+@ Pause at End
+mk Пауза на крајот
+
+@ Playback Bar
+mk Лента за пуштање
+
+@ Quality
+mk Квалитет
+
+@ Record Audio
+mk Снимај звук
+
+@ VP9 (WebM)
+mk VP9 (WebM)
+
+@ Video Format
+mk Формат на видео
+
+@ Video Recording
+mk Снимање видео
+
+@ ffmpeg Program
+mk Програма ffmpeg
+
+@ small file
+mk мала датотека
+
+@ unlimited
+mk неограничено
+
+# Demos and video recording.
+@ 1080p
+mk 1080p
+
+@ 1440p
+mk 1440p
+
+@ 4K
+mk 4K
+
+@ 720p
+mk 720p
+
+@ Destination
+mk Одредиште
+
+@ File Name
+mk Име на датотеката
+
+@ Rename
+mk Преименувај
+
+@ Rename Demo
+mk Преименувај демо
+
+@ Export Highlighted Clip
+mk Извези го означениот клип
+
+@ Export Whole Demo
+mk Извези го целото демо
+
+@ Same as window
+mk Како прозорецот
+
+# Demos and video recording.
+@ GPU Encoding
+mk GPU кодирање
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ mk Кои оружја предизвикуваат замрзнување; бл
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 mk Твоите ракети и гранати не те повредуваат; ракетните скокови сè уште работат
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+mk Демото што го пуштате застанува на последната слика наместо да се врати во менито, за да можете да го премотате наназад
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+mk Слики во секунда на видеото; додека снима, играта работи точно со оваа брзина
+
+@ High keeps the most detail; small file saves disk space
+mk Високиот чува најмногу детали; малата датотека штеди простор на дискот
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+mk Колку автоматски демо се чуваат пред да се избрише најстарото; задржаните демо не се бројат
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+mk Го снима секое одиграно ниво во списокот Автоматски во Главно мени > Демо; задржете ги оние што ги сакате, најстарите се заменуваат
+
+@ Records game sound and music into the video
+mk Ги снима звуците и музиката на играта во видеото
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+mk Ја прикажува лентата за пуштање (време, брзина, временска линија) по контролно копче, секогаш или никогаш
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+mk Формат на видео; потребен е ffmpeg со тој кодер, инаку сликите се зачувуваат како PNG слики
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+mk Нема означен клип: за време на демото повлечете по временската линија или притиснете I и O (LT и RT на контролерот)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+mk Име на видеодатотеката; наставката го следи видеоформатот, а датотека со исто име се заменува
+
+@ New name of the demo; if another demo has it, a number is added
+mk Ново име на демото; ако друго демо веќе го има, се додава број
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+mk Големина на видеото; сликите се скалираат од големината на прозорецот (со ленти за да се задржи обликот), па поголема големина не додава детали
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+mk Кодира на графичката картичка (NVIDIA NVENC, AMD или Intel преку VA-API, AMF или Quick Sync, Apple VideoToolbox) кога ffmpeg може да ја користи, оставајќи го процесорот слободен; инаку кодира процесорот
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ mk Зачувај
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 mk Алтернативниот оган врз светлечка електронска плоча на дофат приклучува едниот крај; другиот потоа испука молњи со неограничена муниција. Кабелот ве врзува за приклучокот и се закачува на аглите. Алтернативниот оган или промената на оружјето го искорнува.
 
+@ From the game folder
+mk Од папката на играта
+
+@ From ironwail
+mk Од ironwail
+
+@ From the 2021 re-release
+mk Од реизданието од 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+mk Автоматските демо се исклучени. Вклучете Автоматски снимај демо во Опции > Демо за да се снима секое одиграно ниво.
+
+@ Automatic: replaced when the slots are full
+mk Автоматско: се заменува кога местата се полни
+
+@ Delete {}?
+mk Да се избрише {}?
+
+@ Demos
+mk Демо
+
+@ End of demo
+mk Крај на демото
+
+@ Export Video
+mk Извези видео
+
+@ Fast forward
+mk Брзо напред
+
+@ Fast forward {}x
+mk Напред {}x
+
+@ Indexing...
+mk Индексирање...
+
+@ K keep
+mk K задржи
+
+@ Keep
+mk Задржи
+
+@ Length: {}
+mk Траење: {}
+
+@ Map: {}
+mk Мапа: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+mk Сè уште нема автоматски демо. Тука се снима секое одиграно ниво.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+mk Сè уште нема зачувани демо. Снимете едно со командата на конзолата 'record <name>' или задржете автоматско демо.
+
+@ Pause
+mk Пауза
+
+@ Paused
+mk Паузирано
+
+@ Play {}x
+mk Пуштање {}x
+
+@ Quake - exporting video {}%
+mk Quake - се извезува видео {}%
+
+@ Recorded: {}
+mk Снимено: {}
+
+@ Rewind
+mk Премотај наназад
+
+@ Rewind {}x
+mk Назад {}x
+
+@ Size: {} KB
+mk Големина: {} KB
+
+@ Skip 10 s
+mk Прескокни 10 с
+
+@ Back 10 s
+mk Назад 10 с
+
+@ Length
+mk Траење
+
+@ Mark in
+mk Означи почеток
+
+@ Mark out
+mk Означи крај
+
+@ Next level
+mk Следно ниво
+
+@ No demos match the filter. Backspace or Esc clears it.
+mk Ниедно демо не одговара на филтерот. Backspace или Esc го брише.
+
+@ Renaming an automatic demo moves it to the saved demos.
+mk Преименувањето автоматско демо го преместува меѓу зачуваните.
+
+@ Restart
+mk Одначало
+
+@ Sort
+mk Подреди
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+mk За време на демо: A паузира, крстот за насоки премотува и ја менува брзината, LT и RT означуваат клип, а X го извезува.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+mk Празно место пауза | Лево/Десно премотување | Горе/Долу брзина | PgUp/PgDn 10 с | I/O ознака | E извоз
+
+@ Speed
+mk Брзина
+
+@ Switch List
+mk Смени список
+
+@ This can't be undone.
+mk Ова не може да се врати.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+mk За време на демо: Празното место паузира, стрелките премотуваат и ја менуваат брзината, I и O означуваат клип, а E го извезува.
+
+@ Saved
+mk Зачувани
+
+@ Automatic
+mk Автоматски
+
+# Demos and video recording.
+@ Export
+mk Извези
+
+@ H hide
+mk H скриј
+
+@ Hide
+mk Скриј
+
+# Demos and video recording.
+@ Demo: {}
+mk Демо: {}
+
+@ Highlighted clip: {} to {} ({})
+mk Означен клип: {} до {} ({})
+
+@ Show controls
+mk Прикажи контроли
+
+# Demos and video recording.
+@ About {} left
+mk Уште околу {}
+
+@ Exporting video
+mk Се извезува видео
+
+@ Preparing...
+mk Се подготвува...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ mk Само серверот може да прави changelevel
 @ {} renamed to {}
 mk {} се преименува во {}
 
-@ From the game folder
-mk Од папката на играта
+@ Already recording video.
+mk Видеото веќе се снима.
 
-@ From ironwail
-mk Од ironwail
+@ Export cancelled.
+mk Извозот е откажан.
 
-@ From the 2021 re-release
-mk Од реизданието од 2021
+@ Exporting {} to video
+mk Се извезува {} во видео
+
+@ Kept demo {}
+mk Демото е задржано: {}
+
+@ Not a valid demo name.
+mk Неважечко име на демо.
+
+@ Renamed demo to {}
+mk Демото е преименувано во {}
+
+@ No auto-demo to keep.
+mk Нема авто-демо за задржување.
+
+@ Not playing a demo.
+mk Не се пушта демо.
+
+@ Not recording video.
+mk Не се снима видео.
+
+@ Recording video to {}
+mk Се снима видео во {}
+
+@ This demo is already saved.
+mk Ова демо е веќе зачувано.
+
+@ This level's demo will be kept when it ends.
+mk Демото на ова ниво ќе се задржи кога ќе заврши.
+
+@ Video capture is not available in this build.
+mk Снимањето видео не е достапно во оваа верзија.
+
+@ Wrote {} ({}s)
+mk Запишано {} ({} с)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+mk ffmpeg не е пронајден: запишани {} PNG слики и WAV во {}

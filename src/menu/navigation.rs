@@ -24,6 +24,7 @@ impl Menu {
             }
             Screen::Load | Screen::Save => (CARD_X, CARD_BOTTOM + 4.0),
             Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.back_position(),
+            Screen::Demos => demos::BACK,
             _ => return None,
         };
         Some((x, y.min(MENU_H - 16.0), 60.0, 16.0))
@@ -56,8 +57,16 @@ impl Menu {
         } else {
             None
         };
-        let Some(s) = reason.or_else(|| tooltip(item)) else { return };
-        let s = qcore::lang::tr(s);
+        // the export destination in full (the row shows its end)
+        let path = match item {
+            Item::Text { cvar: "_export_dest", .. } => cv.by_name("_export_dest").map(|c| c.string.clone()),
+            _ => None,
+        };
+        let s = match (path, reason.or_else(|| tooltip(item))) {
+            (Some(p), _) => std::borrow::Cow::Owned(p),
+            (None, Some(s)) => qcore::lang::tr(s),
+            (None, None) => return,
+        };
         let lines = wrap_tooltip_lines(c, &s, 588.0, TXT);
         let w = lines.iter().map(|l| c.text_w(l, TXT)).fold(0.0, f32::max);
         let h = lines.len() as f32 * 10.0 + 4.0;
@@ -119,6 +128,17 @@ impl Menu {
         }
         if matches!(self.screen, Screen::Quit) {
             items = vec![(sel, qcore::t!("Confirm")), (back, qcore::t!("Cancel"))];
+        }
+        if self.screen == Screen::Demos && self.prompt.is_none() {
+            items = Vec::new();
+            if self.demos.selected().is_some() {
+                items.extend([(sel, qcore::t!("Play")), (K_XBUTTON, qcore::t!("Export Video")), (K_YBUTTON, qcore::t!("Rename"))]);
+                if self.demos.selected().is_some_and(|d| d.auto) {
+                    items.push((K_LTRIGGER, qcore::t!("Keep")));
+                }
+                items.push((K_BACK, qcore::t!("Delete")));
+            }
+            items.extend([(K_RTRIGGER, qcore::t!("Sort")), (K_LSHOULDER, qcore::t!("Switch List")), (back, qcore::t!("Back"))]);
         }
         self.boxed_hints(c, y, &items);
     }

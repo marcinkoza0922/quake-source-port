@@ -5,9 +5,16 @@ impl Host {
     /// frame. When the renderer is still reading it back (wgpu in the
     /// browser), both stay pending and this runs again next frame.
     pub(super) fn write_captures(&mut self) {
-        if self.screenshot.is_none() && self.thumb.is_none() { return; }
+        if !self.wants_capture() { return; }
         let captured = self.r.take_capture();
-        if matches!(captured, Ok(None)) { return; }
+        if matches!(captured, Ok(None)) {
+            self.capture_frame(None);
+            return;
+        }
+        if let Ok(Some((w, h, px))) = &captured {
+            self.capture_frame(Some((*w, *h, px)));
+        }
+        if self.screenshot.is_none() && self.thumb.is_none() { return; }
         let (shot, thumb) = (self.screenshot.take(), self.thumb.take());
         self.clean_shot = false;
         let (w, h, px) = match captured {

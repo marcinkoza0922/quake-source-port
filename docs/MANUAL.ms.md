@@ -159,6 +159,34 @@ sesuatu mod menggunakan kesan zarah yang tidak dapat dipaparkan oleh port
 lain, versi penuh disimpan sebagai `<name>.qsd` (`playdemo <name>.qsd`).
 `demo_convert <name>` menukar demo yang lebih lama.
 
+Menu utama → Demo menyenaraikan demo tersimpan anda dan, jika Pilihan → Demo
+→ Rakam demo secara automatik dihidupkan, demo automatik bagi setiap
+peringkat yang anda main; yang tertua diganti apabila slot penuh. Taip untuk
+menapis senarai dan tekan Tab untuk menukar susunan; butang di sebelah
+senarai memainkan, mengeksport, menamakan semula, menyimpan atau memadam
+demo yang dipilih, dan menamakan semula demo automatik akan menyimpannya.
+Laporan pepijat mengandungi demo automatik peringkat semasa.
+
+Semasa demo dimainkan, Ruang menjeda, menahan Kiri atau Kanan mengundur atau
+memara laju, Atas dan Bawah menukar kelajuan, PgUp dan PgDn melompat 10
+saat, serta Home dan End pergi ke permulaan dan ke peta seterusnya. I dan O
+menanda klip; E mengeksportnya, atau seluruh demo, ke folder `videos`.
+Kawalan kekal di skrin; H atau Sembunyi menyembunyikannya, dan menuding tepi
+bawah menunjukkan jalur yang mengembalikannya. Klik butang, klik garis masa
+untuk melompat ke situ, atau seret padanya untuk menanda klip; Eksport
+bertanya kadar bingkai, saiz, format dan fail, serta sama ada mengeksport
+klip yang ditanda atau seluruh demo.
+
+Pada pengawal, A menjeda, d-pad mengundur, mempercepat dan menukar kelajuan,
+LB dan RB melompat 10 saat, dan butang batang kawalan pergi ke permulaan dan
+ke peta seterusnya. LT dan RT menanda klip, B mengosongkannya, X
+mengeksport, Y menyimpan demo automatik dan View menyembunyikan kawalan.
+
+`capture` memulakan dan menghentikan rakaman video semasa bermain. Kadar
+bingkai, format dan kualiti terdapat dalam Pilihan → Demo → Rakaman video.
+Video memerlukan ffmpeg; tanpanya bingkai disimpan sebagai imej PNG bersama
+fail WAV.
+
 ## Kebolehcapaian
 
 Options → Kebolehcapaian:

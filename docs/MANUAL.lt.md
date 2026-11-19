@@ -162,6 +162,34 @@ pilna versija išsaugoma kaip `<pavadinimas>.qsd`
 (`playdemo <pavadinimas>.qsd`). `demo_convert <pavadinimas>` konvertuoja
 senesnį demo.
 
+Pagrindinis meniu → Demo rodo išsaugotus demo ir, kai įjungta Parinktys →
+Demo → Automatiškai įrašyti demo, kiekvieno žaisto lygio automatinį demo;
+seniausi pakeičiami, kai vietos užpildytos. Rašykite, kad filtruotumėte
+sąrašus, o Tab keičia rikiavimą; mygtukai šalia sąrašo paleidžia,
+eksportuoja, pervadina, pasilieka arba ištrina pasirinktą demo, o
+pervadintas automatinis demo pasiliekamas. Klaidų ataskaitose yra
+dabartinio lygio automatinis demo.
+
+Leidžiant demo, Tarpas pristabdo, laikant Kairėn ar Dešinėn sukama atgal ar
+pirmyn, Aukštyn ir Žemyn keičia greitį, PgUp ir PgDn peršoka 10 sekundžių, o
+Home ir End nueina į pradžią ir į kitą žemėlapį. I ir O pažymi klipą; E jį
+ar visą demo eksportuoja į aplanką `videos`. Valdikliai lieka ekrane; H arba
+Slėpti juos paslepia, o nurodžius apatinį kraštą pasirodo juosta, kuri juos
+grąžina. Spauskite mygtukus, spustelėkite laiko juostą, kad peršoktumėte
+ten, arba vilkite per ją, kad pažymėtumėte klipą; Eksportuoti klausia kadrų
+dažnio, dydžio, formato ir failo bei ar eksportuoti pažymėtą klipą, ar visą
+demo.
+
+Valdiklyje A pristabdo, kryžminis mygtukas suka atgal ir pirmyn bei keičia
+greitį, LB ir RB peršoka 10 sekundžių, o lazdelių paspaudimai nukelia į
+pradžią ir į kitą žemėlapį. LT ir RT pažymi klipą, B jį išvalo, X
+eksportuoja, Y pasilieka automatinį demo, o View paslepia valdiklius.
+
+`capture` pradeda ir sustabdo vaizdo įrašymą žaidžiant. Kadrų dažnis,
+formatas ir kokybė yra skiltyje Parinktys → Demo → Vaizdo įrašymas. Vaizdo
+įrašams reikia ffmpeg; be jo kadrai išsaugomi kaip PNG paveikslėliai su WAV
+failu.
+
 ## Prieinamumas
 
 Options → Prieinamumas:

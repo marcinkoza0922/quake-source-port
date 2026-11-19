@@ -1397,6 +1397,93 @@ yue 唔止電子嘢，任何金屬表面都插得落插頭
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 yue 每 0.1 秒嘅閃電傷害（原版雷電槍係 30）
 
+# Demos and video recording.
+@ AV1 (MP4)
+yue AV1 (MP4)
+
+@ Auto-Demo Slots
+yue 自動示範欄位
+
+@ Auto-Record Demos
+yue 自動錄示範
+
+@ Frame Rate
+yue 影格率
+
+@ H.264 (MP4)
+yue H.264 (MP4)
+
+@ H.265 (MP4)
+yue H.265 (MP4)
+
+@ Pause at End
+yue 最後暫停
+
+@ Playback Bar
+yue 播放列
+
+@ Quality
+yue 質素
+
+@ Record Audio
+yue 錄聲音
+
+@ VP9 (WebM)
+yue VP9 (WebM)
+
+@ Video Format
+yue 影片格式
+
+@ Video Recording
+yue 錄影
+
+@ ffmpeg Program
+yue ffmpeg 程式
+
+@ small file
+yue 細檔案
+
+@ unlimited
+yue 冇限制
+
+# Demos and video recording.
+@ 1080p
+yue 1080p
+
+@ 1440p
+yue 1440p
+
+@ 4K
+yue 4K
+
+@ 720p
+yue 720p
+
+@ Destination
+yue 儲存位置
+
+@ File Name
+yue 檔案名
+
+@ Rename
+yue 改名
+
+@ Rename Demo
+yue 示範改名
+
+@ Export Highlighted Clip
+yue 匯出標示咗嘅片段
+
+@ Export Whole Demo
+yue 匯出成個示範
+
+@ Same as window
+yue 同視窗一樣
+
+# Demos and video recording.
+@ GPU Encoding
+yue GPU 編碼
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ yue 邊啲武器會觸發凍結；近戰包括斧頭，同埋任何唔使彈藥�
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 yue 自己嘅火箭同榴彈唔會傷到你；火箭跳照樣得
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+yue 你播嘅示範會停喺最後一格，唔會返去選單，等你可以倒帶
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+yue 錄影嘅每秒影格數；錄影期間遊戲會準確噉用呢個速率行
+
+@ High keeps the most detail; small file saves disk space
+yue 高會保留最多細節；細檔案慳磁碟位
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+yue 刪除最舊嗰個之前保留幾多個自動示範；已保留嘅示範唔計
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+yue 將你玩嘅每一關錄落 主選單 > 示範 嘅自動清單；保留你想要嘅，最舊嗰啲會被取代
+
+@ Records game sound and music into the video
+yue 將遊戲音效同音樂錄入影片
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+yue 撳完控制鍵之後、一直或者永遠唔顯示播放列（時間、速度、時間軸）
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+yue 影片格式；要有嗰個編碼器嘅 ffmpeg，否則影格會儲存做 PNG 圖片
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+yue 冇標示片段：播示範嗰陣喺時間軸上面拖，或者撳 I 同 O（手掣上面係 LT 同 RT）
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+yue 影片檔案名；副檔名跟影片格式，同名檔案會被取代
+
+@ New name of the demo; if another demo has it, a number is added
+yue 示範嘅新名；如果有其他示範用緊，會加個編號
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+yue 影片尺寸；影格係由視窗尺寸縮放出嚟（加黑邊保持比例），所以大啲都唔會多咗細節
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+yue ffmpeg 用得到嘅話就喺顯示卡度編碼（NVIDIA NVENC、經 VA-API 嘅 AMD 或者 Intel、AMF 或者 Quick Sync、Apple VideoToolbox），等處理器得閒；否則由處理器編碼
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ yue 存檔
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 yue 對住手邊一塊發光嘅電子面板用副開火就會插入一頭；另一頭跟住會用無限彈藥射閃電。條線會將你綁住喺插座度，仲會勾住轉角。副開火或者換武器就會扯甩佢。
 
+@ From the game folder
+yue 嚟自遊戲資料夾
+
+@ From ironwail
+yue 嚟自 ironwail
+
+@ From the 2021 re-release
+yue 嚟自2021年重製版
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+yue 自動示範已經熄咗。喺 選項 > 示範 度開返「自動錄示範」，就會錄低你玩嘅每一關。
+
+@ Automatic: replaced when the slots are full
+yue 自動：欄位滿咗就會被取代
+
+@ Delete {}?
+yue 刪除 {}？
+
+@ Demos
+yue 示範
+
+@ End of demo
+yue 示範完咗
+
+@ Export Video
+yue 匯出影片
+
+@ Fast forward
+yue 快轉
+
+@ Fast forward {}x
+yue 快轉 {}x
+
+@ Indexing...
+yue 建立索引中...
+
+@ K keep
+yue K 保留
+
+@ Keep
+yue 保留
+
+@ Length: {}
+yue 長度：{}
+
+@ Map: {}
+yue 地圖：{}
+
+@ No automatic demos yet. Each level you play is recorded here.
+yue 仲未有自動示範。你玩嘅每一關都會錄喺度。
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+yue 仲未有儲存咗嘅示範。用主控台指令 'record <name>' 錄一個，或者保留一個自動示範。
+
+@ Pause
+yue 暫停
+
+@ Paused
+yue 暫停咗
+
+@ Play {}x
+yue 播放 {}x
+
+@ Quake - exporting video {}%
+yue Quake - 匯出影片中 {}%
+
+@ Recorded: {}
+yue 錄於：{}
+
+@ Rewind
+yue 倒帶
+
+@ Rewind {}x
+yue 倒帶 {}x
+
+@ Size: {} KB
+yue 大小：{} KB
+
+@ Skip 10 s
+yue 跳過 10 秒
+
+@ Back 10 s
+yue 倒退 10 秒
+
+@ Length
+yue 長度
+
+@ Mark in
+yue 標記起點
+
+@ Mark out
+yue 標記終點
+
+@ Next level
+yue 下一關
+
+@ No demos match the filter. Backspace or Esc clears it.
+yue 冇示範符合篩選。Backspace 或者 Esc 清除篩選。
+
+@ Renaming an automatic demo moves it to the saved demos.
+yue 自動示範改名之後會搬去已儲存嘅示範。
+
+@ Restart
+yue 由頭開始
+
+@ Sort
+yue 排序
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+yue 播示範嗰陣：A 暫停，十字掣拉同轉速度，LT 同 RT 標記片段，X 匯出佢。
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+yue Space 暫停 | ←/→ 拉 | ↑/↓ 速度 | PgUp/PgDn 10 秒 | I/O 標記 | E 匯出
+
+@ Speed
+yue 速度
+
+@ Switch List
+yue 轉清單
+
+@ This can't be undone.
+yue 呢個操作冇得還原。
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+yue 播示範嗰陣：Space 暫停，方向鍵拉同轉速度，I 同 O 標記片段，E 匯出佢。
+
+@ Saved
+yue 已儲存
+
+@ Automatic
+yue 自動
+
+# Demos and video recording.
+@ Export
+yue 匯出
+
+@ H hide
+yue H 收埋
+
+@ Hide
+yue 收埋
+
+# Demos and video recording.
+@ Demo: {}
+yue 示範：{}
+
+@ Highlighted clip: {} to {} ({})
+yue 標示咗嘅片段：{} 至 {}（{}）
+
+@ Show controls
+yue 顯示控制列
+
+# Demos and video recording.
+@ About {} left
+yue 仲有大約 {}
+
+@ Exporting video
+yue 匯出緊影片
+
+@ Preparing...
+yue 準備緊...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ yue 淨係伺服器可以用changelevel
 @ {} renamed to {}
 yue {}改咗名做{}
 
-@ From the game folder
-yue 嚟自遊戲資料夾
+@ Already recording video.
+yue 已經喺度錄緊影片。
 
-@ From ironwail
-yue 嚟自 ironwail
+@ Export cancelled.
+yue 已取消匯出。
 
-@ From the 2021 re-release
-yue 嚟自2021年重製版
+@ Exporting {} to video
+yue 將 {} 匯出做影片中
+
+@ Kept demo {}
+yue 已保留示範：{}
+
+@ Not a valid demo name.
+yue 示範名唔啱。
+
+@ Renamed demo to {}
+yue 示範已改名做 {}
+
+@ No auto-demo to keep.
+yue 冇自動示範可以保留。
+
+@ Not playing a demo.
+yue 冇播緊示範。
+
+@ Not recording video.
+yue 冇錄緊影片。
+
+@ Recording video to {}
+yue 錄緊影片去 {}
+
+@ This demo is already saved.
+yue 呢個示範已經儲存咗。
+
+@ This level's demo will be kept when it ends.
+yue 呢關嘅示範會喺完咗嗰陣保留。
+
+@ Video capture is not available in this build.
+yue 呢個版本冇得錄影。
+
+@ Wrote {} ({}s)
+yue 寫咗 {}（{} 秒）
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+yue 搵唔到 ffmpeg：寫咗 {} 格 PNG 同一個 WAV 去 {}

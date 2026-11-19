@@ -1397,6 +1397,93 @@ sk Zástrčka sa dá zapojiť do akéhokoľvek kovového povrchu, nielen do elek
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 sk Poškodenie bleskom každú desatinu sekundy (bežná blesková zbraň dáva 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+sk AV1 (MP4)
+
+@ Auto-Demo Slots
+sk Sloty pre autodemá
+
+@ Auto-Record Demos
+sk Automaticky nahrávať demá
+
+@ Frame Rate
+sk Snímková frekvencia
+
+@ H.264 (MP4)
+sk H.264 (MP4)
+
+@ H.265 (MP4)
+sk H.265 (MP4)
+
+@ Pause at End
+sk Pauza na konci
+
+@ Playback Bar
+sk Lišta prehrávania
+
+@ Quality
+sk Kvalita
+
+@ Record Audio
+sk Nahrávať zvuk
+
+@ VP9 (WebM)
+sk VP9 (WebM)
+
+@ Video Format
+sk Formát videa
+
+@ Video Recording
+sk Nahrávanie videa
+
+@ ffmpeg Program
+sk Program ffmpeg
+
+@ small file
+sk malý súbor
+
+@ unlimited
+sk neobmedzene
+
+# Demos and video recording.
+@ 1080p
+sk 1080p
+
+@ 1440p
+sk 1440p
+
+@ 4K
+sk 4K
+
+@ 720p
+sk 720p
+
+@ Destination
+sk Cieľ
+
+@ File Name
+sk Názov súboru
+
+@ Rename
+sk Premenovať
+
+@ Rename Demo
+sk Premenovať demo
+
+@ Export Highlighted Clip
+sk Exportovať označený klip
+
+@ Export Whole Demo
+sk Exportovať celé demo
+
+@ Same as window
+sk Ako okno
+
+# Demos and video recording.
+@ GPU Encoding
+sk Kódovanie na GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ sk Ktoré zbrane spúšťajú zmrazenie; na blízko zahŕňa sekeru a každú zb
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 sk Vaše vlastné rakety a granáty vás nezrania; raketové skoky stále fungujú
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+sk Demo, ktoré spustíte, sa zastaví na poslednom snímku namiesto návratu do menu, takže ho môžete pretočiť späť
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+sk Snímky za sekundu nahraného videa; počas nahrávania hra beží presne touto frekvenciou
+
+@ High keeps the most detail; small file saves disk space
+sk Vysoká zachová najviac detailov; malý súbor šetrí miesto na disku
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+sk Koľko automatických dem sa uchová, kým sa zmaže najstaršie; ponechané demá sa nepočítajú
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+sk Nahráva každý odohraný level do zoznamu Automatické v Hlavné menu > Demá; ponechajte si tie, ktoré chcete, najstaršie sa nahrádzajú
+
+@ Records game sound and music into the video
+sk Nahráva zvuky a hudbu hry do videa
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+sk Zobrazí lištu prehrávania (čas, rýchlosť, časová os) po ovládacom klávese, vždy alebo nikdy
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+sk Formát videa; vyžaduje ffmpeg s týmto kodérom, inak sa snímky uložia ako obrázky PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+sk Žiadny klip nie je označený: počas dema ťahajte po časovej osi alebo stlačte I a O (LT a RT na ovládači)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+sk Názov videosúboru; prípona zodpovedá formátu videa a súbor s rovnakým názvom sa nahradí
+
+@ New name of the demo; if another demo has it, a number is added
+sk Nový názov dema; ak ho už má iné demo, pridá sa číslo
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+sk Veľkosť videa; snímky sa škálujú z veľkosti okna (s pásmi na zachovanie tvaru), takže väčšia veľkosť nepridá detaily
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+sk Kóduje na grafickej karte (NVIDIA NVENC, AMD alebo Intel cez VA-API, AMF či Quick Sync, Apple VideoToolbox), ak ju ffmpeg vie použiť, a necháva procesor voľný; inak kóduje procesor
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ sk Uloženie
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 sk Alternatívna streľba na svietiaci elektronický panel na dosah zapojí jeden koniec; druhý potom strieľa blesky s neobmedzenou muníciou. Kábel vás drží pri zásuvke a zachytáva sa o rohy. Alternatívna streľba alebo zmena zbrane ho vytrhne.
 
+@ From the game folder
+sk Z priečinka hry
+
+@ From ironwail
+sk Z ironwail
+
+@ From the 2021 re-release
+sk Z reedície 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+sk Automatické demá sú vypnuté. Zapnite Automaticky nahrávať demá v Možnosti > Demá a nahrajte každý odohraný level.
+
+@ Automatic: replaced when the slots are full
+sk Automatické: nahradené, keď sú sloty plné
+
+@ Delete {}?
+sk Zmazať {}?
+
+@ Demos
+sk Demá
+
+@ End of demo
+sk Koniec dema
+
+@ Export Video
+sk Exportovať video
+
+@ Fast forward
+sk Rýchlo vpred
+
+@ Fast forward {}x
+sk Vpred {}x
+
+@ Indexing...
+sk Indexovanie...
+
+@ K keep
+sk K ponechať
+
+@ Keep
+sk Ponechať
+
+@ Length: {}
+sk Dĺžka: {}
+
+@ Map: {}
+sk Mapa: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+sk Zatiaľ žiadne automatické demá. Každý odohraný level sa nahráva sem.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+sk Zatiaľ žiadne uložené demá. Nahrajte jedno príkazom konzoly 'record <name>' alebo si ponechajte automatické demo.
+
+@ Pause
+sk Pauza
+
+@ Paused
+sk Pozastavené
+
+@ Play {}x
+sk Prehrávanie {}x
+
+@ Quake - exporting video {}%
+sk Quake - export videa {} %
+
+@ Recorded: {}
+sk Nahrané: {}
+
+@ Rewind
+sk Pretočiť späť
+
+@ Rewind {}x
+sk Späť {}x
+
+@ Size: {} KB
+sk Veľkosť: {} KB
+
+@ Skip 10 s
+sk Preskočiť 10 s
+
+@ Back 10 s
+sk Späť 10 s
+
+@ Length
+sk Dĺžka
+
+@ Mark in
+sk Začiatok klipu
+
+@ Mark out
+sk Koniec klipu
+
+@ Next level
+sk Ďalšia úroveň
+
+@ No demos match the filter. Backspace or Esc clears it.
+sk Filtru nezodpovedá žiadne demo. Backspace alebo Esc ho vymaže.
+
+@ Renaming an automatic demo moves it to the saved demos.
+sk Premenovaním sa automatické demo presunie medzi uložené demá.
+
+@ Restart
+sk Od začiatku
+
+@ Sort
+sk Zoradiť
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+sk Počas dema: A pozastaví, smerový ovládač posúva a mení rýchlosť, LT a RT označia klip a X ho exportuje.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+sk Medzerník pauza | Vľavo/Vpravo posun | Hore/Dole rýchlosť | PgUp/PgDn 10 s | I/O značka | E export
+
+@ Speed
+sk Rýchlosť
+
+@ Switch List
+sk Prepnúť zoznam
+
+@ This can't be undone.
+sk Túto akciu nemožno vrátiť.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+sk Počas dema: Medzerník pozastaví, šípky posúvajú a menia rýchlosť, I a O označia klip a E ho exportuje.
+
+@ Saved
+sk Uložené
+
+@ Automatic
+sk Automatické
+
+# Demos and video recording.
+@ Export
+sk Exportovať
+
+@ H hide
+sk H skryť
+
+@ Hide
+sk Skryť
+
+# Demos and video recording.
+@ Demo: {}
+sk Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+sk Označený klip: {} až {} ({})
+
+@ Show controls
+sk Zobraziť ovládanie
+
+# Demos and video recording.
+@ About {} left
+sk Zostáva asi {}
+
+@ Exporting video
+sk Export videa
+
+@ Preparing...
+sk Príprava...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ sk Iba server môže použiť changelevel
 @ {} renamed to {}
 sk {} sa premenoval na {}
 
-@ From the game folder
-sk Z priečinka hry
+@ Already recording video.
+sk Video sa už nahráva.
 
-@ From ironwail
-sk Z ironwail
+@ Export cancelled.
+sk Export zrušený.
 
-@ From the 2021 re-release
-sk Z reedície 2021
+@ Exporting {} to video
+sk Export {} do videa
+
+@ Kept demo {}
+sk Demo ponechané: {}
+
+@ Not a valid demo name.
+sk Neplatný názov dema.
+
+@ Renamed demo to {}
+sk Demo premenované na {}
+
+@ No auto-demo to keep.
+sk Žiadne autodemo na ponechanie.
+
+@ Not playing a demo.
+sk Neprehráva sa žiadne demo.
+
+@ Not recording video.
+sk Video sa nenahráva.
+
+@ Recording video to {}
+sk Nahrávanie videa do {}
+
+@ This demo is already saved.
+sk Toto demo je už uložené.
+
+@ This level's demo will be kept when it ends.
+sk Demo tohto levelu bude ponechané, keď skončí.
+
+@ Video capture is not available in this build.
+sk Nahrávanie videa nie je v tejto zostave dostupné.
+
+@ Wrote {} ({}s)
+sk Zapísané {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+sk ffmpeg sa nenašiel: zapísaných {} snímok PNG a WAV do {}

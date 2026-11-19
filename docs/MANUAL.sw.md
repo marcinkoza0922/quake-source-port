@@ -164,6 +164,35 @@ athari za chembechembe ambazo ports nyingine haziwezi kuonyesha, toleo
 kamili huhifadhiwa kama `<name>.qsd` (`playdemo <name>.qsd`).
 `demo_convert <name>` hubadilisha demo ya zamani.
 
+Menyu kuu → Demo huonyesha demo ulizohifadhi na, Chaguo → Demo → Rekodi demo
+kiotomatiki ikiwa imewashwa, demo ya kiotomatiki ya kila kiwango
+unachocheza; za zamani zaidi hubadilishwa nafasi zikijaa. Andika ili kuchuja
+orodha na ubonyeze Tab ili kubadili mpangilio; vitufe kando ya orodha
+hucheza, huhamisha, hubadilisha jina, hubakiza au hufuta demo uliyochagua,
+na kubadilisha jina la demo ya kiotomatiki huibakiza. Ripoti za hitilafu
+hujumuisha demo ya kiotomatiki ya kiwango cha sasa.
+
+Demo inapocheza, Nafasi husitisha, kushikilia Kushoto au Kulia hurudisha
+nyuma au kusonga mbele haraka, Juu na Chini hubadili kasi, PgUp na PgDn
+huruka sekunde 10, na Home na End huenda mwanzo na kwenye ramani inayofuata.
+I na O huweka alama ya kipande; E hukihamisha, au demo nzima, kwenye folda
+ya `videos`. Vidhibiti hubaki kwenye skrini; H au Ficha huvificha, na
+kuelekeza ukingo wa chini huonyesha ukanda unaovirudisha. Bofya vitufe,
+bofya ratiba ili kuruka hapo, au buruta juu yake ili kuweka alama ya
+kipande; Hamisha huuliza kasi ya fremu, ukubwa, muundo na faili, na kama
+kuhamisha kipande kilichowekwa alama au demo nzima.
+
+Kwenye kidhibiti, A husitisha, d-pad hurudisha nyuma, husogeza mbele na
+hubadili kasi, LB na RB huruka sekunde 10, na vitufe vya vijiti huenda
+mwanzo na kwenye ramani inayofuata. LT na RT huweka alama ya kipande, B
+hukifuta, X huhamisha, Y hubakiza demo ya kiotomatiki na View huficha
+vidhibiti.
+
+`capture` huanzisha na kusimamisha kurekodi video unapocheza. Kasi ya fremu,
+muundo na ubora vipo katika Chaguo → Demo → Kurekodi video. Video zinahitaji
+ffmpeg; bila hiyo fremu huhifadhiwa kama picha za PNG pamoja na faili ya
+WAV.
+
 ## Ufikivu
 
 Options → Ufikivu:

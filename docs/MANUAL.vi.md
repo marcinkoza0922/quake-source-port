@@ -147,6 +147,31 @@ bản port khác không hiển thị được, phiên bản đầy đủ đượ
 `<tên>.qsd` (`playdemo <tên>.qsd`). `demo_convert <tên>` chuyển đổi một
 demo cũ hơn.
 
+Menu chính → Demo liệt kê các demo đã lưu và, khi bật Tùy chọn → Demo → Tự
+động ghi demo, một demo tự động của mỗi màn bạn chơi; các bản cũ nhất bị
+thay khi các ô đã đầy. Gõ để lọc danh sách và nhấn Tab để đổi cách sắp
+xếp; các nút cạnh danh sách phát, xuất, đổi tên, giữ hoặc xóa demo đã
+chọn, và đổi tên một demo tự động sẽ giữ nó lại. Báo cáo lỗi có kèm demo
+tự động của màn hiện tại.
+
+Khi đang phát demo, Space tạm dừng, giữ Trái hoặc Phải để tua lại hoặc tua
+nhanh, Lên và Xuống đổi tốc độ, PgUp và PgDn nhảy 10 giây, còn Home và End
+về đầu và sang bản đồ kế tiếp. I và O đánh dấu một đoạn; E xuất đoạn đó,
+hoặc cả demo, vào thư mục `videos`. Thanh điều khiển luôn hiện trên màn
+hình; H hoặc Ẩn sẽ ẩn nó, và trỏ vào mép dưới sẽ hiện một dải để gọi nó lại.
+Bấm các nút, bấm vào dòng thời gian để nhảy tới đó, hoặc kéo trên nó để đánh
+dấu một đoạn; Xuất sẽ hỏi tốc độ khung hình, kích thước, định dạng và tệp,
+và xuất đoạn đã đánh dấu hay toàn bộ demo.
+
+Trên tay cầm, A tạm dừng, d-pad tua lùi, tua nhanh và đổi tốc độ, LB và RB
+nhảy 10 giây, và nút nhấn cần analog đến đầu và đến bản đồ tiếp theo. LT và
+RT đánh dấu đoạn cắt, B xóa nó, X xuất, Y giữ một demo tự động và View ẩn
+bảng điều khiển.
+
+`capture` bắt đầu và dừng ghi video khi bạn chơi. Tốc độ khung hình, định
+dạng và chất lượng nằm trong Tùy chọn → Demo → Ghi video. Video cần ffmpeg;
+không có nó thì khung hình được lưu thành ảnh PNG kèm một tệp WAV.
+
 ## Trợ năng
 
 Options → Trợ năng:

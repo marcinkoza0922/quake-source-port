@@ -89,6 +89,11 @@ pub struct Renderer {
     capture_requested: bool,
     /// (buffer, width, height) of the last captured swapchain image.
     capture: Option<(Buffer, u32, u32)>,
+    /// Windowed: keep an offscreen output (`targets.out`) for frames that
+    /// aren't presented (video export), and whether the next `render`
+    /// draws there instead of the swapchain.
+    keep_out: bool,
+    skip_present: bool,
     /// Loaded slang preset (r_shader_preset).
     slang: Option<slang::Slang>,
 }
@@ -182,15 +187,41 @@ impl Renderer {
     /// Windowed mode: the next `render` copies the image it presents so
     /// `read_pixels` can return it. No-op when headless.
     pub fn request_capture(&mut self) {
-        self.capture_requested = self.swap.is_some();
+        self.capture_requested = self.swap.is_some() && !self.skip_present;
+    }
+
+    /// Windowed: allocate (or free) an offscreen output so frames can be
+    /// drawn without being shown. Headless always has one.
+    pub fn set_offscreen(&mut self, on: bool) -> Result<()> {
+        if self.swap.is_none() || self.keep_out == on {
+            return Ok(());
+        }
+        self.keep_out = on;
+        self.skip_present = false;
+        if self.targets.is_some() {
+            self.create_targets()?;
+        }
+        Ok(())
+    }
+
+    /// With [`Self::set_offscreen`] on: the next `render` draws into the
+    /// offscreen output (read with `read_pixels`) and the window keeps
+    /// showing the last presented image.
+    pub fn present_next(&mut self, present: bool) {
+        self.skip_present = !present && self.keep_out;
+    }
+
+    /// Whether `render` presents this frame.
+    pub(crate) fn presenting(&self) -> bool {
+        self.swap.is_some() && !self.skip_present
     }
 
     /// The captured frame as (width, height, RGBA8). Never pending here (the
     /// wgpu backend may return `Ok(None)` until the read-back completes).
     pub fn take_capture(&mut self) -> Result<Option<(u32, u32, Vec<u8>)>> {
         let (w, h) = match &self.swap {
-            Some(_) => self.capture.as_ref().map_or((self.width, self.height), |c| (c.1, c.2)),
-            None => (self.width, self.height),
+            Some(_) if !self.skip_present => self.capture.as_ref().map_or((self.width, self.height), |c| (c.1, c.2)),
+            _ => (self.width, self.height),
         };
         self.read_pixels().map(|px| Some((w, h, px)))
     }
@@ -200,7 +231,9 @@ impl Renderer {
     /// `render` after `request_capture`.
     pub fn read_pixels(&mut self) -> Result<Vec<u8>> {
         self.idle();
-        if let Some(s) = &self.swap {
+        if let Some(s) = &self.swap
+            && !self.skip_present
+        {
             let bgra = matches!(
                 s.format,
                 vk::Format::B8G8R8A8_UNORM | vk::Format::B8G8R8A8_SRGB
@@ -223,7 +256,15 @@ impl Renderer {
             .as_mut()
             .ok_or_else(|| Error::new("no targets"))?;
         let (_, buf) = t.out.as_mut().ok_or_else(|| Error::new("not headless"))?;
-        Ok(buf.bytes_mut()[..(w * h * 4) as usize].to_vec())
+        let mut px = buf.bytes_mut()[..(w * h * 4) as usize].to_vec();
+        // the windowed offscreen output has the swapchain's format
+        if matches!(self.pipes.post_format, vk::Format::B8G8R8A8_UNORM | vk::Format::B8G8R8A8_SRGB) {
+            px.as_chunks_mut::<4>().0.iter_mut().for_each(|p| p.swap(0, 2));
+        }
+        if self.swap.is_some() {
+            px.as_chunks_mut::<4>().0.iter_mut().for_each(|p| p[3] = 255);
+        }
+        Ok(px)
     }
 
     /// Light level at a point (R_LightPoint), RGB 0..255+.

@@ -1397,6 +1397,93 @@ gl Calquera superficie metálica admite o enchufe, non só a electrónica
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 gl Dano do raio cada décima de segundo (o canón de raios orixinal fai 30)
 
+# Demos and video recording.
+@ AV1 (MP4)
+gl AV1 (MP4)
+
+@ Auto-Demo Slots
+gl Espazos de demos automáticas
+
+@ Auto-Record Demos
+gl Gravar demos automaticamente
+
+@ Frame Rate
+gl Fotogramas por segundo
+
+@ H.264 (MP4)
+gl H.264 (MP4)
+
+@ H.265 (MP4)
+gl H.265 (MP4)
+
+@ Pause at End
+gl Pausa ao final
+
+@ Playback Bar
+gl Barra de reprodución
+
+@ Quality
+gl Calidade
+
+@ Record Audio
+gl Gravar son
+
+@ VP9 (WebM)
+gl VP9 (WebM)
+
+@ Video Format
+gl Formato de vídeo
+
+@ Video Recording
+gl Gravación de vídeo
+
+@ ffmpeg Program
+gl Programa ffmpeg
+
+@ small file
+gl ficheiro pequeno
+
+@ unlimited
+gl ilimitadas
+
+# Demos and video recording.
+@ 1080p
+gl 1080p
+
+@ 1440p
+gl 1440p
+
+@ 4K
+gl 4K
+
+@ 720p
+gl 720p
+
+@ Destination
+gl Destino
+
+@ File Name
+gl Nome do ficheiro
+
+@ Rename
+gl Renomear
+
+@ Rename Demo
+gl Renomear demo
+
+@ Export Highlighted Clip
+gl Exportar o clip resaltado
+
+@ Export Whole Demo
+gl Exportar a demo enteira
+
+@ Same as window
+gl Como a xanela
+
+# Demos and video recording.
+@ GPU Encoding
+gl Codificación por GPU
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ gl Que armas activan a conxelación; corpo a corpo inclúe o machado e calquera 
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 gl Os teus propios foguetes e granadas non te feren; os saltos con foguete seguen funcionando
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+gl Unha demo que reproduces detense no último fotograma en vez de volver ao menú, para que a poidas rebobinar
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+gl Fotogramas por segundo do vídeo; mentres grava, o xogo funciona exactamente a este ritmo
+
+@ High keeps the most detail; small file saves disk space
+gl Alta conserva máis detalle; ficheiro pequeno aforra espazo no disco
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+gl Cantas demos automáticas se conservan antes de eliminar a máis antiga; as demos gardadas non contan
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+gl Grava cada nivel que xogues na lista Automáticas de Menú principal > Demos; garda as que queiras, as máis antigas substitúense
+
+@ Records game sound and music into the video
+gl Grava os sons e a música do xogo no vídeo
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+gl Mostra a barra de reprodución (tempo, velocidade, liña de tempo) despois dunha tecla de control, sempre ou nunca
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+gl Formato de vídeo; precisa ffmpeg con ese codificador, se non os fotogramas gárdanse como imaxes PNG
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+gl Ningún clip resaltado: durante a demo, arrastra sobre a liña de tempo ou preme I e O (LT e RT no mando)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+gl Nome do ficheiro de vídeo; a extensión segue o formato de vídeo e substitúese un ficheiro co mesmo nome
+
+@ New name of the demo; if another demo has it, a number is added
+gl Novo nome da demo; se outra demo xa o ten, engádese un número
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+gl Tamaño do vídeo; os fotogramas escálanse desde o tamaño da xanela (con bandas para manter a forma), así que un tamaño maior non engade detalle
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+gl Codifica na tarxeta gráfica (NVIDIA NVENC, AMD ou Intel mediante VA-API, AMF ou Quick Sync, Apple VideoToolbox) cando ffmpeg pode usala, deixando libre o procesador; se non, codifica o procesador
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ gl Partida gardada
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 gl O disparo secundario sobre un panel electrónico iluminado ao teu alcance enchufa un extremo; o outro dispara raios con munición ilimitada. O cable átate á toma e engánchase nas esquinas. O secundario ou cambiar de arma arríncao.
 
+@ From the game folder
+gl Do cartafol do xogo
+
+@ From ironwail
+gl De ironwail
+
+@ From the 2021 re-release
+gl Da reedición de 2021
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+gl As demos automáticas están desactivadas. Activa Gravar demos automaticamente en Opcións > Demos para gravar cada nivel que xogues.
+
+@ Automatic: replaced when the slots are full
+gl Automática: substitúese cando os espazos están cheos
+
+@ Delete {}?
+gl Eliminar {}?
+
+@ Demos
+gl Demos
+
+@ End of demo
+gl Fin da demo
+
+@ Export Video
+gl Exportar vídeo
+
+@ Fast forward
+gl Avance rápido
+
+@ Fast forward {}x
+gl Adiante {}x
+
+@ Indexing...
+gl Indexando...
+
+@ K keep
+gl K gardar
+
+@ Keep
+gl Gardar
+
+@ Length: {}
+gl Duración: {}
+
+@ Map: {}
+gl Mapa: {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+gl Aínda non hai demos automáticas. Cada nivel que xogues grávase aquí.
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+gl Aínda non hai demos gardadas. Grava unha co comando de consola 'record <name>' ou garda unha demo automática.
+
+@ Pause
+gl Pausa
+
+@ Paused
+gl En pausa
+
+@ Play {}x
+gl Reprodución {}x
+
+@ Quake - exporting video {}%
+gl Quake - exportando vídeo {} %
+
+@ Recorded: {}
+gl Gravada: {}
+
+@ Rewind
+gl Rebobinar
+
+@ Rewind {}x
+gl Atrás {}x
+
+@ Size: {} KB
+gl Tamaño: {} KB
+
+@ Skip 10 s
+gl Saltar 10 s
+
+@ Back 10 s
+gl Atrás 10 s
+
+@ Length
+gl Duración
+
+@ Mark in
+gl Marcar inicio
+
+@ Mark out
+gl Marcar fin
+
+@ Next level
+gl Seguinte nivel
+
+@ No demos match the filter. Backspace or Esc clears it.
+gl Ningunha demo coincide co filtro. Retroceso ou Esc bórrao.
+
+@ Renaming an automatic demo moves it to the saved demos.
+gl Renomear unha demo automática móvea ás demos gardadas.
+
+@ Restart
+gl Desde o principio
+
+@ Sort
+gl Ordenar
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+gl Durante unha demo: A pausa, a cruceta despraza e cambia a velocidade, LT e RT marcan un clip e X expórtao.
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+gl Espazo pausa | Esq./Der. desprazar | Arriba/Abaixo velocidade | RePáx/AvPáx 10 s | I/O marcar | E exportar
+
+@ Speed
+gl Velocidade
+
+@ Switch List
+gl Cambiar de lista
+
+@ This can't be undone.
+gl Non se pode desfacer.
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+gl Durante unha demo: Espazo pausa, as frechas desprazan e cambian a velocidade, I e O marcan un clip e E expórtao.
+
+@ Saved
+gl Gardadas
+
+@ Automatic
+gl Automáticas
+
+# Demos and video recording.
+@ Export
+gl Exportar
+
+@ H hide
+gl H ocultar
+
+@ Hide
+gl Ocultar
+
+# Demos and video recording.
+@ Demo: {}
+gl Demo: {}
+
+@ Highlighted clip: {} to {} ({})
+gl Clip resaltado: {} a {} ({})
+
+@ Show controls
+gl Amosar controis
+
+# Demos and video recording.
+@ About {} left
+gl Quedan uns {}
+
+@ Exporting video
+gl Exportando vídeo
+
+@ Preparing...
+gl Preparando...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ gl Só o servidor pode usar changelevel
 @ {} renamed to {}
 gl {} renomeado como {}
 
-@ From the game folder
-gl Do cartafol do xogo
+@ Already recording video.
+gl Xa se está a gravar vídeo.
 
-@ From ironwail
-gl De ironwail
+@ Export cancelled.
+gl Exportación cancelada.
 
-@ From the 2021 re-release
-gl Da reedición de 2021
+@ Exporting {} to video
+gl Exportando {} a vídeo
+
+@ Kept demo {}
+gl Demo gardada: {}
+
+@ Not a valid demo name.
+gl Nome de demo non válido.
+
+@ Renamed demo to {}
+gl Demo renomeada a {}
+
+@ No auto-demo to keep.
+gl Non hai ningunha demo automática que gardar.
+
+@ Not playing a demo.
+gl Non se está a reproducir ningunha demo.
+
+@ Not recording video.
+gl Non se está a gravar vídeo.
+
+@ Recording video to {}
+gl Gravando vídeo en {}
+
+@ This demo is already saved.
+gl Esta demo xa está gardada.
+
+@ This level's demo will be kept when it ends.
+gl A demo deste nivel gardarase cando remate.
+
+@ Video capture is not available in this build.
+gl A captura de vídeo non está dispoñible nesta versión.
+
+@ Wrote {} ({}s)
+gl Escrito {} ({} s)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+gl Non se atopou ffmpeg: escribíronse {} fotogramas PNG e un WAV en {}

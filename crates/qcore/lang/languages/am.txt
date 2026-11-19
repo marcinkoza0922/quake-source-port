@@ -1397,6 +1397,93 @@ am ኤሌክትሮኒክስ ብቻ ሳይሆን ማንኛውም የብረት ገ
 @ Lightning damage every tenth of a second (the stock lightning gun does 30)
 am በየአሥረኛው ሰከንድ የመብረቅ ጉዳት (መደበኛው የመብረቅ ጠመንጃ 30 ያደርሳል)
 
+# Demos and video recording.
+@ AV1 (MP4)
+am AV1 (MP4)
+
+@ Auto-Demo Slots
+am የራስ-ሰር ዴሞ ቦታዎች
+
+@ Auto-Record Demos
+am ዴሞዎችን በራስ-ሰር ቅረጽ
+
+@ Frame Rate
+am የፍሬም መጠን
+
+@ H.264 (MP4)
+am H.264 (MP4)
+
+@ H.265 (MP4)
+am H.265 (MP4)
+
+@ Pause at End
+am መጨረሻ ላይ አቁም
+
+@ Playback Bar
+am የማጫወቻ አሞሌ
+
+@ Quality
+am ጥራት
+
+@ Record Audio
+am ድምጽ ቅረጽ
+
+@ VP9 (WebM)
+am VP9 (WebM)
+
+@ Video Format
+am የቪዲዮ ቅርጸት
+
+@ Video Recording
+am ቪዲዮ መቅረጽ
+
+@ ffmpeg Program
+am የffmpeg ፕሮግራም
+
+@ small file
+am ትንሽ ፋይል
+
+@ unlimited
+am ያልተገደበ
+
+# Demos and video recording.
+@ 1080p
+am 1080p
+
+@ 1440p
+am 1440p
+
+@ 4K
+am 4K
+
+@ 720p
+am 720p
+
+@ Destination
+am መድረሻ
+
+@ File Name
+am የፋይል ስም
+
+@ Rename
+am ስም ቀይር
+
+@ Rename Demo
+am የዴሞ ስም ቀይር
+
+@ Export Highlighted Clip
+am የተመረጠውን ቅንጥብ ላክ
+
+@ Export Whole Demo
+am ሙሉውን ዴሞ ላክ
+
+@ Same as window
+am እንደ መስኮቱ
+
+# Demos and video recording.
+@ GPU Encoding
+am የGPU ኢንኮዲንግ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1843,6 +1930,48 @@ am መቀዝቀዙን የሚያስነሱ መሳሪያዎች፤ የቅርብ ው�
 
 @ Your own rockets and grenades don't hurt you; rocket jumps still work
 am የራስዎ ሮኬቶችና ቦምቦች አይጎዱዎትም፤ የሮኬት ዝላይ አሁንም ይሰራል
+
+# Demos and video recording.
+@ A demo you play stops on its last frame instead of returning to the menu, so you can rewind
+am የሚያጫውቱት ዴሞ ወደ ምናሌው ከመመለስ ይልቅ በመጨረሻው ፍሬም ላይ ይቆማል፣ ወደ ኋላ ማጠንጠን እንዲችሉ
+
+@ Frames per second of recorded video; the game runs at exactly this rate while recording
+am የቪዲዮው ፍሬሞች በሰከንድ፤ በመቅረጽ ጊዜ ጨዋታው በትክክል በዚህ ፍጥነት ይሄዳል
+
+@ High keeps the most detail; small file saves disk space
+am ከፍተኛ ብዙ ዝርዝር ይይዛል፤ ትንሽ ፋይል የዲስክ ቦታ ይቆጥባል
+
+@ How many automatic demos are kept before the oldest is deleted; kept demos never count
+am በጣም አሮጌው ከመሰረዙ በፊት ስንት ራስ-ሰር ዴሞዎች ይቀመጣሉ፤ የተያዙ ዴሞዎች አይቆጠሩም
+
+@ Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced
+am የሚጫወቱትን እያንዳንዱን ደረጃ በዋና ምናሌ > ዴሞዎች ውስጥ ባለው ራስ-ሰር ዝርዝር ይቀርጻል፤ የሚፈልጉትን ይያዙ፣ በጣም አሮጌዎቹ ይተካሉ
+
+@ Records game sound and music into the video
+am የጨዋታውን ድምጾችና ሙዚቃ በቪዲዮው ውስጥ ይቀርጻል
+
+@ Shows the playback bar (time, speed, timeline) after a control key, always, or never
+am የማጫወቻ አሞሌውን (ጊዜ፣ ፍጥነት፣ የጊዜ መስመር) ከመቆጣጠሪያ ቁልፍ በኋላ፣ ሁልጊዜ ወይም በጭራሽ ያሳያል
+
+@ Video format; needs ffmpeg with that encoder, else frames are saved as PNG images
+am የቪዲዮ ቅርጸት፤ ያንን ኢንኮደር የያዘ ffmpeg ያስፈልጋል፣ አለዚያ ፍሬሞቹ እንደ PNG ምስሎች ይቀመጣሉ
+
+# Demos and video recording.
+@ No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)
+am ምንም ቅንጥብ አልተመረጠም፦ ዴሞ ሲጫወት በጊዜ መስመሩ ላይ ይጎትቱ ወይም I እና O ይጫኑ (በመቆጣጠሪያ ላይ LT እና RT)
+
+@ Name of the video file; the extension follows the video format, and a file of the same name is replaced
+am የቪዲዮ ፋይሉ ስም፤ ቅጥያው የቪዲዮ ቅርጸቱን ይከተላል፣ ተመሳሳይ ስም ያለው ፋይልም ይተካል
+
+@ New name of the demo; if another demo has it, a number is added
+am የዴሞው አዲስ ስም፤ ሌላ ዴሞ ስሙን ቀድሞ ከያዘ ቁጥር ይታከላል
+
+@ Video size; frames are scaled from the window size (bars keep the shape), so a larger size adds no detail
+am የቪዲዮ መጠን፤ ፍሬሞቹ ከመስኮቱ መጠን ይሰፋሉ (ቅርጹን ለመጠበቅ በአሞሌዎች)፣ ስለዚህ ትልቅ መጠን ዝርዝር አይጨምርም
+
+# Demos and video recording.
+@ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
+am ffmpeg ሲጠቀምበት በግራፊክስ ካርዱ ላይ ኢንኮድ ያደርጋል (NVIDIA NVENC፣ AMD ወይም Intel በVA-API፣ AMF ወይም Quick Sync፣ Apple VideoToolbox) እና ፕሮሰሰሩን ነፃ ያደርጋል፤ ካልሆነ ፕሮሰሰሩ ኢንኮድ ያደርጋል
 
 # ==== ui.txt ====
 
@@ -2594,6 +2723,169 @@ am ማስቀመጫ
 @ Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out.
 am በእጅ ርቀት ባለ በሚያበራ የኤሌክትሮኒክ ፓነል ላይ ሁለተኛ ተኩስ አንዱን ጫፍ ይሰካል፤ ሌላው ጫፍ ከዚያ ገደብ በሌለው ጥይት መብረቅ ይተኩሳል። ገመዱ ከሶኬቱ ጋር ያስርዎታል እና በማዕዘኖች ላይ ይያዛል። ሁለተኛ ተኩስ ወይም መሣሪያ መቀየር ይነቅለዋል።
 
+@ From the game folder
+am ከጨዋታው አቃፊ
+
+@ From ironwail
+am ከ ironwail
+
+@ From the 2021 re-release
+am ከ2021 ዳግም እትም
+
+# Demos and video recording.
+@ Automatic demos are off. Turn on Auto-Record Demos in Options > Demos to record every level you play.
+am ራስ-ሰር ዴሞዎች ጠፍተዋል። የሚጫወቱትን እያንዳንዱን ደረጃ ለመቅረጽ በአማራጮች > ዴሞዎች ውስጥ ዴሞዎችን በራስ-ሰር ቅረጽን ያብሩ።
+
+@ Automatic: replaced when the slots are full
+am ራስ-ሰር፦ ቦታዎቹ ሲሞሉ ይተካል
+
+@ Delete {}?
+am {} ይሰረዝ?
+
+@ Demos
+am ዴሞዎች
+
+@ End of demo
+am የዴሞው መጨረሻ
+
+@ Export Video
+am እንደ ቪዲዮ ላክ
+
+@ Fast forward
+am በፍጥነት ወደፊት
+
+@ Fast forward {}x
+am ወደፊት {}x
+
+@ Indexing...
+am በማውጫ ላይ...
+
+@ K keep
+am K ያዝ
+
+@ Keep
+am ያዝ
+
+@ Length: {}
+am ርዝመት፦ {}
+
+@ Map: {}
+am ካርታ፦ {}
+
+@ No automatic demos yet. Each level you play is recorded here.
+am እስካሁን ራስ-ሰር ዴሞዎች የሉም። የሚጫወቱት እያንዳንዱ ደረጃ እዚህ ይቀረጻል።
+
+@ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
+am እስካሁን የተቀመጡ ዴሞዎች የሉም። በኮንሶል ትዕዛዝ 'record <name>' አንዱን ይቅረጹ፣ ወይም ራስ-ሰር ዴሞ ይያዙ።
+
+@ Pause
+am ለአፍታ አቁም
+
+@ Paused
+am ለአፍታ ቆሟል
+
+@ Play {}x
+am በማጫወት ላይ {}x
+
+@ Quake - exporting video {}%
+am Quake - ቪዲዮ እየተላከ ነው {}%
+
+@ Recorded: {}
+am የተቀረጸው፦ {}
+
+@ Rewind
+am ወደ ኋላ አጠንጥን
+
+@ Rewind {}x
+am ወደ ኋላ {}x
+
+@ Size: {} KB
+am መጠን፦ {} KB
+
+@ Skip 10 s
+am 10 ሰ. ዝለል
+
+@ Back 10 s
+am 10 ሰ. ወደኋላ
+
+@ Length
+am ርዝመት
+
+@ Mark in
+am መጀመሪያ ምልክት አድርግ
+
+@ Mark out
+am መጨረሻ ምልክት አድርግ
+
+@ Next level
+am ቀጣይ ደረጃ
+
+@ No demos match the filter. Backspace or Esc clears it.
+am ከማጣሪያው ጋር የሚዛመድ ዴሞ የለም። Backspace ወይም Esc ያጸዳዋል።
+
+@ Renaming an automatic demo moves it to the saved demos.
+am የራስ-ሰር ዴሞ ስም መቀየር ወደ የተቀመጡ ዴሞዎች ያዛውረዋል።
+
+@ Restart
+am ከመጀመሪያው
+
+@ Sort
+am ደርድር
+
+@ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
+am ዴሞ ሲጫወት፦ A ለአፍታ ያቆማል፣ ዲ-ፓድ ያጠነጥናል ፍጥነትም ይቀይራል፣ LT እና RT ቅንጥብ ያመለክታሉ፣ X ደግሞ ይልከዋል።
+
+@ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
+am Space አቁም | ግራ/ቀኝ አጠንጥን | ላይ/ታች ፍጥነት | PgUp/PgDn 10 ሰ. | I/O ምልክት | E ላክ
+
+@ Speed
+am ፍጥነት
+
+@ Switch List
+am ዝርዝር ቀይር
+
+@ This can't be undone.
+am ይህ ሊቀለበስ አይችልም።
+
+@ While a demo plays: Space pauses, the arrows scrub and change speed, I and O mark a clip and E exports it.
+am ዴሞ ሲጫወት፦ Space ለአፍታ ያቆማል፣ ቀስቶቹ ያጠነጥናሉ ፍጥነትም ይቀይራሉ፣ I እና O ቅንጥብ ያመለክታሉ፣ E ደግሞ ይልከዋል።
+
+@ Saved
+am የተቀመጡ
+
+@ Automatic
+am ራስ-ሰር
+
+# Demos and video recording.
+@ Export
+am ላክ
+
+@ H hide
+am H ደብቅ
+
+@ Hide
+am ደብቅ
+
+# Demos and video recording.
+@ Demo: {}
+am ዴሞ፦ {}
+
+@ Highlighted clip: {} to {} ({})
+am የተመረጠ ቅንጥብ፦ {} እስከ {} ({})
+
+@ Show controls
+am መቆጣጠሪያዎችን አሳይ
+
+# Demos and video recording.
+@ About {} left
+am ወደ {} ቀርቷል
+
+@ Exporting video
+am ቪዲዮ እየተላከ ነው
+
+@ Preparing...
+am በዝግጅት ላይ...
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3107,11 +3399,47 @@ am ደረጃ መቀየር የሚችለው አገልጋዩ ብቻ ነው
 @ {} renamed to {}
 am {} ስሙን ወደ {} ቀይሯል
 
-@ From the game folder
-am ከጨዋታው አቃፊ
+@ Already recording video.
+am ቪዲዮ አስቀድሞ እየተቀረጸ ነው።
 
-@ From ironwail
-am ከ ironwail
+@ Export cancelled.
+am መላክ ተሰርዟል።
 
-@ From the 2021 re-release
-am ከ2021 ዳግም እትም
+@ Exporting {} to video
+am {} ወደ ቪዲዮ እየተላከ ነው
+
+@ Kept demo {}
+am ዴሞ ተይዟል፦ {}
+
+@ Not a valid demo name.
+am ልክ ያልሆነ የዴሞ ስም።
+
+@ Renamed demo to {}
+am የዴሞው ስም ወደ {} ተቀይሯል
+
+@ No auto-demo to keep.
+am የሚያዝ ራስ-ሰር ዴሞ የለም።
+
+@ Not playing a demo.
+am የሚጫወት ዴሞ የለም።
+
+@ Not recording video.
+am የሚቀረጽ ቪዲዮ የለም።
+
+@ Recording video to {}
+am ቪዲዮ ወደ {} እየተቀረጸ ነው
+
+@ This demo is already saved.
+am ይህ ዴሞ አስቀድሞ ተቀምጧል።
+
+@ This level's demo will be kept when it ends.
+am የዚህ ደረጃ ዴሞ ሲያልቅ ይያዛል።
+
+@ Video capture is not available in this build.
+am በዚህ እትም ቪዲዮ መቅረጽ አይገኝም።
+
+@ Wrote {} ({}s)
+am {} ተጽፏል ({} ሰ.)
+
+@ ffmpeg not found: wrote {} PNG frames and a WAV to {}
+am ffmpeg አልተገኘም፦ {} PNG ፍሬሞችና አንድ WAV ወደ {} ተጽፈዋል

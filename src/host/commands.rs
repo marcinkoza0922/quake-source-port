@@ -127,6 +127,22 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         }
     });
     c.add("menu_main", |h, _| h.menu.open(Screen::Main));
+    // scripted menu input for headless screenshots: key names as `bind`
+    // takes them (`menu_keys DOWNARROW TAB ENTER`), or typed text
+    c.add("menu_keys", |h, a| {
+        for i in 1..a.argc() {
+            let k = qinput::keys::string_to_keynum(a.argv(i));
+            if k >= 0 && h.menu.active() {
+                h.menu_key(k);
+            }
+        }
+        h.sync_key_dest();
+    });
+    c.add("menu_text", |h, a| {
+        for ch in a.args().trim_matches('"').chars() {
+            h.menu.text(ch, &mut h.server.core.cvars);
+        }
+    });
     c.add("menu_help", |h, a| h.menu.open_help(a.argv(1)));
     c.add("menu_singleplayer", |h, _| h.menu.open(Screen::SinglePlayer));
     c.add("menu_newgame", |h, _| h.menu.open_new_game());
@@ -164,6 +180,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "debris" => Some(Page::Debris),
             "shader" | "screenshader" => Some(Page::ScreenShader),
             "audio" => Some(Page::Audio),
+            "demos" => Some(Page::Demos),
+            "video" => Some(Page::Video),
             "addons" => Some(Page::Addons),
             "newgame" => Some(Page::NewGameAddons),
             "portalgun" => Some(Page::PortalGun),
@@ -213,6 +231,9 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("+showscores", |h, _| h.show_scores = true);
     c.add("-showscores", |h, _| h.show_scores = false);
     super::demo::register(c);
+    super::demo_play::register(c);
+    super::autodemo::register(c);
+    super::capture::register(c);
     for n in ["sizeup", "sizedown", "cd", "help", "scr_autoscale", "togglezoom", "messagemode", "messagemode2", "menu_multiplayer"] {
         c.add(n, |_, _| {});
     }
