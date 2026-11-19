@@ -3622,3 +3622,59 @@ is ffmpeg fannst ekki: skrifaði {} PNG-ramma og WAV í {}
 # Personal bests.
 @ New personal best ({}): {}
 is Nýtt persónulegt met ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+is Vista við að taka upp lykil
+
+@ User Data Directory
+is Notendagagnamappa
+
+@ Autosaves when you pick up a key
+is Vistar sjálfkrafa þegar þú tekur upp lykil
+
+@ Where saves, configs, demos and downloaded map packs are stored
+is Hvar vistaðir leikir, stillingar, kynningar og sóttir kortapakkar eru geymdir
+
+@ Key picked up
+is Lykill tekinn upp
+
+@ Select User Data Directory
+is Veldu notendagagnamöppu
+
+@ Data folder: {}
+is Gagnamappa: {}
+
+@ Parent Folder
+is Yfirmappa
+
+@ Unable to read directory
+is Ekki tókst að lesa möppu
+
+@ No subfolders
+is Engar undirmöppur
+
+@ Select Folder
+is Velja möppu
+
+@ Show Hidden
+is Sýna faldar
+
+@ Copy existing user data?
+is Afrita núverandi notendagögn?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+is Vistaða leiki, stillingar, kynningar og sótta kortapakka má afrita í nýju möppuna.
+
+@ Copy Data
+is Afrita gögn
+
+@ Switch Only
+is Aðeins skipta
+
+@ User data directory set to {}
+is Notendagagnamappa stillt á {}
+
+@ User data directory error: {}
+is Villa í notendagagnamöppu: {}
+

@@ -3622,3 +3622,59 @@ cy Heb ddod o hyd i ffmpeg: ysgrifennwyd {} ffrâm PNG a WAV i {}
 # Personal bests.
 @ New personal best ({}): {}
 cy Gorau personol newydd ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+cy Cadw wrth godi allwedd
+
+@ User Data Directory
+cy Cyfeiriadur Data Defnyddiwr
+
+@ Autosaves when you pick up a key
+cy Yn awto-gadw pan fyddwch yn codi allwedd
+
+@ Where saves, configs, demos and downloaded map packs are stored
+cy Lle mae cadwadau, ffurfweddiadau, demos a phecynnau mapiau wedi'u lawrlwytho yn cael eu storio
+
+@ Key picked up
+cy Allwedd wedi'i chodi
+
+@ Select User Data Directory
+cy Dewis Cyfeiriadur Data Defnyddiwr
+
+@ Data folder: {}
+cy Ffolder data: {}
+
+@ Parent Folder
+cy Ffolder Rhiant
+
+@ Unable to read directory
+cy Methu darllen y cyfeiriadur
+
+@ No subfolders
+cy Dim is-ffolderi
+
+@ Select Folder
+cy Dewis Ffolder
+
+@ Show Hidden
+cy Dangos Cudd
+
+@ Copy existing user data?
+cy Copïo data defnyddiwr presennol?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+cy Gellir copïo cadwadau, ffurfweddiadau, demos a phecynnau mapiau i'r ffolder newydd.
+
+@ Copy Data
+cy Copïo Data
+
+@ Switch Only
+cy Newid yn Unig
+
+@ User data directory set to {}
+cy Cyfeiriadur data defnyddiwr wedi'i osod i {}
+
+@ User data directory error: {}
+cy Gwall cyfeiriadur data defnyddiwr: {}
+

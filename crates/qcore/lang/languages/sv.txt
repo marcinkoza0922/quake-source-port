@@ -3622,3 +3622,59 @@ sv ffmpeg hittades inte: skrev {} PNG-bilder och en WAV till {}
 # Personal bests.
 @ New personal best ({}): {}
 sv Nytt personbästa ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+sv Spara vid nyckelupplockning
+
+@ User Data Directory
+sv Användardatamapp
+
+@ Autosaves when you pick up a key
+sv Sparar automatiskt när du plockar upp en nyckel
+
+@ Where saves, configs, demos and downloaded map packs are stored
+sv Var sparfiler, inställningar, demon och hämtade kartpaket lagras
+
+@ Key picked up
+sv Nyckel upplockad
+
+@ Select User Data Directory
+sv Välj användardatamapp
+
+@ Data folder: {}
+sv Datamapp: {}
+
+@ Parent Folder
+sv Överordnad mapp
+
+@ Unable to read directory
+sv Kan inte läsa mappen
+
+@ No subfolders
+sv Inga undermappar
+
+@ Select Folder
+sv Välj mapp
+
+@ Show Hidden
+sv Visa dolda
+
+@ Copy existing user data?
+sv Kopiera befintliga användardata?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+sv Sparfiler, inställningar, demon och hämtade kartpaket kan kopieras till den nya mappen.
+
+@ Copy Data
+sv Kopiera data
+
+@ Switch Only
+sv Byt bara
+
+@ User data directory set to {}
+sv Användardatamapp inställd på {}
+
+@ User data directory error: {}
+sv Fel i användardatamapp: {}
+

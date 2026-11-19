@@ -3622,3 +3622,59 @@ tr ffmpeg bulunamadı: {} PNG karesi ve bir WAV {} konumuna yazıldı
 # Personal bests.
 @ New personal best ({}): {}
 tr Yeni kişisel rekor ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+tr Anahtar alınca kaydet
+
+@ User Data Directory
+tr Kullanıcı Veri Dizini
+
+@ Autosaves when you pick up a key
+tr Bir anahtar aldığınızda otomatik kaydeder
+
+@ Where saves, configs, demos and downloaded map packs are stored
+tr Kayıtların, ayarların, demoların ve indirilen harita paketlerinin saklandığı yer
+
+@ Key picked up
+tr Anahtar alındı
+
+@ Select User Data Directory
+tr Kullanıcı Veri Dizinini Seç
+
+@ Data folder: {}
+tr Veri klasörü: {}
+
+@ Parent Folder
+tr Üst Klasör
+
+@ Unable to read directory
+tr Dizin okunamadı
+
+@ No subfolders
+tr Alt klasör yok
+
+@ Select Folder
+tr Klasörü Seç
+
+@ Show Hidden
+tr Gizlileri Göster
+
+@ Copy existing user data?
+tr Mevcut kullanıcı verileri kopyalansın mı?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+tr Kayıtlar, ayarlar, demolar ve indirilen harita paketleri yeni klasöre kopyalanabilir.
+
+@ Copy Data
+tr Verileri Kopyala
+
+@ Switch Only
+tr Sadece Değiştir
+
+@ User data directory set to {}
+tr Kullanıcı veri dizini {} olarak ayarlandı
+
+@ User data directory error: {}
+tr Kullanıcı veri dizini hatası: {}
+

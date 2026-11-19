@@ -3622,3 +3622,59 @@ bn ffmpeg পাওয়া যায়নি: {}টি PNG ফ্রেম �
 # Personal bests.
 @ New personal best ({}): {}
 bn নতুন ব্যক্তিগত সেরা ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+bn চাবি তোলার সময় সংরক্ষণ
+
+@ User Data Directory
+bn ব্যবহারকারীর ডেটা ডিরেক্টরি
+
+@ Autosaves when you pick up a key
+bn চাবি তুললে স্বয়ংক্রিয়ভাবে সংরক্ষণ করে
+
+@ Where saves, configs, demos and downloaded map packs are stored
+bn যেখানে সেভ, কনফিগ, ডেমো এবং ডাউনলোড করা ম্যাপ প্যাক সংরক্ষিত হয়
+
+@ Key picked up
+bn চাবি তোলা হয়েছে
+
+@ Select User Data Directory
+bn ব্যবহারকারীর ডেটা ডিরেক্টরি নির্বাচন করুন
+
+@ Data folder: {}
+bn ডেটা ফোল্ডার: {}
+
+@ Parent Folder
+bn মূল ফোল্ডার
+
+@ Unable to read directory
+bn ডিরেক্টরি পড়া যায়নি
+
+@ No subfolders
+bn কোনো সাবফোল্ডার নেই
+
+@ Select Folder
+bn ফোল্ডার নির্বাচন করুন
+
+@ Show Hidden
+bn লুকানো দেখান
+
+@ Copy existing user data?
+bn বিদ্যমান ব্যবহারকারীর ডেটা কপি করবেন?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+bn সেভ, কনফিগ, ডেমো এবং ডাউনলোড করা ম্যাপ প্যাক নতুন ফোল্ডারে কপি করা যেতে পারে।
+
+@ Copy Data
+bn ডেটা কপি করুন
+
+@ Switch Only
+bn শুধু পরিবর্তন করুন
+
+@ User data directory set to {}
+bn ব্যবহারকারীর ডেটা ডিরেক্টরি {} এ সেট করা হয়েছে
+
+@ User data directory error: {}
+bn ব্যবহারকারীর ডেটা ডিরেক্টরি ত্রুটি: {}
+

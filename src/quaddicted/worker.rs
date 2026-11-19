@@ -43,6 +43,7 @@ pub struct Online {
     shared: Arc<Mutex<Shared>>,
     pub releases: Vec<Release>,
     basedir: PathBuf,
+    install_root: PathBuf,
     cache: PathBuf,
 }
 
@@ -52,8 +53,10 @@ impl Online {
     }
 
     /// Starts loading the index (once; `force` refetches it).
-    pub fn open(&mut self, basedir: &Path, cache: &Path, force: bool) {
+    pub fn open(&mut self, basedir: &Path, install_root: &Path, cache: &Path, force: bool) {
+        let dir_changed = self.install_root != install_root || self.cache != cache;
         self.basedir = basedir.to_path_buf();
+        self.install_root = install_root.to_path_buf();
         self.cache = cache.to_path_buf();
         // the browser has no threads or curl
         if cfg!(target_arch = "wasm32") {
@@ -62,7 +65,10 @@ impl Online {
         }
         {
             let mut s = self.lock();
-            if s.status == Status::Loading || (s.status == Status::Ready && !force) {
+            if dir_changed {
+                s.installed = super::load_installed(&cache.join("installed.txt"));
+            }
+            if s.status == Status::Loading || (s.status == Status::Ready && !force && !dir_changed) {
                 return;
             }
             s.status = Status::Loading;
@@ -115,7 +121,13 @@ impl Online {
             }
             s.jobs.insert(r.sha.clone(), Job::Downloading(0.0));
         }
-        let (shared, r, basedir, cache) = (self.shared.clone(), r.clone(), self.basedir.clone(), self.cache.clone());
+        let (shared, r, basedir, install_root, cache) = (
+            self.shared.clone(),
+            r.clone(),
+            self.basedir.clone(),
+            self.install_root.clone(),
+            self.cache.clone(),
+        );
         std::thread::spawn(move || {
             let set = |j: Option<Job>| {
                 let mut s = shared.lock().unwrap_or_else(|e| e.into_inner());
@@ -127,7 +139,7 @@ impl Online {
             let zip = cache.join(format!("{}.zip", r.sha));
             let res = fetch(&r.url, &zip, r.bytes, &|f| set(Some(Job::Downloading(f)))).and_then(|()| {
                 set(Some(Job::Installing));
-                super::install(&r, &zip, &basedir)
+                super::install(&r, &zip, &install_root, &basedir)
             });
             let _ = std::fs::remove_file(&zip);
             match res {

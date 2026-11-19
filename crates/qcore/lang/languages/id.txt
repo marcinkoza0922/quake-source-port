@@ -3622,3 +3622,59 @@ id ffmpeg tidak ditemukan: menulis {} bingkai PNG dan satu WAV ke {}
 # Personal bests.
 @ New personal best ({}): {}
 id Rekor pribadi baru ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+id Simpan saat mengambil kunci
+
+@ User Data Directory
+id Direktori Data Pengguna
+
+@ Autosaves when you pick up a key
+id Menyimpan otomatis saat Anda mengambil kunci
+
+@ Where saves, configs, demos and downloaded map packs are stored
+id Tempat penyimpanan save, konfigurasi, demo, dan paket peta unduhan
+
+@ Key picked up
+id Kunci diambil
+
+@ Select User Data Directory
+id Pilih Direktori Data Pengguna
+
+@ Data folder: {}
+id Folder data: {}
+
+@ Parent Folder
+id Folder Induk
+
+@ Unable to read directory
+id Tidak dapat membaca direktori
+
+@ No subfolders
+id Tidak ada subfolder
+
+@ Select Folder
+id Pilih Folder
+
+@ Show Hidden
+id Tampilkan Tersembunyi
+
+@ Copy existing user data?
+id Salin data pengguna yang ada?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+id Save, konfigurasi, demo, dan paket peta unduhan dapat disalin ke folder baru.
+
+@ Copy Data
+id Salin Data
+
+@ Switch Only
+id Ganti Saja
+
+@ User data directory set to {}
+id Direktori data pengguna diatur ke {}
+
+@ User data directory error: {}
+id Kesalahan direktori data pengguna: {}
+

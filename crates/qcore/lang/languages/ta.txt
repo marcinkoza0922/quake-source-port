@@ -3622,3 +3622,59 @@ ta ffmpeg கிடைக்கவில்லை: {} PNG சட்டகங்�
 # Personal bests.
 @ New personal best ({}): {}
 ta புதிய தனிப்பட்ட சிறந்தது ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ta சாவி எடுக்கும்போது சேமி
+
+@ User Data Directory
+ta பயனர் தரவு அடைவு
+
+@ Autosaves when you pick up a key
+ta சாவியை எடுக்கும்போது தானாகச் சேமிக்கும்
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ta சேமிப்புகள், அமைப்புகள், டெமோக்கள் மற்றும் பதிவிறக்கிய வரைபடத் தொகுப்புகள் சேமிக்கப்படும் இடம்
+
+@ Key picked up
+ta சாவி எடுக்கப்பட்டது
+
+@ Select User Data Directory
+ta பயனர் தரவு அடைவைத் தேர்ந்தெடு
+
+@ Data folder: {}
+ta தரவு கோப்புறை: {}
+
+@ Parent Folder
+ta மேல் கோப்புறை
+
+@ Unable to read directory
+ta அடைவைப் படிக்க முடியவில்லை
+
+@ No subfolders
+ta துணைக்கோப்புறைகள் இல்லை
+
+@ Select Folder
+ta கோப்புறையைத் தேர்ந்தெடு
+
+@ Show Hidden
+ta மறைக்கப்பட்டவை காட்டு
+
+@ Copy existing user data?
+ta தற்போதைய பயனர் தரவை நகலெடுக்கவா?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ta சேமிப்புகள், அமைப்புகள், டெமோக்கள் மற்றும் பதிவிறக்கிய வரைபடத் தொகுப்புகளை புதிய கோப்புறைக்கு நகலெடுக்கலாம்.
+
+@ Copy Data
+ta தரவை நகலெடு
+
+@ Switch Only
+ta மாற்று மட்டும்
+
+@ User data directory set to {}
+ta பயனர் தரவு அடைவு {} என அமைக்கப்பட்டது
+
+@ User data directory error: {}
+ta பயனர் தரவு அடைவு பிழை: {}
+

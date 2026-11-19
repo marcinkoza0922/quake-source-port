@@ -3622,3 +3622,59 @@ et ffmpegi ei leitud: {} PNG-kaadrit ja WAV kirjutati asukohta {}
 # Personal bests.
 @ New personal best ({}): {}
 et Uus isiklik rekord ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+et Salvesta võtme üleskorjamisel
+
+@ User Data Directory
+et Kasutajaandmete kaust
+
+@ Autosaves when you pick up a key
+et Salvestab automaatselt võtme üleskorjamisel
+
+@ Where saves, configs, demos and downloaded map packs are stored
+et Kuhu salvestatakse mänguseisud, seaded, demod ja allalaaditud kaardipakid
+
+@ Key picked up
+et Võti üles korjatud
+
+@ Select User Data Directory
+et Vali kasutajaandmete kaust
+
+@ Data folder: {}
+et Andmekaust: {}
+
+@ Parent Folder
+et Ülemkaust
+
+@ Unable to read directory
+et Kausta ei saa lugeda
+
+@ No subfolders
+et Alamkaustu pole
+
+@ Select Folder
+et Vali kaust
+
+@ Show Hidden
+et Näita peidetud
+
+@ Copy existing user data?
+et Kopeerida olemasolevad kasutajaandmed?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+et Mänguseisud, seaded, demod ja allalaaditud kaardipakid saab uude kausta kopeerida.
+
+@ Copy Data
+et Kopeeri andmed
+
+@ Switch Only
+et Ainult vaheta
+
+@ User data directory set to {}
+et Kasutajaandmete kaust määrati asukohta {}
+
+@ User data directory error: {}
+et Kasutajaandmete kausta viga: {}
+

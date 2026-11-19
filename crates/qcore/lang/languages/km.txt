@@ -3622,3 +3622,59 @@ km រក​មិន​ឃើញ ffmpeg៖ បាន​សរសេរ​ស៊
 # Personal bests.
 @ New personal best ({}): {}
 km កំណត់ត្រា​ផ្ទាល់ខ្លួន​ថ្មី ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+km រក្សាទុក​ពេល​រើស​សោ
+
+@ User Data Directory
+km ថត​ទិន្នន័យ​អ្នកប្រើប្រាស់
+
+@ Autosaves when you pick up a key
+km រក្សាទុក​ស្វ័យប្រវត្តិ​នៅពេល​អ្នក​រើស​សោ
+
+@ Where saves, configs, demos and downloaded map packs are stored
+km កន្លែង​រក្សាទុក​ការរក្សាទុក ការកំណត់ ដេម៉ូ និង​កញ្ចប់​ផែនទី​ដែល​បាន​ទាញយក
+
+@ Key picked up
+km បាន​រើស​សោ
+
+@ Select User Data Directory
+km ជ្រើសរើស​ថត​ទិន្នន័យ​អ្នកប្រើប្រាស់
+
+@ Data folder: {}
+km ថត​ទិន្នន័យ៖ {}
+
+@ Parent Folder
+km ថត​មេ
+
+@ Unable to read directory
+km មិនអាច​អាន​ថត​បានទេ
+
+@ No subfolders
+km គ្មាន​ថត​រង
+
+@ Select Folder
+km ជ្រើសរើស​ថត
+
+@ Show Hidden
+km បង្ហាញ​ថត​លាក់
+
+@ Copy existing user data?
+km ចម្លង​ទិន្នន័យ​អ្នកប្រើប្រាស់​ដែល​មាន​ស្រាប់?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+km ការរក្សាទុក ការកំណត់ ដេម៉ូ និង​កញ្ចប់​ផែនទី​ដែល​បាន​ទាញយក​អាច​ត្រូវបាន​ចម្លង​ទៅ​ថត​ថ្មី។
+
+@ Copy Data
+km ចម្លង​ទិន្នន័យ
+
+@ Switch Only
+km ប្ដូរ​តែប៉ុណ្ណោះ
+
+@ User data directory set to {}
+km ថត​ទិន្នន័យ​អ្នកប្រើប្រាស់​ត្រូវបាន​កំណត់​ទៅ {}
+
+@ User data directory error: {}
+km កំហុស​ថត​ទិន្នន័យ​អ្នកប្រើប្រាស់៖ {}
+

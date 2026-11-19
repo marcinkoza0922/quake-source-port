@@ -10,7 +10,7 @@ pub(super) const GLOBAL_CVARS: &[(&str, &str)] = &[("bugreport_dir", "")];
 
 /// `<data dir>/quake-source-port/` (parent of every per-game user dir).
 pub fn global_dir() -> PathBuf {
-    crate::user_dir("id1").parent().map_or_else(|| PathBuf::from("."), PathBuf::from)
+    crate::userdata::root()
 }
 
 fn global_path() -> PathBuf {

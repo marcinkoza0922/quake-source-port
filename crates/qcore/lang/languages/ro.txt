@@ -3622,3 +3622,59 @@ ro ffmpeg nu a fost găsit: s-au scris {} cadre PNG și un WAV în {}
 # Personal bests.
 @ New personal best ({}): {}
 ro Nou record personal ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ro Salvează la ridicarea unei chei
+
+@ User Data Directory
+ro Director de date utilizator
+
+@ Autosaves when you pick up a key
+ro Salvează automat când ridici o cheie
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ro Unde sunt stocate salvările, configurările, demo-urile și pachetele de hărți descărcate
+
+@ Key picked up
+ro Cheie ridicată
+
+@ Select User Data Directory
+ro Selectează directorul de date utilizator
+
+@ Data folder: {}
+ro Folder de date: {}
+
+@ Parent Folder
+ro Folder părinte
+
+@ Unable to read directory
+ro Directorul nu poate fi citit
+
+@ No subfolders
+ro Niciun subfolder
+
+@ Select Folder
+ro Selectează folderul
+
+@ Show Hidden
+ro Arată ascunse
+
+@ Copy existing user data?
+ro Copiezi datele existente ale utilizatorului?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ro Salvari, configurări, demo-uri și pachete de hărți descărcate pot fi copiate în noul folder.
+
+@ Copy Data
+ro Copiază datele
+
+@ Switch Only
+ro Doar schimbă
+
+@ User data directory set to {}
+ro Directorul de date utilizator setat la {}
+
+@ User data directory error: {}
+ro Eroare director de date utilizator: {}
+

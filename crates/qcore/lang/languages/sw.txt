@@ -3622,3 +3622,59 @@ sw ffmpeg haikupatikana: imeandika fremu {} za PNG na WAV moja kwenye {}
 # Personal bests.
 @ New personal best ({}): {}
 sw Rekodi binafsi mpya ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+sw Hifadhi unapochukua ufunguo
+
+@ User Data Directory
+sw Saraka ya Data ya Mtumiaji
+
+@ Autosaves when you pick up a key
+sw Huhifadhi kiotomatiki unapochukua ufunguo
+
+@ Where saves, configs, demos and downloaded map packs are stored
+sw Mahali ambapo hifadhi, mipangilio, demo na vifurushi vya ramani vilivyopakuliwa huhifadhiwa
+
+@ Key picked up
+sw Ufunguo umechukuliwa
+
+@ Select User Data Directory
+sw Chagua Saraka ya Data ya Mtumiaji
+
+@ Data folder: {}
+sw Folda ya data: {}
+
+@ Parent Folder
+sw Folda Kuu
+
+@ Unable to read directory
+sw Haiwezi kusoma saraka
+
+@ No subfolders
+sw Hakuna folda ndogo
+
+@ Select Folder
+sw Chagua Folda
+
+@ Show Hidden
+sw Onyesha Zilizofichwa
+
+@ Copy existing user data?
+sw Nakili data iliyopo ya mtumiaji?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+sw Hifadhi, mipangilio, demo na vifurushi vya ramani vilivyopakuliwa vinaweza kunakiliwa kwenye folda mpya.
+
+@ Copy Data
+sw Nakili Data
+
+@ Switch Only
+sw Badilisha Tu
+
+@ User data directory set to {}
+sw Saraka ya data ya mtumiaji imewekwa kuwa {}
+
+@ User data directory error: {}
+sw Hitilafu ya saraka ya data ya mtumiaji: {}
+

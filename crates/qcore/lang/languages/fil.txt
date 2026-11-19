@@ -3622,3 +3622,59 @@ fil Hindi nakita ang ffmpeg: naisulat ang {} PNG frame at isang WAV sa {}
 # Personal bests.
 @ New personal best ({}): {}
 fil Bagong personal best ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+fil I-save kapag kumuha ng susi
+
+@ User Data Directory
+fil Direktoryo ng Data ng User
+
+@ Autosaves when you pick up a key
+fil Awtomatikong nagse-save kapag kumuha ka ng susi
+
+@ Where saves, configs, demos and downloaded map packs are stored
+fil Kung saan nakaimbak ang mga save, config, demo, at na-download na map pack
+
+@ Key picked up
+fil Nakakuha ng susi
+
+@ Select User Data Directory
+fil Pumili ng Direktoryo ng Data ng User
+
+@ Data folder: {}
+fil Folder ng data: {}
+
+@ Parent Folder
+fil Parent na Folder
+
+@ Unable to read directory
+fil Hindi mabasa ang direktoryo
+
+@ No subfolders
+fil Walang subfolder
+
+@ Select Folder
+fil Piliin ang Folder
+
+@ Show Hidden
+fil Ipakita ang Nakatago
+
+@ Copy existing user data?
+fil Kopyahin ang kasalukuyang data ng user?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+fil Maaaring kopyahin ang mga save, config, demo, at na-download na map pack sa bagong folder.
+
+@ Copy Data
+fil Kopyahin ang Data
+
+@ Switch Only
+fil Lumipat Lang
+
+@ User data directory set to {}
+fil Itinakda ang direktoryo ng data ng user sa {}
+
+@ User data directory error: {}
+fil Error sa direktoryo ng data ng user: {}
+

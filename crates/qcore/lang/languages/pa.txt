@@ -3622,3 +3622,59 @@ pa ffmpeg ਨਹੀਂ ਮਿਲਿਆ: {} PNG ਫ੍ਰੇਮ ਅਤੇ ਇੱ�
 # Personal bests.
 @ New personal best ({}): {}
 pa ਨਵਾਂ ਨਿੱਜੀ ਸਰਵੋਤਮ ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+pa ਚਾਬੀ ਚੁੱਕਣ 'ਤੇ ਸੇਵ ਕਰੋ
+
+@ User Data Directory
+pa ਯੂਜ਼ਰ ਡਾਟਾ ਡਾਇਰੈਕਟਰੀ
+
+@ Autosaves when you pick up a key
+pa ਚਾਬੀ ਚੁੱਕਣ 'ਤੇ ਆਪਣੇ ਆਪ ਸੇਵ ਕਰਦਾ ਹੈ
+
+@ Where saves, configs, demos and downloaded map packs are stored
+pa ਜਿੱਥੇ ਸੇਵ, ਕੌਨਫਿਗ, ਡੈਮੋ ਅਤੇ ਡਾਊਨਲੋਡ ਕੀਤੇ ਮੈਪ ਪੈਕ ਸਟੋਰ ਹੁੰਦੇ ਹਨ
+
+@ Key picked up
+pa ਚਾਬੀ ਚੁੱਕੀ ਗਈ
+
+@ Select User Data Directory
+pa ਯੂਜ਼ਰ ਡਾਟਾ ਡਾਇਰੈਕਟਰੀ ਚੁਣੋ
+
+@ Data folder: {}
+pa ਡਾਟਾ ਫੋਲਡਰ: {}
+
+@ Parent Folder
+pa ਮੂਲ ਫੋਲਡਰ
+
+@ Unable to read directory
+pa ਡਾਇਰੈਕਟਰੀ ਪੜ੍ਹੀ ਨਹੀਂ ਜਾ ਸਕੀ
+
+@ No subfolders
+pa ਕੋਈ ਸਬ-ਫੋਲਡਰ ਨਹੀਂ
+
+@ Select Folder
+pa ਫੋਲਡਰ ਚੁਣੋ
+
+@ Show Hidden
+pa ਲੁਕਵੇਂ ਦਿਖਾਓ
+
+@ Copy existing user data?
+pa ਮੌਜੂਦਾ ਯੂਜ਼ਰ ਡਾਟਾ ਕਾਪੀ ਕਰਨਾ ਹੈ?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+pa ਸੇਵ, ਕੌਨਫਿਗ, ਡੈਮੋ ਅਤੇ ਡਾਊਨਲੋਡ ਕੀਤੇ ਮੈਪ ਪੈਕ ਨਵੇਂ ਫੋਲਡਰ ਵਿੱਚ ਕਾਪੀ ਕੀਤੇ ਜਾ ਸਕਦੇ ਹਨ।
+
+@ Copy Data
+pa ਡਾਟਾ ਕਾਪੀ ਕਰੋ
+
+@ Switch Only
+pa ਸਿਰਫ਼ ਬਦਲੋ
+
+@ User data directory set to {}
+pa ਯੂਜ਼ਰ ਡਾਟਾ ਡਾਇਰੈਕਟਰੀ {} 'ਤੇ ਸੈੱਟ ਕੀਤੀ ਗਈ
+
+@ User data directory error: {}
+pa ਯੂਜ਼ਰ ਡਾਟਾ ਡਾਇਰੈਕਟਰੀ ਗਲਤੀ: {}
+

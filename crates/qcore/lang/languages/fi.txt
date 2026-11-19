@@ -3622,3 +3622,59 @@ fi ffmpegiä ei löytynyt: {} PNG-kuvaa ja WAV kirjoitettu kohteeseen {}
 # Personal bests.
 @ New personal best ({}): {}
 fi Uusi oma ennätys ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+fi Tallenna avainta poimiessa
+
+@ User Data Directory
+fi Käyttäjätietokansio
+
+@ Autosaves when you pick up a key
+fi Tallentaa automaattisesti, kun poimit avaimen
+
+@ Where saves, configs, demos and downloaded map packs are stored
+fi Missä tallennukset, asetukset, demot ja ladatut karttapaketit sijaitsevat
+
+@ Key picked up
+fi Avain poimittu
+
+@ Select User Data Directory
+fi Valitse käyttäjätietokansio
+
+@ Data folder: {}
+fi Tietokansio: {}
+
+@ Parent Folder
+fi Yläkansio
+
+@ Unable to read directory
+fi Kansiota ei voi lukea
+
+@ No subfolders
+fi Ei alikansioita
+
+@ Select Folder
+fi Valitse kansio
+
+@ Show Hidden
+fi Näytä piilotetut
+
+@ Copy existing user data?
+fi Kopioidaanko nykyiset käyttäjätiedot?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+fi Tallennukset, asetukset, demot ja ladatut karttapaketit voidaan kopioida uuteen kansioon.
+
+@ Copy Data
+fi Kopioi tiedot
+
+@ Switch Only
+fi Vain vaihda
+
+@ User data directory set to {}
+fi Käyttäjätietokansio asetettu kohteeseen {}
+
+@ User data directory error: {}
+fi Käyttäjätietokansion virhe: {}
+

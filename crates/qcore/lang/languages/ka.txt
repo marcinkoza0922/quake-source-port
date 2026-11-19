@@ -3622,3 +3622,59 @@ ka ffmpeg ვერ მოიძებნა: {} PNG კადრი და WAV 
 # Personal bests.
 @ New personal best ({}): {}
 ka ახალი პირადი რეკორდი ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ka შენახვა გასაღების აღებისას
+
+@ User Data Directory
+ka მომხმარებლის მონაცემთა საქაღალდე
+
+@ Autosaves when you pick up a key
+ka ავტომატურად ინახავს გასაღების აღებისას
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ka სად ინახება შენახვები, კონფიგურაციები, დემოები და გადმოწერილი რუკების პაკეტები
+
+@ Key picked up
+ka გასაღები აღებულია
+
+@ Select User Data Directory
+ka აირჩიეთ მომხმარებლის მონაცემთა საქაღალდე
+
+@ Data folder: {}
+ka მონაცემთა საქაღალდე: {}
+
+@ Parent Folder
+ka მშობელი საქაღალდე
+
+@ Unable to read directory
+ka საქაღალდის წაკითხვა ვერ მოხერხდა
+
+@ No subfolders
+ka ქვესაქაღალდეები არ არის
+
+@ Select Folder
+ka საქაღალდის არჩევა
+
+@ Show Hidden
+ka დამალულების ჩვენება
+
+@ Copy existing user data?
+ka დაკოპირდეს არსებული მომხმარებლის მონაცემები?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ka შენახვები, კონფიგურაციები, დემოები და გადმოწერილი რუკები შეიძლება დაკოპირდეს ახალ საქაღალდეში.
+
+@ Copy Data
+ka მონაცემთა კოპირება
+
+@ Switch Only
+ka მხოლოდ შეცვლა
+
+@ User data directory set to {}
+ka მომხმარებლის მონაცემთა საქაღალდე დაყენდა: {}
+
+@ User data directory error: {}
+ka მომხმარებლის მონაცემთა საქაღალდის შეცდომა: {}
+

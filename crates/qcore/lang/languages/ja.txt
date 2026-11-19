@@ -3622,3 +3622,59 @@ ja ffmpeg が見つかりません：{}枚の PNG フレームと WAV を{}に�
 # Personal bests.
 @ New personal best ({}): {}
 ja 自己ベスト更新（{}）: {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ja 鍵を拾った時にセーブ
+
+@ User Data Directory
+ja ユーザーデータフォルダ
+
+@ Autosaves when you pick up a key
+ja 鍵を拾った時に自動でセーブします
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ja セーブデータ、設定、デモ、ダウンロードしたマップパックの保存先
+
+@ Key picked up
+ja 鍵を取得
+
+@ Select User Data Directory
+ja ユーザーデータフォルダを選択
+
+@ Data folder: {}
+ja データフォルダ: {}
+
+@ Parent Folder
+ja 親フォルダ
+
+@ Unable to read directory
+ja フォルダを読み込めません
+
+@ No subfolders
+ja サブフォルダがありません
+
+@ Select Folder
+ja フォルダを選択
+
+@ Show Hidden
+ja 隠しフォルダを表示
+
+@ Copy existing user data?
+ja 既存のユーザーデータをコピーしますか？
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ja セーブデータ、設定、デモ、ダウンロードしたマップパックを新しいフォルダへコピーできます。
+
+@ Copy Data
+ja データをコピー
+
+@ Switch Only
+ja 切り替えのみ
+
+@ User data directory set to {}
+ja ユーザーデータフォルダを {} に設定しました
+
+@ User data directory error: {}
+ja ユーザーデータフォルダのエラー: {}
+

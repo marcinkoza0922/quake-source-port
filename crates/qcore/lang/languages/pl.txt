@@ -3622,3 +3622,59 @@ pl Nie znaleziono ffmpeg: zapisano {} klatek PNG i plik WAV w {}
 # Personal bests.
 @ New personal best ({}): {}
 pl Nowy rekord osobisty ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+pl Zapisz po podniesieniu klucza
+
+@ User Data Directory
+pl Katalog danych użytkownika
+
+@ Autosaves when you pick up a key
+pl Automatycznie zapisuje po podniesieniu klucza
+
+@ Where saves, configs, demos and downloaded map packs are stored
+pl Miejsce przechowywania zapisów, konfiguracji, dem i pobranych paczek map
+
+@ Key picked up
+pl Podniesiono klucz
+
+@ Select User Data Directory
+pl Wybierz katalog danych użytkownika
+
+@ Data folder: {}
+pl Folder danych: {}
+
+@ Parent Folder
+pl Folder nadrzędny
+
+@ Unable to read directory
+pl Nie można odczytać katalogu
+
+@ No subfolders
+pl Brak podfolderów
+
+@ Select Folder
+pl Wybierz folder
+
+@ Show Hidden
+pl Pokaż ukryte
+
+@ Copy existing user data?
+pl Skopiować istniejące dane użytkownika?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+pl Zapisy, konfiguracje, dema i pobrane paczki map można skopiować do nowego folderu.
+
+@ Copy Data
+pl Kopiuj dane
+
+@ Switch Only
+pl Tylko zmień
+
+@ User data directory set to {}
+pl Ustawiono katalog danych użytkownika na {}
+
+@ User data directory error: {}
+pl Błąd katalogu danych użytkownika: {}
+

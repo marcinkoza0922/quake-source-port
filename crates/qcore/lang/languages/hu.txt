@@ -3622,3 +3622,59 @@ hu Az ffmpeg nem található: {} PNG-képkocka és egy WAV kiírva ide: {}
 # Personal bests.
 @ New personal best ({}): {}
 hu Új egyéni csúcs ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+hu Mentés kulcs felvételekor
+
+@ User Data Directory
+hu Felhasználói adatok mappája
+
+@ Autosaves when you pick up a key
+hu Automatikusan ment, amikor felveszel egy kulcsot
+
+@ Where saves, configs, demos and downloaded map packs are stored
+hu A mentések, beállítások, demók és letöltött pályacsomagok tárolási helye
+
+@ Key picked up
+hu Kulcs felvéve
+
+@ Select User Data Directory
+hu Felhasználói adatok mappájának kiválasztása
+
+@ Data folder: {}
+hu Adatmappa: {}
+
+@ Parent Folder
+hu Szülőmappa
+
+@ Unable to read directory
+hu A mappa nem olvasható
+
+@ No subfolders
+hu Nincsenek almappák
+
+@ Select Folder
+hu Mappa kiválasztása
+
+@ Show Hidden
+hu Rejtettek mutatása
+
+@ Copy existing user data?
+hu Meglévő felhasználói adatok másolása?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+hu A mentések, beállítások, demók és letöltött pályacsomagok átmásolhatók az új mappába.
+
+@ Copy Data
+hu Adatok másolása
+
+@ Switch Only
+hu Csak váltás
+
+@ User data directory set to {}
+hu Felhasználói adatok mappája beállítva: {}
+
+@ User data directory error: {}
+hu Felhasználói adatmappa hiba: {}
+

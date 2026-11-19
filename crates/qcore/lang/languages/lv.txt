@@ -3622,3 +3622,59 @@ lv ffmpeg nav atrasts: {} PNG kadri un WAV ierakstīti {}
 # Personal bests.
 @ New personal best ({}): {}
 lv Jauns personīgais rekords ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+lv Saglabāt, paņemot atslēgu
+
+@ User Data Directory
+lv Lietotāja datu mape
+
+@ Autosaves when you pick up a key
+lv Automātiski saglabā, kad paņemat atslēgu
+
+@ Where saves, configs, demos and downloaded map packs are stored
+lv Kur tiek glabāti saglabājumi, konfigurācijas, demo un lejupielādētās karšu pakotnes
+
+@ Key picked up
+lv Atslēga paņemta
+
+@ Select User Data Directory
+lv Izvēlēties lietotāja datu mapi
+
+@ Data folder: {}
+lv Datu mape: {}
+
+@ Parent Folder
+lv Augstākā mape
+
+@ Unable to read directory
+lv Nevar nolasīt mapi
+
+@ No subfolders
+lv Nav apakšmapju
+
+@ Select Folder
+lv Izvēlēties mapi
+
+@ Show Hidden
+lv Rādīt slēptās
+
+@ Copy existing user data?
+lv Kopēt esošos lietotāja datus?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+lv Saglabājumus, konfigurācijas, demo un lejupielādētās karšu pakotnes var kopēt uz jauno mapi.
+
+@ Copy Data
+lv Kopēt datus
+
+@ Switch Only
+lv Tikai pārslēgt
+
+@ User data directory set to {}
+lv Lietotāja datu mape iestatīta uz {}
+
+@ User data directory error: {}
+lv Lietotāja datu mapes kļūda: {}
+

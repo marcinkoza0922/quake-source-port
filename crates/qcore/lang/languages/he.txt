@@ -3622,3 +3622,59 @@ he ffmpeg לא נמצא: נכתבו {} פריימים של PNG וקובץ WAV א
 # Personal bests.
 @ New personal best ({}): {}
 he שיא אישי חדש ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+he שמירה בעת איסוף מפתח
+
+@ User Data Directory
+he תיקיית נתוני משתמש
+
+@ Autosaves when you pick up a key
+he שומר אוטומטית בעת איסוף מפתח
+
+@ Where saves, configs, demos and downloaded map packs are stored
+he היכן נשמרים קובצי שמירה, הגדרות, הדגמות וחבילות מפות שהורדו
+
+@ Key picked up
+he נאסף מפתח
+
+@ Select User Data Directory
+he בחר תיקיית נתוני משתמש
+
+@ Data folder: {}
+he תיקיית נתונים: {}
+
+@ Parent Folder
+he תיקיית אב
+
+@ Unable to read directory
+he לא ניתן לקרוא את התיקייה
+
+@ No subfolders
+he אין תיקיות משנה
+
+@ Select Folder
+he בחר תיקייה
+
+@ Show Hidden
+he הצג מוסתרים
+
+@ Copy existing user data?
+he להעתיק נתוני משתמש קיימים?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+he ניתן להעתיק שמירות, הגדרות, הדגמות וחבילות מפות שהורדו לתיקייה החדשה.
+
+@ Copy Data
+he העתק נתונים
+
+@ Switch Only
+he החלף בלבד
+
+@ User data directory set to {}
+he תיקיית נתוני המשתמש הוגדרה ל-{}
+
+@ User data directory error: {}
+he שגיאה בתיקיית נתוני המשתמש: {}
+

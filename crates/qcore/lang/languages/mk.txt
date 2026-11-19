@@ -3622,3 +3622,59 @@ mk ffmpeg не е пронајден: запишани {} PNG слики и WAV 
 # Personal bests.
 @ New personal best ({}): {}
 mk Нов личен рекорд ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+mk Зачувај при земање клуч
+
+@ User Data Directory
+mk Папка со кориснички податоци
+
+@ Autosaves when you pick up a key
+mk Автоматски зачувува кога ќе земете клуч
+
+@ Where saves, configs, demos and downloaded map packs are stored
+mk Каде се чуваат зачуваните игри, поставки, демоа и преземени пакети со мапи
+
+@ Key picked up
+mk Клучот е земен
+
+@ Select User Data Directory
+mk Изберете папка со кориснички податоци
+
+@ Data folder: {}
+mk Папка со податоци: {}
+
+@ Parent Folder
+mk Родителска папка
+
+@ Unable to read directory
+mk Папката не може да се прочита
+
+@ No subfolders
+mk Нема потпапки
+
+@ Select Folder
+mk Избери папка
+
+@ Show Hidden
+mk Прикажи скриени
+
+@ Copy existing user data?
+mk Да се копираат постојните кориснички податоци?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+mk Зачуваните игри, поставки, демоа и преземени пакети со мапи може да се копираат во новата папка.
+
+@ Copy Data
+mk Копирај податоци
+
+@ Switch Only
+mk Само смени
+
+@ User data directory set to {}
+mk Папката со кориснички податоци е поставена на {}
+
+@ User data directory error: {}
+mk Грешка во папката со кориснички податоци: {}
+

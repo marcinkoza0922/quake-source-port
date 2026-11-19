@@ -47,6 +47,13 @@ impl Menu {
             self.demos.drag_to(pos.1, g);
             return None;
         }
+        if let (Some(g), Screen::DirBrowser) = (self.drag, self.screen) {
+            self.dir_browser.drag_to(pos.1, g);
+            return None;
+        }
+        if self.screen == Screen::DirBrowser {
+            return self.dir_browser.mouse_move(pos);
+        }
         // the Demos list selects on click; hovering only lights the row
         if self.screen == Screen::Demos {
             return None;
@@ -110,6 +117,38 @@ impl Menu {
         if let (Some(d), Screen::OptionsPage(p)) = (self.drop, self.screen) {
             let item = self.page_item(p, d.item);
             self.drop_key(key, d, item, cv, &mut out);
+            return out;
+        }
+        if self.screen == Screen::DirBrowser {
+            if matches!(key, K_MWHEELUP | K_MWHEELDOWN) {
+                self.dir_browser.wheel(key == K_MWHEELUP);
+                return out;
+            }
+            if key == K_MOUSE1
+                && !self.dir_browser.has_modal()
+                && let Some(pos) = self.mouse
+                && let Some((x, top, h, ty, th)) = self.dir_browser.scrollbar()
+                && (x - 4.0..x + 7.0).contains(&pos.0)
+                && (top..top + h).contains(&pos.1)
+            {
+                let grab = if (ty..ty + th).contains(&pos.1) { pos.1 - ty } else { th / 2.0 };
+                self.dir_browser.drag_to(pos.1, grab);
+                self.drag = Some(grab);
+                return out;
+            }
+            match self.dir_browser.key(key, self.mouse, &mut out) {
+                dir_browser::DirOutcome::None => {}
+                dir_browser::DirOutcome::Cancel => {
+                    self.screen = Screen::OptionsPage(Page::Gameplay);
+                    self.opt_cursor = GAMEPLAY.iter().position(|i| matches!(i, Item::UserDataDir)).unwrap_or(0);
+                }
+                dir_browser::DirOutcome::Apply { parent, copy } => {
+                    self.pending_user_data_dir = Some((parent, copy));
+                    self.screen = Screen::OptionsPage(Page::Gameplay);
+                    self.opt_cursor = GAMEPLAY.iter().position(|i| matches!(i, Item::UserDataDir)).unwrap_or(0);
+                    out.push(Action::Command("_apply_user_data_dir\n".into()));
+                }
+            }
             return out;
         }
         if self.screen == Screen::Help {
@@ -253,7 +292,7 @@ impl Menu {
                     out.push(Action::Command(format!("_death_choice {}\n", choice + 1)));
                 }
             }
-            Screen::None | Screen::HudEditor => {}
+            Screen::None | Screen::HudEditor | Screen::DirBrowser => {}
             Screen::Help => {}
             Screen::Main => {
                 if back {
@@ -507,6 +546,13 @@ impl Menu {
                     Item::ResetBinds => {
                         if enter {
                             out.push(Action::Command("_resetbinds\n".into()));
+                            out.push(Action::Sound("misc/menu2.wav"));
+                        }
+                        return out;
+                    }
+                    Item::UserDataDir => {
+                        if enter && !cfg!(target_arch = "wasm32") {
+                            self.open_dir_browser();
                             out.push(Action::Sound("misc/menu2.wav"));
                         }
                         return out;

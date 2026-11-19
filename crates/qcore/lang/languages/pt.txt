@@ -3622,3 +3622,59 @@ pt ffmpeg não encontrado: foram escritos {} fotogramas PNG e um WAV em {}
 # Personal bests.
 @ New personal best ({}): {}
 pt Novo recorde pessoal ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+pt Guardar ao apanhar uma chave
+
+@ User Data Directory
+pt Diretório de dados do utilizador
+
+@ Autosaves when you pick up a key
+pt Guarda automaticamente quando apanhas uma chave
+
+@ Where saves, configs, demos and downloaded map packs are stored
+pt Onde são guardados os jogos, configurações, demos e pacotes de mapas transferidos
+
+@ Key picked up
+pt Chave apanhada
+
+@ Select User Data Directory
+pt Selecionar diretório de dados do utilizador
+
+@ Data folder: {}
+pt Pasta de dados: {}
+
+@ Parent Folder
+pt Pasta superior
+
+@ Unable to read directory
+pt Não foi possível ler o diretório
+
+@ No subfolders
+pt Sem subpastas
+
+@ Select Folder
+pt Selecionar pasta
+
+@ Show Hidden
+pt Mostrar ocultas
+
+@ Copy existing user data?
+pt Copiar os dados do utilizador existentes?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+pt Os jogos guardados, configurações, demos e pacotes de mapas transferidos podem ser copiados para a nova pasta.
+
+@ Copy Data
+pt Copiar dados
+
+@ Switch Only
+pt Apenas mudar
+
+@ User data directory set to {}
+pt Diretório de dados do utilizador definido para {}
+
+@ User data directory error: {}
+pt Erro no diretório de dados do utilizador: {}
+

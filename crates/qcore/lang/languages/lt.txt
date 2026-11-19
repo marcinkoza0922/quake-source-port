@@ -3622,3 +3622,59 @@ lt ffmpeg nerastas: {} PNG kadrų ir WAV įrašyti į {}
 # Personal bests.
 @ New personal best ({}): {}
 lt Naujas asmeninis rekordas ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+lt Išsaugoti paėmus raktą
+
+@ User Data Directory
+lt Naudotojo duomenų aplankas
+
+@ Autosaves when you pick up a key
+lt Automatiškai išsaugo paėmus raktą
+
+@ Where saves, configs, demos and downloaded map packs are stored
+lt Kur saugomi įrašai, konfigūracijos, demo ir atsisiųsti žemėlapių paketai
+
+@ Key picked up
+lt Raktas paimtas
+
+@ Select User Data Directory
+lt Pasirinkti naudotojo duomenų aplanką
+
+@ Data folder: {}
+lt Duomenų aplankas: {}
+
+@ Parent Folder
+lt Aukštesnis aplankas
+
+@ Unable to read directory
+lt Nepavyko perskaityti aplanko
+
+@ No subfolders
+lt Nėra poaplankių
+
+@ Select Folder
+lt Pasirinkti aplanką
+
+@ Show Hidden
+lt Rodyti paslėptus
+
+@ Copy existing user data?
+lt Kopijuoti esamus naudotojo duomenis?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+lt Įrašus, konfigūracijas, demo ir atsisiųstus žemėlapių paketus galima nukopijuoti į naują aplanką.
+
+@ Copy Data
+lt Kopijuoti duomenis
+
+@ Switch Only
+lt Tik perjungti
+
+@ User data directory set to {}
+lt Naudotojo duomenų aplankas nustatytas į {}
+
+@ User data directory error: {}
+lt Naudotojo duomenų aplanko klaida: {}
+

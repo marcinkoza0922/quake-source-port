@@ -47,6 +47,8 @@ pub(super) enum Item {
     Sub { label: &'static str, page: Page },
     /// `language`: System (auto) or one of the re-release's languages.
     Language,
+    /// User data directory (opens the in-game directory explorer).
+    UserDataDir,
 }
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -224,6 +226,7 @@ pub(super) const GAMEPLAY: &[Item] = &[
     Item::Choice { label: "On Death", cvar: "cl_deathaction", choices: &[("Ask", 0.0), ("Most recent save", 1.0), ("Select save", 2.0), ("Restart level", 3.0)] },
     toggle("Autosave", "sv_autosave"),
     Item::Sub { label: "Autosave Settings", page: Page::Autosave },
+    Item::UserDataDir,
 ];
 
 pub(super) const GRENADE_ARC: &[Item] = &[
@@ -245,6 +248,7 @@ pub(super) const AUTOSAVE: &[Item] = &[
     Item::Choice { label: "Autosave Timer", cvar: "sv_autosave_interval", choices: MINUTES },
     toggle("Save on Level Entry", "sv_autosave_entry"),
     toggle("Save on Secret Found", "sv_autosave_secret"),
+    toggle("Save on Picking Up Key", "sv_autosave_key"),
     toggle("Save on All Secrets Found", "sv_autosave_secrets"),
     toggle("Save on All Enemies Killed", "sv_autosave_monsters"),
 ];

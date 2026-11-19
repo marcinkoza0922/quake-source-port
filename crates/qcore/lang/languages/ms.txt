@@ -3622,3 +3622,59 @@ ms ffmpeg tidak dijumpai: menulis {} bingkai PNG dan satu WAV ke {}
 # Personal bests.
 @ New personal best ({}): {}
 ms Rekod peribadi baharu ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ms Simpan apabila mengambil kunci
+
+@ User Data Directory
+ms Direktori Data Pengguna
+
+@ Autosaves when you pick up a key
+ms Simpan automatik apabila anda mengambil kunci
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ms Tempat simpanan, konfigurasi, demo dan pek peta yang dimuat turun disimpan
+
+@ Key picked up
+ms Kunci diambil
+
+@ Select User Data Directory
+ms Pilih Direktori Data Pengguna
+
+@ Data folder: {}
+ms Folder data: {}
+
+@ Parent Folder
+ms Folder Induk
+
+@ Unable to read directory
+ms Tidak dapat membaca direktori
+
+@ No subfolders
+ms Tiada subfolder
+
+@ Select Folder
+ms Pilih Folder
+
+@ Show Hidden
+ms Tunjuk Tersembunyi
+
+@ Copy existing user data?
+ms Salin data pengguna sedia ada?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ms Simpanan, konfigurasi, demo dan pek peta yang dimuat turun boleh disalin ke folder baharu.
+
+@ Copy Data
+ms Salin Data
+
+@ Switch Only
+ms Tukar Sahaja
+
+@ User data directory set to {}
+ms Direktori data pengguna ditetapkan kepada {}
+
+@ User data directory error: {}
+ms Ralat direktori data pengguna: {}
+

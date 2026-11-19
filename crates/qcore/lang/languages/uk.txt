@@ -3622,3 +3622,59 @@ uk ffmpeg не знайдено: {} кадрів PNG і WAV записано д�
 # Personal bests.
 @ New personal best ({}): {}
 uk Новий особистий рекорд ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+uk Зберігати при підборі ключа
+
+@ User Data Directory
+uk Тека даних користувача
+
+@ Autosaves when you pick up a key
+uk Автозбереження під час підбору ключа
+
+@ Where saves, configs, demos and downloaded map packs are stored
+uk Де зберігаються збереження, налаштування, демо та завантажені набори мап
+
+@ Key picked up
+uk Ключ підібрано
+
+@ Select User Data Directory
+uk Вибір теки даних користувача
+
+@ Data folder: {}
+uk Тека даних: {}
+
+@ Parent Folder
+uk Батьківська тека
+
+@ Unable to read directory
+uk Не вдалося прочитати теку
+
+@ No subfolders
+uk Немає підтек
+
+@ Select Folder
+uk Вибрати теку
+
+@ Show Hidden
+uk Показати приховані
+
+@ Copy existing user data?
+uk Скопіювати наявні дані користувача?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+uk Збереження, налаштування, демо та завантажені набори мап можна скопіювати до нової теки.
+
+@ Copy Data
+uk Копіювати дані
+
+@ Switch Only
+uk Лише змінити
+
+@ User data directory set to {}
+uk Теку даних користувача встановлено на {}
+
+@ User data directory error: {}
+uk Помилка теки даних користувача: {}
+

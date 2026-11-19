@@ -3622,3 +3622,59 @@ zh-CN 未找到 ffmpeg：已将 {} 帧 PNG 和一个 WAV 写入 {}
 # Personal bests.
 @ New personal best ({}): {}
 zh-CN 新的个人最佳（{}）：{}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+zh-CN 拾取钥匙时保存
+
+@ User Data Directory
+zh-CN 用户数据目录
+
+@ Autosaves when you pick up a key
+zh-CN 拾取钥匙时自动保存
+
+@ Where saves, configs, demos and downloaded map packs are stored
+zh-CN 存档、配置、录像和已下载地图包的保存位置
+
+@ Key picked up
+zh-CN 拾取钥匙
+
+@ Select User Data Directory
+zh-CN 选择用户数据目录
+
+@ Data folder: {}
+zh-CN 数据文件夹：{}
+
+@ Parent Folder
+zh-CN 上级文件夹
+
+@ Unable to read directory
+zh-CN 无法读取目录
+
+@ No subfolders
+zh-CN 没有子文件夹
+
+@ Select Folder
+zh-CN 选择文件夹
+
+@ Show Hidden
+zh-CN 显示隐藏项
+
+@ Copy existing user data?
+zh-CN 复制现有用户数据？
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+zh-CN 可将存档、配置、录像和已下载地图包复制到新文件夹。
+
+@ Copy Data
+zh-CN 复制数据
+
+@ Switch Only
+zh-CN 仅切换
+
+@ User data directory set to {}
+zh-CN 用户数据目录已设为 {}
+
+@ User data directory error: {}
+zh-CN 用户数据目录错误：{}
+

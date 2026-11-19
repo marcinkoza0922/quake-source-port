@@ -3622,3 +3622,59 @@ mr ffmpeg सापडले नाही: {} PNG फ्रेम आणि ए�
 # Personal bests.
 @ New personal best ({}): {}
 mr नवीन वैयक्तिक सर्वोत्तम ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+mr किल्ली उचलल्यावर जतन करा
+
+@ User Data Directory
+mr वापरकर्ता डेटा निर्देशिका
+
+@ Autosaves when you pick up a key
+mr किल्ली उचलल्यावर आपोआप जतन करते
+
+@ Where saves, configs, demos and downloaded map packs are stored
+mr जेथे सेव्ह, कॉन्फिग, डेमो आणि डाउनलोड केलेले नकाशा पॅक साठवले जातात
+
+@ Key picked up
+mr किल्ली उचलली
+
+@ Select User Data Directory
+mr वापरकर्ता डेटा निर्देशिका निवडा
+
+@ Data folder: {}
+mr डेटा फोल्डर: {}
+
+@ Parent Folder
+mr मूळ फोल्डर
+
+@ Unable to read directory
+mr निर्देशिका वाचता आली नाही
+
+@ No subfolders
+mr उपफोल्डर नाहीत
+
+@ Select Folder
+mr फोल्डर निवडा
+
+@ Show Hidden
+mr लपवलेले दाखवा
+
+@ Copy existing user data?
+mr विद्यमान वापरकर्ता डेटा कॉपी करायचा का?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+mr सेव्ह, कॉन्फिग, डेमो आणि डाउनलोड केलेले नकाशा पॅक नवीन फोल्डरमध्ये कॉपी करता येतात.
+
+@ Copy Data
+mr डेटा कॉपी करा
+
+@ Switch Only
+mr फक्त बदला
+
+@ User data directory set to {}
+mr वापरकर्ता डेटा निर्देशिका {} वर सेट केली
+
+@ User data directory error: {}
+mr वापरकर्ता डेटा निर्देशिका त्रुटी: {}
+

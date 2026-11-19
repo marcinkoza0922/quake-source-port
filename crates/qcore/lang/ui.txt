@@ -2080,3 +2080,89 @@ de PB {} {}
 it PB {} {}
 es PB {} {}
 ru PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+fr Clé ramassée
+de Schlüssel aufgehoben
+it Chiave raccolta
+es Llave recogida
+ru Ключ подобран
+
+@ Select User Data Directory
+fr Choisir le dossier des données utilisateur
+de Benutzerdatenverzeichnis wählen
+it Seleziona cartella dati utente
+es Seleccionar carpeta de datos de usuario
+ru Выбор папки пользовательских данных
+
+@ Data folder: {}
+fr Dossier de données : {}
+de Datenordner: {}
+it Cartella dati: {}
+es Carpeta de datos: {}
+ru Папка данных: {}
+
+@ Parent Folder
+fr Dossier parent
+de Übergeordneter Ordner
+it Cartella superiore
+es Carpeta superior
+ru Родительская папка
+
+@ Unable to read directory
+fr Impossible de lire le dossier
+de Verzeichnis konnte nicht gelesen werden
+it Impossibile leggere la cartella
+es No se puede leer la carpeta
+ru Не удалось прочитать папку
+
+@ No subfolders
+fr Aucun sous-dossier
+de Keine Unterordner
+it Nessuna sottocartella
+es Sin subcarpetas
+ru Нет подпапок
+
+@ Select Folder
+fr Choisir ce dossier
+de Ordner auswählen
+it Seleziona cartella
+es Seleccionar carpeta
+ru Выбрать папку
+
+@ Show Hidden
+fr Afficher les cachés
+de Versteckte anzeigen
+it Mostra nascoste
+es Mostrar ocultas
+ru Показать скрытые
+
+@ Copy existing user data?
+fr Copier les données utilisateur existantes ?
+de Vorhandene Benutzerdaten kopieren?
+it Copiare i dati utente esistenti?
+es ¿Copiar los datos de usuario existentes?
+ru Скопировать существующие данные пользователя?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+fr Les sauvegardes, configurations, démos et packs de cartes téléchargés peuvent être copiés vers le nouveau dossier.
+de Spielstände, Konfigurationen, Demos und heruntergeladene Kartenpakete können in den neuen Ordner kopiert werden.
+it Salvataggi, configurazioni, demo e pacchetti di mappe scaricati possono essere copiati nella nuova cartella.
+es Las partidas, configuraciones, demos y paquetes de mapas descargados pueden copiarse a la nueva carpeta.
+ru Сохранения, настройки, демки и загруженные наборы карт можно скопировать в новую папку.
+
+@ Copy Data
+fr Copier les données
+de Daten kopieren
+it Copia dati
+es Copiar datos
+ru Копировать данные
+
+@ Switch Only
+fr Changer seulement
+de Nur wechseln
+it Solo cambia
+es Solo cambiar
+ru Только сменить
+

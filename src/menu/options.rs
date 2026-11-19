@@ -67,7 +67,7 @@ impl Menu {
                 let i = (language_index(cv) as i32 + dir).rem_euclid(n) as usize;
                 set_language(cv, i);
             }
-            Item::Text { .. } | Item::Run { .. } | Item::Server(_) | Item::Bind { .. } | Item::ResetBinds | Item::ResetShaderParams | Item::Sub { .. } => return false,
+            Item::Text { .. } | Item::Run { .. } | Item::Server(_) | Item::Bind { .. } | Item::ResetBinds | Item::ResetShaderParams | Item::Sub { .. } | Item::UserDataDir => return false,
             Item::Apply => {
                 if !enter || !self.display_dirty(cv) {
                     return false;

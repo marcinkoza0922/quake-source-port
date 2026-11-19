@@ -65,6 +65,7 @@ pub(super) fn item_label(item: Item) -> Option<&'static str> {
         Item::Resolution => "Resolution",
         Item::Apply => "Apply Display Changes",
         Item::Language => "Language",
+        Item::UserDataDir => "User Data Directory",
         Item::ShaderPreset => "Preset",
         Item::ResetBinds => "Reset to Defaults",
         Item::ResetShaderParams => "Reset Shader Settings",

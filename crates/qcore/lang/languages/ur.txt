@@ -3622,3 +3622,59 @@ ur ffmpeg نہیں ملا: {} PNG فریم اور ایک WAV {} میں لکھے 
 # Personal bests.
 @ New personal best ({}): {}
 ur نیا ذاتی بہترین ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ur چابی اٹھانے پر محفوظ کریں
+
+@ User Data Directory
+ur صارف ڈیٹا ڈائریکٹری
+
+@ Autosaves when you pick up a key
+ur چابی اٹھانے پر خودکار محفوظ کرتا ہے
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ur جہاں سیوز، ترتیبات، ڈیموز اور ڈاؤن لوڈ شدہ نقشہ پیک محفوظ ہوتے ہیں
+
+@ Key picked up
+ur چابی اٹھا لی گئی
+
+@ Select User Data Directory
+ur صارف ڈیٹا ڈائریکٹری منتخب کریں
+
+@ Data folder: {}
+ur ڈیٹا فولڈر: {}
+
+@ Parent Folder
+ur بنیادی فولڈر
+
+@ Unable to read directory
+ur ڈائریکٹری پڑھی نہیں جا سکی
+
+@ No subfolders
+ur کوئی ذیلی فولڈر نہیں
+
+@ Select Folder
+ur فولڈر منتخب کریں
+
+@ Show Hidden
+ur پوشیدہ دکھائیں
+
+@ Copy existing user data?
+ur موجودہ صارف ڈیٹا کاپی کریں؟
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ur سیوز، ترتیبات، ڈیموز اور ڈاؤن لوڈ شدہ نقشہ پیک نئے فولڈر میں کاپی کیے جا سکتے ہیں۔
+
+@ Copy Data
+ur ڈیٹا کاپی کریں
+
+@ Switch Only
+ur صرف تبدیل کریں
+
+@ User data directory set to {}
+ur صارف ڈیٹا ڈائریکٹری {} پر مقرر کر دی گئی
+
+@ User data directory error: {}
+ur صارف ڈیٹا ڈائریکٹری میں خرابی: {}
+

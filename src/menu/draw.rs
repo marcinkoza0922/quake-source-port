@@ -14,7 +14,7 @@ impl Menu {
         c.fade_screen();
         let base_scale = c.scale;
         c.menu_layout();
-        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Load | Screen::Save | Screen::Help | Screen::Demos) {
+        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Load | Screen::Save | Screen::Help | Screen::Demos | Screen::DirBrowser) {
             c.ox += CLASSIC.0;
             c.oy += CLASSIC.1;
         }
@@ -55,6 +55,7 @@ impl Menu {
             }
             Screen::Mods => self.mods.draw(c, modmenu::Page::List),
             Screen::Demos => self.demos.draw(c, self.mouse, self.pad_ui),
+            Screen::DirBrowser => self.dir_browser.draw(c, self.drag.is_some()),
             Screen::ModMaps => self.mods.draw(c, modmenu::Page::Maps),
             Screen::ModOnline => self.mods.draw(c, modmenu::Page::Online),
             Screen::SinglePlayer => {
@@ -308,6 +309,16 @@ impl Menu {
             Item::Language => {
                 label(c, "Language");
                 txt(c, VALUE_X, y, &super::options::language_options()[super::options::language_index(cv)]);
+            }
+            Item::UserDataDir => {
+                label(c, "User Data Directory");
+                let bx = VALUE_X - 3.0;
+                let bw = PANEL_X + PANEL_W - 14.0 - bx;
+                c.fill(bx, y - 1.0, bw, BOX_H, [0.0, 0.0, 0.0, 0.5]);
+                c.frame(bx, y - 1.0, bw, BOX_H, BORDER);
+                let path = crate::userdata::parent().to_string_lossy().into_owned();
+                let shown = dir_browser::fit_path_tail(c, &path, bw - 8.0, TXT);
+                c.text_raw(VALUE_X, y, &shown, TXT, if cfg!(target_arch = "wasm32") { MUTED } else { GOLD_FG });
             }
             Item::ShaderPreset => {
                 label(c, "Preset");

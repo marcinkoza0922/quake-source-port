@@ -3622,3 +3622,59 @@ da ffmpeg ikke fundet: skrev {} PNG-billeder og en WAV til {}
 # Personal bests.
 @ New personal best ({}): {}
 da Ny personlig rekord ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+da Gem ved opsamling af nøgle
+
+@ User Data Directory
+da Brugerdatamappe
+
+@ Autosaves when you pick up a key
+da Gemmer automatisk, når du samler en nøgle op
+
+@ Where saves, configs, demos and downloaded map packs are stored
+da Hvor gemte spil, indstillinger, demoer og hentede kortpakker gemmes
+
+@ Key picked up
+da Nøgle opsamlet
+
+@ Select User Data Directory
+da Vælg brugerdatamappe
+
+@ Data folder: {}
+da Datamappe: {}
+
+@ Parent Folder
+da Overordnet mappe
+
+@ Unable to read directory
+da Kan ikke læse mappen
+
+@ No subfolders
+da Ingen undermapper
+
+@ Select Folder
+da Vælg mappe
+
+@ Show Hidden
+da Vis skjulte
+
+@ Copy existing user data?
+da Kopiér eksisterende brugerdata?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+da Gemte spil, indstillinger, demoer og hentede kortpakker kan kopieres til den nye mappe.
+
+@ Copy Data
+da Kopiér data
+
+@ Switch Only
+da Skift kun
+
+@ User data directory set to {}
+da Brugerdatamappe sat til {}
+
+@ User data directory error: {}
+da Fejl i brugerdatamappe: {}
+

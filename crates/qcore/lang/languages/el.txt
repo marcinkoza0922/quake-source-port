@@ -3622,3 +3622,59 @@ el Δεν βρέθηκε ffmpeg: γράφτηκαν {} καρέ PNG και έν�
 # Personal bests.
 @ New personal best ({}): {}
 el Νέο προσωπικό ρεκόρ ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+el Αποθήκευση κατά τη συλλογή κλειδιού
+
+@ User Data Directory
+el Φάκελος δεδομένων χρήστη
+
+@ Autosaves when you pick up a key
+el Αποθηκεύει αυτόματα όταν παίρνετε ένα κλειδί
+
+@ Where saves, configs, demos and downloaded map packs are stored
+el Πού αποθηκεύονται οι αποθηκεύσεις, ρυθμίσεις, demos και τα πακέτα χαρτών
+
+@ Key picked up
+el Κλειδί συλλέχθηκε
+
+@ Select User Data Directory
+el Επιλογή φακέλου δεδομένων χρήστη
+
+@ Data folder: {}
+el Φάκελος δεδομένων: {}
+
+@ Parent Folder
+el Γονικός φάκελος
+
+@ Unable to read directory
+el Αδύνατη η ανάγνωση του φακέλου
+
+@ No subfolders
+el Δεν υπάρχουν υποφάκελοι
+
+@ Select Folder
+el Επιλογή φακέλου
+
+@ Show Hidden
+el Εμφάνιση κρυφών
+
+@ Copy existing user data?
+el Αντιγραφή υπαρχόντων δεδομένων χρήστη;
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+el Οι αποθηκεύσεις, ρυθμίσεις, demos και τα πακέτα χαρτών μπορούν να αντιγραφούν στον νέο φάκελο.
+
+@ Copy Data
+el Αντιγραφή δεδομένων
+
+@ Switch Only
+el Μόνο αλλαγή
+
+@ User data directory set to {}
+el Ο φάκελος δεδομένων χρήστη ορίστηκε σε {}
+
+@ User data directory error: {}
+el Σφάλμα φακέλου δεδομένων χρήστη: {}
+

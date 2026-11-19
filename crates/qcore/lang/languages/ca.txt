@@ -3622,3 +3622,59 @@ ca No s'ha trobat ffmpeg: s'han escrit {} fotogrames PNG i un WAV a {}
 # Personal bests.
 @ New personal best ({}): {}
 ca Nou rècord personal ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ca Desa en recollir una clau
+
+@ User Data Directory
+ca Directori de dades d'usuari
+
+@ Autosaves when you pick up a key
+ca Desa automàticament quan reculls una clau
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ca On es desen les partides, configuracions, demos i paquets de mapes baixats
+
+@ Key picked up
+ca Clau recollida
+
+@ Select User Data Directory
+ca Selecciona el directori de dades d'usuari
+
+@ Data folder: {}
+ca Carpeta de dades: {}
+
+@ Parent Folder
+ca Carpeta superior
+
+@ Unable to read directory
+ca No es pot llegir el directori
+
+@ No subfolders
+ca Sense subcarpetes
+
+@ Select Folder
+ca Selecciona la carpeta
+
+@ Show Hidden
+ca Mostra ocultes
+
+@ Copy existing user data?
+ca Copiar les dades d'usuari existents?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ca Les partides, configuracions, demos i paquets de mapes baixats es poden copiar a la carpeta nova.
+
+@ Copy Data
+ca Copia les dades
+
+@ Switch Only
+ca Només canvia
+
+@ User data directory set to {}
+ca Directori de dades d'usuari establert a {}
+
+@ User data directory error: {}
+ca Error del directori de dades d'usuari: {}
+

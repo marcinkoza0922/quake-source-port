@@ -3622,3 +3622,59 @@ yue 搵唔到 ffmpeg：寫咗 {} 格 PNG 同一個 WAV 去 {}
 # Personal bests.
 @ New personal best ({}): {}
 yue 新嘅個人最佳（{}）：{}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+yue 執起鎖匙時儲存
+
+@ User Data Directory
+yue 用戶資料目錄
+
+@ Autosaves when you pick up a key
+yue 執起鎖匙時會自動儲存
+
+@ Where saves, configs, demos and downloaded map packs are stored
+yue 存放存檔、設定、錄影同埋下載地圖包嘅位置
+
+@ Key picked up
+yue 執起咗鎖匙
+
+@ Select User Data Directory
+yue 揀選用戶資料目錄
+
+@ Data folder: {}
+yue 資料夾：{}
+
+@ Parent Folder
+yue 上一層資料夾
+
+@ Unable to read directory
+yue 讀取唔到目錄
+
+@ No subfolders
+yue 冇子資料夾
+
+@ Select Folder
+yue 揀選資料夾
+
+@ Show Hidden
+yue 顯示隱藏項目
+
+@ Copy existing user data?
+yue 要唔要複製現有用戶資料？
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+yue 可以將存檔、設定、錄影同下載嘅地圖包複製去新資料夾。
+
+@ Copy Data
+yue 複製資料
+
+@ Switch Only
+yue 淨係切換
+
+@ User data directory set to {}
+yue 用戶資料目錄已經設為 {}
+
+@ User data directory error: {}
+yue 用戶資料目錄出錯：{}
+

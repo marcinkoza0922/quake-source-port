@@ -3622,3 +3622,59 @@ ar لم يُعثر على ffmpeg: كُتب {} إطار PNG وملف WAV في {}
 # Personal bests.
 @ New personal best ({}): {}
 ar أفضل رقم شخصي جديد ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ar الحفظ عند التقاط مفتاح
+
+@ User Data Directory
+ar مجلد بيانات المستخدم
+
+@ Autosaves when you pick up a key
+ar يحفظ تلقائياً عند التقاط مفتاح
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ar مكان حفظ الملفات المحفوظة والإعدادات والعروض وحزم الخرائط المُنزَّلة
+
+@ Key picked up
+ar تم التقاط مفتاح
+
+@ Select User Data Directory
+ar اختر مجلد بيانات المستخدم
+
+@ Data folder: {}
+ar مجلد البيانات: {}
+
+@ Parent Folder
+ar المجلد الأعلى
+
+@ Unable to read directory
+ar تعذرت قراءة المجلد
+
+@ No subfolders
+ar لا توجد مجلدات فرعية
+
+@ Select Folder
+ar اختر المجلد
+
+@ Show Hidden
+ar إظهار المخفي
+
+@ Copy existing user data?
+ar نسخ بيانات المستخدم الحالية؟
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ar يمكن نسخ الملفات المحفوظة والإعدادات والعروض وحزم الخرائط المُنزَّلة إلى المجلد الجديد.
+
+@ Copy Data
+ar نسخ البيانات
+
+@ Switch Only
+ar التبديل فقط
+
+@ User data directory set to {}
+ar تم تعيين مجلد بيانات المستخدم إلى {}
+
+@ User data directory error: {}
+ar خطأ في مجلد بيانات المستخدم: {}
+

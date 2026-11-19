@@ -47,6 +47,7 @@ mod help;
 mod search;
 mod textedit;
 mod search_keywords;
+mod dir_browser;
 pub mod demos;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -71,6 +72,8 @@ pub enum Screen {
     Demos,
     /// Options → HUD → Edit HUD.
     HudEditor,
+    /// Options → Gameplay → User Data Directory explorer.
+    DirBrowser,
 }
 
 /// Options sub-pages.
@@ -198,6 +201,10 @@ pub struct Menu {
     pub demos: demos::DemoBrowser,
     /// Options → HUD → Edit HUD.
     pub hud_edit: crate::hud::editor::Editor,
+    /// Options → Gameplay → User Data Directory explorer.
+    dir_browser: dir_browser::DirBrowser,
+    /// Pending user data directory change: (selected parent, copy existing data).
+    pub pending_user_data_dir: Option<(std::path::PathBuf, bool)>,
     /// Export dialog: where Back goes; export and rename dialogs: info lines.
     export_back: Screen,
     dialog_info: Vec<String>,
@@ -337,6 +344,8 @@ impl Menu {
             mods: ModMenu::default(),
             demos: Default::default(),
             hud_edit: Default::default(),
+            dir_browser: Default::default(),
+            pending_user_data_dir: None,
             export_back: Screen::None,
             dialog_info: Vec::new(),
             rename_from: String::new(),
@@ -401,6 +410,12 @@ impl Menu {
     pub fn open_help(&mut self, section: &str) {
         self.open(Screen::Help);
         self.help.open_section(section);
+    }
+
+    /// Opens the User Data Directory explorer at the active location.
+    pub fn open_dir_browser(&mut self) {
+        self.open(Screen::DirBrowser);
+        self.dir_browser.open(crate::userdata::parent());
     }
 
     /// Typed text goes to a text field under the cursor.
@@ -506,7 +521,7 @@ impl Menu {
                 .position(|&bx| x >= bx && x < bx + QUIT_BTN.0 && y >= QUIT_BTN_Y && y < QUIT_BTN_Y + QUIT_BTN.1),
             Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.item_at(self.mods_page(), (x, y)),
             Screen::Help => self.help.item_at((x, y)),
-            Screen::Demos | Screen::None | Screen::HudEditor => None,
+            Screen::Demos | Screen::None | Screen::HudEditor | Screen::DirBrowser => None,
         }
     }
 
@@ -535,7 +550,7 @@ impl Menu {
             }
             // hovering doesn't switch sections; a click does
             Screen::Help => None,
-            Screen::Demos | Screen::None | Screen::HudEditor => None,
+            Screen::Demos | Screen::None | Screen::HudEditor | Screen::DirBrowser => None,
         }
     }
 

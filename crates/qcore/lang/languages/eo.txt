@@ -3622,3 +3622,59 @@ eo ffmpeg ne trovita: skribis {} PNG-kadrojn kaj WAV al {}
 # Personal bests.
 @ New personal best ({}): {}
 eo Nova persona rekordo ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+eo Konservi kiam prenas ŝlosilon
+
+@ User Data Directory
+eo Dosierujo de uzantaj datumoj
+
+@ Autosaves when you pick up a key
+eo Aŭtomate konservas kiam vi prenas ŝlosilon
+
+@ Where saves, configs, demos and downloaded map packs are stored
+eo Kie konservaĵoj, agordoj, demo-dosieroj kaj elŝutitaj map-pakaĵoj estas stokitaj
+
+@ Key picked up
+eo Ŝlosilo prenita
+
+@ Select User Data Directory
+eo Elekti dosierujon de uzantaj datumoj
+
+@ Data folder: {}
+eo Datuma dosierujo: {}
+
+@ Parent Folder
+eo Patra dosierujo
+
+@ Unable to read directory
+eo Ne eblas legi la dosierujon
+
+@ No subfolders
+eo Neniuj subdosierujoj
+
+@ Select Folder
+eo Elekti dosierujon
+
+@ Show Hidden
+eo Montri kaŝitajn
+
+@ Copy existing user data?
+eo Ĉu kopii ekzistantajn uzantajn datumojn?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+eo Konservaĵoj, agordoj, demo-dosieroj kaj elŝutitaj map-pakaĵoj povas esti kopiitaj al la nova dosierujo.
+
+@ Copy Data
+eo Kopii datumojn
+
+@ Switch Only
+eo Nur ŝanĝi
+
+@ User data directory set to {}
+eo Dosierujo de uzantaj datumoj agordita al {}
+
+@ User data directory error: {}
+eo Eraro pri dosierujo de uzantaj datumoj: {}
+

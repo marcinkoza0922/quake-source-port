@@ -3622,3 +3622,59 @@ nl ffmpeg niet gevonden: {} PNG-beelden en een WAV geschreven naar {}
 # Personal bests.
 @ New personal best ({}): {}
 nl Nieuw persoonlijk record ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+nl Opslaan bij oppakken sleutel
+
+@ User Data Directory
+nl Gebruikersgegevensmap
+
+@ Autosaves when you pick up a key
+nl Slaat automatisch op wanneer je een sleutel oppakt
+
+@ Where saves, configs, demos and downloaded map packs are stored
+nl Waar opslagbestanden, instellingen, demo's en gedownloade mappakketten worden opgeslagen
+
+@ Key picked up
+nl Sleutel opgepakt
+
+@ Select User Data Directory
+nl Kies gebruikersgegevensmap
+
+@ Data folder: {}
+nl Gegevensmap: {}
+
+@ Parent Folder
+nl Bovenliggende map
+
+@ Unable to read directory
+nl Kan map niet lezen
+
+@ No subfolders
+nl Geen submappen
+
+@ Select Folder
+nl Selecteer map
+
+@ Show Hidden
+nl Verborgen tonen
+
+@ Copy existing user data?
+nl Bestaande gebruikersgegevens kopiëren?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+nl Opslagbestanden, instellingen, demo's en gedownloade mappakketten kunnen naar de nieuwe map worden gekopieerd.
+
+@ Copy Data
+nl Gegevens kopiëren
+
+@ Switch Only
+nl Alleen wisselen
+
+@ User data directory set to {}
+nl Gebruikersgegevensmap ingesteld op {}
+
+@ User data directory error: {}
+nl Fout bij gebruikersgegevensmap: {}
+

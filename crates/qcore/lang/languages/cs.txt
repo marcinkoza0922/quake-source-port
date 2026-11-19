@@ -3622,3 +3622,59 @@ cs ffmpeg nenalezen: zapsáno {} snímků PNG a WAV do {}
 # Personal bests.
 @ New personal best ({}): {}
 cs Nový osobní rekord ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+cs Uložit při sebrání klíče
+
+@ User Data Directory
+cs Složka uživatelských dat
+
+@ Autosaves when you pick up a key
+cs Automaticky uloží hru při sebrání klíče
+
+@ Where saves, configs, demos and downloaded map packs are stored
+cs Kam se ukládají uložené pozice, nastavení, dema a stažené balíčky map
+
+@ Key picked up
+cs Klíč sebrán
+
+@ Select User Data Directory
+cs Vybrat složku uživatelských dat
+
+@ Data folder: {}
+cs Datová složka: {}
+
+@ Parent Folder
+cs Nadřazená složka
+
+@ Unable to read directory
+cs Složku nelze přečíst
+
+@ No subfolders
+cs Žádné podsložky
+
+@ Select Folder
+cs Vybrat složku
+
+@ Show Hidden
+cs Zobrazit skryté
+
+@ Copy existing user data?
+cs Zkopírovat stávající uživatelská data?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+cs Uložené pozice, nastavení, dema a stažené balíčky map lze zkopírovat do nové složky.
+
+@ Copy Data
+cs Zkopírovat data
+
+@ Switch Only
+cs Jen přepnout
+
+@ User data directory set to {}
+cs Složka uživatelských dat nastavena na {}
+
+@ User data directory error: {}
+cs Chyba složky uživatelských dat: {}
+

@@ -3622,3 +3622,59 @@ zh-TW 找不到 ffmpeg：已將 {} 格 PNG 和一個 WAV 寫入 {}
 # Personal bests.
 @ New personal best ({}): {}
 zh-TW 新的個人最佳（{}）：{}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+zh-TW 拾取鑰匙時儲存
+
+@ User Data Directory
+zh-TW 使用者資料目錄
+
+@ Autosaves when you pick up a key
+zh-TW 拾取鑰匙時自動儲存
+
+@ Where saves, configs, demos and downloaded map packs are stored
+zh-TW 存檔、設定、錄影與已下載地圖包的儲存位置
+
+@ Key picked up
+zh-TW 拾取鑰匙
+
+@ Select User Data Directory
+zh-TW 選擇使用者資料目錄
+
+@ Data folder: {}
+zh-TW 資料夾：{}
+
+@ Parent Folder
+zh-TW 上層資料夾
+
+@ Unable to read directory
+zh-TW 無法讀取目錄
+
+@ No subfolders
+zh-TW 沒有子資料夾
+
+@ Select Folder
+zh-TW 選擇資料夾
+
+@ Show Hidden
+zh-TW 顯示隱藏項目
+
+@ Copy existing user data?
+zh-TW 複製現有使用者資料？
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+zh-TW 可將存檔、設定、錄影與已下載地圖包複製到新資料夾。
+
+@ Copy Data
+zh-TW 複製資料
+
+@ Switch Only
+zh-TW 僅切換
+
+@ User data directory set to {}
+zh-TW 使用者資料目錄已設為 {}
+
+@ User data directory error: {}
+zh-TW 使用者資料目錄錯誤：{}
+

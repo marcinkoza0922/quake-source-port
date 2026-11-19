@@ -3622,3 +3622,59 @@ ga Níor aimsíodh ffmpeg: scríobhadh {} fráma PNG agus WAV go {}
 # Personal bests.
 @ New personal best ({}): {}
 ga Curiarracht phearsanta nua ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ga Sábháil ar eochair a phiocadh suas
+
+@ User Data Directory
+ga Comhadlann Sonraí Úsáideora
+
+@ Autosaves when you pick up a key
+ga Uathshábhálann nuair a phiocann tú eochair suas
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ga An áit a stóráiltear sábhálacha, cumraíochtaí, taispeántais agus pacáistí léarscáileanna íoslódáilte
+
+@ Key picked up
+ga Eochair pioctha suas
+
+@ Select User Data Directory
+ga Roghnaigh Comhadlann Sonraí Úsáideora
+
+@ Data folder: {}
+ga Fillteán sonraí: {}
+
+@ Parent Folder
+ga Máthairfhillteán
+
+@ Unable to read directory
+ga Ní féidir an chomhadlann a léamh
+
+@ No subfolders
+ga Gan fofhillteáin
+
+@ Select Folder
+ga Roghnaigh Fillteán
+
+@ Show Hidden
+ga Taispeáin Folaigh
+
+@ Copy existing user data?
+ga Cóipeáil sonraí úsáideora reatha?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ga Is féidir sábhálacha, cumraíochtaí, taispeántais agus pacáistí léarscáileanna a chóipeáil chuig an bhfillteán nua.
+
+@ Copy Data
+ga Cóipeáil Sonraí
+
+@ Switch Only
+ga Athraigh Amháin
+
+@ User data directory set to {}
+ga Comhadlann sonraí úsáideora socraithe go {}
+
+@ User data directory error: {}
+ga Earráid chomhadlann sonraí úsáideora: {}
+

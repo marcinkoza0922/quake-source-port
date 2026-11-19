@@ -3622,3 +3622,59 @@ fa ffmpeg پیدا نشد: {} فریم PNG و یک WAV در {} نوشته شد
 # Personal bests.
 @ New personal best ({}): {}
 fa رکورد شخصی تازه ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+fa ذخیره هنگام برداشتن کلید
+
+@ User Data Directory
+fa پوشه داده‌های کاربر
+
+@ Autosaves when you pick up a key
+fa هنگام برداشتن کلید به‌طور خودکار ذخیره می‌کند
+
+@ Where saves, configs, demos and downloaded map packs are stored
+fa محل ذخیره بازی‌ها، تنظیمات، دموها و بسته‌های نقشه دانلودشده
+
+@ Key picked up
+fa کلید برداشته شد
+
+@ Select User Data Directory
+fa انتخاب پوشه داده‌های کاربر
+
+@ Data folder: {}
+fa پوشه داده‌ها: {}
+
+@ Parent Folder
+fa پوشه والد
+
+@ Unable to read directory
+fa خواندن پوشه ممکن نیست
+
+@ No subfolders
+fa زیرپوشه‌ای وجود ندارد
+
+@ Select Folder
+fa انتخاب پوشه
+
+@ Show Hidden
+fa نمایش مخفی‌ها
+
+@ Copy existing user data?
+fa داده‌های فعلی کاربر کپی شوند؟
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+fa ذخیره‌ها، تنظیمات، دموها و بسته‌های نقشه دانلودشده می‌توانند به پوشه جدید کپی شوند.
+
+@ Copy Data
+fa کپی داده‌ها
+
+@ Switch Only
+fa فقط تغییر
+
+@ User data directory set to {}
+fa پوشه داده‌های کاربر روی {} تنظیم شد
+
+@ User data directory error: {}
+fa خطای پوشه داده‌های کاربر: {}
+

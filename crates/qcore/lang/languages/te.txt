@@ -3622,3 +3622,59 @@ te ffmpeg కనబడలేదు: {} PNG ఫ్రేమ్‌లు మరి
 # Personal bests.
 @ New personal best ({}): {}
 te కొత్త వ్యక్తిగత ఉత్తమం ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+te తాళం తీసుకున్నప్పుడు సేవ్ చేయి
+
+@ User Data Directory
+te వినియోగదారు డేటా డైరెక్టరీ
+
+@ Autosaves when you pick up a key
+te మీరు తాళం తీసుకున్నప్పుడు స్వయంచాలకంగా సేవ్ చేస్తుంది
+
+@ Where saves, configs, demos and downloaded map packs are stored
+te సేవ్‌లు, కాన్ఫిగ్‌లు, డెమోలు మరియు డౌన్‌లోడ్ చేసిన మ్యాప్ ప్యాక్‌లు నిల్వ ఉండే స్థలం
+
+@ Key picked up
+te తాళం తీసుకోబడింది
+
+@ Select User Data Directory
+te వినియోగదారు డేటా డైరెక్టరీని ఎంచుకోండి
+
+@ Data folder: {}
+te డేటా ఫోల్డర్: {}
+
+@ Parent Folder
+te పై ఫోల్డర్
+
+@ Unable to read directory
+te డైరెక్టరీని చదవడం సాధ్యం కాలేదు
+
+@ No subfolders
+te ఉపఫోల్డర్లు లేవు
+
+@ Select Folder
+te ఫోల్డర్ ఎంచుకోండి
+
+@ Show Hidden
+te దాచినవి చూపు
+
+@ Copy existing user data?
+te ఇప్పటికే ఉన్న వినియోగదారు డేటాను కాపీ చేయాలా?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+te సేవ్‌లు, కాన్ఫిగ్‌లు, డెమోలు మరియు డౌన్‌లోడ్ చేసిన మ్యాప్ ప్యాక్‌లను కొత్త ఫోల్డర్‌కు కాపీ చేయవచ్చు.
+
+@ Copy Data
+te డేటా కాపీ చేయి
+
+@ Switch Only
+te మార్చు మాత్రమే
+
+@ User data directory set to {}
+te వినియోగదారు డేటా డైరెక్టరీ {} కు సెట్ చేయబడింది
+
+@ User data directory error: {}
+te వినియోగదారు డేటా డైరెక్టరీ లోపం: {}
+

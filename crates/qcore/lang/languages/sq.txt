@@ -3622,3 +3622,59 @@ sq ffmpeg nuk u gjet: u shkruan {} kuadro PNG dhe një WAV në {}
 # Personal bests.
 @ New personal best ({}): {}
 sq Rekord i ri personal ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+sq Ruaj kur merr një çelës
+
+@ User Data Directory
+sq Dosja e të dhënave të përdoruesit
+
+@ Autosaves when you pick up a key
+sq Ruan automatikisht kur merr një çelës
+
+@ Where saves, configs, demos and downloaded map packs are stored
+sq Ku ruhen ruajtjet, konfigurimet, demot dhe paketat e hartave të shkarkuara
+
+@ Key picked up
+sq Çelësi u mor
+
+@ Select User Data Directory
+sq Zgjidh dosjen e të dhënave të përdoruesit
+
+@ Data folder: {}
+sq Dosja e të dhënave: {}
+
+@ Parent Folder
+sq Dosja prind
+
+@ Unable to read directory
+sq Nuk mund të lexohet dosja
+
+@ No subfolders
+sq Nuk ka nëndosje
+
+@ Select Folder
+sq Zgjidh dosjen
+
+@ Show Hidden
+sq Shfaq të fshehurat
+
+@ Copy existing user data?
+sq Të kopjohen të dhënat ekzistuese të përdoruesit?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+sq Ruajtjet, konfigurimet, demot dhe paketat e hartave të shkarkuara mund të kopjohen në dosjen e re.
+
+@ Copy Data
+sq Kopjo të dhënat
+
+@ Switch Only
+sq Vetëm ndërro
+
+@ User data directory set to {}
+sq Dosja e të dhënave të përdoruesit u vendos në {}
+
+@ User data directory error: {}
+sq Gabim i dosjes së të dhënave të përdoruesit: {}
+

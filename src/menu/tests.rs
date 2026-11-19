@@ -672,3 +672,18 @@ fn enhanced_particles_disables_the_classic_particle_style() {
     assert!(menu.adjust(item, 1, false, &mut cv, &mut out));
     assert_eq!(cv.value_of("r_particles"), 2.0);
 }
+
+#[test]
+fn gameplay_user_data_dir_opens_explorer_and_autosave_has_key_toggle() {
+    assert!(option_cvars().any(|c| c == "sv_autosave_key"));
+    let mut cv = Cvars::default();
+    let mut m = Menu::new();
+    m.open(Screen::OptionsPage(Page::Gameplay));
+    let row = GAMEPLAY.iter().position(|i| matches!(i, Item::UserDataDir)).unwrap();
+    m.opt_cursor = row;
+    m.key(K_ENTER, &mut cv, false);
+    assert_eq!(m.screen, Screen::DirBrowser);
+    m.key(K_ESCAPE, &mut cv, false);
+    assert_eq!(m.screen, Screen::OptionsPage(Page::Gameplay));
+    assert_eq!(m.opt_cursor, row);
+}

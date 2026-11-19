@@ -3622,3 +3622,59 @@ la ffmpeg non inventum: {} imagines PNG et WAV in {} scriptae
 # Personal bests.
 @ New personal best ({}): {}
 la Novum optimum proprium ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+la Serva clave capta
+
+@ User Data Directory
+la Directorium Datorum Usoris
+
+@ Autosaves when you pick up a key
+la Sponte servat cum clavem capis
+
+@ Where saves, configs, demos and downloaded map packs are stored
+la Ubi servata, configurationes, demonstrationes et fasciculi tabularum conduntur
+
+@ Key picked up
+la Clavis capta
+
+@ Select User Data Directory
+la Elige Directorium Datorum Usoris
+
+@ Data folder: {}
+la Scriniolum datorum: {}
+
+@ Parent Folder
+la Scriniolum Superius
+
+@ Unable to read directory
+la Directorium legi non potest
+
+@ No subfolders
+la Nulla subscriniola
+
+@ Select Folder
+la Elige Scriniolum
+
+@ Show Hidden
+la Ostende Occulta
+
+@ Copy existing user data?
+la Exscribere data usoris exstantia?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+la Servata, configurationes, demonstrationes et fasciculi tabularum in novum scriniolum exscribi possunt.
+
+@ Copy Data
+la Exscribe Data
+
+@ Switch Only
+la Muta Tantum
+
+@ User data directory set to {}
+la Directorium datorum usoris positum est in {}
+
+@ User data directory error: {}
+la Error directorii datorum usoris: {}
+

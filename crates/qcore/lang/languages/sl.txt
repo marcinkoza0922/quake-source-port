@@ -3622,3 +3622,59 @@ sl ffmpeg ni najden: zapisanih {} sličic PNG in WAV v {}
 # Personal bests.
 @ New personal best ({}): {}
 sl Nov osebni rekord ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+sl Shrani ob pobiranju ključa
+
+@ User Data Directory
+sl Mapa uporabniških podatkov
+
+@ Autosaves when you pick up a key
+sl Samodejno shrani, ko pobereš ključ
+
+@ Where saves, configs, demos and downloaded map packs are stored
+sl Kjer so shranjeni shranjeni položaji, nastavitve, demo posnetki in preneseni paketi map
+
+@ Key picked up
+sl Ključ pobran
+
+@ Select User Data Directory
+sl Izberi mapo uporabniških podatkov
+
+@ Data folder: {}
+sl Podatkovna mapa: {}
+
+@ Parent Folder
+sl Nadrejena mapa
+
+@ Unable to read directory
+sl Mape ni mogoče prebrati
+
+@ No subfolders
+sl Ni podmap
+
+@ Select Folder
+sl Izberi mapo
+
+@ Show Hidden
+sl Prikaži skrite
+
+@ Copy existing user data?
+sl Kopiraj obstoječe uporabniške podatke?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+sl Shranjene igre, nastavitve, demo posnetke in prenesene pakete map lahko kopirate v novo mapo.
+
+@ Copy Data
+sl Kopiraj podatke
+
+@ Switch Only
+sl Samo preklopi
+
+@ User data directory set to {}
+sl Mapa uporabniških podatkov nastavljena na {}
+
+@ User data directory error: {}
+sl Napaka mape uporabniških podatkov: {}
+

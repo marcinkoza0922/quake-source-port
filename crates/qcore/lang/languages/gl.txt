@@ -3622,3 +3622,59 @@ gl Non se atopou ffmpeg: escribíronse {} fotogramas PNG e un WAV en {}
 # Personal bests.
 @ New personal best ({}): {}
 gl Nova marca persoal ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+gl Gardar ao recoller unha chave
+
+@ User Data Directory
+gl Cartafol de datos de usuario
+
+@ Autosaves when you pick up a key
+gl Garda automaticamente cando recolles unha chave
+
+@ Where saves, configs, demos and downloaded map packs are stored
+gl Onde se gardan as partidas, configuracións, demos e paquetes de mapas descargados
+
+@ Key picked up
+gl Chave recollida
+
+@ Select User Data Directory
+gl Seleccionar cartafol de datos de usuario
+
+@ Data folder: {}
+gl Cartafol de datos: {}
+
+@ Parent Folder
+gl Cartafol superior
+
+@ Unable to read directory
+gl Non se pode ler o cartafol
+
+@ No subfolders
+gl Sen subcartafoles
+
+@ Select Folder
+gl Seleccionar cartafol
+
+@ Show Hidden
+gl Mostrar ocultos
+
+@ Copy existing user data?
+gl Copiar os datos de usuario existentes?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+gl As partidas, configuracións, demos e paquetes de mapas descargados pódense copiar ao novo cartafol.
+
+@ Copy Data
+gl Copiar datos
+
+@ Switch Only
+gl Só cambiar
+
+@ User data directory set to {}
+gl Cartafol de datos de usuario establecido en {}
+
+@ User data directory error: {}
+gl Erro do cartafol de datos de usuario: {}
+

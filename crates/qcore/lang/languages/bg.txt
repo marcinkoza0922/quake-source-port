@@ -3622,3 +3622,59 @@ bg ffmpeg не е намерен: записани {} PNG кадъра и WAV в
 # Personal bests.
 @ New personal best ({}): {}
 bg Нов личен рекорд ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+bg Запис при вземане на ключ
+
+@ User Data Directory
+bg Папка с потребителски данни
+
+@ Autosaves when you pick up a key
+bg Автоматично запазва при вземане на ключ
+
+@ Where saves, configs, demos and downloaded map packs are stored
+bg Къде се съхраняват записите, настройките, демотата и изтеглените пакети с карти
+
+@ Key picked up
+bg Ключът е взет
+
+@ Select User Data Directory
+bg Избор на папка с потребителски данни
+
+@ Data folder: {}
+bg Папка с данни: {}
+
+@ Parent Folder
+bg Родителска папка
+
+@ Unable to read directory
+bg Папката не може да бъде прочетена
+
+@ No subfolders
+bg Няма подпапки
+
+@ Select Folder
+bg Избери папка
+
+@ Show Hidden
+bg Покажи скрити
+
+@ Copy existing user data?
+bg Копиране на съществуващите потребителски данни?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+bg Записите, настройките, демотата и изтеглените пакети с карти могат да бъдат копирани в новата папка.
+
+@ Copy Data
+bg Копирай данни
+
+@ Switch Only
+bg Само смени
+
+@ User data directory set to {}
+bg Папката с потребителски данни е зададена на {}
+
+@ User data directory error: {}
+bg Грешка в папката с потребителски данни: {}
+

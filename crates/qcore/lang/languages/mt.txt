@@ -3622,3 +3622,59 @@ mt ffmpeg ma nstabx: inkitbu {} frejms PNG u WAV f'{}
 # Personal bests.
 @ New personal best ({}): {}
 mt Aħjar personali ġdid ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+mt Issejvja meta taqbad ċavetta
+
+@ User Data Directory
+mt Fowlder tad-dejta tal-utent
+
+@ Autosaves when you pick up a key
+mt Issejvja awtomatikament meta taqbad ċavetta
+
+@ Where saves, configs, demos and downloaded map packs are stored
+mt Fejn jinħażnu s-saves, il-konfigurazzjonijiet, id-demos u l-pakketti tal-mapep imniżżla
+
+@ Key picked up
+mt Ċavetta maqbuda
+
+@ Select User Data Directory
+mt Agħżel il-fowlder tad-dejta tal-utent
+
+@ Data folder: {}
+mt Fowlder tad-dejta: {}
+
+@ Parent Folder
+mt Fowlder ta' fuq
+
+@ Unable to read directory
+mt Ma jistax jinqara d-direttorju
+
+@ No subfolders
+mt L-ebda subfowlder
+
+@ Select Folder
+mt Agħżel Fowlder
+
+@ Show Hidden
+mt Uri Moħbija
+
+@ Copy existing user data?
+mt Tikkopja d-dejta tal-utent eżistenti?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+mt Saves, konfigurazzjonijiet, demos u pakketti tal-mapep imniżżla jistgħu jiġu kkupjati fil-fowlder il-ġdid.
+
+@ Copy Data
+mt Ikkopja d-Dejta
+
+@ Switch Only
+mt Ibdel Biss
+
+@ User data directory set to {}
+mt Il-fowlder tad-dejta tal-utent ġie ssettjat għal {}
+
+@ User data directory error: {}
+mt Żball fil-fowlder tad-dejta tal-utent: {}
+

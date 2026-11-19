@@ -3622,3 +3622,59 @@ eu Ez da ffmpeg aurkitu: {} PNG fotograma eta WAV bat idatzi dira hemen: {}
 # Personal bests.
 @ New personal best ({}): {}
 eu Marka pertsonal berria ({}): {}
+
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+eu Gorde giltza jasotzean
+
+@ User Data Directory
+eu Erabiltzailearen datuen karpeta
+
+@ Autosaves when you pick up a key
+eu Automatikoki gordetzen du giltza bat jasotzean
+
+@ Where saves, configs, demos and downloaded map packs are stored
+eu Gordetzeak, konfigurazioak, demoak eta deskargatutako mapa paketeak gordetzen diren tokia
+
+@ Key picked up
+eu Giltza jasota
+
+@ Select User Data Directory
+eu Hautatu erabiltzailearen datuen karpeta
+
+@ Data folder: {}
+eu Datuen karpeta: {}
+
+@ Parent Folder
+eu Karpeta nagusia
+
+@ Unable to read directory
+eu Ezin da karpeta irakurri
+
+@ No subfolders
+eu Azpikarpetarik ez
+
+@ Select Folder
+eu Hautatu karpeta
+
+@ Show Hidden
+eu Erakutsi ezkutuak
+
+@ Copy existing user data?
+eu Dauden erabiltzaile-datuak kopiatu?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+eu Gordetzeak, konfigurazioak, demoak eta deskargatutako mapa paketeak karpeta berrira kopia daitezke.
+
+@ Copy Data
+eu Kopiatu datuak
+
+@ Switch Only
+eu Aldatu bakarrik
+
+@ User data directory set to {}
+eu Erabiltzailearen datuen karpeta hemen ezarri da: {}
+
+@ User data directory error: {}
+eu Erabiltzailearen datuen karpetaren errorea: {}
+
