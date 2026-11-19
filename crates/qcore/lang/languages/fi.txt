@@ -1682,6 +1682,60 @@ fi Hirviöt
 @ World & Pickups
 fi Maailma ja esineet
 
+@ 3D wireframe
+fi 3D-rautalanka
+
+@ Automap
+fi Autokartta
+
+@ Automap Settings
+fi Autokartan asetukset
+
+@ Better weapon
+fi Parempi ase
+
+@ Center overlay
+fi Keskitetty peittokuva
+
+@ Corner minimap
+fi Kulmaminikartta
+
+@ Display
+fi Näyttö
+
+@ Explored only
+fi Vain tutkitut
+
+@ Full map
+fi Koko kartta
+
+@ Never
+fi Ei koskaan
+
+@ Reveal
+fi Paljastus
+
+@ Rotate with Player
+fi Kierrä pelaajan mukana
+
+@ Show Markers
+fi Näytä merkit
+
+@ Top-down
+fi Ylhäältä alas
+
+@ View Mode
+fi Näkymätila
+
+@ Weapon Auto-Switch
+fi Automaattinen aseen vaihto
+
+@ Weapon Priority
+fi Aseiden tärkeys
+
+@ Zoom
+fi Zoomaus
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ fi Hirviöiden hälytysten, hyökkäysten, kivun ja kuoleman äänten voimakkuus
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 fi Ovien, hissien, kytkinten, esineiden poiminnan ja muiden maailman tehosteiden voimakkuus
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+fi 3D-rautalanka kallistaa karttaa perspektiivissä korkeuserojen näyttämiseksi; Ylhäältä alas piirtää tasaisen ylänäkymän
+
+@ Arrange weapon priority order for Better weapon auto-switching
+fi Järjestä aseiden tärkeys Parempi ase -automaattivaihtoa varten
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+fi Määritä 3D-rautalankakartan näkymä, esitys, paljastustila, zoomaus ja merkit
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+fi Kulmaminikartta rajaa kartan oikeaan yläkulmaan; Keskitetty peittokuva piirtää läpinäkyvän rautalangan näkymän päälle
+
+@ Disabled while Weapon Auto-Switch is set to Never
+fi Pois käytöstä, kun Automaattinen aseen vaihto on asetettu tilaan Ei koskaan
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+fi Vain tutkitut paljastaa huoneet sitä mukaa kun käyt niissä; Koko kartta näyttää koko kentän geometrian
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+fi Korostaa autokartalla uloskäynnit, avaimet, teleportit, lukitut ovet ja viimeisimmän reittisi
+
+@ Opacity of the automap lines and panel
+fi Autokartan viivojen ja paneelin peittävyys
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+fi Kiertää autokarttaa niin, että katsesuuntasi osoittaa ylös; pois käytöstä pitää pohjoisen ylhäällä
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+fi Näyttää pelatessa reaaliaikaisen 3D-rautalanka- tai ylhäältä alas -autokartan; paina M avataksesi interaktiivisen kokoruudun kartan (vain yksinpeli ja yhteistyö)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+fi Asetta poimittaessa: Ei koskaan pitää nykyisen aseesi; Parempi ase vaihtaa vain, jos se on ylempänä Aseiden tärkeys -listalla
+
+@ Zoom level of the automap view
+fi Autokartan näkymän zoomaustaso
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ fi Kopioi tiedot
 
 @ Switch Only
 fi Vain vaihda
+
+@ Above
+fi Yläpuolella
+
+@ Below
+fi Alapuolella
+
+@ Close
+fi Sulje
+
+@ Current floor
+fi Nykyinen kerros
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+fi Järjestä aseet vetämällä tai paina Enter ja käytä nuolinäppäimiä
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+fi Veto: Kierto  |  WASD: Vieritä  |  Q/E: Kerros  |  Rulla: Zoom  |  Tab: 3D/2D  |  F: Paljasta  |  R: Nollaa  |  M/Esc: Sulje
+
+@ Exit
+fi Uloskäynti
+
+@ Highest priority at top
+fi Suurin tärkeys ylhäällä
+
+@ Move
+fi Siirrä
+
+@ Orbit
+fi Kierto
+
+@ Pan
+fi Vieritä
+
+@ Place
+fi Aseta
+
+@ Press A to pick up a weapon, then move it up or down
+fi Paina A poimiaksesi aseen ja siirrä sitä sitten ylös tai alas
+
+@ Reorder
+fi Järjestä
+
+@ Reset
+fi Nollaa
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+fi Siirrä ristiohjaimella tai tikulla, aseta A:lla, peruuta B:llä
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+fi Siirrä ylös- ja alas-nuolilla, aseta Enterillä, peruuta Escillä
+
+@ View
+fi Näkymä
 
 # ==== hud.txt ====
 

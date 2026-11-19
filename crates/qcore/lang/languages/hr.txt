@@ -1682,6 +1682,60 @@ hr Čudovišta
 @ World & Pickups
 hr Svijet i predmeti
 
+@ 3D wireframe
+hr 3D žičani prikaz
+
+@ Automap
+hr Automapa
+
+@ Automap Settings
+hr Postavke automape
+
+@ Better weapon
+hr Bolje oružje
+
+@ Center overlay
+hr Središnji prekrivni prikaz
+
+@ Corner minimap
+hr Minimapa u kutu
+
+@ Display
+hr Prikaz
+
+@ Explored only
+hr Samo istraženo
+
+@ Full map
+hr Cijela mapa
+
+@ Never
+hr Nikad
+
+@ Reveal
+hr Otkrivanje
+
+@ Rotate with Player
+hr Rotiraj s igračem
+
+@ Show Markers
+hr Prikaži oznake
+
+@ Top-down
+hr Pogled odozgo
+
+@ View Mode
+hr Način prikaza
+
+@ Weapon Auto-Switch
+hr Auto-promjena oružja
+
+@ Weapon Priority
+hr Prioritet oružja
+
+@ Zoom
+hr Zumiranje
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ hr Glasnoća uzbuna, napada, boli i smrti čudovišta
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 hr Glasnoća vrata, dizala, prekidača, skupljanja predmeta i ostalih efekata svijeta
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+hr 3D žičani prikaz naginje mapu u perspektivi radi prikaza visine; Pogled odozgo crta ravan tlocrt
+
+@ Arrange weapon priority order for Better weapon auto-switching
+hr Podesi redoslijed prioriteta oružja za automatsku promjenu na bolje oružje
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+hr Prilagodi prikaz 3D žičane automape, način prikaza, otkrivanje, zumiranje i oznake
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+hr Minimapa u kutu uokviruje mapu gore desno; Središnji prekrivni prikaz postavlja prozirnu žičanu mrežu preko pogleda
+
+@ Disabled while Weapon Auto-Switch is set to Never
+hr Onemogućeno dok je Auto-promjena oružja postavljena na Nikad
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+hr Samo istraženo otkriva prostorije dok ih posjećujete; Cijela mapa prikazuje svu geometriju razine
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+hr Ističe izlaze, ključeve, teleportere, zaključana vrata i vaš nedavni trag na automapi
+
+@ Opacity of the automap lines and panel
+hr Neprozirnost linija i ploče automape
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+hr Rotira automapu tako da smjer pogleda pokazuje gore; isključeno drži sjever na vrhu
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+hr Prikazuje 3D žičanu ili automapu odozgo tijekom igre; pritisnite M za interaktivnu kartu na cijelom zaslonu (samo za jednog igrača i suradnju)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+hr Pri uzimanju oružja: Nikad zadržava trenutačno oružje; Bolje oružje prebacuje samo ako je više na popisu Prioriteta oružja
+
+@ Zoom level of the automap view
+hr Razina zumiranja prikaza automape
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ hr Kopiraj podatke
 
 @ Switch Only
 hr Samo promijeni
+
+@ Above
+hr Iznad
+
+@ Below
+hr Ispod
+
+@ Close
+hr Zatvori
+
+@ Current floor
+hr Trenutačni kat
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+hr Povucite oružja za promjenu redoslijeda ili pritisnite Enter i koristite strelice
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+hr Povuci: Rotiraj  |  WASD: Pomak  |  Q/E: Kat  |  Kotačić: Zum  |  Tab: 3D/2D  |  F: Otkrij  |  R: Vrati  |  M/Esc: Zatvori
+
+@ Exit
+hr Izlaz
+
+@ Highest priority at top
+hr Najviši prioritet na vrhu
+
+@ Move
+hr Pomakni
+
+@ Orbit
+hr Rotiraj
+
+@ Pan
+hr Pomak
+
+@ Place
+hr Postavi
+
+@ Press A to pick up a weapon, then move it up or down
+hr Pritisnite A za odabir oružja, zatim ga pomaknite gore ili dolje
+
+@ Reorder
+hr Redoslijed
+
+@ Reset
+hr Vrati
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+hr Smjerni gumbi ili palica za pomicanje, A za postavljanje, B za odustajanje
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+hr Strelice gore i dolje za pomicanje, Enter za postavljanje, Esc za odustajanje
+
+@ View
+hr Prikaz
 
 # ==== hud.txt ====
 

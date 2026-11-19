@@ -1682,6 +1682,60 @@ lv Briesmoņi
 @ World & Pickups
 lv Pasaule un priekšmeti
 
+@ 3D wireframe
+lv 3D karkass
+
+@ Automap
+lv Autokarte
+
+@ Automap Settings
+lv Autokartes iestatījumi
+
+@ Better weapon
+lv Labāks ierocis
+
+@ Center overlay
+lv Pārklājums centrā
+
+@ Corner minimap
+lv Minikarte stūrī
+
+@ Display
+lv Attēlojums
+
+@ Explored only
+lv Tikai izpētītais
+
+@ Full map
+lv Visa karte
+
+@ Never
+lv Nekad
+
+@ Reveal
+lv Atklāšana
+
+@ Rotate with Player
+lv Pagriezt ar spēlētāju
+
+@ Show Markers
+lv Rādīt marķierus
+
+@ Top-down
+lv Skats no augšas
+
+@ View Mode
+lv Skata režīms
+
+@ Weapon Auto-Switch
+lv Automātiska ieroču maiņa
+
+@ Weapon Priority
+lv Ieroču prioritāte
+
+@ Zoom
+lv Tālummaiņa
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ lv Briesmoņu brīdinājumu, uzbrukumu, sāpju un nāves skaņu skaļums
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 lv Durvju, liftu, slēdžu, priekšmetu pacelšanas un citu pasaules efektu skaļums
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+lv 3D karkass sasver karti perspektīvā, lai parādītu augstumu; Skats no augšas zīmē plakanu virsskatu
+
+@ Arrange weapon priority order for Better weapon auto-switching
+lv Sakārtojiet ieroču prioritāti automātiskai pārslēgšanai uz Labāks ierocis
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+lv Konfigurējiet 3D karkasa autokartes skatu, attēlojumu, atklāšanas režīmu, tālummaiņu un marķierus
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+lv Minikarte stūrī ierāmē karti augšējā labajā stūrī; Pārklājums centrā uzliek caurspīdīgu karkasu pāri skatam
+
+@ Disabled while Weapon Auto-Switch is set to Never
+lv Atspējots, kamēr Automātiska ieroču maiņa ir iestatīta uz Nekad
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+lv Tikai izpētītais atklāj telpas, kad tās apmeklējat; Visa karte rāda visu līmeņa ģeometriju
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+lv Autokartē izceļ izejas, atslēgas, teleportus, aizslēgtas durvis un jūsu neseno ceļu
+
+@ Opacity of the automap lines and panel
+lv Autokartes līniju un paneļa necaurredzamība
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+lv Pagriež autokarti tā, lai jūsu skata virziens būtu uz augšu; izslēgts atstāj ziemeļus augšā
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+lv Spēles laikā rāda tiešraides 3D karkasa vai no augšas skatāmu autokarti; nospiediet M interaktīvai pilnekrāna kartei (tikai vienam spēlētājam un kooperatīvam)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+lv Paņemot ieroci: Nekad patur pašreizējo ieroci; Labāks ierocis pārslēdzas tikai tad, ja tam ir augstāka vieta Ieroču prioritātē
+
+@ Zoom level of the automap view
+lv Autokartes skata tālummaiņas līmenis
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ lv Kopēt datus
 
 @ Switch Only
 lv Tikai pārslēgt
+
+@ Above
+lv Virs
+
+@ Below
+lv Zem
+
+@ Close
+lv Aizvērt
+
+@ Current floor
+lv Pašreizējais stāvs
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+lv Velciet ieročus, lai pārkārtotu, vai nospiediet Enter un izmantojiet bulttaustiņus
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+lv Vilkt: Grozīt  |  WASD: Pārbīdīt  |  Q/E: Stāvs  |  Ritenītis: Tālummaiņa  |  Tab: 3D/2D  |  F: Atklāt  |  R: Atiestatīt  |  M/Esc: Aizvērt
+
+@ Exit
+lv Izeja
+
+@ Highest priority at top
+lv Augstākā prioritāte augšpusē
+
+@ Move
+lv Pārvietot
+
+@ Orbit
+lv Grozīt
+
+@ Pan
+lv Pārbīdīt
+
+@ Place
+lv Novietot
+
+@ Press A to pick up a weapon, then move it up or down
+lv Nospiediet A, lai paņemtu ieroci, tad pārvietojiet to augšup vai lejup
+
+@ Reorder
+lv Pārkārtot
+
+@ Reset
+lv Atiestatīt
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+lv Izmantojiet D-Pad vai sviru, lai pārvietotu, A – novietot, B – atcelt
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+lv Izmantojiet augšup un lejup bulttaustiņus, lai pārvietotu, Enter – novietot, Esc – atcelt
+
+@ View
+lv Skats
 
 # ==== hud.txt ====
 

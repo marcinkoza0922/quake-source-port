@@ -1682,6 +1682,60 @@ nl Monsters
 @ World & Pickups
 nl Wereld en voorwerpen
 
+@ 3D wireframe
+nl 3D-draadmodel
+
+@ Automap
+nl Autokaart
+
+@ Automap Settings
+nl Autokaartinstellingen
+
+@ Better weapon
+nl Beter wapen
+
+@ Center overlay
+nl Overlay in midden
+
+@ Corner minimap
+nl Minikaart in hoek
+
+@ Display
+nl Weergave
+
+@ Explored only
+nl Alleen verkend
+
+@ Full map
+nl Volledige kaart
+
+@ Never
+nl Nooit
+
+@ Reveal
+nl Onthullen
+
+@ Rotate with Player
+nl Meedraaien met speler
+
+@ Show Markers
+nl Markeringen tonen
+
+@ Top-down
+nl Bovenaanzicht
+
+@ View Mode
+nl Weergavemodus
+
+@ Weapon Auto-Switch
+nl Automatisch wapen wisselen
+
+@ Weapon Priority
+nl Wapenprioriteit
+
+@ Zoom
+nl Zoom
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ nl Volume van waarschuwingen, aanvallen, pijn en doodsgeluiden van monsters
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 nl Volume van deuren, liften, schakelaars, voorwerpen en andere wereldeffecten
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+nl 3D-draadmodel kantelt de kaart in perspectief voor hoogteverschillen; Bovenaanzicht tekent een plat bovenaanzicht
+
+@ Arrange weapon priority order for Better weapon auto-switching
+nl Stel de wapenprioriteit in voor automatisch wisselen naar Beter wapen
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+nl Stel de weergave, plaatsing, onthulling, zoom en markeringen van de 3D-autokaart in
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+nl Minikaart in hoek plaatst de kaart rechtsboven; Overlay in midden toont een transparant draadmodel over het beeld
+
+@ Disabled while Weapon Auto-Switch is set to Never
+nl Uitgeschakeld zolang Automatisch wapen wisselen op Nooit staat
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+nl Alleen verkend toont ruimtes zodra je ze bezoekt; Volledige kaart toont de hele levelgeometrie
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+nl Markeert uitgangen, sleutels, teleporters, gesloten deuren en je recente spoor op de autokaart
+
+@ Opacity of the automap lines and panel
+nl Dekking van de lijnen en het paneel van de autokaart
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+nl Draait de autokaart zodat je kijkrichting omhoog wijst; uit houdt het noorden boven
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+nl Toont tijdens het spelen een live 3D-draadmodel of bovenaanzicht; druk op M voor de interactieve kaart op volledig scherm (alleen singleplayer en co-op)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+nl Bij het oppakken van een wapen: Nooit behoudt je huidige wapen; Beter wapen wisselt alleen bij een hogere plaats in Wapenprioriteit
+
+@ Zoom level of the automap view
+nl Zoomniveau van de autokaartweergave
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ nl Gegevens kopiëren
 
 @ Switch Only
 nl Alleen wisselen
+
+@ Above
+nl Boven
+
+@ Below
+nl Onder
+
+@ Close
+nl Sluiten
+
+@ Current floor
+nl Huidige verdieping
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+nl Sleep wapens om te herschikken, of druk op Enter en gebruik de pijltoetsen
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+nl Slepen: Draaien  |  WASD: Verschuiven  |  Q/E: Verdieping  |  Wiel: Zoom  |  Tab: 3D/2D  |  F: Onthullen  |  R: Reset  |  M/Esc: Sluiten
+
+@ Exit
+nl Uitgang
+
+@ Highest priority at top
+nl Hoogste prioriteit bovenaan
+
+@ Move
+nl Verplaatsen
+
+@ Orbit
+nl Draaien
+
+@ Pan
+nl Verschuiven
+
+@ Place
+nl Plaatsen
+
+@ Press A to pick up a weapon, then move it up or down
+nl Druk op A om een wapen te pakken en verplaats het omhoog of omlaag
+
+@ Reorder
+nl Herschikken
+
+@ Reset
+nl Resetten
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+nl Gebruik D-pad of stick om te verplaatsen, A om te plaatsen, B om te annuleren
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+nl Gebruik pijl omhoog/omlaag om te verplaatsen, Enter om te plaatsen, Esc om te annuleren
+
+@ View
+nl Weergave
 
 # ==== hud.txt ====
 

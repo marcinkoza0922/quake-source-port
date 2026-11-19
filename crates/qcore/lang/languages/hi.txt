@@ -1682,6 +1682,60 @@ hi राक्षस
 @ World & Pickups
 hi दुनिया और वस्तुएँ
 
+@ 3D wireframe
+hi 3D वायरफ़्रेम
+
+@ Automap
+hi ऑटोमैप
+
+@ Automap Settings
+hi ऑटोमैप सेटिंग्स
+
+@ Better weapon
+hi बेहतर हथियार
+
+@ Center overlay
+hi मध्य ओवरले
+
+@ Corner minimap
+hi कोने में मिनीमैप
+
+@ Display
+hi प्रदर्शन
+
+@ Explored only
+hi केवल खोजा गया
+
+@ Full map
+hi पूरा मैप
+
+@ Never
+hi कभी नहीं
+
+@ Reveal
+hi प्रकटन
+
+@ Rotate with Player
+hi खिलाड़ी के साथ घुमाएँ
+
+@ Show Markers
+hi मार्कर दिखाएँ
+
+@ Top-down
+hi ऊपर से दृश्य
+
+@ View Mode
+hi दृश्य मोड
+
+@ Weapon Auto-Switch
+hi हथियार ऑटो-स्विच
+
+@ Weapon Priority
+hi हथियार प्राथमिकता
+
+@ Zoom
+hi ज़ूम
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ hi राक्षसों की चेतावनी, हमले, दर�
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 hi दरवाज़ों, लिफ़्ट, स्विच, वस्तुएँ उठाने और अन्य विश्व प्रभावों का वॉल्यूम
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+hi 3D वायरफ़्रेम ऊँचाई दिखाने के लिए मैप को परिप्रेक्ष्य में झुकाता है; ऊपर से दृश्य सपाट ऊपरी नक्शा दिखाता है
+
+@ Arrange weapon priority order for Better weapon auto-switching
+hi बेहतर हथियार ऑटो-स्विच के लिए हथियार प्राथमिकता क्रम व्यवस्थित करें
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+hi 3D वायरफ़्रेम ऑटोमैप दृश्य, प्रदर्शन, प्रकटन मोड, ज़ूम और मार्कर कॉन्फ़िगर करें
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+hi कोने में मिनीमैप मैप को ऊपर-दाएँ रखता है; मध्य ओवरले दृश्य के ऊपर पारदर्शी वायरफ़्रेम दिखाता है
+
+@ Disabled while Weapon Auto-Switch is set to Never
+hi जब हथियार ऑटो-स्विच 'कभी नहीं' पर सेट हो तो अक्षम रहता है
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+hi केवल खोजा गया आपके जाने पर कमरे दिखाता है; पूरा मैप पूरे स्तर की ज्यामिति दिखाता है
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+hi ऑटोमैप पर निकास, चाबियाँ, टेलीपोर्टर, बंद दरवाज़े और आपका हालिया रास्ता उजागर करता है
+
+@ Opacity of the automap lines and panel
+hi ऑटोमैप रेखाओं और पैनल की अपारदर्शिता
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+hi ऑटोमैप को घुमाता है ताकि आपकी देखने की दिशा ऊपर रहे; बंद रहने पर उत्तर ऊपर रहता है
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+hi खेलते समय लाइव 3D वायरफ़्रेम या ऊपर से ऑटोमैप दिखाता है; इंटरैक्टिव फ़ुल-स्क्रीन मैप के लिए M दबाएँ (केवल सिंगल प्लेयर और को-ऑप)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+hi हथियार उठाने पर: 'कभी नहीं' वर्तमान हथियार रखता है; 'बेहतर हथियार' तभी बदलता है जब हथियार प्राथमिकता में उसका स्थान ऊपर हो
+
+@ Zoom level of the automap view
+hi ऑटोमैप दृश्य का ज़ूम स्तर
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ hi डेटा कॉपी करें
 
 @ Switch Only
 hi केवल बदलें
+
+@ Above
+hi ऊपर
+
+@ Below
+hi नीचे
+
+@ Close
+hi बंद करें
+
+@ Current floor
+hi वर्तमान तल
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+hi क्रम बदलने के लिए हथियारों को खींचें, या Enter दबाकर तीर कुंजियाँ उपयोग करें
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+hi खींचें: घुमाएँ  |  WASD: सरकाएँ  |  Q/E: तल  |  व्हील: ज़ूम  |  Tab: 3D/2D  |  F: दिखाएँ  |  R: रीसेट  |  M/Esc: बंद
+
+@ Exit
+hi निकास
+
+@ Highest priority at top
+hi सबसे उच्च प्राथमिकता सबसे ऊपर
+
+@ Move
+hi सरकाएँ
+
+@ Orbit
+hi घुमाएँ
+
+@ Pan
+hi खिसकाएँ
+
+@ Place
+hi रखें
+
+@ Press A to pick up a weapon, then move it up or down
+hi हथियार उठाने के लिए A दबाएँ, फिर उसे ऊपर या नीचे ले जाएँ
+
+@ Reorder
+hi क्रम बदलें
+
+@ Reset
+hi रीसेट
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+hi हिलाने के लिए डी-पैड या स्टिक, रखने के लिए A, रद्द करने के लिए B उपयोग करें
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+hi हिलाने के लिए ऊपर और नीचे तीर, रखने के लिए Enter, रद्द करने के लिए Esc उपयोग करें
+
+@ View
+hi दृश्य
 
 # ==== hud.txt ====
 

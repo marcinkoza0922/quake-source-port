@@ -64,6 +64,12 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             }
             h.server.core.cvars.set("cl_addonslotdefaults", "1");
         }
+        if h.cv("cl_automapbind") < 1.0 {
+            if h.input.binding(b'm' as i32).is_none() {
+                h.input.set_binding(b'm' as i32, Some("automap"));
+            }
+            h.server.core.cvars.set("cl_automapbind", "1");
+        }
         if h.cv("cl_paddefaults") >= 1.0 {
             return;
         }
@@ -151,6 +157,20 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         h.menu.open(Screen::HudEditor);
         h.menu.hud_edit.open();
     });
+    c.add("automap", |h, a| {
+        if h.cl.signon != 4 || h.cl.intermission != 0 || h.cl.gametype == 1 || h.cv("deathmatch") != 0.0 {
+            h.automap.close_fullscreen();
+            return;
+        }
+        let pos = h.player_origin();
+        let yaw = h.cl.viewangles[1];
+        match a.argv(1) {
+            "0" | "off" => h.automap.close_fullscreen(),
+            "1" | "on" => h.automap.open_fullscreen(pos, yaw, &h.server.core.cvars),
+            _ => h.automap.toggle_fullscreen(pos, yaw, &h.server.core.cvars),
+        }
+        h.sync_key_dest();
+    });
     c.add("menu_options", |h, a| {
         use crate::menu::Page;
         let page = match a.argv(1).to_ascii_lowercase().as_str() {
@@ -162,6 +182,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "gyro" | "flick" => Some(Page::Gyro),
             "touch" | "touchscreen" => Some(Page::Touch),
             "autosave" => Some(Page::Autosave),
+            "weaponpriority" | "weapons" => Some(Page::WeaponPriority),
+            "automap" | "map" => Some(Page::Automap),
             "customize" => Some(Page::Customize),
             "newgamecustomize" => Some(Page::NewGameCustomize),
             "modifiers" => Some(Page::Modifiers),

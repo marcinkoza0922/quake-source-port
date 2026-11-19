@@ -288,6 +288,22 @@ impl Host {
                         if let Some((at, ts, color)) = captions {
                             self.captions.draw(&mut c, self.realtime, at, ts, color);
                         }
+                        if !hud.edit && !self.menu.active() && !self.automap.fullscreen
+                            && self.cl.gametype != 1 && self.server.core.cvars.value_of("deathmatch") == 0.0
+                        {
+                            let player_pos = Vec3::from_array(self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| e.origin));
+                            let header = crate::automap::HeaderInfo::default();
+                            self.automap.draw(
+                                &mut c,
+                                &self.server.core.cvars,
+                                player_pos,
+                                self.cl.viewangles[1],
+                                reserve,
+                                header,
+                                pad_ui,
+                                &glyphs,
+                            );
+                        }
                     }
                 }
                 // QC accepts the exit after 2 s (5 s in deathmatch).
@@ -304,11 +320,24 @@ impl Host {
             }
             let conback = pf("gfx/conback.lmp");
             let ingame = view.is_some() && self.cl.intermission == 0;
+            if ingame && self.automap.fullscreen && !self.menu.active()
+                && self.cl.gametype != 1 && self.server.core.cvars.value_of("deathmatch") == 0.0
+            {
+                let player_pos = Vec3::from_array(self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| e.origin));
+                let header = crate::automap::HeaderInfo {
+                    title: &self.cl.levelname,
+                    kills: self.cl.stats[qnet::protocol::STAT_MONSTERS],
+                    total_kills: self.cl.stats[qnet::protocol::STAT_TOTALMONSTERS],
+                    secrets: self.cl.stats[qnet::protocol::STAT_SECRETS],
+                    total_secrets: self.cl.stats[qnet::protocol::STAT_TOTALSECRETS],
+                };
+                self.automap.draw(&mut c, &self.server.core.cvars, player_pos, self.cl.viewangles[1], reserve, header, pad_ui, &glyphs);
+            }
             // Split screen draws center prints in each player's cell.
-            let center = ingame && !self.menu.active() && splits.is_empty();
+            let center = ingame && !self.menu.active() && !self.automap.fullscreen && splits.is_empty();
             if !(self.clean_shot && self.screenshot.is_some()) && self.thumb.is_none() {
                 // exported video keeps centerprints but not console messages
-                self.con.draw(&mut c, conback, ingame && !self.menu.active() && !exporting, center);
+                self.con.draw(&mut c, conback, ingame && !self.menu.active() && !self.automap.fullscreen && !exporting, center);
             }
             if self.server.core.sv.paused && view.is_some() {
                 let p = pf("gfx/pause.lmp");

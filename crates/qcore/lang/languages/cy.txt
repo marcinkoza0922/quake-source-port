@@ -1682,6 +1682,60 @@ cy Anghenfilod
 @ World & Pickups
 cy Byd ac Eitemau
 
+@ 3D wireframe
+cy Ffrâm weiren 3D
+
+@ Automap
+cy Awtomap
+
+@ Automap Settings
+cy Gosodiadau Awtomap
+
+@ Better weapon
+cy Arf well
+
+@ Center overlay
+cy Troshaen canol
+
+@ Corner minimap
+cy Map bach cornel
+
+@ Display
+cy Arddangos
+
+@ Explored only
+cy Archwiliwyd yn unig
+
+@ Full map
+cy Map llawn
+
+@ Never
+cy Byth
+
+@ Reveal
+cy Datgelu
+
+@ Rotate with Player
+cy Cylchdroi gyda'r Chwaraewr
+
+@ Show Markers
+cy Dangos Marcwyr
+
+@ Top-down
+cy Oddi uchod
+
+@ View Mode
+cy Modd Gweld
+
+@ Weapon Auto-Switch
+cy Awtonewid Arf
+
+@ Weapon Priority
+cy Blaenoriaeth Arfau
+
+@ Zoom
+cy Chwyddo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ cy Lefel rhybuddion, ymosodiadau, poen a marwolaeth anghenfilod
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 cy Lefel drysau, lifftiau, switshis, codi eitemau ac effeithiau byd eraill
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+cy Mae Ffrâm weiren 3D yn gogwyddo'r map mewn persbectif i ddangos fertigolrwydd; mae Oddi uchod yn tynnu golwg wastad o uwchben
+
+@ Arrange weapon priority order for Better weapon auto-switching
+cy Trefnwch drefn blaenoriaeth arfau ar gyfer awtonewid i Arf well
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+cy Ffurfweddu golwg, arddangos, modd datgelu, chwyddo a marcwyr yr awtomap ffrâm weiren 3D
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+cy Mae Map bach cornel yn fframio'r map ar y dde uchaf; mae Troshaen canol yn arnofio ffrâm weiren dryloyw dros yr olygfa
+
+@ Disabled while Weapon Auto-Switch is set to Never
+cy Analluogwyd tra bod Awtonewid Arf wedi'i osod i Byth
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+cy Mae Archwiliwyd yn unig yn datgelu ystafelloedd wrth i chi ymweld â nhw; mae Map llawn yn dangos geometreg gyfan y lefel
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+cy Yn amlygu allanfeydd, allweddi, teleportwyr, drysau dan glo a'ch trywydd diweddar ar yr awtomap
+
+@ Opacity of the automap lines and panel
+cy Didreiddedd llinellau a phanel yr awtomap
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+cy Yn cylchdroi'r awtomap fel bod eich cyfeiriad wynebu yn pwyntio i fyny; mae i ffwrdd yn cadw'r Gogledd ar y brig
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+cy Yn dangos awtomap byw ffrâm weiren 3D neu oddi uchod wrth chwarae; pwyswch M am y map rhyngweithiol sgrin lawn (un chwaraewr a chydweithredol yn unig)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+cy Wrth godi arf: mae Byth yn cadw eich arf presennol; dim ond os yw'n uwch ym Mlaenoriaeth Arfau y mae Arf well yn newid
+
+@ Zoom level of the automap view
+cy Lefel chwyddo golwg yr awtomap
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ cy Copïo Data
 
 @ Switch Only
 cy Newid yn Unig
+
+@ Above
+cy Uwchben
+
+@ Below
+cy Islaw
+
+@ Close
+cy Cau
+
+@ Current floor
+cy Llawr presennol
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+cy Llusgwch arfau i'w haildrefnu, neu pwyswch Enter a defnyddiwch y bysellau saeth
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+cy Llusgo: Cylchdroi  |  WASD: Symud  |  Q/E: Llawr  |  Olwyn: Chwyddo  |  Tab: 3D/2D  |  F: Datgelu  |  R: Ailosod  |  M/Esc: Cau
+
+@ Exit
+cy Allanfa
+
+@ Highest priority at top
+cy Blaenoriaeth uchaf ar y brig
+
+@ Move
+cy Symud
+
+@ Orbit
+cy Cylchdroi
+
+@ Pan
+cy Symud
+
+@ Place
+cy Gosod
+
+@ Press A to pick up a weapon, then move it up or down
+cy Pwyswch A i godi arf, yna symudwch ef i fyny neu i lawr
+
+@ Reorder
+cy Aildrefnu
+
+@ Reset
+cy Ailosod
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+cy Defnyddiwch D-Pad neu ffon i symud, A i osod, B i ganslo
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+cy Defnyddiwch saethau I Fyny ac I Lawr i symud, Enter i osod, Esc i ganslo
+
+@ View
+cy Golwg
 
 # ==== hud.txt ====
 

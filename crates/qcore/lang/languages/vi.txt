@@ -1682,6 +1682,60 @@ vi Quái vật
 @ World & Pickups
 vi Thế giới & Vật phẩm
 
+@ 3D wireframe
+vi Khung dây 3D
+
+@ Automap
+vi Bản đồ tự động
+
+@ Automap Settings
+vi Cài đặt bản đồ tự động
+
+@ Better weapon
+vi Vũ khí tốt hơn
+
+@ Center overlay
+vi Lớp phủ giữa
+
+@ Corner minimap
+vi Bản đồ nhỏ ở góc
+
+@ Display
+vi Hiển thị
+
+@ Explored only
+vi Chỉ vùng đã khám phá
+
+@ Full map
+vi Toàn bộ bản đồ
+
+@ Never
+vi Không bao giờ
+
+@ Reveal
+vi Hiển lộ
+
+@ Rotate with Player
+vi Xoay theo người chơi
+
+@ Show Markers
+vi Hiện điểm đánh dấu
+
+@ Top-down
+vi Nhìn từ trên xuống
+
+@ View Mode
+vi Chế độ xem
+
+@ Weapon Auto-Switch
+vi Tự động đổi vũ khí
+
+@ Weapon Priority
+vi Thứ tự ưu tiên vũ khí
+
+@ Zoom
+vi Thu phóng
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ vi Âm lượng tiếng phát hiện, tấn công, đau đớn và chết của 
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 vi Âm lượng cửa, thang máy, công tắc, nhặt vật phẩm và hiệu ứng thế giới khác
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+vi Khung dây 3D nghiêng bản đồ theo phối cảnh để thể hiện độ cao; Nhìn từ trên xuống vẽ góc nhìn phẳng từ trên
+
+@ Arrange weapon priority order for Better weapon auto-switching
+vi Sắp xếp thứ tự ưu tiên vũ khí cho chế độ tự đổi sang Vũ khí tốt hơn
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+vi Thiết lập chế độ xem, hiển thị, kiểu hiển lộ, thu phóng và điểm đánh dấu của bản đồ tự động khung dây 3D
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+vi Bản đồ nhỏ ở góc đặt bản đồ vào khung trên bên phải; Lớp phủ giữa phủ khung dây trong suốt lên màn hình
+
+@ Disabled while Weapon Auto-Switch is set to Never
+vi Bị vô hiệu hóa khi Tự động đổi vũ khí đặt là Không bao giờ
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+vi Chỉ vùng đã khám phá chỉ hiện các phòng khi bạn đi qua; Toàn bộ bản đồ hiện toàn bộ hình học màn chơi
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+vi Làm nổi bật lối ra, chìa khóa, máy dịch chuyển, cửa khóa và dấu vết gần đây trên bản đồ tự động
+
+@ Opacity of the automap lines and panel
+vi Độ mờ đục của đường nét và bảng bản đồ tự động
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+vi Xoay bản đồ tự động để hướng nhìn của bạn hướng lên trên; tắt sẽ giữ hướng Bắc ở trên
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+vi Hiện bản đồ tự động khung dây 3D hoặc nhìn từ trên xuống khi chơi; nhấn M để mở bản đồ toàn màn hình tương tác (chỉ chơi đơn và co-op)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+vi Khi nhặt vũ khí: Không bao giờ giữ nguyên vũ khí hiện tại; Vũ khí tốt hơn chỉ đổi nếu vũ khí đó xếp cao hơn trong Thứ tự ưu tiên vũ khí
+
+@ Zoom level of the automap view
+vi Mức thu phóng của góc nhìn bản đồ tự động
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ vi Sao chép dữ liệu
 
 @ Switch Only
 vi Chỉ chuyển đổi
+
+@ Above
+vi Phía trên
+
+@ Below
+vi Phía dưới
+
+@ Close
+vi Đóng
+
+@ Current floor
+vi Tầng hiện tại
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+vi Kéo vũ khí để sắp xếp lại, hoặc nhấn Enter và dùng phím mũi tên
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+vi Kéo: Xoay quanh  |  WASD: Dịch chuyển  |  Q/E: Tầng  |  Cuộn: Thu phóng  |  Tab: 3D/2D  |  F: Hiển lộ  |  R: Đặt lại  |  M/Esc: Đóng
+
+@ Exit
+vi Lối ra
+
+@ Highest priority at top
+vi Ưu tiên cao nhất ở trên cùng
+
+@ Move
+vi Di chuyển
+
+@ Orbit
+vi Xoay quanh
+
+@ Pan
+vi Dịch chuyển
+
+@ Place
+vi Đặt
+
+@ Press A to pick up a weapon, then move it up or down
+vi Nhấn A để chọn vũ khí, rồi di chuyển lên hoặc xuống
+
+@ Reorder
+vi Sắp xếp lại
+
+@ Reset
+vi Đặt lại
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+vi Dùng D-Pad hoặc cần để di chuyển, A để đặt, B để hủy
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+vi Dùng mũi tên Lên và Xuống để di chuyển, Enter để đặt, Esc để hủy
+
+@ View
+vi Xem
 
 # ==== hud.txt ====
 

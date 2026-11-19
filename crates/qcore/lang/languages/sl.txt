@@ -1682,6 +1682,60 @@ sl Pošasti
 @ World & Pickups
 sl Svet in predmeti
 
+@ 3D wireframe
+sl 3D žični model
+
+@ Automap
+sl Samodejni zemljevid
+
+@ Automap Settings
+sl Nastavitve samodejnega zemljevida
+
+@ Better weapon
+sl Boljše orožje
+
+@ Center overlay
+sl Sredinsko prekrivanje
+
+@ Corner minimap
+sl Kotni minizemljevid
+
+@ Display
+sl Prikaz
+
+@ Explored only
+sl Samo raziskano
+
+@ Full map
+sl Celoten zemljevid
+
+@ Never
+sl Nikoli
+
+@ Reveal
+sl Razkritje
+
+@ Rotate with Player
+sl Zasukaj z igralcem
+
+@ Show Markers
+sl Prikaži oznake
+
+@ Top-down
+sl Pogled od zgoraj
+
+@ View Mode
+sl Način pogleda
+
+@ Weapon Auto-Switch
+sl Samodejna menjava orožja
+
+@ Weapon Priority
+sl Prednost orožij
+
+@ Zoom
+sl Povečava
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ sl Glasnost opozoril, napadov, bolečine in smrti pošasti
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 sl Glasnost vrat, dvigal, stikal, pobiranja predmetov in drugih učinkov sveta
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+sl 3D žični model nagne zemljevid v perspektivi za prikaz višin; Pogled od zgoraj nariše raven pogled od zgoraj
+
+@ Arrange weapon priority order for Better weapon auto-switching
+sl Razvrstite prednostni vrstni red orožij za samodejno menjavo na Boljše orožje
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+sl Nastavite pogled, prikaz, način razkritja, povečavo in oznake 3D žičnega samodejnega zemljevida
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+sl Kotni minizemljevid uokviri zemljevid zgoraj desno; Sredinsko prekrivanje prikaže prosojen žični model čez pogled
+
+@ Disabled while Weapon Auto-Switch is set to Never
+sl Onemogočeno, dokler je Samodejna menjava orožja nastavljena na Nikoli
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+sl Samo raziskano razkriva prostore sproti ob obisku; Celoten zemljevid prikaže celotno geometrijo ravni
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+sl Na samodejnem zemljevidu poudari izhode, ključe, teleporterje, zaklenjena vrata in vašo nedavno sled
+
+@ Opacity of the automap lines and panel
+sl Prekrivnost črt in plošče samodejnega zemljevida
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+sl Zasuka samodejni zemljevid tako, da smer vašega pogleda kaže navzgor; izklopljeno ohrani sever na vrhu
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+sl Med igranjem prikazuje živi 3D žični ali zgornji samodejni zemljevid; pritisnite M za interaktivni celozaslonski zemljevid (samo en igralec in sodelovalno)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+sl Ob pobiranju orožja: Nikoli obdrži trenutno orožje; Boljše orožje preklopi le, če je višje uvrščeno v Prednosti orožij
+
+@ Zoom level of the automap view
+sl Raven povečave pogleda samodejnega zemljevida
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ sl Kopiraj podatke
 
 @ Switch Only
 sl Samo preklopi
+
+@ Above
+sl Nad
+
+@ Below
+sl Pod
+
+@ Close
+sl Zapri
+
+@ Current floor
+sl Trenutno nadstropje
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+sl Povlecite orožja za prerazporeditev ali pritisnite Enter in uporabite puščične tipke
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+sl Vlečenje: Vrtenje  |  WASD: Premik  |  Q/E: Nadstropje  |  Kolešček: Povečava  |  Tab: 3D/2D  |  F: Razkrij  |  R: Ponastavi  |  M/Esc: Zapri
+
+@ Exit
+sl Izhod
+
+@ Highest priority at top
+sl Najvišja prednost na vrhu
+
+@ Move
+sl Premakni
+
+@ Orbit
+sl Vrtenje
+
+@ Pan
+sl Premik
+
+@ Place
+sl Postavi
+
+@ Press A to pick up a weapon, then move it up or down
+sl Pritisnite A, da poberete orožje, nato ga premaknite gor ali dol
+
+@ Reorder
+sl Prerazporedi
+
+@ Reset
+sl Ponastavi
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+sl Uporabite D-Pad ali palico za premikanje, A za postavitev, B za preklic
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+sl Uporabite puščici gor in dol za premikanje, Enter za postavitev, Esc za preklic
+
+@ View
+sl Pogled
 
 # ==== hud.txt ====
 

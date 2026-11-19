@@ -1682,6 +1682,60 @@ id Monster
 @ World & Pickups
 id Dunia & Item
 
+@ 3D wireframe
+id Rangka kawat 3D
+
+@ Automap
+id Peta Otomatis
+
+@ Automap Settings
+id Pengaturan Peta Otomatis
+
+@ Better weapon
+id Senjata lebih baik
+
+@ Center overlay
+id Lapisan tengah
+
+@ Corner minimap
+id Peta mini sudut
+
+@ Display
+id Tampilan
+
+@ Explored only
+id Hanya yang dijelajahi
+
+@ Full map
+id Peta penuh
+
+@ Never
+id Tidak pernah
+
+@ Reveal
+id Penyingkapan
+
+@ Rotate with Player
+id Putar bersama Pemain
+
+@ Show Markers
+id Tampilkan Penanda
+
+@ Top-down
+id Tampak atas
+
+@ View Mode
+id Mode Tampilan
+
+@ Weapon Auto-Switch
+id Ganti Senjata Otomatis
+
+@ Weapon Priority
+id Prioritas Senjata
+
+@ Zoom
+id Perbesaran
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ id Volume peringatan, serangan, kesakitan, dan kematian monster
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 id Volume pintu, lift, sakelar, pengambilan item, dan efek dunia lainnya
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+id Rangka kawat 3D memiringkan peta secara perspektif untuk menunjukkan ketinggian; Tampak atas menggambar tampilan datar dari atas
+
+@ Arrange weapon priority order for Better weapon auto-switching
+id Atur urutan prioritas senjata untuk penggantian otomatis ke Senjata lebih baik
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+id Atur tampilan peta otomatis rangka kawat 3D, letak, mode penyingkapan, perbesaran, dan penanda
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+id Peta mini sudut membingkai peta di kanan atas; Lapisan tengah menampilkan rangka kawat transparan di atas tampilan
+
+@ Disabled while Weapon Auto-Switch is set to Never
+id Dinonaktifkan saat Ganti Senjata Otomatis disetel ke Tidak pernah
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+id Hanya yang dijelajahi membuka ruangan saat Anda mengunjunginya; Peta penuh menampilkan seluruh geometri level
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+id Menyorot pintu keluar, kunci, teleporter, pintu terkunci, dan jejak terbaru Anda di peta otomatis
+
+@ Opacity of the automap lines and panel
+id Opasitas garis dan panel peta otomatis
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+id Memutar peta otomatis agar arah hadap Anda menghadap ke atas; nonaktif menjaga arah utara tetap di atas
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+id Menampilkan peta otomatis rangka kawat 3D atau tampak atas saat bermain; tekan M untuk peta layar penuh interaktif (hanya pemain tunggal dan co-op)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+id Saat mengambil senjata: Tidak pernah mempertahankan senjata saat ini; Senjata lebih baik hanya beralih jika peringkatnya lebih tinggi di Prioritas Senjata
+
+@ Zoom level of the automap view
+id Tingkat perbesaran tampilan peta otomatis
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ id Salin Data
 
 @ Switch Only
 id Ganti Saja
+
+@ Above
+id Di atas
+
+@ Below
+id Di bawah
+
+@ Close
+id Tutup
+
+@ Current floor
+id Lantai saat ini
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+id Seret senjata untuk mengurutkan ulang, atau tekan Enter dan gunakan tombol panah
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+id Seret: Putar  |  WASD: Geser  |  Q/E: Lantai  |  Roda: Zoom  |  Tab: 3D/2D  |  F: Singkap  |  R: Reset  |  M/Esc: Tutup
+
+@ Exit
+id Keluar
+
+@ Highest priority at top
+id Prioritas tertinggi di atas
+
+@ Move
+id Pindah
+
+@ Orbit
+id Putar
+
+@ Pan
+id Geser
+
+@ Place
+id Letakkan
+
+@ Press A to pick up a weapon, then move it up or down
+id Tekan A untuk memilih senjata, lalu pindahkan ke atas atau bawah
+
+@ Reorder
+id Urutkan
+
+@ Reset
+id Reset
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+id Gunakan D-Pad atau stik untuk memindah, A untuk meletakkan, B untuk batal
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+id Gunakan panah Atas dan Bawah untuk memindah, Enter untuk meletakkan, Esc untuk batal
+
+@ View
+id Tampilan
 
 # ==== hud.txt ====
 

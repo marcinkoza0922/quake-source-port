@@ -1682,6 +1682,60 @@ fil Mga Halimaw
 @ World & Pickups
 fil Mundo at Item
 
+@ 3D wireframe
+fil 3D wireframe
+
+@ Automap
+fil Automap
+
+@ Automap Settings
+fil Mga Setting ng Automap
+
+@ Better weapon
+fil Mas magandang armas
+
+@ Center overlay
+fil Overlay sa gitna
+
+@ Corner minimap
+fil Minimap sa sulok
+
+@ Display
+fil Pagpapakita
+
+@ Explored only
+fil Mga nalibot lang
+
+@ Full map
+fil Buong mapa
+
+@ Never
+fil Huwag kailanman
+
+@ Reveal
+fil Pagpapakita ng Mapa
+
+@ Rotate with Player
+fil Umikot kasama ng Manlalaro
+
+@ Show Markers
+fil Ipakita ang mga Pananda
+
+@ Top-down
+fil Tanaw mula itaas
+
+@ View Mode
+fil Mode ng Tanaw
+
+@ Weapon Auto-Switch
+fil Auto-Palit ng Armas
+
+@ Weapon Priority
+fil Prayoridad ng Armas
+
+@ Zoom
+fil Zoom
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ fil Lakas ng babala, atake, sakit at pagkamatay ng mga halimaw
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 fil Lakas ng mga pinto, lift, switch, pagkuha ng item at iba pang tunog ng mundo
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+fil Ikinikiling ng 3D wireframe ang mapa sa perspektiba upang ipakita ang taas; gumuguhit ang Tanaw mula itaas ng patag na tanaw sa ibabaw
+
+@ Arrange weapon priority order for Better weapon auto-switching
+fil Ayusin ang pagkakasunod-sunod ng prayoridad ng armas para sa awtomatikong paglipat sa Mas magandang armas
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+fil I-configure ang tanaw ng 3D wireframe automap, pagpapakita, mode ng pagpapakita ng mapa, zoom at mga pananda
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+fil Inilalagay ng Minimap sa sulok ang mapa sa kanang itaas; nagpapalutang ang Overlay sa gitna ng malinaw na wireframe sa ibabaw ng tanaw
+
+@ Disabled while Weapon Auto-Switch is set to Never
+fil Naka-disable habang nakatakda sa Huwag kailanman ang Auto-Palit ng Armas
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+fil Ipinapakita ng Mga nalibot lang ang mga silid habang binibisita mo; ipinapakita ng Buong mapa ang buong heometriya ng antas
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+fil Binibigyang-diin ang mga labasan, susi, teleporter, nakakandadong pinto at ang iyong kamakailang daan sa automap
+
+@ Opacity of the automap lines and panel
+fil Opacity ng mga linya at panel ng automap
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+fil Iniikot ang automap upang nakaturo pataas ang direksyon ng tingin mo; pinananatiling nasa itaas ang hilaga kapag naka-off
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+fil Nagpapakita ng live na 3D wireframe o tanaw mula itaas na automap habang naglalaro; pindutin ang M para sa interaktibong full-screen na mapa (single player at co-op lang)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+fil Kapag dumampot ng armas: pinananatili ng Huwag kailanman ang kasalukuyan mong armas; lilipat lang ang Mas magandang armas kung mas mataas ito sa Prayoridad ng Armas
+
+@ Zoom level of the automap view
+fil Antas ng zoom ng tanaw ng automap
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ fil Kopyahin ang Data
 
 @ Switch Only
 fil Lumipat Lang
+
+@ Above
+fil Sa itaas
+
+@ Below
+fil Sa ibaba
+
+@ Close
+fil Isara
+
+@ Current floor
+fil Kasalukuyang palapag
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+fil I-drag ang mga armas upang ayusin muli, o pindutin ang Enter at gamitin ang mga arrow key
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+fil I-drag: Ikot  |  WASD: Igalaw  |  Q/E: Palapag  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Ilantad  |  R: I-reset  |  M/Esc: Isara
+
+@ Exit
+fil Labasan
+
+@ Highest priority at top
+fil Pinakamataas na prayoridad sa itaas
+
+@ Move
+fil Ilipat
+
+@ Orbit
+fil Ikot
+
+@ Pan
+fil Igalaw
+
+@ Place
+fil Ilagay
+
+@ Press A to pick up a weapon, then move it up or down
+fil Pindutin ang A upang pumili ng armas, pagkatapos ay ilipat ito pataas o pababa
+
+@ Reorder
+fil Ayusin muli
+
+@ Reset
+fil I-reset
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+fil Gamitin ang D-Pad o stick upang ilipat, A upang ilagay, B upang kanselahin
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+fil Gamitin ang Pataas at Pababang arrow upang ilipat, Enter upang ilagay, Esc upang kanselahin
+
+@ View
+fil Tanaw
 
 # ==== hud.txt ====
 

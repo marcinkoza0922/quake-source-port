@@ -146,7 +146,7 @@ pub fn draw_text(c: &mut Canvas, pf: &mut PicFn, font: Font, size: f32, (x, y): 
 /// Multiplies the opacity of `list`'s draws by `a`.
 fn fade_list(list: &mut [Draw2D], a: f32) {
     for d in list {
-        if let Draw2D::Pic { color, .. } | Draw2D::Char { color, .. } | Draw2D::Fill { color, .. } = d {
+        if let Draw2D::Pic { color, .. } | Draw2D::Char { color, .. } | Draw2D::Fill { color, .. } | Draw2D::Line { color, .. } = d {
             color[3] *= a;
         }
     }

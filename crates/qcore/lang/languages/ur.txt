@@ -1682,6 +1682,60 @@ ur عفریت
 @ World & Pickups
 ur دنیا اور اشیاء
 
+@ 3D wireframe
+ur 3D وائر فریم
+
+@ Automap
+ur آٹو میپ
+
+@ Automap Settings
+ur آٹو میپ ترتیبات
+
+@ Better weapon
+ur بہتر ہتھیار
+
+@ Center overlay
+ur درمیانی اوورلے
+
+@ Corner minimap
+ur کونے کا منی میپ
+
+@ Display
+ur ڈسپلے
+
+@ Explored only
+ur صرف دریافت شدہ
+
+@ Full map
+ur مکمل نقشہ
+
+@ Never
+ur کبھی نہیں
+
+@ Reveal
+ur ظاہر کرنا
+
+@ Rotate with Player
+ur کھلاڑی کے ساتھ گھمائیں
+
+@ Show Markers
+ur نشانات دکھائیں
+
+@ Top-down
+ur اوپر سے منظر
+
+@ View Mode
+ur منظر کا انداز
+
+@ Weapon Auto-Switch
+ur ہتھیار خودکار تبدیلی
+
+@ Weapon Priority
+ur ہتھیاروں کی ترجیح
+
+@ Zoom
+ur زوم
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ ur عفریتوں کے الرٹ، حملوں، درد اور موت کی آوا�
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 ur دروازوں، لفٹوں، سوئچز، اشیاء اٹھانے اور دنیا کے دیگر اثرات کا والیوم
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+ur 3D وائر فریم بلندی دکھانے کے لیے نقشے کو جھکاتا ہے؛ اوپر سے منظر سیدھا اوپری نقشہ دکھاتا ہے
+
+@ Arrange weapon priority order for Better weapon auto-switching
+ur بہتر ہتھیار پر خودکار تبدیلی کے لیے ہتھیاروں کی ترجیح ترتیب دیں
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+ur 3D وائر فریم آٹو میپ کا منظر، ڈسپلے، ظاہر کرنے کا انداز، زوم اور نشانات ترتیب دیں
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+ur کونے کا منی میپ نقشہ اوپر دائیں جانب رکھتا ہے؛ درمیانی اوورلے منظر پر شفاف وائر فریم دکھاتا ہے
+
+@ Disabled while Weapon Auto-Switch is set to Never
+ur جب ہتھیار خودکار تبدیلی کبھی نہیں پر ہو تو یہ غیر فعال ہوتا ہے
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+ur صرف دریافت شدہ آپ کے جانے پر کمرے دکھاتا ہے؛ مکمل نقشہ پورے لیول کی ساخت دکھاتا ہے
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+ur آٹو میپ پر راستوں، چابیوں، ٹیلی پورٹرز، مقفل دروازوں اور آپ کے حالیہ راستے کو نمایاں کرتا ہے
+
+@ Opacity of the automap lines and panel
+ur آٹو میپ کی لکیروں اور پینل کی غیر شفافیت
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+ur آٹو میپ کو گھماتا ہے تاکہ آپ کے دیکھنے کی سمت اوپر رہے؛ بند رکھنے پر شمال اوپر رہتا ہے
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+ur کھیلتے وقت لائیو 3D وائر فریم یا اوپر سے آٹو میپ دکھاتا ہے؛ فل اسکرین نقشے کے لیے M دبائیں (صرف سنگل پلیئر اور کو-آپ)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+ur ہتھیار اٹھاتے وقت: کبھی نہیں موجودہ ہتھیار رکھتا ہے؛ بہتر ہتھیار صرف تب بدلتا ہے جب وہ ہتھیاروں کی ترجیح میں اوپر ہو
+
+@ Zoom level of the automap view
+ur آٹو میپ منظر کے زوم کی سطح
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ ur ڈیٹا کاپی کریں
 
 @ Switch Only
 ur صرف تبدیل کریں
+
+@ Above
+ur اوپر
+
+@ Below
+ur نیچے
+
+@ Close
+ur بند کریں
+
+@ Current floor
+ur موجودہ منزل
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+ur ترتیب بدلنے کے لیے ہتھیار گھسیٹیں، یا Enter دبا کر تیر والے بٹن استعمال کریں
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+ur گھسیٹیں: گھمائیں  |  WASD: سرکائیں  |  Q/E: منزل  |  وہیل: زوم  |  Tab: 3D/2D  |  F: ظاہر  |  R: ری سیٹ  |  M/Esc: بند
+
+@ Exit
+ur خروج
+
+@ Highest priority at top
+ur سب سے زیادہ ترجیح اوپر
+
+@ Move
+ur منتقل کریں
+
+@ Orbit
+ur گھمائیں
+
+@ Pan
+ur سرکائیں
+
+@ Place
+ur رکھیں
+
+@ Press A to pick up a weapon, then move it up or down
+ur ہتھیار اٹھانے کے لیے A دبائیں، پھر اسے اوپر یا نیچے لے جائیں
+
+@ Reorder
+ur ترتیب بدلیں
+
+@ Reset
+ur ری سیٹ
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+ur منتقل کرنے کے لیے ڈی پیڈ یا اسٹک، رکھنے کے لیے A، منسوخ کرنے کے لیے B استعمال کریں
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+ur منتقل کرنے کے لیے اوپر اور نیچے تیر، رکھنے کے لیے Enter، منسوخ کرنے کے لیے Esc استعمال کریں
+
+@ View
+ur منظر
 
 # ==== hud.txt ====
 

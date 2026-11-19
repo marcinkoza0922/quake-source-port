@@ -1682,6 +1682,60 @@ nb Monstre
 @ World & Pickups
 nb Verden og gjenstander
 
+@ 3D wireframe
+nb 3D-trådramme
+
+@ Automap
+nb Autokart
+
+@ Automap Settings
+nb Innstillinger for autokart
+
+@ Better weapon
+nb Bedre våpen
+
+@ Center overlay
+nb Sentrert overlegg
+
+@ Corner minimap
+nb Hjørneminikart
+
+@ Display
+nb Visning
+
+@ Explored only
+nb Kun utforsket
+
+@ Full map
+nb Fullt kart
+
+@ Never
+nb Aldri
+
+@ Reveal
+nb Avdekking
+
+@ Rotate with Player
+nb Roter med spilleren
+
+@ Show Markers
+nb Vis markører
+
+@ Top-down
+nb Ovenfra
+
+@ View Mode
+nb Visningsmodus
+
+@ Weapon Auto-Switch
+nb Auto-våpenbytte
+
+@ Weapon Priority
+nb Våpenprioritet
+
+@ Zoom
+nb Zoom
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ nb Volum på monstres varsler, angrep, smerte og dødslyder
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 nb Volum på dører, heiser, brytere, gjenstander og andre verdenseffekter
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+nb 3D-trådramme vipper kartet i perspektiv for å vise høyde; Ovenfra tegner en flat oversikt
+
+@ Arrange weapon priority order for Better weapon auto-switching
+nb Sett opp våpenprioritet for automatisk bytte til Bedre våpen
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+nb Tilpass visning, plassering, avdekking, zoom og markører for 3D-trådrammekartet
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+nb Hjørneminikart rammer inn kartet øverst til høyre; Sentrert overlegg legger en gjennomsiktig trådramme over bildet
+
+@ Disabled while Weapon Auto-Switch is set to Never
+nb Deaktivert mens Auto-våpenbytte står på Aldri
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+nb Kun utforsket avdekker rom etter hvert som du besøker dem; Fullt kart viser hele brettets geometri
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+nb Fremhever utganger, nøkler, teleportere, låste dører og ditt nyeste spor på autokartet
+
+@ Opacity of the automap lines and panel
+nb Dekkevne for autokartets linjer og panel
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+nb Roterer autokartet så blikkretningen din peker opp; av holder nord øverst
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+nb Viser et aktivt 3D-trådramme- eller ovenfra-autokart mens du spiller; trykk M for interaktivt fullskjermskart (kun énspiller og samarbeid)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+nb Når du plukker opp et våpen: Aldri beholder nåværende våpen; Bedre våpen bytter bare hvis det står høyere i Våpenprioritet
+
+@ Zoom level of the automap view
+nb Zoomnivå for autokartvisningen
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ nb Kopier data
 
 @ Switch Only
 nb Bare bytt
+
+@ Above
+nb Over
+
+@ Below
+nb Under
+
+@ Close
+nb Lukk
+
+@ Current floor
+nb Nåværende etasje
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+nb Dra våpen for å endre rekkefølge, eller trykk Enter og bruk piltastene
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+nb Dra: Roter  |  WASD: Panorer  |  Q/E: Etasje  |  Hjul: Zoom  |  Tab: 3D/2D  |  F: Avdekk  |  R: Tilbakestill  |  M/Esc: Lukk
+
+@ Exit
+nb Utgang
+
+@ Highest priority at top
+nb Høyeste prioritet øverst
+
+@ Move
+nb Flytt
+
+@ Orbit
+nb Roter
+
+@ Pan
+nb Panorer
+
+@ Place
+nb Plasser
+
+@ Press A to pick up a weapon, then move it up or down
+nb Trykk A for å velge et våpen, og flytt det deretter opp eller ned
+
+@ Reorder
+nb Endre rekkefølge
+
+@ Reset
+nb Tilbakestill
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+nb Bruk D-Pad eller spak til å flytte, A til å plassere, B til å avbryte
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+nb Bruk pil opp og ned til å flytte, Enter til å plassere, Esc til å avbryte
+
+@ View
+nb Visning
 
 # ==== hud.txt ====
 

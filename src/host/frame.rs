@@ -205,6 +205,16 @@ impl Host {
             let (ls, rs) = self.input.sticks();
             self.menu.hud_edit.pad_stick(ls, rs, dt as f32, &mut self.server.core.cvars);
         }
+        self.automap.sync_level(&self.level.mapname, self.level.bsp.as_ref());
+        let dm = self.cl.gametype == 1 || self.cv("deathmatch") != 0.0;
+        if dm || self.cl.signon != 4 || self.cl.intermission != 0 {
+            self.automap.close_fullscreen();
+        } else {
+            self.automap.track_player(self.level.bsp.as_ref(), self.player_origin());
+            if self.automap.fullscreen && !self.menu.active() {
+                self.automap.update_controls(dt as f32, &self.input);
+            }
+        }
 
         self.prof_mark(0);
         // input (every frame, for smooth view angles)
@@ -248,7 +258,15 @@ impl Host {
         if let Some(weapon) = choice {
             self.toy.select(weapon, &self.cl, &mut impulse);
         }
-        if impulse != 0 { self.pend_impulse = impulse; }
+        if impulse != 0 {
+            self.pend_impulse = impulse;
+            self.remote_wswitch.note_impulse(impulse, self.realtime);
+        }
+        if self.local.is_none() && self.demo.is_none() && self.pend_impulse == 0
+            && let Some(imp) = self.remote_wswitch.check(&self.cl, &self.server.core.cvars, self.realtime)
+        {
+            self.pend_impulse = imp;
+        }
         self.guest_moves(ft);
         self.bullet_time_frame(dt, in_game && alive);
         let timescale = (self.wheel_timescale() * if self.bullet_time.active { 0.2 } else { 1.0 }) as f64;
@@ -352,8 +370,8 @@ impl Host {
             // Keep QC localcmd text for the shared host Cbuf (see exec_cbuf).
             let t = self.server.take_text();
             self.cbuf.add_text(&t);
-            // Ironwail: single player only advances while not in the menu.
-            let hold = (self.server.core.maxclients() == 1 && self.menu.active()) || self.hitstop_hold();
+            // Ironwail: single player only advances while not in the menu or fullscreen automap.
+            let hold = (self.server.core.maxclients() == 1 && (self.menu.active() || self.automap.fullscreen)) || self.hitstop_hold();
             self.server.frame_held(sdt, hold);
             if let Some(e) = self.server.error() {
                 let msg = format!("Host_Error: {e}\n");

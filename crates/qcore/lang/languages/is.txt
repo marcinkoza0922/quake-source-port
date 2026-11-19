@@ -1682,6 +1682,60 @@ is Skrímsli
 @ World & Pickups
 is Heimur og hlutir
 
+@ 3D wireframe
+is 3D-vírnet
+
+@ Automap
+is Sjálfvirkt kort
+
+@ Automap Settings
+is Stillingar sjálfvirks korts
+
+@ Better weapon
+is Betra vopn
+
+@ Center overlay
+is Yfirlag í miðju
+
+@ Corner minimap
+is Smákort í horni
+
+@ Display
+is Birting
+
+@ Explored only
+is Aðeins kannað
+
+@ Full map
+is Fullt kort
+
+@ Never
+is Aldrei
+
+@ Reveal
+is Afhjúpun
+
+@ Rotate with Player
+is Snúa með leikmanni
+
+@ Show Markers
+is Sýna merki
+
+@ Top-down
+is Yfirlit að ofan
+
+@ View Mode
+is Sýnarhamur
+
+@ Weapon Auto-Switch
+is Sjálfvirk vopnaskipti
+
+@ Weapon Priority
+is Forgangsröð vopna
+
+@ Zoom
+is Aðdráttur
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ is Hljóðstyrkur viðvarana, árása, sársauka og dauðahljóða skrímsla
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 is Hljóðstyrkur dyra, lyfta, rofa, hlutatöku og annarra heimshljóða
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+is 3D-vírnet hallar kortinu í fjarvídd til að sýna hæðarmun; Yfirlit að ofan teiknar flatt yfirlitskort
+
+@ Arrange weapon priority order for Better weapon auto-switching
+is Raða forgangsröð vopna fyrir sjálfvirk skipti yfir í Betra vopn
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+is Stilla sýn, birtingu, afhjúpunarham, aðdrátt og merki fyrir 3D-vírnetskort
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+is Smákort í horni rammar kortið inn efst til hægri; Yfirlag í miðju leggur gegnsætt vírnet yfir sýnina
+
+@ Disabled while Weapon Auto-Switch is set to Never
+is Óvirkt meðan Sjálfvirk vopnaskipti eru stillt á Aldrei
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+is Aðeins kannað afhjúpar herbergi þegar þú heimsækir þau; Fullt kort sýnir alla rúmfræði borðsins
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+is Auðkennir útganga, lykla, fjarflytjara, læstar hurðir og nýlega slóð þína á kortinu
+
+@ Opacity of the automap lines and panel
+is Ógegnsæi lína og spjalds sjálfvirks korts
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+is Snýr sjálfvirka kortinu þannig að áttin sem þú horfir í vísi upp; af heldur norðri efst
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+is Sýnir lifandi 3D-vírnet eða yfirlit að ofan meðan spilað er; ýttu á M fyrir gagnvirkt heilskjás kort (aðeins einspilun og samvinna)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+is Þegar vopn er tekið upp: Aldrei heldur núverandi vopni; Betra vopn skiptir aðeins ef það er ofar í Forgangsröð vopna
+
+@ Zoom level of the automap view
+is Aðdráttarstig kortsýnar
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ is Afrita gögn
 
 @ Switch Only
 is Aðeins skipta
+
+@ Above
+is Fyrir ofan
+
+@ Below
+is Fyrir neðan
+
+@ Close
+is Loka
+
+@ Current floor
+is Núverandi hæð
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+is Dragðu vopn til að endurraða, eða ýttu á Enter og notaðu örvalyklana
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+is Draga: Snúa  |  WASD: Færa  |  Q/E: Hæð  |  Hjól: Aðdráttur  |  Tab: 3D/2D  |  F: Afhjúpa  |  R: Endurstilla  |  M/Esc: Loka
+
+@ Exit
+is Útgangur
+
+@ Highest priority at top
+is Hæsti forgangur efst
+
+@ Move
+is Færa
+
+@ Orbit
+is Snúa
+
+@ Pan
+is Færa
+
+@ Place
+is Setja
+
+@ Press A to pick up a weapon, then move it up or down
+is Ýttu á A til að taka vopn, færðu það síðan upp eða niður
+
+@ Reorder
+is Endurraða
+
+@ Reset
+is Endurstilla
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+is Notaðu D-Pad eða pinna til að færa, A til að setja, B til að hætta við
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+is Notaðu upp- og niðurörvar til að færa, Enter til að setja, Esc til að hætta við
+
+@ View
+is Sýn
 
 # ==== hud.txt ====
 

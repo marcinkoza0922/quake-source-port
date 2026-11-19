@@ -15,6 +15,9 @@ impl Menu {
         if matches!(self.prompt, Some(Prompt::Preset { .. })) { return self.preset_hover(pos); }
         if self.prompt.is_some() { return self.prompt_hover(pos); }
         if self.addon_mouse(pos) { return None; }
+        if self.screen == Screen::OptionsPage(Page::WeaponPriority) {
+            return self.wp_mouse_move(pos, cv);
+        }
         if let (Some(i), Screen::OptionsPage(p)) = (self.slider_drag, self.screen) {
             self.set_slider(self.page_item(p, i), pos.0, cv);
             return None;
@@ -74,6 +77,10 @@ impl Menu {
         let mut out = Vec::new();
         if self.binding_key(key, &mut out) { return out; }
         if self.addon_key(key, cv, &mut out) { return out; }
+        if self.screen == Screen::OptionsPage(Page::WeaponPriority) {
+            self.wp_key(key, cv, &mut out);
+            return out;
+        }
         if self.autoaim_prompt {
             self.autoaim_prompt_key(key, cv, &mut out);
             return out;
@@ -531,6 +538,9 @@ impl Menu {
                         } else if enter || right {
                             self.sub_return = Some((p, page, self.opt_cursor));
                             self.opt_cursor = 0;
+                            if page == Page::WeaponPriority {
+                                self.wp.reset_state();
+                            }
                             self.screen = Screen::OptionsPage(page);
                             out.push(Action::Sound("misc/menu2.wav"));
                         }

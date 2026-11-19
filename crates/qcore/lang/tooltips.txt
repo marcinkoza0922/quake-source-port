@@ -1330,3 +1330,87 @@ es Volumen de puertas, ascensores, interruptores, objetos recogidos y otros efec
 ru Громкость дверей, лифтов, переключателей, подбора предметов и прочих звуков мира
 
 
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+fr Le fil de fer 3D incline la carte en perspective pour montrer le relief ; la vue de dessus affiche un plan plat
+de 3D-Drahtgitter kippt die Karte perspektivisch für Höhenunterschiede; Draufsicht zeigt eine flache Übersicht
+it Il wireframe 3D inclina la mappa in prospettiva per mostrare i dislivelli; Dall'alto disegna una vista piana
+es Alámbrico 3D inclina el mapa en perspectiva para mostrar altura; Vista cenital dibuja un plano desde arriba
+ru 3D-каркас наклоняет карту в перспективе для показа высот; вид сверху рисует плоскую схему
+
+@ Arrange weapon priority order for Better weapon auto-switching
+fr Définit l'ordre de priorité des armes pour le changement automatique vers une meilleure arme
+de Legt die Waffenpriorität für den automatischen Wechsel auf eine bessere Waffe fest
+it Ordina la priorità delle armi per il cambio automatico verso un'arma migliore
+es Ordena la prioridad de armas para el cambio automático a una mejor arma
+ru Настраивает порядок приоритета оружия для автосмены на лучшее оружие
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+fr Configure la vue, l'affichage, la révélation, le zoom et les marqueurs de la carte 3D
+de Konfiguriert Ansicht, Anzeige, Aufdeckung, Zoom und Markierungen der 3D-Drahtgitter-Autokarte
+it Configura vista, visualizzazione, rivelazione, zoom e indicatori dell'automappa 3D
+es Configura vista, visualización, revelación, zoom y marcadores del automapa alámbrico 3D
+ru Настраивает вид, отображение, режим открытия, масштаб и маркеры 3D-автокарты
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+fr La minicarte encadre la carte en haut à droite ; la superposition centrale affiche un fil de fer transparent au centre
+de Eck-Minikarte rahmt die Karte oben rechts ein; Zentriertes Overlay legt ein transparentes Drahtgitter über das Bild
+it La minimappa d'angolo inquadra la mappa in alto a destra; la sovrapposizione centrale mostra un wireframe trasparente
+es Minimapa en esquina encuadra el mapa arriba a la derecha; Superposición central flota un alámbrico transparente
+ru Миникарта в углу размещает карту справа вверху; наложение по центру рисует полупрозрачный каркас поверх обзора
+
+@ Disabled while Weapon Auto-Switch is set to Never
+fr Désactivé lorsque le changement auto d'arme est réglé sur Jamais
+de Deaktiviert, solange Auto-Waffenwechsel auf Nie steht
+it Disattivato quando il cambio arma automatico è impostato su Mai
+es Desactivado mientras el cambio automático de arma esté en Nunca
+ru Отключено, пока автосмена оружия установлена на «Никогда»
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+fr Zones explorées révèle les salles au fil de votre visite ; Carte complète affiche toute la géométrie du niveau
+de Nur erkundet deckt Räume beim Betreten auf; Ganze Karte zeigt die gesamte Levelgeometrie
+it Solo esplorato rivela le stanze man mano che le visiti; Mappa completa mostra l'intera geometria del livello
+es Solo explorado revela las salas al visitarlas; Mapa completo muestra toda la geometría del nivel
+ru Только исследованное открывает комнаты по мере прохождения; вся карта показывает весь уровень
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+fr Met en évidence sorties, clés, téléporteurs, portes verrouillées et votre trajet récent sur la carte
+de Hebt Ausgänge, Schlüssel, Teleporter, verschlossene Türen und deine Spur auf der Autokarte hervor
+it Evidenzia uscite, chiavi, teletrasporti, porte chiuse e il tuo percorso recente sull'automappa
+es Resalta salidas, llaves, teletransportadores, puertas cerradas y tu recorrido reciente en el automapa
+ru Подсвечивает выходы, ключи, телепорты, запертые двери и ваш недавний путь на автокарте
+
+@ Opacity of the automap lines and panel
+fr Opacité des lignes et du panneau de la carte automatique
+de Deckkraft der Linien und des Rahmens der Autokarte
+it Opacità delle linee e del pannello dell'automappa
+es Opacidad de las líneas y del panel del automapa
+ru Непрозрачность линий и панели автокарты
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+fr Fait pivoter la carte pour orienter votre regard vers le haut ; désactivé garde le nord en haut
+de Dreht die Autokarte in Blickrichtung nach oben; aus hält Norden oben
+it Ruota l'automappa in modo che la tua direzione punti in alto; disattivato mantiene il nord in alto
+es Rota el automapa para que tu dirección apunte arriba; desactivado mantiene el norte arriba
+ru Поворачивает автокарту по направлению взгляда вверх; выкл. оставляет север сверху
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+fr Affiche une carte 3D ou vue de dessus en jeu ; appuyez sur M pour la carte plein écran interactive (solo et coop uniquement)
+de Zeigt beim Spielen eine 3D-Drahtgitter- oder Draufsicht-Autokarte; M öffnet die interaktive Vollbildkarte (nur Einzelspieler und Koop)
+it Mostra un'automappa 3D o dall'alto in gioco; premi M per la mappa interattiva a schermo intero (solo giocatore singolo e coop)
+es Muestra un automapa alámbrico 3D o cenital al jugar; pulsa M para el mapa interactivo a pantalla completa (solo un jugador y coop)
+ru Показывает 3D-каркасную или верхнюю автокарту во время игры; нажмите M для интерактивной полноэкранной карты (только одиночная и кооп)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+fr Au ramassage d'une arme : Jamais garde l'arme actuelle ; Meilleure arme ne change que si elle est mieux classée dans Priorité des armes
+de Beim Aufheben einer Waffe: Nie behält die aktuelle Waffe; Bessere Waffe wechselt nur bei höherem Rang in der Waffenpriorität
+it Quando raccogli un'arma: Mai mantiene l'arma attuale; Arma migliore cambia solo se ha priorità più alta in Priorità armi
+es Al recoger un arma: Nunca mantiene el arma actual; Mejor arma cambia solo si tiene mayor rango en Prioridad de armas
+ru При подборе оружия: «Никогда» оставляет текущее оружие; «Лучшее оружие» переключается только при более высоком приоритете
+
+@ Zoom level of the automap view
+fr Niveau de zoom de la vue de la carte automatique
+de Zoomstufe der Autokarten-Ansicht
+it Livello di zoom della vista dell'automappa
+es Nivel de zoom de la vista del automapa
+ru Уровень приближения автокарты

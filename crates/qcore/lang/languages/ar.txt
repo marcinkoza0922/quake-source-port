@@ -1682,6 +1682,60 @@ ar الوحوش
 @ World & Pickups
 ar العالم والأدوات
 
+@ 3D wireframe
+ar شبكة ثلاثية الأبعاد
+
+@ Automap
+ar الخريطة التلقائية
+
+@ Automap Settings
+ar إعدادات الخريطة التلقائية
+
+@ Better weapon
+ar سلاح أفضل
+
+@ Center overlay
+ar تراكب مركزي
+
+@ Corner minimap
+ar خريطة مصغرة بالزاوية
+
+@ Display
+ar العرض
+
+@ Explored only
+ar المستكشف فقط
+
+@ Full map
+ar الخريطة الكاملة
+
+@ Never
+ar أبدًا
+
+@ Reveal
+ar الكشف
+
+@ Rotate with Player
+ar تدوير مع اللاعب
+
+@ Show Markers
+ar إظهار العلامات
+
+@ Top-down
+ar منظر علوي
+
+@ View Mode
+ar وضع العرض
+
+@ Weapon Auto-Switch
+ar التبديل التلقائي للسلاح
+
+@ Weapon Priority
+ar أولوية الأسلحة
+
+@ Zoom
+ar التكبير
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ ar مستوى صوت تنبيهات الوحوش وهجماتها وألمها �
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 ar مستوى صوت الأبواب والمصاعد والمفاتيح والتقاط العناصر وتأثيرات العالم الأخرى
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+ar الشبكة ثلاثية الأبعاد تميل الخريطة بمنظور لإظهار الارتفاع؛ المنظر العلوي يرسم خريطة مسطحة من الأعلى
+
+@ Arrange weapon priority order for Better weapon auto-switching
+ar رتّب أولوية الأسلحة للتبديل التلقائي إلى سلاح أفضل
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+ar اضبط وضع العرض والشكل والكشف والتكبير والعلامات للخريطة التلقائية ثلاثية الأبعاد
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+ar الخريطة المصغرة بالزاوية تضع الخريطة أعلى اليمين؛ التراكب المركزي يعرض شبكة شفافة فوق المشهد
+
+@ Disabled while Weapon Auto-Switch is set to Never
+ar معطّل عندما يكون التبديل التلقائي للسلاح مضبوطًا على أبدًا
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+ar المستكشف فقط يكشف الغرف عند زيارتها؛ الخريطة الكاملة تُظهر هندسة المستوى بالكامل
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+ar يبرز المخارج والمفاتيح والناقلات والأبواب المغلقة ومسارك الأخير على الخريطة التلقائية
+
+@ Opacity of the automap lines and panel
+ar عتامة خطوط ولوحة الخريطة التلقائية
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+ar يدوّر الخريطة التلقائية ليشير اتجاه نظرك للأعلى؛ عند الإيقاف يبقى الشمال للأعلى
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+ar يعرض خريطة تلقائية شبكية ثلاثية الأبعاد أو علوية أثناء اللعب؛ اضغط M للخريطة التفاعلية بملء الشاشة (فردي وتعاوني فقط)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+ar عند التقاط سلاح: أبدًا يُبقي سلاحك الحالي؛ سلاح أفضل يبدّل فقط إذا كان أعلى رتبة في أولوية الأسلحة
+
+@ Zoom level of the automap view
+ar مستوى تكبير عرض الخريطة التلقائية
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ ar نسخ البيانات
 
 @ Switch Only
 ar التبديل فقط
+
+@ Above
+ar أعلى
+
+@ Below
+ar أسفل
+
+@ Close
+ar إغلاق
+
+@ Current floor
+ar الطابق الحالي
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+ar اسحب الأسلحة لإعادة الترتيب، أو اضغط Enter واستخدم مفاتيح الأسهم
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+ar السحب: تدوير  |  WASD: تحريك  |  Q/E: الطابق  |  العجلة: تكبير  |  Tab: 3D/2D  |  F: كشف  |  R: إعادة ضبط  |  M/Esc: إغلاق
+
+@ Exit
+ar مخرج
+
+@ Highest priority at top
+ar الأعلى أولوية في الأعلى
+
+@ Move
+ar تحريك
+
+@ Orbit
+ar تدوير
+
+@ Pan
+ar إزاحة
+
+@ Place
+ar وضع
+
+@ Press A to pick up a weapon, then move it up or down
+ar اضغط A لاختيار سلاح، ثم حرّكه للأعلى أو للأسفل
+
+@ Reorder
+ar إعادة الترتيب
+
+@ Reset
+ar إعادة ضبط
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+ar استخدم لوحة الاتجاهات أو العصا للتحريك، وA للوضع، وB للإلغاء
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+ar استخدم سهمي الأعلى والأسفل للتحريك، وEnter للوضع، وEsc للإلغاء
+
+@ View
+ar العرض
 
 # ==== hud.txt ====
 

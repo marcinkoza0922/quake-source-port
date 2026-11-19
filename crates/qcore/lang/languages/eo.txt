@@ -1682,6 +1682,60 @@ eo Monstroj
 @ World & Pickups
 eo Mondo kaj objektoj
 
+@ 3D wireframe
+eo 3D-dratmodelo
+
+@ Automap
+eo Aŭtomapo
+
+@ Automap Settings
+eo Agordoj de aŭtomapo
+
+@ Better weapon
+eo Pli bona armilo
+
+@ Center overlay
+eo Centra surmeto
+
+@ Corner minimap
+eo Angula minimapo
+
+@ Display
+eo Vidigo
+
+@ Explored only
+eo Nur esplorita
+
+@ Full map
+eo Plena mapo
+
+@ Never
+eo Neniam
+
+@ Reveal
+eo Malkaŝo
+
+@ Rotate with Player
+eo Turni kun ludanto
+
+@ Show Markers
+eo Montri markilojn
+
+@ Top-down
+eo Desupra vido
+
+@ View Mode
+eo Vidreĝimo
+
+@ Weapon Auto-Switch
+eo Aŭtomata armilŝanĝo
+
+@ Weapon Priority
+eo Armila prioritato
+
+@ Zoom
+eo Zomo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ eo Laŭteco de monstrotremoj, atakoj, doloro kaj mortsonoj
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 eo Laŭteco de pordoj, liftoj, ŝaltiloj, kolektitaj objektoj kaj aliaj mondaj efektoj
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+eo 3D-dratmodelo klinas la mapon en perspektivo por montri altecon; Desupra vido desegnas platan vidon de supre
+
+@ Arrange weapon priority order for Better weapon auto-switching
+eo Aranĝu la armilan prioritatan ordon por aŭtomata ŝanĝo al Pli bona armilo
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+eo Agordu vidon, vidigon, malkaŝreĝimon, zomon kaj markilojn de la 3D-dratmodela aŭtomapo
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+eo Angula minimapo enkadras la mapon supre dekstre; Centra surmeto metas travideblan dratmodelon super la vidon
+
+@ Disabled while Weapon Auto-Switch is set to Never
+eo Malŝaltita dum Aŭtomata armilŝanĝo estas agordita al Neniam
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+eo Nur esplorita malkaŝas ĉambrojn dum vi vizitas ilin; Plena mapo montras la tutan nivelgeometrion
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+eo Elstarigas elirejojn, ŝlosilojn, teleportilojn, ŝlositajn pordojn kaj vian lastan spuron sur la aŭtomapo
+
+@ Opacity of the automap lines and panel
+eo Opakeco de la linioj kaj panelo de la aŭtomapo
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+eo Turnas la aŭtomapon tiel ke via rigarddirekto montras supren; malŝaltita tenas nordon supre
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+eo Montras vivan 3D-dratmodelan aŭ desupran aŭtomapon dum ludado; premu M por la interaga plenekrana mapo (nur unuludanta kaj kunludo)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+eo Kiam vi prenas armilon: Neniam tenas vian nunan armilon; Pli bona armilo ŝanĝas nur se ĝi havas pli altan rangon en Armila prioritato
+
+@ Zoom level of the automap view
+eo Zomnivelo de la aŭtomapa vido
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ eo Kopii datumojn
 
 @ Switch Only
 eo Nur ŝanĝi
+
+@ Above
+eo Supre
+
+@ Below
+eo Malsupre
+
+@ Close
+eo Fermi
+
+@ Current floor
+eo Nuna etaĝo
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+eo Trenu armilojn por reordigi, aŭ premu Enter kaj uzu sagoklavojn
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+eo Treni: Orbiti  |  WASD: Ŝovi  |  Q/E: Etaĝo  |  Rado: Zomo  |  Tab: 3D/2D  |  F: Malkaŝi  |  R: Restarigi  |  M/Esc: Fermi
+
+@ Exit
+eo Elirejo
+
+@ Highest priority at top
+eo Plej alta prioritato supre
+
+@ Move
+eo Movi
+
+@ Orbit
+eo Orbiti
+
+@ Pan
+eo Ŝovi
+
+@ Place
+eo Meti
+
+@ Press A to pick up a weapon, then move it up or down
+eo Premu A por preni armilon, poste movu ĝin supren aŭ malsupren
+
+@ Reorder
+eo Reordigi
+
+@ Reset
+eo Restarigi
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+eo Uzu D-Pad aŭ stangon por movi, A por meti, B por nuligi
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+eo Uzu sagojn Supren kaj Malsupren por movi, Enter por meti, Esc por nuligi
+
+@ View
+eo Vido
 
 # ==== hud.txt ====
 

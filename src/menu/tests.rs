@@ -598,6 +598,77 @@ fn autoaim_submenu_is_guarded_and_returns_to_accessibility() {
 }
 
 #[test]
+fn gameplay_weapon_priority_drag_drop_and_controller_reordering() {
+    let mut cv = Cvars::default();
+    cv.register("cl_autoswitch", "0", 0);
+    cv.register("cl_weaponpriority", qserver::weaponswitch::DEFAULT_PRIORITY, 0);
+    cv.register("cl_automap", "0", 0);
+    let mut m = Menu::new();
+    m.open(Screen::OptionsPage(Page::Gameplay));
+
+    // Weapon Auto-Switch has exactly two choices: Never and Better weapon.
+    let sw_row = GAMEPLAY.iter().position(|i| matches!(i, Item::Choice { cvar: "cl_autoswitch", .. })).unwrap();
+    let Item::Choice { choices, .. } = GAMEPLAY[sw_row] else { unreachable!() };
+    assert_eq!(choices, &[("Never", 0.0), ("Better weapon", 1.0)]);
+
+    // Weapon Priority sub-page is guarded while Never is selected.
+    let wp_row = GAMEPLAY.iter().position(|i| matches!(i, Item::Sub { page: Page::WeaponPriority, .. })).unwrap();
+    m.opt_cursor = wp_row;
+    m.key(K_ENTER, &mut cv, false);
+    assert_eq!(m.screen, Screen::OptionsPage(Page::Gameplay));
+
+    // Switch to Better weapon -> Weapon Priority opens.
+    cv.set("cl_autoswitch", "1");
+    m.key(K_ENTER, &mut cv, false);
+    assert_eq!(m.screen, Screen::OptionsPage(Page::WeaponPriority));
+
+    // Controller flow: press A on row 0 (Thunderbolt = 8), move down twice, press A to place.
+    m.key(K_ABUTTON, &mut cv, false);
+    assert!(m.wp.is_grabbed());
+    m.key(K_DPAD_DOWN, &mut cv, false);
+    m.key(K_DPAD_DOWN, &mut cv, false);
+    m.key(K_ABUTTON, &mut cv, false);
+    assert!(!m.wp.is_grabbed());
+    assert_eq!(cv.by_name("cl_weaponpriority").unwrap().string, "7 5 8 6 3 4 2 1");
+
+    // Controller cancel: grab row 2, move up, press B -> restores pre-grab order!
+    m.key(K_ABUTTON, &mut cv, false);
+    m.key(K_DPAD_UP, &mut cv, false);
+    assert_eq!(cv.by_name("cl_weaponpriority").unwrap().string, "7 8 5 6 3 4 2 1");
+    m.key(K_BBUTTON, &mut cv, false);
+    assert!(!m.wp.is_grabbed());
+    assert_eq!(cv.by_name("cl_weaponpriority").unwrap().string, "7 5 8 6 3 4 2 1");
+
+    // Mouse drag-and-drop: drag row 0 (y ~ 92) down to row 3 (y ~ 155), then mouse_up.
+    m.mouse_move((250.0, 92.0), &mut cv);
+    m.key(K_MOUSE1, &mut cv, false);
+    m.mouse_move((250.0, 155.0), &mut cv);
+    m.mouse_up();
+    assert_eq!(cv.by_name("cl_weaponpriority").unwrap().string, "5 8 6 7 3 4 2 1");
+
+    // Controller Y resets to default priority.
+    m.key(K_YBUTTON, &mut cv, false);
+    assert_eq!(cv.by_name("cl_weaponpriority").unwrap().string, qserver::weaponswitch::DEFAULT_PRIORITY);
+
+    // B returns to Gameplay at the Weapon Priority row.
+    m.key(K_BBUTTON, &mut cv, false);
+    assert_eq!(m.screen, Screen::OptionsPage(Page::Gameplay));
+    assert_eq!(m.opt_cursor, wp_row);
+
+    // Automap sub-page is guarded while Automap is off, opens when on, and returns to Gameplay.
+    let am_row = GAMEPLAY.iter().position(|i| matches!(i, Item::Sub { page: Page::Automap, .. })).unwrap();
+    m.opt_cursor = am_row;
+    m.key(K_ENTER, &mut cv, false);
+    assert_eq!(m.screen, Screen::OptionsPage(Page::Gameplay));
+    cv.set("cl_automap", "1");
+    m.key(K_ENTER, &mut cv, false);
+    assert_eq!(m.screen, Screen::OptionsPage(Page::Automap));
+    m.key(K_ESCAPE, &mut cv, false);
+    assert_eq!(m.screen, Screen::OptionsPage(Page::Gameplay));
+    assert_eq!(m.opt_cursor, am_row);
+}
+
+#[test]
 fn water_opacity_requires_translucency_for_keys_and_pointer() {
     let mut cv = Cvars::default();
     cv.register("r_enhancedwater", "1", 0);

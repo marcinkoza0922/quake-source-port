@@ -1682,6 +1682,60 @@ el Τέρατα
 @ World & Pickups
 el Κόσμος και αντικείμενα
 
+@ 3D wireframe
+el Τρισδιάστατο συρμάτινο πλέγμα
+
+@ Automap
+el Αυτόματος χάρτης
+
+@ Automap Settings
+el Ρυθμίσεις αυτόματου χάρτη
+
+@ Better weapon
+el Καλύτερο όπλο
+
+@ Center overlay
+el Κεντρική επικάλυψη
+
+@ Corner minimap
+el Μίνι χάρτης γωνίας
+
+@ Display
+el Εμφάνιση
+
+@ Explored only
+el Μόνο εξερευνημένα
+
+@ Full map
+el Πλήρης χάρτης
+
+@ Never
+el Ποτέ
+
+@ Reveal
+el Αποκάλυψη
+
+@ Rotate with Player
+el Περιστροφή με τον παίκτη
+
+@ Show Markers
+el Εμφάνιση δεικτών
+
+@ Top-down
+el Κάτοψη
+
+@ View Mode
+el Λειτουργία προβολής
+
+@ Weapon Auto-Switch
+el Αυτόματη αλλαγή όπλου
+
+@ Weapon Priority
+el Προτεραιότητα όπλων
+
+@ Zoom
+el Ζουμ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ el Ένταση ειδοποιήσεων, επιθέσεων, πόνου και 
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 el Ένταση θυρών, ανελκυστήρων, διακοπτών, αντικειμένων και άλλων εφέ του κόσμου
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+el Το τρισδιάστατο συρμάτινο πλέγμα γέρνει τον χάρτη προοπτικά δείχνοντας το ύψος· η Κάτοψη σχεδιάζει επίπεδη όψη από πάνω
+
+@ Arrange weapon priority order for Better weapon auto-switching
+el Ορίζει τη σειρά προτεραιότητας όπλων για την αυτόματη εναλλαγή σε Καλύτερο όπλο
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+el Ρυθμίζει την προβολή, την εμφάνιση, την αποκάλυψη, το ζουμ και τους δείκτες του τρισδιάστατου αυτόματου χάρτη
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+el Ο Μίνι χάρτης γωνίας τοποθετεί τον χάρτη επάνω δεξιά· η Κεντρική επικάλυψη εμφανίζει διαφανές πλέγμα πάνω από την εικόνα
+
+@ Disabled while Weapon Auto-Switch is set to Never
+el Απενεργοποιημένο όσο η Αυτόματη αλλαγή όπλου είναι ρυθμισμένη στο Ποτέ
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+el Το Μόνο εξερευνημένα αποκαλύπτει χώρους καθώς τους επισκέπτεστε· ο Πλήρης χάρτης δείχνει όλη τη γεωμετρία του επιπέδου
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+el Επισημαίνει στον αυτόματο χάρτη εξόδους, κλειδιά, τηλεμεταφορείς, κλειδωμένες πόρτες και την πρόσφατη διαδρομή σας
+
+@ Opacity of the automap lines and panel
+el Αδιαφάνεια των γραμμών και του πλαισίου του αυτόματου χάρτη
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+el Περιστρέφει τον αυτόματο χάρτη ώστε η κατεύθυνση βλέμματος να δείχνει επάνω· απενεργοποιημένο κρατά τον Βορρά επάνω
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+el Εμφανίζει ζωντανό τρισδιάστατο συρμάτινο ή κάτοψης χάρτη στο παιχνίδι· πατήστε M για διαδραστικό χάρτη πλήρους οθόνης (μόνο μονό και συνεργατικό)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+el Κατά τη συλλογή όπλου: Ποτέ διατηρεί το τρέχον όπλο· Καλύτερο όπλο αλλάζει μόνο αν έχει υψηλότερη θέση στην Προτεραιότητα όπλων
+
+@ Zoom level of the automap view
+el Επίπεδο ζουμ της προβολής του αυτόματου χάρτη
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ el Αντιγραφή δεδομένων
 
 @ Switch Only
 el Μόνο αλλαγή
+
+@ Above
+el Επάνω
+
+@ Below
+el Κάτω
+
+@ Close
+el Κλείσιμο
+
+@ Current floor
+el Τρέχων όροφος
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+el Σύρετε όπλα για αναδιάταξη ή πατήστε Enter και τα βελάκια
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+el Σύρσιμο: Περιστροφή  |  WASD: Μετατόπιση  |  Q/E: Όροφος  |  Τροχός: Ζουμ  |  Tab: 3D/2D  |  F: Αποκάλυψη  |  R: Επαναφορά  |  M/Esc: Κλείσιμο
+
+@ Exit
+el Έξοδος
+
+@ Highest priority at top
+el Υψηλότερη προτεραιότητα επάνω
+
+@ Move
+el Μετακίνηση
+
+@ Orbit
+el Περιστροφή
+
+@ Pan
+el Μετατόπιση
+
+@ Place
+el Τοποθέτηση
+
+@ Press A to pick up a weapon, then move it up or down
+el Πατήστε A για να επιλέξετε όπλο και μετακινήστε το πάνω ή κάτω
+
+@ Reorder
+el Αναδιάταξη
+
+@ Reset
+el Επαναφορά
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+el Χρησιμοποιήστε D-Pad ή μοχλό για μετακίνηση, A για τοποθέτηση, B για ακύρωση
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+el Χρησιμοποιήστε βέλη Πάνω/Κάτω για μετακίνηση, Enter για τοποθέτηση, Esc για ακύρωση
+
+@ View
+el Προβολή
 
 # ==== hud.txt ====
 

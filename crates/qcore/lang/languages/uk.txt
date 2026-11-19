@@ -1682,6 +1682,60 @@ uk Монстри
 @ World & Pickups
 uk Світ і предмети
 
+@ 3D wireframe
+uk 3D-каркас
+
+@ Automap
+uk Автокарта
+
+@ Automap Settings
+uk Налаштування автокарти
+
+@ Better weapon
+uk Краща зброя
+
+@ Center overlay
+uk Накладання по центру
+
+@ Corner minimap
+uk Мінікарта в кутку
+
+@ Display
+uk Відображення
+
+@ Explored only
+uk Лише досліджене
+
+@ Full map
+uk Уся карта
+
+@ Never
+uk Ніколи
+
+@ Reveal
+uk Відкриття
+
+@ Rotate with Player
+uk Обертати з гравцем
+
+@ Show Markers
+uk Показувати маркери
+
+@ Top-down
+uk Вигляд згори
+
+@ View Mode
+uk Режим вигляду
+
+@ Weapon Auto-Switch
+uk Автозміна зброї
+
+@ Weapon Priority
+uk Пріоритет зброї
+
+@ Zoom
+uk Масштаб
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ uk Гучність вигуків, атак, болю та смерті мон�
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 uk Гучність дверей, ліфтів, перемикачів, підбирання предметів та інших ефектів світу
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+uk 3D-каркас нахиляє карту в перспективі для показу висот; Вигляд згори малює пласку схему
+
+@ Arrange weapon priority order for Better weapon auto-switching
+uk Налаштовує порядок пріоритету зброї для автозміни на кращу зброю
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+uk Налаштовує вигляд 3D-каркасної автокарти, відображення, режим відкриття, масштаб і маркери
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+uk Мінікарта в кутку розміщує карту праворуч угорі; Накладання по центру виводить прозорий каркас поверх огляду
+
+@ Disabled while Weapon Auto-Switch is set to Never
+uk Вимкнено, доки Автозміна зброї має значення Ніколи
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+uk Лише досліджене відкриває кімнати під час відвідування; Уся карта показує всю геометрію рівня
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+uk Підсвічує на автокарті виходи, ключі, телепорти, замкнені двері та ваш недавній шлях
+
+@ Opacity of the automap lines and panel
+uk Непрозорість ліній і панелі автокарти
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+uk Обертає автокарту за напрямком вашого погляду вгору; вимкнення тримає північ угорі
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+uk Показує 3D-каркасну автокарту або вигляд згори під час гри; натисніть M для інтерактивної повноекранної карти (лише одинарна гра й кооператив)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+uk При підборі зброї: Ніколи залишає поточну зброю; Краща зброя перемикається лише за вищого рангу в Пріоритеті зброї
+
+@ Zoom level of the automap view
+uk Рівень масштабування автокарти
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ uk Копіювати дані
 
 @ Switch Only
 uk Лише змінити
+
+@ Above
+uk Вище
+
+@ Below
+uk Нижче
+
+@ Close
+uk Закрити
+
+@ Current floor
+uk Поточний поверх
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+uk Перетягніть зброю, щоб змінити порядок, або натисніть Enter і стрілки
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+uk Тягнути: Оберт  |  WASD: Зсув  |  Q/E: Поверх  |  Колесо: Масштаб  |  Tab: 3D/2D  |  F: Відкрити  |  R: Скинути  |  M/Esc: Закрити
+
+@ Exit
+uk Вихід
+
+@ Highest priority at top
+uk Найвищий пріоритет угорі
+
+@ Move
+uk Перемістити
+
+@ Orbit
+uk Оберт
+
+@ Pan
+uk Зсув
+
+@ Place
+uk Закріпити
+
+@ Press A to pick up a weapon, then move it up or down
+uk Натисніть A, щоб узяти зброю, потім перемістіть її вгору чи вниз
+
+@ Reorder
+uk Порядок
+
+@ Reset
+uk Скинути
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+uk Хрестовина або стік — перемістити, A — закріпити, B — скасувати
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+uk Стрілки вгору й униз — перемістити, Enter — закріпити, Esc — скасувати
+
+@ View
+uk Вигляд
 
 # ==== hud.txt ====
 

@@ -48,6 +48,7 @@ mod search;
 mod textedit;
 mod search_keywords;
 mod dir_browser;
+mod weapon_priority;
 pub mod demos;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -97,6 +98,8 @@ pub enum Page {
     Gyro,
     Touch,
     Autosave,
+    WeaponPriority,
+    Automap,
     AutoAim,
     GrenadeArc,
     Water,
@@ -144,7 +147,7 @@ pub enum Page {
 
 /// Every cvar the options pages edit (the host marks them archived).
 pub fn option_cvars() -> impl Iterator<Item = &'static str> {
-    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, addon_settings::HITSTOP, addon_settings::HITSTOP_ADVANCED, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, GEL, WASHER, HOOKSHOT, CABLE, RAILGUN, STICKY, GOGGLES, GAMEPLAY, HUD, CROSSHAIR, ENHANCEMENTS, WATER, BLOOM, RT_LIGHTS, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, MODIFIERS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GYRO, GRAPHICS, AUDIO, AUDIO_MIX, HIT_SOUND, KILL_SOUND, ACCESSIBILITY, demos::DEMOS, demos::VIDEO].into_iter().flatten().filter_map(|i| match *i {
+    [addon_settings::SHOTGUNS, addon_settings::BULLET_TIME, addon_settings::HITSTOP, addon_settings::HITSTOP_ADVANCED, ADDONS, NEW_GAME_ADDONS, PORTAL_GUN, BOOMERANG, GEL, WASHER, HOOKSHOT, CABLE, RAILGUN, STICKY, GOGGLES, GAMEPLAY, AUTOMAP, HUD, CROSSHAIR, ENHANCEMENTS, WATER, BLOOM, RT_LIGHTS, BLOOD, DEBRIS, IMPACTS, AUTOSAVE, MODIFIERS, AUTOAIM, INPUT, MOUSE, CONTROLLER, GYRO, GRAPHICS, AUDIO, AUDIO_MIX, HIT_SOUND, KILL_SOUND, ACCESSIBILITY, demos::DEMOS, demos::VIDEO].into_iter().flatten().filter_map(|i| match *i {
         Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
         _ => None,
     })
@@ -204,6 +207,8 @@ pub struct Menu {
     pub hud_edit: crate::hud::editor::Editor,
     /// Options → Gameplay → User Data Directory explorer.
     dir_browser: dir_browser::DirBrowser,
+    /// Options → Gameplay → Weapon Priority drag-and-drop list.
+    wp: weapon_priority::WeaponPriorityUi,
     /// Pending user data directory change: (selected parent, copy existing data).
     pub pending_user_data_dir: Option<(std::path::PathBuf, bool)>,
     /// Export dialog: where Back goes; export and rename dialogs: info lines.
@@ -348,6 +353,7 @@ impl Menu {
             demos: Default::default(),
             hud_edit: Default::default(),
             dir_browser: Default::default(),
+            wp: Default::default(),
             pending_user_data_dir: None,
             export_back: Screen::None,
             dialog_info: Vec::new(),
@@ -468,6 +474,7 @@ impl Menu {
         self.quit_cursor = 0;
         self.death_cursor = 0;
         if s == Screen::Options { self.clear_search(); }
+        if s == Screen::OptionsPage(Page::WeaponPriority) { self.wp.reset_state(); }
         if matches!(s, Screen::Load | Screen::Save) { self.load_cursor = 0; self.save_scroll = 0.0; }
     }
 

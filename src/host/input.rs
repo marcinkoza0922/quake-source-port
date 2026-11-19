@@ -36,6 +36,10 @@ impl Host {
                     }
                     // hovering a text row turns text input on before the first key
                     self.sync_key_dest();
+                } else if self.key_dest() == KeyDest::Game && self.automap.fullscreen {
+                    c.menu_layout();
+                    let pos = (px / c.scale - c.ox, py / c.scale - c.oy);
+                    self.automap.mouse_move(pos);
                 } else if self.key_dest() == KeyDest::Game && (self.demo_cursor() || self.exporting()) {
                     self.demo_pointer_move((px / c.scale, py / c.scale), (c.vw(), c.vh()));
                 } else if self.key_dest() == KeyDest::Console && self.con.modern {
@@ -52,6 +56,57 @@ impl Host {
                 // the export screen takes every key and button (Esc included)
                 if self.exporting() {
                     return self.export_input(&ie);
+                }
+                // Fullscreen interactive 3D automap intercepts game input (console `~` still works above).
+                if self.key_dest() == KeyDest::Game && self.automap.fullscreen {
+                    let is_console_key = matches!(ie, InputEvent::Key { key, down: true } if key == b'`' as i32);
+                    if !is_console_key {
+                        match ie {
+                            InputEvent::MouseButton { button, down } => {
+                                self.automap.mouse_button(button, down);
+                                return;
+                            }
+                            InputEvent::MouseWheel { y } => {
+                                if y != 0.0 {
+                                    self.automap.zoom_by(if y > 0.0 { 1.18 } else { 1.0 / 1.18 });
+                                }
+                                return;
+                            }
+                            InputEvent::MouseMotion { .. } => return,
+                            InputEvent::GamepadAxis { axis: a @ (qinput::GamepadAxis::LeftTrigger | qinput::GamepadAxis::RightTrigger), value } => {
+                                let on = value > self.cv("joy_deadzone_trigger");
+                                self.automap.set_trigger(a == qinput::GamepadAxis::RightTrigger, on);
+                                let _ = qinput::handle_event(self, ie);
+                                return;
+                            }
+                            InputEvent::GamepadAxis { .. } => {
+                                let _ = qinput::handle_event(self, ie);
+                                return;
+                            }
+                            InputEvent::Key { key, down } => {
+                                let toggle_bind = down
+                                    && self.input.binding(key).is_some_and(|b| b.eq_ignore_ascii_case("automap"));
+                                if toggle_bind {
+                                    self.automap.close_fullscreen();
+                                } else {
+                                    let pos = self.player_origin();
+                                    let yaw = self.cl.viewangles[1];
+                                    self.automap.key(key, down, pos, yaw);
+                                }
+                                self.sync_key_dest();
+                                return;
+                            }
+                            InputEvent::GamepadButton { button, down } => {
+                                let key = button.key();
+                                let pos = self.player_origin();
+                                let yaw = self.cl.viewangles[1];
+                                self.automap.key(key, down, pos, yaw);
+                                self.sync_key_dest();
+                                return;
+                            }
+                            _ => return,
+                        }
+                    }
                 }
                 // the demo cursor: buttons and the wheel work the bar, not binds
                 if self.key_dest() == KeyDest::Game && self.demo_cursor() {

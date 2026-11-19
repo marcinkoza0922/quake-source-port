@@ -3909,3 +3909,129 @@ es Mundo y objetos
 ru Мир и предметы
 
 
+
+@ 3D wireframe
+fr Fil de fer 3D
+de 3D-Drahtgitter
+it Wireframe 3D
+es Alámbrico 3D
+ru 3D-каркас
+
+@ Automap
+fr Carte automatique
+de Autokarte
+it Automappa
+es Automapa
+ru Автокарта
+
+@ Automap Settings
+fr Paramètres de la carte
+de Autokarten-Einstellungen
+it Impostazioni automappa
+es Ajustes del automapa
+ru Настройки автокарты
+
+@ Better weapon
+fr Meilleure arme
+de Bessere Waffe
+it Arma migliore
+es Mejor arma
+ru Лучшее оружие
+
+@ Center overlay
+fr Superposition centrale
+de Zentriertes Overlay
+it Sovrapposizione centrale
+es Superposición central
+ru Наложение по центру
+
+@ Corner minimap
+fr Minicarte en coin
+de Eck-Minikarte
+it Minimappa d'angolo
+es Minimapa en esquina
+ru Миникарта в углу
+
+@ Display
+fr Affichage
+de Anzeige
+it Visualizzazione
+es Visualización
+ru Отображение
+
+@ Explored only
+fr Zones explorées
+de Nur erkundet
+it Solo esplorato
+es Solo explorado
+ru Только исследованное
+
+@ Full map
+fr Carte complète
+de Ganze Karte
+it Mappa completa
+es Mapa completo
+ru Вся карта
+
+@ Never
+fr Jamais
+de Nie
+it Mai
+es Nunca
+ru Никогда
+
+@ Reveal
+fr Révélation
+de Aufdeckung
+it Rivelazione
+es Revelación
+ru Отображение карты
+
+@ Rotate with Player
+fr Pivoter avec le joueur
+de Mit Spieler drehen
+it Ruota con il giocatore
+es Rotar con el jugador
+ru Поворачивать с игроком
+
+@ Show Markers
+fr Afficher les marqueurs
+de Markierungen anzeigen
+it Mostra indicatori
+es Mostrar marcadores
+ru Показывать маркеры
+
+@ Top-down
+fr Vue de dessus
+de Draufsicht
+it Dall'alto
+es Vista cenital
+ru Вид сверху
+
+@ View Mode
+fr Mode de vue
+de Ansichtsmodus
+it Modalità vista
+es Modo de vista
+ru Режим вида
+
+@ Weapon Auto-Switch
+fr Changement auto d'arme
+de Auto-Waffenwechsel
+it Cambio arma automatico
+es Cambio automático de arma
+ru Автосмена оружия
+
+@ Weapon Priority
+fr Priorité des armes
+de Waffenpriorität
+it Priorità armi
+es Prioridad de armas
+ru Приоритет оружия
+
+@ Zoom
+fr Zoom
+de Zoom
+it Zoom
+es Zoom
+ru Масштаб

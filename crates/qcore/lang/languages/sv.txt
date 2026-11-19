@@ -1682,6 +1682,60 @@ sv Monster
 @ World & Pickups
 sv Värld och föremål
 
+@ 3D wireframe
+sv 3D-trådram
+
+@ Automap
+sv Autokarta
+
+@ Automap Settings
+sv Inställningar för autokarta
+
+@ Better weapon
+sv Bättre vapen
+
+@ Center overlay
+sv Centrerat överlägg
+
+@ Corner minimap
+sv Hörnminikarta
+
+@ Display
+sv Visning
+
+@ Explored only
+sv Endast utforskat
+
+@ Full map
+sv Hela kartan
+
+@ Never
+sv Aldrig
+
+@ Reveal
+sv Avslöja
+
+@ Rotate with Player
+sv Rotera med spelaren
+
+@ Show Markers
+sv Visa markörer
+
+@ Top-down
+sv Ovanifrån
+
+@ View Mode
+sv Visningsläge
+
+@ Weapon Auto-Switch
+sv Automatiskt vapenbyte
+
+@ Weapon Priority
+sv Vapenprioritet
+
+@ Zoom
+sv Zoom
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ sv Volym för monsters varningar, attacker, smärta och dödsljud
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 sv Volym för dörrar, hissar, knappar, föremål och andra världseffekter
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+sv 3D-trådram lutar kartan i perspektiv för att visa höjdskillnader; Ovanifrån ritar en plan översikt
+
+@ Arrange weapon priority order for Better weapon auto-switching
+sv Ordna vapenprioritet för automatiskt byte till Bättre vapen
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+sv Anpassa 3D-trådramskartans vy, visning, avslöjandeläge, zoom och markörer
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+sv Hörnminikarta ramar in kartan uppe till höger; Centrerat överlägg lägger en genomskinlig trådram över vyn
+
+@ Disabled while Weapon Auto-Switch is set to Never
+sv Inaktiverad medan Automatiskt vapenbyte är inställt på Aldrig
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+sv Endast utforskat visar rum vartefter du besöker dem; Hela kartan visar hela banans geometri
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+sv Markerar utgångar, nycklar, teleportörer, låsta dörrar och ditt senaste spår på autokartan
+
+@ Opacity of the automap lines and panel
+sv Opacitet för autokartans linjer och panel
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+sv Roterar autokartan så att din blickriktning pekar uppåt; av behåller norr överst
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+sv Visar en aktiv 3D-trådrams- eller ovanifrånskarta under spel; tryck M för interaktiv helskärmskarta (endast enspelare och samarbete)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+sv När du plockar upp ett vapen: Aldrig behåller ditt nuvarande vapen; Bättre vapen byter bara om det rankas högre i Vapenprioritet
+
+@ Zoom level of the automap view
+sv Zoomnivå för autokartans vy
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ sv Kopiera data
 
 @ Switch Only
 sv Byt bara
+
+@ Above
+sv Ovanför
+
+@ Below
+sv Nedanför
+
+@ Close
+sv Stäng
+
+@ Current floor
+sv Nuvarande våning
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+sv Dra vapen för att ändra ordning, eller tryck Enter och använd piltangenterna
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+sv Dra: Rotera  |  WASD: Panorera  |  Q/E: Våning  |  Hjul: Zoom  |  Tab: 3D/2D  |  F: Avslöja  |  R: Återställ  |  M/Esc: Stäng
+
+@ Exit
+sv Utgång
+
+@ Highest priority at top
+sv Högsta prioritet överst
+
+@ Move
+sv Flytta
+
+@ Orbit
+sv Rotera
+
+@ Pan
+sv Panorera
+
+@ Place
+sv Placera
+
+@ Press A to pick up a weapon, then move it up or down
+sv Tryck A för att välja ett vapen och flytta det sedan upp eller ned
+
+@ Reorder
+sv Ändra ordning
+
+@ Reset
+sv Återställ
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+sv Använd styrkors eller spak för att flytta, A för att placera, B för att avbryta
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+sv Använd upp- och nedpilar för att flytta, Enter för att placera, Esc för att avbryta
+
+@ View
+sv Vy
 
 # ==== hud.txt ====
 

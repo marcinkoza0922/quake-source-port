@@ -1682,6 +1682,60 @@ et Koletised
 @ World & Pickups
 et Maailm ja esemed
 
+@ 3D wireframe
+et 3D-traatvõrk
+
+@ Automap
+et Autokaart
+
+@ Automap Settings
+et Autokaardi seaded
+
+@ Better weapon
+et Parem relv
+
+@ Center overlay
+et Keskülekattega
+
+@ Corner minimap
+et Nurgaminikaart
+
+@ Display
+et Kuva
+
+@ Explored only
+et Ainult uuritud
+
+@ Full map
+et Terve kaart
+
+@ Never
+et Mitte kunagi
+
+@ Reveal
+et Avamine
+
+@ Rotate with Player
+et Pööra mängijaga
+
+@ Show Markers
+et Näita markereid
+
+@ Top-down
+et Pealtvaade
+
+@ View Mode
+et Vaaterežiim
+
+@ Weapon Auto-Switch
+et Automaatne relvavahetus
+
+@ Weapon Priority
+et Relvade järjekord
+
+@ Zoom
+et Suurendus
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ et Koletiste häirete, rünnakute, valu ja surmahelide helitugevus
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 et Uste, liftide, lülitite, esemete korjamise ja muude maailmaefektide helitugevus
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+et 3D-traatvõrk kallutab kaarti perspektiivis, et näidata kõrgusi; Pealtvaade joonistab lameda vaate ülalt
+
+@ Arrange weapon priority order for Better weapon auto-switching
+et Sea relvade eelistusjärjekord Parem relv automaatseks vahetuseks
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+et Seadista 3D-traatvõrgu autokaardi vaadet, kuva, avamisrežiimi, suurendust ja markereid
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+et Nurgaminikaart raamib kaardi paremale üles; Keskülekattega hõljutab läbipaistva traatvõrgu vaate kohal
+
+@ Disabled while Weapon Auto-Switch is set to Never
+et Keelatud, kui Automaatne relvavahetus on seatud väärtusele Mitte kunagi
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+et Ainult uuritud avab ruumid nende külastamisel; Terve kaart näitab kogu taseme geomeetriat
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+et Tõstab autokaardil esile väljapääsud, võtmed, teleportid, lukustatud uksed ja sinu hiljutise raja
+
+@ Opacity of the automap lines and panel
+et Autokaardi joonte ja paneeli läbipaistmatus
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+et Pöörab autokaarti nii, et sinu vaatesuund on üles; väljas hoiab põhja ülal
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+et Näitab mängides reaalajas 3D-traatvõrgu või pealtvaate autokaarti; vajuta M interaktiivse täisekraankaardi jaoks (ainult üksikmäng ja koostöö)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+et Relva üles korjates: Mitte kunagi jätab alles praeguse relva; Parem relv vahetab ainult siis, kui see on Relvade järjekorras kõrgemal
+
+@ Zoom level of the automap view
+et Autokaardi vaate suurendusaste
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ et Kopeeri andmed
 
 @ Switch Only
 et Ainult vaheta
+
+@ Above
+et Üleval
+
+@ Below
+et All
+
+@ Close
+et Sulge
+
+@ Current floor
+et Praegune korrus
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+et Lohista relvi järjestamiseks või vajuta Enter ja kasuta nooleklahve
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+et Lohista: Pööra  |  WASD: Nihuta  |  Q/E: Korrus  |  Ratas: Suurendus  |  Tab: 3D/2D  |  F: Ava  |  R: Lähtesta  |  M/Esc: Sulge
+
+@ Exit
+et Väljapääs
+
+@ Highest priority at top
+et Kõrgeim prioriteet üleval
+
+@ Move
+et Liiguta
+
+@ Orbit
+et Pööra
+
+@ Pan
+et Nihuta
+
+@ Place
+et Aseta
+
+@ Press A to pick up a weapon, then move it up or down
+et Vajuta A, et relv haarata, seejärel liiguta seda üles või alla
+
+@ Reorder
+et Järjesta
+
+@ Reset
+et Lähtesta
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+et Kasuta liigutamiseks D-Padi või kangi, asetamiseks A, tühistamiseks B
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+et Kasuta liigutamiseks üles- ja allanoolt, asetamiseks Enter, tühistamiseks Esc
+
+@ View
+et Vaade
 
 # ==== hud.txt ====
 

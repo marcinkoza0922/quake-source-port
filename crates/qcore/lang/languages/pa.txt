@@ -1682,6 +1682,60 @@ pa ਰਾਖਸ਼
 @ World & Pickups
 pa ਦੁਨੀਆ ਅਤੇ ਚੀਜ਼ਾਂ
 
+@ 3D wireframe
+pa 3D ਵਾਇਰਫ੍ਰੇਮ
+
+@ Automap
+pa ਆਟੋਮੈਪ
+
+@ Automap Settings
+pa ਆਟੋਮੈਪ ਸੈਟਿੰਗਾਂ
+
+@ Better weapon
+pa ਬਿਹਤਰ ਹਥਿਆਰ
+
+@ Center overlay
+pa ਕੇਂਦਰੀ ਓਵਰਲੇ
+
+@ Corner minimap
+pa ਕੋਨੇ ਦਾ ਮਿਨੀਮੈਪ
+
+@ Display
+pa ਦਿਖਾवट
+
+@ Explored only
+pa ਸਿਰਫ਼ ਖੋਜਿਆ ਹੋਇਆ
+
+@ Full map
+pa ਪੂਰਾ ਮੈਪ
+
+@ Never
+pa ਕਦੇ ਨਹੀਂ
+
+@ Reveal
+pa ਪ੍ਰਗਟਾਵਾ
+
+@ Rotate with Player
+pa ਖਿਡਾਰੀ ਨਾਲ ਘੁਮਾਓ
+
+@ Show Markers
+pa ਨਿਸ਼ਾਨ ਦਿਖਾਓ
+
+@ Top-down
+pa ਉੱਪਰੋਂ ਦ੍ਰਿਸ਼
+
+@ View Mode
+pa ਦ੍ਰਿਸ਼ ਮੋਡ
+
+@ Weapon Auto-Switch
+pa ਹਥਿਆਰ ਆਟੋ-ਸਵਿੱਚ
+
+@ Weapon Priority
+pa ਹਥਿਆਰ ਤਰਜੀਹ
+
+@ Zoom
+pa ਜ਼ੂਮ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ pa ਰਾਖਸ਼ਾਂ ਦੀਆਂ ਚੇਤਾਵਨੀਆਂ, ਹਮਲਿ�
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 pa ਦਰਵਾਜ਼ਿਆਂ, ਲਿਫਟਾਂ, ਸਵਿੱਚਾਂ, ਚੀਜ਼ਾਂ ਚੁੱਕਣ ਅਤੇ ਹੋਰ ਦੁਨੀਆ ਦੇ ਪ੍ਰਭਾਵਾਂ ਦਾ ਵਾਲੀਅਮ
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+pa 3D ਵਾਇਰਫ੍ਰੇਮ ਉਚਾਈ ਦਿਖਾਉਣ ਲਈ ਮੈਪ ਨੂੰ ਝੁਕਾਉਂਦਾ ਹੈ; ਉੱਪਰੋਂ ਦ੍ਰਿਸ਼ ਸਮਤਲ ਉੱਪਰੀ ਨਕਸ਼ਾ ਦਿਖਾਉਂਦਾ ਹੈ
+
+@ Arrange weapon priority order for Better weapon auto-switching
+pa ਬਿਹਤਰ ਹਥਿਆਰ ਆਟੋ-ਸਵਿੱਚ ਲਈ ਹਥਿਆਰ ਤਰਜੀਹ ਕ੍ਰਮ ਸਜਾਓ
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+pa 3D ਵਾਇਰਫ੍ਰੇਮ ਆਟੋਮੈਪ ਦ੍ਰਿਸ਼, ਦਿਖਾਵਟ, ਪ੍ਰਗਟਾਵਾ ਮੋਡ, ਜ਼ੂਮ ਅਤੇ ਨਿਸ਼ਾਨ ਸੈੱਟ ਕਰੋ
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+pa ਕੋਨੇ ਦਾ ਮਿਨੀਮੈਪ ਮੈਪ ਨੂੰ ਉੱਪਰ-ਸੱਜੇ ਰੱਖਦਾ ਹੈ; ਕੇਂਦਰੀ ਓਵਰਲੇ ਦ੍ਰਿਸ਼ ਉੱਤੇ ਪਾਰਦਰਸ਼ੀ ਵਾਇਰਫ੍ਰੇਮ ਦਿਖਾਉਂਦਾ ਹੈ
+
+@ Disabled while Weapon Auto-Switch is set to Never
+pa ਜਦੋਂ ਹਥਿਆਰ ਆਟੋ-ਸਵਿੱਚ 'ਕਦੇ ਨਹੀਂ' ਉੱਤੇ ਹੋਵੇ ਤਾਂ ਬੰਦ ਰਹਿੰਦਾ ਹੈ
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+pa ਸਿਰਫ਼ ਖੋਜਿਆ ਹੋਇਆ ਤੁਹਾਡੇ ਜਾਣ 'ਤੇ ਕਮਰੇ ਦਿਖਾਉਂਦਾ ਹੈ; ਪੂਰਾ ਮੈਪ ਪੂਰੇ ਪੱਧਰ ਦੀ ਬਣਤਰ ਦਿਖਾਉਂਦਾ ਹੈ
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+pa ਆਟੋਮੈਪ 'ਤੇ ਨਿਕਾਸ, ਚਾਬੀਆਂ, ਟੈਲੀਪੋਰਟਰ, ਬੰਦ ਦਰਵਾਜ਼ੇ ਅਤੇ ਤੁਹਾਡਾ ਹਾਲੀਆ ਰਾਹ ਉਜਾਗਰ ਕਰਦਾ ਹੈ
+
+@ Opacity of the automap lines and panel
+pa ਆਟੋਮੈਪ ਦੀਆਂ ਲਾਈਨਾਂ ਅਤੇ ਪੈਨਲ ਦਾ ਧੁੰਦਲਾਪਨ
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+pa ਆਟੋਮੈਪ ਨੂੰ ਘੁਮਾਉਂਦਾ ਹੈ ਤਾਂ ਜੋ ਤੁਹਾਡੇ ਦੇਖਣ ਦੀ ਦਿਸ਼ਾ ਉੱਪਰ ਰਹੇ; ਬੰਦ ਰੱਖਣ 'ਤੇ ਉੱਤਰ ਉੱਪਰ ਰਹਿੰਦਾ ਹੈ
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+pa ਖੇਡਦੇ ਸਮੇਂ ਲਾਈਵ 3D ਵਾਇਰਫ੍ਰੇਮ ਜਾਂ ਉੱਪਰੋਂ ਆਟੋਮੈਪ ਦਿਖਾਉਂਦਾ ਹੈ; ਪੂਰੀ-ਸਕ੍ਰੀਨ ਇੰਟਰਐਕਟਿਵ ਮੈਪ ਲਈ M ਦਬਾਓ (ਸਿਰਫ਼ ਇਕੱਲੀ ਖੇਡ ਅਤੇ ਕੋ-ਆਪ)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+pa ਹਥਿਆਰ ਚੁੱਕਣ ਵੇਲੇ: 'ਕਦੇ ਨਹੀਂ' ਮੌਜੂਦਾ ਹਥਿਆਰ ਰੱਖਦਾ ਹੈ; 'ਬਿਹਤਰ ਹਥਿਆਰ' ਸਿਰਫ਼ ਉਦੋਂ ਬਦਲਦਾ ਹੈ ਜੇ ਹਥਿਆਰ ਤਰਜੀਹ ਵਿੱਚ ਦਰਜਾ ਉੱਚਾ ਹੋਵੇ
+
+@ Zoom level of the automap view
+pa ਆਟੋਮੈਪ ਦ੍ਰਿਸ਼ ਦਾ ਜ਼ੂਮ ਪੱਧਰ
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ pa ਡਾਟਾ ਕਾਪੀ ਕਰੋ
 
 @ Switch Only
 pa ਸਿਰਫ਼ ਬਦਲੋ
+
+@ Above
+pa ਉੱਪਰ
+
+@ Below
+pa ਹੇਠਾਂ
+
+@ Close
+pa ਬੰਦ ਕਰੋ
+
+@ Current floor
+pa ਮੌਜੂਦਾ ਮੰਜ਼ਿਲ
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+pa ਕ੍ਰਮ ਬਦਲਣ ਲਈ ਹਥਿਆਰ ਖਿੱਚੋ, ਜਾਂ Enter ਦਬਾ ਕੇ ਤੀਰ ਕੁੰਜੀਆਂ ਵਰਤੋ
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+pa ਖਿੱਚੋ: ਘੁਮਾਓ  |  WASD: ਹਿਲਾਓ  |  Q/E: ਮੰਜ਼ਿਲ  |  ਵ੍ਹੀਲ: ਜ਼ੂਮ  |  Tab: 3D/2D  |  F: ਦਿਖਾਓ  |  R: ਰੀਸੈੱਟ  |  M/Esc: ਬੰਦ
+
+@ Exit
+pa ਨਿਕਾਸ
+
+@ Highest priority at top
+pa ਸਭ ਤੋਂ ਵੱਧ ਤਰਜੀਹ ਉੱਪਰ
+
+@ Move
+pa ਹਿਲਾਓ
+
+@ Orbit
+pa ਘੁਮਾਓ
+
+@ Pan
+pa ਸਰਕਾਓ
+
+@ Place
+pa ਰੱਖੋ
+
+@ Press A to pick up a weapon, then move it up or down
+pa ਹਥਿਆਰ ਚੁੱਕਣ ਲਈ A ਦਬਾਓ, ਫਿਰ ਇਸਨੂੰ ਉੱਪਰ ਜਾਂ ਹੇਠਾਂ ਲੈ ਜਾਓ
+
+@ Reorder
+pa ਕ੍ਰਮ ਬਦਲੋ
+
+@ Reset
+pa ਰੀਸੈੱਟ
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+pa ਹਿਲਾਉਣ ਲਈ ਡੀ-ਪੈਡ ਜਾਂ ਸਟਿੱਕ, ਰੱਖਣ ਲਈ A, ਰੱਦ ਕਰਨ ਲਈ B ਵਰਤੋ
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+pa ਹਿਲਾਉਣ ਲਈ ਉੱਪਰ ਅਤੇ ਹੇਠਾਂ ਤੀਰ, ਰੱਖਣ ਲਈ Enter, ਰੱਦ ਕਰਨ ਲਈ Esc ਵਰਤੋ
+
+@ View
+pa ਦ੍ਰਿਸ਼
 
 # ==== hud.txt ====
 

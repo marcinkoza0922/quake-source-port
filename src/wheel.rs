@@ -12,7 +12,7 @@ use crate::glyphs::Glyphs;
 use crate::sbar::PicFn;
 
 mod inventory;
-pub use inventory::{Entry, Weapon, SLOTS, inventory};
+pub use inventory::{Entry, Slot, Weapon, SLOTS, inventory};
 
 #[derive(Default)]
 pub struct Wheel {

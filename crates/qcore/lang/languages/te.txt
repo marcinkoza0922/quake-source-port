@@ -1682,6 +1682,60 @@ te రాక్షసులు
 @ World & Pickups
 te ప్రపంచం & వస్తువులు
 
+@ 3D wireframe
+te 3D వైర్‌ఫ్రేమ్
+
+@ Automap
+te ఆటోమ్యాప్
+
+@ Automap Settings
+te ఆటోమ్యాప్ సెట్టింగ్‌లు
+
+@ Better weapon
+te మెరుగైన ఆయుధం
+
+@ Center overlay
+te మధ్య ఓవర్‌లే
+
+@ Corner minimap
+te మూల మినీమ్యాప్
+
+@ Display
+te ప్రదర్శన
+
+@ Explored only
+te అన్వేషించినవి మాత్రమే
+
+@ Full map
+te పూర్తి మ్యాప్
+
+@ Never
+te ఎప్పుడూ వద్దు
+
+@ Reveal
+te బహిర్గతం
+
+@ Rotate with Player
+te ఆటగాడితో తిప్పు
+
+@ Show Markers
+te మార్కర్‌లు చూపు
+
+@ Top-down
+te పైనుండి వీక్షణ
+
+@ View Mode
+te వీక్షణ మోడ్
+
+@ Weapon Auto-Switch
+te ఆయుధం ఆటో-స్విచ్
+
+@ Weapon Priority
+te ఆయుధ ప్రాధాన్యత
+
+@ Zoom
+te జూమ్
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ te రాక్షసుల హెచ్చరికలు, దాడులు, 
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 te తలుపులు, లిఫ్ట్‌లు, స్విచ్‌లు, వస్తువుల సేకరణ మరియు ఇతర ప్రపంచ ప్రభావాల వాల్యూమ్
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+te 3D వైర్‌ఫ్రేమ్ ఎత్తును చూపడానికి మ్యాప్‌ను వంచుతుంది; పైనుండి వీక్షణ సమతల పైదృశ్యాన్ని గీస్తుంది
+
+@ Arrange weapon priority order for Better weapon auto-switching
+te మెరుగైన ఆయుధం ఆటో-స్విచ్ కోసం ఆయుధ ప్రాధాన్యత క్రమాన్ని అమర్చండి
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+te 3D వైర్‌ఫ్రేమ్ ఆటోమ్యాప్ వీక్షణ, ప్రదర్శన, బహిర్గత మోడ్, జూమ్ మరియు మార్కర్‌లను కాన్ఫిగర్ చేయండి
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+te మూల మినీమ్యాప్ మ్యాప్‌ను పై-కుడిలో ఉంచుతుంది; మధ్య ఓవర్‌లే వీక్షణపై పారదర్శక వైర్‌ఫ్రేమ్‌ను చూపుతుంది
+
+@ Disabled while Weapon Auto-Switch is set to Never
+te ఆయుధం ఆటో-స్విచ్ 'ఎప్పుడూ వద్దు'గా ఉన్నప్పుడు నిష్క్రియంగా ఉంటుంది
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+te అన్వేషించినవి మాత్రమే మీరు వెళ్లిన గదులను చూపుతుంది; పూర్తి మ్యాప్ మొత్తం స్థాయి నిర్మాణాన్ని చూపుతుంది
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+te ఆటోమ్యాప్‌లో నిష్క్రమణలు, తాళాలు, టెలిపోర్టర్‌లు, మూసిన తలుపులు మరియు మీ ఇటీవలి దారిని హైలైట్ చేస్తుంది
+
+@ Opacity of the automap lines and panel
+te ఆటోమ్యాప్ గీతలు మరియు ప్యానెల్ అపారదర్శకత
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+te మీరు చూసే దిశ పైకి ఉండేలా ఆటోమ్యాప్‌ను తిప్పుతుంది; ఆఫ్ చేస్తే ఉత్తరం పైన ఉంటుంది
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+te ఆడేటప్పుడు లైవ్ 3D వైర్‌ఫ్రేమ్ లేదా పైనుండి ఆటోమ్యాప్ చూపుతుంది; పూర్తి-స్క్రీన్ ఇంటరాక్టివ్ మ్యాప్ కోసం M నొక్కండి (సింగిల్ ప్లేయర్ మరియు కో-ఆప్ మాత్రమే)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+te ఆయుధం తీసుకునేటప్పుడు: ఎప్పుడూ వద్దు ప్రస్తుత ఆయుధాన్ని ఉంచుతుంది; మెరుగైన ఆయుధం ఆయుధ ప్రాధాన్యతలో పైస్థానంలో ఉంటేనే మారుస్తుంది
+
+@ Zoom level of the automap view
+te ఆటోమ్యాప్ వీక్షణ జూమ్ స్థాయి
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ te డేటా కాపీ చేయి
 
 @ Switch Only
 te మార్చు మాత్రమే
+
+@ Above
+te పైన
+
+@ Below
+te కింద
+
+@ Close
+te మూసివేయి
+
+@ Current floor
+te ప్రస్తుత అంతస్తు
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+te క్రమం మార్చడానికి ఆయుధాలను లాగండి, లేదా Enter నొక్కి బాణం కీలను ఉపయోగించండి
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+te లాగండి: తిప్పు  |  WASD: కదుపు  |  Q/E: అంతస్తు  |  వీల్: జూమ్  |  Tab: 3D/2D  |  F: చూపు  |  R: రీసెట్  |  M/Esc: మూసివేయి
+
+@ Exit
+te నిష్క్రమణ
+
+@ Highest priority at top
+te అత్యధిక ప్రాధాన్యత పైన
+
+@ Move
+te కదుపు
+
+@ Orbit
+te తిప్పు
+
+@ Pan
+te జరుపు
+
+@ Place
+te ఉంచు
+
+@ Press A to pick up a weapon, then move it up or down
+te ఆయుధాన్ని ఎంచుకోవడానికి A నొక్కండి, ఆపై పైకి లేదా కిందికి కదపండి
+
+@ Reorder
+te క్రమం మార్చు
+
+@ Reset
+te రీసెట్
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+te కదపడానికి డి-ప్యాడ్ లేదా స్టిక్, ఉంచడానికి A, రద్దు చేయడానికి B ఉపయోగించండి
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+te కదపడానికి పైకి మరియు కిందికి బాణాలు, ఉంచడానికి Enter, రద్దు చేయడానికి Esc ఉపయోగించండి
+
+@ View
+te వీక్షణ
 
 # ==== hud.txt ====
 

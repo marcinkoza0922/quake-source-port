@@ -1682,6 +1682,60 @@ ca Monstres
 @ World & Pickups
 ca Món i objectes
 
+@ 3D wireframe
+ca Filferro 3D
+
+@ Automap
+ca Automapa
+
+@ Automap Settings
+ca Configuració de l'automapa
+
+@ Better weapon
+ca Arma millor
+
+@ Center overlay
+ca Superposició central
+
+@ Corner minimap
+ca Minimapa a la cantonada
+
+@ Display
+ca Visualització
+
+@ Explored only
+ca Només explorat
+
+@ Full map
+ca Mapa complet
+
+@ Never
+ca Mai
+
+@ Reveal
+ca Revelació
+
+@ Rotate with Player
+ca Gira amb el jugador
+
+@ Show Markers
+ca Mostra els marcadors
+
+@ Top-down
+ca Vista zenital
+
+@ View Mode
+ca Mode de vista
+
+@ Weapon Auto-Switch
+ca Canvi automàtic d'arma
+
+@ Weapon Priority
+ca Prioritat d'armes
+
+@ Zoom
+ca Zoom
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ ca Volum d'alertes, atacs, dolor i mort dels monstres
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 ca Volum de portes, ascensors, interruptors, recollida d'objectes i altres efectes del món
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+ca Filferro 3D inclina el mapa en perspectiva per mostrar-ne l'alçada; Vista zenital dibuixa un plànol pla des de dalt
+
+@ Arrange weapon priority order for Better weapon auto-switching
+ca Ordena la prioritat d'armes per al canvi automàtic a Arma millor
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+ca Configura la vista, visualització, mode de revelació, zoom i marcadors de l'automapa en filferro 3D
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+ca Minimapa a la cantonada emmarca el mapa a dalt a la dreta; Superposició central mostra un filferro transparent sobre la vista
+
+@ Disabled while Weapon Auto-Switch is set to Never
+ca Desactivat mentre Canvi automàtic d'arma estigui en Mai
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+ca Només explorat revela les sales a mesura que les visites; Mapa complet mostra tota la geometria del nivell
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+ca Ressalta sortides, claus, teletransportadors, portes tancades i el teu rastre recent a l'automapa
+
+@ Opacity of the automap lines and panel
+ca Opacitat de les línies i del panell de l'automapa
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+ca Gira l'automapa perquè la direcció on mires apunti amunt; desactivat manté el nord a dalt
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+ca Mostra un automapa en directe en filferro 3D o vista zenital mentre jugues; prem M per al mapa interactiu a pantalla completa (només un jugador i cooperatiu)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+ca En recollir una arma: Mai manté l'arma actual; Arma millor canvia només si té un rang superior a Prioritat d'armes
+
+@ Zoom level of the automap view
+ca Nivell de zoom de la vista de l'automapa
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ ca Copia les dades
 
 @ Switch Only
 ca Només canvia
+
+@ Above
+ca Per sobre
+
+@ Below
+ca Per sota
+
+@ Close
+ca Tanca
+
+@ Current floor
+ca Planta actual
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+ca Arrossega les armes per reordenar-les, o prem Retorn i fes servir les fletxes
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+ca Arrossegar: Orbita  |  WASD: Desplaça  |  Q/E: Planta  |  Roda: Zoom  |  Tab: 3D/2D  |  F: Revela  |  R: Restableix  |  M/Esc: Tanca
+
+@ Exit
+ca Sortida
+
+@ Highest priority at top
+ca Prioritat més alta a dalt
+
+@ Move
+ca Mou
+
+@ Orbit
+ca Orbita
+
+@ Pan
+ca Desplaça
+
+@ Place
+ca Col·loca
+
+@ Press A to pick up a weapon, then move it up or down
+ca Prem A per agafar una arma i mou-la amunt o avall
+
+@ Reorder
+ca Reordena
+
+@ Reset
+ca Restableix
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+ca Fes servir la creueta o la palanca per moure, A per col·locar, B per cancel·lar
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+ca Fes servir les fletxes Amunt i Avall per moure, Retorn per col·locar, Esc per cancel·lar
+
+@ View
+ca Vista
 
 # ==== hud.txt ====
 

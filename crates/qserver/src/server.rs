@@ -167,7 +167,7 @@ fn register_cvars(cv: &mut Cvars) {
     ] {
         cv.register(n, d, f);
     }
-    for &(n, d, f) in crate::modifiers::CVARS.iter().chain(crate::addons::CVARS) {
+    for &(n, d, f) in crate::modifiers::CVARS.iter().chain(crate::addons::CVARS).chain(crate::weaponswitch::CVARS) {
         cv.register(n, d, f);
     }
 }

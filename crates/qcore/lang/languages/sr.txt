@@ -1682,6 +1682,60 @@ sr Чудовишта
 @ World & Pickups
 sr Свет и предмети
 
+@ 3D wireframe
+sr 3D жичани приказ
+
+@ Automap
+sr Аутомапа
+
+@ Automap Settings
+sr Подешавања аутомапе
+
+@ Better weapon
+sr Боље оружје
+
+@ Center overlay
+sr Преклапање у средини
+
+@ Corner minimap
+sr Минимапа у углу
+
+@ Display
+sr Приказ
+
+@ Explored only
+sr Само истражено
+
+@ Full map
+sr Цела мапа
+
+@ Never
+sr Никада
+
+@ Reveal
+sr Откривање
+
+@ Rotate with Player
+sr Ротирај са играчем
+
+@ Show Markers
+sr Прикажи маркере
+
+@ Top-down
+sr Одозго
+
+@ View Mode
+sr Режим приказа
+
+@ Weapon Auto-Switch
+sr Аутоматска промена оружја
+
+@ Weapon Priority
+sr Приоритет оружја
+
+@ Zoom
+sr Зум
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ sr Јачина узбуна, напада, бола и смрти чудови�
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 sr Јачина врата, лифтова, прекидача, купљења предмета и других ефеката света
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+sr 3D жичани приказ нагиње мапу у перспективи да би приказао висину; Одозго црта раван поглед одозго
+
+@ Arrange weapon priority order for Better weapon auto-switching
+sr Уреди редослед приоритета оружја за аутоматску промену на Боље оружје
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+sr Подеси поглед, приказ, режим откривања, зум и маркере 3D жичане аутомапе
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+sr Минимапа у углу смешта мапу горе десно; Преклапање у средини приказује прозиран жичани приказ преко погледа
+
+@ Disabled while Weapon Auto-Switch is set to Never
+sr Онемогућено док је Аутоматска промена оружја подешена на Никада
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+sr Само истражено открива просторије како их обилазите; Цела мапа приказује читаву геометрију нивоа
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+sr Истиче излазе, кључеве, телепортере, закључана врата и ваш скорашњи траг на аутомапи
+
+@ Opacity of the automap lines and panel
+sr Непрозирност линија и панела аутомапе
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+sr Ротира аутомапу тако да ваш правац погледа буде нагоре; искључено држи север на врху
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+sr Приказује живу 3D жичану или аутомапу одозго током игре; притисните M за интерактивну мапу преко целог екрана (само један играч и кооперација)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+sr При подизању оружја: Никада задржава тренутно оружје; Боље оружје мења само ако је више рангирано у Приоритету оружја
+
+@ Zoom level of the automap view
+sr Ниво зумирања приказа аутомапе
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ sr Копирај податке
 
 @ Switch Only
 sr Само промени
+
+@ Above
+sr Изнад
+
+@ Below
+sr Испод
+
+@ Close
+sr Затвори
+
+@ Current floor
+sr Тренутни ниво
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+sr Превуците оружја да промените редослед или притисните Enter и користите стрелице
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+sr Превлачење: Орбита  |  WASD: Померање  |  Q/E: Ниво  |  Точкић: Зум  |  Tab: 3D/2D  |  F: Откриј  |  R: Врати  |  M/Esc: Затвори
+
+@ Exit
+sr Излаз
+
+@ Highest priority at top
+sr Највећи приоритет на врху
+
+@ Move
+sr Помери
+
+@ Orbit
+sr Орбита
+
+@ Pan
+sr Померање
+
+@ Place
+sr Постави
+
+@ Press A to pick up a weapon, then move it up or down
+sr Притисните A да подигнете оружје, затим га померите горе или доле
+
+@ Reorder
+sr Преуреди
+
+@ Reset
+sr Ресетуј
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+sr Користите D-Pad или палицу за померање, A за постављање, B за отказивање
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+sr Користите стрелице горе и доле за померање, Enter за постављање, Esc за отказивање
+
+@ View
+sr Приказ
 
 # ==== hud.txt ====
 

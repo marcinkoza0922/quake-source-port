@@ -1682,6 +1682,60 @@ la Monstra
 @ World & Pickups
 la Mundus et Res
 
+@ 3D wireframe
+la Reticulum 3D
+
+@ Automap
+la Tabula automatica
+
+@ Automap Settings
+la Optiones tabulae automaticae
+
+@ Better weapon
+la Telum melius
+
+@ Center overlay
+la Superpositio media
+
+@ Corner minimap
+la Minima tabula in angulo
+
+@ Display
+la Ostentatio
+
+@ Explored only
+la Explorata tantum
+
+@ Full map
+la Tota tabula
+
+@ Never
+la Numquam
+
+@ Reveal
+la Revelatio
+
+@ Rotate with Player
+la Circumagere cum lusore
+
+@ Show Markers
+la Ostende signa
+
+@ Top-down
+la Desuper
+
+@ View Mode
+la Modus aspectus
+
+@ Weapon Auto-Switch
+la Mutatio automatica teli
+
+@ Weapon Priority
+la Ordo telorum
+
+@ Zoom
+la Magnificatio
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ la Volumen clamorum, impetuum, doloris et mortis monstrorum
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 la Volumen ianuarum, elevatorum, clavium, rerum captarum et aliorum effectuum mundi
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+la Reticulum 3D tabulam in prospectu inclinat ut altitudo appareat; Desuper aspectum planum ex alto depingit
+
+@ Arrange weapon priority order for Better weapon auto-switching
+la Ordina gradum telorum pro mutatione automatica ad Telum melius
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+la Configura aspectum, ostentationem, modum revelationis, magnificationem et signa tabulae automaticae 3D
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+la Minima tabula in angulo tabulam in summa dextra includit; Superpositio media reticulum pellucidum super aspectum ponit
+
+@ Disabled while Weapon Auto-Switch is set to Never
+la Inactivum dum Mutatio automatica teli ad Numquam posita est
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+la Explorata tantum conclavia cum ea invisis aperit; Tota tabula omnem geometriam gradus ostendit
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+la Exitus, claves, teleportatores, ianuas clausas et vestigium tuum recens in tabula automatica illustrat
+
+@ Opacity of the automap lines and panel
+la Opacitas linearum et tabulae automaticae
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+la Tabulam automaticam rotat ut directio aspectus sursum spectet; inactivum septentrionem in summo servat
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+la Tabulam automaticam vivam 3D vel desuper inter ludum ostendit; preme M pro tabula interactiva pleni quadri (modo singulari et cooperatione tantum)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+la Cum telum tollitur: Numquam telum praesens servat; Telum melius mutat tantum si altius in Ordine telorum stat
+
+@ Zoom level of the automap view
+la Gradus magnificationis aspectus tabulae automaticae
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ la Exscribe Data
 
 @ Switch Only
 la Muta Tantum
+
+@ Above
+la Supra
+
+@ Below
+la Infra
+
+@ Close
+la Claude
+
+@ Current floor
+la Tabulatum praesens
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+la Trahe tela ad ordinandum, vel preme Enter et clavibus sagittarum utere
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+la Trahe: Circumage  |  WASD: Move  |  Q/E: Tabulatum  |  Rota: Magnificatio  |  Tab: 3D/2D  |  F: Revela  |  R: Restitue  |  M/Esc: Claude
+
+@ Exit
+la Exitus
+
+@ Highest priority at top
+la Summus ordo in summo
+
+@ Move
+la Move
+
+@ Orbit
+la Circumage
+
+@ Pan
+la Transmove
+
+@ Place
+la Pone
+
+@ Press A to pick up a weapon, then move it up or down
+la Preme A ut telum tollas, deinde sursum vel deorsum move
+
+@ Reorder
+la Reordina
+
+@ Reset
+la Restitue
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+la Utere D-Pad vel vecte ad movendum, A ad ponendum, B ad abrogandum
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+la Utere sagittis Sursum et Deorsum ad movendum, Enter ad ponendum, Esc ad abrogandum
+
+@ View
+la Aspectus
 
 # ==== hud.txt ====
 

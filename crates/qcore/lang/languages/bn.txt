@@ -1682,6 +1682,60 @@ bn দানব
 @ World & Pickups
 bn জগৎ ও সামগ্রী
 
+@ 3D wireframe
+bn 3D ওয়্যারফ্রেম
+
+@ Automap
+bn অটোম্যাপ
+
+@ Automap Settings
+bn অটোম্যাপ সেটিংস
+
+@ Better weapon
+bn উন্নত অস্ত্র
+
+@ Center overlay
+bn মাঝের ওভারলে
+
+@ Corner minimap
+bn কোণের মিনিম্যাপ
+
+@ Display
+bn প্রদর্শন
+
+@ Explored only
+bn শুধু অন্বেষিত
+
+@ Full map
+bn সম্পূর্ণ ম্যাপ
+
+@ Never
+bn কখনোই নয়
+
+@ Reveal
+bn প্রকাশ
+
+@ Rotate with Player
+bn খেলোয়াড়ের সাথে ঘোরান
+
+@ Show Markers
+bn মার্কার দেখান
+
+@ Top-down
+bn উপর থেকে দৃশ্য
+
+@ View Mode
+bn দৃশ্য মোড
+
+@ Weapon Auto-Switch
+bn অস্ত্র অটো-সুইচ
+
+@ Weapon Priority
+bn অস্ত্রের অগ্রাধিকার
+
+@ Zoom
+bn জুম
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ bn দানবদের সতর্কতা, আক্রমণ, ব্যথ
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 bn দরজা, লিফট, সুইচ, বস্তু সংগ্রহ ও অন্যান্য জগতের শব্দের ভলিউম
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+bn 3D ওয়্যারফ্রেম উচ্চতা দেখাতে ম্যাপকে দৃষ্টিকোণে বাঁকায়; উপর থেকে দৃশ্য সমতল উপরের নকশা আঁকে
+
+@ Arrange weapon priority order for Better weapon auto-switching
+bn উন্নত অস্ত্র অটো-সুইচের জন্য অস্ত্রের অগ্রাধিকারের ক্রম সাজান
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+bn 3D ওয়্যারফ্রেম অটোম্যাপের দৃশ্য, প্রদর্শন, প্রকাশ মোড, জুম ও মার্কার কনফিগার করুন
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+bn কোণের মিনিম্যাপ ম্যাপকে উপরে-ডানে রাখে; মাঝের ওভারলে দৃশ্যের ওপর স্বচ্ছ ওয়্যারফ্রেম ভাসায়
+
+@ Disabled while Weapon Auto-Switch is set to Never
+bn অস্ত্র অটো-সুইচ 'কখনোই নয়' সেট থাকলে নিষ্ক্রিয় থাকে
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+bn শুধু অন্বেষিত আপনি ঘোরার সাথে সাথে ঘর দেখায়; সম্পূর্ণ ম্যাপ পুরো লেভেলের গঠন দেখায়
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+bn অটোম্যাপে প্রস্থান, চাবি, টেলিপোর্টার, তালাবদ্ধ দরজা এবং আপনার সাম্প্রতিক পথ হাইলাইট করে
+
+@ Opacity of the automap lines and panel
+bn অটোম্যাপের রেখা ও প্যানেলের অস্বচ্ছতা
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+bn আপনার দেখার দিক উপরে রাখতে অটোম্যাপ ঘোরায়; বন্ধ থাকলে উত্তর দিক উপরে থাকে
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+bn খেলার সময় লাইভ 3D ওয়্যারফ্রেম বা উপর থেকে অটোম্যাপ দেখায়; ইন্টারঅ্যাক্টিভ পূর্ণ-স্ক্রিন ম্যাপের জন্য M চাপুন (শুধু একক খেলা ও কো-অপ)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+bn অস্ত্র নেওয়ার সময়: 'কখনোই নয়' বর্তমান অস্ত্র রাখে; 'উন্নত অস্ত্র' কেবল অস্ত্রের অগ্রাধিকারে ওপরে থাকলে বদলায়
+
+@ Zoom level of the automap view
+bn অটোম্যাপ দৃশ্যের জুম মাত্রা
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ bn ডেটা কপি করুন
 
 @ Switch Only
 bn শুধু পরিবর্তন করুন
+
+@ Above
+bn উপরে
+
+@ Below
+bn নিচে
+
+@ Close
+bn বন্ধ করুন
+
+@ Current floor
+bn বর্তমান তলা
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+bn ক্রম বদলাতে অস্ত্র টেনে নিন, অথবা Enter চেপে তীর কী ব্যবহার করুন
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+bn টানা: ঘোরান  |  WASD: সরান  |  Q/E: তলা  |  হুইল: জুম  |  Tab: 3D/2D  |  F: দেখান  |  R: রিসেট  |  M/Esc: বন্ধ
+
+@ Exit
+bn প্রস্থান
+
+@ Highest priority at top
+bn সর্বোচ্চ অগ্রাধিকার উপরে
+
+@ Move
+bn সরান
+
+@ Orbit
+bn ঘোরান
+
+@ Pan
+bn স্লাইড
+
+@ Place
+bn রাখুন
+
+@ Press A to pick up a weapon, then move it up or down
+bn অস্ত্র তুলতে A চাপুন, তারপর উপরে বা নিচে সরান
+
+@ Reorder
+bn ক্রমবিন্যাস
+
+@ Reset
+bn রিসেট
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+bn সরাতে ডি-প্যাড বা স্টিক, রাখতে A, বাতিল করতে B ব্যবহার করুন
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+bn সরাতে উপর ও নিচের তীর, রাখতে Enter, বাতিল করতে Esc ব্যবহার করুন
+
+@ View
+bn দৃশ্য
 
 # ==== hud.txt ====
 

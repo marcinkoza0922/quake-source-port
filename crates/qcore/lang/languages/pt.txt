@@ -1682,6 +1682,60 @@ pt Monstros
 @ World & Pickups
 pt Mundo e itens
 
+@ 3D wireframe
+pt Estrutura 3D
+
+@ Automap
+pt Automapa
+
+@ Automap Settings
+pt Definições do automapa
+
+@ Better weapon
+pt Arma melhor
+
+@ Center overlay
+pt Sobreposição central
+
+@ Corner minimap
+pt Minimapa de canto
+
+@ Display
+pt Exibição
+
+@ Explored only
+pt Apenas explorado
+
+@ Full map
+pt Mapa completo
+
+@ Never
+pt Nunca
+
+@ Reveal
+pt Revelação
+
+@ Rotate with Player
+pt Rodar com o jogador
+
+@ Show Markers
+pt Mostrar marcadores
+
+@ Top-down
+pt Vista superior
+
+@ View Mode
+pt Modo de vista
+
+@ Weapon Auto-Switch
+pt Troca automática de arma
+
+@ Weapon Priority
+pt Prioridade das armas
+
+@ Zoom
+pt Zoom
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ pt Volume de alertas, ataques, dor e morte dos monstros
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 pt Volume de portas, elevadores, interruptores, recolhas de itens e outros efeitos do mundo
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+pt Estrutura 3D inclina o mapa em perspetiva para mostrar altura; Vista superior desenha um plano visto de cima
+
+@ Arrange weapon priority order for Better weapon auto-switching
+pt Ordena a prioridade das armas para a troca automática para Arma melhor
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+pt Configura a vista em estrutura 3D do automapa, exibição, revelação, zoom e marcadores
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+pt Minimapa de canto enquadra o mapa no canto superior direito; Sobreposição central mostra uma estrutura transparente sobre a vista
+
+@ Disabled while Weapon Auto-Switch is set to Never
+pt Desativado enquanto Troca automática de arma estiver em Nunca
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+pt Apenas explorado revela as salas à medida que as visitas; Mapa completo mostra toda a geometria do nível
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+pt Destaca saídas, chaves, teletransportadores, portas trancadas e o teu percurso recente no automapa
+
+@ Opacity of the automap lines and panel
+pt Opacidade das linhas e do painel do automapa
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+pt Roda o automapa para que a direção do olhar aponte para cima; desligado mantém o norte em cima
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+pt Mostra um automapa em estrutura 3D ou vista superior durante o jogo; prime M para o mapa interativo em ecrã inteiro (apenas um jogador e cooperativo)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+pt Ao apanhar uma arma: Nunca mantém a arma atual; Arma melhor só troca se estiver acima na Prioridade das armas
+
+@ Zoom level of the automap view
+pt Nível de zoom da vista do automapa
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ pt Copiar dados
 
 @ Switch Only
 pt Apenas mudar
+
+@ Above
+pt Acima
+
+@ Below
+pt Abaixo
+
+@ Close
+pt Fechar
+
+@ Current floor
+pt Piso atual
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+pt Arrasta as armas para reordenar, ou prime Enter e usa as setas
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+pt Arrastar: Orbitar  |  WASD: Mover  |  Q/E: Piso  |  Roda: Zoom  |  Tab: 3D/2D  |  F: Revelar  |  R: Repor  |  M/Esc: Fechar
+
+@ Exit
+pt Saída
+
+@ Highest priority at top
+pt Prioridade máxima em cima
+
+@ Move
+pt Mover
+
+@ Orbit
+pt Orbitar
+
+@ Pan
+pt Mover
+
+@ Place
+pt Colocar
+
+@ Press A to pick up a weapon, then move it up or down
+pt Prime A para pegar numa arma e move-a para cima ou para baixo
+
+@ Reorder
+pt Reordenar
+
+@ Reset
+pt Repor
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+pt Usa o D-Pad ou manípulo para mover, A para colocar, B para cancelar
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+pt Usa as setas Cima e Baixo para mover, Enter para colocar, Esc para cancelar
+
+@ View
+pt Vista
 
 # ==== hud.txt ====
 

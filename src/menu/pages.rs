@@ -116,6 +116,7 @@ macro_rules! controls_list {
             bind("Look Up", "+lookup"),
             bind("Look Down", "+lookdown"),
             bind("Center View", "centerview"),
+            bind("Automap", "automap"),
             bind("Scoreboard", "+showscores"),
             bind("Quick Save", "echo Quicksaving...; wait; save quick"),
             bind("Quick Load", "echo Quickloading...; wait; load quick"),
@@ -215,6 +216,11 @@ pub(super) const fn toggle(label: &'static str, cvar: &'static str) -> Item {
     Item::Toggle { label, cvar }
 }
 
+pub(super) const WEAPON_SWITCH: &[(&str, f32)] = &[("Never", 0.0), ("Better weapon", 1.0)];
+pub(super) const AUTOMAP_VIEW: &[(&str, f32)] = &[("3D wireframe", 0.0), ("Top-down", 1.0)];
+pub(super) const AUTOMAP_DISPLAY: &[(&str, f32)] = &[("Corner minimap", 0.0), ("Center overlay", 1.0)];
+pub(super) const AUTOMAP_REVEAL: &[(&str, f32)] = &[("Explored only", 0.0), ("Full map", 1.0)];
+
 pub(super) const GAMEPLAY: &[Item] = &[
     Item::Language,
     toggle("Translate Console", "con_translate"),
@@ -225,10 +231,24 @@ pub(super) const GAMEPLAY: &[Item] = &[
     slider("View Bob", "cl_bob", 0.0, 0.02, 0.002),
     toggle("Gun Kick", "v_gunkick"),
     toggle("Always Run", "cl_alwaysrun"),
+    Item::Choice { label: "Weapon Auto-Switch", cvar: "cl_autoswitch", choices: WEAPON_SWITCH },
+    Item::Sub { label: "Weapon Priority", page: Page::WeaponPriority },
+    toggle("Automap", "cl_automap"),
+    Item::Sub { label: "Automap Settings", page: Page::Automap },
     Item::Choice { label: "On Death", cvar: "cl_deathaction", choices: &[("Ask", 0.0), ("Most recent save", 1.0), ("Select save", 2.0), ("Restart level", 3.0)] },
     toggle("Autosave", "sv_autosave"),
     Item::Sub { label: "Autosave Settings", page: Page::Autosave },
     Item::UserDataDir,
+];
+
+pub(super) const AUTOMAP: &[Item] = &[
+    Item::Choice { label: "View Mode", cvar: "cl_automap_view", choices: AUTOMAP_VIEW },
+    Item::Choice { label: "Display", cvar: "cl_automap_display", choices: AUTOMAP_DISPLAY },
+    toggle("Rotate with Player", "cl_automap_rotate"),
+    Item::Choice { label: "Reveal", cvar: "cl_automap_reveal", choices: AUTOMAP_REVEAL },
+    slider("Zoom", "cl_automap_zoom", 0.5, 3.0, 0.25),
+    slider("Opacity", "cl_automap_alpha", 0.2, 1.0, 0.1),
+    toggle("Show Markers", "cl_automap_markers"),
 ];
 
 pub(super) const GRENADE_ARC: &[Item] = &[

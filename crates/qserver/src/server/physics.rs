@@ -145,6 +145,7 @@ impl Server {
         // this frame (projectiles fired from a think, sparks) get their first
         // physics next frame. WinQuake re-read num_edicts and ran them now.
         let cap = if freeze { maxclients + 1 } else { vm.num_edicts() as u32 };
+        let mut post_think_weapons: Vec<(u32, crate::weaponswitch::WeaponSnapshot)> = Vec::new();
         let mut i = 0u32;
         loop {
             if i >= cap || c.sv.error.is_some() {
@@ -160,13 +161,19 @@ impl Server {
                 w.link_edict(&mut Ents { vm: &mut *vm, c: &mut *c }, e, true);
             }
             if e > 0 && e <= maxclients {
-                if !c.clients[e as usize - 1].active {
+                let ci = e as usize - 1;
+                if !c.clients[ci].active {
                     continue;
                 }
+                let local_client = c.clients[ci].local;
                 vm.set_g_f(g.time, vm.time as f32);
                 vm.set_self(e);
                 exec(vm, c, w, vm.g_i(g.f_player_pre_think));
+                let pre_move_weapon = local_client.then(|| crate::weaponswitch::WeaponSnapshot::capture(vm, &f, e));
                 let ok = qworld::phys::physics_client_move(w, &mut Ents { vm: &mut *vm, c: &mut *c }, &p, e);
+                if ok && let Some(snap) = pre_move_weapon {
+                    snap.apply(vm, &f, &c.cvars, e);
+                }
                 if ok && toys {
                     crate::addons::gel_phys::land(&mut l.gel, &mut Ents { vm: &mut *vm, c: &mut *c }, e);
                 }
@@ -174,6 +181,9 @@ impl Server {
                     vm.set_g_f(g.time, vm.time as f32);
                     vm.set_self(e);
                     exec(vm, c, w, vm.g_i(g.f_player_post_think));
+                    if local_client && !vm.is_free(e) {
+                        post_think_weapons.push((e, crate::weaponswitch::WeaponSnapshot::capture(vm, &f, e)));
+                    }
                 }
             } else {
                 let mut ep = p;
@@ -199,6 +209,11 @@ impl Server {
                         x.sendinterval = true;
                     }
                 }
+            }
+        }
+        if c.sv.error.is_none() {
+            for (e, snap) in post_think_weapons {
+                snap.apply(vm, &f, &c.cvars, e);
             }
         }
         let fr = vm.g_f(g.force_retouch);

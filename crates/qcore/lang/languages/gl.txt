@@ -1682,6 +1682,60 @@ gl Monstros
 @ World & Pickups
 gl Mundo e obxectos
 
+@ 3D wireframe
+gl Arame 3D
+
+@ Automap
+gl Automapa
+
+@ Automap Settings
+gl Axustes do automapa
+
+@ Better weapon
+gl Mellor arma
+
+@ Center overlay
+gl Superposición central
+
+@ Corner minimap
+gl Minimapa na esquina
+
+@ Display
+gl Visualización
+
+@ Explored only
+gl Só o explorado
+
+@ Full map
+gl Mapa completo
+
+@ Never
+gl Nunca
+
+@ Reveal
+gl Revelación
+
+@ Rotate with Player
+gl Rotar co xogador
+
+@ Show Markers
+gl Amosar marcadores
+
+@ Top-down
+gl Vista cenital
+
+@ View Mode
+gl Modo de vista
+
+@ Weapon Auto-Switch
+gl Cambio automático de arma
+
+@ Weapon Priority
+gl Prioridade de armas
+
+@ Zoom
+gl Zoom
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ gl Volume de alertas, ataques, dor e morte dos monstros
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 gl Volume de portas, ascensores, interruptores, recollida de obxectos e outros efectos do mundo
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+gl Arame 3D inclina o mapa en perspectiva para amosar a altura; Vista cenital debuxa un plano desde arriba
+
+@ Arrange weapon priority order for Better weapon auto-switching
+gl Ordena a prioridade das armas para o cambio automático a Mellor arma
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+gl Configura a vista, visualización, modo de revelación, zoom e marcadores do automapa de arame 3D
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+gl Minimapa na esquina encadra o mapa arriba á dereita; Superposición central mostra un arame transparente sobre a vista
+
+@ Disabled while Weapon Auto-Switch is set to Never
+gl Desactivado mentres Cambio automático de arma estea en Nunca
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+gl Só o explorado revela as salas ao visitalas; Mapa completo mostra toda a xeometría do nivel
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+gl Destaca saídas, chaves, teletransportadores, portas pechadas e o teu rastro recente no automapa
+
+@ Opacity of the automap lines and panel
+gl Opacidade das liñas e do panel do automapa
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+gl Rota o automapa para que a túa dirección apunte cara arriba; desactivado mantén o norte arriba
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+gl Amosa un automapa en vivo de arame 3D ou vista cenital ao xogar; preme M para o mapa interactivo a pantalla completa (só un xogador e cooperativo)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+gl Ao recoller unha arma: Nunca mantén a arma actual; Mellor arma cambia só se ten maior rango en Prioridade de armas
+
+@ Zoom level of the automap view
+gl Nivel de zoom da vista do automapa
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ gl Copiar datos
 
 @ Switch Only
 gl Só cambiar
+
+@ Above
+gl Arriba
+
+@ Below
+gl Abaixo
+
+@ Close
+gl Pechar
+
+@ Current floor
+gl Planta actual
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+gl Arrastra as armas para reordenalas, ou preme Intro e usa as frechas
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+gl Arrastrar: Orbitar  |  WASD: Desprazar  |  Q/E: Planta  |  Roda: Zoom  |  Tab: 3D/2D  |  F: Revelar  |  R: Restablecer  |  M/Esc: Pechar
+
+@ Exit
+gl Saída
+
+@ Highest priority at top
+gl Maior prioridade arriba
+
+@ Move
+gl Mover
+
+@ Orbit
+gl Orbitar
+
+@ Pan
+gl Desprazar
+
+@ Place
+gl Colocar
+
+@ Press A to pick up a weapon, then move it up or down
+gl Preme A para coller unha arma e móvea arriba ou abaixo
+
+@ Reorder
+gl Reordenar
+
+@ Reset
+gl Restablecer
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+gl Usa a cruceta ou a panca para mover, A para colocar, B para cancelar
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+gl Usa as frechas Arriba e Abaixo para mover, Intro para colocar, Esc para cancelar
+
+@ View
+gl Vista
 
 # ==== hud.txt ====
 

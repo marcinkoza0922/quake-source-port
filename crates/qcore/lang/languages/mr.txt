@@ -1682,6 +1682,60 @@ mr राक्षस
 @ World & Pickups
 mr जग आणि वस्तू
 
+@ 3D wireframe
+mr 3D वायरफ्रेम
+
+@ Automap
+mr ऑटोमॅप
+
+@ Automap Settings
+mr ऑटोमॅप सेटिंग्ज
+
+@ Better weapon
+mr चांगले शस्त्र
+
+@ Center overlay
+mr मध्य ओव्हरले
+
+@ Corner minimap
+mr कोपऱ्यातील मिनीमॅप
+
+@ Display
+mr प्रदर्शन
+
+@ Explored only
+mr फक्त शोधलेले
+
+@ Full map
+mr संपूर्ण मॅप
+
+@ Never
+mr कधीही नाही
+
+@ Reveal
+mr उघड करणे
+
+@ Rotate with Player
+mr खेळाडूसोबत फिरवा
+
+@ Show Markers
+mr मार्कर्स दाखवा
+
+@ Top-down
+mr वरचा दृष्टिकोन
+
+@ View Mode
+mr दृश्य मोड
+
+@ Weapon Auto-Switch
+mr शस्त्र ऑटो-स्विच
+
+@ Weapon Priority
+mr शस्त्र प्राधान्य
+
+@ Zoom
+mr झूम
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ mr राक्षसांचे इशारे, हल्ले, वेदन
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 mr दरवाजे, लिफ्ट, स्विच, वस्तू उचलणे आणि इतर जग प्रभावांचा आवाज स्तर
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+mr 3D वायरफ्रेम उंची दाखवण्यासाठी मॅप तिरका करते; वरचा दृष्टिकोन सपाट वरील नकाशा काढतो
+
+@ Arrange weapon priority order for Better weapon auto-switching
+mr चांगले शस्त्र ऑटो-स्विचसाठी शस्त्रांचा प्राधान्यक्रम ठरवा
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+mr 3D वायरफ्रेम ऑटोमॅप दृश्य, प्रदर्शन, उघडण्याचा मोड, झूम आणि मार्कर्स सेट करा
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+mr कोपऱ्यातील मिनीमॅप मॅप वर-उजवीकडे ठेवतो; मध्य ओव्हरले दृश्यावर पारदर्शक वायरफ्रेम दाखवतो
+
+@ Disabled while Weapon Auto-Switch is set to Never
+mr शस्त्र ऑटो-स्विच 'कधीही नाही' वर असताना अक्षम राहते
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+mr फक्त शोधलेले तुम्ही जाताना खोल्या दाखवते; संपूर्ण मॅप संपूर्ण पातळीची रचना दाखवतो
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+mr ऑटोमॅपवर निर्गमन, चाव्या, टेलिपोर्टर्स, कुलूपबंद दारे आणि तुमचा अलीकडील मार्ग ठळक करतो
+
+@ Opacity of the automap lines and panel
+mr ऑटोमॅप रेषा आणि पॅनेलची अपारदर्शकता
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+mr तुमची पाहण्याची दिशा वर राहील अशा प्रकारे ऑटोमॅप फिरवतो; बंद असताना उत्तर वर राहते
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+mr खेळताना थेट 3D वायरफ्रेम किंवा वरचा ऑटोमॅप दाखवतो; पूर्ण-स्क्रीन संवादात्मक मॅपसाठी M दाबा (फक्त सिंगल प्लेयर आणि को-ऑप)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+mr शस्त्र उचलताना: 'कधीही नाही' सध्याचे शस्त्र ठेवते; 'चांगले शस्त्र' फक्त शस्त्र प्राधान्यात वर असल्यास बदलते
+
+@ Zoom level of the automap view
+mr ऑटोमॅप दृश्याची झूम पातळी
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ mr डेटा कॉपी करा
 
 @ Switch Only
 mr फक्त बदला
+
+@ Above
+mr वर
+
+@ Below
+mr खाली
+
+@ Close
+mr बंद करा
+
+@ Current floor
+mr सध्याचा मजला
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+mr क्रम बदलण्यासाठी शस्त्रे ओढा, किंवा Enter दाबून बाण कळा वापरा
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+mr ओढा: फिरवा  |  WASD: सरकवा  |  Q/E: मजला  |  चाक: झूम  |  Tab: 3D/2D  |  F: दाखवा  |  R: रीसेट  |  M/Esc: बंद
+
+@ Exit
+mr बाहेर पडा
+
+@ Highest priority at top
+mr सर्वाधिक प्राधान्य सर्वात वर
+
+@ Move
+mr हलवा
+
+@ Orbit
+mr फिरवा
+
+@ Pan
+mr सरकवा
+
+@ Place
+mr ठेवा
+
+@ Press A to pick up a weapon, then move it up or down
+mr शस्त्र निवडण्यासाठी A दाबा, नंतर ते वर किंवा खाली हलवा
+
+@ Reorder
+mr क्रम बदला
+
+@ Reset
+mr रीसेट
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+mr हलवण्यासाठी डी-पॅड किंवा स्टिक, ठेवण्यासाठी A, रद्द करण्यासाठी B वापरा
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+mr हलवण्यासाठी वर आणि खाली बाण, ठेवण्यासाठी Enter, रद्द करण्यासाठी Esc वापरा
+
+@ View
+mr दृश्य
 
 # ==== hud.txt ====
 

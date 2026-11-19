@@ -67,6 +67,7 @@ pub(crate) mod feedback;
 use crate::reticle::{self, draw_crosshair, hitmarker};
 mod video;
 mod touch;
+mod weaponswitch;
 
 /// Server tic rate when rendering faster (ironwail-style decoupling).
 const SERVER_TIC: f64 = 1.0 / 72.0;
@@ -136,6 +137,8 @@ pub struct Host {
     hitfx: crate::hitfx::HitFx,
     tracers: crate::tracers::Tracers,
     bboxes: crate::bboxes::BBoxes,
+    automap: crate::automap::Automap,
+    remote_wswitch: weaponswitch::RemoteSwitch,
     /// `r_testlight`: fixed dynamic lights for checking real-time lighting.
     test_lights: Vec<qrender::DLight>,
     /// scr_showspeed: (peak this interval, shown value, interval start).
@@ -310,6 +313,8 @@ impl Host {
             hitfx: crate::hitfx::HitFx::default(),
             tracers: Default::default(),
             bboxes: Default::default(),
+            automap: Default::default(),
+            remote_wswitch: Default::default(),
             test_lights: Vec::new(),
             speed: (0.0, -1.0, 0.0),
             realtime: 0.0,
@@ -427,6 +432,12 @@ impl Host {
     /// Host_Init, a dedicated server runs only autoexec.cfg and the command
     /// line, never the game's quake.rc (which may set cvars, e.g. AD's
     /// `temp1 1024`).
+    /// Player 1's current world origin (from the client's view entity).
+    pub(super) fn player_origin(&self) -> Vec3 {
+        let o = self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| e.origin);
+        Vec3::from_array(o)
+    }
+
     pub fn make_dedicated(&mut self) {
         self.dedicated = true;
         let _ = self.cbuf.take_text();

@@ -1682,6 +1682,60 @@ ja モンスター
 @ World & Pickups
 ja ワールドとアイテム
 
+@ 3D wireframe
+ja 3Dワイヤーフレーム
+
+@ Automap
+ja オートマップ
+
+@ Automap Settings
+ja オートマップ設定
+
+@ Better weapon
+ja より強い武器
+
+@ Center overlay
+ja 中央オーバーレイ
+
+@ Corner minimap
+ja 右上ミニマップ
+
+@ Display
+ja 表示位置
+
+@ Explored only
+ja 探索済みのみ
+
+@ Full map
+ja 全体マップ
+
+@ Never
+ja 切り替えない
+
+@ Reveal
+ja 表示範囲
+
+@ Rotate with Player
+ja プレイヤーに合わせて回転
+
+@ Show Markers
+ja マーカーを表示
+
+@ Top-down
+ja トップダウン
+
+@ View Mode
+ja 表示モード
+
+@ Weapon Auto-Switch
+ja 武器の自動切り替え
+
+@ Weapon Priority
+ja 武器の優先順位
+
+@ Zoom
+ja ズーム
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ ja モンスターの発見・攻撃・ダメージ・死亡音の音量
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 ja 扉、リフト、スイッチ、アイテム取得などワールド効果音の音量
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+ja 3Dワイヤーフレームは高低差が分かるよう立体的に傾けて表示し、トップダウンは平面的な真上からの図を描画します
+
+@ Arrange weapon priority order for Better weapon auto-switching
+ja 「より強い武器」への自動切り替えで使う武器の優先順位を並べ替えます
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+ja 3Dワイヤーフレーム・オートマップの表示モード、位置、表示範囲、ズーム、マーカーを設定します
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+ja 右上ミニマップは画面右上に枠表示し、中央オーバーレイは画面中央に半透明のワイヤーフレームを重ねます
+
+@ Disabled while Weapon Auto-Switch is set to Never
+ja 武器の自動切り替えが「切り替えない」のときは無効です
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+ja 探索済みのみは訪れた部屋だけを表示し、全体マップはレベル全体の構造を表示します
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+ja オートマップ上に出口、鍵、テレポーター、鍵付きドア、最近の移動軌跡を強調表示します
+
+@ Opacity of the automap lines and panel
+ja オートマップの線とパネルの不透明度
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+ja 向いている方向が上になるようにオートマップを回転します。オフでは北が上になります
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+ja プレイ中に3Dワイヤーフレームまたはトップダウンのオートマップを表示します。Mキーで操作可能な全画面マップを開きます（シングルプレイ・協力プレイのみ）
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+ja 武器を拾ったとき：「切り替えない」は現在の武器を保ち、「より強い武器」は武器の優先順位が上なら切り替えます
+
+@ Zoom level of the automap view
+ja オートマップ表示のズーム倍率
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ ja データをコピー
 
 @ Switch Only
 ja 切り替えのみ
+
+@ Above
+ja 上階
+
+@ Below
+ja 下階
+
+@ Close
+ja 閉じる
+
+@ Current floor
+ja 現在の階
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+ja 武器をドラッグして並べ替えるか、Enterを押して矢印キーで移動します
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+ja ドラッグ：回転  |  WASD：移動  |  Q/E：階層  |  ホイール：ズーム  |  Tab：3D/2D  |  F：表示切替  |  R：リセット  |  M/Esc：閉じる
+
+@ Exit
+ja 出口
+
+@ Highest priority at top
+ja 最上位が最優先
+
+@ Move
+ja 移動
+
+@ Orbit
+ja 回転
+
+@ Pan
+ja 平行移動
+
+@ Place
+ja 決定
+
+@ Press A to pick up a weapon, then move it up or down
+ja Aで武器を選択し、上下に動かして順位を変更します
+
+@ Reorder
+ja 並べ替え
+
+@ Reset
+ja リセット
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+ja 十字キーまたはスティックで移動、Aで決定、Bでキャンセル
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+ja 上下の矢印キーで移動、Enterで決定、Escでキャンセル
+
+@ View
+ja 視点
 
 # ==== hud.txt ====
 

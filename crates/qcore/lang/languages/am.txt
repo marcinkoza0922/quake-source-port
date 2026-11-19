@@ -1682,6 +1682,60 @@ am ጭራቆች
 @ World & Pickups
 am ዓለም እና ዕቃዎች
 
+@ 3D wireframe
+am 3D ሽቦ-ፍሬም
+
+@ Automap
+am ራስ-ሰር ካርታ
+
+@ Automap Settings
+am የራስ-ሰር ካርታ ቅንብሮች
+
+@ Better weapon
+am የተሻለ መሳሪያ
+
+@ Center overlay
+am መካከለኛ ተደራቢ
+
+@ Corner minimap
+am የማዕዘን ንዑስ ካርታ
+
+@ Display
+am አቀራረብ
+
+@ Explored only
+am የተዳሰሱ ብቻ
+
+@ Full map
+am ሙሉ ካርታ
+
+@ Never
+am በጭራሽ
+
+@ Reveal
+am መግለጥ
+
+@ Rotate with Player
+am ከተጫዋቹ ጋር አዙር
+
+@ Show Markers
+am ምልክቶችን አሳይ
+
+@ Top-down
+am ከላይ እይታ
+
+@ View Mode
+am የእይታ ሁነታ
+
+@ Weapon Auto-Switch
+am የመሳሪያ ራስ-ሰር ቅየራ
+
+@ Weapon Priority
+am የመሳሪያ ቅድሚያ
+
+@ Zoom
+am ማጉያ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ am የጭራቆች ማስጠንቀቂያ፣ ጥቃት፣ ህመም እና ሞት
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 am የበሮች፣ ሊፍቶች፣ ማብሪያና ማጥፊያዎች፣ ዕቃ ማንሳት እና ሌሎች የዓለም ውጤቶች ድምፅ መጠን
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+am 3D ሽቦ-ፍሬም ከፍታን ለማሳየት ካርታውን በእይታ ያዘነብላል፤ ከላይ እይታ ጠፍጣፋ የላይኛው እይታ ይስላል
+
+@ Arrange weapon priority order for Better weapon auto-switching
+am ለተሻለ መሳሪያ ራስ-ሰር ቅየራ የመሳሪያዎችን ቅድሚያ ቅደም ተከተል ያስተካክሉ
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+am የ3D ሽቦ-ፍሬም ራስ-ሰር ካርታ እይታን፣ አቀራረብን፣ የመግለጥ ሁነታን፣ ማጉያን እና ምልክቶችን ያዋቅሩ
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+am የማዕዘን ንዑስ ካርታ ካርታውን ከላይ በቀኝ ያስቀምጣል፤ መካከለኛ ተደራቢ ግልጽ ሽቦ-ፍሬም በእይታው ላይ ያሳያል
+
+@ Disabled while Weapon Auto-Switch is set to Never
+am የመሳሪያ ራስ-ሰር ቅየራ ወደ በጭራሽ ሲቀናበር ይቦዝናል
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+am የተዳሰሱ ብቻ ክፍሎችን ሲጎበኙ ይገልጣል፤ ሙሉ ካርታ የደረጃውን ሙሉ ቅርጽ ያሳያል
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+am መውጫዎችን፣ ቁልፎችን፣ ቴሌፖርተሮችን፣ የተቆለፉ በሮችን እና የቅርብ ጊዜ ዱካዎን በራስ-ሰር ካርታ ላይ ያደምቃል
+
+@ Opacity of the automap lines and panel
+am የራስ-ሰር ካርታ መስመሮች እና ፓነል ግልጽነት
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+am የሚያዩበት አቅጣጫ ወደ ላይ እንዲሆን ራስ-ሰር ካርታውን ያዞራል፤ ሲጠፋ ሰሜን ከላይ ይቆያል
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+am ሲጫወቱ ቀጥታ 3D ሽቦ-ፍሬም ወይም ከላይ ራስ-ሰር ካርታ ያሳያል፤ ለሙሉ ማያ ገጽ በይነተገናኝ ካርታ M ይጫኑ (ለአንድ ተጫዋች እና ትብብር ብቻ)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+am መሳሪያ ሲያነሱ፦ በጭራሽ የአሁኑን መሳሪያዎን ያቆያል፤ የተሻለ መሳሪያ በመሳሪያ ቅድሚያ ከፍ ካለ ብቻ ይቀይራል
+
+@ Zoom level of the automap view
+am የራስ-ሰር ካርታ እይታ የማጉያ ደረጃ
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ am ውሂብ ገልብጥ
 
 @ Switch Only
 am ቀይር ብቻ
+
+@ Above
+am ከላይ
+
+@ Below
+am ከታች
+
+@ Close
+am ዝጋ
+
+@ Current floor
+am የአሁኑ ወለል
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+am ቅደም ተከተል ለመቀየር መሳሪያዎችን ይጎትቱ፣ ወይም Enter ተጭነው የቀስት ቁልፎችን ይጠቀሙ
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+am ጎትት፦ አዙር  |  WASD፦ አንቀሳቅስ  |  Q/E፦ ወለል  |  ዊል፦ አጉላ  |  Tab፦ 3D/2D  |  F፦ ግለጥ  |  R፦ ዳግም አስጀምር  |  M/Esc፦ ዝጋ
+
+@ Exit
+am መውጫ
+
+@ Highest priority at top
+am ከፍተኛው ቅድሚያ ከላይ
+
+@ Move
+am አንቀሳቅስ
+
+@ Orbit
+am አዙር
+
+@ Pan
+am አሸጋግር
+
+@ Place
+am አስቀምጥ
+
+@ Press A to pick up a weapon, then move it up or down
+am መሳሪያ ለማንሳት A ይጫኑ፣ ከዚያ ወደ ላይ ወይም ወደ ታች ያንቀሳቅሱት
+
+@ Reorder
+am ቅደም ተከተል አስተካክል
+
+@ Reset
+am ዳግም አስጀምር
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+am ለማንቀሳቀስ ዲ-ፓድ ወይም ስቲክ፣ ለማስቀመጥ A፣ ለመሰረዝ B ይጠቀሙ
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+am ለማንቀሳቀስ የላይ እና የታች ቀስቶችን፣ ለማስቀመጥ Enter፣ ለመሰረዝ Esc ይጠቀሙ
+
+@ View
+am እይታ
 
 # ==== hud.txt ====
 

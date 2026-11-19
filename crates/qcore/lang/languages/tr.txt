@@ -1682,6 +1682,60 @@ tr Canavarlar
 @ World & Pickups
 tr Dünya ve Eşyalar
 
+@ 3D wireframe
+tr 3D tel kafes
+
+@ Automap
+tr Oto-Harita
+
+@ Automap Settings
+tr Oto-Harita Ayarları
+
+@ Better weapon
+tr Daha iyi silah
+
+@ Center overlay
+tr Orta kaplama
+
+@ Corner minimap
+tr Köşe mini haritası
+
+@ Display
+tr Görünüm
+
+@ Explored only
+tr Yalnızca keşfedilen
+
+@ Full map
+tr Tam harita
+
+@ Never
+tr Asla
+
+@ Reveal
+tr Açma
+
+@ Rotate with Player
+tr Oyuncuyla Döndür
+
+@ Show Markers
+tr İşaretleri Göster
+
+@ Top-down
+tr Üstten görünüm
+
+@ View Mode
+tr Görünüm Modu
+
+@ Weapon Auto-Switch
+tr Otomatik Silah Değiştirme
+
+@ Weapon Priority
+tr Silah Önceliği
+
+@ Zoom
+tr Yakınlaştırma
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2255,6 +2309,42 @@ tr Canavar uyarı, saldırı, acı ve ölüm seslerinin düzeyi
 
 @ Volume of doors, lifts, switches, item pickups and other world effects
 tr Kapılar, asansörler, düğmeler, eşya toplama ve diğer dünya efektlerinin sesi
+
+@ 3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view
+tr 3D tel kafes yüksekliği göstermek için haritayı perspektifle eğer; Üstten görünüm düz bir kuşbakışı çizer
+
+@ Arrange weapon priority order for Better weapon auto-switching
+tr Daha iyi silah otomatik geçişi için silah öncelik sırasını düzenler
+
+@ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
+tr 3D tel kafes oto-haritanın görünümünü, yerleşimini, açma modunu, yakınlaştırmasını ve işaretlerini ayarlar
+
+@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
+tr Köşe mini haritası haritayı sağ üste yerleştirir; Orta kaplama görüntünün üzerine yarı saydam bir tel kafes çizer
+
+@ Disabled while Weapon Auto-Switch is set to Never
+tr Otomatik Silah Değiştirme Asla ayarlıyken devre dışıdır
+
+@ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
+tr Yalnızca keşfedilen odaları gezdikçe açar; Tam harita tüm bölüm geometrisini gösterir
+
+@ Highlights exits, keys, teleporters, locked doors and your recent trail on the automap
+tr Oto-haritada çıkışları, anahtarları, ışınlayıcıları, kilitli kapıları ve son izini vurgular
+
+@ Opacity of the automap lines and panel
+tr Oto-harita çizgilerinin ve panelinin opaklığı
+
+@ Rotates the automap so your facing direction points up; off keeps North at the top
+tr Oto-haritayı baktığın yön yukarı gelecek şekilde döndürür; kapalıyken kuzey üstte kalır
+
+@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
+tr Oynarken canlı 3D tel kafes veya üstten oto-harita gösterir; etkileşimli tam ekran harita için M'ye bas (yalnızca tek oyunculu ve ortak oyun)
+
+@ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
+tr Silah alırken: Asla mevcut silahını korur; Daha iyi silah yalnızca Silah Önceliği listesinde daha üstteyse değiştirir
+
+@ Zoom level of the automap view
+tr Oto-harita görünümünün yakınlaştırma düzeyi
 
 # ==== ui.txt ====
 
@@ -3185,6 +3275,60 @@ tr Verileri Kopyala
 
 @ Switch Only
 tr Sadece Değiştir
+
+@ Above
+tr Üstte
+
+@ Below
+tr Altta
+
+@ Close
+tr Kapat
+
+@ Current floor
+tr Geçerli kat
+
+@ Drag weapons to reorder, or press Enter and use arrow keys
+tr Sıralamak için silahları sürükle veya Enter'a basıp ok tuşlarını kullan
+
+@ Drag: Orbit  |  WASD: Pan  |  Q/E: Floor  |  Wheel: Zoom  |  Tab: 3D/2D  |  F: Reveal  |  R: Reset  |  M/Esc: Close
+tr Sürükle: Döndür  |  WASD: Kaydır  |  Q/E: Kat  |  Tekerlek: Yakınlaştır  |  Tab: 3D/2D  |  F: Aç  |  R: Sıfırla  |  M/Esc: Kapat
+
+@ Exit
+tr Çıkış
+
+@ Highest priority at top
+tr En yüksek öncelik üstte
+
+@ Move
+tr Taşı
+
+@ Orbit
+tr Döndür
+
+@ Pan
+tr Kaydır
+
+@ Place
+tr Yerleştir
+
+@ Press A to pick up a weapon, then move it up or down
+tr Bir silahı seçmek için A'ya bas, ardından yukarı veya aşağı taşı
+
+@ Reorder
+tr Sırala
+
+@ Reset
+tr Sıfırla
+
+@ Use D-Pad or stick to move, A to place, B to cancel
+tr Taşımak için D-Pad veya çubuğu, yerleştirmek için A'yı, iptal için B'yi kullan
+
+@ Use Up and Down arrows to move, Enter to place, Esc to cancel
+tr Taşımak için Yukarı/Aşağı okları, yerleştirmek için Enter'ı, iptal için Esc'i kullan
+
+@ View
+tr Görünüm
 
 # ==== hud.txt ====
 

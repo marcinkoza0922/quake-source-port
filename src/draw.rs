@@ -128,9 +128,18 @@ pub const WHITE: [f32; 4] = [1.0; 4];
 /// Move draws by (`dx`, `dy`) pixels (a split-screen cell's HUD into place).
 pub fn translate(list: &mut [Draw2D], dx: f32, dy: f32) {
     for d in list {
-        let (Draw2D::Pic { x, y, .. } | Draw2D::Char { x, y, .. } | Draw2D::Fill { x, y, .. } | Draw2D::Tile { x, y, .. }) = d;
-        *x += dx;
-        *y += dy;
+        match d {
+            Draw2D::Pic { x, y, .. } | Draw2D::Char { x, y, .. } | Draw2D::Fill { x, y, .. } | Draw2D::Tile { x, y, .. } => {
+                *x += dx;
+                *y += dy;
+            }
+            Draw2D::Line { x0, y0, x1, y1, .. } => {
+                *x0 += dx;
+                *y0 += dy;
+                *x1 += dx;
+                *y1 += dy;
+            }
+        }
     }
 }
 
@@ -218,6 +227,12 @@ impl Canvas {
     pub fn fill(&mut self, x: f32, y: f32, w: f32, h: f32, color: [f32; 4]) {
         let (px, py) = self.px(x, y);
         self.push(Draw2D::Fill { x: px, y: py, w: w * self.scale, h: h * self.scale, color });
+    }
+    /// Screen-space line in virtual units, `width` in framebuffer pixels.
+    pub fn line(&mut self, x0: f32, y0: f32, x1: f32, y1: f32, width: f32, color: [f32; 4]) {
+        let (px0, py0) = self.px(x0, y0);
+        let (px1, py1) = self.px(x1, y1);
+        self.push(Draw2D::Line { x0: px0, y0: py0, x1: px1, y1: py1, width, color });
     }
 
     /// Adds a draw, cut to [`Self::clip`].
