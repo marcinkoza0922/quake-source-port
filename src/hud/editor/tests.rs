@@ -1,5 +1,6 @@
 use super::*;
 use crate::hud::layout::Anchor;
+use crate::hud::place;
 
 fn setup() -> (Editor, Cvars) {
     let mut cv = Cvars::new();
@@ -117,4 +118,105 @@ fn reset_asks_first() {
     ed.key(K_ENTER, &mut cv);
     assert_eq!(cv.by_name(CVAR).unwrap().string, "default");
     assert_eq!(cv.value_of(PRESET), 0.0);
+}
+
+#[test]
+fn hamburger_collapses_and_expands_the_dialog() {
+    let (mut ed, mut cv) = setup();
+    let (x, y) = ed.pos.unwrap();
+    let full_h = ed.dims(5).h;
+    assert!(full_h > TITLE_H);
+    // click the hamburger button in the top-right corner
+    ed.mouse_move((x + W - 10.0, y + 5.0), &mut cv);
+    ed.key(K_MOUSE1, &mut cv);
+    assert!(ed.collapsed);
+    assert_eq!(ed.dims(5).h, TITLE_H);
+    // title bar still drags while collapsed
+    ed.mouse_move((x + 20.0, y + 5.0), &mut cv);
+    ed.key(K_MOUSE1, &mut cv);
+    ed.mouse_move((x - 10.0, y + 25.0), &mut cv);
+    ed.mouse_up();
+    assert_eq!(ed.pos, Some((x - 30.0, y + 20.0)));
+    // clicking the hamburger button again expands it
+    let (x2, y2) = ed.pos.unwrap();
+    ed.mouse_move((x2 + W - 10.0, y2 + 5.0), &mut cv);
+    ed.key(K_MOUSE1, &mut cv);
+    assert!(!ed.collapsed);
+    assert_eq!(ed.dims(5).h, full_h);
+}
+
+#[test]
+fn controller_navigates_moves_and_configures_elements() {
+    let (mut ed, mut cv) = setup();
+    ed.pad_ui = true;
+    let l = layout(&cv);
+    let rects: Vec<Rect> = l.elems.iter().map(|e| place::wanted(e, (20.0, 20.0), 640.0, 360.0)).collect();
+    ed.set_frame(&rects, 3.0, (1920, 1080));
+
+    // D-pad wraps within the element list (doesn't fall into buttons/props)
+    let n = l.elems.len();
+    ed.key(K_DPAD_UP, &mut cv);
+    assert_eq!(ed.sel, n - 1);
+    ed.key(K_DPAD_DOWN, &mut cv);
+    assert_eq!(ed.sel, 0);
+
+    // A starts moving the selected element; left stick & D-pad move it
+    let orig = (layout(&cv).elems[0].x, layout(&cv).elems[0].y);
+    ed.key(K_ABUTTON, &mut cv);
+    assert!(ed.moving());
+    assert_eq!(ed.dragging(), Some(0));
+    ed.pad_stick([1.0, 0.0], [0.0, 0.0], 0.1, &mut cv);
+    let after_stick = (layout(&cv).elems[0].x, layout(&cv).elems[0].y);
+    assert!(after_stick.0 > orig.0);
+    ed.key(K_DPAD_DOWN, &mut cv);
+    let after_nudge = (layout(&cv).elems[0].x, layout(&cv).elems[0].y);
+    assert_eq!(after_nudge.1, after_stick.1 + 1.0);
+    // B cancels and restores original coordinates
+    ed.key(K_BBUTTON, &mut cv);
+    assert!(!ed.moving());
+    assert_eq!((layout(&cv).elems[0].x, layout(&cv).elems[0].y), orig);
+
+    // A again, nudge, A confirms
+    ed.key(K_ABUTTON, &mut cv);
+    ed.key(K_DPAD_RIGHT, &mut cv);
+    ed.key(K_ABUTTON, &mut cv);
+    assert!(!ed.moving());
+    assert_eq!(layout(&cv).elems[0].x, orig.0 + 1.0);
+
+    // X jumps to config options; D-pad adjusts; B returns to element list
+    ed.key(K_XBUTTON, &mut cv);
+    assert!(matches!(ed.rows(&layout(&cv))[ed.cursor], Row::Prop(_)));
+    ed.key(K_DPAD_RIGHT, &mut cv);
+    assert_eq!(layout(&cv).elems[0].font, crate::hud::kind::Font::Quake);
+    assert!(!ed.key(K_BBUTTON, &mut cv).exit);
+    assert_eq!(ed.rows(&layout(&cv))[ed.cursor], Row::Elem(0));
+
+    // Right stick moves the HUD editor panel
+    let p0 = ed.pos.unwrap();
+    ed.pad_stick([0.0, 0.0], [-1.0, 1.0], 0.1, &mut cv);
+    let p1 = ed.pos.unwrap();
+    assert!(p1.0 < p0.0 && p1.1 > p0.1);
+
+    // RB collapses/expands; LT/RT scale; LB deletes; Back resets (with confirm); Start exits
+    ed.key(K_RSHOULDER, &mut cv);
+    assert!(ed.collapsed);
+    ed.key(K_RSHOULDER, &mut cv);
+    assert!(!ed.collapsed);
+
+    let s0 = layout(&cv).elems[0].scale;
+    ed.key(K_RTRIGGER, &mut cv);
+    assert!(layout(&cv).elems[0].scale > s0);
+    ed.key(K_LTRIGGER, &mut cv);
+    assert_eq!(layout(&cv).elems[0].scale, s0);
+
+    let count_before = layout(&cv).elems.len();
+    ed.key(K_LSHOULDER, &mut cv);
+    assert_eq!(layout(&cv).elems.len(), count_before - 1);
+
+    ed.key(K_BACK, &mut cv);
+    assert!(ed.confirm_reset);
+    ed.key(K_BACK, &mut cv);
+    assert_eq!(cv.by_name(CVAR).unwrap().string, "default");
+
+    assert!(ed.key(K_START, &mut cv).exit);
 }

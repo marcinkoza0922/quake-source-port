@@ -2,6 +2,7 @@
 //! its popups.
 
 use qcore::cvar::Cvars;
+use qinput::keys::*;
 
 use super::editor::{ADD_W, AddRow, BUTTONS, CELL, Dims, Editor, LIST_ROWS, Popup, ROW, Row, TITLE_H, W, layout};
 use super::editor_popup::add_rows;
@@ -9,10 +10,14 @@ use super::editor_rows::{self, Prop};
 use super::kind::{CATEGORIES, IMMERSIVE_TIP, Kind, opt_tip};
 use super::layout::Layout;
 use crate::draw::Canvas;
+use crate::glyphs::{self, Glyphs, HINT_H};
 use crate::menu::{BORDER, FG, GOLD_FG, HILITE, MUTED};
 
 const SIZE: f32 = 8.0;
-const BACK: [f32; 4] = [0.03, 0.035, 0.04, 0.94];
+const BUTTON_KEYS: [i32; 4] = [K_YBUTTON, K_LSHOULDER, K_BACK, K_START];
+const BACK: [f32; 4] = [0.04, 0.04, 0.045, 0.94];
+const LIST_BG: [f32; 4] = [0.025, 0.035, 0.055, 0.96];
+const PROPS_BG: [f32; 4] = [0.095, 0.072, 0.048, 0.96];
 const TITLE_BG: [f32; 4] = [0.22, 0.15, 0.07, 0.95];
 const BUTTON_BG: [f32; 4] = [0.12, 0.09, 0.05, 0.9];
 const SELECTED: [f32; 4] = [1.0, 0.8, 0.3, 1.0];
@@ -25,71 +30,130 @@ fn text_right(c: &mut Canvas, right: f32, y: f32, s: &str, color: [f32; 4]) {
 }
 
 impl Editor {
-    pub fn draw(&self, c: &mut Canvas, cv: &Cvars) {
+    pub fn draw(&self, c: &mut Canvas, cv: &Cvars, pad_ui: bool, glyphs: &Glyphs) {
         let l = layout(cv);
         let saved = c.scale;
         c.reset_origin();
         c.scale = self.geo.hud;
+        let moving = self.moving();
         for (i, r) in self.rects.iter().enumerate().take(l.elems.len()) {
             if i == self.sel {
-                c.fill(r.x, r.y, r.w, r.h, [1.0, 0.8, 0.3, 0.12]);
+                c.fill(r.x, r.y, r.w, r.h, [1.0, 0.8, 0.3, if moving { 0.24 } else { 0.12 }]);
+                if moving {
+                    c.frame(r.x - 2.0, r.y - 2.0, r.w + 4.0, r.h + 4.0, SELECTED);
+                }
             }
             c.frame(r.x - 1.0, r.y - 1.0, r.w + 2.0, r.h + 2.0, if i == self.sel { SELECTED } else { OUTLINE });
         }
         c.scale = self.geo.menu;
         let props = l.elems.get(self.sel).map(|e| editor_rows::props(e.kind)).unwrap_or_default();
         let d = self.dims(props.len());
-        c.fill(d.x, d.y, W, d.h, BACK);
-        c.fill(d.x, d.y, W, TITLE_H, TITLE_BG);
-        c.frame(d.x, d.y, W, d.h, BORDER);
-        c.text(d.x + 6.0, d.y + 3.0, "HUD Editor", SIZE, GOLD_FG);
-        // grip: the title bar drags the dialog
-        for k in 0..3 {
-            c.fill(d.x + W - 14.0, d.y + 4.0 + k as f32 * 2.5, 8.0, 1.0, MUTED);
-        }
         let rows = self.rows(&l);
         let cur = rows.get(self.cursor).copied();
-        self.draw_list(c, &l, &d, cur);
-        self.draw_buttons(c, &l, &d, cur);
-        if let Some(e) = l.elems.get(self.sel) {
-            c.fill(d.x + 4.0, d.hdr_y - 3.0, W - 8.0, 1.0, BORDER);
-            c.text(d.x + 6.0, d.hdr_y, e.kind.label(), SIZE, GOLD_FG);
-            for (j, &p) in props.iter().enumerate() {
-                let y = d.props_y + j as f32 * ROW;
-                if cur == Some(Row::Prop(p)) {
-                    c.fill(d.x + 2.0, y, W - 4.0, ROW, HILITE);
-                }
-                c.text(d.x + 8.0, y + 1.5, editor_rows::label(p, e.kind), SIZE, FG);
-                let value = match &self.typing {
-                    Some((tp, s)) if *tp == p => format!("{s}_"),
-                    _ => editor_rows::value_text(p, e, cv),
-                };
-                let (lo, hi) = (d.x + W - 92.0, d.x + W - 8.0);
-                if p == Prop::Position {
-                    grid_icon(c, lo, y + 2.0, e.anchor as usize);
-                    text_right(c, hi, y + 1.5, &value, FG);
+        c.fill(d.x, d.y, W, d.h, BACK);
+        c.fill(d.x, d.y, W, TITLE_H, TITLE_BG);
+        c.text(d.x + 6.0, d.y + 3.0, "HUD Editor", SIZE, GOLD_FG);
+        // hamburger menu button: collapses/expands the dialog to a single bar
+        let tr = Self::toggle_rect(&d);
+        let hover_toggle = self.mouse.is_some_and(|m| tr.contains(m));
+        if hover_toggle {
+            c.fill(tr.x + 1.0, tr.y + 1.0, tr.w - 2.0, tr.h - 2.0, HILITE);
+        }
+        let bar_col = if hover_toggle || self.collapsed { GOLD_FG } else { MUTED };
+        for k in 0..3 {
+            c.fill(d.x + W - 14.0, d.y + 4.0 + k as f32 * 2.5, 8.0, 1.0, bar_col);
+        }
+        let badge_right = if pad_ui {
+            let gw = glyphs::width(c, K_RSHOULDER, glyphs.family, glyphs::H);
+            let gx = (tr.x - gw - 1.0).floor();
+            glyphs.key(c, gx, d.y + (TITLE_H - glyphs::H) / 2.0, K_RSHOULDER);
+            gx - 4.0
+        } else {
+            d.x + W - 22.0
+        };
+        if moving {
+            text_right(c, badge_right, d.y + 3.0, "Position", SELECTED);
+        }
+        if !self.collapsed {
+            // distinct background for the element list section
+            let list_h = (d.btn_y - 2.0) - (d.y + TITLE_H);
+            c.fill(d.x + 1.0, d.y + TITLE_H, W - 2.0, list_h, LIST_BG);
+            c.fill(d.x + 1.0, d.btn_y - 2.0, W - 2.0, 1.0, BORDER);
+            self.draw_list(c, &l, &d, cur);
+            self.draw_buttons(c, &l, &d, cur, pad_ui, glyphs);
+            if let Some(e) = l.elems.get(self.sel) {
+                // distinct background for the selected element's config options
+                let props_top = d.hdr_y - 3.0;
+                c.fill(d.x + 1.0, props_top, W - 2.0, d.y + d.h - props_top - 1.0, PROPS_BG);
+                c.fill(d.x + 1.0, props_top, W - 2.0, 1.0, BORDER);
+                let hdr_x = if pad_ui {
+                    let gh = 9.0;
+                    let gw = glyphs.key_h(c, d.x + 6.0, d.hdr_y - 0.5, K_XBUTTON, gh);
+                    d.x + 6.0 + gw + 3.0
                 } else {
-                    c.text(lo, y + 1.5, "<", SIZE, MUTED);
-                    text_right(c, hi, y + 1.5, ">", MUTED);
-                    let w = c.text_w(&value, SIZE);
-                    c.text(((lo + hi) / 2.0 - w / 2.0).floor(), y + 1.5, &value, SIZE, FG);
+                    d.x + 6.0
+                };
+                c.text(hdr_x, d.hdr_y, e.kind.label(), SIZE, GOLD_FG);
+                for (j, &p) in props.iter().enumerate() {
+                    let y = d.props_y + j as f32 * ROW;
+                    if cur == Some(Row::Prop(p)) {
+                        c.fill(d.x + 2.0, y, W - 4.0, ROW, HILITE);
+                    }
+                    c.text(d.x + 8.0, y + 1.5, editor_rows::label(p, e.kind), SIZE, FG);
+                    let value = match &self.typing {
+                        Some((tp, s)) if *tp == p => format!("{s}_"),
+                        _ => editor_rows::value_text(p, e, cv),
+                    };
+                    let (lo, hi) = (d.x + W - 92.0, d.x + W - 8.0);
+                    if p == Prop::Position {
+                        grid_icon(c, lo, y + 2.0, e.anchor as usize);
+                        text_right(c, hi, y + 1.5, &value, FG);
+                    } else {
+                        c.text(lo, y + 1.5, "<", SIZE, MUTED);
+                        text_right(c, hi, y + 1.5, ">", MUTED);
+                        let w = c.text_w(&value, SIZE);
+                        c.text(((lo + hi) / 2.0 - w / 2.0).floor(), y + 1.5, &value, SIZE, FG);
+                    }
                 }
             }
-        }
-        if self.popup.is_none() {
-            let kind = l.elems.get(self.sel).map(|e| e.kind);
-            let tip = match cur {
-                Some(Row::Prop(Prop::Show)) => Some(IMMERSIVE_TIP),
-                Some(Row::Prop(Prop::Opt(i))) => kind.and_then(|k| opt_tip(k.opts()[i].label)).or(kind.and_then(Kind::tip)),
-                Some(Row::Elem(_) | Row::Prop(_)) => kind.and_then(Kind::tip),
-                _ => None,
-            };
-            if let Some(tip) = tip {
-                draw_tip(c, &d, tip);
+            if self.popup.is_none() {
+                let kind = l.elems.get(self.sel).map(|e| e.kind);
+                let tip = match cur {
+                    Some(Row::Prop(Prop::Show)) => Some(IMMERSIVE_TIP),
+                    Some(Row::Prop(Prop::Opt(i))) => kind.and_then(|k| opt_tip(k.opts()[i].label)).or(kind.and_then(Kind::tip)),
+                    Some(Row::Elem(_) | Row::Prop(_)) => kind.and_then(Kind::tip),
+                    _ => None,
+                };
+                if let Some(tip) = tip {
+                    draw_tip(c, &d, tip);
+                }
             }
+            self.draw_popup(c, &l, &d);
         }
-        self.draw_popup(c, &l, &d);
+        c.frame(d.x, d.y, W, d.h, BORDER);
+        if pad_ui {
+            self.draw_pad_hints(c, glyphs, cur);
+        }
         c.scale = saved;
+    }
+
+    fn draw_pad_hints(&self, c: &mut Canvas, glyphs: &Glyphs, cur: Option<Row>) {
+        let row: Vec<(i32, &str)> = if self.moving() {
+            vec![(K_LTHUMB, "Position"), (K_RTRIGGER, "Scale"), (K_ABUTTON, "Confirm"), (K_XBUTTON, "Options"), (K_BBUTTON, "Cancel")]
+        } else if self.popup.is_some() {
+            vec![(K_ABUTTON, "Select"), (K_BBUTTON, "Back")]
+        } else if matches!(cur, Some(Row::Prop(_))) && !self.collapsed {
+            vec![(K_ABUTTON, "Select"), (K_RTHUMB, "HUD Editor"), (K_BBUTTON, "Back")]
+        } else if self.collapsed {
+            vec![(K_ABUTTON, "Position"), (K_XBUTTON, "Options"), (K_YBUTTON, "Add"), (K_RTHUMB, "HUD Editor"), (K_START, "Done"), (K_BBUTTON, "Back")]
+        } else {
+            vec![(K_ABUTTON, "Position"), (K_XBUTTON, "Options"), (K_RTHUMB, "HUD Editor"), (K_BBUTTON, "Back")]
+        };
+        let y = self.geo.sh - 6.0 - (HINT_H + 4.0);
+        let cx = self.geo.sw / 2.0;
+        let w = glyphs.hints(c, 0.0, y, &row, false);
+        c.fill(cx - w / 2.0 - 8.0, y - 2.0, w + 16.0, HINT_H + 4.0, [0.0, 0.0, 0.0, 0.65]);
+        glyphs.hints_centered(c, cx, y, &row);
     }
 
     fn draw_list(&self, c: &mut Canvas, l: &Layout, d: &Dims, cur: Option<Row>) {
@@ -119,7 +183,7 @@ impl Editor {
         }
     }
 
-    fn draw_buttons(&self, c: &mut Canvas, l: &Layout, d: &Dims, cur: Option<Row>) {
+    fn draw_buttons(&self, c: &mut Canvas, l: &Layout, d: &Dims, cur: Option<Row>, pad_ui: bool, glyphs: &Glyphs) {
         for (b, label) in BUTTONS.iter().enumerate() {
             let r = Self::button_rect(d, b);
             let focus = cur == Some(Row::Buttons(b / 2)) && self.button == b % 2;
@@ -127,8 +191,19 @@ impl Editor {
             c.frame(r.x, r.y, r.w, r.h, if focus { SELECTED } else { BORDER });
             let disabled = b == 1 && l.elems.get(self.sel).is_none_or(|e| e.kind.permanent());
             let label = if b == 2 && self.confirm_reset { qcore::t!("Confirm") } else { label };
+            let fg = if disabled { MUTED } else { FG };
             let w = c.text_w(label, SIZE);
-            c.text((r.x + (r.w - w) / 2.0).floor(), r.y + 3.0, label, SIZE, if disabled { MUTED } else { FG });
+            if pad_ui {
+                let key = BUTTON_KEYS[b];
+                let gw = glyphs::width(c, key, glyphs.family, glyphs::H);
+                let gap = 3.0;
+                let total = gw + gap + w;
+                let x = (r.x + (r.w - total) / 2.0).max(r.x + 3.0).floor();
+                glyphs.key(c, x, r.y + (r.h - glyphs::H) / 2.0, key);
+                c.text(x + gw + gap, r.y + 3.0, label, SIZE, fg);
+            } else {
+                c.text((r.x + (r.w - w) / 2.0).floor(), r.y + 3.0, label, SIZE, fg);
+            }
         }
     }
 

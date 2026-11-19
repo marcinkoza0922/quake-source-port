@@ -378,6 +378,10 @@ impl Input {
     pub fn key_down(&self, key: i32) -> bool {
         self.keydown.get(key as usize).copied().unwrap_or(false)
     }
+    /// Current raw left and right stick axes (`[x, y]`, +x right, +y down).
+    pub fn sticks(&self) -> ([f32; 2], [f32; 2]) {
+        ([self.axes[0], self.axes[1]], [self.axes[2], self.axes[3]])
+    }
     /// Key_WriteBindings lines.
     pub fn archive_bindings(&self) -> Vec<String> {
         let mut v = vec!["unbindall".to_string()];
