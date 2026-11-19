@@ -37,9 +37,9 @@ impl Menu {
             return;
         }
         let items = if self.browser_binding_focused() {
-            vec![(K_ABUTTON, "Remap"), (K_XBUTTON, "Clear pad"), (K_BBUTTON, "Back")]
+            vec![(K_ABUTTON, "Remap"), (K_XBUTTON, "Clear pad")]
         } else {
-            vec![(K_ABUTTON, self.browser_select_label()), (K_BBUTTON, "Back")]
+            vec![(K_ABUTTON, self.browser_select_label())]
         };
         self.boxed_hints(c, 344.0, &items);
     }
@@ -89,8 +89,12 @@ impl Menu {
         let hover = self.mouse.is_some_and(|(mx, my)| (x..x + w).contains(&mx) && (y..y + h).contains(&my));
         let bg = if hover { HILITE } else { [0.0, 0.0, 0.0, 0.7] };
         c.round_box(x, y, w, h, 4.0, bg, Some(BORDER));
-        let s = qcore::t!("< Back");
-        c.text(x + ((w - c.text_w(s, TXT)) / 2.0).floor(), y + 4.0, s, TXT, if hover { GOLD_FG } else { FG });
+        let fg = if hover { GOLD_FG } else { FG };
+        if self.pad_ui {
+            self.glyphs.button_label(c, [x, y, w, h], Some(K_BBUTTON), qcore::t!("Back"), TXT, fg);
+        } else {
+            self.glyphs.button_label(c, [x, y, w, h], None, qcore::t!("< Back"), TXT, fg);
+        }
     }
 
     /// Menu hint row, centred in a bordered box.
@@ -113,8 +117,20 @@ impl Menu {
             return;
         }
         if self.osk.is_some() {
-            let items = [(K_ABUTTON, "Type"), (K_XBUTTON, "Delete"), (K_YBUTTON, "Shift"), (K_BBUTTON, "Done")];
-            self.boxed_hints(c, y, &items);
+            // Shift, Del and Done carry their own controller glyphs on the OSK.
+            self.boxed_hints(c, y, &[(K_ABUTTON, "Type")]);
+            return;
+        }
+        if self.screen == Screen::Help {
+            self.boxed_hints(c, y, &[(K_DPAD_UP, "Section"), (K_RSHOULDER, "Scroll"), (K_BBUTTON, "Back")]);
+            return;
+        }
+        // Launch and Preset draw their own hints over the dimmed backdrop.
+        if matches!(self.prompt, Some(Prompt::Launch { .. } | Prompt::Preset { .. })) {
+            return;
+        }
+        // Demos shows every controller binding directly on its tabs, sort, action and Back buttons.
+        if self.screen == Screen::Demos && self.prompt.is_none() {
             return;
         }
         let action = match self.screen {
@@ -123,39 +139,30 @@ impl Menu {
             Screen::OptionsPage(Page::Controls) => qcore::t!("Bind"),
             _ => qcore::t!("Select"),
         };
-        let mut items = vec![(sel, action), (back, qcore::t!("Back"))];
-        if matches!(self.screen, Screen::Load | Screen::Save) && self.save_at(self.load_cursor).is_some() {
-            items.insert(1, (K_XBUTTON, "Delete"));
+        let mut items = vec![(sel, action)];
+        if self.back_button().is_none() {
+            items.push((back, qcore::t!("Back")));
         }
-        if self.prompt.is_some() {
-            items = vec![(sel, qcore::t!("Select")), (back, qcore::t!("Cancel"))];
+        match &self.prompt {
+            Some(Prompt::Confirm { .. }) => items = vec![(sel, qcore::t!("Select"))],
+            Some(Prompt::Skill { .. }) => items = vec![(sel, qcore::t!("Select")), (back, qcore::t!("Cancel"))],
+            _ => {}
         }
         if self.screen == Screen::Options && self.prompt.is_none() {
-            items.insert(1, (K_YBUTTON, "Search"));
+            items.push((K_YBUTTON, "Search"));
         }
-        if self.screen == Screen::OptionsPage(Page::Controls) && self.drop.is_none() {
-            items.insert(1, (K_XBUTTON, "Clear"));
+        if self.screen == Screen::OptionsPage(Page::Controls) && self.drop.is_none() && self.prompt.is_none() {
+            items.push((K_XBUTTON, "Clear"));
         }
         if self.screen == Screen::DirBrowser {
             items = if self.dir_browser.has_modal() {
-                vec![(sel, qcore::t!("Select")), (back, qcore::t!("Cancel"))]
+                vec![(sel, qcore::t!("Select"))]
             } else {
-                vec![(sel, qcore::t!("Select")), (K_XBUTTON, qcore::t!("Select Folder")), (K_YBUTTON, qcore::t!("Show Hidden")), (back, qcore::t!("Cancel"))]
+                vec![(sel, qcore::t!("Select")), (K_LSHOULDER, qcore::t!("Parent Folder"))]
             };
         }
         if matches!(self.screen, Screen::Quit) {
-            items = vec![(sel, qcore::t!("Confirm")), (back, qcore::t!("Cancel"))];
-        }
-        if self.screen == Screen::Demos && self.prompt.is_none() {
-            items = Vec::new();
-            if self.demos.selected().is_some() {
-                items.extend([(sel, qcore::t!("Play")), (K_XBUTTON, qcore::t!("Export Video")), (K_YBUTTON, qcore::t!("Rename"))]);
-                if self.demos.selected().is_some_and(|d| d.auto) {
-                    items.push((K_LTRIGGER, qcore::t!("Keep")));
-                }
-                items.push((K_BACK, qcore::t!("Delete")));
-            }
-            items.extend([(K_RTRIGGER, qcore::t!("Sort")), (K_LSHOULDER, qcore::t!("Switch List")), (back, qcore::t!("Back"))]);
+            items = vec![(sel, qcore::t!("Confirm"))];
         }
         self.boxed_hints(c, y, &items);
     }

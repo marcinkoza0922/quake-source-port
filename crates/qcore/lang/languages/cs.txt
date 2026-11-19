@@ -1632,6 +1632,13 @@ cs vlastní
 @ classic
 cs klasický
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+cs Uložit při sebrání klíče
+
+@ User Data Directory
+cs Složka uživatelských dat
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ cs Přesouvejte, měňte velikost, přidávejte a odebírejte prvky HUD: zdraví
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 cs Moderní: kompaktní prvky u okrajů obrazovky; klasický: původní stavový pruh. Volba předvolby HUD obnoví; změny v Upravit HUD z něj udělají vlastní
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+cs Automaticky uloží hru při sebrání klíče
+
+@ Where saves, configs, demos and downloaded map packs are stored
+cs Kam se ukládají uložené pozice, nastavení, dema a stažené balíčky map
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ cs VLASTNÍ
 
 @ Customize Experience
 cs Přizpůsobit zážitek
-
-@ Disable All
-cs Vypnout vše
 
 @ Disable All Modifications
 cs Vypnout všechny úpravy
@@ -3003,17 +3014,11 @@ cs Filtru neodpovídá žádné demo. Backspace nebo Esc ho vymaže.
 @ Renaming an automatic demo moves it to the saved demos.
 cs Přejmenováním se automatické demo přesune mezi uložená dema.
 
-@ Sort
-cs Řadit
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 cs Během dema: A pozastaví, křížový ovladač posouvá a mění rychlost, LT a RT označí klip a X ho exportuje.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 cs Mezerník pauza | Vlevo/Vpravo posun | Nahoru/Dolů rychlost | PgUp/PgDn 10 s | I/O značka | E export
-
-@ Switch List
-cs Přepnout seznam
 
 @ This can't be undone.
 cs Tuto akci nelze vrátit.
@@ -3060,6 +3065,43 @@ cs Příprava...
 # Save cards: personal best.
 @ PB {} {}
 cs PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+cs Klíč sebrán
+
+@ Select User Data Directory
+cs Vybrat složku uživatelských dat
+
+@ Data folder: {}
+cs Datová složka: {}
+
+@ Parent Folder
+cs Nadřazená složka
+
+@ Unable to read directory
+cs Složku nelze přečíst
+
+@ No subfolders
+cs Žádné podsložky
+
+@ Select Folder
+cs Vybrat složku
+
+@ Show Hidden
+cs Zobrazit skryté
+
+@ Copy existing user data?
+cs Zkopírovat stávající uživatelská data?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+cs Uložené pozice, nastavení, dema a stažené balíčky map lze zkopírovat do nové složky.
+
+@ Copy Data
+cs Zkopírovat data
+
+@ Switch Only
+cs Jen přepnout
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ cs ffmpeg nenalezen: zapsáno {} snímků PNG a WAV do {}
 cs Nový osobní rekord ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-cs Uložit při sebrání klíče
-
-@ User Data Directory
-cs Složka uživatelských dat
-
-@ Autosaves when you pick up a key
-cs Automaticky uloží hru při sebrání klíče
-
-@ Where saves, configs, demos and downloaded map packs are stored
-cs Kam se ukládají uložené pozice, nastavení, dema a stažené balíčky map
-
-@ Key picked up
-cs Klíč sebrán
-
-@ Select User Data Directory
-cs Vybrat složku uživatelských dat
-
-@ Data folder: {}
-cs Datová složka: {}
-
-@ Parent Folder
-cs Nadřazená složka
-
-@ Unable to read directory
-cs Složku nelze přečíst
-
-@ No subfolders
-cs Žádné podsložky
-
-@ Select Folder
-cs Vybrat složku
-
-@ Show Hidden
-cs Zobrazit skryté
-
-@ Copy existing user data?
-cs Zkopírovat stávající uživatelská data?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-cs Uložené pozice, nastavení, dema a stažené balíčky map lze zkopírovat do nové složky.
-
-@ Copy Data
-cs Zkopírovat data
-
-@ Switch Only
-cs Jen přepnout
-
 @ User data directory set to {}
 cs Složka uživatelských dat nastavena na {}
 
 @ User data directory error: {}
 cs Chyba složky uživatelských dat: {}
-

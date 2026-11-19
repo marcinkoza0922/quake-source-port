@@ -1632,6 +1632,13 @@ lt savas
 @ classic
 lt klasikinis
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+lt Išsaugoti paėmus raktą
+
+@ User Data Directory
+lt Naudotojo duomenų aplankas
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ lt Perkelkite, keiskite dydį, pridėkite ir šalinkite HUD elementus: sveikatą
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 lt Modernus: kompaktiški elementai ekrano kraštuose; klasikinis: originali būsenos juosta. Pasirinkus atkuriamas HUD; pakeitimai skiltyje Redaguoti HUD paverčia jį savu
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+lt Automatiškai išsaugo paėmus raktą
+
+@ Where saves, configs, demos and downloaded map packs are stored
+lt Kur saugomi įrašai, konfigūracijos, demo ir atsisiųsti žemėlapių paketai
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ lt PRITAIKYTAS
 
 @ Customize Experience
 lt Pritaikyti žaidimo patirtį
-
-@ Disable All
-lt Išjungti viską
 
 @ Disable All Modifications
 lt Išjungti visus pakeitimus
@@ -3003,17 +3014,11 @@ lt Filtrą atitinkančių demo nėra. Backspace arba Esc jį išvalo.
 @ Renaming an automatic demo moves it to the saved demos.
 lt Pervadintas automatinis demo perkeliamas į išsaugotus.
 
-@ Sort
-lt Rikiuoti
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 lt Leidžiant demo: A pristabdo, kryžminis mygtukas suka ir keičia greitį, LT ir RT pažymi klipą, o X jį eksportuoja.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 lt Tarpas pauzė | Kairėn/Dešinėn sukti | Aukštyn/Žemyn greitis | PgUp/PgDn 10 s | I/O žymė | E eksportas
-
-@ Switch List
-lt Keisti sąrašą
 
 @ This can't be undone.
 lt To negalima atšaukti.
@@ -3060,6 +3065,43 @@ lt Ruošiama...
 # Save cards: personal best.
 @ PB {} {}
 lt PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+lt Raktas paimtas
+
+@ Select User Data Directory
+lt Pasirinkti naudotojo duomenų aplanką
+
+@ Data folder: {}
+lt Duomenų aplankas: {}
+
+@ Parent Folder
+lt Aukštesnis aplankas
+
+@ Unable to read directory
+lt Nepavyko perskaityti aplanko
+
+@ No subfolders
+lt Nėra poaplankių
+
+@ Select Folder
+lt Pasirinkti aplanką
+
+@ Show Hidden
+lt Rodyti paslėptus
+
+@ Copy existing user data?
+lt Kopijuoti esamus naudotojo duomenis?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+lt Įrašus, konfigūracijas, demo ir atsisiųstus žemėlapių paketus galima nukopijuoti į naują aplanką.
+
+@ Copy Data
+lt Kopijuoti duomenis
+
+@ Switch Only
+lt Tik perjungti
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ lt ffmpeg nerastas: {} PNG kadrų ir WAV įrašyti į {}
 lt Naujas asmeninis rekordas ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-lt Išsaugoti paėmus raktą
-
-@ User Data Directory
-lt Naudotojo duomenų aplankas
-
-@ Autosaves when you pick up a key
-lt Automatiškai išsaugo paėmus raktą
-
-@ Where saves, configs, demos and downloaded map packs are stored
-lt Kur saugomi įrašai, konfigūracijos, demo ir atsisiųsti žemėlapių paketai
-
-@ Key picked up
-lt Raktas paimtas
-
-@ Select User Data Directory
-lt Pasirinkti naudotojo duomenų aplanką
-
-@ Data folder: {}
-lt Duomenų aplankas: {}
-
-@ Parent Folder
-lt Aukštesnis aplankas
-
-@ Unable to read directory
-lt Nepavyko perskaityti aplanko
-
-@ No subfolders
-lt Nėra poaplankių
-
-@ Select Folder
-lt Pasirinkti aplanką
-
-@ Show Hidden
-lt Rodyti paslėptus
-
-@ Copy existing user data?
-lt Kopijuoti esamus naudotojo duomenis?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-lt Įrašus, konfigūracijas, demo ir atsisiųstus žemėlapių paketus galima nukopijuoti į naują aplanką.
-
-@ Copy Data
-lt Kopijuoti duomenis
-
-@ Switch Only
-lt Tik perjungti
-
 @ User data directory set to {}
 lt Naudotojo duomenų aplankas nustatytas į {}
 
 @ User data directory error: {}
 lt Naudotojo duomenų aplanko klaida: {}
-

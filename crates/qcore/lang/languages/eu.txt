@@ -1632,6 +1632,13 @@ eu pertsonalizatua
 @ classic
 eu klasikoa
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+eu Gorde giltza jasotzean
+
+@ User Data Directory
+eu Erabiltzailearen datuen karpeta
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ eu Mugitu, tamainaz aldatu, gehitu eta kendu HUDeko elementuak: osasuna, munizio
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 eu Modernoa: elementu trinkoak pantailaren ertzetan; klasikoa: jatorrizko egoera-barra. Bat aukeratzeak HUDa berrezartzen du; Editatu HUDa ataleko aldaketek pertsonalizatu egiten dute
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+eu Automatikoki gordetzen du giltza bat jasotzean
+
+@ Where saves, configs, demos and downloaded map packs are stored
+eu Gordetzeak, konfigurazioak, demoak eta deskargatutako mapa paketeak gordetzen diren tokia
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ eu PERTSONALIZATUA
 
 @ Customize Experience
 eu Pertsonalizatu esperientzia
-
-@ Disable All
-eu Desgaitu dena
 
 @ Disable All Modifications
 eu Desgaitu aldaketa guztiak
@@ -3003,17 +3014,11 @@ eu Ez dago iragazkiarekin bat datorren demorik. Backspace edo Esc garbitzen du.
 @ Renaming an automatic demo moves it to the saved demos.
 eu Demo automatiko baten izena aldatzean gordetako demoetara eramaten da.
 
-@ Sort
-eu Ordenatu
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 eu Demo bat erreproduzitzen den bitartean: A-k pausatzen du, d-pad-ak mugitu eta abiadura aldatzen du, LT eta RT-k klip bat markatzen dute eta X-k esportatzen du.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 eu Zuriunea pausa | Ezker/Eskuin mugitu | Gora/Behera abiadura | PgUp/PgDn 10 s | I/O marka | E esportatu
-
-@ Switch List
-eu Aldatu zerrenda
 
 @ This can't be undone.
 eu Ezin da desegin.
@@ -3060,6 +3065,43 @@ eu Prestatzen...
 # Save cards: personal best.
 @ PB {} {}
 eu PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+eu Giltza jasota
+
+@ Select User Data Directory
+eu Hautatu erabiltzailearen datuen karpeta
+
+@ Data folder: {}
+eu Datuen karpeta: {}
+
+@ Parent Folder
+eu Karpeta nagusia
+
+@ Unable to read directory
+eu Ezin da karpeta irakurri
+
+@ No subfolders
+eu Azpikarpetarik ez
+
+@ Select Folder
+eu Hautatu karpeta
+
+@ Show Hidden
+eu Erakutsi ezkutuak
+
+@ Copy existing user data?
+eu Dauden erabiltzaile-datuak kopiatu?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+eu Gordetzeak, konfigurazioak, demoak eta deskargatutako mapa paketeak karpeta berrira kopia daitezke.
+
+@ Copy Data
+eu Kopiatu datuak
+
+@ Switch Only
+eu Aldatu bakarrik
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ eu Ez da ffmpeg aurkitu: {} PNG fotograma eta WAV bat idatzi dira hemen: {}
 eu Marka pertsonal berria ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-eu Gorde giltza jasotzean
-
-@ User Data Directory
-eu Erabiltzailearen datuen karpeta
-
-@ Autosaves when you pick up a key
-eu Automatikoki gordetzen du giltza bat jasotzean
-
-@ Where saves, configs, demos and downloaded map packs are stored
-eu Gordetzeak, konfigurazioak, demoak eta deskargatutako mapa paketeak gordetzen diren tokia
-
-@ Key picked up
-eu Giltza jasota
-
-@ Select User Data Directory
-eu Hautatu erabiltzailearen datuen karpeta
-
-@ Data folder: {}
-eu Datuen karpeta: {}
-
-@ Parent Folder
-eu Karpeta nagusia
-
-@ Unable to read directory
-eu Ezin da karpeta irakurri
-
-@ No subfolders
-eu Azpikarpetarik ez
-
-@ Select Folder
-eu Hautatu karpeta
-
-@ Show Hidden
-eu Erakutsi ezkutuak
-
-@ Copy existing user data?
-eu Dauden erabiltzaile-datuak kopiatu?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-eu Gordetzeak, konfigurazioak, demoak eta deskargatutako mapa paketeak karpeta berrira kopia daitezke.
-
-@ Copy Data
-eu Kopiatu datuak
-
-@ Switch Only
-eu Aldatu bakarrik
-
 @ User data directory set to {}
 eu Erabiltzailearen datuen karpeta hemen ezarri da: {}
 
 @ User data directory error: {}
 eu Erabiltzailearen datuen karpetaren errorea: {}
-

@@ -1632,6 +1632,13 @@ he מותאם אישית
 @ classic
 he קלאסי
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+he שמירה בעת איסוף מפתח
+
+@ User Data Directory
+he תיקיית נתוני משתמש
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ he הזזה, שינוי גודל, הוספה והסרה של רכיבי HUD: ב�
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 he מודרני: רכיבים קומפקטיים בקצוות המסך; קלאסי: שורת המצב המקורית. בחירה באחד מאפסת את ה-HUD; שינויים בעריכת HUD הופכים אותו למותאם אישית
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+he שומר אוטומטית בעת איסוף מפתח
+
+@ Where saves, configs, demos and downloaded map packs are stored
+he היכן נשמרים קובצי שמירה, הגדרות, הדגמות וחבילות מפות שהורדו
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ he מותאם
 
 @ Customize Experience
 he התאמה אישית של החוויה
-
-@ Disable All
-he השבתת הכול
 
 @ Disable All Modifications
 he השבתת כל השינויים
@@ -3003,17 +3014,11 @@ he אין הדגמות שמתאימות למסנן. Backspace או Esc מנקי�
 @ Renaming an automatic demo moves it to the saved demos.
 he שינוי שם של הדגמה אוטומטית מעביר אותה להדגמות השמורות.
 
-@ Sort
-he מיון
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 he בזמן הדגמה: A משהה, לוח הכיוונים גולל ומשנה מהירות, LT ו-RT מסמנים קטע ו-X מייצא אותו.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 he Space השהיה | שמאל/ימין גלילה | למעלה/למטה מהירות | PgUp/PgDn 10 ש׳ | I/O סימון | E ייצוא
-
-@ Switch List
-he החלפת רשימה
 
 @ This can't be undone.
 he אי אפשר לבטל את זה.
@@ -3060,6 +3065,43 @@ he מתכונן...
 # Save cards: personal best.
 @ PB {} {}
 he PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+he נאסף מפתח
+
+@ Select User Data Directory
+he בחר תיקיית נתוני משתמש
+
+@ Data folder: {}
+he תיקיית נתונים: {}
+
+@ Parent Folder
+he תיקיית אב
+
+@ Unable to read directory
+he לא ניתן לקרוא את התיקייה
+
+@ No subfolders
+he אין תיקיות משנה
+
+@ Select Folder
+he בחר תיקייה
+
+@ Show Hidden
+he הצג מוסתרים
+
+@ Copy existing user data?
+he להעתיק נתוני משתמש קיימים?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+he ניתן להעתיק שמירות, הגדרות, הדגמות וחבילות מפות שהורדו לתיקייה החדשה.
+
+@ Copy Data
+he העתק נתונים
+
+@ Switch Only
+he החלף בלבד
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ he ffmpeg לא נמצא: נכתבו {} פריימים של PNG וקובץ WAV א
 he שיא אישי חדש ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-he שמירה בעת איסוף מפתח
-
-@ User Data Directory
-he תיקיית נתוני משתמש
-
-@ Autosaves when you pick up a key
-he שומר אוטומטית בעת איסוף מפתח
-
-@ Where saves, configs, demos and downloaded map packs are stored
-he היכן נשמרים קובצי שמירה, הגדרות, הדגמות וחבילות מפות שהורדו
-
-@ Key picked up
-he נאסף מפתח
-
-@ Select User Data Directory
-he בחר תיקיית נתוני משתמש
-
-@ Data folder: {}
-he תיקיית נתונים: {}
-
-@ Parent Folder
-he תיקיית אב
-
-@ Unable to read directory
-he לא ניתן לקרוא את התיקייה
-
-@ No subfolders
-he אין תיקיות משנה
-
-@ Select Folder
-he בחר תיקייה
-
-@ Show Hidden
-he הצג מוסתרים
-
-@ Copy existing user data?
-he להעתיק נתוני משתמש קיימים?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-he ניתן להעתיק שמירות, הגדרות, הדגמות וחבילות מפות שהורדו לתיקייה החדשה.
-
-@ Copy Data
-he העתק נתונים
-
-@ Switch Only
-he החלף בלבד
-
 @ User data directory set to {}
 he תיקיית נתוני המשתמש הוגדרה ל-{}
 
 @ User data directory error: {}
 he שגיאה בתיקיית נתוני המשתמש: {}
-

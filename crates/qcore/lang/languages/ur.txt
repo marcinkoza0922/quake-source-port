@@ -1632,6 +1632,13 @@ ur اپنا
 @ classic
 ur کلاسک
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ur چابی اٹھانے پر محفوظ کریں
+
+@ User Data Directory
+ur صارف ڈیٹا ڈائریکٹری
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ ur HUD کے اجزا کو منتقل کریں، سائز بدلیں، شامل �
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 ur جدید: اسکرین کے کناروں پر مختصر اجزا؛ کلاسک: اصل حالت کی پٹی۔ ایک چننے سے HUD ری سیٹ ہوتا ہے؛ HUD میں ترمیم میں تبدیلیاں اسے اپنا بنا دیتی ہیں
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+ur چابی اٹھانے پر خودکار محفوظ کرتا ہے
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ur جہاں سیوز، ترتیبات، ڈیموز اور ڈاؤن لوڈ شدہ نقشہ پیک محفوظ ہوتے ہیں
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ ur حسبِ منشا
 
 @ Customize Experience
 ur تجربہ حسبِ منشا بنائیں
-
-@ Disable All
-ur سب غیر فعال
 
 @ Disable All Modifications
 ur تمام تبدیلیاں غیر فعال کریں
@@ -3003,17 +3014,11 @@ ur کوئی ڈیمو فلٹر سے میل نہیں کھاتا۔ Backspace یا E
 @ Renaming an automatic demo moves it to the saved demos.
 ur خودکار ڈیمو کا نام بدلنے سے وہ محفوظ ڈیمو میں چلا جاتا ہے۔
 
-@ Sort
-ur ترتیب
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 ur ڈیمو چلتے وقت: A روکتا ہے، ڈی پیڈ کھسکاتا اور رفتار بدلتا ہے، LT اور RT کلپ نشان زد کرتے ہیں اور X اسے برآمد کرتا ہے۔
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ur Space روکیں | بائیں/دائیں کھسکائیں | اوپر/نیچے رفتار | PgUp/PgDn 10 سیکنڈ | I/O نشان | E برآمد
-
-@ Switch List
-ur فہرست بدلیں
 
 @ This can't be undone.
 ur اسے واپس نہیں کیا جا سکتا۔
@@ -3060,6 +3065,43 @@ ur تیاری ہو رہی ہے...
 # Save cards: personal best.
 @ PB {} {}
 ur PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+ur چابی اٹھا لی گئی
+
+@ Select User Data Directory
+ur صارف ڈیٹا ڈائریکٹری منتخب کریں
+
+@ Data folder: {}
+ur ڈیٹا فولڈر: {}
+
+@ Parent Folder
+ur بنیادی فولڈر
+
+@ Unable to read directory
+ur ڈائریکٹری پڑھی نہیں جا سکی
+
+@ No subfolders
+ur کوئی ذیلی فولڈر نہیں
+
+@ Select Folder
+ur فولڈر منتخب کریں
+
+@ Show Hidden
+ur پوشیدہ دکھائیں
+
+@ Copy existing user data?
+ur موجودہ صارف ڈیٹا کاپی کریں؟
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ur سیوز، ترتیبات، ڈیموز اور ڈاؤن لوڈ شدہ نقشہ پیک نئے فولڈر میں کاپی کیے جا سکتے ہیں۔
+
+@ Copy Data
+ur ڈیٹا کاپی کریں
+
+@ Switch Only
+ur صرف تبدیل کریں
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ ur ffmpeg نہیں ملا: {} PNG فریم اور ایک WAV {} میں لکھے 
 ur نیا ذاتی بہترین ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-ur چابی اٹھانے پر محفوظ کریں
-
-@ User Data Directory
-ur صارف ڈیٹا ڈائریکٹری
-
-@ Autosaves when you pick up a key
-ur چابی اٹھانے پر خودکار محفوظ کرتا ہے
-
-@ Where saves, configs, demos and downloaded map packs are stored
-ur جہاں سیوز، ترتیبات، ڈیموز اور ڈاؤن لوڈ شدہ نقشہ پیک محفوظ ہوتے ہیں
-
-@ Key picked up
-ur چابی اٹھا لی گئی
-
-@ Select User Data Directory
-ur صارف ڈیٹا ڈائریکٹری منتخب کریں
-
-@ Data folder: {}
-ur ڈیٹا فولڈر: {}
-
-@ Parent Folder
-ur بنیادی فولڈر
-
-@ Unable to read directory
-ur ڈائریکٹری پڑھی نہیں جا سکی
-
-@ No subfolders
-ur کوئی ذیلی فولڈر نہیں
-
-@ Select Folder
-ur فولڈر منتخب کریں
-
-@ Show Hidden
-ur پوشیدہ دکھائیں
-
-@ Copy existing user data?
-ur موجودہ صارف ڈیٹا کاپی کریں؟
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-ur سیوز، ترتیبات، ڈیموز اور ڈاؤن لوڈ شدہ نقشہ پیک نئے فولڈر میں کاپی کیے جا سکتے ہیں۔
-
-@ Copy Data
-ur ڈیٹا کاپی کریں
-
-@ Switch Only
-ur صرف تبدیل کریں
-
 @ User data directory set to {}
 ur صارف ڈیٹا ڈائریکٹری {} پر مقرر کر دی گئی
 
 @ User data directory error: {}
 ur صارف ڈیٹا ڈائریکٹری میں خرابی: {}
-

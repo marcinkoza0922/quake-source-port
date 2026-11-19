@@ -1632,6 +1632,13 @@ sk vlastný
 @ classic
 sk klasický
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+sk Uložiť pri zobratí kľúča
+
+@ User Data Directory
+sk Priečinok používateľských údajov
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ sk Presúvajte, meňte veľkosť, pridávajte a odstraňujte prvky HUD: zdravie,
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 sk Moderný: kompaktné prvky pri okrajoch obrazovky; klasický: pôvodný stavový pruh. Voľba predvoľby obnoví HUD; zmeny v Upraviť HUD z neho urobia vlastný
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+sk Automaticky uloží hru pri zobratí kľúča
+
+@ Where saves, configs, demos and downloaded map packs are stored
+sk Kde sú uložené pozície, nastavenia, demá a stiahnuté balíky máp
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ sk VLASTNÉ
 
 @ Customize Experience
 sk Prispôsobiť zážitok
-
-@ Disable All
-sk Vypnúť všetko
 
 @ Disable All Modifications
 sk Vypnúť všetky úpravy
@@ -3003,17 +3014,11 @@ sk Filtru nezodpovedá žiadne demo. Backspace alebo Esc ho vymaže.
 @ Renaming an automatic demo moves it to the saved demos.
 sk Premenovaním sa automatické demo presunie medzi uložené demá.
 
-@ Sort
-sk Zoradiť
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 sk Počas dema: A pozastaví, smerový ovládač posúva a mení rýchlosť, LT a RT označia klip a X ho exportuje.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sk Medzerník pauza | Vľavo/Vpravo posun | Hore/Dole rýchlosť | PgUp/PgDn 10 s | I/O značka | E export
-
-@ Switch List
-sk Prepnúť zoznam
 
 @ This can't be undone.
 sk Túto akciu nemožno vrátiť.
@@ -3060,6 +3065,43 @@ sk Príprava...
 # Save cards: personal best.
 @ PB {} {}
 sk PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+sk Kľúč zobratý
+
+@ Select User Data Directory
+sk Vybrať priečinok používateľských údajov
+
+@ Data folder: {}
+sk Údajový priečinok: {}
+
+@ Parent Folder
+sk Nadradený priečinok
+
+@ Unable to read directory
+sk Priečinok sa nedá prečítať
+
+@ No subfolders
+sk Žiadne podpriečinky
+
+@ Select Folder
+sk Vybrať priečinok
+
+@ Show Hidden
+sk Zobraziť skryté
+
+@ Copy existing user data?
+sk Skopírovať existujúce používateľské údaje?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+sk Uložené pozície, nastavenia, demá a stiahnuté balíky máp možno skopírovať do nového priečinka.
+
+@ Copy Data
+sk Kopírovať údaje
+
+@ Switch Only
+sk Iba prepnúť
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ sk ffmpeg sa nenašiel: zapísaných {} snímok PNG a WAV do {}
 sk Nový osobný rekord ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-sk Uložiť pri zobratí kľúča
-
-@ User Data Directory
-sk Priečinok používateľských údajov
-
-@ Autosaves when you pick up a key
-sk Automaticky uloží hru pri zobratí kľúča
-
-@ Where saves, configs, demos and downloaded map packs are stored
-sk Kde sú uložené pozície, nastavenia, demá a stiahnuté balíky máp
-
-@ Key picked up
-sk Kľúč zobratý
-
-@ Select User Data Directory
-sk Vybrať priečinok používateľských údajov
-
-@ Data folder: {}
-sk Údajový priečinok: {}
-
-@ Parent Folder
-sk Nadradený priečinok
-
-@ Unable to read directory
-sk Priečinok sa nedá prečítať
-
-@ No subfolders
-sk Žiadne podpriečinky
-
-@ Select Folder
-sk Vybrať priečinok
-
-@ Show Hidden
-sk Zobraziť skryté
-
-@ Copy existing user data?
-sk Skopírovať existujúce používateľské údaje?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-sk Uložené pozície, nastavenia, demá a stiahnuté balíky máp možno skopírovať do nového priečinka.
-
-@ Copy Data
-sk Kopírovať údaje
-
-@ Switch Only
-sk Iba prepnúť
-
 @ User data directory set to {}
 sk Priečinok používateľských údajov nastavený na {}
 
 @ User data directory error: {}
 sk Chyba priečinka používateľských údajov: {}
-

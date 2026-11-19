@@ -1632,6 +1632,13 @@ hu egyéni
 @ classic
 hu klasszikus
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+hu Mentés kulcs felvételekor
+
+@ User Data Directory
+hu Felhasználói adatok mappája
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ hu HUD-elemek mozgatása, átméretezése, hozzáadása és eltávolítása: él
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 hu Modern: tömör elemek a képernyő szélein; klasszikus: az eredeti állapotsáv. Választásuk visszaállítja a HUD-ot; a HUD szerkesztése menüben tett változtatások egyénivé teszik
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+hu Automatikusan ment, amikor felveszel egy kulcsot
+
+@ Where saves, configs, demos and downloaded map packs are stored
+hu A mentések, beállítások, demók és letöltött pályacsomagok tárolási helye
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ hu EGYEDI
 
 @ Customize Experience
 hu Játékélmény testreszabása
-
-@ Disable All
-hu Mind ki
 
 @ Disable All Modifications
 hu Minden módosítás kikapcsolása
@@ -3003,17 +3014,11 @@ hu Egy demó sem felel meg a szűrőnek. A Backspace vagy az Esc törli.
 @ Renaming an automatic demo moves it to the saved demos.
 hu Egy automatikus demó átnevezése áthelyezi a mentett demók közé.
 
-@ Sort
-hu Rendezés
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 hu Demó közben: az A szüneteltet, a D-pad teker és sebességet vált, az LT és RT kijelöl egy klipet, az X pedig exportálja.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 hu Szóköz szünet | Bal/Jobb tekerés | Fel/Le sebesség | PgUp/PgDn 10 mp | I/O jelölés | E export
-
-@ Switch List
-hu Lista váltása
 
 @ This can't be undone.
 hu Ez nem vonható vissza.
@@ -3060,6 +3065,43 @@ hu Előkészítés...
 # Save cards: personal best.
 @ PB {} {}
 hu PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+hu Kulcs felvéve
+
+@ Select User Data Directory
+hu Felhasználói adatok mappájának kiválasztása
+
+@ Data folder: {}
+hu Adatmappa: {}
+
+@ Parent Folder
+hu Szülőmappa
+
+@ Unable to read directory
+hu A mappa nem olvasható
+
+@ No subfolders
+hu Nincsenek almappák
+
+@ Select Folder
+hu Mappa kiválasztása
+
+@ Show Hidden
+hu Rejtettek mutatása
+
+@ Copy existing user data?
+hu Meglévő felhasználói adatok másolása?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+hu A mentések, beállítások, demók és letöltött pályacsomagok átmásolhatók az új mappába.
+
+@ Copy Data
+hu Adatok másolása
+
+@ Switch Only
+hu Csak váltás
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ hu Az ffmpeg nem található: {} PNG-képkocka és egy WAV kiírva ide: {}
 hu Új egyéni csúcs ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-hu Mentés kulcs felvételekor
-
-@ User Data Directory
-hu Felhasználói adatok mappája
-
-@ Autosaves when you pick up a key
-hu Automatikusan ment, amikor felveszel egy kulcsot
-
-@ Where saves, configs, demos and downloaded map packs are stored
-hu A mentések, beállítások, demók és letöltött pályacsomagok tárolási helye
-
-@ Key picked up
-hu Kulcs felvéve
-
-@ Select User Data Directory
-hu Felhasználói adatok mappájának kiválasztása
-
-@ Data folder: {}
-hu Adatmappa: {}
-
-@ Parent Folder
-hu Szülőmappa
-
-@ Unable to read directory
-hu A mappa nem olvasható
-
-@ No subfolders
-hu Nincsenek almappák
-
-@ Select Folder
-hu Mappa kiválasztása
-
-@ Show Hidden
-hu Rejtettek mutatása
-
-@ Copy existing user data?
-hu Meglévő felhasználói adatok másolása?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-hu A mentések, beállítások, demók és letöltött pályacsomagok átmásolhatók az új mappába.
-
-@ Copy Data
-hu Adatok másolása
-
-@ Switch Only
-hu Csak váltás
-
 @ User data directory set to {}
 hu Felhasználói adatok mappája beállítva: {}
 
 @ User data directory error: {}
 hu Felhasználói adatmappa hiba: {}
-

@@ -1632,6 +1632,13 @@ ko 사용자 지정
 @ classic
 ko 클래식
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ko 열쇠 획득 시 저장
+
+@ User Data Directory
+ko 사용자 데이터 폴더
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ ko HUD 요소 이동, 크기 조절, 추가 및 제거: 체력, 탄약, 무기, 
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 ko 모던: 화면 가장자리의 간결한 요소, 클래식: 원래 상태 표시줄. 하나를 고르면 HUD가 초기화되고, HUD 편집에서 바꾸면 사용자 지정이 됩니다
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+ko 열쇠를 주울 때 자동으로 저장합니다
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ko 저장 파일, 설정, 데모 및 다운로드한 맵 팩이 저장되는 위치
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ ko 커스텀
 
 @ Customize Experience
 ko 게임 커스터마이즈
-
-@ Disable All
-ko 모두 끄기
 
 @ Disable All Modifications
 ko 모든 변경 끄기
@@ -3003,17 +3014,11 @@ ko 필터와 일치하는 데모가 없습니다. Backspace나 Esc로 지웁니�
 @ Renaming an automatic demo moves it to the saved demos.
 ko 자동 데모의 이름을 바꾸면 저장된 데모로 옮겨집니다.
 
-@ Sort
-ko 정렬
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 ko 데모 재생 중: A로 일시 정지, 방향 패드로 탐색과 속도 변경, LT와 RT로 클립 구간을 표시하고 X로 내보냅니다.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ko Space 일시 정지 | ←/→ 탐색 | ↑/↓ 속도 | PgUp/PgDn 10초 | I/O 표시 | E 내보내기
-
-@ Switch List
-ko 목록 전환
 
 @ This can't be undone.
 ko 되돌릴 수 없습니다.
@@ -3060,6 +3065,43 @@ ko 준비 중...
 # Save cards: personal best.
 @ PB {} {}
 ko PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+ko 열쇠 획득
+
+@ Select User Data Directory
+ko 사용자 데이터 폴더 선택
+
+@ Data folder: {}
+ko 데이터 폴더: {}
+
+@ Parent Folder
+ko 상위 폴더
+
+@ Unable to read directory
+ko 폴더를 읽을 수 없습니다
+
+@ No subfolders
+ko 하위 폴더 없음
+
+@ Select Folder
+ko 폴더 선택
+
+@ Show Hidden
+ko 숨김 폴더 표시
+
+@ Copy existing user data?
+ko 기존 사용자 데이터를 복사하시겠습니까?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ko 저장 파일, 설정, 데모 및 다운로드한 맵 팩을 새 폴더로 복사할 수 있습니다.
+
+@ Copy Data
+ko 데이터 복사
+
+@ Switch Only
+ko 변경만 하기
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ ko ffmpeg를 찾을 수 없음: PNG 프레임 {}장과 WAV를 {}에 저장했습
 ko 새 개인 최고 기록 ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-ko 열쇠 획득 시 저장
-
-@ User Data Directory
-ko 사용자 데이터 폴더
-
-@ Autosaves when you pick up a key
-ko 열쇠를 주울 때 자동으로 저장합니다
-
-@ Where saves, configs, demos and downloaded map packs are stored
-ko 저장 파일, 설정, 데모 및 다운로드한 맵 팩이 저장되는 위치
-
-@ Key picked up
-ko 열쇠 획득
-
-@ Select User Data Directory
-ko 사용자 데이터 폴더 선택
-
-@ Data folder: {}
-ko 데이터 폴더: {}
-
-@ Parent Folder
-ko 상위 폴더
-
-@ Unable to read directory
-ko 폴더를 읽을 수 없습니다
-
-@ No subfolders
-ko 하위 폴더 없음
-
-@ Select Folder
-ko 폴더 선택
-
-@ Show Hidden
-ko 숨김 폴더 표시
-
-@ Copy existing user data?
-ko 기존 사용자 데이터를 복사하시겠습니까?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-ko 저장 파일, 설정, 데모 및 다운로드한 맵 팩을 새 폴더로 복사할 수 있습니다.
-
-@ Copy Data
-ko 데이터 복사
-
-@ Switch Only
-ko 변경만 하기
-
 @ User data directory set to {}
 ko 사용자 데이터 폴더가 {} 로 설정되었습니다
 
 @ User data directory error: {}
 ko 사용자 데이터 폴더 오류: {}
-

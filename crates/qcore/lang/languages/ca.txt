@@ -1632,6 +1632,13 @@ ca personalitzada
 @ classic
 ca clàssic
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ca Desa en recollir una clau
+
+@ User Data Directory
+ca Directori de dades d'usuari
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ ca Mou, redimensiona, afegeix i treu elements de la interfície: salut, munició
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 ca Moderna: elements compactes a les vores de la pantalla; clàssica: la barra d'estat original. Triar-ne una restableix la interfície; els canvis a Edita la interfície la fan personalitzada
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+ca Desa automàticament quan reculls una clau
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ca On es desen les partides, configuracions, demos i paquets de mapes baixats
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ ca PERSONALITZADA
 
 @ Customize Experience
 ca Personalitza l'experiència
-
-@ Disable All
-ca Desactiva-ho tot
 
 @ Disable All Modifications
 ca Desactiva totes les modificacions
@@ -3003,17 +3014,11 @@ ca Cap demo coincideix amb el filtre. Retrocés o Esc l'esborra.
 @ Renaming an automatic demo moves it to the saved demos.
 ca Canviar el nom d'una demo automàtica la mou a les demos desades.
 
-@ Sort
-ca Ordena
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 ca Durant una demo: A fa pausa, la creueta es desplaça i canvia la velocitat, LT i RT marquen un clip i X l'exporta.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ca Espai pausa | Esq./Dreta desplaça | Amunt/Avall velocitat | RePàg/AvPàg 10 s | I/O marca | E exporta
-
-@ Switch List
-ca Canvia de llista
 
 @ This can't be undone.
 ca No es pot desfer.
@@ -3060,6 +3065,43 @@ ca S'està preparant...
 # Save cards: personal best.
 @ PB {} {}
 ca PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+ca Clau recollida
+
+@ Select User Data Directory
+ca Selecciona el directori de dades d'usuari
+
+@ Data folder: {}
+ca Carpeta de dades: {}
+
+@ Parent Folder
+ca Carpeta superior
+
+@ Unable to read directory
+ca No es pot llegir el directori
+
+@ No subfolders
+ca Sense subcarpetes
+
+@ Select Folder
+ca Selecciona la carpeta
+
+@ Show Hidden
+ca Mostra ocultes
+
+@ Copy existing user data?
+ca Copiar les dades d'usuari existents?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ca Les partides, configuracions, demos i paquets de mapes baixats es poden copiar a la carpeta nova.
+
+@ Copy Data
+ca Copia les dades
+
+@ Switch Only
+ca Només canvia
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ ca No s'ha trobat ffmpeg: s'han escrit {} fotogrames PNG i un WAV a {}
 ca Nou rècord personal ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-ca Desa en recollir una clau
-
-@ User Data Directory
-ca Directori de dades d'usuari
-
-@ Autosaves when you pick up a key
-ca Desa automàticament quan reculls una clau
-
-@ Where saves, configs, demos and downloaded map packs are stored
-ca On es desen les partides, configuracions, demos i paquets de mapes baixats
-
-@ Key picked up
-ca Clau recollida
-
-@ Select User Data Directory
-ca Selecciona el directori de dades d'usuari
-
-@ Data folder: {}
-ca Carpeta de dades: {}
-
-@ Parent Folder
-ca Carpeta superior
-
-@ Unable to read directory
-ca No es pot llegir el directori
-
-@ No subfolders
-ca Sense subcarpetes
-
-@ Select Folder
-ca Selecciona la carpeta
-
-@ Show Hidden
-ca Mostra ocultes
-
-@ Copy existing user data?
-ca Copiar les dades d'usuari existents?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-ca Les partides, configuracions, demos i paquets de mapes baixats es poden copiar a la carpeta nova.
-
-@ Copy Data
-ca Copia les dades
-
-@ Switch Only
-ca Només canvia
-
 @ User data directory set to {}
 ca Directori de dades d'usuari establert a {}
 
 @ User data directory error: {}
 ca Error del directori de dades d'usuari: {}
-

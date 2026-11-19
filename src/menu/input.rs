@@ -572,11 +572,16 @@ impl Menu {
                     out.push(Action::Sound("misc/menu3.wav"));
                 }
             }
-            Screen::ModMaps if back && self.prev == Screen::SinglePlayer => {
+            Screen::ModMaps if back && self.prev == Screen::SinglePlayer && !self.mods.has_filter(modmenu::Page::Maps) => {
                 // Level Select opened from New Game: back returns there
                 self.screen = Screen::SinglePlayer;
             }
             Screen::Mods | Screen::ModMaps | Screen::ModOnline => {
+                if key == K_YBUTTON {
+                    self.osk = Some(Osk::default());
+                    out.push(Action::Sound("misc/menu2.wav"));
+                    return out;
+                }
                 let page = self.mods_page();
                 let start = out.len();
                 let next = self.mods.key(page, key, &mut out);

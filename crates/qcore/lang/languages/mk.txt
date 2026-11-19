@@ -1632,6 +1632,13 @@ mk сопствен
 @ classic
 mk класичен
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+mk Зачувај при земање клуч
+
+@ User Data Directory
+mk Папка со кориснички податоци
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ mk Преместувајте, менувајте големина, додава
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 mk Модерен: компактни елементи на рабовите на екранот; класичен: оригиналната лента за состојба. Изборот го ресетира HUD; промените во Уреди HUD го прават сопствен
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+mk Автоматски зачувува кога ќе земете клуч
+
+@ Where saves, configs, demos and downloaded map packs are stored
+mk Каде се чуваат зачуваните игри, поставки, демоа и преземени пакети со мапи
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ mk СВОЈА
 
 @ Customize Experience
 mk Прилагоди го искуството
-
-@ Disable All
-mk Исклучи сè
 
 @ Disable All Modifications
 mk Исклучи ги сите измени
@@ -3003,17 +3014,11 @@ mk Ниедно демо не одговара на филтерот. Backspace 
 @ Renaming an automatic demo moves it to the saved demos.
 mk Преименувањето автоматско демо го преместува меѓу зачуваните.
 
-@ Sort
-mk Подреди
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 mk За време на демо: A паузира, крстот за насоки премотува и ја менува брзината, LT и RT означуваат клип, а X го извезува.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 mk Празно место пауза | Лево/Десно премотување | Горе/Долу брзина | PgUp/PgDn 10 с | I/O ознака | E извоз
-
-@ Switch List
-mk Смени список
 
 @ This can't be undone.
 mk Ова не може да се врати.
@@ -3060,6 +3065,43 @@ mk Се подготвува...
 # Save cards: personal best.
 @ PB {} {}
 mk PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+mk Клучот е земен
+
+@ Select User Data Directory
+mk Изберете папка со кориснички податоци
+
+@ Data folder: {}
+mk Папка со податоци: {}
+
+@ Parent Folder
+mk Родителска папка
+
+@ Unable to read directory
+mk Папката не може да се прочита
+
+@ No subfolders
+mk Нема потпапки
+
+@ Select Folder
+mk Избери папка
+
+@ Show Hidden
+mk Прикажи скриени
+
+@ Copy existing user data?
+mk Да се копираат постојните кориснички податоци?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+mk Зачуваните игри, поставки, демоа и преземени пакети со мапи може да се копираат во новата папка.
+
+@ Copy Data
+mk Копирај податоци
+
+@ Switch Only
+mk Само смени
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ mk ffmpeg не е пронајден: запишани {} PNG слики и WAV 
 mk Нов личен рекорд ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-mk Зачувај при земање клуч
-
-@ User Data Directory
-mk Папка со кориснички податоци
-
-@ Autosaves when you pick up a key
-mk Автоматски зачувува кога ќе земете клуч
-
-@ Where saves, configs, demos and downloaded map packs are stored
-mk Каде се чуваат зачуваните игри, поставки, демоа и преземени пакети со мапи
-
-@ Key picked up
-mk Клучот е земен
-
-@ Select User Data Directory
-mk Изберете папка со кориснички податоци
-
-@ Data folder: {}
-mk Папка со податоци: {}
-
-@ Parent Folder
-mk Родителска папка
-
-@ Unable to read directory
-mk Папката не може да се прочита
-
-@ No subfolders
-mk Нема потпапки
-
-@ Select Folder
-mk Избери папка
-
-@ Show Hidden
-mk Прикажи скриени
-
-@ Copy existing user data?
-mk Да се копираат постојните кориснички податоци?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-mk Зачуваните игри, поставки, демоа и преземени пакети со мапи може да се копираат во новата папка.
-
-@ Copy Data
-mk Копирај податоци
-
-@ Switch Only
-mk Само смени
-
 @ User data directory set to {}
 mk Папката со кориснички податоци е поставена на {}
 
 @ User data directory error: {}
 mk Грешка во папката со кориснички податоци: {}
-

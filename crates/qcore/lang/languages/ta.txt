@@ -1632,6 +1632,13 @@ ta தனிப்பயன்
 @ classic
 ta பழைய பாணி
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ta சாவி எடுக்கும்போது சேமி
+
+@ User Data Directory
+ta பயனர் தரவு அடைவு
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ ta HUD கூறுகளை நகர்த்து, அளவு மாற்
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 ta நவீனம்: திரை ஓரங்களில் சிறிய கூறுகள்; பாரம்பரியம்: மூல நிலைமைப் பட்டை. ஒன்றைத் தேர்ந்தெடுத்தால் HUD மீட்டமைக்கப்படும்; HUD-ஐத் திருத்து இல் செய்யும் மாற்றங்கள் அதைத் தனிப்பயனாக்கும்
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+ta சாவியை எடுக்கும்போது தானாகச் சேமிக்கும்
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ta சேமிப்புகள், அமைப்புகள், டெமோக்கள் மற்றும் பதிவிறக்கிய வரைபடத் தொகுப்புகள் சேமிக்கப்படும் இடம்
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ ta தனிப்பயன்
 
 @ Customize Experience
 ta அனுபவத்தைத் தனிப்பயனாக்கு
-
-@ Disable All
-ta அனைத்தையும் முடக்கு
 
 @ Disable All Modifications
 ta எல்லா மாற்றங்களையும் முடக்கு
@@ -3003,17 +3014,11 @@ ta வடிகட்டியுடன் எந்த டெமோவும்
 @ Renaming an automatic demo moves it to the saved demos.
 ta தானியங்கி டெமோவின் பெயரை மாற்றினால் அது சேமித்த டெமோக்களுக்கு நகரும்.
 
-@ Sort
-ta வரிசைப்படுத்து
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 ta டெமோ இயங்கும்போது: A இடைநிறுத்தும், டி-பேட் நகர்த்தி வேகத்தை மாற்றும், LT மற்றும் RT ஒரு கிளிப்பைக் குறிக்கும், X அதை ஏற்றுமதி செய்யும்.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ta Space இடைநிறுத்து | இடது/வலது நகர்த்து | மேல்/கீழ் வேகம் | PgUp/PgDn 10 வி. | I/O குறி | E ஏற்றுமதி
-
-@ Switch List
-ta பட்டியலை மாற்று
 
 @ This can't be undone.
 ta இதைச் செயல்தவிர்க்க முடியாது.
@@ -3060,6 +3065,43 @@ ta தயாராகிறது...
 # Save cards: personal best.
 @ PB {} {}
 ta PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+ta சாவி எடுக்கப்பட்டது
+
+@ Select User Data Directory
+ta பயனர் தரவு அடைவைத் தேர்ந்தெடு
+
+@ Data folder: {}
+ta தரவு கோப்புறை: {}
+
+@ Parent Folder
+ta மேல் கோப்புறை
+
+@ Unable to read directory
+ta அடைவைப் படிக்க முடியவில்லை
+
+@ No subfolders
+ta துணைக்கோப்புறைகள் இல்லை
+
+@ Select Folder
+ta கோப்புறையைத் தேர்ந்தெடு
+
+@ Show Hidden
+ta மறைக்கப்பட்டவை காட்டு
+
+@ Copy existing user data?
+ta தற்போதைய பயனர் தரவை நகலெடுக்கவா?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ta சேமிப்புகள், அமைப்புகள், டெமோக்கள் மற்றும் பதிவிறக்கிய வரைபடத் தொகுப்புகளை புதிய கோப்புறைக்கு நகலெடுக்கலாம்.
+
+@ Copy Data
+ta தரவை நகலெடு
+
+@ Switch Only
+ta மாற்று மட்டும்
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ ta ffmpeg கிடைக்கவில்லை: {} PNG சட்டகங்�
 ta புதிய தனிப்பட்ட சிறந்தது ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-ta சாவி எடுக்கும்போது சேமி
-
-@ User Data Directory
-ta பயனர் தரவு அடைவு
-
-@ Autosaves when you pick up a key
-ta சாவியை எடுக்கும்போது தானாகச் சேமிக்கும்
-
-@ Where saves, configs, demos and downloaded map packs are stored
-ta சேமிப்புகள், அமைப்புகள், டெமோக்கள் மற்றும் பதிவிறக்கிய வரைபடத் தொகுப்புகள் சேமிக்கப்படும் இடம்
-
-@ Key picked up
-ta சாவி எடுக்கப்பட்டது
-
-@ Select User Data Directory
-ta பயனர் தரவு அடைவைத் தேர்ந்தெடு
-
-@ Data folder: {}
-ta தரவு கோப்புறை: {}
-
-@ Parent Folder
-ta மேல் கோப்புறை
-
-@ Unable to read directory
-ta அடைவைப் படிக்க முடியவில்லை
-
-@ No subfolders
-ta துணைக்கோப்புறைகள் இல்லை
-
-@ Select Folder
-ta கோப்புறையைத் தேர்ந்தெடு
-
-@ Show Hidden
-ta மறைக்கப்பட்டவை காட்டு
-
-@ Copy existing user data?
-ta தற்போதைய பயனர் தரவை நகலெடுக்கவா?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-ta சேமிப்புகள், அமைப்புகள், டெமோக்கள் மற்றும் பதிவிறக்கிய வரைபடத் தொகுப்புகளை புதிய கோப்புறைக்கு நகலெடுக்கலாம்.
-
-@ Copy Data
-ta தரவை நகலெடு
-
-@ Switch Only
-ta மாற்று மட்டும்
-
 @ User data directory set to {}
 ta பயனர் தரவு அடைவு {} என அமைக்கப்பட்டது
 
 @ User data directory error: {}
 ta பயனர் தரவு அடைவு பிழை: {}
-

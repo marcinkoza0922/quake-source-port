@@ -86,11 +86,11 @@ fn fuzzy_filter_and_sort_mods_and_maps() {
     let m = |d: &str, t: &str| ModInfo { dir: d.into(), title: t.into(), base: Base::Id, blurb: vec![] };
     mm.set_mods(vec![m("z_mod", "Beta Pack"), m("a_mod", "Arcane Dimensions"), m("m_mod", "Alpha")], "z_mod");
     let mut out = Vec::new();
-    // Tab cycles sort: Default -> Name -> Dir
+    // Tab and RT cycle sort: Default -> Name -> Dir -> Default
     mm.key(Page::List, K_TAB, &mut out);
     assert_eq!(mm.mod_sort, ModSort::Name);
     assert_eq!(mm.mod_at_row(1).unwrap().1.title, "Alpha");
-    mm.key(Page::List, K_TAB, &mut out);
+    mm.key(Page::List, K_RTRIGGER, &mut out);
     assert_eq!(mm.mod_sort, ModSort::Dir);
     assert_eq!(mm.mod_at_row(1).unwrap().1.dir, "a_mod");
     // Typing filters immediately without focusing search box

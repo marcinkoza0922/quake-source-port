@@ -1632,6 +1632,13 @@ hy անհատական
 @ classic
 hy դասական
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+hy Պահպանել բանալի վերցնելիս
+
+@ User Data Directory
+hy Օգտատիրոջ տվյալների պանակ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ hy Տեղափոխեք, չափափոխեք, ավելացրեք և հեռացրե�
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 hy Ժամանակակից՝ կոմպակտ տարրեր էկրանի եզրերին; դասական՝ սկզբնական վիճակի գոտին։ Ընտրությունը վերակայում է HUD-ը; «Խմբագրել HUD-ը»-ում փոփոխությունները այն անհատական են դարձնում
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+hy Ինքնաշխատ պահպանում է բանալի վերցնելիս
+
+@ Where saves, configs, demos and downloaded map packs are stored
+hy Որտեղ պահվում են պահպանումները, կարգավորումները, դեմոները և ներբեռնված քարտեզների փաթեթները
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ hy ՀԱՏՈՒԿ
 
 @ Customize Experience
 hy Հարմարեցնել խաղը
-
-@ Disable All
-hy Անջատել բոլորը
 
 @ Disable All Modifications
 hy Անջատել բոլոր փոփոխությունները
@@ -3003,17 +3014,11 @@ hy Ֆիլտրին համապատասխանող դեմո չկա։ Backspace-ը կ
 @ Renaming an automatic demo moves it to the saved demos.
 hy Ավտոմատ դեմոյի վերանվանումը այն տեղափոխում է պահված դեմոների մեջ։
 
-@ Sort
-hy Դասավորել
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 hy Դեմոյի ժամանակ՝ A-ն դադար է տալիս, d-pad-ը փաթաթում և փոխում է արագությունը, LT-ն ու RT-ն նշում են հատվածը, իսկ X-ը արտահանում է այն։
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 hy Space դադար | Ձախ/Աջ փաթաթել | Վերև/Ներքև արագություն | PgUp/PgDn 10 վ | I/O նշիչ | E արտահանել
-
-@ Switch List
-hy Փոխել ցանկը
 
 @ This can't be undone.
 hy Սա հնարավոր չէ հետարկել։
@@ -3060,6 +3065,43 @@ hy Պատրաստում...
 # Save cards: personal best.
 @ PB {} {}
 hy PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+hy Բանալին վերցված է
+
+@ Select User Data Directory
+hy Ընտրել օգտատիրոջ տվյալների պանակը
+
+@ Data folder: {}
+hy Տվյալների պանակ՝ {}
+
+@ Parent Folder
+hy Վերին պանակ
+
+@ Unable to read directory
+hy Հնարավոր չէ կարդալ պանակը
+
+@ No subfolders
+hy Ենթապանակներ չկան
+
+@ Select Folder
+hy Ընտրել պանակը
+
+@ Show Hidden
+hy Ցույց տալ թաքնվածները
+
+@ Copy existing user data?
+hy Պատճենե՞լ օգտատիրոջ առկա տվյալները
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+hy Պահպանումները, կարգավորումները, դեմոները և ներբեռնված քարտեզները կարող են պատճենվել նոր պանակում։
+
+@ Copy Data
+hy Պատճենել տվյալները
+
+@ Switch Only
+hy Միայն փոխել
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ hy ffmpeg-ը չգտնվեց․ {} PNG կադր և WAV գրվեցին {}-ում
 hy Նոր անձնական ռեկորդ ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-hy Պահպանել բանալի վերցնելիս
-
-@ User Data Directory
-hy Օգտատիրոջ տվյալների պանակ
-
-@ Autosaves when you pick up a key
-hy Ինքնաշխատ պահպանում է բանալի վերցնելիս
-
-@ Where saves, configs, demos and downloaded map packs are stored
-hy Որտեղ պահվում են պահպանումները, կարգավորումները, դեմոները և ներբեռնված քարտեզների փաթեթները
-
-@ Key picked up
-hy Բանալին վերցված է
-
-@ Select User Data Directory
-hy Ընտրել օգտատիրոջ տվյալների պանակը
-
-@ Data folder: {}
-hy Տվյալների պանակ՝ {}
-
-@ Parent Folder
-hy Վերին պանակ
-
-@ Unable to read directory
-hy Հնարավոր չէ կարդալ պանակը
-
-@ No subfolders
-hy Ենթապանակներ չկան
-
-@ Select Folder
-hy Ընտրել պանակը
-
-@ Show Hidden
-hy Ցույց տալ թաքնվածները
-
-@ Copy existing user data?
-hy Պատճենե՞լ օգտատիրոջ առկա տվյալները
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-hy Պահպանումները, կարգավորումները, դեմոները և ներբեռնված քարտեզները կարող են պատճենվել նոր պանակում։
-
-@ Copy Data
-hy Պատճենել տվյալները
-
-@ Switch Only
-hy Միայն փոխել
-
 @ User data directory set to {}
 hy Օգտատիրոջ տվյալների պանակը սահմանվեց՝ {}
 
 @ User data directory error: {}
 hy Օգտատիրոջ տվյալների պանակի սխալ՝ {}
-

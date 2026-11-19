@@ -1632,6 +1632,13 @@ fa سفارشی
 @ classic
 fa کلاسیک
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+fa ذخیره هنگام برداشتن کلید
+
+@ User Data Directory
+fa پوشه داده‌های کاربر
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ fa جابه‌جایی، تغییر اندازه، افزودن و حذف اجز
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 fa مدرن: اجزای جمع‌وجور در لبه‌های صفحه؛ کلاسیک: نوار وضعیت اصلی. انتخاب یکی HUD را بازنشانی می‌کند؛ تغییر در ویرایش HUD آن را سفارشی می‌کند
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+fa هنگام برداشتن کلید به‌طور خودکار ذخیره می‌کند
+
+@ Where saves, configs, demos and downloaded map packs are stored
+fa محل ذخیره بازی‌ها، تنظیمات، دموها و بسته‌های نقشه دانلودشده
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ fa سفارشی
 
 @ Customize Experience
 fa سفارشی‌سازی تجربه
-
-@ Disable All
-fa غیرفعال کردن همه
 
 @ Disable All Modifications
 fa غیرفعال کردن همه‌ی تغییرات
@@ -3003,17 +3014,11 @@ fa هیچ دمویی با فیلتر جور نیست. Backspace یا Esc آن ر
 @ Renaming an automatic demo moves it to the saved demos.
 fa تغییر نام دموی خودکار آن را به دموهای ذخیره‌شده منتقل می‌کند.
 
-@ Sort
-fa مرتب‌سازی
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 fa هنگام پخش دمو: A مکث می‌کند، دکمه‌های جهت جابه‌جا می‌کنند و سرعت را تغییر می‌دهند، LT و RT یک قطعه را علامت می‌زنند و X از آن خروجی می‌گیرد.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 fa Space مکث | چپ/راست جابه‌جایی | بالا/پایین سرعت | PgUp/PgDn ۱۰ ث | I/O نشانه | E خروجی
-
-@ Switch List
-fa تعویض فهرست
 
 @ This can't be undone.
 fa این کار برگشت‌پذیر نیست.
@@ -3060,6 +3065,43 @@ fa در حال آماده‌سازی...
 # Save cards: personal best.
 @ PB {} {}
 fa PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+fa کلید برداشته شد
+
+@ Select User Data Directory
+fa انتخاب پوشه داده‌های کاربر
+
+@ Data folder: {}
+fa پوشه داده‌ها: {}
+
+@ Parent Folder
+fa پوشه والد
+
+@ Unable to read directory
+fa خواندن پوشه ممکن نیست
+
+@ No subfolders
+fa زیرپوشه‌ای وجود ندارد
+
+@ Select Folder
+fa انتخاب پوشه
+
+@ Show Hidden
+fa نمایش مخفی‌ها
+
+@ Copy existing user data?
+fa داده‌های فعلی کاربر کپی شوند؟
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+fa ذخیره‌ها، تنظیمات، دموها و بسته‌های نقشه دانلودشده می‌توانند به پوشه جدید کپی شوند.
+
+@ Copy Data
+fa کپی داده‌ها
+
+@ Switch Only
+fa فقط تغییر
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ fa ffmpeg پیدا نشد: {} فریم PNG و یک WAV در {} نوشته شد
 fa رکورد شخصی تازه ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-fa ذخیره هنگام برداشتن کلید
-
-@ User Data Directory
-fa پوشه داده‌های کاربر
-
-@ Autosaves when you pick up a key
-fa هنگام برداشتن کلید به‌طور خودکار ذخیره می‌کند
-
-@ Where saves, configs, demos and downloaded map packs are stored
-fa محل ذخیره بازی‌ها، تنظیمات، دموها و بسته‌های نقشه دانلودشده
-
-@ Key picked up
-fa کلید برداشته شد
-
-@ Select User Data Directory
-fa انتخاب پوشه داده‌های کاربر
-
-@ Data folder: {}
-fa پوشه داده‌ها: {}
-
-@ Parent Folder
-fa پوشه والد
-
-@ Unable to read directory
-fa خواندن پوشه ممکن نیست
-
-@ No subfolders
-fa زیرپوشه‌ای وجود ندارد
-
-@ Select Folder
-fa انتخاب پوشه
-
-@ Show Hidden
-fa نمایش مخفی‌ها
-
-@ Copy existing user data?
-fa داده‌های فعلی کاربر کپی شوند؟
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-fa ذخیره‌ها، تنظیمات، دموها و بسته‌های نقشه دانلودشده می‌توانند به پوشه جدید کپی شوند.
-
-@ Copy Data
-fa کپی داده‌ها
-
-@ Switch Only
-fa فقط تغییر
-
 @ User data directory set to {}
 fa پوشه داده‌های کاربر روی {} تنظیم شد
 
 @ User data directory error: {}
 fa خطای پوشه داده‌های کاربر: {}
-

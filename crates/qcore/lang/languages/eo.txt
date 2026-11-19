@@ -1632,6 +1632,13 @@ eo propra
 @ classic
 eo klasika
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+eo Konservi kiam prenas ŝlosilon
+
+@ User Data Directory
+eo Dosierujo de uzantaj datumoj
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ eo Movu, regrandigu, aldonu kaj forigu HUD-elementojn: sano, municio, armiloj, t
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 eo Moderna: kompaktaj elementoj ĉe la ekranrandoj; klasika: la originala statobreto. Elekto de unu restarigas la HUD; ŝanĝoj en Redakti HUD faras ĝin propra
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+eo Aŭtomate konservas kiam vi prenas ŝlosilon
+
+@ Where saves, configs, demos and downloaded map packs are stored
+eo Kie konservaĵoj, agordoj, demo-dosieroj kaj elŝutitaj map-pakaĵoj estas stokitaj
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ eo ADAPTITA
 
 @ Customize Experience
 eo Adapti la sperton
-
-@ Disable All
-eo Malŝalti ĉiujn
 
 @ Disable All Modifications
 eo Malŝalti ĉiujn modifojn
@@ -3003,17 +3014,11 @@ eo Neniu demonstraĵo kongruas kun la filtrilo. Retropaŝo aŭ Esc forigas ĝin.
 @ Renaming an automatic demo moves it to the saved demos.
 eo Alinomi aŭtomatan demonstraĵon movas ĝin al la konservitaj.
 
-@ Sort
-eo Ordigi
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 eo Dum demonstraĵo: A paŭzigas, la direktokruco rulumas kaj ŝanĝas la rapidon, LT kaj RT markas eltranĉaĵon kaj X eksportas ĝin.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 eo Spaco paŭzo | Maldekstren/Dekstren rulumi | Supren/Malsupren rapido | PgUp/PgDn 10 s | I/O marko | E eksporti
-
-@ Switch List
-eo Ŝanĝi liston
 
 @ This can't be undone.
 eo Tio ne malfareblas.
@@ -3060,6 +3065,43 @@ eo Preparante...
 # Save cards: personal best.
 @ PB {} {}
 eo PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+eo Ŝlosilo prenita
+
+@ Select User Data Directory
+eo Elekti dosierujon de uzantaj datumoj
+
+@ Data folder: {}
+eo Datuma dosierujo: {}
+
+@ Parent Folder
+eo Patra dosierujo
+
+@ Unable to read directory
+eo Ne eblas legi la dosierujon
+
+@ No subfolders
+eo Neniuj subdosierujoj
+
+@ Select Folder
+eo Elekti dosierujon
+
+@ Show Hidden
+eo Montri kaŝitajn
+
+@ Copy existing user data?
+eo Ĉu kopii ekzistantajn uzantajn datumojn?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+eo Konservaĵoj, agordoj, demo-dosieroj kaj elŝutitaj map-pakaĵoj povas esti kopiitaj al la nova dosierujo.
+
+@ Copy Data
+eo Kopii datumojn
+
+@ Switch Only
+eo Nur ŝanĝi
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ eo ffmpeg ne trovita: skribis {} PNG-kadrojn kaj WAV al {}
 eo Nova persona rekordo ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-eo Konservi kiam prenas ŝlosilon
-
-@ User Data Directory
-eo Dosierujo de uzantaj datumoj
-
-@ Autosaves when you pick up a key
-eo Aŭtomate konservas kiam vi prenas ŝlosilon
-
-@ Where saves, configs, demos and downloaded map packs are stored
-eo Kie konservaĵoj, agordoj, demo-dosieroj kaj elŝutitaj map-pakaĵoj estas stokitaj
-
-@ Key picked up
-eo Ŝlosilo prenita
-
-@ Select User Data Directory
-eo Elekti dosierujon de uzantaj datumoj
-
-@ Data folder: {}
-eo Datuma dosierujo: {}
-
-@ Parent Folder
-eo Patra dosierujo
-
-@ Unable to read directory
-eo Ne eblas legi la dosierujon
-
-@ No subfolders
-eo Neniuj subdosierujoj
-
-@ Select Folder
-eo Elekti dosierujon
-
-@ Show Hidden
-eo Montri kaŝitajn
-
-@ Copy existing user data?
-eo Ĉu kopii ekzistantajn uzantajn datumojn?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-eo Konservaĵoj, agordoj, demo-dosieroj kaj elŝutitaj map-pakaĵoj povas esti kopiitaj al la nova dosierujo.
-
-@ Copy Data
-eo Kopii datumojn
-
-@ Switch Only
-eo Nur ŝanĝi
-
 @ User data directory set to {}
 eo Dosierujo de uzantaj datumoj agordita al {}
 
 @ User data directory error: {}
 eo Eraro pri dosierujo de uzantaj datumoj: {}
-

@@ -138,7 +138,8 @@ impl Menu {
                 for (k, (bx, label)) in BTN_X.iter().zip([*yes_label, "Cancel"]).enumerate() {
                     let on = (k == 0) == *yes;
                     c.round_box(*bx, BTN_Y, BTN.0, BTN.1, 4.0, if on { HILITE } else { [0.0, 0.0, 0.0, 0.7] }, Some(BORDER));
-                    c.text_center(bx + BTN.0 / 2.0, BTN_Y + 4.0, label, TXT, if on { GOLD_FG } else { MUTED });
+                    let key = (self.pad_ui && k == 1).then_some(K_BBUTTON);
+                    self.glyphs.button_label(c, [*bx, BTN_Y, BTN.0, BTN.1], key, label, TXT, if on { GOLD_FG } else { MUTED });
                 }
             }
             Prompt::Skill { cursor, warn, .. } => {

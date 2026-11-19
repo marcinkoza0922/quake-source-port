@@ -1632,6 +1632,13 @@ fil custom
 @ classic
 fil klasiko
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+fil I-save kapag kumuha ng susi
+
+@ User Data Directory
+fil Direktoryo ng Data ng User
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ fil Ilipat, baguhin ang laki, idagdag at alisin ang mga bahagi ng HUD: kalusugan
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 fil Moderno: maliliit na bahagi sa mga gilid ng screen; klasiko: ang orihinal na status bar. Nire-reset ng pagpili ang HUD; nagiging custom ito kapag binago sa I-edit ang HUD
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+fil Awtomatikong nagse-save kapag kumuha ka ng susi
+
+@ Where saves, configs, demos and downloaded map packs are stored
+fil Kung saan nakaimbak ang mga save, config, demo, at na-download na map pack
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ fil CUSTOM
 
 @ Customize Experience
 fil I-customize ang Karanasan
-
-@ Disable All
-fil I-disable Lahat
 
 @ Disable All Modifications
 fil I-disable ang Lahat ng Pagbabago
@@ -3003,17 +3014,11 @@ fil Walang demo na tugma sa filter. Buburahin ito ng Backspace o Esc.
 @ Renaming an automatic demo moves it to the saved demos.
 fil Kapag pinalitan ang pangalan ng awtomatikong demo, malilipat ito sa mga naka-save na demo.
 
-@ Sort
-fil Ayusin
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 fil Habang may demo: A para i-pause, ang d-pad para mag-scrub at magbago ng bilis, LT at RT para markahan ang clip at X para i-export ito.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 fil Space pause | Kaliwa/Kanan scrub | Taas/Baba bilis | PgUp/PgDn 10 s | I/O marka | E export
-
-@ Switch List
-fil Palitan ang listahan
 
 @ This can't be undone.
 fil Hindi na ito maibabalik.
@@ -3060,6 +3065,43 @@ fil Inihahanda...
 # Save cards: personal best.
 @ PB {} {}
 fil PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+fil Nakakuha ng susi
+
+@ Select User Data Directory
+fil Pumili ng Direktoryo ng Data ng User
+
+@ Data folder: {}
+fil Folder ng data: {}
+
+@ Parent Folder
+fil Parent na Folder
+
+@ Unable to read directory
+fil Hindi mabasa ang direktoryo
+
+@ No subfolders
+fil Walang subfolder
+
+@ Select Folder
+fil Piliin ang Folder
+
+@ Show Hidden
+fil Ipakita ang Nakatago
+
+@ Copy existing user data?
+fil Kopyahin ang kasalukuyang data ng user?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+fil Maaaring kopyahin ang mga save, config, demo, at na-download na map pack sa bagong folder.
+
+@ Copy Data
+fil Kopyahin ang Data
+
+@ Switch Only
+fil Lumipat Lang
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ fil Hindi nakita ang ffmpeg: naisulat ang {} PNG frame at isang WAV sa {}
 fil Bagong personal best ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-fil I-save kapag kumuha ng susi
-
-@ User Data Directory
-fil Direktoryo ng Data ng User
-
-@ Autosaves when you pick up a key
-fil Awtomatikong nagse-save kapag kumuha ka ng susi
-
-@ Where saves, configs, demos and downloaded map packs are stored
-fil Kung saan nakaimbak ang mga save, config, demo, at na-download na map pack
-
-@ Key picked up
-fil Nakakuha ng susi
-
-@ Select User Data Directory
-fil Pumili ng Direktoryo ng Data ng User
-
-@ Data folder: {}
-fil Folder ng data: {}
-
-@ Parent Folder
-fil Parent na Folder
-
-@ Unable to read directory
-fil Hindi mabasa ang direktoryo
-
-@ No subfolders
-fil Walang subfolder
-
-@ Select Folder
-fil Piliin ang Folder
-
-@ Show Hidden
-fil Ipakita ang Nakatago
-
-@ Copy existing user data?
-fil Kopyahin ang kasalukuyang data ng user?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-fil Maaaring kopyahin ang mga save, config, demo, at na-download na map pack sa bagong folder.
-
-@ Copy Data
-fil Kopyahin ang Data
-
-@ Switch Only
-fil Lumipat Lang
-
 @ User data directory set to {}
 fil Itinakda ang direktoryo ng data ng user sa {}
 
 @ User data directory error: {}
 fil Error sa direktoryo ng data ng user: {}
-

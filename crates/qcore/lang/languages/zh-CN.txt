@@ -1632,6 +1632,13 @@ zh-CN 自定义
 @ classic
 zh-CN 经典
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+zh-CN 拾取钥匙时保存
+
+@ User Data Directory
+zh-CN 用户数据目录
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ zh-CN 移动、缩放、添加和移除 HUD 元素：生命、弹药、武器、
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 zh-CN 现代：屏幕边缘的紧凑元素；经典：原版状态栏。选择预设会重置 HUD；在编辑 HUD 中修改后会变为自定义
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+zh-CN 拾取钥匙时自动保存
+
+@ Where saves, configs, demos and downloaded map packs are stored
+zh-CN 存档、配置、录像和已下载地图包的保存位置
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ zh-CN 自定义
 
 @ Customize Experience
 zh-CN 自定义体验
-
-@ Disable All
-zh-CN 全部禁用
 
 @ Disable All Modifications
 zh-CN 禁用所有修改
@@ -3003,17 +3014,11 @@ zh-CN 没有符合筛选的演示。Backspace 或 Esc 清除筛选。
 @ Renaming an automatic demo moves it to the saved demos.
 zh-CN 重命名自动演示会将其移到已保存的演示中。
 
-@ Sort
-zh-CN 排序
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 zh-CN 播放演示时：A 暂停，方向键拖动和改变速度，LT 和 RT 标记片段，X 导出该片段。
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 zh-CN Space 暂停 | ←/→ 拖动 | ↑/↓ 速度 | PgUp/PgDn 10 秒 | I/O 标记 | E 导出
-
-@ Switch List
-zh-CN 切换列表
 
 @ This can't be undone.
 zh-CN 此操作无法撤销。
@@ -3060,6 +3065,43 @@ zh-CN 正在准备...
 # Save cards: personal best.
 @ PB {} {}
 zh-CN PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+zh-CN 拾取钥匙
+
+@ Select User Data Directory
+zh-CN 选择用户数据目录
+
+@ Data folder: {}
+zh-CN 数据文件夹：{}
+
+@ Parent Folder
+zh-CN 上级文件夹
+
+@ Unable to read directory
+zh-CN 无法读取目录
+
+@ No subfolders
+zh-CN 没有子文件夹
+
+@ Select Folder
+zh-CN 选择文件夹
+
+@ Show Hidden
+zh-CN 显示隐藏项
+
+@ Copy existing user data?
+zh-CN 复制现有用户数据？
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+zh-CN 可将存档、配置、录像和已下载地图包复制到新文件夹。
+
+@ Copy Data
+zh-CN 复制数据
+
+@ Switch Only
+zh-CN 仅切换
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ zh-CN 未找到 ffmpeg：已将 {} 帧 PNG 和一个 WAV 写入 {}
 zh-CN 新的个人最佳（{}）：{}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-zh-CN 拾取钥匙时保存
-
-@ User Data Directory
-zh-CN 用户数据目录
-
-@ Autosaves when you pick up a key
-zh-CN 拾取钥匙时自动保存
-
-@ Where saves, configs, demos and downloaded map packs are stored
-zh-CN 存档、配置、录像和已下载地图包的保存位置
-
-@ Key picked up
-zh-CN 拾取钥匙
-
-@ Select User Data Directory
-zh-CN 选择用户数据目录
-
-@ Data folder: {}
-zh-CN 数据文件夹：{}
-
-@ Parent Folder
-zh-CN 上级文件夹
-
-@ Unable to read directory
-zh-CN 无法读取目录
-
-@ No subfolders
-zh-CN 没有子文件夹
-
-@ Select Folder
-zh-CN 选择文件夹
-
-@ Show Hidden
-zh-CN 显示隐藏项
-
-@ Copy existing user data?
-zh-CN 复制现有用户数据？
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-zh-CN 可将存档、配置、录像和已下载地图包复制到新文件夹。
-
-@ Copy Data
-zh-CN 复制数据
-
-@ Switch Only
-zh-CN 仅切换
-
 @ User data directory set to {}
 zh-CN 用户数据目录已设为 {}
 
 @ User data directory error: {}
 zh-CN 用户数据目录错误：{}
-

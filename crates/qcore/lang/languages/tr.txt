@@ -1632,6 +1632,13 @@ tr özel
 @ classic
 tr klasik
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+tr Anahtar alınca kaydet
+
+@ User Data Directory
+tr Kullanıcı Veri Dizini
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ tr HUD öğelerini taşı, boyutlandır, ekle ve kaldır: sağlık, cephane, sil
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 tr Modern: ekran kenarlarında derli toplu öğeler; klasik: özgün durum çubuğu. Birini seçmek HUD'yi sıfırlar; HUD'yi Düzenle'deki değişiklikler onu özel yapar
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+tr Bir anahtar aldığınızda otomatik kaydeder
+
+@ Where saves, configs, demos and downloaded map packs are stored
+tr Kayıtların, ayarların, demoların ve indirilen harita paketlerinin saklandığı yer
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ tr ÖZEL
 
 @ Customize Experience
 tr Deneyimi Özelleştir
-
-@ Disable All
-tr Tümünü Kapat
 
 @ Disable All Modifications
 tr Tüm Değişiklikleri Kapat
@@ -3003,17 +3014,11 @@ tr Filtreye uyan demo yok. Geri tuşu veya Esc filtreyi temizler.
 @ Renaming an automatic demo moves it to the saved demos.
 tr Otomatik bir demoyu yeniden adlandırmak onu kayıtlı demolara taşır.
 
-@ Sort
-tr Sırala
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 tr Demo oynarken: A duraklatır, yön tuşları sarar ve hızı değiştirir, LT ve RT bir klibi işaretler, X onu dışa aktarır.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 tr Boşluk duraklat | Sol/Sağ sar | Yukarı/Aşağı hız | PgUp/PgDn 10 sn | I/O işaret | E dışa aktar
-
-@ Switch List
-tr Listeyi değiştir
 
 @ This can't be undone.
 tr Bu işlem geri alınamaz.
@@ -3060,6 +3065,43 @@ tr Hazırlanıyor...
 # Save cards: personal best.
 @ PB {} {}
 tr PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+tr Anahtar alındı
+
+@ Select User Data Directory
+tr Kullanıcı Veri Dizinini Seç
+
+@ Data folder: {}
+tr Veri klasörü: {}
+
+@ Parent Folder
+tr Üst Klasör
+
+@ Unable to read directory
+tr Dizin okunamadı
+
+@ No subfolders
+tr Alt klasör yok
+
+@ Select Folder
+tr Klasörü Seç
+
+@ Show Hidden
+tr Gizlileri Göster
+
+@ Copy existing user data?
+tr Mevcut kullanıcı verileri kopyalansın mı?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+tr Kayıtlar, ayarlar, demolar ve indirilen harita paketleri yeni klasöre kopyalanabilir.
+
+@ Copy Data
+tr Verileri Kopyala
+
+@ Switch Only
+tr Sadece Değiştir
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ tr ffmpeg bulunamadı: {} PNG karesi ve bir WAV {} konumuna yazıldı
 tr Yeni kişisel rekor ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-tr Anahtar alınca kaydet
-
-@ User Data Directory
-tr Kullanıcı Veri Dizini
-
-@ Autosaves when you pick up a key
-tr Bir anahtar aldığınızda otomatik kaydeder
-
-@ Where saves, configs, demos and downloaded map packs are stored
-tr Kayıtların, ayarların, demoların ve indirilen harita paketlerinin saklandığı yer
-
-@ Key picked up
-tr Anahtar alındı
-
-@ Select User Data Directory
-tr Kullanıcı Veri Dizinini Seç
-
-@ Data folder: {}
-tr Veri klasörü: {}
-
-@ Parent Folder
-tr Üst Klasör
-
-@ Unable to read directory
-tr Dizin okunamadı
-
-@ No subfolders
-tr Alt klasör yok
-
-@ Select Folder
-tr Klasörü Seç
-
-@ Show Hidden
-tr Gizlileri Göster
-
-@ Copy existing user data?
-tr Mevcut kullanıcı verileri kopyalansın mı?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-tr Kayıtlar, ayarlar, demolar ve indirilen harita paketleri yeni klasöre kopyalanabilir.
-
-@ Copy Data
-tr Verileri Kopyala
-
-@ Switch Only
-tr Sadece Değiştir
-
 @ User data directory set to {}
 tr Kullanıcı veri dizini {} olarak ayarlandı
 
 @ User data directory error: {}
 tr Kullanıcı veri dizini hatası: {}
-

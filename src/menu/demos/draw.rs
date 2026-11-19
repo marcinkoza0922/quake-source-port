@@ -9,12 +9,26 @@ use crate::modmenu::clip;
 
 const HOVER: [f32; 4] = [1.0, 1.0, 1.0, 0.07];
 
+impl DemoBtn {
+    /// Gamepad button that triggers this action (matches [`DemoBrowser::key`]).
+    pub fn pad_key(self) -> i32 {
+        match self {
+            Self::Play => K_ABUTTON,
+            Self::Export => K_XBUTTON,
+            Self::Rename => K_YBUTTON,
+            Self::Keep => K_LTRIGGER,
+            Self::Delete => K_BACK,
+        }
+    }
+}
+
 impl DemoBrowser {
-    /// `mouse` lights the row or button under the pointer; `pad` picks the
-    /// controller wording of the playback note.
-    pub fn draw(&self, c: &mut Canvas, mouse: Option<(f32, f32)>, pad: bool) {
+    /// `mouse` lights the row or button under the pointer; `pad` draws
+    /// controller glyphs on buttons and picks controller wording in the note.
+    pub fn draw(&self, c: &mut Canvas, mouse: Option<(f32, f32)>, pad: bool, glyphs: &crate::glyphs::Glyphs) {
         let hover = mouse.and_then(|p| self.hit(p));
         c.text_center(320.0, 22.0, "Demos", 13.0, GOLD_FG);
+        let tab_keys = [K_LSHOULDER, K_RSHOULDER];
         for (t, name) in TABS.iter().enumerate() {
             let x = 320.0 - TAB.0 - 4.0 + t as f32 * (TAB.0 + 8.0);
             let on = t == self.tab;
@@ -23,13 +37,13 @@ impl DemoBrowser {
             c.frame(x, TAB_Y, TAB.0, TAB.1, BORDER);
             let (shown, all) = (self.view[t].len(), self.lists[t].len());
             let s = if self.filter.is_empty() { qcore::tr!("{} ({})", qcore::lang::tr(name), all) } else { qcore::tr!("{} ({}/{})", qcore::lang::tr(name), shown, all) };
-            c.text_center(x + TAB.0 / 2.0, TAB_Y + 3.0, &s, TXT, if on { GOLD_FG } else { MUTED });
+            glyphs.button_label_raw(c, [x, TAB_Y, TAB.0, TAB.1], pad.then_some(tab_keys[t]), &s, TXT, if on { GOLD_FG } else { MUTED });
         }
         let (x, w) = LIST;
-        crate::modmenu::filter_bar_at(c, x, BAR_Y, w, SORT_W, &self.filter, self.sort.label());
+        crate::modmenu::filter_bar_at(c, x, BAR_Y, w, SORT_W, &self.filter, self.sort.label(), pad.then_some((None, Some(K_RTRIGGER), glyphs)));
         panel(c, x, w);
         self.draw_list(c, hover);
-        self.draw_info(c, hover, pad);
+        self.draw_info(c, hover, pad, glyphs);
     }
 
     fn draw_list(&self, c: &mut Canvas, hover: Option<Hit>) {
@@ -69,7 +83,7 @@ impl DemoBrowser {
         }
     }
 
-    fn draw_info(&self, c: &mut Canvas, hover: Option<Hit>, pad: bool) {
+    fn draw_info(&self, c: &mut Canvas, hover: Option<Hit>, pad: bool, glyphs: &crate::glyphs::Glyphs) {
         let (ix, iw) = INFO;
         panel(c, ix, iw);
         let cols = ((iw - 16.0) / 6.0) as usize;
@@ -96,7 +110,7 @@ impl DemoBrowser {
             let bg = if lit { HILITE } else if on { [0.0, 0.0, 0.0, 0.7] } else { [0.0, 0.0, 0.0, 0.35] };
             c.round_box(bx, by, bw, bh, 3.0, bg, Some(if on { BORDER } else { [0.35, 0.3, 0.25, 0.5] }));
             let fg = if lit { GOLD_FG } else if on { FG } else { [0.45, 0.42, 0.38, 0.7] };
-            c.text_center(bx + bw / 2.0, by + 4.0, &clip(&qcore::lang::tr(name), ((bw - 8.0) / 6.0) as usize), TXT, fg);
+            glyphs.button_label(c, [bx, by, bw, bh], (pad && on).then_some(b.pad_key()), name, TXT, fg);
         }
         let (_, last_y, _, last_h) = button_rect(BUTTONS.len() - 1);
         let note = if pad {

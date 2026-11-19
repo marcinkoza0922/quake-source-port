@@ -1632,6 +1632,13 @@ hr prilagođeno
 @ classic
 hr klasično
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+hr Spremi pri uzimanju ključa
+
+@ User Data Directory
+hr Mapa korisničkih podataka
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ hr Pomičite, mijenjajte veličinu, dodajte i uklanjajte elemente HUD-a: zdravlj
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 hr Moderno: kompaktni elementi uz rubove zaslona; klasično: izvorna traka stanja. Odabir predloška vraća HUD; promjene u Uredi HUD čine ga prilagođenim
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+hr Automatski sprema kada pokupite ključ
+
+@ Where saves, configs, demos and downloaded map packs are stored
+hr Gdje se pohranjuju spremljene igre, postavke, demoi i preuzeti paketi mapa
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ hr PRILAGOĐENO
 
 @ Customize Experience
 hr Prilagodi iskustvo
-
-@ Disable All
-hr Onemogući sve
 
 @ Disable All Modifications
 hr Onemogući sve izmjene
@@ -3003,17 +3014,11 @@ hr Nijedan demo ne odgovara filtru. Backspace ili Esc ga briše.
 @ Renaming an automatic demo moves it to the saved demos.
 hr Preimenovanje automatskog dema premješta ga među spremljene demoe.
 
-@ Sort
-hr Poredaj
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 hr Tijekom dema: A pauzira, križni gumb premotava i mijenja brzinu, LT i RT označavaju isječak, a X ga izvozi.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 hr Razmaknica pauza | Lijevo/Desno premotavanje | Gore/Dolje brzina | PgUp/PgDn 10 s | I/O oznaka | E izvoz
-
-@ Switch List
-hr Promijeni popis
 
 @ This can't be undone.
 hr Ovo se ne može poništiti.
@@ -3060,6 +3065,43 @@ hr Priprema...
 # Save cards: personal best.
 @ PB {} {}
 hr PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+hr Ključ pokupljen
+
+@ Select User Data Directory
+hr Odaberite mapu korisničkih podataka
+
+@ Data folder: {}
+hr Mapa podataka: {}
+
+@ Parent Folder
+hr Nadređena mapa
+
+@ Unable to read directory
+hr Nije moguće pročitati mapu
+
+@ No subfolders
+hr Nema podmapa
+
+@ Select Folder
+hr Odaberi mapu
+
+@ Show Hidden
+hr Prikaži skrivene
+
+@ Copy existing user data?
+hr Kopirati postojeće korisničke podatke?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+hr Spremljene igre, postavke, demoi i preuzeti paketi mapa mogu se kopirati u novu mapu.
+
+@ Copy Data
+hr Kopiraj podatke
+
+@ Switch Only
+hr Samo promijeni
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ hr ffmpeg nije pronađen: zapisano {} PNG sličica i WAV u {}
 hr Novi osobni rekord ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-hr Spremi pri uzimanju ključa
-
-@ User Data Directory
-hr Mapa korisničkih podataka
-
-@ Autosaves when you pick up a key
-hr Automatski sprema kada pokupite ključ
-
-@ Where saves, configs, demos and downloaded map packs are stored
-hr Gdje se pohranjuju spremljene igre, postavke, demoi i preuzeti paketi mapa
-
-@ Key picked up
-hr Ključ pokupljen
-
-@ Select User Data Directory
-hr Odaberite mapu korisničkih podataka
-
-@ Data folder: {}
-hr Mapa podataka: {}
-
-@ Parent Folder
-hr Nadređena mapa
-
-@ Unable to read directory
-hr Nije moguće pročitati mapu
-
-@ No subfolders
-hr Nema podmapa
-
-@ Select Folder
-hr Odaberi mapu
-
-@ Show Hidden
-hr Prikaži skrivene
-
-@ Copy existing user data?
-hr Kopirati postojeće korisničke podatke?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-hr Spremljene igre, postavke, demoi i preuzeti paketi mapa mogu se kopirati u novu mapu.
-
-@ Copy Data
-hr Kopiraj podatke
-
-@ Switch Only
-hr Samo promijeni
-
 @ User data directory set to {}
 hr Mapa korisničkih podataka postavljena na {}
 
 @ User data directory error: {}
 hr Greška mape korisničkih podataka: {}
-

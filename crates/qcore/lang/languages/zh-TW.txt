@@ -1632,6 +1632,13 @@ zh-TW 自訂
 @ classic
 zh-TW 經典
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+zh-TW 拾取鑰匙時儲存
+
+@ User Data Directory
+zh-TW 使用者資料目錄
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ zh-TW 移動、縮放、新增和移除 HUD 元素：生命、彈藥、武器、
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 zh-TW 現代：螢幕邊緣的精簡元素；經典：原版狀態列。選擇預設會重設 HUD；在編輯 HUD 中修改後會變為自訂
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+zh-TW 拾取鑰匙時自動儲存
+
+@ Where saves, configs, demos and downloaded map packs are stored
+zh-TW 存檔、設定、錄影與已下載地圖包的儲存位置
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ zh-TW 自訂
 
 @ Customize Experience
 zh-TW 自訂遊戲體驗
-
-@ Disable All
-zh-TW 全部停用
 
 @ Disable All Modifications
 zh-TW 停用所有修改
@@ -3003,17 +3014,11 @@ zh-TW 沒有符合篩選的示範。Backspace 或 Esc 清除篩選。
 @ Renaming an automatic demo moves it to the saved demos.
 zh-TW 重新命名自動示範會將其移到已儲存的示範中。
 
-@ Sort
-zh-TW 排序
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 zh-TW 播放示範時：A 暫停，方向鍵拖曳和改變速度，LT 和 RT 標記片段，X 匯出該片段。
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 zh-TW Space 暫停 | ←/→ 拖曳 | ↑/↓ 速度 | PgUp/PgDn 10 秒 | I/O 標記 | E 匯出
-
-@ Switch List
-zh-TW 切換清單
 
 @ This can't be undone.
 zh-TW 此操作無法復原。
@@ -3060,6 +3065,43 @@ zh-TW 準備中...
 # Save cards: personal best.
 @ PB {} {}
 zh-TW PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+zh-TW 拾取鑰匙
+
+@ Select User Data Directory
+zh-TW 選擇使用者資料目錄
+
+@ Data folder: {}
+zh-TW 資料夾：{}
+
+@ Parent Folder
+zh-TW 上層資料夾
+
+@ Unable to read directory
+zh-TW 無法讀取目錄
+
+@ No subfolders
+zh-TW 沒有子資料夾
+
+@ Select Folder
+zh-TW 選擇資料夾
+
+@ Show Hidden
+zh-TW 顯示隱藏項目
+
+@ Copy existing user data?
+zh-TW 複製現有使用者資料？
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+zh-TW 可將存檔、設定、錄影與已下載地圖包複製到新資料夾。
+
+@ Copy Data
+zh-TW 複製資料
+
+@ Switch Only
+zh-TW 僅切換
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ zh-TW 找不到 ffmpeg：已將 {} 格 PNG 和一個 WAV 寫入 {}
 zh-TW 新的個人最佳（{}）：{}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-zh-TW 拾取鑰匙時儲存
-
-@ User Data Directory
-zh-TW 使用者資料目錄
-
-@ Autosaves when you pick up a key
-zh-TW 拾取鑰匙時自動儲存
-
-@ Where saves, configs, demos and downloaded map packs are stored
-zh-TW 存檔、設定、錄影與已下載地圖包的儲存位置
-
-@ Key picked up
-zh-TW 拾取鑰匙
-
-@ Select User Data Directory
-zh-TW 選擇使用者資料目錄
-
-@ Data folder: {}
-zh-TW 資料夾：{}
-
-@ Parent Folder
-zh-TW 上層資料夾
-
-@ Unable to read directory
-zh-TW 無法讀取目錄
-
-@ No subfolders
-zh-TW 沒有子資料夾
-
-@ Select Folder
-zh-TW 選擇資料夾
-
-@ Show Hidden
-zh-TW 顯示隱藏項目
-
-@ Copy existing user data?
-zh-TW 複製現有使用者資料？
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-zh-TW 可將存檔、設定、錄影與已下載地圖包複製到新資料夾。
-
-@ Copy Data
-zh-TW 複製資料
-
-@ Switch Only
-zh-TW 僅切換
-
 @ User data directory set to {}
 zh-TW 使用者資料目錄已設為 {}
 
 @ User data directory error: {}
 zh-TW 使用者資料目錄錯誤：{}
-

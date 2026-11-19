@@ -135,3 +135,18 @@ fn menu_routes_wheel_typing_and_rename_dialog() {
     assert!(out.iter().any(|a| matches!(a, Action::Command(c) if c == "_demo_rename \"autodemos/20240101-120000_e1m1.dem\" \"e1m1_20240101-120000x\"\n")));
     assert_eq!(m.screen, Screen::Demos);
 }
+
+#[test]
+fn demo_buttons_emit_controller_glyphs_in_pad_mode() {
+    let mut b = DemoBrowser::default();
+    b.set(vec![file("a", false)], vec![file("20240101-120000_e1m1", true)], true);
+    b.tab = 1;
+    let glyphs = crate::glyphs::Glyphs::default();
+    let mut kb = crate::draw::Canvas::new(640, 360);
+    kb.ui = Some(Default::default());
+    b.draw(&mut kb, None, false, &glyphs);
+    let mut pad = crate::draw::Canvas::new(640, 360);
+    pad.ui = Some(Default::default());
+    b.draw(&mut pad, None, true, &glyphs);
+    assert!(pad.list.len() > kb.list.len(), "Demos tabs, sort and action buttons should draw controller glyphs");
+}

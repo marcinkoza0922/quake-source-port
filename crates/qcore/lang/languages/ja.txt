@@ -1632,6 +1632,13 @@ ja カスタム
 @ classic
 ja クラシック
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ja 鍵を拾った時にセーブ
+
+@ User Data Directory
+ja ユーザーデータフォルダ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ ja HUD要素の移動、サイズ変更、追加、削除：体力、弾薬、�
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 ja モダン：画面の端にまとまった要素。クラシック：オリジナルのステータスバー。選ぶとHUDがリセットされ、「HUDを編集」で変更するとカスタムになります
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+ja 鍵を拾った時に自動でセーブします
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ja セーブデータ、設定、デモ、ダウンロードしたマップパックの保存先
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ ja カスタム
 
 @ Customize Experience
 ja ゲーム体験をカスタマイズ
-
-@ Disable All
-ja すべて無効化
 
 @ Disable All Modifications
 ja すべての変更を無効化
@@ -3003,17 +3014,11 @@ ja フィルターに合うデモはありません。Backspace か Esc で消�
 @ Renaming an automatic demo moves it to the saved demos.
 ja 自動デモの名前を変えると保存済みデモに移動します。
 
-@ Sort
-ja 並べ替え
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 ja デモ再生中：A で一時停止、十字キーでスクラブと速度変更、LT と RT でクリップを指定し、X で書き出します。
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ja Space 一時停止 | ←/→ スクラブ | ↑/↓ 速度 | PgUp/PgDn 10秒 | I/O マーク | E 書き出し
-
-@ Switch List
-ja リストを切り替え
 
 @ This can't be undone.
 ja 元に戻せません。
@@ -3060,6 +3065,43 @@ ja 準備中...
 # Save cards: personal best.
 @ PB {} {}
 ja PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+ja 鍵を取得
+
+@ Select User Data Directory
+ja ユーザーデータフォルダを選択
+
+@ Data folder: {}
+ja データフォルダ: {}
+
+@ Parent Folder
+ja 親フォルダ
+
+@ Unable to read directory
+ja フォルダを読み込めません
+
+@ No subfolders
+ja サブフォルダがありません
+
+@ Select Folder
+ja フォルダを選択
+
+@ Show Hidden
+ja 隠しフォルダを表示
+
+@ Copy existing user data?
+ja 既存のユーザーデータをコピーしますか？
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ja セーブデータ、設定、デモ、ダウンロードしたマップパックを新しいフォルダへコピーできます。
+
+@ Copy Data
+ja データをコピー
+
+@ Switch Only
+ja 切り替えのみ
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ ja ffmpeg が見つかりません：{}枚の PNG フレームと WAV を{}に�
 ja 自己ベスト更新（{}）: {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-ja 鍵を拾った時にセーブ
-
-@ User Data Directory
-ja ユーザーデータフォルダ
-
-@ Autosaves when you pick up a key
-ja 鍵を拾った時に自動でセーブします
-
-@ Where saves, configs, demos and downloaded map packs are stored
-ja セーブデータ、設定、デモ、ダウンロードしたマップパックの保存先
-
-@ Key picked up
-ja 鍵を取得
-
-@ Select User Data Directory
-ja ユーザーデータフォルダを選択
-
-@ Data folder: {}
-ja データフォルダ: {}
-
-@ Parent Folder
-ja 親フォルダ
-
-@ Unable to read directory
-ja フォルダを読み込めません
-
-@ No subfolders
-ja サブフォルダがありません
-
-@ Select Folder
-ja フォルダを選択
-
-@ Show Hidden
-ja 隠しフォルダを表示
-
-@ Copy existing user data?
-ja 既存のユーザーデータをコピーしますか？
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-ja セーブデータ、設定、デモ、ダウンロードしたマップパックを新しいフォルダへコピーできます。
-
-@ Copy Data
-ja データをコピー
-
-@ Switch Only
-ja 切り替えのみ
-
 @ User data directory set to {}
 ja ユーザーデータフォルダを {} に設定しました
 
 @ User data directory error: {}
 ja ユーザーデータフォルダのエラー: {}
-

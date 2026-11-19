@@ -52,7 +52,8 @@ impl Menu {
         c.text_center(320.0, 172.0, &qcore::tr!("{} already assigned", keys), TXT, FG);
         c.text_center(320.0, 194.0, "Open Controls to remap Lock-on?", TXT, FG);
         c.text_center(270.0, 226.0, "Yes", TXT, if self.autoaim_yes { GOLD_FG } else { MUTED });
-        c.text_center(370.0, 226.0, "No", TXT, if self.autoaim_yes { MUTED } else { GOLD_FG });
+        let no_col = if self.autoaim_yes { MUTED } else { GOLD_FG };
+        self.glyphs.button_label(c, [320.0, 222.0, 100.0, 16.0], self.pad_ui.then_some(K_BBUTTON), "No", TXT, no_col);
     }
 }
 

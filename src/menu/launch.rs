@@ -208,12 +208,7 @@ impl Menu {
             c.text_center(320.0, BOX.1 + 118.0, "Saves load in other source ports too.", 8.0, MUTED);
         }
         if self.pad_ui {
-            let mut items = vec![(K_ABUTTON, "Select")];
-            if custom {
-                items.push((K_XBUTTON, "Disable All"));
-            }
-            items.push((K_BBUTTON, "Cancel"));
-            self.boxed_hints(c, 344.0, &items);
+            self.boxed_hints(c, 344.0, &[(K_ABUTTON, "Select"), (K_BBUTTON, "Cancel")]);
         }
     }
 }

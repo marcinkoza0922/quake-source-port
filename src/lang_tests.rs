@@ -15,7 +15,7 @@ use qcore::lang::{Lang, catalog};
 const MARKERS: &[&str] = &["t!(", "tr!(", "qtr!(", "ctr!(", "lang::tr(", " tr(", "(tr(", "tr_ctx("];
 const DRAW_CALLS: &[&str] = &[
     ".text(", ".text_right(", ".text_center(", "txt(", "txt_gold(", "gold(", "label(c, ", ".ptext(", ".ptext_w(",
-    ".ptext_gold(", "center_gold(", "center(c, ", "(K_", "hint(", "title(c, ", "heading(",
+    ".ptext_gold(", "center_gold(", "center(c, ", "(K_", "hint(", "title(c, ", "heading(", ".button_label(",
 ];
 
 fn rust_files(dir: &Path, out: &mut Vec<PathBuf>) {

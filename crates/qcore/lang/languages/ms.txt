@@ -1632,6 +1632,13 @@ ms tersuai
 @ classic
 ms klasik
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ms Simpan apabila mengambil kunci
+
+@ User Data Directory
+ms Direktori Data Pengguna
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ ms Alih, ubah saiz, tambah dan buang elemen HUD: kesihatan, peluru, senjata, pem
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 ms Moden: elemen padat di tepi skrin; klasik: bar status asal. Memilih satu menetapkan semula HUD; perubahan dalam Edit HUD menjadikannya tersuai
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+ms Simpan automatik apabila anda mengambil kunci
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ms Tempat simpanan, konfigurasi, demo dan pek peta yang dimuat turun disimpan
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ ms UBAH
 
 @ Customize Experience
 ms Ubah Suai Pengalaman
-
-@ Disable All
-ms Matikan Semua
 
 @ Disable All Modifications
 ms Matikan Semua Pengubahsuaian
@@ -3003,17 +3014,11 @@ ms Tiada demo sepadan dengan penapis. Backspace atau Esc mengosongkannya.
 @ Renaming an automatic demo moves it to the saved demos.
 ms Menamakan semula demo automatik memindahkannya ke demo yang disimpan.
 
-@ Sort
-ms Isih
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 ms Semasa demo dimainkan: A menjeda, d-pad menganjak dan menukar kelajuan, LT dan RT menanda klip dan X mengeksportnya.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ms Ruang jeda | Kiri/Kanan anjak | Atas/Bawah kelajuan | PgUp/PgDn 10 s | I/O tanda | E eksport
-
-@ Switch List
-ms Tukar senarai
 
 @ This can't be undone.
 ms Ini tidak boleh dibatalkan.
@@ -3060,6 +3065,43 @@ ms Menyediakan...
 # Save cards: personal best.
 @ PB {} {}
 ms PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+ms Kunci diambil
+
+@ Select User Data Directory
+ms Pilih Direktori Data Pengguna
+
+@ Data folder: {}
+ms Folder data: {}
+
+@ Parent Folder
+ms Folder Induk
+
+@ Unable to read directory
+ms Tidak dapat membaca direktori
+
+@ No subfolders
+ms Tiada subfolder
+
+@ Select Folder
+ms Pilih Folder
+
+@ Show Hidden
+ms Tunjuk Tersembunyi
+
+@ Copy existing user data?
+ms Salin data pengguna sedia ada?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ms Simpanan, konfigurasi, demo dan pek peta yang dimuat turun boleh disalin ke folder baharu.
+
+@ Copy Data
+ms Salin Data
+
+@ Switch Only
+ms Tukar Sahaja
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ ms ffmpeg tidak dijumpai: menulis {} bingkai PNG dan satu WAV ke {}
 ms Rekod peribadi baharu ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-ms Simpan apabila mengambil kunci
-
-@ User Data Directory
-ms Direktori Data Pengguna
-
-@ Autosaves when you pick up a key
-ms Simpan automatik apabila anda mengambil kunci
-
-@ Where saves, configs, demos and downloaded map packs are stored
-ms Tempat simpanan, konfigurasi, demo dan pek peta yang dimuat turun disimpan
-
-@ Key picked up
-ms Kunci diambil
-
-@ Select User Data Directory
-ms Pilih Direktori Data Pengguna
-
-@ Data folder: {}
-ms Folder data: {}
-
-@ Parent Folder
-ms Folder Induk
-
-@ Unable to read directory
-ms Tidak dapat membaca direktori
-
-@ No subfolders
-ms Tiada subfolder
-
-@ Select Folder
-ms Pilih Folder
-
-@ Show Hidden
-ms Tunjuk Tersembunyi
-
-@ Copy existing user data?
-ms Salin data pengguna sedia ada?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-ms Simpanan, konfigurasi, demo dan pek peta yang dimuat turun boleh disalin ke folder baharu.
-
-@ Copy Data
-ms Salin Data
-
-@ Switch Only
-ms Tukar Sahaja
-
 @ User data directory set to {}
 ms Direktori data pengguna ditetapkan kepada {}
 
 @ User data directory error: {}
 ms Ralat direktori data pengguna: {}
-

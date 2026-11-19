@@ -1632,6 +1632,13 @@ ar مخصص
 @ classic
 ar كلاسيكي
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+ar الحفظ عند التقاط مفتاح
+
+@ User Data Directory
+ar مجلد بيانات المستخدم
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ ar انقل عناصر HUD وغيّر حجمها وأضفها وأزلها: ال
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 ar حديث: عناصر مدمجة عند حواف الشاشة؛ كلاسيكي: شريط الحالة الأصلي. اختيار أحدهما يعيد ضبط HUD؛ والتغييرات في تحرير HUD تجعله مخصصًا
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+ar يحفظ تلقائياً عند التقاط مفتاح
+
+@ Where saves, configs, demos and downloaded map packs are stored
+ar مكان حفظ الملفات المحفوظة والإعدادات والعروض وحزم الخرائط المُنزَّلة
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ ar مخصّص
 
 @ Customize Experience
 ar تخصيص التجربة
-
-@ Disable All
-ar تعطيل الكل
 
 @ Disable All Modifications
 ar تعطيل كل التعديلات
@@ -3003,17 +3014,11 @@ ar لا توجد عروض تطابق عامل التصفية. Backspace أو Esc
 @ Renaming an automatic demo moves it to the saved demos.
 ar إعادة تسمية عرض تلقائي تنقله إلى العروض المحفوظة.
 
-@ Sort
-ar فرز
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 ar أثناء تشغيل عرض: A يوقف مؤقتًا، ولوحة الاتجاهات تمرّر وتغيّر السرعة، وLT وRT يحددان مقطعًا، وX يصدّره.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ar Space إيقاف | يسار/يمين تمرير | أعلى/أسفل السرعة | PgUp/PgDn 10 ث | I/O علامة | E تصدير
-
-@ Switch List
-ar تبديل القائمة
 
 @ This can't be undone.
 ar لا يمكن التراجع عن هذا.
@@ -3060,6 +3065,43 @@ ar جارٍ التحضير...
 # Save cards: personal best.
 @ PB {} {}
 ar PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+ar تم التقاط مفتاح
+
+@ Select User Data Directory
+ar اختر مجلد بيانات المستخدم
+
+@ Data folder: {}
+ar مجلد البيانات: {}
+
+@ Parent Folder
+ar المجلد الأعلى
+
+@ Unable to read directory
+ar تعذرت قراءة المجلد
+
+@ No subfolders
+ar لا توجد مجلدات فرعية
+
+@ Select Folder
+ar اختر المجلد
+
+@ Show Hidden
+ar إظهار المخفي
+
+@ Copy existing user data?
+ar نسخ بيانات المستخدم الحالية؟
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+ar يمكن نسخ الملفات المحفوظة والإعدادات والعروض وحزم الخرائط المُنزَّلة إلى المجلد الجديد.
+
+@ Copy Data
+ar نسخ البيانات
+
+@ Switch Only
+ar التبديل فقط
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ ar لم يُعثر على ffmpeg: كُتب {} إطار PNG وملف WAV في {}
 ar أفضل رقم شخصي جديد ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-ar الحفظ عند التقاط مفتاح
-
-@ User Data Directory
-ar مجلد بيانات المستخدم
-
-@ Autosaves when you pick up a key
-ar يحفظ تلقائياً عند التقاط مفتاح
-
-@ Where saves, configs, demos and downloaded map packs are stored
-ar مكان حفظ الملفات المحفوظة والإعدادات والعروض وحزم الخرائط المُنزَّلة
-
-@ Key picked up
-ar تم التقاط مفتاح
-
-@ Select User Data Directory
-ar اختر مجلد بيانات المستخدم
-
-@ Data folder: {}
-ar مجلد البيانات: {}
-
-@ Parent Folder
-ar المجلد الأعلى
-
-@ Unable to read directory
-ar تعذرت قراءة المجلد
-
-@ No subfolders
-ar لا توجد مجلدات فرعية
-
-@ Select Folder
-ar اختر المجلد
-
-@ Show Hidden
-ar إظهار المخفي
-
-@ Copy existing user data?
-ar نسخ بيانات المستخدم الحالية؟
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-ar يمكن نسخ الملفات المحفوظة والإعدادات والعروض وحزم الخرائط المُنزَّلة إلى المجلد الجديد.
-
-@ Copy Data
-ar نسخ البيانات
-
-@ Switch Only
-ar التبديل فقط
-
 @ User data directory set to {}
 ar تم تعيين مجلد بيانات المستخدم إلى {}
 
 @ User data directory error: {}
 ar خطأ في مجلد بيانات المستخدم: {}
-

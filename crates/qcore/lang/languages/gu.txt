@@ -1632,6 +1632,13 @@ gu કસ્ટમ
 @ classic
 gu ક્લાસિક
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+gu ચાવી ઉપાડતાં સાચવો
+
+@ User Data Directory
+gu વપરાશકર્તા ડેટા ડિરેક્ટરી
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ gu HUD ઘટકો ખસેડો, માપ બદલો, ઉમેરો અ
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 gu આધુનિક: સ્ક્રીનની કિનારીએ નાના ઘટકો; ક્લાસિક: મૂળ સ્થિતિ બાર. એક પસંદ કરવાથી HUD રીસેટ થાય છે; HUD સંપાદિત કરોમાં ફેરફાર તેને કસ્ટમ બનાવે છે
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+gu ચાવી ઉપાડતાં આપમેળે સાચવે છે
+
+@ Where saves, configs, demos and downloaded map packs are stored
+gu જ્યાં સેવ, કોન્ફિગ, ડેમો અને ડાઉનલોડ કરેલા મેપ પેક સંગ્રહાય છે
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ gu કસ્ટમ
 
 @ Customize Experience
 gu અનુભવ કસ્ટમાઇઝ કરો
-
-@ Disable All
-gu બધું બંધ કરો
 
 @ Disable All Modifications
 gu બધા ફેરફારો બંધ કરો
@@ -3003,17 +3014,11 @@ gu ફિલ્ટર સાથે કોઈ ડેમો મેળ ખાતો
 @ Renaming an automatic demo moves it to the saved demos.
 gu સ્વચાલિત ડેમોનું નામ બદલવાથી તે સાચવેલા ડેમોમાં જાય છે.
 
-@ Sort
-gu ક્રમ
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 gu ડેમો ચાલતો હોય ત્યારે: A થોભાવે છે, ડી-પેડ ખસેડે અને ઝડપ બદલે છે, LT અને RT ક્લિપ ચિહ્નિત કરે છે અને X તેની નિકાસ કરે છે.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 gu Space થોભો | ડાબે/જમણે ખસેડો | ઉપર/નીચે ઝડપ | PgUp/PgDn 10 સે. | I/O નિશાન | E નિકાસ
-
-@ Switch List
-gu યાદી બદલો
 
 @ This can't be undone.
 gu આ પૂર્વવત્ કરી શકાતું નથી.
@@ -3060,6 +3065,43 @@ gu તૈયારી થઈ રહી છે...
 # Save cards: personal best.
 @ PB {} {}
 gu PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+gu ચાવી ઉપાડી
+
+@ Select User Data Directory
+gu વપરાશકર્તા ડેટા ડિરેક્ટરી પસંદ કરો
+
+@ Data folder: {}
+gu ડેટા ફોલ્ડર: {}
+
+@ Parent Folder
+gu મૂળ ફોલ્ડર
+
+@ Unable to read directory
+gu ડિરેક્ટરી વાંચી શકાઈ નહીં
+
+@ No subfolders
+gu કોઈ સબફોલ્ડર નથી
+
+@ Select Folder
+gu ફોલ્ડર પસંદ કરો
+
+@ Show Hidden
+gu છુપાયેલા બતાવો
+
+@ Copy existing user data?
+gu હાલનો વપરાશકર્તા ડેટા કૉપિ કરવો?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+gu સેવ, કોન્ફિગ, ડેમો અને ડાઉનલોડ કરેલા મેપ પેક નવા ફોલ્ડરમાં કૉપિ કરી શકાય છે.
+
+@ Copy Data
+gu ડેટા કૉપિ કરો
+
+@ Switch Only
+gu ફક્ત બદલો
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ gu ffmpeg મળ્યું નહીં: {} PNG ફ્રેમ અને એ�
 gu નવો વ્યક્તિગત શ્રેષ્ઠ ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-gu ચાવી ઉપાડતાં સાચવો
-
-@ User Data Directory
-gu વપરાશકર્તા ડેટા ડિરેક્ટરી
-
-@ Autosaves when you pick up a key
-gu ચાવી ઉપાડતાં આપમેળે સાચવે છે
-
-@ Where saves, configs, demos and downloaded map packs are stored
-gu જ્યાં સેવ, કોન્ફિગ, ડેમો અને ડાઉનલોડ કરેલા મેપ પેક સંગ્રહાય છે
-
-@ Key picked up
-gu ચાવી ઉપાડી
-
-@ Select User Data Directory
-gu વપરાશકર્તા ડેટા ડિરેક્ટરી પસંદ કરો
-
-@ Data folder: {}
-gu ડેટા ફોલ્ડર: {}
-
-@ Parent Folder
-gu મૂળ ફોલ્ડર
-
-@ Unable to read directory
-gu ડિરેક્ટરી વાંચી શકાઈ નહીં
-
-@ No subfolders
-gu કોઈ સબફોલ્ડર નથી
-
-@ Select Folder
-gu ફોલ્ડર પસંદ કરો
-
-@ Show Hidden
-gu છુપાયેલા બતાવો
-
-@ Copy existing user data?
-gu હાલનો વપરાશકર્તા ડેટા કૉપિ કરવો?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-gu સેવ, કોન્ફિગ, ડેમો અને ડાઉનલોડ કરેલા મેપ પેક નવા ફોલ્ડરમાં કૉપિ કરી શકાય છે.
-
-@ Copy Data
-gu ડેટા કૉપિ કરો
-
-@ Switch Only
-gu ફક્ત બદલો
-
 @ User data directory set to {}
 gu વપરાશકર્તા ડેટા ડિરેક્ટરી {} પર સેટ થઈ
 
 @ User data directory error: {}
 gu વપરાશકર્તા ડેટા ડિરેક્ટરી ભૂલ: {}
-

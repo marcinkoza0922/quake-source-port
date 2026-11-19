@@ -150,36 +150,35 @@ pub(super) fn layout(vw: f32, vh: f32, auto: bool, pad: bool) -> Layout {
 pub(super) const PEEK_ZONE: f32 = 26.0;
 
 /// The "Show controls" tab of the strip.
-pub(super) fn peek_tab(vw: f32, vh: f32) -> Rect {
-    let w = 120.0f32.min(vw - 16.0);
+pub(super) fn peek_tab(vw: f32, vh: f32, pad: bool) -> Rect {
+    let w = (if pad { 142.0f32 } else { 120.0f32 }).min(vw - 16.0);
     (((vw - w) / 2.0).floor(), vh - 17.0, w, 13.0)
 }
 
 pub(super) struct Peek {
     hover: bool,
     progress: Option<f32>,
+    pad: bool,
 }
 
 /// The strip: progress along the bottom edge and a tab to show the bar.
-pub(super) fn draw_peek(c: &mut Canvas, p: &Peek) {
+pub(super) fn draw_peek(c: &mut Canvas, p: &Peek, glyphs: &crate::glyphs::Glyphs) {
     c.reset_origin();
     let (vw, vh) = (c.vw(), c.vh());
     c.fill(0.0, vh - 3.0, vw, 3.0, [0.0, 0.0, 0.0, 0.6]);
     if let Some(f) = p.progress {
         c.fill(0.0, vh - 3.0, vw * f.clamp(0.0, 1.0), 3.0, [0.85, 0.65, 0.30, 0.95]);
     }
-    let r = peek_tab(vw, vh);
+    let r = peek_tab(vw, vh, p.pad);
     c.round_box(r.0, r.1, r.2, r.3, 3.0, if p.hover { HOVER } else { [0.0, 0.0, 0.0, 0.72] }, Some(BORDER));
-    // up chevron, then the label
+    // up chevron, then the label (with the View/Share glyph in controller mode)
     let (cx, cy) = (r.0 + 9.0, r.1 + r.3 / 2.0);
     for i in 0..4 {
         let fi = i as f32;
         c.fill(cx - fi, cy - 2.0 + fi, 1.0, 1.0, ICON);
         c.fill(cx + fi, cy - 2.0 + fi, 1.0, 1.0, ICON);
     }
-    let s = crate::modmenu::clip(&qcore::lang::tr(qcore::t!("Show controls")), ((r.2 - 24.0) / 4.0) as usize);
-    let sw = c.text_w_raw(&s, 8.0);
-    c.text_raw(r.0 + 16.0 + (r.2 - 20.0 - sw) / 2.0, r.1 + 2.0, &s, 8.0, ICON);
+    glyphs.button_label(c, [r.0 + 14.0, r.1, r.2 - 16.0, r.3], p.pad.then_some(K_BACK), qcore::t!("Show controls"), 8.0, ICON);
 }
 
 /// How far the HUD moves up while the bar shows.
@@ -214,8 +213,9 @@ impl Host {
         if y < vh - PEEK_ZONE {
             return None;
         }
+        let pad = self.pad_ui();
         let progress = self.demo_clock().zip(self.demo.as_ref()?.play.duration()).map(|(t, len)| (t / len.max(0.001)) as f32);
-        Some(Peek { hover: inside(peek_tab(vw, vh), (x, y)), progress })
+        Some(Peek { hover: inside(peek_tab(vw, vh, pad), (x, y)), progress, pad })
     }
 
     /// What the bar shows this frame, or None when hidden.

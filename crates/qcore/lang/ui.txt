@@ -507,13 +507,6 @@ it Personalizza l'esperienza
 es Personalizar la experiencia
 ru Настроить игру
 
-@ Disable All
-fr Tout désactiver
-de Alles deaktivieren
-it Disattiva tutto
-es Desactivar todo
-ru Отключить всё
-
 @ Disable All Modifications
 fr Désactiver toutes les modifications
 de Alle Änderungen deaktivieren
@@ -1947,13 +1940,6 @@ it Rinominare una demo automatica la sposta tra le demo salvate.
 es Renombrar una demo automática la mueve a las demos guardadas.
 ru Переименованное автоматическое демо переносится в сохранённые.
 
-@ Sort
-fr Trier
-de Sortieren
-it Ordina
-es Ordenar
-ru Сортировка
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 fr Pendant une démo : A met en pause, la croix directionnelle fait défiler et change la vitesse, LT et RT marquent un extrait et X l'exporte.
 de Während einer Demo: A pausiert, das Steuerkreuz spult und ändert die Geschwindigkeit, LT und RT markieren einen Clip und X exportiert ihn.
@@ -1967,13 +1953,6 @@ de Leertaste Pause | Links/Rechts spulen | Hoch/Runter Tempo | Bild↑/Bild↓ 1
 it Spazio pausa | Sinistra/Destra scorri | Su/Giù velocità | PagSu/PagGiù 10 s | I/O segna | E esporta
 es Espacio pausa | Izq./Der. desplazar | Arriba/Abajo velocidad | RePág/AvPág 10 s | I/O marcar | E exportar
 ru Пробел пауза | Влево/Вправо перемотка | Вверх/Вниз скорость | PgUp/PgDn 10 с | I/O метка | E экспорт
-
-@ Switch List
-fr Changer de liste
-de Liste wechseln
-it Cambia elenco
-es Cambiar de lista
-ru Сменить список
 
 @ This can't be undone.
 fr Action irréversible.

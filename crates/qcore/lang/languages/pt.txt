@@ -1632,6 +1632,13 @@ pt personalizado
 @ classic
 pt clássico
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+pt Guardar ao apanhar uma chave
+
+@ User Data Directory
+pt Diretório de dados do utilizador
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ pt Mova, redimensione, adicione e remova elementos do HUD: saúde, munições, a
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 pt Moderno: elementos compactos nas margens do ecrã; clássico: a barra de estado original. Escolher um repõe o HUD; alterações em Editar HUD tornam-no personalizado
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+pt Guarda automaticamente quando apanhas uma chave
+
+@ Where saves, configs, demos and downloaded map packs are stored
+pt Onde são guardados os jogos, configurações, demos e pacotes de mapas transferidos
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ pt PERSONALIZADO
 
 @ Customize Experience
 pt Personalizar experiência
-
-@ Disable All
-pt Desativar tudo
 
 @ Disable All Modifications
 pt Desativar todas as modificações
@@ -3003,17 +3014,11 @@ pt Nenhuma demo corresponde ao filtro. Retrocesso ou Esc limpa-o.
 @ Renaming an automatic demo moves it to the saved demos.
 pt Mudar o nome de uma demo automática move-a para as demos guardadas.
 
-@ Sort
-pt Ordenar
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 pt Durante uma demo: A pausa, o d-pad percorre e muda a velocidade, LT e RT marcam um excerto e X exporta-o.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 pt Espaço pausa | Esq./Dir. percorrer | Cima/Baixo velocidade | PgUp/PgDn 10 s | I/O marcar | E exportar
-
-@ Switch List
-pt Mudar de lista
 
 @ This can't be undone.
 pt Isto não pode ser anulado.
@@ -3060,6 +3065,43 @@ pt A preparar...
 # Save cards: personal best.
 @ PB {} {}
 pt PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+pt Chave apanhada
+
+@ Select User Data Directory
+pt Selecionar diretório de dados do utilizador
+
+@ Data folder: {}
+pt Pasta de dados: {}
+
+@ Parent Folder
+pt Pasta superior
+
+@ Unable to read directory
+pt Não foi possível ler o diretório
+
+@ No subfolders
+pt Sem subpastas
+
+@ Select Folder
+pt Selecionar pasta
+
+@ Show Hidden
+pt Mostrar ocultas
+
+@ Copy existing user data?
+pt Copiar os dados do utilizador existentes?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+pt Os jogos guardados, configurações, demos e pacotes de mapas transferidos podem ser copiados para a nova pasta.
+
+@ Copy Data
+pt Copiar dados
+
+@ Switch Only
+pt Apenas mudar
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ pt ffmpeg não encontrado: foram escritos {} fotogramas PNG e um WAV em {}
 pt Novo recorde pessoal ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-pt Guardar ao apanhar uma chave
-
-@ User Data Directory
-pt Diretório de dados do utilizador
-
-@ Autosaves when you pick up a key
-pt Guarda automaticamente quando apanhas uma chave
-
-@ Where saves, configs, demos and downloaded map packs are stored
-pt Onde são guardados os jogos, configurações, demos e pacotes de mapas transferidos
-
-@ Key picked up
-pt Chave apanhada
-
-@ Select User Data Directory
-pt Selecionar diretório de dados do utilizador
-
-@ Data folder: {}
-pt Pasta de dados: {}
-
-@ Parent Folder
-pt Pasta superior
-
-@ Unable to read directory
-pt Não foi possível ler o diretório
-
-@ No subfolders
-pt Sem subpastas
-
-@ Select Folder
-pt Selecionar pasta
-
-@ Show Hidden
-pt Mostrar ocultas
-
-@ Copy existing user data?
-pt Copiar os dados do utilizador existentes?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-pt Os jogos guardados, configurações, demos e pacotes de mapas transferidos podem ser copiados para a nova pasta.
-
-@ Copy Data
-pt Copiar dados
-
-@ Switch Only
-pt Apenas mudar
-
 @ User data directory set to {}
 pt Diretório de dados do utilizador definido para {}
 
 @ User data directory error: {}
 pt Erro no diretório de dados do utilizador: {}
-

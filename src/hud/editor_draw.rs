@@ -192,18 +192,7 @@ impl Editor {
             let disabled = b == 1 && l.elems.get(self.sel).is_none_or(|e| e.kind.permanent());
             let label = if b == 2 && self.confirm_reset { qcore::t!("Confirm") } else { label };
             let fg = if disabled { MUTED } else { FG };
-            let w = c.text_w(label, SIZE);
-            if pad_ui {
-                let key = BUTTON_KEYS[b];
-                let gw = glyphs::width(c, key, glyphs.family, glyphs::H);
-                let gap = 3.0;
-                let total = gw + gap + w;
-                let x = (r.x + (r.w - total) / 2.0).max(r.x + 3.0).floor();
-                glyphs.key(c, x, r.y + (r.h - glyphs::H) / 2.0, key);
-                c.text(x + gw + gap, r.y + 3.0, label, SIZE, fg);
-            } else {
-                c.text((r.x + (r.w - w) / 2.0).floor(), r.y + 3.0, label, SIZE, fg);
-            }
+            glyphs.button_label(c, [r.x, r.y, r.w, r.h], pad_ui.then_some(BUTTON_KEYS[b]), label, SIZE, fg);
         }
     }
 

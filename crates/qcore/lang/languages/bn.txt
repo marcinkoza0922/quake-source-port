@@ -1632,6 +1632,13 @@ bn নিজস্ব
 @ classic
 bn ক্লাসিক
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+bn চাবি তোলার সময় সংরক্ষণ
+
+@ User Data Directory
+bn ব্যবহারকারীর ডেটা ডিরেক্টরি
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ bn HUD উপাদান সরান, আকার বদলান, যোগ 
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 bn আধুনিক: পর্দার কিনারায় ছোট উপাদান; ক্লাসিক: আসল অবস্থা বার। একটি বাছলে HUD রিসেট হয়; HUD সম্পাদনায় পরিবর্তন করলে তা নিজস্ব হয়ে যায়
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+bn চাবি তুললে স্বয়ংক্রিয়ভাবে সংরক্ষণ করে
+
+@ Where saves, configs, demos and downloaded map packs are stored
+bn যেখানে সেভ, কনফিগ, ডেমো এবং ডাউনলোড করা ম্যাপ প্যাক সংরক্ষিত হয়
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ bn কাস্টম
 
 @ Customize Experience
 bn অভিজ্ঞতা কাস্টমাইজ করুন
-
-@ Disable All
-bn সব বন্ধ
 
 @ Disable All Modifications
 bn সব পরিবর্তন বন্ধ করুন
@@ -3003,17 +3014,11 @@ bn ফিল্টারের সাথে কোনো ডেমো মেল�
 @ Renaming an automatic demo moves it to the saved demos.
 bn স্বয়ংক্রিয় ডেমোর নাম বদলালে সেটি সংরক্ষিত ডেমোতে চলে যায়।
 
-@ Sort
-bn সাজান
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 bn ডেমো চলার সময়: A বিরতি দেয়, ডি-প্যাড সরায় ও গতি বদলায়, LT আর RT একটি ক্লিপ চিহ্নিত করে এবং X সেটি রপ্তানি করে।
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 bn Space বিরতি | বাঁ/ডান সরান | উপর/নিচ গতি | PgUp/PgDn 10 সে. | I/O চিহ্ন | E রপ্তানি
-
-@ Switch List
-bn তালিকা বদলান
 
 @ This can't be undone.
 bn এটি আর ফেরানো যাবে না।
@@ -3060,6 +3065,43 @@ bn প্রস্তুত হচ্ছে...
 # Save cards: personal best.
 @ PB {} {}
 bn PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+bn চাবি তোলা হয়েছে
+
+@ Select User Data Directory
+bn ব্যবহারকারীর ডেটা ডিরেক্টরি নির্বাচন করুন
+
+@ Data folder: {}
+bn ডেটা ফোল্ডার: {}
+
+@ Parent Folder
+bn মূল ফোল্ডার
+
+@ Unable to read directory
+bn ডিরেক্টরি পড়া যায়নি
+
+@ No subfolders
+bn কোনো সাবফোল্ডার নেই
+
+@ Select Folder
+bn ফোল্ডার নির্বাচন করুন
+
+@ Show Hidden
+bn লুকানো দেখান
+
+@ Copy existing user data?
+bn বিদ্যমান ব্যবহারকারীর ডেটা কপি করবেন?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+bn সেভ, কনফিগ, ডেমো এবং ডাউনলোড করা ম্যাপ প্যাক নতুন ফোল্ডারে কপি করা যেতে পারে।
+
+@ Copy Data
+bn ডেটা কপি করুন
+
+@ Switch Only
+bn শুধু পরিবর্তন করুন
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ bn ffmpeg পাওয়া যায়নি: {}টি PNG ফ্রেম �
 bn নতুন ব্যক্তিগত সেরা ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-bn চাবি তোলার সময় সংরক্ষণ
-
-@ User Data Directory
-bn ব্যবহারকারীর ডেটা ডিরেক্টরি
-
-@ Autosaves when you pick up a key
-bn চাবি তুললে স্বয়ংক্রিয়ভাবে সংরক্ষণ করে
-
-@ Where saves, configs, demos and downloaded map packs are stored
-bn যেখানে সেভ, কনফিগ, ডেমো এবং ডাউনলোড করা ম্যাপ প্যাক সংরক্ষিত হয়
-
-@ Key picked up
-bn চাবি তোলা হয়েছে
-
-@ Select User Data Directory
-bn ব্যবহারকারীর ডেটা ডিরেক্টরি নির্বাচন করুন
-
-@ Data folder: {}
-bn ডেটা ফোল্ডার: {}
-
-@ Parent Folder
-bn মূল ফোল্ডার
-
-@ Unable to read directory
-bn ডিরেক্টরি পড়া যায়নি
-
-@ No subfolders
-bn কোনো সাবফোল্ডার নেই
-
-@ Select Folder
-bn ফোল্ডার নির্বাচন করুন
-
-@ Show Hidden
-bn লুকানো দেখান
-
-@ Copy existing user data?
-bn বিদ্যমান ব্যবহারকারীর ডেটা কপি করবেন?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-bn সেভ, কনফিগ, ডেমো এবং ডাউনলোড করা ম্যাপ প্যাক নতুন ফোল্ডারে কপি করা যেতে পারে।
-
-@ Copy Data
-bn ডেটা কপি করুন
-
-@ Switch Only
-bn শুধু পরিবর্তন করুন
-
 @ User data directory set to {}
 bn ব্যবহারকারীর ডেটা ডিরেক্টরি {} এ সেট করা হয়েছে
 
 @ User data directory error: {}
 bn ব্যবহারকারীর ডেটা ডিরেক্টরি ত্রুটি: {}
-

@@ -1632,6 +1632,13 @@ hi कस्टम
 @ classic
 hi क्लासिक
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+hi चाबी उठाने पर सहेजें
+
+@ User Data Directory
+hi उपयोगकर्ता डेटा निर्देशिका
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ hi HUD तत्वों को हिलाएँ, आकार बदले�
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 hi आधुनिक: स्क्रीन के किनारों पर छोटे तत्व; क्लासिक: मूल स्थिति पट्टी। एक चुनने से HUD रीसेट हो जाता है; HUD संपादित करें में बदलाव इसे कस्टम बना देते हैं
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+hi चाबी उठाने पर स्वतः सहेजता है
+
+@ Where saves, configs, demos and downloaded map packs are stored
+hi जहाँ सेव, कॉन्फ़िग, डेमो और डाउनलोड किए गए मैप पैक संग्रहीत होते हैं
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ hi कस्टम
 
 @ Customize Experience
 hi अनुभव कस्टमाइज़ करें
-
-@ Disable All
-hi सब बंद करें
 
 @ Disable All Modifications
 hi सभी बदलाव बंद करें
@@ -3003,17 +3014,11 @@ hi फ़िल्टर से कोई डेमो मेल नहीं �
 @ Renaming an automatic demo moves it to the saved demos.
 hi स्वचालित डेमो का नाम बदलने से वह सहेजे गए डेमो में चला जाता है।
 
-@ Sort
-hi क्रम
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 hi डेमो चलते समय: A रोकता है, डी-पैड खिसकाता और गति बदलता है, LT और RT क्लिप चिह्नित करते हैं और X उसे निर्यात करता है।
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 hi Space रोकें | बाएँ/दाएँ खिसकाएँ | ऊपर/नीचे गति | PgUp/PgDn 10 से. | I/O निशान | E निर्यात
-
-@ Switch List
-hi सूची बदलें
 
 @ This can't be undone.
 hi इसे पूर्ववत नहीं किया जा सकता।
@@ -3060,6 +3065,43 @@ hi तैयारी हो रही है...
 # Save cards: personal best.
 @ PB {} {}
 hi PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+hi चाबी उठाई गई
+
+@ Select User Data Directory
+hi उपयोगकर्ता डेटा निर्देशिका चुनें
+
+@ Data folder: {}
+hi डेटा फ़ोल्डर: {}
+
+@ Parent Folder
+hi मूल फ़ोल्डर
+
+@ Unable to read directory
+hi निर्देशिका पढ़ी नहीं जा सकी
+
+@ No subfolders
+hi कोई उप-फ़ोल्डर नहीं
+
+@ Select Folder
+hi फ़ोल्डर चुनें
+
+@ Show Hidden
+hi छिपे दिखाएँ
+
+@ Copy existing user data?
+hi मौजूदा उपयोगकर्ता डेटा कॉपी करें?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+hi सेव, कॉन्फ़िग, डेमो और डाउनलोड किए गए मैप पैक नए फ़ोल्डर में कॉपी किए जा सकते हैं।
+
+@ Copy Data
+hi डेटा कॉपी करें
+
+@ Switch Only
+hi केवल बदलें
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ hi ffmpeg नहीं मिला: {} PNG फ़्रेम और एक WAV
 hi नया निजी सर्वश्रेष्ठ ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-hi चाबी उठाने पर सहेजें
-
-@ User Data Directory
-hi उपयोगकर्ता डेटा निर्देशिका
-
-@ Autosaves when you pick up a key
-hi चाबी उठाने पर स्वतः सहेजता है
-
-@ Where saves, configs, demos and downloaded map packs are stored
-hi जहाँ सेव, कॉन्फ़िग, डेमो और डाउनलोड किए गए मैप पैक संग्रहीत होते हैं
-
-@ Key picked up
-hi चाबी उठाई गई
-
-@ Select User Data Directory
-hi उपयोगकर्ता डेटा निर्देशिका चुनें
-
-@ Data folder: {}
-hi डेटा फ़ोल्डर: {}
-
-@ Parent Folder
-hi मूल फ़ोल्डर
-
-@ Unable to read directory
-hi निर्देशिका पढ़ी नहीं जा सकी
-
-@ No subfolders
-hi कोई उप-फ़ोल्डर नहीं
-
-@ Select Folder
-hi फ़ोल्डर चुनें
-
-@ Show Hidden
-hi छिपे दिखाएँ
-
-@ Copy existing user data?
-hi मौजूदा उपयोगकर्ता डेटा कॉपी करें?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-hi सेव, कॉन्फ़िग, डेमो और डाउनलोड किए गए मैप पैक नए फ़ोल्डर में कॉपी किए जा सकते हैं।
-
-@ Copy Data
-hi डेटा कॉपी करें
-
-@ Switch Only
-hi केवल बदलें
-
 @ User data directory set to {}
 hi उपयोगकर्ता डेटा निर्देशिका {} पर सेट की गई
 
 @ User data directory error: {}
 hi उपयोगकर्ता डेटा निर्देशिका त्रुटि: {}
-

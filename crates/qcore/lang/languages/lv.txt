@@ -1632,6 +1632,13 @@ lv pielāgots
 @ classic
 lv klasisks
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+lv Saglabāt, paņemot atslēgu
+
+@ User Data Directory
+lv Lietotāja datu mape
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ lv Pārvietojiet, mainiet izmēru, pievienojiet un noņemiet HUD elementus: vese
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 lv Moderns: kompakti elementi ekrāna malās; klasisks: oriģinālā stāvokļa josla. Izvēle atiestata HUD; izmaiņas sadaļā Rediģēt HUD padara to pielāgotu
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+lv Automātiski saglabā, kad paņemat atslēgu
+
+@ Where saves, configs, demos and downloaded map packs are stored
+lv Kur tiek glabāti saglabājumi, konfigurācijas, demo un lejupielādētās karšu pakotnes
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ lv PIELĀGOTS
 
 @ Customize Experience
 lv Pielāgot pieredzi
-
-@ Disable All
-lv Atspējot visu
 
 @ Disable All Modifications
 lv Atspējot visas modifikācijas
@@ -3003,17 +3014,11 @@ lv Filtram neatbilst neviens demo. Backspace vai Esc to notīra.
 @ Renaming an automatic demo moves it to the saved demos.
 lv Pārdēvējot automātisko demo, tas tiek pārvietots uz saglabātajiem.
 
-@ Sort
-lv Kārtot
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 lv Demo laikā: A pauzē, krustveida pogas tin un maina ātrumu, LT un RT atzīmē klipu, un X to eksportē.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 lv Atstarpe pauze | Pa kreisi/Pa labi tīt | Augšup/Lejup ātrums | PgUp/PgDn 10 s | I/O atzīme | E eksports
-
-@ Switch List
-lv Mainīt sarakstu
 
 @ This can't be undone.
 lv To nevar atsaukt.
@@ -3060,6 +3065,43 @@ lv Sagatavo...
 # Save cards: personal best.
 @ PB {} {}
 lv PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+lv Atslēga paņemta
+
+@ Select User Data Directory
+lv Izvēlēties lietotāja datu mapi
+
+@ Data folder: {}
+lv Datu mape: {}
+
+@ Parent Folder
+lv Augstākā mape
+
+@ Unable to read directory
+lv Nevar nolasīt mapi
+
+@ No subfolders
+lv Nav apakšmapju
+
+@ Select Folder
+lv Izvēlēties mapi
+
+@ Show Hidden
+lv Rādīt slēptās
+
+@ Copy existing user data?
+lv Kopēt esošos lietotāja datus?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+lv Saglabājumus, konfigurācijas, demo un lejupielādētās karšu pakotnes var kopēt uz jauno mapi.
+
+@ Copy Data
+lv Kopēt datus
+
+@ Switch Only
+lv Tikai pārslēgt
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ lv ffmpeg nav atrasts: {} PNG kadri un WAV ierakstīti {}
 lv Jauns personīgais rekords ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-lv Saglabāt, paņemot atslēgu
-
-@ User Data Directory
-lv Lietotāja datu mape
-
-@ Autosaves when you pick up a key
-lv Automātiski saglabā, kad paņemat atslēgu
-
-@ Where saves, configs, demos and downloaded map packs are stored
-lv Kur tiek glabāti saglabājumi, konfigurācijas, demo un lejupielādētās karšu pakotnes
-
-@ Key picked up
-lv Atslēga paņemta
-
-@ Select User Data Directory
-lv Izvēlēties lietotāja datu mapi
-
-@ Data folder: {}
-lv Datu mape: {}
-
-@ Parent Folder
-lv Augstākā mape
-
-@ Unable to read directory
-lv Nevar nolasīt mapi
-
-@ No subfolders
-lv Nav apakšmapju
-
-@ Select Folder
-lv Izvēlēties mapi
-
-@ Show Hidden
-lv Rādīt slēptās
-
-@ Copy existing user data?
-lv Kopēt esošos lietotāja datus?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-lv Saglabājumus, konfigurācijas, demo un lejupielādētās karšu pakotnes var kopēt uz jauno mapi.
-
-@ Copy Data
-lv Kopēt datus
-
-@ Switch Only
-lv Tikai pārslēgt
-
 @ User data directory set to {}
 lv Lietotāja datu mape iestatīta uz {}
 
 @ User data directory error: {}
 lv Lietotāja datu mapes kļūda: {}
-

@@ -6,7 +6,7 @@ use super::*;
 use crate::draw::Canvas;
 
 impl DirBrowser {
-    pub(in crate::menu) fn draw(&self, c: &mut Canvas, drag: bool) {
+    pub(in crate::menu) fn draw(&self, c: &mut Canvas, drag: bool, pad_ui: bool, glyphs: &Glyphs) {
         c.text_center(320.0, 18.0, "Select User Data Directory", TXT * 1.15, GOLD_FG);
 
         // Current path box
@@ -66,30 +66,38 @@ impl DirBrowser {
 
         // Bottom action buttons
         let labels = [qcore::t!("Select Folder"), qcore::t!("Default"), qcore::t!("Show Hidden"), qcore::t!("Cancel")];
+        const BTN_KEYS: [Option<i32>; 4] = [Some(K_XBUTTON), None, Some(K_YBUTTON), Some(K_BBUTTON)];
         for (i, (&(bx, bw), &label)) in BTNS.iter().zip(&labels).enumerate() {
             let on = self.focus_buttons && self.btn_cursor == i;
             let bg = if on { HILITE } else if i == 0 { [0.22, 0.14, 0.06, 0.85] } else { [0.0, 0.0, 0.0, 0.7] };
             let fg = if on || i == 0 { GOLD_FG } else { FG };
             c.round_box(bx, BTN_Y, bw, BTN_H, 4.0, bg, Some(BORDER));
+            let key = pad_ui.then_some(BTN_KEYS[i]).flatten();
             if i == 2 {
+                let gh = crate::glyphs::H;
+                let gw = key.map_or(0.0, |k| crate::glyphs::width(c, k, glyphs.family, gh) + 3.0);
                 let tw = c.text_w(label, TXT);
-                let sx = bx + ((bw - (tw + 14.0)) / 2.0).floor();
+                let mut sx = bx + ((bw - (gw + tw + 13.0)) / 2.0).max(3.0).floor();
+                if let Some(k) = key {
+                    glyphs.key_h(c, sx, BTN_Y + (BTN_H - gh) / 2.0, k, gh);
+                    sx += gw;
+                }
                 c.round_box(sx, BTN_Y + 4.5, 9.0, 9.0, 1.5, [0.0, 0.0, 0.0, 0.5], Some(BORDER));
                 if self.show_hidden {
                     c.round_box(sx + 2.0, BTN_Y + 6.5, 5.0, 5.0, 1.0, GOLD_FG, None);
                 }
-                c.text(sx + 13.0, BTN_Y + 5.0, label, TXT, fg);
+                c.text(sx + 13.0, crate::glyphs::center_text_y(BTN_Y, BTN_H, TXT), label, TXT, fg);
             } else {
-                c.text_center(bx + bw / 2.0, BTN_Y + 5.0, label, TXT, fg);
+                glyphs.button_label(c, [bx, BTN_Y, bw, BTN_H], key, label, TXT, fg);
             }
         }
 
         if let Some((chosen, cur)) = &self.confirm {
-            self.draw_confirm(c, chosen, *cur);
+            self.draw_confirm(c, chosen, *cur, pad_ui, glyphs);
         }
     }
 
-    fn draw_confirm(&self, c: &mut Canvas, chosen: &Path, cur: usize) {
+    fn draw_confirm(&self, c: &mut Canvas, chosen: &Path, cur: usize, pad_ui: bool, glyphs: &Glyphs) {
         let (x, y, w, h) = MODAL;
         c.fill(-c.ox, -c.oy, c.vw(), c.vh(), [0.0, 0.0, 0.0, 0.55]);
         c.round_box(x, y, w, h, 5.0, [0.06, 0.05, 0.04, 0.98], Some(BORDER));
@@ -104,10 +112,11 @@ impl DirBrowser {
         center_raw(c, 320.0, y + 76.0, &dest_shown, TXT, MUTED);
 
         let labels = [qcore::t!("Copy Data"), qcore::t!("Switch Only"), qcore::t!("Cancel")];
+        const MODAL_KEYS: [Option<i32>; 3] = [None, None, Some(K_BBUTTON)];
         for (i, (&(bx, bw), &label)) in MODAL_BTNS.iter().zip(&labels).enumerate() {
             let on = i == cur;
             c.round_box(bx, MODAL_BTN_Y, bw, MODAL_BTN_H, 4.0, if on { HILITE } else { [0.0, 0.0, 0.0, 0.7] }, Some(BORDER));
-            c.text_center(bx + bw / 2.0, MODAL_BTN_Y + 5.0, label, TXT, if on { GOLD_FG } else { MUTED });
+            glyphs.button_label(c, [bx, MODAL_BTN_Y, bw, MODAL_BTN_H], pad_ui.then_some(MODAL_KEYS[i]).flatten(), label, TXT, if on { GOLD_FG } else { MUTED });
         }
     }
 }

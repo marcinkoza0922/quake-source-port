@@ -1632,6 +1632,13 @@ uk власний
 @ classic
 uk класичний
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+uk Зберігати при підборі ключа
+
+@ User Data Directory
+uk Тека даних користувача
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ uk Переміщуйте, масштабуйте, додавайте й при�
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 uk Сучасний: компактні елементи по краях екрана; класичний: оригінальний рядок стану. Вибір шаблону скидає інтерфейс; зміни в «Змінити інтерфейс» роблять його власним
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+uk Автозбереження під час підбору ключа
+
+@ Where saves, configs, demos and downloaded map packs are stored
+uk Де зберігаються збереження, налаштування, демо та завантажені набори мап
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ uk СВОЯ
 
 @ Customize Experience
 uk Налаштувати гру
-
-@ Disable All
-uk Вимкнути все
 
 @ Disable All Modifications
 uk Вимкнути всі зміни
@@ -3003,17 +3014,11 @@ uk Жодне демо не відповідає фільтру. Backspace аб�
 @ Renaming an automatic demo moves it to the saved demos.
 uk Перейменоване автоматичне демо переноситься до збережених.
 
-@ Sort
-uk Сортувати
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 uk Під час демо: A ставить паузу, хрестовина перемотує і змінює швидкість, LT і RT позначають фрагмент, а X експортує його.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 uk Пробіл пауза | Ліворуч/Праворуч перемотування | Вгору/Вниз швидкість | PgUp/PgDn 10 с | I/O мітка | E експорт
-
-@ Switch List
-uk Змінити список
 
 @ This can't be undone.
 uk Це не можна скасувати.
@@ -3060,6 +3065,43 @@ uk Підготовка...
 # Save cards: personal best.
 @ PB {} {}
 uk PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+uk Ключ підібрано
+
+@ Select User Data Directory
+uk Вибір теки даних користувача
+
+@ Data folder: {}
+uk Тека даних: {}
+
+@ Parent Folder
+uk Батьківська тека
+
+@ Unable to read directory
+uk Не вдалося прочитати теку
+
+@ No subfolders
+uk Немає підтек
+
+@ Select Folder
+uk Вибрати теку
+
+@ Show Hidden
+uk Показати приховані
+
+@ Copy existing user data?
+uk Скопіювати наявні дані користувача?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+uk Збереження, налаштування, демо та завантажені набори мап можна скопіювати до нової теки.
+
+@ Copy Data
+uk Копіювати дані
+
+@ Switch Only
+uk Лише змінити
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ uk ffmpeg не знайдено: {} кадрів PNG і WAV записано д�
 uk Новий особистий рекорд ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-uk Зберігати при підборі ключа
-
-@ User Data Directory
-uk Тека даних користувача
-
-@ Autosaves when you pick up a key
-uk Автозбереження під час підбору ключа
-
-@ Where saves, configs, demos and downloaded map packs are stored
-uk Де зберігаються збереження, налаштування, демо та завантажені набори мап
-
-@ Key picked up
-uk Ключ підібрано
-
-@ Select User Data Directory
-uk Вибір теки даних користувача
-
-@ Data folder: {}
-uk Тека даних: {}
-
-@ Parent Folder
-uk Батьківська тека
-
-@ Unable to read directory
-uk Не вдалося прочитати теку
-
-@ No subfolders
-uk Немає підтек
-
-@ Select Folder
-uk Вибрати теку
-
-@ Show Hidden
-uk Показати приховані
-
-@ Copy existing user data?
-uk Скопіювати наявні дані користувача?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-uk Збереження, налаштування, демо та завантажені набори мап можна скопіювати до нової теки.
-
-@ Copy Data
-uk Копіювати дані
-
-@ Switch Only
-uk Лише змінити
-
 @ User data directory set to {}
 uk Теку даних користувача встановлено на {}
 
 @ User data directory error: {}
 uk Помилка теки даних користувача: {}
-

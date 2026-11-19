@@ -1632,6 +1632,13 @@ is sérsniðið
 @ classic
 is klassískt
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+is Vista við að taka upp lykil
+
+@ User Data Directory
+is Notendagagnamappa
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ is Færa, breyta stærð, bæta við og fjarlægja HUD-einingar: heilsu, skotfæ
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 is Nútímalegt: þéttar einingar við skjábrúnir; klassískt: upprunalega stöðustikan. Val endurstillir HUD; breytingar í Breyta HUD gera það sérsniðið
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+is Vistar sjálfkrafa þegar þú tekur upp lykil
+
+@ Where saves, configs, demos and downloaded map packs are stored
+is Hvar vistaðir leikir, stillingar, kynningar og sóttir kortapakkar eru geymdir
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ is SÉRSNIÐIÐ
 
 @ Customize Experience
 is Sérsníða upplifun
-
-@ Disable All
-is Slökkva á öllu
 
 @ Disable All Modifications
 is Slökkva á öllum breytingum
@@ -3003,17 +3014,11 @@ is Engin kynning passar við síuna. Backspace eða Esc hreinsar hana.
 @ Renaming an automatic demo moves it to the saved demos.
 is Sjálfvirk kynning sem er endurnefnd færist í vistaðar kynningar.
 
-@ Sort
-is Raða
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 is Meðan kynning er spiluð: A gerir hlé, stefnuhnapparnir spóla og breyta hraða, LT og RT merkja bút og X flytur hann út.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 is Bil hlé | Vinstri/Hægri spóla | Upp/Niður hraði | PgUp/PgDn 10 s | I/O merki | E flytja út
-
-@ Switch List
-is Skipta um lista
 
 @ This can't be undone.
 is Ekki er hægt að afturkalla þetta.
@@ -3060,6 +3065,43 @@ is Undirbý...
 # Save cards: personal best.
 @ PB {} {}
 is PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+is Lykill tekinn upp
+
+@ Select User Data Directory
+is Veldu notendagagnamöppu
+
+@ Data folder: {}
+is Gagnamappa: {}
+
+@ Parent Folder
+is Yfirmappa
+
+@ Unable to read directory
+is Ekki tókst að lesa möppu
+
+@ No subfolders
+is Engar undirmöppur
+
+@ Select Folder
+is Velja möppu
+
+@ Show Hidden
+is Sýna faldar
+
+@ Copy existing user data?
+is Afrita núverandi notendagögn?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+is Vistaða leiki, stillingar, kynningar og sótta kortapakka má afrita í nýju möppuna.
+
+@ Copy Data
+is Afrita gögn
+
+@ Switch Only
+is Aðeins skipta
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ is ffmpeg fannst ekki: skrifaði {} PNG-ramma og WAV í {}
 is Nýtt persónulegt met ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-is Vista við að taka upp lykil
-
-@ User Data Directory
-is Notendagagnamappa
-
-@ Autosaves when you pick up a key
-is Vistar sjálfkrafa þegar þú tekur upp lykil
-
-@ Where saves, configs, demos and downloaded map packs are stored
-is Hvar vistaðir leikir, stillingar, kynningar og sóttir kortapakkar eru geymdir
-
-@ Key picked up
-is Lykill tekinn upp
-
-@ Select User Data Directory
-is Veldu notendagagnamöppu
-
-@ Data folder: {}
-is Gagnamappa: {}
-
-@ Parent Folder
-is Yfirmappa
-
-@ Unable to read directory
-is Ekki tókst að lesa möppu
-
-@ No subfolders
-is Engar undirmöppur
-
-@ Select Folder
-is Velja möppu
-
-@ Show Hidden
-is Sýna faldar
-
-@ Copy existing user data?
-is Afrita núverandi notendagögn?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-is Vistaða leiki, stillingar, kynningar og sótta kortapakka má afrita í nýju möppuna.
-
-@ Copy Data
-is Afrita gögn
-
-@ Switch Only
-is Aðeins skipta
-
 @ User data directory set to {}
 is Notendagagnamappa stillt á {}
 
 @ User data directory error: {}
 is Villa í notendagagnamöppu: {}
-

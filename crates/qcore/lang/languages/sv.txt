@@ -1632,6 +1632,13 @@ sv anpassad
 @ classic
 sv klassisk
 
+# User data directory and autosave on key pickup.
+@ Save on Picking Up Key
+sv Spara vid nyckelupplockning
+
+@ User Data Directory
+sv Användardatamapp
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2159,6 +2166,13 @@ sv Flytta, skala, lägg till och ta bort HUD-element: hälsa, ammunition, vapen,
 @ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
 sv Modern: kompakta element vid skärmkanterna; klassisk: den ursprungliga statusraden. Ett val återställer HUD:en; ändringar i Redigera HUD gör den anpassad
 
+# User data directory and autosave on key pickup.
+@ Autosaves when you pick up a key
+sv Sparar automatiskt när du plockar upp en nyckel
+
+@ Where saves, configs, demos and downloaded map packs are stored
+sv Var sparfiler, inställningar, demon och hämtade kartpaket lagras
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2379,9 +2393,6 @@ sv ANPASSAT
 
 @ Customize Experience
 sv Anpassa upplevelsen
-
-@ Disable All
-sv Inaktivera alla
 
 @ Disable All Modifications
 sv Inaktivera alla ändringar
@@ -3003,17 +3014,11 @@ sv Ingen demo matchar filtret. Backsteg eller Esc rensar det.
 @ Renaming an automatic demo moves it to the saved demos.
 sv En automatisk demo som byter namn flyttas till de sparade demona.
 
-@ Sort
-sv Sortera
-
 @ While a demo plays: A pauses, the d-pad scrubs and changes speed, LT and RT mark a clip and X exports it.
 sv Under en demo: A pausar, styrkorset spolar och ändrar hastighet, LT och RT markerar ett klipp och X exporterar det.
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sv Mellanslag paus | Vänster/Höger spola | Upp/Ned hastighet | PgUp/PgDn 10 s | I/O markera | E exportera
-
-@ Switch List
-sv Byt lista
 
 @ This can't be undone.
 sv Det går inte att ångra.
@@ -3060,6 +3065,43 @@ sv Förbereder...
 # Save cards: personal best.
 @ PB {} {}
 sv PB {} {}
+
+# User data directory and autosave on key pickup.
+@ Key picked up
+sv Nyckel upplockad
+
+@ Select User Data Directory
+sv Välj användardatamapp
+
+@ Data folder: {}
+sv Datamapp: {}
+
+@ Parent Folder
+sv Överordnad mapp
+
+@ Unable to read directory
+sv Kan inte läsa mappen
+
+@ No subfolders
+sv Inga undermappar
+
+@ Select Folder
+sv Välj mapp
+
+@ Show Hidden
+sv Visa dolda
+
+@ Copy existing user data?
+sv Kopiera befintliga användardata?
+
+@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
+sv Sparfiler, inställningar, demon och hämtade kartpaket kan kopieras till den nya mappen.
+
+@ Copy Data
+sv Kopiera data
+
+@ Switch Only
+sv Byt bara
 
 # ==== hud.txt ====
 
@@ -3624,57 +3666,8 @@ sv ffmpeg hittades inte: skrev {} PNG-bilder och en WAV till {}
 sv Nytt personbästa ({}): {}
 
 # User data directory and autosave on key pickup.
-@ Save on Picking Up Key
-sv Spara vid nyckelupplockning
-
-@ User Data Directory
-sv Användardatamapp
-
-@ Autosaves when you pick up a key
-sv Sparar automatiskt när du plockar upp en nyckel
-
-@ Where saves, configs, demos and downloaded map packs are stored
-sv Var sparfiler, inställningar, demon och hämtade kartpaket lagras
-
-@ Key picked up
-sv Nyckel upplockad
-
-@ Select User Data Directory
-sv Välj användardatamapp
-
-@ Data folder: {}
-sv Datamapp: {}
-
-@ Parent Folder
-sv Överordnad mapp
-
-@ Unable to read directory
-sv Kan inte läsa mappen
-
-@ No subfolders
-sv Inga undermappar
-
-@ Select Folder
-sv Välj mapp
-
-@ Show Hidden
-sv Visa dolda
-
-@ Copy existing user data?
-sv Kopiera befintliga användardata?
-
-@ Saves, configs, demos and downloaded map packs can be copied to the new folder.
-sv Sparfiler, inställningar, demon och hämtade kartpaket kan kopieras till den nya mappen.
-
-@ Copy Data
-sv Kopiera data
-
-@ Switch Only
-sv Byt bara
-
 @ User data directory set to {}
 sv Användardatamapp inställd på {}
 
 @ User data directory error: {}
 sv Fel i användardatamapp: {}
-
