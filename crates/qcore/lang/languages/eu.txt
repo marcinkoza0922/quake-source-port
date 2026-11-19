@@ -1639,6 +1639,49 @@ eu Gorde giltza jasotzean
 @ User Data Directory
 eu Erabiltzailearen datuen karpeta
 
+# Audio enhancements.
+@ Volume Mix
+eu Bolumen nahasketa
+
+@ Soundtrack
+eu Soinu-banda
+
+@ Music Crossfade
+eu Musika-trantsizioa
+
+@ Underwater Muffling
+eu Urpeko moteltzea
+
+@ Environmental Reverb
+eu Inguruneko erreberberazioa
+
+@ Reverb Amount
+eu Erreberberazio indarra
+
+@ 3D Binaural Audio
+eu 3D audio binaurala
+
+@ Sound Occlusion
+eu Soinu-oklusioa
+
+@ Footsteps
+eu Pausoak
+
+@ Footstep Volume
+eu Pausoen bolumena
+
+@ Ambient
+eu Giroa
+
+@ Weapons & Player
+eu Armak eta jokalaria
+
+@ Monsters
+eu Munstroak
+
+@ World & Pickups
+eu Mundua eta objektuak
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ eu Automatikoki gordetzen du giltza bat jasotzean
 
 @ Where saves, configs, demos and downloaded map packs are stored
 eu Gordetzeak, konfigurazioak, demoak eta deskargatutako mapa paketeak gordetzen diren tokia
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+eu Mailen musika paketea: Lehenetsiak mod aktiboa darabil, edo hautatu beste Quake soinu-banda bat edo <user data>/music karpeta bat
+
+@ Muffles sound with a deep low-pass filter while underwater
+eu Ur azpian soinua moteltzen du behe-paseko iragazki sakon batekin
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+eu Denbora errealeko gela-erreberberazioa gehitzen du inguruko espazioaren tamaina eta materialen arabera
+
+@ How strongly environmental room reverb mixes into world sounds
+eu Inguruneko erreberberazioa munduko soinuekin zenbat nahasten den
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+eu Entzungailuetarako 3D espazializazio binaurala belarri-atzerapenarekin, buru-itzalarekin eta aurre/atze/altuera seinaleekin
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+eu Horma solidoen eta ate itxien atzetik datozen soinuak moteltzen eta jaisten ditu
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+eu Harri, metal, egur, lur eta likido zoruetara egokitutako pauso eta lurreratze sintetizatuak jotzen ditu
+
+@ Volume of synthesized player footsteps and landings
+eu Jokalariaren pauso eta lurreratze sintetizatuen bolumena
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+eu Musika-pisten artean leunki igarotzeko segundoak; 0k berehala aldatzen du
+
+@ Volume of map ambient loops such as wind, water and static world hums
+eu Mapako giro-begizten bolumena, hala nola haizea, ura eta burrunba estatikoa
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+eu Armen tiroen, jokalariaren ahotsen, pausoen eta gehigarrien bolumena
+
+@ Volume of monster alerts, attacks, pain and death sounds
+eu Munstroen abisuen, erasoen, minaren eta heriotzaren bolumena
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+eu Ateen, igogailuen, etengailuen, objektuak hartzearen eta munduko beste efektuen bolumena
 
 # ==== ui.txt ====
 

@@ -1639,6 +1639,49 @@ lt Išsaugoti paėmus raktą
 @ User Data Directory
 lt Naudotojo duomenų aplankas
 
+# Audio enhancements.
+@ Volume Mix
+lt Garsumo maišytuvas
+
+@ Soundtrack
+lt Garso takelis
+
+@ Music Crossfade
+lt Muzikos perėjimas
+
+@ Underwater Muffling
+lt Slopinimas po vandeniu
+
+@ Environmental Reverb
+lt Aplinkos aidas
+
+@ Reverb Amount
+lt Aido stiprumas
+
+@ 3D Binaural Audio
+lt 3D binauralinis garsas
+
+@ Sound Occlusion
+lt Garso užstojimas
+
+@ Footsteps
+lt Žingsniai
+
+@ Footstep Volume
+lt Žingsnių garsumas
+
+@ Ambient
+lt Aplinka
+
+@ Weapons & Player
+lt Ginklai ir žaidėjas
+
+@ Monsters
+lt Monstrai
+
+@ World & Pickups
+lt Pasaulis ir daiktai
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ lt Automatiškai išsaugo paėmus raktą
 
 @ Where saves, configs, demos and downloaded map packs are stored
 lt Kur saugomi įrašai, konfigūracijos, demo ir atsisiųsti žemėlapių paketai
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+lt Lygio muzikos paketas: Numatytasis naudoja aktyvų modą, arba pasirinkite kitą įdiegtą Quake garso takelį ar savo aplanką <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+lt Slopina garsą giliu žemųjų dažnių filtru po vandeniu
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+lt Prideda realaus laiko patalpos aidą pagal aplinkinės erdvės dydį ir medžiagas
+
+@ How strongly environmental room reverb mixes into world sounds
+lt Kaip stipriai patalpos aidas susimaišo su pasaulio garsais
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+lt Binauralinis 3D erdvinis garsas ausinėms su ausų vėlinimu, galvos šešėliu ir priekio/galo/aukščio užuominomis
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+lt Slopina ir pritildo garsus, sklindančius už vientisų sienų ir uždarytų durų
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+lt Groja sintezuotus žaidėjo žingsnius ir nusileidimus pagal akmens, metalo, medžio, žemės ir skysčių paviršius
+
+@ Volume of synthesized player footsteps and landings
+lt Sintezuotų žaidėjo žingsnių ir nusileidimų garsumas
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+lt Sekundės sklandžiam perėjimui tarp muzikos kūrinių; 0 perjungia iškart
+
+@ Volume of map ambient loops such as wind, water and static world hums
+lt Žemėlapio aplinkos garsų, tokių kaip vėjas, vanduo ir statinis ūžimas, garsumas
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+lt Ginklų šūvių, žaidėjo balsų, žingsnių ir papildomos įrangos garsumas
+
+@ Volume of monster alerts, attacks, pain and death sounds
+lt Monstrų pavojaus, puolimo, skausmo ir mirties garsų garsumas
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+lt Durų, liftų, jungiklių, daiktų paėmimo ir kitų pasaulio efektų garsumas
 
 # ==== ui.txt ====
 

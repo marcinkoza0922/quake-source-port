@@ -182,6 +182,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "debris" => Some(Page::Debris),
             "shader" | "screenshader" => Some(Page::ScreenShader),
             "audio" => Some(Page::Audio),
+            "audiomix" | "mix" => Some(Page::AudioMix),
             "demos" => Some(Page::Demos),
             "video" => Some(Page::Video),
             "addons" => Some(Page::Addons),
@@ -495,7 +496,34 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             h.con.print(&qcore::ctr!("Couldn't handle music file {}\n", a.argv(1)));
         }
     });
+    c.add("music_track", |h, a| {
+        let Ok(track) = a.argv(1).parse::<u8>() else {
+            h.print("usage: music_track <track number>\n");
+            return;
+        };
+        if !h.play_cd_track(track, true) {
+            h.con.print(&qcore::ctr!("Couldn't handle music file {}\n", format!("track{track:02}")));
+        }
+    });
+    c.add("soundtrack", |h, a| {
+        h.refresh_soundtracks();
+        if a.argc() < 2 {
+            let cur = h.server.core.cvars.by_name("s_soundtrack").map_or("", |c| c.string.trim()).to_owned();
+            let shown = if cur.is_empty() { "default" } else { cur.as_str() };
+            let mut msg = format!("Soundtrack: {shown}\nAvailable: default");
+            for p in h.audio_fx.soundtracks.packs() {
+                msg.push_str(&format!(", {} ({})", p.id, p.label));
+            }
+            msg.push('\n');
+            h.print(&msg);
+            return;
+        }
+        let arg = a.argv(1);
+        let val = if arg.eq_ignore_ascii_case("default") || arg.eq_ignore_ascii_case("auto") { "" } else { arg };
+        h.server.core.cvars.set("s_soundtrack", val);
+    });
     c.add("music_stop", |h, _| {
+        h.audio_fx.soundtracks.clear_track();
         if let Some(s) = &h.snd {
             s.stop_music();
         }

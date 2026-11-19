@@ -1639,6 +1639,49 @@ is Vista við að taka upp lykil
 @ User Data Directory
 is Notendagagnamappa
 
+# Audio enhancements.
+@ Volume Mix
+is Hljóðblöndun
+
+@ Soundtrack
+is Tónlistarpakki
+
+@ Music Crossfade
+is Tónlistaryfirgangur
+
+@ Underwater Muffling
+is Neðansjávardeyfing
+
+@ Environmental Reverb
+is Umhverfisendurómur
+
+@ Reverb Amount
+is Styrkur enduróms
+
+@ 3D Binaural Audio
+is 3D tvíeyrnahjóð
+
+@ Sound Occlusion
+is Hljóðhindrun
+
+@ Footsteps
+is Fótatak
+
+@ Footstep Volume
+is Hljóðstyrkur fótataks
+
+@ Ambient
+is Umhverfi
+
+@ Weapons & Player
+is Vopn og leikmaður
+
+@ Monsters
+is Skrímsli
+
+@ World & Pickups
+is Heimur og hlutir
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ is Vistar sjálfkrafa þegar þú tekur upp lykil
 
 @ Where saves, configs, demos and downloaded map packs are stored
 is Hvar vistaðir leikir, stillingar, kynningar og sóttir kortapakkar eru geymdir
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+is Tónlistarpakki fyrir borð: Sjálfgefið notar virka viðbót, eða veldu annan uppsettan Quake-tónlistarpakka eða möppu í <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+is Deyfir hljóð með djúpri lágþröskuldssíu undir vatni
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+is Bætir við rauntíma herbergisendurómi eftir stærð og efnum rýmisins í kring
+
+@ How strongly environmental room reverb mixes into world sounds
+is Hversu sterkt umhverfisendurómur blandast í hljóð heimsins
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+is Tvíeyrna 3D-rýmishljóð fyrir heyrnartól með eyrnatöf, höfuðskugga og fram/aftur/hæðarvísum
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+is Deyfir og lækkar hljóð sem koma aftan við þétta veggi og lokaðar dyr
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+is Spilar tilbúið fótatak og lendingarhljóð fyrir stein, málm, við, mold og vökva
+
+@ Volume of synthesized player footsteps and landings
+is Hljóðstyrkur tilbúins fótataks og lendinga leikmanns
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+is Sekúndur fyrir mjúka yfirfærslu milli laga; 0 skiptir strax
+
+@ Volume of map ambient loops such as wind, water and static world hums
+is Hljóðstyrkur umhverfislykkja kortsins eins og vinds, vatns og suðs
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+is Hljóðstyrkur vopnaskota, radda leikmanns, fótataks og aukabúnaðar
+
+@ Volume of monster alerts, attacks, pain and death sounds
+is Hljóðstyrkur viðvarana, árása, sársauka og dauðahljóða skrímsla
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+is Hljóðstyrkur dyra, lyfta, rofa, hlutatöku og annarra heimshljóða
 
 # ==== ui.txt ====
 

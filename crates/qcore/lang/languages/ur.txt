@@ -1639,6 +1639,49 @@ ur چابی اٹھانے پر محفوظ کریں
 @ User Data Directory
 ur صارف ڈیٹا ڈائریکٹری
 
+# Audio enhancements.
+@ Volume Mix
+ur آواز مکس
+
+@ Soundtrack
+ur ساؤنڈ ٹریک
+
+@ Music Crossfade
+ur موسیقی کراس فیڈ
+
+@ Underwater Muffling
+ur پانی کے نیچے دباؤ
+
+@ Environmental Reverb
+ur ماحولیاتی گونج
+
+@ Reverb Amount
+ur گونج کی مقدار
+
+@ 3D Binaural Audio
+ur تھری ڈی بائنورل آڈیو
+
+@ Sound Occlusion
+ur آواز کی رکاوٹ
+
+@ Footsteps
+ur قدموں کی آواز
+
+@ Footstep Volume
+ur قدموں کا والیوم
+
+@ Ambient
+ur ماحول
+
+@ Weapons & Player
+ur ہتھیار اور کھلاڑی
+
+@ Monsters
+ur عفریت
+
+@ World & Pickups
+ur دنیا اور اشیاء
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ ur چابی اٹھانے پر خودکار محفوظ کرتا ہے
 
 @ Where saves, configs, demos and downloaded map packs are stored
 ur جہاں سیوز، ترتیبات، ڈیموز اور ڈاؤن لوڈ شدہ نقشہ پیک محفوظ ہوتے ہیں
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+ur لیول ٹریکس کے لیے موسیقی پیک: ڈیفالٹ فعال موڈ استعمال کرتا ہے، یا کوئی اور نصب شدہ Quake ساؤنڈ ٹریک یا <user data>/music میں فولڈر منتخب کریں
+
+@ Muffles sound with a deep low-pass filter while underwater
+ur پانی کے اندر گہرے لو پاس فلٹر کے ساتھ آواز کو دبا دیتا ہے
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+ur ارد گرد کی جگہ کے سائز اور مواد کے مطابق حقیقی وقت میں کمرے کی گونج شامل کرتا ہے
+
+@ How strongly environmental room reverb mixes into world sounds
+ur ماحولیاتی گونج دنیا کی آوازوں میں کتنی شدت سے شامل ہو
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+ur ہیڈ فونز کے لیے کانوں کے وقت، سر کے سائے اور آگے/پیچھے/اونچائی کے اشاروں کے ساتھ تھری ڈی آواز
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+ur ٹھوس دیواروں اور بند دروازوں کے پیچھے سے آنے والی آوازوں کو مدھم اور کم کرتا ہے
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ur پتھر، دھات، لکڑی، مٹی اور مائع فرش کے مطابق تیار کردہ قدم اور اترنے کی آوازیں چلاتا ہے
+
+@ Volume of synthesized player footsteps and landings
+ur کھلاڑی کے تیار کردہ قدموں اور اترنے کا والیوم
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+ur موسیقی کے ٹریکس کے درمیان ہموار تبدیلی کے سیکنڈ؛ 0 فوری بدلتا ہے
+
+@ Volume of map ambient loops such as wind, water and static world hums
+ur نقشے کی ماحولیاتی آوازوں جیسے ہوا، پانی اور مستقل گنگناہٹ کا والیوم
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+ur ہتھیاروں کی فائرنگ، کھلاڑی کی آوازوں، قدموں اور اضافی آلات کا والیوم
+
+@ Volume of monster alerts, attacks, pain and death sounds
+ur عفریتوں کے الرٹ، حملوں، درد اور موت کی آوازوں کا والیوم
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+ur دروازوں، لفٹوں، سوئچز، اشیاء اٹھانے اور دنیا کے دیگر اثرات کا والیوم
 
 # ==== ui.txt ====
 

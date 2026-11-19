@@ -1639,6 +1639,49 @@ te తాళం తీసుకున్నప్పుడు సేవ్ చ�
 @ User Data Directory
 te వినియోగదారు డేటా డైరెక్టరీ
 
+# Audio enhancements.
+@ Volume Mix
+te వాల్యూమ్ మిక్స్
+
+@ Soundtrack
+te సౌండ్‌ట్రాక్
+
+@ Music Crossfade
+te సంగీత క్రాస్‌ఫేడ్
+
+@ Underwater Muffling
+te నీటి అడుగున మసక శబ్దం
+
+@ Environmental Reverb
+te పరిసర ప్రతిధ్వని
+
+@ Reverb Amount
+te ప్రతిధ్వని స్థాయి
+
+@ 3D Binaural Audio
+te 3D బైనారల్ ఆడియో
+
+@ Sound Occlusion
+te ధ్వని అవరోధం
+
+@ Footsteps
+te అడుగుల శబ్దాలు
+
+@ Footstep Volume
+te అడుగుల వాల్యూమ్
+
+@ Ambient
+te పరిసరాలు
+
+@ Weapons & Player
+te ఆయుధాలు & ఆటగాడు
+
+@ Monsters
+te రాక్షసులు
+
+@ World & Pickups
+te ప్రపంచం & వస్తువులు
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ te మీరు తాళం తీసుకున్నప్పుడు స�
 
 @ Where saves, configs, demos and downloaded map packs are stored
 te సేవ్‌లు, కాన్ఫిగ్‌లు, డెమోలు మరియు డౌన్‌లోడ్ చేసిన మ్యాప్ ప్యాక్‌లు నిల్వ ఉండే స్థలం
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+te స్థాయి పాటల కోసం సంగీత ప్యాక్: డిఫాల్ట్ సక్రియ మోడ్‌ను ఉపయోగిస్తుంది, లేదా మరొక Quake సౌండ్‌ట్రాక్ లేదా <user data>/music ఫోల్డర్‌ను ఎంచుకోండి
+
+@ Muffles sound with a deep low-pass filter while underwater
+te నీటి అడుగున ఉన్నప్పుడు లోతైన లో-పాస్ ఫిల్టర్‌తో ధ్వనిని మసకబారుస్తుంది
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+te చుట్టుపక్కల ప్రదేశం పరిమాణం మరియు పదార్థాలకు అనుగుణంగా రియల్-టైమ్ గది ప్రతిధ్వనిని జోడిస్తుంది
+
+@ How strongly environmental room reverb mixes into world sounds
+te పరిసర ప్రతిధ్వని ప్రపంచ శబ్దాలతో ఎంత బలంగా కలుస్తుంది
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+te హెడ్‌ఫోన్‌ల కోసం చెవి సమయం, తల నీడ మరియు ముందు/వెనుక/ఎత్తు సూచనలతో 3D ఆడియో
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+te దృఢమైన గోడలు మరియు మూసిన తలుపుల వెనుక నుండి వచ్చే శబ్దాలను మసకబారి తగ్గిస్తుంది
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+te రాయి, లోహం, కలప, మట్టి మరియు ద్రవ నేలలకు తగిన కృత్రిమ అడుగులు మరియు దిగే శబ్దాలను ప్లే చేస్తుంది
+
+@ Volume of synthesized player footsteps and landings
+te ఆటగాడి కృత్రిమ అడుగులు మరియు దిగే శబ్దాల వాల్యూమ్
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+te సంగీత ట్రాక్‌ల మధ్య మృదువుగా మారే సెకన్లు; 0 వెంటనే మారుస్తుంది
+
+@ Volume of map ambient loops such as wind, water and static world hums
+te గాలి, నీరు మరియు స్థిర శబ్దాలు వంటి మ్యాప్ పరిసర లూప్‌ల వాల్యూమ్
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+te ఆయుధ కాల్పులు, ఆటగాడి స్వరాలు, అడుగులు మరియు అదనపు పరికరాల వాల్యూమ్
+
+@ Volume of monster alerts, attacks, pain and death sounds
+te రాక్షసుల హెచ్చరికలు, దాడులు, నొప్పి మరియు మరణ శబ్దాల వాల్యూమ్
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+te తలుపులు, లిఫ్ట్‌లు, స్విచ్‌లు, వస్తువుల సేకరణ మరియు ఇతర ప్రపంచ ప్రభావాల వాల్యూమ్
 
 # ==== ui.txt ====
 

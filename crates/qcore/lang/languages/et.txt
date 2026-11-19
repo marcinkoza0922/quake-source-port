@@ -1639,6 +1639,49 @@ et Salvesta võtme üleskorjamisel
 @ User Data Directory
 et Kasutajaandmete kaust
 
+# Audio enhancements.
+@ Volume Mix
+et Helitugevuse mikser
+
+@ Soundtrack
+et Heliriba
+
+@ Music Crossfade
+et Muusika üleminek
+
+@ Underwater Muffling
+et Veealune summutus
+
+@ Environmental Reverb
+et Keskkonnakaja
+
+@ Reverb Amount
+et Kaja tugevus
+
+@ 3D Binaural Audio
+et 3D binauraalne heli
+
+@ Sound Occlusion
+et Heli varjestus
+
+@ Footsteps
+et Sammud
+
+@ Footstep Volume
+et Sammude helitugevus
+
+@ Ambient
+et Keskkond
+
+@ Weapons & Player
+et Relvad ja mängija
+
+@ Monsters
+et Koletised
+
+@ World & Pickups
+et Maailm ja esemed
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ et Salvestab automaatselt võtme üleskorjamisel
 
 @ Where saves, configs, demos and downloaded map packs are stored
 et Kuhu salvestatakse mänguseisud, seaded, demod ja allalaaditud kaardipakid
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+et Tasememuusika pakk: Vaikimisi kasutab aktiivset modi, või vali mõni teine paigaldatud Quake heliriba või oma kaust asukohas <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+et Summutab vee all heli sügava madalpääsfiltriga
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+et Lisab reaalajas ruumikaja ümbritseva ruumi suuruse ja materjalide põhjal
+
+@ How strongly environmental room reverb mixes into world sounds
+et Kui tugevalt ruumikaja maailma helidega seguneb
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+et Binauraalne 3D-ruumiheli kõrvaklappidele kõrvaaja, peavarju ning ees/taga/kõrguse vihjetega
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+et Summutab ja vaigistab tahkete seinte ja suletud uste tagant tulevaid helisid
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+et Esitab sünteesitud samme ja maandumisi kivi-, metalli-, puit-, mulla- ja vedelikupindadele
+
+@ Volume of synthesized player footsteps and landings
+et Sünteesitud mängija sammude ja maandumiste helitugevus
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+et Sekundid sujuvaks üleminekuks muusikapalade vahel; 0 vahetab kohe
+
+@ Volume of map ambient loops such as wind, water and static world hums
+et Kaardi keskkonnahelide, nagu tuul, vesi ja staatiline urin, helitugevus
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+et Relvalaskude, mängija häälte, sammude ja lisavarustuse helitugevus
+
+@ Volume of monster alerts, attacks, pain and death sounds
+et Koletiste häirete, rünnakute, valu ja surmahelide helitugevus
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+et Uste, liftide, lülitite, esemete korjamise ja muude maailmaefektide helitugevus
 
 # ==== ui.txt ====
 

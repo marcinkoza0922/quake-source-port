@@ -1639,6 +1639,49 @@ mt Issejvja meta taqbad ċavetta
 @ User Data Directory
 mt Fowlder tad-dejta tal-utent
 
+# Audio enhancements.
+@ Volume Mix
+mt Taħlita tal-Volum
+
+@ Soundtrack
+mt Soundtrack
+
+@ Music Crossfade
+mt Transizzjoni tal-Mużika
+
+@ Underwater Muffling
+mt Taffija taħt l-Ilma
+
+@ Environmental Reverb
+mt Eku Ambjentali
+
+@ Reverb Amount
+mt Qawwa tal-Eku
+
+@ 3D Binaural Audio
+mt Awdjo Binawrali 3D
+
+@ Sound Occlusion
+mt Oklużjoni tal-Ħoss
+
+@ Footsteps
+mt Passi
+
+@ Footstep Volume
+mt Volum tal-Passi
+
+@ Ambient
+mt Ambjent
+
+@ Weapons & Player
+mt Armi u Plejer
+
+@ Monsters
+mt Mostri
+
+@ World & Pickups
+mt Dinja u Oġġetti
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ mt Issejvja awtomatikament meta taqbad ċavetta
 
 @ Where saves, configs, demos and downloaded map packs are stored
 mt Fejn jinħażnu s-saves, il-konfigurazzjonijiet, id-demos u l-pakketti tal-mapep imniżżla
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+mt Pakkett tal-mużika għal-livelli: Default juża l-mod attiv, jew agħżel soundtrack ieħor ta' Quake jew folder f'<user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+mt Itaffi l-ħoss b'filtru baxx fond meta tkun taħt l-ilma
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+mt Iżżid eku tal-kamra f'ħin reali skont id-daqs u l-materjali tal-ispazju ta' madwarek
+
+@ How strongly environmental room reverb mixes into world sounds
+mt Kemm jitħallat b'saħħtu l-eku ambjentali mal-ħsejjes tad-dinja
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+mt Spazjalizzazzjoni binawrali 3D għall-headphones b'ħin tal-widnejn, dell tar-ras u direzzjoni quddiem/wara/għoli
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+mt Itaffi u jbaxxi ħsejjes ġejjin minn wara ħitan sodi u bibien magħluqa
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+mt Iddoqq passi u nżul sintetizzati skont art tal-ġebel, metall, injam, ħamrija u likwidi
+
+@ Volume of synthesized player footsteps and landings
+mt Volum tal-passi u l-inżul sintetizzati tal-plejer
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+mt Sekondi biex il-mużika tgħaddi bil-mod bejn binarji; 0 tibdel mill-ewwel
+
+@ Volume of map ambient loops such as wind, water and static world hums
+mt Volum tal-ħsejjes ambjentali tal-mappa bħar-riħ, l-ilma u l-ħsejjes statiċi
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+mt Volum tal-isparar tal-armi, vuċijiet tal-plejer, passi u tagħmir addizzjonali
+
+@ Volume of monster alerts, attacks, pain and death sounds
+mt Volum tat-twissijiet, attakki, uġigħ u mewt tal-mostri
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+mt Volum tal-bibien, liftijiet, swiċċijiet, ġbir ta' oġġetti u effetti oħra tad-dinja
 
 # ==== ui.txt ====
 

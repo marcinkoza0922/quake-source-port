@@ -1639,6 +1639,49 @@ gu ચાવી ઉપાડતાં સાચવો
 @ User Data Directory
 gu વપરાશકર્તા ડેટા ડિરેક્ટરી
 
+# Audio enhancements.
+@ Volume Mix
+gu વોલ્યુમ મિક્સ
+
+@ Soundtrack
+gu સાઉન્ડટ્રેક
+
+@ Music Crossfade
+gu સંગીત ક્રોસફેડ
+
+@ Underwater Muffling
+gu પાણી નીચે દબાયેલો અવાજ
+
+@ Environmental Reverb
+gu પર્યાવરણીય પડઘો
+
+@ Reverb Amount
+gu પડઘાની માત્રા
+
+@ 3D Binaural Audio
+gu 3D બાયનોરલ ઓડિયો
+
+@ Sound Occlusion
+gu અવાજ અવરોધ
+
+@ Footsteps
+gu પગલાંના અવાજ
+
+@ Footstep Volume
+gu પગલાંનું વોલ્યુમ
+
+@ Ambient
+gu પર્યાવરણ
+
+@ Weapons & Player
+gu શસ્ત્રો અને ખેલાડી
+
+@ Monsters
+gu રાક્ષસો
+
+@ World & Pickups
+gu દુનિયા અને વસ્તુઓ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ gu ચાવી ઉપાડતાં આપમેળે સાચવે છે
 
 @ Where saves, configs, demos and downloaded map packs are stored
 gu જ્યાં સેવ, કોન્ફિગ, ડેમો અને ડાઉનલોડ કરેલા મેપ પેક સંગ્રહાય છે
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+gu લેવલ ટ્રેક્સ માટે મ્યુઝિક પેક: ડિફોલ્ટ સક્રિય મોડ વાપરે છે, અથવા અન્ય ઇન્સ્ટોલ કરેલ Quake સાઉન્ડટ્રેક કે <user data>/music ફોલ્ડર પસંદ કરો
+
+@ Muffles sound with a deep low-pass filter while underwater
+gu પાણીની અંદર ઊંડા લો-પાસ ફિલ્ટર વડે અવાજ દબાવી દે છે
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+gu આસપાસની જગ્યાના કદ અને સામગ્રી મુજબ રીઅલ-ટાઇમ રૂમનો પડઘો ઉમેરે છે
+
+@ How strongly environmental room reverb mixes into world sounds
+gu પર્યાવરણીય પડઘો દુનિયાના અવાજોમાં કેટલો ભળે છે
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+gu હેડફોન માટે કાનનો સમય, માથાનો પડછાયો અને આગળ/પાછળ/ઊંચાઈના સંકેતો સાથે 3D ઓડિયો
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+gu નક્કર દીવાલો અને બંધ દરવાજા પાછળથી આવતા અવાજોને દબાવે અને ધીમા કરે છે
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+gu પથ્થર, ધાતુ, લાકડું, માટી અને પ્રવાહી ભોંયતળિયા મુજબ કૃત્રિમ પગલાં અને ઉતરાણના અવાજ વગાડે છે
+
+@ Volume of synthesized player footsteps and landings
+gu ખેલાડીના કૃત્રિમ પગલાં અને ઉતરાણનું વોલ્યુમ
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+gu સંગીત ટ્રેક્સ વચ્ચે સરળ ફેરફાર માટેની સેકન્ડ; 0 તરત જ બદલે છે
+
+@ Volume of map ambient loops such as wind, water and static world hums
+gu નકશાના પવન, પાણી અને સ્થિર ગુંજારવ જેવા પર્યાવરણ લૂપ્સનું વોલ્યુમ
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+gu શસ્ત્રોના ગોળીબાર, ખેલાડીના અવાજ, પગલાં અને વધારાના સાધનોનું વોલ્યુમ
+
+@ Volume of monster alerts, attacks, pain and death sounds
+gu રાક્ષસોની ચેતવણી, હુમલા, પીડા અને મૃત્યુના અવાજોનું વોલ્યુમ
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+gu દરવાજા, લિફ્ટ, સ્વિચ, વસ્તુઓ ઉપાડવા અને અન્ય વિશ્વ અસરોનું વોલ્યુમ
 
 # ==== ui.txt ====
 

@@ -207,3 +207,176 @@ fn split_screen_listeners() {
     assert!(l2 > l && l2 == r2);
     assert!(m.channel_volume(6, 1).is_none());
 }
+
+fn sine_sfx(name: &str, freq: f32, rate: u32, len: usize) -> Arc<Sfx> {
+    let data = (0..len)
+        .map(|i| ((std::f32::consts::TAU * freq * i as f32 / rate as f32).sin() * 14000.0) as i16)
+        .collect();
+    Arc::new(Sfx { name: name.into(), data, loop_start: None })
+}
+
+#[test]
+fn hrtf_produces_binaural_output_with_head_shadow() {
+    let (s, mut m) = sys();
+    s.set_hrtf(true);
+    s.update(Listener {
+        origin: [0.0; 3],
+        forward: [1.0, 0.0, 0.0],
+        right: [0.0, -1.0, 0.0],
+        up: [0.0, 0.0, 1.0],
+        view_entity: 1,
+        ..Default::default()
+    });
+    let hi = sine_sfx("ogre/ogwake.wav", 4000.0, 44100, 4096);
+    // Sound directly to the right.
+    start(&s, 2, 1, &hi, [0.0, -100.0, 0.0]);
+    let mut out = vec![0i16; 2048];
+    m.paint(&mut out);
+    let left_e: i64 = out.chunks_exact(2).skip(64).map(|f| i64::from(f[0].abs())).sum();
+    let right_e: i64 = out.chunks_exact(2).skip(64).map(|f| i64::from(f[1].abs())).sum();
+    assert!(right_e > left_e * 2, "expected strong right bias: l={left_e} r={right_e}");
+    assert!(left_e > 0, "HRTF keeps shadowed contralateral ear audible");
+}
+
+#[test]
+fn occlusion_muffles_and_attenuates_blocked_sounds() {
+    let hi = sine_sfx("shambler/sattck1.wav", 4500.0, 44100, 4096);
+    let measure = |occluded: bool| -> i64 {
+        let (s, mut m) = sys();
+        s.set_occlusion(true);
+        listener(&s);
+        start(&s, 2, 1, &hi, [100.0, 0.0, 0.0]);
+        if occluded {
+            s.set_channel_occlusion(2, 1, 1.0);
+        }
+        let mut out = vec![0i16; 4096];
+        m.paint(&mut out);
+        out.iter().skip(256).map(|&x| i64::from(x.abs())).sum()
+    };
+    let clear = measure(false);
+    let blocked = measure(true);
+    assert!(clear > blocked * 5, "occluded HF should drop sharply: clear={clear} blocked={blocked}");
+    assert!(blocked > 0, "occluded sound stays faintly audible");
+}
+
+#[test]
+fn environmental_reverb_leaves_ui_dry_and_adds_world_tail() {
+    let (s, mut m) = sys();
+    listener(&s);
+    s.set_reverb(ReverbParams { enabled: true, room_size: 0.8, damping: 0.25, wet: 0.45 });
+    let short_shot = sine_sfx("weapons/guncock.wav", 600.0, 44100, 512);
+    start(&s, 2, 1, &short_shot, [80.0, 0.0, 0.0]);
+    let mut out = vec![0i16; 2048];
+    m.paint(&mut out);
+    // Sound has finished; subsequent buffer should still contain reverb tail.
+    let mut tail = vec![0i16; 4096];
+    m.paint(&mut tail);
+    let tail_energy: i64 = tail.iter().map(|&x| i64::from(x.abs())).sum();
+    assert!(tail_energy > 2000, "expected reverb tail after gunshot, got {tail_energy}");
+
+    // UI sound produces no reverb tail.
+    let (s, mut m) = sys();
+    listener(&s);
+    s.set_reverb(ReverbParams { enabled: true, room_size: 0.8, damping: 0.25, wet: 0.45 });
+    let click = sine_sfx("misc/menu1.wav", 600.0, 44100, 512);
+    s.event(SoundEvent::Local(click));
+    m.paint(&mut out);
+    m.paint(&mut tail);
+    let ui_tail: i64 = tail.iter().map(|&x| i64::from(x.abs())).sum();
+    assert_eq!(ui_tail, 0, "UI sounds must stay dry");
+}
+
+#[test]
+fn category_volumes_scale_each_bucket_independently() {
+    let (s, mut m) = sys();
+    listener(&s);
+    s.set_category_volumes(CategoryVolumes {
+        ambient: 0.0,
+        weapons: 1.0,
+        monsters: 0.0,
+        world: 1.0,
+    });
+    let monster = tone("ogre/ogwake.wav", 4096);
+    start(&s, 2, 1, &monster, [50.0, 0.0, 0.0]);
+    let mut out = vec![0i16; 1024];
+    m.paint(&mut out);
+    assert!(out.iter().all(|&x| x == 0), "muted monster category should be silent");
+
+    let weapon = tone("weapons/guncock.wav", 4096);
+    start(&s, 3, 1, &weapon, [50.0, 0.0, 0.0]);
+    m.paint(&mut out);
+    assert!(out.iter().any(|&x| x != 0), "unmuted weapon category should play");
+}
+
+#[test]
+fn underwater_muffling_respects_water_fx_toggle() {
+    let hi = sine_sfx("weapons/guncock.wav", 4500.0, 44100, 24000);
+    let run = |water_fx: bool| -> i64 {
+        let (s, mut m) = sys();
+        s.set_water_fx(water_fx);
+        s.update(Listener {
+            origin: [0.0; 3],
+            right: [0.0, -1.0, 0.0],
+            view_entity: 1,
+            underwater: true,
+            ..Default::default()
+        });
+        start(&s, 1, 1, &hi, [0.0; 3]);
+        let mut out = vec![0i16; 16384];
+        m.paint(&mut out);
+        // Second block after fade-in completes while sine is still playing.
+        m.paint(&mut out);
+        out.iter().map(|&x| i64::from(x.abs())).sum()
+    };
+    let dry = run(false);
+    let muffled = run(true);
+    assert!(dry > muffled * 10, "underwater filter should strongly muffle HF: dry={dry} muffled={muffled}");
+}
+
+fn wav_bytes(freq: f32, rate: u32, frames: usize) -> Vec<u8> {
+    let data_bytes = (frames * 2) as u32;
+    let mut b = Vec::with_capacity(44 + data_bytes as usize);
+    b.extend_from_slice(b"RIFF");
+    b.extend_from_slice(&(36 + data_bytes).to_le_bytes());
+    b.extend_from_slice(b"WAVEfmt ");
+    b.extend_from_slice(&16u32.to_le_bytes());
+    b.extend_from_slice(&1u16.to_le_bytes()); // PCM
+    b.extend_from_slice(&1u16.to_le_bytes()); // mono
+    b.extend_from_slice(&rate.to_le_bytes());
+    b.extend_from_slice(&(rate * 2).to_le_bytes());
+    b.extend_from_slice(&2u16.to_le_bytes());
+    b.extend_from_slice(&16u16.to_le_bytes());
+    b.extend_from_slice(b"data");
+    b.extend_from_slice(&data_bytes.to_le_bytes());
+    for i in 0..frames {
+        let s = ((std::f32::consts::TAU * freq * i as f32 / rate as f32).sin() * 14000.0) as i16;
+        b.extend_from_slice(&s.to_le_bytes());
+    }
+    b
+}
+
+#[test]
+fn music_crossfade_blends_outgoing_track() {
+    let (s, mut m) = sys();
+    s.set_music_crossfade(0.5);
+    let track_a = wav_bytes(300.0, 44100, 44100);
+    assert!(s.play_music_bytes(track_a, "wav", true));
+    let mut out = vec![0i16; 2048];
+    // Let track A play and ramp in.
+    for _ in 0..25 {
+        m.paint(&mut out);
+    }
+    assert!(m.music_playing());
+    // Stop music: music_playing becomes false immediately, while fade-out still produces non-zero audio.
+    s.stop_music();
+    m.paint(&mut out);
+    assert!(!m.music_playing());
+    let fade_energy: i64 = out.iter().map(|&x| i64::from(x.abs())).sum();
+    assert!(fade_energy > 1000, "expected smooth fade-out tail, got {fade_energy}");
+    // After crossfade completes, output returns to silence.
+    for _ in 0..30 {
+        m.paint(&mut out);
+    }
+    let after: i64 = out.iter().map(|&x| i64::from(x.abs())).sum();
+    assert_eq!(after, 0, "expected silence after crossfade finishes, got {after}");
+}

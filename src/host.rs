@@ -110,6 +110,10 @@ pub struct Host {
     pub snd: Option<SoundSystem>,
     /// The mixer shared with the audio device, for video capture.
     pub mixer: Option<std::sync::Arc<qsound::SharedMixer>>,
+    /// Enhanced audio state (reverb probe, occlusion, footsteps, soundtracks).
+    audio_fx: crate::audio::AudioFx,
+    /// Last rendered camera view (used for immediate occlusion checks on sound start).
+    last_audio_view: Option<qrender::View>,
     /// Video recording or clip export in progress.
     capture: Option<capture::CaptureState>,
     /// Export dialog open: what it would export.
@@ -296,6 +300,8 @@ impl Host {
             pics,
             snd,
             mixer: None,
+            audio_fx: Default::default(),
+            last_audio_view: None,
             level: Level::default(),
             view: ViewState::default(),
             debris: crate::debris::Debris::default(),
@@ -406,6 +412,7 @@ impl Host {
         h.con.load_history(&crate::user_dir("id1"));
         h.sync_shell_env();
         h.sync_console_catalog();
+        h.refresh_soundtracks();
         // 2026 update compat (ironwail host.c): word-wrap centerprints for mg3.
         let mg3 = h.server.core.fs.game_dirs().iter().any(|d| d.eq_ignore_ascii_case("mg3"));
         h.server.core.cvars.set("scr_usekfont", if mg3 { "1" } else { "0" });

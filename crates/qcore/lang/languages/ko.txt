@@ -1639,6 +1639,49 @@ ko 열쇠 획득 시 저장
 @ User Data Directory
 ko 사용자 데이터 폴더
 
+# Audio enhancements.
+@ Volume Mix
+ko 볼륨 믹스
+
+@ Soundtrack
+ko 사운드트랙
+
+@ Music Crossfade
+ko 음악 크로스페이드
+
+@ Underwater Muffling
+ko 수중 먹먹함
+
+@ Environmental Reverb
+ko 환경 리버브
+
+@ Reverb Amount
+ko 리버브 강도
+
+@ 3D Binaural Audio
+ko 3D 바이노럴 오디오
+
+@ Sound Occlusion
+ko 소리 차폐
+
+@ Footsteps
+ko 발소리
+
+@ Footstep Volume
+ko 발소리 볼륨
+
+@ Ambient
+ko 환경음
+
+@ Weapons & Player
+ko 무기 및 플레이어
+
+@ Monsters
+ko 몬스터
+
+@ World & Pickups
+ko 월드 및 아이템
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ ko 열쇠를 주울 때 자동으로 저장합니다
 
 @ Where saves, configs, demos and downloaded map packs are stored
 ko 저장 파일, 설정, 데모 및 다운로드한 맵 팩이 저장되는 위치
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+ko 레벨 음악 팩: 기본값은 활성 모드를 사용하며, 다른 Quake 사운드트랙이나 <user data>/music 폴더도 선택할 수 있습니다
+
+@ Muffles sound with a deep low-pass filter while underwater
+ko 물속에서 깊은 로우패스 필터로 소리를 먹먹하게 만듭니다
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+ko 주변 공간의 크기와 재질에 맞춘 실시간 공간 리버브를 추가합니다
+
+@ How strongly environmental room reverb mixes into world sounds
+ko 환경 리버브가 월드 사운드에 섞이는 강도
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+ko 귀 시간차, 머리 그림자, 앞/뒤/높이 단서를 제공하는 헤드폰용 3D 바이노럴 공간 음향
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+ko 단단한 벽과 닫힌 문 너머에서 들리는 소리를 먹먹하고 작게 만듭니다
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ko 돌, 금속, 나무, 흙, 액체 바닥에 맞춘 합성 발소리와 착지음을 재생합니다
+
+@ Volume of synthesized player footsteps and landings
+ko 합성된 플레이어 발소리 및 착지음 볼륨
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+ko 음악 트랙 사이를 부드럽게 페이드하는 시간(초); 0은 즉시 전환
+
+@ Volume of map ambient loops such as wind, water and static world hums
+ko 바람, 물, 고정 배경음 등 맵 환경음 루프의 볼륨
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+ko 무기 발사, 플레이어 음성, 발소리 및 애드온 장비의 볼륨
+
+@ Volume of monster alerts, attacks, pain and death sounds
+ko 몬스터 경계, 공격, 피격 및 사망 소리의 볼륨
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+ko 문, 리프트, 스위치, 아이템 획득 및 기타 월드 효과음 볼륨
 
 # ==== ui.txt ====
 

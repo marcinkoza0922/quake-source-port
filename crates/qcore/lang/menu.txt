@@ -3809,3 +3809,103 @@ it Cartella dati utente
 es Carpeta de datos de usuario
 ru Папка пользовательских данных
 
+# Audio enhancements.
+@ Volume Mix
+fr Mixage du volume
+de Lautstärkemix
+it Mix volume
+es Mezcla de volumen
+ru Микшер громкости
+
+@ Soundtrack
+fr Bande sonore
+de Soundtrack
+it Colonna sonora
+es Banda sonora
+ru Саундтрек
+
+@ Music Crossfade
+fr Fondu enchaîné musical
+de Musik-Überblendung
+it Dissolvenza musica
+es Fundido de música
+ru Плавный переход музыки
+
+@ Underwater Muffling
+fr Étouffement sous-marin
+de Unterwasser-Dämpfung
+it Attenuazione subacquea
+es Amortiguación submarina
+ru Приглушение под водой
+
+@ Environmental Reverb
+fr Réverbération ambiante
+de Raumhall
+it Riverbero ambientale
+es Reverberación ambiental
+ru Реверберация окружения
+
+@ Reverb Amount
+fr Intensité de réverbération
+de Hallstärke
+it Intensità riverbero
+es Nivel de reverberación
+ru Сила реверберации
+
+@ 3D Binaural Audio
+fr Audio binaural 3D
+de 3D-Binauralaudio
+it Audio binaurale 3D
+es Audio binaural 3D
+ru 3D бинауральный звук
+
+@ Sound Occlusion
+fr Occlusion sonore
+de Schallverdeckung
+it Occlusione sonora
+es Oclusión sonora
+ru Окклюзия звука
+
+@ Footsteps
+fr Bruits de pas
+de Schritte
+it Passi
+es Pasos
+ru Шаги
+
+@ Footstep Volume
+fr Volume des pas
+de Schrittlautstärke
+it Volume dei passi
+es Volumen de pasos
+ru Громкость шагов
+
+@ Ambient
+fr Ambiance
+de Umgebung
+it Ambiente
+es Ambiente
+ru Окружение
+
+@ Weapons & Player
+fr Armes et joueur
+de Waffen & Spieler
+it Armi e giocatore
+es Armas y jugador
+ru Оружие и игрок
+
+@ Monsters
+fr Monstres
+de Monster
+it Mostri
+es Monstruos
+ru Монстры
+
+@ World & Pickups
+fr Monde et objets
+de Welt & Gegenstände
+it Mondo e oggetti
+es Mundo y objetos
+ru Мир и предметы
+
+

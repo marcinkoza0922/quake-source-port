@@ -1639,6 +1639,49 @@ eo Konservi kiam prenas ŝlosilon
 @ User Data Directory
 eo Dosierujo de uzantaj datumoj
 
+# Audio enhancements.
+@ Volume Mix
+eo Laŭteca miksilo
+
+@ Soundtrack
+eo Muzikaro
+
+@ Music Crossfade
+eo Muzika transiro
+
+@ Underwater Muffling
+eo Subakva dampado
+
+@ Environmental Reverb
+eo Ĉirkaŭa eĥo
+
+@ Reverb Amount
+eo Eĥa forto
+
+@ 3D Binaural Audio
+eo 3D-binaŭrala sono
+
+@ Sound Occlusion
+eo Sona okluzio
+
+@ Footsteps
+eo Paŝoj
+
+@ Footstep Volume
+eo Paŝa laŭteco
+
+@ Ambient
+eo Ĉirkaŭaĵo
+
+@ Weapons & Player
+eo Armiloj kaj ludanto
+
+@ Monsters
+eo Monstroj
+
+@ World & Pickups
+eo Mondo kaj objektoj
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ eo Aŭtomate konservas kiam vi prenas ŝlosilon
 
 @ Where saves, configs, demos and downloaded map packs are stored
 eo Kie konservaĵoj, agordoj, demo-dosieroj kaj elŝutitaj map-pakaĵoj estas stokitaj
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+eo Muzika pako por niveloj: Defaŭlto uzas la aktivan modon, aŭ elektu alian instalitan Quake-muzikaron aŭ dosierujon en <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+eo Dampas sonon per profunda malaltpasa filtrilo sub akvo
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+eo Aldonas realtempan ĉambran eĥon laŭ la grandeco kaj materialoj de la ĉirkaŭa spaco
+
+@ How strongly environmental room reverb mixes into world sounds
+eo Kiom forte ĉirkaŭa eĥo miksiĝas en mondajn sonojn
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+eo Binaŭrala 3D-spacigo por kapaŭskultiloj kun orela prokrasto, kapa ombro kaj antaŭ/malantaŭ/altaj indikoj
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+eo Dampas kaj mallaŭtigas sonojn malantaŭ solidaj muroj kaj fermitaj pordoj
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+eo Lugas sintezitajn paŝojn kaj surteriĝojn laŭ ŝtona, metala, ligna, tera kaj likva planko
+
+@ Volume of synthesized player footsteps and landings
+eo Laŭteco de sintezitaj paŝoj kaj surteriĝoj de la ludanto
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+eo Sekundoj por glata transiro inter muzikaj trakoj; 0 ŝanĝas tuj
+
+@ Volume of map ambient loops such as wind, water and static world hums
+eo Laŭteco de mapaj fonaj bukloj kiel vento, akvo kaj statika zumado
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+eo Laŭteco de armilpafoj, ludantaj voĉoj, paŝoj kaj aldona ekipaĵo
+
+@ Volume of monster alerts, attacks, pain and death sounds
+eo Laŭteco de monstrotremoj, atakoj, doloro kaj mortsonoj
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+eo Laŭteco de pordoj, liftoj, ŝaltiloj, kolektitaj objektoj kaj aliaj mondaj efektoj
 
 # ==== ui.txt ====
 

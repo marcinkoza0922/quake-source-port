@@ -1639,6 +1639,49 @@ th บันทึก​เมื่อ​เก็บ​กุญแจ
 @ User Data Directory
 th โฟลเดอร์​ข้อมูล​ผู้ใช้
 
+# Audio enhancements.
+@ Volume Mix
+th มิกซ์​ระดับ​เสียง
+
+@ Soundtrack
+th เพลง​ประกอบ
+
+@ Music Crossfade
+th เฟด​เปลี่ยน​เพลง
+
+@ Underwater Muffling
+th เสียง​อู้อี้​ใต้น้ำ
+
+@ Environmental Reverb
+th เสียง​ก้อง​สภาพ​แวดล้อม
+
+@ Reverb Amount
+th ระดับ​เสียง​ก้อง
+
+@ 3D Binaural Audio
+th เสียง​รอบทิศ​ 3D
+
+@ Sound Occlusion
+th การ​บัง​เสียง
+
+@ Footsteps
+th เสียง​ฝีเท้า
+
+@ Footstep Volume
+th ระดับ​เสียง​ฝีเท้า
+
+@ Ambient
+th บรรยากาศ
+
+@ Weapons & Player
+th อาวุธ​และ​ผู้เล่น
+
+@ Monsters
+th มอนสเตอร์
+
+@ World & Pickups
+th ฉาก​และ​ไอเทม
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ th บันทึก​อัตโนมัติ​เมื่อ​คุ�
 
 @ Where saves, configs, demos and downloaded map packs are stored
 th ตำแหน่ง​ที่​จัดเก็บ​เซฟ การ​ตั้งค่า เดโม และ​ชุด​แผนที่​ที่​ดาวน์โหลด
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+th ชุด​เพลง​สำหรับ​ด่าน: ค่า​เริ่มต้น​ใช้​ม็อด​ปัจจุบัน หรือ​เลือก​เพลง​ประกอบ​ Quake อื่น หรือ​โฟลเดอร์​ใน <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+th ทำ​ให้​เสียง​อู้อี้​ด้วย​ฟิลเตอร์​ความถี่​ต่ำ​เมื่อ​อยู่​ใต้น้ำ
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+th เพิ่ม​เสียง​ก้อง​แบบ​เรียลไทม์​ตาม​ขนาด​และ​วัสดุ​ของ​พื้นที่​รอบ​ตัว
+
+@ How strongly environmental room reverb mixes into world sounds
+th ความ​แรง​ของ​เสียง​ก้อง​สภาพ​แวดล้อม​ที่​ผสม​กับ​เสียง​ใน​ฉาก
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+th เสียง​สาม​มิติ​สำหรับ​หูฟัง​พร้อม​ความ​ต่าง​เวลา​สอง​หู เงา​ศีรษะ และ​ทิศ​หน้า/หลัง/สูงต่ำ
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+th ทำ​ให้​เสียง​จาก​หลัง​กำแพง​ทึบ​และ​ประตู​ที่​ปิด​อู้อี้​และ​เบา​ลง
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+th เล่น​เสียง​ฝีเท้า​และ​การ​ลง​พื้น​สังเคราะห์​ตาม​พื้น​หิน โลหะ ไม้ ดิน และ​ของเหลว
+
+@ Volume of synthesized player footsteps and landings
+th ระดับ​เสียง​ฝีเท้า​และ​การ​ลง​พื้น​สังเคราะห์​ของ​ผู้เล่น
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+th จำนวน​วินาที​สำหรับ​เฟด​เปลี่ยน​เพลง​อย่าง​นุ่มนวล; 0 เปลี่ยน​ทันที
+
+@ Volume of map ambient loops such as wind, water and static world hums
+th ระดับ​เสียง​บรรยากาศ​วนซ้ำ​ของ​ด่าน เช่น ลม น้ำ และ​เสียง​หึ่ง​คงที่
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+th ระดับ​เสียง​ปืน เสียง​ผู้เล่น ฝีเท้า และ​อุปกรณ์​เสริม
+
+@ Volume of monster alerts, attacks, pain and death sounds
+th ระดับ​เสียง​เตือน โจมตี เจ็บปวด และ​ตาย​ของ​มอนสเตอร์
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+th ระดับ​เสียง​ประตู ลิฟต์ สวิตช์ การ​เก็บ​ไอเทม และ​เอฟเฟกต์​ฉาก​อื่น
 
 # ==== ui.txt ====
 

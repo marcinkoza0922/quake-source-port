@@ -1639,6 +1639,49 @@ vi Lưu khi nhặt chìa khóa
 @ User Data Directory
 vi Thư mục dữ liệu người dùng
 
+# Audio enhancements.
+@ Volume Mix
+vi Trộn âm lượng
+
+@ Soundtrack
+vi Nhạc nền
+
+@ Music Crossfade
+vi Chuyển nhạc mượt
+
+@ Underwater Muffling
+vi Làm nghẹt dưới nước
+
+@ Environmental Reverb
+vi Vang môi trường
+
+@ Reverb Amount
+vi Mức độ vang
+
+@ 3D Binaural Audio
+vi Âm thanh 3D hai tai
+
+@ Sound Occlusion
+vi Che khuất âm thanh
+
+@ Footsteps
+vi Tiếng bước chân
+
+@ Footstep Volume
+vi Âm lượng bước chân
+
+@ Ambient
+vi Môi trường
+
+@ Weapons & Player
+vi Vũ khí & Người chơi
+
+@ Monsters
+vi Quái vật
+
+@ World & Pickups
+vi Thế giới & Vật phẩm
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ vi Tự động lưu khi bạn nhặt được chìa khóa
 
 @ Where saves, configs, demos and downloaded map packs are stored
 vi Nơi lưu tệp lưu, cấu hình, demo và gói bản đồ đã tải xuống
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+vi Gói nhạc cho các màn chơi: Mặc định dùng mod hiện tại, hoặc chọn nhạc Quake khác hay thư mục riêng trong <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+vi Làm nghẹt âm thanh bằng bộ lọc thông thấp sâu khi ở dưới nước
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+vi Thêm tiếng vang phòng thời gian thực theo kích thước và vật liệu xung quanh
+
+@ How strongly environmental room reverb mixes into world sounds
+vi Mức độ tiếng vang môi trường hòa vào âm thanh thế giới
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+vi Âm thanh không gian 3D cho tai nghe với độ trễ hai tai, bóng đầu và hướng trước/sau/cao
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+vi Làm nghẹt và nhỏ âm thanh phát ra sau tường đặc và cửa đóng
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+vi Phát tiếng bước chân và tiếp đất tổng hợp theo nền đá, kim loại, gỗ, đất và chất lỏng
+
+@ Volume of synthesized player footsteps and landings
+vi Âm lượng tiếng bước chân và tiếp đất tổng hợp của người chơi
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+vi Số giây chuyển mượt giữa các bản nhạc; 0 để chuyển ngay lập tức
+
+@ Volume of map ambient loops such as wind, water and static world hums
+vi Âm lượng vòng lặp môi trường như gió, nước và tiếng ù tĩnh
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+vi Âm lượng tiếng súng, giọng người chơi, bước chân và trang bị bổ sung
+
+@ Volume of monster alerts, attacks, pain and death sounds
+vi Âm lượng tiếng phát hiện, tấn công, đau đớn và chết của quái vật
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+vi Âm lượng cửa, thang máy, công tắc, nhặt vật phẩm và hiệu ứng thế giới khác
 
 # ==== ui.txt ====
 

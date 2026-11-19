@@ -1639,6 +1639,49 @@ mr किल्ली उचलल्यावर जतन करा
 @ User Data Directory
 mr वापरकर्ता डेटा निर्देशिका
 
+# Audio enhancements.
+@ Volume Mix
+mr व्हॉल्यूम मिक्स
+
+@ Soundtrack
+mr साउंडट्रॅक
+
+@ Music Crossfade
+mr संगीत क्रॉसफेड
+
+@ Underwater Muffling
+mr पाण्याखालील दबलेला आवाज
+
+@ Environmental Reverb
+mr परिसर प्रतिध्वनी
+
+@ Reverb Amount
+mr प्रतिध्वनी प्रमाण
+
+@ 3D Binaural Audio
+mr 3D बायनॉरल ऑडिओ
+
+@ Sound Occlusion
+mr ध्वनी अडथळा
+
+@ Footsteps
+mr पावलांचे आवाज
+
+@ Footstep Volume
+mr पावलांचा आवाज स्तर
+
+@ Ambient
+mr परिसर
+
+@ Weapons & Player
+mr शस्त्रे आणि खेळाडू
+
+@ Monsters
+mr राक्षस
+
+@ World & Pickups
+mr जग आणि वस्तू
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ mr किल्ली उचलल्यावर आपोआप जतन क�
 
 @ Where saves, configs, demos and downloaded map packs are stored
 mr जेथे सेव्ह, कॉन्फिग, डेमो आणि डाउनलोड केलेले नकाशा पॅक साठवले जातात
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+mr पातळीच्या संगीतासाठी पॅक: डीफॉल्ट सक्रिय मॉड वापरतो, किंवा इतर स्थापित Quake साउंडट्रॅक किंवा <user data>/music मधील फोल्डर निवडा
+
+@ Muffles sound with a deep low-pass filter while underwater
+mr पाण्याखाली खोल लो-पास फिल्टरने आवाज दाबतो
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+mr सभोवतालच्या जागेच्या आकार आणि साहित्यानुसार रिअल-टाइम खोलीचा प्रतिध्वनी जोडतो
+
+@ How strongly environmental room reverb mixes into world sounds
+mr परिसरातील प्रतिध्वनी जगाच्या आवाजांमध्ये किती प्रमाणात मिसळतो
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+mr हेडफोन्ससाठी कानांचा वेळ, डोक्याची सावली आणि पुढे/मागे/उंचीच्या संकेतांसह 3D बायनॉरल ध्वनी
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+mr भक्कम भिंती आणि बंद दरवाजांमागून येणारे आवाज दाबतो व कमी करतो
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+mr दगड, धातू, लाकूड, माती आणि द्रव जमिनीनुसार कृत्रिम पावले व उतरण्याचे आवाज वाजवतो
+
+@ Volume of synthesized player footsteps and landings
+mr खेळाडूच्या कृत्रिम पावलांचा व उतरण्याचा आवाज स्तर
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+mr संगीत ट्रॅक्समध्ये सहज संक्रमणाचे सेकंद; 0 लगेच बदलतो
+
+@ Volume of map ambient loops such as wind, water and static world hums
+mr नकाशातील वारा, पाणी आणि स्थिर गुणगुण या परिसर आवाजांचा स्तर
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+mr शस्त्र गोळीबार, खेळाडूचे आवाज, पावले आणि अतिरिक्त उपकरणांचा स्तर
+
+@ Volume of monster alerts, attacks, pain and death sounds
+mr राक्षसांचे इशारे, हल्ले, वेदना आणि मृत्यूच्या आवाजांचा स्तर
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+mr दरवाजे, लिफ्ट, स्विच, वस्तू उचलणे आणि इतर जग प्रभावांचा आवाज स्तर
 
 # ==== ui.txt ====
 

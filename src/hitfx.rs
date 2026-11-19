@@ -11,7 +11,7 @@ use std::collections::HashMap;
 mod draw;
 mod spawn;
 
-pub(crate) use spawn::Material;
+pub(crate) use spawn::{Material, classify};
 
 #[derive(Clone, Copy, PartialEq, Debug)]
 enum Kind {

@@ -111,6 +111,7 @@ impl Host {
         self.save_thumbs.clear();
         self.write_config();
         self.scan_mods();
+        self.refresh_soundtracks();
         self.print(&qcore::ctr!("User data directory set to {}\n", root.display()));
     }
 

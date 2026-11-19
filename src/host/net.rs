@@ -66,6 +66,8 @@ impl Host {
         self.local = None;
         self.guests.clear();
         self.level = Level::default();
+        self.audio_fx.clear_map();
+        self.audio_fx.soundtracks.clear_track();
         if let Some(s) = &self.snd {
             s.event(SoundEvent::StopAll);
             s.event(SoundEvent::ClearStatic);
@@ -418,7 +420,22 @@ impl Host {
                         self.captions.sound(n, self.realtime);
                     }
                     if let (Some(snd), Some(Some(sfx))) = (&self.snd, self.level.sounds.get(sound)) {
+                        let dur = sfx.data.len() as f64 / snd.rate().max(8000) as f64;
                         snd.event(SoundEvent::Start { entity: ent, channel, sfx: sfx.clone(), origin, volume, attenuation });
+                        let mut brushes = None;
+                        self.audio_fx.on_sound_start(
+                            &self.server.core.cvars,
+                            &self.cl,
+                            &self.level,
+                            &mut brushes,
+                            self.last_audio_view.as_ref(),
+                            ent,
+                            channel,
+                            origin,
+                            dur,
+                            self.realtime,
+                            snd,
+                        );
                     }
                 }
                 ClientEvent::TempSound { name, origin } => {
@@ -428,7 +445,22 @@ impl Host {
                     if let Some(snd) = &mut self.snd
                         && let Some(sfx) = snd.precache(name)
                     {
+                        let dur = sfx.data.len() as f64 / snd.rate().max(8000) as f64;
                         snd.event(SoundEvent::Start { entity: -1, channel: 0, sfx, origin, volume: 1.0, attenuation: 1.0 });
+                        let mut brushes = None;
+                        self.audio_fx.on_sound_start(
+                            &self.server.core.cvars,
+                            &self.cl,
+                            &self.level,
+                            &mut brushes,
+                            self.last_audio_view.as_ref(),
+                            -1,
+                            0,
+                            origin,
+                            dur,
+                            self.realtime,
+                            snd,
+                        );
                     }
                 }
                 ClientEvent::LocalSound { sound } => {
@@ -457,9 +489,7 @@ impl Host {
                         continue;
                     }
                     self.menu_music = false;
-                    if let Some(snd) = &mut self.snd {
-                        snd.play_cd_track(track, true);
-                    }
+                    self.play_cd_track(track, true);
                 }
                 ClientEvent::Damage { armor, blood, from } => {
                     let cv = self.view_cvars();
@@ -479,6 +509,7 @@ impl Host {
                 ClientEvent::BonusFlash => self.view.bonus_flash(),
                 ClientEvent::NewMap => {
                     self.clear_toy_fx();
+                    self.audio_fx.clear_map();
                     feedback = None;
                     self.feedback = Default::default();
                     self.stats_recorded = false;

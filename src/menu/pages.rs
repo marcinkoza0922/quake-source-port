@@ -49,6 +49,8 @@ pub(super) enum Item {
     Language,
     /// User data directory (opens the in-game directory explorer).
     UserDataDir,
+    /// Soundtrack pack (`s_soundtrack`) from `Menu::soundtracks`.
+    Soundtrack,
 }
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -398,10 +400,27 @@ pub(super) const HUD: &[Item] = &[
 pub(super) const AUDIO: &[Item] = &[
     slider("Sound Volume", "volume", 0.0, 1.0, 0.1),
     slider("Music Volume", "bgmvolume", 0.0, 1.0, 0.1),
+    Item::Sub { label: "Volume Mix", page: Page::AudioMix },
+    Item::Soundtrack,
+    slider("Music Crossfade", "s_music_crossfade", 0.0, 3.0, 0.25),
     toggle("Main Menu Music", "menu_music"),
+    toggle("Underwater Muffling", "snd_waterfx"),
+    toggle("Environmental Reverb", "s_reverb"),
+    slider("Reverb Amount", "s_reverb_amount", 0.25, 2.0, 0.25),
+    toggle("3D Binaural Audio", "s_hrtf"),
+    toggle("Sound Occlusion", "s_occlusion"),
+    toggle("Footsteps", "s_footsteps"),
+    slider("Footstep Volume", "s_footsteps_volume", 0.1, 1.5, 0.1),
     toggle("Hit & Kill Sounds", "s_hitfeedback"),
     Item::Sub { label: "Hit Sound", page: Page::HitSound },
     Item::Sub { label: "Kill Sound", page: Page::KillSound },
+];
+
+pub(super) const AUDIO_MIX: &[Item] = &[
+    slider("Ambient", "s_vol_ambient", 0.0, 1.0, 0.1),
+    slider("Weapons & Player", "s_vol_weapons", 0.0, 1.0, 0.1),
+    slider("Monsters", "s_vol_monsters", 0.0, 1.0, 0.1),
+    slider("World & Pickups", "s_vol_world", 0.0, 1.0, 0.1),
 ];
 
 /// Independent of the debris toggle and particle scripts.

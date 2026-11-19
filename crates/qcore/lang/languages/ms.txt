@@ -1639,6 +1639,49 @@ ms Simpan apabila mengambil kunci
 @ User Data Directory
 ms Direktori Data Pengguna
 
+# Audio enhancements.
+@ Volume Mix
+ms Campuran Kelantangan
+
+@ Soundtrack
+ms Runut Bunyi
+
+@ Music Crossfade
+ms Peralihan Muzik
+
+@ Underwater Muffling
+ms Redaman Bawah Air
+
+@ Environmental Reverb
+ms Gema Persekitaran
+
+@ Reverb Amount
+ms Tahap Gema
+
+@ 3D Binaural Audio
+ms Audio Binaural 3D
+
+@ Sound Occlusion
+ms Oklusi Bunyi
+
+@ Footsteps
+ms Langkah Kaki
+
+@ Footstep Volume
+ms Kelantangan Langkah
+
+@ Ambient
+ms Ambien
+
+@ Weapons & Player
+ms Senjata & Pemain
+
+@ Monsters
+ms Raksasa
+
+@ World & Pickups
+ms Dunia & Item
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ ms Simpan automatik apabila anda mengambil kunci
 
 @ Where saves, configs, demos and downloaded map packs are stored
 ms Tempat simpanan, konfigurasi, demo dan pek peta yang dimuat turun disimpan
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+ms Pek muzik untuk trek tahap: Lalai guna mod aktif, atau pilih runut bunyi Quake lain atau folder tersuai dalam <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+ms Meredam bunyi dengan penapis laluan rendah yang dalam di bawah air
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+ms Menambah gema bilik masa nyata mengikut saiz dan bahan ruang sekeliling
+
+@ How strongly environmental room reverb mixes into world sounds
+ms Seberapa kuat gema persekitaran dicampur ke dalam bunyi dunia
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+ms Audio ruang binaural 3D untuk fon kepala dengan masa telinga, bayang kepala dan petunjuk depan/belakang/tinggi
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+ms Meredam dan memperlahankan bunyi dari sebalik dinding pepejal dan pintu tertutup
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ms Memainkan bunyi langkah dan pendaratan sintetik mengikut lantai batu, logam, kayu, tanah dan cecair
+
+@ Volume of synthesized player footsteps and landings
+ms Kelantangan bunyi langkah kaki dan pendaratan sintetik pemain
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+ms Saat untuk peralihan lancar antara trek muzik; 0 bertukar serta-merta
+
+@ Volume of map ambient loops such as wind, water and static world hums
+ms Kelantangan gelung ambien peta seperti angin, air dan dengungan statik
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+ms Kelantangan tembakan senjata, suara pemain, langkah kaki dan peralatan tambahan
+
+@ Volume of monster alerts, attacks, pain and death sounds
+ms Kelantangan amaran, serangan, kesakitan dan kematian raksasa
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+ms Kelantangan pintu, lif, suis, kutipan item dan kesan dunia lain
 
 # ==== ui.txt ====
 

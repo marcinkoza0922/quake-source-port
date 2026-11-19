@@ -1639,6 +1639,49 @@ am ቁልፍ ሲወሰድ አስቀምጥ
 @ User Data Directory
 am የተጠቃሚ ውሂብ አቃፊ
 
+# Audio enhancements.
+@ Volume Mix
+am የድምፅ ቅልቅል
+
+@ Soundtrack
+am የሙዚቃ ስብስብ
+
+@ Music Crossfade
+am የሙዚቃ ለስላሳ ሽግግር
+
+@ Underwater Muffling
+am የውሃ ውስጥ ድምፅ ማፈን
+
+@ Environmental Reverb
+am የአካባቢ ማሚቶ
+
+@ Reverb Amount
+am የማሚቶ መጠን
+
+@ 3D Binaural Audio
+am 3D ባይኖራል ድምፅ
+
+@ Sound Occlusion
+am የድምፅ መከልከል
+
+@ Footsteps
+am የእግር ኮቴ
+
+@ Footstep Volume
+am የኮቴ ድምፅ መጠን
+
+@ Ambient
+am አካባቢ
+
+@ Weapons & Player
+am መሣሪያዎች እና ተጫዋች
+
+@ Monsters
+am ጭራቆች
+
+@ World & Pickups
+am ዓለም እና ዕቃዎች
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ am ቁልፍ ሲወስዱ በራስ-ሰር ያስቀምጣል
 
 @ Where saves, configs, demos and downloaded map packs are stored
 am ቅምጦች፣ ቅንብሮች፣ ዴሞዎች እና የወረዱ የካርታ ጥቅሎች የሚቀመጡበት ቦታ
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+am ለደረጃ ሙዚቃዎች የሙዚቃ ጥቅል፡ ነባሪው ንቁውን ሞድ ይጠቀማል፣ ወይም ሌላ የተጫነ Quake ሙዚቃ ወይም <user data>/music ውስጥ ያለ አቃፊ ይምረጡ
+
+@ Muffles sound with a deep low-pass filter while underwater
+am በውሃ ውስጥ ሲሆኑ በጥልቅ ዝቅተኛ ድግግሞሽ ማጣሪያ ድምፅን ያፍናል
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+am እንደ ዙሪያው ቦታ መጠን እና ቁሳቁስ በቅጽበት የክፍል ማሚቶ ይጨምራል
+
+@ How strongly environmental room reverb mixes into world sounds
+am የአካባቢ ማሚቶ ከዓለም ድምፆች ጋር ምን ያህል በጠንካራ እንደሚቀላቀል
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+am ለጆሮ ማዳመጫዎች በጆሮ ጊዜ ልዩነት፣ በራስ ጥላ እና በፊት/ኋላ/ከፍታ ምልክቶች 3D ድምፅ
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+am ከጠንካራ ግድግዳዎች እና ከተዘጉ በሮች ጀርባ የሚመጡ ድምፆችን ያፍናል እና ይቀንሳል
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+am ለድንጋይ፣ ብረት፣ እንጨት፣ አፈር እና ፈሳሽ ወለሎች የተሰሩ የኮቴ እና የማረፍ ድምፆችን ያጫውታል
+
+@ Volume of synthesized player footsteps and landings
+am የተጫዋቹ የተሰሩ የኮቴ እና የማረፍ ድምፆች መጠን
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+am በሙዚቃ ትራኮች መካከል በለስላሳ ለመሸጋገር ሰከንዶች፤ 0 ወዲያውኑ ይቀይራል
+
+@ Volume of map ambient loops such as wind, water and static world hums
+am እንደ ንፋስ፣ ውሃ እና ቋሚ ድምፅ ያሉ የካርታ አካባቢ ድምፆች መጠን
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+am የመሣሪያ ተኩስ፣ የተጫዋች ድምፆች፣ ኮቴዎች እና ተጨማሪ ዕቃዎች ድምፅ መጠን
+
+@ Volume of monster alerts, attacks, pain and death sounds
+am የጭራቆች ማስጠንቀቂያ፣ ጥቃት፣ ህመም እና ሞት ድምፆች መጠን
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+am የበሮች፣ ሊፍቶች፣ ማብሪያና ማጥፊያዎች፣ ዕቃ ማንሳት እና ሌሎች የዓለም ውጤቶች ድምፅ መጠን
 
 # ==== ui.txt ====
 

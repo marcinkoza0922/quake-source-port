@@ -24,6 +24,18 @@ are independent. Audio → Hit Sounds edits the synthesized hit and kill cues.
 See [HIT_FEEDBACK.md](HIT_FEEDBACK.md) for settings, target detection, event
 capture, synthesis, and diagnostic commands.
 
+### Audio enhancements (`qsound::{category, reverb, hrtf, footsteps}`, `src/audio/`)
+
+All client-side, wired under **Options → Audio** (and **Options → Audio → Volume Mix**, `menu_options audiomix`):
+
+- **Underwater muffling** (`snd_waterfx`, archived, default `1`): 2-pole Butterworth low-pass filter (~550 Hz, Q 0.85, gentle 0.86 submerged gain) in `qsound::reverb::UnderwaterFilter`, smoothly crossfaded over 0.25 s while `Listener::underwater` is true.
+- **Environmental reverb** (`s_reverb` default `0`, `s_reverb_amount` default `1.0`, 0.25–2.0, archived; slider dimmed while off): stereo Freeverb network (8 parallel comb filters + 4 series allpass diffusers per channel, zero audio-thread allocations) in `qsound::reverb::Reverb`, applied to world/spatialized SFX while keeping UI, hit feedback and music dry. `src/audio/acoustic.rs` probes 14 BSP rays (`BspWorld::trace_line`, throttled to 80 ms / 24 u motion) to estimate mean room size, sky/outdoor openness, and wall material reflectivity (`hitfx::classify`).
+- **3D binaural audio (HRTF)** (`s_hrtf`, archived, default `0`): analytical Woodworth-Schlosberg ITD (fractional-sample delay up to ~0.68 ms) + Brown-Duda head-shadow low-pass and front/back/elevation pinna cues in `qsound::hrtf`, driven by the full 3D listener basis (`Listener::{forward, right, up}`). Classic integer stereo panning stays unchanged when off; split-screen guest mono contributions blend alongside player 1's binaural mix.
+- **Sound occlusion** (`s_occlusion`, archived, default `0`): 5-ray soft line-of-sight cluster (`src/audio/acoustic.rs`) between listener eye and active dynamic sounds (immediate probe on `Start`, refreshed every 50 ms following moving entities) plus nearby static sounds; occluded channels smoothly low-pass (down to ~650 Hz) and attenuate (to 44%) in `qsound::Mixer`.
+- **Optional footsteps** (`s_footsteps` default `0`, `s_footsteps_volume` default `0.6`, 0.1–1.5, archived; slider dimmed while off): procedural surface-aware footsteps (4 variations + landing thuds across Stone, Metal, Wood, Dirt, Water, Slime, Lava in `qsound::footsteps`). `src/audio/footsteps.rs` tracks grounded distance and landing velocity per local player (including split-screen guests) and classifies the floor texture via `impacts::surfaces::texture_at` + `hitfx::classify`.
+- **Per-category volume mix** (`s_vol_ambient`, `s_vol_weapons`, `s_vol_monsters`, `s_vol_world`, archived, all default `1.0`, 0–1; Audio → Volume Mix): `qsound::category::classify_sound` maps sound paths into Ambient, Weapons, Monsters, World, or Ui (always dry and un-attenuated by category sliders); static sounds and BSP leaf ambients map to Ambient.
+- **Soundtrack switcher & music crossfade** (`s_soundtrack` archived default `""`, `s_music_crossfade` archived default `0.5`, 0–3 s): `src/audio/soundtrack.rs` discovers music packs across installed game directories (loose files and PAK/PK3 `music/`) and custom folders under `<user data>/music/<pack>/` (supporting both `trackNN.*` and arbitrary sorted playlists). Switching `s_soundtrack` in Audio → Soundtrack (or `soundtrack [name]` / `music_track <n>`) swaps the active level or main-menu track live with smooth crossfading in `qsound::Mixer::mix_music`.
+
 ### HUD layout and editor
 
 The HUD is a free layout of elements (`src/hud.rs`, `src/hud/`), kept in the archived

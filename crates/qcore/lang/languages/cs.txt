@@ -1639,6 +1639,49 @@ cs Uložit při sebrání klíče
 @ User Data Directory
 cs Složka uživatelských dat
 
+# Audio enhancements.
+@ Volume Mix
+cs Mix hlasitosti
+
+@ Soundtrack
+cs Soundtrack
+
+@ Music Crossfade
+cs Prolínání hudby
+
+@ Underwater Muffling
+cs Tlumení pod vodou
+
+@ Environmental Reverb
+cs Prostorový dozvuk
+
+@ Reverb Amount
+cs Síla dozvuku
+
+@ 3D Binaural Audio
+cs 3D binaurální zvuk
+
+@ Sound Occlusion
+cs Okluze zvuku
+
+@ Footsteps
+cs Kroky
+
+@ Footstep Volume
+cs Hlasitost kroků
+
+@ Ambient
+cs Prostředí
+
+@ Weapons & Player
+cs Zbraně a hráč
+
+@ Monsters
+cs Příšery
+
+@ World & Pickups
+cs Svět a předměty
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ cs Automaticky uloží hru při sebrání klíče
 
 @ Where saves, configs, demos and downloaded map packs are stored
 cs Kam se ukládají uložené pozice, nastavení, dema a stažené balíčky map
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+cs Hudební balíček pro úrovně: Výchozí používá aktivní mod, nebo vyberte jiný soundtrack Quake či vlastní složku v <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+cs Tlumí zvuk hlubokou dolní propustí pod vodou
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+cs Přidává prostorový dozvuk v reálném čase podle velikosti a materiálů okolního prostoru
+
+@ How strongly environmental room reverb mixes into world sounds
+cs Jak silně se prostorový dozvuk přimíchává ke zvukům světa
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+cs Binaurální 3D prostorový zvuk pro sluchátka s časováním uší, stínem hlavy a směrem vpřed/vzad/výška
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+cs Tlumí a ztišuje zvuky přicházející zpoza pevných zdí a zavřených dveří
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+cs Přehrává syntetizované kroky a dopady hráče podle kamene, kovu, dřeva, hlíny a kapalin
+
+@ Volume of synthesized player footsteps and landings
+cs Hlasitost syntetizovaných kroků a dopadů hráče
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+cs Sekundy plynulého prolínání mezi skladbami; 0 přepne okamžitě
+
+@ Volume of map ambient loops such as wind, water and static world hums
+cs Hlasitost okolních smyček mapy, jako je vítr, voda a statické hučení
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+cs Hlasitost střelby, hlasů hráče, kroků a doplňkové výbavy
+
+@ Volume of monster alerts, attacks, pain and death sounds
+cs Hlasitost varování, útoků, bolesti a smrti příšer
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+cs Hlasitost dveří, výtahů, spínačů, sbírání předmětů a dalších efektů světa
 
 # ==== ui.txt ====
 

@@ -1639,6 +1639,49 @@ ar الحفظ عند التقاط مفتاح
 @ User Data Directory
 ar مجلد بيانات المستخدم
 
+# Audio enhancements.
+@ Volume Mix
+ar مزج مستوى الصوت
+
+@ Soundtrack
+ar الموسيقى التصويرية
+
+@ Music Crossfade
+ar تداخل الموسيقى
+
+@ Underwater Muffling
+ar كتم تحت الماء
+
+@ Environmental Reverb
+ar صدى البيئة
+
+@ Reverb Amount
+ar شدة الصدى
+
+@ 3D Binaural Audio
+ar صوت ثلاثي الأبعاد للأذنين
+
+@ Sound Occlusion
+ar حجب الصوت
+
+@ Footsteps
+ar خطوات الأقدام
+
+@ Footstep Volume
+ar مستوى صوت الخطوات
+
+@ Ambient
+ar المحيط
+
+@ Weapons & Player
+ar الأسلحة واللاعب
+
+@ Monsters
+ar الوحوش
+
+@ World & Pickups
+ar العالم والأدوات
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ ar يحفظ تلقائياً عند التقاط مفتاح
 
 @ Where saves, configs, demos and downloaded map packs are stored
 ar مكان حفظ الملفات المحفوظة والإعدادات والعروض وحزم الخرائط المُنزَّلة
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+ar حزمة موسيقى لمقاطع المراحل: الافتراضي يستخدم التعديل النشط، أو اختر موسيقى Quake أخرى مثبتة أو مجلدًا مخصصًا في <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+ar يكتم الصوت بمرشح ترددات منخفضة عميق أثناء الغوص تحت الماء
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+ar يضيف صدى غرف فوري يتشكل حسب حجم ومواد المكان المحيط
+
+@ How strongly environmental room reverb mixes into world sounds
+ar مدى قوة امتزاج صدى البيئة مع أصوات العالم
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+ar توزيع صوتي ثلاثي الأبعاد لسماعات الرأس مع فرق توقيت الأذنين وظل الرأس وإشارات الأمام/الخلف/الارتفاع
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+ar يكتم ويخفض الأصوات القادمة من خلف الجدران الصلبة والأبواب المغلقة
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ar يشغّل أصوات خطوات وهبوط مصنّعة تناسب الحجر والمعدن والخشب والتراب والسوائل
+
+@ Volume of synthesized player footsteps and landings
+ar مستوى صوت خطوات اللاعب وهبوطه المصنّعة
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+ar ثواني التلاشي السلس بين المقطوعات الموسيقية؛ 0 يبدّل فورًا
+
+@ Volume of map ambient loops such as wind, water and static world hums
+ar مستوى صوت أصوات البيئة المتكررة مثل الرياح والماء والطنين الثابت
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+ar مستوى صوت إطلاق الأسلحة وأصوات اللاعب والخطوات والمعدات الإضافية
+
+@ Volume of monster alerts, attacks, pain and death sounds
+ar مستوى صوت تنبيهات الوحوش وهجماتها وألمها وموتها
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+ar مستوى صوت الأبواب والمصاعد والمفاتيح والتقاط العناصر وتأثيرات العالم الأخرى
 
 # ==== ui.txt ====
 

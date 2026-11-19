@@ -3,7 +3,7 @@
 use super::*;
 
 const ALL_PAGES: &[Page] = &[
-    Page::Gameplay, Page::Controls, Page::Input, Page::Graphics, Page::Enhancements, Page::Audio, Page::HitSound,
+    Page::Gameplay, Page::Controls, Page::Input, Page::Graphics, Page::Enhancements, Page::Audio, Page::AudioMix, Page::HitSound,
     Page::KillSound, Page::Accessibility, Page::Hud, Page::Crosshair, Page::Mouse, Page::Controller, Page::Gyro,
     Page::Touch, Page::Autosave, Page::AutoAim, Page::GrenadeArc, Page::Water, Page::Bloom, Page::RtLights,
     Page::Debris, Page::Blood, Page::Impacts, Page::ScreenShader, Page::Customize, Page::NewGameCustomize,
@@ -30,6 +30,7 @@ pub(crate) fn menu_keys() -> Vec<&'static str> {
                 out.extend(choices.iter().map(|c| c.0));
             }
             Item::UserDataDir => out.push("User Data Directory"),
+            Item::Soundtrack => out.push("Soundtrack"),
             _ => {}
         }
         out.extend(tooltip(item));

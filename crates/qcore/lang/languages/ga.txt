@@ -1639,6 +1639,49 @@ ga Sábháil ar eochair a phiocadh suas
 @ User Data Directory
 ga Comhadlann Sonraí Úsáideora
 
+# Audio enhancements.
+@ Volume Mix
+ga Meascán Fuaime
+
+@ Soundtrack
+ga Fuaimrian
+
+@ Music Crossfade
+ga Traschéimniú Ceoil
+
+@ Underwater Muffling
+ga Maolú Faoi Uisce
+
+@ Environmental Reverb
+ga Macalla Timpeallachta
+
+@ Reverb Amount
+ga Neart an Mhacalla
+
+@ 3D Binaural Audio
+ga Fuaim Dhé-chluasach 3D
+
+@ Sound Occlusion
+ga Bac Fuaime
+
+@ Footsteps
+ga Coiscéimeanna
+
+@ Footstep Volume
+ga Toirt na gCoiscéimeanna
+
+@ Ambient
+ga Timpeallacht
+
+@ Weapons & Player
+ga Airm & Imreoir
+
+@ Monsters
+ga Arrachtaigh
+
+@ World & Pickups
+ga Domhan & Míreanna
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ ga Uathshábhálann nuair a phiocann tú eochair suas
 
 @ Where saves, configs, demos and downloaded map packs are stored
 ga An áit a stóráiltear sábhálacha, cumraíochtaí, taispeántais agus pacáistí léarscáileanna íoslódáilte
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+ga Pacáiste ceoil do leibhéil: Úsáideann Réamhshocrú an mod gníomhach, nó roghnaigh fuaimrian Quake eile nó fillteán i <user data>/music
+
+@ Muffles sound with a deep low-pass filter while underwater
+ga Maolaíonn fuaim le scagaire ísealpás domhain faoi uisce
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+ga Cuireann macalla seomra fíor-ama leis de réir mhéid agus ábhar an spáis máguaird
+
+@ How strongly environmental room reverb mixes into world sounds
+ga Cé chomh láidir is a mheascann macalla timpeallachta le fuaimeanna an domhain
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+ga Spású dé-chluasach 3D do chluasáin le moill chluaise, scáth cinn agus leideanna tosaigh/cúil/airde
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+ga Maolaíonn agus laghdaíonn fuaimeanna a thagann taobh thiar de bhallaí soladacha agus doirse dúnta
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ga Seinneann coiscéimeanna agus tuirlingtí sintéiseacha do chloch, miotal, adhmad, cré agus leachtanna
+
+@ Volume of synthesized player footsteps and landings
+ga Toirt choiscéimeanna agus tuirlingtí sintéiseacha an imreora
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+ga Soicind chun aistriú go réidh idir rianta ceoil; athraíonn 0 láithreach
+
+@ Volume of map ambient loops such as wind, water and static world hums
+ga Toirt fhuaimeanna timpeallachta an léarscáil amhail gaoth, uisce agus dordán
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+ga Toirt lámhaigh arm, guthanna imreora, coiscéimeanna agus trealaimh bhreise
+
+@ Volume of monster alerts, attacks, pain and death sounds
+ga Toirt foláireamh, ionsaithe, pian agus bás na n-arrachtach
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+ga Toirt doirse, ardaitheoirí, lasca, bailiú míreanna agus éifeachtaí eile an domhain
 
 # ==== ui.txt ====
 

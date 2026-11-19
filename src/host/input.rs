@@ -298,14 +298,40 @@ impl Host {
         // startup demos behind the menu don't count as a game
         let no_game = !self.server.active() && (self.cl.signon == 0 || self.demo.is_some());
         let on = self.server.core.cvars.value_of("menu_music") != 0.0;
-        let Some(snd) = &mut self.snd else { return };
+        if self.snd.is_none() {
+            return;
+        }
         if !self.menu_music && no_game && on && self.menu.screen == Screen::Main {
             self.menu_music = true;
-            snd.play_cd_track(2, true);
+            self.play_cd_track(2, true);
         } else if self.menu_music && !(no_game && on) {
             self.menu_music = false;
-            snd.stop_music();
+            self.audio_fx.soundtracks.clear_track();
+            if let Some(snd) = &self.snd {
+                snd.stop_music();
+            }
         }
+    }
+
+    /// Re-scan installed game dirs and `<user data>/music/` for soundtrack packs.
+    pub(super) fn refresh_soundtracks(&mut self) {
+        self.audio_fx.refresh_soundtracks(&self.server.core.fs);
+        self.menu.soundtracks = self.audio_fx.soundtracks.menu_entries();
+    }
+
+    /// Play CD track `track` via the selected soundtrack pack (`s_soundtrack`).
+    pub(super) fn play_cd_track(&mut self, track: u8, looping: bool) -> bool {
+        let st = self
+            .server
+            .core
+            .cvars
+            .by_name("s_soundtrack")
+            .map_or("", |c| c.string.as_str())
+            .to_owned();
+        let Some(snd) = &mut self.snd else { return false };
+        self.audio_fx
+            .soundtracks
+            .play_cd_track(track, looping, &st, &self.server.core.fs, snd)
     }
 
     pub(super) fn sync_menu_ui(&mut self) {

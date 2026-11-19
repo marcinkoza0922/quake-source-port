@@ -1639,6 +1639,49 @@ ja 鍵を拾った時にセーブ
 @ User Data Directory
 ja ユーザーデータフォルダ
 
+# Audio enhancements.
+@ Volume Mix
+ja 音量ミキサー
+
+@ Soundtrack
+ja サウンドトラック
+
+@ Music Crossfade
+ja 音楽クロスフェード
+
+@ Underwater Muffling
+ja 水中こもり効果
+
+@ Environmental Reverb
+ja 環境リバーブ
+
+@ Reverb Amount
+ja リバーブ強度
+
+@ 3D Binaural Audio
+ja 3Dバイノーラル音響
+
+@ Sound Occlusion
+ja サウンド遮蔽
+
+@ Footsteps
+ja 足音
+
+@ Footstep Volume
+ja 足音の音量
+
+@ Ambient
+ja 環境音
+
+@ Weapons & Player
+ja 武器とプレイヤー
+
+@ Monsters
+ja モンスター
+
+@ World & Pickups
+ja ワールドとアイテム
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2172,6 +2215,46 @@ ja 鍵を拾った時に自動でセーブします
 
 @ Where saves, configs, demos and downloaded map packs are stored
 ja セーブデータ、設定、デモ、ダウンロードしたマップパックの保存先
+
+# Audio enhancements.
+@ Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music
+ja レベル曲の音楽パック：デフォルトは現在のMODを使用。別のQuakeサウンドトラックや <user data>/music のフォルダも選べます
+
+@ Muffles sound with a deep low-pass filter while underwater
+ja 水中では深いローパスフィルターで音をこもらせます
+
+@ Adds real-time room reverb shaped by the size and materials of the surrounding space
+ja 周囲の空間の広さと材質に応じたリアルタイムのリバーブを追加します
+
+@ How strongly environmental room reverb mixes into world sounds
+ja 環境リバーブをワールド音に混ぜる強さ
+
+@ Binaural 3D spatialization for headphones with ear timing, head shadow and front/back/height cues
+ja ヘッドホン向けの3D立体音響（両耳時間差・頭部影・前後/上下の手がかり）
+
+@ Muffles and quiets sounds coming from behind solid walls and closed doors
+ja 壁や閉じた扉の向こう側の音をこもらせて小さくします
+
+@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ja 石・金属・木・土・液体の床に合わせた合成足音と着地音を鳴らします
+
+@ Volume of synthesized player footsteps and landings
+ja 合成されたプレイヤーの足音と着地音の音量
+
+@ Seconds to smoothly fade between music tracks; 0 cuts immediately
+ja 曲の切り替え時に滑らかにフェードする秒数（0で即切り替え）
+
+@ Volume of map ambient loops such as wind, water and static world hums
+ja 風・水・固定の環境音ループの音量
+
+@ Volume of weapon fire, player voices, footsteps and add-on gear
+ja 武器の発射音、プレイヤー音声、足音、アドオン装備の音量
+
+@ Volume of monster alerts, attacks, pain and death sounds
+ja モンスターの発見・攻撃・ダメージ・死亡音の音量
+
+@ Volume of doors, lifts, switches, item pickups and other world effects
+ja 扉、リフト、スイッチ、アイテム取得などワールド効果音の音量
 
 # ==== ui.txt ====
 
