@@ -2952,9 +2952,6 @@ el Τέλος του demo
 @ Export Video
 el Εξαγωγή βίντεο
 
-@ Fast forward
-el Γρήγορη κίνηση εμπρός
-
 @ Fast forward {}x
 el Εμπρός {}x
 
@@ -2979,9 +2976,6 @@ el Δεν υπάρχουν ακόμη αυτόματα demo. Κάθε πίστα
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 el Δεν υπάρχουν ακόμη αποθηκευμένα demo. Καταγράψτε ένα με την εντολή κονσόλας 'record <name>' ή κρατήστε ένα αυτόματο demo.
 
-@ Pause
-el Παύση
-
 @ Paused
 el Σε παύση
 
@@ -2994,41 +2988,20 @@ el Quake - εξαγωγή βίντεο {}%
 @ Recorded: {}
 el Εγγράφηκε: {}
 
-@ Rewind
-el Γύρισμα πίσω
-
 @ Rewind {}x
 el Πίσω {}x
 
 @ Size: {} KB
 el Μέγεθος: {} KB
 
-@ Skip 10 s
-el Παράλειψη 10 δ
-
-@ Back 10 s
-el Πίσω 10 δ
-
 @ Length
 el Διάρκεια
-
-@ Mark in
-el Σημείο αρχής
-
-@ Mark out
-el Σημείο τέλους
-
-@ Next level
-el Επόμενη πίστα
 
 @ No demos match the filter. Backspace or Esc clears it.
 el Κανένα demo δεν ταιριάζει στο φίλτρο. Το Backspace ή το Esc το καθαρίζει.
 
 @ Renaming an automatic demo moves it to the saved demos.
 el Η μετονομασία ενός αυτόματου demo το μεταφέρει στα αποθηκευμένα.
-
-@ Restart
-el Από την αρχή
 
 @ Sort
 el Ταξινόμηση
@@ -3038,9 +3011,6 @@ el Κατά την αναπαραγωγή demo: το A κάνει παύση, τ
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 el Διάστημα παύση | Αριστερά/Δεξιά κύλιση | Πάνω/Κάτω ταχύτητα | PgUp/PgDn 10 δ | I/O σημάδι | E εξαγωγή
-
-@ Speed
-el Ταχύτητα
 
 @ Switch List
 el Αλλαγή λίστας

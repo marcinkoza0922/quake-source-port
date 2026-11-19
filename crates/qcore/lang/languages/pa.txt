@@ -2952,9 +2952,6 @@ pa ਡੈਮੋ ਦਾ ਅੰਤ
 @ Export Video
 pa ਵੀਡੀਓ ਨਿਰਯਾਤ ਕਰੋ
 
-@ Fast forward
-pa ਤੇਜ਼ ਅੱਗੇ
-
 @ Fast forward {}x
 pa ਅੱਗੇ {}x
 
@@ -2979,9 +2976,6 @@ pa ਅਜੇ ਕੋਈ ਆਪਣੇ-ਆਪ ਡੈਮੋ ਨਹੀਂ। ਤੁ�
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 pa ਅਜੇ ਕੋਈ ਸੰਭਾਲਿਆ ਡੈਮੋ ਨਹੀਂ। ਕੰਸੋਲ ਕਮਾਂਡ 'record <name>' ਨਾਲ ਇੱਕ ਰਿਕਾਰਡ ਕਰੋ, ਜਾਂ ਕੋਈ ਆਪਣੇ-ਆਪ ਡੈਮੋ ਰੱਖੋ।
 
-@ Pause
-pa ਰੋਕੋ
-
 @ Paused
 pa ਰੁਕਿਆ ਹੋਇਆ
 
@@ -2994,41 +2988,20 @@ pa Quake - ਵੀਡੀਓ ਨਿਰਯਾਤ ਹੋ ਰਹੀ ਹੈ {}%
 @ Recorded: {}
 pa ਰਿਕਾਰਡ ਹੋਇਆ: {}
 
-@ Rewind
-pa ਪਿੱਛੇ ਲਿਜਾਓ
-
 @ Rewind {}x
 pa ਪਿੱਛੇ {}x
 
 @ Size: {} KB
 pa ਆਕਾਰ: {} KB
 
-@ Skip 10 s
-pa 10 ਸਕਿੰ. ਛੱਡੋ
-
-@ Back 10 s
-pa 10 ਸਕਿੰ. ਪਿੱਛੇ
-
 @ Length
 pa ਲੰਬਾਈ
-
-@ Mark in
-pa ਸ਼ੁਰੂਆਤ ਨਿਸ਼ਾਨਬੱਧ ਕਰੋ
-
-@ Mark out
-pa ਅੰਤ ਨਿਸ਼ਾਨਬੱਧ ਕਰੋ
-
-@ Next level
-pa ਅਗਲਾ ਲੈਵਲ
 
 @ No demos match the filter. Backspace or Esc clears it.
 pa ਫਿਲਟਰ ਨਾਲ ਕੋਈ ਡੈਮੋ ਮੇਲ ਨਹੀਂ ਖਾਂਦਾ। Backspace ਜਾਂ Esc ਇਸਨੂੰ ਸਾਫ਼ ਕਰਦਾ ਹੈ।
 
 @ Renaming an automatic demo moves it to the saved demos.
 pa ਆਪਣੇ-ਆਪ ਬਣੇ ਡੈਮੋ ਦਾ ਨਾਮ ਬਦਲਣ ਨਾਲ ਉਹ ਸੰਭਾਲੇ ਡੈਮੋ ਵਿੱਚ ਚਲਾ ਜਾਂਦਾ ਹੈ।
-
-@ Restart
-pa ਸ਼ੁਰੂ ਤੋਂ
 
 @ Sort
 pa ਕ੍ਰਮ
@@ -3038,9 +3011,6 @@ pa ਡੈਮੋ ਚੱਲਦੇ ਸਮੇਂ: A ਰੋਕਦਾ ਹੈ, ਡੀ-�
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 pa Space ਰੋਕੋ | ਖੱਬੇ/ਸੱਜੇ ਸਰਕਾਓ | ਉੱਪਰ/ਹੇਠਾਂ ਗਤੀ | PgUp/PgDn 10 ਸਕਿੰ. | I/O ਨਿਸ਼ਾਨ | E ਨਿਰਯਾਤ
-
-@ Speed
-pa ਗਤੀ
 
 @ Switch List
 pa ਸੂਚੀ ਬਦਲੋ

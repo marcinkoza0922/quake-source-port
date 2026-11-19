@@ -2952,9 +2952,6 @@ gu ડેમોનો અંત
 @ Export Video
 gu વીડિયો નિકાસ કરો
 
-@ Fast forward
-gu ઝડપથી આગળ
-
 @ Fast forward {}x
 gu આગળ {}x
 
@@ -2979,9 +2976,6 @@ gu હજી કોઈ આપમેળે ડેમો નથી. તમે ર�
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 gu હજી કોઈ સાચવેલો ડેમો નથી. કન્સોલ આદેશ 'record <name>' થી એક રેકોર્ડ કરો, અથવા કોઈ આપમેળે ડેમો રાખો.
 
-@ Pause
-gu થોભો
-
 @ Paused
 gu થોભાવેલું
 
@@ -2994,41 +2988,20 @@ gu Quake - વીડિયો નિકાસ થઈ રહ્યો છે {}%
 @ Recorded: {}
 gu રેકોર્ડ થયો: {}
 
-@ Rewind
-gu પાછળ લઈ જાઓ
-
 @ Rewind {}x
 gu પાછળ {}x
 
 @ Size: {} KB
 gu કદ: {} KB
 
-@ Skip 10 s
-gu 10 સે. છોડો
-
-@ Back 10 s
-gu 10 સે. પાછળ
-
 @ Length
 gu લંબાઈ
-
-@ Mark in
-gu શરૂઆત ચિહ્નિત કરો
-
-@ Mark out
-gu અંત ચિહ્નિત કરો
-
-@ Next level
-gu આગલું લેવલ
 
 @ No demos match the filter. Backspace or Esc clears it.
 gu ફિલ્ટર સાથે કોઈ ડેમો મેળ ખાતો નથી. Backspace અથવા Esc તેને સાફ કરે છે.
 
 @ Renaming an automatic demo moves it to the saved demos.
 gu સ્વચાલિત ડેમોનું નામ બદલવાથી તે સાચવેલા ડેમોમાં જાય છે.
-
-@ Restart
-gu શરૂઆતથી
 
 @ Sort
 gu ક્રમ
@@ -3038,9 +3011,6 @@ gu ડેમો ચાલતો હોય ત્યારે: A થોભાવ�
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 gu Space થોભો | ડાબે/જમણે ખસેડો | ઉપર/નીચે ઝડપ | PgUp/PgDn 10 સે. | I/O નિશાન | E નિકાસ
-
-@ Speed
-gu ઝડપ
 
 @ Switch List
 gu યાદી બદલો

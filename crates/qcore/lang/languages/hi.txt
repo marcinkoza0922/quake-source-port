@@ -2952,9 +2952,6 @@ hi डेमो का अंत
 @ Export Video
 hi वीडियो निर्यात करें
 
-@ Fast forward
-hi तेज़ आगे
-
 @ Fast forward {}x
 hi आगे {}x
 
@@ -2979,9 +2976,6 @@ hi अभी कोई अपने-आप डेमो नहीं। आप�
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 hi अभी कोई सहेजा डेमो नहीं। कंसोल कमांड 'record <name>' से एक रिकॉर्ड करें, या कोई अपने-आप डेमो रखें।
 
-@ Pause
-hi रोकें
-
 @ Paused
 hi रुका हुआ
 
@@ -2994,41 +2988,20 @@ hi Quake - वीडियो निर्यात हो रहा है {}%
 @ Recorded: {}
 hi रिकॉर्ड हुआ: {}
 
-@ Rewind
-hi पीछे करें
-
 @ Rewind {}x
 hi पीछे {}x
 
 @ Size: {} KB
 hi आकार: {} KB
 
-@ Skip 10 s
-hi 10 से. छोड़ें
-
-@ Back 10 s
-hi 10 से. पीछे
-
 @ Length
 hi अवधि
-
-@ Mark in
-hi शुरुआत चिह्नित करें
-
-@ Mark out
-hi अंत चिह्नित करें
-
-@ Next level
-hi अगला लेवल
 
 @ No demos match the filter. Backspace or Esc clears it.
 hi फ़िल्टर से कोई डेमो मेल नहीं खाता। Backspace या Esc उसे साफ़ करता है।
 
 @ Renaming an automatic demo moves it to the saved demos.
 hi स्वचालित डेमो का नाम बदलने से वह सहेजे गए डेमो में चला जाता है।
-
-@ Restart
-hi शुरू से
 
 @ Sort
 hi क्रम
@@ -3038,9 +3011,6 @@ hi डेमो चलते समय: A रोकता है, डी-पै�
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 hi Space रोकें | बाएँ/दाएँ खिसकाएँ | ऊपर/नीचे गति | PgUp/PgDn 10 से. | I/O निशान | E निर्यात
-
-@ Speed
-hi गति
 
 @ Switch List
 hi सूची बदलें

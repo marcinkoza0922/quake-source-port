@@ -77,7 +77,7 @@ fn seeking_back_matches_straight_playback() {
     // the mouse: a drag across the timeline marks that segment, a click
     // seeks, the play/pause button toggles
     let size = (h.r.size().0 as f32, h.r.size().1 as f32);
-    let l = super::super::demo_bar::layout(size.0, size.1, false);
+    let l = super::super::demo_bar::layout(size.0, size.1, false, false);
     let ty = l.hit.1 + l.hit.3 / 2.0;
     let at = |f: f32| l.track.0 + l.track.2 * f;
     h.demo_pointer_move((at(0.25), ty), size);

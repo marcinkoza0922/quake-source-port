@@ -2952,9 +2952,6 @@ vi Hết demo
 @ Export Video
 vi Xuất video
 
-@ Fast forward
-vi Tua nhanh
-
 @ Fast forward {}x
 vi Tua nhanh {}x
 
@@ -2979,9 +2976,6 @@ vi Chưa có demo tự động. Mọi màn bạn chơi sẽ được ghi ở đ�
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 vi Chưa có demo đã lưu. Hãy ghi bằng lệnh console 'record <name>', hoặc giữ một demo tự động.
 
-@ Pause
-vi Tạm dừng
-
 @ Paused
 vi Đã tạm dừng
 
@@ -2994,41 +2988,20 @@ vi Quake - đang xuất video {}%
 @ Recorded: {}
 vi Ghi lúc: {}
 
-@ Rewind
-vi Tua lại
-
 @ Rewind {}x
 vi Tua lại {}x
 
 @ Size: {} KB
 vi Kích thước: {} KB
 
-@ Skip 10 s
-vi Bỏ qua 10 giây
-
-@ Back 10 s
-vi Lùi 10 giây
-
 @ Length
 vi Độ dài
-
-@ Mark in
-vi Đánh dấu đầu
-
-@ Mark out
-vi Đánh dấu cuối
-
-@ Next level
-vi Màn tiếp theo
 
 @ No demos match the filter. Backspace or Esc clears it.
 vi Không có demo nào khớp bộ lọc. Backspace hoặc Esc sẽ xóa nó.
 
 @ Renaming an automatic demo moves it to the saved demos.
 vi Đổi tên demo tự động sẽ chuyển nó sang các demo đã lưu.
-
-@ Restart
-vi Từ đầu
 
 @ Sort
 vi Sắp xếp
@@ -3038,9 +3011,6 @@ vi Khi đang phát demo: A tạm dừng, d-pad tua và đổi tốc độ, LT v�
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 vi Space tạm dừng | Trái/Phải tua | Lên/Xuống tốc độ | PgUp/PgDn 10 giây | I/O đánh dấu | E xuất
-
-@ Speed
-vi Tốc độ
 
 @ Switch List
 vi Đổi danh sách

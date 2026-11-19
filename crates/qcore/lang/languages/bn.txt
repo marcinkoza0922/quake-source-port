@@ -2952,9 +2952,6 @@ bn ডেমোর শেষ
 @ Export Video
 bn ভিডিও রপ্তানি
 
-@ Fast forward
-bn দ্রুত সামনে
-
 @ Fast forward {}x
 bn সামনে {}x
 
@@ -2979,9 +2976,6 @@ bn এখনও কোনো স্বয়ংক্রিয় ডেমো �
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 bn এখনও কোনো সংরক্ষিত ডেমো নেই। কনসোল কমান্ড 'record <name>' দিয়ে একটি রেকর্ড করুন, অথবা একটি স্বয়ংক্রিয় ডেমো রাখুন।
 
-@ Pause
-bn বিরতি
-
 @ Paused
 bn বিরতিতে
 
@@ -2994,41 +2988,20 @@ bn Quake - ভিডিও রপ্তানি হচ্ছে {}%
 @ Recorded: {}
 bn রেকর্ড হয়েছে: {}
 
-@ Rewind
-bn পিছিয়ে নিন
-
 @ Rewind {}x
 bn পিছনে {}x
 
 @ Size: {} KB
 bn আকার: {} KB
 
-@ Skip 10 s
-bn 10 সে. এড়িয়ে যান
-
-@ Back 10 s
-bn 10 সে. পিছনে
-
 @ Length
 bn দৈর্ঘ্য
-
-@ Mark in
-bn শুরু চিহ্নিত করুন
-
-@ Mark out
-bn শেষ চিহ্নিত করুন
-
-@ Next level
-bn পরের লেভেল
 
 @ No demos match the filter. Backspace or Esc clears it.
 bn ফিল্টারের সাথে কোনো ডেমো মেলে না। Backspace বা Esc এটি মুছে দেয়।
 
 @ Renaming an automatic demo moves it to the saved demos.
 bn স্বয়ংক্রিয় ডেমোর নাম বদলালে সেটি সংরক্ষিত ডেমোতে চলে যায়।
-
-@ Restart
-bn শুরু থেকে
 
 @ Sort
 bn সাজান
@@ -3038,9 +3011,6 @@ bn ডেমো চলার সময়: A বিরতি দেয়, ড�
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 bn Space বিরতি | বাঁ/ডান সরান | উপর/নিচ গতি | PgUp/PgDn 10 সে. | I/O চিহ্ন | E রপ্তানি
-
-@ Speed
-bn গতি
 
 @ Switch List
 bn তালিকা বদলান

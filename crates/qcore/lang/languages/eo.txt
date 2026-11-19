@@ -2952,9 +2952,6 @@ eo Fino de la demonstraĵo
 @ Export Video
 eo Eksporti videon
 
-@ Fast forward
-eo Rapide antaŭen
-
 @ Fast forward {}x
 eo Antaŭen {}x
 
@@ -2979,9 +2976,6 @@ eo Ankoraŭ neniuj aŭtomataj demonstraĵoj. Ĉiu nivelo, kiun vi ludas, registr
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 eo Ankoraŭ neniuj konservitaj demonstraĵoj. Registru unu per la konzola komando 'record <name>', aŭ konservu aŭtomatan demonstraĵon.
 
-@ Pause
-eo Paŭzo
-
 @ Paused
 eo Paŭzita
 
@@ -2994,41 +2988,20 @@ eo Quake - eksportante videon {}%
 @ Recorded: {}
 eo Registrita: {}
 
-@ Rewind
-eo Rebobeni
-
 @ Rewind {}x
 eo Malantaŭen {}x
 
 @ Size: {} KB
 eo Grando: {} KB
 
-@ Skip 10 s
-eo Salti 10 s
-
-@ Back 10 s
-eo Malantaŭen 10 s
-
 @ Length
 eo Daŭro
-
-@ Mark in
-eo Marki komencon
-
-@ Mark out
-eo Marki finon
-
-@ Next level
-eo Sekva nivelo
 
 @ No demos match the filter. Backspace or Esc clears it.
 eo Neniu demonstraĵo kongruas kun la filtrilo. Retropaŝo aŭ Esc forigas ĝin.
 
 @ Renaming an automatic demo moves it to the saved demos.
 eo Alinomi aŭtomatan demonstraĵon movas ĝin al la konservitaj.
-
-@ Restart
-eo De la komenco
 
 @ Sort
 eo Ordigi
@@ -3038,9 +3011,6 @@ eo Dum demonstraĵo: A paŭzigas, la direktokruco rulumas kaj ŝanĝas la rapido
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 eo Spaco paŭzo | Maldekstren/Dekstren rulumi | Supren/Malsupren rapido | PgUp/PgDn 10 s | I/O marko | E eksporti
-
-@ Speed
-eo Rapido
 
 @ Switch List
 eo Ŝanĝi liston

@@ -2952,9 +2952,6 @@ km ចប់​ដេមូ
 @ Export Video
 km នាំចេញ​ជា​វីដេអូ
 
-@ Fast forward
-km ខា​ទៅ​មុខ
-
 @ Fast forward {}x
 km ទៅ​មុខ {}x
 
@@ -2979,9 +2976,6 @@ km មិន​ទាន់​មាន​ដេមូ​ស្វ័យប្�
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 km មិន​ទាន់​មាន​ដេមូ​ដែល​បាន​រក្សាទុក​ទេ។ ថត​មួយ​ដោយ​ពាក្យបញ្ជា​កុងសូល 'record <name>' ឬ​រក្សា​ដេមូ​ស្វ័យប្រវត្តិ​មួយ។
 
-@ Pause
-km ផ្អាក
-
 @ Paused
 km បាន​ផ្អាក
 
@@ -2994,41 +2988,20 @@ km Quake - កំពុង​នាំចេញ​វីដេអូ {}%
 @ Recorded: {}
 km បាន​ថត៖ {}
 
-@ Rewind
-km ខា​ថយក្រោយ
-
 @ Rewind {}x
 km ថយក្រោយ {}x
 
 @ Size: {} KB
 km ទំហំ៖ {} KB
 
-@ Skip 10 s
-km រំលង 10 វិ
-
-@ Back 10 s
-km ថយ​ក្រោយ 10 វិ
-
 @ Length
 km រយៈពេល
-
-@ Mark in
-km សម្គាល់​ចំណុច​ចាប់ផ្តើម
-
-@ Mark out
-km សម្គាល់​ចំណុច​បញ្ចប់
-
-@ Next level
-km កម្រិត​បន្ទាប់
 
 @ No demos match the filter. Backspace or Esc clears it.
 km គ្មាន​ដេមូ​ណា​ត្រូវ​នឹង​តម្រង​ទេ។ Backspace ឬ Esc សម្អាត​វា។
 
 @ Renaming an automatic demo moves it to the saved demos.
 km ការ​ប្តូរ​ឈ្មោះ​ដេមូ​ស្វ័យ​ប្រវត្តិ​នឹង​ផ្លាស់​វា​ទៅ​ដេមូ​ដែល​បាន​រក្សា​ទុក។
-
-@ Restart
-km ចាប់ផ្តើម​ឡើង​វិញ
 
 @ Sort
 km តម្រៀប
@@ -3038,9 +3011,6 @@ km ពេល​ចាក់​ដេមូ៖ A ផ្អាក ប៊ូតុ�
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 km Space ផ្អាក | ឆ្វេង/ស្តាំ ខា | ឡើង/ចុះ ល្បឿន | PgUp/PgDn 10 វិ | I/O សញ្ញា | E នាំចេញ
-
-@ Speed
-km ល្បឿន
 
 @ Switch List
 km ប្តូរ​បញ្ជី

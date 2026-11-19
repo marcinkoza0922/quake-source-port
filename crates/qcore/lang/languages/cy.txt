@@ -2952,9 +2952,6 @@ cy Diwedd y demo
 @ Export Video
 cy Allforio fideo
 
-@ Fast forward
-cy Cyflym ymlaen
-
 @ Fast forward {}x
 cy Ymlaen {}x
 
@@ -2979,9 +2976,6 @@ cy Dim demos awtomatig eto. Mae pob lefel rydych yn ei chwarae yn cael ei record
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 cy Dim demos wedi'u cadw eto. Recordiwch un gyda'r gorchymyn consol 'record <name>', neu cadwch demo awtomatig.
 
-@ Pause
-cy Saib
-
 @ Paused
 cy Wedi oedi
 
@@ -2994,41 +2988,20 @@ cy Quake - yn allforio fideo {}%
 @ Recorded: {}
 cy Recordiwyd: {}
 
-@ Rewind
-cy Weindio'n ôl
-
 @ Rewind {}x
 cy Yn ôl {}x
 
 @ Size: {} KB
 cy Maint: {} KB
 
-@ Skip 10 s
-cy Neidio 10 e
-
-@ Back 10 s
-cy Yn ôl 10 e
-
 @ Length
 cy Hyd
-
-@ Mark in
-cy Marcio'r dechrau
-
-@ Mark out
-cy Marcio'r diwedd
-
-@ Next level
-cy Y lefel nesaf
 
 @ No demos match the filter. Backspace or Esc clears it.
 cy Does dim demo'n cyfateb i'r hidlydd. Mae Backspace neu Esc yn ei glirio.
 
 @ Renaming an automatic demo moves it to the saved demos.
 cy Mae ailenwi demo awtomatig yn ei symud i'r demos a gadwyd.
-
-@ Restart
-cy O'r dechrau
 
 @ Sort
 cy Trefnu
@@ -3038,9 +3011,6 @@ cy Wrth i demo chwarae: mae A yn oedi, mae'r pad cyfeiriad yn sgrolio ac yn newi
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 cy Bwlch saib | Chwith/De sgrolio | I fyny/I lawr cyflymder | PgUp/PgDn 10 e | I/O marc | E allforio
-
-@ Speed
-cy Cyflymder
 
 @ Switch List
 cy Newid rhestr

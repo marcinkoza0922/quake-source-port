@@ -2952,9 +2952,6 @@ ca Final de la demo
 @ Export Video
 ca Exporta en vídeo
 
-@ Fast forward
-ca Avançament ràpid
-
 @ Fast forward {}x
 ca Endavant {}x
 
@@ -2979,9 +2976,6 @@ ca Encara no hi ha demos automàtiques. Cada nivell que jugues es grava aquí.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 ca Encara no hi ha demos desades. Grava'n una amb l'ordre de consola 'record <name>' o guarda una demo automàtica.
 
-@ Pause
-ca Pausa
-
 @ Paused
 ca En pausa
 
@@ -2994,41 +2988,20 @@ ca Quake - s'està exportant el vídeo {} %
 @ Recorded: {}
 ca Gravada: {}
 
-@ Rewind
-ca Rebobina
-
 @ Rewind {}x
 ca Enrere {}x
 
 @ Size: {} KB
 ca Mida: {} KB
 
-@ Skip 10 s
-ca Salta 10 s
-
-@ Back 10 s
-ca Enrere 10 s
-
 @ Length
 ca Durada
-
-@ Mark in
-ca Marca l'inici
-
-@ Mark out
-ca Marca el final
-
-@ Next level
-ca Nivell següent
 
 @ No demos match the filter. Backspace or Esc clears it.
 ca Cap demo coincideix amb el filtre. Retrocés o Esc l'esborra.
 
 @ Renaming an automatic demo moves it to the saved demos.
 ca Canviar el nom d'una demo automàtica la mou a les demos desades.
-
-@ Restart
-ca Des del principi
 
 @ Sort
 ca Ordena
@@ -3038,9 +3011,6 @@ ca Durant una demo: A fa pausa, la creueta es desplaça i canvia la velocitat, L
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ca Espai pausa | Esq./Dreta desplaça | Amunt/Avall velocitat | RePàg/AvPàg 10 s | I/O marca | E exporta
-
-@ Speed
-ca Velocitat
 
 @ Switch List
 ca Canvia de llista

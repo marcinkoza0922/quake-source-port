@@ -2952,9 +2952,6 @@ uk Кінець демо
 @ Export Video
 uk Експорт відео
 
-@ Fast forward
-uk Перемотування вперед
-
 @ Fast forward {}x
 uk Вперед {}x
 
@@ -2979,9 +2976,6 @@ uk Автоматичних демо ще немає. Тут записуєть�
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 uk Збережених демо ще немає. Запишіть демо консольною командою 'record <name>' або збережіть автоматичне.
 
-@ Pause
-uk Пауза
-
 @ Paused
 uk Пауза
 
@@ -2994,41 +2988,20 @@ uk Quake - експорт відео {}%
 @ Recorded: {}
 uk Записано: {}
 
-@ Rewind
-uk Перемотування назад
-
 @ Rewind {}x
 uk Назад {}x
 
 @ Size: {} KB
 uk Розмір: {} КБ
 
-@ Skip 10 s
-uk Пропустити 10 с
-
-@ Back 10 s
-uk Назад 10 с
-
 @ Length
 uk Тривалість
-
-@ Mark in
-uk Початок фрагмента
-
-@ Mark out
-uk Кінець фрагмента
-
-@ Next level
-uk Наступний рівень
 
 @ No demos match the filter. Backspace or Esc clears it.
 uk Жодне демо не відповідає фільтру. Backspace або Esc очищає його.
 
 @ Renaming an automatic demo moves it to the saved demos.
 uk Перейменоване автоматичне демо переноситься до збережених.
-
-@ Restart
-uk Спочатку
 
 @ Sort
 uk Сортувати
@@ -3038,9 +3011,6 @@ uk Під час демо: A ставить паузу, хрестовина п�
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 uk Пробіл пауза | Ліворуч/Праворуч перемотування | Вгору/Вниз швидкість | PgUp/PgDn 10 с | I/O мітка | E експорт
-
-@ Speed
-uk Швидкість
 
 @ Switch List
 uk Змінити список

@@ -2952,9 +2952,6 @@ fi Demon loppu
 @ Export Video
 fi Vie videoksi
 
-@ Fast forward
-fi Pikakelaus eteen
-
 @ Fast forward {}x
 fi Eteen {}x
 
@@ -2979,9 +2976,6 @@ fi Ei vielä automaattisia demoja. Jokainen pelaamasi taso tallennetaan tänne.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 fi Ei vielä tallennettuja demoja. Tallenna sellainen konsolikomennolla 'record <name>' tai säilytä automaattinen demo.
 
-@ Pause
-fi Tauko
-
 @ Paused
 fi Tauolla
 
@@ -2994,41 +2988,20 @@ fi Quake - viedään videota {} %
 @ Recorded: {}
 fi Tallennettu: {}
 
-@ Rewind
-fi Kelaa taakse
-
 @ Rewind {}x
 fi Taakse {}x
 
 @ Size: {} KB
 fi Koko: {} kt
 
-@ Skip 10 s
-fi Ohita 10 s
-
-@ Back 10 s
-fi Taaksepäin 10 s
-
 @ Length
 fi Kesto
-
-@ Mark in
-fi Merkitse alku
-
-@ Mark out
-fi Merkitse loppu
-
-@ Next level
-fi Seuraava taso
 
 @ No demos match the filter. Backspace or Esc clears it.
 fi Mikään demo ei vastaa suodatinta. Askelpalautin tai Esc tyhjentää sen.
 
 @ Renaming an automatic demo moves it to the saved demos.
 fi Automaattisen demon uudelleennimeäminen siirtää sen tallennettuihin demoihin.
-
-@ Restart
-fi Alusta
 
 @ Sort
 fi Lajittele
@@ -3038,9 +3011,6 @@ fi Demon aikana: A pysäyttää, ristiohjain kelaa ja muuttaa nopeutta, LT ja RT
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 fi Välilyönti tauko | Vasen/Oikea kelaus | Ylös/Alas nopeus | PgUp/PgDn 10 s | I/O merkki | E vie
-
-@ Speed
-fi Nopeus
 
 @ Switch List
 fi Vaihda luetteloa

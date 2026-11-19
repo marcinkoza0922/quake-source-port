@@ -2952,9 +2952,6 @@ te డెమో ముగింపు
 @ Export Video
 te వీడియోగా ఎగుమతి
 
-@ Fast forward
-te వేగంగా ముందుకు
-
 @ Fast forward {}x
 te ముందుకు {}x
 
@@ -2979,9 +2976,6 @@ te ఇంకా స్వయంచాలక డెమోలు లేవు. మ
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 te ఇంకా సేవ్ చేసిన డెమోలు లేవు. 'record <name>' కన్సోల్ ఆదేశంతో ఒకటి రికార్డ్ చేయండి, లేదా ఒక స్వయంచాలక డెమోను ఉంచండి.
 
-@ Pause
-te పాజ్
-
 @ Paused
 te పాజ్ చేయబడింది
 
@@ -2994,41 +2988,20 @@ te Quake - వీడియో ఎగుమతి అవుతోంది {}%
 @ Recorded: {}
 te రికార్డ్ అయినది: {}
 
-@ Rewind
-te వెనక్కి తిప్పు
-
 @ Rewind {}x
 te వెనక్కి {}x
 
 @ Size: {} KB
 te పరిమాణం: {} KB
 
-@ Skip 10 s
-te 10 సె. దాటవేయి
-
-@ Back 10 s
-te 10 సె. వెనక్కి
-
 @ Length
 te నిడివి
-
-@ Mark in
-te ప్రారంభాన్ని గుర్తించు
-
-@ Mark out
-te ముగింపును గుర్తించు
-
-@ Next level
-te తదుపరి స్థాయి
 
 @ No demos match the filter. Backspace or Esc clears it.
 te ఫిల్టర్‌కు ఏ డెమో సరిపోలలేదు. Backspace లేదా Esc దాన్ని తొలగిస్తుంది.
 
 @ Renaming an automatic demo moves it to the saved demos.
 te స్వయంచాలక డెమో పేరు మారిస్తే అది సేవ్ చేసిన డెమోలకు వెళ్తుంది.
-
-@ Restart
-te మొదటి నుంచి
 
 @ Sort
 te క్రమం
@@ -3038,9 +3011,6 @@ te డెమో ప్లే అవుతున్నప్పుడు: A ప�
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 te Space పాజ్ | ఎడమ/కుడి జరుపు | పైకి/కిందికి వేగం | PgUp/PgDn 10 సె. | I/O గుర్తు | E ఎగుమతి
-
-@ Speed
-te వేగం
 
 @ Switch List
 te జాబితా మార్చు

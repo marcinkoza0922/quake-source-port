@@ -2952,9 +2952,6 @@ sk Koniec dema
 @ Export Video
 sk Exportovať video
 
-@ Fast forward
-sk Rýchlo vpred
-
 @ Fast forward {}x
 sk Vpred {}x
 
@@ -2979,9 +2976,6 @@ sk Zatiaľ žiadne automatické demá. Každý odohraný level sa nahráva sem.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 sk Zatiaľ žiadne uložené demá. Nahrajte jedno príkazom konzoly 'record <name>' alebo si ponechajte automatické demo.
 
-@ Pause
-sk Pauza
-
 @ Paused
 sk Pozastavené
 
@@ -2994,41 +2988,20 @@ sk Quake - export videa {} %
 @ Recorded: {}
 sk Nahrané: {}
 
-@ Rewind
-sk Pretočiť späť
-
 @ Rewind {}x
 sk Späť {}x
 
 @ Size: {} KB
 sk Veľkosť: {} KB
 
-@ Skip 10 s
-sk Preskočiť 10 s
-
-@ Back 10 s
-sk Späť 10 s
-
 @ Length
 sk Dĺžka
-
-@ Mark in
-sk Začiatok klipu
-
-@ Mark out
-sk Koniec klipu
-
-@ Next level
-sk Ďalšia úroveň
 
 @ No demos match the filter. Backspace or Esc clears it.
 sk Filtru nezodpovedá žiadne demo. Backspace alebo Esc ho vymaže.
 
 @ Renaming an automatic demo moves it to the saved demos.
 sk Premenovaním sa automatické demo presunie medzi uložené demá.
-
-@ Restart
-sk Od začiatku
 
 @ Sort
 sk Zoradiť
@@ -3038,9 +3011,6 @@ sk Počas dema: A pozastaví, smerový ovládač posúva a mení rýchlosť, LT 
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sk Medzerník pauza | Vľavo/Vpravo posun | Hore/Dole rýchlosť | PgUp/PgDn 10 s | I/O značka | E export
-
-@ Speed
-sk Rýchlosť
 
 @ Switch List
 sk Prepnúť zoznam

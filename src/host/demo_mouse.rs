@@ -57,7 +57,7 @@ impl Host {
     fn track_time(&self, x: f32) -> Option<f64> {
         let d = self.demo.as_ref()?;
         let len = d.play.duration()?;
-        let l = layout(self.demo_ui.size.0, self.demo_ui.size.1, d.play.auto);
+        let l = layout(self.demo_ui.size.0, self.demo_ui.size.1, d.play.auto, self.pad_ui());
         Some(((x - l.track.0) / l.track.2).clamp(0.0, 1.0) as f64 * len)
     }
 
@@ -100,7 +100,7 @@ impl Host {
             self.toggle_demo_bar();
             return;
         }
-        let l = layout(self.demo_ui.size.0, self.demo_ui.size.1, d.play.auto);
+        let l = layout(self.demo_ui.size.0, self.demo_ui.size.1, d.play.auto, self.pad_ui());
         if self.demo_bar_visible() && inside(l.hit, pos) {
             self.demo_ui.drag = self.track_time(pos.0);
             self.demo_ui.drag_to = self.demo_ui.drag;

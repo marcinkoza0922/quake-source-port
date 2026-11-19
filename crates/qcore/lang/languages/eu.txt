@@ -2952,9 +2952,6 @@ eu Demoaren amaiera
 @ Export Video
 eu Esportatu bideoa
 
-@ Fast forward
-eu Aurrera azkar
-
 @ Fast forward {}x
 eu Aurrera {}x
 
@@ -2979,9 +2976,6 @@ eu Oraindik ez dago demo automatikorik. Jokatzen duzun maila bakoitza hemen grab
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 eu Oraindik ez dago gordetako demorik. Grabatu bat 'record <name>' kontsola-komandoarekin, edo gorde demo automatiko bat.
 
-@ Pause
-eu Pausa
-
 @ Paused
 eu Pausatuta
 
@@ -2994,41 +2988,20 @@ eu Quake - bideoa esportatzen %{}
 @ Recorded: {}
 eu Grabatua: {}
 
-@ Rewind
-eu Atzera eraman
-
 @ Rewind {}x
 eu Atzera {}x
 
 @ Size: {} KB
 eu Tamaina: {} KB
 
-@ Skip 10 s
-eu Saltatu 10 s
-
-@ Back 10 s
-eu Atzera 10 s
-
 @ Length
 eu Iraupena
-
-@ Mark in
-eu Markatu hasiera
-
-@ Mark out
-eu Markatu amaiera
-
-@ Next level
-eu Hurrengo maila
 
 @ No demos match the filter. Backspace or Esc clears it.
 eu Ez dago iragazkiarekin bat datorren demorik. Backspace edo Esc garbitzen du.
 
 @ Renaming an automatic demo moves it to the saved demos.
 eu Demo automatiko baten izena aldatzean gordetako demoetara eramaten da.
-
-@ Restart
-eu Hasieratik
 
 @ Sort
 eu Ordenatu
@@ -3038,9 +3011,6 @@ eu Demo bat erreproduzitzen den bitartean: A-k pausatzen du, d-pad-ak mugitu eta
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 eu Zuriunea pausa | Ezker/Eskuin mugitu | Gora/Behera abiadura | PgUp/PgDn 10 s | I/O marka | E esportatu
-
-@ Speed
-eu Abiadura
 
 @ Switch List
 eu Aldatu zerrenda

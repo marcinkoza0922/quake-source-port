@@ -85,7 +85,19 @@ impl Host {
         let r = cancel_rect(vw, vh);
         let hover = self.demo_ui.pos.is_some_and(|p| demo_bar::inside(r, p));
         c.round_box(r.0, r.1, r.2, r.3, 3.0, if hover { HILITE } else { [1.0, 1.0, 1.0, 0.1] }, Some(BORDER));
-        c.text_center(r.0 + r.2 / 2.0, r.1 + 3.0, "Cancel", TXT, GOLD_FG);
+        let label = qcore::t!("Cancel");
+        if self.pad_ui() {
+            let glyphs = self.glyphs();
+            let key = qinput::keys::K_ABUTTON;
+            let gw = crate::glyphs::width(&c, key, glyphs.family, crate::glyphs::H);
+            let tw = c.text_w(label, TXT);
+            let gap = 3.0;
+            let x = (r.0 + (r.2 - (gw + gap + tw)) / 2.0).max(r.0 + 4.0).floor();
+            glyphs.key(&mut c, x, r.1 + (r.3 - crate::glyphs::H) / 2.0, key);
+            c.text(x + gw + gap, r.1 + 3.0, label, TXT, GOLD_FG);
+        } else {
+            c.text_center(r.0 + r.2 / 2.0, r.1 + 3.0, label, TXT, GOLD_FG);
+        }
         self.upload_ui_text();
         let Some(mut settings) = self.last_settings else { return };
         // the still already has gamma and filters in it

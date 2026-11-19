@@ -2952,9 +2952,6 @@ hu A demó vége
 @ Export Video
 hu Exportálás videóba
 
-@ Fast forward
-hu Előretekerés
-
 @ Fast forward {}x
 hu Előre {}x
 
@@ -2979,9 +2976,6 @@ hu Még nincsenek automatikus demók. Minden játszott pálya ide kerül felvét
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 hu Még nincsenek mentett demók. Vegyél fel egyet a 'record <name>' konzolparanccsal, vagy tarts meg egy automatikus demót.
 
-@ Pause
-hu Szünet
-
 @ Paused
 hu Szüneteltetve
 
@@ -2994,41 +2988,20 @@ hu Quake - videó exportálása {}%
 @ Recorded: {}
 hu Felvéve: {}
 
-@ Rewind
-hu Visszatekerés
-
 @ Rewind {}x
 hu Vissza {}x
 
 @ Size: {} KB
 hu Méret: {} KB
 
-@ Skip 10 s
-hu 10 mp ugrás
-
-@ Back 10 s
-hu 10 mp vissza
-
 @ Length
 hu Hossz
-
-@ Mark in
-hu Kezdőpont
-
-@ Mark out
-hu Végpont
-
-@ Next level
-hu Következő pálya
 
 @ No demos match the filter. Backspace or Esc clears it.
 hu Egy demó sem felel meg a szűrőnek. A Backspace vagy az Esc törli.
 
 @ Renaming an automatic demo moves it to the saved demos.
 hu Egy automatikus demó átnevezése áthelyezi a mentett demók közé.
-
-@ Restart
-hu Előről
 
 @ Sort
 hu Rendezés
@@ -3038,9 +3011,6 @@ hu Demó közben: az A szüneteltet, a D-pad teker és sebességet vált, az LT 
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 hu Szóköz szünet | Bal/Jobb tekerés | Fel/Le sebesség | PgUp/PgDn 10 mp | I/O jelölés | E export
-
-@ Speed
-hu Sebesség
 
 @ Switch List
 hu Lista váltása

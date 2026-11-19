@@ -2952,9 +2952,6 @@ lv Demo beigas
 @ Export Video
 lv Eksportēt video
 
-@ Fast forward
-lv Pārtīt uz priekšu
-
 @ Fast forward {}x
 lv Uz priekšu {}x
 
@@ -2979,9 +2976,6 @@ lv Automātisko demo vēl nav. Šeit tiek ierakstīts katrs spēlētais līmenis
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 lv Saglabātu demo vēl nav. Ierakstiet to ar konsoles komandu 'record <name>' vai paturiet automātisko demo.
 
-@ Pause
-lv Pauze
-
 @ Paused
 lv Pauzēts
 
@@ -2994,41 +2988,20 @@ lv Quake - eksportē video {}%
 @ Recorded: {}
 lv Ierakstīts: {}
 
-@ Rewind
-lv Attīt atpakaļ
-
 @ Rewind {}x
 lv Atpakaļ {}x
 
 @ Size: {} KB
 lv Izmērs: {} KB
 
-@ Skip 10 s
-lv Izlaist 10 s
-
-@ Back 10 s
-lv Atpakaļ 10 s
-
 @ Length
 lv Ilgums
-
-@ Mark in
-lv Atzīmēt sākumu
-
-@ Mark out
-lv Atzīmēt beigas
-
-@ Next level
-lv Nākamais līmenis
 
 @ No demos match the filter. Backspace or Esc clears it.
 lv Filtram neatbilst neviens demo. Backspace vai Esc to notīra.
 
 @ Renaming an automatic demo moves it to the saved demos.
 lv Pārdēvējot automātisko demo, tas tiek pārvietots uz saglabātajiem.
-
-@ Restart
-lv No sākuma
 
 @ Sort
 lv Kārtot
@@ -3038,9 +3011,6 @@ lv Demo laikā: A pauzē, krustveida pogas tin un maina ātrumu, LT un RT atzīm
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 lv Atstarpe pauze | Pa kreisi/Pa labi tīt | Augšup/Lejup ātrums | PgUp/PgDn 10 s | I/O atzīme | E eksports
-
-@ Speed
-lv Ātrums
 
 @ Switch List
 lv Mainīt sarakstu

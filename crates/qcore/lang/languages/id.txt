@@ -2952,9 +2952,6 @@ id Akhir demo
 @ Export Video
 id Ekspor video
 
-@ Fast forward
-id Maju cepat
-
 @ Fast forward {}x
 id Maju {}x
 
@@ -2979,9 +2976,6 @@ id Belum ada demo otomatis. Setiap level yang Anda mainkan direkam di sini.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 id Belum ada demo tersimpan. Rekam satu dengan perintah konsol 'record <name>', atau simpan demo otomatis.
 
-@ Pause
-id Jeda
-
 @ Paused
 id Dijeda
 
@@ -2994,41 +2988,20 @@ id Quake - mengekspor video {}%
 @ Recorded: {}
 id Direkam: {}
 
-@ Rewind
-id Putar mundur
-
 @ Rewind {}x
 id Mundur {}x
 
 @ Size: {} KB
 id Ukuran: {} KB
 
-@ Skip 10 s
-id Lewati 10 d
-
-@ Back 10 s
-id Mundur 10 d
-
 @ Length
 id Durasi
-
-@ Mark in
-id Tandai awal
-
-@ Mark out
-id Tandai akhir
-
-@ Next level
-id Level berikutnya
 
 @ No demos match the filter. Backspace or Esc clears it.
 id Tidak ada demo yang cocok dengan filter. Backspace atau Esc menghapusnya.
 
 @ Renaming an automatic demo moves it to the saved demos.
 id Mengganti nama demo otomatis memindahkannya ke demo tersimpan.
-
-@ Restart
-id Ulangi
 
 @ Sort
 id Urutkan
@@ -3038,9 +3011,6 @@ id Saat demo diputar: A menjeda, d-pad menggeser dan mengubah kecepatan, LT dan 
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 id Spasi jeda | Kiri/Kanan geser | Atas/Bawah kecepatan | PgUp/PgDn 10 d | I/O tanda | E ekspor
-
-@ Speed
-id Kecepatan
 
 @ Switch List
 id Ganti daftar

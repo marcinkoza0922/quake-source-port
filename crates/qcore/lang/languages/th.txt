@@ -2952,9 +2952,6 @@ th จบ​เดโม
 @ Export Video
 th ส่งออก​เป็น​วิดีโอ
 
-@ Fast forward
-th กรอ​ไป​ข้างหน้า
-
 @ Fast forward {}x
 th ไป​ข้างหน้า {}x
 
@@ -2979,9 +2976,6 @@ th ยัง​ไม่มี​เดโม​อัตโนมัติ ท�
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 th ยัง​ไม่มี​เดโม​ที่​บันทึก​ไว้ บันทึก​ด้วย​คำสั่ง​คอนโซล 'record <name>' หรือ​เก็บ​เดโม​อัตโนมัติ
 
-@ Pause
-th หยุด​ชั่วคราว
-
 @ Paused
 th หยุด​ชั่วคราว​อยู่
 
@@ -2994,41 +2988,20 @@ th Quake - กำลัง​ส่งออก​วิดีโอ {}%
 @ Recorded: {}
 th บันทึก​เมื่อ: {}
 
-@ Rewind
-th กรอ​กลับ
-
 @ Rewind {}x
 th ถอย​กลับ {}x
 
 @ Size: {} KB
 th ขนาด: {} KB
 
-@ Skip 10 s
-th ข้าม 10 วินาที
-
-@ Back 10 s
-th ถอย​หลัง 10 วินาที
-
 @ Length
 th ความ​ยาว
-
-@ Mark in
-th มาร์ก​จุด​เริ่ม
-
-@ Mark out
-th มาร์ก​จุด​จบ
-
-@ Next level
-th ด่าน​ถัดไป
 
 @ No demos match the filter. Backspace or Esc clears it.
 th ไม่มี​เดโม​ที่​ตรง​กับ​ตัวกรอง กด Backspace หรือ Esc เพื่อ​ล้าง
 
 @ Renaming an automatic demo moves it to the saved demos.
 th การ​เปลี่ยน​ชื่อ​เดโม​อัตโนมัติ​จะ​ย้าย​ไป​ไว้​ใน​เดโม​ที่​บันทึก​ไว้
-
-@ Restart
-th เริ่ม​ใหม่
 
 @ Sort
 th เรียง
@@ -3038,9 +3011,6 @@ th ระหว่าง​เล่น​เดโม: A หยุด​ชั�
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 th Space หยุด | ซ้าย/ขวา กรอ | ขึ้น/ลง ความเร็ว | PgUp/PgDn 10 วินาที | I/O มาร์ก | E ส่งออก
-
-@ Speed
-th ความเร็ว
 
 @ Switch List
 th สลับ​รายการ

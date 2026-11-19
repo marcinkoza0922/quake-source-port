@@ -2952,9 +2952,6 @@ lt Demo pabaiga
 @ Export Video
 lt Eksportuoti vaizdo įrašą
 
-@ Fast forward
-lt Prasukti pirmyn
-
 @ Fast forward {}x
 lt Pirmyn {}x
 
@@ -2979,9 +2976,6 @@ lt Automatinių demo dar nėra. Čia įrašomas kiekvienas žaistas lygis.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 lt Išsaugotų demo dar nėra. Įrašykite jį konsolės komanda 'record <name>' arba pasilikite automatinį demo.
 
-@ Pause
-lt Pauzė
-
 @ Paused
 lt Pristabdyta
 
@@ -2994,41 +2988,20 @@ lt Quake - eksportuojamas vaizdo įrašas {} %
 @ Recorded: {}
 lt Įrašyta: {}
 
-@ Rewind
-lt Atsukti atgal
-
 @ Rewind {}x
 lt Atgal {}x
 
 @ Size: {} KB
 lt Dydis: {} KB
 
-@ Skip 10 s
-lt Praleisti 10 s
-
-@ Back 10 s
-lt Atgal 10 s
-
 @ Length
 lt Trukmė
-
-@ Mark in
-lt Žymėti pradžią
-
-@ Mark out
-lt Žymėti pabaigą
-
-@ Next level
-lt Kitas lygis
 
 @ No demos match the filter. Backspace or Esc clears it.
 lt Filtrą atitinkančių demo nėra. Backspace arba Esc jį išvalo.
 
 @ Renaming an automatic demo moves it to the saved demos.
 lt Pervadintas automatinis demo perkeliamas į išsaugotus.
-
-@ Restart
-lt Iš pradžių
 
 @ Sort
 lt Rikiuoti
@@ -3038,9 +3011,6 @@ lt Leidžiant demo: A pristabdo, kryžminis mygtukas suka ir keičia greitį, LT
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 lt Tarpas pauzė | Kairėn/Dešinėn sukti | Aukštyn/Žemyn greitis | PgUp/PgDn 10 s | I/O žymė | E eksportas
-
-@ Speed
-lt Greitis
 
 @ Switch List
 lt Keisti sąrašą

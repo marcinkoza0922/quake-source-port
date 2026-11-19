@@ -2952,9 +2952,6 @@ et Demo lõpp
 @ Export Video
 et Ekspordi video
 
-@ Fast forward
-et Edasikerimine
-
 @ Fast forward {}x
 et Edasi {}x
 
@@ -2979,9 +2976,6 @@ et Automaatseid demosid veel pole. Iga mängitud tase salvestatakse siia.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 et Salvestatud demosid veel pole. Salvesta üks konsooli käsuga 'record <name>' või jäta alles automaatne demo.
 
-@ Pause
-et Paus
-
 @ Paused
 et Peatatud
 
@@ -2994,41 +2988,20 @@ et Quake - video eksportimine {}%
 @ Recorded: {}
 et Salvestatud: {}
 
-@ Rewind
-et Tagasikerimine
-
 @ Rewind {}x
 et Tagasi {}x
 
 @ Size: {} KB
 et Suurus: {} KB
 
-@ Skip 10 s
-et Jäta vahele 10 s
-
-@ Back 10 s
-et 10 s tagasi
-
 @ Length
 et Pikkus
-
-@ Mark in
-et Märgi algus
-
-@ Mark out
-et Märgi lõpp
-
-@ Next level
-et Järgmine tase
 
 @ No demos match the filter. Backspace or Esc clears it.
 et Filtrile ei vasta ükski demo. Backspace või Esc tühjendab selle.
 
 @ Renaming an automatic demo moves it to the saved demos.
 et Automaatse demo ümbernimetamine viib selle salvestatud demode hulka.
-
-@ Restart
-et Algusest
 
 @ Sort
 et Sordi
@@ -3038,9 +3011,6 @@ et Demo ajal: A peatab, suunanupud keritavad ja muudavad kiirust, LT ja RT märg
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 et Tühik paus | Vasak/Parem kerimine | Üles/Alla kiirus | PgUp/PgDn 10 s | I/O märk | E eksport
-
-@ Speed
-et Kiirus
 
 @ Switch List
 et Vaheta loendit

@@ -275,8 +275,8 @@ impl Host {
                         }
                         metrics_drawn = true;
                         // the demo bar takes the bottom of the screen: lift the HUD over it
-                        if demo_bar.is_some() {
-                            let dy = -super::demo_bar::lift() * c.scale;
+                        if let Some(b) = &demo_bar {
+                            let dy = -super::demo_bar::lift(b.pad) * c.scale;
                             crate::draw::translate(&mut c.list[hud_start..], 0.0, dy);
                         }
                         if self.show_scores && self.cl.gametype == 1 {
@@ -320,7 +320,7 @@ impl Host {
                 touch::draw_touch(&mut c, &self.input, &self.server.core.cvars);
             }
             if let Some(b) = &demo_bar {
-                super::demo_bar::draw(&mut c, b, &self.menu.glyphs);
+                super::demo_bar::draw(&mut c, b, &glyphs);
             }
             if let Some(p) = &demo_peek {
                 super::demo_bar::draw_peek(&mut c, p);

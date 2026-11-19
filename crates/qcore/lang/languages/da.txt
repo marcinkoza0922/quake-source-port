@@ -2952,9 +2952,6 @@ da Slut på demoen
 @ Export Video
 da Eksportér video
 
-@ Fast forward
-da Spol frem
-
 @ Fast forward {}x
 da Frem {}x
 
@@ -2979,9 +2976,6 @@ da Ingen automatiske demoer endnu. Hver bane, du spiller, optages her.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 da Ingen gemte demoer endnu. Optag en med konsolkommandoen 'record <name>', eller behold en automatisk demo.
 
-@ Pause
-da Pause
-
 @ Paused
 da På pause
 
@@ -2994,41 +2988,20 @@ da Quake - eksporterer video {} %
 @ Recorded: {}
 da Optaget: {}
 
-@ Rewind
-da Spol tilbage
-
 @ Rewind {}x
 da Tilbage {}x
 
 @ Size: {} KB
 da Størrelse: {} KB
 
-@ Skip 10 s
-da Spring 10 s
-
-@ Back 10 s
-da Tilbage 10 s
-
 @ Length
 da Længde
-
-@ Mark in
-da Markér start
-
-@ Mark out
-da Markér slut
-
-@ Next level
-da Næste bane
 
 @ No demos match the filter. Backspace or Esc clears it.
 da Ingen demoer passer til filteret. Backspace eller Esc rydder det.
 
 @ Renaming an automatic demo moves it to the saved demos.
 da En automatisk demo, der omdøbes, flyttes til de gemte demoer.
-
-@ Restart
-da Forfra
 
 @ Sort
 da Sortér
@@ -3038,9 +3011,6 @@ da Under en demo: A sætter på pause, retningsknapperne spoler og ændrer hasti
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 da Mellemrum pause | Venstre/Højre spol | Op/Ned hastighed | PgUp/PgDn 10 s | I/O markér | E eksportér
-
-@ Speed
-da Hastighed
 
 @ Switch List
 da Skift liste

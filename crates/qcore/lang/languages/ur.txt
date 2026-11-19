@@ -2952,9 +2952,6 @@ ur ڈیمو کا اختتام
 @ Export Video
 ur ویڈیو برآمد کریں
 
-@ Fast forward
-ur تیزی سے آگے
-
 @ Fast forward {}x
 ur آگے {}x
 
@@ -2979,9 +2976,6 @@ ur ابھی کوئی خودکار ڈیمو نہیں۔ آپ کا کھیلا ہر 
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 ur ابھی کوئی محفوظ ڈیمو نہیں۔ کنسول کمانڈ 'record <name>' سے ایک ریکارڈ کریں، یا کوئی خودکار ڈیمو رکھ لیں۔
 
-@ Pause
-ur روکیں
-
 @ Paused
 ur رکا ہوا
 
@@ -2994,41 +2988,20 @@ ur Quake - ویڈیو برآمد ہو رہی ہے {}%
 @ Recorded: {}
 ur ریکارڈ شدہ: {}
 
-@ Rewind
-ur پیچھے لے جائیں
-
 @ Rewind {}x
 ur پیچھے {}x
 
 @ Size: {} KB
 ur سائز: {} KB
 
-@ Skip 10 s
-ur 10 سیکنڈ چھوڑیں
-
-@ Back 10 s
-ur 10 سیکنڈ پیچھے
-
 @ Length
 ur دورانیہ
-
-@ Mark in
-ur آغاز نشان زد کریں
-
-@ Mark out
-ur اختتام نشان زد کریں
-
-@ Next level
-ur اگلا لیول
 
 @ No demos match the filter. Backspace or Esc clears it.
 ur کوئی ڈیمو فلٹر سے میل نہیں کھاتا۔ Backspace یا Esc اسے صاف کرتا ہے۔
 
 @ Renaming an automatic demo moves it to the saved demos.
 ur خودکار ڈیمو کا نام بدلنے سے وہ محفوظ ڈیمو میں چلا جاتا ہے۔
-
-@ Restart
-ur شروع سے
 
 @ Sort
 ur ترتیب
@@ -3038,9 +3011,6 @@ ur ڈیمو چلتے وقت: A روکتا ہے، ڈی پیڈ کھسکاتا او
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ur Space روکیں | بائیں/دائیں کھسکائیں | اوپر/نیچے رفتار | PgUp/PgDn 10 سیکنڈ | I/O نشان | E برآمد
-
-@ Speed
-ur رفتار
 
 @ Switch List
 ur فہرست بدلیں

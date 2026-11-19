@@ -2952,9 +2952,6 @@ yue 示範完咗
 @ Export Video
 yue 匯出影片
 
-@ Fast forward
-yue 快轉
-
 @ Fast forward {}x
 yue 快轉 {}x
 
@@ -2979,9 +2976,6 @@ yue 仲未有自動示範。你玩嘅每一關都會錄喺度。
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 yue 仲未有儲存咗嘅示範。用主控台指令 'record <name>' 錄一個，或者保留一個自動示範。
 
-@ Pause
-yue 暫停
-
 @ Paused
 yue 暫停咗
 
@@ -2994,41 +2988,20 @@ yue Quake - 匯出影片中 {}%
 @ Recorded: {}
 yue 錄於：{}
 
-@ Rewind
-yue 倒帶
-
 @ Rewind {}x
 yue 倒帶 {}x
 
 @ Size: {} KB
 yue 大小：{} KB
 
-@ Skip 10 s
-yue 跳過 10 秒
-
-@ Back 10 s
-yue 倒退 10 秒
-
 @ Length
 yue 長度
-
-@ Mark in
-yue 標記起點
-
-@ Mark out
-yue 標記終點
-
-@ Next level
-yue 下一關
 
 @ No demos match the filter. Backspace or Esc clears it.
 yue 冇示範符合篩選。Backspace 或者 Esc 清除篩選。
 
 @ Renaming an automatic demo moves it to the saved demos.
 yue 自動示範改名之後會搬去已儲存嘅示範。
-
-@ Restart
-yue 由頭開始
 
 @ Sort
 yue 排序
@@ -3038,9 +3011,6 @@ yue 播示範嗰陣：A 暫停，十字掣拉同轉速度，LT 同 RT 標記片�
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 yue Space 暫停 | ←/→ 拉 | ↑/↓ 速度 | PgUp/PgDn 10 秒 | I/O 標記 | E 匯出
-
-@ Speed
-yue 速度
 
 @ Switch List
 yue 轉清單

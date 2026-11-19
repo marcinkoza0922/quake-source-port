@@ -2952,9 +2952,6 @@ ta டெமோ முடிவு
 @ Export Video
 ta வீடியோவாக ஏற்றுமதி
 
-@ Fast forward
-ta வேகமாக முன்னே
-
 @ Fast forward {}x
 ta முன்னே {}x
 
@@ -2979,9 +2976,6 @@ ta இன்னும் தானியங்கி டெமோக்கள்
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 ta இன்னும் சேமித்த டெமோக்கள் இல்லை. 'record <name>' கன்சோல் கட்டளையால் ஒன்றைப் பதிவுசெய்யவும், அல்லது ஒரு தானியங்கி டெமோவை வைக்கவும்.
 
-@ Pause
-ta இடைநிறுத்து
-
 @ Paused
 ta இடைநிறுத்தப்பட்டது
 
@@ -2994,41 +2988,20 @@ ta Quake - வீடியோ ஏற்றுமதியாகிறது {}%
 @ Recorded: {}
 ta பதிவானது: {}
 
-@ Rewind
-ta பின்னோக்கு
-
 @ Rewind {}x
 ta பின்னே {}x
 
 @ Size: {} KB
 ta அளவு: {} KB
 
-@ Skip 10 s
-ta 10 வி. தவிர்
-
-@ Back 10 s
-ta 10 வி. பின்
-
 @ Length
 ta நீளம்
-
-@ Mark in
-ta தொடக்கத்தைக் குறி
-
-@ Mark out
-ta முடிவைக் குறி
-
-@ Next level
-ta அடுத்த நிலை
 
 @ No demos match the filter. Backspace or Esc clears it.
 ta வடிகட்டியுடன் எந்த டெமோவும் பொருந்தவில்லை. Backspace அல்லது Esc அதை அழிக்கும்.
 
 @ Renaming an automatic demo moves it to the saved demos.
 ta தானியங்கி டெமோவின் பெயரை மாற்றினால் அது சேமித்த டெமோக்களுக்கு நகரும்.
-
-@ Restart
-ta தொடக்கத்திலிருந்து
 
 @ Sort
 ta வரிசைப்படுத்து
@@ -3038,9 +3011,6 @@ ta டெமோ இயங்கும்போது: A இடைநிறுத
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 ta Space இடைநிறுத்து | இடது/வலது நகர்த்து | மேல்/கீழ் வேகம் | PgUp/PgDn 10 வி. | I/O குறி | E ஏற்றுமதி
-
-@ Speed
-ta வேகம்
 
 @ Switch List
 ta பட்டியலை மாற்று

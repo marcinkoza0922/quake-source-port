@@ -2952,9 +2952,6 @@ mk Крај на демото
 @ Export Video
 mk Извези видео
 
-@ Fast forward
-mk Брзо напред
-
 @ Fast forward {}x
 mk Напред {}x
 
@@ -2979,9 +2976,6 @@ mk Сè уште нема автоматски демо. Тука се сним�
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 mk Сè уште нема зачувани демо. Снимете едно со командата на конзолата 'record <name>' или задржете автоматско демо.
 
-@ Pause
-mk Пауза
-
 @ Paused
 mk Паузирано
 
@@ -2994,41 +2988,20 @@ mk Quake - се извезува видео {}%
 @ Recorded: {}
 mk Снимено: {}
 
-@ Rewind
-mk Премотај наназад
-
 @ Rewind {}x
 mk Назад {}x
 
 @ Size: {} KB
 mk Големина: {} KB
 
-@ Skip 10 s
-mk Прескокни 10 с
-
-@ Back 10 s
-mk Назад 10 с
-
 @ Length
 mk Траење
-
-@ Mark in
-mk Означи почеток
-
-@ Mark out
-mk Означи крај
-
-@ Next level
-mk Следно ниво
 
 @ No demos match the filter. Backspace or Esc clears it.
 mk Ниедно демо не одговара на филтерот. Backspace или Esc го брише.
 
 @ Renaming an automatic demo moves it to the saved demos.
 mk Преименувањето автоматско демо го преместува меѓу зачуваните.
-
-@ Restart
-mk Одначало
 
 @ Sort
 mk Подреди
@@ -3038,9 +3011,6 @@ mk За време на демо: A паузира, крстот за насок
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 mk Празно место пауза | Лево/Десно премотување | Горе/Долу брзина | PgUp/PgDn 10 с | I/O ознака | E извоз
-
-@ Speed
-mk Брзина
 
 @ Switch List
 mk Смени список

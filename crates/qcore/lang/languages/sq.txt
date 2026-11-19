@@ -2952,9 +2952,6 @@ sq Fundi i demos
 @ Export Video
 sq Eksporto video
 
-@ Fast forward
-sq Përpara shpejt
-
 @ Fast forward {}x
 sq Përpara {}x
 
@@ -2979,9 +2976,6 @@ sq Ende nuk ka demo automatike. Çdo nivel që luan regjistrohet këtu.
 @ No saved demos yet. Record one with the console command 'record <name>', or keep an automatic demo.
 sq Ende nuk ka demo të ruajtura. Regjistro një me komandën e konsolës 'record <name>', ose mbaj një demo automatike.
 
-@ Pause
-sq Pauzë
-
 @ Paused
 sq Në pauzë
 
@@ -2994,41 +2988,20 @@ sq Quake - po eksportohet video {}%
 @ Recorded: {}
 sq Regjistruar: {}
 
-@ Rewind
-sq Kthe mbrapsht
-
 @ Rewind {}x
 sq Mbrapsht {}x
 
 @ Size: {} KB
 sq Madhësia: {} KB
 
-@ Skip 10 s
-sq Kapërce 10 s
-
-@ Back 10 s
-sq Mbrapa 10 s
-
 @ Length
 sq Kohëzgjatja
-
-@ Mark in
-sq Shëno fillimin
-
-@ Mark out
-sq Shëno fundin
-
-@ Next level
-sq Niveli tjetër
 
 @ No demos match the filter. Backspace or Esc clears it.
 sq Asnjë demo nuk përputhet me filtrin. Backspace ose Esc e pastron.
 
 @ Renaming an automatic demo moves it to the saved demos.
 sq Riemërtimi i një demoje automatike e zhvendos te demot e ruajtura.
-
-@ Restart
-sq Nga fillimi
 
 @ Sort
 sq Rendit
@@ -3038,9 +3011,6 @@ sq Gjatë një demoje: A bën pauzë, d-pad-i lëviz dhe ndryshon shpejtësinë,
 
 @ Space pause | Left/Right scrub | Up/Down speed | PgUp/PgDn 10 s | I/O mark | E export
 sq Hapësirë pauzë | Majtas/Djathtas lëviz | Lart/Poshtë shpejtësi | PgUp/PgDn 10 s | I/O shenjë | E eksporto
-
-@ Speed
-sq Shpejtësia
 
 @ Switch List
 sq Ndrysho listën
