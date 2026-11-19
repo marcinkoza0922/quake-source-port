@@ -781,6 +781,9 @@ bg Височина на тона
 @ Pitch Sensitivity
 bg Вертикална чувствителност
 
+@ planar
+bg плоски
+
 @ Playback Speed
 bg Скорост на възпроизвеждане
 
@@ -832,6 +835,9 @@ bg Настройки на рейлгъна
 @ Ranged only
 bg Само далечен бой
 
+@ ray traced
+bg проследяване на лъчи
+
 @ Reacquire While Held
 bg Повторен захват при задържане
 
@@ -846,6 +852,12 @@ bg Червен
 
 @ Reduce Motion
 bg Намали движението
+
+@ Reflection Strength
+bg Сила на отраженията
+
+@ Reflections
+bg Отражения
 
 @ Regen (seconds per second)
 bg Възстановяване (секунди за секунда)
@@ -1652,6 +1664,9 @@ bg Колко светлини хвърлят сенки едновременн�
 @ How strongly fog covers the sky when fog is on
 bg Колко силно мъглата покрива небето, когато е включена
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+bg Колко силно отразява повърхността; най-силно при полегат ъгъл на гледане
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 bg Как се изкривява погледът под вода: класически вълнува целия екран като софтуерния Quake, GLQuake бавно разтяга и свива картината
 
@@ -1918,6 +1933,9 @@ bg Използва цветното осветление на картата (.
 
 @ Walls, doors and monsters block the light and cast shadows
 bg Стени, врати и чудовища спират светлината и хвърлят сенки
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+bg Водата и слузта отразяват помещението над тях; плоски прерисува сцената веднъж за всяко близко водно ниво; проследяването на лъчи следва всяка вълничка и изисква GPU с проследяване на лъчи
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 bg Сегменти на струята, брой капки и лъскаво осветяване на течността: ниско ползва по-прости полупрозрачни струи; високо – гладки лъскави струи

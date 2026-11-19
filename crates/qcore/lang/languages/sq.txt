@@ -781,6 +781,9 @@ sq Lartësia e tonit
 @ Pitch Sensitivity
 sq Ndjeshmëria vertikale
 
+@ planar
+sq planare
+
 @ Playback Speed
 sq Shpejtësia e luajtjes
 
@@ -832,6 +835,9 @@ sq Cilësimet e railgun-it
 @ Ranged only
 sq Vetëm nga larg
 
+@ ray traced
+sq gjurmim rrezesh
+
 @ Reacquire While Held
 sq Rikap duke mbajtur
 
@@ -846,6 +852,12 @@ sq E kuqe
 
 @ Reduce Motion
 sq Pakëso lëvizjet
+
+@ Reflection Strength
+sq Fuqia e pasqyrimeve
+
+@ Reflections
+sq Pasqyrime
 
 @ Regen (seconds per second)
 sq Rigjenerimi (sekonda për sekondë)
@@ -1652,6 +1664,9 @@ sq Sa drita hedhin hije njëkohësisht dhe sa të buta janë skajet e tyre
 @ How strongly fog covers the sky when fog is on
 sq Sa fort e mbulon mjegulla qiellin kur mjegulla është aktive
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+sq Sa fort pasqyron sipërfaqja; më fort në kënde të ulëta shikimi
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 sq Si shtrembërohet pamja nën ujë: Klasik valëzon gjithë ekranin si Quake me softuer, GLQuake e zgjat dhe e shtyp pamjen ngadalë
 
@@ -1918,6 +1933,9 @@ sq Përdor dritën me ngjyra të hartës (skedar .lit ose bllok BSPX); joaktiv j
 
 @ Walls, doors and monsters block the light and cast shadows
 sq Muret, dyert dhe përbindëshat bllokojnë dritën dhe hedhin hije
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+sq Uji dhe llumi pasqyrojnë dhomën mbi to; planare e rivizaton skenën një herë për çdo nivel uji aty pranë; gjurmimi i rrezeve ndjek çdo valëzim dhe kërkon një GPU me gjurmim rrezesh
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sq Segmentet e rrymës, numri i pikave dhe hijezimi i shndritshëm i lëngut: e ulët përdor rryma më të thjeshta të tejdukshme; e lartë rryma të lëmuara e të shndritshme

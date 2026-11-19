@@ -198,6 +198,7 @@ impl Renderer {
             keep_out: false,
             skip_present: false,
             slang: None,
+            rt: None,
         };
         r.write_static_descriptors();
         r.create_shadow_maps(1, 16)?;

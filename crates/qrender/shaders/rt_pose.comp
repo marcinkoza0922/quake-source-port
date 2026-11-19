@@ -1,0 +1,81 @@
+#version 460
+// r_water_reflections 2: poses every alias model of the frame into world
+// space for the per-frame ray-tracing BLAS (src/rt). One thread per output
+// triangle; vertex decoding follows alias.vert. Writes three positions per
+// triangle (the BLAS vertices, no index buffer) and the attributes the hit
+// shading needs: texture coordinates, Quake's shadedot per vertex and the
+// draw index.
+#extension GL_EXT_buffer_reference : require
+#extension GL_EXT_buffer_reference_uvec2 : require
+#include "anorms.glsl"
+#include "rt_types.glsl"
+layout(local_size_x = 64) in;
+layout(set = 0, binding = 0) readonly buffer AliasVerts { uint alias_verts[]; };
+layout(set = 0, binding = 1) readonly buffer DynVerts { uint dyn_verts[]; };
+layout(set = 0, binding = 2, std430) readonly buffer Draws { RtDraw draws[]; };
+layout(set = 0, binding = 3) writeonly buffer Pos { float pos[]; };
+layout(set = 0, binding = 4) writeonly buffer Attr { vec4 attr[]; };
+layout(buffer_reference, std430, buffer_reference_align = 4) readonly buffer U32s { uint v[]; };
+layout(push_constant) uniform P { uint ndraws; uint ntris; } pc;
+
+float shadedot(vec3 n, vec3 sv) {
+    float d = dot(n, sv);
+    return d < 0.0 ? 1.0 + d * (13.0 / 44.0) : 1.0 + d;
+}
+
+void main() {
+    uint tri = gl_GlobalInvocationID.x;
+    if (tri >= pc.ntris) return;
+    // last draw whose first output triangle is <= tri
+    uint lo = 0u, hi = pc.ndraws - 1u;
+    while (lo < hi) {
+        uint mid = (lo + hi + 1u) >> 1;
+        if (draws[mid].range.z <= tri) lo = mid; else hi = mid - 1u;
+    }
+    RtDraw d = draws[lo];
+    uint local = tri - d.range.z;
+    U32s vb = U32s(d.addr.xy);
+    U32s ib = U32s(d.addr.zw);
+    bool dyn = (d.texs.w & 16u) != 0u;
+    bool md3 = !dyn && (d.texs.w & 32u) != 0u;
+    float blend = d.shadevec.w;
+    vec2 st[3];
+    float sh[3];
+    for (uint k = 0u; k < 3u; k++) {
+        uint idx = ib.v[d.range.x + local * 3u + k];
+        uint vert = vb.v[idx * 3u];
+        st[k] = vec2(uintBitsToFloat(vb.v[idx * 3u + 1u]), uintBitsToFloat(vb.v[idx * 3u + 2u]));
+        vec3 pa, pb, na, nb;
+        if (md3) {
+            uint va = vert * 2u;
+            uint a0 = alias_verts[d.poses.x + va];
+            uint a1 = alias_verts[d.poses.x + va + 1u];
+            uint b0 = alias_verts[d.poses.y + va];
+            uint b1 = alias_verts[d.poses.y + va + 1u];
+            pa = vec3(float(a0 & 0xffffu), float((a0 >> 16) & 0xffffu), float(a1 & 0xffffu)) - 32768.0;
+            pb = vec3(float(b0 & 0xffffu), float((b0 >> 16) & 0xffffu), float(b1 & 0xffffu)) - 32768.0;
+            const float K = 2.0 * 3.14159265 / 255.0;
+            vec2 sa = vec2((a1 >> 16) & 0xffu, (a1 >> 24) & 0xffu) * K;
+            vec2 sb = vec2((b1 >> 16) & 0xffu, (b1 >> 24) & 0xffu) * K;
+            na = vec3(cos(sa.y) * sin(sa.x), sin(sa.y) * sin(sa.x), cos(sa.x));
+            nb = vec3(cos(sb.y) * sin(sb.x), sin(sb.y) * sin(sb.x), cos(sb.x));
+        } else {
+            uint a = dyn ? dyn_verts[d.poses.x + vert] : alias_verts[d.poses.x + vert];
+            uint b = dyn ? a : alias_verts[d.poses.y + vert];
+            pa = vec3(a & 0xffu, (a >> 8) & 0xffu, (a >> 16) & 0xffu);
+            pb = vec3(b & 0xffu, (b >> 8) & 0xffu, (b >> 16) & 0xffu);
+            na = ANORMS[min(a >> 24, 161u)];
+            nb = ANORMS[min(b >> 24, 161u)];
+        }
+        vec4 p = vec4(mix(pa, pb, blend), 1.0);
+        vec3 w = vec3(dot(d.m[0], p), dot(d.m[1], p), dot(d.m[2], p));
+        uint o = tri * 9u + k * 3u;
+        pos[o] = w.x;
+        pos[o + 1u] = w.y;
+        pos[o + 2u] = w.z;
+        sh[k] = mix(shadedot(na, d.shadevec.xyz), shadedot(nb, d.shadevec.xyz), blend);
+    }
+    attr[tri * 3u] = vec4(st[0], st[1]);
+    attr[tri * 3u + 1u] = vec4(st[2], sh[0], sh[1]);
+    attr[tri * 3u + 2u] = vec4(sh[2], uintBitsToFloat(lo), 0.0, 0.0);
+}

@@ -781,6 +781,9 @@ sv Tonhöjd
 @ Pitch Sensitivity
 sv Vertikal känslighet
 
+@ planar
+sv plana
+
 @ Playback Speed
 sv Uppspelningshastighet
 
@@ -832,6 +835,9 @@ sv Railgun-inställningar
 @ Ranged only
 sv Endast avstånd
 
+@ ray traced
+sv strålspårning
+
 @ Reacquire While Held
 sv Lås om medan hållen
 
@@ -846,6 +852,12 @@ sv Röd
 
 @ Reduce Motion
 sv Minska rörelse
+
+@ Reflection Strength
+sv Speglingsstyrka
+
+@ Reflections
+sv Speglingar
 
 @ Regen (seconds per second)
 sv Regen (sekunder per sekund)
@@ -1652,6 +1664,9 @@ sv Hur många ljus som kastar skuggor samtidigt och hur mjuka deras kanter är
 @ How strongly fog covers the sky when fog is on
 sv Hur starkt dimman täcker himlen när dimma är på
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+sv Hur starkt ytan speglar; starkast vid låga betraktningsvinklar
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 sv Hur vyn förvrängs under vatten: klassisk låter hela skärmen krusa sig som mjukvaru-Quake, GLQuake sträcker och trycker ihop vyn långsamt
 
@@ -1918,6 +1933,9 @@ sv Använder banans färgade ljus (.lit-fil eller BSPX-block); av ger det urspru
 
 @ Walls, doors and monsters block the light and cast shadows
 sv Väggar, dörrar och monster stänger ute ljuset och kastar skuggor
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+sv Vatten och slem speglar rummet ovanför; plana ritar om scenen en gång per närliggande vattenyta; strålspårning följer varje krusning och kräver en GPU med strålspårning
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sv Vattenstrålens segment, antal droppar och blank vätskeskuggning: låg använder enklare genomskinliga strålar; hög jämna, blanka strålar

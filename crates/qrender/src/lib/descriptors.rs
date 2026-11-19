@@ -102,6 +102,7 @@ impl Renderer {
             // SAFETY: device idle or sets not in use; all handles valid.
             unsafe { dev.update_descriptor_sets(&writes, &[]) };
         }
+        self.write_rt_descriptors();
     }
 
     pub(super) fn write_texture_descriptor(&self, slot: u32, view: vk::ImageView, sampler: vk::Sampler) {

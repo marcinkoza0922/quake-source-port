@@ -781,6 +781,9 @@ bn পিচ
 @ Pitch Sensitivity
 bn উল্লম্ব সংবেদনশীলতা
 
+@ planar
+bn সমতল
+
 @ Playback Speed
 bn প্লেব্যাকের গতি
 
@@ -832,6 +835,9 @@ bn রেলগান সেটিংস
 @ Ranged only
 bn শুধু দূরপাল্লার
 
+@ ray traced
+bn রে ট্রেসিং
+
 @ Reacquire While Held
 bn ধরে থাকলে আবার লক্ষ্য নিন
 
@@ -846,6 +852,12 @@ bn লাল
 
 @ Reduce Motion
 bn গতিময়তা কমান
+
+@ Reflection Strength
+bn প্রতিফলনের শক্তি
+
+@ Reflections
+bn প্রতিফলন
 
 @ Regen (seconds per second)
 bn পুনরুদ্ধার (সেকেন্ড প্রতি সেকেন্ড)
@@ -1652,6 +1664,9 @@ bn একসাথে কতগুলো আলো ছায়া ফেলে 
 @ How strongly fog covers the sky when fog is on
 bn কুয়াশা চালু থাকলে আকাশ কতটা কুয়াশায় ঢাকে
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+bn পৃষ্ঠ কতটা জোরে প্রতিফলিত করে; নিচু দৃষ্টিকোণে সবচেয়ে জোরালো
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 bn জলের নিচে দৃশ্য কীভাবে বিকৃত হয়: ক্লাসিক সফটওয়্যার Quake-এর মতো পুরো পর্দায় ঢেউ তোলে, GLQuake ধীরে ধীরে দৃশ্য টানে ও চাপে
 
@@ -1918,6 +1933,9 @@ bn ম্যাপের রঙিন আলো (.lit ফাইল বা BSPX �
 
 @ Walls, doors and monsters block the light and cast shadows
 bn দেয়াল, দরজা ও দানব আলো আটকায় এবং ছায়া ফেলে
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+bn জল ও কাদা তাদের উপরের ঘর প্রতিফলিত করে; সমতল প্রতিটি কাছের জলস্তরের জন্য দৃশ্য একবার পুনরায় আঁকে; রে ট্রেসিং প্রতিটি ঢেউ অনুসরণ করে এবং রে ট্রেসিং সমর্থিত GPU প্রয়োজন
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 bn জলধারার অংশ, ফোঁটার সংখ্যা ও চকচকে তরল শেডিং: নিম্ন সরল স্বচ্ছ ধারা ব্যবহার করে; উচ্চ মসৃণ চকচকে ধারা ব্যবহার করে

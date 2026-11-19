@@ -1,6 +1,12 @@
 use super::*;
 
 impl Host {
+    /// Water reflections are on (planar or ray traced): the player's own
+    /// body is then drawn into them like into gun portal views.
+    pub(super) fn reflections_on(&self) -> bool {
+        self.cv("r_enhancedwater") != 0.0 && self.cv("r_water_reflections").round() >= 1.0
+    }
+
     pub(super) fn render(&mut self, view: Option<qrender::View>, gun: Option<qrender::RenderEntity>, ft: f32) {
         self.sync_shader();
         let (w, h) = self.r.size();
@@ -31,7 +37,7 @@ impl Host {
             let fs = &self.server.core.fs;
             let cv = self.view_cvars();
             self.view.replaced_models = self.fte.replaced_models(&self.cl, fs);
-            self.view.with_self = !self.cl.portals.is_empty();
+            self.view.with_self = !self.cl.portals.is_empty() || self.reflections_on();
             self.view.dodge_pose = self.server.level.as_ref()
                 .and_then(|l| l.dodges.get(self.cl.viewentity.saturating_sub(1)).map(|d| d.pose(l.vm.time)))
                 .unwrap_or_default();
@@ -412,6 +418,9 @@ impl Host {
                 v("r_motionblur_amount").clamp(0.0, 4.0)
             },
             motion_blur_quality: (v("r_motionblur_quality").round() as i32).clamp(0, 1) as u32,
+            // planar reflections (Water Settings, under the Enhanced Water master)
+            water_reflections: if v("r_enhancedwater") != 0.0 { (v("r_water_reflections").round() as i32).clamp(0, 2) as u32 } else { 0 },
+            water_reflection_amount: v("r_water_reflections_amount").clamp(0.0, 1.5),
             bloom: if v("r_bloom") != 0.0 { v("r_bloom_intensity").clamp(0.0, 4.0) } else { 0.0 },
             bloom_size: v("r_bloom_size").clamp(0.5, 2.0),
             bloom_bright: v("r_bloom_bright").clamp(0.0, 1.0),

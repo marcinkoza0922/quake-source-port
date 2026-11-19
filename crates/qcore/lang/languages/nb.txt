@@ -781,6 +781,9 @@ nb Tonehøyde
 @ Pitch Sensitivity
 nb Vertikal følsomhet
 
+@ planar
+nb plane
+
 @ Playback Speed
 nb Avspillingsfart
 
@@ -832,6 +835,9 @@ nb Railgun-innstillinger
 @ Ranged only
 nb Kun avstand
 
+@ ray traced
+nb strålesporing
+
 @ Reacquire While Held
 nb Lås på nytt mens holdt
 
@@ -846,6 +852,12 @@ nb Rød
 
 @ Reduce Motion
 nb Reduser bevegelse
+
+@ Reflection Strength
+nb Speilingsstyrke
+
+@ Reflections
+nb Speilinger
 
 @ Regen (seconds per second)
 nb Regen (sekunder per sekund)
@@ -1652,6 +1664,9 @@ nb Hvor mange lys som kaster skygger samtidig, og hvor myke kantene deres er
 @ How strongly fog covers the sky when fog is on
 nb Hvor kraftig tåken dekker himmelen når tåke er på
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+nb Hvor kraftig overflaten speiler; sterkest ved lave synsvinkler
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 nb Hvordan visningen forvrenges under vann: Klassisk bølger hele skjermen som programvare-Quake, GLQuake strekker og klemmer visningen sakte
 
@@ -1918,6 +1933,9 @@ nb Bruker banens fargede lys (.lit-fil eller BSPX-lump); av gir vanlig hvitt lys
 
 @ Walls, doors and monsters block the light and cast shadows
 nb Vegger, dører og monstre stenger for lyset og kaster skygger
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+nb Vann og slim speiler rommet over seg; plane tegner scenen på nytt én gang per nærliggende vannflate; strålesporing følger hver krusning og krever en GPU med strålesporing
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 nb Vannstrålesegmenter, antall dråper og blank væskeskyggelegging: lav bruker enklere gjennomskinnelige stråler; høy bruker jevne, blanke stråler

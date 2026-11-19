@@ -73,6 +73,7 @@ impl Host {
         let p1_temps: std::collections::HashSet<_> = self.cl.temp_entities.iter().map(tkey).collect();
         let cv = self.view_cvars();
         let draw_ents = self.cv("r_drawentities") != 0.0;
+        let reflections = self.reflections_on();
         for (vi, &k) in live.iter().enumerate() {
             let bit = 1u8 << (vi + 1);
             let g = &mut self.guests[k];
@@ -96,7 +97,7 @@ impl Host {
             }
             if draw_ents {
                 let mut gents = Vec::new();
-                g.view.with_self = !g.cl.portals.is_empty();
+                g.view.with_self = !g.cl.portals.is_empty() || reflections;
                 g.view.dodge_pose = self.server.level.as_ref()
                     .and_then(|l| l.dodges.get(g.cl.viewentity.saturating_sub(1)).map(|d| d.pose(l.vm.time)))
                     .unwrap_or_default();

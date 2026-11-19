@@ -781,6 +781,9 @@ ur پچ
 @ Pitch Sensitivity
 ur عمودی حساسیت
 
+@ planar
+ur مسطح
+
 @ Playback Speed
 ur چلنے کی رفتار
 
@@ -832,6 +835,9 @@ ur ریل گن کی ترتیبات
 @ Ranged only
 ur صرف دور مار
 
+@ ray traced
+ur رے ٹریسنگ
+
 @ Reacquire While Held
 ur دبائے رکھنے پر دوبارہ ہدف
 
@@ -846,6 +852,12 @@ ur سرخ
 
 @ Reduce Motion
 ur حرکت کم کریں
+
+@ Reflection Strength
+ur عکس کی شدت
+
+@ Reflections
+ur عکس
 
 @ Regen (seconds per second)
 ur بحالی (سیکنڈ فی سیکنڈ)
@@ -1652,6 +1664,9 @@ ur ایک ساتھ کتنی روشنیاں سائے ڈالتی ہیں اور ا�
 @ How strongly fog covers the sky when fog is on
 ur دھند چالو ہونے پر آسمان کو کتنی گہری دھند ڈھانپے
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+ur سطح کتنی شدت سے عکس دکھاتی ہے؛ کم زاویۂ نظر پر سب سے زیادہ
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 ur پانی کے نیچے منظر کیسے بگڑے: کلاسک سافٹ ویئر Quake کی طرح پوری اسکرین لہراتا ہے، GLQuake منظر کو آہستہ کھینچتا اور دباتا ہے
 
@@ -1918,6 +1933,9 @@ ur نقشے کی رنگین روشنی (.lit فائل یا BSPX lump) استعم
 
 @ Walls, doors and monsters block the light and cast shadows
 ur دیواریں، دروازے اور عفریت روشنی روکتے ہیں اور سائے ڈالتے ہیں
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ur پانی اور کیچڑ اپنے اوپر کے کمرے کا عکس دکھاتے ہیں؛ مسطح ہر قریبی پانی کی سطح کے لیے منظر ایک بار دوبارہ بناتا ہے؛ رے ٹریسنگ ہر لہر کا پیچھا کرتی ہے اور رے ٹریسنگ والا GPU درکار ہے
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ur پانی کی دھار کے حصے، قطروں کی تعداد اور چمکدار مائع شیڈنگ: کم سادہ نیم شفاف دھاریں؛ زیادہ ہموار چمکدار دھاریں

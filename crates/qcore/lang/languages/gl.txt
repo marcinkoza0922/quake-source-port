@@ -781,6 +781,9 @@ gl Ton
 @ Pitch Sensitivity
 gl Sensibilidade vertical
 
+@ planar
+gl planos
+
 @ Playback Speed
 gl Velocidade de reprodución
 
@@ -832,6 +835,9 @@ gl Axustes do railgun
 @ Ranged only
 gl Só a distancia
 
+@ ray traced
+gl trazado de raios
+
 @ Reacquire While Held
 gl Volver fixar ao manter
 
@@ -846,6 +852,12 @@ gl Vermello
 
 @ Reduce Motion
 gl Reducir movemento
+
+@ Reflection Strength
+gl Intensidade dos reflexos
+
+@ Reflections
+gl Reflexos
 
 @ Regen (seconds per second)
 gl Rexeneración (segundos por segundo)
@@ -1652,6 +1664,9 @@ gl Cantas luces proxectan sombras á vez e o suaves que son os seus bordos
 @ How strongly fog covers the sky when fog is on
 gl Canto cobre a néboa o ceo cando está activada
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+gl Canto reflicte a superficie; máis forte con ángulos de visión rasantes
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 gl Como se distorsiona a vista baixo a auga: clásico ondula toda a pantalla como Quake por software, GLQuake estira e esmaga a vista lentamente
 
@@ -1918,6 +1933,9 @@ gl Usa a luz de cor do mapa (ficheiro .lit ou bloque BSPX); desactivado dá a lu
 
 @ Walls, doors and monsters block the light and cast shadows
 gl Paredes, portas e monstros bloquean a luz e proxectan sombras
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+gl A auga e o limo reflicten a sala de enriba; planos redebuxa a escena unha vez por cada nivel de auga próximo; trazado de raios segue cada onda e precisa dunha GPU con trazado de raios
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 gl Segmentos do chorro, número de pingas e sombreado brillante do líquido: baixa usa chorros translúcidos máis simples; alta, chorros suaves e brillantes

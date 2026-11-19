@@ -781,6 +781,9 @@ vi Cao độ
 @ Pitch Sensitivity
 vi Độ nhạy dọc
 
+@ planar
+vi phẳng
+
 @ Playback Speed
 vi Tốc độ phát
 
@@ -832,6 +835,9 @@ vi Cài đặt railgun
 @ Ranged only
 vi Chỉ đánh xa
 
+@ ray traced
+vi dò tia
+
 @ Reacquire While Held
 vi Bắt lại mục tiêu khi giữ
 
@@ -846,6 +852,12 @@ vi Đỏ
 
 @ Reduce Motion
 vi Giảm chuyển động
+
+@ Reflection Strength
+vi Độ mạnh phản chiếu
+
+@ Reflections
+vi Phản chiếu
 
 @ Regen (seconds per second)
 vi Hồi phục (giây mỗi giây)
@@ -1652,6 +1664,9 @@ vi Số đèn đổ bóng cùng lúc và độ mềm của mép bóng
 @ How strongly fog covers the sky when fog is on
 vi Mức sương mù che bầu trời khi bật sương mù
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+vi Bề mặt phản chiếu mạnh đến mức nào; mạnh nhất khi nhìn ở góc thấp
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 vi Cách góc nhìn bị méo dưới nước: Cổ điển làm gợn cả màn hình như Quake phần mềm, GLQuake từ từ kéo giãn và nén góc nhìn
 
@@ -1918,6 +1933,9 @@ vi Dùng ánh sáng màu của bản đồ (tệp .lit hoặc khối BSPX); tắ
 
 @ Walls, doors and monsters block the light and cast shadows
 vi Tường, cửa và quái vật chắn ánh sáng và đổ bóng
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+vi Nước và chất nhờn phản chiếu căn phòng phía trên; phẳng vẽ lại cảnh một lần cho mỗi mặt nước gần đó; dò tia bám theo từng gợn sóng và cần GPU hỗ trợ dò tia
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 vi Số đoạn tia nước, số giọt và đổ bóng chất lỏng bóng loáng: thấp dùng dòng nước trong mờ đơn giản hơn; cao dùng tia nước mượt và bóng

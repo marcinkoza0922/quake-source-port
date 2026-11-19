@@ -781,6 +781,9 @@ pt-BR Tom
 @ Pitch Sensitivity
 pt-BR Sensibilidade vertical
 
+@ planar
+pt-BR planares
+
 @ Playback Speed
 pt-BR Velocidade de reprodução
 
@@ -832,6 +835,9 @@ pt-BR Configurações do railgun
 @ Ranged only
 pt-BR Só à distância
 
+@ ray traced
+pt-BR traçado de raios
+
 @ Reacquire While Held
 pt-BR Retravar ao segurar
 
@@ -846,6 +852,12 @@ pt-BR Vermelho
 
 @ Reduce Motion
 pt-BR Reduzir movimento
+
+@ Reflection Strength
+pt-BR Intensidade dos reflexos
+
+@ Reflections
+pt-BR Reflexos
 
 @ Regen (seconds per second)
 pt-BR Regeneração (segundos por segundo)
@@ -1652,6 +1664,9 @@ pt-BR Quantas luzes projetam sombras ao mesmo tempo e quão suaves são as borda
 @ How strongly fog covers the sky when fog is on
 pt-BR Quanto a neblina cobre o céu quando está ativada
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+pt-BR Quão forte a superfície reflete; mais forte em ângulos de visão rasantes
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 pt-BR Como a visão se distorce debaixo d'água: clássico ondula a tela inteira como o Quake por software, GLQuake estica e achata a visão devagar
 
@@ -1918,6 +1933,9 @@ pt-BR Usa a luz colorida do mapa (arquivo .lit ou lump BSPX); desativado dá a l
 
 @ Walls, doors and monsters block the light and cast shadows
 pt-BR Paredes, portas e monstros bloqueiam a luz e projetam sombras
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+pt-BR A água e o lodo refletem a sala acima deles; planares redesenha a cena uma vez para cada nível de água próximo; traçado de raios segue cada ondulação e exige uma GPU com traçado de raios
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 pt-BR Segmentos do jato de água, quantidade de gotas e sombreamento brilhante do líquido: baixa usa jatos translúcidos mais simples; alta usa jatos suaves e brilhantes

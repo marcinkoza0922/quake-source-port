@@ -781,6 +781,9 @@ nl Toonhoogte
 @ Pitch Sensitivity
 nl Verticale gevoeligheid
 
+@ planar
+nl vlak
+
 @ Playback Speed
 nl Afspeelsnelheid
 
@@ -832,6 +835,9 @@ nl Railgun-instellingen
 @ Ranged only
 nl Alleen afstand
 
+@ ray traced
+nl raytracing
+
 @ Reacquire While Held
 nl Nieuw doel bij vasthouden
 
@@ -846,6 +852,12 @@ nl Rood
 
 @ Reduce Motion
 nl Beweging beperken
+
+@ Reflection Strength
+nl Reflectiesterkte
+
+@ Reflections
+nl Reflecties
 
 @ Regen (seconds per second)
 nl Herstel (seconden per seconde)
@@ -1652,6 +1664,9 @@ nl Hoeveel lichten tegelijk schaduwen werpen en hoe zacht hun randen zijn
 @ How strongly fog covers the sky when fog is on
 nl Hoe sterk mist de hemel bedekt als mist aan staat
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+nl Hoe sterk het oppervlak weerspiegelt; het sterkst bij lage kijkhoeken
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 nl Hoe het beeld onder water vervormt: Klassiek laat het hele scherm golven zoals software-Quake, GLQuake rekt en drukt het beeld langzaam samen
 
@@ -1918,6 +1933,9 @@ nl Gebruikt het gekleurde licht van de map (.lit-bestand of BSPX-lump); uit geef
 
 @ Walls, doors and monsters block the light and cast shadows
 nl Muren, deuren en monsters houden het licht tegen en werpen schaduwen
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+nl Water en slijm weerspiegelen de ruimte erboven; vlak tekent de scène één keer extra per nabij waterniveau; raytracing volgt elke rimpeling en vereist een GPU met raytracing
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 nl Waterstraalsegmenten, aantal druppels en glanzende vloeistofshading: laag gebruikt eenvoudigere doorschijnende stralen; hoog vloeiende glanzende stralen

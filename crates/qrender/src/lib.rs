@@ -37,6 +37,8 @@ mod gpu;
 #[cfg(qvk)]
 mod pipelines;
 #[cfg(qvk)]
+mod rt;
+#[cfg(qvk)]
 mod slang;
 #[cfg(qvk)]
 #[path = "lib/targets.rs"]

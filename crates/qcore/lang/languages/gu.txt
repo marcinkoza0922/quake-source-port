@@ -781,6 +781,9 @@ gu સૂર
 @ Pitch Sensitivity
 gu ઊભી સંવેદનશીલતા
 
+@ planar
+gu સપાટ
+
 @ Playback Speed
 gu પ્લેબૅક ઝડપ
 
@@ -832,6 +835,9 @@ gu રેલગન સેટિંગ્સ
 @ Ranged only
 gu ફક્ત દૂરથી
 
+@ ray traced
+gu રે ટ્રેસિંગ
+
 @ Reacquire While Held
 gu પકડી રાખતાં ફરી પકડો
 
@@ -846,6 +852,12 @@ gu લાલ
 
 @ Reduce Motion
 gu ગતિ ઓછી કરો
+
+@ Reflection Strength
+gu પ્રતિબિંબની તીવ્રતા
+
+@ Reflections
+gu પ્રતિબિંબો
 
 @ Regen (seconds per second)
 gu પુનઃપ્રાપ્તિ (સેકન્ડ પ્રતિ સેકન્ડ)
@@ -1652,6 +1664,9 @@ gu એકસાથે કેટલા પ્રકાશ પડછાયા પ�
 @ How strongly fog covers the sky when fog is on
 gu ધુમ્મસ ચાલુ હોય ત્યારે તે આકાશને કેટલું ઢાંકે છે
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+gu સપાટી કેટલી મજબૂત રીતે પ્રતિબિંબિત કરે છે; નીચા દ્રષ્ટિકોણે સૌથી વધુ
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 gu પાણીની અંદર દૃશ્ય કેવું વિકૃત થાય: ક્લાસિક સૉફ્ટવેર Quakeની જેમ આખી સ્ક્રીનને લહેરાવે છે, GLQuake દૃશ્યને ધીમે ધીમે ખેંચે અને દબાવે છે
 
@@ -1918,6 +1933,9 @@ gu મેપનો રંગીન પ્રકાશ (.lit ફાઇલ કે 
 
 @ Walls, doors and monsters block the light and cast shadows
 gu દીવાલો, દરવાજા અને રાક્ષસો પ્રકાશ રોકે છે અને પડછાયા પાડે છે
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+gu પાણી અને કાદવ તેમની ઉપરના ઓરડાનું પ્રતિબિંબ પાડે છે; સપાટ દરેક નજીકના પાણીના સ્તર માટે દૃશ્ય એક વાર ફરી દોરે છે; રે ટ્રેસિંગ દરેક લહેરને અનુસરે છે અને રે ટ્રેસિંગ ધરાવતું GPU જરૂરી છે
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 gu પાણીના જેટના ભાગો, ટીપાંની સંખ્યા અને ચળકતું પ્રવાહી શેડિંગ: નીચું સાદા અર્ધપારદર્શક પ્રવાહ વાપરે છે; ઊંચું સરળ ચળકતા જેટ વાપરે છે

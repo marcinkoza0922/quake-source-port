@@ -781,6 +781,9 @@ ko 음높이
 @ Pitch Sensitivity
 ko 상하 감도
 
+@ planar
+ko 평면
+
 @ Playback Speed
 ko 재생 속도
 
@@ -832,6 +835,9 @@ ko 레일건 설정
 @ Ranged only
 ko 원거리만
 
+@ ray traced
+ko 레이 트레이싱
+
 @ Reacquire While Held
 ko 누르는 동안 재포착
 
@@ -846,6 +852,12 @@ ko 빨강
 
 @ Reduce Motion
 ko 움직임 줄이기
+
+@ Reflection Strength
+ko 반사 강도
+
+@ Reflections
+ko 반사
 
 @ Regen (seconds per second)
 ko 재생 (초당 초)
@@ -1652,6 +1664,9 @@ ko 동시에 그림자를 드리우는 조명의 수와 그림자 가장자리�
 @ How strongly fog covers the sky when fog is on
 ko 안개가 켜져 있을 때 안개가 하늘을 덮는 정도
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+ko 표면이 반사하는 세기. 낮은 각도에서 볼 때 가장 강합니다
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 ko 수중 화면 왜곡 방식입니다. 클래식은 소프트웨어 Quake처럼 화면 전체를 물결치게 하고, GLQuake는 화면을 천천히 늘였다 줄입니다
 
@@ -1918,6 +1933,9 @@ ko 맵의 컬러 조명(.lit 파일 또는 BSPX 럼프)을 씁니다. 끄면 원
 
 @ Walls, doors and monsters block the light and cast shadows
 ko 벽, 문, 몬스터가 빛을 가리고 그림자를 드리웁니다
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ko 물과 슬라임이 위쪽 공간을 비춥니다. 평면은 가까운 수면마다 장면을 한 번 더 그립니다; 레이 트레이싱은 모든 물결을 따라가며 레이 트레이싱을 지원하는 GPU가 필요합니다
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ko 물줄기 분할 수, 물방울 수, 광택 액체 셰이딩입니다. 낮음은 단순한 반투명 물줄기를, 높음은 매끄럽고 광택 있는 물줄기를 씁니다

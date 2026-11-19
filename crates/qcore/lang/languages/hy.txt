@@ -781,6 +781,9 @@ hy Տոնի բարձրություն
 @ Pitch Sensitivity
 hy Ուղղաձիգ զգայունություն
 
+@ planar
+hy հարթ
+
 @ Playback Speed
 hy Նվագարկման արագություն
 
@@ -832,6 +835,9 @@ hy Ռեյլգանի կարգավորումներ
 @ Ranged only
 hy Միայն հեռահար
 
+@ ray traced
+hy ճառագայթների հետագծում
+
 @ Reacquire While Held
 hy Վերագրավել պահելիս
 
@@ -846,6 +852,12 @@ hy Կարմիր
 
 @ Reduce Motion
 hy Նվազեցնել շարժումը
+
+@ Reflection Strength
+hy Արտացոլման ուժ
+
+@ Reflections
+hy Արտացոլումներ
 
 @ Regen (seconds per second)
 hy Վերականգնում (վայրկյան/վայրկյան)
@@ -1652,6 +1664,9 @@ hy Քանի լույս է միաժամանակ ստվեր գցում, և որք�
 @ How strongly fog covers the sky when fog is on
 hy Որքան ուժեղ է մառախուղը ծածկում երկինքը, երբ մառախուղը միացված է
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+hy Որքան ուժեղ է մակերեսը արտացոլում. ամենաուժեղը ցածր դիտման անկյուններում
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 hy Ինչպես է տեսքն աղավաղվում ջրի տակ: դասականը ալեկոծում է ամբողջ էկրանը ծրագրային Quake-ի պես, GLQuake-ը դանդաղ ձգում և սեղմում է տեսքը
 
@@ -1918,6 +1933,9 @@ hy Օգտագործում է քարտեզի գունավոր լույսը (.lit 
 
 @ Walls, doors and monsters block the light and cast shadows
 hy Պատերը, դռներն ու հրեշները փակում են լույսը և ստվեր գցում
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+hy Ջուրն ու լորձը արտացոլում են իրենց վերևի սենյակը. հարթը տեսարանը նորից է նկարում յուրաքանչյուր մոտակա ջրի մակարդակի համար մեկ անգամ. ճառագայթների հետագծումը հետևում է յուրաքանչյուր ալիքին և պահանջում է ճառագայթների հետագծմամբ GPU
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 hy Ջրաշիթի հատվածները, կաթիլների քանակը և հեղուկի փայլուն ստվերավորումը: ցածրն օգտագործում է ավելի պարզ կիսաթափանցիկ հոսքեր, բարձրը՝ հարթ փայլուն շիթեր

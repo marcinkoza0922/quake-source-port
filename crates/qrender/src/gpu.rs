@@ -7,6 +7,8 @@ use std::ffi::{CStr, CString, c_char};
 mod alloc;
 pub use alloc::*;
 mod upload;
+mod rt;
+pub use rt::{Accel, RtFns};
 
 const BLOCK_SIZE: u64 = 64 << 20;
 
@@ -58,6 +60,8 @@ pub struct Gpu {
     pub sample_shading: bool,
     /// Nanoseconds per timestamp tick.
     pub timestamp_period: f32,
+    /// Ray queries and acceleration structures (None when unsupported).
+    pub rt: Option<RtFns>,
 }
 
 impl Gpu {
@@ -160,6 +164,10 @@ impl Gpu {
         if surface_fn.is_some() {
             dev_exts.push(ash::khr::swapchain::NAME.as_ptr());
         }
+        let rt_ok = rt::rt_supported(&instance, pdev);
+        if rt_ok {
+            dev_exts.extend(rt::RT_EXTENSIONS.iter().map(|n| n.as_ptr()));
+        }
         let lim = props.limits;
         let counts = lim.framebuffer_color_sample_counts & lim.framebuffer_depth_sample_counts;
         let max_samples = [8u32, 4, 2]
@@ -180,18 +188,24 @@ impl Gpu {
             .descriptor_indexing(true)
             .runtime_descriptor_array(true)
             .descriptor_binding_partially_bound(true)
-            .shader_sampled_image_array_non_uniform_indexing(true);
+            .shader_sampled_image_array_non_uniform_indexing(true)
+            .buffer_device_address(rt_ok);
+        let mut asf = vk::PhysicalDeviceAccelerationStructureFeaturesKHR::default().acceleration_structure(true);
+        let mut rqf = vk::PhysicalDeviceRayQueryFeaturesKHR::default().ray_query(true);
         // glslc maps `discard` to OpDemoteToHelperInvocation for Vulkan 1.3
         // (core feature, required to be supported by 1.3 devices).
         let mut f13 = vk::PhysicalDeviceVulkan13Features::default()
             .dynamic_rendering(true)
             .shader_demote_to_helper_invocation(true);
-        let dci = vk::DeviceCreateInfo::default()
+        let mut dci = vk::DeviceCreateInfo::default()
             .queue_create_infos(&qci)
             .enabled_extension_names(&dev_exts)
             .enabled_features(&features)
             .push_next(&mut f12)
             .push_next(&mut f13);
+        if rt_ok {
+            dci = dci.push_next(&mut asf).push_next(&mut rqf);
+        }
         // SAFETY: valid pdev and create info.
         let device = unsafe { instance.create_device(pdev, &dci, None)? };
         // SAFETY: queue family/index created above.
@@ -204,6 +218,10 @@ impl Gpu {
             .flags(vk::CommandPoolCreateFlags::RESET_COMMAND_BUFFER);
         // SAFETY: valid device.
         let upload_pool = unsafe { device.create_command_pool(&pci, None)? };
+        let rt = rt_ok.then(|| RtFns {
+            accel: ash::khr::acceleration_structure::Device::new(&instance, &device),
+            scratch_align: rt::scratch_alignment(&instance, pdev),
+        });
         Ok(Gpu {
             _entry: entry,
             instance,
@@ -216,17 +234,22 @@ impl Gpu {
             surface_fn,
             swapchain_fn,
             surface,
-            alloc: Allocator::default(),
+            alloc: Allocator { device_address: rt_ok, ..Allocator::default() },
             upload_pool,
             max_samples,
             max_anisotropy,
             timestamp_period: lim.timestamp_period,
             sample_shading,
+            rt,
         })
     }
 
-    pub fn buffer(&mut self, size: u64, usage: vk::BufferUsageFlags, host: bool) -> Result<Buffer> {
+    pub fn buffer(&mut self, size: u64, mut usage: vk::BufferUsageFlags, host: bool) -> Result<Buffer> {
         let size = size.max(16);
+        if self.rt.is_some() {
+            // ray tracing reads geometry and model buffers by address
+            usage |= vk::BufferUsageFlags::SHADER_DEVICE_ADDRESS;
+        }
         let ci = vk::BufferCreateInfo::default().size(size).usage(usage);
         // SAFETY: valid device/create info.
         let buf = unsafe { self.device.create_buffer(&ci, None)? };

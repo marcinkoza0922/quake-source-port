@@ -781,6 +781,9 @@ ms Pic
 @ Pitch Sensitivity
 ms Kepekaan Menegak
 
+@ planar
+ms satah
+
 @ Playback Speed
 ms Kelajuan Main Semula
 
@@ -832,6 +835,9 @@ ms Tetapan Railgun
 @ Ranged only
 ms Jarak jauh sahaja
 
+@ ray traced
+ms surihan sinar
+
 @ Reacquire While Held
 ms Kunci Semula Semasa Ditahan
 
@@ -846,6 +852,12 @@ ms Merah
 
 @ Reduce Motion
 ms Kurangkan Gerakan
+
+@ Reflection Strength
+ms Kekuatan Pantulan
+
+@ Reflections
+ms Pantulan
 
 @ Regen (seconds per second)
 ms Pemulihan (saat sesaat)
@@ -1652,6 +1664,9 @@ ms Berapa banyak cahaya yang menghasilkan bayang-bayang serentak, dan sehalus ma
 @ How strongly fog covers the sky when fog is on
 ms Sekuat mana kabus menutupi langit apabila kabus hidup
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+ms Sekuat mana permukaan memantul; paling kuat pada sudut pandangan rendah
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 ms Cara pandangan herot di bawah air: Klasik meriakkan seluruh skrin seperti Quake perisian, GLQuake meregang dan memampatkan pandangan secara perlahan
 
@@ -1918,6 +1933,9 @@ ms Menggunakan cahaya berwarna peta (fail .lit atau lump BSPX); mati memberi cah
 
 @ Walls, doors and monsters block the light and cast shadows
 ms Dinding, pintu dan raksasa menghalang cahaya dan menghasilkan bayang-bayang
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ms Air dan lendir memantulkan bilik di atasnya; satah melukis semula adegan sekali bagi setiap paras air berdekatan; surihan sinar mengikut setiap riak dan memerlukan GPU dengan surihan sinar
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ms Segmen pancutan air, bilangan titisan dan pelorekan cecair berkilat: rendah guna aliran lut cahaya yang lebih ringkas; tinggi guna pancutan berkilat yang licin

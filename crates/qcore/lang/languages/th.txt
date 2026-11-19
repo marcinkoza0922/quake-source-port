@@ -781,6 +781,9 @@ th ระดับ​เสียง​สูง​ต่ำ
 @ Pitch Sensitivity
 th ความ​ไว​แนว​ตั้ง
 
+@ planar
+th ระนาบ
+
 @ Playback Speed
 th ความ​เร็ว​การ​เล่น
 
@@ -832,6 +835,9 @@ th ตั้งค่า​เรลกัน
 @ Ranged only
 th ระยะ​ไกล​เท่านั้น
 
+@ ray traced
+th เรย์​เทรซิง
+
 @ Reacquire While Held
 th หา​เป้า​ใหม่​ขณะ​กด​ค้าง
 
@@ -846,6 +852,12 @@ th แดง
 
 @ Reduce Motion
 th ลด​การ​เคลื่อนไหว
+
+@ Reflection Strength
+th ความ​แรง​การ​สะท้อน
+
+@ Reflections
+th การ​สะท้อน
 
 @ Regen (seconds per second)
 th ฟื้นฟู (วินาที​ต่อ​วินาที)
@@ -1652,6 +1664,9 @@ th จำนวน​แสง​ที่​ทอด​เงา​พร้�
 @ How strongly fog covers the sky when fog is on
 th หมอก​ปก​คลุม​ท้องฟ้า​มาก​แค่​ไหน​เมื่อ​เปิด​หมอก
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+th พื้น​ผิว​สะท้อน​แรง​แค่​ไหน แรง​ที่​สุด​เมื่อ​มอง​จาก​มุม​ต่ำ
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 th ภาพ​บิด​เบี้ยว​ใต้​น้ำ​อย่างไร: คลาสสิก​ทำ​ระลอก​ทั้ง​จอ​แบบ Quake ซอฟต์แวร์ GLQuake ยืด​และ​บีบ​ภาพ​ช้า​ๆ
 
@@ -1918,6 +1933,9 @@ th ใช้​แสง​สี​ของ​แผนที่ (ไฟล์
 
 @ Walls, doors and monsters block the light and cast shadows
 th ผนัง ประตู และ​มอนสเตอร์​บัง​แสง​และ​ทอด​เงา
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+th น้ำ​และ​เมือก​สะท้อน​ห้อง​ด้าน​บน ระนาบ​วาด​ฉาก​ใหม่​หนึ่ง​ครั้ง​ต่อ​ระดับ​น้ำ​ที่​อยู่​ใกล้ เรย์​เทรซิง​ติดตาม​ทุก​ระลอก​คลื่น​และ​ต้อง​ใช้ GPU ที่​รองรับ​เรย์​เทรซิง
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 th ส่วน​ลำ​น้ำ จำนวน​หยด​และ​การ​แรเงา​ของ​เหลว​มัน​วาว: ต่ำ​ใช้​สาย​น้ำ​โปร่ง​แสง​ที่​ง่าย​กว่า; สูง​ใช้​ลำ​น้ำ​เรียบ​มัน​วาว

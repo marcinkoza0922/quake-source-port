@@ -781,6 +781,9 @@ sk Výška tónu
 @ Pitch Sensitivity
 sk Vertikálna citlivosť
 
+@ planar
+sk rovinné
+
 @ Playback Speed
 sk Rýchlosť prehrávania
 
@@ -832,6 +835,9 @@ sk Nastavenia railgunu
 @ Ranged only
 sk Iba na diaľku
 
+@ ray traced
+sk sledovanie lúčov
+
 @ Reacquire While Held
 sk Znova zamerať pri držaní
 
@@ -846,6 +852,12 @@ sk Červená
 
 @ Reduce Motion
 sk Obmedziť pohyb
+
+@ Reflection Strength
+sk Sila odrazov
+
+@ Reflections
+sk Odrazy
 
 @ Regen (seconds per second)
 sk Regenerácia (sekundy za sekundu)
@@ -1652,6 +1664,9 @@ sk Koľko svetiel vrhá tiene naraz a aké mäkké sú ich okraje
 @ How strongly fog covers the sky when fog is on
 sk Ako silno hmla zakryje oblohu, keď je hmla zapnutá
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+sk Ako silno povrch odráža; najsilnejšie pri šikmom pohľade
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 sk Ako sa pohľad pod vodou skresľuje: klasický vlní celú obrazovku ako softvérový Quake, GLQuake pomaly naťahuje a stláča pohľad
 
@@ -1918,6 +1933,9 @@ sk Použije farebné svetlo mapy (súbor .lit alebo blok BSPX); vypnuté dá pô
 
 @ Walls, doors and monsters block the light and cast shadows
 sk Steny, dvere a príšery zakrývajú svetlo a vrhajú tiene
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+sk Voda a sliz odrážajú miestnosť nad sebou; rovinné vykreslia scénu znova raz pre každú blízku hladinu; sledovanie lúčov sleduje každé zvlnenie a vyžaduje GPU so sledovaním lúčov
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sk Segmenty prúdu, počet kvapiek a lesklé tieňovanie kvapaliny: nízka používa jednoduchšie priesvitné prúdy; vysoká hladké lesklé prúdy
