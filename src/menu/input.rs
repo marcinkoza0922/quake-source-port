@@ -245,7 +245,7 @@ impl Menu {
                     match self.main_cursor {
                         0 => self.screen = Screen::SinglePlayer,
                         1 => self.screen = Screen::Multiplayer,
-                        2 => self.screen = Screen::Options,
+                        2 => self.open(Screen::Options),
                         3 => self.open(Screen::Help),
                         4 => self.open(Screen::Quit),
                         5 => {
@@ -358,6 +358,9 @@ impl Menu {
                 }
             }
             Screen::Options => {
+                if self.search_key(key, cv, &mut out) {
+                    return out;
+                }
                 if back {
                     self.screen = Screen::Main;
                     return out;

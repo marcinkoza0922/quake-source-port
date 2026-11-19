@@ -2574,6 +2574,21 @@ ja 敵にダメージを与えたときにゲームを一瞬停止させ、攻�
 @ Get more maps (Quaddicted)...
 ja マップを追加（Quaddicted）...
 
+@ Type to search settings...
+ja 入力して設定を検索...
+
+@ No matching settings
+ja 一致する設定がありません
+
+@ Search
+ja 検索
+
+@ Options
+ja オプション
+
+@ Multiplayer
+ja マルチプレイヤー
+
 @ Type to filter...
 ja 入力して絞り込み...
 

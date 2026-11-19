@@ -2574,6 +2574,21 @@ te మీరు శత్రువును దెబ్బతీసినప్
 @ Get more maps (Quaddicted)...
 te మరిన్ని మ్యాప్‌లు పొందండి (Quaddicted)...
 
+@ Type to search settings...
+te సెట్టింగ్‌లను వెతకడానికి టైప్ చేయండి...
+
+@ No matching settings
+te సరిపోలే సెట్టింగ్‌లు లేవు
+
+@ Search
+te వెతుకు
+
+@ Options
+te ఎంపికలు
+
+@ Multiplayer
+te మల్టీప్లేయర్
+
 @ Type to filter...
 te ఫిల్టర్ చేయడానికి టైప్ చేయండి...
 

@@ -2574,6 +2574,21 @@ be Замарожвае гульню на долю секунды, калі вы
 @ Get more maps (Quaddicted)...
 be Больш карт (Quaddicted)...
 
+@ Type to search settings...
+be Увядзіце тэкст для пошуку налад...
+
+@ No matching settings
+be Няма адпаведных налад
+
+@ Search
+be Пошук
+
+@ Options
+be Налады
+
+@ Multiplayer
+be Сеткавая гульня
+
 @ Type to filter...
 be Увядзіце для фільтра...
 

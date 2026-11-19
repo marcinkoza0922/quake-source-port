@@ -2574,6 +2574,21 @@ cy Rhewi'r gêm am ennyd pan fyddwch yn niweidio gelyn, fel bod trawiadau'n teim
 @ Get more maps (Quaddicted)...
 cy Rhagor o fapiau (Quaddicted)...
 
+@ Type to search settings...
+cy Teipiwch i chwilio'r gosodiadau...
+
+@ No matching settings
+cy Dim gosodiadau sy'n cyfateb
+
+@ Search
+cy Chwilio
+
+@ Options
+cy Opsiynau
+
+@ Multiplayer
+cy Aml-chwaraewr
+
 @ Type to filter...
 cy Teipiwch i hidlo...
 

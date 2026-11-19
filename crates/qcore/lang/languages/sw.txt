@@ -2574,6 +2574,21 @@ sw Hugandisha mchezo kwa sekunde moja unapomjeruhi adui, ili mapigo yahisi mazit
 @ Get more maps (Quaddicted)...
 sw Pata ramani zaidi (Quaddicted)...
 
+@ Type to search settings...
+sw Andika ili kutafuta mipangilio...
+
+@ No matching settings
+sw Hakuna mipangilio inayolingana
+
+@ Search
+sw Tafuta
+
+@ Options
+sw Chaguo
+
+@ Multiplayer
+sw Wachezaji wengi
+
 @ Type to filter...
 sw Andika ili kuchuja...
 

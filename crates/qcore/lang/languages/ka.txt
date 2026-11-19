@@ -2574,6 +2574,21 @@ ka მტრის დაზიანებისას თამაშს წ�
 @ Get more maps (Quaddicted)...
 ka მეტი რუკა (Quaddicted)...
 
+@ Type to search settings...
+ka აკრიფეთ პარამეტრების მოსაძებნად...
+
+@ No matching settings
+ka შესაბამისი პარამეტრები არ არის
+
+@ Search
+ka ძებნა
+
+@ Options
+ka პარამეტრები
+
+@ Multiplayer
+ka მრავალმოთამაშიანი
+
 @ Type to filter...
 ka აკრიფეთ ფილტრისთვის...
 

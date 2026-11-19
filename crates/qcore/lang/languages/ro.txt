@@ -2574,6 +2574,21 @@ ro Îngheață jocul o fracțiune de secundă când rănești un inamic, ca lovi
 @ Get more maps (Quaddicted)...
 ro Mai multe hărți (Quaddicted)...
 
+@ Type to search settings...
+ro Tastați pentru a căuta setări...
+
+@ No matching settings
+ro Nicio setare potrivită
+
+@ Search
+ro Caută
+
+@ Options
+ro Opțiuni
+
+@ Multiplayer
+ro Multiplayer
+
 @ Type to filter...
 ro Scrie pentru a filtra...
 

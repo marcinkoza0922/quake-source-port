@@ -2574,6 +2574,21 @@ eu Jokoa segundo-zati batez izozten du etsai bati kalte egitean, kolpeak astunag
 @ Get more maps (Quaddicted)...
 eu Mapa gehiago (Quaddicted)...
 
+@ Type to search settings...
+eu Idatzi ezarpenak bilatzeko...
+
+@ No matching settings
+eu Ez dago bat datorren ezarpenik
+
+@ Search
+eu Bilatu
+
+@ Options
+eu Aukerak
+
+@ Multiplayer
+eu Jokalari anitz
+
 @ Type to filter...
 eu Idatzi iragazteko...
 

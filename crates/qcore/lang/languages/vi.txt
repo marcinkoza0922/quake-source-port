@@ -2574,6 +2574,21 @@ vi Dừng hình trò chơi trong tích tắc khi bạn gây sát thương cho k�
 @ Get more maps (Quaddicted)...
 vi Thêm bản đồ (Quaddicted)...
 
+@ Type to search settings...
+vi Gõ để tìm cài đặt...
+
+@ No matching settings
+vi Không có cài đặt phù hợp
+
+@ Search
+vi Tìm kiếm
+
+@ Options
+vi Tùy chọn
+
+@ Multiplayer
+vi Nhiều người chơi
+
 @ Type to filter...
 vi Gõ để lọc...
 

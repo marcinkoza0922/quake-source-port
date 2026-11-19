@@ -2574,6 +2574,21 @@ zh-CN 对敌人造成伤害时让游戏冻结一瞬间，使命中更有分量�
 @ Get more maps (Quaddicted)...
 zh-CN 获取更多地图（Quaddicted）……
 
+@ Type to search settings...
+zh-CN 输入以搜索设置...
+
+@ No matching settings
+zh-CN 没有匹配的设置
+
+@ Search
+zh-CN 搜索
+
+@ Options
+zh-CN 选项
+
+@ Multiplayer
+zh-CN 多人游戏
+
 @ Type to filter...
 zh-CN 输入以筛选……
 

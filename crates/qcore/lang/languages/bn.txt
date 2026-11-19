@@ -2574,6 +2574,21 @@ bn শত্রুকে আঘাত করলে গেম এক মুহূ
 @ Get more maps (Quaddicted)...
 bn আরও ম্যাপ নিন (Quaddicted)...
 
+@ Type to search settings...
+bn সেটিং খুঁজতে টাইপ করুন...
+
+@ No matching settings
+bn কোনো মিলে যাওয়া সেটিং নেই
+
+@ Search
+bn খুঁজুন
+
+@ Options
+bn বিকল্প
+
+@ Multiplayer
+bn মাল্টিপ্লেয়ার
+
 @ Type to filter...
 bn ফিল্টার করতে লিখুন...
 

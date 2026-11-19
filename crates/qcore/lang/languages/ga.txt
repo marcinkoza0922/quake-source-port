@@ -2574,6 +2574,21 @@ ga Reonn sé an cluiche ar feadh sciorta de shoicind nuair a dhéanann tú damá
 @ Get more maps (Quaddicted)...
 ga Faigh tuilleadh léarscáileanna (Quaddicted)...
 
+@ Type to search settings...
+ga Clóscríobh chun socruithe a chuardach...
+
+@ No matching settings
+ga Níl socrú ar bith a mheaitseálann
+
+@ Search
+ga Cuardaigh
+
+@ Options
+ga Roghanna
+
+@ Multiplayer
+ga Ilimreoirí
+
 @ Type to filter...
 ga Clóscríobh le scagadh...
 

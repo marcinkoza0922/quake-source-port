@@ -2574,6 +2574,21 @@ eo Frostigas la ludon dum frakcio de sekundo kiam vi damaĝas malamikon, por ke 
 @ Get more maps (Quaddicted)...
 eo Pliaj mapoj (Quaddicted)...
 
+@ Type to search settings...
+eo Tajpu por serĉi agordojn...
+
+@ No matching settings
+eo Neniuj kongruaj agordoj
+
+@ Search
+eo Serĉi
+
+@ Options
+eo Agordoj
+
+@ Multiplayer
+eo Plurludanta
+
 @ Type to filter...
 eo Tajpu por filtri...
 

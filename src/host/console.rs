@@ -248,9 +248,15 @@ impl Host {
         let d = self.key_dest();
         if self.input.dest != d {
             qinput::set_key_dest(self, d);
-            if let Some(w) = &self.window {
-                let _ = w.set_text_input(d == KeyDest::Console);
-            }
+        }
+        // text events for the console and a menu text row only, so touch
+        // devices don't raise their keyboard anywhere else in the menu
+        let text = d == KeyDest::Console || (d == KeyDest::Menu && self.menu.wants_text());
+        if self.text_input != Some(text)
+            && let Some(w) = &self.window
+        {
+            let _ = w.set_text_input(text);
+            self.text_input = Some(text);
         }
         self.sync_mouse_grab();
     }

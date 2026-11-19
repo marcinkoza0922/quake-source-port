@@ -34,6 +34,8 @@ impl Host {
                     if let Some(snd) = self.menu.mouse_move(pos, &mut self.server.core.cvars) {
                         self.local_sound(snd);
                     }
+                    // hovering a text row turns text input on before the first key
+                    self.sync_key_dest();
                 } else if self.key_dest() == KeyDest::Game && (self.demo_cursor() || self.exporting()) {
                     self.demo_pointer_move((px / c.scale, py / c.scale), (c.vw(), c.vh()));
                 } else if self.key_dest() == KeyDest::Console && self.con.modern {

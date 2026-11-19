@@ -2574,6 +2574,21 @@ zh-TW 傷害敵人時讓遊戲凍結一瞬間，讓命中更有打擊感。僅�
 @ Get more maps (Quaddicted)...
 zh-TW 取得更多地圖（Quaddicted）……
 
+@ Type to search settings...
+zh-TW 輸入以搜尋設定...
+
+@ No matching settings
+zh-TW 沒有符合的設定
+
+@ Search
+zh-TW 搜尋
+
+@ Options
+zh-TW 選項
+
+@ Multiplayer
+zh-TW 多人遊戲
+
 @ Type to filter...
 zh-TW 輸入文字以篩選……
 

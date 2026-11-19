@@ -2574,6 +2574,21 @@ la Lusum per momentum congelat cum hostem laedis, ut ictus graviores videantur. 
 @ Get more maps (Quaddicted)...
 la Plures tabulae (Quaddicted)...
 
+@ Type to search settings...
+la Scribe ut optiones quaeras...
+
+@ No matching settings
+la Nullae optiones congruunt
+
+@ Search
+la Quaere
+
+@ Options
+la Optiones
+
+@ Multiplayer
+la Lusores multi
+
 @ Type to filter...
 la Scribe ut eliquas...
 

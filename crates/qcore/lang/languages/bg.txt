@@ -2574,6 +2574,21 @@ bg Замразява играта за частица от секундата, 
 @ Get more maps (Quaddicted)...
 bg Още карти (Quaddicted)...
 
+@ Type to search settings...
+bg Пишете, за да търсите настройки...
+
+@ No matching settings
+bg Няма съвпадащи настройки
+
+@ Search
+bg Търсене
+
+@ Options
+bg Настройки
+
+@ Multiplayer
+bg Мрежова игра
+
 @ Type to filter...
 bg Пиши за филтриране...
 

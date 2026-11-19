@@ -2574,6 +2574,21 @@ hu Egy pillanatra megállítja a játékot, amikor megsebzel egy ellenséget, í
 @ Get more maps (Quaddicted)...
 hu További pályák (Quaddicted)...
 
+@ Type to search settings...
+hu Írjon a beállítások kereséséhez...
+
+@ No matching settings
+hu Nincs egyező beállítás
+
+@ Search
+hu Keresés
+
+@ Options
+hu Beállítások
+
+@ Multiplayer
+hu Többjátékos
+
 @ Type to filter...
 hu Gépelj a szűréshez...
 

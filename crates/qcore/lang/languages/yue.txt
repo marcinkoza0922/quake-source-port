@@ -2574,6 +2574,21 @@ yue 傷到敵人時令遊戲凍結一剎那，等命中更有打擊感。只限�
 @ Get more maps (Quaddicted)...
 yue 攞更多地圖（Quaddicted）……
 
+@ Type to search settings...
+yue 輸入嚟搵設定……
+
+@ No matching settings
+yue 冇相符嘅設定
+
+@ Search
+yue 搜尋
+
+@ Options
+yue 選項
+
+@ Multiplayer
+yue 多人遊戲
+
 @ Type to filter...
 yue 打字篩選……
 

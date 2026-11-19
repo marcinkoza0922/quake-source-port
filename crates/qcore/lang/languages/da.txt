@@ -2574,6 +2574,21 @@ da Fryser spillet et splitsekund, når du skader en fjende, så træf føles tun
 @ Get more maps (Quaddicted)...
 da Hent flere baner (Quaddicted)...
 
+@ Type to search settings...
+da Skriv for at søge i indstillinger...
+
+@ No matching settings
+da Ingen matchende indstillinger
+
+@ Search
+da Søg
+
+@ Options
+da Indstillinger
+
+@ Multiplayer
+da Multiplayer
+
 @ Type to filter...
 da Skriv for at filtrere...
 

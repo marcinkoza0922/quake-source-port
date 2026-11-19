@@ -2574,6 +2574,21 @@ ca Congela el joc una fracció de segon en ferir un enemic, perquè els cops es 
 @ Get more maps (Quaddicted)...
 ca Més mapes (Quaddicted)...
 
+@ Type to search settings...
+ca Escriu per cercar ajustos...
+
+@ No matching settings
+ca Cap ajust coincident
+
+@ Search
+ca Cerca
+
+@ Options
+ca Opcions
+
+@ Multiplayer
+ca Multijugador
+
 @ Type to filter...
 ca Escriu per filtrar...
 

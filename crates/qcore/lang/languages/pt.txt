@@ -2574,6 +2574,21 @@ pt Congela o jogo durante uma fração de segundo quando danificas um inimigo, p
 @ Get more maps (Quaddicted)...
 pt Obter mais mapas (Quaddicted)...
 
+@ Type to search settings...
+pt Escreva para procurar definições...
+
+@ No matching settings
+pt Nenhuma definição corresponde
+
+@ Search
+pt Procurar
+
+@ Options
+pt Opções
+
+@ Multiplayer
+pt Multijogador
+
 @ Type to filter...
 pt Escreve para filtrar...
 

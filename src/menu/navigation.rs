@@ -8,7 +8,7 @@ impl Menu {
         let (x, y) = match self.screen {
             Screen::SinglePlayer => (CLASSIC.0 + 72.0, CLASSIC.1 + 32.0 + customize::SP_ITEMS as f32 * 20.0 + 8.0),
             Screen::Multiplayer => (CLASSIC.0 + 72.0, CLASSIC.1 + 32.0 + 3.0 * 20.0 + 8.0),
-            Screen::Options => (PANEL_X, ROW0 + PAGES.len() as f32 * ROW_H + 12.0),
+            Screen::Options => (PANEL_X, ROW0 + self.hub_rows() as f32 * ROW_H + 12.0),
             Screen::OptionsPage(Page::Addons) => (20.0, 266.0),
             Screen::OptionsPage(Page::NewGameAddons) => (24.0, 294.0),
             Screen::OptionsPage(p) => {
@@ -122,6 +122,9 @@ impl Menu {
         }
         if self.prompt.is_some() {
             items = vec![(sel, qcore::t!("Select")), (back, qcore::t!("Cancel"))];
+        }
+        if self.screen == Screen::Options && self.prompt.is_none() {
+            items.insert(1, (K_YBUTTON, "Search"));
         }
         if self.screen == Screen::OptionsPage(Page::Controls) && self.drop.is_none() {
             items.insert(1, (K_XBUTTON, "Clear"));

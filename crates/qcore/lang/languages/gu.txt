@@ -2574,6 +2574,21 @@ gu તમે દુશ્મનને નુકસાન કરો ત્યા�
 @ Get more maps (Quaddicted)...
 gu વધુ મેપ મેળવો (Quaddicted)...
 
+@ Type to search settings...
+gu સેટિંગ્સ શોધવા માટે લખો...
+
+@ No matching settings
+gu કોઈ મેળ ખાતી સેટિંગ નથી
+
+@ Search
+gu શોધો
+
+@ Options
+gu વિકલ્પો
+
+@ Multiplayer
+gu મલ્ટિપ્લેયર
+
 @ Type to filter...
 gu ફિલ્ટર કરવા લખો...
 

@@ -2574,6 +2574,21 @@ tr Bir düşmana hasar verdiğinizde oyunu bir anlığına dondurur; böylece vu
 @ Get more maps (Quaddicted)...
 tr Daha fazla harita (Quaddicted)...
 
+@ Type to search settings...
+tr Ayar aramak için yazın...
+
+@ No matching settings
+tr Eşleşen ayar yok
+
+@ Search
+tr Ara
+
+@ Options
+tr Seçenekler
+
+@ Multiplayer
+tr Çok oyunculu
+
 @ Type to filter...
 tr Filtrelemek için yazın...
 

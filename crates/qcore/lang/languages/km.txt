@@ -2574,6 +2574,21 @@ km ផ្អាក​ហ្គេម​មួយ​ភ្លែត​ពេល�
 @ Get more maps (Quaddicted)...
 km យក​ផែនទី​បន្ថែម (Quaddicted)...
 
+@ Type to search settings...
+km វាយ​ដើម្បី​ស្វែងរក​ការកំណត់...
+
+@ No matching settings
+km គ្មាន​ការកំណត់​ដែល​ត្រូវគ្នា
+
+@ Search
+km ស្វែងរក
+
+@ Options
+km ជម្រើស
+
+@ Multiplayer
+km អ្នកលេង​ច្រើន​នាក់
+
 @ Type to filter...
 km វាយ​ដើម្បី​ត្រង...
 

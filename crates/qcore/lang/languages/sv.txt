@@ -2574,6 +2574,21 @@ sv Fryser spelet en bråkdels sekund när du skadar en fiende, så att träffar 
 @ Get more maps (Quaddicted)...
 sv Hämta fler banor (Quaddicted)...
 
+@ Type to search settings...
+sv Skriv för att söka inställningar...
+
+@ No matching settings
+sv Inga matchande inställningar
+
+@ Search
+sv Sök
+
+@ Options
+sv Alternativ
+
+@ Multiplayer
+sv Flerspelare
+
 @ Type to filter...
 sv Skriv för att filtrera...
 

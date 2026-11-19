@@ -2574,6 +2574,21 @@ et Külmutab mängu hetkeks, kui vaenlast vigastad, et tabamused tunduksid raske
 @ Get more maps (Quaddicted)...
 et Rohkem kaarte (Quaddicted)...
 
+@ Type to search settings...
+et Kirjuta seadete otsimiseks...
+
+@ No matching settings
+et Sobivaid seadeid pole
+
+@ Search
+et Otsi
+
+@ Options
+et Valikud
+
+@ Multiplayer
+et Mitmikmäng
+
 @ Type to filter...
 et Kirjuta filtreerimiseks...
 

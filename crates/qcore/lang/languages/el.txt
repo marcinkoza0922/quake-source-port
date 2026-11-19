@@ -2574,6 +2574,21 @@ el Παγώνει το παιχνίδι για κλάσμα του δευτερ�
 @ Get more maps (Quaddicted)...
 el Περισσότεροι χάρτες (Quaddicted)...
 
+@ Type to search settings...
+el Πληκτρολογήστε για αναζήτηση ρυθμίσεων...
+
+@ No matching settings
+el Καμία ρύθμιση δεν ταιριάζει
+
+@ Search
+el Αναζήτηση
+
+@ Options
+el Επιλογές
+
+@ Multiplayer
+el Πολλοί παίκτες
+
 @ Type to filter...
 el Πληκτρολόγησε για φιλτράρισμα...
 

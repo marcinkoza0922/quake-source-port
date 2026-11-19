@@ -2574,6 +2574,21 @@ uk Заморожує гру на частку секунди, коли ви р�
 @ Get more maps (Quaddicted)...
 uk Більше карт (Quaddicted)...
 
+@ Type to search settings...
+uk Введіть текст для пошуку налаштувань...
+
+@ No matching settings
+uk Немає відповідних налаштувань
+
+@ Search
+uk Пошук
+
+@ Options
+uk Налаштування
+
+@ Multiplayer
+uk Мережева гра
+
 @ Type to filter...
 uk Введіть для фільтра...
 

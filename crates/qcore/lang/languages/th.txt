@@ -2574,6 +2574,21 @@ th หยุด​เกม​เสี้ยว​วินาที​เม�
 @ Get more maps (Quaddicted)...
 th หา​แผนที่​เพิ่ม (Quaddicted)...
 
+@ Type to search settings...
+th พิมพ์​เพื่อ​ค้นหา​การตั้งค่า...
+
+@ No matching settings
+th ไม่มี​การตั้งค่า​ที่​ตรงกัน
+
+@ Search
+th ค้นหา
+
+@ Options
+th ตัวเลือก
+
+@ Multiplayer
+th หลาย​ผู้เล่น
+
 @ Type to filter...
 th พิมพ์​เพื่อ​กรอง...
 

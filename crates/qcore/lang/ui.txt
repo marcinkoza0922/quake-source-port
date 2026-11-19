@@ -1341,6 +1341,41 @@ it Altre mappe (Quaddicted)...
 es Más mapas (Quaddicted)...
 ru Больше карт (Quaddicted)...
 
+@ Type to search settings...
+fr Tapez pour chercher un réglage...
+de Tippen, um Einstellungen zu suchen...
+it Digita per cercare un'impostazione...
+es Escribe para buscar ajustes...
+ru Введите текст для поиска настроек...
+
+@ No matching settings
+fr Aucun réglage correspondant
+de Keine passenden Einstellungen
+it Nessuna impostazione corrispondente
+es Ningún ajuste coincide
+ru Подходящих настроек нет
+
+@ Search
+fr Rechercher
+de Suchen
+it Cerca
+es Buscar
+ru Поиск
+
+@ Options
+fr Options
+de Optionen
+it Opzioni
+es Opciones
+ru Настройки
+
+@ Multiplayer
+fr Multijoueur
+de Mehrspieler
+it Multigiocatore
+es Multijugador
+ru Сетевая игра
+
 @ Type to filter...
 fr Tapez pour filtrer...
 de Tippen zum Filtern...

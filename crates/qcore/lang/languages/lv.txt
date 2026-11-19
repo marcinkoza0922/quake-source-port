@@ -2574,6 +2574,21 @@ lv Uz sekundes daļu sasaldē spēli, kad ievaino ienaidnieku, lai trāpījumi �
 @ Get more maps (Quaddicted)...
 lv Vairāk karšu (Quaddicted)...
 
+@ Type to search settings...
+lv Rakstiet, lai meklētu iestatījumus...
+
+@ No matching settings
+lv Nav atbilstošu iestatījumu
+
+@ Search
+lv Meklēt
+
+@ Options
+lv Opcijas
+
+@ Multiplayer
+lv Vairāku spēlētāju
+
 @ Type to filter...
 lv Raksti, lai filtrētu...
 

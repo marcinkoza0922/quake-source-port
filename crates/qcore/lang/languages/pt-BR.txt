@@ -2574,6 +2574,21 @@ pt-BR Congela o jogo por uma fração de segundo quando você causa dano a um in
 @ Get more maps (Quaddicted)...
 pt-BR Mais mapas (Quaddicted)...
 
+@ Type to search settings...
+pt-BR Digite para buscar configurações...
+
+@ No matching settings
+pt-BR Nenhuma configuração encontrada
+
+@ Search
+pt-BR Buscar
+
+@ Options
+pt-BR Opções
+
+@ Multiplayer
+pt-BR Multijogador
+
 @ Type to filter...
 pt-BR Digite para filtrar...
 

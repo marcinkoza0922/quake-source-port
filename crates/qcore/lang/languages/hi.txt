@@ -2574,6 +2574,21 @@ hi दुश्मन को डैमेज करने पर गेम प�
 @ Get more maps (Quaddicted)...
 hi और मैप पाएँ (Quaddicted)...
 
+@ Type to search settings...
+hi सेटिंग खोजने के लिए टाइप करें...
+
+@ No matching settings
+hi कोई मिलती-जुलती सेटिंग नहीं
+
+@ Search
+hi खोजें
+
+@ Options
+hi विकल्प
+
+@ Multiplayer
+hi मल्टीप्लेयर
+
 @ Type to filter...
 hi फ़िल्टर के लिए टाइप करें...
 

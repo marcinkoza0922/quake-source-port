@@ -2574,6 +2574,21 @@ fil Saglit na hinihinto ang laro kapag napinsala mo ang kalaban, para mas mabiga
 @ Get more maps (Quaddicted)...
 fil Kumuha ng iba pang mapa (Quaddicted)...
 
+@ Type to search settings...
+fil Mag-type para maghanap ng setting...
+
+@ No matching settings
+fil Walang tugmang setting
+
+@ Search
+fil Maghanap
+
+@ Options
+fil Mga Opsyon
+
+@ Multiplayer
+fil Multiplayer
+
 @ Type to filter...
 fil Mag-type para mag-filter...
 

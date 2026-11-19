@@ -2574,6 +2574,21 @@ is Frystir leikinn í sekúndubrot þegar þú særir óvin, svo högg virðast 
 @ Get more maps (Quaddicted)...
 is Fleiri borð (Quaddicted)...
 
+@ Type to search settings...
+is Skrifaðu til að leita í stillingum...
+
+@ No matching settings
+is Engar samsvarandi stillingar
+
+@ Search
+is Leita
+
+@ Options
+is Valkostir
+
+@ Multiplayer
+is Fjölspilun
+
 @ Type to filter...
 is Skrifaðu til að sía...
 

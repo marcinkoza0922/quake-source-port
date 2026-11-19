@@ -2574,6 +2574,21 @@ ur دشمن کو نقصان پہنچانے پر گیم کو پل بھر روک �
 @ Get more maps (Quaddicted)...
 ur مزید نقشے (Quaddicted)...
 
+@ Type to search settings...
+ur ترتیبات تلاش کرنے کے لیے ٹائپ کریں...
+
+@ No matching settings
+ur کوئی مماثل ترتیب نہیں
+
+@ Search
+ur تلاش
+
+@ Options
+ur اختیارات
+
+@ Multiplayer
+ur ملٹی پلیئر
+
 @ Type to filter...
 ur فلٹر کے لیے لکھیں...
 
