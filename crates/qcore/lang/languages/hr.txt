@@ -1697,8 +1697,8 @@ hr Bolje oružje
 @ Center overlay
 hr Središnji prekrivni prikaz
 
-@ Corner minimap
-hr Minimapa u kutu
+@ Framed panel
+hr Uokvirena ploča
 
 @ Display
 hr Prikaz
@@ -2289,11 +2289,11 @@ hr Binauralni 3D prostorni zvuk za slušalice s vremenom ušiju, sjenom glave i 
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 hr Prigušuje i utišava zvukove koji dolaze iza čvrstih zidova i zatvorenih vrata
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-hr Reproducira sintetizirane korake i doskoke igrača za kamen, metal, drvo, zemlju i tekućine
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+hr Reproducira korake i doskoke igrača usklađene s kamenim, metalnim, drvenim, zemljanim i tekućim podlogama
 
-@ Volume of synthesized player footsteps and landings
-hr Glasnoća sintetiziranih koraka i doskoka igrača
+@ Volume of player footsteps and landings
+hr Glasnoća koraka i doskoka igrača
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 hr Sekunde glatkog pretapanja između glazbenih zapisa; 0 prebacuje odmah
@@ -2319,8 +2319,8 @@ hr Podesi redoslijed prioriteta oružja za automatsku promjenu na bolje oružje
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 hr Prilagodi prikaz 3D žičane automape, način prikaza, otkrivanje, zumiranje i oznake
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-hr Minimapa u kutu uokviruje mapu gore desno; Središnji prekrivni prikaz postavlja prozirnu žičanu mrežu preko pogleda
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+hr Uokvirena ploča centrira kartu u tamnom okviru na zaslonu statistike; središnji sloj prikazuje prozirni žičani prikaz preko slike
 
 @ Disabled while Weapon Auto-Switch is set to Never
 hr Onemogućeno dok je Auto-promjena oružja postavljena na Nikad
@@ -2337,8 +2337,11 @@ hr Neprozirnost linija i ploče automape
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 hr Rotira automapu tako da smjer pogleda pokazuje gore; isključeno drži sjever na vrhu
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-hr Prikazuje 3D žičanu ili automapu odozgo tijekom igre; pritisnite M za interaktivnu kartu na cijelom zaslonu (samo za jednog igrača i suradnju)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+hr Prikazuje 3D žičanu ili gornju autokartu na zaslonu statistike (Tab/Select); dodajte Autokartu u uređivaču HUD-a za stalni prikaz ili pritisnite M za kartu preko cijelog zaslona (samo jedan igrač i kooperativno)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+hr Stalno prikazuje 3D žičanu ili gornju autokartu na HUD-u (samo jedan igrač i kooperativno)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 hr Pri uzimanju oružja: Nikad zadržava trenutačno oružje; Bolje oružje prebacuje samo ako je više na popisu Prioriteta oružja

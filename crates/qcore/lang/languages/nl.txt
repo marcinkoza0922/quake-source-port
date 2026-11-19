@@ -1697,8 +1697,8 @@ nl Beter wapen
 @ Center overlay
 nl Overlay in midden
 
-@ Corner minimap
-nl Minikaart in hoek
+@ Framed panel
+nl Omkaderd paneel
 
 @ Display
 nl Weergave
@@ -2289,11 +2289,11 @@ nl Binaurale 3D-ruimtelijkheid voor koptelefoons met oorvertraging, hoofdschaduw
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 nl Dempt en verzacht geluiden achter massieve muren en gesloten deuren
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-nl Speelt gesynthetiseerde voetstappen en landingen af voor steen, metaal, hout, aarde en vloeistof
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+nl Speelt voetstappen en landingen van de speler af, afgestemd op steen, metaal, hout, aarde en vloeistoffen
 
-@ Volume of synthesized player footsteps and landings
-nl Volume van gesynthetiseerde voetstappen en landingen
+@ Volume of player footsteps and landings
+nl Volume van voetstappen en landingen van de speler
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 nl Seconden om vloeiend over te gaan tussen muzieknummers; 0 schakelt direct
@@ -2319,8 +2319,8 @@ nl Stel de wapenprioriteit in voor automatisch wisselen naar Beter wapen
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 nl Stel de weergave, plaatsing, onthulling, zoom en markeringen van de 3D-autokaart in
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-nl Minikaart in hoek plaatst de kaart rechtsboven; Overlay in midden toont een transparant draadmodel over het beeld
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+nl Omkaderd paneel centreert de kaart in een donker vak op het statistiekenscherm; Middenoverlay zweeft een transparant draadmodel over het beeld
 
 @ Disabled while Weapon Auto-Switch is set to Never
 nl Uitgeschakeld zolang Automatisch wapen wisselen op Nooit staat
@@ -2337,8 +2337,11 @@ nl Dekking van de lijnen en het paneel van de autokaart
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 nl Draait de autokaart zodat je kijkrichting omhoog wijst; uit houdt het noorden boven
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-nl Toont tijdens het spelen een live 3D-draadmodel of bovenaanzicht; druk op M voor de interactieve kaart op volledig scherm (alleen singleplayer en co-op)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+nl Toont een 3D-draadmodel- of bovenaanzicht-autokaart op het statistiekenscherm (Tab/Select); voeg Autokaart toe in HUD bewerken om deze altijd te tonen, of druk op M voor de volledige kaart (alleen singleplayer en co-op)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+nl Toont altijd een live 3D-draadmodel- of bovenaanzicht-autokaart op de HUD (alleen singleplayer en co-op)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 nl Bij het oppakken van een wapen: Nooit behoudt je huidige wapen; Beter wapen wisselt alleen bij een hogere plaats in Wapenprioriteit

@@ -1697,8 +1697,8 @@ hy Ավելի լավ զենք
 @ Center overlay
 hy Կենտրոնական ծածկույթ
 
-@ Corner minimap
-hy Անկյունային մինի քարտեզ
+@ Framed panel
+hy Շրջանակված վահանակ
 
 @ Display
 hy Ցուցադրում
@@ -2289,11 +2289,11 @@ hy 3D բինաուրալ տարածական ձայն ականջակալների 
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 hy Խլացնում և նվազեցնում է պինդ պատերի ու փակ դռների հետևից եկող ձայները
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-hy Նվագարկում է սինթեզված քայլեր և վայրէջքներ քարե, մետաղական, փայտե, հողե և հեղուկ հատակների համար
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+hy Նվագարկում է խաղացողի քայլերի և վայրէջքի ձայներ՝ քարե, մետաղական, փայտե, հողե և հեղուկ հատակներին համապատասխան
 
-@ Volume of synthesized player footsteps and landings
-hy Խաղացողի սինթեզված քայլերի և վայրէջքների ձայնի ուժգնությունը
+@ Volume of player footsteps and landings
+hy Խաղացողի քայլերի և վայրէջքների ձայնի ուժգնությունը
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 hy Վայրկյաններ երաժշտական թրեքների միջև սահուն անցման համար. 0-ն անմիջապես փոխում է
@@ -2319,8 +2319,8 @@ hy Դասավորեք զենքերի առաջնահերթության կարգը
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 hy Կարգավորեք 3D կարկասային ինքնաքարտեզի տեսքը, ցուցադրումը, բացահայտման ռեժիմը, խոշորացումը և նշիչները
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-hy Անկյունային մինի քարտեզը տեղադրում է քարտեզը վերևի աջ անկյունում, իսկ Կենտրոնական ծածկույթը թափանցիկ կարկաս է գծում տեսքի վրա
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+hy Շրջանակված վահանակը քարտեզը կենտրոնացնում է մուգ տուփում վիճակագրության էկրանին․ կենտրոնական վերադրումը թափանցիկ կարկաս է ցույց տալիս տեսարանի վրա
 
 @ Disabled while Weapon Auto-Switch is set to Never
 hy Անջատված է, քանի դեռ Զենքի ինքնափոխումը դրված է Երբեք
@@ -2337,8 +2337,11 @@ hy Ինքնաքարտեզի գծերի և վահանակի անթափանցու�
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 hy Պտտում է ինքնաքարտեզը, որպեսզի ձեր հայացքի ուղղությունը լինի վերևում, անջատված վիճակում Հյուսիսը մնում է վերևում
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-hy Խաղի ընթացքում ցույց է տալիս կենդանի 3D կարկասային կամ վերևից ինքնաքարտեզ, սեղմեք M՝ ինտերակտիվ լիաէկրան քարտեզի համար (միայն միանձնյա և համատեղ խաղում)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+hy Վիճակագրության էկրանին (Tab/Select) ցույց է տալիս 3D կարկասային կամ վերևից ավտոքարտեզ․ միշտ տեսնելու համար ավելացրեք HUD խմբագրիչում կամ սեղմեք M՝ լիաէկրան քարտեզի համար (միայն մեկ խաղացող և համատեղ)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+hy Միշտ ցույց է տալիս 3D կարկասային կամ վերևից ավտոքարտեզ HUD-ի վրա (միայն մեկ խաղացող և համատեղ)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 hy Զենք վերցնելիս՝ Երբեքը պահում է ընթացիկ զենքը, Ավելի լավ զենքը փոխում է միայն եթե այն ավելի բարձր է Զենքերի առաջնահերթության մեջ

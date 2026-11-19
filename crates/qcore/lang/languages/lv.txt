@@ -1697,8 +1697,8 @@ lv Labāks ierocis
 @ Center overlay
 lv Pārklājums centrā
 
-@ Corner minimap
-lv Minikarte stūrī
+@ Framed panel
+lv Ierāmēts panelis
 
 @ Display
 lv Attēlojums
@@ -2289,11 +2289,11 @@ lv Binaurālā 3D telpiskā skaņa austiņām ar ausu aizturi, galvas ēnu un pr
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 lv Slāpē un klusina skaņas aiz blīvām sienām un aizvērtām durvīm
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-lv Atskaņo sintezētus soļus un piezemēšanos atbilstoši akmens, metāla, koka, zemes un šķidruma virsmām
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+lv Atskaņo spēlētāja soļus un piezemēšanās skaņas atbilstoši akmens, metāla, koka, zemes un šķidruma virsmām
 
-@ Volume of synthesized player footsteps and landings
-lv Sintezēto spēlētāja soļu un piezemēšanās skaļums
+@ Volume of player footsteps and landings
+lv Spēlētāja soļu un piezemēšanās skaļums
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 lv Sekundes plūstošai pārejai starp mūzikas ierakstiem; 0 pārslēdz uzreiz
@@ -2319,8 +2319,8 @@ lv Sakārtojiet ieroču prioritāti automātiskai pārslēgšanai uz Labāks ier
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 lv Konfigurējiet 3D karkasa autokartes skatu, attēlojumu, atklāšanas režīmu, tālummaiņu un marķierus
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-lv Minikarte stūrī ierāmē karti augšējā labajā stūrī; Pārklājums centrā uzliek caurspīdīgu karkasu pāri skatam
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+lv Ierāmēts panelis centrē karti tumšā rāmī statistikas ekrānā; centra pārklājums parāda caurspīdīgu karkasu pāri skatam
 
 @ Disabled while Weapon Auto-Switch is set to Never
 lv Atspējots, kamēr Automātiska ieroču maiņa ir iestatīta uz Nekad
@@ -2337,8 +2337,11 @@ lv Autokartes līniju un paneļa necaurredzamība
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 lv Pagriež autokarti tā, lai jūsu skata virziens būtu uz augšu; izslēgts atstāj ziemeļus augšā
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-lv Spēles laikā rāda tiešraides 3D karkasa vai no augšas skatāmu autokarti; nospiediet M interaktīvai pilnekrāna kartei (tikai vienam spēlētājam un kooperatīvam)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+lv Rāda 3D karkasa vai augšskata autokarti statistikas ekrānā (Tab/Select); pievienojiet Autokarti HUD redaktorā pastāvīgai rādīšanai vai nospiediet M pilnekrāna kartei (tikai vienspēlē un sadarbībā)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+lv Pastāvīgi rāda tiešraides 3D karkasa vai augšskata autokarti HUD saskarnē (tikai vienspēlē un sadarbībā)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 lv Paņemot ieroci: Nekad patur pašreizējo ieroci; Labāks ierocis pārslēdzas tikai tad, ja tam ir augstāka vieta Ieroču prioritātē

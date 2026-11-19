@@ -2,7 +2,7 @@
 //! - Room-probing environmental reverb (`s_reverb`, `s_reverb_amount`)
 //! - Multi-ray BSP sound occlusion (`s_occlusion`)
 //! - 3D binaural spatialization (`s_hrtf`) & underwater muffling (`snd_waterfx`)
-//! - Procedural surface-aware footsteps (`s_footsteps`, `s_footsteps_volume`)
+//! - Surface-aware footsteps (`s_footsteps`, `s_footsteps_volume`)
 //! - Per-category volume mixing (`s_vol_ambient`, `s_vol_weapons`, `s_vol_monsters`, `s_vol_world`)
 //! - Soundtrack switcher & music crossfade (`s_soundtrack`, `s_music_crossfade`)
 

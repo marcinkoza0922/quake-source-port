@@ -1697,8 +1697,8 @@ cs Lepší zbraň
 @ Center overlay
 cs Překrytí uprostřed
 
-@ Corner minimap
-cs Minimapa v rohu
+@ Framed panel
+cs Zarámovaný panel
 
 @ Display
 cs Zobrazení
@@ -2289,11 +2289,11 @@ cs Binaurální 3D prostorový zvuk pro sluchátka s časováním uší, stínem
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 cs Tlumí a ztišuje zvuky přicházející zpoza pevných zdí a zavřených dveří
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-cs Přehrává syntetizované kroky a dopady hráče podle kamene, kovu, dřeva, hlíny a kapalin
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+cs Přehrává kroky a dopady hráče podle kamenné, kovové, dřevěné, hlinité a tekuté podlahy
 
-@ Volume of synthesized player footsteps and landings
-cs Hlasitost syntetizovaných kroků a dopadů hráče
+@ Volume of player footsteps and landings
+cs Hlasitost kroků a dopadů hráče
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 cs Sekundy plynulého prolínání mezi skladbami; 0 přepne okamžitě
@@ -2319,8 +2319,8 @@ cs Seřadí priority zbraní pro automatické přepnutí na lepší zbraň
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 cs Nastaví pohled 3D drátové automapy, zobrazení, odhalení, přiblížení a značky
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-cs Minimapa v rohu zobrazí mapu vpravo nahoře; Překrytí uprostřed vykreslí průhledný drátový model přes obraz
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+cs Zarámovaný panel vycentruje mapu v tmavém poli na obrazovce statistik; středové překrytí zobrazí průhledný drátěný model přes pohled
 
 @ Disabled while Weapon Auto-Switch is set to Never
 cs Vypnuto, pokud je Auto-přepnutí zbraně nastaveno na Nikdy
@@ -2337,8 +2337,11 @@ cs Krytí čar a panelu automapy
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 cs Otáčí automapu tak, aby váš směr pohledu mířil nahoru; vypnutí ponechá sever nahoře
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-cs Zobrazuje při hraní živou 3D drátovou nebo horní automapu; stiskněte M pro interaktivní mapu na celou obrazovku (jen hra jednoho hráče a kooperace)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+cs Zobrazí 3D drátěnou nebo horní automapu na obrazovce statistik (Tab/Select); pro trvalé zobrazení přidejte Automapu v editoru HUD nebo stiskněte M pro celoobrazovkovou mapu (pouze hra jednoho hráče a koop)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+cs Trvale zobrazuje živou 3D drátěnou nebo horní automapu na HUD (pouze hra jednoho hráče a koop)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 cs Při sebrání zbraně: Nikdy ponechá aktuální zbraň; Lepší zbraň přepne jen tehdy, má-li vyšší pořadí v Prioritě zbraní

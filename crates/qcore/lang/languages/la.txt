@@ -1697,8 +1697,8 @@ la Telum melius
 @ Center overlay
 la Superpositio media
 
-@ Corner minimap
-la Minima tabula in angulo
+@ Framed panel
+la Tabula inclusa
 
 @ Display
 la Ostentatio
@@ -2289,11 +2289,11 @@ la Spatialisatio binauralis 3D pro auricularibus cum mora aurium, umbra capitis 
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 la Sonos post muros solidos et ianuas clausas hebetat et minuit
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-la Passus et casus syntheticos pro lapide, metallo, ligno, terra et liquidis edit
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+la Sonos passuum et lapsus lusoris pro pavimento lapideo, metallico, ligneo, terreo et liquido edit
 
-@ Volume of synthesized player footsteps and landings
-la Volumen passuum et casuum syntheticorum lusoris
+@ Volume of player footsteps and landings
+la Sonoritas passuum et lapsus lusoris
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 la Secunda ad transitum lenem inter carmina; 0 statim mutat
@@ -2319,8 +2319,8 @@ la Ordina gradum telorum pro mutatione automatica ad Telum melius
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 la Configura aspectum, ostentationem, modum revelationis, magnificationem et signa tabulae automaticae 3D
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-la Minima tabula in angulo tabulam in summa dextra includit; Superpositio media reticulum pellucidum super aspectum ponit
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+la Tabula inclusa chartam in capsa obscura in scrinio statisticorum collocat; superpositio media filum pellucidum super aspectum monstrat
 
 @ Disabled while Weapon Auto-Switch is set to Never
 la Inactivum dum Mutatio automatica teli ad Numquam posita est
@@ -2337,8 +2337,11 @@ la Opacitas linearum et tabulae automaticae
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 la Tabulam automaticam rotat ut directio aspectus sursum spectet; inactivum septentrionem in summo servat
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-la Tabulam automaticam vivam 3D vel desuper inter ludum ostendit; preme M pro tabula interactiva pleni quadri (modo singulari et cooperatione tantum)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+la Chartam automaticam 3D vel desuper in scrinio statisticorum (Tab/Select) monstrat; adde eam in Editore HUD ut semper appareat, vel preme M pro charta plena (solum lusor unus et cooperatio)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+la Chartam automaticam vivam 3D vel desuper in HUD semper monstrat (solum lusor unus et cooperatio)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 la Cum telum tollitur: Numquam telum praesens servat; Telum melius mutat tantum si altius in Ordine telorum stat

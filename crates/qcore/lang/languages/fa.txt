@@ -1697,8 +1697,8 @@ fa سلاح بهتر
 @ Center overlay
 fa هم‌پوشانی مرکزی
 
-@ Corner minimap
-fa نقشه کوچک گوشه
+@ Framed panel
+fa پنل قاب‌دار
 
 @ Display
 fa نمایش
@@ -2289,11 +2289,11 @@ fa فضاسازی سه‌بعدی دوگوشی برای هدفون با تأخی
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 fa صداهایی را که از پشت دیوارهای توپر و درهای بسته می‌آیند خفه و آرام‌تر می‌کند
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-fa صدای قدم و فرود ساخته‌شده متناسب با سنگ، فلز، چوب، خاک و مایعات پخش می‌کند
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+fa صدای قدم‌ها و فرود بازیکن را متناسب با سطوح سنگی، فلزی، چوبی، خاکی و مایع پخش می‌کند
 
-@ Volume of synthesized player footsteps and landings
-fa بلندی صدای قدم‌ها و فرودهای ساخته‌شده بازیکن
+@ Volume of player footsteps and landings
+fa بلندی صدای قدم‌ها و فرود بازیکن
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 fa ثانیه برای گذار نرم بین قطعه‌های موسیقی؛ 0 فوری عوض می‌کند
@@ -2319,8 +2319,8 @@ fa ترتیب اولویت سلاح‌ها را برای تعویض خودکار
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 fa حالت نمایش، آشکارسازی، بزرگ‌نمایی و نشانگرهای نقشه خودکار سه‌بعدی را تنظیم کنید
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-fa نقشه کوچک گوشه نقشه را در بالا-راست قاب می‌گیرد؛ هم‌پوشانی مرکزی نمای سیمی شفاف روی صفحه می‌اندازد
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+fa پنل قاب‌دار نقشه را در یک کادر تیره وسط صفحه آمار قرار می‌دهد؛ هم‌پوشانی میانی یک شبکه سیمی شفاف روی تصویر نمایش می‌دهد
 
 @ Disabled while Weapon Auto-Switch is set to Never
 fa وقتی تعویض خودکار سلاح روی هرگز باشد غیرفعال است
@@ -2337,8 +2337,11 @@ fa کدری خطوط و پنل نقشه خودکار
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 fa نقشه خودکار را می‌چرخاند تا جهت نگاه شما به بالا باشد؛ خاموش شمال را در بالا نگه می‌دارد
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-fa هنگام بازی نقشه خودکار سیمی سه‌بعدی یا از بالا را نشان می‌دهد؛ برای نقشه تعاملی تمام‌صفحه M را بزنید (فقط تک‌نفره و همکاری)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+fa نقشه خودکار سه‌بعدی یا از بالا را در صفحه آمار (Tab/Select) نشان می‌دهد؛ برای نمایش همیشگی آن را در ویرایشگر HUD اضافه کنید یا برای نقشه تمام‌صفحه M را بزنید (فقط تک‌نفره و همکاری)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+fa نقشه خودکار زنده سه‌بعدی یا از بالا را همیشه روی HUD نمایش می‌دهد (فقط تک‌نفره و همکاری)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 fa هنگام برداشتن سلاح: هرگز سلاح فعلی را نگه می‌دارد؛ سلاح بهتر فقط اگر در اولویت سلاح‌ها رتبه بالاتری داشته باشد تعویض می‌کند

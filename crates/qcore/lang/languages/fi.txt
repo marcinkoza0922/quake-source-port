@@ -1697,8 +1697,8 @@ fi Parempi ase
 @ Center overlay
 fi Keskitetty peittokuva
 
-@ Corner minimap
-fi Kulmaminikartta
+@ Framed panel
+fi Kehystetty paneeli
 
 @ Display
 fi Näyttö
@@ -2289,11 +2289,11 @@ fi Binauraalinen 3D-tilaääni kuulokkeille korvaviiveellä, pään varjostuksel
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 fi Vaimentaa ja hiljentää ääniä kiinteiden seinien ja suljettujen ovien takaa
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-fi Toistaa syntetisoidut askeleet ja laskeutumiset kivi-, metalli-, puu-, maa- ja nestepinnoille
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+fi Toistaa pelaajan askel- ja laskeutumisäänet kivi-, metalli-, puu-, maa- ja nestepintojen mukaan
 
-@ Volume of synthesized player footsteps and landings
-fi Syntetisoitujen askelten ja laskeutumisten äänenvoimakkuus
+@ Volume of player footsteps and landings
+fi Pelaajan askelten ja laskeutumisten äänenvoimakkuus
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 fi Sekuntia pehmeään ristiinhäivytykseen kappaleiden välillä; 0 vaihtaa heti
@@ -2319,8 +2319,8 @@ fi Järjestä aseiden tärkeys Parempi ase -automaattivaihtoa varten
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 fi Määritä 3D-rautalankakartan näkymä, esitys, paljastustila, zoomaus ja merkit
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-fi Kulmaminikartta rajaa kartan oikeaan yläkulmaan; Keskitetty peittokuva piirtää läpinäkyvän rautalangan näkymän päälle
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+fi Kehystetty paneeli keskittää kartan tummaan laatikkoon tilastoruudussa; keskipäällyste piirtää läpinäkyvän rautalankakartan näkymän päälle
 
 @ Disabled while Weapon Auto-Switch is set to Never
 fi Pois käytöstä, kun Automaattinen aseen vaihto on asetettu tilaan Ei koskaan
@@ -2337,8 +2337,11 @@ fi Autokartan viivojen ja paneelin peittävyys
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 fi Kiertää autokarttaa niin, että katsesuuntasi osoittaa ylös; pois käytöstä pitää pohjoisen ylhäällä
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-fi Näyttää pelatessa reaaliaikaisen 3D-rautalanka- tai ylhäältä alas -autokartan; paina M avataksesi interaktiivisen kokoruudun kartan (vain yksinpeli ja yhteistyö)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+fi Näyttää 3D-rautalanka- tai ylhäältä kuvatun automaattikartan tilastoruudussa (Tab/Select); lisää Automaattikartta HUD-editorissa jatkuvaan näyttöön tai paina M koko näytön kartalle (vain yksinpeli ja yhteistyö)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+fi Näyttää reaaliaikaisen 3D-rautalanka- tai ylhäältä kuvatun automaattikartan aina HUD:ssa (vain yksinpeli ja yhteistyö)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 fi Asetta poimittaessa: Ei koskaan pitää nykyisen aseesi; Parempi ase vaihtaa vain, jos se on ylempänä Aseiden tärkeys -listalla

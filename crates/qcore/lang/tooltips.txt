@@ -1280,19 +1280,19 @@ it Attenua e abbassa i suoni provenienti da dietro muri solidi e porte chiuse
 es Amortigua y atenúa los sonidos que vienen detrás de muros sólidos y puertas cerradas
 ru Приглушает и ослабляет звуки, доносящиеся из-за сплошных стен и закрытых дверей
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-fr Joue des bruits de pas et d'atterrissage synthétisés adaptés aux sols en pierre, métal, bois, terre et liquides
-de Spielt synthetisierte Schritte und Landungen passend zu Stein-, Metall-, Holz-, Erd- und Flüssigkeitsböden ab
-it Riproduce passi e atterraggi sintetizzati adatti a superfici in pietra, metallo, legno, terra e liquidi
-es Reproduce pasos y aterrizajes sintetizados según el suelo de piedra, metal, madera, tierra o líquido
-ru Воспроизводит синтезированные шаги и приземления игрока для камня, металла, дерева, земли и жидкостей
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+fr Joue des bruits de pas et d'atterrissage adaptés aux sols en pierre, métal, bois, terre et liquides
+de Spielt Schritte und Landungen passend zu Stein-, Metall-, Holz-, Erd- und Flüssigkeitsböden ab
+it Riproduce passi e atterraggi adatti a superfici in pietra, metallo, legno, terra e liquidi
+es Reproduce pasos y aterrizajes según el suelo de piedra, metal, madera, tierra o líquido
+ru Воспроизводит шаги и приземления игрока для камня, металла, дерева, земли и жидкостей
 
-@ Volume of synthesized player footsteps and landings
-fr Volume des bruits de pas et d'atterrissage synthétisés du joueur
-de Lautstärke der synthetisierten Spielerschritte und Landungen
-it Volume dei passi e degli atterraggi sintetizzati del giocatore
-es Volumen de los pasos y aterrizajes sintetizados del jugador
-ru Громкость синтезированных шагов и приземлений игрока
+@ Volume of player footsteps and landings
+fr Volume des bruits de pas et d'atterrissage du joueur
+de Lautstärke der Spielerschritte und Landungen
+it Volume dei passi e degli atterraggi del giocatore
+es Volumen de los pasos y aterrizajes del jugador
+ru Громкость шагов и приземлений игрока
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 fr Secondes de fondu fluide entre les pistes musicales ; 0 coupe immédiatement
@@ -1352,12 +1352,12 @@ it Configura vista, visualizzazione, rivelazione, zoom e indicatori dell'automap
 es Configura vista, visualización, revelación, zoom y marcadores del automapa alámbrico 3D
 ru Настраивает вид, отображение, режим открытия, масштаб и маркеры 3D-автокарты
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-fr La minicarte encadre la carte en haut à droite ; la superposition centrale affiche un fil de fer transparent au centre
-de Eck-Minikarte rahmt die Karte oben rechts ein; Zentriertes Overlay legt ein transparentes Drahtgitter über das Bild
-it La minimappa d'angolo inquadra la mappa in alto a destra; la sovrapposizione centrale mostra un wireframe trasparente
-es Minimapa en esquina encuadra el mapa arriba a la derecha; Superposición central flota un alámbrico transparente
-ru Миникарта в углу размещает карту справа вверху; наложение по центру рисует полупрозрачный каркас поверх обзора
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+fr Le panneau encadré centre la carte dans un cadre sombre sur l'écran de statistiques ; la superposition centrale affiche un fil de fer transparent
+de Eingerahmtes Feld zentriert die Karte im dunklen Rahmen auf dem Statistikbildschirm; Zentriertes Overlay legt ein transparentes Drahtgitter über das Bild
+it Il pannello incorniciato centra la mappa in un riquadro scuro nella schermata delle statistiche; la sovrapposizione centrale mostra un wireframe trasparente
+es Panel enmarcado centra el mapa en un recuadro oscuro en la pantalla de estadísticas; Superposición central flota un alámbrico transparente
+ru Панель в рамке центрирует карту в тёмном окне на экране статистики; наложение по центру рисует полупрозрачный каркас поверх обзора
 
 @ Disabled while Weapon Auto-Switch is set to Never
 fr Désactivé lorsque le changement auto d'arme est réglé sur Jamais
@@ -1394,12 +1394,19 @@ it Ruota l'automappa in modo che la tua direzione punti in alto; disattivato man
 es Rota el automapa para que tu dirección apunte arriba; desactivado mantiene el norte arriba
 ru Поворачивает автокарту по направлению взгляда вверх; выкл. оставляет север сверху
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-fr Affiche une carte 3D ou vue de dessus en jeu ; appuyez sur M pour la carte plein écran interactive (solo et coop uniquement)
-de Zeigt beim Spielen eine 3D-Drahtgitter- oder Draufsicht-Autokarte; M öffnet die interaktive Vollbildkarte (nur Einzelspieler und Koop)
-it Mostra un'automappa 3D o dall'alto in gioco; premi M per la mappa interattiva a schermo intero (solo giocatore singolo e coop)
-es Muestra un automapa alámbrico 3D o cenital al jugar; pulsa M para el mapa interactivo a pantalla completa (solo un jugador y coop)
-ru Показывает 3D-каркасную или верхнюю автокарту во время игры; нажмите M для интерактивной полноэкранной карты (только одиночная и кооп)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+fr Affiche une carte 3D ou vue de dessus sur l'écran de statistiques (Tab/Select) ; ajoutez Automap dans Modifier le HUD pour la garder affichée, ou appuyez sur M pour la carte plein écran (solo et coop uniquement)
+de Zeigt eine 3D-Drahtgitter- oder Draufsicht-Autokarte auf dem Statistikbildschirm (Tab/Select); füge Autokarte im HUD-Editor hinzu, um sie dauerhaft anzuzeigen, oder drücke M für die Vollbildkarte (nur Einzelspieler und Koop)
+it Mostra un'automappa 3D o dall'alto nella schermata delle statistiche (Tab/Select); aggiungi Automappa in Modifica HUD per mantenerla visibile, o premi M per la mappa a schermo intero (solo giocatore singolo e coop)
+es Muestra un automapa alámbrico 3D o cenital en la pantalla de estadísticas (Tab/Select); añade Automapa en Editar HUD para mantenerlo visible, o pulsa M para el mapa a pantalla completa (solo un jugador y coop)
+ru Показывает 3D-каркасную или верхнюю автокарту на экране статистики (Tab/Select); добавьте Автокарту в редакторе HUD для постоянного отображения или нажмите M для полноэкранной карты (только одиночная и кооп)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+fr Affiche en permanence une carte 3D ou vue de dessus sur le HUD (solo et coop uniquement)
+de Zeigt dauerhaft eine 3D-Drahtgitter- oder Draufsicht-Autokarte im HUD an (nur Einzelspieler und Koop)
+it Mostra sempre un'automappa 3D o dall'alto sull'HUD (solo giocatore singolo e coop)
+es Muestra siempre un automapa alámbrico 3D o cenital en el HUD (solo un jugador y coop)
+ru Постоянно показывает 3D-каркасную или верхнюю автокарту на HUD (только одиночная и кооп)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 fr Au ramassage d'une arme : Jamais garde l'arme actuelle ; Meilleure arme ne change que si elle est mieux classée dans Priorité des armes

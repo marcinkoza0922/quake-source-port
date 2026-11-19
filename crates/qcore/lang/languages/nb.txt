@@ -1697,8 +1697,8 @@ nb Bedre våpen
 @ Center overlay
 nb Sentrert overlegg
 
-@ Corner minimap
-nb Hjørneminikart
+@ Framed panel
+nb Innrammet panel
 
 @ Display
 nb Visning
@@ -2289,11 +2289,11 @@ nb Binaural 3D-lyd for hodetelefoner med øretidsforskjell, hodeskygge og foran/
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 nb Demper og senker lyder bak solide vegger og lukkede dører
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-nb Spiller syntetiserte fottrinn og landinger tilpasset stein, metall, tre, jord og væske
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+nb Spiller av spillerens fottrinn og landinger tilpasset stein-, metall-, tre-, jord- og væskegulv
 
-@ Volume of synthesized player footsteps and landings
-nb Volum på syntetiserte fottrinn og landinger
+@ Volume of player footsteps and landings
+nb Volum for spillerens fottrinn og landinger
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 nb Sekunder med myk overgang mellom musikkspor; 0 bytter umiddelbart
@@ -2319,8 +2319,8 @@ nb Sett opp våpenprioritet for automatisk bytte til Bedre våpen
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 nb Tilpass visning, plassering, avdekking, zoom og markører for 3D-trådrammekartet
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-nb Hjørneminikart rammer inn kartet øverst til høyre; Sentrert overlegg legger en gjennomsiktig trådramme over bildet
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+nb Innrammet panel sentrerer kartet i en mørk boks på statistikkskjermen; midtoverlegg viser en gjennomsiktig trådmodell over visningen
 
 @ Disabled while Weapon Auto-Switch is set to Never
 nb Deaktivert mens Auto-våpenbytte står på Aldri
@@ -2337,8 +2337,11 @@ nb Dekkevne for autokartets linjer og panel
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 nb Roterer autokartet så blikkretningen din peker opp; av holder nord øverst
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-nb Viser et aktivt 3D-trådramme- eller ovenfra-autokart mens du spiller; trykk M for interaktivt fullskjermskart (kun énspiller og samarbeid)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+nb Viser et 3D-trådmodell- eller ovenfra-autokart på statistikkskjermen (Tab/Select); legg til Autokart i Rediger HUD for å vise det hele tiden, eller trykk M for fullskjermkart (kun enspiller og samarbeid)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+nb Viser et direkte 3D-trådmodell- eller ovenfra-autokart på HUD-en hele tiden (kun enspiller og samarbeid)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 nb Når du plukker opp et våpen: Aldri beholder nåværende våpen; Bedre våpen bytter bare hvis det står høyere i Våpenprioritet

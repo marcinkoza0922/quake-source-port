@@ -1697,8 +1697,8 @@ cy Arf well
 @ Center overlay
 cy Troshaen canol
 
-@ Corner minimap
-cy Map bach cornel
+@ Framed panel
+cy Panel â ffrâm
 
 @ Display
 cy Arddangos
@@ -2289,11 +2289,11 @@ cy Sain ofodol ddeuglust 3D ar gyfer clustffonau gydag oedi clust, cysgod pen ac
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 cy Yn tewi ac yn gostwng synau sy'n dod o du ôl i waliau solet a drysau caeëdig
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-cy Yn chwarae camau a glaniadau synthetig wedi'u paru â charreg, metel, pren, pridd a hylifau
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+cy Yn chwarae camau a glaniadau'r chwaraewr wedi'u paru â lloriau carreg, metel, pren, pridd a hylif
 
-@ Volume of synthesized player footsteps and landings
-cy Lefel sain camau a glaniadau synthetig y chwaraewr
+@ Volume of player footsteps and landings
+cy Uchder sain camau a glaniadau'r chwaraewr
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 cy Eiliadau i bylu'n llyfn rhwng traciau cerddoriaeth; mae 0 yn newid ar unwaith
@@ -2319,8 +2319,8 @@ cy Trefnwch drefn blaenoriaeth arfau ar gyfer awtonewid i Arf well
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 cy Ffurfweddu golwg, arddangos, modd datgelu, chwyddo a marcwyr yr awtomap ffrâm weiren 3D
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-cy Mae Map bach cornel yn fframio'r map ar y dde uchaf; mae Troshaen canol yn arnofio ffrâm weiren dryloyw dros yr olygfa
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+cy Mae panel â ffrâm yn canoli'r map mewn blwch tywyll ar y sgrin ystadegau; mae troshaen canol yn arnofio ffrâm wifren dryloyw dros y golygfa
 
 @ Disabled while Weapon Auto-Switch is set to Never
 cy Analluogwyd tra bod Awtonewid Arf wedi'i osod i Byth
@@ -2337,8 +2337,11 @@ cy Didreiddedd llinellau a phanel yr awtomap
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 cy Yn cylchdroi'r awtomap fel bod eich cyfeiriad wynebu yn pwyntio i fyny; mae i ffwrdd yn cadw'r Gogledd ar y brig
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-cy Yn dangos awtomap byw ffrâm weiren 3D neu oddi uchod wrth chwarae; pwyswch M am y map rhyngweithiol sgrin lawn (un chwaraewr a chydweithredol yn unig)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+cy Yn dangos awtomap 3D neu o'r brig ar y sgrin ystadegau (Tab/Select); ychwanegwch Awtomap yn Golygu HUD i'w gadw ar y sgrin, neu pwyswch M ar gyfer map sgrin lawn (chwaraewr unigol a chyd-chwarae yn unig)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+cy Yn dangos awtomap 3D neu o'r brig byw ar y HUD bob amser (chwaraewr unigol a chyd-chwarae yn unig)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 cy Wrth godi arf: mae Byth yn cadw eich arf presennol; dim ond os yw'n uwch ym Mlaenoriaeth Arfau y mae Arf well yn newid

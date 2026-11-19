@@ -1697,8 +1697,8 @@ yue 更強武器
 @ Center overlay
 yue 置中疊加
 
-@ Corner minimap
-yue 角落小地圖
+@ Framed panel
+yue 帶框面板
 
 @ Display
 yue 顯示位置
@@ -2289,11 +2289,11 @@ yue 畀耳機用嘅3D雙耳空間音效，有雙耳時間差、頭部聲影同�
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 yue 令來自實心牆同閂埋道門後面嘅聲音變悶同細聲
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-yue 跟住石頭、金屬、木頭、泥土同液體地面播合成腳步聲同落地聲
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+yue 根據石頭、金屬、木頭、泥土同液體地面播放玩家腳步聲同落地聲
 
-@ Volume of synthesized player footsteps and landings
-yue 合成玩家腳步聲同落地聲嘅音量
+@ Volume of player footsteps and landings
+yue 玩家腳步聲同落地聲嘅音量
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 yue 音樂之間平滑淡入淡出嘅秒數；0 會即刻切換
@@ -2319,8 +2319,8 @@ yue 排好「更強武器」自動換武器所用嘅武器優先次序
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 yue 設定3D線框自動地圖嘅檢視模式、顯示位置、顯示範圍、縮放同埋標記
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-yue 角落小地圖會將地圖擺喺右上角；置中疊加會喺畫面上方浮現半透明線框
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+yue 帶框面板喺統計畫面中間用深色框顯示地圖；中央疊加會喺畫面上面浮現半透明線框
 
 @ Disabled while Weapon Auto-Switch is set to Never
 yue 當自動換武器設為「永不」嗰陣會停用
@@ -2337,8 +2337,11 @@ yue 自動地圖線條同面板嘅不透明度
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 yue 旋轉自動地圖令你面向嘅方向指住正上方；熄咗就會保持北方喺上面
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-yue 玩緊嗰陣即時顯示3D線框或者俯視自動地圖；撳 M 可以開互動式全螢幕地圖（只限單人遊戲同合作模式）
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+yue 喺統計畫面（Tab/Select）顯示 3D 線框或者俯視自動地圖；想長期顯示可以喺編輯 HUD 加入自動地圖，或者撳 M 開全螢幕地圖（只限單人同合作）
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+yue 喺 HUD 上面長期即時顯示 3D 線框或者俯視自動地圖（只限單人同合作）
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 yue 執到武器嗰陣：「永不」會留返依家用緊嘅武器；「更強武器」只有喺嗰件武器喺武器優先次序排得更高先會換

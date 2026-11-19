@@ -1697,8 +1697,8 @@ is Betra vopn
 @ Center overlay
 is Yfirlag í miðju
 
-@ Corner minimap
-is Smákort í horni
+@ Framed panel
+is Innrammað spjald
 
 @ Display
 is Birting
@@ -2289,11 +2289,11 @@ is Tvíeyrna 3D-rýmishljóð fyrir heyrnartól með eyrnatöf, höfuðskugga og
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 is Deyfir og lækkar hljóð sem koma aftan við þétta veggi og lokaðar dyr
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-is Spilar tilbúið fótatak og lendingarhljóð fyrir stein, málm, við, mold og vökva
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+is Spilar fótatak og lendingarhljóð leikmanns sem passa við stein-, málm-, viðar-, moldar- og vökvafleti
 
-@ Volume of synthesized player footsteps and landings
-is Hljóðstyrkur tilbúins fótataks og lendinga leikmanns
+@ Volume of player footsteps and landings
+is Hljóðstyrkur fótataks og lendinga leikmanns
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 is Sekúndur fyrir mjúka yfirfærslu milli laga; 0 skiptir strax
@@ -2319,8 +2319,8 @@ is Raða forgangsröð vopna fyrir sjálfvirk skipti yfir í Betra vopn
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 is Stilla sýn, birtingu, afhjúpunarham, aðdrátt og merki fyrir 3D-vírnetskort
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-is Smákort í horni rammar kortið inn efst til hægri; Yfirlag í miðju leggur gegnsætt vírnet yfir sýnina
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+is Innrammað spjald miðjar kortið í dökkum ramma á tölfræðiskjánum; miðjuyfirlag sýnir gegnsæja vírgrind yfir myndina
 
 @ Disabled while Weapon Auto-Switch is set to Never
 is Óvirkt meðan Sjálfvirk vopnaskipti eru stillt á Aldrei
@@ -2337,8 +2337,11 @@ is Ógegnsæi lína og spjalds sjálfvirks korts
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 is Snýr sjálfvirka kortinu þannig að áttin sem þú horfir í vísi upp; af heldur norðri efst
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-is Sýnir lifandi 3D-vírnet eða yfirlit að ofan meðan spilað er; ýttu á M fyrir gagnvirkt heilskjás kort (aðeins einspilun og samvinna)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+is Sýnir þrívíddar vírgrindar- eða ofanákort á tölfræðiskjánum (Tab/Select); bættu Sjálfvirku korti við í HUD-ritlinum til að hafa það alltaf uppi, eða ýttu á M fyrir fullskjákort (aðeins einspilun og samspil)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+is Sýnir lifandi þrívíddar vírgrindar- eða ofanákort á HUD allan tímann (aðeins einspilun og samspil)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 is Þegar vopn er tekið upp: Aldrei heldur núverandi vopni; Betra vopn skiptir aðeins ef það er ofar í Forgangsröð vopna

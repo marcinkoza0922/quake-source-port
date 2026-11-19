@@ -1697,8 +1697,8 @@ eo Pli bona armilo
 @ Center overlay
 eo Centra surmeto
 
-@ Corner minimap
-eo Angula minimapo
+@ Framed panel
+eo Enkadrigita panelo
 
 @ Display
 eo Vidigo
@@ -2289,11 +2289,11 @@ eo Binaŭrala 3D-spacigo por kapaŭskultiloj kun orela prokrasto, kapa ombro kaj
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 eo Dampas kaj mallaŭtigas sonojn malantaŭ solidaj muroj kaj fermitaj pordoj
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-eo Lugas sintezitajn paŝojn kaj surteriĝojn laŭ ŝtona, metala, ligna, tera kaj likva planko
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+eo Ludas paŝojn kaj alteriĝojn de la ludanto laŭ ŝtona, metala, ligna, tera kaj likva plankoj
 
-@ Volume of synthesized player footsteps and landings
-eo Laŭteco de sintezitaj paŝoj kaj surteriĝoj de la ludanto
+@ Volume of player footsteps and landings
+eo Laŭteco de paŝoj kaj alteriĝoj de la ludanto
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 eo Sekundoj por glata transiro inter muzikaj trakoj; 0 ŝanĝas tuj
@@ -2319,8 +2319,8 @@ eo Aranĝu la armilan prioritatan ordon por aŭtomata ŝanĝo al Pli bona armilo
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 eo Agordu vidon, vidigon, malkaŝreĝimon, zomon kaj markilojn de la 3D-dratmodela aŭtomapo
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-eo Angula minimapo enkadras la mapon supre dekstre; Centra surmeto metas travideblan dratmodelon super la vidon
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+eo Enkadrigita panelo centras la mapon en malhela skatolo sur la statistika ekrano; centra supermeto ŝvebigas travideblan dratkadron super la vido
 
 @ Disabled while Weapon Auto-Switch is set to Never
 eo Malŝaltita dum Aŭtomata armilŝanĝo estas agordita al Neniam
@@ -2337,8 +2337,11 @@ eo Opakeco de la linioj kaj panelo de la aŭtomapo
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 eo Turnas la aŭtomapon tiel ke via rigarddirekto montras supren; malŝaltita tenas nordon supre
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-eo Montras vivan 3D-dratmodelan aŭ desupran aŭtomapon dum ludado; premu M por la interaga plenekrana mapo (nur unuludanta kaj kunludo)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+eo Montras 3D dratkadran aŭ desupran aŭtomapon sur la statistika ekrano (Tab/Select); aldonu Aŭtomapon en Redakti HUD por teni ĝin ekrane, aŭ premu M por plenekrana mapo (nur unu-ludanta kaj kunlabora)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+eo Ĉiam montras vivan 3D dratkadran aŭ desupran aŭtomapon sur la HUD (nur unu-ludanta kaj kunlabora)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 eo Kiam vi prenas armilon: Neniam tenas vian nunan armilon; Pli bona armilo ŝanĝas nur se ĝi havas pli altan rangon en Armila prioritato

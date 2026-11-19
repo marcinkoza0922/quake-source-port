@@ -1697,8 +1697,8 @@ ro Armă mai bună
 @ Center overlay
 ro Suprapunere centrală
 
-@ Corner minimap
-ro Minihartă în colț
+@ Framed panel
+ro Panou încadrat
 
 @ Display
 ro Afișare
@@ -2289,11 +2289,11 @@ ro Spațializare binaurală 3D pentru căști cu întârziere între urechi, umb
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 ro Înăbușă și scade sunetele care vin din spatele pereților plini și ușilor închise
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-ro Redă pași și aterizări sintetizate adaptate la piatră, metal, lemn, pământ și lichide
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ro Redă pașii și aterizările jucătorului potrivite pentru piatră, metal, lemn, pământ și lichide
 
-@ Volume of synthesized player footsteps and landings
-ro Volumul pașilor și aterizărilor sintetizate ale jucătorului
+@ Volume of player footsteps and landings
+ro Volumul pașilor și aterizărilor jucătorului
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 ro Secunde de tranziție lină între piese muzicale; 0 taie imediat
@@ -2319,8 +2319,8 @@ ro Ordonează prioritatea armelor pentru schimbarea automată la o Armă mai bun
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 ro Configurează vederea 3D, afișarea, modul de dezvăluire, zoomul și marcatorii autohărții
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-ro Minihartă în colț încadrează harta dreapta-sus; Suprapunere centrală afișează un contur transparent peste imagine
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+ro Panoul încadrat centrează harta într-o casetă întunecată pe ecranul de statistici; suprapunerea centrală afișează o plasă transparentă peste imagine
 
 @ Disabled while Weapon Auto-Switch is set to Never
 ro Dezactivat cât timp Schimbare automată armă este setată la Niciodată
@@ -2337,8 +2337,11 @@ ro Opacitatea liniilor și a panoului autohărții
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 ro Rotește autoharta astfel încât direcția privirii să fie în sus; oprit păstrează nordul sus
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-ro Afișează o autohartă 3D sau de sus în timpul jocului; apasă M pentru harta interactivă pe tot ecranul (doar single-player și cooperativ)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+ro Afișează o hartă automată 3D sau de sus pe ecranul de statistici (Tab/Select); adaugă Harta automată în Editorul HUD pentru afișare permanentă sau apasă M pentru harta pe tot ecranul (doar single player și co-op)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+ro Afișează permanent o hartă automată 3D sau de sus în timp real pe HUD (doar single player și co-op)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 ro La ridicarea unei arme: Niciodată păstrează arma curentă; Armă mai bună schimbă doar dacă are rang mai mare în Prioritate arme

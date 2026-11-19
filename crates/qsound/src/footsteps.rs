@@ -1,8 +1,14 @@
-//! Procedural surface-aware footstep and landing cues.
-//! Synthesized offline into mono `Sfx` clips so footsteps work across every
-//! Quake mod and map pack with zero external audio files.
+//! Surface-aware player footstep and landing cues backed by embedded CC0 1.0
+//! (public domain) OGG Vorbis recordings in `crates/qsound/assets/footsteps/`.
 
-use std::f32::consts::TAU;
+use std::io::Cursor;
+
+use symphonia::core::audio::SampleBuffer;
+use symphonia::core::codecs::DecoderOptions;
+use symphonia::core::formats::FormatOptions;
+use symphonia::core::io::{MediaSourceStream, MediaSourceStreamOptions};
+use symphonia::core::meta::MetadataOptions;
+use symphonia::core::probe::Hint;
 
 use crate::Sfx;
 
@@ -49,18 +55,65 @@ impl FootstepSurface {
 /// Number of distinct alternating footstep variations per surface.
 pub const VARIANTS: usize = 4;
 
-struct Rng(u32);
-impl Rng {
-    fn next_f32(&mut self) -> f32 {
-        self.0 = self.0.wrapping_mul(1_664_525).wrapping_add(1_013_904_223);
-        ((self.0 >> 8) as f32 / 8_388_608.0) - 1.0
-    }
-}
+const STEP_CLIPS: [[&[u8]; VARIANTS]; 7] = [
+    [
+        include_bytes!("../assets/footsteps/stone_0.ogg"),
+        include_bytes!("../assets/footsteps/stone_1.ogg"),
+        include_bytes!("../assets/footsteps/stone_2.ogg"),
+        include_bytes!("../assets/footsteps/stone_3.ogg"),
+    ],
+    [
+        include_bytes!("../assets/footsteps/metal_0.ogg"),
+        include_bytes!("../assets/footsteps/metal_1.ogg"),
+        include_bytes!("../assets/footsteps/metal_2.ogg"),
+        include_bytes!("../assets/footsteps/metal_3.ogg"),
+    ],
+    [
+        include_bytes!("../assets/footsteps/wood_0.ogg"),
+        include_bytes!("../assets/footsteps/wood_1.ogg"),
+        include_bytes!("../assets/footsteps/wood_2.ogg"),
+        include_bytes!("../assets/footsteps/wood_3.ogg"),
+    ],
+    [
+        include_bytes!("../assets/footsteps/dirt_0.ogg"),
+        include_bytes!("../assets/footsteps/dirt_1.ogg"),
+        include_bytes!("../assets/footsteps/dirt_2.ogg"),
+        include_bytes!("../assets/footsteps/dirt_3.ogg"),
+    ],
+    [
+        include_bytes!("../assets/footsteps/water_0.ogg"),
+        include_bytes!("../assets/footsteps/water_1.ogg"),
+        include_bytes!("../assets/footsteps/water_2.ogg"),
+        include_bytes!("../assets/footsteps/water_3.ogg"),
+    ],
+    [
+        include_bytes!("../assets/footsteps/slime_0.ogg"),
+        include_bytes!("../assets/footsteps/slime_1.ogg"),
+        include_bytes!("../assets/footsteps/slime_2.ogg"),
+        include_bytes!("../assets/footsteps/slime_3.ogg"),
+    ],
+    [
+        include_bytes!("../assets/footsteps/lava_0.ogg"),
+        include_bytes!("../assets/footsteps/lava_1.ogg"),
+        include_bytes!("../assets/footsteps/lava_2.ogg"),
+        include_bytes!("../assets/footsteps/lava_3.ogg"),
+    ],
+];
 
-/// Render a single footstep variation for `surface`.
+const LAND_CLIPS: [&[u8]; 7] = [
+    include_bytes!("../assets/footsteps/stone_land.ogg"),
+    include_bytes!("../assets/footsteps/metal_land.ogg"),
+    include_bytes!("../assets/footsteps/wood_land.ogg"),
+    include_bytes!("../assets/footsteps/dirt_land.ogg"),
+    include_bytes!("../assets/footsteps/water_land.ogg"),
+    include_bytes!("../assets/footsteps/slime_land.ogg"),
+    include_bytes!("../assets/footsteps/lava_land.ogg"),
+];
+
+/// Decode a single footstep variation for `surface` resampled to `rate`.
 pub fn render_step(surface: FootstepSurface, variant: usize, rate: u32) -> Sfx {
     let v = variant % VARIANTS;
-    let data = synth(surface, v, false, rate.max(8000));
+    let data = decode_ogg_mono(STEP_CLIPS[surface.index()][v], rate.max(8000));
     Sfx {
         name: format!("footsteps/{}_{}", surface.name(), v),
         data,
@@ -68,9 +121,9 @@ pub fn render_step(surface: FootstepSurface, variant: usize, rate: u32) -> Sfx {
     }
 }
 
-/// Render a heavier landing thud for `surface`.
+/// Decode the heavier landing thud for `surface` resampled to `rate`.
 pub fn render_land(surface: FootstepSurface, rate: u32) -> Sfx {
-    let data = synth(surface, 0, true, rate.max(8000));
+    let data = decode_ogg_mono(LAND_CLIPS[surface.index()], rate.max(8000));
     Sfx {
         name: format!("footsteps/{}_land", surface.name()),
         data,
@@ -78,121 +131,73 @@ pub fn render_land(surface: FootstepSurface, rate: u32) -> Sfx {
     }
 }
 
-fn synth(surface: FootstepSurface, variant: usize, land: bool, rate: u32) -> Vec<i16> {
-    let sr = rate as f32;
-    let dur = match (surface, land) {
-        (FootstepSurface::Water | FootstepSurface::Slime, true) => 0.24,
-        (FootstepSurface::Water | FootstepSurface::Slime, false) => 0.16,
-        (_, true) => 0.17,
-        (_, false) => 0.11,
+fn decode_ogg_mono(bytes: &'static [u8], out_rate: u32) -> Vec<i16> {
+    let src = Cursor::new(bytes);
+    let mss = MediaSourceStream::new(Box::new(src), MediaSourceStreamOptions::default());
+    let mut hint = Hint::new();
+    hint.with_extension("ogg");
+    let Ok(probed) = symphonia::default::get_probe().format(
+        &hint,
+        mss,
+        &FormatOptions::default(),
+        &MetadataOptions::default(),
+    ) else {
+        return Vec::new();
     };
-    let n = (dur * sr) as usize;
-    let seed = (surface.index() as u32 + 1)
-        .wrapping_mul(0x9E37_79B1)
-        ^ (variant as u32).wrapping_mul(0x85EB_CA77)
-        ^ if land { 0xC2B2_AE3D } else { 0 };
-    let mut rng = Rng(seed | 1);
-    // Subtle pitch/timbre jitter per variant so left/right steps feel organic.
-    let pitch = 0.92 + (variant as f32) * 0.055 - if land { 0.18 } else { 0.0 };
-    let gain = if land { 0.88 } else { 0.62 };
+    let mut format = probed.format;
+    let Some(track) = format.default_track() else {
+        return Vec::new();
+    };
+    let in_rate = track.codec_params.sample_rate.unwrap_or(out_rate);
+    let track_id = track.id;
+    let Ok(mut decoder) =
+        symphonia::default::get_codecs().make(&track.codec_params, &DecoderOptions::default())
+    else {
+        return Vec::new();
+    };
 
-    let mut out = vec![0.0f32; n];
-    let mut lp1 = 0.0f32;
-    let mut lp2 = 0.0f32;
-    let mut hp = 0.0f32;
-    let mut prev_x = 0.0f32;
-
-    for (i, sample) in out.iter_mut().enumerate() {
-        let t = i as f32 / sr;
-        let noise = rng.next_f32();
-        let attack = (t / 0.004).min(1.0);
-
-        let y = match surface {
-            FootstepSurface::Stone => {
-                // Crisp gritty boot heel tap + short low stone thump.
-                let heel_env = attack * (-t * 42.0).exp();
-                let grit_env = ((t - 0.006).max(0.0) / 0.008).min(1.0) * (-t * 28.0).exp();
-                lp1 += (1800.0 * pitch / sr).min(0.6) * (noise - lp1);
-                hp = 0.92 * (hp + noise - prev_x);
-                prev_x = noise;
-                let thump = (TAU * (105.0 * pitch * (-t * 10.0).exp().max(0.5)) * t).sin() * heel_env;
-                let scuff = (lp1 * 0.7 + hp * 0.35) * grit_env;
-                thump * 0.55 + scuff * 0.65
-            }
-            FootstepSurface::Metal => {
-                // Tight metallic ring modes + hard click transient.
-                let click = noise * attack * (-t * 95.0).exp();
-                let ring_env = attack * (-t * if land { 18.0 } else { 26.0 }).exp();
-                let f1 = 420.0 * pitch;
-                let f2 = 915.0 * pitch;
-                let f3 = 1680.0 * pitch;
-                let ring = (TAU * f1 * t).sin() * 0.45
-                    + (TAU * f2 * t).sin() * 0.35
-                    + (TAU * f3 * t).sin() * 0.22;
-                let thud = (TAU * 130.0 * pitch * t).sin() * attack * (-t * 36.0).exp();
-                ring * ring_env * 0.42 + click * 0.55 + thud * 0.45
-            }
-            FootstepSurface::Wood => {
-                // Hollow warm board knock + dry scuff.
-                let knock_env = attack * (-t * 30.0).exp();
-                let f1 = 175.0 * pitch;
-                let f2 = 340.0 * pitch;
-                let knock = (TAU * f1 * t).sin() * 0.65 + (TAU * f2 * t).sin() * 0.30;
-                lp1 += (950.0 * pitch / sr).min(0.5) * (noise - lp1);
-                let scuff = lp1 * attack * (-t * 38.0).exp();
-                knock * knock_env * 0.65 + scuff * 0.45
-            }
-            FootstepSurface::Dirt => {
-                // Soft granular crunch + damped earthy thud.
-                let env = (t / 0.010).min(1.0) * (-t * 22.0).exp();
-                lp1 += (1100.0 * pitch / sr).min(0.5) * (noise - lp1);
-                lp2 += (320.0 * pitch / sr).min(0.3) * (lp1 - lp2);
-                let grain = (lp1 - lp2) * (0.65 + 0.35 * (TAU * 55.0 * t).sin());
-                let thud = (TAU * 82.0 * pitch * t).sin() * attack * (-t * 32.0).exp();
-                grain * env * 0.75 + thud * 0.42
-            }
-            FootstepSurface::Water => {
-                // Splashy droplet scatter + wet low slosh.
-                let splash_env = (t / 0.012).min(1.0) * (-t * if land { 11.0 } else { 17.0 }).exp();
-                lp1 += (3400.0 * pitch / sr).min(0.75) * (noise - lp1);
-                hp = 0.85 * (hp + lp1 - prev_x);
-                prev_x = lp1;
-                let slosh = (TAU * (260.0 + 180.0 * (-t * 14.0).exp()) * pitch * t).sin()
-                    * attack
-                    * (-t * 20.0).exp();
-                hp * splash_env * 0.75 + slosh * 0.30
-            }
-            FootstepSurface::Slime => {
-                // Thick viscous squelch with downward pitch sweep.
-                let env = (t / 0.014).min(1.0) * (-t * 15.0).exp();
-                let f = (460.0 * (-t * 9.0).exp() + 110.0) * pitch;
-                lp1 += (1200.0 / sr).min(0.5) * (noise - lp1);
-                let squelch = (TAU * f * t).sin() * (0.6 + 0.4 * lp1);
-                squelch * env * 0.65 + lp1 * env * 0.35
-            }
-            FootstepSurface::Lava => {
-                // Hot sizzle crackle + heavy cinder thump.
-                let env = attack * (-t * 22.0).exp();
-                hp = 0.94 * (hp + noise - prev_x);
-                prev_x = noise;
-                let crackle = if noise.abs() > 0.72 { hp * 1.4 } else { hp * 0.35 };
-                let thud = (TAU * 95.0 * pitch * t).sin() * attack * (-t * 35.0).exp();
-                crackle * env * 0.65 + thud * 0.50
-            }
+    let mut mono = Vec::<f32>::new();
+    while let Ok(pkt) = format.next_packet() {
+        if pkt.track_id() != track_id {
+            continue;
+        }
+        let Ok(decoded) = decoder.decode(&pkt) else {
+            continue;
         };
-
-        // Smooth fade-out tail on last 10 ms to guarantee zero clicks.
-        let tail = ((dur - t) / 0.010).clamp(0.0, 1.0);
-        *sample = y * gain * tail;
+        let spec = *decoded.spec();
+        let ch = spec.channels.count().max(1);
+        let mut sb = SampleBuffer::<f32>::new(decoded.capacity() as u64, spec);
+        sb.copy_interleaved_ref(decoded);
+        let inv_ch = 1.0 / ch as f32;
+        for frame in sb.samples().chunks_exact(ch) {
+            let sum: f32 = frame.iter().copied().sum();
+            mono.push(sum * inv_ch);
+        }
+    }
+    if mono.is_empty() {
+        return Vec::new();
     }
 
-    // Normalize softly to a consistent comfortable footstep level.
-    let peak = out.iter().map(|s| s.abs()).fold(0.0f32, f32::max).max(1e-4);
-    let target = if land { 19000.0 } else { 13500.0 };
-    let scale = (target / peak).min(24000.0);
-    out.into_iter()
-        .map(|s| (s * scale).clamp(-32768.0, 32767.0) as i16)
-        .collect()
+    if in_rate == out_rate {
+        return mono
+            .into_iter()
+            .map(|s| (s * 32767.0).clamp(-32768.0, 32767.0) as i16)
+            .collect();
+    }
+
+    let step = f64::from(in_rate) / f64::from(out_rate);
+    let out_len = ((mono.len() as f64) / step).ceil() as usize;
+    let last = mono.len() - 1;
+    let mut out = Vec::with_capacity(out_len);
+    for i in 0..out_len {
+        let pos = i as f64 * step;
+        let idx = (pos as usize).min(last);
+        let next = (idx + 1).min(last);
+        let frac = (pos - idx as f64) as f32;
+        let sample = mono[idx] + (mono[next] - mono[idx]) * frac;
+        out.push((sample * 32767.0).clamp(-32768.0, 32767.0) as i16);
+    }
+    out
 }
 
 #[cfg(test)]
@@ -200,17 +205,25 @@ mod tests {
     use super::*;
 
     #[test]
-    fn renders_all_surfaces_and_variants_non_empty() {
+    fn decodes_all_surfaces_and_variants_non_empty() {
         for &surf in &FootstepSurface::ALL {
             for v in 0..VARIANTS {
                 let s = render_step(surf, v, 48000);
-                assert!(!s.data.is_empty());
-                assert!(s.data.iter().any(|&x| x.abs() > 1000), "{:?} v{}", surf, v);
+                assert!(!s.data.is_empty(), "{surf:?} v{v} empty");
+                assert!(s.data.iter().any(|&x| x.abs() > 3000), "{surf:?} v{v} too quiet");
                 assert!(s.name.starts_with("footsteps/"));
             }
             let l = render_land(surf, 48000);
-            assert!(!l.data.is_empty());
-            assert!(l.data.iter().any(|&x| x.abs() > 2000), "{:?} land", surf);
+            assert!(!l.data.is_empty(), "{surf:?} land empty");
+            assert!(l.data.iter().any(|&x| x.abs() > 4000), "{surf:?} land too quiet");
         }
+    }
+
+    #[test]
+    fn resamples_proportionally_to_output_rate() {
+        let lo = render_step(FootstepSurface::Stone, 0, 22050);
+        let hi = render_step(FootstepSurface::Stone, 0, 44100);
+        let ratio = hi.data.len() as f32 / lo.data.len() as f32;
+        assert!((ratio - 2.0).abs() < 0.05, "unexpected resample ratio {ratio}");
     }
 }

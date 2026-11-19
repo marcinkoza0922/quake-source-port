@@ -1697,8 +1697,8 @@ bg По-добро оръжие
 @ Center overlay
 bg Централно наслагване
 
-@ Corner minimap
-bg Миникарта в ъгъла
+@ Framed panel
+bg Панел в рамка
 
 @ Display
 bg Показване
@@ -2289,11 +2289,11 @@ bg Бинаурален 3D пространствен звук за слушал
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 bg Заглушава и намалява звуци, идващи зад плътни стени и затворени врати
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-bg Възпроизвежда синтезирани стъпки и приземявания според камък, метал, дърво, пръст и течности
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+bg Възпроизвежда стъпки и приземявания на играча според каменни, метални, дървени, земни и течни повърхности
 
-@ Volume of synthesized player footsteps and landings
-bg Сила на синтезираните стъпки и приземявания на играча
+@ Volume of player footsteps and landings
+bg Сила на звука за стъпки и приземявания на играча
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 bg Секунди за плавен преход между музикалните писти; 0 сменя незабавно
@@ -2319,8 +2319,8 @@ bg Подрежда приоритета на оръжията за автосм
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 bg Настройва изгледа на 3D телената автокарта, показването, разкриването, мащаба и маркерите
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-bg Миникарта в ъгъла поставя картата горе вдясно; Централно наслагване показва прозрачна телена мрежа върху изгледа
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+bg Панелът в рамка центрира картата в тъмна кутия на екрана със статистика; централното наслагване показва прозрачна мрежа върху изгледа
 
 @ Disabled while Weapon Auto-Switch is set to Never
 bg Изключено, докато Автосмяна на оръжие е зададено на Никога
@@ -2337,8 +2337,11 @@ bg Непрозрачност на линиите и панела на авто�
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 bg Завърта автокартата така, че посоката ви да сочи нагоре; изключено държи север отгоре
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-bg Показва 3D телена или горна автокарта по време на игра; натиснете M за интерактивна карта на цял екран (само за един играч и кооп)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+bg Показва 3D телена или горна автокарта на екрана със статистика (Tab/Select); добавете Автокарта в редактора на HUD, за да остане на екрана, или натиснете M за карта на цял екран (само самостоятелно и кооп)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+bg Показва постоянно 3D телена или горна автокарта на HUD (само самостоятелно и кооп)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 bg При вдигане на оръжие: Никога запазва текущото оръжие; По-добро оръжие превключва само ако е по-високо в Приоритет на оръжията

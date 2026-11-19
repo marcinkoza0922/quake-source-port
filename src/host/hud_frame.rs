@@ -25,7 +25,17 @@ pub(super) struct HudFrame {
 
 impl HudFrame {
     /// Drawing context for `cl` (the editor's sample player when editing).
-    pub fn ctx<'a>(&'a self, cl: &'a qclient::ClientState, face_anim: bool, teamplay: f32, addons: &'a [crate::wheel::Entry], held: Option<qserver::addons::Toy>, show_scores: bool) -> Ctx<'a> {
+    #[allow(clippy::too_many_arguments)]
+    pub fn ctx<'a>(
+        &'a self,
+        cl: &'a qclient::ClientState,
+        face_anim: bool,
+        teamplay: f32,
+        addons: &'a [crate::wheel::Entry],
+        held: Option<qserver::addons::Toy>,
+        show_scores: bool,
+        automap: Option<crate::hud::draw::AutomapCtx<'a>>,
+    ) -> Ctx<'a> {
         Ctx {
             cl: self.sample.as_ref().unwrap_or(cl),
             pack: self.room.pack,
@@ -39,6 +49,7 @@ impl HudFrame {
             pb_color: self.pb_color,
             show_scores: show_scores && !self.edit,
             preview: self.edit,
+            automap,
         }
     }
 }

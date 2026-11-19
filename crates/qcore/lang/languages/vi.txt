@@ -1697,8 +1697,8 @@ vi Vũ khí tốt hơn
 @ Center overlay
 vi Lớp phủ giữa
 
-@ Corner minimap
-vi Bản đồ nhỏ ở góc
+@ Framed panel
+vi Khung bản đồ
 
 @ Display
 vi Hiển thị
@@ -2289,11 +2289,11 @@ vi Âm thanh không gian 3D cho tai nghe với độ trễ hai tai, bóng đầu
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 vi Làm nghẹt và nhỏ âm thanh phát ra sau tường đặc và cửa đóng
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-vi Phát tiếng bước chân và tiếp đất tổng hợp theo nền đá, kim loại, gỗ, đất và chất lỏng
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+vi Phát tiếng bước chân và tiếp đất của người chơi phù hợp với sàn đá, kim loại, gỗ, đất và chất lỏng
 
-@ Volume of synthesized player footsteps and landings
-vi Âm lượng tiếng bước chân và tiếp đất tổng hợp của người chơi
+@ Volume of player footsteps and landings
+vi Âm lượng bước chân và tiếp đất của người chơi
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 vi Số giây chuyển mượt giữa các bản nhạc; 0 để chuyển ngay lập tức
@@ -2319,8 +2319,8 @@ vi Sắp xếp thứ tự ưu tiên vũ khí cho chế độ tự đổi sang V�
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 vi Thiết lập chế độ xem, hiển thị, kiểu hiển lộ, thu phóng và điểm đánh dấu của bản đồ tự động khung dây 3D
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-vi Bản đồ nhỏ ở góc đặt bản đồ vào khung trên bên phải; Lớp phủ giữa phủ khung dây trong suốt lên màn hình
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+vi Khung bản đồ đặt bản đồ ở giữa trong hộp tối trên màn hình thống kê; lớp phủ giữa hiển thị khung dây trong suốt trên góc nhìn
 
 @ Disabled while Weapon Auto-Switch is set to Never
 vi Bị vô hiệu hóa khi Tự động đổi vũ khí đặt là Không bao giờ
@@ -2337,8 +2337,11 @@ vi Độ mờ đục của đường nét và bảng bản đồ tự động
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 vi Xoay bản đồ tự động để hướng nhìn của bạn hướng lên trên; tắt sẽ giữ hướng Bắc ở trên
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-vi Hiện bản đồ tự động khung dây 3D hoặc nhìn từ trên xuống khi chơi; nhấn M để mở bản đồ toàn màn hình tương tác (chỉ chơi đơn và co-op)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+vi Hiển thị bản đồ tự động khung dây 3D hoặc từ trên xuống trên màn hình thống kê (Tab/Select); thêm Bản đồ tự động trong Sửa HUD để luôn hiển thị, hoặc nhấn M để mở bản đồ toàn màn hình (chỉ chơi đơn và phối hợp)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+vi Luôn hiển thị trực tiếp bản đồ tự động khung dây 3D hoặc từ trên xuống trên HUD (chỉ chơi đơn và phối hợp)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 vi Khi nhặt vũ khí: Không bao giờ giữ nguyên vũ khí hiện tại; Vũ khí tốt hơn chỉ đổi nếu vũ khí đó xếp cao hơn trong Thứ tự ưu tiên vũ khí

@@ -236,7 +236,7 @@ impl Host {
                                 hitmarker::draw_hitmarker(&mut cc, vh, &self.server.core.cvars, marker.0, color);
                             }
                             if !hud.edit {
-                                let ctx = hud.ctx(cl, face, teamplay, &addon_entries, held_addon, self.show_scores);
+                                let ctx = hud.ctx(cl, face, teamplay, &addon_entries, held_addon, self.show_scores, None);
                                 crate::hud::draw_layout(&mut cc, &mut pf, &self.hud.layout, &cell_rects, &ctx, Some(fade), self.realtime, crate::hud::kind::Kind::is_player);
                             }
                             if self.show_scores && cl.gametype == 1 {
@@ -268,9 +268,18 @@ impl Host {
                             hitmarker::draw_hitmarker(&mut c, scene_h, &self.server.core.cvars, self.feedback.remaining(self.realtime), color);
                         }
                         let face = self.view.face_anim_time > self.cl.time;
+                        let player_pos = Vec3::from_array(self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| e.origin));
+                        let automap_allowed = self.cl.gametype != 1 && self.server.core.cvars.value_of("deathmatch") == 0.0;
                         let hud_start = c.list.len();
                         if !hud.edit {
-                            let ctx = hud.ctx(&self.cl, face, teamplay, &addon_entries, self.toy.held, self.show_scores);
+                            let am = crate::hud::draw::AutomapCtx {
+                                map: &self.automap,
+                                settings: crate::automap::Automap::settings(&self.server.core.cvars),
+                                player_pos,
+                                player_yaw: self.cl.viewangles[1],
+                                allowed: automap_allowed,
+                            };
+                            let ctx = hud.ctx(&self.cl, face, teamplay, &addon_entries, self.toy.held, self.show_scores, Some(am));
                             crate::hud::draw_layout(&mut c, &mut pf, &self.hud.layout, &self.hud.rects, &ctx, Some(&self.hud.fade), self.realtime, |_| true);
                         }
                         metrics_drawn = true;
@@ -288,16 +297,16 @@ impl Host {
                         if let Some((at, ts, color)) = captions {
                             self.captions.draw(&mut c, self.realtime, at, ts, color);
                         }
-                        if !hud.edit && !self.menu.active() && !self.automap.fullscreen
-                            && self.cl.gametype != 1 && self.server.core.cvars.value_of("deathmatch") == 0.0
-                        {
-                            let player_pos = Vec3::from_array(self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| e.origin));
+                        if self.show_scores && !hud.edit && !self.menu.active() && !self.automap.fullscreen && automap_allowed {
+                            let has_status_bar = self.hud.layout.elems.iter().any(|e| e.kind == crate::hud::kind::Kind::StatusBar);
+                            let top_reserve = if has_status_bar { 10.0 } else { 30.0 };
                             let header = crate::automap::HeaderInfo::default();
                             self.automap.draw(
                                 &mut c,
                                 &self.server.core.cvars,
                                 player_pos,
                                 self.cl.viewangles[1],
+                                top_reserve,
                                 reserve,
                                 header,
                                 pad_ui,
@@ -331,7 +340,7 @@ impl Host {
                     secrets: self.cl.stats[qnet::protocol::STAT_SECRETS],
                     total_secrets: self.cl.stats[qnet::protocol::STAT_TOTALSECRETS],
                 };
-                self.automap.draw(&mut c, &self.server.core.cvars, player_pos, self.cl.viewangles[1], reserve, header, pad_ui, &glyphs);
+                self.automap.draw(&mut c, &self.server.core.cvars, player_pos, self.cl.viewangles[1], 0.0, reserve, header, pad_ui, &glyphs);
             }
             // Split screen draws center prints in each player's cell.
             let center = ingame && !self.menu.active() && !self.automap.fullscreen && splits.is_empty();
@@ -357,14 +366,22 @@ impl Host {
             self.menu.mods.online.poll();
             // the HUD editor's preview, under its dialog
             if hud.edit {
-                let ctx = hud.ctx(&self.cl, false, teamplay, &addon_entries, None, false);
+                let player_pos = Vec3::from_array(self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| e.origin));
+                let am = crate::hud::draw::AutomapCtx {
+                    map: &self.automap,
+                    settings: crate::automap::Automap::settings(&self.server.core.cvars),
+                    player_pos,
+                    player_yaw: self.cl.viewangles[1],
+                    allowed: true,
+                };
+                let ctx = hud.ctx(&self.cl, false, teamplay, &addon_entries, None, false, Some(am));
                 crate::hud::draw_layout(&mut c, &mut pf, &self.hud.layout, &self.hud.rects, &ctx, None, self.realtime, |_| true);
             }
             self.menu.draw(&mut c, &mut pf, &self.server.core.cvars, self.realtime);
             // outside the in-game HUD (menus, intermission, split screen) the
             // metrics go over everything
             if !metrics_drawn && !hud.edit {
-                let ctx = hud.ctx(&self.cl, false, teamplay, &addon_entries, None, false);
+                let ctx = hud.ctx(&self.cl, false, teamplay, &addon_entries, None, false, None);
                 crate::hud::draw_layout(&mut c, &mut pf, &self.hud.layout, &self.hud.rects, &ctx, None, self.realtime, crate::hud::kind::Kind::is_metric);
             }
             if let Some(s) = speed.filter(|_| ingame && !self.menu.active()) {

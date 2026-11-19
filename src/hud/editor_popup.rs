@@ -40,9 +40,13 @@ impl Editor {
         self.popup = Some(Popup::Grid(a as usize));
         sound("misc/menu2.wav")
     }
-    /// Adds `k` at the screen centre; placement moves it to free room.
+    /// Adds `k` at its default anchor; placement moves it to free room.
     pub(super) fn add(&mut self, k: Kind, l: &mut Layout, cv: &mut Cvars) -> Out {
-        let anchor = if k == Kind::StatusBar { Anchor::BottomCenter } else { Anchor::Center };
+        let anchor = match k {
+            Kind::StatusBar => Anchor::BottomCenter,
+            Kind::Automap => Anchor::TopRight,
+            _ => Anchor::Center,
+        };
         l.elems.push(Elem::new(k, anchor));
         save(cv, l);
         self.popup = None;

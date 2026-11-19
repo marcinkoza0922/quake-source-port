@@ -1697,8 +1697,8 @@ gu વધુ સારું હથિયાર
 @ Center overlay
 gu મધ્ય ઓવરલે
 
-@ Corner minimap
-gu ખૂણાનો મિનિમેપ
+@ Framed panel
+gu ફ્રેમવાળી પેનલ
 
 @ Display
 gu ડિસ્પ્લે
@@ -2289,11 +2289,11 @@ gu હેડફોન માટે કાનનો સમય, માથાનો
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 gu નક્કર દીવાલો અને બંધ દરવાજા પાછળથી આવતા અવાજોને દબાવે અને ધીમા કરે છે
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-gu પથ્થર, ધાતુ, લાકડું, માટી અને પ્રવાહી ભોંયતળિયા મુજબ કૃત્રિમ પગલાં અને ઉતરાણના અવાજ વગાડે છે
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+gu પથ્થર, ધાતુ, લાકડું, માટી અને પ્રવાહી સપાટી મુજબ ખેલાડીના પગલાં અને ઉતરાણના અવાજ વગાડે છે
 
-@ Volume of synthesized player footsteps and landings
-gu ખેલાડીના કૃત્રિમ પગલાં અને ઉતરાણનું વોલ્યુમ
+@ Volume of player footsteps and landings
+gu ખેલાડીના પગલાં અને ઉતરાણનો અવાજ
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 gu સંગીત ટ્રેક્સ વચ્ચે સરળ ફેરફાર માટેની સેકન્ડ; 0 તરત જ બદલે છે
@@ -2319,8 +2319,8 @@ gu વધુ સારું હથિયાર ઑટો-સ્વિચ મા
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 gu 3D વાયરફ્રેમ ઑટોમેપ દૃશ્ય, ડિસ્પ્લે, દર્શાવવાનો મોડ, ઝૂમ અને માર્કર્સ ગોઠવો
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-gu ખૂણાનો મિનિમેપ મેપને ઉપર-જમણે રાખે છે; મધ્ય ઓવરલે દૃશ્ય પર પારદર્શક વાયરફ્રેમ દર્શાવે છે
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+gu ફ્રેમવાળી પેનલ આંકડાકીય સ્ક્રીન પર નકશાને ઘેરા બોક્સમાં કેન્દ્રિત કરે છે; સેન્ટર ઓવરલે દૃશ્ય પર પારદર્શક વાયરફ્રેમ બતાવે છે
 
 @ Disabled while Weapon Auto-Switch is set to Never
 gu જ્યારે હથિયાર ઑટો-સ્વિચ 'ક્યારેય નહીં' પર હોય ત્યારે બંધ રહે છે
@@ -2337,8 +2337,11 @@ gu ઑટોમેપ રેખાઓ અને પેનલની અપાર�
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 gu તમારી જોવાની દિશા ઉપર રહે તે રીતે ઑટોમેપ ફેરવે છે; બંધ રાખવાથી ઉત્તર ઉપર રહે છે
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-gu રમતી વખતે લાઇવ 3D વાયરફ્રેમ અથવા ઉપરથી ઑટોમેપ બતાવે છે; પૂર્ણ-સ્ક્રીન ઇન્ટરેક્ટિવ મેપ માટે M દબાવો (ફક્ત સિંગલ પ્લેયર અને કો-ઓપ)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+gu આંકડાકીય સ્ક્રીન (Tab/Select) પર 3D વાયરફ્રેમ અથવા ટોપ-ડાઉન ઓટોમેપ બતાવે છે; તેને હંમેશા સ્ક્રીન પર રાખવા Edit HUD માં ઓટોમેપ ઉમેરો અથવા પૂર્ણ-સ્ક્રીન નકશા માટે M દબાવો (માત્ર સિંગલ પ્લેયર અને કો-ઓપ)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+gu HUD પર હંમેશા લાઇવ 3D વાયરફ્રેમ અથવા ટોપ-ડાઉન ઓટોમેપ બતાવે છે (માત્ર સિંગલ પ્લેયર અને કો-ઓપ)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 gu હથિયાર ઉપાડતી વખતે: 'ક્યારેય નહીં' હાલનું હથિયાર રાખે છે; 'વધુ સારું હથિયાર' ફક્ત હથિયાર પ્રાથમિકતામાં ઊંચો ક્રમ હોય તો જ બદલે છે

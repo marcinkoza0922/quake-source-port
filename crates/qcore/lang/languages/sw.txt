@@ -1697,8 +1697,8 @@ sw Silaha bora
 @ Center overlay
 sw Kufunika katikati
 
-@ Corner minimap
-sw Ramani ndogo pembeni
+@ Framed panel
+sw Paneli yenye fremu
 
 @ Display
 sw Mwonekano
@@ -2289,11 +2289,11 @@ sw Sauti ya anga ya 3D kwa vipokea sauti yenye muda wa masikio, kivuli cha kichw
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 sw Hufifisha na kupunguza sauti zinazotoka nyuma ya kuta imara na milango iliyofungwa
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-sw Hucheza sauti za hatua na kutua zilizoundwa kwa sakafu za mawe, chuma, mbao, udongo na maji
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+sw Hucheza sauti za hatua na kutua za mchezaji kulingana na sakafu ya mawe, chuma, mbao, udongo na maji
 
-@ Volume of synthesized player footsteps and landings
-sw Kiwango cha sauti ya hatua na kutua za mchezaji
+@ Volume of player footsteps and landings
+sw Sauti ya hatua na kutua za mchezaji
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 sw Sekunde za kubadili muziki kwa upole kati ya nyimbo; 0 hubadili mara moja
@@ -2319,8 +2319,8 @@ sw Panga mpangilio wa kipaumbele cha silaha kwa kubadili kwenda Silaha bora kiot
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 sw Sanidi mwonekano wa ramani ya waya ya 3D, uonyeshaji, ufichuaji, ukuzaji na alama
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-sw Ramani ndogo pembeni huweka ramani juu kulia; Kufunika katikati huweka waya angavu juu ya mwonekano
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+sw Paneli yenye fremu huweka ramani katikati kwenye kisanduku cheusi kwenye skrini ya takwimu; mfuniko wa kati huonyesha waya wazi juu ya mwonekano
 
 @ Disabled while Weapon Auto-Switch is set to Never
 sw Huzimwa wakati Kubadili Silaha Kiotomatiki kumewekwa kuwa Kamwe
@@ -2337,8 +2337,11 @@ sw Uangavu wa mistari na paneli ya ramani ya kiotomatiki
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 sw Huzungusha ramani ili mwelekeo unaotazama uelekee juu; ikizimwa Kaskazini hubaki juu
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-sw Huonyesha ramani hai ya waya ya 3D au ya kutoka juu unapocheza; bonyeza M kwa ramani shirikishi ya skrini nzima (mchezaji mmoja na ushirikiano pekee)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+sw Huonyesha ramani ya 3D au ya juu kwenye skrini ya takwimu (Tab/Select); ongeza Ramani katika Hariri HUD ili ibaki kwenye skrini, au bonyeza M kwa ramani ya skrini nzima (mchezaji mmoja na ushirikiano pekee)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+sw Huonyesha ramani hai ya 3D au ya juu kwenye HUD muda wote (mchezaji mmoja na ushirikiano pekee)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 sw Unapookota silaha: Kamwe hubakiza silaha yako ya sasa; Silaha bora hubadilisha tu ikiwa ina daraja la juu zaidi kwenye Kipaumbele cha Silaha

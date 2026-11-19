@@ -3945,12 +3945,12 @@ it Sovrapposizione centrale
 es Superposición central
 ru Наложение по центру
 
-@ Corner minimap
-fr Minicarte en coin
-de Eck-Minikarte
-it Minimappa d'angolo
-es Minimapa en esquina
-ru Миникарта в углу
+@ Framed panel
+fr Panneau encadré
+de Eingerahmtes Feld
+it Pannello incorniciato
+es Panel enmarcado
+ru Панель в рамке
 
 @ Display
 fr Affichage

@@ -1697,8 +1697,8 @@ lt Geresnis ginklas
 @ Center overlay
 lt Perdanga centre
 
-@ Corner minimap
-lt Mini žemėlapis kampe
+@ Framed panel
+lt Įrėmintas skydelis
 
 @ Display
 lt Rodymas
@@ -2289,11 +2289,11 @@ lt Binauralinis 3D erdvinis garsas ausinėms su ausų vėlinimu, galvos šešėl
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 lt Slopina ir pritildo garsus, sklindančius už vientisų sienų ir uždarytų durų
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-lt Groja sintezuotus žaidėjo žingsnius ir nusileidimus pagal akmens, metalo, medžio, žemės ir skysčių paviršius
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+lt Groja žaidėjo žingsnius ir nusileidimus, pritaikytus akmens, metalo, medžio, žemės ir skysčių paviršiams
 
-@ Volume of synthesized player footsteps and landings
-lt Sintezuotų žaidėjo žingsnių ir nusileidimų garsumas
+@ Volume of player footsteps and landings
+lt Žaidėjo žingsnių ir nusileidimų garsumas
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 lt Sekundės sklandžiam perėjimui tarp muzikos kūrinių; 0 perjungia iškart
@@ -2319,8 +2319,8 @@ lt Surikiuokite ginklų prioriteto tvarką automatiniam perjungimui į Geresnį 
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 lt Konfigūruokite 3D karkaso autožemėlapio vaizdą, rodymą, atidengimo režimą, mastelį ir žymeklius
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-lt Mini žemėlapis kampe įrėmina žemėlapį viršuje dešinėje; Perdanga centre rodo permatomą karkasą virš vaizdo
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+lt Įrėmintas skydelis centruoja žemėlapį tamsiame lange statistikos ekrane; centrinė perdanga rodo permatomą karkasą virš vaizdo
 
 @ Disabled while Weapon Auto-Switch is set to Never
 lt Išjungta, kai Automatinis ginklo keitimas nustatytas į Niekada
@@ -2337,8 +2337,11 @@ lt Autožemėlapio linijų ir skydelio neskaidrumas
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 lt Suka autožemėlapį, kad jūsų žvilgsnio kryptis būtų į viršų; išjungus viršuje lieka šiaurė
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-lt Žaidžiant rodo gyvą 3D karkaso arba iš viršaus autožemėlapį; paspauskite M interaktyviam viso ekrano žemėlapiui (tik vienam žaidėjui ir kooperatiniam režimui)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+lt Rodo 3D karkasinį arba vaizdo iš viršaus autožemėlapį statistikos ekrane (Tab/Select); norėdami matyti nuolat, pridėkite jį HUD redaktoriuje arba paspauskite M viso ekrano žemėlapiui (tik vienam žaidėjui ir bendradarbiavimui)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+lt Nuolat rodo gyvą 3D karkasinį arba vaizdo iš viršaus autožemėlapį HUD ekrane (tik vienam žaidėjui ir bendradarbiavimui)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 lt Paėmus ginklą: Niekada palieka dabartinį ginklą; Geresnis ginklas perjungia tik tada, jei jis aukščiau sąraše Ginklų prioritetas

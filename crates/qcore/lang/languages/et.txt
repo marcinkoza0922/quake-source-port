@@ -1697,8 +1697,8 @@ et Parem relv
 @ Center overlay
 et Keskülekattega
 
-@ Corner minimap
-et Nurgaminikaart
+@ Framed panel
+et Raamitud paneel
 
 @ Display
 et Kuva
@@ -2289,11 +2289,11 @@ et Binauraalne 3D-ruumiheli kõrvaklappidele kõrvaaja, peavarju ning ees/taga/k
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 et Summutab ja vaigistab tahkete seinte ja suletud uste tagant tulevaid helisid
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-et Esitab sünteesitud samme ja maandumisi kivi-, metalli-, puit-, mulla- ja vedelikupindadele
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+et Esitab mängija samme ja maandumishelisid vastavalt kivi-, metalli-, puit-, mulla- ja vedelikupindadele
 
-@ Volume of synthesized player footsteps and landings
-et Sünteesitud mängija sammude ja maandumiste helitugevus
+@ Volume of player footsteps and landings
+et Mängija sammude ja maandumiste helitugevus
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 et Sekundid sujuvaks üleminekuks muusikapalade vahel; 0 vahetab kohe
@@ -2319,8 +2319,8 @@ et Sea relvade eelistusjärjekord Parem relv automaatseks vahetuseks
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 et Seadista 3D-traatvõrgu autokaardi vaadet, kuva, avamisrežiimi, suurendust ja markereid
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-et Nurgaminikaart raamib kaardi paremale üles; Keskülekattega hõljutab läbipaistva traatvõrgu vaate kohal
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+et Raamitud paneel joondab kaardi statistikakuval tumedasse kasti; keskne ülekate kuvab vaate peal läbipaistva traatraami
 
 @ Disabled while Weapon Auto-Switch is set to Never
 et Keelatud, kui Automaatne relvavahetus on seatud väärtusele Mitte kunagi
@@ -2337,8 +2337,11 @@ et Autokaardi joonte ja paneeli läbipaistmatus
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 et Pöörab autokaarti nii, et sinu vaatesuund on üles; väljas hoiab põhja ülal
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-et Näitab mängides reaalajas 3D-traatvõrgu või pealtvaate autokaarti; vajuta M interaktiivse täisekraankaardi jaoks (ainult üksikmäng ja koostöö)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+et Kuvab statistikakuval (Tab/Select) 3D-traatraami või ülaltvaates autokaarti; püsivaks kuvamiseks lisa Autokaart HUD-i redaktoris või vajuta täisekraanikaardi jaoks M (ainult üksikmäng ja koostöö)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+et Kuvab HUD-il alati reaalajas 3D-traatraami või ülaltvaates autokaarti (ainult üksikmäng ja koostöö)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 et Relva üles korjates: Mitte kunagi jätab alles praeguse relva; Parem relv vahetab ainult siis, kui see on Relvade järjekorras kõrgemal

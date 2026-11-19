@@ -1697,8 +1697,8 @@ ca Arma millor
 @ Center overlay
 ca Superposició central
 
-@ Corner minimap
-ca Minimapa a la cantonada
+@ Framed panel
+ca Panell emmarcat
 
 @ Display
 ca Visualització
@@ -2289,11 +2289,11 @@ ca Espacialització binaural 3D per a auriculars amb retard entre orelles, ombra
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 ca Esmorteeix i abaixa els sons que provenen de darrere de parets sòlides i portes tancades
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-ca Reprodueix passos i aterratges sintetitzats adaptats a pedra, metall, fusta, terra i líquids
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ca Reprodueix passes i aterratges del jugador adaptats a pedra, metall, fusta, terra i líquids
 
-@ Volume of synthesized player footsteps and landings
-ca Volum dels passos i aterratges sintetitzats del jugador
+@ Volume of player footsteps and landings
+ca Volum de les passes i aterratges del jugador
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 ca Segons per fondre suaument entre pistes musicals; 0 canvia a l'instant
@@ -2319,8 +2319,8 @@ ca Ordena la prioritat d'armes per al canvi automàtic a Arma millor
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 ca Configura la vista, visualització, mode de revelació, zoom i marcadors de l'automapa en filferro 3D
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-ca Minimapa a la cantonada emmarca el mapa a dalt a la dreta; Superposició central mostra un filferro transparent sobre la vista
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+ca El panell emmarcat centra el mapa en un quadre fosc a la pantalla d'estadístiques; la superposició central mostra un filferro transparent sobre la vista
 
 @ Disabled while Weapon Auto-Switch is set to Never
 ca Desactivat mentre Canvi automàtic d'arma estigui en Mai
@@ -2337,8 +2337,11 @@ ca Opacitat de les línies i del panell de l'automapa
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 ca Gira l'automapa perquè la direcció on mires apunti amunt; desactivat manté el nord a dalt
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-ca Mostra un automapa en directe en filferro 3D o vista zenital mentre jugues; prem M per al mapa interactiu a pantalla completa (només un jugador i cooperatiu)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+ca Mostra un automapa 3D o zenital a la pantalla d'estadístiques (Tab/Select); afegeix Automapa a Edita HUD per mantenir-lo en pantalla o prem M per al mapa a pantalla completa (només un jugador i cooperatiu)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+ca Mostra en tot moment un automapa 3D o zenital en directe al HUD (només un jugador i cooperatiu)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 ca En recollir una arma: Mai manté l'arma actual; Arma millor canvia només si té un rang superior a Prioritat d'armes

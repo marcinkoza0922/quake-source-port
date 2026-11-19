@@ -1697,8 +1697,8 @@ pa ਬਿਹਤਰ ਹਥਿਆਰ
 @ Center overlay
 pa ਕੇਂਦਰੀ ਓਵਰਲੇ
 
-@ Corner minimap
-pa ਕੋਨੇ ਦਾ ਮਿਨੀਮੈਪ
+@ Framed panel
+pa ਫਰੇਮ ਵਾਲਾ ਪੈਨਲ
 
 @ Display
 pa ਦਿਖਾवट
@@ -2289,11 +2289,11 @@ pa ਹੈੱਡਫੋਨਾਂ ਲਈ ਕੰਨਾਂ ਦੇ ਸਮੇਂ, ਸ�
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 pa ਠੋਸ ਕੰਧਾਂ ਅਤੇ ਬੰਦ ਦਰਵਾਜ਼ਿਆਂ ਦੇ ਪਿੱਛੇ ਤੋਂ ਆਉਂਦੀਆਂ ਆਵਾਜ਼ਾਂ ਨੂੰ ਦਬਾਉਂਦਾ ਅਤੇ ਧੀਮਾ ਕਰਦਾ ਹੈ
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-pa ਪੱਥਰ, ਧਾਤ, ਲੱਕੜ, ਮਿੱਟੀ ਅਤੇ ਤਰਲ ਫਰਸ਼ ਅਨੁਸਾਰ ਤਿਆਰ ਕਦਮਾਂ ਅਤੇ ਉਤਰਨ ਦੀਆਂ ਆਵਾਜ਼ਾਂ ਚਲਾਉਂਦਾ ਹੈ
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+pa ਪੱਥਰ, ਧਾਤ, ਲੱਕੜ, ਮਿੱਟੀ ਅਤੇ ਤਰਲ ਫਰਸ਼ਾਂ ਅਨੁਸਾਰ ਖਿਡਾਰੀ ਦੇ ਕਦਮਾਂ ਅਤੇ ਉਤਰਨ ਦੀਆਂ ਆਵਾਜ਼ਾਂ ਚਲਾਉਂਦਾ ਹੈ
 
-@ Volume of synthesized player footsteps and landings
-pa ਖਿਡਾਰੀ ਦੇ ਤਿਆਰ ਕਦਮਾਂ ਅਤੇ ਉਤਰਨ ਦਾ ਵਾਲੀਅਮ
+@ Volume of player footsteps and landings
+pa ਖਿਡਾਰੀ ਦੇ ਕਦਮਾਂ ਅਤੇ ਉਤਰਨ ਦੀ ਆਵਾਜ਼
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 pa ਸੰਗੀਤ ਟਰੈਕਾਂ ਵਿਚਕਾਰ ਨਰਮ ਬਦਲਾਅ ਦੇ ਸਕਿੰਟ; 0 ਤੁਰੰਤ ਬਦਲਦਾ ਹੈ
@@ -2319,8 +2319,8 @@ pa ਬਿਹਤਰ ਹਥਿਆਰ ਆਟੋ-ਸਵਿੱਚ ਲਈ ਹਥਿਆ
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 pa 3D ਵਾਇਰਫ੍ਰੇਮ ਆਟੋਮੈਪ ਦ੍ਰਿਸ਼, ਦਿਖਾਵਟ, ਪ੍ਰਗਟਾਵਾ ਮੋਡ, ਜ਼ੂਮ ਅਤੇ ਨਿਸ਼ਾਨ ਸੈੱਟ ਕਰੋ
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-pa ਕੋਨੇ ਦਾ ਮਿਨੀਮੈਪ ਮੈਪ ਨੂੰ ਉੱਪਰ-ਸੱਜੇ ਰੱਖਦਾ ਹੈ; ਕੇਂਦਰੀ ਓਵਰਲੇ ਦ੍ਰਿਸ਼ ਉੱਤੇ ਪਾਰਦਰਸ਼ੀ ਵਾਇਰਫ੍ਰੇਮ ਦਿਖਾਉਂਦਾ ਹੈ
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+pa ਫਰੇਮ ਵਾਲਾ ਪੈਨਲ ਅੰਕੜਾ ਸਕ੍ਰੀਨ ਉੱਤੇ ਨਕਸ਼ੇ ਨੂੰ ਗੂੜ੍ਹੇ ਬਕਸੇ ਵਿੱਚ ਵਿਚਕਾਰ ਰੱਖਦਾ ਹੈ; ਸੈਂਟਰ ਓਵਰਲੇ ਦ੍ਰਿਸ਼ ਉੱਤੇ ਪਾਰਦਰਸ਼ੀ ਵਾਇਰਫਰੇਮ ਦਿਖਾਉਂਦਾ ਹੈ
 
 @ Disabled while Weapon Auto-Switch is set to Never
 pa ਜਦੋਂ ਹਥਿਆਰ ਆਟੋ-ਸਵਿੱਚ 'ਕਦੇ ਨਹੀਂ' ਉੱਤੇ ਹੋਵੇ ਤਾਂ ਬੰਦ ਰਹਿੰਦਾ ਹੈ
@@ -2337,8 +2337,11 @@ pa ਆਟੋਮੈਪ ਦੀਆਂ ਲਾਈਨਾਂ ਅਤੇ ਪੈਨਲ ਦ
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 pa ਆਟੋਮੈਪ ਨੂੰ ਘੁਮਾਉਂਦਾ ਹੈ ਤਾਂ ਜੋ ਤੁਹਾਡੇ ਦੇਖਣ ਦੀ ਦਿਸ਼ਾ ਉੱਪਰ ਰਹੇ; ਬੰਦ ਰੱਖਣ 'ਤੇ ਉੱਤਰ ਉੱਪਰ ਰਹਿੰਦਾ ਹੈ
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-pa ਖੇਡਦੇ ਸਮੇਂ ਲਾਈਵ 3D ਵਾਇਰਫ੍ਰੇਮ ਜਾਂ ਉੱਪਰੋਂ ਆਟੋਮੈਪ ਦਿਖਾਉਂਦਾ ਹੈ; ਪੂਰੀ-ਸਕ੍ਰੀਨ ਇੰਟਰਐਕਟਿਵ ਮੈਪ ਲਈ M ਦਬਾਓ (ਸਿਰਫ਼ ਇਕੱਲੀ ਖੇਡ ਅਤੇ ਕੋ-ਆਪ)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+pa ਅੰਕੜਾ ਸਕ੍ਰੀਨ (Tab/Select) ਉੱਤੇ 3D ਵਾਇਰਫਰੇਮ ਜਾਂ ਉੱਪਰੋਂ ਆਟੋਮੈਪ ਦਿਖਾਉਂਦਾ ਹੈ; ਹਮੇਸ਼ਾ ਦਿਖਾਉਣ ਲਈ Edit HUD ਵਿੱਚ ਆਟੋਮੈਪ ਸ਼ਾਮਲ ਕਰੋ, ਜਾਂ ਫੁੱਲ-ਸਕ੍ਰੀਨ ਨਕਸ਼ੇ ਲਈ M ਦਬਾਓ (ਸਿਰਫ਼ ਸਿੰਗਲ ਪਲੇਅਰ ਅਤੇ ਕੋ-ਆਪ)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+pa HUD ਉੱਤੇ ਹਰ ਵੇਲੇ ਲਾਈਵ 3D ਵਾਇਰਫਰੇਮ ਜਾਂ ਉੱਪਰੋਂ ਆਟੋਮੈਪ ਦਿਖਾਉਂਦਾ ਹੈ (ਸਿਰਫ਼ ਸਿੰਗਲ ਪਲੇਅਰ ਅਤੇ ਕੋ-ਆਪ)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 pa ਹਥਿਆਰ ਚੁੱਕਣ ਵੇਲੇ: 'ਕਦੇ ਨਹੀਂ' ਮੌਜੂਦਾ ਹਥਿਆਰ ਰੱਖਦਾ ਹੈ; 'ਬਿਹਤਰ ਹਥਿਆਰ' ਸਿਰਫ਼ ਉਦੋਂ ਬਦਲਦਾ ਹੈ ਜੇ ਹਥਿਆਰ ਤਰਜੀਹ ਵਿੱਚ ਦਰਜਾ ਉੱਚਾ ਹੋਵੇ

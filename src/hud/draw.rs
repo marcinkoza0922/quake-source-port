@@ -29,6 +29,16 @@ const METRICS: [(&str, &str); 6] = [
 ];
 pub(super) const AMMO_PICS: [&str; 4] = ["sb_shells", "sb_nails", "sb_rocket", "sb_cells"];
 
+/// Automap state passed to the `Automap` HUD element.
+pub struct AutomapCtx<'a> {
+    pub map: &'a crate::automap::Automap,
+    pub settings: crate::automap::draw::Settings,
+    pub player_pos: qcore::math::Vec3,
+    pub player_yaw: f32,
+    /// Single player and co-op only (disabled in deathmatch).
+    pub allowed: bool,
+}
+
 /// What the elements show this frame.
 pub struct Ctx<'a> {
     pub cl: &'a ClientState,
@@ -45,6 +55,7 @@ pub struct Ctx<'a> {
     pub show_scores: bool,
     /// The HUD editor: everything drawn, sample text for the messages.
     pub preview: bool,
+    pub automap: Option<AutomapCtx<'a>>,
 }
 
 /// What an element's size depends on besides its settings.
@@ -282,6 +293,7 @@ pub fn size(c: &Canvas, e: &Elem, room: &Room) -> (f32, f32) {
         Kind::Notify => ((200.0 * k).min(room.vw), 32.0 * k),
         Kind::Captions => ((160.0 * k).min(room.vw), 30.0 * k),
         Kind::Face => (24.0, 24.0),
+        Kind::Automap => (120.0, 88.0),
         Kind::StatusBar => (320.0, if e.a == 1 { 48.0 } else { 24.0 }),
         Kind::Weapons => {
             let (n, cols) = (weapon_slots(room), usize::from(e.a.clamp(1, 10)));
@@ -362,6 +374,15 @@ fn draw_local(c: &mut Canvas, pf: &mut PicFn, e: &Elem, (w, h): (f32, f32), ctx:
         }
         Kind::Face => {
             pic_box(c, pf, &Sbar::face_name(ctx.cl, ctx.face_anim), [0.0, 0.0, 24.0, 24.0], crate::draw::WHITE);
+        }
+        Kind::Automap => {
+            if let Some(am) = &ctx.automap {
+                if ctx.preview {
+                    am.map.draw_widget_preview(c, (w, h), am.player_pos, am.player_yaw, am.settings, e.bg);
+                } else if am.allowed {
+                    am.map.draw_widget(c, (w, h), am.player_pos, am.player_yaw, am.settings, e.bg);
+                }
+            }
         }
         Kind::StatusBar => {
             let mut sb = Sbar::at(c, pf, ctx.pack, if e.a == 1 { 24.0 } else { 0.0 });

@@ -1697,8 +1697,8 @@ pt Arma melhor
 @ Center overlay
 pt Sobreposição central
 
-@ Corner minimap
-pt Minimapa de canto
+@ Framed panel
+pt Painel emoldurado
 
 @ Display
 pt Exibição
@@ -2289,11 +2289,11 @@ pt Espacialização binaural 3D para auscultadores com atraso entre ouvidos, som
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 pt Abafa e reduz sons vindos de trás de paredes sólidas e portas fechadas
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-pt Reproduz passos e aterragens sintetizados ajustados a pedra, metal, madeira, terra e líquidos
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+pt Reproduz passos e aterragens do jogador adequados a pedra, metal, madeira, terra e líquidos
 
-@ Volume of synthesized player footsteps and landings
-pt Volume dos passos e aterragens sintetizados do jogador
+@ Volume of player footsteps and landings
+pt Volume dos passos e aterragens do jogador
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 pt Segundos para transição suave entre faixas musicais; 0 muda de imediato
@@ -2319,8 +2319,8 @@ pt Ordena a prioridade das armas para a troca automática para Arma melhor
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 pt Configura a vista em estrutura 3D do automapa, exibição, revelação, zoom e marcadores
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-pt Minimapa de canto enquadra o mapa no canto superior direito; Sobreposição central mostra uma estrutura transparente sobre a vista
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+pt O painel emoldurado centra o mapa numa caixa escura no ecrã de estatísticas; a sobreposição central mostra um modelo de arame transparente sobre a vista
 
 @ Disabled while Weapon Auto-Switch is set to Never
 pt Desativado enquanto Troca automática de arma estiver em Nunca
@@ -2337,8 +2337,11 @@ pt Opacidade das linhas e do painel do automapa
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 pt Roda o automapa para que a direção do olhar aponte para cima; desligado mantém o norte em cima
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-pt Mostra um automapa em estrutura 3D ou vista superior durante o jogo; prime M para o mapa interativo em ecrã inteiro (apenas um jogador e cooperativo)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+pt Mostra um automapa 3D ou vista de cima no ecrã de estatísticas (Tab/Select); adicione Automapa em Editar HUD para o manter visível ou prima M para o mapa em ecrã inteiro (apenas um jogador e cooperativo)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+pt Mostra sempre um automapa 3D ou vista de cima em tempo real no HUD (apenas um jogador e cooperativo)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 pt Ao apanhar uma arma: Nunca mantém a arma atual; Arma melhor só troca se estiver acima na Prioridade das armas

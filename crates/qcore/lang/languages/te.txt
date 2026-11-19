@@ -1697,8 +1697,8 @@ te మెరుగైన ఆయుధం
 @ Center overlay
 te మధ్య ఓవర్‌లే
 
-@ Corner minimap
-te మూల మినీమ్యాప్
+@ Framed panel
+te ఫ్రేమ్ చేసిన ప్యానెల్
 
 @ Display
 te ప్రదర్శన
@@ -2289,11 +2289,11 @@ te హెడ్‌ఫోన్‌ల కోసం చెవి సమయం, త
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 te దృఢమైన గోడలు మరియు మూసిన తలుపుల వెనుక నుండి వచ్చే శబ్దాలను మసకబారి తగ్గిస్తుంది
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-te రాయి, లోహం, కలప, మట్టి మరియు ద్రవ నేలలకు తగిన కృత్రిమ అడుగులు మరియు దిగే శబ్దాలను ప్లే చేస్తుంది
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+te రాయి, లోహం, కలప, మట్టి మరియు ద్రవ ఉపరితలాలకు అనుగుణంగా ఆటగాడి అడుగులు మరియు దిగే శబ్దాలను ప్లే చేస్తుంది
 
-@ Volume of synthesized player footsteps and landings
-te ఆటగాడి కృత్రిమ అడుగులు మరియు దిగే శబ్దాల వాల్యూమ్
+@ Volume of player footsteps and landings
+te ఆటగాడి అడుగులు మరియు దిగే శబ్దాల వాల్యూమ్
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 te సంగీత ట్రాక్‌ల మధ్య మృదువుగా మారే సెకన్లు; 0 వెంటనే మారుస్తుంది
@@ -2319,8 +2319,8 @@ te మెరుగైన ఆయుధం ఆటో-స్విచ్ కోస�
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 te 3D వైర్‌ఫ్రేమ్ ఆటోమ్యాప్ వీక్షణ, ప్రదర్శన, బహిర్గత మోడ్, జూమ్ మరియు మార్కర్‌లను కాన్ఫిగర్ చేయండి
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-te మూల మినీమ్యాప్ మ్యాప్‌ను పై-కుడిలో ఉంచుతుంది; మధ్య ఓవర్‌లే వీక్షణపై పారదర్శక వైర్‌ఫ్రేమ్‌ను చూపుతుంది
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+te ఫ్రేమ్ చేసిన ప్యానెల్ గణాంకాల స్క్రీన్‌పై మ్యాప్‌ను ముదురు పెట్టెలో మధ్యలో ఉంచుతుంది; సెంటర్ ఓవర్‌లే వీక్షణపై పారదర్శక వైర్‌ఫ్రేమ్‌ను చూపుతుంది
 
 @ Disabled while Weapon Auto-Switch is set to Never
 te ఆయుధం ఆటో-స్విచ్ 'ఎప్పుడూ వద్దు'గా ఉన్నప్పుడు నిష్క్రియంగా ఉంటుంది
@@ -2337,8 +2337,11 @@ te ఆటోమ్యాప్ గీతలు మరియు ప్యాన�
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 te మీరు చూసే దిశ పైకి ఉండేలా ఆటోమ్యాప్‌ను తిప్పుతుంది; ఆఫ్ చేస్తే ఉత్తరం పైన ఉంటుంది
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-te ఆడేటప్పుడు లైవ్ 3D వైర్‌ఫ్రేమ్ లేదా పైనుండి ఆటోమ్యాప్ చూపుతుంది; పూర్తి-స్క్రీన్ ఇంటరాక్టివ్ మ్యాప్ కోసం M నొక్కండి (సింగిల్ ప్లేయర్ మరియు కో-ఆప్ మాత్రమే)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+te గణాంకాల స్క్రీన్‌పై (Tab/Select) 3D వైర్‌ఫ్రేమ్ లేదా టాప్-డౌన్ ఆటోమ్యాప్‌ను చూపుతుంది; ఎల్లప్పుడూ స్క్రీన్‌పై ఉంచడానికి Edit HUD లో ఆటోమ్యాప్ జోడించండి, లేదా ఫుల్-స్క్రీన్ మ్యాప్ కోసం M నొక్కండి (సింగిల్ ప్లేయర్ మరియు కో-ఆప్ మాత్రమే)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+te HUD పై ఎల్లప్పుడూ లైవ్ 3D వైర్‌ఫ్రేమ్ లేదా టాప్-డౌన్ ఆటోమ్యాప్‌ను చూపుతుంది (సింగిల్ ప్లేయర్ మరియు కో-ఆప్ మాత్రమే)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 te ఆయుధం తీసుకునేటప్పుడు: ఎప్పుడూ వద్దు ప్రస్తుత ఆయుధాన్ని ఉంచుతుంది; మెరుగైన ఆయుధం ఆయుధ ప్రాధాన్యతలో పైస్థానంలో ఉంటేనే మారుస్తుంది

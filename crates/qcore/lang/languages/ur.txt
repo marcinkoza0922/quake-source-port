@@ -1697,8 +1697,8 @@ ur بہتر ہتھیار
 @ Center overlay
 ur درمیانی اوورلے
 
-@ Corner minimap
-ur کونے کا منی میپ
+@ Framed panel
+ur فریم والا پینل
 
 @ Display
 ur ڈسپلے
@@ -2289,11 +2289,11 @@ ur ہیڈ فونز کے لیے کانوں کے وقت، سر کے سائے او�
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 ur ٹھوس دیواروں اور بند دروازوں کے پیچھے سے آنے والی آوازوں کو مدھم اور کم کرتا ہے
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-ur پتھر، دھات، لکڑی، مٹی اور مائع فرش کے مطابق تیار کردہ قدم اور اترنے کی آوازیں چلاتا ہے
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ur پتھر، دھات، لکڑی، مٹی اور مائع فرش کے مطابق کھلاڑی کے قدموں اور اترنے کی آوازیں چلاتا ہے
 
-@ Volume of synthesized player footsteps and landings
-ur کھلاڑی کے تیار کردہ قدموں اور اترنے کا والیوم
+@ Volume of player footsteps and landings
+ur کھلاڑی کے قدموں اور اترنے کی آواز کا حجم
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 ur موسیقی کے ٹریکس کے درمیان ہموار تبدیلی کے سیکنڈ؛ 0 فوری بدلتا ہے
@@ -2319,8 +2319,8 @@ ur بہتر ہتھیار پر خودکار تبدیلی کے لیے ہتھیار
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 ur 3D وائر فریم آٹو میپ کا منظر، ڈسپلے، ظاہر کرنے کا انداز، زوم اور نشانات ترتیب دیں
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-ur کونے کا منی میپ نقشہ اوپر دائیں جانب رکھتا ہے؛ درمیانی اوورلے منظر پر شفاف وائر فریم دکھاتا ہے
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+ur فریم والا پینل اعداد و شمار کی اسکرین پر نقشے کو گہرے باکس میں درمیان میں رکھتا ہے؛ مرکزی اوورلے منظر کے اوپر شفاف وائر فریم دکھاتا ہے
 
 @ Disabled while Weapon Auto-Switch is set to Never
 ur جب ہتھیار خودکار تبدیلی کبھی نہیں پر ہو تو یہ غیر فعال ہوتا ہے
@@ -2337,8 +2337,11 @@ ur آٹو میپ کی لکیروں اور پینل کی غیر شفافیت
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 ur آٹو میپ کو گھماتا ہے تاکہ آپ کے دیکھنے کی سمت اوپر رہے؛ بند رکھنے پر شمال اوپر رہتا ہے
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-ur کھیلتے وقت لائیو 3D وائر فریم یا اوپر سے آٹو میپ دکھاتا ہے؛ فل اسکرین نقشے کے لیے M دبائیں (صرف سنگل پلیئر اور کو-آپ)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+ur اعداد و شمار کی اسکرین (Tab/Select) پر 3D وائر فریم یا اوپر سے آٹومیپ دکھاتا ہے؛ ہمیشہ اسکرین پر رکھنے کے لیے HUD ایڈیٹر میں آٹومیپ شامل کریں، یا فل اسکرین نقشے کے لیے M دبائیں (صرف سنگل پلیئر اور کو-آپ)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+ur HUD پر ہر وقت لائیو 3D وائر فریم یا اوپر سے آٹومیپ دکھاتا ہے (صرف سنگل پلیئر اور کو-آپ)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 ur ہتھیار اٹھاتے وقت: کبھی نہیں موجودہ ہتھیار رکھتا ہے؛ بہتر ہتھیار صرف تب بدلتا ہے جب وہ ہتھیاروں کی ترجیح میں اوپر ہو

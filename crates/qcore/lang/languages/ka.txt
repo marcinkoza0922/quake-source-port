@@ -1697,8 +1697,8 @@ ka უკეთესი იარაღი
 @ Center overlay
 ka ცენტრალური გადაფარვა
 
-@ Corner minimap
-ka კუთხის მინირუკა
+@ Framed panel
+ka ჩარჩოიანი პანელი
 
 @ Display
 ka ჩვენება
@@ -2289,11 +2289,11 @@ ka 3D ბინაურალური სივრცული აუდიო
 @ Muffles and quiets sounds coming from behind solid walls and closed doors
 ka ახშობს და ასუსტებს მყარი კედლებისა და დაკეტილი კარების მიღმა მომავალ ხმებს
 
-@ Plays synthesized player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
-ka უკრავს სინთეზირებულ ნაბიჯებსა და დაშვებას ქვის, მეტალის, ხის, მიწისა და სითხის იატაკზე
+@ Plays player footsteps and landing thuds matched to stone, metal, wood, dirt and liquid floors
+ka უკრავს მოთამაშის ნაბიჯებსა და დახტომას ქვის, ლითონის, ხის, მიწისა და სითხის იატაკის შესაბამისად
 
-@ Volume of synthesized player footsteps and landings
-ka მოთამაშის სინთეზირებული ნაბიჯებისა და დაშვების ხმის სიმაღლე
+@ Volume of player footsteps and landings
+ka მოთამაშის ნაბიჯებისა და დახტომის ხმის სიმაღლე
 
 @ Seconds to smoothly fade between music tracks; 0 cuts immediately
 ka წამები მუსიკალურ ტრეკებს შორის გლუვი გადასვლისთვის; 0 მაშინვე ცვლის
@@ -2319,8 +2319,8 @@ ka დაალაგეთ იარაღის პრიორიტეტი
 @ Configure the 3D wireframe automap view, display, reveal mode, zoom and markers
 ka მოარგეთ 3D კარკასული ავტორუკის ხედი, ჩვენება, გამოჩენის რეჟიმი, მასშტაბი და მარკერები
 
-@ Corner minimap frames the map in the top-right; Center overlay floats a transparent wireframe over the view
-ka კუთხის მინირუკა ათავსებს რუკას ზედა მარჯვენა კუთხეში; ცენტრალური გადაფარვა გამჭვირვალე კარკასს აჩვენებს ხედის თავზე
+@ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
+ka ჩარჩოიანი პანელი რუკას სტატისტიკის ეკრანზე მუქ ჩარჩოში ათავსებს; ცენტრალური გადაფარვა გამჭვირვალე მავთულბადეს აჩვენებს ხედზე
 
 @ Disabled while Weapon Auto-Switch is set to Never
 ka გამორთულია, სანამ იარაღის ავტოშეცვლა დაყენებულია მნიშვნელობაზე არასოდეს
@@ -2337,8 +2337,11 @@ ka ავტორუკის ხაზებისა და პანელ�
 @ Rotates the automap so your facing direction points up; off keeps North at the top
 ka აბრუნებს ავტორუკას ისე, რომ თქვენი მზერის მიმართულება ზემოთ იყოს; გამორთული ჩრდილოეთს ზემოთ ტოვებს
 
-@ Shows a live 3D wireframe or top-down automap while playing; press M for the interactive full-screen map (single player and co-op only)
-ka თამაშისას აჩვენებს ცოცხალ 3D კარკასულ ან ზემოდან ავტორუკას; დააჭირეთ M-ს ინტერაქტიული სრულეკრანიანი რუკისთვის (მხოლოდ ერთმოთამაშიან და კოოპ. რეჟიმში)
+@ Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)
+ka სტატისტიკის ეკრანზე (Tab/Select) აჩვენებს 3D მავთულბადის ან ზემოდან ავტორუკას; მუდმივი ჩვენებისთვის დაამატეთ ავტორუკა HUD რედაქტორში ან დააჭირეთ M სრულეკრანიანი რუკისთვის (მხოლოდ ერთმოთამაშიანი და კოოპერატიული)
+
+@ Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)
+ka მუდმივად აჩვენებს ცოცხალ 3D მავთულბადის ან ზემოდან ავტორუკას HUD-ზე (მხოლოდ ერთმოთამაშიანი და კოოპერატიული)
 
 @ When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority
 ka იარაღის აღებისას: არასოდეს ტოვებს მიმდინარე იარაღს; უკეთესი იარაღი ცვლის მხოლოდ მაშინ, თუ ის უფრო მაღლა დგას იარაღის პრიორიტეტში
