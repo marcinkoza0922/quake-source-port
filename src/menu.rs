@@ -45,6 +45,7 @@ mod addon_bindings;
 pub(crate) mod shader;
 mod help;
 mod search;
+mod textedit;
 mod search_keywords;
 pub mod demos;
 
@@ -243,6 +244,13 @@ pub struct Menu {
     help: help::Help,
     /// Settings search on the Options hub.
     search: search::Search,
+    /// Caret and selection of the text row being edited, where its
+    /// characters were drawn, and the row a mouse drag is selecting in.
+    edit: textedit::Edit,
+    text_layouts: std::cell::RefCell<Vec<textedit::TextLayout>>,
+    text_drag: Option<usize>,
+    /// Shift is held (set by the host before each key; extends selections).
+    pub shift: bool,
 }
 
 /// Open dropdown list: the page row it belongs to, highlighted entry and
@@ -352,6 +360,10 @@ impl Menu {
             osk: None,
             help: Default::default(),
             search: Default::default(),
+            edit: Default::default(),
+            text_layouts: Default::default(),
+            text_drag: None,
+            shift: false,
         }
     }
 
@@ -388,19 +400,8 @@ impl Menu {
 
     /// Typed text goes to a text field under the cursor.
     pub fn text(&mut self, ch: char, cv: &mut Cvars) {
-        let Screen::OptionsPage(p) = self.screen else { return };
-        if self.drop.is_some() || !(' '..='~').contains(&ch) || ch == '"' || ch == ';' {
-            return;
-        }
-        if let Item::Text { cvar, max, .. } = self.page_item(p, self.opt_cursor) {
-            if demos::file_name_field(cvar) && !demos::file_name_char(ch) {
-                return;
-            }
-            let mut v = cv.by_name(cvar).map_or(String::new(), |c| c.string.clone());
-            if v.len() < max {
-                v.push(ch);
-                cv.set(cvar, &v);
-            }
+        if self.drop.is_none() {
+            self.text_insert(ch.encode_utf8(&mut [0; 4]), cv);
         }
     }
 
@@ -430,6 +431,8 @@ impl Menu {
         self.drop = None;
         self.drag = None;
         self.slider_drag = None;
+        self.text_drag = None;
+        self.edit = Default::default();
         self.capture = None;
         self.addon_capture = None;
         self.bind_pending = None;

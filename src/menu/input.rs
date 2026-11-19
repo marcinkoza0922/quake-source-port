@@ -15,6 +15,10 @@ impl Menu {
             self.set_slider(self.page_item(p, i), pos.0, cv);
             return None;
         }
+        if let Some(row) = self.text_drag {
+            self.text_drag_to(row, pos.0, cv);
+            return None;
+        }
         if let (Some(g), Screen::OptionsPage(p)) = (self.drag, self.screen) {
             self.drag_to(p, pos.1, g);
             return None;
@@ -186,6 +190,13 @@ impl Menu {
             let Some(i) = self.item_at(pos) else { return out };
             if let Some(c) = self.cursor_mut() {
                 *c = i;
+            }
+            // a click edits a text row (caret, drag to select); never submits it
+            if let Screen::OptionsPage(p) = self.screen
+                && matches!(self.page_item(p, i), Item::Text { .. })
+            {
+                self.text_click(i, pos.0, cv);
+                return out;
             }
             if let Screen::OptionsPage(p) = self.screen
                 && let item @ (Item::Slider { .. } | Item::ShaderParam(_)) = self.page_item(p, i)
@@ -424,13 +435,12 @@ impl Menu {
                         if key == K_ABUTTON {
                             self.osk = Some(Osk::default());
                             out.push(Action::Sound("misc/menu2.wav"));
-                        } else if key == K_BACKSPACE {
-                            let mut v = cv.by_name(cvar).map_or(String::new(), |c| c.string.clone());
-                            v.pop();
-                            cv.set(cvar, &v);
-                        } else if enter && cvar == "_mp_address" {
+                        } else if matches!(key, K_BACKSPACE | K_DEL) {
+                            self.text_delete(key == K_DEL, cv);
+                        } else if self.text_nav(key, cv) {
+                        } else if matches!(key, K_ENTER | K_KP_ENTER) && cvar == "_mp_address" {
                             self.run(Run::Connect, cv, &mut out);
-                        } else if enter && cvar == "_demo_rename" {
+                        } else if matches!(key, K_ENTER | K_KP_ENTER) && cvar == "_demo_rename" {
                             self.run(Run::RenameDemo, cv, &mut out);
                         }
                         return out;
