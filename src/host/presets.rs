@@ -22,6 +22,11 @@ const BASE: &[(&str, &str)] = &[
     ("r_motionblur", "0"),
     ("r_motionblur_quality", "1"),
     ("r_speedblur", "0"),
+    ("r_bloom", "0"),
+    ("r_bloom_quality", "1"),
+    ("r_shadow_realtime_dlight", "0"),
+    ("r_shadow_realtime_dlight_shadows", "1"),
+    ("r_shadow_quality", "1"),
     ("r_shader_preset", ""),
     ("r_enhancedfx", "0"),
     ("r_enhancedparticles", "0"),
@@ -40,6 +45,7 @@ const BASE: &[(&str, &str)] = &[
     ("r_waterripples", "0"),
     ("r_watersplash", "0"),
     ("r_watercaustics", "0"),
+    ("r_water_reflections", "0"),
     ("r_teleportwindows", "0"),
     ("r_portal_quality", "1"),
     ("r_debris", "0"),
@@ -55,6 +61,9 @@ const ENHANCED: &[(&str, &str)] = &[
     ("r_ssao", "3"),
     ("r_motionblur", "1"),
     ("r_speedblur", "1"),
+    ("r_bloom", "1"),
+    ("r_shadow_realtime_dlight", "1"),
+    ("r_shadow_quality", "2"),
     ("r_enhancedfx", "1"),
     ("r_enhancedparticles", "1"),
     ("r_particle_quality", "2"),
@@ -70,6 +79,7 @@ const ENHANCED: &[(&str, &str)] = &[
     ("r_waterripples", "1"),
     ("r_watersplash", "1"),
     ("r_watercaustics", "1"),
+    ("r_water_reflections", "1"),
     ("r_teleportwindows", "1"),
     ("r_portal_quality", "2"),
     ("r_debris", "1"),
@@ -83,6 +93,8 @@ const LOW_END: &[(&str, &str)] = &[
     ("r_msaa", "1"),
     ("r_anisotropy", "4"),
     ("r_motionblur_quality", "0"),
+    ("r_bloom_quality", "0"),
+    ("r_shadow_quality", "0"),
     ("r_particle_quality", "0"),
     ("r_blood_quality", "0"),
     ("r_water_quality", "0"),
@@ -144,7 +156,18 @@ mod tests {
         let get = |n| v.iter().find(|c| c.0 == n).unwrap().1;
         assert_eq!(get("r_enhancedmodels"), "1");
         assert_eq!(get("r_enhancedfx"), "0");
-        assert_eq!(values("enhanced").unwrap().iter().find(|c| c.0 == "r_impact_fx").unwrap().1, "4");
+        assert_eq!(get("r_bloom"), "0");
+        assert_eq!(get("r_shadow_realtime_dlight"), "0");
+        assert_eq!(get("r_water_reflections"), "0");
+        let e = values("enhanced").unwrap();
+        let eget = |n| e.iter().find(|c| c.0 == n).unwrap().1;
+        assert_eq!(eget("r_impact_fx"), "4");
+        assert_eq!(eget("r_bloom"), "1");
+        assert_eq!(eget("r_bloom_quality"), "1");
+        assert_eq!(eget("r_shadow_realtime_dlight"), "1");
+        assert_eq!(eget("r_shadow_realtime_dlight_shadows"), "1");
+        assert_eq!(eget("r_shadow_quality"), "2");
+        assert_eq!(eget("r_water_reflections"), "1");
         assert!(values("nope").is_none());
     }
 }
