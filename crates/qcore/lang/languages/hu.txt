@@ -745,6 +745,9 @@ hu Hangmagasság
 @ Pitch Sensitivity
 hu Függőleges érzékenység
 
+@ planar
+hu síkbeli
+
 @ Playback Speed
 hu Lejátszási sebesség
 
@@ -796,6 +799,9 @@ hu Railgun beállításai
 @ Ranged only
 hu Csak távolsági
 
+@ ray traced
+hu sugárkövetés
+
 @ Reacquire While Held
 hu Újrabefogás nyomva tartva
 
@@ -810,6 +816,12 @@ hu Piros
 
 @ Reduce Motion
 hu Kevesebb mozgás
+
+@ Reflection Strength
+hu Tükröződés erőssége
+
+@ Reflections
+hu Tükröződések
 
 @ Regen (seconds per second)
 hu Regeneráció (mp/mp)
@@ -1782,6 +1794,9 @@ hu Hány fény vet egyszerre árnyékot, és mennyire lágyak a széleik
 @ How strongly fog covers the sky when fog is on
 hu Milyen erősen takarja a köd az égboltot, ha a köd be van kapcsolva
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+hu Milyen erősen tükröz a felület; lapos látószögnél a legerősebb
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 hu Hogyan torzul a nézet a víz alatt: a klasszikus a szoftveres Quake-hez hasonlóan az egész képernyőt hullámoztatja, a GLQuake lassan nyújtja és nyomja össze a nézetet
 
@@ -2042,6 +2057,9 @@ hu A pálya színes fényét használja (.lit fájl vagy BSPX lump); kikapcsolva
 
 @ Walls, doors and monsters block the light and cast shadows
 hu A falak, ajtók és szörnyek elzárják a fényt és árnyékot vetnek
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+hu A víz és a nyálka visszatükrözi a fölötte lévő teret; a síkbeli minden közeli vízszinthez egyszer újrarajzolja a jelenetet; a sugárkövetés minden fodrozódást követ, és sugárkövetésre képes GPU kell hozzá
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 hu Vízsugárszakaszok, cseppek száma és fényes folyadékárnyalás: az alacsony egyszerűbb áttetsző sugarakat, a magas sima, fényes sugarakat ad
@@ -2723,6 +2741,21 @@ hu Egy pillanatra megállítja a játékot, amikor megsebzel egy ellenséget, í
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 hu További pályák (Quaddicted)...
+
+@ Type to search settings...
+hu Írjon a beállítások kereséséhez...
+
+@ No matching settings
+hu Nincs egyező beállítás
+
+@ Search
+hu Keresés
+
+@ Options
+hu Beállítások
+
+@ Multiplayer
+hu Többjátékos
 
 @ Type to filter...
 hu Gépelj a szűréshez...

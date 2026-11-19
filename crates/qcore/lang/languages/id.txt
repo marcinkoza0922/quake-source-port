@@ -745,6 +745,9 @@ id Nada
 @ Pitch Sensitivity
 id Sensitivitas Vertikal
 
+@ planar
+id planar
+
 @ Playback Speed
 id Kecepatan Putar
 
@@ -796,6 +799,9 @@ id Pengaturan Railgun
 @ Ranged only
 id Hanya jarak jauh
 
+@ ray traced
+id ray tracing
+
 @ Reacquire While Held
 id Kunci Ulang saat Ditahan
 
@@ -810,6 +816,12 @@ id Merah
 
 @ Reduce Motion
 id Kurangi Gerakan
+
+@ Reflection Strength
+id Kekuatan Pantulan
+
+@ Reflections
+id Pantulan
 
 @ Regen (seconds per second)
 id Regenerasi (detik per detik)
@@ -1782,6 +1794,9 @@ id Berapa banyak cahaya yang menghasilkan bayangan sekaligus, dan seberapa halus
 @ How strongly fog covers the sky when fog is on
 id Seberapa tebal kabut menutupi langit saat kabut aktif
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+id Seberapa kuat permukaan memantulkan; terkuat pada sudut pandang rendah
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 id Cara pandangan terdistorsi di bawah air: Klasik membuat seluruh layar beriak seperti Quake software, GLQuake perlahan meregangkan dan memampatkan pandangan
 
@@ -2042,6 +2057,9 @@ id Memakai cahaya berwarna peta (berkas .lit atau lump BSPX); nonaktif memberi c
 
 @ Walls, doors and monsters block the light and cast shadows
 id Dinding, pintu, dan monster menghalangi cahaya dan menghasilkan bayangan
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+id Air dan lendir memantulkan ruangan di atasnya; planar menggambar ulang adegan sekali untuk setiap permukaan air terdekat; ray tracing mengikuti setiap riak dan memerlukan GPU dengan ray tracing
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 id Segmen semburan air, jumlah tetesan, dan shading cairan mengilap: rendah memakai aliran tembus pandang sederhana; tinggi memakai semburan halus dan mengilap
@@ -2723,6 +2741,21 @@ id Membekukan game sepersekian detik saat Anda melukai musuh, agar serangan tera
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 id Dapatkan peta lain (Quaddicted)...
+
+@ Type to search settings...
+id Ketik untuk mencari pengaturan...
+
+@ No matching settings
+id Tidak ada pengaturan yang cocok
+
+@ Search
+id Cari
+
+@ Options
+id Opsi
+
+@ Multiplayer
+id Multipemain
 
 @ Type to filter...
 id Ketik untuk menyaring...

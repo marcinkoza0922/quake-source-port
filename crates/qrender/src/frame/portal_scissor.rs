@@ -55,7 +55,7 @@ mod tests {
     fn sheet(mins: [f32; 3], maxs: [f32; 3]) -> crate::portals::Portal {
         crate::portals::Portal { mins, maxs, normal: [0.0, 0.0, 1.0], center: [0.0; 3],
             destination: [0.0; 3], rot: [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]],
-            pvs: [0.0; 3], gun: Some(0) }
+            pvs: [0.0; 3], gun: Some(0), reflect: false }
     }
 
     #[test]

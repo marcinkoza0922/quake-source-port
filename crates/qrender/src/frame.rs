@@ -18,6 +18,7 @@ use world_draw::*;
 mod lightmaps;
 mod bloom;
 mod dlights;
+mod rt;
 pub(super) use lightmaps::LightmapRequests;
 
 type Mat4 = [f32; 16];
@@ -38,7 +39,13 @@ impl Renderer {
             self.create_swapchain(fr.settings.vsync)?;
         }
         self.apply_settings(&fr.settings)?;
-        self.gun_targets |= fr.gun_portals.iter().any(|g| g.live && g.exit.is_some());
+        // r_water_reflections: 1 planar (portal views), 2 ray traced
+        let refl_mode = self.reflection_mode(&fr.settings);
+        let rt_on = refl_mode == 2 && (fr.view.is_some() || !fr.splits.is_empty());
+        if rt_on {
+            self.ensure_rt()?;
+        }
+        self.gun_targets |= fr.gun_portals.iter().any(|g| g.live && g.exit.is_some()) || refl_mode == 1;
         if self.targets.as_ref().is_some_and(|t| t.portals.is_empty())
             && (self.gun_targets || self.world.as_ref().is_some_and(|w| !w.portals.is_empty()))
         {
@@ -133,7 +140,9 @@ impl Renderer {
             let models = &self.models;
             let movers = fr.entities.iter().filter_map(|e| {
                 let alias = matches!(models.get(e.model.0 as usize), Some(Model::Alias(_)));
-                (alias && e.key != 0 && e.key & crate::ATTACHED_KEY == 0 && !e.viewmodel).then_some((e.key, e.origin))
+                // the local player's own body is tracked as `fr.player`
+                let own_body = e.portal_only || e.follows_camera;
+                (alias && e.key != 0 && e.key & crate::ATTACHED_KEY == 0 && !e.viewmodel && !own_body).then_some((e.key, e.origin))
             });
             water_parts = self.water_fx.update(
                 &wg.cpu,
@@ -239,7 +248,7 @@ impl Renderer {
             w.max(1) as f32 * (scene_w as f32 / sw.max(1) as f32),
             h.max(1) as f32 * (scene_h as f32 / sh.max(1) as f32),
         ];
-        let mut portal_draws = if fr.settings.teleport_windows || !fr.gun_portals.is_empty() {
+        let mut portal_draws = if fr.settings.teleport_windows || !fr.gun_portals.is_empty() || refl_mode == 1 {
             self.prepare_portals(view.as_ref(), [scene_w, scene_h], fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis, &mut portal_worlds)
         } else {
             Vec::new()
@@ -247,6 +256,17 @@ impl Renderer {
 
         if let Some(vs) = &view {
             if let Some(wg) = self.world.as_mut() {
+                // ray-traced reflections reach surfaces outside the view:
+                // keep the lightmaps of the eye's PVS current (planar
+                // reflection views request the same set by drawing it)
+                if rt_on && vi == 0 {
+                    for &si in wg.cpu.portal_surfaces(vs.eye).iter() {
+                        let lm = wg.draw_surfaces[si as usize].lm;
+                        if lm != NO_LM {
+                            lm_vis.push(lm);
+                        }
+                    }
+                }
                 if let Some(index) = self.isolated_portal.filter(|_| !multi) {
                     let p = &wg.portals[index];
                     let surfs: Vec<_> = wg.cpu.surfaces.iter().enumerate().filter_map(|(i, s)| {
@@ -294,13 +314,13 @@ impl Renderer {
                                 .map(|x| x * x)
                                 .sum::<f32>()
                                 .sqrt();
-                            if portal_draws.is_empty() && !sphere_in_frustum(&vs.frustum, e.origin, r) {
+                            if portal_draws.is_empty() && !rt_on && !sphere_in_frustum(&vs.frustum, e.origin, r) {
                                 continue;
                             }
                         } else {
                             let mn = [0, 1, 2].map(|i| sub_.mins[i] + e.origin[i]);
                             let mx = [0, 1, 2].map(|i| sub_.maxs[i] + e.origin[i]);
-                            if portal_draws.is_empty() && !box_in_frustum(&vs.frustum, mn, mx) {
+                            if portal_draws.is_empty() && !rt_on && !box_in_frustum(&vs.frustum, mn, mx) {
                                 continue;
                             }
                         }
@@ -372,7 +392,8 @@ impl Renderer {
                         };
                         let radius = dynp.map_or(am.radius, |(_, d)| d.radius);
                         let main_visible = e.viewmodel || sphere_in_frustum(&vs.frustum, e.origin, radius);
-                        if portal_draws.is_empty() && !main_visible {
+                        // ray-traced reflections see every model (first view's list)
+                        if portal_draws.is_empty() && !main_visible && !(rt_on && vi == 0) {
                             continue;
                         }
                         let t = time + e.syncbase as f64;
@@ -723,6 +744,12 @@ impl Renderer {
         });
         }
 
+        let rt_build = if rt_on { passes.first().and_then(|p| self.prepare_rt(fi, fr, &p.alias_draws, time)) } else { None };
+        let (water_pipe, water_alpha_pipe) = match rt_build {
+            Some(_) => (self.pipes.water_rt, self.pipes.water_rt_alpha),
+            None => (self.pipes.water, self.pipes.water_alpha),
+        };
+
         // UI vertices
         let mut ui: Vec<UiVert> = Vec::with_capacity(fr.draw2d.len() * 6);
         let quad = |ui: &mut Vec<UiVert>,
@@ -897,13 +924,16 @@ impl Renderer {
                     }
                     a
                 },
+                refl: [if st.water_reflections > 0 { st.water_reflection_amount.clamp(0.0, 1.5) } else { 0.0 }, 0.0, 0.0, 0.0],
             };
             for (i, portal) in pass.portal_draws.iter_mut().enumerate().filter(|(i, _)| *i < 4) {
                 ubo.portal_plane[i] = portal.portal.plane();
                 // only teleporter sheets sample their view in water.frag
                 let slot = if portal.portal.gun.is_some() { 0.0 } else { self.targets.as_ref().unwrap().portals[i].1 as f32 };
                 ubo.portal_min[i] = [portal.portal.mins[0], portal.portal.mins[1], portal.portal.mins[2], slot];
-                ubo.portal_max[i] = [portal.portal.maxs[0], portal.portal.maxs[1], portal.portal.maxs[2], 1.0];
+                // w: 1 teleporter sheet / gun portal, 2 reflection (water.frag)
+                let kind = if portal.portal.reflect { 2.0 } else { 1.0 };
+                ubo.portal_max[i] = [portal.portal.maxs[0], portal.portal.maxs[1], portal.portal.maxs[2], kind];
             }
             let portal_uv_self = self.targets.as_ref().map_or([0.0; 4], |t| {
                 let [pw, ph] = portals::portal_viewport(t, [pass.scene_w, pass.scene_h]);
@@ -1042,6 +1072,9 @@ impl Renderer {
                     up.rows,
                     up.staging.as_ref().map(|b| b.buf),
                 );
+            }
+            if let Some(b) = rt_build {
+                self.record_rt(cmd, fi, b);
             }
             // post: gamma/contrast/polyblend to the output
             let (out_img, out_view) = match (self.swap.as_ref().filter(|_| present), &t.out) {
@@ -1420,10 +1453,10 @@ impl Renderer {
                             &[
                                 (wd.opaque, p.world),
                                 (wd.sky, p.sky),
-                                (wd.water[0], p.water),
-                                (wd.water[1], p.water),
-                                (wd.water[2], p.water),
-                                (wd.water[3], p.water),
+                                (wd.water[0], water_pipe),
+                                (wd.water[1], water_pipe),
+                                (wd.water[2], water_pipe),
+                                (wd.water[3], water_pipe),
                             ],
                         );
                     }
@@ -1523,7 +1556,7 @@ impl Renderer {
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[wg.vbuf.buf], &[0]);
                     dev.cmd_bind_index_buffer(cmd, dynbuf, 0, vk::IndexType::UINT32);
                     for wd in world_draws.iter().filter(|wd| wd.alpha >= 1.0) {
-                        let wa = wd.water_alpha.map(|r| (r, p.water_alpha));
+                        let wa = wd.water_alpha.map(|r| (r, water_alpha_pipe));
                         draw_world(wd, &wa);
                     }
                 }
@@ -1539,8 +1572,8 @@ impl Renderer {
                                     &[
                                         (wd.opaque, p.world_alpha),
                                         (wd.sky, p.sky),
-                                        (wd.water[0], p.water_alpha),
-                                        (wd.water_alpha[0], p.water_alpha),
+                                        (wd.water[0], water_alpha_pipe),
+                                        (wd.water_alpha[0], water_alpha_pipe),
                                     ],
                                 );
                             }

@@ -745,6 +745,9 @@ fa زیر و بمی
 @ Pitch Sensitivity
 fa حساسیت عمودی
 
+@ planar
+fa صفحه‌ای
+
 @ Playback Speed
 fa سرعت پخش
 
@@ -796,6 +799,9 @@ fa تنظیمات ریل‌گان
 @ Ranged only
 fa فقط دوربرد
 
+@ ray traced
+fa ردیابی پرتو
+
 @ Reacquire While Held
 fa هدف‌گیری دوباره هنگام نگه‌داشتن
 
@@ -810,6 +816,12 @@ fa قرمز
 
 @ Reduce Motion
 fa کاهش حرکت
+
+@ Reflection Strength
+fa شدت بازتاب
+
+@ Reflections
+fa بازتاب‌ها
 
 @ Regen (seconds per second)
 fa بازیابی (ثانیه در ثانیه)
@@ -1782,6 +1794,9 @@ fa چند نور هم‌زمان سایه می‌اندازند و لبه‌ها
 @ How strongly fog covers the sky when fog is on
 fa میزان پوشش آسمان با مه وقتی مه روشن است
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+fa سطح چقدر قوی بازتاب می‌دهد؛ در زاویه‌های دید کم قوی‌ترین است
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 fa اعوجاج دید زیر آب: کلاسیک کل صفحه را مانند Quake نرم‌افزاری موج‌دار می‌کند، GLQuake دید را آرام می‌کشد و می‌فشارد
 
@@ -2042,6 +2057,9 @@ fa نور رنگی نقشه را به کار می‌برد (فایل .lit یا �
 
 @ Walls, doors and monsters block the light and cast shadows
 fa دیوارها، درها و هیولاها جلوی نور را می‌گیرند و سایه می‌اندازند
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+fa آب و لجن اتاق بالای خود را بازتاب می‌دهند؛ صفحه‌ای صحنه را برای هر سطح آب نزدیک یک بار دوباره می‌کشد؛ ردیابی پرتو هر موج را دنبال می‌کند و به GPU با پشتیبانی ردیابی پرتو نیاز دارد
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 fa بخش‌های فواره‌ی آب، تعداد قطره‌ها و سایه‌زنی براق مایع: کم جریان‌های نیمه‌شفاف ساده‌تر؛ زیاد فواره‌های نرم و براق
@@ -2723,6 +2741,21 @@ fa وقتی به دشمن آسیب می‌زنید بازی را برای کسر
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 fa نقشه‌های بیشتر (Quaddicted)...
+
+@ Type to search settings...
+fa برای جستجوی تنظیمات تایپ کنید...
+
+@ No matching settings
+fa تنظیمی مطابق نیست
+
+@ Search
+fa جستجو
+
+@ Options
+fa گزینه‌ها
+
+@ Multiplayer
+fa چندنفره
 
 @ Type to filter...
 fa برای فیلتر تایپ کنید...

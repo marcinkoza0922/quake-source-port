@@ -745,6 +745,9 @@ fi Sävelkorkeus
 @ Pitch Sensitivity
 fi Pystyherkkyys
 
+@ planar
+fi tasomaiset
+
 @ Playback Speed
 fi Toistonopeus
 
@@ -796,6 +799,9 @@ fi Railgunin asetukset
 @ Ranged only
 fi Vain kaukotaistelu
 
+@ ray traced
+fi säteenseuranta
+
 @ Reacquire While Held
 fi Hae uudelleen pidettäessä
 
@@ -810,6 +816,12 @@ fi Punainen
 
 @ Reduce Motion
 fi Vähennä liikettä
+
+@ Reflection Strength
+fi Heijastusten voimakkuus
+
+@ Reflections
+fi Heijastukset
 
 @ Regen (seconds per second)
 fi Palautus (sekuntia sekunnissa)
@@ -1782,6 +1794,9 @@ fi Kuinka moni valo luo varjoja yhtä aikaa ja kuinka pehmeät niiden reunat ova
 @ How strongly fog covers the sky when fog is on
 fi Kuinka voimakkaasti sumu peittää taivaan, kun sumu on päällä
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+fi Kuinka voimakkaasti pinta heijastaa; voimakkaimmin loivassa katselukulmassa
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 fi Miten näkymä vääristyy veden alla: klassinen aaltoiluttaa koko ruutua kuin ohjelmisto-Quake, GLQuake venyttää ja litistää näkymää hitaasti
 
@@ -2042,6 +2057,9 @@ fi Käyttää kentän värillistä valoa (.lit-tiedosto tai BSPX-lohko); pois an
 
 @ Walls, doors and monsters block the light and cast shadows
 fi Seinät, ovet ja hirviöt estävät valon ja luovat varjoja
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+fi Vesi ja lima heijastavat yläpuolista tilaa; tasomaiset piirtävät näkymän uudelleen kerran jokaista lähellä olevaa vedenpintaa kohden; säteenseuranta seuraa jokaista väreilyä ja vaatii säteenseurantaa tukevan GPU:n
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 fi Vesisuihkun segmentit, pisaroiden määrä ja kiiltävä nesteen varjostus: matala käyttää yksinkertaisempia läpikuultavia virtoja; korkea pehmeitä kiiltäviä suihkuja
@@ -2723,6 +2741,21 @@ fi Pysäyttää pelin sekunnin murto-osaksi, kun vahingoitat vihollista, joten o
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 fi Lisää karttoja (Quaddicted)...
+
+@ Type to search settings...
+fi Kirjoita hakeaksesi asetuksia...
+
+@ No matching settings
+fi Ei vastaavia asetuksia
+
+@ Search
+fi Hae
+
+@ Options
+fi Asetukset
+
+@ Multiplayer
+fi Moninpeli
 
 @ Type to filter...
 fi Kirjoita suodattaaksesi...

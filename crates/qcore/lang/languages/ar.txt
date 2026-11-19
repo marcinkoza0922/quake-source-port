@@ -745,6 +745,9 @@ ar طبقة الصوت
 @ Pitch Sensitivity
 ar حساسية الانحدار
 
+@ planar
+ar مستوية
+
 @ Playback Speed
 ar سرعة التشغيل
 
@@ -796,6 +799,9 @@ ar إعدادات الريلغن
 @ Ranged only
 ar الهجوم البعيد فقط
 
+@ ray traced
+ar تتبع الأشعة
+
 @ Reacquire While Held
 ar إعادة الالتقاط أثناء الضغط
 
@@ -810,6 +816,12 @@ ar أحمر
 
 @ Reduce Motion
 ar تقليل الحركة
+
+@ Reflection Strength
+ar شدة الانعكاس
+
+@ Reflections
+ar الانعكاسات
 
 @ Regen (seconds per second)
 ar التجدد (ثوانٍ لكل ثانية)
@@ -1782,6 +1794,9 @@ ar عدد الأضواء التي تُلقي ظلالًا في آن واحد و�
 @ How strongly fog covers the sky when fog is on
 ar مدى تغطية الضباب للسماء عند تفعيل الضباب
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+ar مدى قوة انعكاس السطح؛ أقوى ما يكون عند زوايا النظر المنخفضة
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 ar كيف تتشوه الرؤية تحت الماء: الكلاسيكي يموّج الشاشة كلها مثل Quake البرمجي، وGLQuake يمطّ الرؤية ويضغطها ببطء
 
@@ -2042,6 +2057,9 @@ ar يستخدم الإضاءة الملونة للخريطة (ملف .lit أو �
 
 @ Walls, doors and monsters block the light and cast shadows
 ar تحجب الجدران والأبواب والوحوش الضوء وتُلقي ظلالًا
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ar يعكس الماء والوحل الغرفة فوقهما؛ المستوية تعيد رسم المشهد مرة لكل مستوى ماء قريب؛ تتبع الأشعة يتبع كل تموج ويحتاج إلى معالج رسوميات يدعم تتبع الأشعة
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ar أجزاء نفث الماء وعدد القطرات وتظليل السائل اللامع: المنخفض يستخدم تيارات شفافة أبسط؛ العالي نفثات لامعة ناعمة
@@ -2723,6 +2741,21 @@ ar يجمّد اللعبة جزءًا من الثانية عند إصابة عد
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 ar المزيد من الخرائط (Quaddicted)...
+
+@ Type to search settings...
+ar اكتب للبحث في الإعدادات...
+
+@ No matching settings
+ar لا توجد إعدادات مطابقة
+
+@ Search
+ar بحث
+
+@ Options
+ar خيارات
+
+@ Multiplayer
+ar اللعب الجماعي
 
 @ Type to filter...
 ar اكتب للتصفية...

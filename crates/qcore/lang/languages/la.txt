@@ -745,6 +745,9 @@ la Altitudo soni
 @ Pitch Sensitivity
 la Sensibilitas verticalis
 
+@ planar
+la plani
+
 @ Playback Speed
 la Celeritas reproductionis
 
@@ -796,6 +799,9 @@ la Optiones railgun
 @ Ranged only
 la Eminus tantum
 
+@ ray traced
+la radiis vestigati
+
 @ Reacquire While Held
 la Tenendo iterum capere
 
@@ -810,6 +816,12 @@ la Ruber
 
 @ Reduce Motion
 la Motum minuere
+
+@ Reflection Strength
+la Vis reflexuum
+
+@ Reflections
+la Reflexus
 
 @ Regen (seconds per second)
 la Regeneratio (secundae per secundam)
@@ -1782,6 +1794,9 @@ la Quot lumina simul umbras iaciant, et quam molles sint earum orae
 @ How strongly fog covers the sky when fog is on
 la Quam valde nebula caelum tegat cum nebula activa est
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+la Quam fortiter superficies reddat; fortissime ex humili aspectu
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 la Quomodo aspectus sub aqua distorqueatur: classicus totum quadrum undulat ut Quake programmaticum, GLQuake aspectum lente extendit et comprimit
 
@@ -2042,6 +2057,9 @@ la Lumen coloratum tabulae adhibet (plica .lit vel frustum BSPX); inactivum lume
 
 @ Walls, doors and monsters block the light and cast shadows
 la Parietes, ostia et monstra lucem impediunt et umbras iaciunt
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+la Aqua et limus conclave supra se reddunt; plani scaenam semel pro unaquaque proxima aquae superficie iterum pingunt; radiis vestigati omnem undulam sequuntur et GPU radios vestigantem requirunt
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 la Segmenta iacti, numerus guttarum et umbratio nitida liquoris: humilis rivos translucidos simpliciores adhibet; alta iactus lenes et nitidos
@@ -2723,6 +2741,21 @@ la Lusum per momentum congelat cum hostem laedis, ut ictus graviores videantur. 
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 la Plures tabulae (Quaddicted)...
+
+@ Type to search settings...
+la Scribe ut optiones quaeras...
+
+@ No matching settings
+la Nullae optiones congruunt
+
+@ Search
+la Quaere
+
+@ Options
+la Optiones
+
+@ Multiplayer
+la Lusores multi
 
 @ Type to filter...
 la Scribe ut eliquas...

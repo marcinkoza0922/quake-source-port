@@ -199,6 +199,8 @@ pub struct Host {
     show_scores: bool,
     startup: u32,
     pub window: Option<qplatform::Window>,
+    /// SDL text input state last set (`None`: not yet), see `sync_key_dest`.
+    pub(super) text_input: Option<bool>,
     cmdline: Vec<String>,
     last_vol: (f32, f32),
     metrics: metrics::Metrics,
@@ -352,6 +354,7 @@ impl Host {
             show_scores: false,
             startup: 0,
             window: None,
+            text_input: None,
             cmdline,
             last_vol: (-1.0, -1.0),
             metrics: Default::default(),

@@ -372,6 +372,13 @@ it Quanto la nebbia copre il cielo quando è attiva
 es Cuánto cubre la niebla el cielo cuando está activada
 ru Насколько туман закрывает небо, когда туман включён
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+fr Force du reflet de la surface ; plus forte sous un angle rasant
+de Wie stark die Oberfläche spiegelt; am stärksten bei flachem Blickwinkel
+it Quanto riflette la superficie; più forte con angoli di visuale radenti
+es Cuánto refleja la superficie; más fuerte con ángulos de visión rasantes
+ru Насколько сильно отражает поверхность; сильнее всего под пологим углом
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 fr Déformation de la vue sous l'eau : classique fait onduler tout l'écran comme Quake en rendu logiciel, GLQuake étire et écrase lentement la vue
 de Wie sich die Sicht unter Wasser verzerrt: klassisch lässt den ganzen Bildschirm wellen wie Software-Quake, GLQuake dehnt und staucht die Sicht langsam
@@ -980,6 +987,13 @@ de Wände, Türen und Monster halten das Licht auf und werfen Schatten
 it Pareti, porte e mostri bloccano la luce e proiettano ombre
 es Paredes, puertas y monstruos bloquean la luz y proyectan sombras
 ru Стены, двери и монстры загораживают свет и отбрасывают тени
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+fr L'eau et la boue reflètent la pièce au-dessus ; planaires redessine la scène une fois par niveau d'eau proche ; par lancer de rayons suit chaque ondulation et nécessite un GPU compatible ray tracing
+de Wasser und Schleim spiegeln den Raum darüber; planar zeichnet die Szene einmal pro nahem Wasserspiegel neu; Raytracing folgt jeder Welle und braucht eine raytracingfähige GPU
+it Acqua e melma riflettono l'ambiente sopra; planari ridisegna la scena una volta per ogni livello d'acqua vicino; ray tracing segue ogni increspatura e richiede una GPU con ray tracing
+es El agua y el limo reflejan la sala de encima; planares redibuja la escena una vez por cada nivel de agua cercano; trazado de rayos sigue cada onda y requiere una GPU con trazado de rayos
+ru Вода и слизь отражают помещение над ними; плоские перерисовывают сцену один раз на каждый ближний уровень воды; трассировка лучей следует за каждой рябью и требует GPU с трассировкой лучей
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 fr Segments du jet, nombre de gouttes et rendu brillant du liquide : faible utilise des jets translucides plus simples ; élevée des jets lisses et brillants

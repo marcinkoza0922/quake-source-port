@@ -745,6 +745,9 @@ is Tónhæð
 @ Pitch Sensitivity
 is Lóðrétt næmni
 
+@ planar
+is flatar
+
 @ Playback Speed
 is Spilunarhraði
 
@@ -796,6 +799,9 @@ is Stillingar Railgun
 @ Ranged only
 is Aðeins af færi
 
+@ ray traced
+is geislarakning
+
 @ Reacquire While Held
 is Endurmiða meðan haldið
 
@@ -810,6 +816,12 @@ is Rauður
 
 @ Reduce Motion
 is Draga úr hreyfingu
+
+@ Reflection Strength
+is Styrkur speglunar
+
+@ Reflections
+is Speglanir
 
 @ Regen (seconds per second)
 is Endurnýjun (sekúndur á sekúndu)
@@ -1782,6 +1794,9 @@ is Hve mörg ljós varpa skuggum í einu og hve mjúkar brúnir þeirra eru
 @ How strongly fog covers the sky when fog is on
 is Hversu mikið þokan hylur himininn þegar þoka er á
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+is Hve sterkt yfirborðið speglar; sterkast við lágt sjónarhorn
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 is Hvernig sjónin bjagast neðansjávar: klassískt gárar allan skjáinn eins og hugbúnaðar-Quake, GLQuake teygir og þjappar sjónarhorninu hægt
 
@@ -2042,6 +2057,9 @@ is Notar litaða lýsingu borðsins (.lit-skrá eða BSPX-hluta); af gefur uppru
 
 @ Walls, doors and monsters block the light and cast shadows
 is Veggir, dyr og skrímsli skyggja á ljósið og varpa skuggum
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+is Vatn og slím spegla rýmið fyrir ofan; flatar teikna senuna aftur einu sinni fyrir hvert nálægt vatnsborð; geislarakning fylgir hverri gáru og þarf skjákort með geislarakningu
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 is Bunuhlutar, fjöldi dropa og gljáandi vökvaskygging: lágt notar einfaldari hálfgegnsæjar bunur; hátt notar mjúkar, gljáandi bunur
@@ -2723,6 +2741,21 @@ is Frystir leikinn í sekúndubrot þegar þú særir óvin, svo högg virðast 
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 is Fleiri borð (Quaddicted)...
+
+@ Type to search settings...
+is Skrifaðu til að leita í stillingum...
+
+@ No matching settings
+is Engar samsvarandi stillingar
+
+@ Search
+is Leita
+
+@ Options
+is Valkostir
+
+@ Multiplayer
+is Fjölspilun
 
 @ Type to filter...
 is Skrifaðu til að sía...

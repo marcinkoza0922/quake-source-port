@@ -745,6 +745,9 @@ zh-TW 音高
 @ Pitch Sensitivity
 zh-TW 垂直靈敏度
 
+@ planar
+zh-TW 平面
+
 @ Playback Speed
 zh-TW 播放速度
 
@@ -796,6 +799,9 @@ zh-TW 磁軌砲設定
 @ Ranged only
 zh-TW 僅限遠程
 
+@ ray traced
+zh-TW 光線追蹤
+
 @ Reacquire While Held
 zh-TW 按住時重新鎖定
 
@@ -810,6 +816,12 @@ zh-TW 紅
 
 @ Reduce Motion
 zh-TW 減少動態效果
+
+@ Reflection Strength
+zh-TW 反射強度
+
+@ Reflections
+zh-TW 反射
 
 @ Regen (seconds per second)
 zh-TW 回復（每秒秒數）
@@ -1782,6 +1794,9 @@ zh-TW 同時投下陰影的光源數量，以及陰影邊緣的柔和程度
 @ How strongly fog covers the sky when fog is on
 zh-TW 開啟霧時霧氣覆蓋天空的程度
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+zh-TW 水面反射的強度；在較低視角時最強
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 zh-TW 水下畫面的扭曲方式：經典會像軟體版Quake一樣讓整個畫面波動，GLQuake則緩慢拉伸與壓縮畫面
 
@@ -2042,6 +2057,9 @@ zh-TW 使用地圖的彩色光照（.lit檔案或BSPX區塊）；關閉則為原
 
 @ Walls, doors and monsters block the light and cast shadows
 zh-TW 牆壁、門與怪物會擋住光線並投下陰影
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+zh-TW 水與黏液會映出上方的空間；平面會為每個附近的水面重新繪製一次場景；光線追蹤會追隨每一道漣漪，需要支援光線追蹤的 GPU
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 zh-TW 水柱分段、水滴數量與光澤液體著色：低使用較簡單的半透明水流；高使用平滑有光澤的水柱
@@ -2723,6 +2741,21 @@ zh-TW 傷害敵人時讓遊戲凍結一瞬間，讓命中更有打擊感。僅�
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 zh-TW 取得更多地圖（Quaddicted）……
+
+@ Type to search settings...
+zh-TW 輸入以搜尋設定...
+
+@ No matching settings
+zh-TW 沒有符合的設定
+
+@ Search
+zh-TW 搜尋
+
+@ Options
+zh-TW 選項
+
+@ Multiplayer
+zh-TW 多人遊戲
 
 @ Type to filter...
 zh-TW 輸入文字以篩選……

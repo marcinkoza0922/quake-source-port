@@ -10,6 +10,8 @@ use crate::modmenu::{self, ModMenu};
 use crate::sbar::PicFn;
 mod pages;
 pub use pages::*;
+mod enhancement_pages;
+use enhancement_pages::*;
 mod draw_util;
 pub use draw_util::*;
 mod osk;
@@ -42,6 +44,9 @@ mod addon_preview;
 mod addon_bindings;
 pub(crate) mod shader;
 mod help;
+mod search;
+mod textedit;
+mod search_keywords;
 pub mod demos;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -240,6 +245,15 @@ pub struct Menu {
     /// On-screen keyboard over a text field (gamepad typing).
     osk: Option<Osk>,
     help: help::Help,
+    /// Settings search on the Options hub.
+    search: search::Search,
+    /// Caret and selection of the text row being edited, where its
+    /// characters were drawn, and the row a mouse drag is selecting in.
+    edit: textedit::Edit,
+    text_layouts: std::cell::RefCell<Vec<textedit::TextLayout>>,
+    text_drag: Option<usize>,
+    /// Shift is held (set by the host before each key; extends selections).
+    pub shift: bool,
 }
 
 /// Open dropdown list: the page row it belongs to, highlighted entry and
@@ -350,6 +364,11 @@ impl Menu {
             glyphs: Glyphs { family: Family::Xbox },
             osk: None,
             help: Default::default(),
+            search: Default::default(),
+            edit: Default::default(),
+            text_layouts: Default::default(),
+            text_drag: None,
+            shift: false,
         }
     }
 
@@ -389,20 +408,16 @@ impl Menu {
         if self.screen == Screen::HudEditor {
             return self.hud_edit.text(ch);
         }
-        let Screen::OptionsPage(p) = self.screen else { return };
-        if self.drop.is_some() || !(' '..='~').contains(&ch) || ch == '"' || ch == ';' {
-            return;
+        if self.drop.is_none() {
+            self.text_insert(ch.encode_utf8(&mut [0; 4]), cv);
         }
-        if let Item::Text { cvar, max, .. } = self.page_item(p, self.opt_cursor) {
-            if demos::file_name_field(cvar) && !demos::file_name_char(ch) {
-                return;
-            }
-            let mut v = cv.by_name(cvar).map_or(String::new(), |c| c.string.clone());
-            if v.len() < max {
-                v.push(ch);
-                cv.set(cvar, &v);
-            }
-        }
+    }
+
+    /// The cursor is on a text row, which takes typed characters (the host
+    /// then turns on text input).
+    pub fn wants_text(&self) -> bool {
+        let Screen::OptionsPage(p) = self.screen else { return false };
+        self.drop.is_none() && self.osk.is_none() && self.prompt.is_none() && matches!(self.page_item(p, self.opt_cursor), Item::Text { .. })
     }
 
     /// Waiting for a key to bind (the host keeps sticks from moving the cursor).
@@ -424,6 +439,8 @@ impl Menu {
         self.drop = None;
         self.drag = None;
         self.slider_drag = None;
+        self.text_drag = None;
+        self.edit = Default::default();
         self.capture = None;
         self.addon_capture = None;
         self.bind_pending = None;
@@ -431,6 +448,7 @@ impl Menu {
         self.prompt = None;
         self.quit_cursor = 0;
         self.death_cursor = 0;
+        if s == Screen::Options { self.clear_search(); }
         if matches!(s, Screen::Load | Screen::Save) { self.load_cursor = 0; self.save_scroll = 0.0; }
     }
 
@@ -477,7 +495,8 @@ impl Menu {
             Screen::Main => row(cy + 32.0, 20.0, self.main_items(), cx + 54.0, cx + 312.0),
             Screen::SinglePlayer => row(cy + 32.0, 20.0, customize::SP_ITEMS, cx + 54.0, cx + 312.0),
             Screen::Load | Screen::Save => self.card_at(x, y),
-            Screen::Options => row(ROW0, ROW_H, PAGES.len(), PANEL_X, PANEL_X + PANEL_W),
+            Screen::Options if self.searching() && self.search_hits() == 0 => None,
+            Screen::Options => row(ROW0, ROW_H, self.hub_rows(), PANEL_X, PANEL_X + PANEL_W).map(|r| r + if self.searching() { self.search_scroll() } else { 0 }),
             Screen::OptionsPage(p) => {
                 row(PAGE_ROW0, ROW_H, self.page_vis(p), PANEL_X, PANEL_X + PANEL_W).map(|r| r + self.page_scroll(p))
             }
@@ -506,6 +525,7 @@ impl Menu {
             Screen::SinglePlayer => Some(&mut self.sp_cursor),
             Screen::Multiplayer => Some(&mut self.mp_cursor),
             Screen::Load | Screen::Save => Some(&mut self.load_cursor),
+            Screen::Options if self.searching() => Some(&mut self.search.cursor),
             Screen::Options => Some(&mut self.page_cursor),
             Screen::OptionsPage(_) => Some(&mut self.opt_cursor),
             Screen::Quit => Some(&mut self.quit_cursor),

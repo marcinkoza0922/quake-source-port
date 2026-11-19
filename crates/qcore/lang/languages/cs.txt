@@ -745,6 +745,9 @@ cs Výška tónu
 @ Pitch Sensitivity
 cs Svislá citlivost
 
+@ planar
+cs rovinné
+
 @ Playback Speed
 cs Rychlost přehrávání
 
@@ -796,6 +799,9 @@ cs Nastavení railgunu
 @ Ranged only
 cs Jen na dálku
 
+@ ray traced
+cs sledování paprsků
+
 @ Reacquire While Held
 cs Znovu zaměřit při držení
 
@@ -810,6 +816,12 @@ cs Červená
 
 @ Reduce Motion
 cs Omezit pohyb
+
+@ Reflection Strength
+cs Síla odrazů
+
+@ Reflections
+cs Odrazy
 
 @ Regen (seconds per second)
 cs Regenerace (sekund za sekundu)
@@ -1782,6 +1794,9 @@ cs Kolik světel vrhá stíny současně a jak měkké jsou jejich okraje
 @ How strongly fog covers the sky when fog is on
 cs Jak silně mlha zakrývá oblohu, když je mlha zapnutá
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+cs Jak silně povrch odráží; nejsilněji při šikmém pohledu
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 cs Jak se pohled pod vodou zkresluje: klasický zvlní celou obrazovku jako softwarový Quake, GLQuake pohled pomalu natahuje a smršťuje
 
@@ -2042,6 +2057,9 @@ cs Použije barevné světlo mapy (soubor .lit nebo blok BSPX); vypnuto dává p
 
 @ Walls, doors and monsters block the light and cast shadows
 cs Stěny, dveře a monstra zastiňují světlo a vrhají stíny
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+cs Voda a sliz odrážejí místnost nad sebou; rovinné vykreslí scénu znovu jednou pro každou blízkou hladinu; sledování paprsků sleduje každé zvlnění a vyžaduje GPU se sledováním paprsků
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 cs Segmenty proudu, počet kapek a lesklé stínování kapaliny: nízká používá jednodušší průsvitné proudy; vysoká hladké lesklé proudy
@@ -2723,6 +2741,21 @@ cs Při zranění nepřítele hru na zlomek sekundy zmrazí, takže zásahy půs
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 cs Další mapy (Quaddicted)...
+
+@ Type to search settings...
+cs Pište pro hledání nastavení...
+
+@ No matching settings
+cs Žádná odpovídající nastavení
+
+@ Search
+cs Hledat
+
+@ Options
+cs Možnosti
+
+@ Multiplayer
+cs Hra více hráčů
 
 @ Type to filter...
 cs Pište pro filtrování...

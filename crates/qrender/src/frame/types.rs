@@ -32,6 +32,8 @@ pub(super) struct FrameUbo {
     /// xy centre, z liquid surface height, w start time.
     pub(super) ripples: [[f32; 4]; crate::water::MAX_RIPPLES],
     pub(super) ripple_amp: [[f32; 4]; crate::water::MAX_RIPPLES / 4],
+    /// x: planar reflection strength (r_water_reflections_amount), 0 = off.
+    pub(super) refl: [f32; 4],
 }
 
 #[repr(C)]

@@ -745,6 +745,9 @@ sr Висина тона
 @ Pitch Sensitivity
 sr Вертикална осетљивост
 
+@ planar
+sr равански
+
 @ Playback Speed
 sr Брзина репродукције
 
@@ -796,6 +799,9 @@ sr Подешавања рејлгана
 @ Ranged only
 sr Само борба из даљине
 
+@ ray traced
+sr праћење зрака
+
 @ Reacquire While Held
 sr Поновни захват док држиш
 
@@ -810,6 +816,12 @@ sr Црвена
 
 @ Reduce Motion
 sr Смањи покрете
+
+@ Reflection Strength
+sr Јачина одраза
+
+@ Reflections
+sr Одрази
 
 @ Regen (seconds per second)
 sr Обнова (секунди по секунди)
@@ -1782,6 +1794,9 @@ sr Колико светала истовремено баца сенке и к�
 @ How strongly fog covers the sky when fog is on
 sr Колико јако магла прекрива небо кад је магла укључена
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+sr Колико јако површина одражава; најјаче при положеном углу гледања
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 sr Како се поглед изобличује под водом: класично таласа цео екран као софтверски Quake, GLQuake полако растеже и сабија поглед
 
@@ -2042,6 +2057,9 @@ sr Користи обојено светло мапе (.lit фајл или BSP
 
 @ Walls, doors and monsters block the light and cast shadows
 sr Зидови, врата и чудовишта заклањају светло и бацају сенке
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+sr Вода и слуз одражавају просторију изнад себе; равански поново исцртава сцену једном за сваки оближњи ниво воде; праћење зрака прати свако таласање и захтева GPU са праћењем зрака
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sr Сегменти млаза, број капљица и сјајно сенчење течности: ниско користи једноставније провидне млазеве; високо глатке сјајне млазеве
@@ -2723,6 +2741,21 @@ sr Замрзава игру на делић секунде кад раните 
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 sr Још мапа (Quaddicted)...
+
+@ Type to search settings...
+sr Укуцајте за претрагу подешавања...
+
+@ No matching settings
+sr Нема одговарајућих подешавања
+
+@ Search
+sr Претрага
+
+@ Options
+sr Опције
+
+@ Multiplayer
+sr Више играча
 
 @ Type to filter...
 sr Укуцајте за филтрирање...

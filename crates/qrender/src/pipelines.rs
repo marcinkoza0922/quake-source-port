@@ -13,6 +13,9 @@ macro_rules! spv {
     };
 }
 
+mod rt;
+pub use rt::{RT_COMP_BUFFERS, RT_SET_BUFFERS, RtPipes};
+
 pub const MAX_TEXTURES: u32 = 4096;
 pub const COLOR_FORMAT: vk::Format = vk::Format::R8G8B8A8_UNORM;
 pub const DEPTH_FORMAT: vk::Format = vk::Format::D32_SFLOAT;
@@ -101,6 +104,8 @@ pub struct Pipelines {
     pub fte: [vk::Pipeline; 17],
     /// Single-sampled pipelines for portal/teleporter destination views when MSAA is enabled.
     pub portal: ScenePipes,
+    /// Single-sampled opaque alias models for mirrored (reflection) views.
+    pub portal_alias_mirror: vk::Pipeline,
     pub ui: vk::Pipeline,
     pub post: vk::Pipeline,
     /// SSAO pass (fullscreen, scene resolution).
@@ -118,6 +123,11 @@ pub struct Pipelines {
     /// Depth-only cube shadow map faces: world/brush entities, alias models.
     pub shadow_world: vk::Pipeline,
     pub shadow_alias: vk::Pipeline,
+    /// Ray-traced reflections (devices with ray queries): set 1 of `layout`,
+    /// the posing compute pipeline and the ray-query water pipelines.
+    pub rt: Option<RtPipes>,
+    pub water_rt: vk::Pipeline,
+    pub water_rt_alpha: vk::Pipeline,
     pub post_format: vk::Format,
     /// MSAA sample count of the scene pipelines.
     pub samples: u32,
@@ -260,7 +270,13 @@ impl Pipelines {
             offset: 0,
             size: 128,
         }];
-        let sl = [set_layout];
+        let mut modules = Vec::new();
+        let rt = match gpu.rt {
+            Some(_) => Some(RtPipes::new(gpu, &mut modules)?),
+            None => None,
+        };
+        // set 1 (ray-traced reflections) is bound only while they are on
+        let sl: Vec<_> = std::iter::once(set_layout).chain(rt.as_ref().map(|r| r.set_layout)).collect();
         let lci = vk::PipelineLayoutCreateInfo::default()
             .set_layouts(&sl)
             .push_constant_ranges(&pcr);
@@ -304,7 +320,6 @@ impl Pipelines {
         // SAFETY: valid device.
         let cull_layout = unsafe { dev.create_pipeline_layout(&clci, None)? };
 
-        let mut modules = Vec::new();
         let mut m = |spv: &[u8]| -> Result<vk::ShaderModule> {
             let s = gpu.shader(spv)?;
             modules.push(s);
@@ -417,6 +432,7 @@ impl Pipelines {
             particle: null,
             fte: [null; 17],
             portal: ScenePipes::null(),
+            portal_alias_mirror: null,
             ui: null,
             post: null,
             ao: null,
@@ -428,6 +444,9 @@ impl Pipelines {
             bloom_up: null,
             shadow_world: null,
             shadow_alias: null,
+            rt,
+            water_rt: null,
+            water_rt_alpha: null,
             post_format,
             samples,
             supersample: false,
@@ -445,6 +464,9 @@ impl Pipelines {
         unsafe {
             for p in self.graphics_pipes().into_iter().chain([self.lightmap, self.cull]) {
                 dev.destroy_pipeline(p, None);
+            }
+            if let Some(rt) = &self.rt {
+                rt.destroy(dev);
             }
             for m in self.modules.drain(..) {
                 dev.destroy_shader_module(m, None);

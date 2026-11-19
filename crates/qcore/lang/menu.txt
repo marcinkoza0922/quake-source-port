@@ -1730,6 +1730,13 @@ it Sensibilità verticale
 es Sensibilidad vertical
 ru Чувствительность по вертикали
 
+@ planar
+fr planaires
+de planar
+it planari
+es planares
+ru плоские
+
 @ Playback Speed
 fr Vitesse de lecture
 de Wiedergabetempo
@@ -1849,6 +1856,13 @@ it Solo a distanza
 es Solo a distancia
 ru Только дальний бой
 
+@ ray traced
+fr par lancer de rayons
+de Raytracing
+it ray tracing
+es trazado de rayos
+ru трассировка лучей
+
 @ Reacquire While Held
 fr Réacquérir en maintenant
 de Bei Halten neu erfassen
@@ -1883,6 +1897,20 @@ de Bewegung reduzieren
 it Riduci il movimento
 es Reducir movimiento
 ru Уменьшить движение
+
+@ Reflection Strength
+fr Intensité des reflets
+de Spiegelungsstärke
+it Intensità riflessi
+es Intensidad de reflejos
+ru Сила отражений
+
+@ Reflections
+fr Reflets
+de Spiegelungen
+it Riflessi
+es Reflejos
+ru Отражения
 
 @ Regen (seconds per second)
 fr Régénération (secondes par seconde)

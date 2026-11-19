@@ -84,11 +84,19 @@ impl Menu {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(PANEL_X - 40.0, 16.0, p);
                 title_c(c, pic, "gfx/p_option.lmp");
-                panel(c, ROW0, PAGES.len());
-                highlight(c, ROW0 + self.page_cursor as f32 * ROW_H);
-                for (i, (label, _)) in PAGES.iter().enumerate() {
-                    let y = ROW0 + i as f32 * ROW_H + 2.0;
-                    c.text_center(320.0, y, label, TXT, FG);
+                self.draw_search_bar(c, realtime);
+                if self.searching() {
+                    self.draw_search_results(c, cv);
+                } else {
+                    panel(c, ROW0, PAGES.len());
+                    highlight(c, ROW0 + self.page_cursor as f32 * ROW_H);
+                    for (i, (label, _)) in PAGES.iter().enumerate() {
+                        let y = ROW0 + i as f32 * ROW_H + 2.0;
+                        c.text_center(320.0, y, label, TXT, FG);
+                    }
+                }
+                if let Some(o) = self.osk {
+                    self.draw_osk(c, o);
                 }
             }
             Screen::OptionsPage(page) if matches!(page, Page::Addons | Page::NewGameAddons) => {
@@ -98,12 +106,7 @@ impl Menu {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(PANEL_X - 40.0, 16.0, p);
                 title_c(c, pic, if is_net_page(page) { "gfx/p_multi.lmp" } else { "gfx/p_option.lmp" });
-                let name = page_name(page);
-                if page == Page::Controls {
-                    c.text_right(LABEL_R, PAGE_ROW0 - 16.0, name, TXT, GOLD_FG);
-                } else {
-                    c.text_center(320.0, PAGE_ROW0 - 16.0, name, TXT, GOLD_FG);
-                }
+                self.draw_page_title(c, page);
                 let total = self.page_len(page);
                 let n = self.page_vis(page);
                 let sc = self.page_scroll(page);
@@ -111,9 +114,14 @@ impl Menu {
                 if self.opt_cursor < total {
                     highlight(c, self.page_row_y(page, self.opt_cursor));
                 }
+                self.text_layouts.borrow_mut().clear();
                 for i in sc..sc + n {
                     let blink = (realtime * 4.0) as i64 & 1 == 0 && i == self.opt_cursor;
-                    self.draw_item(c, cv, self.page_item(page, i), self.page_row_y(page, i) + 2.0, blink);
+                    let y = self.page_row_y(page, i) + 2.0;
+                    match self.page_item(page, i) {
+                        Item::Text { .. } => self.draw_text_row(c, cv, page, i, y, blink),
+                        item => self.draw_item(c, cv, item, y, blink),
+                    }
                 }
                 if let Some((x, top, h, ty, th)) = self.scrollbar(page) {
                     // scrollbar along the panel's right edge
@@ -286,33 +294,8 @@ impl Menu {
                 };
                 { txt(c, VALUE_X, y, &s); }
             }
-            Item::Text { label: l, cvar, max } => {
-                label(c, l);
-                let v = cv.by_name(cvar).map_or("", |c| c.string.as_str());
-                // fits inside the panel: 20 visible characters, or for long
-                // fields (paths) the panel's width with the start cut off
-                let w = if max > 40 { PANEL_X + PANEL_W - VALUE_X - 4.0 } else { (max.min(20) as f32 * 7.0 + 14.0).min(PANEL_X + PANEL_W - VALUE_X - 4.0) };
-                c.fill(VALUE_X - 3.0, y - 1.0, w, BOX_H, [0.0, 0.0, 0.0, 0.5]);
-                // the export file name's extension follows the video format
-                let ext = (cvar == "_export_name").then(|| crate::capture::Codec::from_cvar(cv.value_of("capture_codec")).extension());
-                let ext_w = ext.map_or(0.0, |e| c.text_w_raw(e, TXT) + 3.0);
-                let shown: String = if max > 40 {
-                    let mut t: &str = v;
-                    while c.text_w_raw(t, TXT) > w - 12.0 - ext_w && !t.is_empty() {
-                        t = &t[t.char_indices().nth(1).map_or(t.len(), |(i, _)| i)..];
-                    }
-                    if t.len() < v.len() { format!("…{t}") } else { t.to_string() }
-                } else {
-                    v.chars().skip(v.chars().count().saturating_sub(20)).collect()
-                };
-                let tw = txt(c, VALUE_X, y, &shown);
-                if blink {
-                    c.fill(VALUE_X + tw + 1.0, y, 1.0, 8.0, FG);
-                }
-                if let Some(e) = ext {
-                    c.text_raw(VALUE_X + tw + 3.0, y, e, TXT, MUTED);
-                }
-            }
+            // drawn by `draw_text_row` (caret and selection)
+            Item::Text { .. } => {}
             Item::Color { label: l, high } => {
                 label(c, l);
                 let v = cv.value_of("_cl_color") as i32;

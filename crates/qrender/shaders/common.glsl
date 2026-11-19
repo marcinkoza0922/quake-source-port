@@ -24,6 +24,7 @@ layout(set = 0, binding = 0, std140) uniform Frame {
     vec4 wind;      // skybox wind: xyz direction (world), w loop phase
     vec4 ripples[32];   // xy centre, z liquid surface height, w start time
     vec4 ripple_amp[8]; // amplitudes, 4 per vec4
+    vec4 refl;          // x planar reflection strength (0 off)
 } fr;
 
 layout(set = 0, binding = 1) uniform sampler2D textures[];

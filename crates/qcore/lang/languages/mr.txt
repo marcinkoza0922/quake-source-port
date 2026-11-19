@@ -745,6 +745,9 @@ mr पिच
 @ Pitch Sensitivity
 mr पिच संवेदनशीलता
 
+@ planar
+mr सपाट
+
 @ Playback Speed
 mr प्लेबॅक वेग
 
@@ -796,6 +799,9 @@ mr रेलगन सेटिंग्ज
 @ Ranged only
 mr फक्त दूरचे
 
+@ ray traced
+mr रे ट्रेसिंग
+
 @ Reacquire While Held
 mr धरून असताना पुन्हा लक्ष्य
 
@@ -810,6 +816,12 @@ mr लाल
 
 @ Reduce Motion
 mr हालचाल कमी करा
+
+@ Reflection Strength
+mr प्रतिबिंबाची तीव्रता
+
+@ Reflections
+mr प्रतिबिंबे
 
 @ Regen (seconds per second)
 mr पुनर्निर्मिती (सेकंद प्रति सेकंद)
@@ -1782,6 +1794,9 @@ mr एकाच वेळी किती दिवे सावली टाक
 @ How strongly fog covers the sky when fog is on
 mr धुके चालू असताना ते आकाश किती दाट झाकते
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+mr पृष्ठभाग किती तीव्रतेने प्रतिबिंबित करतो; कमी दृष्टिकोनात सर्वाधिक
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 mr पाण्याखाली दृश्य कसे विकृत होते: क्लासिक सॉफ्टवेअर Quake प्रमाणे संपूर्ण स्क्रीन लहरवते, GLQuake दृश्य हळूहळू ताणते आणि दाबते
 
@@ -2042,6 +2057,9 @@ mr मॅपचा रंगीत प्रकाश वापरते (.lit �
 
 @ Walls, doors and monsters block the light and cast shadows
 mr भिंती, दारे आणि राक्षस प्रकाश अडवतात आणि सावली टाकतात
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+mr पाणी आणि चिखल वरील खोलीचे प्रतिबिंब दाखवतात; सपाट प्रत्येक जवळच्या पाण्याच्या पातळीसाठी दृश्य एकदा पुन्हा काढते; रे ट्रेसिंग प्रत्येक लहरीचा मागोवा घेते आणि रे ट्रेसिंग असलेला GPU लागतो
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 mr पाण्याच्या फवाऱ्याचे भाग, थेंबांची संख्या आणि चकचकीत द्रव शेडिंग: कमी सोप्या अर्धपारदर्शक धारा वापरते; उच्च गुळगुळीत चकचकीत फवारे वापरते
@@ -2723,6 +2741,21 @@ mr तुम्ही शत्रूला नुकसान केल्य�
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 mr आणखी मॅप्स मिळवा (Quaddicted)...
+
+@ Type to search settings...
+mr सेटिंग्ज शोधण्यासाठी टाइप करा...
+
+@ No matching settings
+mr जुळणारी सेटिंग नाही
+
+@ Search
+mr शोधा
+
+@ Options
+mr पर्याय
+
+@ Multiplayer
+mr मल्टिप्लेअर
 
 @ Type to filter...
 mr फिल्टर करण्यासाठी टाइप करा...

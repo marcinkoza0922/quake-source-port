@@ -35,6 +35,51 @@ fn portal_budgets(set: &crate::Settings) -> (usize, u32, f32) {
         _ => (set.gun_portal_max as usize, set.gun_portal_depth, set.gun_portal_dist),
     }
 }
+/// Most liquid planes reflected per view (r_water_reflections).
+const MAX_REFLECTIONS: usize = 2;
+
+/// A liquid plane's normal and distance, and the bounds of its sheets.
+type LiquidPlane = ([f32; 3], f32, [f32; 3], [f32; 3]);
+
+/// Planar reflections for a view: horizontal water and slime sheets in the
+/// eye's PVS, facing the eye and in its frustum, merged per plane, nearest
+/// first.
+fn reflection_portals(w: &mut WorldGpu, v: &ViewSetup) -> Vec<crate::portals::Portal> {
+    let surfs = w.cpu.portal_surfaces(v.eye);
+    // (normal, dist, mins, maxs)
+    let mut planes: Vec<LiquidPlane> = Vec::new();
+    for &si in surfs.iter() {
+        let Some(s) = w.cpu.surfaces.get(si as usize) else { continue };
+        if s.kind != TextureKind::Liquid || w.cpu.hidden_surfaces.contains(&si) {
+            continue;
+        }
+        let ty = w.tex_info.get(s.texture as usize).map_or(0, |t| t.1 & 0xf);
+        if ty != 1 && ty != 3 {
+            continue; // water and slime; lava and teleporters don't reflect
+        }
+        let (n, d) = if s.flipped { (s.normal.map(|x| -x), -s.dist) } else { (s.normal, s.dist) };
+        if n[2].abs() < 0.99 || dot(v.eye, n) - d <= 1.0 || !box_in_frustum(&v.frustum, s.mins, s.maxs) {
+            continue;
+        }
+        match planes.iter_mut().find(|p| dot(p.0, n) > 0.999 && (p.1 - d).abs() < 0.5) {
+            Some(p) => {
+                for k in 0..3 {
+                    p.2[k] = p.2[k].min(s.mins[k]);
+                    p.3[k] = p.3[k].max(s.maxs[k]);
+                }
+            }
+            None => planes.push((n, d, s.mins, s.maxs)),
+        }
+    }
+    let dist2 = |p: &LiquidPlane| {
+        let c: [f32; 3] = std::array::from_fn(|k| v.eye[k].clamp(p.2[k], p.3[k]) - v.eye[k]);
+        dot(c, c)
+    };
+    planes.sort_by(|a, b| dist2(a).total_cmp(&dist2(b)));
+    planes.truncate(MAX_REFLECTIONS);
+    planes.into_iter().map(|(n, d, mins, maxs)| crate::portals::reflection(n, d, mins, maxs, v.eye)).collect()
+}
+
 impl Renderer {
     /// Destination views for this frame: live add-on portals first (nearest,
     /// at most `gun_portal_max`, within `gun_portal_dist`), then teleporter
@@ -52,6 +97,7 @@ impl Renderer {
         lm: &mut LightmapRequests,
         worlds: &mut PortalWorldCache,
     ) -> Vec<PortalDraw> {
+        let planar_reflections = self.reflection_mode(set) == 1;
         let (Some(v), Some(w)) = (view, self.world.as_mut()) else {
             return Vec::new();
         };
@@ -72,6 +118,9 @@ impl Renderer {
             .collect();
         guns.sort_by(|a, b| dist2(a).total_cmp(&dist2(b)));
         guns.truncate(gun_max);
+        if planar_reflections && self.isolated_portal.is_none() {
+            guns.extend(reflection_portals(w, v));
+        }
         let mut portals: Vec<_> = if set.teleport_windows {
             w.portals
                 .iter()
@@ -269,10 +318,13 @@ impl Renderer {
                             params: [wd.alpha, 0.0, 0.0, 0.0],
                         }]),
                     );
+                    // reflections draw no liquids: the reflecting sheet would cover them
+                    let liquids = if portal.portal.reflect { &[][..] } else { &wd.water[..] };
+                    let liquids_alpha = if portal.portal.reflect { &[][..] } else { &wd.water_alpha[..] };
                     for (range, pipe) in [(wd.opaque, pp.world), (wd.sky, pp.sky)].into_iter().chain(
-                        wd.water
+                        liquids
                             .iter()
-                            .chain(&wd.water_alpha)
+                            .chain(liquids_alpha)
                             .map(|r| (*r, pp.water)),
                     ) {
                         if range.count == 0 {
@@ -311,7 +363,7 @@ impl Renderer {
                     let Some(Model::Alias(am)) = self.models.get(a.model) else {
                         continue;
                     };
-                    d.cmd_bind_pipeline(cmd, gfx, pp.alias);
+                    d.cmd_bind_pipeline(cmd, gfx, if portal.portal.reflect { p.portal_alias_mirror } else { pp.alias });
                     d.cmd_bind_vertex_buffers(cmd, 0, &[am.vbuf.buf], &[0]);
                     d.cmd_bind_index_buffer(cmd, am.ibuf.buf, 0, vk::IndexType::UINT32);
                     d.cmd_push_constants(

@@ -745,6 +745,9 @@ lv Tonis
 @ Pitch Sensitivity
 lv Vertikālā jutība
 
+@ planar
+lv plakni
+
 @ Playback Speed
 lv Atskaņošanas ātrums
 
@@ -796,6 +799,9 @@ lv Railgun iestatījumi
 @ Ranged only
 lv Tikai tālcīņa
 
+@ ray traced
+lv staru izsekošana
+
 @ Reacquire While Held
 lv Atkārtoti uztvert, turot
 
@@ -810,6 +816,12 @@ lv Sarkana
 
 @ Reduce Motion
 lv Samazināt kustību
+
+@ Reflection Strength
+lv Atspīdumu stiprums
+
+@ Reflections
+lv Atspīdumi
 
 @ Regen (seconds per second)
 lv Atjaunošanās (sekundes sekundē)
@@ -1782,6 +1794,9 @@ lv Cik gaismas vienlaikus met ēnas un cik maigas ir to malas
 @ How strongly fog covers the sky when fog is on
 lv Cik stipri migla pārklāj debesis, kad migla ir ieslēgta
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+lv Cik stipri virsma atspoguļo; visstiprāk slīpā skata leņķī
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 lv Kā skats kropļojas zem ūdens: klasisks viļņo visu ekrānu kā programmatūras Quake, GLQuake lēni stiepj un saspiež skatu
 
@@ -2042,6 +2057,9 @@ lv Izmanto kartes krāsaino gaismu (.lit fails vai BSPX bloks); izslēgts dod or
 
 @ Walls, doors and monsters block the light and cast shadows
 lv Sienas, durvis un briesmoņi aizsedz gaismu un met ēnas
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+lv Ūdens un gļotas atspoguļo telpu virs tiem; plakni pārzīmē ainu reizi katram tuvam ūdens līmenim; staru izsekošana seko katram viļņojumam un prasa GPU ar staru izsekošanu
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 lv Strūklas segmenti, pilienu skaits un spīdīga šķidruma ēnošana: zems izmanto vienkāršākas caurspīdīgas strūklas; augsts gludas, spīdīgas strūklas
@@ -2723,6 +2741,21 @@ lv Uz sekundes daļu sasaldē spēli, kad ievaino ienaidnieku, lai trāpījumi �
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 lv Vairāk karšu (Quaddicted)...
+
+@ Type to search settings...
+lv Rakstiet, lai meklētu iestatījumus...
+
+@ No matching settings
+lv Nav atbilstošu iestatījumu
+
+@ Search
+lv Meklēt
+
+@ Options
+lv Opcijas
+
+@ Multiplayer
+lv Vairāku spēlētāju
 
 @ Type to filter...
 lv Raksti, lai filtrētu...

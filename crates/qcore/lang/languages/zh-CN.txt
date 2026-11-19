@@ -745,6 +745,9 @@ zh-CN 音调
 @ Pitch Sensitivity
 zh-CN 纵向灵敏度
 
+@ planar
+zh-CN 平面
+
 @ Playback Speed
 zh-CN 播放速度
 
@@ -796,6 +799,9 @@ zh-CN 轨道炮设置
 @ Ranged only
 zh-CN 仅限远程
 
+@ ray traced
+zh-CN 光线追踪
+
 @ Reacquire While Held
 zh-CN 按住时重新锁定
 
@@ -810,6 +816,12 @@ zh-CN 红色
 
 @ Reduce Motion
 zh-CN 减少动态效果
+
+@ Reflection Strength
+zh-CN 反射强度
+
+@ Reflections
+zh-CN 反射
 
 @ Regen (seconds per second)
 zh-CN 恢复速度（秒/秒）
@@ -1782,6 +1794,9 @@ zh-CN 同时投下阴影的光源数量，以及阴影边缘的柔和程度
 @ How strongly fog covers the sky when fog is on
 zh-CN 开启雾时，雾对天空的覆盖程度
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+zh-CN 水面反射的强度；在较低视角时最强
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 zh-CN 水下画面的扭曲方式：经典会像软件版 Quake 一样使整个屏幕波动，GLQuake 会缓慢拉伸和压缩画面
 
@@ -2042,6 +2057,9 @@ zh-CN 使用地图的彩色光照（.lit 文件或 BSPX 数据块）；关闭则
 
 @ Walls, doors and monsters block the light and cast shadows
 zh-CN 墙壁、门和怪物会挡住光线并投下阴影
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+zh-CN 水和黏液会映出上方的空间；平面会为每个附近的水面重新绘制一次场景；光线追踪会追随每一道涟漪，需要支持光线追踪的 GPU
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 zh-CN 水柱分段、水滴数量和液体光泽着色：低使用简单的半透明水流；高使用平滑有光泽的水柱
@@ -2723,6 +2741,21 @@ zh-CN 对敌人造成伤害时让游戏冻结一瞬间，使命中更有分量�
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 zh-CN 获取更多地图（Quaddicted）……
+
+@ Type to search settings...
+zh-CN 输入以搜索设置...
+
+@ No matching settings
+zh-CN 没有匹配的设置
+
+@ Search
+zh-CN 搜索
+
+@ Options
+zh-CN 选项
+
+@ Multiplayer
+zh-CN 多人游戏
 
 @ Type to filter...
 zh-CN 输入以筛选……

@@ -745,6 +745,9 @@ sw Toni
 @ Pitch Sensitivity
 sw Unyeti wa Wima
 
+@ planar
+sw bapa
+
 @ Playback Speed
 sw Kasi ya Kucheza
 
@@ -796,6 +799,9 @@ sw Mipangilio ya Railgun
 @ Ranged only
 sw Mbali pekee
 
+@ ray traced
+sw ufuatiliaji wa miale
+
 @ Reacquire While Held
 sw Lenga Upya Ukishikilia
 
@@ -810,6 +816,12 @@ sw Nyekundu
 
 @ Reduce Motion
 sw Punguza Mwendo
+
+@ Reflection Strength
+sw Nguvu ya maakisi
+
+@ Reflections
+sw Maakisi
 
 @ Regen (seconds per second)
 sw Kurejesha (sekunde kwa sekunde)
@@ -1782,6 +1794,9 @@ sw Taa ngapi hutupa vivuli kwa wakati mmoja, na kingo zake ni laini kiasi gani
 @ How strongly fog covers the sky when fog is on
 sw Kiasi ukungu unafunika anga ukungu ukiwa umewashwa
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+sw Uso unaakisi kwa nguvu kiasi gani; kwa nguvu zaidi kwenye pembe za chini za kutazama
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 sw Jinsi mwonekano unavyopotoka chini ya maji: Asili hutikisa skrini nzima kama Quake ya programu, GLQuake hunyoosha na kubana mwonekano polepole
 
@@ -2042,6 +2057,9 @@ sw Hutumia mwanga wa rangi wa ramani (faili .lit au BSPX lump); ukizima, mwanga 
 
 @ Walls, doors and monsters block the light and cast shadows
 sw Kuta, milango na majitu huzuia mwanga na kutupa vivuli
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+sw Maji na tope huakisi chumba kilicho juu yake; bapa huchora upya mandhari mara moja kwa kila kiwango cha maji kilicho karibu; ufuatiliaji wa miale hufuata kila wimbi na unahitaji GPU yenye ufuatiliaji wa miale
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sw Vipande vya mkondo wa maji, idadi ya matone na kivuli cha kung'aa cha vimiminika: chini hutumia mikondo rahisi angavu; juu hutumia mikondo laini inayong'aa
@@ -2723,6 +2741,21 @@ sw Hugandisha mchezo kwa sekunde moja unapomjeruhi adui, ili mapigo yahisi mazit
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 sw Pata ramani zaidi (Quaddicted)...
+
+@ Type to search settings...
+sw Andika ili kutafuta mipangilio...
+
+@ No matching settings
+sw Hakuna mipangilio inayolingana
+
+@ Search
+sw Tafuta
+
+@ Options
+sw Chaguo
+
+@ Multiplayer
+sw Wachezaji wengi
 
 @ Type to filter...
 sw Andika ili kuchuja...

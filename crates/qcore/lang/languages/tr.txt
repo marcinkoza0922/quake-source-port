@@ -745,6 +745,9 @@ tr Perde
 @ Pitch Sensitivity
 tr Dikey Hassasiyet
 
+@ planar
+tr düzlemsel
+
 @ Playback Speed
 tr Oynatma Hızı
 
@@ -796,6 +799,9 @@ tr Railgun Ayarları
 @ Ranged only
 tr Yalnızca uzak menzil
 
+@ ray traced
+tr ışın izleme
+
 @ Reacquire While Held
 tr Basılıyken Yeniden Kilitlen
 
@@ -810,6 +816,12 @@ tr Kırmızı
 
 @ Reduce Motion
 tr Hareketi Azalt
+
+@ Reflection Strength
+tr Yansıma gücü
+
+@ Reflections
+tr Yansımalar
 
 @ Regen (seconds per second)
 tr Yenilenme (saniye başına sn)
@@ -1782,6 +1794,9 @@ tr Aynı anda kaç ışığın gölge düşürdüğü ve kenarlarının ne kadar
 @ How strongly fog covers the sky when fog is on
 tr Sis açıkken sisin gökyüzünü ne kadar örttüğü
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+tr Yüzeyin ne kadar güçlü yansıttığı; alçak bakış açılarında en güçlü
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 tr Su altında görüntünün nasıl bozulacağı: Klasik, yazılımsal Quake gibi tüm ekranı dalgalandırır; GLQuake görüntüyü yavaşça gerer ve sıkıştırır
 
@@ -2042,6 +2057,9 @@ tr Haritanın renkli ışığını kullanır (.lit dosyası veya BSPX bloğu); k
 
 @ Walls, doors and monsters block the light and cast shadows
 tr Duvarlar, kapılar ve canavarlar ışığı engeller ve gölge düşürür
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+tr Su ve balçık üstlerindeki odayı yansıtır; düzlemsel, yakındaki her su seviyesi için sahneyi bir kez daha çizer; ışın izleme her dalgacığı izler ve ışın izlemeli bir GPU gerektirir
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 tr Su fışkırması bölümleri, damla sayısı ve parlak sıvı gölgelendirme: düşük daha basit yarı saydam akışlar, yüksek pürüzsüz parlak fışkırmalar kullanır
@@ -2723,6 +2741,21 @@ tr Bir düşmana hasar verdiğinizde oyunu bir anlığına dondurur; böylece vu
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 tr Daha fazla harita (Quaddicted)...
+
+@ Type to search settings...
+tr Ayar aramak için yazın...
+
+@ No matching settings
+tr Eşleşen ayar yok
+
+@ Search
+tr Ara
+
+@ Options
+tr Seçenekler
+
+@ Multiplayer
+tr Çok oyunculu
 
 @ Type to filter...
 tr Filtrelemek için yazın...

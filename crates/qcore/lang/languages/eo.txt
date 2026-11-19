@@ -745,6 +745,9 @@ eo Tonalto
 @ Pitch Sensitivity
 eo Vertikala sentemo
 
+@ planar
+eo ebenaj
+
 @ Playback Speed
 eo Reludrapido
 
@@ -796,6 +799,9 @@ eo Agordoj de relpafilo
 @ Ranged only
 eo Nur distancaj atakoj
 
+@ ray traced
+eo radiospurado
+
 @ Reacquire While Held
 eo Rekapti dum tenado
 
@@ -810,6 +816,12 @@ eo Ruĝa
 
 @ Reduce Motion
 eo Redukti movadon
+
+@ Reflection Strength
+eo Forto de reflektoj
+
+@ Reflections
+eo Reflektoj
 
 @ Regen (seconds per second)
 eo Regenerado (sekundoj po sekundo)
@@ -1782,6 +1794,9 @@ eo Kiom da lumoj samtempe ĵetas ombrojn, kaj kiel glataj estas iliaj randoj
 @ How strongly fog covers the sky when fog is on
 eo Kiom forte nebulo kovras la ĉielon kiam nebulo estas ŝaltita
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+eo Kiom forte la surfaco reflektas; plej forte ĉe malaltaj vidanguloj
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 eo Kiel la vido distordiĝas subakve: klasika ondigas la tutan ekranon kiel programara Quake, GLQuake malrapide streĉas kaj premas la vidon
 
@@ -2042,6 +2057,9 @@ eo Uzas la koloran lumon de la mapo (dosiero .lit aŭ BSPX-ero); malŝaltite don
 
 @ Walls, doors and monsters block the light and cast shadows
 eo Muroj, pordoj kaj monstroj baras la lumon kaj ĵetas ombrojn
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+eo Akvo kaj ŝlimo spegulas la ĉambron super si; ebenaj redesegnas la scenon unufoje por ĉiu proksima akvonivelo; radiospurado sekvas ĉiun ondeton kaj bezonas GPU kun radiospurado
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 eo Segmentoj de akvoŝpruco, nombro de gutoj kaj brila likva ombrigo: malalta uzas pli simplajn duontravideblajn fluojn; alta uzas glatajn brilajn ŝprucojn
@@ -2723,6 +2741,21 @@ eo Frostigas la ludon dum frakcio de sekundo kiam vi damaĝas malamikon, por ke 
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 eo Pliaj mapoj (Quaddicted)...
+
+@ Type to search settings...
+eo Tajpu por serĉi agordojn...
+
+@ No matching settings
+eo Neniuj kongruaj agordoj
+
+@ Search
+eo Serĉi
+
+@ Options
+eo Agordoj
+
+@ Multiplayer
+eo Plurludanta
 
 @ Type to filter...
 eo Tajpu por filtri...

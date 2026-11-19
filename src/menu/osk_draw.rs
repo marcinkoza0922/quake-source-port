@@ -8,19 +8,16 @@ impl Menu {
     }
 
     pub(super) fn osk_key(&mut self, key: i32, mut o: Osk, cv: &mut Cvars, out: &mut Vec<Action>) {
-        let Screen::OptionsPage(p) = self.screen else {
-            self.osk = None;
-            return;
+        // a text row, or the Options hub's search field
+        let search = match self.screen {
+            Screen::Options => true,
+            Screen::OptionsPage(p) if matches!(self.page_item(p, self.opt_cursor), Item::Text { .. }) => false,
+            _ => {
+                self.osk = None;
+                return;
+            }
         };
-        let Item::Text { cvar, .. } = self.page_item(p, self.opt_cursor) else {
-            self.osk = None;
-            return;
-        };
-        let backspace = |cv: &mut Cvars| {
-            let mut v = cv.by_name(cvar).map_or(String::new(), |c| c.string.clone());
-            v.pop();
-            cv.set(cvar, &v);
-        };
+        let backspace = |m: &mut Self, cv: &mut Cvars| if search { m.search_backspace() } else { m.text_delete(false, cv) };
         let n = OSK_ACTIONS.len();
         match key {
             K_UPARROW | K_DPAD_UP => o.row = (o.row + 4) % 5,
@@ -29,7 +26,7 @@ impl Menu {
             K_RIGHTARROW | K_DPAD_RIGHT if o.row == 4 => o.col = ((o.action() + 1) % n * 10).div_ceil(n),
             K_LEFTARROW | K_DPAD_LEFT => o.col = (o.col + 9) % 10,
             K_RIGHTARROW | K_DPAD_RIGHT => o.col = (o.col + 1) % 10,
-            K_XBUTTON | K_BACKSPACE => backspace(cv),
+            K_XBUTTON | K_BACKSPACE => backspace(self, cv),
             K_YBUTTON => o.shift = !o.shift,
             K_BBUTTON | K_ESCAPE | K_START => {
                 self.osk = None;
@@ -39,12 +36,12 @@ impl Menu {
             K_ABUTTON | K_ENTER | K_KP_ENTER => {
                 if o.row < 4 {
                     let ch = OSK_ROWS[o.row].as_bytes()[o.col] as char;
-                    self.text(if o.shift { ch.to_ascii_uppercase() } else { ch }, cv);
+                    self.osk_char(if o.shift { ch.to_ascii_uppercase() } else { ch }, cv);
                 } else {
                     match o.action() {
                         0 => o.shift = !o.shift,
-                        1 => self.text(' ', cv),
-                        2 => backspace(cv),
+                        1 => self.osk_char(' ', cv),
+                        2 => backspace(self, cv),
                         _ => {
                             self.osk = None;
                             out.push(Action::Sound("misc/menu2.wav"));

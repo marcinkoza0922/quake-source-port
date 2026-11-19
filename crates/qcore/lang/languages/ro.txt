@@ -745,6 +745,9 @@ ro Ton
 @ Pitch Sensitivity
 ro Sensibilitate verticală
 
+@ planar
+ro plane
+
 @ Playback Speed
 ro Viteză redare
 
@@ -796,6 +799,9 @@ ro Setări railgun
 @ Ranged only
 ro Doar la distanță
 
+@ ray traced
+ro trasare de raze
+
 @ Reacquire While Held
 ro Refixare la menținere
 
@@ -810,6 +816,12 @@ ro Roșu
 
 @ Reduce Motion
 ro Reduce mișcarea
+
+@ Reflection Strength
+ro Intensitatea reflexiilor
+
+@ Reflections
+ro Reflexii
 
 @ Regen (seconds per second)
 ro Regenerare (secunde pe secundă)
@@ -1782,6 +1794,9 @@ ro Câte lumini aruncă umbre în același timp și cât de fine sunt marginile 
 @ How strongly fog covers the sky when fog is on
 ro Cât de mult acoperă ceața cerul când ceața e pornită
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+ro Cât de puternic reflectă suprafața; cel mai puternic la unghiuri de privire joase
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 ro Cum se distorsionează privirea sub apă: Clasic unduiește tot ecranul ca Quake software, GLQuake întinde și turtește lent imaginea
 
@@ -2042,6 +2057,9 @@ ro Folosește lumina colorată a hărții (fișier .lit sau bloc BSPX); oprit of
 
 @ Walls, doors and monsters block the light and cast shadows
 ro Pereții, ușile și monștrii blochează lumina și aruncă umbre
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ro Apa și mâlul reflectă încăperea de deasupra; plane redesenează scena o dată pentru fiecare nivel de apă apropiat; trasarea de raze urmează fiecare undă și necesită un GPU cu trasare de raze
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ro Segmentele jetului de apă, numărul de picături și umbrirea lucioasă a lichidului: scăzută folosește jeturi translucide mai simple; ridicată jeturi fine și lucioase
@@ -2723,6 +2741,21 @@ ro Îngheață jocul o fracțiune de secundă când rănești un inamic, ca lovi
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 ro Mai multe hărți (Quaddicted)...
+
+@ Type to search settings...
+ro Tastați pentru a căuta setări...
+
+@ No matching settings
+ro Nicio setare potrivită
+
+@ Search
+ro Caută
+
+@ Options
+ro Opțiuni
+
+@ Multiplayer
+ro Multiplayer
 
 @ Type to filter...
 ro Scrie pentru a filtra...

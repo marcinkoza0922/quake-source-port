@@ -745,6 +745,9 @@ km កម្ពស់​សំឡេង
 @ Pitch Sensitivity
 km ភាព​រសើប​ឡើង​ចុះ
 
+@ planar
+km ប្លង់​រាប
+
 @ Playback Speed
 km ល្បឿន​ចាក់
 
@@ -796,6 +799,9 @@ km ការ​កំណត់​រ៉េលហ្គាន
 @ Ranged only
 km តែ​វាយ​ពី​ចម្ងាយ
 
+@ ray traced
+km តាមដាន​កាំរស្មី
+
 @ Reacquire While Held
 km ចាប់​គោលដៅ​ថ្មី​ពេល​សង្កត់
 
@@ -810,6 +816,12 @@ km ក្រហម
 
 @ Reduce Motion
 km កាត់​បន្ថយ​ចលនា
+
+@ Reflection Strength
+km កម្លាំង​ឆ្លុះ​បញ្ចាំង
+
+@ Reflections
+km ការ​ឆ្លុះ​បញ្ចាំង
 
 @ Regen (seconds per second)
 km ការ​ស្ដារ (វិនាទី​ក្នុង​មួយ​វិនាទី)
@@ -1782,6 +1794,9 @@ km ចំនួន​ពន្លឺ​ដែល​បង្កើត​ស្�
 @ How strongly fog covers the sky when fog is on
 km កម្រិត​ដែល​អ័ព្ទ​គ្រប​មេឃ​ពេល​អ័ព្ទ​បើក
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+km ផ្ទៃ​ឆ្លុះ​ខ្លាំង​ប៉ុណ្ណា ខ្លាំង​បំផុត​ពេល​មើល​ពី​មុំ​ទាប
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 km របៀប​ដែល​ទិដ្ឋភាព​បង្ខូច​ក្រោម​ទឹក: បុរាណ​ធ្វើ​ឱ្យ​អេក្រង់​ទាំង​មូល​រលក​ដូច Quake software ចំណែក GLQuake ពន្លូត​និង​សង្កត់​ទិដ្ឋភាព​យឺតៗ
 
@@ -2042,6 +2057,9 @@ km ប្រើ​ពន្លឺ​ពណ៌​របស់​ផែនទី (
 
 @ Walls, doors and monsters block the light and cast shadows
 km ជញ្ជាំង ទ្វារ និង​បិសាច​បាំង​ពន្លឺ ហើយ​បង្កើត​ស្រមោល
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+km ទឹក និង​ភក់​ឆ្លុះ​បន្ទប់​ខាង​លើ ប្លង់​រាប​គូរ​ឈុត​ឆាក​ឡើង​វិញ​ម្ដង​សម្រាប់​កម្រិត​ទឹក​ជិត​នីមួយៗ តាមដាន​កាំរស្មី​ធ្វើ​តាម​រលក​នីមួយៗ ហើយ​ត្រូវ​ការ GPU ដែល​គាំទ្រ​ការ​តាមដាន​កាំរស្មី
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 km ផ្នែក​ទឹក​បាញ់ ចំនួន​ដំណក់ និង​ការ​ដាក់​ស្រមោល​វត្ថុ​រាវ​ភ្លឺ​រលោង: ទាប​ប្រើ​ខ្សែ​ទឹក​ថ្លា​សាមញ្ញ​ជាង; ខ្ពស់​ប្រើ​ទឹក​បាញ់​រលូន​ភ្លឺ​រលោង
@@ -2723,6 +2741,21 @@ km ផ្អាក​ហ្គេម​មួយ​ភ្លែត​ពេល�
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 km យក​ផែនទី​បន្ថែម (Quaddicted)...
+
+@ Type to search settings...
+km វាយ​ដើម្បី​ស្វែងរក​ការកំណត់...
+
+@ No matching settings
+km គ្មាន​ការកំណត់​ដែល​ត្រូវគ្នា
+
+@ Search
+km ស្វែងរក
+
+@ Options
+km ជម្រើស
+
+@ Multiplayer
+km អ្នកលេង​ច្រើន​នាក់
 
 @ Type to filter...
 km វាយ​ដើម្បី​ត្រង...

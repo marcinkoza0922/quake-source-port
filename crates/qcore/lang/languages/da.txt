@@ -745,6 +745,9 @@ da Tonehøjde
 @ Pitch Sensitivity
 da Lodret følsomhed
 
+@ planar
+da plane
+
 @ Playback Speed
 da Afspilningshastighed
 
@@ -796,6 +799,9 @@ da Indstillinger for railgun
 @ Ranged only
 da Kun afstandsvåben
 
+@ ray traced
+da strålesporing
+
 @ Reacquire While Held
 da Fang igen mens holdt
 
@@ -810,6 +816,12 @@ da Rød
 
 @ Reduce Motion
 da Reducér bevægelse
+
+@ Reflection Strength
+da Spejlingsstyrke
+
+@ Reflections
+da Spejlinger
 
 @ Regen (seconds per second)
 da Regenerering (sekunder pr. sekund)
@@ -1782,6 +1794,9 @@ da Hvor mange lys der kaster skygger på én gang, og hvor bløde deres kanter e
 @ How strongly fog covers the sky when fog is on
 da Hvor kraftigt tågen dækker himlen, når tåge er slået til
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+da Hvor kraftigt overfladen spejler; stærkest ved lave synsvinkler
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 da Hvordan visningen forvrænges under vand: klassisk får hele skærmen til at bølge som software-Quake, GLQuake strækker og mosler langsomt visningen
 
@@ -2042,6 +2057,9 @@ da Bruger banens farvede lys (.lit-fil eller BSPX-blok); fra giver det originale
 
 @ Walls, doors and monsters block the light and cast shadows
 da Vægge, døre og monstre blokerer lyset og kaster skygger
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+da Vand og slim spejler rummet over dem; plane tegner scenen igen én gang per nærliggende vandstand; strålesporing følger hver krusning og kræver en GPU med strålesporing
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 da Vandstrålesegmenter, antal dråber og blank væskeskygning: lav bruger enklere gennemsigtige stråler; høj bruger glatte, blanke stråler
@@ -2723,6 +2741,21 @@ da Fryser spillet et splitsekund, når du skader en fjende, så træf føles tun
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 da Hent flere baner (Quaddicted)...
+
+@ Type to search settings...
+da Skriv for at søge i indstillinger...
+
+@ No matching settings
+da Ingen matchende indstillinger
+
+@ Search
+da Søg
+
+@ Options
+da Indstillinger
+
+@ Multiplayer
+da Multiplayer
 
 @ Type to filter...
 da Skriv for at filtrere...

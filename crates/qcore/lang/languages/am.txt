@@ -745,6 +745,9 @@ am የድምፅ ቅላፄ
 @ Pitch Sensitivity
 am የላይ-ታች ትብነት
 
+@ planar
+am ጠፍጣፋ
+
 @ Playback Speed
 am የመልሶ ማጫወት ፍጥነት
 
@@ -796,6 +799,9 @@ am የሬልገን ቅንብሮች
 @ Ranged only
 am የርቀት ጥቃት ብቻ
 
+@ ray traced
+am የጨረር ፍለጋ
+
 @ Reacquire While Held
 am ተይዞ ሳለ እንደገና ያዝ
 
@@ -810,6 +816,12 @@ am ቀይ
 
 @ Reduce Motion
 am እንቅስቃሴን ቀንስ
+
+@ Reflection Strength
+am የነጸብራቅ ጥንካሬ
+
+@ Reflections
+am ነጸብራቆች
 
 @ Regen (seconds per second)
 am መታደስ (ሰከንድ በሰከንድ)
@@ -1782,6 +1794,9 @@ am ስንት ብርሃኖች በአንድ ጊዜ ጥላ እንደሚጥሉ እ�
 @ How strongly fog covers the sky when fog is on
 am ጭጋግ በርቶ ሳለ ጭጋግ ሰማዩን ምን ያህል ይሸፍናል
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+am ገጽታው ምን ያህል በጥንካሬ እንደሚያንጸባርቅ፤ በዝቅተኛ የእይታ ማዕዘን ይበረታል
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 am ከውሃ በታች እይታው እንዴት እንደሚዛባ፦ ክላሲክ እንደ ሶፍትዌር Quake ሙሉ ስክሪኑን ያሞግዳል፣ GLQuake እይታውን ቀስ ብሎ ይለጥጣል ይጨመቃልም
 
@@ -2042,6 +2057,9 @@ am የካርታውን ባለቀለም ብርሃን (.lit ፋይል ወይም BSP
 
 @ Walls, doors and monsters block the light and cast shadows
 am ግድግዳዎች፣ በሮች እና ጭራቆች ብርሃኑን ያግዳሉ እና ጥላ ይጥላሉ
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+am ውሃ እና ዝቃጭ ከላያቸው ያለውን ክፍል ያንጸባርቃሉ፤ ጠፍጣፋ ለእያንዳንዱ ቅርብ የውሃ ደረጃ ትዕይንቱን አንድ ጊዜ እንደገና ይስላል; የጨረር ፍለጋ እያንዳንዱን ሞገድ ይከተላል እና የጨረር ፍለጋ የሚደግፍ GPU ይፈልጋል
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 am የውሃ ጄት ክፍሎች፣ የጠብታ ብዛትና አንጸባራቂ የፈሳሽ ጥላ፦ ዝቅተኛ ቀላል አሳላፊ ፍሰቶችን ይጠቀማል፤ ከፍተኛ ለስላሳ አንጸባራቂ ጄቶችን ይጠቀማል
@@ -2723,6 +2741,21 @@ am ጠላትን ሲጎዱ ጨዋታውን ለቅጽበት ያቀዘቅዛል፣ 
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 am ተጨማሪ ካርታዎችን አግኝ (Quaddicted)...
+
+@ Type to search settings...
+am ቅንብሮችን ለመፈለግ ይተይቡ...
+
+@ No matching settings
+am የሚዛመድ ቅንብር የለም
+
+@ Search
+am ፈልግ
+
+@ Options
+am አማራጮች
+
+@ Multiplayer
+am ባለብዙ ተጫዋች
 
 @ Type to filter...
 am ለማጣራት ይጻፉ...

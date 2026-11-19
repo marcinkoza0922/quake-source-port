@@ -745,6 +745,9 @@ eu Tonua
 @ Pitch Sensitivity
 eu Sentikortasun bertikala
 
+@ planar
+eu lauak
+
 @ Playback Speed
 eu Erreprodukzio-abiadura
 
@@ -796,6 +799,9 @@ eu Railgun ezarpenak
 @ Ranged only
 eu Urrutiko erasoak soilik
 
+@ ray traced
+eu izpi-trazatua
+
 @ Reacquire While Held
 eu Berriz finkatu eustean
 
@@ -810,6 +816,12 @@ eu Gorria
 
 @ Reduce Motion
 eu Murriztu mugimendua
+
+@ Reflection Strength
+eu Islen indarra
+
+@ Reflections
+eu Islak
 
 @ Regen (seconds per second)
 eu Berroneratzea (segundo segundoko)
@@ -1782,6 +1794,9 @@ eu Zenbat argik sortzen dituzten itzalak aldi berean, eta haien ertzak zenbat le
 @ How strongly fog covers the sky when fog is on
 eu Lainoak zerua zenbat estaltzen duen lainoa aktibatuta dagoenean
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+eu Gainazalak zenbat islatzen duen; ikuspegi-angelu baxuetan indartsuena
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 eu Ikuspegia urpean nola distortsionatzen den: klasikoak pantaila osoa uhintzen du software bidezko Quake-n bezala, GLQuake-k ikuspegia poliki luzatu eta zapaltzen du
 
@@ -2042,6 +2057,9 @@ eu Maparen argi koloreduna erabiltzen du (.lit fitxategia edo BSPX blokea); desa
 
 @ Walls, doors and monsters block the light and cast shadows
 eu Hormek, ateek eta munstroek argia blokeatzen dute eta itzalak sortzen dituzte
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+eu Urak eta lohiak gaineko gela islatzen dute; lauak eszena berriro marrazten du inguruko ur-maila bakoitzeko behin; izpi-trazatuak uhin bakoitza jarraitzen du eta izpi-trazatua onartzen duen GPU bat behar du
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 eu Zorrotada-segmentuak, tanta kopurua eta likido distiratsuaren itzaldura: baxuak zorrotada zeharrargitsu sinpleagoak erabiltzen ditu; altuak zorrotada leun eta distiratsuak
@@ -2723,6 +2741,21 @@ eu Jokoa segundo-zati batez izozten du etsai bati kalte egitean, kolpeak astunag
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 eu Mapa gehiago (Quaddicted)...
+
+@ Type to search settings...
+eu Idatzi ezarpenak bilatzeko...
+
+@ No matching settings
+eu Ez dago bat datorren ezarpenik
+
+@ Search
+eu Bilatu
+
+@ Options
+eu Aukerak
+
+@ Multiplayer
+eu Jokalari anitz
 
 @ Type to filter...
 eu Idatzi iragazteko...

@@ -745,6 +745,9 @@ sl Višina tona
 @ Pitch Sensitivity
 sl Navpična občutljivost
 
+@ planar
+sl ravninski
+
 @ Playback Speed
 sl Hitrost predvajanja
 
@@ -796,6 +799,9 @@ sl Nastavitve railguna
 @ Ranged only
 sl Samo boj na daljavo
 
+@ ray traced
+sl sledenje žarkom
+
 @ Reacquire While Held
 sl Ponovni zajem med držanjem
 
@@ -810,6 +816,12 @@ sl Rdeča
 
 @ Reduce Motion
 sl Zmanjšaj gibanje
+
+@ Reflection Strength
+sl Moč odsevov
+
+@ Reflections
+sl Odsevi
 
 @ Regen (seconds per second)
 sl Obnova (sekund na sekundo)
@@ -1782,6 +1794,9 @@ sl Koliko luči hkrati meče sence in kako mehki so njihovi robovi
 @ How strongly fog covers the sky when fog is on
 sl Kako močno megla prekrije nebo, ko je megla vklopljena
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+sl Kako močno površina odseva; najmočneje pri položnem kotu gledanja
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 sl Kako se pogled pod vodo popači: klasično valovi cel zaslon kot programski Quake, GLQuake počasi razteguje in stiska pogled
 
@@ -2042,6 +2057,9 @@ sl Uporablja barvno svetlobo zemljevida (datoteka .lit ali blok BSPX); izkloplje
 
 @ Walls, doors and monsters block the light and cast shadows
 sl Stene, vrata in pošasti zastirajo svetlobo in mečejo sence
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+sl Voda in sluz odsevata prostor nad sabo; ravninski znova izriše prizor enkrat za vsako bližnjo gladino; sledenje žarkom sledi vsakemu valovanju in zahteva GPE s sledenjem žarkom
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sl Segmenti curka, število kapljic in sijoče senčenje tekočine: nizko uporablja preprostejše prosojne curke; visoko gladke sijoče curke
@@ -2723,6 +2741,21 @@ sl Ob poškodbi sovražnika za delček sekunde zamrzne igro, da so zadetki obču
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 sl Več zemljevidov (Quaddicted) ...
+
+@ Type to search settings...
+sl Tipkajte za iskanje nastavitev...
+
+@ No matching settings
+sl Ni ustreznih nastavitev
+
+@ Search
+sl Išči
+
+@ Options
+sl Možnosti
+
+@ Multiplayer
+sl Večigralski način
 
 @ Type to filter...
 sl Vnesite za filtriranje ...

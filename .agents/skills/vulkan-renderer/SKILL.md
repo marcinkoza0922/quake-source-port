@@ -42,6 +42,9 @@ drop the file in `shaders/` and load it with `spv!("x.frag")` in
 `pipelines.rs`. A Set 0 change has to be made in `common.glsl`,
 `pipelines.rs`'s layout and the descriptor writes in `lib/descriptors.rs`
 together.
+On devices with ray queries `Pipelines::layout` also has set 1 (ray-traced
+reflections, `pipelines/rt.rs`, `rt.rs`); bind set 0 with `p.layout` so set
+1 is not disturbed. `QRENDER_NO_RT=1` runs as if ray queries were missing.
 
 ## Conventions and gotchas
 

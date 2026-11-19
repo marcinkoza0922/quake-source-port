@@ -745,6 +745,9 @@ mt Ton
 @ Pitch Sensitivity
 mt Sensittività vertikali
 
+@ planar
+mt ċatti
+
 @ Playback Speed
 mt Veloċità tad-daqq
 
@@ -796,6 +799,9 @@ mt Issettjar tar-railgun
 @ Ranged only
 mt Mill-bogħod biss
 
+@ ray traced
+mt traċċar tar-raġġi
+
 @ Reacquire While Held
 mt Erġa' aqbad waqt li żżomm
 
@@ -810,6 +816,12 @@ mt Aħmar
 
 @ Reduce Motion
 mt Naqqas il-moviment
+
+@ Reflection Strength
+mt Saħħa tar-riflessjonijiet
+
+@ Reflections
+mt Riflessjonijiet
 
 @ Regen (seconds per second)
 mt Riġenerazzjoni (sekondi kull sekonda)
@@ -1782,6 +1794,9 @@ mt Kemm dwal jitfgħu dellijiet fl-istess ħin, u kemm huma rotob it-truf tagħh
 @ How strongly fog covers the sky when fog is on
 mt Kemm jgħatti s-sema ċ-ċpar meta ċ-ċpar ikun mixgħul
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+mt Kemm tirrifletti b'saħħa l-wiċċ; l-aktar b'saħħa f'angoli baxxi tal-ħarsa
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 mt Kif titgħawweġ il-veduta taħt l-ilma: Klassiku jmewweġ l-iskrin kollu bħal Quake bis-software, GLQuake bil-mod jiġbed u jagħfas il-veduta
 
@@ -2042,6 +2057,9 @@ mt Juża d-dawl ikkulurit tal-mappa (fajl .lit jew lump BSPX); mitfi jagħti d-d
 
 @ Walls, doors and monsters block the light and cast shadows
 mt Il-ħitan, il-bibien u l-mostri jimblukkaw id-dawl u jitfgħu dellijiet
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+mt L-ilma u t-tajn jirriflettu l-kamra ta' fuqhom; ċatti terġa' tpinġi x-xena darba għal kull livell tal-ilma fil-qrib; it-traċċar tar-raġġi jsegwi kull mewġa u jeħtieġ GPU b'traċċar tar-raġġi
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 mt Segmenti tal-ġett tal-ilma, għadd ta' qtar u shading tleqq tal-likwidu: baxxa tuża ġettijiet trasluċidi aktar sempliċi; għolja tuża ġettijiet lixxi u tleqq
@@ -2723,6 +2741,21 @@ mt Jiffriża l-logħba għal frazzjoni ta' sekonda meta tagħmel ħsara lil għa
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 mt Ikseb aktar mappep (Quaddicted)...
+
+@ Type to search settings...
+mt Ikteb biex tfittex l-issettjar...
+
+@ No matching settings
+mt L-ebda issettjar ma jaqbel
+
+@ Search
+mt Fittex
+
+@ Options
+mt Għażliet
+
+@ Multiplayer
+mt Multiplayer
 
 @ Type to filter...
 mt Ikteb biex tiffiltra...

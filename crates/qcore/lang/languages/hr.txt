@@ -745,6 +745,9 @@ hr Visina tona
 @ Pitch Sensitivity
 hr Okomita osjetljivost
 
+@ planar
+hr ravninski
+
 @ Playback Speed
 hr Brzina reprodukcije
 
@@ -796,6 +799,9 @@ hr Postavke railguna
 @ Ranged only
 hr Samo dalekometno
 
+@ ray traced
+hr praćenje zraka
+
 @ Reacquire While Held
 hr Ponovni zahvat pri držanju
 
@@ -810,6 +816,12 @@ hr Crvena
 
 @ Reduce Motion
 hr Smanji pokrete
+
+@ Reflection Strength
+hr Jačina odraza
+
+@ Reflections
+hr Odrazi
 
 @ Regen (seconds per second)
 hr Obnova (sekundi po sekundi)
@@ -1782,6 +1794,9 @@ hr Koliko svjetala istodobno baca sjene i koliko su im rubovi mekani
 @ How strongly fog covers the sky when fog is on
 hr Koliko jako magla prekriva nebo kad je magla uključena
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+hr Koliko jako površina odražava; najjače pri položenom kutu gledanja
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 hr Kako se pogled izobličuje pod vodom: klasično valovito mreška cijeli zaslon kao softverski Quake, GLQuake polako rasteže i sabija pogled
 
@@ -2042,6 +2057,9 @@ hr Koristi obojeno svjetlo mape (.lit datoteka ili BSPX blok); isključeno daje 
 
 @ Walls, doors and monsters block the light and cast shadows
 hr Zidovi, vrata i čudovišta blokiraju svjetlo i bacaju sjene
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+hr Voda i sluz odražavaju prostoriju iznad sebe; ravninski ponovno iscrtava scenu jednom za svaku obližnju razinu vode; praćenje zraka slijedi svako mreškanje i traži GPU s praćenjem zraka
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 hr Segmenti mlaza, broj kapljica i sjajno sjenčanje tekućine: nisko koristi jednostavnije prozirne mlazove; visoko glatke sjajne mlazove
@@ -2723,6 +2741,21 @@ hr Zamrzava igru na djelić sekunde kad ozlijedite neprijatelja, pa se pogoci č
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 hr Još mapa (Quaddicted)...
+
+@ Type to search settings...
+hr Upišite za pretragu postavki...
+
+@ No matching settings
+hr Nema odgovarajućih postavki
+
+@ Search
+hr Traži
+
+@ Options
+hr Opcije
+
+@ Multiplayer
+hr Više igrača
 
 @ Type to filter...
 hr Upišite za filtriranje...

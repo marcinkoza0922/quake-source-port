@@ -745,6 +745,9 @@ pt Tom
 @ Pitch Sensitivity
 pt Sensibilidade vertical
 
+@ planar
+pt planares
+
 @ Playback Speed
 pt Velocidade de reprodução
 
@@ -796,6 +799,9 @@ pt Definições da railgun
 @ Ranged only
 pt Só à distância
 
+@ ray traced
+pt traçado de raios
+
 @ Reacquire While Held
 pt Refixar ao manter
 
@@ -810,6 +816,12 @@ pt Vermelho
 
 @ Reduce Motion
 pt Reduzir movimento
+
+@ Reflection Strength
+pt Intensidade dos reflexos
+
+@ Reflections
+pt Reflexos
 
 @ Regen (seconds per second)
 pt Regeneração (segundos por segundo)
@@ -1782,6 +1794,9 @@ pt Quantas luzes projetam sombras ao mesmo tempo e quão suaves são as orlas
 @ How strongly fog covers the sky when fog is on
 pt Quanto o nevoeiro cobre o céu quando está ligado
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+pt Quão forte a superfície reflete; mais forte em ângulos de visão rasantes
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 pt Como a vista se distorce debaixo de água: clássico ondula o ecrã inteiro como o Quake por software, GLQuake estica e achata a vista lentamente
 
@@ -2042,6 +2057,9 @@ pt Usa a luz colorida do mapa (ficheiro .lit ou bloco BSPX); desligado dá a luz
 
 @ Walls, doors and monsters block the light and cast shadows
 pt Paredes, portas e monstros bloqueiam a luz e projetam sombras
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+pt A água e o lodo refletem a sala acima deles; planares redesenha a cena uma vez por cada nível de água próximo; traçado de raios segue cada ondulação e exige uma GPU com traçado de raios
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 pt Segmentos do jato, número de gotas e sombreamento brilhante do líquido: baixa usa jatos translúcidos mais simples; alta usa jatos suaves e brilhantes
@@ -2723,6 +2741,21 @@ pt Congela o jogo durante uma fração de segundo quando danificas um inimigo, p
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 pt Obter mais mapas (Quaddicted)...
+
+@ Type to search settings...
+pt Escreva para procurar definições...
+
+@ No matching settings
+pt Nenhuma definição corresponde
+
+@ Search
+pt Procurar
+
+@ Options
+pt Opções
+
+@ Multiplayer
+pt Multijogador
 
 @ Type to filter...
 pt Escreve para filtrar...

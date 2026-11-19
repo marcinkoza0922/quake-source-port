@@ -745,6 +745,9 @@ hi पिच
 @ Pitch Sensitivity
 hi पिच संवेदनशीलता
 
+@ planar
+hi समतल
+
 @ Playback Speed
 hi प्लेबैक गति
 
@@ -796,6 +799,9 @@ hi रेलगन सेटिंग्स
 @ Ranged only
 hi केवल दूरी वाले
 
+@ ray traced
+hi रे ट्रेसिंग
+
 @ Reacquire While Held
 hi दबाए रखते हुए फिर से लॉक करें
 
@@ -810,6 +816,12 @@ hi लाल
 
 @ Reduce Motion
 hi मोशन कम करें
+
+@ Reflection Strength
+hi प्रतिबिंब की तीव्रता
+
+@ Reflections
+hi प्रतिबिंब
 
 @ Regen (seconds per second)
 hi रीजन (सेकंड प्रति सेकंड)
@@ -1782,6 +1794,9 @@ hi एक साथ कितनी रोशनियाँ छाया डा
 @ How strongly fog covers the sky when fog is on
 hi कोहरा चालू होने पर वह आसमान को कितना ढकता है
 
+@ How strongly the surface reflects; strongest at shallow viewing angles
+hi सतह कितना तेज़ प्रतिबिंबित करती है; कम दृष्टि कोण पर सबसे तेज़
+
 @ How the view distorts underwater: Classic ripples the whole screen like software Quake, GLQuake slowly stretches and squashes the view
 hi पानी के नीचे दृश्य कैसे विकृत होता है: क्लासिक सॉफ़्टवेयर Quake की तरह पूरी स्क्रीन में लहरें बनाता है, GLQuake दृश्य को धीरे-धीरे खींचता और दबाता है
 
@@ -2042,6 +2057,9 @@ hi मैप की रंगीन रोशनी (.lit फ़ाइल या
 
 @ Walls, doors and monsters block the light and cast shadows
 hi दीवारें, दरवाज़े और राक्षस रोशनी रोकते हैं और छाया डालते हैं
+
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+hi पानी और कीचड़ अपने ऊपर के कमरे को प्रतिबिंबित करते हैं; समतल हर नज़दीकी जल स्तर के लिए दृश्य एक बार फिर बनाता है; रे ट्रेसिंग हर लहर का अनुसरण करता है और रे ट्रेसिंग वाला GPU चाहिए
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 hi पानी की धार के खंड, बूँदों की संख्या और चमकदार तरल शेडिंग: निम्न सरल पारभासी धाराएँ इस्तेमाल करता है; उच्च स्मूद चमकदार धारें
@@ -2723,6 +2741,21 @@ hi दुश्मन को डैमेज करने पर गेम प�
 # map packs and the Quaddicted browser
 @ Get more maps (Quaddicted)...
 hi और मैप पाएँ (Quaddicted)...
+
+@ Type to search settings...
+hi सेटिंग खोजने के लिए टाइप करें...
+
+@ No matching settings
+hi कोई मिलती-जुलती सेटिंग नहीं
+
+@ Search
+hi खोजें
+
+@ Options
+hi विकल्प
+
+@ Multiplayer
+hi मल्टीप्लेयर
 
 @ Type to filter...
 hi फ़िल्टर के लिए टाइप करें...

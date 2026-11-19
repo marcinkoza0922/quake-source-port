@@ -16,6 +16,9 @@ pub struct Portal {
     /// Index into [`crate::RenderFrame::gun_portals`] for add-on portals;
     /// `None` for teleporter windows.
     pub gun: Option<usize>,
+    /// A planar reflection (r_water_reflections): `rot` mirrors across the
+    /// plane, so the view's winding flips.
+    pub reflect: bool,
 }
 
 fn cross(a: [f32; 3], b: [f32; 3]) -> [f32; 3] {
@@ -48,7 +51,19 @@ pub fn gun(index: usize, g: &crate::GunPortal, (eo, en, eu): ([f32; 3], [f32; 3]
         rot,
         pvs: std::array::from_fn(|k| eo[k] + en[k] * 8.0),
         gun: Some(index),
+        reflect: false,
     }
+}
+
+/// The planar reflection of the liquid sheets within `mins`..`maxs` on the
+/// plane `normal`·p = `dist` (`normal` toward the eye at `eye`): the scene
+/// mirrored across the plane, from the eye's PVS, clipped to the eye's side.
+pub fn reflection(normal: [f32; 3], dist: f32, mins: [f32; 3], maxs: [f32; 3], eye: [f32; 3]) -> Portal {
+    let mid: [f32; 3] = std::array::from_fn(|k| 0.5 * (mins[k] + maxs[k]));
+    let off = world::dot(normal, mid) - dist;
+    let center = std::array::from_fn(|k| mid[k] - normal[k] * off);
+    let rot = std::array::from_fn(|i| std::array::from_fn(|j| f32::from(i == j) - 2.0 * normal[i] * normal[j]));
+    Portal { mins, maxs, normal, center, destination: center, rot, pvs: eye, gun: None, reflect: true }
 }
 
 /// Rotation by `yaw` radians about +z.
@@ -140,6 +155,7 @@ pub(crate) fn discover(bsp: &Bsp, world: &world::World) -> Vec<Portal> {
                 rot: yaw_rot(angle.to_radians() - (-normal[1]).atan2(-normal[0])),
                 pvs: destination,
                 gun: None,
+                reflect: false,
             });
         }
     }
@@ -204,6 +220,7 @@ impl Portal {
             rot: std::array::from_fn(|i| std::array::from_fn(|j| (0..3).map(|k| b[i][k] * a[k][j]).sum())),
             pvs: inner.pvs,
             gun: inner.gun,
+            reflect: inner.reflect,
         }
     }
     pub fn plane(&self) -> [f32; 4] {
@@ -217,8 +234,10 @@ impl Portal {
     pub fn clip(&self) -> [f32; 4] {
         let n = self.rotate(self.normal).map(|x| -x);
         // gun portals sit on a wall: clip just in front of it so the wall
-        // itself (coplanar with the plane) is gone
-        let lift = if self.gun.is_some() { 0.5 } else { 0.0 };
+        // itself (coplanar with the plane) is gone. Reflections keep 8 units
+        // below the waterline (their views draw no liquids), so the wobbled
+        // lookup never reaches past the drawn image at the shore.
+        let lift = if self.gun.is_some() { 0.5 } else if self.reflect { -8.0 } else { 0.0 };
         [n[0], n[1], n[2], -world::dot(n, self.destination) - lift]
     }
 }
@@ -364,6 +383,23 @@ mod tests {
         let clip = p.clip();
         assert!(world::dot([clip[0], clip[1], clip[2]], mapped) + clip[3] < 0.0);
         assert_eq!(p.to_destination(p.center), p.destination);
+    }
+
+    #[test]
+    fn reflection_mirrors_across_the_plane_and_keeps_the_eye_side() {
+        // water at z = 16, eye above it
+        let r = reflection([0.0, 0.0, 1.0], 16.0, [0.0, 0.0, 16.0], [64.0, 64.0, 16.0], [10.0, 20.0, 80.0]);
+        let mirrored = r.to_destination([10.0, 20.0, 80.0]);
+        assert!(mirrored.iter().zip([10.0, 20.0, -48.0]).all(|(a, b)| (a - b).abs() < 1e-4), "{mirrored:?}");
+        // the inverse maps it back
+        let back = r.from_destination(mirrored);
+        assert!((back[2] - 80.0).abs() < 1e-4);
+        // the clip keeps what is above the water (and drops the sheet itself)
+        let c = r.clip();
+        let side = |p: [f32; 3]| world::dot([c[0], c[1], c[2]], p) + c[3];
+        assert!(side([5.0, 5.0, 40.0]) > 0.0);
+        assert!(side([5.0, 5.0, 12.0]) > 0.0);
+        assert!(side([5.0, 5.0, 0.0]) < 0.0);
     }
 }
 

@@ -128,6 +128,8 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_shadow_realtime_dlight" => "Lights from rockets, muzzle flashes and explosions shade walls and models per pixel and cast shadows; needs Dynamic Lights",
         "r_shadow_realtime_dlight_shadows" => "Walls, doors and monsters block the light and cast shadows",
         "r_shadow_quality" => "How many lights cast shadows at once, and how smooth their edges are",
+        "r_water_reflections" => "Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU",
+        "r_water_reflections_amount" => "How strongly the surface reflects; strongest at shallow viewing angles",
         "r_bloom" => "Light sources glow: lamps, lava, teleporters, sparks and explosions; Bloom Settings tunes it",
         "r_bloom_quality" => "Resolution of the glow: low is cheaper and softer",
         "r_bloom_intensity" => "How bright the glow is",
@@ -368,6 +370,7 @@ impl Menu {
             ) && cv.value_of("r_enhancedparticles") == 0.0)
             || (matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
             && (cv.value_of("r_enhancedwater") == 0.0 || cv.value_of("r_watertranslucency") == 0.0))
+            || (matches!(item, Item::Slider { cvar: "r_water_reflections_amount", .. }) && cv.value_of("r_water_reflections") == 0.0)
             || (matches!(item, Item::Choice { cvar: "r_waterwarp", .. }) && cv.value_of("r_enhancedwater") != 0.0)
             || (matches!(item, Item::Choice { cvar: "r_particles", .. }) && cv.value_of("r_enhancedparticles") != 0.0)
             || (matches!(item, Item::Choice { cvar: "r_drawviewmodel", .. }) && cv.value_of("cl_camera") != 0.0)
