@@ -103,9 +103,6 @@ sl Senčenje okolice
 @ Ammo Counts
 sl Števci streliva
 
-@ Ammo Counts Position
-sl Položaj števcev streliva
-
 @ Ammo Pickups
 sl Pobrano strelivo
 
@@ -120,9 +117,6 @@ sl Uporabi za
 
 @ Armor
 sl Oklep
-
-@ Armor Position
-sl Položaj oklepa
 
 @ Ask
 sl Vprašaj
@@ -220,9 +214,6 @@ sl Kavstika
 @ Center
 sl Sredina
 
-@ Center Message Position
-sl Položaj sredinskih sporočil
-
 @ Center Message Time
 sl Trajanje sredinskih sporočil
 
@@ -282,9 +273,6 @@ sl Velikost merka
 
 @ Current Ammo
 sl Trenutno strelivo
-
-@ Current Ammo Position
-sl Položaj trenutnega streliva
 
 @ Customize This Game
 sl Prilagodi to igro
@@ -469,17 +457,11 @@ sl Merjenje z žiroskopom
 @ HUD
 sl HUD
 
-@ HUD Style
-sl Slog HUD-a
-
 @ Health
 sl Zdravje
 
 @ Health Pickups
 sl Pobrano zdravje
-
-@ Health Position
-sl Položaj zdravja
 
 @ Health Regeneration
 sl Obnavljanje zdravja
@@ -589,9 +571,6 @@ sl Skoki
 @ Keys & Powerups
 sl Ključi in okrepitve
 
-@ Keys & Powerups Position
-sl Položaj ključev in okrepitev
-
 @ Kill Bonus (x)
 sl Bonus za uboj (x)
 
@@ -661,15 +640,6 @@ sl Največji doseg
 @ Melee only
 sl Samo boj od blizu
 
-@ Message Background
-sl Ozadje sporočil
-
-@ Message Text Size
-sl Velikost besedila sporočil
-
-@ Messages & Captions
-sl Sporočila in podnapisi
-
 @ Meter Duration (real seconds)
 sl Trajanje merilnika (dejanske sekunde)
 
@@ -681,9 +651,6 @@ sl Način
 
 @ Modern Console
 sl Sodobna konzola
-
-@ Modern HUD Layout
-sl Sodobna postavitev HUD-a
 
 @ Most recent save
 sl Najnovejše shranjevanje
@@ -732,9 +699,6 @@ sl Filter šuma
 
 @ Normal Color
 sl Običajna barva
-
-@ Notify Message Position
-sl Položaj obvestil
 
 @ Notify Message Time
 sl Trajanje obvestil
@@ -940,17 +904,11 @@ sl Rama levo
 @ Shoulder right
 sl Rama desno
 
-@ Show FPS
-sl Prikaži FPS
-
 @ Show Face
 sl Prikaži obraz
 
 @ Shrapnel
 sl Šrapneli
-
-@ Size of on-screen messages and captions
-sl Velikost sporočil in podnapisov na zaslonu
 
 @ Skill
 sl Težavnost
@@ -1120,15 +1078,6 @@ sl Upočasnitev ob kolesu orožij
 @ Weapons
 sl Orožja
 
-@ Weapons Position
-sl Položaj orožij
-
-@ Where center-screen messages appear
-sl Kje se prikažejo sporočila na sredini zaslona
-
-@ Where pickup and event messages appear
-sl Kje se prikažejo sporočila o predmetih in dogodkih
-
 @ White
 sl Bela
 
@@ -1168,9 +1117,6 @@ sl okvir
 
 @ broken square
 sl prekinjen kvadrat
-
-@ classic
-sl klasično
 
 @ coarse
 sl grobo
@@ -1259,29 +1205,17 @@ sl intenzivno
 @ large
 sl veliko
 
-@ larger
-sl večje
-
-@ largest
-sl največje
-
 @ linear
 sl linearno
 
 @ low
 sl nizko
 
-@ lower
-sl spodaj
-
 @ magenta
 sl magenta
 
 @ medium
 sl srednje
-
-@ middle
-sl sredina
 
 @ middle left
 sl sredina levo
@@ -1369,9 +1303,6 @@ sl trojno
 
 @ tritanopia
 sl tritanopija
-
-@ upper
-sl zgoraj
 
 @ white
 sl bela
@@ -1496,6 +1427,211 @@ sl Kot okno
 @ GPU Encoding
 sl Kodiranje z GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+sl Čas in statistika
+
+@ Clock
+sl Ura
+
+@ Level Timer
+sl Časovnik stopnje
+
+@ Personal Best
+sl Osebni rekord
+
+@ Personal Best Type
+sl Vrsta rekorda
+
+@ Personal Best Color
+sl Barva rekorda
+
+@ Kills
+sl Uboji
+
+@ Secrets
+sl Skrivnosti
+
+@ 24-hour
+sl 24-urni
+
+@ 24-hour + seconds
+sl 24-urni + sekunde
+
+@ 12-hour
+sl 12-urni
+
+@ 12-hour + seconds
+sl 12-urni + sekunde
+
+@ count
+sl število
+
+@ percent
+sl odstotek
+
+@ any% and 100%
+sl any% in 100%
+
+@ Keep Personal Best Demos
+sl Ohrani posnetke rekordov
+
+@ any%
+sl any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+sl Kazalniki zmogljivosti
+
+@ Frame Time
+sl Čas sličice
+
+@ CPU Usage
+sl Uporaba procesorja
+
+@ Memory Usage
+sl Uporaba pomnilnika
+
+@ GPU Time
+sl Čas GPU
+
+@ Video Memory
+sl Video pomnilnik
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+sl Dodaj
+
+@ Ammo
+sl Strelivo
+
+@ Ammo Bar
+sl Vrstica streliva
+
+@ Armor Bar
+sl Vrstica oklepa
+
+@ Background
+sl Ozadje
+
+@ Cells
+sl Celice
+
+@ Center Message
+sl Sredinsko sporočilo
+
+@ Columns
+sl Stolpci
+
+@ Edit HUD
+sl Uredi HUD
+
+@ FPS
+sl FPS
+
+@ Face
+sl Obraz
+
+@ Fill Width
+sl Polna širina
+
+@ Font
+sl Pisava
+
+@ Format
+sl Oblika
+
+@ HUD Editor
+sl Urejevalnik HUD
+
+@ Health Bar
+sl Vrstica zdravja
+
+@ Inventory
+sl Inventar
+
+@ Keys
+sl Ključi
+
+@ Nails
+sl Žeblji
+
+@ Notify Messages
+sl Obvestila
+
+@ Position
+sl Položaj
+
+@ Powerups
+sl Okrepitve
+
+@ Precision
+sl Natančnost
+
+@ Quake
+sl Quake
+
+@ Rockets
+sl Rakete
+
+@ Scale
+sl Merilo
+
+@ Sections
+sl Deli
+
+@ Shells
+sl Naboji
+
+@ Show As
+sl Prikaži kot
+
+@ Show Icon
+sl Prikaži ikono
+
+@ Show Value
+sl Prikaži vrednost
+
+@ Sigils
+sl Rune
+
+@ Status
+sl Stanje
+
+@ Status Bar
+sl Vrstica stanja
+
+@ Visibility
+sl Vidnost
+
+@ big numbers
+sl velike številke
+
+@ center
+sl sredina
+
+@ status + inventory
+sl stanje + inventar
+
+@ status only
+sl samo stanje
+
+@ Text Color
+sl Barva besedila
+
+@ Label Color
+sl Barva oznak
+
+@ HUD Preset
+sl Prednastavitev HUD
+
+@ custom
+sl po meri
+
+@ classic
+sl klasično
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ sl Omeji število sledi, trajanje, kapljice v zraku in madeže ran/kosov mesa; n
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 sl Omeji vhod senčilnika na izhodno velikost, zato 200-odstotno merilo izrisa ohrani 3D-ostrino brez štirikratne cene senčilnika; nizka merila ostanejo v nizki ločljivosti
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-sl Klasično: izvirna vrstica stanja; sodobno: kompaktni elementi ob robovih zaslona
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 sl Ločljivost atlasa premazov, pogostost obnove in podrobnost senčilnika: nizko gradi manjše premaze redkeje s hitrim senčenjem; visoko uporablja polne podrobnosti
 
@@ -1558,9 +1691,6 @@ sl Barva spiralne sledi railguna; na deljenem zaslonu vsak igralec dobi naslednj
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 sl Škoda, ki jo railgun povzroči vsakemu sovražniku, skozi katerega gre (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-sl Temno ozadje za sporočili na zaslonu za boljšo berljivost
 
 @ Dark border keeps the crosshair visible on any background
 sl Temna obroba ohrani merek viden na vsakem ozadju
@@ -1811,17 +1941,11 @@ sl Valoviti svetlobni vzorci na površinah pod vodo in sluzjo
 @ Scales all damage you take; above 100% is harder
 sl Spremeni vso škodo, ki jo prejmete; nad 100 % je težje
 
-@ Screen edge for this element; elements on the same spot stack
-sl Rob zaslona za ta element; elementi na istem mestu se zložijo
-
 @ Seconds a monster hit by the boomerang stays stunned
 sl Koliko sekund ostane pošast, ki jo zadene bumerang, omamljena
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 sl Koliko sekund ostanejo sledi udarcev in zapičeni žeblji, preden zbledijo; neodvisno od Kakovosti delcev
-
-@ Seconds messages at the top of the screen stay up
-sl Koliko sekund ostanejo sporočila na vrhu zaslona
 
 @ Seconds the flick stick snap takes; lower is faster
 sl Koliko sekund traja preskok flick sticka; manj je hitreje
@@ -1990,6 +2114,50 @@ sl Velikost videa; sličice se razširijo iz velikosti okna (s pasovi, da obdrž
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 sl Kodira na grafični kartici (NVIDIA NVENC, AMD ali Intel prek VA-API, AMF ali Quick Sync, Apple VideoToolbox), ko jo ffmpeg lahko uporabi, in pusti procesor prost; sicer kodira procesor
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+sl Prikaže uro v izbrani obliki
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+sl Čas stopnje, kot na vmesnem zaslonu; ustavi se med premorom in na izhodu
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+sl any%: kakršen koli konec; 100%: vsi uboji in skrivnosti. Kartice shranjenih iger najprej prikažejo tega
+
+@ Color of the personal best on the HUD and save cards
+sl Barva osebnega rekorda na HUD-u in karticah shranjenih iger
+
+@ Shown as a count or as a percentage of the level's total
+sl Kot število ali kot odstotek celote stopnje
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+sl Ohrani posnetek vsake stopnje z novim osebnim rekordom; stari ostanejo. Snema tudi brez samodejnega snemanja
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+sl Sličice na sekundo, povprečje pol sekunde
+
+@ Average time per frame in milliseconds, and the slowest frame
+sl Povprečni čas sličice v milisekundah in najpočasnejša sličica
+
+@ How busy the game keeps the processor, as a share of all its cores
+sl Kako zelo igra obremenjuje procesor, kot delež vseh jeder
+
+@ Memory the game uses
+sl Pomnilnik, ki ga uporablja igra
+
+@ Graphics card time per frame in milliseconds
+sl Čas grafične kartice na sličico v milisekundah
+
+@ Video memory in use and what the driver allows, where it reports it
+sl Zaseden video pomnilnik in koliko dovoli gonilnik, če to sporoča
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+sl Premikajte, spreminjajte velikost, dodajajte in odstranjujte elemente HUD: zdravje, strelivo, orožje, časovnike, sporočila in drugo
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+sl Sodobno: kompaktni elementi ob robovih zaslona; klasično: izvirna vrstica stanja. Izbira ponastavi HUD; spremembe v Uredi HUD ga naredijo po meri
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ sl Izvažanje videa
 @ Preparing...
 sl Pripravljanje...
 
+# Save cards: personal best.
+@ PB {} {}
+sl PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ sl Zapisano {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 sl ffmpeg ni najden: zapisanih {} sličic PNG in WAV v {}
+
+# Personal bests.
+@ New personal best ({}): {}
+sl Nov osebni rekord ({}): {}

@@ -124,6 +124,11 @@ impl Renderer {
         &self.gpu.name
     }
 
+    /// Video memory in use and the budget, in bytes, when the driver reports it.
+    pub fn vram(&self) -> Option<(u64, u64)> {
+        self.gpu.vram()
+    }
+
     pub fn size(&self) -> (u32, u32) {
         (self.width, self.height)
     }

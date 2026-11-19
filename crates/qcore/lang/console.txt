@@ -610,3 +610,12 @@ de ffmpeg nicht gefunden: {} PNG-Bilder und eine WAV nach {} geschrieben
 it ffmpeg non trovato: scritti {} fotogrammi PNG e un WAV in {}
 es No se encontró ffmpeg: se escribieron {} fotogramas PNG y un WAV en {}
 ru ffmpeg не найден: {} кадров PNG и WAV записаны в {}
+
+# Personal bests.
+
+@ New personal best ({}): {}
+fr Nouveau record personnel ({}) : {}
+de Neue Bestzeit ({}): {}
+it Nuovo record personale ({}): {}
+es Nueva mejor marca personal ({}): {}
+ru Новый личный рекорд ({}): {}

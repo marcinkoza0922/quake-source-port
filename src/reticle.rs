@@ -108,6 +108,11 @@ pub(crate) fn color(cv: &Cvars, target: bool, kill: bool) -> [f32; 4] {
     } else {
         "crosshair_color"
     };
+    color_of(cv, name)
+}
+
+/// The palette colour a `crosshair_color`-style index cvar names.
+pub(crate) fn color_of(cv: &Cvars, name: &str) -> [f32; 4] {
     CROSSHAIR_COLORS[(cv.value_of(name).max(0.0) as usize).min(CROSSHAIR_COLORS.len() - 1)]
 }
 

@@ -103,9 +103,6 @@ ta சூழல் மறைப்பு
 @ Ammo Counts
 ta வெடிமருந்து எண்ணிக்கை
 
-@ Ammo Counts Position
-ta வெடிமருந்து எண்ணிக்கை நிலை
-
 @ Ammo Pickups
 ta எடுத்த வெடிமருந்து
 
@@ -120,9 +117,6 @@ ta இதற்குப் பொருத்து
 
 @ Armor
 ta கவசம்
-
-@ Armor Position
-ta கவச நிலை
 
 @ Ask
 ta கேள்
@@ -220,9 +214,6 @@ ta காஸ்டிக்ஸ்
 @ Center
 ta மையம்
 
-@ Center Message Position
-ta மையச் செய்தி நிலை
-
 @ Center Message Time
 ta மையச் செய்தி நேரம்
 
@@ -282,9 +273,6 @@ ta கிராஸ்ஹேர் அளவு
 
 @ Current Ammo
 ta தற்போதைய வெடிமருந்து
-
-@ Current Ammo Position
-ta தற்போதைய வெடிமருந்து நிலை
 
 @ Customize This Game
 ta இந்த ஆட்டத்தைத் தனிப்பயனாக்கு
@@ -469,17 +457,11 @@ ta கைரோ குறிவைப்பு
 @ HUD
 ta HUD
 
-@ HUD Style
-ta HUD பாணி
-
 @ Health
 ta உயிர்
 
 @ Health Pickups
 ta எடுத்த உயிர்ப் பொருட்கள்
-
-@ Health Position
-ta உயிர் நிலை
 
 @ Health Regeneration
 ta உயிர் மீளுருவாக்கம்
@@ -589,9 +571,6 @@ ta குதிப்புகள்
 @ Keys & Powerups
 ta சாவிகள் & சக்திகள்
 
-@ Keys & Powerups Position
-ta சாவிகள் & சக்திகள் நிலை
-
 @ Kill Bonus (x)
 ta கொலை போனஸ் (x)
 
@@ -661,15 +640,6 @@ ta அதிகபட்ச வீச்சு
 @ Melee only
 ta கைகலப்பு மட்டும்
 
-@ Message Background
-ta செய்திப் பின்னணி
-
-@ Message Text Size
-ta செய்தி உரை அளவு
-
-@ Messages & Captions
-ta செய்திகள் & வசனங்கள்
-
 @ Meter Duration (real seconds)
 ta அளவி நேரம் (உண்மை விநாடிகள்)
 
@@ -681,9 +651,6 @@ ta பயன்முறை
 
 @ Modern Console
 ta நவீன கன்சோல்
-
-@ Modern HUD Layout
-ta நவீன HUD அமைப்பு
 
 @ Most recent save
 ta சமீபத்திய சேமிப்பு
@@ -732,9 +699,6 @@ ta இரைச்சல் வடிகட்டி
 
 @ Normal Color
 ta இயல்பு நிறம்
-
-@ Notify Message Position
-ta அறிவிப்புச் செய்தி நிலை
 
 @ Notify Message Time
 ta அறிவிப்புச் செய்தி நேரம்
@@ -940,17 +904,11 @@ ta இடது தோள்
 @ Shoulder right
 ta வலது தோள்
 
-@ Show FPS
-ta FPS காட்டு
-
 @ Show Face
 ta முகம் காட்டு
 
 @ Shrapnel
 ta சிதறல்கள்
-
-@ Size of on-screen messages and captions
-ta திரைச் செய்திகள், வசனங்களின் அளவு
 
 @ Skill
 ta சிரமம்
@@ -1120,15 +1078,6 @@ ta ஆயுதச் சக்கர மந்தம்
 @ Weapons
 ta ஆயுதங்கள்
 
-@ Weapons Position
-ta ஆயுதங்கள் நிலை
-
-@ Where center-screen messages appear
-ta மையச் செய்திகள் தோன்றும் இடம்
-
-@ Where pickup and event messages appear
-ta எடுப்பு, நிகழ்வுச் செய்திகள் தோன்றும் இடம்
-
 @ White
 ta வெள்ளை
 
@@ -1168,9 +1117,6 @@ ta சதுரம்
 
 @ broken square
 ta உடைந்த சதுரம்
-
-@ classic
-ta பழைய பாணி
 
 @ coarse
 ta கரடு
@@ -1259,29 +1205,17 @@ ta தீவிரம்
 @ large
 ta பெரிது
 
-@ larger
-ta மேலும் பெரிது
-
-@ largest
-ta மிகப் பெரியது
-
 @ linear
 ta நேரியல்
 
 @ low
 ta குறைவு
 
-@ lower
-ta கீழ்
-
 @ magenta
 ta மெஜந்தா
 
 @ medium
 ta நடுத்தரம்
-
-@ middle
-ta நடு
 
 @ middle left
 ta நடு இடது
@@ -1369,9 +1303,6 @@ ta மும்மடங்கு
 
 @ tritanopia
 ta டிரைட்டனோப்பியா
-
-@ upper
-ta மேல்
 
 @ white
 ta வெள்ளை
@@ -1496,6 +1427,211 @@ ta சாளரம் போல
 @ GPU Encoding
 ta GPU குறியாக்கம்
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ta நேரம் & புள்ளிவிவரம்
+
+@ Clock
+ta கடிகாரம்
+
+@ Level Timer
+ta நிலை நேரமானி
+
+@ Personal Best
+ta தனிப்பட்ட சிறந்தது
+
+@ Personal Best Type
+ta சிறந்ததின் வகை
+
+@ Personal Best Color
+ta சிறந்ததின் நிறம்
+
+@ Kills
+ta கொலைகள்
+
+@ Secrets
+ta ரகசியங்கள்
+
+@ 24-hour
+ta 24 மணி
+
+@ 24-hour + seconds
+ta 24 மணி + வினாடிகள்
+
+@ 12-hour
+ta 12 மணி
+
+@ 12-hour + seconds
+ta 12 மணி + வினாடிகள்
+
+@ count
+ta எண்ணிக்கை
+
+@ percent
+ta சதவீதம்
+
+@ any% and 100%
+ta any% மற்றும் 100%
+
+@ Keep Personal Best Demos
+ta தனிப்பட்ட சிறந்த டெமோக்களை வை
+
+@ any%
+ta any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ta செயல்திறன் அளவீடுகள்
+
+@ Frame Time
+ta சட்ட நேரம்
+
+@ CPU Usage
+ta CPU பயன்பாடு
+
+@ Memory Usage
+ta நினைவக பயன்பாடு
+
+@ GPU Time
+ta GPU நேரம்
+
+@ Video Memory
+ta வீடியோ நினைவகம்
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+ta சேர்
+
+@ Ammo
+ta வெடிமருந்து
+
+@ Ammo Bar
+ta வெடிமருந்துப் பட்டை
+
+@ Armor Bar
+ta கவசப் பட்டை
+
+@ Background
+ta பின்னணி
+
+@ Cells
+ta செல்கள்
+
+@ Center Message
+ta மையச் செய்தி
+
+@ Columns
+ta நெடுவரிசைகள்
+
+@ Edit HUD
+ta HUD-ஐத் திருத்து
+
+@ FPS
+ta FPS
+
+@ Face
+ta முகம்
+
+@ Fill Width
+ta முழு அகலம்
+
+@ Font
+ta எழுத்துரு
+
+@ Format
+ta வடிவம்
+
+@ HUD Editor
+ta HUD திருத்தி
+
+@ Health Bar
+ta ஆரோக்கியப் பட்டை
+
+@ Inventory
+ta பொருட்கள்
+
+@ Keys
+ta சாவிகள்
+
+@ Nails
+ta ஆணிகள்
+
+@ Notify Messages
+ta அறிவிப்புச் செய்திகள்
+
+@ Position
+ta நிலை
+
+@ Powerups
+ta சக்திகள்
+
+@ Precision
+ta துல்லியம்
+
+@ Quake
+ta Quake
+
+@ Rockets
+ta ராக்கெட்டுகள்
+
+@ Scale
+ta அளவுகோல்
+
+@ Sections
+ta பகுதிகள்
+
+@ Shells
+ta தோட்டாக்கள்
+
+@ Show As
+ta இவ்வாறு காட்டு
+
+@ Show Icon
+ta படவுருவைக் காட்டு
+
+@ Show Value
+ta மதிப்பைக் காட்டு
+
+@ Sigils
+ta சின்னங்கள்
+
+@ Status
+ta நிலைமை
+
+@ Status Bar
+ta நிலைமைப் பட்டை
+
+@ Visibility
+ta தெரிவுநிலை
+
+@ big numbers
+ta பெரிய எண்கள்
+
+@ center
+ta மையம்
+
+@ status + inventory
+ta நிலைமை + பொருட்கள்
+
+@ status only
+ta நிலைமை மட்டும்
+
+@ Text Color
+ta உரையின் நிறம்
+
+@ Label Color
+ta லேபிளின் நிறம்
+
+@ HUD Preset
+ta HUD முன்னமைவு
+
+@ custom
+ta தனிப்பயன்
+
+@ classic
+ta பழைய பாணி
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ ta தடங்களின் எண்ணிக்கை, ஆயுள், க
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 ta ஷேடர் உள்ளீட்டை வெளியீட்டு அளவுக்குக் கட்டுப்படுத்தும், எனவே 200% ரெண்டர் அளவு 4 மடங்கு ஷேடர் செலவின்றி 3D கூர்மையைத் தக்கவைக்கும்; குறைந்த அளவுகள் குறைந்த தெளிவிலேயே இருக்கும்
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-ta பழைய பாணி: அசல் நிலைப் பட்டை; நவீனம்: திரை ஓரங்களில் சுருக்கமான கூறுகள்
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 ta பூச்சு அட்லஸ் தெளிவு, மீள்கட்டமைப்பு வீதம், ஷேடர் விவரம்: குறைவு சிறிய பூச்சுகளைக் குறைவாக, வேகமான நிழலிடலுடன் உருவாக்கும்; உயர் முழு விவரம் பயன்படுத்தும்
 
@@ -1558,9 +1691,6 @@ ta ரெயில்கன் சுருள் தடத்தின் ந�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 ta ரெயில்கன் தான் கடந்து செல்லும் ஒவ்வொரு எதிரிக்கும் செய்யும் சேதம் (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-ta படிக்க எளிதாகத் திரைச் செய்திகளுக்குப் பின் இருண்ட பின்னணி
 
 @ Dark border keeps the crosshair visible on any background
 ta இருண்ட எல்லை எந்தப் பின்னணியிலும் கிராஸ்ஹேரைத் தெரியவைக்கும்
@@ -1811,17 +1941,11 @@ ta நீர், நச்சுச் சேற்றுக்கடியி�
 @ Scales all damage you take; above 100% is harder
 ta நீங்கள் பெறும் எல்லாச் சேதத்தையும் அளவிடும்; 100%-க்கு மேல் கடினம்
 
-@ Screen edge for this element; elements on the same spot stack
-ta இந்தக் கூறுக்கான திரை ஓரம்; ஒரே இடத்திலுள்ள கூறுகள் அடுக்கப்படும்
-
 @ Seconds a monster hit by the boomerang stays stunned
 ta பூமராங்கால் தாக்கப்பட்ட அரக்கன் திகைத்து நிற்கும் வினாடிகள்
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 ta தாக்கத் தடங்களும் ஒட்டிய ஆணிகளும் மங்கும் முன் இருக்கும் வினாடிகள்; துகள் தரத்தைச் சாராதது
-
-@ Seconds messages at the top of the screen stay up
-ta திரையின் மேலே செய்திகள் இருக்கும் வினாடிகள்
 
 @ Seconds the flick stick snap takes; lower is faster
 ta ஃபிளிக் ஸ்டிக் திருப்பத்துக்கான வினாடிகள்; குறைவானது வேகமானது
@@ -1990,6 +2114,50 @@ ta வீடியோ அளவு; சட்டகங்கள் சாளர 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ta ffmpeg பயன்படுத்த முடிந்தால் கிராபிக்ஸ் அட்டையில் குறியாக்கம் செய்யும் (NVIDIA NVENC, VA-API வழியாக AMD அல்லது Intel, AMF அல்லது Quick Sync, Apple VideoToolbox), செயலியை விடுவிக்கும்; இல்லையெனில் செயலி குறியாக்கம் செய்யும்
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ta தேர்ந்தெடுத்த வடிவில் நேரத்தைக் காட்டும்
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ta நிலையின் நேரம், இடைவேளைத் திரையில் போல; இடைநிறுத்தும்போதும் வெளியேறும் இடத்திலும் நிற்கும்
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ta any%: எந்த முடிவும்; 100%: எல்லாக் கொலைகளும் ரகசியங்களும். சேமிப்பு அட்டைகள் இதை முதலில் காட்டும்
+
+@ Color of the personal best on the HUD and save cards
+ta HUD மற்றும் சேமிப்பு அட்டைகளில் தனிப்பட்ட சிறந்ததின் நிறம்
+
+@ Shown as a count or as a percentage of the level's total
+ta எண்ணிக்கையாக அல்லது நிலையின் மொத்தத்தின் சதவீதமாக
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ta தனிப்பட்ட சிறந்ததை அமைக்கும் ஒவ்வொரு நிலையின் டெமோவையும் வைக்கும்; பழையவை இருக்கும். தானியங்கு பதிவு அணைத்திருந்தாலும் பதிவு செய்யும்
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ta வினாடிக்குச் சட்டங்கள், அரை வினாடி சராசரி
+
+@ Average time per frame in milliseconds, and the slowest frame
+ta ஒரு சட்டத்துக்கான சராசரி நேரம் மில்லிவினாடிகளில், மற்றும் மெதுவான சட்டம்
+
+@ How busy the game keeps the processor, as a share of all its cores
+ta விளையாட்டு செயலியை எவ்வளவு பயன்படுத்துகிறது, எல்லா கோர்களின் பங்காக
+
+@ Memory the game uses
+ta விளையாட்டு பயன்படுத்தும் நினைவகம்
+
+@ Graphics card time per frame in milliseconds
+ta ஒரு சட்டத்துக்கான கிராபிக்ஸ் அட்டை நேரம் மில்லிவினாடிகளில்
+
+@ Video memory in use and what the driver allows, where it reports it
+ta பயன்பாட்டில் உள்ள வீடியோ நினைவகம் மற்றும் இயக்கி அனுமதிப்பது, அது தெரிவிக்கும் இடத்தில்
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+ta HUD கூறுகளை நகர்த்து, அளவு மாற்று, சேர், நீக்கு: ஆரோக்கியம், வெடிமருந்து, ஆயுதங்கள், நேரமானிகள், செய்திகள் மற்றும் பல
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+ta நவீனம்: திரை ஓரங்களில் சிறிய கூறுகள்; பாரம்பரியம்: மூல நிலைமைப் பட்டை. ஒன்றைத் தேர்ந்தெடுத்தால் HUD மீட்டமைக்கப்படும்; HUD-ஐத் திருத்து இல் செய்யும் மாற்றங்கள் அதைத் தனிப்பயனாக்கும்
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ ta வீடியோ ஏற்றுமதியாகிறது
 @ Preparing...
 ta தயாராகிறது...
 
+# Save cards: personal best.
+@ PB {} {}
+ta PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ ta {} எழுதப்பட்டது ({} வி.)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ta ffmpeg கிடைக்கவில்லை: {} PNG சட்டகங்களும் ஒரு WAV உம் {} இல் எழுதப்பட்டன
+
+# Personal bests.
+@ New personal best ({}): {}
+ta புதிய தனிப்பட்ட சிறந்தது ({}): {}

@@ -103,9 +103,6 @@ sv Ambient ocklusion
 @ Ammo Counts
 sv Ammunitionsräknare
 
-@ Ammo Counts Position
-sv Ammunitionsräknarens position
-
 @ Ammo Pickups
 sv Upplockad ammunition
 
@@ -120,9 +117,6 @@ sv Tillämpa på
 
 @ Armor
 sv Rustning
-
-@ Armor Position
-sv Rustningens position
 
 @ Ask
 sv Fråga
@@ -220,9 +214,6 @@ sv Kaustik
 @ Center
 sv Mitten
 
-@ Center Message Position
-sv Mittmeddelandets position
-
 @ Center Message Time
 sv Mittmeddelandets tid
 
@@ -282,9 +273,6 @@ sv Hårkorsets storlek
 
 @ Current Ammo
 sv Aktuell ammunition
-
-@ Current Ammo Position
-sv Aktuell ammunitions position
 
 @ Customize This Game
 sv Anpassa detta spel
@@ -469,17 +457,11 @@ sv Gyrosikte
 @ HUD
 sv HUD
 
-@ HUD Style
-sv HUD-stil
-
 @ Health
 sv Hälsa
 
 @ Health Pickups
 sv Upplockad hälsa
-
-@ Health Position
-sv Hälsans position
 
 @ Health Regeneration
 sv Hälsoregenerering
@@ -589,9 +571,6 @@ sv Hopp
 @ Keys & Powerups
 sv Nycklar & power-ups
 
-@ Keys & Powerups Position
-sv Position för nycklar & power-ups
-
 @ Kill Bonus (x)
 sv Dödsbonus (x)
 
@@ -661,15 +640,6 @@ sv Maximal räckvidd
 @ Melee only
 sv Endast närstrid
 
-@ Message Background
-sv Meddelandebakgrund
-
-@ Message Text Size
-sv Meddelandetextens storlek
-
-@ Messages & Captions
-sv Meddelanden & undertexter
-
 @ Meter Duration (real seconds)
 sv Mätarens tid (verkliga sekunder)
 
@@ -681,9 +651,6 @@ sv Läge
 
 @ Modern Console
 sv Modern konsol
-
-@ Modern HUD Layout
-sv Modern HUD-layout
 
 @ Most recent save
 sv Senaste sparning
@@ -732,9 +699,6 @@ sv Brusfilter
 
 @ Normal Color
 sv Normal färg
-
-@ Notify Message Position
-sv Notismeddelandets position
 
 @ Notify Message Time
 sv Notismeddelandets tid
@@ -940,17 +904,11 @@ sv Axel vänster
 @ Shoulder right
 sv Axel höger
 
-@ Show FPS
-sv Visa FPS
-
 @ Show Face
 sv Visa ansikte
 
 @ Shrapnel
 sv Splitter
-
-@ Size of on-screen messages and captions
-sv Storlek på meddelanden och undertexter på skärmen
 
 @ Skill
 sv Svårighetsgrad
@@ -1120,15 +1078,6 @@ sv Vapenhjulets inbromsning
 @ Weapons
 sv Vapen
 
-@ Weapons Position
-sv Vapnens position
-
-@ Where center-screen messages appear
-sv Var mittmeddelanden visas
-
-@ Where pickup and event messages appear
-sv Var upplocknings- och händelsemeddelanden visas
-
 @ White
 sv Vit
 
@@ -1168,9 +1117,6 @@ sv ruta
 
 @ broken square
 sv bruten kvadrat
-
-@ classic
-sv klassisk
 
 @ coarse
 sv grov
@@ -1259,29 +1205,17 @@ sv intensiv
 @ large
 sv stor
 
-@ larger
-sv större
-
-@ largest
-sv störst
-
 @ linear
 sv linjär
 
 @ low
 sv låg
 
-@ lower
-sv nedre
-
 @ magenta
 sv magenta
 
 @ medium
 sv medel
-
-@ middle
-sv mitten
 
 @ middle left
 sv mitten vänster
@@ -1369,9 +1303,6 @@ sv trippel
 
 @ tritanopia
 sv tritanopi
-
-@ upper
-sv övre
 
 @ white
 sv vit
@@ -1496,6 +1427,211 @@ sv Som fönstret
 @ GPU Encoding
 sv GPU-kodning
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+sv Tid och statistik
+
+@ Clock
+sv Klocka
+
+@ Level Timer
+sv Banans tidtagare
+
+@ Personal Best
+sv Personbästa
+
+@ Personal Best Type
+sv Typ av personbästa
+
+@ Personal Best Color
+sv Personbästas färg
+
+@ Kills
+sv Dödade
+
+@ Secrets
+sv Hemligheter
+
+@ 24-hour
+sv 24-timmars
+
+@ 24-hour + seconds
+sv 24-timmars + sekunder
+
+@ 12-hour
+sv 12-timmars
+
+@ 12-hour + seconds
+sv 12-timmars + sekunder
+
+@ count
+sv antal
+
+@ percent
+sv procent
+
+@ any% and 100%
+sv any% och 100%
+
+@ Keep Personal Best Demos
+sv Spara demor med personbästa
+
+@ any%
+sv any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+sv Prestandamått
+
+@ Frame Time
+sv Bildtid
+
+@ CPU Usage
+sv CPU-användning
+
+@ Memory Usage
+sv Minnesanvändning
+
+@ GPU Time
+sv GPU-tid
+
+@ Video Memory
+sv Videominne
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+sv Lägg till
+
+@ Ammo
+sv Ammunition
+
+@ Ammo Bar
+sv Ammunitionsmätare
+
+@ Armor Bar
+sv Rustningsmätare
+
+@ Background
+sv Bakgrund
+
+@ Cells
+sv Celler
+
+@ Center Message
+sv Mittmeddelande
+
+@ Columns
+sv Kolumner
+
+@ Edit HUD
+sv Redigera HUD
+
+@ FPS
+sv FPS
+
+@ Face
+sv Ansikte
+
+@ Fill Width
+sv Full bredd
+
+@ Font
+sv Typsnitt
+
+@ Format
+sv Format
+
+@ HUD Editor
+sv HUD-redigerare
+
+@ Health Bar
+sv Hälsomätare
+
+@ Inventory
+sv Inventarie
+
+@ Keys
+sv Nycklar
+
+@ Nails
+sv Spikar
+
+@ Notify Messages
+sv Notismeddelanden
+
+@ Position
+sv Position
+
+@ Powerups
+sv Power-ups
+
+@ Precision
+sv Precision
+
+@ Quake
+sv Quake
+
+@ Rockets
+sv Raketer
+
+@ Scale
+sv Skala
+
+@ Sections
+sv Delar
+
+@ Shells
+sv Hagel
+
+@ Show As
+sv Visa som
+
+@ Show Icon
+sv Visa ikon
+
+@ Show Value
+sv Visa värde
+
+@ Sigils
+sv Runor
+
+@ Status
+sv Status
+
+@ Status Bar
+sv Statusrad
+
+@ Visibility
+sv Synlighet
+
+@ big numbers
+sv stora siffror
+
+@ center
+sv mitten
+
+@ status + inventory
+sv status + inventarie
+
+@ status only
+sv endast status
+
+@ Text Color
+sv Textfärg
+
+@ Label Color
+sv Etikettfärg
+
+@ HUD Preset
+sv HUD-förval
+
+@ custom
+sv anpassad
+
+@ classic
+sv klassisk
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ sv Begränsar antal märken, livslängd, droppar i luften och sår-/köttbitsfl�
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 sv Begränsar shaderns indata till utdatastorleken så att 200 % renderingsskala behåller 3D-skärpan utan fyrdubbel shaderkostnad; låga skalor förblir lågupplösta
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-sv Klassisk: den ursprungliga statusraden; modern: kompakta element vid skärmkanterna
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 sv Beläggningsatlasens upplösning, ombyggnadstakt och shaderdetalj: låg bygger mindre lager mer sällan med snabb skuggning; hög använder full detalj
 
@@ -1558,9 +1691,6 @@ sv Färg på railgunens spiralspår; i delad skärm får varje spelare nästa f�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 sv Skada som railgunen gör på varje fiende den går igenom (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-sv Mörk bakgrund bakom meddelanden på skärmen för bättre läsbarhet
 
 @ Dark border keeps the crosshair visible on any background
 sv Mörk kant håller hårkorset synligt mot alla bakgrunder
@@ -1811,17 +1941,11 @@ sv Krusande ljusmönster på ytor under vatten och slem
 @ Scales all damage you take; above 100% is harder
 sv Skalar all skada du tar; över 100 % är svårare
 
-@ Screen edge for this element; elements on the same spot stack
-sv Skärmkant för detta element; element på samma plats staplas
-
 @ Seconds a monster hit by the boomerang stays stunned
 sv Sekunder ett monster som träffats av bumerangen förblir bedövat
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 sv Sekunder som nedslagsmärken och fastsittande spikar finns kvar innan de bleknar; oberoende av Partikelkvalitet
-
-@ Seconds messages at the top of the screen stay up
-sv Sekunder som meddelanden högst upp på skärmen visas
 
 @ Seconds the flick stick snap takes; lower is faster
 sv Sekunder som flick-spakens snäpp tar; lägre är snabbare
@@ -1990,6 +2114,50 @@ sv Videostorlek; bilderna skalas från fönstrets storlek (med svarta kanter som
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 sv Kodar på grafikkortet (NVIDIA NVENC, AMD eller Intel via VA-API, AMF eller Quick Sync, Apple VideoToolbox) när ffmpeg kan använda det, så att processorn blir ledig; annars kodar processorn
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+sv Visar tiden på dygnet i valt format
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+sv Banans tid, som på mellanskärmen; den står still vid paus och vid utgången
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+sv any%: valfritt slut; 100%: alla dödade och hemligheter. Sparkort visar denna först
+
+@ Color of the personal best on the HUD and save cards
+sv Färg på personbästa i HUD och på sparkort
+
+@ Shown as a count or as a percentage of the level's total
+sv Som antal eller som procent av banans totala
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+sv Sparar demon för varje bana som ger nytt personbästa; gamla finns kvar. Spelar in även utan automatiska demor
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+sv Bilder per sekund, medelvärde över en halv sekund
+
+@ Average time per frame in milliseconds, and the slowest frame
+sv Genomsnittlig tid per bild i millisekunder och den långsammaste bilden
+
+@ How busy the game keeps the processor, as a share of all its cores
+sv Hur hårt spelet belastar processorn, som andel av alla kärnor
+
+@ Memory the game uses
+sv Minne som spelet använder
+
+@ Graphics card time per frame in milliseconds
+sv Grafikkortstid per bild i millisekunder
+
+@ Video memory in use and what the driver allows, where it reports it
+sv Använt videominne och vad drivrutinen tillåter, där den rapporterar det
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+sv Flytta, skala, lägg till och ta bort HUD-element: hälsa, ammunition, vapen, timers, meddelanden och mer
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+sv Modern: kompakta element vid skärmkanterna; klassisk: den ursprungliga statusraden. Ett val återställer HUD:en; ändringar i Redigera HUD gör den anpassad
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ sv Exporterar video
 @ Preparing...
 sv Förbereder...
 
+# Save cards: personal best.
+@ PB {} {}
+sv PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ sv Skrev {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 sv ffmpeg hittades inte: skrev {} PNG-bilder och en WAV till {}
+
+# Personal bests.
+@ New personal best ({}): {}
+sv Nytt personbästa ({}): {}

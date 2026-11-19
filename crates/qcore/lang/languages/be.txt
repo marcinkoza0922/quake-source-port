@@ -103,9 +103,6 @@ be Фонавае зацяненне
 @ Ammo Counts
 be Лічыльнікі боепрыпасаў
 
-@ Ammo Counts Position
-be Пазіцыя лічыльнікаў боепрыпасаў
-
 @ Ammo Pickups
 be Падбор патронаў
 
@@ -120,9 +117,6 @@ be Ужываць да
 
 @ Armor
 be Браня
-
-@ Armor Position
-be Пазіцыя брані
 
 @ Ask
 be Пытацца
@@ -220,9 +214,6 @@ be Каўстыка
 @ Center
 be Па цэнтры
 
-@ Center Message Position
-be Пазіцыя паведамленняў па цэнтры
-
 @ Center Message Time
 be Час паведамленняў па цэнтры
 
@@ -282,9 +273,6 @@ be Памер прыцэла
 
 @ Current Ammo
 be Бягучыя патроны
-
-@ Current Ammo Position
-be Пазіцыя бягучых патронаў
 
 @ Customize This Game
 be Наладзіць гэту гульню
@@ -469,17 +457,11 @@ be Прыцэльванне гіраскопам
 @ HUD
 be Інтэрфейс
 
-@ HUD Style
-be Стыль інтэрфейсу
-
 @ Health
 be Здароўе
 
 @ Health Pickups
 be Падбор аптэчак
-
-@ Health Position
-be Пазіцыя здароўя
 
 @ Health Regeneration
 be Рэгенерацыя здароўя
@@ -589,9 +571,6 @@ be Скачкі
 @ Keys & Powerups
 be Ключы і ўзмацненні
 
-@ Keys & Powerups Position
-be Пазіцыя ключоў і ўзмацненняў
-
 @ Kill Bonus (x)
 be Бонус за забойства (x)
 
@@ -661,15 +640,6 @@ be Максімальная далёкасць
 @ Melee only
 be Толькі блізкі бой
 
-@ Message Background
-be Фон паведамленняў
-
-@ Message Text Size
-be Памер тэксту паведамленняў
-
-@ Messages & Captions
-be Паведамленні і субцітры
-
 @ Meter Duration (real seconds)
 be Працягласць шкалы (рэальныя секунды)
 
@@ -681,9 +651,6 @@ be Рэжым
 
 @ Modern Console
 be Сучасная кансоль
-
-@ Modern HUD Layout
-be Раскладка сучаснага інтэрфейсу
 
 @ Most recent save
 be Апошняе захаванне
@@ -732,9 +699,6 @@ be Фільтр шуму
 
 @ Normal Color
 be Звычайны колер
-
-@ Notify Message Position
-be Пазіцыя апавяшчэнняў
 
 @ Notify Message Time
 be Час апавяшчэнняў
@@ -940,17 +904,11 @@ be з-за левага пляча
 @ Shoulder right
 be з-за правага пляча
 
-@ Show FPS
-be Паказваць FPS
-
 @ Show Face
 be Паказваць твар
 
 @ Shrapnel
 be Шрапнэль
-
-@ Size of on-screen messages and captions
-be Памер экранных паведамленняў і субцітраў
 
 @ Skill
 be Складанасць
@@ -1120,15 +1078,6 @@ be Запавольванне пры коле зброі
 @ Weapons
 be Зброя
 
-@ Weapons Position
-be Пазіцыя зброі
-
-@ Where center-screen messages appear
-be Дзе з’яўляюцца паведамленні па цэнтры экрана
-
-@ Where pickup and event messages appear
-be Дзе з’яўляюцца паведамленні пра падбор і падзеі
-
 @ White
 be Белы
 
@@ -1168,9 +1117,6 @@ be рамка
 
 @ broken square
 be разарваны квадрат
-
-@ classic
-be класічны
 
 @ coarse
 be грубы
@@ -1259,29 +1205,17 @@ be моцны
 @ large
 be вялікі
 
-@ larger
-be большы
-
-@ largest
-be найбольшы
-
 @ linear
 be лінейная
 
 @ low
 be нізкая
 
-@ lower
-be ніжэй
-
 @ magenta
 be пурпуровы
 
 @ medium
 be сярэдняя
-
-@ middle
-be пасярэдзіне
 
 @ middle left
 be пасярэдзіне злева
@@ -1369,9 +1303,6 @@ be патройны
 
 @ tritanopia
 be трытанапія
-
-@ upper
-be вышэй
 
 @ white
 be белы
@@ -1496,6 +1427,211 @@ be Як акно
 @ GPU Encoding
 be Кадаванне на GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+be Час і статыстыка
+
+@ Clock
+be Гадзіннік
+
+@ Level Timer
+be Таймер узроўню
+
+@ Personal Best
+be Асабісты рэкорд
+
+@ Personal Best Type
+be Тып рэкорду
+
+@ Personal Best Color
+be Колер рэкорду
+
+@ Kills
+be Забойствы
+
+@ Secrets
+be Сакрэты
+
+@ 24-hour
+be 24 гадзіны
+
+@ 24-hour + seconds
+be 24 гадзіны + секунды
+
+@ 12-hour
+be 12 гадзін
+
+@ 12-hour + seconds
+be 12 гадзін + секунды
+
+@ count
+be колькасць
+
+@ percent
+be працэнт
+
+@ any% and 100%
+be any% і 100%
+
+@ Keep Personal Best Demos
+be Захоўваць дэма рэкордаў
+
+@ any%
+be any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+be Паказчыкі прадукцыйнасці
+
+@ Frame Time
+be Час кадра
+
+@ CPU Usage
+be Загрузка ЦП
+
+@ Memory Usage
+be Выкарыстанне памяці
+
+@ GPU Time
+be Час ГП
+
+@ Video Memory
+be Відэапамяць
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+be Дадаць
+
+@ Ammo
+be Боепрыпасы
+
+@ Ammo Bar
+be Паласа боепрыпасаў
+
+@ Armor Bar
+be Паласа брані
+
+@ Background
+be Фон
+
+@ Cells
+be Ячэйкі
+
+@ Center Message
+be Паведамленне па цэнтры
+
+@ Columns
+be Слупкі
+
+@ Edit HUD
+be Змяніць інтэрфейс
+
+@ FPS
+be FPS
+
+@ Face
+be Твар
+
+@ Fill Width
+be На ўсю шырыню
+
+@ Font
+be Шрыфт
+
+@ Format
+be Фармат
+
+@ HUD Editor
+be Рэдактар інтэрфейсу
+
+@ Health Bar
+be Паласа здароўя
+
+@ Inventory
+be Інвентар
+
+@ Keys
+be Ключы
+
+@ Nails
+be Цвікі
+
+@ Notify Messages
+be Апавяшчэнні
+
+@ Position
+be Пазіцыя
+
+@ Powerups
+be Узмацненні
+
+@ Precision
+be Дакладнасць
+
+@ Quake
+be Quake
+
+@ Rockets
+be Ракеты
+
+@ Scale
+be Маштаб
+
+@ Sections
+be Раздзелы
+
+@ Shells
+be Шрот
+
+@ Show As
+be Паказваць як
+
+@ Show Icon
+be Паказваць значок
+
+@ Show Value
+be Паказваць значэнне
+
+@ Sigils
+be Руны
+
+@ Status
+be Стан
+
+@ Status Bar
+be Радок стану
+
+@ Visibility
+be Бачнасць
+
+@ big numbers
+be вялікія лічбы
+
+@ center
+be цэнтр
+
+@ status + inventory
+be стан + інвентар
+
+@ status only
+be толькі стан
+
+@ Text Color
+be Колер тэксту
+
+@ Label Color
+be Колер подпісаў
+
+@ HUD Preset
+be Шаблон інтэрфейсу
+
+@ custom
+be свой
+
+@ classic
+be класічны
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ be Абмяжоўвае колькасць і час жыцця слядоў, к
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 be Абмяжоўвае ўваход шэйдара памерам вываду: маштаб рэндэрынгу 200% захоўвае выразнасць 3D без чатырохразовай нагрузкі; малыя маштабы застаюцца ў нізкай раздзяляльнасці
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-be Класічны: арыгінальная панэль стану; сучасны: кампактныя элементы па краях экрана
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 be Раздзяляльнасць атласа пакрыцця, частата перабудовы і дэталізацыя шэйдара: нізкая будуе меншыя пакрыцці радзей і з хуткім зацяненнем; высокая — поўная дэталізацыя
 
@@ -1558,9 +1691,6 @@ be Колер спіральнага следу рэйлгана; на падз�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 be Шкода рэйлгана кожнаму прабітаму ворагу (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-be Цёмная падкладка пад экраннымі паведамленнямі для лепшай чытальнасці
 
 @ Dark border keeps the crosshair visible on any background
 be Цёмнае абвядзенне робіць прыцэл прыкметным на любым фоне
@@ -1811,17 +1941,11 @@ be Мігатлівыя светлавыя ўзоры на паверхнях п
 @ Scales all damage you take; above 100% is harder
 be Маштабуе ўсю атрыманую шкоду; больш за 100% — цяжэй
 
-@ Screen edge for this element; elements on the same spot stack
-be Край экрана для гэтага элемента; элементы ў адным месцы складаюцца стосам
-
 @ Seconds a monster hit by the boomerang stays stunned
 be Колькі секунд застаецца аглушаным монстр, якога зачапіў бумеранг
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 be Колькі секунд трымаюцца сляды пападанняў і цвікі, што ўтыкнуліся; не залежыць ад якасці часціц
-
-@ Seconds messages at the top of the screen stay up
-be Колькі секунд трымаюцца паведамленні ўверсе экрана
 
 @ Seconds the flick stick snap takes; lower is faster
 be Працягласць развароту флік-стыка ў секундах; менш — хутчэй
@@ -1990,6 +2114,50 @@ be Памер відэа; кадры маштабуюцца з памеру ак
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 be Кадуе на відэакарце (NVIDIA NVENC, AMD ці Intel праз VA-API, AMF або Quick Sync, Apple VideoToolbox), калі ffmpeg можа яе выкарыстаць, вызваляючы працэсар; інакш кадуе працэсар
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+be Паказвае час сутак у выбраным фармаце
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+be Час узроўню, як на экране вынікаў; спыняецца на паўзе і на выхадзе
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+be any%: любое праходжанне; 100%: усе забойствы і сакрэты. Карткі захаванняў паказваюць яго першым
+
+@ Color of the personal best on the HUD and save cards
+be Колер асабістага рэкорду ў HUD і на картках захаванняў
+
+@ Shown as a count or as a percentage of the level's total
+be Колькасцю або працэнтам ад агульнага на ўзроўні
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+be Захоўвае дэма кожнага ўзроўню з новым асабістым рэкордам; старыя застаюцца. Запісвае нават без аўтазапісу
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+be Кадраў у секунду, у сярэднім за паўсекунды
+
+@ Average time per frame in milliseconds, and the slowest frame
+be Сярэдні час кадра ў мілісекундах і самы павольны кадр
+
+@ How busy the game keeps the processor, as a share of all its cores
+be Наколькі гульня загружае працэсар, як доля ўсіх яго ядраў
+
+@ Memory the game uses
+be Памяць, якую выкарыстоўвае гульня
+
+@ Graphics card time per frame in milliseconds
+be Час відэакарты на кадр у мілісекундах
+
+@ Video memory in use and what the driver allows, where it reports it
+be Занятая відэапамяць і даступны ад драйвера аб'ём, калі ён яго паведамляе
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+be Перамяшчайце, маштабуйце, дадавайце і прыбірайце элементы інтэрфейсу: здароўе, боепрыпасы, зброю, таймеры, паведамленні і іншае
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+be Сучасны: кампактныя элементы па краях экрана; класічны: арыгінальны радок стану. Выбар шаблону скідвае інтэрфейс; змены ў «Змяніць інтэрфейс» робяць яго сваім
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ be Экспарт відэа
 @ Preparing...
 be Падрыхтоўка...
 
+# Save cards: personal best.
+@ PB {} {}
+be PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ be Запісана {} ({} с)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 be ffmpeg не знойдзены: {} кадраў PNG і WAV запісаны ў {}
+
+# Personal bests.
+@ New personal best ({}): {}
+be Новы асабісты рэкорд ({}): {}

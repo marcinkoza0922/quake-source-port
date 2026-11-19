@@ -103,9 +103,6 @@ fi Ympäristön varjostus
 @ Ammo Counts
 fi Ammusmäärät
 
-@ Ammo Counts Position
-fi Ammusmäärien sijainti
-
 @ Ammo Pickups
 fi Ammuslöydöt
 
@@ -120,9 +117,6 @@ fi Koskee
 
 @ Armor
 fi Panssari
-
-@ Armor Position
-fi Panssarin sijainti
 
 @ Ask
 fi Kysy
@@ -220,9 +214,6 @@ fi Kaustiikka
 @ Center
 fi Keskellä
 
-@ Center Message Position
-fi Keskiviestien sijainti
-
 @ Center Message Time
 fi Keskiviestien kesto
 
@@ -282,9 +273,6 @@ fi Tähtäimen koko
 
 @ Current Ammo
 fi Nykyiset ammukset
-
-@ Current Ammo Position
-fi Nykyisten ammusten sijainti
 
 @ Customize This Game
 fi Mukauta tätä peliä
@@ -469,17 +457,11 @@ fi Gyrotähtäys
 @ HUD
 fi HUD
 
-@ HUD Style
-fi HUD-tyyli
-
 @ Health
 fi Terveys
 
 @ Health Pickups
 fi Terveyslöydöt
-
-@ Health Position
-fi Terveyden sijainti
 
 @ Health Regeneration
 fi Terveyden palautuminen
@@ -589,9 +571,6 @@ fi Hypyt
 @ Keys & Powerups
 fi Avaimet ja bonukset
 
-@ Keys & Powerups Position
-fi Avainten ja bonusten sijainti
-
 @ Kill Bonus (x)
 fi Tappobonus (x)
 
@@ -661,15 +640,6 @@ fi Suurin kantama
 @ Melee only
 fi Vain lähitaistelu
 
-@ Message Background
-fi Viestien tausta
-
-@ Message Text Size
-fi Viestien tekstikoko
-
-@ Messages & Captions
-fi Viestit ja tekstitykset
-
 @ Meter Duration (real seconds)
 fi Mittarin kesto (todelliset sekunnit)
 
@@ -681,9 +651,6 @@ fi Tila
 
 @ Modern Console
 fi Moderni konsoli
-
-@ Modern HUD Layout
-fi Modernin HUDin asettelu
 
 @ Most recent save
 fi Uusin tallennus
@@ -732,9 +699,6 @@ fi Kohinasuodin
 
 @ Normal Color
 fi Normaali väri
-
-@ Notify Message Position
-fi Ilmoitusten sijainti
 
 @ Notify Message Time
 fi Ilmoitusten kesto
@@ -940,17 +904,11 @@ fi Olan yli vasemmalta
 @ Shoulder right
 fi Olan yli oikealta
 
-@ Show FPS
-fi Näytä FPS
-
 @ Show Face
 fi Näytä kasvot
 
 @ Shrapnel
 fi Sirpaleet
-
-@ Size of on-screen messages and captions
-fi Ruutuviestien ja tekstitysten koko
 
 @ Skill
 fi Vaikeustaso
@@ -1120,15 +1078,6 @@ fi Asekiekon hidastus
 @ Weapons
 fi Aseet
 
-@ Weapons Position
-fi Aseiden sijainti
-
-@ Where center-screen messages appear
-fi Missä keskiviestit näkyvät
-
-@ Where pickup and event messages appear
-fi Missä löytö- ja tapahtumaviestit näkyvät
-
 @ White
 fi Valkoinen
 
@@ -1168,9 +1117,6 @@ fi laatikko
 
 @ broken square
 fi katkonainen neliö
-
-@ classic
-fi klassinen
 
 @ coarse
 fi karkea
@@ -1259,29 +1205,17 @@ fi voimakas
 @ large
 fi suuri
 
-@ larger
-fi suurempi
-
-@ largest
-fi suurin
-
 @ linear
 fi lineaarinen
 
 @ low
 fi matala
 
-@ lower
-fi alhaalla
-
 @ magenta
 fi magenta
 
 @ medium
 fi keskitaso
-
-@ middle
-fi keskellä
 
 @ middle left
 fi keskellä vasemmalla
@@ -1369,9 +1303,6 @@ fi kolminkertainen
 
 @ tritanopia
 fi tritanopia
-
-@ upper
-fi ylhäällä
 
 @ white
 fi valkoinen
@@ -1496,6 +1427,211 @@ fi Kuten ikkuna
 @ GPU Encoding
 fi GPU-koodaus
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+fi Aika ja tilastot
+
+@ Clock
+fi Kello
+
+@ Level Timer
+fi Tason ajastin
+
+@ Personal Best
+fi Oma ennätys
+
+@ Personal Best Type
+fi Ennätyksen tyyppi
+
+@ Personal Best Color
+fi Ennätyksen väri
+
+@ Kills
+fi Tapot
+
+@ Secrets
+fi Salaisuudet
+
+@ 24-hour
+fi 24 tuntia
+
+@ 24-hour + seconds
+fi 24 tuntia + sekunnit
+
+@ 12-hour
+fi 12 tuntia
+
+@ 12-hour + seconds
+fi 12 tuntia + sekunnit
+
+@ count
+fi määrä
+
+@ percent
+fi prosentti
+
+@ any% and 100%
+fi any% ja 100%
+
+@ Keep Personal Best Demos
+fi Säilytä ennätysdemot
+
+@ any%
+fi any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+fi Suorituskykymittarit
+
+@ Frame Time
+fi Kuva-aika
+
+@ CPU Usage
+fi Suorittimen käyttö
+
+@ Memory Usage
+fi Muistin käyttö
+
+@ GPU Time
+fi GPU-aika
+
+@ Video Memory
+fi Videomuisti
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+fi Lisää
+
+@ Ammo
+fi Ammukset
+
+@ Ammo Bar
+fi Ammuspalkki
+
+@ Armor Bar
+fi Panssaripalkki
+
+@ Background
+fi Tausta
+
+@ Cells
+fi Kennot
+
+@ Center Message
+fi Keskiviesti
+
+@ Columns
+fi Sarakkeet
+
+@ Edit HUD
+fi Muokkaa HUDia
+
+@ FPS
+fi FPS
+
+@ Face
+fi Kasvot
+
+@ Fill Width
+fi Koko leveys
+
+@ Font
+fi Fontti
+
+@ Format
+fi Muoto
+
+@ HUD Editor
+fi HUD-editori
+
+@ Health Bar
+fi Terveyspalkki
+
+@ Inventory
+fi Inventaario
+
+@ Keys
+fi Avaimet
+
+@ Nails
+fi Naulat
+
+@ Notify Messages
+fi Ilmoitukset
+
+@ Position
+fi Sijainti
+
+@ Powerups
+fi Bonukset
+
+@ Precision
+fi Tarkkuus
+
+@ Quake
+fi Quake
+
+@ Rockets
+fi Raketit
+
+@ Scale
+fi Mittakaava
+
+@ Sections
+fi Osat
+
+@ Shells
+fi Haulit
+
+@ Show As
+fi Näytä muodossa
+
+@ Show Icon
+fi Näytä kuvake
+
+@ Show Value
+fi Näytä arvo
+
+@ Sigils
+fi Riimut
+
+@ Status
+fi Tila
+
+@ Status Bar
+fi Tilapalkki
+
+@ Visibility
+fi Näkyvyys
+
+@ big numbers
+fi isot numerot
+
+@ center
+fi keskellä
+
+@ status + inventory
+fi tila + inventaario
+
+@ status only
+fi vain tila
+
+@ Text Color
+fi Tekstin väri
+
+@ Label Color
+fi Nimiöiden väri
+
+@ HUD Preset
+fi HUD-esiasetus
+
+@ custom
+fi oma
+
+@ classic
+fi klassinen
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ fi Rajoittaa jälkien määrää ja kestoa, ilmassa olevia pisaroita sekä haava
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 fi Rajoittaa varjostimen syötteen ulostulon kokoon, jolloin 200 %:n renderöintiskaala säilyttää 3D-terävyyden ilman nelinkertaista varjostinkuormaa; pienet skaalat pysyvät matalaresoluutioisina
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-fi Klassinen: alkuperäinen tilapalkki; moderni: kompaktit elementit ruudun reunoilla
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 fi Pinnoiteatlaksen resoluutio, päivitystahti ja varjostimen yksityiskohdat: matala rakentaa pienempiä pinnoitteita harvemmin nopealla varjostuksella; korkea käyttää täysiä yksityiskohtia
 
@@ -1558,9 +1691,6 @@ fi Railgunin spiraalivanan väri; jaetulla ruudulla kukin pelaaja saa seuraavan 
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 fi Railgunin vahinko jokaiselle lävistetylle viholliselle (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-fi Tumma tausta ruutuviestien takana luettavuuden parantamiseksi
 
 @ Dark border keeps the crosshair visible on any background
 fi Tumma reunus pitää tähtäimen näkyvissä kaikilla taustoilla
@@ -1811,17 +1941,11 @@ fi Aaltoilevat valokuviot pinnoilla veden ja liman alla
 @ Scales all damage you take; above 100% is harder
 fi Skaalaa kaiken saamasi vahingon; yli 100 % on vaikeampi
 
-@ Screen edge for this element; elements on the same spot stack
-fi Tämän elementin ruudun reuna; samassa kohdassa olevat elementit pinoutuvat
-
 @ Seconds a monster hit by the boomerang stays stunned
 fi Montako sekuntia bumerangin osuma hirviö pysyy tainnuksissa
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 fi Montako sekuntia osumajäljet ja kiinni jääneet naulat pysyvät ennen haalistumista; Partikkelien laadusta riippumaton
-
-@ Seconds messages at the top of the screen stay up
-fi Montako sekuntia ruudun yläosan viestit pysyvät näkyvissä
 
 @ Seconds the flick stick snap takes; lower is faster
 fi Flick-tikun käännöksen kesto sekunteina; pienempi on nopeampi
@@ -1990,6 +2114,50 @@ fi Videon koko; kuvat skaalataan ikkunan koosta (reunoilla, jotta muoto säilyy)
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 fi Koodaa näytönohjaimella (NVIDIA NVENC, AMD tai Intel VA-API:n kautta, AMF tai Quick Sync, Apple VideoToolbox), kun ffmpeg voi käyttää sitä, jolloin suoritin jää vapaaksi; muuten suoritin koodaa
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+fi Näyttää kellonajan valitussa muodossa
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+fi Tason aika kuten väliruudussa; pysähtyy tauolla ja uloskäynnillä
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+fi any%: mikä tahansa läpäisy; 100%: kaikki tapot ja salaisuudet. Tallennuskortit näyttävät tämän ensin
+
+@ Color of the personal best on the HUD and save cards
+fi Oman ennätyksen väri HUD:ssa ja tallennuskorteissa
+
+@ Shown as a count or as a percentage of the level's total
+fi Määränä tai prosenttina tason kokonaismäärästä
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+fi Säilyttää jokaisen uuden oman ennätyksen tason demon; vanhat jäävät. Nauhoittaa myös ilman automaattidemoja
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+fi Kuvaa sekunnissa, puolen sekunnin keskiarvo
+
+@ Average time per frame in milliseconds, and the slowest frame
+fi Keskimääräinen kuva-aika millisekunteina ja hitain kuva
+
+@ How busy the game keeps the processor, as a share of all its cores
+fi Kuinka paljon peli kuormittaa suoritinta, osuutena kaikista ytimistä
+
+@ Memory the game uses
+fi Pelin käyttämä muisti
+
+@ Graphics card time per frame in milliseconds
+fi Näytönohjaimen aika kuvaa kohden millisekunteina
+
+@ Video memory in use and what the driver allows, where it reports it
+fi Käytetty videomuisti ja ajurin sallima määrä, jos ajuri ilmoittaa sen
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+fi Siirrä, muuta kokoa, lisää ja poista HUD-elementtejä: terveys, ammukset, aseet, ajastimet, viestit ja muuta
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+fi Moderni: tiiviit elementit näytön reunoilla; klassinen: alkuperäinen tilapalkki. Valinta palauttaa HUDin; muutokset kohdassa Muokkaa HUDia tekevät siitä oman
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ fi Viedään videota
 @ Preparing...
 fi Valmistellaan...
 
+# Save cards: personal best.
+@ PB {} {}
+fi PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ fi Kirjoitettu {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 fi ffmpegiä ei löytynyt: {} PNG-kuvaa ja WAV kirjoitettu kohteeseen {}
+
+# Personal bests.
+@ New personal best ({}): {}
+fi Uusi oma ennätys ({}): {}

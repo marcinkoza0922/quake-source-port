@@ -209,8 +209,8 @@ Options → Irisgarritasuna:
 - Daltonismo-iragazkiak.
 - Mira konfiguragarria: forma, tamaina, ingerada eta kolore-aldaketak
   xedean edo hilketa batean; aukerako kolpe-markak.
-- **Soinuen azpitituluak** eta mezu-ezarpenak (Mezuak eta azpitituluak),
-  testuaren eskalatzea.
+- **Soinuen azpitituluak**; mezuen eta azpitituluen kokapena, tamaina eta
+  iraupena HUD editorean ezartzen dira.
 - Erasoa eta korrika txandakatzea (eutsi beharrean).
 - Joko-abiaduraren graduatzailea joko osoa moteltzeko.
 - Xede automatikoa finkatze-adierazlearekin, konoa eta irismena

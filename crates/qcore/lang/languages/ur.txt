@@ -103,9 +103,6 @@ ur ایمبیئنٹ آکلوژن
 @ Ammo Counts
 ur گولہ بارود کی گنتی
 
-@ Ammo Counts Position
-ur گولہ بارود کی گنتی کی جگہ
-
 @ Ammo Pickups
 ur اٹھایا گیا گولہ بارود
 
@@ -120,9 +117,6 @@ ur لاگو کریں
 
 @ Armor
 ur زرہ
-
-@ Armor Position
-ur زرہ کی جگہ
 
 @ Ask
 ur پوچھیں
@@ -220,9 +214,6 @@ ur کاسٹکس
 @ Center
 ur درمیان
 
-@ Center Message Position
-ur مرکزی پیغام کی جگہ
-
 @ Center Message Time
 ur مرکزی پیغام کا دورانیہ
 
@@ -282,9 +273,6 @@ ur کراس ہیئر کا سائز
 
 @ Current Ammo
 ur موجودہ گولہ بارود
-
-@ Current Ammo Position
-ur موجودہ گولہ بارود کی جگہ
 
 @ Customize This Game
 ur اس گیم کو حسبِ منشا بنائیں
@@ -469,17 +457,11 @@ ur جائرو نشانہ
 @ HUD
 ur HUD
 
-@ HUD Style
-ur HUD کا انداز
-
 @ Health
 ur صحت
 
 @ Health Pickups
 ur اٹھائی گئی صحت
-
-@ Health Position
-ur صحت کی جگہ
 
 @ Health Regeneration
 ur صحت کی بحالی
@@ -589,9 +571,6 @@ ur چھلانگیں
 @ Keys & Powerups
 ur چابیاں اور پاور اپس
 
-@ Keys & Powerups Position
-ur چابیوں اور پاور اپس کی جگہ
-
 @ Kill Bonus (x)
 ur قتل بونس (x)
 
@@ -661,15 +640,6 @@ ur زیادہ سے زیادہ رینج
 @ Melee only
 ur صرف دست بدست
 
-@ Message Background
-ur پیغام کا پس منظر
-
-@ Message Text Size
-ur پیغام کے متن کا سائز
-
-@ Messages & Captions
-ur پیغامات اور کیپشن
-
 @ Meter Duration (real seconds)
 ur میٹر کا دورانیہ (حقیقی سیکنڈ)
 
@@ -681,9 +651,6 @@ ur موڈ
 
 @ Modern Console
 ur جدید کنسول
-
-@ Modern HUD Layout
-ur جدید HUD ترتیب
 
 @ Most recent save
 ur تازہ ترین سیو
@@ -732,9 +699,6 @@ ur شور فلٹر
 
 @ Normal Color
 ur عام رنگ
-
-@ Notify Message Position
-ur اطلاعی پیغام کی جگہ
 
 @ Notify Message Time
 ur اطلاعی پیغام کا دورانیہ
@@ -940,17 +904,11 @@ ur بائیں کندھا
 @ Shoulder right
 ur دائیں کندھا
 
-@ Show FPS
-ur FPS دکھائیں
-
 @ Show Face
 ur چہرہ دکھائیں
 
 @ Shrapnel
 ur چھرے
-
-@ Size of on-screen messages and captions
-ur اسکرین پیغامات اور کیپشن کا سائز
 
 @ Skill
 ur مہارت
@@ -1120,15 +1078,6 @@ ur ہتھیاروں کے پہیے کی سست روی
 @ Weapons
 ur ہتھیار
 
-@ Weapons Position
-ur ہتھیاروں کی جگہ
-
-@ Where center-screen messages appear
-ur اسکرین کے درمیان پیغامات کہاں دکھیں
-
-@ Where pickup and event messages appear
-ur اٹھانے اور واقعات کے پیغامات کہاں دکھیں
-
 @ White
 ur سفید
 
@@ -1168,9 +1117,6 @@ ur ڈبہ
 
 @ broken square
 ur ٹوٹا مربع
-
-@ classic
-ur کلاسک
 
 @ coarse
 ur موٹا
@@ -1259,29 +1205,17 @@ ur شدید
 @ large
 ur بڑا
 
-@ larger
-ur زیادہ بڑا
-
-@ largest
-ur سب سے بڑا
-
 @ linear
 ur لکیری
 
 @ low
 ur کم
 
-@ lower
-ur نچلا
-
 @ magenta
 ur میجنٹا
 
 @ medium
 ur درمیانہ
-
-@ middle
-ur درمیان
 
 @ middle left
 ur درمیان بائیں
@@ -1369,9 +1303,6 @@ ur تہرا
 
 @ tritanopia
 ur ٹرائٹانوپیا
-
-@ upper
-ur بالائی
 
 @ white
 ur سفید
@@ -1496,6 +1427,211 @@ ur ونڈو جیسا
 @ GPU Encoding
 ur GPU انکوڈنگ
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ur وقت اور اعداد و شمار
+
+@ Clock
+ur گھڑی
+
+@ Level Timer
+ur لیول ٹائمر
+
+@ Personal Best
+ur ذاتی بہترین
+
+@ Personal Best Type
+ur ذاتی بہترین کی قسم
+
+@ Personal Best Color
+ur ذاتی بہترین کا رنگ
+
+@ Kills
+ur ہلاکتیں
+
+@ Secrets
+ur راز
+
+@ 24-hour
+ur 24 گھنٹے
+
+@ 24-hour + seconds
+ur 24 گھنٹے + سیکنڈ
+
+@ 12-hour
+ur 12 گھنٹے
+
+@ 12-hour + seconds
+ur 12 گھنٹے + سیکنڈ
+
+@ count
+ur تعداد
+
+@ percent
+ur فیصد
+
+@ any% and 100%
+ur any% اور 100%
+
+@ Keep Personal Best Demos
+ur ذاتی بہترین ڈیمو رکھیں
+
+@ any%
+ur any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ur کارکردگی کے پیمانے
+
+@ Frame Time
+ur فریم کا وقت
+
+@ CPU Usage
+ur CPU کا استعمال
+
+@ Memory Usage
+ur میموری کا استعمال
+
+@ GPU Time
+ur GPU کا وقت
+
+@ Video Memory
+ur ویڈیو میموری
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+ur شامل کریں
+
+@ Ammo
+ur گولہ بارود
+
+@ Ammo Bar
+ur گولہ بارود کی پٹی
+
+@ Armor Bar
+ur زرہ کی پٹی
+
+@ Background
+ur پس منظر
+
+@ Cells
+ur سیل
+
+@ Center Message
+ur مرکزی پیغام
+
+@ Columns
+ur کالم
+
+@ Edit HUD
+ur HUD میں ترمیم
+
+@ FPS
+ur FPS
+
+@ Face
+ur چہرہ
+
+@ Fill Width
+ur پوری چوڑائی
+
+@ Font
+ur فونٹ
+
+@ Format
+ur فارمیٹ
+
+@ HUD Editor
+ur HUD ایڈیٹر
+
+@ Health Bar
+ur صحت کی پٹی
+
+@ Inventory
+ur سامان
+
+@ Keys
+ur چابیاں
+
+@ Nails
+ur کیلیں
+
+@ Notify Messages
+ur اطلاعی پیغامات
+
+@ Position
+ur جگہ
+
+@ Powerups
+ur پاور اپس
+
+@ Precision
+ur درستگی
+
+@ Quake
+ur Quake
+
+@ Rockets
+ur راکٹ
+
+@ Scale
+ur پیمانہ
+
+@ Sections
+ur حصے
+
+@ Shells
+ur کارتوس
+
+@ Show As
+ur اس طرح دکھائیں
+
+@ Show Icon
+ur آئیکن دکھائیں
+
+@ Show Value
+ur قدر دکھائیں
+
+@ Sigils
+ur نشان
+
+@ Status
+ur حالت
+
+@ Status Bar
+ur حالت کی پٹی
+
+@ Visibility
+ur نمائش
+
+@ big numbers
+ur بڑے ہندسے
+
+@ center
+ur مرکز
+
+@ status + inventory
+ur حالت + سامان
+
+@ status only
+ur صرف حالت
+
+@ Text Color
+ur متن کا رنگ
+
+@ Label Color
+ur لیبل کا رنگ
+
+@ HUD Preset
+ur HUD پری سیٹ
+
+@ custom
+ur اپنا
+
+@ classic
+ur کلاسک
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ ur نشانوں کی تعداد، عمر، ہوا میں قطروں اور زخ�
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 ur شیڈر ان پٹ کو آؤٹ پٹ سائز تک محدود کرتا ہے تاکہ 200% رینڈر پیمانہ شیڈر کی 4 گنا لاگت کے بغیر 3D کی وضاحت برقرار رکھے؛ کم پیمانے کم ریزولوشن ہی رہتے ہیں
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-ur کلاسک: اصل اسٹیٹس بار؛ جدید: اسکرین کے کناروں پر مختصر عناصر
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 ur تہوں کے اٹلس کی ریزولوشن، دوبارہ بنانے کی شرح اور شیڈر کی تفصیل: کم چھوٹی تہیں کم بار تیز شیڈنگ سے بناتا ہے؛ زیادہ پوری تفصیل استعمال کرتا ہے
 
@@ -1558,9 +1691,6 @@ ur ریل گن کی بل دار لکیر کا رنگ؛ اسپلٹ اسکرین �
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 ur ریل گن ہر اس دشمن کو جتنا نقصان دیتی ہے جس کے آر پار جاتی ہے (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-ur پڑھنے میں آسانی کے لیے اسکرین پیغامات کے پیچھے گہرا پس منظر
 
 @ Dark border keeps the crosshair visible on any background
 ur گہرا کنارہ کراس ہیئر کو ہر پس منظر پر نمایاں رکھتا ہے
@@ -1811,17 +1941,11 @@ ur پانی اور کیچڑ کے نیچے سطحوں پر لہراتے روشن�
 @ Scales all damage you take; above 100% is harder
 ur آپ کو ملنے والے تمام نقصان کا پیمانہ؛ 100% سے اوپر زیادہ مشکل ہے
 
-@ Screen edge for this element; elements on the same spot stack
-ur اس عنصر کے لیے اسکرین کا کنارہ؛ ایک ہی جگہ کے عناصر ایک دوسرے پر ترتیب پاتے ہیں
-
 @ Seconds a monster hit by the boomerang stays stunned
 ur بومرینگ لگنے پر راکشس کتنے سیکنڈ بے ہوش رہے
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 ur ضرب کے نشان اور گڑی کیلیں مدھم ہونے سے پہلے کتنے سیکنڈ رہیں؛ ذرات کا معیار سے آزاد
-
-@ Seconds messages at the top of the screen stay up
-ur اسکرین کے اوپر پیغامات کتنے سیکنڈ رہیں
 
 @ Seconds the flick stick snap takes; lower is faster
 ur فلک اسٹک کا مڑنا کتنے سیکنڈ لے؛ کم تیز ہے
@@ -1990,6 +2114,50 @@ ur ویڈیو کا سائز؛ فریم ونڈو کے سائز سے بڑے کیے
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ur جب ffmpeg استعمال کر سکے تو گرافکس کارڈ پر انکوڈ کرتا ہے (NVIDIA NVENC، VA-API کے ذریعے AMD یا Intel، AMF یا Quick Sync، Apple VideoToolbox) اور پروسیسر کو آزاد رکھتا ہے؛ ورنہ پروسیسر انکوڈ کرتا ہے
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ur دن کا وقت منتخب انداز میں دکھاتا ہے
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ur لیول کا وقت، وقفے کی اسکرین کی طرح؛ رکنے پر اور باہر نکلنے پر تھم جاتا ہے
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ur any%: کوئی بھی اختتام؛ 100%: تمام ہلاکتیں اور راز۔ محفوظ کارڈ پہلے یہی دکھاتے ہیں
+
+@ Color of the personal best on the HUD and save cards
+ur HUD اور محفوظ کارڈز پر ذاتی بہترین کا رنگ
+
+@ Shown as a count or as a percentage of the level's total
+ur تعداد کے طور پر یا لیول کے کل کے فیصد کے طور پر
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ur ہر اس لیول کا ڈیمو رکھتا ہے جو ذاتی بہترین بنائے؛ پرانے رہتے ہیں۔ خودکار ریکارڈنگ بند ہو تب بھی ریکارڈ کرتا ہے
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ur فی سیکنڈ فریم، آدھے سیکنڈ کا اوسط
+
+@ Average time per frame in milliseconds, and the slowest frame
+ur فی فریم اوسط وقت ملی سیکنڈ میں، اور سب سے سست فریم
+
+@ How busy the game keeps the processor, as a share of all its cores
+ur گیم پروسیسر کو کتنا مصروف رکھتا ہے، تمام کورز کے حصے کے طور پر
+
+@ Memory the game uses
+ur گیم کی استعمال کردہ میموری
+
+@ Graphics card time per frame in milliseconds
+ur فی فریم گرافکس کارڈ کا وقت ملی سیکنڈ میں
+
+@ Video memory in use and what the driver allows, where it reports it
+ur استعمال شدہ ویڈیو میموری اور ڈرائیور کی اجازت، جہاں وہ بتاتا ہو
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+ur HUD کے اجزا کو منتقل کریں، سائز بدلیں، شامل کریں اور ہٹائیں: صحت، گولہ بارود، ہتھیار، ٹائمر، پیغامات اور مزید
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+ur جدید: اسکرین کے کناروں پر مختصر اجزا؛ کلاسک: اصل حالت کی پٹی۔ ایک چننے سے HUD ری سیٹ ہوتا ہے؛ HUD میں ترمیم میں تبدیلیاں اسے اپنا بنا دیتی ہیں
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ ur ویڈیو برآمد ہو رہی ہے
 @ Preparing...
 ur تیاری ہو رہی ہے...
 
+# Save cards: personal best.
+@ PB {} {}
+ur PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ ur {} لکھا گیا ({} سیکنڈ)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ur ffmpeg نہیں ملا: {} PNG فریم اور ایک WAV {} میں لکھے گئے
+
+# Personal bests.
+@ New personal best ({}): {}
+ur نیا ذاتی بہترین ({}): {}

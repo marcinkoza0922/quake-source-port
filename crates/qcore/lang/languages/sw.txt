@@ -103,9 +103,6 @@ sw Kivuli cha Mazingira
 @ Ammo Counts
 sw Idadi ya Risasi
 
-@ Ammo Counts Position
-sw Nafasi ya Idadi ya Risasi
-
 @ Ammo Pickups
 sw Risasi Zinazookotwa
 
@@ -120,9 +117,6 @@ sw Tumia Kwa
 
 @ Armor
 sw Deraya
-
-@ Armor Position
-sw Nafasi ya Deraya
 
 @ Ask
 sw Uliza
@@ -220,9 +214,6 @@ sw Caustics
 @ Center
 sw Katikati
 
-@ Center Message Position
-sw Nafasi ya Ujumbe wa Kati
-
 @ Center Message Time
 sw Muda wa Ujumbe wa Kati
 
@@ -282,9 +273,6 @@ sw Ukubwa wa Kilenga
 
 @ Current Ammo
 sw Risasi za Sasa
-
-@ Current Ammo Position
-sw Nafasi ya Risasi za Sasa
 
 @ Customize This Game
 sw Binafsisha Mchezo Huu
@@ -469,17 +457,11 @@ sw Kulenga kwa Gyro
 @ HUD
 sw HUD
 
-@ HUD Style
-sw Mtindo wa HUD
-
 @ Health
 sw Afya
 
 @ Health Pickups
 sw Afya Inayookotwa
-
-@ Health Position
-sw Nafasi ya Afya
 
 @ Health Regeneration
 sw Kurejesha Afya
@@ -589,9 +571,6 @@ sw Miruko
 @ Keys & Powerups
 sw Funguo na Nguvu
 
-@ Keys & Powerups Position
-sw Nafasi ya Funguo na Nguvu
-
 @ Kill Bonus (x)
 sw Bonasi ya Kuua (x)
 
@@ -661,15 +640,6 @@ sw Masafa ya Juu
 @ Melee only
 sw Ana kwa ana pekee
 
-@ Message Background
-sw Mandharinyuma ya Ujumbe
-
-@ Message Text Size
-sw Ukubwa wa Maandishi
-
-@ Messages & Captions
-sw Ujumbe na Manukuu
-
 @ Meter Duration (real seconds)
 sw Muda wa Kipimo (sekunde halisi)
 
@@ -681,9 +651,6 @@ sw Hali
 
 @ Modern Console
 sw Konsoli ya Kisasa
-
-@ Modern HUD Layout
-sw Mpangilio wa HUD ya Kisasa
 
 @ Most recent save
 sw Hifadhi ya karibuni
@@ -732,9 +699,6 @@ sw Kichujio cha Kelele
 
 @ Normal Color
 sw Rangi ya Kawaida
-
-@ Notify Message Position
-sw Nafasi ya Arifa
 
 @ Notify Message Time
 sw Muda wa Arifa
@@ -940,17 +904,11 @@ sw Bega kushoto
 @ Shoulder right
 sw Bega kulia
 
-@ Show FPS
-sw Onyesha FPS
-
 @ Show Face
 sw Onyesha Uso
 
 @ Shrapnel
 sw Vipande
-
-@ Size of on-screen messages and captions
-sw Ukubwa wa ujumbe na manukuu ya skrini
 
 @ Skill
 sw Ugumu
@@ -1120,15 +1078,6 @@ sw Kupunguza Kasi kwa Gurudumu
 @ Weapons
 sw Silaha
 
-@ Weapons Position
-sw Nafasi ya Silaha
-
-@ Where center-screen messages appear
-sw Mahali ujumbe wa katikati ya skrini unapotokea
-
-@ Where pickup and event messages appear
-sw Mahali ujumbe wa vitu na matukio unapotokea
-
 @ White
 sw Nyeupe
 
@@ -1168,9 +1117,6 @@ sw kisanduku
 
 @ broken square
 sw mraba uliovunjika
-
-@ classic
-sw asili
 
 @ coarse
 sw ghafi
@@ -1259,19 +1205,10 @@ sw kali
 @ large
 sw kubwa
 
-@ larger
-sw kubwa zaidi
-
-@ largest
-sw kubwa kabisa
-
 @ linear
 sw mstari
 
 @ low
-sw chini
-
-@ lower
 sw chini
 
 @ magenta
@@ -1279,9 +1216,6 @@ sw majenta
 
 @ medium
 sw wastani
-
-@ middle
-sw katikati
 
 @ middle left
 sw katikati kushoto
@@ -1369,9 +1303,6 @@ sw mara tatu
 
 @ tritanopia
 sw tritanopia
-
-@ upper
-sw juu
 
 @ white
 sw nyeupe
@@ -1496,6 +1427,211 @@ sw Kama dirisha
 @ GPU Encoding
 sw Usimbaji wa GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+sw Muda na Takwimu
+
+@ Clock
+sw Saa
+
+@ Level Timer
+sw Kipima Muda cha Kiwango
+
+@ Personal Best
+sw Rekodi Binafsi
+
+@ Personal Best Type
+sw Aina ya Rekodi
+
+@ Personal Best Color
+sw Rangi ya Rekodi
+
+@ Kills
+sw Mauaji
+
+@ Secrets
+sw Siri
+
+@ 24-hour
+sw saa 24
+
+@ 24-hour + seconds
+sw saa 24 + sekunde
+
+@ 12-hour
+sw saa 12
+
+@ 12-hour + seconds
+sw saa 12 + sekunde
+
+@ count
+sw idadi
+
+@ percent
+sw asilimia
+
+@ any% and 100%
+sw any% na 100%
+
+@ Keep Personal Best Demos
+sw Hifadhi Demo za Rekodi
+
+@ any%
+sw any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+sw Vipimo vya Utendaji
+
+@ Frame Time
+sw Muda wa Fremu
+
+@ CPU Usage
+sw Matumizi ya CPU
+
+@ Memory Usage
+sw Matumizi ya Kumbukumbu
+
+@ GPU Time
+sw Muda wa GPU
+
+@ Video Memory
+sw Kumbukumbu ya Video
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+sw Ongeza
+
+@ Ammo
+sw Risasi
+
+@ Ammo Bar
+sw Upau wa risasi
+
+@ Armor Bar
+sw Upau wa deraya
+
+@ Background
+sw Mandharinyuma
+
+@ Cells
+sw Seli
+
+@ Center Message
+sw Ujumbe wa Kati
+
+@ Columns
+sw Safu wima
+
+@ Edit HUD
+sw Hariri HUD
+
+@ FPS
+sw FPS
+
+@ Face
+sw Uso
+
+@ Fill Width
+sw Upana kamili
+
+@ Font
+sw Fonti
+
+@ Format
+sw Muundo
+
+@ HUD Editor
+sw Kihariri cha HUD
+
+@ Health Bar
+sw Upau wa afya
+
+@ Inventory
+sw Mali
+
+@ Keys
+sw Funguo
+
+@ Nails
+sw Misumari
+
+@ Notify Messages
+sw Ujumbe wa Arifa
+
+@ Position
+sw Nafasi
+
+@ Powerups
+sw Nguvu
+
+@ Precision
+sw Usahihi
+
+@ Quake
+sw Quake
+
+@ Rockets
+sw Roketi
+
+@ Scale
+sw Kipimo
+
+@ Sections
+sw Sehemu
+
+@ Shells
+sw Katriji
+
+@ Show As
+sw Onyesha kama
+
+@ Show Icon
+sw Onyesha aikoni
+
+@ Show Value
+sw Onyesha thamani
+
+@ Sigils
+sw Alama
+
+@ Status
+sw Hali
+
+@ Status Bar
+sw Upau wa hali
+
+@ Visibility
+sw Mwonekano
+
+@ big numbers
+sw tarakimu kubwa
+
+@ center
+sw katikati
+
+@ status + inventory
+sw hali + mali
+
+@ status only
+sw hali pekee
+
+@ Text Color
+sw Rangi ya maandishi
+
+@ Label Color
+sw Rangi ya lebo
+
+@ HUD Preset
+sw Mpangilio wa HUD
+
+@ custom
+sw maalum
+
+@ classic
+sw asili
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ sw Hudhibiti idadi ya alama, muda wake, matone hewani na madoa ya majeraha/vipan
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 sw Huweka kikomo cha ingizo la shader kwenye ukubwa wa pato ili kipimo cha 200% kibaki kikali bila gharama ya shader mara 4; vipimo vya chini hubaki na ubora wa chini
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-sw Asili: upau wa hali wa awali; kisasa: vipengele vidogo kwenye kingo za skrini
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 sw Ubora wa atlasi ya tabaka, kasi ya kujenga upya na undani wa shader: chini hujenga tabaka ndogo mara chache kwa kivuli cha haraka; juu hutumia undani kamili
 
@@ -1558,9 +1691,6 @@ sw Rangi ya mkondo wa ond wa railgun; kwenye skrini iliyogawanywa kila mchezaji 
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 sw Madhara ambayo railgun huleta kwa kila adui inayempenya (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-sw Mandharinyuma meusi nyuma ya ujumbe wa skrini ili usomeke vizuri
 
 @ Dark border keeps the crosshair visible on any background
 sw Ukingo mweusi huweka kilenga kionekane kwenye mandharinyuma yoyote
@@ -1811,17 +1941,11 @@ sw Mifumo ya mwanga inayotikisika kwenye nyuso chini ya maji na ute
 @ Scales all damage you take; above 100% is harder
 sw Hupima madhara yote unayopata; zaidi ya 100% ni ngumu zaidi
 
-@ Screen edge for this element; elements on the same spot stack
-sw Ukingo wa skrini wa kipengele hiki; vipengele vya mahali pamoja hupangana
-
 @ Seconds a monster hit by the boomerang stays stunned
 sw Sekunde ambazo zimwi lililopigwa na bumerangi hubaki limeduwaa
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 sw Sekunde ambazo alama za athari na misumari iliyokwama hukaa kabla ya kufifia; haitegemei Ubora wa Chembechembe
-
-@ Seconds messages at the top of the screen stay up
-sw Sekunde ambazo ujumbe ulio juu ya skrini hukaa
 
 @ Seconds the flick stick snap takes; lower is faster
 sw Sekunde ambazo kuelekeza kwa flick stick huchukua; chini ni haraka zaidi
@@ -1990,6 +2114,50 @@ sw Ukubwa wa video; fremu hubadilishwa ukubwa kutoka ukubwa wa dirisha (pamoja n
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 sw Husimba kwenye kadi ya michoro (NVIDIA NVENC, AMD au Intel kupitia VA-API, AMF au Quick Sync, Apple VideoToolbox) ffmpeg inapoweza kuitumia, na kuacha kichakataji huru; vinginevyo kichakataji husimba
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+sw Huonyesha saa ya siku katika muundo uliochaguliwa
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+sw Muda wa kiwango, kama kwenye skrini ya mapumziko; husimama ukisitisha na kwenye mlango wa kutoka
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+sw any%: mwisho wowote; 100%: mauaji yote na siri zote. Kadi za hifadhi huonyesha hii kwanza
+
+@ Color of the personal best on the HUD and save cards
+sw Rangi ya rekodi binafsi kwenye HUD na kadi za hifadhi
+
+@ Shown as a count or as a percentage of the level's total
+sw Kama idadi au kama asilimia ya jumla ya kiwango
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+sw Huhifadhi demo ya kila kiwango kinachoweka rekodi binafsi; za zamani hubaki. Hurekodi hata kurekodi kiotomatiki kukiwa kumezimwa
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+sw Fremu kwa sekunde, wastani wa nusu sekunde
+
+@ Average time per frame in milliseconds, and the slowest frame
+sw Muda wa wastani kwa kila fremu kwa milisekunde, na fremu ya polepole zaidi
+
+@ How busy the game keeps the processor, as a share of all its cores
+sw Jinsi mchezo unavyoshughulisha kichakataji, kama sehemu ya viini vyake vyote
+
+@ Memory the game uses
+sw Kumbukumbu ambayo mchezo unatumia
+
+@ Graphics card time per frame in milliseconds
+sw Muda wa kadi ya michoro kwa kila fremu kwa milisekunde
+
+@ Video memory in use and what the driver allows, where it reports it
+sw Kumbukumbu ya video inayotumika na kiasi dereva anachoruhusu, pale anaporipoti
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+sw Sogeza, badilisha ukubwa, ongeza na ondoa vipengele vya HUD: afya, risasi, silaha, vipima muda, ujumbe na zaidi
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+sw Kisasa: vipengele vidogo kwenye kingo za skrini; kawaida: upau wa hali wa asili. Kuchagua mmoja huweka upya HUD; mabadiliko katika Hariri HUD huifanya kuwa maalum
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ sw Inahamisha video
 @ Preparing...
 sw Inaandaa...
 
+# Save cards: personal best.
+@ PB {} {}
+sw PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ sw Imeandika {} (sek {})
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 sw ffmpeg haikupatikana: imeandika fremu {} za PNG na WAV moja kwenye {}
+
+# Personal bests.
+@ New personal best ({}): {}
+sw Rekodi binafsi mpya ({}): {}

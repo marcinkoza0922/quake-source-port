@@ -186,7 +186,7 @@ Options → Prístupnosť:
 - Filtre pre farbosleposť.
 - Nastaviteľný zameriavač: tvar, veľkosť, obrys a zmena farby na cieli
   alebo pri zabití; voliteľné značky zásahu.
-- **Titulky zvukov** a nastavenia správ (Správy a titulky), mierka textu.
+- **Titulky zvukov**; pozícia, veľkosť a čas zobrazenia správ a titulkov sa nastavujú v editore HUD.
 - Prepínanie (namiesto držania) útoku a behu.
 - Posuvník rýchlosti hry na spomalenie celej hry.
 - Automatické mierenie s indikátorom zamerania a nastavením kužeľa a

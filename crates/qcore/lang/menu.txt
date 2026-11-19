@@ -232,13 +232,6 @@ it Contatori munizioni
 es Contadores de munición
 ru Счётчики боеприпасов
 
-@ Ammo Counts Position
-fr Position des compteurs de munitions
-de Position der Munitionszähler
-it Posizione contatori munizioni
-es Posición de contadores de munición
-ru Положение счётчиков боеприпасов
-
 @ Ammo Pickups
 fr Munitions ramassées
 de Munitionsfunde
@@ -273,13 +266,6 @@ de Rüstung
 it Armatura
 es Armadura
 ru Броня
-
-@ Armor Position
-fr Position de l'armure
-de Rüstungsposition
-it Posizione armatura
-es Posición de la armadura
-ru Положение брони
 
 @ Ask
 fr Demander
@@ -505,13 +491,6 @@ it Centro
 es Centro
 ru По центру
 
-@ Center Message Position
-fr Position des messages centraux
-de Position der Mittelnachrichten
-it Posizione messaggi centrali
-es Posición de mensajes centrales
-ru Положение сообщений по центру
-
 @ Center Message Time
 fr Durée des messages centraux
 de Dauer der Mittelnachrichten
@@ -651,13 +630,6 @@ de Aktuelle Munition
 it Munizioni attuali
 es Munición actual
 ru Текущие патроны
-
-@ Current Ammo Position
-fr Position des munitions actuelles
-de Position der aktuellen Munition
-it Posizione munizioni attuali
-es Posición de la munición actual
-ru Положение текущих патронов
 
 @ Customize This Game
 fr Personnaliser cette partie
@@ -1086,13 +1058,6 @@ it Interfaccia
 es Interfaz
 ru Интерфейс
 
-@ HUD Style
-fr Style ATH
-de HUD-Stil
-it Stile interfaccia
-es Estilo de interfaz
-ru Стиль интерфейса
-
 @ Health
 fr Santé
 de Gesundheit
@@ -1106,13 +1071,6 @@ de Gesundheitsfunde
 it Salute raccolta
 es Salud recogida
 ru Подбор аптечек
-
-@ Health Position
-fr Position de la santé
-de Gesundheitsposition
-it Posizione salute
-es Posición de la salud
-ru Положение здоровья
 
 @ Health Regeneration
 fr Régénération de santé
@@ -1366,13 +1324,6 @@ it Chiavi e potenziamenti
 es Llaves y potenciadores
 ru Ключи и усилители
 
-@ Keys & Powerups Position
-fr Position des clés et bonus
-de Position von Schlüsseln & Power-ups
-it Posizione chiavi e potenziamenti
-es Posición de llaves y potenciadores
-ru Положение ключей и усилителей
-
 @ Kill Bonus (x)
 fr Bonus d'élimination (x)
 de Abschussbonus (x)
@@ -1534,27 +1485,6 @@ it Solo corpo a corpo
 es Solo cuerpo a cuerpo
 ru Только ближний бой
 
-@ Message Background
-fr Fond des messages
-de Nachrichtenhintergrund
-it Sfondo dei messaggi
-es Fondo de los mensajes
-ru Фон сообщений
-
-@ Message Text Size
-fr Taille du texte des messages
-de Textgröße der Nachrichten
-it Dimensione testo dei messaggi
-es Tamaño del texto de los mensajes
-ru Размер текста сообщений
-
-@ Messages & Captions
-fr Messages et sous-titres
-de Nachrichten & Untertitel
-it Messaggi e didascalie
-es Mensajes y subtítulos
-ru Сообщения и субтитры
-
 @ Meter Duration (real seconds)
 fr Durée de la jauge (secondes réelles)
 de Leistendauer (echte Sekunden)
@@ -1582,13 +1512,6 @@ de Moderne Konsole
 it Console moderna
 es Consola moderna
 ru Современная консоль
-
-@ Modern HUD Layout
-fr Disposition de l'ATH moderne
-de Modernes HUD-Layout
-it Layout interfaccia moderna
-es Diseño de la interfaz moderna
-ru Раскладка современного интерфейса
 
 @ Most recent save
 fr Sauvegarde la plus récente
@@ -1701,13 +1624,6 @@ de Normale Farbe
 it Colore normale
 es Color normal
 ru Обычный цвет
-
-@ Notify Message Position
-fr Position des notifications
-de Position der Meldungen
-it Posizione delle notifiche
-es Posición de las notificaciones
-ru Положение уведомлений
 
 @ Notify Message Time
 fr Durée des notifications
@@ -2185,13 +2101,6 @@ it spalla destra
 es hombro derecho
 ru из-за правого плеча
 
-@ Show FPS
-fr Afficher les IPS
-de FPS anzeigen
-it Mostra FPS
-es Mostrar FPS
-ru Показывать FPS
-
 @ Show Face
 fr Afficher le visage
 de Gesicht anzeigen
@@ -2205,13 +2114,6 @@ de Splitter
 it Schegge
 es Metralla
 ru Шрапнель
-
-@ Size of on-screen messages and captions
-fr Taille des messages et sous-titres à l'écran
-de Größe der Bildschirmnachrichten und Untertitel
-it Dimensione dei messaggi e delle didascalie su schermo
-es Tamaño de los mensajes y subtítulos en pantalla
-ru Размер экранных сообщений и субтитров
 
 @ Skill
 fr Difficulté
@@ -2605,27 +2507,6 @@ it Armi
 es Armas
 ru Оружие
 
-@ Weapons Position
-fr Position des armes
-de Waffenposition
-it Posizione armi
-es Posición de las armas
-ru Положение оружия
-
-@ Where center-screen messages appear
-fr Emplacement des messages au centre de l'écran
-de Wo Nachrichten der Bildschirmmitte erscheinen
-it Dove appaiono i messaggi al centro dello schermo
-es Dónde aparecen los mensajes centrales
-ru Где появляются сообщения по центру экрана
-
-@ Where pickup and event messages appear
-fr Emplacement des messages de ramassage et d'événement
-de Wo Fund- und Ereignisnachrichten erscheinen
-it Dove appaiono i messaggi di raccolta e di evento
-es Dónde aparecen los mensajes de objetos y eventos
-ru Где появляются сообщения о подборе и событиях
-
 @ White
 fr Blanc
 de Weiß
@@ -2717,13 +2598,6 @@ de unterbrochenes Quadrat
 it quadrato spezzato
 es cuadrado roto
 ru разорванный квадрат
-
-@ classic
-fr classique
-de klassisch
-it classico
-es clásico
-ru классический
 
 @ coarse
 fr grossier
@@ -2928,20 +2802,6 @@ it grande
 es grande
 ru большой
 
-@ larger
-fr plus grand
-de größer
-it più grande
-es más grande
-ru крупнее
-
-@ largest
-fr le plus grand
-de am größten
-it il più grande
-es el más grande
-ru самый крупный
-
 @ linear
 fr linéaire
 de linear
@@ -2956,13 +2816,6 @@ it bassa
 es baja
 ru низкое
 
-@ lower
-fr bas
-de unten
-it in basso
-es abajo
-ru ниже
-
 @ magenta
 fr magenta
 de Magenta
@@ -2976,13 +2829,6 @@ de mittel
 it media
 es media
 ru среднее
-
-@ middle
-fr milieu
-de Mitte
-it al centro
-es en medio
-ru посередине
 
 @ middle left
 fr au milieu à gauche
@@ -3186,13 +3032,6 @@ de Tritanopie
 it tritanopia
 es tritanopía
 ru тританопия
-
-@ upper
-fr haut
-de oben
-it in alto
-es arriba
-ru выше
 
 @ white
 fr blanc
@@ -3479,3 +3318,478 @@ de GPU-Kodierung
 it Codifica GPU
 es Codificación por GPU
 ru Кодирование на GPU
+
+# HUD > Time & Stats, and personal-best demos.
+
+@ Time & Stats
+fr Temps et stats
+de Zeit & Statistik
+it Tempo e statistiche
+es Tiempo y estadísticas
+ru Время и статистика
+
+@ Clock
+fr Horloge
+de Uhr
+it Orologio
+es Reloj
+ru Часы
+
+@ Level Timer
+fr Chrono du niveau
+de Level-Timer
+it Timer del livello
+es Cronómetro del nivel
+ru Таймер уровня
+
+@ Personal Best
+fr Record personnel
+de Persönliche Bestzeit
+it Record personale
+es Mejor marca personal
+ru Личный рекорд
+
+@ Personal Best Type
+fr Type de record
+de Art der Bestzeit
+it Tipo di record
+es Tipo de marca
+ru Тип рекорда
+
+@ Personal Best Color
+fr Couleur du record
+de Farbe der Bestzeit
+it Colore del record
+es Color de la marca
+ru Цвет рекорда
+
+@ Kills
+fr Ennemis tués
+de Kills
+it Uccisioni
+es Muertes
+ru Убийства
+
+@ Secrets
+fr Secrets
+de Geheimnisse
+it Segreti
+es Secretos
+ru Секреты
+
+@ 24-hour
+fr 24 heures
+de 24 Stunden
+it 24 ore
+es 24 horas
+ru 24 часа
+
+@ 24-hour + seconds
+fr 24 heures + secondes
+de 24 Stunden + Sekunden
+it 24 ore + secondi
+es 24 horas + segundos
+ru 24 часа + секунды
+
+@ 12-hour
+fr 12 heures
+de 12 Stunden
+it 12 ore
+es 12 horas
+ru 12 часов
+
+@ 12-hour + seconds
+fr 12 heures + secondes
+de 12 Stunden + Sekunden
+it 12 ore + secondi
+es 12 horas + segundos
+ru 12 часов + секунды
+
+@ count
+fr nombre
+de Anzahl
+it numero
+es cantidad
+ru число
+
+@ percent
+fr pourcentage
+de Prozent
+it percentuale
+es porcentaje
+ru процент
+
+@ any% and 100%
+fr any% et 100%
+de any% und 100%
+it any% e 100%
+es any% y 100%
+ru any% и 100%
+
+@ Keep Personal Best Demos
+fr Garder les démos de record
+de Bestzeit-Demos behalten
+it Conserva demo dei record
+es Guardar demos de marcas
+ru Сохранять демо рекордов
+
+@ any%
+fr any%
+de any%
+it any%
+es any%
+ru any%
+
+# HUD > Performance Metrics.
+
+@ Performance Metrics
+fr Mesures de performance
+de Leistungswerte
+it Metriche di prestazione
+es Métricas de rendimiento
+ru Показатели производительности
+
+@ Frame Time
+fr Temps d'image
+de Bildzeit
+it Tempo per fotogramma
+es Tiempo de fotograma
+ru Время кадра
+
+@ CPU Usage
+fr Utilisation du processeur
+de CPU-Auslastung
+it Uso della CPU
+es Uso de CPU
+ru Загрузка ЦП
+
+@ Memory Usage
+fr Utilisation de la mémoire
+de Speichernutzung
+it Uso della memoria
+es Uso de memoria
+ru Использование памяти
+
+@ GPU Time
+fr Temps GPU
+de GPU-Zeit
+it Tempo GPU
+es Tiempo de GPU
+ru Время ГП
+
+@ Video Memory
+fr Mémoire vidéo
+de Videospeicher
+it Memoria video
+es Memoria de vídeo
+ru Видеопамять
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+fr Ajouter
+de Hinzufügen
+it Aggiungi
+es Añadir
+ru Добавить
+
+@ Ammo
+fr Munitions
+de Munition
+it Munizioni
+es Munición
+ru Боеприпасы
+
+@ Ammo Bar
+fr Barre de munitions
+de Munitionsleiste
+it Barra munizioni
+es Barra de munición
+ru Полоса боеприпасов
+
+@ Armor Bar
+fr Barre d'armure
+de Rüstungsleiste
+it Barra armatura
+es Barra de armadura
+ru Полоса брони
+
+@ Background
+fr Fond
+de Hintergrund
+it Sfondo
+es Fondo
+ru Фон
+
+@ Cells
+fr Cellules
+de Zellen
+it Celle
+es Celdas
+ru Ячейки
+
+@ Center Message
+fr Message central
+de Mittelnachricht
+it Messaggio centrale
+es Mensaje central
+ru Сообщение по центру
+
+@ Columns
+fr Colonnes
+de Spalten
+it Colonne
+es Columnas
+ru Столбцы
+
+@ Edit HUD
+fr Modifier l'ATH
+de HUD bearbeiten
+it Modifica interfaccia
+es Editar interfaz
+ru Изменить интерфейс
+
+@ FPS
+fr IPS
+de FPS
+it FPS
+es FPS
+ru FPS
+
+@ Face
+fr Visage
+de Gesicht
+it Volto
+es Cara
+ru Лицо
+
+@ Fill Width
+fr Toute la largeur
+de Volle Breite
+it Larghezza intera
+es Ancho completo
+ru Во всю ширину
+
+@ Font
+fr Police
+de Schriftart
+it Carattere
+es Fuente
+ru Шрифт
+
+@ Format
+fr Format
+de Format
+it Formato
+es Formato
+ru Формат
+
+@ HUD Editor
+fr Éditeur d'ATH
+de HUD-Editor
+it Editor dell'interfaccia
+es Editor de interfaz
+ru Редактор интерфейса
+
+@ Health Bar
+fr Barre de santé
+de Gesundheitsleiste
+it Barra della salute
+es Barra de salud
+ru Полоса здоровья
+
+@ Inventory
+fr Inventaire
+de Inventar
+it Inventario
+es Inventario
+ru Инвентарь
+
+@ Keys
+fr Clés
+de Schlüssel
+it Chiavi
+es Llaves
+ru Ключи
+
+@ Nails
+fr Clous
+de Nägel
+it Chiodi
+es Clavos
+ru Гвозди
+
+@ Notify Messages
+fr Notifications
+de Meldungen
+it Notifiche
+es Notificaciones
+ru Уведомления
+
+@ Position
+fr Position
+de Position
+it Posizione
+es Posición
+ru Положение
+
+@ Powerups
+fr Bonus
+de Power-ups
+it Potenziamenti
+es Potenciadores
+ru Усилители
+
+@ Precision
+fr Précision
+de Genauigkeit
+it Precisione
+es Precisión
+ru Точность
+
+@ Quake
+fr Quake
+de Quake
+it Quake
+es Quake
+ru Quake
+
+@ Rockets
+fr Roquettes
+de Raketen
+it Razzi
+es Cohetes
+ru Ракеты
+
+@ Scale
+fr Échelle
+de Skalierung
+it Scala
+es Escala
+ru Масштаб
+
+@ Sections
+fr Sections
+de Abschnitte
+it Sezioni
+es Secciones
+ru Разделы
+
+@ Shells
+fr Cartouches
+de Schrot
+it Cartucce
+es Cartuchos
+ru Дробь
+
+@ Show As
+fr Afficher en
+de Anzeigen als
+it Mostra come
+es Mostrar como
+ru Показывать как
+
+@ Show Icon
+fr Afficher l'icône
+de Symbol anzeigen
+it Mostra icona
+es Mostrar icono
+ru Показывать значок
+
+@ Show Value
+fr Afficher la valeur
+de Wert anzeigen
+it Mostra valore
+es Mostrar valor
+ru Показывать значение
+
+@ Sigils
+fr Runes
+de Runen
+it Rune
+es Runas
+ru Руны
+
+@ Status
+fr État
+de Status
+it Stato
+es Estado
+ru Состояние
+
+@ Status Bar
+fr Barre d'état
+de Statusleiste
+it Barra di stato
+es Barra de estado
+ru Строка состояния
+
+@ Visibility
+fr Visibilité
+de Sichtbarkeit
+it Visibilità
+es Visibilidad
+ru Видимость
+
+@ big numbers
+fr grands chiffres
+de große Ziffern
+it cifre grandi
+es números grandes
+ru крупные цифры
+
+@ center
+fr centre
+de Mitte
+it centro
+es centro
+ru центр
+
+@ status + inventory
+fr état + inventaire
+de Status + Inventar
+it stato + inventario
+es estado + inventario
+ru состояние + инвентарь
+
+@ status only
+fr état seul
+de nur Status
+it solo stato
+es solo estado
+ru только состояние
+
+@ Text Color
+fr Couleur du texte
+de Textfarbe
+it Colore del testo
+es Color del texto
+ru Цвет текста
+
+@ Label Color
+fr Couleur des libellés
+de Beschriftungsfarbe
+it Colore delle etichette
+es Color de las etiquetas
+ru Цвет подписей
+
+@ HUD Preset
+fr Préréglage de l'ATH
+de HUD-Vorlage
+it Preimpostazione interfaccia
+es Ajuste de interfaz
+ru Шаблон интерфейса
+
+@ custom
+fr personnalisé
+de eigenes
+it personalizzata
+es personalizada
+ru свой
+
+@ classic
+fr classique
+de klassisch
+it classico
+es clásico
+ru классический

@@ -204,8 +204,8 @@ Options → Accessibility:
 - Mga filter para sa color blindness.
 - Naaayos na crosshair: hugis, laki, balangkas, at pagbabago ng kulay kapag
   nasa target o sa pagpatay; opsyonal na hit marker.
-- **Caption ng Tunog** at mga setting ng mensahe (Mensahe at Caption),
-  laki ng teksto.
+- **Caption ng Tunog**; ang posisyon, laki at tagal ng mga mensahe at
+  caption ay itinatakda sa HUD editor.
 - Toggle (sa halip na hold) na atake at takbo.
 - Slider ng bilis ng laro para pabagalin ang buong laro.
 - Auto-aim na may lock indicator, at setting ng cone at abot.

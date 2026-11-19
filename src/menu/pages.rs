@@ -68,6 +68,8 @@ pub(super) enum Run {
     ExportWhole,
     /// Rename dialog: renames the demo (an auto-demo is kept).
     RenameDemo,
+    /// HUD → Edit HUD: the HUD editor (`crate::hud::editor`).
+    EditHud,
 }
 
 /// A server answering the LAN search.
@@ -364,14 +366,13 @@ pub(super) const CROSSHAIR: &[Item] = &[
     toggle("Grenade Arc", "assist_grenadearc"),
     Item::Sub { label: "Grenade Arc Settings", page: Page::GrenadeArc },
 ];
-pub(super) const TEXT_SIZE: &[(&str, f32)] = &[("normal", 1.0), ("large", 1.5), ("larger", 2.0), ("largest", 3.0)];
 pub(super) const GAME_SPEED: &[(&str, f32)] = &[("100%", 1.0), ("90%", 0.9), ("75%", 0.75), ("60%", 0.6), ("50%", 0.5)];
 
 pub(super) const ACCESSIBILITY: &[Item] = &[
     toggle("Reduce Motion", "a11y_reducemotion"),
     slider("Screen Flashes", "v_flashscale", 0.0, 1.0, 0.1),
     Item::Choice { label: "Color Filter", cvar: "r_colorblind", choices: COLORBLIND },
-    Item::Sub { label: "Messages & Captions", page: Page::Messages },
+    toggle("Sound Captions", "cl_captions"),
     toggle("Toggle Attack", "in_toggleattack"),
     toggle("Toggle Run", "in_togglerun"),
     Item::Choice { label: "Game Speed", cvar: "a11y_gamespeed", choices: GAME_SPEED },
@@ -379,63 +380,15 @@ pub(super) const ACCESSIBILITY: &[Item] = &[
     Item::Sub { label: "Auto-aim Settings", page: Page::AutoAim },
 ];
 
-pub(super) const HUD_MODE: &[(&str, f32)] = &[("off", 0.0), ("on", 1.0), ("immersive", 2.0)];
-pub(super) const HUD_POS: &[(&str, f32)] = &[
-    ("bottom left", 0.0),
-    ("bottom center", 1.0),
-    ("bottom right", 2.0),
-    ("top left", 3.0),
-    ("top center", 4.0),
-    ("top right", 5.0),
-    ("middle left", 6.0),
-    ("middle right", 7.0),
-];
-pub(super) const HUD_STYLE: &[(&str, f32)] = &[("classic", 0.0), ("modern", 1.0)];
-pub(super) const CENTER_POS: &[(&str, f32)] = &[("upper", 0.0), ("middle", 1.0), ("lower", 2.0)];
-pub(super) const NOTIFY_POS: &[(&str, f32)] = &[("top left", 0.0), ("top center", 1.0), ("bottom left", 2.0)];
+pub(super) const HUD_PRESET: &[(&str, f32)] = &[("modern", 0.0), ("classic", 1.0), ("custom", 2.0)];
 
 pub(super) const HUD: &[Item] = &[
-    Item::Choice { label: "HUD Style", cvar: "scr_hudstyle", choices: HUD_STYLE },
-    Item::Sub { label: "Modern HUD Layout", page: Page::HudLayout },
+    Item::Choice { label: "HUD Preset", cvar: "hud_preset", choices: HUD_PRESET },
+    Item::Run { label: "Edit HUD", run: Run::EditHud },
     Item::Sub { label: "Crosshair", page: Page::Crosshair },
     toggle("Directional Damage", "hud_damageindicator"),
-    Item::Sub { label: "Messages & Captions", page: Page::Messages },
     Item::Choice { label: "Weapon Wheel Slowdown", cvar: "cl_wheel_timescale", choices: WHEEL_TIME },
-    toggle("Show FPS", "scr_showfps"),
     toggle("Modern Console", "con_modern"),
-];
-
-pub(super) const MESSAGES: &[Item] = &[
-    Item::Choice { label: "Center Message Position", cvar: "scr_centerpos", choices: CENTER_POS },
-    slider("Center Message Time", "scr_centertime", 1.0, 10.0, 1.0),
-    Item::Choice { label: "Notify Message Position", cvar: "con_notifypos", choices: NOTIFY_POS },
-    slider("Notify Message Time", "con_notifytime", 1.0, 10.0, 1.0),
-    Item::Choice { label: "Message Text Size", cvar: "scr_textscale", choices: TEXT_SIZE },
-    toggle("Message Background", "scr_textbg"),
-    toggle("Sound Captions", "cl_captions"),
-];
-
-pub(super) const fn hud_mode(label: &'static str, cvar: &'static str) -> Item {
-    Item::Choice { label, cvar, choices: HUD_MODE }
-}
-pub(super) const fn hud_pos(label: &'static str, cvar: &'static str) -> Item {
-    Item::Choice { label, cvar, choices: HUD_POS }
-}
-
-pub(super) const HUD_LAYOUT: &[Item] = &[
-    hud_mode("Health", "hud_health"),
-    hud_pos("Health Position", "hud_health_pos"),
-    toggle("Show Face", "hud_face"),
-    hud_mode("Armor", "hud_armor"),
-    hud_pos("Armor Position", "hud_armor_pos"),
-    hud_mode("Current Ammo", "hud_ammo"),
-    hud_pos("Current Ammo Position", "hud_ammo_pos"),
-    hud_mode("Ammo Counts", "hud_ammolist"),
-    hud_pos("Ammo Counts Position", "hud_ammolist_pos"),
-    hud_mode("Weapons", "hud_weapons"),
-    hud_pos("Weapons Position", "hud_weapons_pos"),
-    hud_mode("Keys & Powerups", "hud_items"),
-    hud_pos("Keys & Powerups Position", "hud_items_pos"),
 ];
 
 pub(super) const AUDIO: &[Item] = &[

@@ -103,9 +103,6 @@ zh-CN 环境光遮蔽
 @ Ammo Counts
 zh-CN 弹药数量
 
-@ Ammo Counts Position
-zh-CN 弹药数量位置
-
 @ Ammo Pickups
 zh-CN 拾取弹药
 
@@ -120,9 +117,6 @@ zh-CN 应用于
 
 @ Armor
 zh-CN 护甲
-
-@ Armor Position
-zh-CN 护甲位置
 
 @ Ask
 zh-CN 询问
@@ -220,9 +214,6 @@ zh-CN 焦散
 @ Center
 zh-CN 居中
 
-@ Center Message Position
-zh-CN 中央消息位置
-
 @ Center Message Time
 zh-CN 中央消息时长
 
@@ -282,9 +273,6 @@ zh-CN 准星大小
 
 @ Current Ammo
 zh-CN 当前弹药
-
-@ Current Ammo Position
-zh-CN 当前弹药位置
 
 @ Customize This Game
 zh-CN 自定义本局游戏
@@ -469,17 +457,11 @@ zh-CN 陀螺仪瞄准
 @ HUD
 zh-CN HUD
 
-@ HUD Style
-zh-CN HUD 样式
-
 @ Health
 zh-CN 生命值
 
 @ Health Pickups
 zh-CN 拾取生命
-
-@ Health Position
-zh-CN 生命值位置
 
 @ Health Regeneration
 zh-CN 生命值恢复
@@ -589,9 +571,6 @@ zh-CN 跳跃次数
 @ Keys & Powerups
 zh-CN 钥匙与强化道具
 
-@ Keys & Powerups Position
-zh-CN 钥匙与强化道具位置
-
 @ Kill Bonus (x)
 zh-CN 击杀奖励（倍）
 
@@ -661,15 +640,6 @@ zh-CN 最大射程
 @ Melee only
 zh-CN 仅限近战
 
-@ Message Background
-zh-CN 消息背景
-
-@ Message Text Size
-zh-CN 消息文字大小
-
-@ Messages & Captions
-zh-CN 消息与字幕
-
 @ Meter Duration (real seconds)
 zh-CN 计量条时长（真实秒数）
 
@@ -681,9 +651,6 @@ zh-CN 模式
 
 @ Modern Console
 zh-CN 现代控制台
-
-@ Modern HUD Layout
-zh-CN 现代 HUD 布局
 
 @ Most recent save
 zh-CN 最新存档
@@ -732,9 +699,6 @@ zh-CN 降噪滤波
 
 @ Normal Color
 zh-CN 常规颜色
-
-@ Notify Message Position
-zh-CN 通知消息位置
 
 @ Notify Message Time
 zh-CN 通知消息时长
@@ -940,17 +904,11 @@ zh-CN 左肩
 @ Shoulder right
 zh-CN 右肩
 
-@ Show FPS
-zh-CN 显示帧率
-
 @ Show Face
 zh-CN 显示头像
 
 @ Shrapnel
 zh-CN 弹片
-
-@ Size of on-screen messages and captions
-zh-CN 屏幕消息和字幕的大小
 
 @ Skill
 zh-CN 难度
@@ -1120,15 +1078,6 @@ zh-CN 武器轮盘减速
 @ Weapons
 zh-CN 武器
 
-@ Weapons Position
-zh-CN 武器位置
-
-@ Where center-screen messages appear
-zh-CN 屏幕中央消息的显示位置
-
-@ Where pickup and event messages appear
-zh-CN 拾取与事件消息的显示位置
-
 @ White
 zh-CN 白色
 
@@ -1168,9 +1117,6 @@ zh-CN 方框
 
 @ broken square
 zh-CN 断开方框
-
-@ classic
-zh-CN 经典
 
 @ coarse
 zh-CN 粗糙
@@ -1259,29 +1205,17 @@ zh-CN 强烈
 @ large
 zh-CN 大
 
-@ larger
-zh-CN 较大
-
-@ largest
-zh-CN 最大
-
 @ linear
 zh-CN 线性
 
 @ low
 zh-CN 低
 
-@ lower
-zh-CN 偏下
-
 @ magenta
 zh-CN 品红
 
 @ medium
 zh-CN 中
-
-@ middle
-zh-CN 中间
 
 @ middle left
 zh-CN 左侧居中
@@ -1369,9 +1303,6 @@ zh-CN 三重
 
 @ tritanopia
 zh-CN 蓝色盲
-
-@ upper
-zh-CN 偏上
 
 @ white
 zh-CN 白色
@@ -1496,6 +1427,211 @@ zh-CN 与窗口相同
 @ GPU Encoding
 zh-CN GPU 编码
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+zh-CN 时间与统计
+
+@ Clock
+zh-CN 时钟
+
+@ Level Timer
+zh-CN 关卡计时器
+
+@ Personal Best
+zh-CN 个人最佳
+
+@ Personal Best Type
+zh-CN 个人最佳类型
+
+@ Personal Best Color
+zh-CN 个人最佳颜色
+
+@ Kills
+zh-CN 击杀
+
+@ Secrets
+zh-CN 秘密
+
+@ 24-hour
+zh-CN 24 小时制
+
+@ 24-hour + seconds
+zh-CN 24 小时制 + 秒
+
+@ 12-hour
+zh-CN 12 小时制
+
+@ 12-hour + seconds
+zh-CN 12 小时制 + 秒
+
+@ count
+zh-CN 数量
+
+@ percent
+zh-CN 百分比
+
+@ any% and 100%
+zh-CN any% 和 100%
+
+@ Keep Personal Best Demos
+zh-CN 保留个人最佳演示
+
+@ any%
+zh-CN any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+zh-CN 性能指标
+
+@ Frame Time
+zh-CN 帧时间
+
+@ CPU Usage
+zh-CN CPU 占用
+
+@ Memory Usage
+zh-CN 内存占用
+
+@ GPU Time
+zh-CN GPU 时间
+
+@ Video Memory
+zh-CN 显存
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+zh-CN 添加
+
+@ Ammo
+zh-CN 弹药
+
+@ Ammo Bar
+zh-CN 弹药条
+
+@ Armor Bar
+zh-CN 护甲条
+
+@ Background
+zh-CN 背景
+
+@ Cells
+zh-CN 电池
+
+@ Center Message
+zh-CN 中央消息
+
+@ Columns
+zh-CN 列数
+
+@ Edit HUD
+zh-CN 编辑 HUD
+
+@ FPS
+zh-CN FPS
+
+@ Face
+zh-CN 头像
+
+@ Fill Width
+zh-CN 全宽
+
+@ Font
+zh-CN 字体
+
+@ Format
+zh-CN 格式
+
+@ HUD Editor
+zh-CN HUD 编辑器
+
+@ Health Bar
+zh-CN 生命条
+
+@ Inventory
+zh-CN 物品栏
+
+@ Keys
+zh-CN 钥匙
+
+@ Nails
+zh-CN 钉子
+
+@ Notify Messages
+zh-CN 通知消息
+
+@ Position
+zh-CN 位置
+
+@ Powerups
+zh-CN 强化道具
+
+@ Precision
+zh-CN 精度
+
+@ Quake
+zh-CN Quake
+
+@ Rockets
+zh-CN 火箭弹
+
+@ Scale
+zh-CN 缩放
+
+@ Sections
+zh-CN 组成
+
+@ Shells
+zh-CN 霰弹
+
+@ Show As
+zh-CN 显示为
+
+@ Show Icon
+zh-CN 显示图标
+
+@ Show Value
+zh-CN 显示数值
+
+@ Sigils
+zh-CN 符印
+
+@ Status
+zh-CN 状态
+
+@ Status Bar
+zh-CN 状态栏
+
+@ Visibility
+zh-CN 可见性
+
+@ big numbers
+zh-CN 大数字
+
+@ center
+zh-CN 中间
+
+@ status + inventory
+zh-CN 状态＋物品栏
+
+@ status only
+zh-CN 仅状态
+
+@ Text Color
+zh-CN 文字颜色
+
+@ Label Color
+zh-CN 标签颜色
+
+@ HUD Preset
+zh-CN HUD 预设
+
+@ custom
+zh-CN 自定义
+
+@ classic
+zh-CN 经典
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ zh-CN 限制痕迹数量、持续时间、空中血滴以及伤口/碎肉染色�
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 zh-CN 将着色器输入限制为输出尺寸，使 200% 渲染缩放保持 3D 清晰度而无需 4 倍着色器开销；低缩放仍保持低分辨率
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-zh-CN 经典：原版状态栏；现代：位于屏幕边缘的紧凑元素
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 zh-CN 涂层图集分辨率、重建频率和着色细节：低会以较低频率构建较小的涂层并使用快速着色；高使用完整细节
 
@@ -1558,9 +1691,6 @@ zh-CN 轨道炮螺旋轨迹的颜色；分屏时每位玩家依次使用下一�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 zh-CN 轨道炮对贯穿的每个敌人造成的伤害（Quake III：100）
-
-@ Dark backdrop behind on-screen messages for readability
-zh-CN 在屏幕消息后方加暗色背景以便阅读
 
 @ Dark border keeps the crosshair visible on any background
 zh-CN 深色描边让准星在任何背景上都清晰可见
@@ -1811,17 +1941,11 @@ zh-CN 水和毒液下表面的波动光纹
 @ Scales all damage you take; above 100% is harder
 zh-CN 调整你受到的所有伤害；超过 100% 更难
 
-@ Screen edge for this element; elements on the same spot stack
-zh-CN 此元素所在的屏幕边缘；同一位置的元素会堆叠
-
 @ Seconds a monster hit by the boomerang stays stunned
 zh-CN 被回旋镖击中的怪物保持眩晕的秒数
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 zh-CN 弹痕和钉在表面的钉子在淡出前停留的秒数；与粒子质量无关
-
-@ Seconds messages at the top of the screen stay up
-zh-CN 屏幕顶部消息的显示秒数
 
 @ Seconds the flick stick snap takes; lower is faster
 zh-CN 甩动摇杆转向所需的秒数；越低越快
@@ -1990,6 +2114,50 @@ zh-CN 视频尺寸；帧由窗口尺寸缩放而来（加黑边保持比例）�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 zh-CN ffmpeg 能用时在显卡上编码（NVIDIA NVENC、通过 VA-API 的 AMD 或 Intel、AMF 或 Quick Sync、Apple VideoToolbox），让处理器空闲；否则由处理器编码
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+zh-CN 以所选格式显示当前时间
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+zh-CN 关卡时间，与过场画面相同；暂停时和到达出口时停止
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+zh-CN any%：任意通关；100%：全部击杀和秘密。存档卡片优先显示此项
+
+@ Color of the personal best on the HUD and save cards
+zh-CN HUD 和存档卡片上个人最佳的颜色
+
+@ Shown as a count or as a percentage of the level's total
+zh-CN 以数量或关卡总数的百分比显示
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+zh-CN 保留每个创下个人最佳的关卡演示；旧的也会保留。即使关闭自动录制也会录制
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+zh-CN 每秒帧数，取半秒平均
+
+@ Average time per frame in milliseconds, and the slowest frame
+zh-CN 每帧平均耗时（毫秒）和最慢的一帧
+
+@ How busy the game keeps the processor, as a share of all its cores
+zh-CN 游戏占用处理器的程度，以全部核心的比例计
+
+@ Memory the game uses
+zh-CN 游戏使用的内存
+
+@ Graphics card time per frame in milliseconds
+zh-CN 每帧显卡耗时（毫秒）
+
+@ Video memory in use and what the driver allows, where it reports it
+zh-CN 已用显存和驱动允许的上限（若驱动提供）
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+zh-CN 移动、缩放、添加和移除 HUD 元素：生命、弹药、武器、计时器、消息等
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+zh-CN 现代：屏幕边缘的紧凑元素；经典：原版状态栏。选择预设会重置 HUD；在编辑 HUD 中修改后会变为自定义
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ zh-CN 正在导出视频
 @ Preparing...
 zh-CN 正在准备...
 
+# Save cards: personal best.
+@ PB {} {}
+zh-CN PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ zh-CN 已写入 {}（{} 秒）
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 zh-CN 未找到 ffmpeg：已将 {} 帧 PNG 和一个 WAV 写入 {}
+
+# Personal bests.
+@ New personal best ({}): {}
+zh-CN 新的个人最佳（{}）：{}

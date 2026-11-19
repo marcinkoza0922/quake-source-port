@@ -103,9 +103,6 @@ da Ambient occlusion
 @ Ammo Counts
 da Ammunitionstællere
 
-@ Ammo Counts Position
-da Placering af ammunitionstællere
-
 @ Ammo Pickups
 da Fundet ammunition
 
@@ -120,9 +117,6 @@ da Anvend på
 
 @ Armor
 da Rustning
-
-@ Armor Position
-da Placering af rustning
 
 @ Ask
 da Spørg
@@ -220,9 +214,6 @@ da Kaustik
 @ Center
 da Midte
 
-@ Center Message Position
-da Placering af midterbeskeder
-
 @ Center Message Time
 da Varighed af midterbeskeder
 
@@ -282,9 +273,6 @@ da Sigtekornets størrelse
 
 @ Current Ammo
 da Aktuel ammunition
-
-@ Current Ammo Position
-da Placering af aktuel ammunition
 
 @ Customize This Game
 da Tilpas dette spil
@@ -469,17 +457,11 @@ da Gyrosigte
 @ HUD
 da HUD
 
-@ HUD Style
-da HUD-stil
-
 @ Health
 da Liv
 
 @ Health Pickups
 da Fundet liv
-
-@ Health Position
-da Placering af liv
 
 @ Health Regeneration
 da Livsregenerering
@@ -589,9 +571,6 @@ da Hop
 @ Keys & Powerups
 da Nøgler & power-ups
 
-@ Keys & Powerups Position
-da Placering af nøgler & power-ups
-
 @ Kill Bonus (x)
 da Drabsbonus (x)
 
@@ -661,15 +640,6 @@ da Maks. rækkevidde
 @ Melee only
 da Kun nærkamp
 
-@ Message Background
-da Beskedbaggrund
-
-@ Message Text Size
-da Beskedernes tekststørrelse
-
-@ Messages & Captions
-da Beskeder & undertekster
-
 @ Meter Duration (real seconds)
 da Målerens varighed (rigtige sekunder)
 
@@ -681,9 +651,6 @@ da Tilstand
 
 @ Modern Console
 da Moderne konsol
-
-@ Modern HUD Layout
-da Moderne HUD-layout
 
 @ Most recent save
 da Nyeste gemte spil
@@ -732,9 +699,6 @@ da Støjfilter
 
 @ Normal Color
 da Normal farve
-
-@ Notify Message Position
-da Placering af meddelelser
 
 @ Notify Message Time
 da Varighed af meddelelser
@@ -940,17 +904,11 @@ da skulder venstre
 @ Shoulder right
 da skulder højre
 
-@ Show FPS
-da Vis FPS
-
 @ Show Face
 da Vis ansigt
 
 @ Shrapnel
 da Granatsplinter
-
-@ Size of on-screen messages and captions
-da Størrelse på skærmbeskeder og undertekster
 
 @ Skill
 da Sværhedsgrad
@@ -1120,15 +1078,6 @@ da Våbenhjul-sløvning
 @ Weapons
 da Våben
 
-@ Weapons Position
-da Placering af våben
-
-@ Where center-screen messages appear
-da Hvor beskeder midt på skærmen vises
-
-@ Where pickup and event messages appear
-da Hvor fund- og hændelsesbeskeder vises
-
 @ White
 da Hvid
 
@@ -1168,9 +1117,6 @@ da kasse
 
 @ broken square
 da brudt firkant
-
-@ classic
-da klassisk
 
 @ coarse
 da grov
@@ -1259,29 +1205,17 @@ da intens
 @ large
 da stor
 
-@ larger
-da større
-
-@ largest
-da størst
-
 @ linear
 da lineær
 
 @ low
 da lav
 
-@ lower
-da nederst
-
 @ magenta
 da magenta
 
 @ medium
 da middel
-
-@ middle
-da midte
 
 @ middle left
 da midt til venstre
@@ -1369,9 +1303,6 @@ da tredobbelt
 
 @ tritanopia
 da tritanopi
-
-@ upper
-da øverst
 
 @ white
 da hvid
@@ -1496,6 +1427,211 @@ da Som vinduet
 @ GPU Encoding
 da GPU-kodning
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+da Tid og statistik
+
+@ Clock
+da Ur
+
+@ Level Timer
+da Banetimer
+
+@ Personal Best
+da Personlig rekord
+
+@ Personal Best Type
+da Rekordtype
+
+@ Personal Best Color
+da Rekordfarve
+
+@ Kills
+da Drab
+
+@ Secrets
+da Hemmeligheder
+
+@ 24-hour
+da 24 timer
+
+@ 24-hour + seconds
+da 24 timer + sekunder
+
+@ 12-hour
+da 12 timer
+
+@ 12-hour + seconds
+da 12 timer + sekunder
+
+@ count
+da antal
+
+@ percent
+da procent
+
+@ any% and 100%
+da any% og 100%
+
+@ Keep Personal Best Demos
+da Behold rekorddemoer
+
+@ any%
+da any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+da Ydelsesmålinger
+
+@ Frame Time
+da Billedtid
+
+@ CPU Usage
+da CPU-forbrug
+
+@ Memory Usage
+da Hukommelsesforbrug
+
+@ GPU Time
+da GPU-tid
+
+@ Video Memory
+da Videohukommelse
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+da Tilføj
+
+@ Ammo
+da Ammunition
+
+@ Ammo Bar
+da Ammunitionsbjælke
+
+@ Armor Bar
+da Rustningsbjælke
+
+@ Background
+da Baggrund
+
+@ Cells
+da Celler
+
+@ Center Message
+da Midterbesked
+
+@ Columns
+da Kolonner
+
+@ Edit HUD
+da Rediger HUD
+
+@ FPS
+da FPS
+
+@ Face
+da Ansigt
+
+@ Fill Width
+da Fuld bredde
+
+@ Font
+da Skrifttype
+
+@ Format
+da Format
+
+@ HUD Editor
+da HUD-editor
+
+@ Health Bar
+da Helbredsbjælke
+
+@ Inventory
+da Inventar
+
+@ Keys
+da Nøgler
+
+@ Nails
+da Søm
+
+@ Notify Messages
+da Meddelelser
+
+@ Position
+da Placering
+
+@ Powerups
+da Power-ups
+
+@ Precision
+da Præcision
+
+@ Quake
+da Quake
+
+@ Rockets
+da Raketter
+
+@ Scale
+da Skala
+
+@ Sections
+da Sektioner
+
+@ Shells
+da Hagl
+
+@ Show As
+da Vis som
+
+@ Show Icon
+da Vis ikon
+
+@ Show Value
+da Vis værdi
+
+@ Sigils
+da Runer
+
+@ Status
+da Status
+
+@ Status Bar
+da Statuslinje
+
+@ Visibility
+da Synlighed
+
+@ big numbers
+da store tal
+
+@ center
+da midte
+
+@ status + inventory
+da status + inventar
+
+@ status only
+da kun status
+
+@ Text Color
+da Tekstfarve
+
+@ Label Color
+da Etiketfarve
+
+@ HUD Preset
+da HUD-forvalg
+
+@ custom
+da brugerdefineret
+
+@ classic
+da klassisk
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ da Begrænser antal mærker, levetid, dråber i luften og sår-/kødstumppletter
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 da Begrænser shader-input til outputstørrelsen, så 200 % renderskala bevarer 3D-skarphed uden 4x shader-omkostning; lave skalaer forbliver lavopløste
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-da Klassisk: den originale statuslinje; moderne: kompakte elementer ved skærmens kanter
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 da Belægningsatlassets opløsning, genopbygningsrate og shader-detaljer: lav bygger mindre belægninger sjældnere med hurtig skygning; høj bruger fulde detaljer
 
@@ -1558,9 +1691,6 @@ da Farven på railgunnens spiralspor; på delt skærm får hver spiller den næs
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 da Skade, som railgunnen giver hver fjende, den passerer igennem (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-da Mørk baggrund bag skærmbeskeder for bedre læsbarhed
 
 @ Dark border keeps the crosshair visible on any background
 da En mørk kant holder sigtekornet synligt på enhver baggrund
@@ -1811,17 +1941,11 @@ da Bølgende lysmønstre på overflader under vand og slim
 @ Scales all damage you take; above 100% is harder
 da Skalerer al skade, du tager; over 100 % er sværere
 
-@ Screen edge for this element; elements on the same spot stack
-da Skærmkant for dette element; elementer på samme sted stables
-
 @ Seconds a monster hit by the boomerang stays stunned
 da Sekunder et monster ramt af boomerangen forbliver lammet
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 da Sekunder nedslagsmærker og fastsiddende søm bliver, før de toner ud; uafhængigt af Partikelkvalitet
-
-@ Seconds messages at the top of the screen stay up
-da Sekunder beskeder øverst på skærmen bliver vist
 
 @ Seconds the flick stick snap takes; lower is faster
 da Sekunder flick-stick-vendingen tager; lavere er hurtigere
@@ -1990,6 +2114,50 @@ da Videostørrelse; billederne skaleres fra vinduets størrelse (med bjælker, s
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 da Koder på grafikkortet (NVIDIA NVENC, AMD eller Intel via VA-API, AMF eller Quick Sync, Apple VideoToolbox), når ffmpeg kan bruge det, så processoren er fri; ellers koder processoren
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+da Viser klokkeslættet i det valgte format
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+da Banens tid, som på mellemskærmen; den stopper ved pause og ved udgangen
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+da any%: enhver afslutning; 100%: alle drab og hemmeligheder. Gemmekort viser denne først
+
+@ Color of the personal best on the HUD and save cards
+da Farve på personlig rekord i HUD og på gemmekort
+
+@ Shown as a count or as a percentage of the level's total
+da Som antal eller som procent af banens samlede
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+da Beholder demoen fra hver bane med ny personlig rekord; gamle bliver. Optager også uden automatiske demoer
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+da Billeder pr. sekund, gennemsnit over et halvt sekund
+
+@ Average time per frame in milliseconds, and the slowest frame
+da Gennemsnitlig tid pr. billede i millisekunder og det langsomste billede
+
+@ How busy the game keeps the processor, as a share of all its cores
+da Hvor hårdt spillet belaster processoren, som andel af alle kerner
+
+@ Memory the game uses
+da Hukommelse, som spillet bruger
+
+@ Graphics card time per frame in milliseconds
+da Grafikkorttid pr. billede i millisekunder
+
+@ Video memory in use and what the driver allows, where it reports it
+da Brugt videohukommelse og hvad driveren tillader, hvor den oplyser det
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+da Flyt, skalér, tilføj og fjern HUD-elementer: helbred, ammunition, våben, timere, beskeder og mere
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+da Moderne: kompakte elementer langs skærmkanterne; klassisk: den oprindelige statuslinje. Et valg nulstiller HUD'en; ændringer i Rediger HUD gør den brugerdefineret
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ da Eksporterer video
 @ Preparing...
 da Forbereder...
 
+# Save cards: personal best.
+@ PB {} {}
+da PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ da Skrev {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 da ffmpeg ikke fundet: skrev {} PNG-billeder og en WAV til {}
+
+# Personal bests.
+@ New personal best ({}): {}
+da Ny personlig rekord ({}): {}

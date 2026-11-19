@@ -24,10 +24,10 @@ impl<'a, 'b> Sbar<'a, 'b> {
         }
     }
 
-    pub fn draw(&mut self, cl: &ClientState, show_scores: bool, face_anim: bool) {
+    /// The inventory strip above the bar: weapons, ammo counts, items.
+    fn draw_inventory(&mut self, cl: &ClientState) {
         let st = &cl.stats;
         let items = cl.items;
-        // inventory
         self.draw_pic(0.0, -24.0, self.pack.ibar(st[STAT_ACTIVEWEAPON]));
         for (i, wname) in WEAPONS.iter().enumerate() {
             if items & (IT_SHOTGUN << i) == 0 {
@@ -78,6 +78,14 @@ impl<'a, 'b> Sbar<'a, 'b> {
             }
         }
 
+    }
+
+    pub fn draw(&mut self, cl: &ClientState, show_scores: bool, face_anim: bool) {
+        let st = &cl.stats;
+        let items = cl.items;
+        if self.inventory {
+            self.draw_inventory(cl);
+        }
         if show_scores || st[STAT_HEALTH] <= 0 {
             self.draw_pic(0.0, 0.0, "scorebar");
             self.solo_scoreboard(cl);

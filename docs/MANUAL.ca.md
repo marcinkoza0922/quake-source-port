@@ -201,8 +201,8 @@ Options → Accessibilitat:
 - Filtres per al daltonisme.
 - Punt de mira configurable: forma, mida, contorn i canvi de color sobre
   l'objectiu o en eliminar; marcadors d'impacte opcionals.
-- **Subtítols dels sons** i configuració dels missatges (Missatges i
-  subtítols), mida del text.
+- **Subtítols dels sons**; la posició, la mida i la durada dels missatges i
+  subtítols es configuren a l'editor de la interfície.
 - Atacar i córrer alternats (en lloc de mantenir premut).
 - Un control lliscant de velocitat del joc per alentir tota la partida.
 - Punteria automàtica amb indicador de fixació i ajustos de con i abast.

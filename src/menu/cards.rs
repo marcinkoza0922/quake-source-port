@@ -17,6 +17,28 @@ impl SaveSlot {
     pub fn is_autosave(&self) -> bool { self.source == SaveSource::Own && is_autosave_name(&self.name) }
 }
 
+/// Personal bests shown on save cards (`qsp_stats.json`), with the
+/// category the HUD's `hud_pb_100` prefers and its colour.
+#[derive(Clone, Debug, Default)]
+pub struct SavePb {
+    pub stats: qui::stats::Stats,
+    pub prefer_full: bool,
+    pub color: [f32; 4],
+}
+
+impl SavePb {
+    /// "PB any% 1:23.45" for the map and skill: the preferred category,
+    /// else the other one.
+    pub fn text(&self, map: &str, skill: i32) -> Option<String> {
+        let rec = self.stats.get(map)?;
+        let skill = usize::try_from(skill).ok()?;
+        let full = self.prefer_full;
+        let (t, full) = rec.pb(skill, full).map(|t| (t, full)).or_else(|| rec.pb(skill, !full).map(|t| (t, !full)))?;
+        let t = crate::sbar::time::format_timer(f64::from(t), 2);
+        Some(qcore::tr!("PB {} {}", if full { "100%" } else { "any%" }, t))
+    }
+}
+
 /// Which engine's folder a listed save comes from.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum SaveSource {
@@ -178,8 +200,18 @@ impl Menu {
                 c.text(lx + tw, y + 7.0, &map, small, MUTED);
             }
             let line = format!("{}   {}   {}", sv.when(now), qcore::lang::tr(sv.skill_name()), qcore::tr!("Time {}", sv.level_time()));
-            c.text(lx, y + 20.0, &line, small, MUTED);
+            let lw = c.text(lx, y + 20.0, &line, small, MUTED);
             let hw = c.text(lx, y + 32.0, &format!("{}   {}", qcore::tr!("Health {}", sv.health), qcore::tr!("Armor {}", sv.armor)), small, FG);
+            // the personal best after the time, or under it when the weapons leave no room
+            let mut tag_x = lx + hw + 12.0;
+            if let Some(pb) = self.save_pb.text(&sv.map, sv.skill) {
+                let px = lx + lw + 12.0;
+                if px + c.text_w(&pb, small) <= x + 218.0 {
+                    c.text(px, y + 20.0, &pb, small, self.save_pb.color);
+                } else {
+                    tag_x += c.text(tag_x, y + 32.0, &pb, small, self.save_pb.color) + 12.0;
+                }
+            }
             // .qsa saves (customized or split-screen games) that other
             // ports cannot load
             let mp = match sv.players {
@@ -192,7 +224,7 @@ impl Menu {
                 (true, true) => qcore::tr!("Customized"),
                 (false, _) => mp,
             };
-            c.text(lx + hw + 12.0, y + 32.0, &tag, small, GOLD_FG);
+            c.text(tag_x, y + 32.0, &tag, small, GOLD_FG);
             let stats = format!("{}   {}", qcore::tr!("Kills {}/{}", sv.kills.0, sv.kills.1), qcore::tr!("Secrets {}/{}", sv.secrets.0, sv.secrets.1));
             let sw = c.text(lx, y + 44.0, &stats, small, FG);
             // keys after the stats line, weapons between the text and the thumbnail

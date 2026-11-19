@@ -204,8 +204,8 @@ Options → Barrierefreiheit:
 - Filter für Farbenblindheit.
 - Einstellbares Fadenkreuz: Form, Größe, Umriss und Farbwechsel auf einem
   Ziel oder bei einem Abschuss; optionale Trefferanzeigen.
-- **Geräusch-Untertitel** und Nachrichteneinstellungen (Nachrichten &
-  Untertitel), Textgröße.
+- **Geräusch-Untertitel**; Position, Größe und Anzeigedauer von Nachrichten
+  und Untertiteln stellt man im HUD-Editor ein.
 - Angriff und Rennen umschaltbar (statt halten).
 - Ein Spieltempo-Regler, um das ganze Spiel zu verlangsamen.
 - Automatisches Zielen mit Erfassungsanzeige sowie Kegel- und

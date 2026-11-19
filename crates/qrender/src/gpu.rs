@@ -60,6 +60,8 @@ pub struct Gpu {
     pub sample_shading: bool,
     /// Nanoseconds per timestamp tick.
     pub timestamp_period: f32,
+    /// VK_EXT_memory_budget is enabled ([`Gpu::vram`]).
+    pub memory_budget: bool,
     /// Ray queries and acceleration structures (None when unsupported).
     pub rt: Option<RtFns>,
 }
@@ -164,6 +166,14 @@ impl Gpu {
         if surface_fn.is_some() {
             dev_exts.push(ash::khr::swapchain::NAME.as_ptr());
         }
+        // SAFETY: valid pdev.
+        let memory_budget = unsafe { instance.enumerate_device_extension_properties(pdev) }
+            .unwrap_or_default()
+            .iter()
+            .any(|e| e.extension_name_as_c_str() == Ok(ash::ext::memory_budget::NAME));
+        if memory_budget {
+            dev_exts.push(ash::ext::memory_budget::NAME.as_ptr());
+        }
         let rt_ok = rt::rt_supported(&instance, pdev);
         if rt_ok {
             dev_exts.extend(rt::RT_EXTENSIONS.iter().map(|n| n.as_ptr()));
@@ -240,8 +250,29 @@ impl Gpu {
             max_anisotropy,
             timestamp_period: lim.timestamp_period,
             sample_shading,
+            memory_budget,
             rt,
         })
+    }
+
+    /// Device-local memory this process uses and its budget, in bytes
+    /// (VK_EXT_memory_budget; None without it).
+    pub fn vram(&self) -> Option<(u64, u64)> {
+        if !self.memory_budget {
+            return None;
+        }
+        let mut budget = vk::PhysicalDeviceMemoryBudgetPropertiesEXT::default();
+        let heaps = {
+            let mut props = vk::PhysicalDeviceMemoryProperties2::default().push_next(&mut budget);
+            // SAFETY: valid pdev; the budget struct's extension is enabled.
+            unsafe { self.instance.get_physical_device_memory_properties2(self.pdev, &mut props) };
+            props.memory_properties
+        };
+        let n = (heaps.memory_heap_count as usize).min(vk::MAX_MEMORY_HEAPS);
+        let local: Vec<usize> = (0..n).filter(|&i| heaps.memory_heaps[i].flags.contains(vk::MemoryHeapFlags::DEVICE_LOCAL)).collect();
+        let used = local.iter().map(|&i| budget.heap_usage[i]).sum();
+        let total = local.iter().map(|&i| budget.heap_budget[i]).sum();
+        Some((used, total))
     }
 
     pub fn buffer(&mut self, size: u64, mut usage: vk::BufferUsageFlags, host: bool) -> Result<Buffer> {

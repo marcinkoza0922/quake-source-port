@@ -197,8 +197,8 @@ Options → Hygyrchedd:
 - Hidlyddion dallineb lliw.
 - Croesflew ffurfweddadwy: siâp, maint, amlinell, a newid lliw ar darged
   neu wrth ladd; marcwyr taro dewisol.
-- **Capsiynau sain** a gosodiadau negeseuon (Negeseuon a chapsiynau),
-  graddio testun.
+- **Capsiynau sain**; mae safle, maint a hyd negeseuon a chapsiynau'n cael
+  eu gosod yn y golygydd HUD.
 - Togl (yn lle dal) ar gyfer ymosod a rhedeg.
 - Llithrydd cyflymder y gêm i arafu'r gêm gyfan.
 - Anelu awtomatig gyda dangosydd cloi, a gosodiadau côn a phellter.

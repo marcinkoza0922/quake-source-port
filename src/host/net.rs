@@ -482,6 +482,7 @@ impl Host {
                     feedback = None;
                     self.feedback = Default::default();
                     self.stats_recorded = false;
+                    self.pb_new_map();
                     self.autosave.reset();
                     self.new_map();
                     self.demo_new_map();

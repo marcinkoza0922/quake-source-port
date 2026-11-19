@@ -103,9 +103,6 @@ tr Ortam Perdeleme
 @ Ammo Counts
 tr Cephane Sayıları
 
-@ Ammo Counts Position
-tr Cephane Sayıları Konumu
-
 @ Ammo Pickups
 tr Cephane Toplama
 
@@ -120,9 +117,6 @@ tr Uygula
 
 @ Armor
 tr Zırh
-
-@ Armor Position
-tr Zırh Konumu
 
 @ Ask
 tr Sor
@@ -220,9 +214,6 @@ tr Kostikler
 @ Center
 tr Orta
 
-@ Center Message Position
-tr Orta Mesaj Konumu
-
 @ Center Message Time
 tr Orta Mesaj Süresi
 
@@ -282,9 +273,6 @@ tr Nişangah Boyutu
 
 @ Current Ammo
 tr Mevcut Cephane
-
-@ Current Ammo Position
-tr Mevcut Cephane Konumu
 
 @ Customize This Game
 tr Bu Oyunu Özelleştir
@@ -469,17 +457,11 @@ tr Jiroskopla Nişan
 @ HUD
 tr HUD
 
-@ HUD Style
-tr HUD Stili
-
 @ Health
 tr Sağlık
 
 @ Health Pickups
 tr Sağlık Toplama
-
-@ Health Position
-tr Sağlık Konumu
 
 @ Health Regeneration
 tr Sağlık Yenilenmesi
@@ -589,9 +571,6 @@ tr Zıplamalar
 @ Keys & Powerups
 tr Anahtarlar ve Güçlendiriciler
 
-@ Keys & Powerups Position
-tr Anahtar ve Güçlendirici Konumu
-
 @ Kill Bonus (x)
 tr Öldürme Bonusu (x)
 
@@ -661,15 +640,6 @@ tr Maks. Menzil
 @ Melee only
 tr Yalnızca yakın dövüş
 
-@ Message Background
-tr Mesaj Arka Planı
-
-@ Message Text Size
-tr Mesaj Yazı Boyutu
-
-@ Messages & Captions
-tr Mesajlar ve Altyazılar
-
 @ Meter Duration (real seconds)
 tr Gösterge Süresi (gerçek saniye)
 
@@ -681,9 +651,6 @@ tr Mod
 
 @ Modern Console
 tr Modern Konsol
-
-@ Modern HUD Layout
-tr Modern HUD Düzeni
 
 @ Most recent save
 tr En son kayıt
@@ -732,9 +699,6 @@ tr Gürültü Filtresi
 
 @ Normal Color
 tr Normal Renk
-
-@ Notify Message Position
-tr Bildirim Konumu
 
 @ Notify Message Time
 tr Bildirim Süresi
@@ -940,17 +904,11 @@ tr Omuz üstü sol
 @ Shoulder right
 tr Omuz üstü sağ
 
-@ Show FPS
-tr FPS Göster
-
 @ Show Face
 tr Yüzü Göster
 
 @ Shrapnel
 tr Şarapnel
-
-@ Size of on-screen messages and captions
-tr Ekran mesajları ve altyazıların boyutu
 
 @ Skill
 tr Zorluk
@@ -1120,15 +1078,6 @@ tr Silah Çarkı Yavaşlatması
 @ Weapons
 tr Silahlar
 
-@ Weapons Position
-tr Silah Konumu
-
-@ Where center-screen messages appear
-tr Ekran ortası mesajlarının konumu
-
-@ Where pickup and event messages appear
-tr Toplama ve olay mesajlarının konumu
-
 @ White
 tr Beyaz
 
@@ -1168,9 +1117,6 @@ tr kutu
 
 @ broken square
 tr kesik kare
-
-@ classic
-tr klasik
 
 @ coarse
 tr kaba
@@ -1259,28 +1205,16 @@ tr yoğun
 @ large
 tr büyük
 
-@ larger
-tr daha büyük
-
-@ largest
-tr en büyük
-
 @ linear
 tr doğrusal
 
 @ low
 tr düşük
 
-@ lower
-tr alt
-
 @ magenta
 tr eflatun
 
 @ medium
-tr orta
-
-@ middle
 tr orta
 
 @ middle left
@@ -1369,9 +1303,6 @@ tr üçlü
 
 @ tritanopia
 tr tritanopi
-
-@ upper
-tr üst
 
 @ white
 tr beyaz
@@ -1496,6 +1427,211 @@ tr Pencereyle aynı
 @ GPU Encoding
 tr GPU ile kodlama
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+tr Süre ve İstatistikler
+
+@ Clock
+tr Saat
+
+@ Level Timer
+tr Bölüm Zamanlayıcısı
+
+@ Personal Best
+tr Kişisel Rekor
+
+@ Personal Best Type
+tr Rekor Türü
+
+@ Personal Best Color
+tr Rekor Rengi
+
+@ Kills
+tr Öldürmeler
+
+@ Secrets
+tr Sırlar
+
+@ 24-hour
+tr 24 saat
+
+@ 24-hour + seconds
+tr 24 saat + saniye
+
+@ 12-hour
+tr 12 saat
+
+@ 12-hour + seconds
+tr 12 saat + saniye
+
+@ count
+tr sayı
+
+@ percent
+tr yüzde
+
+@ any% and 100%
+tr any% ve 100%
+
+@ Keep Personal Best Demos
+tr Rekor Demolarını Sakla
+
+@ any%
+tr any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+tr Performans Ölçümleri
+
+@ Frame Time
+tr Kare Süresi
+
+@ CPU Usage
+tr CPU Kullanımı
+
+@ Memory Usage
+tr Bellek Kullanımı
+
+@ GPU Time
+tr GPU Süresi
+
+@ Video Memory
+tr Video Belleği
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+tr Ekle
+
+@ Ammo
+tr Cephane
+
+@ Ammo Bar
+tr Cephane Çubuğu
+
+@ Armor Bar
+tr Zırh Çubuğu
+
+@ Background
+tr Arka Plan
+
+@ Cells
+tr Hücre
+
+@ Center Message
+tr Orta Mesaj
+
+@ Columns
+tr Sütunlar
+
+@ Edit HUD
+tr HUD'yi Düzenle
+
+@ FPS
+tr FPS
+
+@ Face
+tr Yüz
+
+@ Fill Width
+tr Tam Genişlik
+
+@ Font
+tr Yazı Tipi
+
+@ Format
+tr Biçim
+
+@ HUD Editor
+tr HUD Düzenleyici
+
+@ Health Bar
+tr Sağlık Çubuğu
+
+@ Inventory
+tr Envanter
+
+@ Keys
+tr Anahtarlar
+
+@ Nails
+tr Çivi
+
+@ Notify Messages
+tr Bildirim Mesajları
+
+@ Position
+tr Konum
+
+@ Powerups
+tr Güçlendiriciler
+
+@ Precision
+tr Hassasiyet
+
+@ Quake
+tr Quake
+
+@ Rockets
+tr Roket
+
+@ Scale
+tr Ölçek
+
+@ Sections
+tr Bölümler
+
+@ Shells
+tr Fişek
+
+@ Show As
+tr Gösterim
+
+@ Show Icon
+tr Simgeyi Göster
+
+@ Show Value
+tr Değeri Göster
+
+@ Sigils
+tr Rünler
+
+@ Status
+tr Durum
+
+@ Status Bar
+tr Durum Çubuğu
+
+@ Visibility
+tr Görünürlük
+
+@ big numbers
+tr büyük rakamlar
+
+@ center
+tr orta
+
+@ status + inventory
+tr durum + envanter
+
+@ status only
+tr yalnızca durum
+
+@ Text Color
+tr Metin Rengi
+
+@ Label Color
+tr Etiket Rengi
+
+@ HUD Preset
+tr HUD Hazır Ayarı
+
+@ custom
+tr özel
+
+@ classic
+tr klasik
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ tr Leke sayısını, kalıcılığı, havadaki damlaları ve yara/et parçası l
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 tr Gölgelendirici girişini çıkış boyutuyla sınırlar; böylece %200 görüntü ölçeği 4 kat gölgelendirici maliyeti olmadan 3D netliğini korur; düşük ölçekler düşük çözünürlükte kalır
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-tr Klasik: orijinal durum çubuğu; modern: ekran kenarlarında kompakt öğeler
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 tr Kaplama atlası çözünürlüğü, yenileme sıklığı ve gölgelendirici ayrıntısı: düşük, daha küçük kaplamaları daha seyrek ve hızlı gölgelendirmeyle oluşturur; yüksek tam ayrıntı kullanır
 
@@ -1558,9 +1691,6 @@ tr Railgun'ın sarmal izinin rengi; bölünmüş ekranda her oyuncu sıradaki re
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 tr Railgun'ın içinden geçtiği her düşmana verdiği hasar (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-tr Okunabilirlik için ekran mesajlarının arkasında koyu zemin
 
 @ Dark border keeps the crosshair visible on any background
 tr Koyu kenarlık nişangahı her arka planda görünür tutar
@@ -1811,17 +1941,11 @@ tr Su ve balçık altındaki yüzeylerde dalgalanan ışık desenleri
 @ Scales all damage you take; above 100% is harder
 tr Aldığınız tüm hasarı ölçekler; %100'ün üstü daha zordur
 
-@ Screen edge for this element; elements on the same spot stack
-tr Bu öğe için ekran kenarı; aynı yerdeki öğeler üst üste dizilir
-
 @ Seconds a monster hit by the boomerang stays stunned
 tr Bumerangın vurduğu canavarın sersem kaldığı saniye
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 tr İsabet izlerinin ve saplanan çivilerin kaybolmadan önce kaldığı saniye; Parçacık Kalitesi'nden bağımsızdır
-
-@ Seconds messages at the top of the screen stay up
-tr Ekranın üstündeki mesajların kaldığı saniye
 
 @ Seconds the flick stick snap takes; lower is faster
 tr Fiske çubuğu dönüşünün süresi (saniye); düşük daha hızlıdır
@@ -1990,6 +2114,50 @@ tr Video boyutu; kareler pencere boyutundan ölçeklenir (biçimi korumak için 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 tr ffmpeg kullanabildiğinde ekran kartında kodlar (NVIDIA NVENC, VA-API üzerinden AMD veya Intel, AMF veya Quick Sync, Apple VideoToolbox) ve işlemciyi boş bırakır; yoksa işlemci kodlar
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+tr Günün saatini seçilen biçimde gösterir
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+tr Ara ekrandaki gibi bölüm süresi; duraklatınca ve çıkışta durur
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+tr any%: herhangi bir bitiş; 100%: tüm öldürmeler ve sırlar. Kayıt kartları önce bunu gösterir
+
+@ Color of the personal best on the HUD and save cards
+tr Kişisel rekorun HUD'daki ve kayıt kartlarındaki rengi
+
+@ Shown as a count or as a percentage of the level's total
+tr Sayı olarak ya da bölüm toplamının yüzdesi olarak
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+tr Kişisel rekor kıran her bölümün demosunu saklar; eskiler kalır. Otomatik kayıt kapalıyken bile kaydeder
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+tr Saniyedeki kare sayısı, yarım saniyelik ortalama
+
+@ Average time per frame in milliseconds, and the slowest frame
+tr Kare başına ortalama süre (milisaniye) ve en yavaş kare
+
+@ How busy the game keeps the processor, as a share of all its cores
+tr Oyunun işlemciyi ne kadar meşgul ettiği, tüm çekirdeklerin payı olarak
+
+@ Memory the game uses
+tr Oyunun kullandığı bellek
+
+@ Graphics card time per frame in milliseconds
+tr Kare başına ekran kartı süresi (milisaniye)
+
+@ Video memory in use and what the driver allows, where it reports it
+tr Kullanılan video belleği ve sürücünün izin verdiği miktar, bildiriyorsa
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+tr HUD öğelerini taşı, boyutlandır, ekle ve kaldır: sağlık, cephane, silahlar, zamanlayıcılar, mesajlar ve daha fazlası
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+tr Modern: ekran kenarlarında derli toplu öğeler; klasik: özgün durum çubuğu. Birini seçmek HUD'yi sıfırlar; HUD'yi Düzenle'deki değişiklikler onu özel yapar
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ tr Video dışa aktarılıyor
 @ Preparing...
 tr Hazırlanıyor...
 
+# Save cards: personal best.
+@ PB {} {}
+tr PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ tr {} yazıldı ({} sn)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 tr ffmpeg bulunamadı: {} PNG karesi ve bir WAV {} konumuna yazıldı
+
+# Personal bests.
+@ New personal best ({}): {}
+tr Yeni kişisel rekor ({}): {}

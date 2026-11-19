@@ -192,6 +192,11 @@ impl Host {
     pub(super) fn scan_saves(&mut self) {
         self.menu.save_inventory = crate::save_inventory::Inventory::new(self.fs(), crate::sbar::Pack::from_game_dirs(self.fs_snapshot.1.iter().map(String::as_str)));
         let dir = self.user_dir();
+        self.menu.save_pb = crate::menu::SavePb {
+            stats: qui::stats::Stats::load(&dir),
+            prefer_full: self.cv("hud_pb_100") != 0.0,
+            color: crate::reticle::color_of(&self.server.core.cvars, "hud_pb_color"),
+        };
         let mut all: Vec<crate::menu::SaveSlot> = qcore::vfs::read_dir(&dir).into_iter().flatten().filter_map(|entry| {
             let path = entry.path;
             if !matches!(path.extension()?.to_str()?, crate::autosave::SAVE_EXT | crate::autosave::ADDON_EXT) { return None; }

@@ -20,6 +20,11 @@ pub(super) fn keywords(item: Item) -> &'static str {
         Item::ResetBinds => "keys bindings defaults",
         Item::ResetShaderParams => "crt defaults",
         Item::Color { .. } => "colour team",
+        // the HUD editor holds the elements that had their own rows
+        Item::Run { run: Run::EditHud, .. } => {
+            "layout interface move position health armor ammo weapons keys clock timer personal best kills secrets fps \
+             framerate performance cpu gpu memory messages captions subtitles text font"
+        }
         _ => "",
     }
 }
@@ -44,8 +49,6 @@ pub(super) fn page_keywords(p: Page) -> &'static str {
         Page::Autosave => "checkpoint",
         Page::AutoAim => "aim assist lock-on lockon",
         Page::GrenadeArc => "trajectory aim",
-        Page::HudLayout => "interface health armor ammo",
-        Page::Messages => "subtitles captions text",
         Page::Crosshair => "reticle aim hitmarker",
         Page::Water => "liquid lava slime reflections",
         Page::Bloom => "light lighting glow bright",
@@ -126,13 +129,10 @@ fn cvar_keywords(cvar: &str) -> &'static str {
         "in_toggleattack" | "in_togglerun" => "hold",
         "a11y_gamespeed" => "slow motion timescale difficulty",
         "assist_autoaim" => "aim assist lock-on lockon",
-        "scr_hudstyle" => "interface status bar sbar modern classic",
+        "hud_preset" => "interface layout status bar sbar modern classic custom",
         "hud_damageindicator" => "damage direction",
         "cl_wheel_timescale" => "slow motion",
-        "scr_showfps" => "framerate frame rate counter performance",
         "con_modern" => "terminal",
-        "scr_centerpos" | "scr_centertime" | "con_notifypos" | "con_notifytime" => "text",
-        "scr_textscale" => "font text",
         "cl_captions" => "subtitles closed captions deaf",
         "volume" => "sfx effects audio loudness",
         "bgmvolume" => "soundtrack cd audio loudness",

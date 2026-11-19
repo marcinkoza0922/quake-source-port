@@ -103,9 +103,6 @@ yue 環境光遮蔽
 @ Ammo Counts
 yue 彈藥數量
 
-@ Ammo Counts Position
-yue 彈藥數量位置
-
 @ Ammo Pickups
 yue 彈藥拾取
 
@@ -120,9 +117,6 @@ yue 套用到
 
 @ Armor
 yue 護甲
-
-@ Armor Position
-yue 護甲位置
 
 @ Ask
 yue 問我
@@ -220,9 +214,6 @@ yue 焦散
 @ Center
 yue 置中
 
-@ Center Message Position
-yue 中央訊息位置
-
 @ Center Message Time
 yue 中央訊息時間
 
@@ -282,9 +273,6 @@ yue 準星大小
 
 @ Current Ammo
 yue 而家彈藥
-
-@ Current Ammo Position
-yue 而家彈藥位置
 
 @ Customize This Game
 yue 自訂呢場遊戲
@@ -469,17 +457,11 @@ yue 陀螺儀瞄準
 @ HUD
 yue HUD
 
-@ HUD Style
-yue HUD樣式
-
 @ Health
 yue 生命值
 
 @ Health Pickups
 yue 生命值拾取
-
-@ Health Position
-yue 生命值位置
 
 @ Health Regeneration
 yue 生命值回復
@@ -589,9 +571,6 @@ yue 跳躍次數
 @ Keys & Powerups
 yue 鎖匙同強化道具
 
-@ Keys & Powerups Position
-yue 鎖匙同強化道具位置
-
 @ Kill Bonus (x)
 yue 殺敵加成（倍）
 
@@ -661,15 +640,6 @@ yue 最大射程
 @ Melee only
 yue 只限近戰
 
-@ Message Background
-yue 訊息背景
-
-@ Message Text Size
-yue 訊息文字大小
-
-@ Messages & Captions
-yue 訊息同字幕
-
 @ Meter Duration (real seconds)
 yue 計量條時間（真實秒數）
 
@@ -681,9 +651,6 @@ yue 模式
 
 @ Modern Console
 yue 現代控制台
-
-@ Modern HUD Layout
-yue 現代HUD版面
 
 @ Most recent save
 yue 最新存檔
@@ -732,9 +699,6 @@ yue 雜訊過濾
 
 @ Normal Color
 yue 一般顏色
-
-@ Notify Message Position
-yue 通知訊息位置
 
 @ Notify Message Time
 yue 通知訊息時間
@@ -940,17 +904,11 @@ yue 左膊頭視角
 @ Shoulder right
 yue 右膊頭視角
 
-@ Show FPS
-yue 顯示FPS
-
 @ Show Face
 yue 顯示塊面
 
 @ Shrapnel
 yue 破片
-
-@ Size of on-screen messages and captions
-yue 畫面訊息同字幕嘅大小
 
 @ Skill
 yue 難度
@@ -1120,15 +1078,6 @@ yue 武器輪盤減速
 @ Weapons
 yue 武器
 
-@ Weapons Position
-yue 武器位置
-
-@ Where center-screen messages appear
-yue 畫面中央訊息喺邊度出現
-
-@ Where pickup and event messages appear
-yue 拾取同事件訊息喺邊度出現
-
 @ White
 yue 白
 
@@ -1168,9 +1117,6 @@ yue 方框
 
 @ broken square
 yue 斷線方框
-
-@ classic
-yue 經典
 
 @ coarse
 yue 粗略
@@ -1259,29 +1205,17 @@ yue 強烈
 @ large
 yue 大
 
-@ larger
-yue 較大
-
-@ largest
-yue 最大
-
 @ linear
 yue 線性
 
 @ low
 yue 低
 
-@ lower
-yue 下方
-
 @ magenta
 yue 洋紅
 
 @ medium
 yue 中
-
-@ middle
-yue 中間
 
 @ middle left
 yue 左側中間
@@ -1369,9 +1303,6 @@ yue 三段跳
 
 @ tritanopia
 yue 藍色盲
-
-@ upper
-yue 上方
 
 @ white
 yue 白
@@ -1496,6 +1427,211 @@ yue 同視窗一樣
 @ GPU Encoding
 yue GPU 編碼
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+yue 時間同統計
+
+@ Clock
+yue 時鐘
+
+@ Level Timer
+yue 關卡計時器
+
+@ Personal Best
+yue 個人最佳
+
+@ Personal Best Type
+yue 個人最佳類型
+
+@ Personal Best Color
+yue 個人最佳顏色
+
+@ Kills
+yue 擊殺
+
+@ Secrets
+yue 秘密
+
+@ 24-hour
+yue 24 小時制
+
+@ 24-hour + seconds
+yue 24 小時制 + 秒
+
+@ 12-hour
+yue 12 小時制
+
+@ 12-hour + seconds
+yue 12 小時制 + 秒
+
+@ count
+yue 數量
+
+@ percent
+yue 百分比
+
+@ any% and 100%
+yue any% 同 100%
+
+@ Keep Personal Best Demos
+yue 保留個人最佳示範
+
+@ any%
+yue any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+yue 效能指標
+
+@ Frame Time
+yue 影格時間
+
+@ CPU Usage
+yue CPU 使用率
+
+@ Memory Usage
+yue 記憶體用量
+
+@ GPU Time
+yue GPU 時間
+
+@ Video Memory
+yue 顯示記憶體
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+yue 加入
+
+@ Ammo
+yue 彈藥
+
+@ Ammo Bar
+yue 彈藥條
+
+@ Armor Bar
+yue 護甲條
+
+@ Background
+yue 背景
+
+@ Cells
+yue 電池
+
+@ Center Message
+yue 中央訊息
+
+@ Columns
+yue 欄數
+
+@ Edit HUD
+yue 編輯 HUD
+
+@ FPS
+yue FPS
+
+@ Face
+yue 樣
+
+@ Fill Width
+yue 全闊
+
+@ Font
+yue 字型
+
+@ Format
+yue 格式
+
+@ HUD Editor
+yue HUD 編輯器
+
+@ Health Bar
+yue 生命條
+
+@ Inventory
+yue 隨身物品
+
+@ Keys
+yue 鎖匙
+
+@ Nails
+yue 鐵釘
+
+@ Notify Messages
+yue 通知訊息
+
+@ Position
+yue 位置
+
+@ Powerups
+yue 強化道具
+
+@ Precision
+yue 精確度
+
+@ Quake
+yue Quake
+
+@ Rockets
+yue 火箭
+
+@ Scale
+yue 比例
+
+@ Sections
+yue 部分
+
+@ Shells
+yue 散彈
+
+@ Show As
+yue 顯示方式
+
+@ Show Icon
+yue 顯示圖示
+
+@ Show Value
+yue 顯示數值
+
+@ Sigils
+yue 符印
+
+@ Status
+yue 狀態
+
+@ Status Bar
+yue 狀態列
+
+@ Visibility
+yue 顯示
+
+@ big numbers
+yue 大數字
+
+@ center
+yue 中間
+
+@ status + inventory
+yue 狀態＋隨身物品
+
+@ status only
+yue 淨係狀態
+
+@ Text Color
+yue 文字顏色
+
+@ Label Color
+yue 標籤顏色
+
+@ HUD Preset
+yue HUD 預設
+
+@ custom
+yue 自訂
+
+@ classic
+yue 經典
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ yue 限制痕跡數量、留存時間、空中血滴同傷口／碎肉血漬；�
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 yue 將著色器輸入限制喺輸出尺寸，等200%渲染比例保持3D清晰度又唔使4倍著色器負擔；低比例就維持低解像度
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-yue 經典：原版狀態列；現代：擺喺畫面邊緣嘅精簡元素
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 yue 塗層圖集解像度、重建頻率同著色細節：低會用較低頻率建立較細嘅塗層同用快速著色；高就用完整細節
 
@@ -1558,9 +1691,6 @@ yue 磁軌炮螺旋軌跡嘅顏色；分割畫面入面每位玩家順序用下�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 yue 磁軌炮對每個貫穿嘅敵人造成嘅傷害（Quake III：100）
-
-@ Dark backdrop behind on-screen messages for readability
-yue 喺畫面訊息後面加深色底，方便閱讀
 
 @ Dark border keeps the crosshair visible on any background
 yue 深色外框令準星喺任何背景都睇得清楚
@@ -1811,17 +1941,11 @@ yue 水同黏液下面表面嘅波動光紋
 @ Scales all damage you take; above 100% is harder
 yue 調整你受到嘅所有傷害；高過100%會更難
 
-@ Screen edge for this element; elements on the same spot stack
-yue 呢個元素所在嘅畫面邊緣；同一位置嘅元素會疊埋一齊
-
 @ Seconds a monster hit by the boomerang stays stunned
 yue 俾迴力鏢打中嘅怪物暈幾多秒
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 yue 彈痕同插住嘅鐵釘淡出前留幾多秒；同粒子質素無關
-
-@ Seconds messages at the top of the screen stay up
-yue 畫面上方訊息停留幾多秒
 
 @ Seconds the flick stick snap takes; lower is faster
 yue 甩桿轉向需要嘅秒數；越低越快
@@ -1990,6 +2114,50 @@ yue 影片尺寸；影格係由視窗尺寸縮放出嚟（加黑邊保持比例�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 yue ffmpeg 用得到嘅話就喺顯示卡度編碼（NVIDIA NVENC、經 VA-API 嘅 AMD 或者 Intel、AMF 或者 Quick Sync、Apple VideoToolbox），等處理器得閒；否則由處理器編碼
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+yue 用揀咗嘅格式顯示而家幾點
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+yue 關卡時間，同過場畫面一樣；暫停同到出口嗰陣會停
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+yue any%：點樣通關都得；100%：全部擊殺同秘密。存檔卡片會先顯示呢個
+
+@ Color of the personal best on the HUD and save cards
+yue HUD 同存檔卡片上個人最佳嘅顏色
+
+@ Shown as a count or as a percentage of the level's total
+yue 用數量或者關卡總數嘅百分比顯示
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+yue 保留每個破個人最佳嘅關卡示範；舊嘅都會留低。就算熄咗自動錄影都會錄
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+yue 每秒影格數，攞半秒平均
+
+@ Average time per frame in milliseconds, and the slowest frame
+yue 每格平均用時（毫秒）同最慢嗰格
+
+@ How busy the game keeps the processor, as a share of all its cores
+yue 遊戲用咗處理器幾多，以全部核心嘅比例計
+
+@ Memory the game uses
+yue 遊戲用緊嘅記憶體
+
+@ Graphics card time per frame in milliseconds
+yue 每格顯示卡用時（毫秒）
+
+@ Video memory in use and what the driver allows, where it reports it
+yue 用緊嘅顯示記憶體同驅動程式容許嘅上限（如果有報告）
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+yue 移動、縮放、加入同移除 HUD 元素：生命、彈藥、武器、計時器、訊息等等
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+yue 現代：畫面邊緣嘅精簡元素；經典：原本嘅狀態列。揀一個會重設 HUD；喺編輯 HUD 度改過就會變成自訂
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ yue 匯出緊影片
 @ Preparing...
 yue 準備緊...
 
+# Save cards: personal best.
+@ PB {} {}
+yue PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ yue 寫咗 {}（{} 秒）
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 yue 搵唔到 ffmpeg：寫咗 {} 格 PNG 同一個 WAV 去 {}
+
+# Personal bests.
+@ New personal best ({}): {}
+yue 新嘅個人最佳（{}）：{}

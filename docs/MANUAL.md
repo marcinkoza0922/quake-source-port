@@ -180,8 +180,8 @@ Options → Accessibility:
 - Colour-blind filters.
 - Configurable crosshair: shape, size, outline, and colour changes when on
   target or on a kill; optional hit markers.
-- **Sound captions** and message settings (Messages & Captions), text
-  scaling.
+- **Sound captions**; where messages and captions appear, their size and how
+  long they stay up are set in the HUD editor (Options → HUD → Edit HUD).
 - Toggle (instead of hold) attack and run.
 - A game-speed slider for slowing the whole game down.
 - Auto-aim with a lock indicator, cone and range settings.

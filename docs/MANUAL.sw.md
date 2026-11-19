@@ -201,8 +201,8 @@ Options → Ufikivu:
 - Vichujio vya upofu wa rangi.
 - Kilenga kinachorekebishika: umbo, ukubwa, ukingo, na kubadilika rangi
   ukilenga au ukiua; alama za kugonga za hiari.
-- **Manukuu ya Sauti** na mipangilio ya ujumbe (Ujumbe na Manukuu),
-  ukubwa wa maandishi.
+- **Manukuu ya Sauti**; nafasi, ukubwa na muda wa ujumbe na manukuu huwekwa
+  katika kihariri cha HUD.
 - Shambulio na kukimbia kwa kubadili (badala ya kushikilia).
 - Kitelezi cha kasi ya mchezo ili kupunguza kasi ya mchezo mzima.
 - Kulenga kiotomatiki chenye kiashiria cha kufunga lengo, na mipangilio ya

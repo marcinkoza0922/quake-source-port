@@ -103,9 +103,6 @@ la Occlusio ambiens
 @ Ammo Counts
 la Numeri munitionum
 
-@ Ammo Counts Position
-la Locus numerorum munitionum
-
 @ Ammo Pickups
 la Munitiones collectae
 
@@ -120,9 +117,6 @@ la Adhibere ad
 
 @ Armor
 la Lorica
-
-@ Armor Position
-la Locus loricae
 
 @ Ask
 la Rogare
@@ -220,9 +214,6 @@ la Caustica
 @ Center
 la Medium
 
-@ Center Message Position
-la Locus nuntiorum mediorum
-
 @ Center Message Time
 la Duratio nuntiorum mediorum
 
@@ -282,9 +273,6 @@ la Magnitudo reticuli
 
 @ Current Ammo
 la Munitio praesens
-
-@ Current Ammo Position
-la Locus munitionis praesentis
 
 @ Customize This Game
 la Hunc lusum accommodare
@@ -469,17 +457,11 @@ la Collimatio gyroscopica
 @ HUD
 la HUD
 
-@ HUD Style
-la Stilus HUD
-
 @ Health
 la Salus
 
 @ Health Pickups
 la Salus collecta
-
-@ Health Position
-la Locus salutis
 
 @ Health Regeneration
 la Regeneratio salutis
@@ -589,9 +571,6 @@ la Saltus
 @ Keys & Powerups
 la Claves et potentiae
 
-@ Keys & Powerups Position
-la Locus clavium et potentiarum
-
 @ Kill Bonus (x)
 la Praemium caedis (x)
 
@@ -661,15 +640,6 @@ la Spatium maximum
 @ Melee only
 la Comminus tantum
 
-@ Message Background
-la Fundus nuntiorum
-
-@ Message Text Size
-la Magnitudo textus nuntiorum
-
-@ Messages & Captions
-la Nuntii et subscriptiones
-
 @ Meter Duration (real seconds)
 la Duratio mensurae (secundae verae)
 
@@ -681,9 +651,6 @@ la Modus
 
 @ Modern Console
 la Consolatorium modernum
-
-@ Modern HUD Layout
-la Dispositio HUD moderna
 
 @ Most recent save
 la Servatio recentissima
@@ -732,9 +699,6 @@ la Filtrum strepitus
 
 @ Normal Color
 la Color solitus
-
-@ Notify Message Position
-la Locus notitiarum
 
 @ Notify Message Time
 la Duratio notitiarum
@@ -940,17 +904,11 @@ la Umerus sinister
 @ Shoulder right
 la Umerus dexter
 
-@ Show FPS
-la FPS monstrare
-
 @ Show Face
 la Vultum monstrare
 
 @ Shrapnel
 la Schidiae
-
-@ Size of on-screen messages and captions
-la Magnitudo nuntiorum et subscriptionum in quadro
 
 @ Skill
 la Difficultas
@@ -1120,15 +1078,6 @@ la Retardatio rotae telorum
 @ Weapons
 la Tela
 
-@ Weapons Position
-la Locus telorum
-
-@ Where center-screen messages appear
-la Ubi nuntii in medio quadro appareant
-
-@ Where pickup and event messages appear
-la Ubi nuntii rerum collectarum et eventuum appareant
-
 @ White
 la Albus
 
@@ -1168,9 +1117,6 @@ la quadratum
 
 @ broken square
 la quadratum fractum
-
-@ classic
-la classicus
 
 @ coarse
 la crassum
@@ -1259,29 +1205,17 @@ la intensus
 @ large
 la magnus
 
-@ larger
-la maior
-
-@ largest
-la maximus
-
 @ linear
 la linearis
 
 @ low
 la humilis
 
-@ lower
-la inferior
-
 @ magenta
 la magenta
 
 @ medium
 la media
-
-@ middle
-la medium
 
 @ middle left
 la medio sinistro
@@ -1369,9 +1303,6 @@ la triplex
 
 @ tritanopia
 la tritanopia
-
-@ upper
-la superior
 
 @ white
 la albus
@@ -1496,6 +1427,211 @@ la Ut fenestra
 @ GPU Encoding
 la Codificatio GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+la Tempus et numeri
+
+@ Clock
+la Horologium
+
+@ Level Timer
+la Chronometrum gradus
+
+@ Personal Best
+la Optimum proprium
+
+@ Personal Best Type
+la Genus optimi
+
+@ Personal Best Color
+la Color optimi
+
+@ Kills
+la Caedes
+
+@ Secrets
+la Arcana
+
+@ 24-hour
+la Horae XXIV
+
+@ 24-hour + seconds
+la Horae XXIV + secunda
+
+@ 12-hour
+la Horae XII
+
+@ 12-hour + seconds
+la Horae XII + secunda
+
+@ count
+la numerus
+
+@ percent
+la centesimae
+
+@ any% and 100%
+la any% et 100%
+
+@ Keep Personal Best Demos
+la Serva demonstrationes optimorum
+
+@ any%
+la any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+la Mensurae efficientiae
+
+@ Frame Time
+la Tempus imaginis
+
+@ CPU Usage
+la Usus processoris
+
+@ Memory Usage
+la Usus memoriae
+
+@ GPU Time
+la Tempus GPU
+
+@ Video Memory
+la Memoria video
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+la Adde
+
+@ Ammo
+la Tela
+
+@ Ammo Bar
+la Virga telorum
+
+@ Armor Bar
+la Virga loricae
+
+@ Background
+la Fundus
+
+@ Cells
+la Cellae
+
+@ Center Message
+la Nuntius medius
+
+@ Columns
+la Columnae
+
+@ Edit HUD
+la HUD muta
+
+@ FPS
+la FPS
+
+@ Face
+la Facies
+
+@ Fill Width
+la Tota latitudo
+
+@ Font
+la Litterae
+
+@ Format
+la Forma
+
+@ HUD Editor
+la Editor HUD
+
+@ Health Bar
+la Virga valetudinis
+
+@ Inventory
+la Supellex
+
+@ Keys
+la Claves
+
+@ Nails
+la Clavi
+
+@ Notify Messages
+la Notitiae
+
+@ Position
+la Locus
+
+@ Powerups
+la Potentiae
+
+@ Precision
+la Subtilitas
+
+@ Quake
+la Quake
+
+@ Rockets
+la Rochetae
+
+@ Scale
+la Magnitudo
+
+@ Sections
+la Partes
+
+@ Shells
+la Tubuli
+
+@ Show As
+la Ostende ut
+
+@ Show Icon
+la Ostende iconem
+
+@ Show Value
+la Ostende valorem
+
+@ Sigils
+la Sigilla
+
+@ Status
+la Status
+
+@ Status Bar
+la Virga status
+
+@ Visibility
+la Visibilitas
+
+@ big numbers
+la numeri magni
+
+@ center
+la medium
+
+@ status + inventory
+la status + supellex
+
+@ status only
+la status solus
+
+@ Text Color
+la Color textus
+
+@ Label Color
+la Color titulorum
+
+@ HUD Preset
+la Praeformatio HUD
+
+@ custom
+la propria
+
+@ classic
+la classicus
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ la Numerum et durationem vestigiorum, guttas volantes et maculas vulnerum/frusto
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 la Initum shader ad magnitudinem exitus terminat, ut scala reddendi 200% aciem 3D sine quadruplici impensa shader servet; scalae humiles resolutione humili manent
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-la Classicus: tabula status originalis; modernus: elementa compacta in marginibus quadri
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 la Resolutio atlantis tegumentorum, frequentia reficiendi et subtilitas shader: humilis tegumenta minora rarius cum umbratione celeri facit; alta plenam subtilitatem adhibet
 
@@ -1558,9 +1691,6 @@ la Color vestigii spiralis railgun; in quadro diviso quisque lusor colorem seque
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 la Damnum quod railgun cuique hosti transfixo infert (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-la Fundus obscurus post nuntios in quadro, ut facilius legantur
 
 @ Dark border keeps the crosshair visible on any background
 la Margo obscurus reticulum in quovis fundo conspicuum servat
@@ -1811,17 +1941,11 @@ la Figurae lucis undulantes in superficiebus sub aqua et limo
 @ Scales all damage you take; above 100% is harder
 la Omne damnum acceptum scalat; supra 100% difficilius est
 
-@ Screen edge for this element; elements on the same spot stack
-la Margo quadri huius elementi; elementa eodem loco cumulantur
-
 @ Seconds a monster hit by the boomerang stays stunned
 la Secundae quibus monstrum boomerang ictum stupefactum manet
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 la Secundae quibus vestigia ictuum et clavi fixi manent antequam evanescant; a Qualitate particularum independens
-
-@ Seconds messages at the top of the screen stay up
-la Secundae quibus nuntii in summo quadro manent
 
 @ Seconds the flick stick snap takes; lower is faster
 la Secundae quas saltus flick stick sumit; minus celerius est
@@ -1990,6 +2114,50 @@ la Magnitudo pelliculae; imagines ex magnitudine fenestrae mutantur (cum fasciis
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 la In charta graphica codificat (NVIDIA NVENC, AMD vel Intel per VA-API, AMF vel Quick Sync, Apple VideoToolbox) cum ffmpeg ea uti potest, processorem liberum relinquens; aliter processor codificat
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+la Horam diei forma electa ostendit
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+la Tempus gradus, ut in tabula intermissionis; in pausa et ad exitum consistit
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+la any%: quilibet finis; 100%: omnes caedes et arcana. Chartae servatorum hoc primum ostendunt
+
+@ Color of the personal best on the HUD and save cards
+la Color optimi proprii in HUD et chartis servatorum
+
+@ Shown as a count or as a percentage of the level's total
+la Ut numerus vel ut pars centesima summae gradus
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+la Demonstrationem cuiusque gradus novum optimum facientis servat; veteres manent. Etiam sine demonstrationibus automaticis inscribit
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+la Imagines per secundum, media dimidii secundi
+
+@ Average time per frame in milliseconds, and the slowest frame
+la Tempus medium cuiusque imaginis in millesimis secundi, et imago tardissima
+
+@ How busy the game keeps the processor, as a share of all its cores
+la Quantum ludus processorem occupat, ut pars omnium nucleorum
+
+@ Memory the game uses
+la Memoria quam ludus adhibet
+
+@ Graphics card time per frame in milliseconds
+la Tempus chartae graphicae per imaginem in millesimis secundi
+
+@ Video memory in use and what the driver allows, where it reports it
+la Memoria video in usu et quantum rector permittit, ubi id nuntiat
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+la Move, magnitudinem muta, adde et remove partes HUD: valetudinem, tela, arma, horologia, nuntios et plura
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+la Moderna: partes compactae ad oras visorii; classica: virga status originalis. Electio HUD restituit; mutationes in HUD muta eam propriam faciunt
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ la Pellicula exportatur
 @ Preparing...
 la Paratur...
 
+# Save cards: personal best.
+@ PB {} {}
+la PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ la Scriptum {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 la ffmpeg non inventum: {} imagines PNG et WAV in {} scriptae
+
+# Personal bests.
+@ New personal best ({}): {}
+la Novum optimum proprium ({}): {}

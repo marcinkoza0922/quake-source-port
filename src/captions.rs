@@ -2,7 +2,7 @@
 //! bottom of the screen for sounds that carry gameplay information.
 
 use crate::console::TEXT_BG;
-use crate::draw::{Canvas, WHITE};
+use crate::draw::Canvas;
 use crate::font::Shape;
 
 /// How long a caption stays up, in seconds.
@@ -104,19 +104,19 @@ impl Captions {
 
     /// Draws the live captions centred just above `bottom` (virtual units)
     /// in the modern UI font; `scale` is `scr_textscale`.
-    pub fn draw(&mut self, c: &mut Canvas, now: f64, bottom: f32, scale: f32) {
+    /// Draws the captions centred on `cx`, the last one ending at `bottom`.
+    pub fn draw(&mut self, c: &mut Canvas, now: f64, (cx, bottom): (f32, f32), scale: f32, color: [f32; 4]) {
         self.shown.retain(|e| now - e.1 < HOLD && e.1 <= now);
         if self.shown.is_empty() {
             return;
         }
         if c.ui.is_none() {
-            return self.draw_classic(c, bottom, scale);
+            return self.draw_classic(c, (cx, bottom), scale, color);
         }
         c.reset_origin();
         let size = 8.0 * scale.clamp(1.0, 3.0);
         let (pad_x, pad_y, gap) = (size * 0.6, size * 0.3, size * 0.25);
         let row = size + pad_y * 2.0 + gap;
-        let cx = c.vw() / 2.0;
         let mut y = bottom - row * self.shown.len() as f32;
         let r = c.upx(size * 0.35);
         for &(text, _, n) in &self.shown {
@@ -124,26 +124,25 @@ impl Captions {
             let s = if n > 1 { format!("{text}  x{n}") } else { text.to_string() };
             let w = c.text_w(&s, size);
             c.shape(cx - w / 2.0 - pad_x, y, w + pad_x * 2.0, size + pad_y * 2.0, Shape::Round { r }, TEXT_BG);
-            c.text_center(cx, y + pad_y, &s, size, WHITE);
+            c.text_center(cx, y + pad_y, &s, size, color);
             y += row;
         }
     }
 
     /// conchars fallback when the UI font atlas isn't available.
-    fn draw_classic(&self, c: &mut Canvas, bottom: f32, scale: f32) {
+    fn draw_classic(&self, c: &mut Canvas, (cx, bottom): (f32, f32), scale: f32, color: [f32; 4]) {
         let base = c.scale;
         c.scale = (base * scale.clamp(1.0, 3.0)).round().max(1.0);
-        let bottom = bottom * base / c.scale;
+        let (cx, bottom) = (cx * base / c.scale, bottom * base / c.scale);
         c.reset_origin();
-        let vw = c.vw();
         let mut y = bottom - 12.0 * self.shown.len() as f32;
         for &(text, _, n) in &self.shown {
             let text = qcore::lang::tr(text);
             let s = if n > 1 { format!("{text} x{n}") } else { text.to_string() };
             let w = c.ptext_w(&s);
-            let x = ((vw - w) / 2.0).floor();
+            let x = (cx - w / 2.0).floor();
             c.fill(x - 4.0, y - 2.0, w + 8.0, 12.0, TEXT_BG);
-            c.ptext(x, y, &s, WHITE);
+            c.ptext(x, y, &s, color);
             y += 12.0;
         }
         c.scale = base;

@@ -103,9 +103,6 @@ ja アンビエントオクルージョン
 @ Ammo Counts
 ja 弾数
 
-@ Ammo Counts Position
-ja 弾数の位置
-
 @ Ammo Pickups
 ja 弾薬アイテム
 
@@ -120,9 +117,6 @@ ja 適用対象
 
 @ Armor
 ja アーマー
-
-@ Armor Position
-ja アーマーの位置
 
 @ Ask
 ja 確認する
@@ -220,9 +214,6 @@ ja コースティクス
 @ Center
 ja 中央
 
-@ Center Message Position
-ja 中央メッセージの位置
-
 @ Center Message Time
 ja 中央メッセージの表示時間
 
@@ -282,9 +273,6 @@ ja クロスヘアのサイズ
 
 @ Current Ammo
 ja 現在の弾薬
-
-@ Current Ammo Position
-ja 現在の弾薬の位置
 
 @ Customize This Game
 ja このゲームをカスタマイズ
@@ -469,17 +457,11 @@ ja ジャイロエイム
 @ HUD
 ja HUD
 
-@ HUD Style
-ja HUDスタイル
-
 @ Health
 ja 体力
 
 @ Health Pickups
 ja 体力アイテム
-
-@ Health Position
-ja 体力の位置
 
 @ Health Regeneration
 ja 体力回復
@@ -589,9 +571,6 @@ ja ジャンプ回数
 @ Keys & Powerups
 ja 鍵＆パワーアップ
 
-@ Keys & Powerups Position
-ja 鍵＆パワーアップの位置
-
 @ Kill Bonus (x)
 ja キルボーナス（x）
 
@@ -661,15 +640,6 @@ ja 最大射程
 @ Melee only
 ja 近接のみ
 
-@ Message Background
-ja メッセージ背景
-
-@ Message Text Size
-ja メッセージ文字サイズ
-
-@ Messages & Captions
-ja メッセージ＆字幕
-
 @ Meter Duration (real seconds)
 ja ゲージ持続時間（実時間秒）
 
@@ -681,9 +651,6 @@ ja モード
 
 @ Modern Console
 ja モダンコンソール
-
-@ Modern HUD Layout
-ja モダンHUDレイアウト
 
 @ Most recent save
 ja 最新のセーブ
@@ -732,9 +699,6 @@ ja ノイズフィルター
 
 @ Normal Color
 ja 通常の色
-
-@ Notify Message Position
-ja 通知メッセージの位置
 
 @ Notify Message Time
 ja 通知メッセージの表示時間
@@ -940,17 +904,11 @@ ja 左肩越し
 @ Shoulder right
 ja 右肩越し
 
-@ Show FPS
-ja FPSを表示
-
 @ Show Face
 ja 顔を表示
 
 @ Shrapnel
 ja 榴散弾
-
-@ Size of on-screen messages and captions
-ja 画面メッセージと字幕のサイズ
 
 @ Skill
 ja 難易度
@@ -1120,15 +1078,6 @@ ja 武器ホイール中の減速
 @ Weapons
 ja 武器
 
-@ Weapons Position
-ja 武器の位置
-
-@ Where center-screen messages appear
-ja 中央メッセージの表示位置
-
-@ Where pickup and event messages appear
-ja 取得・イベントメッセージの表示位置
-
 @ White
 ja 白
 
@@ -1168,9 +1117,6 @@ ja 四角
 
 @ broken square
 ja 欠けた四角
-
-@ classic
-ja クラシック
 
 @ coarse
 ja 粗い
@@ -1259,29 +1205,17 @@ ja 強烈
 @ large
 ja 大
 
-@ larger
-ja より大
-
-@ largest
-ja 最大
-
 @ linear
 ja リニア
 
 @ low
 ja 低
 
-@ lower
-ja 下
-
 @ magenta
 ja マゼンタ
 
 @ medium
 ja 中
-
-@ middle
-ja 中央
 
 @ middle left
 ja 左中央
@@ -1369,9 +1303,6 @@ ja 3段
 
 @ tritanopia
 ja 3型色覚
-
-@ upper
-ja 上
 
 @ white
 ja 白
@@ -1496,6 +1427,211 @@ ja ウィンドウと同じ
 @ GPU Encoding
 ja GPU エンコード
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ja 時間と統計
+
+@ Clock
+ja 時計
+
+@ Level Timer
+ja レベルタイマー
+
+@ Personal Best
+ja 自己ベスト
+
+@ Personal Best Type
+ja 自己ベストの種類
+
+@ Personal Best Color
+ja 自己ベストの色
+
+@ Kills
+ja 撃破数
+
+@ Secrets
+ja シークレット
+
+@ 24-hour
+ja 24時間
+
+@ 24-hour + seconds
+ja 24時間＋秒
+
+@ 12-hour
+ja 12時間
+
+@ 12-hour + seconds
+ja 12時間＋秒
+
+@ count
+ja 数
+
+@ percent
+ja 割合
+
+@ any% and 100%
+ja any%と100%
+
+@ Keep Personal Best Demos
+ja 自己ベストのデモを保存
+
+@ any%
+ja any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ja パフォーマンス指標
+
+@ Frame Time
+ja フレーム時間
+
+@ CPU Usage
+ja CPU使用率
+
+@ Memory Usage
+ja メモリ使用量
+
+@ GPU Time
+ja GPU時間
+
+@ Video Memory
+ja ビデオメモリ
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+ja 追加
+
+@ Ammo
+ja 弾薬
+
+@ Ammo Bar
+ja 弾薬バー
+
+@ Armor Bar
+ja アーマーバー
+
+@ Background
+ja 背景
+
+@ Cells
+ja セル
+
+@ Center Message
+ja 中央メッセージ
+
+@ Columns
+ja 列数
+
+@ Edit HUD
+ja HUDを編集
+
+@ FPS
+ja FPS
+
+@ Face
+ja 顔
+
+@ Fill Width
+ja 横幅いっぱい
+
+@ Font
+ja フォント
+
+@ Format
+ja 形式
+
+@ HUD Editor
+ja HUDエディター
+
+@ Health Bar
+ja 体力バー
+
+@ Inventory
+ja 所持品
+
+@ Keys
+ja 鍵
+
+@ Nails
+ja ネイル
+
+@ Notify Messages
+ja 通知メッセージ
+
+@ Position
+ja 位置
+
+@ Powerups
+ja パワーアップ
+
+@ Precision
+ja 精度
+
+@ Quake
+ja Quake
+
+@ Rockets
+ja ロケット
+
+@ Scale
+ja 拡大率
+
+@ Sections
+ja 表示範囲
+
+@ Shells
+ja シェル
+
+@ Show As
+ja 表示形式
+
+@ Show Icon
+ja アイコンを表示
+
+@ Show Value
+ja 値を表示
+
+@ Sigils
+ja シジル
+
+@ Status
+ja ステータス
+
+@ Status Bar
+ja ステータスバー
+
+@ Visibility
+ja 表示
+
+@ big numbers
+ja 大きな数字
+
+@ center
+ja 中央
+
+@ status + inventory
+ja ステータス＋所持品
+
+@ status only
+ja ステータスのみ
+
+@ Text Color
+ja 文字の色
+
+@ Label Color
+ja ラベルの色
+
+@ HUD Preset
+ja HUDプリセット
+
+@ custom
+ja カスタム
+
+@ classic
+ja クラシック
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ ja 跡の数、持続時間、空中の飛沫、傷や肉片の跡を制限し�
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 ja シェーダー入力を出力サイズに制限し、レンダースケール200%でもシェーダー負荷を4倍にせず3Dの鮮明さを保ちます。低スケールは低解像度のままです
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-ja クラシック：オリジナルのステータスバー。モダン：画面端のコンパクトな表示
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 ja コーティングアトラスの解像度、再構築頻度、シェーダーの詳細度。低は小さいコートを低頻度で構築し高速に描画、高はフル詳細を使用します
 
@@ -1558,9 +1691,6 @@ ja レールガンの螺旋軌跡の色。画面分割では各プレイヤー�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 ja レールガンが貫通する各敵に与えるダメージ（Quake III：100）
-
-@ Dark backdrop behind on-screen messages for readability
-ja 読みやすくするため画面メッセージの背後を暗くします
 
 @ Dark border keeps the crosshair visible on any background
 ja 暗い縁取りでどんな背景でもクロスヘアを見やすくします
@@ -1811,17 +1941,11 @@ ja 水中やスライム中の面に揺らめく光の模様
 @ Scales all damage you take; above 100% is harder
 ja 受けるすべてのダメージの倍率。100%超で難しくなります
 
-@ Screen edge for this element; elements on the same spot stack
-ja この要素を置く画面の位置。同じ位置の要素は積み重なります
-
 @ Seconds a monster hit by the boomerang stays stunned
 ja ブーメランが命中したモンスターがスタンする秒数
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 ja 着弾痕と刺さったネイルが消え始めるまでの秒数。パーティクル品質とは無関係です
-
-@ Seconds messages at the top of the screen stay up
-ja 画面上部のメッセージが表示される秒数
 
 @ Seconds the flick stick snap takes; lower is faster
 ja フリックスティックで視点が向きを変えるまでの秒数。小さいほど速くなります
@@ -1990,6 +2114,50 @@ ja ビデオのサイズ。フレームはウィンドウのサイズから拡�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ja ffmpeg が使える場合はグラフィックカード（NVIDIA NVENC、AMD や Intel の VA-API、AMF、Quick Sync、Apple VideoToolbox）でエンコードし、CPU を空けます。使えない場合は CPU でエンコードします
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ja 現在時刻を選んだ形式で表示します
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ja インターミッション画面と同じレベル時間。ポーズ中と出口で止まります
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ja any%: どんなクリアでも、100%: 全撃破と全シークレット。セーブカードはこちらを先に表示
+
+@ Color of the personal best on the HUD and save cards
+ja HUDとセーブカードでの自己ベストの色
+
+@ Shown as a count or as a percentage of the level's total
+ja 数、またはレベル全体に対する割合で表示
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ja 自己ベストを出したレベルのデモをすべて保存し、古いものも残します。自動録画がオフでも録画します
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ja 1秒あたりのフレーム数（0.5秒間の平均）
+
+@ Average time per frame in milliseconds, and the slowest frame
+ja 1フレームあたりの平均時間（ミリ秒）と最も遅いフレーム
+
+@ How busy the game keeps the processor, as a share of all its cores
+ja ゲームがプロセッサーをどれだけ使っているか（全コアに対する割合）
+
+@ Memory the game uses
+ja ゲームが使っているメモリ
+
+@ Graphics card time per frame in milliseconds
+ja 1フレームあたりのグラフィックカードの時間（ミリ秒）
+
+@ Video memory in use and what the driver allows, where it reports it
+ja 使用中のビデオメモリとドライバーが許す量（報告される場合）
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+ja HUD要素の移動、サイズ変更、追加、削除：体力、弾薬、武器、タイマー、メッセージなど
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+ja モダン：画面の端にまとまった要素。クラシック：オリジナルのステータスバー。選ぶとHUDがリセットされ、「HUDを編集」で変更するとカスタムになります
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ ja ビデオを書き出し中
 @ Preparing...
 ja 準備中...
 
+# Save cards: personal best.
+@ PB {} {}
+ja PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ ja {}を書き出しました（{}秒）
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ja ffmpeg が見つかりません：{}枚の PNG フレームと WAV を{}に書き出しました
+
+# Personal bests.
+@ New personal best ({}): {}
+ja 自己ベスト更新（{}）: {}

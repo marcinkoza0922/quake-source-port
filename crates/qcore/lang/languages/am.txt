@@ -103,9 +103,6 @@ am የአካባቢ ጥላ (AO)
 @ Ammo Counts
 am የጥይት ብዛት
 
-@ Ammo Counts Position
-am የጥይት ብዛት ቦታ
-
 @ Ammo Pickups
 am የጥይት ማንሻዎች
 
@@ -120,9 +117,6 @@ am የሚተገበርበት
 
 @ Armor
 am ጋሻ
-
-@ Armor Position
-am የጋሻ ቦታ
 
 @ Ask
 am ጠይቅ
@@ -220,9 +214,6 @@ am የውሃ ብርሃን ነጸብራቅ
 @ Center
 am መሃል
 
-@ Center Message Position
-am የመሃል መልዕክት ቦታ
-
 @ Center Message Time
 am የመሃል መልዕክት ጊዜ
 
@@ -282,9 +273,6 @@ am የማነጣጠሪያ መጠን
 
 @ Current Ammo
 am የአሁኑ ጥይት
-
-@ Current Ammo Position
-am የአሁኑ ጥይት ቦታ
 
 @ Customize This Game
 am ይህን ጨዋታ አብጅ
@@ -469,17 +457,11 @@ am በጋይሮ ማነጣጠር
 @ HUD
 am HUD
 
-@ HUD Style
-am የHUD ዘይቤ
-
 @ Health
 am ጤና
 
 @ Health Pickups
 am የጤና ማንሻዎች
-
-@ Health Position
-am የጤና ቦታ
 
 @ Health Regeneration
 am የጤና መታደስ
@@ -589,9 +571,6 @@ am ዝላዮች
 @ Keys & Powerups
 am ቁልፎችና ኃይሎች
 
-@ Keys & Powerups Position
-am የቁልፎችና ኃይሎች ቦታ
-
 @ Kill Bonus (x)
 am የግድያ ጉርሻ (x)
 
@@ -661,15 +640,6 @@ am ከፍተኛ ርቀት
 @ Melee only
 am የቅርብ ውጊያ ብቻ
 
-@ Message Background
-am የመልዕክት ዳራ
-
-@ Message Text Size
-am የመልዕክት ጽሑፍ መጠን
-
-@ Messages & Captions
-am መልዕክቶችና መግለጫ ጽሑፎች
-
 @ Meter Duration (real seconds)
 am የመለኪያ ቆይታ (እውነተኛ ሰከንዶች)
 
@@ -681,9 +651,6 @@ am ሁነታ
 
 @ Modern Console
 am ዘመናዊ ኮንሶል
-
-@ Modern HUD Layout
-am ዘመናዊ የHUD አቀማመጥ
 
 @ Most recent save
 am የቅርብ ጊዜ ማስቀመጫ
@@ -732,9 +699,6 @@ am የጫጫታ ማጣሪያ
 
 @ Normal Color
 am መደበኛ ቀለም
-
-@ Notify Message Position
-am የማሳወቂያ መልዕክት ቦታ
 
 @ Notify Message Time
 am የማሳወቂያ መልዕክት ጊዜ
@@ -940,17 +904,11 @@ am ትከሻ ግራ
 @ Shoulder right
 am ትከሻ ቀኝ
 
-@ Show FPS
-am FPS አሳይ
-
 @ Show Face
 am ፊት አሳይ
 
 @ Shrapnel
 am ስብርባሪ
-
-@ Size of on-screen messages and captions
-am በስክሪን ላይ ያሉ መልዕክቶችና መግለጫ ጽሑፎች መጠን
 
 @ Skill
 am ክህሎት
@@ -1120,15 +1078,6 @@ am የመሳሪያ ጎማ ማዘግየት
 @ Weapons
 am መሳሪያዎች
 
-@ Weapons Position
-am የመሳሪያዎች ቦታ
-
-@ Where center-screen messages appear
-am የመሃል መልዕክቶች የሚታዩበት ቦታ
-
-@ Where pickup and event messages appear
-am የማንሻና የክስተት መልዕክቶች የሚታዩበት ቦታ
-
 @ White
 am ነጭ
 
@@ -1168,9 +1117,6 @@ am ሳጥን
 
 @ broken square
 am የተሰበረ ካሬ
-
-@ classic
-am ክላሲክ
 
 @ coarse
 am ሻካራ
@@ -1259,29 +1205,17 @@ am ኃይለኛ
 @ large
 am ትልቅ
 
-@ larger
-am በጣም ትልቅ
-
-@ largest
-am ትልቁ
-
 @ linear
 am ቀጥተኛ
 
 @ low
 am ዝቅተኛ
 
-@ lower
-am ዝቅ ያለ
-
 @ magenta
 am ማጀንታ
 
 @ medium
 am መካከለኛ
-
-@ middle
-am መሃል
 
 @ middle left
 am መሃል ግራ
@@ -1369,9 +1303,6 @@ am ሶስቴ
 
 @ tritanopia
 am ትሪታኖፒያ
-
-@ upper
-am ከፍ ያለ
 
 @ white
 am ነጭ
@@ -1496,6 +1427,211 @@ am እንደ መስኮቱ
 @ GPU Encoding
 am የGPU ኢንኮዲንግ
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+am ጊዜ እና ስታቲስቲክስ
+
+@ Clock
+am ሰዓት
+
+@ Level Timer
+am የደረጃ ሰዓት ቆጣሪ
+
+@ Personal Best
+am የግል ምርጥ
+
+@ Personal Best Type
+am የምርጥ አይነት
+
+@ Personal Best Color
+am የምርጥ ቀለም
+
+@ Kills
+am ግድያዎች
+
+@ Secrets
+am ምስጢሮች
+
+@ 24-hour
+am 24 ሰዓት
+
+@ 24-hour + seconds
+am 24 ሰዓት + ሰከንድ
+
+@ 12-hour
+am 12 ሰዓት
+
+@ 12-hour + seconds
+am 12 ሰዓት + ሰከንድ
+
+@ count
+am ብዛት
+
+@ percent
+am መቶኛ
+
+@ any% and 100%
+am any% እና 100%
+
+@ Keep Personal Best Demos
+am የግል ምርጥ ዴሞዎችን አቆይ
+
+@ any%
+am any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+am የአፈጻጸም መለኪያዎች
+
+@ Frame Time
+am የፍሬም ጊዜ
+
+@ CPU Usage
+am የCPU አጠቃቀም
+
+@ Memory Usage
+am የማህደረ ትውስታ አጠቃቀም
+
+@ GPU Time
+am የGPU ጊዜ
+
+@ Video Memory
+am የቪዲዮ ማህደረ ትውስታ
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+am አክል
+
+@ Ammo
+am ጥይት
+
+@ Ammo Bar
+am የጥይት አሞሌ
+
+@ Armor Bar
+am የጋሻ አሞሌ
+
+@ Background
+am ዳራ
+
+@ Cells
+am ሴሎች
+
+@ Center Message
+am የመሃል መልዕክት
+
+@ Columns
+am ዓምዶች
+
+@ Edit HUD
+am HUD አርትዕ
+
+@ FPS
+am FPS
+
+@ Face
+am ፊት
+
+@ Fill Width
+am ሙሉ ስፋት
+
+@ Font
+am ፊደል
+
+@ Format
+am ቅርጸት
+
+@ HUD Editor
+am የHUD አርታዒ
+
+@ Health Bar
+am የጤና አሞሌ
+
+@ Inventory
+am ዕቃዎች
+
+@ Keys
+am ቁልፎች
+
+@ Nails
+am ሚስማሮች
+
+@ Notify Messages
+am የማሳወቂያ መልዕክቶች
+
+@ Position
+am ቦታ
+
+@ Powerups
+am ኃይሎች
+
+@ Precision
+am ትክክለኛነት
+
+@ Quake
+am Quake
+
+@ Rockets
+am ሮኬቶች
+
+@ Scale
+am መጠን ማሳደጊያ
+
+@ Sections
+am ክፍሎች
+
+@ Shells
+am ቀለሃዎች
+
+@ Show As
+am አሳይ እንደ
+
+@ Show Icon
+am አዶ አሳይ
+
+@ Show Value
+am ዋጋ አሳይ
+
+@ Sigils
+am ምልክቶች
+
+@ Status
+am ሁኔታ
+
+@ Status Bar
+am የሁኔታ አሞሌ
+
+@ Visibility
+am ታይነት
+
+@ big numbers
+am ትላልቅ ቁጥሮች
+
+@ center
+am መሃል
+
+@ status + inventory
+am ሁኔታ + ዕቃዎች
+
+@ status only
+am ሁኔታ ብቻ
+
+@ Text Color
+am የጽሑፍ ቀለም
+
+@ Label Color
+am የመለያ ቀለም
+
+@ HUD Preset
+am የHUD ቅድመ ቅንብር
+
+@ custom
+am ብጁ
+
+@ classic
+am ክላሲክ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ am የምልክቶችን ብዛት፣ ዕድሜ፣ በአየር ያሉ ጠብታ
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 am የሼደር ግቤትን በውጤቱ መጠን ይገድባል፣ ስለዚህ 200% የማሳያ መጠን 3D ጥራትን ያለ 4x የሼደር ወጪ ይጠብቃል፤ ዝቅተኛ መጠኖች ዝቅተኛ ጥራት ይቆያሉ
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-am ክላሲክ፦ የመጀመሪያው የሁኔታ አሞሌ፤ ዘመናዊ፦ በስክሪኑ ጠርዞች ላይ የታመቁ ክፍሎች
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 am የሽፋን አትላስ ጥራት፣ የማደሻ ፍጥነትና የሼደር ዝርዝር፦ ዝቅተኛ ትናንሽ ሽፋኖችን አልፎ አልፎ በፈጣን ጥላ ይገነባል፤ ከፍተኛ ሙሉ ዝርዝር ይጠቀማል
 
@@ -1558,9 +1691,6 @@ am የሬልገኑ ጠመዝማዛ ዱካ ቀለም፤ በተከፈለ ስክሪ
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 am ሬልገኑ በሚያልፍበት በእያንዳንዱ ጠላት ላይ የሚያደርሰው ጉዳት (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-am ለንባብ ቀላልነት ከመልዕክቶች ጀርባ ጨለማ ዳራ
 
 @ Dark border keeps the crosshair visible on any background
 am ጨለማ ጠርዝ ማነጣጠሪያውን በማንኛውም ዳራ ላይ እንዲታይ ያደርጋል
@@ -1811,17 +1941,11 @@ am ከውሃና ከዝቃጭ በታች ባሉ ገጽታዎች ላይ የሚሞ�
 @ Scales all damage you take; above 100% is harder
 am የሚደርስብዎትን ጉዳት ሁሉ ያባዛል፤ ከ100% በላይ ከባድ ነው
 
-@ Screen edge for this element; elements on the same spot stack
-am ለዚህ ክፍል የስክሪን ጠርዝ፤ በአንድ ቦታ ያሉ ክፍሎች ይደራረባሉ
-
 @ Seconds a monster hit by the boomerang stays stunned
 am በቡሜራንግ የተመታ ጭራቅ ደንዝዞ የሚቆይበት ሰከንዶች
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 am የምት ምልክቶችና የተጣበቁ ሚስማሮች ከመደብዘዛቸው በፊት የሚቆዩበት ሰከንዶች፤ ከቅንጣት ጥራት ነጻ ነው
-
-@ Seconds messages at the top of the screen stay up
-am በስክሪኑ ላይኛው ክፍል ያሉ መልዕክቶች የሚቆዩበት ሰከንዶች
 
 @ Seconds the flick stick snap takes; lower is faster
 am የፍሊክ ስቲክ መዞር የሚወስደው ሰከንዶች፤ ዝቅ ያለ ፈጣን ነው
@@ -1990,6 +2114,50 @@ am የቪዲዮ መጠን፤ ፍሬሞቹ ከመስኮቱ መጠን ይሰፋሉ
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 am ffmpeg ሲጠቀምበት በግራፊክስ ካርዱ ላይ ኢንኮድ ያደርጋል (NVIDIA NVENC፣ AMD ወይም Intel በVA-API፣ AMF ወይም Quick Sync፣ Apple VideoToolbox) እና ፕሮሰሰሩን ነፃ ያደርጋል፤ ካልሆነ ፕሮሰሰሩ ኢንኮድ ያደርጋል
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+am የቀኑን ሰዓት በተመረጠው ቅርጸት ያሳያል
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+am የደረጃው ጊዜ፣ እንደ የእረፍት ማያ፤ ሲቆም እና በመውጫው ላይ ይቆማል
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+am any%: ማንኛውም ማጠናቀቂያ፤ 100%: ሁሉም ግድያዎች እና ምስጢሮች። የማስቀመጫ ካርዶች ይህንን መጀመሪያ ያሳያሉ
+
+@ Color of the personal best on the HUD and save cards
+am በHUD እና በማስቀመጫ ካርዶች ላይ የግል ምርጥ ቀለም
+
+@ Shown as a count or as a percentage of the level's total
+am እንደ ብዛት ወይም ከደረጃው ጠቅላላ መቶኛ
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+am የግል ምርጥ የሚያስመዘግብ የእያንዳንዱን ደረጃ ዴሞ ያቆያል፤ የቆዩት ይቀራሉ። ራስ-ሰር ቅጂ ቢጠፋም ይቀርጻል
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+am ፍሬሞች በሰከንድ፣ የግማሽ ሰከንድ አማካይ
+
+@ Average time per frame in milliseconds, and the slowest frame
+am በአንድ ፍሬም አማካይ ጊዜ በሚሊሰከንድ፣ እና በጣም ቀርፋፋው ፍሬም
+
+@ How busy the game keeps the processor, as a share of all its cores
+am ጨዋታው ፕሮሰሰሩን ምን ያህል እንደሚያስጠምድ፣ ከሁሉም ኮሮች ድርሻ
+
+@ Memory the game uses
+am ጨዋታው የሚጠቀመው ማህደረ ትውስታ
+
+@ Graphics card time per frame in milliseconds
+am በአንድ ፍሬም የግራፊክስ ካርድ ጊዜ በሚሊሰከንድ
+
+@ Video memory in use and what the driver allows, where it reports it
+am በጥቅም ላይ ያለ የቪዲዮ ማህደረ ትውስታ እና ሾፌሩ የሚፈቅደው፣ ሪፖርት ሲያደርግ
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+am የHUD ክፍሎችን አንቀሳቅስ፣ መጠናቸውን ቀይር፣ አክል እና አስወግድ፦ ጤና፣ ጥይት፣ መሳሪያዎች፣ ሰዓት ቆጣሪዎች፣ መልዕክቶች እና ሌሎችም
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+am ዘመናዊ፦ በማያ ገጹ ጠርዞች ያሉ የታመቁ ክፍሎች፤ ክላሲክ፦ የመጀመሪያው የሁኔታ አሞሌ። አንዱን መምረጥ HUDን ዳግም ያስጀምራል፤ በHUD አርትዕ ውስጥ የሚደረጉ ለውጦች ብጁ ያደርጉታል
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ am ቪዲዮ እየተላከ ነው
 @ Preparing...
 am በዝግጅት ላይ...
 
+# Save cards: personal best.
+@ PB {} {}
+am PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ am {} ተጽፏል ({} ሰ.)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 am ffmpeg አልተገኘም፦ {} PNG ፍሬሞችና አንድ WAV ወደ {} ተጽፈዋል
+
+# Personal bests.
+@ New personal best ({}): {}
+am አዲስ የግል ምርጥ ({}): {}

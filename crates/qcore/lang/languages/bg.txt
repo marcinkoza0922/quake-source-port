@@ -103,9 +103,6 @@ bg Околно засенчване
 @ Ammo Counts
 bg Брояч на муниции
 
-@ Ammo Counts Position
-bg Позиция на брояча
-
 @ Ammo Pickups
 bg Взимане на муниции
 
@@ -120,9 +117,6 @@ bg Прилагане към
 
 @ Armor
 bg Броня
-
-@ Armor Position
-bg Позиция на бронята
 
 @ Ask
 bg Питай
@@ -220,9 +214,6 @@ bg Каустика
 @ Center
 bg Център
 
-@ Center Message Position
-bg Позиция на съобщенията в центъра
-
 @ Center Message Time
 bg Време на съобщенията в центъра
 
@@ -282,9 +273,6 @@ bg Размер на мерника
 
 @ Current Ammo
 bg Текущи муниции
-
-@ Current Ammo Position
-bg Позиция на текущите муниции
 
 @ Customize This Game
 bg Персонализирай тази игра
@@ -469,17 +457,11 @@ bg Прицелване с жироскоп
 @ HUD
 bg HUD
 
-@ HUD Style
-bg Стил на HUD
-
 @ Health
 bg Здраве
 
 @ Health Pickups
 bg Взимане на здраве
-
-@ Health Position
-bg Позиция на здравето
 
 @ Health Regeneration
 bg Възстановяване на здраве
@@ -589,9 +571,6 @@ bg Скокове
 @ Keys & Powerups
 bg Ключове и бонуси
 
-@ Keys & Powerups Position
-bg Позиция на ключовете и бонусите
-
 @ Kill Bonus (x)
 bg Бонус за убийство (x)
 
@@ -661,15 +640,6 @@ bg Максимален обхват
 @ Melee only
 bg Само близък бой
 
-@ Message Background
-bg Фон на съобщенията
-
-@ Message Text Size
-bg Размер на текста
-
-@ Messages & Captions
-bg Съобщения и субтитри
-
 @ Meter Duration (real seconds)
 bg Времетраене на скалата (реални секунди)
 
@@ -681,9 +651,6 @@ bg Режим
 
 @ Modern Console
 bg Модерна конзола
-
-@ Modern HUD Layout
-bg Модерно оформление на HUD
 
 @ Most recent save
 bg Последният запис
@@ -732,9 +699,6 @@ bg Филтър за шум
 
 @ Normal Color
 bg Нормален цвят
-
-@ Notify Message Position
-bg Позиция на известията
 
 @ Notify Message Time
 bg Време на известията
@@ -940,17 +904,11 @@ bg Рамо ляво
 @ Shoulder right
 bg Рамо дясно
 
-@ Show FPS
-bg Показвай FPS
-
 @ Show Face
 bg Показвай лицето
 
 @ Shrapnel
 bg Шрапнели
-
-@ Size of on-screen messages and captions
-bg Размер на екранните съобщения и субтитри
 
 @ Skill
 bg Трудност
@@ -1120,15 +1078,6 @@ bg Забавяне при колелото
 @ Weapons
 bg Оръжия
 
-@ Weapons Position
-bg Позиция на оръжията
-
-@ Where center-screen messages appear
-bg Къде се появяват съобщенията в центъра
-
-@ Where pickup and event messages appear
-bg Къде се появяват съобщенията за предмети и събития
-
 @ White
 bg Бял
 
@@ -1168,9 +1117,6 @@ bg кутия
 
 @ broken square
 bg прекъснат квадрат
-
-@ classic
-bg класически
 
 @ coarse
 bg груб
@@ -1259,29 +1205,17 @@ bg силен
 @ large
 bg голям
 
-@ larger
-bg по-голям
-
-@ largest
-bg най-голям
-
 @ linear
 bg линеен
 
 @ low
 bg ниско
 
-@ lower
-bg по-ниско
-
 @ magenta
 bg пурпурен
 
 @ medium
 bg средно
-
-@ middle
-bg по средата
 
 @ middle left
 bg в средата вляво
@@ -1369,9 +1303,6 @@ bg троен
 
 @ tritanopia
 bg тританопия
-
-@ upper
-bg по-високо
 
 @ white
 bg бял
@@ -1496,6 +1427,211 @@ bg Като прозореца
 @ GPU Encoding
 bg Кодиране с GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+bg Време и статистика
+
+@ Clock
+bg Часовник
+
+@ Level Timer
+bg Таймер на нивото
+
+@ Personal Best
+bg Личен рекорд
+
+@ Personal Best Type
+bg Вид рекорд
+
+@ Personal Best Color
+bg Цвят на рекорда
+
+@ Kills
+bg Убийства
+
+@ Secrets
+bg Тайни
+
+@ 24-hour
+bg 24-часов
+
+@ 24-hour + seconds
+bg 24-часов + секунди
+
+@ 12-hour
+bg 12-часов
+
+@ 12-hour + seconds
+bg 12-часов + секунди
+
+@ count
+bg брой
+
+@ percent
+bg процент
+
+@ any% and 100%
+bg any% и 100%
+
+@ Keep Personal Best Demos
+bg Пазене на демота с рекорди
+
+@ any%
+bg any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+bg Показатели за производителност
+
+@ Frame Time
+bg Време за кадър
+
+@ CPU Usage
+bg Натоварване на процесора
+
+@ Memory Usage
+bg Използвана памет
+
+@ GPU Time
+bg Време на GPU
+
+@ Video Memory
+bg Видеопамет
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+bg Добавяне
+
+@ Ammo
+bg Муниции
+
+@ Ammo Bar
+bg Лента за муниции
+
+@ Armor Bar
+bg Лента за броня
+
+@ Background
+bg Фон
+
+@ Cells
+bg Клетки
+
+@ Center Message
+bg Съобщение в центъра
+
+@ Columns
+bg Колони
+
+@ Edit HUD
+bg Редактиране на HUD
+
+@ FPS
+bg FPS
+
+@ Face
+bg Лице
+
+@ Fill Width
+bg Цяла ширина
+
+@ Font
+bg Шрифт
+
+@ Format
+bg Формат
+
+@ HUD Editor
+bg Редактор на HUD
+
+@ Health Bar
+bg Лента за здраве
+
+@ Inventory
+bg Инвентар
+
+@ Keys
+bg Ключове
+
+@ Nails
+bg Гвоздеи
+
+@ Notify Messages
+bg Известия
+
+@ Position
+bg Позиция
+
+@ Powerups
+bg Бонуси
+
+@ Precision
+bg Точност
+
+@ Quake
+bg Quake
+
+@ Rockets
+bg Ракети
+
+@ Scale
+bg Мащаб
+
+@ Sections
+bg Секции
+
+@ Shells
+bg Патрони
+
+@ Show As
+bg Показване като
+
+@ Show Icon
+bg Показване на икона
+
+@ Show Value
+bg Показване на стойност
+
+@ Sigils
+bg Руни
+
+@ Status
+bg Състояние
+
+@ Status Bar
+bg Лента за състояние
+
+@ Visibility
+bg Видимост
+
+@ big numbers
+bg големи цифри
+
+@ center
+bg център
+
+@ status + inventory
+bg състояние + инвентар
+
+@ status only
+bg само състояние
+
+@ Text Color
+bg Цвят на текста
+
+@ Label Color
+bg Цвят на етикетите
+
+@ HUD Preset
+bg Шаблон на HUD
+
+@ custom
+bg собствен
+
+@ classic
+bg класически
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ bg Ограничава броя и живота на следите, капки
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 bg Ограничава входа на шейдъра до размера на изхода, така че мащаб 200% запазва 3D яснотата без четирикратна цена; малките мащаби остават с ниска резолюция
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-bg Класически: оригиналната лента на състоянието; модерен: компактни елементи по краищата на екрана
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 bg Резолюция на атласа на покритието, честота на обновяване и детайл на шейдъра: ниско строи по-малки покрития по-рядко с бързо осветяване; високо ползва пълен детайл
 
@@ -1558,9 +1691,6 @@ bg Цвят на спиралната следа на рейлгъна; при �
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 bg Щети от рейлгъна за всеки пронизан враг (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-bg Тъмен фон зад екранните съобщения за по-добра четимост
 
 @ Dark border keeps the crosshair visible on any background
 bg Тъмният контур прави мерника видим на всякакъв фон
@@ -1811,17 +1941,11 @@ bg Вълнисти светлинни шарки по повърхностит�
 @ Scales all damage you take; above 100% is harder
 bg Мащабира всички получени щети; над 100% е по-трудно
 
-@ Screen edge for this element; elements on the same spot stack
-bg Край на екрана за този елемент; елементите на едно място се подреждат един над друг
-
 @ Seconds a monster hit by the boomerang stays stunned
 bg Секунди, през които чудовище, ударено от бумеранга, остава зашеметено
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 bg Секунди, през които следите и забитите гвоздеи остават, преди да избледнеят; не зависи от качеството на частиците
-
-@ Seconds messages at the top of the screen stay up
-bg Секунди, през които съобщенията горе на екрана остават
 
 @ Seconds the flick stick snap takes; lower is faster
 bg Секунди за обръщането с флик стик; по-малко е по-бързо
@@ -1990,6 +2114,50 @@ bg Размер на видеото; кадрите се мащабират от
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 bg Кодира на видеокартата (NVIDIA NVENC, AMD или Intel чрез VA-API, AMF или Quick Sync, Apple VideoToolbox), когато ffmpeg може да я използва, и оставя процесора свободен; иначе кодира процесорът
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+bg Показва часа в избрания формат
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+bg Времето на нивото, както на екрана с резултатите; спира при пауза и на изхода
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+bg any%: всяко завършване; 100%: всички убийства и тайни. Картите на записите показват него първо
+
+@ Color of the personal best on the HUD and save cards
+bg Цвят на личния рекорд в HUD и на картите на записите
+
+@ Shown as a count or as a percentage of the level's total
+bg Като брой или процент от общото за нивото
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+bg Пази демото на всяко ниво с нов личен рекорд; старите остават. Записва и без автоматичен запис
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+bg Кадри в секунда, средно за половин секунда
+
+@ Average time per frame in milliseconds, and the slowest frame
+bg Средно време за кадър в милисекунди и най-бавният кадър
+
+@ How busy the game keeps the processor, as a share of all its cores
+bg Колко играта натоварва процесора, като дял от всичките му ядра
+
+@ Memory the game uses
+bg Паметта, която играта използва
+
+@ Graphics card time per frame in milliseconds
+bg Време на видеокартата за кадър в милисекунди
+
+@ Video memory in use and what the driver allows, where it reports it
+bg Заета видеопамет и колко позволява драйверът, ако го съобщава
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+bg Местете, оразмерявайте, добавяйте и премахвайте елементи на HUD: здраве, муниции, оръжия, таймери, съобщения и още
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+bg Модерен: компактни елементи по краищата на екрана; класически: оригиналната лента за състояние. Изборът на шаблон нулира HUD; промените в „Редактиране на HUD“ го правят собствен
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ bg Експорт на видео
 @ Preparing...
 bg Подготовка...
 
+# Save cards: personal best.
+@ PB {} {}
+bg PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ bg Записано {} ({} с)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 bg ffmpeg не е намерен: записани {} PNG кадъра и WAV в {}
+
+# Personal bests.
+@ New personal best ({}): {}
+bg Нов личен рекорд ({}): {}

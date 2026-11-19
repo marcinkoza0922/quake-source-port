@@ -103,9 +103,6 @@ mr अँबियंट ऑक्लूजन
 @ Ammo Counts
 mr दारूगोळा संख्या
 
-@ Ammo Counts Position
-mr दारूगोळा संख्येचे स्थान
-
 @ Ammo Pickups
 mr उचललेला दारूगोळा
 
@@ -120,9 +117,6 @@ mr यावर लागू करा
 
 @ Armor
 mr चिलखत
-
-@ Armor Position
-mr चिलखताचे स्थान
 
 @ Ask
 mr विचारा
@@ -220,9 +214,6 @@ mr कॉस्टिक्स
 @ Center
 mr मध्य
 
-@ Center Message Position
-mr मध्य संदेशाचे स्थान
-
 @ Center Message Time
 mr मध्य संदेशाचा वेळ
 
@@ -282,9 +273,6 @@ mr क्रॉसहेअरचा आकार
 
 @ Current Ammo
 mr सध्याचा दारूगोळा
-
-@ Current Ammo Position
-mr सध्याच्या दारूगोळ्याचे स्थान
 
 @ Customize This Game
 mr हा गेम सानुकूलित करा
@@ -469,17 +457,11 @@ mr जायरो नेम
 @ HUD
 mr HUD
 
-@ HUD Style
-mr HUD शैली
-
 @ Health
 mr आरोग्य
 
 @ Health Pickups
 mr उचललेले आरोग्य
-
-@ Health Position
-mr आरोग्याचे स्थान
 
 @ Health Regeneration
 mr आरोग्य पुनर्निर्मिती
@@ -589,9 +571,6 @@ mr उड्या
 @ Keys & Powerups
 mr किल्ल्या आणि पॉवर-अप्स
 
-@ Keys & Powerups Position
-mr किल्ल्या आणि पॉवर-अप्सचे स्थान
-
 @ Kill Bonus (x)
 mr किल बोनस (x)
 
@@ -661,15 +640,6 @@ mr कमाल पल्ला
 @ Melee only
 mr फक्त हातघाईचे
 
-@ Message Background
-mr संदेश पार्श्वभूमी
-
-@ Message Text Size
-mr संदेश मजकूर आकार
-
-@ Messages & Captions
-mr संदेश आणि कॅप्शन्स
-
 @ Meter Duration (real seconds)
 mr मीटर कालावधी (वास्तविक सेकंद)
 
@@ -681,9 +651,6 @@ mr मोड
 
 @ Modern Console
 mr आधुनिक कन्सोल
-
-@ Modern HUD Layout
-mr आधुनिक HUD मांडणी
 
 @ Most recent save
 mr सर्वात अलीकडील सेव्ह
@@ -732,9 +699,6 @@ mr नॉइज फिल्टर
 
 @ Normal Color
 mr सामान्य रंग
-
-@ Notify Message Position
-mr सूचना संदेशाचे स्थान
 
 @ Notify Message Time
 mr सूचना संदेशाचा वेळ
@@ -940,17 +904,11 @@ mr डावा खांदा
 @ Shoulder right
 mr उजवा खांदा
 
-@ Show FPS
-mr FPS दाखवा
-
 @ Show Face
 mr चेहरा दाखवा
 
 @ Shrapnel
 mr छर्रे
-
-@ Size of on-screen messages and captions
-mr स्क्रीनवरील संदेश आणि कॅप्शन्सचा आकार
 
 @ Skill
 mr कौशल्य
@@ -1120,15 +1078,6 @@ mr शस्त्र चक्र मंदावणे
 @ Weapons
 mr शस्त्रे
 
-@ Weapons Position
-mr शस्त्रांचे स्थान
-
-@ Where center-screen messages appear
-mr मध्यभागी संदेश कुठे दिसतात
-
-@ Where pickup and event messages appear
-mr उचलण्याचे व घटनांचे संदेश कुठे दिसतात
-
 @ White
 mr पांढरा
 
@@ -1168,9 +1117,6 @@ mr चौकोन
 
 @ broken square
 mr तुटलेला चौकोन
-
-@ classic
-mr क्लासिक
 
 @ coarse
 mr जाडसर
@@ -1259,29 +1205,17 @@ mr तीव्र
 @ large
 mr मोठा
 
-@ larger
-mr अधिक मोठा
-
-@ largest
-mr सर्वात मोठा
-
 @ linear
 mr लिनियर
 
 @ low
 mr कमी
 
-@ lower
-mr खालचा
-
 @ magenta
 mr किरमिजी
 
 @ medium
 mr मध्यम
-
-@ middle
-mr मध्य
 
 @ middle left
 mr मध्ये डावीकडे
@@ -1369,9 +1303,6 @@ mr तिहेरी
 
 @ tritanopia
 mr ट्रिटानोपिया
-
-@ upper
-mr वरचा
 
 @ white
 mr पांढरा
@@ -1496,6 +1427,211 @@ mr विंडोसारखे
 @ GPU Encoding
 mr GPU एन्कोडिंग
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+mr वेळ आणि आकडेवारी
+
+@ Clock
+mr घड्याळ
+
+@ Level Timer
+mr स्तर टायमर
+
+@ Personal Best
+mr वैयक्तिक सर्वोत्तम
+
+@ Personal Best Type
+mr सर्वोत्तमाचा प्रकार
+
+@ Personal Best Color
+mr सर्वोत्तमाचा रंग
+
+@ Kills
+mr मारलेले
+
+@ Secrets
+mr रहस्ये
+
+@ 24-hour
+mr 24 तास
+
+@ 24-hour + seconds
+mr 24 तास + सेकंद
+
+@ 12-hour
+mr 12 तास
+
+@ 12-hour + seconds
+mr 12 तास + सेकंद
+
+@ count
+mr संख्या
+
+@ percent
+mr टक्के
+
+@ any% and 100%
+mr any% आणि 100%
+
+@ Keep Personal Best Demos
+mr वैयक्तिक सर्वोत्तम डेमो ठेवा
+
+@ any%
+mr any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+mr कामगिरी मापदंड
+
+@ Frame Time
+mr फ्रेम वेळ
+
+@ CPU Usage
+mr CPU वापर
+
+@ Memory Usage
+mr मेमरी वापर
+
+@ GPU Time
+mr GPU वेळ
+
+@ Video Memory
+mr व्हिडिओ मेमरी
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+mr जोडा
+
+@ Ammo
+mr दारूगोळा
+
+@ Ammo Bar
+mr दारूगोळा पट्टी
+
+@ Armor Bar
+mr चिलखत पट्टी
+
+@ Background
+mr पार्श्वभूमी
+
+@ Cells
+mr सेल्स
+
+@ Center Message
+mr मध्य संदेश
+
+@ Columns
+mr स्तंभ
+
+@ Edit HUD
+mr HUD संपादित करा
+
+@ FPS
+mr FPS
+
+@ Face
+mr चेहरा
+
+@ Fill Width
+mr पूर्ण रुंदी
+
+@ Font
+mr फॉन्ट
+
+@ Format
+mr स्वरूप
+
+@ HUD Editor
+mr HUD संपादक
+
+@ Health Bar
+mr आरोग्य पट्टी
+
+@ Inventory
+mr साहित्य
+
+@ Keys
+mr किल्ल्या
+
+@ Nails
+mr खिळे
+
+@ Notify Messages
+mr सूचना संदेश
+
+@ Position
+mr स्थान
+
+@ Powerups
+mr पॉवर-अप्स
+
+@ Precision
+mr अचूकता
+
+@ Quake
+mr Quake
+
+@ Rockets
+mr रॉकेट्स
+
+@ Scale
+mr प्रमाण
+
+@ Sections
+mr भाग
+
+@ Shells
+mr काडतुसे
+
+@ Show As
+mr असे दाखवा
+
+@ Show Icon
+mr चिन्ह दाखवा
+
+@ Show Value
+mr मूल्य दाखवा
+
+@ Sigils
+mr सिगिल
+
+@ Status
+mr स्थिती
+
+@ Status Bar
+mr स्थिती पट्टी
+
+@ Visibility
+mr दृश्यता
+
+@ big numbers
+mr मोठे अंक
+
+@ center
+mr मध्य
+
+@ status + inventory
+mr स्थिती + साहित्य
+
+@ status only
+mr फक्त स्थिती
+
+@ Text Color
+mr मजकुराचा रंग
+
+@ Label Color
+mr लेबलचा रंग
+
+@ HUD Preset
+mr HUD प्रीसेट
+
+@ custom
+mr सानुकूल
+
+@ classic
+mr क्लासिक
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ mr खुणांची संख्या, आयुष्य, हवेती
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 mr शेडर इनपुट आउटपुट आकारापर्यंत मर्यादित करते, त्यामुळे 200% रेंडर स्केल 4x शेडर खर्चाशिवाय 3D स्पष्टता ठेवतो; कमी स्केल्स कमी रिझोल्यूशनच राहतात
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-mr क्लासिक: मूळ स्टेटस बार; आधुनिक: स्क्रीनच्या कडांवर लहान घटक
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 mr कोट अॅटलस रिझोल्यूशन, पुनर्बांधणी दर आणि शेडर तपशील: कमी लहान कोट कमी वेळा जलद शेडिंगसह बनवते; उच्च पूर्ण तपशील वापरते
 
@@ -1558,9 +1691,6 @@ mr रेलगनच्या सर्पिल मागोव्याचा
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 mr रेलगन ज्या प्रत्येक शत्रूमधून जाते त्याला होणारे नुकसान (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-mr वाचनीयतेसाठी स्क्रीनवरील संदेशांमागे गडद पार्श्वभूमी
 
 @ Dark border keeps the crosshair visible on any background
 mr गडद किनार कोणत्याही पार्श्वभूमीवर क्रॉसहेअर दृश्यमान ठेवते
@@ -1811,17 +1941,11 @@ mr पाणी आणि स्लाइमखालील पृष्ठभ�
 @ Scales all damage you take; above 100% is harder
 mr तुम्हाला होणारे सर्व नुकसान मोजते; 100% पेक्षा जास्त कठीण आहे
 
-@ Screen edge for this element; elements on the same spot stack
-mr या घटकासाठी स्क्रीनची कडा; एकाच जागी असलेले घटक एकावर एक रचले जातात
-
 @ Seconds a monster hit by the boomerang stays stunned
 mr बूमरँगचा फटका बसलेला राक्षस किती सेकंद बधिर राहतो
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 mr आघाताच्या खुणा आणि रुतलेले खिळे फिके होण्यापूर्वी किती सेकंद राहतात; कणांच्या गुणवत्तेपासून स्वतंत्र
-
-@ Seconds messages at the top of the screen stay up
-mr स्क्रीनच्या वरच्या भागातील संदेश किती सेकंद दिसतात
 
 @ Seconds the flick stick snap takes; lower is faster
 mr फ्लिक स्टिकच्या झटक्याला लागणारे सेकंद; कमी म्हणजे जलद
@@ -1990,6 +2114,50 @@ mr व्हिडिओचा आकार; फ्रेम विंडोच�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 mr ffmpeg वापरू शकत असल्यास ग्राफिक्स कार्डवर एन्कोड करते (NVIDIA NVENC, VA-API द्वारे AMD किंवा Intel, AMF किंवा Quick Sync, Apple VideoToolbox) आणि प्रोसेसर मोकळा ठेवते; नाहीतर प्रोसेसर एन्कोड करतो
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+mr निवडलेल्या स्वरूपात दिवसाची वेळ दाखवते
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+mr स्तराची वेळ, मध्यंतर स्क्रीनप्रमाणे; थांबवल्यावर आणि बाहेर पडताना थांबते
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+mr any%: कोणताही शेवट; 100%: सर्व मारलेले आणि रहस्ये. सेव्ह कार्ड आधी हेच दाखवतात
+
+@ Color of the personal best on the HUD and save cards
+mr HUD आणि सेव्ह कार्डवरील वैयक्तिक सर्वोत्तमाचा रंग
+
+@ Shown as a count or as a percentage of the level's total
+mr संख्या म्हणून किंवा स्तराच्या एकूणच्या टक्केवारी म्हणून
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+mr वैयक्तिक सर्वोत्तम करणाऱ्या प्रत्येक स्तराचा डेमो ठेवते; जुने राहतात. स्वयं रेकॉर्ड बंद असतानाही रेकॉर्ड करते
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+mr प्रति सेकंद फ्रेम, अर्ध्या सेकंदाची सरासरी
+
+@ Average time per frame in milliseconds, and the slowest frame
+mr प्रति फ्रेम सरासरी वेळ मिलिसेकंदात, आणि सर्वात संथ फ्रेम
+
+@ How busy the game keeps the processor, as a share of all its cores
+mr खेळ प्रोसेसरला किती व्यस्त ठेवतो, सर्व कोअरच्या वाट्याच्या रूपात
+
+@ Memory the game uses
+mr खेळ वापरत असलेली मेमरी
+
+@ Graphics card time per frame in milliseconds
+mr प्रति फ्रेम ग्राफिक्स कार्डचा वेळ मिलिसेकंदात
+
+@ Video memory in use and what the driver allows, where it reports it
+mr वापरातील व्हिडिओ मेमरी आणि ड्रायव्हरची मर्यादा, तो सांगत असल्यास
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+mr HUD घटक हलवा, आकार बदला, जोडा आणि काढा: आरोग्य, दारूगोळा, शस्त्रे, टायमर, संदेश आणि बरेच काही
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+mr आधुनिक: पडद्याच्या कडांवर छोटे घटक; क्लासिक: मूळ स्थिती पट्टी. एक निवडल्यास HUD रीसेट होतो; HUD संपादित करा मधील बदल त्याला सानुकूल करतात
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ mr व्हिडिओ निर्यात होत आहे
 @ Preparing...
 mr तयारी सुरू आहे...
 
+# Save cards: personal best.
+@ PB {} {}
+mr PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ mr {} लिहिले ({} से.)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 mr ffmpeg सापडले नाही: {} PNG फ्रेम आणि एक WAV {} मध्ये लिहिले
+
+# Personal bests.
+@ New personal best ({}): {}
+mr नवीन वैयक्तिक सर्वोत्तम ({}): {}

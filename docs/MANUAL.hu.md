@@ -197,8 +197,8 @@ Options → Akadálymentesség:
 - Színtévesztő-szűrők.
 - Testreszabható célkereszt: alak, méret, körvonal, valamint színváltás
   célponton vagy öléskor; opcionális találatjelzők.
-- **Hangfeliratok** és üzenetbeállítások (Üzenetek és feliratok),
-  szövegméretezés.
+- **Hangfeliratok**; az üzenetek és feliratok helye, mérete és megjelenési
+  ideje a HUD-szerkesztőben állítható.
 - Kapcsolható (nyomva tartás helyett) támadás és futás.
 - Játéksebesség-csúszka az egész játék lelassításához.
 - Automatikus célzás befogásjelzővel, valamint kúp- és hatótáv-beállítással.

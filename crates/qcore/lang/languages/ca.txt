@@ -103,9 +103,6 @@ ca Oclusió ambiental
 @ Ammo Counts
 ca Comptadors de munició
 
-@ Ammo Counts Position
-ca Posició dels comptadors de munició
-
 @ Ammo Pickups
 ca Munició recollida
 
@@ -120,9 +117,6 @@ ca Aplica a
 
 @ Armor
 ca Armadura
-
-@ Armor Position
-ca Posició de l'armadura
 
 @ Ask
 ca Pregunta
@@ -220,9 +214,6 @@ ca Càustiques
 @ Center
 ca Centre
 
-@ Center Message Position
-ca Posició dels missatges centrals
-
 @ Center Message Time
 ca Durada dels missatges centrals
 
@@ -282,9 +273,6 @@ ca Mida del punt de mira
 
 @ Current Ammo
 ca Munició actual
-
-@ Current Ammo Position
-ca Posició de la munició actual
 
 @ Customize This Game
 ca Personalitza aquesta partida
@@ -469,17 +457,11 @@ ca Punteria amb giroscopi
 @ HUD
 ca HUD
 
-@ HUD Style
-ca Estil de l'HUD
-
 @ Health
 ca Salut
 
 @ Health Pickups
 ca Salut recollida
-
-@ Health Position
-ca Posició de la salut
 
 @ Health Regeneration
 ca Regeneració de salut
@@ -589,9 +571,6 @@ ca Salts
 @ Keys & Powerups
 ca Claus i potenciadors
 
-@ Keys & Powerups Position
-ca Posició de claus i potenciadors
-
 @ Kill Bonus (x)
 ca Bonificació per eliminació (x)
 
@@ -661,15 +640,6 @@ ca Abast màxim
 @ Melee only
 ca Només cos a cos
 
-@ Message Background
-ca Fons dels missatges
-
-@ Message Text Size
-ca Mida del text dels missatges
-
-@ Messages & Captions
-ca Missatges i subtítols
-
 @ Meter Duration (real seconds)
 ca Durada del mesurador (segons reals)
 
@@ -681,9 +651,6 @@ ca Mode
 
 @ Modern Console
 ca Consola moderna
-
-@ Modern HUD Layout
-ca Disposició de l'HUD modern
 
 @ Most recent save
 ca Partida desada més recent
@@ -732,9 +699,6 @@ ca Filtre de soroll
 
 @ Normal Color
 ca Color normal
-
-@ Notify Message Position
-ca Posició de les notificacions
 
 @ Notify Message Time
 ca Durada de les notificacions
@@ -940,17 +904,11 @@ ca espatlla esquerra
 @ Shoulder right
 ca espatlla dreta
 
-@ Show FPS
-ca Mostra els FPS
-
 @ Show Face
 ca Mostra la cara
 
 @ Shrapnel
 ca Metralla
-
-@ Size of on-screen messages and captions
-ca Mida dels missatges i subtítols en pantalla
 
 @ Skill
 ca Dificultat
@@ -1120,15 +1078,6 @@ ca Alentiment del selector d'armes
 @ Weapons
 ca Armes
 
-@ Weapons Position
-ca Posició de les armes
-
-@ Where center-screen messages appear
-ca On apareixen els missatges centrals
-
-@ Where pickup and event messages appear
-ca On apareixen els missatges d'objectes i esdeveniments
-
 @ White
 ca Blanc
 
@@ -1168,9 +1117,6 @@ ca caixa
 
 @ broken square
 ca quadrat trencat
-
-@ classic
-ca clàssic
 
 @ coarse
 ca gruixut
@@ -1259,29 +1205,17 @@ ca intens
 @ large
 ca gran
 
-@ larger
-ca més gran
-
-@ largest
-ca el més gran
-
 @ linear
 ca lineal
 
 @ low
 ca baixa
 
-@ lower
-ca a baix
-
 @ magenta
 ca magenta
 
 @ medium
 ca mitjana
-
-@ middle
-ca al mig
 
 @ middle left
 ca al mig a l'esquerra
@@ -1369,9 +1303,6 @@ ca triple
 
 @ tritanopia
 ca tritanopia
-
-@ upper
-ca a dalt
 
 @ white
 ca blanc
@@ -1496,6 +1427,211 @@ ca Com la finestra
 @ GPU Encoding
 ca Codificació per GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ca Temps i estadístiques
+
+@ Clock
+ca Rellotge
+
+@ Level Timer
+ca Cronòmetre del nivell
+
+@ Personal Best
+ca Rècord personal
+
+@ Personal Best Type
+ca Tipus de rècord
+
+@ Personal Best Color
+ca Color del rècord
+
+@ Kills
+ca Morts
+
+@ Secrets
+ca Secrets
+
+@ 24-hour
+ca 24 hores
+
+@ 24-hour + seconds
+ca 24 hores + segons
+
+@ 12-hour
+ca 12 hores
+
+@ 12-hour + seconds
+ca 12 hores + segons
+
+@ count
+ca nombre
+
+@ percent
+ca percentatge
+
+@ any% and 100%
+ca any% i 100%
+
+@ Keep Personal Best Demos
+ca Conserva les demos de rècords
+
+@ any%
+ca any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ca Mètriques de rendiment
+
+@ Frame Time
+ca Temps de fotograma
+
+@ CPU Usage
+ca Ús de la CPU
+
+@ Memory Usage
+ca Ús de memòria
+
+@ GPU Time
+ca Temps de GPU
+
+@ Video Memory
+ca Memòria de vídeo
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+ca Afegeix
+
+@ Ammo
+ca Munició
+
+@ Ammo Bar
+ca Barra de munició
+
+@ Armor Bar
+ca Barra d'armadura
+
+@ Background
+ca Fons
+
+@ Cells
+ca Cel·les
+
+@ Center Message
+ca Missatge central
+
+@ Columns
+ca Columnes
+
+@ Edit HUD
+ca Edita la interfície
+
+@ FPS
+ca FPS
+
+@ Face
+ca Cara
+
+@ Fill Width
+ca Amplada completa
+
+@ Font
+ca Tipus de lletra
+
+@ Format
+ca Format
+
+@ HUD Editor
+ca Editor de la interfície
+
+@ Health Bar
+ca Barra de salut
+
+@ Inventory
+ca Inventari
+
+@ Keys
+ca Claus
+
+@ Nails
+ca Claus (munició)
+
+@ Notify Messages
+ca Notificacions
+
+@ Position
+ca Posició
+
+@ Powerups
+ca Potenciadors
+
+@ Precision
+ca Precisió
+
+@ Quake
+ca Quake
+
+@ Rockets
+ca Coets
+
+@ Scale
+ca Escala
+
+@ Sections
+ca Seccions
+
+@ Shells
+ca Cartutxos
+
+@ Show As
+ca Mostra com
+
+@ Show Icon
+ca Mostra la icona
+
+@ Show Value
+ca Mostra el valor
+
+@ Sigils
+ca Runes
+
+@ Status
+ca Estat
+
+@ Status Bar
+ca Barra d'estat
+
+@ Visibility
+ca Visibilitat
+
+@ big numbers
+ca xifres grans
+
+@ center
+ca centre
+
+@ status + inventory
+ca estat + inventari
+
+@ status only
+ca només estat
+
+@ Text Color
+ca Color del text
+
+@ Label Color
+ca Color de les etiquetes
+
+@ HUD Preset
+ca Predefinit de la interfície
+
+@ custom
+ca personalitzada
+
+@ classic
+ca clàssic
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ ca Limita el nombre i la durada de les marques, les gotes a l'aire i les taques 
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 ca Limita l'entrada del shader a la mida de sortida, així una escala de renderització del 200 % manté la nitidesa 3D sense quadruplicar-ne el cost; les escales baixes continuen en baixa resolució
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-ca Clàssic: la barra d'estat original; modern: elements compactes a les vores de la pantalla
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 ca Resolució de l'atles de capes, freqüència de reconstrucció i detall del shader: baixa crea capes més petites amb menys freqüència i ombrejat ràpid; alta usa tot el detall
 
@@ -1558,9 +1691,6 @@ ca Color de l'estela en espiral del railgun; en pantalla dividida cada jugador r
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 ca Dany que fa el railgun a cada enemic que travessa (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-ca Fons fosc darrere dels missatges en pantalla per llegir-los millor
 
 @ Dark border keeps the crosshair visible on any background
 ca Una vora fosca manté visible el punt de mira sobre qualsevol fons
@@ -1811,17 +1941,11 @@ ca Reflexos de llum ondulants a les superfícies sota l'aigua i el llot
 @ Scales all damage you take; above 100% is harder
 ca Escala tot el dany que reps; per sobre del 100 % és més difícil
 
-@ Screen edge for this element; elements on the same spot stack
-ca Vora de la pantalla per a aquest element; els elements al mateix lloc s'apilen
-
 @ Seconds a monster hit by the boomerang stays stunned
 ca Segons que queda atordit un monstre colpejat pel bumerang
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 ca Segons que romanen els impactes i els claus clavats abans d'esvair-se; independent de Qualitat de les partícules
-
-@ Seconds messages at the top of the screen stay up
-ca Segons que romanen els missatges a la part superior de la pantalla
 
 @ Seconds the flick stick snap takes; lower is faster
 ca Segons que triga el gir del flick stick; menys és més ràpid
@@ -1990,6 +2114,50 @@ ca Mida del vídeo; els fotogrames s'escalen des de la mida de la finestra (amb 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ca Codifica a la targeta gràfica (NVIDIA NVENC, AMD o Intel mitjançant VA-API, AMF o Quick Sync, Apple VideoToolbox) quan ffmpeg la pot fer servir, deixant lliure el processador; si no, codifica el processador
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ca Mostra l'hora del dia en el format triat
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ca El temps del nivell, com a la pantalla d'intermedi; s'atura en pausa i a la sortida
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ca any%: qualsevol final; 100%: totes les morts i secrets. Les fitxes de partides mostren aquest primer
+
+@ Color of the personal best on the HUD and save cards
+ca Color del rècord personal a l'HUD i a les fitxes de partides
+
+@ Shown as a count or as a percentage of the level's total
+ca Com a nombre o com a percentatge del total del nivell
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ca Conserva la demo de cada nivell que fa un rècord personal; les antigues es queden. Enregistra fins i tot sense demos automàtiques
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ca Fotogrames per segon, mitjana de mig segon
+
+@ Average time per frame in milliseconds, and the slowest frame
+ca Temps mitjà per fotograma en mil·lisegons i el fotograma més lent
+
+@ How busy the game keeps the processor, as a share of all its cores
+ca Com d'ocupat té el joc el processador, com a part de tots els nuclis
+
+@ Memory the game uses
+ca Memòria que fa servir el joc
+
+@ Graphics card time per frame in milliseconds
+ca Temps de la targeta gràfica per fotograma en mil·lisegons
+
+@ Video memory in use and what the driver allows, where it reports it
+ca Memòria de vídeo en ús i la que permet el controlador, si ho indica
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+ca Mou, redimensiona, afegeix i treu elements de la interfície: salut, munició, armes, temporitzadors, missatges i més
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+ca Moderna: elements compactes a les vores de la pantalla; clàssica: la barra d'estat original. Triar-ne una restableix la interfície; els canvis a Edita la interfície la fan personalitzada
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ ca S'està exportant el vídeo
 @ Preparing...
 ca S'està preparant...
 
+# Save cards: personal best.
+@ PB {} {}
+ca PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ ca S'ha escrit {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ca No s'ha trobat ffmpeg: s'han escrit {} fotogrames PNG i un WAV a {}
+
+# Personal bests.
+@ New personal best ({}): {}
+ca Nou rècord personal ({}): {}

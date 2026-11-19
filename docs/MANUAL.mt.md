@@ -193,8 +193,8 @@ Options → Aċċessibbiltà:
 - Filtri għall-għama tal-kulur.
 - Crosshair konfigurabbli: forma, daqs, kontorn, u bidla fil-kulur fuq
   il-mira jew mal-qtil; indikaturi tal-laqta fakultattivi.
-- **Sottotitoli tal-ħsejjes** u issettjar tal-messaġġi (Messaġġi u
-  sottotitoli), daqs tat-test.
+- **Sottotitoli tal-ħsejjes**; il-pożizzjoni, id-daqs u t-tul tal-messaġġi u
+  s-sottotitoli jiġu ssettjati fl-editur tal-HUD.
 - Attakk u ġiri bi qlib (minflok iżżomm).
 - Slider tal-veloċità tal-logħba biex tnaqqas il-veloċità tal-logħba kollha.
 - Immirar awtomatiku b'indikatur tal-qbid, u issettjar tal-kon u tal-medda.

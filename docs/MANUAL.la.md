@@ -202,8 +202,8 @@ Options → Accessibilitas:
 - Filtra pro caecitate colorum.
 - Reticulum configurabile: forma, magnitudo, ambitus, et colores mutati in
   scopo vel in caede; signa ictuum optionalia.
-- **Subscriptiones sonorum** et optiones nuntiorum (Nuntii et
-  subscriptiones), magnitudo textus.
+- **Subscriptiones sonorum**; locus, magnitudo et tempus nuntiorum et
+  subscriptionum in editore HUD statuuntur.
 - Ferire et currere alternantia (pro tenendo).
 - Regula celeritatis lusus ad totum lusum retardandum.
 - Collimatio automatica cum indice capturae, cono et spatio

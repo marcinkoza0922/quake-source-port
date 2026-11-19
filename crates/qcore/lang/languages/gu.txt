@@ -103,9 +103,6 @@ gu ઍમ્બિયન્ટ ઑક્લુઝન
 @ Ammo Counts
 gu દારૂગોળાની ગણતરી
 
-@ Ammo Counts Position
-gu દારૂગોળા ગણતરીનું સ્થાન
-
 @ Ammo Pickups
 gu દારૂગોળો પિકઅપ
 
@@ -120,9 +117,6 @@ gu લાગુ કરો
 
 @ Armor
 gu બખ્તર
-
-@ Armor Position
-gu બખ્તરનું સ્થાન
 
 @ Ask
 gu પૂછો
@@ -220,9 +214,6 @@ gu કૉસ્ટિક્સ
 @ Center
 gu મધ્યમાં
 
-@ Center Message Position
-gu મધ્ય સંદેશનું સ્થાન
-
 @ Center Message Time
 gu મધ્ય સંદેશનો સમય
 
@@ -282,9 +273,6 @@ gu ક્રૉસહેર કદ
 
 @ Current Ammo
 gu વર્તમાન દારૂગોળો
-
-@ Current Ammo Position
-gu વર્તમાન દારૂગોળાનું સ્થાન
 
 @ Customize This Game
 gu આ ગેમ કસ્ટમાઇઝ કરો
@@ -469,17 +457,11 @@ gu ગાયરો નિશાન
 @ HUD
 gu HUD
 
-@ HUD Style
-gu HUD શૈલી
-
 @ Health
 gu હેલ્થ
 
 @ Health Pickups
 gu હેલ્થ પિકઅપ
-
-@ Health Position
-gu હેલ્થનું સ્થાન
 
 @ Health Regeneration
 gu હેલ્થ પુનઃપ્રાપ્તિ
@@ -589,9 +571,6 @@ gu કૂદકા
 @ Keys & Powerups
 gu ચાવીઓ અને પાવરઅપ્સ
 
-@ Keys & Powerups Position
-gu ચાવીઓ અને પાવરઅપ્સનું સ્થાન
-
 @ Kill Bonus (x)
 gu કિલ બોનસ (x)
 
@@ -661,15 +640,6 @@ gu મહત્તમ રેન્જ
 @ Melee only
 gu ફક્ત હાથાપાઈ
 
-@ Message Background
-gu સંદેશની પૃષ્ઠભૂમિ
-
-@ Message Text Size
-gu સંદેશ લખાણનું કદ
-
-@ Messages & Captions
-gu સંદેશા અને કૅપ્શન
-
 @ Meter Duration (real seconds)
 gu મીટર અવધિ (વાસ્તવિક સેકન્ડ)
 
@@ -681,9 +651,6 @@ gu મોડ
 
 @ Modern Console
 gu આધુનિક કન્સોલ
-
-@ Modern HUD Layout
-gu આધુનિક HUD લેઆઉટ
 
 @ Most recent save
 gu સૌથી તાજેતરનો સેવ
@@ -732,9 +699,6 @@ gu ઘોંઘાટ ફિલ્ટર
 
 @ Normal Color
 gu સામાન્ય રંગ
-
-@ Notify Message Position
-gu સૂચના સંદેશનું સ્થાન
 
 @ Notify Message Time
 gu સૂચના સંદેશનો સમય
@@ -940,17 +904,11 @@ gu ડાબા ખભેથી
 @ Shoulder right
 gu જમણા ખભેથી
 
-@ Show FPS
-gu FPS બતાવો
-
 @ Show Face
 gu ચહેરો બતાવો
 
 @ Shrapnel
 gu શ્રેપનલ
-
-@ Size of on-screen messages and captions
-gu સ્ક્રીન પરના સંદેશા અને કૅપ્શનનું કદ
 
 @ Skill
 gu મુશ્કેલી
@@ -1120,15 +1078,6 @@ gu હથિયાર ચક્ર ધીમું
 @ Weapons
 gu હથિયારો
 
-@ Weapons Position
-gu હથિયારોનું સ્થાન
-
-@ Where center-screen messages appear
-gu સ્ક્રીનની મધ્યના સંદેશા ક્યાં દેખાય છે
-
-@ Where pickup and event messages appear
-gu પિકઅપ અને ઘટનાના સંદેશા ક્યાં દેખાય છે
-
 @ White
 gu સફેદ
 
@@ -1168,9 +1117,6 @@ gu ચોરસ
 
 @ broken square
 gu તૂટેલો ચોરસ
-
-@ classic
-gu ક્લાસિક
 
 @ coarse
 gu બરછટ
@@ -1259,29 +1205,17 @@ gu તીવ્ર
 @ large
 gu મોટું
 
-@ larger
-gu વધુ મોટું
-
-@ largest
-gu સૌથી મોટું
-
 @ linear
 gu લીનિયર
 
 @ low
 gu નીચું
 
-@ lower
-gu નીચલું
-
 @ magenta
 gu મૅજેન્ટા
 
 @ medium
 gu મધ્યમ
-
-@ middle
-gu મધ્ય
 
 @ middle left
 gu મધ્ય ડાબે
@@ -1369,9 +1303,6 @@ gu ત્રેવડું
 
 @ tritanopia
 gu ટ્રાઇટેનોપિયા
-
-@ upper
-gu ઉપલું
 
 @ white
 gu સફેદ
@@ -1496,6 +1427,211 @@ gu વિન્ડો જેવું
 @ GPU Encoding
 gu GPU એન્કોડિંગ
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+gu સમય અને આંકડા
+
+@ Clock
+gu ઘડિયાળ
+
+@ Level Timer
+gu સ્તર ટાઇમર
+
+@ Personal Best
+gu વ્યક્તિગત શ્રેષ્ઠ
+
+@ Personal Best Type
+gu શ્રેષ્ઠનો પ્રકાર
+
+@ Personal Best Color
+gu શ્રેષ્ઠનો રંગ
+
+@ Kills
+gu માર્યા
+
+@ Secrets
+gu રહસ્યો
+
+@ 24-hour
+gu 24 કલાક
+
+@ 24-hour + seconds
+gu 24 કલાક + સેકન્ડ
+
+@ 12-hour
+gu 12 કલાક
+
+@ 12-hour + seconds
+gu 12 કલાક + સેકન્ડ
+
+@ count
+gu સંખ્યા
+
+@ percent
+gu ટકા
+
+@ any% and 100%
+gu any% અને 100%
+
+@ Keep Personal Best Demos
+gu વ્યક્તિગત શ્રેષ્ઠ ડેમો રાખો
+
+@ any%
+gu any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+gu પ્રદર્શન માપ
+
+@ Frame Time
+gu ફ્રેમ સમય
+
+@ CPU Usage
+gu CPU વપરાશ
+
+@ Memory Usage
+gu મેમરી વપરાશ
+
+@ GPU Time
+gu GPU સમય
+
+@ Video Memory
+gu વિડિયો મેમરી
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+gu ઉમેરો
+
+@ Ammo
+gu દારૂગોળો
+
+@ Ammo Bar
+gu દારૂગોળા બાર
+
+@ Armor Bar
+gu બખ્તર બાર
+
+@ Background
+gu પૃષ્ઠભૂમિ
+
+@ Cells
+gu સેલ
+
+@ Center Message
+gu મધ્ય સંદેશ
+
+@ Columns
+gu કૉલમ
+
+@ Edit HUD
+gu HUD સંપાદિત કરો
+
+@ FPS
+gu FPS
+
+@ Face
+gu ચહેરો
+
+@ Fill Width
+gu પૂર્ણ પહોળાઈ
+
+@ Font
+gu ફોન્ટ
+
+@ Format
+gu ફોર્મેટ
+
+@ HUD Editor
+gu HUD સંપાદક
+
+@ Health Bar
+gu સ્વાસ્થ્ય બાર
+
+@ Inventory
+gu ઇન્વેન્ટરી
+
+@ Keys
+gu ચાવીઓ
+
+@ Nails
+gu ખીલા
+
+@ Notify Messages
+gu સૂચના સંદેશાઓ
+
+@ Position
+gu સ્થાન
+
+@ Powerups
+gu પાવરઅપ્સ
+
+@ Precision
+gu ચોકસાઈ
+
+@ Quake
+gu Quake
+
+@ Rockets
+gu રૉકેટ
+
+@ Scale
+gu માપ
+
+@ Sections
+gu વિભાગો
+
+@ Shells
+gu કારતૂસ
+
+@ Show As
+gu આ રીતે બતાવો
+
+@ Show Icon
+gu આઇકન બતાવો
+
+@ Show Value
+gu મૂલ્ય બતાવો
+
+@ Sigils
+gu સિગિલ
+
+@ Status
+gu સ્થિતિ
+
+@ Status Bar
+gu સ્થિતિ બાર
+
+@ Visibility
+gu દૃશ્યતા
+
+@ big numbers
+gu મોટા અંકો
+
+@ center
+gu મધ્ય
+
+@ status + inventory
+gu સ્થિતિ + ઇન્વેન્ટરી
+
+@ status only
+gu ફક્ત સ્થિતિ
+
+@ Text Color
+gu લખાણનો રંગ
+
+@ Label Color
+gu લેબલનો રંગ
+
+@ HUD Preset
+gu HUD પ્રીસેટ
+
+@ custom
+gu કસ્ટમ
+
+@ classic
+gu ક્લાસિક
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ gu નિશાનની સંખ્યા, સમયગાળો, હવામ
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 gu શેડર ઇનપુટને આઉટપુટ કદ સુધી મર્યાદિત કરે છે જેથી 200% રેન્ડર સ્કેલ 4x શેડર ખર્ચ વિના 3D તીક્ષ્ણતા રાખે; નીચા સ્કેલ ઓછા રિઝોલ્યુશનમાં રહે છે
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-gu ક્લાસિક: મૂળ સ્ટેટસ બાર; આધુનિક: સ્ક્રીનની કિનારીએ નાના ઘટકો
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 gu પડનું ઍટલાસ રિઝોલ્યુશન, પુનઃનિર્માણ દર અને શેડર વિગત: નીચું નાનાં પડ ઓછી વાર ઝડપી શેડિંગ સાથે બનાવે છે; ઊંચું પૂર્ણ વિગત વાપરે છે
 
@@ -1558,9 +1691,6 @@ gu રેલગનની વર્તુળાકાર રેખાનો ર�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 gu રેલગન જે દરેક દુશ્મનમાંથી પસાર થાય તેને થતું નુકસાન (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-gu વાંચવામાં સરળતા માટે સ્ક્રીન પરના સંદેશા પાછળ ઘેરી પૃષ્ઠભૂમિ
 
 @ Dark border keeps the crosshair visible on any background
 gu ઘેરી કિનારી કોઈ પણ પૃષ્ઠભૂમિ પર ક્રૉસહેરને દૃશ્યમાન રાખે છે
@@ -1811,17 +1941,11 @@ gu પાણી અને સ્લાઇમ નીચેની સપાટી�
 @ Scales all damage you take; above 100% is harder
 gu તમને થતા બધા નુકસાનને માપે છે; 100%થી ઉપર વધુ મુશ્કેલ છે
 
-@ Screen edge for this element; elements on the same spot stack
-gu આ ઘટક માટે સ્ક્રીનની કિનારી; એક જ જગ્યાના ઘટકો એકબીજા પર ગોઠવાય છે
-
 @ Seconds a monster hit by the boomerang stays stunned
 gu બૂમરેંગથી અથડાયેલો રાક્ષસ કેટલી સેકન્ડ સ્તબ્ધ રહે છે
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 gu અથડામણનાં નિશાન અને ચોંટેલા ખીલા ઝાંખા થતાં પહેલાં કેટલી સેકન્ડ રહે છે; કણોની ગુણવત્તાથી સ્વતંત્ર
-
-@ Seconds messages at the top of the screen stay up
-gu સ્ક્રીનની ઉપરના સંદેશા કેટલી સેકન્ડ રહે છે
 
 @ Seconds the flick stick snap takes; lower is faster
 gu ફ્લિક સ્ટિકના ઝટકાને લાગતી સેકન્ડ; ઓછું એટલે ઝડપી
@@ -1990,6 +2114,50 @@ gu વીડિયોનું કદ; ફ્રેમ વિન્ડોના 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 gu ffmpeg વાપરી શકે ત્યારે ગ્રાફિક્સ કાર્ડ પર એન્કોડ કરે છે (NVIDIA NVENC, VA-API દ્વારા AMD કે Intel, AMF કે Quick Sync, Apple VideoToolbox) અને પ્રોસેસરને મુક્ત રાખે છે; નહીં તો પ્રોસેસર એન્કોડ કરે છે
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+gu પસંદ કરેલા ફોર્મેટમાં દિવસનો સમય બતાવે છે
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+gu સ્તરનો સમય, મધ્યાંતર સ્ક્રીનની જેમ; થોભાવતાં અને બહાર નીકળતાં અટકે છે
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+gu any%: કોઈ પણ અંત; 100%: બધા માર્યા અને રહસ્યો. સેવ કાર્ડ પહેલાં આ જ બતાવે છે
+
+@ Color of the personal best on the HUD and save cards
+gu HUD અને સેવ કાર્ડ પર વ્યક્તિગત શ્રેષ્ઠનો રંગ
+
+@ Shown as a count or as a percentage of the level's total
+gu સંખ્યા તરીકે અથવા સ્તરના કુલના ટકા તરીકે
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+gu વ્યક્તિગત શ્રેષ્ઠ બનાવનાર દરેક સ્તરનો ડેમો રાખે છે; જૂના રહે છે. ઓટો રેકોર્ડ બંધ હોય ત્યારે પણ રેકોર્ડ કરે છે
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+gu પ્રતિ સેકન્ડ ફ્રેમ, અડધી સેકન્ડની સરેરાશ
+
+@ Average time per frame in milliseconds, and the slowest frame
+gu પ્રતિ ફ્રેમ સરેરાશ સમય મિલિસેકન્ડમાં, અને સૌથી ધીમી ફ્રેમ
+
+@ How busy the game keeps the processor, as a share of all its cores
+gu રમત પ્રોસેસરને કેટલું વ્યસ્ત રાખે છે, બધા કોરના હિસ્સા તરીકે
+
+@ Memory the game uses
+gu રમત વાપરે છે તે મેમરી
+
+@ Graphics card time per frame in milliseconds
+gu પ્રતિ ફ્રેમ ગ્રાફિક્સ કાર્ડનો સમય મિલિસેકન્ડમાં
+
+@ Video memory in use and what the driver allows, where it reports it
+gu વપરાશમાં વિડિયો મેમરી અને ડ્રાઇવરની મંજૂરી, જ્યાં તે જણાવે છે
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+gu HUD ઘટકો ખસેડો, માપ બદલો, ઉમેરો અને દૂર કરો: સ્વાસ્થ્ય, દારૂગોળો, હથિયારો, ટાઇમર, સંદેશાઓ અને વધુ
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+gu આધુનિક: સ્ક્રીનની કિનારીએ નાના ઘટકો; ક્લાસિક: મૂળ સ્થિતિ બાર. એક પસંદ કરવાથી HUD રીસેટ થાય છે; HUD સંપાદિત કરોમાં ફેરફાર તેને કસ્ટમ બનાવે છે
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ gu વીડિયો નિકાસ થઈ રહ્યો છે
 @ Preparing...
 gu તૈયારી થઈ રહી છે...
 
+# Save cards: personal best.
+@ PB {} {}
+gu PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ gu {} લખાયું ({} સે.)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 gu ffmpeg મળ્યું નહીં: {} PNG ફ્રેમ અને એક WAV {} માં લખાયા
+
+# Personal bests.
+@ New personal best ({}): {}
+gu નવો વ્યક્તિગત શ્રેષ્ઠ ({}): {}

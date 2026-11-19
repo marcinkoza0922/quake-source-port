@@ -196,8 +196,8 @@ Options → Accesibilidade:
 - Filtros para o daltonismo.
 - Punto de mira configurable: forma, tamaño, contorno e cambio de cor ao
   apuntar a un obxectivo ou ao matar; marcadores de impacto opcionais.
-- **Subtítulos de sons** e axustes das mensaxes (Mensaxes e subtítulos),
-  tamaño do texto.
+- **Subtítulos de sons**; a posición, o tamaño e a duración das mensaxes e
+  dos subtítulos axústanse no editor da interface.
 - Atacar e correr alternos (en vez de manter).
 - Un control da velocidade do xogo para ralentizar toda a partida.
 - Puntaría automática con indicador de fixación e axustes de cono e

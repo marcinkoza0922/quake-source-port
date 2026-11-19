@@ -43,10 +43,13 @@ fn several_words_and_pages() {
 fn top_level_pages_are_listed() {
     let h = matches("audio");
     assert!(h[0].item.is_none() && h[0].label == "Audio");
-    // a page reached from two parents is indexed once, rows from both
-    let n = index().iter().filter(|h| h.label == "Center Message Time").count();
-    assert_eq!(n, 1);
-    assert_eq!(index().iter().filter(|h| h.label == "Messages & Captions").count(), 2);
+    // every row is indexed once
+    assert_eq!(index().iter().filter(|h| h.label == "Edit HUD").count(), 1);
+    // settings that moved into the HUD editor lead to it
+    for q in ["fps", "clock", "captions"] {
+        assert!(labels(q).contains(&"Edit HUD"), "{q}: {:?}", labels(q));
+    }
+    assert!(labels("classic").contains(&"HUD Preset"));
 }
 
 #[test]
@@ -149,8 +152,10 @@ fn net_and_sub_page_breadcrumbs() {
     assert_eq!(m.crumbs(Page::Host), ["Multiplayer", "Host Game"]);
     assert_eq!(m.crumbs(Page::Gyro), ["Options", "Input", "Controller", "Gyro & Flick Stick"]);
     // a page with two parents shows the one it was opened from
-    m.sub_return = Some((Page::Accessibility, Page::Messages, 3));
-    assert_eq!(m.crumbs(Page::Messages), ["Options", "Accessibility", "Messages & Captions"]);
+    m.sub_return = Some((Page::NewGameAddons, Page::PortalGun, 0));
+    let c = m.crumbs(Page::PortalGun);
+    assert_eq!(c[c.len() - 2..], [page_name(Page::NewGameAddons), page_name(Page::PortalGun)]);
     m.sub_return = None;
-    assert_eq!(m.crumbs(Page::Messages), ["Options", "HUD", "Messages & Captions"]);
+    let c = m.crumbs(Page::PortalGun);
+    assert_eq!(c[c.len() - 2..], [page_name(Page::Addons), page_name(Page::PortalGun)]);
 }

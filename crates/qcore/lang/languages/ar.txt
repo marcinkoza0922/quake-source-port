@@ -103,9 +103,6 @@ ar الإطباق المحيطي
 @ Ammo Counts
 ar عدد الذخيرة
 
-@ Ammo Counts Position
-ar موضع عدد الذخيرة
-
 @ Ammo Pickups
 ar التقاط الذخيرة
 
@@ -120,9 +117,6 @@ ar تطبيق على
 
 @ Armor
 ar الدرع
-
-@ Armor Position
-ar موضع الدرع
 
 @ Ask
 ar اسأل
@@ -220,9 +214,6 @@ ar انكسارات الضوء
 @ Center
 ar الوسط
 
-@ Center Message Position
-ar موضع رسائل الوسط
-
 @ Center Message Time
 ar مدة رسائل الوسط
 
@@ -282,9 +273,6 @@ ar حجم علامة التصويب
 
 @ Current Ammo
 ar الذخيرة الحالية
-
-@ Current Ammo Position
-ar موضع الذخيرة الحالية
 
 @ Customize This Game
 ar تخصيص هذه اللعبة
@@ -469,17 +457,11 @@ ar التصويب بالجيروسكوب
 @ HUD
 ar HUD
 
-@ HUD Style
-ar نمط HUD
-
 @ Health
 ar الصحة
 
 @ Health Pickups
 ar التقاط الصحة
-
-@ Health Position
-ar موضع الصحة
 
 @ Health Regeneration
 ar تجدد الصحة
@@ -589,9 +571,6 @@ ar القفزات
 @ Keys & Powerups
 ar المفاتيح والمعززات
 
-@ Keys & Powerups Position
-ar موضع المفاتيح والمعززات
-
 @ Kill Bonus (x)
 ar مكافأة القتل (×)
 
@@ -661,15 +640,6 @@ ar أقصى مدى
 @ Melee only
 ar القتال القريب فقط
 
-@ Message Background
-ar خلفية الرسائل
-
-@ Message Text Size
-ar حجم نص الرسائل
-
-@ Messages & Captions
-ar الرسائل والتعليقات
-
 @ Meter Duration (real seconds)
 ar مدة العداد (ثوانٍ حقيقية)
 
@@ -681,9 +651,6 @@ ar الوضع
 
 @ Modern Console
 ar وحدة تحكم حديثة
-
-@ Modern HUD Layout
-ar تخطيط HUD حديث
 
 @ Most recent save
 ar أحدث حفظ
@@ -732,9 +699,6 @@ ar مرشّح التشويش
 
 @ Normal Color
 ar اللون العادي
-
-@ Notify Message Position
-ar موضع رسائل الإشعارات
 
 @ Notify Message Time
 ar مدة رسائل الإشعارات
@@ -940,17 +904,11 @@ ar كتف يسار
 @ Shoulder right
 ar كتف يمين
 
-@ Show FPS
-ar عرض FPS
-
 @ Show Face
 ar عرض الوجه
 
 @ Shrapnel
 ar الشظايا
-
-@ Size of on-screen messages and captions
-ar حجم الرسائل والتعليقات على الشاشة
 
 @ Skill
 ar الصعوبة
@@ -1120,15 +1078,6 @@ ar إبطاء عجلة الأسلحة
 @ Weapons
 ar الأسلحة
 
-@ Weapons Position
-ar موضع الأسلحة
-
-@ Where center-screen messages appear
-ar مكان ظهور رسائل وسط الشاشة
-
-@ Where pickup and event messages appear
-ar مكان ظهور رسائل الالتقاط والأحداث
-
 @ White
 ar أبيض
 
@@ -1168,9 +1117,6 @@ ar مربع
 
 @ broken square
 ar مربع مكسور
-
-@ classic
-ar كلاسيكي
 
 @ coarse
 ar خشن
@@ -1259,29 +1205,17 @@ ar مكثّف
 @ large
 ar كبير
 
-@ larger
-ar أكبر
-
-@ largest
-ar الأكبر
-
 @ linear
 ar خطي
 
 @ low
 ar منخفض
 
-@ lower
-ar أسفل
-
 @ magenta
 ar أرجواني
 
 @ medium
 ar متوسط
-
-@ middle
-ar الوسط
 
 @ middle left
 ar وسط اليسار
@@ -1369,9 +1303,6 @@ ar ثلاثي
 
 @ tritanopia
 ar عمى الأزرق
-
-@ upper
-ar أعلى
 
 @ white
 ar أبيض
@@ -1496,6 +1427,211 @@ ar مثل النافذة
 @ GPU Encoding
 ar ترميز GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+ar الوقت والإحصاءات
+
+@ Clock
+ar الساعة
+
+@ Level Timer
+ar مؤقت المرحلة
+
+@ Personal Best
+ar أفضل رقم شخصي
+
+@ Personal Best Type
+ar نوع أفضل رقم
+
+@ Personal Best Color
+ar لون أفضل رقم
+
+@ Kills
+ar القتلى
+
+@ Secrets
+ar الأسرار
+
+@ 24-hour
+ar 24 ساعة
+
+@ 24-hour + seconds
+ar 24 ساعة + ثوانٍ
+
+@ 12-hour
+ar 12 ساعة
+
+@ 12-hour + seconds
+ar 12 ساعة + ثوانٍ
+
+@ count
+ar عدد
+
+@ percent
+ar نسبة مئوية
+
+@ any% and 100%
+ar any% و100%
+
+@ Keep Personal Best Demos
+ar الاحتفاظ بعروض أفضل الأرقام
+
+@ any%
+ar any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+ar مقاييس الأداء
+
+@ Frame Time
+ar زمن الإطار
+
+@ CPU Usage
+ar استخدام المعالج
+
+@ Memory Usage
+ar استخدام الذاكرة
+
+@ GPU Time
+ar زمن معالج الرسوميات
+
+@ Video Memory
+ar ذاكرة الفيديو
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+ar إضافة
+
+@ Ammo
+ar الذخيرة
+
+@ Ammo Bar
+ar شريط الذخيرة
+
+@ Armor Bar
+ar شريط الدرع
+
+@ Background
+ar الخلفية
+
+@ Cells
+ar خلايا
+
+@ Center Message
+ar رسالة الوسط
+
+@ Columns
+ar الأعمدة
+
+@ Edit HUD
+ar تحرير HUD
+
+@ FPS
+ar FPS
+
+@ Face
+ar الوجه
+
+@ Fill Width
+ar العرض الكامل
+
+@ Font
+ar الخط
+
+@ Format
+ar التنسيق
+
+@ HUD Editor
+ar محرر HUD
+
+@ Health Bar
+ar شريط الصحة
+
+@ Inventory
+ar المخزون
+
+@ Keys
+ar المفاتيح
+
+@ Nails
+ar مسامير
+
+@ Notify Messages
+ar رسائل الإشعارات
+
+@ Position
+ar الموضع
+
+@ Powerups
+ar المعززات
+
+@ Precision
+ar الدقة
+
+@ Quake
+ar Quake
+
+@ Rockets
+ar صواريخ
+
+@ Scale
+ar المقياس
+
+@ Sections
+ar الأقسام
+
+@ Shells
+ar خرطوش
+
+@ Show As
+ar العرض كـ
+
+@ Show Icon
+ar إظهار الأيقونة
+
+@ Show Value
+ar إظهار القيمة
+
+@ Sigils
+ar الرموز
+
+@ Status
+ar الحالة
+
+@ Status Bar
+ar شريط الحالة
+
+@ Visibility
+ar الظهور
+
+@ big numbers
+ar أرقام كبيرة
+
+@ center
+ar الوسط
+
+@ status + inventory
+ar الحالة + المخزون
+
+@ status only
+ar الحالة فقط
+
+@ Text Color
+ar لون النص
+
+@ Label Color
+ar لون التسميات
+
+@ HUD Preset
+ar إعداد HUD المسبق
+
+@ custom
+ar مخصص
+
+@ classic
+ar كلاسيكي
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ ar يحدّ عدد الآثار ومدتها والقطرات المتطايرة
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 ar يحدّ دخل المرشّح بحجم المخرج كي يحافظ مقياس 200% على حدة المشهد دون تكلفة مضاعفة 4 مرات؛ المقاييس المنخفضة تبقى منخفضة الدقة
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-ar كلاسيكي: شريط الحالة الأصلي؛ حديث: عناصر مدمجة على أطراف الشاشة
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 ar دقة أطلس الطبقات ومعدل إعادة بنائها وتفاصيل التظليل: المنخفض يبني طبقات أصغر بوتيرة أقل بتظليل سريع؛ العالي يستخدم التفاصيل الكاملة
 
@@ -1558,9 +1691,6 @@ ar لون الأثر الحلزوني للريلغن؛ يحصل كل لاعب ف
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 ar الضرر الذي يُلحقه الريلغن بكل عدو يخترقه (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-ar خلفية داكنة خلف الرسائل على الشاشة لتسهيل القراءة
 
 @ Dark border keeps the crosshair visible on any background
 ar حدّ داكن يُبقي علامة التصويب مرئية على أي خلفية
@@ -1811,17 +1941,11 @@ ar أنماط ضوء متموجة على الأسطح تحت الماء والو
 @ Scales all damage you take; above 100% is harder
 ar يغيّر مقياس كل الضرر الذي تتلقاه؛ فوق 100% أصعب
 
-@ Screen edge for this element; elements on the same spot stack
-ar طرف الشاشة لهذا العنصر؛ العناصر في المكان نفسه تتراكم
-
 @ Seconds a monster hit by the boomerang stays stunned
 ar عدد ثواني بقاء الوحش المصاب بالبوميرانغ مصعوقًا
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 ar عدد ثواني بقاء آثار الإصابة والمسامير المنغرسة قبل تلاشيها؛ مستقل عن جودة الجسيمات
-
-@ Seconds messages at the top of the screen stay up
-ar عدد ثواني بقاء الرسائل في أعلى الشاشة
 
 @ Seconds the flick stick snap takes; lower is faster
 ar عدد الثواني التي يستغرقها الالتفاف السريع؛ الأقل أسرع
@@ -1990,6 +2114,50 @@ ar حجم الفيديو؛ تُحجَّم الإطارات من حجم النا�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 ar يرمّز على بطاقة الرسوميات (NVIDIA NVENC، أو AMD أو Intel عبر VA-API، أو AMF أو Quick Sync، أو Apple VideoToolbox) عندما يستطيع ffmpeg استخدامها، فيبقى المعالج حرًّا؛ وإلا فالمعالج يرمّز
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+ar يعرض الوقت بالتنسيق المختار
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+ar وقت المرحلة كما في شاشة الاستراحة؛ يتوقف عند الإيقاف المؤقت وعند المخرج
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+ar any%: أي إنهاء؛ 100%: كل القتلى والأسرار. بطاقات الحفظ تعرض هذا أولًا
+
+@ Color of the personal best on the HUD and save cards
+ar لون أفضل رقم شخصي في الواجهة وبطاقات الحفظ
+
+@ Shown as a count or as a percentage of the level's total
+ar كعدد أو كنسبة مئوية من مجموع المرحلة
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+ar يحتفظ بعرض كل مرحلة تحقق أفضل رقم شخصي؛ تبقى القديمة. يسجل حتى مع إيقاف التسجيل التلقائي
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+ar الإطارات في الثانية، بمتوسط نصف ثانية
+
+@ Average time per frame in milliseconds, and the slowest frame
+ar متوسط زمن الإطار بالملّي ثانية، وأبطأ إطار
+
+@ How busy the game keeps the processor, as a share of all its cores
+ar مقدار انشغال المعالج باللعبة، كنسبة من كل أنويته
+
+@ Memory the game uses
+ar الذاكرة التي تستخدمها اللعبة
+
+@ Graphics card time per frame in milliseconds
+ar زمن بطاقة الرسوميات لكل إطار بالملّي ثانية
+
+@ Video memory in use and what the driver allows, where it reports it
+ar ذاكرة الفيديو المستخدمة وما يسمح به التعريف، حيث يبلّغ عنها
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+ar انقل عناصر HUD وغيّر حجمها وأضفها وأزلها: الصحة والذخيرة والأسلحة والمؤقتات والرسائل وغير ذلك
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+ar حديث: عناصر مدمجة عند حواف الشاشة؛ كلاسيكي: شريط الحالة الأصلي. اختيار أحدهما يعيد ضبط HUD؛ والتغييرات في تحرير HUD تجعله مخصصًا
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ ar جارٍ تصدير الفيديو
 @ Preparing...
 ar جارٍ التحضير...
 
+# Save cards: personal best.
+@ PB {} {}
+ar PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ ar كُتب {} ({} ث)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 ar لم يُعثر على ffmpeg: كُتب {} إطار PNG وملف WAV في {}
+
+# Personal bests.
+@ New personal best ({}): {}
+ar أفضل رقم شخصي جديد ({}): {}

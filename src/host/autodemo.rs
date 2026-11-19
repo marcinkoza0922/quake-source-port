@@ -2,7 +2,9 @@
 //! `autodemos/<stamp>_<map>.dem`, from its serverinfo to the next map or
 //! disconnect. Only the newest `cl_autodemo_slots` are kept (0: all); a
 //! level shorter than [`MIN_SECS`] is discarded. `demo_keep` moves one into
-//! the saved demos, where rotation never touches it.
+//! the saved demos, where rotation never touches it. With only
+//! `cl_autodemo_pb` on, levels are still recorded but kept only when they
+//! set a personal best (`level_time`).
 
 use std::path::Path;
 
@@ -18,11 +20,14 @@ pub(super) struct AutoDemo {
     span: Option<(f64, f64)>,
     /// `demo_keep` during the level: the saved name to use when it ends.
     keep: Option<String>,
+    /// Recorded only for `cl_autodemo_pb` (auto-demos off): dropped unless
+    /// the level sets a personal best.
+    pb_only: bool,
 }
 
 impl Host {
     fn autodemo_allowed(&self) -> bool {
-        self.cv("cl_autodemo") != 0.0 && self.demo.is_none() && self.timedemo.is_none() && !self.dedicated && self.capture.as_ref().is_none_or(|c| c.export.is_none())
+        (self.cv("cl_autodemo") != 0.0 || self.cv("cl_autodemo_pb") != 0.0) && self.demo.is_none() && self.timedemo.is_none() && !self.dedicated && self.capture.as_ref().is_none_or(|c| c.export.is_none())
     }
 
     /// Called with every server message after it is parsed: a serverinfo
@@ -49,14 +54,15 @@ impl Host {
     fn autodemo_start(&mut self) {
         let dir = self.user_dir().join(AUTO_DIR);
         let slots = self.cv("cl_autodemo_slots").max(0.0) as usize;
+        let pb_only = self.cv("cl_autodemo") == 0.0;
         // room for the new one
-        if slots > 0 {
+        if slots > 0 && !pb_only {
             library::prune(&dir, slots - 1);
         }
         let map: String = self.cl.mapname.chars().map(|c| if c.is_alphanumeric() || "-_".contains(c) { c } else { '_' }).collect();
         let path = dir.join(format!("{}_{}.dem", crate::demo::stamp_now(), if map.is_empty() { "map" } else { &map }));
         match crate::demo::DemoWriter::create(&path, -1) {
-            Ok(writer) => self.autodemo = Some(AutoDemo { writer, span: None, keep: None }),
+            Ok(writer) => self.autodemo = Some(AutoDemo { writer, span: None, keep: None, pb_only }),
             Err(e) => self.con.print(&qcore::ctr!("ERROR: couldn't create {}: {}\n", path.display(), e)),
         }
     }
@@ -67,7 +73,7 @@ impl Host {
         let path = a.writer.path().to_path_buf();
         let ok = a.writer.write(self.cl.viewangles, &[qnet::protocol::SVC_DISCONNECT]).and_then(|_| a.writer.finish()).is_ok();
         let long = a.span.is_some_and(|(t0, t1)| t1 - t0 >= MIN_SECS);
-        if !ok || !long {
+        if !ok || !long || (a.pb_only && a.keep.is_none()) {
             let _ = qcore::vfs::remove_file(&path);
             return;
         }
@@ -146,6 +152,14 @@ impl Host {
             return a.writer.copy_to(dest, angles).is_ok();
         }
         self.last_autodemo.as_ref().and_then(|p| qcore::vfs::read(p).ok()).is_some_and(|d| qcore::vfs::write(dest, &d).is_ok())
+    }
+
+    /// The level being recorded is kept as `name` when it ends, unless a
+    /// name was already chosen with `demo_keep`.
+    pub(super) fn autodemo_keep_as(&mut self, name: String) {
+        if let Some(a) = &mut self.autodemo {
+            a.keep.get_or_insert(name);
+        }
     }
 
     /// `demo_keep [name]`: the auto-demo being watched, else the level being

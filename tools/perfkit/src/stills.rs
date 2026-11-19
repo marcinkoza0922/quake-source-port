@@ -152,13 +152,13 @@ pub fn record_cfg(g: &Group) -> Vec<String> {
 
 /// Console lines that hide everything but the 3D view: no status bar, no
 /// crosshair, no weapon, no notify lines. The references hide the HUD with
-/// `viewsize 130`; ours ignores viewsize and hides each HUD element instead.
+/// `viewsize 130`; ours ignores viewsize and uses a layout without elements.
 pub fn hud_off(e: Engine) -> Vec<String> {
     let common = ["crosshair 0", "r_drawviewmodel 0", "con_notifytime 0", "scr_showfps 0"];
     let own: &[&str] = match e {
         Engine::Ours => &[
-            "scr_hudstyle 1", "hud_health 0", "hud_armor 0", "hud_ammo 0", "hud_ammolist 0", "hud_weapons 0", "hud_items 0",
-            "hud_face 0", "hud_damageindicator 0",
+            // a layout with only the (permanent) messages
+            "hud_layout center@mc", "hud_damageindicator 0",
         ],
         Engine::Ironwail | Engine::VkQuake => &["viewsize 130"],
     };

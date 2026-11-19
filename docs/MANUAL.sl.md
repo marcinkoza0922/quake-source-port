@@ -190,8 +190,8 @@ Options → Dostopnost:
 - Filtri za barvno slepoto.
 - Nastavljiv merek: oblika, velikost, obroba in sprememba barve na tarči ali
   ob uboju; neobvezne oznake zadetkov.
-- **Podnapisi zvokov** in nastavitve sporočil (Sporočila in podnapisi),
-  velikost besedila.
+- **Podnapisi zvokov**; položaj, velikost in trajanje sporočil in podnapisov
+  se nastavijo v urejevalniku HUD.
 - Preklop (namesto držanja) za napad in tek.
 - Drsnik hitrosti igre za upočasnitev celotne igre.
 - Samodejno merjenje s kazalnikom zajema ter nastavitvami stožca in dosega.

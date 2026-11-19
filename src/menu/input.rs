@@ -6,6 +6,10 @@ impl Menu {
     pub fn mouse_move(&mut self, pos: (f32, f32), cv: &mut Cvars) -> Option<&'static str> {
         self.sync_autoaim_mapping(cv);
         self.mouse = Some(pos);
+        if self.screen == Screen::HudEditor {
+            self.hud_edit.mouse_move(pos, cv);
+            return None;
+        }
         if self.autoaim_prompt || self.capturing() { return None; }
         if matches!(self.prompt, Some(Prompt::Launch { .. })) { return self.launch_hover(pos, cv); }
         if matches!(self.prompt, Some(Prompt::Preset { .. })) { return self.preset_hover(pos); }
@@ -77,6 +81,16 @@ impl Menu {
         }
         if self.prompt.is_some() {
             self.prompt_key(key, &mut out);
+            return out;
+        }
+        if self.screen == Screen::HudEditor {
+            let r = self.hud_edit.key(key, cv);
+            out.extend(r.sound.map(Action::Sound));
+            if r.exit {
+                self.open(Screen::OptionsPage(Page::Hud));
+                // back on the Edit HUD row
+                self.opt_cursor = HUD.iter().position(|i| matches!(i, Item::Run { run: Run::EditHud, .. })).unwrap_or(0);
+            }
             return out;
         }
         if let Some(row) = self.capture.take() {
@@ -239,7 +253,7 @@ impl Menu {
                     out.push(Action::Command(format!("_death_choice {}\n", choice + 1)));
                 }
             }
-            Screen::None => {}
+            Screen::None | Screen::HudEditor => {}
             Screen::Help => {}
             Screen::Main => {
                 if back {

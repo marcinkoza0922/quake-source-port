@@ -202,8 +202,8 @@ Options → Accessibilité :
 - Filtres pour daltoniens.
 - Réticule configurable : forme, taille, contour et changement de couleur
   sur cible ou à l'élimination ; marqueurs de touche facultatifs.
-- **Sous-titres des sons** et réglages des messages (Messages et
-  sous-titres), taille du texte.
+- **Sous-titres des sons**; l'emplacement, la taille et la durée des
+  messages et des sous-titres se règlent dans l'éditeur d'ATH.
 - Attaque et course en bascule (au lieu de maintenir).
 - Un curseur de vitesse du jeu pour ralentir toute la partie.
 - Visée automatique avec indicateur de verrouillage, réglages du cône et de

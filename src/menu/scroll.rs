@@ -69,6 +69,7 @@ impl Menu {
     }
 
     pub fn mouse_up(&mut self) {
+        self.hud_edit.mouse_up();
         self.drag = None;
         self.slider_drag = None;
         self.text_drag = None;

@@ -103,9 +103,6 @@ te యాంబియెంట్ అక్లూజన్
 @ Ammo Counts
 te మందుగుండు లెక్కలు
 
-@ Ammo Counts Position
-te మందుగుండు లెక్కల స్థానం
-
 @ Ammo Pickups
 te మందుగుండు పికప్‌లు
 
@@ -120,9 +117,6 @@ te వర్తింపజేయి
 
 @ Armor
 te కవచం
-
-@ Armor Position
-te కవచం స్థానం
 
 @ Ask
 te అడుగు
@@ -220,9 +214,6 @@ te కాస్టిక్స్
 @ Center
 te మధ్య
 
-@ Center Message Position
-te మధ్య సందేశం స్థానం
-
 @ Center Message Time
 te మధ్య సందేశం సమయం
 
@@ -282,9 +273,6 @@ te క్రాస్‌హెయిర్ పరిమాణం
 
 @ Current Ammo
 te ప్రస్తుత మందుగుండు
-
-@ Current Ammo Position
-te ప్రస్తుత మందుగుండు స్థానం
 
 @ Customize This Game
 te ఈ గేమ్‌ను అనుకూలీకరించు
@@ -469,17 +457,11 @@ te గైరో గురి
 @ HUD
 te HUD
 
-@ HUD Style
-te HUD శైలి
-
 @ Health
 te ఆరోగ్యం
 
 @ Health Pickups
 te ఆరోగ్య పికప్‌లు
-
-@ Health Position
-te ఆరోగ్యం స్థానం
 
 @ Health Regeneration
 te ఆరోగ్య పునరుత్పత్తి
@@ -589,9 +571,6 @@ te దూకులు
 @ Keys & Powerups
 te తాళాలు & పవర్‌అప్‌లు
 
-@ Keys & Powerups Position
-te తాళాలు & పవర్‌అప్‌ల స్థానం
-
 @ Kill Bonus (x)
 te కిల్ బోనస్ (x)
 
@@ -661,15 +640,6 @@ te గరిష్ట పరిధి
 @ Melee only
 te దగ్గరి పోరాటం మాత్రమే
 
-@ Message Background
-te సందేశ నేపథ్యం
-
-@ Message Text Size
-te సందేశ అక్షరాల పరిమాణం
-
-@ Messages & Captions
-te సందేశాలు & క్యాప్షన్‌లు
-
 @ Meter Duration (real seconds)
 te మీటర్ వ్యవధి (నిజ సెకన్లు)
 
@@ -681,9 +651,6 @@ te మోడ్
 
 @ Modern Console
 te ఆధునిక కన్సోల్
-
-@ Modern HUD Layout
-te ఆధునిక HUD లేఅవుట్
 
 @ Most recent save
 te తాజా సేవ్
@@ -732,9 +699,6 @@ te నాయిస్ ఫిల్టర్
 
 @ Normal Color
 te సాధారణ రంగు
-
-@ Notify Message Position
-te నోటిఫై సందేశం స్థానం
 
 @ Notify Message Time
 te నోటిఫై సందేశం సమయం
@@ -940,17 +904,11 @@ te ఎడమ భుజం
 @ Shoulder right
 te కుడి భుజం
 
-@ Show FPS
-te FPS చూపించు
-
 @ Show Face
 te ముఖం చూపించు
 
 @ Shrapnel
 te ముక్కలు
-
-@ Size of on-screen messages and captions
-te స్క్రీన్ సందేశాలు, క్యాప్షన్‌ల పరిమాణం
 
 @ Skill
 te కష్టతరం
@@ -1120,15 +1078,6 @@ te ఆయుధ చక్రం మందగింపు
 @ Weapons
 te ఆయుధాలు
 
-@ Weapons Position
-te ఆయుధాల స్థానం
-
-@ Where center-screen messages appear
-te మధ్య సందేశాలు ఎక్కడ కనిపిస్తాయి
-
-@ Where pickup and event messages appear
-te పికప్, ఈవెంట్ సందేశాలు ఎక్కడ కనిపిస్తాయి
-
 @ White
 te తెలుపు
 
@@ -1168,9 +1117,6 @@ te పెట్టె
 
 @ broken square
 te విరిగిన చతురస్రం
-
-@ classic
-te క్లాసిక్
 
 @ coarse
 te ముతక
@@ -1259,29 +1205,17 @@ te తీవ్రం
 @ large
 te పెద్ద
 
-@ larger
-te ఇంకా పెద్ద
-
-@ largest
-te అతిపెద్ద
-
 @ linear
 te లీనియర్
 
 @ low
 te తక్కువ
 
-@ lower
-te కింది
-
 @ magenta
 te మెజెంటా
 
 @ medium
 te మధ్యస్థం
-
-@ middle
-te మధ్య
 
 @ middle left
 te మధ్య ఎడమ
@@ -1369,9 +1303,6 @@ te మూడు
 
 @ tritanopia
 te ట్రైటానోపియా
-
-@ upper
-te పై
 
 @ white
 te తెలుపు
@@ -1496,6 +1427,211 @@ te విండో లాగే
 @ GPU Encoding
 te GPU ఎన్‌కోడింగ్
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+te సమయం & గణాంకాలు
+
+@ Clock
+te గడియారం
+
+@ Level Timer
+te స్థాయి టైమర్
+
+@ Personal Best
+te వ్యక్తిగత ఉత్తమం
+
+@ Personal Best Type
+te ఉత్తమం రకం
+
+@ Personal Best Color
+te ఉత్తమం రంగు
+
+@ Kills
+te హతమైనవి
+
+@ Secrets
+te రహస్యాలు
+
+@ 24-hour
+te 24 గంటలు
+
+@ 24-hour + seconds
+te 24 గంటలు + సెకన్లు
+
+@ 12-hour
+te 12 గంటలు
+
+@ 12-hour + seconds
+te 12 గంటలు + సెకన్లు
+
+@ count
+te సంఖ్య
+
+@ percent
+te శాతం
+
+@ any% and 100%
+te any% మరియు 100%
+
+@ Keep Personal Best Demos
+te వ్యక్తిగత ఉత్తమ డెమోలు ఉంచు
+
+@ any%
+te any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+te పనితీరు కొలమానాలు
+
+@ Frame Time
+te ఫ్రేమ్ సమయం
+
+@ CPU Usage
+te CPU వినియోగం
+
+@ Memory Usage
+te మెమరీ వినియోగం
+
+@ GPU Time
+te GPU సమయం
+
+@ Video Memory
+te వీడియో మెమరీ
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+te జోడించు
+
+@ Ammo
+te మందుగుండు
+
+@ Ammo Bar
+te మందుగుండు పట్టీ
+
+@ Armor Bar
+te కవచం పట్టీ
+
+@ Background
+te నేపథ్యం
+
+@ Cells
+te సెల్‌లు
+
+@ Center Message
+te మధ్య సందేశం
+
+@ Columns
+te నిలువు వరుసలు
+
+@ Edit HUD
+te HUD సవరించు
+
+@ FPS
+te FPS
+
+@ Face
+te ముఖం
+
+@ Fill Width
+te పూర్తి వెడల్పు
+
+@ Font
+te ఫాంట్
+
+@ Format
+te ఆకృతి
+
+@ HUD Editor
+te HUD ఎడిటర్
+
+@ Health Bar
+te ఆరోగ్య పట్టీ
+
+@ Inventory
+te సామగ్రి
+
+@ Keys
+te తాళాలు
+
+@ Nails
+te మేకులు
+
+@ Notify Messages
+te నోటిఫై సందేశాలు
+
+@ Position
+te స్థానం
+
+@ Powerups
+te పవర్‌అప్‌లు
+
+@ Precision
+te ఖచ్చితత్వం
+
+@ Quake
+te Quake
+
+@ Rockets
+te రాకెట్‌లు
+
+@ Scale
+te స్కేల్
+
+@ Sections
+te భాగాలు
+
+@ Shells
+te షెల్స్
+
+@ Show As
+te ఇలా చూపు
+
+@ Show Icon
+te ఐకాన్ చూపు
+
+@ Show Value
+te విలువ చూపు
+
+@ Sigils
+te సిగిల్‌లు
+
+@ Status
+te స్థితి
+
+@ Status Bar
+te స్థితి పట్టీ
+
+@ Visibility
+te కనిపించడం
+
+@ big numbers
+te పెద్ద అంకెలు
+
+@ center
+te మధ్య
+
+@ status + inventory
+te స్థితి + సామగ్రి
+
+@ status only
+te స్థితి మాత్రమే
+
+@ Text Color
+te వచనం రంగు
+
+@ Label Color
+te లేబుల్ రంగు
+
+@ HUD Preset
+te HUD ప్రీసెట్
+
+@ custom
+te అనుకూలం
+
+@ classic
+te క్లాసిక్
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ te గుర్తుల సంఖ్య, జీవితకాలం, గాల
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 te షేడర్ ఇన్‌పుట్‌ను అవుట్‌పుట్ పరిమాణానికి పరిమితం చేస్తుంది, కాబట్టి 200% రెండర్ స్కేల్ 4x షేడర్ ఖర్చు లేకుండా 3D స్పష్టతను ఉంచుతుంది; తక్కువ స్కేల్‌లు తక్కువ రిజల్యూషన్‌లోనే ఉంటాయి
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-te క్లాసిక్: అసలైన స్టేటస్ బార్; ఆధునిక: స్క్రీన్ అంచుల వద్ద చిన్న అంశాలు
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 te పూత అట్లాస్ రిజల్యూషన్, పునర్నిర్మాణ రేటు, షేడర్ వివరాలు: తక్కువ చిన్న పూతలను తక్కువసార్లు వేగవంతమైన షేడింగ్‌తో నిర్మిస్తుంది; అధికం పూర్తి వివరాలు వాడుతుంది
 
@@ -1558,9 +1691,6 @@ te రెయిల్‌గన్ సర్పిలాకార గీత ర�
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 te రెయిల్‌గన్ తాను దాటే ప్రతి శత్రువుకు చేసే నష్టం (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-te చదవడం సులభం కావడానికి స్క్రీన్ సందేశాల వెనుక ముదురు నేపథ్యం
 
 @ Dark border keeps the crosshair visible on any background
 te ముదురు అంచు ఏ నేపథ్యంపైనైనా క్రాస్‌హెయిర్‌ను కనిపించేలా ఉంచుతుంది
@@ -1811,17 +1941,11 @@ te నీరు, బురద కింద ఉపరితలాలపై అల
 @ Scales all damage you take; above 100% is harder
 te మీరు పొందే నష్టం మొత్తాన్ని స్కేల్ చేస్తుంది; 100% పైన కష్టం
 
-@ Screen edge for this element; elements on the same spot stack
-te ఈ అంశం కోసం స్క్రీన్ అంచు; ఒకే చోట ఉన్న అంశాలు ఒకదానిపై ఒకటి పేర్చబడతాయి
-
 @ Seconds a monster hit by the boomerang stays stunned
 te బూమరాంగ్ తగిలిన రాక్షసుడు ఎన్ని సెకన్లు స్టన్‌లో ఉంటాడు
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 te తాకిడి గుర్తులు, గుచ్చుకున్న మేకులు మసకబారే ముందు ఉండే సెకన్లు; పార్టికల్ నాణ్యతతో సంబంధం లేదు
-
-@ Seconds messages at the top of the screen stay up
-te స్క్రీన్ పైభాగంలోని సందేశాలు ఎన్ని సెకన్లు ఉంటాయి
 
 @ Seconds the flick stick snap takes; lower is faster
 te ఫ్లిక్ స్టిక్ తిరగడానికి పట్టే సెకన్లు; తక్కువ అంటే వేగం
@@ -1990,6 +2114,50 @@ te వీడియో పరిమాణం; ఫ్రేమ్‌లు వి�
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 te ffmpeg ఉపయోగించగలిగితే గ్రాఫిక్స్ కార్డుపై ఎన్‌కోడ్ చేస్తుంది (NVIDIA NVENC, VA-API ద్వారా AMD లేదా Intel, AMF లేదా Quick Sync, Apple VideoToolbox), ప్రాసెసర్‌ను ఖాళీగా ఉంచుతుంది; లేకపోతే ప్రాసెసర్ ఎన్‌కోడ్ చేస్తుంది
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+te ఎంచుకున్న రూపంలో రోజు సమయం చూపుతుంది
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+te స్థాయి సమయం, విరామ తెరపై లాగా; ఆపినప్పుడు మరియు నిష్క్రమణ వద్ద ఆగుతుంది
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+te any%: ఏ ముగింపైనా; 100%: అన్ని హతాలు మరియు రహస్యాలు. సేవ్ కార్డులు దీన్నే ముందు చూపుతాయి
+
+@ Color of the personal best on the HUD and save cards
+te HUD మరియు సేవ్ కార్డులపై వ్యక్తిగత ఉత్తమం రంగు
+
+@ Shown as a count or as a percentage of the level's total
+te సంఖ్యగా లేదా స్థాయి మొత్తంలో శాతంగా
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+te వ్యక్తిగత ఉత్తమం సాధించిన ప్రతి స్థాయి డెమోను ఉంచుతుంది; పాతవి ఉంటాయి. ఆటో రికార్డ్ ఆఫ్‌లో ఉన్నా రికార్డ్ చేస్తుంది
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+te సెకనుకు ఫ్రేమ్‌లు, అర సెకను సగటు
+
+@ Average time per frame in milliseconds, and the slowest frame
+te ఒక్కో ఫ్రేమ్‌కు సగటు సమయం మిల్లీసెకన్లలో, మరియు అత్యంత నెమ్మదైన ఫ్రేమ్
+
+@ How busy the game keeps the processor, as a share of all its cores
+te ఆట ప్రాసెసర్‌ను ఎంత బిజీగా ఉంచుతుంది, అన్ని కోర్‌ల వాటాగా
+
+@ Memory the game uses
+te ఆట వాడుతున్న మెమరీ
+
+@ Graphics card time per frame in milliseconds
+te ఒక్కో ఫ్రేమ్‌కు గ్రాఫిక్స్ కార్డ్ సమయం మిల్లీసెకన్లలో
+
+@ Video memory in use and what the driver allows, where it reports it
+te వాడుకలో ఉన్న వీడియో మెమరీ మరియు డ్రైవర్ అనుమతి, అది తెలియజేసిన చోట
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+te HUD అంశాలను కదిలించండి, పరిమాణం మార్చండి, జోడించండి, తొలగించండి: ఆరోగ్యం, మందుగుండు, ఆయుధాలు, టైమర్‌లు, సందేశాలు మరియు మరిన్ని
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+te ఆధునికం: తెర అంచుల వద్ద చిన్న అంశాలు; క్లాసిక్: అసలు స్థితి పట్టీ. ఒకదాన్ని ఎంచుకుంటే HUD రీసెట్ అవుతుంది; HUD సవరించులో మార్పులు దాన్ని అనుకూలంగా మారుస్తాయి
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ te వీడియో ఎగుమతి అవుతోంది
 @ Preparing...
 te సిద్ధమవుతోంది...
 
+# Save cards: personal best.
+@ PB {} {}
+te PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ te {} రాయబడింది ({} సె.)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 te ffmpeg కనబడలేదు: {} PNG ఫ్రేమ్‌లు మరియు ఒక WAV {} లో రాయబడ్డాయి
+
+# Personal bests.
+@ New personal best ({}): {}
+te కొత్త వ్యక్తిగత ఉత్తమం ({}): {}

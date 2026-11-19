@@ -147,6 +147,10 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("menu_singleplayer", |h, _| h.menu.open(Screen::SinglePlayer));
     c.add("menu_newgame", |h, _| h.menu.open_new_game());
     c.add("menu_quit", |h, _| h.menu.open(Screen::Quit));
+    c.add("menu_hudedit", |h, _| {
+        h.menu.open(Screen::HudEditor);
+        h.menu.hud_edit.open();
+    });
     c.add("menu_options", |h, a| {
         use crate::menu::Page;
         let page = match a.argv(1).to_ascii_lowercase().as_str() {
@@ -167,8 +171,6 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "crosshair" => Some(Page::Crosshair),
             "hitsound" => Some(Page::HitSound),
             "killsound" => Some(Page::KillSound),
-            "hudlayout" | "layout" => Some(Page::HudLayout),
-            "messages" => Some(Page::Messages),
             "accessibility" => Some(Page::Accessibility),
             "graphics" => Some(Page::Graphics),
             "enhancements" => Some(Page::Enhancements),

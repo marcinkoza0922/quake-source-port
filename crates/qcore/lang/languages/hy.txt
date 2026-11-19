@@ -103,9 +103,6 @@ hy Շրջակա ստվերավորում
 @ Ammo Counts
 hy Զինամթերքի քանակ
 
-@ Ammo Counts Position
-hy Զինամթերքի քանակի դիրք
-
 @ Ammo Pickups
 hy Զինամթերքի հավաքում
 
@@ -120,9 +117,6 @@ hy Կիրառել
 
 @ Armor
 hy Զրահ
-
-@ Armor Position
-hy Զրահի դիրք
 
 @ Ask
 hy Հարցնել
@@ -220,9 +214,6 @@ hy Կաուստիկա
 @ Center
 hy Կենտրոն
 
-@ Center Message Position
-hy Կենտր. հաղորդագրության դիրք
-
 @ Center Message Time
 hy Կենտր. հաղորդագրության տևողություն
 
@@ -282,9 +273,6 @@ hy Նշանոցի չափ
 
 @ Current Ammo
 hy Ընթացիկ զինամթերք
-
-@ Current Ammo Position
-hy Ընթացիկ զինամթերքի դիրք
 
 @ Customize This Game
 hy Հարմարեցնել այս խաղը
@@ -469,17 +457,11 @@ hy Գիրո նշանառում
 @ HUD
 hy HUD
 
-@ HUD Style
-hy HUD-ի ոճ
-
 @ Health
 hy Առողջություն
 
 @ Health Pickups
 hy Առողջության հավաքում
-
-@ Health Position
-hy Առողջության դիրք
 
 @ Health Regeneration
 hy Առողջության վերականգնում
@@ -589,9 +571,6 @@ hy Ցատկեր
 @ Keys & Powerups
 hy Բանալիներ և ուժեղացումներ
 
-@ Keys & Powerups Position
-hy Բանալիների և ուժեղացումների դիրք
-
 @ Kill Bonus (x)
 hy Սպանության բոնուս (x)
 
@@ -661,15 +640,6 @@ hy Առավ. հեռահարություն
 @ Melee only
 hy Միայն մերձամարտ
 
-@ Message Background
-hy Հաղորդագրության ֆոն
-
-@ Message Text Size
-hy Հաղորդագրության տառաչափ
-
-@ Messages & Captions
-hy Հաղորդագրություններ և ենթագրեր
-
 @ Meter Duration (real seconds)
 hy Սանդղակի տևողություն (իրական վայրկյան)
 
@@ -681,9 +651,6 @@ hy Ռեժիմ
 
 @ Modern Console
 hy Ժամանակակից կոնսոլ
-
-@ Modern HUD Layout
-hy Ժամանակակից HUD-ի դասավորություն
 
 @ Most recent save
 hy Վերջին պահպանումը
@@ -732,9 +699,6 @@ hy Աղմուկի ֆիլտր
 
 @ Normal Color
 hy Սովորական գույն
-
-@ Notify Message Position
-hy Ծանուցումների դիրք
 
 @ Notify Message Time
 hy Ծանուցումների տևողություն
@@ -940,17 +904,11 @@ hy ձախ ուսի հետևից
 @ Shoulder right
 hy աջ ուսի հետևից
 
-@ Show FPS
-hy Ցույց տալ FPS
-
 @ Show Face
 hy Ցույց տալ դեմքը
 
 @ Shrapnel
 hy Շրապնել
-
-@ Size of on-screen messages and captions
-hy Էկրանային հաղորդագրությունների և ենթագրերի չափը
 
 @ Skill
 hy Բարդություն
@@ -1120,15 +1078,6 @@ hy Դանդաղում զենքի անիվում
 @ Weapons
 hy Զենքեր
 
-@ Weapons Position
-hy Զենքերի դիրք
-
-@ Where center-screen messages appear
-hy Որտեղ են հայտնվում կենտրոնի հաղորդագրությունները
-
-@ Where pickup and event messages appear
-hy Որտեղ են հայտնվում հավաքման և իրադարձությունների հաղորդագրությունները
-
 @ White
 hy Սպիտակ
 
@@ -1168,9 +1117,6 @@ hy շրջանակ
 
 @ broken square
 hy կտրտված քառակուսի
-
-@ classic
-hy դասական
 
 @ coarse
 hy կոպիտ
@@ -1259,29 +1205,17 @@ hy ուժեղ
 @ large
 hy մեծ
 
-@ larger
-hy ավելի մեծ
-
-@ largest
-hy ամենամեծ
-
 @ linear
 hy գծային
 
 @ low
 hy ցածր
 
-@ lower
-hy ներքևում
-
 @ magenta
 hy մագենտա
 
 @ medium
 hy միջին
-
-@ middle
-hy մեջտեղում
 
 @ middle left
 hy մեջտեղում՝ ձախ
@@ -1369,9 +1303,6 @@ hy եռակի
 
 @ tritanopia
 hy տրիտանոպիա
-
-@ upper
-hy վերևում
 
 @ white
 hy սպիտակ
@@ -1496,6 +1427,211 @@ hy Ինչպես պատուհանը
 @ GPU Encoding
 hy GPU կոդավորում
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+hy Ժամանակ և վիճակագրություն
+
+@ Clock
+hy Ժամացույց
+
+@ Level Timer
+hy Մակարդակի վայրկյանաչափ
+
+@ Personal Best
+hy Անձնական ռեկորդ
+
+@ Personal Best Type
+hy Ռեկորդի տեսակը
+
+@ Personal Best Color
+hy Ռեկորդի գույնը
+
+@ Kills
+hy Սպանություններ
+
+@ Secrets
+hy Գաղտնիքներ
+
+@ 24-hour
+hy 24-ժամյա
+
+@ 24-hour + seconds
+hy 24-ժամյա + վայրկյաններ
+
+@ 12-hour
+hy 12-ժամյա
+
+@ 12-hour + seconds
+hy 12-ժամյա + վայրկյաններ
+
+@ count
+hy քանակ
+
+@ percent
+hy տոկոս
+
+@ any% and 100%
+hy any% և 100%
+
+@ Keep Personal Best Demos
+hy Պահել ռեկորդների ցուցադրումները
+
+@ any%
+hy any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+hy Արտադրողականության ցուցանիշներ
+
+@ Frame Time
+hy Կադրի ժամանակ
+
+@ CPU Usage
+hy Պրոցեսորի օգտագործում
+
+@ Memory Usage
+hy Հիշողության օգտագործում
+
+@ GPU Time
+hy GPU ժամանակ
+
+@ Video Memory
+hy Տեսահիշողություն
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+hy Ավելացնել
+
+@ Ammo
+hy Զինամթերք
+
+@ Ammo Bar
+hy Զինամթերքի գոտի
+
+@ Armor Bar
+hy Զրահի գոտի
+
+@ Background
+hy Ֆոն
+
+@ Cells
+hy Բջիջներ
+
+@ Center Message
+hy Կենտրոնական հաղորդագրություն
+
+@ Columns
+hy Սյունակներ
+
+@ Edit HUD
+hy Խմբագրել HUD-ը
+
+@ FPS
+hy FPS
+
+@ Face
+hy Դեմք
+
+@ Fill Width
+hy Ամբողջ լայնությամբ
+
+@ Font
+hy Տառատեսակ
+
+@ Format
+hy Ձևաչափ
+
+@ HUD Editor
+hy HUD խմբագրիչ
+
+@ Health Bar
+hy Առողջության գոտի
+
+@ Inventory
+hy Գույք
+
+@ Keys
+hy Բանալիներ
+
+@ Nails
+hy Մեխեր
+
+@ Notify Messages
+hy Ծանուցումներ
+
+@ Position
+hy Դիրք
+
+@ Powerups
+hy Ուժեղացումներ
+
+@ Precision
+hy Ճշգրտություն
+
+@ Quake
+hy Quake
+
+@ Rockets
+hy Հրթիռներ
+
+@ Scale
+hy Մասշտաբ
+
+@ Sections
+hy Բաժիններ
+
+@ Shells
+hy Պարկուճներ
+
+@ Show As
+hy Ցույց տալ որպես
+
+@ Show Icon
+hy Ցույց տալ պատկերակը
+
+@ Show Value
+hy Ցույց տալ արժեքը
+
+@ Sigils
+hy Ռուններ
+
+@ Status
+hy Վիճակ
+
+@ Status Bar
+hy Վիճակի գոտի
+
+@ Visibility
+hy Տեսանելիություն
+
+@ big numbers
+hy մեծ թվանշաններ
+
+@ center
+hy կենտրոն
+
+@ status + inventory
+hy վիճակ + գույք
+
+@ status only
+hy միայն վիճակ
+
+@ Text Color
+hy Տեքստի գույն
+
+@ Label Color
+hy Պիտակների գույն
+
+@ HUD Preset
+hy HUD-ի նախադրում
+
+@ custom
+hy անհատական
+
+@ classic
+hy դասական
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ hy Սահմանափակում է հետքերի քանակը, կյանքը, օդ
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 hy Սահմանափակում է շեյդերի մուտքը ելքի չափով, որպեսզի 200% ռենդերի մասշտաբը պահպանի 3D հստակությունն առանց շեյդերի 4x ծախսի, ցածր մասշտաբները մնում են ցածր լուծաչափով
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-hy Դասական: սկզբնական կարգավիճակի գոտին, ժամանակակից: կոմպակտ տարրեր էկրանի եզրերին
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 hy Ծածկույթների ատլասի լուծաչափը, թարմացման հաճախությունն ու շեյդերի մանրամասնությունը։ Ցածրը կառուցում է ավելի փոքր ծածկույթներ ավելի հազվադեպ և արագ ստվերավորմամբ, բարձրը՝ լրիվ մանրամասնությամբ
 
@@ -1558,9 +1691,6 @@ hy Ռեյլգանի պարուրաձև հետքի գույնը, բաժանված
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 hy Վնասը, որ ռեյլգանը հասցնում է իր միջով անցնող յուրաքանչյուր թշնամուն (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-hy Մուգ ֆոն էկրանային հաղորդագրությունների հետևում՝ ընթեռնելիության համար
 
 @ Dark border keeps the crosshair visible on any background
 hy Մուգ եզրագիծը նշանոցը տեսանելի է պահում ցանկացած ֆոնի վրա
@@ -1811,17 +1941,11 @@ hy Ալեկոծվող լուսային նախշեր ջրի և տիղմի տակ 
 @ Scales all damage you take; above 100% is harder
 hy Մասշտաբավորում է ձեր ստացած ամբողջ վնասը, 100%-ից բարձրն ավելի դժվար է
 
-@ Screen edge for this element; elements on the same spot stack
-hy Էկրանի եզրը այս տարրի համար, նույն տեղում գտնվող տարրերը դասավորվում են իրար վրա
-
 @ Seconds a monster hit by the boomerang stays stunned
 hy Քանի վայրկյան է բումերանգից խոցված հրեշը մնում ապշած
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 hy Քանի վայրկյան են հարվածի հետքերն ու խրված մեխերը մնում մինչև խամրելը, կախված չէ մասնիկների որակից
-
-@ Seconds messages at the top of the screen stay up
-hy Քանի վայրկյան են մնում էկրանի վերևի հաղորդագրությունները
 
 @ Seconds the flick stick snap takes; lower is faster
 hy Քանի վայրկյան է տևում ֆլիկ-լծակի շրջումը, ավելի ցածրն ավելի արագ է
@@ -1990,6 +2114,50 @@ hy Տեսանյութի չափ․ կադրերը մասշտաբավորվում 
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 hy Կոդավորում է վիդեոքարտով (NVIDIA NVENC, AMD կամ Intel՝ VA-API-ով, AMF կամ Quick Sync, Apple VideoToolbox), երբ ffmpeg-ը կարող է այն օգտագործել, պրոցեսորն ազատ թողնելով, այլապես կոդավորում է պրոցեսորը
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+hy Ցույց է տալիս օրվա ժամը ընտրված ձևաչափով
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+hy Մակարդակի ժամանակը, ինչպես ընդմիջման էկրանին․ կանգնում է դադարի ժամանակ և ելքում
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+hy any%՝ ցանկացած ավարտ, 100%՝ բոլոր սպանություններն ու գաղտնիքները։ Պահպանումների քարտերը սա են ցույց տալիս առաջինը
+
+@ Color of the personal best on the HUD and save cards
+hy Անձնական ռեկորդի գույնը HUD-ում և պահպանումների քարտերում
+
+@ Shown as a count or as a percentage of the level's total
+hy Որպես քանակ կամ մակարդակի ընդհանուրի տոկոս
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+hy Պահում է նոր անձնական ռեկորդով յուրաքանչյուր մակարդակի ցուցադրումը․ հները մնում են։ Ձայնագրում է նույնիսկ առանց ավտոմատ ձայնագրման
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+hy Կադրեր վայրկյանում, կես վայրկյանի միջինը
+
+@ Average time per frame in milliseconds, and the slowest frame
+hy Կադրի միջին ժամանակը միլիվայրկյաններով և ամենադանդաղ կադրը
+
+@ How busy the game keeps the processor, as a share of all its cores
+hy Որքան է խաղը ծանրաբեռնում պրոցեսորը՝ բոլոր միջուկների մասով
+
+@ Memory the game uses
+hy Խաղի օգտագործած հիշողությունը
+
+@ Graphics card time per frame in milliseconds
+hy Գրաֆիկական քարտի ժամանակը մեկ կադրի համար՝ միլիվայրկյաններով
+
+@ Video memory in use and what the driver allows, where it reports it
+hy Օգտագործվող տեսահիշողությունը և դրայվերի թույլատրածը, եթե այն հաղորդում է
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+hy Տեղափոխեք, չափափոխեք, ավելացրեք և հեռացրեք HUD-ի տարրերը՝ առողջություն, զինամթերք, զենքեր, ժամաչափեր, հաղորդագրություններ և այլն
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+hy Ժամանակակից՝ կոմպակտ տարրեր էկրանի եզրերին; դասական՝ սկզբնական վիճակի գոտին։ Ընտրությունը վերակայում է HUD-ը; «Խմբագրել HUD-ը»-ում փոփոխությունները այն անհատական են դարձնում
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ hy Տեսանյութի արտահանում
 @ Preparing...
 hy Պատրաստում...
 
+# Save cards: personal best.
+@ PB {} {}
+hy PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ hy Գրվեց {} ({} վ)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 hy ffmpeg-ը չգտնվեց․ {} PNG կադր և WAV գրվեցին {}-ում
+
+# Personal bests.
+@ New personal best ({}): {}
+hy Նոր անձնական ռեկորդ ({}): {}

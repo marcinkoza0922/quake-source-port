@@ -103,9 +103,6 @@ cs Okolní zastínění
 @ Ammo Counts
 cs Počty munice
 
-@ Ammo Counts Position
-cs Pozice počtů munice
-
 @ Ammo Pickups
 cs Sebraná munice
 
@@ -120,9 +117,6 @@ cs Použít na
 
 @ Armor
 cs Brnění
-
-@ Armor Position
-cs Pozice brnění
 
 @ Ask
 cs Zeptat se
@@ -220,9 +214,6 @@ cs Kaustika
 @ Center
 cs Střed
 
-@ Center Message Position
-cs Pozice zpráv uprostřed
-
 @ Center Message Time
 cs Doba zpráv uprostřed
 
@@ -282,9 +273,6 @@ cs Velikost zaměřovače
 
 @ Current Ammo
 cs Aktuální munice
-
-@ Current Ammo Position
-cs Pozice aktuální munice
 
 @ Customize This Game
 cs Přizpůsobit tuto hru
@@ -469,17 +457,11 @@ cs Míření gyroskopem
 @ HUD
 cs HUD
 
-@ HUD Style
-cs Styl HUD
-
 @ Health
 cs Zdraví
 
 @ Health Pickups
 cs Sebrané zdraví
-
-@ Health Position
-cs Pozice zdraví
 
 @ Health Regeneration
 cs Regenerace zdraví
@@ -589,9 +571,6 @@ cs Skoky
 @ Keys & Powerups
 cs Klíče a bonusy
 
-@ Keys & Powerups Position
-cs Pozice klíčů a bonusů
-
 @ Kill Bonus (x)
 cs Bonus za zabití (x)
 
@@ -661,15 +640,6 @@ cs Maximální dosah
 @ Melee only
 cs Jen na blízko
 
-@ Message Background
-cs Pozadí zpráv
-
-@ Message Text Size
-cs Velikost textu zpráv
-
-@ Messages & Captions
-cs Zprávy a titulky
-
 @ Meter Duration (real seconds)
 cs Trvání ukazatele (skutečné sekundy)
 
@@ -681,9 +651,6 @@ cs Režim
 
 @ Modern Console
 cs Moderní konzole
-
-@ Modern HUD Layout
-cs Moderní rozložení HUD
 
 @ Most recent save
 cs Nejnovější uložená pozice
@@ -732,9 +699,6 @@ cs Filtr šumu
 
 @ Normal Color
 cs Normální barva
-
-@ Notify Message Position
-cs Pozice oznámení
 
 @ Notify Message Time
 cs Doba oznámení
@@ -940,17 +904,11 @@ cs Rameno vlevo
 @ Shoulder right
 cs Rameno vpravo
 
-@ Show FPS
-cs Zobrazit FPS
-
 @ Show Face
 cs Zobrazit obličej
 
 @ Shrapnel
 cs Šrapnely
-
-@ Size of on-screen messages and captions
-cs Velikost zpráv a titulků na obrazovce
 
 @ Skill
 cs Obtížnost
@@ -1120,15 +1078,6 @@ cs Zpomalení u kola zbraní
 @ Weapons
 cs Zbraně
 
-@ Weapons Position
-cs Pozice zbraní
-
-@ Where center-screen messages appear
-cs Kde se zobrazují zprávy uprostřed obrazovky
-
-@ Where pickup and event messages appear
-cs Kde se zobrazují zprávy o sebrání a událostech
-
 @ White
 cs Bílá
 
@@ -1168,9 +1117,6 @@ cs čtverec
 
 @ broken square
 cs přerušený čtverec
-
-@ classic
-cs klasický
 
 @ coarse
 cs hrubé
@@ -1259,29 +1205,17 @@ cs intenzivní
 @ large
 cs velká
 
-@ larger
-cs větší
-
-@ largest
-cs největší
-
 @ linear
 cs lineární
 
 @ low
 cs nízká
 
-@ lower
-cs dole
-
 @ magenta
 cs purpurová
 
 @ medium
 cs střední
-
-@ middle
-cs uprostřed
 
 @ middle left
 cs vlevo uprostřed
@@ -1369,9 +1303,6 @@ cs trojitý
 
 @ tritanopia
 cs tritanopie
-
-@ upper
-cs nahoře
 
 @ white
 cs bílá
@@ -1496,6 +1427,211 @@ cs Jako okno
 @ GPU Encoding
 cs Kódování na GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+cs Čas a statistiky
+
+@ Clock
+cs Hodiny
+
+@ Level Timer
+cs Časovač úrovně
+
+@ Personal Best
+cs Osobní rekord
+
+@ Personal Best Type
+cs Typ rekordu
+
+@ Personal Best Color
+cs Barva rekordu
+
+@ Kills
+cs Zabití
+
+@ Secrets
+cs Tajemství
+
+@ 24-hour
+cs 24hodinový
+
+@ 24-hour + seconds
+cs 24hodinový + sekundy
+
+@ 12-hour
+cs 12hodinový
+
+@ 12-hour + seconds
+cs 12hodinový + sekundy
+
+@ count
+cs počet
+
+@ percent
+cs procenta
+
+@ any% and 100%
+cs any% a 100%
+
+@ Keep Personal Best Demos
+cs Uchovávat dema rekordů
+
+@ any%
+cs any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+cs Ukazatele výkonu
+
+@ Frame Time
+cs Čas snímku
+
+@ CPU Usage
+cs Využití procesoru
+
+@ Memory Usage
+cs Využití paměti
+
+@ GPU Time
+cs Čas GPU
+
+@ Video Memory
+cs Videopaměť
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+cs Přidat
+
+@ Ammo
+cs Munice
+
+@ Ammo Bar
+cs Pruh munice
+
+@ Armor Bar
+cs Pruh brnění
+
+@ Background
+cs Pozadí
+
+@ Cells
+cs Články
+
+@ Center Message
+cs Zpráva uprostřed
+
+@ Columns
+cs Sloupce
+
+@ Edit HUD
+cs Upravit HUD
+
+@ FPS
+cs FPS
+
+@ Face
+cs Obličej
+
+@ Fill Width
+cs Celá šířka
+
+@ Font
+cs Písmo
+
+@ Format
+cs Formát
+
+@ HUD Editor
+cs Editor HUD
+
+@ Health Bar
+cs Pruh zdraví
+
+@ Inventory
+cs Inventář
+
+@ Keys
+cs Klíče
+
+@ Nails
+cs Hřebíky
+
+@ Notify Messages
+cs Oznámení
+
+@ Position
+cs Pozice
+
+@ Powerups
+cs Bonusy
+
+@ Precision
+cs Přesnost
+
+@ Quake
+cs Quake
+
+@ Rockets
+cs Rakety
+
+@ Scale
+cs Měřítko
+
+@ Sections
+cs Části
+
+@ Shells
+cs Broky
+
+@ Show As
+cs Zobrazit jako
+
+@ Show Icon
+cs Zobrazit ikonu
+
+@ Show Value
+cs Zobrazit hodnotu
+
+@ Sigils
+cs Runy
+
+@ Status
+cs Stav
+
+@ Status Bar
+cs Stavový pruh
+
+@ Visibility
+cs Viditelnost
+
+@ big numbers
+cs velké číslice
+
+@ center
+cs střed
+
+@ status + inventory
+cs stav + inventář
+
+@ status only
+cs jen stav
+
+@ Text Color
+cs Barva textu
+
+@ Label Color
+cs Barva popisků
+
+@ HUD Preset
+cs Předvolba HUD
+
+@ custom
+cs vlastní
+
+@ classic
+cs klasický
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ cs Omezí počet a trvání stop, kapky ve vzduchu a skvrny od zranění a kusů
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 cs Omezí vstup shaderu na výstupní velikost, takže měřítko vykreslování 200 % zachová 3D ostrost bez čtyřnásobné ceny shaderu; nízká měřítka zůstanou v nízkém rozlišení
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-cs Klasický: původní stavový panel; moderní: kompaktní prvky u okrajů obrazovky
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 cs Rozlišení atlasu vrstev, frekvence přestavby a detail shaderu: nízká vytváří menší vrstvy méně často s rychlým stínováním; vysoká používá plný detail
 
@@ -1558,9 +1691,6 @@ cs Barva spirálové stopy railgunu; na rozdělené obrazovce dostane každý hr
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 cs Poškození, které railgun způsobí každému proraženému nepříteli (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-cs Tmavé pozadí za zprávami na obrazovce pro lepší čitelnost
 
 @ Dark border keeps the crosshair visible on any background
 cs Tmavý obrys udrží zaměřovač viditelný na jakémkoli pozadí
@@ -1811,17 +1941,11 @@ cs Vlnící se světelné vzory na površích pod vodou a slizem
 @ Scales all damage you take; above 100% is harder
 cs Upraví veškeré poškození, které dostanete; nad 100 % je hra těžší
 
-@ Screen edge for this element; elements on the same spot stack
-cs Okraj obrazovky pro tento prvek; prvky na stejném místě se skládají na sebe
-
 @ Seconds a monster hit by the boomerang stays stunned
 cs Kolik sekund zůstane monstrum zasažené bumerangem omráčené
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 cs Kolik sekund zůstanou stopy zásahů a zabodnuté hřebíky, než vyblednou; nezávislé na Kvalitě částic
-
-@ Seconds messages at the top of the screen stay up
-cs Kolik sekund zůstanou zprávy nahoře na obrazovce
 
 @ Seconds the flick stick snap takes; lower is faster
 cs Kolik sekund trvá natočení flick sticku; méně je rychlejší
@@ -1990,6 +2114,50 @@ cs Velikost videa; snímky se škálují z velikosti okna (s pruhy pro zachován
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 cs Kóduje na grafické kartě (NVIDIA NVENC, AMD nebo Intel přes VA-API, AMF či Quick Sync, Apple VideoToolbox), pokud ji ffmpeg umí použít, a nechává procesor volný; jinak kóduje procesor
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+cs Zobrazuje denní čas ve zvoleném formátu
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+cs Čas úrovně jako na obrazovce přestávky; zastaví se při pauze a u východu
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+cs any%: jakékoli dokončení; 100%: všechna zabití a tajemství. Karty uložených her ukazují tento první
+
+@ Color of the personal best on the HUD and save cards
+cs Barva osobního rekordu v HUD a na kartách uložených her
+
+@ Shown as a count or as a percentage of the level's total
+cs Jako počet nebo procento z celku úrovně
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+cs Uchová demo každé úrovně s novým osobním rekordem; stará zůstávají. Nahrává i bez automatických dem
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+cs Snímky za sekundu, průměr za půl sekundy
+
+@ Average time per frame in milliseconds, and the slowest frame
+cs Průměrný čas snímku v milisekundách a nejpomalejší snímek
+
+@ How busy the game keeps the processor, as a share of all its cores
+cs Jak moc hra vytěžuje procesor, jako podíl všech jader
+
+@ Memory the game uses
+cs Paměť, kterou hra používá
+
+@ Graphics card time per frame in milliseconds
+cs Čas grafické karty na snímek v milisekundách
+
+@ Video memory in use and what the driver allows, where it reports it
+cs Použitá videopaměť a kolik ovladač dovoluje, pokud to hlásí
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+cs Přesouvejte, měňte velikost, přidávejte a odebírejte prvky HUD: zdraví, munici, zbraně, časovače, zprávy a další
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+cs Moderní: kompaktní prvky u okrajů obrazovky; klasický: původní stavový pruh. Volba předvolby HUD obnoví; změny v Upravit HUD z něj udělají vlastní
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ cs Export videa
 @ Preparing...
 cs Příprava...
 
+# Save cards: personal best.
+@ PB {} {}
+cs PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ cs Zapsáno {} ({} s)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 cs ffmpeg nenalezen: zapsáno {} snímků PNG a WAV do {}
+
+# Personal bests.
+@ New personal best ({}): {}
+cs Nový osobní rekord ({}): {}

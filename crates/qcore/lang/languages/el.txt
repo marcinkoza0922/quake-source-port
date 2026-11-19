@@ -103,9 +103,6 @@ el Σκίαση περιβάλλοντος
 @ Ammo Counts
 el Μετρητές πυρομαχικών
 
-@ Ammo Counts Position
-el Θέση μετρητών πυρομαχικών
-
 @ Ammo Pickups
 el Συλλογή πυρομαχικών
 
@@ -120,9 +117,6 @@ el Εφαρμογή σε
 
 @ Armor
 el Πανοπλία
-
-@ Armor Position
-el Θέση πανοπλίας
 
 @ Ask
 el Ερώτηση
@@ -220,9 +214,6 @@ el Καυστικά
 @ Center
 el Κέντρο
 
-@ Center Message Position
-el Θέση κεντρικών μηνυμάτων
-
 @ Center Message Time
 el Διάρκεια κεντρικών μηνυμάτων
 
@@ -282,9 +273,6 @@ el Μέγεθος στόχαστρου
 
 @ Current Ammo
 el Τρέχοντα πυρομαχικά
-
-@ Current Ammo Position
-el Θέση τρεχόντων πυρομαχικών
 
 @ Customize This Game
 el Προσαρμογή αυτού του παιχνιδιού
@@ -469,17 +457,11 @@ el Στόχευση με γυροσκόπιο
 @ HUD
 el HUD
 
-@ HUD Style
-el Στυλ HUD
-
 @ Health
 el Υγεία
 
 @ Health Pickups
 el Συλλογή υγείας
-
-@ Health Position
-el Θέση υγείας
 
 @ Health Regeneration
 el Αναγέννηση υγείας
@@ -589,9 +571,6 @@ el Άλματα
 @ Keys & Powerups
 el Κλειδιά & ενισχύσεις
 
-@ Keys & Powerups Position
-el Θέση κλειδιών & ενισχύσεων
-
 @ Kill Bonus (x)
 el Μπόνους σκοτωμού (x)
 
@@ -661,15 +640,6 @@ el Μέγιστη εμβέλεια
 @ Melee only
 el Μόνο σώμα με σώμα
 
-@ Message Background
-el Φόντο μηνυμάτων
-
-@ Message Text Size
-el Μέγεθος κειμένου μηνυμάτων
-
-@ Messages & Captions
-el Μηνύματα & υπότιτλοι
-
 @ Meter Duration (real seconds)
 el Διάρκεια μπάρας (πραγματικά δευτ.)
 
@@ -681,9 +651,6 @@ el Λειτουργία
 
 @ Modern Console
 el Σύγχρονη κονσόλα
-
-@ Modern HUD Layout
-el Σύγχρονη διάταξη HUD
 
 @ Most recent save
 el Πιο πρόσφατη αποθήκευση
@@ -732,9 +699,6 @@ el Φίλτρο θορύβου
 
 @ Normal Color
 el Κανονικό χρώμα
-
-@ Notify Message Position
-el Θέση ειδοποιήσεων
 
 @ Notify Message Time
 el Διάρκεια ειδοποιήσεων
@@ -940,17 +904,11 @@ el Ώμος αριστερά
 @ Shoulder right
 el Ώμος δεξιά
 
-@ Show FPS
-el Εμφάνιση FPS
-
 @ Show Face
 el Εμφάνιση προσώπου
 
 @ Shrapnel
 el Θραύσματα
-
-@ Size of on-screen messages and captions
-el Μέγεθος μηνυμάτων και υποτίτλων οθόνης
 
 @ Skill
 el Δυσκολία
@@ -1120,15 +1078,6 @@ el Επιβράδυνση τροχού όπλων
 @ Weapons
 el Όπλα
 
-@ Weapons Position
-el Θέση όπλων
-
-@ Where center-screen messages appear
-el Πού εμφανίζονται τα μηνύματα στο κέντρο της οθόνης
-
-@ Where pickup and event messages appear
-el Πού εμφανίζονται τα μηνύματα συλλογής και συμβάντων
-
 @ White
 el Λευκό
 
@@ -1168,9 +1117,6 @@ el πλαίσιο
 
 @ broken square
 el σπασμένο τετράγωνο
-
-@ classic
-el κλασικό
 
 @ coarse
 el αδρό
@@ -1259,29 +1205,17 @@ el έντονο
 @ large
 el μεγάλο
 
-@ larger
-el μεγαλύτερο
-
-@ largest
-el μέγιστο
-
 @ linear
 el γραμμικό
 
 @ low
 el χαμηλή
 
-@ lower
-el χαμηλότερα
-
 @ magenta
 el ματζέντα
 
 @ medium
 el μεσαία
-
-@ middle
-el μέση
 
 @ middle left
 el μέση αριστερά
@@ -1369,9 +1303,6 @@ el τριπλό
 
 @ tritanopia
 el τριτανωπία
-
-@ upper
-el ψηλότερα
 
 @ white
 el λευκό
@@ -1496,6 +1427,211 @@ el Όπως το παράθυρο
 @ GPU Encoding
 el Κωδικοποίηση GPU
 
+# HUD > Time & Stats, and personal-best demos.
+@ Time & Stats
+el Χρόνος και στατιστικά
+
+@ Clock
+el Ρολόι
+
+@ Level Timer
+el Χρονόμετρο πίστας
+
+@ Personal Best
+el Προσωπικό ρεκόρ
+
+@ Personal Best Type
+el Τύπος ρεκόρ
+
+@ Personal Best Color
+el Χρώμα ρεκόρ
+
+@ Kills
+el Σκοτωμοί
+
+@ Secrets
+el Μυστικά
+
+@ 24-hour
+el 24ωρο
+
+@ 24-hour + seconds
+el 24ωρο + δευτερόλεπτα
+
+@ 12-hour
+el 12ωρο
+
+@ 12-hour + seconds
+el 12ωρο + δευτερόλεπτα
+
+@ count
+el πλήθος
+
+@ percent
+el ποσοστό
+
+@ any% and 100%
+el any% και 100%
+
+@ Keep Personal Best Demos
+el Διατήρηση demo ρεκόρ
+
+@ any%
+el any%
+
+# HUD > Performance Metrics.
+@ Performance Metrics
+el Μετρήσεις επιδόσεων
+
+@ Frame Time
+el Χρόνος καρέ
+
+@ CPU Usage
+el Χρήση CPU
+
+@ Memory Usage
+el Χρήση μνήμης
+
+@ GPU Time
+el Χρόνος GPU
+
+@ Video Memory
+el Μνήμη βίντεο
+
+# HUD editor (Options > HUD > Edit HUD): element names, categories,
+# options and buttons.
+@ Add
+el Προσθήκη
+
+@ Ammo
+el Πυρομαχικά
+
+@ Ammo Bar
+el Μπάρα πυρομαχικών
+
+@ Armor Bar
+el Μπάρα πανοπλίας
+
+@ Background
+el Φόντο
+
+@ Cells
+el Κυψέλες
+
+@ Center Message
+el Κεντρικό μήνυμα
+
+@ Columns
+el Στήλες
+
+@ Edit HUD
+el Επεξεργασία HUD
+
+@ FPS
+el FPS
+
+@ Face
+el Πρόσωπο
+
+@ Fill Width
+el Πλήρες πλάτος
+
+@ Font
+el Γραμματοσειρά
+
+@ Format
+el Μορφή
+
+@ HUD Editor
+el Επεξεργαστής HUD
+
+@ Health Bar
+el Μπάρα υγείας
+
+@ Inventory
+el Απόθεμα
+
+@ Keys
+el Κλειδιά
+
+@ Nails
+el Καρφιά
+
+@ Notify Messages
+el Ειδοποιήσεις
+
+@ Position
+el Θέση
+
+@ Powerups
+el Ενισχύσεις
+
+@ Precision
+el Ακρίβεια
+
+@ Quake
+el Quake
+
+@ Rockets
+el Ρουκέτες
+
+@ Scale
+el Κλίμακα
+
+@ Sections
+el Τμήματα
+
+@ Shells
+el Φυσίγγια
+
+@ Show As
+el Εμφάνιση ως
+
+@ Show Icon
+el Εμφάνιση εικονιδίου
+
+@ Show Value
+el Εμφάνιση τιμής
+
+@ Sigils
+el Ρούνοι
+
+@ Status
+el Κατάσταση
+
+@ Status Bar
+el Γραμμή κατάστασης
+
+@ Visibility
+el Ορατότητα
+
+@ big numbers
+el μεγάλα ψηφία
+
+@ center
+el κέντρο
+
+@ status + inventory
+el κατάσταση + απόθεμα
+
+@ status only
+el μόνο κατάσταση
+
+@ Text Color
+el Χρώμα κειμένου
+
+@ Label Color
+el Χρώμα ετικετών
+
+@ HUD Preset
+el Προεπιλογή HUD
+
+@ custom
+el προσαρμοσμένο
+
+@ classic
+el κλασικό
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1547,9 +1683,6 @@ el Όρια για πλήθος σημαδιών, διάρκεια, σταγόν
 @ Caps shader input at output size so 200% render scale keeps 3D sharpness without 4x shader cost; low scales stay low-res
 el Περιορίζει την είσοδο του shader στο μέγεθος εξόδου, ώστε η κλίμακα απόδοσης 200% να κρατά την ευκρίνεια 3D χωρίς 4πλάσιο κόστος shader· οι χαμηλές κλίμακες μένουν σε χαμηλή ανάλυση
 
-@ Classic: the original status bar; modern: compact elements at the screen edges
-el Κλασικό: η αρχική γραμμή κατάστασης· σύγχρονο: συμπαγή στοιχεία στις άκρες της οθόνης
-
 @ Coat atlas resolution, rebuild rate and shader detail: low builds smaller coats less often with fast shading; high uses full detail
 el Ανάλυση άτλαντα επικάλυψης, ρυθμός ανανέωσης και λεπτομέρεια shader: η χαμηλή φτιάχνει μικρότερες επικαλύψεις πιο αραιά με γρήγορη σκίαση· η υψηλή χρησιμοποιεί πλήρη λεπτομέρεια
 
@@ -1558,9 +1691,6 @@ el Χρώμα του σπειροειδούς ίχνους του railgun· σε
 
 @ Damage the railgun deals to each enemy it passes through (Quake III: 100)
 el Ζημιά που προκαλεί το railgun σε κάθε εχθρό που διαπερνά (Quake III: 100)
-
-@ Dark backdrop behind on-screen messages for readability
-el Σκούρο φόντο πίσω από τα μηνύματα οθόνης για καλύτερη ανάγνωση
 
 @ Dark border keeps the crosshair visible on any background
 el Σκούρο περίγραμμα που κρατά το στόχαστρο ορατό σε κάθε φόντο
@@ -1811,17 +1941,11 @@ el Κυματιστά φωτεινά μοτίβα σε επιφάνειες κά
 @ Scales all damage you take; above 100% is harder
 el Κλιμακώνει όλη τη ζημιά που δέχεσαι· πάνω από 100% είναι δυσκολότερο
 
-@ Screen edge for this element; elements on the same spot stack
-el Άκρη της οθόνης για αυτό το στοιχείο· στοιχεία στην ίδια θέση στοιβάζονται
-
 @ Seconds a monster hit by the boomerang stays stunned
 el Δευτερόλεπτα που μένει ζαλισμένο ένα τέρας που χτύπησε το μπούμερανγκ
 
 @ Seconds impact marks and stuck nails stay before fading out; independent of Particle Quality
 el Δευτερόλεπτα που μένουν τα σημάδια προσκρούσεων και τα καρφωμένα καρφιά πριν σβήσουν· ανεξάρτητο από την Ποιότητα σωματιδίων
-
-@ Seconds messages at the top of the screen stay up
-el Δευτερόλεπτα που μένουν τα μηνύματα στο πάνω μέρος της οθόνης
 
 @ Seconds the flick stick snap takes; lower is faster
 el Δευτερόλεπτα που διαρκεί η στροφή flick stick· λιγότερο είναι γρηγορότερο
@@ -1990,6 +2114,50 @@ el Μέγεθος βίντεο· τα καρέ κλιμακώνονται από
 # Demos and video recording.
 @ Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes
 el Κωδικοποιεί στην κάρτα γραφικών (NVIDIA NVENC, AMD ή Intel μέσω VA-API, AMF ή Quick Sync, Apple VideoToolbox) όταν το ffmpeg μπορεί να τη χρησιμοποιήσει, αφήνοντας ελεύθερο τον επεξεργαστή· αλλιώς κωδικοποιεί ο επεξεργαστής
+
+# HUD > Time & Stats, and personal-best demos.
+@ Shows the time of day in the chosen format
+el Δείχνει την ώρα στη μορφή που επιλέξατε
+
+@ The level time, as on the intermission screen; it stops while paused and at the exit
+el Ο χρόνος της πίστας, όπως στην οθόνη διαλείμματος· σταματά στην παύση και στην έξοδο
+
+@ any%: any finish; 100%: every kill and secret. Save cards show this one first
+el any%: οποιοδήποτε τέλος· 100%: όλοι οι σκοτωμοί και τα μυστικά. Οι κάρτες αποθήκευσης δείχνουν αυτό πρώτα
+
+@ Color of the personal best on the HUD and save cards
+el Χρώμα του προσωπικού ρεκόρ στο HUD και στις κάρτες αποθήκευσης
+
+@ Shown as a count or as a percentage of the level's total
+el Ως πλήθος ή ως ποσοστό του συνόλου της πίστας
+
+@ Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off
+el Κρατά το demo κάθε πίστας με νέο προσωπικό ρεκόρ· τα παλιά μένουν. Καταγράφει ακόμη και χωρίς αυτόματη εγγραφή
+
+# HUD > Performance Metrics.
+@ Frames per second, averaged over half a second
+el Καρέ ανά δευτερόλεπτο, μέσος όρος μισού δευτερολέπτου
+
+@ Average time per frame in milliseconds, and the slowest frame
+el Μέσος χρόνος ανά καρέ σε χιλιοστά του δευτερολέπτου και το πιο αργό καρέ
+
+@ How busy the game keeps the processor, as a share of all its cores
+el Πόσο απασχολεί το παιχνίδι τον επεξεργαστή, ως μερίδιο όλων των πυρήνων
+
+@ Memory the game uses
+el Η μνήμη που χρησιμοποιεί το παιχνίδι
+
+@ Graphics card time per frame in milliseconds
+el Χρόνος κάρτας γραφικών ανά καρέ σε χιλιοστά του δευτερολέπτου
+
+@ Video memory in use and what the driver allows, where it reports it
+el Μνήμη βίντεο σε χρήση και όσο επιτρέπει ο οδηγός, όπου το αναφέρει
+
+@ Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more
+el Μετακινήστε, αλλάξτε μέγεθος, προσθέστε και αφαιρέστε στοιχεία του HUD: υγεία, πυρομαχικά, όπλα, χρονόμετρα, μηνύματα και άλλα
+
+@ Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom
+el Σύγχρονο: συμπαγή στοιχεία στις άκρες της οθόνης· κλασικό: η αρχική γραμμή κατάστασης. Η επιλογή μιας επαναφέρει το HUD· οι αλλαγές στην Επεξεργασία HUD το κάνουν προσαρμοσμένο
 
 # ==== ui.txt ====
 
@@ -2919,6 +3087,10 @@ el Εξαγωγή βίντεο
 @ Preparing...
 el Προετοιμασία...
 
+# Save cards: personal best.
+@ PB {} {}
+el PB {} {}
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -3476,3 +3648,7 @@ el Γράφτηκε {} ({} δ)
 
 @ ffmpeg not found: wrote {} PNG frames and a WAV to {}
 el Δεν βρέθηκε ffmpeg: γράφτηκαν {} καρέ PNG και ένα WAV στο {}
+
+# Personal bests.
+@ New personal best ({}): {}
+el Νέο προσωπικό ρεκόρ ({}): {}

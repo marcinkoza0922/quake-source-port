@@ -27,7 +27,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("r_lerpmodels", "1", CVAR_ARCHIVE),
     ("r_enhancedmodels", "1", CVAR_ARCHIVE),
     ("r_lerpmove", "1", CVAR_ARCHIVE),
-    ("scr_hudstyle", "1", CVAR_ARCHIVE),
+    ("scr_hudstyle", "1", 0),
     ("crosshair", "0", CVAR_ARCHIVE),
     ("hud_damageindicator", "1", CVAR_ARCHIVE),
     ("hud_hitmarkers", "0", CVAR_ARCHIVE),
@@ -121,12 +121,20 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("_mp_fraglimit", "0", CVAR_ARCHIVE),
     ("_mp_timelimit", "0", CVAR_ARCHIVE),
     ("_mp_map", "", CVAR_ARCHIVE),
-    ("scr_showfps", "0", CVAR_ARCHIVE),
+    ("scr_showfps", "0", 0),
+    ("scr_showframetime", "0", 0),
+    ("scr_showcpu", "0", 0),
+    ("scr_showram", "0", 0),
+    ("scr_showgpu", "0", 0),
+    ("scr_showvram", "0", 0),
+    ("scr_metrics_pos", "5", 0),
     // Horizontal speed under the crosshair; _ofs moves it down (ironwail).
     ("scr_showspeed", "0", CVAR_ARCHIVE),
     // Demos (Options > Demos): auto-recording, playback bar, video capture
     ("cl_autodemo", "1", CVAR_ARCHIVE),
     ("cl_autodemo_slots", "10", CVAR_ARCHIVE),
+    // keep a level's demo when it sets a personal best: 1 any%, 2 100%, 3 both
+    ("cl_autodemo_pb", "0", CVAR_ARCHIVE),
     ("cl_demobar", "2", CVAR_ARCHIVE),
     ("cl_demo_endpause", "1", CVAR_ARCHIVE),
     ("capture_fps", "60", CVAR_ARCHIVE),
@@ -175,23 +183,41 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("a11y_gamespeed", "1", CVAR_ARCHIVE),
     ("v_flashscale", "1", CVAR_ARCHIVE),
     ("crosshair_size", "1", CVAR_ARCHIVE),
-    // HUD page: modern HUD elements (0 off, 1 on, 2 immersive) and anchors
-    // (sbar::HudAnchor), face, message placement.
-    ("hud_health", "1", CVAR_ARCHIVE),
-    ("hud_health_pos", "0", CVAR_ARCHIVE),
-    ("hud_armor", "1", CVAR_ARCHIVE),
-    ("hud_armor_pos", "0", CVAR_ARCHIVE),
-    ("hud_ammo", "1", CVAR_ARCHIVE),
-    ("hud_ammo_pos", "2", CVAR_ARCHIVE),
-    ("hud_ammolist", "1", CVAR_ARCHIVE),
-    ("hud_ammolist_pos", "2", CVAR_ARCHIVE),
-    ("hud_weapons", "1", CVAR_ARCHIVE),
-    ("hud_weapons_pos", "2", CVAR_ARCHIVE),
-    ("hud_items", "1", CVAR_ARCHIVE),
-    ("hud_items_pos", "2", CVAR_ARCHIVE),
-    ("hud_face", "1", CVAR_ARCHIVE),
-    ("scr_centerpos", "0", CVAR_ARCHIVE),
-    ("con_notifypos", "0", CVAR_ARCHIVE),
+    // The HUD layout (crate::hud, edited in HUD > Edit HUD); empty until
+    // made from the old settings below. Those (scr_hudstyle, hud_* modes
+    // and anchors, Time & Stats, scr_show* metrics, message placement and
+    // text size) are read once for that and no longer saved.
+    ("hud_layout", "", CVAR_ARCHIVE),
+    // HUD > HUD Preset: 0 modern, 1 classic (picking either rebuilds
+    // hud_layout), 2 custom (set by any change in the HUD editor).
+    ("hud_preset", "0", CVAR_ARCHIVE),
+    ("hud_health", "1", 0),
+    ("hud_health_pos", "0", 0),
+    ("hud_armor", "1", 0),
+    ("hud_armor_pos", "0", 0),
+    ("hud_ammo", "1", 0),
+    ("hud_ammo_pos", "2", 0),
+    ("hud_ammolist", "1", 0),
+    ("hud_ammolist_pos", "2", 0),
+    ("hud_weapons", "1", 0),
+    ("hud_weapons_pos", "2", 0),
+    ("hud_items", "1", 0),
+    ("hud_items_pos", "2", 0),
+    ("hud_face", "1", 0),
+    // hud_pb_100 / hud_pb_color: the personal best's category and palette
+    // colour, on the HUD element and the save cards.
+    ("hud_clock", "0", 0),
+    ("hud_clock_pos", "5", 0),
+    ("hud_timer", "0", 0),
+    ("hud_pb", "1", 0),
+    ("hud_pb_100", "0", CVAR_ARCHIVE),
+    ("hud_pb_color", "2", CVAR_ARCHIVE),
+    ("hud_timer_pos", "5", 0),
+    ("hud_kills", "0", 0),
+    ("hud_secrets", "0", 0),
+    ("hud_stats_pos", "5", 0),
+    ("scr_centerpos", "0", 0),
+    ("con_notifypos", "0", 0),
     ("crosshair_color", "6", CVAR_ARCHIVE),
     ("crosshair_outline", "1", CVAR_ARCHIVE),
     ("crosshair_shape", "0", CVAR_ARCHIVE),
@@ -207,8 +233,8 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("r_shader_scale", "0", CVAR_ARCHIVE),
     ("r_shader_params", "", CVAR_ARCHIVE),
     ("cl_captions", "0", CVAR_ARCHIVE),
-    ("scr_textbg", "0", CVAR_ARCHIVE),
-    ("scr_textscale", "1", CVAR_ARCHIVE),
+    ("scr_textbg", "0", 0),
+    ("scr_textscale", "1", 0),
 ];
 
 /// Cvars other engines register that mod configs (vkQuake.cfg, AD/KEX

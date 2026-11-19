@@ -192,7 +192,7 @@ Options → Aksesibilitas:
 - Filter buta warna.
 - Crosshair yang bisa diatur: bentuk, ukuran, garis tepi, dan perubahan
   warna saat membidik target atau saat membunuh; penanda kena opsional.
-- **Teks Suara** dan pengaturan pesan (Pesan & Teks), skala teks.
+- **Teks Suara**; posisi, ukuran, dan lama tampil pesan serta takarir diatur di editor HUD.
 - Serang dan lari dengan mode tetap (bukan ditahan).
 - Penggeser kecepatan game untuk memperlambat seluruh game.
 - Bidik otomatis dengan indikator kunci target, pengaturan kerucut dan
