@@ -835,6 +835,9 @@ fil Mga Setting ng Railgun
 @ Ranged only
 fil Malayuan lang
 
+@ ray traced
+fil ray tracing
+
 @ Reacquire While Held
 fil Muling Mag-target Habang Hawak
 
@@ -1844,8 +1847,8 @@ fil Ginagamit ang may kulay na ilaw ng mapa (.lit file o BSPX lump); kapag naka-
 @ Walls, doors and monsters block the light and cast shadows
 fil Hinaharangan ng mga pader, pinto at halimaw ang ilaw at naglalabas ng anino
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-fil Sinasalamin ng tubig at putik ang silid sa itaas nila; muling iginuguhit ng patag ang eksena minsan bawat malapit na antas ng tubig
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+fil Sinasalamin ng tubig at putik ang silid sa itaas nila; muling iginuguhit ng patag ang eksena minsan bawat malapit na antas ng tubig; sinusundan ng ray tracing ang bawat alon at kailangan nito ng GPU na may ray tracing
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 fil Mga segment ng water jet, bilang ng patak at makintab na shading ng likido: mas simpleng translucent na agos sa mababa; makinis at makintab na jet sa mataas

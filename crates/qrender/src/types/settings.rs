@@ -116,7 +116,9 @@ pub struct Settings {
     /// r_water_quality: enhanced water caustics, ripples & splashes quality (0 = low, 1 = high).
     pub water_quality: u32,
     /// r_water_reflections: 0 off, 1 planar (the scene mirrored across each
-    /// nearby horizontal water/slime plane, drawn as a portal view).
+    /// nearby horizontal water/slime plane, drawn as a portal view), 2 ray
+    /// traced (ray queries from every water/slime pixel; planar on devices
+    /// without them).
     pub water_reflections: u32,
     /// r_water_reflections_amount: reflection strength (0..=1.5).
     pub water_reflection_amount: f32,

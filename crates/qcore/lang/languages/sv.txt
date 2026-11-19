@@ -835,6 +835,9 @@ sv Railgun-inställningar
 @ Ranged only
 sv Endast avstånd
 
+@ ray traced
+sv strålspårning
+
 @ Reacquire While Held
 sv Lås om medan hållen
 
@@ -1844,8 +1847,8 @@ sv Använder banans färgade ljus (.lit-fil eller BSPX-block); av ger det urspru
 @ Walls, doors and monsters block the light and cast shadows
 sv Väggar, dörrar och monster stänger ute ljuset och kastar skuggor
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-sv Vatten och slem speglar rummet ovanför; plana ritar om scenen en gång per närliggande vattenyta
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+sv Vatten och slem speglar rummet ovanför; plana ritar om scenen en gång per närliggande vattenyta; strålspårning följer varje krusning och kräver en GPU med strålspårning
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sv Vattenstrålens segment, antal droppar och blank vätskeskuggning: låg använder enklare genomskinliga strålar; hög jämna, blanka strålar

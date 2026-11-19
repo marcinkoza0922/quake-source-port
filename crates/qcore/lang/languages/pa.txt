@@ -835,6 +835,9 @@ pa ਰੇਲਗੰਨ ਸੈਟਿੰਗਾਂ
 @ Ranged only
 pa ਸਿਰਫ਼ ਦੂਰੋਂ ਵਾਰ
 
+@ ray traced
+pa ਰੇ ਟ੍ਰੇਸਿੰਗ
+
 @ Reacquire While Held
 pa ਦਬਾਏ ਹੋਏ ਮੁੜ ਨਿਸ਼ਾਨਾ ਲਓ
 
@@ -1844,8 +1847,8 @@ pa ਮੈਪ ਦੀ ਰੰਗੀਨ ਰੋਸ਼ਨੀ (.lit ਫ਼ਾਈਲ ਜ
 @ Walls, doors and monsters block the light and cast shadows
 pa ਕੰਧਾਂ, ਦਰਵਾਜ਼ੇ ਅਤੇ ਰਾਖਸ਼ ਰੌਸ਼ਨੀ ਰੋਕਦੇ ਹਨ ਅਤੇ ਪਰਛਾਵੇਂ ਪਾਉਂਦੇ ਹਨ
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-pa ਪਾਣੀ ਅਤੇ ਚਿੱਕੜ ਆਪਣੇ ਉੱਪਰਲੇ ਕਮਰੇ ਦਾ ਪ੍ਰਤੀਬਿੰਬ ਦਿਖਾਉਂਦੇ ਹਨ; ਸਮਤਲ ਹਰ ਨੇੜਲੇ ਪਾਣੀ ਦੇ ਪੱਧਰ ਲਈ ਦ੍ਰਿਸ਼ ਇੱਕ ਵਾਰ ਮੁੜ ਬਣਾਉਂਦਾ ਹੈ
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+pa ਪਾਣੀ ਅਤੇ ਚਿੱਕੜ ਆਪਣੇ ਉੱਪਰਲੇ ਕਮਰੇ ਦਾ ਪ੍ਰਤੀਬਿੰਬ ਦਿਖਾਉਂਦੇ ਹਨ; ਸਮਤਲ ਹਰ ਨੇੜਲੇ ਪਾਣੀ ਦੇ ਪੱਧਰ ਲਈ ਦ੍ਰਿਸ਼ ਇੱਕ ਵਾਰ ਮੁੜ ਬਣਾਉਂਦਾ ਹੈ; ਰੇ ਟ੍ਰੇਸਿੰਗ ਹਰ ਲਹਿਰ ਦੇ ਪਿੱਛੇ ਚੱਲਦੀ ਹੈ ਅਤੇ ਰੇ ਟ੍ਰੇਸਿੰਗ ਵਾਲਾ GPU ਚਾਹੀਦਾ ਹੈ
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 pa ਪਾਣੀ ਦੀ ਧਾਰ ਦੇ ਹਿੱਸੇ, ਬੂੰਦਾਂ ਦੀ ਗਿਣਤੀ ਅਤੇ ਚਮਕੀਲੀ ਤਰਲ ਸ਼ੇਡਿੰਗ: ਘੱਟ ਸਾਦੀਆਂ ਪਾਰਦਰਸ਼ੀ ਧਾਰਾਂ ਵਰਤਦਾ ਹੈ; ਉੱਚ ਸੁਚਾਰੂ ਚਮਕੀਲੀਆਂ ਧਾਰਾਂ ਵਰਤਦਾ ਹੈ

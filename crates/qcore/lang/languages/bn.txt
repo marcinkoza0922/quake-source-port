@@ -835,6 +835,9 @@ bn রেলগান সেটিংস
 @ Ranged only
 bn শুধু দূরপাল্লার
 
+@ ray traced
+bn রে ট্রেসিং
+
 @ Reacquire While Held
 bn ধরে থাকলে আবার লক্ষ্য নিন
 
@@ -1844,8 +1847,8 @@ bn ম্যাপের রঙিন আলো (.lit ফাইল বা BSPX �
 @ Walls, doors and monsters block the light and cast shadows
 bn দেয়াল, দরজা ও দানব আলো আটকায় এবং ছায়া ফেলে
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-bn জল ও কাদা তাদের উপরের ঘর প্রতিফলিত করে; সমতল প্রতিটি কাছের জলস্তরের জন্য দৃশ্য একবার পুনরায় আঁকে
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+bn জল ও কাদা তাদের উপরের ঘর প্রতিফলিত করে; সমতল প্রতিটি কাছের জলস্তরের জন্য দৃশ্য একবার পুনরায় আঁকে; রে ট্রেসিং প্রতিটি ঢেউ অনুসরণ করে এবং রে ট্রেসিং সমর্থিত GPU প্রয়োজন
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 bn জলধারার অংশ, ফোঁটার সংখ্যা ও চকচকে তরল শেডিং: নিম্ন সরল স্বচ্ছ ধারা ব্যবহার করে; উচ্চ মসৃণ চকচকে ধারা ব্যবহার করে

@@ -835,6 +835,9 @@ eo Agordoj de relpafilo
 @ Ranged only
 eo Nur distancaj atakoj
 
+@ ray traced
+eo radiospurado
+
 @ Reacquire While Held
 eo Rekapti dum tenado
 
@@ -1844,8 +1847,8 @@ eo Uzas la koloran lumon de la mapo (dosiero .lit aŭ BSPX-ero); malŝaltite don
 @ Walls, doors and monsters block the light and cast shadows
 eo Muroj, pordoj kaj monstroj baras la lumon kaj ĵetas ombrojn
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-eo Akvo kaj ŝlimo spegulas la ĉambron super si; ebenaj redesegnas la scenon unufoje por ĉiu proksima akvonivelo
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+eo Akvo kaj ŝlimo spegulas la ĉambron super si; ebenaj redesegnas la scenon unufoje por ĉiu proksima akvonivelo; radiospurado sekvas ĉiun ondeton kaj bezonas GPU kun radiospurado
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 eo Segmentoj de akvoŝpruco, nombro de gutoj kaj brila likva ombrigo: malalta uzas pli simplajn duontravideblajn fluojn; alta uzas glatajn brilajn ŝprucojn

@@ -835,6 +835,9 @@ hr Postavke railguna
 @ Ranged only
 hr Samo dalekometno
 
+@ ray traced
+hr praćenje zraka
+
 @ Reacquire While Held
 hr Ponovni zahvat pri držanju
 
@@ -1844,8 +1847,8 @@ hr Koristi obojeno svjetlo mape (.lit datoteka ili BSPX blok); isključeno daje 
 @ Walls, doors and monsters block the light and cast shadows
 hr Zidovi, vrata i čudovišta blokiraju svjetlo i bacaju sjene
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-hr Voda i sluz odražavaju prostoriju iznad sebe; ravninski ponovno iscrtava scenu jednom za svaku obližnju razinu vode
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+hr Voda i sluz odražavaju prostoriju iznad sebe; ravninski ponovno iscrtava scenu jednom za svaku obližnju razinu vode; praćenje zraka slijedi svako mreškanje i traži GPU s praćenjem zraka
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 hr Segmenti mlaza, broj kapljica i sjajno sjenčanje tekućine: nisko koristi jednostavnije prozirne mlazove; visoko glatke sjajne mlazove

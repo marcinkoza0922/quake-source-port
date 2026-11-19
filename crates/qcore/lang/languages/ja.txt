@@ -835,6 +835,9 @@ ja レールガン設定
 @ Ranged only
 ja 遠距離のみ
 
+@ ray traced
+ja レイトレーシング
+
 @ Reacquire While Held
 ja 長押し中に再捕捉
 
@@ -1844,8 +1847,8 @@ ja マップの色付きライト（.litファイルまたはBSPXランプ）を
 @ Walls, doors and monsters block the light and cast shadows
 ja 壁、ドア、モンスターが光を遮り、影を落とします
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-ja 水やスライムが上の部屋を映します。平面は近くの水面ごとにシーンを一度描き直します
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ja 水やスライムが上の部屋を映します。平面は近くの水面ごとにシーンを一度描き直します。レイトレーシングは波紋の一つ一つを追い、レイトレーシング対応のGPUが必要です
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ja 水流のセグメント数、飛沫の数、液体の光沢表現。低は簡素な半透明の水流、高は滑らかで光沢のある水流になります

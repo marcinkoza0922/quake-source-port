@@ -835,6 +835,9 @@ be Налады рэйлгана
 @ Ranged only
 be Толькі далёкі бой
 
+@ ray traced
+be трасіроўка прамянёў
+
 @ Reacquire While Held
 be Перазахоп пры ўтрыманні
 
@@ -1844,8 +1847,8 @@ be Выкарыстоўвае каляровае асвятленне карты
 @ Walls, doors and monsters block the light and cast shadows
 be Сцены, дзверы і монстры засланяюць святло і адкідаюць цені
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-be Вада і слізь адлюстроўваюць памяшканне над імі; плоскія перамалёўваюць сцэну адзін раз на кожны блізкі ўзровень вады
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+be Вада і слізь адлюстроўваюць памяшканне над імі; плоскія перамалёўваюць сцэну адзін раз на кожны блізкі ўзровень вады; трасіроўка прамянёў ідзе за кожнай рабізной і патрабуе GPU з трасіроўкай прамянёў
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 be Сегменты струменя, колькасць кропель і глянцавае зацяненне вадкасці: нізкая — простыя паўпразрыстыя струмені; высокая — гладкія глянцавыя

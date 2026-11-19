@@ -835,6 +835,9 @@ cs Nastavení railgunu
 @ Ranged only
 cs Jen na dálku
 
+@ ray traced
+cs sledování paprsků
+
 @ Reacquire While Held
 cs Znovu zaměřit při držení
 
@@ -1844,8 +1847,8 @@ cs Použije barevné světlo mapy (soubor .lit nebo blok BSPX); vypnuto dává p
 @ Walls, doors and monsters block the light and cast shadows
 cs Stěny, dveře a monstra zastiňují světlo a vrhají stíny
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-cs Voda a sliz odrážejí místnost nad sebou; rovinné vykreslí scénu znovu jednou pro každou blízkou hladinu
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+cs Voda a sliz odrážejí místnost nad sebou; rovinné vykreslí scénu znovu jednou pro každou blízkou hladinu; sledování paprsků sleduje každé zvlnění a vyžaduje GPU se sledováním paprsků
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 cs Segmenty proudu, počet kapek a lesklé stínování kapaliny: nízká používá jednodušší průsvitné proudy; vysoká hladké lesklé proudy

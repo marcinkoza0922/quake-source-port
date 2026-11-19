@@ -3,6 +3,7 @@ use super::*;
 impl Renderer {
     pub(super) fn free_level(&mut self) {
         self.idle();
+        self.free_rt_world();
         self.hidden_entities.clear();
         self.isolated_portal = None;
         self.isolated_distance = None;
@@ -126,9 +127,15 @@ impl Renderer {
         }
         let usage = vk::BufferUsageFlags::STORAGE_BUFFER | vk::BufferUsageFlags::TRANSFER_DST;
         let vbytes = bytes_of(&cpu.vertices);
+        // ray-traced reflections build BLASes from it and read hit vertices
+        let rt_usage = if self.gpu.rt.is_some() {
+            vk::BufferUsageFlags::ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_KHR | vk::BufferUsageFlags::STORAGE_BUFFER
+        } else {
+            vk::BufferUsageFlags::empty()
+        };
         let vbuf = self.gpu.buffer(
             vbytes.len() as u64,
-            vk::BufferUsageFlags::VERTEX_BUFFER | vk::BufferUsageFlags::TRANSFER_DST,
+            vk::BufferUsageFlags::VERTEX_BUFFER | vk::BufferUsageFlags::TRANSFER_DST | rt_usage,
             false,
         )?;
         self.gpu.upload_buffer(&mut up, vbuf.buf, 0, vbytes)?;

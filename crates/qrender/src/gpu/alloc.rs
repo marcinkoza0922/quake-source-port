@@ -25,6 +25,8 @@ pub(super) struct Block {
 #[derive(Default)]
 pub struct Allocator {
     pub(super) pools: HashMap<(u32, bool), Vec<Block>>,
+    /// Buffer blocks are allocated with DEVICE_ADDRESS (ray queries on).
+    pub(super) device_address: bool,
 }
 
 impl Allocator {
@@ -66,9 +68,13 @@ impl Allocator {
             }
         }
         let size = req.size.max(BLOCK_SIZE).next_multiple_of(BLOCK_SIZE);
-        let info = vk::MemoryAllocateInfo::default()
+        let mut flags_info = vk::MemoryAllocateFlagsInfo::default().flags(vk::MemoryAllocateFlags::DEVICE_ADDRESS);
+        let mut info = vk::MemoryAllocateInfo::default()
             .allocation_size(size)
             .memory_type_index(ty);
+        if self.device_address && linear {
+            info = info.push_next(&mut flags_info);
+        }
         // SAFETY: valid device and allocate info.
         let memory = unsafe { dev.allocate_memory(&info, None)? };
         let ptr = if host {

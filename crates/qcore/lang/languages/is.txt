@@ -835,6 +835,9 @@ is Stillingar Railgun
 @ Ranged only
 is Aðeins af færi
 
+@ ray traced
+is geislarakning
+
 @ Reacquire While Held
 is Endurmiða meðan haldið
 
@@ -1844,8 +1847,8 @@ is Notar litaða lýsingu borðsins (.lit-skrá eða BSPX-hluta); af gefur uppru
 @ Walls, doors and monsters block the light and cast shadows
 is Veggir, dyr og skrímsli skyggja á ljósið og varpa skuggum
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-is Vatn og slím spegla rýmið fyrir ofan; flatar teikna senuna aftur einu sinni fyrir hvert nálægt vatnsborð
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+is Vatn og slím spegla rýmið fyrir ofan; flatar teikna senuna aftur einu sinni fyrir hvert nálægt vatnsborð; geislarakning fylgir hverri gáru og þarf skjákort með geislarakningu
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 is Bunuhlutar, fjöldi dropa og gljáandi vökvaskygging: lágt notar einfaldari hálfgegnsæjar bunur; hátt notar mjúkar, gljáandi bunur

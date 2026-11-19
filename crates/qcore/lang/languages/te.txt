@@ -835,6 +835,9 @@ te రెయిల్‌గన్ సెట్టింగ్‌లు
 @ Ranged only
 te దూర దాడులు మాత్రమే
 
+@ ray traced
+te రే ట్రేసింగ్
+
 @ Reacquire While Held
 te పట్టుకున్నప్పుడు మళ్లీ లక్ష్యం
 
@@ -1844,8 +1847,8 @@ te మ్యాప్ రంగుల కాంతిని వాడుతు�
 @ Walls, doors and monsters block the light and cast shadows
 te గోడలు, తలుపులు, రాక్షసులు కాంతిని అడ్డుకుని నీడలు వేస్తాయి
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-te నీరు, బురద తమ పైనున్న గదిని ప్రతిబింబిస్తాయి; సమతల ప్రతి దగ్గరి నీటి మట్టానికి దృశ్యాన్ని ఒకసారి మళ్లీ గీస్తుంది
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+te నీరు, బురద తమ పైనున్న గదిని ప్రతిబింబిస్తాయి; సమతల ప్రతి దగ్గరి నీటి మట్టానికి దృశ్యాన్ని ఒకసారి మళ్లీ గీస్తుంది; రే ట్రేసింగ్ ప్రతి అలను అనుసరిస్తుంది, రే ట్రేసింగ్ ఉన్న GPU అవసరం
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 te నీటి జెట్ భాగాలు, బిందువుల సంఖ్య, మెరిసే ద్రవ షేడింగ్: తక్కువ సరళమైన పారదర్శక ధారలు వాడుతుంది; అధికం మృదువైన మెరిసే జెట్‌లు వాడుతుంది

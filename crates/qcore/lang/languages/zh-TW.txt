@@ -835,6 +835,9 @@ zh-TW 磁軌砲設定
 @ Ranged only
 zh-TW 僅限遠程
 
+@ ray traced
+zh-TW 光線追蹤
+
 @ Reacquire While Held
 zh-TW 按住時重新鎖定
 
@@ -1844,8 +1847,8 @@ zh-TW 使用地圖的彩色光照（.lit檔案或BSPX區塊）；關閉則為原
 @ Walls, doors and monsters block the light and cast shadows
 zh-TW 牆壁、門與怪物會擋住光線並投下陰影
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-zh-TW 水與黏液會映出上方的空間；平面會為每個附近的水面重新繪製一次場景
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+zh-TW 水與黏液會映出上方的空間；平面會為每個附近的水面重新繪製一次場景；光線追蹤會追隨每一道漣漪，需要支援光線追蹤的 GPU
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 zh-TW 水柱分段、水滴數量與光澤液體著色：低使用較簡單的半透明水流；高使用平滑有光澤的水柱

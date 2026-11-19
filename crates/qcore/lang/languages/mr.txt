@@ -835,6 +835,9 @@ mr रेलगन सेटिंग्ज
 @ Ranged only
 mr फक्त दूरचे
 
+@ ray traced
+mr रे ट्रेसिंग
+
 @ Reacquire While Held
 mr धरून असताना पुन्हा लक्ष्य
 
@@ -1844,8 +1847,8 @@ mr मॅपचा रंगीत प्रकाश वापरते (.lit �
 @ Walls, doors and monsters block the light and cast shadows
 mr भिंती, दारे आणि राक्षस प्रकाश अडवतात आणि सावली टाकतात
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-mr पाणी आणि चिखल वरील खोलीचे प्रतिबिंब दाखवतात; सपाट प्रत्येक जवळच्या पाण्याच्या पातळीसाठी दृश्य एकदा पुन्हा काढते
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+mr पाणी आणि चिखल वरील खोलीचे प्रतिबिंब दाखवतात; सपाट प्रत्येक जवळच्या पाण्याच्या पातळीसाठी दृश्य एकदा पुन्हा काढते; रे ट्रेसिंग प्रत्येक लहरीचा मागोवा घेते आणि रे ट्रेसिंग असलेला GPU लागतो
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 mr पाण्याच्या फवाऱ्याचे भाग, थेंबांची संख्या आणि चकचकीत द्रव शेडिंग: कमी सोप्या अर्धपारदर्शक धारा वापरते; उच्च गुळगुळीत चकचकीत फवारे वापरते

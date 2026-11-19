@@ -835,6 +835,9 @@ mt Issettjar tar-railgun
 @ Ranged only
 mt Mill-bogħod biss
 
+@ ray traced
+mt traċċar tar-raġġi
+
 @ Reacquire While Held
 mt Erġa' aqbad waqt li żżomm
 
@@ -1844,8 +1847,8 @@ mt Juża d-dawl ikkulurit tal-mappa (fajl .lit jew lump BSPX); mitfi jagħti d-d
 @ Walls, doors and monsters block the light and cast shadows
 mt Il-ħitan, il-bibien u l-mostri jimblukkaw id-dawl u jitfgħu dellijiet
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-mt L-ilma u t-tajn jirriflettu l-kamra ta' fuqhom; ċatti terġa' tpinġi x-xena darba għal kull livell tal-ilma fil-qrib
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+mt L-ilma u t-tajn jirriflettu l-kamra ta' fuqhom; ċatti terġa' tpinġi x-xena darba għal kull livell tal-ilma fil-qrib; it-traċċar tar-raġġi jsegwi kull mewġa u jeħtieġ GPU b'traċċar tar-raġġi
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 mt Segmenti tal-ġett tal-ilma, għadd ta' qtar u shading tleqq tal-likwidu: baxxa tuża ġettijiet trasluċidi aktar sempliċi; għolja tuża ġettijiet lixxi u tleqq

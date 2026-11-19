@@ -835,6 +835,9 @@ et Railguni seaded
 @ Ranged only
 et Ainult kaugrünnak
 
+@ ray traced
+et kiirtejälitus
+
 @ Reacquire While Held
 et Hoides haara uuesti
 
@@ -1844,8 +1847,8 @@ et Kasutab kaardi värvilist valgust (.lit-fail või BSPX-plokk); väljas annab 
 @ Walls, doors and monsters block the light and cast shadows
 et Seinad, uksed ja koletised varjavad valgust ja heidavad varje
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-et Vesi ja lima peegeldavad ruumi enda kohal; tasapinnalised joonistavad stseeni iga lähedase veetaseme kohta korra uuesti
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+et Vesi ja lima peegeldavad ruumi enda kohal; tasapinnalised joonistavad stseeni iga lähedase veetaseme kohta korra uuesti; kiirtejälitus järgib iga virvendust ja vajab kiirtejälitusega GPU-d
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 et Veejoa lõigud, piiskade arv ja läikiv vedelikuvarjutus: madal kasutab lihtsamaid poolläbipaistvaid jugasid; kõrge sujuvaid läikivaid jugasid

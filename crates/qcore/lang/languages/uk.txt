@@ -835,6 +835,9 @@ uk Налаштування рейлгана
 @ Ranged only
 uk Лише дальній бій
 
+@ ray traced
+uk трасування променів
+
 @ Reacquire While Held
 uk Перезахоплення при утриманні
 
@@ -1844,8 +1847,8 @@ uk Використовує кольорове освітлення карти (
 @ Walls, doors and monsters block the light and cast shadows
 uk Стіни, двері й монстри затуляють світло й відкидають тіні
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-uk Вода й слиз віддзеркалюють приміщення над ними; площинні перемальовують сцену один раз для кожного близького рівня води
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+uk Вода й слиз віддзеркалюють приміщення над ними; площинні перемальовують сцену один раз для кожного близького рівня води; трасування променів стежить за кожною брижею й потребує GPU з трасуванням променів
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 uk Сегменти струменя, кількість крапель і глянцеве затінення рідини: низька — прості напівпрозорі струмені; висока — гладкі глянцеві

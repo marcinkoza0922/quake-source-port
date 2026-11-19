@@ -835,6 +835,9 @@ yue 磁軌炮設定
 @ Ranged only
 yue 只限遠程
 
+@ ray traced
+yue 光線追蹤
+
 @ Reacquire While Held
 yue 撳住時重新鎖定
 
@@ -1844,8 +1847,8 @@ yue 用地圖嘅彩色光照（.lit檔案或者BSPX區塊）；關閉就係原�
 @ Walls, doors and monsters block the light and cast shadows
 yue 牆、門同怪物會擋住光，投下陰影
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-yue 水同黏液會映出上面嘅空間；平面會為每個附近嘅水面再畫多一次場景
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+yue 水同黏液會映出上面嘅空間；平面會為每個附近嘅水面再畫多一次場景；光線追蹤會跟住每一道漣漪，要支援光線追蹤嘅 GPU
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 yue 水柱分段、水滴數量同光澤液體著色：低用較簡單嘅半透明水流；高用順滑有光澤嘅水柱

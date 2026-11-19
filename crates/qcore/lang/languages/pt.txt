@@ -835,6 +835,9 @@ pt Definições da railgun
 @ Ranged only
 pt Só à distância
 
+@ ray traced
+pt traçado de raios
+
 @ Reacquire While Held
 pt Refixar ao manter
 
@@ -1844,8 +1847,8 @@ pt Usa a luz colorida do mapa (ficheiro .lit ou bloco BSPX); desligado dá a luz
 @ Walls, doors and monsters block the light and cast shadows
 pt Paredes, portas e monstros bloqueiam a luz e projetam sombras
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-pt A água e o lodo refletem a sala acima deles; planares redesenha a cena uma vez por cada nível de água próximo
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+pt A água e o lodo refletem a sala acima deles; planares redesenha a cena uma vez por cada nível de água próximo; traçado de raios segue cada ondulação e exige uma GPU com traçado de raios
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 pt Segmentos do jato, número de gotas e sombreamento brilhante do líquido: baixa usa jatos translúcidos mais simples; alta usa jatos suaves e brilhantes

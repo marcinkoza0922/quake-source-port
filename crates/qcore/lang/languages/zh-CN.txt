@@ -835,6 +835,9 @@ zh-CN 轨道炮设置
 @ Ranged only
 zh-CN 仅限远程
 
+@ ray traced
+zh-CN 光线追踪
+
 @ Reacquire While Held
 zh-CN 按住时重新锁定
 
@@ -1844,8 +1847,8 @@ zh-CN 使用地图的彩色光照（.lit 文件或 BSPX 数据块）；关闭则
 @ Walls, doors and monsters block the light and cast shadows
 zh-CN 墙壁、门和怪物会挡住光线并投下阴影
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-zh-CN 水和黏液会映出上方的空间；平面会为每个附近的水面重新绘制一次场景
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+zh-CN 水和黏液会映出上方的空间；平面会为每个附近的水面重新绘制一次场景；光线追踪会追随每一道涟漪，需要支持光线追踪的 GPU
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 zh-CN 水柱分段、水滴数量和液体光泽着色：低使用简单的半透明水流；高使用平滑有光泽的水柱

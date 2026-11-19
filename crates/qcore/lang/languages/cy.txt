@@ -835,6 +835,9 @@ cy Gosodiadau railgun
 @ Ranged only
 cy O bell yn unig
 
+@ ray traced
+cy olrhain pelydrau
+
 @ Reacquire While Held
 cy Ailgaffael wrth ddal
 
@@ -1844,8 +1847,8 @@ cy Defnyddio golau lliw y map (ffeil .lit neu lwmp BSPX); mae i ffwrdd yn rhoi g
 @ Walls, doors and monsters block the light and cast shadows
 cy Mae waliau, drysau a bwystfilod yn rhwystro'r golau ac yn bwrw cysgodion
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-cy Mae dŵr a llysnafedd yn adlewyrchu'r ystafell uwch eu pennau; mae gwastad yn ail-lunio'r olygfa unwaith fesul lefel dŵr gerllaw
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+cy Mae dŵr a llysnafedd yn adlewyrchu'r ystafell uwch eu pennau; mae gwastad yn ail-lunio'r olygfa unwaith fesul lefel dŵr gerllaw; mae olrhain pelydrau yn dilyn pob crych ac mae angen GPU sy'n cefnogi olrhain pelydrau
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 cy Segmentau'r jet dŵr, nifer y diferion ac arlliwio hylif sgleiniog: mae isel yn defnyddio ffrydiau tryleu symlach; mae uchel yn defnyddio jetiau llyfn sgleiniog

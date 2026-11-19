@@ -835,6 +835,9 @@ lv Railgun iestatījumi
 @ Ranged only
 lv Tikai tālcīņa
 
+@ ray traced
+lv staru izsekošana
+
 @ Reacquire While Held
 lv Atkārtoti uztvert, turot
 
@@ -1844,8 +1847,8 @@ lv Izmanto kartes krāsaino gaismu (.lit fails vai BSPX bloks); izslēgts dod or
 @ Walls, doors and monsters block the light and cast shadows
 lv Sienas, durvis un briesmoņi aizsedz gaismu un met ēnas
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-lv Ūdens un gļotas atspoguļo telpu virs tiem; plakni pārzīmē ainu reizi katram tuvam ūdens līmenim
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+lv Ūdens un gļotas atspoguļo telpu virs tiem; plakni pārzīmē ainu reizi katram tuvam ūdens līmenim; staru izsekošana seko katram viļņojumam un prasa GPU ar staru izsekošanu
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 lv Strūklas segmenti, pilienu skaits un spīdīga šķidruma ēnošana: zems izmanto vienkāršākas caurspīdīgas strūklas; augsts gludas, spīdīgas strūklas

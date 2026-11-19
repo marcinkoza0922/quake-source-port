@@ -835,6 +835,9 @@ la Optiones railgun
 @ Ranged only
 la Eminus tantum
 
+@ ray traced
+la radiis vestigati
+
 @ Reacquire While Held
 la Tenendo iterum capere
 
@@ -1844,8 +1847,8 @@ la Lumen coloratum tabulae adhibet (plica .lit vel frustum BSPX); inactivum lume
 @ Walls, doors and monsters block the light and cast shadows
 la Parietes, ostia et monstra lucem impediunt et umbras iaciunt
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-la Aqua et limus conclave supra se reddunt; plani scaenam semel pro unaquaque proxima aquae superficie iterum pingunt
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+la Aqua et limus conclave supra se reddunt; plani scaenam semel pro unaquaque proxima aquae superficie iterum pingunt; radiis vestigati omnem undulam sequuntur et GPU radios vestigantem requirunt
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 la Segmenta iacti, numerus guttarum et umbratio nitida liquoris: humilis rivos translucidos simpliciores adhibet; alta iactus lenes et nitidos

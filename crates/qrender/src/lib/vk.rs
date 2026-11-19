@@ -91,6 +91,8 @@ pub struct Renderer {
     capture: Option<(Buffer, u32, u32)>,
     /// Loaded slang preset (r_shader_preset).
     slang: Option<slang::Slang>,
+    /// Ray-traced reflections (created on first use).
+    rt: Option<rt::Rt>,
 }
 
 impl Renderer {
@@ -258,6 +260,7 @@ impl Renderer {
         self.idle();
         self.drop_shader();
         self.free_level();
+        self.free_rt();
         self.destroy_targets();
         self.destroy_shadow_maps();
         if let Some((b, _, _)) = self.capture.take() {

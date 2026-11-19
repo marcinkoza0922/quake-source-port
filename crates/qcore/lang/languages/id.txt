@@ -835,6 +835,9 @@ id Pengaturan Railgun
 @ Ranged only
 id Hanya jarak jauh
 
+@ ray traced
+id ray tracing
+
 @ Reacquire While Held
 id Kunci Ulang saat Ditahan
 
@@ -1844,8 +1847,8 @@ id Memakai cahaya berwarna peta (berkas .lit atau lump BSPX); nonaktif memberi c
 @ Walls, doors and monsters block the light and cast shadows
 id Dinding, pintu, dan monster menghalangi cahaya dan menghasilkan bayangan
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-id Air dan lendir memantulkan ruangan di atasnya; planar menggambar ulang adegan sekali untuk setiap permukaan air terdekat
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+id Air dan lendir memantulkan ruangan di atasnya; planar menggambar ulang adegan sekali untuk setiap permukaan air terdekat; ray tracing mengikuti setiap riak dan memerlukan GPU dengan ray tracing
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 id Segmen semburan air, jumlah tetesan, dan shading cairan mengilap: rendah memakai aliran tembus pandang sederhana; tinggi memakai semburan halus dan mengilap

@@ -835,6 +835,9 @@ sl Nastavitve railguna
 @ Ranged only
 sl Samo boj na daljavo
 
+@ ray traced
+sl sledenje žarkom
+
 @ Reacquire While Held
 sl Ponovni zajem med držanjem
 
@@ -1844,8 +1847,8 @@ sl Uporablja barvno svetlobo zemljevida (datoteka .lit ali blok BSPX); izkloplje
 @ Walls, doors and monsters block the light and cast shadows
 sl Stene, vrata in pošasti zastirajo svetlobo in mečejo sence
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-sl Voda in sluz odsevata prostor nad sabo; ravninski znova izriše prizor enkrat za vsako bližnjo gladino
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+sl Voda in sluz odsevata prostor nad sabo; ravninski znova izriše prizor enkrat za vsako bližnjo gladino; sledenje žarkom sledi vsakemu valovanju in zahteva GPE s sledenjem žarkom
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sl Segmenti curka, število kapljic in sijoče senčenje tekočine: nizko uporablja preprostejše prosojne curke; visoko gladke sijoče curke

@@ -835,6 +835,9 @@ mk Поставки за рејлган
 @ Ranged only
 mk Само далечен бој
 
+@ ray traced
+mk следење зраци
+
 @ Reacquire While Held
 mk Повторен зафат при држење
 
@@ -1844,8 +1847,8 @@ mk Ја користи обоената светлина на мапата (.lit
 @ Walls, doors and monsters block the light and cast shadows
 mk Ѕидовите, вратите и чудовиштата го блокираат светлото и фрлаат сенки
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-mk Водата и лигата ја одразуваат просторијата над нив; рамнински ја исцртува сцената уште еднаш за секое блиско водно ниво
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+mk Водата и лигата ја одразуваат просторијата над нив; рамнински ја исцртува сцената уште еднаш за секое блиско водно ниво; следењето зраци го следи секое бранување и бара GPU со следење зраци
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 mk Сегменти на водениот млаз, број на капки и сјајно сенчење на течноста: ниско користи поедноставни проѕирни млазови; високо користи мазни сјајни млазови

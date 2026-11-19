@@ -835,6 +835,9 @@ sr Подешавања рејлгана
 @ Ranged only
 sr Само борба из даљине
 
+@ ray traced
+sr праћење зрака
+
 @ Reacquire While Held
 sr Поновни захват док држиш
 
@@ -1844,8 +1847,8 @@ sr Користи обојено светло мапе (.lit фајл или BSP
 @ Walls, doors and monsters block the light and cast shadows
 sr Зидови, врата и чудовишта заклањају светло и бацају сенке
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-sr Вода и слуз одражавају просторију изнад себе; равански поново исцртава сцену једном за сваки оближњи ниво воде
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+sr Вода и слуз одражавају просторију изнад себе; равански поново исцртава сцену једном за сваки оближњи ниво воде; праћење зрака прати свако таласање и захтева GPU са праћењем зрака
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sr Сегменти млаза, број капљица и сјајно сенчење течности: ниско користи једноставније провидне млазеве; високо глатке сјајне млазеве

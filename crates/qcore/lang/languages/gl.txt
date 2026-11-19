@@ -835,6 +835,9 @@ gl Axustes do railgun
 @ Ranged only
 gl Só a distancia
 
+@ ray traced
+gl trazado de raios
+
 @ Reacquire While Held
 gl Volver fixar ao manter
 
@@ -1844,8 +1847,8 @@ gl Usa a luz de cor do mapa (ficheiro .lit ou bloque BSPX); desactivado dá a lu
 @ Walls, doors and monsters block the light and cast shadows
 gl Paredes, portas e monstros bloquean a luz e proxectan sombras
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-gl A auga e o limo reflicten a sala de enriba; planos redebuxa a escena unha vez por cada nivel de auga próximo
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+gl A auga e o limo reflicten a sala de enriba; planos redebuxa a escena unha vez por cada nivel de auga próximo; trazado de raios segue cada onda e precisa dunha GPU con trazado de raios
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 gl Segmentos do chorro, número de pingas e sombreado brillante do líquido: baixa usa chorros translúcidos máis simples; alta, chorros suaves e brillantes

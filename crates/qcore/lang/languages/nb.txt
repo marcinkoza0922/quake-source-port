@@ -835,6 +835,9 @@ nb Railgun-innstillinger
 @ Ranged only
 nb Kun avstand
 
+@ ray traced
+nb strålesporing
+
 @ Reacquire While Held
 nb Lås på nytt mens holdt
 
@@ -1844,8 +1847,8 @@ nb Bruker banens fargede lys (.lit-fil eller BSPX-lump); av gir vanlig hvitt lys
 @ Walls, doors and monsters block the light and cast shadows
 nb Vegger, dører og monstre stenger for lyset og kaster skygger
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-nb Vann og slim speiler rommet over seg; plane tegner scenen på nytt én gang per nærliggende vannflate
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+nb Vann og slim speiler rommet over seg; plane tegner scenen på nytt én gang per nærliggende vannflate; strålesporing følger hver krusning og krever en GPU med strålesporing
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 nb Vannstrålesegmenter, antall dråper og blank væskeskyggelegging: lav bruker enklere gjennomskinnelige stråler; høy bruker jevne, blanke stråler

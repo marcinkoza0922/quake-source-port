@@ -835,6 +835,9 @@ ka რეილგანის პარამეტრები
 @ Ranged only
 ka მხოლოდ შორი ბრძოლა
 
+@ ray traced
+ka სხივების კვალი
+
 @ Reacquire While Held
 ka ხელახალი ჩამიზნება დაჭერისას
 
@@ -1844,8 +1847,8 @@ ka იყენებს რუკის ფერად განათებ�
 @ Walls, doors and monsters block the light and cast shadows
 ka კედლები, კარები და ურჩხულები სინათლეს ფარავენ და ჩრდილს აყენებენ
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-ka წყალი და ლორწო ირეკლავს ოთახს მათ ზემოთ; ბრტყელი სცენას ხელახლა ხატავს ყოველი ახლო წყლის დონისთვის ერთხელ
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ka წყალი და ლორწო ირეკლავს ოთახს მათ ზემოთ; ბრტყელი სცენას ხელახლა ხატავს ყოველი ახლო წყლის დონისთვის ერთხელ; სხივების კვალი მიჰყვება ყოველ ტალღას და საჭიროებს სხივების კვალის მხარდამჭერ GPU-ს
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ka წყლის ჭავლის სეგმენტები, წვეთების რაოდენობა და სითხის პრიალა დაჩრდილვა: დაბალი იყენებს მარტივ გამჭვირვალე ნაკადებს; მაღალი — გლუვ პრიალა ჭავლებს

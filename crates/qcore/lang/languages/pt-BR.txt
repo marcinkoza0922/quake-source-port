@@ -835,6 +835,9 @@ pt-BR Configurações do railgun
 @ Ranged only
 pt-BR Só à distância
 
+@ ray traced
+pt-BR traçado de raios
+
 @ Reacquire While Held
 pt-BR Retravar ao segurar
 
@@ -1844,8 +1847,8 @@ pt-BR Usa a luz colorida do mapa (arquivo .lit ou lump BSPX); desativado dá a l
 @ Walls, doors and monsters block the light and cast shadows
 pt-BR Paredes, portas e monstros bloqueiam a luz e projetam sombras
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-pt-BR A água e o lodo refletem a sala acima deles; planares redesenha a cena uma vez para cada nível de água próximo
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+pt-BR A água e o lodo refletem a sala acima deles; planares redesenha a cena uma vez para cada nível de água próximo; traçado de raios segue cada ondulação e exige uma GPU com traçado de raios
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 pt-BR Segmentos do jato de água, quantidade de gotas e sombreamento brilhante do líquido: baixa usa jatos translúcidos mais simples; alta usa jatos suaves e brilhantes

@@ -835,6 +835,9 @@ ga Socruithe Railgun
 @ Ranged only
 ga Fadraon amháin
 
+@ ray traced
+ga rianú ga
+
 @ Reacquire While Held
 ga Athaimsigh Agus É Coinnithe
 
@@ -1844,8 +1847,8 @@ ga Úsáideann sé solas daite na léarscáile (comhad .lit nó cnap BSPX); má 
 @ Walls, doors and monsters block the light and cast shadows
 ga Cuireann ballaí, doirse agus arrachtaigh bac ar an solas agus caitheann siad scáthanna
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-ga Frithchaitheann uisce agus ramallae an seomra os a gcionn; atharraingíonn plánach an radharc uair amháin in aghaidh gach leibhéal uisce in aice láimhe
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ga Frithchaitheann uisce agus ramallae an seomra os a gcionn; atharraingíonn plánach an radharc uair amháin in aghaidh gach leibhéal uisce in aice láimhe; leanann rianú ga gach cuilithín agus teastaíonn GPU a thacaíonn le rianú ga
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ga Míreanna scaird uisce, líon na mbraonta agus scáthú snasta leachta: úsáideann íseal sruthanna tréshoilseacha níos simplí; úsáideann ard scairdeanna míne snasta

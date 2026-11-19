@@ -835,6 +835,9 @@ fi Railgunin asetukset
 @ Ranged only
 fi Vain kaukotaistelu
 
+@ ray traced
+fi säteenseuranta
+
 @ Reacquire While Held
 fi Hae uudelleen pidettäessä
 
@@ -1844,8 +1847,8 @@ fi Käyttää kentän värillistä valoa (.lit-tiedosto tai BSPX-lohko); pois an
 @ Walls, doors and monsters block the light and cast shadows
 fi Seinät, ovet ja hirviöt estävät valon ja luovat varjoja
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-fi Vesi ja lima heijastavat yläpuolista tilaa; tasomaiset piirtävät näkymän uudelleen kerran jokaista lähellä olevaa vedenpintaa kohden
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+fi Vesi ja lima heijastavat yläpuolista tilaa; tasomaiset piirtävät näkymän uudelleen kerran jokaista lähellä olevaa vedenpintaa kohden; säteenseuranta seuraa jokaista väreilyä ja vaatii säteenseurantaa tukevan GPU:n
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 fi Vesisuihkun segmentit, pisaroiden määrä ja kiiltävä nesteen varjostus: matala käyttää yksinkertaisempia läpikuultavia virtoja; korkea pehmeitä kiiltäviä suihkuja

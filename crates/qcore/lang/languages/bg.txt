@@ -835,6 +835,9 @@ bg Настройки на рейлгъна
 @ Ranged only
 bg Само далечен бой
 
+@ ray traced
+bg проследяване на лъчи
+
 @ Reacquire While Held
 bg Повторен захват при задържане
 
@@ -1844,8 +1847,8 @@ bg Използва цветното осветление на картата (.
 @ Walls, doors and monsters block the light and cast shadows
 bg Стени, врати и чудовища спират светлината и хвърлят сенки
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-bg Водата и слузта отразяват помещението над тях; плоски прерисува сцената веднъж за всяко близко водно ниво
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+bg Водата и слузта отразяват помещението над тях; плоски прерисува сцената веднъж за всяко близко водно ниво; проследяването на лъчи следва всяка вълничка и изисква GPU с проследяване на лъчи
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 bg Сегменти на струята, брой капки и лъскаво осветяване на течността: ниско ползва по-прости полупрозрачни струи; високо – гладки лъскави струи

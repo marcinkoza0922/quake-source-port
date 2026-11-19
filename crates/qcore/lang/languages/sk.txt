@@ -835,6 +835,9 @@ sk Nastavenia railgunu
 @ Ranged only
 sk Iba na diaľku
 
+@ ray traced
+sk sledovanie lúčov
+
 @ Reacquire While Held
 sk Znova zamerať pri držaní
 
@@ -1844,8 +1847,8 @@ sk Použije farebné svetlo mapy (súbor .lit alebo blok BSPX); vypnuté dá pô
 @ Walls, doors and monsters block the light and cast shadows
 sk Steny, dvere a príšery zakrývajú svetlo a vrhajú tiene
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-sk Voda a sliz odrážajú miestnosť nad sebou; rovinné vykreslia scénu znova raz pre každú blízku hladinu
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+sk Voda a sliz odrážajú miestnosť nad sebou; rovinné vykreslia scénu znova raz pre každú blízku hladinu; sledovanie lúčov sleduje každé zvlnenie a vyžaduje GPU so sledovaním lúčov
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 sk Segmenty prúdu, počet kvapiek a lesklé tieňovanie kvapaliny: nízka používa jednoduchšie priesvitné prúdy; vysoká hladké lesklé prúdy

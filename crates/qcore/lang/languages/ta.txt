@@ -835,6 +835,9 @@ ta ரெயில்கன் அமைப்புகள்
 @ Ranged only
 ta தொலைவுத் தாக்கு மட்டும்
 
+@ ray traced
+ta கதிர் தடமறிதல்
+
 @ Reacquire While Held
 ta பிடிக்கும்போது மீண்டும் பிடி
 
@@ -1844,8 +1847,8 @@ ta மேப்பின் வண்ண ஒளியைப் (.lit கோப�
 @ Walls, doors and monsters block the light and cast shadows
 ta சுவர்கள், கதவுகள், அரக்கர்கள் ஒளியைத் தடுத்து நிழல் விழச் செய்கின்றன
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-ta நீரும் சேறும் தங்களுக்கு மேலுள்ள அறையைப் பிரதிபலிக்கின்றன; தட்டை ஒவ்வொரு அருகிலுள்ள நீர் மட்டத்திற்கும் காட்சியை ஒருமுறை மீண்டும் வரைகிறது
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ta நீரும் சேறும் தங்களுக்கு மேலுள்ள அறையைப் பிரதிபலிக்கின்றன; தட்டை ஒவ்வொரு அருகிலுள்ள நீர் மட்டத்திற்கும் காட்சியை ஒருமுறை மீண்டும் வரைகிறது; கதிர் தடமறிதல் ஒவ்வொரு அலையையும் பின்தொடர்கிறது, கதிர் தடமறிதல் கொண்ட GPU தேவை
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ta நீர்த்தாரைப் பகுதிகள், துளி எண்ணிக்கை, பளபளப்பான திரவ நிழலிடல்: குறைவு எளிய ஒளி ஊடுருவும் தாரைகள்; உயர் மென்மையான பளபளப்பான தாரைகள்

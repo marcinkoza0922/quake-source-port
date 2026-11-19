@@ -835,6 +835,9 @@ ar إعدادات الريلغن
 @ Ranged only
 ar الهجوم البعيد فقط
 
+@ ray traced
+ar تتبع الأشعة
+
 @ Reacquire While Held
 ar إعادة الالتقاط أثناء الضغط
 
@@ -1844,8 +1847,8 @@ ar يستخدم الإضاءة الملونة للخريطة (ملف .lit أو �
 @ Walls, doors and monsters block the light and cast shadows
 ar تحجب الجدران والأبواب والوحوش الضوء وتُلقي ظلالًا
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-ar يعكس الماء والوحل الغرفة فوقهما؛ المستوية تعيد رسم المشهد مرة لكل مستوى ماء قريب
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ar يعكس الماء والوحل الغرفة فوقهما؛ المستوية تعيد رسم المشهد مرة لكل مستوى ماء قريب؛ تتبع الأشعة يتبع كل تموج ويحتاج إلى معالج رسوميات يدعم تتبع الأشعة
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ar أجزاء نفث الماء وعدد القطرات وتظليل السائل اللامع: المنخفض يستخدم تيارات شفافة أبسط؛ العالي نفثات لامعة ناعمة

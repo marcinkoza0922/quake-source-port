@@ -835,6 +835,9 @@ hy Ռեյլգանի կարգավորումներ
 @ Ranged only
 hy Միայն հեռահար
 
+@ ray traced
+hy ճառագայթների հետագծում
+
 @ Reacquire While Held
 hy Վերագրավել պահելիս
 
@@ -1844,8 +1847,8 @@ hy Օգտագործում է քարտեզի գունավոր լույսը (.lit 
 @ Walls, doors and monsters block the light and cast shadows
 hy Պատերը, դռներն ու հրեշները փակում են լույսը և ստվեր գցում
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-hy Ջուրն ու լորձը արտացոլում են իրենց վերևի սենյակը. հարթը տեսարանը նորից է նկարում յուրաքանչյուր մոտակա ջրի մակարդակի համար մեկ անգամ
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+hy Ջուրն ու լորձը արտացոլում են իրենց վերևի սենյակը. հարթը տեսարանը նորից է նկարում յուրաքանչյուր մոտակա ջրի մակարդակի համար մեկ անգամ. ճառագայթների հետագծումը հետևում է յուրաքանչյուր ալիքին և պահանջում է ճառագայթների հետագծմամբ GPU
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 hy Ջրաշիթի հատվածները, կաթիլների քանակը և հեղուկի փայլուն ստվերավորումը: ցածրն օգտագործում է ավելի պարզ կիսաթափանցիկ հոսքեր, բարձրը՝ հարթ փայլուն շիթեր

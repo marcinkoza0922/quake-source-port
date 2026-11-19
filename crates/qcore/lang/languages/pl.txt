@@ -835,6 +835,9 @@ pl Ustawienia railguna
 @ Ranged only
 pl Tylko walka dystansowa
 
+@ ray traced
+pl śledzenie promieni
+
 @ Reacquire While Held
 pl Ponowne namierzanie przy trzymaniu
 
@@ -1844,8 +1847,8 @@ pl Używa kolorowego światła mapy (plik .lit lub blok BSPX); wyłączone daje 
 @ Walls, doors and monsters block the light and cast shadows
 pl Ściany, drzwi i potwory zasłaniają światło i rzucają cienie
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-pl Woda i szlam odbijają pomieszczenie nad sobą; płaskie rysuje scenę ponownie raz na każdy pobliski poziom wody
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+pl Woda i szlam odbijają pomieszczenie nad sobą; płaskie rysuje scenę ponownie raz na każdy pobliski poziom wody; śledzenie promieni podąża za każdą zmarszczką i wymaga GPU ze śledzeniem promieni
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 pl Segmenty strumienia, liczba kropli i połysk cieczy: niska używa prostszych przezroczystych strumieni; wysoka gładkich, lśniących strumieni

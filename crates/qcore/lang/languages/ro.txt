@@ -835,6 +835,9 @@ ro Setări railgun
 @ Ranged only
 ro Doar la distanță
 
+@ ray traced
+ro trasare de raze
+
 @ Reacquire While Held
 ro Refixare la menținere
 
@@ -1844,8 +1847,8 @@ ro Folosește lumina colorată a hărții (fișier .lit sau bloc BSPX); oprit of
 @ Walls, doors and monsters block the light and cast shadows
 ro Pereții, ușile și monștrii blochează lumina și aruncă umbre
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-ro Apa și mâlul reflectă încăperea de deasupra; plane redesenează scena o dată pentru fiecare nivel de apă apropiat
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ro Apa și mâlul reflectă încăperea de deasupra; plane redesenează scena o dată pentru fiecare nivel de apă apropiat; trasarea de raze urmează fiecare undă și necesită un GPU cu trasare de raze
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ro Segmentele jetului de apă, numărul de picături și umbrirea lucioasă a lichidului: scăzută folosește jeturi translucide mai simple; ridicată jeturi fine și lucioase

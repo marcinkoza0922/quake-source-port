@@ -835,6 +835,9 @@ hi रेलगन सेटिंग्स
 @ Ranged only
 hi केवल दूरी वाले
 
+@ ray traced
+hi रे ट्रेसिंग
+
 @ Reacquire While Held
 hi दबाए रखते हुए फिर से लॉक करें
 
@@ -1844,8 +1847,8 @@ hi मैप की रंगीन रोशनी (.lit फ़ाइल या
 @ Walls, doors and monsters block the light and cast shadows
 hi दीवारें, दरवाज़े और राक्षस रोशनी रोकते हैं और छाया डालते हैं
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-hi पानी और कीचड़ अपने ऊपर के कमरे को प्रतिबिंबित करते हैं; समतल हर नज़दीकी जल स्तर के लिए दृश्य एक बार फिर बनाता है
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+hi पानी और कीचड़ अपने ऊपर के कमरे को प्रतिबिंबित करते हैं; समतल हर नज़दीकी जल स्तर के लिए दृश्य एक बार फिर बनाता है; रे ट्रेसिंग हर लहर का अनुसरण करता है और रे ट्रेसिंग वाला GPU चाहिए
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 hi पानी की धार के खंड, बूँदों की संख्या और चमकदार तरल शेडिंग: निम्न सरल पारभासी धाराएँ इस्तेमाल करता है; उच्च स्मूद चमकदार धारें

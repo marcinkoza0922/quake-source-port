@@ -1940,6 +1940,13 @@ it Solo a distanza
 es Solo a distancia
 ru Только дальний бой
 
+@ ray traced
+fr par lancer de rayons
+de Raytracing
+it ray tracing
+es trazado de rayos
+ru трассировка лучей
+
 @ Reacquire While Held
 fr Réacquérir en maintenant
 de Bei Halten neu erfassen

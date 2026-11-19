@@ -835,6 +835,9 @@ lt Railgun nustatymai
 @ Ranged only
 lt Tik tolima kova
 
+@ ray traced
+lt spindulių sekimas
+
 @ Reacquire While Held
 lt Iš naujo fiksuoti laikant
 
@@ -1844,8 +1847,8 @@ lt Naudoja spalvotą žemėlapio apšvietimą (.lit failas arba BSPX blokas); i�
 @ Walls, doors and monsters block the light and cast shadows
 lt Sienos, durys ir monstrai užstoja šviesą ir meta šešėlius
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-lt Vanduo ir gleivės atspindi patalpą virš jų; plokštuminiai perpiešia sceną kartą kiekvienam artimam vandens lygiui
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+lt Vanduo ir gleivės atspindi patalpą virš jų; plokštuminiai perpiešia sceną kartą kiekvienam artimam vandens lygiui; spindulių sekimas seka kiekvieną raibulį ir reikalauja GPU su spindulių sekimu
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 lt Vandens srovės segmentai, lašų skaičius ir blizgus skysčio šešėliavimas: žema naudoja paprastesnes permatomas sroves; aukšta – glotnias blizgias sroves

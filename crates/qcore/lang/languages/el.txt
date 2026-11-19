@@ -835,6 +835,9 @@ el Ρυθμίσεις railgun
 @ Ranged only
 el Μόνο από απόσταση
 
+@ ray traced
+el ανίχνευση ακτίνων
+
 @ Reacquire While Held
 el Επανεντοπισμός με κράτημα
 
@@ -1844,8 +1847,8 @@ el Χρησιμοποιεί τον έγχρωμο φωτισμό του χάρτ
 @ Walls, doors and monsters block the light and cast shadows
 el Τοίχοι, πόρτες και τέρατα εμποδίζουν το φως και ρίχνουν σκιές
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-el Το νερό και η λάσπη καθρεφτίζουν τον χώρο από πάνω τους· οι επίπεδες ξανασχεδιάζουν τη σκηνή μία φορά για κάθε κοντινή στάθμη νερού
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+el Το νερό και η λάσπη καθρεφτίζουν τον χώρο από πάνω τους· οι επίπεδες ξανασχεδιάζουν τη σκηνή μία φορά για κάθε κοντινή στάθμη νερού· η ανίχνευση ακτίνων ακολουθεί κάθε κυματισμό και απαιτεί GPU με ανίχνευση ακτίνων
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 el Τμήματα πίδακα νερού, πλήθος σταγόνων και γυαλιστερή σκίαση υγρών: η χαμηλή χρησιμοποιεί απλούστερες ημιδιάφανες ροές· η υψηλή ομαλούς γυαλιστερούς πίδακες

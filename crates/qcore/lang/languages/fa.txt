@@ -835,6 +835,9 @@ fa تنظیمات ریل‌گان
 @ Ranged only
 fa فقط دوربرد
 
+@ ray traced
+fa ردیابی پرتو
+
 @ Reacquire While Held
 fa هدف‌گیری دوباره هنگام نگه‌داشتن
 
@@ -1844,8 +1847,8 @@ fa نور رنگی نقشه را به کار می‌برد (فایل .lit یا �
 @ Walls, doors and monsters block the light and cast shadows
 fa دیوارها، درها و هیولاها جلوی نور را می‌گیرند و سایه می‌اندازند
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-fa آب و لجن اتاق بالای خود را بازتاب می‌دهند؛ صفحه‌ای صحنه را برای هر سطح آب نزدیک یک بار دوباره می‌کشد
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+fa آب و لجن اتاق بالای خود را بازتاب می‌دهند؛ صفحه‌ای صحنه را برای هر سطح آب نزدیک یک بار دوباره می‌کشد؛ ردیابی پرتو هر موج را دنبال می‌کند و به GPU با پشتیبانی ردیابی پرتو نیاز دارد
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 fa بخش‌های فواره‌ی آب، تعداد قطره‌ها و سایه‌زنی براق مایع: کم جریان‌های نیمه‌شفاف ساده‌تر؛ زیاد فواره‌های نرم و براق

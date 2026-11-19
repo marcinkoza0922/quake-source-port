@@ -835,6 +835,9 @@ th ตั้งค่า​เรลกัน
 @ Ranged only
 th ระยะ​ไกล​เท่านั้น
 
+@ ray traced
+th เรย์​เทรซิง
+
 @ Reacquire While Held
 th หา​เป้า​ใหม่​ขณะ​กด​ค้าง
 
@@ -1844,8 +1847,8 @@ th ใช้​แสง​สี​ของ​แผนที่ (ไฟล์
 @ Walls, doors and monsters block the light and cast shadows
 th ผนัง ประตู และ​มอนสเตอร์​บัง​แสง​และ​ทอด​เงา
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-th น้ำ​และ​เมือก​สะท้อน​ห้อง​ด้าน​บน ระนาบ​วาด​ฉาก​ใหม่​หนึ่ง​ครั้ง​ต่อ​ระดับ​น้ำ​ที่​อยู่​ใกล้
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+th น้ำ​และ​เมือก​สะท้อน​ห้อง​ด้าน​บน ระนาบ​วาด​ฉาก​ใหม่​หนึ่ง​ครั้ง​ต่อ​ระดับ​น้ำ​ที่​อยู่​ใกล้ เรย์​เทรซิง​ติดตาม​ทุก​ระลอก​คลื่น​และ​ต้อง​ใช้ GPU ที่​รองรับ​เรย์​เทรซิง
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 th ส่วน​ลำ​น้ำ จำนวน​หยด​และ​การ​แรเงา​ของ​เหลว​มัน​วาว: ต่ำ​ใช้​สาย​น้ำ​โปร่ง​แสง​ที่​ง่าย​กว่า; สูง​ใช้​ลำ​น้ำ​เรียบ​มัน​วาว

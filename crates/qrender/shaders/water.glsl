@@ -1,4 +1,7 @@
 #include "common.glsl"
+#ifdef RT
+#include "rt.glsl"
+#endif
 layout(location = 0) in vec2 i_st;
 layout(location = 1) in vec3 i_lm;
 layout(location = 2) in vec3 i_wpos;
@@ -32,6 +35,7 @@ void main() {
     }
     vec2 st = i_st;
     vec2 refl_off = vec2(0.0); // planar reflection wobble (screen uv)
+    vec2 slope = vec2(0.0);    // ripple slope (ray-traced reflection normal)
     float shade = 1.0;
     float heat = 0.0; // lava only: disturbed crust glows hotter
     // r_waterripples: the height field bends the classic warp lookup and
@@ -56,6 +60,7 @@ void main() {
                     vec2 g = water_grad(i_wpos, t, 0.5 * min(k, 1.5), 2.5 * k);
                     st += g * 5.0;
                     refl_off = g * 0.02;
+                    slope = g;
                     float slope = dot(g, vec2(0.6, 0.45));
                     shade = 1.0 + clamp(slope, -0.6, 0.6) * 1.4 + smoothstep(0.25, 0.7, length(g)) * 0.2;
                 }
@@ -78,6 +83,33 @@ void main() {
     }
     vec3 col = apply_fog(c.rgb * shade, i_wpos);
     float alpha = a * pc.params.x;
+#ifdef RT
+    // r_water_reflections 2: a ray query along the reflection about the
+    // face normal bent by the ripple slope and the classic warp, shaded like
+    // the raster path and fogged over the whole path (rt.glsl)
+    if (fr.refl.x > 0.0 && kind != 2u && kind != 4u && fr.portal_clip == vec4(0.0)) {
+        vec3 dp = fwidth(i_wpos);
+        vec3 nf = normalize(cross(dFdx(i_wpos), dFdy(i_wpos)));
+        vec3 v = fr.eye.xyz - i_wpos;
+        float dv = length(v);
+        v /= dv;
+        if (dot(nf, v) < 0.0) nf = -nf;
+        vec3 tx = normalize(abs(nf.z) > 0.7 ? vec3(1.0, 0.0, 0.0) - nf * nf.x : vec3(0.0, 0.0, 1.0) - nf * nf.z);
+        vec3 ty = cross(nf, tx);
+        vec2 wob = sin(i_st.yx * 0.125 + t * vec2(1.3, 1.1)) * 0.012;
+        vec3 n = normalize(nf + tx * wob.x + ty * wob.y + vec3(-slope * 0.35 * sign(nf.z), 0.0));
+        vec3 r = reflect(-v, n);
+        float rn = dot(r, nf);
+        if (rn < 0.02) r = normalize(r + nf * (0.02 - rn));
+        float cone = max(dp.x, max(dp.y, dp.z)) / max(dv, 1.0);
+        vec3 refl = rt_reflect(i_wpos + nf * 0.5, r, dv, cone);
+        float cosv = clamp(dot(v, nf), 0.0, 1.0);
+        float fres = 0.2 + 0.8 * pow(1.0 - cosv, 5.0);
+        float f = min(fres * fr.refl.x, 0.9);
+        col = mix(col, refl, f);
+        alpha = max(alpha, f);
+    }
+#else
     // r_water_reflections: the mirrored view of this sheet's plane (portal
     // slot kind 2), Fresnel-weighted and wobbled by the warp and ripples.
     // Its image is fogged along the reflected path already.
@@ -99,6 +131,7 @@ void main() {
             break;
         }
     }
+#endif
     o_color = vec4(col, alpha);
     // lava and teleporters are drawn fullbright and glow; hot crust more
     float g = kind == 2u ? 0.55 * (1.0 + heat) : kind == 4u ? 0.5 : 0.0;

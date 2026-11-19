@@ -97,6 +97,7 @@ impl Renderer {
         lm: &mut LightmapRequests,
         worlds: &mut PortalWorldCache,
     ) -> Vec<PortalDraw> {
+        let planar_reflections = self.reflection_mode(set) == 1;
         let (Some(v), Some(w)) = (view, self.world.as_mut()) else {
             return Vec::new();
         };
@@ -117,7 +118,7 @@ impl Renderer {
             .collect();
         guns.sort_by(|a, b| dist2(a).total_cmp(&dist2(b)));
         guns.truncate(gun_max);
-        if set.water_reflections > 0 && self.isolated_portal.is_none() {
+        if planar_reflections && self.isolated_portal.is_none() {
             guns.extend(reflection_portals(w, v));
         }
         let mut portals: Vec<_> = if set.teleport_windows {

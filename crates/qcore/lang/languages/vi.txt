@@ -835,6 +835,9 @@ vi Cài đặt railgun
 @ Ranged only
 vi Chỉ đánh xa
 
+@ ray traced
+vi dò tia
+
 @ Reacquire While Held
 vi Bắt lại mục tiêu khi giữ
 
@@ -1844,8 +1847,8 @@ vi Dùng ánh sáng màu của bản đồ (tệp .lit hoặc khối BSPX); tắ
 @ Walls, doors and monsters block the light and cast shadows
 vi Tường, cửa và quái vật chắn ánh sáng và đổ bóng
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-vi Nước và chất nhờn phản chiếu căn phòng phía trên; phẳng vẽ lại cảnh một lần cho mỗi mặt nước gần đó
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+vi Nước và chất nhờn phản chiếu căn phòng phía trên; phẳng vẽ lại cảnh một lần cho mỗi mặt nước gần đó; dò tia bám theo từng gợn sóng và cần GPU hỗ trợ dò tia
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 vi Số đoạn tia nước, số giọt và đổ bóng chất lỏng bóng loáng: thấp dùng dòng nước trong mờ đơn giản hơn; cao dùng tia nước mượt và bóng

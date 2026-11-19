@@ -54,7 +54,7 @@ pub(super) const WATER: &[Item] = &[
     slider("Reflection Strength", "r_water_reflections_amount", 0.25, 1.5, 0.25),
 ];
 
-pub(super) const WATER_REFLECTIONS: &[(&str, f32)] = &[("off", 0.0), ("planar", 1.0)];
+pub(super) const WATER_REFLECTIONS: &[(&str, f32)] = &[("off", 0.0), ("planar", 1.0), ("ray traced", 2.0)];
 
 pub(super) const BLOOM_QUALITY: &[(&str, f32)] = &[("low", 0.0), ("high", 1.0)];
 

@@ -835,6 +835,9 @@ ca Configuració del railgun
 @ Ranged only
 ca Només a distància
 
+@ ray traced
+ca traçat de raigs
+
 @ Reacquire While Held
 ca Torna a fixar en mantenir
 
@@ -1844,8 +1847,8 @@ ca Fa servir la llum de color del mapa (fitxer .lit o bloc BSPX); desactivat don
 @ Walls, doors and monsters block the light and cast shadows
 ca Parets, portes i monstres bloquegen la llum i projecten ombres
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-ca L'aigua i el llot reflecteixen la sala de sobre; plans redibuixa l'escena un cop per cada nivell d'aigua proper
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ca L'aigua i el llot reflecteixen la sala de sobre; plans redibuixa l'escena un cop per cada nivell d'aigua proper; traçat de raigs segueix cada ona i necessita una GPU amb traçat de raigs
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ca Segments del raig, nombre de gotes i ombrejat brillant del líquid: baixa usa raigs translúcids més simples; alta, raigs suaus i brillants

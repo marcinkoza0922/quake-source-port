@@ -835,6 +835,9 @@ ur ریل گن کی ترتیبات
 @ Ranged only
 ur صرف دور مار
 
+@ ray traced
+ur رے ٹریسنگ
+
 @ Reacquire While Held
 ur دبائے رکھنے پر دوبارہ ہدف
 
@@ -1844,8 +1847,8 @@ ur نقشے کی رنگین روشنی (.lit فائل یا BSPX lump) استعم
 @ Walls, doors and monsters block the light and cast shadows
 ur دیواریں، دروازے اور عفریت روشنی روکتے ہیں اور سائے ڈالتے ہیں
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-ur پانی اور کیچڑ اپنے اوپر کے کمرے کا عکس دکھاتے ہیں؛ مسطح ہر قریبی پانی کی سطح کے لیے منظر ایک بار دوبارہ بناتا ہے
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ur پانی اور کیچڑ اپنے اوپر کے کمرے کا عکس دکھاتے ہیں؛ مسطح ہر قریبی پانی کی سطح کے لیے منظر ایک بار دوبارہ بناتا ہے؛ رے ٹریسنگ ہر لہر کا پیچھا کرتی ہے اور رے ٹریسنگ والا GPU درکار ہے
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ur پانی کی دھار کے حصے، قطروں کی تعداد اور چمکدار مائع شیڈنگ: کم سادہ نیم شفاف دھاریں؛ زیادہ ہموار چمکدار دھاریں

@@ -835,6 +835,9 @@ ms Tetapan Railgun
 @ Ranged only
 ms Jarak jauh sahaja
 
+@ ray traced
+ms surihan sinar
+
 @ Reacquire While Held
 ms Kunci Semula Semasa Ditahan
 
@@ -1844,8 +1847,8 @@ ms Menggunakan cahaya berwarna peta (fail .lit atau lump BSPX); mati memberi cah
 @ Walls, doors and monsters block the light and cast shadows
 ms Dinding, pintu dan raksasa menghalang cahaya dan menghasilkan bayang-bayang
 
-@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level
-ms Air dan lendir memantulkan bilik di atasnya; satah melukis semula adegan sekali bagi setiap paras air berdekatan
+@ Water and slime mirror the room above them; planar redraws the scene once per nearby water level; ray traced follows every ripple and needs a ray-tracing GPU
+ms Air dan lendir memantulkan bilik di atasnya; satah melukis semula adegan sekali bagi setiap paras air berdekatan; surihan sinar mengikut setiap riak dan memerlukan GPU dengan surihan sinar
 
 @ Water jet segments, droplet count and glossy liquid shading: low uses simpler translucent streams; high uses smooth glossy jets
 ms Segmen pancutan air, bilangan titisan dan pelorekan cecair berkilat: rendah guna aliran lut cahaya yang lebih ringkas; tinggi guna pancutan berkilat yang licin
