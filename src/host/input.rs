@@ -150,7 +150,12 @@ impl Host {
                             self.con.text(ch);
                         }
                     }
-                    Some(Routed::Text { ch, dest: KeyDest::Menu }) => self.menu.text(ch, &mut self.server.core.cvars),
+                    // Ctrl/Alt chords are shortcuts (Ctrl+V pastes), not typing
+                    Some(Routed::Text { ch, dest: KeyDest::Menu }) => {
+                        if !self.input.key_down(qinput::keys::K_CTRL) && !self.input.key_down(qinput::keys::K_ALT) {
+                            self.menu.text(ch, &mut self.server.core.cvars);
+                        }
+                    }
                     Some(Routed::Key { key, dest: KeyDest::Menu }) => self.menu_key(key),
                     _ => {}
                 }
@@ -224,6 +229,12 @@ impl Host {
     }
 
     pub(super) fn menu_key(&mut self, key: i32) {
+        use qinput::keys::{K_CTRL, K_INS, K_SHIFT};
+        self.menu.shift = self.input.key_down(K_SHIFT);
+        let ctrl = self.input.key_down(K_CTRL);
+        if self.menu.wants_text() && (ctrl || (self.menu.shift && key == K_INS)) && self.menu_clipboard(key, ctrl) {
+            return;
+        }
         let active = self.server.active();
         let acts = self.menu.key(key, &mut self.server.core.cvars, active);
         for a in acts {
@@ -233,6 +244,36 @@ impl Host {
                 Action::Close => {}
             }
         }
+    }
+
+    /// Clipboard keys on a menu text row: Ctrl+A selects all, Ctrl+C/X
+    /// copy/cut the selection, Ctrl+V and Shift+Insert paste. True when
+    /// `key` was one of them.
+    fn menu_clipboard(&mut self, key: i32, ctrl: bool) -> bool {
+        let cv = &mut self.server.core.cvars;
+        let paste = !ctrl || key == b'v' as i32;
+        match key {
+            _ if paste => {
+                if let Some(s) = self.window.as_ref().and_then(|w| w.clipboard_text()) {
+                    // one line: newlines and tabs become spaces
+                    let s: String = s.trim_end_matches(['\r', '\n']).chars().map(|c| if c.is_control() { ' ' } else { c }).collect();
+                    self.menu.text_insert(&s, cv);
+                }
+            }
+            k if k == b'a' as i32 => self.menu.text_select_all(cv),
+            k if k == b'c' as i32 || k == b'x' as i32 => {
+                if let Some(s) = self.menu.text_selection(cv) {
+                    if let Some(w) = &self.window {
+                        let _ = w.set_clipboard_text(&s);
+                    }
+                    if k == b'x' as i32 {
+                        self.menu.text_insert("", cv);
+                    }
+                }
+            }
+            _ => return false,
+        }
+        true
     }
 
     /// Whether prompts should show gamepad glyphs.

@@ -71,6 +71,7 @@ impl Menu {
     pub fn mouse_up(&mut self) {
         self.drag = None;
         self.slider_drag = None;
+        self.text_drag = None;
     }
 
     /// Sets a slider from a pointer x (the knob centres on it), snapped to its step.

@@ -8,23 +8,16 @@ impl Menu {
     }
 
     pub(super) fn osk_key(&mut self, key: i32, mut o: Osk, cv: &mut Cvars, out: &mut Vec<Action>) {
-        // a text row's cvar, or `None` for the Options hub's search field
-        let field = match self.screen {
-            Screen::Options => None,
-            Screen::OptionsPage(p) if let Item::Text { cvar, .. } = self.page_item(p, self.opt_cursor) => Some(cvar),
+        // a text row, or the Options hub's search field
+        let search = match self.screen {
+            Screen::Options => true,
+            Screen::OptionsPage(p) if matches!(self.page_item(p, self.opt_cursor), Item::Text { .. }) => false,
             _ => {
                 self.osk = None;
                 return;
             }
         };
-        let backspace = |m: &mut Self, cv: &mut Cvars| match field {
-            Some(cvar) => {
-                let mut v = cv.by_name(cvar).map_or(String::new(), |c| c.string.clone());
-                v.pop();
-                cv.set(cvar, &v);
-            }
-            None => m.search_backspace(),
-        };
+        let backspace = |m: &mut Self, cv: &mut Cvars| if search { m.search_backspace() } else { m.text_delete(false, cv) };
         let n = OSK_ACTIONS.len();
         match key {
             K_UPARROW | K_DPAD_UP => o.row = (o.row + 4) % 5,
