@@ -1467,7 +1467,7 @@ mt perċentwal
 @ any% and 100%
 mt any% u 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 mt Żomm id-Demos tal-Aħjar Personali
 
 @ any%
@@ -4043,3 +4043,12 @@ mt Logħob lokali. Allinja l-marka bajda ma' dik tad-deheb. Qabża: − kmieni, 
 
 @ Shows the eight most recent gameplay inputs
 mt Juri l-aħħar tmien inputs waqt il-logħob
+
+@ no-hit
+mt bla ħsara
+
+@ 100% no-hit
+mt 100% bla ħsara
+
+@ Damage Skull
+mt Kranju tal-ħsara

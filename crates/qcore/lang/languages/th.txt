@@ -1467,7 +1467,7 @@ th เปอร์เซ็นต์
 @ any% and 100%
 th any% และ 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 th เก็บ​เดโม​สถิติ​ส่วนตัว
 
 @ any%
@@ -4043,3 +4043,12 @@ th เกม​ในเครื่อง จัด​เครื่องห�
 
 @ Shows the eight most recent gameplay inputs
 th แสดง​คำสั่ง​ล่าสุด​แปดรายการ​ระหว่าง​เล่น
+
+@ no-hit
+th ไม่​เสีย​พลัง
+
+@ 100% no-hit
+th 100% ไม่​เสีย​พลัง
+
+@ Damage Skull
+th หัวกะโหลก​เมื่อ​บาดเจ็บ

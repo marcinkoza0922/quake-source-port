@@ -1467,7 +1467,7 @@ gl porcentaxe
 @ any% and 100%
 gl any% e 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 gl Gardar demos de marcas
 
 @ any%
@@ -4043,3 +4043,12 @@ gl Partidas locais. Aliña a marca branca coa dourada. Salto: − cedo, + tarde.
 
 @ Shows the eight most recent gameplay inputs
 gl Amosa as oito últimas entradas durante a partida
+
+@ no-hit
+gl sen dano
+
+@ 100% no-hit
+gl 100% sen dano
+
+@ Damage Skull
+gl Caveira de dano

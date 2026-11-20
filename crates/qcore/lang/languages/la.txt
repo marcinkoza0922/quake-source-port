@@ -1467,7 +1467,7 @@ la centesimae
 @ any% and 100%
 la any% et 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 la Serva demonstrationes optimorum
 
 @ any%
@@ -4043,3 +4043,12 @@ la Ludi locales. Signum album cum aureo compone. Saltus: − mature, + sero.
 
 @ Shows the eight most recent gameplay inputs
 la Octo recentissima imperia ludentis ostendit
+
+@ no-hit
+la sine damno
+
+@ 100% no-hit
+la 100% sine damno
+
+@ Damage Skull
+la Calvaria damni

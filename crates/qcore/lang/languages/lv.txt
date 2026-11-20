@@ -1467,7 +1467,7 @@ lv procenti
 @ any% and 100%
 lv any% un 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 lv Saglabāt rekordu demo
 
 @ any%
@@ -4043,3 +4043,12 @@ lv Lokāla spēle. Salāgo balto atzīmi ar zeltaino. Lēciens: − par agru, + 
 
 @ Shows the eight most recent gameplay inputs
 lv Rāda astoņas nesenākās spēles ievades
+
+@ no-hit
+lv bez bojājumiem
+
+@ 100% no-hit
+lv 100% bez bojājumiem
+
+@ Damage Skull
+lv Bojājumu galvaskauss

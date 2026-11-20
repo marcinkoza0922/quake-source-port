@@ -1467,7 +1467,7 @@ hy տոկոս
 @ any% and 100%
 hy any% և 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 hy Պահել ռեկորդների ցուցադրումները
 
 @ any%
@@ -4043,3 +4043,12 @@ hy Տեղային խաղ։ Համընկեցրեք սպիտակ նշիչը ոսկ
 
 @ Shows the eight most recent gameplay inputs
 hy Ցույց է տալիս խաղի վերջին ութ մուտքային հրամանները
+
+@ no-hit
+hy առանց վնասի
+
+@ 100% no-hit
+hy 100% առանց վնասի
+
+@ Damage Skull
+hy Վնասի գանգ

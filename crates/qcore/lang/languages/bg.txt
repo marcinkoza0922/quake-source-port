@@ -1467,7 +1467,7 @@ bg процент
 @ any% and 100%
 bg any% и 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 bg Пазене на демота с рекорди
 
 @ any%
@@ -4043,3 +4043,12 @@ bg Локална игра. Подравнете белия маркер със 
 
 @ Shows the eight most recent gameplay inputs
 bg Показва последните осем команди в играта
+
+@ no-hit
+bg без щети
+
+@ 100% no-hit
+bg 100% без щети
+
+@ Damage Skull
+bg Череп за щети

@@ -1467,7 +1467,7 @@ cs procenta
 @ any% and 100%
 cs any% a 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 cs Uchovávat dema rekordů
 
 @ any%
@@ -4043,3 +4043,12 @@ cs Místní hra. Zarovnejte bílou značku se zlatou. Skok: − příliš brzy, 
 
 @ Shows the eight most recent gameplay inputs
 cs Zobrazuje osm posledních vstupů při hře
+
+@ no-hit
+cs bez poškození
+
+@ 100% no-hit
+cs 100% bez poškození
+
+@ Damage Skull
+cs Lebka při zásahu

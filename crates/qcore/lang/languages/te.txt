@@ -1467,7 +1467,7 @@ te శాతం
 @ any% and 100%
 te any% మరియు 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 te వ్యక్తిగత ఉత్తమ డెమోలు ఉంచు
 
 @ any%
@@ -4043,3 +4043,12 @@ te స్థానిక ఆట. తెల్ల గుర్తును బం
 
 @ Shows the eight most recent gameplay inputs
 te ఆటలో చివరి ఎనిమిది ఇన్‌పుట్‌లను చూపిస్తుంది
+
+@ no-hit
+te నష్టం లేకుండా
+
+@ 100% no-hit
+te 100% నష్టం లేకుండా
+
+@ Damage Skull
+te నష్టం పుర్రె

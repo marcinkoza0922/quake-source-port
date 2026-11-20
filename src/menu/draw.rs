@@ -290,7 +290,13 @@ impl Menu {
             Item::Choice { label: l, cvar, choices } => {
                 label(c, l);
                 let n = self.choice_count(cvar, choices);
-                { txt(c, VALUE_X, y, choices[nearest_choice(cv.value_of(cvar), &choices[..n])].0); }
+                let value = cv.value_of(cvar);
+                let choice = if cvar == "cl_autodemo_pb" && value.round() as i32 == 3 {
+                    qcore::t!("any% and 100%")
+                } else {
+                    choices[nearest_choice(value, &choices[..n])].0
+                };
+                txt(c, VALUE_X, y, choice);
             }
             Item::DisplayMode => {
                 label(c, "Display Mode");

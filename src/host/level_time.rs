@@ -1,7 +1,6 @@
 //! Level exits and personal bests: the per-mod `qsp_stats.json` record,
-//! personal bests per map, skill and category (any%, 100%: every kill and
-//! secret), what the HUD's Time & Stats elements show (`crate::hud`) and keeping a new
-//! PB's auto-demo as a saved demo (`cl_autodemo_pb`).
+//! personal bests per map, skill and category, the HUD's Time & Stats elements
+//! (`crate::hud`), and saving a new PB's auto-demo (`cl_autodemo_pb`).
 //!
 //! The level time is the client clock, as on the intermission screen: it
 //! stops while the game is paused and at the exit, and a loaded save goes
@@ -9,7 +8,7 @@
 
 use super::*;
 use crate::sbar::time;
-use qui::stats::{MapStats, SKILLS, Stats};
+use qui::stats::{MapStats, PbCategory, Stats};
 
 #[derive(Default)]
 pub(super) struct LevelPb {
@@ -18,13 +17,11 @@ pub(super) struct LevelPb {
     skill: Option<usize>,
     /// This map's record, loaded on first use each level.
     record: Option<Option<MapStats>>,
+    /// Whether damage history is known for the whole attempt.
+    pub(super) damage_history_known: bool,
+    /// Restored once at serverinfo after a successful load command.
+    pub(super) saved_damage: Option<bool>,
 }
-
-/// `cl_autodemo_pb` bits: keep any% and/or 100% PB demos.
-const PB_DEMO_ANY: u32 = 1;
-const PB_DEMO_FULL: u32 = 2;
-
-const SKILL_NAMES: [&str; SKILLS] = ["easy", "normal", "hard", "nightmare"];
 
 impl Host {
     /// A new level (serverinfo): forget the last map's record.
@@ -32,6 +29,9 @@ impl Host {
         let local = self.local.is_some() && self.demo.is_none();
         self.pb.skill = local.then(|| self.cv("skill").clamp(0.0, 3.0) as usize);
         self.pb.record = None;
+        let saved_damage = self.pb.saved_damage.take();
+        self.pb.damage_history_known = !local || !self.server.core.sv.loadgame || saved_damage.is_some();
+        self.cl.took_damage |= saved_damage == Some(true);
     }
 
     /// Personal bests count only in a local, uncustomized, non-deathmatch game.
@@ -55,9 +55,9 @@ impl Host {
     /// personal best is looked up only when `want_pb`.
     pub(super) fn level_info(&mut self, want_pb: bool) -> time::LevelInfo {
         use qnet::protocol::{STAT_MONSTERS, STAT_SECRETS, STAT_TOTALMONSTERS, STAT_TOTALSECRETS};
-        let full = self.cv("hud_pb_100") != 0.0;
+        let category = PbCategory::hud_mode(self.cv("hud_pb_100"));
         let pb = match (want_pb && self.pb_allowed(), self.pb.skill) {
-            (true, Some(skill)) => Some(self.map_record().and_then(|r| r.pb(skill, full))),
+            (true, Some(skill)) => Some(self.map_record().and_then(|r| r.pb(skill, category))),
             _ => None,
         };
         let secs = qcore::time::SystemTime::now().duration_since(qcore::time::UNIX_EPOCH).map_or(0, |d| d.as_secs());
@@ -99,10 +99,10 @@ impl Host {
         };
         let full = run.all_kills() && run.all_secrets();
         let skill = self.pb.skill.filter(|_| self.pb_allowed());
+        let no_hit = self.pb.damage_history_known && !self.cl.took_damage;
         if let Some(k) = skill {
-            run.pb_any[k] = t;
-            if full {
-                run.pb_full[k] = t;
+            for category in PbCategory::ALL.into_iter().filter(|cat| cat.qualifies(full, no_hit)) {
+                run.set_pb(k, category, t);
             }
         }
         let dir = self.user_dir();
@@ -114,41 +114,37 @@ impl Host {
         }
         self.pb.record = Some(stats.get(&self.level.mapname).copied());
         let Some(k) = skill else { return };
-        let beats = |old: Option<f32>| t > 0.0 && old.is_none_or(|o| t < o);
-        let new_any = beats(old.pb(k, false));
-        let new_full = full && beats(old.pb(k, true));
         let shown = time::format_timer(f64::from(t), 2);
-        for (new, cat) in [(new_any, "any%"), (new_full, "100%")] {
-            if new {
-                self.con.print(&qcore::ctr!("New personal best ({}): {}\n", cat, shown));
+        let map = self.level.mapname.clone();
+        let mut new_bests = Vec::new();
+        for category in PbCategory::ALL {
+            if run.pb(k, category).is_some_and(|t| old.pb(k, category).is_none_or(|o| t < o)) {
+                new_bests.push(category);
+                let label = if qcore::lang::console() { qcore::lang::tr(category.label()) } else { category.label().into() };
+                self.con.print(&qcore::ctr!("New personal best ({}): {}\n", label, shown));
+                let dest = crate::demo::ghost::ghost_path(&dir, &map, k, category);
+                self.autodemo_copy_current(&dest);
             }
         }
-        self.keep_pb_demo(k, new_any, new_full, t);
-        let map = self.level.mapname.clone();
-        if new_any {
-            let dest = crate::demo::ghost::ghost_path(&dir, &map, k, false);
-            self.autodemo_copy_current(&dest);
-        }
-        if new_full {
-            let dest = crate::demo::ghost::ghost_path(&dir, &map, k, true);
-            self.autodemo_copy_current(&dest);
-        }
+        self.keep_pb_demo(k, &new_bests, t);
     }
 
-    /// `cl_autodemo_pb`: the level's auto-demo is kept as
-    /// `<map>_pb_<any|100|any-100>_<skill>_<time>` when it ends. Old PB demos
-    /// stay; a name already taken gets a number.
-    fn keep_pb_demo(&mut self, skill: usize, new_any: bool, new_full: bool, time: f32) {
-        let mode = self.cv("cl_autodemo_pb").clamp(0.0, 3.0) as u32;
-        let any = new_any && mode & PB_DEMO_ANY != 0;
-        let full = new_full && mode & PB_DEMO_FULL != 0;
-        let cat = match (any, full) {
-            (true, true) => "any-100",
-            (true, false) => "any",
-            (false, true) => "100",
-            (false, false) => return,
+    fn keep_pb_demo(&mut self, skill: usize, new_bests: &[PbCategory], time: f32) {
+        use crate::demo::ghost::{SKILL_NAMES, sanitize_map};
+        let mode = self.cv("cl_autodemo_pb");
+        let cat = if mode.round() as i32 == 3 {
+            // Value 3 was the old "any% and 100%" setting.
+            match (new_bests.contains(&PbCategory::Any), new_bests.contains(&PbCategory::Full)) {
+                (true, true) => "any-100",
+                (true, false) => "any",
+                (false, true) => "100",
+                (false, false) => return,
+            }
+        } else {
+            let Some(category) = PbCategory::demo_mode(mode).filter(|cat| new_bests.contains(cat)) else { return };
+            category.file_tag()
         };
-        let map: String = self.level.mapname.chars().map(|c| if c.is_alphanumeric() || "-_".contains(c) { c } else { '_' }).collect();
+        let map = sanitize_map(&self.level.mapname);
         let name = format!("{map}_pb_{cat}_{}_{}", SKILL_NAMES[skill], file_time(time));
         self.autodemo_keep_as(name);
     }

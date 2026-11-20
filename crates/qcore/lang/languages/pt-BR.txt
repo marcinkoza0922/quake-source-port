@@ -1467,7 +1467,7 @@ pt-BR porcentagem
 @ any% and 100%
 pt-BR any% e 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 pt-BR Guardar demos de recordes
 
 @ any%
@@ -4043,3 +4043,12 @@ pt-BR Jogo local. Alinhe o marcador branco com o dourado. Pulo: − cedo, + tard
 
 @ Shows the eight most recent gameplay inputs
 pt-BR Mostra os oito comandos mais recentes durante o jogo
+
+@ no-hit
+pt-BR sem dano
+
+@ 100% no-hit
+pt-BR 100% sem dano
+
+@ Damage Skull
+pt-BR Caveira de dano

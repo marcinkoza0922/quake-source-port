@@ -1467,7 +1467,7 @@ mk процент
 @ any% and 100%
 mk any% и 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 mk Чувај демоа на рекорди
 
 @ any%
@@ -4043,3 +4043,12 @@ mk Локална игра. Порамнете ја белата ознака с
 
 @ Shows the eight most recent gameplay inputs
 mk Ги прикажува последните осум внесови во играта
+
+@ no-hit
+mk без штета
+
+@ 100% no-hit
+mk 100% без штета
+
+@ Damage Skull
+mk Череп за штета

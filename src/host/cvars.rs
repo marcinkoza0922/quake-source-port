@@ -165,9 +165,9 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     // Demos (Options > Demos): auto-recording, playback bar, video capture
     ("cl_autodemo", "1", CVAR_ARCHIVE),
     ("cl_autodemo_slots", "10", CVAR_ARCHIVE),
-    // keep a level's demo when it sets a personal best: 1 any%, 2 100%, 3 both
+    // PB demos: 0 off, 1 any%, 2 100%, 4 no-hit, 5 100% no-hit (3 keeps both original categories)
     ("cl_autodemo_pb", "0", CVAR_ARCHIVE),
-    // translucent ghost of your PB demo: 0 off, 1 any%, 2 100%
+    // PB ghost: same categories as PB demos
     ("cl_demo_ghost", "0", CVAR_ARCHIVE),
     ("cl_demobar", "2", CVAR_ARCHIVE),
     ("cl_demo_endpause", "1", CVAR_ARCHIVE),

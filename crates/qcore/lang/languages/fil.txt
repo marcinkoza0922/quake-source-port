@@ -1467,7 +1467,7 @@ fil porsiyento
 @ any% and 100%
 fil any% at 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 fil Itago ang mga Demo ng Personal Best
 
 @ any%
@@ -4043,3 +4043,12 @@ fil Lokal na laro. Itapat ang puting marka sa ginto. Talon: − maaga, + huli.
 
 @ Shows the eight most recent gameplay inputs
 fil Ipinapakita ang walong huling input habang naglalaro
+
+@ no-hit
+fil walang pinsala
+
+@ 100% no-hit
+fil 100% walang pinsala
+
+@ Damage Skull
+fil Bungo ng pinsala

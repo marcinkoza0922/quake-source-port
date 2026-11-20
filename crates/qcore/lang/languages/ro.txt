@@ -1467,7 +1467,7 @@ ro procent
 @ any% and 100%
 ro any% și 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 ro Păstrează demo-urile record
 
 @ any%
@@ -4043,3 +4043,12 @@ ro Joc local. Aliniază marcajul alb cu cel auriu. Săritură: − devreme, + t�
 
 @ Shows the eight most recent gameplay inputs
 ro Arată ultimele opt comenzi din timpul jocului
+
+@ no-hit
+ro fără daune
+
+@ 100% no-hit
+ro 100% fără daune
+
+@ Damage Skull
+ro Craniu de daune

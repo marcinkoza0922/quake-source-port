@@ -5,6 +5,7 @@
 use std::path::{Path, PathBuf};
 
 use qclient::{ClientEvent, ClientState};
+use qui::stats::PbCategory;
 
 use super::Demo;
 
@@ -57,10 +58,10 @@ pub fn sanitize_map(mapname: &str) -> String {
     mapname.chars().map(|c| if c.is_alphanumeric() || "-_".contains(c) { c } else { '_' }).collect()
 }
 
-/// Dedicated ghost demo path: `<user_dir>/ghosts/<map>_<any|100>_<skill>.dem`.
-pub fn ghost_path(user_dir: &Path, mapname: &str, skill: usize, full: bool) -> PathBuf {
+/// Dedicated ghost demo path: `<user_dir>/ghosts/<map>_<category>_<skill>.dem`.
+pub fn ghost_path(user_dir: &Path, mapname: &str, skill: usize, category: PbCategory) -> PathBuf {
     let map = sanitize_map(mapname).to_ascii_lowercase();
-    let cat = if full { "100" } else { "any" };
+    let cat = category.file_tag();
     let sk = SKILL_NAMES.get(skill).copied().unwrap_or("normal");
     user_dir.join(GHOST_DIR).join(format!("{map}_{cat}_{sk}.dem"))
 }
@@ -85,24 +86,21 @@ pub fn parse_file_time(s: &str) -> Option<u64> {
     Some(mins * 6000 + secs * 100 + cs)
 }
 
-/// Finds the PB demo for `(mapname, skill, full)`: prefers the dedicated
+/// Finds the PB demo for `(mapname, skill, category)`: prefers the dedicated
 /// `ghosts/` demo, otherwise picks the fastest matching `<map>_pb_*` demo
 /// kept in `user_dir` by `cl_autodemo_pb`.
-pub fn find_pb_demo(user_dir: &Path, mapname: &str, skill: usize, full: bool) -> Option<PathBuf> {
+pub fn find_pb_demo(user_dir: &Path, mapname: &str, skill: usize, category: PbCategory) -> Option<PathBuf> {
     if mapname.is_empty() || skill >= SKILL_NAMES.len() {
         return None;
     }
-    let dedicated = ghost_path(user_dir, mapname, skill, full);
+    let dedicated = ghost_path(user_dir, mapname, skill, category);
     if qcore::vfs::exists(&dedicated) {
         return Some(dedicated);
     }
     let map = sanitize_map(mapname).to_ascii_lowercase();
     let sk = SKILL_NAMES[skill];
-    let prefixes = if full {
-        [format!("{map}_pb_100_{sk}_"), format!("{map}_pb_any-100_{sk}_")]
-    } else {
-        [format!("{map}_pb_any_{sk}_"), format!("{map}_pb_any-100_{sk}_")]
-    };
+    let prefix = format!("{map}_pb_{}_{sk}_", category.file_tag());
+    let legacy = matches!(category, PbCategory::Any | PbCategory::Full).then(|| format!("{map}_pb_any-100_{sk}_"));
     let entries = qcore::vfs::read_dir(user_dir).ok()?;
     let mut best: Option<(u64, PathBuf)> = None;
     for e in entries {
@@ -111,7 +109,7 @@ pub fn find_pb_demo(user_dir: &Path, mapname: &str, skill: usize, full: bool) ->
         }
         let stem = e.path.file_stem().map_or_else(String::new, |s| s.to_string_lossy().into_owned());
         let lower = stem.to_ascii_lowercase();
-        let Some(rest) = prefixes.iter().find_map(|p| lower.strip_prefix(p.as_str())) else {
+        let Some(rest) = lower.strip_prefix(&prefix).or_else(|| lower.strip_prefix(legacy.as_deref()?)) else {
             continue;
         };
         let Some(cs) = parse_file_time(rest) else {
@@ -425,22 +423,28 @@ mod tests {
             "e1m1_pb_any-100_normal_0m45s00.dem",
             "e1m1_pb_100_normal_0m40s00.dem",
             "e1m1_pb_any_hard_0m30s00.dem",
+            "e1m1_pb_nohit_normal_1m00s00.dem",
+            "e1m1_pb_100-nohit_normal_0m55s00.dem",
         ] {
             std::fs::write(dir.join(f), b"-1\n").unwrap();
         }
         // any% normal picks 0m42s10 (ignores 100%-only 0m40s00 and hard 0m30s00)
-        assert_eq!(find_pb_demo(&dir, "e1m1", 1, false), Some(dir.join("e1m1_pb_any_normal_0m42s10.dem")));
+        assert_eq!(find_pb_demo(&dir, "e1m1", 1, PbCategory::Any), Some(dir.join("e1m1_pb_any_normal_0m42s10.dem")));
         // 100% normal picks 0m40s00
-        assert_eq!(find_pb_demo(&dir, "e1m1", 1, true), Some(dir.join("e1m1_pb_100_normal_0m40s00.dem")));
+        assert_eq!(find_pb_demo(&dir, "e1m1", 1, PbCategory::Full), Some(dir.join("e1m1_pb_100_normal_0m40s00.dem")));
         // any% hard picks 0m30s00; 100% hard has none
-        assert_eq!(find_pb_demo(&dir, "e1m1", 2, false), Some(dir.join("e1m1_pb_any_hard_0m30s00.dem")));
-        assert_eq!(find_pb_demo(&dir, "e1m1", 2, true), None);
+        assert_eq!(find_pb_demo(&dir, "e1m1", 2, PbCategory::Any), Some(dir.join("e1m1_pb_any_hard_0m30s00.dem")));
+        assert_eq!(find_pb_demo(&dir, "e1m1", 2, PbCategory::Full), None);
+
+        assert_eq!(find_pb_demo(&dir, "e1m1", 1, PbCategory::NoHit), Some(dir.join("e1m1_pb_nohit_normal_1m00s00.dem")));
+        assert_eq!(find_pb_demo(&dir, "e1m1", 1, PbCategory::FullNoHit), Some(dir.join("e1m1_pb_100-nohit_normal_0m55s00.dem")));
+        assert_eq!(find_pb_demo(&dir, "e1m1", 2, PbCategory::NoHit), None);
 
         // Dedicated ghosts/ file takes priority once saved
-        let g = ghost_path(&dir, "e1m1", 1, false);
+        let g = ghost_path(&dir, "e1m1", 1, PbCategory::Any);
         std::fs::create_dir_all(g.parent().unwrap()).unwrap();
         std::fs::write(&g, b"-1\n").unwrap();
-        assert_eq!(find_pb_demo(&dir, "e1m1", 1, false), Some(g));
+        assert_eq!(find_pb_demo(&dir, "e1m1", 1, PbCategory::Any), Some(g));
         let _ = std::fs::remove_dir_all(&dir);
     }
 }

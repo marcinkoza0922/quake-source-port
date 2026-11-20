@@ -1467,7 +1467,7 @@ nl percentage
 @ any% and 100%
 nl any% en 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 nl Recorddemo's bewaren
 
 @ any%
@@ -4043,3 +4043,12 @@ nl Lokale spellen. Lijn wit uit met goud. Sprong: − vroeg, + laat.
 
 @ Shows the eight most recent gameplay inputs
 nl Toont de acht laatste invoeracties tijdens het spelen
+
+@ no-hit
+nl zonder schade
+
+@ 100% no-hit
+nl 100% zonder schade
+
+@ Damage Skull
+nl Schadeschedel

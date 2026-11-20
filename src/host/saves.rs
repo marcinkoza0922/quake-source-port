@@ -200,6 +200,17 @@ impl Host {
         out
     }
 
+    fn save_text(&self) -> String {
+        let mut text = self.server.save_game();
+        // A trailing comment keeps the version 5 body readable by other engines.
+        if self.cl.took_damage {
+            text.push_str("// qsp_level_damage 1\n");
+        } else if self.pb.damage_history_known {
+            text.push_str("// qsp_level_damage 0\n");
+        }
+        text
+    }
+
     pub(super) fn update_autosave(&mut self) {
         if self.dedicated || self.demo.is_some() || self.local.is_none()
             || !self.server.active() || self.server.core.maxclients() != 1
@@ -216,7 +227,7 @@ impl Host {
         let sv = &self.server.core.sv;
         let reason = self.autosave.update(self.server.time(), self.server.stats(), self.server.player_keys(), sv.loadgame || sv.reloaded, flags, interval);
         if let Some(reason) = reason.filter(|_| keep > 0) {
-            let text = self.server.save_game();
+            let text = self.save_text();
             // The v5 description is ignored by the loader; preserve the trigger in the save itself.
             let text = qserver::addons::save::set_comment(&text, &format!("AUTOSAVE_{}", reason.replace(' ', "_")));
             match crate::autosave::rotate(&self.user_dir(), keep, &text, crate::autosave::ext(self.server.qsa_saves())) {
@@ -235,7 +246,7 @@ impl Host {
         let dir = self.user_dir();
         self.menu.save_pb = crate::menu::SavePb {
             stats: qui::stats::Stats::load(&dir),
-            prefer_full: self.cv("hud_pb_100") != 0.0,
+            category: qui::stats::PbCategory::hud_mode(self.cv("hud_pb_100")),
             color: crate::reticle::color_of(&self.server.core.cvars, "hud_pb_color"),
         };
         let mut all: Vec<crate::menu::SaveSlot> = qcore::vfs::read_dir(&dir).into_iter().flatten().filter_map(|entry| {
@@ -400,7 +411,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
             h.print(&qcore::ctr!("This game only autosaves (No Manual Saves modifier).\n"));
             return;
         }
-        let text = h.server.save_game();
+        let text = h.save_text();
         let p = h.savegame_path(a.argv(1));
         match qcore::vfs::write(&p, &qcore::text::encode(&text)) {
             Ok(()) => {
@@ -435,6 +446,12 @@ pub(super) fn register(c: &mut Commands<Host>) {
         h.disconnect_client();
         if let Err(e) = h.server.load_game(&text) {
             h.print(&qcore::ctr!("load failed: {}\n", e));
+        } else {
+            h.pb.saved_damage = match text.lines().next_back() {
+                Some("// qsp_level_damage 0") => Some(false),
+                Some("// qsp_level_damage 1") => Some(true),
+                _ => None,
+            };
         }
         h.drain_server_log();
     });

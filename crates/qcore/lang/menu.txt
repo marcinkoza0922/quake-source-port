@@ -3412,7 +3412,7 @@ it any% e 100%
 es any% y 100%
 ru any% и 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 fr Garder les démos de record
 de Bestzeit-Demos behalten
 it Conserva demo dei record
@@ -4161,3 +4161,17 @@ de Eingabefolge
 it Sequenza di comandi
 es Secuencia de controles
 ru Последовательность ввода
+
+@ no-hit
+fr sans dégâts
+de ohne Schaden
+it senza danni
+es sin daño
+ru без урона
+
+@ 100% no-hit
+fr 100% sans dégâts
+de 100% ohne Schaden
+it 100% senza danni
+es 100% sin daño
+ru 100% без урона

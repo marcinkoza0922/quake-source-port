@@ -40,6 +40,7 @@ pub enum Kind {
     Center,
     Notify,
     Captions,
+    DamageSkull,
 }
 
 /// Text style of an element.
@@ -107,7 +108,7 @@ pub struct Opt {
 pub const ON_OFF: &[(&str, f32)] = &[("off", 0.0), ("on", 1.0)];
 pub const CLOCK: &[(&str, f32)] = &[("24-hour", 1.0), ("24-hour + seconds", 2.0), ("12-hour", 3.0), ("12-hour + seconds", 4.0)];
 pub const PRECISION: &[(&str, f32)] = &[("1:23", 0.0), ("1:23.4", 1.0), ("1:23.45", 2.0)];
-pub const PB_KIND: &[(&str, f32)] = &[("any%", 0.0), ("100%", 1.0)];
+pub const PB_KIND: &[(&str, f32)] = &[("any%", 0.0), ("no-hit", 2.0), ("100%", 1.0), ("100% no-hit", 3.0)];
 pub const COUNT: &[(&str, f32)] = &[("count", 0.0), ("percent", 1.0)];
 pub const SECTIONS: &[(&str, f32)] = &[("status only", 0.0), ("status + inventory", 1.0)];
 /// Text colour choices: the element's own, or a crosshair palette colour.
@@ -157,19 +158,19 @@ pub const CATEGORIES: &[(&str, &[Kind])] = &[
     ("Ammo", &[Kind::Ammo, Kind::AmmoBar, Kind::AmmoList, Kind::Shells, Kind::Nails, Kind::Rockets, Kind::Cells]),
     ("Inventory", &[Kind::Weapons, Kind::Items, Kind::Keys, Kind::Powerups, Kind::Sigils]),
     ("Classic", &[Kind::StatusBar]),
-    ("Time & Stats", &[Kind::Clock, Kind::Timer, Kind::Pb, Kind::Kills, Kind::Secrets, Kind::Speed]),
+    ("Time & Stats", &[Kind::Clock, Kind::Timer, Kind::Pb, Kind::Kills, Kind::Secrets, Kind::Speed, Kind::DamageSkull]),
     ("Performance Metrics", &[Kind::Fps, Kind::FrameTime, Kind::Cpu, Kind::Ram, Kind::Gpu, Kind::Vram]),
     ("Automap", &[Kind::Automap]),
     ("Movement & Input", &[Kind::Strafe, Kind::InputSequence]),
 ];
 
 impl Kind {
-    pub const ALL: [Kind; 36] = [
+    pub const ALL: [Kind; 37] = [
         Kind::Health, Kind::Armor, Kind::Face, Kind::HealthBar, Kind::ArmorBar, Kind::Ammo, Kind::AmmoBar,
         Kind::AmmoList, Kind::Shells, Kind::Nails, Kind::Rockets, Kind::Cells, Kind::Weapons, Kind::Items,
         Kind::Keys, Kind::Powerups, Kind::Sigils, Kind::StatusBar, Kind::Clock, Kind::Timer, Kind::Pb,
         Kind::Kills, Kind::Secrets, Kind::Speed, Kind::Fps, Kind::FrameTime, Kind::Cpu, Kind::Ram, Kind::Gpu, Kind::Vram,
-        Kind::Automap, Kind::Strafe, Kind::InputSequence, Kind::Center, Kind::Notify, Kind::Captions,
+        Kind::Automap, Kind::Strafe, Kind::InputSequence, Kind::Center, Kind::Notify, Kind::Captions, Kind::DamageSkull,
     ];
     /// Always in the layout: they can be moved but not removed.
     pub const PERMANENT: [Kind; 3] = [Kind::Center, Kind::Notify, Kind::Captions];
@@ -213,6 +214,7 @@ impl Kind {
             Center => "center",
             Notify => "notify",
             Captions => "captions",
+            DamageSkull => "damageskull",
         }
     }
 
@@ -260,6 +262,7 @@ impl Kind {
             Center => "Center Message",
             Notify => "Notify Messages",
             Captions => "Sound Captions",
+            DamageSkull => "Damage Skull",
         }
     }
 
@@ -271,7 +274,7 @@ impl Kind {
     /// death, drawn per player in split screen, may fade (immersive).
     pub fn is_player(self) -> bool {
         use Kind::*;
-        !matches!(self, Clock | Timer | Pb | Kills | Secrets | Speed | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Automap | Center | Notify | Captions)
+        !matches!(self, Clock | Timer | Pb | Kills | Secrets | Speed | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Automap | Center | Notify | Captions | DamageSkull)
     }
 
     pub fn is_metric(self) -> bool {
@@ -297,7 +300,7 @@ impl Kind {
         use Kind::*;
         if self.is_number() {
             &[Font::Big, Font::Quake, Font::Modern]
-        } else if matches!(self, Face | Weapons | Items | Keys | Powerups | Sigils | StatusBar | Automap | Strafe | InputSequence) || self.is_message() {
+        } else if matches!(self, Face | Weapons | Items | Keys | Powerups | Sigils | StatusBar | Automap | Strafe | InputSequence | DamageSkull) || self.is_message() {
             &[]
         } else {
             &[Font::Quake, Font::Modern]
@@ -337,7 +340,7 @@ impl Kind {
             Health | Armor | Face | HealthBar | ArmorBar => Anchor::BottomLeft,
             Ammo | AmmoBar | AmmoList | Shells | Nails | Rockets | Cells | Weapons | Items | Keys | Powerups | Sigils => Anchor::BottomRight,
             StatusBar | Captions | InputSequence => Anchor::BottomCenter,
-            Strafe => Anchor::TopCenter,
+            Strafe | DamageSkull => Anchor::TopCenter,
             Clock | Timer | Pb | Kills | Secrets | Speed | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Automap => Anchor::TopRight,
             Notify => Anchor::TopLeft,
             Center => Anchor::Center,

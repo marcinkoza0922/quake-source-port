@@ -1467,7 +1467,7 @@ is prósenta
 @ any% and 100%
 is any% og 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 is Geyma metdemó
 
 @ any%
@@ -4043,3 +4043,12 @@ is Staðbundnir leikir. Stilltu hvíta merkið við það gyllta. Stökk: − sn
 
 @ Shows the eight most recent gameplay inputs
 is Sýnir átta nýjustu inntökin meðan spilað er
+
+@ no-hit
+is án skaða
+
+@ 100% no-hit
+is 100% án skaða
+
+@ Damage Skull
+is Skaðahauskúpa

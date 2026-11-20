@@ -6,6 +6,7 @@
 use qclient::ClientState;
 use qnet::protocol::*;
 use qrender::Draw2D;
+use qui::stats::PbCategory;
 
 use super::kind::{Font, Kind};
 use super::layout::Elem;
@@ -50,7 +51,7 @@ pub struct Ctx<'a> {
     pub info: &'a LevelInfo,
     /// Values of the metric kinds, `Kind::Fps` order.
     pub metrics: &'a [String; 6],
-    pub pb_full: bool,
+    pub pb_category: PbCategory,
     pub pb_color: [f32; 4],
     pub show_scores: bool,
     /// The HUD editor: everything drawn, sample text for the messages.
@@ -69,6 +70,7 @@ pub struct Room {
     pub addons: usize,
     /// HUD width (messages are no wider).
     pub vw: f32,
+    pub pb_category: PbCategory,
 }
 
 /// The element's own scale (messages are sized by their text size).
@@ -198,9 +200,9 @@ fn spans_raw(e: &Elem, ctx: Option<&Ctx>, sample: bool) -> Option<Spans> {
         }
         Kind::Timer => v(if sample { widest(time::format_timer(3599.99, dec)) } else { time::format_timer(info?.time, dec) }),
         Kind::Pb => {
-            let full = ctx.is_some_and(|c| c.pb_full);
+            let category = ctx.map_or(PbCategory::Any, |c| c.pb_category);
             let color = ctx.map_or(VALUE, |c| c.pb_color);
-            let label = if full { "PB 100% " } else { "PB " };
+            let label = pb_label(category, e.font);
             let t = if sample {
                 widest(time::format_timer(3599.99, dec))
             } else {
@@ -210,7 +212,7 @@ fn spans_raw(e: &Elem, ctx: Option<&Ctx>, sample: bool) -> Option<Spans> {
             if dm {
                 return None;
             }
-            vec![(label.to_string(), color), (t, color)]
+            vec![(label, color), (t, color)]
         }
         Kind::Kills | Kind::Secrets => {
             if dm {
@@ -240,6 +242,15 @@ fn spans_raw(e: &Elem, ctx: Option<&Ctx>, sample: bool) -> Option<Spans> {
         }
         _ => return None,
     })
+}
+
+fn pb_label(category: PbCategory, font: Font) -> String {
+    if category == PbCategory::Any {
+        return "PB ".into();
+    }
+    let label = qcore::lang::tr(category.label());
+    let label = if font == Font::Quake { qcore::lang::quake_encode(&label) } else { label };
+    format!("PB {label} ")
 }
 
 fn spans_w(c: &Canvas, e: &Elem, s: &Spans) -> f32 {
@@ -304,6 +315,7 @@ pub fn size(c: &Canvas, e: &Elem, room: &Room) -> (f32, f32) {
         Kind::Notify => ((200.0 * k).min(room.vw), 32.0 * k),
         Kind::Captions => ((160.0 * k).min(room.vw), 30.0 * k),
         Kind::Face => (24.0, 24.0),
+        Kind::DamageSkull => (14.0, 14.0),
         Kind::Automap => (120.0, 88.0),
         Kind::Strafe => super::strafe::SIZE,
         Kind::InputSequence => super::input_sequence::SIZE,
@@ -327,7 +339,10 @@ pub fn size(c: &Canvas, e: &Elem, room: &Room) -> (f32, f32) {
             (icon + text_w(c, e.font, z, "888"), z)
         }
         _ => {
-            let s = spans(e, None, true).unwrap_or_default();
+            let mut s = spans(e, None, true).unwrap_or_default();
+            if e.kind == Kind::Pb {
+                s[0].0 = pb_label(room.pb_category, e.font);
+            }
             let (px, py) = text_pad(z);
             (spans_w(c, e, &s) + 2.0 * px, z + 2.0 * py)
         }
@@ -387,6 +402,11 @@ fn draw_local(c: &mut Canvas, pf: &mut PicFn, e: &Elem, (w, h): (f32, f32), ctx:
         }
         Kind::Face => {
             pic_box(c, pf, &Sbar::face_name(ctx.cl, ctx.face_anim), [0.0, 0.0, 24.0, 24.0], crate::draw::WHITE);
+        }
+        Kind::DamageSkull => {
+            if ctx.preview || (ctx.cl.took_damage && ctx.cl.gametype != 1) {
+                super::draw_more::damage_skull(c);
+            }
         }
         Kind::Automap => {
             if let Some(am) = &ctx.automap {

@@ -1467,7 +1467,7 @@ lt procentai
 @ any% and 100%
 lt any% ir 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 lt Saugoti rekordų demonstracijas
 
 @ any%
@@ -4043,3 +4043,12 @@ lt Vietinis žaidimas. Sulygiuokite baltą žymeklį su auksiniu. Šuolis: − p
 
 @ Shows the eight most recent gameplay inputs
 lt Rodo aštuonias paskutines žaidimo įvestis
+
+@ no-hit
+lt be žalos
+
+@ 100% no-hit
+lt 100% be žalos
+
+@ Damage Skull
+lt Žalos kaukolė

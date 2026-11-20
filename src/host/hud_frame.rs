@@ -17,7 +17,6 @@ pub(super) struct HudFrame {
     pub edit: bool,
     pub info: crate::sbar::time::LevelInfo,
     pub metrics: [String; 6],
-    pub pb_full: bool,
     pub pb_color: [f32; 4],
     pub glyph_override: f32,
     /// The editor's sample player.
@@ -46,7 +45,7 @@ impl HudFrame {
             held_addon: held,
             info: &self.info,
             metrics: &self.metrics,
-            pb_full: self.pb_full,
+            pb_category: self.room.pb_category,
             pb_color: self.pb_color,
             show_scores: show_scores && !self.edit,
             preview: self.edit,
@@ -160,7 +159,8 @@ impl Host {
     /// Lays the HUD out on `c` (the whole screen) for this frame.
     pub(super) fn hud_frame(&mut self, c: &Canvas, addons: &[crate::wheel::Entry], cur_speed: Option<f32>) -> HudFrame {
         let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
-        let room = Room { pack, addons: addons.len(), vw: c.vw() };
+        let pb_category = qui::stats::PbCategory::hud_mode(self.cv("hud_pb_100"));
+        let room = Room { pack, addons: addons.len(), vw: c.vw(), pb_category };
         self.hud_preset();
         self.hud_sync(c, &room);
         let edit = self.menu.screen == crate::menu::Screen::HudEditor;
@@ -212,7 +212,6 @@ impl Host {
             edit,
             info,
             metrics: self.metric_values(),
-            pb_full: self.cv("hud_pb_100") != 0.0,
             pb_color: crate::reticle::color_of(&self.server.core.cvars, "hud_pb_color"),
             sample,
         }

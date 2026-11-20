@@ -1467,7 +1467,7 @@ he אחוז
 @ any% and 100%
 he any% ו-100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 he שמירת הדגמות שיא
 
 @ any%
@@ -4043,3 +4043,12 @@ he למשחק מקומי. יישרו את הסמן הלבן עם הזהוב. ק�
 
 @ Shows the eight most recent gameplay inputs
 he מציג את שמונת הקלטים האחרונים במהלך המשחק
+
+@ no-hit
+he ללא נזק
+
+@ 100% no-hit
+he 100% ללא נזק
+
+@ Damage Skull
+he גולגולת נזק
