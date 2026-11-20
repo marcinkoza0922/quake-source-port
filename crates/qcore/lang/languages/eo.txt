@@ -1757,6 +1757,15 @@ eo Armila prioritato
 @ Zoom
 eo Zomo
 
+@ Show Ghost
+eo Montri fantomon
+
+@ Show Label
+eo Montri etikedon
+
+@ Speedometer
+eo Rapidometro
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ eo Kiam vi prenas armilon: Neniam tenas vian nunan armilon; Pli bona armilo ŝan
 
 @ Zoom level of the automap view
 eo Zomnivelo de la aŭtomapa vido
+
+@ Horizontal movement speed in units per second
+eo Horizontala movrapido en unuoj por sekundo
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+eo Rulas diafanan fantomon de la demonstraĵo de via persona rekordo por la aktuala mapo kaj malfacileco (nur unu ludanto)
+
+@ Shows the SPD label before the speed number
+eo Montras la etikedon SPD antaŭ la rapidnombro
 
 # ==== ui.txt ====
 

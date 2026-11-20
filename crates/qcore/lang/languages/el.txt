@@ -1757,6 +1757,15 @@ el Προτεραιότητα όπλων
 @ Zoom
 el Ζουμ
 
+@ Show Ghost
+el Εμφάνιση φαντάσματος
+
+@ Show Label
+el Εμφάνιση ετικέτας
+
+@ Speedometer
+el Ταχύμετρο
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ el Κατά τη συλλογή όπλου: Ποτέ διατηρεί το τρ�
 
 @ Zoom level of the automap view
 el Επίπεδο ζουμ της προβολής του αυτόματου χάρτη
+
+@ Horizontal movement speed in units per second
+el Οριζόντια ταχύτητα κίνησης σε μονάδες ανά δευτερόλεπτο
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+el Εμφανίζει ένα ημιδιαφανές φάντασμα από το demo του προσωπικού σας ρεκόρ για τον τρέχοντα χάρτη και δυσκολία (μόνο για έναν παίκτη)
+
+@ Shows the SPD label before the speed number
+el Εμφανίζει την ετικέτα SPD πριν από τον αριθμό ταχύτητας
 
 # ==== ui.txt ====
 

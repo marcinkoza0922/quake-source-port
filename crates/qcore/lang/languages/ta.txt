@@ -1757,6 +1757,15 @@ ta ஆயுத முன்னுரிமை
 @ Zoom
 ta பெரிதாக்கம்
 
+@ Show Ghost
+ta பேய் காட்டு
+
+@ Show Label
+ta லேபிள் காட்டு
+
+@ Speedometer
+ta வேகமானி
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ ta ஆயுதம் எடுக்கும்போது: எப்போ�
 
 @ Zoom level of the automap view
 ta ஆட்டோமேப் பார்வையின் பெரிதாக்க அளவு
+
+@ Horizontal movement speed in units per second
+ta வினாடிக்கு அலகுகளில் கிடைமட்ட இயக்க வேகம்
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+ta தற்போதைய வரைபடம் மற்றும் கடினத்தன்மைக்கான உங்கள் தனிப்பட்ட சிறந்த டெமோவின் ஒளி ஊடுருவும் பேயை இயக்கும் (தனி ஆட்டக்காரர் மட்டும்)
+
+@ Shows the SPD label before the speed number
+ta வேக எண்ணுக்கு முன் SPD லேபிளைக் காட்டும்
 
 # ==== ui.txt ====
 

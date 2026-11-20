@@ -1757,6 +1757,15 @@ is Forgangsröð vopna
 @ Zoom
 is Aðdráttur
 
+@ Show Ghost
+is Sýna draug
+
+@ Show Label
+is Sýna merki
+
+@ Speedometer
+is Hraðamælir
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ is Þegar vopn er tekið upp: Aldrei heldur núverandi vopni; Betra vopn skiptir
 
 @ Zoom level of the automap view
 is Aðdráttarstig kortsýnar
+
+@ Horizontal movement speed in units per second
+is Láréttur hreyfihraði í einingum á sekúndu
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+is Spilar hálfgegnsæjan draug úr upptöku af þínu persónulega meti fyrir núverandi borð og erfiðleikastig (aðeins einspilun)
+
+@ Shows the SPD label before the speed number
+is Sýnir SPD-merkið á undan hraðatölunni
 
 # ==== ui.txt ====
 

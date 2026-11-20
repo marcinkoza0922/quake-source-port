@@ -1757,6 +1757,15 @@ ro Prioritate arme
 @ Zoom
 ro Zoom
 
+@ Show Ghost
+ro Afișează fantoma
+
+@ Show Label
+ro Afișează eticheta
+
+@ Speedometer
+ro Vitezometru
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ ro La ridicarea unei arme: Niciodată păstrează arma curentă; Armă mai bună
 
 @ Zoom level of the automap view
 ro Nivelul de zoom al autohărții
+
+@ Horizontal movement speed in units per second
+ro Viteză de deplasare orizontală în unități pe secundă
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+ro Rulează o fantomă translucidă a demo-ului recordului tău personal pentru harta și dificultatea curentă (doar un singur jucător)
+
+@ Shows the SPD label before the speed number
+ro Afișează eticheta SPD înaintea valorii vitezei
 
 # ==== ui.txt ====
 

@@ -1757,6 +1757,15 @@ ga Tosaíocht Arm
 @ Zoom
 ga Zúmáil
 
+@ Show Ghost
+ga Taispeáin Taibhse
+
+@ Show Label
+ga Taispeáin Lipéad
+
+@ Speedometer
+ga Luasmhéadar
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ ga Agus arm á phiocadh suas: coinníonn Riamh d'arm reatha; ní athraíonn Arm 
 
 @ Zoom level of the automap view
 ga Leibhéal zúmála amhairc na huathléarscáile
+
+@ Horizontal movement speed in units per second
+ga Luas gluaiseachta cothrománach in aonaid sa soicind
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+ga Ritheann sé taibhse thréshoilseach de thaispeántas do churiarracht phearsanta don léarscáil agus don deacracht reatha (aon imreoir amháin)
+
+@ Shows the SPD label before the speed number
+ga Taispeánann sé an lipéad SPD roimh uimhir an luais
 
 # ==== ui.txt ====
 

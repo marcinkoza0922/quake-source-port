@@ -21,6 +21,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
     Some(match cvar {
         "cl_autodemo" => "Records every level you play to the Automatic list in Main Menu > Demos; keep the ones you want, the oldest are replaced",
         "cl_autodemo_pb" => "Keeps the demo of each level that sets a personal best; old ones stay. Records even with auto-record off",
+        "cl_demo_ghost" => "Runs a translucent ghost of your personal best demo for the current map and skill (single player only)",
         "cl_autodemo_slots" => "How many automatic demos are kept before the oldest is deleted; kept demos never count",
         "cl_demobar" => "Shows the playback bar (time, speed, timeline) after a control key, always, or never",
         "cl_demo_endpause" => "A demo you play stops on its last frame instead of returning to the menu, so you can rewind",

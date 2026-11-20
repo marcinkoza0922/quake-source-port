@@ -808,3 +808,25 @@ fn audio_enhancements_subpage_gating_and_soundtrack_picker() {
     assert_eq!(m.screen, Screen::OptionsPage(Page::Audio));
     assert_eq!(m.opt_cursor, mix_row);
 }
+
+#[test]
+fn demos_show_ghost_option_cycles_and_has_tooltip() {
+    let mut cv = Cvars::default();
+    cv.register("cl_demo_ghost", "0", 0);
+    let mut m = Menu::new();
+    m.open(Screen::OptionsPage(Page::Demos));
+    let row = page_items(Page::Demos)
+        .iter()
+        .position(|i| matches!(i, Item::Choice { cvar: "cl_demo_ghost", .. }))
+        .expect("Show Ghost row under Demos");
+    let item = page_items(Page::Demos)[row];
+    assert!(tooltip(item).is_some(), "Show Ghost needs a tooltip");
+    m.opt_cursor = row;
+    // Right cycles off (0) -> any% (1) -> 100% (2) -> off (0)
+    m.key(K_RIGHTARROW, &mut cv, false);
+    assert_eq!(cv.value_of("cl_demo_ghost"), 1.0);
+    m.key(K_RIGHTARROW, &mut cv, false);
+    assert_eq!(cv.value_of("cl_demo_ghost"), 2.0);
+    m.key(K_RIGHTARROW, &mut cv, false);
+    assert_eq!(cv.value_of("cl_demo_ghost"), 0.0);
+}

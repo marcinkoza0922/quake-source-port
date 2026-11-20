@@ -1757,6 +1757,15 @@ ja 武器の優先順位
 @ Zoom
 ja ズーム
 
+@ Show Ghost
+ja ゴーストを表示
+
+@ Show Label
+ja ラベルを表示
+
+@ Speedometer
+ja スピードメーター
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ ja 武器を拾ったとき：「切り替えない」は現在の武器を保�
 
 @ Zoom level of the automap view
 ja オートマップ表示のズーム倍率
+
+@ Horizontal movement speed in units per second
+ja 水平方向の移動速度（単位/秒）
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+ja 現在のマップと難易度の自己ベストデモから半透明のゴーストを再生します（シングルプレイヤー専用）
+
+@ Shows the SPD label before the speed number
+ja 速度の数値の前に SPD ラベルを表示します
 
 # ==== ui.txt ====
 

@@ -3,6 +3,7 @@
 mod menu_controller;
 mod demo_seek;
 mod hud_preset;
+mod pb_ghost;
 
 mod relaunch_tests {
     #[test]

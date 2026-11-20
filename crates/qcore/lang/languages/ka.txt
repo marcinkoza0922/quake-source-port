@@ -1757,6 +1757,15 @@ ka იარაღის პრიორიტეტი
 @ Zoom
 ka მასშტაბი
 
+@ Show Ghost
+ka მოჩვენების ჩვენება
+
+@ Show Label
+ka წარწერის ჩვენება
+
+@ Speedometer
+ka სპიდომეტრი
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ ka იარაღის აღებისას: არასოდეს ტ�
 
 @ Zoom level of the automap view
 ka ავტორუკის ხედის მასშტაბირების დონე
+
+@ Horizontal movement speed in units per second
+ka ჰორიზონტალური მოძრაობის სიჩქარე ერთეულებში წამში
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+ka უშვებს ნახევრად გამჭვირვალე მოჩვენებას მიმდინარე რუკისა და სირთულის თქვენი პირადი რეკორდის დემოდან (მხოლოდ ერთი მოთამაშე)
+
+@ Shows the SPD label before the speed number
+ka აჩვენებს SPD წარწერას სიჩქარის რიცხვის წინ
 
 # ==== ui.txt ====
 

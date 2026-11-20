@@ -25,7 +25,7 @@ pub(super) fn keywords(item: Item) -> &'static str {
         Item::Color { .. } => "colour team",
         // the HUD editor holds the elements that had their own rows
         Item::Run { run: Run::EditHud, .. } => {
-            "layout interface move position health armor ammo weapons keys clock timer personal best kills secrets fps \
+            "layout interface move position health armor ammo weapons keys clock timer personal best kills secrets speedometer speed velocity ups fps \
              framerate performance cpu gpu memory messages captions subtitles text font"
         }
         _ => "",
@@ -170,6 +170,7 @@ fn cvar_keywords(cvar: &str) -> &'static str {
         "r_debris" | "r_debris_quality" | "r_debris_gibs" | "r_debris_shrapnel" => "gibs physics",
         "r_blood" | "r_blood_quality" | "r_blood_amount" | "r_blood_size" | "r_blood_wounds" | "r_blood_gibs" => "gore decals",
         "cl_autodemo" | "cl_autodemo_slots" => "replay recording",
+        "cl_demo_ghost" => "pb personal best speedrun race replay ghost",
         "capture_fps" | "capture_size" | "capture_codec" | "capture_quality" => "capture video recording",
         "capture_gpu" => "hardware nvenc",
         "capture_audio" => "sound",

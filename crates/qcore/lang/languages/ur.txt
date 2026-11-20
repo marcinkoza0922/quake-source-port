@@ -1757,6 +1757,15 @@ ur ہتھیاروں کی ترجیح
 @ Zoom
 ur زوم
 
+@ Show Ghost
+ur بھوت دکھائیں
+
+@ Show Label
+ur لیبل دکھائیں
+
+@ Speedometer
+ur اسپیڈومیٹر
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ ur ہتھیار اٹھاتے وقت: کبھی نہیں موجودہ ہتھیار
 
 @ Zoom level of the automap view
 ur آٹو میپ منظر کے زوم کی سطح
+
+@ Horizontal movement speed in units per second
+ur افقی حرکت کی رفتار اکائی فی سیکنڈ میں
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+ur موجودہ نقشے اور مشکل کے لیے آپ کے ذاتی بہترین ڈیمو کا نیم شفاف بھوت چلاتا ہے (صرف سنگل پلیئر)
+
+@ Shows the SPD label before the speed number
+ur رفتار کے عدد سے پہلے SPD لیبل دکھاتا ہے
 
 # ==== ui.txt ====
 

@@ -1757,6 +1757,15 @@ lt Ginklų prioritetas
 @ Zoom
 lt Mastelis
 
+@ Show Ghost
+lt Rodyti vaiduoklį
+
+@ Show Label
+lt Rodyti etiketę
+
+@ Speedometer
+lt Spidometras
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ lt Paėmus ginklą: Niekada palieka dabartinį ginklą; Geresnis ginklas perjung
 
 @ Zoom level of the automap view
 lt Autožemėlapio vaizdo priartinimo lygis
+
+@ Horizontal movement speed in units per second
+lt Horizontalus judėjimo greitis vienetais per sekundę
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+lt Atkuria pusiau permatomą jūsų asmeninio rekordo demo vaiduoklį esamam žemėlapiui ir sudėtingumui (tik vienam žaidėjui)
+
+@ Shows the SPD label before the speed number
+lt Rodo SPD etiketę prieš greičio skaičių
 
 # ==== ui.txt ====
 

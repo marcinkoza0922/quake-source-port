@@ -1757,6 +1757,15 @@ nl Wapenprioriteit
 @ Zoom
 nl Zoom
 
+@ Show Ghost
+nl Geest tonen
+
+@ Show Label
+nl Label tonen
+
+@ Speedometer
+nl Snelheidsmeter
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ nl Bij het oppakken van een wapen: Nooit behoudt je huidige wapen; Beter wapen w
 
 @ Zoom level of the automap view
 nl Zoomniveau van de autokaartweergave
+
+@ Horizontal movement speed in units per second
+nl Horizontale bewegingssnelheid in eenheden per seconde
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+nl Speelt een doorschijnende geest af van de demo van je persoonlijk record voor de huidige kaart en moeilijkheidsgraad (alleen singleplayer)
+
+@ Shows the SPD label before the speed number
+nl Toont het SPD-label vóór het snelheidsgetal
 
 # ==== ui.txt ====
 

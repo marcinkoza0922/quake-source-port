@@ -85,6 +85,9 @@ impl Host {
                 qrender::ViewFrustum::from_view(v, (w, h), self.cv("r_renderscale"))
             });
             self.debris.entities(&mut ents, &mut dyn_verts, fte_frustum.as_ref());
+            if let Some(ghost) = self.ghost_entity(v, cv.lerp_models) {
+                ents.push(ghost);
+            }
             if self.cv("r_drawentities") == 0.0 {
                 ents.clear();
             }
@@ -176,7 +179,8 @@ impl Host {
         let bullet_meter = self.cv("addon_bullet_time_meter") != 0.0;
         self.update_metrics(ft);
         let mut metrics_drawn = false;
-        let speed = self.speedometer();
+        let cur_speed = self.update_speed();
+        let speed = self.speedometer_text(cur_speed);
         let reserve = self.hud_reserve();
         let rays: Vec<_> = std::iter::once(&self.cl).chain(self.guests.iter().filter(|g| g.cl.signon == 4).map(|g| &g.cl))
             .map(|cl| {
@@ -188,7 +192,7 @@ impl Host {
             self.server.reticle_on_target(id, eye, dir)).collect();
         let addon_entries: Vec<_> = crate::wheel::inventory(&self.server.core.cvars, &self.allowed_toys())
             .into_iter().filter(|e| matches!(e.weapon, crate::wheel::Weapon::Addon(_))).collect();
-        let hud = self.hud_frame(&c, &addon_entries);
+        let hud = self.hud_frame(&c, &addon_entries, cur_speed);
         self.hud.fade.update(&self.hud.layout, &self.cl, (&addon_entries, self.toy.held), self.realtime);
         let teamplay = self.server.core.cvars.value_of("teamplay");
         let captions = self.caption_place().filter(|_| self.cv("cl_captions") != 0.0 && !hud.edit);

@@ -1757,6 +1757,15 @@ et Relvade järjekord
 @ Zoom
 et Suurendus
 
+@ Show Ghost
+et Näita kummitust
+
+@ Show Label
+et Näita silti
+
+@ Speedometer
+et Spidomeeter
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ et Relva üles korjates: Mitte kunagi jätab alles praeguse relva; Parem relv va
 
 @ Zoom level of the automap view
 et Autokaardi vaate suurendusaste
+
+@ Horizontal movement speed in units per second
+et Horisontaalne liikumiskiirus ühikutes sekundis
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+et Esitab poolläbipaistva kummituse sinu isikliku rekordi demolt praegusel kaardil ja raskusastmel (ainult üksikmäng)
+
+@ Shows the SPD label before the speed number
+et Näitab kiiruse numbri ees silti SPD
 
 # ==== ui.txt ====
 

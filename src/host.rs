@@ -35,6 +35,7 @@ mod demo_play;
 mod demo_mouse;
 mod export_ui;
 mod autodemo;
+mod ghost;
 mod capture;
 mod mapswitch;
 mod render;
@@ -218,6 +219,8 @@ pub struct Host {
     stats_recorded: bool,
     /// Personal-best state for the HUD timer and PB demos (`level_time`).
     pb: level_time::LevelPb,
+    /// Personal-best demo ghost (`cl_demo_ghost`).
+    ghost: ghost::GhostState,
     /// The main menu theme is playing (`menu_music`); a CD track replaces it.
     menu_music: bool,
     /// The demo being played (cls.demoplayback).
@@ -374,6 +377,7 @@ impl Host {
             stuffed: false,
             stats_recorded: false,
             pb: Default::default(),
+            ghost: Default::default(),
             menu_music: false,
             console_sound_id: 0,
             qd_cli: None,

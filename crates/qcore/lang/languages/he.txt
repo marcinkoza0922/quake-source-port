@@ -1757,6 +1757,15 @@ he עדיפות נשקים
 @ Zoom
 he תקריב
 
+@ Show Ghost
+he הצג רוח רפאים
+
+@ Show Label
+he הצג תווית
+
+@ Speedometer
+he מד מהירות
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ he בעת איסוף נשק: לעולם לא שומר על הנשק הנוכחי
 
 @ Zoom level of the automap view
 he רמת התקריב של תצוגת המפה האוטומטית
+
+@ Horizontal movement speed in units per second
+he מהירות תנועה אופקית ביחידות לשנייה
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+he מריץ רוח רפאים שקופה למחצה מהדמו של השיא האישי שלך למפה ולרמת הקושי הנוכחיות (שחקן יחיד בלבד)
+
+@ Shows the SPD label before the speed number
+he מציג את התווית SPD לפני מספר המהירות
 
 # ==== ui.txt ====
 

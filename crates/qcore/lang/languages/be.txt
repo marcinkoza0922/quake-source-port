@@ -1757,6 +1757,15 @@ be Прыярытэт зброі
 @ Zoom
 be Маштаб
 
+@ Show Ghost
+be Паказаць прывіда
+
+@ Show Label
+be Паказаць подпіс
+
+@ Speedometer
+be Спідометр
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ be Пры падборы зброі: Ніколі пакідае бягучую 
 
 @ Zoom level of the automap view
 be Узровень набліжэння выгляду аўтакарты
+
+@ Horizontal movement speed in units per second
+be Гарызантальная хуткасць руху ў адзінках за секунду
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+be Запускае паўпразрыстага прывіда з дэма вашага асабістага рэкорду для бягучай карты і складанасці (толькі адзіночная гульня)
+
+@ Shows the SPD label before the speed number
+be Паказвае подпіс SPD перад лікам хуткасці
 
 # ==== ui.txt ====
 

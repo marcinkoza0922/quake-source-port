@@ -1757,6 +1757,15 @@ sw Kipaumbele cha Silaha
 @ Zoom
 sw Kuza
 
+@ Show Ghost
+sw Onyesha Mzimu
+
+@ Show Label
+sw Onyesha Lebo
+
+@ Speedometer
+sw Kipima Kasi
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ sw Unapookota silaha: Kamwe hubakiza silaha yako ya sasa; Silaha bora hubadilish
 
 @ Zoom level of the automap view
 sw Kiwango cha ukuzaji wa mwonekano wa ramani
+
+@ Horizontal movement speed in units per second
+sw Kasi ya mwendo wa mlalo kwa vitengo kwa sekunde
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+sw Huendesha mzimu unaoonekana kwa uwazi wa onyesho la rekodi yako binafsi kwa ramani na ugumu wa sasa (mchezaji mmoja pekee)
+
+@ Shows the SPD label before the speed number
+sw Huonyesha lebo ya SPD kabla ya nambari ya kasi
 
 # ==== ui.txt ====
 

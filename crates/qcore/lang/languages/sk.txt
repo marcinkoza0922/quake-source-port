@@ -1757,6 +1757,15 @@ sk Priorita zbraní
 @ Zoom
 sk Priblíženie
 
+@ Show Ghost
+sk Zobraziť ducha
+
+@ Show Label
+sk Zobraziť popisok
+
+@ Speedometer
+sk Rýchlomer
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ sk Pri zobraní zbrane: Nikdy ponechá aktuálnu zbraň; Lepšia zbraň prepne l
 
 @ Zoom level of the automap view
 sk Úroveň priblíženia automapy
+
+@ Horizontal movement speed in units per second
+sk Vodorovná rýchlosť pohybu v jednotkách za sekundu
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+sk Prehráva priesvitného ducha z dema vášho osobného rekordu pre aktuálnu mapu a obťažnosť (len hra jedného hráča)
+
+@ Shows the SPD label before the speed number
+sk Zobrazuje popisok SPD pred hodnotou rýchlosti
 
 # ==== ui.txt ====
 

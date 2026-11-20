@@ -1757,6 +1757,15 @@ vi Thứ tự ưu tiên vũ khí
 @ Zoom
 vi Thu phóng
 
+@ Show Ghost
+vi Hiện bóng ma
+
+@ Show Label
+vi Hiện nhãn
+
+@ Speedometer
+vi Đồng hồ tốc độ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ vi Khi nhặt vũ khí: Không bao giờ giữ nguyên vũ khí hiện tại; V�
 
 @ Zoom level of the automap view
 vi Mức thu phóng của góc nhìn bản đồ tự động
+
+@ Horizontal movement speed in units per second
+vi Tốc độ di chuyển ngang tính bằng đơn vị mỗi giây
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+vi Chạy bóng ma mờ từ bản demo kỷ lục cá nhân của bạn cho bản đồ và độ khó hiện tại (chỉ chơi đơn)
+
+@ Shows the SPD label before the speed number
+vi Hiển thị nhãn SPD trước con số tốc độ
 
 # ==== ui.txt ====
 

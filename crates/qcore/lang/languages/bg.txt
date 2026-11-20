@@ -1757,6 +1757,15 @@ bg Приоритет на оръжията
 @ Zoom
 bg Мащаб
 
+@ Show Ghost
+bg Покажи призрак
+
+@ Show Label
+bg Покажи етикет
+
+@ Speedometer
+bg Скоростомер
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ bg При вдигане на оръжие: Никога запазва теку
 
 @ Zoom level of the automap view
 bg Ниво на приближение на автокартата
+
+@ Horizontal movement speed in units per second
+bg Хоризонтална скорост на движение в единици в секунда
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+bg Пуска полупрозрачен призрак от демото на личния ви рекорд за текущата карта и трудност (само за един играч)
+
+@ Shows the SPD label before the speed number
+bg Показва етикета SPD пред стойността на скоростта
 
 # ==== ui.txt ====
 

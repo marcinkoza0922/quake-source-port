@@ -1757,6 +1757,15 @@ uk Пріоритет зброї
 @ Zoom
 uk Масштаб
 
+@ Show Ghost
+uk Показати привида
+
+@ Show Label
+uk Показати підпис
+
+@ Speedometer
+uk Спідометр
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ uk При підборі зброї: Ніколи залишає поточну 
 
 @ Zoom level of the automap view
 uk Рівень масштабування автокарти
+
+@ Horizontal movement speed in units per second
+uk Горизонтальна швидкість руху в одиницях за секунду
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+uk Запускає напівпрозорого привида з демо вашого особистого рекорду для поточної карти й складності (лише одиночна гра)
+
+@ Shows the SPD label before the speed number
+uk Показує підпис SPD перед значенням швидкості
 
 # ==== ui.txt ====
 

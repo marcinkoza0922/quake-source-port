@@ -41,11 +41,13 @@ pub const BACK: (f32, f32) = (LIST.0, TOP + ROWS as f32 * ROW_H + 8.0);
 // Options > Demos and its Video Recording page.
 pub(super) const DEMO_SLOTS: &[(&str, f32)] = &[("5", 5.0), ("10", 10.0), ("20", 20.0), ("50", 50.0), ("100", 100.0), ("unlimited", 0.0)];
 pub(super) const PB_DEMOS: &[(&str, f32)] = &[("off", 0.0), ("any%", 1.0), ("100%", 2.0), ("any% and 100%", 3.0)];
+pub(super) const PB_GHOST: &[(&str, f32)] = &[("off", 0.0), ("any%", 1.0), ("100%", 2.0)];
 pub(super) const DEMO_BAR: &[(&str, f32)] = &[("off", 0.0), ("auto", 1.0), ("always", 2.0)];
 pub(super) const DEMOS: &[Item] = &[
     toggle("Auto-Record Demos", "cl_autodemo"),
     Item::Choice { label: "Auto-Demo Slots", cvar: "cl_autodemo_slots", choices: DEMO_SLOTS },
     Item::Choice { label: "Keep Personal Best Demos", cvar: "cl_autodemo_pb", choices: PB_DEMOS },
+    Item::Choice { label: "Show Ghost", cvar: "cl_demo_ghost", choices: PB_GHOST },
     Item::Choice { label: "Playback Bar", cvar: "cl_demobar", choices: DEMO_BAR },
     toggle("Pause at End", "cl_demo_endpause"),
     Item::Sub { label: "Video Recording", page: Page::Video },

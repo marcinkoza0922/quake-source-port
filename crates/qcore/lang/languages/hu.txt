@@ -1757,6 +1757,15 @@ hu Fegyverprioritás
 @ Zoom
 hu Nagyítás
 
+@ Show Ghost
+hu Szellem megjelenítése
+
+@ Show Label
+hu Címke megjelenítése
+
+@ Speedometer
+hu Sebességmérő
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ hu Fegyver felvételekor: a Soha megtartja a jelenlegi fegyvert; a Jobb fegyver 
 
 @ Zoom level of the automap view
 hu Az autotérkép nézetének nagyítási szintje
+
+@ Horizontal movement speed in units per second
+hu Vízszintes mozgási sebesség egység per másodpercben
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+hu Áttetsző szellemet játszik le az aktuális pálya és nehézség egyéni rekordjának demójából (csak egyjátékos módban)
+
+@ Shows the SPD label before the speed number
+hu Megjeleníti az SPD címkét a sebességérték előtt
 
 # ==== ui.txt ====
 

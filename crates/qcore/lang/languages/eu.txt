@@ -1757,6 +1757,15 @@ eu Armen lehentasuna
 @ Zoom
 eu Zooma
 
+@ Show Ghost
+eu Erakutsi mamua
+
+@ Show Label
+eu Erakutsi etiketa
+
+@ Speedometer
+eu Abiadura-neurgailua
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ eu Arma bat jasotzean: Inoiz ez aukerak uneko arma mantentzen du; Arma hobea auk
 
 @ Zoom level of the automap view
 eu Automaparen ikuspegiaren zoom-maila
+
+@ Horizontal movement speed in units per second
+eu Mugimendu horizontalaren abiadura unitatetan segundoko
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+eu Uneko mapa eta zailtasunerako zure marka pertsonalaren demoaren mamu zeharrargi bat erreproduzitzen du (jokalari bakarra)
+
+@ Shows the SPD label before the speed number
+eu SPD etiketa erakusten du abiadura-zenbakiaren aurretik
 
 # ==== ui.txt ====
 

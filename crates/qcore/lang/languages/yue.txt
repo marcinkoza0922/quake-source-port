@@ -1757,6 +1757,15 @@ yue 武器優先次序
 @ Zoom
 yue 縮放
 
+@ Show Ghost
+yue 顯示幽靈
+
+@ Show Label
+yue 顯示標籤
+
+@ Speedometer
+yue 速度計
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ yue 執到武器嗰陣：「永不」會留返依家用緊嘅武器；「更強�
 
 @ Zoom level of the automap view
 yue 自動地圖檢視嘅縮放級別
+
+@ Horizontal movement speed in units per second
+yue 以單位每秒顯示嘅水平移動速度
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+yue 播返目前地圖同難度個人最佳紀錄示範嘅半透明幽靈（只限單人遊戲）
+
+@ Shows the SPD label before the speed number
+yue 喺速度數值前面顯示 SPD 標籤
 
 # ==== ui.txt ====
 

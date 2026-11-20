@@ -1757,6 +1757,15 @@ am የመሳሪያ ቅድሚያ
 @ Zoom
 am ማጉያ
 
+@ Show Ghost
+am መንፈስ አሳይ
+
+@ Show Label
+am መለያ አሳይ
+
+@ Speedometer
+am የፍጥነት መለኪያ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ am መሳሪያ ሲያነሱ፦ በጭራሽ የአሁኑን መሳሪያዎን 
 
 @ Zoom level of the automap view
 am የራስ-ሰር ካርታ እይታ የማጉያ ደረጃ
+
+@ Horizontal movement speed in units per second
+am አግድም የእንቅስቃሴ ፍጥነት በአሃድ በሰከንድ
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+am ለአሁኑ ካርታ እና ከባድነት የግል ምርጥ ዴሞዎን ግልጽ መንፈስ ያጫውታል (ነጠላ ተጫዋች ብቻ)
+
+@ Shows the SPD label before the speed number
+am ከፍጥነት ቁጥሩ በፊት SPD መለያን ያሳያል
 
 # ==== ui.txt ====
 

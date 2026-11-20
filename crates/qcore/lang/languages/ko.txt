@@ -1757,6 +1757,15 @@ ko 무기 우선순위
 @ Zoom
 ko 확대/축소
 
+@ Show Ghost
+ko 고스트 표시
+
+@ Show Label
+ko 레이블 표시
+
+@ Speedometer
+ko 속도계
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ ko 무기를 주웠을 때: '사용 안 함'은 현재 무기를 유지하고, '
 
 @ Zoom level of the automap view
 ko 오토맵 보기의 확대 배율
+
+@ Horizontal movement speed in units per second
+ko 초당 단위 기준 수평 이동 속도
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+ko 현재 맵과 난이도의 개인 최고 기록 데모를 반투명 고스트로 재생합니다 (싱글 플레이어 전용)
+
+@ Shows the SPD label before the speed number
+ko 속도 숫자 앞에 SPD 레이블을 표시합니다
 
 # ==== ui.txt ====
 

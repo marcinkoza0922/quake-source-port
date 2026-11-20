@@ -222,6 +222,14 @@ fn spans_raw(e: &Elem, ctx: Option<&Ctx>, sample: bool) -> Option<Spans> {
             };
             vec![(label.to_string(), LABEL), (n, VALUE)]
         }
+        Kind::Speed => {
+            let n = if sample { "8888".to_string() } else { info?.speed.to_string() };
+            if e.a != 0 {
+                vec![("SPD ".to_string(), LABEL), (n, VALUE)]
+            } else {
+                vec![(n, VALUE)]
+            }
+        }
         k if k.is_metric() => {
             let (label, wide) = METRICS[metric_index(k)];
             let value = if sample { wide.to_string() } else { ctx?.metrics[metric_index(k)].clone() };

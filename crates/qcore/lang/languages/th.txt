@@ -1757,6 +1757,15 @@ th ลำดับ​อาวุธ
 @ Zoom
 th ซูม
 
+@ Show Ghost
+th แสดง​เงา​ผี
+
+@ Show Label
+th แสดง​ป้าย​กำกับ
+
+@ Speedometer
+th มาตร​วัด​ความ​เร็ว
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ th เมื่อ​เก็บ​อาวุธ: ไม่​เปลี่
 
 @ Zoom level of the automap view
 th ระดับ​การ​ซูม​ของ​มุม​มอง​แผนที่​อัตโนมัติ
+
+@ Horizontal movement speed in units per second
+th ความ​เร็ว​การ​เคลื่อน​ที่​แนว​ราบ​ใน​หน่วย​ต่อ​วินาที
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+th เล่น​เงา​ผี​โปร่ง​แสง​จาก​เดโม​สถิติ​ดี​ที่สุด​ของ​คุณ​สำหรับ​ด่าน​และ​ระดับ​ความ​ยาก​ปัจจุบัน (เล่น​คน​เดียว​เท่านั้น)
+
+@ Shows the SPD label before the speed number
+th แสดง​ป้าย SPD หน้า​ตัว​เลข​ความ​เร็ว
 
 # ==== ui.txt ====
 

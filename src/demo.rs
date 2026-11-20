@@ -2,6 +2,7 @@
 //! line holding a CD track number, then blocks of
 //! `i32 length, 3 × f32 view angles, length bytes of server message`.
 
+pub mod ghost;
 pub mod index;
 pub mod keyframes;
 pub mod library;

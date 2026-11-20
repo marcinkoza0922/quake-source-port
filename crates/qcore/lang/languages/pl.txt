@@ -1757,6 +1757,15 @@ pl Priorytet broni
 @ Zoom
 pl Powiększenie
 
+@ Show Ghost
+pl Pokaż ducha
+
+@ Show Label
+pl Pokaż etykietę
+
+@ Speedometer
+pl Prędkościomierz
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ pl Po podniesieniu broni: Nigdy zachowuje obecną broń; Lepsza broń przełącz
 
 @ Zoom level of the automap view
 pl Poziom powiększenia widoku automapy
+
+@ Horizontal movement speed in units per second
+pl Pozioma prędkość ruchu w jednostkach na sekundę
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+pl Odtwarza półprzezroczystego ducha z dema twojego rekordu życiowego dla bieżącej mapy i poziomu trudności (tylko gra jednoosobowa)
+
+@ Shows the SPD label before the speed number
+pl Wyświetla etykietę SPD przed wartością prędkości
 
 # ==== ui.txt ====
 

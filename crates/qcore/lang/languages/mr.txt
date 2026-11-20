@@ -1757,6 +1757,15 @@ mr शस्त्र प्राधान्य
 @ Zoom
 mr झूम
 
+@ Show Ghost
+mr भूत दाखवा
+
+@ Show Label
+mr लेबल दाखवा
+
+@ Speedometer
+mr स्पीडोमीटर
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ mr शस्त्र उचलताना: 'कधीही नाही' स�
 
 @ Zoom level of the automap view
 mr ऑटोमॅप दृश्याची झूम पातळी
+
+@ Horizontal movement speed in units per second
+mr प्रति सेकंद एककांमध्ये क्षैतिज वेग
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+mr सध्याच्या नकाशा आणि काठिण्य पातळीसाठी तुमच्या वैयक्तिक सर्वोत्तम डेमोचे अर्धपारदर्शक भूत दाखवते (फक्त सिंगल प्लेयर)
+
+@ Shows the SPD label before the speed number
+mr वेगाच्या संख्येपूर्वी SPD लेबल दाखवते
 
 # ==== ui.txt ====
 

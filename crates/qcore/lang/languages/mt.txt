@@ -1757,6 +1757,15 @@ mt Prijorità tal-Armi
 @ Zoom
 mt Zoom
 
+@ Show Ghost
+mt Uri l-Fantażma
+
+@ Show Label
+mt Uri t-Tikketta
+
+@ Speedometer
+mt Veloċimetru
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ mt Meta tiġbor arma: Qatt iżżomm l-arma attwali tiegħek; Arma aħjar taqleb 
 
 @ Zoom level of the automap view
 mt Livell ta' zoom tal-veduta tal-awto-mappa
+
+@ Horizontal movement speed in units per second
+mt Veloċità tal-moviment orizzontali f'unitajiet kull sekonda
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+mt Iħaddem fantażma trasluċida mid-demo tar-rekord personali tiegħek għall-mappa u d-diffikultà kurrenti (plejer wieħed biss)
+
+@ Shows the SPD label before the speed number
+mt Juri t-tikketta SPD qabel in-numru tal-veloċità
 
 # ==== ui.txt ====
 

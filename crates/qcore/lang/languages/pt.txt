@@ -1757,6 +1757,15 @@ pt Prioridade das armas
 @ Zoom
 pt Zoom
 
+@ Show Ghost
+pt Mostrar fantasma
+
+@ Show Label
+pt Mostrar rótulo
+
+@ Speedometer
+pt Velocímetro
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ pt Ao apanhar uma arma: Nunca mantém a arma atual; Arma melhor só troca se est
 
 @ Zoom level of the automap view
 pt Nível de zoom da vista do automapa
+
+@ Horizontal movement speed in units per second
+pt Velocidade de movimento horizontal em unidades por segundo
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+pt Reproduz um fantasma translúcido da demo do teu recorde pessoal para o mapa e dificuldade atuais (apenas um jogador)
+
+@ Shows the SPD label before the speed number
+pt Mostra o rótulo SPD antes do valor da velocidade
 
 # ==== ui.txt ====
 
