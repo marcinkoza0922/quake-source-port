@@ -46,6 +46,10 @@ impl Host {
                 e.views = 1;
             }
             let debris_on = self.cv("r_debris") != 0.0;
+            let mut brushes = None;
+            let teleporters = self.impacts.prepare(
+                &self.server.core.cvars, &mut self.cl, &self.level, &mut brushes, v.origin.into(), &self.debris,
+            );
             let gravity = self.cv("sv_gravity");
             let set = crate::debris::Settings {
                 quality: crate::debris::Quality::from_cvar(self.cv("r_debris_quality")),
@@ -70,7 +74,11 @@ impl Host {
                     set,
                 },
             );
-            if crate::blood::Settings::read(&self.server.core.cvars).enabled || (crate::impacts::impacts_on(&self.server.core.cvars) && (self.cv("r_impact_nails") != 0.0 || self.cv("r_impact_bullets") != 0.0)) {
+            if teleporters || crate::blood::Settings::read(&self.server.core.cvars).enabled
+                || (crate::impacts::impacts_on(&self.server.core.cvars)
+                    && (self.cv("r_impact_nails") != 0.0 || self.cv("r_impact_bullets") != 0.0
+                        || self.cv("r_impact_scorches") != 0.0 || self.cv("r_teleportwindows") != 0.0))
+            {
                 self.debris.track_shooters(&self.cl, &self.level, self.cl.time);
             }
             let fte_frustum = self.cull_fte_for_view().then(|| {
@@ -96,7 +104,6 @@ impl Host {
             let cull_particles = self.cull_fte_for_view().then(|| {
                 qrender::view_fov_tangents(v, (w, h), self.cv("r_renderscale"))
             });
-            let mut brushes = None;
             fte = self.fte.frame(
                 &mut self.cl,
                 &self.level,
@@ -156,6 +163,7 @@ impl Host {
             if !self.guests.is_empty() {
                 splits = self.split_views(*v, blend, ft, &mut ents);
             }
+            self.impacts.hide_explosion_sprites(&self.cl, &mut ents);
         }
         // 2D
         let glyphs = self.glyphs();
@@ -483,9 +491,11 @@ impl Host {
         let impacts = std::mem::take(&mut self.cl.shot_impacts);
         self.cl.blood_hits.clear();
         self.cl.weapon_impacts.clear();
+        self.cl.impact_effects.clear();
         let gun_portals = crate::addons::portal_draw::gun_portals(&self.cl.portals, self.cv("addon_portal_view") != 0.0);
         let frame = qrender::RenderFrame {
             gun_portals: &gun_portals,
+            teleport_ripples: self.impacts.teleport_ripples(),
             time: self.cl.time,
             view,
             entities: &ents,

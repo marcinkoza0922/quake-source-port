@@ -69,6 +69,10 @@ in the Enhancements menu) makes visible intra-level teleporters show their linke
 parallax as the player moves. Preserve the original dark look with a black-tinted
 shimmer and animated sparkles. Slipgates, silent or activated teleport triggers,
 and unrelated uses of teleport textures keep their existing appearance.
+Teleporter surfaces reject weapon decals, impact smoke, particles and
+explosion flashes in both modes. With impact effects and see-through
+teleporters enabled, shots and projectile impacts briefly ripple the
+destination image.
 
 ## Speed feedback
 

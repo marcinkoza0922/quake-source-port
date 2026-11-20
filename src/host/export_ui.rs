@@ -96,6 +96,7 @@ impl Host {
         settings.dither = 0.0;
         let frame = qrender::RenderFrame {
             gun_portals: &[],
+            teleport_ripples: &[],
             time: self.cl.time,
             view: None,
             entities: &[],

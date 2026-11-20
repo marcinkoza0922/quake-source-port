@@ -100,6 +100,13 @@ impl Renderer {
             cap: self.frames[fi].dynbuf.size,
         };
         let st = &fr.settings;
+        let mut teleport_ripples = [[0.0; 4]; MAX_TELEPORT_RIPPLES];
+        let ripple_count = if st.teleport_windows {
+            fr.teleport_ripples.len().min(MAX_TELEPORT_RIPPLES)
+        } else {
+            0
+        };
+        teleport_ripples[..ripple_count].copy_from_slice(&fr.teleport_ripples[..ripple_count]);
         let mut alphas = [
             st.wateralpha,
             st.lavaalpha.unwrap_or(st.wateralpha),
@@ -249,7 +256,7 @@ impl Renderer {
             h.max(1) as f32 * (scene_h as f32 / sh.max(1) as f32),
         ];
         let mut portal_draws = if fr.settings.teleport_windows || !fr.gun_portals.is_empty() || refl_mode == 1 {
-            self.prepare_portals(view.as_ref(), [scene_w, scene_h], fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis, &mut portal_worlds)
+            self.prepare_portals(view.as_ref(), [scene_w, scene_h], fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis, &mut portal_worlds, ripple_count > 0)
         } else {
             Vec::new()
         };
@@ -943,6 +950,8 @@ impl Renderer {
                     a
                 },
                 refl: [if st.water_reflections > 0 { st.water_reflection_amount.clamp(0.0, 1.5) } else { 0.0 }, 0.0, 0.0, 0.0],
+                teleport_fx: [ripple_count as u32, 0, 0, 0],
+                teleport_ripples,
             };
             for (i, portal) in pass.portal_draws.iter_mut().enumerate().filter(|(i, _)| *i < 4) {
                 ubo.portal_plane[i] = portal.portal.plane();

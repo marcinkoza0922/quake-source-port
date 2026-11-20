@@ -118,6 +118,7 @@ fn pad_mode_draws_glyphs_on_buttons_without_above_bar_clutter() {
         }
         let frame = qrender::RenderFrame {
             gun_portals: &[],
+            teleport_ripples: &[],
             time: 0.0,
             view: None,
             entities: &[],

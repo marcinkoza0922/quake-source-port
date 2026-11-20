@@ -34,6 +34,10 @@ pub(super) struct FrameUbo {
     pub(super) ripple_amp: [[f32; 4]; crate::water::MAX_RIPPLES / 4],
     /// x: planar reflection strength (r_water_reflections_amount), 0 = off.
     pub(super) refl: [f32; 4],
+    /// Number of active teleporter impact ripples in x.
+    pub(super) teleport_fx: [u32; 4],
+    /// World xyz and the time of the impact.
+    pub(super) teleport_ripples: [[f32; 4]; crate::MAX_TELEPORT_RIPPLES],
 }
 
 #[repr(C)]

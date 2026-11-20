@@ -7,6 +7,7 @@ pub(super) fn aperture(
     portal: &crate::portals::Portal,
     extent: [u32; 2],
     texture_extent: [u32; 2],
+    teleport_ripples: bool,
 ) -> vk::Rect2D {
     // water.frag accepts points 0.25 units beyond the discovered sheet bounds.
     // Gun bounds already enclose the oval and its normal offset; padding them
@@ -34,11 +35,18 @@ pub(super) fn aperture(
             hi[k] = hi[k].max(pixel);
         }
     }
-    // water.frag warps destination UVs by at most 0.0015 of the *texture*
-    // size, which can exceed this split viewport's size. Two extra pixels
-    // cover filtering, sample positions and projection rounding. Gun ovals
-    // sample without warp (fte.frag). Both use non-mipmapped clamp samplers.
-    let padding = texture_extent.map(|n| 2.0 + if portal.gun.is_none() { (n as f32 * 0.0015).ceil() } else { 0.0 });
+    // water.glsl warps destination UVs by up to 0.0015 of the *texture*
+    // size (plus 0.025 for impact ripples), which can exceed the split viewport.
+    // Two extra pixels cover filtering, sample positions and projection rounding.
+    // Gun ovals sample without warp (fte.frag).
+    let warp = if portal.gun.is_some() {
+        0.0
+    } else if teleport_ripples && !portal.reflect {
+        0.0265
+    } else {
+        0.0015
+    };
+    let padding = texture_extent.map(|n| 2.0 + (n as f32 * warp).ceil());
     let start: [u32; 2] = std::array::from_fn(|k| (lo[k].floor() - padding[k]).clamp(0.0, extent[k] as f32) as u32);
     let end: [u32; 2] = std::array::from_fn(|k| (hi[k].ceil() + padding[k]).clamp(0.0, extent[k] as f32) as u32);
     vk::Rect2D {
@@ -61,14 +69,19 @@ mod tests {
     #[test]
     fn warp_padding_uses_texture_size_in_split_views() {
         let mut p = sheet([-0.01, -0.01, 1.0], [0.01, 0.01, 1.0]);
-        let gun = aperture(&ident(), &p, [1000, 500], [4096, 2048]);
+        let gun = aperture(&ident(), &p, [1000, 500], [4096, 2048], false);
         assert!(gun.extent.width < 1000 && gun.extent.height < 500);
         p.gun = None;
-        let water = aperture(&ident(), &p, [1000, 500], [4096, 2048]);
+        let water = aperture(&ident(), &p, [1000, 500], [4096, 2048], false);
         assert_eq!(water.offset.x, gun.offset.x - 7);
         assert_eq!(water.offset.y, gun.offset.y - 4);
         assert_eq!(water.extent.width, gun.extent.width + 14);
         assert_eq!(water.extent.height, gun.extent.height + 8);
+        let ripple = aperture(&ident(), &p, [1000, 500], [4096, 2048], true);
+        assert_eq!(ripple.offset.x, gun.offset.x - 109);
+        assert_eq!(ripple.offset.y, gun.offset.y - 55);
+        assert_eq!(ripple.extent.width, gun.extent.width + 218);
+        assert_eq!(ripple.extent.height, gun.extent.height + 110);
     }
 
     #[test]
@@ -79,18 +92,18 @@ mod tests {
         vp[14] = -4.0;
         vp[15] = 0.0;
         let full = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: 320, height: 200 } };
-        assert_eq!(aperture(&vp, &p, [320, 200], [640, 400]), full);
+        assert_eq!(aperture(&vp, &p, [320, 200], [640, 400], false), full);
         vp[0] = f32::NAN;
-        assert_eq!(aperture(&vp, &p, [320, 200], [640, 400]), full);
+        assert_eq!(aperture(&vp, &p, [320, 200], [640, 400], false), full);
         vp = ident();
         vp[15] = -1.0;
-        assert_eq!(aperture(&vp, &p, [320, 200], [640, 400]), full);
+        assert_eq!(aperture(&vp, &p, [320, 200], [640, 400], false), full);
     }
 
     #[test]
     fn offscreen_bounds_are_clamped_and_may_be_empty() {
         let p = sheet([2.0, 2.0, 1.0], [3.0, 3.0, 2.0]);
-        let rect = aperture(&ident(), &p, [320, 200], [640, 400]);
+        let rect = aperture(&ident(), &p, [320, 200], [640, 400], false);
         assert_eq!(rect.offset, vk::Offset2D { x: 320, y: 200 });
         assert_eq!(rect.extent, vk::Extent2D { width: 0, height: 0 });
     }
@@ -111,7 +124,7 @@ mod tests {
             for angles in [[0.0; 3], [4.0, 5.0, 12.0], [-6.0, -8.0, -16.0]] {
                 let view = crate::View { origin: [0.0; 3], angles, fov_x: 90.0, ..Default::default() };
                 let vp = setup_view(&view, extent[0], extent[1]).vp;
-                let rect = aperture(&vp, &nested, extent, extent.map(|n| n * 2));
+                let rect = aperture(&vp, &nested, extent, extent.map(|n| n * 2), false);
                 assert!(rect.extent.width < extent[0], "fixture must exercise a bounded aperture");
                 for x in 0..=4 { for y in 0..=4 { for z in 0..=4 {
                     let p = [x, y, z].map(|v| v as f32 * 2.0 - 4.0);

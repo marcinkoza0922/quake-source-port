@@ -96,6 +96,7 @@ impl Renderer {
         alphas: [f32; 4],
         lm: &mut LightmapRequests,
         worlds: &mut PortalWorldCache,
+        teleport_ripples: bool,
     ) -> Vec<PortalDraw> {
         let planar_reflections = self.reflection_mode(set) == 1;
         let (Some(v), Some(w)) = (view, self.world.as_mut()) else {
@@ -185,7 +186,9 @@ impl Renderer {
                     ident(),
                     lm,
                 ));
-                let scissor = super::portal_scissor::aperture(&v.vp, &portal, portal_extent, texture_extent);
+                let scissor = super::portal_scissor::aperture(
+                    &v.vp, &portal, portal_extent, texture_extent, teleport_ripples,
+                );
                 Some(PortalDraw { portal, world, ubo, scissor, parent, depth, fte: Vec::new() })
             })
             .collect()

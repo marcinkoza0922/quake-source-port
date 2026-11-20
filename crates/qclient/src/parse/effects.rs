@@ -1,4 +1,5 @@
 use super::*;
+use crate::ImpactKind;
 
 impl ClientState {
     /// CL_ParseStartSoundPacket.
@@ -72,28 +73,18 @@ impl ClientState {
         match ty {
             TE_WIZSPIKE => {
                 let pos = pos_of(m);
-                self.shot_impacts.push((pos, false));
-                if !self.fte_effect("TE_WIZSPIKE", pos, 1.0) {
-                    self.run_particle_effect(pos, [0.0; 3], 20, 30);
-                }
+                self.impact_effect(ImpactKind::WizardSpike, pos);
                 self.tsound("wizard/hit.wav", pos);
             }
             TE_KNIGHTSPIKE => {
                 let pos = pos_of(m);
-                self.shot_impacts.push((pos, false));
-                if !self.fte_effect("TE_KNIGHTSPIKE", pos, 1.0) {
-                    self.run_particle_effect(pos, [0.0; 3], 226, 20);
-                }
+                self.impact_effect(ImpactKind::KnightSpike, pos);
                 self.tsound("hknight/hit.wav", pos);
             }
             TE_SPIKE | TE_SUPERSPIKE => {
                 let pos = pos_of(m);
-                self.weapon_impacts.push((1, pos));
-                let name = if ty == TE_SPIKE { "TE_SPIKE" } else { "TE_SUPERSPIKE" };
-                self.shot_impacts.push((pos, false));
-                if !self.fte_effect(name, pos, 1.0) {
-                    self.run_particle_effect(pos, [0.0; 3], 0, if ty == TE_SPIKE { 10 } else { 20 });
-                }
+                let kind = if ty == TE_SPIKE { ImpactKind::Spike } else { ImpactKind::SuperSpike };
+                self.impact_effect(kind, pos);
                 if self.rng.rand() % 5 != 0 {
                     self.tsound("weapons/tink1.wav", pos);
                 } else {
@@ -107,29 +98,16 @@ impl ClientState {
             }
             TE_GUNSHOT => {
                 let pos = pos_of(m);
-                self.weapon_impacts.push((0, pos));
-                self.shot_impacts.push((pos, false));
-                if !self.fte_effect("TE_GUNSHOT", pos, 20.0) {
-                    self.run_particle_effect(pos, [0.0; 3], 0, 20);
-                }
+                self.impact_effect(ImpactKind::Gunshot, pos);
             }
             TE_EXPLOSION => {
                 let pos = pos_of(m);
-                self.shot_impacts.push((pos, true));
-                self.weapon_impacts.push((2, pos));
-                if !self.fte_effect("TE_EXPLOSION", pos, 1.0) {
-                    self.particle_explosion(pos);
-                }
-                self.explosion_light(pos);
+                self.impact_effect(ImpactKind::Explosion, pos);
                 self.tsound("weapons/r_exp3.wav", pos);
             }
             TE_TAREXPLOSION => {
                 let pos = pos_of(m);
-                self.shot_impacts.push((pos, true));
-                self.weapon_impacts.push((2, pos));
-                if !self.fte_effect("TE_TAREXPLOSION", pos, 1.0) {
-                    self.blob_explosion(pos);
-                }
+                self.impact_effect(ImpactKind::TarExplosion, pos);
                 self.tsound("weapons/r_exp3.wav", pos);
             }
             TE_LIGHTNING1 => self.parse_beam(m, "progs/bolt.mdl"),
@@ -152,12 +130,7 @@ impl ClientState {
                 let pos = pos_of(m);
                 let start = m.byte();
                 let len = m.byte();
-                self.shot_impacts.push((pos, true));
-                self.weapon_impacts.push((2, pos));
-                if !self.fte_effect(&format!("TE_EXPLOSION2_{start}_{len}"), pos, 1.0) {
-                    self.particle_explosion2(pos, start, len);
-                }
-                self.explosion_light(pos);
+                self.impact_effect(ImpactKind::ColoredExplosion { start, len }, pos);
                 self.tsound("weapons/r_exp3.wav", pos);
             }
             crate::fte::TEDP_PARTICLERAIN => self.parse_dp_weather(m, false),
@@ -169,15 +142,6 @@ impl ClientState {
 
     pub(super) fn tsound(&mut self, name: &'static str, origin: [f32; 3]) {
         self.events.push(ClientEvent::TempSound { name, origin });
-    }
-
-    pub(super) fn explosion_light(&mut self, pos: [f32; 3]) {
-        let die = self.time + 0.5;
-        let dl = self.alloc_dlight(0);
-        dl.origin = pos;
-        dl.radius = 350.0;
-        dl.die = die;
-        dl.decay = 300.0;
     }
 }
 
@@ -195,5 +159,27 @@ mod impact_tests {
             cl.parse_tent(&mut MsgReader::new(&bytes)).unwrap();
             assert_eq!(cl.weapon_impacts.first().map(|e| e.0),kind);
         }
+    }
+
+    #[test]
+    fn deferred_weapon_impacts_wait_for_surface_routing() {
+        let mut cl = ClientState::new();
+        cl.defer_impact_effects();
+        cl.clear_state();
+        for ty in [
+            TE_GUNSHOT, TE_SPIKE, TE_SUPERSPIKE, TE_WIZSPIKE, TE_KNIGHTSPIKE,
+            TE_EXPLOSION, TE_TAREXPLOSION, TE_EXPLOSION2,
+        ] {
+            let bytes = [ty, 0, 0, 0, 0, 0, 0, 4, 8];
+            cl.parse_tent(&mut MsgReader::new(&bytes)).unwrap();
+        }
+        assert_eq!(cl.impact_effects.len(), 8);
+        assert!(cl.weapon_impacts.is_empty() && cl.shot_impacts.is_empty());
+        assert!(cl.particles.is_empty() && cl.fte_queue.is_empty() && cl.dlights.is_empty());
+
+        let impact = cl.impact_effects[5];
+        cl.emit_impact_effect(impact);
+        assert_eq!(cl.weapon_impacts, [(2, [0.0; 3])]);
+        assert!(!cl.particles.is_empty() && !cl.dlights.is_empty());
     }
 }

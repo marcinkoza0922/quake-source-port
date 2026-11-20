@@ -90,6 +90,7 @@ impl Host {
         };
         self.cl.mviewangles[1] = self.cl.mviewangles[0];
         self.cl.mviewangles[0] = angles;
+        self.cl.defer_impact_effects();
         let r = self.cl.parse_server_message(&data);
         self.cl.take_reliable_out();
         if let Err(e) = r {

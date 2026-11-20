@@ -35,6 +35,7 @@ impl ClientState {
         self.temp_entities.clear();
         self.events.clear();
         self.weapon_impacts.clear();
+        self.impact_effects.clear();
         self.shot_impacts.clear();
         self.blood_hits.clear();
         self.fte_queue.clear();
