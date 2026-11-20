@@ -31,9 +31,9 @@ pub(super) struct Pointer {
 }
 
 impl Host {
-    /// A demo the player started, not exported: the cursor is free.
+    /// A demo the player started, not exported and not in free-roam camera: the cursor is free.
     pub(super) fn demo_cursor(&self) -> bool {
-        self.demo.is_some() && self.demonum < 0 && self.timedemo.is_none() && !self.exporting()
+        self.demo.is_some() && self.demonum < 0 && self.timedemo.is_none() && !self.exporting() && self.freecam.cam.is_none()
     }
 
     /// Relative mouse only in game mode without a demo cursor; applied when

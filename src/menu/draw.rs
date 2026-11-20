@@ -149,7 +149,7 @@ impl Menu {
                 if page == Page::Crosshair { crate::reticle::preview(c, cv); }
                 self.draw_custom_notes(c, cv, page, n);
                 if matches!(page, Page::Export | Page::RenameDemo) { self.draw_dialog_notes(c, n); }
-                if page == Page::Join && self.servers.is_empty() && !self.searching {
+                if page == Page::Join && self.visible_servers().is_empty() && !self.searching {
                     let s = "no servers found yet";
                     c.text_center(320.0, PAGE_ROW0 + n as f32 * ROW_H + 8.0, s, TXT, MUTED);
                 }
@@ -372,10 +372,47 @@ impl Menu {
             }
             Item::Server(k) => {
                 if let Some(s) = self.servers.get(k) {
-                    let name: String = s.hostname.chars().take(20).collect();
-                    label(c, &name);
-                    let m: String = s.map.chars().take(10).collect();
-                    { txt(c, VALUE_X, y, &format!("{m:<10} {}/{}", s.players, s.max_players)); }
+                    let prefix = if s.favorite { "* " } else { "" };
+                    let raw_name: String = s.hostname.chars().take(if s.favorite { 18 } else { 20 }).collect();
+                    let full_name = format!("{prefix}{raw_name}");
+                    c.text_right(LABEL_R, y, &full_name, TXT, if s.favorite { GOLD_FG } else { FG });
+                    let m: String = s.map.chars().take(8).collect();
+                    let tag = s.protocol.tag();
+                    let ping = s.ping_ms.map_or_else(|| "--".into(), |ms| format!("{ms}ms"));
+                    let info = format!("{m:<8} {tag:<3} {}/{} {ping}", s.players, s.max_players);
+                    c.text_raw(VALUE_X, y, &info, TXT, FG);
+                }
+            }
+            Item::Browser(row) => {
+                match row {
+                    BrowserRow::SearchInternet => {
+                        let lbl = if self.searching { "Searching..." } else { "Search Internet" };
+                        c.text_center(320.0, y, lbl, TXT, GOLD_FG);
+                    }
+                    BrowserRow::HideEmpty => {
+                        let lbl = "Hide Empty";
+                        label(c, lbl);
+                        c.round_box(VALUE_X, y - 0.5, 9.0, 9.0, 1.5, [0.0, 0.0, 0.0, 0.5], Some(BORDER));
+                        if self.browser.hide_empty {
+                            c.round_box(VALUE_X + 2.0, y + 1.5, 5.0, 5.0, 1.0, GOLD_FG, None);
+                        }
+                    }
+                    _ => {
+                        let lbl = match row {
+                            BrowserRow::Source => "Source",
+                            BrowserRow::Protocol => "Protocol",
+                            BrowserRow::Mode => "Game Mode",
+                            BrowserRow::ModFilter => "Mod",
+                            BrowserRow::SortBy => "Sort By",
+                            _ => "",
+                        };
+                        label(c, lbl);
+                        let opts = self.browser_options(row);
+                        let idx = self.browser_option_index(row);
+                        if let Some(val) = opts.get(idx) {
+                            txt(c, VALUE_X, y, val);
+                        }
+                    }
                 }
             }
             Item::Bind { label: l, cmd } => {

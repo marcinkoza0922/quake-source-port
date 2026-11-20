@@ -256,6 +256,6 @@ fn nails_unpack() {
     b.byte((z & 255) as i32);
     b.byte(((z >> 8) | 4 << 4) as i32);
     b.byte(64);
-    qw.parse_nails(&mut MsgReader::new(&b.data));
+    qw.parse_nails(&mut MsgReader::new(&b.data), false);
     assert_eq!(qw.nails, [([100.0, -50.0, 8.0], [90.0, 90.0, 0.0])]);
 }

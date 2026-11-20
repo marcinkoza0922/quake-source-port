@@ -139,14 +139,23 @@ impl ClientState {
     /// CL_SendMove: the unreliable clc_move to send, or `None` for the first
     /// two moves of a level (they may carry stale input) or before signon.
     pub fn build_move(&mut self, cmd: &UserCmd) -> Option<Vec<u8>> {
+        self.build_move_dt(cmd, 1.0 / 72.0)
+    }
+
+    /// Like [`Self::build_move`], recording the elapsed frame duration `dt`
+    /// (in seconds) in the `PEXT2_PREDINFO` prediction journal.
+    pub fn build_move_dt(&mut self, cmd: &UserCmd, dt: f32) -> Option<Vec<u8>> {
         if self.signon < SIGNONS {
             return None;
         }
         let mut m = self.encode_move(cmd);
+        let seq = self.movemessages;
         self.movemessages += 1;
         if self.movemessages <= 2 {
             return None;
         }
+        let msec = (dt * 1000.0).round().clamp(1.0, 255.0) as u8;
+        self.movecmds[(seq & crate::pred::MOVECMDS_MASK) as usize] = crate::pred::PredMove { cmd: *cmd, msec };
         // Replacement-delta acks ride along (CL_SendMove).
         for a in self.ack_frames.drain(..) {
             m.push(crate::delta::CLCDP_ACKFRAME);

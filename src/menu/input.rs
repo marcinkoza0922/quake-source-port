@@ -514,18 +514,34 @@ impl Menu {
                         }
                         return out;
                     }
+                    Item::Browser(BrowserRow::SearchInternet) => {
+                        if enter && !self.searching {
+                            out.push(Action::Command("slist_internet\n".into()));
+                            out.push(Action::Sound("misc/menu2.wav"));
+                        }
+                        return out;
+                    }
                     Item::Run { run, .. } if enter => {
                         self.run(run, cv, &mut out);
                         return out;
                     }
-                    Item::Server(k) if enter => {
-                        if let Some(sv) = self.servers.get(k) {
-                            cv.set("_mp_address", &sv.address.clone());
-                            self.run(Run::Connect, cv, &mut out);
+                    Item::Server(k) => {
+                        if enter {
+                            if let Some(sv) = self.servers.get(k) {
+                                cv.set("_mp_address", &sv.connect_address());
+                                self.run(Run::Connect, cv, &mut out);
+                            }
+                        } else if (matches!(key, K_YBUTTON | K_XBUTTON) || key == b'f' as i32 || key == b'F' as i32 || key == b'*' as i32)
+                            && let Some(sv) = self.servers.get_mut(k)
+                        {
+                            sv.favorite = !sv.favorite;
+                            let addr = sv.connect_address();
+                            out.push(Action::Command(format!("server_fav \"{addr}\"\n")));
+                            out.push(Action::Sound("misc/menu2.wav"));
                         }
                         return out;
                     }
-                    Item::Run { .. } | Item::Server(_) => return out,
+                    Item::Run { .. } => return out,
                     Item::Bind { cmd, .. } => {
                         if enter {
                             self.capture = Some(self.opt_cursor);

@@ -151,6 +151,8 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("_mp_fraglimit", "0", CVAR_ARCHIVE),
     ("_mp_timelimit", "0", CVAR_ARCHIVE),
     ("_mp_map", "", CVAR_ARCHIVE),
+    ("net_masters", crate::net::browser::DEFAULT_NQ_MASTERS, CVAR_ARCHIVE),
+    ("net_qwmasters", crate::net::browser::DEFAULT_QW_MASTERS, CVAR_ARCHIVE),
     ("scr_showfps", "0", 0),
     ("scr_showframetime", "0", 0),
     ("scr_showcpu", "0", 0),

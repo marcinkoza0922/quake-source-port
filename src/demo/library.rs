@@ -43,11 +43,17 @@ impl DemoFile {
     }
 }
 
+fn is_demo_ext(p: &Path) -> bool {
+    p.extension().is_some_and(|x| {
+        x.eq_ignore_ascii_case("dem") || x.eq_ignore_ascii_case("qwd") || x.eq_ignore_ascii_case("mvd")
+    })
+}
+
 fn dem_files(dir: &Path, auto: bool) -> Vec<DemoFile> {
     let Ok(entries) = qcore::vfs::read_dir(dir) else { return Vec::new() };
     entries
         .into_iter()
-        .filter(|e| !e.is_dir && e.path.extension().is_some_and(|x| x.eq_ignore_ascii_case("dem")))
+        .filter(|e| !e.is_dir && is_demo_ext(&e.path))
         .map(|e| DemoFile {
             name: e.path.file_stem().map_or_else(String::new, |s| s.to_string_lossy().into_owned()),
             modified: qcore::vfs::modified(&e.path).ok().and_then(|t| t.duration_since(qcore::time::UNIX_EPOCH).ok()).map_or(0, |d| d.as_secs()),

@@ -9,6 +9,7 @@
 
 use qcore::anorms;
 pub mod delta;
+pub mod pred;
 mod addon_msgs;
 mod effects;
 mod fte;

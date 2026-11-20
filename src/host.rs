@@ -269,8 +269,10 @@ pub struct Host {
     /// deadline while one is expected (cl.expectingpingtimes).
     ping_next: f64,
     ping_expect: Option<f64>,
-    /// Running `slist`.
-    lan_search: Option<crate::net::LanSearch>,
+    /// Running `slist` or `slist_internet`.
+    lan_search: Option<crate::net::browser::ServerSearch>,
+    /// Saved Favorites and Recent servers (`<userdata>/servers.txt`).
+    pub saved_servers: crate::net::browser::SavedServers,
     autosave: crate::autosave::Tracker,
     death_handled: bool,
     /// FTE scripted particles.
@@ -426,6 +428,7 @@ impl Host {
             net_port: crate::net::DEFAULT_PORT,
             dedicated: false,
             lan_search: None,
+            saved_servers: crate::net::browser::SavedServers::load(&crate::userdata::root().join("servers.txt")),
             ping_next: 0.0,
             ping_expect: None,
         };
@@ -441,6 +444,7 @@ impl Host {
         h.sync_console_catalog();
         h.refresh_soundtracks();
         h.menu.hud_edit.reload_presets();
+        h.saved_servers.sync_into(&mut h.menu.servers);
         // 2026 update compat (ironwail host.c): word-wrap centerprints for mg3.
         let mg3 = h.server.core.fs.game_dirs().iter().any(|d| d.eq_ignore_ascii_case("mg3"));
         h.server.core.cvars.set("scr_usekfont", if mg3 { "1" } else { "0" });

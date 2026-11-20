@@ -378,7 +378,17 @@ impl Host {
                     impulse: self.pend_impulse,
                 };
                 let active = self.cl.signon == 4;
+                q.recording_qwd = self.recording.as_ref().is_some_and(|w| w.is_qwd());
                 q.send_cmd(cmd, self.realtime);
+                let tape = q.take_qwd_tape();
+                if !tape.is_empty()
+                    && let Some(w) = &mut self.recording
+                    && w.is_qwd()
+                    && let Err(e) = w.write_raw(&tape)
+                {
+                    self.con.print(&format!("demo write failed: {e}\n"));
+                    self.recording = None;
+                }
                 if active {
                     self.pend_attack = false;
                     self.pend_jump = false;
@@ -390,7 +400,7 @@ impl Host {
                 let mut cmd = self.last_cmd;
                 cmd.buttons = self.pend_attack as u16 | (self.pend_jump as u16) << 1;
                 cmd.impulse = self.pend_impulse;
-                if let Some(m) = self.cl.build_move(&cmd)
+                if let Some(m) = self.cl.build_move_dt(&cmd, sdt as f32)
                     && let Some(n) = &mut self.net_client
                 {
                     n.send_unreliable(&m, self.realtime);
@@ -448,6 +458,7 @@ impl Host {
             // Demos run at their playback speed (rewinding seeks instead).
             let cdt = if self.demo.is_some() { dt * f64::from(self.demo_speed()).max(0.0) } else { dt * timescale };
             self.cl.frame(cdt);
+            self.apply_nq_prediction();
             self.apply_qw_prediction();
         }
         for g in &mut self.guests {

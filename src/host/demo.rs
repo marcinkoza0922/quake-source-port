@@ -30,14 +30,23 @@ impl Host {
         true
     }
 
-    /// CL_PlayDemo_f: drop any game and start reading `name`(.dem).
+    /// CL_PlayDemo_f: drop any game and start reading `name`(.dem/.qwd/.mvd).
     pub(super) fn play_demo(&mut self, name: &str) {
         self.stop_game();
-        let file = if name.contains('.') { name.to_string() } else { format!("{name}.dem") };
-        // Recorded demos live in the user dir, which isn't a search path.
-        let data = self.server.core.fs.open(&file).or_else(|| qcore::vfs::read(&self.user_dir().join(&file)).ok());
-        let Some(data) = data else {
-            self.con.print(&qcore::ctr!("ERROR: couldn't open {}.\n", file));
+        let candidates: Vec<String> = if name.contains('.') {
+            vec![name.to_string()]
+        } else {
+            vec![format!("{name}.dem"), format!("{name}.qwd"), format!("{name}.mvd")]
+        };
+        let mut found = None;
+        for c in &candidates {
+            if let Some(d) = self.server.core.fs.open(c).or_else(|| qcore::vfs::read(&self.user_dir().join(c)).ok()) {
+                found = Some((c.clone(), d));
+                break;
+            }
+        }
+        let Some((file, data)) = found else {
+            self.con.print(&qcore::ctr!("ERROR: couldn't open {}.\n", candidates[0]));
             self.demonum = -1;
             return;
         };
@@ -88,12 +97,23 @@ impl Host {
     /// CL_Stop_f: end with svc_disconnect.
     pub(super) fn stop_recording(&mut self) {
         let Some(mut w) = self.recording.take() else { return };
+        if let Some(q) = &mut self.qw_client {
+            q.recording_qwd = false;
+        }
         let path = w.path().to_path_buf();
-        let r = w.write(self.cl.viewangles, &[qnet::protocol::SVC_DISCONNECT]).and_then(|_| w.finish());
+        let is_qwd = w.is_qwd();
+        let r = if is_qwd {
+            let end = qclient::qw::demo::encode_qwd_end(self.realtime as f32);
+            w.write_raw(&end).and_then(|_| w.finish())
+        } else {
+            w.write(self.cl.viewangles, &[qnet::protocol::SVC_DISCONNECT]).and_then(|_| w.finish())
+        };
         match r {
             Ok(()) => {
                 self.con.print(&qcore::ctr!("Completed demo\n"));
-                self.convert_demo(path);
+                if !is_qwd {
+                    self.convert_demo(path);
+                }
             }
             Err(e) => self.con.print(&format!("demo write failed: {e}\n")),
         }
@@ -154,7 +174,13 @@ impl Host {
             return;
         }
         let track = if c == 4 { a.argv(3).parse().unwrap_or(-1) } else { -1 };
-        let file = if name.ends_with(".dem") { name.to_string() } else { format!("{name}.dem") };
+        let is_qw = self.qw_client.is_some() && c == 2;
+        let default_ext = if is_qw { "qwd" } else { "dem" };
+        let file = if name.ends_with(".dem") || name.ends_with(".qwd") {
+            name.to_string()
+        } else {
+            format!("{name}.{default_ext}")
+        };
         let path = self.user_dir().join(file);
         if c > 2 {
             self.pending_record = Some((path, track));
@@ -184,10 +210,11 @@ impl Host {
         let map_part = if map.is_empty() { "demo" } else { &map };
         let stamp = crate::demo::stamp_now();
         let dir = self.user_dir();
-        let mut path = dir.join(format!("{map_part}_{stamp}.dem"));
+        let ext = if self.qw_client.is_some() { "qwd" } else { "dem" };
+        let mut path = dir.join(format!("{map_part}_{stamp}.{ext}"));
         let mut n = 2u32;
         while qcore::vfs::exists(&path) {
-            path = dir.join(format!("{map_part}_{stamp}_{n}.dem"));
+            path = dir.join(format!("{map_part}_{stamp}_{n}.{ext}"));
             n += 1;
         }
         self.record_at(&path, -1, true);
@@ -195,6 +222,22 @@ impl Host {
 
     fn record_at(&mut self, path: &std::path::Path, track: i32, connected: bool) {
         use qnet::protocol::*;
+        if path.extension().is_some_and(|e| e.eq_ignore_ascii_case("qwd"))
+            && let Some(q) = &mut self.qw_client
+        {
+            let inseq = q.incoming_sequence();
+            let header = q.qw.encode_qwd_header(self.realtime as f32, inseq);
+            match crate::demo::DemoWriter::create_qwd(path, &header) {
+                Ok(w) => {
+                    q.recording_qwd = true;
+                    let _ = q.take_qwd_tape();
+                    self.con.print(&qcore::ctr!("Recording to {}.\n", path.display()));
+                    self.recording = Some(w);
+                }
+                Err(e) => self.con.print(&qcore::ctr!("ERROR: couldn't create {}: {}\n", path.display(), e)),
+            }
+            return;
+        }
         self.start_recording(path, track);
         if !connected {
             return;

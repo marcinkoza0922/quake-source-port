@@ -302,6 +302,7 @@ impl Host {
             return false;
         }
         let Some(d) = &mut self.demo else { return false };
+        let is_mvd = d.is_mvd();
         let p: &mut Playback = &mut d.play;
         let held = |p: &mut Playback, key: i32, down: bool| match key {
             K_LEFTARROW | K_DPAD_LEFT => p.scrub = if down { -1 } else if p.scrub < 0 { 0 } else { p.scrub },
@@ -320,10 +321,29 @@ impl Host {
             p.shown_until = realtime + BAR_SECS;
         }
         let k = if (b'A' as i32..=b'Z' as i32).contains(&key) { key + 32 } else { key };
+        let in_freecam = self.freecam.cam.is_some();
         match k {
+            K_SPACE if in_freecam => return false,
             K_SPACE | K_ABUTTON | K_PAUSE => {
                 d.paused = !d.paused;
                 d.play.scrub = 0;
+            }
+            k if k == b'p' as i32 => {
+                d.paused = !d.paused;
+                d.play.scrub = 0;
+            }
+            k if k == b'f' as i32 => {
+                self.set_freecam(!in_freecam);
+            }
+            k if k == b']' as i32 && is_mvd => {
+                self.demo_switch_pov("next");
+            }
+            k if k == b'[' as i32 && is_mvd => {
+                self.demo_switch_pov("prev");
+            }
+            k if (b'1' as i32..=b'9' as i32).contains(&k) && is_mvd => {
+                let s = ((k - b'0' as i32) as u8).to_string();
+                self.demo_switch_pov(&s);
             }
             K_UPARROW | K_DPAD_UP => d.play.faster(&mut d.paused),
             K_DOWNARROW | K_DPAD_DOWN => d.play.slower(&mut d.paused),
@@ -365,6 +385,69 @@ impl Host {
     /// True while a clip is being rendered to video.
     pub(super) fn exporting(&self) -> bool {
         self.capture.as_ref().is_some_and(|c| c.export.is_some())
+    }
+
+    /// Switches the active player POV in a Multi-View Demo (`.mvd`) or toggles
+    /// the free-roam camera (`demo_pov free`).
+    pub(super) fn demo_switch_pov(&mut self, target: &str) {
+        let arg = target.trim();
+        if arg.eq_ignore_ascii_case("free") || arg.eq_ignore_ascii_case("roam") {
+            self.set_freecam(self.freecam.cam.is_none());
+            self.show_demo_bar();
+            return;
+        }
+        let Some(d) = &self.demo else {
+            self.print(&qcore::ctr!("Not playing a demo.\n"));
+            return;
+        };
+        if !d.is_mvd() {
+            self.print("demo_pov: POV switching requires an .mvd demo (use 'demo_pov free' or 'freecam' for free-roam camera)\n");
+            return;
+        }
+        let players = d.mvd_players().to_vec();
+        if players.is_empty() {
+            self.print("demo_pov: no active players in demo\n");
+            return;
+        }
+        let cur = d.mvd_pov().unwrap_or(players[0].0);
+        let cur_idx = players.iter().position(|(s, _)| *s == cur).unwrap_or(0);
+        let chosen = match arg.to_ascii_lowercase().as_str() {
+            "" | "next" | "+" => {
+                if self.freecam.cam.is_some() {
+                    Some(players[cur_idx].clone())
+                } else {
+                    Some(players[(cur_idx + 1) % players.len()].clone())
+                }
+            }
+            "prev" | "-" => Some(players[(cur_idx + players.len() - 1) % players.len()].clone()),
+            s => {
+                if let Ok(n) = s.parse::<usize>()
+                    && n >= 1
+                {
+                    players
+                        .get(n - 1)
+                        .cloned()
+                        .or_else(|| players.iter().find(|(slot, _)| *slot + 1 == n).cloned())
+                } else {
+                    players.iter().find(|(_, name)| name.to_ascii_lowercase().contains(s)).cloned()
+                }
+            }
+        };
+        let Some((slot, name)) = chosen else {
+            self.print(&format!("demo_pov: player '{arg}' not found\n"));
+            return;
+        };
+        self.set_freecam(false);
+        let now = self.demo_clock().unwrap_or(0.0);
+        let changed = self.demo.as_ref().is_some_and(|d| d.mvd_pov() != Some(slot));
+        if changed
+            && let Some(d) = &mut self.demo
+            && d.set_mvd_pov(slot)
+        {
+            self.demo_seek(now);
+        }
+        self.print(&format!("POV: {name} (#{})\n", slot + 1));
+        self.show_demo_bar();
     }
 }
 
@@ -418,5 +501,13 @@ pub(super) fn register(c: &mut Commands<Host>) {
         if let Some(d) = &mut h.demo {
             d.play.marks = [None; 2];
         }
+    });
+    c.add("demo_pov", |h, a| {
+        let arg = if a.argc() >= 2 { a.argv(1) } else { "next" };
+        h.demo_switch_pov(arg);
+    });
+    c.add("track", |h, a| {
+        let arg = if a.argc() >= 2 { a.argv(1) } else { "next" };
+        h.demo_switch_pov(arg);
     });
 }

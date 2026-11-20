@@ -3,13 +3,25 @@ use super::*;
 impl QwState {
     /// The NQ entity frame: svc_clientdata, players, packet entities, nails.
     pub(super) fn emit_frame(&mut self, b: &mut Nq) {
-        let fi = Self::frame_index(self.parsecount);
-        let me = self.frames[fi].playerstate[self.playernum];
+        let fi = Self::frame_index(if self.mvd { self.mvd_ent_seq.wrapping_sub(1) } else { self.parsecount });
+        let me = if self.mvd {
+            self.mvd_players[self.playernum]
+        } else {
+            self.frames[Self::frame_index(self.parsecount)].playerstate[self.playernum]
+        };
         self.emit_clientdata(b, &me);
         let muzzle = std::mem::take(&mut self.muzzle);
         for j in 0..MAX_CLIENTS {
-            let st = self.frames[fi].playerstate[j];
-            if st.messagenum != self.parsecount || !st.present {
+            let st = if self.mvd {
+                let p = &self.players[j];
+                if p.spectator || (p.name.is_empty() && !self.mvd_players[j].present) {
+                    continue;
+                }
+                self.mvd_players[j]
+            } else {
+                self.frames[Self::frame_index(self.parsecount)].playerstate[j]
+            };
+            if (!self.mvd && st.messagenum != self.parsecount) || !st.present {
                 continue;
             }
             let local = j == self.playernum;
@@ -26,11 +38,11 @@ impl QwState {
             if muzzle.contains(&j) {
                 effects |= crate::EF_MUZZLEFLASH;
             }
-            let model = if local && self.intermission.is_some() { 0 } else { st.modelindex };
-            let colormap = if st.modelindex == self.playerindex { j as i32 + 1 } else { 0 };
+            let model = if local && self.intermission.is_some() { 0 } else if st.modelindex == 0 && self.mvd { self.playerindex } else { st.modelindex };
+            let colormap = if model == self.playerindex { j as i32 + 1 } else { 0 };
             emit_update(b, j + 1, model, st.frame, colormap, st.skinnum, effects, origin, angles);
         }
-        if self.validsequence != 0 {
+        if !self.mvd && self.validsequence != 0 {
             let ents = &self.frames[fi].entities;
             for e in ents {
                 if e.modelindex == 0 && map_effects(e.effects) == 0 {
@@ -39,8 +51,11 @@ impl QwState {
                 emit_update(b, e.number, e.modelindex, e.frame, e.colormap, e.skinnum, map_effects(e.effects), e.origin, e.angles);
             }
         } else if let Some(prev) = self.last_valid_frame() {
-            // No usable delta this packet: keep showing the last valid entities.
+            // No usable delta this packet (or MVD player-only subpacket): keep showing the last valid entities.
             for e in prev {
+                if e.modelindex == 0 && map_effects(e.effects) == 0 {
+                    continue;
+                }
                 emit_update(b, e.number, e.modelindex, e.frame, e.colormap, e.skinnum, map_effects(e.effects), e.origin, e.angles);
             }
         }
