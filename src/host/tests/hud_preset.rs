@@ -40,9 +40,9 @@ fn presets_rebuild_the_layout_and_editing_makes_it_custom() {
     frames(&mut h);
     assert_eq!(kinds(&h), [Kind::StatusBar, Kind::Center, Kind::Notify, Kind::Captions]);
     assert!(h.hud_reserve() > 0.0, "the 3D view ends above the status bar");
-    // a change in the editor: custom, and the layout stays
+    // a change in the editor: custom, and the layout stays (second ENTER confirms the grid position prompt)
     h.exec_line("menu_hudedit");
-    h.exec_line("menu_keys INS DOWNARROW DOWNARROW DOWNARROW DOWNARROW RIGHTARROW DOWNARROW ENTER");
+    h.exec_line("menu_keys INS DOWNARROW DOWNARROW DOWNARROW DOWNARROW RIGHTARROW DOWNARROW ENTER ENTER");
     frames(&mut h);
     assert_eq!(h.cv("hud_preset"), 2.0);
     assert!(kinds(&h).contains(&Kind::Clock) && kinds(&h).contains(&Kind::StatusBar));
@@ -56,6 +56,20 @@ fn presets_rebuild_the_layout_and_editing_makes_it_custom() {
     h.exec_line("hudstyle 0");
     frames(&mut h);
     assert_eq!(kinds(&h)[0], Kind::StatusBar);
+    // Saved user presets can be loaded via hud_preset_load and switched from Options > HUD
+    h.menu.hud_edit.presets.push(crate::hud::presets::SavedPreset {
+        name: "Minimal".into(),
+        layout: "health@bl,i fps@tr center@mc notify@tl captions@bc".into(),
+    });
+    h.exec_line("hud_preset_load Minimal");
+    frames(&mut h);
+    assert_eq!(h.cv("hud_preset"), 2.0);
+    assert_eq!(h.cvs("hud_preset_name"), "Minimal");
+    assert!(kinds(&h).contains(&Kind::Fps) && !kinds(&h).contains(&Kind::StatusBar));
+    h.exec_line("hud_preset 0");
+    frames(&mut h);
+    assert_eq!(h.cvs("hud_preset_name"), "");
+    assert!(!kinds(&h).contains(&Kind::Fps));
 }
 
 #[test]

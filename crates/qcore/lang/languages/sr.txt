@@ -1196,9 +1196,6 @@ sr високо
 @ huge
 sr огромно
 
-@ immersive
-sr имерзивно
-
 @ intense
 sr интензивно
 
@@ -1605,6 +1602,30 @@ sr Трака стања
 @ Visibility
 sr Видљивост
 
+@ Alert
+sr Упозорење
+
+@ Live
+sr Уживо
+
+@ Sample
+sr Пример
+
+@ Undo
+sr Опозови
+
+@ Presets
+sr Подешавања
+
+@ Save As
+sr Сачувај као
+
+@ appear on change
+sr при промени
+
+@ hidden
+sr скривено
+
 @ big numbers
 sr велике цифре
 
@@ -1907,8 +1928,8 @@ sr Како се поглед изобличује под водом: класи
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 sr Занемарује окретање жироскопа спорије од оволико степени у секунди, да сакрије дрхтање руке
 
-@ Immersive: appears for a few seconds only when its value changes
-sr Имерзивно: појављује се на неколико секунди само кад се вредност промени
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+sr При промени: појављује се накратко само када се вредност промени; скривено: скрива без уклањања
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 sr Одржава текстуре оштрим на подовима и зидовима гледаним под оштрим углом

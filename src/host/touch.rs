@@ -102,6 +102,7 @@ impl Host {
                     let _ = self.menu.mouse_move(pos, &mut self.server.core.cvars);
                     self.menu_key(qinput::keys::K_MOUSE1);
                 }
+                self.menu.hud_edit.mouse_up(&mut self.server.core.cvars);
                 self.menu.mouse_up();
                 self.sync_key_dest();
             }

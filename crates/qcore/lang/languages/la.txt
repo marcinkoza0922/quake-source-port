@@ -1196,9 +1196,6 @@ la alta
 @ huge
 la ingens
 
-@ immersive
-la immersivus
-
 @ intense
 la intensus
 
@@ -1605,6 +1602,30 @@ la Virga status
 @ Visibility
 la Visibilitas
 
+@ Alert
+la Monitum
+
+@ Live
+la Vivum
+
+@ Sample
+la Exemplum
+
+@ Undo
+la Infectum
+
+@ Presets
+la Praeconfigurata
+
+@ Save As
+la Serva ut
+
+@ appear on change
+la in mutatione
+
+@ hidden
+la celatum
+
 @ big numbers
 la numeri magni
 
@@ -1907,8 +1928,8 @@ la Quomodo aspectus sub aqua distorqueatur: classicus totum quadrum undulat ut Q
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 la Rotationem gyroscopii tardiorem tot gradibus per secundam neglegit, ut tremor manus celetur
 
-@ Immersive: appears for a few seconds only when its value changes
-la Immersivus: paucas secundas tantum apparet cum valor mutatur
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+la In mutatione: paulisper apparet tantum cum valor mutatur; celatum: celat sine remotione
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 la Texturas in pavimentis et parietibus sub angulis acutis visis acutas servat

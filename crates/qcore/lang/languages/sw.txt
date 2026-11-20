@@ -1196,9 +1196,6 @@ sw juu
 @ huge
 sw kubwa mno
 
-@ immersive
-sw ya kuzama ndani
-
 @ intense
 sw kali
 
@@ -1605,6 +1602,30 @@ sw Upau wa hali
 @ Visibility
 sw Mwonekano
 
+@ Alert
+sw Tahadhari
+
+@ Live
+sw Moja kwa moja
+
+@ Sample
+sw Mfano
+
+@ Undo
+sw Tendua
+
+@ Presets
+sw Mipangilio
+
+@ Save As
+sw Hifadhi Kama
+
+@ appear on change
+sw ikibadilika
+
+@ hidden
+sw imefichwa
+
 @ big numbers
 sw tarakimu kubwa
 
@@ -1907,8 +1928,8 @@ sw Jinsi mwonekano unavyopotoka chini ya maji: Asili hutikisa skrini nzima kama 
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 sw Hupuuza mzunguko wa gyro ulio polepole kuliko nyuzi hizi kwa sekunde, kuficha mtetemo wa mkono
 
-@ Immersive: appears for a few seconds only when its value changes
-sw Ya kuzama ndani: huonekana kwa sekunde chache tu thamani yake inapobadilika
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+sw Ikibadilika: huonekana kwa muda mfupi tu thamani ikibadilika; imefichwa: huficha bila kuondoa
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 sw Huweka tekstua kali kwenye sakafu na kuta zinazoonekana kwa pembe kali

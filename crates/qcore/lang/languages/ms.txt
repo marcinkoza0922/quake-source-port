@@ -1196,9 +1196,6 @@ ms tinggi
 @ huge
 ms sangat besar
 
-@ immersive
-ms mengasyikkan
-
 @ intense
 ms sengit
 
@@ -1605,6 +1602,30 @@ ms Bar Status
 @ Visibility
 ms Keterlihatan
 
+@ Alert
+ms Amaran
+
+@ Live
+ms Langsung
+
+@ Sample
+ms Sampel
+
+@ Undo
+ms Buat asal
+
+@ Presets
+ms Pratetap
+
+@ Save As
+ms Simpan Sebagai
+
+@ appear on change
+ms bila berubah
+
+@ hidden
+ms tersembunyi
+
 @ big numbers
 ms nombor besar
 
@@ -1907,8 +1928,8 @@ ms Cara pandangan herot di bawah air: Klasik meriakkan seluruh skrin seperti Qua
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 ms Abaikan putaran giro yang lebih perlahan daripada nilai darjah sesaat ini, untuk menyembunyikan gegaran tangan
 
-@ Immersive: appears for a few seconds only when its value changes
-ms Mengasyikkan: muncul beberapa saat hanya apabila nilainya berubah
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+ms Bila berubah: muncul seketika hanya apabila nilai berubah; tersembunyi: sembunyikan tanpa membuang
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ms Mengekalkan tekstur tajam pada lantai dan dinding yang dilihat dari sudut curam

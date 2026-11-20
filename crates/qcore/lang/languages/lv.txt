@@ -1196,9 +1196,6 @@ lv augsts
 @ huge
 lv milzīgs
 
-@ immersive
-lv iekļaujošs
-
 @ intense
 lv intensīvs
 
@@ -1605,6 +1602,30 @@ lv Stāvokļa josla
 @ Visibility
 lv Redzamība
 
+@ Alert
+lv Trauksme
+
+@ Live
+lv Tiešraide
+
+@ Sample
+lv Paraugs
+
+@ Undo
+lv Atsaukt
+
+@ Presets
+lv Sagataves
+
+@ Save As
+lv Saglabāt kā
+
+@ appear on change
+lv mainoties
+
+@ hidden
+lv paslēpts
+
 @ big numbers
 lv lieli cipari
 
@@ -1907,8 +1928,8 @@ lv Kā skats kropļojas zem ūdens: klasisks viļņo visu ekrānu kā programmat
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 lv Ignorē žiroskopa pagriezienus, kas lēnāki par tik grādiem sekundē, lai slēptu roku trīcēšanu
 
-@ Immersive: appears for a few seconds only when its value changes
-lv Iekļaujošs: parādās uz dažām sekundēm tikai tad, kad mainās tā vērtība
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+lv Mainoties: īslaicīgi parādās tikai vērtībai mainoties; paslēpts: paslēpj bez dzēšanas
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 lv Saglabā tekstūras asas uz grīdām un sienām, kas redzamas slīpā leņķī

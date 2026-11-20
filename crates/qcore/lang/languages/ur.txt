@@ -1196,9 +1196,6 @@ ur زیادہ
 @ huge
 ur بہت بڑا
 
-@ immersive
-ur عمیق
-
 @ intense
 ur شدید
 
@@ -1605,6 +1602,30 @@ ur حالت کی پٹی
 @ Visibility
 ur نمائش
 
+@ Alert
+ur تنبیہ
+
+@ Live
+ur لائیو
+
+@ Sample
+ur نمونہ
+
+@ Undo
+ur واپس لیں
+
+@ Presets
+ur پری سیٹس
+
+@ Save As
+ur محفوظ کریں بطور
+
+@ appear on change
+ur تبدیلی پر
+
+@ hidden
+ur پوشیدہ
+
 @ big numbers
 ur بڑے ہندسے
 
@@ -1907,8 +1928,8 @@ ur پانی کے نیچے منظر کیسے بگڑے: کلاسک سافٹ ویئ
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 ur ہاتھ کی لرزش چھپانے کے لیے اتنے ڈگری فی سیکنڈ سے سست جائرو گردش نظر انداز کرتا ہے
 
-@ Immersive: appears for a few seconds only when its value changes
-ur عمیق: صرف قدر بدلنے پر چند سیکنڈ کے لیے ظاہر ہوتا ہے
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+ur تبدیلی پر: قدر بدلنے پر ہی چند سیکنڈ کے لیے ظاہر ہوتا ہے؛ پوشیدہ: ہٹائے بغیر چھپاتا ہے
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ur ترچھے زاویوں سے نظر آنے والے فرش اور دیواروں پر ٹیکسچر صاف رکھتا ہے

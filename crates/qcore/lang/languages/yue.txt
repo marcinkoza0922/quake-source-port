@@ -1196,9 +1196,6 @@ yue 高
 @ huge
 yue 特大
 
-@ immersive
-yue 沉浸
-
 @ intense
 yue 強烈
 
@@ -1605,6 +1602,30 @@ yue 狀態列
 @ Visibility
 yue 顯示
 
+@ Alert
+yue 警報
+
+@ Live
+yue 即時
+
+@ Sample
+yue 樣本
+
+@ Undo
+yue 復原
+
+@ Presets
+yue 預設
+
+@ Save As
+yue 另存新檔
+
+@ appear on change
+yue 變動時顯示
+
+@ hidden
+yue 隱藏
+
 @ big numbers
 yue 大數字
 
@@ -1907,8 +1928,8 @@ yue 水底畫面嘅扭曲方式：經典會好似軟件版Quake咁令成個畫�
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 yue 忽略低過每秒呢個度數嘅陀螺儀轉動，用嚟消除手震
 
-@ Immersive: appears for a few seconds only when its value changes
-yue 沉浸：淨係喺數值變化時顯示幾秒
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+yue 變動時顯示：數值改變嗰陣先短暫顯示；隱藏：唔刪除但收埋
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 yue 令斜角睇到嘅地板同牆身材質保持清晰

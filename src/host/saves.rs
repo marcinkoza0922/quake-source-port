@@ -112,6 +112,7 @@ impl Host {
         self.write_config();
         self.scan_mods();
         self.refresh_soundtracks();
+        self.menu.hud_edit.reload_presets();
         self.print(&qcore::ctr!("User data directory set to {}\n", root.display()));
     }
 

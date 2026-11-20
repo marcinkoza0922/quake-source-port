@@ -1196,9 +1196,6 @@ uk висока
 @ huge
 uk величезний
 
-@ immersive
-uk занурення
-
 @ intense
 uk сильний
 
@@ -1605,6 +1602,30 @@ uk Рядок стану
 @ Visibility
 uk Видимість
 
+@ Alert
+uk Тривога
+
+@ Live
+uk У грі
+
+@ Sample
+uk Зразок
+
+@ Undo
+uk Скасувати
+
+@ Presets
+uk Пресети
+
+@ Save As
+uk Зберегти як
+
+@ appear on change
+uk при зміні
+
+@ hidden
+uk приховано
+
 @ big numbers
 uk великі цифри
 
@@ -1907,8 +1928,8 @@ uk Як спотворюється огляд під водою: класичн�
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 uk Ігнорує обертання гіроскопа, повільніше за цю кількість градусів за секунду, щоб приховати тремтіння рук
 
-@ Immersive: appears for a few seconds only when its value changes
-uk Занурення: з’являється на кілька секунд лише при зміні значення
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+uk При зміні: з'являється ненадовго лише при зміні значення; приховано: ховає без видалення
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 uk Зберігає чіткість текстур підлог і стін, видимих під гострим кутом

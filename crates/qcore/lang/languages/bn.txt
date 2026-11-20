@@ -1196,9 +1196,6 @@ bn উচ্চ
 @ huge
 bn বিশাল
 
-@ immersive
-bn নিমগ্ন
-
 @ intense
 bn তীব্র
 
@@ -1605,6 +1602,30 @@ bn অবস্থা বার
 @ Visibility
 bn দৃশ্যমানতা
 
+@ Alert
+bn সতর্কতা
+
+@ Live
+bn লাইভ
+
+@ Sample
+bn নমুনা
+
+@ Undo
+bn পূর্বাবস্থা
+
+@ Presets
+bn প্রিসেট
+
+@ Save As
+bn নতুন নামে সংরক্ষণ
+
+@ appear on change
+bn পরিবর্তনে দেখান
+
+@ hidden
+bn লুকানো
+
 @ big numbers
 bn বড় সংখ্যা
 
@@ -1907,8 +1928,8 @@ bn জলের নিচে দৃশ্য কীভাবে বিকৃত 
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 bn হাতের কাঁপুনি লুকাতে প্রতি সেকেন্ডে এত ডিগ্রির চেয়ে ধীর জাইরো ঘূর্ণন উপেক্ষা করে
 
-@ Immersive: appears for a few seconds only when its value changes
-bn নিমগ্ন: মান বদলালে শুধু কয়েক সেকেন্ডের জন্য দেখা যায়
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+bn পরিবর্তনে দেখান: মান পরিবর্তিত হলেই অল্প সময়ের জন্য দেখায়; লুকানো: না সরিয়ে লুকায়
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 bn তির্যক কোণে দেখা মেঝে ও দেয়ালে টেক্সচার স্পষ্ট রাখে

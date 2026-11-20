@@ -1196,9 +1196,6 @@ he גבוהה
 @ huge
 he ענק
 
-@ immersive
-he סוחף
-
 @ intense
 he עז
 
@@ -1605,6 +1602,30 @@ he שורת מצב
 @ Visibility
 he נראות
 
+@ Alert
+he התראה
+
+@ Live
+he חי
+
+@ Sample
+he דוגמה
+
+@ Undo
+he בטל
+
+@ Presets
+he ערכות מוגדרות
+
+@ Save As
+he שמור בשם
+
+@ appear on change
+he בשינוי
+
+@ hidden
+he מוסתר
+
 @ big numbers
 he ספרות גדולות
 
@@ -1907,8 +1928,8 @@ he איך המבט מתעוות מתחת למים: קלאסי מגלגל את כ
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 he מתעלם מסיבוב ג'ירו איטי ממספר המעלות לשנייה הזה, כדי להסתיר רעד ידיים
 
-@ Immersive: appears for a few seconds only when its value changes
-he סוחף: מופיע לכמה שניות רק כשהערך שלו משתנה
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+he בשינוי: מופיע לזמן קצר רק כשהערך משתנה; מוסתר: מסתיר בלי להסיר
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 he שומר על טקסטורות חדות ברצפות וקירות שנראים בזווית חדה

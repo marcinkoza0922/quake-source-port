@@ -1196,9 +1196,6 @@ mt għolja
 @ huge
 mt enormi
 
-@ immersive
-mt immersiv
-
 @ intense
 mt intens
 
@@ -1605,6 +1602,30 @@ mt Virga tal-istat
 @ Visibility
 mt Viżibbiltà
 
+@ Alert
+mt Twissija
+
+@ Live
+mt Dirett
+
+@ Sample
+mt Kampjun
+
+@ Undo
+mt Ħassar l-aħħar
+
+@ Presets
+mt Presets
+
+@ Save As
+mt Issejvja bħala
+
+@ appear on change
+mt mal-bidla
+
+@ hidden
+mt moħbi
+
 @ big numbers
 mt numri kbar
 
@@ -1907,8 +1928,8 @@ mt Kif titgħawweġ il-veduta taħt l-ilma: Klassiku jmewweġ l-iskrin kollu bħ
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 mt Jinjora r-rotazzjoni tal-gyro iktar bil-mod minn dawn il-gradi kull sekonda, biex jaħbi r-rogħda tal-idejn
 
-@ Immersive: appears for a few seconds only when its value changes
-mt Immersiv: jidher għal ftit sekondi biss meta jinbidel il-valur tiegħu
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+mt Mal-bidla: jidher fil-qosor biss meta jinbidel il-valur; moħbi: jaħbi mingħajr ma jneħħi
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 mt Iżomm it-tessituri ċari fuq l-art u l-ħitan li jidhru minn angoli wieqfa

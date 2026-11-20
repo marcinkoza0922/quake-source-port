@@ -1196,9 +1196,6 @@ pt alta
 @ huge
 pt enorme
 
-@ immersive
-pt imersivo
-
 @ intense
 pt intenso
 
@@ -1605,6 +1602,30 @@ pt Barra de estado
 @ Visibility
 pt Visibilidade
 
+@ Alert
+pt Alerta
+
+@ Live
+pt Em direto
+
+@ Sample
+pt Exemplo
+
+@ Undo
+pt Desfazer
+
+@ Presets
+pt Predefinições
+
+@ Save As
+pt Guardar como
+
+@ appear on change
+pt ao mudar
+
+@ hidden
+pt oculto
+
 @ big numbers
 pt números grandes
 
@@ -1907,8 +1928,8 @@ pt Como a vista se distorce debaixo de água: clássico ondula o ecrã inteiro c
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 pt Ignora rotações do giroscópio mais lentas do que estes graus por segundo, para esconder o tremor da mão
 
-@ Immersive: appears for a few seconds only when its value changes
-pt Imersivo: aparece durante alguns segundos só quando o valor muda
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+pt Ao mudar: aparece brevemente apenas quando o valor muda; oculto: oculta sem remover
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 pt Mantém nítidas as texturas de chãos e paredes vistos em ângulos muito inclinados

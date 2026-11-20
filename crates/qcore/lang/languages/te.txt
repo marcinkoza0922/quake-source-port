@@ -1196,9 +1196,6 @@ te అధికం
 @ huge
 te భారీ
 
-@ immersive
-te లీనమయ్యే
-
 @ intense
 te తీవ్రం
 
@@ -1605,6 +1602,30 @@ te స్థితి పట్టీ
 @ Visibility
 te కనిపించడం
 
+@ Alert
+te హెచ్చరిక
+
+@ Live
+te లైవ్
+
+@ Sample
+te నమూనా
+
+@ Undo
+te రద్దు చేయి
+
+@ Presets
+te ప్రీసెట్లు
+
+@ Save As
+te ఇలా సేవ్ చేయి
+
+@ appear on change
+te మారినప్పుడు
+
+@ hidden
+te దాచినది
+
 @ big numbers
 te పెద్ద అంకెలు
 
@@ -1907,8 +1928,8 @@ te నీటి అడుగున వీక్షణ ఎలా వక్రీ�
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 te చేతి వణుకును దాచడానికి, సెకనుకు ఇన్ని డిగ్రీల కంటే నెమ్మదైన గైరో భ్రమణాన్ని పట్టించుకోదు
 
-@ Immersive: appears for a few seconds only when its value changes
-te లీనమయ్యే: విలువ మారినప్పుడు మాత్రమే కొన్ని సెకన్లు కనిపిస్తుంది
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+te మారినప్పుడు: విలువ మారినప్పుడు మాత్రమే కొద్దిసేపు కనిపిస్తుంది; దాచినది: తొలగించకుండా దాస్తుంది
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 te ఏటవాలు కోణాల్లో కనిపించే నేలలు, గోడలపై టెక్స్చర్‌లను స్పష్టంగా ఉంచుతుంది

@@ -1196,9 +1196,6 @@ km ខ្ពស់
 @ huge
 km ធំ​សម្បើម
 
-@ immersive
-km ស៊ីជម្រៅ
-
 @ intense
 km ខ្លាំង
 
@@ -1605,6 +1602,30 @@ km របារ​ស្ថានភាព
 @ Visibility
 km ភាព​មើល​ឃើញ
 
+@ Alert
+km ការ​ព្រមាន
+
+@ Live
+km ផ្ទាល់
+
+@ Sample
+km គំរូ
+
+@ Undo
+km មិន​ធ្វើ​វិញ
+
+@ Presets
+km ការ​កំណត់​ជា​មុន
+
+@ Save As
+km រក្សា​ទុក​ជា
+
+@ appear on change
+km ពេល​ផ្លាស់​ប្ដូរ
+
+@ hidden
+km លាក់
+
 @ big numbers
 km លេខ​ធំ
 
@@ -1907,8 +1928,8 @@ km របៀប​ដែល​ទិដ្ឋភាព​បង្ខូច​�
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 km មិន​អើពើ​ការ​បង្វិល​ជីរ៉ូ​ដែល​យឺត​ជាង​ចំនួន​ដឺក្រេ​ក្នុង​មួយ​វិនាទី​នេះ ដើម្បី​លាក់​ការ​ញ័រ​ដៃ
 
-@ Immersive: appears for a few seconds only when its value changes
-km ស៊ីជម្រៅ: បង្ហាញ​តែ​ពីរ​បី​វិនាទី​ពេល​តម្លៃ​របស់​វា​ប្ដូរ
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+km ពេល​ផ្លាស់​ប្ដូរ៖ បង្ហាញ​មួយ​ភ្លែត​តែ​ពេល​តម្លៃ​ប្ដូរ; លាក់៖ លាក់​ដោយ​មិន​លុប
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 km រក្សា​វាយនភាព​ឱ្យ​ច្បាស់​លើ​កម្រាល​និង​ជញ្ជាំង​ដែល​មើល​ពី​មុំ​ចោត

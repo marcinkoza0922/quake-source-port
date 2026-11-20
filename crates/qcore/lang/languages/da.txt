@@ -1196,9 +1196,6 @@ da høj
 @ huge
 da enorm
 
-@ immersive
-da indlevende
-
 @ intense
 da intens
 
@@ -1605,6 +1602,30 @@ da Statuslinje
 @ Visibility
 da Synlighed
 
+@ Alert
+da Alarm
+
+@ Live
+da Live
+
+@ Sample
+da Eksempel
+
+@ Undo
+da Fortryd
+
+@ Presets
+da Forudindstillinger
+
+@ Save As
+da Gem som
+
+@ appear on change
+da ved ændring
+
+@ hidden
+da skjult
+
 @ big numbers
 da store tal
 
@@ -1907,8 +1928,8 @@ da Hvordan visningen forvrænges under vand: klassisk får hele skærmen til at 
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 da Ignorerer gyrodrejning langsommere end så mange grader pr. sekund for at skjule rysten på hånden
 
-@ Immersive: appears for a few seconds only when its value changes
-da Indlevende: vises kun i nogle få sekunder, når værdien ændrer sig
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+da Ved ændring: vises kortvarigt kun når værdien ændres; skjult: skjuler uden at fjerne
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 da Holder teksturer skarpe på gulve og vægge set fra skrå vinkler

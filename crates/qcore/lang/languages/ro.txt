@@ -1196,9 +1196,6 @@ ro ridicată
 @ huge
 ro enormă
 
-@ immersive
-ro imersiv
-
 @ intense
 ro intens
 
@@ -1605,6 +1602,30 @@ ro Bară de stare
 @ Visibility
 ro Vizibilitate
 
+@ Alert
+ro Alertă
+
+@ Live
+ro Live
+
+@ Sample
+ro Exemplu
+
+@ Undo
+ro Anulează
+
+@ Presets
+ro Presetări
+
+@ Save As
+ro Salvează ca
+
+@ appear on change
+ro la schimbare
+
+@ hidden
+ro ascuns
+
 @ big numbers
 ro cifre mari
 
@@ -1907,8 +1928,8 @@ ro Cum se distorsionează privirea sub apă: Clasic unduiește tot ecranul ca Qu
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 ro Ignoră rotirile giroscopului mai lente decât acest număr de grade pe secundă, pentru a ascunde tremurul mâinii
 
-@ Immersive: appears for a few seconds only when its value changes
-ro Imersiv: apare câteva secunde doar când valoarea sa se schimbă
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+ro La schimbare: apare scurt doar când valoarea se schimbă; ascuns: ascunde fără a șterge
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ro Păstrează texturile clare pe podele și pereți văzuți din unghiuri ascuțite

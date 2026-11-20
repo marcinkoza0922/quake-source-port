@@ -1196,9 +1196,6 @@ sv hög
 @ huge
 sv enorm
 
-@ immersive
-sv inlevelse
-
 @ intense
 sv intensiv
 
@@ -1605,6 +1602,30 @@ sv Statusrad
 @ Visibility
 sv Synlighet
 
+@ Alert
+sv Varning
+
+@ Live
+sv Live
+
+@ Sample
+sv Exempel
+
+@ Undo
+sv Ångra
+
+@ Presets
+sv Förval
+
+@ Save As
+sv Spara som
+
+@ appear on change
+sv vid ändring
+
+@ hidden
+sv dold
+
 @ big numbers
 sv stora siffror
 
@@ -1907,8 +1928,8 @@ sv Hur vyn förvrängs under vatten: klassisk låter hela skärmen krusa sig som
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 sv Ignorerar gyrorotation långsammare än så många grader per sekund, för att dölja handskakningar
 
-@ Immersive: appears for a few seconds only when its value changes
-sv Inlevelse: visas några sekunder bara när värdet ändras
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+sv Vid ändring: visas kort bara när värdet ändras; dold: döljer utan att ta bort
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 sv Håller texturer skarpa på golv och väggar som ses i branta vinklar

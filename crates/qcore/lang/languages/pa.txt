@@ -1196,9 +1196,6 @@ pa ਉੱਚ
 @ huge
 pa ਬਹੁਤ ਵੱਡਾ
 
-@ immersive
-pa ਡੁੱਬਵਾਂ
-
 @ intense
 pa ਤੀਬਰ
 
@@ -1605,6 +1602,30 @@ pa ਹਾਲਤ ਪੱਟੀ
 @ Visibility
 pa ਦਿੱਖ
 
+@ Alert
+pa ਚੇਤਾਵਨੀ
+
+@ Live
+pa ਲਾਈਵ
+
+@ Sample
+pa ਨਮੂਨਾ
+
+@ Undo
+pa ਵਾਪਸ
+
+@ Presets
+pa ਪ੍ਰੀਸੈੱਟ
+
+@ Save As
+pa ਇਸ ਤਰ੍ਹਾਂ ਸੰਭਾਲੋ
+
+@ appear on change
+pa ਬਦਲਣ ਤੇ
+
+@ hidden
+pa ਲੁਕਿਆ
+
 @ big numbers
 pa ਵੱਡੇ ਅੰਕ
 
@@ -1907,8 +1928,8 @@ pa ਪਾਣੀ ਹੇਠਾਂ ਦ੍ਰਿਸ਼ ਕਿਵੇਂ ਵਿਗੜ�
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 pa ਹੱਥ ਦੀ ਕੰਬਣੀ ਲੁਕਾਉਣ ਲਈ ਇੰਨੀਆਂ ਡਿਗਰੀਆਂ ਪ੍ਰਤੀ ਸਕਿੰਟ ਤੋਂ ਹੌਲੀ ਜਾਇਰੋ ਘੁਮਾਉ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਦਾ ਹੈ
 
-@ Immersive: appears for a few seconds only when its value changes
-pa ਡੁੱਬਵਾਂ: ਸਿਰਫ਼ ਮੁੱਲ ਬਦਲਣ 'ਤੇ ਕੁਝ ਸਕਿੰਟਾਂ ਲਈ ਦਿਸਦਾ ਹੈ
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+pa ਬਦਲਣ ਤੇ: ਮੁੱਲ ਬਦਲਣ ਤੇ ਹੀ ਕੁਝ ਸਕਿੰਟਾਂ ਲਈ ਦਿਖਦਾ ਹੈ; ਲੁਕਿਆ: ਹਟਾਏ ਬਿਨਾਂ ਲੁਕਾਉਂਦਾ ਹੈ
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 pa ਤਿੱਖੇ ਕੋਣਾਂ ਤੋਂ ਦਿਸਦੇ ਫ਼ਰਸ਼ਾਂ ਅਤੇ ਕੰਧਾਂ 'ਤੇ ਟੈਕਸਚਰ ਸਾਫ਼ ਰੱਖਦਾ ਹੈ

@@ -1196,9 +1196,6 @@ fa زیاد
 @ huge
 fa بسیار بزرگ
 
-@ immersive
-fa غوطه‌ور
-
 @ intense
 fa شدید
 
@@ -1605,6 +1602,30 @@ fa نوار وضعیت
 @ Visibility
 fa نمایانی
 
+@ Alert
+fa هشدار
+
+@ Live
+fa زنده
+
+@ Sample
+fa نمونه
+
+@ Undo
+fa واگرد
+
+@ Presets
+fa پیش‌تنظیم‌ها
+
+@ Save As
+fa ذخیره با نام
+
+@ appear on change
+fa هنگام تغییر
+
+@ hidden
+fa پنهان
+
 @ big numbers
 fa ارقام بزرگ
 
@@ -1907,8 +1928,8 @@ fa اعوجاج دید زیر آب: کلاسیک کل صفحه را مانند Q
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 fa چرخش ژیروسکوپ کندتر از این تعداد درجه در ثانیه را نادیده می‌گیرد تا لرزش دست پنهان شود
 
-@ Immersive: appears for a few seconds only when its value changes
-fa غوطه‌ور: فقط هنگام تغییر مقدارش چند ثانیه نمایان می‌شود
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+fa هنگام تغییر: فقط هنگام تغییر مقدار برای چند ثانیه نمایش داده می‌شود؛ پنهان: بدون حذف پنهان می‌کند
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 fa بافت‌های کف و دیوارهایی را که با زاویه‌ی تند دیده می‌شوند تیز نگه می‌دارد

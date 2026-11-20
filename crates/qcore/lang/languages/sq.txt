@@ -1196,9 +1196,6 @@ sq e lartë
 @ huge
 sq shumë i madh
 
-@ immersive
-sq zhytës
-
 @ intense
 sq intensiv
 
@@ -1605,6 +1602,30 @@ sq Shiriti i gjendjes
 @ Visibility
 sq Dukshmëria
 
+@ Alert
+sq Alarm
+
+@ Live
+sq Drejtpërdrejt
+
+@ Sample
+sq Shembull
+
+@ Undo
+sq Zhbëj
+
+@ Presets
+sq Paracaktimet
+
+@ Save As
+sq Ruaj si
+
+@ appear on change
+sq në ndryshim
+
+@ hidden
+sq fshehur
+
 @ big numbers
 sq shifra të mëdha
 
@@ -1907,8 +1928,8 @@ sq Si shtrembërohet pamja nën ujë: Klasik valëzon gjithë ekranin si Quake m
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 sq Shpërfill rrotullimin e xhiros më të ngadaltë se kaq gradë në sekondë, për të fshehur dridhjen e dorës
 
-@ Immersive: appears for a few seconds only when its value changes
-sq Zhytës: shfaqet për pak sekonda vetëm kur ndryshon vlera
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+sq Në ndryshim: shfaqet shkurt vetëm kur vlera ndryshon; fshehur: fsheh pa fshirë
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 sq I mban teksturat të mprehta në dysheme dhe mure të para në kënde të pjerrëta

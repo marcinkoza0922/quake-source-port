@@ -5,7 +5,7 @@
 use qcore::cvar::Cvars;
 use qinput::keys::*;
 
-use super::editor::{Drag, Editor, Out, Row, TITLE_H, W, layout, save, sound};
+use super::editor::{CVAR, Drag, Editor, Out, PRESET, Row, TITLE_H, W, layout, save, sound};
 use super::editor_rows::Prop;
 use super::layout::Layout;
 use super::place::{self, Rect};
@@ -33,19 +33,22 @@ impl Editor {
         matches!(self.drag, Some(Drag::Pad { .. }))
     }
 
-    pub(super) fn start_move(&mut self, l: &Layout) -> Out {
-        let Some(e) = l.elems.get(self.sel) else { return Out::default() };
+    pub(super) fn start_move(&mut self, l: &Layout, cv: &Cvars) -> Out {
+        let Some(sel) = self.sel else { return Out::default() };
+        let Some(e) = l.elems.get(sel) else { return Out::default() };
         self.popup = None;
         self.typing = None;
         self.confirm_reset = false;
-        let want = self.rects.get(self.sel).map(|r| (r.x, r.y));
-        self.drag = Some(Drag::Pad { elem: self.sel, orig: (e.x, e.y), want });
+        let origin = self.rects.get(sel).copied().unwrap_or_default();
+        let want = self.rects.get(sel).map(|r| (r.x, r.y));
+        let before = self.snapshot(cv);
+        self.drag = Some(Drag::Pad { elem: sel, orig: (e.x, e.y), origin, want, before });
         sound("misc/menu2.wav")
     }
 
     /// Nudge or smoothly move the element currently in controller Move mode.
     fn move_elem_by(&mut self, dx: f32, dy: f32, l: &mut Layout, cv: &mut Cvars) {
-        let Some(Drag::Pad { elem, orig, mut want }) = self.drag else { return };
+        let Some(Drag::Pad { elem, orig, origin, mut want, before }) = self.drag.clone() else { return };
         let Some(e) = l.elems.get_mut(elem) else {
             self.drag = None;
             return;
@@ -55,8 +58,12 @@ impl Editor {
             let nx = (wx + dx).clamp(0.0, (self.geo.vw - r.w).max(0.0));
             let ny = (wy + dy).clamp(0.0, (self.geo.vh - r.h).max(0.0));
             want = Some((nx, ny));
-            self.drag = Some(Drag::Pad { elem, orig, want });
-            let (ox, oy) = place::offset_for(e, Rect { x: nx, y: ny, ..r }, self.geo.vw, self.geo.vh);
+            self.drag = Some(Drag::Pad { elem, orig, origin, want, before });
+            let moved = Rect { x: nx, y: ny, ..r };
+            let others: Vec<Rect> = self.rects.iter().enumerate().filter(|&(j, _)| j != elem).map(|(_, &o)| o).collect();
+            let guides = place::snap_rect(moved, &others, self.geo.vw, self.geo.vh, 0.0);
+            self.snap_guides = (guides.guides_x, guides.guides_y);
+            let (ox, oy) = place::offset_for(e, moved, self.geo.vw, self.geo.vh);
             if (ox, oy) != (e.x, e.y) {
                 (e.x, e.y) = (ox, oy);
                 save(cv, l);
@@ -70,24 +77,30 @@ impl Editor {
 
     /// Keys handled while moving an element with the controller.
     pub(super) fn pad_move_key(&mut self, key: i32, l: &mut Layout, cv: &mut Cvars) -> Out {
+        let nudge = if self.shift { 8.0 } else { 1.0 };
         match key {
             K_ABUTTON | K_ENTER | K_KP_ENTER => {
-                self.drag = None;
+                if let Some(drag) = self.drag.take() {
+                    self.commit_drag(drag, cv);
+                }
                 sound("misc/menu2.wav")
             }
             K_BBUTTON | K_ESCAPE => {
-                if let Some(Drag::Pad { elem, orig, .. }) = self.drag.take()
-                    && let Some(e) = l.elems.get_mut(elem)
-                    && (e.x, e.y) != orig
-                {
-                    (e.x, e.y) = orig;
-                    save(cv, l);
+                self.snap_guides.0.clear();
+                self.snap_guides.1.clear();
+                if let Some(Drag::Pad { before, .. }) = self.drag.take() {
+                    cv.set(CVAR, &before.layout);
+                    cv.set(PRESET, &before.preset);
+                    cv.set(super::presets::PRESET_NAME, &before.preset_name);
                 }
                 sound("misc/menu3.wav")
             }
             K_XBUTTON => {
-                self.drag = None;
-                self.focus_props(l)
+                if let Some(drag) = self.drag.take() {
+                    self.commit_drag(drag, cv);
+                }
+                let updated = layout(cv);
+                self.focus_props(&updated)
             }
             K_RSHOULDER => self.toggle_collapse(),
             K_LTRIGGER | K_RTRIGGER => {
@@ -95,28 +108,33 @@ impl Editor {
                 self.scale_selected(dir, l, cv)
             }
             K_START => {
-                self.drag = None;
+                if let Some(drag) = self.drag.take() {
+                    self.commit_drag(drag, cv);
+                }
                 Out { sound: Some("misc/menu2.wav"), exit: true }
             }
             K_DPAD_UP | K_UPARROW | K_KP_UPARROW => {
-                self.move_elem_by(0.0, -1.0, l, cv);
+                self.move_elem_by(0.0, -nudge, l, cv);
                 Out::default()
             }
             K_DPAD_DOWN | K_DOWNARROW | K_KP_DOWNARROW => {
-                self.move_elem_by(0.0, 1.0, l, cv);
+                self.move_elem_by(0.0, nudge, l, cv);
                 Out::default()
             }
             K_DPAD_LEFT | K_LEFTARROW => {
-                self.move_elem_by(-1.0, 0.0, l, cv);
+                self.move_elem_by(-nudge, 0.0, l, cv);
                 Out::default()
             }
             K_DPAD_RIGHT | K_RIGHTARROW => {
-                self.move_elem_by(1.0, 0.0, l, cv);
+                self.move_elem_by(nudge, 0.0, l, cv);
                 Out::default()
             }
             K_MOUSE1 => {
-                self.drag = None;
-                self.click(l, cv)
+                if let Some(drag) = self.drag.take() {
+                    self.commit_drag(drag, cv);
+                }
+                let mut updated = layout(cv);
+                self.click(&mut updated, cv)
             }
             _ => Out::default(),
         }
@@ -146,7 +164,8 @@ impl Editor {
 
     /// Step scale of the selected element (if scalable).
     pub(super) fn scale_selected(&mut self, dir: i32, l: &mut Layout, cv: &mut Cvars) -> Out {
-        let Some(e) = l.elems.get(self.sel) else { return Out::default() };
+        let Some(sel) = self.sel else { return Out::default() };
+        let Some(e) = l.elems.get(sel) else { return Out::default() };
         if e.kind.is_message() {
             return Out::default();
         }
@@ -156,7 +175,10 @@ impl Editor {
     /// Expand the dialog (if collapsed) and focus the first property of the selected element.
     pub(super) fn focus_props(&mut self, l: &Layout) -> Out {
         self.collapsed = false;
-        if let Some(p) = l.elems.get(self.sel).and_then(|e| super::editor_rows::props(e.kind).first().copied()) {
+        if self.sel.is_none() && !l.elems.is_empty() {
+            self.select(0, l);
+        }
+        if let Some(p) = self.sel.and_then(|i| l.elems.get(i)).and_then(|e| super::editor_rows::props(e.kind).first().copied()) {
             self.cursor_to(Row::Prop(p), l);
             sound("misc/menu1.wav")
         } else {

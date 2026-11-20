@@ -23,9 +23,14 @@ pub enum Prop {
     Opt(usize),
 }
 
-const SHOW: &[(&str, f32)] = &[("always", 0.0), ("immersive", 1.0)];
 /// Coordinate labels are the same in every language.
 pub const AXES: [&str; 2] = ["X", "Y"];
+
+/// True when `e` is still at its chosen anchor's default offset.
+pub fn is_at_anchor(e: &Elem) -> bool {
+    let d = Elem::new(e.kind, e.anchor);
+    (e.x - d.x).abs() < 0.5 && (e.y - d.y).abs() < 0.5
+}
 
 /// The rows `k` has, in order.
 pub fn props(k: Kind) -> Vec<Prop> {
@@ -39,7 +44,7 @@ pub fn props(k: Kind) -> Vec<Prop> {
     if !k.is_message() {
         out.extend([Prop::Scale, Prop::Opacity]);
     }
-    if k.can_fade() {
+    if k.has_visibility() {
         out.push(Prop::Show);
     }
     if k.has_background() {
@@ -97,11 +102,25 @@ pub fn value_text(p: Prop, e: &Elem, cv: &Cvars) -> String {
         Prop::Size => num(e.size),
         Prop::Scale => format!("{}x", num(e.scale)),
         Prop::Opacity => format!("{}%", (e.opacity * 100.0).round()),
-        Prop::Show => SHOW[usize::from(e.fade)].0.to_string(),
+        Prop::Show => {
+            if e.hidden {
+                "hidden".to_string()
+            } else if e.fade && e.kind.can_fade() {
+                "appear on change".to_string()
+            } else {
+                "always".to_string()
+            }
+        }
         Prop::Background => if e.bg { "on" } else { "off" }.to_string(),
         Prop::TextColor => choice_text(TEXT_COLOR, f32::from(e.color)),
         Prop::LabelColor => choice_text(TEXT_COLOR, f32::from(e.label)),
-        Prop::Position => e.anchor.label().to_string(),
+        Prop::Position => {
+            if is_at_anchor(e) {
+                e.anchor.label().to_string()
+            } else {
+                format!("({}, {})", num(e.x), num(e.y))
+            }
+        }
         Prop::X => num(e.x),
         Prop::Y => num(e.y),
         Prop::Opt(i) => {
@@ -141,7 +160,17 @@ pub fn step(p: Prop, e: &mut Elem, cv: &mut Cvars, dir: i32) -> bool {
         }
         Prop::Scale => e.scale = range(e.scale, (0.25, 4.0, 0.25), dir),
         Prop::Opacity => e.opacity = range(e.opacity, (0.1, 1.0, 0.1), dir),
-        Prop::Show => e.fade = !e.fade,
+        Prop::Show => {
+            if e.kind.can_fade() {
+                let mode = if e.hidden { 2 } else if e.fade { 1 } else { 0 };
+                let next = (mode + dir).rem_euclid(3);
+                e.fade = next == 1;
+                e.hidden = next == 2;
+            } else {
+                e.hidden = !e.hidden;
+                e.fade = false;
+            }
+        }
         Prop::Background => e.bg = !e.bg,
         Prop::TextColor | Prop::LabelColor => {
             let field = if p == Prop::TextColor { &mut e.color } else { &mut e.label };
@@ -170,6 +199,78 @@ pub fn step(p: Prop, e: &mut Elem, cv: &mut Cvars, dir: i32) -> bool {
         }
     }
     true
+}
+
+impl super::editor::Editor {
+    /// Typed text: preset name in Save As popup, or coordinate digits.
+    pub fn text(&mut self, ch: char) {
+        if let Some(super::editor::Popup::SaveAs { name, confirm_overwrite }) = &mut self.popup {
+            if !ch.is_control() && ch != '\t' && name.chars().count() < super::presets::MAX_NAME_LEN {
+                name.push(ch);
+                *confirm_overwrite = false;
+            }
+            return;
+        }
+        if let Some((_, s)) = &mut self.typing
+            && (ch.is_ascii_digit() || (ch == '-' && s.is_empty()))
+            && s.len() < 6
+        {
+            s.push(ch);
+        }
+    }
+
+    pub(super) fn type_key(&mut self, key: i32, (p, mut s): (Prop, String), l: &mut super::layout::Layout, cv: &mut Cvars) -> super::editor::Out {
+        use qinput::keys::*;
+        match key {
+            K_BACKSPACE | K_XBUTTON => {
+                s.pop();
+                self.typing = Some((p, s));
+                super::editor::Out::default()
+            }
+            K_ESCAPE | K_BBUTTON => super::editor::sound("misc/menu3.wav"),
+            K_ENTER | K_KP_ENTER | K_ABUTTON | K_MOUSE1 => {
+                if let (Ok(v), Some(e)) = (s.parse::<f32>(), self.sel.and_then(|i| l.elems.get_mut(i))) {
+                    let old = if p == Prop::X { e.x } else { e.y };
+                    if old != v {
+                        self.push_undo_now(cv);
+                        if p == Prop::X { e.x = v } else { e.y = v }
+                        super::editor::save(cv, l);
+                    }
+                }
+                if key == K_MOUSE1 {
+                    return self.key(key, cv);
+                }
+                super::editor::sound("misc/menu2.wav")
+            }
+            _ => {
+                self.typing = Some((p, s));
+                super::editor::Out::default()
+            }
+        }
+    }
+
+    pub(super) fn step(&mut self, p: Prop, dir: i32, l: &mut super::layout::Layout, cv: &mut Cvars) -> super::editor::Out {
+        let Some(i) = self.sel else { return super::editor::Out::default() };
+        let snap = self.snapshot(cv);
+        let Some(e) = l.elems.get_mut(i) else { return super::editor::Out::default() };
+        if step(p, e, cv, dir) {
+            self.push_undo(snap);
+            super::editor::save(cv, l);
+        }
+        super::editor::sound("misc/menu3.wav")
+    }
+
+    /// Enter or a click on a property row.
+    pub(super) fn activate(&mut self, p: Prop, dir: i32, l: &mut super::layout::Layout, cv: &mut Cvars) -> super::editor::Out {
+        match p {
+            Prop::Position => self.open_grid(l),
+            Prop::X | Prop::Y => {
+                self.typing = Some((p, String::new()));
+                super::editor::sound("misc/menu2.wav")
+            }
+            _ => self.step(p, dir, l, cv),
+        }
+    }
 }
 
 #[cfg(test)]
@@ -213,5 +314,24 @@ mod tests {
         let mut h = Elem::new(Kind::Health, Anchor::BottomLeft);
         step(Prop::Font, &mut h, &mut cv, 1);
         assert_eq!(value_text(Prop::Font, &h, &cv), "Quake");
+        // Visibility cycles always -> appear on change -> hidden -> always on player elements
+        assert_eq!(value_text(Prop::Show, &h, &cv), "always");
+        step(Prop::Show, &mut h, &mut cv, 1);
+        assert_eq!(value_text(Prop::Show, &h, &cv), "appear on change");
+        assert!(h.fade && !h.hidden);
+        step(Prop::Show, &mut h, &mut cv, 1);
+        assert_eq!(value_text(Prop::Show, &h, &cv), "hidden");
+        assert!(!h.fade && h.hidden);
+        step(Prop::Show, &mut h, &mut cv, 1);
+        assert_eq!(value_text(Prop::Show, &h, &cv), "always");
+        // Non-fade elements cycle always <-> hidden
+        assert_eq!(value_text(Prop::Show, &e, &cv), "always");
+        step(Prop::Show, &mut e, &mut cv, 1);
+        assert_eq!(value_text(Prop::Show, &e, &cv), "hidden");
+        // Position shows anchor name at default offset, and (x, y) once moved
+        assert_eq!(value_text(Prop::Position, &h, &cv), "bottom left");
+        h.x = 12.0;
+        h.y = -8.0;
+        assert_eq!(value_text(Prop::Position, &h, &cv), "(12, -8)");
     }
 }

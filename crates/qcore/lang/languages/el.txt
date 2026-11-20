@@ -1196,9 +1196,6 @@ el υψηλή
 @ huge
 el τεράστιο
 
-@ immersive
-el καθηλωτικό
-
 @ intense
 el έντονο
 
@@ -1605,6 +1602,30 @@ el Γραμμή κατάστασης
 @ Visibility
 el Ορατότητα
 
+@ Alert
+el Ειδοποίηση
+
+@ Live
+el Ζωντανά
+
+@ Sample
+el Δείγμα
+
+@ Undo
+el Αναίρεση
+
+@ Presets
+el Προεπιλογές
+
+@ Save As
+el Αποθήκευση ως
+
+@ appear on change
+el σε αλλαγή
+
+@ hidden
+el κρυφό
+
 @ big numbers
 el μεγάλα ψηφία
 
@@ -1907,8 +1928,8 @@ el Πώς παραμορφώνεται η θέα κάτω από το νερό: 
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 el Αγνοεί περιστροφή γυροσκοπίου πιο αργή από τόσες μοίρες ανά δευτερόλεπτο, για να κρύψει το τρέμουλο του χεριού
 
-@ Immersive: appears for a few seconds only when its value changes
-el Καθηλωτικό: εμφανίζεται για λίγα δευτερόλεπτα μόνο όταν αλλάζει η τιμή του
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+el Σε αλλαγή: εμφανίζεται για λίγο μόνο όταν αλλάζει η τιμή· κρυφό: αποκρύπτει χωρίς διαγραφή
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 el Κρατά τις υφές ευκρινείς σε πατώματα και τοίχους που φαίνονται υπό απότομη γωνία

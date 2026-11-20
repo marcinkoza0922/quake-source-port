@@ -91,9 +91,12 @@ fn hud_editor_controller_events_and_button_glyphs() {
     h.exec_line("menu_hudedit");
     h.sync_key_dest();
     h.handle_event(HostEvent::Input(InputEvent::GamepadConnected(true)));
+    assert_eq!(h.menu.hud_edit.sel, None);
     press(&mut h, GamepadButton::DpadDown);
     assert!(h.menu.pad_ui);
-    assert_eq!(h.menu.hud_edit.sel, 1);
+    assert_eq!(h.menu.hud_edit.sel, Some(0));
+    press(&mut h, GamepadButton::DpadDown);
+    assert_eq!(h.menu.hud_edit.sel, Some(1));
     capture(&mut h, "hudedit-pad-xbox");
     // PlayStation glyphs fit on the buttons too
     h.exec_line("joy_glyphs 2");

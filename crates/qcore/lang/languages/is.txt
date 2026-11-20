@@ -1196,9 +1196,6 @@ is hátt
 @ huge
 is risastórt
 
-@ immersive
-is innlifun
-
 @ intense
 is ákaft
 
@@ -1605,6 +1602,30 @@ is Stöðustika
 @ Visibility
 is Sýnileiki
 
+@ Alert
+is Viðvörun
+
+@ Live
+is Í beinni
+
+@ Sample
+is Dæmi
+
+@ Undo
+is Afturkalla
+
+@ Presets
+is Forstillingar
+
+@ Save As
+is Vista sem
+
+@ appear on change
+is við breytingu
+
+@ hidden
+is falið
+
 @ big numbers
 is stórir tölustafir
 
@@ -1907,8 +1928,8 @@ is Hvernig sjónin bjagast neðansjávar: klassískt gárar allan skjáinn eins 
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 is Hunsar gyro-snúning hægari en þetta margar gráður á sekúndu, til að fela handskjálfta
 
-@ Immersive: appears for a few seconds only when its value changes
-is Innlifun: birtist aðeins í nokkrar sekúndur þegar gildið breytist
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+is Við breytingu: birtist stuttlega aðeins þegar gildið breytist; falið: felur án þess að fjarlægja
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 is Heldur áferðum skörpum á gólfum og veggjum sem sjást frá bröttu horni

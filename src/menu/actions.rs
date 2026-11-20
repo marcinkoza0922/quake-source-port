@@ -48,7 +48,7 @@ impl Menu {
             }
             Run::EditHud => {
                 self.open(Screen::HudEditor);
-                self.hud_edit.open();
+                self.hud_edit.open(cv);
                 out.push(Action::Sound("misc/menu2.wav"));
                 return;
             }

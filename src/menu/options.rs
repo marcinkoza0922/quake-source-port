@@ -72,6 +72,11 @@ impl Menu {
                 let i = (self.soundtrack_index(cv) as i32 + dir).rem_euclid(n) as usize;
                 self.set_soundtrack(i, cv);
             }
+            Item::HudPreset => {
+                let n = self.hud_preset_options().len() as i32;
+                let i = (self.hud_preset_index(cv) as i32 + dir).rem_euclid(n) as usize;
+                self.set_hud_preset(i, cv);
+            }
             Item::Text { .. } | Item::Run { .. } | Item::Server(_) | Item::Bind { .. } | Item::ResetBinds | Item::ResetShaderParams | Item::Sub { .. } | Item::UserDataDir => return false,
             Item::Apply => {
                 if !enter || !self.display_dirty(cv) {
@@ -108,6 +113,7 @@ impl Menu {
             Item::ShaderPreset => self.preset_options(),
             Item::Language => language_options(),
             Item::Soundtrack => self.soundtrack_options(),
+            Item::HudPreset => self.hud_preset_options(),
             _ => Vec::new(),
         }
     }
@@ -123,6 +129,7 @@ impl Menu {
             Item::ShaderPreset => self.preset_index(cv),
             Item::Language => language_index(cv),
             Item::Soundtrack => self.soundtrack_index(cv),
+            Item::HudPreset => self.hud_preset_index(cv),
             _ => 0,
         }
     }
@@ -143,6 +150,7 @@ impl Menu {
             Item::ShaderPreset => self.set_preset(i, cv),
             Item::Language => set_language(cv, i),
             Item::Soundtrack => self.set_soundtrack(i, cv),
+            Item::HudPreset => self.set_hud_preset(i, cv),
             _ => {}
         }
     }
@@ -248,6 +256,53 @@ impl Menu {
             .and_then(|k| self.soundtracks.get(k))
             .map_or("", |(id, _)| id.as_str());
         cv.set("s_soundtrack", id);
+    }
+
+    /// HUD Preset dropdown entries: modern, classic, saved user presets, then custom.
+    pub(super) fn hud_preset_options(&self) -> Vec<String> {
+        let mut out = vec![qcore::t!("modern").to_string(), qcore::t!("classic").to_string()];
+        out.extend(self.hud_edit.presets.iter().map(|p| p.name.clone()));
+        out.push(qcore::t!("custom").to_string());
+        out
+    }
+
+    pub(super) fn hud_preset_index(&self, cv: &Cvars) -> usize {
+        match cv.value_of("hud_preset") as i32 {
+            0 => 0,
+            1 => 1,
+            _ => {
+                let name = cv.by_name(crate::hud::presets::PRESET_NAME).map_or("", |c| c.string.trim());
+                if !name.is_empty()
+                    && let Some(k) = self.hud_edit.presets.iter().position(|p| p.name.eq_ignore_ascii_case(name))
+                {
+                    return 2 + k;
+                }
+                2 + self.hud_edit.presets.len()
+            }
+        }
+    }
+
+    pub(super) fn set_hud_preset(&self, i: usize, cv: &mut Cvars) {
+        match i {
+            0 => {
+                cv.set("hud_preset", "0");
+                cv.set(crate::hud::presets::PRESET_NAME, "");
+            }
+            1 => {
+                cv.set("hud_preset", "1");
+                cv.set(crate::hud::presets::PRESET_NAME, "");
+            }
+            k if k >= 2 && k - 2 < self.hud_edit.presets.len() => {
+                let p = &self.hud_edit.presets[k - 2];
+                cv.set(crate::hud::editor::CVAR, &p.layout);
+                cv.set("hud_preset", "2");
+                cv.set(crate::hud::presets::PRESET_NAME, &p.name);
+            }
+            _ => {
+                cv.set("hud_preset", "2");
+                cv.set(crate::hud::presets::PRESET_NAME, "");
+            }
+        }
     }
 }
 

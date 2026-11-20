@@ -31,6 +31,7 @@ impl Host {
                 if self.menu.active() {
                     c.menu_layout();
                     let pos = (px / c.scale - c.ox, py / c.scale - c.oy);
+                    self.menu.hud_edit.shift = self.input.key_down(qinput::keys::K_SHIFT);
                     if let Some(snd) = self.menu.mouse_move(pos, &mut self.server.core.cvars) {
                         self.local_sound(snd);
                     }
@@ -130,6 +131,7 @@ impl Host {
                             };
                         }
                     } else {
+                        self.menu.hud_edit.mouse_up(&mut self.server.core.cvars);
                         self.menu.mouse_up();
                         if self.con.selection.dragging {
                             self.con.selection.dragging = false;
@@ -287,6 +289,8 @@ impl Host {
         use qinput::keys::{K_CTRL, K_INS, K_SHIFT};
         self.menu.shift = self.input.key_down(K_SHIFT);
         let ctrl = self.input.key_down(K_CTRL);
+        self.menu.hud_edit.shift = self.menu.shift;
+        self.menu.hud_edit.ctrl = ctrl;
         if self.menu.wants_text() && (ctrl || (self.menu.shift && key == K_INS)) && self.menu_clipboard(key, ctrl) {
             return;
         }

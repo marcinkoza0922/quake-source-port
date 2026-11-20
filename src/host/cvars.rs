@@ -212,8 +212,9 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     // text size) are read once for that and no longer saved.
     ("hud_layout", "", CVAR_ARCHIVE),
     // HUD > HUD Preset: 0 modern, 1 classic (picking either rebuilds
-    // hud_layout), 2 custom (set by any change in the HUD editor).
+    // hud_layout), 2 custom (or a saved user preset named by hud_preset_name).
     ("hud_preset", "0", CVAR_ARCHIVE),
+    ("hud_preset_name", "", CVAR_ARCHIVE),
     ("hud_health", "1", 0),
     ("hud_health_pos", "0", 0),
     ("hud_armor", "1", 0),

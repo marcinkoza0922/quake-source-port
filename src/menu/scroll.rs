@@ -69,7 +69,7 @@ impl Menu {
     }
 
     pub fn mouse_up(&mut self) {
-        self.hud_edit.mouse_up();
+        self.hud_edit.cancel_dialog_drag();
         self.wp.mouse_up();
         self.drag = None;
         self.slider_drag = None;

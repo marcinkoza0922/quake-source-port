@@ -1196,9 +1196,6 @@ fi korkea
 @ huge
 fi valtava
 
-@ immersive
-fi immersiivinen
-
 @ intense
 fi voimakas
 
@@ -1605,6 +1602,30 @@ fi Tilapalkki
 @ Visibility
 fi Näkyvyys
 
+@ Alert
+fi Hälytys
+
+@ Live
+fi Live
+
+@ Sample
+fi Malli
+
+@ Undo
+fi Kumoa
+
+@ Presets
+fi Esiasetukset
+
+@ Save As
+fi Tallenna nimellä
+
+@ appear on change
+fi muuttuessa
+
+@ hidden
+fi piilotettu
+
 @ big numbers
 fi isot numerot
 
@@ -1907,8 +1928,8 @@ fi Miten näkymä vääristyy veden alla: klassinen aaltoiluttaa koko ruutua kui
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 fi Ohittaa tätä hitaammat gyron kierrot (astetta sekunnissa) käden tärinän peittämiseksi
 
-@ Immersive: appears for a few seconds only when its value changes
-fi Immersiivinen: näkyy muutaman sekunnin vain arvon muuttuessa
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+fi Muuttuessa: näkyy hetken vain arvon muuttuessa; piilotettu: piilottaa poistamatta
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 fi Pitää lattioiden ja seinien tekstuurit terävinä jyrkissä katselukulmissa

@@ -316,7 +316,7 @@ impl Console {
                 c.qtext_grid(8.0, row, &self.lines[n], crate::draw::WHITE);
                 row -= 8.0;
             }
-        } else if show_notify {
+        } else if show_notify && !self.notify_place.hidden {
             let base = c.scale;
             let p = self.notify_place;
             c.scale = (base * p.scale.clamp(1.0, 3.0)).round().max(1.0);
@@ -335,7 +335,7 @@ impl Console {
             }
             c.scale = base;
         }
-        if centerprint && lines_h <= 0.0 && self.realtime < self.center_time {
+        if centerprint && lines_h <= 0.0 && self.realtime < self.center_time && !self.center_place.hidden {
             self.draw_center(c, usize::MAX);
         }
     }

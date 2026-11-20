@@ -313,6 +313,25 @@ impl Kind {
         self.is_player() && self != Kind::StatusBar
     }
 
+    /// Whether the element exposes a Visibility row in the editor.
+    pub fn has_visibility(self) -> bool {
+        self != Kind::Captions
+    }
+
+    /// Sane default grid anchor when adding a new element of this kind.
+    pub fn default_anchor(self) -> super::layout::Anchor {
+        use super::layout::Anchor;
+        use Kind::*;
+        match self {
+            Health | Armor | Face | HealthBar | ArmorBar => Anchor::BottomLeft,
+            Ammo | AmmoBar | AmmoList | Shells | Nails | Rockets | Cells | Weapons | Items | Keys | Powerups | Sigils => Anchor::BottomRight,
+            StatusBar | Captions => Anchor::BottomCenter,
+            Clock | Timer | Pb | Kills | Secrets | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Automap => Anchor::TopRight,
+            Notify => Anchor::TopLeft,
+            Center => Anchor::Center,
+        }
+    }
+
     /// Text elements may have a dark backing.
     /// Its text colour can be picked (the personal best has its own).
     pub fn has_text_color(self) -> bool {
@@ -380,8 +399,8 @@ pub fn opt_tip(label: &str) -> Option<&'static str> {
     })
 }
 
-/// Immersive visibility's help.
-pub const IMMERSIVE_TIP: &str = "Immersive: appears for a few seconds only when its value changes";
+/// Visibility option's help.
+pub const IMMERSIVE_TIP: &str = "Appear on change: shown briefly only when its value changes; hidden: hides without removing";
 
 /// Every text of the catalog, categories, options and editor, for the
 /// translation catalog test.
@@ -402,7 +421,7 @@ pub fn lang_keys() -> Vec<&'static str> {
     out.extend([Font::Big, Font::Quake, Font::Modern].map(Font::label));
     out.extend(super::layout::Anchor::ALL.map(super::layout::Anchor::label));
     out.extend(super::editor::BUTTONS);
-    out.extend(["always", "immersive", IMMERSIVE_TIP, "Text Color", "Label Color"]);
+    out.extend(["always", "appear on change", "hidden", IMMERSIVE_TIP, "Text Color", "Label Color", "Sample", "Alert", "Live"]);
     out.extend(TEXT_COLOR.iter().map(|c| c.0));
     out
 }

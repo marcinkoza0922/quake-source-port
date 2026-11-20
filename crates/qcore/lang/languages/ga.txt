@@ -1196,9 +1196,6 @@ ga ard
 @ huge
 ga ollmhór
 
-@ immersive
-ga tumtha
-
 @ intense
 ga dian
 
@@ -1605,6 +1602,30 @@ ga Barra stádais
 @ Visibility
 ga Infheictheacht
 
+@ Alert
+ga Foláireamh
+
+@ Live
+ga Beo
+
+@ Sample
+ga Sampla
+
+@ Undo
+ga Cealaigh
+
+@ Presets
+ga Réamhshocruithe
+
+@ Save As
+ga Sábháil mar
+
+@ appear on change
+ga ar athrú
+
+@ hidden
+ga folaithe
+
 @ big numbers
 ga uimhreacha móra
 
@@ -1907,8 +1928,8 @@ ga Conas a shaobhtar an radharc faoi uisce: cuireann Clasaiceach cuilithíní ar
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 ga Déanann sé neamhaird de rothlú gíreascóip níos moille ná an líon seo céimeanna in aghaidh an tsoicind, chun crith láimhe a cheilt
 
-@ Immersive: appears for a few seconds only when its value changes
-ga Tumtha: ní thaispeántar é ach ar feadh cúpla soicind nuair a athraíonn a luach
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+ga Ar athrú: taispeántar go gairid nuair a athraíonn an luach amháin; folaithe: folaíonn gan bhaint
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ga Coinníonn sé uigeachtaí géar ar urláir agus ballaí a fheictear ó uillinneacha géara

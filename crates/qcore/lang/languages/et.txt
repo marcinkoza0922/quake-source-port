@@ -1196,9 +1196,6 @@ et kõrge
 @ huge
 et hiiglaslik
 
-@ immersive
-et kaasahaarav
-
 @ intense
 et intensiivne
 
@@ -1605,6 +1602,30 @@ et Olekuriba
 @ Visibility
 et Nähtavus
 
+@ Alert
+et Hoiatus
+
+@ Live
+et Otse
+
+@ Sample
+et Näidis
+
+@ Undo
+et Võta tagasi
+
+@ Presets
+et Eelseaded
+
+@ Save As
+et Salvesta nimega
+
+@ appear on change
+et muutumisel
+
+@ hidden
+et peidetud
+
 @ big numbers
 et suured numbrid
 
@@ -1907,8 +1928,8 @@ et Kuidas vaade vee all moondub: klassikaline laineb tervet ekraani nagu tarkvar
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 et Eirab güro pööret, mis on aeglasem kui nii mitu kraadi sekundis, et peita käte värinat
 
-@ Immersive: appears for a few seconds only when its value changes
-et Kaasahaarav: ilmub vaid mõneks sekundiks, kui väärtus muutub
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+et Muutumisel: ilmub hetkeks ainult väärtuse muutumisel; peidetud: peidab eemaldamata
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 et Hoiab tekstuurid teravana põrandatel ja seintel, mida nähakse terava nurga all

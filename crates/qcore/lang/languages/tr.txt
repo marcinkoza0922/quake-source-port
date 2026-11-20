@@ -1196,9 +1196,6 @@ tr yüksek
 @ huge
 tr devasa
 
-@ immersive
-tr sürükleyici
-
 @ intense
 tr yoğun
 
@@ -1605,6 +1602,30 @@ tr Durum Çubuğu
 @ Visibility
 tr Görünürlük
 
+@ Alert
+tr Uyarı
+
+@ Live
+tr Canlı
+
+@ Sample
+tr Örnek
+
+@ Undo
+tr Geri Al
+
+@ Presets
+tr Ön Ayarlar
+
+@ Save As
+tr Farklı Kaydet
+
+@ appear on change
+tr değişince
+
+@ hidden
+tr gizli
+
 @ big numbers
 tr büyük rakamlar
 
@@ -1907,8 +1928,8 @@ tr Su altında görüntünün nasıl bozulacağı: Klasik, yazılımsal Quake gi
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 tr El titremesini gizlemek için saniyede bu kadar dereceden yavaş jiroskop dönüşlerini yok sayar
 
-@ Immersive: appears for a few seconds only when its value changes
-tr Sürükleyici: yalnızca değeri değiştiğinde birkaç saniye görünür
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+tr Değişince: yalnızca değer değiştiğinde kısa süre görünür; gizli: silmeden gizler
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 tr Dik açılardan görülen zemin ve duvarlardaki dokuları keskin tutar

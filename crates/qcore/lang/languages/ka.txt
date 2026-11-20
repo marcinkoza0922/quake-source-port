@@ -1196,9 +1196,6 @@ ka მაღალი
 @ huge
 ka უზარმაზარი
 
-@ immersive
-ka იმერსიული
-
 @ intense
 ka ძლიერი
 
@@ -1605,6 +1602,30 @@ ka მდგომარეობის ზოლი
 @ Visibility
 ka ხილვადობა
 
+@ Alert
+ka განგაში
+
+@ Live
+ka ცოცხალი
+
+@ Sample
+ka ნიმუში
+
+@ Undo
+ka დაბრუნება
+
+@ Presets
+ka პრესეტები
+
+@ Save As
+ka შენახვა როგორც
+
+@ appear on change
+ka შეცვლისას
+
+@ hidden
+ka დამალული
+
 @ big numbers
 ka დიდი ციფრები
 
@@ -1907,8 +1928,8 @@ ka როგორ მახინჯდება ხედი წყალქ�
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 ka უგულებელყოფს გიროსკოპის ბრუნვას, რომელიც ამდენ გრადუს წამში ნელია, ხელის კანკალის დასამალად
 
-@ Immersive: appears for a few seconds only when its value changes
-ka იმერსიული: ჩნდება რამდენიმე წამით მხოლოდ მაშინ, როცა მისი მნიშვნელობა იცვლება
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+ka შეცვლისას: ჩნდება მხოლოდ მნიშვნელობის შეცვლისას რამდენიმე წამით; დამალული: მალავს წაშლის გარეშე
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ka ტექსტურებს მკვეთრად ტოვებს ციცაბო კუთხით დანახულ იატაკსა და კედლებზე
