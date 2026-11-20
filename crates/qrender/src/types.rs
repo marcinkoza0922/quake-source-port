@@ -344,6 +344,11 @@ pub enum Draw2D {
     },
 }
 
+/// Number of simultaneous impact ripples packed into the scene uniforms.
+pub const MAX_TELEPORT_RIPPLES: usize = 12;
+/// Lifetime in client seconds, also used by the teleporter shader.
+pub const TELEPORT_RIPPLE_LIFE: f64 = 0.65;
+
 /// Everything needed to draw one frame.
 #[derive(Clone, Copy, Debug)]
 pub struct RenderFrame<'a> {
@@ -379,6 +384,8 @@ pub struct RenderFrame<'a> {
     pub splits: &'a [SplitView],
     /// Add-on portals (empty unless the portal gun is in use).
     pub gun_portals: &'a [GunPortal],
+    /// Impacts on teleporter sheets, packed as world xyz and client birth time.
+    pub teleport_ripples: &'a [[f32; 4]],
 }
 
 impl Default for RenderFrame<'_> {
@@ -402,6 +409,7 @@ impl Default for RenderFrame<'_> {
             dyn_verts: &[],
             splits: &[],
             gun_portals: &[],
+            teleport_ripples: &[],
         }
     }
 }

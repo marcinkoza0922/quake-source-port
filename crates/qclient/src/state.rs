@@ -255,6 +255,8 @@ pub struct ClientState {
     pub fog: Fog,
 
     pub beams: Pool<Beam>,
+    pub impact_effects: Vec<crate::ImpactEffect>,
+    pub(crate) defer_impact_effects: bool,
     /// Cosmetic weapon impacts: kind 0 shotgun, 1 nail, 2 explosion.
     pub weapon_impacts: Vec<(u8, [f32; 3])>,
     /// Bullet/nail/explosion impact points since the renderer last took
@@ -363,6 +365,8 @@ impl ClientState {
             fog: Fog::default(),
             beams: Pool::with_max(MAX_BEAMS),
             weapon_impacts: Vec::new(),
+            impact_effects: Vec::new(),
+            defer_impact_effects: false,
             shot_impacts: Vec::new(),
             blood_hits: Vec::new(),
             dlights: Pool::with_max(MAX_DLIGHTS),
@@ -396,8 +400,10 @@ impl ClientState {
         let out = std::mem::take(&mut self.out_reliable);
         let events = std::mem::take(&mut self.events);
         let fte_names = std::mem::take(&mut self.fte_names);
+        let defer_impact_effects = self.defer_impact_effects;
         *self = Self::new();
         self.fte_names = fte_names;
+        self.defer_impact_effects = defer_impact_effects;
         (self.standard_quake, self.nolerp, self.name, self.color, self.sv_gravity, self.signon, self.demoplayback) = keep;
         self.out_reliable = out;
         self.events = events;

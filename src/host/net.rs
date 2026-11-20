@@ -101,6 +101,7 @@ impl Host {
             }
             let before = self.cl.signon;
             let events_before = self.cl.events.len();
+            self.cl.defer_impact_effects();
             let r = self.cl.parse_server_message(&m);
             let new_map = self.cl.events[events_before.min(self.cl.events.len())..].iter().any(|e| matches!(e, ClientEvent::NewMap));
             self.autodemo_message(&m, new_map);

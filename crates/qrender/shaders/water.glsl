@@ -8,6 +8,29 @@ layout(location = 2) in vec3 i_wpos;
 layout(location = 3) flat in uint i_mat;
 layout(push_constant) uniform P { mat4 model; vec4 params; } pc;
 layout(location = 0) out vec4 o_color;
+
+vec3 teleporter_ripple(int portal, float t) {
+    vec2 warp = vec2(0.0);
+    float light = 0.0;
+    for (uint j = 0u; j < fr.teleport_fx.x; ++j) {
+        vec4 hit = fr.teleport_ripples[j];
+        if (abs(dot(fr.portal_plane[portal].xyz, hit.xyz) + fr.portal_plane[portal].w) > 0.25 ||
+            any(lessThan(hit.xyz, fr.portal_min[portal].xyz - 0.25)) ||
+            any(greaterThan(hit.xyz, fr.portal_max[portal].xyz + 0.25))) continue;
+        float age = t - hit.w;
+        float fade = 1.0 - smoothstep(0.0, 0.65, age);
+        vec3 radial = i_wpos - hit.xyz;
+        float r = length(radial);
+        float phase = (r - age * 145.0) * 0.15;
+        float band = exp(-phase * phase) * fade;
+        vec2 dir = vec2(dot(radial, fr.vright.xyz), -dot(radial, fr.vup.xyz)) / max(r, 1.0);
+        warp += dir * (sin(phase * 2.5) * band * 0.05);
+        light += band * 0.12;
+    }
+    // Keep in sync with the aperture padding in frame/portal_scissor.rs.
+    return vec3(clamp(warp, vec2(-0.025), vec2(0.025)), min(light, 0.18));
+}
+
 void main() {
     if (dot(fr.portal_clip.xyz, i_wpos) + fr.portal_clip.w < 0.0) discard;
     uvec4 m = materials[i_mat];
@@ -21,6 +44,8 @@ void main() {
                 any(greaterThan(i_wpos, fr.portal_max[i].xyz + 0.25))) continue;
             vec2 uv = gl_FragCoord.xy * fr.portal_uv.xy;
             vec2 warp = sin(i_st.yx * 0.14 + t * vec2(1.7, -1.3)) * 0.0015;
+            vec3 ripple = teleporter_ripple(i, t);
+            warp += ripple.xy;
             vec3 behind = tex(uint(fr.portal_min[i].w), clamp(uv + warp, vec2(0.0), fr.portal_uv.zw)).rgb;
             vec2 cell = floor(i_st / 3.0);
             float seed = whitenoise01(cell);
@@ -28,7 +53,7 @@ void main() {
             vec2 p = fract(i_st / 3.0) - 0.5;
             float spark = exp(-dot(p,p) * 40.0) * step(0.9, seed) * (0.15 + 0.85 * pulse);
             float veil = 0.59 + 0.06 * sin(i_st.x * 0.13 + sin(i_st.y * 0.1) + t * 2.0);
-            o_color = vec4(behind * veil + vec3(0.8, 0.72, 0.57) * spark, 1.0);
+            o_color = vec4(behind * veil + vec3(0.8, 0.72, 0.57) * (spark + ripple.z), 1.0);
             GLOW_OUT(vec4(vec3(0.8, 0.72, 0.57) * spark * fog_factor(i_wpos), 1.0));
             return;
         }

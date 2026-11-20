@@ -7,6 +7,7 @@ use qrender::{FteBatch, FteBlend, FteVertex, ModelId, PicId, RenderEntity};
 use std::collections::{HashMap, VecDeque};
 mod nails;
 pub(crate) mod surfaces;
+mod teleporters;
 #[cfg(test)]
 mod tests;
 
@@ -42,6 +43,11 @@ pub(crate) struct Tier {
 /// Impact effects need the Enhanced FX master and Enhanced Particles.
 pub(crate) fn impacts_on(cv: &qcore::cvar::Cvars) -> bool {
     cv.value_of("r_enhancedfx") != 0.0 && cv.value_of("r_enhancedparticles") != 0.0
+}
+
+fn mark_settings(cv: &qcore::cvar::Cvars) -> [bool; 3] {
+    ["r_impact_bullets", "r_impact_nails", "r_impact_scorches"]
+        .map(|n| cv.value_of(n) != 0.0 && impacts_on(cv))
 }
 
 pub(crate) fn tier(cv: &qcore::cvar::Cvars) -> Tier {
@@ -117,6 +123,7 @@ pub struct Impacts {
     flights: HashMap<usize, Flight>,
     flights_scratch: HashMap<usize, Flight>,
     intercepted: std::collections::HashSet<usize>,
+    teleporters: teleporters::TeleportImpacts,
     pic: Option<PicId>,
     time: f64,
 }
@@ -125,6 +132,10 @@ impl Impacts {
         let pic = self.pic;
         *self = Self::default();
         self.pic = pic;
+    }
+
+    pub fn teleport_ripples(&self) -> &[[f32; 4]] {
+        self.teleporters.ripples()
     }
 
     #[allow(clippy::too_many_arguments)]
@@ -143,14 +154,13 @@ impl Impacts {
         frustum: Option<&qrender::ViewFrustum>,
         out: &mut Geometry,
     ) {
-        let enabled = ["r_impact_bullets", "r_impact_nails", "r_impact_scorches"]
-            .map(|n| cv.value_of(n) != 0.0 && impacts_on(cv));
+        let enabled = mark_settings(cv);
         if !enabled.iter().any(|v| *v) {
+            let teleporters = std::mem::take(&mut self.teleporters);
             self.clear();
+            self.teleporters = teleporters;
+            self.time = cl.time;
             return;
-        }
-        if cl.time < self.time {
-            self.clear();
         }
         let dt = (cl.time - self.time).clamp(0.0, 0.1) as f32;
         self.time = cl.time;
@@ -343,7 +353,7 @@ impl Impacts {
             }
         }
         self.step_nails(&world, &poses, dt, cv.value_of("sv_gravity").max(1.0));
-        if self.pic.is_none() {
+        if self.pic.is_none() && (!self.marks.is_empty() || !self.nails.is_empty()) {
             self.pic = r
                 .register_pic_rgba_linear(96, 32, &surfaces::texture())
                 .ok();
