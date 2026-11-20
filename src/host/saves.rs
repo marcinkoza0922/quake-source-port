@@ -213,7 +213,8 @@ impl Host {
         let keep = if on { cv.value_of("sv_autosave_keep").clamp(0.0, crate::autosave::MAX as f32) as usize } else { 0 };
         let flags = ["entry", "secret", "monsters", "secrets", "key"].map(|n| cv.value_of(&format!("sv_autosave_{n}")) != 0.0);
         let interval = cv.value_of("sv_autosave_interval").max(0.0) as f64 * 60.0;
-        let reason = self.autosave.update(self.server.time(), self.server.stats(), self.server.player_keys(), self.server.core.sv.loadgame, flags, interval);
+        let sv = &self.server.core.sv;
+        let reason = self.autosave.update(self.server.time(), self.server.stats(), self.server.player_keys(), sv.loadgame || sv.reloaded, flags, interval);
         if let Some(reason) = reason.filter(|_| keep > 0) {
             let text = self.server.save_game();
             // The v5 description is ignored by the loader; preserve the trigger in the save itself.

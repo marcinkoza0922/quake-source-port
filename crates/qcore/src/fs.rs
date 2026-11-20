@@ -227,6 +227,18 @@ impl Fs {
         self.find_path(path).is_some()
     }
 
+    /// The winning file's on-disk path, if the search resolves to a loose file.
+    /// With `main`, also apply the same priority rule as `open_companion`.
+    pub fn loose_path(&self, path: &str, main: Option<&str>) -> Option<PathBuf> {
+        let (source, loose) = self.find(path)?;
+        if let Some(main) = main
+            && self.find_path(main)?.game > source.game
+        {
+            return None;
+        }
+        loose
+    }
+
     pub fn origin(&self, path: &str) -> Option<FileOrigin> {
         let sp = self.find_path(path)?;
         Some(FileOrigin {

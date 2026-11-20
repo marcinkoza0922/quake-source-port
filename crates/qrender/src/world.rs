@@ -111,6 +111,7 @@ pub struct World {
     /// the PVS leaf key, 0 for any all-visible query, or MAX before setup.
     vis_leaves: Vec<VisLeaf>,
     vis_leaf: usize,
+    locked_pvs: Option<usize>,
     /// `portal_surfaces` results per eye leaf (most recent last), and the
     /// per-surface stamps used to dedupe while building one.
     portal_cache: Vec<(usize, std::sync::Arc<[u32]>)>,

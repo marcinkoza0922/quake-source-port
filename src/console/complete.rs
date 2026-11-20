@@ -312,6 +312,7 @@ fn cmd_hint(name: &str) -> &'static str {
         "record" => "record a demo",
         "record_toggle" => "start or stop recording a demo",
         "restart" => "restart current level from the beginning",
+        "map_reload" => "reload the current BSP and entities; watch/off controls automatic reload",
         "demo_convert" => "rewrite a recorded demo so other source ports can play it",
         "playdemo" => "play back a demo",
         "timedemo" => "benchmark a demo at uncapped framerate",

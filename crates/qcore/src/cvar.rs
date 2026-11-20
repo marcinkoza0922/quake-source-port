@@ -61,7 +61,7 @@ pub struct SetResult {
     pub flags: u32,
 }
 
-#[derive(Default, Debug)]
+#[derive(Clone, Default, Debug)]
 pub struct Cvars {
     vars: Vec<Cvar>,
     /// Case-insensitive name hash → ids with that hash (collisions are rare).

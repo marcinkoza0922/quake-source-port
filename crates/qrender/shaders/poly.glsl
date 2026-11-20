@@ -4,6 +4,11 @@ layout(location = 1) in vec3 i_wpos;
 layout(push_constant) uniform P { vec4 color; uint tex; } pc;
 layout(location = 0) out vec4 o_color;
 void main() {
+    if (pc.tex == NO_TEX) {
+        o_color = pc.color;
+        GLOW_OUT(vec4(0.0));
+        return;
+    }
     vec4 c = tex(pc.tex, i_uv) * pc.color;
     if (c.a < 0.666 * pc.color.a) discard;
     if (thermal()) {

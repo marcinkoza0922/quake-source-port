@@ -22,6 +22,7 @@ mod bboxes;
 pub use bboxes::{BoxModel, EdictBox};
 pub use types::*;
 mod spawn;
+mod reload;
 mod physics;
 pub use physics::{Thrown, ThrownEnt};
 mod connect;
@@ -204,6 +205,7 @@ impl Server {
                 portal_crossed: Vec::new(),
             },
             level: None,
+            map_watch: None,
             cmds: Commands::with_builtins(),
         };
         crate::commands::register(&mut s);

@@ -21,14 +21,20 @@ impl Renderer {
         let scale = st.render_scale.clamp(0.25, 2.0);
         let supersample = st.supersample && self.gpu.sample_shading;
         let fte_supersample = supersample && st.soft_particle_quality > 0;
-        if msaa != self.msaa || supersample != self.pipes.supersample || fte_supersample != self.pipes.fte_supersample {
+        let samples_changed = msaa != self.msaa || supersample != self.pipes.supersample
+            || fte_supersample != self.pipes.fte_supersample;
+        let first_wireframe = st.mapper.wire != 0 && self.gpu.wireframe && !self.pipes.wire_enabled;
+        if samples_changed || first_wireframe {
             self.idle();
+            self.pipes.wire_enabled |= first_wireframe;
             self.msaa = msaa;
             self.pipes.supersample = supersample;
             self.pipes.fte_supersample = fte_supersample;
             let fmt = self.pipes.post_format;
             self.pipes.build(&self.gpu, fmt, msaa)?;
-            self.destroy_targets();
+            if samples_changed {
+                self.destroy_targets();
+            }
         }
         if scale != self.render_scale {
             self.render_scale = scale;

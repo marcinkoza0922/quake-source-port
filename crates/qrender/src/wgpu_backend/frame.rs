@@ -64,7 +64,7 @@ pub(super) struct Buffers {
 fn ui_quads(r: &Renderer, fr: &RenderFrame) -> (Vec<UiV>, Vec<(u32, u32, u32)>) {
     let mut v: Vec<UiV> = Vec::with_capacity(fr.draw2d.len() * 6);
     let mut batches: Vec<(u32, u32, u32)> = Vec::new();
-    let mut quad = |x: f32, y: f32, w: f32, h: f32, uv: [f32; 4], color: [f32; 4], tex: u32| {
+    let quad = |v: &mut Vec<UiV>, batches: &mut Vec<(u32, u32, u32)>, x: f32, y: f32, w: f32, h: f32, uv: [f32; 4], color: [f32; 4], tex: u32| {
         let c = color.map(|c| (c.clamp(0.0, 1.0) * 255.0 + 0.5) as u8);
         let p = |px: f32, py: f32, u: f32, vv: f32| UiV { pos: [px, py], uv: [u, vv], color: c };
         let first = v.len() as u32;
@@ -85,7 +85,7 @@ fn ui_quads(r: &Renderer, fr: &RenderFrame) -> (Vec<UiV>, Vec<(u32, u32, u32)>) 
         match *d {
             Draw2D::Pic { x, y, w, h, pic, uv, color } => {
                 if let Some(p) = r.pics.get(pic.0 as usize) {
-                    quad(x, y, w, h, uv, color, p.slot);
+                    quad(&mut v, &mut batches, x, y, w, h, uv, color, p.slot);
                 }
             }
             Draw2D::Char { x, y, size, ch, color } => {
@@ -96,14 +96,14 @@ fn ui_quads(r: &Renderer, fr: &RenderFrame) -> (Vec<UiV>, Vec<(u32, u32, u32)>) 
                     let (cx, cy) = ((ch & 15) as f32 / 16.0, (ch >> 4) as f32 / 16.0);
                     let e = 1.0 / 2048.0;
                     let uv = [cx + e, cy + e, cx + 1.0 / 16.0 - e, cy + 1.0 / 16.0 - e];
-                    quad(x, y, size, size, uv, color, p.slot);
+                    quad(&mut v, &mut batches, x, y, size, size, uv, color, p.slot);
                 }
             }
-            Draw2D::Fill { x, y, w, h, color } => quad(x, y, w, h, [0.0; 4], color, NO_TEX),
+            Draw2D::Fill { x, y, w, h, color } => quad(&mut v, &mut batches, x, y, w, h, [0.0; 4], color, NO_TEX),
             Draw2D::Tile { x, y, w, h, pic, scale } => {
                 if let Some(p) = r.pics.get(pic.0 as usize) {
                     let (pw, ph) = (p.width as f32 * scale.max(1e-3), p.height as f32 * scale.max(1e-3));
-                    quad(x, y, w, h, [x / pw, y / ph, (x + w) / pw, (y + h) / ph], [1.0; 4], p.slot);
+                    quad(&mut v, &mut batches, x, y, w, h, [x / pw, y / ph, (x + w) / pw, (y + h) / ph], [1.0; 4], p.slot);
                 }
             }
             Draw2D::Line { x0, y0, x1, y1, width, color } => {
@@ -198,6 +198,7 @@ impl Renderer {
 
     /// Draws one frame (and presents it when windowed).
     pub fn render(&mut self, fr: &RenderFrame) -> Result<()> {
+        self.mapper_stats = crate::MapperStats::default();
         self.set_world_filter(fr.settings.texture_linear && !crate::softemu::forces_nearest(&fr.settings));
         self.update_lut(&fr.settings);
         self.wait_frames_in_flight();
@@ -256,6 +257,7 @@ impl Renderer {
         }
         let mut lists = std::mem::take(&mut self.bufs.lists);
         lists.world_idx.clear();
+        lists.world_polys = 0;
         lists.alias_v.clear();
         lists.poly_v.clear();
         lists.poly_i.clear();

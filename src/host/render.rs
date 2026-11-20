@@ -1,5 +1,7 @@
 use super::*;
 
+mod mapper;
+
 impl Host {
     /// Water reflections are on (planar or ray traced): the player's own
     /// body is then drawn into them like into gun portal views.
@@ -22,6 +24,7 @@ impl Host {
         let mut parts = Vec::new();
         let mut dls = Vec::new();
         let mut fte = (Vec::new(), Vec::new(), Vec::new());
+        let mapper = self.mapper_settings();
         let mut blend = [0.0; 4];
         let mut splits = Vec::new();
         let mut goggles = qrender::Goggles::default();
@@ -147,18 +150,11 @@ impl Host {
                 && self.cv("deathmatch") == 0.0;
             let hitscan = false && !pellets; // shotgun tracers disabled (hidden from menus)
             self.tracers.frame(hitscan, &self.cl, &self.debris, v, &mut self.r, &mut fte);
-            let bb = crate::bboxes::Settings::read(&self.server.core.cvars);
-            if bb.mode != 0 && self.cv("r_drawentities") != 0.0 {
-                let eye = Vec3::from(v.origin);
-                let boxes = self.server.edict_boxes(self.cl.viewentity as u32, (bb.mode.abs() >= 2).then_some(eye));
-                let fwd = qcore::math::angle_vectors(Vec3::from(v.angles)).0;
-                self.bboxes.frame(&bb, &boxes, eye, fwd, &mut self.r, &mut fte);
-            }
-            self.bboxes.pointfile_frame(Vec3::from(v.origin), &mut self.r, &mut fte);
             self.impacts.frame(
                 &self.server.core.cvars, &self.cl, &self.level, &mut brushes, &self.server.core.fs,
                 &mut self.r, &mut ents, &dyn_verts, v.origin.into(), &self.debris, fte_frustum.as_ref(), &mut fte,
             );
+            self.mapper_geometry(mapper.lightmap, v, &mut parts, &mut fte);
             crate::view::dlights(&self.cl, &mut dls);
             dls.extend_from_slice(&self.test_lights);
             let contents = self.contents(v.origin);
@@ -405,6 +401,9 @@ impl Host {
                 c.ptext((c.vw() / 2.0 - c.ptext_w(&s) / 2.0).floor(), y.floor(), &s, crate::draw::WHITE);
             }
         }
+        if view.is_some() {
+            self.draw_mapper_stats(&mut c, mapper);
+        }
         let styles: Vec<i32> = (0..qnet::protocol::MAX_LIGHTSTYLES).map(|i| self.cl.lightstyle_value(i)).collect();
         // r_fog 0 hides fog without touching the map/mod values, so it comes back
         // as soon as the option is turned on again.
@@ -436,7 +435,8 @@ impl Host {
             skyfog: v("r_skyfog"),
             dynamic: v("r_dynamic") != 0.0,
             // cheat-protected as in ironwail: single player only
-            fullbright: v("r_fullbright") != 0.0 && self.cl.maxclients <= 1,
+            fullbright: !mapper.lightmap && v("r_fullbright") != 0.0 && self.cl.maxclients <= 1,
+            mapper,
             sky_wind: self.level.sky_wind.uniform(self.cl.time, v("r_skywind")),
             vsync: v("vid_vsync") != 0.0,
             msaa: v("r_msaa").max(1.0) as u32,
@@ -460,7 +460,7 @@ impl Host {
             soft_particle_distance: if soft_particles(v("r_particle_quality")) > 0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
             soft_particle_quality: u32::from(soft_particles(v("r_particle_quality")) >= 2),
             particle_style: if v("r_particles").round() as i32 == 2 { 2 } else { 1 },
-            ssao: if (v("r_ssao").round() as i32).clamp(0, 3) > 0 { v("r_ssao_strength").max(0.0) } else { 0.0 },
+            ssao: if !mapper.lightmap && (v("r_ssao").round() as i32).clamp(0, 3) > 0 { v("r_ssao_strength").max(0.0) } else { 0.0 },
             ssao_quality: (v("r_ssao").round() as i32).clamp(0, 3).saturating_sub(1).min(2) as u32,
             ssao_radius: v("r_ssao_radius"),
             edge_blur: if self.bullet_time.active && v("a11y_reducemotion") == 0.0 { 0.65 } else { 0.0 },
@@ -482,7 +482,7 @@ impl Host {
             dlight_shadows: v("r_shadow_realtime_dlight_shadows") != 0.0,
             shadow_quality: (v("r_shadow_quality").round() as i32).clamp(0, 2) as u32,
             water_ripples: if v("r_enhancedwater") != 0.0 && v("r_waterripples") != 0.0 { v("r_waterripples_amount").clamp(0.0, 4.0) } else { 0.0 },
-            water_splashes: v("r_enhancedwater") != 0.0 && v("r_watersplash") != 0.0,
+            water_splashes: !mapper.lightmap && v("r_enhancedwater") != 0.0 && v("r_watersplash") != 0.0,
             water_caustics: if v("r_enhancedwater") != 0.0 && v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },
             water_quality: (v("r_water_quality").round() as i32).clamp(0, 1) as u32,
             gel_quality: (v("addon_gel_quality").round() as i32).clamp(0, 1) as u32,

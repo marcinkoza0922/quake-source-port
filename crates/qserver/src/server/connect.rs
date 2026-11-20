@@ -103,6 +103,9 @@ impl Server {
         if i >= self.core.maxclients() || self.level.is_none() {
             return;
         }
+        if let Some(state) = self.core.sv.reload_players.get_mut(i) {
+            *state = None;
+        }
         let cl = &mut self.core.clients[i];
         *cl = Client { active: true, local, name: "unconnected".into(), ..Client::default() };
         let l = self.level.as_mut().unwrap();
