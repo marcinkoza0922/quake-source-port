@@ -1467,7 +1467,7 @@ hi प्रतिशत
 @ any% and 100%
 hi any% और 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 hi निजी सर्वश्रेष्ठ डेमो रखें
 
 @ any%
@@ -4043,3 +4043,12 @@ hi स्थानीय खेल। सफ़ेद निशान को स
 
 @ Shows the eight most recent gameplay inputs
 hi खेल के दौरान के आठ सबसे हालिया इनपुट दिखाता है
+
+@ no-hit
+hi बिना क्षति
+
+@ 100% no-hit
+hi 100% बिना क्षति
+
+@ Damage Skull
+hi क्षति की खोपड़ी

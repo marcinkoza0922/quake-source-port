@@ -1467,7 +1467,7 @@ cy canran
 @ any% and 100%
 cy any% a 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 cy Cadw Demos Gorau Personol
 
 @ any%
@@ -4043,3 +4043,12 @@ cy Gemau lleol. Alinia'r marciwr gwyn â'r un aur. Naid: − yn gynnar, + yn hwy
 
 @ Shows the eight most recent gameplay inputs
 cy Yn dangos yr wyth mewnbwn diweddaraf yn ystod chwarae
+
+@ no-hit
+cy heb ddifrod
+
+@ 100% no-hit
+cy 100% heb ddifrod
+
+@ Damage Skull
+cy Penglog difrod

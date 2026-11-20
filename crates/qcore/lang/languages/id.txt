@@ -1467,7 +1467,7 @@ id persen
 @ any% and 100%
 id any% dan 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 id Simpan Demo Rekor
 
 @ any%
@@ -4043,3 +4043,12 @@ id Game lokal. Sejajarkan penanda putih dengan penanda emas. Lompatan: − terla
 
 @ Shows the eight most recent gameplay inputs
 id Menampilkan delapan input terakhir selama bermain
+
+@ no-hit
+id tanpa kerusakan
+
+@ 100% no-hit
+id 100% tanpa kerusakan
+
+@ Damage Skull
+id Tengkorak kerusakan

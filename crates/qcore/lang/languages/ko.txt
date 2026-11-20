@@ -1467,7 +1467,7 @@ ko 백분율
 @ any% and 100%
 ko any% 및 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 ko 최고 기록 데모 보관
 
 @ any%
@@ -4043,3 +4043,12 @@ ko 로컬 게임용. 흰색 표시를 금색에 맞추세요. 점프: − 빠름
 
 @ Shows the eight most recent gameplay inputs
 ko 플레이 중 최근 입력 8개를 표시합니다
+
+@ no-hit
+ko 피해 없음
+
+@ 100% no-hit
+ko 100% 피해 없음
+
+@ Damage Skull
+ko 피해 해골

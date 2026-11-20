@@ -1467,7 +1467,7 @@ pt percentagem
 @ any% and 100%
 pt any% e 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 pt Guardar demos de recordes
 
 @ any%
@@ -4043,3 +4043,12 @@ pt Jogo local. Alinha o marcador branco com o dourado. Salto: − cedo, + tarde.
 
 @ Shows the eight most recent gameplay inputs
 pt Mostra os oito últimos comandos durante o jogo
+
+@ no-hit
+pt sem dano
+
+@ 100% no-hit
+pt 100% sem dano
+
+@ Damage Skull
+pt Caveira de dano

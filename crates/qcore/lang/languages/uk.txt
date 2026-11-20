@@ -1467,7 +1467,7 @@ uk відсоток
 @ any% and 100%
 uk any% і 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 uk Зберігати демо рекордів
 
 @ any%
@@ -4043,3 +4043,12 @@ uk Локальна гра. Сумістіть білу позначку із з
 
 @ Shows the eight most recent gameplay inputs
 uk Показує вісім останніх дій керування в грі
+
+@ no-hit
+uk без ушкоджень
+
+@ 100% no-hit
+uk 100% без ушкоджень
+
+@ Damage Skull
+uk Череп ушкодження

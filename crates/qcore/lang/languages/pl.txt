@@ -1467,7 +1467,7 @@ pl procent
 @ any% and 100%
 pl any% i 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 pl Zachowuj dema rekordów
 
 @ any%
@@ -4043,3 +4043,12 @@ pl Gra lokalna. Zgraj biały znacznik ze złotym. Skok: − za wcześnie, + za p
 
 @ Shows the eight most recent gameplay inputs
 pl Pokazuje osiem ostatnich wejść podczas gry
+
+@ no-hit
+pl bez obrażeń
+
+@ 100% no-hit
+pl 100% bez obrażeń
+
+@ Damage Skull
+pl Czaszka obrażeń

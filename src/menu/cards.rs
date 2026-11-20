@@ -22,7 +22,7 @@ impl SaveSlot {
 #[derive(Clone, Debug, Default)]
 pub struct SavePb {
     pub stats: qui::stats::Stats,
-    pub prefer_full: bool,
+    pub category: qui::stats::PbCategory,
     pub color: [f32; 4],
 }
 
@@ -32,10 +32,16 @@ impl SavePb {
     pub fn text(&self, map: &str, skill: i32) -> Option<String> {
         let rec = self.stats.get(map)?;
         let skill = usize::try_from(skill).ok()?;
-        let full = self.prefer_full;
-        let (t, full) = rec.pb(skill, full).map(|t| (t, full)).or_else(|| rec.pb(skill, !full).map(|t| (t, !full)))?;
+        use qui::stats::PbCategory::{Any, Full, FullNoHit, NoHit};
+        let fallback = match self.category {
+            Any => Full,
+            Full => Any,
+            NoHit => FullNoHit,
+            FullNoHit => NoHit,
+        };
+        let (t, category) = [self.category, fallback].into_iter().find_map(|cat| rec.pb(skill, cat).map(|t| (t, cat)))?;
         let t = crate::sbar::time::format_timer(f64::from(t), 2);
-        Some(qcore::tr!("PB {} {}", if full { "100%" } else { "any%" }, t))
+        Some(qcore::tr!("PB {} {}", qcore::lang::tr(category.label()), t))
     }
 }
 

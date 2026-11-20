@@ -1467,7 +1467,7 @@ zh-TW 百分比
 @ any% and 100%
 zh-TW any% 和 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 zh-TW 保留個人最佳示範
 
 @ any%
@@ -4043,3 +4043,12 @@ zh-TW 適用於本機遊戲。將白色標記對準金色標記。跳躍：− �
 
 @ Shows the eight most recent gameplay inputs
 zh-TW 顯示遊戲中最近八次輸入
+
+@ no-hit
+zh-TW 無傷
+
+@ 100% no-hit
+zh-TW 100% 無傷
+
+@ Damage Skull
+zh-TW 受傷骷髏

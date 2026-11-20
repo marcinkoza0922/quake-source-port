@@ -1467,7 +1467,7 @@ ta சதவீதம்
 @ any% and 100%
 ta any% மற்றும் 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 ta தனிப்பட்ட சிறந்த டெமோக்களை வை
 
 @ any%
@@ -4043,3 +4043,12 @@ ta உள்ளூர் விளையாட்டு. வெள்ளைக�
 
 @ Shows the eight most recent gameplay inputs
 ta விளையாட்டின் கடைசி எட்டு உள்ளீடுகளைக் காட்டும்
+
+@ no-hit
+ta சேதமின்றி
+
+@ 100% no-hit
+ta 100% சேதமின்றி
+
+@ Damage Skull
+ta சேத மண்டையோடு

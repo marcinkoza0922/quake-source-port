@@ -1467,7 +1467,7 @@ bn শতাংশ
 @ any% and 100%
 bn any% ও 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 bn ব্যক্তিগত সেরার ডেমো রাখুন
 
 @ any%
@@ -4043,3 +4043,12 @@ bn স্থানীয় খেলা। সাদা চিহ্নটি �
 
 @ Shows the eight most recent gameplay inputs
 bn খেলার সময়কার সর্বশেষ আটটি ইনপুট দেখায়
+
+@ no-hit
+bn ক্ষতি ছাড়া
+
+@ 100% no-hit
+bn 100% ক্ষতি ছাড়া
+
+@ Damage Skull
+bn ক্ষতির খুলি

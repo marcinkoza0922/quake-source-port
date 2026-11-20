@@ -1467,7 +1467,7 @@ sr проценат
 @ any% and 100%
 sr any% и 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 sr Чувај демо снимке рекорда
 
 @ any%
@@ -4043,3 +4043,12 @@ sr Локална игра. Поравнајте белу ознаку са зл
 
 @ Shows the eight most recent gameplay inputs
 sr Приказује осам последњих уноса током игре
+
+@ no-hit
+sr без штете
+
+@ 100% no-hit
+sr 100% без штете
+
+@ Damage Skull
+sr Лобања при повреди

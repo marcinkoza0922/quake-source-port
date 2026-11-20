@@ -1467,7 +1467,7 @@ ur فیصد
 @ any% and 100%
 ur any% اور 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 ur ذاتی بہترین ڈیمو رکھیں
 
 @ any%
@@ -4043,3 +4043,12 @@ ur مقامی کھیل۔ سفید نشان کو سنہری نشان سے ملا�
 
 @ Shows the eight most recent gameplay inputs
 ur کھیل کے دوران آخری آٹھ اِن پٹ دکھاتا ہے
+
+@ no-hit
+ur بغیر نقصان
+
+@ 100% no-hit
+ur 100% بغیر نقصان
+
+@ Damage Skull
+ur نقصان کی کھوپڑی

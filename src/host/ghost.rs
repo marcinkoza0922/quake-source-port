@@ -1,4 +1,4 @@
-//! Personal-best demo ghost (`cl_demo_ghost`: 0 off, 1 any%, 2 100%).
+//! Personal-best demo ghost (`cl_demo_ghost`).
 //! Loads the matching PB demo for the current map and skill once (or when the
 //! setting changes mid-level) and emits a translucent fullbright player entity
 //! synced to the level clock, faded out when overlapping the camera.
@@ -7,6 +7,7 @@ use std::path::PathBuf;
 
 use qcore::math::Vec3;
 use qrender::RenderEntity;
+use qui::stats::PbCategory;
 
 use super::*;
 use crate::demo::ghost::{GhostTrack, find_pb_demo};
@@ -19,8 +20,8 @@ const FADE_FAR: f32 = 64.0;
 
 #[derive(Default)]
 pub(super) struct GhostState {
-    /// Key of the currently cached track: (user_dir, mapname, skill, full).
-    key: Option<(PathBuf, String, usize, bool)>,
+    /// Key of the currently cached track: (user_dir, mapname, skill, category).
+    key: Option<(PathBuf, String, usize, PbCategory)>,
     track: Option<GhostTrack>,
 }
 
@@ -33,16 +34,9 @@ impl Host {
     /// Returns the translucent PB ghost entity for this frame, if enabled and
     /// a PB demo exists for the current map, skill and category.
     pub(super) fn ghost_entity(&mut self, view: &qrender::View, lerp_models: bool) -> Option<RenderEntity> {
-        let mode = self.cv("cl_demo_ghost").round() as i32;
-        let full = match mode {
-            1 => false,
-            2 => true,
-            _ => {
-                if self.ghost.key.is_some() {
-                    self.ghost_reset();
-                }
-                return None;
-            }
+        let Some(category) = PbCategory::demo_mode(self.cv("cl_demo_ghost")) else {
+            self.ghost_reset();
+            return None;
         };
         if !self.pb_allowed() || !self.guests.is_empty() || self.cl.signon != 4 || self.cl.intermission != 0 {
             return None;
@@ -50,10 +44,10 @@ impl Host {
         let skill = self.pb_skill()?;
         let user_dir = self.user_dir();
         let mapname = self.level.mapname.clone();
-        let want = (user_dir.clone(), mapname.clone(), skill, full);
+        let want = (user_dir.clone(), mapname.clone(), skill, category);
         if self.ghost.key.as_ref() != Some(&want) {
             self.ghost.key = Some(want);
-            self.ghost.track = find_pb_demo(&user_dir, &mapname, skill, full)
+            self.ghost.track = find_pb_demo(&user_dir, &mapname, skill, category)
                 .and_then(|p| qcore::vfs::read(&p).ok())
                 .map(|data| GhostTrack::extract(&data, Some(&mapname)))
                 .filter(|t| !t.samples.is_empty());

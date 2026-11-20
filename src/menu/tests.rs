@@ -804,11 +804,8 @@ fn demos_show_ghost_option_cycles_and_has_tooltip() {
     let item = page_items(Page::Demos)[row];
     assert!(tooltip(item).is_some(), "Show Ghost needs a tooltip");
     m.opt_cursor = row;
-    // Right cycles off (0) -> any% (1) -> 100% (2) -> off (0)
-    m.key(K_RIGHTARROW, &mut cv, false);
-    assert_eq!(cv.value_of("cl_demo_ghost"), 1.0);
-    m.key(K_RIGHTARROW, &mut cv, false);
-    assert_eq!(cv.value_of("cl_demo_ghost"), 2.0);
-    m.key(K_RIGHTARROW, &mut cv, false);
-    assert_eq!(cv.value_of("cl_demo_ghost"), 0.0);
+    for value in [1.0, 4.0, 2.0, 5.0, 0.0] {
+        m.key(K_RIGHTARROW, &mut cv, false);
+        assert_eq!(cv.value_of("cl_demo_ghost"), value);
+    }
 }

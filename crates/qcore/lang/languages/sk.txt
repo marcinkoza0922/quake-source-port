@@ -1467,7 +1467,7 @@ sk percentá
 @ any% and 100%
 sk any% a 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 sk Uchovávať demá rekordov
 
 @ any%
@@ -4043,3 +4043,12 @@ sk Miestna hra. Zarovnajte bielu značku so zlatou. Skok: − priskoro, + neskor
 
 @ Shows the eight most recent gameplay inputs
 sk Zobrazuje osem posledných vstupov počas hry
+
+@ no-hit
+sk bez poškodenia
+
+@ 100% no-hit
+sk 100% bez poškodenia
+
+@ Damage Skull
+sk Lebka pri zásahu

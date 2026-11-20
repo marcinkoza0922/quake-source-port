@@ -1467,7 +1467,7 @@ hu százalék
 @ any% and 100%
 hu any% és 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 hu Egyéni csúcs demók megtartása
 
 @ any%
@@ -4043,3 +4043,12 @@ hu Helyi játék. Igazítsd a fehér jelölőt az aranyhoz. Ugrás: − korai, +
 
 @ Shows the eight most recent gameplay inputs
 hu Megjeleníti a játék utolsó nyolc bevitelét
+
+@ no-hit
+hu sebződés nélkül
+
+@ 100% no-hit
+hu 100% sebződés nélkül
+
+@ Damage Skull
+hu Sebzéskoponya

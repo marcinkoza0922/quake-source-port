@@ -1467,7 +1467,7 @@ pa ਪ੍ਰਤੀਸ਼ਤ
 @ any% and 100%
 pa any% ਅਤੇ 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 pa ਨਿੱਜੀ ਸਰਵੋਤਮ ਡੈਮੋ ਰੱਖੋ
 
 @ any%
@@ -4043,3 +4043,12 @@ pa ਸਥਾਨਕ ਖੇਡ। ਚਿੱਟਾ ਨਿਸ਼ਾਨ ਸੁਨਹ�
 
 @ Shows the eight most recent gameplay inputs
 pa ਖੇਡ ਦੌਰਾਨ ਦਿੱਤੇ ਆਖਰੀ ਅੱਠ ਇਨਪੁੱਟ ਦਿਖਾਉਂਦਾ ਹੈ
+
+@ no-hit
+pa ਨੁਕਸਾਨ ਤੋਂ ਬਿਨਾਂ
+
+@ 100% no-hit
+pa 100% ਨੁਕਸਾਨ ਤੋਂ ਬਿਨਾਂ
+
+@ Damage Skull
+pa ਨੁਕਸਾਨ ਦੀ ਖੋਪੜੀ

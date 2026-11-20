@@ -1467,7 +1467,7 @@ be працэнт
 @ any% and 100%
 be any% і 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 be Захоўваць дэма рэкордаў
 
 @ any%
@@ -4043,3 +4043,12 @@ be Лакальная гульня. Сумясціце белую адзнаку
 
 @ Shows the eight most recent gameplay inputs
 be Паказвае восем апошніх дзеянняў кіравання падчас гульні
+
+@ no-hit
+be без шкоды
+
+@ 100% no-hit
+be 100% без шкоды
+
+@ Damage Skull
+be Чэрап шкоды

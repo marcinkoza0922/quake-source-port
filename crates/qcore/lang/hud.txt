@@ -695,3 +695,10 @@ de Sprung-Timing
 it Tempismo salto
 es Ritmo de salto
 ru Тайминг прыжка
+
+@ Damage Skull
+fr Crâne de dégâts
+de Schadensschädel
+it Teschio dei danni
+es Calavera de daño
+ru Череп урона

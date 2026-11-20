@@ -1467,7 +1467,7 @@ am መቶኛ
 @ any% and 100%
 am any% እና 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 am የግል ምርጥ ዴሞዎችን አቆይ
 
 @ any%
@@ -4043,3 +4043,12 @@ am የአካባቢ ጨዋታ። ነጩን ምልክት ከወርቃማው ጋር
 
 @ Shows the eight most recent gameplay inputs
 am በጨዋታ ጊዜ የመጨረሻዎቹን ስምንት ግቤቶች ያሳያል
+
+@ no-hit
+am ያለ ጉዳት
+
+@ 100% no-hit
+am 100% ያለ ጉዳት
+
+@ Damage Skull
+am የጉዳት ቅል

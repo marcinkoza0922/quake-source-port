@@ -1467,7 +1467,7 @@ sw asilimia
 @ any% and 100%
 sw any% na 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 sw Hifadhi Demo za Rekodi
 
 @ any%
@@ -4043,3 +4043,12 @@ sw Michezo ya ndani. Pangilia alama nyeupe na ya dhahabu. Ruko: − mapema, + ku
 
 @ Shows the eight most recent gameplay inputs
 sw Huonyesha ingizo nane za mwisho wakati wa kucheza
+
+@ no-hit
+sw bila madhara
+
+@ 100% no-hit
+sw 100% bila madhara
+
+@ Damage Skull
+sw Fuvu la madhara

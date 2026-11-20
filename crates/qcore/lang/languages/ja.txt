@@ -1467,7 +1467,7 @@ ja 割合
 @ any% and 100%
 ja any%と100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 ja 自己ベストのデモを保存
 
 @ any%
@@ -4043,3 +4043,12 @@ ja ローカルゲーム用。白い目印を金色の目印に合わせます�
 
 @ Shows the eight most recent gameplay inputs
 ja ゲーム中の直近8件の入力を表示します
+
+@ no-hit
+ja ノーダメージ
+
+@ 100% no-hit
+ja 100% ノーダメージ
+
+@ Damage Skull
+ja ダメージドクロ

@@ -1467,7 +1467,7 @@ fa درصد
 @ any% and 100%
 fa any% و 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 fa نگه‌داشتن دموهای رکورد
 
 @ any%
@@ -4043,3 +4043,12 @@ fa بازی محلی. نشانگر سفید را با طلایی هم‌راست
 
 @ Shows the eight most recent gameplay inputs
 fa هشت ورودی اخیر حین بازی را نشان می‌دهد
+
+@ no-hit
+fa بدون آسیب
+
+@ 100% no-hit
+fa 100% بدون آسیب
+
+@ Damage Skull
+fa جمجمهٔ آسیب

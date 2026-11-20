@@ -1467,7 +1467,7 @@ ka პროცენტი
 @ any% and 100%
 ka any% და 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 ka პირადი რეკორდების დემოების შენახვა
 
 @ any%
@@ -4043,3 +4043,12 @@ ka ლოკალური თამაში. თეთრი ნიშნუ�
 
 @ Shows the eight most recent gameplay inputs
 ka აჩვენებს თამაშში ბოლო რვა შეყვანას
+
+@ no-hit
+ka დაზიანების გარეშე
+
+@ 100% no-hit
+ka 100% დაზიანების გარეშე
+
+@ Damage Skull
+ka დაზიანების თავის ქალა

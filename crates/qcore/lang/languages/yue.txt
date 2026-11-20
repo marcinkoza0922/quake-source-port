@@ -1467,7 +1467,7 @@ yue 百分比
 @ any% and 100%
 yue any% 同 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 yue 保留個人最佳示範
 
 @ any%
@@ -4043,3 +4043,12 @@ yue 本機遊戲。將白色記號對準金色記號。跳躍：− 太早，+ �
 
 @ Shows the eight most recent gameplay inputs
 yue 顯示遊戲入面最近八次輸入
+
+@ no-hit
+yue 無傷
+
+@ 100% no-hit
+yue 100% 無傷
+
+@ Damage Skull
+yue 受傷骷髏

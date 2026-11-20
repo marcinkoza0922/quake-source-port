@@ -227,6 +227,8 @@ pub struct ClientState {
     pub paused: bool,
 
     pub stats: [i32; MAX_CL_STATS],
+    /// Latched by the first damage message and cleared at serverinfo.
+    pub took_damage: bool,
     /// Float representation of stats (PEXT2_PREDINFO / CSQC `getstatf`).
     pub statsf: [f32; MAX_CL_STATS],
     /// String stats (`svcfte_updatestatstring` / CSQC `getstats`).
@@ -356,6 +358,7 @@ impl ClientState {
             cl_nolerp: false,
             paused: false,
             stats: [0; MAX_CL_STATS],
+            took_damage: false,
             statsf: [0.0; MAX_CL_STATS],
             statss: vec![String::new(); MAX_CL_STATS],
             items: 0,

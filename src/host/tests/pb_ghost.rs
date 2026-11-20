@@ -2,6 +2,7 @@
 //! (skips cleanly without game data or Vulkan).
 
 use super::super::*;
+use qui::stats::PbCategory;
 
 fn host() -> Option<Host> {
     let mut fs = qcore::fs::Fs::new(qcore::fs::Fs::default_basedir());
@@ -29,7 +30,7 @@ fn pb_ghost_replays_translucent_entity_and_speedometer_tracks_speed() {
     crate::userdata::set_parent(&tmp, false).unwrap();
 
     // Record a short run on e1m1 (skill 1 = normal) into the dedicated any% ghost path.
-    let ghost_file = crate::demo::ghost::ghost_path(&h.user_dir(), "e1m1", 1, false);
+    let ghost_file = crate::demo::ghost::ghost_path(&h.user_dir(), "e1m1", 1, PbCategory::Any);
     h.exec_line("cl_startdemos 0");
     h.exec_line("sv_autosave 0");
     h.exec_line("cl_autodemo 0");
@@ -77,6 +78,15 @@ fn pb_ghost_replays_translucent_entity_and_speedometer_tracks_speed() {
     h.exec_line("cl_demo_ghost 2");
     run(&mut h, 0.05);
     assert!(h.ghost_entity(&view, true).is_none(), "100% mode should not play an any%-only demo");
+
+    h.exec_line("cl_demo_ghost 4");
+    assert!(h.ghost_entity(&view, true).is_none(), "no-hit mode should not play an any%-only demo");
+    let no_hit_file = crate::demo::ghost::ghost_path(&h.user_dir(), "e1m1", 1, PbCategory::NoHit);
+    std::fs::copy(&ghost_file, no_hit_file).unwrap();
+    h.exec_line("cl_demo_ghost 5");
+    assert!(h.ghost_entity(&view, true).is_none(), "100% no-hit mode should not play a no-hit-only demo");
+    h.exec_line("cl_demo_ghost 4");
+    assert!(h.ghost_entity(&view, true).is_some(), "no-hit mode should play its dedicated demo");
 
     let _ = std::fs::remove_dir_all(&tmp);
 }

@@ -1467,7 +1467,7 @@ sl odstotek
 @ any% and 100%
 sl any% in 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 sl Ohrani posnetke rekordov
 
 @ any%
@@ -4043,3 +4043,12 @@ sl Lokalna igra. Poravnajte belo oznako z zlato. Skok: − prezgodaj, + prepozno
 
 @ Shows the eight most recent gameplay inputs
 sl Prikaže zadnjih osem vnosov med igro
+
+@ no-hit
+sl brez poškodb
+
+@ 100% no-hit
+sl 100% brez poškodb
+
+@ Damage Skull
+sl Lobanja ob poškodbi

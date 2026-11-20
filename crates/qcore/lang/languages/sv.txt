@@ -1467,7 +1467,7 @@ sv procent
 @ any% and 100%
 sv any% och 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 sv Spara demor med personbästa
 
 @ any%
@@ -4043,3 +4043,12 @@ sv Lokala spel. Rikta den vita markören mot den gyllene. Hopp: − tidigt, + se
 
 @ Shows the eight most recent gameplay inputs
 sv Visar de åtta senaste inmatningarna under spel
+
+@ no-hit
+sv utan skada
+
+@ 100% no-hit
+sv 100% utan skada
+
+@ Damage Skull
+sv Skadedödskalle

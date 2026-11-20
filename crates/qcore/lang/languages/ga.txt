@@ -1467,7 +1467,7 @@ ga céatadán
 @ any% and 100%
 ga any% agus 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 ga Coinnigh Taispeántais Churiarrachta
 
 @ any%
@@ -4043,3 +4043,12 @@ ga Cluichí logánta. Ailínigh an marc bán leis an marc órga. Léim: − luat
 
 @ Shows the eight most recent gameplay inputs
 ga Taispeánann sé na hocht n-ionchur is déanaí le linn imeartha
+
+@ no-hit
+ga gan damáiste
+
+@ 100% no-hit
+ga 100% gan damáiste
+
+@ Damage Skull
+ga Cloigeann damáiste

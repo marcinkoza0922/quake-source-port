@@ -1467,7 +1467,7 @@ km ភាគរយ
 @ any% and 100%
 km any% និង 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 km រក្សា​ដេមូ​កំណត់ត្រា​ផ្ទាល់ខ្លួន
 
 @ any%
@@ -4043,3 +4043,12 @@ km ហ្គេម​ ក្នុងម៉ាស៊ីន។ តម្រឹម
 
 @ Shows the eight most recent gameplay inputs
 km បង្ហាញ​ ការបញ្ចូល​ ប្រាំបី​ ចុងក្រោយ​ ពេលលេង
+
+@ no-hit
+km គ្មាន​ការ​ខូចខាត
+
+@ 100% no-hit
+km 100% គ្មាន​ការ​ខូចខាត
+
+@ Damage Skull
+km លលាដ៍ក្បាល​ពេល​រង​របួស

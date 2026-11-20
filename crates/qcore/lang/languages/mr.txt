@@ -1467,7 +1467,7 @@ mr टक्के
 @ any% and 100%
 mr any% आणि 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 mr वैयक्तिक सर्वोत्तम डेमो ठेवा
 
 @ any%
@@ -4043,3 +4043,12 @@ mr स्थानिक खेळ. पांढरी खूण सोनेर
 
 @ Shows the eight most recent gameplay inputs
 mr खेळातील शेवटचे आठ इनपुट दाखवते
+
+@ no-hit
+mr इजा न होता
+
+@ 100% no-hit
+mr 100% इजा न होता
+
+@ Damage Skull
+mr इजेची कवटी

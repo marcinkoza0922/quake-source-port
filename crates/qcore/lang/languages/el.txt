@@ -1467,7 +1467,7 @@ el ποσοστό
 @ any% and 100%
 el any% και 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 el Διατήρηση demo ρεκόρ
 
 @ any%
@@ -4043,3 +4043,12 @@ el Τοπικό παιχνίδι. Ευθυγραμμίστε τον λευκό �
 
 @ Shows the eight most recent gameplay inputs
 el Δείχνει τις οκτώ πιο πρόσφατες εντολές στο παιχνίδι
+
+@ no-hit
+el χωρίς ζημιά
+
+@ 100% no-hit
+el 100% χωρίς ζημιά
+
+@ Damage Skull
+el Κρανίο ζημιάς

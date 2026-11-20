@@ -1467,7 +1467,7 @@ sq përqindje
 @ any% and 100%
 sq any% dhe 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 sq Mbaj demot e rekordeve
 
 @ any%
@@ -4043,3 +4043,12 @@ sq Lojë lokale. Rreshto shenjën e bardhë me atë të artë. Kërcim: − her�
 
 @ Shows the eight most recent gameplay inputs
 sq Shfaq tetë komandat më të fundit gjatë lojës
+
+@ no-hit
+sq pa dëme
+
+@ 100% no-hit
+sq 100% pa dëme
+
+@ Damage Skull
+sq Kafka e dëmit

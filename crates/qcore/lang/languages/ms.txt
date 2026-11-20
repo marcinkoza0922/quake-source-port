@@ -1467,7 +1467,7 @@ ms peratus
 @ any% and 100%
 ms any% dan 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 ms Simpan Demo Rekod
 
 @ any%
@@ -4043,3 +4043,12 @@ ms Permainan setempat. Jajarkan penanda putih dengan penanda emas. Lompatan: −
 
 @ Shows the eight most recent gameplay inputs
 ms Memaparkan lapan input terakhir semasa bermain
+
+@ no-hit
+ms tanpa cedera
+
+@ 100% no-hit
+ms 100% tanpa cedera
+
+@ Damage Skull
+ms Tengkorak kecederaan

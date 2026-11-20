@@ -1467,7 +1467,7 @@ gu ટકા
 @ any% and 100%
 gu any% અને 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 gu વ્યક્તિગત શ્રેષ્ઠ ડેમો રાખો
 
 @ any%
@@ -4043,3 +4043,12 @@ gu સ્થાનિક રમત. સફેદ નિશાનને સોન
 
 @ Shows the eight most recent gameplay inputs
 gu રમત દરમિયાનના છેલ્લાં આઠ ઇનપુટ બતાવે છે
+
+@ no-hit
+gu નુકસાન વિના
+
+@ 100% no-hit
+gu 100% નુકસાન વિના
+
+@ Damage Skull
+gu નુકસાનની ખોપરી

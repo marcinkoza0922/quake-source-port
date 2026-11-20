@@ -1467,7 +1467,7 @@ fi prosentti
 @ any% and 100%
 fi any% ja 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 fi Säilytä ennätysdemot
 
 @ any%
@@ -4043,3 +4043,12 @@ fi Paikallinen peli. Kohdista valkoinen merkki kultaiseen. Hyppy: − aikaisin, 
 
 @ Shows the eight most recent gameplay inputs
 fi Näyttää pelin kahdeksan viimeisintä syötettä
+
+@ no-hit
+fi ilman vahinkoa
+
+@ 100% no-hit
+fi 100% ilman vahinkoa
+
+@ Damage Skull
+fi Vahinkokallo

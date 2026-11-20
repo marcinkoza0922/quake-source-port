@@ -104,6 +104,7 @@ impl ClientState {
                     let armor = m.byte();
                     let blood = m.byte();
                     let from = m.vec3_coord(pf);
+                    self.took_damage |= !m.badread && (armor > 0 || blood > 0);
                     self.events.push(ClientEvent::Damage { armor, blood, from });
                 }
                 SVC_SERVERINFO => self.parse_serverinfo(&mut m)?,
@@ -426,4 +427,35 @@ fn check_protocol(p: u32) -> R {
         return err(format!("Server returned version {p}, not 15 or 666 or 999"));
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod damage_tests {
+    use super::*;
+
+    #[test]
+    fn level_damage_latches_on_one_point_and_resets_at_serverinfo() {
+        let mut cl = ClientState::new();
+        cl.parse_server_message(&[SVC_DAMAGE, 0, 0, 0, 0, 0, 0, 0, 0]).unwrap();
+        assert!(!cl.took_damage);
+        cl.parse_server_message(&[SVC_DAMAGE, 1, 0, 0, 0, 0, 0, 0, 0]).unwrap();
+        assert!(cl.took_damage);
+        cl.events.clear();
+        cl.parse_server_message(&[SVC_NOP]).unwrap();
+        assert!(cl.took_damage);
+
+        let mut map = qnet::msg::SizeBuf::new(128);
+        map.byte(SVC_SERVERINFO.into());
+        map.long(PROTOCOL_NETQUAKE as i32);
+        map.byte(1);
+        map.byte(0);
+        map.string(b"Test");
+        map.string(b"maps/e1m1.bsp");
+        map.string(b"");
+        map.string(b"");
+        cl.parse_server_message(&map.data).unwrap();
+        assert!(!cl.took_damage);
+        cl.parse_server_message(&[SVC_DAMAGE, 0, 1, 0, 0, 0, 0, 0, 0]).unwrap();
+        assert!(cl.took_damage);
+    }
 }

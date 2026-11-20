@@ -1467,7 +1467,7 @@ nb prosent
 @ any% and 100%
 nb any% og 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 nb Behold rekorddemoer
 
 @ any%
@@ -4043,3 +4043,12 @@ nb Lokale spill. Rett den hvite markøren mot den gylne. Hopp: − tidlig, + sen
 
 @ Shows the eight most recent gameplay inputs
 nb Viser de åtte siste inndataene i spillet
+
+@ no-hit
+nb uten skade
+
+@ 100% no-hit
+nb 100% uten skade
+
+@ Damage Skull
+nb Skadehodeskalle

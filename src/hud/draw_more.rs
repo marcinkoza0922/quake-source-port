@@ -156,3 +156,19 @@ pub(super) fn message_sample(c: &mut Canvas, e: &Elem, (w, h): (f32, f32)) {
     }
     (c.scale, c.ox, c.oy) = saved;
 }
+
+/// A two-tone skull on a 14 × 14 pixel grid.
+pub(super) fn damage_skull(c: &mut Canvas) {
+    let outline = [0.16, 0.05, 0.04, 1.0];
+    let bone = [1.0, 0.83, 0.69, 1.0];
+    c.fill(2.0, 0.0, 10.0, 11.0, outline);
+    c.fill(0.0, 2.0, 14.0, 8.0, outline);
+    c.fill(3.0, 10.0, 8.0, 4.0, outline);
+    c.fill(3.0, 1.0, 8.0, 9.0, bone);
+    c.fill(1.0, 3.0, 12.0, 6.0, bone);
+    c.fill(4.0, 9.0, 6.0, 4.0, bone);
+    c.fill(3.0, 5.0, 3.0, 3.0, outline);
+    c.fill(8.0, 5.0, 3.0, 3.0, outline);
+    c.fill(6.0, 8.0, 2.0, 2.0, outline);
+    c.fill(6.0, 11.0, 2.0, 2.0, outline);
+}

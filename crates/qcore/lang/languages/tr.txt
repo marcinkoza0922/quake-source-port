@@ -1467,7 +1467,7 @@ tr yüzde
 @ any% and 100%
 tr any% ve 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 tr Rekor Demolarını Sakla
 
 @ any%
@@ -4043,3 +4043,12 @@ tr Yerel oyunlar. Beyaz işareti altın renkli işaretle hizala. Sıçrama: − 
 
 @ Shows the eight most recent gameplay inputs
 tr Oyun sırasındaki son sekiz girdiyi gösterir
+
+@ no-hit
+tr hasarsız
+
+@ 100% no-hit
+tr 100% hasarsız
+
+@ Damage Skull
+tr Hasar kafatası

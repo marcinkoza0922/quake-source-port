@@ -1467,7 +1467,7 @@ eu ehunekoa
 @ any% and 100%
 eu any% eta 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 eu Gorde marken demoak
 
 @ any%
@@ -4043,3 +4043,12 @@ eu Joko lokala. Lerrokatu marka zuria urre-kolorekoarekin. Jauzia: − goiz, + b
 
 @ Shows the eight most recent gameplay inputs
 eu Jokoko azken zortzi sarrerak erakusten ditu
+
+@ no-hit
+eu kalterik gabe
+
+@ 100% no-hit
+eu 100% kalterik gabe
+
+@ Damage Skull
+eu Kaltearen garezurra

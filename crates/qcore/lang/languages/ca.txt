@@ -1467,7 +1467,7 @@ ca percentatge
 @ any% and 100%
 ca any% i 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 ca Conserva les demos de rècords
 
 @ any%
@@ -4043,3 +4043,12 @@ ca Partides locals. Alinea el marcador blanc amb el daurat. Salt: − aviat, + t
 
 @ Shows the eight most recent gameplay inputs
 ca Mostra les vuit darreres entrades durant la partida
+
+@ no-hit
+ca sense dany
+
+@ 100% no-hit
+ca 100% sense dany
+
+@ Damage Skull
+ca Calavera de dany

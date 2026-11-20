@@ -1467,7 +1467,7 @@ ar نسبة مئوية
 @ any% and 100%
 ar any% و100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 ar الاحتفاظ بعروض أفضل الأرقام
 
 @ any%
@@ -4043,3 +4043,12 @@ ar للعب المحلي. حاذِ العلامة البيضاء مع الذهب
 
 @ Shows the eight most recent gameplay inputs
 ar يعرض آخر ثمانية إدخالات أثناء اللعب
+
+@ no-hit
+ar بلا ضرر
+
+@ 100% no-hit
+ar 100% بلا ضرر
+
+@ Damage Skull
+ar جمجمة الضرر

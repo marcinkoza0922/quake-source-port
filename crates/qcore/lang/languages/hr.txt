@@ -1467,7 +1467,7 @@ hr postotak
 @ any% and 100%
 hr any% i 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 hr Čuvaj demo snimke rekorda
 
 @ any%
@@ -4043,3 +4043,12 @@ hr Lokalna igra. Poravnajte bijelu oznaku sa zlatnom. Skok: − prerano, + preka
 
 @ Shows the eight most recent gameplay inputs
 hr Prikazuje osam posljednjih unosa u igri
+
+@ no-hit
+hr bez štete
+
+@ 100% no-hit
+hr 100% bez štete
+
+@ Damage Skull
+hr Lubanja za štetu

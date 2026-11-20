@@ -1467,7 +1467,7 @@ vi phần trăm
 @ any% and 100%
 vi any% và 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 vi Giữ demo kỷ lục cá nhân
 
 @ any%
@@ -4043,3 +4043,12 @@ vi Trận cục bộ. Căn vạch trắng với vạch vàng. Nhảy: − sớm,
 
 @ Shows the eight most recent gameplay inputs
 vi Hiển thị tám thao tác gần nhất khi chơi
+
+@ no-hit
+vi không nhận sát thương
+
+@ 100% no-hit
+vi 100% không nhận sát thương
+
+@ Damage Skull
+vi Đầu lâu sát thương

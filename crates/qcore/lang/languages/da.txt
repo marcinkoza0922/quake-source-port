@@ -1467,7 +1467,7 @@ da procent
 @ any% and 100%
 da any% og 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 da Behold rekorddemoer
 
 @ any%
@@ -4043,3 +4043,12 @@ da Lokale spil. Flugt den hvide markør med den gyldne. Hop: − tidligt, + sent
 
 @ Shows the eight most recent gameplay inputs
 da Viser de otte seneste input under spillet
+
+@ no-hit
+da uden skade
+
+@ 100% no-hit
+da 100% uden skade
+
+@ Damage Skull
+da Skadekranium

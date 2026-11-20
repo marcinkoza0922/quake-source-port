@@ -1467,7 +1467,7 @@ et protsent
 @ any% and 100%
 et any% ja 100%
 
-@ Keep Personal Best Demos
+@ Keep Personal Bests
 et Hoia rekordite demosid
 
 @ any%
@@ -4043,3 +4043,12 @@ et Kohalik mäng. Joonda valge märk kuldsega. Hüpe: − vara, + hilja.
 
 @ Shows the eight most recent gameplay inputs
 et Kuvab kaheksa viimast mängusisendit
+
+@ no-hit
+et kahjudeta
+
+@ 100% no-hit
+et 100% kahjudeta
+
+@ Damage Skull
+et Kahjupealuu
