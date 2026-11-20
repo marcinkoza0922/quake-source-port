@@ -3,7 +3,13 @@ Creative Commons Zero (CC0 1.0 Universal / Public Domain Dedication):
 https://creativecommons.org/publicdomain/zero/1.0/
 
 Sources:
-- stone_*.ogg, dirt_*.ogg:
+- stone_*.ogg:
+  "Hiking Boot Footsteps on Stone" by Fission9
+  https://freesound.org/people/Fission9/sounds/521590/
+  License: CC0 1.0
+  Four trimmed steps and a fifth strike pitched down for the landing.
+
+- dirt_*.ogg:
   "Fantozzi's Footsteps (Grass/Sand & Stone)" by Fantozzi (packaged by qubodup)
   https://opengameart.org/content/fantozzis-footsteps-grasssand-stone
   License: CC0 1.0
