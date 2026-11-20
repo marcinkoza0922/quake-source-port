@@ -72,10 +72,10 @@ fn build_surface(s: &LmSurf, samples: &[u32], styles: &[f32; 256], dlights: &[DL
                 }
                 let minlight = rad - d.minlight;
                 let imp: [f32; 3] = std::array::from_fn(|k| d.origin[k] - n[k] * dist);
-                let ls = imp[0] * s.vecs0[0] + imp[1] * s.vecs0[1] + imp[2] * s.vecs0[2] + s.vecs0[3] - s.tmins[0];
-                let lt = imp[0] * s.vecs1[0] + imp[1] * s.vecs1[1] + imp[2] * s.vecs1[2] + s.vecs1[3] - s.tmins[1];
-                let sd = (ls - (x * 16) as f32).abs();
-                let td = (lt - (y * 16) as f32).abs();
+                let ls = imp[0] * s.vecs0[0] + imp[1] * s.vecs0[1] + imp[2] * s.vecs0[2] + s.vecs0[3];
+                let lt = imp[0] * s.vecs1[0] + imp[1] * s.vecs1[1] + imp[2] * s.vecs1[2] + s.vecs1[3];
+                let sd = (ls - x as f32).abs() * s.tmins[0];
+                let td = (lt - y as f32).abs() * s.tmins[1];
                 let dd = if sd > td { sd + td * 0.5 } else { td + sd * 0.5 };
                 if dd < minlight {
                     for (lc, dc) in l.iter_mut().zip(d.color) {

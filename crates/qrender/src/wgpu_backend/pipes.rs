@@ -210,8 +210,8 @@ pub(super) fn pipeline_with(dev: &wgpu::Device, d: Desc, compare: wgpu::CompareF
     })
 }
 
-pub(super) const WORLD_ATTRS: [wgpu::VertexAttribute; 4] =
-    wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Float32x3, 3 => Float32x2];
+pub(super) const WORLD_ATTRS: [wgpu::VertexAttribute; 5] =
+    wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Float32x3, 3 => Float32x2, 4 => Float32x3];
 pub(super) const ALIAS_ATTRS: [wgpu::VertexAttribute; 4] =
     wgpu::vertex_attr_array![0 => Float32x3, 1 => Float32x2, 2 => Float32x3, 3 => Float32x3];
 pub(super) const POLY_ATTRS: [wgpu::VertexAttribute; 3] =

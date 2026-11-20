@@ -7,10 +7,10 @@ struct Surf {
     uint styles;      // 4 x u8, 255 = none
     uint size;        // w | h << 16 (in samples)
     uint atlas;       // x | y << 16
-    vec4 vecs0;
-    vec4 vecs1;
+    vec4 vecs0;       // world -> luxel S
+    vec4 vecs1;       // world -> luxel T
     vec4 plane;       // normal, dist
-    vec4 tmins;       // texturemins.xy, layer, fullbright (entire BSP unlit)
+    vec4 tmins;       // lm_scale.xy (world units per luxel), layer, fullbright (entire BSP unlit)
 };
 struct DLight { vec4 origin_radius; vec4 color_minlight; };
 layout(set = 0, binding = 0) readonly buffer Samples { uint samples[]; };
@@ -59,10 +59,10 @@ void main() {
                 if (rad < minlight) continue;
                 minlight = rad - minlight;
                 vec3 impact = org - s.plane.xyz * dist;
-                float ls = dot(impact, s.vecs0.xyz) + s.vecs0.w - s.tmins.x;
-                float lt = dot(impact, s.vecs1.xyz) + s.vecs1.w - s.tmins.y;
-                float sd = abs(ls - float(x * 16u));
-                float td = abs(lt - float(y * 16u));
+                float ls = dot(impact, s.vecs0.xyz) + s.vecs0.w;
+                float lt = dot(impact, s.vecs1.xyz) + s.vecs1.w;
+                float sd = abs(ls - float(x)) * s.tmins.x;
+                float td = abs(lt - float(y)) * s.tmins.y;
                 float dd = sd > td ? sd + td * 0.5 : td + sd * 0.5;
                 if (dd < minlight) l += (rad - dd) / 128.0 * dl[d].color_minlight.rgb;
             }
