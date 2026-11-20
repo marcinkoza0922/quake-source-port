@@ -1766,6 +1766,15 @@ pl Pokaż etykietę
 @ Speedometer
 pl Prędkościomierz
 
+@ Quick Reset
+pl Szybki restart
+
+@ Screenshot
+pl Zrzut ekranu
+
+@ Record Demo
+pl Nagrywaj demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

@@ -1766,6 +1766,15 @@ gl Mostrar etiqueta
 @ Speedometer
 gl Velocímetro
 
+@ Quick Reset
+gl Reinicio rápido
+
+@ Screenshot
+gl Captura de pantalla
+
+@ Record Demo
+gl Gravar demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

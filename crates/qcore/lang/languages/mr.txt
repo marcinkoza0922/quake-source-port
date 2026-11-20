@@ -1766,6 +1766,15 @@ mr लेबल दाखवा
 @ Speedometer
 mr स्पीडोमीटर
 
+@ Quick Reset
+mr क्विक रीसेट
+
+@ Screenshot
+mr स्क्रीनशॉट
+
+@ Record Demo
+mr डेमो रेकॉर्ड करा
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

@@ -95,6 +95,9 @@ The port is designed to be played on a gamepad.
 - **Button glyphs** match your pad (Xbox, PlayStation, Nintendo) and are
   detected automatically.
 - Rebind everything in Options → Controls, including from the controller.
+- **Button shortcuts**: double-tapping the stats button (Select / View)
+  always takes a screenshot. On the menu button (Start), double-tapping
+  creates a quick save and holding it performs a quick load.
 - Touchscreen controls with adjustable size, opacity and look speed.
 
 ## Saving

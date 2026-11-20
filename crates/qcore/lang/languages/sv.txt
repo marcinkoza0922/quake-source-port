@@ -1766,6 +1766,15 @@ sv Visa etikett
 @ Speedometer
 sv Hastighetsmätare
 
+@ Quick Reset
+sv Snabbomstart
+
+@ Screenshot
+sv Skärmdump
+
+@ Record Demo
+sv Spela in demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

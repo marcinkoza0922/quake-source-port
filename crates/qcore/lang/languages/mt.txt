@@ -1766,6 +1766,15 @@ mt Uri t-Tikketta
 @ Speedometer
 mt Veloċimetru
 
+@ Quick Reset
+mt Erġa' ibda malajr
+
+@ Screenshot
+mt Screenshot
+
+@ Record Demo
+mt Irrekordja demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

@@ -1766,6 +1766,15 @@ yue 顯示標籤
 @ Speedometer
 yue 速度計
 
+@ Quick Reset
+yue 快速重開
+
+@ Screenshot
+yue 截圖
+
+@ Record Demo
+yue 錄示範
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

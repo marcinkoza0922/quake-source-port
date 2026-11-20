@@ -1766,6 +1766,15 @@ is Sýna merki
 @ Speedometer
 is Hraðamælir
 
+@ Quick Reset
+is Flýtiendurræsing
+
+@ Screenshot
+is Skjámynd
+
+@ Record Demo
+is Taka upp kynningu
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

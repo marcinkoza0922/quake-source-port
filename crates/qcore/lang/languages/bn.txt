@@ -1766,6 +1766,15 @@ bn লেবেল দেখান
 @ Speedometer
 bn স্পিডোমিটার
 
+@ Quick Reset
+bn দ্রুত রিসেট
+
+@ Screenshot
+bn স্ক্রিনশট
+
+@ Record Demo
+bn ডেমো রেকর্ড করুন
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

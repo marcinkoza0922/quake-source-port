@@ -79,6 +79,9 @@ fn bind_keywords(cmd: &str) -> &'static str {
         "+lookup" | "+lookdown" | "centerview" => "camera aim",
         "+showscores" => "scores stats",
         "automap" => "map minimap wireframe 3d",
+        "restart" => "reset level retry speedrun",
+        "screenshot" => "capture picture photo snap",
+        "record_toggle" => "demo recording replay",
         "+lockon" => "aim assist autoaim",
         _ => "",
     }

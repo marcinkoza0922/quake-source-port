@@ -1766,6 +1766,15 @@ hi लेबल दिखाएँ
 @ Speedometer
 hi स्पीडोमीटर
 
+@ Quick Reset
+hi क्विक रीसेट
+
+@ Screenshot
+hi स्क्रीनशॉट
+
+@ Record Demo
+hi डेमो रिकॉर्ड करें
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

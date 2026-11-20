@@ -1766,6 +1766,15 @@ el Εμφάνιση ετικέτας
 @ Speedometer
 el Ταχύμετρο
 
+@ Quick Reset
+el Γρήγορη επανεκκίνηση
+
+@ Screenshot
+el Στιγμιότυπο
+
+@ Record Demo
+el Εγγραφή demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

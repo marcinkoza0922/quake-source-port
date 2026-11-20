@@ -1766,6 +1766,15 @@ ka წარწერის ჩვენება
 @ Speedometer
 ka სპიდომეტრი
 
+@ Quick Reset
+ka სწრაფი გადატვირთვა
+
+@ Screenshot
+ka ეკრანის სურათი
+
+@ Record Demo
+ka დემოს ჩაწერა
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

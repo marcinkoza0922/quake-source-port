@@ -1766,6 +1766,15 @@ hy Ցույց տալ պիտակը
 @ Speedometer
 hy Արագաչափ
 
+@ Quick Reset
+hy Արագ վերսկսում
+
+@ Screenshot
+hy Էկրանանկար
+
+@ Record Demo
+hy Ձայնագրել դեմո
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

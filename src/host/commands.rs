@@ -70,6 +70,12 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             }
             h.server.core.cvars.set("cl_automapbind", "1");
         }
+        if h.cv("cl_recordbind") < 1.0 {
+            if h.input.binding(qinput::keys::K_F1 + 7).is_none() {
+                h.input.set_binding(qinput::keys::K_F1 + 7, Some("record_toggle"));
+            }
+            h.server.core.cvars.set("cl_recordbind", "1");
+        }
         if h.cv("cl_paddefaults") >= 1.0 {
             return;
         }

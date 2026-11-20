@@ -1766,6 +1766,15 @@ pt-BR Mostrar rótulo
 @ Speedometer
 pt-BR Velocímetro
 
+@ Quick Reset
+pt-BR Reinício rápido
+
+@ Screenshot
+pt-BR Captura de tela
+
+@ Record Demo
+pt-BR Gravar demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

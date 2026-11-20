@@ -183,6 +183,10 @@ impl Host {
                     self.sync_key_dest();
                     return;
                 }
+                if self.handle_pad_gesture(&ie) {
+                    self.sync_key_dest();
+                    return;
+                }
                 // Level complete: any key or button moves on (QC exits the
                 // intermission on attack/jump/use).
                 if self.cl.intermission != 0 && self.key_dest() == KeyDest::Game {

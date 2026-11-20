@@ -4105,3 +4105,24 @@ de Geschwindigkeitsmesser
 it Tachimetro
 es Velocímetro
 ru Спидометр
+
+@ Quick Reset
+fr Réinitialisation rapide
+de Schnellneustart
+it Riavvio rapido
+es Reinicio rápido
+ru Быстрый перезапуск
+
+@ Screenshot
+fr Capture d'écran
+de Bildschirmfoto
+it Schermata
+es Captura de pantalla
+ru Снимок экрана
+
+@ Record Demo
+fr Enregistrer une démo
+de Demo aufnehmen
+it Registra demo
+es Grabar demo
+ru Записать демо

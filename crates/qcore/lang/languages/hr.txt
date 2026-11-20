@@ -1766,6 +1766,15 @@ hr Prikaži oznaku
 @ Speedometer
 hr Brzinomjer
 
+@ Quick Reset
+hr Brzo ponovno pokretanje
+
+@ Screenshot
+hr Snimka zaslona
+
+@ Record Demo
+hr Snimaj demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

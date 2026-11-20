@@ -131,7 +131,6 @@ impl Host {
 
     /// CL_Record_f (with ProQuake's mid-game start).
     pub(super) fn record(&mut self, a: &Args) {
-        use qnet::protocol::*;
         if self.demo.is_some() {
             self.print(&qcore::ctr!("Can't record during demo playback\n"));
             return;
@@ -149,7 +148,7 @@ impl Host {
             self.print(&qcore::ctr!("Relative pathnames are not allowed.\n"));
             return;
         }
-        let connected = self.local.is_some() && self.server.active();
+        let connected = (self.local.is_some() && self.server.active()) || self.remote();
         if c == 2 && connected && self.cl.signon < 2 {
             self.print(&qcore::ctr!("Can't record - try again when connected\n"));
             return;
@@ -162,7 +161,41 @@ impl Host {
             self.cbuf.insert_text(&format!("map {}\n", a.argv(2)));
             return;
         }
-        self.start_recording(&path, track);
+        self.record_at(&path, track, connected);
+    }
+
+    /// Toggle manual demo recording: stops if active, otherwise starts a new
+    /// timestamped demo for the current map.
+    pub(super) fn record_toggle(&mut self) {
+        if self.recording.is_some() {
+            self.stop_recording();
+            return;
+        }
+        if self.demo.is_some() {
+            self.print(&qcore::ctr!("Can't record during demo playback\n"));
+            return;
+        }
+        let connected = (self.local.is_some() && self.server.active()) || self.remote();
+        if !connected || self.cl.signon < 2 {
+            self.print(&qcore::ctr!("Can't record - try again when connected\n"));
+            return;
+        }
+        let map: String = self.cl.mapname.chars().map(|c| if c.is_alphanumeric() || "-_".contains(c) { c } else { '_' }).collect();
+        let map_part = if map.is_empty() { "demo" } else { &map };
+        let stamp = crate::demo::stamp_now();
+        let dir = self.user_dir();
+        let mut path = dir.join(format!("{map_part}_{stamp}.dem"));
+        let mut n = 2u32;
+        while qcore::vfs::exists(&path) {
+            path = dir.join(format!("{map_part}_{stamp}_{n}.dem"));
+            n += 1;
+        }
+        self.record_at(&path, -1, true);
+    }
+
+    fn record_at(&mut self, path: &std::path::Path, track: i32, connected: bool) {
+        use qnet::protocol::*;
+        self.start_recording(path, track);
         if !connected {
             return;
         }
@@ -245,6 +278,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
         h.next_demo();
     });
     c.add("record", |h, a| h.record(a));
+    c.add("record_toggle", |h, _| h.record_toggle());
     c.add("demo_convert", |h, a| {
         if a.argc() != 2 || a.argv(1).contains("..") {
             h.print("demo_convert <demoname> : rewrite a demo so other source ports can play it\n");

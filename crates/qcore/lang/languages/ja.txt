@@ -1766,6 +1766,15 @@ ja ラベルを表示
 @ Speedometer
 ja スピードメーター
 
+@ Quick Reset
+ja クイックリセット
+
+@ Screenshot
+ja スクリーンショット
+
+@ Record Demo
+ja デモを録画
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

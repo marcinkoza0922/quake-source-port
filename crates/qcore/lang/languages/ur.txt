@@ -1766,6 +1766,15 @@ ur لیبل دکھائیں
 @ Speedometer
 ur اسپیڈومیٹر
 
+@ Quick Reset
+ur فوری ری سیٹ
+
+@ Screenshot
+ur اسکرین شاٹ
+
+@ Record Demo
+ur ڈیمو ریکارڈ کریں
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

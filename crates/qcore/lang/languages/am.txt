@@ -1766,6 +1766,15 @@ am መለያ አሳይ
 @ Speedometer
 am የፍጥነት መለኪያ
 
+@ Quick Reset
+am ፈጣን እንደገና ጀምር
+
+@ Screenshot
+am ቅጽበታዊ ገጽ እይታ
+
+@ Record Demo
+am ዴሞ ቅረጽ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

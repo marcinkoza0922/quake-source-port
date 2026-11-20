@@ -1766,6 +1766,15 @@ ta லேபிள் காட்டு
 @ Speedometer
 ta வேகமானி
 
+@ Quick Reset
+ta விரைவு மறுதொடக்கம்
+
+@ Screenshot
+ta திரைப்பிடிப்பு
+
+@ Record Demo
+ta டெமோ பதிவுசெய்
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
