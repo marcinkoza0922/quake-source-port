@@ -72,6 +72,9 @@ pub struct QwClient {
     pub download_root: Option<PathBuf>,
     last_cmd: f64,
     buf: Vec<u8>,
+    /// True while `.qwd` recording is active on this connection.
+    pub recording_qwd: bool,
+    qwd_tape: Vec<u8>,
 }
 
 impl QwClient {
@@ -97,7 +100,20 @@ impl QwClient {
             download_root: None,
             last_cmd: now,
             buf: vec![0; 8192],
+            recording_qwd: false,
+            qwd_tape: Vec::new(),
         })
+    }
+
+    pub fn incoming_sequence(&self) -> u32 {
+        match &self.conn {
+            Conn::Connected(c) => c.incoming_sequence,
+            _ => 0,
+        }
+    }
+
+    pub fn take_qwd_tape(&mut self) -> Vec<u8> {
+        std::mem::take(&mut self.qwd_tape)
     }
 
     pub fn connected(&self) -> bool {
@@ -174,6 +190,9 @@ impl QwClient {
             }
             let Conn::Connected(c) = &mut self.conn else { continue };
             let Some(payload) = c.process(&pkt, now) else { continue };
+            if self.recording_qwd {
+                self.qwd_tape.extend(qclient::qw::demo::encode_qwd_read(now as f32, &pkt));
+            }
             let (ack, inseq) = (c.incoming_acknowledged, c.incoming_sequence);
             let parsed = match self.qw.parse(payload, ack, inseq, now) {
                 Ok(p) => p,
@@ -335,6 +354,9 @@ impl QwClient {
         self.qw.outgoing_sequence = c.outgoing_sequence;
         let lost = (c.drop.min(100)) as u8;
         let m = self.qw.build_cmd(cmd, lost, now);
+        if self.recording_qwd && self.qw.stage == Stage::Active {
+            self.qwd_tape.extend(qclient::qw::demo::encode_qwd_cmd(now as f32, &cmd, cmd.angles));
+        }
         let p = c.transmit(&m);
         let _ = self.sock.send_to(&p, self.server);
     }

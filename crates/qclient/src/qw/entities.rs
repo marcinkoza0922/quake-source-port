@@ -62,16 +62,63 @@ impl QwState {
         Ok(())
     }
 
-    /// CL_ParsePlayerinfo.
+    /// CL_ParsePlayerinfo (both standard QW `PF_*` and MVD `DF_*` delta format).
     pub(super) fn parse_playerinfo(&mut self, m: &mut MsgReader<'_>) -> R {
         let num = m.byte();
         if !(0..MAX_CLIENTS as i32).contains(&num) {
             return err("CL_ParsePlayerinfo: bad num");
         }
+        let slot = num as usize;
+        if self.mvd {
+            let flags = m.short() as u16 as u32;
+            let frame = m.byte();
+            let prev = self.mvd_players[slot];
+            let mut st = prev;
+            st.present = true;
+            st.messagenum = self.parsecount;
+            st.frame = frame;
+            if !prev.present && st.modelindex == 0 {
+                st.modelindex = self.playerindex;
+            }
+            for i in 0..3 {
+                if flags & (DF_ORIGIN << i) != 0 {
+                    st.origin[i] = read_coord(m);
+                }
+            }
+            for i in 0..3 {
+                if flags & (DF_ANGLES << i) != 0 {
+                    st.viewangles[i] = read_angle16(m);
+                }
+            }
+            if flags & DF_MODEL != 0 {
+                st.modelindex = m.byte().max(0) as usize;
+            }
+            if flags & DF_SKINNUM != 0 {
+                st.skinnum = m.byte();
+            }
+            if flags & DF_EFFECTS != 0 {
+                st.effects = m.byte();
+            }
+            if flags & DF_WEAPONFRAME != 0 {
+                st.weaponframe = m.byte();
+            }
+            let mut pf = 0u32;
+            if flags & DF_DEAD != 0 {
+                pf |= PF_DEAD;
+            }
+            if flags & DF_GIB != 0 {
+                pf |= PF_GIB;
+            }
+            st.flags = pf;
+            self.mvd_players[slot] = st;
+            let fi = Self::frame_index(self.parsecount);
+            self.frames[fi].playerstate[slot] = st;
+            return Ok(());
+        }
         let fi = Self::frame_index(self.parsecount);
         let senttime = self.frames[fi].senttime;
         let playerindex = self.playerindex;
-        let st = &mut self.frames[fi].playerstate[num as usize];
+        let st = &mut self.frames[fi].playerstate[slot];
         let flags = m.short() as u16 as u32;
         st.flags = flags;
         st.messagenum = self.parsecount;
@@ -93,10 +140,13 @@ impl QwState {
         Ok(())
     }
 
-    /// CL_ParseProjectiles.
-    pub(super) fn parse_nails(&mut self, m: &mut MsgReader<'_>) {
+    /// CL_ParseProjectiles (`SVC_NAILS` and MVD `SVC_NAILS2`).
+    pub(super) fn parse_nails(&mut self, m: &mut MsgReader<'_>, nails2: bool) {
         let c = m.byte().max(0);
         for _ in 0..c {
+            if nails2 {
+                let _id = m.byte();
+            }
             let mut b = [0i32; 6];
             for x in &mut b {
                 *x = m.byte() & 255;
@@ -152,8 +202,15 @@ impl QwState {
     /// CL_ParsePacketEntities. Frames are keyed by the acknowledged
     /// outgoing sequence (the server keys its copies by the sequence it
     /// received), and `from` names the frame the server deltas against.
+    /// In MVD mode, frames are keyed by `self.mvd_ent_seq`.
     pub(super) fn parse_packet_entities(&mut self, m: &mut MsgReader<'_>, delta: bool, _inseq: u32) -> R {
-        let newseq = self.parsecount;
+        let newseq = if self.mvd {
+            let s = self.mvd_ent_seq;
+            self.mvd_ent_seq = self.mvd_ent_seq.wrapping_add(1);
+            s
+        } else {
+            self.parsecount
+        };
         let newi = Self::frame_index(newseq);
         let mut old: Vec<QwEntity> = Vec::new();
         let mut full = true;
@@ -163,8 +220,13 @@ impl QwState {
             full = false;
             let oldi = Self::frame_index(from);
             let f = &self.frames[oldi];
+            let recent = if self.mvd || self.demo_mode {
+                newseq.wrapping_sub(f.entities_seq.unwrap_or(u32::MAX)) < UPDATE_BACKUP as u32
+            } else {
+                self.outgoing_sequence.wrapping_sub(f.entities_seq.unwrap_or(u32::MAX)) < UPDATE_BACKUP as u32 - 1
+            };
             match f.entities_seq {
-                Some(s) if s & 255 == from && self.outgoing_sequence.wrapping_sub(s) < UPDATE_BACKUP as u32 - 1 => {
+                Some(s) if s & 255 == from && recent => {
                     old = f.entities.clone();
                 }
                 _ => valid = false,

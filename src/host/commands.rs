@@ -567,18 +567,28 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         }
     });
     c.add("slist", |h, _| {
-        if h.lan_search.is_some() {
+        h.start_server_search(false);
+    });
+    c.add("slist_internet", |h, _| {
+        h.start_server_search(true);
+    });
+    c.add("server_fav", |h, a| {
+        if a.argc() < 2 {
+            if h.saved_servers.favorites.is_empty() {
+                h.print("Favorites: (none)\nusage: server_fav <address>\n");
+            } else {
+                let lines: String = h
+                    .saved_servers
+                    .favorites
+                    .iter()
+                    .map(|sv| format!("* {:<22} {} ({})\n", sv.connect_address(), sv.hostname, sv.effective_gamedir()))
+                    .collect();
+                h.print(&lines);
+            }
             return;
         }
-        match crate::net::LanSearch::start(h.net_port, h.realtime) {
-            Ok(ls) => {
-                h.print(&qcore::ctr!("Looking for Quake servers...\n"));
-                h.lan_search = Some(ls);
-                h.menu.servers.clear();
-                h.menu.searching = true;
-            }
-            Err(e) => h.print(&format!("slist: {e}\n")),
-        }
+        let addr: String = a.args().trim().trim_matches('"').split_whitespace().collect();
+        h.toggle_favorite_server(&addr);
     });
     // Maps for the Host Game page: the running game dir's own maps.
     c.add("_netmaps", |h, _| {

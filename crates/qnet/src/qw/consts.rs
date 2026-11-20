@@ -61,6 +61,50 @@ pub const SVC_ENTGRAVITY: u8 = 50;
 pub const SVC_SETINFO: u8 = 51;
 pub const SVC_SERVERINFO: u8 = 52;
 pub const SVC_UPDATEPL: u8 = 53;
+pub const SVC_NAILS2: u8 = 54;
+
+// Master server out-of-band commands.
+pub const C2M_MASTER_REQUEST: u8 = b'c';
+pub const M2C_MASTER_REPLY: u8 = b'd';
+pub const PORT_MASTER: u16 = 27000;
+
+// Protocol extension tags preceding PROTOCOL_VERSION in svc_serverdata.
+pub const PROTOCOL_VERSION_FTE: i32 = 0x5845_5446; // "FTEX"
+pub const PROTOCOL_VERSION_FTE2: i32 = 0x3245_5446; // "FTE2"
+pub const PROTOCOL_VERSION_MVD1: i32 = 0x3144_564d; // "MVD1"
+pub const MVD_PEXT1_FLOATCOORDS: u32 = 1 << 0;
+pub const MVD_PEXT1_HIDDEN_MESSAGES: u32 = 1 << 5;
+
+// FTE packetentities extension bits (in U_MOREBITS byte -> U_FTE_EVENMORE).
+pub const U_FTE_EVENMORE: u32 = 1 << 7;
+pub const U_FTE_SCALE: u32 = 1 << 0;
+pub const U_FTE_TRANS: u32 = 1 << 1;
+pub const U_FTE_FATNESS: u32 = 1 << 2;
+pub const U_FTE_MODELDBL: u32 = 1 << 3;
+pub const U_FTE_ENTITYDBL: u32 = 1 << 5;
+pub const U_FTE_ENTITYDBL2: u32 = 1 << 6;
+pub const U_FTE_YETMORE: u32 = 1 << 7;
+pub const U_FTE_COLOURMOD: u32 = 1 << 10;
+
+// QuakeWorld (.qwd) and Multi-View Demo (.mvd) frame record types.
+pub const DEM_CMD: u8 = 0;
+pub const DEM_READ: u8 = 1;
+pub const DEM_SET: u8 = 2;
+pub const DEM_MULTIPLE: u8 = 3;
+pub const DEM_SINGLE: u8 = 4;
+pub const DEM_STATS: u8 = 5;
+pub const DEM_ALL: u8 = 6;
+pub const DEM_MASK: u8 = 7;
+
+// MVD svc_playerinfo delta flags (DF_*).
+pub const DF_ORIGIN: u32 = 1 << 0;
+pub const DF_ANGLES: u32 = 1 << 3;
+pub const DF_EFFECTS: u32 = 1 << 6;
+pub const DF_SKINNUM: u32 = 1 << 7;
+pub const DF_DEAD: u32 = 1 << 8;
+pub const DF_GIB: u32 = 1 << 9;
+pub const DF_WEAPONFRAME: u32 = 1 << 10;
+pub const DF_MODEL: u32 = 1 << 11;
 
 pub const CLC_NOP: u8 = 1;
 pub const CLC_MOVE: u8 = 3;

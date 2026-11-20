@@ -309,6 +309,12 @@ pub struct ClientState {
     /// Reliable clc_* bytes to send (signon replies, string commands).
     pub out_reliable: SizeBuf,
     pub movemessages: u32,
+    /// Ring buffer of recent outgoing moves for `PEXT2_PREDINFO` prediction.
+    pub movecmds: [crate::pred::PredMove; crate::pred::MOVECMDS_SIZE],
+    /// Predicted player origin and velocity when `PEXT2_PREDINFO` is active.
+    pub simorg: [f32; 3],
+    pub simvel: [f32; 3],
+    pub predicted: bool,
     /// Player name/colors for the signon reply.
     pub name: String,
     pub color: i32,
@@ -405,6 +411,10 @@ impl ClientState {
             stickies: Vec::new(),
             out_reliable: SizeBuf::new(MAX_MSGLEN),
             movemessages: 0,
+            movecmds: [crate::pred::PredMove::default(); crate::pred::MOVECMDS_SIZE],
+            simorg: [0.0; 3],
+            simvel: [0.0; 3],
+            predicted: false,
             name: "player".into(),
             color: 0,
         }

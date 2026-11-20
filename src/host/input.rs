@@ -173,11 +173,12 @@ impl Host {
                         self.demo_key([qinput::keys::K_LTRIGGER, qinput::keys::K_RTRIGGER][i], true);
                     }
                 }
-                // Key_Event: in a demo, a key in game mode brings up the menu.
+                // Key_Event: in a demo (outside freecam), a key in game mode brings up the menu.
                 if let InputEvent::Key { key, down: true } = ie
                     && self.demo.is_some()
                     && self.key_dest() == KeyDest::Game
                     && key != qinput::keys::K_TAB
+                    && (self.freecam.cam.is_none() || key == K_ESCAPE)
                 {
                     self.menu.open(Screen::Main);
                     self.sync_key_dest();

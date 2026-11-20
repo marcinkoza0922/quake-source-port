@@ -16,6 +16,7 @@ impl QwState {
         }
         self.nails.clear();
         let mut got_entities = false;
+        let for_pov = !self.mvd || (self.target_mask & (1u32.checked_shl(self.playernum as u32).unwrap_or(0))) != 0;
         let mut m = MsgReader::new(data);
         loop {
             if m.badread {
@@ -34,41 +35,71 @@ impl QwState {
                 SVC_PRINT => {
                     let level = m.byte();
                     let s = m.string_lossy();
-                    body.byte(nq::SVC_PRINT);
-                    // \x01 marks chat (talk sound, coloured) as in NQ.
-                    let s = if level == PRINT_CHAT && !s.starts_with('\x01') { format!("\x01{s}") } else { s };
-                    body.string(&s);
+                    if for_pov || self.target_mask == u32::MAX || level == PRINT_CHAT {
+                        body.byte(nq::SVC_PRINT);
+                        // \x01 marks chat (talk sound, coloured) as in NQ.
+                        let s = if level == PRINT_CHAT && !s.starts_with('\x01') { format!("\x01{s}") } else { s };
+                        body.string(&s);
+                    }
                 }
                 SVC_CENTERPRINT => {
                     let s = m.string_lossy();
-                    body.byte(nq::SVC_CENTERPRINT);
-                    body.string(&s);
+                    if for_pov {
+                        body.byte(nq::SVC_CENTERPRINT);
+                        body.string(&s);
+                    }
                 }
                 SVC_STUFFTEXT => {
                     let s = m.string_lossy();
+                    let prev_signon = self.nq_signon;
                     self.stuff_text(&s, &mut body, &mut out);
+                    if self.mvd && prev_signon < 3 && self.nq_signon >= 3 && self.mvd_players.iter().any(|p| p.present) {
+                        got_entities = true;
+                    }
                 }
                 SVC_DAMAGE => {
                     let armor = m.byte();
                     let blood = m.byte();
                     let from = coord3(&mut m);
-                    body.byte(nq::SVC_DAMAGE);
-                    body.byte(armor as u8);
-                    body.byte(blood as u8);
-                    body.vec(from);
+                    if for_pov {
+                        body.byte(nq::SVC_DAMAGE);
+                        body.byte(armor as u8);
+                        body.byte(blood as u8);
+                        body.vec(from);
+                    }
                 }
                 SVC_SERVERDATA => self.parse_serverdata(&mut m, &mut out)?,
                 SVC_SETANGLE => {
-                    let a = [read_angle(&mut m), read_angle(&mut m), read_angle(&mut m)];
-                    body.byte(nq::SVC_SETANGLE);
-                    body.angles(a);
+                    let a = if self.mvd && self.target_mask == u32::MAX {
+                        let slot = self.slot(m.byte())?;
+                        let ang = [read_angle(&mut m), read_angle(&mut m), read_angle(&mut m)];
+                        self.mvd_players[slot].viewangles = ang;
+                        if slot == self.playernum {
+                            body.byte(nq::SVC_SETANGLE);
+                            body.angles(ang);
+                        }
+                        ang
+                    } else {
+                        let ang = [read_angle(&mut m), read_angle(&mut m), read_angle(&mut m)];
+                        if for_pov {
+                            body.byte(nq::SVC_SETANGLE);
+                            body.angles(ang);
+                        }
+                        ang
+                    };
+                    let _ = a;
                 }
                 SVC_LIGHTSTYLE => {
                     let i = m.byte();
                     let s = m.string_lossy();
-                    body.byte(nq::SVC_LIGHTSTYLE);
-                    body.byte(i as u8);
-                    body.string(&s);
+                    if let Some(slot) = self.lightstyles.get_mut(i.max(0) as usize) {
+                        *slot = s.clone();
+                    }
+                    if self.nq_ready {
+                        body.byte(nq::SVC_LIGHTSTYLE);
+                        body.byte(i as u8);
+                        body.string(&s);
+                    }
                 }
                 SVC_SOUND => {
                     let channel = m.short();
@@ -116,6 +147,7 @@ impl QwState {
                 }
                 SVC_SPAWNSTATIC => {
                     let b = Self::parse_baseline(&mut m, 0);
+                    self.static_entities.push(b);
                     body.byte(nq::SVC_SPAWNSTATIC);
                     body.byte(b.modelindex as u8);
                     body.byte(b.frame as u8);
@@ -135,12 +167,22 @@ impl QwState {
                     if !(0..nq::MAX_CL_STATS as i32).contains(&i) {
                         return err(format!("CL_SetStat: {i} is invalid"));
                     }
-                    self.stats[i as usize] = v;
-                    // Stats 0..=10 and items ride in svc_clientdata.
-                    if i as usize > nq::STAT_ACTIVEWEAPON && i as usize != nq::STAT_ITEMS {
-                        body.byte(nq::SVC_UPDATESTAT);
-                        body.byte(i as u8);
-                        body.0.long(v);
+                    let idx = i as usize;
+                    if self.mvd {
+                        for s in 0..MAX_CLIENTS {
+                            if self.target_mask & (1 << s) != 0 {
+                                self.player_stats[s][idx] = v;
+                            }
+                        }
+                    }
+                    if for_pov {
+                        self.stats[idx] = v;
+                        // Stats 0..=10 and items ride in svc_clientdata.
+                        if idx > nq::STAT_ACTIVEWEAPON && idx != nq::STAT_ITEMS {
+                            body.byte(nq::SVC_UPDATESTAT);
+                            body.byte(i as u8);
+                            body.0.long(v);
+                        }
                     }
                 }
                 SVC_SPAWNSTATICSOUND => {
@@ -172,8 +214,16 @@ impl QwState {
                     body.string(&s);
                 }
                 SVC_SELLSCREEN => body.byte(nq::SVC_SELLSCREEN),
-                SVC_SMALLKICK => self.punch = -2.0,
-                SVC_BIGKICK => self.punch = -4.0,
+                SVC_SMALLKICK => {
+                    if for_pov {
+                        self.punch = -2.0;
+                    }
+                }
+                SVC_BIGKICK => {
+                    if for_pov {
+                        self.punch = -4.0;
+                    }
+                }
                 SVC_MUZZLEFLASH => {
                     let i = m.short();
                     if (1..=MAX_CLIENTS as i32).contains(&i) {
@@ -185,6 +235,7 @@ impl QwState {
                     self.players[i].userid = m.long();
                     self.players[i].userinfo = m.string_lossy();
                     self.process_userinfo(i, &mut body);
+                    self.auto_select_mvd_pov(&mut body);
                 }
                 SVC_SETINFO => {
                     let i = self.slot(m.byte())?;
@@ -192,6 +243,7 @@ impl QwState {
                     let v = m.string_lossy();
                     info_set(&mut self.players[i].userinfo, &k, &v);
                     self.process_userinfo(i, &mut body);
+                    self.auto_select_mvd_pov(&mut body);
                 }
                 SVC_SERVERINFO => {
                     let k = m.string_lossy();
@@ -207,8 +259,14 @@ impl QwState {
                     }
                     out.actions.push(QwAction::Download { size, percent, data });
                 }
-                SVC_PLAYERINFO => self.parse_playerinfo(&mut m)?,
-                SVC_NAILS => self.parse_nails(&mut m),
+                SVC_PLAYERINFO => {
+                    self.parse_playerinfo(&mut m)?;
+                    if self.mvd {
+                        self.auto_select_mvd_pov(&mut body);
+                        got_entities = true;
+                    }
+                }
+                SVC_NAILS | SVC_NAILS2 => self.parse_nails(&mut m, cmd == SVC_NAILS2),
                 SVC_CHOKECOUNT => {
                     m.byte();
                 }
@@ -217,8 +275,18 @@ impl QwState {
                     self.parse_packet_entities(&mut m, cmd == SVC_DELTAPACKETENTITIES, inseq)?;
                     got_entities = true;
                 }
-                SVC_MAXSPEED => self.movevars.maxspeed = m.float(),
-                SVC_ENTGRAVITY => self.movevars.entgravity = m.float(),
+                SVC_MAXSPEED => {
+                    let v = m.float();
+                    if for_pov {
+                        self.movevars.maxspeed = v;
+                    }
+                }
+                SVC_ENTGRAVITY => {
+                    let v = m.float();
+                    if for_pov {
+                        self.movevars.entgravity = v;
+                    }
+                }
                 SVC_SETPAUSE => {
                     self.paused = m.byte() != 0;
                     body.byte(nq::SVC_SETPAUSE);

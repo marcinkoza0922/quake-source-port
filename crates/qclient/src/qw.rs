@@ -28,6 +28,7 @@ mod entities;
 mod frame_out;
 mod client_cmd;
 mod parse;
+pub mod demo;
 
 type R<T = ()> = Result<T, ParseError>;
 
@@ -158,6 +159,7 @@ pub enum Stage {
     Active,
 }
 
+#[derive(Clone)]
 pub struct QwState {
     pub stage: Stage,
     pub servercount: i32,
@@ -174,8 +176,28 @@ pub struct QwState {
     pub players: Vec<QwPlayer>,
     pub serverinfo: String,
     pub stats: [i32; nq::MAX_CL_STATS],
+    /// Per-player stats tracked in MVD demos (`dem_stats`).
+    pub player_stats: Vec<[i32; nq::MAX_CL_STATS]>,
+    pub static_entities: Vec<QwEntity>,
+    pub lightstyles: Vec<String>,
     baselines: Vec<QwEntity>,
     pub frames: Vec<QwFrame>,
+    /// Persistent per-player state for MVD delta `svc_playerinfo`.
+    pub mvd_players: Vec<QwPlayerState>,
+    /// Entity sequence counter in MVD playback (`svc_packetentities` / `svc_deltapacketentities`).
+    pub mvd_ent_seq: u32,
+    /// True when replaying a `.qwd` or `.mvd` demo (auto-completes precache).
+    pub demo_mode: bool,
+    /// True when replaying a Multi-View Demo (`.mvd`).
+    pub mvd: bool,
+    /// True when the user explicitly locked an MVD POV slot.
+    pub pov_locked: bool,
+    /// Recipient bitmask for the current MVD packet (`u32::MAX` = all).
+    pub target_mask: u32,
+    pub fte_pext1: u32,
+    pub fte_pext2: u32,
+    pub mvd_pext1: u32,
+    pub gametime: f32,
     /// cl.validsequence (0: no valid entity frame to delta from).
     pub validsequence: u32,
     /// cl.parsecount: the newest acknowledged outgoing sequence.
@@ -253,8 +275,21 @@ impl QwState {
             players: vec![QwPlayer::default(); MAX_CLIENTS],
             serverinfo: String::new(),
             stats: [0; nq::MAX_CL_STATS],
+            player_stats: vec![[0; nq::MAX_CL_STATS]; MAX_CLIENTS],
+            static_entities: Vec::new(),
+            lightstyles: vec![String::new(); nq::MAX_LIGHTSTYLES],
             baselines: vec![QwEntity::default(); MAX_EDICTS],
             frames: vec![QwFrame::default(); UPDATE_BACKUP],
+            mvd_players: vec![QwPlayerState::default(); MAX_CLIENTS],
+            mvd_ent_seq: 0,
+            demo_mode: false,
+            mvd: false,
+            pov_locked: false,
+            target_mask: u32::MAX,
+            fte_pext1: 0,
+            fte_pext2: 0,
+            mvd_pext1: 0,
+            gametime: 0.0,
             validsequence: 0,
             parsecount: 0,
             outgoing_sequence: 0,
@@ -278,11 +313,18 @@ impl QwState {
     /// CL_ClearState for a new map (keeps the connection's sequences).
     fn clear_level(&mut self) {
         let (out, parse) = (self.outgoing_sequence, self.parsecount);
+        let (demo_mode, mvd, pov_locked, playernum) = (self.demo_mode, self.mvd, self.pov_locked, self.playernum);
         let players = std::mem::take(&mut self.players);
         let serverinfo = std::mem::take(&mut self.serverinfo);
         *self = Self::new();
         self.outgoing_sequence = out;
         self.parsecount = parse;
+        self.demo_mode = demo_mode;
+        self.mvd = mvd;
+        self.pov_locked = pov_locked;
+        if mvd && pov_locked {
+            self.playernum = playernum;
+        }
         // Userinfo persists across maps; frags and pings are resent.
         self.players = players;
         self.serverinfo = serverinfo;

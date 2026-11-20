@@ -4,18 +4,32 @@ impl QwState {
     /// CL_ParseServerData.
     pub(super) fn parse_serverdata(&mut self, m: &mut MsgReader<'_>, out: &mut Parsed) -> R {
         self.clear_level();
-        // FTE/MVD extension headers come before the version; we ask for none.
-        let protover = m.long();
+        // Optional FTE/MVD extension headers come before PROTOCOL_VERSION.
+        let mut protover = m.long();
+        loop {
+            match protover {
+                PROTOCOL_VERSION_FTE => self.fte_pext1 = m.long() as u32,
+                PROTOCOL_VERSION_FTE2 => self.fte_pext2 = m.long() as u32,
+                PROTOCOL_VERSION_MVD1 => self.mvd_pext1 = m.long() as u32,
+                _ => break,
+            }
+            protover = m.long();
+        }
         if protover != PROTOCOL_VERSION {
             return err(format!("Server returned version {protover}, not {PROTOCOL_VERSION}"));
         }
         self.servercount = m.long();
         self.gamedir = m.string_lossy();
-        let pn = m.byte();
-        self.spectator = pn & 128 != 0;
-        self.playernum = (pn & 127) as usize;
-        if self.playernum >= MAX_CLIENTS {
-            return err(format!("bad playernum {}", self.playernum));
+        if self.mvd {
+            self.gametime = m.float();
+            self.spectator = false;
+        } else {
+            let pn = m.byte();
+            self.spectator = pn & 128 != 0;
+            self.playernum = (pn & 127) as usize;
+            if self.playernum >= MAX_CLIENTS {
+                return err(format!("bad playernum {}", self.playernum));
+            }
         }
         self.levelname = m.string_lossy();
         let mv = &mut self.movevars;
@@ -69,7 +83,12 @@ impl QwState {
         let find = |name: &str| self.model_names.iter().position(|n| n == name).unwrap_or(0);
         self.playerindex = find("progs/player.mdl");
         self.spikeindex = find("progs/spike.mdl");
-        out.actions.push(QwAction::Precache);
+        if self.demo_mode {
+            let (msg, _) = self.finish_precache(0);
+            out.nq.push(msg);
+        } else {
+            out.actions.push(QwAction::Precache);
+        }
         Ok(())
     }
 
@@ -106,6 +125,13 @@ impl QwState {
         for i in 0..MAX_CLIENTS {
             self.emit_player(&mut b, i);
             self.emit_frags(&mut b, i);
+        }
+        for (i, ls) in self.lightstyles.iter().enumerate() {
+            if !ls.is_empty() {
+                b.byte(nq::SVC_LIGHTSTYLE);
+                b.byte(i as u8);
+                b.string(ls);
+            }
         }
         self.nq_signon = 1;
         b.byte(nq::SVC_SIGNONNUM);

@@ -53,6 +53,19 @@ pub(super) enum Item {
     Soundtrack,
     /// Built-in and user-saved HUD presets (`hud_preset`, `hud_preset_name`).
     HudPreset,
+    /// Server browser filter/sort/search controls on `Page::Join`.
+    Browser(BrowserRow),
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(super) enum BrowserRow {
+    SearchInternet,
+    Source,
+    Protocol,
+    Mode,
+    ModFilter,
+    HideEmpty,
+    SortBy,
 }
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -78,20 +91,19 @@ pub(super) enum Run {
     EditHud,
 }
 
-/// A server answering the LAN search.
-#[derive(Clone, Debug, PartialEq)]
-pub struct ServerEntry {
-    pub address: String,
-    pub hostname: String,
-    pub map: String,
-    pub players: u8,
-    pub max_players: u8,
-}
+pub use crate::net::browser::ServerEntry;
 
 pub(super) const JOIN: &[Item] = &[
     Item::Text { label: "Address", cvar: "_mp_address", max: 40 },
     Item::Run { label: "Connect", run: Run::Connect },
     Item::Run { label: "Search LAN", run: Run::Search },
+    Item::Browser(BrowserRow::SearchInternet),
+    Item::Browser(BrowserRow::Source),
+    Item::Browser(BrowserRow::Protocol),
+    Item::Browser(BrowserRow::Mode),
+    Item::Browser(BrowserRow::ModFilter),
+    Item::Browser(BrowserRow::HideEmpty),
+    Item::Browser(BrowserRow::SortBy),
 ];
 
 pub(super) const fn bind(label: &'static str, cmd: &'static str) -> Item {

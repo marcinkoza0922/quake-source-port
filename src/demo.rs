@@ -7,6 +7,7 @@ pub mod index;
 pub mod keyframes;
 pub mod library;
 pub mod playback;
+pub mod qw;
 
 pub struct Demo {
     data: std::sync::Arc<[u8]>,
@@ -17,6 +18,8 @@ pub struct Demo {
     pub paused: bool,
     /// Speed, seeking, marks and the timeline (`playback`).
     pub play: playback::Playback,
+    /// Present when playing a QuakeWorld Multi-View Demo (`.mvd`).
+    pub mvd: Option<qw::MvdInfo>,
 }
 
 /// `YYYYMMDD-HHMMSS` (UTC) for auto-demo and video file names.
@@ -49,10 +52,57 @@ const MAX_MSGLEN: usize = 96_000;
 
 impl Demo {
     pub fn new(data: Vec<u8>) -> Self {
+        let mut mvd = None;
+        let data = match qw::detect_format(&data) {
+            Some(qw::QwDemoFormat::Qwd) => qw::transcode_qwd(&data).unwrap_or(data),
+            Some(qw::QwDemoFormat::Mvd) => {
+                let raw: std::sync::Arc<[u8]> = data.into();
+                match qw::transcode_mvd(raw.clone(), None) {
+                    Some((dem, info)) => {
+                        mvd = Some(info);
+                        dem
+                    }
+                    None => raw.to_vec(),
+                }
+            }
+            None => data,
+        };
         // The header (cls.forcetrack, unused: svc_cdtrack follows) is an
         // optional '-' and digits ending in '\n'.
         let pos = data.iter().take(16).position(|&b| b == b'\n').map_or(0, |e| e + 1);
-        Demo { data: data.into(), pos, start: pos, paused: false, play: playback::Playback::default() }
+        Demo { data: data.into(), pos, start: pos, paused: false, play: playback::Playback::default(), mvd }
+    }
+
+    pub fn is_mvd(&self) -> bool {
+        self.mvd.is_some()
+    }
+
+    pub fn mvd_players(&self) -> &[(usize, String)] {
+        self.mvd.as_ref().map_or(&[], |m| &m.players)
+    }
+
+    pub fn mvd_pov(&self) -> Option<usize> {
+        self.mvd.as_ref().map(|m| m.pov)
+    }
+
+    pub fn mvd_pov_name(&self) -> Option<&str> {
+        let m = self.mvd.as_ref()?;
+        m.players.iter().find(|(s, _)| *s == m.pov).map(|(_, n)| n.as_str())
+    }
+
+    /// Re-transcodes an MVD demo for player slot `slot` (`0..32`) and resets
+    /// the playhead and keyframe cache so the caller can seek to the current clock.
+    pub fn set_mvd_pov(&mut self, slot: usize) -> bool {
+        let Some(cur) = &self.mvd else { return false };
+        let Some((dem, info)) = qw::transcode_mvd(cur.raw.clone(), Some(slot)) else { return false };
+        let pos = dem.iter().take(16).position(|&b| b == b'\n').map_or(0, |e| e + 1);
+        self.data = dem.into();
+        self.start = pos;
+        self.pos = pos;
+        self.mvd = Some(info);
+        self.play.keyframes = keyframes::Keyframes::default();
+        self.play.ord = None;
+        true
     }
 
     /// The whole file, shared with the background indexer.
@@ -100,16 +150,33 @@ impl Demo {
 pub struct DemoWriter {
     path: std::path::PathBuf,
     buf: Vec<u8>,
+    qwd: bool,
 }
 
 /// Buffered bytes appended to the file at a time.
 const DEMO_FLUSH: usize = 64 * 1024;
 
 impl DemoWriter {
-    /// Creates the file and writes the CD track header.
+    /// Creates a NetQuake `.dem` file and writes the CD track header.
     pub fn create(path: &std::path::Path, track: i32) -> std::io::Result<Self> {
         qcore::vfs::write(path, format!("{track}\n").as_bytes())?;
-        Ok(DemoWriter { path: path.to_path_buf(), buf: Vec::with_capacity(DEMO_FLUSH) })
+        Ok(DemoWriter { path: path.to_path_buf(), buf: Vec::with_capacity(DEMO_FLUSH), qwd: false })
+    }
+
+    /// Creates a QuakeWorld `.qwd` file and writes the initial gamestate header.
+    pub fn create_qwd(path: &std::path::Path, header: &[u8]) -> std::io::Result<Self> {
+        qcore::vfs::write(path, header)?;
+        Ok(DemoWriter { path: path.to_path_buf(), buf: Vec::with_capacity(DEMO_FLUSH), qwd: true })
+    }
+
+    pub fn is_qwd(&self) -> bool {
+        self.qwd
+    }
+
+    /// Appends raw pre-encoded demo records (used for `.qwd` packets and commands).
+    pub fn write_raw(&mut self, data: &[u8]) -> std::io::Result<()> {
+        self.buf.extend_from_slice(data);
+        if self.buf.len() >= DEMO_FLUSH { self.flush() } else { Ok(()) }
     }
 
     /// CL_WriteDemoMessage.

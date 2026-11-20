@@ -22,6 +22,7 @@ use qnet::dgram::{NET_HEADERSIZE, NET_MAXMESSAGE, NETFLAG_CTL, NETFLAG_LENGTH_MA
 use qnet::protocol::{CLC_DISCONNECT, CLC_MOVE, CLC_NOP, CLC_STRINGCMD, PROTOCOL_NETQUAKE};
 use qnet::{Ccrep, Ccreq, Connection, MsgReader, Received, Transport, UdpTransport};
 use qserver::{ClientMove, Server};
+pub mod browser;
 mod control;
 
 pub const DEFAULT_PORT: u16 = 26000;
@@ -335,54 +336,6 @@ impl NetClient {
         for _ in 0..3 {
             self.send_unreliable(&[CLC_DISCONNECT], now);
         }
-    }
-}
-
-/// `slist`: broadcast CCREQ_SERVER_INFO on the LAN (and ask localhost),
-/// collecting replies until the deadline.
-pub struct LanSearch {
-    sock: UdpTransport,
-    pub deadline: f64,
-    pub found: Vec<(SocketAddr, Ccrep)>,
-    buf: Vec<u8>,
-}
-
-impl LanSearch {
-    pub fn start(port: u16, now: f64) -> std::io::Result<Self> {
-        let mut sock = UdpTransport::bind((Ipv4Addr::UNSPECIFIED, 0).into())?;
-        let _ = sock.set_broadcast(true);
-        let q = Ccreq::ServerInfo { game: "QUAKE".into(), version: NET_PROTOCOL_VERSION }.encode();
-        let mut ports = vec![DEFAULT_PORT];
-        if port != DEFAULT_PORT && port != 0 {
-            ports.push(port);
-        }
-        for p in ports {
-            let _ = sock.send_to(&q, (Ipv4Addr::BROADCAST, p).into());
-            let _ = sock.send_to(&q, (Ipv4Addr::LOCALHOST, p).into());
-        }
-        Ok(Self { sock, deadline: now + 1.5, found: Vec::new(), buf: vec![0; 2048] })
-    }
-
-    /// Read replies; true when new servers arrived.
-    pub fn poll(&mut self) -> bool {
-        let mut new = false;
-        while let Ok(Some((n, from))) = self.sock.recv_from(&mut self.buf) {
-            if let Some(r @ Ccrep::ServerInfo { .. }) = Ccrep::decode(&self.buf[..n]) {
-                // Broadcast and localhost may both reach a local server.
-                let dup = self.found.iter().any(|(a, f)| {
-                    *a == from || (a.port() == from.port() && (a.ip().is_loopback() || from.ip().is_loopback()) && *f == r)
-                });
-                if !dup {
-                    self.found.push((from, r));
-                    new = true;
-                }
-            }
-        }
-        new
-    }
-
-    pub fn done(&self, now: f64) -> bool {
-        now >= self.deadline
     }
 }
 

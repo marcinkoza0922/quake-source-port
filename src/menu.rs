@@ -225,8 +225,9 @@ pub struct Menu {
     pub shader_params: Vec<qrender::ShaderParam>,
     /// Soundtrack packs `(id, label)` for Options → Audio (filled by the host).
     pub soundtracks: Vec<(String, String)>,
-    /// LAN search results and whether a search is running.
+    /// Server browser results, active filters/sorting, and whether a search is running.
     pub servers: Vec<ServerEntry>,
+    pub browser: crate::net::browser::BrowserFilter,
     pub searching: bool,
     /// Key bindings snapshot (host refreshes it while the menu is open).
     pub bindings: Vec<Option<String>>,
@@ -364,6 +365,7 @@ impl Menu {
             shader_params: Vec::new(),
             soundtracks: Vec::new(),
             servers: Vec::new(),
+            browser: Default::default(),
             searching: false,
             bindings: vec![None; MAX_KEYS],
             autoaim_conflicts: Vec::new(),

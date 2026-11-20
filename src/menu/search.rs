@@ -72,7 +72,7 @@ pub(super) fn item_label(item: Item) -> Option<&'static str> {
         Item::ResetBinds => "Reset to Defaults",
         Item::ResetShaderParams => "Reset Shader Settings",
         Item::Map => "Map",
-        Item::Server(_) | Item::ShaderParam(_) => return None,
+        Item::Server(_) | Item::ShaderParam(_) | Item::Browser(_) => return None,
     })
 }
 

@@ -101,6 +101,7 @@ impl Host {
         for (m, seq) in msgs {
             self.cl.net_sequence = seq;
             if let Some(w) = &mut self.recording
+                && !w.is_qwd()
                 && let Err(e) = w.write(self.cl.viewangles, &m)
             {
                 self.con.print(&format!("demo write failed: {e}\n"));
@@ -222,34 +223,100 @@ impl Host {
         any
     }
 
+    pub(super) fn start_server_search(&mut self, internet: bool) {
+        if self.lan_search.is_some() {
+            return;
+        }
+        let nq_m = self.cvs("net_masters").to_string();
+        let qw_m = self.cvs("net_qwmasters").to_string();
+        match crate::net::browser::ServerSearch::start(
+            self.net_port,
+            internet,
+            &nq_m,
+            &qw_m,
+            &self.saved_servers,
+            self.realtime,
+        ) {
+            Ok(ls) => {
+                self.print(&qcore::ctr!("Looking for Quake servers...\n"));
+                self.lan_search = Some(ls);
+                self.menu.servers.clear();
+                self.saved_servers.sync_into(&mut self.menu.servers);
+                self.menu.searching = true;
+            }
+            Err(e) => self.print(&format!("slist: {e}\n")),
+        }
+    }
+
     pub(super) fn poll_lan_search(&mut self) {
         let Some(ls) = &mut self.lan_search else { return };
-        if ls.poll() {
-            self.menu.servers = ls
-                .found
-                .iter()
-                .filter_map(|(a, r)| match r {
-                    qnet::Ccrep::ServerInfo { hostname, level, players, max_players, .. } => Some(crate::menu::ServerEntry {
-                        address: a.to_string(),
-                        hostname: hostname.clone(),
-                        map: level.clone(),
-                        players: *players,
-                        max_players: *max_players,
-                    }),
-                    _ => None,
-                })
-                .collect();
+        if ls.poll(self.realtime) {
+            self.menu.servers = ls.found.clone();
+            self.saved_servers.sync_into(&mut self.menu.servers);
         }
         if ls.done(self.realtime) {
             let n = ls.found.len();
+            self.menu.servers = ls.found.clone();
+            self.saved_servers.sync_into(&mut self.menu.servers);
             self.lan_search = None;
             self.menu.searching = false;
             let mut out = String::new();
             for s in &self.menu.servers {
-                out.push_str(&format!("{:<15.15} {:<15.15} {:>2}/{:<2} {}\n", s.hostname, s.map, s.players, s.max_players, s.address));
+                let ping = s.ping_ms.map_or_else(|| " --".into(), |ms| format!("{ms:>3}ms"));
+                out.push_str(&format!(
+                    "{:<15.15} {:<10.10} {:<4} {:>2}/{:<2} {:>5} {}\n",
+                    s.hostname,
+                    s.map,
+                    s.protocol.tag(),
+                    s.players,
+                    s.max_players,
+                    ping,
+                    s.connect_address(),
+                ));
             }
             out.push_str(&format!("{n} server(s) found\n"));
             self.con.print(&out);
+        }
+    }
+
+    pub(super) fn record_recent_server(&mut self, addr: &str, qw: bool) {
+        let bare = addr.trim().strip_prefix("qw://").unwrap_or(addr.trim());
+        let existing = self.menu.servers.iter().find(|s| s.bare_address().eq_ignore_ascii_case(bare)).cloned();
+        self.saved_servers.record_recent(addr, qw, existing.as_ref());
+        self.saved_servers.save(&crate::userdata::root().join("servers.txt"));
+        self.saved_servers.sync_into(&mut self.menu.servers);
+    }
+
+    pub(super) fn toggle_favorite_server(&mut self, addr: &str) {
+        let bare = addr.trim().strip_prefix("qw://").unwrap_or(addr.trim());
+        if bare.is_empty() {
+            return;
+        }
+        let qw = addr.trim().starts_with("qw://");
+        let entry = self
+            .menu
+            .servers
+            .iter()
+            .find(|s| s.bare_address().eq_ignore_ascii_case(bare))
+            .cloned()
+            .unwrap_or_else(|| crate::menu::ServerEntry {
+                address: bare.to_string(),
+                hostname: bare.to_string(),
+                protocol: if qw {
+                    crate::net::browser::ServerProto::QuakeWorld
+                } else {
+                    crate::net::browser::ServerProto::NetQuake
+                },
+                gamedir: if qw { "qw".into() } else { "id1".into() },
+                ..Default::default()
+            });
+        let now_fav = self.saved_servers.toggle_favorite(&entry);
+        self.saved_servers.save(&crate::userdata::root().join("servers.txt"));
+        self.saved_servers.sync_into(&mut self.menu.servers);
+        if now_fav {
+            self.print(&format!("Added {} to favorites\n", entry.connect_address()));
+        } else {
+            self.print(&format!("Removed {} from favorites\n", entry.connect_address()));
         }
     }
 
@@ -270,6 +337,7 @@ impl Host {
             Ok(n) => {
                 self.net_client = Some(n);
                 self.last_server = Some((a, false));
+                self.record_recent_server(&a.to_string(), false);
             }
             Err(e) => self.con.print(&qcore::ctr!("Connection failed: {}\n", e)),
         }
@@ -307,6 +375,7 @@ impl Host {
             Ok(q) => {
                 self.qw_client = Some(q);
                 self.last_server = Some((a, true));
+                self.record_recent_server(&format!("qw://{a}"), true);
             }
             Err(e) => self.con.print(&qcore::ctr!("Connection failed: {}\n", e)),
         }
@@ -316,7 +385,18 @@ impl Host {
     pub(super) fn poll_qw(&mut self) {
         let now = self.realtime;
         let Some(q) = &mut self.qw_client else { return };
-        match q.poll(&mut self.server.core.fs, now) {
+        q.recording_qwd = self.recording.as_ref().is_some_and(|w| w.is_qwd());
+        let res = q.poll(&mut self.server.core.fs, now);
+        let tape = q.take_qwd_tape();
+        if !tape.is_empty()
+            && let Some(w) = &mut self.recording
+            && w.is_qwd()
+            && let Err(e) = w.write_raw(&tape)
+        {
+            self.con.print(&format!("demo write failed: {e}\n"));
+            self.recording = None;
+        }
+        match res {
             crate::qw::QwPoll::Messages(m, prints) => {
                 for p in prints {
                     self.con.print(&p);
@@ -328,6 +408,26 @@ impl Host {
                 self.disconnect_client();
             }
         }
+    }
+
+    /// NQ (`PEXT2_PREDINFO`): replays unacknowledged client moves against
+    /// the loaded BSP collision model (respecting `cl_nopred`).
+    pub(super) fn apply_nq_prediction(&mut self) {
+        if self.net_client.is_none() || self.local.is_some() || self.demo.is_some() {
+            return;
+        }
+        let Some(cm) = self.level.collision_model() else {
+            return;
+        };
+        let nopred = self.cv("cl_nopred") != 0.0;
+        let pending = (self.accum > 0.001 && self.freecam.cam.is_none()).then(|| {
+            let mut cmd = self.last_cmd;
+            cmd.buttons = self.pend_attack as u16 | (self.pend_jump as u16) << 1;
+            cmd.impulse = self.pend_impulse;
+            let msec = (self.accum * 1000.0).round().clamp(1.0, 250.0) as u8;
+            (cmd, msec)
+        });
+        self.cl.predict_move(cm, nopred, pending);
     }
 
     /// QW: the predicted local player replaces the server's position, and

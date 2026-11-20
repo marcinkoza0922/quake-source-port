@@ -80,8 +80,9 @@ impl Peer {
 fn play(protocol: &str) {
     let Some(mut sv) = server(4, protocol) else { return };
     let mut ns = NetServer::listen(0).unwrap();
-    // alice negotiates replacement deltas, bob is vanilla.
-    let mut a = Peer::new("alice", ns.port(), 0.0, qnet::delta::PEXT2_REPLACEMENTDELTAS);
+    // alice negotiates replacement deltas + predinfo, bob is vanilla.
+    let alice_pext2 = qnet::delta::PEXT2_REPLACEMENTDELTAS | qnet::delta::PEXT2_PREDINFO;
+    let mut a = Peer::new("alice", ns.port(), 0.0, alice_pext2);
     let mut b = Peer::new("bob", ns.port(), 0.0, 0);
     let mut now = 0.0;
     let mut said = false;
@@ -109,8 +110,12 @@ fn play(protocol: &str) {
     assert!(b.prints.contains("alice: hello bob"), "chat: {:?}", b.prints);
     let names: Vec<_> = sv.core.clients.iter().filter(|c| c.spawned).map(|c| c.name.clone()).collect();
     assert_eq!(names, ["alice", "bob"]);
-    assert_eq!((a.cl.pext2, b.cl.pext2), (qnet::delta::PEXT2_REPLACEMENTDELTAS, 0));
-    assert_eq!((sv.client_pext2(0), sv.client_pext2(1)), (qnet::delta::PEXT2_REPLACEMENTDELTAS, 0));
+    assert_eq!((a.cl.pext2, b.cl.pext2), (alice_pext2, 0));
+    assert_eq!((sv.client_pext2(0), sv.client_pext2(1)), (alice_pext2, 0));
+    assert!(a.cl.acked_movemessages > 0, "PEXT2_PREDINFO should acknowledge client move sequence");
+    let cm = &sv.level.as_ref().unwrap().world.worldmodel;
+    assert!(a.cl.predict_move(cm, false, None));
+    assert!(a.cl.predicted);
     // alice's entities arrive as deltas and track the server.
     assert!(a.cl.entities.iter().filter(|e| e.delta_live).count() > 3);
     let (so, co) = (sv.level.as_ref().unwrap().vm.ent_v(1, sv.core.sv.fields.origin), a.cl.entities[1].netstate.origin);
@@ -151,15 +156,16 @@ fn udp_play_protocol_999() {
 fn lan_search_finds_server() {
     let Some(mut sv) = server(4, "999") else { return };
     let mut ns = NetServer::listen(0).unwrap();
-    let mut ls = LanSearch::start(ns.port(), 0.0).unwrap();
+    let saved = browser::SavedServers::default();
+    let mut ls = browser::ServerSearch::start(ns.port(), false, "", "", &saved, 0.0).unwrap();
     for _ in 0..100 {
         ns.receive(&mut sv, 0.0, "lanhost");
-        ls.poll();
+        ls.poll(0.01);
         if !ls.found.is_empty() {
             break;
         }
         std::thread::sleep(std::time::Duration::from_millis(5));
     }
-    let Some((_, Ccrep::ServerInfo { hostname, level, max_players, .. })) = ls.found.first() else { panic!("no reply") };
-    assert_eq!((hostname.as_str(), level.as_str(), *max_players), ("lanhost", "e1m1", 4));
+    let Some(entry) = ls.found.first() else { panic!("no reply") };
+    assert_eq!((entry.hostname.as_str(), entry.map.as_str(), entry.max_players), ("lanhost", "e1m1", 4));
 }
