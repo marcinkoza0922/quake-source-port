@@ -108,9 +108,15 @@ impl Host {
         let t0 = qcore::time::Instant::now();
         let colored = self.cv("r_coloredlight") != 0.0;
         let enhanced = self.cv("r_enhancedmodels") != 0.0;
+        let local = self.server.active() && self.cl.model_precache.get(1) == Some(&self.server.core.sv.modelname);
+        let sv = &mut self.server.core.sv;
+        let reloaded = local && sv.reloaded;
+        let reload_bsp = if local { sv.reload_bsp.take() } else { None };
+        let external_entities = sv.external_entities.as_deref().filter(|_| local);
+        let options = crate::assets::LevelLoad { colored, enhanced_models: enhanced, external_entities, reload_bsp };
         let fs = &self.server.core.fs;
         let con = &mut self.con;
-        self.level = Level::load(fs, &mut self.r, self.snd.as_mut(), &mut self.cl, colored, enhanced, &mut |s| con.print(s));
+        self.level = Level::load(fs, &mut self.r, self.snd.as_mut(), &mut self.cl, options, &mut |s| con.print(s));
         // Fog_ParseWorldspawn; an svc_fog parsed in the same batch wins.
         if self.cl.fog == qclient::Fog::default() {
             let w = self.level.world_fog;
@@ -119,7 +125,10 @@ impl Host {
         self.view.reset();
         self.feedback = Default::default();
         self.debris.new_map(&mut self.cl);
-        self.bboxes.pointfile.clear();
+        self.bboxes.clear_map();
+        if reloaded {
+            self.automap = Default::default();
+        }
         self.blood.clear();
         self.impacts.clear();
         self.hitfx.clear();

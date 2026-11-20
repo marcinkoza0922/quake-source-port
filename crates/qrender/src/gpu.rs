@@ -58,6 +58,7 @@ pub struct Gpu {
     pub max_anisotropy: f32,
     /// sampleRateShading is enabled (supersampling).
     pub sample_shading: bool,
+    pub wireframe: bool,
     /// Nanoseconds per timestamp tick.
     pub timestamp_period: f32,
     /// VK_EXT_memory_budget is enabled ([`Gpu::vram`]).
@@ -189,7 +190,9 @@ impl Gpu {
         let aniso = supported.sampler_anisotropy == vk::TRUE;
         let max_anisotropy = if aniso { lim.max_sampler_anisotropy.max(1.0) } else { 1.0 };
         let sample_shading = supported.sample_rate_shading == vk::TRUE;
+        let wireframe = supported.fill_mode_non_solid == vk::TRUE;
         let features = vk::PhysicalDeviceFeatures::default()
+            .fill_mode_non_solid(wireframe)
             .sampler_anisotropy(aniso)
             .sample_rate_shading(sample_shading)
             .multi_draw_indirect(true)
@@ -250,6 +253,7 @@ impl Gpu {
             max_anisotropy,
             timestamp_period: lim.timestamp_period,
             sample_shading,
+            wireframe,
             memory_budget,
             rt,
         })

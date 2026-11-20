@@ -65,6 +65,7 @@ pub struct Renderer {
     dummy: Buffer,
     world: Option<WorldGpu>,
     isolated_portal: Option<usize>,
+    mapper_stats: MapperStats,
     /// Add-on portals have been drawn: keep the portal view targets.
     gun_targets: bool,
     isolated_distance: Option<f32>,

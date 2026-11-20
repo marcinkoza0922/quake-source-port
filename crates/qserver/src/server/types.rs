@@ -83,9 +83,16 @@ pub struct Sv {
     pub error: Option<VmError>,
     /// Level restored from a savegame: clients keep their saved edicts.
     pub loadgame: bool,
+    /// Rebuilt by map_reload. The host suppresses the level-entry autosave.
+    pub reloaded: bool,
+    /// The parsed BSP handed to the local client after a live rebuild.
+    pub reload_bsp: Option<qformats::Bsp>,
+    /// Effective external entity text for local client map assets.
+    pub external_entities: Option<String>,
     pub(crate) loadgame_parms: [f32; 16],
     pub(crate) brush_cache: HashMap<String, Arc<CollisionModel>>,
     pub(crate) parse_client_command: Option<usize>,
+    pub(super) reload_players: Vec<Option<super::reload::PlayerState>>,
 }
 
 /// Everything QC builtins can reach besides the VM and the world.
@@ -150,4 +157,5 @@ pub struct Server {
     pub core: Core,
     pub level: Option<Level>,
     pub(crate) cmds: Commands<Server>,
+    pub(super) map_watch: Option<super::reload::MapWatch>,
 }

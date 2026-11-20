@@ -38,6 +38,7 @@ impl World {
             numleafs,
             vis_leaves: Vec::new(),
             vis_leaf: usize::MAX,
+            locked_pvs: None,
             portal_cache: Vec::new(),
             surf_stamp: Vec::new(),
             stamp: 0,

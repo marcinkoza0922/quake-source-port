@@ -33,6 +33,11 @@ vec3 teleporter_ripple(int portal, float t) {
 
 void main() {
     if (dot(fr.portal_clip.xyz, i_wpos) + fr.portal_clip.w < 0.0) discard;
+    if ((fr.softf.x & 32u) != 0u) {
+        o_color = vec4(vec3(0.24), 1.0);
+        GLOW_OUT(vec4(0.0));
+        return;
+    }
     uvec4 m = materials[i_mat];
     float t = fr.eye.w;
     uint kind = m.z & 0xfu; // 1 water 2 lava 3 slime 4 tele

@@ -139,6 +139,9 @@ impl Server {
             exec(vm, c, &mut l.world, vm.g_i(g.f_client_connect));
             exec(vm, c, &mut l.world, vm.g_i(g.f_put_client_in_server));
         }
+        if let Some(state) = c.sv.reload_players.get_mut(i).and_then(Option::take) {
+            state.restore(vm, c, &mut l.world, i);
+        }
 
         let pf = c.sv.protocolflags;
         let mut m = std::mem::take(&mut c.clients[i].message);

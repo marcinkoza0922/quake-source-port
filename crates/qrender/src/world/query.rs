@@ -116,7 +116,7 @@ impl World {
     /// (with surfaces) whose box touches the frustum. `out` gets one bit per
     /// leaf index.
     pub fn leaf_bits(&mut self, eye: [f32; 3], frustum: &[[f32; 4]; 4], out: &mut Vec<u32>) {
-        let leaf = self.point_leaf(eye);
+        let leaf = self.view_leaf(eye);
         self.mark_leaves(leaf);
         out.clear();
         out.resize(self.leafs.len().div_ceil(32), 0);
@@ -128,6 +128,37 @@ impl World {
         }
     }
 
+    /// Lock the primary render PVS at the current camera leaf. Portal queries
+    /// continue using their own leaves, and frustum tests still use the live camera.
+    pub(crate) fn lock_pvs(&mut self, lock: bool, eye: Option<[f32; 3]>) {
+        if !lock {
+            self.locked_pvs = None;
+        } else if self.locked_pvs.is_none() && let Some(eye) = eye {
+            self.locked_pvs = Some(self.point_leaf(eye));
+        }
+    }
+
+    pub(crate) fn view_leaf(&self, eye: [f32; 3]) -> usize {
+        self.locked_pvs.unwrap_or_else(|| self.point_leaf(eye))
+    }
+
+    pub(crate) fn view_surfaces(&mut self, eye: [f32; 3], frustum: &[[f32; 4]; 4]) -> (Vec<u32>, u32) {
+        let leaf = self.view_leaf(eye);
+        self.mark_leaves(leaf);
+        let planes = Planes::new(frustum);
+        let leaves = self.vis_leaves.iter()
+            .filter(|l| planes.clip(0b1111, l.center, l.extent).is_some())
+            .count() as u32;
+        let pvs = self.surfaces_for_leaf(leaf);
+        let surfaces = pvs.iter().copied().filter(|&i| {
+            let s = &self.surfaces[i as usize];
+            s.num_indices != 0 && !self.hidden_surfaces.contains(&i)
+                && (s.kind == TextureKind::Sky || ((dot(eye, s.normal) - s.dist < 0.0) == s.flipped))
+                && super::box_in_frustum(frustum, s.mins, s.maxs)
+        }).collect();
+        (surfaces, leaves)
+    }
+
     pub fn leafs_len(&self) -> usize {
         self.leafs.len()
     }
@@ -137,8 +168,11 @@ impl World {
     /// Surfaces in the PVS of `eye`'s leaf, each once. Cached per leaf, so
     /// static portal/window destinations and split views cost a lookup.
     pub(crate) fn portal_surfaces(&mut self, eye: [f32; 3]) -> Arc<[u32]> {
+        self.surfaces_for_leaf(self.point_leaf(eye))
+    }
+
+    pub(crate) fn surfaces_for_leaf(&mut self, leaf: usize) -> Arc<[u32]> {
         const CACHE: usize = 16;
-        let leaf = self.point_leaf(eye);
         if let Some(i) = self.portal_cache.iter().position(|(l, _)| *l == leaf) {
             let hit = self.portal_cache.remove(i);
             self.portal_cache.push(hit.clone());

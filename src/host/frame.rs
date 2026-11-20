@@ -225,6 +225,9 @@ impl Host {
                 self.menu.open(Screen::Main);
             }
         }
+        if self.demo.is_none() && !self.remote() {
+            self.server.poll_map_reload(now);
+        }
         self.check_local_client();
         self.sync_key_dest();
         self.sync_language();

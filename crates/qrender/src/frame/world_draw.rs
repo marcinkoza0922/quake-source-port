@@ -40,6 +40,8 @@ pub(super) fn build_world_draw(
             lm_vis.push(s.lm);
         }
     }
+    let mut polys = 0;
+    let mut triangles = 0;
     let mut cats: [Vec<vk::DrawIndexedIndirectCommand>; 4] = Default::default();
     for (t, b) in buckets.iter_mut().enumerate() {
         if b.is_empty() {
@@ -54,6 +56,7 @@ pub(super) fn build_world_draw(
             let Some(o) = dynw.push(idx, 4) else { break };
             first.get_or_insert(o);
             count += s.num_indices;
+            polys += u32::from(s.num_indices > 0);
         }
         b.clear();
         let Some(first) = first else { continue };
@@ -70,6 +73,7 @@ pub(super) fn build_world_draw(
             }
             _ => 0,
         };
+        triangles += count / 3;
         cats[cat].push(vk::DrawIndexedIndirectCommand {
             index_count: count,
             instance_count: 1,
@@ -96,6 +100,8 @@ pub(super) fn build_world_draw(
         ibuf: None,
         cbuf: None,
         bounds: [0.0; 4],
+        polys,
+        triangles,
     }
 }
 
@@ -160,6 +166,8 @@ pub(super) fn gpu_world_draw(
         ibuf: Some(c.out[fi].buf),
         cbuf: Some(c.cmdbuf[fi].buf),
         bounds: [0.0; 4],
+        polys: 0,
+        triangles: 0,
     };
     let push = CullPush {
         frustum: vs.frustum,
@@ -201,6 +209,8 @@ mod tests {
                 opaque: Range { ofs: requests.len() as u64 * 16, count: 1 },
                 sky: Range::default(), water: [Range::default(); 4],
                 water_alpha: [Range::default(); 4], ibuf: None, cbuf: None, bounds: [0.0; 4],
+        polys: 0,
+        triangles: 0,
             }
         };
         let mut frame = PortalWorldCache::default();

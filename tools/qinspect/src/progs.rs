@@ -1,7 +1,7 @@
 //! `qinspect progs`: QuakeC disassembler and summary.
 
 
-use qcore::fs::Fs;
+use super::formats::load;
 use qvm::Progs;
 use qvm::disasm::Disasm;
 
@@ -10,20 +10,6 @@ const USAGE: &str = "usage: qinspect progs [FILE | -g GAME[,GAME..]] [--func NAM
   --func NAME  disassemble one function (repeatable)
   --all        disassemble every function
   --grep TEXT  list functions whose listing contains TEXT";
-
-fn load(file: Option<&str>, games: Option<&str>) -> Result<Vec<u8>, String> {
-    if let Some(f) = file {
-        return std::fs::read(f).map_err(|e| format!("{f}: {e}"));
-    }
-    let mut fs = Fs::new(Fs::default_basedir());
-    fs.add_game_dir("id1");
-    for g in games.unwrap_or("").split(',').filter(|g| !g.is_empty()) {
-        if !fs.add_game_dir(g.trim_start_matches('+')) {
-            return Err(format!("no game dir {g}"));
-        }
-    }
-    fs.open("progs.dat").ok_or_else(|| "progs.dat not found".into())
-}
 
 fn summary(p: &Progs) {
     let d = Disasm::new(p);
@@ -68,7 +54,10 @@ pub fn run(args: &[String]) -> Result<(), String> {
             o => return Err(format!("unknown option {o}\n{USAGE}")),
         }
     }
-    let data = load(file, games)?;
+    let data = match file {
+        Some(file) => load(file, None)?,
+        None => load("progs.dat", Some(games.unwrap_or_default()))?,
+    };
     let p = Progs::parse(&data).map_err(|e| e.to_string())?;
     let d = Disasm::new(&p);
     if all || grep.is_some() {

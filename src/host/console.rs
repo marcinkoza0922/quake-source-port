@@ -159,7 +159,7 @@ impl Host {
         let known = self.cmds.exists(&name) || self.cmds.alias(&name).is_some() || self.server.core.cvars.find(&name).is_some();
         if known {
             qcore::cmd::execute_string(self, line);
-        } else if self.remote() && !matches!(name.as_str(), "map" | "maxplayers" | "restart" | "changelevel") {
+        } else if self.remote() && !matches!(name.as_str(), "map" | "maxplayers" | "restart" | "changelevel" | "map_reload") {
             // Cmd_ForwardToServer. A typed `ping` prints its reply.
             if name == "ping" {
                 self.ping_expect = None;
@@ -205,7 +205,7 @@ impl Host {
         let log = std::mem::take(&mut self.server.core.log);
         let dev = self.dedicated || self.cv("developer") != 0.0;
         for s in log {
-            if dev || ["rror", "ouldn't", "not ", "nknown", "valid", "usage", "<"].iter().any(|k| s.contains(k)) {
+            if dev || s.starts_with("map_reload:") || ["rror", "ouldn't", "not ", "nknown", "valid", "usage", "<"].iter().any(|k| s.contains(k)) {
                 let s = self.server.core.loc.translate(&s);
                 self.con.print(&s);
             }

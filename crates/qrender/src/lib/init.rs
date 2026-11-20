@@ -177,6 +177,7 @@ impl Renderer {
             dummy,
             world: None,
             isolated_portal: None,
+            mapper_stats: MapperStats::default(),
             gun_targets: false,
             isolated_distance: None,
             hidden_entities: Default::default(),

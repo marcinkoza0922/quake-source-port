@@ -23,6 +23,7 @@ pub(super) struct AliasSurface {
 pub(super) struct AliasModel {
     pub(super) verts: Vec<AliasVertex>,
     pub(super) ibuf: wgpu::Buffer,
+    pub(super) indices: Vec<u32>,
     pub(super) poses: Vec<u32>,
     pub(super) surfaces: Vec<AliasSurface>,
     pub(super) frames: Vec<FrameInfo>,
@@ -147,6 +148,7 @@ impl Renderer {
             }],
             verts,
             ibuf,
+            indices: idx,
             poses,
             frames,
             scale: mdl.scale,
@@ -231,6 +233,7 @@ impl Renderer {
         self.models.push(Model::Alias(Box::new(AliasModel {
             verts: all_verts,
             ibuf,
+            indices: all_idx,
             poses: all_poses,
             surfaces,
             frames,

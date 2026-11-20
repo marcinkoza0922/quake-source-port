@@ -15,6 +15,7 @@ pub(crate) fn register(s: &mut Server) {
     s.add_cmd("map", cmd_map);
     s.add_cmd("changelevel", cmd_changelevel);
     s.add_cmd("restart", cmd_restart);
+    s.add_cmd("map_reload", Server::map_reload_command);
     s.add_cmd("prof_wake", |s, _| if !s.deathmatch() { crate::horde::cmd_prof_wake(s) });
     s.add_cmd("kill", cmd_kill);
     s.add_cmd("color", cmd_color);
