@@ -156,6 +156,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         }
     });
     c.add("menu_help", |h, a| h.menu.open_help(a.argv(1)));
+    c.add("help", |h, a| h.menu.open_help(a.argv(1)));
     c.add("menu_singleplayer", |h, _| h.menu.open(Screen::SinglePlayer));
     c.add("menu_newgame", |h, _| h.menu.open_new_game());
     c.add("menu_quit", |h, _| h.menu.open(Screen::Quit));
@@ -346,10 +347,9 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     super::demo_play::register(c);
     super::autodemo::register(c);
     super::capture::register(c);
-    for n in ["sizeup", "sizedown", "cd", "help", "scr_autoscale", "togglezoom", "messagemode", "messagemode2", "menu_multiplayer"] {
+    for n in ["scr_autoscale", "cfg_unbindall"] {
         c.add(n, |_, _| {});
     }
-    c.add("cfg_unbindall", |_, _| {});
     c.add("fog", cmd_fog);
     // Exercise the real impact path against the surface under the crosshair.
     c.add("impact_test", |h, a| {
@@ -633,6 +633,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     });
     c.add("music_stop", |h, _| {
         h.audio_fx.soundtracks.clear_track();
+        h.cd.playing = None;
+        h.cd.paused = false;
         if let Some(s) = &h.snd {
             s.stop_music();
         }

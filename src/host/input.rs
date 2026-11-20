@@ -218,6 +218,16 @@ impl Host {
                         }
                     }
                     Some(Routed::Key { key, dest: KeyDest::Menu }) => self.menu_key(key),
+                    Some(Routed::Key { key, dest: KeyDest::Message }) => {
+                        if let Some(cmd) = self.con.chat_key(key) {
+                            self.cbuf.add_text(&cmd);
+                        }
+                    }
+                    Some(Routed::Text { ch, dest: KeyDest::Message })
+                        if !self.input.key_down(qinput::keys::K_CTRL) && !self.input.key_down(qinput::keys::K_ALT) =>
+                    {
+                        self.con.chat_text(ch);
+                    }
                     _ => {}
                 }
                 self.sync_key_dest();
@@ -384,6 +394,12 @@ impl Host {
 
     /// Play CD track `track` via the selected soundtrack pack (`s_soundtrack`).
     pub(super) fn play_cd_track(&mut self, track: u8, looping: bool) -> bool {
+        if !self.cd.enabled {
+            return false;
+        }
+        let track = self.cd.map(track);
+        self.cd.playing = Some((track, looping));
+        self.cd.paused = false;
         let st = self
             .server
             .core

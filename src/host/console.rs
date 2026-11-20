@@ -240,6 +240,8 @@ impl Host {
             KeyDest::Menu
         } else if self.con.open || self.con.forced {
             KeyDest::Console
+        } else if self.con.chat_active {
+            KeyDest::Message
         } else {
             KeyDest::Game
         }
@@ -250,9 +252,9 @@ impl Host {
         if self.input.dest != d {
             qinput::set_key_dest(self, d);
         }
-        // text events for the console and a menu text row only, so touch
-        // devices don't raise their keyboard anywhere else in the menu
-        let text = d == KeyDest::Console || (d == KeyDest::Menu && self.menu.wants_text());
+        // text events for the console, chat prompt, and menu text rows only,
+        // so touch devices don't raise their keyboard anywhere else
+        let text = matches!(d, KeyDest::Console | KeyDest::Message) || (d == KeyDest::Menu && self.menu.wants_text());
         if self.text_input != Some(text)
             && let Some(w) = &self.window
         {

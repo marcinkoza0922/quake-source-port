@@ -273,8 +273,9 @@ impl Host {
                     }
                     _ => {
                         let scene_h = c.vh() - reserve;
+                        let viewsize = self.server.core.cvars.value_of("viewsize");
                         self.view.draw_damage(&mut c, scene_h, self.server.core.cvars.value_of("hud_damageindicator") != 0.0, self.server.core.cvars.value_of("v_flashscale"));
-                        {
+                        if viewsize < 130.0 {
                             let color = reticle::color(&self.server.core.cvars, target_colors[0], self.feedback.kill && self.feedback.remaining(self.realtime) > 0.0);
                             draw_crosshair(&mut c, scene_h, &self.server.core.cvars, self.input.lockon.target.is_some(), self.input.lockon.active, color);
                             hitmarker::draw_hitmarker(&mut c, scene_h, &self.server.core.cvars, self.feedback.remaining(self.realtime), color);
@@ -283,7 +284,7 @@ impl Host {
                         let player_pos = Vec3::from_array(self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| e.origin));
                         let automap_allowed = self.cl.gametype != 1 && self.server.core.cvars.value_of("deathmatch") == 0.0;
                         let hud_start = c.list.len();
-                        if !hud.edit {
+                        if !hud.edit && viewsize < 120.0 {
                             let am = crate::hud::draw::AutomapCtx {
                                 map: &self.automap,
                                 settings: crate::automap::Automap::settings(&self.server.core.cvars),

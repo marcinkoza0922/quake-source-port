@@ -62,6 +62,9 @@ impl Host {
     /// HUD units at the bottom of the screen a full-width status bar takes
     /// (the 3D view ends above it).
     pub(super) fn hud_reserve(&self) -> f32 {
+        if self.cv("viewsize") >= 120.0 {
+            return 0.0;
+        }
         let (w, h) = self.r.size();
         self.hud.reserve_bottom(Canvas::new(w, h).vh())
     }
