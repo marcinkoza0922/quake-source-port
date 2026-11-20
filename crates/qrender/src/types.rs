@@ -342,6 +342,8 @@ pub enum Draw2D {
         width: f32,
         color: [f32; 4],
     },
+    /// Sets or clears (`None`) the 2D scissor clip rectangle `[x, y, w, h]` in framebuffer pixels.
+    Clip(Option<[f32; 4]>),
 }
 
 /// Number of simultaneous impact ripples packed into the scene uniforms.

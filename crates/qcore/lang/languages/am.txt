@@ -1775,6 +1775,15 @@ am ቅጽበታዊ ገጽ እይታ
 @ Record Demo
 am ዴሞ ቅረጽ
 
+@ HDR Lightmaps
+am የHDR ብርሃን ካርታዎች
+
+@ Directional Lighting
+am አቅጣጫዊ ብርሃን
+
+@ Light Specular
+am የብርሃን አንጸባራቂነት
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ am ለአሁኑ ካርታ እና ከባድነት የግል ምርጥ ዴሞዎ�
 
 @ Shows the SPD label before the speed number
 am ከፍጥነት ቁጥሩ በፊት SPD መለያን ያሳያል
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+am ደማቅ የHDR ብርሃንን (.lit2) ከመቁረጥ ይልቅ በለስላሳ ሽግግር ያቆያል
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+am በግድግዳዎች እና ሞዴሎች ላይ ለስላሳ ጥላ እና አንጸባራቂነት የተዘጋጁ የብርሃን አቅጣጫዎችን (.dlit) ይጠቀማል
+
+@ Strength of the highlights from directional lighting
+am ከአቅጣጫዊ ብርሃን የሚገኘው አንጸባራቂ ጥንካሬ
 
 # ==== ui.txt ====
 

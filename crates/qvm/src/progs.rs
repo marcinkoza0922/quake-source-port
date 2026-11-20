@@ -123,6 +123,15 @@ fn cstr(strings: &[u8], ofs: i32) -> &[u8] {
 impl Progs {
     /// Parse progs.dat. Rejects wrong version or header CRC (like `fatal` PR_LoadProgs).
     pub fn parse(data: &[u8]) -> Result<Self, VmError> {
+        Self::parse_inner(data, true)
+    }
+
+    /// Parse a CSQC `csprogs.dat` (v6 progs with CSQC-specific header CRC).
+    pub fn parse_csqc(data: &[u8]) -> Result<Self, VmError> {
+        Self::parse_inner(data, false)
+    }
+
+    fn parse_inner(data: &[u8], check_crc: bool) -> Result<Self, VmError> {
         let err = |m: String| VmError::new(format!("progs.dat: {m}"));
         let rd = |i: usize| -> Result<i32, VmError> {
             data.get(i * 4..i * 4 + 4)
@@ -134,7 +143,7 @@ impl Progs {
         if version != PROG_VERSION {
             return Err(err(format!("wrong version number ({version} should be {PROG_VERSION})")));
         }
-        if header_crc != PROGHEADER_CRC {
+        if check_crc && header_crc != PROGHEADER_CRC {
             return Err(err(format!("system vars have been modified (crc {header_crc})")));
         }
         let lump = |idx: usize, elem: usize| -> Result<&[u8], VmError> {

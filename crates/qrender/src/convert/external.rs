@@ -14,18 +14,20 @@ pub struct ExternalTexture {
 }
 
 /// One BSP handed to `Renderer::load_level`: the map or an external brush
-/// model, its `.lit` and its replacement textures (indexed like
-/// `bsp.textures`; missing or shorter means none).
+/// model, its `.lit` / HDR `.lit2` / `.dlit` deluxemap and its replacement
+/// textures (indexed like `bsp.textures`; missing or shorter means none).
 #[derive(Clone, Copy)]
 pub struct LevelBsp<'a> {
     pub bsp: &'a qformats::bsp::Bsp,
     pub lit: Option<&'a [u8]>,
+    pub hdr_lit: Option<&'a [u32]>,
+    pub deluxe: Option<&'a [u8]>,
     pub external: &'a [Option<ExternalTexture>],
 }
 
 impl<'a> LevelBsp<'a> {
     pub fn new(bsp: &'a qformats::bsp::Bsp, lit: Option<&'a [u8]>) -> Self {
-        LevelBsp { bsp, lit, external: &[] }
+        LevelBsp { bsp, lit, hdr_lit: None, deluxe: None, external: &[] }
     }
 
     pub(crate) fn external(&self, i: usize) -> Option<&'a ExternalTexture> {

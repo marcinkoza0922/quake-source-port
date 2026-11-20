@@ -115,10 +115,14 @@ impl ClientState {
     /// Encode a clc_move (CL_SendMove). Uses `cmd.viewangles`.
     pub fn encode_move(&self, cmd: &UserCmd) -> Vec<u8> {
         let mut b = SizeBuf::new(128);
+        let predinfo = self.pext2 & crate::delta::PEXT2_PREDINFO != 0;
         b.byte(CLC_MOVE as i32);
+        if predinfo {
+            b.short((self.movemessages & 0xffff) as i32);
+        }
         b.float(self.mtime[0] as f32);
         for i in 0..3 {
-            if self.protocol == PROTOCOL_NETQUAKE {
+            if self.protocol == PROTOCOL_NETQUAKE && !predinfo {
                 b.angle(cmd.viewangles[i], self.protocolflags);
             } else {
                 b.angle16(cmd.viewangles[i], self.protocolflags);

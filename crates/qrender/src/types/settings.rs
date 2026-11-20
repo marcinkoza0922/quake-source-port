@@ -130,6 +130,14 @@ pub struct Settings {
     /// r_shader_scale: 0 = cap slang preset input at output resolution,
     /// 1 = match full 3D scene resolution.
     pub shader_scale: u32,
+    /// r_hdr_lightmaps: preserve full HDR range from LIT2 / LIGHTING_E5BGR9
+    /// lightmaps with soft roll-off instead of clipping at 2x overbright.
+    pub hdr_lightmaps: bool,
+    /// r_deluxemapping: apply baked world-space light direction (.dlit / LIGHTINGDIR)
+    /// for subtle normal and specular shading on world surfaces and models.
+    pub deluxemapping: bool,
+    /// r_deluxemapping_specular: specular highlight strength from deluxemaps (0..=2).
+    pub deluxemapping_specular: f32,
     /// Add-on night vision / thermal goggles.
     pub goggles: Goggles,
 }
@@ -214,6 +222,9 @@ impl Default for Settings {
             gel_quality: 1,
             shader_scope: 0,
             shader_scale: 0,
+            hdr_lightmaps: true,
+            deluxemapping: true,
+            deluxemapping_specular: 0.25,
             goggles: Goggles::default(),
         }
     }

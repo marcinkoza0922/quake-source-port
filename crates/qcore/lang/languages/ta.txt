@@ -1775,6 +1775,15 @@ ta திரைப்பிடிப்பு
 @ Record Demo
 ta டெமோ பதிவுசெய்
 
+@ HDR Lightmaps
+ta HDR ஒளிப்படங்கள்
+
+@ Directional Lighting
+ta திசை ஒளியூட்டல்
+
+@ Light Specular
+ta ஒளி பளபளப்பு
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ ta தற்போதைய வரைபடம் மற்றும் கட�
 
 @ Shows the SPD label before the speed number
 ta வேக எண்ணுக்கு முன் SPD லேபிளைக் காட்டும்
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+ta பிரகாசமான HDR ஒளியை (.lit2) வெட்டாமல் மென்மையான தணிப்புடன் தக்கவைக்கிறது
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+ta சுவர்கள் மற்றும் மாதிரிகளில் நுட்பமான நிழல் மற்றும் பளபளப்புக்கு முன்-கணக்கிடப்பட்ட ஒளி திசைகளை (.dlit) பயன்படுத்துகிறது
+
+@ Strength of the highlights from directional lighting
+ta திசை ஒளியூட்டலின் பளபளப்பு வலிமை
 
 # ==== ui.txt ====
 

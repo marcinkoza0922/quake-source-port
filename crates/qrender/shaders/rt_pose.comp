@@ -38,6 +38,7 @@ void main() {
     U32s ib = U32s(d.addr.zw);
     bool dyn = (d.texs.w & 16u) != 0u;
     bool md3 = !dyn && (d.texs.w & 32u) != 0u;
+    bool iqm = !dyn && (d.texs.w & 64u) != 0u;
     float blend = d.shadevec.w;
     vec2 st[3];
     float sh[3];
@@ -46,7 +47,36 @@ void main() {
         uint vert = vb.v[idx * 3u];
         st[k] = vec2(uintBitsToFloat(vb.v[idx * 3u + 1u]), uintBitsToFloat(vb.v[idx * 3u + 2u]));
         vec3 pa, pb, na, nb;
-        if (md3) {
+        if (iqm) {
+            vec3 sp = vec3(uintBitsToFloat(alias_verts[vert]), uintBitsToFloat(alias_verts[vert + 1u]), uintBitsToFloat(alias_verts[vert + 2u]));
+            vec3 sn = vec3(uintBitsToFloat(alias_verts[vert + 3u]), uintBitsToFloat(alias_verts[vert + 4u]), uintBitsToFloat(alias_verts[vert + 5u]));
+            uint bi = alias_verts[vert + 6u];
+            vec4 bw = unpackUnorm4x8(alias_verts[vert + 7u]);
+            float wsum = bw.x + bw.y + bw.z + bw.w;
+            if (wsum > 0.0) bw /= wsum;
+            vec4 r0a = vec4(0.0), r1a = vec4(0.0), r2a = vec4(0.0);
+            vec4 r0b = vec4(0.0), r1b = vec4(0.0), r2b = vec4(0.0);
+            for (uint j = 0u; j < 4u; j++) {
+                float wj = bw[j];
+                if (wj <= 0.0) continue;
+                uint bj = ((bi >> (j * 8u)) & 0xffu) * 12u;
+                uint ba = d.poses.x + bj;
+                r0a += wj * vec4(uintBitsToFloat(alias_verts[ba + 0u]), uintBitsToFloat(alias_verts[ba + 1u]), uintBitsToFloat(alias_verts[ba + 2u]), uintBitsToFloat(alias_verts[ba + 3u]));
+                r1a += wj * vec4(uintBitsToFloat(alias_verts[ba + 4u]), uintBitsToFloat(alias_verts[ba + 5u]), uintBitsToFloat(alias_verts[ba + 6u]), uintBitsToFloat(alias_verts[ba + 7u]));
+                r2a += wj * vec4(uintBitsToFloat(alias_verts[ba + 8u]), uintBitsToFloat(alias_verts[ba + 9u]), uintBitsToFloat(alias_verts[ba + 10u]), uintBitsToFloat(alias_verts[ba + 11u]));
+                uint bb = d.poses.y + bj;
+                r0b += wj * vec4(uintBitsToFloat(alias_verts[bb + 0u]), uintBitsToFloat(alias_verts[bb + 1u]), uintBitsToFloat(alias_verts[bb + 2u]), uintBitsToFloat(alias_verts[bb + 3u]));
+                r1b += wj * vec4(uintBitsToFloat(alias_verts[bb + 4u]), uintBitsToFloat(alias_verts[bb + 5u]), uintBitsToFloat(alias_verts[bb + 6u]), uintBitsToFloat(alias_verts[bb + 7u]));
+                r2b += wj * vec4(uintBitsToFloat(alias_verts[bb + 8u]), uintBitsToFloat(alias_verts[bb + 9u]), uintBitsToFloat(alias_verts[bb + 10u]), uintBitsToFloat(alias_verts[bb + 11u]));
+            }
+            vec4 hp = vec4(sp, 1.0);
+            pa = wsum > 0.0 ? vec3(dot(r0a, hp), dot(r1a, hp), dot(r2a, hp)) : sp;
+            pb = wsum > 0.0 ? vec3(dot(r0b, hp), dot(r1b, hp), dot(r2b, hp)) : sp;
+            vec3 n0 = wsum > 0.0 ? vec3(dot(r0a.xyz, sn), dot(r1a.xyz, sn), dot(r2a.xyz, sn)) : sn;
+            vec3 n1 = wsum > 0.0 ? vec3(dot(r0b.xyz, sn), dot(r1b.xyz, sn), dot(r2b.xyz, sn)) : sn;
+            na = dot(n0, n0) > 1e-8 ? normalize(n0) : sn;
+            nb = dot(n1, n1) > 1e-8 ? normalize(n1) : sn;
+        } else if (md3) {
             uint va = vert * 2u;
             uint a0 = alias_verts[d.poses.x + va];
             uint a1 = alias_verts[d.poses.x + va + 1u];

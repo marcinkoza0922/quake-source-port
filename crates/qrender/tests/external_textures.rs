@@ -81,7 +81,7 @@ fn larger_replacement_covers_the_face_like_the_miptex() {
     };
     let bsp = wall();
     let mut shoot = |external: &[Option<ExternalTexture>]| {
-        r.load_level(LevelBsp { bsp: &bsp, lit: None, external }, &[]).unwrap();
+        r.load_level(LevelBsp { bsp: &bsp, lit: None, hdr_lit: None, deluxe: None, external }, &[]).unwrap();
         r.render(&frame).unwrap();
         r.render(&frame).unwrap();
         let px = r.read_pixels().unwrap();

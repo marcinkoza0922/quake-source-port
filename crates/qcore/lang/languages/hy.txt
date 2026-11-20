@@ -1775,6 +1775,15 @@ hy Էկրանանկար
 @ Record Demo
 hy Ձայնագրել դեմո
 
+@ HDR Lightmaps
+hy HDR լուսաքարտեզներ
+
+@ Directional Lighting
+hy Ուղղորդված լուսավորում
+
+@ Light Specular
+hy Լույսի փայլ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ hy Գործարկում է կիսաթափանցիկ ուրվական ձեր ան
 
 @ Shows the SPD label before the speed number
 hy Ցույց է տալիս SPD պիտակը արագության թվից առաջ
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+hy Պահպանում է պայծառ HDR լուսավորումը (.lit2) սահուն անցումով՝ կտրելու փոխարեն
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+hy Օգտագործում է նախապես հաշվարկված լույսի ուղղությունները (.dlit) պատերի և մոդելների նուրբ ստվերման համար
+
+@ Strength of the highlights from directional lighting
+hy Ուղղորդված լուսավորման փայլերի ուժգնությունը
 
 # ==== ui.txt ====
 

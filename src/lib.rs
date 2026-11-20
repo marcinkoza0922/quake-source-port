@@ -14,6 +14,7 @@ mod automap;
 mod autosave;
 mod captions;
 mod console;
+mod csqc;
 mod debris;
 mod blood;
 mod hitfx;

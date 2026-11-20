@@ -4126,3 +4126,24 @@ de Demo aufnehmen
 it Registra demo
 es Grabar demo
 ru Записать демо
+
+@ HDR Lightmaps
+fr Lightmaps HDR
+de HDR-Lightmaps
+it Lightmap HDR
+es Mapas de luz HDR
+ru HDR-лайтмапы
+
+@ Directional Lighting
+fr Éclairage directionnel
+de Gerichtetes Licht
+it Illuminazione direzionale
+es Iluminación direccional
+ru Направленный свет
+
+@ Light Specular
+fr Reflets lumineux
+de Glanzlichter
+it Riflessi speculari
+es Brillo especular
+ru Блики освещения

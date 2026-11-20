@@ -48,6 +48,7 @@ fn build_surface(s: &LmSurf, samples: &[u32], styles: &[f32; 256], dlights: &[DL
             if s.sample_ofs == u32::MAX {
                 l = [s.tmins[3]; 3];
             } else {
+                let is_hdr = (s.atlas & crate::world::LM_FLAG_HDR) != 0;
                 let mut i = s.sample_ofs as usize + (y * w + x) as usize;
                 for k in 0..4 {
                     let st = (s.styles >> (k * 8)) & 0xff;
@@ -56,12 +57,21 @@ fn build_surface(s: &LmSurf, samples: &[u32], styles: &[f32; 256], dlights: &[DL
                     }
                     let v = samples.get(i).copied().unwrap_or(0);
                     let sc = styles[st as usize];
-                    for (c, lc) in l.iter_mut().enumerate() {
-                        *lc += ((v >> (c * 8)) & 0xff) as f32 * sc;
+                    if is_hdr {
+                        let rgb = qformats::bsp::decode_e5bgr9(v);
+                        for (c, lc) in l.iter_mut().enumerate() {
+                            *lc += rgb[c] * (sc / 256.0);
+                        }
+                    } else {
+                        for (c, lc) in l.iter_mut().enumerate() {
+                            *lc += ((v >> (c * 8)) & 0xff) as f32 * sc;
+                        }
                     }
                     i += nst;
                 }
-                l = l.map(|c| c / (256.0 * 128.0));
+                if !is_hdr {
+                    l = l.map(|c| c / (256.0 * 128.0));
+                }
             }
             for d in dlights {
                 let n = [s.plane[0], s.plane[1], s.plane[2]];
@@ -187,7 +197,7 @@ impl Lightmaps {
             let dl: &[DLight] = if lit_set.contains(&i) { dlights } else { &[] };
             build_surface(s, &w.samples, styles, dl, &mut self.scratch);
             let (sw, sh) = (s.size & 0xffff, s.size >> 16);
-            let (ax, ay) = (s.atlas & 0xffff, s.atlas >> 16);
+            let (ax, ay) = (s.atlas & 0x3fff, (s.atlas >> 14) & 0x3fff);
             write_rows(queue, &self.tex, 0, [ax, ay, s.tmins[2] as u32], sw, sh, &self.scratch);
         }
         self.dlit = lit;

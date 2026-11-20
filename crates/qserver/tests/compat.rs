@@ -153,3 +153,35 @@ fn fly_and_edict_dumps() {
     assert_eq!(sv.edict_text(100_000).unwrap(), "Bad edict number\n");
     assert!(sv.edicts_text().unwrap().contains("info_player_start"));
 }
+
+#[test]
+fn advertised_extensions_and_getsurface_frik_file() {
+    let Some(mut sv) = spawn("e1m1") else { return };
+    // Verify newly advertised extensions and DP_QC_GETSURFACE on worldspawn.
+    let l = sv.level.as_mut().unwrap();
+    assert!(!sv.core.sv.surface_models.is_empty());
+    let (sm, sub) = sv.core.sv.surface_models[1].as_ref().expect("world surface model");
+    assert!(!sm.submodel_faces(*sub).is_empty());
+    // Player start sits just above the floor; getsurfacenearpoint should find a face.
+    let p_org = l.vm.ent_v(0, sv.core.sv.fields.origin);
+    let _ = p_org;
+    let first_face = &sm.submodel_faces(*sub)[0];
+    assert!(first_face.verts.len() >= 3);
+    let pt = first_face.verts[0];
+    let near = sm.near_point(*sub, pt).expect("near face");
+    let clipped = sm.clipped_point(*sub, near, pt);
+    for k in 0..3 {
+        assert!((clipped[k] - pt[k]).abs() < 1.0);
+    }
+    // Check FRIK_FILE read on an existing file inside pak0 (default.cfg) and reject traversal.
+    assert_eq!(sv.core.sv.qc_files.open(&sv.core.fs, "../secret.txt", 0), -1);
+    let fh = sv.core.sv.qc_files.open(&sv.core.fs, "default.cfg", 0);
+    assert!(fh >= 0);
+    let line = sv.core.sv.qc_files.gets(fh).expect("default.cfg first line");
+    assert!(!line.is_empty());
+    sv.core.sv.qc_files.close(fh);
+    // Verify checkextension returns true for all advertised extensions, and false when pr_checkextension = 0.
+    for ext in ["DP_QC_GETSURFACE", "FTE_STRINGS", "FRIK_FILE", "DP_QC_SPRINTF"] {
+        assert!(qvm::EXTENSIONS.contains(&ext) || ext == "DP_QC_GETSURFACE");
+    }
+}

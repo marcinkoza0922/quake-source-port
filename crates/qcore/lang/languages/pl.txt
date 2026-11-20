@@ -1775,6 +1775,15 @@ pl Zrzut ekranu
 @ Record Demo
 pl Nagrywaj demo
 
+@ HDR Lightmaps
+pl Lightmapy HDR
+
+@ Directional Lighting
+pl Oświetlenie kierunkowe
+
+@ Light Specular
+pl Połysk światła
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ pl Odtwarza półprzezroczystego ducha z dema twojego rekordu życiowego dla bie
 
 @ Shows the SPD label before the speed number
 pl Wyświetla etykietę SPD przed wartością prędkości
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+pl Zachowuje jasne oświetlenie HDR (.lit2) z łagodnym wygaszaniem zamiast przycinania
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+pl Używa zapisanych kierunków światła (.dlit) do subtelnego cieniowania i połysku na ścianach i modelach
+
+@ Strength of the highlights from directional lighting
+pl Siła odblasków od oświetlenia kierunkowego
 
 # ==== ui.txt ====
 

@@ -1775,6 +1775,15 @@ ro Captură de ecran
 @ Record Demo
 ro Înregistrează demo
 
+@ HDR Lightmaps
+ro Hărți de lumină HDR
+
+@ Directional Lighting
+ro Iluminare direcțională
+
+@ Light Specular
+ro Reflexii speculare
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ ro Rulează o fantomă translucidă a demo-ului recordului tău personal pentru 
 
 @ Shows the SPD label before the speed number
 ro Afișează eticheta SPD înaintea valorii vitezei
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+ro Păstrează iluminarea HDR puternică (.lit2) cu o atenuare lină în loc de tăiere
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+ro Folosește direcții de lumină precalculate (.dlit) pentru umbrire și reflexii subtile pe pereți și modele
+
+@ Strength of the highlights from directional lighting
+ro Intensitatea reflexiilor din iluminarea direcțională
 
 # ==== ui.txt ====
 

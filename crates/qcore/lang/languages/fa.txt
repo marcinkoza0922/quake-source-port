@@ -1775,6 +1775,15 @@ fa تصویر صفحه
 @ Record Demo
 fa ضبط دمو
 
+@ HDR Lightmaps
+fa نقشه‌های نور HDR
+
+@ Directional Lighting
+fa نورپردازی جهت‌دار
+
+@ Light Specular
+fa درخشش نور
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ fa شبح نیمه‌شفافی از دموی بهترین رکورد شخصی �
 
 @ Shows the SPD label before the speed number
 fa برچسب SPD را پیش از عدد سرعت نمایش می‌دهد
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+fa نورپردازی روشن HDR (.lit2) را با گذار نرم به‌جای برش حفظ می‌کند
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+fa از جهت‌های نور ازپیش‌پخته (.dlit) برای سایه‌زنی و درخشش ظریف روی دیوارها و مدل‌ها استفاده می‌کند
+
+@ Strength of the highlights from directional lighting
+fa شدت بازتاب‌های حاصل از نورپردازی جهت‌دار
 
 # ==== ui.txt ====
 

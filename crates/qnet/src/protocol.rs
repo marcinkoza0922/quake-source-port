@@ -169,6 +169,12 @@ pub const STAT_TOTALMONSTERS: usize = 12;
 pub const STAT_SECRETS: usize = 13;
 pub const STAT_MONSTERS: usize = 14;
 pub const STAT_ITEMS: usize = 15;
+pub const STAT_VIEWHEIGHT: usize = 16;
+pub const STAT_VIEWZOOM: usize = 21;
+pub const STAT_IDEALPITCH: usize = 25;
+pub const STAT_PUNCHANGLE_X: usize = 26;
+pub const STAT_PUNCHANGLE_Y: usize = 27;
+pub const STAT_PUNCHANGLE_Z: usize = 28;
 pub const MAX_CL_STATS: usize = 256;
 
 pub const SIGNONS: u32 = 4;

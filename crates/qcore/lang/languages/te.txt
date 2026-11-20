@@ -1775,6 +1775,15 @@ te స్క్రీన్‌షాట్
 @ Record Demo
 te డెమో రికార్డ్ చేయి
 
+@ HDR Lightmaps
+te HDR లైట్‌మ్యాప్స్
+
+@ Directional Lighting
+te దిశాత్మక కాంతి
+
+@ Light Specular
+te కాంతి మెరుపు
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ te ప్రస్తుత మ్యాప్ మరియు కష్టత�
 
 @ Shows the SPD label before the speed number
 te వేగం సంఖ్య ముందు SPD లేబుల్ చూపుతుంది
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+te ప్రకాశవంతమైన HDR కాంతిని (.lit2) కత్తిరించకుండా మృదువైన రోల్-ఆఫ్‌తో నిలుపుతుంది
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+te గోడలు మరియు మోడళ్లపై సున్నితమైన నీడలు, మెరుపుల కోసం బేక్ చేసిన కాంతి దిశలను (.dlit) ఉపయోగిస్తుంది
+
+@ Strength of the highlights from directional lighting
+te దిశాత్మక కాంతి నుండి వచ్చే హైలైట్ల తీవ్రత
 
 # ==== ui.txt ====
 

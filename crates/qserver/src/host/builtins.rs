@@ -318,7 +318,206 @@ impl Host for Ctx<'_> {
             return Err(e.clone());
         }
         match name {
-            "clientstat" => {}
+            "clientstat" => {
+                let idx = vm.g_f(p(0)) as i32;
+                let ty = vm.g_f(p(1)) as i32;
+                let fld = vm.g_i(p(2)) as usize;
+                if (32..qnet::protocol::MAX_CL_STATS as i32).contains(&idx) {
+                    let idx = idx as usize;
+                    self.c.sv.custom_stats.retain(|s| s.idx != idx);
+                    self.c.sv.custom_stats.push(crate::server::CustomStat {
+                        idx,
+                        ty,
+                        field: Some(fld),
+                        global: None,
+                    });
+                }
+            }
+            "globalstat" => {
+                let idx = vm.g_f(p(0)) as i32;
+                let ty = vm.g_f(p(1)) as i32;
+                let gname = lossy(&str_arg(vm, 2)?);
+                if (32..qnet::protocol::MAX_CL_STATS as i32).contains(&idx)
+                    && let Some(ofs) = vm.global_ofs(&gname)
+                {
+                    let idx = idx as usize;
+                    self.c.sv.custom_stats.retain(|s| s.idx != idx);
+                    self.c.sv.custom_stats.push(crate::server::CustomStat {
+                        idx,
+                        ty,
+                        field: None,
+                        global: Some(ofs),
+                    });
+                }
+            }
+            "fopen" => {
+                let path = lossy(&str_arg(vm, 0)?);
+                let mode = vm.g_f(p(1)) as i32;
+                let h = self.c.sv.qc_files.open(&self.c.fs, &path, mode);
+                vm.ret_f(h as f32);
+            }
+            "fclose" => {
+                let h = vm.g_f(p(0)) as i32;
+                self.c.sv.qc_files.close(h);
+            }
+            "fgets" => {
+                let h = vm.g_f(p(0)) as i32;
+                match self.c.sv.qc_files.gets(h) {
+                    Some(line) => vm.ret_temp(&line),
+                    None => vm.ret_i(0),
+                }
+            }
+            "fputs" => {
+                let h = vm.g_f(p(0)) as i32;
+                let s = vm.var_string(1)?;
+                self.c.sv.qc_files.puts(h, &s);
+            }
+            "fseek" => {
+                let h = vm.g_f(p(0)) as i32;
+                let pos = (vm.argc > 1).then(|| vm.g_i(p(1)).max(0) as usize);
+                let prev = self.c.sv.qc_files.seek(h, pos);
+                vm.ret_i(prev);
+            }
+            "getsurfacenumpoints" => {
+                let e = ent_arg(vm, 0)?;
+                let si = vm.g_f(p(1)) as i32;
+                let mi = vm.ent_f(e, self.c.sv.fields.modelindex) as usize;
+                let n = self.c.sv.surface_models.get(mi).and_then(|s| s.as_ref())
+                    .filter(|_| si >= 0)
+                    .and_then(|(sm, sub)| sm.face(*sub, si as usize))
+                    .map_or(0, |f| f.verts.len());
+                vm.ret_f(n as f32);
+            }
+            "getsurfacepoint" => {
+                let e = ent_arg(vm, 0)?;
+                let si = vm.g_f(p(1)) as i32;
+                let pi = vm.g_f(p(2)) as i32;
+                let mi = vm.ent_f(e, self.c.sv.fields.modelindex) as usize;
+                let pt = self.c.sv.surface_models.get(mi).and_then(|s| s.as_ref())
+                    .filter(|_| si >= 0 && pi >= 0)
+                    .and_then(|(sm, sub)| sm.face(*sub, si as usize)?.verts.get(pi as usize).copied())
+                    .unwrap_or([0.0; 3]);
+                vm.ret_v(pt);
+            }
+            "getsurfacenormal" => {
+                let e = ent_arg(vm, 0)?;
+                let si = vm.g_f(p(1)) as i32;
+                let mi = vm.ent_f(e, self.c.sv.fields.modelindex) as usize;
+                let n = self.c.sv.surface_models.get(mi).and_then(|s| s.as_ref())
+                    .filter(|_| si >= 0)
+                    .and_then(|(sm, sub)| sm.face(*sub, si as usize))
+                    .map(crate::surface::SurfaceModel::face_outward_normal)
+                    .unwrap_or([0.0; 3]);
+                vm.ret_v(n);
+            }
+            "getsurfacetexture" => {
+                let e = ent_arg(vm, 0)?;
+                let si = vm.g_f(p(1)) as i32;
+                let mi = vm.ent_f(e, self.c.sv.fields.modelindex) as usize;
+                let tex = self.c.sv.surface_models.get(mi).and_then(|s| s.as_ref())
+                    .filter(|_| si >= 0)
+                    .and_then(|(sm, sub)| sm.face(*sub, si as usize))
+                    .map(|f| f.texture.as_bytes().to_vec());
+                match tex {
+                    Some(t) => {
+                        let h = vm.strings.engine(&t);
+                        vm.ret_i(h);
+                    }
+                    None => vm.ret_i(0),
+                }
+            }
+            "getsurfacenearpoint" => {
+                let e = ent_arg(vm, 0)?;
+                let pt = vm.g_v(p(1));
+                let mi = vm.ent_f(e, self.c.sv.fields.modelindex) as usize;
+                let r = self.c.sv.surface_models.get(mi).and_then(|s| s.as_ref())
+                    .and_then(|(sm, sub)| sm.near_point(*sub, pt))
+                    .map_or(-1.0, |i| i as f32);
+                vm.ret_f(r);
+            }
+            "getsurfaceclippedpoint" => {
+                let e = ent_arg(vm, 0)?;
+                let si = vm.g_f(p(1)) as i32;
+                let pt = vm.g_v(p(2));
+                let mi = vm.ent_f(e, self.c.sv.fields.modelindex) as usize;
+                let cp = self.c.sv.surface_models.get(mi).and_then(|s| s.as_ref())
+                    .filter(|_| si >= 0)
+                    .map_or(pt, |(sm, sub)| sm.clipped_point(*sub, si as usize, pt));
+                vm.ret_v(cp);
+            }
+            "getsurfacepointattribute" => {
+                let e = ent_arg(vm, 0)?;
+                let si = vm.g_f(p(1)) as i32;
+                let pi = vm.g_f(p(2)) as i32;
+                let attr = vm.g_f(p(3)) as u32;
+                let mi = vm.ent_f(e, self.c.sv.fields.modelindex) as usize;
+                let v = self.c.sv.surface_models.get(mi).and_then(|s| s.as_ref())
+                    .filter(|_| si >= 0 && pi >= 0)
+                    .map_or([0.0; 3], |(sm, sub)| sm.point_attribute(*sub, si as usize, pi as usize, attr));
+                vm.ret_v(v);
+            }
+            "getsurfacenumtriangles" => {
+                let e = ent_arg(vm, 0)?;
+                let si = vm.g_f(p(1)) as i32;
+                let mi = vm.ent_f(e, self.c.sv.fields.modelindex) as usize;
+                let n = self.c.sv.surface_models.get(mi).and_then(|s| s.as_ref())
+                    .filter(|_| si >= 0)
+                    .and_then(|(sm, sub)| sm.face(*sub, si as usize))
+                    .map_or(0, |f| f.verts.len().saturating_sub(2));
+                vm.ret_f(n as f32);
+            }
+            "getsurfacetriangle" => {
+                let e = ent_arg(vm, 0)?;
+                let si = vm.g_f(p(1)) as i32;
+                let ti = vm.g_f(p(2)) as i32;
+                let mi = vm.ent_f(e, self.c.sv.fields.modelindex) as usize;
+                let tri = self.c.sv.surface_models.get(mi).and_then(|s| s.as_ref())
+                    .filter(|_| si >= 0 && ti >= 0)
+                    .and_then(|(sm, sub)| sm.face(*sub, si as usize))
+                    .filter(|f| (ti as usize) < f.verts.len().saturating_sub(2))
+                    .map_or([0.0; 3], |_| [0.0, (ti + 1) as f32, (ti + 2) as f32]);
+                vm.ret_v(tri);
+            }
+            "cvar_string" => {
+                let n = lossy(&str_arg(vm, 0)?);
+                let s = self.c.cvars.by_name(&n).map_or("", |c| c.string.as_str()).to_string();
+                vm.ret_temp(s.as_bytes());
+            }
+            "registercvar" => {
+                let n = lossy(&str_arg(vm, 0)?);
+                let v = lossy(&str_arg(vm, 1)?);
+                let existed = self.c.cvars.find(&n).is_some();
+                if !existed {
+                    self.c.cvars.register(&n, &v, 0);
+                }
+                vm.ret_f(i32::from(!existed) as f32);
+            }
+            "print" => {
+                let s = lossy(&vm.var_string(0)?);
+                self.c.print(&s);
+            }
+            "setmodelindex" => {
+                let e = ent_arg(vm, 0)?;
+                let idx = vm.g_f(p(1)) as usize;
+                let m = self.c.sv.model_precache.get(idx).map(|s| s.as_bytes().to_vec()).unwrap_or_default();
+                let h = if m.is_empty() { 0 } else { vm.strings.engine(&m) };
+                let f = &self.c.sv.fields;
+                let (fm, fmi) = (f.model, f.modelindex);
+                vm.set_ent_i(e, fm, h);
+                vm.set_ent_f(e, fmi, idx as f32);
+                let (mn, mx) = match self.c.sv.models.get(idx).and_then(|m| m.as_ref()) {
+                    Some(m) => (m.mins.to_array(), m.maxs.to_array()),
+                    None => ([0.0; 3], [0.0; 3]),
+                };
+                self.set_min_max_size(vm, e, mn, mx)?;
+            }
+            "modelnameforindex" => {
+                let idx = vm.g_f(p(0)) as usize;
+                match self.c.sv.model_precache.get(idx) {
+                    Some(s) if !s.is_empty() => vm.ret_temp(s.as_bytes()),
+                    _ => vm.ret_i(0),
+                }
+            }
             "checkcommand" => {
                 let n = lossy(&str_arg(vm, 0)?).to_ascii_lowercase();
                 let r = if self.c.cmd_names.contains(&n) {
@@ -343,7 +542,6 @@ impl Host for Ctx<'_> {
             "pointparticles" => self.c.pf_pointparticles(vm)?,
             "te_particlerain" => self.c.pf_te_weather(vm, false)?,
             "te_particlesnow" => self.c.pf_te_weather(vm, true)?,
-            "checkbuiltin" => vm.ret_f(0.0),
             "ex_CheckPlayerEXFlags" | "ex_walkpathtogoal" => vm.ret_f(0.0),
             _ => return Err(vm.run_error(format!("unimplemented builtin {name}"))),
         }
@@ -354,8 +552,39 @@ impl Host for Ctx<'_> {
         self.c.fte_particles().then(|| self.c.particle_precache(name) as f32)
     }
 
+    fn extensions_enabled(&self) -> bool {
+        self.c.cvars.value_of("pr_checkextension") != 0.0
+    }
+
     fn has_extension(&self, name: &str) -> bool {
-        self.c.fte_particles() && crate::particles::EXTENSIONS.contains(&name)
+        if !self.extensions_enabled() {
+            return false;
+        }
+        if qvm::EXTENSIONS.contains(&name) {
+            return true;
+        }
+        const SERVER_EXTENSIONS: &[&str] = &[
+            "DP_CON_SET",
+            "DP_CON_SETA",
+            "DP_REGISTERCVAR",
+            "DP_QC_CVAR_STRING",
+            "DP_QC_GETSURFACE",
+            "DP_QC_GETSURFACETRIANGLE",
+            "DP_QC_GETSURFACEPOINTATTRIBUTE",
+            "DP_SV_PRINT",
+            "DP_VIEWZOOM",
+            "EXT_CSQC",
+        ];
+        if SERVER_EXTENSIONS.contains(&name) {
+            return true;
+        }
+        let pext2 = self.c.cvars.value_of("sv_protocol_pext2") as u32 & qnet::delta::PEXT2_SUPPORTED;
+        match name {
+            "DP_ENT_ALPHA" => self.c.sv.protocol != PROTOCOL_NETQUAKE || pext2 & qnet::delta::PEXT2_REPLACEMENTDELTAS != 0,
+            "DP_ENT_SCALE" => self.c.sv.protocol == PROTOCOL_RMQ || pext2 & qnet::delta::PEXT2_REPLACEMENTDELTAS != 0,
+            "DP_ENT_COLORMOD" => pext2 & qnet::delta::PEXT2_REPLACEMENTDELTAS != 0,
+            _ => self.c.fte_particles() && crate::particles::EXTENSIONS.contains(&name),
+        }
     }
 
     fn dprint(&mut self, msg: &str) {

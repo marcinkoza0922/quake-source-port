@@ -286,6 +286,64 @@ pub fn load_md3(
     r.load_md3(md3, &surface_skins).ok()
 }
 
+/// Loads an IQM v2 skeletal model (`iqm_path`) with skin manifests and material/fallback textures.
+pub fn load_iqm(
+    fs: &Fs,
+    r: &mut Renderer,
+    iqm_path: &str,
+    iqm: &qformats::Iqm,
+    holey: bool,
+) -> Option<ModelId> {
+    let base_path = strip_ext(iqm_path);
+    let mesh_names: Vec<&str> = iqm.meshes.iter().map(|m| m.name.as_str()).collect();
+    let manifests = load_skin_manifests(fs, iqm_path, base_path, &mesh_names);
+    let mut surface_skins = Vec::with_capacity(iqm.meshes.len());
+    for mesh in &iqm.meshes {
+        let mut skins: Vec<(Vec<Md3SkinImage>, Vec<f32>)> = Vec::new();
+        for manifest in &manifests {
+            let Some(entries) = manifest else { continue };
+            let frames = skin_from_manifest(r, fs, entries, &mesh.name, holey);
+            if !frames.is_empty() {
+                let iv = intervals_for(frames.len());
+                skins.push((frames, iv));
+            } else if let Some(first) = skins.first().cloned() {
+                skins.push(first);
+            }
+        }
+        if skins.is_empty() {
+            let shaders: Vec<String> = if mesh.material.is_empty() {
+                Vec::new()
+            } else {
+                vec![mesh.material.clone()]
+            };
+            skins = load_fallback_skins(r, fs, &mesh.name, &shaders, holey);
+        }
+        if skins.is_empty() {
+            skins.push((vec![dummy_skin()], Vec::new()));
+        }
+        surface_skins.push(Md3SurfaceSkins { skins, holey });
+    }
+    r.load_iqm(iqm, &surface_skins).ok()
+}
+
+/// Attempts to load a companion `.iqm` replacement for `mdl_name`.
+pub fn load_iqm_replacement(
+    fs: &Fs,
+    r: &mut Renderer,
+    mdl_name: &str,
+    mdl: &Mdl,
+) -> Option<ModelId> {
+    let stem = strip_ext(mdl_name);
+    let iqm_name = format!("{stem}.iqm");
+    let data = fs.open_companion(mdl_name, &iqm_name)?;
+    if data.get(..16) != Some(qformats::iqm::IQM_MAGIC.as_slice()) {
+        return None;
+    }
+    let iqm = qformats::Iqm::parse(&data).ok()?;
+    let holey = (mdl.flags & MF_HOLEY) != 0;
+    load_iqm(fs, r, &iqm_name, &iqm, holey)
+}
+
 /// Attempts to load a companion `.md3` replacement for `mdl_name`.
 pub fn load_replacement(
     fs: &Fs,

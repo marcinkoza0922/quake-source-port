@@ -3,7 +3,7 @@
 
 pub use qnet::delta::*;
 use qnet::MsgReader;
-use qnet::protocol::{MAX_MODELS, SIGNONS};
+use qnet::protocol::{MAX_CL_STATS, MAX_MODELS, SIGNONS};
 
 use crate::parse::{R, err};
 use crate::state::*;
@@ -43,6 +43,57 @@ fn entity_state(s: &EntState) -> EntityState {
 }
 
 impl ClientState {
+    /// Update an integer stat (`svc_updatestat` / `svcdp_updatestatbyte`) and
+    /// sync `PEXT2_PREDINFO` derived client fields (items, viewheight, weapon).
+    pub(crate) fn apply_stat_int(&mut self, i: i32, v: i32) {
+        if !(0..MAX_CL_STATS as i32).contains(&i) {
+            return;
+        }
+        let idx = i as usize;
+        self.stats[idx] = v;
+        self.statsf[idx] = v as f32;
+        self.sync_stat(idx);
+    }
+
+    /// Update a float stat (`svcfte_updatestatfloat`).
+    pub(crate) fn apply_stat_float(&mut self, i: i32, v: f32) {
+        if !(0..MAX_CL_STATS as i32).contains(&i) {
+            return;
+        }
+        let idx = i as usize;
+        self.stats[idx] = v as i32;
+        self.statsf[idx] = v;
+        self.sync_stat(idx);
+    }
+
+    fn sync_stat(&mut self, idx: usize) {
+        use qnet::protocol::*;
+        match idx {
+            STAT_ITEMS => {
+                let items = self.stats[STAT_ITEMS];
+                if self.items != items {
+                    for j in 0..32 {
+                        if items & (1 << j) != 0 && self.items & (1 << j) == 0 {
+                            self.item_gettime[j] = self.time;
+                        }
+                    }
+                    self.items = items;
+                }
+            }
+            STAT_VIEWHEIGHT => self.viewheight = self.statsf[STAT_VIEWHEIGHT],
+            STAT_IDEALPITCH => self.idealpitch = self.statsf[STAT_IDEALPITCH],
+            STAT_WEAPON => {
+                let wm = self.stats[STAT_WEAPON].max(0) as usize;
+                if self.viewent.model != wm {
+                    self.viewent.model = wm;
+                    self.viewent.lerpflags |= LERP_RESETANIM;
+                }
+            }
+            STAT_WEAPONFRAME => self.viewent.frame = self.stats[STAT_WEAPONFRAME],
+            _ => {}
+        }
+    }
+
     /// CLFTE_ParseBaseline (svcfte_spawnbaseline2 / svcfte_spawnstatic2).
     pub(crate) fn parse_baseline_fte(&mut self, m: &mut MsgReader<'_>) -> R<EntityState> {
         let mut s = EntState::default();
@@ -62,7 +113,12 @@ impl ClientState {
             self.ack_frames.push(seq as i32);
         }
         if self.pext2 & PEXT2_PREDINFO != 0 {
-            m.short();
+            let raw = m.short() as u16 as u32;
+            let mut seq = (self.movemessages & 0xffff_0000) | raw;
+            if seq > self.movemessages {
+                seq = seq.wrapping_sub(0x10000);
+            }
+            self.acked_movemessages = seq;
         }
         let newtime = m.float() as f64;
         // A snapshot split over several datagrams shares one time.
@@ -113,6 +169,25 @@ impl ClientState {
             return err("svcfte_updateentities: truncated");
         }
         self.entities_deltaed();
+        if self.pext2 & PEXT2_PREDINFO != 0 {
+            use qnet::protocol::{STAT_PUNCHANGLE_X, STAT_PUNCHANGLE_Y, STAT_PUNCHANGLE_Z};
+            self.mvelocity[1] = self.mvelocity[0];
+            if let Some(ve) = self.entities.get(self.viewentity) {
+                self.mvelocity[0] = ve.netstate.velocity.map(|v| v as f32 * (1.0 / 8.0));
+                self.onground = ve.netstate.eflags & EFLAGS_ONGROUND != 0;
+            }
+            let p = [
+                self.statsf[STAT_PUNCHANGLE_X],
+                self.statsf[STAT_PUNCHANGLE_Y],
+                self.statsf[STAT_PUNCHANGLE_Z],
+            ];
+            self.punchangle = p;
+            if self.punchangles[0] != p {
+                self.punchangles[1] = self.punchangles[0];
+                self.punchangles[0] = p;
+                self.punchtime = self.time;
+            }
+        }
         Ok(())
     }
 

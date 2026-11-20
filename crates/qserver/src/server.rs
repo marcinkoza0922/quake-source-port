@@ -161,9 +161,9 @@ fn register_cvars(cv: &mut Cvars) {
         ("pr_checkextension", "1", 0),
         // FTE/DP particle builtins + svcdp_* messages (single player only).
         ("sv_fteparticles", "1", 0),
-        // FTE protocol extensions offered to clients (PEXT2_* mask; 8 =
-        // replacement deltas). 0 keeps the plain 15/666/999 protocol.
-        ("sv_protocol_pext2", "8", 0),
+        // FTE protocol extensions offered to clients (PEXT2_* mask; 40 =
+        // replacement deltas + predinfo). 0 keeps the plain 15/666/999 protocol.
+        ("sv_protocol_pext2", "40", 0),
     ] {
         cv.register(n, d, f);
     }

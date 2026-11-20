@@ -61,6 +61,9 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_dynamic" => "Lights from rockets, muzzle flashes and explosions brighten nearby walls",
         "r_enhancedmodels" => "Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load",
         "r_coloredlight" => "Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load",
+        "r_hdr_lightmaps" => "Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping",
+        "r_deluxemapping" => "Uses baked light directions (.dlit) for subtle shading and highlights on walls and models",
+        "r_deluxemapping_specular" => "Strength of the highlights from directional lighting",
         "r_fog" => "Shows the distance fog that maps and mods set; off always gives clear view",
         "r_skyfog" => "How strongly fog covers the sky when fog is on",
         "r_lerpmodels" => "Blends between animation frames of monsters and weapons",
@@ -397,6 +400,7 @@ impl Menu {
     pub(super) fn item_disabled(&self, item: Item, cv: &Cvars) -> bool {
         self.game_locked(item, cv)
             || (matches!(item, Item::Run { run: Run::ExportClip, .. }) && cv.value_of("_export_hasclip") == 0.0)
+            || (matches!(item, Item::Slider { cvar: "r_deluxemapping_specular", .. }) && cv.value_of("r_deluxemapping") == 0.0)
             || (matches!(item, Item::Slider { cvar: "r_motionblur_amount", .. } | Item::Choice { cvar: "r_motionblur_quality", .. })
             && cv.value_of("r_motionblur") == 0.0)
             || (matches!(item, Item::Slider { cvar: "r_waterripples_amount", .. }) && cv.value_of("r_waterripples") == 0.0)

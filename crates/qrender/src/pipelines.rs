@@ -296,6 +296,7 @@ impl Pipelines {
             cb(2, vk::DescriptorType::STORAGE_BUFFER),
             cb(3, vk::DescriptorType::STORAGE_BUFFER),
             cb(4, vk::DescriptorType::STORAGE_IMAGE),
+            cb(5, vk::DescriptorType::STORAGE_BUFFER),
         ];
         let cci = vk::DescriptorSetLayoutCreateInfo::default().bindings(&cbind);
         // SAFETY: valid device.

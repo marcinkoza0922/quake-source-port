@@ -176,7 +176,9 @@ impl Server {
         m.angle(a[0], pf);
         m.angle(a[1], pf);
         m.angle(0.0, pf);
-        crate::send::write_clientdata(vm, c, &mut l.world, e, &mut m);
+        if c.clients[i].pext2 & qnet::delta::PEXT2_PREDINFO == 0 {
+            crate::send::write_clientdata(vm, c, &mut l.world, e, &mut m);
+        }
         m.byte(SVC_SIGNONNUM);
         m.byte(3);
         let cl = &mut c.clients[i];
@@ -227,12 +229,30 @@ impl Server {
         };
         let words: Vec<&str> = args.split_whitespace().skip(1).collect();
         for kv in words.chunks(2) {
-            if num(kv[0]) == qnet::delta::PROTOCOL_FTE_PEXT2 {
+            let k = num(kv[0]);
+            if k == qnet::delta::PROTOCOL_FTE_PEXT1 {
+                cl.pext1 = kv.get(1).map_or(0, |v| num(v)) & qnet::delta::PEXT1_SUPPORTED;
+            } else if k == qnet::delta::PROTOCOL_FTE_PEXT2 {
                 cl.pext2 = kv.get(1).map_or(0, |v| num(v)) & qnet::delta::PEXT2_SUPPORTED;
             }
         }
         cl.pext_known = true;
         self.send_serverinfo(i);
+    }
+
+    /// Record the latest client input sequence (PEXT2_PREDINFO `clc_move`).
+    /// Returns `false` if stale/duplicate (should drop the move).
+    pub fn record_move_seq(&mut self, i: usize, seq16: u16) -> bool {
+        let Some(cl) = self.core.clients.get_mut(i) else { return false };
+        let mut seq = (cl.last_move_seq & 0xffff_0000) | u32::from(seq16);
+        if seq.wrapping_add(0x100) < cl.last_move_seq {
+            seq = seq.wrapping_add(0x10000);
+        }
+        if seq <= cl.last_move_seq && cl.last_move_seq != 0 {
+            return false;
+        }
+        cl.last_move_seq = seq;
+        true
     }
 
     /// clcdp_ackframe from client `i` (`-1` requests a full entity resend).

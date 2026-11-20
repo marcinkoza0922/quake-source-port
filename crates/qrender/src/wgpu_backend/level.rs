@@ -93,14 +93,14 @@ impl Renderer {
     /// entry of `brushes`).
     pub fn load_level(&mut self, level: LevelBsp, brushes: &[LevelBsp]) -> Result<(Vec<ModelId>, Vec<ModelId>)> {
         self.free_level();
-        let mut cpu = world::World::build(level.bsp, level.lit);
+        let mut cpu = world::World::build_ext(level.bsp, level.lit, level.hdr_lit, level.deluxe);
         let world_subs = cpu.submodels.len();
         let mut materials = Vec::new();
         let mut kinds = Vec::new();
         self.upload_bsp_textures(level, &mut materials, &mut kinds)?;
         let mut brush_ids = Vec::new();
         for b in brushes {
-            let first = cpu.add_brush(b.bsp, b.lit, materials.len() as u32);
+            let first = cpu.add_brush_ext(b.bsp, b.lit, b.hdr_lit, b.deluxe, materials.len() as u32);
             self.upload_bsp_textures(*b, &mut materials, &mut kinds)?;
             self.models.push(Model::Brush(first));
             brush_ids.push(ModelId(self.models.len() as u32 - 1));

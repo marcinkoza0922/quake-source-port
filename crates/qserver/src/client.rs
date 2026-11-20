@@ -60,8 +60,11 @@ pub struct Client {
     pub num_pings: usize,
     /// The client answered (or never needed) the `cmd pext` query.
     pub pext_known: bool,
-    /// Active FTE protocol extensions (PEXT2_*).
+    /// Active FTE protocol extensions (PEXT1_* / PEXT2_*).
+    pub pext1: u32,
     pub pext2: u32,
+    /// Last client `clc_move` sequence received (PEXT2_PREDINFO).
+    pub last_move_seq: u32,
     /// Replacement-delta state while PEXT2_REPLACEMENTDELTAS is active.
     pub delta: Option<Box<crate::delta::DeltaState>>,
     /// A second point whose PVS is added to this client's (the local free
@@ -102,7 +105,9 @@ impl Default for Client {
             ping_times: [0.0; NUM_PING_TIMES],
             num_pings: 0,
             pext_known: false,
+            pext1: 0,
             pext2: 0,
+            last_move_seq: 0,
             delta: None,
             extra_view: None,
         }

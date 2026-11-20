@@ -1775,6 +1775,15 @@ ka ეკრანის სურათი
 @ Record Demo
 ka დემოს ჩაწერა
 
+@ HDR Lightmaps
+ka HDR სინათლის რუკები
+
+@ Directional Lighting
+ka მიმართული განათება
+
+@ Light Specular
+ka სინათლის ბზინვარება
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ ka უშვებს ნახევრად გამჭვირვალე
 
 @ Shows the SPD label before the speed number
 ka აჩვენებს SPD წარწერას სიჩქარის რიცხვის წინ
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+ka ინარჩუნებს კაშკაშა HDR განათებას (.lit2) რბილი გადასვლით მოჭრის ნაცვლად
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+ka იყენებს წინასწარ გამოთვლილ სინათლის მიმართულებებს (.dlit) კედლებსა და მოდელებზე ნაზი ჩრდილისა და ანარეკლისთვის
+
+@ Strength of the highlights from directional lighting
+ka მიმართული განათების ანარეკლების სიმძლავრე
 
 # ==== ui.txt ====
 

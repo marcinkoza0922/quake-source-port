@@ -156,6 +156,9 @@ impl Host {
             return;
         }
         let name = args.argv(0).to_ascii_lowercase();
+        if self.csqc.has_command(&name) && self.csqc_console_command(line) {
+            return;
+        }
         let known = self.cmds.exists(&name) || self.cmds.alias(&name).is_some() || self.server.core.cvars.find(&name).is_some();
         if known {
             qcore::cmd::execute_string(self, line);

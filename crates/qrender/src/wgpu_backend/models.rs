@@ -243,6 +243,100 @@ impl Renderer {
         Ok(ModelId(self.models.len() as u32 - 1))
     }
 
+    /// Loads an IQM v2 skeletal model (CPU-skinned into MD3-format poses for wgpu).
+    pub fn load_iqm(&mut self, iqm: &qformats::Iqm, surface_skins: &[Md3SurfaceSkins]) -> Result<ModelId> {
+        let num_frames = iqm.num_frames_effective();
+        let num_bones = iqm.num_bones();
+        let matrices = iqm.compute_frame_matrices();
+        let nv = iqm.positions.len();
+        let verts: Vec<AliasVertex> = (0..nv)
+            .map(|i| AliasVertex { vert: i as u32, st: iqm.texcoords.get(i).copied().unwrap_or([0.0; 2]) })
+            .collect();
+        let mut all_poses = Vec::with_capacity(num_frames * nv * 2);
+        let inv_scale = 1.0 / qformats::md3::XYZ_SCALE;
+        for f in 0..num_frames {
+            let fm = &matrices[f * num_bones..(f + 1) * num_bones];
+            for i in 0..nv {
+                let p = iqm.positions[i];
+                let n = iqm.normals.get(i).copied().unwrap_or([0.0, 0.0, 1.0]);
+                let bi = iqm.blend_indexes.get(i).copied().unwrap_or([0; 4]);
+                let bw = iqm.blend_weights.get(i).copied().unwrap_or([255, 0, 0, 0]);
+                let wsum: f32 = bw.iter().map(|&w| w as f32).sum();
+                let (sp, sn) = if wsum > 0.0 {
+                    let mut m = [0.0f32; 12];
+                    for k in 0..4 {
+                        let w = bw[k] as f32 / wsum;
+                        if w <= 0.0 { continue; }
+                        let bm = fm[(bi[k] as usize).min(num_bones - 1)];
+                        for c in 0..12 { m[c] += w * bm[c]; }
+                    }
+                    let op = [
+                        m[0] * p[0] + m[1] * p[1] + m[2] * p[2] + m[3],
+                        m[4] * p[0] + m[5] * p[1] + m[6] * p[2] + m[7],
+                        m[8] * p[0] + m[9] * p[1] + m[10] * p[2] + m[11],
+                    ];
+                    let on = [
+                        m[0] * n[0] + m[1] * n[1] + m[2] * n[2],
+                        m[4] * n[0] + m[5] * n[1] + m[6] * n[2],
+                        m[8] * n[0] + m[9] * n[1] + m[10] * n[2],
+                    ];
+                    let nl = (on[0] * on[0] + on[1] * on[1] + on[2] * on[2]).sqrt();
+                    (op, if nl > 1e-6 { on.map(|c| c / nl) } else { n })
+                } else {
+                    (p, n)
+                };
+                let q = |v: f32| ((v * inv_scale).clamp(-32768.0, 32767.0) as i32 + 32768) as u32;
+                let lat = (sn[2].clamp(-1.0, 1.0).acos() * (255.0 / std::f32::consts::TAU)).rem_euclid(256.0) as u32;
+                let lng = (sn[1].atan2(sn[0]) * (255.0 / std::f32::consts::TAU)).rem_euclid(256.0) as u32;
+                all_poses.push((q(sp[0]) & 0xffff) | ((q(sp[1]) & 0xffff) << 16));
+                all_poses.push((q(sp[2]) & 0xffff) | ((lat & 0xff) << 16) | ((lng & 0xff) << 24));
+            }
+        }
+        let mut all_idx = Vec::with_capacity(iqm.triangles.len() * 3);
+        let mut surfaces = Vec::with_capacity(iqm.meshes.len());
+        for (mi, mesh) in iqm.meshes.iter().enumerate() {
+            let first_index = all_idx.len() as u32;
+            let start = mesh.first_triangle as usize;
+            let end = (start + mesh.num_triangles as usize).min(iqm.triangles.len());
+            for tri in &iqm.triangles[start..end] {
+                all_idx.extend_from_slice(tri);
+            }
+            let spec = surface_skins.get(mi);
+            let mut skins = Vec::new();
+            for (frames, intervals) in spec.map_or(&[][..], |ss| &ss.skins[..]) {
+                let mut imgs = Vec::with_capacity(frames.len());
+                for img in frames { imgs.push(self.md3_skin(img)?); }
+                skins.push((imgs, intervals.clone()));
+            }
+            surfaces.push(AliasSurface {
+                first_index,
+                num_indices: all_idx.len() as u32 - first_index,
+                first_vert: 0,
+                vert_count: nv as u32,
+                pose_base: 0,
+                num_verts: nv as u32,
+                skins,
+                holey: spec.is_some_and(|ss| ss.holey),
+            });
+        }
+        let frames = (0..num_frames).map(|f| (f as u32, 1, Vec::new())).collect();
+        let (_lo, hi, radius) = iqm.compute_bounds();
+        let ibuf = self.index_buffer(&all_idx);
+        self.models.push(Model::Alias(Box::new(AliasModel {
+            verts,
+            ibuf,
+            poses: all_poses,
+            surfaces,
+            frames,
+            scale: [qformats::md3::XYZ_SCALE; 3],
+            scale_origin: [0.0; 3],
+            radius,
+            maxs_z: hi[2],
+            md3: true,
+        })));
+        Ok(ModelId(self.models.len() as u32 - 1))
+    }
+
     /// Loads a sprite (SPR v1 palette or SPR32).
     pub fn load_sprite(&mut self, spr: &Spr) -> Result<ModelId> {
         let pal = self.palette;

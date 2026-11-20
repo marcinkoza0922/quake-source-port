@@ -1775,6 +1775,15 @@ da Skærmbillede
 @ Record Demo
 da Optag demo
 
+@ HDR Lightmaps
+da HDR-lyskort
+
+@ Directional Lighting
+da Retningsbestemt lys
+
+@ Light Specular
+da Lysreflekser
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ da Afspiller et gennemsigtigt spøgelse fra demoen af din personlige rekord for 
 
 @ Shows the SPD label before the speed number
 da Viser SPD-etiketten før hastighedstallet
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+da Bevarer kraftig HDR-belysning (.lit2) med blød afrunding i stedet for klipning
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+da Bruger forudberegnede lysretninger (.dlit) til subtil skygge og glans på vægge og modeller
+
+@ Strength of the highlights from directional lighting
+da Styrke af højlys fra retningsbestemt belysning
 
 # ==== ui.txt ====
 

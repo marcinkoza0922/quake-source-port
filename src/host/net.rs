@@ -67,6 +67,7 @@ impl Host {
         self.cl = ClientState::new();
         self.local = None;
         self.guests.clear();
+        self.csqc.clear();
         self.level = Level::default();
         self.audio_fx.clear_map();
         self.audio_fx.soundtracks.clear_track();
@@ -412,13 +413,24 @@ impl Host {
                         continue;
                     }
                     let s = self.server.core.loc.translate(&s);
-                    self.con.print(&s)
+                    if !self.csqc_parse_print(&s) {
+                        self.con.print(&s);
+                    }
                 }
                 ClientEvent::CenterPrint(s) => {
-                    let (s, t, cols) = self.center_args(&s);
-                    self.con.center_print(&s, t, cols);
+                    if !self.csqc_parse_centerprint(&s) {
+                        let (s, t, cols) = self.center_args(&s);
+                        self.con.center_print(&s, t, cols);
+                    }
                 }
-                ClientEvent::StuffText(s) => self.cbuf.add_text(&s),
+                ClientEvent::StuffText(s) => {
+                    if !self.csqc_parse_stuffcmd(&s) {
+                        self.cbuf.add_text(&s);
+                    }
+                }
+                ClientEvent::CsqcEvent(data) => {
+                    self.csqc_parse_event(&data);
+                }
                 ClientEvent::Sound { ent, channel, sound, origin, volume, attenuation } => {
                     self.view.vwep.sound(&self.cl, ent, sound);
                     if self.cv("cl_captions") != 0.0

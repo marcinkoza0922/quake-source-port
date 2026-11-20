@@ -1775,6 +1775,15 @@ lv Ekrānuzņēmums
 @ Record Demo
 lv Ierakstīt demo
 
+@ HDR Lightmaps
+lv HDR gaismas kartes
+
+@ Directional Lighting
+lv Virzītais apgaismojums
+
+@ Light Specular
+lv Gaismas atspīdums
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ lv Atskaņo caurspīdīgu spoku no tava personīgā rekorda demo pašreizējai k
 
 @ Shows the SPD label before the speed number
 lv Rāda SPD etiķeti pirms ātruma skaitļa
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+lv Saglabā spilgtu HDR apgaismojumu (.lit2) ar vienmērīgu pāreju nociršanas vietā
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+lv Izmanto ieceptos gaismas virzienus (.dlit) smalkam ēnojumam un atspīdumiem uz sienām un modeļiem
+
+@ Strength of the highlights from directional lighting
+lv Virzītā apgaismojuma atspīdumu stiprums
 
 # ==== ui.txt ====
 

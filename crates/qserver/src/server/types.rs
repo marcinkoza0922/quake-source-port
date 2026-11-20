@@ -51,6 +51,18 @@ pub struct KeyState {
     pub counts: [u8; 2],
 }
 
+/// Custom stat registered by QC `clientstat` (#232) or `globalstat` (#233).
+#[derive(Debug, Clone)]
+pub struct CustomStat {
+    pub idx: usize,
+    /// QC `EV_*` type: 1 = string, 2 = float, 3 = vector, 4 = entity, 10 = int.
+    pub ty: i32,
+    /// Entity field offset (`clientstat`) or `None` for global.
+    pub field: Option<usize>,
+    /// Global offset (`globalstat`) or `None` for entity field.
+    pub global: Option<usize>,
+}
+
 /// Per-level server state (`server_t` minus the VM and world).
 #[derive(Debug, Default)]
 pub struct Sv {
@@ -63,6 +75,9 @@ pub struct Sv {
     pub protocolflags: u32,
     pub model_precache: Vec<String>,
     pub models: Vec<Option<ModelInfo>>,
+    /// Per-precache BSP surface geometry for `DP_QC_GETSURFACE`.
+    pub surface_models: Vec<Option<(Arc<crate::surface::SurfaceModel>, usize)>>,
+    pub(crate) surface_cache: HashMap<String, Arc<crate::surface::SurfaceModel>>,
     pub sound_precache: Vec<String>,
     /// particleeffectnum names (index 0 unused).
     pub particle_precache: Vec<String>,
@@ -86,6 +101,8 @@ pub struct Sv {
     pub(crate) loadgame_parms: [f32; 16],
     pub(crate) brush_cache: HashMap<String, Arc<CollisionModel>>,
     pub(crate) parse_client_command: Option<usize>,
+    pub(crate) custom_stats: Vec<CustomStat>,
+    pub qc_files: crate::qcfile::QcFiles,
 }
 
 /// Everything QC builtins can reach besides the VM and the world.

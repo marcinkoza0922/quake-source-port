@@ -27,6 +27,7 @@ layout(set = 0, binding = 0, std140) uniform Frame {
     vec4 refl;          // x planar reflection strength (0 off)
     uvec4 teleport_fx;  // x teleporter impact ripple count
     vec4 teleport_ripples[12]; // xyz impact position, w birth time
+    vec4 hdr_deluxe;    // x deluxe layer offset (0 off), y hdr tonemap (0/1), z specular, w normal mod
 } fr;
 
 layout(set = 0, binding = 1) uniform sampler2D textures[];
@@ -87,6 +88,17 @@ vec3 effect_glow(vec3 c) {
 }
 
 vec4 unpack_rgba(uint c) { return unpackUnorm4x8(c); }
+
+// Hue-preserving soft HDR shoulder above 0.85 so LIT2 / LIGHTING_E5BGR9
+// overbright lighting rolls off smoothly instead of clipping to white.
+vec3 hdr_tonemap(vec3 c) {
+    vec3 p = max(c, vec3(0.0));
+    float m = max(p.r, max(p.g, p.b));
+    if (m <= 0.85) return p;
+    float excess = m - 0.85;
+    float mapped = 0.85 + 0.15 * (excess / (excess + 0.15));
+    return p * (mapped / m);
+}
 
 // Fraction of light `i` reaching `p` (normal `n`, `tl` = light - p): its
 // cube shadow map, filtered by quality. A ray-traced test can replace this.

@@ -29,11 +29,29 @@ void main() {
     bool has_nrm = dot(i_nrm, i_nrm) > 1e-6;
     vec3 nf = has_nrm ? normalize(i_nrm) : normalize(cross(dFdx(i_wpos), dFdy(i_wpos)));
     if ((!has_nrm || (m.z & 0x10u) != 0u) && dot(nf, fr.eye.xyz - i_wpos) < 0.0) nf = -nf;
-    if (light_count.x > 0u && (m.z & 0x20u) == 0u && !fullbright)
-        light = min(light + dyn_lights(i_wpos, nf), vec3(2.0));
+    if (light_count.x > 0u && (m.z & 0x20u) == 0u && !fullbright) {
+        vec3 dl = dyn_lights(i_wpos, nf);
+        light = fr.hdr_deluxe.y > 0.0 ? (light + dl) : min(light + dl, vec3(2.0));
+    }
     if (dither >= 2u) // 64 light levels, like the colormap
         light = floor(light * (63.0 / 2.0) + 0.5) * (2.0 / 63.0);
-    vec3 rgb = c.rgb * light;
+    // Directional lightmap (.dlit / LIGHTINGDIR): subtle normal shading & specular
+    vec3 spec_add = vec3(0.0);
+    if (fr.hdr_deluxe.x > 0.0 && (m.z & 0x20u) == 0u && !fullbright) {
+        vec4 dlx = texture(lightmap, vec3(lm.xy, lm.z + fr.hdr_deluxe.x));
+        if (dot(dlx.xyz, dlx.xyz) > 1e-4) {
+            vec3 L = normalize(dlx.xyz);
+            float ndl = max(dot(nf, L), 0.0);
+            light *= mix(1.0, 0.75 + 0.5 * ndl, fr.hdr_deluxe.w);
+            if (fr.hdr_deluxe.z > 0.0) {
+                vec3 V = normalize(fr.eye.xyz - i_wpos);
+                vec3 H = normalize(L + V);
+                float spec = pow(max(dot(nf, H), 0.0), 24.0) * ndl;
+                spec_add = light * (spec * fr.hdr_deluxe.z * (0.35 + 0.65 * luma(c.rgb)));
+            }
+        }
+    }
+    vec3 rgb = c.rgb * light + spec_add;
     // caustics on submerged faces (not lava); water bluish, slime green
     uint lk = uint(i_liq.y + 0.5);
     if (fr.water.y > 0.0 && (lk & 3u) != 0u && (lk & 3u) != 2u && i_wpos.z < i_liq.x) {
@@ -53,9 +71,10 @@ void main() {
             rgb += c.rgb * light * tint * (cst * fade * fr.water.y * 1.8);
         }
     }
+    vec3 hdr_excess = fr.hdr_deluxe.y > 0.0 ? max(rgb - vec3(1.0), vec3(0.0)) * 0.45 : vec3(0.0);
     vec3 fb = m.y != NO_TEX ? texture(textures[nonuniformEXT(m.y)], uv, bias).rgb : vec3(0.0);
     rgb += fb;
-    rgb = apply_fog(clamp(rgb, 0.0, 1.0), i_wpos);
+    rgb = apply_fog(fr.hdr_deluxe.y > 0.0 ? hdr_tonemap(rgb) : clamp(rgb, 0.0, 1.0), i_wpos);
     if (dither == 1u) {
         vec3 dpos = fwidth(i_wpos);
         float farblend = clamp(max(dpos.x, max(dpos.y, dpos.z)) * 0.5 - 0.125, 0.0, 1.0);
@@ -75,8 +94,9 @@ void main() {
         h += 1.6 * luma(fb);
         rgb = vec3(min(h, 1.0));
         fb = vec3(0.0);
+        hdr_excess = vec3(0.0);
     }
     o_color = vec4(rgb, pc.params.x);
-    // fullbright texels (lamps, runes, lava rock) are the light sources
-    GLOW_OUT(vec4(fb * fog_factor(i_wpos), pc.params.x));
+    // fullbright texels (lamps, runes, lava rock) and HDR overbright peaks glow
+    GLOW_OUT(vec4((fb + hdr_excess) * fog_factor(i_wpos), pc.params.x));
 }

@@ -87,9 +87,10 @@ fn loopback_protocols() {
         return;
     };
     for p in [15, 666, 999] {
-        // plain U_* updates, then FTE replacement deltas
+        // plain U_* updates, FTE replacement deltas, and replacement deltas + PEXT2_PREDINFO
         run(&base, p, 0);
         run(&base, p, qnet::delta::PEXT2_REPLACEMENTDELTAS);
+        run(&base, p, qnet::delta::PEXT2_SUPPORTED);
     }
 }
 
@@ -110,7 +111,7 @@ fn ad_entity_effects() {
     let c = sv.connect_local().unwrap();
     let mut cl = ClientState::new();
     feed(&mut sv, &mut cl, c);
-    assert_eq!(cl.pext2, qnet::delta::PEXT2_REPLACEMENTDELTAS);
+    assert_eq!(cl.pext2, qnet::delta::PEXT2_SUPPORTED);
     let dt = 1.0 / 72.0;
     let run = |sv: &mut Server, cl: &mut ClientState, n: usize| {
         for _ in 0..n {

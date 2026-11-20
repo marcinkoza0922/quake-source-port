@@ -1775,6 +1775,15 @@ ga Gabháil scáileáin
 @ Record Demo
 ga Taifead taispeántas
 
+@ HDR Lightmaps
+ga Léarscáileanna Solais HDR
+
+@ Directional Lighting
+ga Soilsiú Treoch
+
+@ Light Specular
+ga Lonrú Solais
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ ga Ritheann sé taibhse thréshoilseach de thaispeántas do churiarracht phearsa
 
 @ Shows the SPD label before the speed number
 ga Taispeánann sé an lipéad SPD roimh uimhir an luais
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+ga Coimeádann sé soilsiú geal HDR (.lit2) le maolú mín in ionad gearrtha
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+ga Úsáideann sé treoracha solais réamhbhácáilte (.dlit) le haghaidh scáthú agus buaicphointí mín ar bhallaí agus ar mhúnlaí
+
+@ Strength of the highlights from directional lighting
+ga Neart na mbuaicphointí ó shoilsiú treoch
 
 # ==== ui.txt ====
 

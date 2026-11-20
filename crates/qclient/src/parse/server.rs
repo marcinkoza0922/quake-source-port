@@ -9,8 +9,9 @@ impl ClientState {
         loop {
             match p {
                 crate::delta::PROTOCOL_FTE_PEXT1 => {
-                    if m.long() != 0 {
-                        return err("Server returned FTE1 protocol extensions that are not supported");
+                    self.pext1 = m.long() as u32;
+                    if self.pext1 & !crate::delta::PEXT1_SUPPORTED != 0 {
+                        return err(format!("Server returned FTE1 protocol extensions that are not supported ({:#x})", self.pext1));
                     }
                 }
                 crate::delta::PROTOCOL_FTE_PEXT2 => {
@@ -29,6 +30,9 @@ impl ClientState {
         check_protocol(p)?;
         self.protocol = p;
         self.protocolflags = if p == PROTOCOL_RMQ { m.long() as u32 } else { 0 };
+        if self.pext2 & crate::delta::PEXT2_PREDINFO != 0 {
+            self.server_gamedir = m.string_lossy();
+        }
         let mc = m.byte();
         if !(1..=MAX_SCOREBOARD as i32).contains(&mc) {
             return err(format!("Bad maxclients ({mc}) from server"));
@@ -253,5 +257,13 @@ impl ClientState {
             self.viewent.lerpflags |= LERP_RESETANIM;
         }
         self.viewent.frame = self.stats[STAT_WEAPONFRAME];
+        for i in 0..16 {
+            self.statsf[i] = self.stats[i] as f32;
+        }
+        self.statsf[STAT_VIEWHEIGHT] = self.viewheight;
+        self.statsf[STAT_IDEALPITCH] = self.idealpitch;
+        self.statsf[STAT_PUNCHANGLE_X] = self.punchangle[0];
+        self.statsf[STAT_PUNCHANGLE_Y] = self.punchangle[1];
+        self.statsf[STAT_PUNCHANGLE_Z] = self.punchangle[2];
     }
 }

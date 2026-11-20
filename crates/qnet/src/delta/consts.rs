@@ -2,16 +2,21 @@
 pub const PROTOCOL_FTE_PEXT1: u32 = u32::from_le_bytes(*b"FTEX");
 /// 'FTE2': pext2 extensions follow.
 pub const PROTOCOL_FTE_PEXT2: u32 = u32::from_le_bytes(*b"FTE2");
+/// PEXT1_CSQC: client-side QuakeC events and networked entities.
+pub const PEXT1_CSQC: u32 = 0x4000_0000;
+/// pext1 bits this engine accepts/implements.
+pub const PEXT1_SUPPORTED: u32 = PEXT1_CSQC;
 pub const PEXT2_REPLACEMENTDELTAS: u32 = 0x0000_0008;
 pub const PEXT2_PREDINFO: u32 = 0x0000_0020;
 /// pext2 bits this engine implements (both client and server).
-pub const PEXT2_SUPPORTED: u32 = PEXT2_REPLACEMENTDELTAS;
+pub const PEXT2_SUPPORTED: u32 = PEXT2_REPLACEMENTDELTAS | PEXT2_PREDINFO;
 
 pub const SVCFTE_SPAWNSTATIC2: u8 = 21;
 pub const SVCDP_UPDATESTATBYTE: u8 = 51;
 pub const SVCFTE_SPAWNBASELINE2: u8 = 66;
 pub const SVCFTE_UPDATESTATSTRING: u8 = 78;
 pub const SVCFTE_UPDATESTATFLOAT: u8 = 79;
+pub const SVCFTE_CGAMEPACKET: u8 = 83;
 pub const SVCFTE_UPDATEENTITIES: u8 = 86;
 /// [long] sequence of a received svcfte_updateentities datagram (-1: resend all).
 pub const CLCDP_ACKFRAME: u8 = 50;
@@ -61,6 +66,8 @@ pub const UFP_BIT7: u32 = 1 << 7;
 
 /// eflags: MOVETYPE_STEP lerping.
 pub const EFLAGS_STEP: u8 = 1;
+/// eflags: FL_ONGROUND for PEXT2_PREDINFO client bobbing/ground state.
+pub const EFLAGS_ONGROUND: u8 = 128;
 
 /// Effect numbers are particle precache indices (14 bits).
 pub const MAX_PARTICLETYPES: u16 = 2048;

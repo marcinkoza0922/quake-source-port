@@ -522,10 +522,13 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         }
         if a.args().trim() == "pext" {
             // The server's extension query: reply with what we support.
-            let p2 = if h.cv("cl_nopext") != 0.0 { 0 } else { qclient::delta::PEXT2_SUPPORTED };
+            let nopext = h.cv("cl_nopext") != 0.0;
+            let p1 = if nopext || h.cv("cl_nocsqc") != 0.0 { 0 } else { qclient::delta::PEXT1_SUPPORTED };
+            let p2 = if nopext { 0 } else { qclient::delta::PEXT2_SUPPORTED };
             let s = format!(
-                "pext {:#x} 0 {:#x} {:#x}",
+                "pext {:#x} {:#x} {:#x} {:#x}",
                 qclient::delta::PROTOCOL_FTE_PEXT1,
+                p1,
                 qclient::delta::PROTOCOL_FTE_PEXT2,
                 p2
             );

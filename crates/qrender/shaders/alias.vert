@@ -20,13 +20,55 @@ float shadedot(vec3 n) {
     float d = dot(n, pc.shadevec.xyz);
     return d < 0.0 ? 1.0 + d * (13.0 / 44.0) : 1.0 + d;
 }
+
+void skin_iqm(uint vofs, uint bone_base, out vec3 out_p, out vec3 out_n) {
+    vec3 p = vec3(
+        uintBitsToFloat(alias_verts[vofs + 0u]),
+        uintBitsToFloat(alias_verts[vofs + 1u]),
+        uintBitsToFloat(alias_verts[vofs + 2u]));
+    vec3 n = vec3(
+        uintBitsToFloat(alias_verts[vofs + 3u]),
+        uintBitsToFloat(alias_verts[vofs + 4u]),
+        uintBitsToFloat(alias_verts[vofs + 5u]));
+    uint bi = alias_verts[vofs + 6u];
+    vec4 bw = unpackUnorm4x8(alias_verts[vofs + 7u]);
+    float wsum = bw.x + bw.y + bw.z + bw.w;
+    if (wsum <= 0.0) { out_p = p; out_n = n; return; }
+    bw /= wsum;
+    vec4 r0 = vec4(0.0), r1 = vec4(0.0), r2 = vec4(0.0);
+    for (uint k = 0u; k < 4u; k++) {
+        float w = bw[k];
+        if (w <= 0.0) continue;
+        uint b = bone_base + ((bi >> (k * 8u)) & 0xffu) * 12u;
+        r0 += w * vec4(uintBitsToFloat(alias_verts[b + 0u]), uintBitsToFloat(alias_verts[b + 1u]),
+                       uintBitsToFloat(alias_verts[b + 2u]), uintBitsToFloat(alias_verts[b + 3u]));
+        r1 += w * vec4(uintBitsToFloat(alias_verts[b + 4u]), uintBitsToFloat(alias_verts[b + 5u]),
+                       uintBitsToFloat(alias_verts[b + 6u]), uintBitsToFloat(alias_verts[b + 7u]));
+        r2 += w * vec4(uintBitsToFloat(alias_verts[b + 8u]), uintBitsToFloat(alias_verts[b + 9u]),
+                       uintBitsToFloat(alias_verts[b + 10u]), uintBitsToFloat(alias_verts[b + 11u]));
+    }
+    vec4 hp = vec4(p, 1.0);
+    out_p = vec3(dot(r0, hp), dot(r1, hp), dot(r2, hp));
+    vec3 sn = vec3(dot(r0.xyz, n), dot(r1.xyz, n), dot(r2.xyz, n));
+    out_n = dot(sn, sn) > 1e-8 ? normalize(sn) : n;
+}
+
 void main() {
     // flag 16: a CPU-built pose in the per-frame buffer (ragdolls)
     // flag 32: packed 16-bit MD3 pose (2 u32s per vertex)
+    // flag 64: IQM skeletal model (8 u32s/vert at in_vert, mat3x4 palette at poses.x/y)
     bool dyn = (pc.texs.w & 16u) != 0u;
     bool md3 = !dyn && (pc.texs.w & 32u) != 0u;
+    bool iqm = !dyn && (pc.texs.w & 64u) != 0u;
     vec3 pa, pb, na, nb;
-    if (md3) {
+    if (iqm) {
+        skin_iqm(in_vert, pc.poses.x, pa, na);
+        if (pc.poses.x == pc.poses.y) {
+            pb = pa; nb = na;
+        } else {
+            skin_iqm(in_vert, pc.poses.y, pb, nb);
+        }
+    } else if (md3) {
         uint va = in_vert * 2u;
         uint a0 = alias_verts[pc.poses.x + va];
         uint a1 = alias_verts[pc.poses.x + va + 1u];

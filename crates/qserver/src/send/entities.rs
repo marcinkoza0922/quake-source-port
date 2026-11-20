@@ -50,7 +50,7 @@ pub(super) fn baseline_state(b: &crate::server::Baseline) -> EntState {
 
 /// SVFTE_BuildSnapshotForClient + SV_BuildEntityState: the visible
 /// entities' states, sorted by number.
-pub(super) fn snapshot(vm: &Vm, c: &mut Core, clent: u32, pvs: &mut Vec<u8>) -> Vec<(u32, EntState)> {
+pub(super) fn snapshot(vm: &Vm, c: &mut Core, clent: u32, predinfo: bool, pvs: &mut Vec<u8>) -> Vec<(u32, EntState)> {
     let f = c.sv.fields.clone();
     let mask = c.sv.effects_mask;
     let mut list = visible_entities(vm, c, clent, pvs);
@@ -69,6 +69,18 @@ pub(super) fn snapshot(vm: &Vm, c: &mut Core, clent: u32, pvs: &mut Vec<u8>) -> 
         if e != clent && alpha == ENTALPHA_ZERO && effects == 0 {
             continue;
         }
+        let mt = vm.ent_f(e, f.movetype) as i32;
+        let mut eflags = if mt == MOVETYPE_STEP { qnet::delta::EFLAGS_STEP } else { 0 };
+        let (velocity, pmovetype) = if predinfo && e == clent {
+            if vm.ent_f(e, f.flags) as i32 & FL_ONGROUND != 0 {
+                eflags |= qnet::delta::EFLAGS_ONGROUND;
+            }
+            let v = vm.ent_v(e, f.velocity);
+            let vel = v.map(|c| (c * 8.0).clamp(i16::MIN as f32, i16::MAX as f32) as i16);
+            (vel, mt.clamp(0, 255) as u8)
+        } else {
+            ([0; 3], 0)
+        };
         out.push((
             e,
             EntState {
@@ -79,11 +91,13 @@ pub(super) fn snapshot(vm: &Vm, c: &mut Core, clent: u32, pvs: &mut Vec<u8>) -> 
                 skin: vm.ent_f(e, f.skin) as u32,
                 colormap: vm.ent_f(e, f.colormap) as u8,
                 effects: effects as u32,
-                eflags: if vm.ent_f(e, f.movetype) as i32 == MOVETYPE_STEP { qnet::delta::EFLAGS_STEP } else { 0 },
+                eflags,
                 alpha,
                 scale: f.scale.map_or(ENTSCALE_DEFAULT, |o| entscale_encode(vm.ent_f(e, o))),
                 traileffect: effect(f.traileffectnum, e),
                 emiteffect: effect(f.emiteffectnum, e),
+                velocity,
+                pmovetype,
                 ..EntState::default()
             },
         ));
@@ -92,23 +106,41 @@ pub(super) fn snapshot(vm: &Vm, c: &mut Core, clent: u32, pvs: &mut Vec<u8>) -> 
 }
 
 /// One frame of replacement deltas for client `i` (SV_SendClientDatagram
-/// with PEXT2_REPLACEMENTDELTAS): client data, then svcfte_updateentities
-/// (more datagrams when the snapshot doesn't fit), then the server datagram.
-/// The local client is lossless, so its frames are acked as written.
+/// with PEXT2_REPLACEMENTDELTAS): client data (or PEXT2_PREDINFO stats), then
+/// svcfte_updateentities (more datagrams when the snapshot doesn't fit), then
+/// the server datagram. The local client is lossless, so its frames are acked
+/// as written.
 pub(super) fn send_deltas(vm: &mut Vm, c: &mut Core, w: &mut World, i: usize, pvs: &mut Vec<u8>) {
     let Some(mut d) = c.clients[i].delta.take() else { return };
     let e = i as u32 + 1;
     let max = c.clients[i].max_datagram;
+    let pext2 = c.clients[i].pext2;
+    let predinfo = pext2 & qnet::delta::PEXT2_PREDINFO != 0;
+    let last_move_seq = c.clients[i].last_move_seq;
     let mut msg = SizeBuf::new(max);
-    write_clientdata(vm, c, w, e, &mut msg);
-    let snap = snapshot(vm, c, e, pvs);
+    if predinfo {
+        write_damage_and_angle(vm, c, w, e, &mut msg);
+        let (si, sf, ss) = calc_stats(vm, c, e, true);
+        let mut q = qnet::SizeBuf::new(max);
+        d.write_stats(&mut q, &si, &sf, &ss);
+        msg.write(&q.data);
+    } else {
+        write_clientdata(vm, c, w, e, &mut msg);
+        if !c.sv.custom_stats.is_empty() {
+            let (si, sf, ss) = calc_stats(vm, c, e, false);
+            let mut q = qnet::SizeBuf::new(max);
+            d.write_stats(&mut q, &si, &sf, &ss);
+            msg.write(&q.data);
+        }
+    }
+    let snap = snapshot(vm, c, e, predinfo, pvs);
     d.calc(snap, vm.num_edicts());
     let (time, pf, local) = (vm.time as f32, c.sv.protocolflags, c.clients[i].local);
     loop {
         let ext = &c.sv.ext;
         let base = |n: u32| ext.get(n as usize).map_or_else(EntState::default, |x| baseline_state(&x.baseline));
         let mut q = qnet::SizeBuf::new(max);
-        d.write(&mut q, max.saturating_sub(msg.len()).max(64), time, pf, &base);
+        d.write(&mut q, max.saturating_sub(msg.len()).max(64), time, pf, pext2, last_move_seq, &base);
         msg.write(&q.data);
         if local {
             d.ack(d.next_sequence.wrapping_sub(1));

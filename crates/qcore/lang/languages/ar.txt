@@ -1775,6 +1775,15 @@ ar لقطة الشاشة
 @ Record Demo
 ar تسجيل عرض
 
+@ HDR Lightmaps
+ar خرائط إضاءة HDR
+
+@ Directional Lighting
+ar إضاءة اتجاهية
+
+@ Light Specular
+ar لمعان الإضاءة
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ ar يعرض شبحاً نصف شفاف لتسجيل أفضل رقم شخصي ل�
 
 @ Shows the SPD label before the speed number
 ar يعرض تسمية SPD قبل رقم السرعة
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+ar يحافظ على إضاءة HDR الساطعة (.lit2) بتدرج ناعم بدلاً من قصها
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+ar يستخدم اتجاهات الإضاءة المخبوزة (.dlit) لتظليل ولمعان خفيف على الجدران والنماذج
+
+@ Strength of the highlights from directional lighting
+ar شدة اللمعان الناتج عن الإضاءة الاتجاهية
 
 # ==== ui.txt ====
 

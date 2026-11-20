@@ -386,7 +386,7 @@ impl Renderer {
                         if am.frames.is_empty() || am.surfaces.is_empty() {
                             continue;
                         }
-                        let dynp = if am.md3 {
+                        let dynp = if am.md3 || am.iqm {
                             None
                         } else {
                             match e.dyn_pose {
@@ -427,16 +427,16 @@ impl Renderer {
                         };
                         // R_SetupAliasLighting
                         let wl = self.world.as_ref().map(|w| &w.cpu);
-                        let mut lc = wl
+                        let (mut lc, ldir) = wl
                             .and_then(|w| {
-                                w.light_point(e.origin, &style_ints).or_else(|| {
-                                    w.light_point(
+                                w.light_point_dir(e.origin, &style_ints).or_else(|| {
+                                    w.light_point_dir(
                                         [e.origin[0], e.origin[1], e.origin[2] + am.maxs_z * 0.5],
                                         &style_ints,
                                     )
                                 })
                             })
-                            .unwrap_or([128.0; 3]);
+                            .unwrap_or(([128.0; 3], None));
                         if st.fullbright {
                             lc = [100.0; 3]; // ironwail: lightcolor 0.5 (x200)
                         }
@@ -465,11 +465,26 @@ impl Renderer {
                         }
                         let sum = lc[0] + lc[1] + lc[2];
                         if sum > 288.0 {
-                            lc = lc.map(|c| c * 288.0 / sum);
+                            if wl.is_some_and(|w| w.has_hdr) && st.hdr_lightmaps {
+                                // Soft rolloff for HDR lightmaps so models reflect strong light without hard clipping.
+                                let excess = sum - 288.0;
+                                let target = 288.0 + 192.0 * (excess / (excess + 192.0));
+                                lc = lc.map(|c| c * target / sum);
+                            } else {
+                                lc = lc.map(|c| c * 288.0 / sum);
+                            }
                         }
-                        let q = ((e.angles[1] * (16.0 / 360.0)) as i32 & 15) as f32;
-                        let ang = q / 16.0 * std::f32::consts::TAU;
-                        let sv = norm([(-ang).cos(), (-ang).sin(), 1.0]);
+                        let sv = if st.deluxemapping
+                            && let Some(wd) = ldir
+                        {
+                            // Transform world-space baked light direction into model space (R^T * wd).
+                            let local_d = [0, 1, 2].map(|c| rot[0][c] * wd[0] + rot[1][c] * wd[1] + rot[2][c] * wd[2]);
+                            norm(local_d)
+                        } else {
+                            let q = ((e.angles[1] * (16.0 / 360.0)) as i32 & 15) as f32;
+                            let ang = q / 16.0 * std::f32::consts::TAU;
+                            norm([(-ang).cos(), (-ang).sin(), 1.0])
+                        };
                         let alpha = e.alpha.clamp(0.0, 1.0);
                         let mut base_flags = 0u32;
                         if e.fullbright {
@@ -485,6 +500,9 @@ impl Renderer {
                         if am.md3 {
                             base_flags |= 32;
                         }
+                        if am.iqm {
+                            base_flags |= 64;
+                        }
                         base_flags |= (e.heat.min(3) as u32) << 8;
                         let stride = if am.md3 { 2 } else { 1 };
                         let prev_r = if main_visible && !e.portal_only && (alpha >= 1.0 || e.viewmodel) {
@@ -496,12 +514,17 @@ impl Renderer {
                             if surf.num_indices == 0 {
                                 continue;
                             }
-                            let (p1, p2) = match dynp {
-                                Some((p, _)) => (p, p),
-                                None => (
-                                    surf.verts_base + pf1 * surf.num_verts * stride,
-                                    surf.verts_base + pf2 * surf.num_verts * stride,
-                                ),
+                            let (p1, p2) = if am.iqm {
+                                let bone_stride = am.num_bones * 12;
+                                (am.bone_base + pf1 * bone_stride, am.bone_base + pf2 * bone_stride)
+                            } else {
+                                match dynp {
+                                    Some((p, _)) => (p, p),
+                                    None => (
+                                        surf.verts_base + pf1 * surf.num_verts * stride,
+                                        surf.verts_base + pf2 * surf.num_verts * stride,
+                                    ),
+                                }
                             };
                             let skin = if surf.skins.is_empty() {
                                 [NO_TEX; 3]
@@ -757,8 +780,11 @@ impl Renderer {
             None => (self.pipes.water, self.pipes.water_alpha),
         };
 
-        // UI vertices
+        // UI vertices (split into scissor ranges whenever Draw2D::Clip appears)
         let mut ui: Vec<UiVert> = Vec::with_capacity(fr.draw2d.len() * 6);
+        let mut ui_ranges: Vec<(Option<[f32; 4]>, u32, u32)> = Vec::new();
+        let mut cur_clip: Option<[f32; 4]> = None;
+        let mut cur_start: u32 = 0;
         let quad = |ui: &mut Vec<UiVert>,
                     x: f32,
                     y: f32,
@@ -853,7 +879,18 @@ impl Renderer {
                         ]);
                     }
                 }
+                Draw2D::Clip(rect) => {
+                    let end = ui.len() as u32;
+                    if end > cur_start {
+                        ui_ranges.push((cur_clip, cur_start, end - cur_start));
+                        cur_start = end;
+                    }
+                    cur_clip = rect;
+                }
             }
+        }
+        if (ui.len() as u32) > cur_start {
+            ui_ranges.push((cur_clip, cur_start, ui.len() as u32 - cur_start));
         }
         let ui_ofs = if ui.is_empty() {
             None
@@ -952,6 +989,15 @@ impl Renderer {
                 refl: [if st.water_reflections > 0 { st.water_reflection_amount.clamp(0.0, 1.5) } else { 0.0 }, 0.0, 0.0, 0.0],
                 teleport_fx: [ripple_count as u32, 0, 0, 0],
                 teleport_ripples,
+                hdr_deluxe: match &self.world {
+                    Some(wg) => [
+                        if wg.cpu.has_deluxe && st.deluxemapping { wg.cpu.atlas_layers as f32 } else { 0.0 },
+                        if wg.cpu.has_hdr && st.hdr_lightmaps { 1.0 } else { 0.0 },
+                        if wg.cpu.has_deluxe && st.deluxemapping { st.deluxemapping_specular.clamp(0.0, 2.0) } else { 0.0 },
+                        if wg.cpu.has_deluxe && st.deluxemapping { 0.35 } else { 0.0 },
+                    ],
+                    None => [0.0; 4],
+                },
             };
             for (i, portal) in pass.portal_draws.iter_mut().enumerate().filter(|(i, _)| *i < 4) {
                 ubo.portal_plane[i] = portal.portal.plane();
@@ -1007,10 +1053,15 @@ impl Renderer {
         dynw.write_at(OFS_LIGHTS, &[crate::rtlight::lights_gpu(&rt_sel, st.shadow_quality, shadow_size)]);
         let mut lm_cpu_range = None;
         if passes.iter().any(|p| p.view.is_some()) {
+            let deluxe_ofs = self
+                .world
+                .as_ref()
+                .filter(|w| w.cpu.has_deluxe)
+                .map_or(0, |w| w.cpu.atlas_layers);
             let mut lmd = LmDyn {
                 styles,
                 num_dlights: 0,
-                pad: [0; 3],
+                pad: [deluxe_ofs, u32::from(st.hdr_lightmaps), 0],
                 dl: [[0.0; 8]; 64],
             };
             // real-time dynamic lights are lit per pixel, not in the lightmaps
@@ -1743,7 +1794,7 @@ impl Renderer {
                                             pp[0],
                                             pp[1],
                                             a.push.shadevec[3].to_bits(),
-                                            samples | (u32::from(am.md3) << 16),
+                                            samples | (u32::from(am.md3) << 16) | (u32::from(am.iqm) << 17),
                                         ],
                                     }]));
                                     dev.cmd_draw_indexed(cmd, a.num_indices, 1, a.first_index, 0, 0);
@@ -1867,18 +1918,43 @@ impl Renderer {
             let post_area = vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: pw, height: ph } };
             let vp_post = vk::Viewport { width: pw as f32, height: ph as f32, ..vp_full };
             dev.cmd_set_scissor(cmd, 0, &[post_area]);
-            let draw_ui = |vp: vk::Viewport| {
+            let draw_ui = |vp: vk::Viewport, full_area: vk::Rect2D| {
                 if let Some(ofs) = ui_ofs {
                     dev.cmd_set_viewport(cmd, 0, &[vp]);
                     dev.cmd_bind_pipeline(cmd, gfx, p.ui);
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[ofs]);
                     push(bytes_of(&[[1.0 / w as f32, 1.0 / h as f32]]));
-                    dev.cmd_draw(cmd, ui.len() as u32, 1, 0, 0);
+                    let sx = vp.width / w.max(1) as f32;
+                    let sy = vp.height / h.max(1) as f32;
+                    let max_w = full_area.extent.width as i32;
+                    let max_h = full_area.extent.height as i32;
+                    for &(clip, first, count) in &ui_ranges {
+                        let sc = match clip {
+                            Some([cx, cy, cw, ch]) => {
+                                let x0 = (cx * sx).floor() as i32;
+                                let y0 = (cy * sy).floor() as i32;
+                                let x1 = ((cx + cw) * sx).ceil() as i32;
+                                let y1 = ((cy + ch) * sy).ceil() as i32;
+                                let x0 = x0.clamp(0, max_w);
+                                let y0 = y0.clamp(0, max_h);
+                                let x1 = x1.clamp(x0, max_w);
+                                let y1 = y1.clamp(y0, max_h);
+                                vk::Rect2D {
+                                    offset: vk::Offset2D { x: x0, y: y0 },
+                                    extent: vk::Extent2D { width: (x1 - x0) as u32, height: (y1 - y0) as u32 },
+                                }
+                            }
+                            None => full_area,
+                        };
+                        dev.cmd_set_scissor(cmd, 0, &[sc]);
+                        dev.cmd_draw(cmd, count, 1, first, 0);
+                    }
+                    dev.cmd_set_scissor(cmd, 0, &[full_area]);
                 }
             };
             // 2D on top at output resolution, unaffected by render scale
             if slang_src.is_none() || ui_in_src {
-                draw_ui(vp_post);
+                draw_ui(vp_post, post_area);
             }
             if let Some((src_img, ..)) = slang_src {
                 dev.cmd_end_rendering(cmd);
@@ -1918,7 +1994,7 @@ impl Renderer {
                 dev.cmd_set_scissor(cmd, 0, &[area]);
                 dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
                 if !ui_in_src {
-                    draw_ui(vp_full);
+                    draw_ui(vp_full, area);
                 }
             }
             dev.cmd_end_rendering(cmd);

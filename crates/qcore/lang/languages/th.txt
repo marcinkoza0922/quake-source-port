@@ -1775,6 +1775,15 @@ th จับ​ภาพ​หน้า​จอ
 @ Record Demo
 th บันทึก​เดโม
 
+@ HDR Lightmaps
+th ไลต์​แมป HDR
+
+@ Directional Lighting
+th แสง​แบบ​มี​ทิศทาง
+
+@ Light Specular
+th ความ​เงา​ของ​แสง
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ th เล่น​เงา​ผี​โปร่ง​แสง​จาก�
 
 @ Shows the SPD label before the speed number
 th แสดง​ป้าย SPD หน้า​ตัว​เลข​ความ​เร็ว
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+th รักษา​แสง HDR ที่​สว่าง (.lit2) ด้วย​การ​ไล่​ระดับ​อย่าง​นุ่มนวล​แทน​การ​ตัด​แสง
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+th ใช้​ทิศทาง​แสง​ที่​อบ​ไว้ (.dlit) เพื่อ​สร้าง​เงา​และ​ไฮไลต์​อ่อนๆ บน​ผนัง​และ​โมเดล
+
+@ Strength of the highlights from directional lighting
+th ความ​แรง​ของ​ไฮไลต์​จาก​แสง​แบบ​มี​ทิศทาง
 
 # ==== ui.txt ====
 

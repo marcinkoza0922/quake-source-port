@@ -1775,6 +1775,15 @@ tr Ekran Görüntüsü
 @ Record Demo
 tr Demo Kaydet
 
+@ HDR Lightmaps
+tr HDR Işık Haritaları
+
+@ Directional Lighting
+tr Yönlü Aydınlatma
+
+@ Light Specular
+tr Işık Parlaması
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ tr Geçerli harita ve zorluk için kişisel en iyi demonuzun yarı saydam bir ha
 
 @ Shows the SPD label before the speed number
 tr Hız sayısının önünde SPD etiketini gösterir
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+tr Parlak HDR aydınlatmayı (.lit2) kırpmak yerine yumuşak bir geçişle korur
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+tr Duvarlarda ve modellerde hafif gölgeleme ve parlamalar için önceden hesaplanmış ışık yönlerini (.dlit) kullanır
+
+@ Strength of the highlights from directional lighting
+tr Yönlü aydınlatmadan gelen parlama vurgularının gücü
 
 # ==== ui.txt ====
 

@@ -25,10 +25,12 @@ impl Host {
         let mut blend = [0.0; 4];
         let mut splits = Vec::new();
         let mut goggles = qrender::Goggles::default();
-        let view = view.map(|mut v| {
+        let mut view = view.map(|mut v| {
             v.waterwarp = self.waterwarp(v.origin, self.cl.time);
             v
         });
+        let mut csqc_sbar = true;
+        let mut csqc_crosshair = true;
         if let Some(v) = &view {
             let fs = &self.server.core.fs;
             let cv = self.view_cvars();
@@ -168,6 +170,11 @@ impl Host {
             }
             self.impacts.hide_explosion_sprites(&self.cl, &mut ents);
         }
+        // Full CSQC (CSQC_UpdateView): runs after engine entities/dlights are collected
+        // so addentities(MASK_ENGINE) can include them, and draws 2D HUD into `c`.
+        if view.is_some() && splits.is_empty() && self.csqc.handles_view() {
+            (csqc_sbar, csqc_crosshair) = self.csqc_update_view(&mut view, &mut ents, &mut dls, &mut c, ft);
+        }
         // 2D
         let glyphs = self.glyphs();
         let pad_ui = self.pad_ui();
@@ -275,7 +282,7 @@ impl Host {
                         let scene_h = c.vh() - reserve;
                         let viewsize = self.server.core.cvars.value_of("viewsize");
                         self.view.draw_damage(&mut c, scene_h, self.server.core.cvars.value_of("hud_damageindicator") != 0.0, self.server.core.cvars.value_of("v_flashscale"));
-                        if viewsize < 130.0 {
+                        if viewsize < 130.0 && csqc_crosshair {
                             let color = reticle::color(&self.server.core.cvars, target_colors[0], self.feedback.kill && self.feedback.remaining(self.realtime) > 0.0);
                             draw_crosshair(&mut c, scene_h, &self.server.core.cvars, self.input.lockon.target.is_some(), self.input.lockon.active, color);
                             hitmarker::draw_hitmarker(&mut c, scene_h, &self.server.core.cvars, self.feedback.remaining(self.realtime), color);
@@ -284,7 +291,8 @@ impl Host {
                         let player_pos = Vec3::from_array(self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| e.origin));
                         let automap_allowed = self.cl.gametype != 1 && self.server.core.cvars.value_of("deathmatch") == 0.0;
                         let hud_start = c.list.len();
-                        if !hud.edit && viewsize < 120.0 {
+                        let simple_csqc_hud = self.csqc.active() && !self.csqc.handles_view() && self.csqc.handles_hud();
+                        if !hud.edit && viewsize < 120.0 && csqc_sbar && !simple_csqc_hud {
                             let am = crate::hud::draw::AutomapCtx {
                                 map: &self.automap,
                                 settings: crate::automap::Automap::settings(&self.server.core.cvars),
@@ -294,6 +302,8 @@ impl Host {
                             };
                             let ctx = hud.ctx(&self.cl, face, teamplay, &addon_entries, self.toy.held, self.show_scores, Some(am));
                             crate::hud::draw_layout(&mut c, &mut pf, &self.hud.layout, &self.hud.rects, &ctx, Some(&self.hud.fade), self.realtime, |_| true);
+                        } else if !hud.edit && viewsize < 120.0 && simple_csqc_hud {
+                            // Simple CSQC HUD runs after releasing the local `pf` borrow below.
                         }
                         metrics_drawn = true;
                         // the demo bar takes the bottom of the screen: lift the HUD over it
@@ -405,6 +415,19 @@ impl Host {
                 c.ptext((c.vw() / 2.0 - c.ptext_w(&s) / 2.0).floor(), y.floor(), &s, crate::draw::WHITE);
             }
         }
+        // Simple CSQC HUD (CSQC_DrawHud / CSQC_DrawScores): drawn in-game when no menu is open.
+        if view.is_some()
+            && self.cl.intermission == 0
+            && splits.is_empty()
+            && !hud.edit
+            && !self.menu.active()
+            && self.cv("viewsize") < 120.0
+            && self.csqc.active()
+            && !self.csqc.handles_view()
+            && self.csqc.handles_hud()
+        {
+            self.csqc_draw_hud(&mut c, ft);
+        }
         let styles: Vec<i32> = (0..qnet::protocol::MAX_LIGHTSTYLES).map(|i| self.cl.lightstyle_value(i)).collect();
         // r_fog 0 hides fog without touching the map/mod values, so it comes back
         // as soon as the option is turned on again.
@@ -488,6 +511,9 @@ impl Host {
             gel_quality: (v("addon_gel_quality").round() as i32).clamp(0, 1) as u32,
             shader_scope: v("r_shader_scope").clamp(0.0, 1.0) as u32,
             shader_scale: v("r_shader_scale").clamp(0.0, 1.0) as u32,
+            hdr_lightmaps: v("r_hdr_lightmaps") != 0.0,
+            deluxemapping: v("r_deluxemapping") != 0.0,
+            deluxemapping_specular: v("r_deluxemapping_specular").clamp(0.0, 2.0),
             goggles,
             ..Settings::default()
         };

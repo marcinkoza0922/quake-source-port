@@ -1775,6 +1775,15 @@ id Tangkapan Layar
 @ Record Demo
 id Rekam Demo
 
+@ HDR Lightmaps
+id Peta Cahaya HDR
+
+@ Directional Lighting
+id Pencahayaan Terarah
+
+@ Light Specular
+id Kilau Cahaya
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ id Menjalankan hantu transparan dari demo rekor pribadi Anda untuk peta dan ting
 
 @ Shows the SPD label before the speed number
 id Menampilkan label SPD sebelum angka kecepatan
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+id Mempertahankan pencahayaan HDR terang (.lit2) dengan transisi halus alih-alih terpotong
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+id Menggunakan arah cahaya pra-hitung (.dlit) untuk bayangan dan kilau halus pada dinding serta model
+
+@ Strength of the highlights from directional lighting
+id Kekuatan sorotan kilau dari pencahayaan terarah
 
 # ==== ui.txt ====
 

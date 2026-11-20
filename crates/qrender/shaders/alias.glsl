@@ -44,9 +44,18 @@ void main() {
     if (light_count.x > 0u && (pc.texs.w & 2u) == 0u && (fr.softf.x & 16u) == 0u)
         shade += dyn_lights(i_wpos, normalize(i_nrm)) * 1.28;
     rgb *= shade;
+    // Directional lightmap specular on alias models when deluxemapping is active
+    if (fr.hdr_deluxe.z > 0.0 && (pc.texs.w & 2u) == 0u && (fr.softf.x & 16u) == 0u) {
+        vec3 N = normalize(i_nrm);
+        vec3 L = normalize(mat3(pc.model) * pc.shadevec.xyz);
+        vec3 V = normalize(fr.eye.xyz - i_wpos);
+        vec3 H = normalize(L + V);
+        float spec = pow(max(dot(N, H), 0.0), 20.0) * max(dot(N, L), 0.0);
+        rgb += shade * (spec * fr.hdr_deluxe.z * 0.7 * (0.3 + 0.7 * luma(c.rgb)));
+    }
     vec3 fb = pc.texs.y != NO_TEX ? stex(pc.texs.y, st, affine).rgb : vec3(0.0);
     rgb += fb;
-    rgb = apply_fog(clamp(rgb, 0.0, 1.0), i_wpos);
+    rgb = apply_fog(fr.hdr_deluxe.y > 0.0 ? hdr_tonemap(rgb) : clamp(rgb, 0.0, 1.0), i_wpos);
     if (mode != 0u) {
         if (fr.fog.w > 0.0) {
             rgb = sqrt(rgb);
@@ -71,7 +80,7 @@ void main() {
         rgb = vec3(min(h + fbl, 1.0));
         fb = vec3(0.0);
     }
-    float out_a = ((pc.texs.w & 32u) != 0u && (pc.texs.w & 1u) == 0u) ? c.a * pc.light.a : pc.light.a;
+    float out_a = ((pc.texs.w & (32u | 64u)) != 0u && (pc.texs.w & 1u) == 0u) ? c.a * pc.light.a : pc.light.a;
     o_color = vec4(rgb, out_a);
     GLOW_OUT(vec4(fb * fog_factor(i_wpos), out_a));
 }

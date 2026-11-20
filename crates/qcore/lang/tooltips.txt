@@ -1442,3 +1442,24 @@ de Zeigt die Bezeichnung SPD vor der Geschwindigkeitszahl an
 it Mostra l'etichetta SPD prima del valore della velocità
 es Muestra la etiqueta SPD delante de la cifra de velocidad
 ru Показывает подпись SPD перед значением скорости
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+fr Conserve l'éclairage HDR lumineux (.lit2) avec une atténuation douce au lieu de l'écrêter
+de Erhält helles HDR-Licht (.lit2) mit sanftem Übergang statt hartem Abschneiden
+it Mantiene l'illuminazione HDR intensa (.lit2) con una transizione morbida invece di tagliarla
+es Mantiene la iluminación HDR brillante (.lit2) con una transición suave en lugar de recortarla
+ru Сохраняет яркое HDR-освещение (.lit2) с плавным переходом вместо жёсткого обрезания
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+fr Utilise les directions de lumière précalculées (.dlit) pour un ombrage et des reflets subtils sur les murs et modèles
+de Nutzt vorberechnete Lichtrichtungen (.dlit) für dezente Schattierung und Glanzlichter auf Wänden und Modellen
+it Usa le direzioni di luce precalcolate (.dlit) per ombreggiature e riflessi sottili su pareti e modelli
+es Usa direcciones de luz precalculadas (.dlit) para un sombreado y reflejos sutiles en paredes y modelos
+ru Использует запечённые направления света (.dlit) для мягкого затенения и бликов на стенах и моделях
+
+@ Strength of the highlights from directional lighting
+fr Intensité des reflets produits par l'éclairage directionnel
+de Stärke der Glanzlichter aus der gerichteten Beleuchtung
+it Intensità dei riflessi prodotti dall'illuminazione direzionale
+es Intensidad de los reflejos de la iluminación direccional
+ru Интенсивность бликов от направленного освещения

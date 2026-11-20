@@ -158,3 +158,39 @@ fn facenormals_populate_smooth_world_vertex_normals() {
     assert!((w.vertices[1].normal[0] - 0.6).abs() < 1e-5);
     assert!((w.vertices[2].normal[1] - 0.6).abs() < 1e-5);
 }
+
+#[test]
+fn hdr_lightmaps_and_deluxemaps_decode_and_sample() {
+    let mut bsp = base_triangle_bsp();
+    // 3x3 lightmap for 32x32 triangle at default 16u/luxel
+    bsp.lighting = vec![128; 9];
+    bsp.nodes = vec![qformats::bsp::Node {
+        plane: 0,
+        children: [-1, -1],
+        mins: [-64.0; 3],
+        maxs: [64.0; 3],
+        first_face: 0,
+        num_faces: 1,
+    }];
+    // HDR E5BGR9 overbright light: [3.0, 1.5, 0.5] (1.0 = neutral 128)
+    let hdr_sample = qformats::bsp::encode_e5bgr9([3.0, 1.5, 0.5]);
+    bsp.hdr_lighting = Some(vec![hdr_sample; 9]);
+    // Deluxemap pointing straight up (+Z -> RGB [128, 128, 255])
+    bsp.deluxemap = Some([128u8, 128, 255].repeat(9));
+
+    let w = World::build(&bsp, None);
+    assert!(w.has_hdr);
+    assert!(w.has_deluxe);
+    assert!(w.surfaces[0].hdr_samples);
+    assert!(w.surfaces[0].has_deluxe);
+    assert_ne!(w.lm_surfs[0].atlas & super::LM_FLAG_HDR, 0);
+    assert_ne!(w.lm_surfs[0].atlas & super::LM_FLAG_DELUXE, 0);
+
+    let (rgb, dir) = w.light_point_dir([8.0, 8.0, 16.0], &[256]).unwrap();
+    // 3.0 * 128 = 384, 1.5 * 128 = 192, 0.5 * 128 = 64
+    assert!((rgb[0] - 384.0).abs() < 4.0, "rgb={rgb:?}");
+    assert!((rgb[1] - 192.0).abs() < 4.0, "rgb={rgb:?}");
+    assert!((rgb[2] - 64.0).abs() < 4.0, "rgb={rgb:?}");
+    let d = dir.expect("deluxemap direction");
+    assert!(d[2] > 0.99, "dir={d:?}");
+}

@@ -129,6 +129,7 @@ fn ui_quads(r: &Renderer, fr: &RenderFrame) -> (Vec<UiV>, Vec<(u32, u32, u32)>) 
                     }
                 }
             }
+            Draw2D::Clip(_) => {}
         }
     }
     (v, batches)

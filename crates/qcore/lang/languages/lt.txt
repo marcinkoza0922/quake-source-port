@@ -1775,6 +1775,15 @@ lt Ekrano nuotrauka
 @ Record Demo
 lt Įrašyti demo
 
+@ HDR Lightmaps
+lt HDR šviesos žemėlapiai
+
+@ Directional Lighting
+lt Kryptinis apšvietimas
+
+@ Light Specular
+lt Šviesos blizgesys
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ lt Atkuria pusiau permatomą jūsų asmeninio rekordo demo vaiduoklį esamam že
 
 @ Shows the SPD label before the speed number
 lt Rodo SPD etiketę prieš greičio skaičių
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+lt Išlaiko ryškų HDR apšvietimą (.lit2) su tolygiu perėjimu vietoj nukirpimo
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+lt Naudoja iškeptas šviesos kryptis (.dlit) subtiliam šešėliavimui ir atspindžiams ant sienų bei modelių
+
+@ Strength of the highlights from directional lighting
+lt Kryptinio apšvietimo atspindžių stiprumas
 
 # ==== ui.txt ====
 

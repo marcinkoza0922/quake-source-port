@@ -1775,6 +1775,15 @@ eu Pantaila-argazkia
 @ Record Demo
 eu Grabatu demoa
 
+@ HDR Lightmaps
+eu HDR argi-mapak
+
+@ Directional Lighting
+eu Norabidezko argiztapena
+
+@ Light Specular
+eu Argi-distira
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ eu Uneko mapa eta zailtasunerako zure marka pertsonalaren demoaren mamu zeharrar
 
 @ Shows the SPD label before the speed number
 eu SPD etiketa erakusten du abiadura-zenbakiaren aurretik
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+eu HDR argiztapen distiratsua (.lit2) trantsizio leunarekin mantentzen du moztu beharrean
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+eu Aurrez kalkulatutako argi-norabideak (.dlit) erabiltzen ditu hormetan eta modeloetan itzal eta distira finak sortzeko
+
+@ Strength of the highlights from directional lighting
+eu Norabidezko argiztapenaren distiren indarra
 
 # ==== ui.txt ====
 

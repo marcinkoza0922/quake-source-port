@@ -1,12 +1,14 @@
 #version 460
 // Builds lightmap atlas texels for visible surfaces from raw samples,
 // lightstyles and dynamic lights (R_BuildLightMap + R_AddDynamicLights).
+// Supports 8-bit RGB, 32-bit E5BGR9 HDR (LIT2 / LIGHTING_E5BGR9), and
+// world-space deluxemap direction vectors (.dlit / LIGHTINGDIR).
 layout(local_size_x = 8, local_size_y = 8) in;
 struct Surf {
     uint sample_ofs;  // 0xffffffff: this face has no light samples
     uint styles;      // 4 x u8, 255 = none
     uint size;        // w | h << 16 (in samples)
-    uint atlas;       // x | y << 16
+    uint atlas;       // (x & 0x3fff) | ((y & 0x3fff) << 14) | flags (bit 31 HDR, bit 30 deluxe)
     vec4 vecs0;       // world -> luxel S
     vec4 vecs1;       // world -> luxel T
     vec4 plane;       // normal, dist
@@ -17,13 +19,20 @@ layout(set = 0, binding = 0) readonly buffer Samples { uint samples[]; };
 layout(set = 0, binding = 1) readonly buffer Surfs { Surf surfs[]; };
 layout(set = 0, binding = 2) readonly buffer Dyn {
     float styles[256];
-    uint num_dlights; uint pad0, pad1, pad2;
+    uint num_dlights; uint pad0, pad1, pad2; // pad0 = deluxe layer offset, pad1 = hdr enabled
     DLight dl[64];
 };
 layout(set = 0, binding = 3) readonly buffer Visible { uint visible[]; };
 layout(set = 0, binding = 4, rgba16f) uniform writeonly image2DArray atlas;
+layout(set = 0, binding = 5) readonly buffer DeluxeSamples { uint deluxe_samples[]; };
 
 layout(push_constant) uniform Push { uint list_ofs; uint count; };
+
+vec3 decode_e5bgr9(uint v) {
+    int e = int((v >> 27) & 31u) - 15 - 9;
+    float sc = ldexp(1.0, e);
+    return vec3(float(v & 511u), float((v >> 9) & 511u), float((v >> 18) & 511u)) * sc;
+}
 
 void main() {
     // The dispatch size comes from the cull shader's counter, which can run
@@ -31,12 +40,17 @@ void main() {
     if (gl_WorkGroupID.x >= count) return;
     Surf s = surfs[visible[list_ofs + gl_WorkGroupID.x]];
     uint w = s.size & 0xffffu, h = s.size >> 16;
-    uint ax = s.atlas & 0xffffu, ay = s.atlas >> 16;
+    uint ax = s.atlas & 0x3fffu, ay = (s.atlas >> 14) & 0x3fffu;
+    bool is_hdr = (s.atlas & 0x80000000u) != 0u;
+    bool has_deluxe = (s.atlas & 0x40000000u) != 0u;
+    int deluxe_ofs = int(pad0);
+    bool hdr_on = pad1 != 0u;
     int layer = int(s.tmins.z);
     uint nst = w * h;
     for (uint y = gl_LocalInvocationID.y; y < h; y += 8u) {
         for (uint x = gl_LocalInvocationID.x; x < w; x += 8u) {
             vec3 l = vec3(0.0);
+            vec3 dir_sum = vec3(0.0);
             if (s.sample_ofs == 0xffffffffu) {
                 // R_BuildLightMap (vkQuake): missing samples in a lit map
                 // stay black. Only a BSP with no lighting is fullbright.
@@ -46,10 +60,20 @@ void main() {
                 for (uint k = 0u; k < 4u; k++) {
                     uint st = (s.styles >> (k * 8u)) & 0xffu;
                     if (st == 255u) break;
-                    l += unpackUnorm4x8(samples[i]).rgb * 255.0 * styles[st];
+                    if (is_hdr) {
+                        l += decode_e5bgr9(samples[i]) * (styles[st] / 256.0);
+                    } else {
+                        l += unpackUnorm4x8(samples[i]).rgb * 255.0 * styles[st];
+                    }
+                    if (has_deluxe && deluxe_ofs > 0) {
+                        vec3 dvec = unpackUnorm4x8(deluxe_samples[i]).rgb * 2.0 - 1.0;
+                        dir_sum += dvec * max(styles[st] / 256.0, 0.0);
+                    }
                     i += nst;
                 }
-                l /= 256.0 * 128.0;
+                if (!is_hdr) {
+                    l /= 256.0 * 128.0;
+                }
             }
             for (uint d = 0u; d < num_dlights; d++) {
                 vec3 org = dl[d].origin_radius.xyz;
@@ -66,7 +90,14 @@ void main() {
                 float dd = sd > td ? sd + td * 0.5 : td + sd * 0.5;
                 if (dd < minlight) l += (rad - dd) / 128.0 * dl[d].color_minlight.rgb;
             }
-            imageStore(atlas, ivec3(int(ax + x), int(ay + y), layer), vec4(min(l, vec3(2.0)), 1.0));
+            vec3 out_l = (is_hdr && hdr_on) ? min(l, vec3(64.0)) : min(l, vec3(2.0));
+            imageStore(atlas, ivec3(int(ax + x), int(ay + y), layer), vec4(out_l, 1.0));
+            if (deluxe_ofs > 0) {
+                vec4 out_d = (has_deluxe && s.sample_ofs != 0xffffffffu && dot(dir_sum, dir_sum) > 1e-6)
+                    ? vec4(normalize(dir_sum), 1.0)
+                    : vec4(0.0);
+                imageStore(atlas, ivec3(int(ax + x), int(ay + y), layer + deluxe_ofs), out_d);
+            }
         }
     }
 }

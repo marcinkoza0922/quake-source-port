@@ -44,6 +44,7 @@ impl Server {
         let data = c.fs.open(&modelname).ok_or_else(|| format!("{modelname} not found"))?;
         let bsp = qformats::Bsp::parse(&data).map_err(|e| format!("{modelname}: {e:?}"))?;
         let cm = Arc::new(CollisionModel::from_bsp(&bsp));
+        let sm = Arc::new(crate::surface::SurfaceModel::from_bsp(&bsp));
         let mut world = World::new(cm.clone());
 
         let has_global = |vm: &Vm, n: &str, v: f32| vm.global_ofs(n).is_some_and(|o| vm.g_f(o) == v);
@@ -59,6 +60,7 @@ impl Server {
             protocolflags: if protocol == PROTOCOL_RMQ { PRFL_INT32COORD | PRFL_SHORTANGLE } else { 0 },
             model_precache: vec![String::new(), modelname.clone()],
             models: vec![None, None],
+            surface_models: vec![None, Some((sm.clone(), 0))],
             sound_precache: vec![String::new()],
             particle_precache: vec![String::new()],
             lightstyles: vec![Vec::new(); MAX_LIGHTSTYLES],
@@ -84,6 +86,7 @@ impl Server {
             let name = format!("*{i}");
             c.sv.model_precache.push(name.clone());
             c.sv.models.push(Some(ModelInfo { name, brush: true, mins: m.mins, maxs: m.maxs }));
+            c.sv.surface_models.push(Some((sm.clone(), i)));
             world.set_model(1 + i, Some((cm.clone(), i)));
         }
         for cl in &mut c.clients {

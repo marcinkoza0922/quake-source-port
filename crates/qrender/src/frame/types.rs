@@ -38,6 +38,9 @@ pub(super) struct FrameUbo {
     pub(super) teleport_fx: [u32; 4],
     /// World xyz and the time of the impact.
     pub(super) teleport_ripples: [[f32; 4]; crate::MAX_TELEPORT_RIPPLES],
+    /// x: deluxemap atlas layer offset (0 = off), y: HDR lightmap tonemap (0/1),
+    /// z: deluxemap specular strength, w: deluxemap normal modulation strength.
+    pub(super) hdr_deluxe: [f32; 4],
 }
 
 #[repr(C)]

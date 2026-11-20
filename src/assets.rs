@@ -60,13 +60,22 @@ fn load_model(fs: &Fs, r: &mut Renderer, name: &str, enhanced_models: bool) -> O
         let m = Mdl::parse(&data).ok()?;
         let flags = m.flags as u32;
         let replacement = enhanced_models
-            .then(|| md3::load_replacement(fs, r, name, &m).or_else(|| md3::load_md5_replacement(fs, r, name, &m)))
+            .then(|| {
+                md3::load_iqm_replacement(fs, r, name, &m)
+                    .or_else(|| md3::load_replacement(fs, r, name, &m))
+                    .or_else(|| md3::load_md5_replacement(fs, r, name, &m))
+            })
             .flatten();
         if let Some(id) = replacement {
             return Some(Model { id, kind: Kind::Alias, flags, md3: true });
         }
         let id = r.load_alias(&m).ok()?;
         return Some(Model { id, kind: Kind::Alias, flags, md3: false });
+    }
+    if data.len() >= 16 && &data[..16] == qformats::iqm::IQM_MAGIC {
+        let m = qformats::Iqm::parse(&data).ok()?;
+        let id = md3::load_iqm(fs, r, name, &m, false)?;
+        return Some(Model { id, kind: Kind::Alias, flags: 0, md3: true });
     }
     if data.len() >= 4 && &data[..4] == b"IDP3" {
         let m = qformats::Md3::parse(&data).ok()?;
@@ -111,26 +120,40 @@ impl Level {
                 continue;
             }
             let Some(d) = fs.open(name) else { continue };
-            if d.starts_with(b"IDPO") || d.starts_with(b"IDSP") || d.starts_with(b"IDP3") {
+            if d.starts_with(b"IDPO") || d.starts_with(b"IDSP") || d.starts_with(b"IDP3") || d.starts_with(qformats::iqm::IQM_MAGIC) {
                 continue;
             }
             match Bsp::parse(&d) {
                 Ok(b) => {
-                    let lit = load_lit(fs, name, &b, colored);
+                    let light = load_lighting(fs, name, &b, colored);
                     let ext = external_textures::load(fs, name, &b, false);
                     brush_names.push(name.clone());
-                    brushes.push((b, lit, ext));
+                    brushes.push((b, light, ext));
                 }
                 Err(e) => print(&format!("{name}: {e}\n")),
             }
         }
         let mut brush_models = HashMap::new();
         if let Some(b) = &bsp {
-            let lit = load_lit(fs, &world, b, colored);
+            let light = load_lighting(fs, &world, b, colored);
             let ext = external_textures::load(fs, &world, b, true);
-            let level = LevelBsp { bsp: b, lit: lit.as_deref(), external: &ext };
-            let refs: Vec<_> =
-                brushes.iter().map(|(b, l, e)| LevelBsp { bsp: b, lit: l.as_deref(), external: e }).collect();
+            let level = LevelBsp {
+                bsp: b,
+                lit: light.rgb.as_deref(),
+                hdr_lit: light.hdr.as_deref(),
+                deluxe: light.deluxe.as_deref(),
+                external: &ext,
+            };
+            let refs: Vec<_> = brushes
+                .iter()
+                .map(|(b, l, e)| LevelBsp {
+                    bsp: b,
+                    lit: l.rgb.as_deref(),
+                    hdr_lit: l.hdr.as_deref(),
+                    deluxe: l.deluxe.as_deref(),
+                    external: e,
+                })
+                .collect();
             match r.load_level(level, &refs) {
                 Ok((s, ext)) => {
                     subs = s;
@@ -219,16 +242,70 @@ impl Level {
     }
 }
 
-/// Mod_LoadLighting: a `.lit` only applies when it comes from the same or a
-/// higher-priority game dir than the map (so id1's start.lit never lights
-/// another game's start.bsp). Falls back to embedded RGB (Quake64, BSPX
-/// RGBLIGHTING). `colored` false (r_coloredlight 0) keeps the mono lightmap.
-fn load_lit(fs: &qcore::fs::Fs, bsp_path: &str, b: &Bsp, colored: bool) -> Option<Vec<u8>> {
-    if !colored {
-        return None;
+struct LoadedLighting {
+    rgb: Option<Vec<u8>>,
+    hdr: Option<Vec<u32>>,
+    deluxe: Option<Vec<u8>>,
+}
+
+/// Mod_LoadLighting: loads external `.lit2` / `.lit` (v1 RGB8 or HDR E5BGR9)
+/// and `.dlit` / `.lux` deluxemaps when they come from the same or a
+/// higher-priority game dir than the map. Falls back to embedded BSPX lumps
+/// (`LIGHTING_E5BGR9`, `RGBLIGHTING`, `LIGHTINGDIR`).
+fn load_lighting(
+    fs: &qcore::fs::Fs,
+    bsp_path: &str,
+    b: &Bsp,
+    colored: bool,
+) -> LoadedLighting {
+    let stem = bsp_path.trim_end_matches(".bsp");
+    let expected = if !b.lighting.is_empty() {
+        b.lighting.len()
+    } else if let Some(h) = &b.hdr_lighting {
+        h.len()
+    } else {
+        b.rgb_lighting.as_ref().map_or(0, |l| l.len() / 3)
+    };
+    let mut rgb = None;
+    let mut hdr = None;
+    if colored {
+        // Prefer external .lit2 (HDR) > .lit (HDR or RGB8) > embedded BSPX HDR > embedded RGB.
+        for ext in [".lit2", ".lit"] {
+            if let Some(data) = fs.open_companion(bsp_path, &format!("{stem}{ext}"))
+                && let Ok(parsed) = qformats::bsp::parse_lit_any(&data)
+            {
+                match parsed {
+                    qformats::bsp::LitData::HdrE5Bgr9(v) if expected == 0 || v.len() == expected => {
+                        hdr = Some(v);
+                        break;
+                    }
+                    qformats::bsp::LitData::Rgb8(v) if expected == 0 || v.len() == expected * 3 => {
+                        rgb = Some(v);
+                        break;
+                    }
+                    _ => {}
+                }
+            }
+        }
+        if hdr.is_none() {
+            hdr = b.hdr_lighting.clone();
+        }
+        if hdr.is_none() && rgb.is_none() {
+            rgb = b.rgb_lighting.clone();
+        }
     }
-    fs.open_companion(bsp_path, &format!("{}.lit", bsp_path.trim_end_matches(".bsp")))
-        .and_then(|d| qformats::bsp::parse_lit(&d).ok())
-        .filter(|l| l.len() == b.lighting.len() * 3)
-        .or_else(|| b.rgb_lighting.clone())
+    let dlx_expected = if expected > 0 {
+        expected
+    } else {
+        hdr.as_ref().map_or_else(|| rgb.as_ref().map_or(0, |r| r.len() / 3), Vec::len)
+    };
+    let deluxe = [".dlit", ".lux"]
+        .into_iter()
+        .find_map(|ext| {
+            fs.open_companion(bsp_path, &format!("{stem}{ext}"))
+                .and_then(|d| qformats::bsp::parse_dlit(&d).ok())
+                .filter(|d| dlx_expected == 0 || d.len() == dlx_expected * 3)
+        })
+        .or_else(|| b.deluxemap.clone());
+    LoadedLighting { rgb, hdr, deluxe }
 }
