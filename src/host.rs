@@ -70,6 +70,7 @@ pub(crate) mod feedback;
 use crate::reticle::{self, draw_crosshair, hitmarker};
 mod video;
 mod touch;
+mod training_hud;
 mod weaponswitch;
 
 /// Server tic rate when rendering faster (ironwail-style decoupling).
@@ -159,6 +160,7 @@ pub struct Host {
     toy: crate::addons::WeaponSelection,
     captions: crate::captions::Captions,
     hud: crate::hud::Hud,
+    training: crate::hud::Training,
     feedback: feedback::Feedback,
     feedback_sounds: feedback::CueCache,
     portal_fx: crate::addons::portal_fx::Presentation,
@@ -185,6 +187,7 @@ pub struct Host {
     guest_cbuf: Cbuf,
     /// Label family of the last connected gamepad.
     pad_family: crate::glyphs::Family,
+    pad_families: std::collections::HashMap<u32, crate::glyphs::Family>,
     /// Modern menu text/shape atlas (`crate::font`).
     ui_text: std::rc::Rc<std::cell::RefCell<crate::font::UiText>>,
     /// Rumble to play this frame (low, high, ms), taken by the main loop.
@@ -341,6 +344,7 @@ impl Host {
             toy: Default::default(),
             captions: Default::default(),
             hud: Default::default(),
+            training: Default::default(),
             feedback: Default::default(),
             feedback_sounds: Default::default(),
             portal_fx: Default::default(),
@@ -362,6 +366,7 @@ impl Host {
             input_target: None,
             guest_cbuf: Cbuf::new(),
             pad_family: Default::default(),
+            pad_families: Default::default(),
             ui_text: Default::default(),
             rumble: None,
             fire_track: (0, 0, 0, [0.0; 3]),

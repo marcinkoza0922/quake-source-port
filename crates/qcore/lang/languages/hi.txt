@@ -3967,3 +3967,28 @@ hi उपयोगकर्ता डेटा निर्देशिका {}
 
 @ User data directory error: {}
 hi उपयोगकर्ता डेटा निर्देशिका त्रुटि: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+hi गति और इनपुट
+
+@ Strafe & Jump Timing
+hi बगल की चाल और छलाँग का समय
+
+@ Input Sequence
+hi इनपुट क्रम
+
+@ Ground
+hi ज़मीन पर
+
+@ Airborne
+hi हवा में
+
+@ Jump Timing
+hi छलाँग का समय
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+hi स्थानीय खेल। सफ़ेद निशान को सुनहरे निशान से मिलाएँ। छलाँग: − जल्दी, + देर से।
+
+@ Shows the eight most recent gameplay inputs
+hi खेल के दौरान के आठ सबसे हालिया इनपुट दिखाता है

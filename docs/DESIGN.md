@@ -74,6 +74,10 @@ e.g. `health@bl,a0 clock@tr,a3,fm`. Unknown kinds and fields are skipped (`layou
   status bar digits, Quake 8×8 text or the modern TTF; text takes Quake or modern.
   Immersive elements (`Fade`) show for 3 s after their value changes, then fade over
   0.5 s; low health always shows.
+- **Movement & Input** widgets are off by default. Add **Strafe & Jump Timing** (`strafe`) or **Input Sequence** (`inputsequence`) from the HUD editor to save their placement, scale, opacity, visibility and background in `hud_layout`.
+  Strafe guidance uses the local server's horizontal velocity, movement command, air acceleration budget and 30-unit projection cap. The bar centers on the direction of travel, shades angles that gain speed in green and marks the two optimal wish directions in gold. The white marker shows the current wish direction and the text gives the turn to the nearer gold mark.
+  Jump timing counts physics ticks spent grounded after landing. Zero is the first available jump tick, positive values count late takeoffs, and negative values report presses up to 12 ticks before that opportunity. The guide and timing run for local walking players, including split-screen guests.
+  Input Sequence shows the eight most recent gameplay presses in order, newest on the right. It captures keyboard keys, mouse buttons and wheel, controller buttons and triggers, and stick direction changes, with controller glyphs following the recorded device and `joy_glyphs`. Each split-screen player has separate history, and a new map clears it.
 - **Messages are permanent**: the center message, notify lines and sound captions are
   always in the layout (`Layout::ensure_permanent`) and can be moved and sized but not
   deleted. The console and captions draw at their rectangles (`MsgPlace`,

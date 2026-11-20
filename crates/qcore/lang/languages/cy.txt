@@ -3967,3 +3967,28 @@ cy Cyfeiriadur data defnyddiwr wedi'i osod i {}
 
 @ User data directory error: {}
 cy Gwall cyfeiriadur data defnyddiwr: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+cy Symud a mewnbwn
+
+@ Strafe & Jump Timing
+cy Symud i'r ochr ac amseru naid
+
+@ Input Sequence
+cy Dilyniant mewnbynnau
+
+@ Ground
+cy Ar y llawr
+
+@ Airborne
+cy Yn yr awyr
+
+@ Jump Timing
+cy Amseru naid
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+cy Gemau lleol. Alinia'r marciwr gwyn â'r un aur. Naid: − yn gynnar, + yn hwyr.
+
+@ Shows the eight most recent gameplay inputs
+cy Yn dangos yr wyth mewnbwn diweddaraf yn ystod chwarae

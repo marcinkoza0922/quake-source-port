@@ -24,6 +24,7 @@ pub struct Guest {
     /// SDL id of the gamepad that plays this guest; `None` until one joins.
     pub pad: Option<u32>,
     pub hud_fade: crate::hud::Fade,
+    pub training: crate::hud::Training,
     pub(crate) feedback: crate::host::feedback::Feedback,
     pub(crate) pending_feedback: Option<bool>,
     /// Sound events this frame; the host plays those player 1's client
@@ -57,6 +58,7 @@ impl Guest {
             input,
             pad: None,
             hud_fade: Default::default(),
+            training: Default::default(),
             feedback: Default::default(),
             pending_feedback: None,
             sounds: Vec::new(),
@@ -90,10 +92,12 @@ impl Guest {
             match e {
                 ClientEvent::Disconnect => {
                     self.cl = ClientState::new();
+                    self.training = Default::default();
                     self.feedback = Default::default();
                     self.pending_feedback = None;
                 }
                 ClientEvent::NewMap => {
+                    self.training = Default::default();
                     self.feedback = Default::default();
                     self.pending_feedback = None;
                 }

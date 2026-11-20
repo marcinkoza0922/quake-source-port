@@ -31,6 +31,9 @@ impl Host {
         }
         if self.p1_pad.is_none() || self.p1_pad == Some(id) {
             self.p1_pad = Some(id);
+            if let Some(&family) = self.pad_families.get(&id) {
+                self.pad_family = family;
+            }
             self.handle_event(HostEvent::Input(ie));
             return;
         }
@@ -53,6 +56,9 @@ impl Host {
         }
         // Free pads keep driving player 1 outside local multiplayer.
         if !self.join_open() && self.guests.is_empty() {
+            if let Some(&family) = self.pad_families.get(&id) {
+                self.pad_family = family;
+            }
             self.handle_event(HostEvent::Input(ie));
         }
     }
@@ -60,12 +66,15 @@ impl Host {
     /// Forget a disconnected pad: its guest stays in the game, padless,
     /// until another free pad presses Start.
     pub(super) fn pad_removed(&mut self, id: u32) {
+        self.pad_families.remove(&id);
         for g in self.guests.iter_mut().filter(|g| g.pad == Some(id)) {
             g.pad = None;
+            g.training.sequence.reset_sticks();
             g.input.buttons = Default::default();
         }
         if self.p1_pad == Some(id) {
             self.p1_pad = None;
+            self.training.sequence.reset_sticks();
             self.pad_gestures.reset_all();
         }
     }
@@ -80,6 +89,7 @@ impl Host {
             self.handle_event(HostEvent::Input(ie));
             return;
         }
+        self.record_hud_input(Some(k), ie);
         self.input_target = Some(k);
         self.guests[k].input.dest = KeyDest::Game;
         let routed = qinput::handle_event(self, ie);

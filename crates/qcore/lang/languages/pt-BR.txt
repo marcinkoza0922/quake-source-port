@@ -3967,3 +3967,28 @@ pt-BR Pasta de dados do usuário definida para {}
 
 @ User data directory error: {}
 pt-BR Erro na pasta de dados do usuário: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+pt-BR Movimento e comandos
+
+@ Strafe & Jump Timing
+pt-BR Strafe e tempo dos pulos
+
+@ Input Sequence
+pt-BR Sequência de comandos
+
+@ Ground
+pt-BR No chão
+
+@ Airborne
+pt-BR No ar
+
+@ Jump Timing
+pt-BR Tempo do pulo
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+pt-BR Jogo local. Alinhe o marcador branco com o dourado. Pulo: − cedo, + tarde.
+
+@ Shows the eight most recent gameplay inputs
+pt-BR Mostra os oito comandos mais recentes durante o jogo

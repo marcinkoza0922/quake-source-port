@@ -3967,3 +3967,28 @@ fi Käyttäjätietokansio asetettu kohteeseen {}
 
 @ User data directory error: {}
 fi Käyttäjätietokansion virhe: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+fi Liike ja ohjaus
+
+@ Strafe & Jump Timing
+fi Sivuliike ja hyppyajoitus
+
+@ Input Sequence
+fi Syötesarja
+
+@ Ground
+fi Maassa
+
+@ Airborne
+fi Ilmassa
+
+@ Jump Timing
+fi Hyppyajoitus
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+fi Paikallinen peli. Kohdista valkoinen merkki kultaiseen. Hyppy: − aikaisin, + myöhään.
+
+@ Shows the eight most recent gameplay inputs
+fi Näyttää pelin kahdeksan viimeisintä syötettä

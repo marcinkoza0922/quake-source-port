@@ -3967,3 +3967,28 @@ sk Priečinok používateľských údajov nastavený na {}
 
 @ User data directory error: {}
 sk Chyba priečinka používateľských údajov: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+sk Pohyb a ovládanie
+
+@ Strafe & Jump Timing
+sk Strafe a načasovanie skokov
+
+@ Input Sequence
+sk Postupnosť vstupov
+
+@ Ground
+sk Na zemi
+
+@ Airborne
+sk Vo vzduchu
+
+@ Jump Timing
+sk Načasovanie skoku
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+sk Miestna hra. Zarovnajte bielu značku so zlatou. Skok: − priskoro, + neskoro.
+
+@ Shows the eight most recent gameplay inputs
+sk Zobrazuje osem posledných vstupov počas hry

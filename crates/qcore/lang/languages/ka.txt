@@ -3967,3 +3967,28 @@ ka მომხმარებლის მონაცემთა საქა
 
 @ User data directory error: {}
 ka მომხმარებლის მონაცემთა საქაღალდის შეცდომა: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+ka მოძრაობა და მართვა
+
+@ Strafe & Jump Timing
+ka გვერდითი მოძრაობა და ნახტომის დრო
+
+@ Input Sequence
+ka შეყვანის მიმდევრობა
+
+@ Ground
+ka მიწაზე
+
+@ Airborne
+ka ჰაერში
+
+@ Jump Timing
+ka ნახტომის დრო
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+ka ლოკალური თამაში. თეთრი ნიშნული ოქროსფერს გაუსწორეთ. ნახტომი: − ადრე, + გვიან.
+
+@ Shows the eight most recent gameplay inputs
+ka აჩვენებს თამაშში ბოლო რვა შეყვანას

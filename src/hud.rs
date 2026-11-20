@@ -16,10 +16,12 @@ mod editor_pad;
 mod editor_popup;
 mod editor_rows;
 mod editor_undo;
+pub mod input_sequence;
 pub mod kind;
 pub mod layout;
 pub mod place;
 pub mod presets;
+pub mod strafe;
 
 use qclient::ClientState;
 use qnet::protocol::*;
@@ -29,6 +31,12 @@ use crate::sbar::{PicFn, Sbar};
 use kind::Kind;
 use layout::{Elem, Layout};
 use place::Rect;
+
+#[derive(Default)]
+pub struct Training {
+    pub strafe: strafe::Strafe,
+    pub sequence: input_sequence::Sequence,
+}
 
 /// Seconds an immersive element stays fully visible, then fades.
 const IMMERSIVE_HOLD: f64 = 3.0;

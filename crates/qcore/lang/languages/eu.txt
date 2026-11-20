@@ -3967,3 +3967,28 @@ eu Erabiltzailearen datuen karpeta hemen ezarri da: {}
 
 @ User data directory error: {}
 eu Erabiltzailearen datuen karpetaren errorea: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+eu Mugimendua eta sarrera
+
+@ Strafe & Jump Timing
+eu Alboko mugimendua eta jauziaren unea
+
+@ Input Sequence
+eu Sarrera-sekuentzia
+
+@ Ground
+eu Lurrean
+
+@ Airborne
+eu Airean
+
+@ Jump Timing
+eu Jauziaren unea
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+eu Joko lokala. Lerrokatu marka zuria urre-kolorekoarekin. Jauzia: − goiz, + berandu.
+
+@ Shows the eight most recent gameplay inputs
+eu Jokoko azken zortzi sarrerak erakusten ditu

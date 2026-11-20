@@ -3967,3 +3967,28 @@ is Notendagagnamappa stillt á {}
 
 @ User data directory error: {}
 is Villa í notendagagnamöppu: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+is Hreyfing og inntak
+
+@ Strafe & Jump Timing
+is Hliðarhreyfing og tímasetning stökks
+
+@ Input Sequence
+is Inntaksröð
+
+@ Ground
+is Á jörðu
+
+@ Airborne
+is Í lofti
+
+@ Jump Timing
+is Tímasetning stökks
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+is Staðbundnir leikir. Stilltu hvíta merkið við það gyllta. Stökk: − snemma, + seint.
+
+@ Shows the eight most recent gameplay inputs
+is Sýnir átta nýjustu inntökin meðan spilað er

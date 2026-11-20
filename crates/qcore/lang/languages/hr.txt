@@ -3967,3 +3967,28 @@ hr Mapa korisničkih podataka postavljena na {}
 
 @ User data directory error: {}
 hr Greška mape korisničkih podataka: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+hr Kretanje i upravljanje
+
+@ Strafe & Jump Timing
+hr Bočno kretanje i ritam skoka
+
+@ Input Sequence
+hr Slijed unosa
+
+@ Ground
+hr Na tlu
+
+@ Airborne
+hr U zraku
+
+@ Jump Timing
+hr Vrijeme skoka
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+hr Lokalna igra. Poravnajte bijelu oznaku sa zlatnom. Skok: − prerano, + prekasno.
+
+@ Shows the eight most recent gameplay inputs
+hr Prikazuje osam posljednjih unosa u igri

@@ -3967,3 +3967,28 @@ cs Složka uživatelských dat nastavena na {}
 
 @ User data directory error: {}
 cs Chyba složky uživatelských dat: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+cs Pohyb a ovládání
+
+@ Strafe & Jump Timing
+cs Strafe a načasování skoků
+
+@ Input Sequence
+cs Posloupnost vstupů
+
+@ Ground
+cs Na zemi
+
+@ Airborne
+cs Ve vzduchu
+
+@ Jump Timing
+cs Načasování skoku
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+cs Místní hra. Zarovnejte bílou značku se zlatou. Skok: − příliš brzy, + příliš pozdě.
+
+@ Shows the eight most recent gameplay inputs
+cs Zobrazuje osm posledních vstupů při hře

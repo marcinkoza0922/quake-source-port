@@ -3967,3 +3967,28 @@ ro Directorul de date utilizator setat la {}
 
 @ User data directory error: {}
 ro Eroare director de date utilizator: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+ro Mișcare și comenzi
+
+@ Strafe & Jump Timing
+ro Strafe și sincronizarea săriturii
+
+@ Input Sequence
+ro Secvență de comenzi
+
+@ Ground
+ro Pe sol
+
+@ Airborne
+ro În aer
+
+@ Jump Timing
+ro Sincronizarea săriturii
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+ro Joc local. Aliniază marcajul alb cu cel auriu. Săritură: − devreme, + târziu.
+
+@ Shows the eight most recent gameplay inputs
+ro Arată ultimele opt comenzi din timpul jocului

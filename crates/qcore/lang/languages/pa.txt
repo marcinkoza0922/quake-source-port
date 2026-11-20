@@ -3967,3 +3967,28 @@ pa ਯੂਜ਼ਰ ਡਾਟਾ ਡਾਇਰੈਕਟਰੀ {} 'ਤੇ ਸੈੱ
 
 @ User data directory error: {}
 pa ਯੂਜ਼ਰ ਡਾਟਾ ਡਾਇਰੈਕਟਰੀ ਗਲਤੀ: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+pa ਹਿਲਜੁਲ ਅਤੇ ਇਨਪੁੱਟ
+
+@ Strafe & Jump Timing
+pa ਪਾਸੇ ਵੱਲ ਚਾਲ ਅਤੇ ਛਾਲ ਦਾ ਸਮਾਂ
+
+@ Input Sequence
+pa ਇਨਪੁੱਟ ਦਾ ਕ੍ਰਮ
+
+@ Ground
+pa ਜ਼ਮੀਨ ਉੱਤੇ
+
+@ Airborne
+pa ਹਵਾ ਵਿੱਚ
+
+@ Jump Timing
+pa ਛਾਲ ਦਾ ਸਮਾਂ
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+pa ਸਥਾਨਕ ਖੇਡ। ਚਿੱਟਾ ਨਿਸ਼ਾਨ ਸੁਨਹਿਰੀ ਨਿਸ਼ਾਨ ਨਾਲ ਮਿਲਾਓ। ਛਾਲ: − ਜਲਦੀ, + ਦੇਰ ਨਾਲ।
+
+@ Shows the eight most recent gameplay inputs
+pa ਖੇਡ ਦੌਰਾਨ ਦਿੱਤੇ ਆਖਰੀ ਅੱਠ ਇਨਪੁੱਟ ਦਿਖਾਉਂਦਾ ਹੈ

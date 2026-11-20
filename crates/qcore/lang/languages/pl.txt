@@ -3967,3 +3967,28 @@ pl Ustawiono katalog danych użytkownika na {}
 
 @ User data directory error: {}
 pl Błąd katalogu danych użytkownika: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+pl Ruch i sterowanie
+
+@ Strafe & Jump Timing
+pl Strafe i rytm skoków
+
+@ Input Sequence
+pl Sekwencja wejść
+
+@ Ground
+pl Na ziemi
+
+@ Airborne
+pl W powietrzu
+
+@ Jump Timing
+pl Rytm skoku
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+pl Gra lokalna. Zgraj biały znacznik ze złotym. Skok: − za wcześnie, + za późno.
+
+@ Shows the eight most recent gameplay inputs
+pl Pokazuje osiem ostatnich wejść podczas gry

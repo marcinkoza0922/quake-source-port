@@ -3967,3 +3967,28 @@ mk Папката со кориснички податоци е поставен
 
 @ User data directory error: {}
 mk Грешка во папката со кориснички податоци: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+mk Движење и управување
+
+@ Strafe & Jump Timing
+mk Стрејф и тајминг на скокот
+
+@ Input Sequence
+mk Низа внесови
+
+@ Ground
+mk На земја
+
+@ Airborne
+mk Во воздух
+
+@ Jump Timing
+mk Тајминг на скокот
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+mk Локална игра. Порамнете ја белата ознака со златната. Скок: − рано, + доцна.
+
+@ Shows the eight most recent gameplay inputs
+mk Ги прикажува последните осум внесови во играта

@@ -3967,3 +3967,28 @@ fil Itinakda ang direktoryo ng data ng user sa {}
 
 @ User data directory error: {}
 fil Error sa direktoryo ng data ng user: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+fil Galaw at input
+
+@ Strafe & Jump Timing
+fil Strafe at tiyempo ng talon
+
+@ Input Sequence
+fil Pagkakasunod ng input
+
+@ Ground
+fil Nasa lupa
+
+@ Airborne
+fil Nasa ere
+
+@ Jump Timing
+fil Tiyempo ng talon
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+fil Lokal na laro. Itapat ang puting marka sa ginto. Talon: − maaga, + huli.
+
+@ Shows the eight most recent gameplay inputs
+fil Ipinapakita ang walong huling input habang naglalaro

@@ -56,6 +56,9 @@ pub struct Ctx<'a> {
     /// The HUD editor: everything drawn, sample text for the messages.
     pub preview: bool,
     pub automap: Option<AutomapCtx<'a>>,
+    /// Player history and whether to draw sample values in the editor.
+    pub training: Option<(&'a super::Training, bool)>,
+    pub glyph_override: f32,
 }
 
 /// What an element's size depends on besides its settings.
@@ -302,6 +305,8 @@ pub fn size(c: &Canvas, e: &Elem, room: &Room) -> (f32, f32) {
         Kind::Captions => ((160.0 * k).min(room.vw), 30.0 * k),
         Kind::Face => (24.0, 24.0),
         Kind::Automap => (120.0, 88.0),
+        Kind::Strafe => super::strafe::SIZE,
+        Kind::InputSequence => super::input_sequence::SIZE,
         Kind::StatusBar => (320.0, if e.a == 1 { 48.0 } else { 24.0 }),
         Kind::Weapons => {
             let (n, cols) = (weapon_slots(room), usize::from(e.a.clamp(1, 10)));
@@ -390,6 +395,16 @@ fn draw_local(c: &mut Canvas, pf: &mut PicFn, e: &Elem, (w, h): (f32, f32), ctx:
                 } else if am.allowed {
                     am.map.draw_widget(c, (w, h), am.player_pos, am.player_yaw, am.settings, e.bg);
                 }
+            }
+        }
+        Kind::Strafe => {
+            if let Some((training, sample)) = ctx.training {
+                training.strafe.draw(c, (w, h), e.bg, sample);
+            }
+        }
+        Kind::InputSequence => {
+            if let Some((training, sample)) = ctx.training {
+                training.sequence.draw(c, (w, h), e.bg, sample, ctx.glyph_override);
             }
         }
         Kind::StatusBar => {

@@ -3967,3 +3967,28 @@ zh-CN 用户数据目录已设为 {}
 
 @ User data directory error: {}
 zh-CN 用户数据目录错误：{}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+zh-CN 移动与输入
+
+@ Strafe & Jump Timing
+zh-CN 横移与跳跃时机
+
+@ Input Sequence
+zh-CN 输入序列
+
+@ Ground
+zh-CN 在地面
+
+@ Airborne
+zh-CN 在空中
+
+@ Jump Timing
+zh-CN 跳跃时机
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+zh-CN 仅限本地游戏。将白色标记对准金色标记。跳跃：− 过早，+ 过晚。
+
+@ Shows the eight most recent gameplay inputs
+zh-CN 显示游戏中最近八次输入

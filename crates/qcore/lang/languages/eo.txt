@@ -3967,3 +3967,28 @@ eo Dosierujo de uzantaj datumoj agordita al {}
 
 @ User data directory error: {}
 eo Eraro pri dosierujo de uzantaj datumoj: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+eo Moviĝo kaj enigo
+
+@ Strafe & Jump Timing
+eo Flanka movo kaj saltotempigo
+
+@ Input Sequence
+eo Eniga sinsekvo
+
+@ Ground
+eo Surtere
+
+@ Airborne
+eo En la aero
+
+@ Jump Timing
+eo Saltotempigo
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+eo Lokaj ludoj. Vicigu la blankan markon kun la ora. Salto: − frue, + malfrue.
+
+@ Shows the eight most recent gameplay inputs
+eo Montras la ok plej lastajn enludajn enigojn

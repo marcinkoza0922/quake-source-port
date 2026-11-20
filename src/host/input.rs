@@ -18,7 +18,13 @@ impl Host {
                 }
             }
             HostEvent::Focus => {}
-            HostEvent::PadFamily(f) => self.pad_family = crate::glyphs::Family::from_platform(f),
+            HostEvent::PadFamily(id, family) => {
+                let family = crate::glyphs::Family::from_platform(family);
+                self.pad_families.insert(id, family);
+                if self.p1_pad.is_none() || self.p1_pad == Some(id) {
+                    self.pad_family = family;
+                }
+            }
             HostEvent::Pad(id, ie) => self.pad_event(id, ie),
             HostEvent::PadRemoved(id) => self.pad_removed(id),
             HostEvent::Finger { id, phase, x, y } => self.finger_event(id, phase, x, y),
@@ -183,6 +189,7 @@ impl Host {
                     self.sync_key_dest();
                     return;
                 }
+                self.record_hud_input(None, ie);
                 if self.handle_pad_gesture(&ie) {
                     self.sync_key_dest();
                     return;

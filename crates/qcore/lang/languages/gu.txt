@@ -3967,3 +3967,28 @@ gu વપરાશકર્તા ડેટા ડિરેક્ટરી {} �
 
 @ User data directory error: {}
 gu વપરાશકર્તા ડેટા ડિરેક્ટરી ભૂલ: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+gu હલનચલન અને ઇનપુટ
+
+@ Strafe & Jump Timing
+gu બાજુની ચાલ અને કૂદકાનો સમય
+
+@ Input Sequence
+gu ઇનપુટ ક્રમ
+
+@ Ground
+gu જમીન પર
+
+@ Airborne
+gu હવામાં
+
+@ Jump Timing
+gu કૂદકાનો સમય
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+gu સ્થાનિક રમત. સફેદ નિશાનને સોનેરી નિશાન સાથે ગોઠવો. કૂદકો: − વહેલો, + મોડો.
+
+@ Shows the eight most recent gameplay inputs
+gu રમત દરમિયાનના છેલ્લાં આઠ ઇનપુટ બતાવે છે

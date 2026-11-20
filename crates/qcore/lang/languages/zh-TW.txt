@@ -3967,3 +3967,28 @@ zh-TW 使用者資料目錄已設為 {}
 
 @ User data directory error: {}
 zh-TW 使用者資料目錄錯誤：{}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+zh-TW 移動與輸入
+
+@ Strafe & Jump Timing
+zh-TW 橫移與跳躍時機
+
+@ Input Sequence
+zh-TW 輸入序列
+
+@ Ground
+zh-TW 在地面
+
+@ Airborne
+zh-TW 在空中
+
+@ Jump Timing
+zh-TW 跳躍時機
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+zh-TW 適用於本機遊戲。將白色標記對準金色標記。跳躍：− 過早，+ 過晚。
+
+@ Shows the eight most recent gameplay inputs
+zh-TW 顯示遊戲中最近八次輸入

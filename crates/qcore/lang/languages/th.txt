@@ -3967,3 +3967,28 @@ th ตั้งค่า​โฟลเดอร์​ข้อมูล​ผ�
 
 @ User data directory error: {}
 th ข้อผิดพลาด​ของ​โฟลเดอร์​ข้อมูล​ผู้ใช้: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+th การเคลื่อนที่​และ​การป้อนคำสั่ง
+
+@ Strafe & Jump Timing
+th สเตรฟ​และ​จังหวะ​กระโดด
+
+@ Input Sequence
+th ลำดับ​คำสั่ง
+
+@ Ground
+th บนพื้น
+
+@ Airborne
+th กลางอากาศ
+
+@ Jump Timing
+th จังหวะ​กระโดด
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+th เกม​ในเครื่อง จัด​เครื่องหมาย​สีขาว​ให้ตรง​กับ​สีทอง กระโดด: − เร็วเกินไป, + ช้าเกินไป
+
+@ Shows the eight most recent gameplay inputs
+th แสดง​คำสั่ง​ล่าสุด​แปดรายการ​ระหว่าง​เล่น

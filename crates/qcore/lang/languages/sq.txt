@@ -3967,3 +3967,28 @@ sq Dosja e të dhënave të përdoruesit u vendos në {}
 
 @ User data directory error: {}
 sq Gabim i dosjes së të dhënave të përdoruesit: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+sq Lëvizja dhe komandat
+
+@ Strafe & Jump Timing
+sq Lëvizja anash dhe koha e kërcimit
+
+@ Input Sequence
+sq Rendi i komandave
+
+@ Ground
+sq Në tokë
+
+@ Airborne
+sq Në ajër
+
+@ Jump Timing
+sq Koha e kërcimit
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+sq Lojë lokale. Rreshto shenjën e bardhë me atë të artë. Kërcim: − herët, + vonë.
+
+@ Shows the eight most recent gameplay inputs
+sq Shfaq tetë komandat më të fundit gjatë lojës

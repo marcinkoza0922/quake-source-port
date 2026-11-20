@@ -3967,3 +3967,28 @@ pt Diretório de dados do utilizador definido para {}
 
 @ User data directory error: {}
 pt Erro no diretório de dados do utilizador: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+pt Movimento e comandos
+
+@ Strafe & Jump Timing
+pt Strafe e tempo dos saltos
+
+@ Input Sequence
+pt Sequência de comandos
+
+@ Ground
+pt No chão
+
+@ Airborne
+pt No ar
+
+@ Jump Timing
+pt Tempo do salto
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+pt Jogo local. Alinha o marcador branco com o dourado. Salto: − cedo, + tarde.
+
+@ Shows the eight most recent gameplay inputs
+pt Mostra os oito últimos comandos durante o jogo

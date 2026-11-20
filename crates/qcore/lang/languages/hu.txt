@@ -3967,3 +3967,28 @@ hu Felhasználói adatok mappája beállítva: {}
 
 @ User data directory error: {}
 hu Felhasználói adatmappa hiba: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+hu Mozgás és bevitel
+
+@ Strafe & Jump Timing
+hu Strafe és ugrásidőzítés
+
+@ Input Sequence
+hu Beviteli sorrend
+
+@ Ground
+hu Talajon
+
+@ Airborne
+hu Levegőben
+
+@ Jump Timing
+hu Ugrásidőzítés
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+hu Helyi játék. Igazítsd a fehér jelölőt az aranyhoz. Ugrás: − korai, + késői.
+
+@ Shows the eight most recent gameplay inputs
+hu Megjeleníti a játék utolsó nyolc bevitelét

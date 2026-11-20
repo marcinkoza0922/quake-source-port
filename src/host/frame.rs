@@ -417,6 +417,9 @@ impl Host {
                 self.server.level = None;
                 self.server.core.sv.active = false;
             }
+            if !hold && !self.server.core.sv.paused {
+                self.sample_strafe_hud();
+            }
             if let Some(n) = &mut self.net_server {
                 n.send(&mut self.server, self.realtime);
             }

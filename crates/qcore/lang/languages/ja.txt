@@ -3967,3 +3967,28 @@ ja ユーザーデータフォルダを {} に設定しました
 
 @ User data directory error: {}
 ja ユーザーデータフォルダのエラー: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+ja 移動と入力
+
+@ Strafe & Jump Timing
+ja ストレイフとジャンプのタイミング
+
+@ Input Sequence
+ja 入力履歴
+
+@ Ground
+ja 接地中
+
+@ Airborne
+ja 空中
+
+@ Jump Timing
+ja ジャンプのタイミング
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+ja ローカルゲーム用。白い目印を金色の目印に合わせます。ジャンプは−が早め、+が遅めです。
+
+@ Shows the eight most recent gameplay inputs
+ja ゲーム中の直近8件の入力を表示します

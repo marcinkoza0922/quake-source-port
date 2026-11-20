@@ -35,6 +35,8 @@ pub enum Kind {
     Gpu,
     Vram,
     Automap,
+    Strafe,
+    InputSequence,
     Center,
     Notify,
     Captions,
@@ -158,15 +160,16 @@ pub const CATEGORIES: &[(&str, &[Kind])] = &[
     ("Time & Stats", &[Kind::Clock, Kind::Timer, Kind::Pb, Kind::Kills, Kind::Secrets, Kind::Speed]),
     ("Performance Metrics", &[Kind::Fps, Kind::FrameTime, Kind::Cpu, Kind::Ram, Kind::Gpu, Kind::Vram]),
     ("Automap", &[Kind::Automap]),
+    ("Movement & Input", &[Kind::Strafe, Kind::InputSequence]),
 ];
 
 impl Kind {
-    pub const ALL: [Kind; 34] = [
+    pub const ALL: [Kind; 36] = [
         Kind::Health, Kind::Armor, Kind::Face, Kind::HealthBar, Kind::ArmorBar, Kind::Ammo, Kind::AmmoBar,
         Kind::AmmoList, Kind::Shells, Kind::Nails, Kind::Rockets, Kind::Cells, Kind::Weapons, Kind::Items,
         Kind::Keys, Kind::Powerups, Kind::Sigils, Kind::StatusBar, Kind::Clock, Kind::Timer, Kind::Pb,
         Kind::Kills, Kind::Secrets, Kind::Speed, Kind::Fps, Kind::FrameTime, Kind::Cpu, Kind::Ram, Kind::Gpu, Kind::Vram,
-        Kind::Automap, Kind::Center, Kind::Notify, Kind::Captions,
+        Kind::Automap, Kind::Strafe, Kind::InputSequence, Kind::Center, Kind::Notify, Kind::Captions,
     ];
     /// Always in the layout: they can be moved but not removed.
     pub const PERMANENT: [Kind; 3] = [Kind::Center, Kind::Notify, Kind::Captions];
@@ -205,6 +208,8 @@ impl Kind {
             Gpu => "gpu",
             Vram => "vram",
             Automap => "automap",
+            Strafe => "strafe",
+            InputSequence => "inputsequence",
             Center => "center",
             Notify => "notify",
             Captions => "captions",
@@ -250,6 +255,8 @@ impl Kind {
             Gpu => "GPU Time",
             Vram => "Video Memory",
             Automap => "Automap",
+            Strafe => "Strafe & Jump Timing",
+            InputSequence => "Input Sequence",
             Center => "Center Message",
             Notify => "Notify Messages",
             Captions => "Sound Captions",
@@ -290,7 +297,7 @@ impl Kind {
         use Kind::*;
         if self.is_number() {
             &[Font::Big, Font::Quake, Font::Modern]
-        } else if matches!(self, Face | Weapons | Items | Keys | Powerups | Sigils | StatusBar | Automap) || self.is_message() {
+        } else if matches!(self, Face | Weapons | Items | Keys | Powerups | Sigils | StatusBar | Automap | Strafe | InputSequence) || self.is_message() {
             &[]
         } else {
             &[Font::Quake, Font::Modern]
@@ -314,7 +321,7 @@ impl Kind {
 
     /// Immersive mode (shown briefly after a change) makes sense.
     pub fn can_fade(self) -> bool {
-        self.is_player() && self != Kind::StatusBar
+        self.is_player() && !matches!(self, Kind::StatusBar | Kind::Strafe | Kind::InputSequence)
     }
 
     /// Whether the element exposes a Visibility row in the editor.
@@ -329,7 +336,8 @@ impl Kind {
         match self {
             Health | Armor | Face | HealthBar | ArmorBar => Anchor::BottomLeft,
             Ammo | AmmoBar | AmmoList | Shells | Nails | Rockets | Cells | Weapons | Items | Keys | Powerups | Sigils => Anchor::BottomRight,
-            StatusBar | Captions => Anchor::BottomCenter,
+            StatusBar | Captions | InputSequence => Anchor::BottomCenter,
+            Strafe => Anchor::TopCenter,
             Clock | Timer | Pb | Kills | Secrets | Speed | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Automap => Anchor::TopRight,
             Notify => Anchor::TopLeft,
             Center => Anchor::Center,
@@ -348,7 +356,7 @@ impl Kind {
     }
 
     pub fn has_background(self) -> bool {
-        !self.fonts().is_empty() && !self.is_number() || matches!(self, Kind::Center | Kind::Notify | Kind::Automap)
+        !self.fonts().is_empty() && !self.is_number() || matches!(self, Kind::Center | Kind::Notify | Kind::Automap | Kind::Strafe | Kind::InputSequence)
     }
 
     pub fn opts(self) -> &'static [Opt] {
@@ -387,6 +395,8 @@ impl Kind {
             Kind::Gpu => "Graphics card time per frame in milliseconds",
             Kind::Vram => "Video memory in use and what the driver allows, where it reports it",
             Kind::Automap => "Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)",
+            Kind::Strafe => "Local games. Align white with gold. Jump timing: − early, + late.",
+            Kind::InputSequence => "Shows the eight most recent gameplay inputs",
             Kind::Captions => "Shows text for important sounds: doors, alerted enemies, secrets, pickups",
             _ => return None,
         })

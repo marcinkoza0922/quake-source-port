@@ -1463,3 +1463,17 @@ de Stärke der Glanzlichter aus der gerichteten Beleuchtung
 it Intensità dei riflessi prodotti dall'illuminazione direzionale
 es Intensidad de los reflejos de la iluminación direccional
 ru Интенсивность бликов от направленного освещения
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+fr Parties locales. Alignez le blanc sur l’or. Saut : − en avance, + en retard.
+de Lokale Spiele. Weiß auf Gold ausrichten. Sprung: − zu früh, + zu spät.
+it Partite locali. Allinea il bianco all’oro. Salto: − in anticipo, + in ritardo.
+es Partidas locales. Alinea el blanco con el dorado. Salto: − temprano, + tarde.
+ru Локальная игра. Совместите белую метку с золотой. Прыжок: − рано, + поздно.
+
+@ Shows the eight most recent gameplay inputs
+fr Affiche les huit dernières commandes saisies en jeu
+de Zeigt die letzten acht Spieleingaben an
+it Mostra gli ultimi otto comandi di gioco
+es Muestra las ocho últimas entradas durante la partida
+ru Показывает восемь последних действий игрока

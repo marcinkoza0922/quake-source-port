@@ -3967,3 +3967,28 @@ sr Фасцикла корисничких података постављена
 
 @ User data directory error: {}
 sr Грешка фасцикле корисничких података: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+sr Кретање и управљање
+
+@ Strafe & Jump Timing
+sr Бочно кретање и тајминг скока
+
+@ Input Sequence
+sr Низ уноса
+
+@ Ground
+sr На тлу
+
+@ Airborne
+sr У ваздуху
+
+@ Jump Timing
+sr Тајминг скока
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+sr Локална игра. Поравнајте белу ознаку са златном. Скок: − прерано, + прекасно.
+
+@ Shows the eight most recent gameplay inputs
+sr Приказује осам последњих уноса током игре

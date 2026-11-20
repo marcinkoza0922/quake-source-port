@@ -3967,3 +3967,28 @@ ta பயனர் தரவு அடைவு {} என அமைக்கப�
 
 @ User data directory error: {}
 ta பயனர் தரவு அடைவு பிழை: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+ta நகர்வும் உள்ளீடும்
+
+@ Strafe & Jump Timing
+ta பக்கவாட்டு நகர்வும் தாவும் நேரமும்
+
+@ Input Sequence
+ta உள்ளீட்டு வரிசை
+
+@ Ground
+ta தரையில்
+
+@ Airborne
+ta காற்றில்
+
+@ Jump Timing
+ta தாவும் நேரம்
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+ta உள்ளூர் விளையாட்டு. வெள்ளைக் குறியைத் தங்கக் குறியுடன் பொருத்தவும். தாவல்: − முன்கூட்டியே, + தாமதமாக.
+
+@ Shows the eight most recent gameplay inputs
+ta விளையாட்டின் கடைசி எட்டு உள்ளீடுகளைக் காட்டும்

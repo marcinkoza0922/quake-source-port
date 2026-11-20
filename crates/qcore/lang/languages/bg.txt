@@ -3967,3 +3967,28 @@ bg Папката с потребителски данни е зададена �
 
 @ User data directory error: {}
 bg Грешка в папката с потребителски данни: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+bg Движение и управление
+
+@ Strafe & Jump Timing
+bg Стрейф и тайминг на скока
+
+@ Input Sequence
+bg Поредица от команди
+
+@ Ground
+bg На земята
+
+@ Airborne
+bg Във въздуха
+
+@ Jump Timing
+bg Тайминг на скока
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+bg Локална игра. Подравнете белия маркер със златния. Скок: − рано, + късно.
+
+@ Shows the eight most recent gameplay inputs
+bg Показва последните осем команди в играта

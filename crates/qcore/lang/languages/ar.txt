@@ -3967,3 +3967,28 @@ ar تم تعيين مجلد بيانات المستخدم إلى {}
 
 @ User data directory error: {}
 ar خطأ في مجلد بيانات المستخدم: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+ar الحركة والإدخال
+
+@ Strafe & Jump Timing
+ar الحركة الجانبية وتوقيت القفز
+
+@ Input Sequence
+ar تسلسل الإدخال
+
+@ Ground
+ar على الأرض
+
+@ Airborne
+ar في الهواء
+
+@ Jump Timing
+ar توقيت القفز
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+ar للعب المحلي. حاذِ العلامة البيضاء مع الذهبية. القفز: − مبكر، + متأخر.
+
+@ Shows the eight most recent gameplay inputs
+ar يعرض آخر ثمانية إدخالات أثناء اللعب

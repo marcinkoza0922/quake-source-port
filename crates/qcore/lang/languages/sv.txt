@@ -3967,3 +3967,28 @@ sv Användardatamapp inställd på {}
 
 @ User data directory error: {}
 sv Fel i användardatamapp: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+sv Rörelse och inmatning
+
+@ Strafe & Jump Timing
+sv Strafe och hopptajming
+
+@ Input Sequence
+sv Inmatningssekvens
+
+@ Ground
+sv På marken
+
+@ Airborne
+sv I luften
+
+@ Jump Timing
+sv Hopptajming
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+sv Lokala spel. Rikta den vita markören mot den gyllene. Hopp: − tidigt, + sent.
+
+@ Shows the eight most recent gameplay inputs
+sv Visar de åtta senaste inmatningarna under spel

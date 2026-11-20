@@ -3967,3 +3967,28 @@ te వినియోగదారు డేటా డైరెక్టరీ {}
 
 @ User data directory error: {}
 te వినియోగదారు డేటా డైరెక్టరీ లోపం: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+te కదలిక మరియు ఇన్‌పుట్
+
+@ Strafe & Jump Timing
+te పక్కకు కదలిక, దూకే సమయం
+
+@ Input Sequence
+te ఇన్‌పుట్ క్రమం
+
+@ Ground
+te నేలపై
+
+@ Airborne
+te గాలిలో
+
+@ Jump Timing
+te దూకే సమయం
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+te స్థానిక ఆట. తెల్ల గుర్తును బంగారు గుర్తుతో సరిపోల్చండి. దూకడం: − ముందుగా, + ఆలస్యంగా.
+
+@ Shows the eight most recent gameplay inputs
+te ఆటలో చివరి ఎనిమిది ఇన్‌పుట్‌లను చూపిస్తుంది

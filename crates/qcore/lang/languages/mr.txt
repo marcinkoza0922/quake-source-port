@@ -3967,3 +3967,28 @@ mr वापरकर्ता डेटा निर्देशिका {} �
 
 @ User data directory error: {}
 mr वापरकर्ता डेटा निर्देशिका त्रुटी: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+mr हालचाल आणि इनपुट
+
+@ Strafe & Jump Timing
+mr बाजूची हालचाल आणि उडीची वेळ
+
+@ Input Sequence
+mr इनपुट क्रम
+
+@ Ground
+mr जमिनीवर
+
+@ Airborne
+mr हवेत
+
+@ Jump Timing
+mr उडीची वेळ
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+mr स्थानिक खेळ. पांढरी खूण सोनेरी खुणेशी जुळवा. उडी: − लवकर, + उशिरा.
+
+@ Shows the eight most recent gameplay inputs
+mr खेळातील शेवटचे आठ इनपुट दाखवते
