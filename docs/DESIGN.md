@@ -568,7 +568,9 @@ other machines. `AGENTS.md` keeps asset-use guidance rather than a tool catalog.
 - `cargo clippy --message-format=short`.
 - `tools/webbuild/build.sh` — browser build into `target/web/` (see Web build).
 - Releases (`.github/workflows/release.yml`, on `v*` tags): glibc Linux, Windows and
-  macOS build on native runners with bundled static SDL3; Android as a debug APK.
+  macOS build on native runners with bundled static SDL3. The Android debug APK
+  stages `libmain.so`, `libSDL3.so` and the build NDK's `libc++_shared.so` as
+  arm64 JNI libraries. The release job checks all three entries before uploading.
   musl Linux (x64, arm64) builds in Alpine via `tools/release_musl.sh` (locally:
   `podman run --rm -v "$PWD:/src:Z" -w /src alpine:3.22 sh tools/release_musl.sh`,
   output in `target/musl/`). musl is linked dynamically (`-crt-static` off) because a
