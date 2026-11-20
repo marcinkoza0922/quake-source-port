@@ -874,9 +874,6 @@ zh-TW 螢幕著色器
 @ Screen Shake
 zh-TW 螢幕震動
 
-@ Search LAN
-zh-TW 搜尋區域網路
-
 @ Seconds a center-screen message stays up
 zh-TW 畫面中央訊息的停留秒數
 
@@ -3398,6 +3395,60 @@ zh-TW 使用上下方向鍵移動，Enter 放置，Esc 取消
 
 @ View
 zh-TW 檢視
+
+@ Server Browser
+zh-TW 伺服器瀏覽器
+
+@ Internet
+zh-TW 網際網路
+
+@ Filters
+zh-TW 篩選
+
+@ Refresh
+zh-TW 重新整理
+
+@ Favorites
+zh-TW 我的最愛
+
+@ Ping
+zh-TW 延遲
+
+@ Protocol
+zh-TW 協定
+
+@ Players
+zh-TW 玩家
+
+@ Unknown
+zh-TW 未知
+
+@ Empty
+zh-TW 無人
+
+@ Populated
+zh-TW 有人
+
+@ Open slots
+zh-TW 有空位
+
+@ Full
+zh-TW 已滿
+
+@ Deathmatch
+zh-TW 死鬥
+
+@ Mod
+zh-TW 模組
+
+@ No servers found
+zh-TW 找不到伺服器
+
+@ No matching servers
+zh-TW 沒有符合條件的伺服器
+
+@ Server search failed
+zh-TW 搜尋伺服器失敗
 
 # ==== hud.txt ====
 

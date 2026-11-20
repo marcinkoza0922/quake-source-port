@@ -874,9 +874,6 @@ fa سایه‌زن صفحه
 @ Screen Shake
 fa لرزش صفحه
 
-@ Search LAN
-fa جستجو در LAN
-
 @ Seconds a center-screen message stays up
 fa مدت ماندن پیام وسط صفحه به ثانیه
 
@@ -3398,6 +3395,60 @@ fa از کلیدهای بالا و پایین برای حرکت، Enter برای
 
 @ View
 fa نمایش
+
+@ Server Browser
+fa فهرست سرورها
+
+@ Internet
+fa اینترنت
+
+@ Filters
+fa فیلترها
+
+@ Refresh
+fa تازه‌سازی
+
+@ Favorites
+fa علاقه‌مندی‌ها
+
+@ Ping
+fa پینگ
+
+@ Protocol
+fa پروتکل
+
+@ Players
+fa بازیکنان
+
+@ Unknown
+fa نامشخص
+
+@ Empty
+fa خالی
+
+@ Populated
+fa دارای بازیکن
+
+@ Open slots
+fa جای خالی
+
+@ Full
+fa پر
+
+@ Deathmatch
+fa نبرد تا مرگ
+
+@ Mod
+fa مد
+
+@ No servers found
+fa هیچ سروری پیدا نشد
+
+@ No matching servers
+fa هیچ سروری با فیلترها مطابقت ندارد
+
+@ Server search failed
+fa جستجوی سرورها ناموفق بود
 
 # ==== hud.txt ====
 

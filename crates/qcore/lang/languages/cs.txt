@@ -874,9 +874,6 @@ cs Shader obrazovky
 @ Screen Shake
 cs Otřesy obrazovky
 
-@ Search LAN
-cs Hledat v LAN
-
 @ Seconds a center-screen message stays up
 cs Kolik sekund zůstane zpráva uprostřed obrazovky
 
@@ -3398,6 +3395,60 @@ cs Šipky nahoru/dolů: přesunout, Enter: umístit, Esc: zrušit
 
 @ View
 cs Pohled
+
+@ Server Browser
+cs Seznam serverů
+
+@ Internet
+cs Internet
+
+@ Filters
+cs Filtry
+
+@ Refresh
+cs Obnovit
+
+@ Favorites
+cs Oblíbené
+
+@ Ping
+cs Ping
+
+@ Protocol
+cs Protokol
+
+@ Players
+cs Hráči
+
+@ Unknown
+cs Neznámý
+
+@ Empty
+cs Prázdné
+
+@ Populated
+cs S hráči
+
+@ Open slots
+cs Volná místa
+
+@ Full
+cs Plné
+
+@ Deathmatch
+cs Deathmatch
+
+@ Mod
+cs Mod
+
+@ No servers found
+cs Nenalezeny žádné servery
+
+@ No matching servers
+cs Žádné odpovídající servery
+
+@ Server search failed
+cs Hledání serverů se nezdařilo
 
 # ==== hud.txt ====
 

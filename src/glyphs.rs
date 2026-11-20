@@ -307,7 +307,7 @@ impl Glyphs {
 }
 
 /// Truncates `s` with a trailing `~` so its rendered width fits within `max_w`.
-fn fit_label(c: &Canvas, s: &str, max_w: f32, size: f32) -> String {
+pub(crate) fn fit_label(c: &Canvas, s: &str, max_w: f32, size: f32) -> String {
     if s.is_empty() || c.text_w_raw(s, size) <= max_w {
         return s.to_string();
     }

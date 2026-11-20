@@ -874,9 +874,6 @@ te స్క్రీన్ షేడర్
 @ Screen Shake
 te స్క్రీన్ కంపనం
 
-@ Search LAN
-te LAN లో వెతుకు
-
 @ Seconds a center-screen message stays up
 te మధ్య సందేశం ఎన్ని సెకన్లు కనిపిస్తుంది
 
@@ -3398,6 +3395,60 @@ te కదపడానికి పైకి మరియు కిందిక�
 
 @ View
 te వీక్షణ
+
+@ Server Browser
+te సర్వర్ల జాబితా
+
+@ Internet
+te ఇంటర్నెట్
+
+@ Filters
+te ఫిల్టర్లు
+
+@ Refresh
+te తాజా చేయి
+
+@ Favorites
+te ఇష్టమైనవి
+
+@ Ping
+te పింగ్
+
+@ Protocol
+te ప్రోటోకాల్
+
+@ Players
+te ఆటగాళ్లు
+
+@ Unknown
+te తెలియదు
+
+@ Empty
+te ఖాళీ
+
+@ Populated
+te ఆటగాళ్లు ఉన్నవి
+
+@ Open slots
+te ఖాళీ స్థానాలు
+
+@ Full
+te నిండినవి
+
+@ Deathmatch
+te డెత్‌మ్యాచ్
+
+@ Mod
+te మోడ్
+
+@ No servers found
+te ఏ సర్వర్లూ కనబడలేదు
+
+@ No matching servers
+te ఫిల్టర్లకు సరిపోయే సర్వర్లు లేవు
+
+@ Server search failed
+te సర్వర్ల శోధన విఫలమైంది
 
 # ==== hud.txt ====
 

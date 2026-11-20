@@ -874,9 +874,6 @@ eu Pantaila-shaderra
 @ Screen Shake
 eu Pantailaren dardara
 
-@ Search LAN
-eu Bilatu LANean
-
 @ Seconds a center-screen message stays up
 eu Erdiko mezu bat pantailan dirauen segundoak
 
@@ -3398,6 +3395,60 @@ eu Erabili Gora eta Behera geziak mugitzeko, Enter kokatzeko, Esc uzteko
 
 @ View
 eu Ikuspegia
+
+@ Server Browser
+eu Zerbitzari-zerrenda
+
+@ Internet
+eu Internet
+
+@ Filters
+eu Iragazkiak
+
+@ Refresh
+eu Freskatu
+
+@ Favorites
+eu Gogokoak
+
+@ Ping
+eu Pinga
+
+@ Protocol
+eu Protokoloa
+
+@ Players
+eu Jokalariak
+
+@ Unknown
+eu Ezezaguna
+
+@ Empty
+eu Hutsik
+
+@ Populated
+eu Jokalariekin
+
+@ Open slots
+eu Leku libreak
+
+@ Full
+eu Beteta
+
+@ Deathmatch
+eu Heriotza partida
+
+@ Mod
+eu Mod
+
+@ No servers found
+eu Ez da zerbitzaririk aurkitu
+
+@ No matching servers
+eu Ez dago iragazkiekin bat datorren zerbitzaririk
+
+@ Server search failed
+eu Zerbitzarien bilaketak huts egin du
 
 # ==== hud.txt ====
 

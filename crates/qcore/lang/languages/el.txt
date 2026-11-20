@@ -874,9 +874,6 @@ el Shader οθόνης
 @ Screen Shake
 el Κούνημα οθόνης
 
-@ Search LAN
-el Αναζήτηση LAN
-
 @ Seconds a center-screen message stays up
 el Δευτερόλεπτα που μένει ένα μήνυμα στο κέντρο της οθόνης
 
@@ -3398,6 +3395,60 @@ el Χρησιμοποιήστε βέλη Πάνω/Κάτω για μετακίν
 
 @ View
 el Προβολή
+
+@ Server Browser
+el Λίστα διακομιστών
+
+@ Internet
+el Διαδίκτυο
+
+@ Filters
+el Φίλτρα
+
+@ Refresh
+el Ανανέωση
+
+@ Favorites
+el Αγαπημένα
+
+@ Ping
+el Ping
+
+@ Protocol
+el Πρωτόκολλο
+
+@ Players
+el Παίκτες
+
+@ Unknown
+el Άγνωστο
+
+@ Empty
+el Κενοί
+
+@ Populated
+el Με παίκτες
+
+@ Open slots
+el Ελεύθερες θέσεις
+
+@ Full
+el Πλήρεις
+
+@ Deathmatch
+el Μάχη μέχρι θανάτου
+
+@ Mod
+el Mod
+
+@ No servers found
+el Δεν βρέθηκαν διακομιστές
+
+@ No matching servers
+el Δεν υπάρχουν διακομιστές που να ταιριάζουν
+
+@ Server search failed
+el Η αναζήτηση διακομιστών απέτυχε
 
 # ==== hud.txt ====
 

@@ -874,9 +874,6 @@ be Экранны шэйдар
 @ Screen Shake
 be Трасянне экрана
 
-@ Search LAN
-be Пошук у лакальнай сетцы
-
 @ Seconds a center-screen message stays up
 be Колькі секунд трымаецца паведамленне ў цэнтры экрана
 
@@ -3398,6 +3395,60 @@ be Выкарыстоўвайце стрэлкі ўверх і ўніз для �
 
 @ View
 be Выгляд
+
+@ Server Browser
+be Спіс сервераў
+
+@ Internet
+be Інтэрнэт
+
+@ Filters
+be Фільтры
+
+@ Refresh
+be Абнавіць
+
+@ Favorites
+be Абранае
+
+@ Ping
+be Пінг
+
+@ Protocol
+be Пратакол
+
+@ Players
+be Гульцы
+
+@ Unknown
+be Невядома
+
+@ Empty
+be Пустыя
+
+@ Populated
+be З гульцамі
+
+@ Open slots
+be Вольныя месцы
+
+@ Full
+be Поўныя
+
+@ Deathmatch
+be Бой насмерць
+
+@ Mod
+be Мод
+
+@ No servers found
+be Серверы не знойдзены
+
+@ No matching servers
+be Няма прыдатных сервераў
+
+@ Server search failed
+be Не ўдалося выканаць пошук сервераў
 
 # ==== hud.txt ====
 

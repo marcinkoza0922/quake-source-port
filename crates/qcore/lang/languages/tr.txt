@@ -874,9 +874,6 @@ tr Ekran Gölgelendiricisi
 @ Screen Shake
 tr Ekran Sarsıntısı
 
-@ Search LAN
-tr LAN'da Ara
-
 @ Seconds a center-screen message stays up
 tr Ekran ortasındaki mesajın kalma süresi (saniye)
 
@@ -3398,6 +3395,60 @@ tr Taşımak için Yukarı/Aşağı okları, yerleştirmek için Enter'ı, iptal
 
 @ View
 tr Görünüm
+
+@ Server Browser
+tr Sunucu listesi
+
+@ Internet
+tr İnternet
+
+@ Filters
+tr Filtreler
+
+@ Refresh
+tr Yenile
+
+@ Favorites
+tr Favoriler
+
+@ Ping
+tr Ping
+
+@ Protocol
+tr Protokol
+
+@ Players
+tr Oyuncular
+
+@ Unknown
+tr Bilinmiyor
+
+@ Empty
+tr Boş
+
+@ Populated
+tr Oyunculu
+
+@ Open slots
+tr Boş yer var
+
+@ Full
+tr Dolu
+
+@ Deathmatch
+tr Ölüm maçı
+
+@ Mod
+tr Mod
+
+@ No servers found
+tr Sunucu bulunamadı
+
+@ No matching servers
+tr Filtrelere uyan sunucu yok
+
+@ Server search failed
+tr Sunucu araması başarısız
 
 # ==== hud.txt ====
 

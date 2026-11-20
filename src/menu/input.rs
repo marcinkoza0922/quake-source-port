@@ -54,6 +54,9 @@ impl Menu {
             self.dir_browser.drag_to(pos.1, g);
             return None;
         }
+        if self.screen == Screen::ServerBrowser {
+            return self.server_browser_hover(pos);
+        }
         if self.screen == Screen::DirBrowser {
             return self.dir_browser.mouse_move(pos);
         }
@@ -128,6 +131,10 @@ impl Menu {
         }
         if let Some(o) = self.osk {
             self.osk_key(key, o, cv, &mut out);
+            return out;
+        }
+        if self.screen == Screen::ServerBrowser {
+            self.server_browser_key(key, cv, &mut out);
             return out;
         }
         if let (Some(d), Screen::OptionsPage(p)) = (self.drop, self.screen) {
@@ -308,7 +315,7 @@ impl Menu {
                     out.push(Action::Command(format!("_death_choice {}\n", choice + 1)));
                 }
             }
-            Screen::None | Screen::HudEditor | Screen::DirBrowser => {}
+            Screen::None | Screen::HudEditor | Screen::DirBrowser | Screen::ServerBrowser => {}
             Screen::Help => {}
             Screen::Main => {
                 if back {
@@ -514,31 +521,8 @@ impl Menu {
                         }
                         return out;
                     }
-                    Item::Browser(BrowserRow::SearchInternet) => {
-                        if enter && !self.searching {
-                            out.push(Action::Command("slist_internet\n".into()));
-                            out.push(Action::Sound("misc/menu2.wav"));
-                        }
-                        return out;
-                    }
                     Item::Run { run, .. } if enter => {
                         self.run(run, cv, &mut out);
-                        return out;
-                    }
-                    Item::Server(k) => {
-                        if enter {
-                            if let Some(sv) = self.servers.get(k) {
-                                cv.set("_mp_address", &sv.connect_address());
-                                self.run(Run::Connect, cv, &mut out);
-                            }
-                        } else if (matches!(key, K_YBUTTON | K_XBUTTON) || key == b'f' as i32 || key == b'F' as i32 || key == b'*' as i32)
-                            && let Some(sv) = self.servers.get_mut(k)
-                        {
-                            sv.favorite = !sv.favorite;
-                            let addr = sv.connect_address();
-                            out.push(Action::Command(format!("server_fav \"{addr}\"\n")));
-                            out.push(Action::Sound("misc/menu2.wav"));
-                        }
                         return out;
                     }
                     Item::Run { .. } => return out,

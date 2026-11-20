@@ -874,9 +874,6 @@ pl Shader ekranu
 @ Screen Shake
 pl Wstrząsy ekranu
 
-@ Search LAN
-pl Szukaj w sieci LAN
-
 @ Seconds a center-screen message stays up
 pl Ile sekund komunikat na środku ekranu jest widoczny
 
@@ -3398,6 +3395,60 @@ pl Strzałki góra/dół: przesuń, Enter: umieść, Esc: anuluj
 
 @ View
 pl Widok
+
+@ Server Browser
+pl Przeglądarka serwerów
+
+@ Internet
+pl Internet
+
+@ Filters
+pl Filtry
+
+@ Refresh
+pl Odśwież
+
+@ Favorites
+pl Ulubione
+
+@ Ping
+pl Ping
+
+@ Protocol
+pl Protokół
+
+@ Players
+pl Gracze
+
+@ Unknown
+pl Nieznany
+
+@ Empty
+pl Puste
+
+@ Populated
+pl Z graczami
+
+@ Open slots
+pl Wolne miejsca
+
+@ Full
+pl Pełne
+
+@ Deathmatch
+pl Deathmatch
+
+@ Mod
+pl Mod
+
+@ No servers found
+pl Nie znaleziono serwerów
+
+@ No matching servers
+pl Brak pasujących serwerów
+
+@ Server search failed
+pl Wyszukiwanie serwerów nie powiodło się
 
 # ==== hud.txt ====
 

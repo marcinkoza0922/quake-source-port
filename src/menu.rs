@@ -49,6 +49,8 @@ mod textedit;
 mod search_keywords;
 mod dir_browser;
 mod weapon_priority;
+mod server_browser;
+pub(crate) use server_browser::SearchStatus;
 pub mod demos;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -67,6 +69,7 @@ pub enum Screen {
     /// Map Packs > Get more maps (Quaddicted archive).
     ModOnline,
     Multiplayer,
+    ServerBrowser,
     /// The user manual (main menu → Help).
     Help,
     /// Main menu → Demos: saved and automatic demos.
@@ -225,10 +228,7 @@ pub struct Menu {
     pub shader_params: Vec<qrender::ShaderParam>,
     /// Soundtrack packs `(id, label)` for Options → Audio (filled by the host).
     pub soundtracks: Vec<(String, String)>,
-    /// Server browser results, active filters/sorting, and whether a search is running.
-    pub servers: Vec<ServerEntry>,
-    pub browser: crate::net::browser::BrowserFilter,
-    pub searching: bool,
+    server_browser: server_browser::ServerBrowser,
     /// Key bindings snapshot (host refreshes it while the menu is open).
     pub bindings: Vec<Option<String>>,
     /// Conditional Controls row, refreshed from cvars before draw/input.
@@ -364,9 +364,7 @@ impl Menu {
             shader_presets: Vec::new(),
             shader_params: Vec::new(),
             soundtracks: Vec::new(),
-            servers: Vec::new(),
-            browser: Default::default(),
-            searching: false,
+            server_browser: server_browser::ServerBrowser::default(),
             bindings: vec![None; MAX_KEYS],
             autoaim_conflicts: Vec::new(),
             autoaim_prompt: false,
@@ -434,6 +432,9 @@ impl Menu {
     pub fn text(&mut self, ch: char, cv: &mut Cvars) {
         if self.screen == Screen::HudEditor {
             return self.hud_edit.text(ch);
+        }
+        if self.screen == Screen::ServerBrowser && self.server_browser_accepts_text() {
+            return self.server_browser_type(ch);
         }
         if self.drop.is_none() {
             self.text_insert(ch.encode_utf8(&mut [0; 4]), cv);
@@ -529,7 +530,13 @@ impl Menu {
             Screen::Options if self.searching() && self.search_hits() == 0 => None,
             Screen::Options => row(ROW0, ROW_H, self.hub_rows(), PANEL_X, PANEL_X + PANEL_W).map(|r| r + if self.searching() { self.search_scroll() } else { 0 }),
             Screen::OptionsPage(p) => {
-                row(PAGE_ROW0, ROW_H, self.page_vis(p), PANEL_X, PANEL_X + PANEL_W).map(|r| r + self.page_scroll(p))
+                let i = row(PAGE_ROW0, ROW_H, self.page_vis(p), PANEL_X, PANEL_X + PANEL_W)? + self.page_scroll(p);
+                if matches!(self.page_item(p, i), Item::Run { run: Run::BrowseServers, .. })
+                    && !server_browser::hit(server_browser::server_browser_button(self.page_row_y(p, i)), (x, y))
+                {
+                    return None;
+                }
+                Some(i)
             }
             Screen::Multiplayer => row(cy + 32.0, 20.0, 3, cx + 54.0, cx + 312.0),
             Screen::Quit => QUIT_BUTTONS
@@ -537,7 +544,7 @@ impl Menu {
                 .position(|&bx| x >= bx && x < bx + QUIT_BTN.0 && y >= QUIT_BTN_Y && y < QUIT_BTN_Y + QUIT_BTN.1),
             Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.item_at(self.mods_page(), (x, y)),
             Screen::Help => self.help.item_at((x, y)),
-            Screen::Demos | Screen::None | Screen::HudEditor | Screen::DirBrowser => None,
+            Screen::Demos | Screen::None | Screen::HudEditor | Screen::DirBrowser | Screen::ServerBrowser => None,
         }
     }
 
@@ -566,7 +573,7 @@ impl Menu {
             }
             // hovering doesn't switch sections; a click does
             Screen::Help => None,
-            Screen::Demos | Screen::None | Screen::HudEditor | Screen::DirBrowser => None,
+            Screen::Demos | Screen::None | Screen::HudEditor | Screen::DirBrowser | Screen::ServerBrowser => None,
         }
     }
 

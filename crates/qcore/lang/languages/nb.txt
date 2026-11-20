@@ -874,9 +874,6 @@ nb Skjermshader
 @ Screen Shake
 nb Skjermristing
 
-@ Search LAN
-nb Søk i LAN
-
 @ Seconds a center-screen message stays up
 nb Sekunder en melding midt på skjermen vises
 
@@ -3398,6 +3395,60 @@ nb Bruk pil opp og ned til å flytte, Enter til å plassere, Esc til å avbryte
 
 @ View
 nb Visning
+
+@ Server Browser
+nb Serverliste
+
+@ Internet
+nb Internett
+
+@ Filters
+nb Filtre
+
+@ Refresh
+nb Oppdater
+
+@ Favorites
+nb Favoritter
+
+@ Ping
+nb Ping
+
+@ Protocol
+nb Protokoll
+
+@ Players
+nb Spillere
+
+@ Unknown
+nb Ukjent
+
+@ Empty
+nb Tomme
+
+@ Populated
+nb Med spillere
+
+@ Open slots
+nb Ledige plasser
+
+@ Full
+nb Fulle
+
+@ Deathmatch
+nb Dødskamp
+
+@ Mod
+nb Mod
+
+@ No servers found
+nb Fant ingen servere
+
+@ No matching servers
+nb Ingen samsvarende servere
+
+@ Server search failed
+nb Serversøket mislyktes
 
 # ==== hud.txt ====
 

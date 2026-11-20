@@ -874,9 +874,6 @@ ta திரை ஷேடர்
 @ Screen Shake
 ta திரை அதிர்வு
 
-@ Search LAN
-ta LAN-இல் தேடு
-
 @ Seconds a center-screen message stays up
 ta மையச் செய்தி திரையில் இருக்கும் வினாடிகள்
 
@@ -3398,6 +3395,60 @@ ta நகர்த்த மேல் மற்றும் கீழ் அம�
 
 @ View
 ta பார்வை
+
+@ Server Browser
+ta சேவையகப் பட்டியல்
+
+@ Internet
+ta இணையம்
+
+@ Filters
+ta வடிகட்டிகள்
+
+@ Refresh
+ta புதுப்பி
+
+@ Favorites
+ta பிடித்தவை
+
+@ Ping
+ta பிங்
+
+@ Protocol
+ta நெறிமுறை
+
+@ Players
+ta வீரர்கள்
+
+@ Unknown
+ta தெரியவில்லை
+
+@ Empty
+ta காலி
+
+@ Populated
+ta வீரர்கள் உள்ளனர்
+
+@ Open slots
+ta காலியிடங்கள்
+
+@ Full
+ta நிரம்பியவை
+
+@ Deathmatch
+ta மரணப் போட்டி
+
+@ Mod
+ta மாட்
+
+@ No servers found
+ta சேவையகங்கள் எதுவும் கிடைக்கவில்லை
+
+@ No matching servers
+ta வடிகட்டிகளுக்குப் பொருந்தும் சேவையகங்கள் இல்லை
+
+@ Server search failed
+ta சேவையகங்களைத் தேட முடியவில்லை
 
 # ==== hud.txt ====
 

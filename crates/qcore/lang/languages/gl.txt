@@ -874,9 +874,6 @@ gl Sombreador de pantalla
 @ Screen Shake
 gl Tremor de pantalla
 
-@ Search LAN
-gl Buscar na LAN
-
 @ Seconds a center-screen message stays up
 gl Segundos que permanece unha mensaxe no centro da pantalla
 
@@ -3398,6 +3395,60 @@ gl Usa as frechas Arriba e Abaixo para mover, Intro para colocar, Esc para cance
 
 @ View
 gl Vista
+
+@ Server Browser
+gl Lista de servidores
+
+@ Internet
+gl Internet
+
+@ Filters
+gl Filtros
+
+@ Refresh
+gl Actualizar
+
+@ Favorites
+gl Favoritos
+
+@ Ping
+gl Ping
+
+@ Protocol
+gl Protocolo
+
+@ Players
+gl Xogadores
+
+@ Unknown
+gl Descoñecido
+
+@ Empty
+gl Baleiros
+
+@ Populated
+gl Con xogadores
+
+@ Open slots
+gl Prazas libres
+
+@ Full
+gl Cheos
+
+@ Deathmatch
+gl Combate a morte
+
+@ Mod
+gl Mod
+
+@ No servers found
+gl Non se atopou ningún servidor
+
+@ No matching servers
+gl Ningún servidor coincide cos filtros
+
+@ Server search failed
+gl Fallou a busca de servidores
 
 # ==== hud.txt ====
 

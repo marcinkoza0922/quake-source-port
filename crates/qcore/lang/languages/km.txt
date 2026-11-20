@@ -874,9 +874,6 @@ km Shader អេក្រង់
 @ Screen Shake
 km ការ​ញ័រ​អេក្រង់
 
-@ Search LAN
-km ស្វែង​រក LAN
-
 @ Seconds a center-screen message stays up
 km ចំនួន​វិនាទី​ដែល​សារ​កណ្ដាល​អេក្រង់​នៅ​បង្ហាញ
 
@@ -3398,6 +3395,60 @@ km ប្រើ​ព្រួញ​ឡើង​និង​ចុះ​ដើ�
 
 @ View
 km ទិដ្ឋភាព
+
+@ Server Browser
+km បញ្ជី​ម៉ាស៊ីនមេ
+
+@ Internet
+km អ៊ីនធឺណិត
+
+@ Filters
+km តម្រង
+
+@ Refresh
+km ធ្វើ​បច្ចុប្បន្នភាព
+
+@ Favorites
+km ចំណូលចិត្ត
+
+@ Ping
+km ភីង
+
+@ Protocol
+km ពិធីការ
+
+@ Players
+km អ្នក​លេង
+
+@ Unknown
+km មិន​ស្គាល់
+
+@ Empty
+km ទទេ
+
+@ Populated
+km មាន​អ្នក​លេង
+
+@ Open slots
+km មាន​កន្លែង​ទំនេរ
+
+@ Full
+km ពេញ
+
+@ Deathmatch
+km ប្រកួត​ដល់​ស្លាប់
+
+@ Mod
+km ម៉ូដ
+
+@ No servers found
+km រក​មិន​ឃើញ​ម៉ាស៊ីនមេ
+
+@ No matching servers
+km គ្មាន​ម៉ាស៊ីនមេ​ដែល​ត្រូវ​នឹង​តម្រង
+
+@ Server search failed
+km ការ​ស្វែងរក​ម៉ាស៊ីនមេ​បាន​បរាជ័យ
 
 # ==== hud.txt ====
 

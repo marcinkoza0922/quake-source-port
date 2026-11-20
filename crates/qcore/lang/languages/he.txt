@@ -874,9 +874,6 @@ he שיידר מסך
 @ Screen Shake
 he רעידות מסך
 
-@ Search LAN
-he חיפוש ברשת מקומית
-
 @ Seconds a center-screen message stays up
 he כמה שניות הודעה במרכז המסך נשארת
 
@@ -3398,6 +3395,60 @@ he השתמש בחצי למעלה ולמטה להזזה, Enter למיקום, Esc
 
 @ View
 he תצוגה
+
+@ Server Browser
+he רשימת שרתים
+
+@ Internet
+he אינטרנט
+
+@ Filters
+he מסננים
+
+@ Refresh
+he רענון
+
+@ Favorites
+he מועדפים
+
+@ Ping
+he פינג
+
+@ Protocol
+he פרוטוקול
+
+@ Players
+he שחקנים
+
+@ Unknown
+he לא ידוע
+
+@ Empty
+he ריקים
+
+@ Populated
+he עם שחקנים
+
+@ Open slots
+he מקומות פנויים
+
+@ Full
+he מלאים
+
+@ Deathmatch
+he קרב עד המוות
+
+@ Mod
+he מוד
+
+@ No servers found
+he לא נמצאו שרתים
+
+@ No matching servers
+he אין שרתים שתואמים למסננים
+
+@ Server search failed
+he החיפוש אחר שרתים נכשל
 
 # ==== hud.txt ====
 

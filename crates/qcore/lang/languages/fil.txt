@@ -874,9 +874,6 @@ fil Shader ng Screen
 @ Screen Shake
 fil Yanig ng Screen
 
-@ Search LAN
-fil Maghanap sa LAN
-
 @ Seconds a center-screen message stays up
 fil Ilang segundo nakikita ang mensahe sa gitna ng screen
 
@@ -3398,6 +3395,60 @@ fil Gamitin ang Pataas at Pababang arrow upang ilipat, Enter upang ilagay, Esc u
 
 @ View
 fil Tanaw
+
+@ Server Browser
+fil Listahan ng mga server
+
+@ Internet
+fil Internet
+
+@ Filters
+fil Mga filter
+
+@ Refresh
+fil I-refresh
+
+@ Favorites
+fil Mga paborito
+
+@ Ping
+fil Ping
+
+@ Protocol
+fil Protocol
+
+@ Players
+fil Mga manlalaro
+
+@ Unknown
+fil Hindi alam
+
+@ Empty
+fil Walang laman
+
+@ Populated
+fil May manlalaro
+
+@ Open slots
+fil May bakante
+
+@ Full
+fil Puno
+
+@ Deathmatch
+fil Deathmatch
+
+@ Mod
+fil Mod
+
+@ No servers found
+fil Walang nahanap na server
+
+@ No matching servers
+fil Walang tumutugmang server
+
+@ Server search failed
+fil Nabigo ang paghahanap ng mga server
 
 # ==== hud.txt ====
 

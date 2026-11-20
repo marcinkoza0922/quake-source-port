@@ -874,9 +874,6 @@ th เชดเดอร์​หน้า​จอ
 @ Screen Shake
 th จอ​สั่น
 
-@ Search LAN
-th ค้นหา LAN
-
 @ Seconds a center-screen message stays up
 th จำนวน​วินาที​ที่​ข้อความ​กลาง​จอ​แสดง​อยู่
 
@@ -3398,6 +3395,60 @@ th ใช้​ลูกศร​ขึ้น​และ​ลง​เพื�
 
 @ View
 th มุม​มอง
+
+@ Server Browser
+th รายการ​เซิร์ฟเวอร์
+
+@ Internet
+th อินเทอร์เน็ต
+
+@ Filters
+th ตัวกรอง
+
+@ Refresh
+th รีเฟรช
+
+@ Favorites
+th รายการโปรด
+
+@ Ping
+th ปิง
+
+@ Protocol
+th โปรโตคอล
+
+@ Players
+th ผู้เล่น
+
+@ Unknown
+th ไม่ทราบ
+
+@ Empty
+th ว่าง
+
+@ Populated
+th มี​ผู้เล่น
+
+@ Open slots
+th มี​ที่ว่าง
+
+@ Full
+th เต็ม
+
+@ Deathmatch
+th เดธแมตช์
+
+@ Mod
+th ม็อด
+
+@ No servers found
+th ไม่พบ​เซิร์ฟเวอร์
+
+@ No matching servers
+th ไม่พบ​เซิร์ฟเวอร์​ที่​ตรง​กับ​ตัวกรอง
+
+@ Server search failed
+th ค้นหา​เซิร์ฟเวอร์​ไม่สำเร็จ
 
 # ==== hud.txt ====
 

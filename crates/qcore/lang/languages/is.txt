@@ -874,9 +874,6 @@ is Skjáskyggir
 @ Screen Shake
 is Skjáhristingur
 
-@ Search LAN
-is Leita á staðarneti
-
 @ Seconds a center-screen message stays up
 is Sekúndur sem skilaboð á miðjum skjá haldast
 
@@ -3398,6 +3395,60 @@ is Notaðu upp- og niðurörvar til að færa, Enter til að setja, Esc til að 
 
 @ View
 is Sýn
+
+@ Server Browser
+is Netþjónalisti
+
+@ Internet
+is Internet
+
+@ Filters
+is Síur
+
+@ Refresh
+is Endurhlaða
+
+@ Favorites
+is Eftirlæti
+
+@ Ping
+is Ping
+
+@ Protocol
+is Samskiptaregla
+
+@ Players
+is Spilarar
+
+@ Unknown
+is Óþekkt
+
+@ Empty
+is Tómir
+
+@ Populated
+is Með spilurum
+
+@ Open slots
+is Laus pláss
+
+@ Full
+is Fullir
+
+@ Deathmatch
+is Dauðaleikur
+
+@ Mod
+is Modd
+
+@ No servers found
+is Engir netþjónar fundust
+
+@ No matching servers
+is Engir netþjónar passa við síurnar
+
+@ Server search failed
+is Leit að netþjónum mistókst
 
 # ==== hud.txt ====
 

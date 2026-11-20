@@ -874,9 +874,6 @@ pa ਸਕ੍ਰੀਨ ਸ਼ੇਡਰ
 @ Screen Shake
 pa ਸਕ੍ਰੀਨ ਹਿੱਲਣਾ
 
-@ Search LAN
-pa LAN ਖੋਜੋ
-
 @ Seconds a center-screen message stays up
 pa ਵਿਚਕਾਰਲਾ ਸੁਨੇਹਾ ਕਿੰਨੇ ਸਕਿੰਟ ਦਿਸਦਾ ਹੈ
 
@@ -3398,6 +3395,60 @@ pa ਹਿਲਾਉਣ ਲਈ ਉੱਪਰ ਅਤੇ ਹੇਠਾਂ ਤੀਰ, �
 
 @ View
 pa ਦ੍ਰਿਸ਼
+
+@ Server Browser
+pa ਸਰਵਰ ਸੂਚੀ
+
+@ Internet
+pa ਇੰਟਰਨੈੱਟ
+
+@ Filters
+pa ਫਿਲਟਰ
+
+@ Refresh
+pa ਤਾਜ਼ਾ ਕਰੋ
+
+@ Favorites
+pa ਮਨਪਸੰਦ
+
+@ Ping
+pa ਪਿੰਗ
+
+@ Protocol
+pa ਪ੍ਰੋਟੋਕੋਲ
+
+@ Players
+pa ਖਿਡਾਰੀ
+
+@ Unknown
+pa ਅਣਜਾਣ
+
+@ Empty
+pa ਖਾਲੀ
+
+@ Populated
+pa ਖਿਡਾਰੀ ਹਨ
+
+@ Open slots
+pa ਖਾਲੀ ਥਾਂਵਾਂ
+
+@ Full
+pa ਭਰੇ ਹੋਏ
+
+@ Deathmatch
+pa ਡੈਥਮੈਚ
+
+@ Mod
+pa ਮੋਡ
+
+@ No servers found
+pa ਕੋਈ ਸਰਵਰ ਨਹੀਂ ਮਿਲਿਆ
+
+@ No matching servers
+pa ਫਿਲਟਰਾਂ ਨਾਲ ਮੇਲ ਖਾਂਦਾ ਕੋਈ ਸਰਵਰ ਨਹੀਂ ਹੈ
+
+@ Server search failed
+pa ਸਰਵਰ ਖੋਜ ਅਸਫਲ ਰਹੀ
 
 # ==== hud.txt ====
 

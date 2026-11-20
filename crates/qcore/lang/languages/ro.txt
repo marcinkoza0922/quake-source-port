@@ -874,9 +874,6 @@ ro Shader de ecran
 @ Screen Shake
 ro Tremur ecran
 
-@ Search LAN
-ro Caută în LAN
-
 @ Seconds a center-screen message stays up
 ro Secunde cât rămâne afișat un mesaj din centrul ecranului
 
@@ -3398,6 +3395,60 @@ ro Folosește săgețile Sus și Jos pentru a muta, Enter pentru a plasa, Esc pe
 
 @ View
 ro Vedere
+
+@ Server Browser
+ro Listă de servere
+
+@ Internet
+ro Internet
+
+@ Filters
+ro Filtre
+
+@ Refresh
+ro Reîmprospătează
+
+@ Favorites
+ro Favorite
+
+@ Ping
+ro Ping
+
+@ Protocol
+ro Protocol
+
+@ Players
+ro Jucători
+
+@ Unknown
+ro Necunoscut
+
+@ Empty
+ro Goale
+
+@ Populated
+ro Cu jucători
+
+@ Open slots
+ro Locuri libere
+
+@ Full
+ro Pline
+
+@ Deathmatch
+ro Deathmatch
+
+@ Mod
+ro Mod
+
+@ No servers found
+ro Nu s-au găsit servere
+
+@ No matching servers
+ro Niciun server nu corespunde filtrelor
+
+@ Server search failed
+ro Căutarea serverelor a eșuat
 
 # ==== hud.txt ====
 

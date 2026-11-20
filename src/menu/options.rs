@@ -77,24 +77,7 @@ impl Menu {
                 let i = (self.hud_preset_index(cv) as i32 + dir).rem_euclid(n) as usize;
                 self.set_hud_preset(i, cv);
             }
-            Item::Browser(row) => {
-                if row == BrowserRow::SearchInternet {
-                    return false;
-                }
-                if row == BrowserRow::HideEmpty {
-                    self.browser.hide_empty = !self.browser.hide_empty;
-                    return true;
-                }
-                let opts = self.browser_options(row);
-                let n = opts.len() as i32;
-                if n <= 1 {
-                    return false;
-                }
-                let cur = self.browser_option_index(row);
-                let i = (cur as i32 + dir).rem_euclid(n) as usize;
-                self.set_browser_option(row, i);
-            }
-            Item::Text { .. } | Item::Run { .. } | Item::Server(_) | Item::Bind { .. } | Item::ResetBinds | Item::ResetShaderParams | Item::Sub { .. } | Item::UserDataDir => return false,
+            Item::Text { .. } | Item::Run { .. } | Item::Bind { .. } | Item::ResetBinds | Item::ResetShaderParams | Item::Sub { .. } | Item::UserDataDir => return false,
             Item::Apply => {
                 if !enter || !self.display_dirty(cv) {
                     return false;
@@ -131,7 +114,6 @@ impl Menu {
             Item::Language => language_options(),
             Item::Soundtrack => self.soundtrack_options(),
             Item::HudPreset => self.hud_preset_options(),
-            Item::Browser(row) => self.browser_options(row),
             _ => Vec::new(),
         }
     }
@@ -148,7 +130,6 @@ impl Menu {
             Item::Language => language_index(cv),
             Item::Soundtrack => self.soundtrack_index(cv),
             Item::HudPreset => self.hud_preset_index(cv),
-            Item::Browser(row) => self.browser_option_index(row),
             _ => 0,
         }
     }
@@ -170,70 +151,7 @@ impl Menu {
             Item::Language => set_language(cv, i),
             Item::Soundtrack => self.set_soundtrack(i, cv),
             Item::HudPreset => self.set_hud_preset(i, cv),
-            Item::Browser(row) => self.set_browser_option(row, i),
             _ => {}
-        }
-    }
-
-    pub(super) fn browser_mod_options(&self) -> Vec<String> {
-        let mut mods = vec!["All".to_string(), "id1".to_string(), "qw".to_string()];
-        for s in &self.servers {
-            let g = s.effective_gamedir();
-            if !mods.iter().any(|m| m.eq_ignore_ascii_case(g)) {
-                mods.push(g.to_string());
-            }
-        }
-        mods
-    }
-
-    pub(super) fn browser_options(&self, row: BrowserRow) -> Vec<String> {
-        match row {
-            BrowserRow::Source => ["All", "Internet", "LAN", "Favorites", "Recent"].into_iter().map(String::from).collect(),
-            BrowserRow::Protocol => ["All", "NetQuake", "QuakeWorld", "FTE / DP"].into_iter().map(String::from).collect(),
-            BrowserRow::Mode => ["All", "Deathmatch", "Cooperative", "Teamplay"].into_iter().map(String::from).collect(),
-            BrowserRow::ModFilter => self.browser_mod_options(),
-            BrowserRow::SortBy => ["Ping", "Players", "Name", "Map"].into_iter().map(String::from).collect(),
-            BrowserRow::HideEmpty | BrowserRow::SearchInternet => Vec::new(),
-        }
-    }
-
-    pub(super) fn browser_option_index(&self, row: BrowserRow) -> usize {
-        match row {
-            BrowserRow::Source => (self.browser.source as usize).min(4),
-            BrowserRow::Protocol => (self.browser.protocol as usize).min(3),
-            BrowserRow::Mode => (self.browser.mode as usize).min(3),
-            BrowserRow::ModFilter => {
-                if self.browser.mod_filter.is_empty() {
-                    0
-                } else {
-                    self.browser_mod_options()
-                        .iter()
-                        .position(|m| m.eq_ignore_ascii_case(&self.browser.mod_filter))
-                        .unwrap_or(0)
-                }
-            }
-            BrowserRow::SortBy => (self.browser.sort as usize).min(3),
-            BrowserRow::HideEmpty => usize::from(self.browser.hide_empty),
-            BrowserRow::SearchInternet => 0,
-        }
-    }
-
-    pub(super) fn set_browser_option(&mut self, row: BrowserRow, i: usize) {
-        match row {
-            BrowserRow::Source => self.browser.source = i.min(4) as u8,
-            BrowserRow::Protocol => self.browser.protocol = i.min(3) as u8,
-            BrowserRow::Mode => self.browser.mode = i.min(3) as u8,
-            BrowserRow::ModFilter => {
-                let opts = self.browser_mod_options();
-                self.browser.mod_filter = if i == 0 {
-                    String::new()
-                } else {
-                    opts.get(i).cloned().unwrap_or_default()
-                };
-            }
-            BrowserRow::SortBy => self.browser.sort = i.min(3) as u8,
-            BrowserRow::HideEmpty => self.browser.hide_empty = i != 0,
-            BrowserRow::SearchInternet => {}
         }
     }
 

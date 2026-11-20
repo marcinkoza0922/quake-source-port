@@ -874,9 +874,6 @@ mk Екрански шејдер
 @ Screen Shake
 mk Тресење на екранот
 
-@ Search LAN
-mk Барај во LAN
-
 @ Seconds a center-screen message stays up
 mk Секунди колку останува пораката во центар
 
@@ -3398,6 +3395,60 @@ mk Користете стрелки нагоре и надолу за поме�
 
 @ View
 mk Приказ
+
+@ Server Browser
+mk Список на сервери
+
+@ Internet
+mk Интернет
+
+@ Filters
+mk Филтри
+
+@ Refresh
+mk Освежи
+
+@ Favorites
+mk Омилени
+
+@ Ping
+mk Пинг
+
+@ Protocol
+mk Протокол
+
+@ Players
+mk Играчи
+
+@ Unknown
+mk Непознато
+
+@ Empty
+mk Празни
+
+@ Populated
+mk Со играчи
+
+@ Open slots
+mk Слободни места
+
+@ Full
+mk Полни
+
+@ Deathmatch
+mk Борба до смрт
+
+@ Mod
+mk Мод
+
+@ No servers found
+mk Не се пронајдени сервери
+
+@ No matching servers
+mk Нема сервери што одговараат на филтрите
+
+@ Server search failed
+mk Пребарувањето сервери не успеа
 
 # ==== hud.txt ====
 

@@ -874,9 +874,6 @@ zh-CN 屏幕着色器
 @ Screen Shake
 zh-CN 屏幕震动
 
-@ Search LAN
-zh-CN 搜索局域网
-
 @ Seconds a center-screen message stays up
 zh-CN 屏幕中央消息的显示秒数
 
@@ -3398,6 +3395,60 @@ zh-CN 使用上下方向键移动，Enter 放置，Esc 取消
 
 @ View
 zh-CN 视图
+
+@ Server Browser
+zh-CN 服务器浏览器
+
+@ Internet
+zh-CN 互联网
+
+@ Filters
+zh-CN 筛选
+
+@ Refresh
+zh-CN 刷新
+
+@ Favorites
+zh-CN 收藏
+
+@ Ping
+zh-CN 延迟
+
+@ Protocol
+zh-CN 协议
+
+@ Players
+zh-CN 玩家
+
+@ Unknown
+zh-CN 未知
+
+@ Empty
+zh-CN 无人
+
+@ Populated
+zh-CN 有人
+
+@ Open slots
+zh-CN 有空位
+
+@ Full
+zh-CN 已满
+
+@ Deathmatch
+zh-CN 死亡竞赛
+
+@ Mod
+zh-CN 模组
+
+@ No servers found
+zh-CN 未找到服务器
+
+@ No matching servers
+zh-CN 没有符合条件的服务器
+
+@ Server search failed
+zh-CN 服务器搜索失败
 
 # ==== hud.txt ====
 

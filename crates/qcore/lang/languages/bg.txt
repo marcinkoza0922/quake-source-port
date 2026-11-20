@@ -874,9 +874,6 @@ bg Екранен шейдър
 @ Screen Shake
 bg Разклащане на екрана
 
-@ Search LAN
-bg Търсене в LAN
-
 @ Seconds a center-screen message stays up
 bg Секунди, през които съобщението в центъра остава
 
@@ -3398,6 +3395,60 @@ bg Стрелки нагоре и надолу за преместване, Ente
 
 @ View
 bg Изглед
+
+@ Server Browser
+bg Списък със сървъри
+
+@ Internet
+bg Интернет
+
+@ Filters
+bg Филтри
+
+@ Refresh
+bg Обнови
+
+@ Favorites
+bg Любими
+
+@ Ping
+bg Пинг
+
+@ Protocol
+bg Протокол
+
+@ Players
+bg Играчи
+
+@ Unknown
+bg Неизвестно
+
+@ Empty
+bg Празни
+
+@ Populated
+bg С играчи
+
+@ Open slots
+bg Свободни места
+
+@ Full
+bg Пълни
+
+@ Deathmatch
+bg Смъртоносен мач
+
+@ Mod
+bg Мод
+
+@ No servers found
+bg Не са намерени сървъри
+
+@ No matching servers
+bg Няма сървъри, които отговарят на филтрите
+
+@ Server search failed
+bg Търсенето на сървъри е неуспешно
 
 # ==== hud.txt ====
 

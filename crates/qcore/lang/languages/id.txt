@@ -874,9 +874,6 @@ id Shader Layar
 @ Screen Shake
 id Guncangan Layar
 
-@ Search LAN
-id Cari di LAN
-
 @ Seconds a center-screen message stays up
 id Lama pesan di tengah layar ditampilkan (detik)
 
@@ -3398,6 +3395,60 @@ id Gunakan panah Atas dan Bawah untuk memindah, Enter untuk meletakkan, Esc untu
 
 @ View
 id Tampilan
+
+@ Server Browser
+id Daftar server
+
+@ Internet
+id Internet
+
+@ Filters
+id Filter
+
+@ Refresh
+id Segarkan
+
+@ Favorites
+id Favorit
+
+@ Ping
+id Ping
+
+@ Protocol
+id Protokol
+
+@ Players
+id Pemain
+
+@ Unknown
+id Tidak diketahui
+
+@ Empty
+id Kosong
+
+@ Populated
+id Ada pemain
+
+@ Open slots
+id Slot tersedia
+
+@ Full
+id Penuh
+
+@ Deathmatch
+id Deathmatch
+
+@ Mod
+id Mod
+
+@ No servers found
+id Tidak ada server ditemukan
+
+@ No matching servers
+id Tidak ada server yang cocok
+
+@ Server search failed
+id Pencarian server gagal
 
 # ==== hud.txt ====
 

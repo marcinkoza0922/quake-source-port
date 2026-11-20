@@ -874,9 +874,6 @@ mr स्क्रीन शेडर
 @ Screen Shake
 mr स्क्रीन हादरा
 
-@ Search LAN
-mr LAN मध्ये शोधा
-
 @ Seconds a center-screen message stays up
 mr मध्यभागी असलेला संदेश किती सेकंद दिसतो
 
@@ -3398,6 +3395,60 @@ mr हलवण्यासाठी वर आणि खाली बाण, �
 
 @ View
 mr दृश्य
+
+@ Server Browser
+mr सर्व्हर यादी
+
+@ Internet
+mr इंटरनेट
+
+@ Filters
+mr फिल्टर
+
+@ Refresh
+mr ताजे करा
+
+@ Favorites
+mr आवडते
+
+@ Ping
+mr पिंग
+
+@ Protocol
+mr प्रोटोकॉल
+
+@ Players
+mr खेळाडू
+
+@ Unknown
+mr अज्ञात
+
+@ Empty
+mr रिकामे
+
+@ Populated
+mr खेळाडू आहेत
+
+@ Open slots
+mr रिकाम्या जागा
+
+@ Full
+mr भरलेले
+
+@ Deathmatch
+mr डेथमेच
+
+@ Mod
+mr मॉड
+
+@ No servers found
+mr कोणतेही सर्व्हर सापडले नाहीत
+
+@ No matching servers
+mr फिल्टरशी जुळणारे सर्व्हर नाहीत
+
+@ Server search failed
+mr सर्व्हर शोध अयशस्वी झाला
 
 # ==== hud.txt ====
 

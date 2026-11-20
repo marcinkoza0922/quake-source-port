@@ -6,16 +6,10 @@ impl Menu {
             else if cv.value_of("assist_autoaim_mode") == 1.0 { 2 } else { 1 });
     }
 
-    /// Filtered and sorted indices into `self.servers` for `Page::Join`.
-    pub(super) fn visible_servers(&self) -> Vec<usize> {
-        self.browser.filter_and_sort(&self.servers)
-    }
-
-    /// Rows on a page: its static items, plus found servers on Join.
+    /// Number of options on a page, including contextual rows.
     pub(super) fn page_len(&self, p: Page) -> usize {
         page_items(p).len() + usize::from(p == Page::Controls && self.autoaim_mapping.get() != 0)
             + match p {
-                Page::Join => self.visible_servers().len(),
                 Page::ScreenShader => self.shader_params.len(),
                 _ => 0,
             }
@@ -110,14 +104,7 @@ impl Menu {
             }
             if i > 1 { i - 1 } else { i }
         } else { i };
-        let k = i.saturating_sub(items.len());
-        items.get(i).copied().unwrap_or_else(|| {
-            if p == Page::ScreenShader {
-                Item::ShaderParam(k)
-            } else {
-                Item::Server(self.visible_servers().get(k).copied().unwrap_or(k))
-            }
-        })
+        items.get(i).copied().unwrap_or(Item::ShaderParam(i.saturating_sub(items.len())))
     }
 }
 

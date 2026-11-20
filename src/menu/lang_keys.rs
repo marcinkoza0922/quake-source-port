@@ -38,6 +38,10 @@ pub(crate) fn menu_keys() -> Vec<&'static str> {
         out.extend(disabled_reason(item));
     }
     out.extend(MODES.iter().copied());
+    out.extend([
+        "Ping", "Protocol", "Players", "Unknown", "Empty", "Populated", "Open slots", "Full", "Deathmatch",
+        "Mod", "Favorites",
+    ]);
     out.extend(crate::hud::kind::lang_keys());
     out
 }

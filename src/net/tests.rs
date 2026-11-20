@@ -157,7 +157,7 @@ fn lan_search_finds_server() {
     let Some(mut sv) = server(4, "999") else { return };
     let mut ns = NetServer::listen(0).unwrap();
     let saved = browser::SavedServers::default();
-    let mut ls = browser::ServerSearch::start(ns.port(), false, "", "", &saved, 0.0).unwrap();
+    let mut ls = browser::ServerSearch::start(ns.port(), browser::ServerTab::Lan, "", "", &saved, 0.0).unwrap();
     for _ in 0..100 {
         ns.receive(&mut sv, 0.0, "lanhost");
         ls.poll(0.01);
@@ -167,5 +167,46 @@ fn lan_search_finds_server() {
         std::thread::sleep(std::time::Duration::from_millis(5));
     }
     let Some(entry) = ls.found.first() else { panic!("no reply") };
+    assert!(entry.lan);
     assert_eq!((entry.hostname.as_str(), entry.map.as_str(), entry.max_players), ("lanhost", "e1m1", 4));
+}
+
+#[test]
+fn internet_search_probes_master_results_without_broadcasting() {
+    use std::net::UdpSocket;
+    use std::time::{Duration, Instant};
+    let master = UdpSocket::bind((Ipv4Addr::LOCALHOST, 0)).unwrap();
+    let server = UdpSocket::bind((Ipv4Addr::LOCALHOST, 0)).unwrap();
+    master.set_nonblocking(true).unwrap();
+    server.set_nonblocking(true).unwrap();
+
+    let port = server.local_addr().unwrap().port();
+    let mut search = browser::ServerSearch::start(
+        port, browser::ServerTab::Internet, "", &master.local_addr().unwrap().to_string(),
+        &browser::SavedServers::default(), 0.0,
+    ).unwrap();
+
+    let start = Instant::now();
+    let mut buf = [0; 64];
+    let mut listed = false;
+    while search.found.is_empty() && start.elapsed() < Duration::from_secs(1) {
+        search.poll(start.elapsed().as_secs_f64());
+        if let Ok((_, addr)) = master.recv_from(&mut buf) {
+            let mut reply = b"\xff\xff\xff\xffd\n\x7f\x00\x00\x01".to_vec();
+            reply.extend_from_slice(&port.to_be_bytes());
+            master.send_to(&reply, addr).unwrap();
+            listed = true;
+        }
+        if let Ok((len, addr)) = server.recv_from(&mut buf) {
+            assert!(listed);
+            assert_eq!(&buf[..len], b"\xff\xff\xff\xffstatus 23\n");
+            server.send_to(b"\xff\xff\xff\xffn\\hostname\\Master Server Result\\map\\dm4\n", addr).unwrap();
+        }
+        std::thread::sleep(Duration::from_millis(2));
+    }
+
+    let entry = search.found.first().expect("master-listed server reply");
+    assert_eq!(entry.hostname, "Master Server Result");
+    assert_eq!(entry.protocol, browser::ServerProto::QuakeWorld);
+    assert!(!entry.lan);
 }

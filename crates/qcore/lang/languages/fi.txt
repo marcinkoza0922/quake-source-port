@@ -874,9 +874,6 @@ fi Ruudun varjostin
 @ Screen Shake
 fi Ruudun tärinä
 
-@ Search LAN
-fi Hae lähiverkosta
-
 @ Seconds a center-screen message stays up
 fi Montako sekuntia keskiviesti pysyy näkyvissä
 
@@ -3398,6 +3395,60 @@ fi Siirrä ylös- ja alas-nuolilla, aseta Enterillä, peruuta Escillä
 
 @ View
 fi Näkymä
+
+@ Server Browser
+fi Palvelinluettelo
+
+@ Internet
+fi Internet
+
+@ Filters
+fi Suodattimet
+
+@ Refresh
+fi Päivitä
+
+@ Favorites
+fi Suosikit
+
+@ Ping
+fi Viive
+
+@ Protocol
+fi Protokolla
+
+@ Players
+fi Pelaajat
+
+@ Unknown
+fi Tuntematon
+
+@ Empty
+fi Tyhjät
+
+@ Populated
+fi Pelaajia paikalla
+
+@ Open slots
+fi Vapaita paikkoja
+
+@ Full
+fi Täydet
+
+@ Deathmatch
+fi Tappomatsi
+
+@ Mod
+fi Modi
+
+@ No servers found
+fi Palvelimia ei löytynyt
+
+@ No matching servers
+fi Suodattimia vastaavia palvelimia ei ole
+
+@ Server search failed
+fi Palvelinhaku epäonnistui
 
 # ==== hud.txt ====
 

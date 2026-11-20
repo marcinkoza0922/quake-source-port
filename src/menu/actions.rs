@@ -66,10 +66,9 @@ impl Menu {
                 out.push(Action::Close);
                 out.push(Action::Command(format!("connect {a}\n")));
             }
-            Run::Search => {
-                if !self.searching {
-                    out.push(Action::Command("slist\n".into()));
-                }
+            Run::BrowseServers => {
+                self.open_server_browser(out);
+                return;
             }
             Run::NewGame => self.launch_play(cv, out),
             Run::RenameDemo => self.run_rename(cv, out),

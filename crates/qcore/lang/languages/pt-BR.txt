@@ -874,9 +874,6 @@ pt-BR Shader de tela
 @ Screen Shake
 pt-BR Tremor de tela
 
-@ Search LAN
-pt-BR Buscar na LAN
-
 @ Seconds a center-screen message stays up
 pt-BR Segundos que uma mensagem fica no centro da tela
 
@@ -3398,6 +3395,60 @@ pt-BR Use as setas Cima e Baixo para mover, Enter para posicionar, Esc para canc
 
 @ View
 pt-BR Visão
+
+@ Server Browser
+pt-BR Lista de servidores
+
+@ Internet
+pt-BR Internet
+
+@ Filters
+pt-BR Filtros
+
+@ Refresh
+pt-BR Atualizar
+
+@ Favorites
+pt-BR Favoritos
+
+@ Ping
+pt-BR Ping
+
+@ Protocol
+pt-BR Protocolo
+
+@ Players
+pt-BR Jogadores
+
+@ Unknown
+pt-BR Desconhecido
+
+@ Empty
+pt-BR Vazios
+
+@ Populated
+pt-BR Com jogadores
+
+@ Open slots
+pt-BR Vagas abertas
+
+@ Full
+pt-BR Lotados
+
+@ Deathmatch
+pt-BR Mata-mata
+
+@ Mod
+pt-BR Mod
+
+@ No servers found
+pt-BR Nenhum servidor encontrado
+
+@ No matching servers
+pt-BR Nenhum servidor corresponde aos filtros
+
+@ Server search failed
+pt-BR Falha ao buscar servidores
 
 # ==== hud.txt ====
 

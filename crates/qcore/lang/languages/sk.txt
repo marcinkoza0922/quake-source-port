@@ -874,9 +874,6 @@ sk Shader obrazovky
 @ Screen Shake
 sk Otrasy obrazovky
 
-@ Search LAN
-sk Hľadať v LAN
-
 @ Seconds a center-screen message stays up
 sk Ako dlho ostane správa v strede obrazovky (s)
 
@@ -3398,6 +3395,60 @@ sk Šípky hore/dole: presunúť, Enter: umiestniť, Esc: zrušiť
 
 @ View
 sk Pohľad
+
+@ Server Browser
+sk Zoznam serverov
+
+@ Internet
+sk Internet
+
+@ Filters
+sk Filtre
+
+@ Refresh
+sk Obnoviť
+
+@ Favorites
+sk Obľúbené
+
+@ Ping
+sk Ping
+
+@ Protocol
+sk Protokol
+
+@ Players
+sk Hráči
+
+@ Unknown
+sk Neznámy
+
+@ Empty
+sk Prázdne
+
+@ Populated
+sk S hráčmi
+
+@ Open slots
+sk Voľné miesta
+
+@ Full
+sk Plné
+
+@ Deathmatch
+sk Deathmatch
+
+@ Mod
+sk Mod
+
+@ No servers found
+sk Nenašli sa žiadne servery
+
+@ No matching servers
+sk Žiadne zodpovedajúce servery
+
+@ Server search failed
+sk Vyhľadávanie serverov zlyhalo
 
 # ==== hud.txt ====
 

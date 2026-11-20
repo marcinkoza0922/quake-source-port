@@ -72,7 +72,7 @@ pub(super) fn item_label(item: Item) -> Option<&'static str> {
         Item::ResetBinds => "Reset to Defaults",
         Item::ResetShaderParams => "Reset Shader Settings",
         Item::Map => "Map",
-        Item::Server(_) | Item::ShaderParam(_) | Item::Browser(_) => return None,
+        Item::ShaderParam(_) => return None,
     })
 }
 
@@ -233,6 +233,7 @@ impl Menu {
     pub(super) fn osk_char(&mut self, ch: char, cv: &mut Cvars) {
         match self.screen {
             Screen::Options => self.search_type(ch),
+            Screen::ServerBrowser => self.server_browser_type(ch),
             Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.filter_push(self.mods_page(), ch),
             _ => self.text(ch, cv),
         }

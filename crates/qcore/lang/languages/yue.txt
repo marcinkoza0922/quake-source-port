@@ -874,9 +874,6 @@ yue 螢幕著色器
 @ Screen Shake
 yue 螢幕震動
 
-@ Search LAN
-yue 搜尋區域網絡
-
 @ Seconds a center-screen message stays up
 yue 畫面中央訊息停留幾多秒
 
@@ -3398,6 +3395,60 @@ yue 用上下方向掣移動，Enter 擺放，Esc 取消
 
 @ View
 yue 檢視
+
+@ Server Browser
+yue 伺服器列表
+
+@ Internet
+yue 互聯網
+
+@ Filters
+yue 篩選
+
+@ Refresh
+yue 重新整理
+
+@ Favorites
+yue 最愛
+
+@ Ping
+yue 延遲
+
+@ Protocol
+yue 協定
+
+@ Players
+yue 玩家
+
+@ Unknown
+yue 未知
+
+@ Empty
+yue 冇人
+
+@ Populated
+yue 有人
+
+@ Open slots
+yue 有空位
+
+@ Full
+yue 已滿
+
+@ Deathmatch
+yue 死鬥
+
+@ Mod
+yue 模組
+
+@ No servers found
+yue 搵唔到伺服器
+
+@ No matching servers
+yue 冇伺服器符合篩選條件
+
+@ Server search failed
+yue 搜尋伺服器失敗
 
 # ==== hud.txt ====
 

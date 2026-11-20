@@ -12,12 +12,14 @@ impl Menu {
         #[derive(Clone, Copy)]
         enum Target {
             Search,
+            Servers,
             Mods(modmenu::Page),
             Text,
             HudPreset,
         }
         let target = match self.screen {
             Screen::Options => Target::Search,
+            Screen::ServerBrowser => Target::Servers,
             Screen::Mods | Screen::ModMaps | Screen::ModOnline => Target::Mods(self.mods_page()),
             Screen::OptionsPage(p) if matches!(self.page_item(p, self.opt_cursor), Item::Text { .. }) => Target::Text,
             Screen::HudEditor if self.hud_edit.saving_preset() => Target::HudPreset,
@@ -28,6 +30,7 @@ impl Menu {
         };
         let backspace = |m: &mut Self, cv: &mut Cvars| match target {
             Target::Search => m.search_backspace(),
+            Target::Servers => m.server_browser_backspace(),
             Target::Mods(p) => m.mods.filter_pop(p),
             Target::Text => m.text_delete(false, cv),
             Target::HudPreset => m.hud_edit.preset_backspace(),

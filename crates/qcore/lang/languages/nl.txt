@@ -874,9 +874,6 @@ nl Schermshader
 @ Screen Shake
 nl Schermschudden
 
-@ Search LAN
-nl LAN doorzoeken
-
 @ Seconds a center-screen message stays up
 nl Seconden dat een bericht midden in beeld blijft staan
 
@@ -3398,6 +3395,60 @@ nl Gebruik pijl omhoog/omlaag om te verplaatsen, Enter om te plaatsen, Esc om te
 
 @ View
 nl Weergave
+
+@ Server Browser
+nl Serverlijst
+
+@ Internet
+nl Internet
+
+@ Filters
+nl Filters
+
+@ Refresh
+nl Vernieuwen
+
+@ Favorites
+nl Favorieten
+
+@ Ping
+nl Ping
+
+@ Protocol
+nl Protocol
+
+@ Players
+nl Spelers
+
+@ Unknown
+nl Onbekend
+
+@ Empty
+nl Leeg
+
+@ Populated
+nl Met spelers
+
+@ Open slots
+nl Vrije plaatsen
+
+@ Full
+nl Vol
+
+@ Deathmatch
+nl Deathmatch
+
+@ Mod
+nl Mod
+
+@ No servers found
+nl Geen servers gevonden
+
+@ No matching servers
+nl Geen overeenkomende servers
+
+@ Server search failed
+nl Zoeken naar servers mislukt
 
 # ==== hud.txt ====
 

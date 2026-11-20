@@ -233,4 +233,51 @@ fn clickable_buttons_render_controller_glyphs_across_menus() {
     h.menu.open(Screen::ModMaps);
     h.sync_key_dest();
     capture(&mut h, "btn-levels-pad");
+
+    // Join Game opens a separate browser, with tabs, filters and the OSK on pad buttons.
+    use crate::net::browser::{SavedServers, ServerEntry, ServerMode, ServerProto, ServerTab};
+    h.exec_line("menu_multiplayer join");
+    h.sync_key_dest();
+    press(&mut h, GamepadButton::DpadDown);
+    press(&mut h, GamepadButton::DpadDown);
+    capture(&mut h, "server-browser-join-pad");
+    press(&mut h, GamepadButton::South);
+    assert_eq!(h.menu.screen, Screen::ServerBrowser);
+    h.menu.replace_server_results(ServerTab::Lan, vec![ServerEntry {
+        address: "192.168.1.5:26000".into(),
+        hostname: "Local co-op".into(),
+        map: "e1m2".into(),
+        players: 2,
+        max_players: 4,
+        ping_ms: Some(3),
+        mode: ServerMode::Coop,
+        lan: true,
+        ..Default::default()
+    }], &SavedServers::default());
+    capture(&mut h, "server-browser-lan-pad");
+    press(&mut h, GamepadButton::RightShoulder);
+    let entries = (0..16).map(|i| ServerEntry {
+        address: format!("192.0.2.1:{}", 27500 + i),
+        hostname: if i == 0 { "QuakeWorld Deathmatch".into() } else { format!("Quake Server {}", i + 1) },
+        map: ["dm2", "aerowalk", "dm6"][i % 3].into(),
+        players: if i % 3 == 0 { 0 } else { (i % 8 + 1) as u8 },
+        max_players: 8,
+        ping_ms: Some(26 + i as u32 * 13),
+        protocol: [ServerProto::QuakeWorld, ServerProto::NetQuake, ServerProto::FteDp][i % 3],
+        ..Default::default()
+    }).collect();
+    h.menu.replace_server_results(ServerTab::Internet, entries, &SavedServers::default());
+    capture(&mut h, "server-browser-internet-pad");
+    for value in [1.0, 0.0] {
+        h.handle_event(HostEvent::Pad(7, InputEvent::GamepadAxis { axis: GamepadAxis::LeftTrigger, value }));
+    }
+    press(&mut h, GamepadButton::DpadRight);
+    capture(&mut h, "server-browser-filters-pad");
+    press(&mut h, GamepadButton::East);
+    assert_eq!(h.menu.screen, Screen::ServerBrowser);
+    press(&mut h, GamepadButton::North);
+    capture(&mut h, "server-browser-osk-pad");
+    press(&mut h, GamepadButton::East);
+    press(&mut h, GamepadButton::East);
+    assert_eq!(h.menu.screen, Screen::OptionsPage(crate::menu::Page::Join));
 }

@@ -874,9 +874,6 @@ uk Екранний шейдер
 @ Screen Shake
 uk Трясіння екрана
 
-@ Search LAN
-uk Пошук у локальній мережі
-
 @ Seconds a center-screen message stays up
 uk Скільки секунд тримається повідомлення в центрі екрана
 
@@ -3398,6 +3395,60 @@ uk Стрілки вгору й униз — перемістити, Enter — �
 
 @ View
 uk Вигляд
+
+@ Server Browser
+uk Список серверів
+
+@ Internet
+uk Інтернет
+
+@ Filters
+uk Фільтри
+
+@ Refresh
+uk Оновити
+
+@ Favorites
+uk Обране
+
+@ Ping
+uk Пінг
+
+@ Protocol
+uk Протокол
+
+@ Players
+uk Гравці
+
+@ Unknown
+uk Невідомо
+
+@ Empty
+uk Порожні
+
+@ Populated
+uk З гравцями
+
+@ Open slots
+uk Є вільні місця
+
+@ Full
+uk Повні
+
+@ Deathmatch
+uk Бій на смерть
+
+@ Mod
+uk Мод
+
+@ No servers found
+uk Серверів не знайдено
+
+@ No matching servers
+uk Немає відповідних серверів
+
+@ Server search failed
+uk Не вдалося виконати пошук серверів
 
 # ==== hud.txt ====
 

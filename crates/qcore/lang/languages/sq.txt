@@ -874,9 +874,6 @@ sq Shaderi i ekranit
 @ Screen Shake
 sq Dridhja e ekranit
 
-@ Search LAN
-sq Kërko në LAN
-
 @ Seconds a center-screen message stays up
 sq Sekonda që qëndron një mesazh në qendër të ekranit
 
@@ -3398,6 +3395,60 @@ sq Përdor shigjetat Lart dhe Poshtë për të lëvizur, Enter për të vendosur
 
 @ View
 sq Pamja
+
+@ Server Browser
+sq Lista e serverëve
+
+@ Internet
+sq Internet
+
+@ Filters
+sq Filtrat
+
+@ Refresh
+sq Rifresko
+
+@ Favorites
+sq Të preferuarat
+
+@ Ping
+sq Pingu
+
+@ Protocol
+sq Protokolli
+
+@ Players
+sq Lojtarët
+
+@ Unknown
+sq I panjohur
+
+@ Empty
+sq Bosh
+
+@ Populated
+sq Me lojtarë
+
+@ Open slots
+sq Vende të lira
+
+@ Full
+sq Plot
+
+@ Deathmatch
+sq Ndeshje për vdekje
+
+@ Mod
+sq Mod
+
+@ No servers found
+sq Nuk u gjet asnjë server
+
+@ No matching servers
+sq Asnjë server nuk përputhet me filtrat
+
+@ Server search failed
+sq Kërkimi i serverëve dështoi
 
 # ==== hud.txt ====
 

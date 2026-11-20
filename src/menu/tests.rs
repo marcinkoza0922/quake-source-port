@@ -3,21 +3,16 @@ use super::*;
 #[test]
 fn long_page_scrolls_with_cursor() {
     let mut m = Menu::new();
-    m.servers = (0..PAGE_ROWS).map(|i| ServerEntry {
-        address: format!("127.0.0.1:{}", 26000+i), hostname: format!("Server {i}"),
-        map: "start".into(), players: 1, max_players: 4, ..Default::default()
-    }).collect();
-    m.open(Screen::OptionsPage(Page::Join));
-    let n = m.page_len(Page::Join);
-    assert!(n > PAGE_ROWS, "Server list should be long enough to scroll");
-    assert_eq!(m.page_scroll(Page::Join), 0);
+    let page = Page::Controls;
+    m.open(Screen::OptionsPage(page));
+    let n = m.page_len(page);
+    assert!(n > PAGE_ROWS);
+    assert_eq!(m.page_scroll(page), 0);
     m.opt_cursor = n - 1;
-    assert_eq!(m.page_scroll(Page::Join), n - PAGE_ROWS);
-    // the top visible row maps to the first scrolled-in item
+    assert_eq!(m.page_scroll(page), n - PAGE_ROWS);
     assert_eq!(m.item_at((320.0, PAGE_ROW0 + 1.0)), Some(n - PAGE_ROWS));
-    // moving back up past the window scrolls up
     m.opt_cursor = 0;
-    assert_eq!(m.page_scroll(Page::Join), 0);
+    assert_eq!(m.page_scroll(page), 0);
 }
 
 #[test]
@@ -84,7 +79,6 @@ mod quit_tests {
 #[cfg(test)]
 mod multiplayer_tests {
     use super::*;
-    use crate::net::browser::ServerProto;
 
     pub(super) fn cvars() -> Cvars {
         let mut cv = Cvars::default();
@@ -128,56 +122,6 @@ mod multiplayer_tests {
         let acts = m.key(K_ENTER, &mut cv, false);
         assert_eq!(commands(&acts), "connect 10.0.0.9:7\n");
         assert_eq!(m.screen, Screen::None);
-    }
-
-    #[test]
-    fn join_found_server_and_search() {
-        let mut cv = cvars();
-        let mut m = Menu::new();
-        m.open_multiplayer("join");
-        m.opt_cursor = 2;
-        assert_eq!(commands(&m.key(K_ENTER, &mut cv, false)), "slist\n");
-        m.opt_cursor = 3;
-        assert_eq!(commands(&m.key(K_ENTER, &mut cv, false)), "slist_internet\n");
-        m.servers = vec![
-            ServerEntry {
-                address: "192.168.1.5:26000".into(),
-                hostname: "h".into(),
-                map: "dm3".into(),
-                players: 1,
-                max_players: 8,
-                ping_ms: Some(40),
-                lan: true,
-                ..Default::default()
-            },
-            ServerEntry {
-                address: "203.0.113.9:27500".into(),
-                hostname: "qw_empty".into(),
-                map: "dm4".into(),
-                players: 0,
-                max_players: 8,
-                ping_ms: Some(15),
-                protocol: ServerProto::QuakeWorld,
-                gamedir: "ktx".into(),
-                ..Default::default()
-            },
-        ];
-        // Default sort is Ping ascending: qw_empty (15ms, index 1) comes before h (40ms, index 0).
-        m.opt_cursor = JOIN.len();
-        assert!(matches!(m.page_item(Page::Join, m.opt_cursor), Item::Server(1)));
-
-        // Toggle Hide Empty (row 8) -> qw_empty is filtered out, leaving only server 0.
-        m.opt_cursor = 8;
-        m.key(K_ENTER, &mut cv, false);
-        assert!(m.browser.hide_empty);
-        assert_eq!(m.visible_servers(), vec![0]);
-
-        // Select the server row: F toggles favorite, Enter connects.
-        m.opt_cursor = JOIN.len();
-        assert!(matches!(m.page_item(Page::Join, m.opt_cursor), Item::Server(0)));
-        assert_eq!(commands(&m.key(b'f' as i32, &mut cv, false)), "server_fav \"192.168.1.5:26000\"\n");
-        assert!(m.servers[0].favorite);
-        assert_eq!(commands(&m.key(K_ENTER, &mut cv, false)), "connect 192.168.1.5:26000\n");
     }
 
     #[test]

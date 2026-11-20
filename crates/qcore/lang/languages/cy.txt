@@ -874,9 +874,6 @@ cy Arlliwiwr sgrin
 @ Screen Shake
 cy Ysgwyd sgrin
 
-@ Search LAN
-cy Chwilio'r LAN
-
 @ Seconds a center-screen message stays up
 cy Eiliadau mae neges canol y sgrin yn aros
 
@@ -3398,6 +3395,60 @@ cy Defnyddiwch saethau I Fyny ac I Lawr i symud, Enter i osod, Esc i ganslo
 
 @ View
 cy Golwg
+
+@ Server Browser
+cy Rhestr gweinyddion
+
+@ Internet
+cy Rhyngrwyd
+
+@ Filters
+cy Hidlyddion
+
+@ Refresh
+cy Adnewyddu
+
+@ Favorites
+cy Ffefrynnau
+
+@ Ping
+cy Ping
+
+@ Protocol
+cy Protocol
+
+@ Players
+cy Chwaraewyr
+
+@ Unknown
+cy Anhysbys
+
+@ Empty
+cy Gwag
+
+@ Populated
+cy Â chwaraewyr
+
+@ Open slots
+cy Lleoedd gwag
+
+@ Full
+cy Llawn
+
+@ Deathmatch
+cy Gornest farwolaeth
+
+@ Mod
+cy Mod
+
+@ No servers found
+cy Heb ddod o hyd i weinyddion
+
+@ No matching servers
+cy Dim gweinyddion sy'n cyfateb i'r hidlyddion
+
+@ Server search failed
+cy Methodd y chwiliad am weinyddion
 
 # ==== hud.txt ====
 

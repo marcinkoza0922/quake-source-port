@@ -874,9 +874,6 @@ hy Էկրանի շեյդեր
 @ Screen Shake
 hy Էկրանի ցնցում
 
-@ Search LAN
-hy Որոնել LAN-ում
-
 @ Seconds a center-screen message stays up
 hy Քանի վայրկյան է մնում կենտրոնի հաղորդագրությունը
 
@@ -3398,6 +3395,60 @@ hy Օգտագործեք Վերև և Ներքև սլաքները՝ շարժելո
 
 @ View
 hy Տեսք
+
+@ Server Browser
+hy Սերվերների ցանկ
+
+@ Internet
+hy Համացանց
+
+@ Filters
+hy Զտիչներ
+
+@ Refresh
+hy Թարմացնել
+
+@ Favorites
+hy Ընտրյալներ
+
+@ Ping
+hy Պինգ
+
+@ Protocol
+hy Արձանագրություն
+
+@ Players
+hy Խաղացողներ
+
+@ Unknown
+hy Անհայտ
+
+@ Empty
+hy Դատարկ
+
+@ Populated
+hy Խաղացողներով
+
+@ Open slots
+hy Ազատ տեղեր
+
+@ Full
+hy Լիքը
+
+@ Deathmatch
+hy Մահվան մարտ
+
+@ Mod
+hy Մոդ
+
+@ No servers found
+hy Սերվերներ չեն գտնվել
+
+@ No matching servers
+hy Զտիչներին համապատասխանող սերվերներ չկան
+
+@ Server search failed
+hy Չհաջողվեց որոնել սերվերներ
 
 # ==== hud.txt ====
 
