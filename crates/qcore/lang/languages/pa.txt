@@ -1757,6 +1757,15 @@ pa ਹਥਿਆਰ ਤਰਜੀਹ
 @ Zoom
 pa ਜ਼ੂਮ
 
+@ Show Ghost
+pa ਭੂਤ ਦਿਖਾਓ
+
+@ Show Label
+pa ਲੇਬਲ ਦਿਖਾਓ
+
+@ Speedometer
+pa ਸਪੀਡੋਮੀਟਰ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ pa ਹਥਿਆਰ ਚੁੱਕਣ ਵੇਲੇ: 'ਕਦੇ ਨਹੀਂ' ਮੌ
 
 @ Zoom level of the automap view
 pa ਆਟੋਮੈਪ ਦ੍ਰਿਸ਼ ਦਾ ਜ਼ੂਮ ਪੱਧਰ
+
+@ Horizontal movement speed in units per second
+pa ਪ੍ਰਤੀ ਸਕਿੰਟ ਇਕਾਈਆਂ ਵਿੱਚ ਖਿਤਿਜੀ ਗਤੀ
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+pa ਮੌਜੂਦਾ ਨਕਸ਼ੇ ਅਤੇ ਮੁਸ਼ਕਲ ਲਈ ਤੁਹਾਡੇ ਨਿੱਜੀ ਸਰਵੋਤਮ ਡੈਮੋ ਦਾ ਅਰਧ-ਪਾਰਦਰਸ਼ੀ ਭੂਤ ਚਲਾਉਂਦਾ ਹੈ (ਸਿਰਫ਼ ਸਿੰਗਲ ਪਲੇਅਰ)
+
+@ Shows the SPD label before the speed number
+pa ਗਤੀ ਦੇ ਨੰਬਰ ਤੋਂ ਪਹਿਲਾਂ SPD ਲੇਬਲ ਦਿਖਾਉਂਦਾ ਹੈ
 
 # ==== ui.txt ====
 

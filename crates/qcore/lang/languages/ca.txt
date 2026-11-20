@@ -1757,6 +1757,15 @@ ca Prioritat d'armes
 @ Zoom
 ca Zoom
 
+@ Show Ghost
+ca Mostra el fantasma
+
+@ Show Label
+ca Mostra l'etiqueta
+
+@ Speedometer
+ca Velocímetre
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ ca En recollir una arma: Mai manté l'arma actual; Arma millor canvia només si 
 
 @ Zoom level of the automap view
 ca Nivell de zoom de la vista de l'automapa
+
+@ Horizontal movement speed in units per second
+ca Velocitat de moviment horitzontal en unitats per segon
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+ca Reprodueix un fantasma translúcid de la demo del teu rècord personal per al mapa i la dificultat actuals (només un jugador)
+
+@ Shows the SPD label before the speed number
+ca Mostra l'etiqueta SPD davant del número de velocitat
 
 # ==== ui.txt ====
 

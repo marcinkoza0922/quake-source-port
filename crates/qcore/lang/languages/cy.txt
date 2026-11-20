@@ -1757,6 +1757,15 @@ cy Blaenoriaeth Arfau
 @ Zoom
 cy Chwyddo
 
+@ Show Ghost
+cy Dangos Ysbryd
+
+@ Show Label
+cy Dangos Label
+
+@ Speedometer
+cy Cyflymderfesurydd
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ cy Wrth godi arf: mae Byth yn cadw eich arf presennol; dim ond os yw'n uwch ym M
 
 @ Zoom level of the automap view
 cy Lefel chwyddo golwg yr awtomap
+
+@ Horizontal movement speed in units per second
+cy Cyflymder symud llorweddol mewn unedau yr eiliad
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+cy Yn rhedeg ysbryd lled-dryloyw o demo eich record bersonol ar gyfer y map a'r anhawster presennol (un chwaraewr yn unig)
+
+@ Shows the SPD label before the speed number
+cy Yn dangos y label SPD cyn rhif y cyflymder
 
 # ==== ui.txt ====
 

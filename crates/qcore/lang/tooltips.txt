@@ -1421,3 +1421,24 @@ de Zoomstufe der Autokarten-Ansicht
 it Livello di zoom della vista dell'automappa
 es Nivel de zoom de la vista del automapa
 ru Уровень приближения автокарты
+
+@ Horizontal movement speed in units per second
+fr Vitesse de déplacement horizontal en unités par seconde
+de Horizontale Bewegungsgeschwindigkeit in Einheiten pro Sekunde
+it Velocità di movimento orizzontale in unità al secondo
+es Velocidad de movimiento horizontal en unidades por segundo
+ru Горизонтальная скорость передвижения в единицах в секунду
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+fr Fait courir un fantôme translucide de la démo de votre record personnel pour la carte et la difficulté actuelles (solo uniquement)
+de Zeigt einen durchscheinenden Geist der Demo deiner persönlichen Bestzeit für die aktuelle Karte und Schwierigkeit (nur Einzelspieler)
+it Mostra un fantasma traslucido della demo del tuo record personale per la mappa e la difficoltà correnti (solo giocatore singolo)
+es Muestra un fantasma translúcido de la demo de tu mejor marca personal para el mapa y la dificultad actuales (solo un jugador)
+ru Запускает полупрозрачного призрака из демо вашего личного рекорда для текущей карты и сложности (только одиночная игра)
+
+@ Shows the SPD label before the speed number
+fr Affiche l'étiquette SPD avant la valeur de vitesse
+de Zeigt die Bezeichnung SPD vor der Geschwindigkeitszahl an
+it Mostra l'etichetta SPD prima del valore della velocità
+es Muestra la etiqueta SPD delante de la cifra de velocidad
+ru Показывает подпись SPD перед значением скорости

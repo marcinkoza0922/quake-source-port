@@ -27,7 +27,11 @@ pub(super) struct AutoDemo {
 
 impl Host {
     fn autodemo_allowed(&self) -> bool {
-        (self.cv("cl_autodemo") != 0.0 || self.cv("cl_autodemo_pb") != 0.0) && self.demo.is_none() && self.timedemo.is_none() && !self.dedicated && self.capture.as_ref().is_none_or(|c| c.export.is_none())
+        (self.cv("cl_autodemo") != 0.0 || self.cv("cl_autodemo_pb") != 0.0 || self.cv("cl_demo_ghost") != 0.0)
+            && self.demo.is_none()
+            && self.timedemo.is_none()
+            && !self.dedicated
+            && self.capture.as_ref().is_none_or(|c| c.export.is_none())
     }
 
     /// Called with every server message after it is parsed: a serverinfo
@@ -139,6 +143,13 @@ impl Host {
         }
         self.scan_demos();
         self.menu.demos.focus(&dest);
+    }
+
+    /// Copies the currently recording auto-demo to `dest` (ended with
+    /// `svc_disconnect`), even when recording only for PB/ghost (`pb_only`).
+    pub(super) fn autodemo_copy_current(&mut self, dest: &Path) -> bool {
+        let angles = self.cl.viewangles;
+        self.autodemo.as_mut().is_some_and(|a| a.writer.copy_to(dest, angles).is_ok())
     }
 
     /// Bug reports with `cl_autodemo` on: the level being recorded (or the

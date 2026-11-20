@@ -35,8 +35,12 @@ impl Host {
     }
 
     /// Personal bests count only in a local, uncustomized, non-deathmatch game.
-    fn pb_allowed(&self) -> bool {
+    pub(super) fn pb_allowed(&self) -> bool {
         self.pb.skill.is_some() && !self.server.core.custom && self.cv("deathmatch") == 0.0 && !self.level.mapname.is_empty()
+    }
+
+    pub(super) fn pb_skill(&self) -> Option<usize> {
+        self.pb.skill
     }
 
     fn map_record(&mut self) -> Option<MapStats> {
@@ -67,6 +71,7 @@ impl Host {
             pb,
             kills: (st[STAT_MONSTERS], st[STAT_TOTALMONSTERS]),
             secrets: (st[STAT_SECRETS], st[STAT_TOTALSECRETS]),
+            speed: 0,
             deathmatch: self.cl.gametype == 1,
             clock,
         }
@@ -119,6 +124,15 @@ impl Host {
             }
         }
         self.keep_pb_demo(k, new_any, new_full, t);
+        let map = self.level.mapname.clone();
+        if new_any {
+            let dest = crate::demo::ghost::ghost_path(&dir, &map, k, false);
+            self.autodemo_copy_current(&dest);
+        }
+        if new_full {
+            let dest = crate::demo::ghost::ghost_path(&dir, &map, k, true);
+            self.autodemo_copy_current(&dest);
+        }
     }
 
     /// `cl_autodemo_pb`: the level's auto-demo is kept as

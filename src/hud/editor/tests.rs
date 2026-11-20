@@ -494,3 +494,32 @@ fn add_automap_element_from_tree_and_edit_options() {
     ed.key(K_RIGHTARROW, &mut cv);
     assert_eq!(cv.value_of("cl_automap_view"), 1.0);
 }
+
+#[test]
+fn add_speedometer_element_from_time_and_stats() {
+    let (mut ed, mut cv) = setup();
+    let n = kinds(&cv).len();
+    ed.key(K_INS, &mut cv);
+    // Open "Time & Stats" (5th category, index 4) and step to Speedometer (6th item).
+    for _ in 0..4 {
+        ed.key(K_DOWNARROW, &mut cv);
+    }
+    ed.key(K_RIGHTARROW, &mut cv);
+    for _ in 0..6 {
+        ed.key(K_DOWNARROW, &mut cv);
+    }
+    ed.key(K_ENTER, &mut cv);
+    assert_eq!(ed.popup, Some(Popup::AddPlace { kind: Kind::Speed, cursor: Anchor::TopRight as usize }));
+    ed.key(K_ENTER, &mut cv);
+    assert!(ed.popup.is_none());
+    let l = layout(&cv);
+    assert_eq!(l.elems.len(), n + 1);
+    let spd = l.elems.last().unwrap();
+    assert_eq!((spd.kind, spd.anchor, spd.a), (Kind::Speed, Anchor::TopRight, 1));
+    assert!(super::editor_rows::props(Kind::Speed).contains(&Prop::LabelColor));
+    assert!(super::editor_rows::props(Kind::Speed).contains(&Prop::TextColor));
+    // Toggle Show Label off (a: 1 -> 0) and verify hud_layout round-trips it.
+    ed.cursor_to(Row::Prop(Prop::Opt(0)), &l);
+    ed.key(K_RIGHTARROW, &mut cv);
+    assert_eq!(layout(&cv).elems.last().unwrap().a, 0);
+}

@@ -1757,6 +1757,15 @@ da Våbenprioritet
 @ Zoom
 da Zoom
 
+@ Show Ghost
+da Vis spøgelse
+
+@ Show Label
+da Vis etiket
+
+@ Speedometer
+da Speedometer
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ da Når du samler et våben op: Aldrig beholder dit nuværende våben; Bedre vå
 
 @ Zoom level of the automap view
 da Zoomniveau for autokortvisningen
+
+@ Horizontal movement speed in units per second
+da Vandret bevægelseshastighed i enheder pr. sekund
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+da Afspiller et gennemsigtigt spøgelse fra demoen af din personlige rekord for det aktuelle kort og sværhedsgrad (kun singleplayer)
+
+@ Shows the SPD label before the speed number
+da Viser SPD-etiketten før hastighedstallet
 
 # ==== ui.txt ====
 

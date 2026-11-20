@@ -1757,6 +1757,15 @@ sq Prioriteti i armëve
 @ Zoom
 sq Zmadhimi
 
+@ Show Ghost
+sq Shfaq fantazmën
+
+@ Show Label
+sq Shfaq etiketën
+
+@ Speedometer
+sq Shpejtësimatës
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ sq Kur merr një armë: Kurrë mban armën aktuale; Armë më e mirë ndërron v
 
 @ Zoom level of the automap view
 sq Niveli i zmadhimit të pamjes së autohartës
+
+@ Horizontal movement speed in units per second
+sq Shpejtësia horizontale e lëvizjes në njësi për sekondë
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+sq Luan një fantazmë gjysmë të tejdukshme të demos së rekordit tënd personal për hartën dhe vështirësinë aktuale (vetëm një lojtar)
+
+@ Shows the SPD label before the speed number
+sq Shfaq etiketën SPD para numrit të shpejtësisë
 
 # ==== ui.txt ====
 

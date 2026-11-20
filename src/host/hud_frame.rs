@@ -152,7 +152,7 @@ impl Host {
     }
 
     /// Lays the HUD out on `c` (the whole screen) for this frame.
-    pub(super) fn hud_frame(&mut self, c: &Canvas, addons: &[crate::wheel::Entry]) -> HudFrame {
+    pub(super) fn hud_frame(&mut self, c: &Canvas, addons: &[crate::wheel::Entry], cur_speed: Option<f32>) -> HudFrame {
         let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
         let room = Room { pack, addons: addons.len(), vw: c.vw() };
         self.hud_preset();
@@ -190,10 +190,20 @@ impl Host {
         } else {
             None
         };
+        let mut info = self.level_info(want_pb);
+        info.speed = if edit {
+            match self.menu.hud_edit.preview {
+                crate::hud::PreviewState::Sample => 320,
+                crate::hud::PreviewState::Alert => 640,
+                crate::hud::PreviewState::Live => cur_speed.unwrap_or(0.0).max(0.0) as i32,
+            }
+        } else {
+            cur_speed.unwrap_or(0.0).max(0.0) as i32
+        };
         HudFrame {
             room,
             edit,
-            info: self.level_info(want_pb),
+            info,
             metrics: self.metric_values(),
             pb_full: self.cv("hud_pb_100") != 0.0,
             pb_color: crate::reticle::color_of(&self.server.core.cvars, "hud_pb_color"),

@@ -1757,6 +1757,15 @@ id Prioritas Senjata
 @ Zoom
 id Perbesaran
 
+@ Show Ghost
+id Tampilkan Hantu
+
+@ Show Label
+id Tampilkan Label
+
+@ Speedometer
+id Spedometer
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ id Saat mengambil senjata: Tidak pernah mempertahankan senjata saat ini; Senjata
 
 @ Zoom level of the automap view
 id Tingkat perbesaran tampilan peta otomatis
+
+@ Horizontal movement speed in units per second
+id Kecepatan gerak horizontal dalam satuan per detik
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+id Menjalankan hantu transparan dari demo rekor pribadi Anda untuk peta dan tingkat kesulitan saat ini (khusus pemain tunggal)
+
+@ Shows the SPD label before the speed number
+id Menampilkan label SPD sebelum angka kecepatan
 
 # ==== ui.txt ====
 

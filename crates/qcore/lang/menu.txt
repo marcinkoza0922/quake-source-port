@@ -4084,3 +4084,24 @@ de Zoom
 it Zoom
 es Zoom
 ru Масштаб
+
+@ Show Ghost
+fr Afficher le fantôme
+de Geist anzeigen
+it Mostra fantasma
+es Mostrar fantasma
+ru Показать призрака
+
+@ Show Label
+fr Afficher l'étiquette
+de Bezeichnung anzeigen
+it Mostra etichetta
+es Mostrar etiqueta
+ru Показать подпись
+
+@ Speedometer
+fr Compteur de vitesse
+de Geschwindigkeitsmesser
+it Tachimetro
+es Velocímetro
+ru Спидометр

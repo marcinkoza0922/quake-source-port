@@ -1757,6 +1757,15 @@ bn অস্ত্রের অগ্রাধিকার
 @ Zoom
 bn জুম
 
+@ Show Ghost
+bn ভূত দেখান
+
+@ Show Label
+bn লেবেল দেখান
+
+@ Speedometer
+bn স্পিডোমিটার
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ bn অস্ত্র নেওয়ার সময়: 'কখনোই ন�
 
 @ Zoom level of the automap view
 bn অটোম্যাপ দৃশ্যের জুম মাত্রা
+
+@ Horizontal movement speed in units per second
+bn প্রতি সেকেন্ডে এককে অনুভূমিক গতিবেগ
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+bn বর্তমান মানচিত্র ও কঠিনতার জন্য আপনার ব্যক্তিগত সেরা ডেমোর একটি অর্ধস্বচ্ছ ভূত চালায় (শুধু সিঙ্গেল প্লেয়ার)
+
+@ Shows the SPD label before the speed number
+bn গতির সংখ্যার আগে SPD লেবেল দেখায়
 
 # ==== ui.txt ====
 

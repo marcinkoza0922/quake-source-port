@@ -1757,6 +1757,15 @@ hy Զենքերի առաջնահերթություն
 @ Zoom
 hy Խոշորացում
 
+@ Show Ghost
+hy Ցույց տալ ուրվականին
+
+@ Show Label
+hy Ցույց տալ պիտակը
+
+@ Speedometer
+hy Արագաչափ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ hy Զենք վերցնելիս՝ Երբեքը պահում է ընթացիկ զ�
 
 @ Zoom level of the automap view
 hy Ինքնաքարտեզի տեսքի խոշորացման մակարդակը
+
+@ Horizontal movement speed in units per second
+hy Հորիզոնական շարժման արագությունը՝ միավոր վայրկյանում
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+hy Գործարկում է կիսաթափանցիկ ուրվական ձեր անձնական ռեկորդի դեմոյից ընթացիկ քարտեզի և բարդության համար (միայն մեկ խաղացողի համար)
+
+@ Shows the SPD label before the speed number
+hy Ցույց է տալիս SPD պիտակը արագության թվից առաջ
 
 # ==== ui.txt ====
 

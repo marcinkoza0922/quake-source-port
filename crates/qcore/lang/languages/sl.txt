@@ -1757,6 +1757,15 @@ sl Prednost orožij
 @ Zoom
 sl Povečava
 
+@ Show Ghost
+sl Prikaži duha
+
+@ Show Label
+sl Prikaži oznako
+
+@ Speedometer
+sl Merilnik hitrosti
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ sl Ob pobiranju orožja: Nikoli obdrži trenutno orožje; Boljše orožje preklo
 
 @ Zoom level of the automap view
 sl Raven povečave pogleda samodejnega zemljevida
+
+@ Horizontal movement speed in units per second
+sl Vodoravna hitrost gibanja v enotah na sekundo
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+sl Predvaja prosojnega duha iz dema vašega osebnega rekorda za trenutno mapo in težavnost (samo za enega igralca)
+
+@ Shows the SPD label before the speed number
+sl Prikaže oznako SPD pred številko hitrosti
 
 # ==== ui.txt ====
 

@@ -1757,6 +1757,15 @@ hi हथियार प्राथमिकता
 @ Zoom
 hi ज़ूम
 
+@ Show Ghost
+hi भूत दिखाएँ
+
+@ Show Label
+hi लेबल दिखाएँ
+
+@ Speedometer
+hi स्पीडोमीटर
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ hi हथियार उठाने पर: 'कभी नहीं' वर्
 
 @ Zoom level of the automap view
 hi ऑटोमैप दृश्य का ज़ूम स्तर
+
+@ Horizontal movement speed in units per second
+hi प्रति सेकंड इकाइयों में क्षैतिज गति
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+hi वर्तमान मैप और कठिनाई के लिए आपके व्यक्तिगत सर्वश्रेष्ठ डेमो का पारभासी भूत चलाता है (केवल सिंगल प्लेयर)
+
+@ Shows the SPD label before the speed number
+hi गति संख्या से पहले SPD लेबल दिखाता है
 
 # ==== ui.txt ====
 

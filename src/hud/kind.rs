@@ -27,6 +27,7 @@ pub enum Kind {
     Pb,
     Kills,
     Secrets,
+    Speed,
     Fps,
     FrameTime,
     Cpu,
@@ -134,6 +135,7 @@ const PB_OPTS: &[Opt] = &[
     opt("Precision", Field::A, Values::Choice(PRECISION)),
 ];
 const COUNT_OPTS: &[Opt] = &[opt("Show As", Field::A, Values::Choice(COUNT))];
+const SPEED_OPTS: &[Opt] = &[opt("Show Label", Field::A, Values::Choice(ON_OFF))];
 const CENTER_OPTS: &[Opt] = &[opt("Center Message Time", Field::Cvar("scr_centertime"), Values::Range(1.0, 10.0, 1.0))];
 const NOTIFY_OPTS: &[Opt] = &[opt("Notify Message Time", Field::Cvar("con_notifytime"), Values::Range(1.0, 10.0, 1.0))];
 const CAPTION_OPTS: &[Opt] = &[opt("Sound Captions", Field::Cvar("cl_captions"), Values::Choice(ON_OFF))];
@@ -153,17 +155,17 @@ pub const CATEGORIES: &[(&str, &[Kind])] = &[
     ("Ammo", &[Kind::Ammo, Kind::AmmoBar, Kind::AmmoList, Kind::Shells, Kind::Nails, Kind::Rockets, Kind::Cells]),
     ("Inventory", &[Kind::Weapons, Kind::Items, Kind::Keys, Kind::Powerups, Kind::Sigils]),
     ("Classic", &[Kind::StatusBar]),
-    ("Time & Stats", &[Kind::Clock, Kind::Timer, Kind::Pb, Kind::Kills, Kind::Secrets]),
+    ("Time & Stats", &[Kind::Clock, Kind::Timer, Kind::Pb, Kind::Kills, Kind::Secrets, Kind::Speed]),
     ("Performance Metrics", &[Kind::Fps, Kind::FrameTime, Kind::Cpu, Kind::Ram, Kind::Gpu, Kind::Vram]),
     ("Automap", &[Kind::Automap]),
 ];
 
 impl Kind {
-    pub const ALL: [Kind; 33] = [
+    pub const ALL: [Kind; 34] = [
         Kind::Health, Kind::Armor, Kind::Face, Kind::HealthBar, Kind::ArmorBar, Kind::Ammo, Kind::AmmoBar,
         Kind::AmmoList, Kind::Shells, Kind::Nails, Kind::Rockets, Kind::Cells, Kind::Weapons, Kind::Items,
         Kind::Keys, Kind::Powerups, Kind::Sigils, Kind::StatusBar, Kind::Clock, Kind::Timer, Kind::Pb,
-        Kind::Kills, Kind::Secrets, Kind::Fps, Kind::FrameTime, Kind::Cpu, Kind::Ram, Kind::Gpu, Kind::Vram,
+        Kind::Kills, Kind::Secrets, Kind::Speed, Kind::Fps, Kind::FrameTime, Kind::Cpu, Kind::Ram, Kind::Gpu, Kind::Vram,
         Kind::Automap, Kind::Center, Kind::Notify, Kind::Captions,
     ];
     /// Always in the layout: they can be moved but not removed.
@@ -195,6 +197,7 @@ impl Kind {
             Pb => "pb",
             Kills => "kills",
             Secrets => "secrets",
+            Speed => "speed",
             Fps => "fps",
             FrameTime => "frametime",
             Cpu => "cpu",
@@ -239,6 +242,7 @@ impl Kind {
             Pb => "Personal Best",
             Kills => "Kills",
             Secrets => "Secrets",
+            Speed => "Speedometer",
             Fps => "FPS",
             FrameTime => "Frame Time",
             Cpu => "CPU Usage",
@@ -260,7 +264,7 @@ impl Kind {
     /// death, drawn per player in split screen, may fade (immersive).
     pub fn is_player(self) -> bool {
         use Kind::*;
-        !matches!(self, Clock | Timer | Pb | Kills | Secrets | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Automap | Center | Notify | Captions)
+        !matches!(self, Clock | Timer | Pb | Kills | Secrets | Speed | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Automap | Center | Notify | Captions)
     }
 
     pub fn is_metric(self) -> bool {
@@ -326,7 +330,7 @@ impl Kind {
             Health | Armor | Face | HealthBar | ArmorBar => Anchor::BottomLeft,
             Ammo | AmmoBar | AmmoList | Shells | Nails | Rockets | Cells | Weapons | Items | Keys | Powerups | Sigils => Anchor::BottomRight,
             StatusBar | Captions => Anchor::BottomCenter,
-            Clock | Timer | Pb | Kills | Secrets | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Automap => Anchor::TopRight,
+            Clock | Timer | Pb | Kills | Secrets | Speed | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Automap => Anchor::TopRight,
             Notify => Anchor::TopLeft,
             Center => Anchor::Center,
         }
@@ -340,7 +344,7 @@ impl Kind {
 
     /// Its text has a gold label ("FPS", "K") whose colour can be picked.
     pub fn has_label(self) -> bool {
-        self.is_metric() || matches!(self, Kind::Kills | Kind::Secrets)
+        self.is_metric() || matches!(self, Kind::Kills | Kind::Secrets | Kind::Speed)
     }
 
     pub fn has_background(self) -> bool {
@@ -359,6 +363,7 @@ impl Kind {
             Timer => TIMER_OPTS,
             Pb => PB_OPTS,
             Kills | Secrets => COUNT_OPTS,
+            Speed => SPEED_OPTS,
             Automap => AUTOMAP_OPTS,
             Center => CENTER_OPTS,
             Notify => NOTIFY_OPTS,
@@ -374,6 +379,7 @@ impl Kind {
         Some(match self {
             Kind::Clock => "Shows the time of day in the chosen format",
             Kind::Timer => "The level time, as on the intermission screen; it stops while paused and at the exit",
+            Kind::Speed => "Horizontal movement speed in units per second",
             Kind::Fps => "Frames per second, averaged over half a second",
             Kind::FrameTime => "Average time per frame in milliseconds, and the slowest frame",
             Kind::Cpu => "How busy the game keeps the processor, as a share of all its cores",
@@ -391,6 +397,7 @@ impl Kind {
 pub fn opt_tip(label: &str) -> Option<&'static str> {
     Some(match label {
         "Show Face" => "Shows the player face next to the health number",
+        "Show Label" => "Shows the SPD label before the speed number",
         "Personal Best Type" => "any%: any finish; 100%: every kill and secret. Save cards show this one first",
         "Personal Best Color" => "Color of the personal best on the HUD and save cards",
         "Show As" => "Shown as a count or as a percentage of the level's total",

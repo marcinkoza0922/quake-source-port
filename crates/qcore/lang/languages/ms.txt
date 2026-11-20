@@ -1757,6 +1757,15 @@ ms Keutamaan Senjata
 @ Zoom
 ms Zum
 
+@ Show Ghost
+ms Tunjukkan Hantu
+
+@ Show Label
+ms Tunjukkan Label
+
+@ Speedometer
+ms Meter Kelajuan
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ ms Apabila mengambil senjata: Jangan sekali mengekalkan senjata semasa; Senjata 
 
 @ Zoom level of the automap view
 ms Tahap zum paparan peta auto
+
+@ Horizontal movement speed in units per second
+ms Kelajuan pergerakan mendatar dalam unit sesaat
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+ms Memainkan hantu lut cahaya daripada demo rekod peribadi anda untuk peta dan tahap kesukaran semasa (pemain tunggal sahaja)
+
+@ Shows the SPD label before the speed number
+ms Menunjukkan label SPD sebelum angka kelajuan
 
 # ==== ui.txt ====
 

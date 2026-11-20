@@ -1757,6 +1757,15 @@ gl Prioridade de armas
 @ Zoom
 gl Zoom
 
+@ Show Ghost
+gl Mostrar pantasma
+
+@ Show Label
+gl Mostrar etiqueta
+
+@ Speedometer
+gl Velocímetro
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ gl Ao recoller unha arma: Nunca mantén a arma actual; Mellor arma cambia só se
 
 @ Zoom level of the automap view
 gl Nivel de zoom da vista do automapa
+
+@ Horizontal movement speed in units per second
+gl Velocidade de movemento horizontal en unidades por segundo
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+gl Reproduce unha pantasma translúcida da demo da túa mellor marca persoal para o mapa e a dificultade actuais (só un xogador)
+
+@ Shows the SPD label before the speed number
+gl Mostra a etiqueta SPD antes do número de velocidade
 
 # ==== ui.txt ====
 

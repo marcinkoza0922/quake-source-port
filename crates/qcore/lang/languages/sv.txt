@@ -1757,6 +1757,15 @@ sv Vapenprioritet
 @ Zoom
 sv Zoom
 
+@ Show Ghost
+sv Visa spöke
+
+@ Show Label
+sv Visa etikett
+
+@ Speedometer
+sv Hastighetsmätare
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ sv När du plockar upp ett vapen: Aldrig behåller ditt nuvarande vapen; Bättre
 
 @ Zoom level of the automap view
 sv Zoomnivå för autokartans vy
+
+@ Horizontal movement speed in units per second
+sv Horisontell rörelsehastighet i enheter per sekund
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+sv Visar ett halvgenomskinligt spöke från demon av ditt personliga rekord för aktuell bana och svårighetsgrad (endast enspelare)
+
+@ Shows the SPD label before the speed number
+sv Visar etiketten SPD före hastighetstalet
 
 # ==== ui.txt ====
 

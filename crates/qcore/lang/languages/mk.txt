@@ -1757,6 +1757,15 @@ mk Приоритет на оружја
 @ Zoom
 mk Зум
 
+@ Show Ghost
+mk Прикажи дух
+
+@ Show Label
+mk Прикажи ознака
+
+@ Speedometer
+mk Брзиномер
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ mk При земање оружје: Никогаш го задржува тек
 
 @ Zoom level of the automap view
 mk Ниво на зум на приказот на автомапата
+
+@ Horizontal movement speed in units per second
+mk Хоризонтална брзина на движење во единици во секунда
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+mk Пушта полупроѕирен дух од демото на вашиот личен рекорд за тековната мапа и тежина (само за еден играч)
+
+@ Shows the SPD label before the speed number
+mk Ја прикажува ознаката SPD пред бројот за брзина
 
 # ==== ui.txt ====
 

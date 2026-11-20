@@ -158,6 +158,8 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("cl_autodemo_slots", "10", CVAR_ARCHIVE),
     // keep a level's demo when it sets a personal best: 1 any%, 2 100%, 3 both
     ("cl_autodemo_pb", "0", CVAR_ARCHIVE),
+    // translucent ghost of your PB demo: 0 off, 1 any%, 2 100%
+    ("cl_demo_ghost", "0", CVAR_ARCHIVE),
     ("cl_demobar", "2", CVAR_ARCHIVE),
     ("cl_demo_endpause", "1", CVAR_ARCHIVE),
     ("capture_fps", "60", CVAR_ARCHIVE),

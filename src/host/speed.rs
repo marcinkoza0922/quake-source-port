@@ -21,12 +21,18 @@ pub(super) fn step(state: &mut (f32, f32, f64), realtime: f64, speed: f32) -> Op
 }
 
 impl Host {
-    /// Text for the speedometer this frame, or None when it is hidden. The
-    /// peak tracking runs every frame so the number is ready when enabled.
-    pub(super) fn speedometer(&mut self) -> Option<String> {
+    /// Advance peak-hold tracking once per frame and return the current
+    /// horizontal speed (units/s). Runs every frame so the HUD element and
+    /// `scr_showspeed` are ready immediately when shown.
+    pub(super) fn update_speed(&mut self) -> Option<f32> {
         let v = self.cl.velocity;
         let speed = (v[0] * v[0] + v[1] * v[1]).sqrt();
-        let shown = step(&mut self.speed, self.realtime, speed)?;
+        step(&mut self.speed, self.realtime, speed)
+    }
+
+    /// Text for the standalone `scr_showspeed` overlay, or None when hidden.
+    pub(super) fn speedometer_text(&self, shown: Option<f32>) -> Option<String> {
+        let shown = shown?;
         let hidden = self.cl.intermission != 0 || self.cv("viewsize") >= 130.0 || self.cv("scr_showspeed") == 0.0;
         (!hidden).then(|| format!("{}", shown as i32))
     }

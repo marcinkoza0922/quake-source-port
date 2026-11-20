@@ -1757,6 +1757,15 @@ ar أولوية الأسلحة
 @ Zoom
 ar التكبير
 
+@ Show Ghost
+ar إظهار الشبح
+
+@ Show Label
+ar إظهار التسمية
+
+@ Speedometer
+ar عداد السرعة
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ ar عند التقاط سلاح: أبدًا يُبقي سلاحك الحالي؛
 
 @ Zoom level of the automap view
 ar مستوى تكبير عرض الخريطة التلقائية
+
+@ Horizontal movement speed in units per second
+ar سرعة الحركة الأفقية بالوحدات في الثانية
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+ar يعرض شبحاً نصف شفاف لتسجيل أفضل رقم شخصي لك في الخريطة ومستوى الصعوبة الحاليين (للاعب واحد فقط)
+
+@ Shows the SPD label before the speed number
+ar يعرض تسمية SPD قبل رقم السرعة
 
 # ==== ui.txt ====
 

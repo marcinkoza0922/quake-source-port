@@ -1757,6 +1757,15 @@ lv Ieroču prioritāte
 @ Zoom
 lv Tālummaiņa
 
+@ Show Ghost
+lv Rādīt spoku
+
+@ Show Label
+lv Rādīt etiķeti
+
+@ Speedometer
+lv Spidometrs
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ lv Paņemot ieroci: Nekad patur pašreizējo ieroci; Labāks ierocis pārslēdza
 
 @ Zoom level of the automap view
 lv Autokartes skata tālummaiņas līmenis
+
+@ Horizontal movement speed in units per second
+lv Horizontālais kustības ātrums vienībās sekundē
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+lv Atskaņo caurspīdīgu spoku no tava personīgā rekorda demo pašreizējai kartei un grūtībai (tikai vienspēlē)
+
+@ Shows the SPD label before the speed number
+lv Rāda SPD etiķeti pirms ātruma skaitļa
 
 # ==== ui.txt ====
 

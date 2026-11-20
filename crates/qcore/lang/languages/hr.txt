@@ -1757,6 +1757,15 @@ hr Prioritet oružja
 @ Zoom
 hr Zumiranje
 
+@ Show Ghost
+hr Prikaži duha
+
+@ Show Label
+hr Prikaži oznaku
+
+@ Speedometer
+hr Brzinomjer
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ hr Pri uzimanju oružja: Nikad zadržava trenutačno oružje; Bolje oružje preb
 
 @ Zoom level of the automap view
 hr Razina zumiranja prikaza automape
+
+@ Horizontal movement speed in units per second
+hr Vodoravna brzina kretanja u jedinicama po sekundi
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+hr Pokreće prozirnog duha iz demo snimke vašeg osobnog rekorda za trenutnu kartu i težinu (samo za jednog igrača)
+
+@ Shows the SPD label before the speed number
+hr Prikazuje oznaku SPD ispred broja brzine
 
 # ==== ui.txt ====
 

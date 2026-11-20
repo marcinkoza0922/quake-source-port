@@ -53,6 +53,7 @@ impl Host {
         }
         self.stop_recording();
         self.autodemo_finish();
+        self.ghost_reset();
         self.view.reset_effects();
         self.autosave.reset();
         self.bullet_time = Default::default();
@@ -515,6 +516,7 @@ impl Host {
                     self.feedback = Default::default();
                     self.stats_recorded = false;
                     self.pb_new_map();
+                    self.ghost_reset();
                     self.autosave.reset();
                     self.new_map();
                     self.demo_new_map();

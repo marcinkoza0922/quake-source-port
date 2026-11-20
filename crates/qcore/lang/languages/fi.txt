@@ -1757,6 +1757,15 @@ fi Aseiden tärkeys
 @ Zoom
 fi Zoomaus
 
+@ Show Ghost
+fi Näytä haamu
+
+@ Show Label
+fi Näytä nimiö
+
+@ Speedometer
+fi Nopeusmittari
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ fi Asetta poimittaessa: Ei koskaan pitää nykyisen aseesi; Parempi ase vaihtaa 
 
 @ Zoom level of the automap view
 fi Autokartan näkymän zoomaustaso
+
+@ Horizontal movement speed in units per second
+fi Vaakasuora liikenopeus yksiköinä sekunnissa
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+fi Toistaa läpikuultavan haamun oman ennätysdemosi mukaan nykyiselle kartalle ja vaikeustasolle (vain yksinpeli)
+
+@ Shows the SPD label before the speed number
+fi Näyttää SPD-nimiön nopeuslukeman edessä
 
 # ==== ui.txt ====
 

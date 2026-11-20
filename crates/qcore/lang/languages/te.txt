@@ -1757,6 +1757,15 @@ te ఆయుధ ప్రాధాన్యత
 @ Zoom
 te జూమ్
 
+@ Show Ghost
+te దెయ్యం చూపించు
+
+@ Show Label
+te లేబుల్ చూపించు
+
+@ Speedometer
+te స్పీడోమీటర్
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ te ఆయుధం తీసుకునేటప్పుడు: ఎప్ప�
 
 @ Zoom level of the automap view
 te ఆటోమ్యాప్ వీక్షణ జూమ్ స్థాయి
+
+@ Horizontal movement speed in units per second
+te సెకనుకు యూనిట్లలో క్షితిజ సమాంతర కదలిక వేగం
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+te ప్రస్తుత మ్యాప్ మరియు కష్టతరం కోసం మీ వ్యక్తిగత అత్యుత్తమ డెమో యొక్క అర్ధపారదర్శక దెయ్యాన్ని చూపుతుంది (సింగిల్ ప్లేయర్ మాత్రమే)
+
+@ Shows the SPD label before the speed number
+te వేగం సంఖ్య ముందు SPD లేబుల్ చూపుతుంది
 
 # ==== ui.txt ====
 

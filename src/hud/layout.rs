@@ -98,7 +98,7 @@ impl Elem {
         let font = kind.fonts().first().copied().unwrap_or(Font::Quake);
         let size = if kind.is_number() { 24.0 } else { 8.0 };
         let a = match kind {
-            Health | Armor | Ammo | Shells | Nails | Rockets | Cells | HealthBar | ArmorBar | AmmoBar => 1,
+            Health | Armor | Ammo | Shells | Nails | Rockets | Cells | HealthBar | ArmorBar | AmmoBar | Speed => 1,
             Weapons => 4,
             StatusBar | Clock => 1,
             Timer | Pb => 2,

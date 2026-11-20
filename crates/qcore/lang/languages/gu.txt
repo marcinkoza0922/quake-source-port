@@ -1757,6 +1757,15 @@ gu હથિયાર પ્રાથમિકતા
 @ Zoom
 gu ઝૂમ
 
+@ Show Ghost
+gu ભૂત બતાવો
+
+@ Show Label
+gu લેબલ બતાવો
+
+@ Speedometer
+gu સ્પીડોમીટર
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ gu હથિયાર ઉપાડતી વખતે: 'ક્યારેય �
 
 @ Zoom level of the automap view
 gu ઑટોમેપ દૃશ્યનું ઝૂમ સ્તર
+
+@ Horizontal movement speed in units per second
+gu પ્રતિ સેકન્ડ એકમોમાં આડી ગતિ
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+gu વર્તમાન નકશા અને મુશ્કેલી માટે તમારા વ્યક્તિગત શ્રેષ્ઠ ડેમોનું અર્ધપારદર્શક ભૂત ચલાવે છે (ફક્ત સિંગલ પ્લેયર)
+
+@ Shows the SPD label before the speed number
+gu ગતિના અંક પહેલાં SPD લેબલ બતાવે છે
 
 # ==== ui.txt ====
 

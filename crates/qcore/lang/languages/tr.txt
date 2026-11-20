@@ -1757,6 +1757,15 @@ tr Silah Önceliği
 @ Zoom
 tr Yakınlaştırma
 
+@ Show Ghost
+tr Hayaleti Göster
+
+@ Show Label
+tr Etiketi Göster
+
+@ Speedometer
+tr Hız Göstergesi
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ tr Silah alırken: Asla mevcut silahını korur; Daha iyi silah yalnızca Silah 
 
 @ Zoom level of the automap view
 tr Oto-harita görünümünün yakınlaştırma düzeyi
+
+@ Horizontal movement speed in units per second
+tr Saniyede birim cinsinden yatay hareket hızı
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+tr Geçerli harita ve zorluk için kişisel en iyi demonuzun yarı saydam bir hayaletini oynatır (yalnızca tek oyunculu)
+
+@ Shows the SPD label before the speed number
+tr Hız sayısının önünde SPD etiketini gösterir
 
 # ==== ui.txt ====
 

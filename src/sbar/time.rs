@@ -11,6 +11,8 @@ pub struct LevelInfo {
     pub pb: Option<Option<f32>>,
     pub kills: (i32, i32),
     pub secrets: (i32, i32),
+    /// Horizontal speed in units per second (50 ms peak hold).
+    pub speed: i32,
     /// Deathmatch: no kills, secrets or personal best.
     pub deathmatch: bool,
     /// Local wall clock: hour, minute, second.

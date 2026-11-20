@@ -1757,6 +1757,15 @@ la Ordo telorum
 @ Zoom
 la Magnificatio
 
+@ Show Ghost
+la Spectrum ostende
+
+@ Show Label
+la Titulum ostende
+
+@ Speedometer
+la Celeritatis mensura
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ la Cum telum tollitur: Numquam telum praesens servat; Telum melius mutat tantum 
 
 @ Zoom level of the automap view
 la Gradus magnificationis aspectus tabulae automaticae
+
+@ Horizontal movement speed in units per second
+la Celeritas motus horizontalis in unitatibus per secundam
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+la Spectrum translucidum ex demonstratione optimi tui temporis pro tabula ac difficultate praesenti agit (solus lusor)
+
+@ Shows the SPD label before the speed number
+la Titulum SPD ante numerum celeritatis ostendit
 
 # ==== ui.txt ====
 

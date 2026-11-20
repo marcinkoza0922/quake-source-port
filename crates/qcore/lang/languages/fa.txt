@@ -1757,6 +1757,15 @@ fa اولویت سلاح‌ها
 @ Zoom
 fa بزرگ‌نمایی
 
+@ Show Ghost
+fa نمایش شبح
+
+@ Show Label
+fa نمایش برچسب
+
+@ Speedometer
+fa سرعت‌سنج
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ fa هنگام برداشتن سلاح: هرگز سلاح فعلی را نگه م
 
 @ Zoom level of the automap view
 fa میزان بزرگ‌نمایی نمای نقشه خودکار
+
+@ Horizontal movement speed in units per second
+fa سرعت حرکت افقی بر حسب واحد در ثانیه
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+fa شبح نیمه‌شفافی از دموی بهترین رکورد شخصی شما برای نقشه و درجه سختی فعلی اجرا می‌کند (فقط تک‌نفره)
+
+@ Shows the SPD label before the speed number
+fa برچسب SPD را پیش از عدد سرعت نمایش می‌دهد
 
 # ==== ui.txt ====
 

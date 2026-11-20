@@ -1757,6 +1757,15 @@ nb Våpenprioritet
 @ Zoom
 nb Zoom
 
+@ Show Ghost
+nb Vis spøkelse
+
+@ Show Label
+nb Vis etikett
+
+@ Speedometer
+nb Speedometer
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ nb Når du plukker opp et våpen: Aldri beholder nåværende våpen; Bedre våpe
 
 @ Zoom level of the automap view
 nb Zoomnivå for autokartvisningen
+
+@ Horizontal movement speed in units per second
+nb Horisontal bevegelseshastighet i enheter per sekund
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+nb Spiller av et halvgjennomsiktig spøkelse fra demoen av din personlige rekord for gjeldende kart og vanskelighetsgrad (kun enkeltspiller)
+
+@ Shows the SPD label before the speed number
+nb Viser SPD-etiketten foran hastighetstallet
 
 # ==== ui.txt ====
 

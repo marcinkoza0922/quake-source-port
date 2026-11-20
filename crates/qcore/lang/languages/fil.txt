@@ -1757,6 +1757,15 @@ fil Prayoridad ng Armas
 @ Zoom
 fil Zoom
 
+@ Show Ghost
+fil Ipakita ang Multo
+
+@ Show Label
+fil Ipakita ang Label
+
+@ Speedometer
+fil Speedometer
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ fil Kapag dumampot ng armas: pinananatili ng Huwag kailanman ang kasalukuyan mon
 
 @ Zoom level of the automap view
 fil Antas ng zoom ng tanaw ng automap
+
+@ Horizontal movement speed in units per second
+fil Pahalang na bilis ng paggalaw sa bawat yunit kada segundo
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+fil Nagpapakita ng bahagyang malinaw na multo mula sa demo ng iyong personal na rekord para sa kasalukuyang mapa at antas (isang manlalaro lamang)
+
+@ Shows the SPD label before the speed number
+fil Ipinapakita ang label na SPD bago ang numero ng bilis
 
 # ==== ui.txt ====
 

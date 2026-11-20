@@ -1757,6 +1757,15 @@ zh-CN 武器优先级
 @ Zoom
 zh-CN 缩放
 
+@ Show Ghost
+zh-CN 显示幽灵
+
+@ Show Label
+zh-CN 显示标签
+
+@ Speedometer
+zh-CN 速度表
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ zh-CN 拾取武器时：“从不”保持当前武器；“更强武器”仅�
 
 @ Zoom level of the automap view
 zh-CN 自动地图视图的缩放级别
+
+@ Horizontal movement speed in units per second
+zh-CN 以单位/秒显示的水平移动速度
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+zh-CN 回放当前地图与难度个人最佳纪录演示的半透明幽灵（仅限单人游戏）
+
+@ Shows the SPD label before the speed number
+zh-CN 在速度数值前显示 SPD 标签
 
 # ==== ui.txt ====
 

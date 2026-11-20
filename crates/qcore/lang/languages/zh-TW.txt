@@ -1757,6 +1757,15 @@ zh-TW 武器優先順序
 @ Zoom
 zh-TW 縮放
 
+@ Show Ghost
+zh-TW 顯示幽靈
+
+@ Show Label
+zh-TW 顯示標籤
+
+@ Speedometer
+zh-TW 速度表
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2369,6 +2378,15 @@ zh-TW 拾取武器時：「從不」保留目前武器；「更強武器」僅�
 
 @ Zoom level of the automap view
 zh-TW 自動地圖檢視的縮放層級
+
+@ Horizontal movement speed in units per second
+zh-TW 以單位/秒顯示的水平移動速度
+
+@ Runs a translucent ghost of your personal best demo for the current map and skill (single player only)
+zh-TW 重播目前地圖與難度個人最佳紀錄示範的半透明幽靈（僅限單人遊戲）
+
+@ Shows the SPD label before the speed number
+zh-TW 在速度數值前顯示 SPD 標籤
 
 # ==== ui.txt ====
 
