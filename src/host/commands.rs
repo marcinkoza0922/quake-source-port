@@ -661,7 +661,9 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         let cmd = a.all()[2..].iter().map(|s| if s.contains(' ') { format!("\"{s}\"") } else { s.clone() }).collect::<Vec<_>>().join(" ");
         h.delayed.push((t, cmd));
     });
-    c.add("version", |h, _| h.print("quake-source-port 0.1.0\n"));
+    c.add("version", |h, _| {
+        h.print(concat!("quake-source-port ", env!("CARGO_PKG_VERSION"), "\n"));
+    });
     super::death::register(c);
     super::mapswitch::register(c);
     c.add("bugreport", |h, a| {

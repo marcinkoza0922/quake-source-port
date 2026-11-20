@@ -1495,7 +1495,7 @@ dependencies = [
 
 [[package]]
 name = "quake-source-port"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "ab_glyph",
  "console_error_panic_hook",

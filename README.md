@@ -81,8 +81,9 @@ cargo build --release
 
 Release builds are meant for Windows (x64, arm64), Linux (x64, arm64, glibc
 and musl), macOS (Apple silicon), FreeBSD, OpenBSD and NetBSD (x64) and
-Android (arm64). **Only Linux x64 has been tested so far**; the other builds
-are untested and may not start or may misbehave.
+Android (arm64). A WebGPU browser archive is also available. Extract it and
+serve it over localhost or HTTPS. **Only Linux x64 has been tested so far**;
+the other builds are untested and may not start or may misbehave.
 You still need your own Quake game data (see below).
 
 The musl build needs `libstdc++` and the Vulkan loader (Alpine:
