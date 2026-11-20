@@ -3,12 +3,23 @@ use super::*;
 impl World {
     pub fn build(bsp: &Bsp, lit: Option<&[u8]>) -> World {
         let numleafs = bsp.models.first().map_or(0, |m| m.visleafs.max(0) as usize);
-        let has_light = !bsp.lighting.is_empty();
+        let lit_data = lit.or(bsp.rgb_lighting.as_deref());
+        let num_samples = if !bsp.lighting.is_empty() {
+            bsp.lighting.len()
+        } else {
+            lit_data.map_or(0, |l| l.len() / 3)
+        };
+        let has_light = num_samples > 0;
+        let has_lit = lit_data.is_some_and(|l| !l.is_empty() && l.len() == num_samples * 3);
         let mut w = World {
             transparent_liquids: false,
             water_vised: 0,
             hidden_surfaces: Default::default(),
-            texture_names: bsp.textures.iter().map(|t| t.as_ref().map_or_else(String::new, |t| t.name.clone())).collect(),
+            texture_names: bsp
+                .textures
+                .iter()
+                .map(|t| t.as_ref().map_or_else(String::new, |t| t.name.clone()))
+                .collect(),
             light_cache: Default::default(),
             vertices: Vec::new(),
             indices: Vec::new(),
@@ -16,7 +27,7 @@ impl World {
             lm_surfs: Vec::new(),
             samples: Vec::new(),
             atlas_layers: 1,
-            lit: lit.is_some_and(|l| !l.is_empty() && l.len() == bsp.lighting.len() * 3),
+            lit: has_lit,
             anims: Vec::new(),
             submodels: Vec::new(),
             bsp_nodes: bsp.nodes.clone(),
@@ -31,12 +42,10 @@ impl World {
             surf_stamp: Vec::new(),
             stamp: 0,
             has_light,
-            packer: Packer {
-                allocated: vec![0; ATLAS as usize],
-                layer: 0,
-            },
+            lightgrid: bsp.lightgrid.clone(),
+            packer: Packer { allocated: vec![0; ATLAS as usize], layer: 0 },
         };
-        w.append(bsp, lit, 0);
+        w.append(bsp, lit_data, 0);
         w.water_vised = w.check_water_vis();
         if let Some(m) = bsp.models.first() {
             w.bake_liquid(m.first_face.max(0) as usize, m.num_faces.max(0) as usize);
@@ -55,18 +64,30 @@ impl World {
             self.texture_names[tex_base as usize + i] =
                 texture.as_ref().map_or_else(String::new, |t| t.name.clone());
         }
-        self.append(bsp, lit, tex_base);
+        self.append(bsp, lit.or(bsp.rgb_lighting.as_deref()), tex_base);
         first
     }
 
     pub(super) fn append(&mut self, bsp: &Bsp, lit: Option<&[u8]>, tex_base: u32) {
         let w = self;
         let surf_base = w.surfaces.len() as u32;
-        let has_light = !bsp.lighting.is_empty();
+        let num_samples = if !bsp.lighting.is_empty() {
+            bsp.lighting.len()
+        } else {
+            lit.map_or(0, |l| l.len() / 3)
+        };
+        let has_light = num_samples > 0;
         let packer = &mut w.packer;
-        let lit = lit.filter(|l| l.len() == bsp.lighting.len() * 3);
+        let lit = lit.filter(|l| !l.is_empty() && l.len() == num_samples * 3);
         let ntex = bsp.textures.len().max(1);
-        for f in &bsp.faces {
+        let decoupled = bsp.decoupled_lm.as_deref();
+        let lm_shifts = bsp.lm_shift.as_deref();
+        let lm_offsets = bsp.lm_offset.as_deref();
+        let lm_styles = bsp.lm_style.as_deref();
+        let face_normals = bsp.face_normals.as_ref();
+
+        for (face_idx, f) in bsp.faces.iter().enumerate() {
+            let styles = lm_styles.and_then(|s| s.get(face_idx).copied()).unwrap_or(f.styles);
             let mut s = Surface {
                 first_index: w.indices.len() as u32,
                 num_indices: 0,
@@ -77,10 +98,12 @@ impl World {
                 flipped: f.side != 0,
                 lm: NO_LM,
                 vecs: [[0.0; 4]; 2],
+                lm_vecs: [[0.0; 4]; 2],
+                lm_size: [0; 2],
                 texturemins: [0; 2],
                 extents: [0; 2],
                 samples: NO_LM,
-                styles: f.styles,
+                styles,
                 mins: [f32::MAX; 3],
                 maxs: [f32::MIN; 3],
             };
@@ -94,6 +117,7 @@ impl World {
             s.normal = pl.normal;
             s.dist = pl.dist;
             s.vecs = ti.vecs;
+            let face_normal = if f.side != 0 { pl.normal.map(|c| -c) } else { pl.normal };
             let ltex = (ti.miptex.max(0) as usize).min(ntex - 1);
             s.texture = ltex as u32 + tex_base;
             let tex = bsp.textures.get(ltex).and_then(|t| t.as_ref());
@@ -135,25 +159,75 @@ impl World {
                     s.maxs[k] = s.maxs[k].max(c);
                 }
             }
-            let mut lmsize = [0u32; 2];
-            for j in 0..2 {
-                let bmin = (mins[j] / 16.0).floor() as i32;
-                let bmax = (maxs[j] / 16.0).ceil() as i32;
-                s.texturemins[j] = bmin * 16;
-                s.extents[j] = (bmax - bmin) * 16;
-                lmsize[j] = ((bmax - bmin) + 1).max(1) as u32;
-            }
+
             let drawtiled = matches!(s.kind, TextureKind::Sky | TextureKind::Liquid)
                 || ti.flags & TEX_SPECIAL != 0;
+
+            // Compute lightmap dimensions, world->luxel projection and sample offset:
+            // DECOUPLED_LM > LMSHIFT (+ optional LMOFFSET) > vanilla (shift 4 = 16).
+            let mut lmsize = [0u32; 2];
+            let mut lm_vecs = [[0.0f32; 4]; 2];
+            let mut lm_scale = [16.0f32; 2];
+            let lightofs: i32;
+            let mut wants_lm = !drawtiled;
+
+            if let Some(dlm) = decoupled.and_then(|d| d.get(face_idx)) {
+                lightofs = dlm.offset;
+                let valid = dlm.width > 0
+                    && dlm.height > 0
+                    && dlm.vecs.iter().flatten().all(|c| c.is_finite());
+                if valid {
+                    lmsize = [dlm.width as u32, dlm.height as u32];
+                    lm_vecs = dlm.vecs;
+                    for (sc, row) in lm_scale.iter_mut().zip(&dlm.vecs) {
+                        let len = (row[0].powi(2) + row[1].powi(2) + row[2].powi(2)).sqrt();
+                        *sc = if len > 1e-6 { 1.0 / len } else { 16.0 };
+                    }
+                    s.extents = [(lmsize[0] - 1) as i32 * 16, (lmsize[1] - 1) as i32 * 16];
+                } else {
+                    wants_lm = false;
+                }
+            } else {
+                let shift = lm_shifts
+                    .and_then(|sh| sh.get(face_idx).copied())
+                    .map_or(4u32, |sh| u32::from(sh.min(15)));
+                let scale_i = 1i32 << shift;
+                let scale = scale_i as f32;
+                lightofs = if lm_shifts.is_some() {
+                    lm_offsets.and_then(|o| o.get(face_idx).copied()).unwrap_or(f.lightofs)
+                } else {
+                    f.lightofs
+                };
+                for j in 0..2 {
+                    let bmin = (mins[j] / scale).floor() as i32;
+                    let bmax = (maxs[j] / scale).ceil() as i32;
+                    s.texturemins[j] = bmin * scale_i;
+                    s.extents[j] = (bmax - bmin) * scale_i;
+                    lmsize[j] = ((bmax - bmin) + 1).max(1) as u32;
+                    let t = &ti.vecs[j];
+                    lm_vecs[j] = [
+                        t[0] / scale,
+                        t[1] / scale,
+                        t[2] / scale,
+                        (t[3] - s.texturemins[j] as f32) / scale,
+                    ];
+                }
+                lm_scale = [scale, scale];
+            }
+            s.lm_vecs = lm_vecs;
+            s.lm_size = lmsize;
+
             let mut atlas_pos = (0u32, 0u32, 0u32);
-            if !drawtiled && let Some(p) = packer.alloc(lmsize[0], lmsize[1]) {
+            if wants_lm && let Some(p) = packer.alloc(lmsize[0], lmsize[1]) {
                 atlas_pos = p;
-                let nstyles = f.styles.iter().take_while(|&&st| st != 255).count();
+                let nstyles = styles.iter().take_while(|&&st| st != 255).count();
                 let n = (lmsize[0] * lmsize[1]) as usize;
                 let mut sample_ofs = NO_LM;
-                if has_light && f.lightofs >= 0 && nstyles > 0 {
-                    let base = f.lightofs as usize;
-                    let ok = base + n * nstyles <= bsp.lighting.len();
+                if has_light && lightofs >= 0 && nstyles > 0 {
+                    let base = lightofs as usize;
+                    let ok = base
+                        .checked_add(n.saturating_mul(nstyles))
+                        .is_some_and(|end| end <= num_samples);
                     if ok {
                         sample_ofs = w.samples.len() as u32;
                         for i in 0..n * nstyles {
@@ -168,8 +242,7 @@ impl World {
                                     (v, v, v)
                                 }
                             };
-                            w.samples
-                                .push(r as u32 | (g as u32) << 8 | (b as u32) << 16);
+                            w.samples.push(r as u32 | (g as u32) << 8 | (b as u32) << 16);
                         }
                     }
                 }
@@ -177,46 +250,65 @@ impl World {
                 s.lm = w.lm_surfs.len() as u32;
                 w.lm_surfs.push(LmSurf {
                     sample_ofs,
-                    styles: u32::from_le_bytes(f.styles),
+                    styles: u32::from_le_bytes(styles),
                     size: lmsize[0] | lmsize[1] << 16,
                     atlas: p.0 | p.1 << 16,
-                    vecs0: ti.vecs[0],
-                    vecs1: ti.vecs[1],
+                    vecs0: lm_vecs[0],
+                    vecs1: lm_vecs[1],
                     plane: [pl.normal[0], pl.normal[1], pl.normal[2], pl.dist],
                     tmins: [
-                        s.texturemins[0] as f32,
-                        s.texturemins[1] as f32,
+                        lm_scale[0],
+                        lm_scale[1],
                         p.2 as f32,
                         if has_light { 0.0 } else { 1.0 },
                     ],
                 });
             }
+
             let base = w.vertices.len() as u32;
             // Quake64 re-release texture shift (not for sky/liquids).
             let tex_div = match bsp.textures.get(ti.miptex.max(0) as usize) {
-                Some(Some(t)) if t.shift > 0 && matches!(t.kind, TextureKind::Normal | TextureKind::Fence) => {
+                Some(Some(t))
+                    if t.shift > 0 && matches!(t.kind, TextureKind::Normal | TextureKind::Fence) =>
+                {
                     2.0 * t.shift as f32
                 }
                 _ => 1.0,
             };
-            for v in &verts {
+            for (ei, v) in verts.iter().enumerate() {
                 let st = [0, 1].map(|j| {
                     let t = &ti.vecs[j];
                     v[0] * t[0] + v[1] * t[1] + v[2] * t[2] + t[3]
                 });
                 let lm = if s.lm != NO_LM {
+                    let ls = v[0] * lm_vecs[0][0]
+                        + v[1] * lm_vecs[0][1]
+                        + v[2] * lm_vecs[0][2]
+                        + lm_vecs[0][3];
+                    let lt = v[0] * lm_vecs[1][0]
+                        + v[1] * lm_vecs[1][1]
+                        + v[2] * lm_vecs[1][2]
+                        + lm_vecs[1][3];
                     [
-                        ((st[0] - s.texturemins[0] as f32 + 8.0) / 16.0 + atlas_pos.0 as f32)
-                            / ATLAS as f32,
-                        ((st[1] - s.texturemins[1] as f32 + 8.0) / 16.0 + atlas_pos.1 as f32)
-                            / ATLAS as f32,
+                        (ls + 0.5 + atlas_pos.0 as f32) / ATLAS as f32,
+                        (lt + 0.5 + atlas_pos.1 as f32) / ATLAS as f32,
                         atlas_pos.2 as f32,
                     ]
                 } else {
                     [0.0; 3]
                 };
                 let st = st.map(|c| c / tex_div);
-                w.vertices.push(WorldVertex { pos: *v, st, lm, liquid: [0.0; 2] });
+                let normal = face_normals
+                    .and_then(|fnm| fnm.vertex_normal(face_idx, ei))
+                    .and_then(|n| {
+                        let l2 = dot(n, n);
+                        (l2 > 1e-12).then(|| {
+                            let inv = 1.0 / l2.sqrt();
+                            n.map(|c| c * inv)
+                        })
+                    })
+                    .unwrap_or(face_normal);
+                w.vertices.push(WorldVertex { pos: *v, st, lm, liquid: [0.0; 2], normal });
             }
             for i in 1..verts.len() as u32 - 1 {
                 w.indices.extend_from_slice(&[base, base + i, base + i + 1]);

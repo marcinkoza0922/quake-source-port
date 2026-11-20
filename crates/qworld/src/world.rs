@@ -312,6 +312,18 @@ impl World {
         } else {
             None
         };
+        let angles = ents.v(ent, V::Angles);
+        let rot = self.rotate_bmodels && ent != 0 && bmodel.is_some() && angles != Vec3::ZERO;
+        if let Some((m, sub)) = bmodel
+            && m.should_use_brushes(sub, mins, maxs)
+            && let Some(mut tr) =
+                m.trace_brushes_transformed(sub, origin, rot.then_some(angles), start, mins, maxs, end)
+        {
+            if tr.fraction < 1.0 || tr.startsolid {
+                tr.ent = Some(ent);
+            }
+            return tr;
+        }
         let (hull, offset) = match bmodel {
             Some((m, sub)) => {
                 let sx = maxs.x - mins.x;
@@ -331,8 +343,6 @@ impl World {
                 (Hull::for_box(&bp), origin)
             }
         };
-        let angles = ents.v(ent, V::Angles);
-        let rot = self.rotate_bmodels && ent != 0 && bmodel.is_some() && angles != Vec3::ZERO;
         let mut tr = Trace::new(end);
         if rot {
             let (f, r, u) = angle_vectors(angles);

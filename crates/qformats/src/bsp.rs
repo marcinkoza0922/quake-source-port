@@ -45,6 +45,10 @@ pub const CONTENTS_WATER: i32 = -3;
 pub const CONTENTS_SLIME: i32 = -4;
 pub const CONTENTS_LAVA: i32 = -5;
 pub const CONTENTS_SKY: i32 = -6;
+/// BSPX `BRUSHLIST` clip brush (blocks entities with size, ignored by point traces).
+pub const CONTENTS_CLIP: i32 = -8;
+/// BSPX `BRUSHLIST` ladder volume.
+pub const CONTENTS_LADDER: i32 = -16;
 
 pub const TEX_SPECIAL: i32 = 1;
 
@@ -172,8 +176,21 @@ pub struct Bsp {
     pub lighting: Vec<u8>,
     /// Embedded RGB samples (3 bytes per mono sample), like a `.lit` file:
     /// Quake64 lighting or a BSPX `RGBLIGHTING` lump.
-    /// Only Quake64 maps carry these.
     pub rgb_lighting: Option<Vec<u8>>,
+    /// BSPX `DECOUPLED_LM`: per-face decoupled lightmap size, offset and projection.
+    pub decoupled_lm: Option<Vec<crate::bspx::DecoupledLm>>,
+    /// BSPX `LMSHIFT`: per-face luxel scale shift (`1 << shift` texels/luxel).
+    pub lm_shift: Option<Vec<u8>>,
+    /// BSPX `LMOFFSET`: per-face lightmap offset override for `LMSHIFT`.
+    pub lm_offset: Option<Vec<i32>>,
+    /// BSPX `LMSTYLE`: per-face 4-byte lightstyle override.
+    pub lm_style: Option<Vec<[u8; 4]>>,
+    /// BSPX `LIGHTGRID_OCTREE`: volumetric 3D lighting octree for alias models.
+    pub lightgrid: Option<crate::bspx::LightGridOctree>,
+    /// BSPX `BRUSHLIST`: per-submodel convex brushes for exact collision.
+    pub brushlist: Option<Vec<crate::bspx::BspxModelBrushes>>,
+    /// BSPX `FACENORMALS`: per-face, per-vertex smooth Phong normals.
+    pub face_normals: Option<crate::bspx::FaceNormals>,
     pub clipnodes: Vec<ClipNode>,
     pub leafs: Vec<Leaf>,
     pub marksurfaces: Vec<u32>,
@@ -392,9 +409,13 @@ impl Bsp {
             (mono, Some(rgb))
         } else {
             let mono = lumps[LUMP_LIGHTING].to_vec();
-            let rgb = crate::bspx::find_lump(data, "RGBLIGHTING").filter(|l| l.len() == mono.len() * 3).map(<[u8]>::to_vec);
+            let rgb = crate::bspx::find_lump(data, "RGBLIGHTING")
+                .filter(|l| if mono.is_empty() { !l.is_empty() && l.len().is_multiple_of(3) } else { l.len() == mono.len() * 3 })
+                .map(<[u8]>::to_vec);
             (mono, rgb)
         };
+        let nf = faces.len();
+        let xl = |n| crate::bspx::find_lump(data, n);
         Ok(Bsp {
             version: Some(version),
             entities: qcore::text::decode(lumps[LUMP_ENTITIES].split(|&b| b == 0).next().unwrap_or_default()),
@@ -404,6 +425,13 @@ impl Bsp {
             visdata: lumps[LUMP_VISIBILITY].to_vec(),
             nodes,
             texinfo,
+            decoupled_lm: xl("DECOUPLED_LM").and_then(|l| crate::bspx::parse_decoupled_lm(l, nf)),
+            lm_shift: xl("LMSHIFT").and_then(|l| crate::bspx::parse_lm_shift(l, nf)),
+            lm_offset: xl("LMOFFSET").and_then(|l| crate::bspx::parse_lm_offset(l, nf)),
+            lm_style: xl("LMSTYLE").and_then(|l| crate::bspx::parse_lm_style(l, nf)),
+            lightgrid: xl("LIGHTGRID_OCTREE").and_then(crate::bspx::parse_lightgrid_octree),
+            brushlist: xl("BRUSHLIST").and_then(crate::bspx::parse_brushlist),
+            face_normals: xl("FACENORMALS").and_then(|l| crate::bspx::parse_face_normals(l, &faces)),
             faces,
             lighting,
             rgb_lighting,

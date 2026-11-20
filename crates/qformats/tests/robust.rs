@@ -313,3 +313,68 @@ fn md3_synth_and_skin() {
         Some(&[("body".to_string(), "progs/body.tga".to_string())][..])
     );
 }
+
+#[test]
+fn bspx_lumps_fuzz_robust() {
+    let mut d = synth_bsp(29, &[], &[128; 16]);
+    while !d.len().is_multiple_of(4) {
+        d.push(0);
+    }
+    let lumps: [(&str, Vec<u8>); 5] = [
+        ("DECOUPLED_LM", vec![0; 40]),
+        ("LMSHIFT", vec![3]),
+        ("LIGHTGRID_OCTREE", {
+            let mut v = Vec::new();
+            for f in [32.0f32, 32.0, 32.0] {
+                v.extend(f.to_le_bytes());
+            }
+            for i in [1i32, 1, 1] {
+                v.extend(i.to_le_bytes());
+            }
+            for f in [0.0f32, 0.0, 0.0] {
+                v.extend(f.to_le_bytes());
+            }
+            v.push(1);
+            v.extend(qformats::bspx::LIGHTGRID_LEAF.to_le_bytes());
+            v.extend(0u32.to_le_bytes());
+            v.extend(1u32.to_le_bytes());
+            for i in [0i32, 0, 0, 1, 1, 1] {
+                v.extend(i.to_le_bytes());
+            }
+            v.extend([1, 0, 100, 150, 200]);
+            v
+        }),
+        ("BRUSHLIST", {
+            let mut v = Vec::new();
+            for i in [1i32, 0, 1, 0] {
+                v.extend(i.to_le_bytes());
+            }
+            for f in [-16.0f32, -16.0, -16.0, 16.0, 16.0, 16.0] {
+                v.extend(f.to_le_bytes());
+            }
+            v.extend((-2i16).to_le_bytes());
+            v.extend(0u16.to_le_bytes());
+            v
+        }),
+        ("FACENORMALS", 0u32.to_le_bytes().to_vec()),
+    ];
+    d.extend_from_slice(b"BSPX");
+    d.extend_from_slice(&(lumps.len() as u32).to_le_bytes());
+    let mut ofs = d.len() + lumps.len() * 32;
+    for (name, payload) in &lumps {
+        let mut nm = [0u8; 24];
+        nm[..name.len()].copy_from_slice(name.as_bytes());
+        d.extend_from_slice(&nm);
+        d.extend_from_slice(&(ofs as u32).to_le_bytes());
+        d.extend_from_slice(&(payload.len() as u32).to_le_bytes());
+        ofs += payload.len();
+    }
+    for (_, payload) in &lumps {
+        d.extend_from_slice(payload);
+    }
+    let parsed = Bsp::parse(&d).unwrap();
+    assert!(parsed.lightgrid.is_some());
+    assert!(parsed.brushlist.is_some());
+    assert!(parsed.face_normals.is_some());
+    fuzz(&d);
+}

@@ -20,7 +20,7 @@ layout(set = 1, binding = 5, std430) readonly buffer RtAnim { uint rt_anim[]; };
 layout(set = 1, binding = 6, std430) readonly buffer RtDraws { RtDraw rt_draws[]; };
 layout(set = 1, binding = 7, std430) readonly buffer RtAttr { vec4 rt_attr[]; };
 
-const uint RT_WV = 10u;        // floats per WorldVertex
+const uint RT_WV = 13u;        // floats per WorldVertex
 const uint RT_SKY = 0x80000000u; // rt_tex[]: sky surface
 
 vec3 rt_bary(vec2 b) { return vec3(1.0 - b.x - b.y, b.x, b.y); }
@@ -177,7 +177,10 @@ vec3 rt_reflect(vec3 o, vec3 dir, float dist0, float cone) {
         uvec4 tri = rt_brush_tri(custom, geom, prim);
         if ((tri.w & RT_SKY) != 0u) return rt_shade_brush(tri, custom, b, o, vec3(0.0), dir, foot);
         mat4x3 o2w = rayQueryGetIntersectionObjectToWorldEXT(rq, true);
-        vec3 n = normalize(mat3(o2w) * cross(rt_vpos(tri.y) - rt_vpos(tri.x), rt_vpos(tri.z) - rt_vpos(tri.x)));
+        vec3 vn = rt_vattr(tri, 10u, 3u, b);
+        vec3 n = dot(vn, vn) > 1e-6
+            ? normalize(mat3(o2w) * vn)
+            : normalize(mat3(o2w) * cross(rt_vpos(tri.y) - rt_vpos(tri.x), rt_vpos(tri.z) - rt_vpos(tri.x)));
         if (dot(n, dir) > 0.0) n = -n;
         c = rt_shade_brush(tri, custom, b, o + dir * t, n, dir, foot);
     }

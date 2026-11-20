@@ -25,6 +25,8 @@ pub struct WorldVertex {
     /// Underwater faces: height of the liquid surface above and liquid kind
     /// (1 water, 2 lava, 3 slime; +4 when the column is roofed). 0 kind = dry.
     pub liquid: [f32; 2],
+    /// Smooth per-vertex normal (BSPX `FACENORMALS`, or face plane normal).
+    pub normal: [f32; 3],
 }
 
 /// GPU layout of `Surf` in lightmap.comp (std430, 96 bytes).
@@ -35,10 +37,12 @@ pub struct LmSurf {
     pub styles: u32,
     pub size: u32,
     pub atlas: u32,
+    /// World -> luxel S projection (`dot(p, vecs0.xyz) + vecs0.w`).
     pub vecs0: [f32; 4],
+    /// World -> luxel T projection (`dot(p, vecs1.xyz) + vecs1.w`).
     pub vecs1: [f32; 4],
     pub plane: [f32; 4],
-    /// Texture minima, atlas layer, fullbright fallback for an unlit BSP.
+    /// World units per luxel (S, T), atlas layer, fullbright fallback for an unlit BSP.
     pub tmins: [f32; 4],
 }
 
@@ -53,6 +57,10 @@ pub struct Surface {
     pub flipped: bool,
     pub lm: u32,
     pub vecs: [[f32; 4]; 2],
+    /// World -> luxel projection (supports vanilla, `LMSHIFT`, and `DECOUPLED_LM`).
+    pub lm_vecs: [[f32; 4]; 2],
+    /// Lightmap dimensions in luxels (`[0, 0]` if unlightmapped).
+    pub lm_size: [u32; 2],
     pub texturemins: [i32; 2],
     pub extents: [i32; 2],
     /// Offset into `samples` (CPU light sampling) or NO_LM.
@@ -109,6 +117,8 @@ pub struct World {
     surf_stamp: Vec<u32>,
     stamp: u32,
     pub has_light: bool,
+    /// Optional BSPX `LIGHTGRID_OCTREE` for volumetric 3D alias lighting.
+    pub(super) lightgrid: Option<qformats::bspx::LightGridOctree>,
     packer: Packer,
 }
 

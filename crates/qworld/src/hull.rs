@@ -52,6 +52,9 @@ pub struct CollisionModel {
     pub node_children: Vec<[i32; 2]>,
     pub leaf_contents: Vec<i32>,
     pub submodels: Vec<SubModel>,
+    /// Optional BSPX `BRUSHLIST` collision structures per submodel (exact
+    /// swept-box collision for non-standard hull sizes or omitted clipnodes).
+    pub brushes: Option<Vec<crate::brush::BrushModel>>,
 }
 
 pub const HULL_MINS: [Vec3; 3] =
@@ -77,6 +80,21 @@ impl CollisionModel {
             .collect();
         let clipnodes =
             b.clipnodes.iter().map(|c| CNode { plane: c.plane as u32, children: c.children }).collect();
+        let brushes = b.brushlist.as_ref().map(|models| {
+            let max_m = models
+                .iter()
+                .map(|m| m.model_num as usize + 1)
+                .max()
+                .unwrap_or(0)
+                .max(b.models.len());
+            let mut per_sub = vec![crate::brush::BrushModel::default(); max_m];
+            for m in models {
+                if let Some(slot) = per_sub.get_mut(m.model_num as usize) {
+                    *slot = crate::brush::BrushModel::from_bspx(&m.brushes);
+                }
+            }
+            per_sub
+        });
         Self {
             planes,
             hull0,
@@ -94,6 +112,100 @@ impl CollisionModel {
                     headnode: m.headnode,
                 })
                 .collect(),
+            brushes,
+        }
+    }
+
+    /// Standard Quake hull index if `(mins, maxs)` matches hull 0, 1 or 2 exactly.
+    pub fn standard_hull(mins: Vec3, maxs: Vec3) -> Option<usize> {
+        let size = maxs - mins;
+        if size == Vec3::ZERO {
+            Some(0)
+        } else if size == HULL_MAXS[1] - HULL_MINS[1] {
+            Some(1)
+        } else if size == HULL_MAXS[2] - HULL_MINS[2] {
+            Some(2)
+        } else {
+            None
+        }
+    }
+
+    /// Whether a trace against `sub` with `(mins, maxs)` should use `BRUSHLIST`
+    /// exact brush collision (non-standard hull size, or omitted clipnodes).
+    pub fn should_use_brushes(&self, sub: usize, mins: Vec3, maxs: Vec3) -> bool {
+        if self.brushes.is_none() {
+            return false;
+        }
+        match Self::standard_hull(mins, maxs) {
+            None => true,
+            Some(0) => self.hull0.is_empty(),
+            Some(h) => {
+                self.clipnodes.is_empty()
+                    || self.submodels.get(sub).is_some_and(|m| m.headnode[h] < 0)
+            }
+        }
+    }
+
+    /// Trace against `BRUSHLIST` for submodel `sub` in world coordinates,
+    /// handling translation by `origin` and optional rotation by `angles`.
+    #[allow(clippy::too_many_arguments)]
+    pub fn trace_brushes_transformed(
+        &self,
+        sub: usize,
+        origin: Vec3,
+        angles: Option<Vec3>,
+        start: Vec3,
+        mins: Vec3,
+        maxs: Vec3,
+        end: Vec3,
+    ) -> Option<Trace> {
+        if let Some(angles) = angles {
+            let (f, r, u) = qcore::math::angle_vectors(angles);
+            let local = |p: Vec3| {
+                let d = p - origin;
+                Vec3::new(d.dot(f), -d.dot(r), d.dot(u))
+            };
+            let mut t = self.trace_brushes(sub, local(start), mins, maxs, local(end))?;
+            if t.fraction != 1.0 {
+                let n = t.plane_normal;
+                t.plane_normal = f * n.x - r * n.y + u * n.z;
+                t.endpos = start + (end - start) * t.fraction;
+                t.plane_dist = t.plane_normal.dot(t.endpos);
+            } else {
+                t.endpos = end;
+            }
+            Some(t)
+        } else {
+            let mut t = self.trace_brushes(sub, start - origin, mins, maxs, end - origin)?;
+            if t.fraction != 1.0 || t.startsolid {
+                t.endpos += origin;
+                t.plane_dist += t.plane_normal.dot(origin);
+            } else {
+                t.endpos = end;
+            }
+            Some(t)
+        }
+    }
+
+    /// Trace against `BRUSHLIST` for submodel `sub` in submodel-local coordinates.
+    pub fn trace_brushes(
+        &self,
+        sub: usize,
+        start: Vec3,
+        mins: Vec3,
+        maxs: Vec3,
+        end: Vec3,
+    ) -> Option<Trace> {
+        let list = self.brushes.as_ref()?;
+        match list.get(sub) {
+            Some(bm) => Some(bm.trace(start, mins, maxs, end)),
+            None => {
+                // Submodels omitted from BRUSHLIST are non-solid (e.g. func_illusionary).
+                let mut tr = Trace::new(end);
+                tr.allsolid = false;
+                tr.inopen = true;
+                Some(tr)
+            }
         }
     }
 

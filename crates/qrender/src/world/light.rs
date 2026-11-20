@@ -2,7 +2,14 @@ use super::*;
 
 impl World {
     /// R_LightPoint: returns RGB light (0..255+ scale) at `p`, or None if nothing hit.
+    /// Uses BSPX `LIGHTGRID_OCTREE` when present (falling back to the classic
+    /// downward BSP trace if `p` is outside the grid or fully occluded).
     pub fn light_point(&self, p: [f32; 3], styles: &[i32]) -> Option<[f32; 3]> {
+        if let Some(grid) = &self.lightgrid
+            && let Some(rgb) = grid.sample(p, styles)
+        {
+            return Some(rgb);
+        }
         if !self.has_light || self.bsp_nodes.is_empty() {
             return Some([255.0; 3]);
         }
@@ -31,9 +38,12 @@ impl World {
     /// InterpolateLightmap: bilinear between the four nearest luxels.
     pub(super) fn interpolate_light(&self, si: usize, ds: i32, dt: i32, styles: &[i32]) -> [f32; 3] {
         let Some(s) = self.surfaces.get(si) else { return [0.0; 3] };
-        let w = ((s.extents[0] >> 4) + 1) as usize;
-        let h = ((s.extents[1] >> 4) + 1) as usize;
-        let (x, y) = ((ds >> 4) as usize, (dt >> 4) as usize);
+        let (w, h) = (s.lm_size[0] as usize, s.lm_size[1] as usize);
+        if w == 0 || h == 0 {
+            return [0.0; 3];
+        }
+        let x = ((ds >> 4).max(0) as usize).min(w - 1);
+        let y = ((dt >> 4).max(0) as usize).min(h - 1);
         let (x1, y1) = ((x + 1).min(w - 1), (y + 1).min(h - 1));
         let (fs, ft) = (ds & 15, dt & 15);
         let mut acc = [[0i32; 3]; 4];
@@ -89,18 +99,19 @@ impl World {
                 let Some(s) = self.surfaces.get(si as usize) else {
                     break;
                 };
-                if s.lm == NO_LM {
+                if s.lm == NO_LM || s.lm_size[0] == 0 || s.lm_size[1] == 0 {
                     continue;
                 }
-                let ds = (dot64(mid, s.vecs[0]) + s.vecs[0][3] as f64) as i32;
-                let dt = (dot64(mid, s.vecs[1]) + s.vecs[1][3] as f64) as i32;
-                if ds < s.texturemins[0] || dt < s.texturemins[1] {
+                let ls = dot64(mid, s.lm_vecs[0]) + s.lm_vecs[0][3] as f64;
+                let lt = dot64(mid, s.lm_vecs[1]) + s.lm_vecs[1][3] as f64;
+                if ls < 0.0
+                    || lt < 0.0
+                    || ls > (s.lm_size[0] - 1) as f64
+                    || lt > (s.lm_size[1] - 1) as f64
+                {
                     continue;
                 }
-                let (ds, dt) = (ds - s.texturemins[0], dt - s.texturemins[1]);
-                if ds > s.extents[0] || dt > s.extents[1] {
-                    continue;
-                }
+                let (ds, dt) = ((ls * 16.0) as i32, (lt * 16.0) as i32);
                 let sfront = dot(rayorg, s.normal) - s.dist;
                 let sback = dot(end, s.normal) - s.dist;
                 let len = (0..3).map(|i| (end[i] - rayorg[i]).powi(2)).sum::<f32>().sqrt();

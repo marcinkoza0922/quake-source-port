@@ -9,6 +9,7 @@ struct WorldIn {
     @location(1) st: vec2<f32>,
     @location(2) lm: vec3<f32>,
     @location(3) liq: vec2<f32>,
+    @location(4) nrm: vec3<f32>,
 };
 struct WorldOut {
     @builtin(position) clip: vec4<f32>,
@@ -17,6 +18,7 @@ struct WorldOut {
     @location(2) wpos: vec3<f32>,
     // liquid surface height above and kind (WorldVertex::liquid)
     @location(3) @interpolate(flat) liq: vec2<f32>,
+    @location(4) nrm: vec3<f32>,
 };
 @vertex fn vs_world(v: WorldIn) -> WorldOut {
     var o: WorldOut;
@@ -26,6 +28,7 @@ struct WorldOut {
     o.lm = v.lm;
     o.wpos = w.xyz;
     o.liq = v.liq;
+    o.nrm = (du.model * vec4<f32>(v.nrm, 0.0)).xyz;
     return o;
 }
 
@@ -145,13 +148,14 @@ fn world_frag(i: WorldOut) -> Frag {
     }
     let lmc = textureSampleLevel(lightmap, lm_samp, lm, i32(i.lm.z + 0.5), 0.0).rgb * 2.0;
     if (du.params.x > 0.5 && c.a < 0.666) { discard; }
+    let has_nrm = dot(i.nrm, i.nrm) > 1e-6;
+    var n = normalize(select(nf, i.nrm, has_nrm));
+    if ((!has_nrm || du.params.x > 0.5) && dot(n, fr.eye.xyz - i.wpos) < 0.0) { n = -n; }
     var light = lmc;
     if (du.params.z > 0.5 || (fr.softf.x & 16u) != 0u) { light = vec3<f32>(1.0); }
     else if (rt.count.x > 0u) {
         // r_shadow_realtime_dlight: dynamic lights per pixel (the lightmaps
-        // then leave them out), on the face normal turned toward the eye
-        var n = normalize(nf);
-        if (dot(n, fr.eye.xyz - i.wpos) < 0.0) { n = -n; }
+        // then leave them out), using smooth FACENORMALS when present
         light = min(light + dyn_lights(i.wpos, n), vec3<f32>(2.0));
     }
     if (dither >= 2u) { // 64 light levels, like the colormap
@@ -167,7 +171,6 @@ fn world_frag(i: WorldOut) -> Frag {
             // light comes in at a slant, so walls get streaks shifted by depth
             let q = floor(i.wpos.xy + depth * vec2<f32>(0.55, 0.35)) + 0.5;
             let cst = caustic_tex(q, fr.eye.w * 0.9);
-            let n = normalize(nf);
             let fade = clamp(depth / 8.0, 0.0, 1.0) * exp(-depth / 384.0) * mix(0.55, 1.0, abs(n.z))
                 * select(1.0, 0.4, (lk & 4u) != 0u) * dist_fade;
             let tint = select(vec3<f32>(0.75, 0.92, 1.0), vec3<f32>(0.55, 1.0, 0.35), (lk & 3u) == 3u);
