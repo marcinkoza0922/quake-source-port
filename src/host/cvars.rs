@@ -106,7 +106,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("r_telealpha", "0", 0),
     ("r_dynamic", "1", CVAR_ARCHIVE),
     ("vid_vsync", "0", CVAR_ARCHIVE),
-    ("vid_fullscreen", "0", CVAR_ARCHIVE),
+    ("vid_fullscreen", if cfg!(target_os = "android") { "2" } else { "0" }, CVAR_ARCHIVE),
     ("vid_width", "1280", CVAR_ARCHIVE),
     ("vid_height", "720", CVAR_ARCHIVE),
     ("r_msaa", "4", CVAR_ARCHIVE),

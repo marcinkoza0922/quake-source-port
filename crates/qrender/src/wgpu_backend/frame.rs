@@ -155,8 +155,12 @@ impl Renderer {
         let color = tex(scene, 1, SCENE_FORMAT, U::RENDER_ATTACHMENT | U::TEXTURE_BINDING);
         let ms_view = (self.msaa > 1)
             .then(|| tex(scene, self.msaa, SCENE_FORMAT, U::RENDER_ATTACHMENT | U::TEXTURE_BINDING).create_view(&Default::default()));
-        // sampled by SSAO
-        let depth = tex(scene, self.msaa, DEPTH_FORMAT, U::RENDER_ATTACHMENT | U::TEXTURE_BINDING);
+        let depth_usage = U::RENDER_ATTACHMENT | if self.pipes.scene.fx.is_some() {
+            U::TEXTURE_BINDING
+        } else {
+            U::empty()
+        };
+        let depth = tex(scene, self.msaa, DEPTH_FORMAT, depth_usage);
         let out = self.surface.is_none().then(|| {
             let o = tex((w, h), 1, wgpu::TextureFormat::Rgba8Unorm, U::RENDER_ATTACHMENT | U::COPY_SRC);
             let bpr = (w * 4).next_multiple_of(256);
@@ -170,14 +174,14 @@ impl Renderer {
         });
         let color_view = color.create_view(&Default::default());
         let depth_view = depth.create_view(&Default::default());
-        let ao = self.ssao.map(|q| self.create_ao_targets(q, scene, ms_view.as_ref().unwrap_or(&color_view), &depth_view));
-        let vel = self.mblur.map(|q| self.create_vel_target(q, scene, &depth_view));
+        let ao = self.ssao.and_then(|q| self.create_ao_targets(q, scene, ms_view.as_ref().unwrap_or(&color_view), &depth_view));
+        let vel = self.mblur.and_then(|q| self.create_vel_target(q, scene, &depth_view));
         let bloom = self.bloom.and_then(|q| self.create_bloom_targets(q, scene, &color_view));
-        let soft_group = self.dev.create_bind_group(&wgpu::BindGroupDescriptor {
+        let soft_group = self.pipes.scene.fx.as_ref().map(|fx| self.dev.create_bind_group(&wgpu::BindGroupDescriptor {
             label: None,
-            layout: &self.pipes.scene.fx.soft_bgl,
+            layout: &fx.soft_bgl,
             entries: &[wgpu::BindGroupEntry { binding: 0, resource: wgpu::BindingResource::TextureView(&depth_view) }],
-        });
+        }));
         self.targets = Some(Targets { scene, color, color_view, ms_view, depth_view, ao, soft_group, vel, bloom, out });
         self.frame_ready = false;
     }
@@ -209,7 +213,9 @@ impl Renderer {
             self.render_scale = scale;
             self.needs_resize = true;
         }
-        let msaa = if fr.settings.msaa > 1 { MSAA_SAMPLES } else { 1 };
+        let depth_sampling = self.pipes.scene.fx.is_some();
+        // GLES drivers can advertise four samples and still reject the scene framebuffer.
+        let msaa = if depth_sampling && fr.settings.msaa > 1 { MSAA_SAMPLES } else { 1 };
         let bloom = (fr.settings.bloom > 0.0).then(|| fr.settings.bloom_quality.min(1));
         if msaa != self.msaa || bloom != self.bloom {
             self.msaa = msaa;
@@ -220,12 +226,12 @@ impl Renderer {
             }
             self.needs_resize = true;
         }
-        let ssao = (fr.settings.ssao > 0.0).then(|| fr.settings.ssao_quality.min(2));
+        let ssao = (depth_sampling && fr.settings.ssao > 0.0).then(|| fr.settings.ssao_quality.min(2));
         if ssao != self.ssao {
             self.ssao = ssao;
             self.needs_resize = true;
         }
-        let mblur = (fr.settings.motion_blur > 0.0).then(|| fr.settings.motion_blur_quality.min(1));
+        let mblur = (depth_sampling && fr.settings.motion_blur > 0.0).then(|| fr.settings.motion_blur_quality.min(1));
         if mblur != self.mblur {
             self.mblur = mblur;
             self.needs_resize = true;

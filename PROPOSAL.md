@@ -14,6 +14,15 @@ Build a testing framework to automatically traverse each level in a way that fin
 
 Give discrete tasks that do not interfere with each other to subagents.
 
+## Android
+
+The Android launcher lets the player choose a Quake folder or a folder
+containing `pak0.pak` directly. The selected PAKs remain available across app
+launches, and the player can choose another folder from the launcher.
+
+Gameplay runs in immersive landscape fullscreen. Graphics settings offer
+render scale for performance and use the device display size for output.
+
 
 ## Combat feedback
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quake Source Port</string>
+    <string name="choose_quake_folder">Choose Quake folder</string>
+    <string name="play">Play</string>
+    <string name="picker_unavailable">Android’s folder picker is unavailable.</string>
+    <string name="importing_paks">Importing PAKs…</string>
+    <string name="imported_paks_ready">Imported Quake PAKs are ready.</string>
+    <string name="using_app_files">Using Quake data in the app’s files folder.</string>
+    <string name="choose_pak_folder_hint">Choose the folder containing pak0.pak or its parent Quake folder.</string>
+    <string name="folder_unreadable">Could not read the selected folder.</string>
+</resources>

@@ -1,19 +1,19 @@
 //! qplatform glue: SurfaceProvider for the window, platform event to
 //! `qinput::InputEvent` conversion (SDL keycodes to Quake key numbers).
 
-#[cfg(not(target_arch = "wasm32"))]
+#[cfg(not(any(target_arch = "wasm32", target_os = "android")))]
 use std::ffi::CString;
 
 use qinput::keys::*;
 use qinput::{GamepadAxis, GamepadButton, InputEvent};
 use qplatform::Event;
-#[cfg(not(target_arch = "wasm32"))]
+#[cfg(not(any(target_arch = "wasm32", target_os = "android")))]
 use qplatform::Window;
 
-#[cfg(not(target_arch = "wasm32"))]
+#[cfg(not(any(target_arch = "wasm32", target_os = "android")))]
 pub struct Surface<'a>(pub &'a Window);
 
-#[cfg(not(target_arch = "wasm32"))]
+#[cfg(not(any(target_arch = "wasm32", target_os = "android")))]
 impl qrender::SurfaceProvider for Surface<'_> {
     fn instance_extensions(&self) -> Vec<CString> {
         self.0.vulkan_instance_extensions()

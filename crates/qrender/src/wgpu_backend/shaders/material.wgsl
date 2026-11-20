@@ -268,8 +268,8 @@ struct AliasOut {
     @location(0) st: vec2<f32>,
     @location(1) shade: vec3<f32>,
     @location(2) wpos: vec3<f32>,
-    // r_softemu_mdl_warp: software-renderer affine texture mapping
-    @location(3) @interpolate(linear) st_affine: vec2<f32>,
+    // Affine UV multiplied by clip W so GLES can interpolate it without noperspective.
+    @location(3) st_times_w: vec2<f32>,
     // world-space normal (per-pixel dynamic lights)
     @location(4) nrm: vec3<f32>,
 };
@@ -277,7 +277,7 @@ struct AliasOut {
     var o: AliasOut;
     o.clip = fr.viewproj * vec4<f32>(v.pos, 1.0);
     o.st = v.st;
-    o.st_affine = v.st;
+    o.st_times_w = v.st * o.clip.w;
     o.shade = v.shade;
     o.wpos = v.pos;
     o.nrm = v.nrm;
@@ -303,7 +303,8 @@ fn alias_tex(t: texture_2d<f32>, st: vec2<f32>, affine: bool) -> vec4<f32> {
 fn alias_frag(i: AliasOut) -> Frag {
     let mode = fr.softf.y;
     let affine = mode == 2u;
-    let st = select(i.st, i.st_affine, affine);
+    // The fragment position's W is 1 / clip W. This cancels perspective correction.
+    let st = select(i.st, i.st_times_w * i.clip.w, affine);
     let c = alias_tex(t0, st, affine);
     let fb = alias_tex(t1, st, affine);
     if (du.params.x > 0.5 && c.a < 0.666) { discard; }

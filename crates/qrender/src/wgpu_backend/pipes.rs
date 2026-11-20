@@ -228,7 +228,7 @@ pub(super) fn vb<T>(attrs: &[wgpu::VertexAttribute]) -> Option<wgpu::VertexBuffe
 }
 
 impl Pipes {
-    pub(super) fn new(dev: &wgpu::Device, out_format: wgpu::TextureFormat) -> Pipes {
+    pub(super) fn new(dev: &wgpu::Device, out_format: wgpu::TextureFormat, scene_depth_sampling: bool) -> Pipes {
         use wgpu::TextureViewDimension as D;
         let bgl = |entries: &[wgpu::BindGroupLayoutEntry]| {
             dev.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor { label: None, entries })
@@ -332,7 +332,7 @@ impl Pipes {
         let alpha = Some(wgpu::BlendState::ALPHA_BLENDING);
         let tri = wgpu::PrimitiveTopology::TriangleList;
         let ui_vb = [vb::<UiV>(&UI_ATTRS)];
-        let scene = ScenePipes::new(dev, &frame_bgl, &mat_bgl, &draw_bgl, &scene_layout, &sky_layout, &scene_module, &sky_module, 1, false);
+        let scene = ScenePipes::new(dev, &frame_bgl, &mat_bgl, &draw_bgl, &scene_layout, &sky_layout, &scene_module, &sky_module, 1, false, scene_depth_sampling);
         let ui = pipeline(dev, Desc {
             layout: &screen_layout,
             module: &screen,
@@ -390,6 +390,7 @@ impl Pipes {
                 &self.sky_module,
                 samples,
                 glow,
+                self.scene.fx.is_some(),
             );
         }
     }

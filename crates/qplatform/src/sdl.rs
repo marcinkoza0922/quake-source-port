@@ -9,6 +9,10 @@ use sdl3_sys::everything as sys;
 
 use crate::*;
 
+#[cfg(target_os = "android")]
+mod android;
+#[cfg(target_os = "android")]
+pub use android::{AndroidWindow, android_log};
 mod window;
 pub use window::vulkan_instance_extensions;
 
@@ -96,10 +100,14 @@ impl Platform {
         if n < 0 { Err(sdl_error()) } else { Ok(n as u32) }
     }
 
-    /// Create a resizable, high-DPI window, optionally Vulkan-capable.
+    /// Create a high-DPI window, optionally Vulkan-capable. Android uses its full display.
     pub fn create_window(&self, title: &str, width: u32, height: u32, vulkan: bool) -> Result<Window> {
         let t = cstring(title)?;
-        let mut flags = sys::SDL_WINDOW_RESIZABLE | sys::SDL_WINDOW_HIGH_PIXEL_DENSITY;
+        let mut flags = sys::SDL_WINDOW_HIGH_PIXEL_DENSITY | if cfg!(target_os = "android") {
+            sys::SDL_WINDOW_FULLSCREEN
+        } else {
+            sys::SDL_WINDOW_RESIZABLE
+        };
         if vulkan {
             flags |= sys::SDL_WINDOW_VULKAN;
         }

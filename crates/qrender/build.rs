@@ -2,18 +2,18 @@
 //! With `QSP_SPIRV_DIR` set, copies prebuilt `<name>.spv` files from there instead (SPIR-V is
 //! platform independent, so release CI compiles the shaders once).
 //!
-//! Also selects the backend: cfg `qvk` (Vulkan) unless building for wasm32 or
-//! with the `wgpu` feature, in which case the WGSL wgpu backend is used and no
-//! GLSL is compiled.
+//! Also selects the backend: wasm32, Android, and native `wgpu` builds use
+//! WGSL. Other builds select cfg `qvk` and compile GLSL.
 use std::path::Path;
 use std::process::Command;
 
 fn main() {
     println!("cargo::rustc-check-cfg=cfg(qvk)");
     let wasm = std::env::var("CARGO_CFG_TARGET_ARCH").is_ok_and(|a| a == "wasm32");
+    let android = std::env::var("CARGO_CFG_TARGET_OS").is_ok_and(|os| os == "android");
     let wgpu = std::env::var("CARGO_FEATURE_WGPU").is_ok();
     println!("cargo:rerun-if-changed=shaders");
-    if wasm || wgpu {
+    if wasm || android || wgpu {
         return;
     }
     println!("cargo:rustc-cfg=qvk");

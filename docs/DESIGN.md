@@ -571,6 +571,17 @@ other machines. `AGENTS.md` keeps asset-use guidance rather than a tool catalog.
   macOS build on native runners with bundled static SDL3. The Android debug APK
   stages `libmain.so`, `libSDL3.so` and the build NDK's `libc++_shared.so` as
   arm64 JNI libraries. The release job checks all three entries before uploading.
+  The Android launcher uses `ACTION_OPEN_DOCUMENT_TREE` to import numbered PAKs
+  from the selected folder or its `id1` subdirectory into app-specific external
+  storage. It validates `pak0.pak` and switches an atomic pointer only after the
+  copy succeeds. The SDL activity uses the active import as `QUAKE_BASEDIR`, or
+  the app's external files directory for data placed there over USB. The SDL
+  activity runs in a separate process so exiting Quake returns to the launcher.
+  Startup errors are shown in an SDL dialog and sent to Android logcat.
+  The game activity uses a fullscreen theme and SDL's landscape fullscreen
+  window. On Android, `vid_apply` and `vid_restart` use the device drawable size
+  and set `vid_fullscreen` to `2`. Graphics omits Display Mode, Resolution and
+  Apply, while `r_renderscale` still controls the internal scene size.
   musl Linux (x64, arm64) builds in Alpine via `tools/release_musl.sh` (locally:
   `podman run --rm -v "$PWD:/src:Z" -w /src alpine:3.22 sh tools/release_musl.sh`,
   output in `target/musl/`). musl is linked dynamically (`-crt-static` off) because a
@@ -965,14 +976,20 @@ Left on `std::fs` because they never run on the web: librashader presets
 (`src/host/shader.rs`), the Steam/home install search
 (`qcore/src/fs/discovery.rs`), the Quaddicted installer, and tests.
 
-### wgpu backend (web / `--features wgpu`)
+### wgpu backend (Android, web, and `--features wgpu`)
 qrender has two backends behind one `Renderer` API. build.rs sets cfg `qvk`
-(Vulkan, ash + glslc SPIR-V) unless the target is wasm32 or the `wgpu`
-feature (root: `cargo run --features wgpu`) is on; then `src/wgpu_backend/`
+(Vulkan, ash + glslc SPIR-V) unless the target is Android or wasm32 or the
+`wgpu` feature (root: `cargo run --features wgpu`) is on; then `src/wgpu_backend/`
 is compiled instead and no GLSL is built. Shared modules: types, projection,
 convert, world (CPU BSP/PVS/light), portals, water, shared (ShaderParam,
 GpuViewTiming). The Vulkan Renderer lives in `src/lib/vk.rs`, include!d at
 the crate root.
+Android presents through wgpu's Vulkan backend, with OpenGL ES 3.1 as a
+fallback when Vulkan initialization fails. The GL backend uses single-sample
+targets and skips the SSAO, velocity, and soft-particle passes that load scene depth.
+qplatform takes an owning reference to SDL's `ANativeWindow`. The renderer recreates the wgpu
+surface when Android replaces that window after pause or when the surface is
+lost.
 The wgpu backend (wgpu 30, WGSL in `wgpu_backend/shaders/`) builds draw lists
 on the CPU each frame: world surfaces from `World::portal_surfaces`
 (frustum/backface culled, bucketed per animated texture) into one index

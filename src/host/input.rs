@@ -9,6 +9,7 @@ impl Host {
                     let (w, h) = win.drawable_size();
                     self.r.resize(w, h);
                     // remember user-resized window size
+                    #[cfg(not(target_os = "android"))]
                     if self.cv("vid_fullscreen") == 0.0 {
                         let (ww, wh) = win.window_size();
                         let cv = &mut self.server.core.cvars;

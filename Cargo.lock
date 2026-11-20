@@ -1438,6 +1438,7 @@ name = "qplatform"
 version = "0.1.0"
 dependencies = [
  "js-sys",
+ "raw-window-handle",
  "sdl3-sys",
  "wasm-bindgen",
  "web-sys",

@@ -334,7 +334,7 @@ pub(super) const WATERWARP: &[(&str, f32)] = &[("off", 0.0), ("Classic", 1.0), (
 /// vkQuake numbering: 1 is GLQuake, 2 is Classic.
 pub(super) const PARTICLES: &[(&str, f32)] = &[("off", 0.0), ("GLQuake", 1.0), ("Classic", 2.0)];
 
-pub(super) const GRAPHICS: &[Item] = &[
+const GRAPHICS_ROWS: &[Item] = &[
     Item::DisplayMode,
     Item::Resolution,
     Item::Apply,
@@ -362,6 +362,13 @@ pub(super) const GRAPHICS: &[Item] = &[
     toggle("Interpolate Animation", "r_lerpmodels"),
     toggle("Interpolate Movement", "r_lerpmove"),
 ];
+
+pub(super) const GRAPHICS: &[Item] = if cfg!(target_os = "android") {
+    // Display Mode, Resolution and their Apply button are desktop controls.
+    GRAPHICS_ROWS.split_at(3).1
+} else {
+    GRAPHICS_ROWS
+};
 
 pub(super) const COLORBLIND: &[(&str, f32)] =
     &[("off", 0.0), ("protanopia", 1.0), ("deuteranopia", 2.0), ("tritanopia", 3.0)];
