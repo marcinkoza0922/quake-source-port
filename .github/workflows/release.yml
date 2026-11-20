@@ -192,7 +192,7 @@ jobs:
         with: { key: android }
       - name: Install cargo-ndk
         run: cargo install cargo-ndk --locked
-      - name: Build libmain.so and libSDL3.so
+      - name: Build and stage Android native libraries
         run: |
           export QSP_SPIRV_DIR="$GITHUB_WORKSPACE/spv"
           export ANDROID_NDK_HOME="${ANDROID_NDK_LATEST_HOME:-$ANDROID_NDK_ROOT}"
@@ -206,6 +206,9 @@ jobs:
           mkdir -p "$libs"
           cp target/aarch64-linux-android/release/libquake_source_port.so "$libs/libmain.so"
           cp "$(find target/aarch64-linux-android/release/build -name libSDL3.so | head -1)" "$libs/"
+          # libmain.so links the NDK's shared C++ runtime. Gradle only packages staged libraries.
+          ndk_sysroot="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+          cp "$ndk_sysroot/usr/lib/aarch64-linux-android/libc++_shared.so" "$libs/"
           ls -la "$libs"
       - name: SDL Java glue
         run: |
@@ -217,8 +220,12 @@ jobs:
         run: gradle --no-daemon assembleDebug
       - name: Package
         run: |
+          apk=android/app/build/outputs/apk/debug/app-debug.apk
+          for lib in libmain.so libSDL3.so libc++_shared.so; do
+            unzip -tq "$apk" "lib/arm64-v8a/$lib"
+          done
           ref="${GITHUB_REF_NAME//\//-}"
-          cp android/app/build/outputs/apk/debug/app-debug.apk "quake-source-port-$ref-android-arm64.apk"
+          cp "$apk" "quake-source-port-$ref-android-arm64.apk"
           echo "ASSET=quake-source-port-$ref-android-arm64.apk" >> "$GITHUB_ENV"
       - uses: actions/upload-artifact@v4
         with: { name: android-arm64, path: "${{ env.ASSET }}" }
