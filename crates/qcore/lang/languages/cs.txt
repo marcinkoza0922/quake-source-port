@@ -1775,6 +1775,15 @@ cs Snímek obrazovky
 @ Record Demo
 cs Nahrávat demo
 
+@ HDR Lightmaps
+cs HDR lightmapy
+
+@ Directional Lighting
+cs Směrové osvětlení
+
+@ Light Specular
+cs Odlesky světla
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ cs Přehrává průsvitného ducha z dema vašeho osobního rekordu pro aktuáln
 
 @ Shows the SPD label before the speed number
 cs Zobrazuje popisek SPD před hodnotou rychlosti
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+cs Zachovává jasné HDR osvětlení (.lit2) s plynulým přechodem místo ořezu
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+cs Používá předpočítané směry světla (.dlit) pro jemné stínování a odlesky na stěnách a modelech
+
+@ Strength of the highlights from directional lighting
+cs Síla odlesků ze směrového osvětlení
 
 # ==== ui.txt ====
 

@@ -15,6 +15,10 @@ pub use hash::*;
 
 pub const ATLAS: u32 = 2048;
 pub const NO_LM: u32 = u32::MAX;
+/// `LmSurf::atlas` bit 31: samples are 32-bit `E5BGR9` HDR instead of packed RGB8.
+pub const LM_FLAG_HDR: u32 = 1 << 31;
+/// `LmSurf::atlas` bit 30: matching world-space deluxemap samples exist in `World::deluxe_samples`.
+pub const LM_FLAG_DELUXE: u32 = 1 << 30;
 
 #[repr(C)]
 #[derive(Clone, Copy, Default, Debug)]
@@ -65,6 +69,8 @@ pub struct Surface {
     pub extents: [i32; 2],
     /// Offset into `samples` (CPU light sampling) or NO_LM.
     pub samples: u32,
+    pub hdr_samples: bool,
+    pub has_deluxe: bool,
     pub styles: [u8; 4],
     pub mins: [f32; 3],
     pub maxs: [f32; 3],
@@ -95,9 +101,15 @@ pub struct World {
     pub texture_names: Vec<String>,
     pub lm_surfs: Vec<LmSurf>,
     pub samples: Vec<u32>,
+    /// Optional world-space deluxemap RGB8 samples (1:1 aligned with `samples`).
+    pub deluxe_samples: Vec<u32>,
     pub atlas_layers: u32,
     /// Coloured (.lit) lighting was loaded for the world model.
     pub lit: bool,
+    /// HDR (`LIT2` / `LIGHTING_E5BGR9`) lightmaps were loaded for at least one surface.
+    pub has_hdr: bool,
+    /// Directional (`.dlit` / `LIGHTINGDIR`) deluxemaps were loaded for at least one surface.
+    pub has_deluxe: bool,
     /// Per texture: primary and alternate animation sequences (texture indices).
     pub anims: Vec<(Vec<u32>, Vec<u32>, bool)>,
     pub submodels: Vec<SubModel>,

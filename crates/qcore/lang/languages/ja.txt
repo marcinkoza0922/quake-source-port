@@ -1775,6 +1775,15 @@ ja スクリーンショット
 @ Record Demo
 ja デモを録画
 
+@ HDR Lightmaps
+ja HDRライトマップ
+
+@ Directional Lighting
+ja 指向性ライティング
+
+@ Light Specular
+ja スペキュラ強度
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ ja 現在のマップと難易度の自己ベストデモから半透明のゴ�
 
 @ Shows the SPD label before the speed number
 ja 速度の数値の前に SPD ラベルを表示します
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+ja 明るいHDRライティング(.lit2)をクリップせず滑らかに減衰させて保持します
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+ja 事前計算された光の向き(.dlit)を使い、壁やモデルに繊細な陰影とハイライトを加えます
+
+@ Strength of the highlights from directional lighting
+ja 指向性ライティングによるハイライトの強さ
 
 # ==== ui.txt ====
 

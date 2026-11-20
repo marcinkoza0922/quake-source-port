@@ -1775,6 +1775,15 @@ pt Captura de ecrã
 @ Record Demo
 pt Gravar demo
 
+@ HDR Lightmaps
+pt Mapas de luz HDR
+
+@ Directional Lighting
+pt Iluminação direcional
+
+@ Light Specular
+pt Brilho especular
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ pt Reproduz um fantasma translúcido da demo do teu recorde pessoal para o mapa 
 
 @ Shows the SPD label before the speed number
 pt Mostra o rótulo SPD antes do valor da velocidade
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+pt Mantém a iluminação HDR intensa (.lit2) com transição suave em vez de corte
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+pt Usa direções de luz pré-calculadas (.dlit) para sombreamento e reflexos subtis em paredes e modelos
+
+@ Strength of the highlights from directional lighting
+pt Intensidade dos reflexos da iluminação direcional
 
 # ==== ui.txt ====
 

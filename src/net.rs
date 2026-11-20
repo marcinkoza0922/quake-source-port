@@ -179,10 +179,12 @@ fn read_client_message(sv: &mut Server, slot: usize, m: &[u8]) -> bool {
                 sv.ack_frame(slot, seq);
             }
             CLC_MOVE => {
+                let predinfo = sv.client_pext2(slot) & qnet::delta::PEXT2_PREDINFO != 0;
+                let seq16 = if predinfo { Some(r.short() as u16) } else { None };
                 let time = r.float();
                 let mut angles = [0.0; 3];
                 for a in &mut angles {
-                    *a = if protocol == PROTOCOL_NETQUAKE { r.angle(flags) } else { r.angle16(flags) };
+                    *a = if protocol == PROTOCOL_NETQUAKE && !predinfo { r.angle(flags) } else { r.angle16(flags) };
                 }
                 let forward = r.short() as f32;
                 let side = r.short() as f32;
@@ -193,7 +195,9 @@ fn read_client_message(sv: &mut Server, slot: usize, m: &[u8]) -> bool {
                     return false;
                 }
                 sv.record_ping(slot, time);
-                sv.set_move(slot, ClientMove { angles, forward, side, up, buttons, impulse });
+                if seq16.is_none_or(|s| sv.record_move_seq(slot, s)) {
+                    sv.set_move(slot, ClientMove { angles, forward, side, up, buttons, impulse });
+                }
             }
             _ => return false,
         }

@@ -124,6 +124,7 @@ impl Host {
         }
         self.view.reset();
         self.feedback = Default::default();
+        self.load_csqc();
         self.debris.new_map(&mut self.cl);
         self.bboxes.clear_map();
         if reloaded {

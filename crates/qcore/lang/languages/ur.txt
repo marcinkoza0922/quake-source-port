@@ -1775,6 +1775,15 @@ ur اسکرین شاٹ
 @ Record Demo
 ur ڈیمو ریکارڈ کریں
 
+@ HDR Lightmaps
+ur HDR لائٹ میپس
+
+@ Directional Lighting
+ur سمتی روشنی
+
+@ Light Specular
+ur روشنی کی چمک
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ ur موجودہ نقشے اور مشکل کے لیے آپ کے ذاتی بہتر
 
 @ Shows the SPD label before the speed number
 ur رفتار کے عدد سے پہلے SPD لیبل دکھاتا ہے
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+ur روشن HDR روشنی (.lit2) کو کاٹنے کے بجائے ہموار اتار کے ساتھ برقرار رکھتا ہے
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+ur دیواروں اور ماڈلز پر ہلکے سائے اور چمک کے لیے پہلے سے تیار شدہ روشنی کی سمتیں (.dlit) استعمال کرتا ہے
+
+@ Strength of the highlights from directional lighting
+ur سمتی روشنی سے پیدا ہونے والی چمک کی شدت
 
 # ==== ui.txt ====
 

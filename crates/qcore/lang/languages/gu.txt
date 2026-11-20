@@ -1775,6 +1775,15 @@ gu સ્ક્રીનશૉટ
 @ Record Demo
 gu ડેમો રેકોર્ડ કરો
 
+@ HDR Lightmaps
+gu HDR લાઇટમેપ્સ
+
+@ Directional Lighting
+gu દિશાત્મક પ્રકાશ
+
+@ Light Specular
+gu પ્રકાશ ચમક
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ gu વર્તમાન નકશા અને મુશ્કેલી મા�
 
 @ Shows the SPD label before the speed number
 gu ગતિના અંક પહેલાં SPD લેબલ બતાવે છે
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+gu તેજસ્વી HDR પ્રકાશ (.lit2) ને કાપવાને બદલે સરળ રોલ-ઓફ સાથે જાળવી રાખે છે
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+gu દીવાલો અને મોડેલો પર સૂક્ષ્મ છાયા અને ચમક માટે બેક કરેલી પ્રકાશ દિશાઓ (.dlit) વાપરે છે
+
+@ Strength of the highlights from directional lighting
+gu દિશાત્મક પ્રકાશમાંથી મળતી ચમકની તીવ્રતા
 
 # ==== ui.txt ====
 

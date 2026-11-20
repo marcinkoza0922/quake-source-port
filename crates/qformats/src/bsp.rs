@@ -1,7 +1,9 @@
 //! BSP29 / BSP2 / 2PSB map parsing. All variants normalize into the same structs.
 
 use crate::{Error, Reader, Result, Vec3};
+mod lighting;
 mod textures;
+pub use lighting::*;
 use textures::*;
 
 const FMT: &str = "bsp";
@@ -177,6 +179,10 @@ pub struct Bsp {
     /// Embedded RGB samples (3 bytes per mono sample), like a `.lit` file:
     /// Quake64 lighting or a BSPX `RGBLIGHTING` lump.
     pub rgb_lighting: Option<Vec<u8>>,
+    /// BSPX `LIGHTING_E5BGR9`: 32-bit shared-exponent HDR lightmap samples.
+    pub hdr_lighting: Option<Vec<u32>>,
+    /// BSPX `LIGHTINGDIR`: directional lightmap (deluxemap) world-space RGB8 vectors.
+    pub deluxemap: Option<Vec<u8>>,
     /// BSPX `DECOUPLED_LM`: per-face decoupled lightmap size, offset and projection.
     pub decoupled_lm: Option<Vec<crate::bspx::DecoupledLm>>,
     /// BSPX `LMSHIFT`: per-face luxel scale shift (`1 << shift` texels/luxel).
@@ -416,6 +422,18 @@ impl Bsp {
         };
         let nf = faces.len();
         let xl = |n| crate::bspx::find_lump(data, n);
+        let expected_samples = if !lighting.is_empty() {
+            lighting.len()
+        } else {
+            rgb_lighting.as_ref().map_or(0, |l| l.len() / 3)
+        };
+        let hdr_lighting = xl("LIGHTING_E5BGR9").and_then(|l| parse_e5bgr9_lump(l, expected_samples));
+        let expected_deluxe = if expected_samples > 0 {
+            expected_samples
+        } else {
+            hdr_lighting.as_ref().map_or(0, Vec::len)
+        };
+        let deluxemap = xl("LIGHTINGDIR").and_then(|l| parse_deluxemap_lump(l, expected_deluxe));
         Ok(Bsp {
             version: Some(version),
             entities: qcore::text::decode(lumps[LUMP_ENTITIES].split(|&b| b == 0).next().unwrap_or_default()),
@@ -435,6 +453,8 @@ impl Bsp {
             faces,
             lighting,
             rgb_lighting,
+            hdr_lighting,
+            deluxemap,
             clipnodes,
             leafs,
             marksurfaces,
@@ -446,10 +466,7 @@ impl Bsp {
 
     /// Decompress the PVS row for a leaf (`visofs` from [`Leaf`]); see [`decompress_vis`].
     pub fn leaf_pvs(&self, leaf: usize) -> Vec<u8> {
-        let numleafs = self
-            .models
-            .first()
-            .map_or(0, |m| m.visleafs.max(0) as usize);
+        let numleafs = self.models.first().map_or(0, |m| m.visleafs.max(0) as usize);
         let visofs = self.leafs.get(leaf).map_or(-1, |l| l.visofs);
         decompress_vis(&self.visdata, visofs, numleafs)
     }
@@ -478,18 +495,4 @@ pub fn decompress_vis(visdata: &[u8], visofs: i32, numleafs: usize) -> Vec<u8> {
     }
     out.resize(row, 0);
     out
-}
-
-/// Parse a `.lit` colored lightmap file ("QLIT", version 1). Returns RGB triplets
-/// matching the BSP lighting lump (3 bytes per mono sample).
-pub fn parse_lit(data: &[u8]) -> Result<Vec<u8>> {
-    let mut r = Reader::new(data, "lit");
-    if &r.arr::<4>()? != b"QLIT" {
-        return Err(r.err("bad magic"));
-    }
-    let v = r.i32()?;
-    if v != 1 {
-        return Err(r.err(format!("unsupported version {v}")));
-    }
-    Ok(data[8..].to_vec())
 }

@@ -6,6 +6,7 @@ fn column(canvas: &Canvas, left: f32, right: f32, top: f32) -> String {
             qrender::Draw2D::Pic { x, y, .. } | qrender::Draw2D::Char { x, y, .. }
             | qrender::Draw2D::Fill { x, y, .. } | qrender::Draw2D::Tile { x, y, .. } => (*x, *y),
             qrender::Draw2D::Line { x0, y0, .. } => (*x0, *y0),
+            qrender::Draw2D::Clip(_) => return false,
         };
         (left..right).contains(&x) && (top..top + 16.0).contains(&y)
     }).collect();

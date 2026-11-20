@@ -1775,6 +1775,15 @@ km ថត​អេក្រង់
 @ Record Demo
 km ថត​ដេមូ
 
+@ HDR Lightmaps
+km ផែនទី​ពន្លឺ HDR
+
+@ Directional Lighting
+km ពន្លឺ​មាន​ទិសដៅ
+
+@ Light Specular
+km ពន្លឺ​ចាំង​ផ្លាត
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ km បង្ហាញ​ខ្មោច​ថ្លា​ពី​ដេម៉�
 
 @ Shows the SPD label before the speed number
 km បង្ហាញ​ស្លាក SPD នៅ​មុខ​លេខ​ល្បឿន
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+km រក្សា​ពន្លឺ HDR ភ្លឺ (.lit2) ដោយ​បន្ថយ​យ៉ាង​រលូន​ជំនួស​ឱ្យ​ការ​កាត់​ចោល
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+km ប្រើ​ទិសដៅ​ពន្លឺ​ដែល​បាន​ដុត​ទុក (.dlit) សម្រាប់​ស្រមោល និង​ចំណាំង​ស្រាលៗ​លើ​ជញ្ជាំង និង​ម៉ូដែល
+
+@ Strength of the highlights from directional lighting
+km កម្រិត​ពន្លឺ​ចាំង​ផ្លាត​ពី​ពន្លឺ​មាន​ទិសដៅ
 
 # ==== ui.txt ====
 

@@ -8,9 +8,11 @@
 //! local client is lossless and acks every frame as it is written.
 
 use qnet::delta::{
-    EntState, SVCFTE_UPDATEENTITIES, UF_16BIT, UF_EXTEND1, UF_RESET, calc_bits, write_record_num,
+    EntState, PEXT2_PREDINFO, SVCDP_UPDATESTATBYTE, SVCFTE_UPDATEENTITIES, SVCFTE_UPDATESTATFLOAT,
+    SVCFTE_UPDATESTATSTRING, UF_16BIT, UF_EXTEND1, UF_RESET, calc_bits, write_record_num,
     write_update,
 };
+use qnet::protocol::{MAX_CL_STATS, SVC_UPDATESTAT};
 
 /// Server-only flags reusing bits that are never part of the delta itself.
 /// The entity left the snapshot (or, on entity 0, "resend everything").
@@ -22,16 +24,20 @@ const UF_RESET2: u32 = UF_EXTEND1;
 const NUM_FRAMES: usize = 64;
 /// Bytes kept free at the end of a datagram for the terminating short.
 const TAIL: usize = 2;
+const STAT_WORDS: usize = MAX_CL_STATS / 32;
 
 #[derive(Debug, Clone, Default)]
 struct Frame {
     sequence: i32,
     /// (entity, bits logged for resend).
     ents: Vec<(u32, u32)>,
+    /// Stat indices sent in this frame (for packet-loss resend under PEXT2_PREDINFO).
+    stats_num: [u32; STAT_WORDS],
+    stats_str: [u32; STAT_WORDS],
 }
 
 /// Delta state of one client (client_t's frames / pendingentities_bits /
-/// previousentities).
+/// previousentities / stat delta tracking).
 #[derive(Debug, Clone)]
 pub struct DeltaState {
     frames: Vec<Frame>,
@@ -43,6 +49,12 @@ pub struct DeltaState {
     resume: usize,
     /// Sequence the next datagram is sent with.
     pub next_sequence: i32,
+    /// Per-client last-sent stat values (PEXT2_PREDINFO).
+    old_stats_i: [i32; MAX_CL_STATS],
+    old_stats_f: [f32; MAX_CL_STATS],
+    old_stats_s: Vec<String>,
+    resend_stats_num: [u32; STAT_WORDS],
+    resend_stats_str: [u32; STAT_WORDS],
 }
 
 impl Default for DeltaState {
@@ -51,12 +63,17 @@ impl Default for DeltaState {
         let mut pending = vec![0; 1];
         pending[0] = UF_REMOVE;
         Self {
-            frames: vec![Frame { sequence: i32::MIN, ents: Vec::new() }; NUM_FRAMES],
+            frames: vec![Frame { sequence: i32::MIN, ..Frame::default() }; NUM_FRAMES],
             pending,
             previous: Vec::new(),
             last_ack: i32::MIN,
             resume: 0,
             next_sequence: 0,
+            old_stats_i: [0; MAX_CL_STATS],
+            old_stats_f: [0.0; MAX_CL_STATS],
+            old_stats_s: vec![String::new(); MAX_CL_STATS],
+            resend_stats_num: [0; STAT_WORDS],
+            resend_stats_str: [0; STAT_WORDS],
         }
     }
 }
@@ -66,7 +83,7 @@ impl DeltaState {
         &mut self.frames[seq as usize & (NUM_FRAMES - 1)]
     }
 
-    /// SVFTE_DroppedFrame: flag a lost frame's entities for resending.
+    /// SVFTE_DroppedFrame: flag a lost frame's entities and stats for resending.
     fn dropped(&mut self, seq: i32) {
         let f = self.frame_mut(seq);
         if f.sequence != seq {
@@ -74,6 +91,14 @@ impl DeltaState {
         }
         f.sequence = -1;
         let ents = std::mem::take(&mut f.ents);
+        let sn = f.stats_num;
+        let ss = f.stats_str;
+        f.stats_num = [0; STAT_WORDS];
+        f.stats_str = [0; STAT_WORDS];
+        for i in 0..STAT_WORDS {
+            self.resend_stats_num[i] |= sn[i];
+            self.resend_stats_str[i] |= ss[i];
+        }
         for &(num, bits) in &ents {
             if bits != 0
                 && let Some(p) = self.pending.get_mut(num as usize)
@@ -89,6 +114,15 @@ impl DeltaState {
     pub fn ack(&mut self, seq: i32) {
         if seq == -1 {
             self.pending[0] |= UF_REMOVE;
+            // Also resend all non-zero stats so mid-game demo recording has full HUD state.
+            for i in 0..MAX_CL_STATS {
+                if self.old_stats_i[i] != 0 || self.old_stats_f[i] != 0.0 {
+                    self.resend_stats_num[i / 32] |= 1u32 << (i & 31);
+                }
+                if !self.old_stats_s[i].is_empty() {
+                    self.resend_stats_str[i / 32] |= 1u32 << (i & 31);
+                }
+            }
         }
         if seq < self.last_ack {
             return;
@@ -106,6 +140,73 @@ impl DeltaState {
         if f.sequence == seq {
             f.sequence = -1;
         }
+    }
+
+    /// SVFTE_WriteStats: diff `stats_i` / `stats_f` / `stats_s` against the
+    /// client's last sent state and emit compact `svcdp_updatestatbyte` /
+    /// `svc_updatestat` / `svcfte_updatestatfloat` / `svcfte_updatestatstring`
+    /// messages into `msg`, logging sent stat bits under `next_sequence`.
+    pub fn write_stats(
+        &mut self,
+        msg: &mut qnet::SizeBuf,
+        stats_i: &[i32; MAX_CL_STATS],
+        stats_f: &[f32; MAX_CL_STATS],
+        stats_s: &[Option<Vec<u8>>],
+    ) {
+        let seq = self.next_sequence;
+        if self.frame_mut(seq).sequence == seq.wrapping_sub(NUM_FRAMES as i32) {
+            self.dropped(seq.wrapping_sub(NUM_FRAMES as i32));
+        }
+        let mut frame_num = [0u32; STAT_WORDS];
+        let mut frame_str = [0u32; STAT_WORDS];
+        for i in 0..MAX_CL_STATS {
+            let mut si = stats_i[i];
+            let mut sf = stats_f[i];
+            if si == 0 {
+                si = sf as i32;
+            } else {
+                sf = 0.0;
+            }
+            let word = i / 32;
+            let bit = 1u32 << (i & 31);
+            if si != self.old_stats_i[i] || sf != self.old_stats_f[i] {
+                self.old_stats_i[i] = si;
+                self.old_stats_f[i] = sf;
+                self.resend_stats_num[word] |= bit;
+            }
+            let ns = stats_s.get(i).and_then(|o| o.as_deref()).unwrap_or(b"");
+            if ns != self.old_stats_s[i].as_bytes() {
+                self.resend_stats_str[word] |= bit;
+                self.old_stats_s[i] = String::from_utf8_lossy(ns).into_owned();
+            }
+            if self.resend_stats_num[word] & bit != 0 {
+                self.resend_stats_num[word] &= !bit;
+                frame_num[word] |= bit;
+                if (si as f64) != (sf as f64) && sf != 0.0 {
+                    msg.byte(SVCFTE_UPDATESTATFLOAT as i32);
+                    msg.byte(i as i32);
+                    msg.float(sf);
+                } else if (0..=255).contains(&si) {
+                    msg.byte(SVCDP_UPDATESTATBYTE as i32);
+                    msg.byte(i as i32);
+                    msg.byte(si);
+                } else {
+                    msg.byte(SVC_UPDATESTAT as i32);
+                    msg.byte(i as i32);
+                    msg.long(si);
+                }
+            }
+            if self.resend_stats_str[word] & bit != 0 {
+                self.resend_stats_str[word] &= !bit;
+                frame_str[word] |= bit;
+                msg.byte(SVCFTE_UPDATESTATSTRING as i32);
+                msg.byte(i as i32);
+                msg.string(self.old_stats_s[i].as_bytes());
+            }
+        }
+        let f = self.frame_mut(seq);
+        f.stats_num = frame_num;
+        f.stats_str = frame_str;
     }
 
     /// SVFTE_CalcEntityDeltas against the new snapshot (sorted by entity).
@@ -151,12 +252,15 @@ impl DeltaState {
     /// SVFTE_WriteEntitiesToClient: one svcfte_updateentities into `msg`
     /// (up to `maxsize` bytes), logged under `next_sequence`, which then
     /// advances. `baseline(e)` is what the client resets entity `e` to.
+    #[allow(clippy::too_many_arguments)]
     pub fn write(
         &mut self,
         msg: &mut qnet::SizeBuf,
         maxsize: usize,
         time: f32,
         pf: u32,
+        pext2: u32,
+        last_move_seq: u32,
         baseline: &dyn Fn(u32) -> EntState,
     ) {
         let seq = self.next_sequence;
@@ -172,6 +276,9 @@ impl DeltaState {
         // buffer would otherwise clear itself on overflow).
         let hard = std::mem::replace(&mut msg.maxsize, usize::MAX);
         msg.byte(SVCFTE_UPDATEENTITIES as i32);
+        if pext2 & PEXT2_PREDINFO != 0 {
+            msg.short((last_move_seq & 0xffff) as i32);
+        }
         msg.float(time);
         let mut state = 0;
         let mut num = self.resume;
@@ -205,7 +312,7 @@ impl DeltaState {
                         bits
                     };
                     write_record_num(msg, num as u32, false);
-                    write_update(net, &s, msg, pf);
+                    write_update(net, &s, msg, pf, pext2);
                 }
             }
             if msg.len() + TAIL > maxsize {
@@ -268,7 +375,7 @@ mod tests {
         let mut out = Vec::new();
         loop {
             let mut b = qnet::SizeBuf::new(maxsize);
-            d.write(&mut b, maxsize, 0.0, 0, &|_| EntState::default());
+            d.write(&mut b, maxsize, 0.0, 0, PEXT2_REPLACEMENTDELTAS, 0, &|_| EntState::default());
             out.push(b.data);
             if !d.more() {
                 return out;
@@ -316,5 +423,35 @@ mod tests {
         }
         assert_eq!(cl.ents.len(), 11);
         assert_eq!(cl.ents[&11], snap[10].1);
+    }
+
+    #[test]
+    fn predinfo_stats_delta_and_resend() {
+        let mut d = DeltaState::default();
+        let mut si = [0i32; MAX_CL_STATS];
+        let mut sf = [0.0f32; MAX_CL_STATS];
+        let mut ss: Vec<Option<Vec<u8>>> = vec![None; MAX_CL_STATS];
+        si[0] = 100; // STAT_HEALTH (byte)
+        si[15] = 0x1001; // STAT_ITEMS (long)
+        sf[26] = 1.5; // STAT_PUNCHANGLE_X (float)
+        ss[32] = Some(b"custom".to_vec()); // string stat
+        let mut b = qnet::SizeBuf::new(1024);
+        d.write_stats(&mut b, &si, &sf, &ss);
+        assert!(!b.data.is_empty());
+        // Write frame 0 (lost) then frame 1 (delivered & acked) -> stats resend on frame 2.
+        d.calc(vec![], 4);
+        let mut f0 = qnet::SizeBuf::new(1024);
+        d.write(&mut f0, 1024, 0.1, 0, qnet::delta::PEXT2_SUPPORTED, 42, &|_| EntState::default());
+        // Frame 1 has no stat changes.
+        let mut b1 = qnet::SizeBuf::new(1024);
+        d.write_stats(&mut b1, &si, &sf, &ss);
+        assert!(b1.data.is_empty());
+        let mut f1 = qnet::SizeBuf::new(1024);
+        d.write(&mut f1, 1024, 0.2, 0, qnet::delta::PEXT2_SUPPORTED, 43, &|_| EntState::default());
+        // Ack frame 1 -> frame 0 is detected dropped -> its stats resend!
+        d.ack(1);
+        let mut b2 = qnet::SizeBuf::new(1024);
+        d.write_stats(&mut b2, &si, &sf, &ss);
+        assert_eq!(b2.data, b.data);
     }
 }

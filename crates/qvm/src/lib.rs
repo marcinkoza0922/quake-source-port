@@ -81,6 +81,10 @@ pub trait Host {
     fn has_extension(&self, _name: &str) -> bool {
         false
     }
+    /// Whether `checkextension` / `pr_checkextension` is enabled at all.
+    fn extensions_enabled(&self) -> bool {
+        true
+    }
     /// `dprint` (developer-only console print).
     fn dprint(&mut self, _msg: &str) {}
     /// Console print (warnings, "No spawn function for", ...).

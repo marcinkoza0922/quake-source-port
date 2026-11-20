@@ -118,10 +118,11 @@ The audit's open list, in its order:
    1391 with spawnflags 32 in both), 4439 edicts here against 4434 there
    after the same 300 + 250 server frames (two `DelayedUse` timers differ),
    and the FTE still (rain, embers, decorations) matches vkQuake within the
-   ironwail-vkQuake band. Still vkQuake-only: `DP_QC_GETSURFACE` and
-   `FTE_STRINGS`/`FRIK_FILE`/`DP_QC_SPRINTF` (`FTE_ENT_SKIN_CONTENTS` is
-   commented out of vkQuake's extension list, so it answers no too),
-   which our VM implements but doesn't advertise (as ironwail). Every AD
+   ironwail-vkQuake band. `DP_QC_GETSURFACE` (+ `DP_QC_GETSURFACETRIANGLE` /
+   `DP_QC_GETSURFACEPOINTATTRIBUTE`), `FTE_STRINGS`, `FRIK_FILE` (sandboxed
+   under `<basedir>/<game>/data/`), and `DP_QC_SPRINTF` are now implemented
+   and advertised (`qvm::EXTENSIONS` + `qserver` host extensions, gated on
+   `pr_checkextension`). Every AD
    map, dev-kit test maps included (104, `tools/vkparity.py`, 720 server
    frames at skill 1), spawns the same content in both engines: "Advanced
    Engine" everywhere, no errors, no class present in only one engine. The

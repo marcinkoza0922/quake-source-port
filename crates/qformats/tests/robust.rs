@@ -1,9 +1,10 @@
 //! Malformed-input robustness and synthetic format tests.
 
-use qformats::{Bsp, Md3, Mdl, Spr, Wad, Wav, bsp, entities, image};
+use qformats::{Bsp, Iqm, Md3, Mdl, Spr, Wad, Wav, bsp, entities, image};
 
 fn all_parsers(d: &[u8]) {
     let _ = Bsp::parse(d);
+    let _ = Iqm::parse(d);
     let _ = Md3::parse(d);
     let _ = Mdl::parse(d);
     let _ = Spr::parse(d);
@@ -15,6 +16,8 @@ fn all_parsers(d: &[u8]) {
     let _ = image::parse_pcx(d);
     let _ = image::parse_tga(d);
     let _ = bsp::parse_lit(d);
+    let _ = bsp::parse_lit_any(d);
+    let _ = bsp::parse_dlit(d);
     let _ = entities::parse_entities(&String::from_utf8_lossy(d));
     let _ = bsp::decompress_vis(d, 0, 4000);
 }

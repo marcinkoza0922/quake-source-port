@@ -139,6 +139,11 @@ pub fn translate(list: &mut [Draw2D], dx: f32, dy: f32) {
                 *x1 += dx;
                 *y1 += dy;
             }
+            Draw2D::Clip(Some(r)) => {
+                r[0] += dx;
+                r[1] += dy;
+            }
+            Draw2D::Clip(None) => {}
         }
     }
 }

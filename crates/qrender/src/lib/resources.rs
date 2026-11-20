@@ -105,6 +105,7 @@ pub(super) struct WorldGpu {
     pub(super) draw_surfaces: Vec<DrawSurface>,
     pub(super) vbuf: Buffer,
     pub(super) samples: Buffer,
+    pub(super) deluxe_samples: Buffer,
     pub(super) surfs: Buffer,
     pub(super) materials: Buffer,
     /// Per BSP texture: kind and material flags.
@@ -171,6 +172,9 @@ pub(super) struct AliasModel {
     pub(super) radius: f32,
     pub(super) maxs_z: f32,
     pub(super) md3: bool,
+    pub(super) iqm: bool,
+    pub(super) num_bones: u32,
+    pub(super) bone_base: u32,
 }
 
 pub(super) struct SpriteFrameGpu {

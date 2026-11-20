@@ -16,7 +16,7 @@
 //! through our own client parser (`parse_server_message_spans`).
 
 use qclient::ClientState;
-use qclient::delta::{EntState, PEXT2_REPLACEMENTDELTAS, PROTOCOL_FTE_PEXT1, PROTOCOL_FTE_PEXT2, SVCFTE_UPDATEENTITIES};
+use qclient::delta::{EntState, PEXT2_PREDINFO, PEXT2_REPLACEMENTDELTAS, PROTOCOL_FTE_PEXT1, PROTOCOL_FTE_PEXT2, SVCFTE_UPDATEENTITIES};
 use qnet::msg::SizeBuf;
 use qnet::protocol::*;
 
@@ -95,9 +95,14 @@ fn drain(cl: &mut ClientState) {
 fn convert_block(cl: &ClientState, data: &[u8], spans: &[(u8, usize, usize)], lost: &mut Lost, extended: &mut bool) -> Result<Vec<u8>, String> {
     let mut out = Vec::with_capacity(data.len() * 2);
     let deltas = cl.pext2 & PEXT2_REPLACEMENTDELTAS != 0;
-    if spans.iter().any(|s| s.0 == SVCFTE_UPDATEENTITIES) && deltas {
+    let predinfo = cl.pext2 & PEXT2_PREDINFO != 0;
+    let has_ent_update = spans.iter().any(|s| s.0 == SVCFTE_UPDATEENTITIES) && deltas;
+    if has_ent_update {
         out.push(SVC_TIME);
         out.extend((cl.mtime[0] as f32).to_le_bytes());
+        if predinfo && !spans.iter().any(|s| s.0 == SVC_CLIENTDATA) {
+            out.extend(synthesize_clientdata(cl));
+        }
     }
     for &(cmd, start, end) in spans {
         let span = &data[start..end];
@@ -140,20 +145,155 @@ fn convert_block(cl: &ClientState, data: &[u8], spans: &[(u8, usize, usize)], lo
     Ok(out)
 }
 
-/// svc_serverinfo without the FTE extension prefixes.
+/// svc_serverinfo without the FTE extension prefixes (and without PEXT2_PREDINFO's gamedir string).
 fn strip_pext(span: &[u8], extended: &mut bool) -> Vec<u8> {
     let mut rest = &span[1..];
+    let mut pext2 = 0u32;
     while rest.len() >= 8 {
         let id = u32::from_le_bytes(rest[..4].try_into().unwrap());
         if id != PROTOCOL_FTE_PEXT1 && id != PROTOCOL_FTE_PEXT2 {
             break;
         }
+        if id == PROTOCOL_FTE_PEXT2 {
+            pext2 = u32::from_le_bytes(rest[4..8].try_into().unwrap());
+        }
         *extended = true;
         rest = &rest[8..];
     }
     let mut v = vec![span[0]];
+    if pext2 & PEXT2_PREDINFO != 0 && rest.len() >= 4 {
+        let proto = u32::from_le_bytes(rest[..4].try_into().unwrap());
+        let hdr = if proto == PROTOCOL_RMQ { 8 } else { 4 };
+        if rest.len() >= hdr {
+            v.extend_from_slice(&rest[..hdr]);
+            let after = &rest[hdr..];
+            // Skip NUL-terminated gamedir string.
+            let skip = after.iter().position(|&b| b == 0).map_or(after.len(), |i| i + 1);
+            v.extend_from_slice(&after[skip..]);
+            return v;
+        }
+    }
     v.extend_from_slice(rest);
     v
+}
+
+/// Synthesize plain `svc_clientdata` from `PEXT2_PREDINFO` stats for vanilla demo playback.
+fn synthesize_clientdata(cl: &ClientState) -> Vec<u8> {
+    let mut msg = SizeBuf::new(256);
+    let mut bits = SU_ITEMS | SU_WEAPON;
+    if cl.viewheight != DEFAULT_VIEWHEIGHT {
+        bits |= SU_VIEWHEIGHT;
+    }
+    if cl.idealpitch != 0.0 {
+        bits |= SU_IDEALPITCH;
+    }
+    if cl.onground {
+        bits |= SU_ONGROUND;
+    }
+    if cl.inwater {
+        bits |= SU_INWATER;
+    }
+    for i in 0..3 {
+        if cl.punchangle[i] != 0.0 {
+            bits |= SU_PUNCH1 << i;
+        }
+        if cl.mvelocity[0][i] != 0.0 {
+            bits |= SU_VELOCITY1 << i;
+        }
+    }
+    if cl.stats[STAT_WEAPONFRAME] != 0 {
+        bits |= SU_WEAPONFRAME;
+    }
+    if cl.stats[STAT_ARMOR] != 0 {
+        bits |= SU_ARMOR;
+    }
+    if cl.protocol != PROTOCOL_NETQUAKE {
+        for (st, b) in [
+            (STAT_WEAPON, SU_WEAPON2),
+            (STAT_ARMOR, SU_ARMOR2),
+            (STAT_AMMO, SU_AMMO2),
+            (STAT_SHELLS, SU_SHELLS2),
+            (STAT_NAILS, SU_NAILS2),
+            (STAT_ROCKETS, SU_ROCKETS2),
+            (STAT_CELLS, SU_CELLS2),
+        ] {
+            if cl.stats[st] & 0xff00 != 0 {
+                bits |= b;
+            }
+        }
+        if bits & SU_WEAPONFRAME != 0 && cl.stats[STAT_WEAPONFRAME] & 0xff00 != 0 {
+            bits |= SU_WEAPONFRAME2;
+        }
+        if cl.viewent.alpha != ENTALPHA_DEFAULT {
+            bits |= SU_WEAPONALPHA;
+        }
+        if bits >= 65536 {
+            bits |= SU_EXTEND1;
+        }
+        if bits >= 16_777_216 {
+            bits |= SU_EXTEND2;
+        }
+    }
+    msg.byte(SVC_CLIENTDATA as i32);
+    msg.short(bits as i32);
+    if bits & SU_EXTEND1 != 0 {
+        msg.byte((bits >> 16) as i32);
+    }
+    if bits & SU_EXTEND2 != 0 {
+        msg.byte((bits >> 24) as i32);
+    }
+    if bits & SU_VIEWHEIGHT != 0 {
+        msg.char(cl.viewheight as i32);
+    }
+    if bits & SU_IDEALPITCH != 0 {
+        msg.char(cl.idealpitch as i32);
+    }
+    for i in 0..3 {
+        if bits & (SU_PUNCH1 << i) != 0 {
+            msg.char(cl.punchangle[i] as i32);
+        }
+        if bits & (SU_VELOCITY1 << i) != 0 {
+            msg.char((cl.mvelocity[0][i] / 16.0) as i32);
+        }
+    }
+    msg.long(cl.items);
+    if bits & SU_WEAPONFRAME != 0 {
+        msg.byte(cl.stats[STAT_WEAPONFRAME]);
+    }
+    if bits & SU_ARMOR != 0 {
+        msg.byte(cl.stats[STAT_ARMOR]);
+    }
+    msg.byte(cl.stats[STAT_WEAPON]);
+    msg.short(cl.stats[STAT_HEALTH]);
+    for st in [STAT_AMMO, STAT_SHELLS, STAT_NAILS, STAT_ROCKETS, STAT_CELLS] {
+        msg.byte(cl.stats[st]);
+    }
+    let w = cl.stats[STAT_ACTIVEWEAPON];
+    if cl.standard_quake {
+        msg.byte(w);
+    } else if let Some(i) = (0..32).find(|i| w & (1 << i) != 0) {
+        msg.byte(i);
+    } else {
+        msg.byte(0);
+    }
+    for (st, b) in [
+        (STAT_WEAPON, SU_WEAPON2),
+        (STAT_ARMOR, SU_ARMOR2),
+        (STAT_AMMO, SU_AMMO2),
+        (STAT_SHELLS, SU_SHELLS2),
+        (STAT_NAILS, SU_NAILS2),
+        (STAT_ROCKETS, SU_ROCKETS2),
+        (STAT_CELLS, SU_CELLS2),
+        (STAT_WEAPONFRAME, SU_WEAPONFRAME2),
+    ] {
+        if bits & b != 0 {
+            msg.byte(cl.stats[st] >> 8);
+        }
+    }
+    if bits & SU_WEAPONALPHA != 0 {
+        msg.byte(cl.viewent.alpha as i32);
+    }
+    msg.data
 }
 
 /// SV_WriteEntitiesToClient for the snapshot the client holds.

@@ -1775,6 +1775,15 @@ ko 스크린샷
 @ Record Demo
 ko 데모 녹화
 
+@ HDR Lightmaps
+ko HDR 라이트맵
+
+@ Directional Lighting
+ko 방향성 조명
+
+@ Light Specular
+ko 조명 반사광
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ ko 현재 맵과 난이도의 개인 최고 기록 데모를 반투명 고스트
 
 @ Shows the SPD label before the speed number
 ko 속도 숫자 앞에 SPD 레이블을 표시합니다
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+ko 밝은 HDR 조명(.lit2)을 잘라내지 않고 부드러운 감쇠로 유지합니다
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+ko 미리 계산된 조명 방향(.dlit)을 사용해 벽과 모델에 은은한 음영과 하이라이트를 더합니다
+
+@ Strength of the highlights from directional lighting
+ko 방향성 조명으로 생기는 하이라이트 강도
 
 # ==== ui.txt ====
 

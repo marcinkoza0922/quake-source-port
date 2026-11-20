@@ -1775,6 +1775,15 @@ sw Picha ya Skrini
 @ Record Demo
 sw Rekodi Demo
 
+@ HDR Lightmaps
+sw Ramani za Mwanga za HDR
+
+@ Directional Lighting
+sw Mwangaza wa Mwelekeo
+
+@ Light Specular
+sw Mng'ao wa Mwanga
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ sw Huendesha mzimu unaoonekana kwa uwazi wa onyesho la rekodi yako binafsi kwa r
 
 @ Shows the SPD label before the speed number
 sw Huonyesha lebo ya SPD kabla ya nambari ya kasi
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+sw Huhifadhi mwangaza mkali wa HDR (.lit2) kwa mpito laini badala ya kukata
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+sw Hutumia mielekeo ya mwanga iliyookwa (.dlit) kwa kivuli na mng'ao hafifu kwenye kuta na miundo
+
+@ Strength of the highlights from directional lighting
+sw Nguvu ya mng'ao kutoka kwa mwangaza wa mwelekeo
 
 # ==== ui.txt ====
 

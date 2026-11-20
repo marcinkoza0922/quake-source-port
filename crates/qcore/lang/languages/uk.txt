@@ -1775,6 +1775,15 @@ uk Знімок екрана
 @ Record Demo
 uk Записувати демо
 
+@ HDR Lightmaps
+uk HDR-лайтмапи
+
+@ Directional Lighting
+uk Спрямоване освітлення
+
+@ Light Specular
+uk Відблиски світла
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ uk Запускає напівпрозорого привида з демо ва
 
 @ Shows the SPD label before the speed number
 uk Показує підпис SPD перед значенням швидкості
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+uk Зберігає яскраве HDR-освітлення (.lit2) з плавним переходом замість обрізання
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+uk Використовує запечені напрямки світла (.dlit) для м'якого затінення та відблисків на стінах і моделях
+
+@ Strength of the highlights from directional lighting
+uk Інтенсивність відблисків від спрямованого освітлення
 
 # ==== ui.txt ====
 

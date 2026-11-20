@@ -113,6 +113,57 @@ impl Vm {
         Ok(vm)
     }
 
+    /// Create a CSQC VM for `progs` with room for `max_edicts` (world entity 0
+    /// reserved). Unlike SSQC, CSQC progs do not require SSQC-only defs such as
+    /// `nextthink` or `think`.
+    pub fn new_csqc(progs: Progs, max_edicts: usize) -> Result<Self> {
+        let opt_g = |n: &str| progs.find_global(n).map_or(0, |d| d.ofs as usize);
+        let opt_f = |n: &str| progs.find_field(n).map_or(0, |d| d.ofs as usize);
+        let sys = Sys {
+            g_self: opt_g("self"),
+            g_time: opt_g("time"),
+            f_nextthink: opt_f("nextthink"),
+            f_frame: opt_f("frame"),
+            f_think: opt_f("think"),
+            f_classname: opt_f("classname"),
+        };
+        let mut globals = progs.globals.clone();
+        globals.extend([0; 3]);
+        let mut vm = Vm {
+            strings: Strings::new(progs.strings.clone()),
+            dispatch: Vec::new(),
+            globals,
+            time: 0.0,
+            argc: 0,
+            trace: false,
+            protect_world: false,
+            sys,
+            fields: Vec::new(),
+            alloc: EntityAllocator::new(),
+            max_edicts: max_edicts.max(256),
+            reserved: 1,
+            rng: 1,
+            tokens: Vec::new(),
+            stack: Vec::with_capacity(64),
+            localstack: Vec::with_capacity(LOCALSTACK_SIZE),
+            xfunction: 0,
+            xstatement: 0,
+            damage_fn: 0,
+            progs,
+        };
+        vm.dispatch = builtins::resolve(&vm.progs);
+        vm.clear_edicts();
+        Ok(vm)
+    }
+
+    /// True if function index `fnum` resolves to a valid QC function or builtin.
+    pub fn is_builtin_supported(&self, fnum: i32) -> bool {
+        if fnum <= 0 {
+            return false;
+        }
+        matches!(self.dispatch.get(fnum as usize), Some(d) if !matches!(d, Dispatch::Missing(_)))
+    }
+
     /// Load and create in one step.
     pub fn load(data: &[u8], max_edicts: usize, maxclients: usize) -> Result<Self> {
         Self::new(Progs::parse(data)?, max_edicts, maxclients)

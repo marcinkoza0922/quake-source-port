@@ -1775,6 +1775,15 @@ hr Snimka zaslona
 @ Record Demo
 hr Snimaj demo
 
+@ HDR Lightmaps
+hr HDR mape svjetla
+
+@ Directional Lighting
+hr Usmjereno osvjetljenje
+
+@ Light Specular
+hr Odsjaj svjetla
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ hr Pokreće prozirnog duha iz demo snimke vašeg osobnog rekorda za trenutnu kar
 
 @ Shows the SPD label before the speed number
 hr Prikazuje oznaku SPD ispred broja brzine
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+hr Zadržava jarko HDR osvjetljenje (.lit2) s glatkim prijelazom umjesto rezanja
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+hr Koristi predračunate smjerove svjetla (.dlit) za suptilno sjenčanje i odsjaje na zidovima i modelima
+
+@ Strength of the highlights from directional lighting
+hr Jačina odsjaja od usmjerenog osvjetljenja
 
 # ==== ui.txt ====
 

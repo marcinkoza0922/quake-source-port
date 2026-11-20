@@ -5,13 +5,18 @@ impl World {
     /// Uses BSPX `LIGHTGRID_OCTREE` when present (falling back to the classic
     /// downward BSP trace if `p` is outside the grid or fully occluded).
     pub fn light_point(&self, p: [f32; 3], styles: &[i32]) -> Option<[f32; 3]> {
+        self.light_point_dir(p, styles).map(|(c, _)| c)
+    }
+
+    /// R_LightPoint plus optional world-space baked light direction (from `.dlit` / `LIGHTINGDIR`).
+    pub fn light_point_dir(&self, p: [f32; 3], styles: &[i32]) -> Option<([f32; 3], Option<[f32; 3]>)> {
         if let Some(grid) = &self.lightgrid
             && let Some(rgb) = grid.sample(p, styles)
         {
-            return Some(rgb);
+            return Some((rgb, None));
         }
         if !self.has_light || self.bsp_nodes.is_empty() {
-            return Some([255.0; 3]);
+            return Some(([255.0; 3], None));
         }
         let key = p.map(|v| v.floor() as i32);
         let cached = self.light_cache.lock().ok().and_then(|c| c.get(&key).copied());
@@ -30,40 +35,106 @@ impl World {
         });
         match hit {
             LightHit::Miss => None,
-            LightHit::Black => Some([0.0; 3]),
-            LightHit::Surf { surf, ds, dt } => Some(self.interpolate_light(surf as usize, ds, dt, styles)),
+            LightHit::Black => Some(([0.0; 3], None)),
+            LightHit::Surf { surf, ds, dt } => Some(self.interpolate_light_dir(surf as usize, ds, dt, styles)),
         }
     }
 
-    /// InterpolateLightmap: bilinear between the four nearest luxels.
-    pub(super) fn interpolate_light(&self, si: usize, ds: i32, dt: i32, styles: &[i32]) -> [f32; 3] {
-        let Some(s) = self.surfaces.get(si) else { return [0.0; 3] };
+    /// InterpolateLightmap: bilinear between the four nearest luxels (supports RGB8,
+    /// E5BGR9 HDR lightmaps, and world-space deluxemap direction vectors).
+    pub(super) fn interpolate_light_dir(
+        &self,
+        si: usize,
+        ds: i32,
+        dt: i32,
+        styles: &[i32],
+    ) -> ([f32; 3], Option<[f32; 3]>) {
+        let Some(s) = self.surfaces.get(si) else { return ([0.0; 3], None) };
         let (w, h) = (s.lm_size[0] as usize, s.lm_size[1] as usize);
         if w == 0 || h == 0 {
-            return [0.0; 3];
+            return ([0.0; 3], None);
         }
         let x = ((ds >> 4).max(0) as usize).min(w - 1);
         let y = ((dt >> 4).max(0) as usize).min(h - 1);
         let (x1, y1) = ((x + 1).min(w - 1), (y + 1).min(h - 1));
         let (fs, ft) = (ds & 15, dt & 15);
-        let mut acc = [[0i32; 3]; 4];
-        let mut base = s.samples as usize;
-        for &st in s.styles.iter().take_while(|&&st| st != 255) {
-            let scale = styles.get(st as usize).copied().unwrap_or(256);
-            for (a, (cx, cy)) in acc.iter_mut().zip([(x, y), (x1, y), (x, y1), (x1, y1)]) {
-                let v = self.samples.get(base + cy * w + cx).copied().unwrap_or(0);
-                for (k, ak) in a.iter_mut().enumerate() {
-                    *ak += ((v >> (k * 8)) & 0xff) as i32 * scale;
+        let corners = [(x, y), (x1, y), (x, y1), (x1, y1)];
+
+        let color = if s.hdr_samples {
+            let mut acc = [[0.0f32; 3]; 4];
+            let mut base = s.samples as usize;
+            for &st in s.styles.iter().take_while(|&&st| st != 255) {
+                let scale = styles.get(st as usize).copied().unwrap_or(256) as f32 / 256.0;
+                for (a, (cx, cy)) in acc.iter_mut().zip(corners) {
+                    let v = self.samples.get(base + cy * w + cx).copied().unwrap_or(0);
+                    let rgb = qformats::bsp::decode_e5bgr9(v);
+                    for (ak, rk) in a.iter_mut().zip(rgb) {
+                        *ak += rk * 128.0 * scale;
+                    }
                 }
+                base += w * h;
             }
-            base += w * h;
-        }
-        let [c00, c01, c10, c11] = acc;
-        std::array::from_fn(|k| {
-            let top = (((c01[k] - c00[k]) * fs) >> 4) + c00[k];
-            let bot = (((c11[k] - c10[k]) * fs) >> 4) + c10[k];
-            ((((bot - top) * ft) >> 4) + top) as f32 / 256.0
-        })
+            let (u, v) = (fs as f32 / 16.0, ft as f32 / 16.0);
+            let [c00, c01, c10, c11] = acc;
+            std::array::from_fn(|k| {
+                let top = c00[k] + (c01[k] - c00[k]) * u;
+                let bot = c10[k] + (c11[k] - c10[k]) * u;
+                top + (bot - top) * v
+            })
+        } else {
+            let mut acc = [[0i32; 3]; 4];
+            let mut base = s.samples as usize;
+            for &st in s.styles.iter().take_while(|&&st| st != 255) {
+                let scale = styles.get(st as usize).copied().unwrap_or(256);
+                for (a, (cx, cy)) in acc.iter_mut().zip(corners) {
+                    let v = self.samples.get(base + cy * w + cx).copied().unwrap_or(0);
+                    for (k, ak) in a.iter_mut().enumerate() {
+                        *ak += ((v >> (k * 8)) & 0xff) as i32 * scale;
+                    }
+                }
+                base += w * h;
+            }
+            let [c00, c01, c10, c11] = acc;
+            std::array::from_fn(|k| {
+                let top = (((c01[k] - c00[k]) * fs) >> 4) + c00[k];
+                let bot = (((c11[k] - c10[k]) * fs) >> 4) + c10[k];
+                ((((bot - top) * ft) >> 4) + top) as f32 / 256.0
+            })
+        };
+
+        let dir = if s.has_deluxe {
+            let mut acc = [[0.0f32; 3]; 4];
+            let mut base = s.samples as usize;
+            for &st in s.styles.iter().take_while(|&&st| st != 255) {
+                let scale = (styles.get(st as usize).copied().unwrap_or(256) as f32 / 256.0).max(0.0);
+                if scale > 0.0 {
+                    for (a, (cx, cy)) in acc.iter_mut().zip(corners) {
+                        let d = self.deluxe_samples.get(base + cy * w + cx).copied().unwrap_or(0x0080_8080);
+                        for (k, ak) in a.iter_mut().enumerate() {
+                            let c = ((d >> (k * 8)) & 0xff) as f32 / 255.0 * 2.0 - 1.0;
+                            *ak += c * scale;
+                        }
+                    }
+                }
+                base += w * h;
+            }
+            let (u, v) = (fs as f32 / 16.0, ft as f32 / 16.0);
+            let [d00, d01, d10, d11] = acc;
+            let raw: [f32; 3] = std::array::from_fn(|k| {
+                let top = d00[k] + (d01[k] - d00[k]) * u;
+                let bot = d10[k] + (d11[k] - d10[k]) * u;
+                top + (bot - top) * v
+            });
+            let len2 = dot(raw, raw);
+            (len2 > 1e-4).then(|| {
+                let inv = 1.0 / len2.sqrt();
+                raw.map(|c| c * inv)
+            })
+        } else {
+            None
+        };
+
+        (color, dir)
     }
 
     pub(super) fn recursive_light(

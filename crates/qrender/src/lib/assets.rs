@@ -32,7 +32,7 @@ impl Renderer {
         Ok(())
     }
 
-    fn upload_alias_buffers(
+    pub(super) fn upload_alias_buffers(
         &mut self,
         mut up: gpu::Upload,
         verts: &[convert::AliasVertex],
@@ -155,6 +155,9 @@ impl Renderer {
             radius,
             maxs_z,
             md3: false,
+            iqm: false,
+            num_bones: 0,
+            bone_base: 0,
         })));
         Ok(ModelId(self.models.len() as u32 - 1))
     }
@@ -176,117 +179,6 @@ impl Renderer {
             fb: fb.map(|d| (width, height, d)),
             cmap: cmap.map(|d| (width, height, d)),
         }
-    }
-
-    /// Loads an MD3 model with pre-decoded per-surface skins.
-    pub fn load_md3(&mut self, md3: &Md3, surface_skins: &[Md3SurfaceSkins]) -> Result<ModelId> {
-        self.idle();
-        let num_frames = md3.frames.len();
-        let mut all_verts = Vec::new();
-        let mut all_idx = Vec::new();
-        let mut all_poses = Vec::new();
-        struct PendingSurf {
-            first_index: u32,
-            num_indices: u32,
-            pose_ofs: u32,
-            num_verts: u32,
-            skins: Vec<(Vec<[u32; 3]>, Vec<f32>)>,
-            holey: bool,
-        }
-        let mut up = self.gpu.begin_upload()?;
-        let mut pending = Vec::with_capacity(md3.surfaces.len());
-        for (si, s) in md3.surfaces.iter().enumerate() {
-            let first_index = all_idx.len() as u32;
-            let (sv, s_idx, sp, used) =
-                convert::md3_surface(s, num_frames, all_verts.len() as u32);
-            let pose_ofs = all_poses.len() as u32;
-            all_verts.extend_from_slice(&sv);
-            all_idx.extend_from_slice(&s_idx);
-            all_poses.extend_from_slice(&sp);
-            let mut skins = Vec::new();
-            let spec = surface_skins.get(si);
-            if let Some(ss) = spec {
-                for (frames, intervals) in &ss.skins {
-                    let mut imgs = Vec::with_capacity(frames.len());
-                    for img in frames {
-                        let bs = self.add_texture(
-                            &mut up,
-                            img.width,
-                            img.height,
-                            &[&img.base],
-                            true,
-                            Sampling::World,
-                        )?;
-                        let fs = match &img.fb {
-                            Some((w, h, data)) => self.add_texture(
-                                &mut up,
-                                *w,
-                                *h,
-                                &[data],
-                                true,
-                                Sampling::World,
-                            )?,
-                            None => NO_TEX,
-                        };
-                        let cs = match &img.cmap {
-                            Some((w, h, data)) => self.add_texture(
-                                &mut up,
-                                *w,
-                                *h,
-                                &[data],
-                                true,
-                                Sampling::Nearest,
-                            )?,
-                            None => NO_TEX,
-                        };
-                        imgs.push([bs, fs, cs]);
-                    }
-                    skins.push((imgs, intervals.clone()));
-                }
-            }
-            pending.push(PendingSurf {
-                first_index,
-                num_indices: s_idx.len() as u32,
-                pose_ofs,
-                num_verts: used,
-                skins,
-                holey: spec.is_some_and(|ss| ss.holey),
-            });
-        }
-        let (vbuf, ibuf, base) = self.upload_alias_buffers(up, &all_verts, &all_idx, &all_poses)?;
-        let surfaces = pending
-            .into_iter()
-            .map(|p| AliasSurface {
-                first_index: p.first_index,
-                num_indices: p.num_indices,
-                verts_base: base + p.pose_ofs,
-                num_verts: p.num_verts,
-                skins: p.skins,
-                holey: p.holey,
-            })
-            .collect();
-        let frames = (0..num_frames).map(|f| (f as u32, 1, Vec::new())).collect();
-        let mut maxs_z: f32 = 0.0;
-        let mut radius: f32 = 0.0;
-        for f in &md3.frames {
-            maxs_z = maxs_z.max(f.bounds[1][2]);
-            radius = radius
-                .max(f.radius)
-                .max(world::dot(f.bounds[0], f.bounds[0]).sqrt())
-                .max(world::dot(f.bounds[1], f.bounds[1]).sqrt());
-        }
-        self.models.push(Model::Alias(Box::new(AliasModel {
-            vbuf,
-            ibuf,
-            surfaces,
-            frames,
-            scale: [qformats::md3::XYZ_SCALE; 3],
-            scale_origin: [0.0; 3],
-            radius,
-            maxs_z,
-            md3: true,
-        })));
-        Ok(ModelId(self.models.len() as u32 - 1))
     }
 
     /// Loads a sprite (SPR v1 palette or SPR32).

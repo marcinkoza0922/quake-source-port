@@ -22,9 +22,11 @@ mod host;
 pub mod loc;
 pub mod msg;
 pub mod particles;
+pub mod qcfile;
 mod send;
 mod save;
 mod server;
+pub mod surface;
 mod vis;
 
 pub use client::{Client, ClientMove, Signon};

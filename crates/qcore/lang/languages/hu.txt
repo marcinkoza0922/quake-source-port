@@ -1775,6 +1775,15 @@ hu Képernyőkép
 @ Record Demo
 hu Demó felvétele
 
+@ HDR Lightmaps
+hu HDR fénytérképek
+
+@ Directional Lighting
+hu Irányított világítás
+
+@ Light Specular
+hu Fénycsillanás
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ hu Áttetsző szellemet játszik le az aktuális pálya és nehézség egyéni r
 
 @ Shows the SPD label before the speed number
 hu Megjeleníti az SPD címkét a sebességérték előtt
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+hu Megőrzi az erős HDR világítást (.lit2) lágy átmenettel a levágás helyett
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+hu Előre sütött fényirányokat (.dlit) használ finom árnyékoláshoz és csillanásokhoz falakon és modelleken
+
+@ Strength of the highlights from directional lighting
+hu Az irányított világítás csillanásainak erőssége
 
 # ==== ui.txt ====
 

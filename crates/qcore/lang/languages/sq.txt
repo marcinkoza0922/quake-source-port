@@ -1775,6 +1775,15 @@ sq Pamje e ekranit
 @ Record Demo
 sq Regjistro demo
 
+@ HDR Lightmaps
+sq Harta drite HDR
+
+@ Directional Lighting
+sq Ndriçim drejtues
+
+@ Light Specular
+sq Shkëlqimi i dritës
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ sq Luan një fantazmë gjysmë të tejdukshme të demos së rekordit tënd perso
 
 @ Shows the SPD label before the speed number
 sq Shfaq etiketën SPD para numrit të shpejtësisë
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+sq Ruan ndriçimin e ndritshëm HDR (.lit2) me zbutje graduale në vend të prerjes
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+sq Përdor drejtime drite të parapërgatitura (.dlit) për hijezim dhe shkëlqime delikate në mure dhe modele
+
+@ Strength of the highlights from directional lighting
+sq Fuqia e shkëlqimeve nga ndriçimi drejtues
 
 # ==== ui.txt ====
 

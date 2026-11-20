@@ -1775,6 +1775,15 @@ cy Sgrinlun
 @ Record Demo
 cy Recordio demo
 
+@ HDR Lightmaps
+cy Mapiau Golau HDR
+
+@ Directional Lighting
+cy Goleuo Cyfeiriadol
+
+@ Light Specular
+cy Disgleirdeb Golau
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ cy Yn rhedeg ysbryd lled-dryloyw o demo eich record bersonol ar gyfer y map a'r 
 
 @ Shows the SPD label before the speed number
 cy Yn dangos y label SPD cyn rhif y cyflymder
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+cy Yn cadw goleuo HDR llachar (.lit2) gyda pylu llyfn yn lle torri
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+cy Yn defnyddio cyfeiriadau golau wedi'u pobi (.dlit) ar gyfer cysgodi amanwl ac uchafbwyntiau ar waliau a modelau
+
+@ Strength of the highlights from directional lighting
+cy Cryfder yr uchafbwyntiau o oleuo cyfeiriadol
 
 # ==== ui.txt ====
 

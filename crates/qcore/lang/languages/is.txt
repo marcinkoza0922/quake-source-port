@@ -1775,6 +1775,15 @@ is Skjámynd
 @ Record Demo
 is Taka upp kynningu
 
+@ HDR Lightmaps
+is HDR-ljóskort
+
+@ Directional Lighting
+is Stefnulýsing
+
+@ Light Specular
+is Ljósglampi
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ is Spilar hálfgegnsæjan draug úr upptöku af þínu persónulega meti fyrir n
 
 @ Shows the SPD label before the speed number
 is Sýnir SPD-merkið á undan hraðatölunni
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+is Heldur bjartri HDR-lýsingu (.lit2) með mjúkri deyfingu í stað afskurðar
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+is Notar forreiknaðar ljósstefnur (.dlit) fyrir fíngerða skyggingu og glampa á veggjum og líkönum
+
+@ Strength of the highlights from directional lighting
+is Styrkur glampa frá stefnulýsingu
 
 # ==== ui.txt ====
 

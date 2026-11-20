@@ -176,6 +176,8 @@ pub enum ClientEvent {
     SellScreen,
     Achievement(String),
     LightStyle(usize),
+    /// CSQC `svcfte_cgamepacket` payload bytes for `CSQC_Parse_Event`.
+    CsqcEvent(Vec<u8>),
     /// Signon stage reached (CL_SignonReply); 4 = fully connected.
     Signon(u32),
     NewMap,
@@ -225,6 +227,10 @@ pub struct ClientState {
     pub paused: bool,
 
     pub stats: [i32; MAX_CL_STATS],
+    /// Float representation of stats (PEXT2_PREDINFO / CSQC `getstatf`).
+    pub statsf: [f32; MAX_CL_STATS],
+    /// String stats (`svcfte_updatestatstring` / CSQC `getstats`).
+    pub statss: Vec<String>,
     pub items: i32,
     pub item_gettime: [f64; 32],
     /// standard_quake: false for hipnotic/rogue (STAT_ACTIVEWEAPON is a bit index).
@@ -278,8 +284,13 @@ pub struct ClientState {
     pub fte_queue: Vec<crate::fte::FteRequest>,
     /// svcdp_precache particle effect names (index 0 unused).
     pub particle_precache: Vec<String>,
-    /// Active FTE protocol extensions (PEXT2_*) from svc_serverinfo.
+    /// Active FTE protocol extensions (PEXT1_* / PEXT2_*) from svc_serverinfo.
+    pub pext1: u32,
     pub pext2: u32,
+    /// Server-reported gamedir string from `PEXT2_PREDINFO` serverinfo.
+    pub server_gamedir: String,
+    /// Last `clc_move` sequence acknowledged by the server (PEXT2_PREDINFO).
+    pub acked_movemessages: u32,
     /// Sequence of the datagram being parsed (network play), for acks.
     pub net_sequence: Option<u32>,
     /// clcdp_ackframe values to send with the next move (-1 = resend all).
@@ -339,6 +350,8 @@ impl ClientState {
             cl_nolerp: false,
             paused: false,
             stats: [0; MAX_CL_STATS],
+            statsf: [0.0; MAX_CL_STATS],
+            statss: vec![String::new(); MAX_CL_STATS],
             items: 0,
             item_gettime: [0.0; 32],
             standard_quake: true,
@@ -378,7 +391,10 @@ impl ClientState {
             fte_names: Default::default(),
             fte_queue: Vec::new(),
             particle_precache: Vec::new(),
+            pext1: 0,
             pext2: 0,
+            server_gamedir: String::new(),
+            acked_movemessages: 0,
             net_sequence: None,
             ack_frames: Vec::new(),
             events: Vec::new(),

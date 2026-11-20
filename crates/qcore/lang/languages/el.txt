@@ -1775,6 +1775,15 @@ el Στιγμιότυπο
 @ Record Demo
 el Εγγραφή demo
 
+@ HDR Lightmaps
+el Χάρτες φωτός HDR
+
+@ Directional Lighting
+el Κατευθυντικός φωτισμός
+
+@ Light Specular
+el Γυαλάδα φωτός
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ el Εμφανίζει ένα ημιδιαφανές φάντασμα από το
 
 @ Shows the SPD label before the speed number
 el Εμφανίζει την ετικέτα SPD πριν από τον αριθμό ταχύτητας
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+el Διατηρεί τον έντονο φωτισμό HDR (.lit2) με ομαλή μετάβαση αντί για αποκοπή
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+el Χρησιμοποιεί προϋπολογισμένες κατευθύνσεις φωτός (.dlit) για διακριτική σκίαση και ανταύγειες
+
+@ Strength of the highlights from directional lighting
+el Ένταση των ανταυγειών από τον κατευθυντικό φωτισμό
 
 # ==== ui.txt ====
 

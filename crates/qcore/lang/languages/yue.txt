@@ -1775,6 +1775,15 @@ yue 截圖
 @ Record Demo
 yue 錄示範
 
+@ HDR Lightmaps
+yue HDR 光照貼圖
+
+@ Directional Lighting
+yue 方向性光照
+
+@ Light Specular
+yue 光照高光
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ yue 播返目前地圖同難度個人最佳紀錄示範嘅半透明幽靈（只�
 
 @ Shows the SPD label before the speed number
 yue 喺速度數值前面顯示 SPD 標籤
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+yue 用平滑衰減保留高亮 HDR 光照（.lit2），唔會硬截斷
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+yue 用預先烘焙嘅光照方向（.dlit）喺牆身同模型度做出細緻嘅明暗同高光
+
+@ Strength of the highlights from directional lighting
+yue 方向性光照帶嚟嘅高光強度
 
 # ==== ui.txt ====
 

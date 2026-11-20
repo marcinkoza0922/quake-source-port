@@ -34,6 +34,10 @@ pub struct EntState {
     /// Particle precache index emitted every frame (0 = none).
     pub emiteffect: u16,
     pub colormod: [u8; 3],
+    /// PEXT2_PREDINFO: velocity scaled by 8 (fixed point, units * 8).
+    pub velocity: [i16; 3],
+    /// PEXT2_PREDINFO: player movetype (0 = none).
+    pub pmovetype: u8,
 }
 
 impl Default for EntState {
@@ -53,13 +57,39 @@ impl Default for EntState {
             traileffect: 0,
             emiteffect: 0,
             colormod: [32; 3],
+            velocity: [0; 3],
+            pmovetype: 0,
         }
     }
 }
 
-/// MSGFTE_DeltaCalcBits without prediction info (this server sends none).
+/// SVFTE_DeltaPredCalcBits: velocity/movetype fields carried inside UF_PREDINFO.
+fn pred_bits(from: Option<&EntState>, to: &EntState) -> u32 {
+    let mut pb = 0u32;
+    if match from {
+        Some(f) => f.pmovetype != to.pmovetype,
+        None => to.pmovetype != 0,
+    } {
+        pb |= UFP_MOVETYPE;
+    }
+    if to.velocity[0] != 0 || to.velocity[1] != 0 {
+        pb |= UFP_VELOCITYXY;
+    }
+    if to.velocity[2] != 0 {
+        pb |= UFP_VELOCITYZ;
+    }
+    pb
+}
+
+/// MSGFTE_DeltaCalcBits (including PEXT2_PREDINFO velocity/movetype).
 pub fn calc_bits(from: &EntState, to: &EntState) -> u32 {
     let mut bits = 0;
+    if pred_bits(Some(from), to) != 0 {
+        bits |= UF_PREDINFO;
+        if from.velocity != [0; 3] || to.velocity != [0; 3] {
+            bits |= UF_ORIGINXY | UF_ORIGINZ;
+        }
+    }
     if to.origin[0] != from.origin[0] || to.origin[1] != from.origin[1] {
         bits |= UF_ORIGINXY;
     }
@@ -106,7 +136,15 @@ pub fn calc_bits(from: &EntState, to: &EntState) -> u32 {
 }
 
 /// MSGFTE_WriteEntityUpdate for `bits` from [`calc_bits`] (plus UF_RESET).
-pub fn write_update(mut bits: u32, s: &EntState, msg: &mut SizeBuf, pf: u32) {
+pub fn write_update(mut bits: u32, s: &EntState, msg: &mut SizeBuf, pf: u32, pext2: u32) {
+    let mut predbits = 0u32;
+    if bits & UF_PREDINFO != 0 {
+        predbits = pred_bits(None, s);
+        // If only pmovetype cleared to 0, still send UFP_MOVETYPE so the client clears it.
+        if predbits == 0 {
+            predbits = UFP_MOVETYPE;
+        }
+    }
     if (bits & UF_MODEL != 0 && s.modelindex > 255) || (bits & UF_FRAME != 0 && s.frame > 255) {
         bits |= UF_16BIT;
     }
@@ -146,12 +184,14 @@ pub fn write_update(mut bits: u32, s: &EntState, msg: &mut SizeBuf, pf: u32) {
     if bits & UF_ORIGINZ != 0 {
         msg.coord(s.origin[2], pf);
     }
+    let ang16 = bits & UF_PREDINFO != 0 && pext2 & PEXT2_PREDINFO == 0;
+    let write_ang = |msg: &mut SizeBuf, a: f32| if ang16 { msg.angle16(a, pf) } else { msg.angle(a, pf) };
     if bits & UF_ANGLESXZ != 0 {
-        msg.angle(s.angles[0], pf);
-        msg.angle(s.angles[2], pf);
+        write_ang(msg, s.angles[0]);
+        write_ang(msg, s.angles[2]);
     }
     if bits & UF_ANGLESY != 0 {
-        msg.angle(s.angles[1], pf);
+        write_ang(msg, s.angles[1]);
     }
     if bits & (UF_EFFECTS | UF_EFFECTS2) == UF_EFFECTS | UF_EFFECTS2 {
         msg.long(s.effects as i32);
@@ -159,6 +199,19 @@ pub fn write_update(mut bits: u32, s: &EntState, msg: &mut SizeBuf, pf: u32) {
         msg.short(s.effects as i32);
     } else if bits & UF_EFFECTS != 0 {
         msg.byte(s.effects as i32);
+    }
+    if bits & UF_PREDINFO != 0 {
+        msg.byte(predbits as i32);
+        if predbits & UFP_MOVETYPE != 0 {
+            msg.byte(s.pmovetype as i32);
+        }
+        if predbits & UFP_VELOCITYXY != 0 {
+            msg.short(s.velocity[0] as i32);
+            msg.short(s.velocity[1] as i32);
+        }
+        if predbits & UFP_VELOCITYZ != 0 {
+            msg.short(s.velocity[2] as i32);
+        }
     }
     if bits & UF_MODEL != 0 {
         wide(msg, s.modelindex);
@@ -237,7 +290,7 @@ pub fn read_delta(m: &mut MsgReader<'_>, s: &mut EntState, baseline: &EntState, 
         s.effects = m.byte() as u8 as u32;
     }
     if bits & UF_PREDINFO != 0 {
-        // movement, movetype, velocity, msec: prediction isn't implemented.
+        // CLFTE_ReadDelta prediction info (vkQuake cl_parse.c).
         let pb = m.byte() as u32;
         for f in [UFP_FORWARD, UFP_SIDE, UFP_UP] {
             if pb & f != 0 {
@@ -245,14 +298,19 @@ pub fn read_delta(m: &mut MsgReader<'_>, s: &mut EntState, baseline: &EntState, 
             }
         }
         if pb & UFP_MOVETYPE != 0 {
-            m.byte();
+            s.pmovetype = m.byte() as u8;
         }
         if pb & UFP_VELOCITYXY != 0 {
-            m.short();
-            m.short();
+            s.velocity[0] = m.short() as i16;
+            s.velocity[1] = m.short() as i16;
+        } else {
+            s.velocity[0] = 0;
+            s.velocity[1] = 0;
         }
         if pb & UFP_VELOCITYZ != 0 {
-            m.short();
+            s.velocity[2] = m.short() as i16;
+        } else {
+            s.velocity[2] = 0;
         }
         if pb & UFP_MSEC != 0 {
             m.byte();
@@ -269,6 +327,9 @@ pub fn read_delta(m: &mut MsgReader<'_>, s: &mut EntState, baseline: &EntState, 
                 m.byte();
             }
         }
+    } else {
+        // Velocity is not delta-tracked across frames without UF_PREDINFO.
+        s.velocity = [0; 3];
     }
     if bits & UF_MODEL != 0 {
         s.modelindex = wide(m);
@@ -406,12 +467,12 @@ pub fn write_entity(msg: &mut SizeBuf, e: u32, pext2: u32) {
 mod tests {
     use super::*;
 
-    fn roundtrip(from: &EntState, to: &EntState, extra: u32) -> (EntState, u32) {
+    fn roundtrip(from: &EntState, to: &EntState, extra: u32, pext2: u32) -> (EntState, u32) {
         let mut b = SizeBuf::new(1024);
-        write_update(calc_bits(from, to) | extra, to, &mut b, 0);
+        write_update(calc_bits(from, to) | extra, to, &mut b, 0, pext2);
         let mut m = MsgReader::new(&b.data);
         let mut s = *from;
-        let bits = read_delta(&mut m, &mut s, &EntState::default(), 0, PEXT2_REPLACEMENTDELTAS).unwrap();
+        let bits = read_delta(&mut m, &mut s, &EntState::default(), 0, pext2).unwrap();
         assert!(m.at_end() && !m.badread);
         (s, bits)
     }
@@ -433,18 +494,24 @@ mod tests {
             traileffect: 5,
             emiteffect: 9,
             colormod: [64, 32, 0],
+            ..Default::default()
         };
-        let (s, bits) = roundtrip(&a, &b, 0);
+        let (s, bits) = roundtrip(&a, &b, 0, PEXT2_REPLACEMENTDELTAS);
         assert_eq!(s, b);
         assert!(bits & UF_16BIT != 0 && bits & UF_TRAILEFFECT != 0);
         // Only what changed is sent; trail without emit is one short.
         let c = EntState { traileffect: 6, emiteffect: 0, ..b };
-        let (s, bits) = roundtrip(&b, &c, 0);
+        let (s, bits) = roundtrip(&b, &c, 0, PEXT2_REPLACEMENTDELTAS);
         assert_eq!(s, c);
         assert_eq!(bits & !(UF_EXTEND1 | UF_EXTEND2 | UF_EXTEND3), UF_TRAILEFFECT);
         // Reset starts from the baseline.
-        let (s, _) = roundtrip(&b, &a, UF_RESET);
+        let (s, _) = roundtrip(&b, &a, UF_RESET, PEXT2_REPLACEMENTDELTAS);
         assert_eq!(s, a);
+        // PEXT2_PREDINFO velocity + movetype roundtrip.
+        let p = EntState { velocity: [800, -400, 160], pmovetype: 3, eflags: EFLAGS_ONGROUND, ..b };
+        let (s, bits) = roundtrip(&a, &p, 0, PEXT2_SUPPORTED);
+        assert_eq!(s, p);
+        assert!(bits & UF_PREDINFO != 0);
     }
 
     #[test]

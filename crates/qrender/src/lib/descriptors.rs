@@ -7,9 +7,9 @@ impl Renderer {
         let Some(lightmap) = &self.lightmap else {
             return;
         };
-        let (samples, surfs, materials) = match &self.world {
-            Some(w) => (w.samples.buf, w.surfs.buf, w.materials.buf),
-            None => (self.dummy.buf, self.dummy.buf, self.dummy.buf),
+        let (samples, deluxe_samples, surfs, materials) = match &self.world {
+            Some(w) => (w.samples.buf, w.deluxe_samples.buf, w.surfs.buf, w.materials.buf),
+            None => (self.dummy.buf, self.dummy.buf, self.dummy.buf, self.dummy.buf),
         };
         let whole = |b: vk::Buffer| {
             [vk::DescriptorBufferInfo {
@@ -77,6 +77,7 @@ impl Renderer {
             let mats = whole(materials);
             let pal = whole(self.palette_buf.buf);
             let smp = whole(samples);
+            let dlx = whole(deluxe_samples);
             let srf = whole(surfs);
             let w = |set, b, ty| {
                 vk::WriteDescriptorSet::default()
@@ -98,6 +99,7 @@ impl Renderer {
                 w(f.comp_set, 2, sb).buffer_info(&lmdyn),
                 w(f.comp_set, 3, sb).buffer_info(&vis),
                 w(f.comp_set, 4, vk::DescriptorType::STORAGE_IMAGE).image_info(&lm_storage),
+                w(f.comp_set, 5, sb).buffer_info(&dlx),
             ];
             // SAFETY: device idle or sets not in use; all handles valid.
             unsafe { dev.update_descriptor_sets(&writes, &[]) };

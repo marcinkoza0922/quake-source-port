@@ -1775,6 +1775,15 @@ bg Екранна снимка
 @ Record Demo
 bg Запис на демо
 
+@ HDR Lightmaps
+bg HDR лайтмапи
+
+@ Directional Lighting
+bg Насочено осветление
+
+@ Light Specular
+bg Отблясъци на светлината
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ bg Пуска полупрозрачен призрак от демото на �
 
 @ Shows the SPD label before the speed number
 bg Показва етикета SPD пред стойността на скоростта
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+bg Запазва яркото HDR осветление (.lit2) с плавен преход вместо отрязване
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+bg Използва предварително изчислени посоки на светлината (.dlit) за фино засенчване и отблясъци
+
+@ Strength of the highlights from directional lighting
+bg Сила на отблясъците от насоченото осветление
 
 # ==== ui.txt ====
 

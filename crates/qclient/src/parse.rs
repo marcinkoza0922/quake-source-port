@@ -184,19 +184,29 @@ impl ClientState {
                     if self.pext2 & crate::delta::PEXT2_REPLACEMENTDELTAS != 0 =>
                 {
                     let i = m.byte();
-                    let v = match cmd {
-                        crate::delta::SVCDP_UPDATESTATBYTE => Some(m.byte()),
-                        crate::delta::SVCFTE_UPDATESTATFLOAT => Some(m.float() as i32),
-                        _ => {
-                            m.string();
-                            None
+                    match cmd {
+                        crate::delta::SVCDP_UPDATESTATBYTE => {
+                            let v = m.byte();
+                            self.apply_stat_int(i, v);
                         }
-                    };
-                    if let Some(v) = v
-                        && (0..MAX_CL_STATS as i32).contains(&i)
-                    {
-                        self.stats[i as usize] = v;
+                        crate::delta::SVCFTE_UPDATESTATFLOAT => {
+                            let v = m.float();
+                            self.apply_stat_float(i, v);
+                        }
+                        _ => {
+                            let s = m.string_lossy();
+                            if (0..MAX_CL_STATS as i32).contains(&i) {
+                                self.statss[i as usize] = s;
+                            }
+                        }
                     }
+                }
+                crate::delta::SVCFTE_CGAMEPACKET if self.pext1 & crate::delta::PEXT1_CSQC != 0 => {
+                    // Remaining bytes of the message belong to CSQC_Parse_Event
+                    // when not length-prefixed; capture until end of buffer.
+                    let rest = data[m.pos..].to_vec();
+                    m.pos = data.len();
+                    self.events.push(ClientEvent::CsqcEvent(rest));
                 }
                 SVC_TEMP_ENTITY => self.parse_tent(&mut m)?,
                 SVC_SETPAUSE => {
@@ -219,7 +229,7 @@ impl ClientState {
                     if !(0..MAX_CL_STATS as i32).contains(&i) {
                         return err(format!("svc_updatestat: {i} is invalid"));
                     }
-                    self.stats[i as usize] = v;
+                    self.apply_stat_int(i, v);
                 }
                 SVC_SPAWNSTATICSOUND | SVC_SPAWNSTATICSOUND2 => {
                     let origin = m.vec3_coord(pf);

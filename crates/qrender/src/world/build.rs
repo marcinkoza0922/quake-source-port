@@ -2,15 +2,30 @@ use super::*;
 
 impl World {
     pub fn build(bsp: &Bsp, lit: Option<&[u8]>) -> World {
+        Self::build_ext(bsp, lit, None, None)
+    }
+
+    pub fn build_ext(
+        bsp: &Bsp,
+        lit: Option<&[u8]>,
+        hdr_lit: Option<&[u32]>,
+        deluxe: Option<&[u8]>,
+    ) -> World {
         let numleafs = bsp.models.first().map_or(0, |m| m.visleafs.max(0) as usize);
         let lit_data = lit.or(bsp.rgb_lighting.as_deref());
+        let hdr_data = hdr_lit.or(bsp.hdr_lighting.as_deref());
+        let dlx_data = deluxe.or(bsp.deluxemap.as_deref());
         let num_samples = if !bsp.lighting.is_empty() {
             bsp.lighting.len()
+        } else if let Some(h) = hdr_data {
+            h.len()
         } else {
             lit_data.map_or(0, |l| l.len() / 3)
         };
         let has_light = num_samples > 0;
-        let has_lit = lit_data.is_some_and(|l| !l.is_empty() && l.len() == num_samples * 3);
+        let has_hdr = hdr_data.is_some_and(|h| !h.is_empty() && h.len() == num_samples);
+        let has_lit = has_hdr || lit_data.is_some_and(|l| !l.is_empty() && l.len() == num_samples * 3);
+        let has_deluxe = dlx_data.is_some_and(|d| !d.is_empty() && d.len() == num_samples * 3);
         let mut w = World {
             transparent_liquids: false,
             water_vised: 0,
@@ -26,8 +41,11 @@ impl World {
             surfaces: Vec::with_capacity(bsp.faces.len()),
             lm_surfs: Vec::new(),
             samples: Vec::new(),
+            deluxe_samples: Vec::new(),
             atlas_layers: 1,
             lit: has_lit,
+            has_hdr,
+            has_deluxe,
             anims: Vec::new(),
             submodels: Vec::new(),
             bsp_nodes: bsp.nodes.clone(),
@@ -46,7 +64,7 @@ impl World {
             lightgrid: bsp.lightgrid.clone(),
             packer: Packer { allocated: vec![0; ATLAS as usize], layer: 0 },
         };
-        w.append(bsp, lit_data, 0);
+        w.append(bsp, lit_data, hdr_data, dlx_data, 0);
         w.water_vised = w.check_water_vis();
         if let Some(m) = bsp.models.first() {
             w.bake_liquid(m.first_face.max(0) as usize, m.num_faces.max(0) as usize);
@@ -58,28 +76,59 @@ impl World {
     /// at `tex_base` in the material table. Its faces share the world's
     /// vertex buffer and lightmap atlas. Returns the index of its model 0 in
     /// `submodels`.
-    pub fn add_brush(&mut self, bsp: &Bsp, lit: Option<&[u8]>, tex_base: u32) -> u32 {
+    pub fn add_brush_ext(
+        &mut self,
+        bsp: &Bsp,
+        lit: Option<&[u8]>,
+        hdr_lit: Option<&[u32]>,
+        deluxe: Option<&[u8]>,
+        tex_base: u32,
+    ) -> u32 {
         let first = self.submodels.len() as u32;
         self.texture_names.resize(tex_base as usize + bsp.textures.len(), String::new());
         for (i, texture) in bsp.textures.iter().enumerate() {
             self.texture_names[tex_base as usize + i] =
                 texture.as_ref().map_or_else(String::new, |t| t.name.clone());
         }
-        self.append(bsp, lit.or(bsp.rgb_lighting.as_deref()), tex_base);
+        self.append(
+            bsp,
+            lit.or(bsp.rgb_lighting.as_deref()),
+            hdr_lit.or(bsp.hdr_lighting.as_deref()),
+            deluxe.or(bsp.deluxemap.as_deref()),
+            tex_base,
+        );
         first
     }
 
-    pub(super) fn append(&mut self, bsp: &Bsp, lit: Option<&[u8]>, tex_base: u32) {
+    pub(super) fn append(
+        &mut self,
+        bsp: &Bsp,
+        lit: Option<&[u8]>,
+        hdr_lit: Option<&[u32]>,
+        deluxe: Option<&[u8]>,
+        tex_base: u32,
+    ) {
         let w = self;
         let surf_base = w.surfaces.len() as u32;
         let num_samples = if !bsp.lighting.is_empty() {
             bsp.lighting.len()
+        } else if let Some(h) = hdr_lit {
+            h.len()
         } else {
             lit.map_or(0, |l| l.len() / 3)
         };
         let has_light = num_samples > 0;
         let packer = &mut w.packer;
+        let hdr = hdr_lit.filter(|h| !h.is_empty() && h.len() == num_samples);
         let lit = lit.filter(|l| !l.is_empty() && l.len() == num_samples * 3);
+        let dlx = deluxe.filter(|d| !d.is_empty() && d.len() == num_samples * 3);
+        if hdr.is_some() {
+            w.has_hdr = true;
+            w.lit = true;
+        }
+        if dlx.is_some() {
+            w.has_deluxe = true;
+        }
         let ntex = bsp.textures.len().max(1);
         let decoupled = bsp.decoupled_lm.as_deref();
         let lm_shifts = bsp.lm_shift.as_deref();
@@ -104,6 +153,8 @@ impl World {
                 texturemins: [0; 2],
                 extents: [0; 2],
                 samples: NO_LM,
+                hdr_samples: false,
+                has_deluxe: false,
                 styles,
                 mins: [f32::MAX; 3],
                 maxs: [f32::MIN; 3],
@@ -224,6 +275,7 @@ impl World {
                 let nstyles = styles.iter().take_while(|&&st| st != 255).count();
                 let n = (lmsize[0] * lmsize[1]) as usize;
                 let mut sample_ofs = NO_LM;
+                let mut lm_flags = 0u32;
                 if has_light && lightofs >= 0 && nstyles > 0 {
                     let base = lightofs as usize;
                     let ok = base
@@ -231,19 +283,38 @@ impl World {
                         .is_some_and(|end| end <= num_samples);
                     if ok {
                         sample_ofs = w.samples.len() as u32;
-                        for i in 0..n * nstyles {
-                            let (r, g, b) = match lit {
-                                Some(l) => (
-                                    l[(base + i) * 3],
-                                    l[(base + i) * 3 + 1],
-                                    l[(base + i) * 3 + 2],
-                                ),
-                                None => {
-                                    let v = bsp.lighting[base + i];
-                                    (v, v, v)
-                                }
-                            };
-                            w.samples.push(r as u32 | (g as u32) << 8 | (b as u32) << 16);
+                        if let Some(h) = hdr {
+                            s.hdr_samples = true;
+                            lm_flags |= LM_FLAG_HDR;
+                            w.samples.extend_from_slice(&h[base..base + n * nstyles]);
+                        } else {
+                            for i in 0..n * nstyles {
+                                let (r, g, b) = match lit {
+                                    Some(l) => (
+                                        l[(base + i) * 3],
+                                        l[(base + i) * 3 + 1],
+                                        l[(base + i) * 3 + 2],
+                                    ),
+                                    None => {
+                                        let v = bsp.lighting[base + i];
+                                        (v, v, v)
+                                    }
+                                };
+                                w.samples.push(r as u32 | (g as u32) << 8 | (b as u32) << 16);
+                            }
+                        }
+                        if let Some(d) = dlx {
+                            s.has_deluxe = true;
+                            lm_flags |= LM_FLAG_DELUXE;
+                            w.deluxe_samples.resize(sample_ofs as usize, 0x0080_8080);
+                            for i in 0..n * nstyles {
+                                let dx = d[(base + i) * 3] as u32;
+                                let dy = d[(base + i) * 3 + 1] as u32;
+                                let dz = d[(base + i) * 3 + 2] as u32;
+                                w.deluxe_samples.push(dx | (dy << 8) | (dz << 16));
+                            }
+                        } else if w.has_deluxe {
+                            w.deluxe_samples.resize(w.samples.len(), 0x0080_8080);
                         }
                     }
                 }
@@ -253,7 +324,7 @@ impl World {
                     sample_ofs,
                     styles: u32::from_le_bytes(styles),
                     size: lmsize[0] | lmsize[1] << 16,
-                    atlas: p.0 | p.1 << 16,
+                    atlas: (p.0 & 0x3fff) | ((p.1 & 0x3fff) << 14) | lm_flags,
                     vecs0: lm_vecs[0],
                     vecs1: lm_vecs[1],
                     plane: [pl.normal[0], pl.normal[1], pl.normal[2], pl.dist],

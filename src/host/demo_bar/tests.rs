@@ -78,6 +78,7 @@ fn pad_mode_draws_glyphs_on_buttons_without_above_bar_clutter() {
         let y = match *d {
             qrender::Draw2D::Pic { y, .. } | qrender::Draw2D::Char { y, .. } | qrender::Draw2D::Fill { y, .. } | qrender::Draw2D::Tile { y, .. } => y,
             qrender::Draw2D::Line { y0, y1, .. } => y0.min(y1),
+            qrender::Draw2D::Clip(_) => continue,
         };
         assert!(y >= panel_top_px - 1.0, "unexpected draw above panel: y={y} < {panel_top_px}");
     }

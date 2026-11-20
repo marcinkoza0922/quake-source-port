@@ -1,9 +1,9 @@
 use super::*;
 
-/// SV_WriteClientdataToMessage.
-pub(crate) fn write_clientdata(vm: &mut Vm, c: &mut Core, w: &mut World, e: u32, msg: &mut SizeBuf) {
+/// Damage, ideal pitch and fixangle messages that precede both `svc_clientdata`
+/// and `PEXT2_PREDINFO` stat updates.
+pub(crate) fn write_damage_and_angle(vm: &mut Vm, c: &mut Core, w: &mut World, e: u32, msg: &mut SizeBuf) {
     let f = c.sv.fields.clone();
-    let g = c.sv.globals.clone();
     let pf = c.sv.protocolflags;
     let fi = |vm: &Vm, o: usize| vm.ent_f(e, o) as i32;
     if vm.ent_f(e, f.dmg_take) != 0.0 || vm.ent_f(e, f.dmg_save) != 0.0 {
@@ -34,6 +34,92 @@ pub(crate) fn write_clientdata(vm: &mut Vm, c: &mut Core, w: &mut World, e: u32,
         }
         vm.set_ent_f(e, f.fixangle, 0.0);
     }
+}
+
+/// SV_CalcStats (vkQuake sv_main.c) for `PEXT2_PREDINFO` and custom QC stats.
+pub(crate) fn calc_stats(
+    vm: &Vm,
+    c: &Core,
+    e: u32,
+    predinfo: bool,
+) -> ([i32; qnet::protocol::MAX_CL_STATS], [f32; qnet::protocol::MAX_CL_STATS], Vec<Option<Vec<u8>>>) {
+    use qnet::protocol::*;
+    let f = &c.sv.fields;
+    let g = &c.sv.globals;
+    let mut si = [0i32; MAX_CL_STATS];
+    let mut sf = [0.0f32; MAX_CL_STATS];
+    let mut ss: Vec<Option<Vec<u8>>> = vec![None; MAX_CL_STATS];
+    let items = match f.items2 {
+        Some(o) => (vm.ent_f(e, f.items) as i32) | ((vm.ent_f(e, o) as i32) << 23),
+        None => (vm.ent_f(e, f.items) as i32) | ((vm.g_f(g.serverflags) as i32) << 28),
+    };
+    sf[STAT_HEALTH] = vm.ent_f(e, f.health);
+    si[STAT_WEAPON] = c.model_index(vm.ent_str(e, f.weaponmodel).unwrap_or(b""));
+    sf[STAT_AMMO] = vm.ent_f(e, f.currentammo);
+    sf[STAT_ARMOR] = vm.ent_f(e, f.armorvalue);
+    sf[STAT_WEAPONFRAME] = vm.ent_f(e, f.weaponframe);
+    sf[STAT_SHELLS] = vm.ent_f(e, f.ammo_shells);
+    sf[STAT_NAILS] = vm.ent_f(e, f.ammo_nails);
+    sf[STAT_ROCKETS] = vm.ent_f(e, f.ammo_rockets);
+    sf[STAT_CELLS] = vm.ent_f(e, f.ammo_cells);
+    sf[STAT_ACTIVEWEAPON] = vm.ent_f(e, f.weapon);
+    if let Some(vz) = f.viewzoom {
+        let v = vm.ent_f(e, vz);
+        if v != 0.0 {
+            sf[STAT_VIEWZOOM] = (v * 255.0).max(1.0);
+        }
+    }
+    if predinfo {
+        si[STAT_ITEMS] = items;
+        sf[STAT_VIEWHEIGHT] = vm.ent_v(e, f.view_ofs)[2];
+        sf[STAT_IDEALPITCH] = vm.ent_f(e, f.idealpitch);
+        let punch = vm.ent_v(e, f.punchangle);
+        sf[STAT_PUNCHANGLE_X] = punch[0];
+        sf[STAT_PUNCHANGLE_Y] = punch[1];
+        sf[STAT_PUNCHANGLE_Z] = punch[2];
+    }
+    // Custom stats from clientstat (#232) / globalstat (#233).
+    for cs in &c.sv.custom_stats {
+        if cs.idx >= MAX_CL_STATS {
+            continue;
+        }
+        match (cs.field, cs.global) {
+            (Some(ofs), _) => match cs.ty {
+                1 => ss[cs.idx] = vm.ent_str(e, ofs).ok().map(|b| b.to_vec()),
+                2 => sf[cs.idx] = vm.ent_f(e, ofs),
+                3 if cs.idx + 2 < MAX_CL_STATS => {
+                    let v = vm.ent_v(e, ofs);
+                    sf[cs.idx] = v[0];
+                    sf[cs.idx + 1] = v[1];
+                    sf[cs.idx + 2] = v[2];
+                }
+                4 | 10 => si[cs.idx] = vm.ent_i(e, ofs),
+                _ => {}
+            },
+            (None, Some(ofs)) => match cs.ty {
+                1 => ss[cs.idx] = vm.g_str(ofs).ok().map(|b| b.to_vec()),
+                2 => sf[cs.idx] = vm.g_f(ofs),
+                3 if cs.idx + 2 < MAX_CL_STATS => {
+                    let v = vm.g_v(ofs);
+                    sf[cs.idx] = v[0];
+                    sf[cs.idx + 1] = v[1];
+                    sf[cs.idx + 2] = v[2];
+                }
+                4 | 10 => si[cs.idx] = vm.g_i(ofs),
+                _ => {}
+            },
+            _ => {}
+        }
+    }
+    (si, sf, ss)
+}
+
+/// SV_WriteClientdataToMessage.
+pub(crate) fn write_clientdata(vm: &mut Vm, c: &mut Core, w: &mut World, e: u32, msg: &mut SizeBuf) {
+    let f = c.sv.fields.clone();
+    let g = c.sv.globals.clone();
+    let fi = |vm: &Vm, o: usize| vm.ent_f(e, o) as i32;
+    write_damage_and_angle(vm, c, w, e, msg);
     let mut bits = 0u32;
     if vm.ent_v(e, f.view_ofs)[2] != DEFAULT_VIEWHEIGHT {
         bits |= SU_VIEWHEIGHT;

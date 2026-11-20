@@ -12,21 +12,33 @@ impl Ctx<'_> {
         let bsp_ext = name.to_ascii_lowercase().ends_with(".bsp");
         let data = if cached.is_some() || !bsp_ext { None } else { self.c.fs.open(name) };
         let is_brush = cached.is_some()
-            || data.as_deref().is_some_and(|d| !matches!(d.get(..4), Some(b"IDPO" | b"IDSP" | b"IDP3")));
+            || data.as_deref().is_some_and(|d| {
+                !matches!(d.get(..4), Some(b"IDPO" | b"IDSP" | b"IDP3"))
+                    && d.get(..16) != Some(qformats::iqm::IQM_MAGIC.as_slice())
+            });
         if is_brush {
-            let cm = match cached {
-                Some(cm) => cm,
+            let (cm, sm) = match cached {
+                Some(cm) => {
+                    let sm = self.c.sv.surface_cache.get(name).cloned();
+                    (cm, sm)
+                }
                 None => {
                     let data = data.unwrap_or_default();
                     let bsp = qformats::Bsp::parse(&data)
                         .map_err(|e| VmError::new(format!("Mod_LoadModel: {name}: {e:?}")))?;
                     let cm = Arc::new(CollisionModel::from_bsp(&bsp));
+                    let sm = Arc::new(crate::surface::SurfaceModel::from_bsp(&bsp));
                     self.c.sv.brush_cache.insert(name.to_string(), cm.clone());
-                    cm
+                    self.c.sv.surface_cache.insert(name.to_string(), sm.clone());
+                    (cm, Some(sm))
                 }
             };
             let (mins, maxs) = cm.submodels.first().map_or((Vec3::ZERO, Vec3::ZERO), |m| (m.mins, m.maxs));
             self.w.set_model(index, Some((cm, 0)));
+            if self.c.sv.surface_models.len() <= index {
+                self.c.sv.surface_models.resize(index + 1, None);
+            }
+            self.c.sv.surface_models[index] = sm.map(|s| (s, 0));
             return Ok(Some(ModelInfo { name: name.into(), brush: true, mins, maxs }));
         }
         if if bsp_ext { data.is_none() } else { !self.c.fs.exists(name) } {
@@ -63,6 +75,15 @@ impl Ctx<'_> {
                 }
                 Err(_) => fallback,
             },
+            _ if data.get(..16) == Some(qformats::iqm::IQM_MAGIC.as_slice()) => {
+                match qformats::Iqm::parse(&data) {
+                    Ok(iqm) => {
+                        let (lo, hi, _) = iqm.compute_bounds();
+                        (Vec3::from(lo), Vec3::from(hi))
+                    }
+                    Err(_) => fallback,
+                }
+            }
             _ => fallback,
         }
     }

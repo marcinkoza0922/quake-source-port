@@ -1775,6 +1775,15 @@ mr स्क्रीनशॉट
 @ Record Demo
 mr डेमो रेकॉर्ड करा
 
+@ HDR Lightmaps
+mr HDR लाइटमॅप्स
+
+@ Directional Lighting
+mr दिशात्मक प्रकाश
+
+@ Light Specular
+mr प्रकाश चमक
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ mr सध्याच्या नकाशा आणि काठिण्य �
 
 @ Shows the SPD label before the speed number
 mr वेगाच्या संख्येपूर्वी SPD लेबल दाखवते
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+mr तीव्र HDR प्रकाश (.lit2) कापण्याऐवजी मऊ संक्रमणासह टिकवून ठेवतो
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+mr भिंती आणि मॉडेल्सवर सूक्ष्म छाया आणि चमकासाठी पूर्वगणित प्रकाश दिशा (.dlit) वापरतो
+
+@ Strength of the highlights from directional lighting
+mr दिशात्मक प्रकाशातून येणाऱ्या चमकाची तीव्रता
 
 # ==== ui.txt ====
 

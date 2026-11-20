@@ -63,6 +63,7 @@ mod hitstop;
 mod pad_gestures;
 mod toy_fx;
 mod ctx;
+mod csqc;
 mod cvars;
 use cvars::*;
 pub(crate) mod feedback;
@@ -132,6 +133,7 @@ pub struct Host {
     /// Headless export done: quit once background jobs have finished.
     quit_after_jobs: bool,
     level: Level,
+    csqc: crate::csqc::Csqc,
     view: ViewState,
     debris: crate::debris::Debris,
     blood: crate::blood::Blood,
@@ -316,6 +318,7 @@ impl Host {
             audio_fx: Default::default(),
             last_audio_view: None,
             level: Level::default(),
+            csqc: Default::default(),
             view: ViewState::default(),
             debris: crate::debris::Debris::default(),
             blood: crate::blood::Blood::default(),

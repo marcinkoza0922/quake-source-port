@@ -24,6 +24,7 @@ impl Renderer {
         if let Some(w) = self.world.take() {
             self.gpu.free_buffer(w.vbuf);
             self.gpu.free_buffer(w.samples);
+            self.gpu.free_buffer(w.deluxe_samples);
             self.gpu.free_buffer(w.surfs);
             self.gpu.free_buffer(w.materials);
             let c = w.cull;
@@ -112,7 +113,7 @@ impl Renderer {
         let bsp = level.bsp;
         self.free_level();
         self.water_fx.reset();
-        let mut cpu = world::World::build(bsp, level.lit);
+        let mut cpu = world::World::build_ext(bsp, level.lit, level.hdr_lit, level.deluxe);
         let world_subs = cpu.submodels.len();
         let mut up = self.gpu.begin_upload()?;
         let mut materials: Vec<[u32; 4]> = Vec::new();
@@ -120,7 +121,7 @@ impl Renderer {
         self.upload_bsp_textures(&mut up, level, &mut materials, &mut tex_info)?;
         let mut brush_ids = Vec::new();
         for b in brushes {
-            let first = cpu.add_brush(b.bsp, b.lit, materials.len() as u32);
+            let first = cpu.add_brush_ext(b.bsp, b.lit, b.hdr_lit, b.deluxe, materials.len() as u32);
             self.upload_bsp_textures(&mut up, *b, &mut materials, &mut tex_info)?;
             self.models.push(Model::Brush(first));
             brush_ids.push(ModelId(self.models.len() as u32 - 1));
@@ -144,6 +145,16 @@ impl Renderer {
             .buffer((cpu.samples.len() * 4) as u64, usage, false)?;
         self.gpu
             .upload_buffer(&mut up, samples.buf, 0, bytes_of(&cpu.samples))?;
+        let dlx_slice: &[u32] = if cpu.deluxe_samples.is_empty() {
+            &[0x0080_8080]
+        } else {
+            &cpu.deluxe_samples
+        };
+        let deluxe_samples = self
+            .gpu
+            .buffer((dlx_slice.len() * 4) as u64, usage, false)?;
+        self.gpu
+            .upload_buffer(&mut up, deluxe_samples.buf, 0, bytes_of(dlx_slice))?;
         let surfs = self.gpu.buffer(
             std::mem::size_of_val(cpu.lm_surfs.as_slice()) as u64,
             usage,
@@ -161,10 +172,11 @@ impl Renderer {
         if let Some(old) = self.lightmap.take() {
             self.gpu.free_image(old);
         }
+        let lm_layers = cpu.atlas_layers * if cpu.has_deluxe { 2 } else { 1 };
         self.lightmap = Some(Self::make_lightmap(
             &mut self.gpu,
             world::ATLAS,
-            cpu.atlas_layers,
+            lm_layers,
         )?);
         let mut ids = Vec::new();
         for i in 1..world_subs {
@@ -178,6 +190,7 @@ impl Renderer {
             cpu,
             vbuf,
             samples,
+            deluxe_samples,
             surfs,
             materials: mats,
             tex_info,

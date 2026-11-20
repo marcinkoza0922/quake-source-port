@@ -1775,6 +1775,15 @@ eo Ekrankopio
 @ Record Demo
 eo Registri demonstraĵon
 
+@ HDR Lightmaps
+eo HDR-lumkartoj
+
+@ Directional Lighting
+eo Direkta lumigo
+
+@ Light Specular
+eo Luma brilo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ eo Rulas diafanan fantomon de la demonstraĵo de via persona rekordo por la aktu
 
 @ Shows the SPD label before the speed number
 eo Montras la etikedon SPD antaŭ la rapidnombro
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+eo Konservas helan HDR-lumigon (.lit2) kun glata malpliiĝo anstataŭ tranĉado
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+eo Uzas antaŭkalkulitajn lumdirektojn (.dlit) por subtila ombrado kaj briloj sur muroj kaj modeloj
+
+@ Strength of the highlights from directional lighting
+eo Forto de la briloj el direkta lumigo
 
 # ==== ui.txt ====
 

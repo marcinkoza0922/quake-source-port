@@ -6,6 +6,7 @@ use std::rc::Rc;
 use crate::edict::fmt_g;
 use crate::progs::Progs;
 use crate::{Host, Result, Vm, ofs_parm};
+mod ext;
 mod pf;
 pub use pf::*;
 
@@ -81,24 +82,117 @@ pub(crate) enum Dispatch {
 
 /// Host-side extension builtins that have fixed numbers.
 const HOST_EXT_NUMS: &[(&str, i32)] = &[
+    ("registercvar", 93),
+    ("fopen", 110),
+    ("fclose", 111),
+    ("fgets", 112),
+    ("fputs", 113),
+    ("cl_localsound", 177),
     ("clientstat", 232),
+    ("globalstat", 233),
+    ("frameforname", 276),
+    ("frameduration", 277),
+    ("frametoname", 284),
     ("checkcommand", 294),
+    ("clearscene", 300),
+    ("addentities", 301),
+    ("addentity", 302),
+    ("setproperty", 303),
+    ("renderscene", 304),
+    ("dynamiclight_add", 305),
+    ("getproperty", 309),
+    ("project", 310),
+    ("unproject", 311),
+    ("drawline", 315),
+    ("iscachedpic", 316),
+    ("precache_pic", 317),
+    ("drawgetimagesize", 318),
+    ("freepic", 319),
+    ("drawcharacter", 320),
+    ("drawrawstring", 321),
+    ("drawpic", 322),
+    ("drawfill", 323),
+    ("drawsetcliparea", 324),
+    ("drawresetcliparea", 325),
+    ("drawstring", 326),
+    ("stringwidth", 327),
+    ("drawsubpic", 328),
+    ("getstati", 330),
+    ("getstatf", 331),
+    ("getstats", 332),
+    ("setmodelindex", 333),
+    ("modelnameforindex", 334),
     ("particleeffectnum", 335),
     ("trailparticles", 336),
     ("pointparticles", 337),
+    ("print", 339),
+    ("setcursormode", 343),
+    ("getinputstate", 345),
+    ("getplayerkeyvalue", 348),
+    ("isdemo", 349),
+    ("registercommand", 352),
+    ("serverkey", 354),
+    ("readbyte", 360),
+    ("readchar", 361),
+    ("readshort", 362),
+    ("readlong", 363),
+    ("readcoord", 364),
+    ("readangle", 365),
+    ("readstring", 366),
+    ("readfloat", 367),
+    ("readentitynum", 368),
     ("te_particlerain", 409),
     ("te_particlesnow", 410),
+    ("getsurfacenumpoints", 434),
+    ("getsurfacepoint", 435),
+    ("getsurfacenormal", 436),
+    ("getsurfacetexture", 437),
+    ("getsurfacenearpoint", 438),
+    ("getsurfaceclippedpoint", 439),
     ("clientcommand", 440),
+    ("cvar_string", 448),
+    ("pointsound", 483),
+    ("getsurfacepointattribute", 486),
+    ("getentity", 504),
+    ("gettime", 519),
+    ("getsurfacenumtriangles", 628),
+    ("getsurfacetriangle", 629),
 ];
 
-/// Extension names the VM-internal builtins implement (for documentation /
-/// host `checkextension` policy). Like ironwail, `checkextension` only
-/// advertises FTE_QC_CHECKCOMMAND plus whatever [`Host::has_extension`] allows.
+/// Extension names the VM-internal builtins implement.
 pub const EXTENSIONS: &[&str] = &[
-    "DP_QC_SINCOSSQRTPOW", "DP_QC_ETOS", "DP_QC_MINMAXBOUND", "FRIK_FILE", "FTE_STRINGS",
-    "DP_QC_VECTORVECTORS", "KRIMZON_SV_PARSECLIENTCOMMAND", "DP_QC_ASINACOSATANATAN2TAN",
-    "DP_QC_TOKENIZE_CONSOLE", "DP_QC_SPRINTF",
+    "DP_QC_SINCOSSQRTPOW",
+    "DP_QC_ETOS",
+    "DP_QC_MINMAXBOUND",
+    "DP_QC_FINDFLOAT",
+    "DP_QC_FINDFLAGS",
+    "DP_QC_COPYENTITY",
+    "DP_QC_EDICT_NUM",
+    "DP_QC_NUM_FOR_EDICT",
+    "DP_QC_MULTIPLETEMPSTRINGS",
+    "DP_QC_STRING_CASE_FUNCTIONS",
+    "DP_QC_STRREPLACE",
+    "FRIK_FILE",
+    "FTE_STRINGS",
+    "FTE_QC_INTCONV",
+    "FTE_QC_CROSSPRODUCT",
+    "EXT_BITSHIFT",
+    "DP_QC_VECTORVECTORS",
+    "KRIMZON_SV_PARSECLIENTCOMMAND",
+    "DP_QC_ASINACOSATANATAN2TAN",
+    "DP_QC_TOKENIZE_CONSOLE",
+    "DP_QC_SPRINTF",
 ];
+
+pub(crate) fn lookup_builtin_num(name: &str) -> Option<i32> {
+    if let Some(&(_, n, _)) = INTERNAL.iter().find(|i| i.0 == name && i.1 != 0) {
+        return Some(n);
+    }
+    if let Some(b) = Builtin::from_name(name) {
+        return Some(b as i32);
+    }
+    HOST_EXT_NUMS.iter().find(|i| i.0 == name).map(|i| i.1)
+}
 
 const INTERNAL: &[(&str, i32, InternalFn)] = &[
     ("makevectors", 1, pf_makevectors),
@@ -158,10 +252,25 @@ const INTERNAL: &[(&str, i32, InternalFn)] = &[
         vm.ret_f(v);
         Ok(())
     }),
+    ("findfloat", 98, ext::pf_findfloat),
+    ("findentity", 0, ext::pf_findfloat),
     ("checkextension", 99, |vm, host| {
         let name = vm.g_string(ofs_parm(0))?;
-        let r = name == "FTE_QC_CHECKCOMMAND" || host.has_extension(&name);
+        let r = host.extensions_enabled() && (name == "FTE_QC_CHECKCOMMAND" || host.has_extension(&name));
         vm.ret_f(r as i32 as f32);
+        Ok(())
+    }),
+    ("checkbuiltin", 0, ext::pf_checkbuiltin),
+    ("builtin_find", 100, ext::pf_builtin_find),
+    ("anglemod", 102, |vm, _| {
+        let mut v = vm.g_f(ofs_parm(0));
+        while v >= 360.0 {
+            v -= 360.0;
+        }
+        while v < 0.0 {
+            v += 360.0;
+        }
+        vm.ret_f(v);
         Ok(())
     }),
     ("strlen", 114, |vm, _| {
@@ -196,11 +305,19 @@ const INTERNAL: &[(&str, i32, InternalFn)] = &[
     }),
     ("strunzone", 119, |vm, host| {
         let h = vm.g_i(ofs_parm(0));
-        if !vm.strings.unzone(h) {
+        if h != 0 && !vm.strings.unzone(h) {
             host.print("PF_strunzone: string wasn't strzoned\n");
         }
         Ok(())
     }),
+    ("bitshift", 218, |vm, _| {
+        let m = vm.g_f(ofs_parm(0)) as i32;
+        let s = vm.g_f(ofs_parm(1)) as i32;
+        let r = if s < 0 { m.wrapping_shr((-s) as u32) } else { m.wrapping_shl(s as u32) };
+        vm.ret_f(r as f32);
+        Ok(())
+    }),
+    ("strstrofs", 221, ext::pf_strstrofs),
     ("str2chr", 222, |vm, _| {
         let s = vm.g_str(ofs_parm(0))?;
         let mut ofs = if vm.argc > 1 { vm.g_f(ofs_parm(1)) as i32 } else { 0 };
@@ -221,6 +338,14 @@ const INTERNAL: &[(&str, i32, InternalFn)] = &[
         Ok(())
     }),
     ("strconv", 224, pf_strconv),
+    ("strpad", 225, ext::pf_strpad),
+    ("infoadd", 226, ext::pf_infoadd),
+    ("infoget", 227, ext::pf_infoget),
+    ("strncmp", 228, |vm, h| ext::pf_strncmp(vm, h, false)),
+    ("strcmp", 0, |vm, h| ext::pf_strncmp(vm, h, false)),
+    ("strcasecmp", 229, |vm, h| ext::pf_strncmp(vm, h, true)),
+    ("strncasecmp", 230, |vm, h| ext::pf_strncmp(vm, h, true)),
+    ("strtrim", 0, ext::pf_strtrim),
     ("mod", 245, |vm, host| {
         let (a, n) = (vm.g_f(ofs_parm(0)), vm.g_f(ofs_parm(1)));
         if n == 0.0 {
@@ -231,6 +356,10 @@ const INTERNAL: &[(&str, i32, InternalFn)] = &[
         }
         Ok(())
     }),
+    ("stoi", 259, ext::pf_stoi),
+    ("itos", 260, ext::pf_itos),
+    ("stoh", 261, ext::pf_stoh),
+    ("htos", 262, ext::pf_htos),
     ("ftoi", 0, |vm, _| {
         let v = vm.g_f(ofs_parm(0)) as i32;
         vm.ret_i(v);
@@ -241,6 +370,14 @@ const INTERNAL: &[(&str, i32, InternalFn)] = &[
         vm.ret_f(v);
         Ok(())
     }),
+    ("crossproduct", 0, |vm, _| {
+        let a = vm.g_v(ofs_parm(0));
+        let b = vm.g_v(ofs_parm(1));
+        vm.ret_v([a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]);
+        Ok(())
+    }),
+    ("wasfreed", 353, ext::pf_wasfreed),
+    ("copyentity", 400, ext::pf_copyentity),
     ("vectorvectors", 432, pf_vectorvectors),
     ("tokenize", 441, |vm, _| {
         let s = String::from_utf8_lossy(vm.g_str(ofs_parm(0))?).into_owned();
@@ -269,6 +406,8 @@ const INTERNAL: &[(&str, i32, InternalFn)] = &[
         vm.ret_f(vm.tokens.len() as f32);
         Ok(())
     }),
+    ("findflags", 449, ext::pf_findflags),
+    ("edict_num", 459, ext::pf_edict_num),
     ("asin", 471, |vm, _| f1(vm, f32::asin)),
     ("acos", 472, |vm, _| f1(vm, f32::acos)),
     ("atan", 473, |vm, _| f1(vm, f32::atan)),
@@ -278,11 +417,24 @@ const INTERNAL: &[(&str, i32, InternalFn)] = &[
         Ok(())
     }),
     ("tan", 475, |vm, _| f1(vm, f32::tan)),
+    ("strtolower", 480, |vm, h| ext::pf_strcase(vm, h, false)),
+    ("strtoupper", 481, |vm, h| ext::pf_strcase(vm, h, true)),
+    ("strreplace", 484, |vm, h| ext::pf_strreplace(vm, h, false)),
+    ("strireplace", 485, |vm, h| ext::pf_strreplace(vm, h, true)),
+    ("num_for_edict", 512, ext::pf_num_for_edict),
     ("tokenize_console", 514, |vm, _| {
         let s = String::from_utf8_lossy(vm.g_str(ofs_parm(0))?).into_owned();
         let a = qcore::cmd::Args::tokenize(&s);
         vm.tokens = a.all().iter().map(|t| t.as_bytes().to_vec()).collect();
         vm.ret_f(vm.tokens.len() as f32);
+        Ok(())
+    }),
+    ("log", 532, |vm, _| {
+        let mut r = (vm.g_f(ofs_parm(0)) as f64).ln();
+        if vm.argc > 1 {
+            r /= (vm.g_f(ofs_parm(1)) as f64).ln();
+        }
+        vm.ret_f(r as f32);
         Ok(())
     }),
     ("sprintf", 627, pf_sprintf),

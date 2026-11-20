@@ -148,27 +148,58 @@ pub(super) fn pf_substring(vm: &mut Vm, host: &mut dyn Host) -> Result<()> {
     Ok(())
 }
 
+fn chrconv_number(c: u8, base: u8, conv: i32) -> u8 {
+    let i = c.wrapping_sub(base);
+    let nb = match conv {
+        1 => b'0',
+        2 => b'0' + 128,
+        3 => b'0' - 30,
+        4 => b'0' + 128 - 30,
+        _ => base,
+    };
+    i.wrapping_add(nb)
+}
+
+fn chrchar_alpha(c: u8, basec: u8, baset: u8, convc: i32, convt: i32, idx: usize) -> u8 {
+    let i = c.wrapping_sub(baset.wrapping_add(basec));
+    let nt = match convt {
+        1 => 0,
+        2 => 128,
+        5 | 6 => 128 * u8::from((idx & 1) == (convt - 5) as usize),
+        _ => baset,
+    };
+    let nc = match convc {
+        1 => b'a',
+        2 => b'A',
+        _ => basec,
+    };
+    i.wrapping_add(nc).wrapping_add(nt)
+}
+
+/// FTE_STRINGS `strconv` (port of vkQuake `PF_strconv`).
 pub(super) fn pf_strconv(vm: &mut Vm, _: &mut dyn Host) -> Result<()> {
     let ccase = vm.g_f(ofs_parm(0)) as i32;
     let redalpha = vm.g_f(ofs_parm(1)) as i32;
-    let redchars = vm.g_f(ofs_parm(2)) as i32;
+    let rednum = vm.g_f(ofs_parm(2)) as i32;
     let mut s = vm.var_string(3)?;
-    for c in &mut s {
-        let base = *c & 0x7f;
-        let alpha = base.is_ascii_alphabetic();
-        let mode = if alpha { redalpha } else { redchars };
-        let mut ch = *c;
-        match ccase {
-            1 => ch = (ch & 0x80) | (ch & 0x7f).to_ascii_lowercase(),
-            2 => ch = (ch & 0x80) | (ch & 0x7f).to_ascii_uppercase(),
-            _ => {}
-        }
-        match mode {
-            1 => ch |= 0x80,
-            2 => ch &= 0x7f,
-            _ => {}
-        }
-        *c = ch;
+    for (idx, c) in s.iter_mut().enumerate() {
+        let ch = *c;
+        *c = match ch {
+            b'0'..=b'9' => chrconv_number(ch, b'0', rednum),
+            176..=185 => chrconv_number(ch, b'0' + 128, rednum),
+            146..=155 => chrconv_number(ch, b'0' + 128 - 30, rednum),
+            18..=27 => chrconv_number(ch, b'0' - 30, rednum),
+            b'a'..=b'z' => chrchar_alpha(ch, b'a', 0, ccase, redalpha, idx),
+            b'A'..=b'Z' => chrchar_alpha(ch, b'A', 0, ccase, redalpha, idx),
+            225..=250 => chrchar_alpha(ch, b'a', 128, ccase, redalpha, idx),
+            193..=218 => chrchar_alpha(ch, b'A', 128, ccase, redalpha, idx),
+            _ if (ch & 127) < 16 || redalpha == 0 => ch,
+            _ => match redalpha {
+                1 => ch & 127,
+                2 => ch | 128,
+                _ => ch,
+            },
+        };
     }
     s.truncate(crate::STRINGTEMP_LENGTH - 1);
     vm.ret_temp(&s);

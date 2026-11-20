@@ -1775,6 +1775,15 @@ fil Screenshot
 @ Record Demo
 fil I-record ang demo
 
+@ HDR Lightmaps
+fil HDR Lightmaps
+
+@ Directional Lighting
+fil Direksiyonal na Ilaw
+
+@ Light Specular
+fil Kinang ng Ilaw
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ fil Nagpapakita ng bahagyang malinaw na multo mula sa demo ng iyong personal na 
 
 @ Shows the SPD label before the speed number
 fil Ipinapakita ang label na SPD bago ang numero ng bilis
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+fil Pinapanatili ang maliwanag na HDR lighting (.lit2) na may banayad na roll-off sa halip na maputol
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+fil Gumagamit ng naka-bake na direksiyon ng ilaw (.dlit) para sa banayad na lilim at kislap sa pader at modelo
+
+@ Strength of the highlights from directional lighting
+fil Lakas ng kislap mula sa direksiyonal na ilaw
 
 # ==== ui.txt ====
 

@@ -1775,6 +1775,15 @@ he צילום מסך
 @ Record Demo
 he הקלטת הדגמה
 
+@ HDR Lightmaps
+he מפות תאורה HDR
+
+@ Directional Lighting
+he תאורה כיוונית
+
+@ Light Specular
+he ברק תאורה
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ he מריץ רוח רפאים שקופה למחצה מהדמו של השיא ה�
 
 @ Shows the SPD label before the speed number
 he מציג את התווית SPD לפני מספר המהירות
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+he שומר על תאורת HDR בהירה (.lit2) עם דעיכה חלקה במקום קיטום
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+he משתמש בכיווני אור אפויים (.dlit) להצללה וברק עדינים על קירות ומודלים
+
+@ Strength of the highlights from directional lighting
+he עוצמת ההבהקים מתאורה כיוונית
 
 # ==== ui.txt ====
 

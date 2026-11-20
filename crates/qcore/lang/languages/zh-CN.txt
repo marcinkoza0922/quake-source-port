@@ -1775,6 +1775,15 @@ zh-CN 截图
 @ Record Demo
 zh-CN 录制演示
 
+@ HDR Lightmaps
+zh-CN HDR 光照贴图
+
+@ Directional Lighting
+zh-CN 方向性光照
+
+@ Light Specular
+zh-CN 光照高光
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ zh-CN 回放当前地图与难度个人最佳纪录演示的半透明幽灵（�
 
 @ Shows the SPD label before the speed number
 zh-CN 在速度数值前显示 SPD 标签
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+zh-CN 以平滑衰减保留高亮 HDR 光照（.lit2），避免硬截断
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+zh-CN 使用预烘焙的光照方向（.dlit）在墙面和模型上呈现细腻的明暗与高光
+
+@ Strength of the highlights from directional lighting
+zh-CN 方向性光照产生的高光强度
 
 # ==== ui.txt ====
 

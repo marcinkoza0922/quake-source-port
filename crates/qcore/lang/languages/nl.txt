@@ -1775,6 +1775,15 @@ nl Screenshot
 @ Record Demo
 nl Demo opnemen
 
+@ HDR Lightmaps
+nl HDR-lightmaps
+
+@ Directional Lighting
+nl Gerichte belichting
+
+@ Light Specular
+nl Lichtglans
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ nl Speelt een doorschijnende geest af van de demo van je persoonlijk record voor
 
 @ Shows the SPD label before the speed number
 nl Toont het SPD-label vóór het snelheidsgetal
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+nl Behoudt heldere HDR-belichting (.lit2) met een zachte overgang in plaats van afkappen
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+nl Gebruikt vooraf berekende lichtrichtingen (.dlit) voor subtiele schaduw en glans op muren en modellen
+
+@ Strength of the highlights from directional lighting
+nl Sterkte van de glanslichten uit gerichte belichting
 
 # ==== ui.txt ====
 

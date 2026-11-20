@@ -47,6 +47,9 @@ mod targets;
 #[path = "lib/assets.rs"]
 mod assets;
 #[cfg(qvk)]
+#[path = "lib/models.rs"]
+mod models;
+#[cfg(qvk)]
 #[path = "lib/world_load.rs"]
 mod world_load;
 #[cfg(qvk)]

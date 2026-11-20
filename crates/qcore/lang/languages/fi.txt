@@ -1775,6 +1775,15 @@ fi Kuvakaappaus
 @ Record Demo
 fi Tallenna demo
 
+@ HDR Lightmaps
+fi HDR-valokartat
+
+@ Directional Lighting
+fi Suunnattu valaistus
+
+@ Light Specular
+fi Valon kiilto
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ fi Toistaa läpikuultavan haamun oman ennätysdemosi mukaan nykyiselle kartalle 
 
 @ Shows the SPD label before the speed number
 fi Näyttää SPD-nimiön nopeuslukeman edessä
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+fi Säilyttää kirkkaan HDR-valaistuksen (.lit2) pehmeällä vaimennuksella leikkautumisen sijaan
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+fi Käyttää esilaskettuja valon suuntia (.dlit) hienovaraiseen varjostukseen ja kiiltoon seinissä ja malleissa
+
+@ Strength of the highlights from directional lighting
+fi Suunnatun valaistuksen korostusten voimakkuus
 
 # ==== ui.txt ====
 

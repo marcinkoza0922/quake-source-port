@@ -1775,6 +1775,15 @@ bn স্ক্রিনশট
 @ Record Demo
 bn ডেমো রেকর্ড করুন
 
+@ HDR Lightmaps
+bn HDR লাইটম্যাপ
+
+@ Directional Lighting
+bn দিকনির্দেশক আলো
+
+@ Light Specular
+bn আলোর ঝিলিক
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ bn বর্তমান মানচিত্র ও কঠিনতার জ�
 
 @ Shows the SPD label before the speed number
 bn গতির সংখ্যার আগে SPD লেবেল দেখায়
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+bn উজ্জ্বল HDR আলো (.lit2) কেটে না ফেলে মসৃণ রোল-অফের মাধ্যমে ধরে রাখে
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+bn দেয়াল ও মডেলে সূক্ষ্ম ছায়া ও ঝিলিকের জন্য বেক করা আলোর দিক (.dlit) ব্যবহার করে
+
+@ Strength of the highlights from directional lighting
+bn দিকনির্দেশক আলো থেকে আসা হাইলাইটের তীব্রতা
 
 # ==== ui.txt ====
 

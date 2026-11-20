@@ -28,12 +28,15 @@ impl Server {
         // FTE extension handshake (SV_SendServerinfo): ask a remote client
         // with `cmd pext` first; it answers with `pext`, which resends this.
         let offer = c.cvars.value_of("sv_protocol_pext2") as u32 & qnet::delta::PEXT2_SUPPORTED;
+        let offer_pext1 = if c.fs.exists("csprogs.dat") { qnet::delta::PEXT1_CSQC } else { 0 };
         let cl = &mut c.clients[i];
-        if offer == 0 {
+        if offer == 0 && offer_pext1 == 0 {
             cl.pext_known = false;
+            cl.pext1 = 0;
             cl.pext2 = 0;
         } else if cl.local {
             cl.pext_known = true;
+            cl.pext1 = offer_pext1;
             cl.pext2 = offer;
         } else if !cl.pext_known {
             m.byte(SVC_STUFFTEXT);
@@ -43,12 +46,22 @@ impl Server {
             cl.spawned = false;
             return;
         }
+        cl.pext1 &= offer_pext1;
         cl.pext2 &= offer;
+        if cl.pext2 & qnet::delta::PEXT2_REPLACEMENTDELTAS == 0 {
+            // Stats cannot be deltaed without replacement-delta frames (vkQuake sv_main.c:1468).
+            cl.pext2 &= !qnet::delta::PEXT2_PREDINFO;
+        }
+        let pext1 = cl.pext1;
         let pext2 = cl.pext2;
         cl.delta = (pext2 & qnet::delta::PEXT2_REPLACEMENTDELTAS != 0).then(Box::default);
         m.byte(SVC_PRINT);
         m.string(format!("\x02\nFITZQUAKE 0.85 SERVER ({} CRC)\n", l.vm.progs.crc).as_bytes());
         m.byte(SVC_SERVERINFO);
+        if pext1 != 0 {
+            m.long(qnet::delta::PROTOCOL_FTE_PEXT1 as i32);
+            m.long(pext1 as i32);
+        }
         if pext2 != 0 {
             m.long(qnet::delta::PROTOCOL_FTE_PEXT2 as i32);
             m.long(pext2 as i32);
@@ -56,6 +69,11 @@ impl Server {
         m.long(sv.protocol as i32);
         if sv.protocol == PROTOCOL_RMQ {
             m.long(sv.protocolflags as i32);
+        }
+        if pext2 & qnet::delta::PEXT2_PREDINFO != 0 {
+            let gamedirs = c.fs.game_dirs();
+            let gname = gamedirs.last().map(String::as_str).unwrap_or("id1");
+            m.string(gname.as_bytes());
         }
         m.byte(c.clients.len() as i32);
         let dm = c.cvars.value_of("coop") == 0.0 && c.cvars.value_of("deathmatch") != 0.0;

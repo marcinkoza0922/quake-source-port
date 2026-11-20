@@ -1775,6 +1775,15 @@ vi Ảnh chụp màn hình
 @ Record Demo
 vi Ghi demo
 
+@ HDR Lightmaps
+vi Bản đồ sáng HDR
+
+@ Directional Lighting
+vi Ánh sáng có hướng
+
+@ Light Specular
+vi Độ bóng ánh sáng
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ vi Chạy bóng ma mờ từ bản demo kỷ lục cá nhân của bạn cho b�
 
 @ Shows the SPD label before the speed number
 vi Hiển thị nhãn SPD trước con số tốc độ
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+vi Giữ ánh sáng HDR rực rỡ (.lit2) với độ chuyển mượt thay vì cắt ngưỡng
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+vi Dùng hướng sáng tính sẵn (.dlit) để tạo đổ bóng và điểm sáng tinh tế trên tường và mô hình
+
+@ Strength of the highlights from directional lighting
+vi Cường độ điểm sáng bóng từ ánh sáng có hướng
 
 # ==== ui.txt ====
 

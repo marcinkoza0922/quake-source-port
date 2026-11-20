@@ -1775,6 +1775,15 @@ et Ekraanipilt
 @ Record Demo
 et Salvesta demo
 
+@ HDR Lightmaps
+et HDR-valguskaardid
+
+@ Directional Lighting
+et Suunatud valgustus
+
+@ Light Specular
+et Valguse läige
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ et Esitab poolläbipaistva kummituse sinu isikliku rekordi demolt praegusel kaar
 
 @ Shows the SPD label before the speed number
 et Näitab kiiruse numbri ees silti SPD
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+et Säilitab ereda HDR-valgustuse (.lit2) sujuva üleminekuga lõikamise asemel
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+et Kasutab eelküpsetatud valgussuundi (.dlit) peeneks varjutuseks ja läikeks seintel ning mudelitel
+
+@ Strength of the highlights from directional lighting
+et Suunatud valgustuse läike tugevus
 
 # ==== ui.txt ====
 

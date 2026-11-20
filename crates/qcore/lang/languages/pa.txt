@@ -1775,6 +1775,15 @@ pa ਸਕ੍ਰੀਨਸ਼ੌਟ
 @ Record Demo
 pa ਡੈਮੋ ਰਿਕਾਰਡ ਕਰੋ
 
+@ HDR Lightmaps
+pa HDR ਲਾਈਟਮੈਪ
+
+@ Directional Lighting
+pa ਦਿਸ਼ਾਵੀ ਰੌਸ਼ਨੀ
+
+@ Light Specular
+pa ਰੌਸ਼ਨੀ ਦੀ ਚਮਕ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ pa ਮੌਜੂਦਾ ਨਕਸ਼ੇ ਅਤੇ ਮੁਸ਼ਕਲ ਲਈ ਤੁ
 
 @ Shows the SPD label before the speed number
 pa ਗਤੀ ਦੇ ਨੰਬਰ ਤੋਂ ਪਹਿਲਾਂ SPD ਲੇਬਲ ਦਿਖਾਉਂਦਾ ਹੈ
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+pa ਤੇਜ਼ HDR ਰੌਸ਼ਨੀ (.lit2) ਨੂੰ ਕੱਟਣ ਦੀ ਬਜਾਏ ਨਰਮ ਢਲਾਣ ਨਾਲ ਬਰਕਰਾਰ ਰੱਖਦਾ ਹੈ
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+pa ਕੰਧਾਂ ਅਤੇ ਮਾਡਲਾਂ ਉੱਤੇ ਹਲਕੀ ਛਾਂ ਤੇ ਚਮਕ ਲਈ ਬੇਕ ਕੀਤੀਆਂ ਰੌਸ਼ਨੀ ਦਿਸ਼ਾਵਾਂ (.dlit) ਵਰਤਦਾ ਹੈ
+
+@ Strength of the highlights from directional lighting
+pa ਦਿਸ਼ਾਵੀ ਰੌਸ਼ਨੀ ਤੋਂ ਬਣਨ ਵਾਲੀ ਚਮਕ ਦੀ ਤੀਬਰਤਾ
 
 # ==== ui.txt ====
 

@@ -23,7 +23,7 @@ fn world() -> World {
         normal: [0.0; 3], dist: 0.0, flipped: false, lm: NO_LM,
         vecs: [[0.0; 4]; 2], lm_vecs: [[0.0; 4]; 2], lm_size: [0; 2],
         texturemins: [0; 2], extents: [0; 2],
-        samples: NO_LM, styles: [255; 4], mins: [0.0; 3], maxs: [0.0; 3],
+        samples: NO_LM, hdr_samples: false, has_deluxe: false, styles: [255; 4], mins: [0.0; 3], maxs: [0.0; 3],
     });
     w
 }

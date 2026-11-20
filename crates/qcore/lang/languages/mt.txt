@@ -1775,6 +1775,15 @@ mt Screenshot
 @ Record Demo
 mt Irrekordja demo
 
+@ HDR Lightmaps
+mt Lightmaps HDR
+
+@ Directional Lighting
+mt Dawl Direzzjonali
+
+@ Light Specular
+mt leqq tad-Dawl
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ mt Iħaddem fantażma trasluċida mid-demo tar-rekord personali tiegħek għall-
 
 @ Shows the SPD label before the speed number
 mt Juri t-tikketta SPD qabel in-numru tal-veloċità
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+mt Iżomm dawl HDR qawwi (.lit2) bi tranżizzjoni ratba minflok ma jaqtgħu
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+mt Juża direzzjonijiet tad-dawl ippreparati (.dlit) għal dellijiet u riflessi sottili fuq ħitan u mudelli
+
+@ Strength of the highlights from directional lighting
+mt Qawwa tar-riflessi mid-dawl direzzjonali
 
 # ==== ui.txt ====
 

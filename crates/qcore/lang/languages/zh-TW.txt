@@ -1775,6 +1775,15 @@ zh-TW 螢幕截圖
 @ Record Demo
 zh-TW 錄製示範
 
+@ HDR Lightmaps
+zh-TW HDR 光照貼圖
+
+@ Directional Lighting
+zh-TW 方向性光照
+
+@ Light Specular
+zh-TW 光照高光
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -2396,6 +2405,15 @@ zh-TW 重播目前地圖與難度個人最佳紀錄示範的半透明幽靈（�
 
 @ Shows the SPD label before the speed number
 zh-TW 在速度數值前顯示 SPD 標籤
+
+@ Keeps bright HDR lighting (.lit2) with a smooth roll-off instead of clipping
+zh-TW 以平滑衰減保留高亮 HDR 光照（.lit2），避免硬截斷
+
+@ Uses baked light directions (.dlit) for subtle shading and highlights on walls and models
+zh-TW 使用預烘焙的光照方向（.dlit）在牆面與模型上呈現細膩的明暗與高光
+
+@ Strength of the highlights from directional lighting
+zh-TW 方向性光照產生的高光強度
 
 # ==== ui.txt ====
 
