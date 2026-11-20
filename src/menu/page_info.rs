@@ -10,6 +10,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         Item::Language => return Some(qcore::t!("Language of the menus, messages and the 2021 re-release's game text; System follows your computer's language")),
         Item::UserDataDir => return Some(qcore::t!("Where saves, configs, demos and downloaded map packs are stored")),
         Item::Soundtrack => return Some(qcore::t!("Music pack to play for level tracks: Default uses the active mod, or pick another installed Quake soundtrack or custom folder in <user data>/music")),
+        Item::HudPreset => return Some(qcore::t!("Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom")),
         Item::Text { cvar: "_export_name", .. } => return Some(qcore::t!("Name of the video file; the extension follows the video format, and a file of the same name is replaced")),
         Item::Run { run: Run::EditHud, .. } => return Some(qcore::t!("Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more")),
         Item::Sub { page: Page::WeaponPriority, .. } => return Some(qcore::t!("Arrange weapon priority order for Better weapon auto-switching")),

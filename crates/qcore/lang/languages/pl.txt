@@ -1196,9 +1196,6 @@ pl wysoka
 @ huge
 pl ogromny
 
-@ immersive
-pl immersyjny
-
 @ intense
 pl intensywny
 
@@ -1605,6 +1602,30 @@ pl Pasek stanu
 @ Visibility
 pl Widoczność
 
+@ Alert
+pl Alarm
+
+@ Live
+pl Na żywo
+
+@ Sample
+pl Przykład
+
+@ Undo
+pl Cofnij
+
+@ Presets
+pl Ustawienia
+
+@ Save As
+pl Zapisz jako
+
+@ appear on change
+pl przy zmianie
+
+@ hidden
+pl ukryty
+
 @ big numbers
 pl duże cyfry
 
@@ -1907,8 +1928,8 @@ pl Jak widok zniekształca się pod wodą: klasyczny faluje cały ekran jak prog
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 pl Ignoruje obroty żyroskopu wolniejsze niż tyle stopni na sekundę, by ukryć drżenie rąk
 
-@ Immersive: appears for a few seconds only when its value changes
-pl Immersyjny: pojawia się na kilka sekund tylko wtedy, gdy zmienia się wartość
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+pl Przy zmianie: pojawia się na chwilę tylko po zmianie wartości; ukryty: ukrywa bez usuwania
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 pl Utrzymuje ostrość tekstur na podłogach i ścianach widzianych pod ostrym kątem

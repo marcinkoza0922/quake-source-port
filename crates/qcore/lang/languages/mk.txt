@@ -1196,9 +1196,6 @@ mk високо
 @ huge
 mk огромно
 
-@ immersive
-mk потопувачки
-
 @ intense
 mk силно
 
@@ -1605,6 +1602,30 @@ mk Лента за состојба
 @ Visibility
 mk Видливост
 
+@ Alert
+mk Аларм
+
+@ Live
+mk Во живо
+
+@ Sample
+mk Пример
+
+@ Undo
+mk Врати
+
+@ Presets
+mk Пресети
+
+@ Save As
+mk Зачувај како
+
+@ appear on change
+mk при промена
+
+@ hidden
+mk скриено
+
 @ big numbers
 mk големи цифри
 
@@ -1907,8 +1928,8 @@ mk Како се изобличува погледот под вода: Клас
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 mk Ја игнорира ротацијата на жироскопот побавна од овие степени во секунда, за да го скрие тресењето на раката
 
-@ Immersive: appears for a few seconds only when its value changes
-mk Потопувачки: се појавува неколку секунди само кога вредноста ќе се смени
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+mk При промена: се појавува накратко само кога вредноста се менува; скриено: крие без бришење
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 mk Ги држи текстурите остри на подови и ѕидови гледани под остар агол

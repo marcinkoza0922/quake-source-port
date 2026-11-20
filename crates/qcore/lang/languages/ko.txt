@@ -1196,9 +1196,6 @@ ko 높음
 @ huge
 ko 아주 큼
 
-@ immersive
-ko 몰입형
-
 @ intense
 ko 강렬
 
@@ -1605,6 +1602,30 @@ ko 상태 표시줄
 @ Visibility
 ko 표시 여부
 
+@ Alert
+ko 경고
+
+@ Live
+ko 실시간
+
+@ Sample
+ko 샘플
+
+@ Undo
+ko 실행 취소
+
+@ Presets
+ko 프리셋
+
+@ Save As
+ko 다른 이름으로 저장
+
+@ appear on change
+ko 변경 시 표시
+
+@ hidden
+ko 숨김
+
 @ big numbers
 ko 큰 숫자
 
@@ -1907,8 +1928,8 @@ ko 수중 화면 왜곡 방식입니다. 클래식은 소프트웨어 Quake처�
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 ko 손떨림을 숨기기 위해 초당 이 각도보다 느린 자이로 회전을 무시합니다
 
-@ Immersive: appears for a few seconds only when its value changes
-ko 몰입형: 값이 바뀔 때만 몇 초간 나타납니다
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+ko 변경 시 표시: 값이 바뀔 때만 잠시 표시합니다. 숨김: 삭제하지 않고 숨깁니다
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ko 비스듬히 보이는 바닥과 벽의 텍스처를 선명하게 유지합니다

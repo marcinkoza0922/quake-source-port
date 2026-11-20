@@ -1196,9 +1196,6 @@ hu magas
 @ huge
 hu óriási
 
-@ immersive
-hu immerzív
-
 @ intense
 hu intenzív
 
@@ -1605,6 +1602,30 @@ hu Állapotsáv
 @ Visibility
 hu Láthatóság
 
+@ Alert
+hu Riasztás
+
+@ Live
+hu Élő
+
+@ Sample
+hu Minta
+
+@ Undo
+hu Visszavonás
+
+@ Presets
+hu Sablonok
+
+@ Save As
+hu Mentés másként
+
+@ appear on change
+hu változáskor
+
+@ hidden
+hu rejtett
+
 @ big numbers
 hu nagy számjegyek
 
@@ -1907,8 +1928,8 @@ hu Hogyan torzul a nézet a víz alatt: a klasszikus a szoftveres Quake-hez haso
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 hu Figyelmen kívül hagyja az ennél lassabb (fok/másodperc) giroszkópos forgást, hogy elrejtse a kézremegést
 
-@ Immersive: appears for a few seconds only when its value changes
-hu Immerzív: csak néhány másodpercre jelenik meg, amikor az értéke változik
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+hu Változáskor: csak az érték változásakor jelenik meg rövid időre; rejtett: törlés nélkül elrejti
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 hu Élesen tartja a textúrákat a meredek szögből látott padlókon és falakon

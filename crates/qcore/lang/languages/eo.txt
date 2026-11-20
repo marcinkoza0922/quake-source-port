@@ -1196,9 +1196,6 @@ eo alta
 @ huge
 eo grandega
 
-@ immersive
-eo enmergiĝa
-
 @ intense
 eo intensa
 
@@ -1605,6 +1602,30 @@ eo Statobreto
 @ Visibility
 eo Videbleco
 
+@ Alert
+eo Averto
+
+@ Live
+eo Viva
+
+@ Sample
+eo Specimeno
+
+@ Undo
+eo Malfari
+
+@ Presets
+eo Antaŭagordoj
+
+@ Save As
+eo Konservi kiel
+
+@ appear on change
+eo ĉe ŝanĝo
+
+@ hidden
+eo kaŝita
+
 @ big numbers
 eo grandaj ciferoj
 
@@ -1907,8 +1928,8 @@ eo Kiel la vido distordiĝas subakve: klasika ondigas la tutan ekranon kiel prog
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 eo Ignoras giroskopan rotacion pli malrapidan ol tiom da gradoj sekunde, por kaŝi tremadon de la mano
 
-@ Immersive: appears for a few seconds only when its value changes
-eo Enmergiĝa: aperas dum kelkaj sekundoj nur kiam ĝia valoro ŝanĝiĝas
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+eo Ĉe ŝanĝo: aperas mallonge nur kiam la valoro ŝanĝiĝas; kaŝita: kaŝas sen forigi
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 eo Tenas teksturojn akraj sur plankoj kaj muroj viditaj je krutaj anguloj

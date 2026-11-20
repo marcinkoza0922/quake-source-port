@@ -1196,9 +1196,6 @@ fil mataas
 @ huge
 fil napakalaki
 
-@ immersive
-fil immersive
-
 @ intense
 fil matindi
 
@@ -1605,6 +1602,30 @@ fil Status Bar
 @ Visibility
 fil Visibility
 
+@ Alert
+fil Alerto
+
+@ Live
+fil Live
+
+@ Sample
+fil Halimbawa
+
+@ Undo
+fil I-undo
+
+@ Presets
+fil Mga Preset
+
+@ Save As
+fil I-save Bilang
+
+@ appear on change
+fil kapag nagbago
+
+@ hidden
+fil nakatago
+
 @ big numbers
 fil malalaking numero
 
@@ -1907,8 +1928,8 @@ fil Paano bumabaluktot ang tanaw sa ilalim ng tubig: kumakaway ang buong screen 
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 fil Binabalewala ang pag-ikot ng gyro na mas mabagal sa ganitong degree kada segundo, para itago ang panginginig ng kamay
 
-@ Immersive: appears for a few seconds only when its value changes
-fil Immersive: lumalabas lang nang ilang segundo kapag nagbago ang halaga nito
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+fil Kapag nagbago: lalabas nang sandali kapag nagbago ang halaga; nakatago: itinatago nang hindi inaalis
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 fil Pinananatiling malinaw ang texture sa sahig at pader na nakikita nang pahilis

@@ -1196,9 +1196,6 @@ am ከፍተኛ
 @ huge
 am ግዙፍ
 
-@ immersive
-am አስጠላቂ
-
 @ intense
 am ኃይለኛ
 
@@ -1605,6 +1602,30 @@ am የሁኔታ አሞሌ
 @ Visibility
 am ታይነት
 
+@ Alert
+am ማስጠንቀቂያ
+
+@ Live
+am ቀጥታ
+
+@ Sample
+am ናሙና
+
+@ Undo
+am ቀልብስ
+
+@ Presets
+am ቅድመ-ቅንብሮች
+
+@ Save As
+am እንደ አዲስ አስቀምጥ
+
+@ appear on change
+am ሲቀየር ይታይ
+
+@ hidden
+am የተደበቀ
+
 @ big numbers
 am ትላልቅ ቁጥሮች
 
@@ -1907,8 +1928,8 @@ am ከውሃ በታች እይታው እንዴት እንደሚዛባ፦ ክላሲ
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 am የእጅ መንቀጥቀጥን ለመደበቅ በሰከንድ ከዚህ ያነሱ ዲግሪዎችን የጋይሮ ሽክርክሪት ችላ ይላል
 
-@ Immersive: appears for a few seconds only when its value changes
-am አስጠላቂ፦ እሴቱ ሲቀየር ብቻ ለጥቂት ሰከንዶች ይታያል
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+am ሲቀየር ይታይ፦ እሴቱ ሲቀየር ብቻ ለጥቂት ሰከንዶች ይታያል፤ የተደበቀ፦ ሳያስወግድ ይደብቃል
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 am በሾጣጣ ማዕዘን በሚታዩ ወለሎችና ግድግዳዎች ላይ ቴክስቸሮችን ጥርት አድርጎ ይይዛል

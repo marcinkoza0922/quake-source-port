@@ -141,6 +141,11 @@ pub fn quaddicted_cache_dir() -> PathBuf {
     root().join("quaddicted")
 }
 
+/// User-saved HUD preset files (`<root>/hud_presets/<name>.hud`).
+pub fn hud_presets_dir() -> PathBuf {
+    root().join("hud_presets")
+}
+
 /// True when `root` already contains user files or folders other than the
 /// bootstrap pointer file.
 pub fn has_existing_data(root: &Path) -> bool {

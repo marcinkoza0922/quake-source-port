@@ -1196,9 +1196,6 @@ mr उच्च
 @ huge
 mr प्रचंड
 
-@ immersive
-mr इमर्सिव्ह
-
 @ intense
 mr तीव्र
 
@@ -1605,6 +1602,30 @@ mr स्थिती पट्टी
 @ Visibility
 mr दृश्यता
 
+@ Alert
+mr इशारा
+
+@ Live
+mr थेट
+
+@ Sample
+mr नमुना
+
+@ Undo
+mr पूर्ववत
+
+@ Presets
+mr प्रीसेट
+
+@ Save As
+mr असे जतन करा
+
+@ appear on change
+mr बदलावर दाखवा
+
+@ hidden
+mr लपवलेले
+
 @ big numbers
 mr मोठे अंक
 
@@ -1907,8 +1928,8 @@ mr पाण्याखाली दृश्य कसे विकृत ह�
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 mr हाताचा कंप लपवण्यासाठी प्रति सेकंद इतक्या अंशांपेक्षा हळू जायरो फिरणे दुर्लक्षित करते
 
-@ Immersive: appears for a few seconds only when its value changes
-mr इमर्सिव्ह: मूल्य बदलल्यावरच काही सेकंद दिसते
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+mr बदलावर दाखवा: मूल्य बदलल्यावरच काही सेकंद दिसते; लपवलेले: न काढता लपवते
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 mr तीव्र कोनात दिसणाऱ्या जमिनी आणि भिंतींवर टेक्सचर्स स्पष्ट ठेवते

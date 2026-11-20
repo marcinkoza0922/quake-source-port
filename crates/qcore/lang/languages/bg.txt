@@ -1196,9 +1196,6 @@ bg високо
 @ huge
 bg огромен
 
-@ immersive
-bg потапящ
-
 @ intense
 bg силен
 
@@ -1605,6 +1602,30 @@ bg Лента за състояние
 @ Visibility
 bg Видимост
 
+@ Alert
+bg Тревога
+
+@ Live
+bg На живо
+
+@ Sample
+bg Пример
+
+@ Undo
+bg Отмени
+
+@ Presets
+bg Настройки
+
+@ Save As
+bg Запази като
+
+@ appear on change
+bg при промяна
+
+@ hidden
+bg скрито
+
 @ big numbers
 bg големи цифри
 
@@ -1907,8 +1928,8 @@ bg Как се изкривява погледът под вода: класич
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 bg Пренебрегва въртене на жироскопа, по-бавно от толкова градуса в секунда, за да скрие треперенето на ръцете
 
-@ Immersive: appears for a few seconds only when its value changes
-bg Потапящ: появява се за няколко секунди само когато стойността се промени
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+bg При промяна: появява се за кратко само при промяна на стойността; скрито: скрива без премахване
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 bg Запазва текстурите ясни по подове и стени, гледани под остър ъгъл

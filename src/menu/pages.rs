@@ -51,6 +51,8 @@ pub(super) enum Item {
     UserDataDir,
     /// Soundtrack pack (`s_soundtrack`) from `Menu::soundtracks`.
     Soundtrack,
+    /// Built-in and user-saved HUD presets (`hud_preset`, `hud_preset_name`).
+    HudPreset,
 }
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -406,10 +408,8 @@ pub(super) const ACCESSIBILITY: &[Item] = &[
     Item::Sub { label: "Auto-aim Settings", page: Page::AutoAim },
 ];
 
-pub(super) const HUD_PRESET: &[(&str, f32)] = &[("modern", 0.0), ("classic", 1.0), ("custom", 2.0)];
-
 pub(super) const HUD: &[Item] = &[
-    Item::Choice { label: "HUD Preset", cvar: "hud_preset", choices: HUD_PRESET },
+    Item::HudPreset,
     Item::Run { label: "Edit HUD", run: Run::EditHud },
     Item::Sub { label: "Crosshair", page: Page::Crosshair },
     toggle("Directional Damage", "hud_damageindicator"),

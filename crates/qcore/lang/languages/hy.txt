@@ -1196,9 +1196,6 @@ hy բարձր
 @ huge
 hy հսկայական
 
-@ immersive
-hy ընկղմող
-
 @ intense
 hy ուժեղ
 
@@ -1605,6 +1602,30 @@ hy Վիճակի գոտի
 @ Visibility
 hy Տեսանելիություն
 
+@ Alert
+hy Ահազանգ
+
+@ Live
+hy Ուղիղ
+
+@ Sample
+hy Նմուշ
+
+@ Undo
+hy Հետարկել
+
+@ Presets
+hy Նախադրումներ
+
+@ Save As
+hy Պահել որպես
+
+@ appear on change
+hy փոփոխման դեպքում
+
+@ hidden
+hy թաքնված
+
 @ big numbers
 hy մեծ թվանշաններ
 
@@ -1907,8 +1928,8 @@ hy Ինչպես է տեսքն աղավաղվում ջրի տակ: դասական
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 hy Անտեսում է գիրոյի պտույտը, որը դանդաղ է վայրկյանում այսքան աստիճանից, ձեռքի դողը թաքցնելու համար
 
-@ Immersive: appears for a few seconds only when its value changes
-hy Ընկղմող: հայտնվում է մի քանի վայրկյանով միայն արժեքը փոխվելիս
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+hy Փոփոխման դեպքում՝ հայտնվում է կարճ ժամանակով միայն արժեքի փոփոխվելիս, թաքնված՝ թաքցնում է առանց ջնջելու
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 hy Հստակ է պահում սուր անկյան տակ երևացող հատակների և պատերի տեքստուրաները

@@ -98,6 +98,15 @@ impl Menu {
             return out;
         }
         if self.screen == Screen::HudEditor {
+            if let Some(o) = self.osk {
+                self.osk_key(key, o, cv, &mut out);
+                return out;
+            }
+            if key == K_YBUTTON && self.hud_edit.saving_preset() {
+                self.osk = Some(Osk::default());
+                out.push(Action::Sound("misc/menu2.wav"));
+                return out;
+            }
             let r = self.hud_edit.key(key, cv);
             out.extend(r.sound.map(Action::Sound));
             if r.exit {

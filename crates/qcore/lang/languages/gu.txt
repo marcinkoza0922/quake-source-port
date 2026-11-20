@@ -1196,9 +1196,6 @@ gu ઊંચું
 @ huge
 gu વિશાળ
 
-@ immersive
-gu ઇમર્સિવ
-
 @ intense
 gu તીવ્ર
 
@@ -1605,6 +1602,30 @@ gu સ્થિતિ બાર
 @ Visibility
 gu દૃશ્યતા
 
+@ Alert
+gu ચેતવણી
+
+@ Live
+gu લાઇવ
+
+@ Sample
+gu નમૂનો
+
+@ Undo
+gu પૂર્વવત્
+
+@ Presets
+gu પ્રીસેટ્સ
+
+@ Save As
+gu આ રીતે સાચવો
+
+@ appear on change
+gu ફેરફાર પર
+
+@ hidden
+gu છુપાયેલ
+
 @ big numbers
 gu મોટા અંકો
 
@@ -1907,8 +1928,8 @@ gu પાણીની અંદર દૃશ્ય કેવું વિકૃ�
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 gu હાથની ધ્રુજારી છુપાવવા, પ્રતિ સેકન્ડ આટલી ડિગ્રીથી ધીમી ગાયરો ફેરવણીને અવગણે છે
 
-@ Immersive: appears for a few seconds only when its value changes
-gu ઇમર્સિવ: તેનું મૂલ્ય બદલાય ત્યારે જ થોડી સેકન્ડ માટે દેખાય છે
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+gu ફેરફાર પર: મૂલ્ય બદલાય ત્યારે જ થોડી સેકંડ માટે દેખાય છે; છુપાયેલ: દૂર કર્યા વિના છુપાવે છે
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 gu ત્રાંસા ખૂણેથી દેખાતાં ભોંયતળિયાં અને દીવાલો પર ટેક્સચર તીક્ષ્ણ રાખે છે

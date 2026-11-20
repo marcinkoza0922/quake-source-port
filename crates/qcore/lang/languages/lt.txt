@@ -1196,9 +1196,6 @@ lt aukšta
 @ huge
 lt milžiniškas
 
-@ immersive
-lt įtraukiantis
-
 @ intense
 lt intensyvus
 
@@ -1605,6 +1602,30 @@ lt Būsenos juosta
 @ Visibility
 lt Matomumas
 
+@ Alert
+lt Pavojus
+
+@ Live
+lt Gyvai
+
+@ Sample
+lt Pavyzdys
+
+@ Undo
+lt Atšaukti
+
+@ Presets
+lt Šablonai
+
+@ Save As
+lt Įrašyti kaip
+
+@ appear on change
+lt pakitus
+
+@ hidden
+lt paslėpta
+
 @ big numbers
 lt dideli skaitmenys
 
@@ -1907,8 +1928,8 @@ lt Kaip vaizdas iškraipomas po vandeniu: klasikinis banguoja visą ekraną kaip
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 lt Nepaiso giroskopo sukimo, lėtesnio nei tiek laipsnių per sekundę, kad paslėptų rankų drebėjimą
 
-@ Immersive: appears for a few seconds only when its value changes
-lt Įtraukiantis: rodomas kelias sekundes tik pasikeitus vertei
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+lt Pakitus: trumpam pasirodo tik pasikeitus reikšmei; paslėpta: paslepia nepašalinant
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 lt Išlaiko tekstūras ryškias ant grindų ir sienų, matomų smailiu kampu

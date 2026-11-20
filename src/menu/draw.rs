@@ -9,7 +9,15 @@ impl Menu {
         sync_addon_binds(cv, self.game_running);
         // the HUD editor shows the HUD as it is, under its dialog
         if self.screen == Screen::HudEditor {
-            return self.hud_edit.draw(c, cv, self.pad_ui, &self.glyphs);
+            self.hud_edit.draw(c, cv, self.pad_ui, &self.glyphs);
+            if let Some(o) = self.osk {
+                let base_scale = c.scale;
+                c.menu_layout();
+                self.draw_osk(c, o);
+                c.scale = base_scale;
+                c.reset_origin();
+            }
+            return;
         }
         c.fade_screen();
         let base_scale = c.scale;
@@ -334,6 +342,17 @@ impl Menu {
                 let idx = self.soundtrack_index(cv);
                 let s: String = opts[idx].chars().take(18).collect();
                 if idx == 0 {
+                    c.text(VALUE_X, y, &s, TXT, FG);
+                } else {
+                    c.text_raw(VALUE_X, y, &s, TXT, FG);
+                }
+            }
+            Item::HudPreset => {
+                label(c, "HUD Preset");
+                let opts = self.hud_preset_options();
+                let idx = self.hud_preset_index(cv);
+                let s: String = opts[idx].chars().take(18).collect();
+                if idx <= 1 || idx == opts.len() - 1 {
                     c.text(VALUE_X, y, &s, TXT, FG);
                 } else {
                     c.text_raw(VALUE_X, y, &s, TXT, FG);

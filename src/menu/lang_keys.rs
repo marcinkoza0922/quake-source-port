@@ -31,6 +31,7 @@ pub(crate) fn menu_keys() -> Vec<&'static str> {
             }
             Item::UserDataDir => out.push("User Data Directory"),
             Item::Soundtrack => out.push("Soundtrack"),
+            Item::HudPreset => out.extend(["HUD Preset", "modern", "classic", "custom"]),
             _ => {}
         }
         out.extend(tooltip(item));

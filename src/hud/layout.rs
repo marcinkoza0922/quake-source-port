@@ -76,6 +76,8 @@ pub struct Elem {
     pub size: f32,
     /// Immersive: shown for a few seconds after the value changes.
     pub fade: bool,
+    /// Hidden in gameplay without removing the element from the layout.
+    pub hidden: bool,
     /// Dark backing behind text.
     pub bg: bool,
     /// Text and label colours: crosshair palette indices, `NORMAL` keeps
@@ -106,7 +108,7 @@ impl Elem {
         // a bottom status bar sits on the screen edge
         let y = if kind == StatusBar && anchor.row() == 2 { super::place::MARGIN } else { 0.0 };
         let bg = kind.has_background() && !kind.is_message();
-        Elem { kind, anchor, x: 0.0, y, scale: 1.0, opacity: 1.0, font, size, fade: false, bg, color: NORMAL, label: NORMAL, a, b, len: 96.0 }
+        Elem { kind, anchor, x: 0.0, y, scale: 1.0, opacity: 1.0, font, size, fade: false, hidden: false, bg, color: NORMAL, label: NORMAL, a, b, len: 96.0 }
     }
 
     fn write(&self, out: &mut String) {
@@ -139,6 +141,9 @@ impl Elem {
         if self.fade {
             out.push_str(",i");
         }
+        if self.hidden {
+            out.push_str(",h");
+        }
     }
 
     fn parse(s: &str) -> Option<Self> {
@@ -169,6 +174,7 @@ impl Elem {
                     }
                 }
                 'i' => e.fade = e.kind.can_fade(),
+                'h' => e.hidden = true,
                 _ => {}
             }
         }
@@ -343,7 +349,7 @@ mod tests {
     fn text_round_trips_and_skips_what_it_does_not_know() {
         let mut l = Layout::default_layout();
         let mut e = Elem::new(Kind::HealthBar, Anchor::TopRight);
-        (e.x, e.y, e.scale, e.opacity, e.len, e.a, e.fade) = (-12.0, 30.5, 1.5, 0.6, 160.0, 0, true);
+        (e.x, e.y, e.scale, e.opacity, e.len, e.a, e.fade, e.hidden) = (-12.0, 30.5, 1.5, 0.6, 160.0, 0, true, true);
         e.font = Font::Modern;
         (e.color, e.label) = (3, 0);
         l.elems.push(e);

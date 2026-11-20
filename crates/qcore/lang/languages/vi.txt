@@ -1196,9 +1196,6 @@ vi cao
 @ huge
 vi cực lớn
 
-@ immersive
-vi nhập vai
-
 @ intense
 vi mạnh
 
@@ -1605,6 +1602,30 @@ vi Thanh trạng thái
 @ Visibility
 vi Hiển thị
 
+@ Alert
+vi Cảnh báo
+
+@ Live
+vi Trực tiếp
+
+@ Sample
+vi Mẫu
+
+@ Undo
+vi Hoàn tác
+
+@ Presets
+vi Mẫu cài sẵn
+
+@ Save As
+vi Lưu thành
+
+@ appear on change
+vi khi thay đổi
+
+@ hidden
+vi ẩn
+
 @ big numbers
 vi số lớn
 
@@ -1907,8 +1928,8 @@ vi Cách góc nhìn bị méo dưới nước: Cổ điển làm gợn cả màn
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 vi Bỏ qua chuyển động xoay của con quay chậm hơn số độ mỗi giây này, để che run tay
 
-@ Immersive: appears for a few seconds only when its value changes
-vi Nhập vai: chỉ xuất hiện vài giây khi giá trị thay đổi
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+vi Khi thay đổi: chỉ hiện thoáng qua khi giá trị thay đổi; ẩn: ẩn mà không xóa
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 vi Giữ texture sắc nét trên sàn và tường khi nhìn ở góc nghiêng

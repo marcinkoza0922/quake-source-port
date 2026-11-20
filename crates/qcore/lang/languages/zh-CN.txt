@@ -1196,9 +1196,6 @@ zh-CN 高
 @ huge
 zh-CN 巨大
 
-@ immersive
-zh-CN 沉浸
-
 @ intense
 zh-CN 强烈
 
@@ -1605,6 +1602,30 @@ zh-CN 状态栏
 @ Visibility
 zh-CN 可见性
 
+@ Alert
+zh-CN 警报
+
+@ Live
+zh-CN 实时
+
+@ Sample
+zh-CN 示例
+
+@ Undo
+zh-CN 撤销
+
+@ Presets
+zh-CN 预设
+
+@ Save As
+zh-CN 另存为
+
+@ appear on change
+zh-CN 变化时显示
+
+@ hidden
+zh-CN 隐藏
+
 @ big numbers
 zh-CN 大数字
 
@@ -1907,8 +1928,8 @@ zh-CN 水下画面的扭曲方式：经典会像软件版 Quake 一样使整个�
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 zh-CN 忽略低于此角速度（度/秒）的陀螺仪转动，以消除手部抖动
 
-@ Immersive: appears for a few seconds only when its value changes
-zh-CN 沉浸：仅在数值变化时显示几秒
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+zh-CN 变化时显示：仅在数值变化时短暂显示；隐藏：不删除但隐藏
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 zh-CN 让以陡峭角度看到的地面和墙面纹理保持清晰

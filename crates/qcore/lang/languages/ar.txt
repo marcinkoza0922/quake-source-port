@@ -1196,9 +1196,6 @@ ar عالٍ
 @ huge
 ar ضخم
 
-@ immersive
-ar غامر
-
 @ intense
 ar مكثّف
 
@@ -1605,6 +1602,30 @@ ar شريط الحالة
 @ Visibility
 ar الظهور
 
+@ Alert
+ar تنبيه
+
+@ Live
+ar مباشر
+
+@ Sample
+ar نموذج
+
+@ Undo
+ar تراجع
+
+@ Presets
+ar الإعدادات المسبقة
+
+@ Save As
+ar حفظ باسم
+
+@ appear on change
+ar عند التغيير
+
+@ hidden
+ar مخفي
+
 @ big numbers
 ar أرقام كبيرة
 
@@ -1907,8 +1928,8 @@ ar كيف تتشوه الرؤية تحت الماء: الكلاسيكي يموّ
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 ar يتجاهل دوران الجيروسكوب الأبطأ من هذا العدد من الدرجات في الثانية، لإخفاء ارتعاش اليد
 
-@ Immersive: appears for a few seconds only when its value changes
-ar غامر: يظهر بضع ثوانٍ فقط عند تغيّر قيمته
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+ar عند التغيير: يظهر لفترة وجيزة عند تغير قيمته فقط؛ مخفي: يخفي دون إزالة
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ar يُبقي الخامات حادة على الأرضيات والجدران المرئية بزوايا حادة

@@ -1196,9 +1196,6 @@ cs vysoká
 @ huge
 cs obrovská
 
-@ immersive
-cs pohlcující
-
 @ intense
 cs intenzivní
 
@@ -1605,6 +1602,30 @@ cs Stavový pruh
 @ Visibility
 cs Viditelnost
 
+@ Alert
+cs Poplach
+
+@ Live
+cs Živě
+
+@ Sample
+cs Ukázka
+
+@ Undo
+cs Zpět
+
+@ Presets
+cs Předvolby
+
+@ Save As
+cs Uložit jako
+
+@ appear on change
+cs při změně
+
+@ hidden
+cs skryto
+
 @ big numbers
 cs velké číslice
 
@@ -1907,8 +1928,8 @@ cs Jak se pohled pod vodou zkresluje: klasický zvlní celou obrazovku jako soft
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 cs Ignoruje otáčení gyroskopu pomalejší než tento počet stupňů za sekundu, aby skryl třes rukou
 
-@ Immersive: appears for a few seconds only when its value changes
-cs Pohlcující: zobrazí se jen na pár sekund, když se hodnota změní
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+cs Při změně: zobrazí se krátce jen při změně hodnoty; skryto: skryje bez odstranění
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 cs Udrží textury ostré na podlahách a stěnách viděných pod ostrým úhlem

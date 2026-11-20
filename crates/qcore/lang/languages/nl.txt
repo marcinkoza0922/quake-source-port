@@ -1196,9 +1196,6 @@ nl hoog
 @ huge
 nl enorm
 
-@ immersive
-nl meeslepend
-
 @ intense
 nl intens
 
@@ -1605,6 +1602,30 @@ nl Statusbalk
 @ Visibility
 nl Zichtbaarheid
 
+@ Alert
+nl Alarm
+
+@ Live
+nl Live
+
+@ Sample
+nl Voorbeeld
+
+@ Undo
+nl Ongedaan
+
+@ Presets
+nl Voorinstellingen
+
+@ Save As
+nl Opslaan als
+
+@ appear on change
+nl bij wijziging
+
+@ hidden
+nl verborgen
+
 @ big numbers
 nl grote cijfers
 
@@ -1907,8 +1928,8 @@ nl Hoe het beeld onder water vervormt: Klassiek laat het hele scherm golven zoal
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 nl Negeert gyrodraaiingen langzamer dan dit aantal graden per seconde, om trillende handen te verbergen
 
-@ Immersive: appears for a few seconds only when its value changes
-nl Meeslepend: verschijnt alleen een paar seconden als de waarde verandert
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+nl Bij wijziging: verschijnt kort alleen wanneer de waarde verandert; verborgen: verbergt zonder te verwijderen
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 nl Houdt textures scherp op vloeren en muren die je onder een scherpe hoek ziet

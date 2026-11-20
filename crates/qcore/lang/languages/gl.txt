@@ -1196,9 +1196,6 @@ gl alta
 @ huge
 gl enorme
 
-@ immersive
-gl inmersivo
-
 @ intense
 gl intenso
 
@@ -1605,6 +1602,30 @@ gl Barra de estado
 @ Visibility
 gl Visibilidade
 
+@ Alert
+gl Alerta
+
+@ Live
+gl En vivo
+
+@ Sample
+gl Mostra
+
+@ Undo
+gl Desfacer
+
+@ Presets
+gl Preaxustes
+
+@ Save As
+gl Gardar como
+
+@ appear on change
+gl ao cambiar
+
+@ hidden
+gl oculto
+
 @ big numbers
 gl números grandes
 
@@ -1907,8 +1928,8 @@ gl Como se distorsiona a vista baixo a auga: clásico ondula toda a pantalla com
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 gl Ignora as rotacións do xiroscopio máis lentas ca estes graos por segundo, para ocultar o tremor da man
 
-@ Immersive: appears for a few seconds only when its value changes
-gl Inmersivo: aparece uns segundos só cando cambia o seu valor
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+gl Ao cambiar: aparece brevemente só cando cambia o valor; oculto: oculta sen eliminar
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 gl Mantén nítidas as texturas de chans e paredes vistas en ángulos moi inclinados

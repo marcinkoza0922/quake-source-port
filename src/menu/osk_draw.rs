@@ -14,11 +14,13 @@ impl Menu {
             Search,
             Mods(modmenu::Page),
             Text,
+            HudPreset,
         }
         let target = match self.screen {
             Screen::Options => Target::Search,
             Screen::Mods | Screen::ModMaps | Screen::ModOnline => Target::Mods(self.mods_page()),
             Screen::OptionsPage(p) if matches!(self.page_item(p, self.opt_cursor), Item::Text { .. }) => Target::Text,
+            Screen::HudEditor if self.hud_edit.saving_preset() => Target::HudPreset,
             _ => {
                 self.osk = None;
                 return;
@@ -28,6 +30,7 @@ impl Menu {
             Target::Search => m.search_backspace(),
             Target::Mods(p) => m.mods.filter_pop(p),
             Target::Text => m.text_delete(false, cv),
+            Target::HudPreset => m.hud_edit.preset_backspace(),
         };
         let n = OSK_ACTIONS.len();
         match key {

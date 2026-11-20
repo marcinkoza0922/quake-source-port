@@ -1196,9 +1196,6 @@ sl visoko
 @ huge
 sl ogromno
 
-@ immersive
-sl potopitveno
-
 @ intense
 sl intenzivno
 
@@ -1605,6 +1602,30 @@ sl Vrstica stanja
 @ Visibility
 sl Vidnost
 
+@ Alert
+sl Opozorilo
+
+@ Live
+sl V živo
+
+@ Sample
+sl Vzorec
+
+@ Undo
+sl Razveljavi
+
+@ Presets
+sl Prednastavitve
+
+@ Save As
+sl Shrani kot
+
+@ appear on change
+sl ob spremembi
+
+@ hidden
+sl skrito
+
 @ big numbers
 sl velike številke
 
@@ -1907,8 +1928,8 @@ sl Kako se pogled pod vodo popači: klasično valovi cel zaslon kot programski Q
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 sl Prezre vrtenje žiroskopa, počasnejše od toliko stopinj na sekundo, da skrije tresenje rok
 
-@ Immersive: appears for a few seconds only when its value changes
-sl Potopitveno: prikaže se le za nekaj sekund, ko se vrednost spremeni
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+sl Ob spremembi: za kratek čas se prikaže le ob spremembi vrednosti; skrito: skrije brez brisanja
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 sl Ohrani teksture ostre na tleh in stenah, gledanih pod ostrim kotom

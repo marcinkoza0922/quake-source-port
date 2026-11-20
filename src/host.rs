@@ -418,6 +418,7 @@ impl Host {
         h.sync_shell_env();
         h.sync_console_catalog();
         h.refresh_soundtracks();
+        h.menu.hud_edit.reload_presets();
         // 2026 update compat (ironwail host.c): word-wrap centerprints for mg3.
         let mg3 = h.server.core.fs.game_dirs().iter().any(|d| d.eq_ignore_ascii_case("mg3"));
         h.server.core.cvars.set("scr_usekfont", if mg3 { "1" } else { "0" });

@@ -1196,9 +1196,6 @@ sk vysoká
 @ huge
 sk obrovská
 
-@ immersive
-sk pohlcujúci
-
 @ intense
 sk intenzívne
 
@@ -1605,6 +1602,30 @@ sk Stavový pruh
 @ Visibility
 sk Viditeľnosť
 
+@ Alert
+sk Poplach
+
+@ Live
+sk Naživo
+
+@ Sample
+sk Ukážka
+
+@ Undo
+sk Späť
+
+@ Presets
+sk Predvoľby
+
+@ Save As
+sk Uložiť ako
+
+@ appear on change
+sk pri zmene
+
+@ hidden
+sk skryté
+
 @ big numbers
 sk veľké číslice
 
@@ -1907,8 +1928,8 @@ sk Ako sa pohľad pod vodou skresľuje: klasický vlní celú obrazovku ako soft
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 sk Ignoruje otáčanie gyroskopu pomalšie ako toľko stupňov za sekundu, aby skryl trasenie rúk
 
-@ Immersive: appears for a few seconds only when its value changes
-sk Pohlcujúci: zobrazí sa na pár sekúnd iba pri zmene hodnoty
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+sk Pri zmene: zobrazí sa krátko len pri zmene hodnoty; skryté: skryje bez odstránenia
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 sk Udrží textúry na podlahách a stenách ostré aj pod strmým uhlom

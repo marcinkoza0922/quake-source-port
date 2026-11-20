@@ -1196,9 +1196,6 @@ eu altua
 @ huge
 eu erraldoia
 
-@ immersive
-eu murgilgarria
-
 @ intense
 eu bizia
 
@@ -1605,6 +1602,30 @@ eu Egoera-barra
 @ Visibility
 eu Ikusgarritasuna
 
+@ Alert
+eu Alerta
+
+@ Live
+eu Zuzenean
+
+@ Sample
+eu Lagina
+
+@ Undo
+eu Desegin
+
+@ Presets
+eu Aurrezarpenak
+
+@ Save As
+eu Gorde honela
+
+@ appear on change
+eu aldatzean
+
+@ hidden
+eu ezkutuan
+
 @ big numbers
 eu zenbaki handiak
 
@@ -1907,8 +1928,8 @@ eu Ikuspegia urpean nola distortsionatzen den: klasikoak pantaila osoa uhintzen 
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 eu Segundoko gradu hauek baino motelagoak diren giroskopio-birak baztertzen ditu, eskuaren dardara ezkutatzeko
 
-@ Immersive: appears for a few seconds only when its value changes
-eu Murgilgarria: balioa aldatzen denean soilik agertzen da segundo batzuetan
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+eu Aldatzean: balioa aldatzean bakarrik agertzen da laburki; ezkutuan: kendu gabe ezkutatzen du
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 eu Testurak garbi mantentzen ditu angelu zorrotzetik ikusitako zoru eta hormetan

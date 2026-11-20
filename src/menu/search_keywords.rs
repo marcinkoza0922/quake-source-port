@@ -18,6 +18,7 @@ pub(super) fn keywords(item: Item) -> &'static str {
         Item::Language => "translation locale",
         Item::UserDataDir => "save folder path storage location config demos mods quaddicted",
         Item::Soundtrack => "music tracks cd nin quake64 playlist",
+        Item::HudPreset => "interface layout status bar sbar modern classic custom saved preset",
         Item::ShaderPreset => "crt scanlines retroarch slang filter retro ntsc",
         Item::ResetBinds => "keys bindings defaults",
         Item::ResetShaderParams => "crt defaults",

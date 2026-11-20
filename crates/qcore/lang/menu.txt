@@ -2781,13 +2781,6 @@ it enorme
 es enorme
 ru огромный
 
-@ immersive
-fr immersif
-de immersiv
-it immersivo
-es inmersivo
-ru погружение
-
 @ intense
 fr intense
 de intensiv
@@ -3730,6 +3723,62 @@ de Sichtbarkeit
 it Visibilità
 es Visibilidad
 ru Видимость
+
+@ Alert
+fr Alerte
+de Alarm
+it Allerta
+es Alerta
+ru Тревога
+
+@ Live
+fr Direct
+de Live
+it Dal vivo
+es En vivo
+ru В игре
+
+@ Sample
+fr Exemple
+de Beispiel
+it Esempio
+es Ejemplo
+ru Пример
+
+@ Undo
+fr Annuler
+de Rückgängig
+it Annulla
+es Deshacer
+ru Отменить
+
+@ Presets
+fr Préréglages
+de Vorlagen
+it Predefiniti
+es Preajustes
+ru Пресеты
+
+@ Save As
+fr Enregistrer sous
+de Speichern unter
+it Salva con nome
+es Guardar como
+ru Сохранить как
+
+@ appear on change
+fr au changement
+de bei Änderung
+it al cambio
+es al cambiar
+ru при изменении
+
+@ hidden
+fr masqué
+de versteckt
+it nascosto
+es oculto
+ru скрыто
 
 @ big numbers
 fr grands chiffres

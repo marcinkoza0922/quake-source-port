@@ -1196,9 +1196,6 @@ ta உயர்
 @ huge
 ta மிகப் பெரிது
 
-@ immersive
-ta மூழ்கடிக்கும்
-
 @ intense
 ta தீவிரம்
 
@@ -1605,6 +1602,30 @@ ta நிலைமைப் பட்டை
 @ Visibility
 ta தெரிவுநிலை
 
+@ Alert
+ta எச்சரிக்கை
+
+@ Live
+ta நேரலை
+
+@ Sample
+ta மாதிரி
+
+@ Undo
+ta செயல்தவிர்
+
+@ Presets
+ta முன்னமைவுகள்
+
+@ Save As
+ta இவ்வாறு சேமி
+
+@ appear on change
+ta மாறும்போது
+
+@ hidden
+ta மறைந்தது
+
 @ big numbers
 ta பெரிய எண்கள்
 
@@ -1907,8 +1928,8 @@ ta நீருக்கடியில் பார்வை எப்படி
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 ta கை நடுக்கத்தை மறைக்க, வினாடிக்கு இத்தனை பாகைக்கும் மெதுவான கைரோ சுழற்சியைப் புறக்கணிக்கும்
 
-@ Immersive: appears for a few seconds only when its value changes
-ta மூழ்கடிக்கும்: அதன் மதிப்பு மாறும்போது மட்டும் சில வினாடிகள் தோன்றும்
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+ta மாறும்போது: மதிப்பு மாறும்போது மட்டுமே சில நொடிகள் தோன்றும்; மறைந்தது: நீக்காமல் மறைக்கும்
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ta கூர்மையான கோணத்தில் காணும் தரை, சுவர்களில் டெக்ஸ்சர்களைக் கூர்மையாக வைக்கும்

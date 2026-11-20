@@ -15,9 +15,11 @@ mod editor_mouse;
 mod editor_pad;
 mod editor_popup;
 mod editor_rows;
+mod editor_undo;
 pub mod kind;
 pub mod layout;
 pub mod place;
+pub mod presets;
 
 use qclient::ClientState;
 use qnet::protocol::*;
@@ -79,6 +81,9 @@ impl Fade {
 
     /// Opacity of element `i` (`e`) now.
     pub fn alpha(&self, i: usize, e: &Elem, cl: &ClientState, now: f64) -> f32 {
+        if e.hidden {
+            return 0.0;
+        }
         if !e.fade || !e.kind.can_fade() {
             return 1.0;
         }
@@ -88,6 +93,35 @@ impl Fade {
         }
         let t = now - self.changed.get(i).copied().unwrap_or(now);
         if t < IMMERSIVE_HOLD { 1.0 } else { (1.0 - (t - IMMERSIVE_HOLD) / IMMERSIVE_FADE).max(0.0) as f32 }
+    }
+}
+
+/// Which player state the HUD editor previews.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum PreviewState {
+    /// Sample player with full health, armor, ammo, weapons and items.
+    #[default]
+    Sample,
+    /// Low-health / low-ammo alert state with active powerups.
+    Alert,
+    /// The live player's actual current stats.
+    Live,
+}
+
+impl PreviewState {
+    pub fn next(self) -> Self {
+        match self {
+            PreviewState::Sample => PreviewState::Alert,
+            PreviewState::Alert => PreviewState::Live,
+            PreviewState::Live => PreviewState::Sample,
+        }
+    }
+    pub fn label(self) -> &'static str {
+        match self {
+            PreviewState::Sample => "Sample",
+            PreviewState::Alert => "Alert",
+            PreviewState::Live => "Live",
+        }
     }
 }
 
@@ -107,6 +141,8 @@ pub struct Hud {
     pub rects: Vec<Rect>,
     /// `hud_preset` as last applied (None until the configs have run).
     pub preset: Option<f32>,
+    /// `hud_preset_name` as last applied (None until the configs have run).
+    pub preset_name: Option<String>,
     /// The loaded layout was checked against its preset.
     pub preset_checked: bool,
 }
@@ -134,6 +170,15 @@ impl Hud {
             self.sizes.clone_from(&key.1);
             self.key = Some(key);
         }
+        &self.rects
+    }
+
+    /// Places the elements while `dragged` is actively being dragged: `dragged`
+    /// keeps priority and other elements reflow smoothly around it.
+    pub fn place_drag(&mut self, sizes: Vec<(f32, f32)>, vw: f32, vh: f32, dragged: usize, origin: Rect) -> &[Rect] {
+        self.key = None;
+        self.rects = place::place_drag(&self.layout.elems, &sizes, vw, vh, dragged, origin);
+        self.sizes = sizes;
         &self.rects
     }
 
@@ -170,7 +215,7 @@ pub fn reserve_bottom(l: &Layout, rects: &[Rect], vh: f32) -> f32 {
     l.elems
         .iter()
         .zip(rects)
-        .filter(|(e, r)| e.kind == Kind::StatusBar && e.b != 0 && r.bottom() >= vh - 0.5)
+        .filter(|(e, r)| e.kind == Kind::StatusBar && !e.hidden && e.b != 0 && r.bottom() >= vh - 0.5)
         .map(|(_, r)| vh - r.y)
         .fold(0.0, f32::max)
 }
@@ -187,19 +232,20 @@ pub struct MsgPlace {
     /// Text size multiplier (1..=3).
     pub scale: f32,
     pub bg: bool,
+    pub hidden: bool,
     pub color: [f32; 4],
 }
 
 impl Default for MsgPlace {
     fn default() -> Self {
-        MsgPlace { rect: Rect::default(), align: 0, up: false, scale: 1.0, bg: false, color: crate::draw::WHITE }
+        MsgPlace { rect: Rect::default(), align: 0, up: false, scale: 1.0, bg: false, hidden: false, color: crate::draw::WHITE }
     }
 }
 
 impl MsgPlace {
     pub fn of(e: &Elem, rect: Rect) -> Self {
         let scale = (e.size / 8.0).round().clamp(1.0, 3.0);
-        MsgPlace { rect, align: e.anchor.col(), up: e.anchor.row() == 2, scale, bg: e.bg, color: draw::value_color(e) }
+        MsgPlace { rect, align: e.anchor.col(), up: e.anchor.row() == 2, scale, bg: e.bg, hidden: e.hidden, color: draw::value_color(e) }
     }
 }
 
@@ -216,11 +262,17 @@ pub fn draw_layout(c: &mut Canvas, pf: &mut PicFn, l: &Layout, rects: &[Rect], c
             continue;
         }
         if e.kind == Kind::StatusBar {
-            status_bar = true;
+            if !e.hidden || ctx.preview {
+                status_bar = true;
+            }
         } else if (e.kind.is_player() && hide_player) || (ctx.show_scores && !e.kind.is_player() && !e.kind.is_metric()) {
             continue;
         }
-        let a = if ctx.preview { 1.0 } else { fade.map_or(1.0, |f| f.alpha(i, e, ctx.cl, now)) };
+        let a = if ctx.preview {
+            if e.hidden { 0.3 } else { 1.0 }
+        } else {
+            fade.map_or(if e.hidden { 0.0 } else { 1.0 }, |f| f.alpha(i, e, ctx.cl, now))
+        };
         if a > 0.0 {
             draw::draw(c, pf, e, *r, ctx, a);
         }
@@ -243,5 +295,18 @@ pub fn sample_client(cl: &ClientState) -> ClientState {
         st[STAT_SHELLS + i] = n;
     }
     s.items = 4096 | 127 | crate::sbar::IT_SHELLS | crate::sbar::IT_ARMOR2 | 1 << 17 | 1 << 18 | crate::sbar::IT_QUAD | 1 << 28 | 1 << 29;
+    s
+}
+
+/// Low-health / low-ammo alert preview state with active powerups.
+pub fn alert_client(cl: &ClientState) -> ClientState {
+    let mut s = sample_client(cl);
+    s.stats[STAT_HEALTH] = 18;
+    s.stats[STAT_ARMOR] = 0;
+    s.stats[STAT_AMMO] = 5;
+    for (i, n) in [5, 10, 2, 0].into_iter().enumerate() {
+        s.stats[STAT_SHELLS + i] = n;
+    }
+    s.items = (s.items & !crate::sbar::IT_ARMOR2) | crate::sbar::IT_INVULNERABILITY | crate::sbar::IT_INVISIBILITY | crate::sbar::IT_QUAD;
     s
 }

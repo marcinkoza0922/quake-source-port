@@ -1,21 +1,25 @@
 //! The HUD editor (Options → HUD → Edit HUD): a dialog that can be moved
-//! but not closed, listing every element with its scale and offset, the
-//! selected element's settings, and buttons to add (from a tree of kinds),
-//! delete, reset and finish. Elements can also be clicked and dragged on
-//! screen. It edits the `hud_layout` cvar; the host places the elements
-//! each frame (the selected one gives way when they would overlap) and
-//! writes the settled offsets back.
+//! or collapsed, listing every element with its scale and offset, the
+//! selected element's settings (shown once an element is actively selected),
+//! and buttons to add (from a tree of kinds followed by a position grid),
+//! delete, reset and finish. Elements can be dragged on screen with website-
+//! style reflow displacement, snap guides, and undo/redo (`Ctrl+Z` or R3).
+
+use std::path::PathBuf;
 
 use qcore::cvar::Cvars;
 use qinput::keys::*;
 
+use super::PreviewState;
 use super::editor_rows::{self, Prop};
+use super::editor_undo::Snapshot;
 use super::kind::{CATEGORIES, Kind};
 use super::layout::Layout;
 use super::place::Rect;
+use super::presets::{self, PRESET_NAME, SavedPreset};
 
 pub const CVAR: &str = "hud_layout";
-/// 0 modern, 1 classic, 2 custom.
+/// 0 modern, 1 classic, 2 custom (or saved preset named by `hud_preset_name`).
 pub const PRESET: &str = "hud_preset";
 
 /// Dialog geometry, in menu units.
@@ -24,8 +28,28 @@ pub(super) const TITLE_H: f32 = 14.0;
 pub(super) const ROW: f32 = 11.0;
 pub(super) const LIST_ROWS: usize = 8;
 pub(super) const BTN_H: f32 = 14.0;
-/// Buttons, two to a row.
-pub(super) const BUTTONS: [&str; 4] = ["Add", "Delete", "Reset to Defaults", "Done"];
+/// Buttons across three rows: row 0 (2), row 1 (3), row 2 (2).
+pub(super) const BUTTONS: [&str; 7] = ["Add", "Delete", "Presets", "Save", "Save As", "Reset to Defaults", "Done"];
+
+pub(super) fn button_row_cols(row: usize) -> usize {
+    if row == 1 { 3 } else { 2 }
+}
+
+pub(super) fn button_index(row: usize, col: usize) -> usize {
+    match row {
+        0 => col.min(1),
+        1 => 2 + col.min(2),
+        _ => 5 + col.min(1),
+    }
+}
+
+pub(super) fn button_row_col(b: usize) -> (usize, usize) {
+    match b {
+        0 | 1 => (0, b),
+        2..=4 => (1, b - 2),
+        _ => (2, b.saturating_sub(5).min(1)),
+    }
+}
 /// Add Element tree and position grid popups.
 pub(super) const ADD_W: f32 = 150.0;
 pub(super) const CELL: (f32, f32) = (18.0, 13.0);
@@ -47,18 +71,25 @@ pub(super) enum AddRow {
 #[derive(Clone, Debug, PartialEq)]
 pub(super) enum Popup {
     Add { open: Vec<bool>, cursor: usize },
-    /// Anchor grid, cursor 0..9.
+    /// Picking the grid position for a newly added element, cursor 0..9.
+    AddPlace { kind: Kind, cursor: usize },
+    /// Anchor grid for the selected element, cursor 0..9.
     Grid(usize),
+    /// Preset picker: 0 modern, 1 classic, 2.. user-saved presets.
+    Presets { cursor: usize, confirm_delete: Option<usize> },
+    /// Typing a name to create a new preset (confirms before overwriting an existing user preset).
+    SaveAs { name: String, confirm_overwrite: bool },
 }
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Debug)]
 pub(super) enum Drag {
     Dialog((f32, f32)),
-    /// Element and the pointer's offset from its top left (HUD units).
-    Elem(usize, (f32, f32)),
-    /// Controller moving an element: index, original `(x, y)` for cancel, and
-    /// floating-point screen position in HUD units so stick motion stays smooth.
-    Pad { elem: usize, orig: (f32, f32), want: Option<(f32, f32)> },
+    /// Element, pointer offset from its top left (HUD units), press point (HUD units),
+    /// whether the pointer has actually dragged past the threshold, original rect and pre-drag state.
+    Elem { elem: usize, grab: (f32, f32), start: (f32, f32), moved: bool, origin: Rect, before: Snapshot },
+    /// Controller moving an element: index, original `(x, y)` for cancel, original rect,
+    /// floating-point screen position in HUD units, and pre-drag state.
+    Pad { elem: usize, orig: (f32, f32), origin: Rect, want: Option<(f32, f32)>, before: Snapshot },
 }
 
 /// Screen sizes: HUD and menu pixels per unit, the menu's centred origin,
@@ -75,17 +106,6 @@ pub(super) struct Geo {
     pub vh: f32,
 }
 
-/// Where the dialog's parts are (menu units, screen origin).
-pub(super) struct Dims {
-    pub x: f32,
-    pub y: f32,
-    pub list_y: f32,
-    pub btn_y: f32,
-    pub hdr_y: f32,
-    pub props_y: f32,
-    pub h: f32,
-}
-
 /// What a key or click asks of the menu.
 #[derive(Default)]
 pub struct Out {
@@ -99,10 +119,15 @@ pub(super) fn sound(s: &'static str) -> Out {
 
 #[derive(Default)]
 pub struct Editor {
-    /// Selected element (layout index).
-    pub sel: usize,
+    /// Actively selected element (layout index); None until the user picks one.
+    pub sel: Option<usize>,
     /// True when the last input came from a gamepad (keeps list/options navigation separated).
     pub pad_ui: bool,
+    /// Modifier keys synced by the host before `key()`.
+    pub ctrl: bool,
+    pub shift: bool,
+    /// Preview state shown while editing (Sample, Alert, Live).
+    pub preview: PreviewState,
     pub(super) cursor: usize,
     /// Column of the focused button.
     pub(super) button: usize,
@@ -117,24 +142,48 @@ pub struct Editor {
     pub(super) mouse: Option<(f32, f32)>,
     pub(super) rects: Vec<Rect>,
     pub(super) geo: Geo,
+    pub(super) undo_stack: Vec<Snapshot>,
+    pub(super) redo_stack: Vec<Snapshot>,
+    /// Active snap guide coordinates (vertical x lines, horizontal y lines) in HUD units.
+    pub(super) snap_guides: (Vec<f32>, Vec<f32>),
+    /// User-saved HUD presets loaded from `<user data>/hud_presets/`.
+    pub presets: Vec<SavedPreset>,
+    /// Override directory for presets persistence (empty path disables disk writes in unit tests).
+    pub(super) presets_path: Option<PathBuf>,
+    /// Name of the user-saved preset currently being edited (None for built-in modern/classic or unsaved custom).
+    pub editing_preset: Option<String>,
 }
 
 pub(super) fn layout(cv: &Cvars) -> Layout {
     Layout::parse(cv.by_name(CVAR).map_or("", |c| c.string.as_str()))
 }
 
-/// Writes the edited layout; it is now the custom preset.
+/// Writes the edited layout; it is now an unsaved custom layout.
 pub(super) fn save(cv: &mut Cvars, l: &Layout) {
     cv.set(CVAR, &l.to_text());
     cv.set(PRESET, "2");
+    cv.set(PRESET_NAME, "");
 }
 
 impl Editor {
-    /// Starts editing: the first element selected, popups closed.
-    pub fn open(&mut self) {
+    /// Starts editing: no element selected yet, popups and history reset.
+    /// Remembers which user-saved preset is active (built-ins are never overwritable).
+    pub fn open(&mut self, cv: &Cvars) {
         let pos = self.pos;
         let pad_ui = self.pad_ui;
-        *self = Editor { pos, pad_ui, geo: self.geo, ..Default::default() };
+        let presets_path = self.presets_path.clone();
+        let presets = match &presets_path {
+            Some(p) if p.as_os_str().is_empty() => std::mem::take(&mut self.presets),
+            Some(p) => presets::load_from(p),
+            None => presets::load(),
+        };
+        let editing_preset = if cv.value_of(PRESET) as i32 == 2 {
+            let name = cv.by_name(PRESET_NAME).map_or("", |c| c.string.trim());
+            presets::find(&presets, name).map(|p| p.name.clone())
+        } else {
+            None
+        };
+        *self = Editor { pos, pad_ui, geo: self.geo, presets, presets_path, editing_preset, ..Default::default() };
     }
 
     /// The frame's placement and screen, from the host.
@@ -151,26 +200,11 @@ impl Editor {
 
     pub(super) fn rows(&self, l: &Layout) -> Vec<Row> {
         let mut out: Vec<Row> = (0..l.elems.len()).map(Row::Elem).collect();
-        out.extend([Row::Buttons(0), Row::Buttons(1)]);
-        if let Some(e) = l.elems.get(self.sel) {
+        out.extend([Row::Buttons(0), Row::Buttons(1), Row::Buttons(2)]);
+        if let Some(e) = self.sel.and_then(|i| l.elems.get(i)) {
             out.extend(editor_rows::props(e.kind).into_iter().map(Row::Prop));
         }
         out
-    }
-
-    pub(super) fn dims(&self, nprops: usize) -> Dims {
-        let (x, y) = self.pos.unwrap_or((8.0, 8.0));
-        let list_y = y + TITLE_H + 2.0;
-        let btn_y = list_y + LIST_ROWS as f32 * ROW + 4.0;
-        let hdr_y = btn_y + 2.0 * BTN_H + 3.0 + 5.0;
-        let props_y = hdr_y + ROW + 1.0;
-        let h = if self.collapsed { TITLE_H } else { props_y + nprops as f32 * ROW + 4.0 - y };
-        Dims { x, y, list_y, btn_y, hdr_y, props_y, h }
-    }
-
-    /// Click target for the hamburger collapse/expand button in the title bar.
-    pub(super) fn toggle_rect(d: &Dims) -> Rect {
-        Rect { x: d.x + W - 18.0, y: d.y, w: 18.0, h: TITLE_H }
     }
 
     pub(super) fn toggle_collapse(&mut self) -> Out {
@@ -183,20 +217,26 @@ impl Editor {
         sound("misc/menu2.wav")
     }
 
-    pub(super) fn button_rect(d: &Dims, b: usize) -> Rect {
-        let bw = (W - 12.0) / 2.0;
-        Rect { x: d.x + 4.0 + (b % 2) as f32 * (bw + 4.0), y: d.btn_y + (b / 2) as f32 * (BTN_H + 3.0), w: bw, h: BTN_H }
-    }
-
-    fn clamp(&mut self, l: &Layout) {
-        self.sel = self.sel.min(l.elems.len().saturating_sub(1));
+    pub(super) fn clamp(&mut self, l: &Layout) {
+        if let Some(i) = self.sel {
+            if l.elems.is_empty() {
+                self.sel = None;
+            } else {
+                self.sel = Some(i.min(l.elems.len() - 1));
+            }
+        }
         let n = self.rows(l).len();
         self.cursor = self.cursor.min(n.saturating_sub(1));
         self.scroll = self.scroll.min(l.elems.len().saturating_sub(LIST_ROWS));
     }
 
     pub(super) fn select(&mut self, i: usize, l: &Layout) {
-        self.sel = i;
+        if l.elems.is_empty() {
+            self.sel = None;
+            return;
+        }
+        let i = i.min(l.elems.len() - 1);
+        self.sel = Some(i);
         self.cursor = i;
         if i < self.scroll {
             self.scroll = i;
@@ -213,8 +253,14 @@ impl Editor {
     }
 
     /// Moves the cursor a row; landing on an element selects it.
+    /// When no element is selected yet, the first arrow/D-pad/stick move selects one.
     /// With a gamepad, list and property navigation stay within their section.
     fn move_cursor(&mut self, dir: i32, l: &Layout) -> Out {
+        if self.sel.is_none() && !l.elems.is_empty() {
+            let i = if dir >= 0 { 0 } else { l.elems.len() - 1 };
+            self.select(i, l);
+            return sound("misc/menu1.wav");
+        }
         let rows = self.rows(l);
         if self.pad_ui {
             match rows.get(self.cursor).copied() {
@@ -243,6 +289,17 @@ impl Editor {
         sound("misc/menu1.wav")
     }
 
+    /// Quick-nudge the selected element with Shift+Arrows (records undo).
+    fn quick_nudge(&mut self, dx: f32, dy: f32, l: &mut Layout, cv: &mut Cvars) -> Out {
+        let Some(i) = self.sel else { return Out::default() };
+        let Some(e) = l.elems.get_mut(i) else { return Out::default() };
+        self.push_undo_now(cv);
+        e.x = (e.x + dx).round();
+        e.y = (e.y + dy).round();
+        save(cv, l);
+        sound("misc/menu1.wav")
+    }
+
     pub fn key(&mut self, key: i32, cv: &mut Cvars) -> Out {
         let mut l = layout(cv);
         self.clamp(&l);
@@ -252,18 +309,45 @@ impl Editor {
         if self.moving() {
             return self.pad_move_key(key, &mut l, cv);
         }
-        if key != K_MOUSE1 && key != K_BACK && !matches!(self.rows(&l).get(self.cursor), Some(Row::Buttons(1))) {
+        if key != K_MOUSE1 && key != K_BACK && !matches!(self.rows(&l).get(self.cursor), Some(Row::Buttons(2))) {
             self.confirm_reset = false;
         }
         if self.popup.is_some() {
             return self.popup_key(key, &mut l, cv);
         }
+        // Undo / Redo shortcuts (Ctrl+Z, Ctrl+Shift+Z, Ctrl+Y, and controller Right-Stick click)
+        if key == K_RTHUMB {
+            return self.undo(cv);
+        }
+        if self.ctrl && key == b'z' as i32 {
+            return if self.shift { self.redo(cv) } else { self.undo(cv) };
+        }
+        if self.ctrl && key == b'y' as i32 {
+            return self.redo(cv);
+        }
+        if key == K_LTHUMB {
+            self.preview = self.preview.next();
+            return sound("misc/menu1.wav");
+        }
         let row = self.rows(&l).get(self.cursor).copied();
+        // Shift+Arrow nudges the selected element cleanly from the list
+        if self.shift && self.sel.is_some() && matches!(row, Some(Row::Elem(_))) {
+            let step = if self.ctrl { 8.0 } else { 4.0 };
+            match key {
+                K_UPARROW | K_KP_UPARROW => return self.quick_nudge(0.0, -step, &mut l, cv),
+                K_DOWNARROW | K_KP_DOWNARROW => return self.quick_nudge(0.0, step, &mut l, cv),
+                K_LEFTARROW => return self.quick_nudge(-step, 0.0, &mut l, cv),
+                K_RIGHTARROW => return self.quick_nudge(step, 0.0, &mut l, cv),
+                _ => {}
+            }
+        }
         match key {
             K_ESCAPE => Out { sound: Some("misc/menu3.wav"), exit: true },
             K_BBUTTON => match row {
                 Some(Row::Prop(_) | Row::Buttons(_)) => {
-                    self.select(self.sel, &l);
+                    if let Some(i) = self.sel {
+                        self.select(i, &l);
+                    }
                     sound("misc/menu3.wav")
                 }
                 _ => Out { sound: Some("misc/menu3.wav"), exit: true },
@@ -271,7 +355,7 @@ impl Editor {
             K_MOUSE1 => self.click(&mut l, cv),
             K_MWHEELUP | K_MWHEELDOWN => {
                 let up = key == K_MWHEELUP;
-                let d = self.dims(0);
+                let d = self.dims(0, self.sel.is_some());
                 let over_list = !self.collapsed && self.mouse.is_some_and(|(_, my)| (d.list_y..d.list_y + LIST_ROWS as f32 * ROW).contains(&my));
                 if over_list {
                     self.scroll = if up { self.scroll.saturating_sub(1) } else { self.scroll + 1 };
@@ -286,8 +370,9 @@ impl Editor {
             K_LEFTARROW | K_DPAD_LEFT | K_RIGHTARROW | K_DPAD_RIGHT => {
                 let dir = if matches!(key, K_LEFTARROW | K_DPAD_LEFT) { -1 } else { 1 };
                 match row {
-                    Some(Row::Buttons(_)) => {
-                        self.button = 1 - self.button;
+                    Some(Row::Buttons(r)) => {
+                        let cols = button_row_cols(r) as i32;
+                        self.button = (self.button.min(cols as usize - 1) as i32 + dir).rem_euclid(cols) as usize;
                         sound("misc/menu1.wav")
                     }
                     Some(Row::Prop(Prop::Position)) => self.open_grid(&l),
@@ -296,21 +381,30 @@ impl Editor {
                 }
             }
             K_ABUTTON => match row {
-                Some(Row::Elem(_)) => self.start_move(&l),
-                Some(Row::Buttons(r)) => self.press(r * 2 + self.button, &mut l, cv),
+                Some(Row::Elem(_)) => {
+                    if self.sel.is_none() && !l.elems.is_empty() {
+                        self.select(0, &l);
+                        sound("misc/menu1.wav")
+                    } else {
+                        self.start_move(&l, cv)
+                    }
+                }
+                Some(Row::Buttons(r)) => self.press(button_index(r, self.button), &mut l, cv),
                 Some(Row::Prop(p @ (Prop::X | Prop::Y))) => self.step(p, 1, &mut l, cv),
                 Some(Row::Prop(p)) => self.activate(p, 1, &mut l, cv),
                 None => Out::default(),
             },
             K_ENTER | K_KP_ENTER => match row {
                 Some(Row::Elem(_)) => self.focus_props(&l),
-                Some(Row::Buttons(r)) => self.press(r * 2 + self.button, &mut l, cv),
+                Some(Row::Buttons(r)) => self.press(button_index(r, self.button), &mut l, cv),
                 Some(Row::Prop(p)) => self.activate(p, 1, &mut l, cv),
                 None => Out::default(),
             },
             K_XBUTTON => match row {
                 Some(Row::Prop(_)) => {
-                    self.select(self.sel, &l);
+                    if let Some(i) = self.sel {
+                        self.select(i, &l);
+                    }
                     sound("misc/menu1.wav")
                 }
                 _ => self.focus_props(&l),
@@ -323,70 +417,16 @@ impl Editor {
             K_RSHOULDER => self.toggle_collapse(),
             K_BACK => {
                 self.collapsed = false;
-                self.press(2, &mut l, cv)
+                self.press(5, &mut l, cv)
             }
-            K_START => self.press(3, &mut l, cv),
+            K_START => self.press(6, &mut l, cv),
             K_LTRIGGER | K_RTRIGGER => self.scale_selected(if key == K_LTRIGGER { -1 } else { 1 }, &mut l, cv),
             _ => Out::default(),
         }
     }
 
-    /// Typed text: digits and a minus sign for a coordinate.
-    pub fn text(&mut self, ch: char) {
-        if let Some((_, s)) = &mut self.typing
-            && (ch.is_ascii_digit() || (ch == '-' && s.is_empty()))
-            && s.len() < 6
-        {
-            s.push(ch);
-        }
-    }
-
-    fn type_key(&mut self, key: i32, (p, mut s): (Prop, String), l: &mut Layout, cv: &mut Cvars) -> Out {
-        match key {
-            K_BACKSPACE | K_XBUTTON => {
-                s.pop();
-                self.typing = Some((p, s));
-                Out::default()
-            }
-            K_ESCAPE | K_BBUTTON => sound("misc/menu3.wav"),
-            K_ENTER | K_KP_ENTER | K_ABUTTON | K_MOUSE1 => {
-                if let (Ok(v), Some(e)) = (s.parse::<f32>(), l.elems.get_mut(self.sel)) {
-                    if p == Prop::X { e.x = v } else { e.y = v }
-                    save(cv, l);
-                }
-                if key == K_MOUSE1 {
-                    return self.key(key, cv);
-                }
-                sound("misc/menu2.wav")
-            }
-            _ => {
-                self.typing = Some((p, s));
-                Out::default()
-            }
-        }
-    }
-
-    pub(super) fn step(&mut self, p: Prop, dir: i32, l: &mut Layout, cv: &mut Cvars) -> Out {
-        let Some(e) = l.elems.get_mut(self.sel) else { return Out::default() };
-        if editor_rows::step(p, e, cv, dir) {
-            save(cv, l);
-        }
-        sound("misc/menu3.wav")
-    }
-
-    /// Enter or a click on a property row.
-    pub(super) fn activate(&mut self, p: Prop, dir: i32, l: &mut Layout, cv: &mut Cvars) -> Out {
-        match p {
-            Prop::Position => self.open_grid(l),
-            Prop::X | Prop::Y => {
-                self.typing = Some((p, String::new()));
-                sound("misc/menu2.wav")
-            }
-            _ => self.step(p, dir, l, cv),
-        }
-    }
-
-    /// Button `b`: 0 Add, 1 Delete, 2 Reset to Defaults, 3 Done.
+    /// Button `b`: 0 Add, 1 Delete, 2 Presets, 3 Save (current user preset), 4 Save As (new preset),
+    /// 5 Reset to Defaults, 6 Done.
     pub(super) fn press(&mut self, b: usize, l: &mut Layout, cv: &mut Cvars) -> Out {
         match b {
             0 => {
@@ -394,24 +434,42 @@ impl Editor {
                 sound("misc/menu2.wav")
             }
             1 => {
-                if l.elems.get(self.sel).is_none_or(|e| e.kind.permanent()) {
+                let Some(sel) = self.sel else { return sound("misc/menu3.wav") };
+                if l.elems.get(sel).is_none_or(|e| e.kind.permanent()) {
                     return sound("misc/menu3.wav");
                 }
-                l.elems.remove(self.sel);
+                self.push_undo_now(cv);
+                l.elems.remove(sel);
                 save(cv, l);
                 let row = self.cursor;
                 self.clamp(l);
-                if row < l.elems.len() {
-                    self.select(self.sel, l);
+                if row < l.elems.len()
+                    && let Some(i) = self.sel
+                {
+                    self.select(i, l);
                 }
                 sound("misc/menu2.wav")
             }
             2 => {
+                self.popup = Some(Popup::Presets { cursor: 0, confirm_delete: None });
+                sound("misc/menu2.wav")
+            }
+            3 => self.save_current_preset(l, cv),
+            4 => {
+                let name = presets::next_variant_name(&self.presets, self.editing_preset.as_deref());
+                self.popup = Some(Popup::SaveAs { name, confirm_overwrite: false });
+                sound("misc/menu2.wav")
+            }
+            5 => {
                 if self.confirm_reset {
+                    self.push_undo_now(cv);
                     cv.set(CVAR, "default");
                     cv.set(PRESET, "0");
+                    cv.set(PRESET_NAME, "");
+                    self.editing_preset = None;
                     self.confirm_reset = false;
-                    self.sel = 0;
+                    self.sel = None;
+                    self.cursor = 0;
                 } else {
                     self.confirm_reset = true;
                 }
@@ -421,12 +479,19 @@ impl Editor {
         }
     }
 
-    /// The element being dragged (the host keeps it where the pointer is).
-    pub fn dragging(&self) -> Option<usize> {
-        match self.drag {
-            Some(Drag::Elem(i, _)) | Some(Drag::Pad { elem: i, .. }) => Some(i),
+    /// The element being actively dragged and its pre-drag rectangle (for reflow placement
+    /// and hiding the dialog). A plain click without dragging does not trigger this.
+    pub fn drag_info(&self) -> Option<(usize, Rect)> {
+        match &self.drag {
+            Some(Drag::Elem { elem, moved: true, origin, .. }) | Some(Drag::Pad { elem, origin, .. }) => Some((*elem, *origin)),
             _ => None,
         }
+    }
+
+    /// The element being dragged (for tests).
+    #[cfg(test)]
+    pub fn dragging(&self) -> Option<usize> {
+        self.drag_info().map(|(i, _)| i)
     }
 }
 

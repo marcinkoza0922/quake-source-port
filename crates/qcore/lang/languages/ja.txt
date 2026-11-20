@@ -1196,9 +1196,6 @@ ja 高
 @ huge
 ja 特大
 
-@ immersive
-ja 没入型
-
 @ intense
 ja 強烈
 
@@ -1605,6 +1602,30 @@ ja ステータスバー
 @ Visibility
 ja 表示
 
+@ Alert
+ja 警告
+
+@ Live
+ja 実戦
+
+@ Sample
+ja 見本
+
+@ Undo
+ja 元に戻す
+
+@ Presets
+ja プリセット
+
+@ Save As
+ja 別名で保存
+
+@ appear on change
+ja 変化時のみ
+
+@ hidden
+ja 非表示
+
 @ big numbers
 ja 大きな数字
 
@@ -1907,8 +1928,8 @@ ja 水中での画面のゆがみ方。クラシックはソフトウェア版Qu
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 ja 手ぶれを隠すため、毎秒この角度より遅いジャイロ回転を無視します
 
-@ Immersive: appears for a few seconds only when its value changes
-ja 没入型：値が変化したときだけ数秒間表示されます
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+ja 変化時のみ：値が変わったときだけ数秒間表示。非表示：削除せずに隠す
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ja 急な角度で見た床や壁のテクスチャを鮮明に保ちます

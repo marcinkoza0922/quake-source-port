@@ -441,6 +441,9 @@ impl Menu {
     /// The cursor is on a text row, which takes typed characters (the host
     /// then turns on text input).
     pub fn wants_text(&self) -> bool {
+        if self.screen == Screen::HudEditor {
+            return self.osk.is_none() && self.hud_edit.wants_text();
+        }
         let Screen::OptionsPage(p) = self.screen else { return false };
         self.drop.is_none() && self.osk.is_none() && self.prompt.is_none() && matches!(self.page_item(p, self.opt_cursor), Item::Text { .. })
     }

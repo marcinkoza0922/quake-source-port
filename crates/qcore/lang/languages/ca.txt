@@ -1196,9 +1196,6 @@ ca alta
 @ huge
 ca enorme
 
-@ immersive
-ca immersiu
-
 @ intense
 ca intens
 
@@ -1605,6 +1602,30 @@ ca Barra d'estat
 @ Visibility
 ca Visibilitat
 
+@ Alert
+ca Alerta
+
+@ Live
+ca En directe
+
+@ Sample
+ca Mostra
+
+@ Undo
+ca Desfer
+
+@ Presets
+ca Predefinits
+
+@ Save As
+ca Anomena i desa
+
+@ appear on change
+ca en canviar
+
+@ hidden
+ca ocult
+
 @ big numbers
 ca xifres grans
 
@@ -1907,8 +1928,8 @@ ca Com es distorsiona la vista sota l'aigua: clàssic ondula tota la pantalla co
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 ca Ignora les rotacions del giroscopi més lentes que aquests graus per segon, per amagar el tremolor de la mà
 
-@ Immersive: appears for a few seconds only when its value changes
-ca Immersiu: apareix uns segons només quan canvia el seu valor
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+ca En canviar: apareix breument només quan canvia el valor; ocult: amaga sense eliminar
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 ca Manté nítides les textures de terres i parets vistes en angles molt inclinats

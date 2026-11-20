@@ -66,20 +66,35 @@ impl Host {
         self.hud.reserve_bottom(Canvas::new(w, h).vh())
     }
 
-    /// Picking the modern or classic preset rebuilds the layout from it.
+    /// Picking modern, classic or a saved HUD preset rebuilds the layout from it.
     fn hud_preset(&mut self) {
         if !self.cbuf.is_empty() {
             return;
         }
         let p = self.cv(PRESET);
+        let name = self.cvs(crate::hud::presets::PRESET_NAME).trim().to_string();
         if self.hud.preset.is_some_and(|old| old != p) {
             match p as i32 {
-                0 => self.server.core.cvars.set(CVAR, "default"),
-                1 => self.server.core.cvars.set(CVAR, "classic"),
-                _ => None,
-            };
+                0 => {
+                    self.server.core.cvars.set(CVAR, "default");
+                    self.server.core.cvars.set(crate::hud::presets::PRESET_NAME, "");
+                }
+                1 => {
+                    self.server.core.cvars.set(CVAR, "classic");
+                    self.server.core.cvars.set(crate::hud::presets::PRESET_NAME, "");
+                }
+                _ => {}
+            }
+        } else if p as i32 == 2
+            && self.hud.preset_name.as_deref().is_some_and(|old| old != name)
+            && !name.is_empty()
+            && let Some(saved) = crate::hud::presets::find(&self.menu.hud_edit.presets, &name)
+        {
+            let layout = saved.layout.clone();
+            self.server.core.cvars.set(CVAR, &layout);
         }
         self.hud.preset = Some(p);
+        self.hud.preset_name = Some(self.cvs(crate::hud::presets::PRESET_NAME).trim().to_string());
     }
 
     /// Reads `hud_layout`; empty (first run), "default" or "classic" (the
@@ -145,10 +160,17 @@ impl Host {
         let edit = self.menu.screen == crate::menu::Screen::HudEditor;
         let (vw, vh) = (c.vw(), c.vh());
         let s = sizes(c, &self.hud.layout, &room);
-        let edited = self.menu.hud_edit.dragging().unwrap_or(self.menu.hud_edit.sel);
-        self.hud.place(s, vw, vh, edit.then_some(edited));
+        let drag_info = edit.then(|| self.menu.hud_edit.drag_info()).flatten();
+        if let Some((drag_idx, origin)) = drag_info {
+            self.hud.place_drag(s, vw, vh, drag_idx, origin);
+        } else {
+            let edited = edit.then_some(self.menu.hud_edit.sel).flatten();
+            self.hud.place(s, vw, vh, edited);
+        }
         if edit {
-            if let Some(l) = self.hud.settled(vw, vh) {
+            if drag_info.is_none()
+                && let Some(l) = self.hud.settled(vw, vh)
+            {
                 let t = l.to_text();
                 self.server.core.cvars.set(CVAR, &t);
                 self.hud.sync(&t);
@@ -159,6 +181,15 @@ impl Host {
         let place = |k| self.hud.rect_of(k).map(|(e, r)| MsgPlace::of(e, r)).unwrap_or_default();
         (self.con.center_place, self.con.notify_place) = (place(Kind::Center), place(Kind::Notify));
         let want_pb = edit || self.hud.layout.elems.iter().any(|e| e.kind == Kind::Pb);
+        let sample = if edit {
+            match self.menu.hud_edit.preview {
+                crate::hud::PreviewState::Sample => Some(crate::hud::sample_client(&self.cl)),
+                crate::hud::PreviewState::Alert => Some(crate::hud::alert_client(&self.cl)),
+                crate::hud::PreviewState::Live => None,
+            }
+        } else {
+            None
+        };
         HudFrame {
             room,
             edit,
@@ -166,7 +197,7 @@ impl Host {
             metrics: self.metric_values(),
             pb_full: self.cv("hud_pb_100") != 0.0,
             pb_color: crate::reticle::color_of(&self.server.core.cvars, "hud_pb_color"),
-            sample: edit.then(|| crate::hud::sample_client(&self.cl)),
+            sample,
         }
     }
 

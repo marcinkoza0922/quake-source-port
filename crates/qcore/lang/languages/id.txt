@@ -1196,9 +1196,6 @@ id tinggi
 @ huge
 id raksasa
 
-@ immersive
-id imersif
-
 @ intense
 id intens
 
@@ -1605,6 +1602,30 @@ id Bilah Status
 @ Visibility
 id Visibilitas
 
+@ Alert
+id Peringatan
+
+@ Live
+id Langsung
+
+@ Sample
+id Contoh
+
+@ Undo
+id Urungkan
+
+@ Presets
+id Prasetel
+
+@ Save As
+id Simpan Sebagai
+
+@ appear on change
+id saat berubah
+
+@ hidden
+id tersembunyi
+
 @ big numbers
 id angka besar
 
@@ -1907,8 +1928,8 @@ id Cara pandangan terdistorsi di bawah air: Klasik membuat seluruh layar beriak 
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 id Abaikan rotasi giroskop yang lebih lambat dari sekian derajat per detik, untuk menyamarkan getaran tangan
 
-@ Immersive: appears for a few seconds only when its value changes
-id Imersif: muncul beberapa detik hanya saat nilainya berubah
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+id Saat berubah: muncul sebentar hanya saat nilainya berubah; tersembunyi: sembunyikan tanpa menghapus
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 id Menjaga tekstur tetap tajam pada lantai dan dinding yang terlihat dari sudut curam

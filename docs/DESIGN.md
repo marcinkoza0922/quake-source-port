@@ -59,7 +59,7 @@ The HUD is a free layout of elements (`src/hud.rs`, `src/hud/`), kept in the arc
 `hud_layout` cvar and edited in Options → HUD → Edit HUD (`menu_hudedit` opens it). The
 text form is one token per element, separated by spaces: `kind@anchor` plus `,<key><value>`
 fields that differ from the kind's defaults (`x`/`y` offset, `s` scale, `o` opacity, `f`
-font b/q/m, `z` size, `i` immersive, `g` background, `t`/`k` text and label colour as a
+font b/q/m, `z` size, `i` appear on change, `h` hidden, `g` background, `t`/`k` text and label colour as a
 crosshair palette index (255, the default, keeps the element's own colours), `a`/`b` kind
 options, `l` bar length),
 e.g. `health@bl,a0 clock@tr,a3,fm`. Unknown kinds and fields are skipped (`layout.rs`).
@@ -85,39 +85,60 @@ e.g. `health@bl,a0 clock@tr,a3,fm`. Unknown kinds and fields are skipped (`layou
   plus enabled add-ons), so a layout that fits stays fitting in play. Elements never
   overlap: `place_all` places them in list order and moves one that would overlap an
   earlier one to the nearest free spot on screen (candidates line up with the wish, the
-  screen edges or another element's edges). The result is cached per layout, sizes and
-  screen. A full-width status bar touching the bottom makes the 3D view end above it
-  (`reserve_bottom` → `View::reserve_bottom`).
-- **Editor** (`editor.rs`, `editor_mouse.rs`, `editor_pad.rs`, `editor_rows.rs`, `editor_popup.rs`, `editor_draw.rs`): a
+  screen edges or another element's edges). During an active drag in the editor,
+  `place_drag` gives the dragged element priority and reflows displaced siblings out of
+  the way (swapping siblings toward the dragged element's vacated slot, and springing
+  unrelated elements back once dragged past; `snap_rect` adds gentle 3-unit snapping and
+  alignment guides). `stack_new` stacks newly added elements below existing ones at
+  top/middle anchors and above them at bottom anchors. The result is cached per layout,
+  sizes and screen. A full-width status bar touching the bottom makes the 3D view end
+  above it (`reserve_bottom` → `View::reserve_bottom`).
+- **Editor** (`editor.rs`, `editor_mouse.rs`, `editor_pad.rs`, `editor_rows.rs`, `editor_popup.rs`, `editor_draw.rs`, `editor_undo.rs`): a
   dialog that can be dragged by its title bar and collapsed to a single title bar via the
-  hamburger button in the top-right corner (or RB on a controller). The element list and
-  selected element's config options panels use distinct background tints. It lists every
-  element with scale and offset, buttons (Add, Delete, Reset to Defaults with a confirm,
-  Done), and the selected element's settings: font, size, scale, opacity, visibility,
-  background, text colour (values and numbers, tinting the big digit pictures; alerts stay
-  red, owned ammo types gold; the personal best keeps `hud_pb_color`), label colour
-  ("FPS", "K", ...), the position button (a 3×3 grid that snaps to an anchor with no
-  offset), X and Y (typed or stepped) and the kind's options, with help under the dialog.
-  Elements on screen can be clicked and dragged. While editing, the HUD is a preview with
-  a sample player (`sample_client`), the selected element gives way when elements would
-  overlap, and the settled offsets are written back (`Hud::settled`), so the dialog shows
-  where things really are. Keyboard: arrows move and step, Enter acts, Esc leaves, Del
-  deletes, Ins adds. Controller: left stick / D-pad navigates the element list (or config
-  options); A selects an element to move it on screen with the left stick or D-pad (A
-  confirms, B cancels); X toggles into/out of the element's config options; right stick
-  moves the editor panel; Y adds, LB deletes, RB collapses/expands, LT/RT scales,
-  View/Back resets (with confirm), Menu/Start finishes, and B backs out/exits; when using a
-  controller, button glyphs draw directly on the dialog buttons, title-bar collapse toggle,
-  and options header, with a single-row gamepad hint bar along the bottom.
-- **Presets**: HUD → HUD Preset (`hud_preset`, archived: 0 modern, default; 1 classic;
-  2 custom), above Edit HUD. Picking modern or classic sets `hud_layout` to `default` or
-  `classic`, which the host turns into that layout (`Layout::default_layout`, the old
-  modern defaults; `classic_layout`, a full-width status bar and the messages). Any change
-  the editor saves sets custom; its Reset to Defaults sets modern. The host acts on a
-  changed `hud_preset` only once the configs have run (`Host::hud_preset`), and once at
-  startup checks the saved layout against its preset: a different one makes it custom
-  (layouts saved before presets existed). ironwail's `hudstyle 0` picks classic, and
-  `hudstyle 1`/`2` picks modern only from classic, so a custom HUD stays.
+  hamburger button in the top-right corner (or RB on a controller), with title-bar buttons
+  for Undo and Preview state (`Sample`, `Alert` low-health/low-ammo, `Live`). On open no
+  element is selected and the Element Config panel stays hidden until the user actively
+  selects an element with the mouse or D-pad/left stick (clicking empty screen space
+  deselects). The Element List (deep slate) and Element Config panel (distinct warm bronze
+  card with a framed element header) are visually separated. Adding an element from the
+  category tree immediately opens a 3×3 grid prompt pre-highlighted at the kind's sane
+  default anchor (`Kind::default_anchor`: e.g. Health/Armor bottom-left, Ammo/Weapons
+  bottom-right, Status Bar bottom-center, FPS/Time & Stats/Automap top-right) and stacks
+  below/above existing elements at that anchor. Element settings include font, size, scale,
+  opacity, visibility (`always` / `appear on change` `,i` / `hidden` `,h`), background,
+  text colour, label colour, a styled Position grid button (showing the anchor name when at
+  its default offset and `(x, y)` once moved), X and Y (typed or stepped), and kind-specific
+  options. While dragging an element on screen (mouse or controller Move mode), the dialog
+  hides completely until release while showing snap/alignment guides and a ghost outline of
+  the starting slot. Undo/Redo (`editor_undo.rs`) is bound to `Ctrl+Z` / `Ctrl+Shift+Z` /
+  `Ctrl+Y`, title-bar Undo, and controller Right-Stick click (`K_RTHUMB`); Left-Stick click
+  (`K_LTHUMB`) cycles the preview state; `Shift+Arrows` quick-nudges the selected element.
+  Controller: left stick / D-pad navigates the element list (or config options); A selects
+  an element to move it on screen with the left stick or D-pad (A confirms, B cancels); X
+  toggles into/out of the element's config options; right stick moves the editor panel; Y
+  adds, LB deletes, RB collapses/expands, LT/RT scales, View/Back resets (with confirm),
+  Menu/Start finishes, and B backs out/exits; button glyphs draw directly on the dialog
+  buttons, title-bar collapse toggle, and options header, with a single-row gamepad hint bar.
+- **Presets** (`presets.rs`): HUD → HUD Preset (`Item::HudPreset`, backed by archived
+  `hud_preset` 0 modern / 1 classic / 2 custom and `hud_preset_name`), above Edit HUD.
+  Picking modern or classic sets `hud_layout` to `default` or `classic`, which the host
+  turns into that layout (`Layout::default_layout`, the old modern defaults;
+  `classic_layout`, a full-width status bar and the messages). User-saved presets live as
+  individual named files in `<user data>/hud_presets/<name>.hud` (`userdata::hud_presets_dir`,
+  shared across all games and mods). In the HUD Editor, **Save** updates the active user-saved
+  preset in place (disabled for built-in `modern`/`classic` foundations or when unchanged),
+  **Save As** creates a new named preset (pre-filling a fresh variant name, rejecting built-in
+  names, confirming before overwriting an existing user preset, with controller OSK via Y), and
+  **Presets** loads built-ins or user presets and exposes a framed **Delete** → **Confirm**
+  button on user presets only. Saved presets also appear in Options → HUD → **HUD Preset** and
+  can be managed via `hud_preset_save`, `hud_preset_load`, `hud_preset_delete`, and
+  `hud_preset_list`. Any
+  edit in the editor clears `hud_preset_name` and sets custom; Reset to Defaults sets
+  modern. The host acts on a changed `hud_preset` / `hud_preset_name` only once the
+  configs have run (`Host::hud_preset`), and once at startup checks the saved layout
+  against its preset: a different one makes it custom (layouts saved before presets
+  existed). ironwail's `hudstyle 0` picks classic, and `hudstyle 1`/`2` picks modern only
+  from classic, so a custom HUD stays.
 - **First run**: an empty `hud_layout` becomes the layout the old settings describe
   (`Layout::from_legacy`: `scr_hudstyle`, `hud_<elem>` modes and `_pos` anchors,
   `hud_face`, Time & Stats, `scr_show*` metrics, `scr_centerpos`, `con_notifypos`,

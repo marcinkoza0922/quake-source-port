@@ -1196,9 +1196,6 @@ cy uchel
 @ huge
 cy enfawr
 
-@ immersive
-cy trochol
-
 @ intense
 cy dwys
 
@@ -1605,6 +1602,30 @@ cy Bar statws
 @ Visibility
 cy Gwelededd
 
+@ Alert
+cy Rhybudd
+
+@ Live
+cy Byw
+
+@ Sample
+cy Sampl
+
+@ Undo
+cy Dadwneud
+
+@ Presets
+cy Rhagosodiadau
+
+@ Save As
+cy Cadw fel
+
+@ appear on change
+cy ar newid
+
+@ hidden
+cy cudd
+
 @ big numbers
 cy rhifau mawr
 
@@ -1907,8 +1928,8 @@ cy Sut mae'r olwg yn ystumio o dan y dŵr: mae Clasurol yn crychu'r sgrin gyfan 
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 cy Anwybyddu cylchdro gyro sy'n arafach na hyn o raddau yr eiliad, i guddio cryndod llaw
 
-@ Immersive: appears for a few seconds only when its value changes
-cy Trochol: yn ymddangos am ychydig eiliadau dim ond pan fydd ei werth yn newid
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+cy Ar newid: yn ymddangos am ychydig eiliadau pan newidia'r gwerth yn unig; cudd: yn cuddio heb dynnu
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 cy Cadw gweadau'n finiog ar loriau a waliau a welir ar onglau serth

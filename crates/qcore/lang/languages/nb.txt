@@ -1196,9 +1196,6 @@ nb høy
 @ huge
 nb enorm
 
-@ immersive
-nb oppslukende
-
 @ intense
 nb intens
 
@@ -1605,6 +1602,30 @@ nb Statuslinje
 @ Visibility
 nb Synlighet
 
+@ Alert
+nb Varsel
+
+@ Live
+nb Direkte
+
+@ Sample
+nb Eksempel
+
+@ Undo
+nb Angre
+
+@ Presets
+nb Forhåndsvalg
+
+@ Save As
+nb Lagre som
+
+@ appear on change
+nb ved endring
+
+@ hidden
+nb skjult
+
 @ big numbers
 nb store tall
 
@@ -1907,8 +1928,8 @@ nb Hvordan visningen forvrenges under vann: Klassisk bølger hele skjermen som p
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 nb Ignorerer gyrorotasjon langsommere enn så mange grader per sekund, for å skjule skjelvende hender
 
-@ Immersive: appears for a few seconds only when its value changes
-nb Oppslukende: vises i noen sekunder kun når verdien endres
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+nb Ved endring: vises kort bare når verdien endres; skjult: skjuler uten å fjerne
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 nb Holder teksturer skarpe på gulv og vegger sett fra skrå vinkler

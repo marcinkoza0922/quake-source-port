@@ -1196,9 +1196,6 @@ th สูง
 @ huge
 th ใหญ่​มาก
 
-@ immersive
-th สมจริง
-
 @ intense
 th เข้มข้น
 
@@ -1605,6 +1602,30 @@ th แถบ​สถานะ
 @ Visibility
 th การ​มองเห็น
 
+@ Alert
+th เตือน​ภัย
+
+@ Live
+th สด
+
+@ Sample
+th ตัว​อย่าง
+
+@ Undo
+th เลิก​ทำ
+
+@ Presets
+th พรีเซ็ต
+
+@ Save As
+th บันทึก​เป็น
+
+@ appear on change
+th เมื่อ​เปลี่ยน
+
+@ hidden
+th ซ่อน
+
 @ big numbers
 th ตัวเลข​ใหญ่
 
@@ -1907,8 +1928,8 @@ th ภาพ​บิด​เบี้ยว​ใต้​น้ำ​อย�
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 th ไม่​สนใจ​การ​หมุน​ไจโร​ที่​ช้า​กว่า​องศา​ต่อ​วินาที​นี้ เพื่อ​ซ่อน​อาการ​มือ​สั่น
 
-@ Immersive: appears for a few seconds only when its value changes
-th สมจริง: ปรากฏ​ไม่​กี่​วินาที​เฉพาะ​เมื่อ​ค่า​เปลี่ยน
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+th เมื่อ​เปลี่ยน: แสดง​ชั่ว​ครู่​เฉพาะ​เมื่อ​ค่า​เปลี่ยน; ซ่อน: ซ่อน​โดย​ไม่​ลบ
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 th ทำให้​เท็กซ์เจอร์​บน​พื้น​และ​ผนัง​ที่​มอง​จาก​มุม​ชัน​คม​ชัด

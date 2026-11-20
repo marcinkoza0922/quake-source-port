@@ -1196,9 +1196,6 @@ zh-TW 高
 @ huge
 zh-TW 特大
 
-@ immersive
-zh-TW 沉浸
-
 @ intense
 zh-TW 強烈
 
@@ -1605,6 +1602,30 @@ zh-TW 狀態列
 @ Visibility
 zh-TW 可見度
 
+@ Alert
+zh-TW 警報
+
+@ Live
+zh-TW 即時
+
+@ Sample
+zh-TW 範例
+
+@ Undo
+zh-TW 復原
+
+@ Presets
+zh-TW 預設
+
+@ Save As
+zh-TW 另存新檔
+
+@ appear on change
+zh-TW 變動時顯示
+
+@ hidden
+zh-TW 隱藏
+
 @ big numbers
 zh-TW 大數字
 
@@ -1907,8 +1928,8 @@ zh-TW 水下畫面的扭曲方式：經典會像軟體版Quake一樣讓整個畫
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 zh-TW 忽略低於每秒此度數的陀螺儀轉動，以消除手部顫抖
 
-@ Immersive: appears for a few seconds only when its value changes
-zh-TW 沉浸：只在數值變化時顯示幾秒
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+zh-TW 變動時顯示：僅在數值變動時短暫顯示；隱藏：不刪除但隱藏
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 zh-TW 讓以斜角觀看的地板與牆面材質保持清晰

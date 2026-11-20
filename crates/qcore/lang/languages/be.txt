@@ -1196,9 +1196,6 @@ be высокая
 @ huge
 be велізарны
 
-@ immersive
-be апусканне
-
 @ intense
 be моцны
 
@@ -1605,6 +1602,30 @@ be Радок стану
 @ Visibility
 be Бачнасць
 
+@ Alert
+be Трывога
+
+@ Live
+be У гульні
+
+@ Sample
+be Узор
+
+@ Undo
+be Адмяніць
+
+@ Presets
+be Прэсеты
+
+@ Save As
+be Захаваць як
+
+@ appear on change
+be пры змене
+
+@ hidden
+be схавана
+
 @ big numbers
 be вялікія лічбы
 
@@ -1907,8 +1928,8 @@ be Як скажаецца агляд пад вадой: класічны кал
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 be Ігнаруе кручэнне гіраскопа, павольнейшае за гэтую колькасць градусаў у секунду, каб схаваць дрыжанне рук
 
-@ Immersive: appears for a few seconds only when its value changes
-be Апусканне: з’яўляецца на некалькі секунд толькі пры змене значэння
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+be Пры змене: з'яўляецца ненадоўга толькі пры змене значэння; схавана: хавае без выдалення
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 be Захоўвае выразнасць тэкстур падлогі і сцен, бачных пад вострым вуглом

@@ -1196,9 +1196,6 @@ hi उच्च
 @ huge
 hi विशाल
 
-@ immersive
-hi इमर्सिव
-
 @ intense
 hi तीव्र
 
@@ -1605,6 +1602,30 @@ hi स्थिति पट्टी
 @ Visibility
 hi दृश्यता
 
+@ Alert
+hi चेतावनी
+
+@ Live
+hi लाइव
+
+@ Sample
+hi नमूना
+
+@ Undo
+hi पूर्ववत
+
+@ Presets
+hi प्रीसेट
+
+@ Save As
+hi इस रूप में सहेजें
+
+@ appear on change
+hi बदलने पर
+
+@ hidden
+hi छिपा हुआ
+
 @ big numbers
 hi बड़े अंक
 
@@ -1907,8 +1928,8 @@ hi पानी के नीचे दृश्य कैसे विकृत
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 hi हाथ की कँपकँपी छिपाने के लिए इतने डिग्री प्रति सेकंड से धीमे जाइरो घुमाव को अनदेखा करता है
 
-@ Immersive: appears for a few seconds only when its value changes
-hi इमर्सिव: केवल मान बदलने पर कुछ सेकंड के लिए दिखता है
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+hi बदलने पर: मान बदलने पर ही कुछ सेकंड के लिए दिखता है; छिपा हुआ: हटाए बिना छिपाता है
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 hi तिरछे कोण से दिखने वाले फ़र्श और दीवारों पर टेक्सचर तीखे रखता है

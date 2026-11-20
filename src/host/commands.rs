@@ -155,7 +155,88 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("menu_quit", |h, _| h.menu.open(Screen::Quit));
     c.add("menu_hudedit", |h, _| {
         h.menu.open(Screen::HudEditor);
-        h.menu.hud_edit.open();
+        h.menu.hud_edit.open(&h.server.core.cvars);
+    });
+    c.add("hud_preset_save", |h, a| {
+        let name = a.args().trim();
+        if name.is_empty() {
+            h.print("usage: hud_preset_save <name>\n");
+            return;
+        }
+        let layout = h.cvs(crate::hud::editor::CVAR).trim().to_string();
+        let layout = if matches!(layout.as_str(), "" | "default" | "classic") {
+            h.hud.layout.to_text()
+        } else {
+            layout
+        };
+        if let Some(i) = crate::hud::presets::upsert(&mut h.menu.hud_edit.presets, name, &layout) {
+            let saved = h.menu.hud_edit.presets[i].clone();
+            if let Err(e) = crate::hud::presets::write_one(&saved) {
+                h.print(&format!("couldn't save HUD preset: {e}\n"));
+            }
+            h.server.core.cvars.set(crate::hud::editor::PRESET, "2");
+            h.server.core.cvars.set(crate::hud::presets::PRESET_NAME, &saved.name);
+            h.menu.hud_edit.editing_preset = Some(saved.name.clone());
+            h.print(&format!("Saved HUD preset \"{}\"\n", saved.name));
+        } else {
+            h.print("Invalid or reserved HUD preset name\n");
+        }
+    });
+    c.add("hud_preset_load", |h, a| {
+        let name = a.args().trim();
+        if name.is_empty() {
+            h.print("usage: hud_preset_load <name>\n");
+            return;
+        }
+        if name.eq_ignore_ascii_case("modern") || name.eq_ignore_ascii_case("default") {
+            h.server.core.cvars.set(crate::hud::editor::CVAR, "default");
+            h.server.core.cvars.set(crate::hud::editor::PRESET, "0");
+            h.server.core.cvars.set(crate::hud::presets::PRESET_NAME, "");
+        } else if name.eq_ignore_ascii_case("classic") {
+            h.server.core.cvars.set(crate::hud::editor::CVAR, "classic");
+            h.server.core.cvars.set(crate::hud::editor::PRESET, "1");
+            h.server.core.cvars.set(crate::hud::presets::PRESET_NAME, "");
+        } else if let Some(p) = crate::hud::presets::find(&h.menu.hud_edit.presets, name).cloned() {
+            h.server.core.cvars.set(crate::hud::editor::CVAR, &p.layout);
+            h.server.core.cvars.set(crate::hud::editor::PRESET, "2");
+            h.server.core.cvars.set(crate::hud::presets::PRESET_NAME, &p.name);
+        } else {
+            h.print(&format!("Unknown HUD preset \"{name}\"\n"));
+        }
+    });
+    c.add("hud_preset_delete", |h, a| {
+        let name = a.args().trim();
+        if name.is_empty() {
+            h.print("usage: hud_preset_delete <name>\n");
+            return;
+        }
+        if crate::hud::presets::is_reserved(name) {
+            h.print("Cannot delete built-in HUD preset\n");
+            return;
+        }
+        if crate::hud::presets::remove(&mut h.menu.hud_edit.presets, name) {
+            if let Err(e) = crate::hud::presets::delete_one(name) {
+                h.print(&format!("couldn't delete HUD preset: {e}\n"));
+            }
+            if h.cvs(crate::hud::presets::PRESET_NAME).eq_ignore_ascii_case(name) {
+                h.server.core.cvars.set(crate::hud::presets::PRESET_NAME, "");
+            }
+            if h.menu.hud_edit.editing_preset.as_deref().is_some_and(|n| n.eq_ignore_ascii_case(name)) {
+                h.menu.hud_edit.editing_preset = None;
+            }
+            h.print(&format!("Deleted HUD preset \"{name}\"\n"));
+        } else {
+            h.print(&format!("Unknown HUD preset \"{name}\"\n"));
+        }
+    });
+    c.add("hud_preset_list", |h, _| {
+        h.print("Built-in: modern, classic\n");
+        if h.menu.hud_edit.presets.is_empty() {
+            h.print("Saved: (none)\n");
+        } else {
+            let names: Vec<&str> = h.menu.hud_edit.presets.iter().map(|p| p.name.as_str()).collect();
+            h.print(&format!("Saved: {}\n", names.join(", ")));
+        }
     });
     c.add("automap", |h, a| {
         if h.cl.signon != 4 || h.cl.intermission != 0 || h.cl.gametype == 1 || h.cv("deathmatch") != 0.0 {

@@ -393,12 +393,12 @@ it Ignora le rotazioni del giroscopio più lente di questi gradi al secondo, per
 es Ignora las rotaciones del giroscopio más lentas que estos grados por segundo, para ocultar el temblor de la mano
 ru Игнорирует вращение гироскопа медленнее этого числа градусов в секунду, чтобы скрыть дрожание рук
 
-@ Immersive: appears for a few seconds only when its value changes
-fr Immersif : n'apparaît que quelques secondes quand sa valeur change
-de Immersiv: erscheint nur für ein paar Sekunden, wenn sich der Wert ändert
-it Immersivo: appare per pochi secondi solo quando il suo valore cambia
-es Inmersivo: aparece unos segundos solo cuando cambia su valor
-ru Погружение: появляется на несколько секунд только при изменении значения
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+fr Au changement : affiché brièvement quand la valeur change ; masqué : caché sans supprimer
+de Bei Änderung: erscheint kurz bei Wertänderung; versteckt: blendet ohne Löschen aus
+it Al cambio: appare brevemente quando il valore cambia; nascosto: nasconde senza rimuovere
+es Al cambiar: aparece brevemente al cambiar su valor; oculto: oculta sin eliminar
+ru При изменении: появляется ненадолго при изменении значения; скрыто: скрывает без удаления
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 fr Garde les textures nettes sur les sols et murs vus en angle rasant

@@ -1196,9 +1196,6 @@ hr visoko
 @ huge
 hr ogromno
 
-@ immersive
-hr imerzivno
-
 @ intense
 hr intenzivno
 
@@ -1605,6 +1602,30 @@ hr Traka stanja
 @ Visibility
 hr Vidljivost
 
+@ Alert
+hr Upozorenje
+
+@ Live
+hr Uživo
+
+@ Sample
+hr Uzorak
+
+@ Undo
+hr Poništi
+
+@ Presets
+hr Predlošci
+
+@ Save As
+hr Spremi kao
+
+@ appear on change
+hr pri promjeni
+
+@ hidden
+hr skriveno
+
 @ big numbers
 hr velike znamenke
 
@@ -1907,8 +1928,8 @@ hr Kako se pogled izobličuje pod vodom: klasično valovito mreška cijeli zaslo
 @ Ignores gyro rotation slower than this many degrees per second, to hide hand tremor
 hr Zanemaruje okretanje žiroskopa sporije od ovoliko stupnjeva u sekundi, da sakrije drhtanje ruke
 
-@ Immersive: appears for a few seconds only when its value changes
-hr Imerzivno: pojavljuje se na nekoliko sekundi samo kad se vrijednost promijeni
+@ Appear on change: shown briefly only when its value changes; hidden: hides without removing
+hr Pri promjeni: nakratko se prikazuje samo pri promjeni vrijednosti; skriveno: skriva bez uklanjanja
 
 @ Keeps textures sharp on floors and walls seen at steep angles
 hr Drži teksture oštrima na podovima i zidovima gledanima pod oštrim kutom
