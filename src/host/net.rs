@@ -70,6 +70,10 @@ impl Host {
         self.level = Level::default();
         self.audio_fx.clear_map();
         self.audio_fx.soundtracks.clear_track();
+        self.cd.playing = None;
+        self.cd.paused = false;
+        self.zoom = (0.0, 0.0);
+        self.con.end_chat();
         if let Some(s) = &self.snd {
             s.event(SoundEvent::StopAll);
             s.event(SoundEvent::ClearStatic);

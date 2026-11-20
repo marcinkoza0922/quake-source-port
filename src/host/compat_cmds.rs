@@ -199,6 +199,129 @@ pub(super) fn register(c: &mut Commands<Host>) {
         let n = |i| qcore::cvar::q_atof(a.argv(i)) as i32;
         h.view.set_empty_shift(n(1), n(2), n(3), n(4));
     });
+    // SCR_SizeUp_f / SCR_SizeDown_f (ironwail gl_screen.c): adjust viewsize by 10, clamped 30..=130.
+    c.add("sizeup", |h, _| adjust_viewsize(h, 10.0));
+    c.add("sizedown", |h, _| adjust_viewsize(h, -10.0));
+    // SCR_ToggleZoom_f / SCR_ZoomDown_f / SCR_ZoomUp_f (ironwail gl_screen.c).
+    c.add("togglezoom", |h, _| {
+        h.zoom.1 = if h.zoom.1 != 0.0 {
+            -h.zoom.1
+        } else if h.zoom.0 > 0.5 {
+            -1.0
+        } else {
+            1.0
+        };
+    });
+    c.add("+zoom", |h, _| h.zoom.1 = 1.0);
+    c.add("-zoom", |h, _| h.zoom.1 = -1.0);
+    // Con_MessageMode_f / Con_MessageMode2_f (ironwail console.c).
+    c.add("messagemode", |h, _| start_message_mode(h, false));
+    c.add("messagemode2", |h, _| start_message_mode(h, true));
+    // CD_f (vkQuake cd_sdl.c): routes to soundtrack/CD music playback.
+    c.add("cd", cmd_cd);
+}
+
+fn adjust_viewsize(h: &mut Host, delta: f32) {
+    let next = (h.cv("viewsize") + delta).clamp(30.0, 130.0);
+    h.server.core.cvars.set("viewsize", &format!("{}", next.round() as i32));
+}
+
+fn start_message_mode(h: &mut Host, team: bool) {
+    if h.cl.signon == 0 || h.demo.is_some() {
+        return;
+    }
+    if !h.con.forced {
+        h.con.open = false;
+    }
+    h.con.start_chat(team);
+    h.sync_key_dest();
+}
+
+/// CD_f (vkQuake cd_sdl.c).
+fn cmd_cd(h: &mut Host, a: &Args) {
+    if a.argc() < 2 {
+        h.print("commands: on, off, reset, remap, play, stop, loop, pause, resume, eject, info, next, prev\n");
+        return;
+    }
+    let cmd = a.argv(1).to_ascii_lowercase();
+    let stop_music = |h: &mut Host| {
+        h.audio_fx.soundtracks.clear_track();
+        h.cd.playing = None;
+        h.cd.paused = false;
+        if let Some(s) = &h.snd {
+            s.stop_music();
+        }
+    };
+    match cmd.as_str() {
+        "on" => h.cd.enabled = true,
+        "off" => {
+            stop_music(h);
+            h.cd.enabled = false;
+        }
+        "reset" => {
+            h.cd.enabled = true;
+            stop_music(h);
+            h.cd.reset_remap();
+        }
+        "remap" => {
+            let count = a.argc() - 2;
+            if count == 0 {
+                for n in 1..h.cd.remap.len() {
+                    if h.cd.remap[n] as usize != n {
+                        h.print(&format!("  {n} -> {}\n", h.cd.remap[n]));
+                    }
+                }
+            } else {
+                for n in 1..=count.min(h.cd.remap.len() - 1) {
+                    h.cd.remap[n] = (qcore::cvar::q_atof(a.argv(n + 1)) as i32).clamp(0, 99) as u8;
+                }
+            }
+        }
+        "play" => {
+            let mut n = qcore::cvar::q_atof(a.argv(2)) as i32;
+            if n <= 0 {
+                n = 1;
+            }
+            h.play_cd_track(n.min(255) as u8, false);
+        }
+        "loop" => {
+            let n = (qcore::cvar::q_atof(a.argv(2)) as i32).clamp(0, 255) as u8;
+            h.play_cd_track(n, true);
+        }
+        "stop" | "eject" => stop_music(h),
+        "pause" => {
+            if h.cd.playing.is_some() && !h.cd.paused {
+                h.cd.paused = true;
+                if let Some(s) = &h.snd {
+                    s.pause_music(true);
+                }
+            }
+        }
+        "resume" => {
+            if h.cd.playing.is_some() && h.cd.paused {
+                h.cd.paused = false;
+                if let Some(s) = &h.snd {
+                    s.pause_music(false);
+                }
+            }
+        }
+        "next" | "prev" => {
+            if let Some((track, looping)) = h.cd.playing {
+                let next = if cmd == "next" { track.saturating_add(1) } else { track.saturating_sub(1).max(1) };
+                h.play_cd_track(next, looping);
+            }
+        }
+        "info" => {
+            let msg = match (h.cd.enabled, h.cd.playing, h.cd.paused) {
+                (false, _, _) => "CD audio is disabled\n".to_string(),
+                (true, Some((t, l)), true) => format!("Currently paused track {t} ({})\n", if l { "looping" } else { "once" }),
+                (true, Some((t, l)), false) => format!("Currently playing track {t} ({})\n", if l { "looping" } else { "once" }),
+                (true, None, _) => "Not playing\n".to_string(),
+            };
+            h.print(&msg);
+        }
+        _ => h.print(&format!("cd: unknown command \"{cmd}\"\n")),
+    }
 }
 
 /// gl_sky.c's sky wind commands; they act on the loaded skybox's wind.

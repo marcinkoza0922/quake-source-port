@@ -80,6 +80,10 @@ pub struct Console {
     pub(crate) last_panel_h: f32,
     pub(crate) last_cell_w: f32,
     pub(crate) hover_cell: Option<(usize, usize)>,
+    /// In-game chat prompt (`messagemode` / `messagemode2`, `Key_Message`).
+    pub chat_active: bool,
+    pub chat_team: bool,
+    pub chat_buf: String,
 }
 
 impl Console {
@@ -224,6 +228,47 @@ impl Console {
         }
     }
 
+    /// Con_MessageMode_f / Con_MessageMode2_f.
+    pub fn start_chat(&mut self, team: bool) {
+        self.chat_active = true;
+        self.chat_team = team;
+        self.chat_buf.clear();
+    }
+
+    /// Key_EndChat.
+    pub fn end_chat(&mut self) {
+        self.chat_active = false;
+        self.chat_buf.clear();
+    }
+
+    /// Key_Message (keys.c). Returns a `say`/`say_team` command on Enter.
+    pub fn chat_key(&mut self, key: i32) -> Option<String> {
+        match key {
+            K_ENTER | K_KP_ENTER => {
+                let msg = std::mem::take(&mut self.chat_buf).replace(['"', '\n', '\r'], "");
+                let cmd = if self.chat_team { "say_team" } else { "say" };
+                self.chat_active = false;
+                (!msg.is_empty()).then(|| format!("{cmd} \"{msg}\"\n"))
+            }
+            K_ESCAPE => {
+                self.end_chat();
+                None
+            }
+            K_BACKSPACE => {
+                self.chat_buf.pop();
+                None
+            }
+            _ => None,
+        }
+    }
+
+    /// Char_Message (keys.c).
+    pub fn chat_text(&mut self, ch: char) {
+        if !ch.is_control() && self.chat_buf.chars().count() < 255 {
+            self.chat_buf.push(ch);
+        }
+    }
+
     /// Classic tab completion over the last word of the input line.
     fn complete(&mut self, complete: &dyn Fn(&str) -> Vec<String>) {
         let start = self.input[..self.cursor].rfind([' ', ';']).map_or(0, |i| i + 1);
@@ -316,22 +361,38 @@ impl Console {
                 c.qtext_grid(8.0, row, &self.lines[n], crate::draw::WHITE);
                 row -= 8.0;
             }
-        } else if show_notify && !self.notify_place.hidden {
+        } else if show_notify {
             let base = c.scale;
             let p = self.notify_place;
             c.scale = (base * p.scale.clamp(1.0, 3.0)).round().max(1.0);
-            let live: Vec<&Vec<u8>> =
-                self.notify.iter().filter(|(t, _)| self.realtime - t <= self.notify_time).map(|(_, l)| l).collect();
             let (rx, ry, rw, rh) = place_rect(&p, base / c.scale, (8.0, 0.0, c.vw() - 16.0, 32.0));
-            let mut y = if p.up { ry + rh - live.len() as f32 * 8.0 } else { ry };
-            for l in live {
-                let w = c.qtext_w(l);
-                let x = align_x(p.align, rx, rw, w);
-                if p.bg && !l.is_empty() {
-                    c.fill(x - 2.0, y - 1.0, w + 4.0, 10.0, TEXT_BG);
+            let mut y = ry;
+            if !p.hidden {
+                let live: Vec<&Vec<u8>> =
+                    self.notify.iter().filter(|(t, _)| self.realtime - t <= self.notify_time).map(|(_, l)| l).collect();
+                y = if p.up { ry + rh - live.len() as f32 * 8.0 } else { ry };
+                for l in live {
+                    let w = c.qtext_w(l);
+                    let x = align_x(p.align, rx, rw, w);
+                    if p.bg && !l.is_empty() {
+                        c.fill(x - 2.0, y - 1.0, w + 4.0, 10.0, TEXT_BG);
+                    }
+                    c.qtext(x, y, l, p.color);
+                    y += 8.0;
                 }
-                c.qtext(x, y, l, p.color);
-                y += 8.0;
+            }
+            if self.chat_active {
+                let prefix = if self.chat_team { "say_team: " } else { "say: " };
+                let max_cols = ((rw / 8.0) as usize).saturating_sub(prefix.len() + 1).max(8);
+                let tail: String = self.chat_buf.chars().rev().take(max_cols).collect::<String>().chars().rev().collect();
+                let line = format!("{prefix}{tail}");
+                let bytes = qcore::text::encode(&line);
+                let w = c.qtext_w(&bytes) + 8.0;
+                c.fill(rx - 2.0, y - 1.0, w + 4.0, 10.0, TEXT_BG);
+                c.qtext(rx, y, &bytes, crate::draw::WHITE);
+                if (self.realtime * 4.0) as i64 & 1 == 0 {
+                    c.ch(rx + c.qtext_w(&bytes), y, 11);
+                }
             }
             c.scale = base;
         }

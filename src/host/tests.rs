@@ -5,6 +5,7 @@ mod demo_seek;
 mod hud_preset;
 mod pb_ghost;
 mod pad_gestures_and_controls;
+mod compat_cmds;
 
 mod relaunch_tests {
     #[test]

@@ -26,7 +26,7 @@ impl Host {
             kicktime: v("v_kicktime").max(0.01),
             kickroll: v("v_kickroll"),
             kickpitch: v("v_kickpitch"),
-            fov: v("fov").clamp(10.0, 170.0),
+            fov: self.effective_fov(),
             gunkick: v("v_gunkick") != 0.0,
             speed_blur: v("r_speedblur") != 0.0,
             viewmodel: crate::view::weapon::Alignment::from_cvar(v("r_drawviewmodel")),
@@ -104,13 +104,42 @@ impl Host {
             && !self.server.core.clients.iter().any(|c| c.active && !c.local)
     }
 
+    /// Effective FOV after `togglezoom` / `+zoom` smoothstep (ironwail `SCR_CalcRefdef`).
+    pub(super) fn effective_fov(&self) -> f32 {
+        let base = self.cv("fov").clamp(10.0, 170.0);
+        let z = self.zoom.0;
+        if z <= 0.0 {
+            return base;
+        }
+        let target = self.cv("zoom_fov").clamp(10.0, 170.0);
+        let t = z * z * (3.0 - 2.0 * z);
+        base + (target - base) * t
+    }
+
+    /// SCR_UpdateZoom (ironwail `gl_screen.c`).
+    pub(super) fn update_zoom(&mut self, dt: f32) {
+        if self.zoom.1 == 0.0 {
+            return;
+        }
+        let s = self.cv("zoom_speed");
+        let speed = if s > 0.0 { s } else { 1e6 };
+        let z = self.zoom.0 + self.zoom.1 * speed * dt;
+        if z >= 1.0 {
+            self.zoom = (1.0, 0.0);
+        } else if z <= 0.0 {
+            self.zoom = (0.0, 0.0);
+        } else {
+            self.zoom.0 = z;
+        }
+    }
+
     /// Match the renderer's 4:3-adapted FOV for each local player's viewport.
     pub(super) fn autoaim_fov(&self) -> [f32; 2] {
         let (w, h) = self.r.size();
         let n = 1 + self.guests.iter().filter(|g| g.cl.signon == 4).count();
         let rect = crate::splitscreen::layout(n, w, h, self.cv("r_splitscreen_layout") != 0.0)[0];
         let aspect = rect[2].max(1) as f32 / rect[3].max(1) as f32;
-        let ty = (self.cv("fov").clamp(10.0, 170.0).to_radians() * 0.5).tan() * 0.75;
+        let ty = (self.effective_fov().to_radians() * 0.5).tan() * 0.75;
         [(ty * aspect).atan().to_degrees() * 2.0, ty.atan().to_degrees() * 2.0]
     }
 
@@ -426,6 +455,7 @@ impl Host {
         self.update_death();
         self.sync_key_dest();
         self.update_autosave();
+        self.update_zoom(ft);
         self.con.update(ft);
 
         self.prof_mark(3);

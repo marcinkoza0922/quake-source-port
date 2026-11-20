@@ -12,6 +12,8 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("sv_autosave_interval", "0", CVAR_ARCHIVE),
     ("host_maxfps", "250", CVAR_ARCHIVE),
     ("fov", "90", CVAR_ARCHIVE),
+    ("zoom_fov", "30", CVAR_ARCHIVE),
+    ("zoom_speed", "8", CVAR_ARCHIVE),
     ("cl_bob", "0.02", CVAR_ARCHIVE),
     ("cl_wheel_timescale", "0.25", CVAR_ARCHIVE),
     ("cl_paddefaults", "0", CVAR_ARCHIVE),

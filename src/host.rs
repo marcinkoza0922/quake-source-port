@@ -274,6 +274,10 @@ pub struct Host {
     console_sound_id: u32,
     /// `quaddicted_list` / `quaddicted_install` in progress.
     qd_cli: Option<quaddicted_cli::QdCli>,
+    /// `togglezoom` / `+zoom` / `-zoom`: (zoom 0..=1, direction -1/0/1).
+    zoom: (f32, f32),
+    /// `cd` console command state (enabled, paused, remap, current track).
+    cd: crate::audio::soundtrack::CdState,
 }
 
 impl Host {
@@ -385,6 +389,8 @@ impl Host {
             menu_music: false,
             console_sound_id: 0,
             qd_cli: None,
+            zoom: (0.0, 0.0),
+            cd: crate::audio::soundtrack::CdState::new(),
             demo: None,
             demos: Vec::new(),
             demonum: 0,
