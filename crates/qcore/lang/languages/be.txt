@@ -3967,3 +3967,28 @@ be Тэчка даных карыстальніка зададзена: {}
 
 @ User data directory error: {}
 be Памылка тэчкі даных карыстальніка: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+be Рух і кіраванне
+
+@ Strafe & Jump Timing
+be Стрэйф і таймінг скачкоў
+
+@ Input Sequence
+be Паслядоўнасць уводу
+
+@ Ground
+be На зямлі
+
+@ Airborne
+be У паветры
+
+@ Jump Timing
+be Таймінг скачка
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+be Лакальная гульня. Сумясціце белую адзнаку з залатой. Скачок: − рана, + позна.
+
+@ Shows the eight most recent gameplay inputs
+be Паказвае восем апошніх дзеянняў кіравання падчас гульні

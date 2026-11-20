@@ -112,7 +112,7 @@ pub enum HostEvent {
     /// Absolute cursor position in window points (menus).
     MousePos { x: f32, y: f32 },
     /// Button-label family of a newly connected gamepad (`qplatform::family`).
-    PadFamily(u8),
+    PadFamily(u32, u8),
     /// Gamepad button, stick or gyro input from the pad with this SDL id
     /// (split-screen routes it to the pad's player).
     Pad(u32, InputEvent),
@@ -160,8 +160,8 @@ pub fn convert(e: Event) -> Vec<HostEvent> {
             Some(b) => vec![HostEvent::Pad(id, InputEvent::GamepadButton { button: b, down })],
             None => vec![],
         },
-        Event::GamepadAdded { family, .. } => {
-            vec![HostEvent::Input(InputEvent::GamepadConnected(true)), HostEvent::PadFamily(family)]
+        Event::GamepadAdded { id, family, .. } => {
+            vec![HostEvent::Input(InputEvent::GamepadConnected(true)), HostEvent::PadFamily(id, family)]
         }
         Event::GamepadRemoved { id } => vec![HostEvent::Input(InputEvent::GamepadConnected(false)), HostEvent::PadRemoved(id)],
         Event::GamepadGyro { id, data, .. } => vec![HostEvent::Pad(id, InputEvent::Gyro { pitch: data[0], yaw: data[1], roll: data[2] })],

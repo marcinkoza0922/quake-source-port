@@ -3967,3 +3967,28 @@ et Kasutajaandmete kaust määrati asukohta {}
 
 @ User data directory error: {}
 et Kasutajaandmete kausta viga: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+et Liikumine ja sisend
+
+@ Strafe & Jump Timing
+et Külgliikumine ja hüppe ajastus
+
+@ Input Sequence
+et Sisendite järjestus
+
+@ Ground
+et Maas
+
+@ Airborne
+et Õhus
+
+@ Jump Timing
+et Hüppe ajastus
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+et Kohalik mäng. Joonda valge märk kuldsega. Hüpe: − vara, + hilja.
+
+@ Shows the eight most recent gameplay inputs
+et Kuvab kaheksa viimast mängusisendit

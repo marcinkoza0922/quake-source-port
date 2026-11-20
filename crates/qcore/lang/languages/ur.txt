@@ -3967,3 +3967,28 @@ ur صارف ڈیٹا ڈائریکٹری {} پر مقرر کر دی گئی
 
 @ User data directory error: {}
 ur صارف ڈیٹا ڈائریکٹری میں خرابی: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+ur حرکت اور اِن پٹ
+
+@ Strafe & Jump Timing
+ur پہلو کی حرکت اور چھلانگ کا وقت
+
+@ Input Sequence
+ur اِن پٹ کی ترتیب
+
+@ Ground
+ur زمین پر
+
+@ Airborne
+ur ہوا میں
+
+@ Jump Timing
+ur چھلانگ کا وقت
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+ur مقامی کھیل۔ سفید نشان کو سنہری نشان سے ملائیں۔ چھلانگ: − جلدی، + دیر سے۔
+
+@ Shows the eight most recent gameplay inputs
+ur کھیل کے دوران آخری آٹھ اِن پٹ دکھاتا ہے

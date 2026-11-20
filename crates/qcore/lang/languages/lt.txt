@@ -3967,3 +3967,28 @@ lt Naudotojo duomenų aplankas nustatytas į {}
 
 @ User data directory error: {}
 lt Naudotojo duomenų aplanko klaida: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+lt Judėjimas ir įvestis
+
+@ Strafe & Jump Timing
+lt Judėjimas šonu ir šuolio laikas
+
+@ Input Sequence
+lt Įvesčių seka
+
+@ Ground
+lt Ant žemės
+
+@ Airborne
+lt Ore
+
+@ Jump Timing
+lt Šuolio laikas
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+lt Vietinis žaidimas. Sulygiuokite baltą žymeklį su auksiniu. Šuolis: − per anksti, + per vėlai.
+
+@ Shows the eight most recent gameplay inputs
+lt Rodo aštuonias paskutines žaidimo įvestis

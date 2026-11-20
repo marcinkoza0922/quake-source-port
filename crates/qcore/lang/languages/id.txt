@@ -3967,3 +3967,28 @@ id Direktori data pengguna diatur ke {}
 
 @ User data directory error: {}
 id Kesalahan direktori data pengguna: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+id Gerakan dan input
+
+@ Strafe & Jump Timing
+id Strafe dan waktu lompatan
+
+@ Input Sequence
+id Urutan input
+
+@ Ground
+id Di tanah
+
+@ Airborne
+id Di udara
+
+@ Jump Timing
+id Waktu lompatan
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+id Game lokal. Sejajarkan penanda putih dengan penanda emas. Lompatan: − terlalu awal, + terlambat.
+
+@ Shows the eight most recent gameplay inputs
+id Menampilkan delapan input terakhir selama bermain

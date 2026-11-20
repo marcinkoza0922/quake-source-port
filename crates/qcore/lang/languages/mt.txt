@@ -3967,3 +3967,28 @@ mt Il-fowlder tad-dejta tal-utent ġie ssettjat għal {}
 
 @ User data directory error: {}
 mt Żball fil-fowlder tad-dejta tal-utent: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+mt Moviment u input
+
+@ Strafe & Jump Timing
+mt Moviment lejn il-ġenb u ħin tal-qabża
+
+@ Input Sequence
+mt Sekwenza tal-input
+
+@ Ground
+mt Mal-art
+
+@ Airborne
+mt Fl-arja
+
+@ Jump Timing
+mt Ħin tal-qabża
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+mt Logħob lokali. Allinja l-marka bajda ma' dik tad-deheb. Qabża: − kmieni, + tard.
+
+@ Shows the eight most recent gameplay inputs
+mt Juri l-aħħar tmien inputs waqt il-logħob

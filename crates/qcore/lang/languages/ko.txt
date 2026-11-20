@@ -3967,3 +3967,28 @@ ko 사용자 데이터 폴더가 {} 로 설정되었습니다
 
 @ User data directory error: {}
 ko 사용자 데이터 폴더 오류: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+ko 이동 및 입력
+
+@ Strafe & Jump Timing
+ko 스트레이프 및 점프 타이밍
+
+@ Input Sequence
+ko 입력 기록
+
+@ Ground
+ko 지상
+
+@ Airborne
+ko 공중
+
+@ Jump Timing
+ko 점프 타이밍
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+ko 로컬 게임용. 흰색 표시를 금색에 맞추세요. 점프: − 빠름, + 늦음.
+
+@ Shows the eight most recent gameplay inputs
+ko 플레이 중 최근 입력 8개를 표시합니다

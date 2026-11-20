@@ -3967,3 +3967,28 @@ da Brugerdatamappe sat til {}
 
 @ User data directory error: {}
 da Fejl i brugerdatamappe: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+da Bevægelse og input
+
+@ Strafe & Jump Timing
+da Strafe og hop-timing
+
+@ Input Sequence
+da Inputsekvens
+
+@ Ground
+da På jorden
+
+@ Airborne
+da I luften
+
+@ Jump Timing
+da Hop-timing
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+da Lokale spil. Flugt den hvide markør med den gyldne. Hop: − tidligt, + sent.
+
+@ Shows the eight most recent gameplay inputs
+da Viser de otte seneste input under spillet

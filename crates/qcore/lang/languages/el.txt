@@ -3967,3 +3967,28 @@ el Ο φάκελος δεδομένων χρήστη ορίστηκε σε {}
 
 @ User data directory error: {}
 el Σφάλμα φακέλου δεδομένων χρήστη: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+el Κίνηση και χειρισμός
+
+@ Strafe & Jump Timing
+el Πλάγια κίνηση και χρονισμός άλματος
+
+@ Input Sequence
+el Ακολουθία εισόδων
+
+@ Ground
+el Στο έδαφος
+
+@ Airborne
+el Στον αέρα
+
+@ Jump Timing
+el Χρονισμός άλματος
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+el Τοπικό παιχνίδι. Ευθυγραμμίστε τον λευκό δείκτη με τον χρυσό. Άλμα: − νωρίς, + αργά.
+
+@ Shows the eight most recent gameplay inputs
+el Δείχνει τις οκτώ πιο πρόσφατες εντολές στο παιχνίδι

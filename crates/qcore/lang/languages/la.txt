@@ -3967,3 +3967,28 @@ la Directorium datorum usoris positum est in {}
 
 @ User data directory error: {}
 la Error directorii datorum usoris: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+la Motus et imperia
+
+@ Strafe & Jump Timing
+la Motus lateralis et tempus saltus
+
+@ Input Sequence
+la Series imperiorum
+
+@ Ground
+la In terra
+
+@ Airborne
+la In aere
+
+@ Jump Timing
+la Tempus saltus
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+la Ludi locales. Signum album cum aureo compone. Saltus: − mature, + sero.
+
+@ Shows the eight most recent gameplay inputs
+la Octo recentissima imperia ludentis ostendit

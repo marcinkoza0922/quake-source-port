@@ -63,6 +63,7 @@ impl Host {
         self.pend_dodge = false;
         self.death_handled = false;
         self.feedback = Default::default();
+        self.training = Default::default();
         self.demo_head.clear();
         self.cl = ClientState::new();
         self.local = None;
@@ -527,6 +528,7 @@ impl Host {
                 }
                 ClientEvent::BonusFlash => self.view.bonus_flash(),
                 ClientEvent::NewMap => {
+                    self.training = Default::default();
                     self.clear_toy_fx();
                     self.audio_fx.clear_map();
                     self.view.reset_effects();

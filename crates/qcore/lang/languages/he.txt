@@ -3967,3 +3967,28 @@ he תיקיית נתוני המשתמש הוגדרה ל-{}
 
 @ User data directory error: {}
 he שגיאה בתיקיית נתוני המשתמש: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+he תנועה וקלט
+
+@ Strafe & Jump Timing
+he תנועה לצדדים ותזמון קפיצה
+
+@ Input Sequence
+he רצף קלט
+
+@ Ground
+he על הקרקע
+
+@ Airborne
+he באוויר
+
+@ Jump Timing
+he תזמון קפיצה
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+he למשחק מקומי. יישרו את הסמן הלבן עם הזהוב. קפיצה: − מוקדם, + מאוחר.
+
+@ Shows the eight most recent gameplay inputs
+he מציג את שמונת הקלטים האחרונים במהלך המשחק

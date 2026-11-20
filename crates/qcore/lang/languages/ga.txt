@@ -3967,3 +3967,28 @@ ga Comhadlann sonraí úsáideora socraithe go {}
 
 @ User data directory error: {}
 ga Earráid chomhadlann sonraí úsáideora: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+ga Gluaiseacht agus ionchur
+
+@ Strafe & Jump Timing
+ga Cliathghluaiseacht agus am léime
+
+@ Input Sequence
+ga Seicheamh ionchur
+
+@ Ground
+ga Ar an talamh
+
+@ Airborne
+ga San aer
+
+@ Jump Timing
+ga Am léime
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+ga Cluichí logánta. Ailínigh an marc bán leis an marc órga. Léim: − luath, + déanach.
+
+@ Shows the eight most recent gameplay inputs
+ga Taispeánann sé na hocht n-ionchur is déanaí le linn imeartha

@@ -19,6 +19,7 @@ pub(super) struct HudFrame {
     pub metrics: [String; 6],
     pub pb_full: bool,
     pub pb_color: [f32; 4],
+    pub glyph_override: f32,
     /// The editor's sample player.
     pub sample: Option<qclient::ClientState>,
 }
@@ -50,6 +51,8 @@ impl HudFrame {
             show_scores: show_scores && !self.edit,
             preview: self.edit,
             automap,
+            training: None,
+            glyph_override: self.glyph_override,
         }
     }
 }
@@ -204,6 +207,7 @@ impl Host {
             cur_speed.unwrap_or(0.0).max(0.0) as i32
         };
         HudFrame {
+            glyph_override: self.cv("joy_glyphs"),
             room,
             edit,
             info,

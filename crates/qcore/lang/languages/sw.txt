@@ -3967,3 +3967,28 @@ sw Saraka ya data ya mtumiaji imewekwa kuwa {}
 
 @ User data directory error: {}
 sw Hitilafu ya saraka ya data ya mtumiaji: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+sw Mwendo na vidhibiti
+
+@ Strafe & Jump Timing
+sw Mwendo wa kando na muda wa kuruka
+
+@ Input Sequence
+sw Mfuatano wa ingizo
+
+@ Ground
+sw Ardhini
+
+@ Airborne
+sw Hewani
+
+@ Jump Timing
+sw Muda wa kuruka
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+sw Michezo ya ndani. Pangilia alama nyeupe na ya dhahabu. Ruko: − mapema, + kuchelewa.
+
+@ Shows the eight most recent gameplay inputs
+sw Huonyesha ingizo nane za mwisho wakati wa kucheza

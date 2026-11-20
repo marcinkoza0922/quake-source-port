@@ -3967,3 +3967,28 @@ km ថត​ទិន្នន័យ​អ្នកប្រើប្រាស�
 
 @ User data directory error: {}
 km កំហុស​ថត​ទិន្នន័យ​អ្នកប្រើប្រាស់៖ {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+km ចលនា និង​ ការបញ្ចូល
+
+@ Strafe & Jump Timing
+km ចលនា​ ចំហៀង និង​ ពេល​ លោត
+
+@ Input Sequence
+km លំដាប់​ ការបញ្ចូល
+
+@ Ground
+km លើដី
+
+@ Airborne
+km លើអាកាស
+
+@ Jump Timing
+km ពេល​ លោត
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+km ហ្គេម​ ក្នុងម៉ាស៊ីន។ តម្រឹម​ សញ្ញា​ ស​ ជាមួយ​ សញ្ញា​ ពណ៌មាស។ លោត៖ − មុនពេល, + យឺត។
+
+@ Shows the eight most recent gameplay inputs
+km បង្ហាញ​ ការបញ្ចូល​ ប្រាំបី​ ចុងក្រោយ​ ពេលលេង

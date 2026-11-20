@@ -3967,3 +3967,28 @@ tr Kullanıcı veri dizini {} olarak ayarlandı
 
 @ User data directory error: {}
 tr Kullanıcı veri dizini hatası: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+tr Hareket ve girdi
+
+@ Strafe & Jump Timing
+tr Yana hareket ve sıçrama zamanlaması
+
+@ Input Sequence
+tr Girdi sırası
+
+@ Ground
+tr Yerde
+
+@ Airborne
+tr Havada
+
+@ Jump Timing
+tr Sıçrama zamanlaması
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+tr Yerel oyunlar. Beyaz işareti altın renkli işaretle hizala. Sıçrama: − erken, + geç.
+
+@ Shows the eight most recent gameplay inputs
+tr Oyun sırasındaki son sekiz girdiyi gösterir

@@ -3967,3 +3967,28 @@ sl Mapa uporabniških podatkov nastavljena na {}
 
 @ User data directory error: {}
 sl Napaka mape uporabniških podatkov: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+sl Gibanje in upravljanje
+
+@ Strafe & Jump Timing
+sl Bočno gibanje in čas skoka
+
+@ Input Sequence
+sl Zaporedje vnosov
+
+@ Ground
+sl Na tleh
+
+@ Airborne
+sl V zraku
+
+@ Jump Timing
+sl Čas skoka
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+sl Lokalna igra. Poravnajte belo oznako z zlato. Skok: − prezgodaj, + prepozno.
+
+@ Shows the eight most recent gameplay inputs
+sl Prikaže zadnjih osem vnosov med igro

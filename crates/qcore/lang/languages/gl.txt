@@ -3967,3 +3967,28 @@ gl Cartafol de datos de usuario establecido en {}
 
 @ User data directory error: {}
 gl Erro do cartafol de datos de usuario: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+gl Movemento e controis
+
+@ Strafe & Jump Timing
+gl Strafe e tempo do salto
+
+@ Input Sequence
+gl Secuencia de controis
+
+@ Ground
+gl No chan
+
+@ Airborne
+gl No aire
+
+@ Jump Timing
+gl Tempo do salto
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+gl Partidas locais. Aliña a marca branca coa dourada. Salto: − cedo, + tarde.
+
+@ Shows the eight most recent gameplay inputs
+gl Amosa as oito últimas entradas durante a partida

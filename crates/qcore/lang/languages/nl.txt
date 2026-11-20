@@ -3967,3 +3967,28 @@ nl Gebruikersgegevensmap ingesteld op {}
 
 @ User data directory error: {}
 nl Fout bij gebruikersgegevensmap: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+nl Beweging en invoer
+
+@ Strafe & Jump Timing
+nl Strafe en sprongtiming
+
+@ Input Sequence
+nl Invoerreeks
+
+@ Ground
+nl Op de grond
+
+@ Airborne
+nl In de lucht
+
+@ Jump Timing
+nl Sprongtiming
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+nl Lokale spellen. Lijn wit uit met goud. Sprong: − vroeg, + laat.
+
+@ Shows the eight most recent gameplay inputs
+nl Toont de acht laatste invoeracties tijdens het spelen

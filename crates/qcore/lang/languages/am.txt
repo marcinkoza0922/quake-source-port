@@ -3967,3 +3967,28 @@ am የተጠቃሚ ውሂብ አቃፊ ወደ {} ተቀናብሯል
 
 @ User data directory error: {}
 am የተጠቃሚ ውሂብ አቃፊ ስህተት: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+am እንቅስቃሴ እና ግቤት
+
+@ Strafe & Jump Timing
+am የጎን እንቅስቃሴ እና የዝላይ ጊዜ
+
+@ Input Sequence
+am የግቤት ቅደም ተከተል
+
+@ Ground
+am መሬት ላይ
+
+@ Airborne
+am አየር ላይ
+
+@ Jump Timing
+am የዝላይ ጊዜ
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+am የአካባቢ ጨዋታ። ነጩን ምልክት ከወርቃማው ጋር አስተካክሉ። ዝላይ፦ − ቀደም፣ + ዘግይቶ።
+
+@ Shows the eight most recent gameplay inputs
+am በጨዋታ ጊዜ የመጨረሻዎቹን ስምንት ግቤቶች ያሳያል

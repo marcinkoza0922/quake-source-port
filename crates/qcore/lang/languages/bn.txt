@@ -3967,3 +3967,28 @@ bn ব্যবহারকারীর ডেটা ডিরেক্টরি
 
 @ User data directory error: {}
 bn ব্যবহারকারীর ডেটা ডিরেক্টরি ত্রুটি: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+bn চলাচল ও ইনপুট
+
+@ Strafe & Jump Timing
+bn পাশে চলা ও লাফের সময়
+
+@ Input Sequence
+bn ইনপুটের ক্রম
+
+@ Ground
+bn মাটিতে
+
+@ Airborne
+bn বাতাসে
+
+@ Jump Timing
+bn লাফের সময়
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+bn স্থানীয় খেলা। সাদা চিহ্নটি সোনালি চিহ্নের সঙ্গে মেলান। লাফ: − আগে, + দেরিতে।
+
+@ Shows the eight most recent gameplay inputs
+bn খেলার সময়কার সর্বশেষ আটটি ইনপুট দেখায়

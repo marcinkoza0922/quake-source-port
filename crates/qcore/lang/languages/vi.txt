@@ -3967,3 +3967,28 @@ vi Đã đặt thư mục dữ liệu người dùng thành {}
 
 @ User data directory error: {}
 vi Lỗi thư mục dữ liệu người dùng: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+vi Di chuyển và điều khiển
+
+@ Strafe & Jump Timing
+vi Strafe và canh thời điểm nhảy
+
+@ Input Sequence
+vi Chuỗi thao tác
+
+@ Ground
+vi Trên mặt đất
+
+@ Airborne
+vi Trên không
+
+@ Jump Timing
+vi Thời điểm nhảy
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+vi Trận cục bộ. Căn vạch trắng với vạch vàng. Nhảy: − sớm, + muộn.
+
+@ Shows the eight most recent gameplay inputs
+vi Hiển thị tám thao tác gần nhất khi chơi

@@ -4147,3 +4147,24 @@ de Glanzlichter
 it Riflessi speculari
 es Brillo especular
 ru Блики освещения
+
+@ Movement & Input
+fr Déplacement et commandes
+de Bewegung und Eingabe
+it Movimento e comandi
+es Movimiento y controles
+ru Движение и управление
+
+@ Strafe & Jump Timing
+fr Strafes et timing des sauts
+de Strafe- und Sprung-Timing
+it Strafe e tempismo dei salti
+es Strafe y ritmo de salto
+ru Стрейф и тайминг прыжков
+
+@ Input Sequence
+fr Séquence de commandes
+de Eingabefolge
+it Sequenza di comandi
+es Secuencia de controles
+ru Последовательность ввода

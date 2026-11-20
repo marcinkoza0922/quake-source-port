@@ -3967,3 +3967,28 @@ yue 用戶資料目錄已經設為 {}
 
 @ User data directory error: {}
 yue 用戶資料目錄出錯：{}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+yue 郁動同輸入
+
+@ Strafe & Jump Timing
+yue 橫移同跳躍時機
+
+@ Input Sequence
+yue 輸入次序
+
+@ Ground
+yue 喺地面
+
+@ Airborne
+yue 喺半空
+
+@ Jump Timing
+yue 跳躍時機
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+yue 本機遊戲。將白色記號對準金色記號。跳躍：− 太早，+ 太遲。
+
+@ Shows the eight most recent gameplay inputs
+yue 顯示遊戲入面最近八次輸入

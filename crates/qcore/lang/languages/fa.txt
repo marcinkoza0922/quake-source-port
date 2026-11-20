@@ -3967,3 +3967,28 @@ fa پوشه داده‌های کاربر روی {} تنظیم شد
 
 @ User data directory error: {}
 fa خطای پوشه داده‌های کاربر: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+fa حرکت و ورودی
+
+@ Strafe & Jump Timing
+fa حرکت جانبی و زمان‌بندی پرش
+
+@ Input Sequence
+fa دنبالهٔ ورودی
+
+@ Ground
+fa روی زمین
+
+@ Airborne
+fa در هوا
+
+@ Jump Timing
+fa زمان‌بندی پرش
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+fa بازی محلی. نشانگر سفید را با طلایی هم‌راستا کنید. پرش: − زود، + دیر.
+
+@ Shows the eight most recent gameplay inputs
+fa هشت ورودی اخیر حین بازی را نشان می‌دهد

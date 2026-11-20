@@ -3967,3 +3967,28 @@ hy Օգտատիրոջ տվյալների պանակը սահմանվեց՝ {}
 
 @ User data directory error: {}
 hy Օգտատիրոջ տվյալների պանակի սխալ՝ {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+hy Շարժում և կառավարում
+
+@ Strafe & Jump Timing
+hy Կողաշարժ և ցատկի պահ
+
+@ Input Sequence
+hy Հրամանների հերթականություն
+
+@ Ground
+hy Գետնին
+
+@ Airborne
+hy Օդում
+
+@ Jump Timing
+hy Ցատկի պահ
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+hy Տեղային խաղ։ Համընկեցրեք սպիտակ նշիչը ոսկեգույնին։ Ցատկ՝ − շուտ, + ուշ։
+
+@ Shows the eight most recent gameplay inputs
+hy Ցույց է տալիս խաղի վերջին ութ մուտքային հրամանները

@@ -234,12 +234,12 @@ impl Host {
                             damage_view.draw_damage(&mut cc, damage_height, self.server.core.cvars.value_of("hud_damageindicator") != 0.0, self.server.core.cvars.value_of("v_flashscale"));
                             let feedback = if i == 0 { &self.feedback } else { &self.guests[live[i - 1]].feedback };
                             let marker = (feedback.remaining(self.realtime), feedback.kill);
-                            let (cl, fade, face, locked, active, held_addon) = if i == 0 {
-                                (&self.cl, &mut self.hud.fade, self.view.face_anim_time > self.cl.time, self.input.lockon.target.is_some(), self.input.lockon.active, self.toy.held)
+                            let (cl, fade, face, locked, active, held_addon, training) = if i == 0 {
+                                (&self.cl, &mut self.hud.fade, self.view.face_anim_time > self.cl.time, self.input.lockon.target.is_some(), self.input.lockon.active, self.toy.held, &self.training)
                             } else {
                                 let Some(g) = live.get(i - 1).and_then(|&k| self.guests.get_mut(k)) else { continue };
                                 let face = g.view.face_anim_time > g.cl.time;
-                                (&g.cl, &mut g.hud_fade, face, g.input.lockon.target.is_some(), g.input.lockon.active, g.toy.held)
+                                (&g.cl, &mut g.hud_fade, face, g.input.lockon.target.is_some(), g.input.lockon.active, g.toy.held, &g.training)
                             };
                             if i > 0 {
                                 fade.update(&self.hud.layout, cl, (&addon_entries, held_addon), self.realtime);
@@ -251,7 +251,8 @@ impl Host {
                                 hitmarker::draw_hitmarker(&mut cc, vh, &self.server.core.cvars, marker.0, color);
                             }
                             if !hud.edit {
-                                let ctx = hud.ctx(cl, face, teamplay, &addon_entries, held_addon, self.show_scores, None);
+                                let mut ctx = hud.ctx(cl, face, teamplay, &addon_entries, held_addon, self.show_scores, None);
+                                ctx.training = Some((training, false));
                                 crate::hud::draw_layout(&mut cc, &mut pf, &self.hud.layout, &cell_rects, &ctx, Some(fade), self.realtime, crate::hud::kind::Kind::is_player);
                             }
                             if self.show_scores && cl.gametype == 1 {
@@ -296,7 +297,10 @@ impl Host {
                                 player_yaw: self.cl.viewangles[1],
                                 allowed: automap_allowed,
                             };
-                            let ctx = hud.ctx(&self.cl, face, teamplay, &addon_entries, self.toy.held, self.show_scores, Some(am));
+                            let mut ctx = hud.ctx(&self.cl, face, teamplay, &addon_entries, self.toy.held, self.show_scores, Some(am));
+                            if self.demo.is_none() {
+                                ctx.training = Some((&self.training, false));
+                            }
                             crate::hud::draw_layout(&mut c, &mut pf, &self.hud.layout, &self.hud.rects, &ctx, Some(&self.hud.fade), self.realtime, |_| true);
                         } else if !hud.edit && viewsize < 120.0 && simple_csqc_hud {
                             // Simple CSQC HUD runs after releasing the local `pf` borrow below.
@@ -393,7 +397,8 @@ impl Host {
                     player_yaw: self.cl.viewangles[1],
                     allowed: true,
                 };
-                let ctx = hud.ctx(&self.cl, false, teamplay, &addon_entries, None, false, Some(am));
+                let mut ctx = hud.ctx(&self.cl, false, teamplay, &addon_entries, None, false, Some(am));
+                ctx.training = Some((&self.training, hud.sample.is_some()));
                 crate::hud::draw_layout(&mut c, &mut pf, &self.hud.layout, &self.hud.rects, &ctx, None, self.realtime, |_| true);
             }
             self.menu.draw(&mut c, &mut pf, &self.server.core.cvars, self.realtime);

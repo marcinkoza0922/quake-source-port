@@ -3967,3 +3967,28 @@ ca Directori de dades d'usuari establert a {}
 
 @ User data directory error: {}
 ca Error del directori de dades d'usuari: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+ca Moviment i controls
+
+@ Strafe & Jump Timing
+ca Strafe i temps del salt
+
+@ Input Sequence
+ca Seqüència de controls
+
+@ Ground
+ca A terra
+
+@ Airborne
+ca A l’aire
+
+@ Jump Timing
+ca Temps del salt
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+ca Partides locals. Alinea el marcador blanc amb el daurat. Salt: − aviat, + tard.
+
+@ Shows the eight most recent gameplay inputs
+ca Mostra les vuit darreres entrades durant la partida

@@ -3967,3 +3967,28 @@ lv Lietotāja datu mape iestatīta uz {}
 
 @ User data directory error: {}
 lv Lietotāja datu mapes kļūda: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+lv Kustība un ievade
+
+@ Strafe & Jump Timing
+lv Sānkustība un lēciena laiks
+
+@ Input Sequence
+lv Ievades secība
+
+@ Ground
+lv Uz zemes
+
+@ Airborne
+lv Gaisā
+
+@ Jump Timing
+lv Lēciena laiks
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+lv Lokāla spēle. Salāgo balto atzīmi ar zeltaino. Lēciens: − par agru, + par vēlu.
+
+@ Shows the eight most recent gameplay inputs
+lv Rāda astoņas nesenākās spēles ievades

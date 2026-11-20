@@ -3967,3 +3967,28 @@ uk Теку даних користувача встановлено на {}
 
 @ User data directory error: {}
 uk Помилка теки даних користувача: {}
+
+# Movement and input HUD widgets.
+@ Movement & Input
+uk Рух і керування
+
+@ Strafe & Jump Timing
+uk Стрейф і таймінг стрибків
+
+@ Input Sequence
+uk Послідовність вводу
+
+@ Ground
+uk На землі
+
+@ Airborne
+uk У повітрі
+
+@ Jump Timing
+uk Таймінг стрибка
+
+@ Local games. Align white with gold. Jump timing: − early, + late.
+uk Локальна гра. Сумістіть білу позначку із золотою. Стрибок: − зарано, + запізно.
+
+@ Shows the eight most recent gameplay inputs
+uk Показує вісім останніх дій керування в грі

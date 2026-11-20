@@ -674,3 +674,24 @@ de [Zerfetzt]
 it [Fatto a pezzi]
 es [Despedazado]
 ru [Разорван]
+
+@ Ground
+fr Au sol
+de Boden
+it A terra
+es Suelo
+ru На земле
+
+@ Airborne
+fr En l’air
+de In der Luft
+it In aria
+es En el aire
+ru В воздухе
+
+@ Jump Timing
+fr Timing du saut
+de Sprung-Timing
+it Tempismo salto
+es Ritmo de salto
+ru Тайминг прыжка

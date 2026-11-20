@@ -26,7 +26,7 @@ pub(super) fn keywords(item: Item) -> &'static str {
         // the HUD editor holds the elements that had their own rows
         Item::Run { run: Run::EditHud, .. } => {
             "layout interface move position health armor ammo weapons keys clock timer personal best kills secrets speedometer speed velocity ups fps \
-             framerate performance cpu gpu memory messages captions subtitles text font"
+             framerate performance cpu gpu memory messages captions subtitles text font strafe bunnyhop cgaz jump timing input sequence"
         }
         _ => "",
     }
