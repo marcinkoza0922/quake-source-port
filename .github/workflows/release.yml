@@ -232,7 +232,7 @@ jobs:
         run: |
           version=$(python3 -c 'import tomllib; print(next(p["version"] for p in tomllib.load(open("Cargo.lock", "rb"))["package"] if p["name"] == "wasm-bindgen"))')
           cargo install wasm-bindgen-cli --locked --version "$version"
-          cargo fetch --locked --target wasm32-unknown-unknown
+          cargo fetch --locked
           tools/webbuild/build.sh
           ref="${GITHUB_REF_NAME//\//-}"
           d="quake-source-port-$ref-web"
