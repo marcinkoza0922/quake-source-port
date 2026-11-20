@@ -9,6 +9,11 @@ layout(push_constant) uniform P { mat4 model; vec4 params; } pc;
 layout(location = 0) out vec4 o_color;
 void main() {
     if (dot(fr.portal_clip.xyz, i_wpos) + fr.portal_clip.w < 0.0) discard;
+    if (pc.params.y > 0.0) {
+        o_color = pc.params.y == 1.0 ? vec4(0.75, 0.95, 1.0, 0.9) : vec4(1.0, 0.32, 0.12, 0.35);
+        GLOW_OUT(vec4(0.0));
+        return;
+    }
     uvec4 m = materials[i_mat];
     // texel coords are in miptex units; an external replacement may differ in size
     vec2 size = m.w != 0u ? vec2(m.w & 0xffffu, m.w >> 16) : vec2(textureSize(textures[nonuniformEXT(m.x)], 0));
@@ -23,6 +28,12 @@ void main() {
     vec2 lmsize = vec2(textureSize(lightmap, 0).xy) * 16.0;
     if (dither != 0u) // snap to the software renderer's surface-cache texels
         lm.xy = (floor(lm.xy * lmsize) + 0.5) / lmsize;
+    if ((fr.softf.x & 32u) != 0u) {
+        vec3 visible_light = (m.z & 0x20u) != 0u ? vec3(1.0) : texture(lightmap, lm).rgb;
+        o_color = vec4(visible_light, pc.params.x);
+        GLOW_OUT(vec4(0.0));
+        return;
+    }
     vec3 light = (m.z & 0x20u) != 0u || fullbright ? vec3(1.0) : texture(lightmap, lm).rgb;
     // r_shadow_realtime_dlight: dynamic lights per pixel (the lightmaps then
     // leave them out), using smooth FACENORMALS when present (else plane normal).

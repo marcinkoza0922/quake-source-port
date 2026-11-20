@@ -97,6 +97,10 @@ pub struct Pipelines {
     pub alias_alpha: vk::Pipeline,
     /// Thermal goggles: alias models behind the scene depth, additive.
     pub alias_xray: vk::Pipeline,
+    pub wire_enabled: bool,
+    pub wire_world: [vk::Pipeline; 2],
+    pub wire_alias: [vk::Pipeline; 2],
+    pub wire_sprite: [vk::Pipeline; 2],
     pub poly: vk::Pipeline,
     pub particle: vk::Pipeline,
     /// FTE particles: 8 blend modes of triangles, then the same as lines
@@ -429,6 +433,10 @@ impl Pipelines {
             alias: null,
             alias_alpha: null,
             alias_xray: null,
+            wire_enabled: false,
+            wire_world: [null; 2],
+            wire_alias: [null; 2],
+            wire_sprite: [null; 2],
             poly: null,
             particle: null,
             fte: [null; 17],

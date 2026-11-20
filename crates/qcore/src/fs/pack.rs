@@ -126,6 +126,11 @@ impl Pack {
         &self.names
     }
 
+    /// Uncompressed length of an archive member, without opening it.
+    pub fn entry_size(&self, name: &str) -> Option<u32> {
+        self.entries.get(&norm(name)).map(|e| e.size)
+    }
+
     pub fn read(&self, name: &str) -> Option<Vec<u8>> {
         let e = *self.entries.get(&norm(name))?;
         let mut f = crate::vfs::open_read(&self.path).ok()?;

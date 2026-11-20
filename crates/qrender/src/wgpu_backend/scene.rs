@@ -79,6 +79,7 @@ pub(super) struct ViewDraw {
 #[derive(Default)]
 pub(super) struct Lists {
     pub(super) world_idx: Vec<u32>,
+    pub(super) world_polys: u32,
     pub(super) alias_v: Vec<AliasV>,
     pub(super) poly_v: Vec<FteVertex>,
     pub(super) poly_i: Vec<u32>,
@@ -146,6 +147,7 @@ pub(super) fn world_cmds(
         }
         let t = (wr.cpu.resolve_texture(s.texture, alt, time, si) as usize).min(nb - 1);
         wr.buckets[t].push(si);
+        lists.world_polys += 1;
     }
     for t in 0..nb {
         if wr.buckets[t].is_empty() {
@@ -232,33 +234,39 @@ impl Renderer {
             alphas,
             vel: self.vel_frame_params(),
             soft: [soft.0, soft.1, 0.0, 0.0],
-            softf: [soft.2 | (u32::from(st.fullbright) << 4), soft.3, st.goggles.mode.min(2), 0],
+            softf: [soft.2 | (u32::from(st.fullbright) << 4) | st.mapper.lightmap_flag(), soft.3, st.goggles.mode.min(2), 0],
             wind: if self.skybox.is_some() { st.sky_wind } else { [0.0; 4] },
             pad: [0.0; 4],
         });
         let fu = lists.frame_u.len() as u32 - 1;
         let mut b = Buckets::default();
+        let mut leaves = 0;
         if let Some(wr) = self.world.as_mut() {
+            if lists.views.is_empty() {
+                wr.cpu.lock_pvs(st.mapper.lock_pvs, Some(vs.eye));
+            }
             let need_novis = wr.cpu.needs_transparent_novis(alphas);
             wr.cpu.set_transparent_liquids(need_novis);
-            let pvs = wr.cpu.portal_surfaces(vs.eye);
-            let surfs: Vec<u32> = pvs
-                .iter()
-                .copied()
-                .filter(|&si| {
-                    let s = &wr.cpu.surfaces[si as usize];
-                    if !crate::world::box_in_frustum(&vs.frustum, s.mins, s.maxs) {
-                        return false;
-                    }
-                    s.kind == TextureKind::Sky || ((dot(vs.eye, s.normal) - s.dist < 0.0) == s.flipped)
-                })
-                .collect();
+            let (surfs, visible_leaves) = wr.cpu.view_surfaces(vs.eye, &vs.frustum);
+            leaves = visible_leaves;
             world_cmds(wr, &surfs, false, fr.time, alphas, 1.0, ident(), 0.0, lists, &mut b);
         }
         self.entity_cmds(fr, &vs, vbit, alphas, lists, &mut b);
+        if st.mapper.wire != 0 {
+            let scene: Vec<Cmd> = b.opaque.iter().chain(&b.sky).chain(&b.alpha_liquids)
+                .chain(b.trans.iter().map(|(_, cmd)| cmd)).copied().collect();
+            if let Some(wire) = self.wire_cmd(st.mapper.wire, lists, &scene, false) {
+                b.trans.push((f32::NEG_INFINITY, wire));
+            }
+            if let Some(wire) = self.wire_cmd(st.mapper.wire, lists, &scene, true) {
+                b.trans.push((f32::NEG_INFINITY, wire));
+            }
+        }
         self.particle_cmds(fr, &vs, lists, &mut b);
         let tan = crate::projection::half_fov_tangents(view, (sw, sh));
-        self.splash_cmds(fr, vs.eye, [vs.fwd, vs.right, vs.up], 2.0 * tan[1] / sh.max(1) as f32, lists, &mut b);
+        if !st.mapper.lightmap {
+            self.splash_cmds(fr, vs.eye, [vs.fwd, vs.right, vs.up], 2.0 * tan[1] / sh.max(1) as f32, lists, &mut b);
+        }
         b.trans.sort_by(|a, c| c.0.total_cmp(&a.0));
         let (mut cmds, late): (Vec<Cmd>, Vec<Cmd>) =
             b.opaque.into_iter().partition(|c| !c.viewmodel && c.pipe != Pipe::Water);
@@ -275,6 +283,9 @@ impl Renderer {
         let out = [ow, oh];
         let (vel, soft) = (b.vel, b.soft);
         let speed_blur = view.speed_blur.clamp(0.0, 1.0).max(st.edge_blur.clamp(0.0, 1.0));
+        if lists.views.is_empty() && (st.mapper.speeds || st.mapper.wire != 0) {
+            self.mapper_stats = super::mapper::stats(lists, &cmds, soft.len(), leaves);
+        }
         let scene = [sw, sh];
         lists.views.push(ViewDraw { fu, rect, ofs, scene, out, blend, warp, tan, fog, split, cmds, speed_blur, vel, soft });
     }

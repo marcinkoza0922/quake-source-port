@@ -33,6 +33,24 @@ pub struct EdictBox {
 }
 
 impl Server {
+    /// Live Quake trigger bounds. SV_TouchLinks overlaps AABBs even for
+    /// brush triggers, so these show the actual contact volumes.
+    pub fn trigger_boxes(&self) -> Vec<(Vec3, Vec3, bool)> {
+        let Some(l) = self.level.as_ref().filter(|_| self.active() && self.core.maxclients() == 1)
+            else { return Vec::new() };
+        let (vm, f) = (&l.vm, &self.core.sv.fields);
+        (1..vm.num_edicts() as u32).filter(|&e| !vm.is_free(e)).filter_map(|e| {
+            let class = vm.classname(e);
+            if !class.starts_with("trigger_") {
+                return None;
+            }
+            let origin = Vec3::from(vm.ent_v(e, f.origin));
+            let mins = Vec3::from(vm.ent_v(e, f.mins));
+            let maxs = Vec3::from(vm.ent_v(e, f.maxs));
+            (mins != maxs).then_some((origin + mins, origin + maxs, class == "trigger_secret"))
+        }).collect()
+    }
+
     /// Every live edict but the world and `skip` (the viewing player), or
     /// nothing when no single-player level is running. With `pvs_from`,
     /// each box records whether it is in the fat PVS of that point.

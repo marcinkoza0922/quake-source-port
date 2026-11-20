@@ -123,3 +123,22 @@ fn water_vised_skips_novis_only_when_pvs_crosses_liquid_boundaries() {
     // ...but with no VIS at all every liquid counts as see-through.
     assert!(w.liquid_seethrough(0));
 }
+
+#[test]
+fn locked_pvs_retains_its_leaf_with_live_camera_frustum() {
+    let mut w = world();
+    let east = [1.0, 0.0, 0.0];
+    let west = [-1.0, 0.0, 0.0];
+    let all = [[0.0, 0.0, 0.0, 1.0]; 4];
+    let west_only = [[-1.0, 0.0, 0.0, 0.0]; 4];
+    let mut bits = Vec::new();
+
+    w.lock_pvs(true, Some(east));
+    w.leaf_bits(west, &all, &mut bits);
+    assert_eq!(bits, [1 << 1]);
+    w.leaf_bits(west, &west_only, &mut bits);
+    assert_eq!(bits, [0], "the live frustum should still clip the frozen leaf");
+    w.lock_pvs(false, Some(west));
+    w.leaf_bits(west, &all, &mut bits);
+    assert_eq!(bits, [1 << 2]);
+}

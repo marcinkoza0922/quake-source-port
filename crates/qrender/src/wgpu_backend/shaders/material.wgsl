@@ -148,6 +148,10 @@ fn world_frag(i: WorldOut) -> Frag {
     }
     let lmc = textureSampleLevel(lightmap, lm_samp, lm, i32(i.lm.z + 0.5), 0.0).rgb * 2.0;
     if (du.params.x > 0.5 && c.a < 0.666) { discard; }
+    if ((fr.softf.x & 32u) != 0u) {
+        let visible_light = select(lmc, vec3<f32>(1.0), du.params.z > 0.5);
+        return Frag(vec4<f32>(visible_light, du.color.x), vec4<f32>(0.0));
+    }
     let has_nrm = dot(i.nrm, i.nrm) > 1e-6;
     var n = normalize(select(nf, i.nrm, has_nrm));
     if ((!has_nrm || du.params.x > 0.5) && dot(n, fr.eye.xyz - i.wpos) < 0.0) { n = -n; }
@@ -205,6 +209,9 @@ fn world_frag(i: WorldOut) -> Frag {
 @fragment fn fs_water(i: WorldOut) -> @location(0) vec4<f32> { return water_frag(i).c; }
 @fragment fn fs_water_glow(i: WorldOut) -> Frag { return water_frag(i); }
 fn water_frag(i: WorldOut) -> Frag {
+    if ((fr.softf.x & 32u) != 0u) {
+        return Frag(vec4<f32>(0.24, 0.24, 0.24, 1.0), vec4<f32>(0.0));
+    }
     let t = fr.eye.w;
     let kind = u32(du.params.w + 0.5);
     let nf = cross(dpdx(i.wpos), dpdy(i.wpos));
@@ -360,6 +367,7 @@ struct PolyOut {
 @vertex fn vs_poly(v: PolyIn) -> PolyOut {
     var o: PolyOut;
     o.clip = fr.viewproj * vec4<f32>(v.pos, 1.0);
+    if (du.ix.z == 1u) { o.clip.z -= min(o.clip.z, 0.00005 * o.clip.w); }
     o.uv = v.uv;
     o.color = v.color;
     o.wpos = v.pos;

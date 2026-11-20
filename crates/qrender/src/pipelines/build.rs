@@ -48,6 +48,9 @@ impl Pipelines {
             self.water_rt_alpha,
         ];
         v.extend(self.fte);
+        v.extend(self.wire_world);
+        v.extend(self.wire_alias);
+        v.extend(self.wire_sprite);
         v.extend(self.portal.all().filter(|&p| p != vk::Pipeline::null()));
         v
     }
@@ -135,6 +138,7 @@ impl Pipelines {
             glow: false,
             shadow: false,
             mirror: false,
+            wire: false,
         };
         let g = |d: Desc| graphics(gpu, layout, &d);
         let fb = [bind(0, 24, false)];
@@ -196,6 +200,20 @@ impl Pipelines {
         let one = vk::BlendFactor::ONE;
         let (alias_main_fs, poly_main_fs) = if glow { (glow_fs.alias, glow_fs.poly) } else { (alias_fs, poly_fs) };
         self.alias_xray = g(Desc { cull: true, behind: true, glow, ..d(alias_vs, alias_main_fs, &ab, &aa, Blend::Factors(one, one), true, false) })?;
+        if self.wire_enabled {
+            let world_main_fs = if glow { glow_fs.world } else { world_fs };
+            for (i, depth) in [true, false].into_iter().enumerate() {
+                self.wire_world[i] = g(Desc {
+                    wire: true, glow, ..d(world_vs, world_main_fs, &wb, &wa, Blend::Alpha, depth, false)
+                })?;
+                self.wire_alias[i] = g(Desc {
+                    wire: true, cull: depth, glow, ..d(alias_vs, alias_main_fs, &ab, &aa, Blend::Alpha, depth, false)
+                })?;
+                self.wire_sprite[i] = g(Desc {
+                    wire: true, glow, ..d(poly_vs, poly_main_fs, &pb, &pa, Blend::Alpha, depth, false)
+                })?;
+            }
+        }
         let poly = g(Desc { glow, ..d(poly_vs, poly_main_fs, &pb, &pa, Blend::Alpha, true, true) })?;
         // UI is drawn in the output pass, after post-processing
         let ui = graphics(
@@ -229,6 +247,7 @@ impl Pipelines {
                 glow: false,
                 shadow: false,
                 mirror: false,
+                wire: false,
             },
         )?;
         // post-effect passes: single-sampled, no depth attachment

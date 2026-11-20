@@ -4,7 +4,8 @@ impl Server {
     /// SV_SpawnServer. Errors (missing map/progs, QC errors while spawning) are
     /// also recorded as the level error.
     pub fn spawn_server(&mut self, mapname: &str) -> Result<(), String> {
-        let r = self.spawn_inner(mapname);
+        self.reset_map_watch(mapname);
+        let r = self.spawn_inner(mapname, None);
         self.core.spawns += 1;
         if let Err(e) = &r {
             self.core.print(&qcore::ctr!("Couldn't spawn server {}: {}\n", mapname, e));
@@ -16,7 +17,12 @@ impl Server {
         r
     }
 
-    pub(super) fn spawn_inner(&mut self, mapname: &str) -> Result<(), String> {
+    pub(super) fn spawn_inner(
+        &mut self,
+        mapname: &str,
+        reload: Option<Vec<Option<super::reload::PlayerState>>>,
+    ) -> Result<(), String> {
+        let reloading = reload.is_some();
         let c = &mut self.core;
         c.changelevel_issued = false;
         c.linked_portals.clear();
@@ -73,6 +79,8 @@ impl Server {
             vis: Vis::new(cm.clone(), &bsp),
             effects_mask: if isqex { -1 } else { !(16 | 32 | 64) },
             parse_client_command,
+            reloaded: reloading,
+            reload_players: reload.unwrap_or_default(),
             ..Sv::default()
         };
         let sub0 = cm.submodels.first();
@@ -119,6 +127,7 @@ impl Server {
             && let Some(e) = c.fs.open_companion(&format!("maps/{mapname}.bsp"), &format!("maps/{mapname}.ent"))
         {
             ents = qcore::text::decode(&e);
+            c.sv.external_entities = Some(ents.clone());
         }
         // sv_horde (tools) or the Extra Monsters modifier of a customized game
         let horde = c.cvars.value_of("sv_horde").max(crate::modifiers::value(c, "modifier_horde")).clamp(0.0, 64.0) as usize;
@@ -138,6 +147,9 @@ impl Server {
         if let Some(e) = &c.sv.error {
             return Err(e.to_string());
         }
+        if reloading && vm.classname(0) != "worldspawn" {
+            return Err("missing worldspawn".into());
+        }
         c.sv.active = true;
         c.sv.loading = false;
         vm.protect_world = true;
@@ -152,6 +164,9 @@ impl Server {
         self.physics(0.1);
         if let Some(e) = &self.core.sv.error {
             return Err(e.to_string());
+        }
+        if reloading && self.core.clients.iter().any(|cl| cl.active && cl.local) {
+            self.core.sv.reload_bsp = Some(bsp);
         }
         self.create_baseline();
         for i in 0..self.core.maxclients() {

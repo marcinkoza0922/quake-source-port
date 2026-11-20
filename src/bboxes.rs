@@ -19,6 +19,9 @@ use qcore::math::Vec3;
 use qrender::{FteBatch, FteBlend, FteVertex, PicId, Renderer};
 use qserver::{BoxModel, EdictBox};
 
+mod hull;
+mod mapper;
+
 const LINK_OUT: u8 = 1;
 const LINK_IN: u8 = 2;
 
@@ -94,6 +97,7 @@ fn center(b: &EdictBox) -> Vec3 {
 #[derive(Default)]
 pub struct BBoxes {
     pic: Option<PicId>,
+    hull: mapper::HullCache,
     /// `pointfile`: the leak path from `maps/<map>.pts`, collinear points
     /// merged; cleared on map load.
     pub pointfile: Vec<Vec3>,
@@ -255,14 +259,18 @@ fn point(g: &mut Geometry, o: Vec3, color: [u8; 4]) {
     }
 }
 
+fn corner(mins: Vec3, maxs: Vec3, i: usize) -> Vec3 {
+    Vec3::new(
+        if i & 1 != 0 { mins.x } else { maxs.x },
+        if i & 2 != 0 { mins.y } else { maxs.y },
+        if i & 4 != 0 { mins.z } else { maxs.z },
+    )
+}
+
 fn wire_box(g: &mut Geometry, mins: Vec3, maxs: Vec3, color: [u8; 4]) {
     let n = g.0.len() as u32;
     for i in 0..8 {
-        let p = Vec3::new(
-            if i & 1 != 0 { mins.x } else { maxs.x },
-            if i & 2 != 0 { mins.y } else { maxs.y },
-            if i & 4 != 0 { mins.z } else { maxs.z },
-        );
+        let p = corner(mins, maxs, i);
         g.0.push(FteVertex { pos: p.to_array(), uv: [0.5, 0.5], color });
     }
     const EDGES: [u32; 24] = [0, 1, 0, 2, 0, 4, 1, 3, 1, 5, 2, 3, 2, 6, 3, 7, 4, 5, 4, 6, 5, 7, 6, 7];

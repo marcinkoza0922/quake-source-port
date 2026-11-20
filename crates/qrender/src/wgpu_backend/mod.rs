@@ -13,6 +13,7 @@ mod fx_pipes;
 mod level;
 mod lightmap;
 mod math;
+mod mapper;
 mod models;
 mod motion;
 mod pipes;
@@ -65,6 +66,7 @@ struct Targets {
 
 /// The renderer. Not `Send`: keep it on the render thread.
 pub struct Renderer {
+    mapper_stats: crate::MapperStats,
     /// Force GPU timestamps on without QSP_GPUTIMES (profiling, `prof_start`).
     pub gpu_times_wanted: bool,
     /// CPU time spent waiting for the GPU last frame (ns).
@@ -250,6 +252,7 @@ impl Renderer {
             samplers,
             textures: Vec::new(),
             white,
+            mapper_stats: crate::MapperStats::default(),
             black,
             bind_groups: HashMap::new(),
             sky_group: None,

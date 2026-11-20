@@ -223,6 +223,8 @@ pub(super) struct WorldDraw {
     /// Brush entity bounding sphere (centre, radius) for shadow casting;
     /// radius 0 for the world.
     pub(super) bounds: [f32; 4],
+    pub(super) polys: u32,
+    pub(super) triangles: u32,
 }
 
 /// Per-frame inputs of cull.comp, filled while building the scene.

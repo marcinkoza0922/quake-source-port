@@ -2,6 +2,30 @@
 
 use super::Goggles;
 
+#[derive(Clone, Copy, Debug, Default)]
+pub struct MapperSettings {
+    /// 1 draws visible edges, 2 includes overdraw behind depth.
+    pub wire: u32,
+    pub lightmap: bool,
+    pub lock_pvs: bool,
+    pub speeds: bool,
+}
+
+#[derive(Clone, Copy, Debug, Default)]
+pub struct MapperStats {
+    pub world_polys: u32,
+    pub entity_polys: u32,
+    pub triangles: u32,
+    pub leaves: u32,
+    pub draws: u32,
+}
+
+impl MapperSettings {
+    pub(crate) fn lightmap_flag(self) -> u32 {
+        u32::from(self.lightmap) << 5
+    }
+}
+
 /// Cvar-like settings.
 #[derive(Clone, Copy, Debug)]
 pub struct Settings {
@@ -33,6 +57,7 @@ pub struct Settings {
     /// r_fullbright: world lightmaps read as neutral light and alias models
     /// get ironwail's 0.5 light colour (single-player cheat).
     pub fullbright: bool,
+    pub mapper: MapperSettings,
     /// Sky_SetupFrame: skybox wind vector (world space, xyz) and loop phase
     /// (w); zero = still.
     pub sky_wind: [f32; 4],
@@ -179,6 +204,7 @@ impl Default for Settings {
             skyalpha: 1.0,
             dynamic: true,
             fullbright: false,
+            mapper: MapperSettings::default(),
             sky_wind: [0.0; 4],
             vsync: true,
             msaa: 1,

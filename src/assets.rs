@@ -90,6 +90,13 @@ fn load_model(fs: &Fs, r: &mut Renderer, name: &str, enhanced_models: bool) -> O
     None
 }
 
+pub struct LevelLoad<'a> {
+    pub colored: bool,
+    pub enhanced_models: bool,
+    pub external_entities: Option<&'a str>,
+    pub reload_bsp: Option<Bsp>,
+}
+
 impl Level {
     /// Lazily builds and caches the BSP collision model for this level.
     pub fn collision_model(&self) -> Option<&qworld::CollisionModel> {
@@ -104,13 +111,18 @@ impl Level {
         r: &mut Renderer,
         snd: Option<&mut SoundSystem>,
         cl: &mut ClientState,
-        colored: bool,
-        enhanced_models: bool,
+        options: LevelLoad<'_>,
         print: &mut dyn FnMut(&str),
     ) -> Level {
+        let LevelLoad { colored, enhanced_models, external_entities, reload_bsp } = options;
         let mut lv = Level { mapname: cl.mapname.clone(), enhanced_models, ..Default::default() };
         let world = cl.model_precache.get(1).cloned().unwrap_or_default();
-        let bsp = fs.open(&world).and_then(|d| Bsp::parse(&d).map_err(|e| print(&format!("{world}: {e}\n"))).ok());
+        let mut bsp = reload_bsp.or_else(|| {
+            fs.open(&world).and_then(|d| Bsp::parse(&d).map_err(|e| print(&format!("{world}: {e}\n"))).ok())
+        });
+        if let (Some(bsp), Some(ents)) = (&mut bsp, external_entities) {
+            bsp.entities = ents.to_owned();
+        }
         let mut subs = Vec::new();
         // External brush models (maps/b_*.bsp) load together with the world.
         let mut brush_names = Vec::new();

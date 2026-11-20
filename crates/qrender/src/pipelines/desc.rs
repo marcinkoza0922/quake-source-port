@@ -26,6 +26,7 @@ pub(super) struct Desc<'a> {
     pub(super) shadow: bool,
     /// Mirrored view (planar reflections): front faces wind the other way.
     pub(super) mirror: bool,
+    pub(super) wire: bool,
 }
 
 pub(super) fn attr(
@@ -74,7 +75,7 @@ pub(super) fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Resul
         .viewport_count(1)
         .scissor_count(1);
     let rs = vk::PipelineRasterizationStateCreateInfo::default()
-        .polygon_mode(vk::PolygonMode::FILL)
+        .polygon_mode(if d.wire { vk::PolygonMode::LINE } else { vk::PolygonMode::FILL })
         .cull_mode(if d.cull { vk::CullModeFlags::BACK } else { vk::CullModeFlags::NONE })
         .front_face(if d.mirror { vk::FrontFace::COUNTER_CLOCKWISE } else { vk::FrontFace::CLOCKWISE })
         .depth_bias_enable(d.depth)

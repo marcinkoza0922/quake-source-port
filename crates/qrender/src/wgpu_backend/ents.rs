@@ -29,14 +29,14 @@ impl Renderer {
                     let sm = *sm;
                     self.brush_cmds(fr, e, sm, vs, alphas, dist, lists, b);
                 }
-                Some(Model::Alias(am)) => {
+                Some(Model::Alias(am)) if !fr.settings.mapper.lightmap => {
                     let light = self.alias_light(fr, e, am, &styles);
                     // vertices are posed in world space: prev = M_prev · M_cur⁻¹
                     let prev = self.motion.prev_transform(e).map(|m| mul(&m, &affine_inv(entity_rotation(e.angles), e.origin)));
                     alias_cmds(fr, e, e.model.0 as usize, am, vs, light, dist, prev, lists, b);
                 }
-                Some(Model::Sprite(sm)) => sprite_cmds(fr, e, sm, vs, dist, lists, b),
-                None => {}
+                Some(Model::Sprite(sm)) if !fr.settings.mapper.lightmap => sprite_cmds(fr, e, sm, vs, dist, lists, b),
+                _ => {}
             }
         }
     }

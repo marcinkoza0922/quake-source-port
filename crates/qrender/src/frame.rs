@@ -14,6 +14,7 @@ use types::*;
 mod math;
 pub use math::*;
 mod world_draw;
+mod mapper;
 use world_draw::*;
 mod lightmaps;
 mod bloom;
@@ -100,6 +101,7 @@ impl Renderer {
             cap: self.frames[fi].dynbuf.size,
         };
         let st = &fr.settings;
+        self.mapper_stats = MapperStats::default();
         let mut teleport_ripples = [[0.0; 4]; MAX_TELEPORT_RIPPLES];
         let ripple_count = if st.teleport_windows {
             fr.teleport_ripples.len().min(MAX_TELEPORT_RIPPLES)
@@ -261,6 +263,11 @@ impl Renderer {
             Vec::new()
         };
 
+        if vi == 0 && let Some(wg) = self.world.as_mut() {
+            wg.cpu.lock_pvs(st.mapper.lock_pvs, view.as_ref().map(|vs| vs.eye));
+        }
+        let measure = vi == 0 && (st.mapper.speeds || st.mapper.wire != 0);
+        let mut leaves = 0;
         if let Some(vs) = &view {
             if let Some(wg) = self.world.as_mut() {
                 // ray-traced reflections reach surfaces outside the view:
@@ -285,13 +292,20 @@ impl Renderer {
                         wg, &mut self.buckets, &mut dynw, &surfs, false, time,
                         alphas, 1.0, ident(), &mut lm_vis,
                     ));
+                } else if measure {
+                    let (surfs, count) = wg.cpu.view_surfaces(vs.eye, &vs.frustum);
+                    leaves = count;
+                    world_draws.push(build_world_draw(
+                        wg, &mut self.buckets, &mut dynw, &surfs, false, time,
+                        alphas, 1.0, ident(), &mut lm_vis,
+                    ));
                 } else if wg.cpu.hidden_surfaces.is_empty() {
                     if let Some((wd, cf)) = gpu_world_draw(wg, &mut dynw, vs, time, alphas, fi) {
                         world_draws.push(wd);
                         cull = Some(cf);
                     }
                 } else {
-                    let surfs = wg.cpu.portal_surfaces(vs.eye);
+                    let surfs = wg.cpu.surfaces_for_leaf(wg.cpu.view_leaf(vs.eye));
                     world_draws.push(build_world_draw(
                         wg, &mut self.buckets, &mut dynw, &surfs, false, time,
                         alphas, 1.0, ident(), &mut lm_vis,
@@ -303,6 +317,9 @@ impl Renderer {
                 let Some(m) = self.models.get(e.model.0 as usize) else {
                     continue;
                 };
+                if st.mapper.lightmap && !matches!(m, Model::Brush(_)) {
+                    continue;
+                }
                 let rot = entity_rotation(e.angles);
                 let dist = dot(sub(e.origin, vs.eye), vs.fwd);
                 match m {
@@ -750,6 +767,9 @@ impl Renderer {
             }
             trans.sort_by(|a, b| b.0.total_cmp(&a.0));
         }
+        if measure {
+            self.mapper_stats = mapper::stats(&world_draws, &alias_draws, &sprite_draws, particles, fte.as_ref(), leaves);
+        }
         passes.push(ViewPass {
             speed_blur: view_in.map_or(0.0, |v| v.speed_blur.clamp(0.0, 1.0)),
             warp: match view_in.map(|v| v.waterwarp) {
@@ -941,7 +961,7 @@ impl Renderer {
                 ],
                 alphas,
                 soft: [soft.0, soft.1, st.goggles.intensity.clamp(0.25, 3.0), st.goggles.noise.clamp(0.0, 2.0)],
-                softf: [soft.2 | (u32::from(st.fullbright) << 4), soft.3, st.goggles.mode.min(2), self.caustic_tex],
+                softf: [soft.2 | (u32::from(st.fullbright) << 4) | st.mapper.lightmap_flag(), soft.3, st.goggles.mode.min(2), self.caustic_tex],
                 water: [
                     st.water_ripples.clamp(0.0, 4.0),
                     st.water_caustics.clamp(0.0, 4.0),
@@ -1670,6 +1690,28 @@ impl Renderer {
                     }
                 }
                 ts(12);
+                let wire = st.mapper.wire;
+                if wire != 0 && self.gpu.wireframe {
+                    let mode = (wire.min(2) - 1) as usize;
+                    if let Some(wg) = &self.world {
+                        // SAFETY: buffers and pipelines belong to the active render pass.
+                        mapper::draw_world_wire(&dev, cmd, p, wg, dynbuf, world_draws, mode);
+                    }
+                    for a in alias_draws.iter().filter(|a| !a.viewmodel) {
+                        let mut a = AliasDraw { push: a.push, ..*a };
+                        a.push.texs[3] |= 2048 | if mode == 1 { 4096 } else { 0 };
+                        dev.cmd_set_depth_bias(cmd, -4.0, 0.0, -0.125);
+                        draw_alias(&a, p.wire_alias[mode]);
+                    }
+                    dev.cmd_bind_pipeline(cmd, gfx, p.wire_sprite[mode]);
+                    let color = if mode == 0 { [0.75, 0.95, 1.0, 0.9] } else { [1.0, 0.32, 0.12, 0.35] };
+                    push(bytes_of(&[PolyPush { color, tex: NO_TEX }]));
+                    for sprite in sprite_draws.iter() {
+                        dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[sprite.vofs]);
+                        dev.cmd_draw(cmd, 6, 1, 0, 0);
+                    }
+                    dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
+                }
                 if particles.count > 0 {
                     dev.cmd_bind_pipeline(cmd, gfx, p.particle);
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[particles.ofs]);
@@ -1746,6 +1788,14 @@ impl Renderer {
                                 p.alias
                             },
                         );
+                        if wire != 0 && self.gpu.wireframe {
+                            let mode = (wire.min(2) - 1) as usize;
+                            let mut a = AliasDraw { push: a.push, ..*a };
+                            a.push.texs[3] |= 2048 | if mode == 1 { 4096 } else { 0 };
+                            dev.cmd_set_depth_bias(cmd, -4.0, 0.0, -0.125);
+                            draw_alias(&a, p.wire_alias[mode]);
+                            dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
+                        }
                     }
                 }
             } else {

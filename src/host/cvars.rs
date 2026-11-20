@@ -185,6 +185,12 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("capture_encoder", "", CVAR_ARCHIVE),
     ("scr_showspeed_ofs", "0", CVAR_ARCHIVE),
     // Mapper aid: server bounding boxes (see src/bboxes.rs).
+    ("r_showtris", "0", 0),
+    ("r_showclip", "0", 0),
+    ("r_showtriggers", "0", 0),
+    ("r_lightmap", "0", 0),
+    ("r_speeds", "0", 0),
+    ("r_lockpvs", "0", 0),
     ("r_showbboxes", "0", 0),
     ("r_showbboxes_think", "0", 0),
     ("r_showbboxes_health", "0", 0),

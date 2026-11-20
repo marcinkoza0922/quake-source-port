@@ -24,6 +24,11 @@ vec4 stex(uint i, vec2 st, bool affine) {
 }
 void main() {
     if (dot(fr.portal_clip.xyz, i_wpos) + fr.portal_clip.w < 0.0) discard;
+    if ((pc.texs.w & 2048u) != 0u) {
+        o_color = (pc.texs.w & 4096u) == 0u ? vec4(0.75, 0.95, 1.0, 0.9) : vec4(1.0, 0.32, 0.12, 0.35);
+        GLOW_OUT(vec4(0.0));
+        return;
+    }
     uint mode = fr.softf.y;
     bool affine = mode == 2u;
     vec2 st = affine ? i_st_affine : i_st;
