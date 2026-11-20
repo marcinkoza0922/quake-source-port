@@ -1766,6 +1766,15 @@ et Näita silti
 @ Speedometer
 et Spidomeeter
 
+@ Quick Reset
+et Kiirtaaskäivitus
+
+@ Screenshot
+et Ekraanipilt
+
+@ Record Demo
+et Salvesta demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

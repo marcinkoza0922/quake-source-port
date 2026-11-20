@@ -1766,6 +1766,15 @@ uk Показати підпис
 @ Speedometer
 uk Спідометр
 
+@ Quick Reset
+uk Швидкий перезапуск
+
+@ Screenshot
+uk Знімок екрана
+
+@ Record Demo
+uk Записувати демо
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

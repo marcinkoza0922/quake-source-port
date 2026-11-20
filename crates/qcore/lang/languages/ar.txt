@@ -1766,6 +1766,15 @@ ar إظهار التسمية
 @ Speedometer
 ar عداد السرعة
 
+@ Quick Reset
+ar إعادة سريعة
+
+@ Screenshot
+ar لقطة الشاشة
+
+@ Record Demo
+ar تسجيل عرض
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

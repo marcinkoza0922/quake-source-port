@@ -163,6 +163,7 @@ impl Host {
         for e in events {
             self.handle_event(e);
         }
+        self.poll_pad_gestures();
         let spawns = self.server.core.spawns;
         let now = self.realtime;
         let (due, rest): (Vec<_>, Vec<_>) = std::mem::take(&mut self.delayed).into_iter().partition(|(t, _)| *t <= now);
@@ -285,6 +286,11 @@ impl Host {
         let spawned = self.server.core.spawns != spawns && self.server.active();
         if spawned {
             self.accum = self.accum.max(tic);
+            self.pend_attack = false;
+            self.pend_attack2 = false;
+            self.pend_jump = false;
+            self.pend_dodge = false;
+            self.pend_impulse = 0;
         }
         if self.accum >= tic {
             let mut sdt = self.accum.min(0.1) * timescale;
@@ -297,7 +303,7 @@ impl Host {
                 sdt = hfr;
             }
             self.accum = 0.0;
-            if let Some(i) = self.local {
+            if let Some(i) = self.local && !spawned {
                 let mut cmd = self.last_cmd;
                 cmd.buttons = self.toy.buttons(self.pend_attack, self.pend_attack2, self.pend_jump)
                     | if self.pend_dodge { qserver::addons::BUTTON_DODGE } else { 0 };

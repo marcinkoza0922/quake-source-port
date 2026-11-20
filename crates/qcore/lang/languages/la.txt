@@ -1766,6 +1766,15 @@ la Titulum ostende
 @ Speedometer
 la Celeritatis mensura
 
+@ Quick Reset
+la Celeriter iterare
+
+@ Screenshot
+la Imago quadri
+
+@ Record Demo
+la Demonstrationem inscribere
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

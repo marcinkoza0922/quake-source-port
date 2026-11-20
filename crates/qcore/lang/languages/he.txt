@@ -1766,6 +1766,15 @@ he הצג תווית
 @ Speedometer
 he מד מהירות
 
+@ Quick Reset
+he איפוס מהיר
+
+@ Screenshot
+he צילום מסך
+
+@ Record Demo
+he הקלטת הדגמה
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

@@ -1766,6 +1766,15 @@ ca Mostra l'etiqueta
 @ Speedometer
 ca Velocímetre
 
+@ Quick Reset
+ca Reinici ràpid
+
+@ Screenshot
+ca Captura de pantalla
+
+@ Record Demo
+ca Grava una demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

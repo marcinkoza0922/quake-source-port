@@ -4,6 +4,7 @@ mod menu_controller;
 mod demo_seek;
 mod hud_preset;
 mod pb_ghost;
+mod pad_gestures_and_controls;
 
 mod relaunch_tests {
     #[test]
@@ -25,6 +26,7 @@ mod pad_default_tests {
         assert!(b.contains(&(K_LSHOULDER, "impulse 12".into())));
         assert!(b.contains(&(b'9' as i32, "weapon_slot 9".into())));
         assert!(b.contains(&(b'0' as i32, "weapon_slot 0".into())));
-        assert_eq!(b.len(), 13);
+        assert!(b.contains(&(K_F1 + 7, "record_toggle".into())));
+        assert_eq!(b.len(), 14);
     }
 }

@@ -1766,6 +1766,15 @@ sl Prikaži oznako
 @ Speedometer
 sl Merilnik hitrosti
 
+@ Quick Reset
+sl Hiter ponovni zagon
+
+@ Screenshot
+sl Zajem zaslona
+
+@ Record Demo
+sl Snemaj posnetek
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

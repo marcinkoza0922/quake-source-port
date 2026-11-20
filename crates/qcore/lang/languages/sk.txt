@@ -1766,6 +1766,15 @@ sk Zobraziť popisok
 @ Speedometer
 sk Rýchlomer
 
+@ Quick Reset
+sk Rýchly reštart
+
+@ Screenshot
+sk Snímka obrazovky
+
+@ Record Demo
+sk Nahrávať demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

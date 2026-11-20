@@ -122,6 +122,9 @@ macro_rules! controls_list {
             bind("Scoreboard", "+showscores"),
             bind("Quick Save", "echo Quicksaving...; wait; save quick"),
             bind("Quick Load", "echo Quickloading...; wait; load quick"),
+            bind("Quick Reset", "restart"),
+            bind("Screenshot", "screenshot"),
+            bind("Record Demo", "record_toggle"),
             $($extra,)*
             Item::ResetBinds,
         ]

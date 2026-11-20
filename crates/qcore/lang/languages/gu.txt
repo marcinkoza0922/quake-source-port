@@ -1766,6 +1766,15 @@ gu લેબલ બતાવો
 @ Speedometer
 gu સ્પીડોમીટર
 
+@ Quick Reset
+gu ઝડપી રીસેટ
+
+@ Screenshot
+gu સ્ક્રીનશૉટ
+
+@ Record Demo
+gu ડેમો રેકોર્ડ કરો
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

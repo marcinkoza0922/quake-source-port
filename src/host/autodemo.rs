@@ -25,6 +25,13 @@ pub(super) struct AutoDemo {
     pb_only: bool,
 }
 
+#[cfg(test)]
+impl AutoDemo {
+    pub(super) fn writer_path(&self) -> &Path {
+        self.writer.path()
+    }
+}
+
 impl Host {
     fn autodemo_allowed(&self) -> bool {
         (self.cv("cl_autodemo") != 0.0 || self.cv("cl_autodemo_pb") != 0.0 || self.cv("cl_demo_ghost") != 0.0)
@@ -64,7 +71,14 @@ impl Host {
             library::prune(&dir, slots - 1);
         }
         let map: String = self.cl.mapname.chars().map(|c| if c.is_alphanumeric() || "-_".contains(c) { c } else { '_' }).collect();
-        let path = dir.join(format!("{}_{}.dem", crate::demo::stamp_now(), if map.is_empty() { "map" } else { &map }));
+        let stamp = crate::demo::stamp_now();
+        let map_part = if map.is_empty() { "map" } else { &map };
+        let mut path = dir.join(format!("{stamp}_{map_part}.dem"));
+        let mut n = 2u32;
+        while qcore::vfs::exists(&path) {
+            path = dir.join(format!("{stamp}r{n:02}_{map_part}.dem"));
+            n += 1;
+        }
         match crate::demo::DemoWriter::create(&path, -1) {
             Ok(writer) => self.autodemo = Some(AutoDemo { writer, span: None, keep: None, pb_only }),
             Err(e) => self.con.print(&qcore::ctr!("ERROR: couldn't create {}: {}\n", path.display(), e)),

@@ -66,6 +66,7 @@ impl Host {
         }
         if self.p1_pad == Some(id) {
             self.p1_pad = None;
+            self.pad_gestures.reset_all();
         }
     }
 

@@ -1766,6 +1766,15 @@ pa ਲੇਬਲ ਦਿਖਾਓ
 @ Speedometer
 pa ਸਪੀਡੋਮੀਟਰ
 
+@ Quick Reset
+pa ਤੁਰੰਤ ਰੀਸੈੱਟ
+
+@ Screenshot
+pa ਸਕ੍ਰੀਨਸ਼ੌਟ
+
+@ Record Demo
+pa ਡੈਮੋ ਰਿਕਾਰਡ ਕਰੋ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

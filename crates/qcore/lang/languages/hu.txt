@@ -1766,6 +1766,15 @@ hu Címke megjelenítése
 @ Speedometer
 hu Sebességmérő
 
+@ Quick Reset
+hu Gyors újrakezdés
+
+@ Screenshot
+hu Képernyőkép
+
+@ Record Demo
+hu Demó felvétele
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

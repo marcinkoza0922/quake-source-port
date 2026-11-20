@@ -1766,6 +1766,15 @@ sq Shfaq etiketën
 @ Speedometer
 sq Shpejtësimatës
 
+@ Quick Reset
+sq Rinisje e shpejtë
+
+@ Screenshot
+sq Pamje e ekranit
+
+@ Record Demo
+sq Regjistro demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

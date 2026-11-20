@@ -1766,6 +1766,15 @@ ro Afișează eticheta
 @ Speedometer
 ro Vitezometru
 
+@ Quick Reset
+ro Repornire rapidă
+
+@ Screenshot
+ro Captură de ecran
+
+@ Record Demo
+ro Înregistrează demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

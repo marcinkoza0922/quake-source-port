@@ -60,6 +60,7 @@ mod presets;
 mod bullet_time;
 mod freecam;
 mod hitstop;
+mod pad_gestures;
 mod toy_fx;
 mod ctx;
 mod cvars;
@@ -190,6 +191,8 @@ pub struct Host {
     fire_track: (i32, i32, i32, [f32; 3]),
     /// Held menu navigation key and when it repeats next (gamepad).
     nav_hold: Option<(i32, f64)>,
+    /// Controller double-tap / long-press gestures on stats and menu buttons.
+    pad_gestures: pad_gestures::PadGestures,
     /// Finger working the menu (tap/drag-scroll).
     menu_touch: Option<touch::MenuTouch>,
     last_cmd: UserCmd,
@@ -356,6 +359,7 @@ impl Host {
             rumble: None,
             fire_track: (0, 0, 0, [0.0; 3]),
             nav_hold: None,
+            pad_gestures: Default::default(),
             menu_touch: None,
             last_cmd: UserCmd::default(),
             screenshot: None,

@@ -1766,6 +1766,15 @@ zh-CN 显示标签
 @ Speedometer
 zh-CN 速度表
 
+@ Quick Reset
+zh-CN 快速重开
+
+@ Screenshot
+zh-CN 截图
+
+@ Record Demo
+zh-CN 录制演示
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

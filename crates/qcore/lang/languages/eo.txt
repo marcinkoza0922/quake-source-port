@@ -1766,6 +1766,15 @@ eo Montri etikedon
 @ Speedometer
 eo Rapidometro
 
+@ Quick Reset
+eo Rapida rekomenco
+
+@ Screenshot
+eo Ekrankopio
+
+@ Record Demo
+eo Registri demonstraĵon
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

@@ -1766,6 +1766,15 @@ ga Taispeáin Lipéad
 @ Speedometer
 ga Luasmhéadar
 
+@ Quick Reset
+ga Mear-Atosú
+
+@ Screenshot
+ga Gabháil scáileáin
+
+@ Record Demo
+ga Taifead taispeántas
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

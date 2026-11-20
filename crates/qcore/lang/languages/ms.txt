@@ -1766,6 +1766,15 @@ ms Tunjukkan Label
 @ Speedometer
 ms Meter Kelajuan
 
+@ Quick Reset
+ms Mula Semula Pantas
+
+@ Screenshot
+ms Tangkapan Skrin
+
+@ Record Demo
+ms Rakam Demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

@@ -59,6 +59,7 @@ impl Host {
         self.bullet_time = Default::default();
         self.freecam.cam = None;
         self.hitstop = Default::default();
+        self.pad_gestures.clear_session();
         self.pend_dodge = false;
         self.death_handled = false;
         self.feedback = Default::default();
@@ -512,6 +513,15 @@ impl Host {
                 ClientEvent::NewMap => {
                     self.clear_toy_fx();
                     self.audio_fx.clear_map();
+                    self.view.reset_effects();
+                    self.bullet_time = Default::default();
+                    self.hitstop = Default::default();
+                    self.pend_attack = false;
+                    self.pend_attack2 = false;
+                    self.pend_jump = false;
+                    self.pend_dodge = false;
+                    self.pend_impulse = 0;
+                    self.death_handled = false;
                     feedback = None;
                     self.feedback = Default::default();
                     self.stats_recorded = false;

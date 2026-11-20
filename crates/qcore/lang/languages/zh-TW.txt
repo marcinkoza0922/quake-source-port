@@ -1766,6 +1766,15 @@ zh-TW 顯示標籤
 @ Speedometer
 zh-TW 速度表
 
+@ Quick Reset
+zh-TW 快速重開
+
+@ Screenshot
+zh-TW 螢幕截圖
+
+@ Record Demo
+zh-TW 錄製示範
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

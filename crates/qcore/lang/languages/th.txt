@@ -1766,6 +1766,15 @@ th แสดง​ป้าย​กำกับ
 @ Speedometer
 th มาตร​วัด​ความ​เร็ว
 
+@ Quick Reset
+th เริ่ม​ใหม่​ด่วน
+
+@ Screenshot
+th จับ​ภาพ​หน้า​จอ
+
+@ Record Demo
+th บันทึก​เดโม
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

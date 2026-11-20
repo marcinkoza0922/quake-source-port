@@ -1766,6 +1766,15 @@ sw Onyesha Lebo
 @ Speedometer
 sw Kipima Kasi
 
+@ Quick Reset
+sw Anza Upya Haraka
+
+@ Screenshot
+sw Picha ya Skrini
+
+@ Record Demo
+sw Rekodi Demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

@@ -1766,6 +1766,15 @@ cy Dangos Label
 @ Speedometer
 cy Cyflymderfesurydd
 
+@ Quick Reset
+cy Ailddechrau cyflym
+
+@ Screenshot
+cy Sgrinlun
+
+@ Record Demo
+cy Recordio demo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.

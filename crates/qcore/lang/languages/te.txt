@@ -1766,6 +1766,15 @@ te లేబుల్ చూపించు
 @ Speedometer
 te స్పీడోమీటర్
 
+@ Quick Reset
+te త్వరిత రీసెట్
+
+@ Screenshot
+te స్క్రీన్‌షాట్
+
+@ Record Demo
+te డెమో రికార్డ్ చేయి
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
