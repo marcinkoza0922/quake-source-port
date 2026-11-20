@@ -874,9 +874,6 @@ da Skærmshader
 @ Screen Shake
 da Skærmrystelser
 
-@ Search LAN
-da Søg på LAN
-
 @ Seconds a center-screen message stays up
 da Sekunder en besked bliver midt på skærmen
 
@@ -3398,6 +3395,60 @@ da Brug Op- og Ned-pile til at flytte, Enter til at placere, Esc til at annuller
 
 @ View
 da Visning
+
+@ Server Browser
+da Serverliste
+
+@ Internet
+da Internet
+
+@ Filters
+da Filtre
+
+@ Refresh
+da Opdater
+
+@ Favorites
+da Favoritter
+
+@ Ping
+da Ping
+
+@ Protocol
+da Protokol
+
+@ Players
+da Spillere
+
+@ Unknown
+da Ukendt
+
+@ Empty
+da Tomme
+
+@ Populated
+da Med spillere
+
+@ Open slots
+da Ledige pladser
+
+@ Full
+da Fulde
+
+@ Deathmatch
+da Dødskamp
+
+@ Mod
+da Mod
+
+@ No servers found
+da Ingen servere fundet
+
+@ No matching servers
+da Ingen matchende servere
+
+@ Server search failed
+da Serversøgningen mislykkedes
 
 # ==== hud.txt ====
 

@@ -874,9 +874,6 @@ eo Ekrana ombrigilo
 @ Screen Shake
 eo Ekrana skuado
 
-@ Search LAN
-eo Serĉi en LAN
-
 @ Seconds a center-screen message stays up
 eo Sekundoj dum kiuj centra mesaĝo restas videbla
 
@@ -3398,6 +3395,60 @@ eo Uzu sagojn Supren kaj Malsupren por movi, Enter por meti, Esc por nuligi
 
 @ View
 eo Vido
+
+@ Server Browser
+eo Servillisto
+
+@ Internet
+eo Interreto
+
+@ Filters
+eo Filtriloj
+
+@ Refresh
+eo Aktualigi
+
+@ Favorites
+eo Plej ŝatataj
+
+@ Ping
+eo Retprokrasto
+
+@ Protocol
+eo Protokolo
+
+@ Players
+eo Ludantoj
+
+@ Unknown
+eo Nekonata
+
+@ Empty
+eo Malplenaj
+
+@ Populated
+eo Kun ludantoj
+
+@ Open slots
+eo Liberaj lokoj
+
+@ Full
+eo Plenaj
+
+@ Deathmatch
+eo Mortmatĉo
+
+@ Mod
+eo Modifaĵo
+
+@ No servers found
+eo Neniuj serviloj trovitaj
+
+@ No matching servers
+eo Neniuj serviloj kongruas kun la filtriloj
+
+@ Server search failed
+eo Servilserĉo malsukcesis
 
 # ==== hud.txt ====
 

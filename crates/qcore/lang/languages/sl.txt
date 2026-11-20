@@ -874,9 +874,6 @@ sl Senčilnik zaslona
 @ Screen Shake
 sl Tresenje zaslona
 
-@ Search LAN
-sl Išči v LAN
-
 @ Seconds a center-screen message stays up
 sl Koliko sekund ostane sporočilo na sredini zaslona
 
@@ -3398,6 +3395,60 @@ sl Uporabite puščici gor in dol za premikanje, Enter za postavitev, Esc za pre
 
 @ View
 sl Pogled
+
+@ Server Browser
+sl Seznam strežnikov
+
+@ Internet
+sl Internet
+
+@ Filters
+sl Filtri
+
+@ Refresh
+sl Osveži
+
+@ Favorites
+sl Priljubljeni
+
+@ Ping
+sl Zakasnitev
+
+@ Protocol
+sl Protokol
+
+@ Players
+sl Igralci
+
+@ Unknown
+sl Neznano
+
+@ Empty
+sl Prazni
+
+@ Populated
+sl Z igralci
+
+@ Open slots
+sl Prosta mesta
+
+@ Full
+sl Polni
+
+@ Deathmatch
+sl Boj na smrt
+
+@ Mod
+sl Mod
+
+@ No servers found
+sl Ni najdenih strežnikov
+
+@ No matching servers
+sl Ni strežnikov, ki ustrezajo filtrom
+
+@ Server search failed
+sl Iskanje strežnikov ni uspelo
 
 # ==== hud.txt ====
 

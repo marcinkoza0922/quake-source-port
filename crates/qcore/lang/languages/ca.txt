@@ -874,9 +874,6 @@ ca Shader de pantalla
 @ Screen Shake
 ca Tremolor de pantalla
 
-@ Search LAN
-ca Cerca a la LAN
-
 @ Seconds a center-screen message stays up
 ca Segons que un missatge roman al centre de la pantalla
 
@@ -3398,6 +3395,60 @@ ca Fes servir les fletxes Amunt i Avall per moure, Retorn per col·locar, Esc pe
 
 @ View
 ca Vista
+
+@ Server Browser
+ca Llista de servidors
+
+@ Internet
+ca Internet
+
+@ Filters
+ca Filtres
+
+@ Refresh
+ca Actualitza
+
+@ Favorites
+ca Preferits
+
+@ Ping
+ca Ping
+
+@ Protocol
+ca Protocol
+
+@ Players
+ca Jugadors
+
+@ Unknown
+ca Desconegut
+
+@ Empty
+ca Buits
+
+@ Populated
+ca Amb jugadors
+
+@ Open slots
+ca Places lliures
+
+@ Full
+ca Plens
+
+@ Deathmatch
+ca Combat a mort
+
+@ Mod
+ca Mod
+
+@ No servers found
+ca No s'ha trobat cap servidor
+
+@ No matching servers
+ca Cap servidor coincideix amb els filtres
+
+@ Server search failed
+ca Ha fallat la cerca de servidors
 
 # ==== hud.txt ====
 

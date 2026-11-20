@@ -30,6 +30,7 @@ impl Menu {
             Screen::Load | Screen::Save => (CARD_X, CARD_BOTTOM + 4.0),
             Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.back_position(),
             Screen::Demos => demos::BACK,
+            Screen::ServerBrowser => self.server_browser_back_position(),
             _ => return None,
         };
         Some((x, y.min(MENU_H - 16.0), 60.0, 16.0))
@@ -133,8 +134,10 @@ impl Menu {
         if matches!(self.prompt, Some(Prompt::Launch { .. } | Prompt::Preset { .. })) {
             return;
         }
-        // Demos shows every controller binding directly on its tabs, sort, action and Back buttons.
-        if self.screen == Screen::Demos && self.prompt.is_none() {
+        // These lists show controller bindings directly on their buttons.
+        let browser_button = self.screen == Screen::OptionsPage(Page::Join)
+            && matches!(self.page_item(Page::Join, self.opt_cursor), Item::Run { run: Run::BrowseServers, .. });
+        if self.prompt.is_none() && (matches!(self.screen, Screen::Demos | Screen::ServerBrowser) || browser_button) {
             return;
         }
         let action = match self.screen {

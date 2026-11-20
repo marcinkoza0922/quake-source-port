@@ -2271,3 +2271,129 @@ de Ansicht
 it Vista
 es Vista
 ru Вид
+
+@ Server Browser
+fr Liste des serveurs
+de Serverbrowser
+it Elenco dei server
+es Lista de servidores
+ru Список серверов
+
+@ Internet
+fr Internet
+de Internet
+it Internet
+es Internet
+ru Интернет
+
+@ Filters
+fr Filtres
+de Filter
+it Filtri
+es Filtros
+ru Фильтры
+
+@ Refresh
+fr Actualiser
+de Aktualisieren
+it Aggiorna
+es Actualizar
+ru Обновить
+
+@ Favorites
+fr Favoris
+de Favoriten
+it Preferiti
+es Favoritos
+ru Избранное
+
+@ Ping
+fr Ping
+de Ping
+it Ping
+es Ping
+ru Пинг
+
+@ Protocol
+fr Protocole
+de Protokoll
+it Protocollo
+es Protocolo
+ru Протокол
+
+@ Players
+fr Joueurs
+de Spieler
+it Giocatori
+es Jugadores
+ru Игроки
+
+@ Unknown
+fr Inconnu
+de Unbekannt
+it Sconosciuto
+es Desconocido
+ru Неизвестно
+
+@ Empty
+fr Vides
+de Leer
+it Vuoti
+es Vacíos
+ru Пустые
+
+@ Populated
+fr Occupés
+de Mit Spielern
+it Con giocatori
+es Con jugadores
+ru С игроками
+
+@ Open slots
+fr Places libres
+de Freie Plätze
+it Posti liberi
+es Plazas libres
+ru Есть места
+
+@ Full
+fr Complets
+de Voll
+it Pieni
+es Llenos
+ru Полные
+
+@ Deathmatch
+fr Match à mort
+de Deathmatch
+it Deathmatch
+es Combate a muerte
+ru Бой насмерть
+
+@ Mod
+fr Mod
+de Mod
+it Mod
+es Mod
+ru Мод
+
+@ No servers found
+fr Aucun serveur trouvé
+de Keine Server gefunden
+it Nessun server trovato
+es No se encontraron servidores
+ru Серверы не найдены
+
+@ No matching servers
+fr Aucun serveur correspondant
+de Keine passenden Server
+it Nessun server corrispondente
+es No hay servidores que coincidan
+ru Нет подходящих серверов
+
+@ Server search failed
+fr Échec de la recherche de serveurs
+de Serversuche fehlgeschlagen
+it Ricerca dei server non riuscita
+es Error al buscar servidores
+ru Не удалось выполнить поиск серверов

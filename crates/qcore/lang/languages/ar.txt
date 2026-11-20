@@ -874,9 +874,6 @@ ar مرشّح الشاشة
 @ Screen Shake
 ar اهتزاز الشاشة
 
-@ Search LAN
-ar البحث في الشبكة المحلية
-
 @ Seconds a center-screen message stays up
 ar عدد ثواني بقاء رسالة وسط الشاشة
 
@@ -3398,6 +3395,60 @@ ar استخدم سهمي الأعلى والأسفل للتحريك، وEnter ل
 
 @ View
 ar العرض
+
+@ Server Browser
+ar قائمة الخوادم
+
+@ Internet
+ar الإنترنت
+
+@ Filters
+ar عوامل التصفية
+
+@ Refresh
+ar تحديث
+
+@ Favorites
+ar المفضلة
+
+@ Ping
+ar زمن الاستجابة
+
+@ Protocol
+ar البروتوكول
+
+@ Players
+ar اللاعبون
+
+@ Unknown
+ar غير معروف
+
+@ Empty
+ar فارغة
+
+@ Populated
+ar بها لاعبون
+
+@ Open slots
+ar أماكن شاغرة
+
+@ Full
+ar ممتلئة
+
+@ Deathmatch
+ar مباراة الموت
+
+@ Mod
+ar تعديل
+
+@ No servers found
+ar لم يتم العثور على خوادم
+
+@ No matching servers
+ar لا توجد خوادم تطابق عوامل التصفية
+
+@ Server search failed
+ar فشل البحث عن الخوادم
 
 # ==== hud.txt ====
 

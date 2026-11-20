@@ -874,9 +874,6 @@ sr Шејдер екрана
 @ Screen Shake
 sr Подрхтавање екрана
 
-@ Search LAN
-sr Тражи у LAN мрежи
-
 @ Seconds a center-screen message stays up
 sr Колико секунди порука у средини екрана остаје видљива
 
@@ -3398,6 +3395,60 @@ sr Користите стрелице горе и доле за померањ�
 
 @ View
 sr Приказ
+
+@ Server Browser
+sr Листа сервера
+
+@ Internet
+sr Интернет
+
+@ Filters
+sr Филтери
+
+@ Refresh
+sr Освежи
+
+@ Favorites
+sr Омиљени
+
+@ Ping
+sr Пинг
+
+@ Protocol
+sr Протокол
+
+@ Players
+sr Играчи
+
+@ Unknown
+sr Непознато
+
+@ Empty
+sr Празни
+
+@ Populated
+sr Са играчима
+
+@ Open slots
+sr Слободна места
+
+@ Full
+sr Пуни
+
+@ Deathmatch
+sr Борба до смрти
+
+@ Mod
+sr Мод
+
+@ No servers found
+sr Није пронађен ниједан сервер
+
+@ No matching servers
+sr Нема одговарајућих сервера
+
+@ Server search failed
+sr Претрага сервера није успела
 
 # ==== hud.txt ====
 

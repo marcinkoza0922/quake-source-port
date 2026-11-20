@@ -874,9 +874,6 @@ bn স্ক্রিন শেডার
 @ Screen Shake
 bn পর্দা কাঁপানো
 
-@ Search LAN
-bn LAN-এ খুঁজুন
-
 @ Seconds a center-screen message stays up
 bn পর্দার মাঝের বার্তা কত সেকেন্ড থাকে
 
@@ -3398,6 +3395,60 @@ bn সরাতে উপর ও নিচের তীর, রাখতে Ente
 
 @ View
 bn দৃশ্য
+
+@ Server Browser
+bn সার্ভার তালিকা
+
+@ Internet
+bn ইন্টারনেট
+
+@ Filters
+bn ফিল্টার
+
+@ Refresh
+bn রিফ্রেশ করুন
+
+@ Favorites
+bn প্রিয়
+
+@ Ping
+bn পিং
+
+@ Protocol
+bn প্রোটোকল
+
+@ Players
+bn খেলোয়াড়
+
+@ Unknown
+bn অজানা
+
+@ Empty
+bn খালি
+
+@ Populated
+bn খেলোয়াড় আছে
+
+@ Open slots
+bn খালি জায়গা আছে
+
+@ Full
+bn পূর্ণ
+
+@ Deathmatch
+bn ডেথম্যাচ
+
+@ Mod
+bn মড
+
+@ No servers found
+bn কোনো সার্ভার পাওয়া যায়নি
+
+@ No matching servers
+bn ফিল্টারের সাথে মেলে এমন সার্ভার নেই
+
+@ Server search failed
+bn সার্ভার অনুসন্ধান ব্যর্থ হয়েছে
 
 # ==== hud.txt ====
 

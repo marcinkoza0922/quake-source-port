@@ -3,12 +3,13 @@
 
 use std::collections::{HashMap, VecDeque};
 use std::net::{Ipv4Addr, SocketAddr, SocketAddrV4, ToSocketAddrs};
+use std::sync::mpsc::{self, Receiver};
 
 use qnet::control::NET_PROTOCOL_VERSION;
 use qnet::qw::{self as qw_proto, info_value};
 use qnet::{Ccrep, Ccreq, Transport, UdpTransport};
 
-use super::{SavedServers, ServerEntry, ServerMode, ServerProto};
+use super::{SavedServers, ServerEntry, ServerMode, ServerProto, ServerTab};
 
 const PROBES_PER_POLL: usize = 24;
 const SEARCH_DURATION: f64 = 2.5;
@@ -17,94 +18,104 @@ const SEARCH_DURATION: f64 = 2.5;
 pub struct ServerSearch {
     sock: UdpTransport,
     pub found: Vec<ServerEntry>,
-    queue: VecDeque<(SocketAddr, ServerProto, bool)>,
-    sent_at: HashMap<SocketAddr, (f64, bool)>,
+    queue: VecDeque<(SocketAddr, ServerProto)>,
+    sent_at: HashMap<SocketAddr, f64>,
     until: f64,
+    broadcast_at: Option<f64>,
+    resolving: Option<Receiver<InternetTargets>>,
     buf: Vec<u8>,
 }
 
 impl ServerSearch {
-    /// Starts a LAN + Favorites/Recent search (`internet == false`) or a full
-    /// Master Server + LAN + Favorites/Recent search (`internet == true`).
+    /// LAN broadcasts and public master queries run on separate sockets.
     pub fn start(
         lan_port: u16,
-        internet: bool,
+        tab: ServerTab,
         nq_masters: &str,
         qw_masters: &str,
         saved: &SavedServers,
         now: f64,
     ) -> std::io::Result<Self> {
         let sock = UdpTransport::bind((Ipv4Addr::UNSPECIFIED, 0).into())?;
-        let _ = sock.set_broadcast(true);
         let mut s = Self {
             sock,
             found: Vec::new(),
             queue: VecDeque::new(),
             sent_at: HashMap::new(),
-            until: now + if internet { SEARCH_DURATION } else { 1.0 },
+            until: now + 1.0,
+            broadcast_at: None,
+            resolving: None,
             buf: vec![0; 4096],
         };
-        s.send_lan_broadcast(lan_port, now);
-        for sv in saved.favorites.iter().chain(saved.recent.iter()) {
-            let default_port = if sv.protocol == ServerProto::QuakeWorld {
-                qw_proto::PORT_SERVER
-            } else {
-                crate::net::DEFAULT_PORT
-            };
-            if let Some(addr) = resolve_host_port(sv.bare_address(), default_port) {
-                s.enqueue(addr, sv.protocol, false);
+        match tab {
+            ServerTab::Lan => {
+                s.sock.set_broadcast(true)?;
+                s.send_lan_broadcast(lan_port);
+                s.broadcast_at = Some(now);
+            }
+            ServerTab::Internet => {
+                let (send, recv) = mpsc::channel();
+                let (nq, qw, saved) = (nq_masters.to_string(), qw_masters.to_string(), saved.clone());
+                std::thread::Builder::new().name("server-discovery-dns".into()).spawn(move || {
+                    let _ = send.send(InternetTargets::resolve(&nq, &qw, &saved));
+                })?;
+                s.resolving = Some(recv);
             }
         }
-        if internet {
-            s.query_masters(nq_masters, qw_masters);
-        }
-        s.pump_queue(now);
         Ok(s)
     }
 
-    fn send_lan_broadcast(&mut self, port: u16, now: f64) {
+    fn send_lan_broadcast(&mut self, port: u16) {
         let nq_q = Ccreq::ServerInfo { game: "QUAKE".into(), version: NET_PROTOCOL_VERSION }.encode();
         for a in [Ipv4Addr::BROADCAST, Ipv4Addr::LOCALHOST] {
             let addr = SocketAddr::from((a, port));
-            self.sent_at.insert(addr, (now, true));
             let _ = self.sock.send_to(&nq_q, addr);
             let qw_addr = SocketAddr::from((a, qw_proto::PORT_SERVER));
-            self.sent_at.insert(qw_addr, (now, true));
             let _ = self.sock.send_to(&qw_proto::oob(b"status 23\n"), qw_addr);
         }
     }
 
-    fn query_masters(&mut self, nq_masters: &str, qw_masters: &str) {
-        for token in nq_masters.split_whitespace() {
-            if let Some(addr) = resolve_host_port(token, 27950) {
-                for q in [
-                    &b"\xff\xff\xff\xffgetservers Quake 3 empty full\n"[..],
-                    &b"\xff\xff\xff\xffgetservers FTE-Quake 28 empty full\n"[..],
-                    &b"\xff\xff\xff\xffgetservers DarkPlaces-Quake 3 empty full\n"[..],
-                ] {
-                    let _ = self.sock.send_to(q, addr);
-                }
+    fn poll_dns(&mut self, now: f64) {
+        let Some(resolving) = &self.resolving else { return };
+        let targets = match resolving.try_recv() {
+            Ok(targets) => targets,
+            Err(mpsc::TryRecvError::Empty) => return,
+            Err(mpsc::TryRecvError::Disconnected) => {
+                self.resolving = None;
+                return;
+            }
+        };
+        self.resolving = None;
+        self.until = now + SEARCH_DURATION;
+        for addr in targets.nq_masters {
+            for q in [
+                &b"\xff\xff\xff\xffgetservers Quake 3 empty full\n"[..],
+                &b"\xff\xff\xff\xffgetservers FTE-Quake 28 empty full\n"[..],
+                &b"\xff\xff\xff\xffgetservers DarkPlaces-Quake 3 empty full\n"[..],
+            ] {
+                let _ = self.sock.send_to(q, addr);
             }
         }
-        for token in qw_masters.split_whitespace() {
-            if let Some(addr) = resolve_host_port(token, qw_proto::PORT_MASTER) {
-                let _ = self.sock.send_to(&[qw_proto::C2M_MASTER_REQUEST, b'\n', 0], addr);
-            }
+        for addr in targets.qw_masters {
+            let _ = self.sock.send_to(&[qw_proto::C2M_MASTER_REQUEST, b'\n', 0], addr);
+        }
+        for (addr, proto) in targets.saved {
+            self.enqueue(addr, proto);
         }
     }
 
-    pub fn enqueue(&mut self, addr: SocketAddr, proto: ServerProto, lan: bool) {
-        if self.sent_at.contains_key(&addr) || self.queue.iter().any(|(a, _, _)| *a == addr) {
+    fn enqueue(&mut self, addr: SocketAddr, proto: ServerProto) {
+        if self.sent_at.contains_key(&addr) || self.queue.iter().any(|(a, _)| *a == addr) {
             return;
         }
-        self.queue.push_back((addr, proto, lan));
+        self.queue.push_back((addr, proto));
     }
 
     fn pump_queue(&mut self, now: f64) {
         let nq_q = Ccreq::ServerInfo { game: "QUAKE".into(), version: NET_PROTOCOL_VERSION }.encode();
         for _ in 0..PROBES_PER_POLL {
-            let Some((addr, proto, lan)) = self.queue.pop_front() else { break };
-            self.sent_at.insert(addr, (now, lan));
+            let Some((addr, proto)) = self.queue.pop_front() else { break };
+            self.sent_at.insert(addr, now);
             match proto {
                 ServerProto::QuakeWorld => {
                     let _ = self.sock.send_to(&qw_proto::oob(b"status 23\n"), addr);
@@ -127,25 +138,27 @@ impl ServerSearch {
     /// Reads any pending master or server replies and sends the next batch of probes.
     /// Returns `true` when at least one server entry was added or updated.
     pub fn poll(&mut self, now: f64) -> bool {
+        self.poll_dns(now);
         self.pump_queue(now);
         let mut changed = false;
         while let Ok(Some((n, from))) = self.sock.recv_from(&mut self.buf) {
-            let pkt = self.buf[..n].to_vec();
-            let (sent_time, is_lan) = self.sent_at.get(&from).copied().unwrap_or((now, from.ip().is_loopback()));
-            let ping_ms = Some(((now - sent_time).max(0.0) * 1000.0).round() as u32);
-
-            if let Some((addrs, proto)) = parse_master_reply(&pkt) {
-                for a in addrs {
-                    self.enqueue(a, proto, false);
+            let pkt = &self.buf[..n];
+            let is_lan = self.broadcast_at.is_some();
+            if !is_lan && let Some((addrs, proto)) = parse_master_reply(pkt) {
+                for addr in addrs {
+                    self.enqueue(addr, proto);
                 }
-                self.pump_queue(now);
                 continue;
             }
-
-            if let Some(mut entry) = parse_server_reply(&pkt, from, ping_ms, is_lan) {
+            let Some(sent_time) = self.broadcast_at.or_else(|| self.sent_at.get(&from).copied()) else { continue };
+            let ping_ms = Some(((now - sent_time).max(0.0) * 1000.0).round() as u32);
+            if let Some(entry) = parse_server_reply(pkt, from, ping_ms, is_lan) {
                 if let Some(existing) = self.found.iter_mut().find(|e| e.address == entry.address) {
-                    entry.favorite = existing.favorite;
-                    entry.recent = existing.recent;
+                    // Both query formats can answer. A native NetQuake reply
+                    // identifies the connection protocol more precisely.
+                    if existing.protocol == ServerProto::NetQuake && entry.protocol == ServerProto::FteDp {
+                        continue;
+                    }
                     *existing = entry;
                 } else {
                     self.found.push(entry);
@@ -157,7 +170,27 @@ impl ServerSearch {
     }
 
     pub fn done(&self, now: f64) -> bool {
-        self.queue.is_empty() && now >= self.until
+        self.resolving.is_none() && self.queue.is_empty() && now >= self.until
+    }
+}
+
+struct InternetTargets {
+    nq_masters: Vec<SocketAddr>,
+    qw_masters: Vec<SocketAddr>,
+    saved: Vec<(SocketAddr, ServerProto)>,
+}
+
+impl InternetTargets {
+    fn resolve(nq: &str, qw: &str, saved: &SavedServers) -> Self {
+        let masters = |list: &str, port| list.split_whitespace().filter_map(|host| resolve_host_port(host, port)).collect();
+        Self {
+            nq_masters: masters(nq, 27950),
+            qw_masters: masters(qw, qw_proto::PORT_MASTER),
+            saved: saved.favorites.iter().chain(&saved.recent).filter_map(|entry| {
+                let port = if entry.protocol == ServerProto::QuakeWorld { qw_proto::PORT_SERVER } else { crate::net::DEFAULT_PORT };
+                resolve_host_port(entry.bare_address(), port).map(|addr| (addr, entry.protocol))
+            }).collect(),
+        }
     }
 }
 

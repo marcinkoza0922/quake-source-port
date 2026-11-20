@@ -874,9 +874,6 @@ ga Scáthóir Scáileáin
 @ Screen Shake
 ga Croitheadh Scáileáin
 
-@ Search LAN
-ga Cuardaigh LAN
-
 @ Seconds a center-screen message stays up
 ga Soicindí a fhanann teachtaireacht i lár an scáileáin
 
@@ -3398,6 +3395,60 @@ ga Úsáid na saigheada Suas agus Síos chun bogadh, Enter chun cur, Esc chun ce
 
 @ View
 ga Amharc
+
+@ Server Browser
+ga Liosta freastalaithe
+
+@ Internet
+ga Idirlíon
+
+@ Filters
+ga Scagairí
+
+@ Refresh
+ga Athnuaigh
+
+@ Favorites
+ga Ceanáin
+
+@ Ping
+ga Ping
+
+@ Protocol
+ga Prótacal
+
+@ Players
+ga Imreoirí
+
+@ Unknown
+ga Anaithnid
+
+@ Empty
+ga Folamh
+
+@ Populated
+ga Le himreoirí
+
+@ Open slots
+ga Áiteanna saora
+
+@ Full
+ga Lán
+
+@ Deathmatch
+ga Comhrac chun báis
+
+@ Mod
+ga Mod
+
+@ No servers found
+ga Níor aimsíodh freastalaí ar bith
+
+@ No matching servers
+ga Níl aon fhreastalaí ag teacht leis na scagairí
+
+@ Server search failed
+ga Theip ar chuardach na bhfreastalaithe
 
 # ==== hud.txt ====
 

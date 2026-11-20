@@ -874,9 +874,6 @@ am የስክሪን ሼደር
 @ Screen Shake
 am የስክሪን መንቀጥቀጥ
 
-@ Search LAN
-am LAN ፈልግ
-
 @ Seconds a center-screen message stays up
 am የመሃል መልዕክት የሚቆይበት ሰከንዶች
 
@@ -3398,6 +3395,60 @@ am ለማንቀሳቀስ የላይ እና የታች ቀስቶችን፣ ለማስ
 
 @ View
 am እይታ
+
+@ Server Browser
+am የአገልጋይ ዝርዝር
+
+@ Internet
+am በይነመረብ
+
+@ Filters
+am ማጣሪያዎች
+
+@ Refresh
+am አድስ
+
+@ Favorites
+am ተወዳጆች
+
+@ Ping
+am ፒንግ
+
+@ Protocol
+am ፕሮቶኮል
+
+@ Players
+am ተጫዋቾች
+
+@ Unknown
+am ያልታወቀ
+
+@ Empty
+am ባዶ
+
+@ Populated
+am ተጫዋቾች ያሉባቸው
+
+@ Open slots
+am ክፍት ቦታዎች
+
+@ Full
+am ሙሉ
+
+@ Deathmatch
+am የሞት ግጥሚያ
+
+@ Mod
+am ሞድ
+
+@ No servers found
+am አገልጋይ አልተገኘም
+
+@ No matching servers
+am ከማጣሪያዎቹ ጋር የሚዛመድ አገልጋይ የለም
+
+@ Server search failed
+am አገልጋይ መፈለግ አልተሳካም
 
 # ==== hud.txt ====
 

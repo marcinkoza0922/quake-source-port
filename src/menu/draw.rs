@@ -22,7 +22,7 @@ impl Menu {
         c.fade_screen();
         let base_scale = c.scale;
         c.menu_layout();
-        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Load | Screen::Save | Screen::Help | Screen::Demos | Screen::DirBrowser) {
+        if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Load | Screen::Save | Screen::Help | Screen::Demos | Screen::DirBrowser | Screen::ServerBrowser) {
             c.ox += CLASSIC.0;
             c.oy += CLASSIC.1;
         }
@@ -60,6 +60,7 @@ impl Menu {
             Screen::Help => self.help.draw(c),
             Screen::Mods => self.mods.draw(c, modmenu::Page::List, self.pad_ui, &self.glyphs),
             Screen::Demos => self.demos.draw(c, self.mouse, self.pad_ui, &self.glyphs),
+            Screen::ServerBrowser => self.draw_server_browser(c),
             Screen::DirBrowser => self.dir_browser.draw(c, self.drag.is_some(), self.pad_ui, &self.glyphs),
             Screen::ModMaps => self.mods.draw(c, modmenu::Page::Maps, self.pad_ui, &self.glyphs),
             Screen::ModOnline => self.mods.draw(c, modmenu::Page::Online, self.pad_ui, &self.glyphs),
@@ -117,7 +118,9 @@ impl Menu {
                 let n = self.page_vis(page);
                 let sc = self.page_scroll(page);
                 panel(c, PAGE_ROW0, n);
-                if self.opt_cursor < total {
+                if self.opt_cursor < total
+                    && !matches!(self.page_item(page, self.opt_cursor), Item::Run { run: Run::BrowseServers, .. })
+                {
                     highlight(c, self.page_row_y(page, self.opt_cursor));
                 }
                 self.text_layouts.borrow_mut().clear();
@@ -149,10 +152,6 @@ impl Menu {
                 if page == Page::Crosshair { crate::reticle::preview(c, cv); }
                 self.draw_custom_notes(c, cv, page, n);
                 if matches!(page, Page::Export | Page::RenameDemo) { self.draw_dialog_notes(c, n); }
-                if page == Page::Join && self.visible_servers().is_empty() && !self.searching {
-                    let s = "no servers found yet";
-                    c.text_center(320.0, PAGE_ROW0 + n as f32 * ROW_H + 8.0, s, TXT, MUTED);
-                }
                 if page == Page::Controls {
                     c.text(VALUE_X, PAGE_ROW0 - 16.0, "Keyboard", TXT, MUTED);
                     c.text(BIND_PAD_X, PAGE_ROW0 - 16.0, "Controller", TXT, MUTED);
@@ -366,54 +365,11 @@ impl Menu {
                 let s: String = format!("{m} {t}").chars().take(13).collect();
                 { txt(c, VALUE_X, y, &s); }
             }
-            Item::Run { label: l, run } => {
-                let l = if run == Run::Search && self.searching { qcore::t!("Searching...") } else { l };
+            Item::Run { label, run: Run::BrowseServers } => {
+                self.draw_server_browser_button(c, y, label);
+            }
+            Item::Run { label: l, .. } => {
                 c.text_center(320.0, y, l, TXT, if self.item_disabled(item, cv) { MUTED } else { GOLD_FG });
-            }
-            Item::Server(k) => {
-                if let Some(s) = self.servers.get(k) {
-                    let prefix = if s.favorite { "* " } else { "" };
-                    let raw_name: String = s.hostname.chars().take(if s.favorite { 18 } else { 20 }).collect();
-                    let full_name = format!("{prefix}{raw_name}");
-                    c.text_right(LABEL_R, y, &full_name, TXT, if s.favorite { GOLD_FG } else { FG });
-                    let m: String = s.map.chars().take(8).collect();
-                    let tag = s.protocol.tag();
-                    let ping = s.ping_ms.map_or_else(|| "--".into(), |ms| format!("{ms}ms"));
-                    let info = format!("{m:<8} {tag:<3} {}/{} {ping}", s.players, s.max_players);
-                    c.text_raw(VALUE_X, y, &info, TXT, FG);
-                }
-            }
-            Item::Browser(row) => {
-                match row {
-                    BrowserRow::SearchInternet => {
-                        let lbl = if self.searching { "Searching..." } else { "Search Internet" };
-                        c.text_center(320.0, y, lbl, TXT, GOLD_FG);
-                    }
-                    BrowserRow::HideEmpty => {
-                        let lbl = "Hide Empty";
-                        label(c, lbl);
-                        c.round_box(VALUE_X, y - 0.5, 9.0, 9.0, 1.5, [0.0, 0.0, 0.0, 0.5], Some(BORDER));
-                        if self.browser.hide_empty {
-                            c.round_box(VALUE_X + 2.0, y + 1.5, 5.0, 5.0, 1.0, GOLD_FG, None);
-                        }
-                    }
-                    _ => {
-                        let lbl = match row {
-                            BrowserRow::Source => "Source",
-                            BrowserRow::Protocol => "Protocol",
-                            BrowserRow::Mode => "Game Mode",
-                            BrowserRow::ModFilter => "Mod",
-                            BrowserRow::SortBy => "Sort By",
-                            _ => "",
-                        };
-                        label(c, lbl);
-                        let opts = self.browser_options(row);
-                        let idx = self.browser_option_index(row);
-                        if let Some(val) = opts.get(idx) {
-                            txt(c, VALUE_X, y, val);
-                        }
-                    }
-                }
             }
             Item::Bind { label: l, cmd } => {
                 label(c, l);

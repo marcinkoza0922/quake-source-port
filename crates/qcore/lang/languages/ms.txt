@@ -874,9 +874,6 @@ ms Shader Skrin
 @ Screen Shake
 ms Gegaran Skrin
 
-@ Search LAN
-ms Cari LAN
-
 @ Seconds a center-screen message stays up
 ms Saat mesej di tengah skrin dipaparkan
 
@@ -3398,6 +3395,60 @@ ms Guna anak panah Atas dan Bawah untuk mengalih, Enter untuk meletak, Esc untuk
 
 @ View
 ms Paparan
+
+@ Server Browser
+ms Senarai pelayan
+
+@ Internet
+ms Internet
+
+@ Filters
+ms Penapis
+
+@ Refresh
+ms Muat semula
+
+@ Favorites
+ms Kegemaran
+
+@ Ping
+ms Ping
+
+@ Protocol
+ms Protokol
+
+@ Players
+ms Pemain
+
+@ Unknown
+ms Tidak diketahui
+
+@ Empty
+ms Kosong
+
+@ Populated
+ms Ada pemain
+
+@ Open slots
+ms Slot kosong
+
+@ Full
+ms Penuh
+
+@ Deathmatch
+ms Perlawanan maut
+
+@ Mod
+ms Mod
+
+@ No servers found
+ms Tiada pelayan ditemui
+
+@ No matching servers
+ms Tiada pelayan yang sepadan
+
+@ Server search failed
+ms Carian pelayan gagal
 
 # ==== hud.txt ====
 

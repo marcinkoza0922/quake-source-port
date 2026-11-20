@@ -874,9 +874,6 @@ ka ეკრანის შეიდერი
 @ Screen Shake
 ka ეკრანის რყევა
 
-@ Search LAN
-ka ძებნა LAN-ში
-
 @ Seconds a center-screen message stays up
 ka რამდენ წამს რჩება შეტყობინება ეკრანის ცენტრში
 
@@ -3398,6 +3395,60 @@ ka გამოიყენეთ ზემოთ და ქვემოთ ი�
 
 @ View
 ka ხედი
+
+@ Server Browser
+ka სერვერების სია
+
+@ Internet
+ka ინტერნეტი
+
+@ Filters
+ka ფილტრები
+
+@ Refresh
+ka განახლება
+
+@ Favorites
+ka რჩეულები
+
+@ Ping
+ka პინგი
+
+@ Protocol
+ka პროტოკოლი
+
+@ Players
+ka მოთამაშეები
+
+@ Unknown
+ka უცნობი
+
+@ Empty
+ka ცარიელი
+
+@ Populated
+ka მოთამაშეებით
+
+@ Open slots
+ka თავისუფალი ადგილები
+
+@ Full
+ka სავსე
+
+@ Deathmatch
+ka სასიკვდილო მატჩი
+
+@ Mod
+ka მოდი
+
+@ No servers found
+ka სერვერები ვერ მოიძებნა
+
+@ No matching servers
+ka ფილტრების შესაბამისი სერვერები არ არის
+
+@ Server search failed
+ka სერვერების ძებნა ვერ მოხერხდა
 
 # ==== hud.txt ====
 

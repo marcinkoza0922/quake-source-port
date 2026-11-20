@@ -874,9 +874,6 @@ lv Ekrāna šeideris
 @ Screen Shake
 lv Ekrāna drebēšana
 
-@ Search LAN
-lv Meklēt LAN
-
 @ Seconds a center-screen message stays up
 lv Cik sekundes ziņa ekrāna centrā paliek redzama
 
@@ -3398,6 +3395,60 @@ lv Izmantojiet augšup un lejup bulttaustiņus, lai pārvietotu, Enter – novie
 
 @ View
 lv Skats
+
+@ Server Browser
+lv Serveru saraksts
+
+@ Internet
+lv Internets
+
+@ Filters
+lv Filtri
+
+@ Refresh
+lv Atsvaidzināt
+
+@ Favorites
+lv Izlase
+
+@ Ping
+lv Aizkave
+
+@ Protocol
+lv Protokols
+
+@ Players
+lv Spēlētāji
+
+@ Unknown
+lv Nezināms
+
+@ Empty
+lv Tukši
+
+@ Populated
+lv Ar spēlētājiem
+
+@ Open slots
+lv Brīvas vietas
+
+@ Full
+lv Pilni
+
+@ Deathmatch
+lv Nāves cīņa
+
+@ Mod
+lv Modifikācija
+
+@ No servers found
+lv Serveri nav atrasti
+
+@ No matching servers
+lv Nav atbilstošu serveru
+
+@ Server search failed
+lv Serveru meklēšana neizdevās
 
 # ==== hud.txt ====
 

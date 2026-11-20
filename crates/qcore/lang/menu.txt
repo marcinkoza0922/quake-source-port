@@ -2031,13 +2031,6 @@ it Tremolio dello schermo
 es Temblor de pantalla
 ru Тряска экрана
 
-@ Search LAN
-fr Rechercher en réseau local
-de Im LAN suchen
-it Cerca in LAN
-es Buscar en LAN
-ru Поиск в локальной сети
-
 @ Seconds a center-screen message stays up
 fr Secondes d'affichage d'un message au centre de l'écran
 de Sekunden, die eine Nachricht in der Bildschirmmitte bleibt

@@ -874,9 +874,6 @@ hr Shader zaslona
 @ Screen Shake
 hr Podrhtavanje zaslona
 
-@ Search LAN
-hr Traži u LAN-u
-
 @ Seconds a center-screen message stays up
 hr Sekunde koliko poruka u sredini zaslona ostaje vidljiva
 
@@ -3398,6 +3395,60 @@ hr Strelice gore i dolje za pomicanje, Enter za postavljanje, Esc za odustajanje
 
 @ View
 hr Prikaz
+
+@ Server Browser
+hr Popis poslužitelja
+
+@ Internet
+hr Internet
+
+@ Filters
+hr Filtri
+
+@ Refresh
+hr Osvježi
+
+@ Favorites
+hr Favoriti
+
+@ Ping
+hr Ping
+
+@ Protocol
+hr Protokol
+
+@ Players
+hr Igrači
+
+@ Unknown
+hr Nepoznato
+
+@ Empty
+hr Prazni
+
+@ Populated
+hr S igračima
+
+@ Open slots
+hr Slobodna mjesta
+
+@ Full
+hr Puni
+
+@ Deathmatch
+hr Borba do smrti
+
+@ Mod
+hr Mod
+
+@ No servers found
+hr Nema pronađenih poslužitelja
+
+@ No matching servers
+hr Nema odgovarajućih poslužitelja
+
+@ Server search failed
+hr Pretraživanje poslužitelja nije uspjelo
 
 # ==== hud.txt ====
 

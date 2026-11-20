@@ -874,9 +874,6 @@ vi Shader màn hình
 @ Screen Shake
 vi Rung màn hình
 
-@ Search LAN
-vi Tìm trong mạng LAN
-
 @ Seconds a center-screen message stays up
 vi Số giây thông báo giữa màn hình hiển thị
 
@@ -3398,6 +3395,60 @@ vi Dùng mũi tên Lên và Xuống để di chuyển, Enter để đặt, Esc �
 
 @ View
 vi Xem
+
+@ Server Browser
+vi Danh sách máy chủ
+
+@ Internet
+vi Internet
+
+@ Filters
+vi Bộ lọc
+
+@ Refresh
+vi Làm mới
+
+@ Favorites
+vi Yêu thích
+
+@ Ping
+vi Ping
+
+@ Protocol
+vi Giao thức
+
+@ Players
+vi Người chơi
+
+@ Unknown
+vi Không rõ
+
+@ Empty
+vi Trống
+
+@ Populated
+vi Có người chơi
+
+@ Open slots
+vi Còn chỗ
+
+@ Full
+vi Đầy
+
+@ Deathmatch
+vi Đấu sinh tử
+
+@ Mod
+vi Mod
+
+@ No servers found
+vi Không tìm thấy máy chủ
+
+@ No matching servers
+vi Không có máy chủ phù hợp
+
+@ Server search failed
+vi Tìm kiếm máy chủ thất bại
 
 # ==== hud.txt ====
 

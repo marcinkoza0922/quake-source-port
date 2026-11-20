@@ -874,9 +874,6 @@ mt Shader tal-iskrin
 @ Screen Shake
 mt Theżżiż tal-iskrin
 
-@ Search LAN
-mt Fittex fil-LAN
-
 @ Seconds a center-screen message stays up
 mt Kemm-il sekonda jibqa' jidher messaġġ f'nofs l-iskrin
 
@@ -3398,6 +3395,60 @@ mt Uża l-vleġeġ 'il fuq u 'l isfel biex tmexxi, Enter biex tpoġġi, Esc biex
 
 @ View
 mt Veduta
+
+@ Server Browser
+mt Lista tas-servers
+
+@ Internet
+mt Internet
+
+@ Filters
+mt Filtri
+
+@ Refresh
+mt Aġġorna
+
+@ Favorites
+mt Favoriti
+
+@ Ping
+mt Ping
+
+@ Protocol
+mt Protokoll
+
+@ Players
+mt Plejers
+
+@ Unknown
+mt Mhux magħruf
+
+@ Empty
+mt Vojta
+
+@ Populated
+mt Bil-plejers
+
+@ Open slots
+mt Postijiet ħielsa
+
+@ Full
+mt Mimlija
+
+@ Deathmatch
+mt Deathmatch
+
+@ Mod
+mt Mod
+
+@ No servers found
+mt Ma nstab l-ebda server
+
+@ No matching servers
+mt L-ebda server ma jaqbel mal-filtri
+
+@ Server search failed
+mt It-tiftix għas-servers falla
 
 # ==== hud.txt ====
 

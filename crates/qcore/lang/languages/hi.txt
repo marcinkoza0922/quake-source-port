@@ -874,9 +874,6 @@ hi स्क्रीन शेडर
 @ Screen Shake
 hi स्क्रीन कंपन
 
-@ Search LAN
-hi LAN खोजें
-
 @ Seconds a center-screen message stays up
 hi स्क्रीन के बीच का संदेश कितने सेकंड दिखता है
 
@@ -3398,6 +3395,60 @@ hi हिलाने के लिए ऊपर और नीचे तीर, 
 
 @ View
 hi दृश्य
+
+@ Server Browser
+hi सर्वर सूची
+
+@ Internet
+hi इंटरनेट
+
+@ Filters
+hi फ़िल्टर
+
+@ Refresh
+hi रीफ़्रेश करें
+
+@ Favorites
+hi पसंदीदा
+
+@ Ping
+hi पिंग
+
+@ Protocol
+hi प्रोटोकॉल
+
+@ Players
+hi खिलाड़ी
+
+@ Unknown
+hi अज्ञात
+
+@ Empty
+hi खाली
+
+@ Populated
+hi खिलाड़ी मौजूद
+
+@ Open slots
+hi खाली जगहें
+
+@ Full
+hi भरे हुए
+
+@ Deathmatch
+hi डेथमैच
+
+@ Mod
+hi मॉड
+
+@ No servers found
+hi कोई सर्वर नहीं मिला
+
+@ No matching servers
+hi फ़िल्टर से मेल खाने वाला कोई सर्वर नहीं है
+
+@ Server search failed
+hi सर्वर की खोज विफल रही
 
 # ==== hud.txt ====
 

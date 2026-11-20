@@ -874,9 +874,6 @@ et Ekraanivarjutaja
 @ Screen Shake
 et Ekraani värin
 
-@ Search LAN
-et Otsi LAN-ist
-
 @ Seconds a center-screen message stays up
 et Mitu sekundit keskteade ekraanil püsib
 
@@ -3398,6 +3395,60 @@ et Kasuta liigutamiseks üles- ja allanoolt, asetamiseks Enter, tühistamiseks E
 
 @ View
 et Vaade
+
+@ Server Browser
+et Serveriloend
+
+@ Internet
+et Internet
+
+@ Filters
+et Filtrid
+
+@ Refresh
+et Värskenda
+
+@ Favorites
+et Lemmikud
+
+@ Ping
+et Viivitus
+
+@ Protocol
+et Protokoll
+
+@ Players
+et Mängijad
+
+@ Unknown
+et Teadmata
+
+@ Empty
+et Tühjad
+
+@ Populated
+et Mängijatega
+
+@ Open slots
+et Vabu kohti
+
+@ Full
+et Täis
+
+@ Deathmatch
+et Surmamatš
+
+@ Mod
+et Mod
+
+@ No servers found
+et Servereid ei leitud
+
+@ No matching servers
+et Sobivaid servereid pole
+
+@ Server search failed
+et Serverite otsing ebaõnnestus
 
 # ==== hud.txt ====
 

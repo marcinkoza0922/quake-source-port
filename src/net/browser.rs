@@ -66,7 +66,7 @@ impl ServerMode {
     }
 }
 
-/// A discovered or saved server shown on the Join Game page.
+/// A discovered or saved server shown in the server browser.
 #[derive(Clone, Debug, Default, PartialEq)]
 pub struct ServerEntry {
     pub address: String,
@@ -109,33 +109,64 @@ impl ServerEntry {
     }
 }
 
-/// Filter & sort state for the Join Game server list.
-#[derive(Clone, Debug, Default, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum ServerTab {
+    #[default]
+    Lan,
+    Internet,
+}
+
+impl ServerTab {
+    pub const ALL: [Self; 2] = [Self::Lan, Self::Internet];
+
+    pub fn index(self) -> usize {
+        self as usize
+    }
+
+    pub fn command(self) -> &'static str {
+        match self {
+            Self::Lan => "slist",
+            Self::Internet => "slist_internet",
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum PingFilter {
+    #[default]
+    Any,
+    Below(u32),
+    Unknown,
+}
+
+/// Active filters and sort order for one server list.
+#[derive(Clone, Debug, Default)]
 pub struct BrowserFilter {
-    /// 0 = All, 1 = Internet, 2 = LAN, 3 = Favorites, 4 = Recent.
-    pub source: u8,
+    /// 0 = All, 1 = Favorites, 2 = Recent.
+    pub saved: usize,
     /// 0 = All, 1 = NetQuake, 2 = QuakeWorld, 3 = FTE/DP.
-    pub protocol: u8,
+    pub protocol: usize,
     /// 0 = All, 1 = Deathmatch, 2 = Cooperative, 3 = Teamplay.
-    pub mode: u8,
+    pub mode: usize,
     /// Empty = All mods, otherwise case-insensitive gamedir match.
     pub mod_filter: String,
-    /// Hide servers with 0 players.
-    pub hide_empty: bool,
+    /// 0 = All, 1 = Empty, 2 = Populated, 3 = Open slots, 4 = Full.
+    pub population: usize,
+    pub ping: PingFilter,
     /// 0 = Ping, 1 = Players, 2 = Name, 3 = Map.
-    pub sort: u8,
+    pub sort: usize,
+    /// Matches a substring of the server's name, address, map or gamedir.
+    pub query: String,
 }
 
 impl BrowserFilter {
+    pub fn has_constraints(&self) -> bool {
+        self.saved != 0 || self.protocol != 0 || self.mode != 0 || !self.mod_filter.is_empty()
+            || self.population != 0 || self.ping != PingFilter::Any
+    }
+
     pub fn matches(&self, s: &ServerEntry) -> bool {
-        let src_ok = match self.source {
-            1 => !s.lan,
-            2 => s.lan,
-            3 => s.favorite,
-            4 => s.recent,
-            _ => true,
-        };
-        if !src_ok {
+        if (self.saved == 1 && !s.favorite) || (self.saved == 2 && !s.recent) {
             return false;
         }
         let proto_ok = match self.protocol {
@@ -159,10 +190,28 @@ impl BrowserFilter {
         if !self.mod_filter.is_empty() && !s.effective_gamedir().eq_ignore_ascii_case(&self.mod_filter) {
             return false;
         }
-        if self.hide_empty && s.players == 0 {
+        let ping_ok = match self.ping {
+            PingFilter::Any => true,
+            PingFilter::Below(limit) => s.ping_ms.is_some_and(|ms| ms < limit),
+            PingFilter::Unknown => s.ping_ms.is_none(),
+        };
+        if !ping_ok {
             return false;
         }
-        true
+        let population_ok = match self.population {
+            1 => s.players == 0,
+            2 => s.players > 0,
+            3 => s.players < s.max_players,
+            4 => s.max_players > 0 && s.players >= s.max_players,
+            _ => true,
+        };
+        if self.population != 0 && (s.ping_ms.is_none() || !population_ok) {
+            return false;
+        }
+        self.query.is_empty()
+            || [&s.hostname, &s.address, &s.map, s.effective_gamedir()]
+                .iter()
+                .any(|field| field.to_ascii_lowercase().contains(&self.query))
     }
 
     /// Returns indices into `servers` matching this filter, ordered by `self.sort`.
@@ -327,20 +376,27 @@ impl SavedServers {
         self.recent.truncate(MAX_RECENT);
     }
 
-    /// Merges favorites and recent flags/entries into `servers`.
+    /// Updates flags on live entries and adds saved entries without a live reply.
     pub fn sync_into(&self, servers: &mut Vec<ServerEntry>) {
-        for s in servers.iter_mut() {
-            s.favorite = self.is_favorite(&s.address);
-            s.recent = self.is_recent(&s.address);
-        }
+        servers.retain(|s| s.ping_ms.is_some());
+        self.mark_entries(servers);
         for saved in self.favorites.iter().chain(self.recent.iter()) {
             let bare = saved.bare_address();
             if !servers.iter().any(|s| s.bare_address().eq_ignore_ascii_case(bare)) {
                 let mut e = saved.clone();
                 e.favorite = self.is_favorite(bare);
                 e.recent = self.is_recent(bare);
+                e.ping_ms = None;
+                e.lan = false;
                 servers.push(e);
             }
+        }
+    }
+
+    pub fn mark_entries(&self, servers: &mut [ServerEntry]) {
+        for s in servers {
+            s.favorite = self.is_favorite(&s.address);
+            s.recent = self.is_recent(&s.address);
         }
     }
 }
@@ -392,7 +448,7 @@ mod tests {
         // Default sort is Ping ascending: sv2 (12 ms) before sv1 (28 ms).
         assert_eq!(f.filter_and_sort(&list), vec![1, 0]);
         // Hide Empty filters out sv2.
-        f.hide_empty = true;
+        f.population = 2;
         assert_eq!(f.filter_and_sort(&list), vec![0]);
         // Mod filter "ktx" matches sv1.
         f.mod_filter = "ktx".into();

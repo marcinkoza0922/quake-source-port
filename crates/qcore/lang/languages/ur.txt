@@ -874,9 +874,6 @@ ur اسکرین شیڈر
 @ Screen Shake
 ur اسکرین کا لرزنا
 
-@ Search LAN
-ur LAN میں تلاش
-
 @ Seconds a center-screen message stays up
 ur اسکرین کے درمیان پیغام کتنے سیکنڈ رہتا ہے
 
@@ -3398,6 +3395,60 @@ ur منتقل کرنے کے لیے اوپر اور نیچے تیر، رکھنے 
 
 @ View
 ur منظر
+
+@ Server Browser
+ur سرور کی فہرست
+
+@ Internet
+ur انٹرنیٹ
+
+@ Filters
+ur فلٹرز
+
+@ Refresh
+ur تازہ کریں
+
+@ Favorites
+ur پسندیدہ
+
+@ Ping
+ur پنگ
+
+@ Protocol
+ur پروٹوکول
+
+@ Players
+ur کھلاڑی
+
+@ Unknown
+ur نامعلوم
+
+@ Empty
+ur خالی
+
+@ Populated
+ur کھلاڑی موجود ہیں
+
+@ Open slots
+ur خالی جگہیں
+
+@ Full
+ur بھرے ہوئے
+
+@ Deathmatch
+ur موت کا مقابلہ
+
+@ Mod
+ur موڈ
+
+@ No servers found
+ur کوئی سرور نہیں ملا
+
+@ No matching servers
+ur فلٹرز سے ملتا کوئی سرور نہیں
+
+@ Server search failed
+ur سرور کی تلاش ناکام رہی
 
 # ==== hud.txt ====
 

@@ -874,9 +874,6 @@ lt Ekrano šešėliuoklis
 @ Screen Shake
 lt Ekrano drebėjimas
 
-@ Search LAN
-lt Ieškoti LAN
-
 @ Seconds a center-screen message stays up
 lt Kiek sekundžių rodomas pranešimas ekrano centre
 
@@ -3398,6 +3395,60 @@ lt Naudokite rodykles aukštyn ir žemyn perkelti, Enter – padėti, Esc – at
 
 @ View
 lt Vaizdas
+
+@ Server Browser
+lt Serverių sąrašas
+
+@ Internet
+lt Internetas
+
+@ Filters
+lt Filtrai
+
+@ Refresh
+lt Atnaujinti
+
+@ Favorites
+lt Mėgstamiausi
+
+@ Ping
+lt Delsa
+
+@ Protocol
+lt Protokolas
+
+@ Players
+lt Žaidėjai
+
+@ Unknown
+lt Nežinoma
+
+@ Empty
+lt Tušti
+
+@ Populated
+lt Su žaidėjais
+
+@ Open slots
+lt Laisvos vietos
+
+@ Full
+lt Pilni
+
+@ Deathmatch
+lt Mūšis iki mirties
+
+@ Mod
+lt Modifikacija
+
+@ No servers found
+lt Serverių nerasta
+
+@ No matching servers
+lt Nėra filtrus atitinkančių serverių
+
+@ Server search failed
+lt Serverių paieška nepavyko
 
 # ==== hud.txt ====
 

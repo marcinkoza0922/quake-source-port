@@ -874,9 +874,6 @@ sv Skärmshader
 @ Screen Shake
 sv Skärmskakning
 
-@ Search LAN
-sv Sök i LAN
-
 @ Seconds a center-screen message stays up
 sv Sekunder ett mittmeddelande visas
 
@@ -3398,6 +3395,60 @@ sv Använd upp- och nedpilar för att flytta, Enter för att placera, Esc för a
 
 @ View
 sv Vy
+
+@ Server Browser
+sv Serverlista
+
+@ Internet
+sv Internet
+
+@ Filters
+sv Filter
+
+@ Refresh
+sv Uppdatera
+
+@ Favorites
+sv Favoriter
+
+@ Ping
+sv Ping
+
+@ Protocol
+sv Protokoll
+
+@ Players
+sv Spelare
+
+@ Unknown
+sv Okänt
+
+@ Empty
+sv Tomma
+
+@ Populated
+sv Med spelare
+
+@ Open slots
+sv Lediga platser
+
+@ Full
+sv Fulla
+
+@ Deathmatch
+sv Dödsmatch
+
+@ Mod
+sv Modd
+
+@ No servers found
+sv Inga servrar hittades
+
+@ No matching servers
+sv Inga matchande servrar
+
+@ Server search failed
+sv Serversökningen misslyckades
 
 # ==== hud.txt ====
 

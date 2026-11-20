@@ -874,9 +874,6 @@ ko 화면 셰이더
 @ Screen Shake
 ko 화면 흔들림
 
-@ Search LAN
-ko LAN 검색
-
 @ Seconds a center-screen message stays up
 ko 화면 중앙 메시지가 표시되는 시간(초)
 
@@ -3398,6 +3395,60 @@ ko 위/아래 화살표로 이동, Enter로 배치, Esc로 취소
 
 @ View
 ko 보기
+
+@ Server Browser
+ko 서버 목록
+
+@ Internet
+ko 인터넷
+
+@ Filters
+ko 필터
+
+@ Refresh
+ko 새로 고침
+
+@ Favorites
+ko 북마크
+
+@ Ping
+ko 지연
+
+@ Protocol
+ko 프로토콜
+
+@ Players
+ko 플레이어
+
+@ Unknown
+ko 알 수 없음
+
+@ Empty
+ko 비어 있음
+
+@ Populated
+ko 플레이어 있음
+
+@ Open slots
+ko 빈자리 있음
+
+@ Full
+ko 가득 참
+
+@ Deathmatch
+ko 데스매치
+
+@ Mod
+ko 모드
+
+@ No servers found
+ko 서버를 찾지 못했습니다
+
+@ No matching servers
+ko 조건에 맞는 서버가 없습니다
+
+@ Server search failed
+ko 서버 검색에 실패했습니다
 
 # ==== hud.txt ====
 

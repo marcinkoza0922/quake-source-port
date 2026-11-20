@@ -874,9 +874,6 @@ gu સ્ક્રીન શેડર
 @ Screen Shake
 gu સ્ક્રીન ધ્રુજારી
 
-@ Search LAN
-gu LAN શોધો
-
 @ Seconds a center-screen message stays up
 gu સ્ક્રીનની મધ્યનો સંદેશ કેટલી સેકન્ડ રહે છે
 
@@ -3398,6 +3395,60 @@ gu ખસેડવા ઉપર અને નીચે તીર, મૂકવ�
 
 @ View
 gu દૃશ્ય
+
+@ Server Browser
+gu સર્વરની યાદી
+
+@ Internet
+gu ઇન્ટરનેટ
+
+@ Filters
+gu ફિલ્ટર
+
+@ Refresh
+gu તાજું કરો
+
+@ Favorites
+gu મનપસંદ
+
+@ Ping
+gu પિંગ
+
+@ Protocol
+gu પ્રોટોકોલ
+
+@ Players
+gu ખેલાડીઓ
+
+@ Unknown
+gu અજ્ઞાત
+
+@ Empty
+gu ખાલી
+
+@ Populated
+gu ખેલાડીઓ છે
+
+@ Open slots
+gu ખાલી જગ્યાઓ
+
+@ Full
+gu ભરેલા
+
+@ Deathmatch
+gu ડેથમેચ
+
+@ Mod
+gu મોડ
+
+@ No servers found
+gu કોઈ સર્વર મળ્યું નથી
+
+@ No matching servers
+gu ફિલ્ટરને અનુરૂપ કોઈ સર્વર નથી
+
+@ Server search failed
+gu સર્વર શોધ નિષ્ફળ રહી
 
 # ==== hud.txt ====
 

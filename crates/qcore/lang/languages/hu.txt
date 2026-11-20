@@ -874,9 +874,6 @@ hu Képernyő-shader
 @ Screen Shake
 hu Képernyőrázkódás
 
-@ Search LAN
-hu Keresés LAN-on
-
 @ Seconds a center-screen message stays up
 hu Ennyi másodpercig látszik egy középső üzenet
 
@@ -3398,6 +3395,60 @@ hu Használd a Fel/Le nyilakat a mozgatáshoz, Enter az elhelyezéshez, Esc a m�
 
 @ View
 hu Nézet
+
+@ Server Browser
+hu Szerverböngésző
+
+@ Internet
+hu Internet
+
+@ Filters
+hu Szűrők
+
+@ Refresh
+hu Frissítés
+
+@ Favorites
+hu Kedvencek
+
+@ Ping
+hu Ping
+
+@ Protocol
+hu Protokoll
+
+@ Players
+hu Játékosok
+
+@ Unknown
+hu Ismeretlen
+
+@ Empty
+hu Üres
+
+@ Populated
+hu Játékosokkal
+
+@ Open slots
+hu Szabad helyek
+
+@ Full
+hu Tele
+
+@ Deathmatch
+hu Halálmeccs
+
+@ Mod
+hu Mod
+
+@ No servers found
+hu Nem találhatók szerverek
+
+@ No matching servers
+hu Egy szerver sem felel meg
+
+@ Server search failed
+hu A szerverkeresés sikertelen
 
 # ==== hud.txt ====
 

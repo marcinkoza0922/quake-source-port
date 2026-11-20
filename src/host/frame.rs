@@ -444,7 +444,7 @@ impl Host {
         self.prof_mark(2);
         self.poll_remote();
         self.poll_qw();
-        self.poll_lan_search();
+        self.poll_server_searches();
         self.update_pings();
         self.read_demo(dt);
         self.check_local_client();

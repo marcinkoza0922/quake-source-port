@@ -874,9 +874,6 @@ la Shader quadri
 @ Screen Shake
 la Tremor quadri
 
-@ Search LAN
-la In LAN quaerere
-
 @ Seconds a center-screen message stays up
 la Secundae quibus nuntius in medio quadro manet
 
@@ -3398,6 +3395,60 @@ la Utere sagittis Sursum et Deorsum ad movendum, Enter ad ponendum, Esc ad abrog
 
 @ View
 la Aspectus
+
+@ Server Browser
+la Index ministrorum
+
+@ Internet
+la Interrete
+
+@ Filters
+la Filtra
+
+@ Refresh
+la Renova
+
+@ Favorites
+la Praedilecta
+
+@ Ping
+la Ping
+
+@ Protocol
+la Protocollum
+
+@ Players
+la Lusores
+
+@ Unknown
+la Ignotum
+
+@ Empty
+la Vacui
+
+@ Populated
+la Cum lusoribus
+
+@ Open slots
+la Loci liberi
+
+@ Full
+la Pleni
+
+@ Deathmatch
+la Certamen mortale
+
+@ Mod
+la Modificatio
+
+@ No servers found
+la Nulli ministri inventi sunt
+
+@ No matching servers
+la Nulli ministri filtris respondent
+
+@ Server search failed
+la Inquisitio ministrorum defecit
 
 # ==== hud.txt ====
 

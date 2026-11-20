@@ -874,9 +874,6 @@ ja 画面シェーダー
 @ Screen Shake
 ja 画面の揺れ
 
-@ Search LAN
-ja LANを検索
-
 @ Seconds a center-screen message stays up
 ja 中央メッセージが表示される秒数
 
@@ -3398,6 +3395,60 @@ ja 上下の矢印キーで移動、Enterで決定、Escでキャンセル
 
 @ View
 ja 視点
+
+@ Server Browser
+ja サーバーブラウザー
+
+@ Internet
+ja インターネット
+
+@ Filters
+ja フィルター
+
+@ Refresh
+ja 更新
+
+@ Favorites
+ja お気に入り
+
+@ Ping
+ja Ping
+
+@ Protocol
+ja プロトコル
+
+@ Players
+ja プレイヤー
+
+@ Unknown
+ja 不明
+
+@ Empty
+ja 無人
+
+@ Populated
+ja プレイヤーあり
+
+@ Open slots
+ja 空きあり
+
+@ Full
+ja 空きなし
+
+@ Deathmatch
+ja デスマッチ
+
+@ Mod
+ja Mod
+
+@ No servers found
+ja サーバーが見つかりません
+
+@ No matching servers
+ja 条件に合うサーバーがありません
+
+@ Server search failed
+ja サーバーの検索に失敗しました
 
 # ==== hud.txt ====
 

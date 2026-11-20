@@ -567,10 +567,10 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         }
     });
     c.add("slist", |h, _| {
-        h.start_server_search(false);
+        h.start_server_search(crate::net::browser::ServerTab::Lan);
     });
     c.add("slist_internet", |h, _| {
-        h.start_server_search(true);
+        h.start_server_search(crate::net::browser::ServerTab::Internet);
     });
     c.add("server_fav", |h, a| {
         if a.argc() < 2 {

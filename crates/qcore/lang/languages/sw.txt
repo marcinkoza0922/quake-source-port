@@ -874,9 +874,6 @@ sw Shader ya Skrini
 @ Screen Shake
 sw Mtikisiko wa Skrini
 
-@ Search LAN
-sw Tafuta LAN
-
 @ Seconds a center-screen message stays up
 sw Sekunde ujumbe wa katikati ya skrini unakaa
 
@@ -3398,6 +3395,60 @@ sw Tumia mishale ya Juu na Chini kusogeza, Enter kuweka, Esc kughairi
 
 @ View
 sw Mwonekano
+
+@ Server Browser
+sw Orodha ya seva
+
+@ Internet
+sw Intaneti
+
+@ Filters
+sw Vichujio
+
+@ Refresh
+sw Onyesha upya
+
+@ Favorites
+sw Vipendwa
+
+@ Ping
+sw Ping
+
+@ Protocol
+sw Itifaki
+
+@ Players
+sw Wachezaji
+
+@ Unknown
+sw Haijulikani
+
+@ Empty
+sw Tupu
+
+@ Populated
+sw Zenye wachezaji
+
+@ Open slots
+sw Nafasi wazi
+
+@ Full
+sw Zimejaa
+
+@ Deathmatch
+sw Mechi ya kifo
+
+@ Mod
+sw Mod
+
+@ No servers found
+sw Hakuna seva iliyopatikana
+
+@ No matching servers
+sw Hakuna seva inayolingana na vichujio
+
+@ Server search failed
+sw Utafutaji wa seva umeshindwa
 
 # ==== hud.txt ====
 
