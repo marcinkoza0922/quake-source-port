@@ -12,7 +12,7 @@ const WP_X: f32 = 152.0;
 const WP_W: f32 = 336.0;
 const WP_ROW0: f32 = 82.0;
 const WP_ROW_H: f32 = 21.0;
-const WP_COUNT: usize = 8;
+pub(super) const WP_COUNT: usize = 8;
 pub(super) const WP_BACK: (f32, f32) = (WP_X, WP_ROW0 + WP_COUNT as f32 * WP_ROW_H + 10.0);
 const RESET_BTN: [f32; 4] = [WP_X + WP_W - 132.0, WP_BACK.1, 132.0, 16.0];
 
@@ -48,7 +48,7 @@ impl WeaponPriorityUi {
     }
 }
 
-fn slot_for_impulse(impulse: u8) -> &'static crate::wheel::Slot {
+pub(super) fn slot_for_impulse(impulse: u8) -> &'static crate::wheel::Slot {
     &SLOTS[(impulse.clamp(1, 8) - 1) as usize]
 }
 
@@ -71,11 +71,11 @@ fn in_rect(pos: (f32, f32), r: [f32; 4]) -> bool {
     pos.0 >= r[0] && pos.0 <= r[0] + r[2] && pos.1 >= r[1] && pos.1 <= r[1] + r[3]
 }
 
-fn save_order(cv: &mut Cvars, order: &[u8; 8]) {
+pub(super) fn save_order(cv: &mut Cvars, order: &[u8; 8]) {
     cv.set("cl_weaponpriority", &format_priority(order));
 }
 
-fn move_entry(order: &mut [u8; 8], from: usize, to: usize) {
+pub(super) fn move_entry(order: &mut [u8; 8], from: usize, to: usize) {
     if from == to || from >= WP_COUNT || to >= WP_COUNT {
         return;
     }

@@ -8,6 +8,7 @@
 
 mod dialogs;
 mod draw;
+mod touch;
 
 use std::path::{Path, PathBuf};
 use std::sync::mpsc::Receiver;

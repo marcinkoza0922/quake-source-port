@@ -526,6 +526,9 @@ sv Hur långt kroken flyger innan den dras tillbaka
 @ How visible the on-screen controls are
 sv Hur synliga skärmkontrollerna är
 
+@ Size of the menus and their buttons while you use the touchscreen
+sv Storleken på menyerna och deras knappar när du använder pekskärmen
+
 @ Impact Lifetime
 sv Nedslagens livslängd
 
@@ -720,6 +723,9 @@ sv Färg vid mål
 
 @ Opacity
 sv Opacitet
+
+@ Menu Size
+sv Menystorlek
 
 @ Opacity of the grenade arc
 sv Granatbanans opacitet
@@ -2560,6 +2566,9 @@ sv Välj bana
 
 @ Really quit?
 sv Vill du verkligen avsluta?
+
+@ Quit
+sv Avsluta
 
 @ You died
 sv Du dog

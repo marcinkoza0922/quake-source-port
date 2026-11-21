@@ -526,6 +526,9 @@ hi लौटने से पहले हुक कितनी दूर ज�
 @ How visible the on-screen controls are
 hi ऑन-स्क्रीन कंट्रोल्स कितने दिखाई देते हैं
 
+@ Size of the menus and their buttons while you use the touchscreen
+hi टचस्क्रीन इस्तेमाल करते समय मेनू और उनके बटनों का आकार
+
 @ Impact Lifetime
 hi इम्पैक्ट अवधि
 
@@ -720,6 +723,9 @@ hi लक्ष्य पर रंग
 
 @ Opacity
 hi अपारदर्शिता
+
+@ Menu Size
+hi मेनू का आकार
 
 @ Opacity of the grenade arc
 hi ग्रेनेड आर्क की अपारदर्शिता
@@ -2560,6 +2566,9 @@ hi लेवल चुनें
 
 @ Really quit?
 hi सच में बाहर निकलें?
+
+@ Quit
+hi बाहर निकलें
 
 @ You died
 hi आप मारे गए

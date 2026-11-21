@@ -56,6 +56,8 @@ mod weapon_priority;
 mod server_browser;
 mod touch;
 mod touch_editor;
+mod touchview;
+pub use touchview::ListRow;
 pub(crate) use server_browser::SearchStatus;
 pub mod demos;
 
@@ -215,6 +217,14 @@ pub struct Menu {
     /// from several pages return there; otherwise `parent_page`).
     sub_return: Option<(Page, Page, usize)>,
     touch_shortcut: bool,
+    /// Touch layout state (`touchview.rs`).
+    tv: touchview::TouchView,
+    /// Pixels per platform UI unit (set by the host from the window).
+    pub display_scale: f32,
+    /// Where the finger now down touched (pressed look), menu units.
+    pub touch_press: Option<(f32, f32)>,
+    /// Load/Save were opened from the touch home menu (Back returns there).
+    cards_from_home: bool,
     pub touch_insets: [f32; 4],
     pub touch_aspect: f32,
     touch_editor: touch_editor::Editor,
@@ -372,6 +382,10 @@ impl Menu {
             drop: None,
             sub_return: None,
             touch_shortcut: false,
+            tv: Default::default(),
+            display_scale: 1.0,
+            touch_press: None,
+            cards_from_home: false,
             touch_insets: [0.0; 4],
             touch_aspect: 16.0 / 9.0,
             touch_editor: Default::default(),
@@ -462,6 +476,9 @@ impl Menu {
         if self.screen == Screen::ServerBrowser && self.server_browser_accepts_text() {
             return self.server_browser_type(ch);
         }
+        if self.tv_search_focus() {
+            return if self.screen == Screen::Options { self.search_type(ch) } else { self.tv_list_type(ch) };
+        }
         if self.drop.is_none() {
             self.text_insert(ch.encode_utf8(&mut [0; 4]), cv);
         }
@@ -470,11 +487,15 @@ impl Menu {
     /// The cursor is on a text row, which takes typed characters (the host
     /// then turns on text input).
     pub fn wants_text(&self) -> bool {
+        if self.tv_search_focus() {
+            return self.osk.is_none() && self.prompt.is_none();
+        }
         if self.screen == Screen::HudEditor {
             return self.osk.is_none() && self.hud_edit.wants_text();
         }
         let Screen::OptionsPage(p) = self.screen else { return false };
         self.drop.is_none() && self.osk.is_none() && self.prompt.is_none() && matches!(self.page_item(p, self.opt_cursor), Item::Text { .. })
+            && self.tv_text_focus() != Some(false)
     }
 
     /// Waiting for a key to bind (the host keeps sticks from moving the cursor).

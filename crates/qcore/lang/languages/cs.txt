@@ -526,6 +526,9 @@ cs Jak daleko hák doletí, než se vrátí
 @ How visible the on-screen controls are
 cs Jak viditelné je ovládání na obrazovce
 
+@ Size of the menus and their buttons while you use the touchscreen
+cs Velikost nabídek a jejich tlačítek při ovládání dotykovou obrazovkou
+
 @ Impact Lifetime
 cs Trvání zásahů
 
@@ -720,6 +723,9 @@ cs Barva na cíli
 
 @ Opacity
 cs Krytí
+
+@ Menu Size
+cs Velikost nabídek
 
 @ Opacity of the grenade arc
 cs Krytí dráhy granátu
@@ -2560,6 +2566,9 @@ cs Výběr úrovně
 
 @ Really quit?
 cs Opravdu ukončit?
+
+@ Quit
+cs Ukončit
 
 @ You died
 cs Zemřeli jste

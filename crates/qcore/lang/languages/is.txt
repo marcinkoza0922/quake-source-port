@@ -526,6 +526,9 @@ is Hversu langt krókurinn flýgur áður en hann snýr við
 @ How visible the on-screen controls are
 is Hversu sýnilegar stýringarnar á skjánum eru
 
+@ Size of the menus and their buttons while you use the touchscreen
+is Stærð valmynda og hnappa þeirra þegar þú notar snertiskjáinn
+
 @ Impact Lifetime
 is Líftími högga
 
@@ -720,6 +723,9 @@ is Litur á skotmarki
 
 @ Opacity
 is Ógegnsæi
+
+@ Menu Size
+is Stærð valmynda
 
 @ Opacity of the grenade arc
 is Ógegnsæi sprengjubogans
@@ -2560,6 +2566,9 @@ is Velja borð
 
 @ Really quit?
 is Hætta í alvöru?
+
+@ Quit
+is Hætta
 
 @ You died
 is Þú dóst

@@ -526,6 +526,9 @@ ga An fad a eitlíonn an crúca sula bhfilleann sé
 @ How visible the on-screen controls are
 ga Cé chomh feiceálach is atá na rialuithe ar an scáileán
 
+@ Size of the menus and their buttons while you use the touchscreen
+ga Méid na roghchlár agus a gcnaipí agus an scáileán tadhaill in úsáid agat
+
 @ Impact Lifetime
 ga Saolré na dTuairteanna
 
@@ -720,6 +723,9 @@ ga Dath ar Sprioc
 
 @ Opacity
 ga Teimhneacht
+
+@ Menu Size
+ga Méid na Roghchlár
 
 @ Opacity of the grenade arc
 ga Teimhneacht stua na gránáide
@@ -2560,6 +2566,9 @@ ga Roghnú Leibhéil
 
 @ Really quit?
 ga An bhfuil tú cinnte gur mian leat scor?
+
+@ Quit
+ga Scoir
 
 @ You died
 ga Fuair tú bás

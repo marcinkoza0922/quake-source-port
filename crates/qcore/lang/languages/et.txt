@@ -526,6 +526,9 @@ et Kui kaugele konks lendab enne tagasitulekut
 @ How visible the on-screen controls are
 et Kui nähtavad on ekraaninupud
 
+@ Size of the menus and their buttons while you use the touchscreen
+et Menüüde ja nende nuppude suurus puuteekraani kasutamisel
+
 @ Impact Lifetime
 et Tabamusjälgede kestus
 
@@ -720,6 +723,9 @@ et Sihtmärgi värv
 
 @ Opacity
 et Läbipaistmatus
+
+@ Menu Size
+et Menüüde suurus
 
 @ Opacity of the grenade arc
 et Granaadikaare läbipaistmatus
@@ -2560,6 +2566,9 @@ et Taseme valik
 
 @ Really quit?
 et Kas tõesti väljuda?
+
+@ Quit
+et Välju
 
 @ You died
 et Sa said surma

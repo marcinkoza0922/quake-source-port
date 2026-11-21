@@ -526,6 +526,9 @@ zh-TW 鉤爪收回前能飛多遠
 @ How visible the on-screen controls are
 zh-TW 螢幕操控按鈕的可見度
 
+@ Size of the menus and their buttons while you use the touchscreen
+zh-TW 使用觸控螢幕時選單及其按鈕的大小
+
 @ Impact Lifetime
 zh-TW 彈痕存留時間
 
@@ -720,6 +723,9 @@ zh-TW 瞄準目標時顏色
 
 @ Opacity
 zh-TW 不透明度
+
+@ Menu Size
+zh-TW 選單大小
 
 @ Opacity of the grenade arc
 zh-TW 榴彈軌跡的不透明度
@@ -2560,6 +2566,9 @@ zh-TW 選擇關卡
 
 @ Really quit?
 zh-TW 確定要離開嗎？
+
+@ Quit
+zh-TW 離開
 
 @ You died
 zh-TW 你死了

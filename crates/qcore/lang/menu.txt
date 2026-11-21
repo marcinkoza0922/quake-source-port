@@ -1219,6 +1219,13 @@ it Visibilità dei comandi su schermo
 es Visibilidad de los controles en pantalla
 ru Насколько заметны экранные элементы управления
 
+@ Size of the menus and their buttons while you use the touchscreen
+fr Taille des menus et de leurs boutons quand vous utilisez l'écran tactile
+de Größe der Menüs und ihrer Schaltflächen bei Bedienung per Touchscreen
+it Dimensione dei menu e dei loro pulsanti quando usi il touchscreen
+es Tamaño de los menús y sus botones cuando usas la pantalla táctil
+ru Размер меню и их кнопок при использовании сенсорного экрана
+
 @ Impact Lifetime
 fr Durée des impacts
 de Lebensdauer der Einschläge
@@ -1673,6 +1680,13 @@ de Deckkraft
 it Opacità
 es Opacidad
 ru Непрозрачность
+
+@ Menu Size
+fr Taille des menus
+de Menügröße
+it Dimensione menu
+es Tamaño de los menús
+ru Размер меню
 
 @ Opacity of the grenade arc
 fr Opacité de l'arc de grenade

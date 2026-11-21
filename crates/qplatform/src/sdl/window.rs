@@ -35,6 +35,15 @@ impl Window {
         ]
     }
 
+    /// Drawable pixels per platform UI unit (Android dp, Windows/Linux
+    /// logical pixel, macOS point): the OS scale its own touch UI uses.
+    /// 1 when SDL can't tell.
+    pub fn display_scale(&self) -> f32 {
+        // SAFETY: raw is a live window.
+        let s = unsafe { sys::SDL_GetWindowDisplayScale(self.raw) };
+        if s.is_finite() && s > 0.0 { s } else { 1.0 }
+    }
+
     /// Relative mouse mode (hidden cursor, unbounded deltas).
     pub fn set_relative_mouse(&self, on: bool) -> Result<()> {
         // SAFETY: raw is a live window.

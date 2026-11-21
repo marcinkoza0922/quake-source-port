@@ -526,6 +526,9 @@ cy Pa mor bell mae'r bachyn yn hedfan cyn dod yn ôl
 @ How visible the on-screen controls are
 cy Pa mor weladwy yw'r rheolyddion ar y sgrin
 
+@ Size of the menus and their buttons while you use the touchscreen
+cy Maint y dewislenni a'u botymau wrth ddefnyddio'r sgrin gyffwrdd
+
 @ Impact Lifetime
 cy Oes trawiadau
 
@@ -720,6 +723,9 @@ cy Lliw ar darged
 
 @ Opacity
 cy Didreiddedd
+
+@ Menu Size
+cy Maint y dewislenni
 
 @ Opacity of the grenade arc
 cy Didreiddedd arc y grenâd
@@ -2560,6 +2566,9 @@ cy Dewis lefel
 
 @ Really quit?
 cy Gadael go iawn?
+
+@ Quit
+cy Gadael
 
 @ You died
 cy Rydych wedi marw

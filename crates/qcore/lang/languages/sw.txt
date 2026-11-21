@@ -526,6 +526,9 @@ sw Umbali ndoano inaruka kabla ya kurudi
 @ How visible the on-screen controls are
 sw Uonekanaji wa vidhibiti vya skrini
 
+@ Size of the menus and their buttons while you use the touchscreen
+sw Ukubwa wa menyu na vitufe vyake unapotumia skrini ya kugusa
+
 @ Impact Lifetime
 sw Muda wa Alama za Athari
 
@@ -720,6 +723,9 @@ sw Rangi Ukilenga
 
 @ Opacity
 sw Uangavu
+
+@ Menu Size
+sw Ukubwa wa menyu
 
 @ Opacity of the grenade arc
 sw Uangavu wa tao la guruneti
@@ -2560,6 +2566,9 @@ sw Chagua Ngazi
 
 @ Really quit?
 sw Kweli unataka kutoka?
+
+@ Quit
+sw Ondoka
 
 @ You died
 sw Umekufa

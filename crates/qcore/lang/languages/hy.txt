@@ -526,6 +526,9 @@ hy Որքան է թռչում կեռիկը մինչև ետ վերադառնալ�
 @ How visible the on-screen controls are
 hy Որքան տեսանելի են էկրանային կառավարման տարրերը
 
+@ Size of the menus and their buttons while you use the touchscreen
+hy Ընտրացանկերի և դրանց կոճակների չափը սենսորային էկրանից օգտվելիս
+
 @ Impact Lifetime
 hy Հարվածի հետքերի կյանք
 
@@ -720,6 +723,9 @@ hy Թիրախի գույն
 
 @ Opacity
 hy Անթափանցություն
+
+@ Menu Size
+hy Ընտրացանկի չափ
 
 @ Opacity of the grenade arc
 hy Նռնակի հետագծի անթափանցությունը
@@ -2560,6 +2566,9 @@ hy Մակարդակի ընտրություն
 
 @ Really quit?
 hy Իսկապե՞ս դուրս գալ
+
+@ Quit
+hy Ելք
 
 @ You died
 hy Դուք զոհվեցիք

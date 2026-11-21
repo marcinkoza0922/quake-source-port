@@ -526,6 +526,9 @@ ca Distància que recorre el ganxo abans de tornar
 @ How visible the on-screen controls are
 ca Visibilitat dels controls en pantalla
 
+@ Size of the menus and their buttons while you use the touchscreen
+ca Mida dels menús i els seus botons quan feu servir la pantalla tàctil
+
 @ Impact Lifetime
 ca Durada dels impactes
 
@@ -720,6 +723,9 @@ ca Color sobre l'objectiu
 
 @ Opacity
 ca Opacitat
+
+@ Menu Size
+ca Mida dels menús
 
 @ Opacity of the grenade arc
 ca Opacitat de l'arc de la granada
@@ -2560,6 +2566,9 @@ ca Tria el nivell
 
 @ Really quit?
 ca Segur que vols sortir?
+
+@ Quit
+ca Surt
 
 @ You died
 ca Has mort

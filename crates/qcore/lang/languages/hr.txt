@@ -526,6 +526,9 @@ hr Koliko daleko kuka leti prije nego što se vrati
 @ How visible the on-screen controls are
 hr Koliko su vidljive kontrole na zaslonu
 
+@ Size of the menus and their buttons while you use the touchscreen
+hr Veličina izbornika i njihovih gumba dok koristite zaslon osjetljiv na dodir
+
 @ Impact Lifetime
 hr Trajanje udaraca
 
@@ -720,6 +723,9 @@ hr Boja na meti
 
 @ Opacity
 hr Neprozirnost
+
+@ Menu Size
+hr Veličina izbornika
 
 @ Opacity of the grenade arc
 hr Neprozirnost putanje granate
@@ -2560,6 +2566,9 @@ hr Odabir razine
 
 @ Really quit?
 hr Stvarno izaći?
+
+@ Quit
+hr Izlaz
 
 @ You died
 hr Poginuli ste

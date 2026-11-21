@@ -526,6 +526,9 @@ sk Ako ďaleko hák letí, kým sa vráti
 @ How visible the on-screen controls are
 sk Viditeľnosť ovládacích prvkov na obrazovke
 
+@ Size of the menus and their buttons while you use the touchscreen
+sk Veľkosť ponúk a ich tlačidiel pri ovládaní dotykovou obrazovkou
+
 @ Impact Lifetime
 sk Trvanie zásahov
 
@@ -720,6 +723,9 @@ sk Farba na cieli
 
 @ Opacity
 sk Nepriehľadnosť
+
+@ Menu Size
+sk Veľkosť ponúk
 
 @ Opacity of the grenade arc
 sk Nepriehľadnosť oblúka granátu
@@ -2560,6 +2566,9 @@ sk Výber úrovne
 
 @ Really quit?
 sk Naozaj ukončiť?
+
+@ Quit
+sk Ukončiť
 
 @ You died
 sk Zomreli ste

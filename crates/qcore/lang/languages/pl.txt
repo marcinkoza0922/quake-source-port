@@ -526,6 +526,9 @@ pl Jak daleko leci hak, zanim wróci
 @ How visible the on-screen controls are
 pl Jak widoczne jest sterowanie ekranowe
 
+@ Size of the menus and their buttons while you use the touchscreen
+pl Rozmiar menu i ich przycisków podczas korzystania z ekranu dotykowego
+
 @ Impact Lifetime
 pl Czas istnienia trafień
 
@@ -720,6 +723,9 @@ pl Kolor na celu
 
 @ Opacity
 pl Krycie
+
+@ Menu Size
+pl Rozmiar menu
 
 @ Opacity of the grenade arc
 pl Krycie toru granatu
@@ -2560,6 +2566,9 @@ pl Wybór poziomu
 
 @ Really quit?
 pl Na pewno wyjść?
+
+@ Quit
+pl Wyjdź
 
 @ You died
 pl Zginąłeś

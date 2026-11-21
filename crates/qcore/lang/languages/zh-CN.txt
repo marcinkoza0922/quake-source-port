@@ -526,6 +526,9 @@ zh-CN 钩爪收回前飞行的距离
 @ How visible the on-screen controls are
 zh-CN 屏幕控件的可见程度
 
+@ Size of the menus and their buttons while you use the touchscreen
+zh-CN 使用触摸屏时菜单及其按钮的大小
+
 @ Impact Lifetime
 zh-CN 弹痕持续时间
 
@@ -720,6 +723,9 @@ zh-CN 瞄准目标时颜色
 
 @ Opacity
 zh-CN 不透明度
+
+@ Menu Size
+zh-CN 菜单大小
 
 @ Opacity of the grenade arc
 zh-CN 手榴弹抛物线的不透明度
@@ -2560,6 +2566,9 @@ zh-CN 选择关卡
 
 @ Really quit?
 zh-CN 确定要退出吗？
+
+@ Quit
+zh-CN 退出
 
 @ You died
 zh-CN 你死了

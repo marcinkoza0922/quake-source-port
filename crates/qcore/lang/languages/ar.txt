@@ -526,6 +526,9 @@ ar المسافة التي يطيرها الخطّاف قبل أن يرتد
 @ How visible the on-screen controls are
 ar مدى وضوح أزرار التحكم على الشاشة
 
+@ Size of the menus and their buttons while you use the touchscreen
+ar حجم القوائم وأزرارها عند استخدام شاشة اللمس
+
 @ Impact Lifetime
 ar مدة بقاء أثر الإصابة
 
@@ -720,6 +723,9 @@ ar لون التصويب على هدف
 
 @ Opacity
 ar العتامة
+
+@ Menu Size
+ar حجم القوائم
 
 @ Opacity of the grenade arc
 ar عتامة مسار القنبلة
@@ -2560,6 +2566,9 @@ ar اختيار المستوى
 
 @ Really quit?
 ar هل تريد الخروج فعلًا؟
+
+@ Quit
+ar خروج
 
 @ You died
 ar لقد متّ

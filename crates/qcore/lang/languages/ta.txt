@@ -526,6 +526,9 @@ ta கொக்கி திரும்புவதற்கு முன் �
 @ How visible the on-screen controls are
 ta திரைக் கட்டுப்பாடுகள் எவ்வளவு தெரியும்
 
+@ Size of the menus and their buttons while you use the touchscreen
+ta தொடுதிரையைப் பயன்படுத்தும்போது மெனுக்கள் மற்றும் அவற்றின் பொத்தான்களின் அளவு
+
 @ Impact Lifetime
 ta தாக்கத் தடங்களின் ஆயுள்
 
@@ -720,6 +723,9 @@ ta இலக்கின் மீது நிறம்
 
 @ Opacity
 ta ஒளிபுகாமை
+
+@ Menu Size
+ta மெனு அளவு
 
 @ Opacity of the grenade arc
 ta கையெறிகுண்டு வளைவின் ஒளிபுகாமை
@@ -2560,6 +2566,9 @@ ta நிலைத் தேர்வு
 
 @ Really quit?
 ta உண்மையில் வெளியேறவா?
+
+@ Quit
+ta வெளியேறு
 
 @ You died
 ta நீங்கள் இறந்தீர்கள்

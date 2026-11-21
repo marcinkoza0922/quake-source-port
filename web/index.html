@@ -8,7 +8,8 @@
   :root { --bg: #111; --fg: #ddd; --accent: #c8642a; --panel: #1c1c1c; }
   html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
     font: 15px/1.4 system-ui, sans-serif; }
-  #quake { display: block; width: 100vw; height: 100vh; outline: none; }
+  #quake { display: block; width: 100vw; height: 100vh; outline: none;
+    touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
   #setup { position: fixed; inset: 0; display: flex; align-items: center;
     justify-content: center; padding: 16px; box-sizing: border-box; }
   #setup .card { background: var(--panel); padding: 24px; border-radius: 8px;

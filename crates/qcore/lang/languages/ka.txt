@@ -526,6 +526,9 @@ ka რამდენად შორს მიფრინავს კაუ�
 @ How visible the on-screen controls are
 ka რამდენად ხილულია ეკრანული მართვის ელემენტები
 
+@ Size of the menus and their buttons while you use the touchscreen
+ka მენიუებისა და მათი ღილაკების ზომა სენსორული ეკრანის გამოყენებისას
+
 @ Impact Lifetime
 ka მოხვედრის კვალის ხანგრძლივობა
 
@@ -720,6 +723,9 @@ ka ფერი მიზანზე
 
 @ Opacity
 ka გაუმჭვირვალობა
+
+@ Menu Size
+ka მენიუს ზომა
 
 @ Opacity of the grenade arc
 ka ყუმბარის ტრაექტორიის გაუმჭვირვალობა
@@ -2560,6 +2566,9 @@ ka დონის არჩევა
 
 @ Really quit?
 ka ნამდვილად გასვლა?
+
+@ Quit
+ka გასვლა
 
 @ You died
 ka თქვენ მოკვდით

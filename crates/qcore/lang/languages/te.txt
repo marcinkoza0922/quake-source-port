@@ -526,6 +526,9 @@ te హుక్ వెనక్కి రాకముందు ఎంత దూ�
 @ How visible the on-screen controls are
 te స్క్రీన్‌పై నియంత్రణలు ఎంత కనిపిస్తాయి
 
+@ Size of the menus and their buttons while you use the touchscreen
+te టచ్‌స్క్రీన్ వాడుతున్నప్పుడు మెనూలు, వాటి బటన్‌ల పరిమాణం
+
 @ Impact Lifetime
 te తాకిడి జీవితకాలం
 
@@ -720,6 +723,9 @@ te లక్ష్యంపై రంగు
 
 @ Opacity
 te అపారదర్శకత
+
+@ Menu Size
+te మెనూ పరిమాణం
 
 @ Opacity of the grenade arc
 te గ్రెనేడ్ వంపు అపారదర్శకత
@@ -2560,6 +2566,9 @@ te లెవెల్ ఎంపిక
 
 @ Really quit?
 te నిజంగా నిష్క్రమించాలా?
+
+@ Quit
+te నిష్క్రమించు
 
 @ You died
 te మీరు చనిపోయారు

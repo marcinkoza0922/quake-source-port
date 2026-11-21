@@ -526,6 +526,9 @@ be Як далёка ляціць крук, перш чым вярнуцца
 @ How visible the on-screen controls are
 be Наколькі прыкметныя экранныя элементы кіравання
 
+@ Size of the menus and their buttons while you use the touchscreen
+be Памер меню і іх кнопак пры карыстанні сэнсарным экранам
+
 @ Impact Lifetime
 be Час жыцця слядоў пападанняў
 
@@ -720,6 +723,9 @@ be Колер на мэце
 
 @ Opacity
 be Непразрыстасць
+
+@ Menu Size
+be Памер меню
 
 @ Opacity of the grenade arc
 be Непразрыстасць траекторыі гранаты
@@ -2560,6 +2566,9 @@ be Выбар узроўню
 
 @ Really quit?
 be Сапраўды выйсці?
+
+@ Quit
+be Выйсці
 
 @ You died
 be Вы загінулі

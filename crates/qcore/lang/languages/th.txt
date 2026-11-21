@@ -526,6 +526,9 @@ th ระยะ​ที่​ตะขอ​บิน​ก่อน​ดึ�
 @ How visible the on-screen controls are
 th ความ​ชัด​ของ​ปุ่ม​บน​จอ
 
+@ Size of the menus and their buttons while you use the touchscreen
+th ขนาด​ของ​เมนู​และ​ปุ่ม​เมื่อ​ใช้​หน้า​จอ​สัมผัส
+
 @ Impact Lifetime
 th อายุ​รอย​กระทบ
 
@@ -720,6 +723,9 @@ th สี​เมื่อ​เล็ง​โดน
 
 @ Opacity
 th ความ​ทึบ
+
+@ Menu Size
+th ขนาด​เมนู
 
 @ Opacity of the grenade arc
 th ความ​ทึบ​ของ​วิถี​ระเบิด
@@ -2560,6 +2566,9 @@ th เลือก​ด่าน
 
 @ Really quit?
 th ออก​จริง​หรือ?
+
+@ Quit
+th ออก
 
 @ You died
 th คุณ​ตาย​แล้ว

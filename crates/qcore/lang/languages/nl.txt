@@ -526,6 +526,9 @@ nl Hoe ver de haak vliegt voordat hij terugkeert
 @ How visible the on-screen controls are
 nl Hoe zichtbaar de schermbediening is
 
+@ Size of the menus and their buttons while you use the touchscreen
+nl Grootte van de menu's en hun knoppen als je het aanraakscherm gebruikt
+
 @ Impact Lifetime
 nl Levensduur inslagen
 
@@ -720,6 +723,9 @@ nl Kleur op doelwit
 
 @ Opacity
 nl Dekking
+
+@ Menu Size
+nl Menugrootte
 
 @ Opacity of the grenade arc
 nl Dekking van de granaatboog
@@ -2560,6 +2566,9 @@ nl Level kiezen
 
 @ Really quit?
 nl Echt afsluiten?
+
+@ Quit
+nl Afsluiten
 
 @ You died
 nl Je bent dood

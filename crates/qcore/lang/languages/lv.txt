@@ -526,6 +526,9 @@ lv Cik tālu kāsis lido, pirms atgriežas
 @ How visible the on-screen controls are
 lv Cik redzama ir ekrāna vadība
 
+@ Size of the menus and their buttons while you use the touchscreen
+lv Izvēlņu un to pogu izmērs, lietojot skārienekrānu
+
 @ Impact Lifetime
 lv Trieciena pēdu ilgums
 
@@ -720,6 +723,9 @@ lv Krāsa uz mērķa
 
 @ Opacity
 lv Necaurredzamība
+
+@ Menu Size
+lv Izvēlņu izmērs
 
 @ Opacity of the grenade arc
 lv Granātas trajektorijas necaurredzamība
@@ -2560,6 +2566,9 @@ lv Līmeņa izvēle
 
 @ Really quit?
 lv Tiešām iziet?
+
+@ Quit
+lv Iziet
 
 @ You died
 lv Tu nomiri

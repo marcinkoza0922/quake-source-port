@@ -526,6 +526,9 @@ eo Kiom malproksimen la hoko flugas antaŭ ol retiriĝi
 @ How visible the on-screen controls are
 eo Kiom videblaj estas la surekranaj regiloj
 
+@ Size of the menus and their buttons while you use the touchscreen
+eo Grando de la menuoj kaj iliaj butonoj dum vi uzas la tuŝekranon
+
 @ Impact Lifetime
 eo Daŭro de trafspuroj
 
@@ -720,6 +723,9 @@ eo Koloro ĉe celo
 
 @ Opacity
 eo Opakeco
+
+@ Menu Size
+eo Grando de menuoj
 
 @ Opacity of the grenade arc
 eo Opakeco de la granatarko
@@ -2560,6 +2566,9 @@ eo Elekto de nivelo
 
 @ Really quit?
 eo Ĉu vere eliri?
+
+@ Quit
+eo Eliri
 
 @ You died
 eo Vi mortis

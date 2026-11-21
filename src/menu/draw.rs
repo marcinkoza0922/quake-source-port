@@ -21,13 +21,16 @@ impl Menu {
         }
         if self.screen == Screen::TouchEditor {
             c.fade_screen();
-            self.canvas_layout(c);
+            self.classic_layout(c);
             self.draw_touch_editor(c, cv);
             return;
         }
+        if self.tv_screen() {
+            return self.tv_draw(c, pic, cv, realtime);
+        }
         c.fade_screen();
         let base_scale = c.scale;
-        self.canvas_layout(c);
+        self.classic_layout(c);
         if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Load | Screen::Save | Screen::Help | Screen::Demos | Screen::DirBrowser | Screen::ServerBrowser) {
             c.ox += CLASSIC.0;
             c.oy += CLASSIC.1;
@@ -231,8 +234,7 @@ impl Menu {
                 c.fill(148.0, 96.0, 344.0, height, [0.05, 0.04, 0.03, 0.95]);
                 c.frame(148.0, 96.0, 344.0, height, BORDER);
                 c.text_center(320.0, 112.0, "You died", TXT * 1.2, GOLD_FG);
-                let labels = [qcore::t!("Continue from most recent save"), qcore::t!("Select save"), qcore::t!("Restart level"), qcore::t!("Return to main menu"), qcore::t!("Quick Load")];
-                for (i, label) in labels.into_iter().take(rows).enumerate() {
+                for (i, label) in navigation::DEATH_LABELS.into_iter().take(rows).enumerate() {
                     let y = 140.0 + i as f32 * 24.0;
                     if i == self.death_cursor { c.fill(160.0, y, 320.0, 20.0, HILITE); }
                     txt(c, 168.0, y + 4.0, &format!("{}. {}", i + 1, qcore::lang::tr(label)));
@@ -240,7 +242,7 @@ impl Menu {
             }
             Screen::None | Screen::HudEditor | Screen::TouchEditor => {}
         }
-        self.canvas_layout(c);
+        self.classic_layout(c);
         if let Some(o) = self.osk {
             self.draw_osk(c, o);
         }
@@ -249,10 +251,14 @@ impl Menu {
             self.draw_hints(c, cv);
         }
         self.draw_back(c);
-        self.draw_prompt(c, cv);
-        c.reset_origin();
-        if self.autoaim_prompt { self.draw_autoaim_prompt(c); }
-        self.draw_binding_prompt(c);
+        if self.touch_ui {
+            self.tv_overlays(c, cv);
+        } else {
+            self.draw_prompt(c, cv);
+            c.reset_origin();
+            if self.autoaim_prompt { self.draw_autoaim_prompt(c); }
+            self.draw_binding_prompt(c);
+        }
         c.scale = base_scale;
     }
 

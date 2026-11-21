@@ -526,6 +526,9 @@ km ចម្ងាយ​ដែល​ទំពក់​ហោះ​មុន​�
 @ How visible the on-screen controls are
 km កម្រិត​មើល​ឃើញ​នៃ​ការ​បញ្ជា​លើ​អេក្រង់
 
+@ Size of the menus and their buttons while you use the touchscreen
+km ទំហំ​ម៉ឺនុយ និង​ប៊ូតុង​របស់​វា ពេល​អ្នក​ប្រើ​អេក្រង់​ប៉ះ
+
 @ Impact Lifetime
 km អាយុ​ស្នាម​ប៉ះ
 
@@ -720,6 +723,9 @@ km ពណ៌​ពេល​ចំ​គោលដៅ
 
 @ Opacity
 km ភាព​ស្រអាប់
+
+@ Menu Size
+km ទំហំ​ម៉ឺនុយ
 
 @ Opacity of the grenade arc
 km ភាព​ស្រអាប់​ខ្សែ​កោង​គ្រាប់​បែក
@@ -2560,6 +2566,9 @@ km ជ្រើស​វគ្គ
 
 @ Really quit?
 km ពិត​ជា​ចង់​ចាក​ចេញ​មែន​ទេ?
+
+@ Quit
+km ចាក​ចេញ
 
 @ You died
 km អ្នក​បាន​ស្លាប់

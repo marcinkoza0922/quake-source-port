@@ -526,6 +526,9 @@ sq Sa larg fluturon grremçi para se të kthehet
 @ How visible the on-screen controls are
 sq Sa të dukshme janë kontrollet në ekran
 
+@ Size of the menus and their buttons while you use the touchscreen
+sq Madhësia e menyve dhe e butonave të tyre kur përdorni ekranin me prekje
+
 @ Impact Lifetime
 sq Kohëzgjatja e goditjeve
 
@@ -720,6 +723,9 @@ sq Ngjyra mbi shenjë
 
 @ Opacity
 sq Opaciteti
+
+@ Menu Size
+sq Madhësia e menyve
 
 @ Opacity of the grenade arc
 sq Opaciteti i harkut të granatës
@@ -2560,6 +2566,9 @@ sq Zgjedhja e nivelit
 
 @ Really quit?
 sq Dil vërtet?
+
+@ Quit
+sq Dil
 
 @ You died
 sq Vdiqe

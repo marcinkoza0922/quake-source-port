@@ -31,13 +31,18 @@ impl Hit {
         self.path.iter().map_while(|p| *p)
     }
 
+    /// Pages leading to a setting row (none for a top-level page).
+    pub(super) fn trail(&self) -> Vec<&'static str> {
+        if self.item.is_some() { self.pages().map(page_name).collect() } else { Vec::new() }
+    }
+
     fn page(&self) -> Page {
         self.pages().last().expect("hit without a page")
     }
 
     /// Opens a page (a sub-page row or a top-level page) rather than
     /// holding a value.
-    fn opens(&self) -> bool {
+    pub(super) fn opens(&self) -> bool {
         self.item.is_none_or(|i| matches!(i, Item::Sub { .. }))
     }
 }
@@ -322,6 +327,23 @@ impl Menu {
             out.push(Action::Command("_vid_menu\n".into()));
         }
         out.push(Action::Sound("misc/menu2.wav"));
+    }
+
+    /// Results of the current search (touch layout).
+    pub(super) fn search_results(&self) -> &[Hit] {
+        &self.search.hits
+    }
+
+    /// Opens result `k`, as Enter on it does.
+    pub(super) fn search_pick(&mut self, k: usize, cv: &Cvars, out: &mut Vec<Action>) {
+        if let Some(&hit) = self.search.hits.get(k) {
+            self.jump(hit, cv, out);
+        }
+    }
+
+    /// A result whose page is switched off (shown muted).
+    pub(super) fn hit_dimmed(&self, h: &Hit, cv: &Cvars) -> bool {
+        gate(h, cv).is_some() || h.item.is_some_and(|i| matches!(i, Item::Sub { page, .. } if sub_disabled(page, cv)))
     }
 
     /// Path to `page` for its title: the menu it hangs off, then each page.

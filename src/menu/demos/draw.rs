@@ -122,7 +122,7 @@ impl DemoBrowser {
     }
 }
 
-fn date(secs: u64) -> String {
+pub(super) fn date(secs: u64) -> String {
     let s = crate::demo::stamp(secs);
     format!("{}-{}-{} {}:{} UTC", &s[..4], &s[4..6], &s[6..8], &s[9..11], &s[11..13])
 }

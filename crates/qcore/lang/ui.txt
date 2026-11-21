@@ -297,6 +297,13 @@ it Uscire davvero?
 es ¿Seguro que quieres salir?
 ru Действительно выйти?
 
+@ Quit
+fr Quitter
+de Beenden
+it Esci
+es Salir
+ru Выход
+
 @ You died
 fr Vous êtes mort
 de Du bist gestorben

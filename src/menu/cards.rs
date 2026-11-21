@@ -129,13 +129,11 @@ impl Menu {
     /// Save/load cards: one column, scrolled so the cursor is in view, with
     /// the next card cut off at the bottom to show the list goes on.
     pub(super) fn draw_cards(&self, c: &mut Canvas, pic: &mut PicFn) {
-        let heading = if self.screen == Screen::Save { qcore::t!("Save Game") } else if self.autosaves { qcore::t!("Autosaves") } else { qcore::t!("Load Game") };
+        let heading = self.cards_heading();
         c.text(CARD_X, 20.0, heading, 13.0, GOLD_FG);
         c.text(CARD_X + c.text_w(heading, 13.0) + 10.0, 23.0, "newest first", TXT, MUTED);
         let n = self.save_rows();
-        let real = if self.screen == Screen::Save || self.autosaves { self.saves.len() } else { self.saves.len() + usize::from(self.latest.is_some()) };
-        c.text_right(CARD_X + CARD_W, 23.0, &qcore::tr!("Saves: {}", real), TXT, MUTED);
-        let small = 8.5;
+        c.text_right(CARD_X + CARD_W, 23.0, &qcore::tr!("Saves: {}", self.save_count()), TXT, MUTED);
         let sticky = self.card_sticky();
         if sticky > 0 {
             // divider between the pinned newest save and the scrolling rest
@@ -149,8 +147,28 @@ impl Menu {
             }
             let y = self.card_y(i);
             c.clip_rows(Some(if i < sticky { (CARD_Y0 - 1.0, CARD_Y0 + CARD_H + 1.0) } else { (self.card_top(), CARD_BOTTOM) }));
+            self.draw_card(c, pic, i, y, i == self.load_cursor, now);
+        }
+        c.clip = None;
+        self.draw_card_extras(c);
+    }
+
+    /// Saves listed (the pinned latest counts on Load).
+    pub(super) fn save_count(&self) -> usize {
+        if self.screen == Screen::Save || self.autosaves { self.saves.len() } else { self.saves.len() + usize::from(self.latest.is_some()) }
+    }
+
+    /// Title of the card screen.
+    pub(super) fn cards_heading(&self) -> &'static str {
+        if self.screen == Screen::Save { qcore::t!("Save Game") } else if self.autosaves { qcore::t!("Autosaves") } else { qcore::t!("Load Game") }
+    }
+
+    /// Card `i` at menu y `y` (x is `CARD_X`, size `CARD_W` x `CARD_H`).
+    pub(super) fn draw_card(&self, c: &mut Canvas, pic: &mut PicFn, i: usize, y: f32, selected: bool, now: qcore::time::SystemTime) {
+        let small = 8.5;
+        let sticky = self.card_sticky();
+        {
             let x = CARD_X;
-            let selected = i == self.load_cursor;
             let bg = if selected { [0.30, 0.20, 0.09, 0.97] } else { [0.08, 0.07, 0.06, 0.94] };
             let edge = if selected { [0.85, 0.59, 0.22, 0.9] } else { [0.35, 0.27, 0.16, 0.7] };
             c.round_box(x, y, CARD_W, CARD_H, 4.0, bg, Some(edge));
@@ -162,7 +180,7 @@ impl Menu {
                 c.text(lx, y + 9.0, "Browse Autosaves", 11.0, FG);
                 c.text(lx, y + 27.0, "Every retained autosave, newest first", small, MUTED);
                 c.shape(rx - 10.0, y + CARD_H / 2.0 - 5.0, 10.0, 10.0, crate::font::Shape::ArrowRight, GOLD_FG);
-                continue;
+                return;
             }
             let Some(slot) = self.save_at(i) else {
                 let (label, sub) = if self.screen == Screen::Save { (qcore::t!("New save"), qcore::t!("Select to save your game here")) }
@@ -173,7 +191,7 @@ impl Menu {
                 if self.screen == Screen::Save {
                     c.shape(rx - 10.0, y + CARD_H / 2.0 - 5.0, 10.0, 10.0, crate::font::Shape::ArrowRight, GOLD_FG);
                 }
-                continue;
+                return;
             };
             let sv = &slot.info;
             // thumbnail on the right
@@ -255,7 +273,7 @@ impl Menu {
             for (j, icon) in icons.iter().take(columns * 2).enumerate() {
                 if pic(&icon.name).is_none() {
                     missing.push(icon.fallback.as_str());
-                    continue;
+                    return;
                 }
                 draw_inventory_icon(c, pic, wx + (j % columns) as f32 * cell, y + 20.0 + (j / columns) as f32 * 14.0, cell - 2.0, 12.0, icon);
             }
@@ -263,7 +281,11 @@ impl Menu {
                 c.text(wx, y + 46.0, &missing.join(", "), small, MUTED);
             }
         }
-        c.clip = None;
+    }
+
+    /// Delete button, hint and scrollbar of the classic card list.
+    fn draw_card_extras(&self, c: &mut Canvas) {
+        let small = 8.5;
         if let Some((bx, by, bw, bh)) = self.delete_button() {
             let hover = self.mouse.is_some_and(|m| self.on_delete_button(m));
             c.round_box(bx, by, bw, bh, 3.0, if hover { [0.55, 0.12, 0.08, 0.95] } else { [0.0, 0.0, 0.0, 0.6] }, Some(BORDER));

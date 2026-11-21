@@ -526,6 +526,9 @@ ro Cât de departe zboară cârligul înainte să revină
 @ How visible the on-screen controls are
 ro Cât de vizibile sunt controalele de pe ecran
 
+@ Size of the menus and their buttons while you use the touchscreen
+ro Mărimea meniurilor și a butoanelor lor când folosiți ecranul tactil
+
 @ Impact Lifetime
 ro Durată impacturi
 
@@ -720,6 +723,9 @@ ro Culoare pe țintă
 
 @ Opacity
 ro Opacitate
+
+@ Menu Size
+ro Mărimea meniurilor
 
 @ Opacity of the grenade arc
 ro Opacitatea traiectoriei grenadei
@@ -2560,6 +2566,9 @@ ro Selectare nivel
 
 @ Really quit?
 ro Sigur ieși?
+
+@ Quit
+ro Ieșire
 
 @ You died
 ro Ai murit

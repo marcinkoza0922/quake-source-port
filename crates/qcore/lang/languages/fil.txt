@@ -526,6 +526,9 @@ fil Gaano kalayo lilipad ang hook bago bumalik
 @ How visible the on-screen controls are
 fil Gaano kakita ang mga kontrol sa screen
 
+@ Size of the menus and their buttons while you use the touchscreen
+fil Laki ng mga menu at ng mga button nito kapag ginagamit mo ang touchscreen
+
 @ Impact Lifetime
 fil Tagal ng Impact
 
@@ -720,6 +723,9 @@ fil Kulay sa Target
 
 @ Opacity
 fil Opacity
+
+@ Menu Size
+fil Laki ng Menu
 
 @ Opacity of the grenade arc
 fil Opacity ng arko ng granada
@@ -2560,6 +2566,9 @@ fil Pumili ng Level
 
 @ Really quit?
 fil Talagang aalis?
+
+@ Quit
+fil Umalis
 
 @ You died
 fil Namatay ka

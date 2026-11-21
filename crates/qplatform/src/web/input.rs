@@ -19,6 +19,12 @@ pub(super) fn keyboard_listeners(w: &EventTarget, shared: &Rc<Shared>) -> Result
             if k.is_composing() {
                 return;
             }
+            // typing into the touch keyboard's field: its `input` events
+            // carry the text (`touch.rs`), so only editing keys go on
+            let field = k.target().and_then(|t| t.dyn_into::<web_sys::HtmlInputElement>().ok()).is_some();
+            if field && k.key().chars().count() == 1 {
+                return;
+            }
             let code = k.code();
             let key = k.key();
             let scancode = keymap::scancode(&code);

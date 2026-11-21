@@ -526,6 +526,9 @@ la Quam longe uncus volet antequam redeat
 @ How visible the on-screen controls are
 la Quam conspicua sint moderamina in quadro
 
+@ Size of the menus and their buttons while you use the touchscreen
+la Magnitudo indicum et bullarum eorum dum scrinio tactili uteris
+
 @ Impact Lifetime
 la Duratio ictuum
 
@@ -720,6 +723,9 @@ la Color in scopo
 
 @ Opacity
 la Opacitas
+
+@ Menu Size
+la Magnitudo indicum
 
 @ Opacity of the grenade arc
 la Opacitas arcus pyroboli
@@ -2560,6 +2566,9 @@ la Tabulam eligere
 
 @ Really quit?
 la Vere exire?
+
+@ Quit
+la Exire
 
 @ You died
 la Mortuus es

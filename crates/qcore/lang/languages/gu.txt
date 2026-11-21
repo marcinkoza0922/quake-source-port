@@ -526,6 +526,9 @@ gu હૂક પાછો ખેંચાય તે પહેલાં કેટ
 @ How visible the on-screen controls are
 gu સ્ક્રીન પરનાં નિયંત્રણો કેટલાં દેખાય છે
 
+@ Size of the menus and their buttons while you use the touchscreen
+gu ટચસ્ક્રીન વાપરતી વખતે મેનુ અને તેનાં બટનોનું કદ
+
 @ Impact Lifetime
 gu અથડામણ નિશાનનો સમય
 
@@ -720,6 +723,9 @@ gu નિશાન પરનો રંગ
 
 @ Opacity
 gu અપારદર્શકતા
+
+@ Menu Size
+gu મેનુનું કદ
 
 @ Opacity of the grenade arc
 gu ગ્રેનેડ ચાપની અપારદર્શકતા
@@ -2560,6 +2566,9 @@ gu લેવલ પસંદગી
 
 @ Really quit?
 gu ખરેખર બહાર નીકળવું છે?
+
+@ Quit
+gu બહાર નીકળો
 
 @ You died
 gu તમે મૃત્યુ પામ્યા

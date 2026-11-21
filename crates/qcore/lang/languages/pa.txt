@@ -526,6 +526,9 @@ pa ਵਾਪਸ ਮੁੜਨ ਤੋਂ ਪਹਿਲਾਂ ਹੁੱਕ ਕਿੰ
 @ How visible the on-screen controls are
 pa ਸਕ੍ਰੀਨ 'ਤੇ ਕੰਟਰੋਲ ਕਿੰਨੇ ਦਿਸਦੇ ਹਨ
 
+@ Size of the menus and their buttons while you use the touchscreen
+pa ਟੱਚਸਕ੍ਰੀਨ ਵਰਤਣ ਵੇਲੇ ਮੀਨੂ ਅਤੇ ਉਹਨਾਂ ਦੇ ਬਟਨਾਂ ਦਾ ਆਕਾਰ
+
 @ Impact Lifetime
 pa ਟੱਕਰ ਨਿਸ਼ਾਨਾਂ ਦੀ ਉਮਰ
 
@@ -720,6 +723,9 @@ pa ਨਿਸ਼ਾਨੇ 'ਤੇ ਰੰਗ
 
 @ Opacity
 pa ਧੁੰਦਲਾਪਨ
+
+@ Menu Size
+pa ਮੀਨੂ ਦਾ ਆਕਾਰ
 
 @ Opacity of the grenade arc
 pa ਗ੍ਰਨੇਡ ਚਾਪ ਦਾ ਧੁੰਦਲਾਪਨ
@@ -2560,6 +2566,9 @@ pa ਲੈਵਲ ਚੁਣੋ
 
 @ Really quit?
 pa ਕੀ ਸੱਚਮੁੱਚ ਬੰਦ ਕਰਨਾ ਹੈ?
+
+@ Quit
+pa ਬਾਹਰ ਜਾਓ
 
 @ You died
 pa ਤੁਸੀਂ ਮਰ ਗਏ

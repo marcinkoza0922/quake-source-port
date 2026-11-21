@@ -5,7 +5,7 @@
 use super::*;
 
 /// Pop-up rows: title, two description lines, console name.
-const CHOICES: [(&str, [&str; 2], &str); 3] = [
+pub(super) const CHOICES: [(&str, [&str; 2], &str); 3] = [
     (qcore::t!("Classic"), [qcore::t!("Like the re-release: enhanced models,"), qcore::t!("no added effects.")], "classic"),
     (qcore::t!("Enhanced"), [qcore::t!("Every enhancement at its highest quality."), qcore::t!("Needs a capable GPU.")], "enhanced"),
     (qcore::t!("Low-End"), [qcore::t!("Fastest. No anti-aliasing, original"), qcore::t!("models, lowest effect quality.")], "lowend"),

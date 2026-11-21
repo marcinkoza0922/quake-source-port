@@ -526,6 +526,9 @@ lt Kaip toli kablys nuskrenda prieš grįždamas
 @ How visible the on-screen controls are
 lt Kiek matomi ekrano valdikliai
 
+@ Size of the menus and their buttons while you use the touchscreen
+lt Meniu ir jų mygtukų dydis naudojant jutiklinį ekraną
+
 @ Impact Lifetime
 lt Smūgio žymių trukmė
 
@@ -720,6 +723,9 @@ lt Taikinio spalva
 
 @ Opacity
 lt Neskaidrumas
+
+@ Menu Size
+lt Meniu dydis
 
 @ Opacity of the grenade arc
 lt Granatos trajektorijos neskaidrumas
@@ -2560,6 +2566,9 @@ lt Lygio pasirinkimas
 
 @ Really quit?
 lt Tikrai išeiti?
+
+@ Quit
+lt Išeiti
 
 @ You died
 lt Jūs žuvote

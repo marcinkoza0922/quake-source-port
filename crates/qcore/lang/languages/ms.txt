@@ -526,6 +526,9 @@ ms Sejauh mana cangkuk terbang sebelum ditarik balik
 @ How visible the on-screen controls are
 ms Sejauh mana kawalan pada skrin kelihatan
 
+@ Size of the menus and their buttons while you use the touchscreen
+ms Saiz menu dan butangnya semasa anda menggunakan skrin sentuh
+
 @ Impact Lifetime
 ms Jangka Hayat Hentaman
 
@@ -720,6 +723,9 @@ ms Warna Pada Sasaran
 
 @ Opacity
 ms Kelegapan
+
+@ Menu Size
+ms Saiz Menu
 
 @ Opacity of the grenade arc
 ms Kelegapan lengkung bom tangan
@@ -2560,6 +2566,9 @@ ms Pilih Peringkat
 
 @ Really quit?
 ms Betul-betul keluar?
+
+@ Quit
+ms Keluar
 
 @ You died
 ms Anda mati

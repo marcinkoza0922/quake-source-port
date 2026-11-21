@@ -5,6 +5,7 @@
 //! Level Select button). Both lists scroll: arrows, wheel and a draggable bar.
 
 mod online;
+mod touch;
 
 use qinput::keys::*;
 use qui::mods::{MapInfo, ModInfo};

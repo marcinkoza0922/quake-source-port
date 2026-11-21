@@ -526,6 +526,9 @@ da Hvor langt krogen flyver, før den trækkes tilbage
 @ How visible the on-screen controls are
 da Hvor synlig skærmstyringen er
 
+@ Size of the menus and their buttons while you use the touchscreen
+da Størrelsen på menuerne og deres knapper, når du bruger touchskærmen
+
 @ Impact Lifetime
 da Nedslagenes levetid
 
@@ -720,6 +723,9 @@ da Farve på mål
 
 @ Opacity
 da Opacitet
+
+@ Menu Size
+da Menustørrelse
 
 @ Opacity of the grenade arc
 da Granatbuens opacitet
@@ -2560,6 +2566,9 @@ da Vælg bane
 
 @ Really quit?
 da Vil du virkelig afslutte?
+
+@ Quit
+da Afslut
 
 @ You died
 da Du døde
