@@ -526,6 +526,9 @@ pt-BR Distância que o gancho voa antes de recolher
 @ How visible the on-screen controls are
 pt-BR Visibilidade dos controles na tela
 
+@ Size of the menus and their buttons while you use the touchscreen
+pt-BR Tamanho dos menus e de seus botões quando você usa a tela sensível ao toque
+
 @ Impact Lifetime
 pt-BR Duração dos impactos
 
@@ -613,8 +616,8 @@ pt-BR Congelamento máximo (ms)
 @ Look Down
 pt-BR Olhar para baixo
 
-@ Look Speed
-pt-BR Velocidade da visão
+@ Look Acceleration
+pt-BR Aceleração da mira
 
 @ Look Up
 pt-BR Olhar para cima
@@ -720,6 +723,9 @@ pt-BR Cor sobre o alvo
 
 @ Opacity
 pt-BR Opacidade
+
+@ Menu Size
+pt-BR Tamanho dos menus
 
 @ Opacity of the grenade arc
 pt-BR Opacidade do arco da granada
@@ -1781,6 +1787,18 @@ pt-BR Iluminação direcional
 @ Light Specular
 pt-BR Brilho especular
 
+@ Gameplay Overlay
+pt-BR Sobreposição de jogabilidade
+
+@ Layout
+pt-BR Disposição
+
+@ Preview
+pt-BR Visualização
+
+@ Resume Game
+pt-BR Retomar o jogo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ pt-BR Quanto a visão inclina para cima e para baixo ao inclinar o controle (eix
 @ How far the view turns left and right when you turn the controller (yaw axis)
 pt-BR Quanto a visão gira para a esquerda e a direita ao girar o controle (eixo de guinada)
 
-@ How far the view turns when you drag on the right half of the screen
-pt-BR Quanto a visão gira ao arrastar na metade direita da tela
-
 @ How fast the boomerang flies (units per second)
 pt-BR Velocidade de voo do bumerangue (unidades por segundo)
 
@@ -2038,9 +2053,6 @@ pt-BR Nenhum congelamento dura mais que isto, não importa quanto dano ou bônus
 
 @ Oldest marks and nails are recycled at this shared limit
 pt-BR As marcas e pregos mais antigos são reciclados neste limite compartilhado
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-pt-BR Analógico e botões na tela: auto os mostra após um toque e os oculta quando outro dispositivo é usado
 
 @ Only autosaves: quicksaves and the Save menu are off
 pt-BR Só salvamentos automáticos: o salvamento rápido e o menu Salvar ficam desativados
@@ -2412,6 +2424,18 @@ pt-BR Usa direções de luz pré-calculadas (.dlit) para sombreamento e reflexos
 @ Strength of the highlights from directional lighting
 pt-BR Intensidade dos reflexos da iluminação direcional
 
+@ How far the view turns when you swipe
+pt-BR Até que ponto a visualização gira quando você desliza o dedo
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+pt-BR Retarda seu deslizamento perto de alvos visíveis. Deathmatch requer permissão do servidor. No nível alto, a mira também é levemente puxada para o alvo.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+pt-BR Troca os lados por botões de movimento, mira e jogabilidade
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+pt-BR Auto segue o dispositivo de entrada ativo. O menu permanece disponível quando a sobreposição está desativada.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ pt-BR Seleção de fase
 @ Really quit?
 pt-BR Sair mesmo?
 
+@ Quit
+pt-BR Sair
+
 @ You died
 pt-BR Você morreu
 
@@ -2557,9 +2584,6 @@ pt-BR Reiniciar a fase
 
 @ Return to main menu
 pt-BR Voltar ao menu principal
-
-@ (disabled)
-pt-BR (desativado)
 
 @ (fixed for this game)
 pt-BR (fixo neste jogo)
@@ -3450,6 +3474,15 @@ pt-BR Nenhum servidor corresponde aos filtros
 @ Server search failed
 pt-BR Falha ao buscar servidores
 
+@ Slide to select, release to equip
+pt-BR Deslize para selecionar, solte para equipar
+
+@ Tap to swap weapons.
+pt-BR Toque para trocar armas.
+
+@ Hold and slide to select.
+pt-BR Segure e deslize para selecionar.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ pt-BR 100% sem dano
 
 @ Damage Skull
 pt-BR Caveira de dano
+
+@ A mild speed boost for fast swipes
+pt-BR Aumenta um pouco a velocidade dos gestos rápidos
+
+@ Phone Gyro
+pt-BR Giroscópio do celular
+
+@ look zone
+pt-BR zona de mira
+
+@ while firing
+pt-BR ao atirar
+
+@ Uses the Android device’s motion sensor.
+pt-BR Usa o sensor de movimento do dispositivo Android.
+
+@ Edit Layout
+pt-BR Editar layout
+
+@ Drag to move
+pt-BR Arraste para mover
+
+@ Auto-fire
+pt-BR Disparo automático
+
+@ Touch Auto-fire
+pt-BR Disparo automático por toque
+
+@ Move-side Fire
+pt-BR Disparo no lado do movimento
+
+@ Touch Haptics
+pt-BR Vibração tátil
+
+@ Add a Fire button on the move side.
+pt-BR Adiciona um botão de disparo no lado do movimento.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+pt-BR Atira nos monstros sob a mira no jogo local (teclado, mouse, controle).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+pt-BR Atira nos monstros sob a mira no jogo local (tela sensível ao toque).
+
+@ Vibrate on button presses and damage (Android).
+pt-BR Vibra ao pressionar botões e ao receber dano (Android).
+
+@ Swipe left or right to cycle.
+pt-BR Deslize para a esquerda ou direita para trocar de arma.
+
+# Options page group headings.
+
+@ General
+pt-BR Geral
+
+@ Saving
+pt-BR Salvamento
+
+@ Lighting
+pt-BR Iluminação
+
+@ Effects
+pt-BR Efeitos
+
+@ Models
+pt-BR Modelos
+
+@ Post-processing
+pt-BR Pós-processamento
+
+@ World
+pt-BR Mundo

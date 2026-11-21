@@ -526,6 +526,9 @@ te హుక్ వెనక్కి రాకముందు ఎంత దూ�
 @ How visible the on-screen controls are
 te స్క్రీన్‌పై నియంత్రణలు ఎంత కనిపిస్తాయి
 
+@ Size of the menus and their buttons while you use the touchscreen
+te టచ్‌స్క్రీన్ వాడుతున్నప్పుడు మెనూలు, వాటి బటన్‌ల పరిమాణం
+
 @ Impact Lifetime
 te తాకిడి జీవితకాలం
 
@@ -613,8 +616,8 @@ te గరిష్ట ఫ్రీజ్ (ms)
 @ Look Down
 te కిందికి చూడు
 
-@ Look Speed
-te చూపు వేగం
+@ Look Acceleration
+te వీక్షణ త్వరణం
 
 @ Look Up
 te పైకి చూడు
@@ -720,6 +723,9 @@ te లక్ష్యంపై రంగు
 
 @ Opacity
 te అపారదర్శకత
+
+@ Menu Size
+te మెనూ పరిమాణం
 
 @ Opacity of the grenade arc
 te గ్రెనేడ్ వంపు అపారదర్శకత
@@ -1781,6 +1787,18 @@ te దిశాత్మక కాంతి
 @ Light Specular
 te కాంతి మెరుపు
 
+@ Gameplay Overlay
+te గేమ్ప్లే అతివ్యాప్తి
+
+@ Layout
+te లేఅవుట్
+
+@ Preview
+te ప్రివ్యూ
+
+@ Resume Game
+te ఆటను పునఃప్రారంభించండి
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ te కంట్రోలర్‌ను వంచినప్పుడు వీ
 @ How far the view turns left and right when you turn the controller (yaw axis)
 te కంట్రోలర్‌ను తిప్పినప్పుడు వీక్షణ ఎడమ కుడికి ఎంత తిరుగుతుంది (యా అక్షం)
 
-@ How far the view turns when you drag on the right half of the screen
-te స్క్రీన్ కుడి సగంపై లాగినప్పుడు వీక్షణ ఎంత తిరుగుతుంది
-
 @ How fast the boomerang flies (units per second)
 te బూమరాంగ్ ఎంత వేగంగా ఎగురుతుంది (సెకనుకు యూనిట్లు)
 
@@ -2038,9 +2053,6 @@ te నష్టం లేదా కిల్ బోనస్ ఎంత జోడ
 
 @ Oldest marks and nails are recycled at this shared limit
 te ఈ ఉమ్మడి పరిమితి వద్ద పాత గుర్తులు, మేకులు తిరిగి వాడబడతాయి
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-te స్క్రీన్‌పై స్టిక్, బటన్‌లు: ఆటో వాటిని తాకిన తర్వాత చూపించి, మరో పరికరం వాడినప్పుడు దాచిపెడుతుంది
 
 @ Only autosaves: quicksaves and the Save menu are off
 te ఆటోసేవ్‌లు మాత్రమే: క్విక్‌సేవ్‌లు, సేవ్ మెనూ ఆఫ్
@@ -2412,6 +2424,18 @@ te గోడలు మరియు మోడళ్లపై సున్ని�
 @ Strength of the highlights from directional lighting
 te దిశాత్మక కాంతి నుండి వచ్చే హైలైట్ల తీవ్రత
 
+@ How far the view turns when you swipe
+te మీరు స్వైప్ చేసినప్పుడు వీక్షణ ఎంత దూరం తిరుగుతుంది
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+te కనిపించే లక్ష్యాల దగ్గర మీ స్వైప్‌ను నెమ్మదిస్తుంది. డెత్‌మ్యాచ్‌కి సర్వర్ అనుమతి అవసరం. అధిక స్థాయిలో గురి కూడా లక్ష్యం వైపు స్వల్పంగా లాగబడుతుంది.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+te కదలిక, లక్ష్యం మరియు గేమ్‌ప్లే బటన్‌ల కోసం భుజాలను మారుస్తుంది
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+te స్వయంచాలకంగా క్రియాశీల ఇన్‌పుట్ పరికరాన్ని అనుసరిస్తుంది. ఓవర్‌లే ఆఫ్‌లో ఉన్నప్పుడు మెనూ అందుబాటులో ఉంటుంది.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ te లెవెల్ ఎంపిక
 @ Really quit?
 te నిజంగా నిష్క్రమించాలా?
 
+@ Quit
+te నిష్క్రమించు
+
 @ You died
 te మీరు చనిపోయారు
 
@@ -2557,9 +2584,6 @@ te లెవెల్ మళ్లీ ప్రారంభించు
 
 @ Return to main menu
 te ప్రధాన మెనూకు తిరిగి వెళ్లు
-
-@ (disabled)
-te (నిలిపివేయబడింది)
 
 @ (fixed for this game)
 te (ఈ గేమ్‌కు స్థిరం)
@@ -3450,6 +3474,15 @@ te ఫిల్టర్లకు సరిపోయే సర్వర్లు
 @ Server search failed
 te సర్వర్ల శోధన విఫలమైంది
 
+@ Slide to select, release to equip
+te ఎంచుకోవడానికి స్లయిడ్ చేయండి, సన్నద్ధం చేయడానికి విడుదల చేయండి
+
+@ Tap to swap weapons.
+te ఆయుధాలను మార్చుకోవడానికి నొక్కండి.
+
+@ Hold and slide to select.
+te ఎంచుకోవడానికి పట్టుకొని స్లయిడ్ చేయండి.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ te 100% నష్టం లేకుండా
 
 @ Damage Skull
 te నష్టం పుర్రె
+
+@ A mild speed boost for fast swipes
+te వేగంగా స్వైప్ చేస్తే దృశ్యం మరికొంత వేగంగా తిరుగుతుంది
+
+@ Phone Gyro
+te ఫోన్ గైరోస్కోప్
+
+@ look zone
+te వీక్షణ ప్రాంతం
+
+@ while firing
+te కాల్పులు జరిపేటప్పుడు
+
+@ Uses the Android device’s motion sensor.
+te Android పరికరంలోని చలన సెన్సర్‌ను ఉపయోగిస్తుంది.
+
+@ Edit Layout
+te అమరికను సవరించండి
+
+@ Drag to move
+te జరపడానికి లాగండి
+
+@ Auto-fire
+te స్వయంచాలక కాల్పులు
+
+@ Touch Auto-fire
+te టచ్‌తో స్వయంచాలక కాల్పులు
+
+@ Move-side Fire
+te కదలిక వైపు కాల్పులు
+
+@ Touch Haptics
+te టచ్ కంపనం
+
+@ Add a Fire button on the move side.
+te కదలిక వైపు కాల్పుల బటన్‌ను జోడిస్తుంది.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+te స్థానిక ఆటలో గురి కింద ఉన్న రాక్షసులపై కాలుస్తుంది (కీబోర్డ్, మౌస్, కంట్రోలర్).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+te స్థానిక ఆటలో గురి కింద ఉన్న రాక్షసులపై కాలుస్తుంది (టచ్‌స్క్రీన్).
+
+@ Vibrate on button presses and damage (Android).
+te బటన్ నొక్కినప్పుడు లేదా గాయపడినప్పుడు కంపిస్తుంది (Android).
+
+@ Swipe left or right to cycle.
+te ఆయుధాన్ని మార్చడానికి ఎడమకు లేదా కుడికి స్వైప్ చేయండి.
+
+# Options page group headings.
+
+@ General
+te సాధారణం
+
+@ Saving
+te సేవ్ చేయడం
+
+@ Lighting
+te లైటింగ్
+
+@ Effects
+te ఎఫెక్ట్‌లు
+
+@ Models
+te మోడల్‌లు
+
+@ Post-processing
+te పోస్ట్-ప్రాసెసింగ్
+
+@ World
+te ప్రపంచం

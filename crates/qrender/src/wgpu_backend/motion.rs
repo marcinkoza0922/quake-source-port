@@ -84,7 +84,8 @@ impl VelTarget {
 impl Renderer {
     /// Velocity target for a scene of `scene` pixels: half (quality 0) or
     /// full resolution; `depth` is the scene depth view.
-    pub(super) fn create_vel_target(&self, quality: u32, scene: (u32, u32), depth: &wgpu::TextureView) -> VelTarget {
+    pub(super) fn create_vel_target(&self, quality: u32, scene: (u32, u32), depth: &wgpu::TextureView) -> Option<VelTarget> {
+        let fx = self.pipes.scene.fx.as_ref()?;
         let scale = if quality == 0 { 0.5 } else { 1.0 };
         let size = (((scene.0 as f32 * scale) as u32).max(1), ((scene.1 as f32 * scale) as u32).max(1));
         let tex = self.dev.create_texture(&wgpu::TextureDescriptor {
@@ -99,10 +100,10 @@ impl Renderer {
         });
         let group = self.dev.create_bind_group(&wgpu::BindGroupDescriptor {
             label: None,
-            layout: &self.pipes.scene.fx.vel_bgl,
+            layout: &fx.vel_bgl,
             entries: &[wgpu::BindGroupEntry { binding: 0, resource: wgpu::BindingResource::TextureView(depth) }],
         });
-        VelTarget { view: tex.create_view(&Default::default()), scale, group }
+        Some(VelTarget { view: tex.create_view(&Default::default()), scale, group })
     }
 
     /// `FrameU::vel`: scene px per velocity px and the largest scene pixel.
@@ -120,13 +121,12 @@ impl Renderer {
     /// when nothing moved (the post pass then skips the blur).
     pub(super) fn encode_velocity(&self, enc: &mut wgpu::CommandEncoder, t: &Targets, l: &Lists) -> bool {
         let b = &self.bufs;
-        let (Some(vel), Some(frame_group), Some(draw_group)) = (&t.vel, &b.frame_group, &b.draw_group) else {
+        let (Some(vel), Some(frame_group), Some(draw_group), Some(p)) = (&t.vel, &b.frame_group, &b.draw_group, &self.pipes.scene.fx) else {
             return false;
         };
         if l.views.iter().all(|v| v.vel.is_empty()) {
             return false;
         }
-        let p = &self.pipes.scene.fx;
         let ts = self.pass_times(super::timing::VELOCITY);
         let mut pass = enc.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("velocity"),

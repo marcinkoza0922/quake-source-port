@@ -1,5 +1,5 @@
-//! qrender — renderer (Vulkan via ash, or wgpu on the web / with the `wgpu`
-//! feature). See docs/DESIGN.md "Renderer" and docs/WEB_PORT.md.
+//! qrender — renderer (Vulkan via ash, or wgpu on Android, the web, and builds
+//! with the `wgpu` feature). See docs/DESIGN.md "Renderer" and docs/WEB_PORT.md.
 //!
 //! Inputs are `qformats` data plus a per-frame [`RenderFrame`]; no SDL or
 //! qclient dependency. Presentation goes through [`SurfaceProvider`]; without

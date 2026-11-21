@@ -23,7 +23,7 @@ pub(super) struct ScenePipes {
     /// FTE blend modes × (triangles, lines).
     pub(super) poly: Vec<wgpu::RenderPipeline>,
     /// SSAO and motion-velocity pipelines (read the scene targets).
-    pub(super) fx: super::fx_pipes::FxPipes,
+    pub(super) fx: Option<super::fx_pipes::FxPipes>,
 }
 
 impl ScenePipes {
@@ -39,6 +39,7 @@ impl ScenePipes {
         sky_m: &wgpu::ShaderModule,
         samples: u32,
         glow: bool,
+        scene_depth_sampling: bool,
     ) -> ScenePipes {
         let fs = |name: &'static str| -> &'static str {
             if !glow {
@@ -131,7 +132,9 @@ impl ScenePipes {
                 }));
             }
         }
-        let fx = super::fx_pipes::FxPipes::new(dev, [frame_bgl, mat_bgl, draw_bgl], samples, glow);
+        let fx = scene_depth_sampling.then(|| {
+            super::fx_pipes::FxPipes::new(dev, [frame_bgl, mat_bgl, draw_bgl], samples, glow)
+        });
         ScenePipes {
             samples,
             glow,

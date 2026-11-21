@@ -526,6 +526,9 @@ pt Distância que o gancho percorre antes de recolher
 @ How visible the on-screen controls are
 pt Visibilidade dos controlos no ecrã
 
+@ Size of the menus and their buttons while you use the touchscreen
+pt Tamanho dos menus e dos respetivos botões quando utiliza o ecrã tátil
+
 @ Impact Lifetime
 pt Duração dos impactos
 
@@ -613,8 +616,8 @@ pt Congelação máxima (ms)
 @ Look Down
 pt Olhar para baixo
 
-@ Look Speed
-pt Velocidade da vista
+@ Look Acceleration
+pt Aceleração da vista
 
 @ Look Up
 pt Olhar para cima
@@ -720,6 +723,9 @@ pt Cor sobre alvo
 
 @ Opacity
 pt Opacidade
+
+@ Menu Size
+pt Tamanho dos menus
 
 @ Opacity of the grenade arc
 pt Opacidade do arco da granada
@@ -1781,6 +1787,18 @@ pt Iluminação direcional
 @ Light Specular
 pt Brilho especular
 
+@ Gameplay Overlay
+pt Sobreposição de jogabilidade
+
+@ Layout
+pt Disposição
+
+@ Preview
+pt Visualização
+
+@ Resume Game
+pt Retomar o jogo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ pt Quanto a vista se inclina para cima e para baixo ao inclinar o comando (eixo 
 @ How far the view turns left and right when you turn the controller (yaw axis)
 pt Quanto a vista roda para a esquerda e direita ao rodar o comando (eixo de guinada)
 
-@ How far the view turns when you drag on the right half of the screen
-pt Quanto a vista roda ao arrastar na metade direita do ecrã
-
 @ How fast the boomerang flies (units per second)
 pt Velocidade de voo do bumerangue (unidades por segundo)
 
@@ -2038,9 +2053,6 @@ pt Nenhuma congelação dura mais do que isto, por mais dano ou bónus de abate 
 
 @ Oldest marks and nails are recycled at this shared limit
 pt As marcas e pregos mais antigos são reutilizados ao atingir este limite comum
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-pt Manípulo e botões no ecrã: auto mostra-os após um toque e esconde-os quando se usa outro dispositivo
 
 @ Only autosaves: quicksaves and the Save menu are off
 pt Só gravações automáticas: a gravação rápida e o menu Guardar estão desativados
@@ -2412,6 +2424,18 @@ pt Usa direções de luz pré-calculadas (.dlit) para sombreamento e reflexos su
 @ Strength of the highlights from directional lighting
 pt Intensidade dos reflexos da iluminação direcional
 
+@ How far the view turns when you swipe
+pt Até que ponto a visualização gira quando desliza o dedo
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+pt Retarda o seu deslizamento perto de alvos visíveis. O Deathmatch requer permissão do servidor. No nível alto, a mira também é puxada ligeiramente para o alvo.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+pt Troca os lados por botões de movimento, mira e jogabilidade
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+pt Auto segue o dispositivo de entrada ativo. O menu permanece disponível quando a sobreposição está desativada.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ pt Escolher nível
 @ Really quit?
 pt Sair mesmo?
 
+@ Quit
+pt Sair
+
 @ You died
 pt Morreste
 
@@ -2557,9 +2584,6 @@ pt Recomeçar o nível
 
 @ Return to main menu
 pt Voltar ao menu principal
-
-@ (disabled)
-pt (desativado)
 
 @ (fixed for this game)
 pt (fixo neste jogo)
@@ -3450,6 +3474,15 @@ pt Nenhum servidor corresponde aos filtros
 @ Server search failed
 pt A pesquisa de servidores falhou
 
+@ Slide to select, release to equip
+pt Deslize para selecionar, solte para equipar
+
+@ Tap to swap weapons.
+pt Toque para trocar armas.
+
+@ Hold and slide to select.
+pt Segure e deslize para selecionar.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ pt 100% sem dano
 
 @ Damage Skull
 pt Caveira de dano
+
+@ A mild speed boost for fast swipes
+pt Aumenta ligeiramente a velocidade dos gestos rápidos
+
+@ Phone Gyro
+pt Giroscópio do telemóvel
+
+@ look zone
+pt zona de vista
+
+@ while firing
+pt ao disparar
+
+@ Uses the Android device’s motion sensor.
+pt Usa o sensor de movimento do dispositivo Android.
+
+@ Edit Layout
+pt Editar disposição
+
+@ Drag to move
+pt Arrastar para mover
+
+@ Auto-fire
+pt Disparo automático
+
+@ Touch Auto-fire
+pt Disparo automático tátil
+
+@ Move-side Fire
+pt Disparo no lado do movimento
+
+@ Touch Haptics
+pt Vibração tátil
+
+@ Add a Fire button on the move side.
+pt Adiciona um botão de disparo do lado do movimento.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+pt Dispara contra os monstros na mira em jogo local (teclado, rato, comando).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+pt Dispara contra os monstros na mira em jogo local (ecrã tátil).
+
+@ Vibrate on button presses and damage (Android).
+pt Vibra ao premir botões e ao sofrer dano (Android).
+
+@ Swipe left or right to cycle.
+pt Desliza para a esquerda ou direita para trocar de arma.
+
+# Options page group headings.
+
+@ General
+pt Geral
+
+@ Saving
+pt Gravação
+
+@ Lighting
+pt Iluminação
+
+@ Effects
+pt Efeitos
+
+@ Models
+pt Modelos
+
+@ Post-processing
+pt Pós-processamento
+
+@ World
+pt Mundo

@@ -526,6 +526,9 @@ km ចម្ងាយ​ដែល​ទំពក់​ហោះ​មុន​�
 @ How visible the on-screen controls are
 km កម្រិត​មើល​ឃើញ​នៃ​ការ​បញ្ជា​លើ​អេក្រង់
 
+@ Size of the menus and their buttons while you use the touchscreen
+km ទំហំ​ម៉ឺនុយ និង​ប៊ូតុង​របស់​វា ពេល​អ្នក​ប្រើ​អេក្រង់​ប៉ះ
+
 @ Impact Lifetime
 km អាយុ​ស្នាម​ប៉ះ
 
@@ -613,8 +616,8 @@ km ការ​កក​យូរ​បំផុត (ms)
 @ Look Down
 km មើល​ចុះ​ក្រោម
 
-@ Look Speed
-km ល្បឿន​មើល
+@ Look Acceleration
+km ការ​បង្កើន​ល្បឿន​បង្វិល​ទិដ្ឋភាព
 
 @ Look Up
 km មើល​ឡើង​លើ
@@ -720,6 +723,9 @@ km ពណ៌​ពេល​ចំ​គោលដៅ
 
 @ Opacity
 km ភាព​ស្រអាប់
+
+@ Menu Size
+km ទំហំ​ម៉ឺនុយ
 
 @ Opacity of the grenade arc
 km ភាព​ស្រអាប់​ខ្សែ​កោង​គ្រាប់​បែក
@@ -1781,6 +1787,18 @@ km ពន្លឺ​មាន​ទិសដៅ
 @ Light Specular
 km ពន្លឺ​ចាំង​ផ្លាត
 
+@ Gameplay Overlay
+km ការ​លេង​ហ្គេម​ជាន់លើ
+
+@ Layout
+km ប្លង់
+
+@ Preview
+km មើល​ជាមុន
+
+@ Resume Game
+km បន្ត​ហ្គេម
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ km កម្រិត​ដែល​ទិដ្ឋភាព​ផ្ងារ�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 km កម្រិត​ដែល​ទិដ្ឋភាព​បត់​ឆ្វេង​ស្ដាំ​ពេល​អ្នក​បង្វិល​ឧបករណ៍​បញ្ជា (អ័ក្ស yaw)
 
-@ How far the view turns when you drag on the right half of the screen
-km កម្រិត​ដែល​ទិដ្ឋភាព​បត់​ពេល​អ្នក​អូស​លើ​ពាក់​កណ្ដាល​ស្ដាំ​នៃ​អេក្រង់
-
 @ How fast the boomerang flies (units per second)
 km ល្បឿន​ហោះ​របស់​ប៊ូមឺរ៉ង់ (ឯកតា​ក្នុង​មួយ​វិនាទី)
 
@@ -2038,9 +2053,6 @@ km គ្មាន​ការ​កក​ណា​មួយ​អូស​ប�
 
 @ Oldest marks and nails are recycled at this shared limit
 km ស្នាម​និង​ដែក​គោល​ចាស់​បំផុត​ត្រូវ​ប្រើ​ឡើង​វិញ​ពេល​ដល់​ដែន​កំណត់​រួម​នេះ
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-km ដង​បញ្ជា​និង​ប៊ូតុង​លើ​អេក្រង់: ស្វ័យ​ប្រវត្តិ​បង្ហាញ​វា​ក្រោយ​ពេល​ប៉ះ​ហើយ​លាក់​វា​ពេល​ប្រើ​ឧបករណ៍​ផ្សេង
 
 @ Only autosaves: quicksaves and the Save menu are off
 km តែ​រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ: រក្សា​ទុក​រហ័ស​និង​ម៉ឺនុយ​រក្សា​ទុក​ត្រូវ​បិទ
@@ -2412,6 +2424,18 @@ km ប្រើ​ទិសដៅ​ពន្លឺ​ដែល​បាន​�
 @ Strength of the highlights from directional lighting
 km កម្រិត​ពន្លឺ​ចាំង​ផ្លាត​ពី​ពន្លឺ​មាន​ទិសដៅ
 
+@ How far the view turns when you swipe
+km តើ​​​ទិដ្ឋភាព​​​ប្រែ​​​ទៅ​​​ឆ្ងាយ​​​ប៉ុណ្ណា​​​ពេល​​​អ្នក​​​អូស
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+km បន្ថយល្បឿន​អូស​របស់​អ្នក​នៅ​ជិត​គោលដៅ​ដែល​អាច​មើលឃើញ​។​ ​Deathmatch​ ​ទាមទារ​ការអនុញ្ញាត​ពី​ម៉ាស៊ីន​មេ​។ កម្រិតខ្ពស់​ក៏​ទាញ​សញ្ញា​តម្រង់​បន្តិច​ទៅ​រក​គោលដៅ​។
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+km ប្តូរ​ផ្នែក​សម្រាប់​ចលនា​ ​គោលបំណង​ ​និង​ប៊ូតុង​លេង​ហ្គេម
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+km ស្វ័យប្រវត្តិ​ធ្វើតាម​ឧបករណ៍​បញ្ចូល​សកម្ម​។​ ​ម៉ឺនុយ​​​នឹង​​​មាន​​​នៅ​​​ពេល​​​បិទ​​​ការ​​​ត្រួត​​​ពិនិត្យ​។
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ km ជ្រើស​វគ្គ
 @ Really quit?
 km ពិត​ជា​ចង់​ចាក​ចេញ​មែន​ទេ?
 
+@ Quit
+km ចាក​ចេញ
+
 @ You died
 km អ្នក​បាន​ស្លាប់
 
@@ -2557,9 +2584,6 @@ km ចាប់​ផ្ដើម​វគ្គ​ឡើង​វិញ
 
 @ Return to main menu
 km ត្រឡប់​ទៅ​ម៉ឺនុយ​មេ
-
-@ (disabled)
-km (បាន​បិទ)
 
 @ (fixed for this game)
 km (ថេរ​សម្រាប់​ហ្គេម​នេះ)
@@ -3450,6 +3474,15 @@ km គ្មាន​ម៉ាស៊ីនមេ​ដែល​ត្រូវ�
 @ Server search failed
 km ការ​ស្វែងរក​ម៉ាស៊ីនមេ​បាន​បរាជ័យ
 
+@ Slide to select, release to equip
+km ស្លាយ​ដើម្បី​ជ្រើសរើស​ ​បញ្ចេញ​ដើម្បី​បំពាក់
+
+@ Tap to swap weapons.
+km ប៉ះ​ដើម្បី​ប្តូរ​អាវុធ​។
+
+@ Hold and slide to select.
+km សង្កត់​ហើយ​រុញ​ដើម្បី​ជ្រើសរើស​។
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ km 100% គ្មាន​ការ​ខូចខាត
 
 @ Damage Skull
 km លលាដ៍ក្បាល​ពេល​រង​របួស
+
+@ A mild speed boost for fast swipes
+km អូស​លឿន​ដើម្បី​បង្វិល​ទិដ្ឋភាព​លឿន​ជាង​មុន​បន្តិច
+
+@ Phone Gyro
+km ជី​រ៉ូ​ស្កុប​ទូរស័ព្ទ
+
+@ look zone
+km តំបន់​បង្វិល​ទិដ្ឋភាព
+
+@ while firing
+km ពេល​បាញ់
+
+@ Uses the Android device’s motion sensor.
+km ប្រើ​ឧបករណ៍​ចាប់​ចលនា​របស់​ឧបករណ៍​ ​Android​។
+
+@ Edit Layout
+km កែ​ប្លង់
+
+@ Drag to move
+km អូស​ដើម្បី​ផ្លាស់ទី
+
+@ Auto-fire
+km បាញ់​ដោយ​ស្វ័យប្រវត្តិ
+
+@ Touch Auto-fire
+km បាញ់​ស្វ័យប្រវត្តិ​ដោយ​ប៉ះ
+
+@ Move-side Fire
+km បាញ់​នៅ​ផ្នែក​បញ្ជា​ចលនា
+
+@ Touch Haptics
+km រំ​ញ័រ​ពេល​ប៉ះ
+
+@ Add a Fire button on the move side.
+km បន្ថែម​ប៊ូតុង​បាញ់​នៅ​ផ្នែក​បញ្ជា​ចលនា​។
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+km បាញ់សត្វ​ចម្លែក​ដែល​ចំ​សញ្ញា​តម្រង់​ក្នុង​ហ្គេម​មូលដ្ឋាន (ក្តារ​ចុច កណ្ដុរ ឧបករណ៍​បញ្ជា)។
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+km បាញ់សត្វ​ចម្លែក​ដែល​ចំ​សញ្ញា​តម្រង់​ក្នុង​ហ្គេម​មូលដ្ឋាន (អេក្រង់​ប៉ះ)។
+
+@ Vibrate on button presses and damage (Android).
+km ញ័រ​ពេល​ចុច​ប៊ូតុង ឬ​រង​របួស (Android)។
+
+@ Swipe left or right to cycle.
+km អូស​ទៅ​ឆ្វេង ឬ​ស្តាំ​ដើម្បី​ប្ដូរ​អាវុធ​។
+
+# Options page group headings.
+
+@ General
+km ទូទៅ
+
+@ Saving
+km ការ​រក្សាទុក
+
+@ Lighting
+km ពន្លឺ
+
+@ Effects
+km បែបផែន
+
+@ Models
+km ម៉ូដែល
+
+@ Post-processing
+km ការ​កែច្នៃ​ក្រោយ
+
+@ World
+km ពិភពលោក

@@ -1219,6 +1219,13 @@ it Visibilità dei comandi su schermo
 es Visibilidad de los controles en pantalla
 ru Насколько заметны экранные элементы управления
 
+@ Size of the menus and their buttons while you use the touchscreen
+fr Taille des menus et de leurs boutons quand vous utilisez l'écran tactile
+de Größe der Menüs und ihrer Schaltflächen bei Bedienung per Touchscreen
+it Dimensione dei menu e dei loro pulsanti quando usi il touchscreen
+es Tamaño de los menús y sus botones cuando usas la pantalla táctil
+ru Размер меню и их кнопок при использовании сенсорного экрана
+
 @ Impact Lifetime
 fr Durée des impacts
 de Lebensdauer der Einschläge
@@ -1422,12 +1429,12 @@ it Guarda giù
 es Mirar abajo
 ru Смотреть вниз
 
-@ Look Speed
-fr Vitesse de la vue
-de Blickgeschwindigkeit
-it Velocità visuale
-es Velocidad de la vista
-ru Скорость обзора
+@ Look Acceleration
+fr Accélération de la visée
+de Blickbeschleunigung
+it Accelerazione visuale
+es Aceleración de la vista
+ru Ускорение обзора
 
 @ Look Up
 fr Regarder en haut
@@ -1673,6 +1680,13 @@ de Deckkraft
 it Opacità
 es Opacidad
 ru Непрозрачность
+
+@ Menu Size
+fr Taille des menus
+de Menügröße
+it Dimensione menu
+es Tamaño de los menús
+ru Размер меню
 
 @ Opacity of the grenade arc
 fr Opacité de l'arc de grenade
@@ -4175,3 +4189,137 @@ de 100% ohne Schaden
 it 100% senza danni
 es 100% sin daño
 ru 100% без урона
+
+@ Gameplay Overlay
+fr Commandes en jeu
+de Spielsteuerung
+it Comandi di gioco
+es Controles de juego
+ru Игровые кнопки
+
+@ Layout
+fr Disposition
+de Anordnung
+it Disposizione
+es Distribución
+ru Раскладка
+
+@ Preview
+fr Aperçu
+de Vorschau
+it Anteprima
+es Vista previa
+ru Предпросмотр
+
+@ Resume Game
+fr Reprendre la partie
+de Spiel fortsetzen
+it Riprendi partita
+es Reanudar partida
+ru Продолжить игру
+
+@ Phone Gyro
+fr Gyroscope du téléphone
+de Handy-Gyroskop
+it Giroscopio del telefono
+es Giroscopio del teléfono
+ru Гироскоп телефона
+
+@ look zone
+fr zone de visée
+de Blickbereich
+it area visuale
+es zona de vista
+ru зона обзора
+
+@ while firing
+fr pendant le tir
+de beim Feuern
+it durante il fuoco
+es al disparar
+ru при стрельбе
+
+@ Edit Layout
+fr Modifier la disposition
+de Layout bearbeiten
+it Modifica disposizione
+es Editar disposición
+ru Изменить раскладку
+
+@ Auto-fire
+fr Tir automatique
+de Automatisches Feuern
+it Fuoco automatico
+es Disparo automático
+ru Автоогонь
+
+@ Touch Auto-fire
+fr Tir auto tactile
+de Auto-Feuer per Touch
+it Fuoco automatico touch
+es Disparo automático táctil
+ru Сенсорный автоогонь
+
+@ Move-side Fire
+fr Tir côté déplacement
+de Feuertaste auf Bewegungsseite
+it Fuoco sul lato movimento
+es Disparo en lado de movimiento
+ru Огонь на стороне движения
+
+@ Touch Haptics
+fr Vibrations tactiles
+de Touch-Vibration
+it Vibrazione touch
+es Vibración táctil
+ru Виброотклик
+
+# Options page group headings.
+@ General
+fr Général
+de Allgemein
+it Generale
+es General
+ru Общие
+
+@ Saving
+fr Sauvegarde
+de Speichern
+it Salvataggio
+es Guardado
+ru Сохранение
+
+@ Lighting
+fr Éclairage
+de Beleuchtung
+it Illuminazione
+es Iluminación
+ru Освещение
+
+@ Effects
+fr Effets
+de Effekte
+it Effetti
+es Efectos
+ru Эффекты
+
+@ Models
+fr Modèles
+de Modelle
+it Modelli
+es Modelos
+ru Модели
+
+@ Post-processing
+fr Post-traitement
+de Nachbearbeitung
+it Post-elaborazione
+es Posprocesado
+ru Постобработка
+
+@ World
+fr Monde
+de Welt
+it Mondo
+es Mundo
+ru Мир

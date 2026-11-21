@@ -1,6 +1,37 @@
 use super::*;
 
 impl Menu {
+    /// The cvar of a row that can be reset to its default.
+    fn resettable(item: Item) -> Option<&'static str> {
+        match item {
+            Item::Slider { cvar, .. } | Item::Toggle { cvar, .. } | Item::Choice { cvar, .. } => Some(cvar),
+            _ => None,
+        }
+    }
+
+    /// Whether a setting row's value differs from its cvar's default.
+    pub(super) fn changed(&self, item: Item, cv: &Cvars) -> bool {
+        Self::resettable(item)
+            .and_then(|name| cv.by_name(name))
+            .is_some_and(|c| (c.value - qcore::cvar::q_atof(&c.default)).abs() > 1e-4)
+    }
+
+    /// Puts a changed row back to its default (Backspace/Del, pad X, or a
+    /// click on its marker). Returns true if something changed.
+    pub(super) fn reset_row(&mut self, item: Item, cv: &mut Cvars, out: &mut Vec<Action>) -> bool {
+        if self.item_disabled(item, cv) || !self.changed(item, cv) {
+            return false;
+        }
+        let Some(name) = Self::resettable(item) else { return false };
+        let default = cv.by_name(name).map(|c| c.default.clone()).unwrap_or_default();
+        if matches!(item, Item::Toggle { .. }) && (cv.value_of(name) != 0.0) != (qcore::cvar::q_atof(&default) != 0.0) {
+            // through adjust, for toggles with side effects (auto-aim defaults)
+            return self.adjust(item, 1, true, cv, out);
+        }
+        cv.set(name, &default);
+        true
+    }
+
     /// Changes one option by `dir` steps. Returns true if something changed.
     pub(super) fn adjust(&mut self, item: Item, dir: i32, enter: bool, cv: &mut Cvars, out: &mut Vec<Action>) -> bool {
         if self.item_disabled(item, cv) { return false; }
@@ -77,7 +108,7 @@ impl Menu {
                 let i = (self.hud_preset_index(cv) as i32 + dir).rem_euclid(n) as usize;
                 self.set_hud_preset(i, cv);
             }
-            Item::Text { .. } | Item::Run { .. } | Item::Bind { .. } | Item::ResetBinds | Item::ResetShaderParams | Item::Sub { .. } | Item::UserDataDir => return false,
+            Item::Text { .. } | Item::Run { .. } | Item::Bind { .. } | Item::ResetBinds | Item::ResetShaderParams | Item::Sub { .. } | Item::UserDataDir | Item::Heading(_) => return false,
             Item::Apply => {
                 if !enter || !self.display_dirty(cv) {
                     return false;
@@ -157,6 +188,10 @@ impl Menu {
 
     /// Dropdown box: (x, y, w) and visible entry count. Opens below its row,
     /// or above when it would run off the bottom.
+    pub(super) fn drop_row_height(&self) -> f32 {
+        if self.touch_ui { 18.0 } else { BOX_H }
+    }
+
     pub(super) fn drop_geom(&self, d: Drop, opts: &[String]) -> (f32, f32, f32, usize) {
         let vis = opts.len().min(DROP_ROWS);
         let w = opts.iter().map(|o| o.len() as f32 * 8.0 + 20.0).fold(DROP_W, f32::max);
@@ -164,8 +199,9 @@ impl Menu {
             Screen::OptionsPage(p) => self.page_row_y(p, d.item),
             _ => PAGE_ROW0 + d.item as f32 * ROW_H,
         };
-        let h = vis as f32 * BOX_H + 2.0;
-        let y = if row_y + ROW_H + h > MENU_H - 4.0 { row_y + 1.0 - h } else { row_y + ROW_H - 1.0 };
+        let h = vis as f32 * self.drop_row_height() + 2.0;
+        let row_h = self.page_row_height();
+        let y = if row_y + row_h + h > MENU_H - 4.0 { (row_y + 1.0 - h).max(4.0) } else { row_y + row_h - 1.0 };
         (VALUE_X - 3.0, y, w, vis)
     }
 
@@ -174,7 +210,7 @@ impl Menu {
         let Screen::OptionsPage(p) = self.screen else { return None };
         let opts = self.options(self.page_item(p, d.item));
         let (bx, by, bw, vis) = self.drop_geom(d, &opts);
-        let k = ((y - by - 1.0) / BOX_H).floor();
+        let k = ((y - by - 1.0) / self.drop_row_height()).floor();
         (x >= bx && x < bx + bw && k >= 0.0 && (k as usize) < vis).then(|| d.scroll + k as usize)
     }
 
@@ -320,4 +356,47 @@ pub(super) fn language_index(cv: &Cvars) -> usize {
 fn set_language(cv: &mut Cvars, i: usize) {
     let v = i.checked_sub(1).and_then(|k| qcore::lang::Lang::ALL.get(k)).map_or("auto", |l| l.name());
     cv.set("language", v);
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn row(p: Page, cvar: &str) -> usize {
+        page_items(p)
+            .iter()
+            .position(|i| matches!(i, Item::Slider { cvar: c, .. } | Item::Toggle { cvar: c, .. } | Item::Choice { cvar: c, .. } if *c == cvar))
+            .unwrap()
+    }
+
+    #[test]
+    fn changed_rows_reset_to_their_default_unless_disabled() {
+        let mut cv = Cvars::default();
+        cv.register("s_reverb", "1", 0);
+        cv.register("s_reverb_amount", "1", 0);
+        cv.register("s_footsteps", "1", 0);
+        let mut m = Menu::new();
+        m.open(Screen::OptionsPage(Page::Audio));
+        let amount = page_items(Page::Audio)[row(Page::Audio, "s_reverb_amount")];
+        assert!(!m.changed(amount, &cv));
+        cv.set("s_reverb_amount", "1.5");
+        assert!(m.changed(amount, &cv));
+
+        // a disabled row keeps its value
+        cv.set("s_reverb", "0");
+        m.opt_cursor = row(Page::Audio, "s_reverb_amount");
+        m.key(K_DEL, &mut cv, false);
+        assert_eq!(cv.value_of("s_reverb_amount"), 1.5);
+
+        cv.set("s_reverb", "1");
+        m.key(K_DEL, &mut cv, false);
+        assert_eq!(cv.value_of("s_reverb_amount"), 1.0);
+        assert!(!m.changed(amount, &cv));
+
+        // toggles reset through the pad's X too
+        cv.set("s_footsteps", "0");
+        m.opt_cursor = row(Page::Audio, "s_footsteps");
+        m.key(K_XBUTTON, &mut cv, false);
+        assert_eq!(cv.value_of("s_footsteps"), 1.0);
+    }
 }

@@ -50,11 +50,19 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "gyro_rollsensitivity" => "Turns the view when you roll the controller sideways; 0 disables it, negative reverses it",
         "gyro_noise_thresh" => "Ignores gyro rotation slower than this many degrees per second, to hide hand tremor",
         "joy_flick_time" => "Seconds the flick stick snap takes; lower is faster",
-        "touch_enable" => "On-screen stick and buttons: auto shows them after a touch and hides them when another device is used",
-        "touch_sensitivity" => "How far the view turns when you drag on the right half of the screen",
+        "touch_enable" => "Auto follows the active input device. Menu stays available when the overlay is off.",
+        "touch_yaw_sensitivity" | "touch_pitch_sensitivity" => "How far the view turns when you swipe",
+        "touch_acceleration" => "A mild speed boost for fast swipes",
+        "gyro_phone_mode" => "Uses the Android device’s motion sensor.",
+        "touch_aim_assist" => "Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.",
+        "touch_move_fire" => "Add a Fire button on the move side.",
+        "touch_autofire" => "Fire at monsters under the crosshair in local play (touchscreen).",
+        "touch_haptics" => "Vibrate on button presses and damage (Android).",
+        "touch_left_handed" => "Swaps the sides for movement, aiming and gameplay buttons",
         "touch_invert" => "Dragging up looks down instead of up",
         "touch_size" => "Size of the on-screen buttons and move stick",
         "touch_opacity" => "How visible the on-screen controls are",
+        "touch_menu_scale" => "Size of the menus and their buttons while you use the touchscreen",
         "cl_wheel_timescale" => "Slows the game down while the weapon wheel is open",
         "r_texfilter" => "Nearest keeps crisp classic pixels; linear smooths textures",
         "r_anisotropy" => "Keeps textures sharp on floors and walls seen at steep angles",
@@ -168,6 +176,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "assist_grenadearc_color" => "Color of the grenade arc",
         "assist_grenadearc_alpha" => "Opacity of the grenade arc",
         "assist_autoaim" => "Snap and track enemies in local play, including split-screen; unavailable online",
+        "assist_autofire" => "Fire at monsters under the crosshair in local play (keyboard, mouse, controller).",
         "assist_autoaim_mode" => "Hold: keep Lock-on held. Toggle: press Auto-aim Toggle to enable automatic acquisition. Click look stick to switch targets",
         "assist_autoaim_indicator" => "Show corner ticks at screen centre while locked, even with Crosshair off",
         "assist_autoaim_reacquire" => "Automatically acquire another enemy while holding Lock-on after losing a target",
@@ -288,7 +297,7 @@ pub(super) fn page_items(p: Page) -> &'static [Item] {
         Page::Mouse => MOUSE,
         Page::Controller => CONTROLLER,
         Page::Gyro => GYRO,
-        Page::Touch => TOUCH,
+        Page::Touch => touch::ITEMS,
         Page::Autosave => AUTOSAVE,
         Page::WeaponPriority => &[],
         Page::Automap => AUTOMAP,
@@ -312,7 +321,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
         Page::Mouse => "Mouse & Keyboard",
         Page::Controller => "Controller",
         Page::Gyro => "Gyro & Flick Stick",
-        Page::Touch => "Touchscreen",
+        Page::Touch => "Touch Controls",
         Page::Autosave => "Autosave",
         Page::WeaponPriority => "Weapon Priority",
         Page::Automap => "Automap Settings",
@@ -374,61 +383,6 @@ pub(super) fn disabled_reason(item: Item) -> Option<&'static str> {
     }
 }
 
-/// Sub-pages that are switched off by their parent setting.
-pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
-    (page == Page::AutoAim && cv.value_of("assist_autoaim") == 0.0)
-        || (page == Page::GrenadeArc && cv.value_of("assist_grenadearc") == 0.0)
-        || (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
-        || (page == Page::WeaponPriority && cv.value_of("cl_autoswitch") == 0.0)
-        || (page == Page::Automap && cv.value_of("cl_automap") == 0.0)
-        || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
-        || (page == Page::Bloom && cv.value_of("r_bloom") == 0.0)
-        || (page == Page::RtLights && cv.value_of("r_shadow_realtime_dlight") == 0.0)
-        || (page == Page::Impacts && cv.value_of("r_enhancedfx") == 0.0)
-        || (page == Page::Blood && cv.value_of("r_blood") == 0.0)
-        || (page == Page::Debris && cv.value_of("r_debris") == 0.0)
-        || (page == Page::Goggles && cv.value_of("addon_goggles") == 0.0)
-        || (matches!(page, Page::Hitstop | Page::HitstopAdvanced) && cv.value_of("addon_hitstop") == 0.0)
-}
-
 pub(super) fn is_net_page(p: Page) -> bool {
     matches!(p, Page::Join | Page::Host | Page::Setup)
-}
-
-impl Menu {
-    /// Shared by keyboard adjustment, pointer dragging and drawing.
-    pub(super) fn item_disabled(&self, item: Item, cv: &Cvars) -> bool {
-        self.game_locked(item, cv)
-            || (matches!(item, Item::Run { run: Run::ExportClip, .. }) && cv.value_of("_export_hasclip") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "r_deluxemapping_specular", .. }) && cv.value_of("r_deluxemapping") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "r_motionblur_amount", .. } | Item::Choice { cvar: "r_motionblur_quality", .. })
-            && cv.value_of("r_motionblur") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "r_waterripples_amount", .. }) && cv.value_of("r_waterripples") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "r_watercaustics_amount", .. }) && cv.value_of("r_watercaustics") == 0.0)
-            || (matches!(
-                item,
-                Item::Choice { cvar: "r_particle_quality" | "r_impact_fx", .. }
-                    | Item::Toggle { cvar: "r_impact_bullets" | "r_impact_nails" | "r_impact_scorches", .. }
-                    | Item::Slider { cvar: "r_impact_lifetime" | "r_impact_limit", .. }
-            ) && cv.value_of("r_enhancedparticles") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
-            && (cv.value_of("r_enhancedwater") == 0.0 || cv.value_of("r_watertranslucency") == 0.0))
-            || (matches!(item, Item::Slider { cvar: "r_water_reflections_amount", .. }) && cv.value_of("r_water_reflections") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "s_reverb_amount", .. }) && cv.value_of("s_reverb") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "s_footsteps_volume", .. }) && cv.value_of("s_footsteps") == 0.0)
-            || (matches!(item, Item::Choice { cvar: "r_waterwarp", .. }) && cv.value_of("r_enhancedwater") != 0.0)
-            || (matches!(item, Item::Choice { cvar: "r_particles", .. }) && cv.value_of("r_enhancedparticles") != 0.0)
-            || (matches!(item, Item::Choice { cvar: "r_drawviewmodel", .. }) && cv.value_of("cl_camera") != 0.0)
-            || (matches!(item, Item::Choice { cvar: "r_portal_quality", .. })
-                && match self.screen {
-                    Screen::OptionsPage(Page::Enhancements) => cv.value_of("r_teleportwindows") == 0.0,
-                    Screen::OptionsPage(Page::PortalGun) => cv.value_of("addon_portal_view") == 0.0,
-                    _ => false,
-                })
-            || (matches!(
-                item,
-                Item::Choice { cvar: "addon_portal_max" | "addon_portal_depth", .. }
-                    | Item::Slider { cvar: "addon_portal_dist", .. }
-            ) && cv.value_of("addon_portal_view") == 0.0)
-    }
 }

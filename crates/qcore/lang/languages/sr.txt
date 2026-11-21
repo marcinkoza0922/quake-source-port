@@ -526,6 +526,9 @@ sr Колико далеко кука лети пре него што се вр�
 @ How visible the on-screen controls are
 sr Колико су видљиве контроле на екрану
 
+@ Size of the menus and their buttons while you use the touchscreen
+sr Величина менија и њихових дугмади док користите екран осетљив на додир
+
 @ Impact Lifetime
 sr Трајање трагова поготка
 
@@ -613,8 +616,8 @@ sr Најдуже замрзавање (ms)
 @ Look Down
 sr Поглед надоле
 
-@ Look Speed
-sr Брзина погледа
+@ Look Acceleration
+sr Убрзање погледа
 
 @ Look Up
 sr Поглед нагоре
@@ -720,6 +723,9 @@ sr Боја на мети
 
 @ Opacity
 sr Непрозирност
+
+@ Menu Size
+sr Величина менија
 
 @ Opacity of the grenade arc
 sr Непрозирност путање гранате
@@ -1781,6 +1787,18 @@ sr Усмерено осветљење
 @ Light Specular
 sr Одсјај светла
 
+@ Gameplay Overlay
+sr Преклапање игре
+
+@ Layout
+sr Лаиоут
+
+@ Preview
+sr Преглед
+
+@ Resume Game
+sr Наставите игру
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ sr Колико се поглед нагиње горе-доле кад нагн
 @ How far the view turns left and right when you turn the controller (yaw axis)
 sr Колико се поглед окреће лево-десно кад окренете контролер (оса скретања)
 
-@ How far the view turns when you drag on the right half of the screen
-sr Колико се поглед окреће кад превлачите по десној половини екрана
-
 @ How fast the boomerang flies (units per second)
 sr Колико брзо бумеранг лети (јединица у секунди)
 
@@ -2038,9 +2053,6 @@ sr Ниједно замрзавање не траје дуже од овога,
 
 @ Oldest marks and nails are recycled at this shared limit
 sr Најстарији трагови и ексери поново се користе кад се достигне ово заједничко ограничење
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-sr Палица и дугмад на екрану: ауто их приказује после додира и скрива кад се користи други уређај
 
 @ Only autosaves: quicksaves and the Save menu are off
 sr Само аутосачувања: брзо чување и мени за чување су искључени
@@ -2412,6 +2424,18 @@ sr Користи унапред израчунате правце светла 
 @ Strength of the highlights from directional lighting
 sr Јачина одсјаја од усмереног осветљења
 
+@ How far the view turns when you swipe
+sr Колико се поглед окреће када превучете прстом
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+sr Успорава превлачење у близини видљивих циљева. Деатхматцх захтева дозволу сервера. На високом подешавању нишан се и благо привлачи мети.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+sr Мења стране за кретање, циљање и дугмад за игру
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+sr Ауто прати активни улазни уређај. Мени остаје доступан када је преклапање искључено.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ sr Избор нивоа
 @ Really quit?
 sr Заиста изаћи?
 
+@ Quit
+sr Изађи
+
 @ You died
 sr Погинули сте
 
@@ -2557,9 +2584,6 @@ sr Поново покрени ниво
 
 @ Return to main menu
 sr Повратак у главни мени
-
-@ (disabled)
-sr (онемогућено)
 
 @ (fixed for this game)
 sr (фиксно за ову игру)
@@ -3450,6 +3474,15 @@ sr Нема одговарајућих сервера
 @ Server search failed
 sr Претрага сервера није успела
 
+@ Slide to select, release to equip
+sr Превуците да бисте изабрали, пустите да бисте опремили
+
+@ Tap to swap weapons.
+sr Додирните да бисте заменили оружје.
+
+@ Hold and slide to select.
+sr Држите и превуците да бисте изабрали.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ sr 100% без штете
 
 @ Damage Skull
 sr Лобања при повреди
+
+@ A mild speed boost for fast swipes
+sr Брзи потези мало убрзавају окретање погледа
+
+@ Phone Gyro
+sr Жироскоп телефона
+
+@ look zone
+sr зона погледа
+
+@ while firing
+sr при пуцању
+
+@ Uses the Android device’s motion sensor.
+sr Користи сензор покрета Android уређаја.
+
+@ Edit Layout
+sr Уреди распоред
+
+@ Drag to move
+sr Превуци за померање
+
+@ Auto-fire
+sr Аутоматска паљба
+
+@ Touch Auto-fire
+sr Аутоматска паљба на додир
+
+@ Move-side Fire
+sr Паљба на страни кретања
+
+@ Touch Haptics
+sr Вибрација на додир
+
+@ Add a Fire button on the move side.
+sr Додаје дугме за паљбу на страну кретања.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+sr Пуца у чудовишта на нишану у локалној игри (тастатура, миш, контролер).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+sr Пуца у чудовишта на нишану у локалној игри (екран осетљив на додир).
+
+@ Vibrate on button presses and damage (Android).
+sr Вибрира при притиску дугмади и примању штете (Android).
+
+@ Swipe left or right to cycle.
+sr Превуци улево или удесно за промену оружја.
+
+# Options page group headings.
+
+@ General
+sr Опште
+
+@ Saving
+sr Чување
+
+@ Lighting
+sr Осветљење
+
+@ Effects
+sr Ефекти
+
+@ Models
+sr Модели
+
+@ Post-processing
+sr Накнадна обрада
+
+@ World
+sr Свет

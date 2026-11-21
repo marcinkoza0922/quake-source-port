@@ -526,6 +526,9 @@ vi Móc bay xa bao nhiêu trước khi thu về
 @ How visible the on-screen controls are
 vi Độ hiện rõ của nút điều khiển trên màn hình
 
+@ Size of the menus and their buttons while you use the touchscreen
+vi Kích thước menu và các nút của nó khi bạn dùng màn hình cảm ứng
+
 @ Impact Lifetime
 vi Thời gian tồn tại vết đạn
 
@@ -613,8 +616,8 @@ vi Đóng băng lâu nhất (ms)
 @ Look Down
 vi Nhìn xuống
 
-@ Look Speed
-vi Tốc độ nhìn
+@ Look Acceleration
+vi Gia tốc góc nhìn
 
 @ Look Up
 vi Nhìn lên
@@ -720,6 +723,9 @@ vi Màu khi nhắm trúng
 
 @ Opacity
 vi Độ mờ đục
+
+@ Menu Size
+vi Cỡ menu
 
 @ Opacity of the grenade arc
 vi Độ mờ đục đường bay lựu đạn
@@ -1781,6 +1787,18 @@ vi Ánh sáng có hướng
 @ Light Specular
 vi Độ bóng ánh sáng
 
+@ Gameplay Overlay
+vi Lớp phủ trò chơi
+
+@ Layout
+vi Bố cục
+
+@ Preview
+vi Xem trước
+
+@ Resume Game
+vi Tiếp tục trò chơi
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ vi Góc nhìn ngẩng lên và cúi xuống bao nhiêu khi bạn nghiêng tay c�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 vi Góc nhìn xoay trái phải bao nhiêu khi bạn xoay tay cầm (trục ngang)
 
-@ How far the view turns when you drag on the right half of the screen
-vi Góc nhìn xoay bao nhiêu khi bạn kéo trên nửa phải màn hình
-
 @ How fast the boomerang flies (units per second)
 vi Tốc độ bay của boomerang (đơn vị mỗi giây)
 
@@ -2038,9 +2053,6 @@ vi Không lần đóng băng nào kéo dài hơn mức này, dù sát thương h
 
 @ Oldest marks and nails are recycled at this shared limit
 vi Vết và đinh cũ nhất được tái sử dụng khi đạt giới hạn chung này
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-vi Cần và nút trên màn hình: tự động hiện chúng sau khi chạm và ẩn khi dùng thiết bị khác
 
 @ Only autosaves: quicksaves and the Save menu are off
 vi Chỉ tự động lưu: lưu nhanh và menu Lưu bị tắt
@@ -2412,6 +2424,18 @@ vi Dùng hướng sáng tính sẵn (.dlit) để tạo đổ bóng và điểm 
 @ Strength of the highlights from directional lighting
 vi Cường độ điểm sáng bóng từ ánh sáng có hướng
 
+@ How far the view turns when you swipe
+vi Chế độ xem sẽ quay được bao xa khi bạn vuốt
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+vi Làm chậm thao tác vuốt của bạn khi ở gần các mục tiêu có thể nhìn thấy. Deathmatch yêu cầu sự cho phép của máy chủ. Mức cao cũng kéo nhẹ tâm ngắm về phía mục tiêu.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+vi Hoán đổi các bên cho các nút di chuyển, nhắm và chơi trò chơi
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+vi Tự động theo dõi thiết bị đầu vào đang hoạt động. Menu vẫn khả dụng khi lớp phủ tắt.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ vi Chọn màn
 @ Really quit?
 vi Thật sự thoát?
 
+@ Quit
+vi Thoát
+
 @ You died
 vi Bạn đã chết
 
@@ -2557,9 +2584,6 @@ vi Chơi lại màn
 
 @ Return to main menu
 vi Về menu chính
-
-@ (disabled)
-vi (đã tắt)
 
 @ (fixed for this game)
 vi (cố định cho ván này)
@@ -3450,6 +3474,15 @@ vi Không có máy chủ phù hợp
 @ Server search failed
 vi Tìm kiếm máy chủ thất bại
 
+@ Slide to select, release to equip
+vi Trượt để chọn, thả ra để trang bị
+
+@ Tap to swap weapons.
+vi Nhấn để trao đổi vũ khí.
+
+@ Hold and slide to select.
+vi Giữ và trượt để chọn.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ vi 100% không nhận sát thương
 
 @ Damage Skull
 vi Đầu lâu sát thương
+
+@ A mild speed boost for fast swipes
+vi Vuốt nhanh làm góc nhìn xoay nhanh hơn một chút
+
+@ Phone Gyro
+vi Con quay của điện thoại
+
+@ look zone
+vi vùng góc nhìn
+
+@ while firing
+vi khi bắn
+
+@ Uses the Android device’s motion sensor.
+vi Dùng cảm biến chuyển động của thiết bị Android.
+
+@ Edit Layout
+vi Sửa bố cục
+
+@ Drag to move
+vi Kéo để di chuyển
+
+@ Auto-fire
+vi Tự động bắn
+
+@ Touch Auto-fire
+vi Tự động bắn cảm ứng
+
+@ Move-side Fire
+vi Bắn bên di chuyển
+
+@ Touch Haptics
+vi Rung cảm ứng
+
+@ Add a Fire button on the move side.
+vi Thêm nút bắn ở bên điều khiển di chuyển.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+vi Bắn quái vật trong tâm ngắm khi chơi cục bộ (bàn phím, chuột, tay cầm).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+vi Bắn quái vật trong tâm ngắm khi chơi cục bộ (màn hình cảm ứng).
+
+@ Vibrate on button presses and damage (Android).
+vi Rung khi bấm nút hoặc nhận sát thương (Android).
+
+@ Swipe left or right to cycle.
+vi Vuốt trái hoặc phải để đổi vũ khí.
+
+# Options page group headings.
+
+@ General
+vi Chung
+
+@ Saving
+vi Lưu game
+
+@ Lighting
+vi Ánh sáng
+
+@ Effects
+vi Hiệu ứng
+
+@ Models
+vi Mô hình
+
+@ Post-processing
+vi Hậu kỳ
+
+@ World
+vi Thế giới

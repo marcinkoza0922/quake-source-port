@@ -526,6 +526,9 @@ sl Kako daleč kavelj leti, preden se vrne
 @ How visible the on-screen controls are
 sl Kako vidni so kontrolniki na zaslonu
 
+@ Size of the menus and their buttons while you use the touchscreen
+sl Velikost menijev in njihovih gumbov med uporabo zaslona na dotik
+
 @ Impact Lifetime
 sl Trajanje udarcev
 
@@ -613,8 +616,8 @@ sl Najdaljša zamrznitev (ms)
 @ Look Down
 sl Poglej dol
 
-@ Look Speed
-sl Hitrost pogleda
+@ Look Acceleration
+sl Pospešek pogleda
 
 @ Look Up
 sl Poglej gor
@@ -720,6 +723,9 @@ sl Barva na tarči
 
 @ Opacity
 sl Prekrivnost
+
+@ Menu Size
+sl Velikost menijev
 
 @ Opacity of the grenade arc
 sl Prekrivnost loka granate
@@ -1781,6 +1787,18 @@ sl Usmerjena osvetlitev
 @ Light Specular
 sl Svetlobni odsev
 
+@ Gameplay Overlay
+sl Prekrivanje igranja
+
+@ Layout
+sl Postavitev
+
+@ Preview
+sl Predogled
+
+@ Resume Game
+sl Nadaljujte z igro
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ sl Koliko se pogled nagne gor in dol, ko nagnete krmilnik (os naklona)
 @ How far the view turns left and right when you turn the controller (yaw axis)
 sl Koliko se pogled obrne levo in desno, ko obrnete krmilnik (os zasuka)
 
-@ How far the view turns when you drag on the right half of the screen
-sl Koliko se pogled obrne, ko vlečete po desni polovici zaslona
-
 @ How fast the boomerang flies (units per second)
 sl Kako hitro leti bumerang (enot na sekundo)
 
@@ -2038,9 +2053,6 @@ sl Nobena posamezna zamrznitev ne traja dlje od tega, ne glede na dodano škodo 
 
 @ Oldest marks and nails are recycled at this shared limit
 sl Najstarejše sledi in žeblji se ob tej skupni omejitvi ponovno uporabijo
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-sl Palica in gumbi na zaslonu: samodejno jih pokaže po dotiku in skrije, ko uporabite drugo napravo
 
 @ Only autosaves: quicksaves and the Save menu are off
 sl Samo samodejna shranjevanja: hitro shranjevanje in meni Shrani sta izklopljena
@@ -2412,6 +2424,18 @@ sl Uporablja vnaprej izračunane smeri svetlobe (.dlit) za subtilno senčenje in
 @ Strength of the highlights from directional lighting
 sl Moč svetlobnih poudarkov iz usmerjene osvetlitve
 
+@ How far the view turns when you swipe
+sl Kako daleč se pogled obrne, ko povlečete
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+sl Upočasni poteg blizu vidnih ciljev. Deathmatch zahteva dovoljenje strežnika. Pri visoki nastavitvi merek tudi rahlo vleče k tarči.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+sl Zamenja strani za gumbe za gibanje, ciljanje in igranje
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+sl Samodejno sledi aktivni vhodni napravi. Meni ostane na voljo, ko je prekrivanje izklopljeno.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ sl Izbira stopnje
 @ Really quit?
 sl Res želite končati?
 
+@ Quit
+sl Izhod
+
 @ You died
 sl Umrli ste
 
@@ -2557,9 +2584,6 @@ sl Znova začni stopnjo
 
 @ Return to main menu
 sl Vrni se v glavni meni
-
-@ (disabled)
-sl (onemogočeno)
 
 @ (fixed for this game)
 sl (za to igro fiksno)
@@ -3450,6 +3474,15 @@ sl Ni strežnikov, ki ustrezajo filtrom
 @ Server search failed
 sl Iskanje strežnikov ni uspelo
 
+@ Slide to select, release to equip
+sl Potisnite za izbiro, spustite za opremo
+
+@ Tap to swap weapons.
+sl Tapnite za zamenjavo orožja.
+
+@ Hold and slide to select.
+sl Pridržite in podrsajte, da izberete.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ sl 100% brez poškodb
 
 @ Damage Skull
 sl Lobanja ob poškodbi
+
+@ A mild speed boost for fast swipes
+sl Hitre poteze nekoliko pospešijo obračanje pogleda
+
+@ Phone Gyro
+sl Žiroskop telefona
+
+@ look zone
+sl območje pogleda
+
+@ while firing
+sl med streljanjem
+
+@ Uses the Android device’s motion sensor.
+sl Uporablja senzor gibanja naprave Android.
+
+@ Edit Layout
+sl Uredi postavitev
+
+@ Drag to move
+sl Povleci za premik
+
+@ Auto-fire
+sl Samodejno streljanje
+
+@ Touch Auto-fire
+sl Samodejno streljanje na dotik
+
+@ Move-side Fire
+sl Streljanje na strani premikanja
+
+@ Touch Haptics
+sl Vibracija ob dotiku
+
+@ Add a Fire button on the move side.
+sl Doda gumb za streljanje na stran za premikanje.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+sl Strelja na pošasti pod merkom v lokalni igri (tipkovnica, miška, krmilnik).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+sl Strelja na pošasti pod merkom v lokalni igri (zaslon na dotik).
+
+@ Vibrate on button presses and damage (Android).
+sl Vibrira ob pritisku gumba ali prejeti škodi (Android).
+
+@ Swipe left or right to cycle.
+sl Podrsaj levo ali desno za menjavo orožja.
+
+# Options page group headings.
+
+@ General
+sl Splošno
+
+@ Saving
+sl Shranjevanje
+
+@ Lighting
+sl Osvetlitev
+
+@ Effects
+sl Učinki
+
+@ Models
+sl Modeli
+
+@ Post-processing
+sl Naknadna obdelava
+
+@ World
+sl Svet

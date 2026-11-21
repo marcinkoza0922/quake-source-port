@@ -8,6 +8,7 @@ use crate::world::{ATLAS, LmSurf, World};
 pub(super) struct Lightmaps {
     pub(super) tex: wgpu::Texture,
     pub(super) view: wgpu::TextureView,
+    min_layers: u32,
     /// Style values the atlas was last built with.
     styles: [f32; 256],
     /// Lightmap surfaces using each style.
@@ -102,12 +103,16 @@ fn build_surface(s: &LmSurf, samples: &[u32], styles: &[f32; 256], dlights: &[DL
 }
 
 impl Lightmaps {
-    pub(super) fn new(dev: &wgpu::Device, queue: &wgpu::Queue, layers: u32) -> Self {
-        let (tex, view) = atlas_texture(dev, 1, layers);
+    pub(super) fn new(dev: &wgpu::Device, queue: &wgpu::Queue, gl: bool) -> Self {
+        // wgpu's GL backend allocates a one-layer texture as GL_TEXTURE_2D
+        // even when we create a 2D-array view. Keep both targets consistent.
+        let min_layers = if gl { 2 } else { 1 };
+        let (tex, view) = atlas_texture(dev, 1, min_layers);
         write_rows(queue, &tex, 0, [0, 0, 0], 1, 1, &[128, 128, 128, 255]);
         Self {
             tex,
             view,
+            min_layers,
             styles: [-1.0; 256],
             style_surfs: Vec::new(),
             dlit: Vec::new(),
@@ -118,8 +123,8 @@ impl Lightmaps {
     }
 
     /// Allocates the atlas for a level; texels are built on the first update.
-    pub(super) fn for_world(dev: &wgpu::Device, w: &World) -> Self {
-        let (tex, view) = atlas_texture(dev, ATLAS, w.atlas_layers);
+    pub(super) fn for_world(&self, dev: &wgpu::Device, w: &World) -> Self {
+        let (tex, view) = atlas_texture(dev, ATLAS, w.atlas_layers.max(self.min_layers));
         let mut style_surfs = vec![Vec::new(); 256];
         for (i, s) in w.lm_surfs.iter().enumerate() {
             for k in 0..4 {
@@ -133,6 +138,7 @@ impl Lightmaps {
         Self {
             tex,
             view,
+            min_layers: self.min_layers,
             styles: [f32::NAN; 256],
             style_surfs,
             dlit: Vec::new(),

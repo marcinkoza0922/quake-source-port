@@ -33,6 +33,44 @@ const LIST_BOTTOM: f32 = LIST_TOP + LIST_ROW * LIST_VISIBLE as f32;
 /// Clicks or taps left of this (the checkbox column) toggle an add-on.
 const CHECK_RIGHT: f32 = 42.0;
 
+/// One add-on as the touch browser shows it.
+pub(super) struct AddonInfo {
+    pub(super) name: &'static str,
+    pub(super) id: &'static str,
+    pub(super) cvar: &'static str,
+    pub(super) description: &'static str,
+    /// Its parameters page.
+    pub(super) page: Option<Page>,
+    /// (weapon name, slot cvar) per weapon.
+    pub(super) slots: Vec<(&'static str, &'static str)>,
+    /// (label, bound command): Fire / Alt Fire, or its equipment action.
+    pub(super) binds: Vec<(&'static str, &'static str)>,
+}
+
+pub(super) const ADDON_COUNT: usize = ADDON.len();
+
+pub(super) fn addon_info(i: usize) -> AddonInfo {
+    let a = &ADDON[i.min(ADDON.len() - 1)];
+    let mut binds = Vec::new();
+    if a.weapons.is_empty() {
+        binds.extend(a.equipment_action());
+    } else {
+        binds.push((qcore::t!("Fire"), "+attack"));
+        if a.alt {
+            binds.push((qcore::t!("Alt Fire"), "+attack2"));
+        }
+    }
+    AddonInfo {
+        name: a.name,
+        id: a.id,
+        cvar: a.cvar,
+        description: a.description,
+        page: a.page,
+        slots: a.weapons.iter().map(|w| (w.name, w.slot)).collect(),
+        binds,
+    }
+}
+
 /// Every add-on's (name, on/off cvar), in browser order.
 pub(super) fn toggles() -> impl Iterator<Item = (&'static str, &'static str)> {
     ADDON.iter().map(|a| (a.name, a.cvar))
@@ -177,6 +215,20 @@ impl Addon {
 }
 
 impl Menu {
+    /// Selects add-on `i` (touch layout), as clicking its name does.
+    pub(super) fn addon_ui_select(&mut self, i: usize) {
+        if i != self.addon_ui.selected {
+            self.addon_ui.scroll = 0;
+            self.addon_ui.settings_scroll = 0.0;
+        }
+        self.addon_ui.selected = i.min(ADDON.len() - 1);
+    }
+
+    /// Add-on the classic browser has selected.
+    pub(super) fn addon_ui_selected(&self) -> usize {
+        self.addon_ui.selected
+    }
+
     fn browser_active(&self) -> bool {
         matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons))
     }

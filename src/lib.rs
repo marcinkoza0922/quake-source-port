@@ -45,6 +45,7 @@ mod saveinfo;
 mod splitscreen;
 mod save_inventory;
 mod userdata;
+mod touch_controls;
 mod view;
 mod vwep;
 #[cfg(target_arch = "wasm32")]
@@ -165,6 +166,10 @@ fn open_sound(p: &qplatform::Platform, basedir: &std::path::Path, fs: &Fs) -> So
 
 /// Forwards pending rumble to player 1's pad (split-screen) or every pad.
 fn apply_rumble(host: &mut host::Host, p: &qplatform::Platform) {
+    #[cfg(target_os = "android")]
+    if let Some((strength, ms)) = host.take_touch_haptic() {
+        p.phone_haptic(strength, ms);
+    }
     if let Some((lo, hi, ms)) = host.take_rumble() {
         match host.rumble_pad() {
             Some(id) => {
@@ -177,21 +182,39 @@ fn apply_rumble(host: &mut host::Host, p: &qplatform::Platform) {
 
 #[cfg(not(target_arch = "wasm32"))]
 pub fn run() {
+    let status = run_native();
+    if status != 0 {
+        std::process::exit(status);
+    }
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+fn run_native() -> i32 {
+    let o = Opts { args: std::env::args().skip(1).collect() };
+    let fixed_step = match o.fixed_step() {
+        Ok(step) => step,
+        Err(e) => {
+            eprintln!("{e}");
+            return 2;
+        }
+    };
+    if let Err((title, message)) = run_engine(&o, fixed_step) {
+        eprintln!("{title}: {message}");
+        #[cfg(target_os = "android")]
+        qplatform::android_log(&format!("{title}: {message}"));
+        if !o.has("-headless") && !o.has("-dedicated") {
+            qplatform::error_box(title, &message);
+        }
+        return 1;
+    }
+    0
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+fn run_engine(o: &Opts, fixed_step: Option<f64>) -> Result<(), (&'static str, String)> {
     use std::time::{Duration, Instant};
 
-    let o = Opts { args: std::env::args().skip(1).collect() };
-    let fixed_step = o.fixed_step().unwrap_or_else(|e| {
-        eprintln!("{e}");
-        std::process::exit(2)
-    });
-    let (fs, basedir, pal) = open_game(&o).unwrap_or_else(|e| {
-        eprintln!("{e}");
-        // launched by double-click there is no terminal: show the error too
-        if !o.has("-headless") && !o.has("-dedicated") {
-            qplatform::error_box("Quake data not found", &e);
-        }
-        std::process::exit(1)
-    });
+    let (fs, basedir, pal) = open_game(o).map_err(|e| ("Quake data not found", e))?;
     // -dedicated [n]: no window, no local client, real-time pacing.
     let dedicated = o.has("-dedicated");
     let realtime = dedicated || o.has("-realtime");
@@ -205,24 +228,29 @@ pub fn run() {
     let renderer = if headless {
         qrender::Renderer::headless(w, h, &pal)
     } else {
-        let p = qplatform::Platform::init().unwrap_or_else(|e| {
-            eprintln!("SDL init failed: {e:?}");
-            std::process::exit(1)
-        });
-        let win = p.create_window("Quake", w, h, true).unwrap_or_else(|e| {
-            eprintln!("window creation failed: {e:?}");
-            std::process::exit(1)
-        });
+        #[cfg(target_os = "android")]
+        let platform_init = qplatform::Platform::init_with_hints(&[("SDL_ORIENTATIONS", "LandscapeLeft LandscapeRight")]);
+        #[cfg(not(target_os = "android"))]
+        let platform_init = qplatform::Platform::init();
+        let p = platform_init.map_err(|e| ("SDL initialization failed", e.to_string()))?;
+        let win = p.create_window("Quake", w, h, !cfg!(target_os = "android"))
+            .map_err(|e| ("Quake window creation failed", e.to_string()))?;
+        #[cfg(not(target_os = "android"))]
         let r = qrender::Renderer::new(&platform::Surface(&win), &pal);
+        #[cfg(target_os = "android")]
+        let r = win.android_window().ok_or_else(|| qrender::Error::new("Android window unavailable"))
+            .and_then(|native| {
+                let id = native.id();
+                qrender::Renderer::new_android(native, id, win.drawable_size(), &pal)
+            });
         platform = Some(p);
         window = Some(win);
         r
     };
-    let renderer = renderer.unwrap_or_else(|e| {
-        eprintln!("renderer init failed: {e:?}");
-        std::process::exit(1)
-    });
+    let renderer = renderer.map_err(|e| ("Quake graphics initialization failed", e.to_string()))?;
     eprintln!("renderer: {}", renderer.device_name());
+    #[cfg(target_os = "android")]
+    qplatform::android_log(&format!("renderer: {}", renderer.device_name()));
 
     let (audio, snd, mixer) = match &platform {
         Some(p) if !o.has("-nosound") => open_sound(p, &basedir, &fs),
@@ -246,6 +274,8 @@ pub fn run() {
         }
     }
     if let Some(win) = window {
+        // On Android, the host enables text input when a field or the console needs it.
+        #[cfg(not(target_os = "android"))]
         let _ = win.set_text_input(true);
         host.window = Some(win);
     }
@@ -286,10 +316,46 @@ pub fn run() {
             last = Instant::now();
             el.min(0.25)
         };
-        let events = match &mut platform {
+        let events: Vec<platform::HostEvent> = match &mut platform {
             Some(p) => p.poll_events().into_iter().flat_map(platform::convert).collect(),
             None => Vec::new(),
         };
+        #[cfg(target_os = "android")]
+        let events = {
+            let was_backgrounded = host.backgrounded;
+            if let Some(win) = &host.window {
+                host.input.touch_size_cm = win.physical_size_cm();
+            }
+            for event in events {
+                host.handle_event(event);
+            }
+            if host.quit {
+                break;
+            }
+            if host.backgrounded != was_backgrounded && let Some(audio) = &audio {
+                let _ = if host.backgrounded { audio.pause() } else { audio.resume() };
+            }
+            if let (Some(p), Some(win)) = (&mut platform, &host.window) {
+                host.input.phone_gyro = p.phone_gyro(win, host.wants_phone_gyro());
+            }
+            if host.backgrounded {
+                continue;
+            }
+            Vec::new()
+        };
+        #[cfg(target_os = "android")]
+        if let Some(win) = &host.window {
+            if let Some(native) = win.android_window() {
+                let id = native.id();
+                let (w, h) = win.drawable_size();
+                host.r.sync_android_window(native, id, (w, h))
+                    .map_err(|e| ("Quake graphics surface failed", e.to_string()))?;
+                host.r.resize(w, h);
+            } else {
+                std::thread::sleep(Duration::from_millis(10));
+                continue;
+            }
+        }
         host.frame(dt, events);
         if let Some(p) = &platform {
             apply_rumble(&mut host, p);
@@ -304,6 +370,7 @@ pub fn run() {
     host.write_config();
     host.shutdown_recordings();
     drop(audio);
+    Ok(())
 }
 
 #[cfg(test)]
@@ -328,6 +395,5 @@ mod timing_tests {
 #[cfg(target_os = "android")]
 #[unsafe(no_mangle)]
 pub extern "C" fn SDL_main(_argc: std::ffi::c_int, _argv: *mut *mut std::ffi::c_char) -> std::ffi::c_int {
-    run();
-    0
+    run_native()
 }

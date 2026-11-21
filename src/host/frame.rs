@@ -232,6 +232,7 @@ impl Host {
         self.sync_key_dest();
         self.sync_language();
         self.sync_menu_ui();
+        self.update_menu_fling(dt as f32);
         self.sync_menu_music();
         self.menu_nav_repeat();
         if self.menu.screen == Screen::HudEditor && self.input.gamepad_connected && self.cv("joy_enable") != 0.0 {
@@ -254,22 +255,24 @@ impl Host {
         let ft = dt as f32;
         let in_game = self.cl.signon == 4 && self.cl.intermission == 0;
         self.input.autoaim_allowed = self.local_autoaim_allowed() && self.demo.is_none() && self.freecam.cam.is_none() && in_game && self.cl.stats[STAT_HEALTH] > 0;
-        let needs_targets = self.input.gamepad_connected || (self.input.autoaim_allowed && self.cv("assist_autoaim") != 0.0);
+        let autofire = !dm && !self.automap.fullscreen && !self.server.core.sv.paused
+            && self.input.autofire_enabled(&self.server.core.cvars);
+        let needs_targets = self.input.gamepad_connected
+            || (self.input.autoaim_allowed && self.cv("assist_autoaim") != 0.0)
+            || self.input.touch_aim_active(&self.server.core.cvars) || autofire;
         let targets = if in_game && self.cl.stats[STAT_HEALTH] > 0 && needs_targets { self.aim_targets(&self.cl) } else { Vec::new() };
         self.input.autoaim_fov = self.autoaim_fov();
         self.input.autoaim_players = self.cv("deathmatch") != 0.0;
-        let mut inp = {
-            let eye = self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| {
-                let mut o = e.origin;
-                o[2] += self.cl.viewheight;
-                o
-            });
-            let cm = self.server.level.as_ref().map(|l| l.world.worldmodel.clone());
-            let vis = cm.as_deref().map(|cm| WorldVis::new(cm, &self.cl));
-            let allowed = aim_assist_allowed(self.cv("deathmatch") != 0.0, self.cv("sv_aimassist") != 0.0);
-            let ctx = vis.as_ref().map(|v| AimContext { eye, player_velocity: self.cl.velocity, targets: &targets, vis: v, allowed });
-            self.input.frame(&self.server.core.cvars, self.cl.viewangles, ft, ctx.as_ref())
-        };
+        let eye = self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| {
+            let mut o = e.origin;
+            o[2] += self.cl.viewheight;
+            o
+        });
+        let cm = self.server.level.as_ref().filter(|_| needs_targets).map(|l| l.world.worldmodel.clone());
+        let vis = cm.as_deref().map(|cm| WorldVis::new(cm, &self.cl));
+        let allowed = self.demo.is_none() && self.freecam.cam.is_none() && aim_assist_allowed(dm, self.cv("sv_aimassist") != 0.0);
+        let ctx = vis.as_ref().map(|v| AimContext { eye, player_velocity: self.cl.velocity, targets: &targets, vis: v, allowed });
+        let mut inp = self.input.frame(&self.server.core.cvars, self.cl.viewangles, ft, ctx.as_ref());
         if self.cv("cl_alwaysrun") != 0.0 {
             inp.speed = !inp.speed;
         }
@@ -281,10 +284,23 @@ impl Host {
         self.pend_dodge |= self.input.dodge_pressed() && !flying;
         let mut impulse = inp.impulse;
         let alive = self.cl.stats[STAT_HEALTH] > 0;
-        let (held, aim) = (self.input.wheel_held(), self.input.wheel_aim);
+        let layout = self.input.touch_layout(&self.server.core.cvars);
+        let wheel_input = self.input.touch.take_wheel(&layout).map_or(
+            crate::wheel::WheelInput::Button { held: self.input.wheel_held(), aim: self.input.wheel_aim },
+            crate::wheel::WheelInput::Touch,
+        );
         let toys = if self.local.is_some() { self.allowed_toys() } else { Vec::new() };
         let entries = crate::wheel::inventory(&self.server.core.cvars, &toys);
-        let choice = self.wheel.update(dt as f32, held, in_game && alive && self.demo.is_none() && !flying, aim, &self.cl, &entries, self.toy.held);
+        let wheel_allowed = self.input.dest == KeyDest::Game && in_game && alive && self.demo.is_none() && !flying;
+        let swipe = match &wheel_input {
+            crate::wheel::WheelInput::Touch(qinput::touch::WheelGesture::Released { cycle, .. })
+                if wheel_allowed => *cycle,
+            _ => 0,
+        };
+        if swipe != 0 {
+            impulse = swipe;
+        }
+        let choice = self.wheel.update(dt as f32, wheel_input, wheel_allowed, &self.cl, &entries, self.toy.held);
         self.input.wheel_open = self.wheel.open;
         self.goggles_frame(in_game, alive);
         self.toy.update_slots(&self.server.core.cvars, &toys, (inp.weapon_slot, &mut impulse), &self.cl);
@@ -337,7 +353,9 @@ impl Host {
             self.accum = 0.0;
             if let Some(i) = self.local && !spawned {
                 let mut cmd = self.last_cmd;
-                cmd.buttons = self.toy.buttons(self.pend_attack, self.pend_attack2, self.pend_jump)
+                let auto_attack = autofire && !self.pend_attack && self.pend_impulse == 0 && self.toy.held.is_none()
+                    && aim_vis::autofire_target(ctx.as_ref(), &self.cl);
+                cmd.buttons = self.toy.buttons(self.pend_attack || auto_attack, self.pend_attack2, self.pend_jump)
                     | if self.pend_dodge { qserver::addons::BUTTON_DODGE } else { 0 };
                 cmd.impulse = self.pend_impulse;
                 // The server acks the lossless local client's frames itself;

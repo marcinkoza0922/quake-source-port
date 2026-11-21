@@ -289,6 +289,52 @@ impl OnlinePage {
     }
 }
 
+/// The archive page for the touch layout (`super::touch`).
+impl OnlinePage {
+    pub(super) fn tv_filter(&self) -> &str {
+        &self.filter
+    }
+
+    pub(super) fn tv_sort(&self) -> &'static str {
+        self.sort.label()
+    }
+
+    pub(super) fn tv_rows(&self) -> Vec<crate::menu::ListRow> {
+        (0..self.rows())
+            .filter_map(|i| {
+                let r = self.at(i)?;
+                let (right, right_color) = self.state(r).unwrap_or_else(|| (r.date.get(..4).unwrap_or("").to_string(), MUTED));
+                Some(crate::menu::ListRow { title: r.title.clone(), sub: r.author.clone(), right, color: FG, right_color })
+            })
+            .collect()
+    }
+
+    /// What the classic info panel shows for the highlighted release.
+    pub(super) fn tv_info(&self) -> Vec<(String, [f32; 4])> {
+        let Some(r) = self.at(self.cursor) else { return Vec::new() };
+        let mut out = vec![
+            (r.title.clone(), GOLD_FG),
+            (qcore::tr!("by {}", r.author), FG),
+            (format!("{}  {:.1} MB  {}", r.date, r.bytes as f64 / 1e6, r.kinds.join(", ")), MUTED),
+        ];
+        if !r.deps.is_empty() {
+            out.push((qcore::tr!("requires: {}", r.deps.join(", ")), WARN_FG));
+        }
+        let action = match (self.data.job(&r.sha), self.data.installed(&r.sha)) {
+            (Some(Job::Failed(e)), _) => (qcore::tr!("Failed: {}", qcore::lang::tr(&e)), WARN_FG),
+            (Some(Job::Downloading(f)), _) => (qcore::tr!("Downloading... {}%", format!("{:.0}", f * 100.0)), GOLD_FG),
+            (Some(Job::Installing), _) => (qcore::tr!("Unpacking..."), GOLD_FG),
+            (None, Some(_)) => (qcore::tr!("installed"), GOLD_FG),
+            (None, None) => (String::new(), GOLD_FG),
+        };
+        if !action.0.is_empty() {
+            out.push(action);
+        }
+        out.push((r.description.clone(), FG));
+        out
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -313,3 +359,4 @@ mod tests {
         assert!(!p.key(K_ESCAPE, &mut out));
     }
 }
+

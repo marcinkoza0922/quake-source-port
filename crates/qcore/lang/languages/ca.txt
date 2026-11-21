@@ -526,6 +526,9 @@ ca Distància que recorre el ganxo abans de tornar
 @ How visible the on-screen controls are
 ca Visibilitat dels controls en pantalla
 
+@ Size of the menus and their buttons while you use the touchscreen
+ca Mida dels menús i els seus botons quan feu servir la pantalla tàctil
+
 @ Impact Lifetime
 ca Durada dels impactes
 
@@ -613,8 +616,8 @@ ca Congelació més llarga (ms)
 @ Look Down
 ca Mira avall
 
-@ Look Speed
-ca Velocitat de la vista
+@ Look Acceleration
+ca Acceleració de la vista
 
 @ Look Up
 ca Mira amunt
@@ -720,6 +723,9 @@ ca Color sobre l'objectiu
 
 @ Opacity
 ca Opacitat
+
+@ Menu Size
+ca Mida dels menús
 
 @ Opacity of the grenade arc
 ca Opacitat de l'arc de la granada
@@ -1781,6 +1787,18 @@ ca Il·luminació direccional
 @ Light Specular
 ca Brillantor especular
 
+@ Gameplay Overlay
+ca Superposició de joc
+
+@ Layout
+ca Disseny
+
+@ Preview
+ca Vista prèvia
+
+@ Resume Game
+ca Reprèn el joc
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ ca Quant s'inclina la vista amunt i avall en inclinar el comandament (eix de cap
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ca Quant gira la vista a esquerra i dreta en girar el comandament (eix de guinyada)
 
-@ How far the view turns when you drag on the right half of the screen
-ca Quant gira la vista en arrossegar a la meitat dreta de la pantalla
-
 @ How fast the boomerang flies (units per second)
 ca Velocitat de vol del bumerang (unitats per segon)
 
@@ -2038,9 +2053,6 @@ ca Cap congelació no dura més que això, per molt de dany o bonificació per e
 
 @ Oldest marks and nails are recycled at this shared limit
 ca Les marques i els claus més antics es reutilitzen en arribar a aquest límit comú
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ca Palanca i botons en pantalla: auto els mostra després d'un toc i els amaga quan s'usa un altre dispositiu
 
 @ Only autosaves: quicksaves and the Save menu are off
 ca Només desament automàtic: el desament ràpid i el menú Desa estan desactivats
@@ -2412,6 +2424,18 @@ ca Usa direccions de llum precalculades (.dlit) per a un ombrejat i reflexos sub
 @ Strength of the highlights from directional lighting
 ca Intensitat dels reflexos de la il·luminació direccional
 
+@ How far the view turns when you swipe
+ca Fins a quin punt gira la vista quan feu lliscar el dit
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ca Redueix el lliscament a prop dels objectius visibles. Deathmatch requereix permís del servidor. Al nivell alt també acosta suaument el punt de mira a l’objectiu.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ca Canvia els costats pels botons de moviment, objectiu i joc
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ca Auto segueix el dispositiu d'entrada actiu. El menú roman disponible quan la superposició està desactivada.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ ca Tria el nivell
 @ Really quit?
 ca Segur que vols sortir?
 
+@ Quit
+ca Surt
+
 @ You died
 ca Has mort
 
@@ -2557,9 +2584,6 @@ ca Reinicia el nivell
 
 @ Return to main menu
 ca Torna al menú principal
-
-@ (disabled)
-ca (desactivat)
 
 @ (fixed for this game)
 ca (fix en aquesta partida)
@@ -3450,6 +3474,15 @@ ca Cap servidor coincideix amb els filtres
 @ Server search failed
 ca Ha fallat la cerca de servidors
 
+@ Slide to select, release to equip
+ca Feu lliscar per seleccionar, deixeu anar per equipar
+
+@ Tap to swap weapons.
+ca Toca per intercanviar les armes.
+
+@ Hold and slide to select.
+ca Mantingueu premut i feu lliscar per seleccionar.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ ca 100% sense dany
 
 @ Damage Skull
 ca Calavera de dany
+
+@ A mild speed boost for fast swipes
+ca Fes lliscar el dit de pressa perquè la vista giri una mica més ràpid
+
+@ Phone Gyro
+ca Giroscopi del telèfon
+
+@ look zone
+ca zona de visió
+
+@ while firing
+ca en disparar
+
+@ Uses the Android device’s motion sensor.
+ca Utilitza el sensor de moviment del dispositiu Android.
+
+@ Edit Layout
+ca Edita la disposició
+
+@ Drag to move
+ca Arrossega per moure
+
+@ Auto-fire
+ca Tret automàtic
+
+@ Touch Auto-fire
+ca Tret automàtic tàctil
+
+@ Move-side Fire
+ca Tret al costat de moviment
+
+@ Touch Haptics
+ca Vibració tàctil
+
+@ Add a Fire button on the move side.
+ca Afegeix un botó de tret al costat del moviment.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ca Dispara als monstres sota el punt de mira en joc local (teclat, ratolí, comandament).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ca Dispara als monstres sota el punt de mira en joc local (pantalla tàctil).
+
+@ Vibrate on button presses and damage (Android).
+ca Vibra en prémer botons i en rebre dany (Android).
+
+@ Swipe left or right to cycle.
+ca Llisca a l'esquerra o a la dreta per canviar d'arma.
+
+# Options page group headings.
+
+@ General
+ca General
+
+@ Saving
+ca Desament
+
+@ Lighting
+ca Il·luminació
+
+@ Effects
+ca Efectes
+
+@ Models
+ca Models
+
+@ Post-processing
+ca Postprocessament
+
+@ World
+ca Món

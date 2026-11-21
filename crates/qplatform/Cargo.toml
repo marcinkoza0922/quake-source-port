@@ -17,6 +17,9 @@ bundled-sdl-shared = ["sdl3-sys/build-from-source"]
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 sdl3-sys = { version = "0.7.3", default-features = false, features = ["use-pkg-config"] }
 
+[target.'cfg(target_os = "android")'.dependencies]
+raw-window-handle = "0.6"
+
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 wasm-bindgen = "=0.2.130"
 js-sys = "=0.3.107"
@@ -26,5 +29,6 @@ web-sys = { version = "=0.3.107", features = [
     "CssStyleDeclaration", "Document", "DomRect", "Element", "Event", "EventTarget",
     "FocusEvent", "Gamepad", "GamepadButton", "GamepadMappingType", "HtmlCanvasElement",
     "HtmlElement", "KeyboardEvent", "MouseEvent", "Navigator", "Node", "Performance",
-    "Screen", "ScriptProcessorNode", "WheelEvent", "Window",
+    "Screen", "ScriptProcessorNode", "WheelEvent", "Window", "HtmlInputElement", "InputEvent",
+    "Touch", "TouchEvent", "TouchList",
 ] }

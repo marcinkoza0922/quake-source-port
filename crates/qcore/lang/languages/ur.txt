@@ -526,6 +526,9 @@ ur واپس آنے سے پہلے کانٹا کتنی دور جاتا ہے
 @ How visible the on-screen controls are
 ur اسکرین کنٹرولز کتنے نمایاں ہیں
 
+@ Size of the menus and their buttons while you use the touchscreen
+ur ٹچ اسکرین استعمال کرتے وقت مینو اور ان کے بٹنوں کا سائز
+
 @ Impact Lifetime
 ur اثر کا دورانیہ
 
@@ -613,8 +616,8 @@ ur سب سے لمبا جمود (ms)
 @ Look Down
 ur نیچے دیکھیں
 
-@ Look Speed
-ur دیکھنے کی رفتار
+@ Look Acceleration
+ur نظر کی رفتار میں اضافہ
 
 @ Look Up
 ur اوپر دیکھیں
@@ -720,6 +723,9 @@ ur ہدف پر رنگ
 
 @ Opacity
 ur غیر شفافیت
+
+@ Menu Size
+ur مینو کا سائز
 
 @ Opacity of the grenade arc
 ur گرینیڈ کی قوس کی غیر شفافیت
@@ -1781,6 +1787,18 @@ ur سمتی روشنی
 @ Light Specular
 ur روشنی کی چمک
 
+@ Gameplay Overlay
+ur گیم پلے اوورلے
+
+@ Layout
+ur لے آؤٹ
+
+@ Preview
+ur پیش نظارہ
+
+@ Resume Game
+ur کھیل کو دوبارہ شروع کریں۔
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ ur کنٹرولر جھکانے پر منظر اوپر نیچے کتنا جھکے
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ur کنٹرولر گھمانے پر منظر دائیں بائیں کتنا مڑے (یاؤ محور)
 
-@ How far the view turns when you drag on the right half of the screen
-ur اسکرین کے دائیں نصف پر انگلی کھینچنے سے منظر کتنا مڑے
-
 @ How fast the boomerang flies (units per second)
 ur بومرینگ کتنی تیزی سے اڑتا ہے (اکائیاں فی سیکنڈ)
 
@@ -2038,9 +2053,6 @@ ur کوئی ایک جمود اس سے زیادہ نہیں چلتا، چاہے ن
 
 @ Oldest marks and nails are recycled at this shared limit
 ur اس مشترکہ حد پر پرانے نشان اور کیلیں دوبارہ استعمال ہوتی ہیں
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ur اسکرین پر اسٹک اور بٹن: خودکار انہیں چھونے کے بعد دکھاتا ہے اور دوسرا آلہ استعمال ہونے پر چھپا دیتا ہے
 
 @ Only autosaves: quicksaves and the Save menu are off
 ur صرف آٹو سیو: فوری سیو اور سیو مینو بند ہیں
@@ -2412,6 +2424,18 @@ ur دیواروں اور ماڈلز پر ہلکے سائے اور چمک کے ل
 @ Strength of the highlights from directional lighting
 ur سمتی روشنی سے پیدا ہونے والی چمک کی شدت
 
+@ How far the view turns when you swipe
+ur جب آپ سوائپ کرتے ہیں تو منظر کتنی دور مڑتا ہے۔
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ur مرئی اہداف کے قریب آپ کے سوائپ کو سست کرتا ہے۔ ڈیتھ میچ کو سرور کی اجازت درکار ہے۔ اعلیٰ سطح پر نشانہ ہلکا سا ہدف کی طرف بھی کھنچتا ہے۔
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ur حرکت، مقصد اور گیم پلے بٹنوں کے لیے اطراف کو تبدیل کریں۔
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ur آٹو فعال ان پٹ ڈیوائس کی پیروی کرتا ہے۔ اوورلے آف ہونے پر مینو دستیاب رہتا ہے۔
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ ur لیول کا انتخاب
 @ Really quit?
 ur واقعی بند کریں؟
 
+@ Quit
+ur باہر نکلیں
+
 @ You died
 ur آپ مر گئے
 
@@ -2557,9 +2584,6 @@ ur لیول دوبارہ شروع کریں
 
 @ Return to main menu
 ur مرکزی مینو پر واپس
-
-@ (disabled)
-ur (غیر فعال)
 
 @ (fixed for this game)
 ur (اس گیم کے لیے مقرر)
@@ -3450,6 +3474,15 @@ ur فلٹرز سے ملتا کوئی سرور نہیں
 @ Server search failed
 ur سرور کی تلاش ناکام رہی
 
+@ Slide to select, release to equip
+ur منتخب کرنے کے لیے سلائیڈ کریں، لیس کرنے کے لیے چھوڑیں۔
+
+@ Tap to swap weapons.
+ur ہتھیاروں کو تبدیل کرنے کے لیے تھپتھپائیں۔
+
+@ Hold and slide to select.
+ur منتخب کرنے کے لیے تھامیں اور سلائیڈ کریں۔
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ ur 100% بغیر نقصان
 
 @ Damage Skull
 ur نقصان کی کھوپڑی
+
+@ A mild speed boost for fast swipes
+ur تیزی سے سوائپ کرنے پر منظر کچھ زیادہ تیزی سے گھومتا ہے
+
+@ Phone Gyro
+ur فون جائروسکوپ
+
+@ look zone
+ur نظر کا علاقہ
+
+@ while firing
+ur فائر کرتے وقت
+
+@ Uses the Android device’s motion sensor.
+ur Android آلے کا حرکتی سینسر استعمال کرتا ہے۔
+
+@ Edit Layout
+ur ترتیب میں ترمیم
+
+@ Drag to move
+ur منتقل کرنے کے لیے گھسیٹیں
+
+@ Auto-fire
+ur خودکار فائر
+
+@ Touch Auto-fire
+ur ٹچ پر خودکار فائر
+
+@ Move-side Fire
+ur حرکت کی جانب فائر
+
+@ Touch Haptics
+ur ٹچ کی لرزش
+
+@ Add a Fire button on the move side.
+ur حرکت کی جانب فائر کا بٹن شامل کرتا ہے۔
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ur مقامی کھیل میں نشانے پر موجود عفریتوں پر فائر کرتا ہے (کی بورڈ، ماؤس، کنٹرولر)۔
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ur مقامی کھیل میں نشانے پر موجود عفریتوں پر فائر کرتا ہے (ٹچ اسکرین)۔
+
+@ Vibrate on button presses and damage (Android).
+ur بٹن دبانے یا نقصان پہنچنے پر لرزش (اینڈرائیڈ)۔
+
+@ Swipe left or right to cycle.
+ur ہتھیار بدلنے کے لیے بائیں یا دائیں سوائپ کریں۔
+
+# Options page group headings.
+
+@ General
+ur عمومی
+
+@ Saving
+ur محفوظ کرنا
+
+@ Lighting
+ur روشنی
+
+@ Effects
+ur اثرات
+
+@ Models
+ur ماڈلز
+
+@ Post-processing
+ur بعد از پروسیسنگ
+
+@ World
+ur دنیا

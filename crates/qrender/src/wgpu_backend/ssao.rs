@@ -48,7 +48,8 @@ impl Renderer {
         scene: (u32, u32),
         color: &wgpu::TextureView,
         depth: &wgpu::TextureView,
-    ) -> AoTargets {
+    ) -> Option<AoTargets> {
+        let fx = self.pipes.scene.fx.as_ref()?;
         let scale = if quality < 2 { 0.5 } else { 1.0 };
         let size = (((scene.0 as f32 * scale) as u32).max(1), ((scene.1 as f32 * scale) as u32).max(1));
         let tex = self.dev.create_texture(&wgpu::TextureDescriptor {
@@ -62,10 +63,9 @@ impl Renderer {
             view_formats: &[],
         });
         let view = tex.create_view(&Default::default());
-        let p = &self.pipes.scene;
-        let gen_group = tex_group(&self.dev, &p.fx.ao_gen_bgl, depth, color);
-        let apply_group = tex_group(&self.dev, &p.fx.ao_apply_bgl, depth, &view);
-        AoTargets { view, size, scale, gen_group, apply_group }
+        let gen_group = tex_group(&self.dev, &fx.ao_gen_bgl, depth, color);
+        let apply_group = tex_group(&self.dev, &fx.ao_apply_bgl, depth, &view);
+        Some(AoTargets { view, size, scale, gen_group, apply_group })
     }
 
     /// Per-view AO uniform records (empty when SSAO is off).
@@ -97,8 +97,7 @@ impl Renderer {
     /// Generates AO for every view and multiplies it into the scene colour.
     /// Runs between the opaque and translucent scene passes.
     pub(super) fn encode_ao(&self, enc: &mut wgpu::CommandEncoder, t: &Targets, l: &Lists, views: &[AoView]) {
-        let (Some(ao), Some(draw_group)) = (&t.ao, &self.bufs.draw_group) else { return };
-        let p = &self.pipes.scene;
+        let (Some(ao), Some(draw_group), Some(fx)) = (&t.ao, &self.bufs.draw_group, &self.pipes.scene.fx) else { return };
         {
             let ts = self.pass_times(super::timing::AO_GENERATE);
             let mut pass = enc.begin_render_pass(&wgpu::RenderPassDescriptor {
@@ -115,7 +114,7 @@ impl Renderer {
                 })],
                 ..Default::default()
             });
-            pass.set_pipeline(&p.fx.ao_gen);
+            pass.set_pipeline(&fx.ao_gen);
             pass.set_bind_group(1, &ao.gen_group, &[]);
             for (v, a) in l.views.iter().zip(views) {
                 if v.scene[0] == 0 || v.scene[1] == 0 {
@@ -140,7 +139,7 @@ impl Renderer {
             })],
             ..Default::default()
         });
-        pass.set_pipeline(&p.fx.ao_apply);
+        pass.set_pipeline(&fx.ao_apply);
         pass.set_bind_group(1, &ao.apply_group, &[]);
         for (v, a) in l.views.iter().zip(views) {
             let ([x, y], [w, h]) = (v.ofs, v.scene);

@@ -526,6 +526,9 @@ et Kui kaugele konks lendab enne tagasitulekut
 @ How visible the on-screen controls are
 et Kui nähtavad on ekraaninupud
 
+@ Size of the menus and their buttons while you use the touchscreen
+et Menüüde ja nende nuppude suurus puuteekraani kasutamisel
+
 @ Impact Lifetime
 et Tabamusjälgede kestus
 
@@ -613,8 +616,8 @@ et Pikim külmutus (ms)
 @ Look Down
 et Vaata alla
 
-@ Look Speed
-et Vaate kiirus
+@ Look Acceleration
+et Vaate kiirendus
 
 @ Look Up
 et Vaata üles
@@ -720,6 +723,9 @@ et Sihtmärgi värv
 
 @ Opacity
 et Läbipaistmatus
+
+@ Menu Size
+et Menüüde suurus
 
 @ Opacity of the grenade arc
 et Granaadikaare läbipaistmatus
@@ -1781,6 +1787,18 @@ et Suunatud valgustus
 @ Light Specular
 et Valguse läige
 
+@ Gameplay Overlay
+et Mängu ülekate
+
+@ Layout
+et Paigutus
+
+@ Preview
+et Eelvaade
+
+@ Resume Game
+et Jätkake mängu
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ et Kui palju vaade üles-alla kaldub, kui pult kallutad (kaldetelg)
 @ How far the view turns left and right when you turn the controller (yaw axis)
 et Kui palju vaade vasakule-paremale pöörab, kui pulti pöörad (pöördetelg)
 
-@ How far the view turns when you drag on the right half of the screen
-et Kui palju vaade pöörab, kui ekraani paremal poolel lohistad
-
 @ How fast the boomerang flies (units per second)
 et Kui kiiresti bumerang lendab (ühikut sekundis)
 
@@ -2038,9 +2053,6 @@ et Ükski külmutus ei kesta kauem, olenemata lisanduvast kahjust või tapuboonu
 
 @ Oldest marks and nails are recycled at this shared limit
 et Selle ühise piiri täitudes kasutatakse vanimad jäljed ja naelad uuesti
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-et Ekraanil olev kang ja nupud: auto näitab neid pärast puudutust ja peidab, kui kasutatakse muud seadet
 
 @ Only autosaves: quicksaves and the Save menu are off
 et Ainult autosalvestused: kiirsalvestus ja salvestusmenüü on välja lülitatud
@@ -2412,6 +2424,18 @@ et Kasutab eelküpsetatud valgussuundi (.dlit) peeneks varjutuseks ja läikeks s
 @ Strength of the highlights from directional lighting
 et Suunatud valgustuse läike tugevus
 
+@ How far the view turns when you swipe
+et Kui kaugele vaade pühkimisel pöördub
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+et Aeglustab pühkimist nähtavate sihtmärkide lähedal. Deathmatch nõuab serveri luba. Kõrgel tasemel liigub sihik ka veidi sihtmärgi poole.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+et Vahetab küljed liikumis-, sihtimis- ja mängunuppude vastu
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+et Auto järgib aktiivset sisendseadet. Menüü jääb kättesaadavaks, kui ülekate on välja lülitatud.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ et Taseme valik
 @ Really quit?
 et Kas tõesti väljuda?
 
+@ Quit
+et Välju
+
 @ You died
 et Sa said surma
 
@@ -2557,9 +2584,6 @@ et Alusta taset uuesti
 
 @ Return to main menu
 et Tagasi peamenüüsse
-
-@ (disabled)
-et (keelatud)
 
 @ (fixed for this game)
 et (selles mängus fikseeritud)
@@ -3450,6 +3474,15 @@ et Sobivaid servereid pole
 @ Server search failed
 et Serverite otsing ebaõnnestus
 
+@ Slide to select, release to equip
+et Valimiseks libistage, varustamiseks vabastage
+
+@ Tap to swap weapons.
+et Puudutage relvade vahetamiseks.
+
+@ Hold and slide to select.
+et Valimiseks hoidke ja libistage.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ et 100% kahjudeta
 
 @ Damage Skull
 et Kahjupealuu
+
+@ A mild speed boost for fast swipes
+et Kiire viibe pöörab vaadet veidi kiiremini
+
+@ Phone Gyro
+et Telefoni güroskoop
+
+@ look zone
+et vaateala
+
+@ while firing
+et tulistades
+
+@ Uses the Android device’s motion sensor.
+et Kasutab Android-seadme liikumisandurit.
+
+@ Edit Layout
+et Muuda paigutust
+
+@ Drag to move
+et Liigutamiseks lohista
+
+@ Auto-fire
+et Automaatne tulistamine
+
+@ Touch Auto-fire
+et Automaatne tulistamine puutega
+
+@ Move-side Fire
+et Tulistamine liikumise poolel
+
+@ Touch Haptics
+et Puutevibratsioon
+
+@ Add a Fire button on the move side.
+et Lisab tulistamisnupu liikumise poolele.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+et Tulistab kohalikus mängus sihikul olevaid koletisi (klaviatuur, hiir, pult).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+et Tulistab kohalikus mängus sihikul olevaid koletisi (puuteekraan).
+
+@ Vibrate on button presses and damage (Android).
+et Vibreerib nupuvajutustel ja kahju saamisel (Android).
+
+@ Swipe left or right to cycle.
+et Relva vahetamiseks pühi vasakule või paremale.
+
+# Options page group headings.
+
+@ General
+et Üldine
+
+@ Saving
+et Salvestamine
+
+@ Lighting
+et Valgustus
+
+@ Effects
+et Efektid
+
+@ Models
+et Mudelid
+
+@ Post-processing
+et Järeltöötlus
+
+@ World
+et Maailm

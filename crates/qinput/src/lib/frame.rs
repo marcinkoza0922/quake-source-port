@@ -38,6 +38,7 @@ impl Input {
         s.impulse = std::mem::take(&mut self.impulse);
         s.weapon_slot = std::mem::take(&mut self.weapon_slot);
         let gyro_btn = b[btn::GYRO].is_down();
+        let firing = b[btn::ATTACK].is_down() || b[btn::ATTACK2].is_down();
         let mlook = b[btn::MLOOK].is_down() || v(c.freelook) != 0.0;
 
         if self.dest != KeyDest::Game {
@@ -50,9 +51,31 @@ impl Input {
         // both wheels share the aim (stick or mouse cursor); only hijack look
         // once the weapon wheel has actually opened (or equipment wheel is held)
         let wheel = (self.wheel_open && b[btn::WHEEL].is_down()) || b[btn::EQUIPWHEEL].is_down();
+        let touch_wheel = self.wheel_open && self.touch.wheel_held();
         if !wheel {
             self.wheel_aim = [0.0; 2];
             self.wheel_mouse = [0.0; 2];
+        }
+
+        let phone_mode = v(c.gyro_phone_mode) as i32;
+        let phone = self.phone_gyro.filter(|rate| phone_mode != 0 && rate.iter().all(|r| r.is_finite()));
+        let gyro_delta = |[pitch, yaw, roll]: [f32; 3]| {
+            let filter = |rate: f32| gamepad::gyro_filter(rate.to_degrees(), v(c.gyro_noise_thresh));
+            [
+                (filter(yaw) * v(c.gyro_yawsensitivity) + filter(roll) * v(c.gyro_rollsensitivity)) * ft,
+                -filter(pitch) * v(c.gyro_pitchsensitivity) * ft,
+            ]
+        };
+        let phone_on = !wheel && !touch_wheel && match phone_mode {
+            1 => true,
+            2 => v(c.touch_enable) != 0.0 && self.touch.looking(&self.touch_layout(cvars)),
+            3 => firing,
+            _ => false,
+        };
+        if let Some(rate) = phone.filter(|_| phone_on) {
+            let [yaw, pitch] = gyro_delta(rate);
+            s.look_delta[0] += yaw;
+            s.look_delta[1] += pitch;
         }
 
         // gamepad
@@ -86,7 +109,7 @@ impl Input {
             s.back += mv[1].max(0.0);
             s.forward += (-mv[1]).max(0.0);
             pad_input = mv != [0.0; 2] || lkd != [0.0; 2];
-            let gyro_on = v(c.gyro_enable) != 0.0
+            let gyro_on = phone.is_none() && v(c.gyro_enable) != 0.0
                 && match v(c.gyro_mode) as i32 {
                     1 => !gyro_btn,
                     2 => gyro_btn,
@@ -115,14 +138,9 @@ impl Input {
                 pad_look[1] = lke[1] * v(c.joy_sensitivity_pitch) * inv * ft;
             }
             if gyro_on {
-                let th = v(c.gyro_noise_thresh);
-                let gy = gamepad::gyro_filter(self.gyro[1].to_degrees(), th);
-                let gp = gamepad::gyro_filter(self.gyro[0].to_degrees(), th);
-                let gr = gamepad::gyro_filter(self.gyro[2].to_degrees(), th);
-                s.look_delta[0] += gy * v(c.gyro_yawsensitivity) * ft;
-                // roll steers like yaw (negative values reverse it)
-                s.look_delta[0] += gr * v(c.gyro_rollsensitivity) * ft;
-                s.look_delta[1] -= gp * v(c.gyro_pitchsensitivity) * ft;
+                let [yaw, pitch] = gyro_delta(self.gyro);
+                s.look_delta[0] += yaw;
+                s.look_delta[1] += pitch;
             }
             if pad_input || (gyro_on && self.gyro != [0.0; 3]) {
                 self.last_look = LookDevice::Gamepad;
@@ -130,7 +148,7 @@ impl Input {
             aim_ok = self.last_look == LookDevice::Gamepad;
         }
 
-        // aim assist: gamepad only, never with mouse look
+        // Gamepad and touch use different assist tuning.
         self.last_aim = AimResult::NONE;
         let mouse_moved = self.mouse != [0.0; 2];
         if aim_ok && !mouse_moved && v(c.aim_assist) != 0.0
@@ -153,17 +171,29 @@ impl Input {
         // touch: stick moves like a gamepad stick, drags turn like a mouse
         if v(c.touch_enable) != 0.0 {
             let lay = self.touch_layout(cvars);
+            if lay.buttons.submerged && self.touch.pressed(touch::SWIM_DOWN) {
+                s.movedown = 1.0;
+            }
             let mv = self.touch.move_vec(&lay);
             s.moveright += mv[0].max(0.0);
             s.moveleft += (-mv[0]).max(0.0);
             s.back += mv[1].max(0.0);
             s.forward += (-mv[1]).max(0.0);
-            // a full screen-height drag turns 180 degrees at sensitivity 1
+            let assist = self.touch_aim_active(cvars) && !mouse_moved;
             let lk = self.touch.take_look();
-            let k = 180.0 * v(c.touch_sensitivity);
-            let inv = if v(c.touch_invert) != 0.0 { -1.0 } else { 1.0 };
-            s.look_delta[0] -= lk[0] * k;
-            s.look_delta[1] += lk[1] * k * inv;
+            if !wheel && !touch_wheel && lk != [0.0; 2] {
+                let result = if assist && let Some(ctx) = aim {
+                    let (slowdown, snap) = if v(c.touch_aim_assist) >= 1.5 { (0.45, 3.0) } else { (0.25, 0.0) };
+                    let p = AimParams { slowdown, rotation: 0.0, snap, ..AimParams::default() };
+                    self.last_aim = aim::aim_assist(&p, ctx, viewangles, ft, false);
+                    self.last_aim
+                } else {
+                    AimResult::NONE
+                };
+                let inv = if v(c.touch_invert) != 0.0 { -1.0 } else { 1.0 };
+                s.look_delta[0] += result.delta[0] - lk[0] * v(c.touch_yaw_sensitivity).clamp(7.0, 84.0) * result.scale;
+                s.look_delta[1] += result.delta[1] + lk[1] * v(c.touch_pitch_sensitivity).clamp(7.0, 84.0) * result.scale * inv;
+            }
         }
 
         // mouse
@@ -206,7 +236,7 @@ impl Input {
         self.buttons[btn::LOCKON].state &= !2;
         let cycle = self.key_down(if v(c.joy_swapmovelook) != 0.0 { K_LTHUMB } else { K_RTHUMB });
         let p = lockon::LockOnParams {
-            enabled: v(c.autoaim) != 0.0 && !wheel,
+            enabled: v(c.autoaim) != 0.0 && !wheel && !touch_wheel,
             allowed: self.autoaim_allowed,
             toggle: v(c.autoaim_mode) != 0.0,
             reacquire: v(c.autoaim_reacquire) != 0.0,

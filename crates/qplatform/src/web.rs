@@ -18,6 +18,7 @@ mod audio;
 mod gamepad;
 mod input;
 mod keymap;
+mod touch;
 
 pub use audio::AudioStream;
 
@@ -62,6 +63,10 @@ pub(crate) struct Shared {
     pub(crate) want_lock: Cell<bool>,
     pub(crate) text_input: Cell<bool>,
     pub(crate) canvas: RefCell<Option<HtmlCanvasElement>>,
+    /// A finger touched the canvas (the device has a touchscreen).
+    pub(crate) touch_used: Cell<bool>,
+    /// Hidden field that raises the on-screen keyboard (`touch.rs`).
+    pub(crate) text_field: RefCell<Option<(web_sys::HtmlInputElement, Listener)>>,
 }
 
 impl Shared {
@@ -119,6 +124,7 @@ impl Platform {
         canvas.set_tab_index(0);
         let _ = canvas.focus();
         self.listeners.borrow_mut().extend(input::mouse_listeners(&canvas, &self.shared)?);
+        self.listeners.borrow_mut().extend(touch::touch_listeners(&canvas, &self.shared)?);
         *self.shared.canvas.borrow_mut() = Some(canvas.clone());
         let win = Window { canvas, shared: self.shared.clone() };
         sync_canvas_size(&win.canvas);
@@ -259,6 +265,15 @@ impl Window {
         self.drawable_size()
     }
 
+    pub fn safe_insets(&self) -> [f32; 4] {
+        [0.0; 4]
+    }
+
+    /// Backing pixels per CSS pixel (`devicePixelRatio`).
+    pub fn display_scale(&self) -> f32 {
+        web_sys::window().map_or(1.0, |w| w.device_pixel_ratio() as f32).max(0.1)
+    }
+
     /// Pointer lock. Locking needs a user gesture, so it is requested now
     /// and again on the next click inside the canvas.
     pub fn set_relative_mouse(&self, on: bool) -> Result<()> {
@@ -277,6 +292,7 @@ impl Window {
     /// Start/stop [`Event::Text`] delivery.
     pub fn set_text_input(&self, on: bool) -> Result<()> {
         self.shared.text_input.set(on);
+        touch::set_keyboard(&self.shared, on);
         Ok(())
     }
 

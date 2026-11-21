@@ -3,16 +3,17 @@ use super::*;
 #[test]
 fn keyboard_has_no_footer_prompts_and_controller_does() {
     let mut menu = Menu::new();
+    let cv = Cvars::new();
     let mut canvas = Canvas::new(640, 360);
     canvas.ui = Some(Default::default());
     for screen in [Screen::Main, Screen::SinglePlayer, Screen::Options, Screen::OptionsPage(Page::Controls), Screen::Quit, Screen::Help] {
         menu.open(screen);
         menu.pad_ui = false;
         canvas.list.clear();
-        menu.draw_hints(&mut canvas);
+        menu.draw_hints(&mut canvas, &cv);
         assert!(canvas.list.is_empty(), "{screen:?}");
         menu.pad_ui = true;
-        menu.draw_hints(&mut canvas);
+        menu.draw_hints(&mut canvas, &cv);
         assert!(!canvas.list.is_empty(), "{screen:?}");
     }
 }
@@ -37,7 +38,7 @@ fn help_draws_only_one_hint_box_in_controller_mode_and_none_on_keyboard() {
     let mut hints_only = Canvas::new(640, 360);
     hints_only.ui = Some(Default::default());
     hints_only.menu_layout();
-    menu.draw_hints(&mut hints_only);
+    menu.draw_hints(&mut hints_only, &cv);
     assert_eq!(pad.list.len() - kb.list.len(), hints_only.list.len(), "Help must draw its hint bar exactly once in pad mode");
 }
 

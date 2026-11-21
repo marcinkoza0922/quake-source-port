@@ -51,6 +51,8 @@ pub(super) enum Item {
     Soundtrack,
     /// Built-in and user-saved HUD presets (`hud_preset`, `hud_preset_name`).
     HudPreset,
+    /// Group heading; not selectable (the cursor and pointer skip it).
+    Heading(&'static str),
 }
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -65,6 +67,8 @@ pub(super) enum Run {
     ResetShotguns,
     ResetBulletTime,
     ResetHitstop,
+    ResetTouch,
+    EditTouch,
     /// Every gameplay modifier back to its default (standard rules).
     ResetModifiers,
     /// Export dialog: the highlighted clip (dimmed without one), or all.
@@ -217,19 +221,23 @@ pub(super) const AUTOMAP_DISPLAY: &[(&str, f32)] = &[("Framed panel", 0.0), ("Ce
 pub(super) const AUTOMAP_REVEAL: &[(&str, f32)] = &[("Explored only", 0.0), ("Full map", 1.0)];
 
 pub(super) const GAMEPLAY: &[Item] = &[
+    Item::Heading("General"),
     Item::Language,
     toggle("Translate Console", "con_translate"),
+    toggle("Always Run", "cl_alwaysrun"),
+    toggle("Automap", "cl_automap"),
+    Item::Sub { label: "Automap Settings", page: Page::Automap },
+    Item::Heading("View"),
     slider("Field of View", "fov", 60.0, 130.0, 5.0),
     Item::Choice { label: "Camera", cvar: "cl_camera", choices: &[("First person", 0.0), ("Third person", 1.0), ("Shoulder right", 2.0), ("Shoulder left", 3.0)] },
     Item::Choice { label: "Viewmodels", cvar: "r_drawviewmodel", choices: &[("Center", 1.0), ("Right", 2.0), ("Left", 3.0), ("Off", 0.0)] },
     toggle("Visible Weapons", "cl_vwep"),
     slider("View Bob", "cl_bob", 0.0, 0.02, 0.002),
     toggle("Gun Kick", "v_gunkick"),
-    toggle("Always Run", "cl_alwaysrun"),
+    Item::Heading("Weapons"),
     Item::Choice { label: "Weapon Auto-Switch", cvar: "cl_autoswitch", choices: WEAPON_SWITCH },
     Item::Sub { label: "Weapon Priority", page: Page::WeaponPriority },
-    toggle("Automap", "cl_automap"),
-    Item::Sub { label: "Automap Settings", page: Page::Automap },
+    Item::Heading("Saving"),
     Item::Choice { label: "On Death", cvar: "cl_deathaction", choices: &[("Ask", 0.0), ("Most recent save", 1.0), ("Select save", 2.0), ("Restart level", 3.0)] },
     toggle("Autosave", "sv_autosave"),
     Item::Sub { label: "Autosave Settings", page: Page::Autosave },
@@ -297,6 +305,7 @@ pub(super) const GYRO: &[Item] = &[
     toggle("Gyro Aiming", "gyro_enable"),
     Item::Choice { label: "Aim Style", cvar: "joy_flick", choices: AIM_STYLE },
     Item::Choice { label: "Gyro Active", cvar: "gyro_mode", choices: GYRO_MODE },
+    Item::Choice { label: "Phone Gyro", cvar: "gyro_phone_mode", choices: PHONE_GYRO_MODE },
     slider("Yaw Sensitivity", "gyro_yawsensitivity", 0.0, 10.0, 0.25),
     slider("Pitch Sensitivity", "gyro_pitchsensitivity", 0.0, 10.0, 0.25),
     slider("Roll Sensitivity", "gyro_rollsensitivity", -10.0, 10.0, 0.25),
@@ -304,18 +313,11 @@ pub(super) const GYRO: &[Item] = &[
     slider("Flick Time", "joy_flick_time", 0.05, 0.5, 0.025),
 ];
 
+pub(super) const PHONE_GYRO_MODE: &[(&str, f32)] = &[("off", 0.0), ("always", 1.0), ("look zone", 2.0), ("while firing", 3.0)];
+
 pub(super) const AIM_STYLE: &[(&str, f32)] = &[("2D aiming", 0.0), ("flick stick", 1.0)];
 pub(super) const GYRO_MODE: &[(&str, f32)] = &[("always", 0.0), ("off while held", 1.0), ("only while held", 2.0)];
 
-pub(super) const TOUCH: &[Item] = &[
-    Item::Choice { label: "Touch Controls", cvar: "touch_enable", choices: TOUCH_MODE },
-    slider("Look Speed", "touch_sensitivity", 0.25, 3.0, 0.25),
-    toggle("Invert Look", "touch_invert"),
-    slider("Button Size", "touch_size", 0.5, 2.0, 0.25),
-    slider("Opacity", "touch_opacity", 0.1, 1.0, 0.1),
-];
-
-pub(super) const TOUCH_MODE: &[(&str, f32)] = &[("off", 0.0), ("auto", 1.0), ("always", 2.0)];
 pub(super) const GLYPHS: &[(&str, f32)] = &[("auto", 0.0), ("xbox", 1.0), ("playstation", 2.0), ("nintendo", 3.0)];
 pub(super) const WHEEL_TIME: &[(&str, f32)] = &[("off", 1.0), ("half speed", 0.5), ("quarter speed", 0.25), ("10% speed", 0.1)];
 
@@ -334,34 +336,49 @@ pub(super) const WATERWARP: &[(&str, f32)] = &[("off", 0.0), ("Classic", 1.0), (
 /// vkQuake numbering: 1 is GLQuake, 2 is Classic.
 pub(super) const PARTICLES: &[(&str, f32)] = &[("off", 0.0), ("GLQuake", 1.0), ("Classic", 2.0)];
 
-pub(super) const GRAPHICS: &[Item] = &[
-    Item::DisplayMode,
-    Item::Resolution,
-    Item::Apply,
-    toggle("VSync", "vid_vsync"),
-    slider("Max FPS", "host_maxfps", 60.0, 500.0, 10.0),
-    Item::Choice { label: "Anti-aliasing", cvar: "r_msaa", choices: MSAA },
-    toggle("Supersampling", "vid_fsaamode"),
-    Item::Choice { label: "Render Scale", cvar: "r_renderscale", choices: SCALE },
-    Item::Choice { label: "Texture Filter", cvar: "r_texfilter", choices: FILTER },
-    Item::Choice { label: "Anisotropic", cvar: "r_anisotropy", choices: ANISO },
-    Item::Choice { label: "8-bit Color", cvar: "r_softemu", choices: SOFTEMU },
-    toggle("Dithering", "r_dither"),
-    Item::Slider { label: "Brightness", cvar: "gamma", min: 0.5, max: 1.5, step: 0.05, invert: true },
-    slider("Contrast", "contrast", 1.0, 2.0, 0.1),
-    Item::Choice { label: "Underwater FX", cvar: "r_waterwarp", choices: WATERWARP },
-    Item::Choice { label: "Particles", cvar: "r_particles", choices: PARTICLES },
-    toggle("Dynamic Lights", "r_dynamic"),
-    toggle("Colored Lighting", "r_coloredlight"),
-    toggle("HDR Lightmaps", "r_hdr_lightmaps"),
-    toggle("Directional Lighting", "r_deluxemapping"),
-    slider("Light Specular", "r_deluxemapping_specular", 0.0, 1.0, 0.05),
-    toggle("Enhanced Models", "r_enhancedmodels"),
-    toggle("Fog", "r_fog"),
-    slider("Sky Fog", "r_skyfog", 0.0, 1.0, 0.1),
-    toggle("Interpolate Animation", "r_lerpmodels"),
-    toggle("Interpolate Movement", "r_lerpmove"),
-];
+/// The Graphics page; `$display` are the desktop-only display rows.
+macro_rules! graphics_rows {
+    ($($display:expr),* $(,)?) => {
+        &[
+            Item::Heading("Display"),
+            $($display,)*
+            toggle("VSync", "vid_vsync"),
+            slider("Max FPS", "host_maxfps", 60.0, 500.0, 10.0),
+            Item::Slider { label: "Brightness", cvar: "gamma", min: 0.5, max: 1.5, step: 0.05, invert: true },
+            slider("Contrast", "contrast", 1.0, 2.0, 0.1),
+            Item::Heading("Quality"),
+            Item::Choice { label: "Anti-aliasing", cvar: "r_msaa", choices: MSAA },
+            toggle("Supersampling", "vid_fsaamode"),
+            Item::Choice { label: "Render Scale", cvar: "r_renderscale", choices: SCALE },
+            Item::Choice { label: "Texture Filter", cvar: "r_texfilter", choices: FILTER },
+            Item::Choice { label: "Anisotropic", cvar: "r_anisotropy", choices: ANISO },
+            Item::Choice { label: "8-bit Color", cvar: "r_softemu", choices: SOFTEMU },
+            toggle("Dithering", "r_dither"),
+            Item::Heading("Lighting"),
+            toggle("Dynamic Lights", "r_dynamic"),
+            toggle("Colored Lighting", "r_coloredlight"),
+            toggle("HDR Lightmaps", "r_hdr_lightmaps"),
+            toggle("Directional Lighting", "r_deluxemapping"),
+            slider("Light Specular", "r_deluxemapping_specular", 0.0, 1.0, 0.05),
+            Item::Heading("Effects"),
+            Item::Choice { label: "Underwater FX", cvar: "r_waterwarp", choices: WATERWARP },
+            Item::Choice { label: "Particles", cvar: "r_particles", choices: PARTICLES },
+            toggle("Fog", "r_fog"),
+            slider("Sky Fog", "r_skyfog", 0.0, 1.0, 0.1),
+            Item::Heading("Models"),
+            toggle("Enhanced Models", "r_enhancedmodels"),
+            toggle("Interpolate Animation", "r_lerpmodels"),
+            toggle("Interpolate Movement", "r_lerpmove"),
+        ]
+    };
+}
+
+/// Display Mode, Resolution and their Apply button are desktop controls.
+pub(super) const GRAPHICS: &[Item] = if cfg!(target_os = "android") {
+    graphics_rows!()
+} else {
+    graphics_rows!(Item::DisplayMode, Item::Resolution, Item::Apply)
+};
 
 pub(super) const COLORBLIND: &[(&str, f32)] =
     &[("off", 0.0), ("protanopia", 1.0), ("deuteranopia", 2.0), ("tritanopia", 3.0)];
@@ -402,6 +419,8 @@ pub(super) const ACCESSIBILITY: &[Item] = &[
     Item::Choice { label: "Game Speed", cvar: "a11y_gamespeed", choices: GAME_SPEED },
     toggle("Auto-aim", "assist_autoaim"),
     Item::Sub { label: "Auto-aim Settings", page: Page::AutoAim },
+    toggle("Auto-fire", "assist_autofire"),
+    toggle("Touch Auto-fire", "touch_autofire"),
 ];
 
 pub(super) const HUD: &[Item] = &[

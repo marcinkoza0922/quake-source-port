@@ -526,6 +526,9 @@ zh-TW 鉤爪收回前能飛多遠
 @ How visible the on-screen controls are
 zh-TW 螢幕操控按鈕的可見度
 
+@ Size of the menus and their buttons while you use the touchscreen
+zh-TW 使用觸控螢幕時選單及其按鈕的大小
+
 @ Impact Lifetime
 zh-TW 彈痕存留時間
 
@@ -613,8 +616,8 @@ zh-TW 最長凍結（毫秒）
 @ Look Down
 zh-TW 向下看
 
-@ Look Speed
-zh-TW 視角速度
+@ Look Acceleration
+zh-TW 視角加速
 
 @ Look Up
 zh-TW 向上看
@@ -720,6 +723,9 @@ zh-TW 瞄準目標時顏色
 
 @ Opacity
 zh-TW 不透明度
+
+@ Menu Size
+zh-TW 選單大小
 
 @ Opacity of the grenade arc
 zh-TW 榴彈軌跡的不透明度
@@ -1781,6 +1787,18 @@ zh-TW 方向性光照
 @ Light Specular
 zh-TW 光照高光
 
+@ Gameplay Overlay
+zh-TW 螢幕控制
+
+@ Layout
+zh-TW 配置
+
+@ Preview
+zh-TW 預覽
+
+@ Resume Game
+zh-TW 繼續遊戲
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ zh-TW 傾斜手把時視角上下傾斜的幅度（俯仰軸）
 @ How far the view turns left and right when you turn the controller (yaw axis)
 zh-TW 轉動手把時視角左右轉動的幅度（偏航軸）
 
-@ How far the view turns when you drag on the right half of the screen
-zh-TW 在螢幕右半邊拖曳時視角轉動的幅度
-
 @ How fast the boomerang flies (units per second)
 zh-TW 迴力鏢的飛行速度（每秒單位數）
 
@@ -2038,9 +2053,6 @@ zh-TW 無論傷害或擊殺加成增加多少，單次凍結都不會超過此�
 
 @ Oldest marks and nails are recycled at this shared limit
 zh-TW 達到此共用上限時會回收最舊的痕跡與鐵釘
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-zh-TW 螢幕搖桿與按鈕：自動會在觸碰後顯示，並在使用其他裝置時隱藏
 
 @ Only autosaves: quicksaves and the Save menu are off
 zh-TW 僅限自動存檔：停用快速存檔與存檔選單
@@ -2412,6 +2424,18 @@ zh-TW 使用預烘焙的光照方向（.dlit）在牆面與模型上呈現細膩
 @ Strength of the highlights from directional lighting
 zh-TW 方向性光照產生的高光強度
 
+@ How far the view turns when you swipe
+zh-TW 滑動時視角轉動的幅度
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+zh-TW 準星靠近可見目標時減慢轉動。死鬥模式需要伺服器允許。高檔還會將準星輕微拉向目標。
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+zh-TW 對調移動區、瞄準區和遊戲按鈕的位置
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+zh-TW 滑動選擇，放開裝備
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ zh-TW 選擇關卡
 @ Really quit?
 zh-TW 確定要離開嗎？
 
+@ Quit
+zh-TW 離開
+
 @ You died
 zh-TW 你死了
 
@@ -2557,9 +2584,6 @@ zh-TW 重新開始關卡
 
 @ Return to main menu
 zh-TW 返回主選單
-
-@ (disabled)
-zh-TW （已停用）
 
 @ (fixed for this game)
 zh-TW （此遊戲已固定）
@@ -3450,6 +3474,15 @@ zh-TW 沒有符合條件的伺服器
 @ Server search failed
 zh-TW 搜尋伺服器失敗
 
+@ Slide to select, release to equip
+zh-TW 自動模式跟隨目前的輸入裝置。關閉螢幕控制後仍可開啟選單。
+
+@ Tap to swap weapons.
+zh-TW 輕觸切換到上一把武器。
+
+@ Hold and slide to select.
+zh-TW 按住並滑動以選擇武器。
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ zh-TW 100% 無傷
 
 @ Damage Skull
 zh-TW 受傷骷髏
+
+@ A mild speed boost for fast swipes
+zh-TW 快速滑動時略微提高轉動速度
+
+@ Phone Gyro
+zh-TW 手機陀螺儀
+
+@ look zone
+zh-TW 視角區
+
+@ while firing
+zh-TW 開火時
+
+@ Uses the Android device’s motion sensor.
+zh-TW 使用 Android 裝置的動作感測器。
+
+@ Edit Layout
+zh-TW 編輯配置
+
+@ Drag to move
+zh-TW 拖曳以移動
+
+@ Auto-fire
+zh-TW 自動開火
+
+@ Touch Auto-fire
+zh-TW 觸控自動開火
+
+@ Move-side Fire
+zh-TW 移動側開火鍵
+
+@ Touch Haptics
+zh-TW 觸控震動
+
+@ Add a Fire button on the move side.
+zh-TW 在移動控制側新增開火鍵。
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+zh-TW 在本機遊戲中自動射擊準星瞄準的怪物（鍵盤、滑鼠、控制器）。
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+zh-TW 在本機遊戲中自動射擊準星瞄準的怪物（觸控螢幕）。
+
+@ Vibrate on button presses and damage (Android).
+zh-TW 按下按鈕或受到傷害時震動（Android）。
+
+@ Swipe left or right to cycle.
+zh-TW 左右滑動切換武器。
+
+# Options page group headings.
+
+@ General
+zh-TW 一般
+
+@ Saving
+zh-TW 存檔
+
+@ Lighting
+zh-TW 光照
+
+@ Effects
+zh-TW 效果
+
+@ Models
+zh-TW 模型
+
+@ Post-processing
+zh-TW 後製處理
+
+@ World
+zh-TW 世界

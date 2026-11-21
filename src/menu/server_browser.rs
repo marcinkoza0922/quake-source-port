@@ -6,6 +6,7 @@ use crate::net::browser::{BrowserFilter, SavedServers, ServerTab};
 mod draw;
 pub(super) use draw::server_browser_button;
 mod filters;
+mod touch;
 
 const X: f32 = 48.0;
 const W: f32 = 544.0;

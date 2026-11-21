@@ -526,6 +526,9 @@ el Πόσο μακριά πετά ο γάντζος πριν επιστρέψε�
 @ How visible the on-screen controls are
 el Πόσο ορατά είναι τα χειριστήρια οθόνης
 
+@ Size of the menus and their buttons while you use the touchscreen
+el Μέγεθος των μενού και των κουμπιών τους όταν χρησιμοποιείτε την οθόνη αφής
+
 @ Impact Lifetime
 el Διάρκεια ιχνών πρόσκρουσης
 
@@ -613,8 +616,8 @@ el Μέγιστο πάγωμα (ms)
 @ Look Down
 el Κοίτα κάτω
 
-@ Look Speed
-el Ταχύτητα θέας
+@ Look Acceleration
+el Επιτάχυνση θέασης
 
 @ Look Up
 el Κοίτα πάνω
@@ -720,6 +723,9 @@ el Χρώμα σε στόχο
 
 @ Opacity
 el Αδιαφάνεια
+
+@ Menu Size
+el Μέγεθος μενού
 
 @ Opacity of the grenade arc
 el Αδιαφάνεια της τροχιάς χειροβομβίδας
@@ -1781,6 +1787,18 @@ el Κατευθυντικός φωτισμός
 @ Light Specular
 el Γυαλάδα φωτός
 
+@ Gameplay Overlay
+el Επικάλυψη παιχνιδιού
+
+@ Layout
+el Διάταξη
+
+@ Preview
+el Προεπισκόπηση
+
+@ Resume Game
+el Συνέχισε το παιχνίδι
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ el Πόσο γέρνει η θέα πάνω-κάτω όταν γέρνεις τ�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 el Πόσο γυρίζει η θέα αριστερά-δεξιά όταν γυρίζεις το χειριστήριο (άξονας yaw)
 
-@ How far the view turns when you drag on the right half of the screen
-el Πόσο γυρίζει η θέα όταν σέρνεις στο δεξί μισό της οθόνης
-
 @ How fast the boomerang flies (units per second)
 el Πόσο γρήγορα πετά το μπούμερανγκ (μονάδες ανά δευτερόλεπτο)
 
@@ -2038,9 +2053,6 @@ el Κανένα πάγωμα δεν διαρκεί περισσότερο από
 
 @ Oldest marks and nails are recycled at this shared limit
 el Τα παλαιότερα σημάδια και καρφιά ανακυκλώνονται σε αυτό το κοινό όριο
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-el Αναλογικό και κουμπιά στην οθόνη: το αυτόματο τα δείχνει μετά από άγγιγμα και τα κρύβει όταν χρησιμοποιείται άλλη συσκευή
 
 @ Only autosaves: quicksaves and the Save menu are off
 el Μόνο αυτόματες αποθηκεύσεις: η γρήγορη αποθήκευση και το μενού Αποθήκευσης είναι ανενεργά
@@ -2412,6 +2424,18 @@ el Χρησιμοποιεί προϋπολογισμένες κατευθύνσ�
 @ Strength of the highlights from directional lighting
 el Ένταση των ανταυγειών από τον κατευθυντικό φωτισμό
 
+@ How far the view turns when you swipe
+el Πόσο μακριά στρέφεται η προβολή όταν σύρετε
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+el Επιβραδύνει το σάρωση κοντά σε ορατούς στόχους. Το Deathmatch απαιτεί άδεια διακομιστή. Στην υψηλή ρύθμιση το στόχαστρο έλκεται ελαφρά προς τον στόχο.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+el Εναλλάσσει τις πλευρές για κίνηση, στόχευση και κουμπιά παιχνιδιού
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+el Αυτόματα ακολουθεί την ενεργή συσκευή εισόδου. Το μενού παραμένει διαθέσιμο όταν η επικάλυψη είναι απενεργοποιημένη.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ el Επιλογή επιπέδου
 @ Really quit?
 el Σίγουρα έξοδος;
 
+@ Quit
+el Έξοδος
+
 @ You died
 el Πέθανες
 
@@ -2557,9 +2584,6 @@ el Επανεκκίνηση επιπέδου
 
 @ Return to main menu
 el Επιστροφή στο κεντρικό μενού
-
-@ (disabled)
-el (ανενεργό)
 
 @ (fixed for this game)
 el (σταθερό για αυτό το παιχνίδι)
@@ -3450,6 +3474,15 @@ el Δεν υπάρχουν διακομιστές που να ταιριάζου
 @ Server search failed
 el Η αναζήτηση διακομιστών απέτυχε
 
+@ Slide to select, release to equip
+el Σύρετε για επιλογή, αφήστε το για εξοπλισμό
+
+@ Tap to swap weapons.
+el Πατήστε για να ανταλλάξετε όπλα.
+
+@ Hold and slide to select.
+el Κρατήστε πατημένο και σύρετε για να επιλέξετε.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ el 100% χωρίς ζημιά
 
 @ Damage Skull
 el Κρανίο ζημιάς
+
+@ A mild speed boost for fast swipes
+el Οι γρήγορες σαρώσεις στρέφουν ελαφρώς πιο γρήγορα την κάμερα
+
+@ Phone Gyro
+el Γυροσκόπιο τηλεφώνου
+
+@ look zone
+el ζώνη σκόπευσης
+
+@ while firing
+el κατά τη βολή
+
+@ Uses the Android device’s motion sensor.
+el Χρησιμοποιεί τον αισθητήρα κίνησης της συσκευής Android.
+
+@ Edit Layout
+el Επεξεργασία διάταξης
+
+@ Drag to move
+el Σύρετε για μετακίνηση
+
+@ Auto-fire
+el Αυτόματη βολή
+
+@ Touch Auto-fire
+el Αυτόματη βολή αφής
+
+@ Move-side Fire
+el Βολή στην πλευρά κίνησης
+
+@ Touch Haptics
+el Δόνηση αφής
+
+@ Add a Fire button on the move side.
+el Προσθέτει κουμπί βολής στην πλευρά κίνησης.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+el Πυροβολεί τα τέρατα στο στόχαστρο σε τοπικό παιχνίδι (πληκτρολόγιο, ποντίκι, χειριστήριο).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+el Πυροβολεί τα τέρατα στο στόχαστρο σε τοπικό παιχνίδι (οθόνη αφής).
+
+@ Vibrate on button presses and damage (Android).
+el Δόνηση σε πατήματα κουμπιών και ζημιά (Android).
+
+@ Swipe left or right to cycle.
+el Σύρετε αριστερά ή δεξιά για αλλαγή όπλου.
+
+# Options page group headings.
+
+@ General
+el Γενικά
+
+@ Saving
+el Αποθήκευση
+
+@ Lighting
+el Φωτισμός
+
+@ Effects
+el Εφέ
+
+@ Models
+el Μοντέλα
+
+@ Post-processing
+el Μετεπεξεργασία
+
+@ World
+el Κόσμος

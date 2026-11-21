@@ -526,6 +526,9 @@ cs Jak daleko hák doletí, než se vrátí
 @ How visible the on-screen controls are
 cs Jak viditelné je ovládání na obrazovce
 
+@ Size of the menus and their buttons while you use the touchscreen
+cs Velikost nabídek a jejich tlačítek při ovládání dotykovou obrazovkou
+
 @ Impact Lifetime
 cs Trvání zásahů
 
@@ -613,8 +616,8 @@ cs Nejdelší zmrazení (ms)
 @ Look Down
 cs Dívat se dolů
 
-@ Look Speed
-cs Rychlost rozhlížení
+@ Look Acceleration
+cs Zrychlení pohledu
 
 @ Look Up
 cs Dívat se nahoru
@@ -720,6 +723,9 @@ cs Barva na cíli
 
 @ Opacity
 cs Krytí
+
+@ Menu Size
+cs Velikost nabídek
 
 @ Opacity of the grenade arc
 cs Krytí dráhy granátu
@@ -1781,6 +1787,18 @@ cs Směrové osvětlení
 @ Light Specular
 cs Odlesky světla
 
+@ Gameplay Overlay
+cs Překryvná hratelnost
+
+@ Layout
+cs Rozložení
+
+@ Preview
+cs Náhled
+
+@ Resume Game
+cs Obnovte hru
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ cs Jak moc se pohled naklání nahoru a dolů, když nakloníte ovladač (osa sk
 @ How far the view turns left and right when you turn the controller (yaw axis)
 cs Jak moc se pohled otáčí doleva a doprava, když otočíte ovladačem (osa otáčení)
 
-@ How far the view turns when you drag on the right half of the screen
-cs Jak moc se pohled otočí, když táhnete po pravé polovině obrazovky
-
 @ How fast the boomerang flies (units per second)
 cs Jak rychle bumerang letí (jednotky za sekundu)
 
@@ -2038,9 +2053,6 @@ cs Žádné zmrazení netrvá déle, bez ohledu na poškození nebo bonus za zab
 
 @ Oldest marks and nails are recycled at this shared limit
 cs Při dosažení tohoto společného limitu se nejstarší stopy a hřebíky recyklují
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-cs Páčka a tlačítka na obrazovce: auto je zobrazí po dotyku a skryje při použití jiného zařízení
 
 @ Only autosaves: quicksaves and the Save menu are off
 cs Jen automatické ukládání: rychlé ukládání a nabídka Uložit jsou vypnuté
@@ -2412,6 +2424,18 @@ cs Používá předpočítané směry světla (.dlit) pro jemné stínování a 
 @ Strength of the highlights from directional lighting
 cs Síla odlesků ze směrového osvětlení
 
+@ How far the view turns when you swipe
+cs Jak daleko se pohled otočí, když přejedete prstem
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+cs Zpomalí vaše přejetí poblíž viditelných cílů. Deathmatch vyžaduje povolení serveru. Při vysokém nastavení zaměřovač také lehce přitahuje k cíli.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+cs Vymění strany pro tlačítka pohybu, zaměřování a hraní
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+cs Auto následuje aktivní vstupní zařízení. Nabídka zůstane dostupná, když je překryvná vrstva vypnutá.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ cs Výběr úrovně
 @ Really quit?
 cs Opravdu ukončit?
 
+@ Quit
+cs Ukončit
+
 @ You died
 cs Zemřeli jste
 
@@ -2557,9 +2584,6 @@ cs Restartovat úroveň
 
 @ Return to main menu
 cs Zpět do hlavní nabídky
-
-@ (disabled)
-cs (vypnuto)
 
 @ (fixed for this game)
 cs (pevně dané pro tuto hru)
@@ -3450,6 +3474,15 @@ cs Žádné odpovídající servery
 @ Server search failed
 cs Hledání serverů se nezdařilo
 
+@ Slide to select, release to equip
+cs Posunutím vyberete, uvolněním vybavíte
+
+@ Tap to swap weapons.
+cs Klepnutím vyměníte zbraně.
+
+@ Hold and slide to select.
+cs Podržením a posunutím vyberte.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ cs 100% bez poškození
 
 @ Damage Skull
 cs Lebka při zásahu
+
+@ A mild speed boost for fast swipes
+cs Při rychlém přejetí se pohled mírně zrychlí
+
+@ Phone Gyro
+cs Gyroskop telefonu
+
+@ look zone
+cs oblast pohledu
+
+@ while firing
+cs při střelbě
+
+@ Uses the Android device’s motion sensor.
+cs Používá snímač pohybu zařízení Android.
+
+@ Edit Layout
+cs Upravit rozložení
+
+@ Drag to move
+cs Přesun přetažením
+
+@ Auto-fire
+cs Automatická střelba
+
+@ Touch Auto-fire
+cs Dotyková automatická střelba
+
+@ Move-side Fire
+cs Střelba na straně pohybu
+
+@ Touch Haptics
+cs Dotykové vibrace
+
+@ Add a Fire button on the move side.
+cs Přidá tlačítko střelby na stranu pohybu.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+cs V místní hře střílí na monstra v zaměřovači (klávesnice, myš, ovladač).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+cs V místní hře střílí na monstra v zaměřovači (dotyková obrazovka).
+
+@ Vibrate on button presses and damage (Android).
+cs Vibruje při stisku tlačítek a utrpění zranění (Android).
+
+@ Swipe left or right to cycle.
+cs Přejetím doleva nebo doprava přepnete zbraň.
+
+# Options page group headings.
+
+@ General
+cs Obecné
+
+@ Saving
+cs Ukládání
+
+@ Lighting
+cs Osvětlení
+
+@ Effects
+cs Efekty
+
+@ Models
+cs Modely
+
+@ Post-processing
+cs Postprocessing
+
+@ World
+cs Svět

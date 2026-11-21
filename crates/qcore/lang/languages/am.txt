@@ -526,6 +526,9 @@ am መንጠቆው ከመመለሱ በፊት ምን ያህል ይበራል
 @ How visible the on-screen controls are
 am በስክሪን ላይ ያሉ መቆጣጠሪያዎች ምን ያህል ይታያሉ
 
+@ Size of the menus and their buttons while you use the touchscreen
+am የንክኪ ማያ ገጹን ሲጠቀሙ የምናሌዎቹና የአዝራሮቻቸው መጠን
+
 @ Impact Lifetime
 am የተጽዕኖ ዕድሜ
 
@@ -613,8 +616,8 @@ am ረጅሙ መቀዝቀዝ (ms)
 @ Look Down
 am ወደ ታች ተመልከት
 
-@ Look Speed
-am የእይታ ፍጥነት
+@ Look Acceleration
+am የዕይታ ማፋጠን
 
 @ Look Up
 am ወደ ላይ ተመልከት
@@ -720,6 +723,9 @@ am የዒላማ ቀለም
 
 @ Opacity
 am ግልጽነት
+
+@ Menu Size
+am የምናሌ መጠን
 
 @ Opacity of the grenade arc
 am የቦምብ ቅስት ግልጽነት
@@ -1781,6 +1787,18 @@ am አቅጣጫዊ ብርሃን
 @ Light Specular
 am የብርሃን አንጸባራቂነት
 
+@ Gameplay Overlay
+am የጨዋታ ተደራቢ
+
+@ Layout
+am አቀማመጥ
+
+@ Preview
+am ቅድመ እይታ
+
+@ Resume Game
+am ጨዋታውን ከቆመበት ቀጥልበት
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ am መቆጣጠሪያውን ሲያዘነብሉ እይታው ወደ ላይና ወ
 @ How far the view turns left and right when you turn the controller (yaw axis)
 am መቆጣጠሪያውን ሲያዞሩ እይታው ወደ ግራና ወደ ቀኝ ምን ያህል ይዞራል (የግራ-ቀኝ ዘንግ)
 
-@ How far the view turns when you drag on the right half of the screen
-am በስክሪኑ ቀኝ ግማሽ ላይ ሲጎትቱ እይታው ምን ያህል ይዞራል
-
 @ How fast the boomerang flies (units per second)
 am ቡሜራንጉ ምን ያህል በፍጥነት ይበራል (units በሰከንድ)
 
@@ -2038,9 +2053,6 @@ am ጉዳት ወይም የግድያ ጉርሻ ምንም ያህል ቢጨምር �
 
 @ Oldest marks and nails are recycled at this shared limit
 am የቆዩ ምልክቶችና ሚስማሮች በዚህ የጋራ ገደብ እንደገና ጥቅም ላይ ይውላሉ
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-am በስክሪን ላይ ያሉ ስቲክና አዝራሮች፦ ራስ-ሰር ከንክኪ በኋላ ያሳያቸዋል ሌላ መሳሪያ ሲጠቀሙ ይደብቃቸዋል
 
 @ Only autosaves: quicksaves and the Save menu are off
 am ራስ-ማስቀመጫዎች ብቻ፦ ፈጣን ማስቀመጫዎችና የማስቀመጫ ምናሌ ጠፍተዋል
@@ -2412,6 +2424,18 @@ am በግድግዳዎች እና ሞዴሎች ላይ ለስላሳ ጥላ እና �
 @ Strength of the highlights from directional lighting
 am ከአቅጣጫዊ ብርሃን የሚገኘው አንጸባራቂ ጥንካሬ
 
+@ How far the view turns when you swipe
+am ሲያንሸራትቱ እይታው ምን ያህል ርቀት ይቀየራል።
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+am በሚታዩ ዒላማዎች አቅራቢያ ማንሸራተትዎን ያቀዘቅዘዋል። Deathmatch የአገልጋይ ፍቃድ ያስፈልገዋል። ከፍተኛ ቅንብር ምልክቱን በቀስታ ወደ ዒላማው ይስባል።
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+am ጎኖቹን ለእንቅስቃሴ፣ አላማ እና የጨዋታ አዝራሮች ይቀይራል።
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+am አውቶማቲክ የገቢር ግቤት መሣሪያውን ይከተላል። ተደራቢው ሲጠፋ ምናሌው እንዳለ ይቆያል።
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ am ደረጃ ምረጥ
 @ Really quit?
 am በእርግጥ ይውጡ?
 
+@ Quit
+am ውጣ
+
 @ You died
 am ሞተዋል
 
@@ -2557,9 +2584,6 @@ am ደረጃውን እንደገና ጀምር
 
 @ Return to main menu
 am ወደ ዋናው ምናሌ ተመለስ
-
-@ (disabled)
-am (ተሰናክሏል)
 
 @ (fixed for this game)
 am (ለዚህ ጨዋታ ቋሚ)
@@ -3450,6 +3474,15 @@ am ከማጣሪያዎቹ ጋር የሚዛመድ አገልጋይ የለም
 @ Server search failed
 am አገልጋይ መፈለግ አልተሳካም
 
+@ Slide to select, release to equip
+am ለመምረጥ ያንሸራትቱ፣ ለመታጠቅ ይልቀቁ
+
+@ Tap to swap weapons.
+am የጦር መሳሪያዎችን ለመለዋወጥ መታ ያድርጉ።
+
+@ Hold and slide to select.
+am ለመምረጥ ያዝ እና ያንሸራትቱ።
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ am 100% ያለ ጉዳት
 
 @ Damage Skull
 am የጉዳት ቅል
+
+@ A mild speed boost for fast swipes
+am ፈጣን ማንሸራተት ዕይታውን ትንሽ ፈጠን ብሎ ያዞራል
+
+@ Phone Gyro
+am የስልክ ጋይሮስኮፕ
+
+@ look zone
+am የዕይታ ዞን
+
+@ while firing
+am በመተኮስ ጊዜ
+
+@ Uses the Android device’s motion sensor.
+am የAndroid መሣሪያውን የእንቅስቃሴ ዳሳሽ ይጠቀማል።
+
+@ Edit Layout
+am አቀማመጥ አርትዕ
+
+@ Drag to move
+am ለማንቀሳቀስ ይጎትቱ
+
+@ Auto-fire
+am ራስ-ሰር ተኩስ
+
+@ Touch Auto-fire
+am የንክኪ ራስ-ሰር ተኩስ
+
+@ Move-side Fire
+am ተኩስ በእንቅስቃሴ በኩል
+
+@ Touch Haptics
+am የንክኪ ንዝረት
+
+@ Add a Fire button on the move side.
+am በእንቅስቃሴ በኩል የተኩስ አዝራር ይጨምራል።
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+am በአካባቢያዊ ጨዋታ ላይ በመስቀል ምልክቱ ሥር ያሉ ጭራቆችን ይተኩሳል (ቁልፍ ሰሌዳ፣ መዳፊት፣ መቆጣጠሪያ)።
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+am በአካባቢያዊ ጨዋታ ላይ በመስቀል ምልክቱ ሥር ያሉ ጭራቆችን ይተኩሳል (የንክኪ ማያ)።
+
+@ Vibrate on button presses and damage (Android).
+am አዝራር ሲጫን ወይም ጉዳት ሲደርስ ይንዘረዘራል (Android)።
+
+@ Swipe left or right to cycle.
+am መሣሪያ ለመቀየር ወደ ግራ ወይም ቀኝ ያንሸራትቱ።
+
+# Options page group headings.
+
+@ General
+am አጠቃላይ
+
+@ Saving
+am ማስቀመጥ
+
+@ Lighting
+am ብርሃን
+
+@ Effects
+am ተጽዕኖዎች
+
+@ Models
+am ሞዴሎች
+
+@ Post-processing
+am ድህረ-ሂደት
+
+@ World
+am ዓለም

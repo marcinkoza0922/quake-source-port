@@ -526,6 +526,9 @@ mk Колку далеку лета куката пред да се врати
 @ How visible the on-screen controls are
 mk Колку се видливи контролите на екранот
 
+@ Size of the menus and their buttons while you use the touchscreen
+mk Големина на менијата и нивните копчиња при користење на екранот на допир
+
 @ Impact Lifetime
 mk Траење на трагите
 
@@ -613,8 +616,8 @@ mk Најдолго замрзнување (мс)
 @ Look Down
 mk Погледни надолу
 
-@ Look Speed
-mk Брзина на погледот
+@ Look Acceleration
+mk Забрзување на погледот
 
 @ Look Up
 mk Погледни нагоре
@@ -720,6 +723,9 @@ mk Боја при цел
 
 @ Opacity
 mk Непроѕирност
+
+@ Menu Size
+mk Големина на менијата
 
 @ Opacity of the grenade arc
 mk Непроѕирност на патеката на гранатата
@@ -1781,6 +1787,18 @@ mk Насочено осветлување
 @ Light Specular
 mk Одблесок на светлина
 
+@ Gameplay Overlay
+mk Преклопување на игра
+
+@ Layout
+mk Распоред
+
+@ Preview
+mk Преглед
+
+@ Resume Game
+mk Продолжете со играта
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ mk Колку погледот се навалува горе-долу кога 
 @ How far the view turns left and right when you turn the controller (yaw axis)
 mk Колку погледот се врти лево-десно кога го вртиш контролерот (оска yaw)
 
-@ How far the view turns when you drag on the right half of the screen
-mk Колку се врти погледот кога влечеш по десната половина на екранот
-
 @ How fast the boomerang flies (units per second)
 mk Колку брзо лета бумерангот (единици во секунда)
 
@@ -2038,9 +2053,6 @@ mk Ниедно замрзнување не трае подолго од ова,
 
 @ Oldest marks and nails are recycled at this shared limit
 mk Најстарите траги и клинци се рециклираат при овој заеднички лимит
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-mk Стик и копчиња на екранот: авто ги прикажува по допир и ги крие кога се користи друг уред
 
 @ Only autosaves: quicksaves and the Save menu are off
 mk Само автозачувувања: брзото зачувување и менито за зачувување се исклучени
@@ -2412,6 +2424,18 @@ mk Користи претходно пресметани насоки на св
 @ Strength of the highlights from directional lighting
 mk Јачина на одблесоците од насоченото осветлување
 
+@ How far the view turns when you swipe
+mk Колку далеку се врти приказот кога ќе поминете
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+mk Го успорува вашето повлекување во близина на видливи цели. Deathmatch бара дозвола од серверот. На високо ниво, нишанот се повлекува малку кон целта.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+mk Ги заменува страните за копчиња за движење, нишање и игра
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+mk Автоматски го следи активниот влезен уред. Менито останува достапно кога преклопувањето е исклучено.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ mk Избор на ниво
 @ Really quit?
 mk Навистина излез?
 
+@ Quit
+mk Излез
+
 @ You died
 mk Загина
 
@@ -2557,9 +2584,6 @@ mk Рестартирај ниво
 
 @ Return to main menu
 mk Врати се во главното мени
-
-@ (disabled)
-mk (оневозможено)
 
 @ (fixed for this game)
 mk (фиксно за оваа игра)
@@ -3450,6 +3474,15 @@ mk Нема сервери што одговараат на филтрите
 @ Server search failed
 mk Пребарувањето сервери не успеа
 
+@ Slide to select, release to equip
+mk Лизгајте за да изберете, пуштете го за опремување
+
+@ Tap to swap weapons.
+mk Допрете за да го замените оружјето.
+
+@ Hold and slide to select.
+mk Држете и лизгајте за да изберете.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ mk 100% без штета
 
 @ Damage Skull
 mk Череп за штета
+
+@ A mild speed boost for fast swipes
+mk Брзите повлекувања го вртат погледот малку побрзо
+
+@ Phone Gyro
+mk Жироскоп на телефонот
+
+@ look zone
+mk зона за поглед
+
+@ while firing
+mk при пукање
+
+@ Uses the Android device’s motion sensor.
+mk Го користи сензорот за движење на уредот Android.
+
+@ Edit Layout
+mk Уреди го распоредот
+
+@ Drag to move
+mk Повлечете за преместување
+
+@ Auto-fire
+mk Автоматско пукање
+
+@ Touch Auto-fire
+mk Автоматско пукање на допир
+
+@ Move-side Fire
+mk Пукање на страната за движење
+
+@ Touch Haptics
+mk Вибрации на допир
+
+@ Add a Fire button on the move side.
+mk Додава копче за пукање на страната за движење.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+mk Пука во чудовишта под нишанот во локална игра (тастатура, глушец, контролер).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+mk Пука во чудовишта под нишанот во локална игра (екран на допир).
+
+@ Vibrate on button presses and damage (Android).
+mk Вибрира при притискање копчиња и примање штета (Android).
+
+@ Swipe left or right to cycle.
+mk Лизгај лево или десно за промена на оружјето.
+
+# Options page group headings.
+
+@ General
+mk Општо
+
+@ Saving
+mk Зачувување
+
+@ Lighting
+mk Осветлување
+
+@ Effects
+mk Ефекти
+
+@ Models
+mk Модели
+
+@ Post-processing
+mk Дополнителна обработка
+
+@ World
+mk Свет

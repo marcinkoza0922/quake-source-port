@@ -526,6 +526,9 @@ bg Колко далеч лети куката, преди да се прибе�
 @ How visible the on-screen controls are
 bg Колко видими са екранните контроли
 
+@ Size of the menus and their buttons while you use the touchscreen
+bg Размер на менютата и бутоните им при използване на сензорния екран
+
 @ Impact Lifetime
 bg Живот на следите от попадения
 
@@ -613,8 +616,8 @@ bg Най-дълго замръзване (мс)
 @ Look Down
 bg Погледни надолу
 
-@ Look Speed
-bg Скорост на погледа
+@ Look Acceleration
+bg Ускорение на погледа
 
 @ Look Up
 bg Погледни нагоре
@@ -720,6 +723,9 @@ bg Цвят при цел
 
 @ Opacity
 bg Непрозрачност
+
+@ Menu Size
+bg Размер на менютата
 
 @ Opacity of the grenade arc
 bg Непрозрачност на траекторията на гранатата
@@ -1781,6 +1787,18 @@ bg Насочено осветление
 @ Light Specular
 bg Отблясъци на светлината
 
+@ Gameplay Overlay
+bg Наслагване на играта
+
+@ Layout
+bg Оформление
+
+@ Preview
+bg Преглед
+
+@ Resume Game
+bg Възобновете играта
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ bg Колко се накланя погледът нагоре и надолу 
 @ How far the view turns left and right when you turn the controller (yaw axis)
 bg Колко се завърта погледът наляво и надясно при завъртане на контролера (ос на завъртане)
 
-@ How far the view turns when you drag on the right half of the screen
-bg Колко се завърта погледът, когато плъзгаш по дясната половина на екрана
-
 @ How fast the boomerang flies (units per second)
 bg Колко бързо лети бумерангът (единици в секунда)
 
@@ -2038,9 +2053,6 @@ bg Нито едно замръзване не трае по-дълго, кол�
 
 @ Oldest marks and nails are recycled at this shared limit
 bg Най-старите следи и гвоздеи се използват отново при този общ лимит
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-bg Екранен стик и бутони: авто ги показва след докосване и ги скрива при ползване на друго устройство
 
 @ Only autosaves: quicksaves and the Save menu are off
 bg Само автозаписи: бързият запис и менюто за запис са изключени
@@ -2412,6 +2424,18 @@ bg Използва предварително изчислени посоки �
 @ Strength of the highlights from directional lighting
 bg Сила на отблясъците от насоченото осветление
 
+@ How far the view turns when you swipe
+bg Колко далеч се обръща изгледът, когато плъзнете
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+bg Забавя плъзгането ви близо до видими цели. Deathmatch изисква разрешение от сървъра. При висока настройка мерникът леко се придърпва към целта.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+bg Разменя страните за бутони за движение, прицелване и игра
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+bg Автоматично следва активното входно устройство. Менюто остава достъпно, когато наслагването е изключено.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ bg Избор на ниво
 @ Really quit?
 bg Наистина ли изход?
 
+@ Quit
+bg Изход
+
 @ You died
 bg Ти загина
 
@@ -2557,9 +2584,6 @@ bg Започни нивото отначало
 
 @ Return to main menu
 bg Към главното меню
-
-@ (disabled)
-bg (недостъпно)
 
 @ (fixed for this game)
 bg (фиксирано за тази игра)
@@ -3450,6 +3474,15 @@ bg Няма сървъри, които отговарят на филтрите
 @ Server search failed
 bg Търсенето на сървъри е неуспешно
 
+@ Slide to select, release to equip
+bg Плъзнете за избор, пуснете за оборудване
+
+@ Tap to swap weapons.
+bg Докоснете, за да размените оръжия.
+
+@ Hold and slide to select.
+bg Задръжте и плъзнете, за да изберете.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ bg 100% без щети
 
 @ Damage Skull
 bg Череп за щети
+
+@ A mild speed boost for fast swipes
+bg Бързото плъзгане леко ускорява завъртането
+
+@ Phone Gyro
+bg Жироскоп на телефона
+
+@ look zone
+bg зона за поглед
+
+@ while firing
+bg при стрелба
+
+@ Uses the Android device’s motion sensor.
+bg Използва датчика за движение на устройството с Android.
+
+@ Edit Layout
+bg Редактиране на подредбата
+
+@ Drag to move
+bg Плъзнете за преместване
+
+@ Auto-fire
+bg Автоматична стрелба
+
+@ Touch Auto-fire
+bg Автострелба с докосване
+
+@ Move-side Fire
+bg Стрелба от страната на движение
+
+@ Touch Haptics
+bg Вибрация при докосване
+
+@ Add a Fire button on the move side.
+bg Добавя бутон за стрелба от страната за движение.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+bg Стреля по чудовища под мерника в локална игра (клавиатура, мишка, контролер).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+bg Стреля по чудовища под мерника в локална игра (сензорен екран).
+
+@ Vibrate on button presses and damage (Android).
+bg Вибрира при натискане на бутони и получаване на щети (Android).
+
+@ Swipe left or right to cycle.
+bg Плъзнете наляво или надясно за смяна на оръжието.
+
+# Options page group headings.
+
+@ General
+bg Общи
+
+@ Saving
+bg Запазване
+
+@ Lighting
+bg Осветление
+
+@ Effects
+bg Ефекти
+
+@ Models
+bg Модели
+
+@ Post-processing
+bg Последваща обработка
+
+@ World
+bg Свят

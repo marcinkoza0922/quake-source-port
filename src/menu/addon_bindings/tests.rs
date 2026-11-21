@@ -24,7 +24,7 @@ fn binding_capture_flashes_only_the_active_device_on_both_screens() {
             menu.bindings[K_MOUSE1 as usize] = Some("+attack".into());
             menu.bindings[K_RTRIGGER as usize] = Some("+attack".into());
             let (columns, top) = if page == Page::Controls {
-                ([(VALUE_X, BIND_PAD_X - 4.0), (BIND_PAD_X, PANEL_X + PANEL_W - 6.0)], PAGE_ROW0)
+                ([(VALUE_X, BIND_PAD_X - 4.0), (BIND_PAD_X, PANEL_X + PANEL_W - SCROLL_W - 3.0)], PAGE_ROW0)
             } else {
                 for _ in 0..3 { menu.key(K_TAB, &mut cv, false); }
                 ([(425.0, 515.0), (525.0, 615.0)], 282.0)

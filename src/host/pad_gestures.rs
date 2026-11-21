@@ -62,8 +62,10 @@ impl Host {
     }
 
     fn note_pad_device(&mut self) {
+        if self.input.last_device == Device::Touch {
+            qinput::release_touch(self);
+        }
         self.input.last_device = Device::Gamepad;
-        self.input.touch_shown = false;
     }
 
     /// Check controller gestures before normal input routing. Returns `true`

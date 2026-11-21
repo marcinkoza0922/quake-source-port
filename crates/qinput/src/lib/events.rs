@@ -114,12 +114,12 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
         InputEvent::GamepadAxis { value, .. } if value.abs() > 0.5 => Some(Device::Gamepad),
         _ => None,
     };
-    if let Some(d) = dev {
-        ctx.input().last_device = d;
-        if ctx.input().touch_shown {
-            ctx.input().touch_shown = false;
+    let typing = ctx.input().touch_typing && matches!(ev, InputEvent::Key { .. });
+    if let Some(d) = dev.filter(|_| !typing) {
+        if ctx.input().last_device == Device::Touch {
             release_touch(ctx);
         }
+        ctx.input().last_device = d;
     }
     match ev {
         InputEvent::Key { key, down } => key_event(ctx, key, down),
@@ -179,17 +179,26 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
             ctx.input().gyro = [pitch, yaw, roll];
             None
         }
-        InputEvent::Touch { id, phase, x, y, aspect } => {
+        InputEvent::Touch { id, phase, x, y, aspect, timestamp_ns } => {
+            if phase == touch::TouchPhase::Down {
+                ctx.input().last_device = Device::Touch;
+            }
             let cvars_on = { let id = ctx.input().cv.touch_enable; ctx.cvars().value(id) != 0.0 };
             if !cvars_on || ctx.input().dest != KeyDest::Game {
                 return None;
             }
             let inp = ctx.input();
-            inp.touch_shown = true;
+            if phase == touch::TouchPhase::Down {
+                inp.last_look = LookDevice::Touch;
+            }
             inp.touch_aspect = aspect.max(0.1);
-            let size_id = inp.cv.touch_size;
-            let lay = touch::TouchLayout { aspect: aspect.max(0.1), size: ctx.cvars().value(size_id) };
-            let cmds = ctx.input().touch.event(id, phase, [x, y], &lay);
+            let insets = inp.touch_insets;
+            let (size_cm, acceleration, buttons) = (inp.touch_size_cm, inp.cv.touch_acceleration, inp.touch_buttons);
+            let cv = ctx.cvars();
+            let mut lay = touch::TouchLayout::from_cvars(cv, aspect, insets);
+            lay.buttons = buttons;
+            let look = touch::TouchLook { size_cm, acceleration: cv.value(acceleration).clamp(0.0, 1.0) * 0.5 };
+            let cmds = ctx.input().touch.event(id, phase, [x, y], timestamp_ns, &lay, look);
             for c in cmds {
                 ctx.cbuf().add_text(&c);
             }
@@ -201,7 +210,9 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
             if !c {
                 inp.axes = [0.0; 6];
                 inp.gyro = [0.0; 3];
-                inp.last_device = Device::KeyboardMouse;
+                if inp.last_device == Device::Gamepad {
+                    inp.last_device = Device::KeyboardMouse;
+                }
             }
             None
         }
@@ -209,7 +220,7 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
 }
 
 /// Lift every finger, releasing held on-screen buttons.
-pub(super) fn release_touch<C: InputHost>(ctx: &mut C) {
+pub fn release_touch<C: InputHost>(ctx: &mut C) {
     for c in ctx.input().touch.release_all() {
         ctx.cbuf().add_text(&c);
     }

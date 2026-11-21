@@ -526,6 +526,9 @@ da Hvor langt krogen flyver, før den trækkes tilbage
 @ How visible the on-screen controls are
 da Hvor synlig skærmstyringen er
 
+@ Size of the menus and their buttons while you use the touchscreen
+da Størrelsen på menuerne og deres knapper, når du bruger touchskærmen
+
 @ Impact Lifetime
 da Nedslagenes levetid
 
@@ -613,8 +616,8 @@ da Længste frysning (ms)
 @ Look Down
 da Kig ned
 
-@ Look Speed
-da Kighastighed
+@ Look Acceleration
+da Kameraacceleration
 
 @ Look Up
 da Kig op
@@ -720,6 +723,9 @@ da Farve på mål
 
 @ Opacity
 da Opacitet
+
+@ Menu Size
+da Menustørrelse
 
 @ Opacity of the grenade arc
 da Granatbuens opacitet
@@ -1781,6 +1787,18 @@ da Retningsbestemt lys
 @ Light Specular
 da Lysreflekser
 
+@ Gameplay Overlay
+da Gameplay Overlay
+
+@ Layout
+da Layout
+
+@ Preview
+da Forhåndsvisning
+
+@ Resume Game
+da Genoptag spillet
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ da Hvor langt visningen vipper op og ned, når du vipper controlleren (pitch-aks
 @ How far the view turns left and right when you turn the controller (yaw axis)
 da Hvor langt visningen drejer til venstre og højre, når du drejer controlleren (yaw-akse)
 
-@ How far the view turns when you drag on the right half of the screen
-da Hvor langt visningen drejer, når du trækker på skærmens højre halvdel
-
 @ How fast the boomerang flies (units per second)
 da Hvor hurtigt boomerangen flyver (enheder pr. sekund)
 
@@ -2038,9 +2053,6 @@ da Ingen enkelt frysning varer længere end dette, uanset hvor meget skade eller
 
 @ Oldest marks and nails are recycled at this shared limit
 da De ældste mærker og søm genbruges ved denne fælles grænse
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-da Stick og knapper på skærmen: auto viser dem efter en berøring og skjuler dem, når en anden enhed bruges
 
 @ Only autosaves: quicksaves and the Save menu are off
 da Kun autogemninger: hurtig gemning og menuen Gem er slået fra
@@ -2412,6 +2424,18 @@ da Bruger forudberegnede lysretninger (.dlit) til subtil skygge og glans på væ
 @ Strength of the highlights from directional lighting
 da Styrke af højlys fra retningsbestemt belysning
 
+@ How far the view turns when you swipe
+da Hvor langt visningen drejer, når du swiper
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+da Sænker dit swipe nær synlige mål. Deathmatch kræver servertilladelse. På høj trækkes sigtet også lidt mod målet.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+da Skifter siderne ud med bevægelses-, sigte- og gameplay-knapper
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+da Auto følger den aktive inputenhed. Menuen forbliver tilgængelig, når overlejringen er slået fra.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ da Vælg bane
 @ Really quit?
 da Vil du virkelig afslutte?
 
+@ Quit
+da Afslut
+
 @ You died
 da Du døde
 
@@ -2557,9 +2584,6 @@ da Genstart bane
 
 @ Return to main menu
 da Tilbage til hovedmenuen
-
-@ (disabled)
-da (deaktiveret)
 
 @ (fixed for this game)
 da (fastlåst for dette spil)
@@ -3450,6 +3474,15 @@ da Ingen matchende servere
 @ Server search failed
 da Serversøgningen mislykkedes
 
+@ Slide to select, release to equip
+da Skub for at vælge, slip for at udstyre
+
+@ Tap to swap weapons.
+da Tryk for at bytte våben.
+
+@ Hold and slide to select.
+da Hold og skub for at vælge.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ da 100% uden skade
 
 @ Damage Skull
 da Skadekranium
+
+@ A mild speed boost for fast swipes
+da Hurtige strøg drejer visningen lidt hurtigere
+
+@ Phone Gyro
+da Telefonens gyro
+
+@ look zone
+da sigteområde
+
+@ while firing
+da ved skud
+
+@ Uses the Android device’s motion sensor.
+da Bruger Android-enhedens bevægelsessensor.
+
+@ Edit Layout
+da Rediger layout
+
+@ Drag to move
+da Træk for at flytte
+
+@ Auto-fire
+da Automatisk skydning
+
+@ Touch Auto-fire
+da Automatisk skydning ved berøring
+
+@ Move-side Fire
+da Skyd på bevægelsessiden
+
+@ Touch Haptics
+da Vibration ved berøring
+
+@ Add a Fire button on the move side.
+da Tilføjer en skydeknap på bevægelsessiden.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+da Skyder mod monstre i sigtekornet i lokale spil (tastatur, mus, controller).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+da Skyder mod monstre i sigtekornet i lokale spil (berøringsskærm).
+
+@ Vibrate on button presses and damage (Android).
+da Vibrerer ved knaptryk og skade (Android).
+
+@ Swipe left or right to cycle.
+da Stryg til venstre eller højre for at skifte våben.
+
+# Options page group headings.
+
+@ General
+da Generelt
+
+@ Saving
+da Gemning
+
+@ Lighting
+da Belysning
+
+@ Effects
+da Effekter
+
+@ Models
+da Modeller
+
+@ Post-processing
+da Efterbehandling
+
+@ World
+da Verden

@@ -19,9 +19,18 @@ impl Menu {
             }
             return;
         }
+        if self.screen == Screen::TouchEditor {
+            c.fade_screen();
+            self.classic_layout(c);
+            self.draw_touch_editor(c, cv);
+            return;
+        }
+        if self.tv_screen() {
+            return self.tv_draw(c, pic, cv, realtime);
+        }
         c.fade_screen();
         let base_scale = c.scale;
-        c.menu_layout();
+        self.classic_layout(c);
         if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Load | Screen::Save | Screen::Help | Screen::Demos | Screen::DirBrowser | Screen::ServerBrowser) {
             c.ox += CLASSIC.0;
             c.oy += CLASSIC.1;
@@ -54,8 +63,11 @@ impl Menu {
                     c.frame(72.0, y, w, 16.0, BORDER);
                     gold(c, 72.0 + (w - c.ptext_w(label)) / 2.0, y + 4.0, label);
                 }
-                let d = dot(pic);
-                c.pic(54.0, 32.0 + self.main_cursor as f32 * 20.0, d);
+                if self.touch_shortcut_index() != Some(self.main_cursor) {
+                    let d = dot(pic);
+                    c.pic(54.0, 32.0 + self.main_cursor as f32 * 20.0, d);
+                }
+                self.draw_touch_shortcut(c);
             }
             Screen::Help => self.help.draw(c),
             Screen::Mods => self.mods.draw(c, modmenu::Page::List, self.pad_ui, &self.glyphs),
@@ -95,11 +107,11 @@ impl Menu {
                 if self.searching() {
                     self.draw_search_results(c, cv);
                 } else {
-                    panel(c, ROW0, PAGES.len());
+                    panel(c, ROW0, PAGES.len(), self.game_running);
                     highlight(c, ROW0 + self.page_cursor as f32 * ROW_H);
                     for (i, (label, _)) in PAGES.iter().enumerate() {
                         let y = ROW0 + i as f32 * ROW_H + 2.0;
-                        c.text_center(320.0, y, label, TXT, FG);
+                        row_label(c, 0.0, y, label, FG);
                     }
                 }
             }
@@ -109,39 +121,63 @@ impl Menu {
             Screen::OptionsPage(Page::WeaponPriority) => {
                 self.draw_weapon_priority(c, pic, cv);
             }
+            Screen::OptionsPage(Page::Touch) => self.draw_touch_settings(c, cv),
             Screen::OptionsPage(page) => {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(PANEL_X - 40.0, 16.0, p);
                 title_c(c, pic, if is_net_page(page) { "gfx/p_multi.lmp" } else { "gfx/p_option.lmp" });
                 self.draw_page_title(c, page);
                 let total = self.page_len(page);
-                let n = self.page_vis(page);
-                let sc = self.page_scroll(page);
-                panel(c, PAGE_ROW0, n);
+                let height = self.page_row_height();
+                let offset = self.page_offset(page) / height;
+                let sc = offset.floor() as usize;
+                let end = (offset + self.page_vis(page) as f32).ceil() as usize;
+                let bottom = self.page_bottom(page);
+                panel_height(c, PAGE_ROW0, bottom - PAGE_ROW0, self.game_running);
+                c.clip_rows(Some((PAGE_ROW0, bottom)));
+                // faint stripes on every other row of a group, to read across to the value
+                let mut odd = false;
+                for i in 0..end.min(total) {
+                    if matches!(self.page_item(page, i), Item::Heading(_)) {
+                        odd = false;
+                        continue;
+                    }
+                    if odd && i >= sc {
+                        c.fill(PANEL_X + 2.0, self.page_row_y(page, i), PANEL_W - 4.0, height, ROW_STRIPE);
+                    }
+                    odd = !odd;
+                }
                 if self.opt_cursor < total
-                    && !matches!(self.page_item(page, self.opt_cursor), Item::Run { run: Run::BrowseServers, .. })
+                    && !matches!(self.page_item(page, self.opt_cursor), Item::Run { run: Run::BrowseServers, .. } | Item::Heading(_))
                 {
-                    highlight(c, self.page_row_y(page, self.opt_cursor));
+                    c.fill(PANEL_X + 2.0, self.page_row_y(page, self.opt_cursor), PANEL_W - 4.0, height, HILITE);
                 }
                 self.text_layouts.borrow_mut().clear();
-                for i in sc..sc + n {
+                for i in sc..end.min(total) {
                     let blink = (realtime * 4.0) as i64 & 1 == 0 && i == self.opt_cursor;
-                    let y = self.page_row_y(page, i) + 2.0;
+                    let top = self.page_row_y(page, i);
+                    let y = top + (height - ROW_H) / 2.0 + 2.0;
+                    let dep = self.is_dependent(page, i);
+                    if dep {
+                        let more = i + 1 < total && self.is_dependent(page, i + 1);
+                        dep_guide(c, top, height, more, DEP_GUIDE);
+                    }
                     match self.page_item(page, i) {
                         Item::Text { .. } => self.draw_text_row(c, cv, page, i, y, blink),
-                        item => self.draw_item(c, cv, item, y, blink),
+                        item => self.draw_item(c, cv, item, y, blink, dep),
                     }
                 }
+                c.clip_rows(None);
                 if let Some((x, top, h, ty, th)) = self.scrollbar(page) {
                     // scrollbar along the panel's right edge
-                    c.fill(x, top, 3.0, h, [1.0, 1.0, 1.0, 0.12]);
+                    c.round_box(x, top, SCROLL_W, h, SCROLL_W / 2.0, [1.0, 1.0, 1.0, 0.12], None);
                     let a = if self.drag.is_some() { 1.0 } else { 0.9 };
-                    c.fill(x, ty, 3.0, th, [0.85, 0.65, 0.3, a]);
+                    c.round_box(x, ty, SCROLL_W, th, SCROLL_W / 2.0, [0.85, 0.65, 0.3, a], None);
                 }
                 if page == Page::Setup {
                     // M_Setup_Draw: the player in a box, in the chosen colours.
                     let v = cv.value_of("_cl_color") as i32;
-                    let y0 = PAGE_ROW0 + n as f32 * ROW_H + 12.0;
+                    let y0 = bottom + 12.0;
                     let bx = pic("gfx/bigbox.lmp");
                     let bw = bx.map_or(64.0, |b| b.1 as f32);
                     c.pic(((640.0 - bw) / 2.0).floor(), y0, bx);
@@ -150,8 +186,8 @@ impl Menu {
                     c.pic(((640.0 - pw) / 2.0).floor(), y0 + 8.0, p);
                 }
                 if page == Page::Crosshair { crate::reticle::preview(c, cv); }
-                self.draw_custom_notes(c, cv, page, n);
-                if matches!(page, Page::Export | Page::RenameDemo) { self.draw_dialog_notes(c, n); }
+                self.draw_custom_notes(c, cv, page);
+                if matches!(page, Page::Export | Page::RenameDemo) { self.draw_dialog_notes(c, page); }
                 if page == Page::Controls {
                     c.text(VALUE_X, PAGE_ROW0 - 16.0, "Keyboard", TXT, MUTED);
                     c.text(BIND_PAD_X, PAGE_ROW0 - 16.0, "Controller", TXT, MUTED);
@@ -193,46 +229,53 @@ impl Menu {
                 }
             }
             Screen::Death => {
-                c.fill(148.0, 96.0, 344.0, 152.0, [0.05, 0.04, 0.03, 0.95]);
-                c.frame(148.0, 96.0, 344.0, 152.0, BORDER);
+                let rows = self.death_rows();
+                let height = 56.0 + rows as f32 * 24.0;
+                c.fill(148.0, 96.0, 344.0, height, [0.05, 0.04, 0.03, 0.95]);
+                c.frame(148.0, 96.0, 344.0, height, BORDER);
                 c.text_center(320.0, 112.0, "You died", TXT * 1.2, GOLD_FG);
-                for (i, label) in [qcore::t!("Continue from most recent save"), qcore::t!("Select save"), qcore::t!("Restart level"), qcore::t!("Return to main menu")].iter().enumerate() {
+                for (i, label) in navigation::DEATH_LABELS.into_iter().take(rows).enumerate() {
                     let y = 140.0 + i as f32 * 24.0;
                     if i == self.death_cursor { c.fill(160.0, y, 320.0, 20.0, HILITE); }
                     txt(c, 168.0, y + 4.0, &format!("{}. {}", i + 1, qcore::lang::tr(label)));
                 }
             }
-            Screen::None | Screen::HudEditor => {}
+            Screen::None | Screen::HudEditor | Screen::TouchEditor => {}
         }
-        c.menu_layout();
+        self.classic_layout(c);
         if let Some(o) = self.osk {
             self.draw_osk(c, o);
         }
-        if !matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons | Page::WeaponPriority)) {
+        if !matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons | Page::WeaponPriority | Page::Touch)) {
             self.draw_tooltip(c, cv);
-            self.draw_hints(c);
+            self.draw_hints(c, cv);
         }
         self.draw_back(c);
-        self.draw_prompt(c, cv);
-        c.reset_origin();
-        if self.autoaim_prompt { self.draw_autoaim_prompt(c); }
-        self.draw_binding_prompt(c);
+        if self.touch_ui {
+            self.tv_overlays(c, cv);
+        } else {
+            self.draw_prompt(c, cv);
+            c.reset_origin();
+            if self.autoaim_prompt { self.draw_autoaim_prompt(c); }
+            self.draw_binding_prompt(c);
+        }
         c.scale = base_scale;
     }
 
     pub(super) fn draw_drop(&self, c: &mut Canvas, cv: &Cvars, item: Item, d: Drop) {
         let opts = self.options(item);
         let (x, y, w, vis) = self.drop_geom(d, &opts);
-        let h = vis as f32 * BOX_H + 2.0;
+        let row_h = self.drop_row_height();
+        let h = vis as f32 * row_h + 2.0;
         c.fill(x, y, w, h, [0.05, 0.04, 0.03, 0.97]);
         c.frame(x, y, w, h, BORDER);
         let cur = self.option_index(item, cv);
         for (k, o) in opts.iter().enumerate().skip(d.scroll).take(vis) {
-            let ry = y + 1.0 + (k - d.scroll) as f32 * BOX_H;
+            let ry = y + 1.0 + (k - d.scroll) as f32 * row_h;
             if k == d.cursor {
-                c.fill(x + 1.0, ry, w - 2.0, BOX_H, HILITE);
+                c.fill(x + 1.0, ry, w - 2.0, row_h, HILITE);
             }
-            c.text(x + 4.0, ry + 1.0, o, TXT, if k == cur { GOLD_FG } else { FG });
+            c.text(x + 4.0, ry + (row_h - BOX_H) / 2.0 + 1.0, o, TXT, if k == cur { GOLD_FG } else { FG });
         }
         // scroll hints
         if d.scroll > 0 {
@@ -243,19 +286,35 @@ impl Menu {
         }
     }
 
-    pub(super) fn draw_item(&self, c: &mut Canvas, cv: &Cvars, item: Item, y: f32, blink: bool) {
-        if self.item_disabled(item, cv) && let Item::Slider { label, .. } | Item::Choice { label, .. } = item {
-            c.text_right(LABEL_R, y, label, TXT, MUTED);
-            c.text(VALUE_X, y, if self.game_locked(item, cv) { "(fixed for this game)" } else { "(disabled)" }, TXT, MUTED);
+    /// One options row; `dep` rows hang off a master toggle above them.
+    pub(super) fn draw_item(&self, c: &mut Canvas, cv: &Cvars, item: Item, y: f32, blink: bool, dep: bool) {
+        let indent = if dep { DEP_INDENT } else { 0.0 };
+        let off = self.item_disabled(item, cv);
+        if self.game_locked(item, cv) && let Item::Slider { label, .. } | Item::Choice { label, .. } = item {
+            row_label(c, indent, y, label, MUTED);
+            c.text(VALUE_X, y, "(fixed for this game)", TXT, MUTED);
             return;
         }
-        let label = |c: &mut Canvas, l: &str| c.text_right(LABEL_R, y, l, TXT, FG);
-        // values with a dropdown get a combo box
-        if self.options(item).len() > 2 {
-            c.fill(VALUE_X - 3.0, y - 1.0, DROP_W, BOX_H, [0.0, 0.0, 0.0, 0.5]);
-            c.frame(VALUE_X - 3.0, y - 1.0, DROP_W, BOX_H, BORDER);
-            c.shape(VALUE_X + DROP_W - 13.0, y + 1.0, 7.0, 7.0, crate::font::Shape::ArrowDown, GOLD_FG);
+        // disabled rows keep their control, dimmed, so the value stays visible
+        let (vc, ac) = if off { (MUTED, MUTED) } else { (FG, GOLD_FG) };
+        let label = |c: &mut Canvas, l: &str| row_label(c, indent, y, l, if off { MUTED } else if dep { DEP_FG } else { FG });
+        if self.changed(item, cv) {
+            changed_mark(c, y, off);
         }
+        // values with a dropdown get a combo box; two-way values a ‹ value › box
+        let opts = if matches!(item, Item::Toggle { .. }) { 0 } else { self.options(item).len() };
+        if opts >= 2 {
+            let frame = if off { [BORDER[0], BORDER[1], BORDER[2], 0.45] } else { BORDER };
+            c.fill(VALUE_X - 3.0, y - 1.0, DROP_W, BOX_H, [0.0, 0.0, 0.0, 0.5]);
+            c.frame(VALUE_X - 3.0, y - 1.0, DROP_W, BOX_H, frame);
+            if opts == 2 {
+                c.shape(VALUE_X - 1.0, y + 1.0, 7.0, 7.0, crate::font::Shape::ArrowLeft, ac);
+                c.shape(VALUE_X + DROP_W - 13.0, y + 1.0, 7.0, 7.0, crate::font::Shape::ArrowRight, ac);
+            } else {
+                c.shape(VALUE_X + DROP_W - 13.0, y + 1.0, 7.0, 7.0, crate::font::Shape::ArrowDown, ac);
+            }
+        }
+        let vx = if opts == 2 { VALUE_X + 9.0 } else { VALUE_X };
         match item {
             Item::Slider { label: l, cvar, min, max, invert, .. } => {
                 label(c, l);
@@ -266,25 +325,18 @@ impl Menu {
                 }
                 // track, filled part, knob
                 let (tx, tw) = (VALUE_X, 92.0);
+                let (fill, knob) = if off { ([0.42, 0.38, 0.33, 1.0], MUTED) } else { ([0.80, 0.55, 0.22, 1.0], [0.95, 0.80, 0.55, 1.0]) };
                 c.round_box(tx, y + 3.0, tw, 3.0, 1.5, [0.25, 0.22, 0.19, 1.0], None);
-                c.round_box(tx, y + 3.0, (tw * f).max(3.0), 3.0, 1.5, [0.80, 0.55, 0.22, 1.0], None);
-                c.round_box(tx + (tw - 8.0) * f, y + 0.5, 8.0, 8.0, 4.0, [0.95, 0.80, 0.55, 1.0], Some([0.2, 0.12, 0.05, 0.8]));
-                txt(c, VALUE_X + 100.0, y, &qcore::cvar::format_float((v * 1000.0).round() / 1000.0));
+                c.round_box(tx, y + 3.0, (tw * f).max(3.0), 3.0, 1.5, fill, None);
+                c.round_box(tx + (tw - 8.0) * f, y + 0.5, 8.0, 8.0, 4.0, knob, Some([0.2, 0.12, 0.05, 0.8]));
+                c.text_raw(VALUE_X + 100.0, y, &slider_text(cvar, v), TXT, vc);
             }
             Item::Toggle { label: l, cvar } => {
                 let locked = self.game_locked(item, cv);
+                label(c, l);
+                switch(c, VALUE_X, y, cv.value_of(cvar) != 0.0, off);
                 if locked {
-                    c.text_right(LABEL_R, y, l, TXT, MUTED);
-                } else {
-                    label(c, l);
-                }
-                let on = cv.value_of(cvar) != 0.0;
-                c.round_box(VALUE_X, y - 0.5, 9.0, 9.0, 1.5, [0.0, 0.0, 0.0, 0.5], Some(BORDER));
-                if on {
-                    c.round_box(VALUE_X + 2.0, y + 1.5, 5.0, 5.0, 1.0, if locked { MUTED } else { GOLD_FG }, None);
-                }
-                if locked {
-                    c.text(VALUE_X + 14.0, y, "(fixed for this game)", TXT, MUTED);
+                    c.text(VALUE_X + SWITCH_W + 6.0, y, "(fixed for this game)", TXT, MUTED);
                 }
             }
             Item::Choice { label: l, cvar, choices } => {
@@ -296,11 +348,11 @@ impl Menu {
                 } else {
                     choices[nearest_choice(value, &choices[..n])].0
                 };
-                txt(c, VALUE_X, y, choice);
+                c.text(vx, y, choice, TXT, vc);
             }
             Item::DisplayMode => {
                 label(c, "Display Mode");
-                { txt(c, VALUE_X, y, MODES[self.pending_mode.min(2)]); }
+                { txt(c, vx, y, MODES[self.pending_mode.min(2)]); }
             }
             Item::Resolution => {
                 label(c, "Resolution");
@@ -309,7 +361,7 @@ impl Menu {
                 } else {
                     format!("{}x{}", self.pending_res.0, self.pending_res.1)
                 };
-                { txt(c, VALUE_X, y, &s); }
+                { txt(c, vx, y, &s); }
             }
             // drawn by `draw_text_row` (caret and selection)
             Item::Text { .. } => {}
@@ -324,7 +376,7 @@ impl Menu {
             }
             Item::Language => {
                 label(c, "Language");
-                txt(c, VALUE_X, y, &super::options::language_options()[super::options::language_index(cv)]);
+                txt(c, vx, y, &super::options::language_options()[super::options::language_index(cv)]);
             }
             Item::UserDataDir => {
                 label(c, "User Data Directory");
@@ -339,7 +391,7 @@ impl Menu {
             Item::ShaderPreset => {
                 label(c, "Preset");
                 let s: String = self.preset_options()[self.preset_index(cv)].chars().take(13).collect();
-                { txt(c, VALUE_X, y, &s); }
+                { txt(c, vx, y, &s); }
             }
             Item::Soundtrack => {
                 label(c, "Soundtrack");
@@ -347,9 +399,9 @@ impl Menu {
                 let idx = self.soundtrack_index(cv);
                 let s: String = opts[idx].chars().take(18).collect();
                 if idx == 0 {
-                    c.text(VALUE_X, y, &s, TXT, FG);
+                    c.text(vx, y, &s, TXT, FG);
                 } else {
-                    c.text_raw(VALUE_X, y, &s, TXT, FG);
+                    c.text_raw(vx, y, &s, TXT, FG);
                 }
             }
             Item::HudPreset => {
@@ -358,9 +410,9 @@ impl Menu {
                 let idx = self.hud_preset_index(cv);
                 let s: String = opts[idx].chars().take(18).collect();
                 if idx <= 1 || idx == opts.len() - 1 {
-                    c.text(VALUE_X, y, &s, TXT, FG);
+                    c.text(vx, y, &s, TXT, FG);
                 } else {
-                    c.text_raw(VALUE_X, y, &s, TXT, FG);
+                    c.text_raw(vx, y, &s, TXT, FG);
                 }
             }
             Item::ShaderParam(k) => self.draw_shader_param(c, y, k, cv),
@@ -369,7 +421,7 @@ impl Menu {
                 let m = self.host_map(cv).unwrap_or_else(|| "(none)".into());
                 let t = self.net_maps.iter().find(|x| x.name == m).map_or(String::new(), |x| x.title.clone());
                 let s: String = format!("{m} {t}").chars().take(13).collect();
-                { txt(c, VALUE_X, y, &s); }
+                { txt(c, vx, y, &s); }
             }
             Item::Run { label, run: Run::BrowseServers } => {
                 self.draw_server_browser_button(c, y, label);
@@ -384,13 +436,14 @@ impl Menu {
                     [(VALUE_X, BIND_PAD_X - 4.0), (BIND_PAD_X, PANEL_X + PANEL_W - 2.0)], capturing, blink);
             }
             Item::Sub { label: l, page } => {
-                // submenu rows: tinted strip, gold label and arrow
+                // submenu rows: gold label, arrow at the panel's right edge
                 let dim = sub_disabled(page, cv);
-                let (fg, tint) = if dim { (MUTED, 0.04) } else { (GOLD_FG, 0.10) };
-                c.fill(PANEL_X + 4.0, y - 2.0, PANEL_W - 14.0, ROW_H, [0.85, 0.60, 0.25, tint]);
-                c.text_right(LABEL_R, y, l, TXT, fg);
-                c.text(VALUE_X, y, if dim { "(off)" } else { "" }, TXT, MUTED);
-                c.shape(VALUE_X + if dim { 30.0 } else { 0.0 }, y + 1.0, 7.0, 7.0, crate::font::Shape::ArrowRight, fg);
+                let fg = if dim { MUTED } else { GOLD_FG };
+                row_label(c, indent, y, l, fg);
+                if dim {
+                    c.text(VALUE_X, y, "(off)", TXT, MUTED);
+                }
+                c.shape(SUB_ARROW_X, y + 1.0, 7.0, 7.0, crate::font::Shape::ArrowRight, fg);
             }
             Item::ResetBinds => {
                 c.text_center(320.0, y, "Reset to Defaults", TXT, GOLD_FG);
@@ -400,6 +453,7 @@ impl Menu {
                 let dirty = cv.by_name("r_shader_params").is_some_and(|c| !c.string.trim().is_empty());
                 c.text_center(320.0, y, "Reset Shader Settings", TXT, if dirty { GOLD_FG } else { MUTED });
             }
+            Item::Heading(l) => heading(c, y, l),
             Item::Apply => {
                 // a button, live only while there are pending changes
                 let col = if self.display_dirty(cv) { GOLD_FG } else { MUTED };

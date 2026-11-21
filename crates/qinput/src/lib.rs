@@ -104,7 +104,7 @@ pub enum InputEvent {
     GamepadConnected(bool),
     /// Finger on the touchscreen: window-normalised position, window
     /// width/height.
-    Touch { id: u64, phase: touch::TouchPhase, x: f32, y: f32, aspect: f32 },
+    Touch { id: u64, phase: touch::TouchPhase, x: f32, y: f32, aspect: f32, timestamp_ns: u64 },
 }
 
 /// Events the console/menu must handle (not routed to binds).
@@ -122,6 +122,7 @@ pub enum Device {
     #[default]
     KeyboardMouse,
     Gamepad,
+    Touch,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
@@ -129,6 +130,7 @@ pub enum LookDevice {
     #[default]
     Mouse,
     Gamepad,
+    Touch,
 }
 
 /// Button indices into [`Input::buttons`].
@@ -217,11 +219,13 @@ cvars! {
     joy_flick_adjust_speed = "joy_flick_adjust_speed", "30.0";
     gyro_enable = "gyro_enable", "0";
     gyro_mode = "gyro_mode", "0";
+    gyro_phone_mode = "gyro_phone_mode", "0";
     gyro_yawsensitivity = "gyro_yawsensitivity", "2.5";
     gyro_pitchsensitivity = "gyro_pitchsensitivity", "2.5";
     gyro_rollsensitivity = "gyro_rollsensitivity", "0";
     gyro_noise_thresh = "gyro_noise_thresh", "1.5";
     autoaim = "assist_autoaim", "0";
+    autofire = "assist_autofire", "0";
     autoaim_mode = "assist_autoaim_mode", "0";
     autoaim_cone = "assist_autoaim_cone", "8";
     autoaim_indicator = "assist_autoaim_indicator", "1";
@@ -238,10 +242,18 @@ cvars! {
     in_toggleattack = "in_toggleattack", "0";
     in_togglerun = "in_togglerun", "0";
     touch_enable = "touch_enable", "1";
-    touch_sensitivity = "touch_sensitivity", "1";
+    touch_yaw_sensitivity = "touch_yaw_sensitivity", "28";
+    touch_pitch_sensitivity = "touch_pitch_sensitivity", "28";
+    touch_acceleration = "touch_acceleration", "0";
+    touch_layout = "touch_layout", "";
     touch_size = "touch_size", "1";
     touch_opacity = "touch_opacity", "0.5";
     touch_invert = "touch_invert", "0";
+    touch_aim_assist = "touch_aim_assist", "1";
+    touch_left_handed = "touch_left_handed", "0";
+    touch_move_fire = "touch_move_fire", "0";
+    touch_autofire = "touch_autofire", "0";
+    touch_haptics = "touch_haptics", "0";
 }
 
 /// Host context for qinput commands.
@@ -264,6 +276,7 @@ pub struct Input {
     old_mouse: [f32; 2],
     axes: [f32; 6],
     gyro: [f32; 3],
+    pub phone_gyro: Option<[f32; 3]>,
     pub gamepad_connected: bool,
     pub last_look: LookDevice,
     /// Device of the last deliberate input (buttons, sticks, keys, mouse).
@@ -287,11 +300,14 @@ pub struct Input {
     pub autoaim_fov: [f32; 2],
     pub autoaim_players: bool,
     pub touch: touch::TouchOverlay,
-    /// On-screen controls showing (`touch_enable 1`: since the last touch,
-    /// until another device is used).
-    pub touch_shown: bool,
+    pub touch_buttons: touch::TouchButtons,
     /// Window width/height from the last touch, for the stick.
     pub touch_aspect: f32,
+    pub touch_size_cm: Option<[f32; 2]>,
+    pub touch_insets: [f32; 4],
+    /// The OS keyboard is up for a touch menu: its keys (Backspace,
+    /// Enter) don't switch away from touch.
+    pub touch_typing: bool,
 }
 
 impl Input {
@@ -309,9 +325,10 @@ impl Input {
             old_mouse: [0.0; 2],
             axes: [0.0; 6],
             gyro: [0.0; 3],
+            phone_gyro: None,
             gamepad_connected: false,
             last_look: LookDevice::Mouse,
-            last_device: Device::KeyboardMouse,
+            last_device: if cfg!(target_os = "android") { Device::Touch } else { Device::KeyboardMouse },
             capture: false,
             wheel_aim: [0.0; 2],
             wheel_open: false,
@@ -324,8 +341,11 @@ impl Input {
             autoaim_fov: [90.0, 73.74],
             autoaim_players: false,
             touch: touch::TouchOverlay::default(),
-            touch_shown: false,
+            touch_buttons: touch::TouchButtons::default(),
             touch_aspect: 16.0 / 9.0,
+            touch_insets: [0.0; 4],
+            touch_size_cm: None,
+            touch_typing: false,
         }
     }
 
@@ -365,15 +385,33 @@ impl Input {
     }
     /// Layout of the on-screen controls.
     pub fn touch_layout(&self, cvars: &Cvars) -> touch::TouchLayout {
-        touch::TouchLayout { aspect: self.touch_aspect, size: cvars.value(self.cv.touch_size) }
+        let mut layout = touch::TouchLayout::from_cvars(cvars, self.touch_aspect, self.touch_insets);
+        layout.buttons = self.touch_buttons;
+        layout
+    }
+
+    pub fn autofire_enabled(&self, cvars: &Cvars) -> bool {
+        self.dest == KeyDest::Game && self.autoaim_allowed && !self.wheel_open
+            && !self.wheel_held() && !self.touch.wheel_held() && !self.buttons[btn::EQUIPWHEEL].is_down()
+            && match self.last_device {
+                Device::Touch => cvars.value(self.cv.touch_autofire) != 0.0 && cvars.value(self.cv.touch_enable) != 0.0,
+                _ => cvars.value(self.cv.autofire) != 0.0,
+            }
     }
     /// Whether the on-screen controls should be drawn and used.
     pub fn touch_visible(&self, cvars: &Cvars) -> bool {
         match cvars.value(self.cv.touch_enable) as i32 {
             0 => false,
-            1 => self.touch_shown,
+            1 => self.last_device == Device::Touch,
             _ => true,
         }
+    }
+
+    pub fn touch_aim_active(&self, cvars: &Cvars) -> bool {
+        self.dest == KeyDest::Game
+            && cvars.value(self.cv.touch_enable) != 0.0
+            && cvars.value(self.cv.touch_aim_assist) >= 0.5
+            && self.touch.has_look()
     }
     pub fn key_down(&self, key: i32) -> bool {
         self.keydown.get(key as usize).copied().unwrap_or(false)
@@ -412,7 +450,6 @@ macro_rules! toggle_button_cmds {
         });
     }};
 }
-
 
 macro_rules! button_cmds {
     ($c:expr, $($i:expr),*) => {$(
@@ -462,7 +499,6 @@ pub fn register_commands<C: InputHost>(c: &mut Commands<C>) {
         ctx.print(&format!("{} bindings\n", lines.len()));
     });
 }
-
 
 #[cfg(test)]
 mod tests;

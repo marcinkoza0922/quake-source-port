@@ -526,6 +526,9 @@ he כמה רחוק הקרס עף לפני שהוא חוזר
 @ How visible the on-screen controls are
 he עד כמה נראים פקדי המסך
 
+@ Size of the menus and their buttons while you use the touchscreen
+he גודל התפריטים והכפתורים שלהם בזמן שימוש במסך המגע
+
 @ Impact Lifetime
 he משך סימני פגיעה
 
@@ -613,8 +616,8 @@ he הקפאה ארוכה ביותר (ms)
 @ Look Down
 he מבט למטה
 
-@ Look Speed
-he מהירות מבט
+@ Look Acceleration
+he האצת מבט
 
 @ Look Up
 he מבט למעלה
@@ -720,6 +723,9 @@ he צבע על מטרה
 
 @ Opacity
 he אטימות
+
+@ Menu Size
+he גודל התפריטים
 
 @ Opacity of the grenade arc
 he אטימות קשת הרימון
@@ -1781,6 +1787,18 @@ he תאורה כיוונית
 @ Light Specular
 he ברק תאורה
 
+@ Gameplay Overlay
+he שכבת על של משחק
+
+@ Layout
+he פריסה
+
+@ Preview
+he תצוגה מקדימה
+
+@ Resume Game
+he המשך את המשחק
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ he כמה המבט נוטה למעלה ולמטה כשמטים את הבקר (צ
 @ How far the view turns left and right when you turn the controller (yaw axis)
 he כמה המבט מסתובב שמאלה וימינה כשמסובבים את הבקר (ציר סבסוב)
 
-@ How far the view turns when you drag on the right half of the screen
-he כמה המבט מסתובב כשגוררים על החצי הימני של המסך
-
 @ How fast the boomerang flies (units per second)
 he מהירות מעוף הבומרנג (יחידות לשנייה)
 
@@ -2038,9 +2053,6 @@ he אף הקפאה לא נמשכת יותר מזה, לא משנה כמה נזק 
 
 @ Oldest marks and nails are recycled at this shared limit
 he הסימנים והמסמרים הישנים ביותר ממוחזרים במגבלה המשותפת הזו
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-he סטיק וכפתורים על המסך: אוטומטי מציג אותם אחרי נגיעה ומסתיר אותם כשמשתמשים בהתקן אחר
 
 @ Only autosaves: quicksaves and the Save menu are off
 he שמירות אוטומטיות בלבד: שמירה מהירה ותפריט השמירה מושבתים
@@ -2412,6 +2424,18 @@ he משתמש בכיווני אור אפויים (.dlit) להצללה וברק �
 @ Strength of the highlights from directional lighting
 he עוצמת ההבהקים מתאורה כיוונית
 
+@ How far the view turns when you swipe
+he כמה רחוק פונה התצוגה כשאתה מחליק
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+he מאט את ההחלקה שלך ליד יעדים גלויים. Deathmatch דורש הרשאת שרת. ברמה הגבוהה הכוונת נמשכת מעט לעבר המטרה.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+he מחליף את הצדדים לכפתורי תנועה, כיוון ומשחק
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+he אוטומטי עוקב אחר התקן הקלט הפעיל. התפריט נשאר זמין כאשר שכבת העל כבויה.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ he בחירת שלב
 @ Really quit?
 he באמת לצאת?
 
+@ Quit
+he יציאה
+
 @ You died
 he מתת
 
@@ -2557,9 +2584,6 @@ he התחלת השלב מחדש
 
 @ Return to main menu
 he חזרה לתפריט הראשי
-
-@ (disabled)
-he (מושבת)
 
 @ (fixed for this game)
 he (קבוע למשחק זה)
@@ -3450,6 +3474,15 @@ he אין שרתים שתואמים למסננים
 @ Server search failed
 he החיפוש אחר שרתים נכשל
 
+@ Slide to select, release to equip
+he החלק כדי לבחור, שחרר כדי לצייד
+
+@ Tap to swap weapons.
+he הקש כדי להחליף כלי נשק.
+
+@ Hold and slide to select.
+he החזק והחלק כדי לבחור.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ he 100% ללא נזק
 
 @ Damage Skull
 he גולגולת נזק
+
+@ A mild speed boost for fast swipes
+he החלקות מהירות מסובבות את המבט מעט מהר יותר
+
+@ Phone Gyro
+he גירוסקופ הטלפון
+
+@ look zone
+he אזור המבט
+
+@ while firing
+he בזמן ירי
+
+@ Uses the Android device’s motion sensor.
+he משתמש בחיישן התנועה של מכשיר ה-Android.
+
+@ Edit Layout
+he עריכת פריסה
+
+@ Drag to move
+he גרור כדי להזיז
+
+@ Auto-fire
+he ירי אוטומטי
+
+@ Touch Auto-fire
+he ירי אוטומטי במגע
+
+@ Move-side Fire
+he ירי בצד התנועה
+
+@ Touch Haptics
+he רטט במגע
+
+@ Add a Fire button on the move side.
+he מוסיף כפתור ירי בצד התנועה.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+he יורה על מפלצות מתחת לכוונת במשחק מקומי (מקלדת, עכבר, בקר).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+he יורה על מפלצות מתחת לכוונת במשחק מקומי (מסך מגע).
+
+@ Vibrate on button presses and damage (Android).
+he רטט בלחיצה על כפתורים ובספיגת נזק (Android).
+
+@ Swipe left or right to cycle.
+he החליקו שמאלה או ימינה כדי להחליף נשק.
+
+# Options page group headings.
+
+@ General
+he כללי
+
+@ Saving
+he שמירה
+
+@ Lighting
+he תאורה
+
+@ Effects
+he אפקטים
+
+@ Models
+he מודלים
+
+@ Post-processing
+he עיבוד תמונה
+
+@ World
+he עולם

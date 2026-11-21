@@ -82,8 +82,9 @@ cargo build --release
 Release builds are meant for Windows (x64, arm64), Linux (x64, arm64, glibc
 and musl), macOS (Apple silicon), FreeBSD, OpenBSD and NetBSD (x64) and
 Android (arm64). A WebGPU browser archive is also available. Extract it and
-serve it over localhost or HTTPS. **Only Linux x64 has been tested so far**;
-the other builds are untested and may not start or may misbehave.
+serve it over localhost or HTTPS. Linux x64 has been tested on hardware.
+Android folder setup and game startup have been tested on an Android 14
+emulator.
 You still need your own Quake game data (see below).
 
 The musl build needs `libstdc++` and the Vulkan loader (Alpine:
@@ -95,6 +96,9 @@ only runs on the OpenBSD release it was built for.
 ## Running
 
 You need your own Quake game data, which this repository does not include.
+On Android, tap **Choose Quake folder** and select the folder containing your
+PAKs. See the [Android setup guide](android/README.md#select-your-quake-paks).
+
 Point the port at a directory that contains `id1/` (plus any mod
 directories):
 

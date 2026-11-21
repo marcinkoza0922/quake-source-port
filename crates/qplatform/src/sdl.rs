@@ -9,6 +9,12 @@ use sdl3_sys::everything as sys;
 
 use crate::*;
 
+#[cfg(target_os = "android")]
+mod android;
+#[cfg(target_os = "android")]
+mod phone_haptics;
+#[cfg(target_os = "android")]
+pub use android::{AndroidWindow, android_log};
 mod window;
 pub use window::vulkan_instance_extensions;
 
@@ -44,6 +50,14 @@ pub fn pad_family(sdl_type: i32, vendor: u16, name: &str) -> u8 {
 /// SDL context. Owns subsystems and opened gamepads. `!Send`/`!Sync`.
 pub struct Platform {
     gamepads: HashMap<u32, Gamepad>,
+    #[cfg(target_os = "android")]
+    phone_gyro: android::PhoneGyro,
+    #[cfg(target_os = "android")]
+    phone_haptics: std::cell::OnceCell<Option<phone_haptics::PhoneHaptics>>,
+    #[cfg(target_os = "android")]
+    lifecycle: android::Lifecycle,
+    #[cfg(target_os = "android")]
+    pending_input: Option<Event>,
     sdl: Rc<SdlGuard>,
 }
 
@@ -79,12 +93,31 @@ impl Platform {
             // SAFETY: both pointers are valid NUL-terminated strings for the call.
             unsafe { sys::SDL_SetHint(k.as_ptr(), v.as_ptr()) };
         }
+        // The host saves on WILL_ENTER_BACKGROUND and skips rendering until resume.
+        #[cfg(target_os = "android")]
+        // SAFETY: both strings are static; this runs before SDL_Init.
+        unsafe { sys::SDL_SetHint(c"SDL_ANDROID_BLOCK_ON_PAUSE".as_ptr(), c"0".as_ptr()) };
         let flags = sys::SDL_INIT_VIDEO | sys::SDL_INIT_EVENTS | sys::SDL_INIT_GAMEPAD | sys::SDL_INIT_AUDIO;
         // SAFETY: plain init call; paired with SDL_Quit in Drop.
         check(unsafe { sys::SDL_Init(flags) })?;
+        #[cfg(target_os = "android")]
+        // SAFETY: SDL is initialized. Failure leaves the optional gyro unavailable.
+        unsafe { sys::SDL_InitSubSystem(sys::SDL_INIT_SENSOR) };
+        let sdl = Rc::new(SdlGuard);
         // Gamepad add events for already-connected devices arrive via the
         // event queue, so open happens lazily in poll_event.
-        Ok(Self { gamepads: HashMap::new(), sdl: Rc::new(SdlGuard) })
+        Ok(Self {
+            gamepads: HashMap::new(),
+            #[cfg(target_os = "android")]
+            phone_gyro: android::PhoneGyro::default(),
+            #[cfg(target_os = "android")]
+            phone_haptics: std::cell::OnceCell::new(),
+            #[cfg(target_os = "android")]
+            lifecycle: android::Lifecycle::new()?,
+            #[cfg(target_os = "android")]
+            pending_input: None,
+            sdl,
+        })
     }
 
     /// Add mappings from a gamecontrollerdb.txt (SDL's built-in DB is always
@@ -96,10 +129,14 @@ impl Platform {
         if n < 0 { Err(sdl_error()) } else { Ok(n as u32) }
     }
 
-    /// Create a resizable, high-DPI window, optionally Vulkan-capable.
+    /// Create a high-DPI window, optionally Vulkan-capable. Android uses its full display.
     pub fn create_window(&self, title: &str, width: u32, height: u32, vulkan: bool) -> Result<Window> {
         let t = cstring(title)?;
-        let mut flags = sys::SDL_WINDOW_RESIZABLE | sys::SDL_WINDOW_HIGH_PIXEL_DENSITY;
+        let mut flags = sys::SDL_WINDOW_HIGH_PIXEL_DENSITY | if cfg!(target_os = "android") {
+            sys::SDL_WINDOW_FULLSCREEN
+        } else {
+            sys::SDL_WINDOW_RESIZABLE
+        };
         if vulkan {
             flags |= sys::SDL_WINDOW_VULKAN;
         }
@@ -111,9 +148,13 @@ impl Platform {
         Ok(Window { raw, _sdl: self.sdl.clone() })
     }
 
-    /// Poll one event. Gamepad hotplug opens/closes devices internally.
-    /// Unhandled SDL events are skipped.
+    /// Poll one event, opening or closing gamepads on hotplug.
+    #[cfg(not(target_os = "android"))]
     pub fn poll_event(&mut self) -> Option<Event> {
+        self.poll_input()
+    }
+
+    fn poll_input(&mut self) -> Option<Event> {
         loop {
             let mut ev = std::mem::MaybeUninit::<sys::SDL_Event>::zeroed();
             // SAFETY: ev points to writable SDL_Event storage.
@@ -143,6 +184,9 @@ impl Platform {
             T::KEY_DOWN | T::KEY_UP => {
                 // SAFETY: tag is a keyboard event.
                 let k = unsafe { ev.key };
+                if k.scancode == sys::SDL_SCANCODE_AC_BACK || k.key == sys::SDLK_AC_BACK {
+                    return (k.down && !k.repeat).then_some(Event::Back);
+                }
                 Event::Key { scancode: k.scancode.0 as u32, key: k.key.0, modifiers: k.r#mod.0, down: k.down, repeat: k.repeat }
             }
             T::TEXT_INPUT => {
@@ -204,10 +248,11 @@ impl Platform {
                 let phase = match ty {
                     T::FINGER_DOWN => FingerPhase::Down,
                     T::FINGER_MOTION => FingerPhase::Move,
-                    _ => FingerPhase::Up,
+                    T::FINGER_UP => FingerPhase::Up,
+                    _ => FingerPhase::Cancel,
                 };
                 let id = f.touchID.0.rotate_left(32) ^ f.fingerID.0;
-                Event::Finger { id, phase, x: f.x, y: f.y }
+                Event::Finger { id, phase, x: f.x, y: f.y, timestamp_ns: f.timestamp }
             }
             T::WINDOW_PIXEL_SIZE_CHANGED => {
                 // SAFETY: tag is a window event.
@@ -267,6 +312,13 @@ impl Platform {
         for g in self.gamepads.values() {
             // SAFETY: g.raw is a valid open gamepad.
             unsafe { sys::SDL_RumbleGamepad(g.raw, low, high, duration_ms) };
+        }
+    }
+
+    #[cfg(target_os = "android")]
+    pub fn phone_haptic(&self, strength: f32, duration_ms: u32) {
+        if let Some(device) = self.phone_haptics.get_or_init(phone_haptics::PhoneHaptics::open) {
+            device.play(strength, duration_ms);
         }
     }
 

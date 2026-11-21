@@ -25,6 +25,10 @@ use hitfeedback::{HIT_SOUND, KILL_SOUND};
 mod input;
 mod page_info;
 use page_info::*;
+mod gating;
+use gating::*;
+mod units;
+use units::slider_text;
 mod scroll;
 mod prompt;
 mod cards;
@@ -50,6 +54,10 @@ mod search_keywords;
 mod dir_browser;
 mod weapon_priority;
 mod server_browser;
+mod touch;
+mod touch_editor;
+mod touchview;
+pub use touchview::ListRow;
 pub(crate) use server_browser::SearchStatus;
 pub mod demos;
 
@@ -76,6 +84,7 @@ pub enum Screen {
     Demos,
     /// Options → HUD → Edit HUD.
     HudEditor,
+    TouchEditor,
     /// Options → Gameplay → User Data Directory explorer.
     DirBrowser,
 }
@@ -172,10 +181,13 @@ pub struct Menu {
     opt_cursor: usize,
     /// First visible row of a long options page (follows the cursor).
     opt_scroll: std::cell::Cell<usize>,
+    touch_scroll: Option<(Page, f32)>,
+    pub touch_ui: bool,
     page_cursor: usize,
     /// Quit prompt button: 0 = yes, 1 = no.
     quit_cursor: usize,
     death_cursor: usize,
+    pub death_quickload: bool,
     /// Display settings being edited on the Graphics page (mode 0..=2, size).
     pub pending_mode: usize,
     pub pending_res: (u32, u32),
@@ -204,6 +216,19 @@ pub struct Menu {
     /// Page and row an open sub-page was entered from (sub-pages reachable
     /// from several pages return there; otherwise `parent_page`).
     sub_return: Option<(Page, Page, usize)>,
+    touch_shortcut: bool,
+    /// Touch layout state (`touchview.rs`).
+    tv: touchview::TouchView,
+    /// Pixels per platform UI unit (set by the host from the window).
+    pub display_scale: f32,
+    /// Where the finger now down touched (pressed look), menu units.
+    pub touch_press: Option<(f32, f32)>,
+    /// Load/Save were opened from the touch home menu (Back returns there).
+    cards_from_home: bool,
+    pub touch_insets: [f32; 4],
+    pub touch_aspect: f32,
+    touch_editor: touch_editor::Editor,
+    touch_from_main: bool,
     pub mods: ModMenu,
     pub demos: demos::DemoBrowser,
     /// Options → HUD → Edit HUD.
@@ -300,11 +325,14 @@ const CARD_SCROLL_Y0: f32 = CARD_Y0 + CARD_PITCH + 6.0;
 /// Pixels scrolled per wheel notch on the card screens.
 const CARD_WHEEL: f32 = 24.0;
 
-/// Options panel: background box, label column (right-aligned), value column.
+/// Options panel: background box, label column (left-aligned, padded from
+/// the panel edge), value column.
 const PANEL_X: f32 = 136.0;
 const PANEL_W: f32 = 368.0;
-const LABEL_R: f32 = 304.0;
+const LABEL_X: f32 = PANEL_X + 12.0;
 const VALUE_X: f32 = 320.0;
+/// Extra indent of a row that depends on a master toggle above it.
+const DEP_INDENT: f32 = 12.0;
 const ROW_H: f32 = 12.0;
 /// Height of value boxes inside a row, and of entries in an open dropdown.
 const BOX_H: f32 = 10.0;
@@ -331,9 +359,12 @@ impl Menu {
             save_scroll: 0.0,
             opt_cursor: 0,
             opt_scroll: Default::default(),
+            touch_scroll: None,
+            touch_ui: false,
             page_cursor: 0,
             quit_cursor: 0,
             death_cursor: 0,
+            death_quickload: false,
             pending_mode: 0,
             pending_res: (1280, 720),
             resolutions: Vec::new(),
@@ -350,6 +381,15 @@ impl Menu {
             slider_drag: None,
             drop: None,
             sub_return: None,
+            touch_shortcut: false,
+            tv: Default::default(),
+            display_scale: 1.0,
+            touch_press: None,
+            cards_from_home: false,
+            touch_insets: [0.0; 4],
+            touch_aspect: 16.0 / 9.0,
+            touch_editor: Default::default(),
+            touch_from_main: false,
             mods: ModMenu::default(),
             demos: Default::default(),
             hud_edit: Default::default(),
@@ -436,6 +476,9 @@ impl Menu {
         if self.screen == Screen::ServerBrowser && self.server_browser_accepts_text() {
             return self.server_browser_type(ch);
         }
+        if self.tv_search_focus() {
+            return if self.screen == Screen::Options { self.search_type(ch) } else { self.tv_list_type(ch) };
+        }
         if self.drop.is_none() {
             self.text_insert(ch.encode_utf8(&mut [0; 4]), cv);
         }
@@ -444,11 +487,15 @@ impl Menu {
     /// The cursor is on a text row, which takes typed characters (the host
     /// then turns on text input).
     pub fn wants_text(&self) -> bool {
+        if self.tv_search_focus() {
+            return self.osk.is_none() && self.prompt.is_none();
+        }
         if self.screen == Screen::HudEditor {
             return self.osk.is_none() && self.hud_edit.wants_text();
         }
         let Screen::OptionsPage(p) = self.screen else { return false };
         self.drop.is_none() && self.osk.is_none() && self.prompt.is_none() && matches!(self.page_item(p, self.opt_cursor), Item::Text { .. })
+            && self.tv_text_focus() != Some(false)
     }
 
     /// Waiting for a key to bind (the host keeps sticks from moving the cursor).
@@ -463,6 +510,8 @@ impl Menu {
     pub fn open(&mut self, s: Screen) {
         self.prev = self.screen;
         self.screen = s;
+        self.touch_scroll = None;
+        self.touch_from_main = false;
         self.new_game_setup = matches!(s, Screen::OptionsPage(Page::NewGameAddons | Page::NewGameCustomize));
         if !self.new_game_setup {
             self.launch = None;
@@ -482,6 +531,7 @@ impl Menu {
         if s == Screen::Options { self.clear_search(); }
         if s == Screen::OptionsPage(Page::WeaponPriority) { self.wp.reset_state(); }
         if matches!(s, Screen::Load | Screen::Save) { self.load_cursor = 0; self.save_scroll = 0.0; }
+        self.settle_cursor();
     }
 
     /// Card rows: Load = pinned latest + Browse Autosaves + saves; Autosaves
@@ -523,16 +573,27 @@ impl Menu {
         };
         let (cx, cy) = CLASSIC;
         match self.screen {
-            Screen::Death => row(140.0, 24.0, 4, 160.0, 480.0),
-            Screen::Main => row(cy + 32.0, 20.0, self.main_items(), cx + 54.0, cx + 312.0),
+            Screen::Death => row(140.0, 24.0, self.death_rows(), 160.0, 480.0),
+            Screen::Main => {
+                if let Some(i) = self.touch_shortcut_index().filter(|_| touch::hit(touch::SHORTCUT, (x, y))) {
+                    return Some(i);
+                }
+                row(cy + 32.0, 20.0, self.main_items() - usize::from(self.touch_shortcut), cx + 54.0, cx + 312.0)
+            }
             Screen::SinglePlayer => row(cy + 32.0, 20.0, customize::SP_ITEMS, cx + 54.0, cx + 312.0),
             Screen::Load | Screen::Save => self.card_at(x, y),
             Screen::Options if self.searching() && self.search_hits() == 0 => None,
             Screen::Options => row(ROW0, ROW_H, self.hub_rows(), PANEL_X, PANEL_X + PANEL_W).map(|r| r + if self.searching() { self.search_scroll() } else { 0 }),
+            Screen::OptionsPage(Page::Touch) => touch::item_at((x, y)),
             Screen::OptionsPage(p) => {
-                let i = row(PAGE_ROW0, ROW_H, self.page_vis(p), PANEL_X, PANEL_X + PANEL_W)? + self.page_scroll(p);
+                let height = self.page_row_height();
+                row(PAGE_ROW0, height, self.page_vis(p), PANEL_X, PANEL_X + PANEL_W)?;
+                let i = ((y - PAGE_ROW0 + self.page_offset(p)) / height) as usize;
+                if matches!(self.page_item(p, i), Item::Heading(_)) {
+                    return None;
+                }
                 if matches!(self.page_item(p, i), Item::Run { run: Run::BrowseServers, .. })
-                    && !server_browser::hit(server_browser::server_browser_button(self.page_row_y(p, i)), (x, y))
+                    && !server_browser::hit(server_browser::server_browser_button(self.page_row_y(p, i) + (height - ROW_H) / 2.0), (x, y))
                 {
                     return None;
                 }
@@ -544,7 +605,7 @@ impl Menu {
                 .position(|&bx| x >= bx && x < bx + QUIT_BTN.0 && y >= QUIT_BTN_Y && y < QUIT_BTN_Y + QUIT_BTN.1),
             Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.item_at(self.mods_page(), (x, y)),
             Screen::Help => self.help.item_at((x, y)),
-            Screen::Demos | Screen::None | Screen::HudEditor | Screen::DirBrowser | Screen::ServerBrowser => None,
+            Screen::Demos | Screen::None | Screen::HudEditor | Screen::TouchEditor | Screen::DirBrowser | Screen::ServerBrowser => None,
         }
     }
 
@@ -573,7 +634,7 @@ impl Menu {
             }
             // hovering doesn't switch sections; a click does
             Screen::Help => None,
-            Screen::Demos | Screen::None | Screen::HudEditor | Screen::DirBrowser | Screen::ServerBrowser => None,
+            Screen::Demos | Screen::None | Screen::HudEditor | Screen::TouchEditor | Screen::DirBrowser | Screen::ServerBrowser => None,
         }
     }
 

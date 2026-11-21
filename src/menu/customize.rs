@@ -88,12 +88,19 @@ impl Menu {
     /// Main menu rows: the classic five, Map Packs, Demos, and Customize while a
     /// customized game runs.
     pub(super) fn main_items(&self) -> usize {
-        MAIN_ITEMS + usize::from(self.custom_running)
+        MAIN_ITEMS + usize::from(self.custom_running) + usize::from(self.touch_shortcut)
     }
 
-    /// Notes under the Customize pages' rows; returns the lines' height.
-    pub(super) fn draw_custom_notes(&self, c: &mut Canvas, cv: &Cvars, page: Page, rows: usize) {
-        let y = PAGE_ROW0 + rows as f32 * ROW_H + 30.0;
+    /// Notes under the Customize pages' rows.
+    pub(super) fn draw_custom_notes(&self, c: &mut Canvas, cv: &Cvars, page: Page) {
+        let y = self.page_bottom(page) + 30.0;
+        for (i, (s, col)) in self.custom_notes(cv, page).iter().enumerate() {
+            c.text_center(320.0, y + i as f32 * 11.0, s, TXT, *col);
+        }
+    }
+
+    /// Lines of notes under a Customize page (translated), with colours.
+    pub(super) fn custom_notes(&self, cv: &Cvars, page: Page) -> Vec<(String, [f32; 4])> {
         let summary = custom_summary(cv);
         let lines: Vec<(String, [f32; 4])> = match page {
             Page::NewGameCustomize if super::launch::customized(cv) => vec![
@@ -116,11 +123,9 @@ impl Menu {
                 vec![(qcore::tr!("These rules apply to the next customized game."), MUTED)]
             }
             Page::Modifiers => vec![(qcore::tr!("Changes apply now and are saved with this game (.qsa)."), MUTED)],
-            _ => return,
+            _ => Vec::new(),
         };
-        for (i, (s, col)) in lines.iter().enumerate() {
-            c.text_center(320.0, y + i as f32 * 11.0, s, TXT, *col);
-        }
+        lines
     }
 }
 

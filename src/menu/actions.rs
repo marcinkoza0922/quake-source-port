@@ -18,8 +18,43 @@ impl Menu {
         Some(m.name.clone())
     }
 
+    /// Single Player row `i`: New Game, Load, Save or Level Select.
+    pub(super) fn sp_select(&mut self, i: usize, cv: &Cvars, server_active: bool, out: &mut Vec<Action>) {
+        match i {
+            0 => self.open_launch(launch::NEW_GAME_CMD.into(), false, None),
+            1 => {
+                out.push(Action::Command("_scansaves\n".into()));
+                self.autosaves = false;
+                self.open(Screen::Load);
+            }
+            3 => out.push(Action::Command("menu_levels\n".into())),
+            _ if server_active && cv.value_of("custom_active") != 0.0 && cv.value_of("modifier_nosaves") != 0.0 => {
+                let lines = vec![qcore::tr!("This game only autosaves."), qcore::tr!("(No Manual Saves modifier)")];
+                self.confirm(lines, qcore::t!("OK"), String::new(), false);
+            }
+            _ => {
+                if server_active {
+                    self.autosaves = false;
+                    out.push(Action::Command("_scansaves\n".into()));
+                    self.open(Screen::Save);
+                }
+            }
+        }
+    }
+
     pub(super) fn run(&mut self, run: Run, cv: &mut Cvars, out: &mut Vec<Action>) {
         match run {
+            Run::EditTouch => {
+                self.screen = Screen::TouchEditor;
+                self.touch_editor = Default::default();
+                out.push(Action::Sound("misc/menu2.wav"));
+                return;
+            }
+            Run::ResetTouch => {
+                touch::reset(cv);
+                out.push(Action::Sound("misc/menu3.wav"));
+                return;
+            }
             Run::ResetShotguns | Run::ResetBulletTime => {
                 let names: &[&str] = if run == Run::ResetShotguns { &["addon_shotgun_speed"] } else {
                     &["addon_bullet_time_toggle", "addon_bullet_time_meter", "addon_bullet_time_duration", "addon_bullet_time_regen"]

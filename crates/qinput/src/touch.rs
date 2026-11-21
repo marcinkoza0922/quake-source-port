@@ -1,11 +1,45 @@
-//! On-screen touch controls (twin-zone): a floating move stick on the left
-//! half, drag-to-look on the right half, and round buttons that run
-//! commands. Pure state; the host feeds finger events and draws
-//! [`TouchOverlay::buttons`] / [`TouchOverlay::stick`].
+//! On-screen touch controls: a floating move stick, drag-to-look, and a
+//! dedicated finger gesture for the weapon wheel.
 //!
 //! Positions are window-normalised (0..1 both axes). Distances are in
 //! "height units" (fractions of the window height) so circles stay round
 //! at any aspect ratio.
+
+mod layout;
+pub use layout::{ButtonPlacement, LAYOUT_CVAR, TouchLayout};
+
+/// A full-height swipe on platforms without physical metrics uses the
+/// original 180-degree turn at the default sensitivity of 28 degrees/cm.
+const FALLBACK_HEIGHT_CM: f32 = 180.0 / 28.0;
+
+#[derive(Clone, Copy, Debug, Default)]
+pub struct TouchLook {
+    pub size_cm: Option<[f32; 2]>,
+    /// Maximum added gain, from zero (linear) to 0.5 (1.5x).
+    pub acceleration: f32,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+struct LookSample {
+    pos: [f32; 2],
+    time_ns: u64,
+}
+
+impl LookSample {
+    fn advance(&mut self, next: Self, aspect: f32, settings: TouchLook) -> [f32; 2] {
+        let [w, h] = settings.size_cm.unwrap_or([aspect * FALLBACK_HEIGHT_CM, FALLBACK_HEIGHT_CM]);
+        let [x, y] = [(next.pos[0] - self.pos[0]) * w, (next.pos[1] - self.pos[1]) * h];
+        let dt = next.time_ns.saturating_sub(self.time_ns) as f32 * 1e-9;
+        *self = next;
+        if settings.acceleration <= 0.0 || dt == 0.0 {
+            return [x, y];
+        }
+        let speed = x.hypot(y) / dt.max(0.001);
+        let t = ((speed - 12.0) / (65.0 - 12.0)).clamp(0.0, 1.0);
+        let gain = 1.0 + settings.acceleration * t * t * (3.0 - 2.0 * t);
+        [x * gain, y * gain]
+    }
+}
 
 /// Finger event phase.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -13,17 +47,17 @@ pub enum TouchPhase {
     Down,
     Move,
     Up,
+    Cancel,
 }
 
-/// An on-screen button. `cmd` starting with `+` is held (its `-` runs on
-/// release); anything else runs once on press.
+/// An on-screen button. Commands starting with `+` are held until release.
+/// Save and Load activate on release inside the button.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct TouchButton {
     pub label: &'static str,
-    pub cmd: &'static str,
-    /// Centre as (distance from the right edge or, if negative, minus the
-    /// distance from the left edge; distance from the bottom edge or, if
-    /// negative, minus the distance from the top), in height units.
+    pub cmd: Option<&'static str>,
+    /// Centre from the right and bottom safe edges in height units.
+    /// Negative distances anchor to the opposite edge.
     pub at: [f32; 2],
     pub radius: f32,
     /// Dragging the finger on this button also turns the view.
@@ -31,13 +65,35 @@ pub struct TouchButton {
 }
 
 // Kept above the modern HUD's bottom rows (health, ammo list).
-pub const BUTTONS: [TouchButton; 5] = [
-    TouchButton { label: "FIRE", cmd: "+attack", at: [0.17, 0.42], radius: 0.11, looks: true },
-    TouchButton { label: "JUMP", cmd: "+jump", at: [0.55, 0.30], radius: 0.08, looks: false },
-    TouchButton { label: "NEXT", cmd: "impulse 10", at: [0.11, 0.68], radius: 0.065, looks: false },
-    TouchButton { label: "PREV", cmd: "impulse 12", at: [0.31, 0.64], radius: 0.055, looks: false },
-    TouchButton { label: "MENU", cmd: "togglemenu", at: [-0.07, -0.07], radius: 0.045, looks: false },
+pub const BUTTONS: [TouchButton; 8] = [
+    TouchButton { label: "Fire", cmd: Some("+attack"), at: [0.17, 0.42], radius: 0.10, looks: true },
+    TouchButton { label: "JUMP", cmd: Some("+jump"), at: [0.35, 0.25], radius: 0.075, looks: false },
+    TouchButton { label: "WEAPON", cmd: None, at: [0.37, 0.49], radius: 0.075, looks: false },
+    TouchButton { label: "MENU", cmd: Some("togglemenu"), at: [-0.085, -0.085], radius: 0.06, looks: false },
+    TouchButton { label: "Swim Down", cmd: None, at: [0.53, 0.32], radius: 0.065, looks: false },
+    TouchButton { label: "Save", cmd: Some("save quick"), at: [-0.26, -0.075], radius: 0.065, looks: false },
+    TouchButton { label: "Load", cmd: Some("load quick"), at: [-0.42, -0.075], radius: 0.065, looks: false },
+    TouchButton { label: "Fire", cmd: Some("+attack"), at: [-0.25, -0.28], radius: 0.085, looks: false },
 ];
+const WHEEL: usize = 2;
+pub const WEAPON_HOLD_NS: u64 = 200_000_000;
+pub const PAUSE_BUTTON: usize = 3;
+pub const SWIM_DOWN: usize = 4;
+const QUICK_SAVE: usize = 5;
+const QUICK_LOAD: usize = 6;
+const MOVE_FIRE: usize = 7;
+const HIT_SCALE: f32 = 1.15;
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct TouchButtons {
+    pub submerged: bool,
+    pub quicksave: bool,
+    pub quickload: bool,
+}
+
+impl TouchButtons {
+    pub const PREVIEW: Self = Self { submerged: true, quicksave: true, quickload: true };
+}
 
 /// Key number passed with `+cmd` so the release matches the press
 /// (outside the real key range, so it never clashes with a held key).
@@ -50,8 +106,9 @@ pub const STICK_RADIUS: f32 = 0.12;
 enum Role {
     /// Floating stick: where the finger first landed, and where it is now.
     Move { origin: [f32; 2], pos: [f32; 2] },
-    Look { last: [f32; 2] },
-    Button { index: usize, last: [f32; 2] },
+    Look { last: LookSample },
+    Button { index: usize, last: LookSample },
+    Wheel { start: LookSample, pos: [f32; 2] },
 }
 
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -60,67 +117,54 @@ struct Finger {
     role: Role,
 }
 
-/// Window shape and control scale, from the host.
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct TouchLayout {
-    /// Width / height.
-    pub aspect: f32,
-    /// `touch_size` (1 = default).
-    pub size: f32,
-}
-
-impl TouchLayout {
-    /// Button centre in window-normalised coordinates, and radius in
-    /// height units.
-    pub fn button(&self, b: &TouchButton) -> ([f32; 2], f32) {
-        let s = self.size.clamp(0.5, 2.0);
-        let x = if b.at[0] >= 0.0 { 1.0 - b.at[0] * s / self.aspect } else { -b.at[0] * s / self.aspect };
-        let y = if b.at[1] >= 0.0 { 1.0 - b.at[1] * s } else { -b.at[1] * s };
-        ([x, y], b.radius * s)
-    }
-
-    fn stick_radius(&self) -> f32 {
-        STICK_RADIUS * self.size.clamp(0.5, 2.0)
-    }
-
-    /// Distance between two normalised points in height units.
-    fn dist(&self, a: [f32; 2], b: [f32; 2]) -> f32 {
-        ((a[0] - b[0]) * self.aspect).hypot(a[1] - b[1])
-    }
-}
-
 #[derive(Clone, Debug, Default, PartialEq)]
 pub struct TouchOverlay {
     fingers: Vec<Finger>,
-    /// Accumulated look drag since the last frame, in height units (+x
+    /// Accumulated look drag since the last frame, in centimeters (+x
     /// right, +y down).
     look: [f32; 2],
+    wheel_release: Option<(LookSample, LookSample)>,
+}
+
+/// The wheel tracks one finger relative to where it touched down.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub enum WheelGesture {
+    Held([f32; 2]),
+    Released { aim: [f32; 2], cycle: u8 },
 }
 
 impl TouchOverlay {
     /// Feed one finger event; returns console commands to run.
-    pub fn event(&mut self, id: u64, phase: TouchPhase, pos: [f32; 2], lay: &TouchLayout) -> Vec<String> {
+    pub fn event(&mut self, id: u64, phase: TouchPhase, pos: [f32; 2], time_ns: u64, lay: &TouchLayout, look: TouchLook) -> Vec<String> {
+        let sample = LookSample { pos, time_ns };
         let mut out = Vec::new();
         match phase {
             TouchPhase::Down => {
                 // a stray Down for a finger we already track: restart it
                 out.extend(self.lift(id));
-                let role = match BUTTONS.iter().position(|b| {
-                    let (c, r) = lay.button(b);
-                    lay.dist(pos, c) <= r * 1.15
-                }) {
-                    Some(index) => {
-                        let b = &BUTTONS[index];
-                        out.push(match b.cmd.strip_prefix('+') {
-                            Some(_) => format!("{} {}\n", b.cmd, TOUCH_KEY_BASE + index as i32),
-                            None => format!("{}\n", b.cmd),
-                        });
-                        Role::Button { index, last: pos }
+                if !lay.contains(pos) {
+                    return out;
+                }
+                let role = match lay.button_at(pos) {
+                    Some(index) if self.pressed(index) => return out,
+                    Some(WHEEL) => {
+                        self.wheel_release = None;
+                        Role::Wheel { start: sample, pos }
                     }
-                    None if pos[0] < 0.5 && !self.fingers.iter().any(|f| matches!(f.role, Role::Move { .. })) => {
+                    Some(index) => {
+                        if let Some(cmd) = BUTTONS[index].cmd.filter(|_| !matches!(index, QUICK_SAVE | QUICK_LOAD)) {
+                            out.push(if cmd.starts_with('+') {
+                                format!("{cmd} {}\n", TOUCH_KEY_BASE + index as i32)
+                            } else {
+                                format!("{cmd}\n")
+                            });
+                        }
+                        Role::Button { index, last: sample }
+                    }
+                    None if lay.move_side(pos[0]) && self.stick().is_none() => {
                         Role::Move { origin: pos, pos }
                     }
-                    None => Role::Look { last: pos },
+                    None => Role::Look { last: sample },
                 };
                 self.fingers.push(Finger { id, role });
             }
@@ -140,20 +184,34 @@ impl TouchOverlay {
                         }
                     }
                     Role::Look { last } => {
-                        self.look[0] += (pos[0] - last[0]) * aspect;
-                        self.look[1] += pos[1] - last[1];
-                        *last = pos;
+                        let delta = last.advance(sample, aspect, look);
+                        self.look[0] += delta[0];
+                        self.look[1] += delta[1];
                     }
-                    Role::Button { index, last } => {
-                        if BUTTONS[*index].looks {
-                            self.look[0] += (pos[0] - last[0]) * aspect;
-                            self.look[1] += pos[1] - last[1];
-                        }
-                        *last = pos;
+                    Role::Button { index, last } if BUTTONS[*index].looks => {
+                        let delta = last.advance(sample, aspect, look);
+                        self.look[0] += delta[0];
+                        self.look[1] += delta[1];
                     }
+                    Role::Button { .. } => {}
+                    Role::Wheel { pos: p, .. } => *p = pos,
                 }
             }
-            TouchPhase::Up => out.extend(self.lift(id)),
+            TouchPhase::Up => {
+                match self.fingers.iter().find(|f| f.id == id).map(|f| f.role) {
+                    Some(Role::Wheel { start, .. }) => self.wheel_release = Some((start, sample)),
+                    Some(Role::Button { index, .. }) if matches!(index, QUICK_SAVE | QUICK_LOAD)
+                        && lay.button_enabled(index) && lay.hits(index, pos) =>
+                    {
+                        if let Some(cmd) = BUTTONS[index].cmd {
+                            out.push(format!("{cmd}\n"));
+                        }
+                    }
+                    _ => {}
+                }
+                out.extend(self.lift(id));
+            }
+            TouchPhase::Cancel => out.extend(self.lift(id)),
         }
         out
     }
@@ -163,7 +221,7 @@ impl TouchOverlay {
         let f = self.fingers.remove(i);
         match f.role {
             Role::Button { index, .. } => {
-                let rest = BUTTONS[index].cmd.strip_prefix('+')?;
+                let rest = BUTTONS[index].cmd?.strip_prefix('+')?;
                 Some(format!("-{rest} {}\n", TOUCH_KEY_BASE + index as i32))
             }
             _ => None,
@@ -175,6 +233,16 @@ impl TouchOverlay {
     pub fn release_all(&mut self) -> Vec<String> {
         let ids: Vec<u64> = self.fingers.iter().map(|f| f.id).collect();
         self.look = [0.0; 2];
+        self.wheel_release = None;
+        ids.into_iter().filter_map(|id| self.lift(id)).collect()
+    }
+
+    /// Release controls that disappeared while a finger was still on them.
+    pub fn release_hidden(&mut self, layout: &TouchLayout) -> Vec<String> {
+        let ids: Vec<_> = self.fingers.iter().filter_map(|f| match f.role {
+            Role::Button { index, .. } if !layout.button_enabled(index) => Some(f.id),
+            _ => None,
+        }).collect();
         ids.into_iter().filter_map(|id| self.lift(id)).collect()
     }
 
@@ -194,9 +262,49 @@ impl TouchOverlay {
         }
     }
 
-    /// Take the look drag accumulated since the last call (height units).
+    /// Take the look drag accumulated since the last call (centimeters).
     pub fn take_look(&mut self) -> [f32; 2] {
         std::mem::take(&mut self.look)
+    }
+
+    pub fn has_look(&self) -> bool {
+        self.look != [0.0; 2]
+    }
+
+    /// A finger on the aim side that can drag to turn the view.
+    pub fn looking(&self, layout: &TouchLayout) -> bool {
+        self.fingers.iter().filter_map(|f| match f.role {
+            Role::Look { last } => Some(last.pos),
+            Role::Button { index, last } if BUTTONS[index].looks => Some(last.pos),
+            _ => None,
+        }).any(|pos| layout.contains(pos) && !layout.move_side(pos[0]))
+    }
+
+    pub fn wheel_held(&self) -> bool {
+        self.pressed(WHEEL)
+    }
+
+    pub fn take_wheel(&mut self, layout: &TouchLayout) -> Option<WheelGesture> {
+        let direction = |origin: [f32; 2], pos: [f32; 2]| {
+            let v = [(pos[0] - origin[0]) * layout.aspect, pos[1] - origin[1]];
+            let d = v[0].hypot(v[1]);
+            if d < 0.035 { [0.0; 2] } else { [v[0] / d, v[1] / d] }
+        };
+        if let Some((start, end)) = self.wheel_release.take() {
+            let dx = (end.pos[0] - start.pos[0]) * layout.aspect;
+            let dy = end.pos[1] - start.pos[1];
+            let quick = end.time_ns.saturating_sub(start.time_ns) < WEAPON_HOLD_NS;
+            let cycle = if quick && dx.abs() >= 0.055 && dx.abs() >= 1.5 * dy.abs() {
+                if dx > 0.0 { 10 } else { 12 }
+            } else {
+                0
+            };
+            return Some(WheelGesture::Released { aim: direction(start.pos, end.pos), cycle });
+        }
+        self.fingers.iter().find_map(|f| match f.role {
+            Role::Wheel { start, pos } => Some(WheelGesture::Held(direction(start.pos, pos))),
+            _ => None,
+        })
     }
 
     /// Active stick: base origin and finger position (normalised).
@@ -209,78 +317,21 @@ impl TouchOverlay {
 
     /// Whether a finger is holding button `index` of [`BUTTONS`].
     pub fn pressed(&self, index: usize) -> bool {
-        self.fingers.iter().any(|f| matches!(f.role, Role::Button { index: i, .. } if i == index))
+        self.fingers.iter().any(|f| match f.role {
+            Role::Button { index: i, .. } => i == index,
+            Role::Wheel { .. } => index == WHEEL,
+            _ => false,
+        })
     }
 
     pub fn any_finger(&self) -> bool {
         !self.fingers.is_empty()
     }
+
+    pub fn button_held_by(&self, id: u64) -> bool {
+        self.fingers.iter().any(|f| f.id == id && matches!(f.role, Role::Button { .. } | Role::Wheel { .. }))
+    }
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-    const LAY: TouchLayout = TouchLayout { aspect: 16.0 / 9.0, size: 1.0 };
-
-    #[test]
-    fn fire_button_holds_and_looks() {
-        let mut t = TouchOverlay::default();
-        let (c, _) = LAY.button(&BUTTONS[0]);
-        assert_eq!(t.event(1, TouchPhase::Down, c, &LAY), vec!["+attack 1000\n"]);
-        assert!(t.pressed(0));
-        t.event(1, TouchPhase::Move, [c[0] + 0.01, c[1]], &LAY);
-        assert!(t.take_look()[0] > 0.0);
-        assert_eq!(t.event(1, TouchPhase::Up, c, &LAY), vec!["-attack 1000\n"]);
-        assert!(!t.pressed(0));
-    }
-
-    #[test]
-    fn left_half_is_a_floating_stick() {
-        let mut t = TouchOverlay::default();
-        t.event(7, TouchPhase::Down, [0.2, 0.6], &LAY);
-        t.event(7, TouchPhase::Move, [0.2, 0.6 - 0.06], &LAY);
-        let v = t.move_vec(&LAY);
-        assert!(v[0].abs() < 1e-4 && (v[1] + 0.5).abs() < 1e-3, "{v:?}");
-        // past the rim: full deflection, base dragged along
-        t.event(7, TouchPhase::Move, [0.2, 0.1], &LAY);
-        assert!((t.move_vec(&LAY)[1] + 1.0).abs() < 1e-4);
-        assert!(t.stick().unwrap().0[1] < 0.6);
-        t.event(7, TouchPhase::Up, [0.2, 0.1], &LAY);
-        assert_eq!(t.move_vec(&LAY), [0.0; 2]);
-    }
-
-    #[test]
-    fn right_half_looks_and_one_shot_buttons() {
-        let mut t = TouchOverlay::default();
-        t.event(2, TouchPhase::Down, [0.6, 0.3], &LAY);
-        t.event(2, TouchPhase::Move, [0.6, 0.35], &LAY);
-        let l = t.take_look();
-        assert!(l[0] == 0.0 && (l[1] - 0.05).abs() < 1e-5);
-        assert_eq!(t.take_look(), [0.0; 2]);
-        let (c, _) = LAY.button(&BUTTONS[2]);
-        assert_eq!(t.event(3, TouchPhase::Down, c, &LAY), vec!["impulse 10\n"]);
-        assert!(t.event(3, TouchPhase::Up, c, &LAY).is_empty());
-    }
-
-    #[test]
-    fn release_all_lets_go_of_held_buttons() {
-        let mut t = TouchOverlay::default();
-        let (c, _) = LAY.button(&BUTTONS[1]);
-        t.event(4, TouchPhase::Down, c, &LAY);
-        t.event(5, TouchPhase::Down, [0.1, 0.5], &LAY);
-        assert_eq!(t.release_all(), vec!["-jump 1001\n"]);
-        assert!(!t.any_finger());
-    }
-
-    #[test]
-    fn buttons_dont_overlap() {
-        for lay in [LAY, TouchLayout { aspect: 4.0 / 3.0, size: 1.5 }] {
-            for (i, a) in BUTTONS.iter().enumerate() {
-                for b in &BUTTONS[i + 1..] {
-                    let ((ca, ra), (cb, rb)) = (lay.button(a), lay.button(b));
-                    assert!(lay.dist(ca, cb) > (ra + rb) * 1.15, "{} / {}", a.label, b.label);
-                }
-            }
-        }
-    }
-}
+mod tests;

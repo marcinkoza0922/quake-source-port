@@ -323,13 +323,6 @@ it Quanto la visuale ruota a sinistra e a destra quando ruoti il controller (ass
 es Cuánto gira la vista a izquierda y derecha al girar el mando (eje de guiñada)
 ru Насколько обзор поворачивается влево и вправо при повороте геймпада (ось рыскания)
 
-@ How far the view turns when you drag on the right half of the screen
-fr Amplitude de rotation de la vue quand vous glissez sur la moitié droite de l'écran
-de Wie weit sich die Sicht dreht, wenn du auf der rechten Bildschirmhälfte ziehst
-it Quanto ruota la visuale quando trascini sulla metà destra dello schermo
-es Cuánto gira la vista al arrastrar en la mitad derecha de la pantalla
-ru Насколько поворачивается обзор при движении пальцем по правой половине экрана
-
 @ How fast the boomerang flies (units per second)
 fr Vitesse de vol du boomerang (unités par seconde)
 de Wie schnell der Bumerang fliegt (Einheiten pro Sekunde)
@@ -595,13 +588,6 @@ de Die ältesten Spuren und Nägel werden an diesem gemeinsamen Limit wiederverw
 it I segni e i chiodi più vecchi vengono riciclati a questo limite comune
 es Las marcas y clavos más antiguos se reutilizan al alcanzar este límite común
 ru Самые старые следы и гвозди заменяются при достижении этого общего лимита
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-fr Stick et boutons à l'écran : auto les affiche après un toucher et les masque quand un autre périphérique est utilisé
-de Bildschirm-Stick und -Tasten: auto zeigt sie nach einer Berührung und blendet sie aus, wenn ein anderes Gerät genutzt wird
-it Levetta e pulsanti su schermo: auto li mostra dopo un tocco e li nasconde quando si usa un altro dispositivo
-es Palanca y botones en pantalla: auto los muestra tras un toque y los oculta al usar otro dispositivo
-ru Экранный стик и кнопки: авто показывает их после касания и скрывает при использовании другого устройства
 
 @ Only autosaves: quicksaves and the Save menu are off
 fr Sauvegardes auto uniquement : la sauvegarde rapide et le menu Sauvegarder sont désactivés
@@ -1477,3 +1463,73 @@ de Zeigt die letzten acht Spieleingaben an
 it Mostra gli ultimi otto comandi di gioco
 es Muestra las ocho últimas entradas durante la partida
 ru Показывает восемь последних действий игрока
+
+@ How far the view turns when you swipe
+fr Amplitude de rotation de la vue quand vous balayez l’écran
+de Wie weit sich der Blick beim Wischen dreht
+it Quanto ruota la visuale quando scorri il dito
+es Cuánto gira la vista al deslizar el dedo
+ru На какой угол поворачивается камера при движении пальца
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+fr Ralentit la visée près des cibles visibles. En match à mort, le serveur doit l’autoriser. Au niveau élevé, le viseur est aussi légèrement attiré par la cible.
+de Verlangsamt das Zielen nahe sichtbaren Zielen. Im Deathmatch entscheidet der Server. Auf Hoch zieht das Fadenkreuz auch leicht zum Ziel.
+it Rallenta la mira vicino ai bersagli visibili. In deathmatch serve il permesso del server. Su Alto attira leggermente il mirino verso il bersaglio.
+es Ralentiza la mira cerca de objetivos visibles. En combate a muerte el servidor debe permitirlo. En Alto también acerca suavemente la mira al objetivo.
+ru Замедляет прицеливание рядом с видимыми целями. В бою насмерть требуется разрешение сервера. На высоком уровне прицел также слегка притягивается к цели.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+fr Inverse les côtés du déplacement, de la visée et des boutons
+de Vertauscht die Seiten für Bewegung, Zielen und Spieltasten
+it Scambia i lati per movimento, mira e pulsanti di gioco
+es Intercambia los lados del movimiento, la mira y los botones de juego
+ru Меняет местами области движения, прицеливания и игровые кнопки
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+fr Glissez pour choisir, relâchez pour équiper
+de Wischen zum Auswählen, loslassen zum Ausrüsten
+it Scorri per scegliere, rilascia per equipaggiare
+es Desliza para elegir y suelta para equipar
+ru Проведите для выбора, отпустите для экипировки
+
+@ A mild speed boost for fast swipes
+fr Un léger gain de vitesse lors des gestes rapides
+de Schnelles Wischen beschleunigt die Sicht leicht
+it Aumenta leggermente la velocità dei movimenti rapidi
+es Aumenta ligeramente la velocidad al deslizar rápido
+ru Быстрые свайпы слегка ускоряют поворот
+
+@ Uses the Android device’s motion sensor.
+fr Utilise le capteur de mouvement de l’appareil Android.
+de Verwendet den Bewegungssensor des Android-Geräts.
+it Usa il sensore di movimento del dispositivo Android.
+es Usa el sensor de movimiento del dispositivo Android.
+ru Использует датчик движения устройства Android.
+
+@ Add a Fire button on the move side.
+fr Ajoute un bouton de tir du côté du déplacement.
+de Fügt eine Feuertaste auf der Bewegungsseite hinzu.
+it Aggiunge un pulsante di fuoco sul lato del movimento.
+es Añade un botón de disparo en el lado de movimiento.
+ru Добавляет кнопку огня на стороне движения.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+fr Tire sur les monstres dans le viseur en partie locale (clavier, souris, manette).
+de Feuert im lokalen Spiel auf Monster im Fadenkreuz (Tastatur, Maus, Controller).
+it Spara ai mostri nel mirino in partita locale (tastiera, mouse, controller).
+es Dispara a los monstruos bajo la mira en partidas locales (teclado, ratón, mando).
+ru Стрельба по монстрам под прицелом в локальной игре (клавиатура, мышь, геймпад).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+fr Tire sur les monstres dans le viseur en partie locale (écran tactile).
+de Feuert im lokalen Spiel auf Monster im Fadenkreuz (Touchscreen).
+it Spara ai mostri nel mirino in partita locale (schermo tattile).
+es Dispara a los monstruos bajo la mira en partidas locales (pantalla táctil).
+ru Стрельба по монстрам под прицелом в локальной игре (сенсорный экран).
+
+@ Vibrate on button presses and damage (Android).
+fr Vibre à la pression des boutons et en cas de dégâts (Android).
+de Vibriert bei Tastendruck und erlittenem Schaden (Android).
+it Vibra alla pressione dei pulsanti e quando subisci danni (Android).
+es Vibra al pulsar botones y al recibir daño (Android).
+ru Вибрация при нажатии кнопок и получении урона (Android).

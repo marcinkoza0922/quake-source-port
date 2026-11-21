@@ -526,6 +526,9 @@ mr परत येण्यापूर्वी हुक किती दू�
 @ How visible the on-screen controls are
 mr स्क्रीनवरील नियंत्रणे किती दिसतात
 
+@ Size of the menus and their buttons while you use the touchscreen
+mr टचस्क्रीन वापरताना मेनू आणि त्यांच्या बटणांचा आकार
+
 @ Impact Lifetime
 mr आघात कालावधी
 
@@ -613,8 +616,8 @@ mr सर्वात लांब गोठणे (ms)
 @ Look Down
 mr खाली पाहा
 
-@ Look Speed
-mr पाहण्याचा वेग
+@ Look Acceleration
+mr दृश्य त्वरण
 
 @ Look Up
 mr वर पाहा
@@ -720,6 +723,9 @@ mr लक्ष्यावरचा रंग
 
 @ Opacity
 mr अपारदर्शकता
+
+@ Menu Size
+mr मेनूचा आकार
 
 @ Opacity of the grenade arc
 mr ग्रेनेड कमानीची अपारदर्शकता
@@ -1781,6 +1787,18 @@ mr दिशात्मक प्रकाश
 @ Light Specular
 mr प्रकाश चमक
 
+@ Gameplay Overlay
+mr गेमप्ले आच्छादन
+
+@ Layout
+mr मांडणी
+
+@ Preview
+mr पूर्वावलोकन
+
+@ Resume Game
+mr खेळ पुन्हा सुरू करा
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ mr कंट्रोलर झुकवल्यावर दृश्य व�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 mr कंट्रोलर फिरवल्यावर दृश्य डावी-उजवीकडे किती वळते (यॉ अक्ष)
 
-@ How far the view turns when you drag on the right half of the screen
-mr स्क्रीनच्या उजव्या अर्ध्या भागावर ओढल्यावर दृश्य किती वळते
-
 @ How fast the boomerang flies (units per second)
 mr बूमरँग किती वेगाने उडतो (units प्रति सेकंद)
 
@@ -2038,9 +2053,6 @@ mr कितीही नुकसान किंवा किल बोनस 
 
 @ Oldest marks and nails are recycled at this shared limit
 mr सर्वात जुन्या खुणा आणि खिळे या सामायिक मर्यादेवर पुन्हा वापरले जातात
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-mr स्क्रीनवरील स्टिक आणि बटणे: ऑटो त्यांना स्पर्शानंतर दाखवते आणि दुसरे उपकरण वापरल्यावर लपवते
 
 @ Only autosaves: quicksaves and the Save menu are off
 mr फक्त ऑटोसेव्ह: क्विकसेव्ह आणि सेव्ह मेनू बंद आहेत
@@ -2412,6 +2424,18 @@ mr भिंती आणि मॉडेल्सवर सूक्ष्म �
 @ Strength of the highlights from directional lighting
 mr दिशात्मक प्रकाशातून येणाऱ्या चमकाची तीव्रता
 
+@ How far the view turns when you swipe
+mr तुम्ही स्वाइप करता तेव्हा दृश्य किती दूर वळते
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+mr दृश्यमान लक्ष्यांजवळ तुमचे स्वाइप धीमे करते. Deathmatch ला सर्व्हरची परवानगी आवश्यक आहे. उच्च पातळीवर नेमाची खूण लक्ष्याकडे थोडी ओढली जाते.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+mr हालचाली, लक्ष्य आणि गेमप्ले बटणांसाठी बाजू बदला
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+mr स्वयं सक्रिय इनपुट डिव्हाइसचे अनुसरण करते. आच्छादन बंद असताना मेनू उपलब्ध राहतो.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ mr लेव्हल निवड
 @ Really quit?
 mr खरंच बाहेर पडायचे?
 
+@ Quit
+mr बाहेर पडा
+
 @ You died
 mr तुमचा मृत्यू झाला
 
@@ -2557,9 +2584,6 @@ mr लेव्हल पुन्हा सुरू करा
 
 @ Return to main menu
 mr मुख्य मेनूवर परत जा
-
-@ (disabled)
-mr (बंद)
 
 @ (fixed for this game)
 mr (या गेमसाठी निश्चित)
@@ -3450,6 +3474,15 @@ mr फिल्टरशी जुळणारे सर्व्हर ना�
 @ Server search failed
 mr सर्व्हर शोध अयशस्वी झाला
 
+@ Slide to select, release to equip
+mr निवडण्यासाठी स्लाइड करा, सुसज्ज करण्यासाठी सोडा
+
+@ Tap to swap weapons.
+mr शस्त्रे स्वॅप करण्यासाठी टॅप करा.
+
+@ Hold and slide to select.
+mr निवडण्यासाठी धरा आणि स्लाइड करा.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ mr 100% इजा न होता
 
 @ Damage Skull
 mr इजेची कवटी
+
+@ A mild speed boost for fast swipes
+mr जलद स्वाइप केल्यावर दृश्य थोडे अधिक वेगाने फिरते
+
+@ Phone Gyro
+mr फोनचा जायरोस्कोप
+
+@ look zone
+mr दृश्य क्षेत्र
+
+@ while firing
+mr गोळीबार करताना
+
+@ Uses the Android device’s motion sensor.
+mr Android उपकरणाचा गती संवेदक वापरतो.
+
+@ Edit Layout
+mr मांडणी संपादित करा
+
+@ Drag to move
+mr हलवण्यासाठी ओढा
+
+@ Auto-fire
+mr आपोआप गोळीबार
+
+@ Touch Auto-fire
+mr स्पर्शावर आपोआप गोळीबार
+
+@ Move-side Fire
+mr हालचालीच्या बाजूला गोळीबार
+
+@ Touch Haptics
+mr स्पर्श कंपन
+
+@ Add a Fire button on the move side.
+mr हालचालीच्या बाजूला गोळीबाराचे बटण जोडते.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+mr स्थानिक खेळात नेमाच्या खुणेखालील राक्षसांवर गोळीबार करते (कीबोर्ड, माउस, कंट्रोलर).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+mr स्थानिक खेळात नेमाच्या खुणेखालील राक्षसांवर गोळीबार करते (स्पर्शपटल).
+
+@ Vibrate on button presses and damage (Android).
+mr बटण दाबल्यावर किंवा इजा झाल्यावर कंपन होते (Android).
+
+@ Swipe left or right to cycle.
+mr शस्त्र बदलण्यासाठी डावीकडे किंवा उजवीकडे स्वाइप करा.
+
+# Options page group headings.
+
+@ General
+mr सामान्य
+
+@ Saving
+mr जतन करणे
+
+@ Lighting
+mr प्रकाशयोजना
+
+@ Effects
+mr इफेक्ट्स
+
+@ Models
+mr मॉडेल्स
+
+@ Post-processing
+mr पोस्ट-प्रोसेसिंग
+
+@ World
+mr जग

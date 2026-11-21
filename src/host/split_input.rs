@@ -181,6 +181,7 @@ impl Host {
         let autoaim_allowed = self.local_autoaim_allowed() && !demo && in_game;
         let autoaim_fov = self.autoaim_fov();
         let autoaim_players = self.cv("deathmatch") != 0.0;
+        let autofire_allowed = !autoaim_players && !self.server.core.sv.paused;
         let cvars = &self.server.core.cvars;
         let entries = crate::wheel::inventory(cvars, &toys);
         for (g, targets) in self.guests.iter_mut().zip(&targets) {
@@ -194,6 +195,7 @@ impl Host {
             g.input.autoaim_fov = autoaim_fov;
             g.input.autoaim_players = autoaim_players;
             g.input.dest = if in_game { KeyDest::Game } else { KeyDest::Menu };
+            let autofire = autofire_allowed && g.pad.is_some() && g.input.autofire_enabled(cvars);
             let mut inp = g.input.frame(cvars, g.cl.viewangles, ft, ctx.as_ref());
             if !in_game {
                 inp = InputState::default();
@@ -204,7 +206,8 @@ impl Host {
             let mut fresh = inp.impulse;
             let alive = g.cl.stats[qnet::protocol::STAT_HEALTH] > 0;
             let allowed = in_game && alive && g.cl.intermission == 0 && !demo;
-            let choice = g.wheel.update(ft, g.input.wheel_held(), allowed, g.input.wheel_aim, &g.cl, &entries, g.toy.held);
+            let wheel_input = crate::wheel::WheelInput::Button { held: g.input.wheel_held(), aim: g.input.wheel_aim };
+            let choice = g.wheel.update(ft, wheel_input, allowed, &g.cl, &entries, g.toy.held);
             g.input.wheel_open = g.wheel.open;
             g.toy.update_slots(cvars, &toys, (inp.weapon_slot, &mut fresh), &g.cl);
             if let Some(weapon) = choice {
@@ -215,6 +218,8 @@ impl Host {
                 | if dodge && allowed { qserver::addons::BUTTON_DODGE } else { 0 };
             let impulse = if fresh != 0 { fresh } else { g.cmd.impulse };
             g.cmd = g.cl.base_move(&InputState { attack: false, jump: false, impulse: 0, ..inp }, &sp, ft);
+            g.auto_attack = autofire && buttons & 1 == 0 && impulse == 0 && g.toy.held.is_none()
+                && aim_vis::autofire_target(ctx.as_ref(), &g.cl);
             g.cmd.buttons = buttons;
             g.cmd.impulse = impulse;
             // Intermission: any button moves on, as for player 1.

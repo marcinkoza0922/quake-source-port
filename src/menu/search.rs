@@ -31,13 +31,18 @@ impl Hit {
         self.path.iter().map_while(|p| *p)
     }
 
+    /// Pages leading to a setting row (none for a top-level page).
+    pub(super) fn trail(&self) -> Vec<&'static str> {
+        if self.item.is_some() { self.pages().map(page_name).collect() } else { Vec::new() }
+    }
+
     fn page(&self) -> Page {
         self.pages().last().expect("hit without a page")
     }
 
     /// Opens a page (a sub-page row or a top-level page) rather than
     /// holding a value.
-    fn opens(&self) -> bool {
+    pub(super) fn opens(&self) -> bool {
         self.item.is_none_or(|i| matches!(i, Item::Sub { .. }))
     }
 }
@@ -72,7 +77,7 @@ pub(super) fn item_label(item: Item) -> Option<&'static str> {
         Item::ResetBinds => "Reset to Defaults",
         Item::ResetShaderParams => "Reset Shader Settings",
         Item::Map => "Map",
-        Item::ShaderParam(_) => return None,
+        Item::ShaderParam(_) | Item::Heading(_) => return None,
     })
 }
 
@@ -324,6 +329,23 @@ impl Menu {
         out.push(Action::Sound("misc/menu2.wav"));
     }
 
+    /// Results of the current search (touch layout).
+    pub(super) fn search_results(&self) -> &[Hit] {
+        &self.search.hits
+    }
+
+    /// Opens result `k`, as Enter on it does.
+    pub(super) fn search_pick(&mut self, k: usize, cv: &Cvars, out: &mut Vec<Action>) {
+        if let Some(&hit) = self.search.hits.get(k) {
+            self.jump(hit, cv, out);
+        }
+    }
+
+    /// A result whose page is switched off (shown muted).
+    pub(super) fn hit_dimmed(&self, h: &Hit, cv: &Cvars) -> bool {
+        gate(h, cv).is_some() || h.item.is_some_and(|i| matches!(i, Item::Sub { page, .. } if sub_disabled(page, cv)))
+    }
+
     /// Path to `page` for its title: the menu it hangs off, then each page.
     pub(super) fn crumbs(&self, page: Page) -> Vec<&'static str> {
         let mut chain = vec![page];
@@ -350,8 +372,9 @@ impl Menu {
         let segs = self.crumbs(page);
         let max = 600.0;
         let w = trail_w(c, &segs).min(max);
-        let x = if page == Page::Controls { LABEL_R - w } else { 320.0 - w / 2.0 };
-        draw_trail(c, x.max(20.0), PAGE_ROW0 - 16.0, &segs, max, GOLD_FG);
+        // Controls keeps the title over the label column, clear of the column headings
+        let (x, max) = if page == Page::Controls { (LABEL_X, VALUE_X - 8.0 - LABEL_X) } else { ((320.0 - w / 2.0).max(20.0), max) };
+        draw_trail(c, x, PAGE_ROW0 - 16.0, &segs, max, GOLD_FG);
     }
 
     pub(super) fn draw_search_bar(&self, c: &mut Canvas, realtime: f64) {
@@ -383,7 +406,7 @@ impl Menu {
     pub(super) fn draw_search_results(&self, c: &mut Canvas, cv: &Cvars) {
         let hits = &self.search.hits;
         let vis = self.hub_rows();
-        panel(c, ROW0, vis);
+        panel(c, ROW0, vis, self.game_running);
         if hits.is_empty() {
             c.text_center(320.0, ROW0 + 2.0, "No matching settings", TXT, MUTED);
             return;
@@ -395,7 +418,7 @@ impl Menu {
             let off = gate(h, cv).is_some()
                 || h.item.is_some_and(|i| matches!(i, Item::Sub { page, .. } if sub_disabled(page, cv)));
             let col = if off { MUTED } else if h.opens() { GOLD_FG } else { FG };
-            c.text_right(LABEL_R, y, h.label, TXT, col);
+            row_label(c, 0.0, y, h.label, col);
             if h.item.is_some() {
                 let segs: Vec<&str> = h.pages().map(page_name).collect();
                 draw_trail(c, VALUE_X, y, &segs, PANEL_X + PANEL_W - VALUE_X - 10.0, MUTED);
@@ -404,11 +427,11 @@ impl Menu {
             }
         }
         if hits.len() > vis {
-            let (x, h) = (PANEL_X + PANEL_W - 5.0, vis as f32 * ROW_H);
+            let (x, h) = (PANEL_X + PANEL_W - SCROLL_W - 2.0, vis as f32 * ROW_H);
             let th = (h * vis as f32 / hits.len() as f32).max(8.0);
             let ty = ROW0 + (h - th) * sc as f32 / (hits.len() - vis) as f32;
-            c.fill(x, ROW0, 3.0, h, [1.0, 1.0, 1.0, 0.12]);
-            c.fill(x, ty, 3.0, th, [0.85, 0.65, 0.3, 0.9]);
+            c.round_box(x, ROW0, SCROLL_W, h, SCROLL_W / 2.0, [1.0, 1.0, 1.0, 0.12], None);
+            c.round_box(x, ty, SCROLL_W, th, SCROLL_W / 2.0, [0.85, 0.65, 0.3, 0.9], None);
         }
     }
 }

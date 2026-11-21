@@ -294,7 +294,8 @@ impl Renderer {
     /// is on: high quality takes the nearest of all MSAA samples.
     pub(super) fn soft_particles(&self, st: &crate::Settings) -> Option<[f32; 2]> {
         let samples = if self.msaa > 1 && st.soft_particle_quality > 0 { self.msaa } else { 1 };
-        (st.soft_particle_distance > 0.0).then(|| [1.0 / st.soft_particle_distance, samples as f32])
+        (self.pipes.scene.fx.is_some() && st.soft_particle_distance > 0.0)
+            .then(|| [1.0 / st.soft_particle_distance, samples as f32])
     }
 
     /// Classic particles (camera-facing dots) and FTE particle geometry.

@@ -526,6 +526,9 @@ is Hversu langt krókurinn flýgur áður en hann snýr við
 @ How visible the on-screen controls are
 is Hversu sýnilegar stýringarnar á skjánum eru
 
+@ Size of the menus and their buttons while you use the touchscreen
+is Stærð valmynda og hnappa þeirra þegar þú notar snertiskjáinn
+
 @ Impact Lifetime
 is Líftími högga
 
@@ -613,8 +616,8 @@ is Lengsta frysting (ms)
 @ Look Down
 is Líta niður
 
-@ Look Speed
-is Sjónhraði
+@ Look Acceleration
+is Hröðun sjónarhorns
 
 @ Look Up
 is Líta upp
@@ -720,6 +723,9 @@ is Litur á skotmarki
 
 @ Opacity
 is Ógegnsæi
+
+@ Menu Size
+is Stærð valmynda
 
 @ Opacity of the grenade arc
 is Ógegnsæi sprengjubogans
@@ -1781,6 +1787,18 @@ is Stefnulýsing
 @ Light Specular
 is Ljósglampi
 
+@ Gameplay Overlay
+is Gameplay Overlay
+
+@ Layout
+is Skipulag
+
+@ Preview
+is Forskoðun
+
+@ Resume Game
+is Haltu leiknum áfram
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ is Hversu mikið sjónarhornið hallast upp og niður þegar þú hallar fjarst�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 is Hversu mikið sjónarhornið snýst til vinstri og hægri þegar þú snýrð fjarstýringunni (láréttur ás)
 
-@ How far the view turns when you drag on the right half of the screen
-is Hversu mikið sjónarhornið snýst þegar þú dregur á hægri helmingi skjásins
-
 @ How fast the boomerang flies (units per second)
 is Hversu hratt búmerangið flýgur (einingar á sekúndu)
 
@@ -2038,9 +2053,6 @@ is Engin einstök frysting varir lengur en þetta, sama hve mikið skaði eða d
 
 @ Oldest marks and nails are recycled at this shared limit
 is Elstu merki og naglar eru endurnýtt við þetta sameiginlega hámark
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-is Pinni og hnappar á skjá: sjálfvirkt sýnir þá eftir snertingu og felur þá þegar annað tæki er notað
 
 @ Only autosaves: quicksaves and the Save menu are off
 is Aðeins sjálfvirkar vistanir: flýtivistun og Vista-valmyndin eru óvirkar
@@ -2412,6 +2424,18 @@ is Notar forreiknaðar ljósstefnur (.dlit) fyrir fíngerða skyggingu og glampa
 @ Strength of the highlights from directional lighting
 is Styrkur glampa frá stefnulýsingu
 
+@ How far the view turns when you swipe
+is Hversu langt útsýnið snýr þegar þú strýkur
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+is Hægar á strokinu þínu nálægt sýnilegum skotmörkum. Deathmatch krefst leyfis netþjóns. Á hárri stillingu dregst miðið líka örlítið að skotmarkinu.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+is Skiptir á hliðunum fyrir hreyfingar-, miðunar- og spilunarhnappa
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+is Sjálfvirkt fylgir virka inntakstækinu. Valmyndin er áfram tiltæk þegar slökkt er á yfirborðinu.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ is Velja borð
 @ Really quit?
 is Hætta í alvöru?
 
+@ Quit
+is Hætta
+
 @ You died
 is Þú dóst
 
@@ -2557,9 +2584,6 @@ is Byrja borðið aftur
 
 @ Return to main menu
 is Aftur í aðalvalmynd
-
-@ (disabled)
-is (óvirkt)
 
 @ (fixed for this game)
 is (fast í þessum leik)
@@ -3450,6 +3474,15 @@ is Engir netþjónar passa við síurnar
 @ Server search failed
 is Leit að netþjónum mistókst
 
+@ Slide to select, release to equip
+is Renndu til að velja, slepptu til að útbúa
+
+@ Tap to swap weapons.
+is Bankaðu til að skipta um vopn.
+
+@ Hold and slide to select.
+is Haltu og renndu til að velja.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ is 100% án skaða
 
 @ Damage Skull
 is Skaðahauskúpa
+
+@ A mild speed boost for fast swipes
+is Hröð strok snúa sýninni aðeins hraðar
+
+@ Phone Gyro
+is Snúðskynjari símans
+
+@ look zone
+is sjónsvæði
+
+@ while firing
+is þegar skotið er
+
+@ Uses the Android device’s motion sensor.
+is Notar hreyfiskynjara Android-tækisins.
+
+@ Edit Layout
+is Breyta uppsetningu
+
+@ Drag to move
+is Dragðu til að færa
+
+@ Auto-fire
+is Sjálfvirk skothríð
+
+@ Touch Auto-fire
+is Sjálfvirk skothríð við snertingu
+
+@ Move-side Fire
+is Skothnappur á hreyfihlið
+
+@ Touch Haptics
+is Snertititringur
+
+@ Add a Fire button on the move side.
+is Bætir við skothnappi á hlið hreyfistýringar.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+is Skýtur á skrímsli í miði í staðbundnum leik (lyklaborð, mús, leikstýring).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+is Skýtur á skrímsli í miði í staðbundnum leik (snertiskjár).
+
+@ Vibrate on button presses and damage (Android).
+is Titrar þegar ýtt er á hnapp eða þú skaðast (Android).
+
+@ Swipe left or right to cycle.
+is Strjúktu til vinstri eða hægri til að skipta um vopn.
+
+# Options page group headings.
+
+@ General
+is Almennt
+
+@ Saving
+is Vistun
+
+@ Lighting
+is Lýsing
+
+@ Effects
+is Áhrif
+
+@ Models
+is Líkön
+
+@ Post-processing
+is Eftirvinnsla
+
+@ World
+is Heimur

@@ -44,6 +44,11 @@ impl Host {
     }
 
     pub(super) fn disconnect_client(&mut self) {
+        if self.input.touch.any_finger() {
+            qinput::release_touch(self);
+        }
+        self.touch_quickload_probe = 0.0;
+        self.touch_console_keyboard = false;
         if let Some(mut n) = self.net_client.take() {
             n.disconnect(self.realtime);
         }
@@ -617,6 +622,7 @@ impl Host {
                     self.view.parse_damage(&self.cl, &cv, armor, blood, from);
                     let s = ((armor + blood) as f32 / 30.0).min(1.0);
                     self.add_rumble(0.4 + 0.6 * s, 0.2 + 0.3 * s, 120 + (s * 250.0) as u32);
+                    self.add_touch_haptic(0.35 + 0.45 * s, 45 + (s * 65.0) as u32);
                 }
                 ClientEvent::Pause(p) => {
                     if let Some(snd) = &self.snd {

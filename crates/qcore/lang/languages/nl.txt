@@ -526,6 +526,9 @@ nl Hoe ver de haak vliegt voordat hij terugkeert
 @ How visible the on-screen controls are
 nl Hoe zichtbaar de schermbediening is
 
+@ Size of the menus and their buttons while you use the touchscreen
+nl Grootte van de menu's en hun knoppen als je het aanraakscherm gebruikt
+
 @ Impact Lifetime
 nl Levensduur inslagen
 
@@ -613,8 +616,8 @@ nl Langste bevriezing (ms)
 @ Look Down
 nl Omlaag kijken
 
-@ Look Speed
-nl Kijksnelheid
+@ Look Acceleration
+nl Kijkversnelling
 
 @ Look Up
 nl Omhoog kijken
@@ -720,6 +723,9 @@ nl Kleur op doelwit
 
 @ Opacity
 nl Dekking
+
+@ Menu Size
+nl Menugrootte
 
 @ Opacity of the grenade arc
 nl Dekking van de granaatboog
@@ -1781,6 +1787,18 @@ nl Gerichte belichting
 @ Light Specular
 nl Lichtglans
 
+@ Gameplay Overlay
+nl Gameplay-overlay
+
+@ Layout
+nl Indeling
+
+@ Preview
+nl Voorbeeld
+
+@ Resume Game
+nl Hervat het spel
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ nl Hoe ver het beeld op en neer kantelt als je de controller kantelt (pitch-as)
 @ How far the view turns left and right when you turn the controller (yaw axis)
 nl Hoe ver het beeld naar links en rechts draait als je de controller draait (yaw-as)
 
-@ How far the view turns when you drag on the right half of the screen
-nl Hoe ver het beeld draait als je over de rechterhelft van het scherm sleept
-
 @ How fast the boomerang flies (units per second)
 nl Hoe snel de boemerang vliegt (eenheden per seconde)
 
@@ -2038,9 +2053,6 @@ nl Geen enkele bevriezing duurt langer dan dit, hoeveel schade of killbonus er o
 
 @ Oldest marks and nails are recycled at this shared limit
 nl Bij deze gedeelde limiet worden de oudste sporen en spijkers hergebruikt
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-nl Stick en knoppen in beeld: auto toont ze na een aanraking en verbergt ze als een ander apparaat wordt gebruikt
 
 @ Only autosaves: quicksaves and the Save menu are off
 nl Alleen autosaves: snel opslaan en het opslagmenu zijn uitgeschakeld
@@ -2412,6 +2424,18 @@ nl Gebruikt vooraf berekende lichtrichtingen (.dlit) voor subtiele schaduw en gl
 @ Strength of the highlights from directional lighting
 nl Sterkte van de glanslichten uit gerichte belichting
 
+@ How far the view turns when you swipe
+nl Hoe ver het zicht draait als je veegt
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+nl Vertraagt uw veegbeweging in de buurt van zichtbare doelen. Deathmatch vereist servertoestemming. Op Hoog wordt het vizier ook licht naar het doel getrokken.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+nl Verwisselt de zijkanten voor bewegings-, richt- en gameplay-knoppen
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+nl Auto volgt het actieve invoerapparaat. Het menu blijft beschikbaar als de overlay is uitgeschakeld.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ nl Level kiezen
 @ Really quit?
 nl Echt afsluiten?
 
+@ Quit
+nl Afsluiten
+
 @ You died
 nl Je bent dood
 
@@ -2557,9 +2584,6 @@ nl Level herstarten
 
 @ Return to main menu
 nl Terug naar hoofdmenu
-
-@ (disabled)
-nl (uitgeschakeld)
 
 @ (fixed for this game)
 nl (vast voor dit spel)
@@ -3450,6 +3474,15 @@ nl Geen overeenkomende servers
 @ Server search failed
 nl Zoeken naar servers mislukt
 
+@ Slide to select, release to equip
+nl Schuif om te selecteren, laat los om uit te rusten
+
+@ Tap to swap weapons.
+nl Tik om wapens te wisselen.
+
+@ Hold and slide to select.
+nl Houd ingedrukt en schuif om te selecteren.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ nl 100% zonder schade
 
 @ Damage Skull
 nl Schadeschedel
+
+@ A mild speed boost for fast swipes
+nl Een lichte versnelling bij snelle veegbewegingen
+
+@ Phone Gyro
+nl Telefoongyroscoop
+
+@ look zone
+nl kijkzone
+
+@ while firing
+nl tijdens schieten
+
+@ Uses the Android device’s motion sensor.
+nl Gebruikt de bewegingssensor van het Android-apparaat.
+
+@ Edit Layout
+nl Indeling bewerken
+
+@ Drag to move
+nl Sleep om te verplaatsen
+
+@ Auto-fire
+nl Automatisch vuren
+
+@ Touch Auto-fire
+nl Automatisch vuren via aanraking
+
+@ Move-side Fire
+nl Vuren aan bewegingskant
+
+@ Touch Haptics
+nl Aanraaktrilling
+
+@ Add a Fire button on the move side.
+nl Voegt een vuurknop toe aan de bewegingskant.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+nl Vuurt op monsters in het vizier in een lokaal spel (toetsenbord, muis, controller).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+nl Vuurt op monsters in het vizier in een lokaal spel (aanraakscherm).
+
+@ Vibrate on button presses and damage (Android).
+nl Trilt bij knopdrukken en bij schade (Android).
+
+@ Swipe left or right to cycle.
+nl Veeg links of rechts om van wapen te wisselen.
+
+# Options page group headings.
+
+@ General
+nl Algemeen
+
+@ Saving
+nl Opslaan
+
+@ Lighting
+nl Belichting
+
+@ Effects
+nl Effecten
+
+@ Models
+nl Modellen
+
+@ Post-processing
+nl Nabewerking
+
+@ World
+nl Wereld

@@ -192,6 +192,8 @@ pub struct Host {
     ui_text: std::rc::Rc<std::cell::RefCell<crate::font::UiText>>,
     /// Rumble to play this frame (low, high, ms), taken by the main loop.
     rumble: Option<(u16, u16, u32)>,
+    touch_haptic: Option<(f32, u32)>,
+    touch_quickload_probe: f64,
     /// Last seen (weapon, ammo, weaponframe, punch) for fire rumble.
     fire_track: (i32, i32, i32, [f32; 3]),
     /// Held menu navigation key and when it repeats next (gamepad).
@@ -200,6 +202,8 @@ pub struct Host {
     pad_gestures: pad_gestures::PadGestures,
     /// Finger working the menu (tap/drag-scroll).
     menu_touch: Option<touch::MenuTouch>,
+    menu_fling: Option<touch::MenuFling>,
+    pub(crate) backgrounded: bool,
     last_cmd: UserCmd,
     screenshot: Option<String>,
     /// Save thumbnail to write from the next frame, and uploaded thumbnails
@@ -217,6 +221,7 @@ pub struct Host {
     pub window: Option<qplatform::Window>,
     /// SDL text input state last set (`None`: not yet), see `sync_key_dest`.
     pub(super) text_input: Option<bool>,
+    touch_console_keyboard: bool,
     cmdline: Vec<String>,
     last_vol: (f32, f32),
     metrics: metrics::Metrics,
@@ -371,10 +376,14 @@ impl Host {
             pad_families: Default::default(),
             ui_text: Default::default(),
             rumble: None,
+            touch_haptic: None,
+            touch_quickload_probe: 0.0,
             fire_track: (0, 0, 0, [0.0; 3]),
             nav_hold: None,
             pad_gestures: Default::default(),
             menu_touch: None,
+            menu_fling: None,
+            backgrounded: false,
             last_cmd: UserCmd::default(),
             screenshot: None,
             thumb: None,
@@ -387,6 +396,7 @@ impl Host {
             startup: 0,
             window: None,
             text_input: None,
+            touch_console_keyboard: false,
             cmdline,
             last_vol: (-1.0, -1.0),
             metrics: Default::default(),

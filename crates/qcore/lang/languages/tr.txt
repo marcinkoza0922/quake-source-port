@@ -526,6 +526,9 @@ tr Kancanın geri dönmeden önce ne kadar uçacağı
 @ How visible the on-screen controls are
 tr Ekran kontrollerinin ne kadar görünür olduğu
 
+@ Size of the menus and their buttons while you use the touchscreen
+tr Dokunmatik ekranı kullanırken menülerin ve düğmelerinin boyutu
+
 @ Impact Lifetime
 tr İz Kalıcılığı
 
@@ -613,8 +616,8 @@ tr En Uzun Donma (ms)
 @ Look Down
 tr Aşağı Bak
 
-@ Look Speed
-tr Bakış Hızı
+@ Look Acceleration
+tr Bakış hızlandırma
 
 @ Look Up
 tr Yukarı Bak
@@ -720,6 +723,9 @@ tr Hedef Rengi
 
 @ Opacity
 tr Opaklık
+
+@ Menu Size
+tr Menü Boyutu
 
 @ Opacity of the grenade arc
 tr Bomba yayının opaklığı
@@ -1781,6 +1787,18 @@ tr Yönlü Aydınlatma
 @ Light Specular
 tr Işık Parlaması
 
+@ Gameplay Overlay
+tr Oynanış Arayüzü
+
+@ Layout
+tr Düzen
+
+@ Preview
+tr Önizleme
+
+@ Resume Game
+tr Oyunu devam ettir
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ tr Kumandayı eğdiğinizde görüşün ne kadar yukarı ve aşağı eğileceği
 @ How far the view turns left and right when you turn the controller (yaw axis)
 tr Kumandayı döndürdüğünüzde görüşün ne kadar sola ve sağa döneceği (yatay eksen)
 
-@ How far the view turns when you drag on the right half of the screen
-tr Ekranın sağ yarısında sürüklediğinizde görüşün ne kadar döneceği
-
 @ How fast the boomerang flies (units per second)
 tr Bumerangın uçuş hızı (saniyede birim)
 
@@ -2038,9 +2053,6 @@ tr Ne kadar hasar veya öldürme bonusu eklenirse eklensin hiçbir donma bundan 
 
 @ Oldest marks and nails are recycled at this shared limit
 tr En eski lekeler ve çiviler bu ortak sınırda yeniden kullanılır
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-tr Ekrandaki çubuk ve düğmeler: otomatik, dokunulduğunda gösterir ve başka bir cihaz kullanıldığında gizler
 
 @ Only autosaves: quicksaves and the Save menu are off
 tr Yalnızca otomatik kayıt: hızlı kayıt ve Kaydet menüsü kapalı
@@ -2412,6 +2424,18 @@ tr Duvarlarda ve modellerde hafif gölgeleme ve parlamalar için önceden hesapl
 @ Strength of the highlights from directional lighting
 tr Yönlü aydınlatmadan gelen parlama vurgularının gücü
 
+@ How far the view turns when you swipe
+tr Kaydırdığınızda görünüm ne kadar uzağa döner?
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+tr Görünür hedeflerin yakınında kaydırmanızı yavaşlatır. Deathmatch sunucu izni gerektirir. Yüksek ayarı nişangâhı hafifçe hedefe çeker.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+tr Hareket, nişan alma ve oyun düğmeleri için kenarları değiştirir
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+tr Otomatik, etkin giriş cihazını takip eder. Yer paylaşımı kapalıyken menü kullanılabilir durumda kalır.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ tr Bölüm Seçimi
 @ Really quit?
 tr Gerçekten çıkılsın mı?
 
+@ Quit
+tr Çık
+
 @ You died
 tr Öldünüz
 
@@ -2557,9 +2584,6 @@ tr Bölümü yeniden başlat
 
 @ Return to main menu
 tr Ana menüye dön
-
-@ (disabled)
-tr (devre dışı)
 
 @ (fixed for this game)
 tr (bu oyun için sabit)
@@ -3450,6 +3474,15 @@ tr Filtrelere uyan sunucu yok
 @ Server search failed
 tr Sunucu araması başarısız
 
+@ Slide to select, release to equip
+tr Seçmek için kaydırın, donatmak için bırakın
+
+@ Tap to swap weapons.
+tr Silahları değiştirmek için dokunun.
+
+@ Hold and slide to select.
+tr Seçmek için basılı tutun ve kaydırın.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ tr 100% hasarsız
 
 @ Damage Skull
 tr Hasar kafatası
+
+@ A mild speed boost for fast swipes
+tr Hızlı kaydırmalarda dönüşü biraz hızlandırır
+
+@ Phone Gyro
+tr Telefon jiroskopu
+
+@ look zone
+tr bakış alanı
+
+@ while firing
+tr ateş ederken
+
+@ Uses the Android device’s motion sensor.
+tr Android cihazın hareket sensörünü kullanır.
+
+@ Edit Layout
+tr Düzeni düzenle
+
+@ Drag to move
+tr Taşımak için sürükle
+
+@ Auto-fire
+tr Otomatik ateş
+
+@ Touch Auto-fire
+tr Dokunmatik otomatik ateş
+
+@ Move-side Fire
+tr Hareket tarafında ateş
+
+@ Touch Haptics
+tr Dokunma titreşimi
+
+@ Add a Fire button on the move side.
+tr Hareket tarafına bir ateş düğmesi ekler.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+tr Yerel oyunda nişangâhtaki canavarlara ateş eder (klavye, fare, kumanda).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+tr Yerel oyunda nişangâhtaki canavarlara ateş eder (dokunmatik ekran).
+
+@ Vibrate on button presses and damage (Android).
+tr Düğmelere basınca ve hasar alınca titreşir (Android).
+
+@ Swipe left or right to cycle.
+tr Silah değiştirmek için sola veya sağa kaydır.
+
+# Options page group headings.
+
+@ General
+tr Genel
+
+@ Saving
+tr Kaydetme
+
+@ Lighting
+tr Aydınlatma
+
+@ Effects
+tr Efektler
+
+@ Models
+tr Modeller
+
+@ Post-processing
+tr Son işleme
+
+@ World
+tr Dünya

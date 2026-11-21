@@ -526,6 +526,9 @@ sk Ako ďaleko hák letí, kým sa vráti
 @ How visible the on-screen controls are
 sk Viditeľnosť ovládacích prvkov na obrazovke
 
+@ Size of the menus and their buttons while you use the touchscreen
+sk Veľkosť ponúk a ich tlačidiel pri ovládaní dotykovou obrazovkou
+
 @ Impact Lifetime
 sk Trvanie zásahov
 
@@ -613,8 +616,8 @@ sk Najdlhšie zmrazenie (ms)
 @ Look Down
 sk Pozrieť nadol
 
-@ Look Speed
-sk Rýchlosť pohľadu
+@ Look Acceleration
+sk Zrýchlenie pohľadu
 
 @ Look Up
 sk Pozrieť nahor
@@ -720,6 +723,9 @@ sk Farba na cieli
 
 @ Opacity
 sk Nepriehľadnosť
+
+@ Menu Size
+sk Veľkosť ponúk
 
 @ Opacity of the grenade arc
 sk Nepriehľadnosť oblúka granátu
@@ -1781,6 +1787,18 @@ sk Smerové osvetlenie
 @ Light Specular
 sk Odlesky svetla
 
+@ Gameplay Overlay
+sk Prekrytie hry
+
+@ Layout
+sk Rozloženie
+
+@ Preview
+sk Ukážka
+
+@ Resume Game
+sk Obnovte hru
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ sk Ako veľmi sa pohľad nakloní nahor a nadol pri naklonení ovládača (os sk
 @ How far the view turns left and right when you turn the controller (yaw axis)
 sk Ako veľmi sa pohľad otočí doľava a doprava pri otočení ovládača (os otáčania)
 
-@ How far the view turns when you drag on the right half of the screen
-sk Ako veľmi sa pohľad otočí pri ťahaní po pravej polovici obrazovky
-
 @ How fast the boomerang flies (units per second)
 sk Ako rýchlo bumerang letí (jednotky za sekundu)
 
@@ -2038,9 +2053,6 @@ sk Žiadne zmrazenie netrvá dlhšie, nech pridá poškodenie či bonus za zabit
 
 @ Oldest marks and nails are recycled at this shared limit
 sk Pri tomto spoločnom limite sa najstaršie stopy a klince recyklujú
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-sk Páčka a tlačidlá na obrazovke: auto ich zobrazí po dotyku a skryje pri použití iného zariadenia
 
 @ Only autosaves: quicksaves and the Save menu are off
 sk Iba automatické ukladanie: rýchle ukladanie a menu Uložiť sú vypnuté
@@ -2412,6 +2424,18 @@ sk Používa predpočítané smery svetla (.dlit) na jemné tieňovanie a odlesk
 @ Strength of the highlights from directional lighting
 sk Intenzita odleskov zo smerového osvetlenia
 
+@ How far the view turns when you swipe
+sk Ako ďaleko sa pohľad otočí, keď potiahnete prstom
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+sk Spomalí potiahnutie v blízkosti viditeľných cieľov. Deathmatch vyžaduje povolenie servera. Pri vysokom nastavení zameriavač tiež mierne priťahuje k cieľu.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+sk Vymieňa strany za tlačidlá pohybu, mierenia a hrania
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+sk Auto sleduje aktívne vstupné zariadenie. Ponuka zostane dostupná, keď je prekrytie vypnuté.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ sk Výber úrovne
 @ Really quit?
 sk Naozaj ukončiť?
 
+@ Quit
+sk Ukončiť
+
 @ You died
 sk Zomreli ste
 
@@ -2557,9 +2584,6 @@ sk Reštartovať úroveň
 
 @ Return to main menu
 sk Návrat do hlavného menu
-
-@ (disabled)
-sk (nedostupné)
 
 @ (fixed for this game)
 sk (pre túto hru pevné)
@@ -3450,6 +3474,15 @@ sk Žiadne zodpovedajúce servery
 @ Server search failed
 sk Vyhľadávanie serverov zlyhalo
 
+@ Slide to select, release to equip
+sk Posunutím vyberiete, uvoľnením vybavíte
+
+@ Tap to swap weapons.
+sk Klepnutím vymeníte zbrane.
+
+@ Hold and slide to select.
+sk Podržaním a posunutím vyberte.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ sk 100% bez poškodenia
 
 @ Damage Skull
 sk Lebka pri zásahu
+
+@ A mild speed boost for fast swipes
+sk Pri rýchlom potiahnutí sa pohľad mierne zrýchli
+
+@ Phone Gyro
+sk Gyroskop telefónu
+
+@ look zone
+sk oblasť pohľadu
+
+@ while firing
+sk pri streľbe
+
+@ Uses the Android device’s motion sensor.
+sk Používa snímač pohybu zariadenia Android.
+
+@ Edit Layout
+sk Upraviť rozloženie
+
+@ Drag to move
+sk Potiahnutím presuniete
+
+@ Auto-fire
+sk Automatická streľba
+
+@ Touch Auto-fire
+sk Dotyková automatická streľba
+
+@ Move-side Fire
+sk Streľba na strane pohybu
+
+@ Touch Haptics
+sk Dotykové vibrácie
+
+@ Add a Fire button on the move side.
+sk Pridá tlačidlo streľby na stranu pohybu.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+sk V miestnej hre strieľa na príšery v zameriavači (klávesnica, myš, ovládač).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+sk V miestnej hre strieľa na príšery v zameriavači (dotyková obrazovka).
+
+@ Vibrate on button presses and damage (Android).
+sk Vibruje pri stlačení tlačidiel a utrpení zranenia (Android).
+
+@ Swipe left or right to cycle.
+sk Potiahnutím doľava alebo doprava prepnete zbraň.
+
+# Options page group headings.
+
+@ General
+sk Všeobecné
+
+@ Saving
+sk Ukladanie
+
+@ Lighting
+sk Osvetlenie
+
+@ Effects
+sk Efekty
+
+@ Models
+sk Modely
+
+@ Post-processing
+sk Postprocessing
+
+@ World
+sk Svet

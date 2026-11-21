@@ -526,6 +526,9 @@ uk Як далеко летить гак, перш ніж повернутися
 @ How visible the on-screen controls are
 uk Наскільки помітні екранні елементи керування
 
+@ Size of the menus and their buttons while you use the touchscreen
+uk Розмір меню та їхніх кнопок під час користування сенсорним екраном
+
 @ Impact Lifetime
 uk Час життя слідів влучань
 
@@ -613,8 +616,8 @@ uk Найдовший стоп-кадр (мс)
 @ Look Down
 uk Дивитися вниз
 
-@ Look Speed
-uk Швидкість огляду
+@ Look Acceleration
+uk Прискорення огляду
 
 @ Look Up
 uk Дивитися вгору
@@ -720,6 +723,9 @@ uk Колір на цілі
 
 @ Opacity
 uk Непрозорість
+
+@ Menu Size
+uk Розмір меню
 
 @ Opacity of the grenade arc
 uk Непрозорість траєкторії гранати
@@ -1781,6 +1787,18 @@ uk Спрямоване освітлення
 @ Light Specular
 uk Відблиски світла
 
+@ Gameplay Overlay
+uk Накладання ігрового процесу
+
+@ Layout
+uk Макет
+
+@ Preview
+uk Попередній перегляд
+
+@ Resume Game
+uk Відновити гру
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ uk Наскільки огляд нахиляється вгору й униз, 
 @ How far the view turns left and right when you turn the controller (yaw axis)
 uk Наскільки огляд повертається ліворуч і праворуч, коли ви повертаєте геймпад (вісь рискання)
 
-@ How far the view turns when you drag on the right half of the screen
-uk Наскільки повертається огляд, коли ви ведете пальцем по правій половині екрана
-
 @ How fast the boomerang flies (units per second)
 uk Швидкість польоту бумеранга (одиниць за секунду)
 
@@ -2038,9 +2053,6 @@ uk Жоден стоп-кадр не триває довше, хоч скіль�
 
 @ Oldest marks and nails are recycled at this shared limit
 uk Найстаріші сліди й цвяхи замінюються після досягнення цього спільного ліміту
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-uk Екранний стік і кнопки: авто показує їх після дотику й ховає, коли використовується інший пристрій
 
 @ Only autosaves: quicksaves and the Save menu are off
 uk Лише автозбереження: швидке збереження й меню збереження вимкнені
@@ -2412,6 +2424,18 @@ uk Використовує запечені напрямки світла (.dli
 @ Strength of the highlights from directional lighting
 uk Інтенсивність відблисків від спрямованого освітлення
 
+@ How far the view turns when you swipe
+uk На яку відстань повертається зображення, коли ви проводите пальцем
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+uk Уповільнює проведення пальцем біля видимих цілей. Deathmatch вимагає дозволу сервера. На високому рівні приціл також трохи тягнеться до цілі.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+uk Змінює сторони для кнопок руху, прицілювання та ігрового процесу
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+uk Автоматично слідує за активним пристроєм введення. Меню залишається доступним, коли накладання вимкнено.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ uk Вибір рівня
 @ Really quit?
 uk Справді вийти?
 
+@ Quit
+uk Вийти
+
 @ You died
 uk Ви загинули
 
@@ -2557,9 +2584,6 @@ uk Почати рівень заново
 
 @ Return to main menu
 uk Повернутися в головне меню
-
-@ (disabled)
-uk (недоступно)
 
 @ (fixed for this game)
 uk (зафіксовано для цієї гри)
@@ -3450,6 +3474,15 @@ uk Немає відповідних серверів
 @ Server search failed
 uk Не вдалося виконати пошук серверів
 
+@ Slide to select, release to equip
+uk Посуньте, щоб вибрати, відпустіть, щоб спорядити
+
+@ Tap to swap weapons.
+uk Натисніть, щоб поміняти зброю.
+
+@ Hold and slide to select.
+uk Утримуйте та проведіть пальцем, щоб вибрати.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ uk 100% без ушкоджень
 
 @ Damage Skull
 uk Череп ушкодження
+
+@ A mild speed boost for fast swipes
+uk Швидкі жести трохи прискорюють поворот
+
+@ Phone Gyro
+uk Гіроскоп телефона
+
+@ look zone
+uk зона огляду
+
+@ while firing
+uk під час стрільби
+
+@ Uses the Android device’s motion sensor.
+uk Використовує датчик руху пристрою Android.
+
+@ Edit Layout
+uk Редагувати розкладку
+
+@ Drag to move
+uk Перетягніть для переміщення
+
+@ Auto-fire
+uk Автовогонь
+
+@ Touch Auto-fire
+uk Сенсорний автовогонь
+
+@ Move-side Fire
+uk Вогонь на боці руху
+
+@ Touch Haptics
+uk Вібровідгук
+
+@ Add a Fire button on the move side.
+uk Додає кнопку вогню на боці руху.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+uk Стріляє в монстрів під прицілом у локальній грі (клавіатура, миша, геймпад).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+uk Стріляє в монстрів під прицілом у локальній грі (сенсорний екран).
+
+@ Vibrate on button presses and damage (Android).
+uk Вібрує при натисканні кнопок та отриманні шкоди (Android).
+
+@ Swipe left or right to cycle.
+uk Проведіть ліворуч або праворуч, щоб змінити зброю.
+
+# Options page group headings.
+
+@ General
+uk Загальні
+
+@ Saving
+uk Збереження
+
+@ Lighting
+uk Освітлення
+
+@ Effects
+uk Ефекти
+
+@ Models
+uk Моделі
+
+@ Post-processing
+uk Постобробка
+
+@ World
+uk Світ

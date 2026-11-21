@@ -526,6 +526,9 @@ hi लौटने से पहले हुक कितनी दूर ज�
 @ How visible the on-screen controls are
 hi ऑन-स्क्रीन कंट्रोल्स कितने दिखाई देते हैं
 
+@ Size of the menus and their buttons while you use the touchscreen
+hi टचस्क्रीन इस्तेमाल करते समय मेनू और उनके बटनों का आकार
+
 @ Impact Lifetime
 hi इम्पैक्ट अवधि
 
@@ -613,8 +616,8 @@ hi सबसे लंबा फ़्रीज़ (ms)
 @ Look Down
 hi नीचे देखें
 
-@ Look Speed
-hi देखने की गति
+@ Look Acceleration
+hi दृश्य त्वरण
 
 @ Look Up
 hi ऊपर देखें
@@ -720,6 +723,9 @@ hi लक्ष्य पर रंग
 
 @ Opacity
 hi अपारदर्शिता
+
+@ Menu Size
+hi मेनू का आकार
 
 @ Opacity of the grenade arc
 hi ग्रेनेड आर्क की अपारदर्शिता
@@ -1781,6 +1787,18 @@ hi दिशात्मक प्रकाश
 @ Light Specular
 hi प्रकाश चमक
 
+@ Gameplay Overlay
+hi गेमप्ले ओवरले
+
+@ Layout
+hi लेआउट
+
+@ Preview
+hi पूर्वावलोकन
+
+@ Resume Game
+hi खेल फिर से शुरू करें
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ hi कंट्रोलर झुकाने पर दृश्य ऊपर-
 @ How far the view turns left and right when you turn the controller (yaw axis)
 hi कंट्रोलर घुमाने पर दृश्य बाएँ-दाएँ कितना घूमता है (यॉ अक्ष)
 
-@ How far the view turns when you drag on the right half of the screen
-hi स्क्रीन के दाएँ आधे हिस्से पर खींचने से दृश्य कितना घूमता है
-
 @ How fast the boomerang flies (units per second)
 hi बूमरैंग कितनी तेज़ उड़ता है (यूनिट प्रति सेकंड)
 
@@ -2038,9 +2053,6 @@ hi कोई भी फ़्रीज़ इससे लंबा नहीं
 
 @ Oldest marks and nails are recycled at this shared limit
 hi इस साझा सीमा पर सबसे पुराने निशान और कीलें दोबारा इस्तेमाल होते हैं
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-hi ऑन-स्क्रीन स्टिक और बटन: ऑटो उन्हें छूने पर दिखाता है और दूसरा डिवाइस इस्तेमाल होने पर छिपा देता है
 
 @ Only autosaves: quicksaves and the Save menu are off
 hi केवल ऑटोसेव: क्विकसेव और सेव मेन्यू बंद हैं
@@ -2412,6 +2424,18 @@ hi दीवारों और मॉडलों पर सूक्ष्म 
 @ Strength of the highlights from directional lighting
 hi दिशात्मक प्रकाश से मिलने वाली चमक की तीव्रता
 
+@ How far the view turns when you swipe
+hi जब आप स्वाइप करते हैं तो दृश्य कितनी दूर तक घूम जाता है
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+hi दृश्यमान लक्ष्यों के पास आपके स्वाइप को धीमा कर देता है। डेथमैच के लिए सर्वर की अनुमति की आवश्यकता होती है। उच्च स्तर पर निशाना थोड़ा लक्ष्य की ओर भी खिंचता है।
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+hi गति, लक्ष्य निर्धारण और गेमप्ले बटनों के लिए किनारों की अदला-बदली करता है
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+hi ऑटो सक्रिय इनपुट डिवाइस का अनुसरण करता है। ओवरले बंद होने पर मेनू उपलब्ध रहता है।
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ hi लेवल चुनें
 @ Really quit?
 hi सच में बाहर निकलें?
 
+@ Quit
+hi बाहर निकलें
+
 @ You died
 hi आप मारे गए
 
@@ -2557,9 +2584,6 @@ hi लेवल फिर से शुरू करें
 
 @ Return to main menu
 hi मुख्य मेन्यू पर लौटें
-
-@ (disabled)
-hi (बंद)
 
 @ (fixed for this game)
 hi (इस गेम के लिए तय)
@@ -3450,6 +3474,15 @@ hi फ़िल्टर से मेल खाने वाला कोई �
 @ Server search failed
 hi सर्वर की खोज विफल रही
 
+@ Slide to select, release to equip
+hi चयन करने के लिए स्लाइड करें, सुसज्जित करने के लिए रिलीज़ करें
+
+@ Tap to swap weapons.
+hi हथियार बदलने के लिए टैप करें.
+
+@ Hold and slide to select.
+hi चयन करने के लिए पकड़ें और स्लाइड करें.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ hi 100% बिना क्षति
 
 @ Damage Skull
 hi क्षति की खोपड़ी
+
+@ A mild speed boost for fast swipes
+hi तेज़ स्वाइप से दृश्य थोड़ा तेज़ घूमता है
+
+@ Phone Gyro
+hi फ़ोन का जायरोस्कोप
+
+@ look zone
+hi दृश्य क्षेत्र
+
+@ while firing
+hi गोली चलाते समय
+
+@ Uses the Android device’s motion sensor.
+hi Android डिवाइस के गति सेंसर का उपयोग करता है।
+
+@ Edit Layout
+hi लेआउट बदलें
+
+@ Drag to move
+hi खिसकाने के लिए खींचें
+
+@ Auto-fire
+hi स्वचालित फ़ायर
+
+@ Touch Auto-fire
+hi टच पर स्वचालित फ़ायर
+
+@ Move-side Fire
+hi चलने की ओर फ़ायर
+
+@ Touch Haptics
+hi टच कंपन
+
+@ Add a Fire button on the move side.
+hi चलने की ओर एक फ़ायर बटन जोड़ता है।
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+hi स्थानीय खेल में निशाने पर मौजूद राक्षसों पर गोली चलाता है (कीबोर्ड, माउस, कंट्रोलर)।
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+hi स्थानीय खेल में निशाने पर मौजूद राक्षसों पर गोली चलाता है (टचस्क्रीन)।
+
+@ Vibrate on button presses and damage (Android).
+hi बटन दबाने या चोट लगने पर कंपन (Android)।
+
+@ Swipe left or right to cycle.
+hi हथियार बदलने के लिए बाएँ या दाएँ स्वाइप करें।
+
+# Options page group headings.
+
+@ General
+hi सामान्य
+
+@ Saving
+hi सेव करना
+
+@ Lighting
+hi प्रकाश व्यवस्था
+
+@ Effects
+hi इफ़ेक्ट्स
+
+@ Models
+hi मॉडल
+
+@ Post-processing
+hi पोस्ट-प्रोसेसिंग
+
+@ World
+hi दुनिया

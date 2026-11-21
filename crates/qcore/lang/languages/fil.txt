@@ -526,6 +526,9 @@ fil Gaano kalayo lilipad ang hook bago bumalik
 @ How visible the on-screen controls are
 fil Gaano kakita ang mga kontrol sa screen
 
+@ Size of the menus and their buttons while you use the touchscreen
+fil Laki ng mga menu at ng mga button nito kapag ginagamit mo ang touchscreen
+
 @ Impact Lifetime
 fil Tagal ng Impact
 
@@ -613,8 +616,8 @@ fil Pinakamahabang Hinto (ms)
 @ Look Down
 fil Tumingin sa Ibaba
 
-@ Look Speed
-fil Bilis ng Tingin
+@ Look Acceleration
+fil Pagbilis ng Pagtingin
 
 @ Look Up
 fil Tumingin sa Itaas
@@ -720,6 +723,9 @@ fil Kulay sa Target
 
 @ Opacity
 fil Opacity
+
+@ Menu Size
+fil Laki ng Menu
 
 @ Opacity of the grenade arc
 fil Opacity ng arko ng granada
@@ -1781,6 +1787,18 @@ fil Direksiyonal na Ilaw
 @ Light Specular
 fil Kinang ng Ilaw
 
+@ Gameplay Overlay
+fil Overlay ng gameplay
+
+@ Layout
+fil Layout
+
+@ Preview
+fil Silipin
+
+@ Resume Game
+fil Ipagpatuloy ang laro
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ fil Gaano kalaki tumatagilid pataas at pababa ang tanaw kapag ikiniling mo ang c
 @ How far the view turns left and right when you turn the controller (yaw axis)
 fil Gaano kalaki lumiliko pakaliwa at pakanan ang tanaw kapag pinihit mo ang controller (yaw axis)
 
-@ How far the view turns when you drag on the right half of the screen
-fil Gaano kalaki lumiliko ang tanaw kapag nag-drag ka sa kanang kalahati ng screen
-
 @ How fast the boomerang flies (units per second)
 fil Gaano kabilis lumipad ang boomerang (unit kada segundo)
 
@@ -2038,9 +2053,6 @@ fil Walang hintong lalampas dito, gaano man kalaki ang idagdag ng pinsala o bonu
 
 @ Oldest marks and nails are recycled at this shared limit
 fil Nire-recycle ang pinakalumang marka at pako sa pinagsasaluhang limit na ito
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-fil Stick at button sa screen: ipinapakita ng auto pagkatapos ng touch at itinatago kapag gumamit ng ibang device
 
 @ Only autosaves: quicksaves and the Save menu are off
 fil Autosave lang: naka-off ang quicksave at ang Save menu
@@ -2412,6 +2424,18 @@ fil Gumagamit ng naka-bake na direksiyon ng ilaw (.dlit) para sa banayad na lili
 @ Strength of the highlights from directional lighting
 fil Lakas ng kislap mula sa direksiyonal na ilaw
 
+@ How far the view turns when you swipe
+fil Gaano kalayo lumiliko ang view kapag nag-swipe ka
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+fil Pinapabagal ang iyong pag-swipe malapit sa mga nakikitang target. Nangangailangan ng pahintulot ng server ang Deathmatch. Sa mataas na antas, bahagyang hinihila rin ang tutok patungo sa target.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+fil Pinapalitan ang mga gilid para sa paggalaw, pagpuntirya at mga pindutan ng gameplay
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+fil Auto sumusunod sa aktibong input device. Mananatiling available ang menu kapag naka-off ang overlay.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ fil Pumili ng Level
 @ Really quit?
 fil Talagang aalis?
 
+@ Quit
+fil Umalis
+
 @ You died
 fil Namatay ka
 
@@ -2557,9 +2584,6 @@ fil Ulitin ang level
 
 @ Return to main menu
 fil Bumalik sa main menu
-
-@ (disabled)
-fil (naka-disable)
 
 @ (fixed for this game)
 fil (nakapirmi sa larong ito)
@@ -3450,6 +3474,15 @@ fil Walang tumutugmang server
 @ Server search failed
 fil Nabigo ang paghahanap ng mga server
 
+@ Slide to select, release to equip
+fil I-slide para piliin, bitawan para i-equip
+
+@ Tap to swap weapons.
+fil I-tap para magpalit ng armas.
+
+@ Hold and slide to select.
+fil I-hold at i-slide para pumili.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ fil 100% walang pinsala
 
 @ Damage Skull
 fil Bungo ng pinsala
+
+@ A mild speed boost for fast swipes
+fil Bahagyang bumibilis ang paglingon kapag mabilis ang pag-swipe
+
+@ Phone Gyro
+fil Gyro ng Telepono
+
+@ look zone
+fil sona ng pagtingin
+
+@ while firing
+fil habang nagpapaputok
+
+@ Uses the Android device’s motion sensor.
+fil Ginagamit ang motion sensor ng Android device.
+
+@ Edit Layout
+fil I-edit ang Ayos
+
+@ Drag to move
+fil I-drag para ilipat
+
+@ Auto-fire
+fil Awtomatikong pagpapaputok
+
+@ Touch Auto-fire
+fil Awtomatikong putok sa touch
+
+@ Move-side Fire
+fil Putok sa panig ng galaw
+
+@ Touch Haptics
+fil Panginginig sa touch
+
+@ Add a Fire button on the move side.
+fil Nagdaragdag ng pindutan ng putok sa panig ng galaw.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+fil Pinaputukan ang halimaw na nasa tutok sa lokal na laro (keyboard, mouse, controller).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+fil Pinaputukan ang halimaw na nasa tutok sa lokal na laro (touchscreen).
+
+@ Vibrate on button presses and damage (Android).
+fil Umuuga kapag may pinindot na pindutan o nasaktan (Android).
+
+@ Swipe left or right to cycle.
+fil Mag-swipe pakaliwa o pakanan para magpalit ng sandata.
+
+# Options page group headings.
+
+@ General
+fil Pangkalahatan
+
+@ Saving
+fil Pag-save
+
+@ Lighting
+fil Ilaw
+
+@ Effects
+fil Mga Effect
+
+@ Models
+fil Mga Modelo
+
+@ Post-processing
+fil Post-processing
+
+@ World
+fil Mundo

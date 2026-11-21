@@ -28,6 +28,11 @@ impl Renderer {
             Some((s, cfg)) => match s.get_current_texture() {
                 wgpu::CurrentSurfaceTexture::Success(t) | wgpu::CurrentSurfaceTexture::Suboptimal(t) => Some(t),
                 wgpu::CurrentSurfaceTexture::Timeout | wgpu::CurrentSurfaceTexture::Occluded => return Ok(()),
+                #[cfg(target_os = "android")]
+                wgpu::CurrentSurfaceTexture::Lost if self.android_surface.is_some() => {
+                    self.android_surface.as_mut().unwrap().lost = true;
+                    return Ok(());
+                }
                 _ => {
                     s.configure(&self.dev, cfg);
                     return Ok(());
@@ -185,7 +190,8 @@ impl Renderer {
                 Part::Soft => &v.soft[..],
             };
             if part == Part::Soft {
-                pass.set_bind_group(3, &t.soft_group, &[]);
+                let Some(group) = &t.soft_group else { continue };
+                pass.set_bind_group(3, group, &[]);
             }
             for c in cmds {
                 if vm != Some(c.viewmodel) {
@@ -204,7 +210,10 @@ impl Renderer {
                     Pipe::AliasAlpha => &p.alias_alpha,
                     Pipe::AliasXray => &p.alias_xray,
                     Pipe::Poly(i) => &p.poly[i],
-                    Pipe::SoftPoly(i) => &p.fx.soft[i],
+                    Pipe::SoftPoly(i) => {
+                        let Some(fx) = &p.fx else { continue };
+                        &fx.soft[i]
+                    }
                 });
                 let mat = if c.pipe == Pipe::Sky { self.sky_group.as_ref() } else { self.bind_groups.get(&c.mat) };
                 let Some(mat) = mat else { continue };

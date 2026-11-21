@@ -6,14 +6,19 @@ impl Menu {
     pub fn mouse_move(&mut self, pos: (f32, f32), cv: &mut Cvars) -> Option<&'static str> {
         self.sync_autoaim_mapping(cv);
         self.mouse = Some(pos);
+        if self.screen == Screen::TouchEditor {
+            self.move_touch_button(pos, cv);
+            return None;
+        }
         if self.screen == Screen::HudEditor {
             self.hud_edit.mouse_move(pos, cv);
             return None;
         }
-        if self.autoaim_prompt || self.capturing() { return None; }
+        if self.tv_dialog_open() || self.autoaim_prompt || self.capturing() { return None; }
         if matches!(self.prompt, Some(Prompt::Launch { .. })) { return self.launch_hover(pos, cv); }
         if matches!(self.prompt, Some(Prompt::Preset { .. })) { return self.preset_hover(pos); }
         if self.prompt.is_some() { return self.prompt_hover(pos); }
+        if self.tv_input() { return self.tv_mouse_move(pos, cv); }
         if self.addon_mouse(pos) { return None; }
         if self.screen == Screen::OptionsPage(Page::WeaponPriority) {
             return self.wp_mouse_move(pos, cv);
@@ -73,11 +78,27 @@ impl Menu {
     }
 
     pub fn key(&mut self, key: i32, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
+        let out = self.key_event(key, cv, server_active);
+        self.settle_cursor();
+        out
+    }
+
+    fn key_event(&mut self, key: i32, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
+        if key != K_MOUSE1 && self.drop.is_none() {
+            self.touch_scroll = None;
+        }
         self.game_running = server_active;
         self.custom_running = server_active && cv.value_of("custom_active") != 0.0;
         sync_addon_binds(cv, server_active);
         self.sync_autoaim_mapping(cv);
         let mut out = Vec::new();
+        if key == K_MOUSE1 && self.tv_dialog_open() {
+            self.tv_dialog_click(cv, server_active, &mut out);
+            return out;
+        }
+        if self.tv_input() && !self.tv_dialog_open() && self.tv_key(key, cv, server_active, &mut out) {
+            return out;
+        }
         if self.binding_key(key, &mut out) { return out; }
         if self.addon_key(key, cv, &mut out) { return out; }
         if self.screen == Screen::OptionsPage(Page::WeaponPriority) {
@@ -98,6 +119,10 @@ impl Menu {
         }
         if self.prompt.is_some() {
             self.prompt_key(key, &mut out);
+            return out;
+        }
+        if self.screen == Screen::TouchEditor {
+            self.touch_editor_key(key, cv);
             return out;
         }
         if self.screen == Screen::HudEditor {
@@ -223,7 +248,7 @@ impl Menu {
             }
             if let Screen::OptionsPage(p) = self.screen
                 && let Some((x, top, h, ty, th)) = self.scrollbar(p)
-                && (x - 4.0..x + 7.0).contains(&pos.0)
+                && (x - 3.0..x + SCROLL_W + 4.0).contains(&pos.0)
                 && (top..top + h).contains(&pos.1)
             {
                 let grab = if (ty..ty + th).contains(&pos.1) { pos.1 - ty } else { th / 2.0 };
@@ -267,21 +292,32 @@ impl Menu {
             if let Some(c) = self.cursor_mut() {
                 *c = i;
             }
+            // the changed-value marker left of a label resets the row
+            if let Screen::OptionsPage(p) = self.screen
+                && p != Page::Touch
+                && pos.0 < LABEL_X - 2.0
+                && self.changed(self.page_item(p, i), cv)
+            {
+                if self.reset_row(self.page_item(p, i), cv, &mut out) {
+                    out.push(Action::Sound("misc/menu3.wav"));
+                }
+                return out;
+            }
+            if let Screen::OptionsPage(p) = self.screen && let Some(row) = self.slider_at(pos, cv) {
+                self.slider_drag = Some(row);
+                self.set_slider(self.page_item(p, row), pos.0, cv);
+                out.push(Action::Sound("misc/menu3.wav"));
+                return out;
+            }
+            if self.screen == Screen::OptionsPage(Page::Touch) && self.pick_touch_choice(i, pos, cv) {
+                out.push(Action::Sound("misc/menu3.wav"));
+                return out;
+            }
             // a click edits a text row (caret, drag to select); never submits it
             if let Screen::OptionsPage(p) = self.screen
                 && matches!(self.page_item(p, i), Item::Text { .. })
             {
                 self.text_click(i, pos.0, cv);
-                return out;
-            }
-            if let Screen::OptionsPage(p) = self.screen
-                && let item @ (Item::Slider { .. } | Item::ShaderParam(_)) = self.page_item(p, i)
-                && pos.0 >= SLIDER_X.0 - 8.0
-                && pos.0 < SLIDER_X.1 + 8.0
-            {
-                self.set_slider(item, pos.0, cv);
-                self.slider_drag = Some(i);
-                out.push(Action::Sound("misc/menu3.wav"));
                 return out;
             }
         }
@@ -307,15 +343,17 @@ impl Menu {
         };
         match self.screen {
             Screen::Death => {
-                wrap(&mut self.death_cursor, 4, &mut out);
-                let shortcut = (b'1' as i32..=b'4' as i32).contains(&key).then(|| (key - b'1' as i32) as usize);
+                let rows = self.death_rows();
+                self.death_cursor = self.death_cursor.min(rows - 1);
+                wrap(&mut self.death_cursor, rows, &mut out);
+                let shortcut = (b'1' as i32..b'1' as i32 + rows as i32).contains(&key).then(|| (key - b'1' as i32) as usize);
                 if enter || shortcut.is_some() {
                     let choice = shortcut.unwrap_or(self.death_cursor);
                     out.push(Action::Sound("misc/menu2.wav"));
                     out.push(Action::Command(format!("_death_choice {}\n", choice + 1)));
                 }
             }
-            Screen::None | Screen::HudEditor | Screen::DirBrowser | Screen::ServerBrowser => {}
+            Screen::None | Screen::HudEditor | Screen::TouchEditor | Screen::DirBrowser | Screen::ServerBrowser => {}
             Screen::Help => {}
             Screen::Main => {
                 if back {
@@ -340,6 +378,7 @@ impl Menu {
                             self.screen = Screen::Mods;
                         }
                         6 => out.push(Action::Command("menu_demos\n".into())),
+                        i if Some(i) == self.touch_shortcut_index() => self.open_touch_from_main(),
                         7 => self.open_customize(false),
                         _ => {}
                     }
@@ -354,26 +393,7 @@ impl Menu {
                 wrap(&mut self.sp_cursor, customize::SP_ITEMS, &mut out);
                 if enter {
                     out.push(Action::Sound("misc/menu2.wav"));
-                    match self.sp_cursor {
-                        0 => self.open_launch(launch::NEW_GAME_CMD.into(), false, None),
-                        1 => {
-                            out.push(Action::Command("_scansaves\n".into()));
-                            self.autosaves = false;
-                            self.open(Screen::Load);
-                        }
-                        3 => out.push(Action::Command("menu_levels\n".into())),
-                        _ if server_active && cv.value_of("custom_active") != 0.0 && cv.value_of("modifier_nosaves") != 0.0 => {
-                            let lines = vec![qcore::tr!("This game only autosaves."), qcore::tr!("(No Manual Saves modifier)")];
-                            self.confirm(lines, qcore::t!("OK"), String::new(), false);
-                        }
-                        _ => {
-                            if server_active {
-                                self.autosaves = false;
-                                out.push(Action::Command("_scansaves\n".into()));
-                                self.open(Screen::Save);
-                            }
-                        }
-                    }
+                    self.sp_select(self.sp_cursor, cv, server_active, &mut out);
                 }
             }
             Screen::Multiplayer => {
@@ -400,7 +420,7 @@ impl Menu {
                         self.save_scroll = 0.0;
                         out.push(Action::Command("_scansaves\n".into()));
                     } else {
-                        self.screen = Screen::SinglePlayer;
+                        self.screen = if std::mem::take(&mut self.cards_from_home) { Screen::Main } else { Screen::SinglePlayer };
                     }
                     return out;
                 }
@@ -492,6 +512,8 @@ impl Menu {
                     } else if matches!(p, Page::NewGameAddons | Page::Addons) {
                         self.opt_cursor = 1;
                         Screen::OptionsPage(if p == Page::Addons { Page::Customize } else { Page::NewGameCustomize })
+                    } else if p == Page::Touch && std::mem::take(&mut self.touch_from_main) {
+                        Screen::Main
                     } else if let Some((parent, row)) =
                         self.sub_return.take().filter(|r| r.1 == p).map(|r| (r.0, r.2)).or_else(|| parent_page(p))
                     {
@@ -505,6 +527,7 @@ impl Menu {
                 let n = self.page_len(p);
                 self.opt_cursor = self.opt_cursor.min(n - 1);
                 wrap(&mut self.opt_cursor, n, &mut out);
+                self.skip_headings(p, if up { -1 } else { 1 });
                 let item = self.page_item(p, self.opt_cursor);
                 match item {
                     Item::Text { cvar, .. } => {
@@ -578,7 +601,13 @@ impl Menu {
                     }
                     _ => {}
                 }
-                if enter && self.options(item).len() > 2 && !self.item_disabled(item, cv) {
+                if matches!(key, K_BACKSPACE | K_DEL | K_XBUTTON) {
+                    if self.reset_row(item, cv, &mut out) {
+                        out.push(Action::Sound("misc/menu3.wav"));
+                    }
+                    return out;
+                }
+                if p != Page::Touch && enter && self.options(item).len() > 2 && !self.item_disabled(item, cv) {
                     let cur = self.option_index(item, cv);
                     let mut d = Drop { item: self.opt_cursor, cursor: cur, scroll: 0 };
                     clamp_scroll(&mut d);

@@ -1,5 +1,10 @@
 # Performance plan
 
+> **Superseded on 2026-11-21 by [PLAN.md](PLAN.md)** (a leaner plan: ours
+> only until after optimising, one scene per feature, one everything-on
+> split-screen scene). The tooling, rules and open items below still apply
+> where PLAN.md points to them.
+
 Started 2026-11-17. Replaces the single `PERF_PLAN.md` (now
 [HISTORY.md](HISTORY.md)), which had grown into a results log that mixed
 two kinds of work with different rules. The plan is in two parts:

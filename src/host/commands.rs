@@ -259,6 +259,13 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         }
         h.sync_key_dest();
     });
+    // Debug: a finger tap at normalized screen coordinates (headless menu checks).
+    c.add("touch_tap", |h, a| {
+        let (x, y) = (a.argv(1).parse().unwrap_or(0.5f32), a.argv(2).parse().unwrap_or(0.5f32));
+        let t = qplatform::ticks_ns();
+        h.finger_event(9999, qplatform::FingerPhase::Down, x, y, t);
+        h.finger_event(9999, qplatform::FingerPhase::Up, x, y, t + 50_000_000);
+    });
     c.add("menu_options", |h, a| {
         use crate::menu::Page;
         let page = match a.argv(1).to_ascii_lowercase().as_str() {

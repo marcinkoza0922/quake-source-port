@@ -526,6 +526,9 @@ fi Kuinka pitkälle koukku lentää ennen paluuta
 @ How visible the on-screen controls are
 fi Kosketusohjainten näkyvyys
 
+@ Size of the menus and their buttons while you use the touchscreen
+fi Valikkojen ja niiden painikkeiden koko kosketusnäyttöä käytettäessä
+
 @ Impact Lifetime
 fi Osumajälkien kesto
 
@@ -613,8 +616,8 @@ fi Pisin jäädytys (ms)
 @ Look Down
 fi Katso alas
 
-@ Look Speed
-fi Katseen nopeus
+@ Look Acceleration
+fi Katselun kiihtyvyys
 
 @ Look Up
 fi Katso ylös
@@ -720,6 +723,9 @@ fi Väri kohteessa
 
 @ Opacity
 fi Peittävyys
+
+@ Menu Size
+fi Valikkojen koko
 
 @ Opacity of the grenade arc
 fi Kranaattiradan peittävyys
@@ -1781,6 +1787,18 @@ fi Suunnattu valaistus
 @ Light Specular
 fi Valon kiilto
 
+@ Gameplay Overlay
+fi Pelin peittokuva
+
+@ Layout
+fi Asettelu
+
+@ Preview
+fi Esikatselu
+
+@ Resume Game
+fi Jatka peliä
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1940,6 @@ fi Kuinka paljon näkymä kallistuu ylös ja alas, kun kallistat ohjainta (pysty
 @ How far the view turns left and right when you turn the controller (yaw axis)
 fi Kuinka paljon näkymä kääntyy vasemmalle ja oikealle, kun käännät ohjainta (vaaka-akseli)
 
-@ How far the view turns when you drag on the right half of the screen
-fi Kuinka paljon näkymä kääntyy, kun vedät ruudun oikealla puoliskolla
-
 @ How fast the boomerang flies (units per second)
 fi Kuinka nopeasti bumerangi lentää (yksikköä sekunnissa)
 
@@ -2038,9 +2053,6 @@ fi Mikään jäädytys ei kestä tätä pidempään, lisäsi vahinko tai tappobo
 
 @ Oldest marks and nails are recycled at this shared limit
 fi Vanhimmat jäljet ja naulat kierrätetään tällä yhteisellä rajalla
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-fi Ruudun tikku ja painikkeet: auto näyttää ne kosketuksen jälkeen ja piilottaa, kun käytetään muuta laitetta
 
 @ Only autosaves: quicksaves and the Save menu are off
 fi Vain automaattitallennukset: pikatallennus ja Tallenna-valikko eivät ole käytössä
@@ -2412,6 +2424,18 @@ fi Käyttää esilaskettuja valon suuntia (.dlit) hienovaraiseen varjostukseen j
 @ Strength of the highlights from directional lighting
 fi Suunnatun valaistuksen korostusten voimakkuus
 
+@ How far the view turns when you swipe
+fi Kuinka pitkälle näkymä kääntyy pyyhkäisemällä
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+fi Hidastaa pyyhkäisyäsi lähellä näkyviä kohteita. Deathmatch vaatii palvelimen luvan. Korkealla asetuksella tähtäin myös hakeutuu hieman kohti kohdetta.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+fi Vaihtaa sivut liike-, tähtäys- ja pelipainikkeita varten
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+fi Auto seuraa aktiivista syöttölaitetta. Valikko on käytettävissä, kun peittokuva on pois päältä.
+
 # ==== ui.txt ====
 
 # Menus and pop-ups outside the options pages: save cards, launch, presets,
@@ -2543,6 +2567,9 @@ fi Kentän valinta
 @ Really quit?
 fi Lopetetaanko?
 
+@ Quit
+fi Lopeta
+
 @ You died
 fi Kuolit
 
@@ -2557,9 +2584,6 @@ fi Aloita kenttä alusta
 
 @ Return to main menu
 fi Palaa päävalikkoon
-
-@ (disabled)
-fi (ei käytössä)
 
 @ (fixed for this game)
 fi (kiinteä tässä pelissä)
@@ -3450,6 +3474,15 @@ fi Suodattimia vastaavia palvelimia ei ole
 @ Server search failed
 fi Palvelinhaku epäonnistui
 
+@ Slide to select, release to equip
+fi Liu'uta valitaksesi, vapauta varustaaksesi
+
+@ Tap to swap weapons.
+fi Napauta vaihtaaksesi aseita.
+
+@ Hold and slide to select.
+fi Valitse pitämällä ja liu'uttamalla.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4085,74 @@ fi 100% ilman vahinkoa
 
 @ Damage Skull
 fi Vahinkokallo
+
+@ A mild speed boost for fast swipes
+fi Nopeat pyyhkäisyt kääntävät näkymää hieman nopeammin
+
+@ Phone Gyro
+fi Puhelimen gyroskooppi
+
+@ look zone
+fi katselualue
+
+@ while firing
+fi ammuttaessa
+
+@ Uses the Android device’s motion sensor.
+fi Käyttää Android-laitteen liikeanturia.
+
+@ Edit Layout
+fi Muokkaa asettelua
+
+@ Drag to move
+fi Siirrä vetämällä
+
+@ Auto-fire
+fi Automaattinen tulitus
+
+@ Touch Auto-fire
+fi Kosketuksen automaattitulitus
+
+@ Move-side Fire
+fi Tulitus liikkumispuolella
+
+@ Touch Haptics
+fi Kosketusvärinä
+
+@ Add a Fire button on the move side.
+fi Lisää tulituspainikkeen liikkumispuolelle.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+fi Ampuu tähtäimessä olevia hirviöitä paikallisessa pelissä (näppäimistö, hiiri, ohjain).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+fi Ampuu tähtäimessä olevia hirviöitä paikallisessa pelissä (kosketusnäyttö).
+
+@ Vibrate on button presses and damage (Android).
+fi Värisee painalluksista ja vahingon saamisesta (Android).
+
+@ Swipe left or right to cycle.
+fi Vaihda asetta pyyhkäisemällä vasemmalle tai oikealle.
+
+# Options page group headings.
+
+@ General
+fi Yleiset
+
+@ Saving
+fi Tallennus
+
+@ Lighting
+fi Valaistus
+
+@ Effects
+fi Tehosteet
+
+@ Models
+fi Mallit
+
+@ Post-processing
+fi Jälkikäsittely
+
+@ World
+fi Maailma
