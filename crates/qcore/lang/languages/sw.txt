@@ -613,8 +613,8 @@ sw Kuganda Kurefu Zaidi (ms)
 @ Look Down
 sw Angalia Chini
 
-@ Look Speed
-sw Kasi ya Kuangalia
+@ Look Acceleration
+sw Uongezaji Kasi ya Mtazamo
 
 @ Look Up
 sw Angalia Juu
@@ -1781,6 +1781,18 @@ sw Mwangaza wa Mwelekeo
 @ Light Specular
 sw Mng'ao wa Mwanga
 
+@ Gameplay Overlay
+sw Uwekeleaji wa Uchezaji
+
+@ Layout
+sw Mpangilio
+
+@ Preview
+sw Hakiki
+
+@ Resume Game
+sw Endelea na mchezo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ sw Kiasi mwonekano unainama juu na chini unapoinamisha kidhibiti (mhimili wa pit
 @ How far the view turns left and right when you turn the controller (yaw axis)
 sw Kiasi mwonekano unageuka kushoto na kulia unapogeuza kidhibiti (mhimili wa yaw)
 
-@ How far the view turns when you drag on the right half of the screen
-sw Kiasi mwonekano unageuka unapoburuta kwenye nusu ya kulia ya skrini
-
 @ How fast the boomerang flies (units per second)
 sw Kasi ya bumerangi kuruka (vipimo kwa sekunde)
 
@@ -2038,9 +2047,6 @@ sw Hakuna kuganda kunakozidi muda huu, hata madhara au bonasi ya kuua ikiongeza 
 
 @ Oldest marks and nails are recycled at this shared limit
 sw Alama na misumari ya zamani zaidi hutumika upya kwenye kikomo hiki cha pamoja
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-sw Stick na vitufe vya skrini: kiotomatiki huvionyesha baada ya mguso na kuvificha kifaa kingine kinapotumika
 
 @ Only autosaves: quicksaves and the Save menu are off
 sw Hifadhi za kiotomatiki pekee: hifadhi za haraka na menyu ya Kuhifadhi zimezimwa
@@ -2411,6 +2417,18 @@ sw Hutumia mielekeo ya mwanga iliyookwa (.dlit) kwa kivuli na mng'ao hafifu kwen
 
 @ Strength of the highlights from directional lighting
 sw Nguvu ya mng'ao kutoka kwa mwangaza wa mwelekeo
+
+@ How far the view turns when you swipe
+sw Mwonekano unageuka umbali gani unapotelezesha kidole
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+sw Hupunguza kasi ya kutelezesha kidole karibu na malengo yanayoonekana. Deathmatch inahitaji ruhusa ya seva. Kiwango cha juu pia huvuta alama ya kulenga kidogo kuelekea shabaha.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+sw Hubadilisha pande kwa vitufe vya kusonga, kulenga na kucheza mchezo
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+sw Kiotomatiki hufuata kifaa cha kuingiza data kinachotumika. Menyu husalia inapatikana wakati wekeleo umezimwa.
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ sw Hakuna seva inayolingana na vichujio
 @ Server search failed
 sw Utafutaji wa seva umeshindwa
 
+@ Slide to select, release to equip
+sw Telezesha kidole ili uchague, toa ili uweke vifaa
+
+@ Tap to swap weapons.
+sw Gusa ili kubadilishana silaha.
+
+@ Hold and slide to select.
+sw Shikilia na telezesha ili kuchagua.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ sw 100% bila madhara
 
 @ Damage Skull
 sw Fuvu la madhara
+
+@ A mild speed boost for fast swipes
+sw Kutelezesha kidole haraka hugeuza mtazamo kwa kasi zaidi kidogo
+
+@ Phone Gyro
+sw Jiroskopu ya Simu
+
+@ look zone
+sw eneo la mtazamo
+
+@ while firing
+sw unapofyatua
+
+@ Uses the Android device’s motion sensor.
+sw Hutumia kitambuzi cha mwendo cha kifaa cha Android.
+
+@ Edit Layout
+sw Hariri Mpangilio
+
+@ Drag to move
+sw Buruta ili kusogeza
+
+@ Auto-fire
+sw Ufyatuaji otomatiki
+
+@ Touch Auto-fire
+sw Ufyatuaji otomatiki kwa mguso
+
+@ Move-side Fire
+sw Fyatuo upande wa mwendo
+
+@ Touch Haptics
+sw Mtetemo wa mguso
+
+@ Add a Fire button on the move side.
+sw Huongeza kitufe cha kufyatua upande wa mwendo.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+sw Huwafyatulia risasi majitu yaliyo kwenye alama ya kulenga katika mchezo wa ndani (kibodi, kipanya, kidhibiti).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+sw Huwafyatulia risasi majitu yaliyo kwenye alama ya kulenga katika mchezo wa ndani (skrini ya mguso).
+
+@ Vibrate on button presses and damage (Android).
+sw Hutetemeka unapobonyeza kitufe au kupata madhara (Android).
+
+@ Swipe left or right to cycle.
+sw Telezesha kushoto au kulia ili kubadili silaha.

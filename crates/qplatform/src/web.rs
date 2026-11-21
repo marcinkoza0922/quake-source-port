@@ -259,6 +259,10 @@ impl Window {
         self.drawable_size()
     }
 
+    pub fn safe_insets(&self) -> [f32; 4] {
+        [0.0; 4]
+    }
+
     /// Pointer lock. Locking needs a user gesture, so it is requested now
     /// and again on the next click inside the canvas.
     pub fn set_relative_mouse(&self, on: bool) -> Result<()> {

@@ -3,6 +3,13 @@ use qcore::math::{Vec3, angle_vectors};
 use qinput::aim::Visibility;
 use qworld::hull::CollisionModel;
 
+pub(super) fn autofire_target(ctx: Option<&qinput::aim::AimContext>, cl: &qclient::ClientState) -> bool {
+    let range = if cl.stats[qnet::protocol::STAT_ACTIVEWEAPON] == 4096 { 64.0 } else { 2048.0 };
+    ctx.is_some_and(|ctx| qinput::aim::crosshair_on_monster(ctx, cl.viewangles, range, |id| {
+        cl.entities.get(id as usize).is_some_and(|ent| ent.model != 0)
+    }))
+}
+
 pub(super) struct WorldVis<'a> {
     cm: &'a CollisionModel,
     brushes: Vec<(usize, Vec3, [Vec3; 3])>,

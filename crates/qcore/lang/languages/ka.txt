@@ -613,8 +613,8 @@ ka უგრძესი გაყინვა (მწმ)
 @ Look Down
 ka ქვემოთ ყურება
 
-@ Look Speed
-ka ხედის სიჩქარე
+@ Look Acceleration
+ka ხედვის აჩქარება
 
 @ Look Up
 ka ზემოთ ყურება
@@ -1781,6 +1781,18 @@ ka მიმართული განათება
 @ Light Specular
 ka სინათლის ბზინვარება
 
+@ Gameplay Overlay
+ka თამაშის გადაფარვა
+
+@ Layout
+ka განლაგება
+
+@ Preview
+ka გადახედვა
+
+@ Resume Game
+ka განაახლეთ თამაში
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ ka რამდენად იხრება ხედი ზემოთ დ�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ka რამდენად ბრუნავს ხედი მარცხნივ და მარჯვნივ კონტროლერის მობრუნებისას (ჰორიზონტალური ღერძი)
 
-@ How far the view turns when you drag on the right half of the screen
-ka რამდენად ბრუნავს ხედი ეკრანის მარჯვენა ნახევარზე გადათრევისას
-
 @ How fast the boomerang flies (units per second)
 ka რა სისწრაფით მიფრინავს ბუმერანგი (ერთეული წამში)
 
@@ -2038,9 +2047,6 @@ ka ერთი გაყინვა ამაზე მეტხანს ა�
 
 @ Oldest marks and nails are recycled at this shared limit
 ka ამ საერთო ლიმიტზე უძველესი კვალი და ლურსმნები ხელახლა გამოიყენება
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ka ეკრანული სტიკი და ღილაკები: ავტო აჩენს მათ შეხების შემდეგ და მალავს სხვა მოწყობილობის გამოყენებისას
 
 @ Only autosaves: quicksaves and the Save menu are off
 ka მხოლოდ ავტოშენახვები: სწრაფი შენახვა და შენახვის მენიუ გამორთულია
@@ -2411,6 +2417,18 @@ ka იყენებს წინასწარ გამოთვლილ �
 
 @ Strength of the highlights from directional lighting
 ka მიმართული განათების ანარეკლების სიმძლავრე
+
+@ How far the view turns when you swipe
+ka რამდენად შორს უხვევს ხედი, როცა გადაფურცლავთ
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ka ანელებს თქვენს გადაფურცვლას ხილულ სამიზნეებთან. Deathmatch საჭიროებს სერვერის ნებართვას. მაღალ დონეზე სამიზნე ნიშნული ოდნავ მიიზიდება მიზნისკენ.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ka ცვლის გვერდებს მოძრაობის, დამიზნებისა და თამაშის ღილაკებისთვის
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ka ავტომატური მიჰყვება აქტიურ შეყვანის მოწყობილობას. მენიუ ხელმისაწვდომი რჩება, როდესაც გადაფარვა გამორთულია.
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ ka ფილტრების შესაბამისი სერვერ
 @ Server search failed
 ka სერვერების ძებნა ვერ მოხერხდა
 
+@ Slide to select, release to equip
+ka გაასრიალეთ ასარჩევად, გაათავისუფლეთ აღჭურვისთვის
+
+@ Tap to swap weapons.
+ka შეეხეთ იარაღის შესაცვლელად.
+
+@ Hold and slide to select.
+ka გააჩერეთ და გაასრიალეთ ასარჩევად.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ ka 100% დაზიანების გარეშე
 
 @ Damage Skull
 ka დაზიანების თავის ქალა
+
+@ A mild speed boost for fast swipes
+ka სწრაფი გასმა ხედს ოდნავ უფრო სწრაფად აბრუნებს
+
+@ Phone Gyro
+ka ტელეფონის გიროსკოპი
+
+@ look zone
+ka ხედვის ზონა
+
+@ while firing
+ka სროლისას
+
+@ Uses the Android device’s motion sensor.
+ka იყენებს Android მოწყობილობის მოძრაობის სენსორს.
+
+@ Edit Layout
+ka განლაგების შეცვლა
+
+@ Drag to move
+ka გადაათრიეთ გადასაადგილებლად
+
+@ Auto-fire
+ka ავტომატური სროლა
+
+@ Touch Auto-fire
+ka ავტომატური სროლა შეხებით
+
+@ Move-side Fire
+ka სროლა მოძრაობის მხარეს
+
+@ Touch Haptics
+ka შეხების ვიბრაცია
+
+@ Add a Fire button on the move side.
+ka ამატებს სროლის ღილაკს მოძრაობის მხარეს.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ka ლოკალურ თამაშში ესვრის სამიზნეში მოხვედრილ ურჩხულებს (კლავიატურა, მაუსი, კონტროლერი).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ka ლოკალურ თამაშში ესვრის სამიზნეში მოხვედრილ ურჩხულებს (სენსორული ეკრანი).
+
+@ Vibrate on button presses and damage (Android).
+ka ვიბრირებს ღილაკზე დაჭერის ან დაზიანებისას (Android).
+
+@ Swipe left or right to cycle.
+ka იარაღის შესაცვლელად გადაუსვით მარცხნივ ან მარჯვნივ.

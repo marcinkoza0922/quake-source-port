@@ -328,6 +328,7 @@ impl Renderer {
         self.models.push(Model::Alias(Box::new(AliasModel {
             verts,
             ibuf,
+            indices: all_idx,
             poses: all_poses,
             surfaces,
             frames,

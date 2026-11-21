@@ -613,8 +613,8 @@ eo Plej longa frosto (ms)
 @ Look Down
 eo Rigardi malsupren
 
-@ Look Speed
-eo Rigardrapido
+@ Look Acceleration
+eo Akcelo de Rigardo
 
 @ Look Up
 eo Rigardi supren
@@ -1781,6 +1781,18 @@ eo Direkta lumigo
 @ Light Specular
 eo Luma brilo
 
+@ Gameplay Overlay
+eo Ludado Overlay
+
+@ Layout
+eo Aranĝo
+
+@ Preview
+eo Antaŭrigardo
+
+@ Resume Game
+eo Rekomencu la ludon
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ eo Kiom la vido kliniĝas supren kaj malsupren kiam vi klinas la regilon (vertik
 @ How far the view turns left and right when you turn the controller (yaw axis)
 eo Kiom la vido turniĝas maldekstren kaj dekstren kiam vi turnas la regilon (horizontala akso)
 
-@ How far the view turns when you drag on the right half of the screen
-eo Kiom la vido turniĝas kiam vi trenas sur la dekstra duono de la ekrano
-
 @ How fast the boomerang flies (units per second)
 eo Kiom rapide flugas la bumerango (unuoj sekunde)
 
@@ -2038,9 +2047,6 @@ eo Neniu unuopa frosto daŭras pli longe ol ĉi tio, kiom ajn da damaĝo aŭ mor
 
 @ Oldest marks and nails are recycled at this shared limit
 eo La plej malnovaj makuloj kaj najloj estas reuzataj ĉe ĉi tiu komuna limo
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-eo Surekrana stango kaj butonoj: aŭtomate montras ilin post tuŝo kaj kaŝas ilin kiam alia aparato estas uzata
 
 @ Only autosaves: quicksaves and the Save menu are off
 eo Nur aŭtokonservoj: rapidaj konservoj kaj la menuo de konservado estas malŝaltitaj
@@ -2411,6 +2417,18 @@ eo Uzas antaŭkalkulitajn lumdirektojn (.dlit) por subtila ombrado kaj briloj su
 
 @ Strength of the highlights from directional lighting
 eo Forto de la briloj el direkta lumigo
+
+@ How far the view turns when you swipe
+eo Kiom malproksimen turniĝas la vido kiam vi glitas
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+eo Malrapidigas vian gliton proksime de videblaj celoj. Deathmatch postulas servilan permeson. Je alta nivelo la celilo ankaŭ milde moviĝas al la celo.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+eo Interŝanĝas la flankojn por butonoj de movado, celado kaj ludado
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+eo Aŭtomate sekvas la aktivan enigan aparaton. Menuo restas disponebla kiam la tegmento estas malŝaltita.
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ eo Neniuj serviloj kongruas kun la filtriloj
 @ Server search failed
 eo Servilserĉo malsukcesis
 
+@ Slide to select, release to equip
+eo Glitu por elekti, liberigu por ekipi
+
+@ Tap to swap weapons.
+eo Frapu por interŝanĝi armilojn.
+
+@ Hold and slide to select.
+eo Tenu kaj gliti por elekti.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ eo 100% sen damaĝo
 
 @ Damage Skull
 eo Damaĝa kranio
+
+@ A mild speed boost for fast swipes
+eo Rapidaj glitoj turnas la vidon iom pli rapide
+
+@ Phone Gyro
+eo Telefona Giroskopo
+
+@ look zone
+eo rigardzono
+
+@ while firing
+eo dum pafado
+
+@ Uses the Android device’s motion sensor.
+eo Uzas la movsensilon de la Android-aparato.
+
+@ Edit Layout
+eo Redakti Aranĝon
+
+@ Drag to move
+eo Trenu por movi
+
+@ Auto-fire
+eo Aŭtomata pafado
+
+@ Touch Auto-fire
+eo Tuŝa aŭtomata pafado
+
+@ Move-side Fire
+eo Pafo ĉe la movflanko
+
+@ Touch Haptics
+eo Tuŝa vibrado
+
+@ Add a Fire button on the move side.
+eo Aldonas pafbutonon ĉe la movflanko.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+eo Pafas al monstroj en la celilo dum loka ludo (klavaro, muso, regilo).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+eo Pafas al monstroj en la celilo dum loka ludo (tuŝekrano).
+
+@ Vibrate on button presses and damage (Android).
+eo Vibras je butonpremoj kaj ricevita damaĝo (Android).
+
+@ Swipe left or right to cycle.
+eo Glitu maldekstren aŭ dekstren por ŝanĝi armilon.

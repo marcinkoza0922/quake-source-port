@@ -613,8 +613,8 @@ ar أطول تجميد (مللي ثانية)
 @ Look Down
 ar النظر للأسفل
 
-@ Look Speed
-ar سرعة النظر
+@ Look Acceleration
+ar تسارع حركة النظر
 
 @ Look Up
 ar النظر للأعلى
@@ -1781,6 +1781,18 @@ ar إضاءة اتجاهية
 @ Light Specular
 ar لمعان الإضاءة
 
+@ Gameplay Overlay
+ar تراكب اللعب
+
+@ Layout
+ar التخطيط
+
+@ Preview
+ar معاينة
+
+@ Resume Game
+ar استئناف اللعبة
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ ar مقدار ميل الرؤية للأعلى والأسفل عند إمالة 
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ar مقدار انعطاف الرؤية يمينًا ويسارًا عند تدوير وحدة التحكم (محور الانعطاف)
 
-@ How far the view turns when you drag on the right half of the screen
-ar مقدار انعطاف الرؤية عند السحب على النصف الأيمن من الشاشة
-
 @ How fast the boomerang flies (units per second)
 ar سرعة طيران البوميرانغ (وحدة في الثانية)
 
@@ -2038,9 +2047,6 @@ ar لا يدوم أي تجميد أطول من هذا، مهما أضاف الض
 
 @ Oldest marks and nails are recycled at this shared limit
 ar تُعاد الآثار والمسامير الأقدم للاستخدام عند هذا الحد المشترك
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ar عصا وأزرار على الشاشة: التلقائي يُظهرها بعد اللمس ويخفيها عند استخدام جهاز آخر
 
 @ Only autosaves: quicksaves and the Save menu are off
 ar الحفظ التلقائي فقط: الحفظ السريع وقائمة الحفظ معطّلان
@@ -2411,6 +2417,18 @@ ar يستخدم اتجاهات الإضاءة المخبوزة (.dlit) لتظل�
 
 @ Strength of the highlights from directional lighting
 ar شدة اللمعان الناتج عن الإضاءة الاتجاهية
+
+@ How far the view turns when you swipe
+ar إلى أي مدى يتحول العرض عند التمرير
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ar يؤدي إلى إبطاء التمرير بالقرب من الأهداف المرئية. يتطلب Deathmatch إذن الخادم. في المستوى العالي تنجذب علامة التصويب برفق نحو الهدف أيضًا.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ar قم بتبديل الجوانب لأزرار الحركة والهدف واللعب
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ar يتبع تلقائي جهاز الإدخال النشط. تظل القائمة متاحة عند إيقاف تشغيل التراكب.
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ ar لا توجد خوادم تطابق عوامل التصفية
 @ Server search failed
 ar فشل البحث عن الخوادم
 
+@ Slide to select, release to equip
+ar قم بالتمرير للتحديد، ثم قم بالتحرير للتجهيز
+
+@ Tap to swap weapons.
+ar انقر لمبادلة الأسلحة.
+
+@ Hold and slide to select.
+ar اضغط مع الاستمرار ثم مرر للتحديد.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ ar 100% بلا ضرر
 
 @ Damage Skull
 ar جمجمة الضرر
+
+@ A mild speed boost for fast swipes
+ar تزيد التمريرات السريعة سرعة دوران الرؤية قليلاً
+
+@ Phone Gyro
+ar جيروسكوب الهاتف
+
+@ look zone
+ar منطقة النظر
+
+@ while firing
+ar أثناء الإطلاق
+
+@ Uses the Android device’s motion sensor.
+ar يستخدم مستشعر الحركة في جهاز Android.
+
+@ Edit Layout
+ar تعديل التخطيط
+
+@ Drag to move
+ar اسحب للنقل
+
+@ Auto-fire
+ar إطلاق تلقائي
+
+@ Touch Auto-fire
+ar إطلاق تلقائي باللمس
+
+@ Move-side Fire
+ar إطلاق النار في جانب الحركة
+
+@ Touch Haptics
+ar اهتزاز اللمس
+
+@ Add a Fire button on the move side.
+ar يضيف زر إطلاق نار في جانب الحركة.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ar يطلق النار على الوحوش التي عليها علامة التصويب في اللعب المحلي (لوحة المفاتيح، الفأرة، وحدة التحكم).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ar يطلق النار على الوحوش التي عليها علامة التصويب في اللعب المحلي (شاشة اللمس).
+
+@ Vibrate on button presses and damage (Android).
+ar اهتزاز عند ضغط الأزرار أو تلقي الضرر (أندرويد).
+
+@ Swipe left or right to cycle.
+ar اسحب يسارًا أو يمينًا لتبديل السلاح.

@@ -204,7 +204,7 @@ fn target() -> AimTarget {
 }
 
 #[test]
-fn aim_assist_gamepad_only() {
+fn gamepad_assist_rotates_but_mouse_does_not() {
     let mut h = host();
     let t = [target()];
     let ctx = AimContext { eye: [0.0; 3], player_velocity: [0.0; 3], targets: &t, vis: &NoWorld, allowed: true };
@@ -226,6 +226,112 @@ fn aim_assist_gamepad_only() {
     h.cvars.set("aim_assist", "0");
     frame(&mut h, Some(&ctx));
     assert_eq!(h.input.last_aim, AimResult::NONE);
+}
+
+#[test]
+fn touch_assist_scales_live_drag_near_visible_targets() {
+    use touch::TouchPhase;
+
+    struct Blocked;
+    impl aim::Visibility for Blocked {
+        fn visible(&self, _: [f32; 3], _: [f32; 3]) -> bool { false }
+    }
+
+    let mut h = host();
+    let targets = [target()];
+    let ctx = AimContext { eye: [0.0; 3], player_velocity: [0.0; 3], targets: &targets, vis: &NoWorld, allowed: true };
+    let blocked = AimContext { vis: &Blocked, ..ctx };
+    let denied = AimContext { allowed: false, ..ctx };
+    let layout = h.input.touch_layout(&h.cvars);
+    let ([x, y], _) = layout.button(0);
+    let finger = |h: &mut Host, id, phase, x, y| {
+        handle_event(h, InputEvent::Touch { id, phase, x, y, aspect: layout.aspect, timestamp_ns: 0 });
+    };
+    finger(&mut h, 2, TouchPhase::Down, 0.2, 0.6);
+    finger(&mut h, 2, TouchPhase::Move, 0.2, 0.5);
+    finger(&mut h, 1, TouchPhase::Down, x, y);
+    execute(&mut h);
+    let still = frame(&mut h, Some(&ctx));
+    assert!(still.attack && still.forward > 0.0);
+    assert_eq!(still.look_delta, [0.0; 2]);
+
+    let mut x = x;
+    let mut drag = |h: &mut Host, ctx: &AimContext| {
+        x -= 0.01;
+        finger(h, 1, TouchPhase::Move, x, y);
+        frame(h, Some(ctx)).look_delta[0]
+    };
+    assert!(h.input.last_aim.target.is_none());
+    let low = drag(&mut h, &ctx);
+    h.cvars.set("touch_aim_assist", "2");
+    let high = drag(&mut h, &ctx);
+    let wall = drag(&mut h, &blocked);
+    let disallowed = drag(&mut h, &denied);
+    h.cvars.set("touch_aim_assist", "0");
+    let off = drag(&mut h, &ctx);
+    assert!(high > 0.0 && high < low);
+    assert!((low / off - 0.75).abs() < 0.001);
+    assert!((high / off - 0.55).abs() < 0.001);
+    assert!((wall - off).abs() < 0.001);
+    assert!((disallowed - off).abs() < 0.001);
+}
+
+#[test]
+fn high_touch_assist_also_pulls_toward_the_target() {
+    let mut h = host();
+    let targets = [AimTarget { origin: [400.0, 30.0, -20.0], ..target() }];
+    let ctx = AimContext { eye: [0.0; 3], player_velocity: [0.0; 3], targets: &targets, vis: &NoWorld, allowed: true };
+    handle_event(&mut h, InputEvent::Touch { id: 1, phase: touch::TouchPhase::Down, x: 0.7, y: 0.3, aspect: 1.8, timestamp_ns: 0 });
+    for (strength, x) in [("1", 0.69), ("2", 0.68)] {
+        h.cvars.set("touch_aim_assist", strength);
+        handle_event(&mut h, InputEvent::Touch { id: 1, phase: touch::TouchPhase::Move, x, y: 0.3, aspect: 1.8, timestamp_ns: 0 });
+        let result = frame(&mut h, Some(&ctx));
+        if strength == "2" {
+            assert!(h.input.last_aim.delta[0] > 0.0 && result.look_delta[1] > 0.0);
+        } else {
+            assert_eq!(h.input.last_aim.delta, [0.0; 2]);
+            assert_eq!(result.look_delta[1], 0.0);
+        }
+    }
+    assert_eq!(frame(&mut h, Some(&ctx)).look_delta, [0.0; 2]);
+}
+
+#[test]
+fn autofire_settings_follow_the_active_input() {
+    let mut h = host();
+    h.input.autoaim_allowed = true;
+    h.cvars.set("touch_autofire", "1");
+    for (device, enabled) in [(Device::Touch, true), (Device::Gamepad, false), (Device::KeyboardMouse, false)] {
+        h.input.last_device = device;
+        assert_eq!(h.input.autofire_enabled(&h.cvars), enabled);
+    }
+    h.cvars.set("assist_autofire", "1");
+    assert!(h.input.autofire_enabled(&h.cvars));
+    h.cvars.set("touch_autofire", "0");
+    h.input.last_device = Device::Touch;
+    assert!(!h.input.autofire_enabled(&h.cvars));
+    h.input.last_device = Device::Gamepad;
+    h.input.dest = KeyDest::Menu;
+    assert!(!h.input.autofire_enabled(&h.cvars));
+    h.input.dest = KeyDest::Game;
+    h.input.autoaim_allowed = false;
+    assert!(!h.input.autofire_enabled(&h.cvars));
+}
+
+#[test]
+fn touch_swim_down_only_moves_while_submerged() {
+    let mut h = host();
+    let layout = h.input.touch_layout(&h.cvars);
+    let [x, y] = layout.button(touch::SWIM_DOWN).0;
+    let finger = |phase| InputEvent::Touch { id: 1, phase, x, y, aspect: layout.aspect, timestamp_ns: 0 };
+    h.input.touch_buttons.submerged = true;
+    handle_event(&mut h, finger(touch::TouchPhase::Down));
+    assert_eq!(frame(&mut h, None).movedown, 1.0);
+    h.input.touch_buttons.submerged = false;
+    assert_eq!(frame(&mut h, None).movedown, 0.0);
+    handle_event(&mut h, finger(touch::TouchPhase::Up));
+    handle_event(&mut h, finger(touch::TouchPhase::Down));
+    assert_eq!(frame(&mut h, None).movedown, 0.0);
 }
 
 #[test]
@@ -346,4 +452,38 @@ fn dodge_action_registers_and_preserves_brief_presses() {
     run(&mut h, "+dodge 42\n-dodge 42\n");
     assert!(h.input.dodge_pressed());
     assert!(!h.input.dodge_pressed());
+}
+
+#[test]
+fn phone_gyro_can_aim_without_a_controller_and_obeys_touch_and_fire_modes() {
+    use touch::TouchPhase;
+
+    let mut h = host();
+    h.input.phone_gyro = Some([0.0, 1.0, 0.0]);
+    h.cvars.set("gyro_phone_mode", "1");
+    let always = frame(&mut h, None).look_delta[0];
+    assert!(always > 0.0);
+
+    h.cvars.set("gyro_phone_mode", "2");
+    assert_eq!(frame(&mut h, None).look_delta[0], 0.0);
+    let touch = |h: &mut Host, phase, [x, y]: [f32; 2]| {
+        handle_event(h, InputEvent::Touch { id: 1, phase, x, y, aspect: 1.8, timestamp_ns: 0 });
+    };
+    touch(&mut h, TouchPhase::Down, [0.3, 0.3]);
+    assert_eq!(frame(&mut h, None).look_delta[0], 0.0);
+    touch(&mut h, TouchPhase::Up, [0.3, 0.3]);
+    touch(&mut h, TouchPhase::Down, [0.7, 0.3]);
+    assert_eq!(frame(&mut h, None).look_delta[0], always);
+    touch(&mut h, TouchPhase::Cancel, [0.7, 0.3]);
+    assert_eq!(frame(&mut h, None).look_delta[0], 0.0);
+
+    h.cvars.set("gyro_phone_mode", "3");
+    run(&mut h, "+attack 1\n");
+    assert_eq!(frame(&mut h, None).look_delta[0], always);
+    run(&mut h, "-attack 1\n");
+    assert_eq!(frame(&mut h, None).look_delta[0], 0.0);
+
+    h.cvars.set("gyro_phone_mode", "1");
+    set_key_dest(&mut h, KeyDest::Menu);
+    assert_eq!(frame(&mut h, None).look_delta[0], 0.0);
 }

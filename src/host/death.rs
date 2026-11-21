@@ -26,6 +26,7 @@ impl Host {
         self.pend_jump = false;
         self.pend_impulse = 0;
         self.con.open = false;
+        self.touch_quickload_probe = 0.0;
         self.menu.open(Screen::Death);
         self.death_choice(self.cv("cl_deathaction") as u32);
     }
@@ -52,6 +53,10 @@ impl Host {
             4 => {
                 self.cbuf.add_text("disconnect\n");
                 self.menu.open(Screen::Main);
+            }
+            5 if self.menu.death_quickload => {
+                self.menu.open(Screen::None);
+                self.cbuf.add_text("load quick\n");
             }
             _ => {}
         }

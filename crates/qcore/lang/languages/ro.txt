@@ -613,8 +613,8 @@ ro Înghețare maximă (ms)
 @ Look Down
 ro Privește în jos
 
-@ Look Speed
-ro Viteză privire
+@ Look Acceleration
+ro Accelerarea privirii
 
 @ Look Up
 ro Privește în sus
@@ -1781,6 +1781,18 @@ ro Iluminare direcțională
 @ Light Specular
 ro Reflexii speculare
 
+@ Gameplay Overlay
+ro Gameplay Overlay
+
+@ Layout
+ro Aspect
+
+@ Preview
+ro Previzualizare
+
+@ Resume Game
+ro Reluați jocul
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ ro Cât de mult se înclină privirea în sus și în jos când înclini control
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ro Cât de mult se rotește privirea la stânga și la dreapta când rotești controlerul (axa de girație)
 
-@ How far the view turns when you drag on the right half of the screen
-ro Cât de mult se rotește privirea când tragi cu degetul pe jumătatea dreaptă a ecranului
-
 @ How fast the boomerang flies (units per second)
 ro Cât de repede zboară bumerangul (unități pe secundă)
 
@@ -2038,9 +2047,6 @@ ro Nicio înghețare nu durează mai mult de atât, indiferent de daune sau bonu
 
 @ Oldest marks and nails are recycled at this shared limit
 ro Cele mai vechi urme și cuie sunt reciclate la această limită comună
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ro Stick și butoane pe ecran: auto le afișează după o atingere și le ascunde când se folosește alt dispozitiv
 
 @ Only autosaves: quicksaves and the Save menu are off
 ro Doar salvări automate: salvarea rapidă și meniul Salvare sunt dezactivate
@@ -2411,6 +2417,18 @@ ro Folosește direcții de lumină precalculate (.dlit) pentru umbrire și refle
 
 @ Strength of the highlights from directional lighting
 ro Intensitatea reflexiilor din iluminarea direcțională
+
+@ How far the view turns when you swipe
+ro Cât de departe se întoarce vizualizarea când glisați
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ro Încetinește glisarea în apropierea țintelor vizibile. Deathmatch necesită permisiunea serverului. La nivel ridicat, cătarea este și atrasă ușor spre țintă.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ro Schimbă părțile laterale pentru butoanele de mișcare, țintire și joc
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ro Auto urmărește dispozitivul de intrare activ. Meniul rămâne disponibil când suprapunerea este dezactivată.
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ ro Niciun server nu corespunde filtrelor
 @ Server search failed
 ro Căutarea serverelor a eșuat
 
+@ Slide to select, release to equip
+ro Glisați pentru a selecta, eliberați pentru a echipa
+
+@ Tap to swap weapons.
+ro Atingeți pentru a schimba armele.
+
+@ Hold and slide to select.
+ro Țineți apăsat și glisați pentru a selecta.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ ro 100% fără daune
 
 @ Damage Skull
 ro Craniu de daune
+
+@ A mild speed boost for fast swipes
+ro Glisările rapide măresc ușor viteza de rotire
+
+@ Phone Gyro
+ro Giroscopul telefonului
+
+@ look zone
+ro zona de privire
+
+@ while firing
+ro în timpul tragerii
+
+@ Uses the Android device’s motion sensor.
+ro Folosește senzorul de mișcare al dispozitivului Android.
+
+@ Edit Layout
+ro Editează aranjamentul
+
+@ Drag to move
+ro Trage pentru a muta
+
+@ Auto-fire
+ro Foc automat
+
+@ Touch Auto-fire
+ro Foc automat la atingere
+
+@ Move-side Fire
+ro Foc pe partea de deplasare
+
+@ Touch Haptics
+ro Vibrații la atingere
+
+@ Add a Fire button on the move side.
+ro Adaugă un buton de tragere pe partea de deplasare.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ro Trage în monștrii din cătare în jocul local (tastatură, mouse, controler).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ro Trage în monștrii din cătare în jocul local (ecran tactil).
+
+@ Vibrate on button presses and damage (Android).
+ro Vibrează la apăsarea butoanelor și la primirea daunelor (Android).
+
+@ Swipe left or right to cycle.
+ro Glisează la stânga sau la dreapta pentru a schimba arma.

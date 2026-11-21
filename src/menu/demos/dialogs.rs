@@ -38,8 +38,8 @@ impl crate::menu::Menu {
     }
 
     /// Lines under the export and rename dialogs' rows.
-    pub(in crate::menu) fn draw_dialog_notes(&self, c: &mut Canvas, rows: usize) {
-        let mut y = crate::menu::PAGE_ROW0 + rows as f32 * crate::menu::ROW_H + 30.0;
+    pub(in crate::menu) fn draw_dialog_notes(&self, c: &mut Canvas, page: crate::menu::Page) {
+        let mut y = self.page_bottom(page) + 30.0;
         for l in &self.dialog_info {
             c.text_center(320.0, y, l, TXT, MUTED);
             y += 11.0;

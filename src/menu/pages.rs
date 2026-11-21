@@ -65,6 +65,8 @@ pub(super) enum Run {
     ResetShotguns,
     ResetBulletTime,
     ResetHitstop,
+    ResetTouch,
+    EditTouch,
     /// Every gameplay modifier back to its default (standard rules).
     ResetModifiers,
     /// Export dialog: the highlighted clip (dimmed without one), or all.
@@ -297,6 +299,7 @@ pub(super) const GYRO: &[Item] = &[
     toggle("Gyro Aiming", "gyro_enable"),
     Item::Choice { label: "Aim Style", cvar: "joy_flick", choices: AIM_STYLE },
     Item::Choice { label: "Gyro Active", cvar: "gyro_mode", choices: GYRO_MODE },
+    Item::Choice { label: "Phone Gyro", cvar: "gyro_phone_mode", choices: PHONE_GYRO_MODE },
     slider("Yaw Sensitivity", "gyro_yawsensitivity", 0.0, 10.0, 0.25),
     slider("Pitch Sensitivity", "gyro_pitchsensitivity", 0.0, 10.0, 0.25),
     slider("Roll Sensitivity", "gyro_rollsensitivity", -10.0, 10.0, 0.25),
@@ -304,18 +307,11 @@ pub(super) const GYRO: &[Item] = &[
     slider("Flick Time", "joy_flick_time", 0.05, 0.5, 0.025),
 ];
 
+pub(super) const PHONE_GYRO_MODE: &[(&str, f32)] = &[("off", 0.0), ("always", 1.0), ("look zone", 2.0), ("while firing", 3.0)];
+
 pub(super) const AIM_STYLE: &[(&str, f32)] = &[("2D aiming", 0.0), ("flick stick", 1.0)];
 pub(super) const GYRO_MODE: &[(&str, f32)] = &[("always", 0.0), ("off while held", 1.0), ("only while held", 2.0)];
 
-pub(super) const TOUCH: &[Item] = &[
-    Item::Choice { label: "Touch Controls", cvar: "touch_enable", choices: TOUCH_MODE },
-    slider("Look Speed", "touch_sensitivity", 0.25, 3.0, 0.25),
-    toggle("Invert Look", "touch_invert"),
-    slider("Button Size", "touch_size", 0.5, 2.0, 0.25),
-    slider("Opacity", "touch_opacity", 0.1, 1.0, 0.1),
-];
-
-pub(super) const TOUCH_MODE: &[(&str, f32)] = &[("off", 0.0), ("auto", 1.0), ("always", 2.0)];
 pub(super) const GLYPHS: &[(&str, f32)] = &[("auto", 0.0), ("xbox", 1.0), ("playstation", 2.0), ("nintendo", 3.0)];
 pub(super) const WHEEL_TIME: &[(&str, f32)] = &[("off", 1.0), ("half speed", 0.5), ("quarter speed", 0.25), ("10% speed", 0.1)];
 
@@ -334,7 +330,7 @@ pub(super) const WATERWARP: &[(&str, f32)] = &[("off", 0.0), ("Classic", 1.0), (
 /// vkQuake numbering: 1 is GLQuake, 2 is Classic.
 pub(super) const PARTICLES: &[(&str, f32)] = &[("off", 0.0), ("GLQuake", 1.0), ("Classic", 2.0)];
 
-pub(super) const GRAPHICS: &[Item] = &[
+const GRAPHICS_ROWS: &[Item] = &[
     Item::DisplayMode,
     Item::Resolution,
     Item::Apply,
@@ -362,6 +358,13 @@ pub(super) const GRAPHICS: &[Item] = &[
     toggle("Interpolate Animation", "r_lerpmodels"),
     toggle("Interpolate Movement", "r_lerpmove"),
 ];
+
+pub(super) const GRAPHICS: &[Item] = if cfg!(target_os = "android") {
+    // Display Mode, Resolution and their Apply button are desktop controls.
+    GRAPHICS_ROWS.split_at(3).1
+} else {
+    GRAPHICS_ROWS
+};
 
 pub(super) const COLORBLIND: &[(&str, f32)] =
     &[("off", 0.0), ("protanopia", 1.0), ("deuteranopia", 2.0), ("tritanopia", 3.0)];
@@ -402,6 +405,8 @@ pub(super) const ACCESSIBILITY: &[Item] = &[
     Item::Choice { label: "Game Speed", cvar: "a11y_gamespeed", choices: GAME_SPEED },
     toggle("Auto-aim", "assist_autoaim"),
     Item::Sub { label: "Auto-aim Settings", page: Page::AutoAim },
+    toggle("Auto-fire", "assist_autofire"),
+    toggle("Touch Auto-fire", "touch_autofire"),
 ];
 
 pub(super) const HUD: &[Item] = &[

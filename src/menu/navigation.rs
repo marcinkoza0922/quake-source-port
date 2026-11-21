@@ -2,9 +2,21 @@
 use super::*;
 
 impl Menu {
+    pub(super) fn death_rows(&self) -> usize {
+        4 + usize::from(self.death_quickload)
+    }
+
     /// Back follows the current menu's content; drawing and mouse input share its bounds.
     pub(super) fn back_button(&self) -> Option<(f32, f32, f32, f32)> {
         if self.capturing() || self.osk.is_some() { return None; }
+        if self.screen == Screen::OptionsPage(Page::Touch) {
+            let [x, y, w, h] = touch::BACK;
+            return Some((x, y, w, h));
+        }
+        if self.screen == Screen::Main && self.touch_shortcut {
+            let [x, y, w, h] = touch::RESUME;
+            return Some((x, y, w, h));
+        }
         let (x, y) = match self.screen {
             Screen::SinglePlayer => (CLASSIC.0 + 72.0, CLASSIC.1 + 32.0 + customize::SP_ITEMS as f32 * 20.0 + 8.0),
             Screen::Multiplayer => (CLASSIC.0 + 72.0, CLASSIC.1 + 32.0 + 3.0 * 20.0 + 8.0),
@@ -16,7 +28,7 @@ impl Menu {
                 weapon_priority::WP_BACK
             }
             Screen::OptionsPage(p) => {
-                let bottom = PAGE_ROW0 + self.page_vis(p) as f32 * ROW_H;
+                let bottom = self.page_bottom(p);
                 // Leave room for contextual help, the player-colour preview
                 // and the Customize notes.
                 let gap = match p {
@@ -33,7 +45,8 @@ impl Menu {
             Screen::ServerBrowser => self.server_browser_back_position(),
             _ => return None,
         };
-        Some((x, y.min(MENU_H - 16.0), 60.0, 16.0))
+        let (width, height) = if self.touch_ui { (84.0, 24.0) } else { (60.0, 16.0) };
+        Some((x, y.min(MENU_H - height), width, height))
     }
 
     pub(super) fn draw_addon_hints(&self, c: &mut Canvas) {
@@ -81,7 +94,7 @@ impl Menu {
         let lines: Vec<String> = s.lines().flat_map(|part| wrap_tooltip_lines(c, part, 588.0, TXT)).collect();
         let w = lines.iter().map(|l| c.text_w_raw(l, TXT)).fold(0.0, f32::max);
         let h = lines.len() as f32 * 10.0 + 4.0;
-        let y = PAGE_ROW0 + self.page_vis(page) as f32 * ROW_H + 10.0;
+        let y = self.page_bottom(page) + 10.0;
         c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, h, 4.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
         for (i, line) in lines.iter().enumerate() {
             let lw = c.text_w_raw(line, TXT);
@@ -95,10 +108,15 @@ impl Menu {
         let bg = if hover { HILITE } else { [0.0, 0.0, 0.0, 0.7] };
         c.round_box(x, y, w, h, 4.0, bg, Some(BORDER));
         let fg = if hover { GOLD_FG } else { FG };
+        if self.screen == Screen::Main {
+            self.glyphs.button_label(c, [x, y, w, h], self.pad_ui.then_some(K_BBUTTON), qcore::t!("Resume Game"), 16.0, fg);
+            return;
+        }
+        let size = if self.screen == Screen::OptionsPage(Page::Touch) { 12.0 } else { TXT };
         if self.pad_ui {
-            self.glyphs.button_label(c, [x, y, w, h], Some(K_BBUTTON), qcore::t!("Back"), TXT, fg);
+            self.glyphs.button_label(c, [x, y, w, h], Some(K_BBUTTON), qcore::t!("Back"), size, fg);
         } else {
-            self.glyphs.button_label(c, [x, y, w, h], None, qcore::t!("< Back"), TXT, fg);
+            self.glyphs.button_label(c, [x, y, w, h], None, qcore::t!("< Back"), size, fg);
         }
     }
 
@@ -179,7 +197,7 @@ impl Menu {
 #[cfg(test)]
 mod tests;
 
-fn wrap_tooltip_lines(c: &Canvas, s: &str, max_w: f32, size: f32) -> Vec<String> {
+pub(super) fn wrap_tooltip_lines(c: &Canvas, s: &str, max_w: f32, size: f32) -> Vec<String> {
     if c.text_w_raw(s, size) <= max_w {
         return vec![s.to_string()];
     }

@@ -613,8 +613,8 @@ fa بیشترین انجماد (ms)
 @ Look Down
 fa نگاه به پایین
 
-@ Look Speed
-fa سرعت نگاه
+@ Look Acceleration
+fa شتاب چرخش دید
 
 @ Look Up
 fa نگاه به بالا
@@ -1781,6 +1781,18 @@ fa نورپردازی جهت‌دار
 @ Light Specular
 fa درخشش نور
 
+@ Gameplay Overlay
+fa پوشش بازی
+
+@ Layout
+fa طرح بندی
+
+@ Preview
+fa پیش نمایش
+
+@ Resume Game
+fa بازی را از سر بگیرید
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ fa میزان کج‌شدن دید به بالا و پایین با کج کرد�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 fa میزان چرخش دید به چپ و راست با چرخاندن دسته (محور افقی)
 
-@ How far the view turns when you drag on the right half of the screen
-fa میزان چرخش دید هنگام کشیدن روی نیمه‌ی راست صفحه
-
 @ How fast the boomerang flies (units per second)
 fa سرعت پرواز بومرنگ (واحد در ثانیه)
 
@@ -2038,9 +2047,6 @@ fa هیچ انجمادی بیش از این طول نمی‌کشد، هر قدر
 
 @ Oldest marks and nails are recycled at this shared limit
 fa قدیمی‌ترین نشان‌ها و میخ‌ها در این سقف مشترک بازیافت می‌شوند
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-fa استیک و دکمه‌های روی صفحه: خودکار پس از لمس نشانشان می‌دهد و با استفاده از دستگاه دیگر پنهانشان می‌کند
 
 @ Only autosaves: quicksaves and the Save menu are off
 fa فقط ذخیره‌ی خودکار: ذخیره‌ی سریع و منوی ذخیره خاموش‌اند
@@ -2411,6 +2417,18 @@ fa از جهت‌های نور ازپیش‌پخته (.dlit) برای سایه�
 
 @ Strength of the highlights from directional lighting
 fa شدت بازتاب‌های حاصل از نورپردازی جهت‌دار
+
+@ How far the view turns when you swipe
+fa هنگام کشیدن انگشت، منظره چقدر دور می‌شود
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+fa تند کشیدن شما را در نزدیکی اهداف قابل مشاهده کند می کند. Deathmatch به مجوز سرور نیاز دارد. در حالت زیاد، نشانه‌گیر کمی به سمت هدف کشیده می‌شود.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+fa دو طرف را با دکمه های حرکت، هدف گیری و بازی عوض می کند
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+fa خودکار دستگاه ورودی فعال را دنبال می کند. وقتی همپوشانی خاموش است، منو در دسترس می ماند.
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ fa هیچ سروری با فیلترها مطابقت ندارد
 @ Server search failed
 fa جستجوی سرورها ناموفق بود
 
+@ Slide to select, release to equip
+fa برای انتخاب اسلاید کنید، برای تجهیز رها کنید
+
+@ Tap to swap weapons.
+fa برای تعویض سلاح ضربه بزنید.
+
+@ Hold and slide to select.
+fa برای انتخاب نگه دارید و بلغزانید.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ fa 100% بدون آسیب
 
 @ Damage Skull
 fa جمجمهٔ آسیب
+
+@ A mild speed boost for fast swipes
+fa کشیدن سریع، دید را کمی سریع‌تر می‌چرخاند
+
+@ Phone Gyro
+fa ژیروسکوپ گوشی
+
+@ look zone
+fa ناحیهٔ دید
+
+@ while firing
+fa هنگام شلیک
+
+@ Uses the Android device’s motion sensor.
+fa از حسگر حرکت دستگاه Android استفاده می‌کند.
+
+@ Edit Layout
+fa ویرایش چیدمان
+
+@ Drag to move
+fa برای جابه‌جایی بکشید
+
+@ Auto-fire
+fa شلیک خودکار
+
+@ Touch Auto-fire
+fa شلیک خودکار لمسی
+
+@ Move-side Fire
+fa شلیک در سمت حرکت
+
+@ Touch Haptics
+fa لرزش لمسی
+
+@ Add a Fire button on the move side.
+fa دکمهٔ شلیک را به سمت حرکت اضافه می‌کند.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+fa در بازی محلی به هیولاهای زیر نشانه‌گیر شلیک می‌کند (صفحه‌کلید، ماوس، دستهٔ بازی).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+fa در بازی محلی به هیولاهای زیر نشانه‌گیر شلیک می‌کند (صفحهٔ لمسی).
+
+@ Vibrate on button presses and damage (Android).
+fa با فشردن دکمه یا دریافت آسیب می‌لرزد (اندروید).
+
+@ Swipe left or right to cycle.
+fa برای تعویض سلاح به چپ یا راست بکشید.

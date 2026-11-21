@@ -613,8 +613,8 @@ pa ਸਭ ਤੋਂ ਲੰਬਾ ਠਹਿਰਾਅ (ms)
 @ Look Down
 pa ਹੇਠਾਂ ਦੇਖੋ
 
-@ Look Speed
-pa ਦੇਖਣ ਦੀ ਸਪੀਡ
+@ Look Acceleration
+pa ਨਜ਼ਰ ਦੀ ਗਤੀ ਵਧਾਉਣਾ
 
 @ Look Up
 pa ਉੱਪਰ ਦੇਖੋ
@@ -1781,6 +1781,18 @@ pa ਦਿਸ਼ਾਵੀ ਰੌਸ਼ਨੀ
 @ Light Specular
 pa ਰੌਸ਼ਨੀ ਦੀ ਚਮਕ
 
+@ Gameplay Overlay
+pa ਗੇਮਪਲੇ ਓਵਰਲੇ
+
+@ Layout
+pa ਖਾਕਾ
+
+@ Preview
+pa ਝਲਕ
+
+@ Resume Game
+pa ਖੇਡ ਨੂੰ ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ pa ਕੰਟਰੋਲਰ ਝੁਕਾਉਣ 'ਤੇ ਦ੍ਰਿਸ਼ ਕਿੰ
 @ How far the view turns left and right when you turn the controller (yaw axis)
 pa ਕੰਟਰੋਲਰ ਘੁਮਾਉਣ 'ਤੇ ਦ੍ਰਿਸ਼ ਕਿੰਨਾ ਖੱਬੇ-ਸੱਜੇ ਮੁੜਦਾ ਹੈ (ਯੌ ਧੁਰਾ)
 
-@ How far the view turns when you drag on the right half of the screen
-pa ਸਕ੍ਰੀਨ ਦੇ ਸੱਜੇ ਅੱਧ 'ਤੇ ਖਿੱਚਣ ਨਾਲ ਦ੍ਰਿਸ਼ ਕਿੰਨਾ ਮੁੜਦਾ ਹੈ
-
 @ How fast the boomerang flies (units per second)
 pa ਬੂਮਰੈਂਗ ਕਿੰਨੀ ਤੇਜ਼ ਉੱਡਦਾ ਹੈ (ਯੂਨਿਟ ਪ੍ਰਤੀ ਸਕਿੰਟ)
 
@@ -2038,9 +2047,6 @@ pa ਕੋਈ ਵੀ ਰੁਕਾਅ ਇਸ ਤੋਂ ਲੰਬਾ ਨਹੀਂ �
 
 @ Oldest marks and nails are recycled at this shared limit
 pa ਇਸ ਸਾਂਝੀ ਸੀਮਾ 'ਤੇ ਸਭ ਤੋਂ ਪੁਰਾਣੇ ਨਿਸ਼ਾਨ ਅਤੇ ਕਿੱਲ ਮੁੜ ਵਰਤੇ ਜਾਂਦੇ ਹਨ
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-pa ਸਕ੍ਰੀਨ 'ਤੇ ਸਟਿੱਕ ਅਤੇ ਬਟਨ: ਆਟੋ ਛੂਹਣ ਤੋਂ ਬਾਅਦ ਦਿਖਾਉਂਦਾ ਹੈ ਅਤੇ ਹੋਰ ਡਿਵਾਈਸ ਵਰਤਣ 'ਤੇ ਲੁਕਾਉਂਦਾ ਹੈ
 
 @ Only autosaves: quicksaves and the Save menu are off
 pa ਸਿਰਫ਼ ਆਟੋਸੇਵ: ਤੁਰੰਤ ਸੇਵ ਅਤੇ ਸੇਵ ਮੀਨੂ ਬੰਦ ਹਨ
@@ -2411,6 +2417,18 @@ pa ਕੰਧਾਂ ਅਤੇ ਮਾਡਲਾਂ ਉੱਤੇ ਹਲਕੀ ਛਾ
 
 @ Strength of the highlights from directional lighting
 pa ਦਿਸ਼ਾਵੀ ਰੌਸ਼ਨੀ ਤੋਂ ਬਣਨ ਵਾਲੀ ਚਮਕ ਦੀ ਤੀਬਰਤਾ
+
+@ How far the view turns when you swipe
+pa ਜਦੋਂ ਤੁਸੀਂ ਸਵਾਈਪ ਕਰਦੇ ਹੋ ਤਾਂ ਦ੍ਰਿਸ਼ ਕਿੰਨੀ ਦੂਰ ਹੋ ਜਾਂਦਾ ਹੈ
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+pa ਦਿਖਾਈ ਦੇਣ ਵਾਲੇ ਟੀਚਿਆਂ ਦੇ ਨੇੜੇ ਤੁਹਾਡੀ ਸਵਾਈਪ ਨੂੰ ਹੌਲੀ ਕਰਦਾ ਹੈ। ਡੈਥਮੈਚ ਨੂੰ ਸਰਵਰ ਦੀ ਇਜਾਜ਼ਤ ਦੀ ਲੋੜ ਹੈ। ਉੱਚ ਪੱਧਰ 'ਤੇ ਨਿਸ਼ਾਨਾ ਟੀਚੇ ਵੱਲ ਹੌਲੀ ਜਿਹਾ ਖਿੱਚਦਾ ਹੈ।
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+pa ਅੰਦੋਲਨ, ਨਿਸ਼ਾਨਾ ਅਤੇ ਗੇਮਪਲੇ ਬਟਨਾਂ ਲਈ ਪਾਸਿਆਂ ਨੂੰ ਬਦਲੋ
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+pa ਆਟੋ ਐਕਟਿਵ ਇਨਪੁਟ ਡਿਵਾਈਸ ਦਾ ਅਨੁਸਰਣ ਕਰਦਾ ਹੈ। ਓਵਰਲੇਅ ਬੰਦ ਹੋਣ 'ਤੇ ਮੀਨੂ ਉਪਲਬਧ ਰਹਿੰਦਾ ਹੈ।
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ pa ਫਿਲਟਰਾਂ ਨਾਲ ਮੇਲ ਖਾਂਦਾ ਕੋਈ ਸਰਵ
 @ Server search failed
 pa ਸਰਵਰ ਖੋਜ ਅਸਫਲ ਰਹੀ
 
+@ Slide to select, release to equip
+pa ਚੁਣਨ ਲਈ ਸਲਾਈਡ ਕਰੋ, ਲੈਸ ਕਰਨ ਲਈ ਛੱਡੋ
+
+@ Tap to swap weapons.
+pa ਹਥਿਆਰਾਂ ਦੀ ਅਦਲਾ-ਬਦਲੀ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ।
+
+@ Hold and slide to select.
+pa ਚੁਣਨ ਲਈ ਹੋਲਡ ਕਰੋ ਅਤੇ ਸਲਾਈਡ ਕਰੋ।
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ pa 100% ਨੁਕਸਾਨ ਤੋਂ ਬਿਨਾਂ
 
 @ Damage Skull
 pa ਨੁਕਸਾਨ ਦੀ ਖੋਪੜੀ
+
+@ A mild speed boost for fast swipes
+pa ਤੇਜ਼ ਸਵਾਈਪ ਨਾਲ ਦ੍ਰਿਸ਼ ਥੋੜ੍ਹਾ ਤੇਜ਼ ਘੁੰਮਦਾ ਹੈ
+
+@ Phone Gyro
+pa ਫ਼ੋਨ ਜਾਇਰੋਸਕੋਪ
+
+@ look zone
+pa ਨਜ਼ਰ ਖੇਤਰ
+
+@ while firing
+pa ਗੋਲੀ ਚਲਾਉਂਦੇ ਸਮੇਂ
+
+@ Uses the Android device’s motion sensor.
+pa Android ਡਿਵਾਈਸ ਦਾ ਮੋਸ਼ਨ ਸੈਂਸਰ ਵਰਤਦਾ ਹੈ।
+
+@ Edit Layout
+pa ਖਾਕਾ ਸੋਧੋ
+
+@ Drag to move
+pa ਹਿਲਾਉਣ ਲਈ ਖਿੱਚੋ
+
+@ Auto-fire
+pa ਆਟੋਮੈਟਿਕ ਗੋਲੀਬਾਰੀ
+
+@ Touch Auto-fire
+pa ਟੱਚ ਨਾਲ ਆਟੋਮੈਟਿਕ ਗੋਲੀਬਾਰੀ
+
+@ Move-side Fire
+pa ਚਾਲ ਵਾਲੇ ਪਾਸੇ ਗੋਲੀਬਾਰੀ
+
+@ Touch Haptics
+pa ਟੱਚ ਕੰਪਨ
+
+@ Add a Fire button on the move side.
+pa ਚਾਲ ਵਾਲੇ ਪਾਸੇ ਗੋਲੀ ਚਲਾਉਣ ਦਾ ਬਟਨ ਜੋੜਦਾ ਹੈ।
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+pa ਸਥਾਨਕ ਖੇਡ ਵਿੱਚ ਨਿਸ਼ਾਨੇ ਹੇਠਾਂ ਆਏ ਰਾਖਸ਼ਾਂ 'ਤੇ ਗੋਲੀ ਚਲਾਉਂਦਾ ਹੈ (ਕੀਬੋਰਡ, ਮਾਊਸ, ਕੰਟਰੋਲਰ).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+pa ਸਥਾਨਕ ਖੇਡ ਵਿੱਚ ਨਿਸ਼ਾਨੇ ਹੇਠਾਂ ਆਏ ਰਾਖਸ਼ਾਂ 'ਤੇ ਗੋਲੀ ਚਲਾਉਂਦਾ ਹੈ (ਟੱਚ ਸਕਰੀਨ).
+
+@ Vibrate on button presses and damage (Android).
+pa ਬਟਨ ਦਬਾਉਣ ਜਾਂ ਸੱਟ ਲੱਗਣ 'ਤੇ ਕੰਪਨ ਹੁੰਦਾ ਹੈ (Android)।
+
+@ Swipe left or right to cycle.
+pa ਹਥਿਆਰ ਬਦਲਣ ਲਈ ਖੱਬੇ ਜਾਂ ਸੱਜੇ ਸਵਾਈਪ ਕਰੋ।

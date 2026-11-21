@@ -613,8 +613,8 @@ ga Reo is Faide (ms)
 @ Look Down
 ga Féach Síos
 
-@ Look Speed
-ga Luas Amhairc
+@ Look Acceleration
+ga Luasghéarú an Radhairc
 
 @ Look Up
 ga Féach Suas
@@ -1781,6 +1781,18 @@ ga Soilsiú Treoch
 @ Light Specular
 ga Lonrú Solais
 
+@ Gameplay Overlay
+ga Forleagan gameplay
+
+@ Layout
+ga Leagan Amach
+
+@ Preview
+ga Réamhamharc
+
+@ Resume Game
+ga Atosaigh an cluiche
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ ga An méid a chlaonann an radharc suas agus síos nuair a chlaonann tú an rial
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ga An méid a chasann an radharc ar clé agus ar dheis nuair a chasann tú an rialtán (ais luascadh)
 
-@ How far the view turns when you drag on the right half of the screen
-ga An méid a chasann an radharc nuair a tharraingíonn tú ar an leath dheas den scáileán
-
 @ How fast the boomerang flies (units per second)
 ga Cé chomh tapa a eitlíonn an búmarang (aonaid in aghaidh an tsoicind)
 
@@ -2038,9 +2047,6 @@ ga Ní mhaireann aon reo amháin níos faide ná seo, is cuma cé mhéad a chuir
 
 @ Oldest marks and nails are recycled at this shared limit
 ga Athchúrsáiltear na rianta agus na tairní is sine ag an teorainn chomhroinnte seo
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ga Maide agus cnaipí ar an scáileán: taispeánann uath iad tar éis tadhaill agus ceileann sé iad nuair a úsáidtear gléas eile
 
 @ Only autosaves: quicksaves and the Save menu are off
 ga Uathshábhálacha amháin: tá mear-shábháil agus an roghchlár Sábháil as
@@ -2411,6 +2417,18 @@ ga Úsáideann sé treoracha solais réamhbhácáilte (.dlit) le haghaidh scáth
 
 @ Strength of the highlights from directional lighting
 ga Neart na mbuaicphointí ó shoilsiú treoch
+
+@ How far the view turns when you swipe
+ga Cé chomh fada agus a chasann an radharc nuair a svaidhpálann tú
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ga slows do swipe in aice le spriocanna infheicthe. Teastaíonn cead freastalaí ó Deathmatch. Ar an leibhéal ard tarraingítear an spriocaire beagán i dtreo na sprice freisin.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ga Malartaíonn na taobhanna le haghaidh gluaiseachta, aidhm agus cnaipí gameplay
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ga Leanann Auto an gléas ionchuir gníomhach. Fanann an roghchlár ar fáil nuair a bhíonn an forleagan múchta.
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ ga Níl aon fhreastalaí ag teacht leis na scagairí
 @ Server search failed
 ga Theip ar chuardach na bhfreastalaithe
 
+@ Slide to select, release to equip
+ga Sleamhnán a roghnú, scaoileadh a threalmhú
+
+@ Tap to swap weapons.
+ga Tapáil chun airm a mhalartú.
+
+@ Hold and slide to select.
+ga Coinnigh agus sleamhnán a roghnú.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ ga 100% gan damáiste
 
 @ Damage Skull
 ga Cloigeann damáiste
+
+@ A mild speed boost for fast swipes
+ga Casann svaidhpeanna gasta an radharc beagán níos tapúla
+
+@ Phone Gyro
+ga Gíreascóp an Fhóin
+
+@ look zone
+ga limistéar féachana
+
+@ while firing
+ga agus tú ag lámhach
+
+@ Uses the Android device’s motion sensor.
+ga Úsáideann sé braiteoir gluaisne an ghléis Android.
+
+@ Edit Layout
+ga Cuir an Leagan Amach in Eagar
+
+@ Drag to move
+ga Tarraing chun bogadh
+
+@ Auto-fire
+ga Uathlámhach
+
+@ Touch Auto-fire
+ga Uathlámhach tadhaill
+
+@ Move-side Fire
+ga Lámhach ar thaobh gluaiseachta
+
+@ Touch Haptics
+ga Creathadh tadhaill
+
+@ Add a Fire button on the move side.
+ga Cuirtear cnaipe lámhaigh ar thaobh na gluaiseachta.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ga Scaoiltear le harrachtaigh faoi na crosribí sa chluiche áitiúil (méarchlár, luch, rialtán).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ga Scaoiltear le harrachtaigh faoi na crosribí sa chluiche áitiúil (scáileán tadhaill).
+
+@ Vibrate on button presses and damage (Android).
+ga Creathann sé nuair a bhrúitear cnaipe nó nuair a dhéantar damáiste (Android).
+
+@ Swipe left or right to cycle.
+ga Svaidhpeáil ar chlé nó ar dheis chun arm a athrú.

@@ -17,13 +17,33 @@ impl Menu {
 
     /// Visible rows of a page.
     pub(super) fn page_vis(&self, p: Page) -> usize {
-        self.page_len(p).min(PAGE_ROWS)
+        if p == Page::Touch {
+            return self.page_len(p);
+        }
+        let rows = if self.touch_ui {
+            match p {
+                Page::Setup => 9,
+                Page::Customize | Page::NewGameCustomize | Page::Modifiers | Page::Export | Page::RenameDemo => 10,
+                _ => 11,
+            }
+        } else {
+            PAGE_ROWS
+        };
+        self.page_len(p).min(rows)
+    }
+
+    pub(super) fn page_row_height(&self) -> f32 {
+        if self.touch_ui { 20.0 } else { ROW_H }
+    }
+
+    pub(super) fn page_bottom(&self, p: Page) -> f32 {
+        PAGE_ROW0 + self.page_vis(p) as f32 * self.page_row_height()
     }
 
     /// First visible row, moved just enough to keep the cursor on screen.
     pub(super) fn page_scroll(&self, p: Page) -> usize {
         let n = self.page_len(p);
-        let vis = n.min(PAGE_ROWS);
+        let vis = self.page_vis(p);
         let mut sc = self.opt_scroll.get().min(n - vis);
         let cur = self.opt_cursor.min(n.saturating_sub(1));
         if cur < sc {
@@ -35,21 +55,65 @@ impl Menu {
         sc
     }
 
+    pub(super) fn page_offset(&self, p: Page) -> f32 {
+        self.touch_scroll.filter(|(page, _)| *page == p)
+            .map_or_else(|| self.page_scroll(p) as f32 * self.page_row_height(), |(_, y)| y)
+    }
+
+    /// Pixel scrolling for the shared options panel and save cards.
+    /// Other list widgets already own row-based scrolling.
+    pub fn scroll_touch(&mut self, dy: f32) -> Option<bool> {
+        if self.prompt.is_some() || self.osk.is_some() || self.capturing() || self.autoaim_prompt {
+            return Some(false);
+        }
+        if self.drop.is_some() {
+            return None;
+        }
+        match self.screen {
+            Screen::OptionsPage(p) if !matches!(p, Page::Touch | Page::WeaponPriority | Page::Addons | Page::NewGameAddons) => {
+                let max = self.page_len(p) - self.page_vis(p);
+                let height = self.page_row_height();
+                let before = self.page_offset(p);
+                let next = (before + dy).clamp(0.0, max as f32 * height);
+                self.set_page_scroll(p, (next / height) as usize);
+                self.touch_scroll = Some((p, next));
+                Some(before != next)
+            }
+            Screen::Load | Screen::Save => {
+                let before = self.card_scroll();
+                self.scroll_cards(dy);
+                Some(before != self.card_scroll())
+            }
+            Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Demos | Screen::DirBrowser
+                | Screen::ServerBrowser | Screen::Help => None,
+            Screen::Options if self.searching() => None,
+            _ => Some(false),
+        }
+    }
+
+    pub fn set_touch_ui(&mut self, active: bool) {
+        if active != self.touch_ui || !self.touch_scroll.is_some_and(|(p, _)| self.screen == Screen::OptionsPage(p)) {
+            self.touch_scroll = None;
+        }
+        self.touch_ui = active;
+    }
+
     /// Scrollbar of a long options page: (x, track top, track h, thumb y, thumb h).
     pub(super) fn scrollbar(&self, p: Page) -> Option<(f32, f32, f32, f32, f32)> {
         let (total, n) = (self.page_len(p), self.page_vis(p));
         if total <= n {
             return None;
         }
-        let sc = self.page_scroll(p);
-        let (x, top, h) = (PANEL_X + PANEL_W - 5.0, PAGE_ROW0, n as f32 * ROW_H);
+        let sc = self.page_offset(p) / self.page_row_height();
+        let (x, top, h) = (PANEL_X + PANEL_W - 5.0, PAGE_ROW0, n as f32 * self.page_row_height());
         let th = (h * n as f32 / total as f32).max(8.0);
-        let ty = top + (h - th) * sc as f32 / (total - n) as f32;
+        let ty = top + (h - th) * sc / (total - n) as f32;
         Some((x, top, h, ty, th))
     }
 
     /// Sets the first visible row, pulling the cursor into view.
     pub(super) fn set_page_scroll(&mut self, p: Page, sc: usize) {
+        self.touch_scroll = None;
         let (total, vis) = (self.page_len(p), self.page_vis(p));
         if vis == 0 {
             return;
@@ -70,6 +134,7 @@ impl Menu {
     pub fn mouse_up(&mut self) {
         self.hud_edit.cancel_dialog_drag();
         self.wp.mouse_up();
+        self.touch_editor.release();
         self.drag = None;
         self.slider_drag = None;
         self.text_drag = None;
@@ -82,7 +147,12 @@ impl Menu {
             return self.drag_shader_param(k, x, cv);
         }
         let Item::Slider { cvar, min, max, step, invert, .. } = item else { return };
-        let mut f = ((x - SLIDER_X.0 - 4.0) / (SLIDER_X.1 - SLIDER_X.0 - 8.0)).clamp(0.0, 1.0);
+        let (start, end) = if self.screen == Screen::OptionsPage(Page::Touch) {
+            touch::SLIDER
+        } else {
+            (SLIDER_X.0 + 4.0, SLIDER_X.1 - 4.0)
+        };
+        let mut f = ((x - start) / (end - start)).clamp(0.0, 1.0);
         if invert {
             f = 1.0 - f;
         }
@@ -92,7 +162,7 @@ impl Menu {
 
     /// Menu y of a page row (may be off the visible window).
     pub(super) fn page_row_y(&self, p: Page, i: usize) -> f32 {
-        PAGE_ROW0 + (i as f32 - self.page_scroll(p) as f32) * ROW_H
+        PAGE_ROW0 + i as f32 * self.page_row_height() - self.page_offset(p)
     }
 
     pub(super) fn page_item(&self, p: Page, i: usize) -> Item {

@@ -15,11 +15,15 @@ wgpu = ["dep:wgpu", "dep:pollster"]
 qformats = { path = "../qformats" }
 qcore = { path = "../qcore" }
 
-[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+[target.'cfg(all(not(target_arch = "wasm32"), not(target_os = "android")))'.dependencies]
 ash = { version = "0.38", default-features = false, features = ["loaded", "std"] }
 librashader = { version = "0.12.1", default-features = false, features = ["runtime-vk", "presets", "preprocess"] }
 wgpu = { version = "=30.0.2", optional = true, default-features = false, features = ["std", "parking_lot", "wgsl", "vulkan", "gles"] }
 pollster = { version = "1.0.1", optional = true }
+
+[target.'cfg(target_os = "android")'.dependencies]
+wgpu = { version = "=30.0.2", default-features = false, features = ["std", "parking_lot", "wgsl", "vulkan", "gles"] }
+pollster = "1.0.1"
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 wgpu = { version = "=30.0.2", default-features = false, features = ["std", "wgsl", "webgpu"] }

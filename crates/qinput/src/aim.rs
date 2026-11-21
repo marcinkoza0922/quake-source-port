@@ -1,4 +1,4 @@
-//! Gamepad aim assist: slowdown (friction) cone + rotational assist. No snap by default.
+//! Aim assist and crosshair hit testing for accessibility.
 
 type V3 = [f32; 3];
 
@@ -107,7 +107,7 @@ impl Default for AimParams {
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct AimResult {
-    /// Multiplier for gamepad look input this frame.
+    /// Multiplier for assisted look input this frame.
     pub scale: f32,
     /// Added [yaw, pitch] degrees (Quake look_delta convention).
     pub delta: [f32; 2],
@@ -156,8 +156,37 @@ pub fn select_target(p: &AimParams, ctx: &AimContext, viewangles: V3) -> Option<
     best.map(|(i, _, f)| (i, f))
 }
 
+/// Whether the view ray intersects a living monster's bounds before an obstruction.
+pub fn crosshair_on_monster(ctx: &AimContext, viewangles: V3, range: f32, drawn: impl Fn(u32) -> bool) -> bool {
+    if !ctx.allowed {
+        return false;
+    }
+    let ray = forward(viewangles);
+    ctx.targets.iter().filter(|t| t.kind == TargetKind::Monster && drawn(t.id)).any(|t| {
+        let mut near: f32 = 0.0;
+        let mut far = range;
+        for (i, direction) in ray.into_iter().enumerate() {
+            let min = t.origin[i] + t.mins[i] - ctx.eye[i];
+            let max = t.origin[i] + t.maxs[i] - ctx.eye[i];
+            if direction.abs() < 1e-6 {
+                if min > 0.0 || max < 0.0 {
+                    return false;
+                }
+            } else {
+                let (a, b) = (min / direction, max / direction);
+                near = near.max(a.min(b));
+                far = far.min(a.max(b));
+                if near > far {
+                    return false;
+                }
+            }
+        }
+        ctx.vis.visible(ctx.eye, add_scaled(ctx.eye, near, ray))
+    })
+}
+
 /// Compute assist. `player_input`: move or look stick deflected this frame.
-/// Caller must only call this for gamepad look (never mouse).
+/// Touch callers pass `false` to skip relative-velocity rotation.
 pub fn aim_assist(p: &AimParams, ctx: &AimContext, viewangles: V3, ft: f32, player_input: bool) -> AimResult {
     if !ctx.allowed || ft <= 0.0 {
         return AimResult::NONE;
@@ -198,6 +227,25 @@ mod tests {
     fn aim_at(eye: V3, p: V3) -> V3 {
         let a = vec_angles(sub(p, eye));
         [a[0], a[1], 0.0]
+    }
+
+    #[test]
+    fn autofire_requires_a_visible_monster_under_the_ray() {
+        struct Wall;
+        impl Visibility for Wall {
+            fn visible(&self, _: V3, _: V3) -> bool { false }
+        }
+        let targets = [monster([300.0, 0.0, 0.0], [0.0; 3])];
+        let ctx = ctx([0.0; 3], [0.0; 3], &targets, &NoWorld);
+        let drawn = |_| true;
+        assert!(crosshair_on_monster(&ctx, [0.0; 3], 400.0, drawn));
+        assert!(!crosshair_on_monster(&ctx, [0.0; 3], 400.0, |_| false));
+        assert!(!crosshair_on_monster(&ctx, [0.0, 5.0, 0.0], 400.0, drawn));
+        assert!(!crosshair_on_monster(&ctx, [0.0, 180.0, 0.0], 400.0, drawn));
+        assert!(!crosshair_on_monster(&ctx, [0.0; 3], 64.0, drawn));
+        assert!(!crosshair_on_monster(&AimContext { vis: &Wall, ..ctx }, [0.0; 3], 400.0, drawn));
+        let players = [AimTarget { kind: TargetKind::Player, ..targets[0] }];
+        assert!(!crosshair_on_monster(&AimContext { targets: &players, ..ctx }, [0.0; 3], 400.0, drawn));
     }
 
     #[test]

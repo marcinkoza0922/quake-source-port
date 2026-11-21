@@ -613,8 +613,8 @@ nb Lengste frysing (ms)
 @ Look Down
 nb Se ned
 
-@ Look Speed
-nb Blikkfart
+@ Look Acceleration
+nb Kameraakselerasjon
 
 @ Look Up
 nb Se opp
@@ -1781,6 +1781,18 @@ nb Retningslys
 @ Light Specular
 nb Lysreflekser
 
+@ Gameplay Overlay
+nb Spilloverlegg
+
+@ Layout
+nb Oppsett
+
+@ Preview
+nb Forhåndsvisning
+
+@ Resume Game
+nb Gjenoppta spillet
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ nb Hvor langt visningen vipper opp og ned når du vipper kontrolleren (vertikal 
 @ How far the view turns left and right when you turn the controller (yaw axis)
 nb Hvor langt visningen dreier til venstre og høyre når du dreier kontrolleren (horisontal akse)
 
-@ How far the view turns when you drag on the right half of the screen
-nb Hvor langt visningen dreier når du drar på høyre halvdel av skjermen
-
 @ How fast the boomerang flies (units per second)
 nb Hvor fort bumerangen flyr (enheter per sekund)
 
@@ -2038,9 +2047,6 @@ nb Ingen enkelt frysing varer lenger enn dette, uansett hvor mye skade eller dra
 
 @ Oldest marks and nails are recycled at this shared limit
 nb De eldste merkene og spikrene gjenbrukes ved denne felles grensen
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-nb Spak og knapper på skjermen: auto viser dem etter berøring og skjuler dem når en annen enhet brukes
 
 @ Only autosaves: quicksaves and the Save menu are off
 nb Kun autolagring: hurtiglagring og Lagre-menyen er av
@@ -2411,6 +2417,18 @@ nb Bruker forhåndsberegnede lysretninger (.dlit) for subtil skyggelegging og gl
 
 @ Strength of the highlights from directional lighting
 nb Styrken på høylys fra retningsbestemt belysning
+
+@ How far the view turns when you swipe
+nb Hvor langt visningen svinger når du sveiper
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+nb Senker sveipet ditt nær synlige mål. Deathmatch krever servertillatelse. På høy trekkes siktet også litt mot målet.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+nb Bytter ut sidene for bevegelses-, sikte- og spillknapper
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+nb Auto følger den aktive inndataenheten. Menyen forblir tilgjengelig når overlegget er av.
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ nb Ingen samsvarende servere
 @ Server search failed
 nb Serversøket mislyktes
 
+@ Slide to select, release to equip
+nb Skyv for å velge, slipp for å utstyre
+
+@ Tap to swap weapons.
+nb Trykk for å bytte våpen.
+
+@ Hold and slide to select.
+nb Hold og skyv for å velge.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ nb 100% uten skade
 
 @ Damage Skull
 nb Skadehodeskalle
+
+@ A mild speed boost for fast swipes
+nb Raske sveip snur visningen litt fortere
+
+@ Phone Gyro
+nb Telefonens gyro
+
+@ look zone
+nb siktesone
+
+@ while firing
+nb ved skyting
+
+@ Uses the Android device’s motion sensor.
+nb Bruker Android-enhetens bevegelsessensor.
+
+@ Edit Layout
+nb Rediger oppsett
+
+@ Drag to move
+nb Dra for å flytte
+
+@ Auto-fire
+nb Automatisk skyting
+
+@ Touch Auto-fire
+nb Automatisk skyting på berøring
+
+@ Move-side Fire
+nb Skyt på bevegelsessiden
+
+@ Touch Haptics
+nb Berøringsvibrasjon
+
+@ Add a Fire button on the move side.
+nb Legger til en skyteknapp på bevegelsessiden.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+nb Skyter mot monstre i siktet i lokale spill (tastatur, mus, håndkontroll).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+nb Skyter mot monstre i siktet i lokale spill (berøringsskjerm).
+
+@ Vibrate on button presses and damage (Android).
+nb Vibrerer ved knappetrykk og når du tar skade (Android).
+
+@ Swipe left or right to cycle.
+nb Sveip til venstre eller høyre for å bytte våpen.

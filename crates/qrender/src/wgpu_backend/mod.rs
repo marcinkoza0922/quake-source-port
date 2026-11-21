@@ -1,9 +1,11 @@
-//! wgpu backend of [`Renderer`] (web via WebGPU, natively with the `wgpu`
-//! feature). Same public API as the Vulkan backend; the scene is drawn with
+//! wgpu backend of [`Renderer`] (WebGPU in browsers, wgpu on Android and with
+//! the native `wgpu` feature). The scene is drawn with
 //! CPU-built draw lists (world from the PVS, alias poses lerped on the CPU,
 //! lightmaps built on the CPU) and WGSL shaders in `shaders/`. See-through
 //! portals and slang presets of the Vulkan backend are not drawn.
 
+#[cfg(target_os = "android")]
+mod android;
 mod bloom;
 mod capture;
 mod encode;
@@ -55,7 +57,7 @@ struct Targets {
     /// SSAO target and bind groups (r_ssao on).
     ao: Option<ssao::AoTargets>,
     /// Scene depth for soft particles (group 3 of their pipelines).
-    soft_group: wgpu::BindGroup,
+    soft_group: Option<wgpu::BindGroup>,
     /// Motion velocity target (r_motionblur on).
     vel: Option<motion::VelTarget>,
     /// Glow attachment and chain (r_bloom on).
@@ -75,6 +77,8 @@ pub struct Renderer {
     queue: wgpu::Queue,
     name: String,
     surface: Option<(wgpu::Surface<'static>, wgpu::SurfaceConfiguration)>,
+    #[cfg(target_os = "android")]
+    android_surface: Option<android::Presentation>,
     width: u32,
     height: u32,
     pipes: pipes::Pipes,
@@ -137,7 +141,7 @@ pub struct Renderer {
 
 impl Renderer {
     /// Windowed rendering through a Vulkan surface provider is not supported
-    /// by this backend (the web uses [`Renderer::new_web`]).
+    /// by this backend. Android and the web have their own surface constructors.
     pub fn new(_surface: &dyn SurfaceProvider, _palette: &Palette) -> Result<Renderer> {
         Err(Error::new("the wgpu renderer has no native window support; run with -headless"))
     }
@@ -145,12 +149,7 @@ impl Renderer {
     /// Offscreen renderer (no surface); read results with [`Renderer::read_pixels`].
     #[cfg(not(target_arch = "wasm32"))]
     pub fn headless(width: u32, height: u32, palette: &Palette) -> Result<Renderer> {
-        let mut desc = wgpu::InstanceDescriptor::new_without_display_handle_from_env();
-        if std::env::var_os("WGPU_BACKEND").is_none() {
-            desc.backends = wgpu::Backends::VULKAN | wgpu::Backends::GL;
-        }
-        let instance = wgpu::Instance::new(desc);
-        pollster::block_on(Self::create(instance, None, width, height, palette))
+        pollster::block_on(Self::create(native_instance(), None, width, height, palette))
     }
 
     /// Offscreen rendering cannot block for readback in the browser.
@@ -188,7 +187,14 @@ impl Renderer {
             })
             .await
             .map_err(|e| Error::new(format!("no wgpu adapter: {e}")))?;
-        let name = format!("{} (wgpu {:?})", adapter.get_info().name, adapter.get_info().backend);
+        let info = adapter.get_info();
+        #[cfg(target_os = "android")]
+        if info.backend == wgpu::Backend::Gl
+            && !adapter.get_downlevel_capabilities().flags.contains(wgpu::DownlevelFlags::COMPUTE_SHADERS)
+        {
+            return Err(Error::new("OpenGL ES 3.1 with compute shaders is required"));
+        }
+        let name = format!("{} (wgpu {:?})", info.name, info.backend);
         let (dev, queue) = adapter
             .request_device(&wgpu::DeviceDescriptor {
                 label: Some("qrender"),
@@ -199,6 +205,10 @@ impl Renderer {
             })
             .await
             .map_err(|e| Error::new(format!("wgpu device: {e}")))?;
+        #[cfg(target_os = "android")]
+        let internal = dev.push_error_scope(wgpu::ErrorFilter::Internal);
+        #[cfg(target_os = "android")]
+        let validation = dev.push_error_scope(wgpu::ErrorFilter::Validation);
         let (width, height) = (width.max(1), height.max(1));
         let surface = match surface {
             Some(s) => {
@@ -232,12 +242,13 @@ impl Renderer {
             None => None,
         };
         let out_format = surface.as_ref().map_or(wgpu::TextureFormat::Rgba8Unorm, |s| s.1.format);
-        let pipes = pipes::Pipes::new(&dev, out_format);
+        // Naga's GLSL backend cannot generate textureLoad from depth textures.
+        let pipes = pipes::Pipes::new(&dev, out_format, info.backend != wgpu::Backend::Gl);
         let samplers = textures::Samplers::new(&dev, false);
         let white = textures::solid(&dev, &queue, [255; 4]);
         let black = textures::solid(&dev, &queue, [0; 4]);
         let palette_view = textures::palette_texture(&dev, &queue, palette);
-        let lightmap = lightmap::Lightmaps::new(&dev, &queue, 1);
+        let lightmap = lightmap::Lightmaps::new(&dev, &queue, info.backend == wgpu::Backend::Gl);
         let water = water::Water::new(&dev, &queue, palette);
         let mut r = Renderer {
             gpu_times_wanted: false,
@@ -246,6 +257,8 @@ impl Renderer {
             queue,
             name,
             surface,
+            #[cfg(target_os = "android")]
+            android_surface: None,
             width,
             height,
             pipes,
@@ -290,6 +303,14 @@ impl Renderer {
         r.init_water();
         let dot = textures::particle_dot();
         r.dot_tex = r.add_texture(8, 8, &[&dot], false, textures::Sampling::Linear)?;
+        #[cfg(target_os = "android")]
+        {
+            let validation = validation.pop().await;
+            let internal = internal.pop().await;
+            if let Some(e) = validation.or(internal) {
+                return Err(Error::new(format!("wgpu startup: {e}")));
+            }
+        }
         Ok(r)
     }
 
@@ -390,4 +411,13 @@ impl Renderer {
     pub fn set_shader_param(&mut self, _id: &str, _value: f32) -> bool {
         false
     }
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+fn native_instance() -> wgpu::Instance {
+    let mut desc = wgpu::InstanceDescriptor::new_without_display_handle_from_env();
+    if std::env::var_os("WGPU_BACKEND").is_none() {
+        desc.backends = wgpu::Backends::VULKAN | wgpu::Backends::GL;
+    }
+    wgpu::Instance::new(desc)
 }

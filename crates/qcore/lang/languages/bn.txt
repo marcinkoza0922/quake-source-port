@@ -613,8 +613,8 @@ bn সর্বোচ্চ স্থিরতা (ms)
 @ Look Down
 bn নিচে তাকান
 
-@ Look Speed
-bn দৃষ্টির গতি
+@ Look Acceleration
+bn দৃশ্যের ত্বরণ
 
 @ Look Up
 bn উপরে তাকান
@@ -1781,6 +1781,18 @@ bn দিকনির্দেশক আলো
 @ Light Specular
 bn আলোর ঝিলিক
 
+@ Gameplay Overlay
+bn গেমপ্লে ওভারলে
+
+@ Layout
+bn লেআউট
+
+@ Preview
+bn পূর্বরূপ
+
+@ Resume Game
+bn খেলা আবার শুরু করুন
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ bn কন্ট্রোলার কাত করলে দৃশ্য কত�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 bn কন্ট্রোলার ঘোরালে দৃশ্য কতটা ডানে-বামে ঘোরে (ইয় অক্ষ)
 
-@ How far the view turns when you drag on the right half of the screen
-bn পর্দার ডান অর্ধেকে টানলে দৃশ্য কতটা ঘোরে
-
 @ How fast the boomerang flies (units per second)
 bn বুমেরাং কত দ্রুত ওড়ে (একক প্রতি সেকেন্ড)
 
@@ -2038,9 +2047,6 @@ bn ক্ষতি বা হত্যা বোনাস যতই যোগ �
 
 @ Oldest marks and nails are recycled at this shared limit
 bn এই যৌথ সীমায় সবচেয়ে পুরোনো দাগ ও পেরেক পুনর্ব্যবহৃত হয়
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-bn পর্দার স্টিক ও বোতাম: অটো ছোঁয়ার পরে সেগুলো দেখায় এবং অন্য ডিভাইস ব্যবহার হলে লুকায়
 
 @ Only autosaves: quicksaves and the Save menu are off
 bn শুধু অটোসেভ: দ্রুত সেভ ও সেভ মেনু বন্ধ
@@ -2411,6 +2417,18 @@ bn দেয়াল ও মডেলে সূক্ষ্ম ছায়া 
 
 @ Strength of the highlights from directional lighting
 bn দিকনির্দেশক আলো থেকে আসা হাইলাইটের তীব্রতা
+
+@ How far the view turns when you swipe
+bn আপনি সোয়াইপ করলে ভিউ কতদূর ঘুরবে
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+bn দৃশ্যমান লক্ষ্যগুলির কাছাকাছি আপনার সোয়াইপকে ধীর করে। Deathmatch সার্ভার অনুমতি প্রয়োজন. উচ্চ সেটিংয়ে নিশানা লক্ষ্যবস্তুর দিকে সামান্য টানেও।
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+bn নড়াচড়া, লক্ষ্য এবং গেমপ্লে বোতামগুলির জন্য পাশ অদলবদল করুন
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+bn অটো সক্রিয় ইনপুট ডিভাইস অনুসরণ করে। ওভারলে বন্ধ থাকলে মেনু উপলব্ধ থাকে।
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ bn ফিল্টারের সাথে মেলে এমন সার্�
 @ Server search failed
 bn সার্ভার অনুসন্ধান ব্যর্থ হয়েছে
 
+@ Slide to select, release to equip
+bn নির্বাচন করতে স্লাইড করুন, সজ্জিত করতে ছেড়ে দিন
+
+@ Tap to swap weapons.
+bn অস্ত্র অদলবদল করতে আলতো চাপুন।
+
+@ Hold and slide to select.
+bn নির্বাচন করতে ধরে রাখুন এবং স্লাইড করুন।
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ bn 100% ক্ষতি ছাড়া
 
 @ Damage Skull
 bn ক্ষতির খুলি
+
+@ A mild speed boost for fast swipes
+bn দ্রুত সোয়াইপে দৃশ্য একটু বেশি দ্রুত ঘোরে
+
+@ Phone Gyro
+bn ফোনের জাইরোস্কোপ
+
+@ look zone
+bn দৃশ্যের অঞ্চল
+
+@ while firing
+bn গুলি চালানোর সময়
+
+@ Uses the Android device’s motion sensor.
+bn Android ডিভাইসের মোশন সেন্সর ব্যবহার করে।
+
+@ Edit Layout
+bn বিন্যাস সম্পাদনা
+
+@ Drag to move
+bn সরাতে টানুন
+
+@ Auto-fire
+bn স্বয়ংক্রিয় গুলি
+
+@ Touch Auto-fire
+bn স্পর্শে স্বয়ংক্রিয় গুলি
+
+@ Move-side Fire
+bn চলার দিকে গুলি
+
+@ Touch Haptics
+bn টাচ কম্পন
+
+@ Add a Fire button on the move side.
+bn চলার দিকের পাশে গুলি করার বোতাম যোগ করে।
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+bn লোকাল খেলায় নিশানায় থাকা দানবদের গুলি করে (কীবোর্ড, মাউস, কন্ট্রোলার)।
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+bn লোকাল খেলায় নিশানায় থাকা দানবদের গুলি করে (টাচস্ক্রিন)।
+
+@ Vibrate on button presses and damage (Android).
+bn বোতাম চাপলে বা ক্ষতি পেলে কাঁপে (Android)।
+
+@ Swipe left or right to cycle.
+bn অস্ত্র বদলাতে বামে বা ডানে সোয়াইপ করুন।

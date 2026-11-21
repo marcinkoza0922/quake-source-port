@@ -613,8 +613,8 @@ ms Beku Paling Lama (ms)
 @ Look Down
 ms Pandang Bawah
 
-@ Look Speed
-ms Kelajuan Pandangan
+@ Look Acceleration
+ms Pecutan Pandangan
 
 @ Look Up
 ms Pandang Atas
@@ -1781,6 +1781,18 @@ ms Pencahayaan Berarah
 @ Light Specular
 ms Kilauan Cahaya
 
+@ Gameplay Overlay
+ms Tindanan Permainan
+
+@ Layout
+ms Susun atur
+
+@ Preview
+ms Pratonton
+
+@ Resume Game
+ms Sambung semula permainan
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ ms Sejauh mana pandangan condong ke atas dan bawah apabila anda mencondongkan al
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ms Sejauh mana pandangan berpusing ke kiri dan kanan apabila anda memusingkan alat kawalan (paksi rewang)
 
-@ How far the view turns when you drag on the right half of the screen
-ms Sejauh mana pandangan berpusing apabila anda menyeret pada separuh kanan skrin
-
 @ How fast the boomerang flies (units per second)
 ms Kelajuan bumerang terbang (unit sesaat)
 
@@ -2038,9 +2047,6 @@ ms Tiada beku tunggal yang lebih lama daripada ini, walau berapa pun tambahan ke
 
 @ Oldest marks and nails are recycled at this shared limit
 ms Kesan dan paku paling lama dikitar semula pada had kongsi ini
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ms Stik dan butang pada skrin: auto memaparkannya selepas sentuhan dan menyembunyikannya apabila peranti lain digunakan
 
 @ Only autosaves: quicksaves and the Save menu are off
 ms Simpanan auto sahaja: simpan pantas dan menu Simpan dimatikan
@@ -2411,6 +2417,18 @@ ms Menggunakan arah cahaya prabakar (.dlit) untuk lorekan dan kilauan halus pada
 
 @ Strength of the highlights from directional lighting
 ms Kekuatan sorotan kilauan daripada pencahayaan berarah
+
+@ How far the view turns when you swipe
+ms Sejauh mana pandangan bertukar apabila anda meleret
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ms Memperlahankan leretan anda berhampiran sasaran yang boleh dilihat. Deathmatch memerlukan kebenaran pelayan. Pada tetapan tinggi, bidikan turut ditarik sedikit ke arah sasaran.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ms Menukar sisi untuk pergerakan, sasaran dan butang permainan
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ms Auto mengikut peranti input aktif. Menu kekal tersedia apabila tindanan dimatikan.
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ ms Tiada pelayan yang sepadan
 @ Server search failed
 ms Carian pelayan gagal
 
+@ Slide to select, release to equip
+ms Slaid untuk memilih, lepaskan untuk melengkapkan
+
+@ Tap to swap weapons.
+ms Ketik untuk menukar senjata.
+
+@ Hold and slide to select.
+ms Tahan dan luncurkan untuk memilih.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ ms 100% tanpa cedera
 
 @ Damage Skull
 ms Tengkorak kecederaan
+
+@ A mild speed boost for fast swipes
+ms Leret pantas mempercepatkan putaran sedikit
+
+@ Phone Gyro
+ms Giroskop Telefon
+
+@ look zone
+ms zon pandangan
+
+@ while firing
+ms ketika menembak
+
+@ Uses the Android device’s motion sensor.
+ms Menggunakan sensor gerakan peranti Android.
+
+@ Edit Layout
+ms Sunting Reka Letak
+
+@ Drag to move
+ms Seret untuk mengalih
+
+@ Auto-fire
+ms Tembak automatik
+
+@ Touch Auto-fire
+ms Tembak automatik sentuh
+
+@ Move-side Fire
+ms Tembak di sisi gerakan
+
+@ Touch Haptics
+ms Getaran sentuhan
+
+@ Add a Fire button on the move side.
+ms Menambah butang tembak di sisi gerakan.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ms Menembak raksasa dalam bidikan semasa bermain secara setempat (papan kekunci, tetikus, alat kawalan).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ms Menembak raksasa dalam bidikan semasa bermain secara setempat (skrin sentuh).
+
+@ Vibrate on button presses and damage (Android).
+ms Bergetar apabila butang ditekan atau menerima kerosakan (Android).
+
+@ Swipe left or right to cycle.
+ms Leret ke kiri atau kanan untuk menukar senjata.

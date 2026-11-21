@@ -613,8 +613,8 @@ la Congelatio longissima (ms)
 @ Look Down
 la Deorsum spectare
 
-@ Look Speed
-la Celeritas aspectus
+@ Look Acceleration
+la Acceleratio Visus
 
 @ Look Up
 la Sursum spectare
@@ -1781,6 +1781,18 @@ la Illuminatio Directionalis
 @ Light Specular
 la Nitor Lucis
 
+@ Gameplay Overlay
+la Ludus deaurabis
+
+@ Layout
+la Layout
+
+@ Preview
+la Praevius
+
+@ Resume Game
+la Proin ludum
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ la Quantum aspectus sursum deorsumque inclinetur cum moderatrum inclinas (axis v
 @ How far the view turns left and right when you turn the controller (yaw axis)
 la Quantum aspectus sinistrorsum dextrorsumque vertatur cum moderatrum vertis (axis horizontalis)
 
-@ How far the view turns when you drag on the right half of the screen
-la Quantum aspectus vertatur cum in dimidia parte dextra quadri trahis
-
 @ How fast the boomerang flies (units per second)
 la Quam celeriter boomerang volet (unitates per secundam)
 
@@ -2038,9 +2047,6 @@ la Nulla congelatio diutius durat, quantumcumque damnum vel praemium caedis addi
 
 @ Oldest marks and nails are recycled at this shared limit
 la Vestigia et clavi vetustissimi ad hunc limitem communem iterum adhibentur
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-la Vectis et globuli in quadro: auto ea post tactum monstrat et celat cum aliud instrumentum adhibetur
 
 @ Only autosaves: quicksaves and the Save menu are off
 la Autoservationes tantum: servationes celeres et index servandi inactiva sunt
@@ -2411,6 +2417,18 @@ la Utitur directionibus lucis praeparatis (.dlit) ad umbram et nitorem subtilem 
 
 @ Strength of the highlights from directional lighting
 la Vis nitoris ex illuminatione directionali
+
+@ How far the view turns when you swipe
+la Quam longe visum ungunt cum ungunt
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+la Retardat tua visibilia prope ungunt scuta. Deathmatch server permission requirit. In gradu alto signum paulum ad scopum trahitur.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+la Swaps latera ad motum, tendendi ac lusionis globulis
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+la Auto activam input fabrica sequitur. Menu praesto manet cum operies non vigilat.
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ la Nulli ministri filtris respondent
 @ Server search failed
 la Inquisitio ministrorum defecit
 
+@ Slide to select, release to equip
+la Labi eligere, dimittere ad instruendum
+
+@ Tap to swap weapons.
+la Tap ad VERTO arma.
+
+@ Hold and slide to select.
+la Tenetur et dicta eligendi.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ la 100% sine damno
 
 @ Damage Skull
 la Calvaria damni
+
+@ A mild speed boost for fast swipes
+la Tractus celeres visum paulo celerius convertunt
+
+@ Phone Gyro
+la Gyroscopium Telephoni
+
+@ look zone
+la regio visus
+
+@ while firing
+la dum iacis
+
+@ Uses the Android device’s motion sensor.
+la Sensore motus instrumenti Android utitur.
+
+@ Edit Layout
+la Dispositionem Mutare
+
+@ Drag to move
+la Trahe ut moveas
+
+@ Auto-fire
+la Ignis automaticus
+
+@ Touch Auto-fire
+la Ignis automaticus tactilis
+
+@ Move-side Fire
+la Ignis in latere motus
+
+@ Touch Haptics
+la Vibratio tactilis
+
+@ Add a Fire button on the move side.
+la Bullam ignis in latere motus addit.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+la In ludo locali monstra sub signo ferit (claviatura, mus, moderatrum).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+la In ludo locali monstra sub signo ferit (velum tactile).
+
+@ Vibrate on button presses and damage (Android).
+la Vibrat cum bullae premuntur aut damnum accipis (Android).
+
+@ Swipe left or right to cycle.
+la Ad sinistram vel dextram trahe ut arma mutes.

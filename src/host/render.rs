@@ -377,7 +377,7 @@ impl Host {
                     c.pic(((c.vw() - pw as f32) / 2.0).floor(), 48.0, p);
                 }
             }
-            if self.cl.intermission == 0 {
+            if ingame && self.demo.is_none() && !self.automap.fullscreen {
                 touch::draw_touch(&mut c, &self.input, &self.server.core.cvars);
             }
             if let Some(b) = &demo_bar {

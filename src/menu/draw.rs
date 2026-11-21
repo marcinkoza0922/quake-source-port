@@ -19,9 +19,15 @@ impl Menu {
             }
             return;
         }
+        if self.screen == Screen::TouchEditor {
+            c.fade_screen();
+            self.canvas_layout(c);
+            self.draw_touch_editor(c, cv);
+            return;
+        }
         c.fade_screen();
         let base_scale = c.scale;
-        c.menu_layout();
+        self.canvas_layout(c);
         if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Load | Screen::Save | Screen::Help | Screen::Demos | Screen::DirBrowser | Screen::ServerBrowser) {
             c.ox += CLASSIC.0;
             c.oy += CLASSIC.1;
@@ -54,8 +60,11 @@ impl Menu {
                     c.frame(72.0, y, w, 16.0, BORDER);
                     gold(c, 72.0 + (w - c.ptext_w(label)) / 2.0, y + 4.0, label);
                 }
-                let d = dot(pic);
-                c.pic(54.0, 32.0 + self.main_cursor as f32 * 20.0, d);
+                if self.touch_shortcut_index() != Some(self.main_cursor) {
+                    let d = dot(pic);
+                    c.pic(54.0, 32.0 + self.main_cursor as f32 * 20.0, d);
+                }
+                self.draw_touch_shortcut(c);
             }
             Screen::Help => self.help.draw(c),
             Screen::Mods => self.mods.draw(c, modmenu::Page::List, self.pad_ui, &self.glyphs),
@@ -109,29 +118,35 @@ impl Menu {
             Screen::OptionsPage(Page::WeaponPriority) => {
                 self.draw_weapon_priority(c, pic, cv);
             }
+            Screen::OptionsPage(Page::Touch) => self.draw_touch_settings(c, cv),
             Screen::OptionsPage(page) => {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(PANEL_X - 40.0, 16.0, p);
                 title_c(c, pic, if is_net_page(page) { "gfx/p_multi.lmp" } else { "gfx/p_option.lmp" });
                 self.draw_page_title(c, page);
                 let total = self.page_len(page);
-                let n = self.page_vis(page);
-                let sc = self.page_scroll(page);
-                panel(c, PAGE_ROW0, n);
+                let height = self.page_row_height();
+                let offset = self.page_offset(page) / height;
+                let sc = offset.floor() as usize;
+                let end = (offset + self.page_vis(page) as f32).ceil() as usize;
+                let bottom = self.page_bottom(page);
+                panel_height(c, PAGE_ROW0, bottom - PAGE_ROW0);
+                c.clip_rows(Some((PAGE_ROW0, bottom)));
                 if self.opt_cursor < total
                     && !matches!(self.page_item(page, self.opt_cursor), Item::Run { run: Run::BrowseServers, .. })
                 {
-                    highlight(c, self.page_row_y(page, self.opt_cursor));
+                    c.fill(PANEL_X + 2.0, self.page_row_y(page, self.opt_cursor), PANEL_W - 4.0, height, HILITE);
                 }
                 self.text_layouts.borrow_mut().clear();
-                for i in sc..sc + n {
+                for i in sc..end.min(total) {
                     let blink = (realtime * 4.0) as i64 & 1 == 0 && i == self.opt_cursor;
-                    let y = self.page_row_y(page, i) + 2.0;
+                    let y = self.page_row_y(page, i) + (height - ROW_H) / 2.0 + 2.0;
                     match self.page_item(page, i) {
                         Item::Text { .. } => self.draw_text_row(c, cv, page, i, y, blink),
                         item => self.draw_item(c, cv, item, y, blink),
                     }
                 }
+                c.clip_rows(None);
                 if let Some((x, top, h, ty, th)) = self.scrollbar(page) {
                     // scrollbar along the panel's right edge
                     c.fill(x, top, 3.0, h, [1.0, 1.0, 1.0, 0.12]);
@@ -141,7 +156,7 @@ impl Menu {
                 if page == Page::Setup {
                     // M_Setup_Draw: the player in a box, in the chosen colours.
                     let v = cv.value_of("_cl_color") as i32;
-                    let y0 = PAGE_ROW0 + n as f32 * ROW_H + 12.0;
+                    let y0 = bottom + 12.0;
                     let bx = pic("gfx/bigbox.lmp");
                     let bw = bx.map_or(64.0, |b| b.1 as f32);
                     c.pic(((640.0 - bw) / 2.0).floor(), y0, bx);
@@ -150,8 +165,8 @@ impl Menu {
                     c.pic(((640.0 - pw) / 2.0).floor(), y0 + 8.0, p);
                 }
                 if page == Page::Crosshair { crate::reticle::preview(c, cv); }
-                self.draw_custom_notes(c, cv, page, n);
-                if matches!(page, Page::Export | Page::RenameDemo) { self.draw_dialog_notes(c, n); }
+                self.draw_custom_notes(c, cv, page);
+                if matches!(page, Page::Export | Page::RenameDemo) { self.draw_dialog_notes(c, page); }
                 if page == Page::Controls {
                     c.text(VALUE_X, PAGE_ROW0 - 16.0, "Keyboard", TXT, MUTED);
                     c.text(BIND_PAD_X, PAGE_ROW0 - 16.0, "Controller", TXT, MUTED);
@@ -193,22 +208,25 @@ impl Menu {
                 }
             }
             Screen::Death => {
-                c.fill(148.0, 96.0, 344.0, 152.0, [0.05, 0.04, 0.03, 0.95]);
-                c.frame(148.0, 96.0, 344.0, 152.0, BORDER);
+                let rows = self.death_rows();
+                let height = 56.0 + rows as f32 * 24.0;
+                c.fill(148.0, 96.0, 344.0, height, [0.05, 0.04, 0.03, 0.95]);
+                c.frame(148.0, 96.0, 344.0, height, BORDER);
                 c.text_center(320.0, 112.0, "You died", TXT * 1.2, GOLD_FG);
-                for (i, label) in [qcore::t!("Continue from most recent save"), qcore::t!("Select save"), qcore::t!("Restart level"), qcore::t!("Return to main menu")].iter().enumerate() {
+                let labels = [qcore::t!("Continue from most recent save"), qcore::t!("Select save"), qcore::t!("Restart level"), qcore::t!("Return to main menu"), qcore::t!("Quick Load")];
+                for (i, label) in labels.into_iter().take(rows).enumerate() {
                     let y = 140.0 + i as f32 * 24.0;
                     if i == self.death_cursor { c.fill(160.0, y, 320.0, 20.0, HILITE); }
                     txt(c, 168.0, y + 4.0, &format!("{}. {}", i + 1, qcore::lang::tr(label)));
                 }
             }
-            Screen::None | Screen::HudEditor => {}
+            Screen::None | Screen::HudEditor | Screen::TouchEditor => {}
         }
-        c.menu_layout();
+        self.canvas_layout(c);
         if let Some(o) = self.osk {
             self.draw_osk(c, o);
         }
-        if !matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons | Page::WeaponPriority)) {
+        if !matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons | Page::WeaponPriority | Page::Touch)) {
             self.draw_tooltip(c, cv);
             self.draw_hints(c);
         }
@@ -223,16 +241,17 @@ impl Menu {
     pub(super) fn draw_drop(&self, c: &mut Canvas, cv: &Cvars, item: Item, d: Drop) {
         let opts = self.options(item);
         let (x, y, w, vis) = self.drop_geom(d, &opts);
-        let h = vis as f32 * BOX_H + 2.0;
+        let row_h = self.drop_row_height();
+        let h = vis as f32 * row_h + 2.0;
         c.fill(x, y, w, h, [0.05, 0.04, 0.03, 0.97]);
         c.frame(x, y, w, h, BORDER);
         let cur = self.option_index(item, cv);
         for (k, o) in opts.iter().enumerate().skip(d.scroll).take(vis) {
-            let ry = y + 1.0 + (k - d.scroll) as f32 * BOX_H;
+            let ry = y + 1.0 + (k - d.scroll) as f32 * row_h;
             if k == d.cursor {
-                c.fill(x + 1.0, ry, w - 2.0, BOX_H, HILITE);
+                c.fill(x + 1.0, ry, w - 2.0, row_h, HILITE);
             }
-            c.text(x + 4.0, ry + 1.0, o, TXT, if k == cur { GOLD_FG } else { FG });
+            c.text(x + 4.0, ry + (row_h - BOX_H) / 2.0 + 1.0, o, TXT, if k == cur { GOLD_FG } else { FG });
         }
         // scroll hints
         if d.scroll > 0 {
@@ -387,7 +406,8 @@ impl Menu {
                 // submenu rows: tinted strip, gold label and arrow
                 let dim = sub_disabled(page, cv);
                 let (fg, tint) = if dim { (MUTED, 0.04) } else { (GOLD_FG, 0.10) };
-                c.fill(PANEL_X + 4.0, y - 2.0, PANEL_W - 14.0, ROW_H, [0.85, 0.60, 0.25, tint]);
+                let h = self.page_row_height();
+                c.fill(PANEL_X + 4.0, y - 2.0 - (h - ROW_H) / 2.0, PANEL_W - 14.0, h, [0.85, 0.60, 0.25, tint]);
                 c.text_right(LABEL_R, y, l, TXT, fg);
                 c.text(VALUE_X, y, if dim { "(off)" } else { "" }, TXT, MUTED);
                 c.shape(VALUE_X + if dim { 30.0 } else { 0.0 }, y + 1.0, 7.0, 7.0, crate::font::Shape::ArrowRight, fg);

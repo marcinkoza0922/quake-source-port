@@ -613,8 +613,8 @@ id Beku Terlama (ms)
 @ Look Down
 id Lihat ke Bawah
 
-@ Look Speed
-id Kecepatan Pandangan
+@ Look Acceleration
+id Akselerasi Pandangan
 
 @ Look Up
 id Lihat ke Atas
@@ -1781,6 +1781,18 @@ id Pencahayaan Terarah
 @ Light Specular
 id Kilau Cahaya
 
+@ Gameplay Overlay
+id Hamparan Permainan
+
+@ Layout
+id Tata Letak
+
+@ Preview
+id Pratinjau
+
+@ Resume Game
+id Lanjutkan permainan
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ id Seberapa jauh pandangan miring ke atas dan bawah saat kontroler dimiringkan (
 @ How far the view turns left and right when you turn the controller (yaw axis)
 id Seberapa jauh pandangan berputar ke kiri dan kanan saat kontroler diputar (sumbu yaw)
 
-@ How far the view turns when you drag on the right half of the screen
-id Seberapa jauh pandangan berputar saat Anda menyeret di separuh kanan layar
-
 @ How fast the boomerang flies (units per second)
 id Seberapa cepat bumerang terbang (unit per detik)
 
@@ -2038,9 +2047,6 @@ id Tidak ada beku yang lebih lama dari ini, berapa pun tambahan dari kerusakan a
 
 @ Oldest marks and nails are recycled at this shared limit
 id Noda dan paku terlama didaur ulang pada batas bersama ini
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-id Stik dan tombol di layar: otomatis menampilkannya setelah disentuh dan menyembunyikannya saat perangkat lain dipakai
 
 @ Only autosaves: quicksaves and the Save menu are off
 id Hanya simpan otomatis: simpan cepat dan menu Simpan dinonaktifkan
@@ -2411,6 +2417,18 @@ id Menggunakan arah cahaya pra-hitung (.dlit) untuk bayangan dan kilau halus pad
 
 @ Strength of the highlights from directional lighting
 id Kekuatan sorotan kilau dari pencahayaan terarah
+
+@ How far the view turns when you swipe
+id Seberapa jauh pandangan berubah saat Anda menggeser
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+id Memperlambat gesekan Anda di dekat target yang terlihat. Deathmatch memerlukan izin server. Pada setelan tinggi, bidikan juga sedikit tertarik ke sasaran.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+id Menukar sisi untuk tombol pergerakan, bidik, dan gameplay
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+id Otomatis mengikuti perangkat input yang aktif. Menu tetap tersedia saat overlay dinonaktifkan.
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ id Tidak ada server yang cocok
 @ Server search failed
 id Pencarian server gagal
 
+@ Slide to select, release to equip
+id Geser untuk memilih, lepaskan untuk melengkapi
+
+@ Tap to swap weapons.
+id Ketuk untuk menukar senjata.
+
+@ Hold and slide to select.
+id Tahan dan geser untuk memilih.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ id 100% tanpa kerusakan
 
 @ Damage Skull
 id Tengkorak kerusakan
+
+@ A mild speed boost for fast swipes
+id Sedikit mempercepat putaran saat mengusap cepat
+
+@ Phone Gyro
+id Giroskop Ponsel
+
+@ look zone
+id zona pandangan
+
+@ while firing
+id saat menembak
+
+@ Uses the Android device’s motion sensor.
+id Menggunakan sensor gerak perangkat Android.
+
+@ Edit Layout
+id Edit Tata Letak
+
+@ Drag to move
+id Seret untuk memindah
+
+@ Auto-fire
+id Tembak otomatis
+
+@ Touch Auto-fire
+id Tembak otomatis sentuh
+
+@ Move-side Fire
+id Tembak di sisi gerak
+
+@ Touch Haptics
+id Getaran sentuh
+
+@ Add a Fire button on the move side.
+id Menambah tombol tembak di sisi gerak.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+id Menembak monster di bidikan dalam permainan lokal (papan ketik, tetikus, pengontrol).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+id Menembak monster di bidikan dalam permainan lokal (layar sentuh).
+
+@ Vibrate on button presses and damage (Android).
+id Bergetar saat menekan tombol dan menerima kerusakan (Android).
+
+@ Swipe left or right to cycle.
+id Usap ke kiri atau kanan untuk mengganti senjata.

@@ -15,6 +15,7 @@ pub struct Guest {
     pub cl: ClientState,
     /// Input for the next server tic (set by whoever drives this player).
     pub cmd: UserCmd,
+    pub auto_attack: bool,
     /// View state (bob, kicks, damage flashes, entity lerps).
     pub view: crate::view::ViewState,
     /// Damage and bonus-flash events for `view`, applied by the host.
@@ -53,6 +54,7 @@ impl Guest {
             slot,
             cl,
             cmd: UserCmd::default(),
+            auto_attack: false,
             view: Default::default(),
             view_events: Vec::new(),
             input,
@@ -127,7 +129,8 @@ impl Guest {
                 sv.ack_frame(self.slot, -1);
             }
         }
-        let cmd = self.cmd;
+        let mut cmd = self.cmd;
+        cmd.buttons |= u16::from(self.auto_attack);
         if self.cl.build_move(&cmd).is_some() {
             sv.set_move(self.slot, ClientMove {
                 angles: cmd.viewangles,

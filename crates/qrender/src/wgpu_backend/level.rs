@@ -1,6 +1,5 @@
 //! Level loading: world geometry, BSP textures, lightmap atlas.
 
-use super::lightmap::Lightmaps;
 use super::models::Model;
 use super::textures::Sampling;
 use super::{NO_TEX, Renderer};
@@ -115,7 +114,7 @@ impl Renderer {
         if !vbytes.is_empty() {
             self.queue.write_buffer(&vbuf, 0, vbytes);
         }
-        self.lightmap = Lightmaps::for_world(&self.dev, &cpu);
+        self.lightmap = self.lightmap.for_world(&self.dev, &cpu);
         self.bufs.frame_group = None;
         let mut ids = Vec::new();
         for i in 1..world_subs {

@@ -613,8 +613,8 @@ hy Ամենաերկար սառեցում (մվ)
 @ Look Down
 hy Նայել ներքև
 
-@ Look Speed
-hy Նայելու արագություն
+@ Look Acceleration
+hy Հայացքի արագացում
 
 @ Look Up
 hy Նայել վերև
@@ -1781,6 +1781,18 @@ hy Ուղղորդված լուսավորում
 @ Light Specular
 hy Լույսի փայլ
 
+@ Gameplay Overlay
+hy Խաղի ծածկույթ
+
+@ Layout
+hy Դասավորություն
+
+@ Preview
+hy Նախադիտում
+
+@ Resume Game
+hy Վերսկսել խաղը
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ hy Որքան է տեսքը թեքվում վեր ու վար, երբ թեքու
 @ How far the view turns left and right when you turn the controller (yaw axis)
 hy Որքան է տեսքը պտտվում աջ ու ձախ, երբ պտտում եք կարգավարը (հորիզոնական առանցք)
 
-@ How far the view turns when you drag on the right half of the screen
-hy Որքան է պտտվում տեսքը, երբ մատը սահեցնում եք էկրանի աջ կեսով
-
 @ How fast the boomerang flies (units per second)
 hy Որքան արագ է թռչում բումերանգը (միավոր/վայրկյան)
 
@@ -2038,9 +2047,6 @@ hy Ոչ մի սառեցում չի տևում սրանից երկար, որքա�
 
 @ Oldest marks and nails are recycled at this shared limit
 hy Ամենահին հետքերն ու մեխերը վերաօգտագործվում են այս ընդհանուր սահմանին հասնելիս
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-hy Էկրանային լծակ և կոճակներ: ավտոն ցույց է տալիս դրանք հպումից հետո և թաքցնում այլ սարք օգտագործելիս
 
 @ Only autosaves: quicksaves and the Save menu are off
 hy Միայն ինքնապահպանումներ: արագ պահպանումները և պահպանման ընտրացանկն անջատված են
@@ -2411,6 +2417,18 @@ hy Օգտագործում է նախապես հաշվարկված լույսի ո
 
 @ Strength of the highlights from directional lighting
 hy Ուղղորդված լուսավորման փայլերի ուժգնությունը
+
+@ How far the view turns when you swipe
+hy Որքան հեռու է շրջվում տեսարանը, երբ սահում եք
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+hy Դանդաղեցնում է ձեր սահեցումը տեսանելի թիրախների մոտ: Deathmatch-ը պահանջում է սերվերի թույլտվություն: Բարձր մակարդակում նշանոցը նաև թեթևակի ձգվում է դեպի թիրախը։
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+hy Փոխում է կողքերը շարժման, նպատակադրման և խաղի կոճակների հետ
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+hy Ավտոմատ հետևում է ակտիվ մուտքային սարքին: Ցանկը հասանելի է մնում, երբ ծածկույթն անջատված է:
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ hy Զտիչներին համապատասխանող սերվերներ չկան
 @ Server search failed
 hy Չհաջողվեց որոնել սերվերներ
 
+@ Slide to select, release to equip
+hy Սահեցրեք՝ ընտրելու համար, բաց թողեք՝ սարքավորելու համար
+
+@ Tap to swap weapons.
+hy Հպեք՝ զենքերը փոխանակելու համար:
+
+@ Hold and slide to select.
+hy Ընտրելու համար պահեք և սահեցրեք:
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ hy 100% առանց վնասի
 
 @ Damage Skull
 hy Վնասի գանգ
+
+@ A mild speed boost for fast swipes
+hy Արագ սահեցնելիս տեսադաշտը մի փոքր ավելի արագ է շրջվում
+
+@ Phone Gyro
+hy Հեռախոսի գիրոսկոպ
+
+@ look zone
+hy հայացքի գոտի
+
+@ while firing
+hy կրակելիս
+
+@ Uses the Android device’s motion sensor.
+hy Օգտագործում է Android սարքի շարժման տվիչը։
+
+@ Edit Layout
+hy Խմբագրել դասավորությունը
+
+@ Drag to move
+hy Քաշեք՝ տեղափոխելու համար
+
+@ Auto-fire
+hy Ինքնաշխատ կրակ
+
+@ Touch Auto-fire
+hy Հպումով ինքնաշխատ կրակ
+
+@ Move-side Fire
+hy Կրակ՝ շարժման կողմում
+
+@ Touch Haptics
+hy Հպման թրթռում
+
+@ Add a Fire button on the move side.
+hy Ավելացնում է կրակի կոճակ շարժման կողմում։
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+hy Տեղային խաղում կրակում է նշանոցում գտնվող հրեշների վրա (ստեղնաշար, մկնիկ, կառավարիչ)։
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+hy Տեղային խաղում կրակում է նշանոցում գտնվող հրեշների վրա (հպէկրան)։
+
+@ Vibrate on button presses and damage (Android).
+hy Թրթռում է կոճակ սեղմելիս կամ վնաս ստանալիս (Android)։
+
+@ Swipe left or right to cycle.
+hy Զենքը փոխելու համար սահեցրեք ձախ կամ աջ։

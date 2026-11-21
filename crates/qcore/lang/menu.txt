@@ -1422,12 +1422,12 @@ it Guarda giù
 es Mirar abajo
 ru Смотреть вниз
 
-@ Look Speed
-fr Vitesse de la vue
-de Blickgeschwindigkeit
-it Velocità visuale
-es Velocidad de la vista
-ru Скорость обзора
+@ Look Acceleration
+fr Accélération de la visée
+de Blickbeschleunigung
+it Accelerazione visuale
+es Aceleración de la vista
+ru Ускорение обзора
 
 @ Look Up
 fr Regarder en haut
@@ -4175,3 +4175,87 @@ de 100% ohne Schaden
 it 100% senza danni
 es 100% sin daño
 ru 100% без урона
+
+@ Gameplay Overlay
+fr Commandes en jeu
+de Spielsteuerung
+it Comandi di gioco
+es Controles de juego
+ru Игровые кнопки
+
+@ Layout
+fr Disposition
+de Anordnung
+it Disposizione
+es Distribución
+ru Раскладка
+
+@ Preview
+fr Aperçu
+de Vorschau
+it Anteprima
+es Vista previa
+ru Предпросмотр
+
+@ Resume Game
+fr Reprendre la partie
+de Spiel fortsetzen
+it Riprendi partita
+es Reanudar partida
+ru Продолжить игру
+
+@ Phone Gyro
+fr Gyroscope du téléphone
+de Handy-Gyroskop
+it Giroscopio del telefono
+es Giroscopio del teléfono
+ru Гироскоп телефона
+
+@ look zone
+fr zone de visée
+de Blickbereich
+it area visuale
+es zona de vista
+ru зона обзора
+
+@ while firing
+fr pendant le tir
+de beim Feuern
+it durante il fuoco
+es al disparar
+ru при стрельбе
+
+@ Edit Layout
+fr Modifier la disposition
+de Layout bearbeiten
+it Modifica disposizione
+es Editar disposición
+ru Изменить раскладку
+
+@ Auto-fire
+fr Tir automatique
+de Automatisches Feuern
+it Fuoco automatico
+es Disparo automático
+ru Автоогонь
+
+@ Touch Auto-fire
+fr Tir auto tactile
+de Auto-Feuer per Touch
+it Fuoco automatico touch
+es Disparo automático táctil
+ru Сенсорный автоогонь
+
+@ Move-side Fire
+fr Tir côté déplacement
+de Feuertaste auf Bewegungsseite
+it Fuoco sul lato movimento
+es Disparo en lado de movimiento
+ru Огонь на стороне движения
+
+@ Touch Haptics
+fr Vibrations tactiles
+de Touch-Vibration
+it Vibrazione touch
+es Vibración táctil
+ru Виброотклик

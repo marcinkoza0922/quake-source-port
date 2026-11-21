@@ -613,8 +613,8 @@ yue 最長凍結（毫秒）
 @ Look Down
 yue 向下望
 
-@ Look Speed
-yue 視角速度
+@ Look Acceleration
+yue 視角加速
 
 @ Look Up
 yue 向上望
@@ -1781,6 +1781,18 @@ yue 方向性光照
 @ Light Specular
 yue 光照高光
 
+@ Gameplay Overlay
+yue 遊戲玩法重疊
+
+@ Layout
+yue 版面配置
+
+@ Preview
+yue 預覽
+
+@ Resume Game
+yue 恢復遊戲
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ yue 傾側手掣時視角上下傾斜嘅幅度（俯仰軸）
 @ How far the view turns left and right when you turn the controller (yaw axis)
 yue 轉動手掣時視角左右轉動嘅幅度（偏航軸）
 
-@ How far the view turns when you drag on the right half of the screen
-yue 喺螢幕右半邊拖動時視角轉動嘅幅度
-
 @ How fast the boomerang flies (units per second)
 yue 迴力鏢飛行速度（每秒單位數）
 
@@ -2038,9 +2047,6 @@ yue 無論傷害或者殺敵加成加幾多，單次凍結都唔會超過呢個�
 
 @ Oldest marks and nails are recycled at this shared limit
 yue 到咗呢個共用上限就會回收最舊嘅痕跡同鐵釘
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-yue 螢幕搖桿同按鈕：自動會喺觸碰後顯示，用其他裝置時就隱藏
 
 @ Only autosaves: quicksaves and the Save menu are off
 yue 淨係自動存檔：停用快速存檔同存檔選單
@@ -2411,6 +2417,18 @@ yue 用預先烘焙嘅光照方向（.dlit）喺牆身同模型度做出細緻�
 
 @ Strength of the highlights from directional lighting
 yue 方向性光照帶嚟嘅高光強度
+
+@ How far the view turns when you swipe
+yue 當你滑動嗰陣，個視圖會轉幾遠
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+yue 減慢你喺可見目標附近嘅滑動速度。死亡對決需要伺服器權限。高設定仲會將準星輕輕拉向目標。
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+yue 將兩邊換成移動、瞄準同遊戲掣
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+yue 自動跟住有效嘅輸入裝置。當重疊功能閂咗嗰陣，選單會保持可用。
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ yue 冇伺服器符合篩選條件
 @ Server search failed
 yue 搜尋伺服器失敗
 
+@ Slide to select, release to equip
+yue 滑動嚟選擇，釋放嚟裝備
+
+@ Tap to swap weapons.
+yue 㩒一下就可以換武器。
+
+@ Hold and slide to select.
+yue 按住同滑動嚟揀。
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ yue 100% 無傷
 
 @ Damage Skull
 yue 受傷骷髏
+
+@ A mild speed boost for fast swipes
+yue 掃快啲會令視角轉快少少
+
+@ Phone Gyro
+yue 手機陀螺儀
+
+@ look zone
+yue 視角區
+
+@ while firing
+yue 開火嗰陣
+
+@ Uses the Android device’s motion sensor.
+yue 用 Android 裝置嘅動作感應器。
+
+@ Edit Layout
+yue 編輯佈局
+
+@ Drag to move
+yue 拖曳嚟移動
+
+@ Auto-fire
+yue 自動開火
+
+@ Touch Auto-fire
+yue 觸屏自動開火
+
+@ Move-side Fire
+yue 移動側開火掣
+
+@ Touch Haptics
+yue 觸控震動
+
+@ Add a Fire button on the move side.
+yue 喺移動嗰邊加個開火掣。
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+yue 喺本機遊戲入面對準怪物就自動開火（鍵盤、滑鼠、手掣）。
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+yue 喺本機遊戲入面對準怪物就自動開火（觸控屏幕）。
+
+@ Vibrate on button presses and damage (Android).
+yue 撳掣或者受到傷害嗰陣會震（Android）。
+
+@ Swipe left or right to cycle.
+yue 向左或右掃就可以轉武器。

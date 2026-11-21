@@ -46,7 +46,11 @@ pub fn gold(c: &mut Canvas, x: f32, y: f32, s: &str) -> f32 {
 
 /// Translucent box behind `n` option rows starting at `top`.
 pub(super) fn panel(c: &mut Canvas, top: f32, n: usize) {
-    let h = n as f32 * ROW_H + 8.0;
+    panel_height(c, top, n as f32 * ROW_H);
+}
+
+pub(super) fn panel_height(c: &mut Canvas, top: f32, height: f32) {
+    let h = height + 8.0;
     c.fill(PANEL_X, top - 4.0, PANEL_W, h, [0.0, 0.0, 0.0, 0.55]);
     c.frame(PANEL_X, top - 4.0, PANEL_W, h, [0.35, 0.27, 0.16, 0.9]);
 }

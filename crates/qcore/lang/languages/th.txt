@@ -613,8 +613,8 @@ th หยุด​นิ่ง​นาน​สุด (ms)
 @ Look Down
 th มอง​ลง
 
-@ Look Speed
-th ความ​เร็ว​การ​มอง
+@ Look Acceleration
+th ความเร่ง​การ​หัน​มุม​มอง
 
 @ Look Up
 th มอง​ขึ้น
@@ -1781,6 +1781,18 @@ th แสง​แบบ​มี​ทิศทาง
 @ Light Specular
 th ความ​เงา​ของ​แสง
 
+@ Gameplay Overlay
+th โอ​เวอร์​เลย์​การ​เล่น​เกม
+
+@ Layout
+th เค้าโครง
+
+@ Preview
+th ดู​ตัวอย่าง
+
+@ Resume Game
+th เล่น​เกม​ต่อ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ th มุม​มอง​เงย​และ​ก้ม​มาก​แ�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 th มุม​มอง​หัน​ซ้าย​ขวา​มาก​แค่​ไหน​เมื่อ​หมุน​จอย (แกน yaw)
 
-@ How far the view turns when you drag on the right half of the screen
-th มุม​มอง​หัน​มาก​แค่​ไหน​เมื่อ​ลาก​บน​ครึ่ง​ขวา​ของ​จอ
-
 @ How fast the boomerang flies (units per second)
 th ความ​เร็ว​ที่​บูมเมอแรง​บิน (หน่วย​ต่อ​วินาที)
 
@@ -2038,9 +2047,6 @@ th การ​หยุด​แต่ละ​ครั้ง​ไม่​�
 
 @ Oldest marks and nails are recycled at this shared limit
 th รอย​และ​ตะปู​ที่​เก่า​สุด​ถูก​นำ​มา​ใช้​ใหม่​ที่​ขีด​จำกัด​ร่วม​นี้
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-th สติ๊ก​และ​ปุ่ม​บน​จอ: อัตโนมัติ​แสดง​หลัง​การ​สัมผัส​และ​ซ่อน​เมื่อ​ใช้​อุปกรณ์​อื่น
 
 @ Only autosaves: quicksaves and the Save menu are off
 th บันทึก​อัตโนมัติ​เท่านั้น: ปิด​บันทึก​ด่วน​และ​เมนู​บันทึก
@@ -2411,6 +2417,18 @@ th ใช้​ทิศทาง​แสง​ที่​อบ​ไว้ (
 
 @ Strength of the highlights from directional lighting
 th ความ​แรง​ของ​ไฮไลต์​จาก​แสง​แบบ​มี​ทิศทาง
+
+@ How far the view turns when you swipe
+th มุม​มอง​จะ​เปลี่ยน​ไป​ไกล​แค่​ไหน​เมื่อ​คุณ​ปัด​นิ้ว
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+th ชะลอ​การ​ปัด​ของ​คุณ​ใกล้​กับ​เป้า​หมาย​ที่​มอง​เห็น​ได้​ ​Deathmatch​ ​ต้อง​ได้​รับ​อนุญาต​จาก​เซิร์ฟเวอร์ ระดับ​สูง​จะ​ดึง​เป้า​เล็ง​เข้าหา​เป้า​หมาย​เล็ก​น้อย​ด้วย
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+th สลับ​ด้าน​ข้าง​สำหรับ​ปุ่ม​การ​เคลื่อนไหว​ ​การ​เล็ง​ ​และ​การ​เล่น​เกม
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+th อัตโนมัติ​ติดตาม​อุปกรณ์​อินพุต​ที่​ใช้​งาน​อยู่​ ​เมนู​จะ​ยัง​คง​ใช้​งาน​ได้​เมื่อ​ปิด​การ​วาง​ซ้อน
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ th ไม่พบ​เซิร์ฟเวอร์​ที่​ตรง�
 @ Server search failed
 th ค้นหา​เซิร์ฟเวอร์​ไม่สำเร็จ
 
+@ Slide to select, release to equip
+th เลื่อน​เพื่อ​เลือก​ ​ปล่อย​เพื่อ​ติด​ตั้ง
+
+@ Tap to swap weapons.
+th แตะ​เพื่อ​สลับ​อาวุธ
+
+@ Hold and slide to select.
+th กด​ค้าง​ไว้​แล้ว​เลื่อน​เพื่อ​เลือก
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ th 100% ไม่​เสีย​พลัง
 
 @ Damage Skull
 th หัวกะโหลก​เมื่อ​บาดเจ็บ
+
+@ A mild speed boost for fast swipes
+th ปัด​เร็ว​เพื่อ​ให้​มุม​มอง​หมุน​เร็ว​ขึ้น​เล็ก​น้อย
+
+@ Phone Gyro
+th ไจ​โร​ของ​โทรศัพท์
+
+@ look zone
+th พื้นที่​หัน​มุม​มอง
+
+@ while firing
+th ขณะ​ยิง
+
+@ Uses the Android device’s motion sensor.
+th ใช้​เซ็นเซอร์​ตรวจ​จับ​การ​เคลื่อนไหว​ของ​อุปกรณ์​ ​Android
+
+@ Edit Layout
+th แก้ไข​ผัง​ปุ่ม
+
+@ Drag to move
+th ลาก​เพื่อ​ย้าย
+
+@ Auto-fire
+th ยิง​อัตโนมัติ
+
+@ Touch Auto-fire
+th ยิง​อัตโนมัติ​บน​จอ​สัมผัส
+
+@ Move-side Fire
+th ปุ่ม​ยิง​ฝั่ง​เคลื่อนที่
+
+@ Touch Haptics
+th สั่น​เมื่อ​สัมผัส
+
+@ Add a Fire button on the move side.
+th เพิ่ม​ปุ่ม​ยิง​ใน​ฝั่ง​ควบคุม​การ​เคลื่อนที่
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+th ยิง​มอน​ส​เตอร์​ที่​อยู่​ใต้​เป้า​ใน​เกม​แบบ​เล่น​ใน​เครื่อง (แป้น​พิมพ์ เมาส์ ตัว​ควบคุม)
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+th ยิง​มอน​ส​เตอร์​ที่​อยู่​ใต้​เป้า​ใน​เกม​แบบ​เล่น​ใน​เครื่อง (จอ​สัมผัส)
+
+@ Vibrate on button presses and damage (Android).
+th สั่น​เมื่อ​กด​ปุ่ม​หรือ​ได้​รับ​ความ​เสีย​หาย (Android)
+
+@ Swipe left or right to cycle.
+th ปัด​ซ้าย​หรือ​ขวา​เพื่อ​สลับ​อาวุธ

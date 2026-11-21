@@ -613,8 +613,8 @@ gu સૌથી લાંબું ફ્રીઝ (ms)
 @ Look Down
 gu નીચે જુઓ
 
-@ Look Speed
-gu જોવાની ઝડપ
+@ Look Acceleration
+gu દૃશ્ય પ્રવેગ
 
 @ Look Up
 gu ઉપર જુઓ
@@ -1781,6 +1781,18 @@ gu દિશાત્મક પ્રકાશ
 @ Light Specular
 gu પ્રકાશ ચમક
 
+@ Gameplay Overlay
+gu ગેમપ્લે ઓવરલે
+
+@ Layout
+gu લેઆઉટ
+
+@ Preview
+gu પૂર્વાવલોકન
+
+@ Resume Game
+gu રમત ફરી શરૂ કરો
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ gu કંટ્રોલર નમાવો ત્યારે દૃશ્ય �
 @ How far the view turns left and right when you turn the controller (yaw axis)
 gu કંટ્રોલર ફેરવો ત્યારે દૃશ્ય ડાબે-જમણે કેટલું ફરે છે (યૉ અક્ષ)
 
-@ How far the view turns when you drag on the right half of the screen
-gu સ્ક્રીનના જમણા અડધા ભાગ પર ખેંચો ત્યારે દૃશ્ય કેટલું ફરે છે
-
 @ How fast the boomerang flies (units per second)
 gu બૂમરેંગ કેટલી ઝડપે ઊડે છે (એકમ પ્રતિ સેકન્ડ)
 
@@ -2038,9 +2047,6 @@ gu નુકસાન કે કિલ બોનસ ગમે તેટલું
 
 @ Oldest marks and nails are recycled at this shared limit
 gu આ સહિયારી મર્યાદા પર સૌથી જૂનાં નિશાન અને ખીલા ફરી વપરાય છે
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-gu સ્ક્રીન પરની સ્ટિક અને બટનો: ઑટો સ્પર્શ પછી તેમને બતાવે છે અને બીજું ઉપકરણ વપરાય ત્યારે છુપાવે છે
 
 @ Only autosaves: quicksaves and the Save menu are off
 gu ફક્ત ઑટોસેવ: ક્વિકસેવ અને સેવ મેનૂ બંધ છે
@@ -2411,6 +2417,18 @@ gu દીવાલો અને મોડેલો પર સૂક્ષ્મ 
 
 @ Strength of the highlights from directional lighting
 gu દિશાત્મક પ્રકાશમાંથી મળતી ચમકની તીવ્રતા
+
+@ How far the view turns when you swipe
+gu જ્યારે તમે સ્વાઇપ કરો છો ત્યારે દૃશ્ય કેટલું દૂર વળે છે
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+gu દૃશ્યમાન લક્ષ્યોની નજીક તમારા સ્વાઇપને ધીમું કરે છે. ડેથમેચને સર્વરની પરવાનગીની જરૂર છે. ઊંચા સ્તરે નિશાન પણ લક્ષ્ય તરફ થોડું ખેંચાય છે.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+gu ચળવળ, લક્ષ્ય અને ગેમપ્લે બટનો માટે બાજુઓને સ્વેપ કરો
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+gu ઑટો સક્રિય ઇનપુટ ઉપકરણને અનુસરે છે. જ્યારે ઓવરલે બંધ હોય ત્યારે મેનૂ ઉપલબ્ધ રહે છે.
 
 # ==== ui.txt ====
 
@@ -3450,6 +3468,15 @@ gu ફિલ્ટરને અનુરૂપ કોઈ સર્વર નથ�
 @ Server search failed
 gu સર્વર શોધ નિષ્ફળ રહી
 
+@ Slide to select, release to equip
+gu પસંદ કરવા માટે સ્લાઇડ કરો, સજ્જ કરવા માટે છોડો
+
+@ Tap to swap weapons.
+gu શસ્ત્રો સ્વેપ કરવા માટે ટેપ કરો.
+
+@ Hold and slide to select.
+gu પસંદ કરવા માટે પકડી રાખો અને સ્લાઇડ કરો.
+
 # ==== hud.txt ====
 
 # HUD, weapon and equipment wheels, sound captions and other in-game text.
@@ -4052,3 +4079,51 @@ gu 100% નુકસાન વિના
 
 @ Damage Skull
 gu નુકસાનની ખોપરી
+
+@ A mild speed boost for fast swipes
+gu ઝડપી સ્વાઇપથી દૃશ્ય થોડું વધુ ઝડપથી ફરે છે
+
+@ Phone Gyro
+gu ફોનનો જાયરોસ્કોપ
+
+@ look zone
+gu દૃશ્ય વિસ્તાર
+
+@ while firing
+gu ગોળી ચલાવતી વખતે
+
+@ Uses the Android device’s motion sensor.
+gu Android ઉપકરણના ગતિ સેન્સરનો ઉપયોગ કરે છે.
+
+@ Edit Layout
+gu લેઆઉટ સંપાદિત કરો
+
+@ Drag to move
+gu ખસેડવા ખેંચો
+
+@ Auto-fire
+gu સ્વયં ગોળીબાર
+
+@ Touch Auto-fire
+gu ટચથી સ્વયં ગોળીબાર
+
+@ Move-side Fire
+gu હલનચલનની બાજુએ ગોળીબાર
+
+@ Touch Haptics
+gu ટચ કંપન
+
+@ Add a Fire button on the move side.
+gu હલનચલનની બાજુએ ગોળીબારનું બટન ઉમેરે છે.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+gu સ્થાનિક રમતમાં નિશાના હેઠળના રાક્ષસો પર ગોળીબાર કરે છે (કીબોર્ડ, માઉસ, કંટ્રોલર).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+gu સ્થાનિક રમતમાં નિશાના હેઠળના રાક્ષસો પર ગોળીબાર કરે છે (ટચસ્ક્રીન).
+
+@ Vibrate on button presses and damage (Android).
+gu બટન દબાવવા કે ઇજા થાય ત્યારે કંપન (Android).
+
+@ Swipe left or right to cycle.
+gu હથિયાર બદલવા ડાબે કે જમણે સ્વાઇપ કરો.

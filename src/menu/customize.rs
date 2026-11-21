@@ -88,12 +88,12 @@ impl Menu {
     /// Main menu rows: the classic five, Map Packs, Demos, and Customize while a
     /// customized game runs.
     pub(super) fn main_items(&self) -> usize {
-        MAIN_ITEMS + usize::from(self.custom_running)
+        MAIN_ITEMS + usize::from(self.custom_running) + usize::from(self.touch_shortcut)
     }
 
     /// Notes under the Customize pages' rows; returns the lines' height.
-    pub(super) fn draw_custom_notes(&self, c: &mut Canvas, cv: &Cvars, page: Page, rows: usize) {
-        let y = PAGE_ROW0 + rows as f32 * ROW_H + 30.0;
+    pub(super) fn draw_custom_notes(&self, c: &mut Canvas, cv: &Cvars, page: Page) {
+        let y = self.page_bottom(page) + 30.0;
         let summary = custom_summary(cv);
         let lines: Vec<(String, [f32; 4])> = match page {
             Page::NewGameCustomize if super::launch::customized(cv) => vec![
