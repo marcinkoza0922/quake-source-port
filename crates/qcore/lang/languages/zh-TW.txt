@@ -2576,9 +2576,6 @@ zh-TW 重新開始關卡
 @ Return to main menu
 zh-TW 返回主選單
 
-@ (disabled)
-zh-TW （已停用）
-
 @ (fixed for this game)
 zh-TW （此遊戲已固定）
 
@@ -4127,3 +4124,26 @@ zh-TW 按下按鈕或受到傷害時震動（Android）。
 
 @ Swipe left or right to cycle.
 zh-TW 左右滑動切換武器。
+
+# Options page group headings.
+
+@ General
+zh-TW 一般
+
+@ Saving
+zh-TW 存檔
+
+@ Lighting
+zh-TW 光照
+
+@ Effects
+zh-TW 效果
+
+@ Models
+zh-TW 模型
+
+@ Post-processing
+zh-TW 後製處理
+
+@ World
+zh-TW 世界

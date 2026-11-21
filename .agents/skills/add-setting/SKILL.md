@@ -60,7 +60,16 @@ Item::Choice { label: "Ragdoll Start", cvar: "r_debris_ragdollstart", choices: R
 
 `Item::Text` is for string cvars and `Item::Sub { label, page }` opens a
 nested page. Labels are short and title case. Long pages scroll, but put
-the important rows first.
+the important rows first. Gameplay, Graphics and Enhancements are grouped
+by `Item::Heading("...")` rows: add a new row to the group it belongs to.
+A new heading is a new catalog key and needs every translation (step 6).
+
+If the row only works while another toggle is on (an amount slider under
+its effect's toggle), add an arm to `Menu::masters` in
+`src/menu/gating.rs`. The row is then dimmed and locked while the master is
+off, and, when the master is a row on the same page, it is drawn as a
+dependent row (indented, tan label, tree guide), so place it right below
+its master.
 
 ## 4. Tooltip (`src/menu/page_info.rs`)
 
@@ -76,9 +85,10 @@ the panel. Mention caveats there ("single player only", "not in deathmatch").
 3. In `page_info.rs`, add `page_items` and `page_name` arms. `parent_page`
    only searches Gameplay, Input, HUD, Accessibility and Graphics, so extend
    that list if the parent is another page.
-4. If a master toggle controls the page, add it to `sub_disabled` (like
-   Water/`r_enhancedwater` and Debris/`r_debris`). The row is then dimmed and
-   refuses to open while the master is off.
+4. If a master toggle controls the page, add it to `sub_masters` in
+   `src/menu/gating.rs` (like Water/`r_enhancedwater` and Debris/`r_debris`).
+   The row is then dimmed and refuses to open while the master is off, and
+   is drawn as a dependent row when it sits under its master's row.
 5. Optionally add a name to the `menu_options` match in
    `src/host/commands.rs`, so `menu_options <name>` opens it directly (handy
    for screenshots).

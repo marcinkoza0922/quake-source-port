@@ -2576,9 +2576,6 @@ et Alusta taset uuesti
 @ Return to main menu
 et Tagasi peamenüüsse
 
-@ (disabled)
-et (keelatud)
-
 @ (fixed for this game)
 et (selles mängus fikseeritud)
 
@@ -4127,3 +4124,26 @@ et Vibreerib nupuvajutustel ja kahju saamisel (Android).
 
 @ Swipe left or right to cycle.
 et Relva vahetamiseks pühi vasakule või paremale.
+
+# Options page group headings.
+
+@ General
+et Üldine
+
+@ Saving
+et Salvestamine
+
+@ Lighting
+et Valgustus
+
+@ Effects
+et Efektid
+
+@ Models
+et Mudelid
+
+@ Post-processing
+et Järeltöötlus
+
+@ World
+et Maailm

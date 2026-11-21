@@ -2576,9 +2576,6 @@ he התחלת השלב מחדש
 @ Return to main menu
 he חזרה לתפריט הראשי
 
-@ (disabled)
-he (מושבת)
-
 @ (fixed for this game)
 he (קבוע למשחק זה)
 
@@ -4127,3 +4124,26 @@ he רטט בלחיצה על כפתורים ובספיגת נזק (Android).
 
 @ Swipe left or right to cycle.
 he החליקו שמאלה או ימינה כדי להחליף נשק.
+
+# Options page group headings.
+
+@ General
+he כללי
+
+@ Saving
+he שמירה
+
+@ Lighting
+he תאורה
+
+@ Effects
+he אפקטים
+
+@ Models
+he מודלים
+
+@ Post-processing
+he עיבוד תמונה
+
+@ World
+he עולם

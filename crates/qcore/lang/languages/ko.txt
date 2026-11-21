@@ -2576,9 +2576,6 @@ ko 레벨 재시작
 @ Return to main menu
 ko 메인 메뉴로 돌아가기
 
-@ (disabled)
-ko (사용 불가)
-
 @ (fixed for this game)
 ko (이 게임에서 고정)
 
@@ -4127,3 +4124,26 @@ ko 버튼을 누르거나 피해를 받으면 진동합니다(Android).
 
 @ Swipe left or right to cycle.
 ko 좌우로 밀어 무기를 바꿉니다.
+
+# Options page group headings.
+
+@ General
+ko 일반
+
+@ Saving
+ko 저장
+
+@ Lighting
+ko 조명
+
+@ Effects
+ko 효과
+
+@ Models
+ko 모델
+
+@ Post-processing
+ko 후처리
+
+@ World
+ko 월드

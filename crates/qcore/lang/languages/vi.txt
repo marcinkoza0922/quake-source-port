@@ -2576,9 +2576,6 @@ vi Chơi lại màn
 @ Return to main menu
 vi Về menu chính
 
-@ (disabled)
-vi (đã tắt)
-
 @ (fixed for this game)
 vi (cố định cho ván này)
 
@@ -4127,3 +4124,26 @@ vi Rung khi bấm nút hoặc nhận sát thương (Android).
 
 @ Swipe left or right to cycle.
 vi Vuốt trái hoặc phải để đổi vũ khí.
+
+# Options page group headings.
+
+@ General
+vi Chung
+
+@ Saving
+vi Lưu game
+
+@ Lighting
+vi Ánh sáng
+
+@ Effects
+vi Hiệu ứng
+
+@ Models
+vi Mô hình
+
+@ Post-processing
+vi Hậu kỳ
+
+@ World
+vi Thế giới

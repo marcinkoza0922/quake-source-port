@@ -2576,9 +2576,6 @@ nl Level herstarten
 @ Return to main menu
 nl Terug naar hoofdmenu
 
-@ (disabled)
-nl (uitgeschakeld)
-
 @ (fixed for this game)
 nl (vast voor dit spel)
 
@@ -4127,3 +4124,26 @@ nl Trilt bij knopdrukken en bij schade (Android).
 
 @ Swipe left or right to cycle.
 nl Veeg links of rechts om van wapen te wisselen.
+
+# Options page group headings.
+
+@ General
+nl Algemeen
+
+@ Saving
+nl Opslaan
+
+@ Lighting
+nl Belichting
+
+@ Effects
+nl Effecten
+
+@ Models
+nl Modellen
+
+@ Post-processing
+nl Nabewerking
+
+@ World
+nl Wereld

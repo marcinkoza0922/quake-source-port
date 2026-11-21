@@ -2576,9 +2576,6 @@ pt-BR Reiniciar a fase
 @ Return to main menu
 pt-BR Voltar ao menu principal
 
-@ (disabled)
-pt-BR (desativado)
-
 @ (fixed for this game)
 pt-BR (fixo neste jogo)
 
@@ -4127,3 +4124,26 @@ pt-BR Vibra ao pressionar botões e ao receber dano (Android).
 
 @ Swipe left or right to cycle.
 pt-BR Deslize para a esquerda ou direita para trocar de arma.
+
+# Options page group headings.
+
+@ General
+pt-BR Geral
+
+@ Saving
+pt-BR Salvamento
+
+@ Lighting
+pt-BR Iluminação
+
+@ Effects
+pt-BR Efeitos
+
+@ Models
+pt-BR Modelos
+
+@ Post-processing
+pt-BR Pós-processamento
+
+@ World
+pt-BR Mundo

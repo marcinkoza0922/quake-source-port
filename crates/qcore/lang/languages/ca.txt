@@ -2576,9 +2576,6 @@ ca Reinicia el nivell
 @ Return to main menu
 ca Torna al menú principal
 
-@ (disabled)
-ca (desactivat)
-
 @ (fixed for this game)
 ca (fix en aquesta partida)
 
@@ -4127,3 +4124,26 @@ ca Vibra en prémer botons i en rebre dany (Android).
 
 @ Swipe left or right to cycle.
 ca Llisca a l'esquerra o a la dreta per canviar d'arma.
+
+# Options page group headings.
+
+@ General
+ca General
+
+@ Saving
+ca Desament
+
+@ Lighting
+ca Il·luminació
+
+@ Effects
+ca Efectes
+
+@ Models
+ca Models
+
+@ Post-processing
+ca Postprocessament
+
+@ World
+ca Món

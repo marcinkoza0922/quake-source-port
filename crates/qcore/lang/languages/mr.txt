@@ -2576,9 +2576,6 @@ mr लेव्हल पुन्हा सुरू करा
 @ Return to main menu
 mr मुख्य मेनूवर परत जा
 
-@ (disabled)
-mr (बंद)
-
 @ (fixed for this game)
 mr (या गेमसाठी निश्चित)
 
@@ -4127,3 +4124,26 @@ mr बटण दाबल्यावर किंवा इजा झाल्�
 
 @ Swipe left or right to cycle.
 mr शस्त्र बदलण्यासाठी डावीकडे किंवा उजवीकडे स्वाइप करा.
+
+# Options page group headings.
+
+@ General
+mr सामान्य
+
+@ Saving
+mr जतन करणे
+
+@ Lighting
+mr प्रकाशयोजना
+
+@ Effects
+mr इफेक्ट्स
+
+@ Models
+mr मॉडेल्स
+
+@ Post-processing
+mr पोस्ट-प्रोसेसिंग
+
+@ World
+mr जग

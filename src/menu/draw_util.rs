@@ -30,6 +30,72 @@ pub const TXT: f32 = 9.0;
 pub const FG: [f32; 4] = [0.88, 0.86, 0.82, 1.0];
 pub const GOLD_FG: [f32; 4] = [0.95, 0.70, 0.34, 1.0];
 pub const MUTED: [f32; 4] = [0.62, 0.59, 0.54, 1.0];
+/// Labels of rows that depend on a master toggle, and their tree guide.
+pub const DEP_FG: [f32; 4] = [0.80, 0.70, 0.52, 1.0];
+pub const DEP_GUIDE: [f32; 4] = [0.75, 0.55, 0.28, 0.75];
+
+/// An options row label, left-aligned in the label column (`indent` for
+/// dependent rows); long labels shrink to keep clear of the value column.
+pub(super) fn row_label(c: &mut Canvas, indent: f32, y: f32, label: &str, color: [f32; 4]) {
+    let x = LABEL_X + indent;
+    let room = VALUE_X - 8.0 - x;
+    let w = c.text_w(label, TXT);
+    let size = if w > room { TXT * room / w } else { TXT };
+    c.text(x, y + (TXT - size) / 2.0, label, size, color);
+}
+
+/// Arrow of a sub-page row, at the panel's right edge (clear of the scrollbar).
+pub(super) const SUB_ARROW_X: f32 = PANEL_X + PANEL_W - 22.0;
+
+/// Gold dot left of a row whose value differs from its default.
+pub(super) fn changed_mark(c: &mut Canvas, y: f32, off: bool) {
+    c.round_box(PANEL_X + 4.0, y + 2.5, 4.0, 4.0, 2.0, if off { MUTED } else { GOLD_FG }, None);
+}
+
+/// Width of an on/off switch.
+pub(super) const SWITCH_W: f32 = 18.0;
+
+/// An on/off switch: the knob slides right and the track fills when on.
+pub(super) fn switch(c: &mut Canvas, x: f32, y: f32, on: bool, off: bool) {
+    let (h, k) = (9.0, 6.0);
+    let track = match (on, off) {
+        (true, false) => [0.80, 0.55, 0.22, 1.0],
+        (true, true) => [0.42, 0.36, 0.28, 1.0],
+        _ => [0.0, 0.0, 0.0, 0.5],
+    };
+    c.round_box(x, y - 0.5, SWITCH_W, h, h / 2.0, track, Some(BORDER));
+    let kx = if on { x + SWITCH_W - k - 1.5 } else { x + 1.5 };
+    let knob = if off { MUTED } else if on { [0.98, 0.88, 0.66, 1.0] } else { [0.70, 0.66, 0.60, 1.0] };
+    c.round_box(kx, y + 1.0, k, k, k / 2.0, knob, None);
+}
+
+/// Every other row of a group on options pages.
+pub const ROW_STRIPE: [f32; 4] = [1.0, 0.95, 0.85, 0.05];
+const HEADING_FG: [f32; 4] = [0.80, 0.62, 0.38, 1.0];
+
+/// A group heading row: small capitals just left of the label column and a
+/// rule across the rest of the panel.
+pub(super) fn heading(c: &mut Canvas, y: f32, label: &str) {
+    let size = TXT * 0.85;
+    let text = qcore::lang::tr(label).to_uppercase();
+    let x = LABEL_X - 6.0;
+    let ty = y + (TXT - size) / 2.0 + 0.5;
+    let w = c.text_raw(x, ty, &text, size, HEADING_FG);
+    let rule = x + w + 6.0;
+    let end = PANEL_X + PANEL_W - 12.0;
+    if rule < end {
+        c.fill(rule, (y + TXT / 2.0 + 0.5).floor(), end - rule, 1.0, [BORDER[0], BORDER[1], BORDER[2], 0.45]);
+    }
+}
+
+/// Tree guide in front of a dependent row: a line down from the row above
+/// (on through the row when the next one also depends) and a tick to the label.
+pub(super) fn dep_guide(c: &mut Canvas, top: f32, h: f32, more: bool, color: [f32; 4]) {
+    let x = LABEL_X + 2.0;
+    let mid = (top + h / 2.0).floor();
+    c.fill(x, top, 1.0, if more { h } else { mid - top + 1.0 }, color);
+    c.fill(x, mid, DEP_INDENT - 5.0, 1.0, color);
+}
 
 /// Modern text at the conchars position (x, y); returns its width.
 pub fn txt(c: &mut Canvas, x: f32, y: f32, s: &str) -> f32 {
@@ -45,13 +111,20 @@ pub fn gold(c: &mut Canvas, x: f32, y: f32, s: &str) -> f32 {
 }
 
 /// Translucent box behind `n` option rows starting at `top`.
-pub(super) fn panel(c: &mut Canvas, top: f32, n: usize) {
-    panel_height(c, top, n as f32 * ROW_H);
+/// Options tooltip bar: left edge and width (fixed, wider than the panel).
+pub(super) const TOOLTIP_BAR: (f32, f32) = (26.0, 588.0);
+/// Options page scrollbar width.
+pub(super) const SCROLL_W: f32 = 5.0;
+
+/// The options panel; `solid` (a game running behind it) makes it more
+/// opaque, so bright scenes don't wash out the text.
+pub(super) fn panel(c: &mut Canvas, top: f32, n: usize, solid: bool) {
+    panel_height(c, top, n as f32 * ROW_H, solid);
 }
 
-pub(super) fn panel_height(c: &mut Canvas, top: f32, height: f32) {
+pub(super) fn panel_height(c: &mut Canvas, top: f32, height: f32, solid: bool) {
     let h = height + 8.0;
-    c.fill(PANEL_X, top - 4.0, PANEL_W, h, [0.0, 0.0, 0.0, 0.55]);
+    c.fill(PANEL_X, top - 4.0, PANEL_W, h, [0.0, 0.0, 0.0, if solid { 0.82 } else { 0.55 }]);
     c.frame(PANEL_X, top - 4.0, PANEL_W, h, [0.35, 0.27, 0.16, 0.9]);
 }
 

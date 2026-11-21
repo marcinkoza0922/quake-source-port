@@ -2576,9 +2576,6 @@ fa شروع دوباره‌ی مرحله
 @ Return to main menu
 fa بازگشت به منوی اصلی
 
-@ (disabled)
-fa (غیرفعال)
-
 @ (fixed for this game)
 fa (ثابت برای این بازی)
 
@@ -4127,3 +4124,26 @@ fa با فشردن دکمه یا دریافت آسیب می‌لرزد (اندر
 
 @ Swipe left or right to cycle.
 fa برای تعویض سلاح به چپ یا راست بکشید.
+
+# Options page group headings.
+
+@ General
+fa عمومی
+
+@ Saving
+fa ذخیره‌سازی
+
+@ Lighting
+fa نورپردازی
+
+@ Effects
+fa جلوه‌ها
+
+@ Models
+fa مدل‌ها
+
+@ Post-processing
+fa پس‌پردازش
+
+@ World
+fa جهان

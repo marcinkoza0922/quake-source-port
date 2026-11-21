@@ -2576,9 +2576,6 @@ am ደረጃውን እንደገና ጀምር
 @ Return to main menu
 am ወደ ዋናው ምናሌ ተመለስ
 
-@ (disabled)
-am (ተሰናክሏል)
-
 @ (fixed for this game)
 am (ለዚህ ጨዋታ ቋሚ)
 
@@ -4127,3 +4124,26 @@ am አዝራር ሲጫን ወይም ጉዳት ሲደርስ ይንዘረዘራል
 
 @ Swipe left or right to cycle.
 am መሣሪያ ለመቀየር ወደ ግራ ወይም ቀኝ ያንሸራትቱ።
+
+# Options page group headings.
+
+@ General
+am አጠቃላይ
+
+@ Saving
+am ማስቀመጥ
+
+@ Lighting
+am ብርሃን
+
+@ Effects
+am ተጽዕኖዎች
+
+@ Models
+am ሞዴሎች
+
+@ Post-processing
+am ድህረ-ሂደት
+
+@ World
+am ዓለም

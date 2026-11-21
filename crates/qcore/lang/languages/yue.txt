@@ -2576,9 +2576,6 @@ yue 重新開始關卡
 @ Return to main menu
 yue 返回主選單
 
-@ (disabled)
-yue （已停用）
-
 @ (fixed for this game)
 yue （呢場遊戲已固定）
 
@@ -4127,3 +4124,26 @@ yue 撳掣或者受到傷害嗰陣會震（Android）。
 
 @ Swipe left or right to cycle.
 yue 向左或右掃就可以轉武器。
+
+# Options page group headings.
+
+@ General
+yue 一般
+
+@ Saving
+yue 存檔
+
+@ Lighting
+yue 光照
+
+@ Effects
+yue 效果
+
+@ Models
+yue 模型
+
+@ Post-processing
+yue 後期處理
+
+@ World
+yue 世界

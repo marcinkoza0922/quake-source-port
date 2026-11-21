@@ -2576,9 +2576,6 @@ eu Berrabiarazi maila
 @ Return to main menu
 eu Itzuli menu nagusira
 
-@ (disabled)
-eu (desgaituta)
-
 @ (fixed for this game)
 eu (finkoa partida honetan)
 
@@ -4127,3 +4124,26 @@ eu Botoiak sakatzean edo kaltea hartzean bibratzen du (Android).
 
 @ Swipe left or right to cycle.
 eu Irristatu ezkerrera edo eskuinera armaz aldatzeko.
+
+# Options page group headings.
+
+@ General
+eu Orokorra
+
+@ Saving
+eu Gordetzea
+
+@ Lighting
+eu Argiztapena
+
+@ Effects
+eu Efektuak
+
+@ Models
+eu Ereduak
+
+@ Post-processing
+eu Postprozesatzea
+
+@ World
+eu Mundua

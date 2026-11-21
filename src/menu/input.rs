@@ -77,6 +77,12 @@ impl Menu {
     }
 
     pub fn key(&mut self, key: i32, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
+        let out = self.key_event(key, cv, server_active);
+        self.settle_cursor();
+        out
+    }
+
+    fn key_event(&mut self, key: i32, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
         if key != K_MOUSE1 && self.drop.is_none() {
             self.touch_scroll = None;
         }
@@ -234,7 +240,7 @@ impl Menu {
             }
             if let Screen::OptionsPage(p) = self.screen
                 && let Some((x, top, h, ty, th)) = self.scrollbar(p)
-                && (x - 4.0..x + 7.0).contains(&pos.0)
+                && (x - 3.0..x + SCROLL_W + 4.0).contains(&pos.0)
                 && (top..top + h).contains(&pos.1)
             {
                 let grab = if (ty..ty + th).contains(&pos.1) { pos.1 - ty } else { th / 2.0 };
@@ -277,6 +283,17 @@ impl Menu {
             let Some(i) = self.item_at(pos) else { return out };
             if let Some(c) = self.cursor_mut() {
                 *c = i;
+            }
+            // the changed-value marker left of a label resets the row
+            if let Screen::OptionsPage(p) = self.screen
+                && p != Page::Touch
+                && pos.0 < LABEL_X - 2.0
+                && self.changed(self.page_item(p, i), cv)
+            {
+                if self.reset_row(self.page_item(p, i), cv, &mut out) {
+                    out.push(Action::Sound("misc/menu3.wav"));
+                }
+                return out;
             }
             if let Screen::OptionsPage(p) = self.screen && let Some(row) = self.slider_at(pos, cv) {
                 self.slider_drag = Some(row);
@@ -521,6 +538,7 @@ impl Menu {
                 let n = self.page_len(p);
                 self.opt_cursor = self.opt_cursor.min(n - 1);
                 wrap(&mut self.opt_cursor, n, &mut out);
+                self.skip_headings(p, if up { -1 } else { 1 });
                 let item = self.page_item(p, self.opt_cursor);
                 match item {
                     Item::Text { cvar, .. } => {
@@ -593,6 +611,12 @@ impl Menu {
                         return out;
                     }
                     _ => {}
+                }
+                if matches!(key, K_BACKSPACE | K_DEL | K_XBUTTON) {
+                    if self.reset_row(item, cv, &mut out) {
+                        out.push(Action::Sound("misc/menu3.wav"));
+                    }
+                    return out;
                 }
                 if p != Page::Touch && enter && self.options(item).len() > 2 && !self.item_disabled(item, cv) {
                     let cur = self.option_index(item, cv);

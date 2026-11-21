@@ -2576,9 +2576,6 @@ hy Վերսկսել մակարդակը
 @ Return to main menu
 hy Վերադառնալ գլխավոր ընտրացանկ
 
-@ (disabled)
-hy (անջատված)
-
 @ (fixed for this game)
 hy (ֆիքսված այս խաղի համար)
 
@@ -4127,3 +4124,26 @@ hy Թրթռում է կոճակ սեղմելիս կամ վնաս ստանալի�
 
 @ Swipe left or right to cycle.
 hy Զենքը փոխելու համար սահեցրեք ձախ կամ աջ։
+
+# Options page group headings.
+
+@ General
+hy Ընդհանուր
+
+@ Saving
+hy Պահպանում
+
+@ Lighting
+hy Լուսավորություն
+
+@ Effects
+hy Էֆեկտներ
+
+@ Models
+hy Մոդելներ
+
+@ Post-processing
+hy Հետմշակում
+
+@ World
+hy Աշխարհ

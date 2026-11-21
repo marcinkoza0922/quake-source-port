@@ -2576,9 +2576,6 @@ sq Rinis nivelin
 @ Return to main menu
 sq Kthehu te menyja kryesore
 
-@ (disabled)
-sq (joaktiv)
-
 @ (fixed for this game)
 sq (e fiksuar për këtë lojë)
 
@@ -4127,3 +4124,26 @@ sq Dridhet kur shtypen butonat ose merret dëm (Android).
 
 @ Swipe left or right to cycle.
 sq Rrëshqit majtas ose djathtas për të ndërruar armën.
+
+# Options page group headings.
+
+@ General
+sq Të përgjithshme
+
+@ Saving
+sq Ruajtja
+
+@ Lighting
+sq Ndriçimi
+
+@ Effects
+sq Efektet
+
+@ Models
+sq Modelet
+
+@ Post-processing
+sq Përpunimi pasues
+
+@ World
+sq Bota

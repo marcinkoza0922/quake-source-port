@@ -2576,9 +2576,6 @@ ja レベルをやり直す
 @ Return to main menu
 ja メインメニューに戻る
 
-@ (disabled)
-ja （無効）
-
 @ (fixed for this game)
 ja （このゲームでは固定）
 
@@ -4127,3 +4124,26 @@ ja ボタン操作時と被ダメージ時に振動します（Android）。
 
 @ Swipe left or right to cycle.
 ja 左右にスワイプして武器を切り替えます。
+
+# Options page group headings.
+
+@ General
+ja 一般
+
+@ Saving
+ja セーブ
+
+@ Lighting
+ja ライティング
+
+@ Effects
+ja エフェクト
+
+@ Models
+ja モデル
+
+@ Post-processing
+ja ポストプロセス
+
+@ World
+ja ワールド

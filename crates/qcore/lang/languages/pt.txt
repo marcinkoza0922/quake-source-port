@@ -2576,9 +2576,6 @@ pt Recomeçar o nível
 @ Return to main menu
 pt Voltar ao menu principal
 
-@ (disabled)
-pt (desativado)
-
 @ (fixed for this game)
 pt (fixo neste jogo)
 
@@ -4127,3 +4124,26 @@ pt Vibra ao premir botões e ao sofrer dano (Android).
 
 @ Swipe left or right to cycle.
 pt Desliza para a esquerda ou direita para trocar de arma.
+
+# Options page group headings.
+
+@ General
+pt Geral
+
+@ Saving
+pt Gravação
+
+@ Lighting
+pt Iluminação
+
+@ Effects
+pt Efeitos
+
+@ Models
+pt Modelos
+
+@ Post-processing
+pt Pós-processamento
+
+@ World
+pt Mundo

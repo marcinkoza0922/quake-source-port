@@ -2576,9 +2576,6 @@ ta நிலையை மீண்டும் தொடங்கு
 @ Return to main menu
 ta முதன்மை மெனுவுக்குத் திரும்பு
 
-@ (disabled)
-ta (முடக்கம்)
-
 @ (fixed for this game)
 ta (இந்த ஆட்டத்துக்கு நிலையானது)
 
@@ -4127,3 +4124,26 @@ ta பொத்தான் அழுத்தும்போதும் சே
 
 @ Swipe left or right to cycle.
 ta ஆயுதத்தை மாற்ற இடது அல்லது வலப்புறம் தேய்க்கவும்.
+
+# Options page group headings.
+
+@ General
+ta பொது
+
+@ Saving
+ta சேமித்தல்
+
+@ Lighting
+ta ஒளியமைப்பு
+
+@ Effects
+ta விளைவுகள்
+
+@ Models
+ta மாதிரிகள்
+
+@ Post-processing
+ta பிந்தைய செயலாக்கம்
+
+@ World
+ta உலகம்

@@ -2576,9 +2576,6 @@ da Genstart bane
 @ Return to main menu
 da Tilbage til hovedmenuen
 
-@ (disabled)
-da (deaktiveret)
-
 @ (fixed for this game)
 da (fastlåst for dette spil)
 
@@ -4127,3 +4124,26 @@ da Vibrerer ved knaptryk og skade (Android).
 
 @ Swipe left or right to cycle.
 da Stryg til venstre eller højre for at skifte våben.
+
+# Options page group headings.
+
+@ General
+da Generelt
+
+@ Saving
+da Gemning
+
+@ Lighting
+da Belysning
+
+@ Effects
+da Effekter
+
+@ Models
+da Modeller
+
+@ Post-processing
+da Efterbehandling
+
+@ World
+da Verden

@@ -2576,9 +2576,6 @@ zh-CN 重新开始关卡
 @ Return to main menu
 zh-CN 返回主菜单
 
-@ (disabled)
-zh-CN （已禁用）
-
 @ (fixed for this game)
 zh-CN （本局固定）
 
@@ -4127,3 +4124,26 @@ zh-CN 按下按键或受到伤害时振动（Android）。
 
 @ Swipe left or right to cycle.
 zh-CN 左右滑动切换武器。
+
+# Options page group headings.
+
+@ General
+zh-CN 常规
+
+@ Saving
+zh-CN 存档
+
+@ Lighting
+zh-CN 光照
+
+@ Effects
+zh-CN 效果
+
+@ Models
+zh-CN 模型
+
+@ Post-processing
+zh-CN 后期处理
+
+@ World
+zh-CN 世界

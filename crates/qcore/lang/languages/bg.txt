@@ -2576,9 +2576,6 @@ bg Започни нивото отначало
 @ Return to main menu
 bg Към главното меню
 
-@ (disabled)
-bg (недостъпно)
-
 @ (fixed for this game)
 bg (фиксирано за тази игра)
 
@@ -4127,3 +4124,26 @@ bg Вибрира при натискане на бутони и получав�
 
 @ Swipe left or right to cycle.
 bg Плъзнете наляво или надясно за смяна на оръжието.
+
+# Options page group headings.
+
+@ General
+bg Общи
+
+@ Saving
+bg Запазване
+
+@ Lighting
+bg Осветление
+
+@ Effects
+bg Ефекти
+
+@ Models
+bg Модели
+
+@ Post-processing
+bg Последваща обработка
+
+@ World
+bg Свят

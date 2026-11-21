@@ -82,7 +82,7 @@ impl Menu {
     pub(super) fn draw_shader_param(&self, c: &mut Canvas, y: f32, k: usize, cv: &Cvars) {
         let Some((p, v)) = self.shader_param(k, cv) else { return };
         let l: String = p.description.trim().chars().take(30).collect();
-        c.text_right(LABEL_R, y, if l.is_empty() { &p.id } else { &l }, TXT, FG);
+        row_label(c, 0.0, y, if l.is_empty() { &p.id } else { &l }, FG);
         let f = if p.max > p.min { ((v - p.min) / (p.max - p.min)).clamp(0.0, 1.0) } else { 0.0 };
         let (tx, tw) = (VALUE_X, 92.0);
         c.round_box(tx, y + 3.0, tw, 3.0, 1.5, [0.25, 0.22, 0.19, 1.0], None);

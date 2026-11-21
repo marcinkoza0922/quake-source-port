@@ -4259,3 +4259,53 @@ de Touch-Vibration
 it Vibrazione touch
 es Vibración táctil
 ru Виброотклик
+
+# Options page group headings.
+@ General
+fr Général
+de Allgemein
+it Generale
+es General
+ru Общие
+
+@ Saving
+fr Sauvegarde
+de Speichern
+it Salvataggio
+es Guardado
+ru Сохранение
+
+@ Lighting
+fr Éclairage
+de Beleuchtung
+it Illuminazione
+es Iluminación
+ru Освещение
+
+@ Effects
+fr Effets
+de Effekte
+it Effetti
+es Efectos
+ru Эффекты
+
+@ Models
+fr Modèles
+de Modelle
+it Modelli
+es Modelos
+ru Модели
+
+@ Post-processing
+fr Post-traitement
+de Nachbearbeitung
+it Post-elaborazione
+es Posprocesado
+ru Постобработка
+
+@ World
+fr Monde
+de Welt
+it Mondo
+es Mundo
+ru Мир

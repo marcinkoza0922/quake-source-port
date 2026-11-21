@@ -175,7 +175,7 @@ impl Menu {
     /// cursor row), selection, caret and, for video names, the extension.
     pub(super) fn draw_text_row(&self, c: &mut Canvas, cv: &Cvars, p: Page, row: usize, y: f32, blink: bool) {
         let Item::Text { label, cvar, max } = self.page_item(p, row) else { return };
-        c.text_right(LABEL_R, y, label, TXT, FG);
+        row_label(c, 0.0, y, label, FG);
         let v = value(cv, cvar);
         // fits inside the panel: 20 visible characters, or for long fields
         // (paths) the panel's width

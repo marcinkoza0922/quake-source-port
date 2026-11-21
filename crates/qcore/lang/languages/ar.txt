@@ -2576,9 +2576,6 @@ ar إعادة المستوى
 @ Return to main menu
 ar العودة إلى القائمة الرئيسية
 
-@ (disabled)
-ar (معطّل)
-
 @ (fixed for this game)
 ar (ثابت في هذه اللعبة)
 
@@ -4127,3 +4124,26 @@ ar اهتزاز عند ضغط الأزرار أو تلقي الضرر (أندر�
 
 @ Swipe left or right to cycle.
 ar اسحب يسارًا أو يمينًا لتبديل السلاح.
+
+# Options page group headings.
+
+@ General
+ar عام
+
+@ Saving
+ar الحفظ
+
+@ Lighting
+ar الإضاءة
+
+@ Effects
+ar المؤثرات
+
+@ Models
+ar النماذج
+
+@ Post-processing
+ar المعالجة اللاحقة
+
+@ World
+ar العالم

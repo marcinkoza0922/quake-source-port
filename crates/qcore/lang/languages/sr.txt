@@ -2576,9 +2576,6 @@ sr Поново покрени ниво
 @ Return to main menu
 sr Повратак у главни мени
 
-@ (disabled)
-sr (онемогућено)
-
 @ (fixed for this game)
 sr (фиксно за ову игру)
 
@@ -4127,3 +4124,26 @@ sr Вибрира при притиску дугмади и примању шт�
 
 @ Swipe left or right to cycle.
 sr Превуци улево или удесно за промену оружја.
+
+# Options page group headings.
+
+@ General
+sr Опште
+
+@ Saving
+sr Чување
+
+@ Lighting
+sr Осветљење
+
+@ Effects
+sr Ефекти
+
+@ Models
+sr Модели
+
+@ Post-processing
+sr Накнадна обрада
+
+@ World
+sr Свет

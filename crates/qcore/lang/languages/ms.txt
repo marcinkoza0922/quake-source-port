@@ -2576,9 +2576,6 @@ ms Mula semula peringkat
 @ Return to main menu
 ms Kembali ke menu utama
 
-@ (disabled)
-ms (dimatikan)
-
 @ (fixed for this game)
 ms (tetap untuk permainan ini)
 
@@ -4127,3 +4124,26 @@ ms Bergetar apabila butang ditekan atau menerima kerosakan (Android).
 
 @ Swipe left or right to cycle.
 ms Leret ke kiri atau kanan untuk menukar senjata.
+
+# Options page group headings.
+
+@ General
+ms Umum
+
+@ Saving
+ms Simpanan
+
+@ Lighting
+ms Pencahayaan
+
+@ Effects
+ms Kesan
+
+@ Models
+ms Model
+
+@ Post-processing
+ms Pascapemprosesan
+
+@ World
+ms Dunia

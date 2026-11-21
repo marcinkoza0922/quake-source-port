@@ -2576,9 +2576,6 @@ fil Ulitin ang level
 @ Return to main menu
 fil Bumalik sa main menu
 
-@ (disabled)
-fil (naka-disable)
-
 @ (fixed for this game)
 fil (nakapirmi sa larong ito)
 
@@ -4127,3 +4124,26 @@ fil Umuuga kapag may pinindot na pindutan o nasaktan (Android).
 
 @ Swipe left or right to cycle.
 fil Mag-swipe pakaliwa o pakanan para magpalit ng sandata.
+
+# Options page group headings.
+
+@ General
+fil Pangkalahatan
+
+@ Saving
+fil Pag-save
+
+@ Lighting
+fil Ilaw
+
+@ Effects
+fil Mga Effect
+
+@ Models
+fil Mga Modelo
+
+@ Post-processing
+fil Post-processing
+
+@ World
+fil Mundo

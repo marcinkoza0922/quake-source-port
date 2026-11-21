@@ -2576,9 +2576,6 @@ be Пачаць узровень нанова
 @ Return to main menu
 be Вярнуцца ў галоўнае меню
 
-@ (disabled)
-be (недаступна)
-
 @ (fixed for this game)
 be (зафіксавана для гэтай гульні)
 
@@ -4127,3 +4124,26 @@ be Вібруе пры націсканні кнопак і атрыманні �
 
 @ Swipe left or right to cycle.
 be Правядзіце ўлева ці ўправа, каб змяніць зброю.
+
+# Options page group headings.
+
+@ General
+be Агульныя
+
+@ Saving
+be Захаванне
+
+@ Lighting
+be Асвятленне
+
+@ Effects
+be Эфекты
+
+@ Models
+be Мадэлі
+
+@ Post-processing
+be Постапрацоўка
+
+@ World
+be Свет

@@ -2576,9 +2576,6 @@ gu લેવલ ફરી શરૂ કરો
 @ Return to main menu
 gu મુખ્ય મેનૂ પર પાછા જાઓ
 
-@ (disabled)
-gu (નિષ્ક્રિય)
-
 @ (fixed for this game)
 gu (આ ગેમ માટે નિશ્ચિત)
 
@@ -4127,3 +4124,26 @@ gu બટન દબાવવા કે ઇજા થાય ત્યારે �
 
 @ Swipe left or right to cycle.
 gu હથિયાર બદલવા ડાબે કે જમણે સ્વાઇપ કરો.
+
+# Options page group headings.
+
+@ General
+gu સામાન્ય
+
+@ Saving
+gu સાચવવું
+
+@ Lighting
+gu પ્રકાશ
+
+@ Effects
+gu ઇફેક્ટ્સ
+
+@ Models
+gu મોડેલ્સ
+
+@ Post-processing
+gu પોસ્ટ-પ્રોસેસિંગ
+
+@ World
+gu દુનિયા

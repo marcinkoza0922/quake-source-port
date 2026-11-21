@@ -2576,9 +2576,6 @@ sw Anza ngazi upya
 @ Return to main menu
 sw Rudi kwenye menyu kuu
 
-@ (disabled)
-sw (imezimwa)
-
 @ (fixed for this game)
 sw (imewekwa kwa mchezo huu)
 
@@ -4127,3 +4124,26 @@ sw Hutetemeka unapobonyeza kitufe au kupata madhara (Android).
 
 @ Swipe left or right to cycle.
 sw Telezesha kushoto au kulia ili kubadili silaha.
+
+# Options page group headings.
+
+@ General
+sw Jumla
+
+@ Saving
+sw Kuhifadhi
+
+@ Lighting
+sw Mwangaza
+
+@ Effects
+sw Madoido
+
+@ Models
+sw Miundo
+
+@ Post-processing
+sw Uchakataji wa baadaye
+
+@ World
+sw Ulimwengu

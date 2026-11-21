@@ -2576,9 +2576,6 @@ sv Starta om banan
 @ Return to main menu
 sv Tillbaka till huvudmenyn
 
-@ (disabled)
-sv (inaktiverad)
-
 @ (fixed for this game)
 sv (låst för detta spel)
 
@@ -4127,3 +4124,26 @@ sv Vibrerar vid knapptryck och när du tar skada (Android).
 
 @ Swipe left or right to cycle.
 sv Svep åt vänster eller höger för att byta vapen.
+
+# Options page group headings.
+
+@ General
+sv Allmänt
+
+@ Saving
+sv Sparande
+
+@ Lighting
+sv Belysning
+
+@ Effects
+sv Effekter
+
+@ Models
+sv Modeller
+
+@ Post-processing
+sv Efterbehandling
+
+@ World
+sv Värld

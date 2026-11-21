@@ -45,6 +45,7 @@ pub enum Shape {
     ArrowDown,
     ArrowUp,
     ArrowRight,
+    ArrowLeft,
 }
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
@@ -359,6 +360,7 @@ fn inside(s: Shape, w: f32, h: f32, p: (f32, f32)) -> bool {
         Shape::ArrowDown => p.1 >= h * 0.2 && p.1 <= h * 0.8 && c.0.abs() <= (h * 0.8 - p.1) / (h * 0.6) * w / 2.0,
         Shape::ArrowUp => p.1 >= h * 0.2 && p.1 <= h * 0.8 && c.0.abs() <= (p.1 - h * 0.2) / (h * 0.6) * w / 2.0,
         Shape::ArrowRight => p.0 >= w * 0.2 && p.0 <= w * 0.8 && c.1.abs() <= (w * 0.8 - p.0) / (w * 0.6) * h / 2.0,
+        Shape::ArrowLeft => p.0 >= w * 0.2 && p.0 <= w * 0.8 && c.1.abs() <= (p.0 - w * 0.2) / (w * 0.6) * h / 2.0,
     }
 }
 

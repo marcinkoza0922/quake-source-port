@@ -2576,9 +2576,6 @@ fi Aloita kenttä alusta
 @ Return to main menu
 fi Palaa päävalikkoon
 
-@ (disabled)
-fi (ei käytössä)
-
 @ (fixed for this game)
 fi (kiinteä tässä pelissä)
 
@@ -4127,3 +4124,26 @@ fi Värisee painalluksista ja vahingon saamisesta (Android).
 
 @ Swipe left or right to cycle.
 fi Vaihda asetta pyyhkäisemällä vasemmalle tai oikealle.
+
+# Options page group headings.
+
+@ General
+fi Yleiset
+
+@ Saving
+fi Tallennus
+
+@ Lighting
+fi Valaistus
+
+@ Effects
+fi Tehosteet
+
+@ Models
+fi Mallit
+
+@ Post-processing
+fi Jälkikäsittely
+
+@ World
+fi Maailma

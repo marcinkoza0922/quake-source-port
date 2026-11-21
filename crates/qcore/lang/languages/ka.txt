@@ -2576,9 +2576,6 @@ ka დონის თავიდან დაწყება
 @ Return to main menu
 ka მთავარ მენიუში დაბრუნება
 
-@ (disabled)
-ka (გამორთულია)
-
 @ (fixed for this game)
 ka (ფიქსირებულია ამ თამაშისთვის)
 
@@ -4127,3 +4124,26 @@ ka ვიბრირებს ღილაკზე დაჭერის ა�
 
 @ Swipe left or right to cycle.
 ka იარაღის შესაცვლელად გადაუსვით მარცხნივ ან მარჯვნივ.
+
+# Options page group headings.
+
+@ General
+ka ზოგადი
+
+@ Saving
+ka შენახვა
+
+@ Lighting
+ka განათება
+
+@ Effects
+ka ეფექტები
+
+@ Models
+ka მოდელები
+
+@ Post-processing
+ka პოსტდამუშავება
+
+@ World
+ka სამყარო

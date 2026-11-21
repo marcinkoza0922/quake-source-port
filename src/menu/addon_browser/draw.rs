@@ -82,9 +82,6 @@ impl Menu {
                 c.fill(216.0, y, 404.0, 16.0, HILITE);
             }
             let submenu = cmd.is_none() && slot.is_none();
-            if submenu {
-                c.fill(216.0, y, 404.0, 16.0, [0.85, 0.60, 0.25, 0.10]);
-            }
             c.text(224.0, y + 3.0, label, TXT, if submenu { GOLD_FG } else { FG });
             if let Some(slot) = slot {
                 let v = cv.value_of(slot).round().clamp(1.0, 10.0) as i32;

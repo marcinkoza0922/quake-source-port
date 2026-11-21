@@ -51,6 +51,8 @@ pub(super) enum Item {
     Soundtrack,
     /// Built-in and user-saved HUD presets (`hud_preset`, `hud_preset_name`).
     HudPreset,
+    /// Group heading; not selectable (the cursor and pointer skip it).
+    Heading(&'static str),
 }
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -219,19 +221,23 @@ pub(super) const AUTOMAP_DISPLAY: &[(&str, f32)] = &[("Framed panel", 0.0), ("Ce
 pub(super) const AUTOMAP_REVEAL: &[(&str, f32)] = &[("Explored only", 0.0), ("Full map", 1.0)];
 
 pub(super) const GAMEPLAY: &[Item] = &[
+    Item::Heading("General"),
     Item::Language,
     toggle("Translate Console", "con_translate"),
+    toggle("Always Run", "cl_alwaysrun"),
+    toggle("Automap", "cl_automap"),
+    Item::Sub { label: "Automap Settings", page: Page::Automap },
+    Item::Heading("View"),
     slider("Field of View", "fov", 60.0, 130.0, 5.0),
     Item::Choice { label: "Camera", cvar: "cl_camera", choices: &[("First person", 0.0), ("Third person", 1.0), ("Shoulder right", 2.0), ("Shoulder left", 3.0)] },
     Item::Choice { label: "Viewmodels", cvar: "r_drawviewmodel", choices: &[("Center", 1.0), ("Right", 2.0), ("Left", 3.0), ("Off", 0.0)] },
     toggle("Visible Weapons", "cl_vwep"),
     slider("View Bob", "cl_bob", 0.0, 0.02, 0.002),
     toggle("Gun Kick", "v_gunkick"),
-    toggle("Always Run", "cl_alwaysrun"),
+    Item::Heading("Weapons"),
     Item::Choice { label: "Weapon Auto-Switch", cvar: "cl_autoswitch", choices: WEAPON_SWITCH },
     Item::Sub { label: "Weapon Priority", page: Page::WeaponPriority },
-    toggle("Automap", "cl_automap"),
-    Item::Sub { label: "Automap Settings", page: Page::Automap },
+    Item::Heading("Saving"),
     Item::Choice { label: "On Death", cvar: "cl_deathaction", choices: &[("Ask", 0.0), ("Most recent save", 1.0), ("Select save", 2.0), ("Restart level", 3.0)] },
     toggle("Autosave", "sv_autosave"),
     Item::Sub { label: "Autosave Settings", page: Page::Autosave },
@@ -330,40 +336,48 @@ pub(super) const WATERWARP: &[(&str, f32)] = &[("off", 0.0), ("Classic", 1.0), (
 /// vkQuake numbering: 1 is GLQuake, 2 is Classic.
 pub(super) const PARTICLES: &[(&str, f32)] = &[("off", 0.0), ("GLQuake", 1.0), ("Classic", 2.0)];
 
-const GRAPHICS_ROWS: &[Item] = &[
-    Item::DisplayMode,
-    Item::Resolution,
-    Item::Apply,
-    toggle("VSync", "vid_vsync"),
-    slider("Max FPS", "host_maxfps", 60.0, 500.0, 10.0),
-    Item::Choice { label: "Anti-aliasing", cvar: "r_msaa", choices: MSAA },
-    toggle("Supersampling", "vid_fsaamode"),
-    Item::Choice { label: "Render Scale", cvar: "r_renderscale", choices: SCALE },
-    Item::Choice { label: "Texture Filter", cvar: "r_texfilter", choices: FILTER },
-    Item::Choice { label: "Anisotropic", cvar: "r_anisotropy", choices: ANISO },
-    Item::Choice { label: "8-bit Color", cvar: "r_softemu", choices: SOFTEMU },
-    toggle("Dithering", "r_dither"),
-    Item::Slider { label: "Brightness", cvar: "gamma", min: 0.5, max: 1.5, step: 0.05, invert: true },
-    slider("Contrast", "contrast", 1.0, 2.0, 0.1),
-    Item::Choice { label: "Underwater FX", cvar: "r_waterwarp", choices: WATERWARP },
-    Item::Choice { label: "Particles", cvar: "r_particles", choices: PARTICLES },
-    toggle("Dynamic Lights", "r_dynamic"),
-    toggle("Colored Lighting", "r_coloredlight"),
-    toggle("HDR Lightmaps", "r_hdr_lightmaps"),
-    toggle("Directional Lighting", "r_deluxemapping"),
-    slider("Light Specular", "r_deluxemapping_specular", 0.0, 1.0, 0.05),
-    toggle("Enhanced Models", "r_enhancedmodels"),
-    toggle("Fog", "r_fog"),
-    slider("Sky Fog", "r_skyfog", 0.0, 1.0, 0.1),
-    toggle("Interpolate Animation", "r_lerpmodels"),
-    toggle("Interpolate Movement", "r_lerpmove"),
-];
+/// The Graphics page; `$display` are the desktop-only display rows.
+macro_rules! graphics_rows {
+    ($($display:expr),* $(,)?) => {
+        &[
+            Item::Heading("Display"),
+            $($display,)*
+            toggle("VSync", "vid_vsync"),
+            slider("Max FPS", "host_maxfps", 60.0, 500.0, 10.0),
+            Item::Slider { label: "Brightness", cvar: "gamma", min: 0.5, max: 1.5, step: 0.05, invert: true },
+            slider("Contrast", "contrast", 1.0, 2.0, 0.1),
+            Item::Heading("Quality"),
+            Item::Choice { label: "Anti-aliasing", cvar: "r_msaa", choices: MSAA },
+            toggle("Supersampling", "vid_fsaamode"),
+            Item::Choice { label: "Render Scale", cvar: "r_renderscale", choices: SCALE },
+            Item::Choice { label: "Texture Filter", cvar: "r_texfilter", choices: FILTER },
+            Item::Choice { label: "Anisotropic", cvar: "r_anisotropy", choices: ANISO },
+            Item::Choice { label: "8-bit Color", cvar: "r_softemu", choices: SOFTEMU },
+            toggle("Dithering", "r_dither"),
+            Item::Heading("Lighting"),
+            toggle("Dynamic Lights", "r_dynamic"),
+            toggle("Colored Lighting", "r_coloredlight"),
+            toggle("HDR Lightmaps", "r_hdr_lightmaps"),
+            toggle("Directional Lighting", "r_deluxemapping"),
+            slider("Light Specular", "r_deluxemapping_specular", 0.0, 1.0, 0.05),
+            Item::Heading("Effects"),
+            Item::Choice { label: "Underwater FX", cvar: "r_waterwarp", choices: WATERWARP },
+            Item::Choice { label: "Particles", cvar: "r_particles", choices: PARTICLES },
+            toggle("Fog", "r_fog"),
+            slider("Sky Fog", "r_skyfog", 0.0, 1.0, 0.1),
+            Item::Heading("Models"),
+            toggle("Enhanced Models", "r_enhancedmodels"),
+            toggle("Interpolate Animation", "r_lerpmodels"),
+            toggle("Interpolate Movement", "r_lerpmove"),
+        ]
+    };
+}
 
+/// Display Mode, Resolution and their Apply button are desktop controls.
 pub(super) const GRAPHICS: &[Item] = if cfg!(target_os = "android") {
-    // Display Mode, Resolution and their Apply button are desktop controls.
-    GRAPHICS_ROWS.split_at(3).1
+    graphics_rows!()
 } else {
-    GRAPHICS_ROWS
+    graphics_rows!(Item::DisplayMode, Item::Resolution, Item::Apply)
 };
 
 pub(super) const COLORBLIND: &[(&str, f32)] =

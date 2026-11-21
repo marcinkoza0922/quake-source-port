@@ -332,13 +332,6 @@ it Torna al menu principale
 es Volver al menú principal
 ru Вернуться в главное меню
 
-@ (disabled)
-fr (désactivé)
-de (deaktiviert)
-it (disattivato)
-es (desactivado)
-ru (недоступно)
-
 @ (fixed for this game)
 fr (fixé pour cette partie)
 de (für dieses Spiel festgelegt)

@@ -2576,9 +2576,6 @@ ur لیول دوبارہ شروع کریں
 @ Return to main menu
 ur مرکزی مینو پر واپس
 
-@ (disabled)
-ur (غیر فعال)
-
 @ (fixed for this game)
 ur (اس گیم کے لیے مقرر)
 
@@ -4127,3 +4124,26 @@ ur بٹن دبانے یا نقصان پہنچنے پر لرزش (اینڈرائ�
 
 @ Swipe left or right to cycle.
 ur ہتھیار بدلنے کے لیے بائیں یا دائیں سوائپ کریں۔
+
+# Options page group headings.
+
+@ General
+ur عمومی
+
+@ Saving
+ur محفوظ کرنا
+
+@ Lighting
+ur روشنی
+
+@ Effects
+ur اثرات
+
+@ Models
+ur ماڈلز
+
+@ Post-processing
+ur بعد از پروسیسنگ
+
+@ World
+ur دنیا

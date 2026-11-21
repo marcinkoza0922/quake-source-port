@@ -2576,9 +2576,6 @@ gl Reiniciar o nivel
 @ Return to main menu
 gl Volver ao menú principal
 
-@ (disabled)
-gl (desactivado)
-
 @ (fixed for this game)
 gl (fixo nesta partida)
 
@@ -4127,3 +4124,26 @@ gl Vibra ao premer botóns e ao recibir dano (Android).
 
 @ Swipe left or right to cycle.
 gl Desliza á esquerda ou á dereita para cambiar de arma.
+
+# Options page group headings.
+
+@ General
+gl Xeral
+
+@ Saving
+gl Gardado
+
+@ Lighting
+gl Iluminación
+
+@ Effects
+gl Efectos
+
+@ Models
+gl Modelos
+
+@ Post-processing
+gl Posprocesado
+
+@ World
+gl Mundo

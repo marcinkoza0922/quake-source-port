@@ -2576,9 +2576,6 @@ hr Ponovno pokreni razinu
 @ Return to main menu
 hr Povratak u glavni izbornik
 
-@ (disabled)
-hr (onemogućeno)
-
 @ (fixed for this game)
 hr (fiksno za ovu igru)
 
@@ -4127,3 +4124,26 @@ hr Vibrira pri pritisku tipki i primanju štete (Android).
 
 @ Swipe left or right to cycle.
 hr Povuci ulijevo ili udesno za promjenu oružja.
+
+# Options page group headings.
+
+@ General
+hr Općenito
+
+@ Saving
+hr Spremanje
+
+@ Lighting
+hr Osvjetljenje
+
+@ Effects
+hr Efekti
+
+@ Models
+hr Modeli
+
+@ Post-processing
+hr Naknadna obrada
+
+@ World
+hr Svijet

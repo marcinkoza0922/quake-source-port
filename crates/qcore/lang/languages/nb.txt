@@ -2576,9 +2576,6 @@ nb Start banen på nytt
 @ Return to main menu
 nb Tilbake til hovedmenyen
 
-@ (disabled)
-nb (deaktivert)
-
 @ (fixed for this game)
 nb (låst for dette spillet)
 
@@ -4127,3 +4124,26 @@ nb Vibrerer ved knappetrykk og når du tar skade (Android).
 
 @ Swipe left or right to cycle.
 nb Sveip til venstre eller høyre for å bytte våpen.
+
+# Options page group headings.
+
+@ General
+nb Generelt
+
+@ Saving
+nb Lagring
+
+@ Lighting
+nb Belysning
+
+@ Effects
+nb Effekter
+
+@ Models
+nb Modeller
+
+@ Post-processing
+nb Etterbehandling
+
+@ World
+nb Verden

@@ -2576,9 +2576,6 @@ lv Sākt līmeni no jauna
 @ Return to main menu
 lv Atgriezties galvenajā izvēlnē
 
-@ (disabled)
-lv (atspējots)
-
 @ (fixed for this game)
 lv (fiksēts šai spēlei)
 
@@ -4127,3 +4124,26 @@ lv Vibrē, nospiežot pogas un saņemot bojājumus (Android).
 
 @ Swipe left or right to cycle.
 lv Pavelc pa kreisi vai pa labi, lai mainītu ieroci.
+
+# Options page group headings.
+
+@ General
+lv Vispārīgi
+
+@ Saving
+lv Saglabāšana
+
+@ Lighting
+lv Apgaismojums
+
+@ Effects
+lv Efekti
+
+@ Models
+lv Modeļi
+
+@ Post-processing
+lv Pēcapstrāde
+
+@ World
+lv Pasaule
