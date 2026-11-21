@@ -114,7 +114,8 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
         InputEvent::GamepadAxis { value, .. } if value.abs() > 0.5 => Some(Device::Gamepad),
         _ => None,
     };
-    if let Some(d) = dev {
+    let typing = ctx.input().touch_typing && matches!(ev, InputEvent::Key { .. });
+    if let Some(d) = dev.filter(|_| !typing) {
         if ctx.input().last_device == Device::Touch {
             release_touch(ctx);
         }

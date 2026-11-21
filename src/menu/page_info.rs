@@ -62,6 +62,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "touch_invert" => "Dragging up looks down instead of up",
         "touch_size" => "Size of the on-screen buttons and move stick",
         "touch_opacity" => "How visible the on-screen controls are",
+        "touch_menu_scale" => "Size of the menus and their buttons while you use the touchscreen",
         "cl_wheel_timescale" => "Slows the game down while the weapon wheel is open",
         "r_texfilter" => "Nearest keeps crisp classic pixels; linear smooths textures",
         "r_anisotropy" => "Keeps textures sharp on floors and walls seen at steep angles",

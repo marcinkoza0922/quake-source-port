@@ -18,6 +18,7 @@ pub(super) const ITEMS: &[Item] = &[
     toggle("Touch Auto-fire", "touch_autofire"),
     toggle("Move-side Fire", "touch_move_fire"),
     toggle("Touch Haptics", "touch_haptics"),
+    Item::Choice { label: "Menu Size", cvar: "touch_menu_scale", choices: MENU_SIZE },
     Item::Run { label: "Edit Layout", run: Run::EditTouch },
     Item::Sub { label: "Gyro & Flick Stick", page: Page::Gyro },
     Item::Run { label: "Reset", run: Run::ResetTouch },
@@ -26,7 +27,10 @@ pub(super) const ITEMS: &[Item] = &[
 const ROW_X: f32 = 24.0;
 const ROW_Y: f32 = 50.0;
 const ROW_WIDTH: f32 = 350.0;
-const ROW_HEIGHT: f32 = 21.0;
+/// Touch menu sizes (`touch_menu_scale`).
+pub(super) const MENU_SIZE: &[(&str, f32)] = &[("small", 0.85), ("normal", 1.0), ("large", 1.2), ("huge", 1.4)];
+/// Rows share the space above the Reset button.
+const ROW_HEIGHT: f32 = (RESET[1] - ROW_Y) / ROWS as f32;
 const ROWS: usize = ITEMS.len() - 3;
 const EDIT: [f32; 4] = [390.0, 231.0, 226.0, 36.0];
 const GYRO: [f32; 4] = [390.0, 272.0, 226.0, 36.0];
@@ -70,6 +74,14 @@ impl Menu {
     /// The touch page fills the available landscape area, including sizes
     /// between the integer zoom levels of the classic menus.
     pub fn canvas_layout(&self, c: &mut Canvas) {
+        if self.tv_input() {
+            return self.tv_layout(c);
+        }
+        self.classic_layout(c);
+    }
+
+    /// The 640x360 menu layout, scaled to the safe area in touch mode.
+    pub(super) fn classic_layout(&self, c: &mut Canvas) {
         if !self.touch_ui && !matches!(self.screen, Screen::OptionsPage(Page::Touch) | Screen::TouchEditor) {
             c.menu_layout();
             return;
@@ -109,6 +121,9 @@ impl Menu {
     }
 
     pub fn slider_at(&self, pos: (f32, f32), cv: &Cvars) -> Option<usize> {
+        if self.tv_input() {
+            return self.tv_slider_at(pos, cv);
+        }
         if self.prompt.is_some() || self.drop.is_some() || self.osk.is_some() || self.autoaim_prompt || self.capturing() {
             return None;
         }
@@ -232,35 +247,26 @@ mod tests {
     use super::*;
 
     #[test]
-    fn standard_options_keep_partial_scroll_rows_and_drag_the_same_sliders() {
+    fn standard_options_use_the_touch_layout_and_classic_pages_keep_theirs() {
         let mut menu = Menu::new();
         let mut cv = Cvars::new();
         qinput::Input::new(&mut cv);
         menu.set_touch_ui(true);
         menu.open(Screen::OptionsPage(Page::Mouse));
-        let row = page_items(Page::Mouse).iter().position(|item| {
-            matches!(item, Item::Slider { cvar: "sensitivity", .. })
-        }).unwrap();
-        let y = menu.page_row_y(Page::Mouse, row) + 10.0;
-        let (left, right) = SLIDER_X;
-        assert_eq!(menu.slider_at((left, y), &cv), Some(row));
-        menu.mouse_move((left, y), &mut cv);
-        menu.key(K_MOUSE1, &mut cv, false);
-        let low = cv.value_of("sensitivity");
-        menu.mouse_move((right + 50.0, y + 20.0), &mut cv);
-        assert!(cv.value_of("sensitivity") > low);
-        menu.mouse_up();
-
-        let page = Page::Graphics;
-        menu.open(Screen::OptionsPage(page));
-        menu.opt_cursor = 0;
-        assert_eq!(menu.scroll_touch(7.5), Some(true));
-        assert_eq!(menu.page_offset(page), 7.5);
-        assert_eq!(menu.item_at((PANEL_X + 10.0, PAGE_ROW0 + 17.0)), Some(1));
-        assert_eq!(menu.scroll_touch(5000.0), Some(true));
-        assert_eq!(menu.scroll_touch(5000.0), Some(false));
-        assert_eq!(menu.scroll_touch(-5000.0), Some(true));
-        assert_eq!(menu.page_offset(page), 0.0);
+        let mut c = Canvas::new(1920, 1080);
+        menu.canvas_layout(&mut c);
+        // touch layout: units, not the 640x360 canvas (tested in touchview)
+        assert!(menu.tv_input());
+        assert_eq!(c.scale, 1.0);
+        // the classic layout's slider column is no longer a slider
+        let row = page_items(Page::Mouse).iter().position(|item| matches!(item, Item::Slider { cvar: "sensitivity", .. })).unwrap();
+        assert_ne!(menu.slider_at((SLIDER_X.0, menu.page_row_y(Page::Mouse, row) + 10.0), &cv), Some(row));
+        // screens without a touch layout keep the scaled classic one
+        menu.open(Screen::DirBrowser);
+        menu.canvas_layout(&mut c);
+        assert!(!menu.tv_screen());
+        assert_eq!(c.scale, 3.0);
+        assert_eq!(menu.page_row_height(), 20.0);
     }
 
     #[test]

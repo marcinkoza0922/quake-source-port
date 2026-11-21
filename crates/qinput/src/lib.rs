@@ -305,6 +305,9 @@ pub struct Input {
     pub touch_aspect: f32,
     pub touch_size_cm: Option<[f32; 2]>,
     pub touch_insets: [f32; 4],
+    /// The OS keyboard is up for a touch menu: its keys (Backspace,
+    /// Enter) don't switch away from touch.
+    pub touch_typing: bool,
 }
 
 impl Input {
@@ -342,6 +345,7 @@ impl Input {
             touch_aspect: 16.0 / 9.0,
             touch_insets: [0.0; 4],
             touch_size_cm: None,
+            touch_typing: false,
         }
     }
 

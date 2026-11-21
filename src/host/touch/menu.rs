@@ -34,6 +34,7 @@ pub(in crate::host) struct MenuTouch {
 impl Host {
     pub(in crate::host) fn cancel_menu_touch(&mut self) {
         self.menu_fling = None;
+        self.menu.touch_press = None;
         if self.menu_touch.take().is_some() {
             self.menu.hud_edit.mouse_up(&mut self.server.core.cvars);
             self.menu.mouse_up();
@@ -65,6 +66,8 @@ impl Host {
             }
             if gesture == Gesture::Pointer {
                 self.menu_key(K_MOUSE1);
+            } else {
+                self.menu.touch_press = Some(pos);
             }
             return;
         }
@@ -76,6 +79,7 @@ impl Host {
         match phase {
             TouchPhase::Move => {
                 if moved && matches!(t.gesture, Gesture::Tap | Gesture::SliderCandidate) {
+                    self.menu.touch_press = None;
                     t.gesture = if t.gesture == Gesture::SliderCandidate && dx > dy {
                         self.menu.mouse_move(t.start, &mut self.server.core.cvars);
                         self.menu_key(K_MOUSE1);

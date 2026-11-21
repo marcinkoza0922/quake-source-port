@@ -14,10 +14,11 @@ impl Menu {
             self.hud_edit.mouse_move(pos, cv);
             return None;
         }
-        if self.autoaim_prompt || self.capturing() { return None; }
+        if self.tv_dialog_open() || self.autoaim_prompt || self.capturing() { return None; }
         if matches!(self.prompt, Some(Prompt::Launch { .. })) { return self.launch_hover(pos, cv); }
         if matches!(self.prompt, Some(Prompt::Preset { .. })) { return self.preset_hover(pos); }
         if self.prompt.is_some() { return self.prompt_hover(pos); }
+        if self.tv_input() { return self.tv_mouse_move(pos, cv); }
         if self.addon_mouse(pos) { return None; }
         if self.screen == Screen::OptionsPage(Page::WeaponPriority) {
             return self.wp_mouse_move(pos, cv);
@@ -91,6 +92,13 @@ impl Menu {
         sync_addon_binds(cv, server_active);
         self.sync_autoaim_mapping(cv);
         let mut out = Vec::new();
+        if key == K_MOUSE1 && self.tv_dialog_open() {
+            self.tv_dialog_click(cv, server_active, &mut out);
+            return out;
+        }
+        if self.tv_input() && !self.tv_dialog_open() && self.tv_key(key, cv, server_active, &mut out) {
+            return out;
+        }
         if self.binding_key(key, &mut out) { return out; }
         if self.addon_key(key, cv, &mut out) { return out; }
         if self.screen == Screen::OptionsPage(Page::WeaponPriority) {
@@ -385,26 +393,7 @@ impl Menu {
                 wrap(&mut self.sp_cursor, customize::SP_ITEMS, &mut out);
                 if enter {
                     out.push(Action::Sound("misc/menu2.wav"));
-                    match self.sp_cursor {
-                        0 => self.open_launch(launch::NEW_GAME_CMD.into(), false, None),
-                        1 => {
-                            out.push(Action::Command("_scansaves\n".into()));
-                            self.autosaves = false;
-                            self.open(Screen::Load);
-                        }
-                        3 => out.push(Action::Command("menu_levels\n".into())),
-                        _ if server_active && cv.value_of("custom_active") != 0.0 && cv.value_of("modifier_nosaves") != 0.0 => {
-                            let lines = vec![qcore::tr!("This game only autosaves."), qcore::tr!("(No Manual Saves modifier)")];
-                            self.confirm(lines, qcore::t!("OK"), String::new(), false);
-                        }
-                        _ => {
-                            if server_active {
-                                self.autosaves = false;
-                                out.push(Action::Command("_scansaves\n".into()));
-                                self.open(Screen::Save);
-                            }
-                        }
-                    }
+                    self.sp_select(self.sp_cursor, cv, server_active, &mut out);
                 }
             }
             Screen::Multiplayer => {
@@ -431,7 +420,7 @@ impl Menu {
                         self.save_scroll = 0.0;
                         out.push(Action::Command("_scansaves\n".into()));
                     } else {
-                        self.screen = Screen::SinglePlayer;
+                        self.screen = if std::mem::take(&mut self.cards_from_home) { Screen::Main } else { Screen::SinglePlayer };
                     }
                     return out;
                 }

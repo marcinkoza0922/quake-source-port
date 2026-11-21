@@ -99,16 +99,20 @@ impl Menu {
             _ => ([24.0, 264.0, 172.0, 22.0], 2.0),
         };
         c.round_frame(rect, radius, 2.0, GOLD_FG);
-        let note = if self.toys_locked(cv) {
+        c.text_center(320.0, 327.0, self.addon_note(cv, page), 8.0, MUTED);
+        if self.pad_ui {
+            self.draw_addon_hints(c);
+        }
+    }
+
+    /// What changing add-ons here does.
+    pub(in crate::menu) fn addon_note(&self, cv: &Cvars, page: Page) -> &'static str {
+        if self.toys_locked(cv) {
             qcore::t!("This game started without Customize, so its add-ons are fixed. Customize a new game instead.")
         } else if page == Page::Addons && self.game_running {
             qcore::t!("Changes apply now and are saved with this game (.qsa).")
         } else {
             qcore::t!("Customized games save as .qsa files, which need this source port.")
-        };
-        c.text_center(320.0, 327.0, note, 8.0, MUTED);
-        if self.pad_ui {
-            self.draw_addon_hints(c);
         }
     }
 }

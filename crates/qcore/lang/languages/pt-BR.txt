@@ -526,6 +526,9 @@ pt-BR Distância que o gancho voa antes de recolher
 @ How visible the on-screen controls are
 pt-BR Visibilidade dos controles na tela
 
+@ Size of the menus and their buttons while you use the touchscreen
+pt-BR Tamanho dos menus e de seus botões quando você usa a tela sensível ao toque
+
 @ Impact Lifetime
 pt-BR Duração dos impactos
 
@@ -720,6 +723,9 @@ pt-BR Cor sobre o alvo
 
 @ Opacity
 pt-BR Opacidade
+
+@ Menu Size
+pt-BR Tamanho dos menus
 
 @ Opacity of the grenade arc
 pt-BR Opacidade do arco da granada
@@ -2560,6 +2566,9 @@ pt-BR Seleção de fase
 
 @ Really quit?
 pt-BR Sair mesmo?
+
+@ Quit
+pt-BR Sair
 
 @ You died
 pt-BR Você morreu

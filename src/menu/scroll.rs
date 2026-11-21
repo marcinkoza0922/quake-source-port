@@ -63,6 +63,9 @@ impl Menu {
     /// Pixel scrolling for the shared options panel and save cards.
     /// Other list widgets already own row-based scrolling.
     pub fn scroll_touch(&mut self, dy: f32) -> Option<bool> {
+        if self.tv_input() {
+            return Some(self.tv_scroll_by(dy));
+        }
         if self.prompt.is_some() || self.osk.is_some() || self.capturing() || self.autoaim_prompt {
             return Some(false);
         }
@@ -94,6 +97,9 @@ impl Menu {
     pub fn set_touch_ui(&mut self, active: bool) {
         if active != self.touch_ui || !self.touch_scroll.is_some_and(|(p, _)| self.screen == Screen::OptionsPage(p)) {
             self.touch_scroll = None;
+        }
+        if !active {
+            self.tv_leave();
         }
         self.touch_ui = active;
     }

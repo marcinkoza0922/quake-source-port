@@ -526,6 +526,9 @@ fi Kuinka pitkälle koukku lentää ennen paluuta
 @ How visible the on-screen controls are
 fi Kosketusohjainten näkyvyys
 
+@ Size of the menus and their buttons while you use the touchscreen
+fi Valikkojen ja niiden painikkeiden koko kosketusnäyttöä käytettäessä
+
 @ Impact Lifetime
 fi Osumajälkien kesto
 
@@ -720,6 +723,9 @@ fi Väri kohteessa
 
 @ Opacity
 fi Peittävyys
+
+@ Menu Size
+fi Valikkojen koko
 
 @ Opacity of the grenade arc
 fi Kranaattiradan peittävyys
@@ -2560,6 +2566,9 @@ fi Kentän valinta
 
 @ Really quit?
 fi Lopetetaanko?
+
+@ Quit
+fi Lopeta
 
 @ You died
 fi Kuolit

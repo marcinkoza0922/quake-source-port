@@ -526,6 +526,9 @@ mk Колку далеку лета куката пред да се врати
 @ How visible the on-screen controls are
 mk Колку се видливи контролите на екранот
 
+@ Size of the menus and their buttons while you use the touchscreen
+mk Големина на менијата и нивните копчиња при користење на екранот на допир
+
 @ Impact Lifetime
 mk Траење на трагите
 
@@ -720,6 +723,9 @@ mk Боја при цел
 
 @ Opacity
 mk Непроѕирност
+
+@ Menu Size
+mk Големина на менијата
 
 @ Opacity of the grenade arc
 mk Непроѕирност на патеката на гранатата
@@ -2560,6 +2566,9 @@ mk Избор на ниво
 
 @ Really quit?
 mk Навистина излез?
+
+@ Quit
+mk Излез
 
 @ You died
 mk Загина

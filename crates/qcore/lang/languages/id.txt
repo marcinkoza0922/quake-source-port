@@ -526,6 +526,9 @@ id Seberapa jauh kait melesat sebelum ditarik kembali
 @ How visible the on-screen controls are
 id Seberapa terlihat kontrol di layar
 
+@ Size of the menus and their buttons while you use the touchscreen
+id Ukuran menu dan tombolnya saat Anda memakai layar sentuh
+
 @ Impact Lifetime
 id Durasi Bekas Hantaman
 
@@ -720,6 +723,9 @@ id Warna saat Membidik
 
 @ Opacity
 id Opasitas
+
+@ Menu Size
+id Ukuran Menu
 
 @ Opacity of the grenade arc
 id Opasitas lintasan granat
@@ -2560,6 +2566,9 @@ id Pilih Level
 
 @ Really quit?
 id Yakin ingin keluar?
+
+@ Quit
+id Keluar
 
 @ You died
 id Anda tewas

@@ -1,6 +1,15 @@
 //! Navigation buttons, contextual help and controller prompts.
 use super::*;
 
+/// Death screen rows (Quick Load only with a quick save on touch).
+pub(super) const DEATH_LABELS: [&str; 5] = [
+    qcore::t!("Continue from most recent save"),
+    qcore::t!("Select save"),
+    qcore::t!("Restart level"),
+    qcore::t!("Return to main menu"),
+    qcore::t!("Quick Load"),
+];
+
 impl Menu {
     pub(super) fn death_rows(&self) -> usize {
         4 + usize::from(self.death_quickload)
@@ -69,6 +78,22 @@ impl Menu {
             return;
         }
         let item = self.page_item(page, self.opt_cursor);
+        let Some(s) = self.tooltip_text(item, cv) else { return };
+        // one fixed bar under the panel: it doesn't change size as the cursor moves
+        let (x, w) = TOOLTIP_BAR;
+        let lines: Vec<String> = s.lines().flat_map(|part| wrap_tooltip_lines(c, part, w - 16.0, TXT)).collect();
+        let h = lines.len() as f32 * 10.0 + 4.0;
+        let y = self.page_bottom(page) + 10.0;
+        let a = if self.game_running { 0.88 } else { 0.7 };
+        c.round_box(x, y - 3.0, w, h, 4.0, [0.0, 0.0, 0.0, a], Some(BORDER));
+        for (i, line) in lines.iter().enumerate() {
+            c.text_raw(x + 8.0, y + i as f32 * 10.0, line, TXT, MUTED);
+        }
+    }
+
+    /// Explanation of an options row (translated): why it is off, its
+    /// full path, or its tooltip.
+    pub(super) fn tooltip_text(&self, item: Item, cv: &Cvars) -> Option<String> {
         let reason = if self.game_locked(item, cv) {
             Some(qcore::t!("Fixed for this game: it was started without Customize"))
         } else if self.item_disabled(item, cv) || matches!(item, Item::Sub { page, .. } if sub_disabled(page, cv)) {
@@ -86,20 +111,10 @@ impl Menu {
             }
             _ => None,
         };
-        let s = match (path, reason.or_else(|| tooltip(item))) {
-            (Some(p), _) => std::borrow::Cow::Owned(p),
-            (None, Some(s)) => qcore::lang::tr(s),
-            (None, None) => return,
-        };
-        // one fixed bar under the panel: it doesn't change size as the cursor moves
-        let (x, w) = TOOLTIP_BAR;
-        let lines: Vec<String> = s.lines().flat_map(|part| wrap_tooltip_lines(c, part, w - 16.0, TXT)).collect();
-        let h = lines.len() as f32 * 10.0 + 4.0;
-        let y = self.page_bottom(page) + 10.0;
-        let a = if self.game_running { 0.88 } else { 0.7 };
-        c.round_box(x, y - 3.0, w, h, 4.0, [0.0, 0.0, 0.0, a], Some(BORDER));
-        for (i, line) in lines.iter().enumerate() {
-            c.text_raw(x + 8.0, y + i as f32 * 10.0, line, TXT, MUTED);
+        match (path, reason.or_else(|| tooltip(item))) {
+            (Some(p), _) => Some(p),
+            (None, Some(s)) => Some(qcore::lang::tr(s).into_owned()),
+            (None, None) => None,
         }
     }
 

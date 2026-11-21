@@ -526,6 +526,9 @@ fa قلاب پیش از برگشتن تا کجا پرواز می‌کند
 @ How visible the on-screen controls are
 fa میزان دیده‌شدن کنترل‌های روی صفحه
 
+@ Size of the menus and their buttons while you use the touchscreen
+fa اندازهٔ منوها و دکمه‌هایشان هنگام استفاده از صفحهٔ لمسی
+
 @ Impact Lifetime
 fa ماندگاری اصابت
 
@@ -720,6 +723,9 @@ fa رنگ روی هدف
 
 @ Opacity
 fa کدری
+
+@ Menu Size
+fa اندازهٔ منوها
 
 @ Opacity of the grenade arc
 fa کدری کمان نارنجک
@@ -2560,6 +2566,9 @@ fa انتخاب مرحله
 
 @ Really quit?
 fa واقعاً خارج می‌شوید؟
+
+@ Quit
+fa خروج
 
 @ You died
 fa شما مردید

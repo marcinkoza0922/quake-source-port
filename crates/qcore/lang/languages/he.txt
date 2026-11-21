@@ -526,6 +526,9 @@ he כמה רחוק הקרס עף לפני שהוא חוזר
 @ How visible the on-screen controls are
 he עד כמה נראים פקדי המסך
 
+@ Size of the menus and their buttons while you use the touchscreen
+he גודל התפריטים והכפתורים שלהם בזמן שימוש במסך המגע
+
 @ Impact Lifetime
 he משך סימני פגיעה
 
@@ -720,6 +723,9 @@ he צבע על מטרה
 
 @ Opacity
 he אטימות
+
+@ Menu Size
+he גודל התפריטים
 
 @ Opacity of the grenade arc
 he אטימות קשת הרימון
@@ -2560,6 +2566,9 @@ he בחירת שלב
 
 @ Really quit?
 he באמת לצאת?
+
+@ Quit
+he יציאה
 
 @ You died
 he מתת

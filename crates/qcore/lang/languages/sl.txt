@@ -526,6 +526,9 @@ sl Kako daleč kavelj leti, preden se vrne
 @ How visible the on-screen controls are
 sl Kako vidni so kontrolniki na zaslonu
 
+@ Size of the menus and their buttons while you use the touchscreen
+sl Velikost menijev in njihovih gumbov med uporabo zaslona na dotik
+
 @ Impact Lifetime
 sl Trajanje udarcev
 
@@ -720,6 +723,9 @@ sl Barva na tarči
 
 @ Opacity
 sl Prekrivnost
+
+@ Menu Size
+sl Velikost menijev
 
 @ Opacity of the grenade arc
 sl Prekrivnost loka granate
@@ -2560,6 +2566,9 @@ sl Izbira stopnje
 
 @ Really quit?
 sl Res želite končati?
+
+@ Quit
+sl Izhod
 
 @ You died
 sl Umrli ste

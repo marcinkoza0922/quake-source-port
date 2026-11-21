@@ -139,6 +139,8 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     // Local players on a local server (1 = no split-screen, up to 6).
     ("cl_splitscreen", "1", 0),
     ("menu_music", "1", CVAR_ARCHIVE),
+    // size of the touch menu layout (`menu::touchview`), times the display scale
+    ("touch_menu_scale", "1", CVAR_ARCHIVE),
     // Two-player split: 0 top/bottom, 1 side by side.
     ("r_splitscreen_layout", "0", CVAR_ARCHIVE),
     // Multiplayer menu (Join / Host Game).

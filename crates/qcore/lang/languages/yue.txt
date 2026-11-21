@@ -526,6 +526,9 @@ yue 鉤爪收返之前可以飛幾遠
 @ How visible the on-screen controls are
 yue 螢幕操控按鈕有幾清楚
 
+@ Size of the menus and their buttons while you use the touchscreen
+yue 用觸控螢幕時選單同按鈕嘅大細
+
 @ Impact Lifetime
 yue 彈痕留存時間
 
@@ -720,6 +723,9 @@ yue 瞄準目標時顏色
 
 @ Opacity
 yue 不透明度
+
+@ Menu Size
+yue 選單大細
 
 @ Opacity of the grenade arc
 yue 榴彈軌跡嘅不透明度
@@ -2560,6 +2566,9 @@ yue 揀關卡
 
 @ Really quit?
 yue 真係要離開？
+
+@ Quit
+yue 離開
 
 @ You died
 yue 你死咗

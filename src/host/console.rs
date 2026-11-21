@@ -266,6 +266,7 @@ impl Host {
             KeyDest::Menu => self.menu.wants_text(),
             KeyDest::Game => false,
         };
+        self.input.touch_typing = text && d == KeyDest::Menu && self.input.last_device == Device::Touch;
         if self.text_input != Some(text)
             && let Some(w) = &self.window
         {

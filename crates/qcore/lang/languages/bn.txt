@@ -526,6 +526,9 @@ bn ফিরে আসার আগে হুক কত দূর যায়
 @ How visible the on-screen controls are
 bn অন-স্ক্রিন নিয়ন্ত্রণ কতটা দৃশ্যমান
 
+@ Size of the menus and their buttons while you use the touchscreen
+bn টাচস্ক্রিন ব্যবহারের সময় মেনু ও তার বোতামগুলোর আকার
+
 @ Impact Lifetime
 bn আঘাতচিহ্নের স্থায়িত্ব
 
@@ -720,6 +723,9 @@ bn লক্ষ্যে থাকলে রং
 
 @ Opacity
 bn অস্বচ্ছতা
+
+@ Menu Size
+bn মেনুর আকার
 
 @ Opacity of the grenade arc
 bn গ্রেনেড আর্কের অস্বচ্ছতা
@@ -2560,6 +2566,9 @@ bn লেভেল নির্বাচন
 
 @ Really quit?
 bn সত্যিই বের হবেন?
+
+@ Quit
+bn প্রস্থান
 
 @ You died
 bn আপনি মারা গেছেন

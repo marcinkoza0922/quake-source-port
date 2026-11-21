@@ -526,6 +526,9 @@ nb Hvor langt kroken flyr før den trekkes inn
 @ How visible the on-screen controls are
 nb Hvor synlige skjermkontrollene er
 
+@ Size of the menus and their buttons while you use the touchscreen
+nb Størrelsen på menyene og knappene deres når du bruker berøringsskjermen
+
 @ Impact Lifetime
 nb Levetid for nedslag
 
@@ -720,6 +723,9 @@ nb Farge på mål
 
 @ Opacity
 nb Dekkevne
+
+@ Menu Size
+nb Menystørrelse
 
 @ Opacity of the grenade arc
 nb Granatbuens dekkevne
@@ -2560,6 +2566,9 @@ nb Banevalg
 
 @ Really quit?
 nb Vil du virkelig avslutte?
+
+@ Quit
+nb Avslutt
 
 @ You died
 nb Du døde

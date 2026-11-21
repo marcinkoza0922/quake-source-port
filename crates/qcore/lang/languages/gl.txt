@@ -526,6 +526,9 @@ gl Distancia que percorre o gancho antes de recollerse
 @ How visible the on-screen controls are
 gl Visibilidade dos controis en pantalla
 
+@ Size of the menus and their buttons while you use the touchscreen
+gl Tamaño dos menús e dos seus botóns cando usas a pantalla táctil
+
 @ Impact Lifetime
 gl Duración dos impactos
 
@@ -720,6 +723,9 @@ gl Cor sobre o obxectivo
 
 @ Opacity
 gl Opacidade
+
+@ Menu Size
+gl Tamaño dos menús
 
 @ Opacity of the grenade arc
 gl Opacidade do arco da granada
@@ -2560,6 +2566,9 @@ gl Elixir nivel
 
 @ Really quit?
 gl Seguro que queres saír?
+
+@ Quit
+gl Saír
 
 @ You died
 gl Morreches

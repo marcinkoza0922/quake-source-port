@@ -526,6 +526,9 @@ eu Kakoak zenbat hegan egiten duen itzuli aurretik
 @ How visible the on-screen controls are
 eu Pantailako kontrolen ikusgaitasuna
 
+@ Size of the menus and their buttons while you use the touchscreen
+eu Menuen eta haien botoien tamaina ukipen-pantaila erabiltzean
+
 @ Impact Lifetime
 eu Talken iraupena
 
@@ -720,6 +723,9 @@ eu Xede-kolorea
 
 @ Opacity
 eu Opakutasuna
+
+@ Menu Size
+eu Menuen tamaina
 
 @ Opacity of the grenade arc
 eu Granada-arkuaren opakutasuna
@@ -2560,6 +2566,9 @@ eu Hautatu maila
 
 @ Really quit?
 eu Benetan irten?
+
+@ Quit
+eu Irten
 
 @ You died
 eu Hil zara

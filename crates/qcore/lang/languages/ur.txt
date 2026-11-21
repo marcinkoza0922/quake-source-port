@@ -526,6 +526,9 @@ ur واپس آنے سے پہلے کانٹا کتنی دور جاتا ہے
 @ How visible the on-screen controls are
 ur اسکرین کنٹرولز کتنے نمایاں ہیں
 
+@ Size of the menus and their buttons while you use the touchscreen
+ur ٹچ اسکرین استعمال کرتے وقت مینو اور ان کے بٹنوں کا سائز
+
 @ Impact Lifetime
 ur اثر کا دورانیہ
 
@@ -720,6 +723,9 @@ ur ہدف پر رنگ
 
 @ Opacity
 ur غیر شفافیت
+
+@ Menu Size
+ur مینو کا سائز
 
 @ Opacity of the grenade arc
 ur گرینیڈ کی قوس کی غیر شفافیت
@@ -2560,6 +2566,9 @@ ur لیول کا انتخاب
 
 @ Really quit?
 ur واقعی بند کریں؟
+
+@ Quit
+ur باہر نکلیں
 
 @ You died
 ur آپ مر گئے

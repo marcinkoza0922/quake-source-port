@@ -526,6 +526,9 @@ mr परत येण्यापूर्वी हुक किती दू�
 @ How visible the on-screen controls are
 mr स्क्रीनवरील नियंत्रणे किती दिसतात
 
+@ Size of the menus and their buttons while you use the touchscreen
+mr टचस्क्रीन वापरताना मेनू आणि त्यांच्या बटणांचा आकार
+
 @ Impact Lifetime
 mr आघात कालावधी
 
@@ -720,6 +723,9 @@ mr लक्ष्यावरचा रंग
 
 @ Opacity
 mr अपारदर्शकता
+
+@ Menu Size
+mr मेनूचा आकार
 
 @ Opacity of the grenade arc
 mr ग्रेनेड कमानीची अपारदर्शकता
@@ -2560,6 +2566,9 @@ mr लेव्हल निवड
 
 @ Really quit?
 mr खरंच बाहेर पडायचे?
+
+@ Quit
+mr बाहेर पडा
 
 @ You died
 mr तुमचा मृत्यू झाला

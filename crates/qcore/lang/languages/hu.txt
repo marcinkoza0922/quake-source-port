@@ -526,6 +526,9 @@ hu Milyen messzire repül a csáklya visszahúzás előtt
 @ How visible the on-screen controls are
 hu Mennyire látható a képernyős irányítás
 
+@ Size of the menus and their buttons while you use the touchscreen
+hu A menük és gombjaik mérete érintőképernyő használatakor
+
 @ Impact Lifetime
 hu Becsapódások élettartama
 
@@ -720,6 +723,9 @@ hu Szín célponton
 
 @ Opacity
 hu Átlátszatlanság
+
+@ Menu Size
+hu Menüméret
 
 @ Opacity of the grenade arc
 hu A gránátív átlátszatlansága
@@ -2560,6 +2566,9 @@ hu Pályaválasztás
 
 @ Really quit?
 hu Biztosan kilépsz?
+
+@ Quit
+hu Kilépés
 
 @ You died
 hu Meghaltál

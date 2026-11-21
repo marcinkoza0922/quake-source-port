@@ -526,6 +526,9 @@ am መንጠቆው ከመመለሱ በፊት ምን ያህል ይበራል
 @ How visible the on-screen controls are
 am በስክሪን ላይ ያሉ መቆጣጠሪያዎች ምን ያህል ይታያሉ
 
+@ Size of the menus and their buttons while you use the touchscreen
+am የንክኪ ማያ ገጹን ሲጠቀሙ የምናሌዎቹና የአዝራሮቻቸው መጠን
+
 @ Impact Lifetime
 am የተጽዕኖ ዕድሜ
 
@@ -720,6 +723,9 @@ am የዒላማ ቀለም
 
 @ Opacity
 am ግልጽነት
+
+@ Menu Size
+am የምናሌ መጠን
 
 @ Opacity of the grenade arc
 am የቦምብ ቅስት ግልጽነት
@@ -2560,6 +2566,9 @@ am ደረጃ ምረጥ
 
 @ Really quit?
 am በእርግጥ ይውጡ?
+
+@ Quit
+am ውጣ
 
 @ You died
 am ሞተዋል

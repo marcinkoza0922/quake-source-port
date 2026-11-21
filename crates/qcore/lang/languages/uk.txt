@@ -526,6 +526,9 @@ uk Як далеко летить гак, перш ніж повернутися
 @ How visible the on-screen controls are
 uk Наскільки помітні екранні елементи керування
 
+@ Size of the menus and their buttons while you use the touchscreen
+uk Розмір меню та їхніх кнопок під час користування сенсорним екраном
+
 @ Impact Lifetime
 uk Час життя слідів влучань
 
@@ -720,6 +723,9 @@ uk Колір на цілі
 
 @ Opacity
 uk Непрозорість
+
+@ Menu Size
+uk Розмір меню
 
 @ Opacity of the grenade arc
 uk Непрозорість траєкторії гранати
@@ -2560,6 +2566,9 @@ uk Вибір рівня
 
 @ Really quit?
 uk Справді вийти?
+
+@ Quit
+uk Вийти
 
 @ You died
 uk Ви загинули

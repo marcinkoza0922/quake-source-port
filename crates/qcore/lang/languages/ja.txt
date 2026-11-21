@@ -526,6 +526,9 @@ ja フックが戻るまでに飛ぶ距離
 @ How visible the on-screen controls are
 ja 画面上の操作ボタンの見えやすさ
 
+@ Size of the menus and their buttons while you use the touchscreen
+ja タッチスクリーン使用時のメニューとボタンの大きさ
+
 @ Impact Lifetime
 ja 着弾痕の持続時間
 
@@ -720,6 +723,9 @@ ja 照準時の色
 
 @ Opacity
 ja 不透明度
+
+@ Menu Size
+ja メニューの大きさ
 
 @ Opacity of the grenade arc
 ja グレネード軌道の不透明度
@@ -2560,6 +2566,9 @@ ja レベル選択
 
 @ Really quit?
 ja 本当に終了しますか？
+
+@ Quit
+ja 終了
 
 @ You died
 ja 死亡しました

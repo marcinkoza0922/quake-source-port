@@ -526,6 +526,9 @@ tr Kancanın geri dönmeden önce ne kadar uçacağı
 @ How visible the on-screen controls are
 tr Ekran kontrollerinin ne kadar görünür olduğu
 
+@ Size of the menus and their buttons while you use the touchscreen
+tr Dokunmatik ekranı kullanırken menülerin ve düğmelerinin boyutu
+
 @ Impact Lifetime
 tr İz Kalıcılığı
 
@@ -720,6 +723,9 @@ tr Hedef Rengi
 
 @ Opacity
 tr Opaklık
+
+@ Menu Size
+tr Menü Boyutu
 
 @ Opacity of the grenade arc
 tr Bomba yayının opaklığı
@@ -2560,6 +2566,9 @@ tr Bölüm Seçimi
 
 @ Really quit?
 tr Gerçekten çıkılsın mı?
+
+@ Quit
+tr Çık
 
 @ You died
 tr Öldünüz

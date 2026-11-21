@@ -526,6 +526,9 @@ ko 갈고리가 되감기기 전까지 날아가는 거리
 @ How visible the on-screen controls are
 ko 화면 조작 버튼의 표시 정도
 
+@ Size of the menus and their buttons while you use the touchscreen
+ko 터치스크린을 사용할 때 메뉴와 버튼의 크기
+
 @ Impact Lifetime
 ko 탄흔 지속 시간
 
@@ -720,6 +723,9 @@ ko 조준 시 색상
 
 @ Opacity
 ko 불투명도
+
+@ Menu Size
+ko 메뉴 크기
 
 @ Opacity of the grenade arc
 ko 유탄 궤적의 불투명도
@@ -2560,6 +2566,9 @@ ko 레벨 선택
 
 @ Really quit?
 ko 정말 종료할까요?
+
+@ Quit
+ko 종료
 
 @ You died
 ko 사망했습니다

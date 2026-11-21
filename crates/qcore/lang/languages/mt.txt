@@ -526,6 +526,9 @@ mt Kemm imur 'il bogħod il-ganċ qabel jerġa' lura
 @ How visible the on-screen controls are
 mt Kemm jidhru l-kontrolli fuq l-iskrin
 
+@ Size of the menus and their buttons while you use the touchscreen
+mt Id-daqs tal-menus u l-buttuni tagħhom meta tuża l-iskrin tal-mess
+
 @ Impact Lifetime
 mt Tul tal-impatti
 
@@ -720,6 +723,9 @@ mt Kulur fuq il-mira
 
 @ Opacity
 mt Opaċità
+
+@ Menu Size
+mt Daqs tal-menu
 
 @ Opacity of the grenade arc
 mt Opaċità tal-ark tal-granata
@@ -2560,6 +2566,9 @@ mt Għażla tal-livell
 
 @ Really quit?
 mt Żgur trid toħroġ?
+
+@ Quit
+mt Oħroġ
 
 @ You died
 mt Mitt

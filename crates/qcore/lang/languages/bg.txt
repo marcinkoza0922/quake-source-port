@@ -526,6 +526,9 @@ bg Колко далеч лети куката, преди да се прибе�
 @ How visible the on-screen controls are
 bg Колко видими са екранните контроли
 
+@ Size of the menus and their buttons while you use the touchscreen
+bg Размер на менютата и бутоните им при използване на сензорния екран
+
 @ Impact Lifetime
 bg Живот на следите от попадения
 
@@ -720,6 +723,9 @@ bg Цвят при цел
 
 @ Opacity
 bg Непрозрачност
+
+@ Menu Size
+bg Размер на менютата
 
 @ Opacity of the grenade arc
 bg Непрозрачност на траекторията на гранатата
@@ -2560,6 +2566,9 @@ bg Избор на ниво
 
 @ Really quit?
 bg Наистина ли изход?
+
+@ Quit
+bg Изход
 
 @ You died
 bg Ти загина

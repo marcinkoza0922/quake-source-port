@@ -25,6 +25,7 @@ impl Host {
         self.menu.set_touch_shortcut(touch && self.cl.signon == 4 && self.demo.is_none());
         let (w, h) = self.window.as_ref().map_or_else(|| self.r.size(), |win| win.drawable_size());
         self.menu.touch_aspect = (w as f32 / h.max(1) as f32).max(0.1);
+        self.menu.display_scale = self.display_scale() * self.cv("touch_menu_scale").clamp(0.75, 1.5);
         if (touch || matches!(self.menu.screen, Screen::OptionsPage(crate::menu::Page::Touch) | Screen::TouchEditor))
             && let Some(win) = &self.window
         {
@@ -42,6 +43,22 @@ impl Host {
             self.menu.death_quickload = false;
         }
         self.sync_touch_buttons();
+    }
+
+    /// Pixels per platform UI unit for the touch menus: `-displayscale`,
+    /// Android's density from the display DPI, or the window's display scale.
+    fn display_scale(&self) -> f32 {
+        let arg = self.cmdline.iter().position(|a| a == "-displayscale").and_then(|i| self.cmdline.get(i + 1));
+        if let Some(s) = arg.and_then(|s| s.parse::<f32>().ok()).filter(|s| s.is_finite() && *s > 0.0) {
+            return s;
+        }
+        let Some(win) = &self.window else { return 1.0 };
+        #[cfg(target_os = "android")]
+        if let Some([cm, _]) = win.physical_size_cm() {
+            // Android's dp: 160 per inch
+            return win.drawable_size().0 as f32 / (cm / 2.54) / 160.0;
+        }
+        win.display_scale()
     }
 
     fn touch_quickload_exists(&mut self) -> bool {
@@ -96,8 +113,8 @@ impl Host {
     }
 
     pub(super) fn finger_event(&mut self, id: u64, phase: FingerPhase, x: f32, y: f32, timestamp_ns: u64) {
-        let Some(win) = &self.window else { return };
-        let (pw, ph) = win.drawable_size();
+        // headless (`touch_tap`): the renderer's size
+        let (pw, ph) = self.window.as_ref().map_or_else(|| self.r.size(), |w| w.drawable_size());
         let phase = match phase {
             FingerPhase::Down => TouchPhase::Down,
             FingerPhase::Move => TouchPhase::Move,

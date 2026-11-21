@@ -526,6 +526,9 @@ el Πόσο μακριά πετά ο γάντζος πριν επιστρέψε�
 @ How visible the on-screen controls are
 el Πόσο ορατά είναι τα χειριστήρια οθόνης
 
+@ Size of the menus and their buttons while you use the touchscreen
+el Μέγεθος των μενού και των κουμπιών τους όταν χρησιμοποιείτε την οθόνη αφής
+
 @ Impact Lifetime
 el Διάρκεια ιχνών πρόσκρουσης
 
@@ -720,6 +723,9 @@ el Χρώμα σε στόχο
 
 @ Opacity
 el Αδιαφάνεια
+
+@ Menu Size
+el Μέγεθος μενού
 
 @ Opacity of the grenade arc
 el Αδιαφάνεια της τροχιάς χειροβομβίδας
@@ -2560,6 +2566,9 @@ el Επιλογή επιπέδου
 
 @ Really quit?
 el Σίγουρα έξοδος;
+
+@ Quit
+el Έξοδος
 
 @ You died
 el Πέθανες

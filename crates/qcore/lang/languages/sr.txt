@@ -526,6 +526,9 @@ sr Колико далеко кука лети пре него што се вр�
 @ How visible the on-screen controls are
 sr Колико су видљиве контроле на екрану
 
+@ Size of the menus and their buttons while you use the touchscreen
+sr Величина менија и њихових дугмади док користите екран осетљив на додир
+
 @ Impact Lifetime
 sr Трајање трагова поготка
 
@@ -720,6 +723,9 @@ sr Боја на мети
 
 @ Opacity
 sr Непрозирност
+
+@ Menu Size
+sr Величина менија
 
 @ Opacity of the grenade arc
 sr Непрозирност путање гранате
@@ -2560,6 +2566,9 @@ sr Избор нивоа
 
 @ Really quit?
 sr Заиста изаћи?
+
+@ Quit
+sr Изађи
 
 @ You died
 sr Погинули сте
