@@ -1,5 +1,5 @@
 # Release builds. Push a tag like v0.1.0 (or run the workflow by hand) to build every
-# desktop target and attach the archives to a GitHub release.
+# target and attach the packages to a GitHub release.
 # Only Linux x64 has been tested by hand; the other targets are built but untested.
 name: release
 
@@ -123,8 +123,6 @@ jobs:
   # run on the OpenBSD release they were built for.
   bsd:
     needs: shaders
-    # Experimental: a broken BSD build must not hold back the release.
-    continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
@@ -226,16 +224,45 @@ jobs:
       - uses: actions/upload-artifact@v4
         with: { name: android-arm64, path: "${{ env.ASSET }}" }
 
+  web:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup toolchain install stable --profile minimal --target wasm32-unknown-unknown && rustup default stable
+      - uses: Swatinem/rust-cache@v2
+        with: { key: web }
+      - name: Build WebGPU package
+        run: |
+          version=$(python3 -c 'import tomllib; print(next(p["version"] for p in tomllib.load(open("Cargo.lock", "rb"))["package"] if p["name"] == "wasm-bindgen"))')
+          cargo install wasm-bindgen-cli --locked --version "$version"
+          cargo fetch --locked
+          tools/webbuild/build.sh
+          ref="${GITHUB_REF_NAME//\//-}"
+          d="quake-source-port-$ref-web"
+          mv target/web "$d"
+          cp README.md LICENSE "$d/"
+          tar czf "$d.tar.gz" "$d"
+          echo "ASSET=$d.tar.gz" >> "$GITHUB_ENV"
+      - uses: actions/upload-artifact@v4
+        with: { name: web, path: "${{ env.ASSET }}", if-no-files-found: error }
+
   release:
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: [build, musl, bsd, android]
+    needs: [build, musl, bsd, android, web]
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/download-artifact@v4
-        with: { path: dist, pattern: "{linux,windows,macos,android,freebsd,openbsd,netbsd}-*", merge-multiple: true }
+        with: { path: dist, pattern: "{linux-*,windows-*,macos-*,android-*,freebsd-*,openbsd-*,netbsd-*,web}", merge-multiple: true }
       - name: Publish
-        env: { GH_TOKEN: "${{ github.token }}" }
+        env: { GH_TOKEN: "${{ github.token }}", RELEASE_TAG: "${{ github.ref_name }}" }
         run: |
-          gh release create "${{ github.ref_name }}" dist/* --repo "${{ github.repository }}" \
-            --title "${{ github.ref_name }}" --prerelease \
+          assets=()
+          for target in linux-{x64,arm64,musl-x64,musl-arm64}.tar.gz windows-{x64,arm64}.zip \
+                        macos-arm64.tar.gz {freebsd,openbsd,netbsd}-x64.tar.gz android-arm64.apk web.tar.gz; do
+            asset="dist/quake-source-port-$RELEASE_TAG-$target"
+            test -s "$asset" || { echo "Missing release package: $asset" >&2; exit 1; }
+            assets+=("$asset")
+          done
+          gh release create "$RELEASE_TAG" "${assets[@]}" --repo "$GITHUB_REPOSITORY" \
+            --title "$RELEASE_TAG" --verify-tag --prerelease \
             --notes "Release builds. **Only Linux x64 has been tested so far**; every other build is untested. You need your own Quake game data. See the README."
