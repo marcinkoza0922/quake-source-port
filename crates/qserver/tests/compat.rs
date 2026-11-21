@@ -173,12 +173,17 @@ fn advertised_extensions_and_getsurface_frik_file() {
     for k in 0..3 {
         assert!((clipped[k] - pt[k]).abs() < 1.0);
     }
-    // Check FRIK_FILE read on an existing file inside pak0 (default.cfg) and reject traversal.
+    // Check FRIK_FILE read on an existing file inside pak0 and reject traversal.
+    // quake.rc is in both the original and the re-release pak0 (the re-release
+    // has no default.cfg), and both versions `exec default.cfg`.
     assert_eq!(sv.core.sv.qc_files.open(&sv.core.fs, "../secret.txt", 0), -1);
-    let fh = sv.core.sv.qc_files.open(&sv.core.fs, "default.cfg", 0);
-    assert!(fh >= 0);
-    let line = sv.core.sv.qc_files.gets(fh).expect("default.cfg first line");
-    assert!(!line.is_empty());
+    let fh = sv.core.sv.qc_files.open(&sv.core.fs, "quake.rc", 0);
+    assert!(fh >= 0, "quake.rc not readable via FRIK_FILE");
+    let mut lines = Vec::new();
+    while let Some(line) = sv.core.sv.qc_files.gets(fh) {
+        lines.push(line);
+    }
+    assert!(lines.iter().any(|l| l.as_slice() == b"exec default.cfg"), "{lines:?}");
     sv.core.sv.qc_files.close(fh);
     // Verify checkextension returns true for all advertised extensions, and false when pr_checkextension = 0.
     for ext in ["DP_QC_GETSURFACE", "FTE_STRINGS", "FRIK_FILE", "DP_QC_SPRINTF"] {
