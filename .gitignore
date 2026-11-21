@@ -10,3 +10,11 @@
 bug-reports/
 # Project website: its own repo (marcinkoza0922/quake-source-port-website)
 /website/
+
+# Android build products (tools/android_build.sh)
+android/app/src/main/jniLibs/
+android/app/src/main/java/org/libsdl/
+android/app/build/
+android/build/
+android/.gradle/
+android/local.properties

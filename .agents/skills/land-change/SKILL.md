@@ -29,6 +29,7 @@ Then add the checks that match the change:
 | fs, BSP/model loading, VM, protocol | `target/release/qsmoke` for the affected mods or all of them (mod-compat) |
 | Hot paths (renderer, client frame, cull) | headless timedemo A/B or qbench (perf-profiling) |
 | Vulkan code | `QRENDER_VALIDATION=1` run is clean (vulkan-renderer) |
+| qplatform, host input/touch, anything `cfg(target_os = "android")` | `tools/android_build.sh check` compiles (skip, and say so, when no Android NDK is installed) |
 
 Report honestly: what you ran, what passed, what you skipped and why. Count
 data tests that skipped as skipped.
