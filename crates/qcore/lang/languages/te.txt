@@ -2576,9 +2576,6 @@ te లెవెల్ మళ్లీ ప్రారంభించు
 @ Return to main menu
 te ప్రధాన మెనూకు తిరిగి వెళ్లు
 
-@ (disabled)
-te (నిలిపివేయబడింది)
-
 @ (fixed for this game)
 te (ఈ గేమ్‌కు స్థిరం)
 
@@ -4127,3 +4124,26 @@ te బటన్ నొక్కినప్పుడు లేదా గాయ�
 
 @ Swipe left or right to cycle.
 te ఆయుధాన్ని మార్చడానికి ఎడమకు లేదా కుడికి స్వైప్ చేయండి.
+
+# Options page group headings.
+
+@ General
+te సాధారణం
+
+@ Saving
+te సేవ్ చేయడం
+
+@ Lighting
+te లైటింగ్
+
+@ Effects
+te ఎఫెక్ట్‌లు
+
+@ Models
+te మోడల్‌లు
+
+@ Post-processing
+te పోస్ట్-ప్రాసెసింగ్
+
+@ World
+te ప్రపంచం

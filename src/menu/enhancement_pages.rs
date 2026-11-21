@@ -4,6 +4,7 @@
 use super::*;
 
 pub(super) const ENHANCEMENTS: &[Item] = &[
+    Item::Heading("Post-processing"),
     Item::Choice { label: "Ambient Occlusion", cvar: "r_ssao", choices: SSAO },
     toggle("Motion Blur", "r_motionblur"),
     Item::Choice { label: "Motion Blur Quality", cvar: "r_motionblur_quality", choices: MOTIONBLUR_QUALITY },
@@ -11,17 +12,20 @@ pub(super) const ENHANCEMENTS: &[Item] = &[
     toggle("Speed Blur", "r_speedblur"),
     toggle("Bloom", "r_bloom"),
     Item::Sub { label: "Bloom Settings", page: Page::Bloom },
+    Item::Sub { label: "Screen Shader", page: Page::ScreenShader },
+    Item::Heading("Lighting"),
     toggle("Real-time Dynamic Lights", "r_shadow_realtime_dlight"),
     Item::Sub { label: "Real-time Light Settings", page: Page::RtLights },
-    Item::Sub { label: "Screen Shader", page: Page::ScreenShader },
+    Item::Heading("Effects"),
     toggle("Enhanced FX", "r_enhancedfx"),
     Item::Sub { label: "FX Settings", page: Page::Impacts },
+    toggle("Debris", "r_debris"),
+    Item::Sub { label: "Debris Settings", page: Page::Debris },
+    Item::Heading("World"),
     toggle("Enhanced Water", "r_enhancedwater"),
     Item::Sub { label: "Water Settings", page: Page::Water },
     toggle("See-through Teleporters", "r_teleportwindows"),
     Item::Choice { label: "Portal View Quality", cvar: "r_portal_quality", choices: PORTAL_QUALITY },
-    toggle("Debris", "r_debris"),
-    Item::Sub { label: "Debris Settings", page: Page::Debris },
 ];
 
 pub(super) const IMPACT_FX: &[(&str, f32)] =

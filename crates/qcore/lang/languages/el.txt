@@ -2576,9 +2576,6 @@ el Επανεκκίνηση επιπέδου
 @ Return to main menu
 el Επιστροφή στο κεντρικό μενού
 
-@ (disabled)
-el (ανενεργό)
-
 @ (fixed for this game)
 el (σταθερό για αυτό το παιχνίδι)
 
@@ -4127,3 +4124,26 @@ el Δόνηση σε πατήματα κουμπιών και ζημιά (Androi
 
 @ Swipe left or right to cycle.
 el Σύρετε αριστερά ή δεξιά για αλλαγή όπλου.
+
+# Options page group headings.
+
+@ General
+el Γενικά
+
+@ Saving
+el Αποθήκευση
+
+@ Lighting
+el Φωτισμός
+
+@ Effects
+el Εφέ
+
+@ Models
+el Μοντέλα
+
+@ Post-processing
+el Μετεπεξεργασία
+
+@ World
+el Κόσμος

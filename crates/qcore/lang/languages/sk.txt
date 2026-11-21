@@ -2576,9 +2576,6 @@ sk Reštartovať úroveň
 @ Return to main menu
 sk Návrat do hlavného menu
 
-@ (disabled)
-sk (nedostupné)
-
 @ (fixed for this game)
 sk (pre túto hru pevné)
 
@@ -4127,3 +4124,26 @@ sk Vibruje pri stlačení tlačidiel a utrpení zranenia (Android).
 
 @ Swipe left or right to cycle.
 sk Potiahnutím doľava alebo doprava prepnete zbraň.
+
+# Options page group headings.
+
+@ General
+sk Všeobecné
+
+@ Saving
+sk Ukladanie
+
+@ Lighting
+sk Osvetlenie
+
+@ Effects
+sk Efekty
+
+@ Models
+sk Modely
+
+@ Post-processing
+sk Postprocessing
+
+@ World
+sk Svet

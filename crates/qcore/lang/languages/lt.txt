@@ -2576,9 +2576,6 @@ lt Pradėti lygį iš naujo
 @ Return to main menu
 lt Grįžti į pagrindinį meniu
 
-@ (disabled)
-lt (išjungta)
-
 @ (fixed for this game)
 lt (šiam žaidimui nekeičiama)
 
@@ -4127,3 +4124,26 @@ lt Vibruoja spaudžiant mygtukus ir gavus žalos (Android).
 
 @ Swipe left or right to cycle.
 lt Brauk į kairę arba dešinę, kad pakeistum ginklą.
+
+# Options page group headings.
+
+@ General
+lt Bendra
+
+@ Saving
+lt Išsaugojimas
+
+@ Lighting
+lt Apšvietimas
+
+@ Effects
+lt Efektai
+
+@ Models
+lt Modeliai
+
+@ Post-processing
+lt Papildomas apdorojimas
+
+@ World
+lt Pasaulis

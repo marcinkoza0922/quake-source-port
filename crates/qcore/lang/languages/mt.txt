@@ -2576,9 +2576,6 @@ mt Erġa' ibda l-livell
 @ Return to main menu
 mt Lura għall-menu prinċipali
 
-@ (disabled)
-mt (mitfi)
-
 @ (fixed for this game)
 mt (fiss għal din il-logħba)
 
@@ -4127,3 +4124,26 @@ mt Jivvibra meta tagħfas buttuna jew iġġarrab ħsara (Android).
 
 @ Swipe left or right to cycle.
 mt Żerżaq lejn ix-xellug jew il-lemin biex tibdel l-arma.
+
+# Options page group headings.
+
+@ General
+mt Ġenerali
+
+@ Saving
+mt Salvataġġ
+
+@ Lighting
+mt Dawl
+
+@ Effects
+mt Effetti
+
+@ Models
+mt Mudelli
+
+@ Post-processing
+mt Proċessar ta' wara
+
+@ World
+mt Dinja

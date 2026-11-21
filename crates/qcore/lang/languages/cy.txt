@@ -2576,9 +2576,6 @@ cy Ailddechrau'r lefel
 @ Return to main menu
 cy Yn ôl i'r brif ddewislen
 
-@ (disabled)
-cy (wedi'i analluogi)
-
 @ (fixed for this game)
 cy (sefydlog ar gyfer y gêm hon)
 
@@ -4127,3 +4124,26 @@ cy Dirgrynu ar wasgu botwm neu wrth gymryd difrod (Android).
 
 @ Swipe left or right to cycle.
 cy Sychwch i'r chwith neu'r dde i newid arf.
+
+# Options page group headings.
+
+@ General
+cy Cyffredinol
+
+@ Saving
+cy Cadw
+
+@ Lighting
+cy Goleuo
+
+@ Effects
+cy Effeithiau
+
+@ Models
+cy Modelau
+
+@ Post-processing
+cy Ôl-brosesu
+
+@ World
+cy Byd

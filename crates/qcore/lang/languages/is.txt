@@ -2576,9 +2576,6 @@ is Byrja borðið aftur
 @ Return to main menu
 is Aftur í aðalvalmynd
 
-@ (disabled)
-is (óvirkt)
-
 @ (fixed for this game)
 is (fast í þessum leik)
 
@@ -4127,3 +4124,26 @@ is Titrar þegar ýtt er á hnapp eða þú skaðast (Android).
 
 @ Swipe left or right to cycle.
 is Strjúktu til vinstri eða hægri til að skipta um vopn.
+
+# Options page group headings.
+
+@ General
+is Almennt
+
+@ Saving
+is Vistun
+
+@ Lighting
+is Lýsing
+
+@ Effects
+is Áhrif
+
+@ Models
+is Líkön
+
+@ Post-processing
+is Eftirvinnsla
+
+@ World
+is Heimur

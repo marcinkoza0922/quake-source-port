@@ -2576,9 +2576,6 @@ hi लेवल फिर से शुरू करें
 @ Return to main menu
 hi मुख्य मेन्यू पर लौटें
 
-@ (disabled)
-hi (बंद)
-
 @ (fixed for this game)
 hi (इस गेम के लिए तय)
 
@@ -4127,3 +4124,26 @@ hi बटन दबाने या चोट लगने पर कंपन (
 
 @ Swipe left or right to cycle.
 hi हथियार बदलने के लिए बाएँ या दाएँ स्वाइप करें।
+
+# Options page group headings.
+
+@ General
+hi सामान्य
+
+@ Saving
+hi सेव करना
+
+@ Lighting
+hi प्रकाश व्यवस्था
+
+@ Effects
+hi इफ़ेक्ट्स
+
+@ Models
+hi मॉडल
+
+@ Post-processing
+hi पोस्ट-प्रोसेसिंग
+
+@ World
+hi दुनिया

@@ -91,14 +91,15 @@ impl Menu {
             (None, Some(s)) => qcore::lang::tr(s),
             (None, None) => return,
         };
-        let lines: Vec<String> = s.lines().flat_map(|part| wrap_tooltip_lines(c, part, 588.0, TXT)).collect();
-        let w = lines.iter().map(|l| c.text_w_raw(l, TXT)).fold(0.0, f32::max);
+        // one fixed bar under the panel: it doesn't change size as the cursor moves
+        let (x, w) = TOOLTIP_BAR;
+        let lines: Vec<String> = s.lines().flat_map(|part| wrap_tooltip_lines(c, part, w - 16.0, TXT)).collect();
         let h = lines.len() as f32 * 10.0 + 4.0;
         let y = self.page_bottom(page) + 10.0;
-        c.round_box(320.0 - w / 2.0 - 8.0, y - 3.0, w + 16.0, h, 4.0, [0.0, 0.0, 0.0, 0.7], Some(BORDER));
+        let a = if self.game_running { 0.88 } else { 0.7 };
+        c.round_box(x, y - 3.0, w, h, 4.0, [0.0, 0.0, 0.0, a], Some(BORDER));
         for (i, line) in lines.iter().enumerate() {
-            let lw = c.text_w_raw(line, TXT);
-            c.text_raw((320.0 - lw / 2.0).floor(), y + i as f32 * 10.0, line, TXT, MUTED);
+            c.text_raw(x + 8.0, y + i as f32 * 10.0, line, TXT, MUTED);
         }
     }
 
@@ -128,7 +129,7 @@ impl Menu {
         self.glyphs.hints_centered(c, 320.0, y, items);
     }
 
-    pub(super) fn draw_hints(&self, c: &mut Canvas) {
+    pub(super) fn draw_hints(&self, c: &mut Canvas, cv: &Cvars) {
         if !self.pad_ui || self.screen == Screen::Death { return; }
         let (sel, back) = (K_ABUTTON, K_BBUTTON);
         let y = 344.0;
@@ -178,6 +179,14 @@ impl Menu {
         }
         if self.screen == Screen::OptionsPage(Page::Controls) && self.drop.is_none() && self.prompt.is_none() {
             items.push((K_XBUTTON, "Clear"));
+        } else if let Screen::OptionsPage(p) = self.screen
+            && self.drop.is_none()
+            && self.prompt.is_none()
+            && self.opt_cursor < self.page_len(p)
+            && self.changed(self.page_item(p, self.opt_cursor), cv)
+            && !self.item_disabled(self.page_item(p, self.opt_cursor), cv)
+        {
+            items.push((K_XBUTTON, "Reset"));
         }
         if self.screen == Screen::DirBrowser {
             items = if self.dir_browser.has_modal() {

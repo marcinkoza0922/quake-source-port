@@ -2576,9 +2576,6 @@ ga Atosaigh an leibhéal
 @ Return to main menu
 ga Fill ar an bpríomhroghchlár
 
-@ (disabled)
-ga (díchumasaithe)
-
 @ (fixed for this game)
 ga (socraithe don chluiche seo)
 
@@ -4127,3 +4124,26 @@ ga Creathann sé nuair a bhrúitear cnaipe nó nuair a dhéantar damáiste (Andr
 
 @ Swipe left or right to cycle.
 ga Svaidhpeáil ar chlé nó ar dheis chun arm a athrú.
+
+# Options page group headings.
+
+@ General
+ga Ginearálta
+
+@ Saving
+ga Sábháil
+
+@ Lighting
+ga Soilsiú
+
+@ Effects
+ga Maisíochtaí
+
+@ Models
+ga Samhlacha
+
+@ Post-processing
+ga Iarphróiseáil
+
+@ World
+ga Domhan

@@ -77,7 +77,7 @@ fn click_places_the_caret_and_drag_selects_without_connecting() {
     m.mouse_up();
     assert_eq!(m.text_selection(&cv).as_deref(), Some(".168"));
     // the label side selects the row without moving the caret
-    m.mouse_move((LABEL_R - 10.0, y), &mut cv);
+    m.mouse_move((LABEL_X + 10.0, y), &mut cv);
     m.key(K_MOUSE1, &mut cv, false);
     assert_eq!(m.text_selection(&cv).as_deref(), Some(".168"));
     // Enter still connects

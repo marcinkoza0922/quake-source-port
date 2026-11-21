@@ -2576,9 +2576,6 @@ mk Рестартирај ниво
 @ Return to main menu
 mk Врати се во главното мени
 
-@ (disabled)
-mk (оневозможено)
-
 @ (fixed for this game)
 mk (фиксно за оваа игра)
 
@@ -4127,3 +4124,26 @@ mk Вибрира при притискање копчиња и примање �
 
 @ Swipe left or right to cycle.
 mk Лизгај лево или десно за промена на оружјето.
+
+# Options page group headings.
+
+@ General
+mk Општо
+
+@ Saving
+mk Зачувување
+
+@ Lighting
+mk Осветлување
+
+@ Effects
+mk Ефекти
+
+@ Models
+mk Модели
+
+@ Post-processing
+mk Дополнителна обработка
+
+@ World
+mk Свет

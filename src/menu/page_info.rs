@@ -382,61 +382,6 @@ pub(super) fn disabled_reason(item: Item) -> Option<&'static str> {
     }
 }
 
-/// Sub-pages that are switched off by their parent setting.
-pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
-    (page == Page::AutoAim && cv.value_of("assist_autoaim") == 0.0)
-        || (page == Page::GrenadeArc && cv.value_of("assist_grenadearc") == 0.0)
-        || (page == Page::Autosave && cv.value_of("sv_autosave") == 0.0)
-        || (page == Page::WeaponPriority && cv.value_of("cl_autoswitch") == 0.0)
-        || (page == Page::Automap && cv.value_of("cl_automap") == 0.0)
-        || (page == Page::Water && cv.value_of("r_enhancedwater") == 0.0)
-        || (page == Page::Bloom && cv.value_of("r_bloom") == 0.0)
-        || (page == Page::RtLights && cv.value_of("r_shadow_realtime_dlight") == 0.0)
-        || (page == Page::Impacts && cv.value_of("r_enhancedfx") == 0.0)
-        || (page == Page::Blood && cv.value_of("r_blood") == 0.0)
-        || (page == Page::Debris && cv.value_of("r_debris") == 0.0)
-        || (page == Page::Goggles && cv.value_of("addon_goggles") == 0.0)
-        || (matches!(page, Page::Hitstop | Page::HitstopAdvanced) && cv.value_of("addon_hitstop") == 0.0)
-}
-
 pub(super) fn is_net_page(p: Page) -> bool {
     matches!(p, Page::Join | Page::Host | Page::Setup)
-}
-
-impl Menu {
-    /// Shared by keyboard adjustment, pointer dragging and drawing.
-    pub(super) fn item_disabled(&self, item: Item, cv: &Cvars) -> bool {
-        self.game_locked(item, cv)
-            || (matches!(item, Item::Run { run: Run::ExportClip, .. }) && cv.value_of("_export_hasclip") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "r_deluxemapping_specular", .. }) && cv.value_of("r_deluxemapping") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "r_motionblur_amount", .. } | Item::Choice { cvar: "r_motionblur_quality", .. })
-            && cv.value_of("r_motionblur") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "r_waterripples_amount", .. }) && cv.value_of("r_waterripples") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "r_watercaustics_amount", .. }) && cv.value_of("r_watercaustics") == 0.0)
-            || (matches!(
-                item,
-                Item::Choice { cvar: "r_particle_quality" | "r_impact_fx", .. }
-                    | Item::Toggle { cvar: "r_impact_bullets" | "r_impact_nails" | "r_impact_scorches", .. }
-                    | Item::Slider { cvar: "r_impact_lifetime" | "r_impact_limit", .. }
-            ) && cv.value_of("r_enhancedparticles") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "r_wateralpha", .. })
-            && (cv.value_of("r_enhancedwater") == 0.0 || cv.value_of("r_watertranslucency") == 0.0))
-            || (matches!(item, Item::Slider { cvar: "r_water_reflections_amount", .. }) && cv.value_of("r_water_reflections") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "s_reverb_amount", .. }) && cv.value_of("s_reverb") == 0.0)
-            || (matches!(item, Item::Slider { cvar: "s_footsteps_volume", .. }) && cv.value_of("s_footsteps") == 0.0)
-            || (matches!(item, Item::Choice { cvar: "r_waterwarp", .. }) && cv.value_of("r_enhancedwater") != 0.0)
-            || (matches!(item, Item::Choice { cvar: "r_particles", .. }) && cv.value_of("r_enhancedparticles") != 0.0)
-            || (matches!(item, Item::Choice { cvar: "r_drawviewmodel", .. }) && cv.value_of("cl_camera") != 0.0)
-            || (matches!(item, Item::Choice { cvar: "r_portal_quality", .. })
-                && match self.screen {
-                    Screen::OptionsPage(Page::Enhancements) => cv.value_of("r_teleportwindows") == 0.0,
-                    Screen::OptionsPage(Page::PortalGun) => cv.value_of("addon_portal_view") == 0.0,
-                    _ => false,
-                })
-            || (matches!(
-                item,
-                Item::Choice { cvar: "addon_portal_max" | "addon_portal_depth", .. }
-                    | Item::Slider { cvar: "addon_portal_dist", .. }
-            ) && cv.value_of("addon_portal_view") == 0.0)
-    }
 }

@@ -2576,9 +2576,6 @@ sl Znova začni stopnjo
 @ Return to main menu
 sl Vrni se v glavni meni
 
-@ (disabled)
-sl (onemogočeno)
-
 @ (fixed for this game)
 sl (za to igro fiksno)
 
@@ -4127,3 +4124,26 @@ sl Vibrira ob pritisku gumba ali prejeti škodi (Android).
 
 @ Swipe left or right to cycle.
 sl Podrsaj levo ali desno za menjavo orožja.
+
+# Options page group headings.
+
+@ General
+sl Splošno
+
+@ Saving
+sl Shranjevanje
+
+@ Lighting
+sl Osvetlitev
+
+@ Effects
+sl Učinki
+
+@ Models
+sl Modeli
+
+@ Post-processing
+sl Naknadna obdelava
+
+@ World
+sl Svet

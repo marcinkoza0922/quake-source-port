@@ -2576,9 +2576,6 @@ th เริ่ม​ด่าน​ใหม่
 @ Return to main menu
 th กลับ​เมนู​หลัก
 
-@ (disabled)
-th (ปิด​ใช้)
-
 @ (fixed for this game)
 th (คง​ที่​สำหรับ​เกม​นี้)
 
@@ -4127,3 +4124,26 @@ th สั่น​เมื่อ​กด​ปุ่ม​หรือ​ไ�
 
 @ Swipe left or right to cycle.
 th ปัด​ซ้าย​หรือ​ขวา​เพื่อ​สลับ​อาวุธ
+
+# Options page group headings.
+
+@ General
+th ทั่วไป
+
+@ Saving
+th การ​บันทึก
+
+@ Lighting
+th แสง
+
+@ Effects
+th เอฟเฟกต์
+
+@ Models
+th โมเดล
+
+@ Post-processing
+th การ​ประมวล​ผล​ภาย​หลัง
+
+@ World
+th โลก

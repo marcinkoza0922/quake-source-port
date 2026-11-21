@@ -2576,9 +2576,6 @@ pl Zacznij poziom od nowa
 @ Return to main menu
 pl Wróć do menu głównego
 
-@ (disabled)
-pl (wyłączone)
-
 @ (fixed for this game)
 pl (ustalone dla tej gry)
 
@@ -4127,3 +4124,26 @@ pl Wibracje przy naciśnięciu przycisku i otrzymaniu obrażeń (Android).
 
 @ Swipe left or right to cycle.
 pl Przesuń w lewo lub w prawo, aby zmienić broń.
+
+# Options page group headings.
+
+@ General
+pl Ogólne
+
+@ Saving
+pl Zapisywanie
+
+@ Lighting
+pl Oświetlenie
+
+@ Effects
+pl Efekty
+
+@ Models
+pl Modele
+
+@ Post-processing
+pl Postprocessing
+
+@ World
+pl Świat

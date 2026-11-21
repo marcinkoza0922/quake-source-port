@@ -2576,9 +2576,6 @@ pa ਲੈਵਲ ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ
 @ Return to main menu
 pa ਮੁੱਖ ਮੀਨੂ 'ਤੇ ਵਾਪਸ ਜਾਓ
 
-@ (disabled)
-pa (ਬੰਦ)
-
 @ (fixed for this game)
 pa (ਇਸ ਗੇਮ ਲਈ ਪੱਕਾ)
 
@@ -4127,3 +4124,26 @@ pa ਬਟਨ ਦਬਾਉਣ ਜਾਂ ਸੱਟ ਲੱਗਣ 'ਤੇ ਕੰਪ�
 
 @ Swipe left or right to cycle.
 pa ਹਥਿਆਰ ਬਦਲਣ ਲਈ ਖੱਬੇ ਜਾਂ ਸੱਜੇ ਸਵਾਈਪ ਕਰੋ।
+
+# Options page group headings.
+
+@ General
+pa ਆਮ
+
+@ Saving
+pa ਸੇਵ ਕਰਨਾ
+
+@ Lighting
+pa ਰੋਸ਼ਨੀ
+
+@ Effects
+pa ਪ੍ਰਭਾਵ
+
+@ Models
+pa ਮਾਡਲ
+
+@ Post-processing
+pa ਪੋਸਟ-ਪ੍ਰੋਸੈਸਿੰਗ
+
+@ World
+pa ਦੁਨੀਆ

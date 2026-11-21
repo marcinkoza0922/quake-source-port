@@ -2576,9 +2576,6 @@ bn লেভেল আবার শুরু করুন
 @ Return to main menu
 bn প্রধান মেনুতে ফিরুন
 
-@ (disabled)
-bn (নিষ্ক্রিয়)
-
 @ (fixed for this game)
 bn (এই গেমের জন্য স্থির)
 
@@ -4127,3 +4124,26 @@ bn বোতাম চাপলে বা ক্ষতি পেলে কাঁ
 
 @ Swipe left or right to cycle.
 bn অস্ত্র বদলাতে বামে বা ডানে সোয়াইপ করুন।
+
+# Options page group headings.
+
+@ General
+bn সাধারণ
+
+@ Saving
+bn সংরক্ষণ
+
+@ Lighting
+bn আলোকসজ্জা
+
+@ Effects
+bn ইফেক্ট
+
+@ Models
+bn মডেল
+
+@ Post-processing
+bn পোস্ট-প্রসেসিং
+
+@ World
+bn বিশ্ব

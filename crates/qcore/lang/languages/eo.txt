@@ -2576,9 +2576,6 @@ eo Rekomenci nivelon
 @ Return to main menu
 eo Reveni al la ĉefmenuo
 
-@ (disabled)
-eo (malebligita)
-
 @ (fixed for this game)
 eo (fiksita por ĉi tiu ludo)
 
@@ -4127,3 +4124,26 @@ eo Vibras je butonpremoj kaj ricevita damaĝo (Android).
 
 @ Swipe left or right to cycle.
 eo Glitu maldekstren aŭ dekstren por ŝanĝi armilon.
+
+# Options page group headings.
+
+@ General
+eo Ĝeneralaj
+
+@ Saving
+eo Konservado
+
+@ Lighting
+eo Lumigado
+
+@ Effects
+eo Efikoj
+
+@ Models
+eo Modeloj
+
+@ Post-processing
+eo Postprilaborado
+
+@ World
+eo Mondo

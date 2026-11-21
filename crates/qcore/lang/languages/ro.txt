@@ -2576,9 +2576,6 @@ ro Reia nivelul
 @ Return to main menu
 ro Înapoi la meniul principal
 
-@ (disabled)
-ro (dezactivat)
-
 @ (fixed for this game)
 ro (fixat pentru acest joc)
 
@@ -4127,3 +4124,26 @@ ro Vibrează la apăsarea butoanelor și la primirea daunelor (Android).
 
 @ Swipe left or right to cycle.
 ro Glisează la stânga sau la dreapta pentru a schimba arma.
+
+# Options page group headings.
+
+@ General
+ro General
+
+@ Saving
+ro Salvare
+
+@ Lighting
+ro Iluminare
+
+@ Effects
+ro Efecte
+
+@ Models
+ro Modele
+
+@ Post-processing
+ro Post-procesare
+
+@ World
+ro Lume

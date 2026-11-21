@@ -2576,9 +2576,6 @@ id Ulangi level
 @ Return to main menu
 id Kembali ke menu utama
 
-@ (disabled)
-id (nonaktif)
-
 @ (fixed for this game)
 id (tetap untuk game ini)
 
@@ -4127,3 +4124,26 @@ id Bergetar saat menekan tombol dan menerima kerusakan (Android).
 
 @ Swipe left or right to cycle.
 id Usap ke kiri atau kanan untuk mengganti senjata.
+
+# Options page group headings.
+
+@ General
+id Umum
+
+@ Saving
+id Penyimpanan
+
+@ Lighting
+id Pencahayaan
+
+@ Effects
+id Efek
+
+@ Models
+id Model
+
+@ Post-processing
+id Pascaproses
+
+@ World
+id Dunia

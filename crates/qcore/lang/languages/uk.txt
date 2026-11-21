@@ -2576,9 +2576,6 @@ uk Почати рівень заново
 @ Return to main menu
 uk Повернутися в головне меню
 
-@ (disabled)
-uk (недоступно)
-
 @ (fixed for this game)
 uk (зафіксовано для цієї гри)
 
@@ -4127,3 +4124,26 @@ uk Вібрує при натисканні кнопок та отриманні
 
 @ Swipe left or right to cycle.
 uk Проведіть ліворуч або праворуч, щоб змінити зброю.
+
+# Options page group headings.
+
+@ General
+uk Загальні
+
+@ Saving
+uk Збереження
+
+@ Lighting
+uk Освітлення
+
+@ Effects
+uk Ефекти
+
+@ Models
+uk Моделі
+
+@ Post-processing
+uk Постобробка
+
+@ World
+uk Світ

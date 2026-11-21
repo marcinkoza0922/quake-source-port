@@ -2576,9 +2576,6 @@ km ចាប់​ផ្ដើម​វគ្គ​ឡើង​វិញ
 @ Return to main menu
 km ត្រឡប់​ទៅ​ម៉ឺនុយ​មេ
 
-@ (disabled)
-km (បាន​បិទ)
-
 @ (fixed for this game)
 km (ថេរ​សម្រាប់​ហ្គេម​នេះ)
 
@@ -4127,3 +4124,26 @@ km ញ័រ​ពេល​ចុច​ប៊ូតុង ឬ​រង​រប�
 
 @ Swipe left or right to cycle.
 km អូស​ទៅ​ឆ្វេង ឬ​ស្តាំ​ដើម្បី​ប្ដូរ​អាវុធ​។
+
+# Options page group headings.
+
+@ General
+km ទូទៅ
+
+@ Saving
+km ការ​រក្សាទុក
+
+@ Lighting
+km ពន្លឺ
+
+@ Effects
+km បែបផែន
+
+@ Models
+km ម៉ូដែល
+
+@ Post-processing
+km ការ​កែច្នៃ​ក្រោយ
+
+@ World
+km ពិភពលោក

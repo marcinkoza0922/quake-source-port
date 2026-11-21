@@ -2576,9 +2576,6 @@ tr Bölümü yeniden başlat
 @ Return to main menu
 tr Ana menüye dön
 
-@ (disabled)
-tr (devre dışı)
-
 @ (fixed for this game)
 tr (bu oyun için sabit)
 
@@ -4127,3 +4124,26 @@ tr Düğmelere basınca ve hasar alınca titreşir (Android).
 
 @ Swipe left or right to cycle.
 tr Silah değiştirmek için sola veya sağa kaydır.
+
+# Options page group headings.
+
+@ General
+tr Genel
+
+@ Saving
+tr Kaydetme
+
+@ Lighting
+tr Aydınlatma
+
+@ Effects
+tr Efektler
+
+@ Models
+tr Modeller
+
+@ Post-processing
+tr Son işleme
+
+@ World
+tr Dünya

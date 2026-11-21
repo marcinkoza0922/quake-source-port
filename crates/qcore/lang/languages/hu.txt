@@ -2576,9 +2576,6 @@ hu Pálya újrakezdése
 @ Return to main menu
 hu Vissza a főmenübe
 
-@ (disabled)
-hu (letiltva)
-
 @ (fixed for this game)
 hu (ebben a játékban rögzített)
 
@@ -4127,3 +4124,26 @@ hu Rezgés gombnyomáskor és sebződéskor (Android).
 
 @ Swipe left or right to cycle.
 hu Húzd balra vagy jobbra a fegyverváltáshoz.
+
+# Options page group headings.
+
+@ General
+hu Általános
+
+@ Saving
+hu Mentés
+
+@ Lighting
+hu Megvilágítás
+
+@ Effects
+hu Effektek
+
+@ Models
+hu Modellek
+
+@ Post-processing
+hu Utófeldolgozás
+
+@ World
+hu Világ

@@ -25,6 +25,10 @@ use hitfeedback::{HIT_SOUND, KILL_SOUND};
 mod input;
 mod page_info;
 use page_info::*;
+mod gating;
+use gating::*;
+mod units;
+use units::slider_text;
 mod scroll;
 mod prompt;
 mod cards;
@@ -311,11 +315,14 @@ const CARD_SCROLL_Y0: f32 = CARD_Y0 + CARD_PITCH + 6.0;
 /// Pixels scrolled per wheel notch on the card screens.
 const CARD_WHEEL: f32 = 24.0;
 
-/// Options panel: background box, label column (right-aligned), value column.
+/// Options panel: background box, label column (left-aligned, padded from
+/// the panel edge), value column.
 const PANEL_X: f32 = 136.0;
 const PANEL_W: f32 = 368.0;
-const LABEL_R: f32 = 304.0;
+const LABEL_X: f32 = PANEL_X + 12.0;
 const VALUE_X: f32 = 320.0;
+/// Extra indent of a row that depends on a master toggle above it.
+const DEP_INDENT: f32 = 12.0;
 const ROW_H: f32 = 12.0;
 /// Height of value boxes inside a row, and of entries in an open dropdown.
 const BOX_H: f32 = 10.0;
@@ -503,6 +510,7 @@ impl Menu {
         if s == Screen::Options { self.clear_search(); }
         if s == Screen::OptionsPage(Page::WeaponPriority) { self.wp.reset_state(); }
         if matches!(s, Screen::Load | Screen::Save) { self.load_cursor = 0; self.save_scroll = 0.0; }
+        self.settle_cursor();
     }
 
     /// Card rows: Load = pinned latest + Browse Autosaves + saves; Autosaves
@@ -560,6 +568,9 @@ impl Menu {
                 let height = self.page_row_height();
                 row(PAGE_ROW0, height, self.page_vis(p), PANEL_X, PANEL_X + PANEL_W)?;
                 let i = ((y - PAGE_ROW0 + self.page_offset(p)) / height) as usize;
+                if matches!(self.page_item(p, i), Item::Heading(_)) {
+                    return None;
+                }
                 if matches!(self.page_item(p, i), Item::Run { run: Run::BrowseServers, .. })
                     && !server_browser::hit(server_browser::server_browser_button(self.page_row_y(p, i) + (height - ROW_H) / 2.0), (x, y))
                 {

@@ -105,7 +105,7 @@ impl Menu {
             return None;
         }
         let sc = self.page_offset(p) / self.page_row_height();
-        let (x, top, h) = (PANEL_X + PANEL_W - 5.0, PAGE_ROW0, n as f32 * self.page_row_height());
+        let (x, top, h) = (PANEL_X + PANEL_W - SCROLL_W - 2.0, PAGE_ROW0, n as f32 * self.page_row_height());
         let th = (h * n as f32 / total as f32).max(8.0);
         let ty = top + (h - th) * sc / (total - n) as f32;
         Some((x, top, h, ty, th))
@@ -121,6 +121,30 @@ impl Menu {
         let sc = sc.min(total - vis);
         self.opt_scroll.set(sc);
         self.opt_cursor = self.opt_cursor.clamp(sc, sc + vis - 1);
+        // off a heading, staying in view
+        self.skip_headings(p, 1);
+        if self.opt_cursor >= sc + vis {
+            self.opt_cursor = sc + vis - 1;
+            self.skip_headings(p, -1);
+        }
+    }
+
+    /// Moves the cursor off heading rows in direction `dir` (wrapping).
+    pub(super) fn skip_headings(&mut self, p: Page, dir: isize) {
+        let n = self.page_len(p);
+        for _ in 0..n {
+            if !matches!(self.page_item(p, self.opt_cursor.min(n - 1)), Item::Heading(_)) {
+                return;
+            }
+            self.opt_cursor = (self.opt_cursor as isize + dir).rem_euclid(n as isize) as usize;
+        }
+    }
+
+    /// Keeps the options cursor on a selectable row after any input.
+    pub(super) fn settle_cursor(&mut self) {
+        if let Screen::OptionsPage(p) = self.screen {
+            self.skip_headings(p, 1);
+        }
     }
 
     /// Scrollbar drag: thumb top follows the pointer.

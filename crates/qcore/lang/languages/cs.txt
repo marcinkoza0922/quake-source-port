@@ -2576,9 +2576,6 @@ cs Restartovat úroveň
 @ Return to main menu
 cs Zpět do hlavní nabídky
 
-@ (disabled)
-cs (vypnuto)
-
 @ (fixed for this game)
 cs (pevně dané pro tuto hru)
 
@@ -4127,3 +4124,26 @@ cs Vibruje při stisku tlačítek a utrpění zranění (Android).
 
 @ Swipe left or right to cycle.
 cs Přejetím doleva nebo doprava přepnete zbraň.
+
+# Options page group headings.
+
+@ General
+cs Obecné
+
+@ Saving
+cs Ukládání
+
+@ Lighting
+cs Osvětlení
+
+@ Effects
+cs Efekty
+
+@ Models
+cs Modely
+
+@ Post-processing
+cs Postprocessing
+
+@ World
+cs Svět

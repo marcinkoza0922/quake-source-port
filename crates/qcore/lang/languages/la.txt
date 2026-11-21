@@ -2576,9 +2576,6 @@ la Tabulam iterum incipere
 @ Return to main menu
 la Ad indicem principalem redire
 
-@ (disabled)
-la (inactivum)
-
 @ (fixed for this game)
 la (huic lusui fixum)
 
@@ -4127,3 +4124,26 @@ la Vibrat cum bullae premuntur aut damnum accipis (Android).
 
 @ Swipe left or right to cycle.
 la Ad sinistram vel dextram trahe ut arma mutes.
+
+# Options page group headings.
+
+@ General
+la Generalia
+
+@ Saving
+la Servatio
+
+@ Lighting
+la Illuminatio
+
+@ Effects
+la Effectus
+
+@ Models
+la Exemplaria
+
+@ Post-processing
+la Postprocessio
+
+@ World
+la Mundus
