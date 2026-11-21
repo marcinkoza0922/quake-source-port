@@ -613,8 +613,8 @@ mr सर्वात लांब गोठणे (ms)
 @ Look Down
 mr खाली पाहा
 
-@ Look Speed
-mr पाहण्याचा वेग
+@ Look Acceleration
+mr दृश्य त्वरण
 
 @ Look Up
 mr वर पाहा
@@ -4079,3 +4079,24 @@ mr 100% इजा न होता
 
 @ Damage Skull
 mr इजेची कवटी
+
+@ A mild speed boost for fast swipes
+mr जलद स्वाइप केल्यावर दृश्य थोडे अधिक वेगाने फिरते
+
+@ Phone Gyro
+mr फोनचा जायरोस्कोप
+
+@ look zone
+mr दृश्य क्षेत्र
+
+@ while firing
+mr गोळीबार करताना
+
+@ Uses the Android device’s motion sensor.
+mr Android उपकरणाचा गती संवेदक वापरतो.
+
+@ Edit Layout
+mr मांडणी संपादित करा
+
+@ Drag to move
+mr हलवण्यासाठी ओढा

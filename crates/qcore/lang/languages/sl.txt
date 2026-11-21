@@ -613,8 +613,8 @@ sl Najdaljša zamrznitev (ms)
 @ Look Down
 sl Poglej dol
 
-@ Look Speed
-sl Hitrost pogleda
+@ Look Acceleration
+sl Pospešek pogleda
 
 @ Look Up
 sl Poglej gor
@@ -4079,3 +4079,24 @@ sl 100% brez poškodb
 
 @ Damage Skull
 sl Lobanja ob poškodbi
+
+@ A mild speed boost for fast swipes
+sl Hitre poteze nekoliko pospešijo obračanje pogleda
+
+@ Phone Gyro
+sl Žiroskop telefona
+
+@ look zone
+sl območje pogleda
+
+@ while firing
+sl med streljanjem
+
+@ Uses the Android device’s motion sensor.
+sl Uporablja senzor gibanja naprave Android.
+
+@ Edit Layout
+sl Uredi postavitev
+
+@ Drag to move
+sl Povleci za premik

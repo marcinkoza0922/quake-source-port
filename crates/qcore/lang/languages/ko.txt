@@ -613,8 +613,8 @@ ko 최대 정지 시간 (ms)
 @ Look Down
 ko 아래 보기
 
-@ Look Speed
-ko 시점 속도
+@ Look Acceleration
+ko 시점 가속
 
 @ Look Up
 ko 위 보기
@@ -4079,3 +4079,24 @@ ko 100% 피해 없음
 
 @ Damage Skull
 ko 피해 해골
+
+@ A mild speed boost for fast swipes
+ko 빠르게 밀면 시점이 조금 더 빨리 회전합니다
+
+@ Phone Gyro
+ko 휴대폰 자이로
+
+@ look zone
+ko 시점 조작 영역
+
+@ while firing
+ko 사격 중
+
+@ Uses the Android device’s motion sensor.
+ko Android 기기의 모션 센서를 사용합니다.
+
+@ Edit Layout
+ko 배치 편집
+
+@ Drag to move
+ko 드래그하여 이동

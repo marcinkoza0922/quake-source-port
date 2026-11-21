@@ -613,8 +613,8 @@ lt Ilgiausias sustingimas (ms)
 @ Look Down
 lt Žiūrėti žemyn
 
-@ Look Speed
-lt Žvilgsnio greitis
+@ Look Acceleration
+lt Žvilgsnio pagreitis
 
 @ Look Up
 lt Žiūrėti aukštyn
@@ -4079,3 +4079,24 @@ lt 100% be žalos
 
 @ Damage Skull
 lt Žalos kaukolė
+
+@ A mild speed boost for fast swipes
+lt Greitai braukiant vaizdas sukasi šiek tiek greičiau
+
+@ Phone Gyro
+lt Telefono giroskopas
+
+@ look zone
+lt žvilgsnio zona
+
+@ while firing
+lt šaudant
+
+@ Uses the Android device’s motion sensor.
+lt Naudoja „Android“ įrenginio judesio jutiklį.
+
+@ Edit Layout
+lt Keisti išdėstymą
+
+@ Drag to move
+lt Vilkite norėdami perkelti

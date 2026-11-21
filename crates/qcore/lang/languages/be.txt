@@ -613,8 +613,8 @@ be Найдаўжэйшы стоп-кадр (мс)
 @ Look Down
 be Глядзець уніз
 
-@ Look Speed
-be Хуткасць агляду
+@ Look Acceleration
+be Паскарэнне агляду
 
 @ Look Up
 be Глядзець уверх
@@ -4079,3 +4079,24 @@ be 100% без шкоды
 
 @ Damage Skull
 be Чэрап шкоды
+
+@ A mild speed boost for fast swipes
+be Хуткія жэсты крыху паскараюць паварот
+
+@ Phone Gyro
+be Гіраскоп тэлефона
+
+@ look zone
+be зона агляду
+
+@ while firing
+be падчас стральбы
+
+@ Uses the Android device’s motion sensor.
+be Выкарыстоўвае датчык руху прылады Android.
+
+@ Edit Layout
+be Рэдагаваць раскладку
+
+@ Drag to move
+be Перацягніце для перамяшчэння

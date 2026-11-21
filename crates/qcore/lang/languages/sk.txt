@@ -613,8 +613,8 @@ sk Najdlhšie zmrazenie (ms)
 @ Look Down
 sk Pozrieť nadol
 
-@ Look Speed
-sk Rýchlosť pohľadu
+@ Look Acceleration
+sk Zrýchlenie pohľadu
 
 @ Look Up
 sk Pozrieť nahor
@@ -4079,3 +4079,24 @@ sk 100% bez poškodenia
 
 @ Damage Skull
 sk Lebka pri zásahu
+
+@ A mild speed boost for fast swipes
+sk Pri rýchlom potiahnutí sa pohľad mierne zrýchli
+
+@ Phone Gyro
+sk Gyroskop telefónu
+
+@ look zone
+sk oblasť pohľadu
+
+@ while firing
+sk pri streľbe
+
+@ Uses the Android device’s motion sensor.
+sk Používa snímač pohybu zariadenia Android.
+
+@ Edit Layout
+sk Upraviť rozloženie
+
+@ Drag to move
+sk Potiahnutím presuniete

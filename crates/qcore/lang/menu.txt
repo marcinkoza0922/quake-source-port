@@ -1422,12 +1422,12 @@ it Guarda giù
 es Mirar abajo
 ru Смотреть вниз
 
-@ Look Speed
-fr Vitesse de la vue
-de Blickgeschwindigkeit
-it Velocità visuale
-es Velocidad de la vista
-ru Скорость обзора
+@ Look Acceleration
+fr Accélération de la visée
+de Blickbeschleunigung
+it Accelerazione visuale
+es Aceleración de la vista
+ru Ускорение обзора
 
 @ Look Up
 fr Regarder en haut
@@ -4203,3 +4203,31 @@ de Spiel fortsetzen
 it Riprendi partita
 es Reanudar partida
 ru Продолжить игру
+
+@ Phone Gyro
+fr Gyroscope du téléphone
+de Handy-Gyroskop
+it Giroscopio del telefono
+es Giroscopio del teléfono
+ru Гироскоп телефона
+
+@ look zone
+fr zone de visée
+de Blickbereich
+it area visuale
+es zona de vista
+ru зона обзора
+
+@ while firing
+fr pendant le tir
+de beim Feuern
+it durante il fuoco
+es al disparar
+ru при стрельбе
+
+@ Edit Layout
+fr Modifier la disposition
+de Layout bearbeiten
+it Modifica disposizione
+es Editar disposición
+ru Изменить раскладку

@@ -613,8 +613,8 @@ eo Plej longa frosto (ms)
 @ Look Down
 eo Rigardi malsupren
 
-@ Look Speed
-eo Rigardrapido
+@ Look Acceleration
+eo Akcelo de Rigardo
 
 @ Look Up
 eo Rigardi supren
@@ -4079,3 +4079,24 @@ eo 100% sen damaĝo
 
 @ Damage Skull
 eo Damaĝa kranio
+
+@ A mild speed boost for fast swipes
+eo Rapidaj glitoj turnas la vidon iom pli rapide
+
+@ Phone Gyro
+eo Telefona Giroskopo
+
+@ look zone
+eo rigardzono
+
+@ while firing
+eo dum pafado
+
+@ Uses the Android device’s motion sensor.
+eo Uzas la movsensilon de la Android-aparato.
+
+@ Edit Layout
+eo Redakti Aranĝon
+
+@ Drag to move
+eo Trenu por movi

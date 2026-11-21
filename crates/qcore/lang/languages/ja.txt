@@ -613,8 +613,8 @@ ja 最長停止時間（ms）
 @ Look Down
 ja 下を見る
 
-@ Look Speed
-ja 視点速度
+@ Look Acceleration
+ja 視点加速
 
 @ Look Up
 ja 上を見る
@@ -4079,3 +4079,24 @@ ja 100% ノーダメージ
 
 @ Damage Skull
 ja ダメージドクロ
+
+@ A mild speed boost for fast swipes
+ja 速いスワイプで視点の回転を少し速めます
+
+@ Phone Gyro
+ja 端末のジャイロ
+
+@ look zone
+ja 視点操作エリア
+
+@ while firing
+ja 射撃中
+
+@ Uses the Android device’s motion sensor.
+ja Android 端末のモーションセンサーを使用します。
+
+@ Edit Layout
+ja 配置を編集
+
+@ Drag to move
+ja ドラッグで移動

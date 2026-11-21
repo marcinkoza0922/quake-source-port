@@ -613,8 +613,8 @@ bg Най-дълго замръзване (мс)
 @ Look Down
 bg Погледни надолу
 
-@ Look Speed
-bg Скорост на погледа
+@ Look Acceleration
+bg Ускорение на погледа
 
 @ Look Up
 bg Погледни нагоре
@@ -4079,3 +4079,24 @@ bg 100% без щети
 
 @ Damage Skull
 bg Череп за щети
+
+@ A mild speed boost for fast swipes
+bg Бързото плъзгане леко ускорява завъртането
+
+@ Phone Gyro
+bg Жироскоп на телефона
+
+@ look zone
+bg зона за поглед
+
+@ while firing
+bg при стрелба
+
+@ Uses the Android device’s motion sensor.
+bg Използва датчика за движение на устройството с Android.
+
+@ Edit Layout
+bg Редактиране на подредбата
+
+@ Drag to move
+bg Плъзнете за преместване

@@ -613,8 +613,8 @@ nl Langste bevriezing (ms)
 @ Look Down
 nl Omlaag kijken
 
-@ Look Speed
-nl Kijksnelheid
+@ Look Acceleration
+nl Kijkversnelling
 
 @ Look Up
 nl Omhoog kijken
@@ -4079,3 +4079,24 @@ nl 100% zonder schade
 
 @ Damage Skull
 nl Schadeschedel
+
+@ A mild speed boost for fast swipes
+nl Een lichte versnelling bij snelle veegbewegingen
+
+@ Phone Gyro
+nl Telefoongyroscoop
+
+@ look zone
+nl kijkzone
+
+@ while firing
+nl tijdens schieten
+
+@ Uses the Android device’s motion sensor.
+nl Gebruikt de bewegingssensor van het Android-apparaat.
+
+@ Edit Layout
+nl Indeling bewerken
+
+@ Drag to move
+nl Sleep om te verplaatsen

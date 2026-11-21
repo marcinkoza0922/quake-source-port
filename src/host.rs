@@ -200,6 +200,7 @@ pub struct Host {
     pad_gestures: pad_gestures::PadGestures,
     /// Finger working the menu (tap/drag-scroll).
     menu_touch: Option<touch::MenuTouch>,
+    pub(crate) backgrounded: bool,
     last_cmd: UserCmd,
     screenshot: Option<String>,
     /// Save thumbnail to write from the next frame, and uploaded thumbnails
@@ -375,6 +376,7 @@ impl Host {
             nav_hold: None,
             pad_gestures: Default::default(),
             menu_touch: None,
+            backgrounded: false,
             last_cmd: UserCmd::default(),
             screenshot: None,
             thumb: None,

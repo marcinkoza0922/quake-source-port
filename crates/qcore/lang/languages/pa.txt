@@ -613,8 +613,8 @@ pa ਸਭ ਤੋਂ ਲੰਬਾ ਠਹਿਰਾਅ (ms)
 @ Look Down
 pa ਹੇਠਾਂ ਦੇਖੋ
 
-@ Look Speed
-pa ਦੇਖਣ ਦੀ ਸਪੀਡ
+@ Look Acceleration
+pa ਨਜ਼ਰ ਦੀ ਗਤੀ ਵਧਾਉਣਾ
 
 @ Look Up
 pa ਉੱਪਰ ਦੇਖੋ
@@ -4079,3 +4079,24 @@ pa 100% ਨੁਕਸਾਨ ਤੋਂ ਬਿਨਾਂ
 
 @ Damage Skull
 pa ਨੁਕਸਾਨ ਦੀ ਖੋਪੜੀ
+
+@ A mild speed boost for fast swipes
+pa ਤੇਜ਼ ਸਵਾਈਪ ਨਾਲ ਦ੍ਰਿਸ਼ ਥੋੜ੍ਹਾ ਤੇਜ਼ ਘੁੰਮਦਾ ਹੈ
+
+@ Phone Gyro
+pa ਫ਼ੋਨ ਜਾਇਰੋਸਕੋਪ
+
+@ look zone
+pa ਨਜ਼ਰ ਖੇਤਰ
+
+@ while firing
+pa ਗੋਲੀ ਚਲਾਉਂਦੇ ਸਮੇਂ
+
+@ Uses the Android device’s motion sensor.
+pa Android ਡਿਵਾਈਸ ਦਾ ਮੋਸ਼ਨ ਸੈਂਸਰ ਵਰਤਦਾ ਹੈ।
+
+@ Edit Layout
+pa ਖਾਕਾ ਸੋਧੋ
+
+@ Drag to move
+pa ਹਿਲਾਉਣ ਲਈ ਖਿੱਚੋ

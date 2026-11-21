@@ -613,8 +613,8 @@ cs Nejdelší zmrazení (ms)
 @ Look Down
 cs Dívat se dolů
 
-@ Look Speed
-cs Rychlost rozhlížení
+@ Look Acceleration
+cs Zrychlení pohledu
 
 @ Look Up
 cs Dívat se nahoru
@@ -4079,3 +4079,24 @@ cs 100% bez poškození
 
 @ Damage Skull
 cs Lebka při zásahu
+
+@ A mild speed boost for fast swipes
+cs Při rychlém přejetí se pohled mírně zrychlí
+
+@ Phone Gyro
+cs Gyroskop telefonu
+
+@ look zone
+cs oblast pohledu
+
+@ while firing
+cs při střelbě
+
+@ Uses the Android device’s motion sensor.
+cs Používá snímač pohybu zařízení Android.
+
+@ Edit Layout
+cs Upravit rozložení
+
+@ Drag to move
+cs Přesun přetažením

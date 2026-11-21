@@ -2418,3 +2418,10 @@ de Halten und wischen zum Auswählen.
 it Tieni premuto e scorri per scegliere.
 es Mantén pulsado y desliza para elegir.
 ru Удерживайте и проведите для выбора.
+
+@ Drag to move
+fr Faire glisser pour déplacer
+de Zum Verschieben ziehen
+it Trascina per spostare
+es Arrastra para mover
+ru Перетащите для перемещения

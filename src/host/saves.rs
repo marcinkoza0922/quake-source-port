@@ -211,32 +211,59 @@ impl Host {
         text
     }
 
+    pub(super) fn local_single_player(&self) -> bool {
+        !self.dedicated && self.demo.is_none() && self.local.is_some() && !self.remote()
+            && self.server.active() && self.server.core.maxclients() == 1
+            && self.cv("deathmatch") == 0.0 && self.cv("coop") == 0.0
+    }
+
+    fn can_autosave(&self) -> bool {
+        self.local_single_player() && self.cl.signon == 4 && self.cl.intermission == 0
+            && self.cl.stats[STAT_HEALTH] > 0
+    }
+
+    fn autosave_keep(&self) -> usize {
+        if self.cv("sv_autosave") == 0.0 { return 0; }
+        self.cv("sv_autosave_keep").clamp(0.0, crate::autosave::MAX as f32) as usize
+    }
+
+    pub(super) fn background_autosave(&mut self) {
+        let keep = self.autosave_keep();
+        if keep > 0 && self.can_autosave() {
+            // The game surface may already be gone. The save is self-contained.
+            self.write_autosave(qcore::t!("Background"), keep, false);
+        }
+    }
+
     pub(super) fn update_autosave(&mut self) {
-        if self.dedicated || self.demo.is_some() || self.local.is_none()
-            || !self.server.active() || self.server.core.maxclients() != 1
-            || self.server.core.cvars.value_of("deathmatch") != 0.0
-            || self.cl.signon != 4 || self.cl.intermission != 0
-            || self.cl.stats[STAT_HEALTH] <= 0 || self.menu.active() || self.server.core.sv.paused {
+        if !self.can_autosave() || self.menu.active() || self.server.core.sv.paused {
             return;
         }
-        let cv = &self.server.core.cvars;
-        let on = cv.value_of("sv_autosave") != 0.0;
-        let keep = if on { cv.value_of("sv_autosave_keep").clamp(0.0, crate::autosave::MAX as f32) as usize } else { 0 };
-        let flags = ["entry", "secret", "monsters", "secrets", "key"].map(|n| cv.value_of(&format!("sv_autosave_{n}")) != 0.0);
-        let interval = cv.value_of("sv_autosave_interval").max(0.0) as f64 * 60.0;
+        let flags = ["entry", "secret", "monsters", "secrets", "key"].map(|n| self.cv(&format!("sv_autosave_{n}")) != 0.0);
+        let interval = self.cv("sv_autosave_interval").max(0.0) as f64 * 60.0;
         let sv = &self.server.core.sv;
         let reason = self.autosave.update(self.server.time(), self.server.stats(), self.server.player_keys(), sv.loadgame || sv.reloaded, flags, interval);
+        let keep = self.autosave_keep();
         if let Some(reason) = reason.filter(|_| keep > 0) {
-            let text = self.save_text();
-            // The v5 description is ignored by the loader; preserve the trigger in the save itself.
-            let text = qserver::addons::save::set_comment(&text, &format!("AUTOSAVE_{}", reason.replace(' ', "_")));
-            match crate::autosave::rotate(&self.user_dir(), keep, &text, crate::autosave::ext(self.server.qsa_saves())) {
-                Ok(()) => {
-                    self.print(&qcore::ctr!("Autosaved.\n"));
-                    self.thumb = Some(self.user_dir().join(format!("autosave0.{}", crate::autosave::THUMB_EXT)));
+            self.write_autosave(reason, keep, true);
+        }
+    }
+
+    fn write_autosave(&mut self, reason: &str, keep: usize, thumbnail: bool) {
+        let text = self.save_text();
+        // The v5 description is ignored by the loader; preserve the trigger in the save itself.
+        let text = qserver::addons::save::set_comment(&text, &format!("AUTOSAVE_{}", reason.replace(' ', "_")));
+        let dir = self.user_dir();
+        match crate::autosave::rotate(&dir, keep, &text, crate::autosave::ext(self.server.qsa_saves())) {
+            Ok(()) => {
+                self.print(&qcore::ctr!("Autosaved.\n"));
+                if thumbnail {
+                    self.thumb = Some(dir.join(format!("autosave0.{}", crate::autosave::THUMB_EXT)));
+                } else if self.thumb.as_ref().is_some_and(|p| p.file_stem().is_some_and(|s| s == "autosave0")) {
+                    self.thumb = None;
                 }
-                Err(e) => self.print(&qcore::ctr!("ERROR: autosave failed: {}\n", e)),
             }
+            Err(e) => self.print(&qcore::ctr!("ERROR: autosave failed: {}\n", e)),
         }
     }
 

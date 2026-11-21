@@ -613,8 +613,8 @@ pt-BR Congelamento máximo (ms)
 @ Look Down
 pt-BR Olhar para baixo
 
-@ Look Speed
-pt-BR Velocidade da visão
+@ Look Acceleration
+pt-BR Aceleração da mira
 
 @ Look Up
 pt-BR Olhar para cima
@@ -4079,3 +4079,24 @@ pt-BR 100% sem dano
 
 @ Damage Skull
 pt-BR Caveira de dano
+
+@ A mild speed boost for fast swipes
+pt-BR Aumenta um pouco a velocidade dos gestos rápidos
+
+@ Phone Gyro
+pt-BR Giroscópio do celular
+
+@ look zone
+pt-BR zona de mira
+
+@ while firing
+pt-BR ao atirar
+
+@ Uses the Android device’s motion sensor.
+pt-BR Usa o sensor de movimento do dispositivo Android.
+
+@ Edit Layout
+pt-BR Editar layout
+
+@ Drag to move
+pt-BR Arraste para mover

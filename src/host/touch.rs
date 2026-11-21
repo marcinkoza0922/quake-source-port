@@ -3,7 +3,7 @@
 //! controls in `qinput::touch`, which this file also draws.
 
 use super::*;
-use qinput::touch::{BUTTONS, PAUSE_BUTTON, TouchPhase};
+use qinput::touch::{PAUSE_BUTTON, TouchPhase};
 use qplatform::FingerPhase;
 
 /// Menu-space drag (virtual pixels) that counts as a scroll, not a tap.
@@ -24,11 +24,20 @@ pub(super) struct MenuTouch {
 }
 
 impl Host {
+    #[cfg(target_os = "android")]
+    pub(crate) fn wants_phone_gyro(&self) -> bool {
+        !self.backgrounded && self.key_dest() == KeyDest::Game && self.cl.signon == 4
+            && self.cl.intermission == 0 && self.demo.is_none() && !self.automap.fullscreen
+            && self.cv("gyro_phone_mode") != 0.0
+    }
+
     pub(super) fn sync_touch_menu(&mut self) {
         let mode = self.cv("touch_enable");
         let touch = self.input.last_device == Device::Touch || mode == 2.0;
         self.menu.set_touch_shortcut(touch && self.cl.signon == 4 && self.demo.is_none());
-        if (touch || self.menu.screen == Screen::OptionsPage(crate::menu::Page::Touch))
+        let (w, h) = self.window.as_ref().map_or_else(|| self.r.size(), |win| win.drawable_size());
+        self.menu.touch_aspect = (w as f32 / h.max(1) as f32).max(0.1);
+        if (touch || matches!(self.menu.screen, Screen::OptionsPage(crate::menu::Page::Touch) | Screen::TouchEditor))
             && let Some(win) = &self.window
         {
             self.input.touch_insets = win.safe_insets();
@@ -46,7 +55,7 @@ impl Host {
         }
     }
 
-    pub(super) fn finger_event(&mut self, id: u64, phase: FingerPhase, x: f32, y: f32) {
+    pub(super) fn finger_event(&mut self, id: u64, phase: FingerPhase, x: f32, y: f32, timestamp_ns: u64) {
         let Some(win) = &self.window else { return };
         let (pw, ph) = win.drawable_size();
         let phase = match phase {
@@ -82,12 +91,12 @@ impl Host {
             KeyDest::Game if self.cl.intermission != 0 => self.pend_attack |= down,
             KeyDest::Game if self.cv("touch_enable") != 0.0 => {
                 let aspect = pw as f32 / ph.max(1) as f32;
-                self.handle_event(HostEvent::Input(InputEvent::Touch { id, phase, x, y, aspect }));
+                self.handle_event(HostEvent::Input(InputEvent::Touch { id, phase, x, y, aspect, timestamp_ns }));
             }
             KeyDest::Game if down && self.cl.signon == 4 => {
                 let mut layout = self.input.touch_layout(&self.server.core.cvars);
                 layout.aspect = pw as f32 / ph.max(1) as f32;
-                if layout.hits(&BUTTONS[PAUSE_BUTTON], [x, y]) {
+                if layout.hits(PAUSE_BUTTON, [x, y]) {
                     self.menu.open(Screen::Main);
                     self.sync_key_dest();
                 }
@@ -107,7 +116,7 @@ impl Host {
         match phase {
             TouchPhase::Down => {
                 if self.menu_touch.is_some() { return; }
-                let slider = self.menu.touch_slider_at(pos).is_some();
+                let slider = self.menu.screen == Screen::TouchEditor || self.menu.touch_slider_at(pos).is_some();
                 self.menu_touch = Some(MenuTouch {
                     id,
                     start: pos,

@@ -613,8 +613,8 @@ mk Најдолго замрзнување (мс)
 @ Look Down
 mk Погледни надолу
 
-@ Look Speed
-mk Брзина на погледот
+@ Look Acceleration
+mk Забрзување на погледот
 
 @ Look Up
 mk Погледни нагоре
@@ -4079,3 +4079,24 @@ mk 100% без штета
 
 @ Damage Skull
 mk Череп за штета
+
+@ A mild speed boost for fast swipes
+mk Брзите повлекувања го вртат погледот малку побрзо
+
+@ Phone Gyro
+mk Жироскоп на телефонот
+
+@ look zone
+mk зона за поглед
+
+@ while firing
+mk при пукање
+
+@ Uses the Android device’s motion sensor.
+mk Го користи сензорот за движење на уредот Android.
+
+@ Edit Layout
+mk Уреди го распоредот
+
+@ Drag to move
+mk Повлечете за преместување

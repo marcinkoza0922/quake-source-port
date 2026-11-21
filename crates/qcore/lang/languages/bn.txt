@@ -613,8 +613,8 @@ bn সর্বোচ্চ স্থিরতা (ms)
 @ Look Down
 bn নিচে তাকান
 
-@ Look Speed
-bn দৃষ্টির গতি
+@ Look Acceleration
+bn দৃশ্যের ত্বরণ
 
 @ Look Up
 bn উপরে তাকান
@@ -4079,3 +4079,24 @@ bn 100% ক্ষতি ছাড়া
 
 @ Damage Skull
 bn ক্ষতির খুলি
+
+@ A mild speed boost for fast swipes
+bn দ্রুত সোয়াইপে দৃশ্য একটু বেশি দ্রুত ঘোরে
+
+@ Phone Gyro
+bn ফোনের জাইরোস্কোপ
+
+@ look zone
+bn দৃশ্যের অঞ্চল
+
+@ while firing
+bn গুলি চালানোর সময়
+
+@ Uses the Android device’s motion sensor.
+bn Android ডিভাইসের মোশন সেন্সর ব্যবহার করে।
+
+@ Edit Layout
+bn বিন্যাস সম্পাদনা
+
+@ Drag to move
+bn সরাতে টানুন

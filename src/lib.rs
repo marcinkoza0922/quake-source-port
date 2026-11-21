@@ -317,12 +317,37 @@ fn run_engine(o: &Opts, fixed_step: Option<f64>) -> Result<(), (&'static str, St
             None => Vec::new(),
         };
         #[cfg(target_os = "android")]
+        let events = {
+            let was_backgrounded = host.backgrounded;
+            if let Some(win) = &host.window {
+                host.input.touch_size_cm = win.physical_size_cm();
+            }
+            for event in events {
+                host.handle_event(event);
+            }
+            if host.quit {
+                break;
+            }
+            if host.backgrounded != was_backgrounded && let Some(audio) = &audio {
+                let _ = if host.backgrounded { audio.pause() } else { audio.resume() };
+            }
+            if let (Some(p), Some(win)) = (&mut platform, &host.window) {
+                host.input.phone_gyro = p.phone_gyro(win, host.wants_phone_gyro());
+            }
+            if host.backgrounded {
+                continue;
+            }
+            Vec::new()
+        };
+        #[cfg(target_os = "android")]
         if let Some(win) = &host.window {
             if let Some(native) = win.android_window() {
                 let id = native.id();
-                host.r.sync_android_window(native, id, win.drawable_size())
+                let (w, h) = win.drawable_size();
+                host.r.sync_android_window(native, id, (w, h))
                     .map_err(|e| ("Quake graphics surface failed", e.to_string()))?;
-            } else if !events.iter().any(|event| matches!(event, platform::HostEvent::Quit)) {
+                host.r.resize(w, h);
+            } else {
                 std::thread::sleep(Duration::from_millis(10));
                 continue;
             }

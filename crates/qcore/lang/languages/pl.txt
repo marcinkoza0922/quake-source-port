@@ -613,8 +613,8 @@ pl Najdłuższe zamrożenie (ms)
 @ Look Down
 pl Patrz w dół
 
-@ Look Speed
-pl Szybkość patrzenia
+@ Look Acceleration
+pl Przyspieszenie celowania
 
 @ Look Up
 pl Patrz w górę
@@ -4079,3 +4079,24 @@ pl 100% bez obrażeń
 
 @ Damage Skull
 pl Czaszka obrażeń
+
+@ A mild speed boost for fast swipes
+pl Lekko przyspiesza obrót przy szybkim przesunięciu
+
+@ Phone Gyro
+pl Żyroskop telefonu
+
+@ look zone
+pl strefa celowania
+
+@ while firing
+pl podczas strzału
+
+@ Uses the Android device’s motion sensor.
+pl Używa czujnika ruchu urządzenia z Androidem.
+
+@ Edit Layout
+pl Edytuj układ
+
+@ Drag to move
+pl Przeciągnij, aby przesunąć

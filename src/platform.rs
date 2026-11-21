@@ -109,6 +109,9 @@ pub enum HostEvent {
     Quit,
     Resize,
     FocusLost,
+    WillEnterBackground,
+    DidEnterForeground,
+    Back,
     /// Absolute cursor position in window points (menus).
     MousePos { x: f32, y: f32 },
     /// Button-label family of a newly connected gamepad (`qplatform::family`).
@@ -118,7 +121,7 @@ pub enum HostEvent {
     Pad(u32, InputEvent),
     PadRemoved(u32),
     /// Touchscreen finger, window-normalised.
-    Finger { id: u64, phase: qplatform::FingerPhase, x: f32, y: f32 },
+    Finger { id: u64, phase: qplatform::FingerPhase, x: f32, y: f32, timestamp_ns: u64 },
 }
 
 pub fn convert(e: Event) -> Vec<HostEvent> {
@@ -165,9 +168,12 @@ pub fn convert(e: Event) -> Vec<HostEvent> {
         }
         Event::GamepadRemoved { id } => vec![HostEvent::Input(InputEvent::GamepadConnected(false)), HostEvent::PadRemoved(id)],
         Event::GamepadGyro { id, data, .. } => vec![HostEvent::Pad(id, InputEvent::Gyro { pitch: data[0], yaw: data[1], roll: data[2] })],
-        Event::Finger { id, phase, x, y } => vec![HostEvent::Finger { id, phase, x, y }],
+        Event::Finger { id, phase, x, y, timestamp_ns } => vec![HostEvent::Finger { id, phase, x, y, timestamp_ns }],
         Event::Resize { .. } => vec![HostEvent::Resize],
         Event::FocusGained => Vec::new(),
         Event::FocusLost => vec![HostEvent::FocusLost],
+        Event::WillEnterBackground => vec![HostEvent::WillEnterBackground],
+        Event::DidEnterForeground => vec![HostEvent::DidEnterForeground],
+        Event::Back => vec![HostEvent::Back],
     }
 }

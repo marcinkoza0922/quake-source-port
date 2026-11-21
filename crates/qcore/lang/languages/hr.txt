@@ -613,8 +613,8 @@ hr Najdulje zamrzavanje (ms)
 @ Look Down
 hr Pogled dolje
 
-@ Look Speed
-hr Brzina pogleda
+@ Look Acceleration
+hr Ubrzanje pogleda
 
 @ Look Up
 hr Pogled gore
@@ -4079,3 +4079,24 @@ hr 100% bez štete
 
 @ Damage Skull
 hr Lubanja za štetu
+
+@ A mild speed boost for fast swipes
+hr Brzi potezi malo ubrzavaju pogled
+
+@ Phone Gyro
+hr Žiroskop telefona
+
+@ look zone
+hr zona pogleda
+
+@ while firing
+hr pri pucanju
+
+@ Uses the Android device’s motion sensor.
+hr Koristi senzor pokreta uređaja Android.
+
+@ Edit Layout
+hr Uredi raspored
+
+@ Drag to move
+hr Povuci za pomicanje

@@ -613,8 +613,8 @@ et Pikim külmutus (ms)
 @ Look Down
 et Vaata alla
 
-@ Look Speed
-et Vaate kiirus
+@ Look Acceleration
+et Vaate kiirendus
 
 @ Look Up
 et Vaata üles
@@ -4079,3 +4079,24 @@ et 100% kahjudeta
 
 @ Damage Skull
 et Kahjupealuu
+
+@ A mild speed boost for fast swipes
+et Kiire viibe pöörab vaadet veidi kiiremini
+
+@ Phone Gyro
+et Telefoni güroskoop
+
+@ look zone
+et vaateala
+
+@ while firing
+et tulistades
+
+@ Uses the Android device’s motion sensor.
+et Kasutab Android-seadme liikumisandurit.
+
+@ Edit Layout
+et Muuda paigutust
+
+@ Drag to move
+et Liigutamiseks lohista

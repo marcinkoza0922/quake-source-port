@@ -230,7 +230,7 @@ fn gamepad_assist_rotates_but_mouse_does_not() {
 
 #[test]
 fn touch_assist_only_scales_live_drag_toward_visible_targets() {
-    use touch::{BUTTONS, TouchPhase};
+    use touch::TouchPhase;
 
     struct Blocked;
     impl aim::Visibility for Blocked {
@@ -243,9 +243,9 @@ fn touch_assist_only_scales_live_drag_toward_visible_targets() {
     let blocked = AimContext { vis: &Blocked, ..ctx };
     let denied = AimContext { allowed: false, ..ctx };
     let layout = h.input.touch_layout(&h.cvars);
-    let ([x, y], _) = layout.button(&BUTTONS[0]);
+    let ([x, y], _) = layout.button(0);
     let finger = |h: &mut Host, id, phase, x, y| {
-        handle_event(h, InputEvent::Touch { id, phase, x, y, aspect: layout.aspect });
+        handle_event(h, InputEvent::Touch { id, phase, x, y, aspect: layout.aspect, timestamp_ns: 0 });
     };
     finger(&mut h, 2, TouchPhase::Down, 0.2, 0.6);
     finger(&mut h, 2, TouchPhase::Move, 0.2, 0.5);
@@ -394,4 +394,38 @@ fn dodge_action_registers_and_preserves_brief_presses() {
     run(&mut h, "+dodge 42\n-dodge 42\n");
     assert!(h.input.dodge_pressed());
     assert!(!h.input.dodge_pressed());
+}
+
+#[test]
+fn phone_gyro_can_aim_without_a_controller_and_obeys_touch_and_fire_modes() {
+    use touch::TouchPhase;
+
+    let mut h = host();
+    h.input.phone_gyro = Some([0.0, 1.0, 0.0]);
+    h.cvars.set("gyro_phone_mode", "1");
+    let always = frame(&mut h, None).look_delta[0];
+    assert!(always > 0.0);
+
+    h.cvars.set("gyro_phone_mode", "2");
+    assert_eq!(frame(&mut h, None).look_delta[0], 0.0);
+    let touch = |h: &mut Host, phase, [x, y]: [f32; 2]| {
+        handle_event(h, InputEvent::Touch { id: 1, phase, x, y, aspect: 1.8, timestamp_ns: 0 });
+    };
+    touch(&mut h, TouchPhase::Down, [0.3, 0.3]);
+    assert_eq!(frame(&mut h, None).look_delta[0], 0.0);
+    touch(&mut h, TouchPhase::Up, [0.3, 0.3]);
+    touch(&mut h, TouchPhase::Down, [0.7, 0.3]);
+    assert_eq!(frame(&mut h, None).look_delta[0], always);
+    touch(&mut h, TouchPhase::Cancel, [0.7, 0.3]);
+    assert_eq!(frame(&mut h, None).look_delta[0], 0.0);
+
+    h.cvars.set("gyro_phone_mode", "3");
+    run(&mut h, "+attack 1\n");
+    assert_eq!(frame(&mut h, None).look_delta[0], always);
+    run(&mut h, "-attack 1\n");
+    assert_eq!(frame(&mut h, None).look_delta[0], 0.0);
+
+    h.cvars.set("gyro_phone_mode", "1");
+    set_key_dest(&mut h, KeyDest::Menu);
+    assert_eq!(frame(&mut h, None).look_delta[0], 0.0);
 }

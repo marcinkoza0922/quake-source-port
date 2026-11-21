@@ -613,8 +613,8 @@ ur سب سے لمبا جمود (ms)
 @ Look Down
 ur نیچے دیکھیں
 
-@ Look Speed
-ur دیکھنے کی رفتار
+@ Look Acceleration
+ur نظر کی رفتار میں اضافہ
 
 @ Look Up
 ur اوپر دیکھیں
@@ -4079,3 +4079,24 @@ ur 100% بغیر نقصان
 
 @ Damage Skull
 ur نقصان کی کھوپڑی
+
+@ A mild speed boost for fast swipes
+ur تیزی سے سوائپ کرنے پر منظر کچھ زیادہ تیزی سے گھومتا ہے
+
+@ Phone Gyro
+ur فون جائروسکوپ
+
+@ look zone
+ur نظر کا علاقہ
+
+@ while firing
+ur فائر کرتے وقت
+
+@ Uses the Android device’s motion sensor.
+ur Android آلے کا حرکتی سینسر استعمال کرتا ہے۔
+
+@ Edit Layout
+ur ترتیب میں ترمیم
+
+@ Drag to move
+ur منتقل کرنے کے لیے گھسیٹیں

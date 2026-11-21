@@ -613,8 +613,8 @@ el Μέγιστο πάγωμα (ms)
 @ Look Down
 el Κοίτα κάτω
 
-@ Look Speed
-el Ταχύτητα θέας
+@ Look Acceleration
+el Επιτάχυνση θέασης
 
 @ Look Up
 el Κοίτα πάνω
@@ -4079,3 +4079,24 @@ el 100% χωρίς ζημιά
 
 @ Damage Skull
 el Κρανίο ζημιάς
+
+@ A mild speed boost for fast swipes
+el Οι γρήγορες σαρώσεις στρέφουν ελαφρώς πιο γρήγορα την κάμερα
+
+@ Phone Gyro
+el Γυροσκόπιο τηλεφώνου
+
+@ look zone
+el ζώνη σκόπευσης
+
+@ while firing
+el κατά τη βολή
+
+@ Uses the Android device’s motion sensor.
+el Χρησιμοποιεί τον αισθητήρα κίνησης της συσκευής Android.
+
+@ Edit Layout
+el Επεξεργασία διάταξης
+
+@ Drag to move
+el Σύρετε για μετακίνηση

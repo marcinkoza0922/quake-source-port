@@ -613,8 +613,8 @@ hu Leghosszabb fagyasztás (ms)
 @ Look Down
 hu Lenézés
 
-@ Look Speed
-hu Nézési sebesség
+@ Look Acceleration
+hu Nézetgyorsítás
 
 @ Look Up
 hu Felnézés
@@ -4079,3 +4079,24 @@ hu 100% sebződés nélkül
 
 @ Damage Skull
 hu Sebzéskoponya
+
+@ A mild speed boost for fast swipes
+hu Gyors húzáskor kissé gyorsabban fordul a nézet
+
+@ Phone Gyro
+hu Telefon giroszkópja
+
+@ look zone
+hu nézetzóna
+
+@ while firing
+hu lövéskor
+
+@ Uses the Android device’s motion sensor.
+hu Az Android-eszköz mozgásérzékelőjét használja.
+
+@ Edit Layout
+hu Elrendezés szerkesztése
+
+@ Drag to move
+hu Húzd az áthelyezéshez

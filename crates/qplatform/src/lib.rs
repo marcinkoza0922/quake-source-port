@@ -89,11 +89,14 @@ pub enum Event {
     GamepadGyro { id: u32, data: [f32; 3], timestamp_ns: u64 },
     /// Touchscreen finger; `x`/`y` normalised to the window (0..1). Touches
     /// no longer also arrive as mouse events.
-    Finger { id: u64, phase: FingerPhase, x: f32, y: f32 },
+    Finger { id: u64, phase: FingerPhase, x: f32, y: f32, timestamp_ns: u64 },
     /// Drawable (pixel) size changed.
     Resize { width: u32, height: u32 },
     FocusGained,
     FocusLost,
+    WillEnterBackground,
+    DidEnterForeground,
+    Back,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

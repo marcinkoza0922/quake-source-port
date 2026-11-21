@@ -1,15 +1,17 @@
 use super::*;
 
 impl Host {
-    pub(super) fn handle_event(&mut self, ev: HostEvent) {
+    pub(crate) fn handle_event(&mut self, ev: HostEvent) {
         match ev {
             HostEvent::Quit => self.quit = true,
+            #[cfg(target_os = "android")]
+            HostEvent::Resize => {},
+            #[cfg(not(target_os = "android"))]
             HostEvent::Resize => {
                 if let Some(win) = &self.window {
                     let (w, h) = win.drawable_size();
                     self.r.resize(w, h);
                     // remember user-resized window size
-                    #[cfg(not(target_os = "android"))]
                     if self.cv("vid_fullscreen") == 0.0 {
                         let (ww, wh) = win.window_size();
                         let cv = &mut self.server.core.cvars;
@@ -18,9 +20,24 @@ impl Host {
                     }
                 }
             }
-            HostEvent::FocusLost => {
-                qinput::release_touch(self);
-                self.cancel_menu_touch();
+            HostEvent::FocusLost => self.pause_for_focus_loss(),
+            HostEvent::WillEnterBackground => {
+                if !std::mem::replace(&mut self.backgrounded, true) {
+                    self.pause_for_focus_loss();
+                    self.background_autosave();
+                    self.write_config();
+                }
+            }
+            HostEvent::DidEnterForeground => self.backgrounded = false,
+            _ if self.backgrounded => {},
+            HostEvent::Back => {
+                match self.key_dest() {
+                    KeyDest::Game => self.menu.open(Screen::Main),
+                    KeyDest::Menu => self.menu_key(K_ESCAPE),
+                    KeyDest::Console => self.console_key(K_ESCAPE),
+                    KeyDest::Message => { self.con.chat_key(K_ESCAPE); }
+                }
+                self.sync_key_dest();
             }
             HostEvent::PadFamily(id, family) => {
                 let family = crate::glyphs::Family::from_platform(family);
@@ -31,7 +48,7 @@ impl Host {
             }
             HostEvent::Pad(id, ie) => self.pad_event(id, ie),
             HostEvent::PadRemoved(id) => self.pad_removed(id),
-            HostEvent::Finger { id, phase, x, y } => self.finger_event(id, phase, x, y),
+            HostEvent::Finger { id, phase, x, y, timestamp_ns } => self.finger_event(id, phase, x, y, timestamp_ns),
             HostEvent::MousePos { x, y } => {
                 let Some(win) = &self.window else { return };
                 let (pw, ph) = win.drawable_size();
@@ -245,6 +262,17 @@ impl Host {
                 self.sync_key_dest();
             }
         }
+    }
+
+    fn pause_for_focus_loss(&mut self) {
+        qinput::release_touch(self);
+        self.cancel_menu_touch();
+        self.menu.mouse_up();
+        self.input.phone_gyro = None;
+        if self.local_single_player() && !self.menu.active() {
+            self.menu.open(Screen::Main);
+        }
+        self.sync_key_dest();
     }
 
     fn console_key(&mut self, key: i32) {

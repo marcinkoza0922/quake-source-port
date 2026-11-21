@@ -613,8 +613,8 @@ tr En Uzun Donma (ms)
 @ Look Down
 tr Aşağı Bak
 
-@ Look Speed
-tr Bakış Hızı
+@ Look Acceleration
+tr Bakış hızlandırma
 
 @ Look Up
 tr Yukarı Bak
@@ -4079,3 +4079,24 @@ tr 100% hasarsız
 
 @ Damage Skull
 tr Hasar kafatası
+
+@ A mild speed boost for fast swipes
+tr Hızlı kaydırmalarda dönüşü biraz hızlandırır
+
+@ Phone Gyro
+tr Telefon jiroskopu
+
+@ look zone
+tr bakış alanı
+
+@ while firing
+tr ateş ederken
+
+@ Uses the Android device’s motion sensor.
+tr Android cihazın hareket sensörünü kullanır.
+
+@ Edit Layout
+tr Düzeni düzenle
+
+@ Drag to move
+tr Taşımak için sürükle

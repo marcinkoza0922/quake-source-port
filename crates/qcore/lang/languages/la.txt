@@ -613,8 +613,8 @@ la Congelatio longissima (ms)
 @ Look Down
 la Deorsum spectare
 
-@ Look Speed
-la Celeritas aspectus
+@ Look Acceleration
+la Acceleratio Visus
 
 @ Look Up
 la Sursum spectare
@@ -4079,3 +4079,24 @@ la 100% sine damno
 
 @ Damage Skull
 la Calvaria damni
+
+@ A mild speed boost for fast swipes
+la Tractus celeres visum paulo celerius convertunt
+
+@ Phone Gyro
+la Gyroscopium Telephoni
+
+@ look zone
+la regio visus
+
+@ while firing
+la dum iacis
+
+@ Uses the Android device’s motion sensor.
+la Sensore motus instrumenti Android utitur.
+
+@ Edit Layout
+la Dispositionem Mutare
+
+@ Drag to move
+la Trahe ut moveas

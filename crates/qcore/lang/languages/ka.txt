@@ -613,8 +613,8 @@ ka უგრძესი გაყინვა (მწმ)
 @ Look Down
 ka ქვემოთ ყურება
 
-@ Look Speed
-ka ხედის სიჩქარე
+@ Look Acceleration
+ka ხედვის აჩქარება
 
 @ Look Up
 ka ზემოთ ყურება
@@ -4079,3 +4079,24 @@ ka 100% დაზიანების გარეშე
 
 @ Damage Skull
 ka დაზიანების თავის ქალა
+
+@ A mild speed boost for fast swipes
+ka სწრაფი გასმა ხედს ოდნავ უფრო სწრაფად აბრუნებს
+
+@ Phone Gyro
+ka ტელეფონის გიროსკოპი
+
+@ look zone
+ka ხედვის ზონა
+
+@ while firing
+ka სროლისას
+
+@ Uses the Android device’s motion sensor.
+ka იყენებს Android მოწყობილობის მოძრაობის სენსორს.
+
+@ Edit Layout
+ka განლაგების შეცვლა
+
+@ Drag to move
+ka გადაათრიეთ გადასაადგილებლად

@@ -613,8 +613,8 @@ sr Најдуже замрзавање (ms)
 @ Look Down
 sr Поглед надоле
 
-@ Look Speed
-sr Брзина погледа
+@ Look Acceleration
+sr Убрзање погледа
 
 @ Look Up
 sr Поглед нагоре
@@ -4079,3 +4079,24 @@ sr 100% без штете
 
 @ Damage Skull
 sr Лобања при повреди
+
+@ A mild speed boost for fast swipes
+sr Брзи потези мало убрзавају окретање погледа
+
+@ Phone Gyro
+sr Жироскоп телефона
+
+@ look zone
+sr зона погледа
+
+@ while firing
+sr при пуцању
+
+@ Uses the Android device’s motion sensor.
+sr Користи сензор покрета Android уређаја.
+
+@ Edit Layout
+sr Уреди распоред
+
+@ Drag to move
+sr Превуци за померање

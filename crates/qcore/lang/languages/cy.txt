@@ -613,8 +613,8 @@ cy Rhewi hiraf (ms)
 @ Look Down
 cy Edrych i lawr
 
-@ Look Speed
-cy Cyflymder edrych
+@ Look Acceleration
+cy Cyflymiad yr Olygfa
 
 @ Look Up
 cy Edrych i fyny
@@ -4079,3 +4079,24 @@ cy 100% heb ddifrod
 
 @ Damage Skull
 cy Penglog difrod
+
+@ A mild speed boost for fast swipes
+cy Mae llusgiadau cyflym yn troi’r olygfa ychydig yn gynt
+
+@ Phone Gyro
+cy Gyrosgop y Ffôn
+
+@ look zone
+cy ardal edrych
+
+@ while firing
+cy wrth danio
+
+@ Uses the Android device’s motion sensor.
+cy Yn defnyddio synhwyrydd symud y ddyfais Android.
+
+@ Edit Layout
+cy Golygu’r Cynllun
+
+@ Drag to move
+cy Llusgwch i symud

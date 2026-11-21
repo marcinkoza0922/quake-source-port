@@ -66,6 +66,7 @@ pub(super) enum Run {
     ResetBulletTime,
     ResetHitstop,
     ResetTouch,
+    EditTouch,
     /// Every gameplay modifier back to its default (standard rules).
     ResetModifiers,
     /// Export dialog: the highlighted clip (dimmed without one), or all.
@@ -298,12 +299,15 @@ pub(super) const GYRO: &[Item] = &[
     toggle("Gyro Aiming", "gyro_enable"),
     Item::Choice { label: "Aim Style", cvar: "joy_flick", choices: AIM_STYLE },
     Item::Choice { label: "Gyro Active", cvar: "gyro_mode", choices: GYRO_MODE },
+    Item::Choice { label: "Phone Gyro", cvar: "gyro_phone_mode", choices: PHONE_GYRO_MODE },
     slider("Yaw Sensitivity", "gyro_yawsensitivity", 0.0, 10.0, 0.25),
     slider("Pitch Sensitivity", "gyro_pitchsensitivity", 0.0, 10.0, 0.25),
     slider("Roll Sensitivity", "gyro_rollsensitivity", -10.0, 10.0, 0.25),
     slider("Noise Filter", "gyro_noise_thresh", 0.0, 5.0, 0.25),
     slider("Flick Time", "joy_flick_time", 0.05, 0.5, 0.025),
 ];
+
+pub(super) const PHONE_GYRO_MODE: &[(&str, f32)] = &[("off", 0.0), ("always", 1.0), ("look zone", 2.0), ("while firing", 3.0)];
 
 pub(super) const AIM_STYLE: &[(&str, f32)] = &[("2D aiming", 0.0), ("flick stick", 1.0)];
 pub(super) const GYRO_MODE: &[(&str, f32)] = &[("always", 0.0), ("off while held", 1.0), ("only while held", 2.0)];

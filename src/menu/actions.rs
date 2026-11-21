@@ -20,6 +20,12 @@ impl Menu {
 
     pub(super) fn run(&mut self, run: Run, cv: &mut Cvars, out: &mut Vec<Action>) {
         match run {
+            Run::EditTouch => {
+                self.screen = Screen::TouchEditor;
+                self.touch_editor = Default::default();
+                out.push(Action::Sound("misc/menu2.wav"));
+                return;
+            }
             Run::ResetTouch => {
                 touch::reset(cv);
                 out.push(Action::Sound("misc/menu3.wav"));

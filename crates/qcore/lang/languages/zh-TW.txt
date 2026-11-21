@@ -613,8 +613,8 @@ zh-TW 最長凍結（毫秒）
 @ Look Down
 zh-TW 向下看
 
-@ Look Speed
-zh-TW 視角速度
+@ Look Acceleration
+zh-TW 視角加速
 
 @ Look Up
 zh-TW 向上看
@@ -4079,3 +4079,24 @@ zh-TW 100% 無傷
 
 @ Damage Skull
 zh-TW 受傷骷髏
+
+@ A mild speed boost for fast swipes
+zh-TW 快速滑動時略微提高轉動速度
+
+@ Phone Gyro
+zh-TW 手機陀螺儀
+
+@ look zone
+zh-TW 視角區
+
+@ while firing
+zh-TW 開火時
+
+@ Uses the Android device’s motion sensor.
+zh-TW 使用 Android 裝置的動作感測器。
+
+@ Edit Layout
+zh-TW 編輯配置
+
+@ Drag to move
+zh-TW 拖曳以移動

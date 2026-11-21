@@ -613,8 +613,8 @@ sw Kuganda Kurefu Zaidi (ms)
 @ Look Down
 sw Angalia Chini
 
-@ Look Speed
-sw Kasi ya Kuangalia
+@ Look Acceleration
+sw Uongezaji Kasi ya Mtazamo
 
 @ Look Up
 sw Angalia Juu
@@ -4079,3 +4079,24 @@ sw 100% bila madhara
 
 @ Damage Skull
 sw Fuvu la madhara
+
+@ A mild speed boost for fast swipes
+sw Kutelezesha kidole haraka hugeuza mtazamo kwa kasi zaidi kidogo
+
+@ Phone Gyro
+sw Jiroskopu ya Simu
+
+@ look zone
+sw eneo la mtazamo
+
+@ while firing
+sw unapofyatua
+
+@ Uses the Android device’s motion sensor.
+sw Hutumia kitambuzi cha mwendo cha kifaa cha Android.
+
+@ Edit Layout
+sw Hariri Mpangilio
+
+@ Drag to move
+sw Buruta ili kusogeza

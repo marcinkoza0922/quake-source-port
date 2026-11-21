@@ -19,6 +19,12 @@ impl Menu {
             }
             return;
         }
+        if self.screen == Screen::TouchEditor {
+            c.fade_screen();
+            self.canvas_layout(c);
+            self.draw_touch_editor(c, cv);
+            return;
+        }
         c.fade_screen();
         let base_scale = c.scale;
         self.canvas_layout(c);
@@ -206,7 +212,7 @@ impl Menu {
                     txt(c, 168.0, y + 4.0, &format!("{}. {}", i + 1, qcore::lang::tr(label)));
                 }
             }
-            Screen::None | Screen::HudEditor => {}
+            Screen::None | Screen::HudEditor | Screen::TouchEditor => {}
         }
         self.canvas_layout(c);
         if let Some(o) = self.osk {

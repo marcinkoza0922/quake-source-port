@@ -613,8 +613,8 @@ km ការ​កក​យូរ​បំផុត (ms)
 @ Look Down
 km មើល​ចុះ​ក្រោម
 
-@ Look Speed
-km ល្បឿន​មើល
+@ Look Acceleration
+km ការ​បង្កើន​ល្បឿន​បង្វិល​ទិដ្ឋភាព
 
 @ Look Up
 km មើល​ឡើង​លើ
@@ -4079,3 +4079,24 @@ km 100% គ្មាន​ការ​ខូចខាត
 
 @ Damage Skull
 km លលាដ៍ក្បាល​ពេល​រង​របួស
+
+@ A mild speed boost for fast swipes
+km អូស​លឿន​ដើម្បី​បង្វិល​ទិដ្ឋភាព​លឿន​ជាង​មុន​បន្តិច
+
+@ Phone Gyro
+km ជី​រ៉ូ​ស្កុប​ទូរស័ព្ទ
+
+@ look zone
+km តំបន់​បង្វិល​ទិដ្ឋភាព
+
+@ while firing
+km ពេល​បាញ់
+
+@ Uses the Android device’s motion sensor.
+km ប្រើ​ឧបករណ៍​ចាប់​ចលនា​របស់​ឧបករណ៍​ ​Android​។
+
+@ Edit Layout
+km កែ​ប្លង់
+
+@ Drag to move
+km អូស​ដើម្បី​ផ្លាស់ទី

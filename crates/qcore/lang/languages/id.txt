@@ -613,8 +613,8 @@ id Beku Terlama (ms)
 @ Look Down
 id Lihat ke Bawah
 
-@ Look Speed
-id Kecepatan Pandangan
+@ Look Acceleration
+id Akselerasi Pandangan
 
 @ Look Up
 id Lihat ke Atas
@@ -4079,3 +4079,24 @@ id 100% tanpa kerusakan
 
 @ Damage Skull
 id Tengkorak kerusakan
+
+@ A mild speed boost for fast swipes
+id Sedikit mempercepat putaran saat mengusap cepat
+
+@ Phone Gyro
+id Giroskop Ponsel
+
+@ look zone
+id zona pandangan
+
+@ while firing
+id saat menembak
+
+@ Uses the Android device’s motion sensor.
+id Menggunakan sensor gerak perangkat Android.
+
+@ Edit Layout
+id Edit Tata Letak
+
+@ Drag to move
+id Seret untuk memindah

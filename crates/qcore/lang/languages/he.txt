@@ -613,8 +613,8 @@ he הקפאה ארוכה ביותר (ms)
 @ Look Down
 he מבט למטה
 
-@ Look Speed
-he מהירות מבט
+@ Look Acceleration
+he האצת מבט
 
 @ Look Up
 he מבט למעלה
@@ -4079,3 +4079,24 @@ he 100% ללא נזק
 
 @ Damage Skull
 he גולגולת נזק
+
+@ A mild speed boost for fast swipes
+he החלקות מהירות מסובבות את המבט מעט מהר יותר
+
+@ Phone Gyro
+he גירוסקופ הטלפון
+
+@ look zone
+he אזור המבט
+
+@ while firing
+he בזמן ירי
+
+@ Uses the Android device’s motion sensor.
+he משתמש בחיישן התנועה של מכשיר ה-Android.
+
+@ Edit Layout
+he עריכת פריסה
+
+@ Drag to move
+he גרור כדי להזיז

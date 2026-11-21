@@ -613,8 +613,8 @@ da Længste frysning (ms)
 @ Look Down
 da Kig ned
 
-@ Look Speed
-da Kighastighed
+@ Look Acceleration
+da Kameraacceleration
 
 @ Look Up
 da Kig op
@@ -4079,3 +4079,24 @@ da 100% uden skade
 
 @ Damage Skull
 da Skadekranium
+
+@ A mild speed boost for fast swipes
+da Hurtige strøg drejer visningen lidt hurtigere
+
+@ Phone Gyro
+da Telefonens gyro
+
+@ look zone
+da sigteområde
+
+@ while firing
+da ved skud
+
+@ Uses the Android device’s motion sensor.
+da Bruger Android-enhedens bevægelsessensor.
+
+@ Edit Layout
+da Rediger layout
+
+@ Drag to move
+da Træk for at flytte

@@ -613,8 +613,8 @@ fi Pisin jäädytys (ms)
 @ Look Down
 fi Katso alas
 
-@ Look Speed
-fi Katseen nopeus
+@ Look Acceleration
+fi Katselun kiihtyvyys
 
 @ Look Up
 fi Katso ylös
@@ -4079,3 +4079,24 @@ fi 100% ilman vahinkoa
 
 @ Damage Skull
 fi Vahinkokallo
+
+@ A mild speed boost for fast swipes
+fi Nopeat pyyhkäisyt kääntävät näkymää hieman nopeammin
+
+@ Phone Gyro
+fi Puhelimen gyroskooppi
+
+@ look zone
+fi katselualue
+
+@ while firing
+fi ammuttaessa
+
+@ Uses the Android device’s motion sensor.
+fi Käyttää Android-laitteen liikeanturia.
+
+@ Edit Layout
+fi Muokkaa asettelua
+
+@ Drag to move
+fi Siirrä vetämällä

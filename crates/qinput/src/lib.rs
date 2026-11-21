@@ -104,7 +104,7 @@ pub enum InputEvent {
     GamepadConnected(bool),
     /// Finger on the touchscreen: window-normalised position, window
     /// width/height.
-    Touch { id: u64, phase: touch::TouchPhase, x: f32, y: f32, aspect: f32 },
+    Touch { id: u64, phase: touch::TouchPhase, x: f32, y: f32, aspect: f32, timestamp_ns: u64 },
 }
 
 /// Events the console/menu must handle (not routed to binds).
@@ -219,6 +219,7 @@ cvars! {
     joy_flick_adjust_speed = "joy_flick_adjust_speed", "30.0";
     gyro_enable = "gyro_enable", "0";
     gyro_mode = "gyro_mode", "0";
+    gyro_phone_mode = "gyro_phone_mode", "0";
     gyro_yawsensitivity = "gyro_yawsensitivity", "2.5";
     gyro_pitchsensitivity = "gyro_pitchsensitivity", "2.5";
     gyro_rollsensitivity = "gyro_rollsensitivity", "0";
@@ -240,7 +241,10 @@ cvars! {
     in_toggleattack = "in_toggleattack", "0";
     in_togglerun = "in_togglerun", "0";
     touch_enable = "touch_enable", "1";
-    touch_sensitivity = "touch_sensitivity", "1";
+    touch_yaw_sensitivity = "touch_yaw_sensitivity", "28";
+    touch_pitch_sensitivity = "touch_pitch_sensitivity", "28";
+    touch_acceleration = "touch_acceleration", "0";
+    touch_layout = "touch_layout", "";
     touch_size = "touch_size", "1";
     touch_opacity = "touch_opacity", "0.5";
     touch_invert = "touch_invert", "0";
@@ -268,6 +272,7 @@ pub struct Input {
     old_mouse: [f32; 2],
     axes: [f32; 6],
     gyro: [f32; 3],
+    pub phone_gyro: Option<[f32; 3]>,
     pub gamepad_connected: bool,
     pub last_look: LookDevice,
     /// Device of the last deliberate input (buttons, sticks, keys, mouse).
@@ -293,6 +298,7 @@ pub struct Input {
     pub touch: touch::TouchOverlay,
     /// Window width/height from the last touch, for the stick.
     pub touch_aspect: f32,
+    pub touch_size_cm: Option<[f32; 2]>,
     pub touch_insets: [f32; 4],
 }
 
@@ -311,6 +317,7 @@ impl Input {
             old_mouse: [0.0; 2],
             axes: [0.0; 6],
             gyro: [0.0; 3],
+            phone_gyro: None,
             gamepad_connected: false,
             last_look: LookDevice::Mouse,
             last_device: if cfg!(target_os = "android") { Device::Touch } else { Device::KeyboardMouse },
@@ -328,6 +335,7 @@ impl Input {
             touch: touch::TouchOverlay::default(),
             touch_aspect: 16.0 / 9.0,
             touch_insets: [0.0; 4],
+            touch_size_cm: None,
         }
     }
 
@@ -367,12 +375,7 @@ impl Input {
     }
     /// Layout of the on-screen controls.
     pub fn touch_layout(&self, cvars: &Cvars) -> touch::TouchLayout {
-        touch::TouchLayout::new(
-            self.touch_aspect,
-            cvars.value(self.cv.touch_size),
-            cvars.value(self.cv.touch_left_handed) >= 0.5,
-            self.touch_insets,
-        )
+        touch::TouchLayout::from_cvars(cvars, self.touch_aspect, self.touch_insets)
     }
     /// Whether the on-screen controls should be drawn and used.
     pub fn touch_visible(&self, cvars: &Cvars) -> bool {
@@ -427,7 +430,6 @@ macro_rules! toggle_button_cmds {
     }};
 }
 
-
 macro_rules! button_cmds {
     ($c:expr, $($i:expr),*) => {$(
         $c.add(&format!("+{}", btn::NAMES[$i]), |ctx, a| ctx.input().buttons[$i].press(key_arg(a)));
@@ -476,7 +478,6 @@ pub fn register_commands<C: InputHost>(c: &mut Commands<C>) {
         ctx.print(&format!("{} bindings\n", lines.len()));
     });
 }
-
 
 #[cfg(test)]
 mod tests;

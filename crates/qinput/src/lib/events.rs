@@ -178,7 +178,7 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
             ctx.input().gyro = [pitch, yaw, roll];
             None
         }
-        InputEvent::Touch { id, phase, x, y, aspect } => {
+        InputEvent::Touch { id, phase, x, y, aspect, timestamp_ns } => {
             if phase == touch::TouchPhase::Down {
                 ctx.input().last_device = Device::Touch;
             }
@@ -191,10 +191,12 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
                 inp.last_look = LookDevice::Touch;
             }
             inp.touch_aspect = aspect.max(0.1);
-            let (size, handed, insets) = (inp.cv.touch_size, inp.cv.touch_left_handed, inp.touch_insets);
+            let insets = inp.touch_insets;
+            let (size_cm, acceleration) = (inp.touch_size_cm, inp.cv.touch_acceleration);
             let cv = ctx.cvars();
-            let lay = touch::TouchLayout::new(aspect, cv.value(size), cv.value(handed) >= 0.5, insets);
-            let cmds = ctx.input().touch.event(id, phase, [x, y], &lay);
+            let lay = touch::TouchLayout::from_cvars(cv, aspect, insets);
+            let look = touch::TouchLook { size_cm, acceleration: cv.value(acceleration).clamp(0.0, 1.0) * 0.5 };
+            let cmds = ctx.input().touch.event(id, phase, [x, y], timestamp_ns, &lay, look);
             for c in cmds {
                 ctx.cbuf().add_text(&c);
             }

@@ -51,6 +51,7 @@ mod dir_browser;
 mod weapon_priority;
 mod server_browser;
 mod touch;
+mod touch_editor;
 pub(crate) use server_browser::SearchStatus;
 pub mod demos;
 
@@ -77,6 +78,7 @@ pub enum Screen {
     Demos,
     /// Options → HUD → Edit HUD.
     HudEditor,
+    TouchEditor,
     /// Options → Gameplay → User Data Directory explorer.
     DirBrowser,
 }
@@ -207,6 +209,8 @@ pub struct Menu {
     sub_return: Option<(Page, Page, usize)>,
     touch_shortcut: bool,
     pub touch_insets: [f32; 4],
+    pub touch_aspect: f32,
+    touch_editor: touch_editor::Editor,
     touch_from_main: bool,
     pub mods: ModMenu,
     pub demos: demos::DemoBrowser,
@@ -356,6 +360,8 @@ impl Menu {
             sub_return: None,
             touch_shortcut: false,
             touch_insets: [0.0; 4],
+            touch_aspect: 16.0 / 9.0,
+            touch_editor: Default::default(),
             touch_from_main: false,
             mods: ModMenu::default(),
             demos: Default::default(),
@@ -558,7 +564,7 @@ impl Menu {
                 .position(|&bx| x >= bx && x < bx + QUIT_BTN.0 && y >= QUIT_BTN_Y && y < QUIT_BTN_Y + QUIT_BTN.1),
             Screen::Mods | Screen::ModMaps | Screen::ModOnline => self.mods.item_at(self.mods_page(), (x, y)),
             Screen::Help => self.help.item_at((x, y)),
-            Screen::Demos | Screen::None | Screen::HudEditor | Screen::DirBrowser | Screen::ServerBrowser => None,
+            Screen::Demos | Screen::None | Screen::HudEditor | Screen::TouchEditor | Screen::DirBrowser | Screen::ServerBrowser => None,
         }
     }
 
@@ -587,7 +593,7 @@ impl Menu {
             }
             // hovering doesn't switch sections; a click does
             Screen::Help => None,
-            Screen::Demos | Screen::None | Screen::HudEditor | Screen::DirBrowser | Screen::ServerBrowser => None,
+            Screen::Demos | Screen::None | Screen::HudEditor | Screen::TouchEditor | Screen::DirBrowser | Screen::ServerBrowser => None,
         }
     }
 

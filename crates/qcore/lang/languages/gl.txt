@@ -613,8 +613,8 @@ gl Conxelación máis longa (ms)
 @ Look Down
 gl Mirar abaixo
 
-@ Look Speed
-gl Velocidade da vista
+@ Look Acceleration
+gl Aceleración da vista
 
 @ Look Up
 gl Mirar arriba
@@ -4079,3 +4079,24 @@ gl 100% sen dano
 
 @ Damage Skull
 gl Caveira de dano
+
+@ A mild speed boost for fast swipes
+gl Os xestos rápidos xiran a vista un pouco máis rápido
+
+@ Phone Gyro
+gl Xiroscopio do teléfono
+
+@ look zone
+gl zona de vista
+
+@ while firing
+gl ao disparar
+
+@ Uses the Android device’s motion sensor.
+gl Usa o sensor de movemento do dispositivo Android.
+
+@ Edit Layout
+gl Editar disposición
+
+@ Drag to move
+gl Arrastra para mover

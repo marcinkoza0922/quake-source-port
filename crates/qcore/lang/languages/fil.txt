@@ -613,8 +613,8 @@ fil Pinakamahabang Hinto (ms)
 @ Look Down
 fil Tumingin sa Ibaba
 
-@ Look Speed
-fil Bilis ng Tingin
+@ Look Acceleration
+fil Pagbilis ng Pagtingin
 
 @ Look Up
 fil Tumingin sa Itaas
@@ -4079,3 +4079,24 @@ fil 100% walang pinsala
 
 @ Damage Skull
 fil Bungo ng pinsala
+
+@ A mild speed boost for fast swipes
+fil Bahagyang bumibilis ang paglingon kapag mabilis ang pag-swipe
+
+@ Phone Gyro
+fil Gyro ng Telepono
+
+@ look zone
+fil sona ng pagtingin
+
+@ while firing
+fil habang nagpapaputok
+
+@ Uses the Android device’s motion sensor.
+fil Ginagamit ang motion sensor ng Android device.
+
+@ Edit Layout
+fil I-edit ang Ayos
+
+@ Drag to move
+fil I-drag para ilipat

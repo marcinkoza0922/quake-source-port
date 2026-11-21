@@ -613,8 +613,8 @@ sq Ngrirja më e gjatë (ms)
 @ Look Down
 sq Shiko poshtë
 
-@ Look Speed
-sq Shpejtësia e shikimit
+@ Look Acceleration
+sq Përshpejtimi i Pamjes
 
 @ Look Up
 sq Shiko lart
@@ -4079,3 +4079,24 @@ sq 100% pa dëme
 
 @ Damage Skull
 sq Kafka e dëmit
+
+@ A mild speed boost for fast swipes
+sq Rrëshqitjet e shpejta e kthejnë pamjen pak më shpejt
+
+@ Phone Gyro
+sq Xhiroskopi i Telefonit
+
+@ look zone
+sq zona e pamjes
+
+@ while firing
+sq gjatë të shtënave
+
+@ Uses the Android device’s motion sensor.
+sq Përdor sensorin e lëvizjes së pajisjes Android.
+
+@ Edit Layout
+sq Ndrysho Paraqitjen
+
+@ Drag to move
+sq Tërhiq për ta zhvendosur

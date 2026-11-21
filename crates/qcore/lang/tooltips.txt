@@ -1491,3 +1491,17 @@ de Wischen zum Auswählen, loslassen zum Ausrüsten
 it Scorri per scegliere, rilascia per equipaggiare
 es Desliza para elegir y suelta para equipar
 ru Проведите для выбора, отпустите для экипировки
+
+@ A mild speed boost for fast swipes
+fr Un léger gain de vitesse lors des gestes rapides
+de Schnelles Wischen beschleunigt die Sicht leicht
+it Aumenta leggermente la velocità dei movimenti rapidi
+es Aumenta ligeramente la velocidad al deslizar rápido
+ru Быстрые свайпы слегка ускоряют поворот
+
+@ Uses the Android device’s motion sensor.
+fr Utilise le capteur de mouvement de l’appareil Android.
+de Verwendet den Bewegungssensor des Android-Geräts.
+it Usa il sensore di movimento del dispositivo Android.
+es Usa el sensor de movimiento del dispositivo Android.
+ru Использует датчик движения устройства Android.

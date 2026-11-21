@@ -613,8 +613,8 @@ sv Längsta frysning (ms)
 @ Look Down
 sv Titta ner
 
-@ Look Speed
-sv Tittkänslighet
+@ Look Acceleration
+sv Blickacceleration
 
 @ Look Up
 sv Titta upp
@@ -4079,3 +4079,24 @@ sv 100% utan skada
 
 @ Damage Skull
 sv Skadedödskalle
+
+@ A mild speed boost for fast swipes
+sv Snabba svep vrider vyn lite snabbare
+
+@ Phone Gyro
+sv Mobilens gyro
+
+@ look zone
+sv blickzon
+
+@ while firing
+sv vid skott
+
+@ Uses the Android device’s motion sensor.
+sv Använder Android-enhetens rörelsesensor.
+
+@ Edit Layout
+sv Redigera layout
+
+@ Drag to move
+sv Dra för att flytta

@@ -613,8 +613,8 @@ lv Ilgākā sasalšana (ms)
 @ Look Down
 lv Skatīties lejup
 
-@ Look Speed
-lv Skatīšanās ātrums
+@ Look Acceleration
+lv Skata paātrinājums
 
 @ Look Up
 lv Skatīties augšup
@@ -4079,3 +4079,24 @@ lv 100% bez bojājumiem
 
 @ Damage Skull
 lv Bojājumu galvaskauss
+
+@ A mild speed boost for fast swipes
+lv Ātri velkot, skats pagriežas nedaudz ātrāk
+
+@ Phone Gyro
+lv Tālruņa žiroskops
+
+@ look zone
+lv skata zona
+
+@ while firing
+lv šaujot
+
+@ Uses the Android device’s motion sensor.
+lv Izmanto Android ierīces kustības sensoru.
+
+@ Edit Layout
+lv Rediģēt izkārtojumu
+
+@ Drag to move
+lv Velciet, lai pārvietotu

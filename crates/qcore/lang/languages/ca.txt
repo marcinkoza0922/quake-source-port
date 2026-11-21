@@ -613,8 +613,8 @@ ca Congelació més llarga (ms)
 @ Look Down
 ca Mira avall
 
-@ Look Speed
-ca Velocitat de la vista
+@ Look Acceleration
+ca Acceleració de la vista
 
 @ Look Up
 ca Mira amunt
@@ -4079,3 +4079,24 @@ ca 100% sense dany
 
 @ Damage Skull
 ca Calavera de dany
+
+@ A mild speed boost for fast swipes
+ca Fes lliscar el dit de pressa perquè la vista giri una mica més ràpid
+
+@ Phone Gyro
+ca Giroscopi del telèfon
+
+@ look zone
+ca zona de visió
+
+@ while firing
+ca en disparar
+
+@ Uses the Android device’s motion sensor.
+ca Utilitza el sensor de moviment del dispositiu Android.
+
+@ Edit Layout
+ca Edita la disposició
+
+@ Drag to move
+ca Arrossega per moure

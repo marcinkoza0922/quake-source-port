@@ -613,8 +613,8 @@ am ረጅሙ መቀዝቀዝ (ms)
 @ Look Down
 am ወደ ታች ተመልከት
 
-@ Look Speed
-am የእይታ ፍጥነት
+@ Look Acceleration
+am የዕይታ ማፋጠን
 
 @ Look Up
 am ወደ ላይ ተመልከት
@@ -4079,3 +4079,24 @@ am 100% ያለ ጉዳት
 
 @ Damage Skull
 am የጉዳት ቅል
+
+@ A mild speed boost for fast swipes
+am ፈጣን ማንሸራተት ዕይታውን ትንሽ ፈጠን ብሎ ያዞራል
+
+@ Phone Gyro
+am የስልክ ጋይሮስኮፕ
+
+@ look zone
+am የዕይታ ዞን
+
+@ while firing
+am በመተኮስ ጊዜ
+
+@ Uses the Android device’s motion sensor.
+am የAndroid መሣሪያውን የእንቅስቃሴ ዳሳሽ ይጠቀማል።
+
+@ Edit Layout
+am አቀማመጥ አርትዕ
+
+@ Drag to move
+am ለማንቀሳቀስ ይጎትቱ

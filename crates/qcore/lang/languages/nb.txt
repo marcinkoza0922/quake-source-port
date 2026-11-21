@@ -613,8 +613,8 @@ nb Lengste frysing (ms)
 @ Look Down
 nb Se ned
 
-@ Look Speed
-nb Blikkfart
+@ Look Acceleration
+nb Kameraakselerasjon
 
 @ Look Up
 nb Se opp
@@ -4079,3 +4079,24 @@ nb 100% uten skade
 
 @ Damage Skull
 nb Skadehodeskalle
+
+@ A mild speed boost for fast swipes
+nb Raske sveip snur visningen litt fortere
+
+@ Phone Gyro
+nb Telefonens gyro
+
+@ look zone
+nb siktesone
+
+@ while firing
+nb ved skyting
+
+@ Uses the Android device’s motion sensor.
+nb Bruker Android-enhetens bevegelsessensor.
+
+@ Edit Layout
+nb Rediger oppsett
+
+@ Drag to move
+nb Dra for å flytte

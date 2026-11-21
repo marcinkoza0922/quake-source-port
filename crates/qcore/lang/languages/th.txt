@@ -613,8 +613,8 @@ th หยุด​นิ่ง​นาน​สุด (ms)
 @ Look Down
 th มอง​ลง
 
-@ Look Speed
-th ความ​เร็ว​การ​มอง
+@ Look Acceleration
+th ความเร่ง​การ​หัน​มุม​มอง
 
 @ Look Up
 th มอง​ขึ้น
@@ -4079,3 +4079,24 @@ th 100% ไม่​เสีย​พลัง
 
 @ Damage Skull
 th หัวกะโหลก​เมื่อ​บาดเจ็บ
+
+@ A mild speed boost for fast swipes
+th ปัด​เร็ว​เพื่อ​ให้​มุม​มอง​หมุน​เร็ว​ขึ้น​เล็ก​น้อย
+
+@ Phone Gyro
+th ไจ​โร​ของ​โทรศัพท์
+
+@ look zone
+th พื้นที่​หัน​มุม​มอง
+
+@ while firing
+th ขณะ​ยิง
+
+@ Uses the Android device’s motion sensor.
+th ใช้​เซ็นเซอร์​ตรวจ​จับ​การ​เคลื่อนไหว​ของ​อุปกรณ์​ ​Android
+
+@ Edit Layout
+th แก้ไข​ผัง​ปุ่ม
+
+@ Drag to move
+th ลาก​เพื่อ​ย้าย

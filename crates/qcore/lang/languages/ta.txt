@@ -613,8 +613,8 @@ ta நீண்ட உறைவு (ms)
 @ Look Down
 ta கீழே பார்
 
-@ Look Speed
-ta பார்வை வேகம்
+@ Look Acceleration
+ta பார்வை முடுக்கம்
 
 @ Look Up
 ta மேலே பார்
@@ -4079,3 +4079,24 @@ ta 100% சேதமின்றி
 
 @ Damage Skull
 ta சேத மண்டையோடு
+
+@ A mild speed boost for fast swipes
+ta விரைவாகத் தேய்த்தால் பார்வை சற்றே வேகமாகத் திரும்பும்
+
+@ Phone Gyro
+ta தொலைபேசியின் சுழல்காட்டி
+
+@ look zone
+ta பார்வைப் பகுதி
+
+@ while firing
+ta சுடும்போது
+
+@ Uses the Android device’s motion sensor.
+ta Android சாதனத்தின் இயக்க உணரியைப் பயன்படுத்துகிறது.
+
+@ Edit Layout
+ta அமைப்பைத் திருத்து
+
+@ Drag to move
+ta நகர்த்த இழுக்கவும்

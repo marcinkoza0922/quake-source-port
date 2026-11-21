@@ -613,8 +613,8 @@ vi Đóng băng lâu nhất (ms)
 @ Look Down
 vi Nhìn xuống
 
-@ Look Speed
-vi Tốc độ nhìn
+@ Look Acceleration
+vi Gia tốc góc nhìn
 
 @ Look Up
 vi Nhìn lên
@@ -4079,3 +4079,24 @@ vi 100% không nhận sát thương
 
 @ Damage Skull
 vi Đầu lâu sát thương
+
+@ A mild speed boost for fast swipes
+vi Vuốt nhanh làm góc nhìn xoay nhanh hơn một chút
+
+@ Phone Gyro
+vi Con quay của điện thoại
+
+@ look zone
+vi vùng góc nhìn
+
+@ while firing
+vi khi bắn
+
+@ Uses the Android device’s motion sensor.
+vi Dùng cảm biến chuyển động của thiết bị Android.
+
+@ Edit Layout
+vi Sửa bố cục
+
+@ Drag to move
+vi Kéo để di chuyển

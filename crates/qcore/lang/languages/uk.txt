@@ -613,8 +613,8 @@ uk Найдовший стоп-кадр (мс)
 @ Look Down
 uk Дивитися вниз
 
-@ Look Speed
-uk Швидкість огляду
+@ Look Acceleration
+uk Прискорення огляду
 
 @ Look Up
 uk Дивитися вгору
@@ -4079,3 +4079,24 @@ uk 100% без ушкоджень
 
 @ Damage Skull
 uk Череп ушкодження
+
+@ A mild speed boost for fast swipes
+uk Швидкі жести трохи прискорюють поворот
+
+@ Phone Gyro
+uk Гіроскоп телефона
+
+@ look zone
+uk зона огляду
+
+@ while firing
+uk під час стрільби
+
+@ Uses the Android device’s motion sensor.
+uk Використовує датчик руху пристрою Android.
+
+@ Edit Layout
+uk Редагувати розкладку
+
+@ Drag to move
+uk Перетягніть для переміщення

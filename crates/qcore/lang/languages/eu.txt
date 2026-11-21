@@ -613,8 +613,8 @@ eu Izozte luzeena (ms)
 @ Look Down
 eu Begiratu behera
 
-@ Look Speed
-eu Begiratzeko abiadura
+@ Look Acceleration
+eu Begiradaren azelerazioa
 
 @ Look Up
 eu Begiratu gora
@@ -4079,3 +4079,24 @@ eu 100% kalterik gabe
 
 @ Damage Skull
 eu Kaltearen garezurra
+
+@ A mild speed boost for fast swipes
+eu Irristatze azkarrekin ikuspegia zertxobait azkarrago biratzen da
+
+@ Phone Gyro
+eu Telefonoaren giroskopioa
+
+@ look zone
+eu begirada-eremua
+
+@ while firing
+eu tiro egitean
+
+@ Uses the Android device’s motion sensor.
+eu Android gailuko mugimendu-sentsorea erabiltzen du.
+
+@ Edit Layout
+eu Editatu diseinua
+
+@ Drag to move
+eu Arrastatu mugitzeko

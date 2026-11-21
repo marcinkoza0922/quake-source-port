@@ -613,8 +613,8 @@ pt Congelação máxima (ms)
 @ Look Down
 pt Olhar para baixo
 
-@ Look Speed
-pt Velocidade da vista
+@ Look Acceleration
+pt Aceleração da vista
 
 @ Look Up
 pt Olhar para cima
@@ -4079,3 +4079,24 @@ pt 100% sem dano
 
 @ Damage Skull
 pt Caveira de dano
+
+@ A mild speed boost for fast swipes
+pt Aumenta ligeiramente a velocidade dos gestos rápidos
+
+@ Phone Gyro
+pt Giroscópio do telemóvel
+
+@ look zone
+pt zona de vista
+
+@ while firing
+pt ao disparar
+
+@ Uses the Android device’s motion sensor.
+pt Usa o sensor de movimento do dispositivo Android.
+
+@ Edit Layout
+pt Editar disposição
+
+@ Drag to move
+pt Arrastar para mover

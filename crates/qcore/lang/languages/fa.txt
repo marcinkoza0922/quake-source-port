@@ -613,8 +613,8 @@ fa بیشترین انجماد (ms)
 @ Look Down
 fa نگاه به پایین
 
-@ Look Speed
-fa سرعت نگاه
+@ Look Acceleration
+fa شتاب چرخش دید
 
 @ Look Up
 fa نگاه به بالا
@@ -4079,3 +4079,24 @@ fa 100% بدون آسیب
 
 @ Damage Skull
 fa جمجمهٔ آسیب
+
+@ A mild speed boost for fast swipes
+fa کشیدن سریع، دید را کمی سریع‌تر می‌چرخاند
+
+@ Phone Gyro
+fa ژیروسکوپ گوشی
+
+@ look zone
+fa ناحیهٔ دید
+
+@ while firing
+fa هنگام شلیک
+
+@ Uses the Android device’s motion sensor.
+fa از حسگر حرکت دستگاه Android استفاده می‌کند.
+
+@ Edit Layout
+fa ویرایش چیدمان
+
+@ Drag to move
+fa برای جابه‌جایی بکشید

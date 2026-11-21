@@ -613,8 +613,8 @@ mt L-itwal iffriżar (ms)
 @ Look Down
 mt Ħares 'l isfel
 
-@ Look Speed
-mt Veloċità tal-ħarsa
+@ Look Acceleration
+mt Aċċellerazzjoni tal-Veduta
 
 @ Look Up
 mt Ħares 'il fuq
@@ -4079,3 +4079,24 @@ mt 100% bla ħsara
 
 @ Damage Skull
 mt Kranju tal-ħsara
+
+@ A mild speed boost for fast swipes
+mt Żerżiq mgħaġġel idawwar il-veduta ftit aktar malajr
+
+@ Phone Gyro
+mt Ġiroskopju tat-Telefon
+
+@ look zone
+mt żona tal-veduta
+
+@ while firing
+mt waqt l-isparar
+
+@ Uses the Android device’s motion sensor.
+mt Juża s-sensur tal-moviment tal-apparat Android.
+
+@ Edit Layout
+mt Editja t-Tqassim
+
+@ Drag to move
+mt Iddreggja biex iċċaqlaq

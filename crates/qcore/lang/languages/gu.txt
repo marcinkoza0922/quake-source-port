@@ -613,8 +613,8 @@ gu સૌથી લાંબું ફ્રીઝ (ms)
 @ Look Down
 gu નીચે જુઓ
 
-@ Look Speed
-gu જોવાની ઝડપ
+@ Look Acceleration
+gu દૃશ્ય પ્રવેગ
 
 @ Look Up
 gu ઉપર જુઓ
@@ -4079,3 +4079,24 @@ gu 100% નુકસાન વિના
 
 @ Damage Skull
 gu નુકસાનની ખોપરી
+
+@ A mild speed boost for fast swipes
+gu ઝડપી સ્વાઇપથી દૃશ્ય થોડું વધુ ઝડપથી ફરે છે
+
+@ Phone Gyro
+gu ફોનનો જાયરોસ્કોપ
+
+@ look zone
+gu દૃશ્ય વિસ્તાર
+
+@ while firing
+gu ગોળી ચલાવતી વખતે
+
+@ Uses the Android device’s motion sensor.
+gu Android ઉપકરણના ગતિ સેન્સરનો ઉપયોગ કરે છે.
+
+@ Edit Layout
+gu લેઆઉટ સંપાદિત કરો
+
+@ Drag to move
+gu ખસેડવા ખેંચો

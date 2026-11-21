@@ -248,3 +248,45 @@ fn controller_menu_button_double_tap_quicksaves_and_long_press_quickloads() {
 
     let _ = std::fs::remove_dir_all(&tmp);
 }
+
+#[test]
+fn focus_loss_holds_single_player_and_background_saves_once() {
+    let Some(mut h) = host() else { return };
+    let tmp = std::env::temp_dir().join(format!("qsp-background-{}", std::process::id()));
+    crate::userdata::set_parent(&tmp, false).unwrap();
+    h.exec_line("cl_autodemo 0");
+    h.exec_line("map e1m1");
+    step(&mut h, 0.5);
+    assert_eq!(h.cl.signon, 4);
+
+    let time = h.server.time();
+    h.handle_event(HostEvent::FocusLost);
+    assert_eq!(h.menu.screen, Screen::Main);
+    step(&mut h, 0.25);
+    assert_eq!(h.server.time(), time);
+
+    h.exec_line("sv_autosave 1");
+    h.handle_event(HostEvent::WillEnterBackground);
+    let dir = h.user_dir();
+    let save = std::fs::read_to_string(dir.join("autosave0.sav")).unwrap();
+    assert!(save.contains("AUTOSAVE_Background"));
+    h.handle_event(HostEvent::WillEnterBackground);
+    assert!(!dir.join("autosave1.sav").exists());
+    assert!(h.backgrounded);
+    h.handle_event(HostEvent::DidEnterForeground);
+    assert!(!h.backgrounded);
+    assert_eq!(h.menu.screen, Screen::Main);
+
+    h.handle_event(HostEvent::Back);
+    assert_eq!(h.menu.screen, Screen::None);
+    let time = h.server.time();
+    step(&mut h, 0.25);
+    assert!(h.server.time() > time);
+    h.handle_event(HostEvent::Back);
+    assert_eq!(h.menu.screen, Screen::Main);
+
+    h.exec_line("menu_options touch");
+    h.handle_event(HostEvent::Back);
+    assert_eq!(h.menu.screen, Screen::OptionsPage(crate::menu::Page::Input));
+    std::fs::remove_dir_all(tmp).unwrap();
+}

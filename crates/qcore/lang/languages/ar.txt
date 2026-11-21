@@ -613,8 +613,8 @@ ar أطول تجميد (مللي ثانية)
 @ Look Down
 ar النظر للأسفل
 
-@ Look Speed
-ar سرعة النظر
+@ Look Acceleration
+ar تسارع حركة النظر
 
 @ Look Up
 ar النظر للأعلى
@@ -4079,3 +4079,24 @@ ar 100% بلا ضرر
 
 @ Damage Skull
 ar جمجمة الضرر
+
+@ A mild speed boost for fast swipes
+ar تزيد التمريرات السريعة سرعة دوران الرؤية قليلاً
+
+@ Phone Gyro
+ar جيروسكوب الهاتف
+
+@ look zone
+ar منطقة النظر
+
+@ while firing
+ar أثناء الإطلاق
+
+@ Uses the Android device’s motion sensor.
+ar يستخدم مستشعر الحركة في جهاز Android.
+
+@ Edit Layout
+ar تعديل التخطيط
+
+@ Drag to move
+ar اسحب للنقل

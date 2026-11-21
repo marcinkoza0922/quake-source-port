@@ -6,6 +6,10 @@ impl Menu {
     pub fn mouse_move(&mut self, pos: (f32, f32), cv: &mut Cvars) -> Option<&'static str> {
         self.sync_autoaim_mapping(cv);
         self.mouse = Some(pos);
+        if self.screen == Screen::TouchEditor {
+            self.move_touch_button(pos, cv);
+            return None;
+        }
         if self.screen == Screen::HudEditor {
             self.hud_edit.mouse_move(pos, cv);
             return None;
@@ -98,6 +102,10 @@ impl Menu {
         }
         if self.prompt.is_some() {
             self.prompt_key(key, &mut out);
+            return out;
+        }
+        if self.screen == Screen::TouchEditor {
+            self.touch_editor_key(key, cv);
             return out;
         }
         if self.screen == Screen::HudEditor {
@@ -327,7 +335,7 @@ impl Menu {
                     out.push(Action::Command(format!("_death_choice {}\n", choice + 1)));
                 }
             }
-            Screen::None | Screen::HudEditor | Screen::DirBrowser | Screen::ServerBrowser => {}
+            Screen::None | Screen::HudEditor | Screen::TouchEditor | Screen::DirBrowser | Screen::ServerBrowser => {}
             Screen::Help => {}
             Screen::Main => {
                 if back {

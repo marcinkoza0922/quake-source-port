@@ -613,8 +613,8 @@ te గరిష్ట ఫ్రీజ్ (ms)
 @ Look Down
 te కిందికి చూడు
 
-@ Look Speed
-te చూపు వేగం
+@ Look Acceleration
+te వీక్షణ త్వరణం
 
 @ Look Up
 te పైకి చూడు
@@ -4079,3 +4079,24 @@ te 100% నష్టం లేకుండా
 
 @ Damage Skull
 te నష్టం పుర్రె
+
+@ A mild speed boost for fast swipes
+te వేగంగా స్వైప్ చేస్తే దృశ్యం మరికొంత వేగంగా తిరుగుతుంది
+
+@ Phone Gyro
+te ఫోన్ గైరోస్కోప్
+
+@ look zone
+te వీక్షణ ప్రాంతం
+
+@ while firing
+te కాల్పులు జరిపేటప్పుడు
+
+@ Uses the Android device’s motion sensor.
+te Android పరికరంలోని చలన సెన్సర్‌ను ఉపయోగిస్తుంది.
+
+@ Edit Layout
+te అమరికను సవరించండి
+
+@ Drag to move
+te జరపడానికి లాగండి

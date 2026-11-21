@@ -613,8 +613,8 @@ ga Reo is Faide (ms)
 @ Look Down
 ga Féach Síos
 
-@ Look Speed
-ga Luas Amhairc
+@ Look Acceleration
+ga Luasghéarú an Radhairc
 
 @ Look Up
 ga Féach Suas
@@ -4079,3 +4079,24 @@ ga 100% gan damáiste
 
 @ Damage Skull
 ga Cloigeann damáiste
+
+@ A mild speed boost for fast swipes
+ga Casann svaidhpeanna gasta an radharc beagán níos tapúla
+
+@ Phone Gyro
+ga Gíreascóp an Fhóin
+
+@ look zone
+ga limistéar féachana
+
+@ while firing
+ga agus tú ag lámhach
+
+@ Uses the Android device’s motion sensor.
+ga Úsáideann sé braiteoir gluaisne an ghléis Android.
+
+@ Edit Layout
+ga Cuir an Leagan Amach in Eagar
+
+@ Drag to move
+ga Tarraing chun bogadh

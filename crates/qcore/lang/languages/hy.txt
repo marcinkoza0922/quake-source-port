@@ -613,8 +613,8 @@ hy Ամենաերկար սառեցում (մվ)
 @ Look Down
 hy Նայել ներքև
 
-@ Look Speed
-hy Նայելու արագություն
+@ Look Acceleration
+hy Հայացքի արագացում
 
 @ Look Up
 hy Նայել վերև
@@ -4079,3 +4079,24 @@ hy 100% առանց վնասի
 
 @ Damage Skull
 hy Վնասի գանգ
+
+@ A mild speed boost for fast swipes
+hy Արագ սահեցնելիս տեսադաշտը մի փոքր ավելի արագ է շրջվում
+
+@ Phone Gyro
+hy Հեռախոսի գիրոսկոպ
+
+@ look zone
+hy հայացքի գոտի
+
+@ while firing
+hy կրակելիս
+
+@ Uses the Android device’s motion sensor.
+hy Օգտագործում է Android սարքի շարժման տվիչը։
+
+@ Edit Layout
+hy Խմբագրել դասավորությունը
+
+@ Drag to move
+hy Քաշեք՝ տեղափոխելու համար

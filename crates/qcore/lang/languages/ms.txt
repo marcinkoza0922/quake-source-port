@@ -613,8 +613,8 @@ ms Beku Paling Lama (ms)
 @ Look Down
 ms Pandang Bawah
 
-@ Look Speed
-ms Kelajuan Pandangan
+@ Look Acceleration
+ms Pecutan Pandangan
 
 @ Look Up
 ms Pandang Atas
@@ -4079,3 +4079,24 @@ ms 100% tanpa cedera
 
 @ Damage Skull
 ms Tengkorak kecederaan
+
+@ A mild speed boost for fast swipes
+ms Leret pantas mempercepatkan putaran sedikit
+
+@ Phone Gyro
+ms Giroskop Telefon
+
+@ look zone
+ms zon pandangan
+
+@ while firing
+ms ketika menembak
+
+@ Uses the Android device’s motion sensor.
+ms Menggunakan sensor gerakan peranti Android.
+
+@ Edit Layout
+ms Sunting Reka Letak
+
+@ Drag to move
+ms Seret untuk mengalih

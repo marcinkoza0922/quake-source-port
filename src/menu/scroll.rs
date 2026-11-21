@@ -70,6 +70,7 @@ impl Menu {
     pub fn mouse_up(&mut self) {
         self.hud_edit.cancel_dialog_drag();
         self.wp.mouse_up();
+        self.touch_editor.release();
         self.drag = None;
         self.slider_drag = None;
         self.text_drag = None;

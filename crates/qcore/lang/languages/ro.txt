@@ -613,8 +613,8 @@ ro Înghețare maximă (ms)
 @ Look Down
 ro Privește în jos
 
-@ Look Speed
-ro Viteză privire
+@ Look Acceleration
+ro Accelerarea privirii
 
 @ Look Up
 ro Privește în sus
@@ -4079,3 +4079,24 @@ ro 100% fără daune
 
 @ Damage Skull
 ro Craniu de daune
+
+@ A mild speed boost for fast swipes
+ro Glisările rapide măresc ușor viteza de rotire
+
+@ Phone Gyro
+ro Giroscopul telefonului
+
+@ look zone
+ro zona de privire
+
+@ while firing
+ro în timpul tragerii
+
+@ Uses the Android device’s motion sensor.
+ro Folosește senzorul de mișcare al dispozitivului Android.
+
+@ Edit Layout
+ro Editează aranjamentul
+
+@ Drag to move
+ro Trage pentru a muta

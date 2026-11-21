@@ -613,8 +613,8 @@ is Lengsta frysting (ms)
 @ Look Down
 is Líta niður
 
-@ Look Speed
-is Sjónhraði
+@ Look Acceleration
+is Hröðun sjónarhorns
 
 @ Look Up
 is Líta upp
@@ -4079,3 +4079,24 @@ is 100% án skaða
 
 @ Damage Skull
 is Skaðahauskúpa
+
+@ A mild speed boost for fast swipes
+is Hröð strok snúa sýninni aðeins hraðar
+
+@ Phone Gyro
+is Snúðskynjari símans
+
+@ look zone
+is sjónsvæði
+
+@ while firing
+is þegar skotið er
+
+@ Uses the Android device’s motion sensor.
+is Notar hreyfiskynjara Android-tækisins.
+
+@ Edit Layout
+is Breyta uppsetningu
+
+@ Drag to move
+is Dragðu til að færa
