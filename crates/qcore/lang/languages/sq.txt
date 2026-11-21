@@ -1781,6 +1781,18 @@ sq Ndriçim drejtues
 @ Light Specular
 sq Shkëlqimi i dritës
 
+@ Gameplay Overlay
+sq Mbivendosja e lojës
+
+@ Layout
+sq Paraqitja
+
+@ Preview
+sq Parapamje
+
+@ Resume Game
+sq Rifilloni lojën
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ sq Sa anon pamja lart e poshtë kur anon kontrolluesin (boshti vertikal)
 @ How far the view turns left and right when you turn the controller (yaw axis)
 sq Sa kthehet pamja majtas e djathtas kur kthen kontrolluesin (boshti horizontal)
 
-@ How far the view turns when you drag on the right half of the screen
-sq Sa kthehet pamja kur tërheq në gjysmën e djathtë të ekranit
-
 @ How fast the boomerang flies (units per second)
 sq Sa shpejt fluturon bumerangu (njësi për sekondë)
 
@@ -2038,9 +2047,6 @@ sq Asnjë ngrirje nuk zgjat më shumë se kaq, sado dëm ose bonus vrasjeje të 
 
 @ Oldest marks and nails are recycled at this shared limit
 sq Gjurmët dhe gozhdët më të vjetra riciklohen në këtë kufi të përbashkët
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-sq Leva dhe butonat në ekran: auto i shfaq pas një prekjeje dhe i fsheh kur përdoret një pajisje tjetër
 
 @ Only autosaves: quicksaves and the Save menu are off
 sq Vetëm autoruajtje: ruajtjet e shpejta dhe menyja Ruaj janë joaktive
@@ -2411,6 +2417,18 @@ sq Përdor drejtime drite të parapërgatitura (.dlit) për hijezim dhe shkëlqi
 
 @ Strength of the highlights from directional lighting
 sq Fuqia e shkëlqimeve nga ndriçimi drejtues
+
+@ How far the view turns when you swipe
+sq Sa larg kthehet pamja kur rrëshqitni
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+sq Ngadalëson rrëshqitjen tuaj pranë objektivave të dukshëm. Deathmatch kërkon lejen e serverit.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+sq Ndërron anët për butonat e lëvizjes, synimit dhe lojës
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+sq Auto ndjek pajisjen hyrëse aktive. Menyja mbetet e disponueshme kur mbivendosja është e fikur.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ sq Asnjë server nuk përputhet me filtrat
 
 @ Server search failed
 sq Kërkimi i serverëve dështoi
+
+@ Slide to select, release to equip
+sq Rrëshqiteni për të zgjedhur, lëshojeni për ta pajisur
+
+@ Tap to swap weapons.
+sq Prekni për të ndërruar armët.
+
+@ Hold and slide to select.
+sq Mbajeni dhe rrëshqitni për të zgjedhur.
 
 # ==== hud.txt ====
 

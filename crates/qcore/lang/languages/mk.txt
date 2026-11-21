@@ -1781,6 +1781,18 @@ mk Насочено осветлување
 @ Light Specular
 mk Одблесок на светлина
 
+@ Gameplay Overlay
+mk Преклопување на игра
+
+@ Layout
+mk Распоред
+
+@ Preview
+mk Преглед
+
+@ Resume Game
+mk Продолжете со играта
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ mk Колку погледот се навалува горе-долу кога 
 @ How far the view turns left and right when you turn the controller (yaw axis)
 mk Колку погледот се врти лево-десно кога го вртиш контролерот (оска yaw)
 
-@ How far the view turns when you drag on the right half of the screen
-mk Колку се врти погледот кога влечеш по десната половина на екранот
-
 @ How fast the boomerang flies (units per second)
 mk Колку брзо лета бумерангот (единици во секунда)
 
@@ -2038,9 +2047,6 @@ mk Ниедно замрзнување не трае подолго од ова,
 
 @ Oldest marks and nails are recycled at this shared limit
 mk Најстарите траги и клинци се рециклираат при овој заеднички лимит
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-mk Стик и копчиња на екранот: авто ги прикажува по допир и ги крие кога се користи друг уред
 
 @ Only autosaves: quicksaves and the Save menu are off
 mk Само автозачувувања: брзото зачувување и менито за зачувување се исклучени
@@ -2411,6 +2417,18 @@ mk Користи претходно пресметани насоки на св
 
 @ Strength of the highlights from directional lighting
 mk Јачина на одблесоците од насоченото осветлување
+
+@ How far the view turns when you swipe
+mk Колку далеку се врти приказот кога ќе поминете
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+mk Го успорува вашето повлекување во близина на видливи цели. Deathmatch бара дозвола од серверот.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+mk Ги заменува страните за копчиња за движење, нишање и игра
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+mk Автоматски го следи активниот влезен уред. Менито останува достапно кога преклопувањето е исклучено.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ mk Нема сервери што одговараат на филтрите
 
 @ Server search failed
 mk Пребарувањето сервери не успеа
+
+@ Slide to select, release to equip
+mk Лизгајте за да изберете, пуштете го за опремување
+
+@ Tap to swap weapons.
+mk Допрете за да го замените оружјето.
+
+@ Hold and slide to select.
+mk Држете и лизгајте за да изберете.
 
 # ==== hud.txt ====
 

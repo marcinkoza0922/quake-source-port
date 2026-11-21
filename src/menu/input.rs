@@ -267,6 +267,18 @@ impl Menu {
             if let Some(c) = self.cursor_mut() {
                 *c = i;
             }
+            if self.screen == Screen::OptionsPage(Page::Touch) {
+                if let Some(row) = self.touch_slider_at(pos) {
+                    self.slider_drag = Some(row);
+                    self.set_slider(self.page_item(Page::Touch, row), pos.0, cv);
+                    out.push(Action::Sound("misc/menu3.wav"));
+                    return out;
+                }
+                if self.pick_touch_choice(i, pos, cv) {
+                    out.push(Action::Sound("misc/menu3.wav"));
+                    return out;
+                }
+            }
             // a click edits a text row (caret, drag to select); never submits it
             if let Screen::OptionsPage(p) = self.screen
                 && matches!(self.page_item(p, i), Item::Text { .. })
@@ -340,6 +352,7 @@ impl Menu {
                             self.screen = Screen::Mods;
                         }
                         6 => out.push(Action::Command("menu_demos\n".into())),
+                        i if Some(i) == self.touch_shortcut_index() => self.open_touch_from_main(),
                         7 => self.open_customize(false),
                         _ => {}
                     }
@@ -492,6 +505,8 @@ impl Menu {
                     } else if matches!(p, Page::NewGameAddons | Page::Addons) {
                         self.opt_cursor = 1;
                         Screen::OptionsPage(if p == Page::Addons { Page::Customize } else { Page::NewGameCustomize })
+                    } else if p == Page::Touch && std::mem::take(&mut self.touch_from_main) {
+                        Screen::Main
                     } else if let Some((parent, row)) =
                         self.sub_return.take().filter(|r| r.1 == p).map(|r| (r.0, r.2)).or_else(|| parent_page(p))
                     {
@@ -578,7 +593,7 @@ impl Menu {
                     }
                     _ => {}
                 }
-                if enter && self.options(item).len() > 2 && !self.item_disabled(item, cv) {
+                if p != Page::Touch && enter && self.options(item).len() > 2 && !self.item_disabled(item, cv) {
                     let cur = self.option_index(item, cv);
                     let mut d = Drop { item: self.opt_cursor, cursor: cur, scroll: 0 };
                     clamp_scroll(&mut d);

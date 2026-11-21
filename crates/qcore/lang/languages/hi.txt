@@ -1781,6 +1781,18 @@ hi दिशात्मक प्रकाश
 @ Light Specular
 hi प्रकाश चमक
 
+@ Gameplay Overlay
+hi गेमप्ले ओवरले
+
+@ Layout
+hi लेआउट
+
+@ Preview
+hi पूर्वावलोकन
+
+@ Resume Game
+hi खेल फिर से शुरू करें
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ hi कंट्रोलर झुकाने पर दृश्य ऊपर-
 @ How far the view turns left and right when you turn the controller (yaw axis)
 hi कंट्रोलर घुमाने पर दृश्य बाएँ-दाएँ कितना घूमता है (यॉ अक्ष)
 
-@ How far the view turns when you drag on the right half of the screen
-hi स्क्रीन के दाएँ आधे हिस्से पर खींचने से दृश्य कितना घूमता है
-
 @ How fast the boomerang flies (units per second)
 hi बूमरैंग कितनी तेज़ उड़ता है (यूनिट प्रति सेकंड)
 
@@ -2038,9 +2047,6 @@ hi कोई भी फ़्रीज़ इससे लंबा नहीं
 
 @ Oldest marks and nails are recycled at this shared limit
 hi इस साझा सीमा पर सबसे पुराने निशान और कीलें दोबारा इस्तेमाल होते हैं
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-hi ऑन-स्क्रीन स्टिक और बटन: ऑटो उन्हें छूने पर दिखाता है और दूसरा डिवाइस इस्तेमाल होने पर छिपा देता है
 
 @ Only autosaves: quicksaves and the Save menu are off
 hi केवल ऑटोसेव: क्विकसेव और सेव मेन्यू बंद हैं
@@ -2411,6 +2417,18 @@ hi दीवारों और मॉडलों पर सूक्ष्म 
 
 @ Strength of the highlights from directional lighting
 hi दिशात्मक प्रकाश से मिलने वाली चमक की तीव्रता
+
+@ How far the view turns when you swipe
+hi जब आप स्वाइप करते हैं तो दृश्य कितनी दूर तक घूम जाता है
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+hi दृश्यमान लक्ष्यों के पास आपके स्वाइप को धीमा कर देता है। डेथमैच के लिए सर्वर की अनुमति की आवश्यकता होती है।
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+hi गति, लक्ष्य निर्धारण और गेमप्ले बटनों के लिए किनारों की अदला-बदली करता है
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+hi ऑटो सक्रिय इनपुट डिवाइस का अनुसरण करता है। ओवरले बंद होने पर मेनू उपलब्ध रहता है।
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ hi फ़िल्टर से मेल खाने वाला कोई �
 
 @ Server search failed
 hi सर्वर की खोज विफल रही
+
+@ Slide to select, release to equip
+hi चयन करने के लिए स्लाइड करें, सुसज्जित करने के लिए रिलीज़ करें
+
+@ Tap to swap weapons.
+hi हथियार बदलने के लिए टैप करें.
+
+@ Hold and slide to select.
+hi चयन करने के लिए पकड़ें और स्लाइड करें.
 
 # ==== hud.txt ====
 

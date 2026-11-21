@@ -1781,6 +1781,18 @@ ur سمتی روشنی
 @ Light Specular
 ur روشنی کی چمک
 
+@ Gameplay Overlay
+ur گیم پلے اوورلے
+
+@ Layout
+ur لے آؤٹ
+
+@ Preview
+ur پیش نظارہ
+
+@ Resume Game
+ur کھیل کو دوبارہ شروع کریں۔
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ ur کنٹرولر جھکانے پر منظر اوپر نیچے کتنا جھکے
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ur کنٹرولر گھمانے پر منظر دائیں بائیں کتنا مڑے (یاؤ محور)
 
-@ How far the view turns when you drag on the right half of the screen
-ur اسکرین کے دائیں نصف پر انگلی کھینچنے سے منظر کتنا مڑے
-
 @ How fast the boomerang flies (units per second)
 ur بومرینگ کتنی تیزی سے اڑتا ہے (اکائیاں فی سیکنڈ)
 
@@ -2038,9 +2047,6 @@ ur کوئی ایک جمود اس سے زیادہ نہیں چلتا، چاہے ن
 
 @ Oldest marks and nails are recycled at this shared limit
 ur اس مشترکہ حد پر پرانے نشان اور کیلیں دوبارہ استعمال ہوتی ہیں
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ur اسکرین پر اسٹک اور بٹن: خودکار انہیں چھونے کے بعد دکھاتا ہے اور دوسرا آلہ استعمال ہونے پر چھپا دیتا ہے
 
 @ Only autosaves: quicksaves and the Save menu are off
 ur صرف آٹو سیو: فوری سیو اور سیو مینو بند ہیں
@@ -2411,6 +2417,18 @@ ur دیواروں اور ماڈلز پر ہلکے سائے اور چمک کے ل
 
 @ Strength of the highlights from directional lighting
 ur سمتی روشنی سے پیدا ہونے والی چمک کی شدت
+
+@ How far the view turns when you swipe
+ur جب آپ سوائپ کرتے ہیں تو منظر کتنی دور مڑتا ہے۔
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+ur مرئی اہداف کے قریب آپ کے سوائپ کو سست کرتا ہے۔ ڈیتھ میچ کو سرور کی اجازت درکار ہے۔
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ur حرکت، مقصد اور گیم پلے بٹنوں کے لیے اطراف کو تبدیل کریں۔
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ur آٹو فعال ان پٹ ڈیوائس کی پیروی کرتا ہے۔ اوورلے آف ہونے پر مینو دستیاب رہتا ہے۔
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ ur فلٹرز سے ملتا کوئی سرور نہیں
 
 @ Server search failed
 ur سرور کی تلاش ناکام رہی
+
+@ Slide to select, release to equip
+ur منتخب کرنے کے لیے سلائیڈ کریں، لیس کرنے کے لیے چھوڑیں۔
+
+@ Tap to swap weapons.
+ur ہتھیاروں کو تبدیل کرنے کے لیے تھپتھپائیں۔
+
+@ Hold and slide to select.
+ur منتخب کرنے کے لیے تھامیں اور سلائیڈ کریں۔
 
 # ==== hud.txt ====
 

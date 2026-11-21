@@ -204,7 +204,7 @@ fn target() -> AimTarget {
 }
 
 #[test]
-fn aim_assist_gamepad_only() {
+fn gamepad_assist_rotates_but_mouse_does_not() {
     let mut h = host();
     let t = [target()];
     let ctx = AimContext { eye: [0.0; 3], player_velocity: [0.0; 3], targets: &t, vis: &NoWorld, allowed: true };
@@ -226,6 +226,54 @@ fn aim_assist_gamepad_only() {
     h.cvars.set("aim_assist", "0");
     frame(&mut h, Some(&ctx));
     assert_eq!(h.input.last_aim, AimResult::NONE);
+}
+
+#[test]
+fn touch_assist_only_scales_live_drag_toward_visible_targets() {
+    use touch::{BUTTONS, TouchPhase};
+
+    struct Blocked;
+    impl aim::Visibility for Blocked {
+        fn visible(&self, _: [f32; 3], _: [f32; 3]) -> bool { false }
+    }
+
+    let mut h = host();
+    let targets = [target()];
+    let ctx = AimContext { eye: [0.0; 3], player_velocity: [0.0; 3], targets: &targets, vis: &NoWorld, allowed: true };
+    let blocked = AimContext { vis: &Blocked, ..ctx };
+    let denied = AimContext { allowed: false, ..ctx };
+    let layout = h.input.touch_layout(&h.cvars);
+    let ([x, y], _) = layout.button(&BUTTONS[0]);
+    let finger = |h: &mut Host, id, phase, x, y| {
+        handle_event(h, InputEvent::Touch { id, phase, x, y, aspect: layout.aspect });
+    };
+    finger(&mut h, 2, TouchPhase::Down, 0.2, 0.6);
+    finger(&mut h, 2, TouchPhase::Move, 0.2, 0.5);
+    finger(&mut h, 1, TouchPhase::Down, x, y);
+    execute(&mut h);
+    let still = frame(&mut h, Some(&ctx));
+    assert!(still.attack && still.forward > 0.0);
+    assert_eq!(still.look_delta, [0.0; 2]);
+
+    let mut x = x;
+    let mut drag = |h: &mut Host, ctx: &AimContext| {
+        x -= 0.01;
+        finger(h, 1, TouchPhase::Move, x, y);
+        frame(h, Some(ctx)).look_delta[0]
+    };
+    assert!(h.input.last_aim.target.is_none());
+    let low = drag(&mut h, &ctx);
+    h.cvars.set("touch_aim_assist", "2");
+    let high = drag(&mut h, &ctx);
+    let wall = drag(&mut h, &blocked);
+    let disallowed = drag(&mut h, &denied);
+    h.cvars.set("touch_aim_assist", "0");
+    let off = drag(&mut h, &ctx);
+    assert!(high > 0.0 && high < low);
+    assert!((low / off - 0.75).abs() < 0.001);
+    assert!((high / off - 0.55).abs() < 0.001);
+    assert!((wall - off).abs() < 0.001);
+    assert!((disallowed - off).abs() < 0.001);
 }
 
 #[test]

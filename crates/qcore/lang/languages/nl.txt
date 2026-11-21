@@ -1781,6 +1781,18 @@ nl Gerichte belichting
 @ Light Specular
 nl Lichtglans
 
+@ Gameplay Overlay
+nl Gameplay-overlay
+
+@ Layout
+nl Indeling
+
+@ Preview
+nl Voorbeeld
+
+@ Resume Game
+nl Hervat het spel
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ nl Hoe ver het beeld op en neer kantelt als je de controller kantelt (pitch-as)
 @ How far the view turns left and right when you turn the controller (yaw axis)
 nl Hoe ver het beeld naar links en rechts draait als je de controller draait (yaw-as)
 
-@ How far the view turns when you drag on the right half of the screen
-nl Hoe ver het beeld draait als je over de rechterhelft van het scherm sleept
-
 @ How fast the boomerang flies (units per second)
 nl Hoe snel de boemerang vliegt (eenheden per seconde)
 
@@ -2038,9 +2047,6 @@ nl Geen enkele bevriezing duurt langer dan dit, hoeveel schade of killbonus er o
 
 @ Oldest marks and nails are recycled at this shared limit
 nl Bij deze gedeelde limiet worden de oudste sporen en spijkers hergebruikt
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-nl Stick en knoppen in beeld: auto toont ze na een aanraking en verbergt ze als een ander apparaat wordt gebruikt
 
 @ Only autosaves: quicksaves and the Save menu are off
 nl Alleen autosaves: snel opslaan en het opslagmenu zijn uitgeschakeld
@@ -2411,6 +2417,18 @@ nl Gebruikt vooraf berekende lichtrichtingen (.dlit) voor subtiele schaduw en gl
 
 @ Strength of the highlights from directional lighting
 nl Sterkte van de glanslichten uit gerichte belichting
+
+@ How far the view turns when you swipe
+nl Hoe ver het zicht draait als je veegt
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+nl Vertraagt uw veegbeweging in de buurt van zichtbare doelen. Deathmatch vereist servertoestemming.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+nl Verwisselt de zijkanten voor bewegings-, richt- en gameplay-knoppen
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+nl Auto volgt het actieve invoerapparaat. Het menu blijft beschikbaar als de overlay is uitgeschakeld.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ nl Geen overeenkomende servers
 
 @ Server search failed
 nl Zoeken naar servers mislukt
+
+@ Slide to select, release to equip
+nl Schuif om te selecteren, laat los om uit te rusten
+
+@ Tap to swap weapons.
+nl Tik om wapens te wisselen.
+
+@ Hold and slide to select.
+nl Houd ingedrukt en schuif om te selecteren.
 
 # ==== hud.txt ====
 

@@ -1781,6 +1781,18 @@ sv Riktad belysning
 @ Light Specular
 sv Ljusreflexer
 
+@ Gameplay Overlay
+sv Spelöverlägg
+
+@ Layout
+sv Layout
+
+@ Preview
+sv Förhandsgranska
+
+@ Resume Game
+sv Återuppta spelet
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ sv Hur långt vyn lutar upp och ner när du lutar handkontrollen (nickaxel)
 @ How far the view turns left and right when you turn the controller (yaw axis)
 sv Hur långt vyn vrids åt vänster och höger när du vrider handkontrollen (giraxel)
 
-@ How far the view turns when you drag on the right half of the screen
-sv Hur långt vyn vrids när du drar på skärmens högra halva
-
 @ How fast the boomerang flies (units per second)
 sv Hur snabbt bumerangen flyger (enheter per sekund)
 
@@ -2038,9 +2047,6 @@ sv Ingen enskild frysning varar längre än detta, oavsett hur mycket skada elle
 
 @ Oldest marks and nails are recycled at this shared limit
 sv De äldsta märkena och spikarna återanvänds vid denna gemensamma gräns
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-sv Skärmspak och knappar: auto visar dem efter en beröring och döljer dem när en annan enhet används
 
 @ Only autosaves: quicksaves and the Save menu are off
 sv Endast autosparningar: snabbsparning och Spara-menyn är avstängda
@@ -2411,6 +2417,18 @@ sv Använder förberäknade ljusriktningar (.dlit) för subtil skuggning och gla
 
 @ Strength of the highlights from directional lighting
 sv Styrka på glansdagrar från riktad belysning
+
+@ How far the view turns when you swipe
+sv Hur långt vyn vänder när du sveper
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+sv Saktar ned svepningen nära synliga mål. Deathmatch kräver servertillstånd.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+sv Byter ut sidorna mot rörelse-, siktnings- och spelknappar
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+sv Auto följer den aktiva inmatningsenheten. Menyn förblir tillgänglig när överlägget är avstängt.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ sv Inga matchande servrar
 
 @ Server search failed
 sv Serversökningen misslyckades
+
+@ Slide to select, release to equip
+sv Skjut för att välja, släpp för att utrusta
+
+@ Tap to swap weapons.
+sv Tryck för att byta vapen.
+
+@ Hold and slide to select.
+sv Håll och skjut för att välja.
 
 # ==== hud.txt ====
 

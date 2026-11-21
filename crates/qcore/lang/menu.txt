@@ -4175,3 +4175,31 @@ de 100% ohne Schaden
 it 100% senza danni
 es 100% sin daño
 ru 100% без урона
+
+@ Gameplay Overlay
+fr Commandes en jeu
+de Spielsteuerung
+it Comandi di gioco
+es Controles de juego
+ru Игровые кнопки
+
+@ Layout
+fr Disposition
+de Anordnung
+it Disposizione
+es Distribución
+ru Раскладка
+
+@ Preview
+fr Aperçu
+de Vorschau
+it Anteprima
+es Vista previa
+ru Предпросмотр
+
+@ Resume Game
+fr Reprendre la partie
+de Spiel fortsetzen
+it Riprendi partita
+es Reanudar partida
+ru Продолжить игру

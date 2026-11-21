@@ -1781,6 +1781,18 @@ bg Насочено осветление
 @ Light Specular
 bg Отблясъци на светлината
 
+@ Gameplay Overlay
+bg Наслагване на играта
+
+@ Layout
+bg Оформление
+
+@ Preview
+bg Преглед
+
+@ Resume Game
+bg Възобновете играта
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ bg Колко се накланя погледът нагоре и надолу 
 @ How far the view turns left and right when you turn the controller (yaw axis)
 bg Колко се завърта погледът наляво и надясно при завъртане на контролера (ос на завъртане)
 
-@ How far the view turns when you drag on the right half of the screen
-bg Колко се завърта погледът, когато плъзгаш по дясната половина на екрана
-
 @ How fast the boomerang flies (units per second)
 bg Колко бързо лети бумерангът (единици в секунда)
 
@@ -2038,9 +2047,6 @@ bg Нито едно замръзване не трае по-дълго, кол�
 
 @ Oldest marks and nails are recycled at this shared limit
 bg Най-старите следи и гвоздеи се използват отново при този общ лимит
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-bg Екранен стик и бутони: авто ги показва след докосване и ги скрива при ползване на друго устройство
 
 @ Only autosaves: quicksaves and the Save menu are off
 bg Само автозаписи: бързият запис и менюто за запис са изключени
@@ -2411,6 +2417,18 @@ bg Използва предварително изчислени посоки �
 
 @ Strength of the highlights from directional lighting
 bg Сила на отблясъците от насоченото осветление
+
+@ How far the view turns when you swipe
+bg Колко далеч се обръща изгледът, когато плъзнете
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+bg Забавя плъзгането ви близо до видими цели. Deathmatch изисква разрешение от сървъра.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+bg Разменя страните за бутони за движение, прицелване и игра
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+bg Автоматично следва активното входно устройство. Менюто остава достъпно, когато наслагването е изключено.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ bg Няма сървъри, които отговарят на филтрите
 
 @ Server search failed
 bg Търсенето на сървъри е неуспешно
+
+@ Slide to select, release to equip
+bg Плъзнете за избор, пуснете за оборудване
+
+@ Tap to swap weapons.
+bg Докоснете, за да размените оръжия.
+
+@ Hold and slide to select.
+bg Задръжте и плъзнете, за да изберете.
 
 # ==== hud.txt ====
 

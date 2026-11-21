@@ -1781,6 +1781,18 @@ hr Usmjereno osvjetljenje
 @ Light Specular
 hr Odsjaj svjetla
 
+@ Gameplay Overlay
+hr Gameplay Overlay
+
+@ Layout
+hr Raspored
+
+@ Preview
+hr Pregled
+
+@ Resume Game
+hr Nastavi igru
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ hr Koliko se pogled naginje gore-dolje kad nagnete kontroler (os nagiba)
 @ How far the view turns left and right when you turn the controller (yaw axis)
 hr Koliko se pogled okreće lijevo-desno kad okrenete kontroler (os skretanja)
 
-@ How far the view turns when you drag on the right half of the screen
-hr Koliko se pogled okreće kad povlačite po desnoj polovici zaslona
-
 @ How fast the boomerang flies (units per second)
 hr Koliko brzo bumerang leti (jedinica u sekundi)
 
@@ -2038,9 +2047,6 @@ hr Nijedno zamrzavanje ne traje dulje od ovoga, koliko god šteta ili bonus za u
 
 @ Oldest marks and nails are recycled at this shared limit
 hr Najstariji tragovi i čavli ponovno se koriste kad se dosegne ovo zajedničko ograničenje
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-hr Palica i tipke na zaslonu: auto ih prikazuje nakon dodira i skriva kad se koristi drugi uređaj
 
 @ Only autosaves: quicksaves and the Save menu are off
 hr Samo autospremanja: brzo spremanje i izbornik Spremi su isključeni
@@ -2411,6 +2417,18 @@ hr Koristi predračunate smjerove svjetla (.dlit) za suptilno sjenčanje i odsja
 
 @ Strength of the highlights from directional lighting
 hr Jačina odsjaja od usmjerenog osvjetljenja
+
+@ How far the view turns when you swipe
+hr Koliko daleko se pogled okreće kada prijeđete
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+hr Usporava vaše prevlačenje blizu vidljivih ciljeva. Deathmatch zahtijeva dozvolu poslužitelja.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+hr Mijenja strane za gumbe za kretanje, ciljanje i igru
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+hr Automatski prati aktivni ulazni uređaj. Izbornik ostaje dostupan kada je preklapanje isključeno.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ hr Nema odgovarajućih poslužitelja
 
 @ Server search failed
 hr Pretraživanje poslužitelja nije uspjelo
+
+@ Slide to select, release to equip
+hr Povucite za odabir, otpustite za opremanje
+
+@ Tap to swap weapons.
+hr Dodirnite za zamjenu oružja.
+
+@ Hold and slide to select.
+hr Držite i klizite za odabir.
 
 # ==== hud.txt ====
 

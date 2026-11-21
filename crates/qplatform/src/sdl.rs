@@ -212,7 +212,8 @@ impl Platform {
                 let phase = match ty {
                     T::FINGER_DOWN => FingerPhase::Down,
                     T::FINGER_MOTION => FingerPhase::Move,
-                    _ => FingerPhase::Up,
+                    T::FINGER_UP => FingerPhase::Up,
+                    _ => FingerPhase::Cancel,
                 };
                 let id = f.touchID.0.rotate_left(32) ^ f.fingerID.0;
                 Event::Finger { id, phase, x: f.x, y: f.y }

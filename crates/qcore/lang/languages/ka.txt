@@ -1781,6 +1781,18 @@ ka მიმართული განათება
 @ Light Specular
 ka სინათლის ბზინვარება
 
+@ Gameplay Overlay
+ka თამაშის გადაფარვა
+
+@ Layout
+ka განლაგება
+
+@ Preview
+ka გადახედვა
+
+@ Resume Game
+ka განაახლეთ თამაში
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ ka რამდენად იხრება ხედი ზემოთ დ�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ka რამდენად ბრუნავს ხედი მარცხნივ და მარჯვნივ კონტროლერის მობრუნებისას (ჰორიზონტალური ღერძი)
 
-@ How far the view turns when you drag on the right half of the screen
-ka რამდენად ბრუნავს ხედი ეკრანის მარჯვენა ნახევარზე გადათრევისას
-
 @ How fast the boomerang flies (units per second)
 ka რა სისწრაფით მიფრინავს ბუმერანგი (ერთეული წამში)
 
@@ -2038,9 +2047,6 @@ ka ერთი გაყინვა ამაზე მეტხანს ა�
 
 @ Oldest marks and nails are recycled at this shared limit
 ka ამ საერთო ლიმიტზე უძველესი კვალი და ლურსმნები ხელახლა გამოიყენება
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ka ეკრანული სტიკი და ღილაკები: ავტო აჩენს მათ შეხების შემდეგ და მალავს სხვა მოწყობილობის გამოყენებისას
 
 @ Only autosaves: quicksaves and the Save menu are off
 ka მხოლოდ ავტოშენახვები: სწრაფი შენახვა და შენახვის მენიუ გამორთულია
@@ -2411,6 +2417,18 @@ ka იყენებს წინასწარ გამოთვლილ �
 
 @ Strength of the highlights from directional lighting
 ka მიმართული განათების ანარეკლების სიმძლავრე
+
+@ How far the view turns when you swipe
+ka რამდენად შორს უხვევს ხედი, როცა გადაფურცლავთ
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+ka ანელებს თქვენს გადაფურცვლას ხილულ სამიზნეებთან. Deathmatch საჭიროებს სერვერის ნებართვას.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ka ცვლის გვერდებს მოძრაობის, დამიზნებისა და თამაშის ღილაკებისთვის
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ka ავტომატური მიჰყვება აქტიურ შეყვანის მოწყობილობას. მენიუ ხელმისაწვდომი რჩება, როდესაც გადაფარვა გამორთულია.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ ka ფილტრების შესაბამისი სერვერ
 
 @ Server search failed
 ka სერვერების ძებნა ვერ მოხერხდა
+
+@ Slide to select, release to equip
+ka გაასრიალეთ ასარჩევად, გაათავისუფლეთ აღჭურვისთვის
+
+@ Tap to swap weapons.
+ka შეეხეთ იარაღის შესაცვლელად.
+
+@ Hold and slide to select.
+ka გააჩერეთ და გაასრიალეთ ასარჩევად.
 
 # ==== hud.txt ====
 

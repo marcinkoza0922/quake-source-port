@@ -1781,6 +1781,18 @@ ta திசை ஒளியூட்டல்
 @ Light Specular
 ta ஒளி பளபளப்பு
 
+@ Gameplay Overlay
+ta விளையாட்டு மேலடுக்கு
+
+@ Layout
+ta தளவமைப்பு
+
+@ Preview
+ta முன்னோட்டம்
+
+@ Resume Game
+ta விளையாட்டை மீண்டும் தொடங்கவும்
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ ta கன்ட்ரோலரைச் சாய்க்கும்போத�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ta கன்ட்ரோலரைத் திருப்பும்போது பார்வை இடமும் வலமும் எவ்வளவு திரும்பும் (yaw அச்சு)
 
-@ How far the view turns when you drag on the right half of the screen
-ta திரையின் வலது பாதியில் இழுக்கும்போது பார்வை எவ்வளவு திரும்பும்
-
 @ How fast the boomerang flies (units per second)
 ta பூமராங் எவ்வளவு வேகமாகப் பறக்கும் (வினாடிக்கு அலகுகள்)
 
@@ -2038,9 +2047,6 @@ ta எவ்வளவு சேதம் அல்லது கொலை போ�
 
 @ Oldest marks and nails are recycled at this shared limit
 ta இந்தப் பொது வரம்பில் பழைய தடங்களும் ஆணிகளும் மீண்டும் பயன்படும்
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ta திரை ஸ்டிக், பொத்தான்கள்: தானியங்கு எனில் தொட்ட பின் காட்டி, வேறு சாதனம் பயன்படும்போது மறைக்கும்
 
 @ Only autosaves: quicksaves and the Save menu are off
 ta தானியங்கு சேமிப்பு மட்டும்: விரைவுச் சேமிப்பும் சேமிப்பு மெனுவும் ஆஃப்
@@ -2411,6 +2417,18 @@ ta சுவர்கள் மற்றும் மாதிரிகளில
 
 @ Strength of the highlights from directional lighting
 ta திசை ஒளியூட்டலின் பளபளப்பு வலிமை
+
+@ How far the view turns when you swipe
+ta ஸ்வைப் செய்யும் போது பார்வை எவ்வளவு தூரம் திரும்பும்
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+ta தெரியும் இலக்குகளுக்கு அருகில் ஸ்வைப் செய்வதை மெதுவாக்குகிறது. Deathmatchக்கு சர்வர் அனுமதி தேவை.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ta இயக்கம், இலக்கு மற்றும் விளையாட்டு பொத்தான்களுக்கு பக்கங்களை மாற்றுகிறது
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ta செயலில் உள்ள உள்ளீட்டு சாதனத்தை தானியங்கு பின்தொடர்கிறது. மேலடுக்கு முடக்கத்தில் இருக்கும்போது மெனு தொடர்ந்து இருக்கும்.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ ta வடிகட்டிகளுக்குப் பொருந்து�
 
 @ Server search failed
 ta சேவையகங்களைத் தேட முடியவில்லை
+
+@ Slide to select, release to equip
+ta தேர்ந்தெடுக்க ஸ்லைடு, சித்தப்படுத்துவதற்கு விடுவிக்கவும்
+
+@ Tap to swap weapons.
+ta ஆயுதங்களை மாற்ற தட்டவும்.
+
+@ Hold and slide to select.
+ta தேர்ந்தெடுக்க, பிடித்து ஸ்லைடு செய்யவும்.
 
 # ==== hud.txt ====
 

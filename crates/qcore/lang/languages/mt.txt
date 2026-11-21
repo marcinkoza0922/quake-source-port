@@ -1781,6 +1781,18 @@ mt Dawl Direzzjonali
 @ Light Specular
 mt leqq tad-Dawl
 
+@ Gameplay Overlay
+mt Gameplay Overlay
+
+@ Layout
+mt Tqassim
+
+@ Preview
+mt Preview
+
+@ Resume Game
+mt Ibda l-logħba
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ mt Kemm titmejjel il-veduta 'l fuq u 'l isfel meta tmejjel il-kontrollur (assi v
 @ How far the view turns left and right when you turn the controller (yaw axis)
 mt Kemm iddur il-veduta lejn ix-xellug u l-lemin meta ddawwar il-kontrollur (assi orizzontali)
 
-@ How far the view turns when you drag on the right half of the screen
-mt Kemm iddur il-veduta meta tkaxkar fuq in-nofs tal-lemin tal-iskrin
-
 @ How fast the boomerang flies (units per second)
 mt Kemm itir malajr il-boomerang (unitajiet kull sekonda)
 
@@ -2038,9 +2047,6 @@ mt L-ebda ffriżar ma jdum aktar minn dan, tkun kemm tkun il-ħsara jew il-bonus
 
 @ Oldest marks and nails are recycled at this shared limit
 mt L-eqdem marki u msiemer jerġgħu jintużaw meta jintlaħaq dan il-limitu komuni
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-mt Stick u buttuni fuq l-iskrin: awto jurihom wara mess u jaħbihom meta jintuża apparat ieħor
 
 @ Only autosaves: quicksaves and the Save menu are off
 mt Salvataġġi awtomatiċi biss: is-salvataġġ malajr u l-menu Salva huma mitfija
@@ -2411,6 +2417,18 @@ mt Juża direzzjonijiet tad-dawl ippreparati (.dlit) għal dellijiet u riflessi 
 
 @ Strength of the highlights from directional lighting
 mt Qawwa tar-riflessi mid-dawl direzzjonali
+
+@ How far the view turns when you swipe
+mt Kemm idur il-veduta meta tiskja
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+mt Inaqqas is-swipe tiegħek ħdejn miri viżibbli. Deathmatch jeħtieġ permess tas-server.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+mt Tibdel il-ġnub għall-buttuni tal-moviment, tal-mira u tal-logħob
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+mt Auto jsegwi l-apparat ta 'input attiv. Il-menu jibqa' disponibbli meta l-overlay ikun mitfi.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ mt L-ebda server ma jaqbel mal-filtri
 
 @ Server search failed
 mt It-tiftix għas-servers falla
+
+@ Slide to select, release to equip
+mt Żerżaq biex tagħżel, rilaxx biex tgħammar
+
+@ Tap to swap weapons.
+mt Tektek biex tbiddel l-armi.
+
+@ Hold and slide to select.
+mt Żomm u żżerżaq biex tagħżel.
 
 # ==== hud.txt ====
 

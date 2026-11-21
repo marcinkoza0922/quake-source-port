@@ -82,7 +82,12 @@ impl Menu {
             return self.drag_shader_param(k, x, cv);
         }
         let Item::Slider { cvar, min, max, step, invert, .. } = item else { return };
-        let mut f = ((x - SLIDER_X.0 - 4.0) / (SLIDER_X.1 - SLIDER_X.0 - 8.0)).clamp(0.0, 1.0);
+        let (start, end) = if self.screen == Screen::OptionsPage(Page::Touch) {
+            touch::SLIDER
+        } else {
+            (SLIDER_X.0 + 4.0, SLIDER_X.1 - 4.0)
+        };
+        let mut f = ((x - start) / (end - start)).clamp(0.0, 1.0);
         if invert {
             f = 1.0 - f;
         }

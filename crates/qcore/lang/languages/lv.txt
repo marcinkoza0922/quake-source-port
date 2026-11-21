@@ -1781,6 +1781,18 @@ lv Virzītais apgaismojums
 @ Light Specular
 lv Gaismas atspīdums
 
+@ Gameplay Overlay
+lv Spēles pārklājums
+
+@ Layout
+lv Izkārtojums
+
+@ Preview
+lv Priekšskatījums
+
+@ Resume Game
+lv Atsākt spēli
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ lv Cik tālu skats noliecas augšup un lejup, kad noliec kontrolieri (vertikāl�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 lv Cik tālu skats pagriežas pa kreisi un pa labi, kad pagriez kontrolieri (horizontālā ass)
 
-@ How far the view turns when you drag on the right half of the screen
-lv Cik tālu skats pagriežas, velkot pa ekrāna labo pusi
-
 @ How fast the boomerang flies (units per second)
 lv Cik ātri lido bumerangs (vienības sekundē)
 
@@ -2038,9 +2047,6 @@ lv Neviena sasalšana nav ilgāka par šo, lai cik daudz pievienotu bojājumi va
 
 @ Oldest marks and nails are recycled at this shared limit
 lv Vecākās pēdas un naglas tiek izmantotas atkārtoti pie šī kopīgā limita
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-lv Ekrāna svira un pogas: auto tās parāda pēc pieskāriena un paslēpj, kad tiek izmantota cita ierīce
 
 @ Only autosaves: quicksaves and the Save menu are off
 lv Tikai autosaglabāšana: ātrā saglabāšana un saglabāšanas izvēlne ir izslēgtas
@@ -2411,6 +2417,18 @@ lv Izmanto ieceptos gaismas virzienus (.dlit) smalkam ēnojumam un atspīdumiem 
 
 @ Strength of the highlights from directional lighting
 lv Virzītā apgaismojuma atspīdumu stiprums
+
+@ How far the view turns when you swipe
+lv Cik tālu skats pagriežas, velkot
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+lv Palēnina vilkšanu redzamo mērķu tuvumā. Deathmatch nepieciešama servera atļauja.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+lv Apmaina sānus pret kustības, mērķēšanas un spēles pogām
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+lv Automātiski seko aktīvajai ievades ierīcei. Izvēlne paliek pieejama, kad pārklājums ir izslēgts.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ lv Nav atbilstošu serveru
 
 @ Server search failed
 lv Serveru meklēšana neizdevās
+
+@ Slide to select, release to equip
+lv Bīdiet, lai atlasītu, atlaidiet, lai aprīkotu
+
+@ Tap to swap weapons.
+lv Pieskarieties, lai apmainītu ieročus.
+
+@ Hold and slide to select.
+lv Turiet un velciet, lai atlasītu.
 
 # ==== hud.txt ====
 

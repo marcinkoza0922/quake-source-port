@@ -22,6 +22,9 @@ launches, and the player can choose another folder from the launcher.
 
 Gameplay runs in immersive landscape fullscreen. Graphics settings offer
 render scale for performance and use the device display size for output.
+Touch play offers aim slowdown near visible targets, left- and right-handed
+layouts, and tap or hold gestures for the weapon wheel. The pause menu links
+to a touch settings page with draggable sliders and a live controls preview.
 
 
 ## Combat feedback

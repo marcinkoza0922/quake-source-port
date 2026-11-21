@@ -1781,6 +1781,18 @@ nb Retningslys
 @ Light Specular
 nb Lysreflekser
 
+@ Gameplay Overlay
+nb Spilloverlegg
+
+@ Layout
+nb Oppsett
+
+@ Preview
+nb Forhåndsvisning
+
+@ Resume Game
+nb Gjenoppta spillet
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ nb Hvor langt visningen vipper opp og ned når du vipper kontrolleren (vertikal 
 @ How far the view turns left and right when you turn the controller (yaw axis)
 nb Hvor langt visningen dreier til venstre og høyre når du dreier kontrolleren (horisontal akse)
 
-@ How far the view turns when you drag on the right half of the screen
-nb Hvor langt visningen dreier når du drar på høyre halvdel av skjermen
-
 @ How fast the boomerang flies (units per second)
 nb Hvor fort bumerangen flyr (enheter per sekund)
 
@@ -2038,9 +2047,6 @@ nb Ingen enkelt frysing varer lenger enn dette, uansett hvor mye skade eller dra
 
 @ Oldest marks and nails are recycled at this shared limit
 nb De eldste merkene og spikrene gjenbrukes ved denne felles grensen
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-nb Spak og knapper på skjermen: auto viser dem etter berøring og skjuler dem når en annen enhet brukes
 
 @ Only autosaves: quicksaves and the Save menu are off
 nb Kun autolagring: hurtiglagring og Lagre-menyen er av
@@ -2411,6 +2417,18 @@ nb Bruker forhåndsberegnede lysretninger (.dlit) for subtil skyggelegging og gl
 
 @ Strength of the highlights from directional lighting
 nb Styrken på høylys fra retningsbestemt belysning
+
+@ How far the view turns when you swipe
+nb Hvor langt visningen svinger når du sveiper
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+nb Senker sveipet ditt nær synlige mål. Deathmatch krever servertillatelse.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+nb Bytter ut sidene for bevegelses-, sikte- og spillknapper
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+nb Auto følger den aktive inndataenheten. Menyen forblir tilgjengelig når overlegget er av.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ nb Ingen samsvarende servere
 
 @ Server search failed
 nb Serversøket mislyktes
+
+@ Slide to select, release to equip
+nb Skyv for å velge, slipp for å utstyre
+
+@ Tap to swap weapons.
+nb Trykk for å bytte våpen.
+
+@ Hold and slide to select.
+nb Hold og skyv for å velge.
 
 # ==== hud.txt ====
 

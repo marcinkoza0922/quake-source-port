@@ -21,7 +21,7 @@ impl Menu {
         }
         c.fade_screen();
         let base_scale = c.scale;
-        c.menu_layout();
+        self.canvas_layout(c);
         if !matches!(self.screen, Screen::Options | Screen::OptionsPage(_) | Screen::Death | Screen::Quit | Screen::Mods | Screen::ModMaps | Screen::ModOnline | Screen::Load | Screen::Save | Screen::Help | Screen::Demos | Screen::DirBrowser | Screen::ServerBrowser) {
             c.ox += CLASSIC.0;
             c.oy += CLASSIC.1;
@@ -54,8 +54,11 @@ impl Menu {
                     c.frame(72.0, y, w, 16.0, BORDER);
                     gold(c, 72.0 + (w - c.ptext_w(label)) / 2.0, y + 4.0, label);
                 }
-                let d = dot(pic);
-                c.pic(54.0, 32.0 + self.main_cursor as f32 * 20.0, d);
+                if self.touch_shortcut_index() != Some(self.main_cursor) {
+                    let d = dot(pic);
+                    c.pic(54.0, 32.0 + self.main_cursor as f32 * 20.0, d);
+                }
+                self.draw_touch_shortcut(c);
             }
             Screen::Help => self.help.draw(c),
             Screen::Mods => self.mods.draw(c, modmenu::Page::List, self.pad_ui, &self.glyphs),
@@ -109,6 +112,7 @@ impl Menu {
             Screen::OptionsPage(Page::WeaponPriority) => {
                 self.draw_weapon_priority(c, pic, cv);
             }
+            Screen::OptionsPage(Page::Touch) => self.draw_touch_settings(c, cv),
             Screen::OptionsPage(page) => {
                 let p = pic("gfx/qplaque.lmp");
                 c.pic(PANEL_X - 40.0, 16.0, p);
@@ -204,11 +208,11 @@ impl Menu {
             }
             Screen::None | Screen::HudEditor => {}
         }
-        c.menu_layout();
+        self.canvas_layout(c);
         if let Some(o) = self.osk {
             self.draw_osk(c, o);
         }
-        if !matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons | Page::WeaponPriority)) {
+        if !matches!(self.screen, Screen::OptionsPage(Page::Addons | Page::NewGameAddons | Page::WeaponPriority | Page::Touch)) {
             self.draw_tooltip(c, cv);
             self.draw_hints(c);
         }

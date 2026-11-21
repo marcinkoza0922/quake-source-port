@@ -1781,6 +1781,18 @@ hu Irányított világítás
 @ Light Specular
 hu Fénycsillanás
 
+@ Gameplay Overlay
+hu Játékmenet Overlay
+
+@ Layout
+hu Elrendezés
+
+@ Preview
+hu Előnézet
+
+@ Resume Game
+hu Folytassa a játékot
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ hu Mennyire dől fel és le a nézet, amikor a kontrollert billented (függőleg
 @ How far the view turns left and right when you turn the controller (yaw axis)
 hu Mennyire fordul balra és jobbra a nézet, amikor a kontrollert elforgatod (vízszintes tengely)
 
-@ How far the view turns when you drag on the right half of the screen
-hu Mennyire fordul a nézet, amikor a képernyő jobb felén húzod az ujjad
-
 @ How fast the boomerang flies (units per second)
 hu Milyen gyorsan repül a bumeráng (egység másodpercenként)
 
@@ -2038,9 +2047,6 @@ hu Egyetlen fagyasztás sem tart ennél tovább, bármennyi sebzés vagy ölési
 
 @ Oldest marks and nails are recycled at this shared limit
 hu E közös korlát elérésekor a legrégebbi nyomok és szögek újrahasznosulnak
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-hu Képernyős kar és gombok: az auto érintéskor megjeleníti, más eszköz használatakor elrejti őket
 
 @ Only autosaves: quicksaves and the Save menu are off
 hu Csak automentések: a gyorsmentés és a Mentés menü ki van kapcsolva
@@ -2411,6 +2417,18 @@ hu Előre sütött fényirányokat (.dlit) használ finom árnyékoláshoz és c
 
 @ Strength of the highlights from directional lighting
 hu Az irányított világítás csillanásainak erőssége
+
+@ How far the view turns when you swipe
+hu Csúsztatás közben milyen messzire fordul a nézet
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+hu Lelassítja az ujját a látható célok közelében. A Deathmatch szerver engedélyt igényel.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+hu Felcseréli az oldalakat mozgás-, célzás- és játékgombokra
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+hu Auto követi az aktív beviteli eszközt. A menü elérhető marad, ha az átfedés ki van kapcsolva.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ hu Egy szerver sem felel meg
 
 @ Server search failed
 hu A szerverkeresés sikertelen
+
+@ Slide to select, release to equip
+hu Csúsztassa a kiválasztáshoz, engedje el a felszereléshez
+
+@ Tap to swap weapons.
+hu Koppintson a fegyverek cseréjéhez.
+
+@ Hold and slide to select.
+hu Tartsa lenyomva és csúsztassa el a kiválasztáshoz.
 
 # ==== hud.txt ====
 

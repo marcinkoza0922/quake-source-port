@@ -18,7 +18,10 @@ impl Host {
                     }
                 }
             }
-            HostEvent::Focus => {}
+            HostEvent::FocusLost => {
+                qinput::release_touch(self);
+                self.cancel_menu_touch();
+            }
             HostEvent::PadFamily(id, family) => {
                 let family = crate::glyphs::Family::from_platform(family);
                 self.pad_families.insert(id, family);
@@ -36,7 +39,7 @@ impl Host {
                 let (px, py) = (x * pw as f32 / ww.max(1) as f32, y * ph as f32 / wh.max(1) as f32);
                 let mut c = Canvas::new(pw, ph);
                 if self.menu.active() {
-                    c.menu_layout();
+                    self.menu.canvas_layout(&mut c);
                     let pos = (px / c.scale - c.ox, py / c.scale - c.oy);
                     self.menu.hud_edit.shift = self.input.key_down(qinput::keys::K_SHIFT);
                     if let Some(snd) = self.menu.mouse_move(pos, &mut self.server.core.cvars) {
@@ -423,6 +426,7 @@ impl Host {
     }
 
     pub(super) fn sync_menu_ui(&mut self) {
+        self.sync_touch_menu();
         self.menu.game_running = self.server.active();
         self.menu.custom_running = self.server.active() && self.server.core.custom;
         self.menu.pad_ui = self.pad_ui();

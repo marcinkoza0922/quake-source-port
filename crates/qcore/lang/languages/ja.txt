@@ -1781,6 +1781,18 @@ ja 指向性ライティング
 @ Light Specular
 ja スペキュラ強度
 
+@ Gameplay Overlay
+ja 画面上の操作
+
+@ Layout
+ja 配置
+
+@ Preview
+ja プレビュー
+
+@ Resume Game
+ja ゲームを再開
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ ja コントローラーを傾けたときに視点が上下に傾く量（ピ�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ja コントローラーを回したときに視点が左右に回る量（ヨー軸）
 
-@ How far the view turns when you drag on the right half of the screen
-ja 画面の右半分をドラッグしたときに視点が回る量
-
 @ How fast the boomerang flies (units per second)
 ja ブーメランの飛ぶ速さ（ユニット/秒）
 
@@ -2038,9 +2047,6 @@ ja ダメージやキルボーナスがどれだけ加わっても、1回の停�
 
 @ Oldest marks and nails are recycled at this shared limit
 ja この共通の上限に達すると古い跡やネイルから再利用されます
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ja 画面上のスティックとボタン。自動ではタッチ後に表示し、他のデバイスを使うと隠します
 
 @ Only autosaves: quicksaves and the Save menu are off
 ja オートセーブのみ。クイックセーブとセーブメニューは無効です
@@ -2411,6 +2417,18 @@ ja 事前計算された光の向き(.dlit)を使い、壁やモデルに繊細�
 
 @ Strength of the highlights from directional lighting
 ja 指向性ライティングによるハイライトの強さ
+
+@ How far the view turns when you swipe
+ja スワイプで視点が回転する量
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+ja 見えている標的の近くで視点の動きを遅くします。デスマッチではサーバーの許可が必要です。
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ja 移動、照準、操作ボタンを画面の反対側に配置します
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ja スライドで選び、指を離して装備
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ ja 条件に合うサーバーがありません
 
 @ Server search failed
 ja サーバーの検索に失敗しました
+
+@ Slide to select, release to equip
+ja 自動は使用中の入力機器に合わせます。操作ボタンを非表示にしてもメニューは開けます。
+
+@ Tap to swap weapons.
+ja タップで直前の武器に切り替え。
+
+@ Hold and slide to select.
+ja 長押ししてスライドで選択。
 
 # ==== hud.txt ====
 

@@ -108,7 +108,7 @@ pub enum HostEvent {
     Input(InputEvent),
     Quit,
     Resize,
-    Focus,
+    FocusLost,
     /// Absolute cursor position in window points (menus).
     MousePos { x: f32, y: f32 },
     /// Button-label family of a newly connected gamepad (`qplatform::family`).
@@ -167,6 +167,7 @@ pub fn convert(e: Event) -> Vec<HostEvent> {
         Event::GamepadGyro { id, data, .. } => vec![HostEvent::Pad(id, InputEvent::Gyro { pitch: data[0], yaw: data[1], roll: data[2] })],
         Event::Finger { id, phase, x, y } => vec![HostEvent::Finger { id, phase, x, y }],
         Event::Resize { .. } => vec![HostEvent::Resize],
-        Event::FocusGained | Event::FocusLost => vec![HostEvent::Focus],
+        Event::FocusGained => Vec::new(),
+        Event::FocusLost => vec![HostEvent::FocusLost],
     }
 }

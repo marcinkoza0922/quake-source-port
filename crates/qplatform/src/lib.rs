@@ -101,6 +101,7 @@ pub enum FingerPhase {
     Down,
     Move,
     Up,
+    Cancel,
 }
 
 /// Label family from a vendor id (0 if unknown) and the device name.

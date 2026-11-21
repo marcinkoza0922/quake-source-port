@@ -45,6 +45,7 @@ mod saveinfo;
 mod splitscreen;
 mod save_inventory;
 mod userdata;
+mod touch_controls;
 mod view;
 mod vwep;
 #[cfg(target_arch = "wasm32")]

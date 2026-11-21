@@ -122,6 +122,7 @@ pub enum Device {
     #[default]
     KeyboardMouse,
     Gamepad,
+    Touch,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
@@ -129,6 +130,7 @@ pub enum LookDevice {
     #[default]
     Mouse,
     Gamepad,
+    Touch,
 }
 
 /// Button indices into [`Input::buttons`].
@@ -242,6 +244,8 @@ cvars! {
     touch_size = "touch_size", "1";
     touch_opacity = "touch_opacity", "0.5";
     touch_invert = "touch_invert", "0";
+    touch_aim_assist = "touch_aim_assist", "1";
+    touch_left_handed = "touch_left_handed", "0";
 }
 
 /// Host context for qinput commands.
@@ -287,11 +291,9 @@ pub struct Input {
     pub autoaim_fov: [f32; 2],
     pub autoaim_players: bool,
     pub touch: touch::TouchOverlay,
-    /// On-screen controls showing (`touch_enable 1`: since the last touch,
-    /// until another device is used).
-    pub touch_shown: bool,
     /// Window width/height from the last touch, for the stick.
     pub touch_aspect: f32,
+    pub touch_insets: [f32; 4],
 }
 
 impl Input {
@@ -311,7 +313,7 @@ impl Input {
             gyro: [0.0; 3],
             gamepad_connected: false,
             last_look: LookDevice::Mouse,
-            last_device: Device::KeyboardMouse,
+            last_device: if cfg!(target_os = "android") { Device::Touch } else { Device::KeyboardMouse },
             capture: false,
             wheel_aim: [0.0; 2],
             wheel_open: false,
@@ -324,8 +326,8 @@ impl Input {
             autoaim_fov: [90.0, 73.74],
             autoaim_players: false,
             touch: touch::TouchOverlay::default(),
-            touch_shown: false,
             touch_aspect: 16.0 / 9.0,
+            touch_insets: [0.0; 4],
         }
     }
 
@@ -365,15 +367,27 @@ impl Input {
     }
     /// Layout of the on-screen controls.
     pub fn touch_layout(&self, cvars: &Cvars) -> touch::TouchLayout {
-        touch::TouchLayout { aspect: self.touch_aspect, size: cvars.value(self.cv.touch_size) }
+        touch::TouchLayout::new(
+            self.touch_aspect,
+            cvars.value(self.cv.touch_size),
+            cvars.value(self.cv.touch_left_handed) >= 0.5,
+            self.touch_insets,
+        )
     }
     /// Whether the on-screen controls should be drawn and used.
     pub fn touch_visible(&self, cvars: &Cvars) -> bool {
         match cvars.value(self.cv.touch_enable) as i32 {
             0 => false,
-            1 => self.touch_shown,
+            1 => self.last_device == Device::Touch,
             _ => true,
         }
+    }
+
+    pub fn touch_aim_active(&self, cvars: &Cvars) -> bool {
+        self.dest == KeyDest::Game
+            && cvars.value(self.cv.touch_enable) != 0.0
+            && cvars.value(self.cv.touch_aim_assist) >= 0.5
+            && self.touch.has_look()
     }
     pub fn key_down(&self, key: i32) -> bool {
         self.keydown.get(key as usize).copied().unwrap_or(false)

@@ -1781,6 +1781,18 @@ pt Iluminação direcional
 @ Light Specular
 pt Brilho especular
 
+@ Gameplay Overlay
+pt Sobreposição de jogabilidade
+
+@ Layout
+pt Disposição
+
+@ Preview
+pt Visualização
+
+@ Resume Game
+pt Retomar o jogo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ pt Quanto a vista se inclina para cima e para baixo ao inclinar o comando (eixo 
 @ How far the view turns left and right when you turn the controller (yaw axis)
 pt Quanto a vista roda para a esquerda e direita ao rodar o comando (eixo de guinada)
 
-@ How far the view turns when you drag on the right half of the screen
-pt Quanto a vista roda ao arrastar na metade direita do ecrã
-
 @ How fast the boomerang flies (units per second)
 pt Velocidade de voo do bumerangue (unidades por segundo)
 
@@ -2038,9 +2047,6 @@ pt Nenhuma congelação dura mais do que isto, por mais dano ou bónus de abate 
 
 @ Oldest marks and nails are recycled at this shared limit
 pt As marcas e pregos mais antigos são reutilizados ao atingir este limite comum
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-pt Manípulo e botões no ecrã: auto mostra-os após um toque e esconde-os quando se usa outro dispositivo
 
 @ Only autosaves: quicksaves and the Save menu are off
 pt Só gravações automáticas: a gravação rápida e o menu Guardar estão desativados
@@ -2411,6 +2417,18 @@ pt Usa direções de luz pré-calculadas (.dlit) para sombreamento e reflexos su
 
 @ Strength of the highlights from directional lighting
 pt Intensidade dos reflexos da iluminação direcional
+
+@ How far the view turns when you swipe
+pt Até que ponto a visualização gira quando desliza o dedo
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+pt Retarda o seu deslizamento perto de alvos visíveis. O Deathmatch requer permissão do servidor.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+pt Troca os lados por botões de movimento, mira e jogabilidade
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+pt Auto segue o dispositivo de entrada ativo. O menu permanece disponível quando a sobreposição está desativada.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ pt Nenhum servidor corresponde aos filtros
 
 @ Server search failed
 pt A pesquisa de servidores falhou
+
+@ Slide to select, release to equip
+pt Deslize para selecionar, solte para equipar
+
+@ Tap to swap weapons.
+pt Toque para trocar armas.
+
+@ Hold and slide to select.
+pt Segure e deslize para selecionar.
 
 # ==== hud.txt ====
 

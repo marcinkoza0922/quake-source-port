@@ -1781,6 +1781,18 @@ mr दिशात्मक प्रकाश
 @ Light Specular
 mr प्रकाश चमक
 
+@ Gameplay Overlay
+mr गेमप्ले आच्छादन
+
+@ Layout
+mr मांडणी
+
+@ Preview
+mr पूर्वावलोकन
+
+@ Resume Game
+mr खेळ पुन्हा सुरू करा
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ mr कंट्रोलर झुकवल्यावर दृश्य व�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 mr कंट्रोलर फिरवल्यावर दृश्य डावी-उजवीकडे किती वळते (यॉ अक्ष)
 
-@ How far the view turns when you drag on the right half of the screen
-mr स्क्रीनच्या उजव्या अर्ध्या भागावर ओढल्यावर दृश्य किती वळते
-
 @ How fast the boomerang flies (units per second)
 mr बूमरँग किती वेगाने उडतो (units प्रति सेकंद)
 
@@ -2038,9 +2047,6 @@ mr कितीही नुकसान किंवा किल बोनस 
 
 @ Oldest marks and nails are recycled at this shared limit
 mr सर्वात जुन्या खुणा आणि खिळे या सामायिक मर्यादेवर पुन्हा वापरले जातात
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-mr स्क्रीनवरील स्टिक आणि बटणे: ऑटो त्यांना स्पर्शानंतर दाखवते आणि दुसरे उपकरण वापरल्यावर लपवते
 
 @ Only autosaves: quicksaves and the Save menu are off
 mr फक्त ऑटोसेव्ह: क्विकसेव्ह आणि सेव्ह मेनू बंद आहेत
@@ -2411,6 +2417,18 @@ mr भिंती आणि मॉडेल्सवर सूक्ष्म �
 
 @ Strength of the highlights from directional lighting
 mr दिशात्मक प्रकाशातून येणाऱ्या चमकाची तीव्रता
+
+@ How far the view turns when you swipe
+mr तुम्ही स्वाइप करता तेव्हा दृश्य किती दूर वळते
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+mr दृश्यमान लक्ष्यांजवळ तुमचे स्वाइप धीमे करते. Deathmatch ला सर्व्हरची परवानगी आवश्यक आहे.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+mr हालचाली, लक्ष्य आणि गेमप्ले बटणांसाठी बाजू बदला
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+mr स्वयं सक्रिय इनपुट डिव्हाइसचे अनुसरण करते. आच्छादन बंद असताना मेनू उपलब्ध राहतो.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ mr फिल्टरशी जुळणारे सर्व्हर ना�
 
 @ Server search failed
 mr सर्व्हर शोध अयशस्वी झाला
+
+@ Slide to select, release to equip
+mr निवडण्यासाठी स्लाइड करा, सुसज्ज करण्यासाठी सोडा
+
+@ Tap to swap weapons.
+mr शस्त्रे स्वॅप करण्यासाठी टॅप करा.
+
+@ Hold and slide to select.
+mr निवडण्यासाठी धरा आणि स्लाइड करा.
 
 # ==== hud.txt ====
 

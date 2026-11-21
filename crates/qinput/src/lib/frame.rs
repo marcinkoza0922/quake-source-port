@@ -50,6 +50,7 @@ impl Input {
         // both wheels share the aim (stick or mouse cursor); only hijack look
         // once the weapon wheel has actually opened (or equipment wheel is held)
         let wheel = (self.wheel_open && b[btn::WHEEL].is_down()) || b[btn::EQUIPWHEEL].is_down();
+        let touch_wheel = self.wheel_open && self.touch.wheel_held();
         if !wheel {
             self.wheel_aim = [0.0; 2];
             self.wheel_mouse = [0.0; 2];
@@ -130,7 +131,7 @@ impl Input {
             aim_ok = self.last_look == LookDevice::Gamepad;
         }
 
-        // aim assist: gamepad only, never with mouse look
+        // Gamepad assist can rotate the view. Touch assist only scales a drag.
         self.last_aim = AimResult::NONE;
         let mouse_moved = self.mouse != [0.0; 2];
         if aim_ok && !mouse_moved && v(c.aim_assist) != 0.0
@@ -159,11 +160,22 @@ impl Input {
             s.back += mv[1].max(0.0);
             s.forward += (-mv[1]).max(0.0);
             // a full screen-height drag turns 180 degrees at sensitivity 1
+            let assist = self.touch_aim_active(cvars) && !mouse_moved;
             let lk = self.touch.take_look();
-            let k = 180.0 * v(c.touch_sensitivity);
-            let inv = if v(c.touch_invert) != 0.0 { -1.0 } else { 1.0 };
-            s.look_delta[0] -= lk[0] * k;
-            s.look_delta[1] += lk[1] * k * inv;
+            if !wheel && !touch_wheel && lk != [0.0; 2] {
+                let scale = if assist && let Some(ctx) = aim {
+                    let slowdown = if v(c.touch_aim_assist) >= 1.5 { 0.45 } else { 0.25 };
+                    let p = AimParams { slowdown, rotation: 0.0, snap: 0.0, ..AimParams::default() };
+                    self.last_aim = aim::aim_assist(&p, ctx, viewangles, ft, false);
+                    self.last_aim.scale
+                } else {
+                    1.0
+                };
+                let k = 180.0 * v(c.touch_sensitivity) * scale;
+                let inv = if v(c.touch_invert) != 0.0 { -1.0 } else { 1.0 };
+                s.look_delta[0] -= lk[0] * k;
+                s.look_delta[1] += lk[1] * k * inv;
+            }
         }
 
         // mouse
@@ -206,7 +218,7 @@ impl Input {
         self.buttons[btn::LOCKON].state &= !2;
         let cycle = self.key_down(if v(c.joy_swapmovelook) != 0.0 { K_LTHUMB } else { K_RTHUMB });
         let p = lockon::LockOnParams {
-            enabled: v(c.autoaim) != 0.0 && !wheel,
+            enabled: v(c.autoaim) != 0.0 && !wheel && !touch_wheel,
             allowed: self.autoaim_allowed,
             toggle: v(c.autoaim_mode) != 0.0,
             reacquire: v(c.autoaim_reacquire) != 0.0,

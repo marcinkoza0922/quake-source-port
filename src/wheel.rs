@@ -6,6 +6,7 @@
 use qclient::ClientState;
 use qnet::protocol::{STAT_ACTIVEWEAPON, STAT_CELLS, STAT_NAILS, STAT_ROCKETS, STAT_SHELLS};
 use qinput::keys::*;
+use qinput::touch::WheelGesture;
 
 use crate::draw::Canvas;
 use crate::glyphs::Glyphs;
@@ -26,6 +27,12 @@ pub struct Wheel {
     current: Option<Weapon>,
     /// The weapon used before the current one; a tap switches back to it.
     last: Option<Weapon>,
+    using_touch: bool,
+}
+
+pub enum WheelInput {
+    Button { held: bool, aim: [f32; 2] },
+    Touch(WheelGesture),
 }
 
 /// Seconds the button must be held before the wheel opens; a shorter press
@@ -43,12 +50,11 @@ pub fn sector(aim: [f32; 2], count: usize) -> Option<usize> {
 }
 
 impl Wheel {
-    /// Advance one frame of `dt` seconds. `held` is the wheel button,
+    /// Advance one frame of `dt` seconds.
     /// `allowed` whether the player can switch now (in game, alive). A tap
     /// returns the previous weapon; holding opens the wheel, and releasing
     /// it returns the exact weapon chosen when usable and not current.
-    #[allow(clippy::too_many_arguments)]
-    pub fn update(&mut self, dt: f32, held: bool, allowed: bool, aim: [f32; 2], cl: &ClientState,
+    pub fn update(&mut self, dt: f32, input: WheelInput, allowed: bool, cl: &ClientState,
         entries: &[Entry], held_addon: Option<qserver::addons::Toy>) -> Option<Weapon> {
         if !allowed {
             *self = Self { current: self.current, last: self.last, ..Self::default() };
@@ -62,6 +68,27 @@ impl Wheel {
         if self.entries != entries { self.sel = None; }
         self.entries = entries.to_vec();
         self.held_addon = held_addon;
+        let touch = matches!(input, WheelInput::Touch(_));
+        if touch != self.using_touch {
+            self.open = false;
+            self.pending = false;
+            self.sel = None;
+            self.using_touch = touch;
+        }
+        let (held, aim) = match input {
+            WheelInput::Button { held, aim } => (held, aim),
+            WheelInput::Touch(WheelGesture::Held(aim)) => (true, aim),
+            WheelInput::Touch(WheelGesture::Released(aim)) => {
+                if self.open {
+                    // A move and a lift can arrive in the same frame.
+                    self.sel = sector(aim, entries.len());
+                } else {
+                    // Also catches taps between host frames.
+                    self.pending = true;
+                }
+                (false, aim)
+            }
+        };
         if held {
             if !self.open {
                 if !self.pending {
@@ -77,6 +104,8 @@ impl Wheel {
             }
             if let Some(i) = sector(aim, entries.len()) {
                 self.sel = Some(i);
+            } else if touch {
+                self.sel = entries.iter().position(|s| s.active(cl, held_addon));
             }
             return None;
         }
@@ -154,13 +183,17 @@ impl Wheel {
         }
         let hint_y = cy + r + d / 2.0 + 8.0;
         let back = |c: &mut Canvas, w: f32| c.fill(cx - w / 2.0 - 6.0, hint_y - 3.0, w + 12.0, 16.0, [0.0, 0.0, 0.0, 0.7]);
-        if pad {
+        if pad && !self.using_touch {
             let items = [(K_LTHUMB, "/"), (K_RTHUMB, "Select"), (wheel_key, "Release to equip")];
             let w = g.hints(c, 0.0, 0.0, &items, false);
             back(c, w);
             g.hints_centered(c, cx, hint_y, &items);
         } else {
-            let s = qcore::t!("Move mouse to select, release to equip");
+            let s = if self.using_touch {
+                qcore::t!("Slide to select, release to equip")
+            } else {
+                qcore::t!("Move mouse to select, release to equip")
+            };
             let w = c.ptext_w(s);
             back(c, w);
             c.ptext(cx - w / 2.0, hint_y + 1.0, s, crate::draw::WHITE);
@@ -201,8 +234,9 @@ mod tests {
                 let aim = [angle.sin(), -angle.cos()];
                 assert_eq!(sector(aim, entries.len()), Some(i));
                 let mut wheel = Wheel::default();
-                wheel.update(1.0, true, true, aim, &cl, &entries, None);
-                let choice = wheel.update(0.0, false, true, [0.0; 2], &cl, &entries, None).unwrap();
+                wheel.update(1.0, WheelInput::Button { held: true, aim }, true, &cl, &entries, None);
+                let released = WheelInput::Button { held: false, aim: [0.0; 2] };
+                let choice = wheel.update(0.0, released, true, &cl, &entries, None).unwrap();
                 assert_eq!(choice, Weapon::Addon(toy));
                 let mut selection = crate::addons::WeaponSelection::default();
                 let mut impulse = 6;
@@ -225,24 +259,24 @@ mod tests {
         let entries = inventory(&qcore::cvar::Cvars::new(), &[]);
         let mut w = Wheel::default();
         cl.stats[STAT_ACTIVEWEAPON] = 1;
-        w.update(0.0, false, true, [0.0; 2], &cl, &entries, None);
+        w.update(0.0, WheelInput::Button { held: false, aim: [0.0; 2] }, true, &cl, &entries, None);
         cl.stats[STAT_ACTIVEWEAPON] = 32;
-        w.update(0.0, false, true, [0.0; 2], &cl, &entries, None);
+        w.update(0.0, WheelInput::Button { held: false, aim: [0.0; 2] }, true, &cl, &entries, None);
         // quick tap: no wheel, back to the axe
-        assert_eq!(w.update(0.05, true, true, [0.0; 2], &cl, &entries, None), None);
+        assert_eq!(w.update(0.05, WheelInput::Button { held: true, aim: [0.0; 2] }, true, &cl, &entries, None), None);
         assert!(!w.open);
-        assert_eq!(w.update(0.05, false, true, [0.0; 2], &cl, &entries, None), Some(Weapon::Stock(2)));
+        assert_eq!(w.update(0.05, WheelInput::Button { held: false, aim: [0.0; 2] }, true, &cl, &entries, None), Some(Weapon::Stock(2)));
         // tapping again with the axe active returns to the rocket launcher
         cl.stats[STAT_ACTIVEWEAPON] = 1;
-        w.update(0.0, false, true, [0.0; 2], &cl, &entries, None);
-        w.update(0.05, true, true, [0.0; 2], &cl, &entries, None);
-        assert_eq!(w.update(0.05, false, true, [0.0; 2], &cl, &entries, None), Some(Weapon::Stock(7)));
+        w.update(0.0, WheelInput::Button { held: false, aim: [0.0; 2] }, true, &cl, &entries, None);
+        w.update(0.05, WheelInput::Button { held: true, aim: [0.0; 2] }, true, &cl, &entries, None);
+        assert_eq!(w.update(0.05, WheelInput::Button { held: false, aim: [0.0; 2] }, true, &cl, &entries, None), Some(Weapon::Stock(7)));
         // hold: wheel opens, release without moving selects nothing new
-        w.update(0.1, true, true, [0.0; 2], &cl, &entries, None);
+        w.update(0.1, WheelInput::Button { held: true, aim: [0.0; 2] }, true, &cl, &entries, None);
         assert!(!w.open);
-        w.update(0.15, true, true, [0.0; 2], &cl, &entries, None);
+        w.update(0.15, WheelInput::Button { held: true, aim: [0.0; 2] }, true, &cl, &entries, None);
         assert!(w.open);
-        assert_eq!(w.update(0.0, false, true, [0.0; 2], &cl, &entries, None), None);
+        assert_eq!(w.update(0.0, WheelInput::Button { held: false, aim: [0.0; 2] }, true, &cl, &entries, None), None);
     }
 
     #[test]
@@ -253,15 +287,44 @@ mod tests {
         cl.stats[STAT_ROCKETS] = 5;
         let entries = inventory(&qcore::cvar::Cvars::new(), &[]);
         let mut w = Wheel::default();
-        assert_eq!(w.update(1.0, true, true, [0.0; 2], &cl, &entries, None), None);
+        assert_eq!(w.update(1.0, WheelInput::Button { held: true, aim: [0.0; 2] }, true, &cl, &entries, None), None);
         assert_eq!(w.sel, Some(1));
-        w.update(1.0, true, true, [-1.0, 0.0], &cl, &entries, None); // rocket launcher (left)
-        assert_eq!(w.update(0.0, false, true, [0.0; 2], &cl, &entries, None), Some(Weapon::Stock(7)));
+        w.update(1.0, WheelInput::Button { held: true, aim: [-1.0, 0.0] }, true, &cl, &entries, None); // rocket launcher (left)
+        assert_eq!(w.update(0.0, WheelInput::Button { held: false, aim: [0.0; 2] }, true, &cl, &entries, None), Some(Weapon::Stock(7)));
         // not owned: nothing
-        w.update(1.0, true, true, [0.0, 1.0], &cl, &entries, None);
-        assert_eq!(w.update(0.0, false, true, [0.0; 2], &cl, &entries, None), None);
+        w.update(1.0, WheelInput::Button { held: true, aim: [0.0, 1.0] }, true, &cl, &entries, None);
+        assert_eq!(w.update(0.0, WheelInput::Button { held: false, aim: [0.0; 2] }, true, &cl, &entries, None), None);
         // current weapon: nothing
-        w.update(1.0, true, true, [0.0; 2], &cl, &entries, None);
-        assert_eq!(w.update(0.0, false, true, [0.0; 2], &cl, &entries, None), None);
+        w.update(1.0, WheelInput::Button { held: true, aim: [0.0; 2] }, true, &cl, &entries, None);
+        assert_eq!(w.update(0.0, WheelInput::Button { held: false, aim: [0.0; 2] }, true, &cl, &entries, None), None);
+    }
+
+    #[test]
+    fn touch_wheel_quick_tap_final_direction_and_cancel() {
+        let mut cl = ClientState::default();
+        cl.items = 4096 | 1 | 32;
+        cl.stats[STAT_SHELLS] = 5;
+        cl.stats[STAT_ROCKETS] = 5;
+        let entries = inventory(&qcore::cvar::Cvars::new(), &[]);
+        let idle = || WheelInput::Button { held: false, aim: [0.0; 2] };
+        let mut wheel = Wheel::default();
+        cl.stats[STAT_ACTIVEWEAPON] = 1;
+        wheel.update(0.0, idle(), true, &cl, &entries, None);
+        cl.stats[STAT_ACTIVEWEAPON] = 32;
+        wheel.update(0.0, idle(), true, &cl, &entries, None);
+        let tap = WheelInput::Touch(WheelGesture::Released([0.0; 2]));
+        assert_eq!(wheel.update(0.0, tap, true, &cl, &entries, None), Some(Weapon::Stock(2)));
+        assert!(!wheel.open);
+
+        cl.stats[STAT_ACTIVEWEAPON] = 1;
+        let hold = || WheelInput::Touch(WheelGesture::Held([0.0; 2]));
+        wheel.update(HOLD_TIME, hold(), true, &cl, &entries, None);
+        assert!(wheel.open);
+        let release = WheelInput::Touch(WheelGesture::Released([-1.0, 0.0]));
+        assert_eq!(wheel.update(0.0, release, true, &cl, &entries, None), Some(Weapon::Stock(7)));
+        wheel.update(HOLD_TIME, hold(), true, &cl, &entries, None);
+        assert!(wheel.open);
+        assert_eq!(wheel.update(0.0, idle(), true, &cl, &entries, None), None);
+        assert!(!wheel.open);
     }
 }

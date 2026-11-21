@@ -88,7 +88,7 @@ impl Menu {
     /// Main menu rows: the classic five, Map Packs, Demos, and Customize while a
     /// customized game runs.
     pub(super) fn main_items(&self) -> usize {
-        MAIN_ITEMS + usize::from(self.custom_running)
+        MAIN_ITEMS + usize::from(self.custom_running) + usize::from(self.touch_shortcut)
     }
 
     /// Notes under the Customize pages' rows; returns the lines' height.

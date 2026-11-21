@@ -1781,6 +1781,18 @@ cs Směrové osvětlení
 @ Light Specular
 cs Odlesky světla
 
+@ Gameplay Overlay
+cs Překryvná hratelnost
+
+@ Layout
+cs Rozložení
+
+@ Preview
+cs Náhled
+
+@ Resume Game
+cs Obnovte hru
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ cs Jak moc se pohled naklání nahoru a dolů, když nakloníte ovladač (osa sk
 @ How far the view turns left and right when you turn the controller (yaw axis)
 cs Jak moc se pohled otáčí doleva a doprava, když otočíte ovladačem (osa otáčení)
 
-@ How far the view turns when you drag on the right half of the screen
-cs Jak moc se pohled otočí, když táhnete po pravé polovině obrazovky
-
 @ How fast the boomerang flies (units per second)
 cs Jak rychle bumerang letí (jednotky za sekundu)
 
@@ -2038,9 +2047,6 @@ cs Žádné zmrazení netrvá déle, bez ohledu na poškození nebo bonus za zab
 
 @ Oldest marks and nails are recycled at this shared limit
 cs Při dosažení tohoto společného limitu se nejstarší stopy a hřebíky recyklují
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-cs Páčka a tlačítka na obrazovce: auto je zobrazí po dotyku a skryje při použití jiného zařízení
 
 @ Only autosaves: quicksaves and the Save menu are off
 cs Jen automatické ukládání: rychlé ukládání a nabídka Uložit jsou vypnuté
@@ -2411,6 +2417,18 @@ cs Používá předpočítané směry světla (.dlit) pro jemné stínování a 
 
 @ Strength of the highlights from directional lighting
 cs Síla odlesků ze směrového osvětlení
+
+@ How far the view turns when you swipe
+cs Jak daleko se pohled otočí, když přejedete prstem
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+cs Zpomalí vaše přejetí poblíž viditelných cílů. Deathmatch vyžaduje povolení serveru.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+cs Vymění strany pro tlačítka pohybu, zaměřování a hraní
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+cs Auto následuje aktivní vstupní zařízení. Nabídka zůstane dostupná, když je překryvná vrstva vypnutá.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ cs Žádné odpovídající servery
 
 @ Server search failed
 cs Hledání serverů se nezdařilo
+
+@ Slide to select, release to equip
+cs Posunutím vyberete, uvolněním vybavíte
+
+@ Tap to swap weapons.
+cs Klepnutím vyměníte zbraně.
+
+@ Hold and slide to select.
+cs Podržením a posunutím vyberte.
 
 # ==== hud.txt ====
 

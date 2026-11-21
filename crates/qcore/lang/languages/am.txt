@@ -1781,6 +1781,18 @@ am አቅጣጫዊ ብርሃን
 @ Light Specular
 am የብርሃን አንጸባራቂነት
 
+@ Gameplay Overlay
+am የጨዋታ ተደራቢ
+
+@ Layout
+am አቀማመጥ
+
+@ Preview
+am ቅድመ እይታ
+
+@ Resume Game
+am ጨዋታውን ከቆመበት ቀጥልበት
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ am መቆጣጠሪያውን ሲያዘነብሉ እይታው ወደ ላይና ወ
 @ How far the view turns left and right when you turn the controller (yaw axis)
 am መቆጣጠሪያውን ሲያዞሩ እይታው ወደ ግራና ወደ ቀኝ ምን ያህል ይዞራል (የግራ-ቀኝ ዘንግ)
 
-@ How far the view turns when you drag on the right half of the screen
-am በስክሪኑ ቀኝ ግማሽ ላይ ሲጎትቱ እይታው ምን ያህል ይዞራል
-
 @ How fast the boomerang flies (units per second)
 am ቡሜራንጉ ምን ያህል በፍጥነት ይበራል (units በሰከንድ)
 
@@ -2038,9 +2047,6 @@ am ጉዳት ወይም የግድያ ጉርሻ ምንም ያህል ቢጨምር �
 
 @ Oldest marks and nails are recycled at this shared limit
 am የቆዩ ምልክቶችና ሚስማሮች በዚህ የጋራ ገደብ እንደገና ጥቅም ላይ ይውላሉ
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-am በስክሪን ላይ ያሉ ስቲክና አዝራሮች፦ ራስ-ሰር ከንክኪ በኋላ ያሳያቸዋል ሌላ መሳሪያ ሲጠቀሙ ይደብቃቸዋል
 
 @ Only autosaves: quicksaves and the Save menu are off
 am ራስ-ማስቀመጫዎች ብቻ፦ ፈጣን ማስቀመጫዎችና የማስቀመጫ ምናሌ ጠፍተዋል
@@ -2411,6 +2417,18 @@ am በግድግዳዎች እና ሞዴሎች ላይ ለስላሳ ጥላ እና �
 
 @ Strength of the highlights from directional lighting
 am ከአቅጣጫዊ ብርሃን የሚገኘው አንጸባራቂ ጥንካሬ
+
+@ How far the view turns when you swipe
+am ሲያንሸራትቱ እይታው ምን ያህል ርቀት ይቀየራል።
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+am በሚታዩ ዒላማዎች አቅራቢያ ማንሸራተትዎን ያቀዘቅዘዋል። Deathmatch የአገልጋይ ፍቃድ ያስፈልገዋል።
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+am ጎኖቹን ለእንቅስቃሴ፣ አላማ እና የጨዋታ አዝራሮች ይቀይራል።
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+am አውቶማቲክ የገቢር ግቤት መሣሪያውን ይከተላል። ተደራቢው ሲጠፋ ምናሌው እንዳለ ይቆያል።
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ am ከማጣሪያዎቹ ጋር የሚዛመድ አገልጋይ የለም
 
 @ Server search failed
 am አገልጋይ መፈለግ አልተሳካም
+
+@ Slide to select, release to equip
+am ለመምረጥ ያንሸራትቱ፣ ለመታጠቅ ይልቀቁ
+
+@ Tap to swap weapons.
+am የጦር መሳሪያዎችን ለመለዋወጥ መታ ያድርጉ።
+
+@ Hold and slide to select.
+am ለመምረጥ ያዝ እና ያንሸራትቱ።
 
 # ==== hud.txt ====
 

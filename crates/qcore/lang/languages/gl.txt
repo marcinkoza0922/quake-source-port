@@ -1781,6 +1781,18 @@ gl Iluminación direccional
 @ Light Specular
 gl Brillo especular
 
+@ Gameplay Overlay
+gl Superposición de xogo
+
+@ Layout
+gl Maquetación
+
+@ Preview
+gl Vista previa
+
+@ Resume Game
+gl Retomar o xogo
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ gl Canto se inclina a vista arriba e abaixo ao inclinar o mando (eixe de cabeceo
 @ How far the view turns left and right when you turn the controller (yaw axis)
 gl Canto xira a vista á esquerda e á dereita ao xirar o mando (eixe de guiñada)
 
-@ How far the view turns when you drag on the right half of the screen
-gl Canto xira a vista ao arrastrar na metade dereita da pantalla
-
 @ How fast the boomerang flies (units per second)
 gl Velocidade de voo do bumerán (unidades por segundo)
 
@@ -2038,9 +2047,6 @@ gl Ningunha conxelación dura máis ca isto, por moito dano ou bonificación por
 
 @ Oldest marks and nails are recycled at this shared limit
 gl As marcas e os cravos máis antigos reutilízanse ao chegar a este límite común
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-gl Panca e botóns en pantalla: auto móstraos tras un toque e ocúltaos ao usar outro dispositivo
 
 @ Only autosaves: quicksaves and the Save menu are off
 gl Só gardado automático: o gardado rápido e o menú Gardar están desactivados
@@ -2411,6 +2417,18 @@ gl Usa direccións de luz precalculadas (.dlit) para un sombreado e reflexos sut
 
 @ Strength of the highlights from directional lighting
 gl Intensidade dos reflexos da iluminación direccional
+
+@ How far the view turns when you swipe
+gl Ata onde xira a vista cando pasas o dedo
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+gl Ralentiza o paso preto dos obxectivos visibles. Deathmatch require permiso do servidor.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+gl Cambia os lados polos botóns de movemento, puntería e xogo
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+gl Auto segue o dispositivo de entrada activo. O menú permanece dispoñible cando a superposición está desactivada.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ gl Ningún servidor coincide cos filtros
 
 @ Server search failed
 gl Fallou a busca de servidores
+
+@ Slide to select, release to equip
+gl Desliza para seleccionar, solta para equipar
+
+@ Tap to swap weapons.
+gl Toca para intercambiar armas.
+
+@ Hold and slide to select.
+gl Mantén premido e desliza para seleccionar.
 
 # ==== hud.txt ====
 

@@ -1781,6 +1781,18 @@ zh-CN 方向性光照
 @ Light Specular
 zh-CN 光照高光
 
+@ Gameplay Overlay
+zh-CN 屏幕控件
+
+@ Layout
+zh-CN 布局
+
+@ Preview
+zh-CN 预览
+
+@ Resume Game
+zh-CN 继续游戏
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ zh-CN 前后倾斜手柄时视角上下转动的幅度（俯仰轴）
 @ How far the view turns left and right when you turn the controller (yaw axis)
 zh-CN 左右转动手柄时视角左右转动的幅度（偏航轴）
 
-@ How far the view turns when you drag on the right half of the screen
-zh-CN 在屏幕右半边拖动时视角转动的幅度
-
 @ How fast the boomerang flies (units per second)
 zh-CN 回旋镖的飞行速度（单位/秒）
 
@@ -2038,9 +2047,6 @@ zh-CN 无论伤害或击杀奖励增加多少，单次冻结都不会超过此�
 
 @ Oldest marks and nails are recycled at this shared limit
 zh-CN 痕迹和钉子共用此上限，超出时回收最旧的
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-zh-CN 屏幕上的摇杆和按钮：自动模式下触摸后显示，使用其他设备时隐藏
 
 @ Only autosaves: quicksaves and the Save menu are off
 zh-CN 仅限自动存档：快速存档和存档菜单均不可用
@@ -2411,6 +2417,18 @@ zh-CN 使用预烘焙的光照方向（.dlit）在墙面和模型上呈现细腻
 
 @ Strength of the highlights from directional lighting
 zh-CN 方向性光照产生的高光强度
+
+@ How far the view turns when you swipe
+zh-CN 滑动时视角转动的幅度
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+zh-CN 准星靠近可见目标时减慢转动。死亡竞赛需要服务器允许。
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+zh-CN 对调移动区、瞄准区和游戏按钮的位置
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+zh-CN 滑动选择，松开装备
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ zh-CN 没有符合条件的服务器
 
 @ Server search failed
 zh-CN 服务器搜索失败
+
+@ Slide to select, release to equip
+zh-CN 自动模式跟随当前输入设备。关闭屏幕控件后仍可打开菜单。
+
+@ Tap to swap weapons.
+zh-CN 轻触切换到上一把武器。
+
+@ Hold and slide to select.
+zh-CN 按住并滑动以选择武器。
 
 # ==== hud.txt ====
 

@@ -1,4 +1,4 @@
-//! Gamepad aim assist: slowdown (friction) cone + rotational assist. No snap by default.
+//! Aim assist: a slowdown cone for touch and gamepad, plus optional gamepad rotation.
 
 type V3 = [f32; 3];
 
@@ -107,7 +107,7 @@ impl Default for AimParams {
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct AimResult {
-    /// Multiplier for gamepad look input this frame.
+    /// Multiplier for assisted look input this frame.
     pub scale: f32,
     /// Added [yaw, pitch] degrees (Quake look_delta convention).
     pub delta: [f32; 2],
@@ -157,7 +157,7 @@ pub fn select_target(p: &AimParams, ctx: &AimContext, viewangles: V3) -> Option<
 }
 
 /// Compute assist. `player_input`: move or look stick deflected this frame.
-/// Caller must only call this for gamepad look (never mouse).
+/// Touch callers use slowdown only and pass `false` for `player_input`.
 pub fn aim_assist(p: &AimParams, ctx: &AimContext, viewangles: V3, ft: f32, player_input: bool) -> AimResult {
     if !ctx.allowed || ft <= 0.0 {
         return AimResult::NONE;

@@ -1781,6 +1781,18 @@ da Retningsbestemt lys
 @ Light Specular
 da Lysreflekser
 
+@ Gameplay Overlay
+da Gameplay Overlay
+
+@ Layout
+da Layout
+
+@ Preview
+da Forhåndsvisning
+
+@ Resume Game
+da Genoptag spillet
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ da Hvor langt visningen vipper op og ned, når du vipper controlleren (pitch-aks
 @ How far the view turns left and right when you turn the controller (yaw axis)
 da Hvor langt visningen drejer til venstre og højre, når du drejer controlleren (yaw-akse)
 
-@ How far the view turns when you drag on the right half of the screen
-da Hvor langt visningen drejer, når du trækker på skærmens højre halvdel
-
 @ How fast the boomerang flies (units per second)
 da Hvor hurtigt boomerangen flyver (enheder pr. sekund)
 
@@ -2038,9 +2047,6 @@ da Ingen enkelt frysning varer længere end dette, uanset hvor meget skade eller
 
 @ Oldest marks and nails are recycled at this shared limit
 da De ældste mærker og søm genbruges ved denne fælles grænse
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-da Stick og knapper på skærmen: auto viser dem efter en berøring og skjuler dem, når en anden enhed bruges
 
 @ Only autosaves: quicksaves and the Save menu are off
 da Kun autogemninger: hurtig gemning og menuen Gem er slået fra
@@ -2411,6 +2417,18 @@ da Bruger forudberegnede lysretninger (.dlit) til subtil skygge og glans på væ
 
 @ Strength of the highlights from directional lighting
 da Styrke af højlys fra retningsbestemt belysning
+
+@ How far the view turns when you swipe
+da Hvor langt visningen drejer, når du swiper
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+da Sænker dit swipe nær synlige mål. Deathmatch kræver servertilladelse.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+da Skifter siderne ud med bevægelses-, sigte- og gameplay-knapper
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+da Auto følger den aktive inputenhed. Menuen forbliver tilgængelig, når overlejringen er slået fra.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ da Ingen matchende servere
 
 @ Server search failed
 da Serversøgningen mislykkedes
+
+@ Slide to select, release to equip
+da Skub for at vælge, slip for at udstyre
+
+@ Tap to swap weapons.
+da Tryk for at bytte våben.
+
+@ Hold and slide to select.
+da Hold og skub for at vælge.
 
 # ==== hud.txt ====
 

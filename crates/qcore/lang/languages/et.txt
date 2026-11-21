@@ -1781,6 +1781,18 @@ et Suunatud valgustus
 @ Light Specular
 et Valguse läige
 
+@ Gameplay Overlay
+et Mängu ülekate
+
+@ Layout
+et Paigutus
+
+@ Preview
+et Eelvaade
+
+@ Resume Game
+et Jätkake mängu
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ et Kui palju vaade üles-alla kaldub, kui pult kallutad (kaldetelg)
 @ How far the view turns left and right when you turn the controller (yaw axis)
 et Kui palju vaade vasakule-paremale pöörab, kui pulti pöörad (pöördetelg)
 
-@ How far the view turns when you drag on the right half of the screen
-et Kui palju vaade pöörab, kui ekraani paremal poolel lohistad
-
 @ How fast the boomerang flies (units per second)
 et Kui kiiresti bumerang lendab (ühikut sekundis)
 
@@ -2038,9 +2047,6 @@ et Ükski külmutus ei kesta kauem, olenemata lisanduvast kahjust või tapuboonu
 
 @ Oldest marks and nails are recycled at this shared limit
 et Selle ühise piiri täitudes kasutatakse vanimad jäljed ja naelad uuesti
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-et Ekraanil olev kang ja nupud: auto näitab neid pärast puudutust ja peidab, kui kasutatakse muud seadet
 
 @ Only autosaves: quicksaves and the Save menu are off
 et Ainult autosalvestused: kiirsalvestus ja salvestusmenüü on välja lülitatud
@@ -2411,6 +2417,18 @@ et Kasutab eelküpsetatud valgussuundi (.dlit) peeneks varjutuseks ja läikeks s
 
 @ Strength of the highlights from directional lighting
 et Suunatud valgustuse läike tugevus
+
+@ How far the view turns when you swipe
+et Kui kaugele vaade pühkimisel pöördub
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+et Aeglustab pühkimist nähtavate sihtmärkide lähedal. Deathmatch nõuab serveri luba.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+et Vahetab küljed liikumis-, sihtimis- ja mängunuppude vastu
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+et Auto järgib aktiivset sisendseadet. Menüü jääb kättesaadavaks, kui ülekate on välja lülitatud.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ et Sobivaid servereid pole
 
 @ Server search failed
 et Serverite otsing ebaõnnestus
+
+@ Slide to select, release to equip
+et Valimiseks libistage, varustamiseks vabastage
+
+@ Tap to swap weapons.
+et Puudutage relvade vahetamiseks.
+
+@ Hold and slide to select.
+et Valimiseks hoidke ja libistage.
 
 # ==== hud.txt ====
 

@@ -1781,6 +1781,18 @@ zh-TW 方向性光照
 @ Light Specular
 zh-TW 光照高光
 
+@ Gameplay Overlay
+zh-TW 螢幕控制
+
+@ Layout
+zh-TW 配置
+
+@ Preview
+zh-TW 預覽
+
+@ Resume Game
+zh-TW 繼續遊戲
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ zh-TW 傾斜手把時視角上下傾斜的幅度（俯仰軸）
 @ How far the view turns left and right when you turn the controller (yaw axis)
 zh-TW 轉動手把時視角左右轉動的幅度（偏航軸）
 
-@ How far the view turns when you drag on the right half of the screen
-zh-TW 在螢幕右半邊拖曳時視角轉動的幅度
-
 @ How fast the boomerang flies (units per second)
 zh-TW 迴力鏢的飛行速度（每秒單位數）
 
@@ -2038,9 +2047,6 @@ zh-TW 無論傷害或擊殺加成增加多少，單次凍結都不會超過此�
 
 @ Oldest marks and nails are recycled at this shared limit
 zh-TW 達到此共用上限時會回收最舊的痕跡與鐵釘
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-zh-TW 螢幕搖桿與按鈕：自動會在觸碰後顯示，並在使用其他裝置時隱藏
 
 @ Only autosaves: quicksaves and the Save menu are off
 zh-TW 僅限自動存檔：停用快速存檔與存檔選單
@@ -2411,6 +2417,18 @@ zh-TW 使用預烘焙的光照方向（.dlit）在牆面與模型上呈現細膩
 
 @ Strength of the highlights from directional lighting
 zh-TW 方向性光照產生的高光強度
+
+@ How far the view turns when you swipe
+zh-TW 滑動時視角轉動的幅度
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+zh-TW 準星靠近可見目標時減慢轉動。死鬥模式需要伺服器允許。
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+zh-TW 對調移動區、瞄準區和遊戲按鈕的位置
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+zh-TW 滑動選擇，放開裝備
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ zh-TW 沒有符合條件的伺服器
 
 @ Server search failed
 zh-TW 搜尋伺服器失敗
+
+@ Slide to select, release to equip
+zh-TW 自動模式跟隨目前的輸入裝置。關閉螢幕控制後仍可開啟選單。
+
+@ Tap to swap weapons.
+zh-TW 輕觸切換到上一把武器。
+
+@ Hold and slide to select.
+zh-TW 按住並滑動以選擇武器。
 
 # ==== hud.txt ====
 

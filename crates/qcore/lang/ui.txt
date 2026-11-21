@@ -2397,3 +2397,24 @@ de Serversuche fehlgeschlagen
 it Ricerca dei server non riuscita
 es Error al buscar servidores
 ru Не удалось выполнить поиск серверов
+
+@ Slide to select, release to equip
+fr Auto suit le périphérique utilisé. Le menu reste accessible quand les commandes sont masquées.
+de Auto folgt dem aktiven Eingabegerät. Das Menü bleibt bei ausgeblendeter Steuerung verfügbar.
+it Auto segue il dispositivo attivo. Il menu resta accessibile con i comandi nascosti.
+es Auto sigue al dispositivo activo. El menú sigue disponible con los controles ocultos.
+ru Авто следует за активным устройством. Меню доступно и при скрытых кнопках.
+
+@ Tap to swap weapons.
+fr Touchez pour changer d’arme.
+de Tippen wechselt zur letzten Waffe.
+it Tocca per cambiare arma.
+es Toca para volver al arma anterior.
+ru Коснитесь для смены оружия.
+
+@ Hold and slide to select.
+fr Maintenez et glissez pour choisir.
+de Halten und wischen zum Auswählen.
+it Tieni premuto e scorri per scegliere.
+es Mantén pulsado y desliza para elegir.
+ru Удерживайте и проведите для выбора.

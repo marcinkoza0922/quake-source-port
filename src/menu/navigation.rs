@@ -5,6 +5,14 @@ impl Menu {
     /// Back follows the current menu's content; drawing and mouse input share its bounds.
     pub(super) fn back_button(&self) -> Option<(f32, f32, f32, f32)> {
         if self.capturing() || self.osk.is_some() { return None; }
+        if self.screen == Screen::OptionsPage(Page::Touch) {
+            let [x, y, w, h] = touch::BACK;
+            return Some((x, y, w, h));
+        }
+        if self.screen == Screen::Main && self.touch_shortcut {
+            let [x, y, w, h] = touch::RESUME;
+            return Some((x, y, w, h));
+        }
         let (x, y) = match self.screen {
             Screen::SinglePlayer => (CLASSIC.0 + 72.0, CLASSIC.1 + 32.0 + customize::SP_ITEMS as f32 * 20.0 + 8.0),
             Screen::Multiplayer => (CLASSIC.0 + 72.0, CLASSIC.1 + 32.0 + 3.0 * 20.0 + 8.0),
@@ -95,10 +103,15 @@ impl Menu {
         let bg = if hover { HILITE } else { [0.0, 0.0, 0.0, 0.7] };
         c.round_box(x, y, w, h, 4.0, bg, Some(BORDER));
         let fg = if hover { GOLD_FG } else { FG };
+        if self.screen == Screen::Main {
+            self.glyphs.button_label(c, [x, y, w, h], self.pad_ui.then_some(K_BBUTTON), qcore::t!("Resume Game"), 16.0, fg);
+            return;
+        }
+        let size = if self.screen == Screen::OptionsPage(Page::Touch) { 12.0 } else { TXT };
         if self.pad_ui {
-            self.glyphs.button_label(c, [x, y, w, h], Some(K_BBUTTON), qcore::t!("Back"), TXT, fg);
+            self.glyphs.button_label(c, [x, y, w, h], Some(K_BBUTTON), qcore::t!("Back"), size, fg);
         } else {
-            self.glyphs.button_label(c, [x, y, w, h], None, qcore::t!("< Back"), TXT, fg);
+            self.glyphs.button_label(c, [x, y, w, h], None, qcore::t!("< Back"), size, fg);
         }
     }
 
@@ -179,7 +192,7 @@ impl Menu {
 #[cfg(test)]
 mod tests;
 
-fn wrap_tooltip_lines(c: &Canvas, s: &str, max_w: f32, size: f32) -> Vec<String> {
+pub(super) fn wrap_tooltip_lines(c: &Canvas, s: &str, max_w: f32, size: f32) -> Vec<String> {
     if c.text_w_raw(s, size) <= max_w {
         return vec![s.to_string()];
     }

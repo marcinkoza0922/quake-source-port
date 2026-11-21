@@ -20,6 +20,11 @@ impl Menu {
 
     pub(super) fn run(&mut self, run: Run, cv: &mut Cvars, out: &mut Vec<Action>) {
         match run {
+            Run::ResetTouch => {
+                touch::reset(cv);
+                out.push(Action::Sound("misc/menu3.wav"));
+                return;
+            }
             Run::ResetShotguns | Run::ResetBulletTime => {
                 let names: &[&str] = if run == Run::ResetShotguns { &["addon_shotgun_speed"] } else {
                     &["addon_bullet_time_toggle", "addon_bullet_time_meter", "addon_bullet_time_duration", "addon_bullet_time_regen"]

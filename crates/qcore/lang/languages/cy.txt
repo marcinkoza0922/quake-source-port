@@ -1781,6 +1781,18 @@ cy Goleuo Cyfeiriadol
 @ Light Specular
 cy Disgleirdeb Golau
 
+@ Gameplay Overlay
+cy Troshaen gameplay
+
+@ Layout
+cy Gosodiad
+
+@ Preview
+cy Rhagolwg
+
+@ Resume Game
+cy Ail-ddechrau'r gêm
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ cy Pa mor bell mae'r olwg yn gogwyddo i fyny ac i lawr pan fyddwch yn gogwyddo'r
 @ How far the view turns left and right when you turn the controller (yaw axis)
 cy Pa mor bell mae'r olwg yn troi i'r chwith a'r dde pan fyddwch yn troi'r rheolydd (echelin gwyro)
 
-@ How far the view turns when you drag on the right half of the screen
-cy Pa mor bell mae'r olwg yn troi pan fyddwch yn llusgo ar hanner de'r sgrin
-
 @ How fast the boomerang flies (units per second)
 cy Pa mor gyflym mae'r bwmerang yn hedfan (unedau yr eiliad)
 
@@ -2038,9 +2047,6 @@ cy Nid oes unrhyw rewi'n para'n hirach na hyn, faint bynnag o ddifrod neu fonws 
 
 @ Oldest marks and nails are recycled at this shared limit
 cy Mae'r olion a'r hoelion hynaf yn cael eu hailgylchu wrth y terfyn cyffredin hwn
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-cy Ffon a botymau ar y sgrin: mae awto yn eu dangos ar ôl cyffwrdd ac yn eu cuddio pan ddefnyddir dyfais arall
 
 @ Only autosaves: quicksaves and the Save menu are off
 cy Awtogadw yn unig: mae cadw cyflym a'r ddewislen Cadw i ffwrdd
@@ -2411,6 +2417,18 @@ cy Yn defnyddio cyfeiriadau golau wedi'u pobi (.dlit) ar gyfer cysgodi amanwl ac
 
 @ Strength of the highlights from directional lighting
 cy Cryfder yr uchafbwyntiau o oleuo cyfeiriadol
+
+@ How far the view turns when you swipe
+cy Pa mor bell mae'r olygfa'n troi pan fyddwch chi'n llithro
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+cy Yn arafu eich swipe yn agos at dargedau gweladwy. Mae angen caniatâd gweinydd ar Deathmatch.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+cy Yn cyfnewid yr ochrau am fotymau symud, anelu a gameplay
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+cy Mae Auto yn dilyn y ddyfais mewnbwn gweithredol. Mae'r fwydlen yn aros ar gael pan fydd y troshaen i ffwrdd.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ cy Dim gweinyddion sy'n cyfateb i'r hidlyddion
 
 @ Server search failed
 cy Methodd y chwiliad am weinyddion
+
+@ Slide to select, release to equip
+cy Sleid i ddewis, rhyddhau i arfogi
+
+@ Tap to swap weapons.
+cy Tapiwch i gyfnewid arfau.
+
+@ Hold and slide to select.
+cy Daliwch a llithro i ddewis.
 
 # ==== hud.txt ====
 

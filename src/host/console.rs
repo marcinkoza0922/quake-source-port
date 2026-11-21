@@ -253,6 +253,7 @@ impl Host {
     pub(super) fn sync_key_dest(&mut self) {
         let d = self.key_dest();
         if self.input.dest != d {
+            if d != KeyDest::Menu { self.cancel_menu_touch(); }
             qinput::set_key_dest(self, d);
         }
         // text events for the console, chat prompt, and menu text rows only,

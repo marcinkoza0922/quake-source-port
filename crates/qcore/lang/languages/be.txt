@@ -1781,6 +1781,18 @@ be Накіраванае асвятленне
 @ Light Specular
 be Блікі святла
 
+@ Gameplay Overlay
+be Накладанне геймплэя
+
+@ Layout
+be Макет
+
+@ Preview
+be Папярэдні прагляд
+
+@ Resume Game
+be Аднавіць гульню
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ be Наколькі агляд нахіляецца ўверх і ўніз, ка
 @ How far the view turns left and right when you turn the controller (yaw axis)
 be Наколькі агляд паварочваецца ўлева і ўправа, калі вы паварочваеце геймпад (вось рыскання)
 
-@ How far the view turns when you drag on the right half of the screen
-be Наколькі паварочваецца агляд, калі вы вядзеце пальцам па правай палове экрана
-
 @ How fast the boomerang flies (units per second)
 be Хуткасць палёту бумеранга (адзінак у секунду)
 
@@ -2038,9 +2047,6 @@ be Ніводзін стоп-кадр не доўжыцца даўжэй, кол
 
 @ Oldest marks and nails are recycled at this shared limit
 be Найстарэйшыя сляды і цвікі замяняюцца пасля дасягнення гэтага агульнага ліміту
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-be Экранны стык і кнопкі: «аўта» паказвае іх пасля дотыку і хавае, калі выкарыстоўваецца іншая прылада
 
 @ Only autosaves: quicksaves and the Save menu are off
 be Толькі аўтазахаванні: хуткае захаванне і меню захавання выключаныя
@@ -2411,6 +2417,18 @@ be Выкарыстоўвае запечаныя напрамкі святла (
 
 @ Strength of the highlights from directional lighting
 be Інтэнсіўнасць блікаў ад накіраванага асвятлення
+
+@ How far the view turns when you swipe
+be Як далёка паварочваецца выгляд, калі вы праводзіце пальцам
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+be Запавольвае правядзенне пальцам каля бачных мэтаў. Deathmatch патрабуе дазволу сервера.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+be Мяняе бакі для кнопак руху, прыцэльвання і гульні
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+be Аўто ідзе за актыўнай прыладай уводу. Меню застаецца даступным, калі накладанне выключана.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ be Няма прыдатных сервераў
 
 @ Server search failed
 be Не ўдалося выканаць пошук сервераў
+
+@ Slide to select, release to equip
+be Ссуньце, каб выбраць, адпусціце, каб экіпіраваць
+
+@ Tap to swap weapons.
+be Націсніце, каб памяняць зброю.
+
+@ Hold and slide to select.
+be Утрымлівайце і ссуньце, каб выбраць.
 
 # ==== hud.txt ====
 

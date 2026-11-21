@@ -1781,6 +1781,18 @@ ro Iluminare direcțională
 @ Light Specular
 ro Reflexii speculare
 
+@ Gameplay Overlay
+ro Gameplay Overlay
+
+@ Layout
+ro Aspect
+
+@ Preview
+ro Previzualizare
+
+@ Resume Game
+ro Reluați jocul
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ ro Cât de mult se înclină privirea în sus și în jos când înclini control
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ro Cât de mult se rotește privirea la stânga și la dreapta când rotești controlerul (axa de girație)
 
-@ How far the view turns when you drag on the right half of the screen
-ro Cât de mult se rotește privirea când tragi cu degetul pe jumătatea dreaptă a ecranului
-
 @ How fast the boomerang flies (units per second)
 ro Cât de repede zboară bumerangul (unități pe secundă)
 
@@ -2038,9 +2047,6 @@ ro Nicio înghețare nu durează mai mult de atât, indiferent de daune sau bonu
 
 @ Oldest marks and nails are recycled at this shared limit
 ro Cele mai vechi urme și cuie sunt reciclate la această limită comună
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ro Stick și butoane pe ecran: auto le afișează după o atingere și le ascunde când se folosește alt dispozitiv
 
 @ Only autosaves: quicksaves and the Save menu are off
 ro Doar salvări automate: salvarea rapidă și meniul Salvare sunt dezactivate
@@ -2411,6 +2417,18 @@ ro Folosește direcții de lumină precalculate (.dlit) pentru umbrire și refle
 
 @ Strength of the highlights from directional lighting
 ro Intensitatea reflexiilor din iluminarea direcțională
+
+@ How far the view turns when you swipe
+ro Cât de departe se întoarce vizualizarea când glisați
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+ro Încetinește glisarea în apropierea țintelor vizibile. Deathmatch necesită permisiunea serverului.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ro Schimbă părțile laterale pentru butoanele de mișcare, țintire și joc
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ro Auto urmărește dispozitivul de intrare activ. Meniul rămâne disponibil când suprapunerea este dezactivată.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ ro Niciun server nu corespunde filtrelor
 
 @ Server search failed
 ro Căutarea serverelor a eșuat
+
+@ Slide to select, release to equip
+ro Glisați pentru a selecta, eliberați pentru a echipa
+
+@ Tap to swap weapons.
+ro Atingeți pentru a schimba armele.
+
+@ Hold and slide to select.
+ro Țineți apăsat și glisați pentru a selecta.
 
 # ==== hud.txt ====
 

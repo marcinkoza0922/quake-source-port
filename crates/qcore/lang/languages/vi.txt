@@ -1781,6 +1781,18 @@ vi Ánh sáng có hướng
 @ Light Specular
 vi Độ bóng ánh sáng
 
+@ Gameplay Overlay
+vi Lớp phủ trò chơi
+
+@ Layout
+vi Bố cục
+
+@ Preview
+vi Xem trước
+
+@ Resume Game
+vi Tiếp tục trò chơi
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ vi Góc nhìn ngẩng lên và cúi xuống bao nhiêu khi bạn nghiêng tay c�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 vi Góc nhìn xoay trái phải bao nhiêu khi bạn xoay tay cầm (trục ngang)
 
-@ How far the view turns when you drag on the right half of the screen
-vi Góc nhìn xoay bao nhiêu khi bạn kéo trên nửa phải màn hình
-
 @ How fast the boomerang flies (units per second)
 vi Tốc độ bay của boomerang (đơn vị mỗi giây)
 
@@ -2038,9 +2047,6 @@ vi Không lần đóng băng nào kéo dài hơn mức này, dù sát thương h
 
 @ Oldest marks and nails are recycled at this shared limit
 vi Vết và đinh cũ nhất được tái sử dụng khi đạt giới hạn chung này
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-vi Cần và nút trên màn hình: tự động hiện chúng sau khi chạm và ẩn khi dùng thiết bị khác
 
 @ Only autosaves: quicksaves and the Save menu are off
 vi Chỉ tự động lưu: lưu nhanh và menu Lưu bị tắt
@@ -2411,6 +2417,18 @@ vi Dùng hướng sáng tính sẵn (.dlit) để tạo đổ bóng và điểm 
 
 @ Strength of the highlights from directional lighting
 vi Cường độ điểm sáng bóng từ ánh sáng có hướng
+
+@ How far the view turns when you swipe
+vi Chế độ xem sẽ quay được bao xa khi bạn vuốt
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+vi Làm chậm thao tác vuốt của bạn khi ở gần các mục tiêu có thể nhìn thấy. Deathmatch yêu cầu sự cho phép của máy chủ.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+vi Hoán đổi các bên cho các nút di chuyển, nhắm và chơi trò chơi
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+vi Tự động theo dõi thiết bị đầu vào đang hoạt động. Menu vẫn khả dụng khi lớp phủ tắt.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ vi Không có máy chủ phù hợp
 
 @ Server search failed
 vi Tìm kiếm máy chủ thất bại
+
+@ Slide to select, release to equip
+vi Trượt để chọn, thả ra để trang bị
+
+@ Tap to swap weapons.
+vi Nhấn để trao đổi vũ khí.
+
+@ Hold and slide to select.
+vi Giữ và trượt để chọn.
 
 # ==== hud.txt ====
 

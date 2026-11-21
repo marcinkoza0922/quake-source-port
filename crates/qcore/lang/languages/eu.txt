@@ -1781,6 +1781,18 @@ eu Norabidezko argiztapena
 @ Light Specular
 eu Argi-distira
 
+@ Gameplay Overlay
+eu Jokatzeko gainjartzea
+
+@ Layout
+eu Diseinua
+
+@ Preview
+eu Aurrebista
+
+@ Resume Game
+eu Berrekin jokoari
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ eu Kontrolagailua okertzean ikuspegia gora eta behera zenbat okertzen den (pitch
 @ How far the view turns left and right when you turn the controller (yaw axis)
 eu Kontrolagailua biratzean ikuspegia ezkerrera eta eskuinera zenbat biratzen den (yaw ardatza)
 
-@ How far the view turns when you drag on the right half of the screen
-eu Pantailaren eskuineko erdian arrastatzean ikuspegia zenbat biratzen den
-
 @ How fast the boomerang flies (units per second)
 eu Bumeranaren hegaldi-abiadura (unitate segundoko)
 
@@ -2038,9 +2047,6 @@ eu Izozte bakar batek ere ez du hau baino gehiago irauten, kalteak edo hilketa-s
 
 @ Oldest marks and nails are recycled at this shared limit
 eu Marka eta iltze zaharrenak berrerabiltzen dira muga partekatu honetara iristean
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-eu Pantailako palanka eta botoiak: auto-k ukitu baten ondoren erakusten ditu eta beste gailu bat erabiltzean ezkutatzen ditu
 
 @ Only autosaves: quicksaves and the Save menu are off
 eu Autogordetzeak soilik: gordetze azkarrak eta Gorde menua desaktibatuta daude
@@ -2411,6 +2417,18 @@ eu Aurrez kalkulatutako argi-norabideak (.dlit) erabiltzen ditu hormetan eta mod
 
 @ Strength of the highlights from directional lighting
 eu Norabidezko argiztapenaren distiren indarra
+
+@ How far the view turns when you swipe
+eu Ikuspegia noraino biratzen den hatza pasatzen duzunean
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+eu Zure hatza moteltzen du helburu ikusgaietatik gertu. Deathmatch-ek zerbitzariaren baimena behar du.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+eu Aldeak mugitzeko, apuntatzeko eta jokatzeko botoiekin aldatzen ditu
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+eu Autoak sarrerako gailu aktiboari jarraitzen dio. Menua erabilgarri egongo da gainjartzea desaktibatuta dagoenean.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ eu Ez dago iragazkiekin bat datorren zerbitzaririk
 
 @ Server search failed
 eu Zerbitzarien bilaketak huts egin du
+
+@ Slide to select, release to equip
+eu Irristatu hautatzeko, askatu hornitzeko
+
+@ Tap to swap weapons.
+eu Ukitu armak trukatzeko.
+
+@ Hold and slide to select.
+eu Eduki sakatuta eta irristatu aukeratzeko.
 
 # ==== hud.txt ====
 

@@ -1781,6 +1781,18 @@ pl Oświetlenie kierunkowe
 @ Light Specular
 pl Połysk światła
 
+@ Gameplay Overlay
+pl Nakładka rozgrywki
+
+@ Layout
+pl Układ
+
+@ Preview
+pl Podgląd
+
+@ Resume Game
+pl Wznów grę
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ pl Jak bardzo widok przechyla się w górę i w dół, gdy pochylasz kontroler (
 @ How far the view turns left and right when you turn the controller (yaw axis)
 pl Jak bardzo widok obraca się w lewo i w prawo, gdy obracasz kontroler (oś pozioma)
 
-@ How far the view turns when you drag on the right half of the screen
-pl Jak bardzo obraca się widok, gdy przeciągasz po prawej połowie ekranu
-
 @ How fast the boomerang flies (units per second)
 pl Jak szybko leci bumerang (jednostki na sekundę)
 
@@ -2038,9 +2047,6 @@ pl Żadne pojedyncze zamrożenie nie trwa dłużej, niezależnie od obrażeń i 
 
 @ Oldest marks and nails are recycled at this shared limit
 pl Po osiągnięciu tego wspólnego limitu najstarsze ślady i gwoździe są używane ponownie
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-pl Gałka i przyciski na ekranie: auto pokazuje je po dotknięciu i ukrywa, gdy używasz innego urządzenia
 
 @ Only autosaves: quicksaves and the Save menu are off
 pl Tylko autozapisy: szybki zapis i menu zapisu są wyłączone
@@ -2411,6 +2417,18 @@ pl Używa zapisanych kierunków światła (.dlit) do subtelnego cieniowania i po
 
 @ Strength of the highlights from directional lighting
 pl Siła odblasków od oświetlenia kierunkowego
+
+@ How far the view turns when you swipe
+pl Jak daleko sięga widok po przesunięciu
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+pl Spowalnia machnięcie w pobliżu widocznych celów. Deathmatch wymaga pozwolenia serwera.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+pl Zamienia strony dla przycisków ruchu, celowania i rozgrywki
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+pl Auto podąża za aktywnym urządzeniem wejściowym. Menu pozostaje dostępne, gdy nakładka jest wyłączona.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ pl Brak pasujących serwerów
 
 @ Server search failed
 pl Wyszukiwanie serwerów nie powiodło się
+
+@ Slide to select, release to equip
+pl Przesuń, aby wybrać, zwolnij, aby wyposażyć
+
+@ Tap to swap weapons.
+pl Kliknij, aby zamienić broń.
+
+@ Hold and slide to select.
+pl Przytrzymaj i przesuń, aby wybrać.
 
 # ==== hud.txt ====
 

@@ -1781,6 +1781,18 @@ km ពន្លឺ​មាន​ទិសដៅ
 @ Light Specular
 km ពន្លឺ​ចាំង​ផ្លាត
 
+@ Gameplay Overlay
+km ការ​លេង​ហ្គេម​ជាន់លើ
+
+@ Layout
+km ប្លង់
+
+@ Preview
+km មើល​ជាមុន
+
+@ Resume Game
+km បន្ត​ហ្គេម
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ km កម្រិត​ដែល​ទិដ្ឋភាព​ផ្ងារ�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 km កម្រិត​ដែល​ទិដ្ឋភាព​បត់​ឆ្វេង​ស្ដាំ​ពេល​អ្នក​បង្វិល​ឧបករណ៍​បញ្ជា (អ័ក្ស yaw)
 
-@ How far the view turns when you drag on the right half of the screen
-km កម្រិត​ដែល​ទិដ្ឋភាព​បត់​ពេល​អ្នក​អូស​លើ​ពាក់​កណ្ដាល​ស្ដាំ​នៃ​អេក្រង់
-
 @ How fast the boomerang flies (units per second)
 km ល្បឿន​ហោះ​របស់​ប៊ូមឺរ៉ង់ (ឯកតា​ក្នុង​មួយ​វិនាទី)
 
@@ -2038,9 +2047,6 @@ km គ្មាន​ការ​កក​ណា​មួយ​អូស​ប�
 
 @ Oldest marks and nails are recycled at this shared limit
 km ស្នាម​និង​ដែក​គោល​ចាស់​បំផុត​ត្រូវ​ប្រើ​ឡើង​វិញ​ពេល​ដល់​ដែន​កំណត់​រួម​នេះ
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-km ដង​បញ្ជា​និង​ប៊ូតុង​លើ​អេក្រង់: ស្វ័យ​ប្រវត្តិ​បង្ហាញ​វា​ក្រោយ​ពេល​ប៉ះ​ហើយ​លាក់​វា​ពេល​ប្រើ​ឧបករណ៍​ផ្សេង
 
 @ Only autosaves: quicksaves and the Save menu are off
 km តែ​រក្សា​ទុក​ស្វ័យ​ប្រវត្តិ: រក្សា​ទុក​រហ័ស​និង​ម៉ឺនុយ​រក្សា​ទុក​ត្រូវ​បិទ
@@ -2411,6 +2417,18 @@ km ប្រើ​ទិសដៅ​ពន្លឺ​ដែល​បាន​�
 
 @ Strength of the highlights from directional lighting
 km កម្រិត​ពន្លឺ​ចាំង​ផ្លាត​ពី​ពន្លឺ​មាន​ទិសដៅ
+
+@ How far the view turns when you swipe
+km តើ​​​ទិដ្ឋភាព​​​ប្រែ​​​ទៅ​​​ឆ្ងាយ​​​ប៉ុណ្ណា​​​ពេល​​​អ្នក​​​អូស
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+km បន្ថយល្បឿន​អូស​របស់​អ្នក​នៅ​ជិត​គោលដៅ​ដែល​អាច​មើលឃើញ​។​ ​Deathmatch​ ​ទាមទារ​ការអនុញ្ញាត​ពី​ម៉ាស៊ីន​មេ​។
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+km ប្តូរ​ផ្នែក​សម្រាប់​ចលនា​ ​គោលបំណង​ ​និង​ប៊ូតុង​លេង​ហ្គេម
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+km ស្វ័យប្រវត្តិ​ធ្វើតាម​ឧបករណ៍​បញ្ចូល​សកម្ម​។​ ​ម៉ឺនុយ​​​នឹង​​​មាន​​​នៅ​​​ពេល​​​បិទ​​​ការ​​​ត្រួត​​​ពិនិត្យ​។
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ km គ្មាន​ម៉ាស៊ីនមេ​ដែល​ត្រូវ�
 
 @ Server search failed
 km ការ​ស្វែងរក​ម៉ាស៊ីនមេ​បាន​បរាជ័យ
+
+@ Slide to select, release to equip
+km ស្លាយ​ដើម្បី​ជ្រើសរើស​ ​បញ្ចេញ​ដើម្បី​បំពាក់
+
+@ Tap to swap weapons.
+km ប៉ះ​ដើម្បី​ប្តូរ​អាវុធ​។
+
+@ Hold and slide to select.
+km សង្កត់​ហើយ​រុញ​ដើម្បី​ជ្រើសរើស​។
 
 # ==== hud.txt ====
 

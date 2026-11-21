@@ -1781,6 +1781,18 @@ sl Usmerjena osvetlitev
 @ Light Specular
 sl Svetlobni odsev
 
+@ Gameplay Overlay
+sl Prekrivanje igranja
+
+@ Layout
+sl Postavitev
+
+@ Preview
+sl Predogled
+
+@ Resume Game
+sl Nadaljujte z igro
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ sl Koliko se pogled nagne gor in dol, ko nagnete krmilnik (os naklona)
 @ How far the view turns left and right when you turn the controller (yaw axis)
 sl Koliko se pogled obrne levo in desno, ko obrnete krmilnik (os zasuka)
 
-@ How far the view turns when you drag on the right half of the screen
-sl Koliko se pogled obrne, ko vlečete po desni polovici zaslona
-
 @ How fast the boomerang flies (units per second)
 sl Kako hitro leti bumerang (enot na sekundo)
 
@@ -2038,9 +2047,6 @@ sl Nobena posamezna zamrznitev ne traja dlje od tega, ne glede na dodano škodo 
 
 @ Oldest marks and nails are recycled at this shared limit
 sl Najstarejše sledi in žeblji se ob tej skupni omejitvi ponovno uporabijo
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-sl Palica in gumbi na zaslonu: samodejno jih pokaže po dotiku in skrije, ko uporabite drugo napravo
 
 @ Only autosaves: quicksaves and the Save menu are off
 sl Samo samodejna shranjevanja: hitro shranjevanje in meni Shrani sta izklopljena
@@ -2411,6 +2417,18 @@ sl Uporablja vnaprej izračunane smeri svetlobe (.dlit) za subtilno senčenje in
 
 @ Strength of the highlights from directional lighting
 sl Moč svetlobnih poudarkov iz usmerjene osvetlitve
+
+@ How far the view turns when you swipe
+sl Kako daleč se pogled obrne, ko povlečete
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+sl Upočasni poteg blizu vidnih ciljev. Deathmatch zahteva dovoljenje strežnika.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+sl Zamenja strani za gumbe za gibanje, ciljanje in igranje
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+sl Samodejno sledi aktivni vhodni napravi. Meni ostane na voljo, ko je prekrivanje izklopljeno.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ sl Ni strežnikov, ki ustrezajo filtrom
 
 @ Server search failed
 sl Iskanje strežnikov ni uspelo
+
+@ Slide to select, release to equip
+sl Potisnite za izbiro, spustite za opremo
+
+@ Tap to swap weapons.
+sl Tapnite za zamenjavo orožja.
+
+@ Hold and slide to select.
+sl Pridržite in podrsajte, da izberete.
 
 # ==== hud.txt ====
 

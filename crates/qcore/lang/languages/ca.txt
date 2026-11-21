@@ -1781,6 +1781,18 @@ ca Il·luminació direccional
 @ Light Specular
 ca Brillantor especular
 
+@ Gameplay Overlay
+ca Superposició de joc
+
+@ Layout
+ca Disseny
+
+@ Preview
+ca Vista prèvia
+
+@ Resume Game
+ca Reprèn el joc
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ ca Quant s'inclina la vista amunt i avall en inclinar el comandament (eix de cap
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ca Quant gira la vista a esquerra i dreta en girar el comandament (eix de guinyada)
 
-@ How far the view turns when you drag on the right half of the screen
-ca Quant gira la vista en arrossegar a la meitat dreta de la pantalla
-
 @ How fast the boomerang flies (units per second)
 ca Velocitat de vol del bumerang (unitats per segon)
 
@@ -2038,9 +2047,6 @@ ca Cap congelació no dura més que això, per molt de dany o bonificació per e
 
 @ Oldest marks and nails are recycled at this shared limit
 ca Les marques i els claus més antics es reutilitzen en arribar a aquest límit comú
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ca Palanca i botons en pantalla: auto els mostra després d'un toc i els amaga quan s'usa un altre dispositiu
 
 @ Only autosaves: quicksaves and the Save menu are off
 ca Només desament automàtic: el desament ràpid i el menú Desa estan desactivats
@@ -2411,6 +2417,18 @@ ca Usa direccions de llum precalculades (.dlit) per a un ombrejat i reflexos sub
 
 @ Strength of the highlights from directional lighting
 ca Intensitat dels reflexos de la il·luminació direccional
+
+@ How far the view turns when you swipe
+ca Fins a quin punt gira la vista quan feu lliscar el dit
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+ca Redueix el lliscament a prop dels objectius visibles. Deathmatch requereix permís del servidor.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ca Canvia els costats pels botons de moviment, objectiu i joc
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ca Auto segueix el dispositiu d'entrada actiu. El menú roman disponible quan la superposició està desactivada.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ ca Cap servidor coincideix amb els filtres
 
 @ Server search failed
 ca Ha fallat la cerca de servidors
+
+@ Slide to select, release to equip
+ca Feu lliscar per seleccionar, deixeu anar per equipar
+
+@ Tap to swap weapons.
+ca Toca per intercanviar les armes.
+
+@ Hold and slide to select.
+ca Mantingueu premut i feu lliscar per seleccionar.
 
 # ==== hud.txt ====
 

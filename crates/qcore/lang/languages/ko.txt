@@ -1781,6 +1781,18 @@ ko 방향성 조명
 @ Light Specular
 ko 조명 반사광
 
+@ Gameplay Overlay
+ko 게임플레이 오버레이
+
+@ Layout
+ko 레이아웃
+
+@ Preview
+ko 미리보기
+
+@ Resume Game
+ko 게임 계속하기
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ ko 컨트롤러를 앞뒤로 기울일 때 시점이 위아래로 움직이는 �
 @ How far the view turns left and right when you turn the controller (yaw axis)
 ko 컨트롤러를 좌우로 돌릴 때 시점이 좌우로 도는 정도 (요 축)
 
-@ How far the view turns when you drag on the right half of the screen
-ko 화면 오른쪽 절반을 드래그할 때 시점이 도는 정도
-
 @ How fast the boomerang flies (units per second)
 ko 부메랑이 날아가는 속도 (초당 유닛)
 
@@ -2038,9 +2047,6 @@ ko 피해나 처치 보너스가 아무리 더해져도 한 번의 정지는 이
 
 @ Oldest marks and nails are recycled at this shared limit
 ko 이 공용 한도에 이르면 가장 오래된 자국과 못부터 재사용됩니다
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-ko 화면 스틱과 버튼입니다. 자동은 터치하면 표시하고 다른 장치를 쓰면 숨깁니다
 
 @ Only autosaves: quicksaves and the Save menu are off
 ko 자동 저장만 가능합니다. 빠른 저장과 저장 메뉴는 꺼집니다
@@ -2411,6 +2417,18 @@ ko 미리 계산된 조명 방향(.dlit)을 사용해 벽과 모델에 은은한
 
 @ Strength of the highlights from directional lighting
 ko 방향성 조명으로 생기는 하이라이트 강도
+
+@ How far the view turns when you swipe
+ko 스와이프할 때 화면이 얼마나 회전하는지
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+ko 보이는 대상 근처에서 스와이프 속도를 늦춥니다. 데스매치에는 서버 권한이 필요합니다.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+ko 이동, 조준 및 게임 플레이 버튼을 위해 측면을 교체합니다.
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+ko 자동은 활성 입력 장치를 따릅니다. 오버레이가 꺼져 있어도 메뉴는 계속 사용 가능합니다.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ ko 조건에 맞는 서버가 없습니다
 
 @ Server search failed
 ko 서버 검색에 실패했습니다
+
+@ Slide to select, release to equip
+ko 밀어서 선택하고 떼면 장착됩니다.
+
+@ Tap to swap weapons.
+ko 무기를 교체하려면 탭하세요.
+
+@ Hold and slide to select.
+ko 길게 누른 채 밀어서 선택하세요.
 
 # ==== hud.txt ====
 

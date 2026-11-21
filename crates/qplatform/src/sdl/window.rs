@@ -18,6 +18,23 @@ impl Window {
         (w.max(0) as u32, h.max(0) as u32)
     }
 
+    /// Left, top, right and bottom safe-area insets, as window fractions.
+    pub fn safe_insets(&self) -> [f32; 4] {
+        let (w, h) = self.window_size();
+        let mut rect = sys::SDL_Rect { x: 0, y: 0, w: 0, h: 0 };
+        // SAFETY: raw is a live window and rect is writable.
+        let ok = unsafe { sys::SDL_GetWindowSafeArea(self.raw, &mut rect) };
+        if !ok || w == 0 || h == 0 || rect.w <= 0 || rect.h <= 0 {
+            return [0.0; 4];
+        }
+        [
+            (rect.x as f32 / w as f32).max(0.0),
+            (rect.y as f32 / h as f32).max(0.0),
+            (1.0 - (rect.x + rect.w) as f32 / w as f32).max(0.0),
+            (1.0 - (rect.y + rect.h) as f32 / h as f32).max(0.0),
+        ]
+    }
+
     /// Relative mouse mode (hidden cursor, unbounded deltas).
     pub fn set_relative_mouse(&self, on: bool) -> Result<()> {
         // SAFETY: raw is a live window.

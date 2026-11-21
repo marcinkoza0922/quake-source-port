@@ -1781,6 +1781,18 @@ tr Yönlü Aydınlatma
 @ Light Specular
 tr Işık Parlaması
 
+@ Gameplay Overlay
+tr Oynanış Arayüzü
+
+@ Layout
+tr Düzen
+
+@ Preview
+tr Önizleme
+
+@ Resume Game
+tr Oyunu devam ettir
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ tr Kumandayı eğdiğinizde görüşün ne kadar yukarı ve aşağı eğileceği
 @ How far the view turns left and right when you turn the controller (yaw axis)
 tr Kumandayı döndürdüğünüzde görüşün ne kadar sola ve sağa döneceği (yatay eksen)
 
-@ How far the view turns when you drag on the right half of the screen
-tr Ekranın sağ yarısında sürüklediğinizde görüşün ne kadar döneceği
-
 @ How fast the boomerang flies (units per second)
 tr Bumerangın uçuş hızı (saniyede birim)
 
@@ -2038,9 +2047,6 @@ tr Ne kadar hasar veya öldürme bonusu eklenirse eklensin hiçbir donma bundan 
 
 @ Oldest marks and nails are recycled at this shared limit
 tr En eski lekeler ve çiviler bu ortak sınırda yeniden kullanılır
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-tr Ekrandaki çubuk ve düğmeler: otomatik, dokunulduğunda gösterir ve başka bir cihaz kullanıldığında gizler
 
 @ Only autosaves: quicksaves and the Save menu are off
 tr Yalnızca otomatik kayıt: hızlı kayıt ve Kaydet menüsü kapalı
@@ -2411,6 +2417,18 @@ tr Duvarlarda ve modellerde hafif gölgeleme ve parlamalar için önceden hesapl
 
 @ Strength of the highlights from directional lighting
 tr Yönlü aydınlatmadan gelen parlama vurgularının gücü
+
+@ How far the view turns when you swipe
+tr Kaydırdığınızda görünüm ne kadar uzağa döner?
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+tr Görünür hedeflerin yakınında kaydırmanızı yavaşlatır. Deathmatch sunucu izni gerektirir.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+tr Hareket, nişan alma ve oyun düğmeleri için kenarları değiştirir
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+tr Otomatik, etkin giriş cihazını takip eder. Yer paylaşımı kapalıyken menü kullanılabilir durumda kalır.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ tr Filtrelere uyan sunucu yok
 
 @ Server search failed
 tr Sunucu araması başarısız
+
+@ Slide to select, release to equip
+tr Seçmek için kaydırın, donatmak için bırakın
+
+@ Tap to swap weapons.
+tr Silahları değiştirmek için dokunun.
+
+@ Hold and slide to select.
+tr Seçmek için basılı tutun ve kaydırın.
 
 # ==== hud.txt ====
 

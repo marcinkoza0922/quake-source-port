@@ -1781,6 +1781,18 @@ lt Kryptinis apšvietimas
 @ Light Specular
 lt Šviesos blizgesys
 
+@ Gameplay Overlay
+lt Žaidimo perdanga
+
+@ Layout
+lt Išdėstymas
+
+@ Preview
+lt Peržiūra
+
+@ Resume Game
+lt Tęsti žaidimą
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ lt Kiek vaizdas pakrypsta aukštyn ir žemyn, kai pakreipiate valdiklį (vertika
 @ How far the view turns left and right when you turn the controller (yaw axis)
 lt Kiek vaizdas pasisuka kairėn ir dešinėn, kai pasukate valdiklį (horizontali ašis)
 
-@ How far the view turns when you drag on the right half of the screen
-lt Kiek vaizdas pasisuka, kai tempiate dešiniąja ekrano puse
-
 @ How fast the boomerang flies (units per second)
 lt Kaip greitai skrenda bumerangas (vienetais per sekundę)
 
@@ -2038,9 +2047,6 @@ lt Joks sustingdymas netrunka ilgiau, nesvarbu, kiek prideda žala ar nužudymo 
 
 @ Oldest marks and nails are recycled at this shared limit
 lt Pasiekus šią bendrą ribą, seniausios žymės ir vinys panaudojamos iš naujo
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-lt Ekrano svirtelė ir mygtukai: auto rodo juos palietus ekraną ir paslepia naudojant kitą įrenginį
 
 @ Only autosaves: quicksaves and the Save menu are off
 lt Tik automatiniai išsaugojimai: greitas išsaugojimas ir išsaugojimo meniu išjungti
@@ -2411,6 +2417,18 @@ lt Naudoja iškeptas šviesos kryptis (.dlit) subtiliam šešėliavimui ir atspi
 
 @ Strength of the highlights from directional lighting
 lt Kryptinio apšvietimo atspindžių stiprumas
+
+@ How far the view turns when you swipe
+lt Kaip toli vaizdas pasisuka perbraukus
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+lt Sulėtėja braukimas šalia matomų taikinių. Deathmatch reikalauja serverio leidimo.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+lt Pakeičia šonus į judėjimo, taikymo ir žaidimo mygtukus
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+lt Automatinis seka aktyvų įvesties įrenginį. Meniu lieka pasiekiamas, kai perdanga išjungta.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ lt Nėra filtrus atitinkančių serverių
 
 @ Server search failed
 lt Serverių paieška nepavyko
+
+@ Slide to select, release to equip
+lt Slinkite, kad pasirinktumėte, atleiskite, kad aprūpintumėte
+
+@ Tap to swap weapons.
+lt Bakstelėkite, kad apsikeistumėte ginklais.
+
+@ Hold and slide to select.
+lt Laikykite ir slinkite, kad pasirinktumėte.
 
 # ==== hud.txt ====
 

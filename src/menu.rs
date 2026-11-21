@@ -50,6 +50,7 @@ mod search_keywords;
 mod dir_browser;
 mod weapon_priority;
 mod server_browser;
+mod touch;
 pub(crate) use server_browser::SearchStatus;
 pub mod demos;
 
@@ -204,6 +205,9 @@ pub struct Menu {
     /// Page and row an open sub-page was entered from (sub-pages reachable
     /// from several pages return there; otherwise `parent_page`).
     sub_return: Option<(Page, Page, usize)>,
+    touch_shortcut: bool,
+    pub touch_insets: [f32; 4],
+    touch_from_main: bool,
     pub mods: ModMenu,
     pub demos: demos::DemoBrowser,
     /// Options → HUD → Edit HUD.
@@ -350,6 +354,9 @@ impl Menu {
             slider_drag: None,
             drop: None,
             sub_return: None,
+            touch_shortcut: false,
+            touch_insets: [0.0; 4],
+            touch_from_main: false,
             mods: ModMenu::default(),
             demos: Default::default(),
             hud_edit: Default::default(),
@@ -463,6 +470,7 @@ impl Menu {
     pub fn open(&mut self, s: Screen) {
         self.prev = self.screen;
         self.screen = s;
+        self.touch_from_main = false;
         self.new_game_setup = matches!(s, Screen::OptionsPage(Page::NewGameAddons | Page::NewGameCustomize));
         if !self.new_game_setup {
             self.launch = None;
@@ -524,11 +532,17 @@ impl Menu {
         let (cx, cy) = CLASSIC;
         match self.screen {
             Screen::Death => row(140.0, 24.0, 4, 160.0, 480.0),
-            Screen::Main => row(cy + 32.0, 20.0, self.main_items(), cx + 54.0, cx + 312.0),
+            Screen::Main => {
+                if let Some(i) = self.touch_shortcut_index().filter(|_| touch::hit(touch::SHORTCUT, (x, y))) {
+                    return Some(i);
+                }
+                row(cy + 32.0, 20.0, self.main_items() - usize::from(self.touch_shortcut), cx + 54.0, cx + 312.0)
+            }
             Screen::SinglePlayer => row(cy + 32.0, 20.0, customize::SP_ITEMS, cx + 54.0, cx + 312.0),
             Screen::Load | Screen::Save => self.card_at(x, y),
             Screen::Options if self.searching() && self.search_hits() == 0 => None,
             Screen::Options => row(ROW0, ROW_H, self.hub_rows(), PANEL_X, PANEL_X + PANEL_W).map(|r| r + if self.searching() { self.search_scroll() } else { 0 }),
+            Screen::OptionsPage(Page::Touch) => touch::item_at((x, y)),
             Screen::OptionsPage(p) => {
                 let i = row(PAGE_ROW0, ROW_H, self.page_vis(p), PANEL_X, PANEL_X + PANEL_W)? + self.page_scroll(p);
                 if matches!(self.page_item(p, i), Item::Run { run: Run::BrowseServers, .. })

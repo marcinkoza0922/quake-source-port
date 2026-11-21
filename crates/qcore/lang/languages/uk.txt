@@ -1781,6 +1781,18 @@ uk Спрямоване освітлення
 @ Light Specular
 uk Відблиски світла
 
+@ Gameplay Overlay
+uk Накладання ігрового процесу
+
+@ Layout
+uk Макет
+
+@ Preview
+uk Попередній перегляд
+
+@ Resume Game
+uk Відновити гру
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ uk Наскільки огляд нахиляється вгору й униз, 
 @ How far the view turns left and right when you turn the controller (yaw axis)
 uk Наскільки огляд повертається ліворуч і праворуч, коли ви повертаєте геймпад (вісь рискання)
 
-@ How far the view turns when you drag on the right half of the screen
-uk Наскільки повертається огляд, коли ви ведете пальцем по правій половині екрана
-
 @ How fast the boomerang flies (units per second)
 uk Швидкість польоту бумеранга (одиниць за секунду)
 
@@ -2038,9 +2047,6 @@ uk Жоден стоп-кадр не триває довше, хоч скіль�
 
 @ Oldest marks and nails are recycled at this shared limit
 uk Найстаріші сліди й цвяхи замінюються після досягнення цього спільного ліміту
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-uk Екранний стік і кнопки: авто показує їх після дотику й ховає, коли використовується інший пристрій
 
 @ Only autosaves: quicksaves and the Save menu are off
 uk Лише автозбереження: швидке збереження й меню збереження вимкнені
@@ -2411,6 +2417,18 @@ uk Використовує запечені напрямки світла (.dli
 
 @ Strength of the highlights from directional lighting
 uk Інтенсивність відблисків від спрямованого освітлення
+
+@ How far the view turns when you swipe
+uk На яку відстань повертається зображення, коли ви проводите пальцем
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+uk Уповільнює проведення пальцем біля видимих цілей. Deathmatch вимагає дозволу сервера.
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+uk Змінює сторони для кнопок руху, прицілювання та ігрового процесу
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+uk Автоматично слідує за активним пристроєм введення. Меню залишається доступним, коли накладання вимкнено.
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ uk Немає відповідних серверів
 
 @ Server search failed
 uk Не вдалося виконати пошук серверів
+
+@ Slide to select, release to equip
+uk Посуньте, щоб вибрати, відпустіть, щоб спорядити
+
+@ Tap to swap weapons.
+uk Натисніть, щоб поміняти зброю.
+
+@ Hold and slide to select.
+uk Утримуйте та проведіть пальцем, щоб вибрати.
 
 # ==== hud.txt ====
 

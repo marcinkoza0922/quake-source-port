@@ -1781,6 +1781,18 @@ th แสง​แบบ​มี​ทิศทาง
 @ Light Specular
 th ความ​เงา​ของ​แสง
 
+@ Gameplay Overlay
+th โอ​เวอร์​เลย์​การ​เล่น​เกม
+
+@ Layout
+th เค้าโครง
+
+@ Preview
+th ดู​ตัวอย่าง
+
+@ Resume Game
+th เล่น​เกม​ต่อ
+
 # ==== tooltips.txt ====
 
 # Options help lines (tooltips) and reasons for disabled rows.
@@ -1922,9 +1934,6 @@ th มุม​มอง​เงย​และ​ก้ม​มาก​แ�
 @ How far the view turns left and right when you turn the controller (yaw axis)
 th มุม​มอง​หัน​ซ้าย​ขวา​มาก​แค่​ไหน​เมื่อ​หมุน​จอย (แกน yaw)
 
-@ How far the view turns when you drag on the right half of the screen
-th มุม​มอง​หัน​มาก​แค่​ไหน​เมื่อ​ลาก​บน​ครึ่ง​ขวา​ของ​จอ
-
 @ How fast the boomerang flies (units per second)
 th ความ​เร็ว​ที่​บูมเมอแรง​บิน (หน่วย​ต่อ​วินาที)
 
@@ -2038,9 +2047,6 @@ th การ​หยุด​แต่ละ​ครั้ง​ไม่​�
 
 @ Oldest marks and nails are recycled at this shared limit
 th รอย​และ​ตะปู​ที่​เก่า​สุด​ถูก​นำ​มา​ใช้​ใหม่​ที่​ขีด​จำกัด​ร่วม​นี้
-
-@ On-screen stick and buttons: auto shows them after a touch and hides them when another device is used
-th สติ๊ก​และ​ปุ่ม​บน​จอ: อัตโนมัติ​แสดง​หลัง​การ​สัมผัส​และ​ซ่อน​เมื่อ​ใช้​อุปกรณ์​อื่น
 
 @ Only autosaves: quicksaves and the Save menu are off
 th บันทึก​อัตโนมัติ​เท่านั้น: ปิด​บันทึก​ด่วน​และ​เมนู​บันทึก
@@ -2411,6 +2417,18 @@ th ใช้​ทิศทาง​แสง​ที่​อบ​ไว้ (
 
 @ Strength of the highlights from directional lighting
 th ความ​แรง​ของ​ไฮไลต์​จาก​แสง​แบบ​มี​ทิศทาง
+
+@ How far the view turns when you swipe
+th มุม​มอง​จะ​เปลี่ยน​ไป​ไกล​แค่​ไหน​เมื่อ​คุณ​ปัด​นิ้ว
+
+@ Slows your swipe near visible targets. Deathmatch requires server permission.
+th ชะลอ​การ​ปัด​ของ​คุณ​ใกล้​กับ​เป้า​หมาย​ที่​มอง​เห็น​ได้​ ​Deathmatch​ ​ต้อง​ได้​รับ​อนุญาต​จาก​เซิร์ฟเวอร์
+
+@ Swaps the sides for movement, aiming and gameplay buttons
+th สลับ​ด้าน​ข้าง​สำหรับ​ปุ่ม​การ​เคลื่อนไหว​ ​การ​เล็ง​ ​และ​การ​เล่น​เกม
+
+@ Auto follows the active input device. Menu stays available when the overlay is off.
+th อัตโนมัติ​ติดตาม​อุปกรณ์​อินพุต​ที่​ใช้​งาน​อยู่​ ​เมนู​จะ​ยัง​คง​ใช้​งาน​ได้​เมื่อ​ปิด​การ​วาง​ซ้อน
 
 # ==== ui.txt ====
 
@@ -3449,6 +3467,15 @@ th ไม่พบ​เซิร์ฟเวอร์​ที่​ตรง�
 
 @ Server search failed
 th ค้นหา​เซิร์ฟเวอร์​ไม่สำเร็จ
+
+@ Slide to select, release to equip
+th เลื่อน​เพื่อ​เลือก​ ​ปล่อย​เพื่อ​ติด​ตั้ง
+
+@ Tap to swap weapons.
+th แตะ​เพื่อ​สลับ​อาวุธ
+
+@ Hold and slide to select.
+th กด​ค้าง​ไว้​แล้ว​เลื่อน​เพื่อ​เลือก
 
 # ==== hud.txt ====
 
