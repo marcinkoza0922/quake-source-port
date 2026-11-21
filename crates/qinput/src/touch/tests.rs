@@ -1,5 +1,8 @@
 use super::*;
-const LAY: TouchLayout = TouchLayout { aspect: 16.0 / 9.0, size: 1.0, left_handed: false, insets: [0.0; 4], placements: [None; BUTTONS.len()] };
+const LAY: TouchLayout = TouchLayout {
+    aspect: 16.0 / 9.0, size: 1.0, left_handed: false, insets: [0.0; 4], placements: [None; BUTTONS.len()],
+    buttons: TouchButtons { submerged: false, quicksave: false, quickload: false }, move_fire: false,
+};
 
 #[test]
 fn fire_button_holds_and_looks() {
@@ -53,13 +56,18 @@ fn release_all_lets_go_of_held_buttons() {
 
 #[test]
 fn buttons_dont_overlap() {
-    for lay in [LAY, TouchLayout::new(4.0 / 3.0, 2.0, true, [0.12, 0.06, 0.04, 0.07])] {
+    for lay in [
+        LAY,
+        TouchLayout::new(4.0 / 3.0, 2.0, true, [0.12, 0.06, 0.04, 0.07]),
+        TouchLayout::new(16.0 / 10.0, 2.0, false, [0.0; 4]),
+        TouchLayout::new(20.0 / 9.0, 2.0, true, [0.10, 0.04, 0.10, 0.10]),
+    ] {
         for (i, a) in BUTTONS.iter().enumerate() {
             let ([x, y], r) = lay.button(i);
             let [l, t, right, bot] = lay.insets;
             let r = r * HIT_SCALE;
-            assert!(x - r / lay.aspect >= l && x + r / lay.aspect <= 1.0 - right);
-            assert!(y - r >= t && y + r <= 1.0 - bot);
+            assert!(x - r / lay.aspect >= l - 1e-6 && x + r / lay.aspect <= 1.0 - right + 1e-6);
+            assert!(y - r >= t - 1e-6 && y + r <= 1.0 - bot + 1e-6);
             for (j, b) in BUTTONS.iter().enumerate().skip(i + 1) {
                 let ((ca, ra), (cb, rb)) = (lay.button(i), lay.button(j));
                 assert!(lay.dist(ca, cb) > (ra + rb) * 1.15, "{} / {}", a.label, b.label);
@@ -90,11 +98,52 @@ fn wheel_keeps_final_swipe_and_cancels_without_selection() {
     t.event(1, TouchPhase::Move, end, 0, &LAY, TouchLook::default());
     assert_eq!(t.take_look(), [0.0; 2]);
     t.event(1, TouchPhase::Up, end, 0, &LAY, TouchLook::default());
-    assert_eq!(t.take_wheel(&LAY), Some(WheelGesture::Released([0.0, -1.0])));
+    assert_eq!(t.take_wheel(&LAY), Some(WheelGesture::Released { aim: [0.0, -1.0], cycle: 0 }));
     assert_eq!(t.take_wheel(&LAY), None);
     t.event(2, TouchPhase::Down, p, 0, &LAY, TouchLook::default());
     t.event(2, TouchPhase::Cancel, end, 0, &LAY, TouchLook::default());
     assert_eq!(t.take_wheel(&LAY), None);
+}
+
+#[test]
+fn quick_horizontal_weapon_swipe_cycles_instead_of_opening_the_wheel() {
+    let mut touch = TouchOverlay::default();
+    let (p, _) = LAY.button(WHEEL);
+    for (dx, time_ns, cycle) in [(0.05, 100_000_000, 10), (-0.05, 100_000_000, 12), (0.05, 300_000_000, 0)] {
+        touch.event(1, TouchPhase::Down, p, 0, &LAY, TouchLook::default());
+        touch.event(1, TouchPhase::Up, [p[0] + dx, p[1]], time_ns, &LAY, TouchLook::default());
+        assert_eq!(touch.take_wheel(&LAY), Some(WheelGesture::Released { aim: [dx.signum(), 0.0], cycle }));
+    }
+}
+
+#[test]
+fn contextual_buttons_only_claim_touches_when_enabled() {
+    let mut touch = TouchOverlay::default();
+    for index in [SWIM_DOWN, QUICK_SAVE, QUICK_LOAD, MOVE_FIRE] {
+        let p = LAY.button(index).0;
+        assert_ne!(LAY.button_at(p), Some(index));
+        let lay = TouchLayout { buttons: TouchButtons::PREVIEW, move_fire: true, ..LAY };
+        assert_eq!(lay.button_at(p), Some(index));
+        let down = touch.event(1, TouchPhase::Down, p, 0, &lay, TouchLook::default());
+        assert!(touch.pressed(index));
+        if index == MOVE_FIRE {
+            assert_eq!(down, ["+attack 1007\n"]);
+            assert_eq!(touch.release_hidden(&LAY), ["-attack 1007\n"]);
+        } else {
+            assert!(down.is_empty());
+            let up = touch.event(1, TouchPhase::Up, p, 1, &lay, TouchLook::default());
+            match index {
+                QUICK_SAVE => assert_eq!(up, ["save quick\n"]),
+                QUICK_LOAD => assert_eq!(up, ["load quick\n"]),
+                _ => assert!(up.is_empty()),
+            }
+        }
+        assert!(!touch.pressed(index));
+    }
+    let lay = TouchLayout { buttons: TouchButtons::PREVIEW, ..LAY };
+    let p = lay.button(QUICK_LOAD).0;
+    touch.event(1, TouchPhase::Down, p, 0, &lay, TouchLook::default());
+    assert!(touch.event(1, TouchPhase::Up, [0.5, 0.5], 1, &lay, TouchLook::default()).is_empty());
 }
 
 #[test]

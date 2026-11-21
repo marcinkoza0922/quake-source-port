@@ -2421,8 +2421,8 @@ pa ਦਿਸ਼ਾਵੀ ਰੌਸ਼ਨੀ ਤੋਂ ਬਣਨ ਵਾਲੀ ਚ
 @ How far the view turns when you swipe
 pa ਜਦੋਂ ਤੁਸੀਂ ਸਵਾਈਪ ਕਰਦੇ ਹੋ ਤਾਂ ਦ੍ਰਿਸ਼ ਕਿੰਨੀ ਦੂਰ ਹੋ ਜਾਂਦਾ ਹੈ
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-pa ਦਿਖਾਈ ਦੇਣ ਵਾਲੇ ਟੀਚਿਆਂ ਦੇ ਨੇੜੇ ਤੁਹਾਡੀ ਸਵਾਈਪ ਨੂੰ ਹੌਲੀ ਕਰਦਾ ਹੈ। ਡੈਥਮੈਚ ਨੂੰ ਸਰਵਰ ਦੀ ਇਜਾਜ਼ਤ ਦੀ ਲੋੜ ਹੈ।
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+pa ਦਿਖਾਈ ਦੇਣ ਵਾਲੇ ਟੀਚਿਆਂ ਦੇ ਨੇੜੇ ਤੁਹਾਡੀ ਸਵਾਈਪ ਨੂੰ ਹੌਲੀ ਕਰਦਾ ਹੈ। ਡੈਥਮੈਚ ਨੂੰ ਸਰਵਰ ਦੀ ਇਜਾਜ਼ਤ ਦੀ ਲੋੜ ਹੈ। ਉੱਚ ਪੱਧਰ 'ਤੇ ਨਿਸ਼ਾਨਾ ਟੀਚੇ ਵੱਲ ਹੌਲੀ ਜਿਹਾ ਖਿੱਚਦਾ ਹੈ।
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 pa ਅੰਦੋਲਨ, ਨਿਸ਼ਾਨਾ ਅਤੇ ਗੇਮਪਲੇ ਬਟਨਾਂ ਲਈ ਪਾਸਿਆਂ ਨੂੰ ਬਦਲੋ
@@ -4100,3 +4100,30 @@ pa ਖਾਕਾ ਸੋਧੋ
 
 @ Drag to move
 pa ਹਿਲਾਉਣ ਲਈ ਖਿੱਚੋ
+
+@ Auto-fire
+pa ਆਟੋਮੈਟਿਕ ਗੋਲੀਬਾਰੀ
+
+@ Touch Auto-fire
+pa ਟੱਚ ਨਾਲ ਆਟੋਮੈਟਿਕ ਗੋਲੀਬਾਰੀ
+
+@ Move-side Fire
+pa ਚਾਲ ਵਾਲੇ ਪਾਸੇ ਗੋਲੀਬਾਰੀ
+
+@ Touch Haptics
+pa ਟੱਚ ਕੰਪਨ
+
+@ Add a Fire button on the move side.
+pa ਚਾਲ ਵਾਲੇ ਪਾਸੇ ਗੋਲੀ ਚਲਾਉਣ ਦਾ ਬਟਨ ਜੋੜਦਾ ਹੈ।
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+pa ਸਥਾਨਕ ਖੇਡ ਵਿੱਚ ਨਿਸ਼ਾਨੇ ਹੇਠਾਂ ਆਏ ਰਾਖਸ਼ਾਂ 'ਤੇ ਗੋਲੀ ਚਲਾਉਂਦਾ ਹੈ (ਕੀਬੋਰਡ, ਮਾਊਸ, ਕੰਟਰੋਲਰ).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+pa ਸਥਾਨਕ ਖੇਡ ਵਿੱਚ ਨਿਸ਼ਾਨੇ ਹੇਠਾਂ ਆਏ ਰਾਖਸ਼ਾਂ 'ਤੇ ਗੋਲੀ ਚਲਾਉਂਦਾ ਹੈ (ਟੱਚ ਸਕਰੀਨ).
+
+@ Vibrate on button presses and damage (Android).
+pa ਬਟਨ ਦਬਾਉਣ ਜਾਂ ਸੱਟ ਲੱਗਣ 'ਤੇ ਕੰਪਨ ਹੁੰਦਾ ਹੈ (Android)।
+
+@ Swipe left or right to cycle.
+pa ਹਥਿਆਰ ਬਦਲਣ ਲਈ ਖੱਬੇ ਜਾਂ ਸੱਜੇ ਸਵਾਈਪ ਕਰੋ।

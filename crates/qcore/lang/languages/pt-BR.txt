@@ -2421,8 +2421,8 @@ pt-BR Intensidade dos reflexos da iluminação direcional
 @ How far the view turns when you swipe
 pt-BR Até que ponto a visualização gira quando você desliza o dedo
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-pt-BR Retarda seu deslizamento perto de alvos visíveis. Deathmatch requer permissão do servidor.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+pt-BR Retarda seu deslizamento perto de alvos visíveis. Deathmatch requer permissão do servidor. No nível alto, a mira também é levemente puxada para o alvo.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 pt-BR Troca os lados por botões de movimento, mira e jogabilidade
@@ -4100,3 +4100,30 @@ pt-BR Editar layout
 
 @ Drag to move
 pt-BR Arraste para mover
+
+@ Auto-fire
+pt-BR Disparo automático
+
+@ Touch Auto-fire
+pt-BR Disparo automático por toque
+
+@ Move-side Fire
+pt-BR Disparo no lado do movimento
+
+@ Touch Haptics
+pt-BR Vibração tátil
+
+@ Add a Fire button on the move side.
+pt-BR Adiciona um botão de disparo no lado do movimento.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+pt-BR Atira nos monstros sob a mira no jogo local (teclado, mouse, controle).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+pt-BR Atira nos monstros sob a mira no jogo local (tela sensível ao toque).
+
+@ Vibrate on button presses and damage (Android).
+pt-BR Vibra ao pressionar botões e ao receber dano (Android).
+
+@ Swipe left or right to cycle.
+pt-BR Deslize para a esquerda ou direita para trocar de arma.

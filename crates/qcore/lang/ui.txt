@@ -2425,3 +2425,10 @@ de Zum Verschieben ziehen
 it Trascina per spostare
 es Arrastra para mover
 ru Перетащите для перемещения
+
+@ Swipe left or right to cycle.
+fr Glissez à gauche ou à droite pour changer d’arme.
+de Zum Waffenwechsel nach links oder rechts wischen.
+it Scorri a sinistra o a destra per cambiare arma.
+es Desliza a izquierda o derecha para cambiar de arma.
+ru Проведите влево или вправо для смены оружия.

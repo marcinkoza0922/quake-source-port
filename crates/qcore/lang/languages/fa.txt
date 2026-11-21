@@ -2421,8 +2421,8 @@ fa شدت بازتاب‌های حاصل از نورپردازی جهت‌دار
 @ How far the view turns when you swipe
 fa هنگام کشیدن انگشت، منظره چقدر دور می‌شود
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-fa تند کشیدن شما را در نزدیکی اهداف قابل مشاهده کند می کند. Deathmatch به مجوز سرور نیاز دارد.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+fa تند کشیدن شما را در نزدیکی اهداف قابل مشاهده کند می کند. Deathmatch به مجوز سرور نیاز دارد. در حالت زیاد، نشانه‌گیر کمی به سمت هدف کشیده می‌شود.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 fa دو طرف را با دکمه های حرکت، هدف گیری و بازی عوض می کند
@@ -4100,3 +4100,30 @@ fa ویرایش چیدمان
 
 @ Drag to move
 fa برای جابه‌جایی بکشید
+
+@ Auto-fire
+fa شلیک خودکار
+
+@ Touch Auto-fire
+fa شلیک خودکار لمسی
+
+@ Move-side Fire
+fa شلیک در سمت حرکت
+
+@ Touch Haptics
+fa لرزش لمسی
+
+@ Add a Fire button on the move side.
+fa دکمهٔ شلیک را به سمت حرکت اضافه می‌کند.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+fa در بازی محلی به هیولاهای زیر نشانه‌گیر شلیک می‌کند (صفحه‌کلید، ماوس، دستهٔ بازی).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+fa در بازی محلی به هیولاهای زیر نشانه‌گیر شلیک می‌کند (صفحهٔ لمسی).
+
+@ Vibrate on button presses and damage (Android).
+fa با فشردن دکمه یا دریافت آسیب می‌لرزد (اندروید).
+
+@ Swipe left or right to cycle.
+fa برای تعویض سلاح به چپ یا راست بکشید.

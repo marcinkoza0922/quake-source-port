@@ -2421,8 +2421,8 @@ hi दिशात्मक प्रकाश से मिलने वाल�
 @ How far the view turns when you swipe
 hi जब आप स्वाइप करते हैं तो दृश्य कितनी दूर तक घूम जाता है
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-hi दृश्यमान लक्ष्यों के पास आपके स्वाइप को धीमा कर देता है। डेथमैच के लिए सर्वर की अनुमति की आवश्यकता होती है।
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+hi दृश्यमान लक्ष्यों के पास आपके स्वाइप को धीमा कर देता है। डेथमैच के लिए सर्वर की अनुमति की आवश्यकता होती है। उच्च स्तर पर निशाना थोड़ा लक्ष्य की ओर भी खिंचता है।
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 hi गति, लक्ष्य निर्धारण और गेमप्ले बटनों के लिए किनारों की अदला-बदली करता है
@@ -4100,3 +4100,30 @@ hi लेआउट बदलें
 
 @ Drag to move
 hi खिसकाने के लिए खींचें
+
+@ Auto-fire
+hi स्वचालित फ़ायर
+
+@ Touch Auto-fire
+hi टच पर स्वचालित फ़ायर
+
+@ Move-side Fire
+hi चलने की ओर फ़ायर
+
+@ Touch Haptics
+hi टच कंपन
+
+@ Add a Fire button on the move side.
+hi चलने की ओर एक फ़ायर बटन जोड़ता है।
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+hi स्थानीय खेल में निशाने पर मौजूद राक्षसों पर गोली चलाता है (कीबोर्ड, माउस, कंट्रोलर)।
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+hi स्थानीय खेल में निशाने पर मौजूद राक्षसों पर गोली चलाता है (टचस्क्रीन)।
+
+@ Vibrate on button presses and damage (Android).
+hi बटन दबाने या चोट लगने पर कंपन (Android)।
+
+@ Swipe left or right to cycle.
+hi हथियार बदलने के लिए बाएँ या दाएँ स्वाइप करें।

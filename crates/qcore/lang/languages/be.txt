@@ -2421,8 +2421,8 @@ be Інтэнсіўнасць блікаў ад накіраванага асв�
 @ How far the view turns when you swipe
 be Як далёка паварочваецца выгляд, калі вы праводзіце пальцам
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-be Запавольвае правядзенне пальцам каля бачных мэтаў. Deathmatch патрабуе дазволу сервера.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+be Запавольвае правядзенне пальцам каля бачных мэтаў. Deathmatch патрабуе дазволу сервера. На высокім узроўні прыцэл таксама трохі прыцягваецца да цэлі.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 be Мяняе бакі для кнопак руху, прыцэльвання і гульні
@@ -4100,3 +4100,30 @@ be Рэдагаваць раскладку
 
 @ Drag to move
 be Перацягніце для перамяшчэння
+
+@ Auto-fire
+be Аўтаматычная стральба
+
+@ Touch Auto-fire
+be Аўтастральба дотыкам
+
+@ Move-side Fire
+be Агонь на баку руху
+
+@ Touch Haptics
+be Вібрацыя пры дотыку
+
+@ Add a Fire button on the move side.
+be Дадае кнопку стральбы на баку руху.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+be Страляе ў монстраў пад прыцэлам у лакальнай гульні (клавіятура, мыш, геймпад).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+be Страляе ў монстраў пад прыцэлам у лакальнай гульні (сэнсарны экран).
+
+@ Vibrate on button presses and damage (Android).
+be Вібруе пры націсканні кнопак і атрыманні ўрону (Android).
+
+@ Swipe left or right to cycle.
+be Правядзіце ўлева ці ўправа, каб змяніць зброю.

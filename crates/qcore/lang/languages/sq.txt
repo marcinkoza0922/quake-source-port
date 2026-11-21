@@ -2421,8 +2421,8 @@ sq Fuqia e shkëlqimeve nga ndriçimi drejtues
 @ How far the view turns when you swipe
 sq Sa larg kthehet pamja kur rrëshqitni
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-sq Ngadalëson rrëshqitjen tuaj pranë objektivave të dukshëm. Deathmatch kërkon lejen e serverit.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+sq Ngadalëson rrëshqitjen tuaj pranë objektivave të dukshëm. Deathmatch kërkon lejen e serverit. Në nivelin e lartë, shënjestra tërhiqet pak drejt objektivit.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 sq Ndërron anët për butonat e lëvizjes, synimit dhe lojës
@@ -4100,3 +4100,30 @@ sq Ndrysho Paraqitjen
 
 @ Drag to move
 sq Tërhiq për ta zhvendosur
+
+@ Auto-fire
+sq Qitje automatike
+
+@ Touch Auto-fire
+sq Qitje automatike me prekje
+
+@ Move-side Fire
+sq Qitje në anën e lëvizjes
+
+@ Touch Haptics
+sq Dridhje me prekje
+
+@ Add a Fire button on the move side.
+sq Shton një buton qitjeje në anën e lëvizjes.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+sq Qëllon përbindëshat në shënjestër gjatë lojës lokale (tastierë, maus, kontrollues).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+sq Qëllon përbindëshat në shënjestër gjatë lojës lokale (ekran me prekje).
+
+@ Vibrate on button presses and damage (Android).
+sq Dridhet kur shtypen butonat ose merret dëm (Android).
+
+@ Swipe left or right to cycle.
+sq Rrëshqit majtas ose djathtas për të ndërruar armën.

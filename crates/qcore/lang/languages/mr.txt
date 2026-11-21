@@ -2421,8 +2421,8 @@ mr दिशात्मक प्रकाशातून येणाऱ्य
 @ How far the view turns when you swipe
 mr तुम्ही स्वाइप करता तेव्हा दृश्य किती दूर वळते
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-mr दृश्यमान लक्ष्यांजवळ तुमचे स्वाइप धीमे करते. Deathmatch ला सर्व्हरची परवानगी आवश्यक आहे.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+mr दृश्यमान लक्ष्यांजवळ तुमचे स्वाइप धीमे करते. Deathmatch ला सर्व्हरची परवानगी आवश्यक आहे. उच्च पातळीवर नेमाची खूण लक्ष्याकडे थोडी ओढली जाते.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 mr हालचाली, लक्ष्य आणि गेमप्ले बटणांसाठी बाजू बदला
@@ -4100,3 +4100,30 @@ mr मांडणी संपादित करा
 
 @ Drag to move
 mr हलवण्यासाठी ओढा
+
+@ Auto-fire
+mr आपोआप गोळीबार
+
+@ Touch Auto-fire
+mr स्पर्शावर आपोआप गोळीबार
+
+@ Move-side Fire
+mr हालचालीच्या बाजूला गोळीबार
+
+@ Touch Haptics
+mr स्पर्श कंपन
+
+@ Add a Fire button on the move side.
+mr हालचालीच्या बाजूला गोळीबाराचे बटण जोडते.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+mr स्थानिक खेळात नेमाच्या खुणेखालील राक्षसांवर गोळीबार करते (कीबोर्ड, माउस, कंट्रोलर).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+mr स्थानिक खेळात नेमाच्या खुणेखालील राक्षसांवर गोळीबार करते (स्पर्शपटल).
+
+@ Vibrate on button presses and damage (Android).
+mr बटण दाबल्यावर किंवा इजा झाल्यावर कंपन होते (Android).
+
+@ Swipe left or right to cycle.
+mr शस्त्र बदलण्यासाठी डावीकडे किंवा उजवीकडे स्वाइप करा.

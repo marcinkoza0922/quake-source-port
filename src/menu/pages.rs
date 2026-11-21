@@ -405,6 +405,8 @@ pub(super) const ACCESSIBILITY: &[Item] = &[
     Item::Choice { label: "Game Speed", cvar: "a11y_gamespeed", choices: GAME_SPEED },
     toggle("Auto-aim", "assist_autoaim"),
     Item::Sub { label: "Auto-aim Settings", page: Page::AutoAim },
+    toggle("Auto-fire", "assist_autofire"),
+    toggle("Touch Auto-fire", "touch_autofire"),
 ];
 
 pub(super) const HUD: &[Item] = &[

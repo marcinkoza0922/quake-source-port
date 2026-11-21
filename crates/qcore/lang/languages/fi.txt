@@ -2421,8 +2421,8 @@ fi Suunnatun valaistuksen korostusten voimakkuus
 @ How far the view turns when you swipe
 fi Kuinka pitkälle näkymä kääntyy pyyhkäisemällä
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-fi Hidastaa pyyhkäisyäsi lähellä näkyviä kohteita. Deathmatch vaatii palvelimen luvan.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+fi Hidastaa pyyhkäisyäsi lähellä näkyviä kohteita. Deathmatch vaatii palvelimen luvan. Korkealla asetuksella tähtäin myös hakeutuu hieman kohti kohdetta.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 fi Vaihtaa sivut liike-, tähtäys- ja pelipainikkeita varten
@@ -4100,3 +4100,30 @@ fi Muokkaa asettelua
 
 @ Drag to move
 fi Siirrä vetämällä
+
+@ Auto-fire
+fi Automaattinen tulitus
+
+@ Touch Auto-fire
+fi Kosketuksen automaattitulitus
+
+@ Move-side Fire
+fi Tulitus liikkumispuolella
+
+@ Touch Haptics
+fi Kosketusvärinä
+
+@ Add a Fire button on the move side.
+fi Lisää tulituspainikkeen liikkumispuolelle.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+fi Ampuu tähtäimessä olevia hirviöitä paikallisessa pelissä (näppäimistö, hiiri, ohjain).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+fi Ampuu tähtäimessä olevia hirviöitä paikallisessa pelissä (kosketusnäyttö).
+
+@ Vibrate on button presses and damage (Android).
+fi Värisee painalluksista ja vahingon saamisesta (Android).
+
+@ Swipe left or right to cycle.
+fi Vaihda asetta pyyhkäisemällä vasemmalle tai oikealle.

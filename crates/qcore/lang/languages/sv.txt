@@ -2421,8 +2421,8 @@ sv Styrka på glansdagrar från riktad belysning
 @ How far the view turns when you swipe
 sv Hur långt vyn vänder när du sveper
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-sv Saktar ned svepningen nära synliga mål. Deathmatch kräver servertillstånd.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+sv Saktar ned svepningen nära synliga mål. Deathmatch kräver servertillstånd. På hög nivå dras siktet också lätt mot målet.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 sv Byter ut sidorna mot rörelse-, siktnings- och spelknappar
@@ -4100,3 +4100,30 @@ sv Redigera layout
 
 @ Drag to move
 sv Dra för att flytta
+
+@ Auto-fire
+sv Automatisk eldgivning
+
+@ Touch Auto-fire
+sv Automateld med pekskärm
+
+@ Move-side Fire
+sv Eld på rörelsesidan
+
+@ Touch Haptics
+sv Pekvibration
+
+@ Add a Fire button on the move side.
+sv Lägger till en eldknapp på rörelsesidan.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+sv Skjuter mot monster i siktet vid lokalt spel (tangentbord, mus, handkontroll).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+sv Skjuter mot monster i siktet vid lokalt spel (pekskärm).
+
+@ Vibrate on button presses and damage (Android).
+sv Vibrerar vid knapptryck och när du tar skada (Android).
+
+@ Swipe left or right to cycle.
+sv Svep åt vänster eller höger för att byta vapen.

@@ -2421,8 +2421,8 @@ pl Siła odblasków od oświetlenia kierunkowego
 @ How far the view turns when you swipe
 pl Jak daleko sięga widok po przesunięciu
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-pl Spowalnia machnięcie w pobliżu widocznych celów. Deathmatch wymaga pozwolenia serwera.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+pl Spowalnia machnięcie w pobliżu widocznych celów. Deathmatch wymaga pozwolenia serwera. Na wysokim ustawieniu celownik także lekko przyciąga do celu.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 pl Zamienia strony dla przycisków ruchu, celowania i rozgrywki
@@ -4100,3 +4100,30 @@ pl Edytuj układ
 
 @ Drag to move
 pl Przeciągnij, aby przesunąć
+
+@ Auto-fire
+pl Automatyczny strzał
+
+@ Touch Auto-fire
+pl Automatyczny strzał dotykowy
+
+@ Move-side Fire
+pl Strzał po stronie ruchu
+
+@ Touch Haptics
+pl Wibracje dotykowe
+
+@ Add a Fire button on the move side.
+pl Dodaje przycisk strzału po stronie ruchu.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+pl Strzela do potworów pod celownikiem w grze lokalnej (klawiatura, mysz, kontroler).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+pl Strzela do potworów pod celownikiem w grze lokalnej (ekran dotykowy).
+
+@ Vibrate on button presses and damage (Android).
+pl Wibracje przy naciśnięciu przycisku i otrzymaniu obrażeń (Android).
+
+@ Swipe left or right to cycle.
+pl Przesuń w lewo lub w prawo, aby zmienić broń.

@@ -2421,8 +2421,8 @@ ka მიმართული განათების ანარეკლ
 @ How far the view turns when you swipe
 ka რამდენად შორს უხვევს ხედი, როცა გადაფურცლავთ
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-ka ანელებს თქვენს გადაფურცვლას ხილულ სამიზნეებთან. Deathmatch საჭიროებს სერვერის ნებართვას.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ka ანელებს თქვენს გადაფურცვლას ხილულ სამიზნეებთან. Deathmatch საჭიროებს სერვერის ნებართვას. მაღალ დონეზე სამიზნე ნიშნული ოდნავ მიიზიდება მიზნისკენ.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 ka ცვლის გვერდებს მოძრაობის, დამიზნებისა და თამაშის ღილაკებისთვის
@@ -4100,3 +4100,30 @@ ka განლაგების შეცვლა
 
 @ Drag to move
 ka გადაათრიეთ გადასაადგილებლად
+
+@ Auto-fire
+ka ავტომატური სროლა
+
+@ Touch Auto-fire
+ka ავტომატური სროლა შეხებით
+
+@ Move-side Fire
+ka სროლა მოძრაობის მხარეს
+
+@ Touch Haptics
+ka შეხების ვიბრაცია
+
+@ Add a Fire button on the move side.
+ka ამატებს სროლის ღილაკს მოძრაობის მხარეს.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ka ლოკალურ თამაშში ესვრის სამიზნეში მოხვედრილ ურჩხულებს (კლავიატურა, მაუსი, კონტროლერი).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ka ლოკალურ თამაშში ესვრის სამიზნეში მოხვედრილ ურჩხულებს (სენსორული ეკრანი).
+
+@ Vibrate on button presses and damage (Android).
+ka ვიბრირებს ღილაკზე დაჭერის ან დაზიანებისას (Android).
+
+@ Swipe left or right to cycle.
+ka იარაღის შესაცვლელად გადაუსვით მარცხნივ ან მარჯვნივ.

@@ -2421,8 +2421,8 @@ la Vis nitoris ex illuminatione directionali
 @ How far the view turns when you swipe
 la Quam longe visum ungunt cum ungunt
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-la Retardat tua visibilia prope ungunt scuta. Deathmatch server permission requirit.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+la Retardat tua visibilia prope ungunt scuta. Deathmatch server permission requirit. In gradu alto signum paulum ad scopum trahitur.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 la Swaps latera ad motum, tendendi ac lusionis globulis
@@ -4100,3 +4100,30 @@ la Dispositionem Mutare
 
 @ Drag to move
 la Trahe ut moveas
+
+@ Auto-fire
+la Ignis automaticus
+
+@ Touch Auto-fire
+la Ignis automaticus tactilis
+
+@ Move-side Fire
+la Ignis in latere motus
+
+@ Touch Haptics
+la Vibratio tactilis
+
+@ Add a Fire button on the move side.
+la Bullam ignis in latere motus addit.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+la In ludo locali monstra sub signo ferit (claviatura, mus, moderatrum).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+la In ludo locali monstra sub signo ferit (velum tactile).
+
+@ Vibrate on button presses and damage (Android).
+la Vibrat cum bullae premuntur aut damnum accipis (Android).
+
+@ Swipe left or right to cycle.
+la Ad sinistram vel dextram trahe ut arma mutes.

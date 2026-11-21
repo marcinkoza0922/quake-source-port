@@ -2,7 +2,7 @@
 //! option values and keyboard/controller navigation of the other pages.
 
 use super::*;
-use qinput::touch::TouchLayout;
+use qinput::touch::{TouchButtons, TouchLayout};
 
 pub(super) const ITEMS: &[Item] = &[
     slider("Yaw Sensitivity", "touch_yaw_sensitivity", 7.0, 84.0, 1.0),
@@ -15,6 +15,9 @@ pub(super) const ITEMS: &[Item] = &[
     slider("Opacity", "touch_opacity", 0.1, 1.0, 0.1),
     toggle("Invert Look", "touch_invert"),
     Item::Choice { label: "Gameplay Overlay", cvar: "touch_enable", choices: &[("off", 0.0), ("auto", 1.0), ("always", 2.0)] },
+    toggle("Touch Auto-fire", "touch_autofire"),
+    toggle("Move-side Fire", "touch_move_fire"),
+    toggle("Touch Haptics", "touch_haptics"),
     Item::Run { label: "Edit Layout", run: Run::EditTouch },
     Item::Sub { label: "Gyro & Flick Stick", page: Page::Gyro },
     Item::Run { label: "Reset", run: Run::ResetTouch },
@@ -23,13 +26,13 @@ pub(super) const ITEMS: &[Item] = &[
 const ROW_X: f32 = 24.0;
 const ROW_Y: f32 = 50.0;
 const ROW_WIDTH: f32 = 350.0;
-const ROW_HEIGHT: f32 = 27.0;
+const ROW_HEIGHT: f32 = 21.0;
 const ROWS: usize = ITEMS.len() - 3;
 const EDIT: [f32; 4] = [390.0, 231.0, 226.0, 36.0];
 const GYRO: [f32; 4] = [390.0, 272.0, 226.0, 36.0];
 const CHOICE_X: f32 = 169.0;
 const CHOICE_WIDTH: f32 = 195.0;
-const PREVIEW: [f32; 4] = [390.0, 58.0, 226.0, 113.0];
+const PREVIEW: [f32; 4] = [390.0, 58.0, 226.0, 100.0];
 const RESET: [f32; 4] = [248.0, 323.0, 126.0, 34.0];
 pub(super) const BACK: [f32; 4] = [ROW_X, 323.0, 106.0, 34.0];
 pub(super) const RESUME: [f32; 4] = [480.0, 112.0, 144.0, 48.0];
@@ -67,7 +70,7 @@ impl Menu {
     /// The touch page fills the available landscape area, including sizes
     /// between the integer zoom levels of the classic menus.
     pub fn canvas_layout(&self, c: &mut Canvas) {
-        if !matches!(self.screen, Screen::OptionsPage(Page::Touch) | Screen::TouchEditor) {
+        if !self.touch_ui && !matches!(self.screen, Screen::OptionsPage(Page::Touch) | Screen::TouchEditor) {
             c.menu_layout();
             return;
         }
@@ -105,12 +108,20 @@ impl Menu {
         touch_button(c, [x - CLASSIC.0, y - CLASSIC.1, w, h], "Touch Controls", selected);
     }
 
-    pub fn touch_slider_at(&self, pos: (f32, f32)) -> Option<usize> {
-        if self.screen != Screen::OptionsPage(Page::Touch) || self.prompt.is_some() {
+    pub fn slider_at(&self, pos: (f32, f32), cv: &Cvars) -> Option<usize> {
+        if self.prompt.is_some() || self.drop.is_some() || self.osk.is_some() || self.autoaim_prompt || self.capturing() {
             return None;
         }
-        let row = item_at(pos)?;
-        (matches!(ITEMS[row], Item::Slider { .. }) && (SLIDER.0 - 10.0..SLIDER.1 + 10.0).contains(&pos.0)).then_some(row)
+        let Screen::OptionsPage(page) = self.screen else { return None };
+        let row = self.item_at(pos)?;
+        let item = self.page_item(page, row);
+        let (start, end, padding) = if page == Page::Touch {
+            (SLIDER.0, SLIDER.1, 10.0)
+        } else {
+            (SLIDER_X.0, SLIDER_X.1, 8.0)
+        };
+        (matches!(item, Item::Slider { .. } | Item::ShaderParam(_)) && !self.item_disabled(item, cv)
+            && (start - padding..end + padding).contains(&pos.0)).then_some(row)
     }
 
     pub(super) fn pick_touch_choice(&mut self, row: usize, pos: (f32, f32), cv: &mut Cvars) -> bool {
@@ -143,7 +154,7 @@ impl Menu {
                     let width = CHOICE_WIDTH / opts.len() as f32;
                     for (i, opt) in opts.iter().enumerate() {
                         let x = CHOICE_X + i as f32 * width;
-                        touch_button(c, [x + 1.0, y + 3.0, width - 2.0, ROW_HEIGHT - 6.0], opt, current == i);
+                        touch_button(c, [x + 1.0, y + 2.0, width - 2.0, ROW_HEIGHT - 4.0], opt, current == i);
                     }
                     label
                 }
@@ -167,7 +178,8 @@ impl Menu {
         c.text_center(x + w / 2.0, y - 25.0, "Preview", 13.0, FG);
         c.round_box(x, y, w, h, 6.0, [0.08, 0.064, 0.051, 1.0], Some(BORDER));
         let aspect = self.touch_aspect;
-        let layout = TouchLayout::from_cvars(cv, aspect, self.touch_insets);
+        let mut layout = TouchLayout::from_cvars(cv, aspect, self.touch_insets);
+        layout.buttons = TouchButtons::PREVIEW;
         let h = (h - 8.0).min((w - 8.0) / aspect);
         let area = [x + (w - h * aspect) / 2.0, y + (PREVIEW[3] - h) / 2.0, h * aspect, h];
         let [ax, ay, aw, ah] = area;
@@ -180,11 +192,12 @@ impl Menu {
         let item = ITEMS[self.opt_cursor.min(ITEMS.len() - 1)];
         if let Some(tip) = tooltip(item) {
             for (i, line) in super::navigation::wrap_tooltip_lines(c, &qcore::lang::tr(tip), w - 12.0, 11.0).iter().enumerate() {
-                c.text_raw(x + 6.0, y + PREVIEW[3] + 8.0 + i as f32 * 14.0, line, 11.0, MUTED);
+                c.text_raw(x + 6.0, y + PREVIEW[3] + 8.0 + i as f32 * 13.0, line, 11.0, MUTED);
             }
         }
-        c.text_center(x + w / 2.0, 321.0, "Tap to swap weapons.", 11.0, FG);
-        c.text_center(x + w / 2.0, 336.0, "Hold and slide to select.", 11.0, MUTED);
+        c.text_center(x + w / 2.0, 313.0, "Tap to swap weapons.", 11.0, FG);
+        c.text_center(x + w / 2.0, 327.0, "Swipe left or right to cycle.", 11.0, MUTED);
+        c.text_center(x + w / 2.0, 341.0, "Hold and slide to select.", 11.0, MUTED);
     }
 }
 
@@ -205,7 +218,7 @@ pub(super) fn touch_button(c: &mut Canvas, [x, y, w, h]: [f32; 4], label: &str, 
     let fill = if selected { [0.37, 0.23, 0.12, 1.0] } else { [0.13, 0.10, 0.077, 1.0] };
     c.round_box(x, y, w, h, 5.0, fill, Some(BORDER));
     let label = qcore::lang::tr(label);
-    let size = fitted_size(c, &label, (h * 0.43).min(16.0), w - 8.0);
+    let size = fitted_size(c, &label, (h * 0.58).min(16.0), w - 8.0);
     let color = if selected { GOLD_FG } else { FG };
     c.text_raw(x + (w - c.text_w_raw(&label, size)) / 2.0, y + (h - size) / 2.0, &label, size, color);
 }
@@ -217,6 +230,38 @@ fn fitted_size(c: &Canvas, text: &str, size: f32, width: f32) -> f32 {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn standard_options_keep_partial_scroll_rows_and_drag_the_same_sliders() {
+        let mut menu = Menu::new();
+        let mut cv = Cvars::new();
+        qinput::Input::new(&mut cv);
+        menu.set_touch_ui(true);
+        menu.open(Screen::OptionsPage(Page::Mouse));
+        let row = page_items(Page::Mouse).iter().position(|item| {
+            matches!(item, Item::Slider { cvar: "sensitivity", .. })
+        }).unwrap();
+        let y = menu.page_row_y(Page::Mouse, row) + 10.0;
+        let (left, right) = SLIDER_X;
+        assert_eq!(menu.slider_at((left, y), &cv), Some(row));
+        menu.mouse_move((left, y), &mut cv);
+        menu.key(K_MOUSE1, &mut cv, false);
+        let low = cv.value_of("sensitivity");
+        menu.mouse_move((right + 50.0, y + 20.0), &mut cv);
+        assert!(cv.value_of("sensitivity") > low);
+        menu.mouse_up();
+
+        let page = Page::Graphics;
+        menu.open(Screen::OptionsPage(page));
+        menu.opt_cursor = 0;
+        assert_eq!(menu.scroll_touch(7.5), Some(true));
+        assert_eq!(menu.page_offset(page), 7.5);
+        assert_eq!(menu.item_at((PANEL_X + 10.0, PAGE_ROW0 + 17.0)), Some(1));
+        assert_eq!(menu.scroll_touch(5000.0), Some(true));
+        assert_eq!(menu.scroll_touch(5000.0), Some(false));
+        assert_eq!(menu.scroll_touch(-5000.0), Some(true));
+        assert_eq!(menu.page_offset(page), 0.0);
+    }
 
     #[test]
     fn touch_shortcut_slider_choices_reset_and_back() {

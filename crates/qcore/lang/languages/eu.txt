@@ -2421,8 +2421,8 @@ eu Norabidezko argiztapenaren distiren indarra
 @ How far the view turns when you swipe
 eu Ikuspegia noraino biratzen den hatza pasatzen duzunean
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-eu Zure hatza moteltzen du helburu ikusgaietatik gertu. Deathmatch-ek zerbitzariaren baimena behar du.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+eu Zure hatza moteltzen du helburu ikusgaietatik gertu. Deathmatch-ek zerbitzariaren baimena behar du. Maila altuan, gurutzea apur bat erakartzen du jomugarantz.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 eu Aldeak mugitzeko, apuntatzeko eta jokatzeko botoiekin aldatzen ditu
@@ -4100,3 +4100,30 @@ eu Editatu diseinua
 
 @ Drag to move
 eu Arrastatu mugitzeko
+
+@ Auto-fire
+eu Tiro automatikoa
+
+@ Touch Auto-fire
+eu Ukipenezko tiro automatikoa
+
+@ Move-side Fire
+eu Tiroa mugimenduaren aldean
+
+@ Touch Haptics
+eu Ukipen-bibrazioa
+
+@ Add a Fire button on the move side.
+eu Tiro-botoi bat gehitzen du mugimenduaren aldean.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+eu Joko lokalean gurutzearen azpiko munstroei tiro egiten die (teklatua, sagua, agintea).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+eu Joko lokalean gurutzearen azpiko munstroei tiro egiten die (ukipen-pantaila).
+
+@ Vibrate on button presses and damage (Android).
+eu Botoiak sakatzean edo kaltea hartzean bibratzen du (Android).
+
+@ Swipe left or right to cycle.
+eu Irristatu ezkerrera edo eskuinera armaz aldatzeko.

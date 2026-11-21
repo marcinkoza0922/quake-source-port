@@ -2421,8 +2421,8 @@ gu દિશાત્મક પ્રકાશમાંથી મળતી ચ�
 @ How far the view turns when you swipe
 gu જ્યારે તમે સ્વાઇપ કરો છો ત્યારે દૃશ્ય કેટલું દૂર વળે છે
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-gu દૃશ્યમાન લક્ષ્યોની નજીક તમારા સ્વાઇપને ધીમું કરે છે. ડેથમેચને સર્વરની પરવાનગીની જરૂર છે.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+gu દૃશ્યમાન લક્ષ્યોની નજીક તમારા સ્વાઇપને ધીમું કરે છે. ડેથમેચને સર્વરની પરવાનગીની જરૂર છે. ઊંચા સ્તરે નિશાન પણ લક્ષ્ય તરફ થોડું ખેંચાય છે.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 gu ચળવળ, લક્ષ્ય અને ગેમપ્લે બટનો માટે બાજુઓને સ્વેપ કરો
@@ -4100,3 +4100,30 @@ gu લેઆઉટ સંપાદિત કરો
 
 @ Drag to move
 gu ખસેડવા ખેંચો
+
+@ Auto-fire
+gu સ્વયં ગોળીબાર
+
+@ Touch Auto-fire
+gu ટચથી સ્વયં ગોળીબાર
+
+@ Move-side Fire
+gu હલનચલનની બાજુએ ગોળીબાર
+
+@ Touch Haptics
+gu ટચ કંપન
+
+@ Add a Fire button on the move side.
+gu હલનચલનની બાજુએ ગોળીબારનું બટન ઉમેરે છે.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+gu સ્થાનિક રમતમાં નિશાના હેઠળના રાક્ષસો પર ગોળીબાર કરે છે (કીબોર્ડ, માઉસ, કંટ્રોલર).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+gu સ્થાનિક રમતમાં નિશાના હેઠળના રાક્ષસો પર ગોળીબાર કરે છે (ટચસ્ક્રીન).
+
+@ Vibrate on button presses and damage (Android).
+gu બટન દબાવવા કે ઇજા થાય ત્યારે કંપન (Android).
+
+@ Swipe left or right to cycle.
+gu હથિયાર બદલવા ડાબે કે જમણે સ્વાઇપ કરો.

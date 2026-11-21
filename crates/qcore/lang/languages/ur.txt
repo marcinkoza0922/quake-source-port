@@ -2421,8 +2421,8 @@ ur سمتی روشنی سے پیدا ہونے والی چمک کی شدت
 @ How far the view turns when you swipe
 ur جب آپ سوائپ کرتے ہیں تو منظر کتنی دور مڑتا ہے۔
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-ur مرئی اہداف کے قریب آپ کے سوائپ کو سست کرتا ہے۔ ڈیتھ میچ کو سرور کی اجازت درکار ہے۔
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ur مرئی اہداف کے قریب آپ کے سوائپ کو سست کرتا ہے۔ ڈیتھ میچ کو سرور کی اجازت درکار ہے۔ اعلیٰ سطح پر نشانہ ہلکا سا ہدف کی طرف بھی کھنچتا ہے۔
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 ur حرکت، مقصد اور گیم پلے بٹنوں کے لیے اطراف کو تبدیل کریں۔
@@ -4100,3 +4100,30 @@ ur ترتیب میں ترمیم
 
 @ Drag to move
 ur منتقل کرنے کے لیے گھسیٹیں
+
+@ Auto-fire
+ur خودکار فائر
+
+@ Touch Auto-fire
+ur ٹچ پر خودکار فائر
+
+@ Move-side Fire
+ur حرکت کی جانب فائر
+
+@ Touch Haptics
+ur ٹچ کی لرزش
+
+@ Add a Fire button on the move side.
+ur حرکت کی جانب فائر کا بٹن شامل کرتا ہے۔
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ur مقامی کھیل میں نشانے پر موجود عفریتوں پر فائر کرتا ہے (کی بورڈ، ماؤس، کنٹرولر)۔
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ur مقامی کھیل میں نشانے پر موجود عفریتوں پر فائر کرتا ہے (ٹچ اسکرین)۔
+
+@ Vibrate on button presses and damage (Android).
+ur بٹن دبانے یا نقصان پہنچنے پر لرزش (اینڈرائیڈ)۔
+
+@ Swipe left or right to cycle.
+ur ہتھیار بدلنے کے لیے بائیں یا دائیں سوائپ کریں۔

@@ -3,25 +3,11 @@
 //! controls in `qinput::touch`, which this file also draws.
 
 use super::*;
-use qinput::touch::{PAUSE_BUTTON, TouchPhase};
+use qinput::touch::{PAUSE_BUTTON, TouchButtons, TouchPhase};
 use qplatform::FingerPhase;
 
-/// Menu-space drag (virtual pixels) that counts as a scroll, not a tap.
-const TAP_SLOP: f32 = 8.0;
-/// Menu-space drag per wheel step while scrolling.
-const SCROLL_STEP: f32 = 16.0;
-
-/// The finger working the menu: id, where it landed, the y of the last
-/// scroll step, and whether it has been dragged past the tap slop.
-#[derive(Clone, Copy, Debug)]
-pub(super) struct MenuTouch {
-    id: u64,
-    start: (f32, f32),
-    scroll_y: f32,
-    dragged: bool,
-    slider: bool,
-    screen: Screen,
-}
+mod menu;
+pub(super) use menu::{MenuFling, MenuTouch};
 
 impl Host {
     #[cfg(target_os = "android")]
@@ -34,6 +20,8 @@ impl Host {
     pub(super) fn sync_touch_menu(&mut self) {
         let mode = self.cv("touch_enable");
         let touch = self.input.last_device == Device::Touch || mode == 2.0;
+        self.menu.set_touch_ui(touch);
+        if !touch { self.cancel_menu_touch(); }
         self.menu.set_touch_shortcut(touch && self.cl.signon == 4 && self.demo.is_none());
         let (w, h) = self.window.as_ref().map_or_else(|| self.r.size(), |win| win.drawable_size());
         self.menu.touch_aspect = (w as f32 / h.max(1) as f32).max(0.1);
@@ -46,13 +34,65 @@ impl Host {
         if mode == 0.0 && self.input.touch.any_finger() {
             qinput::release_touch(self);
         }
+        if self.menu.screen == Screen::Death && touch {
+            if self.realtime >= self.touch_quickload_probe {
+                self.menu.death_quickload = self.touch_quickload_exists();
+            }
+        } else {
+            self.menu.death_quickload = false;
+        }
+        self.sync_touch_buttons();
     }
 
-    pub(super) fn cancel_menu_touch(&mut self) {
-        if self.menu_touch.take().is_some() {
-            self.menu.hud_edit.mouse_up(&mut self.server.core.cvars);
-            self.menu.mouse_up();
+    fn touch_quickload_exists(&mut self) -> bool {
+        self.touch_quickload_probe = self.realtime + 0.5;
+        crate::autosave::find(&self.user_dir(), "quick").is_some()
+    }
+
+    fn sync_touch_buttons(&mut self) {
+        let active = self.input.touch_visible(&self.server.core.cvars) && self.key_dest() == KeyDest::Game
+            && self.cl.signon == 4 && self.cl.intermission == 0 && self.demo.is_none()
+            && !self.automap.fullscreen && self.freecam.cam.is_none() && self.cl.stats[STAT_HEALTH] > 0;
+        let mut buttons = TouchButtons::default();
+        if active {
+            buttons.submerged = self.cl.entities.get(self.cl.viewentity).is_some_and(|ent| {
+                let [x, y, z] = ent.origin;
+                (-5..=-3).contains(&self.contents([x, y, z + self.cl.viewheight]))
+            });
+            if self.local_single_player() {
+                buttons.quicksave = qserver::modifiers::value(&self.server.core, "modifier_nosaves") == 0.0;
+                buttons.quickload = self.input.touch_buttons.quickload;
+                if self.realtime >= self.touch_quickload_probe {
+                    buttons.quickload = self.touch_quickload_exists();
+                }
+            } else {
+                self.touch_quickload_probe = 0.0;
+            }
+        } else if self.menu.screen != Screen::Death {
+            self.touch_quickload_probe = 0.0;
         }
+        self.input.touch_buttons = buttons;
+        if self.input.touch.any_finger() {
+            let layout = self.input.touch_layout(&self.server.core.cvars);
+            for cmd in self.input.touch.release_hidden(&layout) {
+                self.cbuf.add_text(&cmd);
+            }
+        }
+    }
+
+    pub(super) fn add_touch_haptic(&mut self, strength: f32, duration: u32) {
+        if cfg!(target_os = "android") && self.input.last_device == Device::Touch && self.cv("touch_haptics") != 0.0
+            && !self.backgrounded && self.demo.is_none()
+            && self.touch_haptic.is_none_or(|(_, ms)| ms <= duration)
+        {
+            self.touch_haptic = Some((strength, duration));
+        }
+    }
+
+    #[cfg(target_os = "android")]
+    pub fn take_touch_haptic(&mut self) -> Option<(f32, u32)> {
+        self.touch_haptic.take().filter(|_| self.input.last_device == Device::Touch
+            && !self.backgrounded && self.cv("touch_haptics") != 0.0)
     }
 
     pub(super) fn finger_event(&mut self, id: u64, phase: FingerPhase, x: f32, y: f32, timestamp_ns: u64) {
@@ -71,17 +111,23 @@ impl Host {
         }
         match self.key_dest() {
             KeyDest::Menu => {
-                self.menu_finger(id, phase, (x * pw as f32, y * ph as f32), (pw, ph));
+                let mut canvas = Canvas::new(pw, ph);
+                self.menu.canvas_layout(&mut canvas);
+                let pos = (x * pw as f32 / canvas.scale - canvas.ox, y * ph as f32 / canvas.scale - canvas.oy);
+                self.menu_finger(id, phase, pos, timestamp_ns);
                 // a tap on a text row brings up the keyboard, again after it was dismissed
                 if down && self.menu.wants_text() {
                     self.text_input = None;
                 }
                 self.sync_key_dest();
             }
-            KeyDest::Console | KeyDest::Message => {
+            dest @ (KeyDest::Console | KeyDest::Message) => {
                 // a tap brings the on-screen keyboard back after it was dismissed
                 if down && let Some(w) = &self.window {
-                    let _ = w.set_text_input(true);
+                    self.touch_console_keyboard = dest == KeyDest::Console;
+                    if w.set_text_input(true).is_ok() {
+                        self.text_input = Some(true);
+                    }
                 }
             }
             KeyDest::Game if down && self.demo.is_some() => {
@@ -92,77 +138,20 @@ impl Host {
             KeyDest::Game if self.cv("touch_enable") != 0.0 => {
                 let aspect = pw as f32 / ph.max(1) as f32;
                 self.handle_event(HostEvent::Input(InputEvent::Touch { id, phase, x, y, aspect, timestamp_ns }));
+                if down && self.input.touch.button_held_by(id) {
+                    self.add_touch_haptic(0.25, 20);
+                }
             }
             KeyDest::Game if down && self.cl.signon == 4 => {
                 let mut layout = self.input.touch_layout(&self.server.core.cvars);
                 layout.aspect = pw as f32 / ph.max(1) as f32;
                 if layout.hits(PAUSE_BUTTON, [x, y]) {
+                    self.add_touch_haptic(0.25, 20);
                     self.menu.open(Screen::Main);
                     self.sync_key_dest();
                 }
             }
             KeyDest::Game => {}
-        }
-    }
-
-    /// Tap = hover + click on release; vertical drag = mouse-wheel scroll.
-    fn menu_finger(&mut self, id: u64, phase: TouchPhase, px: (f32, f32), (pw, ph): (u32, u32)) {
-        let mut c = Canvas::new(pw, ph);
-        self.menu.canvas_layout(&mut c);
-        let pos = (px.0 / c.scale - c.ox, px.1 / c.scale - c.oy);
-        if self.menu_touch.is_some_and(|t| t.screen != self.menu.screen) {
-            self.cancel_menu_touch();
-        }
-        match phase {
-            TouchPhase::Down => {
-                if self.menu_touch.is_some() { return; }
-                let slider = self.menu.screen == Screen::TouchEditor || self.menu.touch_slider_at(pos).is_some();
-                self.menu_touch = Some(MenuTouch {
-                    id,
-                    start: pos,
-                    scroll_y: pos.1,
-                    dragged: false,
-                    slider,
-                    screen: self.menu.screen,
-                });
-                if let Some(snd) = self.menu.mouse_move(pos, &mut self.server.core.cvars) {
-                    self.local_sound(snd);
-                }
-                if slider { self.menu_key(qinput::keys::K_MOUSE1); }
-            }
-            TouchPhase::Move => {
-                let Some(mut t) = self.menu_touch.filter(|t| t.id == id) else {
-                    return;
-                };
-                if t.slider {
-                    let _ = self.menu.mouse_move(pos, &mut self.server.core.cvars);
-                    return;
-                }
-                t.dragged |= (pos.0 - t.start.0).hypot(pos.1 - t.start.1) > TAP_SLOP;
-                while t.dragged && (pos.1 - t.scroll_y).abs() >= SCROLL_STEP {
-                    // finger down pulls the list down, i.e. scrolls up
-                    let up = pos.1 > t.scroll_y;
-                    t.scroll_y += if up { SCROLL_STEP } else { -SCROLL_STEP };
-                    self.menu_key(if up { qinput::keys::K_MWHEELUP } else { qinput::keys::K_MWHEELDOWN });
-                }
-                self.menu_touch = Some(t);
-            }
-            TouchPhase::Up => {
-                let Some(t) = self.menu_touch.filter(|t| t.id == id) else {
-                    return;
-                };
-                if t.slider {
-                    let _ = self.menu.mouse_move(pos, &mut self.server.core.cvars);
-                } else if !t.dragged {
-                    let _ = self.menu.mouse_move(pos, &mut self.server.core.cvars);
-                    self.menu_key(qinput::keys::K_MOUSE1);
-                }
-                self.cancel_menu_touch();
-                self.sync_key_dest();
-            }
-            TouchPhase::Cancel => {
-                if self.menu_touch.is_some_and(|t| t.id == id) { self.cancel_menu_touch(); }
-            }
         }
     }
 }

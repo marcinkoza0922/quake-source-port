@@ -2421,8 +2421,8 @@ ko 방향성 조명으로 생기는 하이라이트 강도
 @ How far the view turns when you swipe
 ko 스와이프할 때 화면이 얼마나 회전하는지
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-ko 보이는 대상 근처에서 스와이프 속도를 늦춥니다. 데스매치에는 서버 권한이 필요합니다.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ko 보이는 대상 근처에서 스와이프 속도를 늦춥니다. 데스매치에는 서버 권한이 필요합니다. 높음에서는 조준점이 대상 쪽으로 살짝 끌립니다.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 ko 이동, 조준 및 게임 플레이 버튼을 위해 측면을 교체합니다.
@@ -4100,3 +4100,30 @@ ko 배치 편집
 
 @ Drag to move
 ko 드래그하여 이동
+
+@ Auto-fire
+ko 자동 사격
+
+@ Touch Auto-fire
+ko 터치 자동 사격
+
+@ Move-side Fire
+ko 이동 쪽 사격 버튼
+
+@ Touch Haptics
+ko 터치 진동
+
+@ Add a Fire button on the move side.
+ko 이동 조작 쪽에 사격 버튼을 추가합니다.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ko 로컬 플레이에서 조준점에 들어온 몬스터를 사격합니다 (키보드, 마우스, 컨트롤러).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ko 로컬 플레이에서 조준점에 들어온 몬스터를 사격합니다 (터치스크린).
+
+@ Vibrate on button presses and damage (Android).
+ko 버튼을 누르거나 피해를 받으면 진동합니다(Android).
+
+@ Swipe left or right to cycle.
+ko 좌우로 밀어 무기를 바꿉니다.

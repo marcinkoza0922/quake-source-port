@@ -2421,8 +2421,8 @@ th ความ​แรง​ของ​ไฮไลต์​จาก​แ�
 @ How far the view turns when you swipe
 th มุม​มอง​จะ​เปลี่ยน​ไป​ไกล​แค่​ไหน​เมื่อ​คุณ​ปัด​นิ้ว
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-th ชะลอ​การ​ปัด​ของ​คุณ​ใกล้​กับ​เป้า​หมาย​ที่​มอง​เห็น​ได้​ ​Deathmatch​ ​ต้อง​ได้​รับ​อนุญาต​จาก​เซิร์ฟเวอร์
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+th ชะลอ​การ​ปัด​ของ​คุณ​ใกล้​กับ​เป้า​หมาย​ที่​มอง​เห็น​ได้​ ​Deathmatch​ ​ต้อง​ได้​รับ​อนุญาต​จาก​เซิร์ฟเวอร์ ระดับ​สูง​จะ​ดึง​เป้า​เล็ง​เข้าหา​เป้า​หมาย​เล็ก​น้อย​ด้วย
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 th สลับ​ด้าน​ข้าง​สำหรับ​ปุ่ม​การ​เคลื่อนไหว​ ​การ​เล็ง​ ​และ​การ​เล่น​เกม
@@ -4100,3 +4100,30 @@ th แก้ไข​ผัง​ปุ่ม
 
 @ Drag to move
 th ลาก​เพื่อ​ย้าย
+
+@ Auto-fire
+th ยิง​อัตโนมัติ
+
+@ Touch Auto-fire
+th ยิง​อัตโนมัติ​บน​จอ​สัมผัส
+
+@ Move-side Fire
+th ปุ่ม​ยิง​ฝั่ง​เคลื่อนที่
+
+@ Touch Haptics
+th สั่น​เมื่อ​สัมผัส
+
+@ Add a Fire button on the move side.
+th เพิ่ม​ปุ่ม​ยิง​ใน​ฝั่ง​ควบคุม​การ​เคลื่อนที่
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+th ยิง​มอน​ส​เตอร์​ที่​อยู่​ใต้​เป้า​ใน​เกม​แบบ​เล่น​ใน​เครื่อง (แป้น​พิมพ์ เมาส์ ตัว​ควบคุม)
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+th ยิง​มอน​ส​เตอร์​ที่​อยู่​ใต้​เป้า​ใน​เกม​แบบ​เล่น​ใน​เครื่อง (จอ​สัมผัส)
+
+@ Vibrate on button presses and damage (Android).
+th สั่น​เมื่อ​กด​ปุ่ม​หรือ​ได้​รับ​ความ​เสีย​หาย (Android)
+
+@ Swipe left or right to cycle.
+th ปัด​ซ้าย​หรือ​ขวา​เพื่อ​สลับ​อาวุธ

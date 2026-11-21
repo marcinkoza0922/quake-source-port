@@ -12,7 +12,7 @@ pub fn draw(c: &mut Canvas, layout: &TouchLayout, input: Option<&TouchOverlay>, 
         c.round_box(x - r, y - r, r * 2.0, r * 2.0, r, fill, Some(edge));
     };
     for (i, button) in BUTTONS.iter().enumerate() {
-        if menu_only && i != PAUSE_BUTTON { continue; }
+        if !layout.button_enabled(i) || (menu_only && i != PAUSE_BUTTON) { continue; }
         let (p, r) = layout.button(i);
         let held = input.is_some_and(|input| input.pressed(i));
         let bg = if held { [0.65, 0.40, 0.15, 0.9 * a] } else { fill };

@@ -2421,8 +2421,8 @@ zh-TW 方向性光照產生的高光強度
 @ How far the view turns when you swipe
 zh-TW 滑動時視角轉動的幅度
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-zh-TW 準星靠近可見目標時減慢轉動。死鬥模式需要伺服器允許。
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+zh-TW 準星靠近可見目標時減慢轉動。死鬥模式需要伺服器允許。高檔還會將準星輕微拉向目標。
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 zh-TW 對調移動區、瞄準區和遊戲按鈕的位置
@@ -4100,3 +4100,30 @@ zh-TW 編輯配置
 
 @ Drag to move
 zh-TW 拖曳以移動
+
+@ Auto-fire
+zh-TW 自動開火
+
+@ Touch Auto-fire
+zh-TW 觸控自動開火
+
+@ Move-side Fire
+zh-TW 移動側開火鍵
+
+@ Touch Haptics
+zh-TW 觸控震動
+
+@ Add a Fire button on the move side.
+zh-TW 在移動控制側新增開火鍵。
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+zh-TW 在本機遊戲中自動射擊準星瞄準的怪物（鍵盤、滑鼠、控制器）。
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+zh-TW 在本機遊戲中自動射擊準星瞄準的怪物（觸控螢幕）。
+
+@ Vibrate on button presses and damage (Android).
+zh-TW 按下按鈕或受到傷害時震動（Android）。
+
+@ Swipe left or right to cycle.
+zh-TW 左右滑動切換武器。

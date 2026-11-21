@@ -2421,8 +2421,8 @@ te దిశాత్మక కాంతి నుండి వచ్చే హ�
 @ How far the view turns when you swipe
 te మీరు స్వైప్ చేసినప్పుడు వీక్షణ ఎంత దూరం తిరుగుతుంది
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-te కనిపించే లక్ష్యాల దగ్గర మీ స్వైప్‌ను నెమ్మదిస్తుంది. డెత్‌మ్యాచ్‌కి సర్వర్ అనుమతి అవసరం.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+te కనిపించే లక్ష్యాల దగ్గర మీ స్వైప్‌ను నెమ్మదిస్తుంది. డెత్‌మ్యాచ్‌కి సర్వర్ అనుమతి అవసరం. అధిక స్థాయిలో గురి కూడా లక్ష్యం వైపు స్వల్పంగా లాగబడుతుంది.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 te కదలిక, లక్ష్యం మరియు గేమ్‌ప్లే బటన్‌ల కోసం భుజాలను మారుస్తుంది
@@ -4100,3 +4100,30 @@ te అమరికను సవరించండి
 
 @ Drag to move
 te జరపడానికి లాగండి
+
+@ Auto-fire
+te స్వయంచాలక కాల్పులు
+
+@ Touch Auto-fire
+te టచ్‌తో స్వయంచాలక కాల్పులు
+
+@ Move-side Fire
+te కదలిక వైపు కాల్పులు
+
+@ Touch Haptics
+te టచ్ కంపనం
+
+@ Add a Fire button on the move side.
+te కదలిక వైపు కాల్పుల బటన్‌ను జోడిస్తుంది.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+te స్థానిక ఆటలో గురి కింద ఉన్న రాక్షసులపై కాలుస్తుంది (కీబోర్డ్, మౌస్, కంట్రోలర్).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+te స్థానిక ఆటలో గురి కింద ఉన్న రాక్షసులపై కాలుస్తుంది (టచ్‌స్క్రీన్).
+
+@ Vibrate on button presses and damage (Android).
+te బటన్ నొక్కినప్పుడు లేదా గాయపడినప్పుడు కంపిస్తుంది (Android).
+
+@ Swipe left or right to cycle.
+te ఆయుధాన్ని మార్చడానికి ఎడమకు లేదా కుడికి స్వైప్ చేయండి.

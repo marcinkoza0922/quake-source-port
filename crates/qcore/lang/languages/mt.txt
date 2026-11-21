@@ -2421,8 +2421,8 @@ mt Qawwa tar-riflessi mid-dawl direzzjonali
 @ How far the view turns when you swipe
 mt Kemm idur il-veduta meta tiskja
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-mt Inaqqas is-swipe tiegħek ħdejn miri viżibbli. Deathmatch jeħtieġ permess tas-server.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+mt Inaqqas is-swipe tiegħek ħdejn miri viżibbli. Deathmatch jeħtieġ permess tas-server. Fl-issettjar għoli, il-mira tinġibed ukoll ħafif lejn il-mira fil-logħba.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 mt Tibdel il-ġnub għall-buttuni tal-moviment, tal-mira u tal-logħob
@@ -4100,3 +4100,30 @@ mt Editja t-Tqassim
 
 @ Drag to move
 mt Iddreggja biex iċċaqlaq
+
+@ Auto-fire
+mt Sparar awtomatiku
+
+@ Touch Auto-fire
+mt Sparar awtomatiku bil-mess
+
+@ Move-side Fire
+mt Sparar fuq in-naħa tal-moviment
+
+@ Touch Haptics
+mt Vibrazzjoni bil-mess
+
+@ Add a Fire button on the move side.
+mt Iżid buttuna tal-isparar fuq in-naħa tal-moviment.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+mt Jispara fuq mostri fil-mira waqt logħob lokali (tastiera, maws, kontrollur).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+mt Jispara fuq mostri fil-mira waqt logħob lokali (skrin tal-mess).
+
+@ Vibrate on button presses and damage (Android).
+mt Jivvibra meta tagħfas buttuna jew iġġarrab ħsara (Android).
+
+@ Swipe left or right to cycle.
+mt Żerżaq lejn ix-xellug jew il-lemin biex tibdel l-arma.

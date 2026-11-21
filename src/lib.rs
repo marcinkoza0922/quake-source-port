@@ -166,6 +166,10 @@ fn open_sound(p: &qplatform::Platform, basedir: &std::path::Path, fs: &Fs) -> So
 
 /// Forwards pending rumble to player 1's pad (split-screen) or every pad.
 fn apply_rumble(host: &mut host::Host, p: &qplatform::Platform) {
+    #[cfg(target_os = "android")]
+    if let Some((strength, ms)) = host.take_touch_haptic() {
+        p.phone_haptic(strength, ms);
+    }
     if let Some((lo, hi, ms)) = host.take_rumble() {
         match host.rumble_pad() {
             Some(id) => {

@@ -2421,8 +2421,8 @@ ms Kekuatan sorotan kilauan daripada pencahayaan berarah
 @ How far the view turns when you swipe
 ms Sejauh mana pandangan bertukar apabila anda meleret
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-ms Memperlahankan leretan anda berhampiran sasaran yang boleh dilihat. Deathmatch memerlukan kebenaran pelayan.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ms Memperlahankan leretan anda berhampiran sasaran yang boleh dilihat. Deathmatch memerlukan kebenaran pelayan. Pada tetapan tinggi, bidikan turut ditarik sedikit ke arah sasaran.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 ms Menukar sisi untuk pergerakan, sasaran dan butang permainan
@@ -4100,3 +4100,30 @@ ms Sunting Reka Letak
 
 @ Drag to move
 ms Seret untuk mengalih
+
+@ Auto-fire
+ms Tembak automatik
+
+@ Touch Auto-fire
+ms Tembak automatik sentuh
+
+@ Move-side Fire
+ms Tembak di sisi gerakan
+
+@ Touch Haptics
+ms Getaran sentuhan
+
+@ Add a Fire button on the move side.
+ms Menambah butang tembak di sisi gerakan.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ms Menembak raksasa dalam bidikan semasa bermain secara setempat (papan kekunci, tetikus, alat kawalan).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ms Menembak raksasa dalam bidikan semasa bermain secara setempat (skrin sentuh).
+
+@ Vibrate on button presses and damage (Android).
+ms Bergetar apabila butang ditekan atau menerima kerosakan (Android).
+
+@ Swipe left or right to cycle.
+ms Leret ke kiri atau kanan untuk menukar senjata.

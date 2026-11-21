@@ -157,6 +157,10 @@ impl Menu {
 
     /// Dropdown box: (x, y, w) and visible entry count. Opens below its row,
     /// or above when it would run off the bottom.
+    pub(super) fn drop_row_height(&self) -> f32 {
+        if self.touch_ui { 18.0 } else { BOX_H }
+    }
+
     pub(super) fn drop_geom(&self, d: Drop, opts: &[String]) -> (f32, f32, f32, usize) {
         let vis = opts.len().min(DROP_ROWS);
         let w = opts.iter().map(|o| o.len() as f32 * 8.0 + 20.0).fold(DROP_W, f32::max);
@@ -164,8 +168,9 @@ impl Menu {
             Screen::OptionsPage(p) => self.page_row_y(p, d.item),
             _ => PAGE_ROW0 + d.item as f32 * ROW_H,
         };
-        let h = vis as f32 * BOX_H + 2.0;
-        let y = if row_y + ROW_H + h > MENU_H - 4.0 { row_y + 1.0 - h } else { row_y + ROW_H - 1.0 };
+        let h = vis as f32 * self.drop_row_height() + 2.0;
+        let row_h = self.page_row_height();
+        let y = if row_y + row_h + h > MENU_H - 4.0 { (row_y + 1.0 - h).max(4.0) } else { row_y + row_h - 1.0 };
         (VALUE_X - 3.0, y, w, vis)
     }
 
@@ -174,7 +179,7 @@ impl Menu {
         let Screen::OptionsPage(p) = self.screen else { return None };
         let opts = self.options(self.page_item(p, d.item));
         let (bx, by, bw, vis) = self.drop_geom(d, &opts);
-        let k = ((y - by - 1.0) / BOX_H).floor();
+        let k = ((y - by - 1.0) / self.drop_row_height()).floor();
         (x >= bx && x < bx + bw && k >= 0.0 && (k as usize) < vis).then(|| d.scroll + k as usize)
     }
 

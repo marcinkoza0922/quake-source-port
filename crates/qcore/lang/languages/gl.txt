@@ -2421,8 +2421,8 @@ gl Intensidade dos reflexos da iluminación direccional
 @ How far the view turns when you swipe
 gl Ata onde xira a vista cando pasas o dedo
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-gl Ralentiza o paso preto dos obxectivos visibles. Deathmatch require permiso do servidor.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+gl Ralentiza o paso preto dos obxectivos visibles. Deathmatch require permiso do servidor. No nivel alto, a mira tamén se achega suavemente ao obxectivo.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 gl Cambia os lados polos botóns de movemento, puntería e xogo
@@ -4100,3 +4100,30 @@ gl Editar disposición
 
 @ Drag to move
 gl Arrastra para mover
+
+@ Auto-fire
+gl Disparo automático
+
+@ Touch Auto-fire
+gl Disparo automático táctil
+
+@ Move-side Fire
+gl Disparo no lado do movemento
+
+@ Touch Haptics
+gl Vibración táctil
+
+@ Add a Fire button on the move side.
+gl Engade un botón de disparo no lado do movemento.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+gl Dispara aos monstros baixo o punto de mira en xogo local (teclado, rato, mando).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+gl Dispara aos monstros baixo o punto de mira en xogo local (pantalla táctil).
+
+@ Vibrate on button presses and damage (Android).
+gl Vibra ao premer botóns e ao recibir dano (Android).
+
+@ Swipe left or right to cycle.
+gl Desliza á esquerda ou á dereita para cambiar de arma.

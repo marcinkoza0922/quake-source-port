@@ -2421,8 +2421,8 @@ ja 指向性ライティングによるハイライトの強さ
 @ How far the view turns when you swipe
 ja スワイプで視点が回転する量
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-ja 見えている標的の近くで視点の動きを遅くします。デスマッチではサーバーの許可が必要です。
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ja 見えている標的の近くで視点の動きを遅くします。デスマッチではサーバーの許可が必要です。「高」では照準が標的に少し引き寄せられます。
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 ja 移動、照準、操作ボタンを画面の反対側に配置します
@@ -4100,3 +4100,30 @@ ja 配置を編集
 
 @ Drag to move
 ja ドラッグで移動
+
+@ Auto-fire
+ja 自動射撃
+
+@ Touch Auto-fire
+ja タッチ操作の自動射撃
+
+@ Move-side Fire
+ja 移動側の射撃ボタン
+
+@ Touch Haptics
+ja タッチ振動
+
+@ Add a Fire button on the move side.
+ja 移動操作側に射撃ボタンを追加します。
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ja ローカルプレイで照準に入ったモンスターを自動で撃つ（キーボード・マウス・コントローラー）。
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ja ローカルプレイで照準に入ったモンスターを自動で撃つ（タッチスクリーン）。
+
+@ Vibrate on button presses and damage (Android).
+ja ボタン操作時と被ダメージ時に振動します（Android）。
+
+@ Swipe left or right to cycle.
+ja 左右にスワイプして武器を切り替えます。

@@ -2421,8 +2421,8 @@ ta திசை ஒளியூட்டலின் பளபளப்பு �
 @ How far the view turns when you swipe
 ta ஸ்வைப் செய்யும் போது பார்வை எவ்வளவு தூரம் திரும்பும்
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-ta தெரியும் இலக்குகளுக்கு அருகில் ஸ்வைப் செய்வதை மெதுவாக்குகிறது. Deathmatchக்கு சர்வர் அனுமதி தேவை.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ta தெரியும் இலக்குகளுக்கு அருகில் ஸ்வைப் செய்வதை மெதுவாக்குகிறது. Deathmatchக்கு சர்வர் அனுமதி தேவை. உயர்ந்த நிலையில் குறி இலக்கு நோக்கிச் சற்றே இழுக்கப்படும்.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 ta இயக்கம், இலக்கு மற்றும் விளையாட்டு பொத்தான்களுக்கு பக்கங்களை மாற்றுகிறது
@@ -4100,3 +4100,30 @@ ta அமைப்பைத் திருத்து
 
 @ Drag to move
 ta நகர்த்த இழுக்கவும்
+
+@ Auto-fire
+ta தானியக்கத் துப்பாக்கிச் சூடு
+
+@ Touch Auto-fire
+ta தொடுதிரை தானியக்கச் சூடு
+
+@ Move-side Fire
+ta நகர்வுப் பக்கத்தில் சூடு
+
+@ Touch Haptics
+ta தொடு அதிர்வு
+
+@ Add a Fire button on the move side.
+ta நகர்வுப் பக்கத்தில் சுடும் பொத்தானைச் சேர்க்கிறது.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ta உள்ளூர் ஆட்டத்தில் குறிக்குள் உள்ள அரக்கர்களைச் சுடும் (விசைப்பலகை, சுட்டி, கட்டுப்படுத்தி).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ta உள்ளூர் ஆட்டத்தில் குறிக்குள் உள்ள அரக்கர்களைச் சுடும் (தொடுதிரை).
+
+@ Vibrate on button presses and damage (Android).
+ta பொத்தான் அழுத்தும்போதும் சேதம் அடையும்போதும் அதிரும் (Android).
+
+@ Swipe left or right to cycle.
+ta ஆயுதத்தை மாற்ற இடது அல்லது வலப்புறம் தேய்க்கவும்.

@@ -77,6 +77,9 @@ impl Menu {
     }
 
     pub fn key(&mut self, key: i32, cv: &mut Cvars, server_active: bool) -> Vec<Action> {
+        if key != K_MOUSE1 && self.drop.is_none() {
+            self.touch_scroll = None;
+        }
         self.game_running = server_active;
         self.custom_running = server_active && cv.value_of("custom_active") != 0.0;
         sync_addon_binds(cv, server_active);
@@ -275,33 +278,21 @@ impl Menu {
             if let Some(c) = self.cursor_mut() {
                 *c = i;
             }
-            if self.screen == Screen::OptionsPage(Page::Touch) {
-                if let Some(row) = self.touch_slider_at(pos) {
-                    self.slider_drag = Some(row);
-                    self.set_slider(self.page_item(Page::Touch, row), pos.0, cv);
-                    out.push(Action::Sound("misc/menu3.wav"));
-                    return out;
-                }
-                if self.pick_touch_choice(i, pos, cv) {
-                    out.push(Action::Sound("misc/menu3.wav"));
-                    return out;
-                }
+            if let Screen::OptionsPage(p) = self.screen && let Some(row) = self.slider_at(pos, cv) {
+                self.slider_drag = Some(row);
+                self.set_slider(self.page_item(p, row), pos.0, cv);
+                out.push(Action::Sound("misc/menu3.wav"));
+                return out;
+            }
+            if self.screen == Screen::OptionsPage(Page::Touch) && self.pick_touch_choice(i, pos, cv) {
+                out.push(Action::Sound("misc/menu3.wav"));
+                return out;
             }
             // a click edits a text row (caret, drag to select); never submits it
             if let Screen::OptionsPage(p) = self.screen
                 && matches!(self.page_item(p, i), Item::Text { .. })
             {
                 self.text_click(i, pos.0, cv);
-                return out;
-            }
-            if let Screen::OptionsPage(p) = self.screen
-                && let item @ (Item::Slider { .. } | Item::ShaderParam(_)) = self.page_item(p, i)
-                && pos.0 >= SLIDER_X.0 - 8.0
-                && pos.0 < SLIDER_X.1 + 8.0
-            {
-                self.set_slider(item, pos.0, cv);
-                self.slider_drag = Some(i);
-                out.push(Action::Sound("misc/menu3.wav"));
                 return out;
             }
         }
@@ -327,8 +318,10 @@ impl Menu {
         };
         match self.screen {
             Screen::Death => {
-                wrap(&mut self.death_cursor, 4, &mut out);
-                let shortcut = (b'1' as i32..=b'4' as i32).contains(&key).then(|| (key - b'1' as i32) as usize);
+                let rows = self.death_rows();
+                self.death_cursor = self.death_cursor.min(rows - 1);
+                wrap(&mut self.death_cursor, rows, &mut out);
+                let shortcut = (b'1' as i32..b'1' as i32 + rows as i32).contains(&key).then(|| (key - b'1' as i32) as usize);
                 if enter || shortcut.is_some() {
                     let choice = shortcut.unwrap_or(self.death_cursor);
                     out.push(Action::Sound("misc/menu2.wav"));

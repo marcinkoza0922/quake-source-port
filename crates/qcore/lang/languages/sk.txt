@@ -2421,8 +2421,8 @@ sk Intenzita odleskov zo smerového osvetlenia
 @ How far the view turns when you swipe
 sk Ako ďaleko sa pohľad otočí, keď potiahnete prstom
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-sk Spomalí potiahnutie v blízkosti viditeľných cieľov. Deathmatch vyžaduje povolenie servera.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+sk Spomalí potiahnutie v blízkosti viditeľných cieľov. Deathmatch vyžaduje povolenie servera. Pri vysokom nastavení zameriavač tiež mierne priťahuje k cieľu.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 sk Vymieňa strany za tlačidlá pohybu, mierenia a hrania
@@ -4100,3 +4100,30 @@ sk Upraviť rozloženie
 
 @ Drag to move
 sk Potiahnutím presuniete
+
+@ Auto-fire
+sk Automatická streľba
+
+@ Touch Auto-fire
+sk Dotyková automatická streľba
+
+@ Move-side Fire
+sk Streľba na strane pohybu
+
+@ Touch Haptics
+sk Dotykové vibrácie
+
+@ Add a Fire button on the move side.
+sk Pridá tlačidlo streľby na stranu pohybu.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+sk V miestnej hre strieľa na príšery v zameriavači (klávesnica, myš, ovládač).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+sk V miestnej hre strieľa na príšery v zameriavači (dotyková obrazovka).
+
+@ Vibrate on button presses and damage (Android).
+sk Vibruje pri stlačení tlačidiel a utrpení zranenia (Android).
+
+@ Swipe left or right to cycle.
+sk Potiahnutím doľava alebo doprava prepnete zbraň.

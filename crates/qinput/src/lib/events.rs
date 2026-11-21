@@ -192,9 +192,10 @@ pub fn handle_event<C: InputHost>(ctx: &mut C, ev: InputEvent) -> Option<Routed>
             }
             inp.touch_aspect = aspect.max(0.1);
             let insets = inp.touch_insets;
-            let (size_cm, acceleration) = (inp.touch_size_cm, inp.cv.touch_acceleration);
+            let (size_cm, acceleration, buttons) = (inp.touch_size_cm, inp.cv.touch_acceleration, inp.touch_buttons);
             let cv = ctx.cvars();
-            let lay = touch::TouchLayout::from_cvars(cv, aspect, insets);
+            let mut lay = touch::TouchLayout::from_cvars(cv, aspect, insets);
+            lay.buttons = buttons;
             let look = touch::TouchLook { size_cm, acceleration: cv.value(acceleration).clamp(0.0, 1.0) * 0.5 };
             let cmds = ctx.input().touch.event(id, phase, [x, y], timestamp_ns, &lay, look);
             for c in cmds {

@@ -2421,8 +2421,8 @@ el Ένταση των ανταυγειών από τον κατευθυντικ
 @ How far the view turns when you swipe
 el Πόσο μακριά στρέφεται η προβολή όταν σύρετε
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-el Επιβραδύνει το σάρωση κοντά σε ορατούς στόχους. Το Deathmatch απαιτεί άδεια διακομιστή.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+el Επιβραδύνει το σάρωση κοντά σε ορατούς στόχους. Το Deathmatch απαιτεί άδεια διακομιστή. Στην υψηλή ρύθμιση το στόχαστρο έλκεται ελαφρά προς τον στόχο.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 el Εναλλάσσει τις πλευρές για κίνηση, στόχευση και κουμπιά παιχνιδιού
@@ -4100,3 +4100,30 @@ el Επεξεργασία διάταξης
 
 @ Drag to move
 el Σύρετε για μετακίνηση
+
+@ Auto-fire
+el Αυτόματη βολή
+
+@ Touch Auto-fire
+el Αυτόματη βολή αφής
+
+@ Move-side Fire
+el Βολή στην πλευρά κίνησης
+
+@ Touch Haptics
+el Δόνηση αφής
+
+@ Add a Fire button on the move side.
+el Προσθέτει κουμπί βολής στην πλευρά κίνησης.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+el Πυροβολεί τα τέρατα στο στόχαστρο σε τοπικό παιχνίδι (πληκτρολόγιο, ποντίκι, χειριστήριο).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+el Πυροβολεί τα τέρατα στο στόχαστρο σε τοπικό παιχνίδι (οθόνη αφής).
+
+@ Vibrate on button presses and damage (Android).
+el Δόνηση σε πατήματα κουμπιών και ζημιά (Android).
+
+@ Swipe left or right to cycle.
+el Σύρετε αριστερά ή δεξιά για αλλαγή όπλου.

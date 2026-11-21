@@ -2421,8 +2421,8 @@ hu Az irányított világítás csillanásainak erőssége
 @ How far the view turns when you swipe
 hu Csúsztatás közben milyen messzire fordul a nézet
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-hu Lelassítja az ujját a látható célok közelében. A Deathmatch szerver engedélyt igényel.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+hu Lelassítja az ujját a látható célok közelében. A Deathmatch szerver engedélyt igényel. Magas fokozaton a célkereszt enyhén a cél felé húz.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 hu Felcseréli az oldalakat mozgás-, célzás- és játékgombokra
@@ -4100,3 +4100,30 @@ hu Elrendezés szerkesztése
 
 @ Drag to move
 hu Húzd az áthelyezéshez
+
+@ Auto-fire
+hu Automatikus lövés
+
+@ Touch Auto-fire
+hu Érintéses automatikus lövés
+
+@ Move-side Fire
+hu Lövés a mozgás oldalán
+
+@ Touch Haptics
+hu Érintési rezgés
+
+@ Add a Fire button on the move side.
+hu Lövésgomb hozzáadása a mozgás oldalán.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+hu A célkereszt alatti szörnyekre lő helyi játékban (billentyűzet, egér, kontroller).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+hu A célkereszt alatti szörnyekre lő helyi játékban (érintőképernyő).
+
+@ Vibrate on button presses and damage (Android).
+hu Rezgés gombnyomáskor és sebződéskor (Android).
+
+@ Swipe left or right to cycle.
+hu Húzd balra vagy jobbra a fegyverváltáshoz.

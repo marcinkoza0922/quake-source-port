@@ -2,7 +2,7 @@
 
 use super::*;
 use crate::hud::place::{self, Rect, SnapResult};
-use qinput::touch::{BUTTONS, LAYOUT_CVAR, TouchLayout};
+use qinput::touch::{BUTTONS, LAYOUT_CVAR, TouchButtons, TouchLayout};
 
 const STAGE: [f32; 4] = [16.0, 49.0, 608.0, 250.0];
 const RESET: [f32; 4] = [16.0, 313.0, 117.0, 37.0];
@@ -38,7 +38,10 @@ fn rect([x, y]: [f32; 2], radius: f32) -> Rect {
 
 impl Menu {
     fn edit_touch_layout(&self, cv: &Cvars) -> TouchLayout {
-        TouchLayout::from_cvars(cv, self.touch_aspect, self.touch_insets)
+        let mut layout = TouchLayout::from_cvars(cv, self.touch_aspect, self.touch_insets);
+        layout.buttons = TouchButtons::PREVIEW;
+        layout.move_fire = true;
+        layout
     }
 
     pub(super) fn move_touch_button(&mut self, (px, py): (f32, f32), cv: &mut Cvars) {

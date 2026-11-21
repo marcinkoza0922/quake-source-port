@@ -22,9 +22,13 @@ launches, and the player can choose another folder from the launcher.
 
 Gameplay runs in immersive landscape fullscreen. Graphics settings offer
 render scale for performance and use the device display size for output.
-Touch play offers aim slowdown near visible targets, left- and right-handed
-layouts, and tap or hold gestures for the weapon wheel. The pause menu links
-to a touch settings page with draggable sliders and a live controls preview.
+Touch play offers left- and right-handed layouts, a contextual Swim Down
+button and quick saves, and tap, swipe or hold gestures on Weapon. High
+aim assist gently pulls toward visible targets while aiming. Players can enable
+auto-fire separately for touch and other input devices. Android can vibrate
+on button presses and damage, and touch menus support momentum scrolling
+and slider drags. The pause menu links to Touch Controls and its live layout
+preview.
 
 
 ## Combat feedback

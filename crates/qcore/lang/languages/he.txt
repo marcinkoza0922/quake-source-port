@@ -2421,8 +2421,8 @@ he עוצמת ההבהקים מתאורה כיוונית
 @ How far the view turns when you swipe
 he כמה רחוק פונה התצוגה כשאתה מחליק
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-he מאט את ההחלקה שלך ליד יעדים גלויים. Deathmatch דורש הרשאת שרת.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+he מאט את ההחלקה שלך ליד יעדים גלויים. Deathmatch דורש הרשאת שרת. ברמה הגבוהה הכוונת נמשכת מעט לעבר המטרה.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 he מחליף את הצדדים לכפתורי תנועה, כיוון ומשחק
@@ -4100,3 +4100,30 @@ he עריכת פריסה
 
 @ Drag to move
 he גרור כדי להזיז
+
+@ Auto-fire
+he ירי אוטומטי
+
+@ Touch Auto-fire
+he ירי אוטומטי במגע
+
+@ Move-side Fire
+he ירי בצד התנועה
+
+@ Touch Haptics
+he רטט במגע
+
+@ Add a Fire button on the move side.
+he מוסיף כפתור ירי בצד התנועה.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+he יורה על מפלצות מתחת לכוונת במשחק מקומי (מקלדת, עכבר, בקר).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+he יורה על מפלצות מתחת לכוונת במשחק מקומי (מסך מגע).
+
+@ Vibrate on button presses and damage (Android).
+he רטט בלחיצה על כפתורים ובספיגת נזק (Android).
+
+@ Swipe left or right to cycle.
+he החליקו שמאלה או ימינה כדי להחליף נשק.

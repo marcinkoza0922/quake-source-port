@@ -12,6 +12,8 @@ use crate::*;
 #[cfg(target_os = "android")]
 mod android;
 #[cfg(target_os = "android")]
+mod phone_haptics;
+#[cfg(target_os = "android")]
 pub use android::{AndroidWindow, android_log};
 mod window;
 pub use window::vulkan_instance_extensions;
@@ -50,6 +52,8 @@ pub struct Platform {
     gamepads: HashMap<u32, Gamepad>,
     #[cfg(target_os = "android")]
     phone_gyro: android::PhoneGyro,
+    #[cfg(target_os = "android")]
+    phone_haptics: std::cell::OnceCell<Option<phone_haptics::PhoneHaptics>>,
     #[cfg(target_os = "android")]
     lifecycle: android::Lifecycle,
     #[cfg(target_os = "android")]
@@ -106,6 +110,8 @@ impl Platform {
             gamepads: HashMap::new(),
             #[cfg(target_os = "android")]
             phone_gyro: android::PhoneGyro::default(),
+            #[cfg(target_os = "android")]
+            phone_haptics: std::cell::OnceCell::new(),
             #[cfg(target_os = "android")]
             lifecycle: android::Lifecycle::new()?,
             #[cfg(target_os = "android")]
@@ -306,6 +312,13 @@ impl Platform {
         for g in self.gamepads.values() {
             // SAFETY: g.raw is a valid open gamepad.
             unsafe { sys::SDL_RumbleGamepad(g.raw, low, high, duration_ms) };
+        }
+    }
+
+    #[cfg(target_os = "android")]
+    pub fn phone_haptic(&self, strength: f32, duration_ms: u32) {
+        if let Some(device) = self.phone_haptics.get_or_init(phone_haptics::PhoneHaptics::open) {
+            device.play(strength, duration_ms);
         }
     }
 

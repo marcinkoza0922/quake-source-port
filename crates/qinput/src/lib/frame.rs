@@ -148,7 +148,7 @@ impl Input {
             aim_ok = self.last_look == LookDevice::Gamepad;
         }
 
-        // Gamepad assist can rotate the view. Touch assist only scales a drag.
+        // Gamepad and touch use different assist tuning.
         self.last_aim = AimResult::NONE;
         let mouse_moved = self.mouse != [0.0; 2];
         if aim_ok && !mouse_moved && v(c.aim_assist) != 0.0
@@ -171,6 +171,9 @@ impl Input {
         // touch: stick moves like a gamepad stick, drags turn like a mouse
         if v(c.touch_enable) != 0.0 {
             let lay = self.touch_layout(cvars);
+            if lay.buttons.submerged && self.touch.pressed(touch::SWIM_DOWN) {
+                s.movedown = 1.0;
+            }
             let mv = self.touch.move_vec(&lay);
             s.moveright += mv[0].max(0.0);
             s.moveleft += (-mv[0]).max(0.0);
@@ -179,17 +182,17 @@ impl Input {
             let assist = self.touch_aim_active(cvars) && !mouse_moved;
             let lk = self.touch.take_look();
             if !wheel && !touch_wheel && lk != [0.0; 2] {
-                let scale = if assist && let Some(ctx) = aim {
-                    let slowdown = if v(c.touch_aim_assist) >= 1.5 { 0.45 } else { 0.25 };
-                    let p = AimParams { slowdown, rotation: 0.0, snap: 0.0, ..AimParams::default() };
+                let result = if assist && let Some(ctx) = aim {
+                    let (slowdown, snap) = if v(c.touch_aim_assist) >= 1.5 { (0.45, 3.0) } else { (0.25, 0.0) };
+                    let p = AimParams { slowdown, rotation: 0.0, snap, ..AimParams::default() };
                     self.last_aim = aim::aim_assist(&p, ctx, viewangles, ft, false);
-                    self.last_aim.scale
+                    self.last_aim
                 } else {
-                    1.0
+                    AimResult::NONE
                 };
                 let inv = if v(c.touch_invert) != 0.0 { -1.0 } else { 1.0 };
-                s.look_delta[0] -= lk[0] * v(c.touch_yaw_sensitivity).clamp(7.0, 84.0) * scale;
-                s.look_delta[1] += lk[1] * v(c.touch_pitch_sensitivity).clamp(7.0, 84.0) * scale * inv;
+                s.look_delta[0] += result.delta[0] - lk[0] * v(c.touch_yaw_sensitivity).clamp(7.0, 84.0) * result.scale;
+                s.look_delta[1] += result.delta[1] + lk[1] * v(c.touch_pitch_sensitivity).clamp(7.0, 84.0) * result.scale * inv;
             }
         }
 

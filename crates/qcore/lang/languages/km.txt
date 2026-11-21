@@ -2421,8 +2421,8 @@ km កម្រិត​ពន្លឺ​ចាំង​ផ្លាត​ព�
 @ How far the view turns when you swipe
 km តើ​​​ទិដ្ឋភាព​​​ប្រែ​​​ទៅ​​​ឆ្ងាយ​​​ប៉ុណ្ណា​​​ពេល​​​អ្នក​​​អូស
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-km បន្ថយល្បឿន​អូស​របស់​អ្នក​នៅ​ជិត​គោលដៅ​ដែល​អាច​មើលឃើញ​។​ ​Deathmatch​ ​ទាមទារ​ការអនុញ្ញាត​ពី​ម៉ាស៊ីន​មេ​។
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+km បន្ថយល្បឿន​អូស​របស់​អ្នក​នៅ​ជិត​គោលដៅ​ដែល​អាច​មើលឃើញ​។​ ​Deathmatch​ ​ទាមទារ​ការអនុញ្ញាត​ពី​ម៉ាស៊ីន​មេ​។ កម្រិតខ្ពស់​ក៏​ទាញ​សញ្ញា​តម្រង់​បន្តិច​ទៅ​រក​គោលដៅ​។
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 km ប្តូរ​ផ្នែក​សម្រាប់​ចលនា​ ​គោលបំណង​ ​និង​ប៊ូតុង​លេង​ហ្គេម
@@ -4100,3 +4100,30 @@ km កែ​ប្លង់
 
 @ Drag to move
 km អូស​ដើម្បី​ផ្លាស់ទី
+
+@ Auto-fire
+km បាញ់​ដោយ​ស្វ័យប្រវត្តិ
+
+@ Touch Auto-fire
+km បាញ់​ស្វ័យប្រវត្តិ​ដោយ​ប៉ះ
+
+@ Move-side Fire
+km បាញ់​នៅ​ផ្នែក​បញ្ជា​ចលនា
+
+@ Touch Haptics
+km រំ​ញ័រ​ពេល​ប៉ះ
+
+@ Add a Fire button on the move side.
+km បន្ថែម​ប៊ូតុង​បាញ់​នៅ​ផ្នែក​បញ្ជា​ចលនា​។
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+km បាញ់សត្វ​ចម្លែក​ដែល​ចំ​សញ្ញា​តម្រង់​ក្នុង​ហ្គេម​មូលដ្ឋាន (ក្តារ​ចុច កណ្ដុរ ឧបករណ៍​បញ្ជា)។
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+km បាញ់សត្វ​ចម្លែក​ដែល​ចំ​សញ្ញា​តម្រង់​ក្នុង​ហ្គេម​មូលដ្ឋាន (អេក្រង់​ប៉ះ)។
+
+@ Vibrate on button presses and damage (Android).
+km ញ័រ​ពេល​ចុច​ប៊ូតុង ឬ​រង​របួស (Android)។
+
+@ Swipe left or right to cycle.
+km អូស​ទៅ​ឆ្វេង ឬ​ស្តាំ​ដើម្បី​ប្ដូរ​អាវុធ​។

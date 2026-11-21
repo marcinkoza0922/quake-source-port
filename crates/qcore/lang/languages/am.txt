@@ -2421,8 +2421,8 @@ am ከአቅጣጫዊ ብርሃን የሚገኘው አንጸባራቂ ጥንካ�
 @ How far the view turns when you swipe
 am ሲያንሸራትቱ እይታው ምን ያህል ርቀት ይቀየራል።
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-am በሚታዩ ዒላማዎች አቅራቢያ ማንሸራተትዎን ያቀዘቅዘዋል። Deathmatch የአገልጋይ ፍቃድ ያስፈልገዋል።
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+am በሚታዩ ዒላማዎች አቅራቢያ ማንሸራተትዎን ያቀዘቅዘዋል። Deathmatch የአገልጋይ ፍቃድ ያስፈልገዋል። ከፍተኛ ቅንብር ምልክቱን በቀስታ ወደ ዒላማው ይስባል።
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 am ጎኖቹን ለእንቅስቃሴ፣ አላማ እና የጨዋታ አዝራሮች ይቀይራል።
@@ -4100,3 +4100,30 @@ am አቀማመጥ አርትዕ
 
 @ Drag to move
 am ለማንቀሳቀስ ይጎትቱ
+
+@ Auto-fire
+am ራስ-ሰር ተኩስ
+
+@ Touch Auto-fire
+am የንክኪ ራስ-ሰር ተኩስ
+
+@ Move-side Fire
+am ተኩስ በእንቅስቃሴ በኩል
+
+@ Touch Haptics
+am የንክኪ ንዝረት
+
+@ Add a Fire button on the move side.
+am በእንቅስቃሴ በኩል የተኩስ አዝራር ይጨምራል።
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+am በአካባቢያዊ ጨዋታ ላይ በመስቀል ምልክቱ ሥር ያሉ ጭራቆችን ይተኩሳል (ቁልፍ ሰሌዳ፣ መዳፊት፣ መቆጣጠሪያ)።
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+am በአካባቢያዊ ጨዋታ ላይ በመስቀል ምልክቱ ሥር ያሉ ጭራቆችን ይተኩሳል (የንክኪ ማያ)።
+
+@ Vibrate on button presses and damage (Android).
+am አዝራር ሲጫን ወይም ጉዳት ሲደርስ ይንዘረዘራል (Android)።
+
+@ Swipe left or right to cycle.
+am መሣሪያ ለመቀየር ወደ ግራ ወይም ቀኝ ያንሸራትቱ።

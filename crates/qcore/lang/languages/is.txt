@@ -2421,8 +2421,8 @@ is Styrkur glampa frá stefnulýsingu
 @ How far the view turns when you swipe
 is Hversu langt útsýnið snýr þegar þú strýkur
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-is Hægar á strokinu þínu nálægt sýnilegum skotmörkum. Deathmatch krefst leyfis netþjóns.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+is Hægar á strokinu þínu nálægt sýnilegum skotmörkum. Deathmatch krefst leyfis netþjóns. Á hárri stillingu dregst miðið líka örlítið að skotmarkinu.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 is Skiptir á hliðunum fyrir hreyfingar-, miðunar- og spilunarhnappa
@@ -4100,3 +4100,30 @@ is Breyta uppsetningu
 
 @ Drag to move
 is Dragðu til að færa
+
+@ Auto-fire
+is Sjálfvirk skothríð
+
+@ Touch Auto-fire
+is Sjálfvirk skothríð við snertingu
+
+@ Move-side Fire
+is Skothnappur á hreyfihlið
+
+@ Touch Haptics
+is Snertititringur
+
+@ Add a Fire button on the move side.
+is Bætir við skothnappi á hlið hreyfistýringar.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+is Skýtur á skrímsli í miði í staðbundnum leik (lyklaborð, mús, leikstýring).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+is Skýtur á skrímsli í miði í staðbundnum leik (snertiskjár).
+
+@ Vibrate on button presses and damage (Android).
+is Titrar þegar ýtt er á hnapp eða þú skaðast (Android).
+
+@ Swipe left or right to cycle.
+is Strjúktu til vinstri eða hægri til að skipta um vopn.

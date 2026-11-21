@@ -2421,8 +2421,8 @@ nl Sterkte van de glanslichten uit gerichte belichting
 @ How far the view turns when you swipe
 nl Hoe ver het zicht draait als je veegt
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-nl Vertraagt uw veegbeweging in de buurt van zichtbare doelen. Deathmatch vereist servertoestemming.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+nl Vertraagt uw veegbeweging in de buurt van zichtbare doelen. Deathmatch vereist servertoestemming. Op Hoog wordt het vizier ook licht naar het doel getrokken.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 nl Verwisselt de zijkanten voor bewegings-, richt- en gameplay-knoppen
@@ -4100,3 +4100,30 @@ nl Indeling bewerken
 
 @ Drag to move
 nl Sleep om te verplaatsen
+
+@ Auto-fire
+nl Automatisch vuren
+
+@ Touch Auto-fire
+nl Automatisch vuren via aanraking
+
+@ Move-side Fire
+nl Vuren aan bewegingskant
+
+@ Touch Haptics
+nl Aanraaktrilling
+
+@ Add a Fire button on the move side.
+nl Voegt een vuurknop toe aan de bewegingskant.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+nl Vuurt op monsters in het vizier in een lokaal spel (toetsenbord, muis, controller).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+nl Vuurt op monsters in het vizier in een lokaal spel (aanraakscherm).
+
+@ Vibrate on button presses and damage (Android).
+nl Trilt bij knopdrukken en bij schade (Android).
+
+@ Swipe left or right to cycle.
+nl Veeg links of rechts om van wapen te wisselen.

@@ -2421,8 +2421,8 @@ cs Síla odlesků ze směrového osvětlení
 @ How far the view turns when you swipe
 cs Jak daleko se pohled otočí, když přejedete prstem
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-cs Zpomalí vaše přejetí poblíž viditelných cílů. Deathmatch vyžaduje povolení serveru.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+cs Zpomalí vaše přejetí poblíž viditelných cílů. Deathmatch vyžaduje povolení serveru. Při vysokém nastavení zaměřovač také lehce přitahuje k cíli.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 cs Vymění strany pro tlačítka pohybu, zaměřování a hraní
@@ -4100,3 +4100,30 @@ cs Upravit rozložení
 
 @ Drag to move
 cs Přesun přetažením
+
+@ Auto-fire
+cs Automatická střelba
+
+@ Touch Auto-fire
+cs Dotyková automatická střelba
+
+@ Move-side Fire
+cs Střelba na straně pohybu
+
+@ Touch Haptics
+cs Dotykové vibrace
+
+@ Add a Fire button on the move side.
+cs Přidá tlačítko střelby na stranu pohybu.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+cs V místní hře střílí na monstra v zaměřovači (klávesnice, myš, ovladač).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+cs V místní hře střílí na monstra v zaměřovači (dotyková obrazovka).
+
+@ Vibrate on button presses and damage (Android).
+cs Vibruje při stisku tlačítek a utrpění zranění (Android).
+
+@ Swipe left or right to cycle.
+cs Přejetím doleva nebo doprava přepnete zbraň.

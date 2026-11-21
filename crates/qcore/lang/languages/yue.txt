@@ -2421,8 +2421,8 @@ yue 方向性光照帶嚟嘅高光強度
 @ How far the view turns when you swipe
 yue 當你滑動嗰陣，個視圖會轉幾遠
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-yue 減慢你喺可見目標附近嘅滑動速度。死亡對決需要伺服器權限。
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+yue 減慢你喺可見目標附近嘅滑動速度。死亡對決需要伺服器權限。高設定仲會將準星輕輕拉向目標。
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 yue 將兩邊換成移動、瞄準同遊戲掣
@@ -4100,3 +4100,30 @@ yue 編輯佈局
 
 @ Drag to move
 yue 拖曳嚟移動
+
+@ Auto-fire
+yue 自動開火
+
+@ Touch Auto-fire
+yue 觸屏自動開火
+
+@ Move-side Fire
+yue 移動側開火掣
+
+@ Touch Haptics
+yue 觸控震動
+
+@ Add a Fire button on the move side.
+yue 喺移動嗰邊加個開火掣。
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+yue 喺本機遊戲入面對準怪物就自動開火（鍵盤、滑鼠、手掣）。
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+yue 喺本機遊戲入面對準怪物就自動開火（觸控屏幕）。
+
+@ Vibrate on button presses and damage (Android).
+yue 撳掣或者受到傷害嗰陣會震（Android）。
+
+@ Swipe left or right to cycle.
+yue 向左或右掃就可以轉武器。

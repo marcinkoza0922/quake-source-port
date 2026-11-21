@@ -2421,8 +2421,8 @@ et Suunatud valgustuse läike tugevus
 @ How far the view turns when you swipe
 et Kui kaugele vaade pühkimisel pöördub
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-et Aeglustab pühkimist nähtavate sihtmärkide lähedal. Deathmatch nõuab serveri luba.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+et Aeglustab pühkimist nähtavate sihtmärkide lähedal. Deathmatch nõuab serveri luba. Kõrgel tasemel liigub sihik ka veidi sihtmärgi poole.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 et Vahetab küljed liikumis-, sihtimis- ja mängunuppude vastu
@@ -4100,3 +4100,30 @@ et Muuda paigutust
 
 @ Drag to move
 et Liigutamiseks lohista
+
+@ Auto-fire
+et Automaatne tulistamine
+
+@ Touch Auto-fire
+et Automaatne tulistamine puutega
+
+@ Move-side Fire
+et Tulistamine liikumise poolel
+
+@ Touch Haptics
+et Puutevibratsioon
+
+@ Add a Fire button on the move side.
+et Lisab tulistamisnupu liikumise poolele.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+et Tulistab kohalikus mängus sihikul olevaid koletisi (klaviatuur, hiir, pult).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+et Tulistab kohalikus mängus sihikul olevaid koletisi (puuteekraan).
+
+@ Vibrate on button presses and damage (Android).
+et Vibreerib nupuvajutustel ja kahju saamisel (Android).
+
+@ Swipe left or right to cycle.
+et Relva vahetamiseks pühi vasakule või paremale.

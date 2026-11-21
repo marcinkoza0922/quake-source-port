@@ -2421,8 +2421,8 @@ ca Intensitat dels reflexos de la il·luminació direccional
 @ How far the view turns when you swipe
 ca Fins a quin punt gira la vista quan feu lliscar el dit
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-ca Redueix el lliscament a prop dels objectius visibles. Deathmatch requereix permís del servidor.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ca Redueix el lliscament a prop dels objectius visibles. Deathmatch requereix permís del servidor. Al nivell alt també acosta suaument el punt de mira a l’objectiu.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 ca Canvia els costats pels botons de moviment, objectiu i joc
@@ -4100,3 +4100,30 @@ ca Edita la disposició
 
 @ Drag to move
 ca Arrossega per moure
+
+@ Auto-fire
+ca Tret automàtic
+
+@ Touch Auto-fire
+ca Tret automàtic tàctil
+
+@ Move-side Fire
+ca Tret al costat de moviment
+
+@ Touch Haptics
+ca Vibració tàctil
+
+@ Add a Fire button on the move side.
+ca Afegeix un botó de tret al costat del moviment.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ca Dispara als monstres sota el punt de mira en joc local (teclat, ratolí, comandament).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ca Dispara als monstres sota el punt de mira en joc local (pantalla tàctil).
+
+@ Vibrate on button presses and damage (Android).
+ca Vibra en prémer botons i en rebre dany (Android).
+
+@ Swipe left or right to cycle.
+ca Llisca a l'esquerra o a la dreta per canviar d'arma.

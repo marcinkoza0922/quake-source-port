@@ -2421,8 +2421,8 @@ bn দিকনির্দেশক আলো থেকে আসা হাই�
 @ How far the view turns when you swipe
 bn আপনি সোয়াইপ করলে ভিউ কতদূর ঘুরবে
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-bn দৃশ্যমান লক্ষ্যগুলির কাছাকাছি আপনার সোয়াইপকে ধীর করে। Deathmatch সার্ভার অনুমতি প্রয়োজন.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+bn দৃশ্যমান লক্ষ্যগুলির কাছাকাছি আপনার সোয়াইপকে ধীর করে। Deathmatch সার্ভার অনুমতি প্রয়োজন. উচ্চ সেটিংয়ে নিশানা লক্ষ্যবস্তুর দিকে সামান্য টানেও।
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 bn নড়াচড়া, লক্ষ্য এবং গেমপ্লে বোতামগুলির জন্য পাশ অদলবদল করুন
@@ -4100,3 +4100,30 @@ bn বিন্যাস সম্পাদনা
 
 @ Drag to move
 bn সরাতে টানুন
+
+@ Auto-fire
+bn স্বয়ংক্রিয় গুলি
+
+@ Touch Auto-fire
+bn স্পর্শে স্বয়ংক্রিয় গুলি
+
+@ Move-side Fire
+bn চলার দিকে গুলি
+
+@ Touch Haptics
+bn টাচ কম্পন
+
+@ Add a Fire button on the move side.
+bn চলার দিকের পাশে গুলি করার বোতাম যোগ করে।
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+bn লোকাল খেলায় নিশানায় থাকা দানবদের গুলি করে (কীবোর্ড, মাউস, কন্ট্রোলার)।
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+bn লোকাল খেলায় নিশানায় থাকা দানবদের গুলি করে (টাচস্ক্রিন)।
+
+@ Vibrate on button presses and damage (Android).
+bn বোতাম চাপলে বা ক্ষতি পেলে কাঁপে (Android)।
+
+@ Swipe left or right to cycle.
+bn অস্ত্র বদলাতে বামে বা ডানে সোয়াইপ করুন।

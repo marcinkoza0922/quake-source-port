@@ -2421,8 +2421,8 @@ fil Lakas ng kislap mula sa direksiyonal na ilaw
 @ How far the view turns when you swipe
 fil Gaano kalayo lumiliko ang view kapag nag-swipe ka
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-fil Pinapabagal ang iyong pag-swipe malapit sa mga nakikitang target. Nangangailangan ng pahintulot ng server ang Deathmatch.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+fil Pinapabagal ang iyong pag-swipe malapit sa mga nakikitang target. Nangangailangan ng pahintulot ng server ang Deathmatch. Sa mataas na antas, bahagyang hinihila rin ang tutok patungo sa target.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 fil Pinapalitan ang mga gilid para sa paggalaw, pagpuntirya at mga pindutan ng gameplay
@@ -4100,3 +4100,30 @@ fil I-edit ang Ayos
 
 @ Drag to move
 fil I-drag para ilipat
+
+@ Auto-fire
+fil Awtomatikong pagpapaputok
+
+@ Touch Auto-fire
+fil Awtomatikong putok sa touch
+
+@ Move-side Fire
+fil Putok sa panig ng galaw
+
+@ Touch Haptics
+fil Panginginig sa touch
+
+@ Add a Fire button on the move side.
+fil Nagdaragdag ng pindutan ng putok sa panig ng galaw.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+fil Pinaputukan ang halimaw na nasa tutok sa lokal na laro (keyboard, mouse, controller).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+fil Pinaputukan ang halimaw na nasa tutok sa lokal na laro (touchscreen).
+
+@ Vibrate on button presses and damage (Android).
+fil Umuuga kapag may pinindot na pindutan o nasaktan (Android).
+
+@ Swipe left or right to cycle.
+fil Mag-swipe pakaliwa o pakanan para magpalit ng sandata.

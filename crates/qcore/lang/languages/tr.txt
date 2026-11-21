@@ -2421,8 +2421,8 @@ tr Yönlü aydınlatmadan gelen parlama vurgularının gücü
 @ How far the view turns when you swipe
 tr Kaydırdığınızda görünüm ne kadar uzağa döner?
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-tr Görünür hedeflerin yakınında kaydırmanızı yavaşlatır. Deathmatch sunucu izni gerektirir.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+tr Görünür hedeflerin yakınında kaydırmanızı yavaşlatır. Deathmatch sunucu izni gerektirir. Yüksek ayarı nişangâhı hafifçe hedefe çeker.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 tr Hareket, nişan alma ve oyun düğmeleri için kenarları değiştirir
@@ -4100,3 +4100,30 @@ tr Düzeni düzenle
 
 @ Drag to move
 tr Taşımak için sürükle
+
+@ Auto-fire
+tr Otomatik ateş
+
+@ Touch Auto-fire
+tr Dokunmatik otomatik ateş
+
+@ Move-side Fire
+tr Hareket tarafında ateş
+
+@ Touch Haptics
+tr Dokunma titreşimi
+
+@ Add a Fire button on the move side.
+tr Hareket tarafına bir ateş düğmesi ekler.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+tr Yerel oyunda nişangâhtaki canavarlara ateş eder (klavye, fare, kumanda).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+tr Yerel oyunda nişangâhtaki canavarlara ateş eder (dokunmatik ekran).
+
+@ Vibrate on button presses and damage (Android).
+tr Düğmelere basınca ve hasar alınca titreşir (Android).
+
+@ Swipe left or right to cycle.
+tr Silah değiştirmek için sola veya sağa kaydır.

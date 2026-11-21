@@ -2421,8 +2421,8 @@ ro Intensitatea reflexiilor din iluminarea direcțională
 @ How far the view turns when you swipe
 ro Cât de departe se întoarce vizualizarea când glisați
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-ro Încetinește glisarea în apropierea țintelor vizibile. Deathmatch necesită permisiunea serverului.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ro Încetinește glisarea în apropierea țintelor vizibile. Deathmatch necesită permisiunea serverului. La nivel ridicat, cătarea este și atrasă ușor spre țintă.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 ro Schimbă părțile laterale pentru butoanele de mișcare, țintire și joc
@@ -4100,3 +4100,30 @@ ro Editează aranjamentul
 
 @ Drag to move
 ro Trage pentru a muta
+
+@ Auto-fire
+ro Foc automat
+
+@ Touch Auto-fire
+ro Foc automat la atingere
+
+@ Move-side Fire
+ro Foc pe partea de deplasare
+
+@ Touch Haptics
+ro Vibrații la atingere
+
+@ Add a Fire button on the move side.
+ro Adaugă un buton de tragere pe partea de deplasare.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ro Trage în monștrii din cătare în jocul local (tastatură, mouse, controler).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ro Trage în monștrii din cătare în jocul local (ecran tactil).
+
+@ Vibrate on button presses and damage (Android).
+ro Vibrează la apăsarea butoanelor și la primirea daunelor (Android).
+
+@ Swipe left or right to cycle.
+ro Glisează la stânga sau la dreapta pentru a schimba arma.

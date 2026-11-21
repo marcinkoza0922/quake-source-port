@@ -2421,8 +2421,8 @@ id Kekuatan sorotan kilau dari pencahayaan terarah
 @ How far the view turns when you swipe
 id Seberapa jauh pandangan berubah saat Anda menggeser
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-id Memperlambat gesekan Anda di dekat target yang terlihat. Deathmatch memerlukan izin server.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+id Memperlambat gesekan Anda di dekat target yang terlihat. Deathmatch memerlukan izin server. Pada setelan tinggi, bidikan juga sedikit tertarik ke sasaran.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 id Menukar sisi untuk tombol pergerakan, bidik, dan gameplay
@@ -4100,3 +4100,30 @@ id Edit Tata Letak
 
 @ Drag to move
 id Seret untuk memindah
+
+@ Auto-fire
+id Tembak otomatis
+
+@ Touch Auto-fire
+id Tembak otomatis sentuh
+
+@ Move-side Fire
+id Tembak di sisi gerak
+
+@ Touch Haptics
+id Getaran sentuh
+
+@ Add a Fire button on the move side.
+id Menambah tombol tembak di sisi gerak.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+id Menembak monster di bidikan dalam permainan lokal (papan ketik, tetikus, pengontrol).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+id Menembak monster di bidikan dalam permainan lokal (layar sentuh).
+
+@ Vibrate on button presses and damage (Android).
+id Bergetar saat menekan tombol dan menerima kerusakan (Android).
+
+@ Swipe left or right to cycle.
+id Usap ke kiri atau kanan untuk mengganti senjata.

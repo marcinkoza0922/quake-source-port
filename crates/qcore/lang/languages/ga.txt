@@ -2421,8 +2421,8 @@ ga Neart na mbuaicphointí ó shoilsiú treoch
 @ How far the view turns when you swipe
 ga Cé chomh fada agus a chasann an radharc nuair a svaidhpálann tú
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-ga slows do swipe in aice le spriocanna infheicthe. Teastaíonn cead freastalaí ó Deathmatch.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ga slows do swipe in aice le spriocanna infheicthe. Teastaíonn cead freastalaí ó Deathmatch. Ar an leibhéal ard tarraingítear an spriocaire beagán i dtreo na sprice freisin.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 ga Malartaíonn na taobhanna le haghaidh gluaiseachta, aidhm agus cnaipí gameplay
@@ -4100,3 +4100,30 @@ ga Cuir an Leagan Amach in Eagar
 
 @ Drag to move
 ga Tarraing chun bogadh
+
+@ Auto-fire
+ga Uathlámhach
+
+@ Touch Auto-fire
+ga Uathlámhach tadhaill
+
+@ Move-side Fire
+ga Lámhach ar thaobh gluaiseachta
+
+@ Touch Haptics
+ga Creathadh tadhaill
+
+@ Add a Fire button on the move side.
+ga Cuirtear cnaipe lámhaigh ar thaobh na gluaiseachta.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ga Scaoiltear le harrachtaigh faoi na crosribí sa chluiche áitiúil (méarchlár, luch, rialtán).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ga Scaoiltear le harrachtaigh faoi na crosribí sa chluiche áitiúil (scáileán tadhaill).
+
+@ Vibrate on button presses and damage (Android).
+ga Creathann sé nuair a bhrúitear cnaipe nó nuair a dhéantar damáiste (Android).
+
+@ Swipe left or right to cycle.
+ga Svaidhpeáil ar chlé nó ar dheis chun arm a athrú.

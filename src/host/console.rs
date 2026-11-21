@@ -256,9 +256,16 @@ impl Host {
             if d != KeyDest::Menu { self.cancel_menu_touch(); }
             qinput::set_key_dest(self, d);
         }
-        // text events for the console, chat prompt, and menu text rows only,
-        // so touch devices don't raise their keyboard anywhere else
-        let text = matches!(d, KeyDest::Console | KeyDest::Message) || (d == KeyDest::Menu && self.menu.wants_text());
+        if d != KeyDest::Console {
+            self.touch_console_keyboard = false;
+        }
+        let text = match d {
+            // Sign-on forces the console briefly during map changes and loads.
+            KeyDest::Console => !cfg!(target_os = "android") || self.con.open || self.touch_console_keyboard,
+            KeyDest::Message => true,
+            KeyDest::Menu => self.menu.wants_text(),
+            KeyDest::Game => false,
+        };
         if self.text_input != Some(text)
             && let Some(w) = &self.window
         {

@@ -2421,8 +2421,8 @@ zh-CN 方向性光照产生的高光强度
 @ How far the view turns when you swipe
 zh-CN 滑动时视角转动的幅度
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-zh-CN 准星靠近可见目标时减慢转动。死亡竞赛需要服务器允许。
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+zh-CN 准星靠近可见目标时减慢转动。死亡竞赛需要服务器允许。高档还会将准星轻微拉向目标。
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 zh-CN 对调移动区、瞄准区和游戏按钮的位置
@@ -4100,3 +4100,30 @@ zh-CN 编辑布局
 
 @ Drag to move
 zh-CN 拖动以移动
+
+@ Auto-fire
+zh-CN 自动开火
+
+@ Touch Auto-fire
+zh-CN 触屏自动开火
+
+@ Move-side Fire
+zh-CN 移动侧开火键
+
+@ Touch Haptics
+zh-CN 触控振动
+
+@ Add a Fire button on the move side.
+zh-CN 在移动控制侧添加开火键。
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+zh-CN 在本地游戏中自动射击准星对准的怪物（键盘、鼠标、手柄）。
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+zh-CN 在本地游戏中自动射击准星对准的怪物（触摸屏）。
+
+@ Vibrate on button presses and damage (Android).
+zh-CN 按下按键或受到伤害时振动（Android）。
+
+@ Swipe left or right to cycle.
+zh-CN 左右滑动切换武器。

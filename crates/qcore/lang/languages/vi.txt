@@ -2421,8 +2421,8 @@ vi Cường độ điểm sáng bóng từ ánh sáng có hướng
 @ How far the view turns when you swipe
 vi Chế độ xem sẽ quay được bao xa khi bạn vuốt
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-vi Làm chậm thao tác vuốt của bạn khi ở gần các mục tiêu có thể nhìn thấy. Deathmatch yêu cầu sự cho phép của máy chủ.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+vi Làm chậm thao tác vuốt của bạn khi ở gần các mục tiêu có thể nhìn thấy. Deathmatch yêu cầu sự cho phép của máy chủ. Mức cao cũng kéo nhẹ tâm ngắm về phía mục tiêu.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 vi Hoán đổi các bên cho các nút di chuyển, nhắm và chơi trò chơi
@@ -4100,3 +4100,30 @@ vi Sửa bố cục
 
 @ Drag to move
 vi Kéo để di chuyển
+
+@ Auto-fire
+vi Tự động bắn
+
+@ Touch Auto-fire
+vi Tự động bắn cảm ứng
+
+@ Move-side Fire
+vi Bắn bên di chuyển
+
+@ Touch Haptics
+vi Rung cảm ứng
+
+@ Add a Fire button on the move side.
+vi Thêm nút bắn ở bên điều khiển di chuyển.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+vi Bắn quái vật trong tâm ngắm khi chơi cục bộ (bàn phím, chuột, tay cầm).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+vi Bắn quái vật trong tâm ngắm khi chơi cục bộ (màn hình cảm ứng).
+
+@ Vibrate on button presses and damage (Android).
+vi Rung khi bấm nút hoặc nhận sát thương (Android).
+
+@ Swipe left or right to cycle.
+vi Vuốt trái hoặc phải để đổi vũ khí.

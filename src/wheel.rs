@@ -37,7 +37,7 @@ pub enum WheelInput {
 
 /// Seconds the button must be held before the wheel opens; a shorter press
 /// is a quick switch to the previous weapon.
-pub const HOLD_TIME: f32 = 0.2;
+pub const HOLD_TIME: f32 = qinput::touch::WEAPON_HOLD_NS as f32 * 1e-9;
 
 /// Slot index for a direction (+y down), 0 at the top, clockwise.
 pub fn sector(aim: [f32; 2], count: usize) -> Option<usize> {
@@ -78,7 +78,13 @@ impl Wheel {
         let (held, aim) = match input {
             WheelInput::Button { held, aim } => (held, aim),
             WheelInput::Touch(WheelGesture::Held(aim)) => (true, aim),
-            WheelInput::Touch(WheelGesture::Released(aim)) => {
+            WheelInput::Touch(WheelGesture::Released { cycle, .. }) if cycle != 0 => {
+                self.open = false;
+                self.pending = false;
+                self.sel = None;
+                return None;
+            }
+            WheelInput::Touch(WheelGesture::Released { aim, .. }) => {
                 if self.open {
                     // A move and a lift can arrive in the same frame.
                     self.sel = sector(aim, entries.len());
@@ -312,7 +318,7 @@ mod tests {
         wheel.update(0.0, idle(), true, &cl, &entries, None);
         cl.stats[STAT_ACTIVEWEAPON] = 32;
         wheel.update(0.0, idle(), true, &cl, &entries, None);
-        let tap = WheelInput::Touch(WheelGesture::Released([0.0; 2]));
+        let tap = WheelInput::Touch(WheelGesture::Released { aim: [0.0; 2], cycle: 0 });
         assert_eq!(wheel.update(0.0, tap, true, &cl, &entries, None), Some(Weapon::Stock(2)));
         assert!(!wheel.open);
 
@@ -320,7 +326,7 @@ mod tests {
         let hold = || WheelInput::Touch(WheelGesture::Held([0.0; 2]));
         wheel.update(HOLD_TIME, hold(), true, &cl, &entries, None);
         assert!(wheel.open);
-        let release = WheelInput::Touch(WheelGesture::Released([-1.0, 0.0]));
+        let release = WheelInput::Touch(WheelGesture::Released { aim: [-1.0, 0.0], cycle: 0 });
         assert_eq!(wheel.update(0.0, release, true, &cl, &entries, None), Some(Weapon::Stock(7)));
         wheel.update(HOLD_TIME, hold(), true, &cl, &entries, None);
         assert!(wheel.open);

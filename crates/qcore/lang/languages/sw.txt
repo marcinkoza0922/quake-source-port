@@ -2421,8 +2421,8 @@ sw Nguvu ya mng'ao kutoka kwa mwangaza wa mwelekeo
 @ How far the view turns when you swipe
 sw Mwonekano unageuka umbali gani unapotelezesha kidole
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-sw Hupunguza kasi ya kutelezesha kidole karibu na malengo yanayoonekana. Deathmatch inahitaji ruhusa ya seva.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+sw Hupunguza kasi ya kutelezesha kidole karibu na malengo yanayoonekana. Deathmatch inahitaji ruhusa ya seva. Kiwango cha juu pia huvuta alama ya kulenga kidogo kuelekea shabaha.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 sw Hubadilisha pande kwa vitufe vya kusonga, kulenga na kucheza mchezo
@@ -4100,3 +4100,30 @@ sw Hariri Mpangilio
 
 @ Drag to move
 sw Buruta ili kusogeza
+
+@ Auto-fire
+sw Ufyatuaji otomatiki
+
+@ Touch Auto-fire
+sw Ufyatuaji otomatiki kwa mguso
+
+@ Move-side Fire
+sw Fyatuo upande wa mwendo
+
+@ Touch Haptics
+sw Mtetemo wa mguso
+
+@ Add a Fire button on the move side.
+sw Huongeza kitufe cha kufyatua upande wa mwendo.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+sw Huwafyatulia risasi majitu yaliyo kwenye alama ya kulenga katika mchezo wa ndani (kibodi, kipanya, kidhibiti).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+sw Huwafyatulia risasi majitu yaliyo kwenye alama ya kulenga katika mchezo wa ndani (skrini ya mguso).
+
+@ Vibrate on button presses and damage (Android).
+sw Hutetemeka unapobonyeza kitufe au kupata madhara (Android).
+
+@ Swipe left or right to cycle.
+sw Telezesha kushoto au kulia ili kubadili silaha.

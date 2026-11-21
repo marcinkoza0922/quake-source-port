@@ -50,8 +50,8 @@ pub enum TouchPhase {
     Cancel,
 }
 
-/// An on-screen button. `cmd` starting with `+` is held (its `-` runs on
-/// release); anything else runs once on press.
+/// An on-screen button. Commands starting with `+` are held until release.
+/// Save and Load activate on release inside the button.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct TouchButton {
     pub label: &'static str,
@@ -65,15 +65,35 @@ pub struct TouchButton {
 }
 
 // Kept above the modern HUD's bottom rows (health, ammo list).
-pub const BUTTONS: [TouchButton; 4] = [
-    TouchButton { label: "FIRE", cmd: Some("+attack"), at: [0.17, 0.42], radius: 0.10, looks: true },
+pub const BUTTONS: [TouchButton; 8] = [
+    TouchButton { label: "Fire", cmd: Some("+attack"), at: [0.17, 0.42], radius: 0.10, looks: true },
     TouchButton { label: "JUMP", cmd: Some("+jump"), at: [0.35, 0.25], radius: 0.075, looks: false },
     TouchButton { label: "WEAPON", cmd: None, at: [0.37, 0.49], radius: 0.075, looks: false },
     TouchButton { label: "MENU", cmd: Some("togglemenu"), at: [-0.085, -0.085], radius: 0.06, looks: false },
+    TouchButton { label: "Swim Down", cmd: None, at: [0.53, 0.32], radius: 0.065, looks: false },
+    TouchButton { label: "Save", cmd: Some("save quick"), at: [-0.26, -0.075], radius: 0.065, looks: false },
+    TouchButton { label: "Load", cmd: Some("load quick"), at: [-0.42, -0.075], radius: 0.065, looks: false },
+    TouchButton { label: "Fire", cmd: Some("+attack"), at: [-0.25, -0.28], radius: 0.085, looks: false },
 ];
 const WHEEL: usize = 2;
+pub const WEAPON_HOLD_NS: u64 = 200_000_000;
 pub const PAUSE_BUTTON: usize = 3;
+pub const SWIM_DOWN: usize = 4;
+const QUICK_SAVE: usize = 5;
+const QUICK_LOAD: usize = 6;
+const MOVE_FIRE: usize = 7;
 const HIT_SCALE: f32 = 1.15;
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct TouchButtons {
+    pub submerged: bool,
+    pub quicksave: bool,
+    pub quickload: bool,
+}
+
+impl TouchButtons {
+    pub const PREVIEW: Self = Self { submerged: true, quicksave: true, quickload: true };
+}
 
 /// Key number passed with `+cmd` so the release matches the press
 /// (outside the real key range, so it never clashes with a held key).
@@ -88,7 +108,7 @@ enum Role {
     Move { origin: [f32; 2], pos: [f32; 2] },
     Look { last: LookSample },
     Button { index: usize, last: LookSample },
-    Wheel { origin: [f32; 2], pos: [f32; 2] },
+    Wheel { start: LookSample, pos: [f32; 2] },
 }
 
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -103,14 +123,14 @@ pub struct TouchOverlay {
     /// Accumulated look drag since the last frame, in centimeters (+x
     /// right, +y down).
     look: [f32; 2],
-    wheel_release: Option<([f32; 2], [f32; 2])>,
+    wheel_release: Option<(LookSample, LookSample)>,
 }
 
 /// The wheel tracks one finger relative to where it touched down.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub enum WheelGesture {
     Held([f32; 2]),
-    Released([f32; 2]),
+    Released { aim: [f32; 2], cycle: u8 },
 }
 
 impl TouchOverlay {
@@ -129,15 +149,16 @@ impl TouchOverlay {
                     Some(index) if self.pressed(index) => return out,
                     Some(WHEEL) => {
                         self.wheel_release = None;
-                        Role::Wheel { origin: pos, pos }
+                        Role::Wheel { start: sample, pos }
                     }
                     Some(index) => {
-                        let cmd = BUTTONS[index].cmd.expect("command button");
-                        out.push(if cmd.starts_with('+') {
-                            format!("{cmd} {}\n", TOUCH_KEY_BASE + index as i32)
-                        } else {
-                            format!("{cmd}\n")
-                        });
+                        if let Some(cmd) = BUTTONS[index].cmd.filter(|_| !matches!(index, QUICK_SAVE | QUICK_LOAD)) {
+                            out.push(if cmd.starts_with('+') {
+                                format!("{cmd} {}\n", TOUCH_KEY_BASE + index as i32)
+                            } else {
+                                format!("{cmd}\n")
+                            });
+                        }
                         Role::Button { index, last: sample }
                     }
                     None if lay.move_side(pos[0]) && self.stick().is_none() => {
@@ -177,8 +198,16 @@ impl TouchOverlay {
                 }
             }
             TouchPhase::Up => {
-                if let Some(Role::Wheel { origin, .. }) = self.fingers.iter().find(|f| f.id == id).map(|f| f.role) {
-                    self.wheel_release = Some((origin, pos));
+                match self.fingers.iter().find(|f| f.id == id).map(|f| f.role) {
+                    Some(Role::Wheel { start, .. }) => self.wheel_release = Some((start, sample)),
+                    Some(Role::Button { index, .. }) if matches!(index, QUICK_SAVE | QUICK_LOAD)
+                        && lay.button_enabled(index) && lay.hits(index, pos) =>
+                    {
+                        if let Some(cmd) = BUTTONS[index].cmd {
+                            out.push(format!("{cmd}\n"));
+                        }
+                    }
+                    _ => {}
                 }
                 out.extend(self.lift(id));
             }
@@ -205,6 +234,15 @@ impl TouchOverlay {
         let ids: Vec<u64> = self.fingers.iter().map(|f| f.id).collect();
         self.look = [0.0; 2];
         self.wheel_release = None;
+        ids.into_iter().filter_map(|id| self.lift(id)).collect()
+    }
+
+    /// Release controls that disappeared while a finger was still on them.
+    pub fn release_hidden(&mut self, layout: &TouchLayout) -> Vec<String> {
+        let ids: Vec<_> = self.fingers.iter().filter_map(|f| match f.role {
+            Role::Button { index, .. } if !layout.button_enabled(index) => Some(f.id),
+            _ => None,
+        }).collect();
         ids.into_iter().filter_map(|id| self.lift(id)).collect()
     }
 
@@ -252,11 +290,19 @@ impl TouchOverlay {
             let d = v[0].hypot(v[1]);
             if d < 0.035 { [0.0; 2] } else { [v[0] / d, v[1] / d] }
         };
-        if let Some((origin, pos)) = self.wheel_release.take() {
-            return Some(WheelGesture::Released(direction(origin, pos)));
+        if let Some((start, end)) = self.wheel_release.take() {
+            let dx = (end.pos[0] - start.pos[0]) * layout.aspect;
+            let dy = end.pos[1] - start.pos[1];
+            let quick = end.time_ns.saturating_sub(start.time_ns) < WEAPON_HOLD_NS;
+            let cycle = if quick && dx.abs() >= 0.055 && dx.abs() >= 1.5 * dy.abs() {
+                if dx > 0.0 { 10 } else { 12 }
+            } else {
+                0
+            };
+            return Some(WheelGesture::Released { aim: direction(start.pos, end.pos), cycle });
         }
         self.fingers.iter().find_map(|f| match f.role {
-            Role::Wheel { origin, pos } => Some(WheelGesture::Held(direction(origin, pos))),
+            Role::Wheel { start, pos } => Some(WheelGesture::Held(direction(start.pos, pos))),
             _ => None,
         })
     }
@@ -280,6 +326,10 @@ impl TouchOverlay {
 
     pub fn any_finger(&self) -> bool {
         !self.fingers.is_empty()
+    }
+
+    pub fn button_held_by(&self, id: u64) -> bool {
+        self.fingers.iter().any(|f| f.id == id && matches!(f.role, Role::Button { .. } | Role::Wheel { .. }))
     }
 }
 

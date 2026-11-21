@@ -2421,8 +2421,8 @@ sr Јачина одсјаја од усмереног осветљења
 @ How far the view turns when you swipe
 sr Колико се поглед окреће када превучете прстом
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-sr Успорава превлачење у близини видљивих циљева. Деатхматцх захтева дозволу сервера.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+sr Успорава превлачење у близини видљивих циљева. Деатхматцх захтева дозволу сервера. На високом подешавању нишан се и благо привлачи мети.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 sr Мења стране за кретање, циљање и дугмад за игру
@@ -4100,3 +4100,30 @@ sr Уреди распоред
 
 @ Drag to move
 sr Превуци за померање
+
+@ Auto-fire
+sr Аутоматска паљба
+
+@ Touch Auto-fire
+sr Аутоматска паљба на додир
+
+@ Move-side Fire
+sr Паљба на страни кретања
+
+@ Touch Haptics
+sr Вибрација на додир
+
+@ Add a Fire button on the move side.
+sr Додаје дугме за паљбу на страну кретања.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+sr Пуца у чудовишта на нишану у локалној игри (тастатура, миш, контролер).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+sr Пуца у чудовишта на нишану у локалној игри (екран осетљив на додир).
+
+@ Vibrate on button presses and damage (Android).
+sr Вибрира при притиску дугмади и примању штете (Android).
+
+@ Swipe left or right to cycle.
+sr Превуци улево или удесно за промену оружја.

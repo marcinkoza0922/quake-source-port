@@ -2421,8 +2421,8 @@ cy Cryfder yr uchafbwyntiau o oleuo cyfeiriadol
 @ How far the view turns when you swipe
 cy Pa mor bell mae'r olygfa'n troi pan fyddwch chi'n llithro
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-cy Yn arafu eich swipe yn agos at dargedau gweladwy. Mae angen caniatâd gweinydd ar Deathmatch.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+cy Yn arafu eich swipe yn agos at dargedau gweladwy. Mae angen caniatâd gweinydd ar Deathmatch. Ar y gosodiad uchel, tynnir y croeswallt ychydig tuag at y targed hefyd.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 cy Yn cyfnewid yr ochrau am fotymau symud, anelu a gameplay
@@ -4100,3 +4100,30 @@ cy Golygu’r Cynllun
 
 @ Drag to move
 cy Llusgwch i symud
+
+@ Auto-fire
+cy Tanio awtomatig
+
+@ Touch Auto-fire
+cy Tanio awtomatig cyffwrdd
+
+@ Move-side Fire
+cy Tanio ar ochr symud
+
+@ Touch Haptics
+cy Dirgryniad cyffwrdd
+
+@ Add a Fire button on the move side.
+cy Ychwanega fotwm tanio ar yr ochr symud.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+cy Tanio at angenfilod o dan y croeswallt mewn gêm leol (bysellfwrdd, llygoden, rheolydd).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+cy Tanio at angenfilod o dan y croeswallt mewn gêm leol (sgrin gyffwrdd).
+
+@ Vibrate on button presses and damage (Android).
+cy Dirgrynu ar wasgu botwm neu wrth gymryd difrod (Android).
+
+@ Swipe left or right to cycle.
+cy Sychwch i'r chwith neu'r dde i newid arf.

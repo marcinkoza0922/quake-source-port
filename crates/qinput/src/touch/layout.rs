@@ -1,4 +1,4 @@
-use super::{BUTTONS, HIT_SCALE, STICK_RADIUS};
+use super::{BUTTONS, HIT_SCALE, MOVE_FIRE, QUICK_LOAD, QUICK_SAVE, STICK_RADIUS, SWIM_DOWN, TouchButtons};
 
 pub const LAYOUT_CVAR: &str = "touch_layout";
 
@@ -20,19 +20,23 @@ pub struct TouchLayout {
     /// Left, top, right and bottom insets, normalised to the window.
     pub insets: [f32; 4],
     pub placements: [Option<ButtonPlacement>; BUTTONS.len()],
+    pub buttons: TouchButtons,
+    pub move_fire: bool,
 }
 
 impl TouchLayout {
     pub fn new(aspect: f32, size: f32, left_handed: bool, insets: [f32; 4]) -> Self {
-        Self { aspect: aspect.max(0.1), size, left_handed, insets, placements: [None; BUTTONS.len()] }
+        Self {
+            aspect: aspect.max(0.1), size, left_handed, insets, placements: [None; BUTTONS.len()],
+            buttons: TouchButtons::default(), move_fire: false,
+        }
     }
 
     fn scale(&self) -> f32 {
         let [l, t, r, b] = self.insets;
         let half_width = (1.0 - l - r) * self.aspect * 0.5;
         let height = 1.0 - t - b;
-        // Keep the full hit areas within the safe rectangle and on their own
-        // side even at maximum button size on narrow displays.
+        // Limit the scale so the buttons fit as the safe rectangle narrows.
         self.size.clamp(0.5, 2.0).min(half_width / 0.48).min(height / 0.60).max(0.01)
     }
 
@@ -51,6 +55,7 @@ impl TouchLayout {
 
     pub fn from_cvars(cv: &qcore::cvar::Cvars, aspect: f32, insets: [f32; 4]) -> Self {
         let mut layout = Self::new(aspect, cv.value_of("touch_size"), cv.value_of("touch_left_handed") >= 0.5, insets);
+        layout.move_fire = cv.value_of("touch_move_fire") != 0.0;
         if let Some(config) = cv.by_name(LAYOUT_CVAR) {
             for (slot, entry) in layout.placements.iter_mut().zip(config.string.split(';')) {
                 let mut values = entry.split_whitespace().map(str::parse::<f32>);
@@ -77,11 +82,21 @@ impl TouchLayout {
     }
 
     pub fn button_at(&self, pos: [f32; 2]) -> Option<usize> {
-        (0..BUTTONS.len()).filter_map(|i| {
+        (0..BUTTONS.len()).filter(|&i| self.button_enabled(i)).filter_map(|i| {
             let (center, radius) = self.button(i);
             let d = self.dist(pos, center);
             (d <= radius * HIT_SCALE).then_some((i, d))
         }).min_by(|a, b| a.1.total_cmp(&b.1)).map(|(i, _)| i)
+    }
+
+    pub fn button_enabled(&self, index: usize) -> bool {
+        match index {
+            SWIM_DOWN => self.buttons.submerged,
+            QUICK_SAVE => self.buttons.quicksave,
+            QUICK_LOAD => self.buttons.quickload,
+            MOVE_FIRE => self.move_fire,
+            _ => true,
+        }
     }
 
     /// Centre in window fractions, radius in height units. Keep the full hit

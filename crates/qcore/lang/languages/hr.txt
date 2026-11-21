@@ -2421,8 +2421,8 @@ hr Jačina odsjaja od usmjerenog osvjetljenja
 @ How far the view turns when you swipe
 hr Koliko daleko se pogled okreće kada prijeđete
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-hr Usporava vaše prevlačenje blizu vidljivih ciljeva. Deathmatch zahtijeva dozvolu poslužitelja.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+hr Usporava vaše prevlačenje blizu vidljivih ciljeva. Deathmatch zahtijeva dozvolu poslužitelja. Na visokoj postavci nišan se i blago privlači meti.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 hr Mijenja strane za gumbe za kretanje, ciljanje i igru
@@ -4100,3 +4100,30 @@ hr Uredi raspored
 
 @ Drag to move
 hr Povuci za pomicanje
+
+@ Auto-fire
+hr Automatska paljba
+
+@ Touch Auto-fire
+hr Automatska paljba na dodir
+
+@ Move-side Fire
+hr Paljba na strani kretanja
+
+@ Touch Haptics
+hr Vibracija na dodir
+
+@ Add a Fire button on the move side.
+hr Dodaje tipku za paljbu na stranu kretanja.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+hr Puca u čudovišta na nišanu u lokalnoj igri (tipkovnica, miš, kontroler).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+hr Puca u čudovišta na nišanu u lokalnoj igri (dodirni zaslon).
+
+@ Vibrate on button presses and damage (Android).
+hr Vibrira pri pritisku tipki i primanju štete (Android).
+
+@ Swipe left or right to cycle.
+hr Povuci ulijevo ili udesno za promjenu oružja.

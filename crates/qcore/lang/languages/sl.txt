@@ -2421,8 +2421,8 @@ sl Moč svetlobnih poudarkov iz usmerjene osvetlitve
 @ How far the view turns when you swipe
 sl Kako daleč se pogled obrne, ko povlečete
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-sl Upočasni poteg blizu vidnih ciljev. Deathmatch zahteva dovoljenje strežnika.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+sl Upočasni poteg blizu vidnih ciljev. Deathmatch zahteva dovoljenje strežnika. Pri visoki nastavitvi merek tudi rahlo vleče k tarči.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 sl Zamenja strani za gumbe za gibanje, ciljanje in igranje
@@ -4100,3 +4100,30 @@ sl Uredi postavitev
 
 @ Drag to move
 sl Povleci za premik
+
+@ Auto-fire
+sl Samodejno streljanje
+
+@ Touch Auto-fire
+sl Samodejno streljanje na dotik
+
+@ Move-side Fire
+sl Streljanje na strani premikanja
+
+@ Touch Haptics
+sl Vibracija ob dotiku
+
+@ Add a Fire button on the move side.
+sl Doda gumb za streljanje na stran za premikanje.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+sl Strelja na pošasti pod merkom v lokalni igri (tipkovnica, miška, krmilnik).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+sl Strelja na pošasti pod merkom v lokalni igri (zaslon na dotik).
+
+@ Vibrate on button presses and damage (Android).
+sl Vibrira ob pritisku gumba ali prejeti škodi (Android).
+
+@ Swipe left or right to cycle.
+sl Podrsaj levo ali desno za menjavo orožja.

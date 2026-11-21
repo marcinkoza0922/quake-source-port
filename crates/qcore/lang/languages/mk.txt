@@ -2421,8 +2421,8 @@ mk Јачина на одблесоците од насоченото освет
 @ How far the view turns when you swipe
 mk Колку далеку се врти приказот кога ќе поминете
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-mk Го успорува вашето повлекување во близина на видливи цели. Deathmatch бара дозвола од серверот.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+mk Го успорува вашето повлекување во близина на видливи цели. Deathmatch бара дозвола од серверот. На високо ниво, нишанот се повлекува малку кон целта.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 mk Ги заменува страните за копчиња за движење, нишање и игра
@@ -4100,3 +4100,30 @@ mk Уреди го распоредот
 
 @ Drag to move
 mk Повлечете за преместување
+
+@ Auto-fire
+mk Автоматско пукање
+
+@ Touch Auto-fire
+mk Автоматско пукање на допир
+
+@ Move-side Fire
+mk Пукање на страната за движење
+
+@ Touch Haptics
+mk Вибрации на допир
+
+@ Add a Fire button on the move side.
+mk Додава копче за пукање на страната за движење.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+mk Пука во чудовишта под нишанот во локална игра (тастатура, глушец, контролер).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+mk Пука во чудовишта под нишанот во локална игра (екран на допир).
+
+@ Vibrate on button presses and damage (Android).
+mk Вибрира при притискање копчиња и примање штета (Android).
+
+@ Swipe left or right to cycle.
+mk Лизгај лево или десно за промена на оружјето.

@@ -423,6 +423,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
         let dir = h.user_dir();
         let _ = crate::autosave::remove_other_exts(&dir, name, None);
         let _ = qcore::vfs::remove_file(&dir.join(format!("{name}.{}", crate::autosave::THUMB_EXT)));
+        h.touch_quickload_probe = 0.0;
         h.scan_saves();
     });
     c.add("save", |h, a| {
@@ -447,6 +448,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
                     let _ = crate::autosave::remove_other_exts(d, stem, p.extension().and_then(|e| e.to_str()));
                 }
                 h.print(&qcore::ctr!("Game saved.\n"));
+                h.touch_quickload_probe = 0.0;
                 h.thumb = Some(p.with_extension(crate::autosave::THUMB_EXT));
             }
             Err(e) => h.print(&qcore::ctr!("ERROR: couldn't write {}: {}\n", p.display(), e)),

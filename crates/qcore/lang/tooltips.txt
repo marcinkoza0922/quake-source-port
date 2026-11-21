@@ -1471,12 +1471,12 @@ it Quanto ruota la visuale quando scorri il dito
 es Cuánto gira la vista al deslizar el dedo
 ru На какой угол поворачивается камера при движении пальца
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-fr Ralentit la visée près des cibles visibles. En match à mort, le serveur doit l’autoriser.
-de Verlangsamt das Zielen nahe sichtbaren Zielen. Im Deathmatch entscheidet der Server.
-it Rallenta la mira vicino ai bersagli visibili. In deathmatch serve il permesso del server.
-es Ralentiza la mira cerca de objetivos visibles. En combate a muerte el servidor debe permitirlo.
-ru Замедляет прицеливание рядом с видимыми целями. В бою насмерть требуется разрешение сервера.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+fr Ralentit la visée près des cibles visibles. En match à mort, le serveur doit l’autoriser. Au niveau élevé, le viseur est aussi légèrement attiré par la cible.
+de Verlangsamt das Zielen nahe sichtbaren Zielen. Im Deathmatch entscheidet der Server. Auf Hoch zieht das Fadenkreuz auch leicht zum Ziel.
+it Rallenta la mira vicino ai bersagli visibili. In deathmatch serve il permesso del server. Su Alto attira leggermente il mirino verso il bersaglio.
+es Ralentiza la mira cerca de objetivos visibles. En combate a muerte el servidor debe permitirlo. En Alto también acerca suavemente la mira al objetivo.
+ru Замедляет прицеливание рядом с видимыми целями. В бою насмерть требуется разрешение сервера. На высоком уровне прицел также слегка притягивается к цели.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 fr Inverse les côtés du déplacement, de la visée et des boutons
@@ -1505,3 +1505,31 @@ de Verwendet den Bewegungssensor des Android-Geräts.
 it Usa il sensore di movimento del dispositivo Android.
 es Usa el sensor de movimiento del dispositivo Android.
 ru Использует датчик движения устройства Android.
+
+@ Add a Fire button on the move side.
+fr Ajoute un bouton de tir du côté du déplacement.
+de Fügt eine Feuertaste auf der Bewegungsseite hinzu.
+it Aggiunge un pulsante di fuoco sul lato del movimento.
+es Añade un botón de disparo en el lado de movimiento.
+ru Добавляет кнопку огня на стороне движения.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+fr Tire sur les monstres dans le viseur en partie locale (clavier, souris, manette).
+de Feuert im lokalen Spiel auf Monster im Fadenkreuz (Tastatur, Maus, Controller).
+it Spara ai mostri nel mirino in partita locale (tastiera, mouse, controller).
+es Dispara a los monstruos bajo la mira en partidas locales (teclado, ratón, mando).
+ru Стрельба по монстрам под прицелом в локальной игре (клавиатура, мышь, геймпад).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+fr Tire sur les monstres dans le viseur en partie locale (écran tactile).
+de Feuert im lokalen Spiel auf Monster im Fadenkreuz (Touchscreen).
+it Spara ai mostri nel mirino in partita locale (schermo tattile).
+es Dispara a los monstruos bajo la mira en partidas locales (pantalla táctil).
+ru Стрельба по монстрам под прицелом в локальной игре (сенсорный экран).
+
+@ Vibrate on button presses and damage (Android).
+fr Vibre à la pression des boutons et en cas de dégâts (Android).
+de Vibriert bei Tastendruck und erlittenem Schaden (Android).
+it Vibra alla pressione dei pulsanti e quando subisci danni (Android).
+es Vibra al pulsar botones y al recibir daño (Android).
+ru Вибрация при нажатии кнопок и получении урона (Android).

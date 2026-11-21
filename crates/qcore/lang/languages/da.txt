@@ -2421,8 +2421,8 @@ da Styrke af højlys fra retningsbestemt belysning
 @ How far the view turns when you swipe
 da Hvor langt visningen drejer, når du swiper
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-da Sænker dit swipe nær synlige mål. Deathmatch kræver servertilladelse.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+da Sænker dit swipe nær synlige mål. Deathmatch kræver servertilladelse. På høj trækkes sigtet også lidt mod målet.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 da Skifter siderne ud med bevægelses-, sigte- og gameplay-knapper
@@ -4100,3 +4100,30 @@ da Rediger layout
 
 @ Drag to move
 da Træk for at flytte
+
+@ Auto-fire
+da Automatisk skydning
+
+@ Touch Auto-fire
+da Automatisk skydning ved berøring
+
+@ Move-side Fire
+da Skyd på bevægelsessiden
+
+@ Touch Haptics
+da Vibration ved berøring
+
+@ Add a Fire button on the move side.
+da Tilføjer en skydeknap på bevægelsessiden.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+da Skyder mod monstre i sigtekornet i lokale spil (tastatur, mus, controller).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+da Skyder mod monstre i sigtekornet i lokale spil (berøringsskærm).
+
+@ Vibrate on button presses and damage (Android).
+da Vibrerer ved knaptryk og skade (Android).
+
+@ Swipe left or right to cycle.
+da Stryg til venstre eller højre for at skifte våben.

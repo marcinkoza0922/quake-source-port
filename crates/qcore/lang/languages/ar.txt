@@ -2421,8 +2421,8 @@ ar شدة اللمعان الناتج عن الإضاءة الاتجاهية
 @ How far the view turns when you swipe
 ar إلى أي مدى يتحول العرض عند التمرير
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-ar يؤدي إلى إبطاء التمرير بالقرب من الأهداف المرئية. يتطلب Deathmatch إذن الخادم.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+ar يؤدي إلى إبطاء التمرير بالقرب من الأهداف المرئية. يتطلب Deathmatch إذن الخادم. في المستوى العالي تنجذب علامة التصويب برفق نحو الهدف أيضًا.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 ar قم بتبديل الجوانب لأزرار الحركة والهدف واللعب
@@ -4100,3 +4100,30 @@ ar تعديل التخطيط
 
 @ Drag to move
 ar اسحب للنقل
+
+@ Auto-fire
+ar إطلاق تلقائي
+
+@ Touch Auto-fire
+ar إطلاق تلقائي باللمس
+
+@ Move-side Fire
+ar إطلاق النار في جانب الحركة
+
+@ Touch Haptics
+ar اهتزاز اللمس
+
+@ Add a Fire button on the move side.
+ar يضيف زر إطلاق نار في جانب الحركة.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+ar يطلق النار على الوحوش التي عليها علامة التصويب في اللعب المحلي (لوحة المفاتيح، الفأرة، وحدة التحكم).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+ar يطلق النار على الوحوش التي عليها علامة التصويب في اللعب المحلي (شاشة اللمس).
+
+@ Vibrate on button presses and damage (Android).
+ar اهتزاز عند ضغط الأزرار أو تلقي الضرر (أندرويد).
+
+@ Swipe left or right to cycle.
+ar اسحب يسارًا أو يمينًا لتبديل السلاح.

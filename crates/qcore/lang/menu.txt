@@ -4231,3 +4231,31 @@ de Layout bearbeiten
 it Modifica disposizione
 es Editar disposición
 ru Изменить раскладку
+
+@ Auto-fire
+fr Tir automatique
+de Automatisches Feuern
+it Fuoco automatico
+es Disparo automático
+ru Автоогонь
+
+@ Touch Auto-fire
+fr Tir auto tactile
+de Auto-Feuer per Touch
+it Fuoco automatico touch
+es Disparo automático táctil
+ru Сенсорный автоогонь
+
+@ Move-side Fire
+fr Tir côté déplacement
+de Feuertaste auf Bewegungsseite
+it Fuoco sul lato movimento
+es Disparo en lado de movimiento
+ru Огонь на стороне движения
+
+@ Touch Haptics
+fr Vibrations tactiles
+de Touch-Vibration
+it Vibrazione touch
+es Vibración táctil
+ru Виброотклик

@@ -2421,8 +2421,8 @@ lv Virzītā apgaismojuma atspīdumu stiprums
 @ How far the view turns when you swipe
 lv Cik tālu skats pagriežas, velkot
 
-@ Slows your swipe near visible targets. Deathmatch requires server permission.
-lv Palēnina vilkšanu redzamo mērķu tuvumā. Deathmatch nepieciešama servera atļauja.
+@ Slows your swipe near visible targets. Deathmatch requires server permission. High also gently pulls toward targets.
+lv Palēnina vilkšanu redzamo mērķu tuvumā. Deathmatch nepieciešama servera atļauja. Augstā līmenī tēmēklis arī tiek nedaudz vilkts uz mērķi.
 
 @ Swaps the sides for movement, aiming and gameplay buttons
 lv Apmaina sānus pret kustības, mērķēšanas un spēles pogām
@@ -4100,3 +4100,30 @@ lv Rediģēt izkārtojumu
 
 @ Drag to move
 lv Velciet, lai pārvietotu
+
+@ Auto-fire
+lv Automātiskā šaušana
+
+@ Touch Auto-fire
+lv Automātiskā šaušana ar skārienu
+
+@ Move-side Fire
+lv Šaušana kustības pusē
+
+@ Touch Haptics
+lv Skārienu vibrācija
+
+@ Add a Fire button on the move side.
+lv Pievieno šaušanas pogu kustības pusē.
+
+@ Fire at monsters under the crosshair in local play (keyboard, mouse, controller).
+lv Šauj uz monstriem tēmēkļa centrā lokālā spēlē (tastatūra, pele, vadāmierīce).
+
+@ Fire at monsters under the crosshair in local play (touchscreen).
+lv Šauj uz monstriem tēmēkļa centrā lokālā spēlē (skārienekrāns).
+
+@ Vibrate on button presses and damage (Android).
+lv Vibrē, nospiežot pogas un saņemot bojājumus (Android).
+
+@ Swipe left or right to cycle.
+lv Pavelc pa kreisi vai pa labi, lai mainītu ieroci.

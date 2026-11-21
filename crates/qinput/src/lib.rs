@@ -225,6 +225,7 @@ cvars! {
     gyro_rollsensitivity = "gyro_rollsensitivity", "0";
     gyro_noise_thresh = "gyro_noise_thresh", "1.5";
     autoaim = "assist_autoaim", "0";
+    autofire = "assist_autofire", "0";
     autoaim_mode = "assist_autoaim_mode", "0";
     autoaim_cone = "assist_autoaim_cone", "8";
     autoaim_indicator = "assist_autoaim_indicator", "1";
@@ -250,6 +251,9 @@ cvars! {
     touch_invert = "touch_invert", "0";
     touch_aim_assist = "touch_aim_assist", "1";
     touch_left_handed = "touch_left_handed", "0";
+    touch_move_fire = "touch_move_fire", "0";
+    touch_autofire = "touch_autofire", "0";
+    touch_haptics = "touch_haptics", "0";
 }
 
 /// Host context for qinput commands.
@@ -296,6 +300,7 @@ pub struct Input {
     pub autoaim_fov: [f32; 2],
     pub autoaim_players: bool,
     pub touch: touch::TouchOverlay,
+    pub touch_buttons: touch::TouchButtons,
     /// Window width/height from the last touch, for the stick.
     pub touch_aspect: f32,
     pub touch_size_cm: Option<[f32; 2]>,
@@ -333,6 +338,7 @@ impl Input {
             autoaim_fov: [90.0, 73.74],
             autoaim_players: false,
             touch: touch::TouchOverlay::default(),
+            touch_buttons: touch::TouchButtons::default(),
             touch_aspect: 16.0 / 9.0,
             touch_insets: [0.0; 4],
             touch_size_cm: None,
@@ -375,7 +381,18 @@ impl Input {
     }
     /// Layout of the on-screen controls.
     pub fn touch_layout(&self, cvars: &Cvars) -> touch::TouchLayout {
-        touch::TouchLayout::from_cvars(cvars, self.touch_aspect, self.touch_insets)
+        let mut layout = touch::TouchLayout::from_cvars(cvars, self.touch_aspect, self.touch_insets);
+        layout.buttons = self.touch_buttons;
+        layout
+    }
+
+    pub fn autofire_enabled(&self, cvars: &Cvars) -> bool {
+        self.dest == KeyDest::Game && self.autoaim_allowed && !self.wheel_open
+            && !self.wheel_held() && !self.touch.wheel_held() && !self.buttons[btn::EQUIPWHEEL].is_down()
+            && match self.last_device {
+                Device::Touch => cvars.value(self.cv.touch_autofire) != 0.0 && cvars.value(self.cv.touch_enable) != 0.0,
+                _ => cvars.value(self.cv.autofire) != 0.0,
+            }
     }
     /// Whether the on-screen controls should be drawn and used.
     pub fn touch_visible(&self, cvars: &Cvars) -> bool {
