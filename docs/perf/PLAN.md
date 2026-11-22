@@ -95,6 +95,8 @@ entities for state, `-fixedstep`, fixed frame count.
 | Water reflections, planar | `r_enhancedwater 1`, `r_water_reflections 1` | e2m2 or AD water view | extra scene pass |
 | Water reflections, ray traced | `r_water_reflections 2` | same view | ray queries, BLAS/TLAS updates |
 | Enhanced water (rest) | translucency, ripples, splashes, caustics | same view + entities in water | |
+| Underwater refraction (new 2026-11-21) | `r_water_refraction 1` | camera held under water (e2m2 or AD), `r_water_quality` 1 and 2 (2 adds the chromatic split) | full-screen post work (4K) |
+| Screen droplets (new 2026-11-21) | `r_water_droplets 1` | scripted live: dip in and out of water every ~3 s, so the 2 s droplet window covers most frames | full-screen post work (4K); per-view state in split-screen |
 | SSAO | `r_ssao` | `spin-sepulcher` | 4K |
 | Motion + speed blur | `r_motionblur 1`, `r_speedblur 1` | `combat-e1m3` | |
 | Blood, impacts, enhanced particles | `r_enhancedfx 1` + each toggle | `combat-e1m3` | particle counts, CPU |
@@ -102,6 +104,12 @@ entities for state, `-fixedstep`, fixed frame count.
 | Teleporter windows | `r_teleportwindows 1` | `start` | extra views |
 | HDR / deluxe lightmaps | `r_hdr_lightmaps`, `r_deluxemapping` | a map with `.lit2`/BSPX E5BGR9 | |
 | Sky wind | `r_skywind 1` | a map with `<sky>wind.cfg` | |
+
+The two water screen effects (refraction, droplets) are passes inside the post shader (`water_screen.glsl`
+/ `water_screen.wgsl`) and should cost little while inactive, so measure them
+in frames where they are active, and check once what they add on a
+dry view. They also belong in the everything-on scene with some players
+under water.
 
 Pin every master toggle (`r_enhancedfx`, `r_enhancedwater`, ...) in the
 baseline, so a feature can't be on or off by accident (ADDITIONS.md
@@ -166,15 +174,11 @@ the comparison runs on the same inputs.
 
 ## Steps
 
-- **P0. Scene list.** One file (`tools/perfkit`, for example
+- **P0. Scene list.** Done 2026-11-21 as `perfkit::plan` (Rust table, not TOML: perfkit has no dependencies and the tests check the cvars against the engine source). Planned as one file (`tools/perfkit`, for example
   `scenes.toml`) listing each scene: kind (demo or live), map, camera,
   cvars, setup commands, frame count, group (`vanilla`, `enhancement`,
   `audio`, `addon`, `all`). Adding a feature then means adding one entry.
-- **P1. One runner.** `perfkit run [-quick|-full] [-only a,b] [-res
-  540|2160]`: plays each scene's off and on runs interleaved, writes
-  `target/perf/runs/<commit>/report.{json,md}` with the cost table.
-  Builds on qprof's live-scene code (`tools/qprof/src/scenarios.rs`,
-  `ultimate.rs`) and perfkit's sandbox. qprof's old scenarios go away.
+- **P1. One runner.** Done 2026-11-21 (`perfkit run`, DESIGN.md Tooling): every scene above runs except `hdr-deluxe` (no installed map has HDR or deluxe lightmaps). Demo runs get GPU time from a profiled attribution run (`prof_timedemo`); live runs from their own profile. Left: the everything-on scene's excess column and leave-one-out runs (the single-feature costs come from other scenes, so their sum isn't comparable yet), and retiring qprof's scenarios (a decision for the user: qprof still has `-perf` per-function profiles).
 - **P2. Audio counters.** Mixer time per buffer, probe time, underruns,
   readable at the end of a run.
 - **P3. Demo check.** Confirm which enhancement scenes render the same
@@ -192,4 +196,29 @@ the comparison runs on the same inputs.
 
 (date, commit, scene, resolution, off / on / cost µs and %, p99, spread)
 
-None yet.
+- 2026-11-21, 07b9663-dirty, **one round only (no spread, preliminary)**,
+  RTX 3060 Ti, i7-12700K. Vanilla demos, mean ms 540p / 4K: spin-e1m1
+  0.219 / 1.050, combat-e1m3 0.237 / 1.073, spin-sepulcher 0.414 / 1.254,
+  spin-sepulcher-fte 1.284 / 1.993 (FTE rain triples the 540p frame of the
+  same map). Live scene costs, 540p / 4K: water-refraction +4 / +34 µs,
+  water-droplets +15 / +218 µs (+17% at 4K, GPU 1223 → 1438 µs: about 6×
+  refraction), teleporter-windows +126 / +315 µs (4K p99 1.07 → 2.43 ms),
+  skywind +7 / +22 µs.
+- The `spin-e2m2` demo showed no water, so the water reflection and
+  "rest" scenes moved to a live camera over e2m1's pool (2026-11-21).
+- 2026-11-21, same build, one round (preliminary): live costs 540p / 4K.
+  water-planar +68 / +240 µs; **water-rt +208 / +1099 µs (+96% at 4K, p99
+  1.99 → 4.67 ms)**; water-rest +6 / +16 µs; `r_water_quality 2` changes
+  none of the water costs. portalgun +95 / +228 µs, recursion 6: +154 /
+  +386 µs. gel +18 / +200 µs (4K p99 1.97 → 2.89 ms); washer −1 / +55 µs;
+  cable +55 / +240 µs; goggles nv and thermal about +100 µs at 4K, under
+  3%. The ad_sepulcher spawn live costs 1.85 / 3.4 ms with nothing on, far
+  more than the `spin-sepulcher` timedemo: the live game has AD's
+  decorations (see DESIGN.md).
+- 2026-11-21, one round (preliminary): audio scenes show no frame-time
+  cost (reverb, HRTF, occlusion, underwater filter all within ±2%), since
+  mixing runs on its own thread; P2's counters are needed. **all-split4**
+  (4 players, everything on) 1.59 → 4.24 ms at 540p and 2.47 → 8.29 ms at
+  4K (120 fps; GPU 2.3 → 8.2 ms; p99 3.65 → 11.64 ms). Demo GPU per frame
+  (attribution runs) 540p / 4K: spin-e1m1 143 / 833 µs, combat-e1m3
+  157 / 914, spin-sepulcher 228 / 1167, spin-sepulcher-fte 946 / 2088.

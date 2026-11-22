@@ -36,7 +36,7 @@ The reported number is the cost over the baseline: µs per frame at 540p
 | Render scale | `r_renderscale` | 1.5, 2.0 (4K: 1.5, and 2.0 only if it fits in VRAM; record VRAM) | spin demos |
 | Ambient occlusion | `r_ssao` | 1 / 2 / 3 | spin demos |
 | Motion + speed blur | `r_motionblur 1`, `r_speedblur 1` | `r_motionblur_quality` 0 / 1 | combat demo |
-| Enhanced water | `r_enhancedwater 1` + translucency, ripples, splashes, caustics | `r_water_quality` 0 / 1 / 2 | e2m2 demo + ad_sepulcher surface/underwater stills (HISTORY item 15) |
+| Enhanced water | `r_enhancedwater 1` + translucency, ripples, splashes, caustics, underwater refraction and screen droplets (`r_water_refraction`, `r_water_droplets`, 2026-11-21) | `r_water_quality` 0 / 1 / 2 | e2m2 demo + ad_sepulcher surface/underwater stills (HISTORY item 15) |
 | Teleporter windows | `r_teleportwindows 1` | `r_portal_quality` 0 / 1 / 2 | `start` (episode teleporters), ad_sepulcher |
 | Blood | `r_enhancedfx 1`, `r_blood 1` | `r_blood_quality` 0 / 1 / 2 | combat demo |
 | Impacts | `r_enhancedfx 1`, `r_impact_fx` + bullets, nails, scorches | `r_particle_quality` 0 / 1 / 2 (caps the hit-effect tier; `r_impact_quality` is a no-op since 2026-11-16), plus `r_impact_limit` / `r_impact_lifetime` | combat demo |

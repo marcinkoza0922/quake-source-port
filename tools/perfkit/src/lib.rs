@@ -8,6 +8,8 @@
 //! - [`runner`]: one windowed timedemo, directly or inside gamescope,
 //!   optionally with a MangoHud per-frame log of exactly the demo's frames.
 //! - [`mangohud`]: the MangoHud control socket and log parsing.
+//! - [`live`]: live scenes: script (map, camera, profiler) and profile parsing.
+//! - [`plan`]: the lean plan's scene list (`docs/perf/PLAN.md`, P0).
 //! - [`scenes`]: Part 1's demo set and how each demo is recorded.
 //! - [`settings`]: Part 1's "vanilla ultra" pins in each engine's cvars.
 //! - [`stats`]: medians, spreads and percentiles.
@@ -18,8 +20,10 @@
 pub mod demofile;
 pub mod engine;
 pub mod guard;
+pub mod live;
 pub mod machine;
 pub mod mangohud;
+pub mod plan;
 pub mod runner;
 pub mod sandbox;
 pub mod scenes;
