@@ -11,6 +11,9 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("sv_autosave_secrets", "0", CVAR_ARCHIVE),
     ("sv_autosave_interval", "0", CVAR_ARCHIVE),
     ("host_maxfps", "250", CVAR_ARCHIVE),
+    // tools/perfkit: a timedemo profiles itself and writes the report here
+    // when it ends (host/prof.rs; empty = off).
+    ("prof_timedemo", "", 0),
     ("fov", "90", CVAR_ARCHIVE),
     ("zoom_fov", "30", CVAR_ARCHIVE),
     ("zoom_speed", "8", CVAR_ARCHIVE),
