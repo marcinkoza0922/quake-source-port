@@ -11,6 +11,7 @@ or a higher-priority game dir than the map).
   qdata.py maps   [-g GAME]
   qdata.py which  PATH [-g GAME]
   qdata.py ents   MAP  [-g GAME] [-c CLASS] [-k KEY=SUBSTR | -k KEY==EXACT] [--all] [--json]
+  qdata.py liquids MAP [-g GAME] [-n N]   largest water/slime/lava leaves (camera spots)
 
 GAME may be `ad`, `hipnotic`, ...; prefix base packs with `+`, e.g.
 `-g +hipnotic,mymod` mounts id1, hipnotic, mymod (like `-hipnotic -game mymod`).
@@ -278,6 +279,48 @@ def cmd_ents(a):
         print(f"{i:4} {cls:26} " + "  ".join(f'{k}="{v}"' for k, v in shown if k != "classname"))
 
 
+LIQUIDS = {-3: "water", -4: "slime", -5: "lava"}
+
+
+def liquid_leaves(bsp):
+    """(contents name, mins, maxs) of every water/slime/lava BSP leaf."""
+    ident = bsp[:4]
+    # Leaf record: contents, visofs, bbox, marksurfaces, ambient levels
+    # (crates/qformats/src/bsp.rs): BSP29/Quake64 short bbox, 2PSB short
+    # bbox with 32-bit marks, BSP2 float bbox.
+    if ident == b"BSP2":
+        size, box = 44, "<6f"
+    elif ident == b"2PSB":
+        size, box = 32, "<6h"
+    else:
+        size, box = 28, "<6h"
+    ofs, ln = struct.unpack("<ii", bsp[4 + 8 * 10:4 + 8 * 10 + 8])
+    out = []
+    for i in range(ofs, ofs + ln - size + 1, size):
+        contents = struct.unpack("<i", bsp[i:i + 4])[0]
+        if contents in LIQUIDS:
+            b = struct.unpack(box, bsp[i + 8:i + 8 + struct.calcsize(box)])
+            out.append((LIQUIDS[contents], b[:3], b[3:]))
+    return out
+
+
+def cmd_liquids(a):
+    base = base_dir(a.basedir)
+    sp = search_path(base, a.game)
+    m = a.map[:-4] if a.map.lower().endswith(".bsp") else a.map
+    hit = find(sp, f"maps/{m}.bsp")
+    if not hit:
+        sys.exit(f"qdata: maps/{m}.bsp not found in {a.game or 'id1'}")
+    leaves = liquid_leaves(hit[3])
+    vol = lambda l: (l[2][0] - l[1][0]) * (l[2][1] - l[1][1]) * (l[2][2] - l[1][2])
+    leaves.sort(key=vol, reverse=True)
+    print(f"# {len(leaves)} liquid leaves in {hit[2]} (bounds are the leaf's box, "
+          "which can reach past the liquid; the centre of a large one is usually inside)", file=sys.stderr)
+    for kind, lo, hi in leaves[:a.n]:
+        c = " ".join(f"{(x + y) / 2:g}" for x, y in zip(lo, hi))
+        print(f"{kind:6} centre=\"{c}\"  mins=\"{' '.join(f'{v:g}' for v in lo)}\"  maxs=\"{' '.join(f'{v:g}' for v in hi)}\"")
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("-b", "--basedir")
@@ -296,8 +339,12 @@ def main():
     s.add_argument("-k", "--key", action="append", help="KEY=SUBSTR or KEY==EXACT filter (repeatable)")
     s.add_argument("--all", action="store_true", help="print every key, not just the usual ones")
     s.add_argument("--json", action="store_true")
+    s = sub.add_parser("liquids", help="largest water/slime/lava leaves of a map")
+    s.add_argument("map")
+    s.add_argument("-g", "--game")
+    s.add_argument("-n", type=int, default=10)
     a = p.parse_args()
-    {"mods": cmd_mods, "maps": cmd_maps, "which": cmd_which, "ents": cmd_ents}[a.cmd](a)
+    {"mods": cmd_mods, "maps": cmd_maps, "which": cmd_which, "ents": cmd_ents, "liquids": cmd_liquids}[a.cmd](a)
 
 
 if __name__ == "__main__":
