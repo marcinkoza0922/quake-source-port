@@ -880,6 +880,9 @@ sk Shader obrazovky
 @ Screen Shake
 sk Otrasy obrazovky
 
+@ Screen Droplets
+sk Kvapky na obrazovke
+
 @ Seconds a center-screen message stays up
 sk Ako dlho ostane správa v strede obrazovky (s)
 
@@ -1044,6 +1047,9 @@ sk Otočiť vpravo
 
 @ Underwater FX
 sk Efekty pod vodou
+
+@ Underwater Refraction
+sk Podvodný lom svetla
 
 @ Use Bullet Time Meter
 sk Použiť ukazovateľ bullet time
@@ -1885,6 +1891,12 @@ sk V každom portáli vykreslí pohľad z prepojeného portálu; vypnuté zobraz
 
 @ Droplets spray up when things enter or leave water, slime or lava
 sk Kvapky vystreknú, keď niečo vojde do vody, slizu alebo lávy alebo z nich vyjde
+
+@ Drops bead and run down the screen after you surface from water or slime
+sk Po vynorení z vody alebo slizu sa na obrazovke tvoria kvapky a stekajú dole
+
+@ The view ripples and bends while your head is under water, slime or lava
+sk Obraz sa vlní a krúti, kým máte hlavu pod vodou, slizom alebo lávou
 
 @ Emulates the original 8-bit palette of software rendering
 sk Napodobní pôvodnú 8-bitovú paletu softvérového vykresľovania

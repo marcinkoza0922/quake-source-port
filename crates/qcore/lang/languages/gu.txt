@@ -880,6 +880,9 @@ gu સ્ક્રીન શેડર
 @ Screen Shake
 gu સ્ક્રીન ધ્રુજારી
 
+@ Screen Droplets
+gu સ્ક્રીન પર ટીપાં
+
 @ Seconds a center-screen message stays up
 gu સ્ક્રીનની મધ્યનો સંદેશ કેટલી સેકન્ડ રહે છે
 
@@ -1044,6 +1047,9 @@ gu જમણે વળો
 
 @ Underwater FX
 gu પાણીની અંદરની FX
+
+@ Underwater Refraction
+gu પાણીની અંદર વક્રીભવન
 
 @ Use Bullet Time Meter
 gu બુલેટ ટાઇમ મીટર વાપરો
@@ -1885,6 +1891,12 @@ gu દરેક પોર્ટલની અંદર જોડાયેલા �
 
 @ Droplets spray up when things enter or leave water, slime or lava
 gu પાણી, સ્લાઇમ કે લાવામાં કંઈ પ્રવેશે કે બહાર નીકળે ત્યારે ટીપાં ઊડે છે
+
+@ Drops bead and run down the screen after you surface from water or slime
+gu પાણી કે સ્લાઇમમાંથી બહાર આવ્યા પછી સ્ક્રીન પર ટીપાં બાઝે છે અને નીચે સરકે છે
+
+@ The view ripples and bends while your head is under water, slime or lava
+gu માથું પાણી, સ્લાઇમ કે લાવા નીચે હોય ત્યારે દૃશ્ય લહેરાય છે અને વળે છે
 
 @ Emulates the original 8-bit palette of software rendering
 gu સૉફ્ટવેર રેન્ડરિંગની મૂળ 8-બિટ પૅલેટનું અનુકરણ કરે છે

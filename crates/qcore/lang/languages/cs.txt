@@ -880,6 +880,9 @@ cs Shader obrazovky
 @ Screen Shake
 cs Otřesy obrazovky
 
+@ Screen Droplets
+cs Kapky na obrazovce
+
 @ Seconds a center-screen message stays up
 cs Kolik sekund zůstane zpráva uprostřed obrazovky
 
@@ -1044,6 +1047,9 @@ cs Otočit vpravo
 
 @ Underwater FX
 cs Efekty pod vodou
+
+@ Underwater Refraction
+cs Podvodní lom světla
 
 @ Use Bullet Time Meter
 cs Použít ukazatel bullet time
@@ -1885,6 +1891,12 @@ cs V každém portálu zobrazí pohled z propojeného portálu; vypnuto zobrazí
 
 @ Droplets spray up when things enter or leave water, slime or lava
 cs Kapky vystříknou, když něco vstoupí do vody, slizu nebo lávy nebo z nich vystoupí
+
+@ Drops bead and run down the screen after you surface from water or slime
+cs Po vynoření z vody nebo slizu se na obrazovce tvoří kapky a stékají dolů
+
+@ The view ripples and bends while your head is under water, slime or lava
+cs Obraz se vlní a kroutí, dokud máte hlavu pod vodou, slizem nebo lávou
 
 @ Emulates the original 8-bit palette of software rendering
 cs Napodobí původní 8bitovou paletu softwarového vykreslování

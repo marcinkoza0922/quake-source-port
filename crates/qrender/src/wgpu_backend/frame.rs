@@ -298,6 +298,8 @@ impl Renderer {
                 let pv = PostView {
                     blend: v.blend,
                     warp: v.warp,
+                    water: v.water,
+                    view_px: v.out,
                     uv: [x as f32 / tw as f32, y as f32 / th as f32, (x + sw) as f32 / tw as f32, (y + sh) as f32 / th as f32],
                     mb: [mb * sw as f32 / tw as f32, mb * sh as f32 / th as f32],
                     speed_blur: v.speed_blur,

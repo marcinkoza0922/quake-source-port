@@ -144,7 +144,14 @@ pub(super) struct PostPush {
     pub(super) bloom_tex: u32,
     pub(super) bloom: f32,
     pub(super) bloom_uv: [f32; 2],
+    /// Enhanced Water screen effects (`WaterScreen::packed`) and droplet age
+    /// (negative = none); the clock is `g_time`.
+    pub(super) water: u32,
+    pub(super) drops: f32,
 }
+
+// The graphics layout has a 128-byte push constant range.
+const _: () = assert!(std::mem::size_of::<PostPush>() == 128);
 
 #[repr(C)]
 #[derive(Clone, Copy)]
@@ -290,6 +297,8 @@ pub(super) struct ViewPass {
     pub(super) speed_blur: f32,
     /// Screen ripple clock (WaterWarp::Screen); negative = off.
     pub(super) warp: f32,
+    /// Enhanced Water screen effects.
+    pub(super) water: crate::WaterScreen,
     /// Scene target region drawn (top-left), in target pixels.
     pub(super) scene_w: u32,
     pub(super) scene_h: u32,

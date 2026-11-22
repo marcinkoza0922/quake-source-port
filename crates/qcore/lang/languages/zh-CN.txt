@@ -880,6 +880,9 @@ zh-CN 屏幕着色器
 @ Screen Shake
 zh-CN 屏幕震动
 
+@ Screen Droplets
+zh-CN 屏幕水滴
+
 @ Seconds a center-screen message stays up
 zh-CN 屏幕中央消息的显示秒数
 
@@ -1044,6 +1047,9 @@ zh-CN 向右转
 
 @ Underwater FX
 zh-CN 水下特效
+
+@ Underwater Refraction
+zh-CN 水下折射
 
 @ Use Bullet Time Meter
 zh-CN 使用子弹时间计量条
@@ -1885,6 +1891,12 @@ zh-CN 在每个传送门内绘制相连传送门另一侧的画面；关闭则�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 zh-CN 物体进出水、毒液或岩浆时会溅起水花
+
+@ Drops bead and run down the screen after you surface from water or slime
+zh-CN 离开水或毒液后，屏幕上会挂满水滴并向下流淌
+
+@ The view ripples and bends while your head is under water, slime or lava
+zh-CN 头部处于水、毒液或岩浆中时，画面会荡漾扭曲
 
 @ Emulates the original 8-bit palette of software rendering
 zh-CN 模拟软件渲染的原版 8 位调色板

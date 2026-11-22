@@ -880,6 +880,9 @@ eo Ekrana ombrigilo
 @ Screen Shake
 eo Ekrana skuado
 
+@ Screen Droplets
+eo Gutoj sur la ekrano
+
 @ Seconds a center-screen message stays up
 eo Sekundoj dum kiuj centra mesaĝo restas videbla
 
@@ -1044,6 +1047,9 @@ eo Turniĝi dekstren
 
 @ Underwater FX
 eo Subakvaj efektoj
+
+@ Underwater Refraction
+eo Subakva refrakto
 
 @ Use Bullet Time Meter
 eo Uzi kuglotempan mezurilon
@@ -1885,6 +1891,12 @@ eo Montri en ĉiu portalo la vidon el la ligita portalo; malŝaltite montras pla
 
 @ Droplets spray up when things enter or leave water, slime or lava
 eo Gutoj ŝprucas supren kiam io eniras aŭ eliras akvon, ŝlimon aŭ lafon
+
+@ Drops bead and run down the screen after you surface from water or slime
+eo Gutoj formiĝas kaj fluas laŭ la ekrano post kiam vi eliras el akvo aŭ ŝlimo
+
+@ The view ripples and bends while your head is under water, slime or lava
+eo La vido ondas kaj fleksiĝas dum via kapo estas sub akvo, ŝlimo aŭ lafo
 
 @ Emulates the original 8-bit palette of software rendering
 eo Imitas la originalan 8-bitan paletron de programara bildigo

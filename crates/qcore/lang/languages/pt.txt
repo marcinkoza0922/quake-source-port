@@ -880,6 +880,9 @@ pt Shader de ecrã
 @ Screen Shake
 pt Tremor do ecrã
 
+@ Screen Droplets
+pt Gotas no ecrã
+
 @ Seconds a center-screen message stays up
 pt Segundos que uma mensagem fica no centro do ecrã
 
@@ -1044,6 +1047,9 @@ pt Virar à direita
 
 @ Underwater FX
 pt Efeitos subaquáticos
+
+@ Underwater Refraction
+pt Refração subaquática
 
 @ Use Bullet Time Meter
 pt Usar medidor de bullet time
@@ -1885,6 +1891,12 @@ pt Mostra em cada portal a vista a partir do portal ligado; desligado mostra dis
 
 @ Droplets spray up when things enter or leave water, slime or lava
 pt Saltam gotas quando algo entra ou sai da água, do lodo ou da lava
+
+@ Drops bead and run down the screen after you surface from water or slime
+pt Formam-se gotas que escorrem pelo ecrã depois de sair da água ou do lodo
+
+@ The view ripples and bends while your head is under water, slime or lava
+pt A vista ondula e distorce-se enquanto a cabeça está submersa em água, lodo ou lava
 
 @ Emulates the original 8-bit palette of software rendering
 pt Emula a paleta original de 8 bits da renderização por software

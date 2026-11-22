@@ -880,6 +880,9 @@ fil Shader ng Screen
 @ Screen Shake
 fil Yanig ng Screen
 
+@ Screen Droplets
+fil Mga Patak sa Screen
+
 @ Seconds a center-screen message stays up
 fil Ilang segundo nakikita ang mensahe sa gitna ng screen
 
@@ -1044,6 +1047,9 @@ fil Lumiko Pakanan
 
 @ Underwater FX
 fil FX sa Ilalim ng Tubig
+
+@ Underwater Refraction
+fil Repraksyon sa Ilalim ng Tubig
 
 @ Use Bullet Time Meter
 fil Gamitin ang Bullet Time Meter
@@ -1885,6 +1891,12 @@ fil Ipakita sa loob ng bawat portal ang tanaw mula sa kaugnay na portal; kapag n
 
 @ Droplets spray up when things enter or leave water, slime or lava
 fil Tumitilamsik ang patak kapag may pumapasok o lumalabas sa tubig, slime o lava
+
+@ Drops bead and run down the screen after you surface from water or slime
+fil Namumuo at dumadaloy pababa ang mga patak sa screen pagkaahon mo mula sa tubig o slime
+
+@ The view ripples and bends while your head is under water, slime or lava
+fil Umaalon at bumabaluktot ang tanaw habang nasa ilalim ng tubig, slime o lava ang ulo mo
 
 @ Emulates the original 8-bit palette of software rendering
 fil Ginagaya ang orihinal na 8-bit na palette ng software rendering

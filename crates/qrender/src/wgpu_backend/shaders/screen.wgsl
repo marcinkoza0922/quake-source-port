@@ -5,6 +5,8 @@ struct DrawU {
     params: vec4<f32>,
     extra: vec4<f32>,
     ix: vec4<u32>,
+    // post pass only: Enhanced Water screen effects (post.rs post_draw)
+    water: vec4<f32>,
 };
 @group(0) @binding(0) var<uniform> du: DrawU;
 @group(1) @binding(0) var t0: texture_2d<f32>;
@@ -91,6 +93,10 @@ fn whitenoise01(p: vec2<f32>) -> f32 {
 }
 fn scene_at(uv: vec2<f32>) -> vec3<f32> {
     return textureSampleLevel(t0, s0, uv, 0.0).rgb;
+}
+// view uv (clamped to the view) -> scene colour
+fn scene_q(q: vec2<f32>) -> vec3<f32> {
+    return scene_at(mix(du.extra.xy, du.extra.zw, clamp(q, vec2<f32>(0.0), vec2<f32>(1.0))));
 }
 // t1: per-object motion (view uv per frame), scaled to target uv
 fn vel_at(uv: vec2<f32>) -> vec2<f32> {
@@ -230,8 +236,36 @@ fn goggles(c: vec3<f32>, uv: vec2<f32>, q: vec2<f32>, frag: vec2<f32>) -> vec3<f
     if (du.params.z >= 0.0) {
         q = water_warp(q, du.params.z, du.params.w);
     }
+    // Enhanced Water: refraction under liquids, droplets after (water_screen.wgsl)
+    let wbits = bitcast<u32>(du.water.y);
+    let aspect = du.water.z;
+    let uw = wbits & 3u;
+    let dk = (wbits >> 2u) & 3u;
+    let high = (wbits & 16u) != 0u;
+    var ca = vec2<f32>(0.0);
+    if (uw != 0u) {
+        let a = ws_amp(uw, aspect);
+        let d = ws_wave(q, du.model[2].z, uw, aspect);
+        q = (q + d) * (1.0 - 2.0 * a) + a;
+        if (high) { ca = d * 0.45 + (q - 0.5) * 0.004; }
+    }
+    var wd = WsDrop(vec2<f32>(0.0), 0.0, 0.0, 0.0);
+    if (dk != 0u && du.water.x >= 0.0) {
+        wd = ws_droplets(i.q, du.water.x, wbits >> 8u, high, aspect, du.water.w);
+        q += wd.off * vec2<f32>(1.0 / aspect, 1.0) * wd.m;
+    }
+    q = clamp(q, vec2<f32>(0.0), vec2<f32>(1.0));
     let uv = mix(du.extra.xy, du.extra.zw, q);
     var c = scene_at(uv);
+    if (any(ca != vec2<f32>(0.0))) {
+        c.r = scene_q(q + ca).r;
+        c.b = scene_q(q - ca).b;
+    }
+    if (wd.m > 0.0 && high) {
+        // drops sit out of focus: soften what they show
+        let bl = vec2<f32>(1.5 / aspect, 1.5) * du.water.w;
+        c = (c * 2.0 + scene_q(q + bl) + scene_q(q - bl) + scene_q(q + vec2<f32>(bl.x, -bl.y)) + scene_q(q - vec2<f32>(bl.x, -bl.y))) / 6.0;
+    }
     if (du.model[0].x > 0.0) {
         c = motion_blur(c, uv, i.clip.xy);
     }
@@ -242,6 +276,14 @@ fn goggles(c: vec3<f32>, uv: vec2<f32>, q: vec2<f32>, frag: vec2<f32>) -> vec3<f
     // added before palettizing and gamma, like the Vulkan post pass
     if (du.model[2].w > 0.0) {
         c += textureSampleLevel(bloom_t, bloom_s, mix(du.model[3].xy, du.model[3].zw, q), 0.0).rgb * du.model[2].w;
+    }
+    if (uw != 0u && uw != 3u) {
+        // murky edges under water and slime
+        let v = (i.q - 0.5) * vec2<f32>(aspect, 1.0);
+        c *= 1.0 - 0.22 * smoothstep(0.35, 1.0, length(v));
+    }
+    if (wd.m > 0.0) {
+        c = ws_shade(c, wd, dk);
     }
     let mode = du.ix.x;
     if (mode != 0u) {

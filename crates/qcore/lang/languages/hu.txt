@@ -880,6 +880,9 @@ hu Képernyő-shader
 @ Screen Shake
 hu Képernyőrázkódás
 
+@ Screen Droplets
+hu Cseppek a képernyőn
+
 @ Seconds a center-screen message stays up
 hu Ennyi másodpercig látszik egy középső üzenet
 
@@ -1044,6 +1047,9 @@ hu Fordulás jobbra
 
 @ Underwater FX
 hu Víz alatti effektek
+
+@ Underwater Refraction
+hu Víz alatti fénytörés
 
 @ Use Bullet Time Meter
 hu Bullet time mérő használata
@@ -1885,6 +1891,12 @@ hu Minden portálban a hozzá kapcsolt portálból látható kép megjelenítés
 
 @ Droplets spray up when things enter or leave water, slime or lava
 hu Cseppek fröccsennek, amikor valami vízbe, nyálkába vagy lávába kerül vagy kilép belőle
+
+@ Drops bead and run down the screen after you surface from water or slime
+hu Miután kiemelkedsz a vízből vagy nyálkából, cseppek gyűlnek a képernyőn és lefolynak
+
+@ The view ripples and bends while your head is under water, slime or lava
+hu A kép hullámzik és torzul, amíg a fejed víz, nyálka vagy láva alatt van
 
 @ Emulates the original 8-bit palette of software rendering
 hu A szoftveres renderelés eredeti 8 bites palettáját utánozza

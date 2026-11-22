@@ -880,6 +880,9 @@ fi Ruudun varjostin
 @ Screen Shake
 fi Ruudun tärinä
 
+@ Screen Droplets
+fi Pisarat ruudulla
+
 @ Seconds a center-screen message stays up
 fi Montako sekuntia keskiviesti pysyy näkyvissä
 
@@ -1044,6 +1047,9 @@ fi Käänny oikealle
 
 @ Underwater FX
 fi Vedenalaiset tehosteet
+
+@ Underwater Refraction
+fi Vedenalainen taittuminen
 
 @ Use Bullet Time Meter
 fi Käytä bullet time -mittaria
@@ -1885,6 +1891,12 @@ fi Näytä jokaisessa portaalissa näkymä yhdistetystä portaalista; pois näyt
 
 @ Droplets spray up when things enter or leave water, slime or lava
 fi Pisarat roiskuvat, kun jokin menee veteen, limaan tai laavaan tai nousee sieltä
+
+@ Drops bead and run down the screen after you surface from water or slime
+fi Kun nouset vedestä tai limasta, ruudulle kertyy pisaroita, jotka valuvat alas
+
+@ The view ripples and bends while your head is under water, slime or lava
+fi Näkymä aaltoilee ja vääristyy, kun pääsi on veden, liman tai laavan alla
 
 @ Emulates the original 8-bit palette of software rendering
 fi Jäljittelee ohjelmistorenderöinnin alkuperäistä 8-bittistä palettia

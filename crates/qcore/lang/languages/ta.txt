@@ -880,6 +880,9 @@ ta திரை ஷேடர்
 @ Screen Shake
 ta திரை அதிர்வு
 
+@ Screen Droplets
+ta திரையில் துளிகள்
+
 @ Seconds a center-screen message stays up
 ta மையச் செய்தி திரையில் இருக்கும் வினாடிகள்
 
@@ -1044,6 +1047,9 @@ ta வலப்புறம் திரும்பு
 
 @ Underwater FX
 ta நீருக்கடி FX
+
+@ Underwater Refraction
+ta நீருக்கடி ஒளிவிலகல்
 
 @ Use Bullet Time Meter
 ta புல்லட் டைம் அளவியைப் பயன்படுத்து
@@ -1885,6 +1891,12 @@ ta ஒவ்வொரு போர்டலுக்குள்ளும் இ
 
 @ Droplets spray up when things enter or leave water, slime or lava
 ta பொருட்கள் நீர், நச்சுச் சேறு அல்லது எரிமலைக் குழம்பில் நுழையும்போதோ வெளியேறும்போதோ துளிகள் தெறிக்கும்
+
+@ Drops bead and run down the screen after you surface from water or slime
+ta நீர் அல்லது நச்சுச் சேற்றிலிருந்து வெளிவந்த பிறகு திரையில் துளிகள் திரண்டு கீழே வழிகின்றன
+
+@ The view ripples and bends while your head is under water, slime or lava
+ta தலை நீர், நச்சுச் சேறு அல்லது எரிமலைக் குழம்பின் கீழ் இருக்கும்போது காட்சி அலைந்து வளைகிறது
 
 @ Emulates the original 8-bit palette of software rendering
 ta மென்பொருள் ரெண்டரிங்கின் அசல் 8-பிட் வண்ணத் தட்டைப் பின்பற்றும்

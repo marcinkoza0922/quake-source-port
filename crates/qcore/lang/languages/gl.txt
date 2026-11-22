@@ -880,6 +880,9 @@ gl Sombreador de pantalla
 @ Screen Shake
 gl Tremor de pantalla
 
+@ Screen Droplets
+gl Pingas na pantalla
+
 @ Seconds a center-screen message stays up
 gl Segundos que permanece unha mensaxe no centro da pantalla
 
@@ -1044,6 +1047,9 @@ gl Xirar á dereita
 
 @ Underwater FX
 gl Efectos baixo a auga
+
+@ Underwater Refraction
+gl Refracción baixo a auga
 
 @ Use Bullet Time Meter
 gl Usar o medidor de tempo bala
@@ -1885,6 +1891,12 @@ gl Mostra en cada portal a vista desde o portal enlazado; desactivado mostra dis
 
 @ Droplets spray up when things enter or leave water, slime or lava
 gl Saltan pingas cando algo entra ou sae da auga, o limo ou a lava
+
+@ Drops bead and run down the screen after you surface from water or slime
+gl Fórmanse pingas que esvaran pola pantalla ao saír da auga ou do limo
+
+@ The view ripples and bends while your head is under water, slime or lava
+gl A vista ondula e defórmase mentres tes a cabeza baixo a auga, o limo ou a lava
 
 @ Emulates the original 8-bit palette of software rendering
 gl Emula a paleta de 8 bits orixinal do renderizado por software

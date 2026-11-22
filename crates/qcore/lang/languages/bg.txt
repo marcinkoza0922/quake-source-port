@@ -880,6 +880,9 @@ bg Екранен шейдър
 @ Screen Shake
 bg Разклащане на екрана
 
+@ Screen Droplets
+bg Капки по екрана
+
 @ Seconds a center-screen message stays up
 bg Секунди, през които съобщението в центъра остава
 
@@ -1044,6 +1047,9 @@ bg Завий надясно
 
 @ Underwater FX
 bg Подводни ефекти
+
+@ Underwater Refraction
+bg Подводно пречупване
 
 @ Use Bullet Time Meter
 bg Скала за забавено време
@@ -1885,6 +1891,12 @@ bg Показва в портала изгледа от свързания по�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 bg Капки пръскат, когато нещо влезе във или излезе от вода, слуз или лава
+
+@ Drops bead and run down the screen after you surface from water or slime
+bg Капки се събират и се стичат по екрана, след като излезете от вода или слуз
+
+@ The view ripples and bends while your head is under water, slime or lava
+bg Изображението се вълнува и изкривява, докато главата ви е под вода, слуз или лава
 
 @ Emulates the original 8-bit palette of software rendering
 bg Имитира оригиналната 8-битова палитра на софтуерното рендиране

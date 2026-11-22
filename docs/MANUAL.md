@@ -200,7 +200,7 @@ with any mod and online.
   airborne droplets that splat where they land.
 - **Impact effects**: shotgun bullet decals, nails that embed in wood and
   enemies, explosion scorch marks.
-- **Enhanced water**: translucency, ripples, splashes and caustics.
+- **Enhanced water**: translucency, ripples, splashes, caustics, underwater refraction and droplets on the screen after surfacing.
 - **See-through teleporters** that show their destination with parallax.
 - Ambient occlusion, per-object and speed motion blur, soft particles.
 - **Screen shaders**: RetroArch `.slangp` presets (CRT and others).

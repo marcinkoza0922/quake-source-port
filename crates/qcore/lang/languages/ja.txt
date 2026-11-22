@@ -880,6 +880,9 @@ ja 画面シェーダー
 @ Screen Shake
 ja 画面の揺れ
 
+@ Screen Droplets
+ja 画面の水滴
+
 @ Seconds a center-screen message stays up
 ja 中央メッセージが表示される秒数
 
@@ -1044,6 +1047,9 @@ ja 右旋回
 
 @ Underwater FX
 ja 水中エフェクト
+
+@ Underwater Refraction
+ja 水中の屈折
 
 @ Use Bullet Time Meter
 ja バレットタイムゲージを使用
@@ -1885,6 +1891,12 @@ ja 各ポータルの中に、つながったポータルからの景色を描�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 ja 水、スライム、溶岩に出入りすると水しぶきが上がります
+
+@ Drops bead and run down the screen after you surface from water or slime
+ja 水やスライムから出た後、画面に水滴が付いて流れ落ちます
+
+@ The view ripples and bends while your head is under water, slime or lava
+ja 頭が水、スライム、溶岩の中にある間、視界が揺らいで歪みます
 
 @ Emulates the original 8-bit palette of software rendering
 ja ソフトウェアレンダリングのオリジナル8ビットパレットを再現します

@@ -880,6 +880,9 @@ sr Шејдер екрана
 @ Screen Shake
 sr Подрхтавање екрана
 
+@ Screen Droplets
+sr Капљице на екрану
+
 @ Seconds a center-screen message stays up
 sr Колико секунди порука у средини екрана остаје видљива
 
@@ -1044,6 +1047,9 @@ sr Окрет удесно
 
 @ Underwater FX
 sr Подводни ефекти
+
+@ Underwater Refraction
+sr Подводно преламање
 
 @ Use Bullet Time Meter
 sr Користи мерач bullet time-а
@@ -1885,6 +1891,12 @@ sr У сваком порталу приказује поглед из пове�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 sr Капљице прскају кад нешто уђе у воду, слуз или лаву или изађе из њих
+
+@ Drops bead and run down the screen after you surface from water or slime
+sr Капљице се скупљају и цуре низ екран кад изроните из воде или слузи
+
+@ The view ripples and bends while your head is under water, slime or lava
+sr Слика се таласа и криви док вам је глава под водом, слузи или лавом
 
 @ Emulates the original 8-bit palette of software rendering
 sr Опонаша оригиналну 8-битну палету софтверског рендеровања

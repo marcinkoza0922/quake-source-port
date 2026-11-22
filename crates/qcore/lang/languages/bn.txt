@@ -880,6 +880,9 @@ bn স্ক্রিন শেডার
 @ Screen Shake
 bn পর্দা কাঁপানো
 
+@ Screen Droplets
+bn পর্দায় ফোঁটা
+
 @ Seconds a center-screen message stays up
 bn পর্দার মাঝের বার্তা কত সেকেন্ড থাকে
 
@@ -1044,6 +1047,9 @@ bn ডানে ঘুরুন
 
 @ Underwater FX
 bn জলের নিচের FX
+
+@ Underwater Refraction
+bn জলের নিচে প্রতিসরণ
 
 @ Use Bullet Time Meter
 bn বুলেট টাইম মিটার ব্যবহার
@@ -1885,6 +1891,12 @@ bn প্রতিটি পোর্টালের ভিতরে সংয�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 bn কিছু জল, স্লাইম বা লাভায় ঢুকলে বা বের হলে ফোঁটা ছিটকে ওঠে
+
+@ Drops bead and run down the screen after you surface from water or slime
+bn জল বা স্লাইম থেকে উঠে এলে পর্দায় ফোঁটা জমে গড়িয়ে পড়ে
+
+@ The view ripples and bends while your head is under water, slime or lava
+bn মাথা জল, স্লাইম বা লাভার নিচে থাকলে দৃশ্য ঢেউ খেলে ও বেঁকে যায়
 
 @ Emulates the original 8-bit palette of software rendering
 bn সফটওয়্যার রেন্ডারিংয়ের মূল 8-বিট প্যালেট অনুকরণ করে

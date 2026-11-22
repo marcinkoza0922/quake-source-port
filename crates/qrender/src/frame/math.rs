@@ -213,6 +213,7 @@ mod tests {
                 reserve_bottom: 0,
                 speed_blur: 0.0,
                 waterwarp: crate::WaterWarp::None,
+                water_screen: Default::default(),
             },
             1280,
             720,

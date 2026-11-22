@@ -54,6 +54,7 @@ mod console;
 mod language;
 mod input;
 mod frame;
+mod underwater;
 mod prof;
 mod goggles;
 mod presets;

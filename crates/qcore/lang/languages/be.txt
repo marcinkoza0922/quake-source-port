@@ -880,6 +880,9 @@ be Экранны шэйдар
 @ Screen Shake
 be Трасянне экрана
 
+@ Screen Droplets
+be Кроплі на экране
+
 @ Seconds a center-screen message stays up
 be Колькі секунд трымаецца паведамленне ў цэнтры экрана
 
@@ -1044,6 +1047,9 @@ be Паварот направа
 
 @ Underwater FX
 be Падводныя эфекты
+
+@ Underwater Refraction
+be Падводнае праламленне
 
 @ Use Bullet Time Meter
 be Шкала запавольвання
@@ -1885,6 +1891,12 @@ be Паказвае ў кожным партале выгляд са звяза�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 be Пырскі ўзлятаюць, калі нешта трапляе ў ваду, слізь або лаву ці выходзіць з іх
+
+@ Drops bead and run down the screen after you surface from water or slime
+be Пасля выхаду з вады ці слізі па экране сцякаюць кроплі
+
+@ The view ripples and bends while your head is under water, slime or lava
+be Выява калышацца і скажаецца, пакуль галава пад вадой, у слізі ці лаве
 
 @ Emulates the original 8-bit palette of software rendering
 be Імітуе арыгінальную 8-бітную палітру праграмнага рэндэрынгу

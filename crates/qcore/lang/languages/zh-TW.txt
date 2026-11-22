@@ -880,6 +880,9 @@ zh-TW 螢幕著色器
 @ Screen Shake
 zh-TW 螢幕震動
 
+@ Screen Droplets
+zh-TW 畫面水滴
+
 @ Seconds a center-screen message stays up
 zh-TW 畫面中央訊息的停留秒數
 
@@ -1044,6 +1047,9 @@ zh-TW 向右轉
 
 @ Underwater FX
 zh-TW 水下特效
+
+@ Underwater Refraction
+zh-TW 水下折射
 
 @ Use Bullet Time Meter
 zh-TW 使用子彈時間計量條
@@ -1885,6 +1891,12 @@ zh-TW 在每個傳送門內繪製連結傳送門另一側的畫面；關閉則�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 zh-TW 物體進出水、黏液或岩漿時會濺起水滴
+
+@ Drops bead and run down the screen after you surface from water or slime
+zh-TW 離開水或黏液後，畫面上會凝結水滴並向下流淌
+
+@ The view ripples and bends while your head is under water, slime or lava
+zh-TW 頭部位於水、黏液或岩漿中時，畫面會蕩漾扭曲
 
 @ Emulates the original 8-bit palette of software rendering
 zh-TW 模擬軟體渲染原本的8位元調色盤

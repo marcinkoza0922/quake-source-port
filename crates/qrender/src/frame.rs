@@ -776,6 +776,7 @@ impl Renderer {
                 Some(crate::WaterWarp::Screen(t)) => t.max(0.0) % 1000.0,
                 _ => -1.0,
             },
+            water: view_in.map(|v| v.water_screen).unwrap_or_default(),
             view,
             rect,
             blend,
@@ -1958,6 +1959,8 @@ impl Renderer {
                 bloom_tex: bloom.as_ref().map_or(0, |b| b.slot),
                 bloom: bloom.as_ref().map_or(0.0, |b| b.amount),
                 bloom_uv: bloom.as_ref().map_or([0.0; 2], |b| b.uv),
+                water: pass.water.packed(st.water_quality > 0),
+                drops: pass.water.drops_age(),
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             if pi + 1 < npasses {

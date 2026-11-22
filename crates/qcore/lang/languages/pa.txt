@@ -880,6 +880,9 @@ pa ਸਕ੍ਰੀਨ ਸ਼ੇਡਰ
 @ Screen Shake
 pa ਸਕ੍ਰੀਨ ਹਿੱਲਣਾ
 
+@ Screen Droplets
+pa ਸਕ੍ਰੀਨ 'ਤੇ ਬੂੰਦਾਂ
+
 @ Seconds a center-screen message stays up
 pa ਵਿਚਕਾਰਲਾ ਸੁਨੇਹਾ ਕਿੰਨੇ ਸਕਿੰਟ ਦਿਸਦਾ ਹੈ
 
@@ -1044,6 +1047,9 @@ pa ਸੱਜੇ ਮੁੜੋ
 
 @ Underwater FX
 pa ਪਾਣੀ ਹੇਠਲੇ FX
+
+@ Underwater Refraction
+pa ਪਾਣੀ ਹੇਠ ਅਪਵਰਤਨ
 
 @ Use Bullet Time Meter
 pa ਬੁਲੇਟ ਟਾਈਮ ਮੀਟਰ ਵਰਤੋ
@@ -1885,6 +1891,12 @@ pa ਹਰ ਪੋਰਟਲ ਅੰਦਰ ਜੁੜੇ ਪੋਰਟਲ ਤੋਂ �
 
 @ Droplets spray up when things enter or leave water, slime or lava
 pa ਜਦੋਂ ਚੀਜ਼ਾਂ ਪਾਣੀ, ਚਿੱਕੜ ਜਾਂ ਲਾਵੇ ਵਿੱਚ ਵੜਦੀਆਂ ਜਾਂ ਨਿਕਲਦੀਆਂ ਹਨ ਤਾਂ ਬੂੰਦਾਂ ਉਛਲਦੀਆਂ ਹਨ
+
+@ Drops bead and run down the screen after you surface from water or slime
+pa ਪਾਣੀ ਜਾਂ ਚਿੱਕੜ ਵਿੱਚੋਂ ਨਿਕਲਣ ਤੋਂ ਬਾਅਦ ਸਕ੍ਰੀਨ 'ਤੇ ਬੂੰਦਾਂ ਜੰਮਦੀਆਂ ਅਤੇ ਹੇਠਾਂ ਵਗਦੀਆਂ ਹਨ
+
+@ The view ripples and bends while your head is under water, slime or lava
+pa ਜਦੋਂ ਤੱਕ ਸਿਰ ਪਾਣੀ, ਚਿੱਕੜ ਜਾਂ ਲਾਵੇ ਹੇਠ ਹੈ, ਨਜ਼ਾਰਾ ਲਹਿਰਾਉਂਦਾ ਅਤੇ ਮੁੜਦਾ ਹੈ
 
 @ Emulates the original 8-bit palette of software rendering
 pa ਸੌਫ਼ਟਵੇਅਰ ਰੈਂਡਰਿੰਗ ਦੇ ਅਸਲ 8-ਬਿੱਟ ਪੈਲੇਟ ਦੀ ਨਕਲ ਕਰਦਾ ਹੈ

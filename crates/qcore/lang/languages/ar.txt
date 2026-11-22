@@ -880,6 +880,9 @@ ar مرشّح الشاشة
 @ Screen Shake
 ar اهتزاز الشاشة
 
+@ Screen Droplets
+ar قطرات على الشاشة
+
 @ Seconds a center-screen message stays up
 ar عدد ثواني بقاء رسالة وسط الشاشة
 
@@ -1044,6 +1047,9 @@ ar انعطاف لليمين
 
 @ Underwater FX
 ar مؤثرات تحت الماء
+
+@ Underwater Refraction
+ar انكسار تحت الماء
 
 @ Use Bullet Time Meter
 ar استخدام عداد الزمن البطيء
@@ -1885,6 +1891,12 @@ ar ارسم داخل كل بوابة المشهد من البوابة المرت
 
 @ Droplets spray up when things enter or leave water, slime or lava
 ar تتطاير القطرات عند دخول الأشياء الماء أو الوحل السام أو الحمم أو خروجها منها
+
+@ Drops bead and run down the screen after you surface from water or slime
+ar تتكوّن قطرات وتنساب على الشاشة بعد خروجك من الماء أو الوحل السام
+
+@ The view ripples and bends while your head is under water, slime or lava
+ar يتموّج المشهد وينحني ما دام رأسك تحت الماء أو الوحل السام أو الحمم
 
 @ Emulates the original 8-bit palette of software rendering
 ar يحاكي لوحة ألوان 8 بت الأصلية للعرض البرمجي

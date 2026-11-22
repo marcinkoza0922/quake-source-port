@@ -128,6 +128,9 @@ impl Renderer {
 pub(super) struct PostView {
     pub(super) blend: [f32; 4],
     pub(super) warp: f32,
+    /// Enhanced Water screen effects and the view's size in output pixels.
+    pub(super) water: crate::WaterScreen,
+    pub(super) view_px: [u32; 2],
     /// Scene uv rectangle (u0, v0, u1, v1).
     pub(super) uv: [f32; 4],
     /// Motion blur scale in target uv (x, y); 0 = off.
@@ -145,13 +148,18 @@ pub(super) fn post_draw(st: &Settings, v: &PostView, out: [u32; 2], render_scale
     model[4..8].copy_from_slice(&[w as f32, h as f32, crate::softemu::post_dither(st), render_scale]);
     model[8..12].copy_from_slice(&[g.intensity.clamp(0.25, 3.0), g.noise.clamp(0.0, 2.0), (time % 1000.0) as f32, v.bloom.1]);
     model[12..16].copy_from_slice(&v.bloom.0);
+    // `water` in fs_post: droplet age (< 0 none), WaterScreen::packed bits,
+    // view aspect, one view pixel in view heights
+    let [vw, vh] = v.view_px.map(|x| x.max(1) as f32);
+    let mut pad = [0.0; 32];
+    pad[..4].copy_from_slice(&[v.water.drops_age(), f32::from_bits(v.water.packed(st.water_quality > 0)), vw / vh, 1.0 / vh]);
     DrawU {
+        pad,
         model,
         color: v.blend.map(|c| c.clamp(0.0, 1.0)),
         // z: underwater warp clock (< 0 off); w: output aspect
         params: [st.gamma.clamp(0.1, 4.0), st.contrast.max(0.0), v.warp, w as f32 / h as f32],
         extra: v.uv,
         ix: [crate::softemu::post_mode(st), st.colorblind.min(3), g.mode.min(2), g.quality.min(2)],
-        ..Default::default()
     }
 }

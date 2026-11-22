@@ -2045,6 +2045,13 @@ it Tremolio dello schermo
 es Temblor de pantalla
 ru Тряска экрана
 
+@ Screen Droplets
+fr Gouttes sur l'écran
+de Tropfen auf dem Bildschirm
+it Gocce sullo schermo
+es Gotas en pantalla
+ru Капли на экране
+
 @ Seconds a center-screen message stays up
 fr Secondes d'affichage d'un message au centre de l'écran
 de Sekunden, die eine Nachricht in der Bildschirmmitte bleibt
@@ -2429,6 +2436,13 @@ de Unterwassereffekte
 it Effetti subacquei
 es Efectos bajo el agua
 ru Подводные эффекты
+
+@ Underwater Refraction
+fr Réfraction sous l'eau
+de Unterwasser-Lichtbrechung
+it Rifrazione subacquea
+es Refracción bajo el agua
+ru Подводное преломление
 
 @ Use Bullet Time Meter
 fr Utiliser la jauge de bullet time

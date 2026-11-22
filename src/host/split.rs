@@ -90,6 +90,9 @@ impl Host {
             let third = self.camera().third_person();
             self.place_camera(Some(k), &mut v, ft);
             v.waterwarp = self.waterwarp(v.origin, self.guests[k].cl.time);
+            let (eye, fx) = self.water_screen_input(v.origin);
+            let time = self.guests[k].cl.time;
+            v.water_screen = self.guests[k].view.water_screen.update(eye, time, fx);
             let g = &mut self.guests[k];
             let me = g.cl.viewentity as u32;
             for e in ents.iter_mut().filter(|e| !third && e.key != 0 && e.key & !qrender::ATTACHED_KEY == me) {

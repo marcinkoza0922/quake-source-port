@@ -880,6 +880,9 @@ pl Shader ekranu
 @ Screen Shake
 pl Wstrząsy ekranu
 
+@ Screen Droplets
+pl Krople na ekranie
+
 @ Seconds a center-screen message stays up
 pl Ile sekund komunikat na środku ekranu jest widoczny
 
@@ -1044,6 +1047,9 @@ pl Obrót w prawo
 
 @ Underwater FX
 pl Efekty pod wodą
+
+@ Underwater Refraction
+pl Załamanie światła pod wodą
 
 @ Use Bullet Time Meter
 pl Używaj paska bullet time
@@ -1885,6 +1891,12 @@ pl Pokazuje w każdym portalu widok z połączonego portalu; wyłączone pokazuj
 
 @ Droplets spray up when things enter or leave water, slime or lava
 pl Krople pryskają, gdy coś wpada do wody, szlamu lub lawy albo z nich wychodzi
+
+@ Drops bead and run down the screen after you surface from water or slime
+pl Po wynurzeniu z wody lub szlamu na ekranie zbierają się krople i spływają w dół
+
+@ The view ripples and bends while your head is under water, slime or lava
+pl Obraz faluje i wygina się, gdy głowa jest pod wodą, szlamem lub lawą
 
 @ Emulates the original 8-bit palette of software rendering
 pl Emuluje oryginalną 8-bitową paletę renderowania programowego

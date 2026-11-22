@@ -880,6 +880,9 @@ tr Ekran Gölgelendiricisi
 @ Screen Shake
 tr Ekran Sarsıntısı
 
+@ Screen Droplets
+tr Ekranda Damlacıklar
+
 @ Seconds a center-screen message stays up
 tr Ekran ortasındaki mesajın kalma süresi (saniye)
 
@@ -1044,6 +1047,9 @@ tr Sağa Dön
 
 @ Underwater FX
 tr Su Altı Efektleri
+
+@ Underwater Refraction
+tr Su Altı Kırılması
 
 @ Use Bullet Time Meter
 tr Bullet Time Göstergesi Kullan
@@ -1885,6 +1891,12 @@ tr Her portalın içinde bağlı portaldan görünen manzarayı çizer; kapalıy
 
 @ Droplets spray up when things enter or leave water, slime or lava
 tr Bir şey suya, balçığa veya lavlara girip çıktığında damlacıklar sıçrar
+
+@ Drops bead and run down the screen after you surface from water or slime
+tr Sudan veya balçıktan çıktıktan sonra ekranda damlacıklar birikip aşağı akar
+
+@ The view ripples and bends while your head is under water, slime or lava
+tr Başın su, balçık veya lav altındayken görüntü dalgalanır ve bükülür
 
 @ Emulates the original 8-bit palette of software rendering
 tr Yazılımsal görüntülemenin orijinal 8-bit paletini taklit eder

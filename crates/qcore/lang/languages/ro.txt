@@ -880,6 +880,9 @@ ro Shader de ecran
 @ Screen Shake
 ro Tremur ecran
 
+@ Screen Droplets
+ro Picături pe ecran
+
 @ Seconds a center-screen message stays up
 ro Secunde cât rămâne afișat un mesaj din centrul ecranului
 
@@ -1044,6 +1047,9 @@ ro Rotire dreapta
 
 @ Underwater FX
 ro Efecte subacvatice
+
+@ Underwater Refraction
+ro Refracție subacvatică
 
 @ Use Bullet Time Meter
 ro Folosește bara bullet time
@@ -1885,6 +1891,12 @@ ro Afișează în fiecare portal vederea din portalul legat; oprit arată discur
 
 @ Droplets spray up when things enter or leave water, slime or lava
 ro Picăturile țâșnesc când ceva intră sau iese din apă, mâl toxic sau lavă
+
+@ Drops bead and run down the screen after you surface from water or slime
+ro Picăturile se adună și se scurg pe ecran după ce ieși din apă sau mâl toxic
+
+@ The view ripples and bends while your head is under water, slime or lava
+ro Imaginea se unduiește și se curbează cât timp capul îți este sub apă, mâl toxic sau lavă
 
 @ Emulates the original 8-bit palette of software rendering
 ro Emulează paleta originală pe 8 biți a randării software

@@ -880,6 +880,9 @@ nb Skjermshader
 @ Screen Shake
 nb Skjermristing
 
+@ Screen Droplets
+nb Dråper på skjermen
+
 @ Seconds a center-screen message stays up
 nb Sekunder en melding midt på skjermen vises
 
@@ -1044,6 +1047,9 @@ nb Snu til høyre
 
 @ Underwater FX
 nb Undervannseffekter
+
+@ Underwater Refraction
+nb Lysbrytning under vann
 
 @ Use Bullet Time Meter
 nb Bruk bullet time-måler
@@ -1885,6 +1891,12 @@ nb Vis utsikten fra den koblede portalen inne i hver portal; av viser flate skiv
 
 @ Droplets spray up when things enter or leave water, slime or lava
 nb Dråper spruter opp når noe går inn i eller ut av vann, slim eller lava
+
+@ Drops bead and run down the screen after you surface from water or slime
+nb Dråper samler seg og renner nedover skjermen når du kommer opp av vann eller slim
+
+@ The view ripples and bends while your head is under water, slime or lava
+nb Bildet bølger og bøyer seg mens hodet ditt er under vann, slim eller lava
 
 @ Emulates the original 8-bit palette of software rendering
 nb Etterligner den originale 8-biters paletten fra programvaregjengivelse

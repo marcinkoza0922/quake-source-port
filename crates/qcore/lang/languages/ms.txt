@@ -880,6 +880,9 @@ ms Shader Skrin
 @ Screen Shake
 ms Gegaran Skrin
 
+@ Screen Droplets
+ms Titisan pada Skrin
+
 @ Seconds a center-screen message stays up
 ms Saat mesej di tengah skrin dipaparkan
 
@@ -1044,6 +1047,9 @@ ms Pusing Kanan
 
 @ Underwater FX
 ms Kesan Bawah Air
+
+@ Underwater Refraction
+ms Biasan Bawah Air
 
 @ Use Bullet Time Meter
 ms Guna Meter Masa Peluru
@@ -1885,6 +1891,12 @@ ms Lukis pandangan dari portal yang dipautkan di dalam setiap portal; mati menun
 
 @ Droplets spray up when things enter or leave water, slime or lava
 ms Titisan memercik apabila sesuatu memasuki atau keluar dari air, lendir atau lava
+
+@ Drops bead and run down the screen after you surface from water or slime
+ms Titisan terbentuk dan mengalir ke bawah skrin selepas anda keluar dari air atau lendir
+
+@ The view ripples and bends while your head is under water, slime or lava
+ms Pandangan beralun dan membengkok semasa kepala anda di bawah air, lendir atau lava
 
 @ Emulates the original 8-bit palette of software rendering
 ms Meniru palet 8-bit asal render perisian

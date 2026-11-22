@@ -58,6 +58,37 @@ pub struct View {
     pub speed_blur: f32,
     /// Underwater view effect (r_waterwarp).
     pub waterwarp: WaterWarp,
+    /// Enhanced Water screen effects: refraction under liquids, droplets after.
+    pub water_screen: WaterScreen,
+}
+
+/// Enhanced Water screen effects of one view (post pass).
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct WaterScreen {
+    /// r_water_refraction: liquid the eye is in (0 none, 1 water, 2 slime, 3 lava).
+    pub refract: u8,
+    /// r_water_droplets: liquid the eye last left (0 none, 1 water, 2 slime).
+    pub drops: u8,
+    /// Seconds since the eye left it.
+    pub drops_age: f32,
+    /// Varies the droplet pattern from one exit to the next.
+    pub drops_seed: u32,
+}
+
+impl WaterScreen {
+    /// Packed for the post shaders: bits 0-1 refraction liquid, 2-3 droplet
+    /// liquid, 4 high quality, 8-31 droplet seed.
+    pub fn packed(&self, high_quality: bool) -> u32 {
+        (self.refract.min(3) as u32)
+            | (self.drops.min(3) as u32) << 2
+            | (high_quality as u32) << 4
+            | (self.drops_seed & 0xff_ffff) << 8
+    }
+
+    /// Droplet age for the post shaders; negative = no droplets.
+    pub fn drops_age(&self) -> f32 {
+        if self.drops != 0 { self.drops_age.max(0.0) } else { -1.0 }
+    }
 }
 
 /// Underwater view distortion; the value is the warp clock in seconds.

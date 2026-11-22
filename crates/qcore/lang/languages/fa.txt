@@ -880,6 +880,9 @@ fa سایه‌زن صفحه
 @ Screen Shake
 fa لرزش صفحه
 
+@ Screen Droplets
+fa قطره‌ها روی صفحه
+
 @ Seconds a center-screen message stays up
 fa مدت ماندن پیام وسط صفحه به ثانیه
 
@@ -1044,6 +1047,9 @@ fa چرخش به راست
 
 @ Underwater FX
 fa جلوه‌های زیر آب
+
+@ Underwater Refraction
+fa شکست نور زیر آب
 
 @ Use Bullet Time Meter
 fa استفاده از نوار زمان آهسته
@@ -1885,6 +1891,12 @@ fa درون هر پورتال، نمای پورتال متصل را بکش؛ خ�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 fa وقتی چیزی وارد آب، لجن یا گدازه می‌شود یا از آن بیرون می‌آید قطره‌ها به بالا می‌پاشند
+
+@ Drops bead and run down the screen after you surface from water or slime
+fa پس از بیرون آمدن از آب یا لجن، قطره‌ها روی صفحه جمع می‌شوند و پایین می‌لغزند
+
+@ The view ripples and bends while your head is under water, slime or lava
+fa تا وقتی سرتان زیر آب، لجن یا گدازه است، تصویر موج برمی‌دارد و خم می‌شود
 
 @ Emulates the original 8-bit palette of software rendering
 fa پالت 8 بیتی اصلی رندر نرم‌افزاری را شبیه‌سازی می‌کند

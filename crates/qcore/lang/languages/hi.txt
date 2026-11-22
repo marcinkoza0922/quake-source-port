@@ -880,6 +880,9 @@ hi स्क्रीन शेडर
 @ Screen Shake
 hi स्क्रीन कंपन
 
+@ Screen Droplets
+hi स्क्रीन पर बूँदें
+
 @ Seconds a center-screen message stays up
 hi स्क्रीन के बीच का संदेश कितने सेकंड दिखता है
 
@@ -1044,6 +1047,9 @@ hi दाएँ मुड़ें
 
 @ Underwater FX
 hi पानी के नीचे FX
+
+@ Underwater Refraction
+hi पानी के नीचे अपवर्तन
 
 @ Use Bullet Time Meter
 hi बुलेट टाइम मीटर इस्तेमाल करें
@@ -1885,6 +1891,12 @@ hi हर पोर्टल के अंदर जुड़े पोर्ट
 
 @ Droplets spray up when things enter or leave water, slime or lava
 hi चीज़ों के पानी, स्लाइम या लावा में जाने या निकलने पर बूँदें उछलती हैं
+
+@ Drops bead and run down the screen after you surface from water or slime
+hi पानी या स्लाइम से बाहर आने के बाद स्क्रीन पर बूँदें जमती हैं और नीचे बहती हैं
+
+@ The view ripples and bends while your head is under water, slime or lava
+hi सिर पानी, स्लाइम या लावा के नीचे रहने पर दृश्य लहराता और मुड़ता है
 
 @ Emulates the original 8-bit palette of software rendering
 hi सॉफ़्टवेयर रेंडरिंग के मूल 8-बिट पैलेट की नकल करता है

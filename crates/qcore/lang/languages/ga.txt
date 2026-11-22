@@ -880,6 +880,9 @@ ga Scáthóir Scáileáin
 @ Screen Shake
 ga Croitheadh Scáileáin
 
+@ Screen Droplets
+ga Braonta ar an Scáileán
+
 @ Seconds a center-screen message stays up
 ga Soicindí a fhanann teachtaireacht i lár an scáileáin
 
@@ -1044,6 +1047,9 @@ ga Cas ar Dheis
 
 @ Underwater FX
 ga Maisíochtaí Faoi Uisce
+
+@ Underwater Refraction
+ga Athraonadh Faoi Uisce
 
 @ Use Bullet Time Meter
 ga Úsáid Méadar Am Piléir
@@ -1885,6 +1891,12 @@ ga Taispeáin an radharc as an tairseach nasctha laistigh de gach tairseach; má
 
 @ Droplets spray up when things enter or leave water, slime or lava
 ga Spréann braonta suas nuair a théann rudaí isteach in uisce, sláim nó laibhe, nó amach as
+
+@ Drops bead and run down the screen after you surface from water or slime
+ga Bailíonn braonta agus ritheann siad síos an scáileán tar éis duit teacht aníos as uisce nó sláim
+
+@ The view ripples and bends while your head is under water, slime or lava
+ga Bíonn an radharc ag luascadh agus ag lúbadh fad atá do cheann faoi uisce, sláim nó laibhe
 
 @ Emulates the original 8-bit palette of software rendering
 ga Aithrisíonn sé pailéad bunaidh 8-giotán an rindreála bogearraí

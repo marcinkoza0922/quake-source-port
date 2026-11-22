@@ -880,6 +880,9 @@ he שיידר מסך
 @ Screen Shake
 he רעידות מסך
 
+@ Screen Droplets
+he טיפות על המסך
+
 @ Seconds a center-screen message stays up
 he כמה שניות הודעה במרכז המסך נשארת
 
@@ -1044,6 +1047,9 @@ he פנייה ימינה
 
 @ Underwater FX
 he אפקטים תת-מימיים
+
+@ Underwater Refraction
+he שבירת אור מתחת למים
 
 @ Use Bullet Time Meter
 he שימוש במד בולט טיים
@@ -1885,6 +1891,12 @@ he מציג בתוך כל פורטל את המבט מהפורטל המקושר; 
 
 @ Droplets spray up when things enter or leave water, slime or lava
 he טיפות ניתזות כשמשהו נכנס למים, לרפש או ללבה או יוצא מהם
+
+@ Drops bead and run down the screen after you surface from water or slime
+he טיפות מצטברות וזולגות על המסך אחרי היציאה ממים או מרפש
+
+@ The view ripples and bends while your head is under water, slime or lava
+he התמונה מתאדווה ומתעקמת כל עוד הראש נמצא מתחת למים, רפש או לבה
 
 @ Emulates the original 8-bit palette of software rendering
 he מדמה את פלטת 8 הביט המקורית של העיבוד בתוכנה

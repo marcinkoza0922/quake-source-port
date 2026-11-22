@@ -880,6 +880,9 @@ yue 螢幕著色器
 @ Screen Shake
 yue 螢幕震動
 
+@ Screen Droplets
+yue 畫面水滴
+
 @ Seconds a center-screen message stays up
 yue 畫面中央訊息停留幾多秒
 
@@ -1044,6 +1047,9 @@ yue 向右轉
 
 @ Underwater FX
 yue 水底特效
+
+@ Underwater Refraction
+yue 水底折射
 
 @ Use Bullet Time Meter
 yue 用子彈時間計量條
@@ -1885,6 +1891,12 @@ yue 喺每個傳送門入面畫出相連傳送門另一邊嘅畫面；關閉就�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 yue 物件出入水、黏液或者岩漿時會濺起水滴
+
+@ Drops bead and run down the screen after you surface from water or slime
+yue 由水或者黏液出返嚟之後，畫面會有水滴凝住再流落嚟
+
+@ The view ripples and bends while your head is under water, slime or lava
+yue 個頭喺水、黏液或者岩漿入面嗰陣，畫面會蕩漾扭曲
 
 @ Emulates the original 8-bit palette of software rendering
 yue 模擬軟件渲染原本嘅8位元調色盤

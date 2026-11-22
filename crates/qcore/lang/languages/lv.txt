@@ -880,6 +880,9 @@ lv Ekrāna šeideris
 @ Screen Shake
 lv Ekrāna drebēšana
 
+@ Screen Droplets
+lv Pilieni uz ekrāna
+
 @ Seconds a center-screen message stays up
 lv Cik sekundes ziņa ekrāna centrā paliek redzama
 
@@ -1044,6 +1047,9 @@ lv Pagriezties pa labi
 
 @ Underwater FX
 lv Zemūdens efekti
+
+@ Underwater Refraction
+lv Zemūdens refrakcija
 
 @ Use Bullet Time Meter
 lv Lietot Bullet Time joslu
@@ -1885,6 +1891,12 @@ lv Katrā portālā rāda skatu no savienotā portāla; izslēgts rāda plakanus
 
 @ Droplets spray up when things enter or leave water, slime or lava
 lv Pilieni šļakstās, kad kaut kas iekļūst ūdenī, gļotās vai lavā vai iznāk no tiem
+
+@ Drops bead and run down the screen after you surface from water or slime
+lv Pēc iznākšanas no ūdens vai gļotām uz ekrāna sakrājas pilieni un notek lejup
+
+@ The view ripples and bends while your head is under water, slime or lava
+lv Skats viļņojas un liecas, kamēr galva ir zem ūdens, gļotām vai lavas
 
 @ Emulates the original 8-bit palette of software rendering
 lv Atdarina programmatūras renderēšanas oriģinālo 8 bitu paleti

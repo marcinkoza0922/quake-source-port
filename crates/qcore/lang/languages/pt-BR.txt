@@ -880,6 +880,9 @@ pt-BR Shader de tela
 @ Screen Shake
 pt-BR Tremor de tela
 
+@ Screen Droplets
+pt-BR Gotas na tela
+
 @ Seconds a center-screen message stays up
 pt-BR Segundos que uma mensagem fica no centro da tela
 
@@ -1044,6 +1047,9 @@ pt-BR Virar à direita
 
 @ Underwater FX
 pt-BR Efeitos debaixo d'água
+
+@ Underwater Refraction
+pt-BR Refração debaixo d'água
 
 @ Use Bullet Time Meter
 pt-BR Usar medidor de bullet time
@@ -1885,6 +1891,12 @@ pt-BR Mostra dentro de cada portal a visão a partir do portal ligado; desativad
 
 @ Droplets spray up when things enter or leave water, slime or lava
 pt-BR Gotas espirram quando algo entra ou sai da água, do limo ou da lava
+
+@ Drops bead and run down the screen after you surface from water or slime
+pt-BR Gotas se formam e escorrem pela tela depois que você sai da água ou do limo
+
+@ The view ripples and bends while your head is under water, slime or lava
+pt-BR A visão ondula e se distorce enquanto sua cabeça está submersa em água, limo ou lava
 
 @ Emulates the original 8-bit palette of software rendering
 pt-BR Emula a paleta original de 8 bits da renderização por software
