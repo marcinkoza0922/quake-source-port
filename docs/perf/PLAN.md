@@ -255,3 +255,13 @@ the comparison runs on the same inputs.
   droplets, portal recursion, teleporter windows, real-time dlights top;
   at 540p (CPU): ray-traced water, portal recursion, teleporter windows,
   SSAO top, bloom.
+- 2026-11-22: per-pass analysis of that run
+  ([BASELINE-2026-11-21.md, Hotspots by pass](BASELINE-2026-11-21.md#hotspots-by-pass-analysed-2026-11-22)).
+  SSAO top is `ao-generate` at full resolution (and the Enhanced preset
+  uses it); bloom doubles the world pass with an 8× MSAA glow attachment;
+  ray-traced water spends ~145 µs a frame on posing and BLAS/TLAS builds at
+  any resolution; destination views cost ~185 µs of world each regardless
+  of resolution (1.4 ms in all-split4); FTE particles are ~0.9 ms CPU and
+  0.5–1.3 ms GPU on AD maps. The 133 MB sepulcher demo adds 120 µs of client
+  parsing to its scenes' baseline. Revised P5 order: SSAO top, bloom,
+  destination culling, ray-traced water, FTE particles.
