@@ -185,7 +185,7 @@ the comparison runs on the same inputs.
   from a demo and live (ADDITIONS.md, A0). The rest stay live.
 - **P4. First full run**, saved as the baseline
   (`-save-baseline`). Each feature gets a budget from it (for example,
-  default tier at most X% of the 4K frame).
+  default tier at most X% of the 4K frame). Run 2026-11-21 (Results); budgets still to be agreed.
 - **P5. Optimise**, items in order of measured cost. Open items carried
   over: V1/V2/V7/V9/V10 (VANILLA.md), H5/H7/H11 (ADDITIONS.md). Vanilla
   optimisations stay pixel-identical (AE = 0).
@@ -231,3 +231,26 @@ the comparison runs on the same inputs.
   target (24 timed runs, 4 warm-ups, 8 attribution runs, ~15 s each, mostly
   startup and map load): candidates are 540p-only quick runs for CPU-only
   changes (as planned), shorter spin demos, and `-noattrib`.
+- **2026-11-21, 7f66f0f: first full run (P4 baseline)**, 3 rounds, 71 min
+  (target 30), no failures; report kept in `target/perf/baseline/`.
+  Cost over off, 540p / 4K, significant unless marked:
+  - SSAO: on +53 / +900 µs; **top (`r_ssao 3`) +140 / +5975 µs** (4K
+    frame 1.43 → 7.41 ms, p99 11.75 ms).
+  - **Bloom +89 / +1554 µs** (4K +109%).
+  - Water: ray-traced reflections +212 / +1168 µs; planar +67 / +264;
+    droplets +16 / +429; refraction and the rest within noise.
+  - Teleporter windows +141 / +369; portal gun +98 / +232, recursion 6
+    +158 / +394.
+  - Real-time dlights +52 / +141, top +59 / +325; motion blur +13 / +113;
+    enhanced particles +58 / +115; sky wind +10 / +22 (4K not sig.).
+  - Gel +19 / +232; cable +56 / +274; washer +1 / +64; goggles about +100
+    to +220 at 4K only.
+  - Blood, impacts and debris: within noise on `combat-e1m3` (≤ +74 µs at
+    4K). Suspicious for a rocket fight: check in P3 that these effects
+    replay from the demo at all.
+  - Audio: nothing on the main thread (P2 counters needed).
+  - all-split4: +2693 / +5828 µs (4K 2.50 → 8.33 ms, GPU 2.3 → 8.2 ms).
+  P5 order by 4K cost: SSAO top, bloom, ray-traced water, SSAO on,
+  droplets, portal recursion, teleporter windows, real-time dlights top;
+  at 540p (CPU): ray-traced water, portal recursion, teleporter windows,
+  SSAO top, bloom.
