@@ -76,6 +76,10 @@ impl Host {
         let Some((frames, start)) = self.timedemo.take() else { return };
         let frames = frames.saturating_sub(1);
         let t = start.elapsed().as_secs_f64().max(1e-6);
+        // Written before the fps line, which tools take as the end of the run.
+        if let Some(path) = self.timedemo_profile_path() {
+            self.write_profile(&path);
+        }
         self.con.print(&qcore::ctr!("{} frames {} seconds {} fps\n", frames, format!("{t:5.1}"), format!("{:5.1}", frames as f64 / t)));
     }
 
@@ -345,6 +349,9 @@ pub(super) fn register(c: &mut Commands<Host>) {
         h.play_demo(a.argv(1));
         if h.demo.is_some() {
             h.timedemo = Some((0, qcore::time::Instant::now()));
+            if h.timedemo_profile_path().is_some() {
+                h.start_profile();
+            }
         }
     });
     c.add("stopdemo", |h, _| {

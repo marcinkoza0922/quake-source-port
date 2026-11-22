@@ -27,6 +27,7 @@ python3 $Q ents e1m1 -c info_player_start      # entities; -c is a classname sub
 python3 $Q ents e1m1 -k targetname==t1         # -k KEY==EXACT or KEY=SUBSTR, repeatable
 python3 $Q ents ad_sepulcher -g ad -c worldspawn --all   # every key (fog, sky, _wateralpha...)
 python3 $Q ents hip1m1 -g +hipnotic -c item_ --json
+python3 $Q liquids e2m2 -n 5                   # largest water/slime/lava leaves: camera spots under or over a liquid
 ```
 
 - `-g` takes a comma list; `+hipnotic`/`+rogue`/`+quoth` mount a mission pack

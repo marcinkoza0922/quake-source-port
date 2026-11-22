@@ -130,6 +130,16 @@ enum Mode<'m> {
     /// `playdemo` in real time; over when a console line contains `marker`,
     /// then the engine gets `linger` more before the SIGKILL.
     Play { marker: &'m str, linger: Duration },
+    /// A live game: the cfg runs `script` instead of the timedemo; over when
+    /// a console line contains `marker`.
+    Live { script: &'m [String], marker: &'m str },
+}
+
+/// Runs a live scene: the cfg's pins, then `script` (map, setup, timed
+/// `delay` commands) instead of the timedemo, until the console prints
+/// `marker`. MangoHud isn't used (it starts logging at a demo).
+pub fn live(spec: &RunSpec, script: &[String], marker: &str) -> Result<(), String> {
+    launch(spec, Mode::Live { script, marker }).map(|_| ())
 }
 
 /// Runs the timedemo and returns its result (and frame log).
@@ -154,9 +164,16 @@ fn launch(spec: &RunSpec, mode: Mode) -> Result<RunResult, String> {
     let cfg_name = format!("perfkit/r{id}.cfg");
     let cfg_path = spec.base.join(spec.game).join(&cfg_name);
     let mut lines = spec.cfg_lines();
-    if let Mode::Play { .. } = mode {
-        let last = lines.len() - 1;
-        lines[last] = format!("playdemo {}", spec.timedemo);
+    match mode {
+        Mode::Play { .. } => {
+            let last = lines.len() - 1;
+            lines[last] = format!("playdemo {}", spec.timedemo);
+        }
+        Mode::Live { script, .. } => {
+            lines.pop();
+            lines.extend(script.iter().cloned());
+        }
+        Mode::Timedemo => {}
     }
     let text = lines.join("\n") + "\n";
     std::fs::write(&cfg_path, &text).map_err(|e| format!("{}: {e}", cfg_path.display()))?;
@@ -211,7 +228,7 @@ fn run_argv(spec: &RunSpec, argv: &[String], control: &str, mode: Mode) -> Resul
             Ok(line) => {
                 let result = match mode {
                     Mode::Timedemo => crate::engine::parse_fps(&line),
-                    Mode::Play { marker, .. } => line.contains(marker).then_some((0, 0.0, 0.0)),
+                    Mode::Play { marker, .. } | Mode::Live { marker, .. } => line.contains(marker).then_some((0, 0.0, 0.0)),
                 };
                 let playing = line.contains("Playing demo from");
                 let fatal = is_fatal(&line);
@@ -259,7 +276,7 @@ fn run_argv(spec: &RunSpec, argv: &[String], control: &str, mode: Mode) -> Resul
         bad => Err(format!("the engine doesn't know pinned cvars {bad:?}")),
     });
     let (frames, secs, fps) = res.map_err(|e| format!("{e} (console: {})", spec.out.join("console.txt").display()))?;
-    let frame_ms = if spec.mangohud { Some(frame_log(spec.out, frames, secs)?) } else { None };
+    let frame_ms = if spec.mangohud && !matches!(mode, Mode::Live { .. }) { Some(frame_log(spec.out, frames, secs)?) } else { None };
     Ok(RunResult { frames, secs, fps, frame_ms })
 }
 

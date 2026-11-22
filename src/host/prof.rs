@@ -1,7 +1,9 @@
-//! Frame profiler for tools/qprof: `prof_start` begins recording wall-clock
-//! CPU time per host-frame phase (plus the renderer's fence wait and GPU
-//! pass timestamps); `prof_stop <file.json>` writes the summary and the raw
-//! per-frame totals. Costs nothing while not recording.
+//! Frame profiler for tools/qprof and tools/perfkit: `prof_start` begins
+//! recording wall-clock CPU time per host-frame phase (plus the renderer's
+//! fence wait and GPU pass timestamps); `prof_stop <file.json>` writes the
+//! summary and the raw per-frame totals. With `prof_timedemo <file.json>`
+//! set, `timedemo` starts it and the demo's end writes it. Costs nothing
+//! while not recording.
 
 use qcore::time::Instant;
 
@@ -114,6 +116,32 @@ impl Profiler {
         let raw: Vec<String> = total.iter().map(|v| format!("{v:.0}")).collect();
         s.push_str(&format!(",\n  \"frame_us_raw\": [{}]\n}}\n", raw.join(",")));
         s
+    }
+}
+
+impl super::Host {
+    pub(super) fn start_profile(&mut self) {
+        self.r.gpu_times_wanted = true;
+        let _ = self.r.take_gpu_times();
+        self.prof = Some(Profiler::new());
+    }
+
+    /// Ends recording and writes the report to `path` (empty: the console).
+    pub(super) fn write_profile(&mut self, path: &str) {
+        let Some(p) = self.prof.take() else { return };
+        let views = self.r.gpu_view_times();
+        let destinations = self.r.gpu_destination_times();
+        let json = p.report(self.r.take_gpu_times(), &views, &destinations);
+        if path.is_empty() {
+            self.con.print(&json);
+        } else if let Err(e) = qcore::vfs::write(std::path::Path::new(path), json.as_bytes()) {
+            self.con.print(&format!("prof_stop: {path}: {e}\n"));
+        }
+    }
+
+    /// `prof_timedemo`'s file, if set.
+    pub(super) fn timedemo_profile_path(&self) -> Option<String> {
+        self.server.core.cvars.by_name("prof_timedemo").map(|c| c.string.trim().to_string()).filter(|p| !p.is_empty())
     }
 }
 

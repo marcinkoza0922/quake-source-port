@@ -23,6 +23,8 @@ not yet (R6).
 | Question | Tool |
 |---|---|
 | Are we at parity with the references? | `qbench` (windowed, every engine, same settings) |
+| What does a feature cost (lean plan, `docs/perf/PLAN.md`)? | `perfkit run [-quick\|-full] [-only scene]` (opens windows; `-list`, `-dry` don't) |
+| GPU time of a timedemo | `+prof_timedemo /abs/file.json +timedemo D` (profile written at the demo's end) |
 | Did my change make our engine faster or slower? | headless `timedemo` A/B on the same demo |
 | Which GPU pass costs what? | `QSP_GPUTIMES=1` |
 | Where does CPU time go? | `perf record` |

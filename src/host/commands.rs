@@ -445,22 +445,12 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     // Debug/headless: hand player 1 a toy (index into `Toy::ALL`; anything
     // else puts it away).
     // tools/qprof: frame profiling (see host/prof.rs).
-    c.add("prof_start", |h, _| {
-        h.r.gpu_times_wanted = true;
-        let _ = h.r.take_gpu_times();
-        h.prof = Some(super::prof::Profiler::new());
-    });
+    c.add("prof_start", |h, _| h.start_profile());
     c.add("prof_stop", |h, a| {
-        let Some(p) = h.prof.take() else { return h.print("prof_stop: not recording\n") };
-        let views = h.r.gpu_view_times();
-        let destinations = h.r.gpu_destination_times();
-        let json = p.report(h.r.take_gpu_times(), &views, &destinations);
-        let path = a.argv(1);
-        if path.is_empty() {
-            h.print(&json);
-        } else if let Err(e) = qcore::vfs::write(std::path::Path::new(path), json.as_bytes()) {
-            h.print(&format!("prof_stop: {path}: {e}\n"));
+        if h.prof.is_none() {
+            return h.print("prof_stop: not recording\n");
         }
+        h.write_profile(a.argv(1));
     });
     c.add("toy", |h, a| {
         let toy = a.argv(1).parse::<usize>().ok().and_then(|k| qserver::addons::Toy::ALL.get(k).copied());
