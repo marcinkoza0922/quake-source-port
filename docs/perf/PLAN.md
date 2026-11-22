@@ -231,7 +231,8 @@ the comparison runs on the same inputs.
   target (24 timed runs, 4 warm-ups, 8 attribution runs, ~15 s each, mostly
   startup and map load): candidates are 540p-only quick runs for CPU-only
   changes (as planned), shorter spin demos, and `-noattrib`.
-- **2026-11-21, 7f66f0f: first full run (P4 baseline)**, 3 rounds, 71 min
+- **2026-11-21, 7f66f0f: first full run (P4 baseline)**, full details and
+  tables in [BASELINE-2026-11-21.md](BASELINE-2026-11-21.md), 3 rounds, 71 min
   (target 30), no failures; report kept in `target/perf/baseline/`.
   Cost over off, 540p / 4K, significant unless marked:
   - SSAO: on +53 / +900 µs; **top (`r_ssao 3`) +140 / +5975 µs** (4K
