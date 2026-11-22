@@ -880,6 +880,9 @@ la Shader quadri
 @ Screen Shake
 la Tremor quadri
 
+@ Screen Droplets
+la Guttae in quadro
+
 @ Seconds a center-screen message stays up
 la Secundae quibus nuntius in medio quadro manet
 
@@ -1044,6 +1047,9 @@ la Dextrorsum vertere
 
 @ Underwater FX
 la Effectus subaquatici
+
+@ Underwater Refraction
+la Refractio subaquatica
 
 @ Use Bullet Time Meter
 la Mensuram temporis lenti adhibere
@@ -1885,6 +1891,12 @@ la In quaque porta aspectum ex porta coniuncta pingit; inactivum discos planos m
 
 @ Droplets spray up when things enter or leave water, slime or lava
 la Guttae exsiliunt cum res aquam, limum vel lavam intrant aut relinquunt
+
+@ Drops bead and run down the screen after you surface from water or slime
+la Guttae in quadro colliguntur et defluunt postquam ex aqua vel limo emergis
+
+@ The view ripples and bends while your head is under water, slime or lava
+la Visus undat et flectitur dum caput sub aqua, limo vel lava est
 
 @ Emulates the original 8-bit palette of software rendering
 la Paletam originalem 8-bit reddendi programmatici imitatur

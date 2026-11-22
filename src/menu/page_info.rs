@@ -170,6 +170,8 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "r_waterripples" => "Liquid surfaces swell and ring out where things move through them",
         "r_watersplash" => "Droplets spray up when things enter or leave water, slime or lava",
         "r_watercaustics" => "Rippling light patterns on surfaces under water and slime",
+        "r_water_refraction" => "The view ripples and bends while your head is under water, slime or lava",
+        "r_water_droplets" => "Drops bead and run down the screen after you surface from water or slime",
         "r_water_quality" => "Detail for caustics, ripples and splashes: low uses smaller budgets and shorter view distance; high uses larger budgets and farther view distance",
         "assist_grenadearc" => "Show where grenades and other arcing shots will fly, bounce and land; local play only, not in deathmatch",
         "assist_grenadearc_style" => "Draw the predicted grenade path as a solid or dashed line",

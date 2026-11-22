@@ -880,6 +880,9 @@ et Ekraanivarjutaja
 @ Screen Shake
 et Ekraani värin
 
+@ Screen Droplets
+et Piisad ekraanil
+
 @ Seconds a center-screen message stays up
 et Mitu sekundit keskteade ekraanil püsib
 
@@ -1044,6 +1047,9 @@ et Pööra paremale
 
 @ Underwater FX
 et Veealused efektid
+
+@ Underwater Refraction
+et Veealune murdumine
 
 @ Use Bullet Time Meter
 et Bullet time'i näidik
@@ -1885,6 +1891,12 @@ et Näitab igas portaalis vaadet seotud portaalist; väljas näitab lamedaid ket
 
 @ Droplets spray up when things enter or leave water, slime or lava
 et Piisad pritsivad, kui midagi siseneb vette, limasse või laavasse või väljub sealt
+
+@ Drops bead and run down the screen after you surface from water or slime
+et Pärast veest või limast väljumist kogunevad ekraanile piisad ja voolavad alla
+
+@ The view ripples and bends while your head is under water, slime or lava
+et Pilt lainetab ja kõverdub, kui su pea on vee, lima või laava all
 
 @ Emulates the original 8-bit palette of software rendering
 et Jäljendab tarkvararenderduse algset 8-bitist paletti

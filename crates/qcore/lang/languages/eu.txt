@@ -880,6 +880,9 @@ eu Pantaila-shaderra
 @ Screen Shake
 eu Pantailaren dardara
 
+@ Screen Droplets
+eu Tantak pantailan
+
 @ Seconds a center-screen message stays up
 eu Erdiko mezu bat pantailan dirauen segundoak
 
@@ -1044,6 +1047,9 @@ eu Biratu eskuinera
 
 @ Underwater FX
 eu Urpeko efektuak
+
+@ Underwater Refraction
+eu Urpeko errefrakzioa
 
 @ Use Bullet Time Meter
 eu Erabili bala-denboraren neurgailua
@@ -1885,6 +1891,12 @@ eu Marraztu atari bakoitzaren barruan lotutako ataritik ikusten dena; desaktibat
 
 @ Droplets spray up when things enter or leave water, slime or lava
 eu Tantak zipriztintzen dira zerbait uretan, lohian edo laban sartu edo irtetean
+
+@ Drops bead and run down the screen after you surface from water or slime
+eu Uretatik edo lohitik ateratzean tantak sortu eta pantailan behera isurtzen dira
+
+@ The view ripples and bends while your head is under water, slime or lava
+eu Ikuspegia uhinka eta okertuta dago burua ur, lohi edo laba azpian duzun bitartean
 
 @ Emulates the original 8-bit palette of software rendering
 eu Software bidezko errendatzearen jatorrizko 8 biteko paleta emulatzen du

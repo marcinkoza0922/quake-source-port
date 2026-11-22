@@ -880,6 +880,9 @@ is Skjáskyggir
 @ Screen Shake
 is Skjáhristingur
 
+@ Screen Droplets
+is Dropar á skjánum
+
 @ Seconds a center-screen message stays up
 is Sekúndur sem skilaboð á miðjum skjá haldast
 
@@ -1044,6 +1047,9 @@ is Snúa til hægri
 
 @ Underwater FX
 is Brellur neðansjávar
+
+@ Underwater Refraction
+is Ljósbrot neðansjávar
 
 @ Use Bullet Time Meter
 is Nota bullet time-mæli
@@ -1885,6 +1891,12 @@ is Sýnir útsýnið úr tengdu gáttinni inni í hverri gátt; af sýnir flata 
 
 @ Droplets spray up when things enter or leave water, slime or lava
 is Dropar skvettast þegar eitthvað fer ofan í eða upp úr vatni, slími eða hrauni
+
+@ Drops bead and run down the screen after you surface from water or slime
+is Dropar safnast á skjáinn og renna niður eftir að þú kemur upp úr vatni eða slími
+
+@ The view ripples and bends while your head is under water, slime or lava
+is Myndin gárast og bjagast meðan höfuðið er í vatni, slími eða hrauni
 
 @ Emulates the original 8-bit palette of software rendering
 is Líkir eftir upprunalegri 8 bita litaspjaldi hugbúnaðarteikningar

@@ -880,6 +880,9 @@ cy Arlliwiwr sgrin
 @ Screen Shake
 cy Ysgwyd sgrin
 
+@ Screen Droplets
+cy Diferion ar y sgrin
+
 @ Seconds a center-screen message stays up
 cy Eiliadau mae neges canol y sgrin yn aros
 
@@ -1044,6 +1047,9 @@ cy Troi i'r dde
 
 @ Underwater FX
 cy Effeithiau tanddwr
+
+@ Underwater Refraction
+cy Plygiant tanddwr
 
 @ Use Bullet Time Meter
 cy Defnyddio mesurydd bullet time
@@ -1885,6 +1891,12 @@ cy Dangos yr olwg allan o'r porth cysylltiedig ym mhob porth; mae i ffwrdd yn da
 
 @ Droplets spray up when things enter or leave water, slime or lava
 cy Mae diferion yn tasgu pan fydd pethau'n mynd i mewn i ddŵr, llysnafedd neu lafa, neu'n dod allan
+
+@ Drops bead and run down the screen after you surface from water or slime
+cy Mae diferion yn casglu ac yn rhedeg i lawr y sgrin ar ôl i chi ddod allan o ddŵr neu lysnafedd
+
+@ The view ripples and bends while your head is under water, slime or lava
+cy Mae'r olygfa'n crychu ac yn plygu tra bo'ch pen o dan ddŵr, llysnafedd neu lafa
 
 @ Emulates the original 8-bit palette of software rendering
 cy Efelychu palet 8-did gwreiddiol y rendro meddalwedd

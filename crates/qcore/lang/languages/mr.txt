@@ -880,6 +880,9 @@ mr स्क्रीन शेडर
 @ Screen Shake
 mr स्क्रीन हादरा
 
+@ Screen Droplets
+mr स्क्रीनवर थेंब
+
 @ Seconds a center-screen message stays up
 mr मध्यभागी असलेला संदेश किती सेकंद दिसतो
 
@@ -1044,6 +1047,9 @@ mr उजवीकडे वळा
 
 @ Underwater FX
 mr पाण्याखालील FX
+
+@ Underwater Refraction
+mr पाण्याखालील अपवर्तन
 
 @ Use Bullet Time Meter
 mr बुलेट टाइम मीटर वापरा
@@ -1885,6 +1891,12 @@ mr प्रत्येक पोर्टलमध्ये जोडलेल
 
 @ Droplets spray up when things enter or leave water, slime or lava
 mr वस्तू पाणी, स्लाइम किंवा लाव्हामध्ये शिरताना किंवा बाहेर पडताना थेंब उडतात
+
+@ Drops bead and run down the screen after you surface from water or slime
+mr पाणी किंवा स्लाइममधून बाहेर आल्यावर स्क्रीनवर थेंब जमतात आणि खाली ओघळतात
+
+@ The view ripples and bends while your head is under water, slime or lava
+mr डोके पाणी, स्लाइम किंवा लाव्हाखाली असताना दृश्य लहरते आणि वाकते
 
 @ Emulates the original 8-bit palette of software rendering
 mr सॉफ्टवेअर रेंडरिंगच्या मूळ 8-बिट पॅलेटचे अनुकरण करते

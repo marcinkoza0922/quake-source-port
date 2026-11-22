@@ -16,6 +16,7 @@ mod entities;
 use entities::Anim;
 mod settings;
 mod speed;
+pub mod water_screen;
 pub mod camera;
 pub use settings::{Idle, ViewCvars};
 
@@ -60,6 +61,8 @@ pub struct ViewState {
     pub aim: camera::Aim,
     /// Visible weapons on player bodies.
     pub vwep: crate::vwep::VWep,
+    /// Enhanced Water screen effects (refraction, droplets).
+    pub water_screen: water_screen::WaterScreen,
 }
 
 fn dot(a: Vec3, b: Vec3) -> f32 {

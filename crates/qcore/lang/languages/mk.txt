@@ -880,6 +880,9 @@ mk Екрански шејдер
 @ Screen Shake
 mk Тресење на екранот
 
+@ Screen Droplets
+mk Капки на екранот
+
 @ Seconds a center-screen message stays up
 mk Секунди колку останува пораката во центар
 
@@ -1044,6 +1047,9 @@ mk Сврти десно
 
 @ Underwater FX
 mk Подводни ефекти
+
+@ Underwater Refraction
+mk Подводно прекршување
 
 @ Use Bullet Time Meter
 mk Скала за забавено време
@@ -1885,6 +1891,12 @@ mk Во секој портал го црта погледот од поврза
 
 @ Droplets spray up when things enter or leave water, slime or lava
 mk Капки прскаат кога нешто влегува или излегува од вода, слуз или лава
+
+@ Drops bead and run down the screen after you surface from water or slime
+mk Капки се собираат и се слеваат по екранот откако ќе излезете од вода или слуз
+
+@ The view ripples and bends while your head is under water, slime or lava
+mk Сликата бранува и се криви додека главата ви е под вода, слуз или лава
 
 @ Emulates the original 8-bit palette of software rendering
 mk Ја емулира оригиналната 8-битна палета на софтверското рендерирање

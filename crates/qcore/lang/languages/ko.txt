@@ -880,6 +880,9 @@ ko 화면 셰이더
 @ Screen Shake
 ko 화면 흔들림
 
+@ Screen Droplets
+ko 화면 물방울
+
 @ Seconds a center-screen message stays up
 ko 화면 중앙 메시지가 표시되는 시간(초)
 
@@ -1044,6 +1047,9 @@ ko 오른쪽 회전
 
 @ Underwater FX
 ko 수중 효과
+
+@ Underwater Refraction
+ko 수중 굴절
 
 @ Use Bullet Time Meter
 ko 불릿 타임 게이지 사용
@@ -1885,6 +1891,12 @@ ko 각 포털 안에 연결된 포털 너머의 화면을 그립니다. 끄면 �
 
 @ Droplets spray up when things enter or leave water, slime or lava
 ko 물체가 물, 슬라임, 용암에 들어가거나 나올 때 물방울이 튑니다
+
+@ Drops bead and run down the screen after you surface from water or slime
+ko 물이나 슬라임에서 나오면 화면에 물방울이 맺혀 흘러내립니다
+
+@ The view ripples and bends while your head is under water, slime or lava
+ko 머리가 물, 슬라임, 용암 속에 있는 동안 시야가 일렁이고 휘어집니다
 
 @ Emulates the original 8-bit palette of software rendering
 ko 소프트웨어 렌더링의 원작 8비트 팔레트를 재현합니다

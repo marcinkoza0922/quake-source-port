@@ -59,6 +59,8 @@ pub(super) struct ViewDraw {
     pub(super) blend: [f32; 4],
     /// Underwater screen warp clock in seconds; negative = off.
     pub(super) warp: f32,
+    /// Enhanced Water screen effects.
+    pub(super) water: crate::WaterScreen,
     /// Tangents of the half field of view (x, y), for SSAO.
     pub(super) tan: [f32; 2],
     /// Fog density (/64) for SSAO.
@@ -287,7 +289,8 @@ impl Renderer {
             self.mapper_stats = super::mapper::stats(lists, &cmds, soft.len(), leaves);
         }
         let scene = [sw, sh];
-        lists.views.push(ViewDraw { fu, rect, ofs, scene, out, blend, warp, tan, fog, split, cmds, speed_blur, vel, soft });
+        let water = view.water_screen;
+        lists.views.push(ViewDraw { fu, rect, ofs, scene, out, blend, warp, water, tan, fog, split, cmds, speed_blur, vel, soft });
     }
 
     /// Soft particle (inverse fade distance, depth samples) when r_softparticles

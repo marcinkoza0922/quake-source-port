@@ -27,8 +27,11 @@ layout(push_constant) uniform P {
     uint bloom_tex;   // r_bloom chain level 0
     float bloom;      // bloom strength; 0 off
     vec2 bloom_uv;    // view UV -> this view's region of level 0
+    uint water;       // WaterScreen::packed: refraction liquid, droplet liquid, quality, seed
+    float drops;      // seconds since leaving the liquid; < 0 no droplets
 } pc;
 layout(location = 0) out vec4 o_color;
+#include "water_screen.glsl"
 
 // 128^3 palette index LUT, packed 4 per uint after the 256 palette entries.
 uint lut(ivec3 c) {
@@ -172,17 +175,51 @@ vec2 water_warp(vec2 p) {
     float y = (p.y + sin(p.x * cycle_y + pc.warp) * amp_y) * (1.0 - amp_y * 2.0) + amp_y;
     return vec2(x, y);
 }
+vec3 scene_q(vec2 q) {
+    return texture(textures[nonuniformEXT(pc.scene)], clamp(q, 0.0, 1.0) * pc.uvs).rgb;
+}
 void main() {
-    vec2 uv = (pc.warp >= 0.0 ? water_warp(i_uv) : i_uv) * pc.uvs;
-    vec4 sc = texture(textures[nonuniformEXT(pc.scene)], uv);
-    vec3 c = sc.rgb;
+    vec2 q = pc.warp >= 0.0 ? water_warp(i_uv) : i_uv;
+    float aspect = pc.mb_w * pc.uvs.x / max(pc.mb_h * pc.uvs.y, 1.0);
+    uint uw = pc.water & 3u, dk = (pc.water >> 2) & 3u;
+    bool high = (pc.water & 16u) != 0u;
+    vec2 ca = vec2(0.0); // chromatic split under liquids (high quality)
+    if (uw != 0u) {
+        vec2 a = ws_amp(uw, aspect);
+        vec2 d = ws_wave(q, pc.g_time, uw, aspect);
+        q = (q + d) * (1.0 - 2.0 * a) + a;
+        if (high) ca = d * 0.45 + (q - 0.5) * 0.004;
+    }
+    WsDrop wd = WsDrop(vec2(0.0), 0.0, 0.0, 0.0);
+    if (dk != 0u && pc.drops >= 0.0) {
+        wd = ws_droplets(i_uv, pc.drops, pc.water >> 8, high, aspect, 1.0 / max(pc.mb_h * pc.uvs.y, 1.0));
+        q += wd.off * vec2(1.0 / aspect, 1.0) * wd.m;
+    }
+    vec2 uv = clamp(q, 0.0, 1.0) * pc.uvs;
+    vec3 c = texture(textures[nonuniformEXT(pc.scene)], uv).rgb;
+    if (ca != vec2(0.0)) {
+        c.r = scene_q(q + ca).r;
+        c.b = scene_q(q - ca).b;
+    }
+    if (wd.m > 0.0 && high) {
+        // drops sit out of focus: soften what they show
+        vec2 bl = vec2(1.5 / aspect, 1.5) / max(pc.mb_h * pc.uvs.y, 1.0);
+        c = (c * 2.0 + scene_q(q + bl) + scene_q(q - bl) + scene_q(q + vec2(bl.x, -bl.y)) + scene_q(q - vec2(bl.x, -bl.y))) / 6.0;
+    }
     if (pc.mbx > 0.0)
         c = motion_blur(c, uv);
     if (pc.speed_blur > 0.0)
         c = speed_blur(c, uv);
     // r_bloom: added like DarkPlaces' bloom, before palettizing and gamma
     if (pc.bloom > 0.0)
-        c += texture(textures[nonuniformEXT(pc.bloom_tex)], (pc.warp >= 0.0 ? water_warp(i_uv) : i_uv) * pc.bloom_uv).rgb * pc.bloom;
+        c += texture(textures[nonuniformEXT(pc.bloom_tex)], clamp(q, 0.0, 1.0) * pc.bloom_uv).rgb * pc.bloom;
+    if (uw != 0u && uw != 3u) {
+        // murky edges under water and slime
+        vec2 v = (i_uv - 0.5) * vec2(aspect, 1.0);
+        c *= 1.0 - 0.22 * smoothstep(0.35, 1.0, length(v));
+    }
+    if (wd.m > 0.0)
+        c = ws_shade(c, wd, dk);
     if (pc.mode != 0u) {
         if (pc.mode == 1u) {
             vec2 noiseuv = floor(gl_FragCoord.xy * pc.scale) + 0.5;

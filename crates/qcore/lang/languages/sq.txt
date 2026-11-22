@@ -880,6 +880,9 @@ sq Shaderi i ekranit
 @ Screen Shake
 sq Dridhja e ekranit
 
+@ Screen Droplets
+sq Pika në ekran
+
 @ Seconds a center-screen message stays up
 sq Sekonda që qëndron një mesazh në qendër të ekranit
 
@@ -1044,6 +1047,9 @@ sq Kthehu djathtas
 
 @ Underwater FX
 sq Efektet nën ujë
+
+@ Underwater Refraction
+sq Përthyerje nën ujë
 
 @ Use Bullet Time Meter
 sq Përdor matësin e Bullet Time
@@ -1885,6 +1891,12 @@ sq Vizaton brenda çdo portali pamjen nga portali i lidhur; joaktiv shfaq disqe 
 
 @ Droplets spray up when things enter or leave water, slime or lava
 sq Pikat spërkasin kur diçka hyn ose del nga uji, llumi ose lava
+
+@ Drops bead and run down the screen after you surface from water or slime
+sq Pikat mblidhen dhe rrjedhin poshtë ekranit pasi del nga uji ose llumi
+
+@ The view ripples and bends while your head is under water, slime or lava
+sq Pamja valëzohet dhe përkulet sa kohë koka është nën ujë, llum ose lavë
 
 @ Emulates the original 8-bit palette of software rendering
 sq Imiton paletën origjinale 8-bit të renderimit me softuer

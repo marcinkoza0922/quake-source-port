@@ -880,6 +880,9 @@ th เชดเดอร์​หน้า​จอ
 @ Screen Shake
 th จอ​สั่น
 
+@ Screen Droplets
+th หยด​น้ำ​บน​หน้าจอ
+
 @ Seconds a center-screen message stays up
 th จำนวน​วินาที​ที่​ข้อความ​กลาง​จอ​แสดง​อยู่
 
@@ -1044,6 +1047,9 @@ th หัน​ขวา
 
 @ Underwater FX
 th เอฟเฟกต์​ใต้​น้ำ
+
+@ Underwater Refraction
+th การ​หักเห​ใต้​น้ำ
 
 @ Use Bullet Time Meter
 th ใช้​มาตร Bullet Time
@@ -1885,6 +1891,12 @@ th แสดง​ภาพ​จาก​พอร์ทัล​ที่​�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 th หยด​น้ำ​กระเซ็น​ขึ้น​เมื่อ​มี​สิ่ง​ใด​เข้า​หรือ​ออก​จาก​น้ำ เมือก​หรือ​ลาวา
+
+@ Drops bead and run down the screen after you surface from water or slime
+th หยด​น้ำ​จะ​เกาะ​และ​ไหล​ลง​ตาม​หน้าจอ​หลัง​จาก​ขึ้น​จาก​น้ำ​หรือ​เมือก
+
+@ The view ripples and bends while your head is under water, slime or lava
+th ภาพ​จะ​กระเพื่อม​และ​บิด​เบี้ยว​ขณะ​ที่​ศีรษะ​อยู่​ใต้​น้ำ เมือก​หรือ​ลาวา
 
 @ Emulates the original 8-bit palette of software rendering
 th จำลอง​จาน​สี 8 บิต​ดั้งเดิม​ของ​การ​เรนเดอร์​แบบ​ซอฟต์แวร์

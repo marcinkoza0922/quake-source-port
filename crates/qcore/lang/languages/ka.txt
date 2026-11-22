@@ -880,6 +880,9 @@ ka ეკრანის შეიდერი
 @ Screen Shake
 ka ეკრანის რყევა
 
+@ Screen Droplets
+ka წვეთები ეკრანზე
+
 @ Seconds a center-screen message stays up
 ka რამდენ წამს რჩება შეტყობინება ეკრანის ცენტრში
 
@@ -1044,6 +1047,9 @@ ka მარჯვნივ მობრუნება
 
 @ Underwater FX
 ka წყალქვეშა ეფექტები
+
+@ Underwater Refraction
+ka წყალქვეშა რეფრაქცია
 
 @ Use Bullet Time Meter
 ka ნელი დროის შკალა
@@ -1885,6 +1891,12 @@ ka თითოეულ პორტალში აჩვენებს ხ�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 ka წვეთები იფრქვევა, როცა რამე წყალში, ლორწოში ან ლავაში შედის ან გამოდის
+
+@ Drops bead and run down the screen after you surface from water or slime
+ka წყლიდან ან ლორწოდან ამოსვლის შემდეგ ეკრანზე წვეთები გროვდება და ქვემოთ ჩამოდის
+
+@ The view ripples and bends while your head is under water, slime or lava
+ka სანამ თავი წყალში, ლორწოში ან ლავაშია, ხედი ტალღოვნად ირხევა და იღუნება
 
 @ Emulates the original 8-bit palette of software rendering
 ka ახდენს პროგრამული რენდერინგის ორიგინალური 8-ბიტიანი პალიტრის ემულაციას

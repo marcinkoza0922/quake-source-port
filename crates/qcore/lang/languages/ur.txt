@@ -880,6 +880,9 @@ ur اسکرین شیڈر
 @ Screen Shake
 ur اسکرین کا لرزنا
 
+@ Screen Droplets
+ur اسکرین پر قطرے
+
 @ Seconds a center-screen message stays up
 ur اسکرین کے درمیان پیغام کتنے سیکنڈ رہتا ہے
 
@@ -1044,6 +1047,9 @@ ur دائیں مڑیں
 
 @ Underwater FX
 ur زیرِ آب اثرات
+
+@ Underwater Refraction
+ur زیرِ آب انعطاف
 
 @ Use Bullet Time Meter
 ur بلٹ ٹائم میٹر استعمال کریں
@@ -1885,6 +1891,12 @@ ur ہر پورٹل کے اندر جڑے ہوئے پورٹل سے نظر آنے �
 
 @ Droplets spray up when things enter or leave water, slime or lava
 ur جب چیزیں پانی، کیچڑ یا لاوے میں داخل ہوں یا نکلیں تو قطرے اچھلتے ہیں
+
+@ Drops bead and run down the screen after you surface from water or slime
+ur پانی یا کیچڑ سے نکلنے کے بعد اسکرین پر قطرے جمع ہو کر نیچے بہتے ہیں
+
+@ The view ripples and bends while your head is under water, slime or lava
+ur جب تک سر پانی، کیچڑ یا لاوے کے نیچے ہو، منظر لہراتا اور مڑتا ہے
 
 @ Emulates the original 8-bit palette of software rendering
 ur سافٹ ویئر رینڈرنگ کے اصل 8-بٹ پیلیٹ کی نقل کرتا ہے

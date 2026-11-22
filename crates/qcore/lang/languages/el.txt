@@ -880,6 +880,9 @@ el Shader οθόνης
 @ Screen Shake
 el Κούνημα οθόνης
 
+@ Screen Droplets
+el Σταγόνες στην οθόνη
+
 @ Seconds a center-screen message stays up
 el Δευτερόλεπτα που μένει ένα μήνυμα στο κέντρο της οθόνης
 
@@ -1044,6 +1047,9 @@ el Στροφή δεξιά
 
 @ Underwater FX
 el Υποβρύχια εφέ
+
+@ Underwater Refraction
+el Υποβρύχια διάθλαση
 
 @ Use Bullet Time Meter
 el Χρήση μπάρας Bullet Time
@@ -1885,6 +1891,12 @@ el Δείχνει μέσα σε κάθε πύλη τη θέα από τη συν
 
 @ Droplets spray up when things enter or leave water, slime or lava
 el Σταγόνες πετάγονται όταν κάτι μπαίνει ή βγαίνει από νερό, γλίτσα ή λάβα
+
+@ Drops bead and run down the screen after you surface from water or slime
+el Σταγόνες σχηματίζονται και κυλούν στην οθόνη όταν βγαίνετε από νερό ή γλίτσα
+
+@ The view ripples and bends while your head is under water, slime or lava
+el Η εικόνα κυματίζει και παραμορφώνεται όσο το κεφάλι σας είναι κάτω από νερό, γλίτσα ή λάβα
 
 @ Emulates the original 8-bit palette of software rendering
 el Μιμείται την αρχική 8-bit παλέτα της απόδοσης λογισμικού

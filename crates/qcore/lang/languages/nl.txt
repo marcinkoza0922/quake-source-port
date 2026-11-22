@@ -880,6 +880,9 @@ nl Schermshader
 @ Screen Shake
 nl Schermschudden
 
+@ Screen Droplets
+nl Druppels op het scherm
+
 @ Seconds a center-screen message stays up
 nl Seconden dat een bericht midden in beeld blijft staan
 
@@ -1044,6 +1047,9 @@ nl Rechts draaien
 
 @ Underwater FX
 nl Onderwatereffecten
+
+@ Underwater Refraction
+nl Onderwaterbreking
 
 @ Use Bullet Time Meter
 nl Bullet time-meter gebruiken
@@ -1885,6 +1891,12 @@ nl Toon in elk portaal het beeld uit het gekoppelde portaal; uit toont platte sc
 
 @ Droplets spray up when things enter or leave water, slime or lava
 nl Druppels spatten op wanneer iets water, slijm of lava in- of uitgaat
+
+@ Drops bead and run down the screen after you surface from water or slime
+nl Druppels parelen en lopen over het scherm nadat je uit water of slijm komt
+
+@ The view ripples and bends while your head is under water, slime or lava
+nl Het beeld golft en vervormt zolang je hoofd onder water, slijm of lava is
 
 @ Emulates the original 8-bit palette of software rendering
 nl Bootst het originele 8-bit palet van softwarerendering na

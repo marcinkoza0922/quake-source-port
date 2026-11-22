@@ -880,6 +880,9 @@ vi Shader màn hình
 @ Screen Shake
 vi Rung màn hình
 
+@ Screen Droplets
+vi Giọt nước trên màn hình
+
 @ Seconds a center-screen message stays up
 vi Số giây thông báo giữa màn hình hiển thị
 
@@ -1044,6 +1047,9 @@ vi Quay phải
 
 @ Underwater FX
 vi Hiệu ứng dưới nước
+
+@ Underwater Refraction
+vi Khúc xạ dưới nước
 
 @ Use Bullet Time Meter
 vi Dùng thanh Bullet Time
@@ -1885,6 +1891,12 @@ vi Hiện bên trong mỗi cổng cảnh nhìn từ cổng được nối; tắt
 
 @ Droplets spray up when things enter or leave water, slime or lava
 vi Giọt nước bắn lên khi vật thể vào hoặc ra khỏi nước, chất nhờn hoặc dung nham
+
+@ Drops bead and run down the screen after you surface from water or slime
+vi Giọt nước đọng lại và chảy xuống màn hình sau khi bạn ra khỏi nước hoặc chất nhờn
+
+@ The view ripples and bends while your head is under water, slime or lava
+vi Hình ảnh gợn sóng và uốn cong khi đầu bạn ở dưới nước, chất nhờn hoặc dung nham
 
 @ Emulates the original 8-bit palette of software rendering
 vi Mô phỏng bảng màu 8-bit gốc của kết xuất phần mềm

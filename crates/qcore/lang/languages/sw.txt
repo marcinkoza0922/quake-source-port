@@ -880,6 +880,9 @@ sw Shader ya Skrini
 @ Screen Shake
 sw Mtikisiko wa Skrini
 
+@ Screen Droplets
+sw Matone Kwenye Skrini
+
 @ Seconds a center-screen message stays up
 sw Sekunde ujumbe wa katikati ya skrini unakaa
 
@@ -1044,6 +1047,9 @@ sw Geuka Kulia
 
 @ Underwater FX
 sw Athari za Chini ya Maji
+
+@ Underwater Refraction
+sw Mpindo wa Mwanga Chini ya Maji
 
 @ Use Bullet Time Meter
 sw Tumia Kipimo cha Bullet Time
@@ -1885,6 +1891,12 @@ sw Onyesha ndani ya kila lango mwonekano kutoka lango lililounganishwa; ukizima,
 
 @ Droplets spray up when things enter or leave water, slime or lava
 sw Matone hurushwa vitu vinapoingia au kutoka kwenye maji, ute au lava
+
+@ Drops bead and run down the screen after you surface from water or slime
+sw Matone hukusanyika na kutiririka chini ya skrini baada ya kutoka kwenye maji au ute
+
+@ The view ripples and bends while your head is under water, slime or lava
+sw Mandhari huyumba na kupinda kichwa chako kikiwa chini ya maji, ute au lava
 
 @ Emulates the original 8-bit palette of software rendering
 sw Huiga paleti ya awali ya 8-bit ya uchoraji wa programu

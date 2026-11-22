@@ -880,6 +880,9 @@ am የስክሪን ሼደር
 @ Screen Shake
 am የስክሪን መንቀጥቀጥ
 
+@ Screen Droplets
+am በስክሪን ላይ ጠብታዎች
+
 @ Seconds a center-screen message stays up
 am የመሃል መልዕክት የሚቆይበት ሰከንዶች
 
@@ -1044,6 +1047,9 @@ am ወደ ቀኝ ታጠፍ
 
 @ Underwater FX
 am የውሃ ውስጥ FX
+
+@ Underwater Refraction
+am የውሃ ውስጥ የብርሃን ስብራት
 
 @ Use Bullet Time Meter
 am የጥይት ጊዜ መለኪያ ተጠቀም
@@ -1885,6 +1891,12 @@ am በእያንዳንዱ ፖርታል ውስጥ ከተገናኘው ፖርታል 
 
 @ Droplets spray up when things enter or leave water, slime or lava
 am ነገሮች ወደ ውሃ፣ ዝቃጭ ወይም ላቫ ሲገቡ ወይም ሲወጡ ጠብታዎች ይረጫሉ
+
+@ Drops bead and run down the screen after you surface from water or slime
+am ከውሃ ወይም ከዝቃጭ ሲወጡ ጠብታዎች በስክሪኑ ላይ ይፈጠራሉ እና ይወርዳሉ
+
+@ The view ripples and bends while your head is under water, slime or lava
+am ራስዎ በውሃ፣ ዝቃጭ ወይም ላቫ ውስጥ ሲሆን እይታው ይንቀጠቀጣል እና ይጣመማል
 
 @ Emulates the original 8-bit palette of software rendering
 am የሶፍትዌር አሳሳል የመጀመሪያውን 8-ቢት የቀለም ሰሌዳ ይመስላል

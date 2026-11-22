@@ -880,6 +880,9 @@ sl Senčilnik zaslona
 @ Screen Shake
 sl Tresenje zaslona
 
+@ Screen Droplets
+sl Kapljice na zaslonu
+
 @ Seconds a center-screen message stays up
 sl Koliko sekund ostane sporočilo na sredini zaslona
 
@@ -1044,6 +1047,9 @@ sl Obrat desno
 
 @ Underwater FX
 sl Podvodni učinki
+
+@ Underwater Refraction
+sl Podvodni lom svetlobe
 
 @ Use Bullet Time Meter
 sl Uporabi merilnik bullet time
@@ -1885,6 +1891,12 @@ sl V vsakem portalu nariše pogled iz povezanega portala; izklopljeno pokaže ra
 
 @ Droplets spray up when things enter or leave water, slime or lava
 sl Kapljice brizgnejo, ko kaj vstopi v vodo, sluz ali lavo ali iz nje izstopi
+
+@ Drops bead and run down the screen after you surface from water or slime
+sl Ko pridete iz vode ali sluzi, se na zaslonu naberejo kapljice in polzijo navzdol
+
+@ The view ripples and bends while your head is under water, slime or lava
+sl Slika valovi in se krivi, dokler je glava pod vodo, sluzjo ali lavo
 
 @ Emulates the original 8-bit palette of software rendering
 sl Posnema izvirno 8-bitno paleto programskega izrisa

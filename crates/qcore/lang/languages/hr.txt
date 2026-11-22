@@ -880,6 +880,9 @@ hr Shader zaslona
 @ Screen Shake
 hr Podrhtavanje zaslona
 
+@ Screen Droplets
+hr Kapljice na zaslonu
+
 @ Seconds a center-screen message stays up
 hr Sekunde koliko poruka u sredini zaslona ostaje vidljiva
 
@@ -1044,6 +1047,9 @@ hr Okret udesno
 
 @ Underwater FX
 hr Podvodni efekti
+
+@ Underwater Refraction
+hr Podvodni lom svjetlosti
 
 @ Use Bullet Time Meter
 hr Koristi mjerač bullet timea
@@ -1885,6 +1891,12 @@ hr U svakom portalu prikazuje pogled iz povezanog portala; isključeno prikazuje
 
 @ Droplets spray up when things enter or leave water, slime or lava
 hr Kapljice prskaju kad nešto uđe u vodu, sluz ili lavu ili iz njih izađe
+
+@ Drops bead and run down the screen after you surface from water or slime
+hr Kapljice se skupljaju i cure niz zaslon kad izronite iz vode ili sluzi
+
+@ The view ripples and bends while your head is under water, slime or lava
+hr Slika se valovito njiše i savija dok vam je glava pod vodom, sluzi ili lavom
 
 @ Emulates the original 8-bit palette of software rendering
 hr Oponaša izvornu 8-bitnu paletu softverskog iscrtavanja

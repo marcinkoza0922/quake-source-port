@@ -880,6 +880,9 @@ km Shader អេក្រង់
 @ Screen Shake
 km ការ​ញ័រ​អេក្រង់
 
+@ Screen Droplets
+km ដំណក់​ទឹក​លើ​អេក្រង់
+
 @ Seconds a center-screen message stays up
 km ចំនួន​វិនាទី​ដែល​សារ​កណ្ដាល​អេក្រង់​នៅ​បង្ហាញ
 
@@ -1044,6 +1047,9 @@ km បត់​ស្ដាំ
 
 @ Underwater FX
 km ឥទ្ធិពល​ក្រោម​ទឹក
+
+@ Underwater Refraction
+km ចំណាំង​ផ្លាត​ក្រោម​ទឹក
 
 @ Use Bullet Time Meter
 km ប្រើ​របារ​ពេល​យឺត
@@ -1885,6 +1891,12 @@ km គូរ​ទិដ្ឋភាព​ពី​ផតថល​ដែល​�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 km ដំណក់​ទឹក​ខ្ទាត​ឡើង​ពេល​វត្ថុ​ចូល​ឬ​ចេញ​ពី​ទឹក ស្លាយ ឬ​កម្អែ​ភ្នំ​ភ្លើង
+
+@ Drops bead and run down the screen after you surface from water or slime
+km ដំណក់​ទឹក​ប្រមូល​ផ្តុំ​និង​ហូរ​ចុះ​លើ​អេក្រង់​បន្ទាប់​ពី​អ្នក​ឡើង​ពី​ទឹក ឬ​ស្លាយ
+
+@ The view ripples and bends while your head is under water, slime or lava
+km ទិដ្ឋភាព​រលក​និង​កោង​ពេល​ក្បាល​របស់​អ្នក​នៅ​ក្រោម​ទឹក ស្លាយ ឬ​កម្អែ​ភ្នំ​ភ្លើង
 
 @ Emulates the original 8-bit palette of software rendering
 km ត្រាប់​តាម​ក្ដារ​ពណ៌ 8-bit ដើម​នៃ​ការ​បង្ហាញ​ដោយ​កម្មវិធី

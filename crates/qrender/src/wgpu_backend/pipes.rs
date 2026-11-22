@@ -6,7 +6,7 @@ pub(super) use super::scene_pipes::ScenePipes;
 
 pub(super) const SCENE_SRC: &str = concat!(include_str!("shaders/common.wgsl"), include_str!("shaders/material.wgsl"));
 const SKY_SRC: &str = concat!(include_str!("shaders/common.wgsl"), include_str!("shaders/sky.wgsl"));
-const SCREEN_SRC: &str = include_str!("shaders/screen.wgsl");
+const SCREEN_SRC: &str = concat!(include_str!("shaders/screen.wgsl"), include_str!("shaders/water_screen.wgsl"));
 
 /// Bytes per per-draw / per-view uniform record (dynamic offset alignment).
 pub(super) const UNIFORM_STRIDE: u64 = 256;

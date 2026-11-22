@@ -197,6 +197,20 @@ it Gocce schizzano quando qualcosa entra o esce da acqua, melma o lava
 es Saltan gotas cuando algo entra o sale del agua, el limo o la lava
 ru Брызги взлетают, когда что-то входит в воду, слизь или лаву либо выходит из них
 
+@ Drops bead and run down the screen after you surface from water or slime
+fr Des gouttes perlent et coulent sur l'écran quand vous sortez de l'eau ou de la boue toxique
+de Tropfen perlen über den Bildschirm und rinnen herab, wenn du aus Wasser oder Schleim auftauchst
+it Gocce si formano e scivolano sullo schermo quando riemergi da acqua o melma
+es Se forman gotas que resbalan por la pantalla al salir del agua o el limo
+ru После выхода из воды или слизи по экрану стекают капли
+
+@ The view ripples and bends while your head is under water, slime or lava
+fr La vue ondule et se déforme quand votre tête est sous l'eau, la boue toxique ou la lave
+de Die Sicht wogt und verzerrt sich, solange dein Kopf unter Wasser, Schleim oder Lava ist
+it La visuale ondeggia e si deforma quando la testa è sotto acqua, melma o lava
+es La vista ondula y se deforma mientras tu cabeza está bajo el agua, el limo o la lava
+ru Изображение колышется и искажается, пока голова под водой, слизью или лавой
+
 @ Emulates the original 8-bit palette of software rendering
 fr Émule la palette 8 bits d'origine du rendu logiciel
 de Emuliert die originale 8-Bit-Palette des Software-Renderings

@@ -28,10 +28,12 @@ impl Host {
         let mut blend = [0.0; 4];
         let mut splits = Vec::new();
         let mut goggles = qrender::Goggles::default();
-        let mut view = view.map(|mut v| {
+        let mut view = view;
+        if let Some(v) = view.as_mut() {
             v.waterwarp = self.waterwarp(v.origin, self.cl.time);
-            v
-        });
+            let (eye, fx) = self.water_screen_input(v.origin);
+            v.water_screen = self.view.water_screen.update(eye, self.cl.time, fx);
+        }
         let mut csqc_sbar = true;
         let mut csqc_crosshair = true;
         if let Some(v) = &view {

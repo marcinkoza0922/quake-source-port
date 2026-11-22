@@ -880,6 +880,9 @@ id Shader Layar
 @ Screen Shake
 id Guncangan Layar
 
+@ Screen Droplets
+id Tetesan di Layar
+
 @ Seconds a center-screen message stays up
 id Lama pesan di tengah layar ditampilkan (detik)
 
@@ -1044,6 +1047,9 @@ id Belok Kanan
 
 @ Underwater FX
 id Efek Bawah Air
+
+@ Underwater Refraction
+id Refraksi Bawah Air
 
 @ Use Bullet Time Meter
 id Gunakan Meter Bullet Time
@@ -1885,6 +1891,12 @@ id Gambar pemandangan dari portal pasangannya di dalam setiap portal; nonaktif m
 
 @ Droplets spray up when things enter or leave water, slime or lava
 id Tetesan memercik saat sesuatu masuk atau keluar dari air, lendir, atau lava
+
+@ Drops bead and run down the screen after you surface from water or slime
+id Tetesan terbentuk dan mengalir di layar setelah Anda keluar dari air atau lendir
+
+@ The view ripples and bends while your head is under water, slime or lava
+id Tampilan beriak dan membengkok saat kepala Anda berada di bawah air, lendir, atau lava
 
 @ Emulates the original 8-bit palette of software rendering
 id Meniru palet 8-bit asli dari rendering software

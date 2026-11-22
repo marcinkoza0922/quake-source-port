@@ -880,6 +880,9 @@ hy Էկրանի շեյդեր
 @ Screen Shake
 hy Էկրանի ցնցում
 
+@ Screen Droplets
+hy Կաթիլներ էկրանին
+
 @ Seconds a center-screen message stays up
 hy Քանի վայրկյան է մնում կենտրոնի հաղորդագրությունը
 
@@ -1044,6 +1047,9 @@ hy Թեքվել աջ
 
 @ Underwater FX
 hy Ստորջրյա էֆեկտներ
+
+@ Underwater Refraction
+hy Ստորջրյա բեկում
 
 @ Use Bullet Time Meter
 hy Դանդաղ ժամանակի սանդղակ
@@ -1885,6 +1891,12 @@ hy Յուրաքանչյուր պորտալում ցույց տալ կապակց�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 hy Կաթիլները ցայտում են, երբ ինչ-որ բան մտնում կամ դուրս է գալիս ջրից, տիղմից կամ լավայից
+
+@ Drops bead and run down the screen after you surface from water or slime
+hy Ջրից կամ տիղմից դուրս գալուց հետո կաթիլները հավաքվում և հոսում են էկրանով ներքև
+
+@ The view ripples and bends while your head is under water, slime or lava
+hy Պատկերը ալեկոծվում և ծռվում է, քանի դեռ գլուխդ ջրի, տիղմի կամ լավայի տակ է
 
 @ Emulates the original 8-bit palette of software rendering
 hy Նմանակում է ծրագրային ռենդերինգի սկզբնական 8-բիթանոց պալիտրան

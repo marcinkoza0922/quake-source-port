@@ -880,6 +880,9 @@ ca Shader de pantalla
 @ Screen Shake
 ca Tremolor de pantalla
 
+@ Screen Droplets
+ca Gotes a la pantalla
+
 @ Seconds a center-screen message stays up
 ca Segons que un missatge roman al centre de la pantalla
 
@@ -1044,6 +1047,9 @@ ca Gira a la dreta
 
 @ Underwater FX
 ca Efectes sota l'aigua
+
+@ Underwater Refraction
+ca Refracció sota l'aigua
 
 @ Use Bullet Time Meter
 ca Usa el mesurador de temps bala
@@ -1885,6 +1891,12 @@ ca Mostra a cada portal la vista des del portal enllaçat; desactivat mostra dis
 
 @ Droplets spray up when things enter or leave water, slime or lava
 ca Salten gotes quan alguna cosa entra o surt de l'aigua, el llot o la lava
+
+@ Drops bead and run down the screen after you surface from water or slime
+ca Es formen gotes que llisquen per la pantalla quan surts de l'aigua o el llot
+
+@ The view ripples and bends while your head is under water, slime or lava
+ca La vista ondula i es deforma mentre tens el cap sota l'aigua, el llot o la lava
 
 @ Emulates the original 8-bit palette of software rendering
 ca Emula la paleta original de 8 bits de la renderització per programari

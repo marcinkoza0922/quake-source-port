@@ -54,6 +54,8 @@ pub(super) const WATER: &[Item] = &[
     toggle("Splashes", "r_watersplash"),
     toggle("Caustics", "r_watercaustics"),
     slider("Caustic Intensity", "r_watercaustics_amount", 0.1, 2.0, 0.1),
+    toggle("Underwater Refraction", "r_water_refraction"),
+    toggle("Screen Droplets", "r_water_droplets"),
     Item::Choice { label: "Reflections", cvar: "r_water_reflections", choices: WATER_REFLECTIONS },
     slider("Reflection Strength", "r_water_reflections_amount", 0.25, 1.5, 0.25),
 ];

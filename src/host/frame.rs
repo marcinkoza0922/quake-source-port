@@ -593,18 +593,6 @@ impl Host {
         snd.update(l);
     }
 
-    /// r_waterwarp (0 off, 1 software ripple, 2 GLQuake FOV pulse) when the eye
-    /// is in water, slime or lava.
-    pub(super) fn waterwarp(&self, eye: [f32; 3], time: f64) -> qrender::WaterWarp {
-        let t = (time % 1000.0) as f32;
-        let mode = self.cv("r_waterwarp").round() as i32;
-        // Enhanced Water draws its own underwater effects instead.
-        if mode == 0 || self.cv("r_enhancedwater") != 0.0 || !(-5..=-3).contains(&self.contents(eye)) {
-            return qrender::WaterWarp::None;
-        }
-        if mode == 2 { qrender::WaterWarp::Fov(t) } else { qrender::WaterWarp::Screen(t) }
-    }
-
     pub(super) fn contents(&self, p: [f32; 3]) -> i32 {
         if let Some(l) = &self.server.level {
             return l.world.point_contents(Vec3::from_array(p));

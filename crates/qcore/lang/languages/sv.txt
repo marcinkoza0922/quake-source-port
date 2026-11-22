@@ -880,6 +880,9 @@ sv Skärmshader
 @ Screen Shake
 sv Skärmskakning
 
+@ Screen Droplets
+sv Droppar på skärmen
+
 @ Seconds a center-screen message stays up
 sv Sekunder ett mittmeddelande visas
 
@@ -1044,6 +1047,9 @@ sv Sväng höger
 
 @ Underwater FX
 sv Undervattenseffekter
+
+@ Underwater Refraction
+sv Ljusbrytning under vatten
 
 @ Use Bullet Time Meter
 sv Använd bullet time-mätare
@@ -1885,6 +1891,12 @@ sv Visar vyn från den länkade portalen inuti varje portal; av visar platta ski
 
 @ Droplets spray up when things enter or leave water, slime or lava
 sv Droppar sprutar upp när något går ner i eller lämnar vatten, slem eller lava
+
+@ Drops bead and run down the screen after you surface from water or slime
+sv Droppar samlas och rinner nerför skärmen när du kommer upp ur vatten eller slem
+
+@ The view ripples and bends while your head is under water, slime or lava
+sv Bilden böljar och böjs medan huvudet är under vatten, slem eller lava
 
 @ Emulates the original 8-bit palette of software rendering
 sv Emulerar den ursprungliga 8-bitarspaletten från mjukvarurenderingen

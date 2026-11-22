@@ -880,6 +880,9 @@ uk Екранний шейдер
 @ Screen Shake
 uk Трясіння екрана
 
+@ Screen Droplets
+uk Краплі на екрані
+
 @ Seconds a center-screen message stays up
 uk Скільки секунд тримається повідомлення в центрі екрана
 
@@ -1044,6 +1047,9 @@ uk Поворот праворуч
 
 @ Underwater FX
 uk Підводні ефекти
+
+@ Underwater Refraction
+uk Підводне заломлення
 
 @ Use Bullet Time Meter
 uk Шкала сповільнення
@@ -1885,6 +1891,12 @@ uk Показує в кожному порталі вигляд із пов’я
 
 @ Droplets spray up when things enter or leave water, slime or lava
 uk Бризки злітають, коли щось входить у воду, слиз чи лаву або виходить із них
+
+@ Drops bead and run down the screen after you surface from water or slime
+uk Після виходу з води чи слизу по екрану збираються й стікають краплі
+
+@ The view ripples and bends while your head is under water, slime or lava
+uk Зображення хвилюється і викривляється, поки голова під водою, слизом чи лавою
 
 @ Emulates the original 8-bit palette of software rendering
 uk Імітує оригінальну 8-бітну палітру програмного рендерингу

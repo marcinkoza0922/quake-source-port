@@ -880,6 +880,9 @@ mt Shader tal-iskrin
 @ Screen Shake
 mt Theżżiż tal-iskrin
 
+@ Screen Droplets
+mt Qtar fuq l-iskrin
+
 @ Seconds a center-screen message stays up
 mt Kemm-il sekonda jibqa' jidher messaġġ f'nofs l-iskrin
 
@@ -1044,6 +1047,9 @@ mt Dur lejn il-lemin
 
 @ Underwater FX
 mt Effetti taħt l-ilma
+
+@ Underwater Refraction
+mt Rifrazzjoni taħt l-ilma
 
 @ Use Bullet Time Meter
 mt Uża l-miżura tal-Bullet Time
@@ -1885,6 +1891,12 @@ mt Juri ġo kull portal il-veduta mill-portal marbut miegħu; mitfi juri diski �
 
 @ Droplets spray up when things enter or leave water, slime or lava
 mt Qtar jitfarrak 'il fuq meta xi ħaġa tidħol jew toħroġ mill-ilma, mis-slime jew mil-lava
+
+@ Drops bead and run down the screen after you surface from water or slime
+mt Il-qtar jinġabar u jiżżerżaq 'l isfel fuq l-iskrin wara li toħroġ mill-ilma jew mis-slime
+
+@ The view ripples and bends while your head is under water, slime or lava
+mt Il-veduta tixxengel u tilwi waqt li rasek tkun taħt l-ilma, is-slime jew il-lava
 
 @ Emulates the original 8-bit palette of software rendering
 mt Jimita l-paletta oriġinali 8-bit tar-rendering bis-software

@@ -880,6 +880,9 @@ te స్క్రీన్ షేడర్
 @ Screen Shake
 te స్క్రీన్ కంపనం
 
+@ Screen Droplets
+te తెరపై బిందువులు
+
 @ Seconds a center-screen message stays up
 te మధ్య సందేశం ఎన్ని సెకన్లు కనిపిస్తుంది
 
@@ -1044,6 +1047,9 @@ te కుడికి తిరుగు
 
 @ Underwater FX
 te నీటి అడుగు FX
+
+@ Underwater Refraction
+te నీటి అడుగు వక్రీభవనం
 
 @ Use Bullet Time Meter
 te బుల్లెట్ టైమ్ మీటర్ వాడు
@@ -1885,6 +1891,12 @@ te ప్రతి పోర్టల్ లోపల అనుసంధాన�
 
 @ Droplets spray up when things enter or leave water, slime or lava
 te వస్తువులు నీరు, బురద లేదా లావాలోకి ప్రవేశించినప్పుడు లేదా బయటకు వచ్చినప్పుడు బిందువులు పైకి చిమ్ముతాయి
+
+@ Drops bead and run down the screen after you surface from water or slime
+te నీరు లేదా బురద నుంచి బయటకు వచ్చిన తర్వాత తెరపై బిందువులు చేరి కిందికి జారుతాయి
+
+@ The view ripples and bends while your head is under water, slime or lava
+te తల నీరు, బురద లేదా లావా కింద ఉన్నంతసేపు దృశ్యం అలలాగా ఊగి వంగుతుంది
 
 @ Emulates the original 8-bit palette of software rendering
 te సాఫ్ట్‌వేర్ రెండరింగ్ యొక్క అసలైన 8-బిట్ పాలెట్‌ను అనుకరిస్తుంది

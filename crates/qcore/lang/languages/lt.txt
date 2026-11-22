@@ -880,6 +880,9 @@ lt Ekrano šešėliuoklis
 @ Screen Shake
 lt Ekrano drebėjimas
 
+@ Screen Droplets
+lt Lašai ekrane
+
 @ Seconds a center-screen message stays up
 lt Kiek sekundžių rodomas pranešimas ekrano centre
 
@@ -1044,6 +1047,9 @@ lt Suktis dešinėn
 
 @ Underwater FX
 lt Povandeniniai efektai
+
+@ Underwater Refraction
+lt Povandeninė refrakcija
 
 @ Use Bullet Time Meter
 lt Naudoti Bullet Time juostą
@@ -1885,6 +1891,12 @@ lt Kiekviename portale rodyti vaizdą iš susieto portalo; išjungus rodomi plok
 
 @ Droplets spray up when things enter or leave water, slime or lava
 lt Lašai taško, kai kas nors įneria ar išneria iš vandens, gleivių ar lavos
+
+@ Drops bead and run down the screen after you surface from water or slime
+lt Išnirus iš vandens ar gleivių, ekrane susidaro lašai ir nuteka žemyn
+
+@ The view ripples and bends while your head is under water, slime or lava
+lt Vaizdas banguoja ir linksta, kol galva yra po vandeniu, gleivėmis ar lava
 
 @ Emulates the original 8-bit palette of software rendering
 lt Imituoja originalią programinio atvaizdavimo 8 bitų paletę
