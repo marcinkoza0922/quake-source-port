@@ -222,3 +222,12 @@ the comparison runs on the same inputs.
   4K (120 fps; GPU 2.3 → 8.2 ms; p99 3.65 → 11.64 ms). Demo GPU per frame
   (attribution runs) 540p / 4K: spin-e1m1 143 / 833 µs, combat-e1m3
   157 / 914, spin-sepulcher 228 / 1167, spin-sepulcher-fte 946 / 2088.
+- 2026-11-21, 447d83b, first 3-round quick run (vanilla demos), mean ms
+  540p / 4K with spread: spin-e1m1 0.228 ±0.001 / 1.067 ±0.045,
+  combat-e1m3 0.249 ±0.001 / 1.197 ±0.089, spin-sepulcher 0.421 ±0.012 /
+  1.416 ±0.029, spin-sepulcher-fte 1.356 ±0.010 / 2.279 ±0.026. 540p is
+  tight (under 3% spread); 4K combat spreads 7%, so 4K costs below that
+  won't count. The quick tier took **9 minutes** against the 5-minute
+  target (24 timed runs, 4 warm-ups, 8 attribution runs, ~15 s each, mostly
+  startup and map load): candidates are 540p-only quick runs for CPU-only
+  changes (as planned), shorter spin demos, and `-noattrib`.
