@@ -149,7 +149,9 @@ impl World {
         (marks, surfs)
     }
 
-    /// R_MarkLeaves: list the PVS leaves of `leaf` that have surfaces.
+    /// R_MarkLeaves: list the PVS leaves of `leaf` that have surfaces, build
+    /// 16-leaf frustum culling blocks, and populate the flat PVS leaf bitset
+    /// for static entity culling.
     /// All-visible queries share key 0, since their candidate list does not
     /// depend on the camera leaf. Frustum clipping still runs for each view.
     pub(super) fn mark_leaves(&mut self, leaf: usize) {
@@ -162,14 +164,22 @@ impl World {
         }
         self.vis_leaf = key;
         self.vis_leaves.clear();
+        self.vis_blocks.clear();
+        self.vis_pvs_bits.clear();
         let pvs = if novis {
             Vec::new()
         } else {
+            self.vis_pvs_bits.resize(self.leafs.len().div_ceil(32), 0);
             qformats::bsp::decompress_vis(&self.visdata, self.leafs[leaf].visofs, self.numleafs)
         };
-        for i in 0..self.numleafs.min(self.leafs.len().saturating_sub(1)) {
-            if !novis && pvs.get(i >> 3).is_none_or(|b| b & (1 << (i & 7)) == 0) {
-                continue;
+        let nclusters = self.numleafs.min(self.leafs.len().saturating_sub(1));
+        for i in 0..nclusters {
+            if !novis {
+                if pvs.get(i >> 3).is_none_or(|b| b & (1 << (i & 7)) == 0) {
+                    continue;
+                }
+                let li = i + 1;
+                self.vis_pvs_bits[li >> 5] |= 1 << (li & 31);
             }
             let l = &self.leafs[i + 1];
             if l.num_marksurfaces > 0 {
@@ -177,5 +187,83 @@ impl World {
                 self.vis_leaves.push(VisLeaf { leaf: i as u32 + 1, center, extent });
             }
         }
+        const BLOCK: usize = 16;
+        let mut start = 0usize;
+        while start < self.vis_leaves.len() {
+            let end = (start + BLOCK).min(self.vis_leaves.len());
+            let mut mins = [f32::INFINITY; 3];
+            let mut maxs = [f32::NEG_INFINITY; 3];
+            for l in &self.vis_leaves[start..end] {
+                for k in 0..3 {
+                    mins[k] = mins[k].min(l.center[k] - l.extent[k]);
+                    maxs[k] = maxs[k].max(l.center[k] + l.extent[k]);
+                }
+            }
+            let (center, extent) = center_extent(mins, maxs);
+            self.vis_blocks.push(VisBlock {
+                center,
+                extent,
+                start: start as u32,
+                count: (end - start) as u32,
+            });
+            start = end;
+        }
+    }
+
+    /// R_SplitEntityOnNode (ironwail `gl_refrag.c`): appends the 1-based BSP
+    /// leaf indices (excluding `CONTENTS_SOLID`) touched by `[mins, maxs]`.
+    pub fn box_leaves(&self, mins: [f32; 3], maxs: [f32; 3], out: &mut Vec<u32>) {
+        if self.bsp_nodes.is_empty() {
+            return;
+        }
+        let mut stack = [0i32; 128];
+        let mut sp = 1usize;
+        while sp > 0 {
+            sp -= 1;
+            let n = stack[sp];
+            if n < 0 {
+                let idx = (-(n + 1)) as usize;
+                if idx >= 1
+                    && self
+                        .leafs
+                        .get(idx)
+                        .is_some_and(|l| l.contents != qformats::bsp::CONTENTS_SOLID)
+                {
+                    out.push(idx as u32);
+                }
+                continue;
+            }
+            let Some(node) = self.bsp_nodes.get(n as usize) else { continue };
+            let Some(pl) = self.planes.get(node.plane.max(0) as usize) else { continue };
+            let mut dmin = -pl.dist;
+            let mut dmax = -pl.dist;
+            for k in 0..3 {
+                let a = pl.normal[k] * mins[k];
+                let b = pl.normal[k] * maxs[k];
+                if a < b {
+                    dmin += a;
+                    dmax += b;
+                } else {
+                    dmin += b;
+                    dmax += a;
+                }
+            }
+            if dmax >= 0.0 && sp < stack.len() {
+                stack[sp] = node.children[0];
+                sp += 1;
+            }
+            if dmin < 0.0 && sp < stack.len() {
+                stack[sp] = node.children[1];
+                sp += 1;
+            }
+        }
+    }
+
+    /// Flat PVS leaf bitset (1 bit per 1-based leaf index) for `eye`'s view
+    /// leaf, or `None` when PVS is disabled / unavailable (`novis`).
+    pub fn pvs_bits(&mut self, eye: [f32; 3]) -> Option<&[u32]> {
+        let leaf = self.view_leaf(eye);
+        self.mark_leaves(leaf);
+        (self.vis_leaf != 0).then_some(self.vis_pvs_bits.as_slice())
     }
 }

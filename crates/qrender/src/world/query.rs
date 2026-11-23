@@ -209,9 +209,22 @@ impl World {
         out.clear();
         out.resize(self.leafs.len().div_ceil(32), 0);
         let planes = Planes::new(frustum);
-        for l in &self.vis_leaves {
-            if planes.clip(0b1111, l.center, l.extent).is_some() {
-                out[(l.leaf >> 5) as usize] |= 1 << (l.leaf & 31);
+        for b in &self.vis_blocks {
+            let slice = &self.vis_leaves[b.start as usize..(b.start + b.count) as usize];
+            match planes.classify(b.center, b.extent) {
+                -1 => continue,
+                1 => {
+                    for l in slice {
+                        out[(l.leaf >> 5) as usize] |= 1 << (l.leaf & 31);
+                    }
+                }
+                _ => {
+                    for l in slice {
+                        if planes.intersects(l.center, l.extent) {
+                            out[(l.leaf >> 5) as usize] |= 1 << (l.leaf & 31);
+                        }
+                    }
+                }
             }
         }
     }
@@ -235,7 +248,7 @@ impl World {
         self.mark_leaves(leaf);
         let planes = Planes::new(frustum);
         let leaves = self.vis_leaves.iter()
-            .filter(|l| planes.clip(0b1111, l.center, l.extent).is_some())
+            .filter(|l| planes.intersects(l.center, l.extent))
             .count() as u32;
         let pvs = self.surfaces_for_leaf(leaf);
         let surfaces = pvs.iter().copied().filter(|&i| {

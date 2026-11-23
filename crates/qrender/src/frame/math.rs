@@ -9,49 +9,87 @@ pub(super) fn ident() -> Mat4 {
     m
 }
 
+#[inline]
 pub(super) fn mul(a: &Mat4, b: &Mat4) -> Mat4 {
     let mut c = [0.0; 16];
     for col in 0..4 {
+        let bc = col * 4;
+        let b0 = b[bc];
+        let b1 = b[bc + 1];
+        let b2 = b[bc + 2];
+        let b3 = b[bc + 3];
         for row in 0..4 {
-            c[col * 4 + row] = (0..4).map(|k| a[k * 4 + row] * b[col * 4 + k]).sum();
+            c[bc + row] = a[row] * b0 + a[4 + row] * b1 + a[8 + row] * b2 + a[12 + row] * b3;
         }
     }
     c
 }
 
 /// From a row-major 3x3 rotation and translation.
+#[inline]
 pub(super) fn affine(r: [[f32; 3]; 3], t: [f32; 3]) -> Mat4 {
-    let mut m = ident();
-    for (row, rr) in r.iter().enumerate() {
-        for (col, v) in rr.iter().enumerate() {
-            m[col * 4 + row] = *v;
-        }
-    }
-    m[12] = t[0];
-    m[13] = t[1];
-    m[14] = t[2];
-    m
+    [
+        r[0][0], r[1][0], r[2][0], 0.0,
+        r[0][1], r[1][1], r[2][1], 0.0,
+        r[0][2], r[1][2], r[2][2], 0.0,
+        t[0], t[1], t[2], 1.0,
+    ]
 }
 
-pub(super) fn mul3(a: [[f32; 3]; 3], b: [[f32; 3]; 3]) -> [[f32; 3]; 3] {
-    let mut c = [[0.0; 3]; 3];
-    for i in 0..3 {
-        for j in 0..3 {
-            c[i][j] = (0..3).map(|k| a[i][k] * b[k][j]).sum();
-        }
-    }
-    c
+/// `affine(r, origin) * affine(diag(scale), scale_origin)` without a 4x4 matmul.
+#[inline]
+pub(super) fn alias_model_matrix(
+    r: [[f32; 3]; 3],
+    origin: [f32; 3],
+    scale: [f32; 3],
+    scale_origin: [f32; 3],
+) -> Mat4 {
+    let [sx, sy, sz] = scale;
+    let [ox, oy, oz] = scale_origin;
+    [
+        r[0][0] * sx, r[1][0] * sx, r[2][0] * sx, 0.0,
+        r[0][1] * sy, r[1][1] * sy, r[2][1] * sy, 0.0,
+        r[0][2] * sz, r[1][2] * sz, r[2][2] * sz, 0.0,
+        r[0][0] * ox + r[0][1] * oy + r[0][2] * oz + origin[0],
+        r[1][0] * ox + r[1][1] * oy + r[1][2] * oz + origin[1],
+        r[2][0] * ox + r[2][1] * oy + r[2][2] * oz + origin[2],
+        1.0,
+    ]
 }
+
+/// Quantized 16-angle Quake alias shade vector (`norm([cos(-ang), sin(-ang), 1])`).
+#[inline]
+pub(super) fn shade_vec(yaw: f32) -> [f32; 3] {
+    static TABLE: std::sync::OnceLock<[[f32; 3]; 16]> = std::sync::OnceLock::new();
+    let tbl = TABLE.get_or_init(|| {
+        std::array::from_fn(|q| {
+            let ang = q as f32 / 16.0 * std::f32::consts::TAU;
+            norm([(-ang).cos(), (-ang).sin(), 1.0])
+        })
+    });
+    tbl[((yaw * (16.0 / 360.0)) as i32 & 15) as usize]
+}
+
+pub(super) const IDENT3: [[f32; 3]; 3] = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]];
 
 /// R_RotateForEntity: Rz(yaw) * Ry(-pitch) * Rx(roll).
+#[inline]
 pub(super) fn entity_rotation(angles: [f32; 3]) -> [[f32; 3]; 3] {
+    if angles[0] == 0.0 && angles[2] == 0.0 {
+        if angles[1] == 0.0 {
+            return IDENT3;
+        }
+        let (sy, cy) = angles[1].to_radians().sin_cos();
+        return [[cy, -sy, 0.0], [sy, cy, 0.0], [0.0, 0.0, 1.0]];
+    }
     let (sy, cy) = angles[1].to_radians().sin_cos();
     let (sp, cp) = (-angles[0]).to_radians().sin_cos();
     let (sr, cr) = angles[2].to_radians().sin_cos();
-    let rz = [[cy, -sy, 0.0], [sy, cy, 0.0], [0.0, 0.0, 1.0]];
-    let ry = [[cp, 0.0, sp], [0.0, 1.0, 0.0], [-sp, 0.0, cp]];
-    let rx = [[1.0, 0.0, 0.0], [0.0, cr, -sr], [0.0, sr, cr]];
-    mul3(mul3(rz, ry), rx)
+    [
+        [cy * cp, -sy * cr + cy * sp * sr, sy * sr + cy * sp * cr],
+        [sy * cp, cy * cr + sy * sp * sr, -cy * sr + sy * sp * cr],
+        [-sp, cp * sr, cp * cr],
+    ]
 }
 
 /// AngleVectors: (forward, right, up).

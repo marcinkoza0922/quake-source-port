@@ -11,7 +11,7 @@ const GEL_MODE: f32 = 9.0;
 const GEL_FAST_MODE: f32 = 10.0;
 mod types;
 use types::*;
-pub(super) use types::UiVert;
+pub(super) use types::{FrameScratch, UiVert};
 mod math;
 pub use math::*;
 mod world_draw;
@@ -140,6 +140,9 @@ impl Renderer {
             styles[i] = v as f32;
             style_ints[i] = v;
         }
+        if let Some(wg) = self.world.as_mut() {
+            wg.cpu.begin_light_frame(&style_ints);
+        }
 
         // views: split-screen cells, or the one view over the whole output
         let views_in: Vec<(Option<View>, [u32; 4], [f32; 4])> = if fr.splits.is_empty() {
@@ -239,13 +242,25 @@ impl Renderer {
         let mut passes: Vec<ViewPass> = Vec::with_capacity(views_in.len());
         let mut primary_water_bounds: Option<([f32; 3], [f32; 3])> = None;
         let mut primary_eye_z = 0.0f32;
+        let mut frame_scratch = std::mem::take(&mut self.frame_scratch);
         for (vi, &(view_in, rect, blend)) in views_in.iter().enumerate() {
         let vbit = 1u8 << vi.min(7);
-        let mut world_draws: Vec<WorldDraw> = Vec::new();
-        let mut vel_draws: Vec<VelDraw> = Vec::new();
-        let mut alias_draws: Vec<AliasDraw> = Vec::new();
-        let mut sprite_draws: Vec<SpriteDraw> = Vec::new();
-        let mut trans: Vec<(f32, Trans)> = Vec::new();
+        let (mut world_draws, mut vel_draws, mut alias_draws, mut sprite_draws, mut trans) = if vi == 0 {
+            frame_scratch.world_draws.clear();
+            frame_scratch.vel_draws.clear();
+            frame_scratch.alias_draws.clear();
+            frame_scratch.sprite_draws.clear();
+            frame_scratch.trans.clear();
+            (
+                std::mem::take(&mut frame_scratch.world_draws),
+                std::mem::take(&mut frame_scratch.vel_draws),
+                std::mem::take(&mut frame_scratch.alias_draws),
+                std::mem::take(&mut frame_scratch.sprite_draws),
+                std::mem::take(&mut frame_scratch.trans),
+            )
+        } else {
+            (Vec::new(), Vec::new(), Vec::new(), Vec::new(), Vec::new())
+        };
         let mut cull: Option<CullFrame> = None;
         let mut particles = Range::default();
         // FTE particles: (vertex offset, index offset, batches with texture slots)
@@ -380,17 +395,20 @@ impl Renderer {
                     }
                 }
             }
-            let mut brush_surfs: Vec<u32> = Vec::new();
+            let brush_surfs = &mut frame_scratch.brush_surfs;
+            let has_hidden_ents = !self.hidden_entities.is_empty();
             for e in fr.entities {
-                if self.hidden_entities.contains(&e.key) || (e.views != 0 && e.views & vbit == 0) { continue; }
+                if (has_hidden_ents && self.hidden_entities.contains(&e.key))
+                    || (e.views != 0 && e.views & vbit == 0)
+                {
+                    continue;
+                }
                 let Some(m) = self.models.get(e.model.0 as usize) else {
                     continue;
                 };
                 if st.mapper.lightmap && !matches!(m, Model::Brush(_)) {
                     continue;
                 }
-                let rot = entity_rotation(e.angles);
-                let dist = dot(sub(e.origin, vs.eye), vs.fwd);
                 match m {
                     Model::Brush(sm) => {
                         let Some(wg) = self.world.as_ref() else {
@@ -399,33 +417,20 @@ impl Renderer {
                         let Some(sub_) = wg.cpu.submodels.get(*sm as usize) else {
                             continue;
                         };
-                        let rotated = e.angles.iter().any(|&a| a != 0.0);
-                        let local_mid = [0, 1, 2].map(|i| 0.5 * (sub_.mins[i] + sub_.maxs[i]));
-                        let half = [0, 1, 2].map(|i| 0.5 * (sub_.maxs[i] - sub_.mins[i]));
-                        let radius = dot(half, half).sqrt();
-                        let center = add(e.origin, rotate3(&rot, local_mid));
+                        let rotated = e.angles[0] != 0.0 || e.angles[1] != 0.0 || e.angles[2] != 0.0;
                         let main_visible = if rotated {
-                            let r = [0, 1, 2]
-                                .map(|i| sub_.mins[i].abs().max(sub_.maxs[i].abs()))
-                                .iter()
-                                .map(|x| x * x)
-                                .sum::<f32>()
-                                .sqrt();
+                            let rx = sub_.mins[0].abs().max(sub_.maxs[0].abs());
+                            let ry = sub_.mins[1].abs().max(sub_.maxs[1].abs());
+                            let rz = sub_.mins[2].abs().max(sub_.maxs[2].abs());
+                            let r = (rx * rx + ry * ry + rz * rz).sqrt();
                             sphere_in_frustum(&vs.frustum, e.origin, r)
                         } else {
-                            let mn = [0, 1, 2].map(|i| sub_.mins[i] + e.origin[i]);
-                            let mx = [0, 1, 2].map(|i| sub_.maxs[i] + e.origin[i]);
+                            let mn = [sub_.mins[0] + e.origin[0], sub_.mins[1] + e.origin[1], sub_.mins[2] + e.origin[2]];
+                            let mx = [sub_.maxs[0] + e.origin[0], sub_.maxs[1] + e.origin[1], sub_.maxs[2] + e.origin[2]];
                             box_in_frustum(&vs.frustum, mn, mx)
                         };
-                        let portal_visible = !portal_draws.is_empty()
-                            && portal_draws.iter().any(|pd| {
-                                pd.frustum.is_some_and(|f| {
-                                    let c = pd.portal.clip();
-                                    dot([c[0], c[1], c[2]], center) + c[3] + radius >= 0.0
-                                        && sphere_in_frustum(&f, center, radius)
-                                })
-                            });
-                        if !main_visible && !portal_visible {
+                        let has_portals = !portal_draws.is_empty();
+                        if !main_visible && !has_portals {
                             // Offscreen brush entities still participate in ray-traced reflections
                             // via `fr.entities`, so keep their lightmaps current when RT is on.
                             if rt_on && vi == 0 {
@@ -439,15 +444,54 @@ impl Renderer {
                             }
                             continue;
                         }
+                        let rot = if rotated { entity_rotation(e.angles) } else { IDENT3 };
+                        let local_mid = [
+                            0.5 * (sub_.mins[0] + sub_.maxs[0]),
+                            0.5 * (sub_.mins[1] + sub_.maxs[1]),
+                            0.5 * (sub_.mins[2] + sub_.maxs[2]),
+                        ];
+                        let half = [
+                            0.5 * (sub_.maxs[0] - sub_.mins[0]),
+                            0.5 * (sub_.maxs[1] - sub_.mins[1]),
+                            0.5 * (sub_.maxs[2] - sub_.mins[2]),
+                        ];
+                        let radius = dot(half, half).sqrt();
+                        let center = if rotated { add(e.origin, rotate3(&rot, local_mid)) } else { add(e.origin, local_mid) };
+                        let portal_visible = has_portals
+                            && portal_draws.iter().any(|pd| {
+                                pd.frustum.is_some_and(|f| {
+                                    let c = pd.portal.clip();
+                                    dot([c[0], c[1], c[2]], center) + c[3] + radius >= 0.0
+                                        && sphere_in_frustum(&f, center, radius)
+                                })
+                            });
+                        if !main_visible && !portal_visible {
+                            if rt_on && vi == 0 {
+                                for si in sub_.first_surface..sub_.first_surface + sub_.num_surfaces {
+                                    if let Some(ds) = wg.draw_surfaces.get(si as usize)
+                                        && ds.lm != NO_LM
+                                    {
+                                        lm_vis.push(ds.lm);
+                                    }
+                                }
+                            }
+                            continue;
+                        }
                         // eye in model space (R^T * (eye - origin))
                         let d = sub(vs.eye, e.origin);
-                        let le = [0, 1, 2]
-                            .map(|c| rot[0][c] * d[0] + rot[1][c] * d[1] + rot[2][c] * d[2]);
+                        let le = if rotated {
+                            [
+                                rot[0][0] * d[0] + rot[1][0] * d[1] + rot[2][0] * d[2],
+                                rot[0][1] * d[0] + rot[1][1] * d[1] + rot[2][1] * d[2],
+                                rot[0][2] * d[0] + rot[1][2] * d[1] + rot[2][2] * d[2],
+                            ]
+                        } else {
+                            d
+                        };
                         brush_surfs.clear();
-                        for si in sub_.first_surface..sub_.first_surface + sub_.num_surfaces {
-                            let Some(s) = wg.cpu.surfaces.get(si as usize) else {
-                                break;
-                            };
+                        let end = (sub_.first_surface + sub_.num_surfaces) as usize;
+                        let surfs = wg.cpu.surfaces.get(sub_.first_surface as usize..end.min(wg.cpu.surfaces.len())).unwrap_or(&[]);
+                        for (off, s) in surfs.iter().enumerate() {
                             if s.num_indices == 0 {
                                 continue;
                             }
@@ -457,7 +501,10 @@ impl Renderer {
                                     continue;
                                 }
                             }
-                            brush_surfs.push(si);
+                            brush_surfs.push(sub_.first_surface + off as u32);
+                        }
+                        if brush_surfs.is_empty() {
+                            continue;
                         }
                         let alpha = e.alpha.clamp(0.0, 1.0);
                         let mut wd = build_world_draw(
@@ -465,7 +512,7 @@ impl Renderer {
                             &mut self.buckets,
                             &mut self.world_draw_scratch,
                             &mut dynw,
-                            &brush_surfs,
+                            brush_surfs,
                             e.frame != 0,
                             time,
                             alphas,
@@ -478,6 +525,7 @@ impl Renderer {
                         wd.bounds = [center[0], center[1], center[2], radius];
                         if main_visible {
                             if alpha < 1.0 {
+                                let dist = dot(sub(e.origin, vs.eye), vs.fwd);
                                 trans.push((dist, Trans::World(world_draws.len())));
                             } else if !e.portal_only
                                 && let Some(r) = prev_rows(vs, view_px, e, center, local_mid, radius, None)
@@ -520,6 +568,7 @@ impl Renderer {
                                 continue;
                             }
                         }
+                        let rot = entity_rotation(e.angles);
                         let t = time + e.syncbase as f64;
                         let pose = |f: u32| {
                             let (first, n, iv) = &am.frames[(f as usize).min(am.frames.len() - 1)];
@@ -527,20 +576,12 @@ impl Renderer {
                         };
                         let pf1 = pose(e.prev_frame);
                         let pf2 = pose(e.frame);
-                        let local = affine(
-                            [
-                                [am.scale[0], 0.0, 0.0],
-                                [0.0, am.scale[1], 0.0],
-                                [0.0, 0.0, am.scale[2]],
-                            ],
-                            am.scale_origin,
-                        );
                         let model = match dynp {
                             Some((_, d)) => affine(
                                 [[d.scale[0], 0.0, 0.0], [0.0, d.scale[1], 0.0], [0.0, 0.0, d.scale[2]]],
                                 d.origin,
                             ),
-                            None => mul(&affine(rot, e.origin), &local),
+                            None => alias_model_matrix(rot, e.origin, am.scale, am.scale_origin),
                         };
                         // R_SetupAliasLighting
                         let wl = self.world.as_ref().map(|w| &w.cpu);
@@ -558,7 +599,7 @@ impl Renderer {
                             .unwrap_or(([128.0; 3], None))
                         };
                         // real-time dynamic lights shade models per pixel instead
-                        if st.dynamic && !st.fullbright && !st.rt_dlights {
+                        if st.dynamic && !st.fullbright && !st.rt_dlights && !fr.dlights.is_empty() {
                             for dl in fr.dlights {
                                 let d = sub(e.origin, dl.origin);
                                 let add = dl.radius - dot(d, d).sqrt();
@@ -595,12 +636,14 @@ impl Renderer {
                             && let Some(wd) = ldir
                         {
                             // Transform world-space baked light direction into model space (R^T * wd).
-                            let local_d = [0, 1, 2].map(|c| rot[0][c] * wd[0] + rot[1][c] * wd[1] + rot[2][c] * wd[2]);
+                            let local_d = [
+                                rot[0][0] * wd[0] + rot[1][0] * wd[1] + rot[2][0] * wd[2],
+                                rot[0][1] * wd[0] + rot[1][1] * wd[1] + rot[2][1] * wd[2],
+                                rot[0][2] * wd[0] + rot[1][2] * wd[1] + rot[2][2] * wd[2],
+                            ];
                             norm(local_d)
                         } else {
-                            let q = ((e.angles[1] * (16.0 / 360.0)) as i32 & 15) as f32;
-                            let ang = q / 16.0 * std::f32::consts::TAU;
-                            norm([(-ang).cos(), (-ang).sin(), 1.0])
+                            shade_vec(e.angles[1])
                         };
                         let alpha = e.alpha.clamp(0.0, 1.0);
                         let mut base_flags = 0u32;
@@ -622,10 +665,23 @@ impl Renderer {
                         }
                         base_flags |= (e.heat.min(3) as u32) << 8;
                         let stride = if am.md3 { 2 } else { 1 };
-                        let prev_r = if main_visible && !e.portal_only && (alpha >= 1.0 || e.viewmodel) {
+                        let prev_r = if prev_ok && main_visible && !e.portal_only && (alpha >= 1.0 || e.viewmodel) {
+                            let local = affine(
+                                [
+                                    [am.scale[0], 0.0, 0.0],
+                                    [0.0, am.scale[1], 0.0],
+                                    [0.0, 0.0, am.scale[2]],
+                                ],
+                                am.scale_origin,
+                            );
                             prev_rows(vs, view_px, e, e.origin, [0.0; 3], radius, Some(&local))
                         } else {
                             None
+                        };
+                        let dist = if alpha < 1.0 && !e.viewmodel && main_visible && !e.portal_only {
+                            dot(sub(e.origin, vs.eye), vs.fwd)
+                        } else {
+                            0.0
                         };
                         for surf in &am.surfaces {
                             if surf.num_indices == 0 {
@@ -727,6 +783,7 @@ impl Renderer {
                             continue;
                         };
                         let alpha = e.alpha.clamp(0.0, 1.0);
+                        let dist = dot(sub(e.origin, vs.eye), vs.fwd);
                         trans.push((dist, Trans::Sprite(sprite_draws.len())));
                         sprite_draws.push(SpriteDraw {
                             vofs,
@@ -740,15 +797,17 @@ impl Renderer {
                 particles = r;
             } else if !fr.particles.is_empty() {
                 if let Some((ofs, ptr)) = dynw.alloc_uninit::<([f32; 3], u32)>(fr.particles.len(), 16) {
+                    let pal = &self.palette_rgba;
                     for (idx, p) in fr.particles.iter().enumerate() {
-                        let c = self.palette[p.color as usize];
-                        let a = (p.alpha.clamp(0.0, 1.0) * 255.0) as u32;
-                        let rec = (
-                            p.origin,
-                            c[0] as u32 | (c[1] as u32) << 8 | (c[2] as u32) << 16 | a << 24,
-                        );
+                        let base = pal[p.color as usize];
+                        let col = if p.alpha >= 1.0 {
+                            base
+                        } else {
+                            let a = (p.alpha.max(0.0) * 255.0) as u32;
+                            (base & 0x00ff_ffff) | (a << 24)
+                        };
                         // SAFETY: `alloc_uninit` reserved `fr.particles.len()` aligned elements.
-                        unsafe { ptr.add(idx).write(rec) };
+                        unsafe { ptr.add(idx).write((p.origin, col)) };
                     }
                     particles = Range {
                         ofs,
@@ -1732,6 +1791,9 @@ impl Renderer {
                 dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[ubo_ofs]);
                 dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
                 let draw_world = |wd: &WorldDraw, cats: &[(Range, vk::Pipeline)]| {
+                    if cats.iter().all(|(r, _)| r.count == 0) {
+                        return;
+                    }
                     dev.cmd_bind_index_buffer(cmd, wd.ibuf.unwrap_or(dynbuf), 0, vk::IndexType::UINT32);
                     push(bytes_of(&[WorldPush {
                         model: wd.model,
@@ -1779,11 +1841,24 @@ impl Renderer {
                     push(bytes_of(&[a.push]));
                     dev.cmd_draw_indexed(cmd, a.num_indices, 1, a.first_index, 0, 0);
                 };
+                let mut bound_alias_pipe = false;
+                let mut last_alias_model: Option<usize> = None;
                 for a in alias_draws
                     .iter()
-                    .filter(|a| a.push.light[3] >= 1.0 && !a.viewmodel)
+                    .filter(|a| a.push.light[3] >= 1.0 && !a.viewmodel && !a.portal_only && a.main_visible)
                 {
-                    draw_alias(a, p.alias);
+                    let Some(Model::Alias(am)) = self.models.get(a.model) else { continue };
+                    if !bound_alias_pipe {
+                        dev.cmd_bind_pipeline(cmd, gfx, p.alias);
+                        bound_alias_pipe = true;
+                    }
+                    if last_alias_model != Some(a.model) {
+                        dev.cmd_bind_vertex_buffers(cmd, 0, &[am.vbuf.buf], &[0]);
+                        dev.cmd_bind_index_buffer(cmd, am.ibuf.buf, 0, vk::IndexType::UINT32);
+                        last_alias_model = Some(a.model);
+                    }
+                    push(bytes_of(&[a.push]));
+                    dev.cmd_draw_indexed(cmd, a.num_indices, 1, a.first_index, 0, 0);
                 }
                 ts(6);
                 if ao_on && let Some(vs) = &view && let Some(ao_src) = &t.ao_source {
@@ -2503,6 +2578,14 @@ impl Renderer {
                 dev.queue_submit(self.gpu.queue, &si, fence)?;
             }
         }
+        if let Some(p0) = passes.into_iter().next() {
+            frame_scratch.world_draws = p0.world_draws;
+            frame_scratch.vel_draws = p0.vel_draws;
+            frame_scratch.alias_draws = p0.alias_draws;
+            frame_scratch.sprite_draws = p0.sprite_draws;
+            frame_scratch.trans = p0.trans;
+        }
+        self.frame_scratch = frame_scratch;
         self.ui_verts = ui;
         self.ui_ranges = ui_ranges;
         for up in pic_uploads {

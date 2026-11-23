@@ -84,14 +84,25 @@ impl Host {
 
     /// Reads, parses and handles one block.
     fn demo_step(&mut self) -> Step {
-        let Some(d) = &mut self.demo else { return Step::End };
-        let Some((angles, data)) = d.next_message().map(|m| (m.angles, m.data.to_vec())) else {
-            return Step::End;
+        let mut buf = std::mem::take(&mut self.demo_msg_buf);
+        let angles = {
+            let Some(d) = &mut self.demo else {
+                self.demo_msg_buf = buf;
+                return Step::End;
+            };
+            let Some(m) = d.next_message() else {
+                self.demo_msg_buf = buf;
+                return Step::End;
+            };
+            buf.clear();
+            buf.extend_from_slice(m.data);
+            m.angles
         };
         self.cl.mviewangles[1] = self.cl.mviewangles[0];
         self.cl.mviewangles[0] = angles;
         self.cl.defer_impact_effects();
-        let r = self.cl.parse_server_message(&data);
+        let r = self.cl.parse_server_message(&buf);
+        self.demo_msg_buf = buf;
         self.cl.take_reliable_out();
         if let Err(e) = r {
             self.con.print(&format!("demo: bad message: {e:?}\n"));

@@ -5,6 +5,7 @@ use super::*;
 pub(crate) struct WorldDrawScratch {
     cats: [Vec<vk::DrawIndexedIndirectCommand>; 4],
     opaque_nofb: Vec<vk::DrawIndexedIndirectCommand>,
+    used_buckets: Vec<usize>,
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -21,25 +22,32 @@ pub(super) fn build_world_draw(
     model: Mat4,
     lm_vis: &mut LightmapRequests,
 ) -> WorldDraw {
+    scratch.used_buckets.clear();
+    let max_t = buckets.len() - 1;
+    let has_hidden = !w.cpu.hidden_surfaces.is_empty();
     for &si in surfs {
-        if w.cpu.hidden_surfaces.contains(&si) { continue; }
+        if has_hidden && w.cpu.hidden_surfaces.contains(&si) {
+            continue;
+        }
         let s = &w.draw_surfaces[si as usize];
-        let t = (w.cpu.resolve_texture(s.texture, alt, time, si) as usize).min(buckets.len() - 1);
+        let t = (w.cpu.resolve_texture(s.texture, alt, time, si) as usize).min(max_t);
+        if buckets[t].is_empty() {
+            scratch.used_buckets.push(t);
+        }
         buckets[t].push(si);
         if s.lm != NO_LM {
             lm_vis.push(s.lm);
         }
     }
+    scratch.used_buckets.sort_unstable();
     let mut polys = 0;
     let mut triangles = 0;
     for c in &mut scratch.cats {
         c.clear();
     }
     scratch.opaque_nofb.clear();
-    for (t, b) in buckets.iter_mut().enumerate() {
-        if b.is_empty() {
-            continue;
-        }
+    for &t in &scratch.used_buckets {
+        let b = &mut buckets[t];
         let mut first = None;
         let mut count = 0u32;
         for &si in b.iter() {

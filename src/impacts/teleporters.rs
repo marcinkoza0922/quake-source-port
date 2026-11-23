@@ -97,6 +97,9 @@ impl Impacts {
         }
         let windows = cv.value_of("r_teleportwindows") != 0.0;
         self.teleporters.update(windows, cl.time);
+        if !windows && !impacts_on(cv) {
+            return false;
+        }
         let has_sheets = lv
             .bsp
             .as_ref()

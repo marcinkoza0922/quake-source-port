@@ -1,6 +1,41 @@
 use super::*;
 
+fn hash_styles(styles: &[i32]) -> u64 {
+    let mut sh = 0xcbf2_9ce4_8422_2325u64;
+    for &s in styles.iter().take(64) {
+        sh = (sh ^ s as u64).wrapping_mul(0x0100_0000_01b3);
+    }
+    sh
+}
+
+#[inline(always)]
+fn eval_style_vals(slot_styles: [u8; 4], styles: &[i32]) -> [i32; 4] {
+    let mut vals = [0i32; 4];
+    for (dst, &st) in vals.iter_mut().zip(&slot_styles) {
+        if st == 255 {
+            break;
+        }
+        *dst = styles.get(st as usize).copied().unwrap_or(256);
+    }
+    vals
+}
+
 impl World {
+    /// Call once per frame with the frame's `lightstyles` table so cached
+    /// `light_point_dir` lookups skip style validation while styles are unchanged.
+    pub fn begin_light_frame(&mut self, styles: &[i32]) {
+        let mut cur = [256i32; 64];
+        let n = styles.len().min(64);
+        cur[..n].copy_from_slice(&styles[..n]);
+        if self.styles_gen == 0 || cur != self.last_styles {
+            self.last_styles = cur;
+            self.styles_gen = self.styles_gen.wrapping_add(1).max(1);
+            if self.lightgrid.is_some() {
+                self.lightgrid_style_hash = hash_styles(&cur);
+            }
+        }
+    }
+
     /// R_LightPoint: returns RGB light (0..255+ scale) at `p`, or None if nothing hit.
     /// Uses BSPX `LIGHTGRID_OCTREE` when present (falling back to the classic
     /// downward BSP trace if `p` is outside the grid or fully occluded).
@@ -10,11 +45,13 @@ impl World {
 
     /// R_LightPoint plus optional world-space baked light direction (from `.dlit` / `LIGHTINGDIR`).
     pub fn light_point_dir(&self, p: [f32; 3], styles: &[i32]) -> Option<([f32; 3], Option<[f32; 3]>)> {
+        let frame_gen = self.styles_gen;
         if let Some(grid) = &self.lightgrid {
-            let mut sh = 0xcbf2_9ce4_8422_2325u64;
-            for &s in styles.iter().take(64) {
-                sh = (sh ^ s as u64).wrapping_mul(0x0100_0000_01b3);
-            }
+            let sh = if frame_gen != 0 && styles.len() >= 64 && styles[..64] == self.last_styles {
+                self.lightgrid_style_hash
+            } else {
+                hash_styles(styles)
+            };
             let key = p.map(|v| v.to_bits() as i32);
             let cached = self.lightgrid_cache.borrow().get(&key).copied();
             let rgb = match cached {
@@ -37,29 +74,27 @@ impl World {
             return Some(([255.0; 3], None));
         }
         let key = p.map(|v| v.floor() as i32);
-        let style_vals_for = |si: usize| -> [i32; 4] {
-            let Some(s) = self.surfaces.get(si) else { return [0; 4] };
-            let mut vals = [0i32; 4];
-            for (dst, &st) in vals.iter_mut().zip(&s.styles) {
-                if st == 255 {
-                    break;
-                }
-                *dst = styles.get(st as usize).copied().unwrap_or(256);
-            }
-            vals
-        };
         let cached = self.light_cache.borrow().get(&key).copied();
         if let Some(entry) = cached {
             return match entry.hit {
                 LightHit::Miss => None,
                 LightHit::Black => Some(([0.0; 3], None)),
                 LightHit::Surf { surf, ds, dt } => {
-                    let cur = style_vals_for(surf as usize);
+                    if frame_gen != 0 && entry.validated_gen == frame_gen {
+                        return Some((entry.rgb, entry.dir));
+                    }
+                    let cur = eval_style_vals(entry.styles, styles);
                     if cur == entry.style_vals {
+                        if frame_gen != 0
+                            && let Some(e) = self.light_cache.borrow_mut().get_mut(&key)
+                        {
+                            e.validated_gen = frame_gen;
+                        }
                         return Some((entry.rgb, entry.dir));
                     }
                     let (rgb, dir) = self.interpolate_light_dir(surf as usize, ds, dt, styles);
                     if let Some(e) = self.light_cache.borrow_mut().get_mut(&key) {
+                        e.validated_gen = frame_gen;
                         e.style_vals = cur;
                         e.rgb = rgb;
                         e.dir = dir;
@@ -71,13 +106,14 @@ impl World {
         let end = [p[0], p[1], p[2] - 8192.0];
         let mut maxdist = 8192.0f32;
         let hit = self.recursive_light(0, p, p, end, &mut maxdist);
-        let (style_vals, rgb, dir, result) = match hit {
-            LightHit::Miss => ([0; 4], [0.0; 3], None, None),
-            LightHit::Black => ([0; 4], [0.0; 3], None, Some(([0.0; 3], None))),
+        let (slot_styles, style_vals, rgb, dir, result) = match hit {
+            LightHit::Miss => ([255; 4], [0; 4], [0.0; 3], None, None),
+            LightHit::Black => ([255; 4], [0; 4], [0.0; 3], None, Some(([0.0; 3], None))),
             LightHit::Surf { surf, ds, dt } => {
-                let sv = style_vals_for(surf as usize);
+                let slot_styles = self.surfaces.get(surf as usize).map_or([255; 4], |s| s.styles);
+                let sv = eval_style_vals(slot_styles, styles);
                 let (rgb, dir) = self.interpolate_light_dir(surf as usize, ds, dt, styles);
-                (sv, rgb, dir, Some((rgb, dir)))
+                (slot_styles, sv, rgb, dir, Some((rgb, dir)))
             }
         };
         let mut c = self.light_cache.borrow_mut();
@@ -85,7 +121,10 @@ impl World {
         if c.len() >= 8192 {
             c.clear();
         }
-        c.insert(key, LightCacheEntry { hit, style_vals, rgb, dir });
+        c.insert(
+            key,
+            LightCacheEntry { hit, styles: slot_styles, validated_gen: frame_gen, style_vals, rgb, dir },
+        );
         result
     }
 

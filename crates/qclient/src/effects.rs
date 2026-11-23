@@ -4,7 +4,7 @@
 use qpool::ParticleSpawn;
 
 use crate::anorms::{AVERTEXNORMALS, NUMVERTEXNORMALS};
-use crate::state::{ClientState, MAX_TEMP_ENTITIES};
+use crate::state::{ClientState, MAX_PARTICLES, MAX_TEMP_ENTITIES};
 
 pub const PT_STATIC: u8 = 0;
 pub const PT_GRAV: u8 = 1;
@@ -139,6 +139,9 @@ impl ClientState {
 
     /// R_RunParticleEffect.
     pub fn run_particle_effect(&mut self, org: [f32; 3], dir: [f32; 3], color: i32, count: i32) {
+        if self.particles.len() >= MAX_PARTICLES {
+            return;
+        }
         let t = self.time;
         for i in 0..count {
             if count == 1024 {
@@ -170,6 +173,9 @@ impl ClientState {
 
     /// R_ParticleExplosion2.
     pub fn particle_explosion2(&mut self, org: [f32; 3], color_start: i32, color_length: i32) {
+        if self.particles.len() >= MAX_PARTICLES {
+            return;
+        }
         let t = self.time;
         for i in 0..512 {
             let c = color_start + i % color_length.max(1);
@@ -182,6 +188,9 @@ impl ClientState {
 
     /// R_BlobExplosion.
     pub fn blob_explosion(&mut self, org: [f32; 3]) {
+        if self.particles.len() >= MAX_PARTICLES {
+            return;
+        }
         let t = self.time;
         for i in 0..1024 {
             let die = t + 1.0 + (self.r() & 8) as f64 * 0.05;
@@ -195,6 +204,9 @@ impl ClientState {
 
     /// R_LavaSplash.
     pub fn lava_splash(&mut self, org: [f32; 3]) {
+        if self.particles.len() >= MAX_PARTICLES {
+            return;
+        }
         let t = self.time;
         for i in -16..16 {
             for j in -16..16 {
@@ -213,6 +225,9 @@ impl ClientState {
 
     /// R_TeleportSplash.
     pub fn teleport_splash(&mut self, org: [f32; 3]) {
+        if self.particles.len() >= MAX_PARTICLES {
+            return;
+        }
         let t = self.time;
         for i in (-16..16).step_by(4) {
             for j in (-16..16).step_by(4) {

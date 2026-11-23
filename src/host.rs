@@ -134,6 +134,14 @@ pub struct Host {
     last_settings: Option<qrender::Settings>,
     /// Cached cvar-derived portion of `qrender::Settings`, invalidated on cvar/level changes.
     settings_cache: Option<SettingsCache>,
+    /// Cached per-frame host cvars, invalidated on cvar/zoom/freecam/mapper changes.
+    render_cvars_cache: Option<(render::RenderCvarsKey, render::RenderCvars)>,
+    /// Reusable per-frame render buffers (zero steady-state heap reallocs).
+    frame_ents: Vec<qrender::RenderEntity>,
+    frame_dyn_verts: Vec<u32>,
+    frame_parts: Vec<qrender::Particle>,
+    frame_dls: Vec<qrender::DLight>,
+    demo_msg_buf: Vec<u8>,
     /// Last cvar generation seen by `sync_language`.
     lang_cvar_gen: Option<u64>,
     /// Reusable per-frame brush entity list shared between sound and render.
@@ -435,6 +443,12 @@ impl Host {
             export_ui_at: None,
             last_settings: None,
             settings_cache: None,
+            render_cvars_cache: None,
+            frame_ents: Vec::new(),
+            frame_dyn_verts: Vec::new(),
+            frame_parts: Vec::new(),
+            frame_dls: Vec::new(),
+            demo_msg_buf: Vec::new(),
             lang_cvar_gen: None,
             frame_brushes: None,
             autodemo: None,

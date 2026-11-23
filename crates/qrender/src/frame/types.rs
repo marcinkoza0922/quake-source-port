@@ -355,6 +355,17 @@ pub(super) enum Trans {
     Sprite(usize),
 }
 
+/// Reused per-frame draw lists for view 0 to avoid steady-state `Vec` reallocations.
+#[derive(Default)]
+pub(crate) struct FrameScratch {
+    pub(super) world_draws: Vec<WorldDraw>,
+    pub(super) vel_draws: Vec<VelDraw>,
+    pub(super) alias_draws: Vec<AliasDraw>,
+    pub(super) sprite_draws: Vec<SpriteDraw>,
+    pub(super) trans: Vec<(f32, Trans)>,
+    pub(super) brush_surfs: Vec<u32>,
+}
+
 /// One view's draw lists for a frame (several with split-screen).
 pub(super) struct ViewPass {
     pub(super) view: Option<ViewSetup>,

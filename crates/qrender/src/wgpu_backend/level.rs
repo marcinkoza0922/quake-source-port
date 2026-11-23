@@ -87,6 +87,37 @@ impl Renderer {
         Ok(self.load_level(LevelBsp::new(bsp, lit), &[])?.0)
     }
 
+    pub fn has_world(&self) -> bool {
+        self.world.is_some()
+    }
+
+    pub fn model_bounds(&self, id: ModelId) -> Option<([f32; 3], [f32; 3])> {
+        match self.models.get(id.0 as usize)? {
+            Model::Brush(sm) => {
+                let sub = self.world.as_ref()?.cpu.submodels.get(*sm as usize)?;
+                Some((sub.mins, sub.maxs))
+            }
+            Model::Alias(am) => {
+                let r = am.radius.max(16.0);
+                Some(([-r; 3], [r; 3]))
+            }
+            Model::Sprite(sm) => {
+                let r = sm.radius.max(16.0);
+                Some(([-r; 3], [r; 3]))
+            }
+        }
+    }
+
+    pub fn world_box_leaves(&self, mins: [f32; 3], maxs: [f32; 3], out: &mut Vec<u32>) {
+        if let Some(w) = &self.world {
+            w.cpu.box_leaves(mins, maxs, out);
+        }
+    }
+
+    pub fn world_pvs_bits(&mut self, eye: [f32; 3]) -> Option<&[u32]> {
+        self.world.as_mut()?.cpu.pvs_bits(eye)
+    }
+
     /// `load_world` plus external brush models (`maps/b_*.bsp`) and external
     /// replacement textures. Returns (world submodel ids `*1..`, one id per
     /// entry of `brushes`).

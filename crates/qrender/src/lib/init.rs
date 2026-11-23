@@ -123,10 +123,10 @@ impl Renderer {
         let sampler_shadow = unsafe { dev.create_sampler(&sci, None)? };
         let storage = vk::BufferUsageFlags::STORAGE_BUFFER | vk::BufferUsageFlags::TRANSFER_DST;
         let mut palette_buf = gpu.buffer(1024 + convert::LUT_BYTES as u64, vk::BufferUsageFlags::STORAGE_BUFFER, true)?;
-        let pal: Vec<u32> = palette
-            .iter()
-            .map(|c| c[0] as u32 | (c[1] as u32) << 8 | (c[2] as u32) << 16 | 0xff << 24)
-            .collect();
+        let pal: [u32; 256] = std::array::from_fn(|i| {
+            let c = palette[i];
+            c[0] as u32 | (c[1] as u32) << 8 | (c[2] as u32) << 16 | 0xff << 24
+        });
         palette_buf.bytes_mut()[..1024].copy_from_slice(bytes_of(&pal));
         let dummy = gpu.buffer(256, storage, false)?;
         let alias_buf = gpu.buffer(4 << 20, storage, false)?;
@@ -171,6 +171,7 @@ impl Renderer {
             },
             textures: Vec::new(),
             palette: *palette,
+            palette_rgba: pal,
             palette_buf,
             lightmap,
             lightmap_requests: Default::default(),
@@ -193,6 +194,7 @@ impl Renderer {
             skybox: None,
             buckets: Vec::new(),
             world_draw_scratch: Default::default(),
+            frame_scratch: Default::default(),
             ui_verts: Vec::new(),
             ui_ranges: Vec::new(),
             needs_resize: false,

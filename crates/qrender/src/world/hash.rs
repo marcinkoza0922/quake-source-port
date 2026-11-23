@@ -40,12 +40,14 @@ pub(super) enum LightHit {
     Surf { surf: u32, ds: i32, dt: i32 },
 }
 
-/// Cached light trace plus the last evaluated colour/direction and the up-to-4
-/// lightstyle values it was computed for. Static entities skip both the BSP
-/// trace and `interpolate_light_dir` whenever their surface's styles didn't change.
+/// Cached light trace plus the last evaluated colour/direction, surface style
+/// slots (stored inline so hits avoid cold `surfaces[]` reads), and the style
+/// generation it was last validated against.
 #[derive(Clone, Copy, Debug)]
 pub(super) struct LightCacheEntry {
     pub(super) hit: LightHit,
+    pub(super) styles: [u8; 4],
+    pub(super) validated_gen: u32,
     pub(super) style_vals: [i32; 4],
     pub(super) rgb: [f32; 3],
     pub(super) dir: Option<[f32; 3]>,

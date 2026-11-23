@@ -98,6 +98,11 @@ pub struct World {
     /// Per-point cache for BSPX `LIGHTGRID_OCTREE` samples keyed by exact bit
     /// coordinates and hashed against the current lightstyles slice.
     lightgrid_cache: std::cell::RefCell<LightGridCache>,
+    /// Last lightstyles seen by `begin_light_frame`, their generation (0 = never
+    /// set), and the precomputed FNV hash for `lightgrid_cache`.
+    last_styles: [i32; 64],
+    styles_gen: u32,
+    lightgrid_style_hash: u64,
     pub vertices: Vec<WorldVertex>,
     pub indices: Vec<u32>,
     pub surfaces: Vec<Surface>,
@@ -123,9 +128,12 @@ pub struct World {
     marksurfaces: Vec<u32>,
     visdata: Vec<u8>,
     numleafs: usize,
-    /// R_MarkLeaves state: candidate leaves with surfaces; `vis_leaf` is
-    /// the PVS leaf key, 0 for any all-visible query, or MAX before setup.
+    /// R_MarkLeaves state: candidate leaves with surfaces, 16-leaf frustum
+    /// culling blocks, and a flat PVS leaf bitset for static entity culling.
+    /// `vis_leaf` is the PVS leaf key, 0 for any all-visible query, or MAX before setup.
     vis_leaves: Vec<VisLeaf>,
+    vis_blocks: Vec<VisBlock>,
+    vis_pvs_bits: Vec<u32>,
     vis_leaf: usize,
     locked_pvs: Option<usize>,
     /// `portal_surfaces` results per eye leaf (most recent last), and the
@@ -229,6 +237,15 @@ struct VisLeaf {
     extent: [f32; 3],
 }
 
+/// Union AABB over up to 16 contiguous `vis_leaves` for coarse frustum culling.
+#[derive(Clone, Copy, Debug)]
+struct VisBlock {
+    center: [f32; 3],
+    extent: [f32; 3],
+    start: u32,
+    count: u32,
+}
+
 fn build_anims(bsp: &Bsp) -> Vec<(Vec<u32>, Vec<u32>, bool)> {
     let n = bsp.textures.len();
     let mut out = vec![(Vec::new(), Vec::new(), false); n];
@@ -282,26 +299,39 @@ impl Planes {
         Planes { p: *f, abs: f.map(|p| [p[0].abs(), p[1].abs(), p[2].abs()]) }
     }
 
-    /// Like [`clip_box`] for a box given as center `c` and half-size `e`.
+    /// Fast box-vs-4-plane frustum intersection (no clip-mask tracking).
     #[inline(always)]
-    fn clip(&self, clip: u8, c: [f32; 3], e: [f32; 3]) -> Option<u8> {
-        let mut out = clip;
+    fn intersects(&self, c: [f32; 3], e: [f32; 3]) -> bool {
         for j in 0..4 {
-            if clip & (1 << j) == 0 {
-                continue;
-            }
             let p = &self.p[j];
             let a = &self.abs[j];
             let d = p[0] * c[0] + p[1] * c[1] + p[2] * c[2] + p[3];
             let r = a[0] * e[0] + a[1] * e[1] + a[2] * e[2];
             if d + r < 0.0 {
-                return None;
-            }
-            if d - r >= 0.0 {
-                out &= !(1 << j);
+                return false;
             }
         }
-        Some(out)
+        true
+    }
+
+    /// Coarse classification against all 4 planes:
+    /// `-1` completely outside, `1` completely inside, `0` straddling.
+    #[inline(always)]
+    fn classify(&self, c: [f32; 3], e: [f32; 3]) -> i8 {
+        let mut inside = true;
+        for j in 0..4 {
+            let p = &self.p[j];
+            let a = &self.abs[j];
+            let d = p[0] * c[0] + p[1] * c[1] + p[2] * c[2] + p[3];
+            let r = a[0] * e[0] + a[1] * e[1] + a[2] * e[2];
+            if d + r < 0.0 {
+                return -1;
+            }
+            if d - r < 0.0 {
+                inside = false;
+            }
+        }
+        if inside { 1 } else { 0 }
     }
 }
 

@@ -196,10 +196,22 @@ acting (numbers in [HISTORY.md](HISTORY.md)):
 
 From the first baseline (Results, 2026-11-17):
 
-- **V1**: `spin-sepulcher` at 540p is the one scene where we aren't ahead
-  (ironwail +2%, within noise). It is the scene where AD sends classic
-  particle messages every frame, so this is H4 in its classic form, and it
-  is CPU work: at 4K we lead by 45%.
+- **V1 — done 2026-11-23.** `spin-sepulcher` at 540p was the sole cell where
+  ironwail led (2831 vs 2187 fps, ref +29%, 457 vs 353 µs/frame; 4K led +40%).
+  `perf` + `+prof_timedemo` showed the CPU gap was NOT primarily `SVC_PARTICLE`
+  parsing (client p50 36 µs) but CPU render time (~430 µs/frame): unculled
+  `cl.static_entities` (no efrag PVS culling, unlike ironwail's `R_AddStaticModels`),
+  per-frame `Vec::new()` reallocs (`ents`, `parts`, `dls`, `world_draws`,
+  `alias_draws`, `brush_surfs`, `demo_msg_buf`), `entity_rotation` (3× `sin_cos`
+  + `mul3`) running before frustum culling, `build_world_draw` scanning all 865
+  buckets per brush entity, `World::light_point_dir` reading cold `surfaces[]`
+  on every cache hit, per-leaf `Planes::clip`, uncached per-frame `Cvars::find`
+  lookups, and `Debris::track_shooters`/`Tracers::frame` scanning all active
+  entities when off. Fixing these (with `compare -metric AE` = 0 on `ad_sepulcher`)
+  lifted `spin-sepulcher` 540p from **2187 → 4073 fps (+86%)**, beating ironwail
+  (2795 fps) by **+46%** and vkQuake (703 fps) by **+479%**, and 4K from
+  **747 → 802 fps (+50% over ironwail)**. Every Part 1 cell across both suites
+  and resolutions now beats the fastest reference by **+25% to +321%**.
 - **V2**: one 49.7 ms cold-start hitch on `spin-sepulcher-fte`, the only
   frame over 33 ms in our cold runs. It is probably the FTE particle
   pipelines or textures created on first use; find out and create them at
@@ -295,7 +307,10 @@ From the first baseline (Results, 2026-11-17):
   - 540p: `spin-e1m1` **0.61** / 0.71 / 1.28, `spin-e2m2` **0.43** / 0.63 / 1.28, `spin-mg1` 0.76 / **0.72** / 1.46, `spin-sepulcher` 0.90 / **0.73** / 2.36, `combat-e1m3` **0.52** / 0.75 / 1.34; FTE: `spin-sepulcher-fte` **2.34** / (0.70) / 4.76, `combat-grendel-fte` **0.71** / (0.67) / 1.99 (`spin-tears` MangoHud started 15 frames late on our fast run so p99 omitted).
   - 4K 8× MSAA: `spin-e1m1` **2.68** / 3.56 / 7.35, `spin-e2m2` **2.72** / 3.29 / 7.37, `spin-mg1` **4.57** / 4.67 / 10.11, `spin-sepulcher` **2.47** / 4.23 / 7.74, `combat-e1m3` **1.85** / 3.60 / 7.37; FTE: `spin-sepulcher-fte` **4.23** / (4.31) / 9.22, `combat-grendel-fte` **5.69** / (4.19) / 9.70.
 - **Cold start (960×540, shader cache off)**: **zero >33 ms hitches** across every completed scene for ours (`spin-e1m1` 5.6 ms, `spin-e2m2` 1.9 ms, `spin-mg1` 2.4 ms, `spin-sepulcher` 4.1 ms, `combat-e1m3` 15.5 ms, `spin-sepulcher-fte` 32.8 ms [down from 49.7 ms, V2], `combat-grendel-fte` 25.9 ms), while ironwail hitched on `spin-sepulcher` (38.4 ms), `spin-tears` (111.2 ms), and `spin-sepulcher-fte` (37.5 ms) and vkQuake hitched on `spin-tears` (210.7 ms).
-- **Remaining gap**: `spin-sepulcher` at 540p (classic 127 MB demo with heavy per-frame `SVC_PARTICLE` traffic, V1) is the sole cell where ironwail leads (2831 vs 2187 fps, while at 4K we lead by **+40%**, 747 vs 533 fps). Every other cell across both suites and both resolutions leads the fastest reference by **+25% to +321%**.
+- **Follow-up (2026-11-23, V1 `spin-sepulcher` CPU optimisations, verified pixel-identical `compare -metric AE` = 0)**: `qbench -suite main -only spin-sepulcher -res 540,4k -runs 3 -mhruns 1 -nocold`:
+  - **960×540**: ours **4073** (4001–4081) vs ironwail 2795 (2777–2818) vs vkQuake 703 (699–706) → **+46% over ironwail** (up from 2187 fps / ref +29%, **+86% gain**); p99 **0.65** / 0.87 / 2.58 ms.
+  - **3840×2160 8× MSAA**: ours **802** (771–825) vs ironwail 534 (534–535) vs vkQuake 505 (497–511) → **+50% over ironwail** (up from 747 fps); p99 **2.42** / 4.23 / 7.76 ms.
+  - Every cell across both Part 1 suites (8 scenes) and both resolutions (540p & 4K) now beats the fastest reference by **+25% to +321%**.
 
 ---
 

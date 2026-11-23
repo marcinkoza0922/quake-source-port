@@ -50,6 +50,10 @@ pub struct ViewState {
     oldz: f32,
     anims: Vec<Anim>,
     static_anims: Vec<Anim>,
+    /// Packed 1-based BSP leaf indices touched by each static entity (ironwail `cl_efrags`).
+    static_efrags: Vec<u32>,
+    /// Per static entity `(start, len)` range inside `static_efrags`.
+    static_ranges: Vec<(u32, u32)>,
     view_anim: Anim,
     pub face_anim_time: f64,
     /// Add the player's own body as a portal-only entity (portals exist).
@@ -304,6 +308,7 @@ impl ViewState {
 
 pub fn particles(cl: &ClientState, out: &mut Vec<Particle>) {
     let p = &cl.particles;
+    out.reserve(p.len());
     for i in 0..p.len() {
         out.push(Particle { origin: [p.x[i], p.y[i], p.z[i]], color: p.color[i], alpha: 1.0 });
     }

@@ -4,10 +4,17 @@ use super::*;
 use qrender::{RenderEntity, SplitView};
 
 impl Host {
-    /// Main-camera culling is safe only when no other camera shares FTE geometry.
+    /// Main-camera culling is safe only when no other camera shares geometry or PVS.
+    pub(super) fn single_camera(&self, teleport_windows: bool) -> bool {
+        self.guests.is_empty()
+            && self.cl.portals.is_empty()
+            && !teleport_windows
+            && !self.r.has_camera_override()
+    }
+
+    #[cfg(test)]
     pub(super) fn cull_fte_for_view(&self) -> bool {
-        self.guests.is_empty() && self.cl.portals.is_empty()
-            && self.cv("r_teleportwindows") == 0.0 && !self.r.has_camera_override()
+        self.single_camera(self.cv("r_teleportwindows") != 0.0)
     }
 
     /// Join or drop split-screen guests to match `cl_splitscreen` once
@@ -106,7 +113,7 @@ impl Host {
                     .unwrap_or_default();
                 g.view.vwep.enabled = self.view.vwep.enabled;
                 g.view.vwep.server = self.view.vwep.server.clone();
-                g.view.entities(&mut g.cl, &cv, &mut self.level, &self.server.core.fs, &mut self.r, &mut gents);
+                g.view.entities(&mut g.cl, &cv, &mut self.level, &self.server.core.fs, &mut self.r, None, &mut gents);
                 // this guest's own body, for its portal views only
                 ents.extend(gents.iter().filter(|e| e.portal_only).map(|e| RenderEntity { views: bit, ..*e }));
                 gents.retain(|e| !e.portal_only);
