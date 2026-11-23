@@ -54,7 +54,13 @@ impl Engine {
 }
 
 pub fn abs(p: &Path) -> PathBuf {
-    std::fs::canonicalize(p).unwrap_or_else(|_| p.to_path_buf())
+    std::fs::canonicalize(p).unwrap_or_else(|_| {
+        if p.is_absolute() {
+            p.to_path_buf()
+        } else {
+            std::env::current_dir().map_or_else(|_| p.to_path_buf(), |cwd| cwd.join(p))
+        }
+    })
 }
 
 fn ironwail(basedir: &Path, refdir: &Path) -> Option<PathBuf> {

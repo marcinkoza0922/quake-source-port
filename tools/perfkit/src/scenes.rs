@@ -92,6 +92,10 @@ pub fn record_args(s: &Scene, base: &Path) -> Vec<String> {
     v.extend(["-autoquit".into(), (s.secs + 10).to_string()]);
     let fte = if s.fte { "1" } else { "0" };
     v.extend(["+sv_autosave", "0", "+sv_fteparticles", fte, "+r_fteparticles", fte].map(String::from));
+    if s.fte {
+        // vkQuake 1.34.1 supports PEXT2_REPLACEMENTDELTAS (8) but not PEXT2_PREDINFO (32).
+        v.extend(["+sv_protocol_pext2".into(), "8".into()]);
+    }
     if s.script == Script::Combat {
         v.extend(["+skill".into(), "3".into()]);
     }
