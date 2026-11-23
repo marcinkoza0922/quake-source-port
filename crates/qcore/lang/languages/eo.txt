@@ -4168,3 +4168,9 @@ eo Postprilaborado
 
 @ World
 eo Mondo
+
+@ Mod HUD
+eo Mod-HUD
+
+@ Custom HUD provided by the current mod or map pack
+eo Propra HUD provizita de la nuna modo aŭ mappakaĵo

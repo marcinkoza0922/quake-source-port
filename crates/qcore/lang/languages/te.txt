@@ -4168,3 +4168,9 @@ te పోస్ట్-ప్రాసెసింగ్
 
 @ World
 te ప్రపంచం
+
+@ Mod HUD
+te మాడ్ HUD
+
+@ Custom HUD provided by the current mod or map pack
+te ప్రస్తుత మాడ్ లేదా మ్యాప్ ప్యాక్ అందించే అనుకూల HUD

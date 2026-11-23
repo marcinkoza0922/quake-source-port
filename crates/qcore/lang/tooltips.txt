@@ -1547,3 +1547,10 @@ de Vibriert bei Tastendruck und erlittenem Schaden (Android).
 it Vibra alla pressione dei pulsanti e quando subisci danni (Android).
 es Vibra al pulsar botones y al recibir daño (Android).
 ru Вибрация при нажатии кнопок и получении урона (Android).
+
+@ Custom HUD provided by the current mod or map pack
+fr ATH personnalisé fourni par le mod ou pack de cartes actif
+de Benutzerdefiniertes HUD der aktuellen Mod oder Kartenpakets
+it HUD personalizzato fornito dalla mod o dal pacchetto di mappe attivo
+es HUD personalizado proporcionado por el mod o paquete de mapas activo
+ru Пользовательский HUD текущего мода или набора карт

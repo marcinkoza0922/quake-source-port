@@ -4168,3 +4168,9 @@ ca Postprocessament
 
 @ World
 ca Món
+
+@ Mod HUD
+ca HUD del mod
+
+@ Custom HUD provided by the current mod or map pack
+ca HUD personalitzat proporcionat pel mod o paquet de mapes actual

@@ -4168,3 +4168,9 @@ sq Përpunimi pasues
 
 @ World
 sq Bota
+
+@ Mod HUD
+sq HUD i modit
+
+@ Custom HUD provided by the current mod or map pack
+sq HUD i personalizuar i ofruar nga modi ose paketa aktuale e hartave

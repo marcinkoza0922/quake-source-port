@@ -4168,3 +4168,9 @@ am ድህረ-ሂደት
 
 @ World
 am ዓለም
+
+@ Mod HUD
+am የሞድ HUD
+
+@ Custom HUD provided by the current mod or map pack
+am በአሁኑ ሞድ ወይም የካርታ ጥቅል የቀረበ ብጁ HUD

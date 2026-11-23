@@ -4168,3 +4168,9 @@ hu Utófeldolgozás
 
 @ World
 hu Világ
+
+@ Mod HUD
+hu Mod HUD
+
+@ Custom HUD provided by the current mod or map pack
+hu Az aktuális mod vagy pályacsomag által biztosított egyéni HUD

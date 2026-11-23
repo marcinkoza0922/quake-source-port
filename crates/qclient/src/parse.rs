@@ -222,8 +222,14 @@ impl ClientState {
                     self.signon = i as u32;
                     self.signon_reply();
                 }
-                SVC_KILLEDMONSTER => self.stats[STAT_MONSTERS] += 1,
-                SVC_FOUNDSECRET => self.stats[STAT_SECRETS] += 1,
+                SVC_KILLEDMONSTER => {
+                    self.stats[STAT_MONSTERS] += 1;
+                    self.statsf[STAT_MONSTERS] = self.stats[STAT_MONSTERS] as f32;
+                }
+                SVC_FOUNDSECRET => {
+                    self.stats[STAT_SECRETS] += 1;
+                    self.statsf[STAT_SECRETS] = self.stats[STAT_SECRETS] as f32;
+                }
                 SVC_UPDATESTAT => {
                     let i = m.byte();
                     let v = m.long();
@@ -457,5 +463,15 @@ mod damage_tests {
         assert!(!cl.took_damage);
         cl.parse_server_message(&[SVC_DAMAGE, 0, 1, 0, 0, 0, 0, 0, 0]).unwrap();
         assert!(cl.took_damage);
+    }
+
+    #[test]
+    fn killed_monster_and_found_secret_update_float_stats() {
+        let mut cl = ClientState::new();
+        cl.parse_server_message(&[SVC_KILLEDMONSTER, SVC_KILLEDMONSTER, SVC_FOUNDSECRET]).unwrap();
+        assert_eq!(cl.stats[STAT_MONSTERS], 2);
+        assert_eq!(cl.statsf[STAT_MONSTERS], 2.0);
+        assert_eq!(cl.stats[STAT_SECRETS], 1);
+        assert_eq!(cl.statsf[STAT_SECRETS], 1.0);
     }
 }

@@ -14,6 +14,9 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             && let Some((g, t)) = h.inherited_config()
         {
             h.cbuf.insert_text("_paddefaults_merge\n");
+            if h.hud.has_mod_hud && h.cv("cl_nocsqc") == 0.0 {
+                h.cbuf.insert_text("hud_preset 3\nhud_layout mod\nhud_preset_name \"\"\n");
+            }
             h.cbuf.insert_text(&t);
             h.print(&qcore::ctr!("execing config.cfg (inherited from {})\n", g));
             if let Some(d) = h.fs().open(name).filter(|_| h.fs().origin(name).is_some_and(|o| o.game.eq_ignore_ascii_case(h.game_name()))) {

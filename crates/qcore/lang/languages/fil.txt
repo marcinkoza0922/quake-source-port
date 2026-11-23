@@ -4168,3 +4168,9 @@ fil Post-processing
 
 @ World
 fil Mundo
+
+@ Mod HUD
+fil Mod HUD
+
+@ Custom HUD provided by the current mod or map pack
+fil Custom na HUD na ibinibigay ng kasalukuyang mod o map pack

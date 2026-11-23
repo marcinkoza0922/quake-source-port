@@ -4168,3 +4168,9 @@ nb Etterbehandling
 
 @ World
 nb Verden
+
+@ Mod HUD
+nb Mod-HUD
+
+@ Custom HUD provided by the current mod or map pack
+nb Egendefinert HUD levert av gjeldende mod eller kartpakke

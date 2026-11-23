@@ -27,6 +27,8 @@ pub fn is_reserved(name: &str) -> bool {
     let n = name.trim();
     n.eq_ignore_ascii_case("modern")
         || n.eq_ignore_ascii_case("classic")
+        || n.eq_ignore_ascii_case("mod")
+        || n.eq_ignore_ascii_case("mod hud")
         || n.eq_ignore_ascii_case("custom")
         || n.eq_ignore_ascii_case("default")
 }

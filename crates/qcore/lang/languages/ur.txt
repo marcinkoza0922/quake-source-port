@@ -4168,3 +4168,9 @@ ur بعد از پروسیسنگ
 
 @ World
 ur دنیا
+
+@ Mod HUD
+ur موڈ HUD
+
+@ Custom HUD provided by the current mod or map pack
+ur موجودہ موڈ یا میپ پیک کی طرف سے فراہم کردہ کسٹم HUD

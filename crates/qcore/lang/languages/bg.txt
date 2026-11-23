@@ -4168,3 +4168,9 @@ bg Последваща обработка
 
 @ World
 bg Свят
+
+@ Mod HUD
+bg HUD на мода
+
+@ Custom HUD provided by the current mod or map pack
+bg Персонализиран HUD, предоставен от текущия мод или пакет карти

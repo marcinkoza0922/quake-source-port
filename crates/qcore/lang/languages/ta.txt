@@ -4168,3 +4168,9 @@ ta பிந்தைய செயலாக்கம்
 
 @ World
 ta உலகம்
+
+@ Mod HUD
+ta மாட் HUD
+
+@ Custom HUD provided by the current mod or map pack
+ta தற்போதைய மாட் அல்லது வரைபட தொகுப்பு வழங்கும் தனிப்பயன் HUD

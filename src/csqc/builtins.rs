@@ -51,6 +51,26 @@ impl CsqcHost<'_, '_> {
         }
     }
 
+    /// Virtual-display cvar values matching vkQuake's `PR_GetCSQCCvarValue`:
+    /// reports a ~1080p reference display at the current aspect ratio so mods
+    /// that compute pixel offsets from `scr_sbarscale`/`vid_width` (e.g. AD)
+    /// lay out identically at 720p, 1080p, 1440p, and 4K.
+    fn csqc_display_cvar(&self, name: &str) -> Option<f32> {
+        let sp = self.draw_space();
+        let aspect = sp.fb_w / sp.fb_h.max(1.0);
+        let ref_w = (2_000_000.0 * aspect).sqrt().round();
+        let ref_h = (2_000_000.0 / aspect).sqrt().round();
+        if name.eq_ignore_ascii_case("scr_sbarscale") {
+            Some((ref_w / sp.virt_w.max(1.0)).max(1.0))
+        } else if name.eq_ignore_ascii_case("vid_width") {
+            Some(ref_w)
+        } else if name.eq_ignore_ascii_case("vid_height") {
+            Some(ref_h)
+        } else {
+            None
+        }
+    }
+
     fn resolve_model(&mut self, name: &str) -> Option<qrender::ModelId> {
         if name.is_empty() {
             return None;
@@ -233,7 +253,8 @@ impl VmHost for CsqcHost<'_, '_> {
             }
             Builtin::Cvar => {
                 let name = s_arg(vm, 0)?;
-                vm.ret_f(self.env.cvars.value_of(&name));
+                let val = self.csqc_display_cvar(&name).unwrap_or_else(|| self.env.cvars.value_of(&name));
+                vm.ret_f(val);
             }
             Builtin::CvarSet => {
                 let (name, val) = (s_arg(vm, 0)?, s_arg(vm, 1)?);
@@ -317,8 +338,13 @@ impl VmHost for CsqcHost<'_, '_> {
             }
             "cvar_string" => {
                 let k = s_arg(vm, 0)?;
-                let v = self.env.cvars.by_name(&k).map_or("", |c| c.string.as_str()).as_bytes().to_vec();
-                vm.ret_temp(&v);
+                if let Some(v) = self.csqc_display_cvar(&k) {
+                    let s = format!("{v}");
+                    vm.ret_temp(s.as_bytes());
+                } else {
+                    let v = self.env.cvars.by_name(&k).map_or("", |c| c.string.as_str()).as_bytes().to_vec();
+                    vm.ret_temp(&v);
+                }
             }
             "cvar_defstring" => {
                 let k = s_arg(vm, 0)?;

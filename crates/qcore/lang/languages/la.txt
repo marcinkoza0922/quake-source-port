@@ -4168,3 +4168,9 @@ la Postprocessio
 
 @ World
 la Mundus
+
+@ Mod HUD
+la HUD modi
+
+@ Custom HUD provided by the current mod or map pack
+la HUD proprium a modo vel fasciculo tabularum praebitum

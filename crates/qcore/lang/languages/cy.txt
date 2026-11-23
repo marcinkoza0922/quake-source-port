@@ -4168,3 +4168,9 @@ cy Ôl-brosesu
 
 @ World
 cy Byd
+
+@ Mod HUD
+cy HUD y mod
+
+@ Custom HUD provided by the current mod or map pack
+cy HUD wedi ei addasu a ddarperir gan y mod neu becyn mapiau cyfredol

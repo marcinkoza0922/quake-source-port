@@ -127,9 +127,14 @@ impl Editor {
         sound("misc/menu2.wav")
     }
 
+    /// Number of built-in preset rows (2 normally, 3 when a Mod HUD is active).
+    pub(super) fn builtin_preset_count(&self) -> usize {
+        if self.has_mod_hud { 3 } else { 2 }
+    }
+
     /// Height of the Presets popup for the current saved list.
     pub(super) fn presets_popup_h(&self) -> f32 {
-        let rows = 2 + self.presets.len();
+        let rows = self.builtin_preset_count() + self.presets.len();
         (rows + 1) as f32 * ROW + if self.presets.is_empty() { 8.0 } else { 11.0 }
     }
 
@@ -226,30 +231,39 @@ impl Editor {
         sound("misc/menu2.wav")
     }
 
-    /// Loads preset row `row` (0 modern, 1 classic, 2.. saved presets), pushing an undo step.
+    /// Loads preset row `row` (built-ins, then saved presets), pushing an undo step.
     pub(super) fn load_preset_row(&mut self, row: usize, cv: &mut Cvars) -> Out {
         self.push_undo_now(cv);
-        match row {
-            0 => {
-                cv.set(CVAR, "default");
-                cv.set(PRESET, "0");
-                cv.set(PRESET_NAME, "");
-                self.editing_preset = None;
-            }
-            1 => {
-                cv.set(CVAR, "classic");
-                cv.set(PRESET, "1");
-                cv.set(PRESET_NAME, "");
-                self.editing_preset = None;
-            }
-            r => {
-                let Some(p) = self.presets.get(r - 2).cloned() else {
-                    return sound("misc/menu3.wav");
-                };
-                cv.set(CVAR, &p.layout);
-                cv.set(PRESET, "2");
-                cv.set(PRESET_NAME, &p.name);
-                self.editing_preset = Some(p.name);
+        let n = self.builtin_preset_count();
+        if self.has_mod_hud && row == 0 {
+            cv.set(CVAR, "mod");
+            cv.set(PRESET, "3");
+            cv.set(PRESET_NAME, "");
+            self.editing_preset = None;
+        } else {
+            let ofs = usize::from(self.has_mod_hud);
+            match row.wrapping_sub(ofs) {
+                0 => {
+                    cv.set(CVAR, "default");
+                    cv.set(PRESET, "0");
+                    cv.set(PRESET_NAME, "");
+                    self.editing_preset = None;
+                }
+                1 => {
+                    cv.set(CVAR, "classic");
+                    cv.set(PRESET, "1");
+                    cv.set(PRESET_NAME, "");
+                    self.editing_preset = None;
+                }
+                _ => {
+                    let Some(p) = self.presets.get(row.saturating_sub(n)).cloned() else {
+                        return sound("misc/menu3.wav");
+                    };
+                    cv.set(CVAR, &p.layout);
+                    cv.set(PRESET, "2");
+                    cv.set(PRESET_NAME, &p.name);
+                    self.editing_preset = Some(p.name);
+                }
             }
         }
         self.popup = None;
@@ -270,8 +284,9 @@ impl Editor {
         if self.editing_preset.as_deref().is_some_and(|n| n.eq_ignore_ascii_case(&removed.name)) {
             self.editing_preset = None;
         }
-        let total = 2 + self.presets.len();
-        let next_cur = (idx + 2).min(total - 1);
+        let n = self.builtin_preset_count();
+        let total = n + self.presets.len();
+        let next_cur = (idx + n).min(total - 1);
         self.popup = Some(Popup::Presets { cursor: next_cur, confirm_delete: None });
         sound("misc/menu2.wav")
     }
@@ -326,12 +341,13 @@ impl Editor {
                 sound("misc/menu1.wav")
             }
             Some(Popup::Presets { mut cursor, mut confirm_delete }) => {
-                let total = (2 + self.presets.len()) as i32;
+                let n = self.builtin_preset_count();
+                let total = (n + self.presets.len()) as i32;
                 if enter {
                     return self.load_preset_row(cursor, cv);
                 }
-                if matches!(key, K_DEL | K_LSHOULDER) && cursor >= 2 {
-                    let idx = cursor - 2;
+                if matches!(key, K_DEL | K_LSHOULDER) && cursor >= n {
+                    let idx = cursor - n;
                     if confirm_delete == Some(idx) {
                         return self.delete_saved_preset(idx, cv);
                     }
@@ -369,14 +385,15 @@ impl Editor {
         }
     }
 
-    /// Y coordinate of row `i` inside the Presets popup at `py` (accounts for divider after classic).
-    pub(super) fn preset_row_y(py: f32, i: usize) -> f32 {
-        py + 3.0 + (i + 1) as f32 * ROW + if i >= 2 { 3.0 } else { 0.0 }
+    /// Y coordinate of row `i` inside the Presets popup at `py` (accounts for divider after built-ins).
+    pub(super) fn preset_row_y(&self, py: f32, i: usize) -> f32 {
+        let n = self.builtin_preset_count();
+        py + 3.0 + (i + 1) as f32 * ROW + if i >= n { 3.0 } else { 0.0 }
     }
 
-    /// Framed delete button rect on saved preset row `i` (`i >= 2`) inside the Presets popup at `(px, py)`.
-    pub(super) fn preset_del_rect(px: f32, py: f32, i: usize) -> Rect {
-        Rect { x: px + PRESETS_W - PRESETS_DEL_W - 3.0, y: Self::preset_row_y(py, i) + 0.5, w: PRESETS_DEL_W, h: ROW - 1.0 }
+    /// Framed delete button rect on saved preset row `i` inside the Presets popup at `(px, py)`.
+    pub(super) fn preset_del_rect(&self, px: f32, py: f32, i: usize) -> Rect {
+        Rect { x: px + PRESETS_W - PRESETS_DEL_W - 3.0, y: self.preset_row_y(py, i) + 0.5, w: PRESETS_DEL_W, h: ROW - 1.0 }
     }
 
     /// The popup row or grid cell under the pointer.
@@ -402,9 +419,9 @@ impl Editor {
                 if !(x..x + PRESETS_W).contains(&mx) {
                     return None;
                 }
-                let total = 2 + self.presets.len();
+                let total = self.builtin_preset_count() + self.presets.len();
                 (0..total).find(|&i| {
-                    let ry = Self::preset_row_y(y, i);
+                    let ry = self.preset_row_y(y, i);
                     (ry..ry + ROW).contains(&my)
                 })
             }
@@ -442,14 +459,15 @@ impl Editor {
             Some(Popup::Grid(_)) => self.set_anchor(i, l, cv),
             Some(Popup::AddPlace { kind, .. }) => self.add_at(kind, Anchor::ALL[i.min(8)], l, cv),
             Some(Popup::Presets { confirm_delete, .. }) => {
-                if i >= 2
+                let n = self.builtin_preset_count();
+                if i >= n
                     && let Some(m) = self.mouse
                 {
                     let nprops = self.sel.and_then(|s| l.elems.get(s)).map_or(0, |e| editor_rows::props(e.kind).len());
                     let d = self.dims(nprops, self.sel.is_some());
                     let (x, y) = self.popup_at(&d, 0);
-                    if Self::preset_del_rect(x, y, i).contains(m) {
-                        let idx = i - 2;
+                    if self.preset_del_rect(x, y, i).contains(m) {
+                        let idx = i - n;
                         if confirm_delete == Some(idx) {
                             return self.delete_saved_preset(idx, cv);
                         }

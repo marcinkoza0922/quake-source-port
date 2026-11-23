@@ -20,6 +20,7 @@ use crate::console::Console;
 use crate::draw::Canvas;
 
 pub mod builtins;
+mod defs;
 pub mod draw;
 pub mod markup;
 pub mod net;
@@ -27,94 +28,9 @@ pub mod scene;
 #[cfg(test)]
 mod tests;
 
+pub use defs::{CsqcFields, CsqcGlobals, Entries};
+
 const CSQC_MAX_EDICTS: usize = 2048;
-
-/// Entry-point function indices discovered in `csprogs.dat`.
-#[derive(Default, Clone, Copy)]
-pub struct Entries {
-    pub init: Option<usize>,
-    pub shutdown: Option<usize>,
-    pub draw_hud: Option<usize>,
-    pub draw_scores: Option<usize>,
-    pub update_view: Option<usize>,
-    pub parse_event: Option<usize>,
-    pub parse_print: Option<usize>,
-    pub parse_centerprint: Option<usize>,
-    pub parse_stuffcmd: Option<usize>,
-    pub console_command: Option<usize>,
-}
-
-/// Optional standard CSQC globals (0 = absent in this `csprogs.dat`).
-#[derive(Default, Clone, Copy)]
-pub struct CsqcGlobals {
-    pub time: usize,
-    pub frametime: usize,
-    pub cltime: usize,
-    pub player_localentnum: usize,
-    pub player_localnum: usize,
-    pub maxclients: usize,
-    pub intermission: usize,
-    pub intermission_time: usize,
-    pub sb_showscores: usize,
-    pub v_forward: usize,
-    pub v_right: usize,
-    pub v_up: usize,
-    pub view_angles: usize,
-    pub pmove_org: usize,
-    pub pmove_vel: usize,
-    pub input_angles: usize,
-    pub trace_allsolid: usize,
-    pub trace_startsolid: usize,
-    pub trace_fraction: usize,
-    pub trace_endpos: usize,
-    pub trace_plane_normal: usize,
-    pub trace_plane_dist: usize,
-    pub trace_ent: usize,
-    pub trace_inopen: usize,
-    pub trace_inwater: usize,
-}
-
-/// Optional standard CSQC entity fields (`usize::MAX` = absent).
-#[derive(Clone, Copy)]
-pub struct CsqcFields {
-    pub origin: usize,
-    pub angles: usize,
-    pub model: usize,
-    pub modelindex: usize,
-    pub frame: usize,
-    pub frame2: usize,
-    pub lerpfrac: usize,
-    pub skin: usize,
-    pub colormap: usize,
-    pub alpha: usize,
-    pub effects: usize,
-    pub renderflags: usize,
-    pub drawmask: usize,
-    pub mins: usize,
-    pub maxs: usize,
-}
-
-impl Default for CsqcFields {
-    fn default() -> Self {
-        Self {
-            origin: usize::MAX,
-            angles: usize::MAX,
-            model: usize::MAX,
-            modelindex: usize::MAX,
-            frame: usize::MAX,
-            frame2: usize::MAX,
-            lerpfrac: usize::MAX,
-            skin: usize::MAX,
-            colormap: usize::MAX,
-            alpha: usize::MAX,
-            effects: usize::MAX,
-            renderflags: usize::MAX,
-            drawmask: usize::MAX,
-            mins: usize::MAX,
-            maxs: usize::MAX,
-        }
-    }
-}
 
 /// Non-VM CSQC state kept separate from `Vm` so `CsqcHost` can borrow it mutably
 /// while `Vm::execute` runs.
@@ -130,6 +46,9 @@ pub struct CsqcState {
     pub cursor_mode: bool,
     /// Dynamic precached models loaded by CSQC (`precache_model`).
     pub extra_models: Vec<String>,
+    cached_mapname: (String, i32),
+    cached_levelname: (String, i32),
+    cached_worldmodel: (String, i32),
 }
 
 /// Mutable host references supplied to CSQC builtins during one VM invocation.
@@ -161,75 +80,11 @@ pub struct Csqc {
     pub state: CsqcState,
 }
 
-fn find_fn(p: &Progs, name: &str) -> Option<usize> {
-    p.find_function(name).filter(|&i| p.functions[i].first_statement > 0)
-}
-
-fn resolve_entries(p: &Progs) -> Entries {
-    Entries {
-        init: find_fn(p, "CSQC_Init"),
-        shutdown: find_fn(p, "CSQC_Shutdown"),
-        draw_hud: find_fn(p, "CSQC_DrawHud"),
-        draw_scores: find_fn(p, "CSQC_DrawScores"),
-        update_view: find_fn(p, "CSQC_UpdateView"),
-        parse_event: find_fn(p, "CSQC_Parse_Event"),
-        parse_print: find_fn(p, "CSQC_Parse_Print"),
-        parse_centerprint: find_fn(p, "CSQC_Parse_CenterPrint"),
-        parse_stuffcmd: find_fn(p, "CSQC_Parse_StuffCmd"),
-        console_command: find_fn(p, "CSQC_ConsoleCommand"),
-    }
-}
-
-fn resolve_globals(p: &Progs) -> CsqcGlobals {
-    let g = |n: &str| p.find_global(n).map_or(0, |d| d.ofs as usize);
-    CsqcGlobals {
-        time: g("time"),
-        frametime: g("frametime"),
-        cltime: g("cltime"),
-        player_localentnum: g("player_localentnum"),
-        player_localnum: g("player_localnum"),
-        maxclients: g("maxclients"),
-        intermission: g("intermission"),
-        intermission_time: g("intermission_time"),
-        sb_showscores: g("sb_showscores"),
-        v_forward: g("v_forward"),
-        v_right: g("v_right"),
-        v_up: g("v_up"),
-        view_angles: g("view_angles"),
-        pmove_org: g("pmove_org"),
-        pmove_vel: g("pmove_vel"),
-        input_angles: g("input_angles"),
-        trace_allsolid: g("trace_allsolid"),
-        trace_startsolid: g("trace_startsolid"),
-        trace_fraction: g("trace_fraction"),
-        trace_endpos: g("trace_endpos"),
-        trace_plane_normal: g("trace_plane_normal"),
-        trace_plane_dist: g("trace_plane_dist"),
-        trace_ent: g("trace_ent"),
-        trace_inopen: g("trace_inopen"),
-        trace_inwater: g("trace_inwater"),
-    }
-}
-
-fn resolve_fields(p: &Progs) -> CsqcFields {
-    let f = |n: &str| p.find_field(n).map_or(usize::MAX, |d| d.ofs as usize);
-    CsqcFields {
-        origin: f("origin"),
-        angles: f("angles"),
-        model: f("model"),
-        modelindex: f("modelindex"),
-        frame: f("frame"),
-        frame2: f("frame2"),
-        lerpfrac: f("lerpfrac"),
-        skin: f("skin"),
-        colormap: f("colormap"),
-        alpha: f("alpha"),
-        effects: f("effects"),
-        renderflags: f("renderflags"),
-        drawmask: f("drawmask"),
-        mins: f("mins"),
-        maxs: f("maxs"),
-    }
+/// True when the active filesystem ships a `csprogs.dat` with `CSQC_DrawHud`.
+pub fn fs_has_hud(fs: &Fs) -> bool {
+    fs.open("csprogs.dat")
+        .and_then(|b| Progs::parse_csqc(&b).ok())
+        .is_some_and(|p| defs::find_fn(&p, "CSQC_DrawHud").is_some())
 }
 
 impl Csqc {
@@ -237,16 +92,28 @@ impl Csqc {
         self.vm.is_some()
     }
 
+    /// True for Full-CSQC-only progs (when `CSQC_UpdateView` exists without Simple CSQC `CSQC_DrawHud`).
     pub fn handles_view(&self) -> bool {
-        self.vm.is_some() && self.state.entries.update_view.is_some()
+        self.vm.is_some() && self.state.entries.update_view.is_some() && self.state.entries.draw_hud.is_none()
     }
 
-    pub fn handles_hud(&self) -> bool {
-        self.vm.is_some() && (self.state.entries.draw_hud.is_some() || self.state.entries.update_view.is_some())
+    /// True when Simple CSQC (`CSQC_DrawHud`) is loaded.
+    pub fn has_simple_hud(&self) -> bool {
+        self.vm.is_some() && self.state.entries.draw_hud.is_some()
+    }
+
+    pub fn has_draw_scores(&self) -> bool {
+        self.vm.is_some() && self.state.entries.draw_scores.is_some()
     }
 
     pub fn has_command(&self, name: &str) -> bool {
-        self.vm.is_some() && self.state.commands.contains(&name.to_ascii_lowercase())
+        let low = name.to_ascii_lowercase();
+        // Simple CSQC receives `showscores` from the engine; let `+showscores`/`-showscores`
+        // update `Host::show_scores` instead of letting Full-CSQC handlers (e.g. AD) swallow them.
+        if self.has_simple_hud() && matches!(low.as_str(), "+showscores" | "-showscores") {
+            return false;
+        }
+        self.vm.is_some() && self.state.commands.contains(&low)
     }
 
     /// Loads `csprogs.dat` from the active filesystem (unless `cl_nocsqc` is set)
@@ -272,9 +139,9 @@ impl Csqc {
                 return false;
             }
         };
-        let entries = resolve_entries(&progs);
-        let globals = resolve_globals(&progs);
-        let fields = resolve_fields(&progs);
+        let entries = defs::resolve_entries(&progs);
+        let globals = defs::resolve_globals(&progs);
+        let fields = defs::resolve_fields(&progs);
         let vm = match Vm::new_csqc(progs, CSQC_MAX_EDICTS) {
             Ok(v) => v,
             Err(e) => {
@@ -320,8 +187,10 @@ impl Csqc {
     }
 
     fn sync_globals(&mut self, env: &CsqcEnv<'_>) {
+        use qnet::protocol::{STAT_MONSTERS, STAT_SECRETS, STAT_TOTALMONSTERS, STAT_TOTALSECRETS};
         let Some(vm) = &mut self.vm else { return };
         let g = self.state.globals;
+        let f = self.state.fields;
         let cl = env.cl;
         vm.time = cl.time;
         let set_f = |vm: &mut Vm, ofs: usize, val: f32| {
@@ -334,15 +203,53 @@ impl Csqc {
                 vm.set_g_v(ofs, val);
             }
         };
+        let cached_str = |vm: &mut Vm, slot: &mut (String, i32), val: &str| -> i32 {
+            if slot.1 == 0 || slot.0 != val {
+                slot.0.clear();
+                slot.0.push_str(val);
+                slot.1 = vm.strings.engine(val.as_bytes());
+            }
+            slot.1
+        };
         set_f(vm, g.time, cl.time as f32);
         set_f(vm, g.frametime, env.frametime);
         set_f(vm, g.cltime, env.realtime as f32);
+        set_f(vm, g.clframetime, env.frametime);
+        set_f(vm, g.deathmatch, cl.gametype as f32);
+        set_f(vm, g.coop, if cl.gametype == 0 && cl.maxclients != 1 { 1.0 } else { 0.0 });
+        set_f(vm, g.total_monsters, cl.statsf[STAT_TOTALMONSTERS]);
+        set_f(vm, g.total_secrets, cl.statsf[STAT_TOTALSECRETS]);
+        set_f(vm, g.killed_monsters, cl.statsf[STAT_MONSTERS]);
+        set_f(vm, g.found_secrets, cl.statsf[STAT_SECRETS]);
         set_f(vm, g.player_localentnum, cl.viewentity as f32);
         set_f(vm, g.player_localnum, cl.viewentity.saturating_sub(1) as f32);
         set_f(vm, g.maxclients, cl.maxclients as f32);
         set_f(vm, g.intermission, cl.intermission as f32);
         set_f(vm, g.intermission_time, cl.completed_time as f32);
         set_f(vm, g.sb_showscores, if env.show_scores { 1.0 } else { 0.0 });
+        if g.world != 0 {
+            vm.set_g_i(g.world, 0);
+        }
+        if g.mapname != 0 {
+            let h = cached_str(vm, &mut self.state.cached_mapname, &cl.mapname);
+            vm.set_g_i(g.mapname, h);
+        }
+        // Worldspawn entity (edict 0) fields expected by Simple CSQC HUDs (ironwail/vkQuake).
+        if f.solid != usize::MAX {
+            vm.set_ent_f(0, f.solid, 4.0);
+        }
+        if f.modelindex != usize::MAX {
+            vm.set_ent_f(0, f.modelindex, 1.0);
+        }
+        if f.model != usize::MAX {
+            let wm = cl.model_precache.get(1).map_or("", String::as_str);
+            let h = cached_str(vm, &mut self.state.cached_worldmodel, wm);
+            vm.set_ent_i(0, f.model, h);
+        }
+        if f.message != usize::MAX {
+            let h = cached_str(vm, &mut self.state.cached_levelname, &cl.levelname);
+            vm.set_ent_i(0, f.message, h);
+        }
         set_v(vm, g.view_angles, cl.viewangles);
         set_v(vm, g.input_angles, cl.viewangles);
         let (fwd, right, up) = angle_vectors(Vec3::from_array(cl.viewangles));
@@ -432,7 +339,7 @@ impl Csqc {
         self.call(f, env);
     }
 
-    /// Simple CSQC HUD: calls `CSQC_DrawHud(virsize, showscores)` and `CSQC_DrawScores(virsize, showscores)`.
+    /// Simple CSQC HUD: calls `CSQC_DrawHud(virsize, showscores)` and (when not in a menu) `CSQC_DrawScores(virsize, showscores)`.
     pub fn draw_hud(&mut self, env: &mut CsqcEnv<'_>) {
         self.sync_globals(env);
         let sz = [env.virt[0], env.virt[1], 0.0];
@@ -444,12 +351,27 @@ impl Csqc {
             }
             self.call(f, env);
         }
-        if let Some(f) = self.state.entries.draw_scores {
+        if env.not_menu
+            && let Some(f) = self.state.entries.draw_scores
+        {
             if let Some(vm) = &mut self.vm {
                 vm.set_g_v(ofs_parm(0), sz);
                 vm.set_g_f(ofs_parm(1), scores);
             }
             self.call(f, env);
         }
+    }
+
+    /// Intermission CSQC scores: calls `CSQC_DrawScores(virsize, showscores)`.
+    pub fn draw_scores(&mut self, env: &mut CsqcEnv<'_>) {
+        let Some(f) = self.state.entries.draw_scores else { return };
+        self.sync_globals(env);
+        let sz = [env.virt[0], env.virt[1], 0.0];
+        let scores = if env.show_scores { 1.0 } else { 0.0 };
+        if let Some(vm) = &mut self.vm {
+            vm.set_g_v(ofs_parm(0), sz);
+            vm.set_g_f(ofs_parm(1), scores);
+        }
+        self.call(f, env);
     }
 }

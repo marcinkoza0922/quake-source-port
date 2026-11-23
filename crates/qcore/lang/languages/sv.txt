@@ -4168,3 +4168,9 @@ sv Efterbehandling
 
 @ World
 sv Värld
+
+@ Mod HUD
+sv Mod-HUD
+
+@ Custom HUD provided by the current mod or map pack
+sv Anpassad HUD från aktuell mod eller kartpaket

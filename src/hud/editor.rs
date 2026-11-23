@@ -19,7 +19,7 @@ use super::place::Rect;
 use super::presets::{self, PRESET_NAME, SavedPreset};
 
 pub const CVAR: &str = "hud_layout";
-/// 0 modern, 1 classic, 2 custom (or saved preset named by `hud_preset_name`).
+/// 0 modern, 1 classic, 2 custom (or saved preset named by `hud_preset_name`), 3 mod HUD.
 pub const PRESET: &str = "hud_preset";
 
 /// Dialog geometry, in menu units.
@@ -152,6 +152,8 @@ pub struct Editor {
     pub(super) presets_path: Option<PathBuf>,
     /// Name of the user-saved preset currently being edited (None for built-in modern/classic or unsaved custom).
     pub editing_preset: Option<String>,
+    /// True when the active mod provides a Simple CSQC HUD (`Mod HUD` preset available).
+    pub has_mod_hud: bool,
 }
 
 pub(super) fn layout(cv: &Cvars) -> Layout {
@@ -171,6 +173,7 @@ impl Editor {
     pub fn open(&mut self, cv: &Cvars) {
         let pos = self.pos;
         let pad_ui = self.pad_ui;
+        let has_mod_hud = self.has_mod_hud;
         let presets_path = self.presets_path.clone();
         let presets = match &presets_path {
             Some(p) if p.as_os_str().is_empty() => std::mem::take(&mut self.presets),
@@ -183,7 +186,7 @@ impl Editor {
         } else {
             None
         };
-        *self = Editor { pos, pad_ui, geo: self.geo, presets, presets_path, editing_preset, ..Default::default() };
+        *self = Editor { pos, pad_ui, geo: self.geo, presets, presets_path, editing_preset, has_mod_hud, ..Default::default() };
     }
 
     /// The frame's placement and screen, from the host.
@@ -463,8 +466,13 @@ impl Editor {
             5 => {
                 if self.confirm_reset {
                     self.push_undo_now(cv);
-                    cv.set(CVAR, "default");
-                    cv.set(PRESET, "0");
+                    if self.has_mod_hud {
+                        cv.set(CVAR, "mod");
+                        cv.set(PRESET, "3");
+                    } else {
+                        cv.set(CVAR, "default");
+                        cv.set(PRESET, "0");
+                    }
                     cv.set(PRESET_NAME, "");
                     self.editing_preset = None;
                     self.confirm_reset = false;

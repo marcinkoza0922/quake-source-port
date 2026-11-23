@@ -4168,3 +4168,9 @@ id Pascaproses
 
 @ World
 id Dunia
+
+@ Mod HUD
+id HUD Mod
+
+@ Custom HUD provided by the current mod or map pack
+id HUD khusus yang disediakan oleh mod atau paket peta saat ini

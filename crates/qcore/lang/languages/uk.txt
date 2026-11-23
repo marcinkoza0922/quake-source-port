@@ -4168,3 +4168,9 @@ uk Постобробка
 
 @ World
 uk Світ
+
+@ Mod HUD
+uk HUD моду
+
+@ Custom HUD provided by the current mod or map pack
+uk Користувацький HUD поточного моду або набору карт

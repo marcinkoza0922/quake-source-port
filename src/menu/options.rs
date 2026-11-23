@@ -294,32 +294,44 @@ impl Menu {
         cv.set("s_soundtrack", id);
     }
 
-    /// HUD Preset dropdown entries: modern, classic, saved user presets, then custom.
+    /// HUD Preset dropdown entries: (Mod HUD when active), modern, classic, saved user presets, then custom.
     pub(super) fn hud_preset_options(&self) -> Vec<String> {
-        let mut out = vec![qcore::t!("modern").to_string(), qcore::t!("classic").to_string()];
+        let mut out = Vec::new();
+        if self.hud_edit.has_mod_hud {
+            out.push(qcore::t!("Mod HUD").to_string());
+        }
+        out.extend([qcore::t!("modern").to_string(), qcore::t!("classic").to_string()]);
         out.extend(self.hud_edit.presets.iter().map(|p| p.name.clone()));
         out.push(qcore::t!("custom").to_string());
         out
     }
 
     pub(super) fn hud_preset_index(&self, cv: &Cvars) -> usize {
+        let ofs = usize::from(self.hud_edit.has_mod_hud);
         match cv.value_of("hud_preset") as i32 {
-            0 => 0,
-            1 => 1,
+            3 if self.hud_edit.has_mod_hud => 0,
+            0 => ofs,
+            1 => ofs + 1,
             _ => {
                 let name = cv.by_name(crate::hud::presets::PRESET_NAME).map_or("", |c| c.string.trim());
                 if !name.is_empty()
                     && let Some(k) = self.hud_edit.presets.iter().position(|p| p.name.eq_ignore_ascii_case(name))
                 {
-                    return 2 + k;
+                    return ofs + 2 + k;
                 }
-                2 + self.hud_edit.presets.len()
+                ofs + 2 + self.hud_edit.presets.len()
             }
         }
     }
 
     pub(super) fn set_hud_preset(&self, i: usize, cv: &mut Cvars) {
-        match i {
+        if self.hud_edit.has_mod_hud && i == 0 {
+            cv.set("hud_preset", "3");
+            cv.set(crate::hud::presets::PRESET_NAME, "");
+            return;
+        }
+        let ofs = usize::from(self.hud_edit.has_mod_hud);
+        match i.wrapping_sub(ofs) {
             0 => {
                 cv.set("hud_preset", "0");
                 cv.set(crate::hud::presets::PRESET_NAME, "");

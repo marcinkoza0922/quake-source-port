@@ -4168,3 +4168,9 @@ da Efterbehandling
 
 @ World
 da Verden
+
+@ Mod HUD
+da Mod-HUD
+
+@ Custom HUD provided by the current mod or map pack
+da Tilpasset HUD leveret af den aktuelle mod eller banepakke

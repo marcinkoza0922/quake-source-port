@@ -4168,3 +4168,9 @@ lt Papildomas apdorojimas
 
 @ World
 lt Pasaulis
+
+@ Mod HUD
+lt Modo HUD
+
+@ Custom HUD provided by the current mod or map pack
+lt Dabartinio modo ar žemėlapių paketo teikiamas pasirinktinis HUD

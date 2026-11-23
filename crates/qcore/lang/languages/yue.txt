@@ -4168,3 +4168,9 @@ yue 後期處理
 
 @ World
 yue 世界
+
+@ Mod HUD
+yue 模組 HUD
+
+@ Custom HUD provided by the current mod or map pack
+yue 由目前模組或地圖包提供嘅自訂 HUD

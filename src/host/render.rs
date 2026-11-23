@@ -217,6 +217,39 @@ impl Host {
         let demo_bar = self.demo_bar();
         let demo_peek = self.demo_peek();
         let exporting = self.exporting();
+        let mod_hud_elem = self
+            .csqc
+            .has_simple_hud()
+            .then(|| self.hud.rect_of(crate::hud::kind::Kind::ModHud).map(|(e, r)| (e.clone(), r)))
+            .flatten();
+        let mut csqc_intermission = false;
+        let mut normal_hud_start = c.list.len();
+        if view.is_some() {
+            if self.cl.intermission == 1
+                && self.csqc.has_draw_scores()
+                && let Some((e, _)) = mod_hud_elem.as_ref().filter(|(e, _)| !e.hidden)
+            {
+                self.csqc_draw_scores(&mut c, ft, Some(e));
+                csqc_intermission = true;
+            } else if self.cl.intermission == 0 && splits.is_empty() {
+                let scene_h = c.vh() - reserve;
+                let viewsize = rc.viewsize;
+                self.view.draw_damage(&mut c, scene_h, rc.damage_indicator, rc.flash_scale);
+                if viewsize < 130.0 && csqc_crosshair {
+                    let color = reticle::color(&self.server.core.cvars, p1_target, self.feedback.kill && self.feedback.remaining(self.realtime) > 0.0);
+                    draw_crosshair(&mut c, scene_h, &self.server.core.cvars, self.input.lockon.target.is_some(), self.input.lockon.active, color);
+                    hitmarker::draw_hitmarker(&mut c, scene_h, &self.server.core.cvars, self.feedback.remaining(self.realtime), color);
+                }
+                normal_hud_start = c.list.len();
+                if !hud.edit
+                    && viewsize < 120.0
+                    && csqc_sbar
+                    && let Some((e, r)) = mod_hud_elem.as_ref().filter(|(e, _)| !e.hidden)
+                {
+                    self.csqc_draw_hud_elem(&mut c, ft, e, *r, false);
+                }
+            }
+        }
         {
             let fs = &self.server.core.fs;
             let pics = &mut self.pics;
@@ -225,6 +258,7 @@ impl Host {
             if view.is_some() {
                 match self.cl.intermission {
                     // GAME_DEATHMATCH: the ranking instead of level stats.
+                    1 if csqc_intermission => {}
                     1 if self.cl.gametype == 1 => crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl),
                     1 => crate::sbar::intermission(&mut c, &mut pf, &self.cl),
                     2 => {
@@ -291,20 +325,11 @@ impl Host {
                         }
                     }
                     _ => {
-                        let scene_h = c.vh() - reserve;
                         let viewsize = rc.viewsize;
-                        self.view.draw_damage(&mut c, scene_h, rc.damage_indicator, rc.flash_scale);
-                        if viewsize < 130.0 && csqc_crosshair {
-                            let color = reticle::color(&self.server.core.cvars, p1_target, self.feedback.kill && self.feedback.remaining(self.realtime) > 0.0);
-                            draw_crosshair(&mut c, scene_h, &self.server.core.cvars, self.input.lockon.target.is_some(), self.input.lockon.active, color);
-                            hitmarker::draw_hitmarker(&mut c, scene_h, &self.server.core.cvars, self.feedback.remaining(self.realtime), color);
-                        }
                         let face = self.view.face_anim_time > self.cl.time;
                         let player_pos = Vec3::from_array(self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| e.origin));
                         let automap_allowed = self.cl.gametype != 1 && !rc.deathmatch;
-                        let hud_start = c.list.len();
-                        let simple_csqc_hud = self.csqc.active() && !self.csqc.handles_view() && self.csqc.handles_hud();
-                        if !hud.edit && viewsize < 120.0 && csqc_sbar && !simple_csqc_hud {
+                        if !hud.edit && viewsize < 120.0 && csqc_sbar {
                             let am = crate::hud::draw::AutomapCtx {
                                 map: &self.automap,
                                 settings: crate::automap::Automap::settings(&self.server.core.cvars),
@@ -317,16 +342,14 @@ impl Host {
                                 ctx.training = Some((&self.training, false));
                             }
                             crate::hud::draw_layout(&mut c, &mut pf, &self.hud.layout, &self.hud.rects, &ctx, Some(&self.hud.fade), self.realtime, |_| true);
-                        } else if !hud.edit && viewsize < 120.0 && simple_csqc_hud {
-                            // Simple CSQC HUD runs after releasing the local `pf` borrow below.
+                            metrics_drawn = true;
                         }
-                        metrics_drawn = true;
                         // the demo bar takes the bottom of the screen: lift the HUD over it
                         if let Some(b) = &demo_bar {
                             let dy = -super::demo_bar::lift(b.pad) * c.scale;
-                            crate::draw::translate(&mut c.list[hud_start..], 0.0, dy);
+                            crate::draw::translate(&mut c.list[normal_hud_start..], 0.0, dy);
                         }
-                        if self.show_scores && self.cl.gametype == 1 {
+                        if self.show_scores && self.cl.gametype == 1 && !self.csqc.has_draw_scores() {
                             crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
                         }
                         self.bullet_time.draw(&mut c, bullet_meter);
@@ -336,7 +359,9 @@ impl Host {
                             self.captions.draw(&mut c, self.realtime, at, ts, color);
                         }
                         if self.show_scores && !hud.edit && !self.menu.active() && !self.automap.fullscreen && automap_allowed {
-                            let has_status_bar = self.hud.layout.elems.iter().any(|e| e.kind == crate::hud::kind::Kind::StatusBar);
+                            let has_status_bar = self.hud.layout.elems.iter().any(|e| {
+                                matches!(e.kind, crate::hud::kind::Kind::StatusBar | crate::hud::kind::Kind::ModHud)
+                            });
                             let top_reserve = if has_status_bar { 10.0 } else { 30.0 };
                             let header = crate::automap::HeaderInfo::default();
                             self.automap.draw(
@@ -402,6 +427,19 @@ impl Host {
                 super::demo_bar::draw_peek(&mut c, p, &glyphs);
             }
             self.menu.mods.online.poll();
+        }
+        // the HUD editor's live Mod HUD preview, under its dialog
+        if hud.edit
+            && let Some((e, r)) = mod_hud_elem.as_ref()
+        {
+            self.csqc_draw_hud_elem(&mut c, ft, e, *r, true);
+        }
+        {
+            let fs = &self.server.core.fs;
+            let pics = &mut self.pics;
+            let r = &mut self.r;
+            let mut pf = |n: &str| pics.get(fs, r, n);
+            let ingame = view.is_some() && self.cl.intermission == 0;
             // the HUD editor's preview, under its dialog
             if hud.edit {
                 let player_pos = Vec3::from_array(self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| e.origin));
@@ -430,19 +468,6 @@ impl Host {
                 let y = (c.vh() / 2.0 + 4.0 + ofs).clamp(0.0, c.vh() - 8.0);
                 c.ptext((c.vw() / 2.0 - c.ptext_w(&s) / 2.0).floor(), y.floor(), &s, crate::draw::WHITE);
             }
-        }
-        // Simple CSQC HUD (CSQC_DrawHud / CSQC_DrawScores): drawn in-game when no menu is open.
-        if view.is_some()
-            && self.cl.intermission == 0
-            && splits.is_empty()
-            && !hud.edit
-            && !self.menu.active()
-            && rc.viewsize < 120.0
-            && self.csqc.active()
-            && !self.csqc.handles_view()
-            && self.csqc.handles_hud()
-        {
-            self.csqc_draw_hud(&mut c, ft);
         }
         if view.is_some() {
             self.draw_mapper_stats(&mut c, mapper);

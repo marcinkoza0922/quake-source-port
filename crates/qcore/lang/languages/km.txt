@@ -4168,3 +4168,9 @@ km ការ​កែច្នៃ​ក្រោយ
 
 @ World
 km ពិភពលោក
+
+@ Mod HUD
+km HUD របស់ម៉ូដ
+
+@ Custom HUD provided by the current mod or map pack
+km HUD ផ្ទាល់​ខ្លួន​ដែល​ផ្តល់​ដោយ​ម៉ូដ ឬ​កញ្ចប់​ផែនទី​បច្ចុប្បន្ន

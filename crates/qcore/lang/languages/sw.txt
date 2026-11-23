@@ -4168,3 +4168,9 @@ sw Uchakataji wa baadaye
 
 @ World
 sw Ulimwengu
+
+@ Mod HUD
+sw HUD ya modi
+
+@ Custom HUD provided by the current mod or map pack
+sw HUD maalum inayotolewa na modi au kifurushi cha ramani cha sasa

@@ -19,6 +19,7 @@ pub(super) struct HudFrame {
     pub metrics: [String; 6],
     pub pb_color: [f32; 4],
     pub glyph_override: f32,
+    pub has_mod_hud: bool,
     /// The editor's sample player.
     pub sample: Option<qclient::ClientState>,
 }
@@ -52,6 +53,7 @@ impl HudFrame {
             automap,
             training: None,
             glyph_override: self.glyph_override,
+            has_mod_hud: self.has_mod_hud,
         }
     }
 }
@@ -88,6 +90,10 @@ impl Host {
                     self.server.core.cvars.set(CVAR, "classic");
                     self.server.core.cvars.set(crate::hud::presets::PRESET_NAME, "");
                 }
+                3 => {
+                    self.server.core.cvars.set(CVAR, "mod");
+                    self.server.core.cvars.set(crate::hud::presets::PRESET_NAME, "");
+                }
                 _ => {}
             }
         } else if p as i32 == 2
@@ -115,10 +121,15 @@ impl Host {
             place::stack(&mut l.elems, &s);
             l.to_text()
         };
+        let changed = text != self.hud.src;
         let t = match text.as_str() {
             "default" => stacked(Layout::default_layout()),
             "classic" => stacked(Layout::classic_layout()),
+            "mod" => stacked(Layout::mod_layout()),
             _ if self.hud.sync(&text) => {
+                if changed {
+                    self.hud.preset_checked = false;
+                }
                 // a saved layout that is not its preset's (saved before
                 // presets existed) is custom
                 if !self.hud.preset_checked && self.cbuf.is_empty() {
@@ -126,6 +137,7 @@ impl Host {
                     let preset = match self.cv(PRESET) as i32 {
                         0 => Some(Layout::default_layout()),
                         1 => Some(Layout::classic_layout()),
+                        3 => Some(Layout::mod_layout()),
                         _ => None,
                     };
                     if preset.is_some_and(|l| stacked(l) != text) {
@@ -136,20 +148,28 @@ impl Host {
                 return;
             }
             _ => {
-                // first run: the old settings, and the preset they match
-                let cv = &self.server.core.cvars;
-                let t = stacked(Layout::from_legacy(&|n| cv.value_of(n)));
-                let preset = if t == stacked(Layout::default_layout()) {
-                    "0"
-                } else if t == stacked(Layout::classic_layout()) {
-                    "1"
+                // first run: mods with a CSQC HUD default to Mod HUD; otherwise
+                // the old settings, and the preset they match
+                if self.hud.has_mod_hud {
+                    self.server.core.cvars.set(PRESET, "3");
+                    self.hud.preset = Some(3.0);
+                    self.hud.preset_checked = true;
+                    stacked(Layout::mod_layout())
                 } else {
-                    "2"
-                };
-                self.server.core.cvars.set(PRESET, preset);
-                self.hud.preset = Some(self.cv(PRESET));
-                self.hud.preset_checked = true;
-                t
+                    let cv = &self.server.core.cvars;
+                    let t = stacked(Layout::from_legacy(&|n| cv.value_of(n)));
+                    let preset = if t == stacked(Layout::default_layout()) {
+                        "0"
+                    } else if t == stacked(Layout::classic_layout()) {
+                        "1"
+                    } else {
+                        "2"
+                    };
+                    self.server.core.cvars.set(PRESET, preset);
+                    self.hud.preset = Some(self.cv(PRESET));
+                    self.hud.preset_checked = true;
+                    t
+                }
             }
         };
         self.server.core.cvars.set(CVAR, &t);
@@ -161,6 +181,7 @@ impl Host {
         let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
         let pb_category = qui::stats::PbCategory::hud_mode(self.cv("hud_pb_100"));
         let room = Room { pack, addons: addons.len(), vw: c.vw(), pb_category };
+        self.menu.hud_edit.has_mod_hud = self.hud.has_mod_hud;
         self.hud_preset();
         self.hud_sync(c, &room);
         let edit = self.menu.screen == crate::menu::Screen::HudEditor;
@@ -208,6 +229,7 @@ impl Host {
         };
         HudFrame {
             glyph_override: self.cv("joy_glyphs"),
+            has_mod_hud: self.hud.has_mod_hud,
             room,
             edit,
             info,

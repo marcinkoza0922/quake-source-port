@@ -4168,3 +4168,9 @@ fi Jälkikäsittely
 
 @ World
 fi Maailma
+
+@ Mod HUD
+fi Modin HUD
+
+@ Custom HUD provided by the current mod or map pack
+fi Nykyisen modin tai karttapaketin tarjoama mukautettu HUD

@@ -4168,3 +4168,9 @@ tr Son işleme
 
 @ World
 tr Dünya
+
+@ Mod HUD
+tr Mod HUD
+
+@ Custom HUD provided by the current mod or map pack
+tr Mevcut mod veya harita paketi tarafından sağlanan özel HUD

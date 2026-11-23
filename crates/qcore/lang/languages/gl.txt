@@ -4168,3 +4168,9 @@ gl Posprocesado
 
 @ World
 gl Mundo
+
+@ Mod HUD
+gl HUD do mod
+
+@ Custom HUD provided by the current mod or map pack
+gl HUD personalizado proporcionado polo mod ou paquete de mapas actual

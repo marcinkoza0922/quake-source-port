@@ -4168,3 +4168,9 @@ mt Proċessar ta' wara
 
 @ World
 mt Dinja
+
+@ Mod HUD
+mt HUD tal-mod
+
+@ Custom HUD provided by the current mod or map pack
+mt HUD personalizzat ipprovdut mill-mod jew pakkett ta mapep attwali

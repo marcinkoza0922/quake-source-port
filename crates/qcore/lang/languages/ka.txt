@@ -4168,3 +4168,9 @@ ka პოსტდამუშავება
 
 @ World
 ka სამყარო
+
+@ Mod HUD
+ka მოდის HUD
+
+@ Custom HUD provided by the current mod or map pack
+ka მიმდინარე მოდის ან რუკების პაკეტის მიერ მოწოდებული HUD

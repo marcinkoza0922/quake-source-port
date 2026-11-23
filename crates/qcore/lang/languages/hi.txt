@@ -4168,3 +4168,9 @@ hi पोस्ट-प्रोसेसिंग
 
 @ World
 hi दुनिया
+
+@ Mod HUD
+hi मॉड HUD
+
+@ Custom HUD provided by the current mod or map pack
+hi वर्तमान मॉड या मैप पैक द्वारा प्रदान किया गया कस्टम HUD
