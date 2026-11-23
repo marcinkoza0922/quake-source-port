@@ -30,6 +30,22 @@ pub(super) struct Swapchain {
     pub(super) readable: bool,
 }
 
+/// Linear-depth mip chain for SAO (mip 0 = AO resolution, plus downsampled mips).
+pub(super) struct AoSource {
+    pub(super) img: Image,
+    pub(super) slot: u32,
+    pub(super) mip_views: Vec<vk::ImageView>,
+}
+
+/// Half-resolution single-sampled targets for ray-traced water reflections.
+pub(super) struct RtReflTargets {
+    pub(super) color: Image,
+    pub(super) depth: Image,
+    pub(super) slot: u32,
+    pub(super) width: u32,
+    pub(super) height: u32,
+}
+
 pub(super) struct Targets {
     pub(super) portals: Vec<(Image, u32)>,
     /// Single-sampled depth buffer for portal destination views.
@@ -46,8 +62,12 @@ pub(super) struct Targets {
     pub(super) scene_w: u32,
     pub(super) scene_h: u32,
     pub(super) color_slot: u32,
-    /// Exact sample-0 depth/alpha snapshot, allocated at AO target size for MSAA SSAO.
-    pub(super) ao_source: Option<(Image, u32)>,
+    /// Linear-depth mip chain for SAO (allocated lazily on the first SSAO frame).
+    pub(super) ao_source: Option<AoSource>,
+    /// Reduced-resolution screen-droplet field (allocated lazily on the first droplet frame).
+    pub(super) droplets: Option<(Image, u32)>,
+    /// Half-resolution ray-traced water reflection target (allocated lazily on first RT frame).
+    pub(super) rt_refl: Option<RtReflTargets>,
     /// Single-sampled visibility/view depth for AO application (output-capped, half-res on low/medium).
     pub(super) ao: Image,
     pub(super) ao_w: u32,
@@ -64,13 +84,11 @@ pub(super) struct Targets {
     pub(super) out: Option<(Image, Buffer)>,
 }
 
-/// r_bloom targets: the scene's second colour attachment and the blur chain.
+/// r_bloom targets: single-sampled reduced-res depth buffer and the blur chain.
 pub(super) struct BloomTargets {
-    /// Single-sampled glow (MSAA resolve target), scene size.
-    pub(super) glow: Image,
-    pub(super) glow_ms: Option<Image>,
-    pub(super) glow_slot: u32,
-    /// The scene colour again, linearly filtered (r_bloom_bright).
+    /// Single-sampled depth at `levels[0]` resolution for the narrow glow pass.
+    pub(super) depth: Image,
+    /// The scene colour, linearly filtered (r_bloom_bright).
     pub(super) scene_slot: u32,
     /// Chain levels: image, texture slot, width, height (halving).
     pub(super) levels: Vec<(Image, u32, u32, u32)>,
@@ -110,6 +128,13 @@ pub(super) struct WorldGpu {
     pub(super) materials: Buffer,
     /// Per BSP texture: kind and material flags.
     pub(super) tex_info: Vec<(TextureKind, u32)>,
+    /// Per BSP texture: whether this texture or any frame of its animation has a fullbright mask.
+    pub(super) tex_has_fb: Vec<bool>,
+    /// `(leaf, surface)` pairs for world water/slime surfaces (fast visibility check for RT reflections).
+    pub(super) water_marks: Vec<(u32, u32)>,
+    /// Per submodel: true if it contains any reflecting water/slime surface.
+    pub(super) brush_has_water: Vec<bool>,
+    pub(super) has_brush_water: bool,
     pub(super) submodel_ids: Vec<ModelId>,
     pub(super) cull: WorldCull,
     /// Per-frame scratch reused by `gpu_world_draw`.
@@ -148,6 +173,8 @@ pub(super) struct WorldCull {
     pub(super) cmd_first: Vec<u32>,
     /// Command index ranges: opaque, sky, then liquids of type 1..=4.
     pub(super) cats: [std::ops::Range<u32>; 6],
+    /// Prefix of `cats[0]` whose texture (or animation) has a fullbright mask.
+    pub(super) opaque_fb: std::ops::Range<u32>,
     pub(super) framecount: u32,
 }
 

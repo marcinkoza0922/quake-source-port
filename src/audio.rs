@@ -26,12 +26,18 @@ pub struct AudioFx {
     pub acoustic: acoustic::AcousticState,
     pub footsteps: footsteps::Footsteps,
     pub soundtracks: soundtrack::SoundtrackManager,
+    last_cvar_gen: Option<u64>,
     last_cats: Option<CategoryVolumes>,
     last_hrtf: Option<bool>,
     last_occlusion: Option<bool>,
     last_water_fx: Option<bool>,
     last_crossfade: Option<f32>,
     last_reverb_on: Option<bool>,
+    reverb_enabled: bool,
+    reverb_amount: f32,
+    occlusion_enabled: bool,
+    footsteps_enabled: bool,
+    footsteps_vol: f32,
     last_soundtrack: Option<String>,
 }
 
@@ -63,56 +69,64 @@ impl AudioFx {
         paused: bool,
         snd: &mut SoundSystem,
     ) {
-        // Per-category volume mix.
-        let cats = CategoryVolumes {
-            ambient: cv.value_of("s_vol_ambient").clamp(0.0, 1.0),
-            weapons: cv.value_of("s_vol_weapons").clamp(0.0, 1.0),
-            monsters: cv.value_of("s_vol_monsters").clamp(0.0, 1.0),
-            world: cv.value_of("s_vol_world").clamp(0.0, 1.0),
-        };
-        if self.last_cats != Some(cats) {
-            snd.set_category_volumes(cats);
-            self.last_cats = Some(cats);
-        }
-
-        let hrtf = cv.value_of("s_hrtf") != 0.0;
-        if self.last_hrtf != Some(hrtf) {
-            snd.set_hrtf(hrtf);
-            self.last_hrtf = Some(hrtf);
-        }
-
-        let occlusion = cv.value_of("s_occlusion") != 0.0;
-        if self.last_occlusion != Some(occlusion) {
-            snd.set_occlusion(occlusion);
-            self.last_occlusion = Some(occlusion);
-        }
-
-        let water_fx = cv.value_of("snd_waterfx") != 0.0;
-        if self.last_water_fx != Some(water_fx) {
-            snd.set_water_fx(water_fx);
-            self.last_water_fx = Some(water_fx);
-        }
-
-        let crossfade = cv.value_of("s_music_crossfade").clamp(0.0, 3.0);
-        if self.last_crossfade != Some(crossfade) {
-            snd.set_music_crossfade(crossfade);
-            self.last_crossfade = Some(crossfade);
-        }
-
-        // Live soundtrack switcher: if `s_soundtrack` changed while a track is active, swap it.
-        let st_cvar = cv.by_name("s_soundtrack").map_or("", |c| c.string.trim());
-        if self.last_soundtrack.as_deref() != Some(st_cvar) {
-            let had_prev = self.last_soundtrack.is_some();
-            self.last_soundtrack = Some(st_cvar.to_owned());
-            if had_prev {
-                self.soundtracks.replay_current(st_cvar, fs, snd);
+        let cvar_gen = cv.generation();
+        if self.last_cvar_gen != Some(cvar_gen) {
+            self.last_cvar_gen = Some(cvar_gen);
+            // Per-category volume mix.
+            let cats = CategoryVolumes {
+                ambient: cv.value_of("s_vol_ambient").clamp(0.0, 1.0),
+                weapons: cv.value_of("s_vol_weapons").clamp(0.0, 1.0),
+                monsters: cv.value_of("s_vol_monsters").clamp(0.0, 1.0),
+                world: cv.value_of("s_vol_world").clamp(0.0, 1.0),
+            };
+            if self.last_cats != Some(cats) {
+                snd.set_category_volumes(cats);
+                self.last_cats = Some(cats);
             }
+
+            let hrtf = cv.value_of("s_hrtf") != 0.0;
+            if self.last_hrtf != Some(hrtf) {
+                snd.set_hrtf(hrtf);
+                self.last_hrtf = Some(hrtf);
+            }
+
+            let occlusion = cv.value_of("s_occlusion") != 0.0;
+            self.occlusion_enabled = occlusion;
+            if self.last_occlusion != Some(occlusion) {
+                snd.set_occlusion(occlusion);
+                self.last_occlusion = Some(occlusion);
+            }
+
+            let water_fx = cv.value_of("snd_waterfx") != 0.0;
+            if self.last_water_fx != Some(water_fx) {
+                snd.set_water_fx(water_fx);
+                self.last_water_fx = Some(water_fx);
+            }
+
+            let crossfade = cv.value_of("s_music_crossfade").clamp(0.0, 3.0);
+            if self.last_crossfade != Some(crossfade) {
+                snd.set_music_crossfade(crossfade);
+                self.last_crossfade = Some(crossfade);
+            }
+
+            // Live soundtrack switcher: if `s_soundtrack` changed while a track is active, swap it.
+            let st_cvar = cv.by_name("s_soundtrack").map_or("", |c| c.string.trim());
+            if self.last_soundtrack.as_deref() != Some(st_cvar) {
+                let had_prev = self.last_soundtrack.is_some();
+                self.last_soundtrack = Some(st_cvar.to_owned());
+                if had_prev {
+                    self.soundtracks.replay_current(st_cvar, fs, snd);
+                }
+            }
+
+            self.reverb_enabled = cv.value_of("s_reverb") != 0.0;
+            self.reverb_amount = cv.value_of("s_reverb_amount").clamp(0.25, 2.0);
+            self.footsteps_enabled = cv.value_of("s_footsteps") != 0.0;
+            self.footsteps_vol = cv.value_of("s_footsteps_volume").clamp(0.1, 1.5);
         }
 
         // Environmental reverb probe.
-        let reverb_on = cv.value_of("s_reverb") != 0.0;
-        let reverb_amt = cv.value_of("s_reverb_amount").clamp(0.25, 2.0);
-        if !reverb_on {
+        if !self.reverb_enabled {
             if self.last_reverb_on != Some(false) {
                 snd.set_reverb(ReverbParams::default());
                 self.last_reverb_on = Some(false);
@@ -125,7 +139,7 @@ impl AudioFx {
                 brushes,
                 Vec3::from_array(v.origin),
                 underwater,
-                reverb_amt,
+                self.reverb_amount,
                 realtime,
             ) {
                 snd.set_reverb(params);
@@ -136,14 +150,13 @@ impl AudioFx {
         }
 
         // Sound occlusion periodic refresh.
-        if occlusion && let Some(v) = view {
+        if self.occlusion_enabled && let Some(v) = view {
             self.acoustic.update_occlusions(cl, level, brushes, v, realtime, snd);
         }
 
         // Optional surface-aware footsteps (client-side cosmetic).
-        if !paused && cv.value_of("s_footsteps") != 0.0 {
-            let step_vol = cv.value_of("s_footsteps_volume").clamp(0.1, 1.5);
-            self.footsteps.frame(cl, guests, level, brushes, step_vol, realtime, snd);
+        if !paused && self.footsteps_enabled {
+            self.footsteps.frame(cl, guests, level, brushes, self.footsteps_vol, realtime, snd);
         }
     }
 

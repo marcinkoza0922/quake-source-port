@@ -66,6 +66,8 @@ pub struct Cvars {
     vars: Vec<Cvar>,
     /// Case-insensitive name hash → ids with that hash (collisions are rare).
     by_name: HashMap<u64, Vec<CvarId>, BuildHasherDefault<IdentityHasher>>,
+    /// Incremented whenever any cvar is registered or changes value.
+    generation: u64,
 }
 
 /// Q_atof: decimal or 0x hex, optional sign, ignores trailing junk.
@@ -109,6 +111,12 @@ impl Cvars {
         Self::default()
     }
 
+    /// Monotonic counter incremented whenever a cvar is added or its value changes.
+    /// Callers can cache derived settings structs against this value to skip per-frame lookups.
+    pub fn generation(&self) -> u64 {
+        self.generation
+    }
+
     /// Cvar_RegisterVariable. If already present (e.g. from `set` in a config),
     /// keeps the current string, sets the default and merges flags.
     pub fn register(&mut self, name: &str, default: &str, flags: u32) -> CvarId {
@@ -127,6 +135,7 @@ impl Cvars {
             flags,
         });
         self.by_name.entry(name_hash(name)).or_default().push(id);
+        self.generation = self.generation.wrapping_add(1);
         id
     }
 
@@ -157,8 +166,9 @@ impl Cvars {
         if changed {
             v.string = value.to_string();
             v.value = q_atof(value);
+            self.generation = self.generation.wrapping_add(1);
         }
-        SetResult { id, changed, flags: v.flags }
+        SetResult { id, changed, flags: self.vars[id.0 as usize].flags }
     }
 
     /// Cvar_Set on an existing cvar; None if unknown.

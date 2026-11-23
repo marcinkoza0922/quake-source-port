@@ -102,6 +102,9 @@ mod grenade_arc;
 mod arc_learn;
 use aim_vis::WorldVis;
 
+type SettingsCacheKey = (u64, bool, u32, bool, bool, bool, [u32; 4]);
+type SettingsCache = (SettingsCacheKey, qrender::Settings, f32, bool);
+
 pub struct Host {
     pub server: Server,
     pub cl: ClientState,
@@ -129,6 +132,12 @@ pub struct Host {
     export_ui_at: Option<qcore::time::Instant>,
     /// The last frame's renderer settings (the export panel reuses them).
     last_settings: Option<qrender::Settings>,
+    /// Cached cvar-derived portion of `qrender::Settings`, invalidated on cvar/level changes.
+    settings_cache: Option<SettingsCache>,
+    /// Last cvar generation seen by `sync_language`.
+    lang_cvar_gen: Option<u64>,
+    /// Reusable per-frame brush entity list shared between sound and render.
+    frame_brushes: Option<Vec<crate::fte::world::BrushEnt>>,
     /// `cl_autodemo`: this level's recording, and the last finished one.
     autodemo: Option<autodemo::AutoDemo>,
     last_autodemo: Option<PathBuf>,
@@ -425,6 +434,9 @@ impl Host {
             export_pic: None,
             export_ui_at: None,
             last_settings: None,
+            settings_cache: None,
+            lang_cvar_gen: None,
+            frame_brushes: None,
             autodemo: None,
             last_autodemo: None,
             quit_after_jobs: false,

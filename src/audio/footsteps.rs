@@ -133,18 +133,23 @@ impl Footsteps {
         }
 
         let delta = origin - prev;
-        let dh = (delta.x * delta.x + delta.y * delta.y).sqrt();
+        let dh2 = delta.x * delta.x + delta.y * delta.y;
+        // Skip probes when the player hasn't moved and is already grounded.
+        if p.was_grounded && dh2 < 1e-4 && delta.z.abs() < 1e-4 {
+            return;
+        }
+        let dh = dh2.sqrt();
         // Skip teleports / respawn snaps.
         if dh > 120.0 || delta.z.abs() > 160.0 {
             p.dist = 0.0;
             p.air_min_vz = 0.0;
-            p.was_grounded = detect_floor(world, origin).is_some();
+            p.was_grounded = probe_floor(world, origin).is_some();
             return;
         }
 
         let vz = delta.z / dt;
-        let floor = detect_floor(world, origin);
-        let grounded = floor.is_some();
+        let floor_hit = probe_floor(world, origin);
+        let grounded = floor_hit.is_some();
 
         let bank = self.bank.as_ref().unwrap();
         let feet = [origin.x, origin.y, origin.z - FEET_OFFSET];
@@ -152,8 +157,8 @@ impl Footsteps {
         let atten = if is_primary { 0.0 } else { 1.2 };
 
         if !p.was_grounded && grounded {
-            let surf = floor.unwrap();
             if p.air_min_vz <= LAND_VZ_THRESHOLD && (now - p.last_step_t) >= MIN_LAND_INTERVAL {
+                let surf = resolve_floor_surface(world, floor_hit.unwrap());
                 let impact = ((-p.air_min_vz - 150.0) / 380.0).clamp(0.45, 1.0);
                 let vol = (volume_scale * 0.65 * impact).clamp(0.0, 1.0);
                 snd.event(SoundEvent::Start {
@@ -170,13 +175,14 @@ impl Footsteps {
             p.air_min_vz = 0.0;
         } else if !grounded {
             p.air_min_vz = p.air_min_vz.min(vz);
-        } else if let Some(surf) = floor {
+        } else if let Some(hit) = floor_hit {
             let speed = dh / dt;
             if speed > 42.0 {
                 p.dist += dh;
                 // Slightly tighten cadence when running at full speed.
                 let cadence = if speed > 260.0 { STEP_DISTANCE * 0.94 } else { STEP_DISTANCE };
                 if p.dist >= cadence && (now - p.last_step_t) >= MIN_STEP_INTERVAL {
+                    let surf = resolve_floor_surface(world, hit);
                     let vol = (volume_scale * 0.48 * (speed / 280.0).clamp(0.55, 1.0)).clamp(0.0, 1.0);
                     let sfx = bank.step(surf, p.step_count);
                     snd.event(SoundEvent::Start {
@@ -197,8 +203,13 @@ impl Footsteps {
     }
 }
 
-/// Returns the floor material under `origin` if the player is grounded or wading.
-fn detect_floor(world: &BspWorld<'_>, origin: Vec3) -> Option<FootstepSurface> {
+enum FloorHit {
+    Liquid(FootstepSurface),
+    Solid(qpart::Trace),
+}
+
+/// Fast grounded/wading check without texture classification.
+fn probe_floor(world: &BspWorld<'_>, origin: Vec3) -> Option<FloorHit> {
     let feet = Vec3::new(origin.x, origin.y, origin.z - FEET_OFFSET + 2.0);
     // Wading in liquid counts as liquid footsteps (skip deep swimming when eye is also submerged).
     let feet_c = world.point_contents(feet);
@@ -209,11 +220,11 @@ fn detect_floor(world: &BspWorld<'_>, origin: Vec3) -> Option<FootstepSurface> {
         let chest = Vec3::new(origin.x, origin.y, origin.z + 8.0);
         let chest_c = world.point_contents(chest);
         if chest_c == qpart::FTECONTENTS_EMPTY {
-            return Some(match feet_c {
+            return Some(FloorHit::Liquid(match feet_c {
                 qpart::FTECONTENTS_SLIME => FootstepSurface::Slime,
                 qpart::FTECONTENTS_LAVA => FootstepSurface::Lava,
                 _ => FootstepSurface::Water,
-            });
+            }));
         }
         // Fully submerged swimming: no boot footsteps.
         return None;
@@ -226,26 +237,39 @@ fn detect_floor(world: &BspWorld<'_>, origin: Vec3) -> Option<FootstepSurface> {
         let tr = world.trace_line(start, end);
         if tr.frac < 1.0 && tr.normal.z >= 0.7 {
             if dx == 0.0 && dy == 0.0 {
-                best = Some(tr);
-                break;
+                return Some(FloorHit::Solid(tr));
             }
             if best.is_none_or(|b| tr.frac < b.frac) {
                 best = Some(tr);
             }
         }
     }
-    let tr = best?;
-    let mat = crate::impacts::surfaces::texture_at(world, &tr)
-        .map_or(Material::Stone, |t| crate::hitfx::classify(&t.name));
-    Some(match mat {
-        Material::Metal => FootstepSurface::Metal,
-        Material::Wood => FootstepSurface::Wood,
-        Material::Dirt => FootstepSurface::Dirt,
-        Material::Water => FootstepSurface::Water,
-        Material::Slime => FootstepSurface::Slime,
-        Material::Lava => FootstepSurface::Lava,
-        Material::Stone | Material::None => FootstepSurface::Stone,
-    })
+    best.map(FloorHit::Solid)
+}
+
+fn resolve_floor_surface(world: &BspWorld<'_>, hit: FloorHit) -> FootstepSurface {
+    match hit {
+        FloorHit::Liquid(s) => s,
+        FloorHit::Solid(tr) => {
+            let mat = crate::impacts::surfaces::texture_at(world, &tr)
+                .map_or(Material::Stone, |t| crate::hitfx::classify(&t.name));
+            match mat {
+                Material::Metal => FootstepSurface::Metal,
+                Material::Wood => FootstepSurface::Wood,
+                Material::Dirt => FootstepSurface::Dirt,
+                Material::Water => FootstepSurface::Water,
+                Material::Slime => FootstepSurface::Slime,
+                Material::Lava => FootstepSurface::Lava,
+                Material::Stone | Material::None => FootstepSurface::Stone,
+            }
+        }
+    }
+}
+
+/// Returns the floor material under `origin` if the player is grounded or wading.
+#[cfg_attr(not(test), allow(dead_code))]
+fn detect_floor(world: &BspWorld<'_>, origin: Vec3) -> Option<FootstepSurface> {
+    probe_floor(world, origin).map(|hit| resolve_floor_surface(world, hit))
 }
 
 #[cfg(test)]

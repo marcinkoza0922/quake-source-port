@@ -39,10 +39,16 @@ impl Host {
                 level: [v("v_ipitch_level"), v("v_iyaw_level"), v("v_iroll_level")],
             },
             cshift: {
+                const CSHIFT_CVARS: [&str; 4] = [
+                    "gl_cshiftpercent_contents",
+                    "gl_cshiftpercent_damage",
+                    "gl_cshiftpercent_bonus",
+                    "gl_cshiftpercent_powerup",
+                ];
                 // V_CalcBlend: gl_cshiftpercent and QuakeSpasm's per-shift
                 // percentages; gl_polyblend 0 draws no blend at all
                 let all = if v("gl_polyblend") != 0.0 { v("gl_cshiftpercent") / 100.0 } else { 0.0 };
-                ["contents", "damage", "bonus", "powerup"].map(|k| all * v(&format!("gl_cshiftpercent_{k}")) / 100.0)
+                CSHIFT_CVARS.map(|name| all * v(name) / 100.0)
             },
         }
         .reduce_motion(v("a11y_reducemotion") != 0.0)
@@ -508,6 +514,7 @@ impl Host {
         } else {
             (None, None)
         };
+        self.frame_brushes = None;
         self.update_sound(view.as_ref(), ft);
         self.update_export();
         self.prof_mark(4);
@@ -576,14 +583,13 @@ impl Host {
             snd.set_bgm_volume(vol.1);
             self.last_vol = vol;
         }
-        let mut brushes = None;
         self.audio_fx.frame(
             &self.server.core.cvars,
             &self.server.core.fs,
             &self.cl,
             &self.guests,
             &self.level,
-            &mut brushes,
+            &mut self.frame_brushes,
             view,
             l.underwater,
             self.realtime,

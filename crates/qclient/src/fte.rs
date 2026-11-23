@@ -31,21 +31,63 @@ const MAX_PARTICLETYPES: usize = 2048;
 
 /// Lowercased effect names that resolve, set by the host whenever the
 /// loaded effects change. Empty: everything is classic.
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug)]
 pub struct FteNames {
     names: HashSet<String>,
+    /// Precomputed `pe_default || pe_size2 || pe_size3` for O(1) `svc_particle` checks.
+    has_pe_fallback: bool,
+    /// Precomputed `pe_<0..255>` membership for zero-allocation `svc_particle` checks.
+    pe_color: [bool; 256],
+}
+
+impl Default for FteNames {
+    fn default() -> Self {
+        Self { names: HashSet::new(), has_pe_fallback: false, pe_color: [false; 256] }
+    }
 }
 
 impl FteNames {
     pub fn new(names: impl IntoIterator<Item = String>) -> Self {
-        FteNames { names: names.into_iter().map(|n| n.to_ascii_lowercase()).collect() }
+        let names: HashSet<String> = names.into_iter().map(|n| n.to_ascii_lowercase()).collect();
+        let has_pe_fallback =
+            names.contains("pe_default") || names.contains("pe_size2") || names.contains("pe_size3");
+        let mut pe_color = [false; 256];
+        for n in &names {
+            if let Some(rest) = n.strip_prefix("pe_")
+                && let Ok(c) = rest.parse::<usize>()
+                && c < 256
+            {
+                pe_color[c] = true;
+            }
+        }
+        FteNames { names, has_pe_fallback, pe_color }
     }
     pub fn is_empty(&self) -> bool {
         self.names.is_empty()
     }
+    /// O(1), zero-allocation check for `svc_particle` (`pe_<color>` or fallback).
+    pub fn has_pe_color(&self, color: i32) -> bool {
+        if self.names.is_empty() {
+            return false;
+        }
+        if self.has_pe_fallback {
+            return true;
+        }
+        if (0..256).contains(&color) {
+            return self.pe_color[color as usize];
+        }
+        self.has(&format!("pe_{color}"))
+    }
     /// Whether `name` would resolve (`TE_EXPLOSION2_<c>_<n>` retints
     /// `TE_EXPLOSION2`).
     pub fn has(&self, name: &str) -> bool {
+        if self.names.is_empty() {
+            return false;
+        }
+        if name.bytes().all(|b| !b.is_ascii_uppercase()) {
+            return self.names.contains(name)
+                || (name.starts_with("te_explosion2_") && self.names.contains("te_explosion2"));
+        }
         let l = name.to_ascii_lowercase();
         self.names.contains(&l) || (l.starts_with("te_explosion2_") && self.names.contains("te_explosion2"))
     }
@@ -64,11 +106,13 @@ impl ClientState {
     /// svc_particle: queued when a `pe_*` effect is scripted (the 1024
     /// count explosion uses TE_EXPLOSION); false means "use the classic effect".
     pub(crate) fn fte_particle(&mut self, org: [f32; 3], dir: [f32; 3], color: i32, count: i32) -> bool {
+        if self.fte_names.is_empty() {
+            return false;
+        }
         if count == 1024 {
             return self.fte_effect("TE_EXPLOSION", org, 1.0);
         }
-        let n = &self.fte_names;
-        if !(n.has(&format!("pe_{color}")) || n.has("pe_default") || n.has("pe_size2") || n.has("pe_size3")) {
+        if !self.fte_names.has_pe_color(color) {
             return false;
         }
         self.fte_queue.push(FteRequest::Classic { org, dir, color, count });

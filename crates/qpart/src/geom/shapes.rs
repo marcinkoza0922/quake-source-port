@@ -13,6 +13,55 @@ fn push_quad(vertices: &mut Vec<Vertex>, indices: &mut Vec<u32>, pos: [Vec3; 4],
 }
 
 impl<'a> Geometry<'a> {
+    pub(super) fn emit_normal_quads(&mut self, l: &Looks, particles: &[Particle]) {
+        let view = self.view;
+        let premul = l.premul;
+        let simple_scale = l.scalefactor == 1.0;
+        let cull_behind = self.cull_behind;
+        let htan = self.horizontal_tan;
+        let vtan = self.vertical_tan;
+        if !cull_behind {
+            self.quads.reserve(particles.len());
+        }
+        for p in particles.iter().rev() {
+            let need_delta = !simple_scale || cull_behind;
+            let (delta, depth) = if need_delta {
+                let d = p.org - view.origin;
+                (d, d.dot(view.forward))
+            } else {
+                (Vec3::ZERO, 0.0)
+            };
+            let scale = if simple_scale {
+                p.scale * 0.25
+            } else {
+                Self::view_scale_depth(depth, p.scale, l, 0.25, 0.001)
+            };
+            if cull_behind {
+                let radius = scale.abs() * 3.0 + 1.0;
+                if depth < -radius {
+                    continue;
+                }
+                if let Some(tan) = htan
+                    && delta.dot(view.right).abs() > depth * tan + radius * (tan + 1.0)
+                {
+                    continue;
+                }
+                if let Some(tan) = vtan
+                    && delta.dot(view.up).abs() > depth * tan + radius * (tan + 1.0)
+                {
+                    continue;
+                }
+            }
+            self.quads.push(Quad {
+                pos: p.org.to_array(),
+                scale,
+                angle: p.angle,
+                color: shade(p.rgba, premul),
+                uv: [p.s1, p.t1, p.s2, p.t2],
+            });
+        }
+    }
+
     pub(super) fn emit_normal_particles(&mut self, l: &Looks, particles: &[Particle]) {
         let view = self.view;
         let (pr, pu) = (view.right * 1.5, view.up * 1.5);

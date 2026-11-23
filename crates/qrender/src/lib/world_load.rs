@@ -167,7 +167,34 @@ impl Renderer {
             .buffer((materials.len() * 16) as u64, usage, false)?;
         self.gpu
             .upload_buffer(&mut up, mats.buf, 0, bytes_of(&materials))?;
-        let cull = self.build_world_cull(&mut up, &cpu, &tex_info)?;
+        let tex_has_fb: Vec<bool> = (0..materials.len())
+            .map(|t| {
+                if materials[t][1] != NO_TEX {
+                    return true;
+                }
+                cpu.anims.get(t).is_some_and(|(prim, alts, _)| {
+                    prim.iter()
+                        .chain(alts)
+                        .any(|&f| materials.get(f as usize).is_some_and(|m| m[1] != NO_TEX))
+                })
+            })
+            .collect();
+        let (cull, water_marks) = self.build_world_cull(&mut up, &cpu, &tex_info, &tex_has_fb)?;
+        let brush_has_water: Vec<bool> = cpu
+            .submodels
+            .iter()
+            .enumerate()
+            .map(|(i, sm)| {
+                i > 0
+                    && (sm.first_surface..sm.first_surface + sm.num_surfaces).any(|si| {
+                        cpu.surfaces.get(si as usize).is_some_and(|s| {
+                            s.kind == TextureKind::Liquid
+                                && tex_info.get(s.texture as usize).is_some_and(|t| matches!(t.1 & 0xf, 1 | 3))
+                        })
+                    })
+            })
+            .collect();
+        let has_brush_water = brush_has_water.iter().any(|&b| b);
         self.gpu.end_upload(up)?;
         if let Some(old) = self.lightmap.take() {
             self.gpu.free_image(old);
@@ -194,6 +221,10 @@ impl Renderer {
             surfs,
             materials: mats,
             tex_info,
+            tex_has_fb,
+            water_marks,
+            brush_has_water,
+            has_brush_water,
             submodel_ids: ids.clone(),
             cull,
             scratch_bits: Vec::new(),
@@ -212,11 +243,19 @@ impl Renderer {
         up: &mut gpu::Upload,
         cpu: &world::World,
         tex_info: &[(TextureKind, u32)],
-    ) -> Result<WorldCull> {
+        tex_has_fb: &[bool],
+    ) -> Result<(WorldCull, Vec<(u32, u32)>)> {
         let (marks, mut surfs) = cpu.gpu_cull(|_| 0);
         let mut seen = vec![false; cpu.surfaces.len()];
         let mut cap: std::collections::BTreeMap<u32, u32> = Default::default();
-        for &[_, si] in &marks {
+        let mut water_marks: Vec<(u32, u32)> = Vec::new();
+        for &[li, si] in &marks {
+            if let Some(s) = cpu.surfaces.get(si as usize)
+                && s.kind == TextureKind::Liquid
+                && tex_info.get(s.texture as usize).is_some_and(|t| matches!(t.1 & 0xf, 1 | 3))
+            {
+                water_marks.push((li, si));
+            }
             if !std::mem::replace(&mut seen[si as usize], true) {
                 *cap.entry(cpu.slot_texture(si)).or_default() += cpu.surfaces[si as usize].num_indices;
             }
@@ -226,13 +265,25 @@ impl Renderer {
             TextureKind::Liquid => 1 + (tex_info[t as usize].1 & 0xf).clamp(1, 4) as usize,
             _ => 0,
         };
+        let has_fb = |t: u32| tex_has_fb.get(t as usize).copied().unwrap_or(false);
         let mut order: Vec<u32> = cap.keys().copied().collect();
-        order.sort_by_key(|&t| (cat(t), t));
+        // Put fullbright-bearing opaque textures first so the bloom glow pass
+        // can draw only `opaque_fb` without touching non-glowing world geometry.
+        order.sort_by_key(|&t| {
+            let c = cat(t);
+            (c, c == 0 && !has_fb(t), t)
+        });
         let cats: [std::ops::Range<u32>; 6] = std::array::from_fn(|c| {
             let a = order.iter().position(|&t| cat(t) >= c).unwrap_or(order.len()) as u32;
             let b = order.iter().position(|&t| cat(t) > c).unwrap_or(order.len()) as u32;
             a..b
         });
+        let fb_end = cats[0].start
+            + order[cats[0].start as usize..cats[0].end as usize]
+                .iter()
+                .take_while(|&&t| has_fb(t))
+                .count() as u32;
+        let opaque_fb = cats[0].start..fb_end;
         let mut cmd_of = std::collections::HashMap::new();
         let mut cmd_first = Vec::with_capacity(order.len());
         let mut total = 0u32;
@@ -272,7 +323,7 @@ impl Renderer {
                 false,
             )?);
         }
-        Ok(WorldCull {
+        Ok((WorldCull {
             marks: marks_b,
             surfs: surfs_b,
             src: src_b,
@@ -283,7 +334,8 @@ impl Renderer {
             cmd_tex: order,
             cmd_first,
             cats,
+            opaque_fb,
             framecount: 0,
-        })
+        }, water_marks))
     }
 }

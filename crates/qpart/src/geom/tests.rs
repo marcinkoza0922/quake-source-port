@@ -118,6 +118,40 @@ fn builds_batches_per_kind() {
 }
 
 #[test]
+fn instanced_quads_emit_compact_normal_billboards() {
+    let fx = "r_part q\n{\ntexture ball\nscale 8\ncount 4\ndie 1\nalpha 1\nrgbf 1 0 0\n}\n\
+              r_part s\n{\ntype spark\ncount 3\ndie 1\nvelbias 0 0 100\n}\n";
+    let data = vec![("particles/x.cfg", fx.as_bytes().to_vec())];
+    let mut f = files(&data);
+    let mut r = Registry::new();
+    r.load_set("x", false, true, &mut f);
+    let mut s = System::default();
+    let id = |n: &str| r.types.iter().position(|t| t.name == n).unwrap();
+    for n in ["q", "s"] {
+        s.run_effect(&r, &EmptyWorld, Vec3::new(100.0, 0.0, 0.0), None, 1.0, id(n), None);
+    }
+    let view = ViewInfo {
+        origin: Vec3::ZERO,
+        forward: Vec3::new(1.0, 0.0, 0.0),
+        right: Vec3::new(0.0, -1.0, 0.0),
+        up: Vec3::new(0.0, 0.0, 1.0),
+    };
+    let eo = |_| None;
+    let mut g = Geometry::new(&r, view, 0.0, &eo);
+    g.use_instanced_quads = true;
+    s.frame(&r, &EmptyWorld, &FrameInput { cl_time: 0.01, ..Default::default() }, &mut g);
+    assert_eq!(g.quads.len(), 4);
+    assert_eq!(g.quad_batches.len(), 1);
+    assert_eq!(g.quad_batches[0].num_indices, 4);
+    assert!(g.quad_batches[0].soft);
+    assert_eq!(&g.quads[0].color[..3], &[255, 0, 0]);
+    // Sparks still use the standard vertex/index path.
+    assert_eq!(g.batches.len(), 1);
+    assert!(g.batches[0].lines);
+    assert_eq!(g.vertices.len(), 3 * 2);
+}
+
+#[test]
 fn behind_eye_culling_keeps_front_and_boundary_quads() {
     let mut r = Registry::new();
     let mut f = files(&[]);

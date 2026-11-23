@@ -19,18 +19,17 @@ impl World {
             return Some(([255.0; 3], None));
         }
         let key = p.map(|v| v.floor() as i32);
-        let cached = self.light_cache.lock().ok().and_then(|c| c.get(&key).copied());
+        let cached = self.light_cache.borrow().get(&key).copied();
         let hit = cached.unwrap_or_else(|| {
             let end = [p[0], p[1], p[2] - 8192.0];
             let mut maxdist = 8192.0f32;
             let h = self.recursive_light(0, p, p, end, &mut maxdist);
-            if let Ok(mut c) = self.light_cache.lock() {
-                // Moving entities add a new key each frame; keep it bounded.
-                if c.len() >= 8192 {
-                    c.clear();
-                }
-                c.insert(key, h);
+            let mut c = self.light_cache.borrow_mut();
+            // Moving entities add a new key each frame; keep it bounded.
+            if c.len() >= 8192 {
+                c.clear();
             }
+            c.insert(key, h);
             h
         });
         match hit {

@@ -93,7 +93,7 @@ pub struct World {
     /// floored to whole units -> trace result. Entities that don't move skip
     /// the BSP trace; the colour is re-read from the lightmap each call so
     /// lightstyles still animate.
-    light_cache: std::sync::Mutex<std::collections::HashMap<[i32; 3], LightHit, PointHash>>,
+    light_cache: std::cell::RefCell<std::collections::HashMap<[i32; 3], LightHit, PointHash>>,
     pub vertices: Vec<WorldVertex>,
     pub indices: Vec<u32>,
     pub surfaces: Vec<Surface>,

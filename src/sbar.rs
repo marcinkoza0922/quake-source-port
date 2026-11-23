@@ -73,15 +73,24 @@ impl Pack {
     }
 
     pub fn ammo_pic(self, items: i32) -> Option<&'static str> {
-        let mut t = vec![];
-        if self == Pack::Rogue {
-            t.extend([(RIT_SHELLS, "sb_shells"), (RIT_NAILS, "sb_nails"), (RIT_ROCKETS, "sb_rocket"), (RIT_CELLS, "sb_cells")]);
+        const ROGUE: &[(i32, &str)] = &[
+            (RIT_SHELLS, "sb_shells"),
+            (RIT_NAILS, "sb_nails"),
+            (RIT_ROCKETS, "sb_rocket"),
+            (RIT_CELLS, "sb_cells"),
             // Sbar_AmmoPic's table order (plasma shows the multi icon, as in the original).
-            t.extend([(RIT_LAVA_NAILS, "r_ammolava"), (RIT_PLASMA_AMMO, "r_ammomulti"), (RIT_MULTI_ROCKETS, "r_ammoplasma")]);
-        } else {
-            t.extend([(IT_SHELLS, "sb_shells"), (IT_NAILS, "sb_nails"), (IT_ROCKETS, "sb_rocket"), (IT_CELLS, "sb_cells")]);
-        }
-        t.into_iter().find(|(b, _)| items & b != 0).map(|(_, n)| n)
+            (RIT_LAVA_NAILS, "r_ammolava"),
+            (RIT_PLASMA_AMMO, "r_ammomulti"),
+            (RIT_MULTI_ROCKETS, "r_ammoplasma"),
+        ];
+        const ID: &[(i32, &str)] = &[
+            (IT_SHELLS, "sb_shells"),
+            (IT_NAILS, "sb_nails"),
+            (IT_ROCKETS, "sb_rocket"),
+            (IT_CELLS, "sb_cells"),
+        ];
+        let table = if self == Pack::Rogue { ROGUE } else { ID };
+        table.iter().find(|&&(b, _)| items & b != 0).map(|&(_, n)| n)
     }
 
     /// Item bits of shells, nails, rockets and cells.
@@ -123,11 +132,15 @@ fn flash(cl: &ClientState, bit: usize, active: bool) -> i32 {
     if f >= 10 { active as i32 } else { f % 5 + 2 }
 }
 
-fn weapon_prefix(flash: i32) -> String {
+fn weapon_prefix(flash: i32) -> &'static str {
     match flash {
-        0 => "inv_".into(),
-        1 => "inv2_".into(),
-        n => format!("inva{}_", n - 1),
+        0 => "inv_",
+        1 => "inv2_",
+        2 => "inva1_",
+        3 => "inva2_",
+        4 => "inva3_",
+        5 => "inva4_",
+        _ => "inva5_",
     }
 }
 
@@ -206,19 +219,21 @@ impl<'a, 'b> Sbar<'a, 'b> {
         self.solo_scoreboard(cl);
     }
 
-    pub fn face_name(cl: &ClientState, face_anim: bool) -> String {
+    pub fn face_name(cl: &ClientState, face_anim: bool) -> &'static str {
+        const FACES: [&str; 5] = ["face5", "face4", "face3", "face2", "face1"];
+        const PAIN: [&str; 5] = ["face_p5", "face_p4", "face_p3", "face_p2", "face_p1"];
         let items = cl.items;
         if items & (IT_INVISIBILITY | IT_INVULNERABILITY) == IT_INVISIBILITY | IT_INVULNERABILITY {
-            "face_inv2".to_string()
+            "face_inv2"
         } else if items & IT_QUAD != 0 {
-            "face_quad".into()
+            "face_quad"
         } else if items & IT_INVISIBILITY != 0 {
-            "face_invis".into()
+            "face_invis"
         } else if items & IT_INVULNERABILITY != 0 {
-            "face_invul2".into()
+            "face_invul2"
         } else {
-            let f = (cl.stats[STAT_HEALTH] / 20).clamp(0, 4);
-            if face_anim { format!("face_p{}", 5 - f) } else { format!("face{}", 5 - f) }
+            let f = (cl.stats[STAT_HEALTH] / 20).clamp(0, 4) as usize;
+            if face_anim { PAIN[f] } else { FACES[f] }
         }
     }
 

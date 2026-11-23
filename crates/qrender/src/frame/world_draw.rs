@@ -1,22 +1,4 @@
 use super::*;
-use std::sync::Arc;
-
-/// Destination world ranges are camera-independent. Share their immutable
-/// dynbuf uploads across portals/players for this frame only: texture
-/// animation, liquid alpha and hidden surfaces may change next frame.
-#[derive(Default)]
-pub(super) struct PortalWorldCache(Vec<(Arc<[u32]>, WorldDraw)>);
-
-impl PortalWorldCache {
-    pub(super) fn get_or_build(&mut self, surfaces: &Arc<[u32]>, build: impl FnOnce() -> WorldDraw) -> WorldDraw {
-        if let Some((_, draw)) = self.0.iter().find(|(key, _)| Arc::ptr_eq(key, surfaces)) {
-            return *draw;
-        }
-        let draw = build();
-        self.0.push((surfaces.clone(), draw));
-        draw
-    }
-}
 
 #[allow(clippy::too_many_arguments)]
 pub(super) fn build_world_draw(
@@ -43,6 +25,7 @@ pub(super) fn build_world_draw(
     let mut polys = 0;
     let mut triangles = 0;
     let mut cats: [Vec<vk::DrawIndexedIndirectCommand>; 4] = Default::default();
+    let mut opaque_nofb: Vec<vk::DrawIndexedIndirectCommand> = Vec::new();
     for (t, b) in buckets.iter_mut().enumerate() {
         if b.is_empty() {
             continue;
@@ -74,14 +57,21 @@ pub(super) fn build_world_draw(
             _ => 0,
         };
         triangles += count / 3;
-        cats[cat].push(vk::DrawIndexedIndirectCommand {
+        let cmd = vk::DrawIndexedIndirectCommand {
             index_count: count,
             instance_count: 1,
             first_index: (first / 4) as u32,
             vertex_offset: 0,
             first_instance: t as u32,
-        });
+        };
+        if cat == 0 && !w.tex_has_fb.get(t).copied().unwrap_or(false) {
+            opaque_nofb.push(cmd);
+        } else {
+            cats[cat].push(cmd);
+        }
     }
+    let fb_count = cats[0].len() as u32;
+    cats[0].extend(opaque_nofb);
     let mut put = |c: &Vec<vk::DrawIndexedIndirectCommand>| match dynw.push(c, 16) {
         Some(ofs) if !c.is_empty() => Range {
             ofs,
@@ -89,11 +79,15 @@ pub(super) fn build_world_draw(
         },
         _ => Range::default(),
     };
+    let opaque = put(&cats[0]);
+    let opaque_fb = Range { ofs: opaque.ofs, count: fb_count.min(opaque.count) };
     WorldDraw {
         model,
         zfix: false,
+        main_visible: true,
         alpha: ent_alpha,
-        opaque: put(&cats[0]),
+        opaque,
+        opaque_fb,
         sky: put(&cats[1]),
         water: [put(&cats[2]), Range::default(), Range::default(), Range::default()],
         water_alpha: [put(&cats[3]), Range::default(), Range::default(), Range::default()],
@@ -158,8 +152,10 @@ pub(super) fn gpu_world_draw(
     let wd = WorldDraw {
         model: ident(),
         zfix: false,
+        main_visible: true,
         alpha: 1.0,
         opaque: range(&c.cats[0]),
+        opaque_fb: range(&c.opaque_fb),
         sky: range(&c.cats[1]),
         water,
         water_alpha,
@@ -191,38 +187,4 @@ pub(super) fn gpu_world_draw(
     wg.scratch_bits = bits;
     wg.scratch_cmds = cmds;
     Some((wd, cf))
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn destinations_share_ranges_and_lightmap_requests_only_within_the_frame() {
-        let surfaces: Arc<[u32]> = vec![2, 7, 11].into();
-        let other_leaf: Arc<[u32]> = vec![2, 7, 11].into();
-        let mut requests = Vec::new();
-        let build = |requests: &mut Vec<u32>| {
-            requests.push(7);
-            WorldDraw {
-                model: ident(), zfix: false, alpha: 1.0,
-                opaque: Range { ofs: requests.len() as u64 * 16, count: 1 },
-                sky: Range::default(), water: [Range::default(); 4],
-                water_alpha: [Range::default(); 4], ibuf: None, cbuf: None, bounds: [0.0; 4],
-        polys: 0,
-        triangles: 0,
-            }
-        };
-        let mut frame = PortalWorldCache::default();
-        let first = frame.get_or_build(&surfaces, || build(&mut requests));
-        let shared = frame.get_or_build(&surfaces.clone(), || build(&mut requests));
-        assert_eq!(first.opaque.ofs, shared.opaque.ofs, "same allocation must share uploaded ranges");
-        assert_eq!(requests, [7], "lightmap union already contains the cached destination");
-        let separate = frame.get_or_build(&other_leaf, || build(&mut requests));
-        assert_ne!(first.opaque.ofs, separate.opaque.ofs, "distinct lists must build independently");
-        let mut next_frame = PortalWorldCache::default();
-        let rebuilt = next_frame.get_or_build(&surfaces, || build(&mut requests));
-        assert_ne!(first.opaque.ofs, rebuilt.opaque.ofs, "next frame must not reuse stale dynbuf ranges");
-        assert_eq!(requests, [7, 7, 7]);
-    }
 }

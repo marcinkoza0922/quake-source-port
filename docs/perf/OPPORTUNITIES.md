@@ -347,3 +347,35 @@ These come before optimising, so items aren't chosen on wrong numbers.
 - Half-resolution ray-traced reflections at quality 1 (item 4d), and a
   quarter-resolution droplet field (item 7a): both change pixels in
   enhancement paths.
+
+---
+
+## Implementation Status & Measured 4K 8× MSAA Results (2026-11-23)
+
+All 10 items above (plus tight layout-derived Vulkan pipeline barriers and `World::light_point_dir` `RefCell` / fullbright short-circuit) were implemented and verified with `QRENDER_VALIDATION=1`, `cargo nextest run`, `cargo clippy`, `cargo check -p qrender --features wgpu`, and visual inspection (`vanilla_e1m1` `compare -metric AE = 0`):
+
+| # | Item | Implemented Change | 4K 8× MSAA GPU Before → After (`QSP_GPUTIMES`) |
+|---|---|---|---|
+| 1 | SSAO top tier | SAO `R32_SFLOAT` linear-depth mip chain (`aosource.frag` + `aodown.frag`), golden-angle rotation matrix, centred 3×3 quality-2 apply | `ao-generate` **3111 → 971 µs (3.20×)**; total AO **3860 → 1621 µs (-2.24 ms)**; `r_ssao 1` **744 → 574 µs** |
+| 2 | Bloom glow | Removed 8× MSAA glow attachment & `*_glow.frag`; narrow single-sampled glow pass directly into `B10G11R11_UFLOAT_PACK32` level 0 (`opaque_fb`), 4-tap tent upsample | `ad_sepulcher` scene+post **2617 → 1943 µs (-674 µs, -288 MB VRAM)**; `e1m1` **1765 → 1167 µs (-598 µs)** |
+| 3 | Destination culling | Aperture-narrowed frustum + backface/clip CPU culling per destination, per-portal brush/alias culling, main-view `WorldDraw::main_visible` | `tele_start_4k` `destinations` **212 → 139 µs (1.53×)**; 6 recursive portals `120 µs` total |
+| 4 | RT water | Visible-water gating (`water_marks`), 2-geom opaque+holey alias BLAS, alias culling, lazily-allocated half-res single-sampled RT pass (`rt_refl`) | Wet (`e2m1`) `destinations+translucent` **682 → 310 µs (2.20×)**; Dry (`e1m1`) `cull` **104 → 18 µs (0 µs RT)** |
+| 5 | FTE particles | `Dyn::push_slices` zero-copy upload, batch merging, 40B GPU-instanced `ParticleQuad` (`fte_quad.vert`), hoisted `StepConst` | `ad_sepulcher` `particles+vm` **459 → 350 µs** (284 µs with SSAO) |
+| 6 | MSAA splits | Soft particles sample `ao_source` linear depth when SSAO is on (eliminates soft-particle + viewmodel splits); 2-tap MSAA depth when SSAO is off | `ad_sepulcher` (`r_ssao 1` + soft FTE) `particles+vm` **459 → 284 µs (1.61×)** |
+| 7 | Water droplets | Reduced-res `Targets::droplets` (capped 960×540 RGBA16F, `droplets.frag`) + AABB early reject | `e2m2` `post` **426 → 201 µs (2.12×)** |
+| 8 | Cvars & allocs | `Cvars::generation()` caching (`Settings`, audio, language, shell env), stack buffers & scratch reuse in host/HUD/sbar/qrender | Eliminated ~109+ cvar lookups and steady-state heap allocs per frame |
+| 9 | `all-split4` `view+sound` | O(depth) BSP-tree `texture_at()`, throttled footstep surface resolution, shared `frame_brushes` | Eliminated O(N_faces) per-frame BSP face scan & Vec alloc per player |
+| 10 | Classic `SVC_PARTICLE` | Precomputed `FteNames::pe_color: [bool; 256]` + `has_pe_fallback` | Eliminated 5 `String` allocs per `SVC_PARTICLE` message |
+| + | Bonus | Tight layout-derived Vulkan barriers (`gpu::layout_sync`), `World::light_cache` `Mutex` → `RefCell` + fullbright skip | Vanilla `lightmap` **26 → 16 µs**, `post` **42 → 24 µs** (`AE = 0`) |
+
+### Newly Flagged Follow-Up Opportunities
+
+1. **`World::light_point_dir` per-entity caching** (`crates/qrender/src/world/light.rs`, ~4.2% CPU in `perf` on `ad_sepulcher`): static entities and `LIGHTGRID_OCTREE` lookups still re-evaluate every frame.
+2. **Brush-entity spatial acceleration for FTE particle `cliptype` traces** (`src/fte.rs`, ~2.2% CPU in `perf`): rain/sparks linearly scan every brush entity AABB on top of world hull traces.
+3. **`post.frag` specialization constants / fast-path pipeline**: split common path (no goggles/motionblur/softemu/water) to lower register pressure at 4K.
+4. **Shared half-res depth target**: share `D32_SFLOAT` between `bloom.depth` and `rt_refl.depth` (non-overlapping lifetimes, ~8 MB VRAM saved at 4K).
+5. **GPU-driven destination culling (`cull.comp`)**: offload `portal_surfaces` culling for huge PVS maps in 4-player split-screen with portals.
+6. **`build_world_draw` scratch `Vec` reuse** (`crates/qrender/src/frame/world_draw.rs`, ~1.0% CPU in `perf`): reuse `cats`/`opaque_nofb` buffers across brushes and portals.
+7. **`wgpu` backend bloom parity**: port the narrow single-sampled glow pass to `crates/qrender/src/wgpu_backend/bloom.rs`.
+8. **Enhanced preset SSAO tier** (`src/host/presets.rs`): switching Enhanced from `r_ssao 3` (full-res, 1.62 ms at 4K) to `r_ssao 2` (half-res, ~0.6 ms) saves another ~1 ms at 4K.
+9. **Map-load hotspots**: `World::append` (8.7%) and `World::liquid_surface` via `bake_liquid` (7.4%) dominate level load time on large AD maps.

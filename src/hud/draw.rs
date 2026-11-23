@@ -257,30 +257,52 @@ fn spans_w(c: &Canvas, e: &Elem, s: &Spans) -> f32 {
     s.iter().map(|(t, _)| text_w(c, e.font, e.size, t)).sum()
 }
 
+fn fmt_i32(v: i32, buf: &mut [u8; 16]) -> &str {
+    let mut len = 0usize;
+    let neg = v < 0;
+    let mut n = v.unsigned_abs();
+    if n == 0 {
+        buf[0] = b'0';
+        len = 1;
+    } else {
+        while n > 0 {
+            buf[len] = b'0' + (n % 10) as u8;
+            n /= 10;
+            len += 1;
+        }
+        if neg {
+            buf[len] = b'-';
+            len += 1;
+        }
+        buf[..len].reverse();
+    }
+    std::str::from_utf8(&buf[..len]).unwrap_or("0")
+}
+
 fn text_pad(size: f32) -> (f32, f32) {
     ((size * 3.0 / 8.0).round(), (size / 4.0).round())
 }
 
 /// The icon and count of a number element; None when it has nothing to show.
-fn number(e: &Elem, ctx: &Ctx) -> Option<(Option<String>, i32, bool)> {
+fn number(e: &Elem, ctx: &Ctx) -> Option<(Option<&'static str>, i32, bool)> {
     let (cl, st) = (ctx.cl, &ctx.cl.stats);
     let (icon, v, alert) = match e.kind {
         Kind::Health => (Some(Sbar::face_name(cl, ctx.face_anim)), st[STAT_HEALTH], st[STAT_HEALTH] <= 25),
         Kind::Armor => {
             let pic = ctx.pack.armor_pic(cl.items).or(ctx.preview.then_some("sb_armor1"))?;
             if cl.items & crate::sbar::IT_INVULNERABILITY != 0 {
-                (Some(pic.to_string()), 666, true)
+                (Some(pic), 666, true)
             } else {
-                (Some(pic.to_string()), st[STAT_ARMOR], st[STAT_ARMOR] <= 25)
+                (Some(pic), st[STAT_ARMOR], st[STAT_ARMOR] <= 25)
             }
         }
         Kind::Ammo => {
             let pic = ctx.pack.ammo_pic(cl.items).or(ctx.preview.then_some("sb_shells"))?;
-            (Some(pic.to_string()), st[STAT_AMMO], st[STAT_AMMO] <= 10)
+            (Some(pic), st[STAT_AMMO], st[STAT_AMMO] <= 10)
         }
         k => {
             let i = k as usize - Kind::Shells as usize;
-            (Some(AMMO_PICS[i].to_string()), st[STAT_SHELLS + i], false)
+            (Some(AMMO_PICS[i]), st[STAT_SHELLS + i], false)
         }
     };
     Some((icon.filter(|_| e.a != 0), v, alert))
@@ -401,7 +423,7 @@ fn draw_local(c: &mut Canvas, pf: &mut PicFn, e: &Elem, (w, h): (f32, f32), ctx:
             }
         }
         Kind::Face => {
-            pic_box(c, pf, &Sbar::face_name(ctx.cl, ctx.face_anim), [0.0, 0.0, 24.0, 24.0], crate::draw::WHITE);
+            pic_box(c, pf, Sbar::face_name(ctx.cl, ctx.face_anim), [0.0, 0.0, 24.0, 24.0], crate::draw::WHITE);
         }
         Kind::DamageSkull => {
             if ctx.preview || (ctx.cl.took_damage && ctx.cl.gametype != 1) {
@@ -441,15 +463,16 @@ fn draw_local(c: &mut Canvas, pf: &mut PicFn, e: &Elem, (w, h): (f32, f32), ctx:
             let Some((icon, v, alert)) = number(e, ctx) else { return };
             let gap = (z / 6.0).round().max(1.0);
             let num_w = text_w(c, e.font, z, "888");
-            let s = v.to_string();
-            let s = if s.len() > 3 { &s[s.len() - 3..] } else { &s[..] };
-            let (num_x, icon_x) = match (&icon, col == 2) {
+            let mut nbuf = [0u8; 16];
+            let s = fmt_i32(v, &mut nbuf);
+            let s = if s.len() > 3 { &s[s.len() - 3..] } else { s };
+            let (num_x, icon_x) = match (icon, col == 2) {
                 (Some(_), true) => (0.0, num_w + gap),
                 (Some(_), false) => (z + gap, 0.0),
                 (None, _) => (0.0, 0.0),
             };
             if let Some(icon) = icon {
-                pic_box(c, pf, &icon, [icon_x, 0.0, z, z], crate::draw::WHITE);
+                pic_box(c, pf, icon, [icon_x, 0.0, z, z], crate::draw::WHITE);
             }
             let tw = text_w(c, e.font, z, s);
             draw_text(c, pf, e.font, z, (num_x + num_w - tw, 0.0), s, value_color(e), alert);

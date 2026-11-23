@@ -17,6 +17,8 @@ pub(crate) use world::RtWorld;
 
 /// Alias triangles posed per frame (excess models are left out).
 pub(crate) const MAX_ALIAS_TRIS: u32 = 131_072;
+/// Maximum holey (alpha-tested) alias triangles in BLAS geometry 1.
+pub(crate) const MAX_HOLEY_TRIS: u32 = 32_768;
 /// Alias model surfaces per frame.
 pub(crate) const MAX_DRAWS: usize = 4096;
 /// TLAS instances per frame (world, brush entities, alias models).
@@ -71,7 +73,12 @@ pub(crate) struct RtFrame {
     /// built for, and frames refitted since: the same list is refitted
     /// (positions only) instead of rebuilt, up to `ALIAS_REFITS` times.
     pub alias_sig: Vec<[u32; 3]>,
+    pub alias_opaque_count: u32,
     pub alias_age: u32,
+    /// Per-frame scratch buffers reused by `prepare_rt` (zero heap allocations).
+    pub out_scratch: Vec<RtDraw>,
+    pub sig_scratch: Vec<[u32; 3]>,
+    pub inst_scratch: Vec<Instance>,
     /// Posed alias triangles: 3 positions each (BLAS input).
     pub pos: Buffer,
     /// Alias triangle attributes (3 vec4 each).
@@ -90,18 +97,31 @@ pub(crate) struct Rt {
     pub warned: bool,
 }
 
-/// Build geometry of the alias BLAS: `n` posed triangles at `pos`.
-pub(crate) fn alias_geometry(pos: u64, n: u32) -> vk::AccelerationStructureGeometryKHR<'static> {
-    let tri = vk::AccelerationStructureGeometryTrianglesDataKHR::default()
-        .vertex_format(vk::Format::R32G32B32_SFLOAT)
-        .vertex_data(vk::DeviceOrHostAddressConstKHR { device_address: pos })
-        .vertex_stride(12)
-        .max_vertex((n * 3).max(1) - 1)
-        .index_type(vk::IndexType::NONE_KHR);
-    vk::AccelerationStructureGeometryKHR::default()
-        .geometry_type(vk::GeometryTypeKHR::TRIANGLES)
-        .geometry(vk::AccelerationStructureGeometryDataKHR { triangles: tri })
-        .flags(vk::GeometryFlagsKHR::NO_DUPLICATE_ANY_HIT_INVOCATION)
+/// Build geometries of the alias BLAS: geometry 0 holds `opaque` triangles
+/// (`OPAQUE`, bypassing any-hit traversal), geometry 1 holds `holey` triangles
+/// starting at `pos + opaque * 36` (`NO_DUPLICATE_ANY_HIT_INVOCATION`).
+pub(crate) fn alias_geometries(
+    pos: u64,
+    opaque: u32,
+    holey: u32,
+) -> [vk::AccelerationStructureGeometryKHR<'static>; 2] {
+    let make = |addr: u64, n: u32, flags: vk::GeometryFlagsKHR| {
+        let tri = vk::AccelerationStructureGeometryTrianglesDataKHR::default()
+            .vertex_format(vk::Format::R32G32B32_SFLOAT)
+            .vertex_data(vk::DeviceOrHostAddressConstKHR { device_address: addr })
+            .vertex_stride(12)
+            .max_vertex((n * 3).max(1) - 1)
+            .index_type(vk::IndexType::NONE_KHR);
+        vk::AccelerationStructureGeometryKHR::default()
+            .geometry_type(vk::GeometryTypeKHR::TRIANGLES)
+            .geometry(vk::AccelerationStructureGeometryDataKHR { triangles: tri })
+            .flags(flags)
+    };
+    let holey_addr = if holey > 0 { pos + u64::from(opaque) * 36 } else { pos };
+    [
+        make(pos, opaque, vk::GeometryFlagsKHR::OPAQUE),
+        make(holey_addr, holey, vk::GeometryFlagsKHR::NO_DUPLICATE_ANY_HIT_INVOCATION),
+    ]
 }
 
 /// Build geometry of a TLAS over the instances at `addr`.
@@ -190,13 +210,13 @@ impl Renderer {
                 vk::BufferUsageFlags::STORAGE_BUFFER,
                 true,
             )?;
-            // alias BLAS sized for the cap
-            let geo = [alias_geometry(self.gpu.device_address(pos.buf), MAX_ALIAS_TRIS)];
+            // alias BLAS sized for the cap (geometry 0 = opaque, geometry 1 = holey)
+            let geo = alias_geometries(self.gpu.device_address(pos.buf), MAX_ALIAS_TRIS, MAX_HOLEY_TRIS);
             let info = vk::AccelerationStructureBuildGeometryInfoKHR::default()
                 .ty(vk::AccelerationStructureTypeKHR::BOTTOM_LEVEL)
                 .flags(ALIAS_BUILD_FLAGS)
                 .geometries(&geo);
-            let (size, scratch, update) = self.gpu.accel_sizes(&info, &[MAX_ALIAS_TRIS]);
+            let (size, scratch, update) = self.gpu.accel_sizes(&info, &[MAX_ALIAS_TRIS, MAX_HOLEY_TRIS]);
             let alias_blas = self.gpu.create_accel(vk::AccelerationStructureTypeKHR::BOTTOM_LEVEL, size)?;
             let alias_scratch = self.gpu.scratch_buffer(scratch.max(update))?;
             let geo = [instance_geometry(self.gpu.device_address(instances.buf))];
@@ -214,7 +234,11 @@ impl Renderer {
                 alias_blas,
                 alias_scratch,
                 alias_sig: Vec::new(),
+                alias_opaque_count: 0,
                 alias_age: 0,
+                out_scratch: Vec::new(),
+                sig_scratch: Vec::new(),
+                inst_scratch: Vec::new(),
                 pos,
                 attr,
                 data,

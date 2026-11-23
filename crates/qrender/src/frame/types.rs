@@ -82,6 +82,15 @@ pub(super) enum VelDraw {
 pub(super) struct AoSourcePush {
     pub(super) scene_per_ao: [f32; 2],
     pub(super) scene_max: [i32; 2],
+    pub(super) msaa: u32,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub(super) struct AoDownPush {
+    pub(super) src: u32,
+    pub(super) src_mip: i32,
+    pub(super) src_max: [i32; 2],
 }
 
 #[repr(C)]
@@ -92,7 +101,19 @@ pub(super) struct AoPush {
     pub(super) scene_per_ao: [f32; 2],
     pub(super) scene_max: [i32; 2],
     pub(super) quality: u32,
-    pub(super) _pad: [u32; 3],
+    pub(super) color_slot: u32,
+    pub(super) max_mip: i32,
+    pub(super) _pad: u32,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub(super) struct DropletsPush {
+    pub(super) age: f32,
+    pub(super) seed: u32,
+    pub(super) high: u32,
+    pub(super) aspect: f32,
+    pub(super) px: f32,
 }
 
 #[repr(C)]
@@ -111,6 +132,15 @@ pub(super) struct AoApplyPush {
 pub(super) struct PolyPush {
     pub(super) color: [f32; 4],
     pub(super) tex: u32,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub(super) struct FtePush {
+    pub(super) fogmix: [f32; 4],
+    pub(super) tex: u32,
+    pub(super) depth_tex: u32,
+    pub(super) depth_uv: [f32; 2],
 }
 
 #[repr(C)]
@@ -155,7 +185,7 @@ const _: () = assert!(std::mem::size_of::<PostPush>() == 128);
 
 #[repr(C)]
 #[derive(Clone, Copy)]
-pub(super) struct UiVert {
+pub(crate) struct UiVert {
     pub(super) pos: [f32; 2],
     pub(super) uv: [f32; 2],
     pub(super) color: u32,
@@ -190,6 +220,34 @@ impl Dyn {
         self.ofs = o + b.len() as u64;
         Some(o)
     }
+    pub(super) fn push_slices<T: Copy>(&mut self, slices: &[&[T]], align: u64) -> Option<u64> {
+        let total: usize = slices.iter().map(|s| std::mem::size_of_val(*s)).sum();
+        let o = self.ofs.next_multiple_of(align);
+        if o + total as u64 > self.cap {
+            return None;
+        }
+        let mut dst = o as usize;
+        for s in slices {
+            let b = bytes_of(s);
+            if !b.is_empty() {
+                // SAFETY: total bounds checked above; frame fence waited on.
+                unsafe { std::ptr::copy_nonoverlapping(b.as_ptr(), self.ptr.add(dst), b.len()) };
+                dst += b.len();
+            }
+        }
+        self.ofs = o + total as u64;
+        Some(o)
+    }
+    pub(super) fn alloc_uninit<T: Copy>(&mut self, count: usize, align: u64) -> Option<(u64, *mut T)> {
+        let bytes = count * std::mem::size_of::<T>();
+        let o = self.ofs.next_multiple_of(align.max(std::mem::align_of::<T>() as u64));
+        if o + bytes as u64 > self.cap {
+            return None;
+        }
+        self.ofs = o + bytes as u64;
+        // SAFETY: aligned and within mapped dynbuf capacity; frame fence waited on.
+        Some((o, unsafe { self.ptr.add(o as usize) as *mut T }))
+    }
     pub(super) fn write_at<T: Copy>(&mut self, ofs: u64, data: &[T]) {
         let b = bytes_of(data);
         assert!(ofs + b.len() as u64 <= self.cap);
@@ -198,10 +256,12 @@ impl Dyn {
     }
 }
 
-/// FTE particles: vertex offset, index offset, (pipeline, texture slot, batch).
 /// FTE draws: vertex and index offsets, then (pipeline, texture slot,
 /// batch, shader mode). Mode is the blend index, or [`GUN_PORTAL_MODE`].
 pub(super) type FteDraw = (u64, u64, Vec<(usize, u32, crate::FteBatch, f32)>);
+/// Instanced normal FTE billboards: quad buffer offset in dynbuf, then
+/// (blend index 0..8, texture slot, batch, shader mode).
+pub(super) type FteQuadDraw = (u64, Vec<(usize, u32, crate::FteBatch, f32)>);
 /// `fte.frag` mode for add-on portal ovals (screen-space view texture).
 pub(super) const GUN_PORTAL_MODE: f32 = 8.0;
 
@@ -217,8 +277,12 @@ pub(super) struct WorldDraw {
     /// Brush entity: drawn with a depth bias toward the viewer so it wins
     /// over coplanar world faces (vkQuake gl_zfix).
     pub(super) zfix: bool,
+    /// True when visible in the main view (false for portal-only offscreen brushes).
+    pub(super) main_visible: bool,
     pub(super) alpha: f32,
     pub(super) opaque: Range,
+    /// Prefix of `opaque` whose texture (or animation) has a fullbright mask.
+    pub(super) opaque_fb: Range,
     pub(super) sky: Range,
     /// Liquids, one range per type for the GPU-culled world (CPU path: [0]).
     pub(super) water: [Range; 4],
@@ -312,5 +376,6 @@ pub(super) struct ViewPass {
     pub(super) cull: Option<CullFrame>,
     pub(super) particles: Range,
     pub(super) fte: Option<FteDraw>,
+    pub(super) fte_quads: Option<FteQuadDraw>,
     pub(super) portal_draws: Vec<super::portals::PortalDraw>,
 }

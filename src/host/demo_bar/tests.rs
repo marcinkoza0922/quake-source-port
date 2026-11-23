@@ -127,6 +127,8 @@ fn pad_mode_draws_glyphs_on_buttons_without_above_bar_clutter() {
             fte_vertices: &[],
             fte_indices: &[],
             fte_batches: &[],
+            fte_quads: &[],
+            fte_quad_batches: &[],
             dlights: &[],
             lightstyles: &[],
             fog: Default::default(),

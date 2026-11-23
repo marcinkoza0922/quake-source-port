@@ -435,7 +435,93 @@ pub fn range(aspect: vk::ImageAspectFlags, mips: u32, layers: u32) -> vk::ImageS
     }
 }
 
-/// Coarse full-pipeline layout transition (only used at frame boundaries/uploads).
+pub fn range_mip(aspect: vk::ImageAspectFlags, base_mip: u32, mips: u32, layers: u32) -> vk::ImageSubresourceRange {
+    vk::ImageSubresourceRange {
+        aspect_mask: aspect,
+        base_mip_level: base_mip,
+        level_count: mips,
+        base_array_layer: 0,
+        layer_count: layers,
+    }
+}
+
+/// Stage and access masks derived from an image layout for tighter pipeline barriers.
+fn layout_sync(layout: vk::ImageLayout, is_src: bool) -> (vk::PipelineStageFlags, vk::AccessFlags) {
+    use vk::{AccessFlags as A, ImageLayout as L, PipelineStageFlags as S};
+    match layout {
+        L::UNDEFINED => (
+            if is_src {
+                S::COLOR_ATTACHMENT_OUTPUT
+                    | S::LATE_FRAGMENT_TESTS
+                    | S::FRAGMENT_SHADER
+                    | S::TRANSFER
+            } else {
+                S::TOP_OF_PIPE
+            },
+            if is_src {
+                A::COLOR_ATTACHMENT_WRITE | A::DEPTH_STENCIL_ATTACHMENT_WRITE | A::TRANSFER_WRITE
+            } else {
+                A::empty()
+            },
+        ),
+        L::COLOR_ATTACHMENT_OPTIMAL => (
+            S::COLOR_ATTACHMENT_OUTPUT,
+            if is_src {
+                A::COLOR_ATTACHMENT_WRITE
+            } else {
+                A::COLOR_ATTACHMENT_READ | A::COLOR_ATTACHMENT_WRITE
+            },
+        ),
+        L::DEPTH_ATTACHMENT_OPTIMAL | L::DEPTH_STENCIL_ATTACHMENT_OPTIMAL => (
+            if is_src {
+                S::LATE_FRAGMENT_TESTS
+            } else {
+                S::EARLY_FRAGMENT_TESTS | S::LATE_FRAGMENT_TESTS
+            },
+            if is_src {
+                A::DEPTH_STENCIL_ATTACHMENT_WRITE
+            } else {
+                A::DEPTH_STENCIL_ATTACHMENT_READ | A::DEPTH_STENCIL_ATTACHMENT_WRITE
+            },
+        ),
+        L::DEPTH_STENCIL_READ_ONLY_OPTIMAL => (
+            if is_src {
+                S::FRAGMENT_SHADER | S::LATE_FRAGMENT_TESTS
+            } else {
+                S::FRAGMENT_SHADER | S::EARLY_FRAGMENT_TESTS
+            },
+            if is_src {
+                A::empty()
+            } else {
+                A::SHADER_READ | A::DEPTH_STENCIL_ATTACHMENT_READ
+            },
+        ),
+        L::SHADER_READ_ONLY_OPTIMAL => (
+            S::FRAGMENT_SHADER | S::COMPUTE_SHADER,
+            if is_src { A::empty() } else { A::SHADER_READ },
+        ),
+        L::TRANSFER_SRC_OPTIMAL => (
+            S::TRANSFER,
+            if is_src { A::empty() } else { A::TRANSFER_READ },
+        ),
+        L::TRANSFER_DST_OPTIMAL => (S::TRANSFER, A::TRANSFER_WRITE),
+        L::PRESENT_SRC_KHR => (S::BOTTOM_OF_PIPE, A::empty()),
+        L::GENERAL => (
+            S::COMPUTE_SHADER | S::FRAGMENT_SHADER | S::TRANSFER,
+            if is_src {
+                A::SHADER_WRITE | A::TRANSFER_WRITE
+            } else {
+                A::SHADER_READ | A::SHADER_WRITE | A::TRANSFER_WRITE
+            },
+        ),
+        _ => (
+            S::ALL_COMMANDS,
+            if is_src { A::MEMORY_WRITE } else { A::MEMORY_READ | A::MEMORY_WRITE },
+        ),
+    }
+}
+
+/// Layout transition with tight stage/access masks derived from `old` and `new`.
 pub fn barrier(
     dev: &ash::Device,
     cmd: vk::CommandBuffer,
@@ -444,21 +530,23 @@ pub fn barrier(
     old: vk::ImageLayout,
     new: vk::ImageLayout,
 ) {
+    let (src_stage, src_access) = layout_sync(old, true);
+    let (dst_stage, dst_access) = layout_sync(new, false);
     let b = [vk::ImageMemoryBarrier::default()
         .image(image)
         .subresource_range(rng)
         .old_layout(old)
         .new_layout(new)
-        .src_access_mask(vk::AccessFlags::MEMORY_WRITE)
-        .dst_access_mask(vk::AccessFlags::MEMORY_READ | vk::AccessFlags::MEMORY_WRITE)
+        .src_access_mask(src_access)
+        .dst_access_mask(dst_access)
         .src_queue_family_index(vk::QUEUE_FAMILY_IGNORED)
         .dst_queue_family_index(vk::QUEUE_FAMILY_IGNORED)];
     // SAFETY: recording command buffer, valid image.
     unsafe {
         dev.cmd_pipeline_barrier(
             cmd,
-            vk::PipelineStageFlags::ALL_COMMANDS,
-            vk::PipelineStageFlags::ALL_COMMANDS,
+            src_stage,
+            dst_stage,
             vk::DependencyFlags::empty(),
             &[],
             &[],

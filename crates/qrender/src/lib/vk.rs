@@ -84,6 +84,9 @@ pub struct Renderer {
     sky_layers: [u32; 2],
     skybox: Option<[u32; 6]>,
     buckets: Vec<Vec<u32>>,
+    /// Reused per-frame 2D UI buffers (zero heap allocations in steady state).
+    ui_verts: Vec<frame::UiVert>,
+    ui_ranges: Vec<(Option<[f32; 4]>, u32, u32)>,
     needs_resize: bool,
     frame_count: u64,
     /// Windowed screenshot: copy the next presented image to a buffer.

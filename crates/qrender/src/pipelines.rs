@@ -22,13 +22,13 @@ pub const DEPTH_FORMAT: vk::Format = vk::Format::D32_SFLOAT;
 pub const LM_FORMAT: vk::Format = vk::Format::R16G16B16A16_SFLOAT;
 /// SSAO target (visibility, view depth) and per-object velocity target.
 pub const AO_FORMAT: vk::Format = vk::Format::R16G16_SFLOAT;
-/// Exact scene sample-0 depth and alpha for MSAA SSAO input.
-pub const AO_SOURCE_FORMAT: vk::Format = vk::Format::R32G32_SFLOAT;
+/// Linear view-space depth mip chain for SAO (mip 0 extracted from scene depth).
+pub const AO_SOURCE_FORMAT: vk::Format = vk::Format::R32_SFLOAT;
+/// Reduced-resolution screen-droplet field (off_q.xy * m, m, spec * m).
+pub const DROPLET_FORMAT: vk::Format = vk::Format::R16G16B16A16_SFLOAT;
 pub const VEL_FORMAT: vk::Format = vk::Format::R16G16_SFLOAT;
-/// Scene colour attachment 1 while bloom is on: what glows (fullbrights, effects).
-pub const GLOW_FORMAT: vk::Format = vk::Format::R8G8B8A8_UNORM;
-/// Bloom downsample/upsample chain levels.
-pub const BLOOM_FORMAT: vk::Format = vk::Format::R16G16B16A16_SFLOAT;
+/// Bloom downsample/upsample chain levels (narrow glow pass renders into level 0).
+pub const BLOOM_FORMAT: vk::Format = vk::Format::B10G11R11_UFLOAT_PACK32;
 /// Cube shadow map faces of real-time dynamic lights (depth only).
 pub const SHADOW_FORMAT: vk::Format = vk::Format::D16_UNORM;
 
@@ -44,6 +44,8 @@ pub struct ScenePipes {
     pub alias_alpha: vk::Pipeline,
     pub particle: vk::Pipeline,
     pub fte: [vk::Pipeline; 17],
+    /// Instanced normal FTE billboards (8 blend modes, 6 verts/instance).
+    pub fte_quad: [vk::Pipeline; 8],
 }
 
 impl ScenePipes {
@@ -59,6 +61,7 @@ impl ScenePipes {
             alias_alpha: n,
             particle: n,
             fte: [n; 17],
+            fte_quad: [n; 8],
         }
     }
 
@@ -75,7 +78,78 @@ impl ScenePipes {
         ]
         .into_iter()
         .chain(self.fte)
+        .chain(self.fte_quad)
     }
+}
+
+/// Single-sampled half/quarter-res pipelines for the narrow r_bloom glow pass.
+#[derive(Clone, Copy)]
+pub struct BloomPipes {
+    pub depth: vk::Pipeline,
+    pub world: vk::Pipeline,
+    pub world_alpha: vk::Pipeline,
+    pub water: vk::Pipeline,
+    pub water_alpha: vk::Pipeline,
+    pub alias: vk::Pipeline,
+    pub alias_alpha: vk::Pipeline,
+    pub poly: vk::Pipeline,
+    pub particle: vk::Pipeline,
+    /// Glowing FTE modes: [Blend, AddA, AddC, Premul] tris (0..4), lines (4..8), Overlay (8).
+    pub fte: [vk::Pipeline; 9],
+    /// Instanced glowing FTE billboards: [Blend, AddA, AddC, Premul].
+    pub fte_quad: [vk::Pipeline; 4],
+}
+
+impl BloomPipes {
+    fn null() -> Self {
+        let n = vk::Pipeline::null();
+        Self {
+            depth: n,
+            world: n,
+            world_alpha: n,
+            water: n,
+            water_alpha: n,
+            alias: n,
+            alias_alpha: n,
+            poly: n,
+            particle: n,
+            fte: [n; 9],
+            fte_quad: [n; 4],
+        }
+    }
+
+    pub(super) fn all(&self) -> impl Iterator<Item = vk::Pipeline> + '_ {
+        [
+            self.depth,
+            self.world,
+            self.world_alpha,
+            self.water,
+            self.water_alpha,
+            self.alias,
+            self.alias_alpha,
+            self.poly,
+            self.particle,
+        ]
+        .into_iter()
+        .chain(self.fte)
+        .chain(self.fte_quad)
+    }
+}
+
+/// Index of a glowing FTE blend mode in [`BloomPipes::fte`], or `None` if it never glows.
+pub fn bloom_fte_index(b: crate::FteBlend, lines: bool) -> Option<usize> {
+    use crate::FteBlend as F;
+    if b == F::Overlay {
+        return Some(8);
+    }
+    let base = match b {
+        F::Blend => 0,
+        F::AddA => 1,
+        F::AddC => 2,
+        F::Premul => 3,
+        _ => return None,
+    };
+    Some(base + if lines { 4 } else { 0 })
 }
 
 pub struct Pipelines {
@@ -106,6 +180,8 @@ pub struct Pipelines {
     /// FTE particles: 8 blend modes of triangles, then the same as lines
     /// (see [`fte_index`]).
     pub fte: [vk::Pipeline; 17],
+    /// Instanced normal FTE billboards (8 blend modes).
+    pub fte_quad: [vk::Pipeline; 8],
     /// Single-sampled pipelines for portal/teleporter destination views when MSAA is enabled.
     pub portal: ScenePipes,
     /// Single-sampled opaque alias models for mirrored (reflection) views.
@@ -114,14 +190,19 @@ pub struct Pipelines {
     pub post: vk::Pipeline,
     /// SSAO pass (fullscreen, scene resolution).
     pub ao: vk::Pipeline,
-    /// Extracts sample-0 depth/alpha into a single-sampled image.
+    /// Extracts sample-0 linear depth into mip 0 of the SAO depth chain.
     pub ao_source: vk::Pipeline,
+    /// Downsamples one mip level of the SAO linear-depth chain.
+    pub ao_down: vk::Pipeline,
     /// Multiplies the blurred AO into the scene colour (scene samples).
     pub ao_apply: vk::Pipeline,
+    /// Reduced-resolution screen-droplet field pass (r_water_droplets).
+    pub droplets: vk::Pipeline,
     /// Velocity pass for moving alias models / brush entities.
     pub vel_alias: vk::Pipeline,
     pub vel_world: vk::Pipeline,
-    /// Bloom chain: prefilter/downsample into a level, and additive upsample.
+    /// Bloom chain: narrow glow pass, downsample into a level, and additive upsample.
+    pub bloom_glow: BloomPipes,
     pub bloom_down: vk::Pipeline,
     pub bloom_up: vk::Pipeline,
     /// Depth-only cube shadow map faces: world/brush entities, alias models.
@@ -132,6 +213,9 @@ pub struct Pipelines {
     pub rt: Option<RtPipes>,
     pub water_rt: vk::Pipeline,
     pub water_rt_alpha: vk::Pipeline,
+    /// Half-res single-sampled depth prepass and ray-query water trace pass.
+    pub rt_depth_world: vk::Pipeline,
+    pub water_rt_half: vk::Pipeline,
     pub post_format: vk::Format,
     /// MSAA sample count of the scene pipelines.
     pub samples: u32,
@@ -139,8 +223,6 @@ pub struct Pipelines {
     pub supersample: bool,
     /// FTE particle pipelines also shade per sample (high soft-particle quality).
     pub fte_supersample: bool,
-    /// Scene pipelines also write the bloom glow attachment (set before `build`).
-    pub glow: bool,
     sh: Shaders,
     modules: Vec<vk::ShaderModule>,
 }
@@ -158,6 +240,7 @@ struct Shaders {
     part_vs: vk::ShaderModule,
     part_fs: vk::ShaderModule,
     fte_vs: vk::ShaderModule,
+    fte_quad_vs: vk::ShaderModule,
     fte_fs: vk::ShaderModule,
     ui_vs: vk::ShaderModule,
     ui_fs: vk::ShaderModule,
@@ -165,22 +248,24 @@ struct Shaders {
     post_fs: vk::ShaderModule,
     ao_fs: vk::ShaderModule,
     ao_source_fs: vk::ShaderModule,
+    ao_down_fs: vk::ShaderModule,
     ao_apply_fs: vk::ShaderModule,
+    droplets_fs: vk::ShaderModule,
     vel_alias_vs: vk::ShaderModule,
     vel_world_vs: vk::ShaderModule,
     vel_fs: vk::ShaderModule,
     bloom_fs: vk::ShaderModule,
     shadow_world_fs: vk::ShaderModule,
     shadow_alias_fs: vk::ShaderModule,
-    /// `*_glow.frag` variants writing the bloom glow attachment.
-    glow: GlowShaders,
+    /// Narrow single-sampled r_bloom glow pass shaders.
+    bloom: BloomShaders,
 }
 
 #[derive(Clone, Copy)]
-struct GlowShaders {
+struct BloomShaders {
+    depth: vk::ShaderModule,
     world: vk::ShaderModule,
     water: vk::ShaderModule,
-    sky: vk::ShaderModule,
     alias: vk::ShaderModule,
     poly: vk::ShaderModule,
     part: vk::ShaderModule,
@@ -342,28 +427,31 @@ impl Pipelines {
         let part_vs = m(spv!("particle.vert"))?;
         let part_fs = m(spv!("particle.frag"))?;
         let fte_vs = m(spv!("fte.vert"))?;
+        let fte_quad_vs = m(spv!("fte_quad.vert"))?;
         let fte_fs = m(spv!("fte.frag"))?;
         let ui_vs = m(spv!("ui.vert"))?;
         let ui_fs = m(spv!("ui.frag"))?;
         let post_vs = m(spv!("post.vert"))?;
         let post_fs = m(spv!("post.frag"))?;
         let ao_source_fs = m(spv!("aosource.frag"))?;
+        let ao_down_fs = m(spv!("aodown.frag"))?;
         let ao_fs = m(spv!("ao.frag"))?;
         let ao_apply_fs = m(spv!("aoapply.frag"))?;
+        let droplets_fs = m(spv!("droplets.frag"))?;
         let vel_alias_vs = m(spv!("velalias.vert"))?;
         let vel_world_vs = m(spv!("velworld.vert"))?;
         let vel_fs = m(spv!("vel.frag"))?;
         let bloom_fs = m(spv!("bloom.frag"))?;
         let shadow_world_fs = m(spv!("shadow_world.frag"))?;
         let shadow_alias_fs = m(spv!("shadow_alias.frag"))?;
-        let glow = GlowShaders {
-            world: m(spv!("world_glow.frag"))?,
-            water: m(spv!("water_glow.frag"))?,
-            sky: m(spv!("sky_glow.frag"))?,
-            alias: m(spv!("alias_glow.frag"))?,
-            poly: m(spv!("poly_glow.frag"))?,
-            part: m(spv!("particle_glow.frag"))?,
-            fte: m(spv!("fte_glow.frag"))?,
+        let bloom = BloomShaders {
+            depth: m(spv!("bloom_depth.frag"))?,
+            world: m(spv!("bloom_world.frag"))?,
+            water: m(spv!("bloom_water.frag"))?,
+            alias: m(spv!("bloom_alias.frag"))?,
+            poly: m(spv!("bloom_poly.frag"))?,
+            part: m(spv!("bloom_particle.frag"))?,
+            fte: m(spv!("bloom_fte.frag"))?,
         };
 
         let stage = vk::PipelineShaderStageCreateInfo::default()
@@ -399,6 +487,7 @@ impl Pipelines {
             part_vs,
             part_fs,
             fte_vs,
+            fte_quad_vs,
             fte_fs,
             ui_vs,
             ui_fs,
@@ -406,14 +495,16 @@ impl Pipelines {
             post_fs,
             ao_fs,
             ao_source_fs,
+            ao_down_fs,
             ao_apply_fs,
+            droplets_fs,
             vel_alias_vs,
             vel_world_vs,
             vel_fs,
             bloom_fs,
             shadow_world_fs,
             shadow_alias_fs,
-            glow,
+            bloom,
         };
         let null = vk::Pipeline::null();
         let mut p = Pipelines {
@@ -440,15 +531,19 @@ impl Pipelines {
             poly: null,
             particle: null,
             fte: [null; 17],
+            fte_quad: [null; 8],
             portal: ScenePipes::null(),
             portal_alias_mirror: null,
             ui: null,
             post: null,
             ao: null,
             ao_source: null,
+            ao_down: null,
             ao_apply: null,
+            droplets: null,
             vel_alias: null,
             vel_world: null,
+            bloom_glow: BloomPipes::null(),
             bloom_down: null,
             bloom_up: null,
             shadow_world: null,
@@ -456,11 +551,12 @@ impl Pipelines {
             rt,
             water_rt: null,
             water_rt_alpha: null,
+            rt_depth_world: null,
+            water_rt_half: null,
             post_format,
             samples,
             supersample: false,
             fte_supersample: false,
-            glow: false,
             sh,
             modules,
         };

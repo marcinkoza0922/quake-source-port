@@ -14,6 +14,7 @@ pub(super) fn stats(
     sprites: &[SpriteDraw],
     particles: Range,
     fte: Option<&FteDraw>,
+    fte_quads: Option<&FteQuadDraw>,
     leaves: u32,
 ) -> MapperStats {
     let mut stats = MapperStats {
@@ -33,6 +34,7 @@ pub(super) fn stats(
     stats.triangles += stats.entity_polys;
     stats.draws += sprites.len() as u32 + u32::from(particles.count > 0);
     stats.draws += fte.map_or(0, |(_, _, batches)| batches.len() as u32);
+    stats.draws += fte_quads.map_or(0, |(_, batches)| batches.len() as u32);
     stats
 }
 

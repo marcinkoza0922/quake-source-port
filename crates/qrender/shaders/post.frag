@@ -190,10 +190,12 @@ void main() {
         q = (q + d) * (1.0 - 2.0 * a) + a;
         if (high) ca = d * 0.45 + (q - 0.5) * 0.004;
     }
-    WsDrop wd = WsDrop(vec2(0.0), 0.0, 0.0, 0.0);
+    // Precomputed reduced-resolution droplet field: (off_q.x * m, off_q.y * m, m, spec * m).
+    vec4 df = vec4(0.0);
     if (dk != 0u && pc.drops >= 0.0) {
-        wd = ws_droplets(i_uv, pc.drops, pc.water >> 8, high, aspect, 1.0 / max(pc.mb_h * pc.uvs.y, 1.0));
-        q += wd.off * vec2(1.0 / aspect, 1.0) * wd.m;
+        uint drop_slot = pc.water >> 8;
+        df = texture(textures[nonuniformEXT(drop_slot)], i_uv);
+        q += df.xy;
     }
     vec2 uv = clamp(q, 0.0, 1.0) * pc.uvs;
     vec3 c = texture(textures[nonuniformEXT(pc.scene)], uv).rgb;
@@ -201,7 +203,7 @@ void main() {
         c.r = scene_q(q + ca).r;
         c.b = scene_q(q - ca).b;
     }
-    if (wd.m > 0.0 && high) {
+    if (df.z > 0.002 && high) {
         // drops sit out of focus: soften what they show
         vec2 bl = vec2(1.5 / aspect, 1.5) / max(pc.mb_h * pc.uvs.y, 1.0);
         c = (c * 2.0 + scene_q(q + bl) + scene_q(q - bl) + scene_q(q + vec2(bl.x, -bl.y)) + scene_q(q - vec2(bl.x, -bl.y))) / 6.0;
@@ -218,8 +220,12 @@ void main() {
         vec2 v = (i_uv - 0.5) * vec2(aspect, 1.0);
         c *= 1.0 - 0.22 * smoothstep(0.35, 1.0, length(v));
     }
-    if (wd.m > 0.0)
-        c = ws_shade(c, wd, dk);
+    if (df.z > 0.002) {
+        float rim_m = df.z > 0.5 ? 0.15 * df.z : df.z * smoothstep(0.0, 0.25, length(df.xy) * 40.0);
+        c *= mix(1.0, 0.9, rim_m);
+        c += df.w * 0.12;
+        if (dk == 2u) c = mix(c, c * vec3(0.55, 1.0, 0.45) + vec3(0.0, 0.03, 0.0), 0.35 * df.z);
+    }
     if (pc.mode != 0u) {
         if (pc.mode == 1u) {
             vec2 noiseuv = floor(gl_FragCoord.xy * pc.scale) + 0.5;

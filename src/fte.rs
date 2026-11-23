@@ -8,7 +8,7 @@ use qcore::math::Vec3;
 use qformats::bsp::{Bsp, TextureKind};
 use qpart::geom::{self, Geometry, TexRef, ViewInfo};
 use qpart::{FrameInput, Registry, System, Trace, TrailHandle, World};
-use qrender::{FteBatch, FteBlend, FteVertex, PicId, Renderer};
+use qrender::{FteBatch, FteBlend, FteQuad, FteVertex, PicId, Renderer};
 use qworld::hull::CollisionModel;
 pub(crate) mod world;
 use world::*;
@@ -162,13 +162,17 @@ pub struct Fte {
     /// Recycled after rendering, including any appended add-on geometry.
     geometry: (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>),
     geometry_batches: Vec<geom::Batch>,
+    /// Instanced normal FTE billboards built this frame (reused across frames).
+    quads: Vec<FteQuad>,
+    quad_batches: Vec<FteBatch>,
+    quad_geom_batches: Vec<geom::Batch>,
     /// Trail state per entity number.
     trails: HashMap<i32, Option<TrailHandle>>,
     /// Map name used to detect level changes and reset cached trail/sky state.
     cm_map: String,
     /// r_particledesc, map, render options and Enhanced Particles the
     /// effects were loaded for.
-    loaded_for: Option<(String, String, String, bool)>,
+    loaded_for: Option<(String, String, qpart::RenderOptions, bool)>,
     palette: Option<Vec<u8>>,
     /// Client requests processed (r_partinfo).
     requests: u64,
@@ -191,6 +195,9 @@ impl Fte {
             pics: Vec::new(),
             geometry: Default::default(),
             geometry_batches: Vec::new(),
+            quads: Vec::new(),
+            quad_batches: Vec::new(),
+            quad_geom_batches: Vec::new(),
             trails: HashMap::new(),
             cm_map: String::new(),
             loaded_for: None,
@@ -203,12 +210,19 @@ impl Fte {
         }
     }
 
+    /// Instanced normal billboards built by the most recent [`Self::frame`] call.
+    pub fn quads(&self) -> (&[FteQuad], &[FteBatch]) {
+        (&self.quads, &self.quad_batches)
+    }
+
     /// Return storage once the renderer has uploaded this frame's geometry.
     pub fn recycle_geometry(&mut self, mut geometry: (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>)) {
         geometry.0.clear();
         geometry.1.clear();
         geometry.2.clear();
         self.geometry = geometry;
+        self.quads.clear();
+        self.quad_batches.clear();
     }
 
     /// Demo seeking: drop live particles, trails and decals.
@@ -237,10 +251,16 @@ impl Fte {
             || settings.max_decals != self.sys.settings.max_decals;
         self.sys.settings = settings;
         // FinishParticleType applies the spark/beam cvars, so they reload.
-        let key = (desc.to_string(), map.to_string(), format!("{opts:?}"), enhanced);
-        if self.loaded_for.as_ref() == Some(&key) && !resize {
+        if !resize
+            && let Some((d, m, o, e)) = &self.loaded_for
+            && d == desc
+            && m == map
+            && *o == opts
+            && *e == enhanced
+        {
             return;
         }
+        let key = (desc.to_string(), map.to_string(), opts, enhanced);
         self.reg.opts = opts;
         if self.palette.is_none() {
             self.palette = fs.open("gfx/palette.lmp");
@@ -317,6 +337,8 @@ impl Fte {
     ) -> (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>) {
         let queue = std::mem::take(&mut cl.fte_queue);
         self.requests += queue.len() as u64;
+        self.quads.clear();
+        self.quad_batches.clear();
         if self.reg.types.is_empty() && queue.is_empty() && self.sys.run_list().is_empty() {
             return std::mem::take(&mut self.geometry);
         }
@@ -388,6 +410,8 @@ impl Fte {
         let (vertices, indices, mut batches) = std::mem::take(&mut self.geometry);
         batches.clear();
         g.reuse_buffers(vertices, indices, std::mem::take(&mut self.geometry_batches));
+        g.reuse_quad_buffers(std::mem::take(&mut self.quads), std::mem::take(&mut self.quad_geom_batches));
+        g.use_instanced_quads = true;
         g.cull_behind = cull_tangents.is_some();
         if let Some([tx, ty]) = cull_tangents {
             g.horizontal_tan = Some(tx);
@@ -396,7 +420,7 @@ impl Fte {
         let rain = self.rain_emitters(cl);
         let input = FrameInput { cl_time: cl.time, vieworg: view.origin.into(), rain };
         self.sys.frame(&self.reg, &world, &input, &mut g);
-        self.profile_geometry[0] += g.vertices.len();
+        self.profile_geometry[0] += g.vertices.len() + g.quads.len();
         self.profile_geometry[1] += g.indices.len();
 
         for d in self.sys.dlights.drain(..) {
@@ -434,6 +458,20 @@ impl Fte {
                 soft: b.soft, gel: false,
             })
         }));
+        g.quad_batches.sort_by_key(|b| geom::blend_pass(b.blend));
+        self.quad_batches.clear();
+        self.quad_batches.extend(g.quad_batches.iter().filter_map(|b| {
+            Some(FteBatch {
+                pic: self.pics.get(b.tex).copied().flatten()?,
+                blend: to_blend(b.blend),
+                lines: false,
+                first_index: b.first_index,
+                num_indices: b.num_indices,
+                soft: b.soft, gel: false,
+            })
+        }));
+        self.quads = g.quads;
+        self.quad_geom_batches = g.quad_batches;
         self.geometry_batches = g.batches;
         (g.vertices, g.indices, batches)
     }

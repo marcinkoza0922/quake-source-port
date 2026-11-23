@@ -192,6 +192,8 @@ impl Renderer {
             sky_layers: [NO_TEX; 2],
             skybox: None,
             buckets: Vec::new(),
+            ui_verts: Vec::new(),
+            ui_ranges: Vec::new(),
             needs_resize: false,
             frame_count: 0,
             capture_requested: false,

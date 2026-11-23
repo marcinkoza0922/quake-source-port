@@ -40,7 +40,10 @@ struct WsDrop { off: vec2<f32>, m: f32, spec: f32, rim: f32 };
 // irregular outline, a random squash and a few lobes: drops on glass are rarely round
 fn ws_drop(best: ptr<function, WsDrop>, p: vec2<f32>, c: vec2<f32>, r: f32, px: f32, st: f32, h: f32) {
     if (r <= 0.0) { return; }
-    var d = (p - c) / r;
+    let rel = p - c;
+    // Fast AABB reject before division and lobe trig.
+    if (abs(rel.x) >= r * 1.8 || abs(rel.y) >= r * st * 1.6) { return; }
+    var d = rel / r;
     d.y /= st;
     d.x *= 0.75 + 0.5 * fract(h * 7.7);
     d.y *= select(1.15, 0.85, d.y > 0.0);

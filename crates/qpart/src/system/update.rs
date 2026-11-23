@@ -23,19 +23,41 @@ fn step_linear_ramp(t: &PartType, p: &mut Particle, pt: f32, d_rgb: [f32; 3], d_
     p.scale += d_scale;
 }
 
+#[derive(Clone, Copy)]
+struct StepConst {
+    ft: f32,
+    pt: f32,
+    has_vel: bool,
+    has_fric: bool,
+    fric_mul: Vec3,
+    grav_ft: f32,
+    d_rgb: [f32; 3],
+    d_alpha: f32,
+    d_scale: f32,
+}
+
+impl StepConst {
+    #[inline(always)]
+    fn new(t: &PartType, ft: f32, pt: f32) -> Self {
+        Self {
+            ft,
+            pt,
+            has_vel: t.flags & PT_VELOCITY != 0,
+            has_fric: t.flags & PT_FRICTION != 0,
+            fric_mul: Vec3::new(1.0 - t.friction[0] * ft, 1.0 - t.friction[1] * ft, 1.0 - t.friction[2] * ft),
+            grav_ft: t.gravity * ft,
+            d_rgb: [ft * t.rgbchange[0], ft * t.rgbchange[1], ft * t.rgbchange[2]],
+            d_alpha: ft * t.alphachange,
+            d_scale: ft * t.scaledelta,
+        }
+    }
+}
+
 impl System {
     /// PScript_UpdateParticle.
-    pub(super) fn update_particle(&mut self, reg: &Registry, world: &dyn World, pi: PartRef, ty: TypeId) {
+    fn update_particle(&mut self, reg: &Registry, world: &dyn World, pi: PartRef, ty: TypeId, sc: StepConst) {
         let t = &reg.types[ty];
-        let ft = self.frametime;
-        let pt = self.particletime;
-        let has_vel = t.flags & PT_VELOCITY != 0;
-        let has_fric = t.flags & PT_FRICTION != 0;
-        let fric_mul = Vec3::new(1.0 - t.friction[0] * ft, 1.0 - t.friction[1] * ft, 1.0 - t.friction[2] * ft);
-        let grav_ft = t.gravity * ft;
-        let d_rgb = [ft * t.rgbchange[0], ft * t.rgbchange[1], ft * t.rgbchange[2]];
-        let d_alpha = ft * t.alphachange;
-        let d_scale = ft * t.scaledelta;
+        let StepConst { ft, pt, has_vel, has_fric, fric_mul, grav_ft, d_rgb, d_alpha, d_scale } = sc;
 
         // Pre-sample flurry RNG before borrowing the particle element.
         let flurry = if has_vel && t.flurry != 0.0 && self.doflurry {
@@ -254,12 +276,13 @@ impl System {
         let t = &reg.types[ty];
         let ft = self.frametime;
         let pt = self.particletime;
+        let sc = StepConst::new(t, ft, pt);
         if t.looks.kind == RenderType::Beam {
             self.reap_arena(reg, ty);
             let mut cur = self.rt[ty].particles;
             while cur != NIL {
                 let next = self.parts[cur as usize].next;
-                self.update_particle(reg, world, PartRef::Arena(cur), ty);
+                self.update_particle(reg, world, PartRef::Arena(cur), ty, sc);
                 cur = next;
             }
             return;
@@ -269,13 +292,6 @@ impl System {
         if len == 0 {
             return;
         }
-        let has_vel = t.flags & PT_VELOCITY != 0;
-        let has_fric = t.flags & PT_FRICTION != 0;
-        let fric_mul = Vec3::new(1.0 - t.friction[0] * ft, 1.0 - t.friction[1] * ft, 1.0 - t.friction[2] * ft);
-        let grav_ft = t.gravity * ft;
-        let d_rgb = [ft * t.rgbchange[0], ft * t.rgbchange[1], ft * t.rgbchange[2]];
-        let d_alpha = ft * t.alphachange;
-        let d_scale = ft * t.scaledelta;
         let simple_ramp = matches!(t.rampmode, RampMode::None) || t.ramp.is_empty();
         if simple_ramp
             && t.emit.is_none()
@@ -283,13 +299,13 @@ impl System {
             && (t.flurry == 0.0 || !self.doflurry)
         {
             for p in self.rt[ty].vec.iter_mut().rev() {
-                step_kinematics(p, ft, has_vel, has_fric, fric_mul, grav_ft);
-                step_linear_ramp(t, p, pt, d_rgb, d_alpha, d_scale);
+                step_kinematics(p, sc.ft, sc.has_vel, sc.has_fric, sc.fric_mul, sc.grav_ft);
+                step_linear_ramp(t, p, sc.pt, sc.d_rgb, sc.d_alpha, sc.d_scale);
             }
             return;
         }
         for idx in (0..len).rev() {
-            self.update_particle(reg, world, PartRef::Vec(ty, idx), ty);
+            self.update_particle(reg, world, PartRef::Vec(ty, idx), ty, sc);
         }
     }
 

@@ -53,7 +53,7 @@ impl Host {
                 e.views = 1;
             }
             let debris_on = self.cv("r_debris") != 0.0;
-            let mut brushes = None;
+            let mut brushes = self.frame_brushes.take();
             let teleporters = self.impacts.prepare(
                 &self.server.core.cvars, &mut self.cl, &self.level, &mut brushes, v.origin.into(), &self.debris,
             );
@@ -434,96 +434,121 @@ impl Host {
         if view.is_some() {
             self.draw_mapper_stats(&mut c, mapper);
         }
-        let styles: Vec<i32> = (0..qnet::protocol::MAX_LIGHTSTYLES).map(|i| self.cl.lightstyle_value(i)).collect();
+        let mut styles = [0i32; qnet::protocol::MAX_LIGHTSTYLES];
+        for (i, slot) in styles.iter_mut().enumerate() {
+            *slot = self.cl.lightstyle_value(i);
+        }
         // r_fog 0 hides fog without touching the map/mod values, so it comes back
         // as soon as the option is turned on again.
         let fog_on = self.cv("r_fog") != 0.0;
         let fog = qrender::Fog { density: if fog_on { self.cl.fog.density } else { 0.0 }, color: self.cl.fog.color };
-        let v = |n: &str| self.cv(n);
-        let enhanced_alpha = v("r_enhancedwater") != 0.0 && v("r_watertranslucency") != 0.0;
-        let settings = Settings {
-            gamma: v("gamma").clamp(0.3, 3.0),
-            contrast: v("contrast").clamp(0.5, 3.0),
-            // As ironwail/vkQuake: the map's worldspawn `wateralpha`, else
-            // `r_wateralpha` (default 1; mods set it too: AD's progs stuffs
-            // its maps' `water_alpha`). Translucent Enhanced Water lets
-            // `r_wateralpha` override the map (and VIS: translucent liquids
-            // then skip leaf PVS). Other liquid types retain map overrides
-            // and zero-to-water fallback.
-            wateralpha: if enhanced_alpha { v("r_wateralpha") } else { self.level.liquid_alpha[0].unwrap_or(v("r_wateralpha")) }.clamp(0.0, 1.0),
-            // ironwail sets r_wateralpha's map alpha to 1 at load where VIS
-            // can't see through water; the map's own key applies anyway.
-            wateralpha_vised_only: !enhanced_alpha && self.level.liquid_alpha[0].is_none(),
-            lavaalpha: self.level.liquid_alpha[1].or(Some(v("r_lavaalpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
-            slimealpha: self.level.liquid_alpha[2].or(Some(v("r_slimealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
-            telealpha: self.level.liquid_alpha[3].or(Some(v("r_telealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
-            teleport_windows: v("r_teleportwindows") != 0.0,
-            portal_quality: (v("r_portal_quality").round() as i32).clamp(0, 2) as u32,
-            gun_portal_max: v("addon_portal_max").clamp(0.0, 4.0) as u32,
-            gun_portal_dist: v("addon_portal_dist").max(0.0),
-            gun_portal_depth: v("addon_portal_depth").clamp(0.0, 6.0) as u32,
-            skyfog: v("r_skyfog"),
-            dynamic: v("r_dynamic") != 0.0,
-            // cheat-protected as in ironwail: single player only
-            fullbright: !mapper.lightmap && v("r_fullbright") != 0.0 && self.cl.maxclients <= 1,
-            mapper,
-            sky_wind: self.level.sky_wind.uniform(self.cl.time, v("r_skywind")),
-            vsync: v("vid_vsync") != 0.0,
-            msaa: v("r_msaa").max(1.0) as u32,
-            render_scale: v("r_renderscale").clamp(0.25, 2.0),
-            texture_linear: v("r_texfilter") != 0.0,
-            anisotropy: v("r_anisotropy").clamp(1.0, 16.0),
-            texture_mode: qrender::parse_texture_mode(self.cvs("gl_texturemode")),
-            lod_bias: {
-                let s = self.cvs("gl_lodbias");
-                if s.eq_ignore_ascii_case("auto") { None } else { s.trim().parse().ok() }
-            },
-            supersample: v("vid_fsaamode") != 0.0,
-            dither: v("r_dither").max(0.0),
-            softemu: v("r_softemu").clamp(0.0, 3.0) as u32,
-            softemu_metric: v("r_softemu_metric") as i32,
-            lightmap_banding: v("r_softemu_lightmap_banding"),
-            mdl_warp: v("r_softemu_mdl_warp"),
-            dither_screen: v("r_softemu_dither_screen"),
-            dither_texture: v("r_softemu_dither_texture"),
-            colorblind: v("r_colorblind").clamp(0.0, 3.0) as u32,
-            soft_particle_distance: if soft_particles(v("r_particle_quality")) > 0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
-            soft_particle_quality: u32::from(soft_particles(v("r_particle_quality")) >= 2),
-            particle_style: if v("r_particles").round() as i32 == 2 { 2 } else { 1 },
-            ssao: if !mapper.lightmap && (v("r_ssao").round() as i32).clamp(0, 3) > 0 { v("r_ssao_strength").max(0.0) } else { 0.0 },
-            ssao_quality: (v("r_ssao").round() as i32).clamp(0, 3).saturating_sub(1).min(2) as u32,
-            ssao_radius: v("r_ssao_radius"),
-            edge_blur: if self.bullet_time.active && v("a11y_reducemotion") == 0.0 { 0.65 } else { 0.0 },
-            // Reduce Motion turns motion blur off
-            motion_blur: if v("a11y_reducemotion") != 0.0 || v("r_motionblur") == 0.0 {
-                0.0
-            } else {
-                v("r_motionblur_amount").clamp(0.0, 4.0)
-            },
-            motion_blur_quality: (v("r_motionblur_quality").round() as i32).clamp(0, 1) as u32,
-            // planar reflections (Water Settings, under the Enhanced Water master)
-            water_reflections: if v("r_enhancedwater") != 0.0 { (v("r_water_reflections").round() as i32).clamp(0, 2) as u32 } else { 0 },
-            water_reflection_amount: v("r_water_reflections_amount").clamp(0.0, 1.5),
-            bloom: if v("r_bloom") != 0.0 { v("r_bloom_intensity").clamp(0.0, 4.0) } else { 0.0 },
-            bloom_size: v("r_bloom_size").clamp(0.5, 2.0),
-            bloom_bright: v("r_bloom_bright").clamp(0.0, 1.0),
-            bloom_quality: (v("r_bloom_quality").round() as i32).clamp(0, 1) as u32,
-            rt_dlights: v("r_shadow_realtime_dlight") != 0.0,
-            dlight_shadows: v("r_shadow_realtime_dlight_shadows") != 0.0,
-            shadow_quality: (v("r_shadow_quality").round() as i32).clamp(0, 2) as u32,
-            water_ripples: if v("r_enhancedwater") != 0.0 && v("r_waterripples") != 0.0 { v("r_waterripples_amount").clamp(0.0, 4.0) } else { 0.0 },
-            water_splashes: !mapper.lightmap && v("r_enhancedwater") != 0.0 && v("r_watersplash") != 0.0,
-            water_caustics: if v("r_enhancedwater") != 0.0 && v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },
-            water_quality: (v("r_water_quality").round() as i32).clamp(0, 1) as u32,
-            gel_quality: (v("addon_gel_quality").round() as i32).clamp(0, 1) as u32,
-            shader_scope: v("r_shader_scope").clamp(0.0, 1.0) as u32,
-            shader_scale: v("r_shader_scale").clamp(0.0, 1.0) as u32,
-            hdr_lightmaps: v("r_hdr_lightmaps") != 0.0,
-            deluxemapping: v("r_deluxemapping") != 0.0,
-            deluxemapping_specular: v("r_deluxemapping_specular").clamp(0.0, 2.0),
-            goggles,
-            ..Settings::default()
+        let settings_key = (
+            self.server.core.cvars.generation(),
+            self.cl.maxclients <= 1,
+            mapper.wire,
+            mapper.lightmap,
+            mapper.lock_pvs,
+            mapper.speeds,
+            self.level.liquid_alpha.map(|o| o.map_or(u32::MAX, f32::to_bits)),
+        );
+        let (mut settings, skywind_cvar, reduce_motion) = if let Some((k, s, sw, rm)) = &self.settings_cache
+            && *k == settings_key
+        {
+            (*s, *sw, *rm)
+        } else {
+            let v = |n: &str| self.cv(n);
+            let enhanced_alpha = v("r_enhancedwater") != 0.0 && v("r_watertranslucency") != 0.0;
+            let reduce_motion = v("a11y_reducemotion") != 0.0;
+            let skywind_cvar = v("r_skywind");
+            let s = Settings {
+                gamma: v("gamma").clamp(0.3, 3.0),
+                contrast: v("contrast").clamp(0.5, 3.0),
+                // As ironwail/vkQuake: the map's worldspawn `wateralpha`, else
+                // `r_wateralpha` (default 1; mods set it too: AD's progs stuffs
+                // its maps' `water_alpha`). Translucent Enhanced Water lets
+                // `r_wateralpha` override the map (and VIS: translucent liquids
+                // then skip leaf PVS). Other liquid types retain map overrides
+                // and zero-to-water fallback.
+                wateralpha: if enhanced_alpha { v("r_wateralpha") } else { self.level.liquid_alpha[0].unwrap_or(v("r_wateralpha")) }.clamp(0.0, 1.0),
+                // ironwail sets r_wateralpha's map alpha to 1 at load where VIS
+                // can't see through water; the map's own key applies anyway.
+                wateralpha_vised_only: !enhanced_alpha && self.level.liquid_alpha[0].is_none(),
+                lavaalpha: self.level.liquid_alpha[1].or(Some(v("r_lavaalpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
+                slimealpha: self.level.liquid_alpha[2].or(Some(v("r_slimealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
+                telealpha: self.level.liquid_alpha[3].or(Some(v("r_telealpha"))).filter(|&a| a > 0.0).map(|a| a.min(1.0)),
+                teleport_windows: v("r_teleportwindows") != 0.0,
+                portal_quality: (v("r_portal_quality").round() as i32).clamp(0, 2) as u32,
+                gun_portal_max: v("addon_portal_max").clamp(0.0, 4.0) as u32,
+                gun_portal_dist: v("addon_portal_dist").max(0.0),
+                gun_portal_depth: v("addon_portal_depth").clamp(0.0, 6.0) as u32,
+                skyfog: v("r_skyfog"),
+                dynamic: v("r_dynamic") != 0.0,
+                // cheat-protected as in ironwail: single player only
+                fullbright: !mapper.lightmap && v("r_fullbright") != 0.0 && self.cl.maxclients <= 1,
+                mapper,
+                sky_wind: [0.0; 4],
+                vsync: v("vid_vsync") != 0.0,
+                msaa: v("r_msaa").max(1.0) as u32,
+                render_scale: v("r_renderscale").clamp(0.25, 2.0),
+                texture_linear: v("r_texfilter") != 0.0,
+                anisotropy: v("r_anisotropy").clamp(1.0, 16.0),
+                texture_mode: qrender::parse_texture_mode(self.cvs("gl_texturemode")),
+                lod_bias: {
+                    let s = self.cvs("gl_lodbias");
+                    if s.eq_ignore_ascii_case("auto") { None } else { s.trim().parse().ok() }
+                },
+                supersample: v("vid_fsaamode") != 0.0,
+                dither: v("r_dither").max(0.0),
+                softemu: v("r_softemu").clamp(0.0, 3.0) as u32,
+                softemu_metric: v("r_softemu_metric") as i32,
+                lightmap_banding: v("r_softemu_lightmap_banding"),
+                mdl_warp: v("r_softemu_mdl_warp"),
+                dither_screen: v("r_softemu_dither_screen"),
+                dither_texture: v("r_softemu_dither_texture"),
+                colorblind: v("r_colorblind").clamp(0.0, 3.0) as u32,
+                soft_particle_distance: if soft_particles(v("r_particle_quality")) > 0 { v("r_softparticledistance").max(0.01) } else { 0.0 },
+                soft_particle_quality: u32::from(soft_particles(v("r_particle_quality")) >= 2),
+                particle_style: if v("r_particles").round() as i32 == 2 { 2 } else { 1 },
+                ssao: if !mapper.lightmap && (v("r_ssao").round() as i32).clamp(0, 3) > 0 { v("r_ssao_strength").max(0.0) } else { 0.0 },
+                ssao_quality: (v("r_ssao").round() as i32).clamp(0, 3).saturating_sub(1).min(2) as u32,
+                ssao_radius: v("r_ssao_radius"),
+                edge_blur: 0.0,
+                // Reduce Motion turns motion blur off
+                motion_blur: if reduce_motion || v("r_motionblur") == 0.0 {
+                    0.0
+                } else {
+                    v("r_motionblur_amount").clamp(0.0, 4.0)
+                },
+                motion_blur_quality: (v("r_motionblur_quality").round() as i32).clamp(0, 1) as u32,
+                // planar reflections (Water Settings, under the Enhanced Water master)
+                water_reflections: if v("r_enhancedwater") != 0.0 { (v("r_water_reflections").round() as i32).clamp(0, 2) as u32 } else { 0 },
+                water_reflection_amount: v("r_water_reflections_amount").clamp(0.0, 1.5),
+                bloom: if v("r_bloom") != 0.0 { v("r_bloom_intensity").clamp(0.0, 4.0) } else { 0.0 },
+                bloom_size: v("r_bloom_size").clamp(0.5, 2.0),
+                bloom_bright: v("r_bloom_bright").clamp(0.0, 1.0),
+                bloom_quality: (v("r_bloom_quality").round() as i32).clamp(0, 1) as u32,
+                rt_dlights: v("r_shadow_realtime_dlight") != 0.0,
+                dlight_shadows: v("r_shadow_realtime_dlight_shadows") != 0.0,
+                shadow_quality: (v("r_shadow_quality").round() as i32).clamp(0, 2) as u32,
+                water_ripples: if v("r_enhancedwater") != 0.0 && v("r_waterripples") != 0.0 { v("r_waterripples_amount").clamp(0.0, 4.0) } else { 0.0 },
+                water_splashes: !mapper.lightmap && v("r_enhancedwater") != 0.0 && v("r_watersplash") != 0.0,
+                water_caustics: if v("r_enhancedwater") != 0.0 && v("r_watercaustics") != 0.0 { v("r_watercaustics_amount").clamp(0.0, 4.0) } else { 0.0 },
+                water_quality: (v("r_water_quality").round() as i32).clamp(0, 1) as u32,
+                gel_quality: (v("addon_gel_quality").round() as i32).clamp(0, 1) as u32,
+                shader_scope: v("r_shader_scope").clamp(0.0, 1.0) as u32,
+                shader_scale: v("r_shader_scale").clamp(0.0, 1.0) as u32,
+                hdr_lightmaps: v("r_hdr_lightmaps") != 0.0,
+                deluxemapping: v("r_deluxemapping") != 0.0,
+                deluxemapping_specular: v("r_deluxemapping_specular").clamp(0.0, 2.0),
+                goggles: qrender::Goggles::default(),
+                ..Settings::default()
+            };
+            self.settings_cache = Some((settings_key, s, skywind_cvar, reduce_motion));
+            (s, skywind_cvar, reduce_motion)
         };
+        settings.sky_wind = self.level.sky_wind.uniform(self.cl.time, skywind_cvar);
+        settings.edge_blur = if self.bullet_time.active && !reduce_motion { 0.65 } else { 0.0 };
+        settings.goggles = goggles;
         self.upload_ui_text();
         self.last_settings = Some(settings);
         let impacts = std::mem::take(&mut self.cl.shot_impacts);
@@ -531,6 +556,7 @@ impl Host {
         self.cl.weapon_impacts.clear();
         self.cl.impact_effects.clear();
         let gun_portals = crate::addons::portal_draw::gun_portals(&self.cl.portals, self.cv("addon_portal_view") != 0.0);
+        let (fte_quads, fte_quad_batches) = if view.is_some() { self.fte.quads() } else { (&[][..], &[][..]) };
         let frame = qrender::RenderFrame {
             gun_portals: &gun_portals,
             teleport_ripples: self.impacts.teleport_ripples(),
@@ -541,6 +567,8 @@ impl Host {
             fte_vertices: &fte.0,
             fte_indices: &fte.1,
             fte_batches: &fte.2,
+            fte_quads,
+            fte_quad_batches,
             dlights: &dls,
             lightstyles: &styles,
             fog,
