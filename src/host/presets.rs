@@ -60,7 +60,7 @@ const CLASSIC: &[(&str, &str)] = &[];
 /// Every enhancement on at its highest quality.
 const ENHANCED: &[(&str, &str)] = &[
     ("r_msaa", "8"),
-    ("r_ssao", "3"),
+    ("r_ssao", "2"),
     ("r_motionblur", "1"),
     ("r_speedblur", "1"),
     ("r_bloom", "1"),

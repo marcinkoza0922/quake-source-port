@@ -19,6 +19,8 @@ pub(crate) struct BrushEnt {
     pub(crate) axis: Option<[Vec3; 3]>,
     pub(crate) mins: Vec3,
     pub(crate) maxs: Vec3,
+    /// Running max of `maxs.x` over `0..=i` when sorted by `mins.x` for O(log N + K) trace pruning.
+    pub(crate) prefix_max_x: f32,
 }
 
 impl BrushEnt {
@@ -58,7 +60,13 @@ pub(crate) fn brush_ents(cl: &ClientState, cm: &CollisionModel) -> Vec<BrushEnt>
             let (f, r, u) = qcore::math::angle_vectors(Vec3::from(e.angles));
             [f, r, u]
         });
-        out.push(BrushEnt { entity: i as i32, submodel: sub, origin, axis, mins, maxs });
+        out.push(BrushEnt { entity: i as i32, submodel: sub, origin, axis, mins, maxs, prefix_max_x: maxs.x });
+    }
+    out.sort_unstable_by(|a, b| a.mins.x.total_cmp(&b.mins.x));
+    let mut max_x = f32::NEG_INFINITY;
+    for b in &mut out {
+        max_x = max_x.max(b.maxs.x);
+        b.prefix_max_x = max_x;
     }
     out
 }

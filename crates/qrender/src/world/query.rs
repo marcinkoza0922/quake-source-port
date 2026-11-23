@@ -58,9 +58,92 @@ impl World {
     /// Stores the liquid surface above each submerged world face in its
     /// vertices (caustics). Probes just off the face at its corners and centre.
     pub(super) fn bake_liquid(&mut self, first: usize, count: usize) {
+        use qformats::bsp::{CONTENTS_LAVA, CONTENTS_SLIME, CONTENTS_WATER};
+        if self.bsp_nodes.is_empty() {
+            return;
+        }
+        let is_liquid_leaf = |leaf: usize| -> bool {
+            self.leafs.get(leaf).is_some_and(|l| {
+                matches!(l.contents, CONTENTS_WATER | CONTENTS_LAVA | CONTENTS_SLIME)
+            })
+        };
+        // Mark every BSP node whose subtree contains at least one liquid leaf
+        // so dry faces skip probing in a few plane tests.
+        let mut node_has_liquid = vec![false; self.bsp_nodes.len()];
+        let mut mark_stack: Vec<(usize, bool)> = Vec::with_capacity(64);
+        mark_stack.push((0, false));
+        while let Some((ni, visited)) = mark_stack.pop() {
+            let Some(node) = self.bsp_nodes.get(ni) else { continue };
+            if visited {
+                let mut any = false;
+                for c in node.children {
+                    if c < 0 {
+                        any |= is_liquid_leaf((-(c + 1)) as usize);
+                    } else if let Some(&has) = node_has_liquid.get(c as usize) {
+                        any |= has;
+                    }
+                }
+                node_has_liquid[ni] = any;
+            } else {
+                mark_stack.push((ni, true));
+                for c in node.children {
+                    if c >= 0 && (c as usize) < self.bsp_nodes.len() {
+                        mark_stack.push((c as usize, false));
+                    }
+                }
+            }
+        }
+        if !node_has_liquid[0] {
+            return;
+        }
+        let mut box_stack: Vec<i32> = Vec::with_capacity(64);
         for si in first..(first + count).min(self.surfaces.len()) {
             let s = &self.surfaces[si];
             if s.num_indices == 0 || !matches!(s.kind, TextureKind::Normal | TextureKind::Fence) {
+                continue;
+            }
+            // All probes lie within 2 units of the face's AABB; skip faces
+            // whose expanded AABB cannot intersect any liquid leaf.
+            let bmin = s.mins.map(|c| c - 2.0);
+            let bmax = s.maxs.map(|c| c + 2.0);
+            box_stack.clear();
+            box_stack.push(0);
+            let mut touches_liquid = false;
+            while let Some(n) = box_stack.pop() {
+                if n < 0 {
+                    if is_liquid_leaf((-(n + 1)) as usize) {
+                        touches_liquid = true;
+                        break;
+                    }
+                    continue;
+                }
+                let ni = n as usize;
+                if !node_has_liquid.get(ni).copied().unwrap_or(false) {
+                    continue;
+                }
+                let node = &self.bsp_nodes[ni];
+                let pl = &self.planes[node.plane.max(0) as usize];
+                let mut dmin = -pl.dist;
+                let mut dmax = -pl.dist;
+                for k in 0..3 {
+                    let a = pl.normal[k] * bmin[k];
+                    let b = pl.normal[k] * bmax[k];
+                    if a < b {
+                        dmin += a;
+                        dmax += b;
+                    } else {
+                        dmin += b;
+                        dmax += a;
+                    }
+                }
+                if dmax >= 0.0 {
+                    box_stack.push(node.children[0]);
+                }
+                if dmin < 0.0 {
+                    box_stack.push(node.children[1]);
+                }
+            }
+            if !touches_liquid {
                 continue;
             }
             let base = self.indices[s.first_index as usize] as usize;
@@ -112,11 +195,16 @@ impl World {
         }
     }
 
-    /// Per-frame leaf bitset for GPU culling: PVS leaves of the eye's leaf
-    /// (with surfaces) whose box touches the frustum. `out` gets one bit per
-    /// leaf index.
+    #[cfg(test)]
     pub fn leaf_bits(&mut self, eye: [f32; 3], frustum: &[[f32; 4]; 4], out: &mut Vec<u32>) {
         let leaf = self.view_leaf(eye);
+        self.leaf_bits_for_leaf(leaf, frustum, out);
+    }
+
+    /// Per-frame leaf bitset for GPU culling: PVS leaves of an explicit leaf
+    /// (with surfaces) whose box touches the frustum. `out` gets one bit per
+    /// leaf index.
+    pub fn leaf_bits_for_leaf(&mut self, leaf: usize, frustum: &[[f32; 4]; 4], out: &mut Vec<u32>) {
         self.mark_leaves(leaf);
         out.clear();
         out.resize(self.leafs.len().div_ceil(32), 0);

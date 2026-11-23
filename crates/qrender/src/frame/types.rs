@@ -315,6 +315,7 @@ pub(super) struct CullFrame {
 #[derive(Clone, Copy)]
 pub(super) struct CullPush {
     pub(super) frustum: [[f32; 4]; 4],
+    pub(super) clip: [f32; 4],
     pub(super) eye: [f32; 4],
     pub(super) framecount: u32,
     pub(super) nmarks: u32,
@@ -324,6 +325,8 @@ pub(super) struct CullPush {
     pub(super) pad: u32,
     pub(super) max_lm: u32,
 }
+
+const _: () = assert!(std::mem::size_of::<CullPush>() <= 128);
 
 pub(super) struct AliasDraw {
     pub(super) model: usize,

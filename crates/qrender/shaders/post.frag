@@ -30,6 +30,7 @@ layout(push_constant) uniform P {
     uint water;       // WaterScreen::packed: refraction liquid, droplet liquid, quality, seed
     float drops;      // seconds since leaving the liquid; < 0 no droplets
 } pc;
+layout(constant_id = 0) const bool FAST_POST = false;
 layout(location = 0) out vec4 o_color;
 #include "water_screen.glsl"
 
@@ -179,6 +180,17 @@ vec3 scene_q(vec2 q) {
     return texture(textures[nonuniformEXT(pc.scene)], clamp(q, 0.0, 1.0) * pc.uvs).rgb;
 }
 void main() {
+    if (FAST_POST) {
+        vec2 uv = clamp(i_uv, 0.0, 1.0) * pc.uvs;
+        vec3 c = texture(textures[nonuniformEXT(pc.scene)], uv).rgb;
+        if (pc.bloom > 0.0)
+            c += texture(textures[nonuniformEXT(pc.bloom_tex)], clamp(i_uv, 0.0, 1.0) * pc.bloom_uv).rgb * pc.bloom;
+        c = mix(c, pc.blend.rgb, pc.blend.a);
+        c = pow(max(c * pc.contrast, vec3(0.0)), vec3(pc.gamma));
+        c += SUPPRESS_BANDING() * pc.dither;
+        o_color = vec4(c, 1.0);
+        return;
+    }
     vec2 q = pc.warp >= 0.0 ? water_warp(i_uv) : i_uv;
     float aspect = pc.mb_w * pc.uvs.x / max(pc.mb_h * pc.uvs.y, 1.0);
     uint uw = pc.water & 3u, dk = (pc.water >> 2) & 3u;

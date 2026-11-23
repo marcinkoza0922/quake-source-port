@@ -28,9 +28,25 @@ impl World for BspWorld<'_> {
                 return best;
             }
         }
-        for be in self.ents {
-            let (lo, hi) = (start.min(best.endpos) - Vec3::splat(1.0), start.max(best.endpos) + Vec3::splat(1.0));
-            if (0..3).any(|k| be.mins[k] > hi[k] || be.maxs[k] < lo[k]) {
+        if self.ents.is_empty() {
+            return best;
+        }
+        let mut lo = start.min(best.endpos) - Vec3::splat(1.0);
+        let mut hi = start.max(best.endpos) + Vec3::splat(1.0);
+        // `self.ents` is sorted by `mins.x` with running `prefix_max_x`:
+        // binary-search past all entities with `mins.x > hi.x`, then scan
+        // backwards and stop as soon as `prefix_max_x < lo.x`.
+        let end_idx = self.ents.partition_point(|be| be.mins.x <= hi.x);
+        for be in self.ents[..end_idx].iter().rev() {
+            if be.prefix_max_x < lo.x {
+                break;
+            }
+            if be.maxs.x < lo.x
+                || be.mins.y > hi.y
+                || be.maxs.y < lo.y
+                || be.mins.z > hi.z
+                || be.maxs.z < lo.z
+            {
                 continue;
             }
             let tr = self.cm.hull(be.submodel, 0).trace(be.local(start), be.local(end));
@@ -40,6 +56,8 @@ impl World for BspWorld<'_> {
                 if best.frac <= 0.0 {
                     break;
                 }
+                lo = start.min(best.endpos) - Vec3::splat(1.0);
+                hi = start.max(best.endpos) + Vec3::splat(1.0);
             }
         }
         best

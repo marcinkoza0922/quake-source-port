@@ -10,33 +10,83 @@ impl World {
 
     /// R_LightPoint plus optional world-space baked light direction (from `.dlit` / `LIGHTINGDIR`).
     pub fn light_point_dir(&self, p: [f32; 3], styles: &[i32]) -> Option<([f32; 3], Option<[f32; 3]>)> {
-        if let Some(grid) = &self.lightgrid
-            && let Some(rgb) = grid.sample(p, styles)
-        {
-            return Some((rgb, None));
+        if let Some(grid) = &self.lightgrid {
+            let mut sh = 0xcbf2_9ce4_8422_2325u64;
+            for &s in styles.iter().take(64) {
+                sh = (sh ^ s as u64).wrapping_mul(0x0100_0000_01b3);
+            }
+            let key = p.map(|v| v.to_bits() as i32);
+            let cached = self.lightgrid_cache.borrow().get(&key).copied();
+            let rgb = match cached {
+                Some((h, rgb)) if h == sh => rgb,
+                _ => {
+                    let rgb = grid.sample(p, styles);
+                    let mut c = self.lightgrid_cache.borrow_mut();
+                    if c.len() >= 8192 {
+                        c.clear();
+                    }
+                    c.insert(key, (sh, rgb));
+                    rgb
+                }
+            };
+            if let Some(rgb) = rgb {
+                return Some((rgb, None));
+            }
         }
         if !self.has_light || self.bsp_nodes.is_empty() {
             return Some(([255.0; 3], None));
         }
         let key = p.map(|v| v.floor() as i32);
-        let cached = self.light_cache.borrow().get(&key).copied();
-        let hit = cached.unwrap_or_else(|| {
-            let end = [p[0], p[1], p[2] - 8192.0];
-            let mut maxdist = 8192.0f32;
-            let h = self.recursive_light(0, p, p, end, &mut maxdist);
-            let mut c = self.light_cache.borrow_mut();
-            // Moving entities add a new key each frame; keep it bounded.
-            if c.len() >= 8192 {
-                c.clear();
+        let style_vals_for = |si: usize| -> [i32; 4] {
+            let Some(s) = self.surfaces.get(si) else { return [0; 4] };
+            let mut vals = [0i32; 4];
+            for (dst, &st) in vals.iter_mut().zip(&s.styles) {
+                if st == 255 {
+                    break;
+                }
+                *dst = styles.get(st as usize).copied().unwrap_or(256);
             }
-            c.insert(key, h);
-            h
-        });
-        match hit {
-            LightHit::Miss => None,
-            LightHit::Black => Some(([0.0; 3], None)),
-            LightHit::Surf { surf, ds, dt } => Some(self.interpolate_light_dir(surf as usize, ds, dt, styles)),
+            vals
+        };
+        let cached = self.light_cache.borrow().get(&key).copied();
+        if let Some(entry) = cached {
+            return match entry.hit {
+                LightHit::Miss => None,
+                LightHit::Black => Some(([0.0; 3], None)),
+                LightHit::Surf { surf, ds, dt } => {
+                    let cur = style_vals_for(surf as usize);
+                    if cur == entry.style_vals {
+                        return Some((entry.rgb, entry.dir));
+                    }
+                    let (rgb, dir) = self.interpolate_light_dir(surf as usize, ds, dt, styles);
+                    if let Some(e) = self.light_cache.borrow_mut().get_mut(&key) {
+                        e.style_vals = cur;
+                        e.rgb = rgb;
+                        e.dir = dir;
+                    }
+                    Some((rgb, dir))
+                }
+            };
         }
+        let end = [p[0], p[1], p[2] - 8192.0];
+        let mut maxdist = 8192.0f32;
+        let hit = self.recursive_light(0, p, p, end, &mut maxdist);
+        let (style_vals, rgb, dir, result) = match hit {
+            LightHit::Miss => ([0; 4], [0.0; 3], None, None),
+            LightHit::Black => ([0; 4], [0.0; 3], None, Some(([0.0; 3], None))),
+            LightHit::Surf { surf, ds, dt } => {
+                let sv = style_vals_for(surf as usize);
+                let (rgb, dir) = self.interpolate_light_dir(surf as usize, ds, dt, styles);
+                (sv, rgb, dir, Some((rgb, dir)))
+            }
+        };
+        let mut c = self.light_cache.borrow_mut();
+        // Moving entities add a new key each frame; keep it bounded.
+        if c.len() >= 8192 {
+            c.clear();
+        }
+        c.insert(key, LightCacheEntry { hit, style_vals, rgb, dir });
+        result
     }
 
     /// InterpolateLightmap: bilinear between the four nearest luxels (supports RGB8,

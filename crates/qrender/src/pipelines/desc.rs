@@ -29,6 +29,8 @@ pub(super) struct Desc<'a> {
     /// Mirrored view (planar reflections): front faces wind the other way.
     pub(super) mirror: bool,
     pub(super) wire: bool,
+    /// Optional single `bool` fragment specialization constant (`constant_id = 0`).
+    pub(super) frag_spec_bool: Option<bool>,
 }
 
 pub(super) fn attr(
@@ -58,15 +60,25 @@ pub(super) fn bind(binding: u32, stride: u32, instance: bool) -> vk::VertexInput
 }
 
 pub(super) fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Result<vk::Pipeline> {
+    let spec_val: u32 = u32::from(d.frag_spec_bool.unwrap_or(false));
+    let spec_bytes = spec_val.to_ne_bytes();
+    let spec_map = [vk::SpecializationMapEntry { constant_id: 0, offset: 0, size: 4 }];
+    let spec_info = vk::SpecializationInfo::default()
+        .map_entries(&spec_map)
+        .data(&spec_bytes);
+    let mut fs_stage = vk::PipelineShaderStageCreateInfo::default()
+        .stage(vk::ShaderStageFlags::FRAGMENT)
+        .module(d.fs)
+        .name(c"main");
+    if d.frag_spec_bool.is_some() {
+        fs_stage = fs_stage.specialization_info(&spec_info);
+    }
     let stages = [
         vk::PipelineShaderStageCreateInfo::default()
             .stage(vk::ShaderStageFlags::VERTEX)
             .module(d.vs)
             .name(c"main"),
-        vk::PipelineShaderStageCreateInfo::default()
-            .stage(vk::ShaderStageFlags::FRAGMENT)
-            .module(d.fs)
-            .name(c"main"),
+        fs_stage,
     ];
     let vi = vk::PipelineVertexInputStateCreateInfo::default()
         .vertex_binding_descriptions(d.bindings)

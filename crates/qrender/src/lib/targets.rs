@@ -31,7 +31,9 @@ impl Renderer {
             if let Some(rt) = t.rt_refl {
                 self.textures[rt.slot as usize] = None;
                 self.gpu.free_image(rt.color);
-                self.gpu.free_image(rt.depth);
+            }
+            if let Some(d) = t.half_depth {
+                self.gpu.free_image(d);
             }
             self.gpu.free_image(t.ao);
             self.gpu.free_image(t.vel);
@@ -42,7 +44,6 @@ impl Renderer {
             }
             if let Some(b) = t.bloom {
                 self.textures[b.scene_slot as usize] = None;
-                self.gpu.free_image(b.depth);
                 for (img, slot, _, _) in b.levels {
                     self.textures[slot as usize] = None;
                     self.gpu.free_image(img);
@@ -213,6 +214,19 @@ impl Renderer {
             Some(quality) => Some(self.create_bloom_targets((base_w, base_h), quality, color.view)?),
             None => None,
         };
+        let half_depth = if bloom.is_some() {
+            Some(self.gpu.image(
+                (base_w / 2).max(1),
+                (base_h / 2).max(1),
+                1,
+                1,
+                DEPTH_FORMAT,
+                vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
+                vk::ImageAspectFlags::DEPTH,
+            )?)
+        } else {
+            None
+        };
         self.targets = Some(Targets {
             portals,
             portal_depth,
@@ -227,6 +241,7 @@ impl Renderer {
             ao_source: None,
             droplets: None,
             rt_refl: None,
+            half_depth,
             ao,
             ao_w,
             ao_h,
@@ -255,15 +270,6 @@ impl Renderer {
         let scene_slot = slot(self, color_view, self.sampler_linear)?;
         let div = if quality == 0 { 4 } else { 2 };
         let (mut lw, mut lh) = ((base.0 / div).max(1), (base.1 / div).max(1));
-        let depth = self.gpu.image(
-            lw,
-            lh,
-            1,
-            1,
-            DEPTH_FORMAT,
-            vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
-            vk::ImageAspectFlags::DEPTH,
-        )?;
         let mut levels = Vec::new();
         loop {
             let img = self.gpu.image(lw, lh, 1, 1, pipelines::BLOOM_FORMAT, usage, vk::ImageAspectFlags::COLOR)?;
@@ -274,7 +280,7 @@ impl Renderer {
             }
             (lw, lh) = ((lw / 2).max(1), (lh / 2).max(1));
         }
-        Ok(BloomTargets { depth, scene_slot, levels })
+        Ok(BloomTargets { scene_slot, levels })
     }
 
     /// Allocate the SAO linear-depth mip chain on the first SSAO frame. Keep
@@ -341,15 +347,15 @@ impl Renderer {
     }
 
     /// Allocate the half-resolution single-sampled ray-traced water reflection
-    /// targets on the first RT frame.
+    /// targets on the first RT frame (sharing `Targets::half_depth` with bloom).
     pub(super) fn ensure_rt_refl(&mut self) -> Result<()> {
         if !self.targets.as_ref().is_some_and(|t| t.rt_refl.is_none()) {
             return Ok(());
         }
         self.idle();
-        let (sw, sh) = {
+        let (sw, sh, need_depth) = {
             let t = self.targets.as_ref().unwrap();
-            (t.scene_w.min(self.width.max(1)), t.scene_h.min(self.height.max(1)))
+            (t.scene_w.min(self.width.max(1)), t.scene_h.min(self.height.max(1)), t.half_depth.is_none())
         };
         let rw = (sw / 2).max(1);
         let rh = (sh / 2).max(1);
@@ -362,19 +368,22 @@ impl Renderer {
             vk::ImageUsageFlags::COLOR_ATTACHMENT | vk::ImageUsageFlags::SAMPLED,
             vk::ImageAspectFlags::COLOR,
         )?;
-        let depth = self.gpu.image(
-            rw,
-            rh,
-            1,
-            1,
-            DEPTH_FORMAT,
-            vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
-            vk::ImageAspectFlags::DEPTH,
-        )?;
+        if need_depth {
+            let depth = self.gpu.image(
+                rw,
+                rh,
+                1,
+                1,
+                DEPTH_FORMAT,
+                vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
+                vk::ImageAspectFlags::DEPTH,
+            )?;
+            self.targets.as_mut().unwrap().half_depth = Some(depth);
+        }
         let slot = self.alloc_slot()?;
         self.write_texture_descriptor(slot, color.view, self.sampler_linear);
         self.textures[slot as usize] = Some(Tex { image: None, level: false, sampling: Sampling::Linear });
-        self.targets.as_mut().unwrap().rt_refl = Some(RtReflTargets { color, depth, slot, width: rw, height: rh });
+        self.targets.as_mut().unwrap().rt_refl = Some(RtReflTargets { color, slot, width: rw, height: rh });
         Ok(())
     }
 

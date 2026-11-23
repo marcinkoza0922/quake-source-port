@@ -2,6 +2,8 @@ use super::*;
 pub(super) struct PortalDraw {
     pub portal: crate::portals::Portal,
     pub world: WorldDraw,
+    /// Optional GPU cull + indirect lightmap dispatch for this destination view.
+    pub cull: Option<CullFrame>,
     pub ubo: u32,
     pub scissor: vk::Rect2D,
     /// Aperture-narrowed destination frustum planes (`None` when scissor is empty).
@@ -100,6 +102,7 @@ impl Renderer {
         alphas: [f32; 4],
         lm: &mut LightmapRequests,
         teleport_ripples: bool,
+        fi: usize,
     ) -> Vec<PortalDraw> {
         let planar_reflections = self.reflection_mode(set) == 1;
         let (Some(v), Some(w)) = (view, self.world.as_mut()) else {
@@ -182,43 +185,61 @@ impl Renderer {
                 );
                 let dest_vp = mul(&v.vp, &portal.to_source());
                 let frustum = super::portal_scissor::frustum_planes(&dest_vp, scissor, portal_extent);
-                let world = if let Some(f) = frustum {
-                    let surfs = w.cpu.portal_surfaces(portal.pvs);
+                let (world, cull) = if let Some(f) = frustum {
                     let dest_eye = portal.to_destination(v.eye);
                     let clip = portal.clip();
-                    culled.clear();
-                    for &si in surfs.iter() {
-                        let Some(s) = w.cpu.surfaces.get(si as usize) else { continue };
-                        if s.num_indices == 0 || (portal.reflect && s.kind == TextureKind::Liquid) {
-                            continue;
-                        }
-                        if s.kind != TextureKind::Sky {
-                            let dd = dot(dest_eye, s.normal) - s.dist;
-                            if (dd < 0.0) != s.flipped {
+                    if w.cpu.hidden_surfaces.is_empty()
+                        && let Some((wd, cf)) = gpu_world_draw_ex(
+                            w,
+                            dynw,
+                            w.cpu.point_leaf(portal.pvs),
+                            dest_eye,
+                            &f,
+                            clip,
+                            time,
+                            alphas,
+                            fi,
+                        )
+                    {
+                        (wd, Some(cf))
+                    } else {
+                        let surfs = w.cpu.portal_surfaces(portal.pvs);
+                        culled.clear();
+                        for &si in surfs.iter() {
+                            let Some(s) = w.cpu.surfaces.get(si as usize) else { continue };
+                            if s.num_indices == 0 || (portal.reflect && s.kind == TextureKind::Liquid) {
                                 continue;
                             }
+                            if s.kind != TextureKind::Sky {
+                                let dd = dot(dest_eye, s.normal) - s.dist;
+                                if (dd < 0.0) != s.flipped {
+                                    continue;
+                                }
+                            }
+                            if !super::portal_scissor::box_in_plane(clip, s.mins, s.maxs)
+                                || !box_in_frustum(&f, s.mins, s.maxs)
+                            {
+                                continue;
+                            }
+                            culled.push(si);
                         }
-                        if !super::portal_scissor::box_in_plane(clip, s.mins, s.maxs)
-                            || !box_in_frustum(&f, s.mins, s.maxs)
-                        {
-                            continue;
-                        }
-                        culled.push(si);
+                        let wd = build_world_draw(
+                            w,
+                            &mut self.buckets,
+                            &mut self.world_draw_scratch,
+                            dynw,
+                            &culled,
+                            false,
+                            time,
+                            alphas,
+                            1.0,
+                            ident(),
+                            lm,
+                        );
+                        (wd, None)
                     }
-                    build_world_draw(
-                        w,
-                        &mut self.buckets,
-                        dynw,
-                        &culled,
-                        false,
-                        time,
-                        alphas,
-                        1.0,
-                        ident(),
-                        lm,
-                    )
                 } else {
-                    WorldDraw {
+                    (WorldDraw {
                         model: ident(),
                         zfix: false,
                         main_visible: false,
@@ -233,9 +254,9 @@ impl Renderer {
                         bounds: [0.0; 4],
                         polys: 0,
                         triangles: 0,
-                    }
+                    }, None)
                 };
-                Some(PortalDraw { portal, world, ubo, scissor, frustum, parent, depth, fte: Vec::new(), fte_quads: Vec::new() })
+                Some(PortalDraw { portal, world, cull, ubo, scissor, frustum, parent, depth, fte: Vec::new(), fte_quads: Vec::new() })
             })
             .collect()
     }
@@ -289,6 +310,64 @@ impl Renderer {
                     }
                 };
                 timestamp(0);
+                if let Some(c) = &portal.cull {
+                    let cs = vk::PipelineBindPoint::COMPUTE;
+                    d.cmd_copy_buffer(
+                        cmd,
+                        f.dynbuf.buf,
+                        c.cmdbuf,
+                        &[vk::BufferCopy { src_offset: c.stage_ofs, dst_offset: 0, size: c.stage_len }],
+                    );
+                    let tb = [vk::MemoryBarrier::default()
+                        .src_access_mask(vk::AccessFlags::TRANSFER_WRITE)
+                        .dst_access_mask(vk::AccessFlags::SHADER_READ | vk::AccessFlags::SHADER_WRITE)];
+                    d.cmd_pipeline_barrier(
+                        cmd,
+                        vk::PipelineStageFlags::TRANSFER,
+                        vk::PipelineStageFlags::COMPUTE_SHADER,
+                        vk::DependencyFlags::empty(),
+                        &tb,
+                        &[],
+                        &[],
+                    );
+                    d.cmd_bind_pipeline(cmd, cs, p.cull);
+                    d.cmd_bind_descriptor_sets(cmd, cs, p.cull_layout, 0, &[f.cull_set], &[]);
+                    d.cmd_push_constants(cmd, p.cull_layout, vk::ShaderStageFlags::COMPUTE, 0, bytes_of(&[c.push]));
+                    d.cmd_dispatch(cmd, c.groups, 1, 1);
+                    let mb = [vk::MemoryBarrier::default()
+                        .src_access_mask(vk::AccessFlags::SHADER_WRITE)
+                        .dst_access_mask(
+                            vk::AccessFlags::INDIRECT_COMMAND_READ
+                                | vk::AccessFlags::INDEX_READ
+                                | vk::AccessFlags::SHADER_READ,
+                        )];
+                    d.cmd_pipeline_barrier(
+                        cmd,
+                        vk::PipelineStageFlags::COMPUTE_SHADER,
+                        vk::PipelineStageFlags::DRAW_INDIRECT
+                            | vk::PipelineStageFlags::VERTEX_INPUT
+                            | vk::PipelineStageFlags::COMPUTE_SHADER,
+                        vk::DependencyFlags::empty(),
+                        &mb,
+                        &[],
+                        &[],
+                    );
+                    if let Some(lm) = &self.lightmap {
+                        let lm_rng = gpu::range(vk::ImageAspectFlags::COLOR, 1, lm.layers);
+                        gpu::barrier(d, cmd, lm.image, lm_rng, vk::ImageLayout::GENERAL, vk::ImageLayout::GENERAL);
+                        d.cmd_bind_pipeline(cmd, cs, p.lightmap);
+                        d.cmd_bind_descriptor_sets(cmd, cs, p.comp_layout, 0, &[f.comp_set], &[]);
+                        d.cmd_push_constants(
+                            cmd,
+                            p.comp_layout,
+                            vk::ShaderStageFlags::COMPUTE,
+                            0,
+                            bytes_of(&[(OFS_VIS / 4) as u32, MAX_VIS as u32]),
+                        );
+                        d.cmd_dispatch_indirect(cmd, c.cmdbuf, c.disp_ofs);
+                        gpu::barrier(d, cmd, lm.image, lm_rng, vk::ImageLayout::GENERAL, vk::ImageLayout::GENERAL);
+                    }
+                }
                 let img = &t.portals[i].0;
                 gpu::barrier(
                     d,
@@ -504,18 +583,26 @@ impl Renderer {
                 let mb = [vk::MemoryBarrier::default()
                     .src_access_mask(
                         vk::AccessFlags::COLOR_ATTACHMENT_WRITE
-                            | vk::AccessFlags::DEPTH_STENCIL_ATTACHMENT_WRITE,
+                            | vk::AccessFlags::DEPTH_STENCIL_ATTACHMENT_WRITE
+                            | vk::AccessFlags::INDIRECT_COMMAND_READ
+                            | vk::AccessFlags::INDEX_READ,
                     )
                     .dst_access_mask(
                         vk::AccessFlags::COLOR_ATTACHMENT_WRITE
-                            | vk::AccessFlags::DEPTH_STENCIL_ATTACHMENT_WRITE,
+                            | vk::AccessFlags::DEPTH_STENCIL_ATTACHMENT_WRITE
+                            | vk::AccessFlags::TRANSFER_WRITE
+                            | vk::AccessFlags::SHADER_WRITE,
                     )];
                 d.cmd_pipeline_barrier(
                     cmd,
                     vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT
-                        | vk::PipelineStageFlags::LATE_FRAGMENT_TESTS,
+                        | vk::PipelineStageFlags::LATE_FRAGMENT_TESTS
+                        | vk::PipelineStageFlags::DRAW_INDIRECT
+                        | vk::PipelineStageFlags::VERTEX_INPUT,
                     vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT
-                        | vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS,
+                        | vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS
+                        | vk::PipelineStageFlags::TRANSFER
+                        | vk::PipelineStageFlags::COMPUTE_SHADER,
                     vk::DependencyFlags::empty(),
                     &mb,
                     &[],

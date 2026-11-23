@@ -84,16 +84,20 @@ pub struct SubModel {
     pub maxs: [f32; 3],
 }
 
+type LightGridCache = std::collections::HashMap<[i32; 3], (u64, Option<[f32; 3]>), PointHash>;
+
 pub struct World {
     pub(super) transparent_liquids: bool,
     /// Bitmask of liquid types (`1 << (type - 1)` for water/lava/slime/tele)
     /// whose PVS already includes other-content leaves (or are absent).
     pub(super) water_vised: u8,
     /// R_LightPoint cache (ironwail's per-entity lightcache_t): sample point
-    /// floored to whole units -> trace result. Entities that don't move skip
-    /// the BSP trace; the colour is re-read from the lightmap each call so
-    /// lightstyles still animate.
-    light_cache: std::cell::RefCell<std::collections::HashMap<[i32; 3], LightHit, PointHash>>,
+    /// floored to whole units -> trace result plus cached colour/direction for
+    /// the last seen lightstyle values.
+    light_cache: std::cell::RefCell<std::collections::HashMap<[i32; 3], LightCacheEntry, PointHash>>,
+    /// Per-point cache for BSPX `LIGHTGRID_OCTREE` samples keyed by exact bit
+    /// coordinates and hashed against the current lightstyles slice.
+    lightgrid_cache: std::cell::RefCell<LightGridCache>,
     pub vertices: Vec<WorldVertex>,
     pub indices: Vec<u32>,
     pub surfaces: Vec<Surface>,
@@ -164,8 +168,11 @@ impl Packer {
                 if j == w {
                     bx = i;
                     best = best2;
+                    i += 1;
+                } else {
+                    // Any window covering column `i + j` has max >= `best`.
+                    i += j + 1;
                 }
-                i += 1;
             }
             if best + h <= ATLAS {
                 for k in 0..w {

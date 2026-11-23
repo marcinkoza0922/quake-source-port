@@ -1,9 +1,17 @@
 use super::*;
 
+/// Reused scratch buffers for [`build_world_draw`] to avoid per-entity/portal `Vec` allocations.
+#[derive(Default)]
+pub(crate) struct WorldDrawScratch {
+    cats: [Vec<vk::DrawIndexedIndirectCommand>; 4],
+    opaque_nofb: Vec<vk::DrawIndexedIndirectCommand>,
+}
+
 #[allow(clippy::too_many_arguments)]
 pub(super) fn build_world_draw(
     w: &WorldGpu,
     buckets: &mut [Vec<u32>],
+    scratch: &mut WorldDrawScratch,
     dynw: &mut Dyn,
     surfs: &[u32],
     alt: bool,
@@ -24,8 +32,10 @@ pub(super) fn build_world_draw(
     }
     let mut polys = 0;
     let mut triangles = 0;
-    let mut cats: [Vec<vk::DrawIndexedIndirectCommand>; 4] = Default::default();
-    let mut opaque_nofb: Vec<vk::DrawIndexedIndirectCommand> = Vec::new();
+    for c in &mut scratch.cats {
+        c.clear();
+    }
+    scratch.opaque_nofb.clear();
     for (t, b) in buckets.iter_mut().enumerate() {
         if b.is_empty() {
             continue;
@@ -65,13 +75,13 @@ pub(super) fn build_world_draw(
             first_instance: t as u32,
         };
         if cat == 0 && !w.tex_has_fb.get(t).copied().unwrap_or(false) {
-            opaque_nofb.push(cmd);
+            scratch.opaque_nofb.push(cmd);
         } else {
-            cats[cat].push(cmd);
+            scratch.cats[cat].push(cmd);
         }
     }
-    let fb_count = cats[0].len() as u32;
-    cats[0].extend(opaque_nofb);
+    let fb_count = scratch.cats[0].len() as u32;
+    scratch.cats[0].extend_from_slice(&scratch.opaque_nofb);
     let mut put = |c: &Vec<vk::DrawIndexedIndirectCommand>| match dynw.push(c, 16) {
         Some(ofs) if !c.is_empty() => Range {
             ofs,
@@ -79,7 +89,7 @@ pub(super) fn build_world_draw(
         },
         _ => Range::default(),
     };
-    let opaque = put(&cats[0]);
+    let opaque = put(&scratch.cats[0]);
     let opaque_fb = Range { ofs: opaque.ofs, count: fb_count.min(opaque.count) };
     WorldDraw {
         model,
@@ -88,9 +98,9 @@ pub(super) fn build_world_draw(
         alpha: ent_alpha,
         opaque,
         opaque_fb,
-        sky: put(&cats[1]),
-        water: [put(&cats[2]), Range::default(), Range::default(), Range::default()],
-        water_alpha: [put(&cats[3]), Range::default(), Range::default(), Range::default()],
+        sky: put(&scratch.cats[1]),
+        water: [put(&scratch.cats[2]), Range::default(), Range::default(), Range::default()],
+        water_alpha: [put(&scratch.cats[3]), Range::default(), Range::default(), Range::default()],
         ibuf: None,
         cbuf: None,
         bounds: [0.0; 4],
@@ -110,8 +120,26 @@ pub(super) fn gpu_world_draw(
     alphas: [f32; 4],
     fi: usize,
 ) -> Option<(WorldDraw, CullFrame)> {
+    let leaf = wg.cpu.view_leaf(vs.eye);
+    gpu_world_draw_ex(wg, dynw, leaf, vs.eye, &vs.frustum, [0.0, 0.0, 0.0, 1.0], time, alphas, fi)
+}
+
+/// Generalised GPU world cull for any view (main or destination portal) with an
+/// explicit PVS leaf, eye position (backface test), frustum and optional clip plane.
+#[allow(clippy::too_many_arguments)]
+pub(super) fn gpu_world_draw_ex(
+    wg: &mut WorldGpu,
+    dynw: &mut Dyn,
+    leaf: usize,
+    eye: [f32; 3],
+    frustum: &[[f32; 4]; 4],
+    clip: [f32; 4],
+    time: f64,
+    alphas: [f32; 4],
+    fi: usize,
+) -> Option<(WorldDraw, CullFrame)> {
     let mut bits = std::mem::take(&mut wg.scratch_bits);
-    wg.cpu.leaf_bits(vs.eye, &vs.frustum, &mut bits);
+    wg.cpu.leaf_bits_for_leaf(leaf, frustum, &mut bits);
     let ntex = wg.tex_info.len().max(1) as u32;
     let c = &mut wg.cull;
     c.framecount = c.framecount.wrapping_add(1).max(1);
@@ -166,8 +194,9 @@ pub(super) fn gpu_world_draw(
         triangles: 0,
     };
     let push = CullPush {
-        frustum: vs.frustum,
-        eye: [vs.eye[0], vs.eye[1], vs.eye[2], 0.0],
+        frustum: *frustum,
+        clip,
+        eye: [eye[0], eye[1], eye[2], 0.0],
         framecount: c.framecount,
         nmarks: c.nmarks,
         ncmds: cmds.len() as u32,

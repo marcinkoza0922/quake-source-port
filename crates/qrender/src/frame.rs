@@ -17,6 +17,7 @@ pub use math::*;
 mod world_draw;
 mod mapper;
 use world_draw::*;
+pub(super) use world_draw::WorldDrawScratch;
 mod lightmaps;
 mod bloom;
 mod dlights;
@@ -270,7 +271,7 @@ impl Renderer {
             h.max(1) as f32 * (scene_h as f32 / sh.max(1) as f32),
         ];
         let mut portal_draws = if fr.settings.teleport_windows || !fr.gun_portals.is_empty() || refl_mode == 1 {
-            self.prepare_portals(view.as_ref(), [scene_w, scene_h], fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis, ripple_count > 0)
+            self.prepare_portals(view.as_ref(), [scene_w, scene_h], fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis, ripple_count > 0, fi)
         } else {
             Vec::new()
         };
@@ -290,14 +291,14 @@ impl Renderer {
                             .then_some(i as u32)
                     }).collect();
                     world_draws.push(build_world_draw(
-                        wg, &mut self.buckets, &mut dynw, &surfs, false, time,
+                        wg, &mut self.buckets, &mut self.world_draw_scratch, &mut dynw, &surfs, false, time,
                         alphas, 1.0, ident(), &mut lm_vis,
                     ));
                 } else if measure {
                     let (surfs, count) = wg.cpu.view_surfaces(vs.eye, &vs.frustum);
                     leaves = count;
                     world_draws.push(build_world_draw(
-                        wg, &mut self.buckets, &mut dynw, &surfs, false, time,
+                        wg, &mut self.buckets, &mut self.world_draw_scratch, &mut dynw, &surfs, false, time,
                         alphas, 1.0, ident(), &mut lm_vis,
                     ));
                 } else if wg.cpu.hidden_surfaces.is_empty() {
@@ -308,7 +309,7 @@ impl Renderer {
                 } else {
                     let surfs = wg.cpu.surfaces_for_leaf(wg.cpu.view_leaf(vs.eye));
                     world_draws.push(build_world_draw(
-                        wg, &mut self.buckets, &mut dynw, &surfs, false, time,
+                        wg, &mut self.buckets, &mut self.world_draw_scratch, &mut dynw, &surfs, false, time,
                         alphas, 1.0, ident(), &mut lm_vis,
                     ));
                 }
@@ -462,6 +463,7 @@ impl Renderer {
                         let mut wd = build_world_draw(
                             wg,
                             &mut self.buckets,
+                            &mut self.world_draw_scratch,
                             &mut dynw,
                             &brush_surfs,
                             e.frame != 0,
@@ -1399,7 +1401,8 @@ impl Renderer {
             // (SSAO runs inside the scene, between opaque and translucent draws)
             let keep_depth = !vel_draws.is_empty() || bloom_on;
             let lm_rng = gpu::range(vk::ImageAspectFlags::COLOR, 1, lightmap.layers);
-            if let Some(c) = &cull {
+            let portal_gpu_cull = portal_draws.iter().any(|pd| pd.cull.is_some());
+            let run_cull = |c: &CullFrame| {
                 let cs = vk::PipelineBindPoint::COMPUTE;
                 dev.cmd_copy_buffer(
                     cmd,
@@ -1441,10 +1444,14 @@ impl Renderer {
                     &[],
                     &[],
                 );
+            };
+            if !portal_gpu_cull && let Some(c) = &cull {
+                run_cull(c);
             }
             ts(1);
             let lm_cpu = pi == 0 && lm_cpu_range.is_some();
-            if (lm_cpu || cull.is_some()) && self.world.is_some() {
+            let lm_indirect_now = !portal_gpu_cull && cull.is_some();
+            if (lm_cpu || lm_indirect_now) && self.world.is_some() {
                 gpu::barrier(
                     &dev,
                     cmd,
@@ -1472,7 +1479,7 @@ impl Renderer {
                         dev.cmd_dispatch(cmd, n, 1, 1);
                     }
                 }
-                if let Some(c) = &cull {
+                if lm_indirect_now && let Some(c) = &cull {
                     if lm_cpu {
                         // Portal and world lists can contain the same surface.
                         gpu::barrier(&dev, cmd, lightmap.image, lm_rng,
@@ -1620,6 +1627,39 @@ impl Renderer {
                 view,
                 st.portal_quality.min(2),
             );
+            if portal_gpu_cull && let Some(c) = &cull {
+                run_cull(c);
+                if self.world.is_some() {
+                    gpu::barrier(
+                        &dev,
+                        cmd,
+                        lightmap.image,
+                        lm_rng,
+                        vk::ImageLayout::GENERAL,
+                        vk::ImageLayout::GENERAL,
+                    );
+                    dev.cmd_bind_pipeline(cmd, vk::PipelineBindPoint::COMPUTE, p.lightmap);
+                    dev.cmd_bind_descriptor_sets(
+                        cmd,
+                        vk::PipelineBindPoint::COMPUTE,
+                        p.comp_layout,
+                        0,
+                        &comp_set,
+                        &[],
+                    );
+                    dev.cmd_push_constants(cmd, p.comp_layout, vk::ShaderStageFlags::COMPUTE,
+                        0, bytes_of(&[(OFS_VIS / 4) as u32, MAX_VIS as u32]));
+                    dev.cmd_dispatch_indirect(cmd, c.cmdbuf, c.disp_ofs);
+                    gpu::barrier(
+                        &dev,
+                        cmd,
+                        lightmap.image,
+                        lm_rng,
+                        vk::ImageLayout::GENERAL,
+                        vk::ImageLayout::GENERAL,
+                    );
+                }
+            }
             if rt_half_on && view.is_some() {
                 self.record_rt_refl(cmd, fi, ubo_ofs, [scene_w, scene_h], [sw, sh], world_draws);
             }
@@ -2119,8 +2159,8 @@ impl Renderer {
                 vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
             );
 
-            let bloom = match (&t.bloom, bloom_on) {
-                (Some(b), true) => {
+            let bloom = match (&t.bloom, &t.half_depth, bloom_on) {
+                (Some(b), Some(half_depth), true) => {
                     let gs = bloom::GlowScene {
                         world: self.world.as_ref(),
                         models: &self.models,
@@ -2135,7 +2175,7 @@ impl Renderer {
                         soft_enabled: soft_active,
                         samples,
                     };
-                    let r = bloom::record(&dev, cmd, p, set[0], ubo_ofs, b, [scene_w, scene_h], [sw, sh], st, &gs);
+                    let r = bloom::record(&dev, cmd, p, set[0], ubo_ofs, b, half_depth, [scene_w, scene_h], [sw, sh], st, &gs);
                     dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
                     Some(r)
                 }
@@ -2207,31 +2247,42 @@ impl Renderer {
             dev.cmd_set_viewport(cmd, 0, &[vp_cell]);
             dev.cmd_set_scissor(cmd, 0, &[cell_area]);
             dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
-            dev.cmd_bind_pipeline(cmd, gfx, p.post);
             let mb = if vel_draws.is_empty() { 0.0 } else { st.motion_blur.min(4.0) / (60.0 * mb_dt as f32) };
+            let post_mode = crate::softemu::post_mode(st);
+            let post_cb = st.colorblind.min(3);
+            let post_goggles = st.goggles.mode.min(2);
+            let post_speed_blur = pass.speed_blur.max(st.edge_blur.clamp(0.0, 1.0));
+            let post_fast = post_mode == 0
+                && post_cb == 0
+                && post_goggles == 0
+                && mb == 0.0
+                && post_speed_blur == 0.0
+                && pass.warp < 0.0
+                && (post_water & 0xf) == 0;
+            dev.cmd_bind_pipeline(cmd, gfx, if post_fast { p.post_fast } else { p.post });
             push(bytes_of(&[PostPush {
                 blend,
                 gamma: st.gamma.clamp(0.1, 4.0),
                 contrast: st.contrast.clamp(0.1, 4.0),
                 scene: t.color_slot,
                 dither: crate::softemu::post_dither(st),
-                mode: crate::softemu::post_mode(st),
+                mode: post_mode,
                 scale: if let Some((_, _, pw, _)) = slang_src {
                     sw.max(1) as f32 / pw.max(1) as f32
                 } else {
                     self.render_scale
                 },
-                colorblind: st.colorblind.min(3),
+                colorblind: post_cb,
                 vel_tex: t.vel_slot,
                 // blur length: r_motionblur × the motion over 1/60 s
                 mbx: mb * scene_w as f32 / sw as f32,
                 mby: mb * scene_h as f32 / sh as f32,
                 uvs: [rect[2] as f32 / w.max(1) as f32, rect[3] as f32 / h.max(1) as f32],
-                goggles: st.goggles.mode.min(2),
+                goggles: post_goggles,
                 g_gain: st.goggles.intensity.clamp(0.25, 3.0),
                 g_noise: st.goggles.noise.clamp(0.0, 2.0),
                 g_time: (fr.time % 1000.0) as f32,
-                speed_blur: pass.speed_blur.max(st.edge_blur.clamp(0.0, 1.0)),
+                speed_blur: post_speed_blur,
                 mb_quality: st.motion_blur_quality.min(1),
                 mb_w: w.max(1) as f32,
                 mb_h: h.max(1) as f32,

@@ -192,6 +192,7 @@ impl Renderer {
             sky_layers: [NO_TEX; 2],
             skybox: None,
             buckets: Vec::new(),
+            world_draw_scratch: Default::default(),
             ui_verts: Vec::new(),
             ui_ranges: Vec::new(),
             needs_resize: false,

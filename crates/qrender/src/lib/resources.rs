@@ -40,7 +40,6 @@ pub(super) struct AoSource {
 /// Half-resolution single-sampled targets for ray-traced water reflections.
 pub(super) struct RtReflTargets {
     pub(super) color: Image,
-    pub(super) depth: Image,
     pub(super) slot: u32,
     pub(super) width: u32,
     pub(super) height: u32,
@@ -68,6 +67,9 @@ pub(super) struct Targets {
     pub(super) droplets: Option<(Image, u32)>,
     /// Half-resolution ray-traced water reflection target (allocated lazily on first RT frame).
     pub(super) rt_refl: Option<RtReflTargets>,
+    /// Shared half-resolution single-sampled D32F depth target reused by the
+    /// pre-scene RT water pass and post-scene narrow bloom glow pass (non-overlapping lifetimes).
+    pub(super) half_depth: Option<Image>,
     /// Single-sampled visibility/view depth for AO application (output-capped, half-res on low/medium).
     pub(super) ao: Image,
     pub(super) ao_w: u32,
@@ -84,10 +86,8 @@ pub(super) struct Targets {
     pub(super) out: Option<(Image, Buffer)>,
 }
 
-/// r_bloom targets: single-sampled reduced-res depth buffer and the blur chain.
+/// r_bloom targets: the blur chain (reuses `Targets::half_depth` for the narrow glow pass).
 pub(super) struct BloomTargets {
-    /// Single-sampled depth at `levels[0]` resolution for the narrow glow pass.
-    pub(super) depth: Image,
     /// The scene colour, linearly filtered (r_bloom_bright).
     pub(super) scene_slot: u32,
     /// Chain levels: image, texture slot, width, height (halving).

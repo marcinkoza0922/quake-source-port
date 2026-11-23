@@ -4,7 +4,7 @@
 
 use crate::frame::types::{AliasDraw, FteDraw, FteQuadDraw, GUN_PORTAL_MODE, PolyPush, Range, SpriteDraw, Trans, WorldDraw, WorldPush};
 use crate::frame::{GEL_FAST_MODE, GEL_MODE};
-use crate::gpu;
+use crate::gpu::{self, Image};
 use crate::pipelines::{Pipelines, bloom_fte_index};
 use crate::{BloomTargets, Model, NO_TEX, Settings, WorldGpu, bytes_of};
 use ash::vk;
@@ -81,6 +81,7 @@ pub(super) fn record(
     set: vk::DescriptorSet,
     ubo_ofs: u32,
     b: &BloomTargets,
+    depth: &Image,
     region: [u32; 2],
     scene: [u32; 2],
     st: &Settings,
@@ -101,7 +102,7 @@ pub(super) fn record(
     let weight = st.bloom_size.clamp(0.5, 2.0);
     let bright = st.bloom_bright.clamp(0.0, 1.0);
 
-    record_glow_pass(dev, cmd, p, set, ubo_ofs, b, region, vps[0], st, gs, crng, drng);
+    record_glow_pass(dev, cmd, p, set, ubo_ofs, b, depth, region, vps[0], st, gs, crng, drng);
 
     let pass = |level: usize, load: bool, pipe: vk::Pipeline, push: BloomPush| {
         let (img, _, w, h) = &b.levels[level];
@@ -200,6 +201,7 @@ fn record_glow_pass(
     set: vk::DescriptorSet,
     ubo_ofs: u32,
     b: &BloomTargets,
+    depth: &Image,
     region: [u32; 2],
     vp0: [u32; 2],
     st: &Settings,
@@ -218,15 +220,15 @@ fn record_glow_pass(
     let max_px = [region[0].max(1) as i32 - 1, region[1].max(1) as i32 - 1];
     let bg = &p.bloom_glow;
 
-    // 1. Downsample scene depth (sample 0) into single-sampled b.depth.
-    gpu::barrier(dev, cmd, b.depth.image, drng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL);
+    // 1. Downsample scene depth (sample 0) into shared single-sampled half_depth.
+    gpu::barrier(dev, cmd, depth.image, drng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL);
     let datt_w = vk::RenderingAttachmentInfo::default()
-        .image_view(b.depth.view)
+        .image_view(depth.view)
         .image_layout(vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL)
         .load_op(vk::AttachmentLoadOp::DONT_CARE)
         .store_op(vk::AttachmentStoreOp::STORE);
     let ri_d = vk::RenderingInfo::default().render_area(area_rt).layer_count(1).depth_attachment(&datt_w);
-    // SAFETY: recording command buffer; b.depth, pipelines, and descriptor set are alive for this frame.
+    // SAFETY: recording command buffer; depth, pipelines, and descriptor set are alive for this frame.
     unsafe {
         dev.cmd_begin_rendering(cmd, &ri_d);
         dev.cmd_set_viewport(cmd, 0, &[vp]);
@@ -238,9 +240,9 @@ fn record_glow_pass(
         dev.cmd_draw(cmd, 3, 1, 0, 0);
         dev.cmd_end_rendering(cmd);
     }
-    gpu::barrier(dev, cmd, b.depth.image, drng, vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL, vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+    gpu::barrier(dev, cmd, depth.image, drng, vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL, vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL);
 
-    // 2. Render only glowing draws into b.levels[0] tested against b.depth.
+    // 2. Render only glowing draws into b.levels[0] tested against depth.
     gpu::barrier(dev, cmd, img0.image, crng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
     let catt = [vk::RenderingAttachmentInfo::default()
         .image_view(img0.view)
@@ -249,7 +251,7 @@ fn record_glow_pass(
         .store_op(vk::AttachmentStoreOp::STORE)
         .clear_value(vk::ClearValue { color: vk::ClearColorValue { float32: [0.0; 4] } })];
     let datt_r = vk::RenderingAttachmentInfo::default()
-        .image_view(b.depth.view)
+        .image_view(depth.view)
         .image_layout(vk::ImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL)
         .load_op(vk::AttachmentLoadOp::LOAD)
         .store_op(vk::AttachmentStoreOp::DONT_CARE);

@@ -271,7 +271,7 @@ impl Renderer {
         world_draws: &[WorldDraw],
     ) {
         let (Some(t), Some(wg), Some(rt)) = (&self.targets, &self.world, &self.rt) else { return };
-        let Some(rt_t) = &t.rt_refl else { return };
+        let (Some(rt_t), Some(half_depth)) = (&t.rt_refl, &t.half_depth) else { return };
         let dev = &self.gpu.device;
         let p = &self.pipes;
         let f = &self.frames[fi];
@@ -282,7 +282,7 @@ impl Renderer {
         let drng = gpu::range(vk::ImageAspectFlags::DEPTH, 1, 1);
         let [rw, rh] = rt_refl_viewport(rt_t, region, scene);
         gpu::barrier(dev, cmd, rt_t.color.image, crng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
-        gpu::barrier(dev, cmd, rt_t.depth.image, drng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL);
+        gpu::barrier(dev, cmd, half_depth.image, drng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL);
         let catt = [vk::RenderingAttachmentInfo::default()
             .image_view(rt_t.color.view)
             .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
@@ -290,7 +290,7 @@ impl Renderer {
             .store_op(vk::AttachmentStoreOp::STORE)
             .clear_value(vk::ClearValue { color: vk::ClearColorValue { float32: [0.0; 4] } })];
         let datt = vk::RenderingAttachmentInfo::default()
-            .image_view(rt_t.depth.view)
+            .image_view(half_depth.view)
             .image_layout(vk::ImageLayout::DEPTH_ATTACHMENT_OPTIMAL)
             .load_op(vk::AttachmentLoadOp::CLEAR)
             .store_op(vk::AttachmentStoreOp::DONT_CARE)

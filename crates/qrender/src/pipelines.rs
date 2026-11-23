@@ -188,6 +188,8 @@ pub struct Pipelines {
     pub portal_alias_mirror: vk::Pipeline,
     pub ui: vk::Pipeline,
     pub post: vk::Pipeline,
+    /// Specialized fast-path post pipeline (no motion/speed blur, water screen, softemu, goggles or colorblind).
+    pub post_fast: vk::Pipeline,
     /// SSAO pass (fullscreen, scene resolution).
     pub ao: vk::Pipeline,
     /// Extracts sample-0 linear depth into mip 0 of the SAO depth chain.
@@ -405,7 +407,7 @@ impl Pipelines {
         // SAFETY: valid device.
         let cull_set_layout = unsafe { dev.create_descriptor_set_layout(&cci, None)? };
         let csl2 = [cull_set_layout];
-        let cpcr = [vk::PushConstantRange { stage_flags: vk::ShaderStageFlags::COMPUTE, offset: 0, size: 112 }];
+        let cpcr = [vk::PushConstantRange { stage_flags: vk::ShaderStageFlags::COMPUTE, offset: 0, size: 128 }];
         let clci = vk::PipelineLayoutCreateInfo::default().set_layouts(&csl2).push_constant_ranges(&cpcr);
         // SAFETY: valid device.
         let cull_layout = unsafe { dev.create_pipeline_layout(&clci, None)? };
@@ -536,6 +538,7 @@ impl Pipelines {
             portal_alias_mirror: null,
             ui: null,
             post: null,
+            post_fast: null,
             ao: null,
             ao_source: null,
             ao_down: null,

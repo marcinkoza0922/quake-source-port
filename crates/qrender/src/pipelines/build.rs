@@ -35,6 +35,7 @@ impl Pipelines {
             self.particle,
             self.ui,
             self.post,
+            self.post_fast,
             self.ao,
             self.ao_source,
             self.ao_down,
@@ -150,6 +151,7 @@ impl Pipelines {
             shadow: false,
             mirror: false,
             wire: false,
+            frag_spec_bool: None,
         };
         let g = |d: Desc| graphics(gpu, layout, &d);
         let fb = [bind(0, 24, false)];
@@ -255,31 +257,30 @@ impl Pipelines {
                 ..d(ui_vs, ui_fs, &ub, &ua, Blend::Alpha, false, false)
             },
         )?;
-        let post = graphics(
-            gpu,
-            layout,
-            &Desc {
-                vs: post_vs,
-                fs: post_fs,
-                bindings: &[],
-                attrs: &[],
-                blend: Blend::None,
-                depth_test: false,
-                depth_write: false,
-                color: post_format,
-                depth: false,
-                samples: 1,
-                cull: false,
-                sample_shading: false,
-                topology: vk::PrimitiveTopology::TRIANGLE_LIST,
-                behind: false,
-                depth_only: false,
-                no_color_write: false,
-                shadow: false,
-                mirror: false,
-                wire: false,
-            },
-        )?;
+        let post_desc = Desc {
+            vs: post_vs,
+            fs: post_fs,
+            bindings: &[],
+            attrs: &[],
+            blend: Blend::None,
+            depth_test: false,
+            depth_write: false,
+            color: post_format,
+            depth: false,
+            samples: 1,
+            cull: false,
+            sample_shading: false,
+            topology: vk::PrimitiveTopology::TRIANGLE_LIST,
+            behind: false,
+            depth_only: false,
+            no_color_write: false,
+            shadow: false,
+            mirror: false,
+            wire: false,
+            frag_spec_bool: Some(false),
+        };
+        let post = graphics(gpu, layout, &post_desc)?;
+        self.post_fast = graphics(gpu, layout, &Desc { frag_spec_bool: Some(true), ..post_desc })?;
         // post-effect passes: single-sampled, no depth attachment
         let fx = |vs, fs, bindings, attrs, color, cull| Desc {
             color,

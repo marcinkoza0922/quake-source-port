@@ -193,4 +193,11 @@ fn hdr_lightmaps_and_deluxemaps_decode_and_sample() {
     assert!((rgb[2] - 64.0).abs() < 4.0, "rgb={rgb:?}");
     let d = dir.expect("deluxemap direction");
     assert!(d[2] > 0.99, "dir={d:?}");
+
+    // Cache hit with identical lightstyles returns the cached result; changing
+    // a flickering lightstyle updates the cached entry in place without panicking.
+    let (rgb_same, _) = w.light_point_dir([8.0, 8.0, 16.0], &[256]).unwrap();
+    assert_eq!(rgb_same, rgb);
+    let (rgb_half, _) = w.light_point_dir([8.0, 8.0, 16.0], &[128]).unwrap();
+    assert!((rgb_half[0] - 192.0).abs() < 4.0, "rgb_half={rgb_half:?}");
 }

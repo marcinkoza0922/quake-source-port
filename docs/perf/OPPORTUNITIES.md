@@ -368,14 +368,14 @@ All 10 items above (plus tight layout-derived Vulkan pipeline barriers and `Worl
 | 10 | Classic `SVC_PARTICLE` | Precomputed `FteNames::pe_color: [bool; 256]` + `has_pe_fallback` | Eliminated 5 `String` allocs per `SVC_PARTICLE` message |
 | + | Bonus | Tight layout-derived Vulkan barriers (`gpu::layout_sync`), `World::light_cache` `Mutex` → `RefCell` + fullbright skip | Vanilla `lightmap` **26 → 16 µs**, `post` **42 → 24 µs** (`AE = 0`) |
 
-### Newly Flagged Follow-Up Opportunities
+### Follow-Up Optimisations Implemented (2026-11-23, Batch 2)
 
-1. **`World::light_point_dir` per-entity caching** (`crates/qrender/src/world/light.rs`, ~4.2% CPU in `perf` on `ad_sepulcher`): static entities and `LIGHTGRID_OCTREE` lookups still re-evaluate every frame.
-2. **Brush-entity spatial acceleration for FTE particle `cliptype` traces** (`src/fte.rs`, ~2.2% CPU in `perf`): rain/sparks linearly scan every brush entity AABB on top of world hull traces.
-3. **`post.frag` specialization constants / fast-path pipeline**: split common path (no goggles/motionblur/softemu/water) to lower register pressure at 4K.
-4. **Shared half-res depth target**: share `D32_SFLOAT` between `bloom.depth` and `rt_refl.depth` (non-overlapping lifetimes, ~8 MB VRAM saved at 4K).
-5. **GPU-driven destination culling (`cull.comp`)**: offload `portal_surfaces` culling for huge PVS maps in 4-player split-screen with portals.
-6. **`build_world_draw` scratch `Vec` reuse** (`crates/qrender/src/frame/world_draw.rs`, ~1.0% CPU in `perf`): reuse `cats`/`opaque_nofb` buffers across brushes and portals.
-7. **`wgpu` backend bloom parity**: port the narrow single-sampled glow pass to `crates/qrender/src/wgpu_backend/bloom.rs`.
-8. **Enhanced preset SSAO tier** (`src/host/presets.rs`): switching Enhanced from `r_ssao 3` (full-res, 1.62 ms at 4K) to `r_ssao 2` (half-res, ~0.6 ms) saves another ~1 ms at 4K.
-9. **Map-load hotspots**: `World::append` (8.7%) and `World::liquid_surface` via `bake_liquid` (7.4%) dominate level load time on large AD maps.
+1. **`World::light_point_dir` style-validated & `LIGHTGRID_OCTREE` caching** (`crates/qrender/src/world/light.rs`, `world.rs`): caches `(style_vals, rgb, dir)` per floored point so static entities skip `interpolate_light_dir` whenever their surface's up-to-4 lightstyles are unchanged, plus exact-coordinate `lightgrid_cache` keyed by lightstyles hash.
+2. **Brush-entity sweep-and-prune acceleration for FTE `trace_line`** (`src/fte/world.rs`, `src/fte.rs`): sorts `BrushEnt` by `mins.x` with running `prefix_max_x`, pruning non-overlapping brush entities in O(log N + K) with hoisted segment bounds.
+3. **`post.frag` specialization constant `FAST_POST`** (`crates/qrender/shaders/post.frag`, `pipelines/desc.rs`, `pipelines/build.rs`, `frame.rs`): compiles `p.post_fast` with `FAST_POST = true` (dead-code-eliminating motion/speed blur, goggles, water screen, `r_softemu` LUT, and daltonize) and binds it whenever those optional effects are inactive (100% pixel-identical).
+4. **Shared half-resolution depth target (`Targets::half_depth`)** (`crates/qrender/src/lib/targets.rs`, `frame/rt.rs`, `frame/bloom.rs`): reuses one lazily-allocated half-res `D32_SFLOAT` image across pre-scene `record_rt_refl` and post-scene `bloom::record` (~8 MB VRAM saved at 4K).
+5. **GPU-driven destination culling (`cull.comp`)** (`crates/qrender/shaders/cull.comp`, `frame/world_draw.rs`, `frame/portals.rs`, `frame.rs`): adds `vec4 clip` to `CullPush` and dispatches `cull.comp` + indirect `lightmap.comp` inline per destination view (reusing `c.cmdbuf`/`c.out` with zero extra VRAM; main-view GPU cull runs after `draw_portals` when GPU-culled portals are present). Verified cleanly with `QRENDER_VALIDATION=1` on depth-4 recursive portals and teleporter windows.
+6. **`build_world_draw` scratch `Vec` reuse** (`crates/qrender/src/frame/world_draw.rs`, `lib/vk.rs`): `WorldDrawScratch` reuses `cats` and `opaque_nofb` across brush entities, shadows, and CPU-fallback views.
+7. **`wgpu` backend bloom upsample** (`crates/qrender/src/wgpu_backend/shaders/bloom.wgsl`): switched 9-tap 3×3 tent upsample to 4-tap bilinear tent matching Vulkan (full narrow single-sampled glow pass in `wgpu_backend` left for a dedicated WebGPU/Android pass where it can be visually verified on device).
+8. **Enhanced preset SSAO tier** (`src/host/presets.rs`): switched `ENHANCED` preset from `r_ssao 3` (full-res, `1.62 ms` at 4K) to `r_ssao 2` (half-res, **`651 µs` total AO** at 4K 8× MSAA on `ad_sepulcher`, saving an extra `~1.0 ms`).
+9. **Map-load hotspots** (`crates/qrender/src/world.rs`, `world/build.rs`, `world/query.rs`): `Packer::alloc` column skip-ahead (`i += j + 1`), pre-reserved `vertices`/`indices`/`lm_surfs`/`samples` + reused per-face `verts` buffer in `World::append`, and bottom-up `node_has_liquid` BSP subtree pruning in `World::bake_liquid` (skips probing dry faces with 100% identical output).
