@@ -47,6 +47,22 @@ pub fn portal_pose(view: View, bob: f32, recoil: f32) -> ([f32; 3], [f32; 3]) {
     )
 }
 
+/// The portal gun sits lower than the other toys with its muzzle raised by
+/// `PORTAL_GUN_TILT` degrees: its top, with the energy chambers, turns toward
+/// the player and the rear stock drops out of view. The tilt goes into the
+/// pitch: exact without view roll, a fraction of a degree off under Quake's
+/// small strafe roll, and free of gimbal lock at straight up.
+pub const PORTAL_GUN_TILT: f32 = 22.0;
+
+pub fn portal_gun_pose(view: View, bob: f32, recoil: f32) -> ([f32; 3], [f32; 3]) {
+    let (forward, _, up) = angle_vectors(view.angles.into());
+    let origin = Vec3::from(view.origin) + forward * (30.0 - recoil * 2.5) - up * (21.0 + bob);
+    (
+        origin.to_array(),
+        [PORTAL_GUN_TILT - view.angles[0], view.angles[1], view.angles[2]],
+    )
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -165,6 +181,22 @@ mod tests {
             }
         }
         assert!(!Alignment::from_cvar(0.0).visible());
+        // the portal gun keeps its raised muzzle in camera space
+        for pitch in [-80.0, 0.0, 45.0, 80.0] {
+            for yaw in [0.0, 135.0] {
+                let view = View { angles: [pitch, yaw, 0.0], ..Default::default() };
+                let (origin, angles) = portal_gun_pose(view, 0.0, 0.0);
+                let (f, r, u) = angle_vectors(view.angles.into());
+                let delta = Vec3::from(origin);
+                assert!((delta.dot(f) - 30.0).abs() < 0.0001 && (delta.dot(u) + 21.0).abs() < 0.0001);
+                assert!(delta.dot(r).abs() < 0.0001);
+                let (sy, cy) = angles[1].to_radians().sin_cos();
+                let (sp, cp) = (-angles[0]).to_radians().sin_cos();
+                let axis = Vec3::new(cp * cy, cp * sy, -sp);
+                let (st, ct) = PORTAL_GUN_TILT.to_radians().sin_cos();
+                assert!((axis - (f * ct + u * st)).length() < 0.0001);
+            }
+        }
         assert_eq!(Alignment::from_cvar(1.0).offset([0.0; 3]), Vec3::ZERO);
     }
 }

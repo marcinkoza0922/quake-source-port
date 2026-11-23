@@ -26,6 +26,6 @@
     "5": 1875
   },
   "cleanup": [
-    "python3 tools/clean_toy_texture.py assets/portal-gun --keep-mask --ramps 0,10,1,6 --detail 0.6 --wear 0.07 --edges 0.1 --grime 0.08 --rust 0.08 --scratches 0.5 --grain 0.015"
+    "python3 tools/paint_toy_texture.py assets/portal-gun --keep-mask --glow-ribs 0.3 --ramp 10 --base 0.246 --bevel 0.09 --seam 0.09 --line 0.3 --ao 0.05 --mottle 0.01 --speckle 0.05 --speckle-frac 0.1 --parts 0.01 --light 0.08"
   ]
 }

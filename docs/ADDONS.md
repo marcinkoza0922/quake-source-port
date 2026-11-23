@@ -130,10 +130,14 @@ eight owner/slot skins, retaining paired chamber/emblem colors and switching
 muzzle energy with the last fired slot. The native renderer supplies lighting;
 the FBX's PBR normal, metallic and roughness maps are not used.
 The model is uploaded once per level and drawn as a depth-compressed view weapon,
-with idle movement and firing recoil. The atlas was cleaned and given
-procedural wear (chipped edges, grime, rust, scratches) afterwards by
-`tools/clean_toy_texture.py --keep-mask` (command in
-`assets/portal-gun/import.json`; rerun it after a reimport, see DESIGN.md).
+with idle movement and firing recoil. The metal of the atlas is repainted
+from the model's shape by `tools/paint_toy_texture.py --keep-mask` (since
+2026-11-22, to match the owner's in-game mockup: plain warm grey-brown on
+palette ramp 10 with a baked top light, one-texel light bevels on outer
+edges and dark seams in inner ones, faint grit, no rust or camo blotches);
+`--glow-ribs` gives the energy chambers bright bands between darker ribs.
+The command is in `assets/portal-gun/import.json` (`cleanup`); rerun it
+after a reimport (see DESIGN.md).
 
 Reimport with `blender -b --factory-startup --python-exit-code 1 --python
 tools/import_portal_gun.py -- /path/to/Meshy_export.zip`. This offline Blender
