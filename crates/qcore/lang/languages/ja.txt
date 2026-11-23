@@ -4168,3 +4168,9 @@ ja ポストプロセス
 
 @ World
 ja ワールド
+
+@ Mod HUD
+ja Mod HUD
+
+@ Custom HUD provided by the current mod or map pack
+ja 現在のModまたはマップパックが提供するカスタムHUD

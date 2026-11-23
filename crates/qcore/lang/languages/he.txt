@@ -4168,3 +4168,9 @@ he עיבוד תמונה
 
 @ World
 he עולם
+
+@ Mod HUD
+he ממשק מוד
+
+@ Custom HUD provided by the current mod or map pack
+he ממשק מותאם אישית שמסופק על ידי המוד או חבילת המפות הנוכחית

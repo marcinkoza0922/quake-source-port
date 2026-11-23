@@ -154,6 +154,8 @@ fn csqc_hud_clip_events_and_commands_roundtrip() {
     let mut a = ProgsAsm::new();
     let f_regcmd = a.builtin("registercommand", 352, 1);
     let f_getstati = a.builtin("getstati", 330, 1);
+    let f_getstatf = a.builtin("getstatf", 331, 3);
+    let f_itof = a.builtin("itof", 0, 1);
     let f_drawfill = a.builtin("drawfill", 323, 4);
     let f_drawstr = a.builtin("drawstring", 326, 5);
     let f_setclip = a.builtin("drawsetcliparea", 324, 4);
@@ -164,6 +166,9 @@ fn csqc_hud_clip_events_and_commands_roundtrip() {
 
     let c_cmd = a.const_s("csqc_ping");
     let c_hp_stat = a.const_f(STAT_HEALTH as f32);
+    let c_items_stat = a.const_f(qnet::protocol::STAT_ITEMS as f32);
+    let c_bit_start = a.const_f(23.0);
+    let c_bit_count = a.const_f(9.0);
     let c_pos = a.const_v([10.0, 20.0, 0.0]);
     let c_sz = a.const_v([100.0, 20.0, 0.0]);
     let c_rgb = a.const_v([1.0, 0.5, 0.0]);
@@ -176,6 +181,7 @@ fn csqc_hud_clip_events_and_commands_roundtrip() {
     let c_cliph = a.const_f(100.0);
     let c_one = a.const_f(1.0);
     let c_cv_hp = a.const_s("_test_hp");
+    let c_cv_bits = a.const_s("_test_bits");
     let c_cv_ev = a.const_s("_test_ev");
     let p0 = ofs_parm(0) as u16;
     let p1 = ofs_parm(1) as u16;
@@ -189,13 +195,24 @@ fn csqc_hud_clip_events_and_commands_roundtrip() {
         [OP_STORE_F, c_cmd, p0, 0],
         [OP_CALL1, f_regcmd, 0, 0],
     ]);
-    // CSQC_DrawHud: read health -> _test_hp; setclip; drawfill; drawstring("^1HP"); resetclip
+    // CSQC_DrawHud: read int health via getstati->itof -> _test_hp; read bit-slice via getstatf -> _test_bits; draw
     a.func("CSQC_DrawHud", &[
         [OP_STORE_F, c_hp_stat, p0, 0],
         [OP_CALL1, f_getstati, 0, 0],
         [OP_STORE_F, ret, p0, 0],
+        [OP_CALL1, f_itof, 0, 0],
+        [OP_STORE_F, ret, p0, 0],
         [OP_CALL1, f_ftos, 0, 0],
         [OP_STORE_F, c_cv_hp, p0, 0],
+        [OP_STORE_F, ret, p1, 0],
+        [OP_CALL1, f_cvarset, 0, 0],
+        [OP_STORE_F, c_items_stat, p0, 0],
+        [OP_STORE_F, c_bit_start, p1, 0],
+        [OP_STORE_F, c_bit_count, p2, 0],
+        [54, f_getstatf, 0, 0], // OP_CALL3
+        [OP_STORE_F, ret, p0, 0],
+        [OP_CALL1, f_ftos, 0, 0],
+        [OP_STORE_F, c_cv_bits, p0, 0],
         [OP_STORE_F, ret, p1, 0],
         [OP_CALL1, f_cvarset, 0, 0],
         [OP_STORE_F, c_clip0, p0, 0],
@@ -236,9 +253,11 @@ fn csqc_hud_clip_events_and_commands_roundtrip() {
     cvars.register("pr_checkextension", "1", 0);
     cvars.register("cl_nocsqc", "0", 0);
     cvars.register("_test_hp", "0", 0);
+    cvars.register("_test_bits", "0", 0);
     cvars.register("_test_ev", "0", 0);
     let mut cl = ClientState::new();
     cl.stats[STAT_HEALTH] = 87;
+    cl.stats[qnet::protocol::STAT_ITEMS] = 0x15 | (0x3a << 23);
     let mut level = Level::default();
     let mut con = Console::new();
     let mut cbuf = Cbuf::new();
@@ -267,7 +286,7 @@ fn csqc_hud_clip_events_and_commands_roundtrip() {
             not_menu: true,
         };
         assert!(csqc.load_bytes(&bytes, &mut env));
-        assert!(csqc.handles_hud());
+        assert!(csqc.has_simple_hud());
         assert!(csqc.has_command("csqc_ping"));
         assert!(csqc.console_command("csqc_ping", &mut env));
         csqc.draw_hud(&mut env);
@@ -275,6 +294,7 @@ fn csqc_hud_clip_events_and_commands_roundtrip() {
     }
 
     assert_eq!(cvars.value_of("_test_hp") as i32, 87);
+    assert_eq!(cvars.value_of("_test_bits") as i32, 0x3a);
     assert_eq!(cvars.value_of("_test_ev") as i32, 42);
     // Verify Clip(Some), Fill, 2 red Char glyphs ('H', 'P'), Clip(None)
     assert!(matches!(canvas.list.first(), Some(Draw2D::Clip(Some([8.0, 16.0, 400.0, 200.0])))));

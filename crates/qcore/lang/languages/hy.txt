@@ -4168,3 +4168,9 @@ hy Հետմշակում
 
 @ World
 hy Աշխարհ
+
+@ Mod HUD
+hy Մոդի HUD
+
+@ Custom HUD provided by the current mod or map pack
+hy Ընթացիկ մոդի կամ քարտեզների փաթեթի տրամադրած հատուկ HUD

@@ -4168,3 +4168,9 @@ sk Postprocessing
 
 @ World
 sk Svet
+
+@ Mod HUD
+sk HUD módu
+
+@ Custom HUD provided by the current mod or map pack
+sk Vlastný HUD poskytovaný aktuálnym módom alebo balíkom máp

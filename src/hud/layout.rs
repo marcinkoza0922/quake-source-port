@@ -105,8 +105,8 @@ impl Elem {
             _ => 0,
         };
         let b = u8::from(kind == StatusBar);
-        // a bottom status bar sits on the screen edge
-        let y = if kind == StatusBar && anchor.row() == 2 { super::place::MARGIN } else { 0.0 };
+        // a bottom status bar or mod HUD sits on the screen edge
+        let y = if matches!(kind, StatusBar | ModHud) && anchor.row() == 2 { super::place::MARGIN } else { 0.0 };
         let bg = kind.has_background() && !kind.is_message();
         Elem { kind, anchor, x: 0.0, y, scale: 1.0, opacity: 1.0, font, size, fade: false, hidden: false, bg, color: NORMAL, label: NORMAL, a, b, len: 96.0 }
     }
@@ -313,6 +313,15 @@ impl Layout {
     /// The classic preset: the full-width Quake status bar and the messages.
     pub fn classic_layout() -> Self {
         Self::from_legacy(&|n| if n == "scr_hudstyle" { 0.0 } else { legacy_default(n) })
+    }
+
+    /// The mod HUD preset: the mod's CSQC HUD widget and the messages.
+    pub fn mod_layout() -> Self {
+        let mut l = Self::classic_layout();
+        if let Some(sb) = l.elems.iter_mut().find(|e| e.kind == Kind::StatusBar) {
+            *sb = Elem::new(Kind::ModHud, Anchor::BottomCenter);
+        }
+        l
     }
 }
 

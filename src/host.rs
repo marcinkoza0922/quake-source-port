@@ -481,6 +481,8 @@ impl Host {
         h.sync_console_catalog();
         h.refresh_soundtracks();
         h.menu.hud_edit.reload_presets();
+        h.hud.has_mod_hud = crate::csqc::fs_has_hud(&h.server.core.fs);
+        h.menu.hud_edit.has_mod_hud = h.hud.has_mod_hud;
         h.menu.update_saved_servers(&h.saved_servers);
         // 2026 update compat (ironwail host.c): word-wrap centerprints for mg3.
         let mg3 = h.server.core.fs.game_dirs().iter().any(|d| d.eq_ignore_ascii_case("mg3"));

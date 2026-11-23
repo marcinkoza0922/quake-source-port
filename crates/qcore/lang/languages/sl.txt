@@ -4168,3 +4168,9 @@ sl Naknadna obdelava
 
 @ World
 sl Svet
+
+@ Mod HUD
+sl HUD moda
+
+@ Custom HUD provided by the current mod or map pack
+sl Prilagojeni HUD, ki ga zagotavlja trenutni mod ali paket map

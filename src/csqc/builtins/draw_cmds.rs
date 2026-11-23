@@ -125,21 +125,24 @@ impl CsqcHost<'_, '_> {
             }
 
             // ---- Stats ----
-            "getstati" | "getstatbits" => {
-                let idx = vm.g_f(p(0)) as usize;
-                let mut v = self.env.cl.stats.get(idx).copied().unwrap_or(0) as u32;
-                if vm.argc >= 2 {
+            "getstati" => {
+                let idx = vm.g_f(p(0)) as i32;
+                let v = if idx >= 0 { self.env.cl.stats.get(idx as usize).copied().unwrap_or(0) } else { 0 };
+                vm.ret_i(v);
+            }
+            "getstatf" | "getstatbits" => {
+                let idx = vm.g_f(p(0)) as i32;
+                if idx < 0 || (idx as usize) >= self.env.cl.stats.len() {
+                    vm.ret_f(0.0);
+                } else if vm.argc > 1 {
+                    let raw = self.env.cl.stats[idx as usize] as u32;
                     let first = (vm.g_f(p(1)) as u32).min(31);
                     let count = if vm.argc >= 3 { (vm.g_f(p(2)) as u32).clamp(1, 32) } else { 1 };
                     let mask = if count >= 32 { u32::MAX } else { (1u32 << count) - 1 };
-                    v = (v >> first) & mask;
+                    vm.ret_f(((raw >> first) & mask) as f32);
+                } else {
+                    vm.ret_f(self.env.cl.statsf[idx as usize]);
                 }
-                vm.ret_f(v as i32 as f32);
-            }
-            "getstatf" => {
-                let idx = vm.g_f(p(0)) as usize;
-                let v = self.env.cl.statsf.get(idx).copied().unwrap_or(0.0);
-                vm.ret_f(v);
             }
             "getstats" => {
                 let idx = vm.g_f(p(0)) as usize;

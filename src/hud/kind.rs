@@ -22,6 +22,7 @@ pub enum Kind {
     Powerups,
     Sigils,
     StatusBar,
+    ModHud,
     Clock,
     Timer,
     Pb,
@@ -157,7 +158,7 @@ pub const CATEGORIES: &[(&str, &[Kind])] = &[
     ("Status", &[Kind::Health, Kind::Armor, Kind::Face, Kind::HealthBar, Kind::ArmorBar]),
     ("Ammo", &[Kind::Ammo, Kind::AmmoBar, Kind::AmmoList, Kind::Shells, Kind::Nails, Kind::Rockets, Kind::Cells]),
     ("Inventory", &[Kind::Weapons, Kind::Items, Kind::Keys, Kind::Powerups, Kind::Sigils]),
-    ("Classic", &[Kind::StatusBar]),
+    ("Classic", &[Kind::StatusBar, Kind::ModHud]),
     ("Time & Stats", &[Kind::Clock, Kind::Timer, Kind::Pb, Kind::Kills, Kind::Secrets, Kind::Speed, Kind::DamageSkull]),
     ("Performance Metrics", &[Kind::Fps, Kind::FrameTime, Kind::Cpu, Kind::Ram, Kind::Gpu, Kind::Vram]),
     ("Automap", &[Kind::Automap]),
@@ -165,10 +166,10 @@ pub const CATEGORIES: &[(&str, &[Kind])] = &[
 ];
 
 impl Kind {
-    pub const ALL: [Kind; 37] = [
+    pub const ALL: [Kind; 38] = [
         Kind::Health, Kind::Armor, Kind::Face, Kind::HealthBar, Kind::ArmorBar, Kind::Ammo, Kind::AmmoBar,
         Kind::AmmoList, Kind::Shells, Kind::Nails, Kind::Rockets, Kind::Cells, Kind::Weapons, Kind::Items,
-        Kind::Keys, Kind::Powerups, Kind::Sigils, Kind::StatusBar, Kind::Clock, Kind::Timer, Kind::Pb,
+        Kind::Keys, Kind::Powerups, Kind::Sigils, Kind::StatusBar, Kind::ModHud, Kind::Clock, Kind::Timer, Kind::Pb,
         Kind::Kills, Kind::Secrets, Kind::Speed, Kind::Fps, Kind::FrameTime, Kind::Cpu, Kind::Ram, Kind::Gpu, Kind::Vram,
         Kind::Automap, Kind::Strafe, Kind::InputSequence, Kind::Center, Kind::Notify, Kind::Captions, Kind::DamageSkull,
     ];
@@ -196,6 +197,7 @@ impl Kind {
             Powerups => "powerups",
             Sigils => "sigils",
             StatusBar => "statusbar",
+            ModHud => "modhud",
             Clock => "clock",
             Timer => "timer",
             Pb => "pb",
@@ -244,6 +246,7 @@ impl Kind {
             Powerups => "Powerups",
             Sigils => "Sigils",
             StatusBar => "Status Bar",
+            ModHud => "Mod HUD",
             Clock => "Clock",
             Timer => "Level Timer",
             Pb => "Personal Best",
@@ -300,7 +303,7 @@ impl Kind {
         use Kind::*;
         if self.is_number() {
             &[Font::Big, Font::Quake, Font::Modern]
-        } else if matches!(self, Face | Weapons | Items | Keys | Powerups | Sigils | StatusBar | Automap | Strafe | InputSequence | DamageSkull) || self.is_message() {
+        } else if matches!(self, Face | Weapons | Items | Keys | Powerups | Sigils | StatusBar | ModHud | Automap | Strafe | InputSequence | DamageSkull) || self.is_message() {
             &[]
         } else {
             &[Font::Quake, Font::Modern]
@@ -324,7 +327,7 @@ impl Kind {
 
     /// Immersive mode (shown briefly after a change) makes sense.
     pub fn can_fade(self) -> bool {
-        self.is_player() && !matches!(self, Kind::StatusBar | Kind::Strafe | Kind::InputSequence)
+        self.is_player() && !matches!(self, Kind::StatusBar | Kind::ModHud | Kind::Strafe | Kind::InputSequence)
     }
 
     /// Whether the element exposes a Visibility row in the editor.
@@ -339,7 +342,7 @@ impl Kind {
         match self {
             Health | Armor | Face | HealthBar | ArmorBar => Anchor::BottomLeft,
             Ammo | AmmoBar | AmmoList | Shells | Nails | Rockets | Cells | Weapons | Items | Keys | Powerups | Sigils => Anchor::BottomRight,
-            StatusBar | Captions | InputSequence => Anchor::BottomCenter,
+            StatusBar | ModHud | Captions | InputSequence => Anchor::BottomCenter,
             Strafe | DamageSkull => Anchor::TopCenter,
             Clock | Timer | Pb | Kills | Secrets | Speed | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Automap => Anchor::TopRight,
             Notify => Anchor::TopLeft,
@@ -388,6 +391,7 @@ impl Kind {
     /// Help for the element, shown under the editor.
     pub fn tip(self) -> Option<&'static str> {
         Some(match self {
+            Kind::ModHud => "Custom HUD provided by the current mod or map pack",
             Kind::Clock => "Shows the time of day in the chosen format",
             Kind::Timer => "The level time, as on the intermission screen; it stops while paused and at the exit",
             Kind::Speed => "Horizontal movement speed in units per second",

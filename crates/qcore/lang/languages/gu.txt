@@ -4168,3 +4168,9 @@ gu પોસ્ટ-પ્રોસેસિંગ
 
 @ World
 gu દુનિયા
+
+@ Mod HUD
+gu મોડ HUD
+
+@ Custom HUD provided by the current mod or map pack
+gu વર્તમાન મોડ અથવા મેપ પેક દ્વારા પૂરું પાડવામાં આવેલ કસ્ટમ HUD

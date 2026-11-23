@@ -4168,3 +4168,9 @@ ro Post-procesare
 
 @ World
 ro Lume
+
+@ Mod HUD
+ro HUD-ul modului
+
+@ Custom HUD provided by the current mod or map pack
+ro HUD personalizat oferit de modul sau pachetul de hărți curent

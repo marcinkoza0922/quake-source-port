@@ -4168,3 +4168,9 @@ ar المعالجة اللاحقة
 
 @ World
 ar العالم
+
+@ Mod HUD
+ar واجهة المود
+
+@ Custom HUD provided by the current mod or map pack
+ar واجهة مخصصة يوفرها المود أو حزمة الخرائط الحالية

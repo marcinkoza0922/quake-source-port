@@ -4168,3 +4168,9 @@ pa ਪੋਸਟ-ਪ੍ਰੋਸੈਸਿੰਗ
 
 @ World
 pa ਦੁਨੀਆ
+
+@ Mod HUD
+pa ਮੌਡ HUD
+
+@ Custom HUD provided by the current mod or map pack
+pa ਮੌਜੂਦਾ ਮੌਡ ਜਾਂ ਮੈਪ ਪੈਕ ਵੱਲੋਂ ਦਿੱਤਾ ਕਸਟਮ HUD

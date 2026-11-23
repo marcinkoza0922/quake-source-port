@@ -4168,3 +4168,9 @@ hr Naknadna obrada
 
 @ World
 hr Svijet
+
+@ Mod HUD
+hr HUD moda
+
+@ Custom HUD provided by the current mod or map pack
+hr Prilagođeni HUD koji pruža trenutni mod ili paket mapa

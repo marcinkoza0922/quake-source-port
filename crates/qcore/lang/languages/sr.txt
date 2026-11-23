@@ -4168,3 +4168,9 @@ sr Накнадна обрада
 
 @ World
 sr Свет
+
+@ Mod HUD
+sr HUD мода
+
+@ Custom HUD provided by the current mod or map pack
+sr Прилагођени HUD који пружа тренутни мод или пакет мапа

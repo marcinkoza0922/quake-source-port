@@ -4168,3 +4168,9 @@ pt-BR Pós-processamento
 
 @ World
 pt-BR Mundo
+
+@ Mod HUD
+pt-BR HUD do mod
+
+@ Custom HUD provided by the current mod or map pack
+pt-BR HUD personalizado fornecido pelo mod ou pacote de mapas atual

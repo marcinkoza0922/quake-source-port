@@ -4168,3 +4168,9 @@ ga Iarphróiseáil
 
 @ World
 ga Domhan
+
+@ Mod HUD
+ga HUD an mhod
+
+@ Custom HUD provided by the current mod or map pack
+ga HUD saincheaptha arna sholáthar ag an mod nó pacáiste léarscáile reatha

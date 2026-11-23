@@ -4168,3 +4168,9 @@ nl Nabewerking
 
 @ World
 nl Wereld
+
+@ Mod HUD
+nl Mod-HUD
+
+@ Custom HUD provided by the current mod or map pack
+nl Aangepaste HUD van de huidige mod of mappack

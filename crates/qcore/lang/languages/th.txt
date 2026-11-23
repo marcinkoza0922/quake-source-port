@@ -4168,3 +4168,9 @@ th การ​ประมวล​ผล​ภาย​หลัง
 
 @ World
 th โลก
+
+@ Mod HUD
+th HUD ของม็อด
+
+@ Custom HUD provided by the current mod or map pack
+th HUD แบบ​กำหนด​เอง​ที่​จัด​ทำ​โดย​ม็อด​หรือ​ชุด​แผนที่​ปัจจุบัน

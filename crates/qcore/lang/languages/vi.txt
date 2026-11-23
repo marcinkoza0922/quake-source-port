@@ -4168,3 +4168,9 @@ vi Hậu kỳ
 
 @ World
 vi Thế giới
+
+@ Mod HUD
+vi HUD của mod
+
+@ Custom HUD provided by the current mod or map pack
+vi HUD tùy chỉnh do mod hoặc gói bản đồ hiện tại cung cấp

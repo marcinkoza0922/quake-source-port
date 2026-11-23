@@ -32,6 +32,8 @@ impl Host {
 
     pub(super) fn load_csqc(&mut self) {
         self.run_csqc(|csqc, env| csqc.load(env));
+        self.hud.has_mod_hud = self.csqc.has_simple_hud();
+        self.menu.hud_edit.has_mod_hud = self.hud.has_mod_hud;
     }
 
     pub(super) fn csqc_parse_event(&mut self, data: &[u8]) {
@@ -124,11 +126,59 @@ impl Host {
         }
     }
 
-    /// Simple CSQC HUD (`CSQC_DrawHud` / `CSQC_DrawScores`).
-    pub(super) fn csqc_draw_hud(&mut self, canvas: &mut Canvas, ft: f32) {
+    /// Simple CSQC HUD (`CSQC_DrawHud` / `CSQC_DrawScores`) drawn as a `Kind::ModHud` widget.
+    pub(super) fn csqc_draw_hud_elem(
+        &mut self,
+        canvas: &mut Canvas,
+        ft: f32,
+        elem: &crate::hud::layout::Elem,
+        rect: crate::hud::place::Rect,
+        preview: bool,
+    ) {
         let (width, height) = self.r.size();
-        let virt = [canvas.vw(), canvas.vh()];
+        let virt = csqc_hud_virt(width, height, elem.scale);
+        let not_menu = !preview && !self.menu.active() && !self.con.open;
+        let show_scores = if preview { false } else { self.show_scores };
+        let start = canvas.list.len();
+        let mut env = CsqcEnv {
+            fs: &self.server.core.fs,
+            cvars: &mut self.server.core.cvars,
+            cl: &self.cl,
+            level: &mut self.level,
+            r: &mut self.r,
+            snd: self.snd.as_mut(),
+            con: &mut self.con,
+            cbuf: &mut self.cbuf,
+            canvas: Some(canvas),
+            base_view: None,
+            is_demo: self.demo.is_some(),
+            realtime: self.realtime,
+            frametime: ft,
+            width,
+            height,
+            virt,
+            show_scores,
+            not_menu,
+        };
+        self.csqc.draw_hud(&mut env);
+        let dx = (rect.x - (canvas.vw() - rect.w) / 2.0) * canvas.scale;
+        let dy = (rect.bottom() - canvas.vh()) * canvas.scale;
+        if dx.abs() > 0.01 || dy.abs() > 0.01 {
+            crate::draw::translate(&mut canvas.list[start..], dx, dy);
+        }
+        let alpha = elem.opacity * if preview && elem.hidden { 0.3 } else { 1.0 };
+        if alpha < 0.999 {
+            crate::hud::draw::fade_list(&mut canvas.list[start..], alpha);
+        }
+    }
+
+    /// Intermission CSQC scores (`CSQC_DrawScores`).
+    pub(super) fn csqc_draw_scores(&mut self, canvas: &mut Canvas, ft: f32, elem: Option<&crate::hud::layout::Elem>) {
+        let (width, height) = self.r.size();
+        let scale = elem.map_or(1.0, |e| e.scale);
+        let virt = csqc_hud_virt(width, height, scale);
         let not_menu = !self.menu.active() && !self.con.open;
+        let start = canvas.list.len();
         let mut env = CsqcEnv {
             fs: &self.server.core.fs,
             cvars: &mut self.server.core.cvars,
@@ -149,6 +199,20 @@ impl Host {
             show_scores: self.show_scores,
             not_menu,
         };
-        self.csqc.draw_hud(&mut env);
+        self.csqc.draw_scores(&mut env);
+        if let Some(e) = elem
+            && e.opacity < 0.999
+        {
+            crate::hud::draw::fade_list(&mut canvas.list[start..], e.opacity);
+        }
     }
+}
+
+/// Resolution-independent virtual display for Simple CSQC HUDs (~640×360 at 16:9,
+/// scaled by the `ModHud` widget's scale), matching vkQuake/ironwail defaults.
+fn csqc_hud_virt(width: u32, height: u32, elem_scale: f32) -> [f32; 2] {
+    let aspect = (width.max(1) as f32) / (height.max(1) as f32);
+    let vh = (360.0 / elem_scale.max(0.25)).max(200.0);
+    let vw = (vh * aspect).max(320.0);
+    [vw, vh]
 }

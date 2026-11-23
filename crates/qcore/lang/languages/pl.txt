@@ -4168,3 +4168,9 @@ pl Postprocessing
 
 @ World
 pl Świat
+
+@ Mod HUD
+pl HUD moda
+
+@ Custom HUD provided by the current mod or map pack
+pl Niestandardowy HUD dostarczany przez bieżący mod lub pakiet map

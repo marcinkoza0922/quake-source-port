@@ -4168,3 +4168,9 @@ et Järeltöötlus
 
 @ World
 et Maailm
+
+@ Mod HUD
+et Modi HUD
+
+@ Custom HUD provided by the current mod or map pack
+et Praeguse modi või kaardipaki kohandatud HUD

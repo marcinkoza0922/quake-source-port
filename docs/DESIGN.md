@@ -125,13 +125,18 @@ e.g. `health@bl,a0 clock@tr,a3,fm`. Unknown kinds and fields are skipped (`layou
   Menu/Start finishes, and B backs out/exits; button glyphs draw directly on the dialog
   buttons, title-bar collapse toggle, and options header, with a single-row gamepad hint bar.
 - **Presets** (`presets.rs`): HUD → HUD Preset (`Item::HudPreset`, backed by archived
-  `hud_preset` 0 modern / 1 classic / 2 custom and `hud_preset_name`), above Edit HUD.
-  Picking modern or classic sets `hud_layout` to `default` or `classic`, which the host
+  `hud_preset` 0 modern / 1 classic / 2 custom / 3 Mod HUD and `hud_preset_name`), above Edit HUD.
+  Picking modern, classic or Mod HUD sets `hud_layout` to `default`, `classic` or `mod`, which the host
   turns into that layout (`Layout::default_layout`, the old modern defaults;
-  `classic_layout`, a full-width status bar and the messages). User-saved presets live as
+  `classic_layout`, a full-width status bar and the messages; `mod_layout`, the `Kind::ModHud`
+  widget and the messages). Mods shipping a Simple CSQC HUD (`csprogs.dat` with `CSQC_DrawHud`)
+  expose **Mod HUD** first in HUD Preset and the HUD Editor's Presets popup, and default to **Mod HUD**
+  on first launch (including when inheriting a base config); players can move, scale, fade, hide, delete,
+  re-add (`Classic → Mod HUD`), or combine it with any other HUD widgets (timers, kills, metrics, automap).
+  User-saved presets live as
   individual named files in `<user data>/hud_presets/<name>.hud` (`userdata::hud_presets_dir`,
   shared across all games and mods). In the HUD Editor, **Save** updates the active user-saved
-  preset in place (disabled for built-in `modern`/`classic` foundations or when unchanged),
+  preset in place (disabled for built-in `modern`/`classic`/`Mod HUD` foundations or when unchanged),
   **Save As** creates a new named preset (pre-filling a fresh variant name, rejecting built-in
   names, confirming before overwriting an existing user preset, with controller OSK via Y), and
   **Presets** loads built-ins or user presets and exposes a framed **Delete** → **Confirm**
@@ -139,10 +144,10 @@ e.g. `health@bl,a0 clock@tr,a3,fm`. Unknown kinds and fields are skipped (`layou
   can be managed via `hud_preset_save`, `hud_preset_load`, `hud_preset_delete`, and
   `hud_preset_list`. Any
   edit in the editor clears `hud_preset_name` and sets custom; Reset to Defaults sets
-  modern. The host acts on a changed `hud_preset` / `hud_preset_name` only once the
-  configs have run (`Host::hud_preset`), and once at startup checks the saved layout
-  against its preset: a different one makes it custom (layouts saved before presets
-  existed). ironwail's `hudstyle 0` picks classic, and `hudstyle 1`/`2` picks modern only
+  Mod HUD when the active mod ships one, else modern. The host acts on a changed `hud_preset` / `hud_preset_name` only once the
+  configs have run (`Host::hud_preset`), and checks the saved layout
+  against its preset whenever it changes: a different one makes it custom (layouts saved before presets
+  existed or edited via console). ironwail's `hudstyle 0` picks classic, and `hudstyle 1`/`2` picks modern only
   from classic, so a custom HUD stays.
 - **First run**: an empty `hud_layout` becomes the layout the old settings describe
   (`Layout::from_legacy`: `scr_hudstyle`, `hud_<elem>` modes and `_pos` anchors,
@@ -717,8 +722,8 @@ Port of vkQuake/QSS's entity delta and prediction-info protocol, layered on 15/6
 - Client (`qclient`): `ClientEntity::{netstate, delta_live}`, `statsf`/`statss`, `acked_movemessages`, `ClientEvent::CsqcEvent`. Each update applies the records and then every live entity (`CL_EntitiesDeltaed`). `svcfte_spawnbaseline2`/`spawnstatic2`, stat deltas, `svcfte_cgamepacket`, and FTE sound flags are parsed.
 - Tests: `qnet::delta` (round trips incl. `UF_PREDINFO`), `qserver::delta` (lost frames + stats delta resend), `qserver::tests::compat`, `tests/loopback.rs` (every protocol with/without `PEXT2_SUPPORTED`), `net.rs` UDP play.
 
-### Client-Side QuakeC (CSQC, `src/csqc.rs`, `src/host/csqc.rs`)
-Loads `csprogs.dat` on map load unless `cl_nocsqc 1` or `pr_checkextension 0`, using `qvm::Progs::parse_csqc` + `Vm::new_csqc`. Supports both Simple CSQC HUD (`CSQC_Init`, `CSQC_Shutdown`, `CSQC_DrawHud`, `CSQC_DrawScores`) and Full CSQC (`CSQC_UpdateView`, `CSQC_Parse_Event`, `CSQC_Parse_Print`, `CSQC_Parse_CenterPrint`, `CSQC_Parse_StuffCmd`, `CSQC_ConsoleCommand`). Implements `draw*` 2D builtins with DP/FTE `^0..^9`/`^xRGB` color markup (`csqc/markup.rs`) and `Draw2D::Clip` hardware scissor rects, `precache_pic`/`drawgetimagesize`/`freepic`, 3D scene builtins (`clearscene`/`addentities`/`addentity`/`setproperty`/`getproperty`/`renderscene`/`dynamiclight_add`/`project`/`unproject`), `read*` event parsing (`csqc/net.rs`), `getstat*`, `getplayerkey*`, `serverkey*`, `registercommand`, world traces/pointcontents, and client sounds. Tested end-to-end with synthetic `progs.dat` bytecode in `src/csqc/tests.rs`.
+### Client-Side QuakeC (CSQC, `src/csqc.rs`, `src/csqc/defs.rs`, `src/host/csqc.rs`)
+Loads `csprogs.dat` on map load unless `cl_nocsqc 1` or `pr_checkextension 0`, using `qvm::Progs::parse_csqc` + `Vm::new_csqc`. Supports both Simple CSQC HUD (`CSQC_Init`, `CSQC_Shutdown`, `CSQC_DrawHud`, `CSQC_DrawScores`, preferred whenever `CSQC_DrawHud` is defined, matching ironwail/vkQuake) and Full CSQC (`CSQC_UpdateView`, `CSQC_Parse_Event`, `CSQC_Parse_Print`, `CSQC_Parse_CenterPrint`, `CSQC_Parse_StuffCmd`, `CSQC_ConsoleCommand`). Simple CSQC HUDs render through the `Kind::ModHud` HUD layout widget in a resolution-independent ~640×360 virtual space (with scale, opacity, offset, live editor preview, demo-bar lifting, and `CSQC_DrawScores` on intermission). Syncs standard CSQC globals (`mapname`, `deathmatch`, `coop`, `clframetime`, `total_monsters`, `total_secrets`, `killed_monsters`, `found_secrets`) and world entity fields (`world.message`, `world.model`, `world.solid`, `world.modelindex`), reports vkQuake-style ~1080p reference display values for `cvar`/`cvar_string` queries of `scr_sbarscale`/`vid_width`/`vid_height`, keeps `statsf` synced on `svc_killedmonster`/`svc_foundsecret`, returns integers from `getstati` (#330) and supports `(firstbit, bitcount)` bit slicing in `getstatf`/`getstatbits` (#331). Implements `draw*` 2D builtins with DP/FTE `^0..^9`/`^xRGB` color markup (`csqc/markup.rs`) and `Draw2D::Clip` hardware scissor rects, `precache_pic`/`drawgetimagesize`/`freepic`, 3D scene builtins (`clearscene`/`addentities`/`addentity`/`setproperty`/`getproperty`/`renderscene`/`dynamiclight_add`/`project`/`unproject`), `read*` event parsing (`csqc/net.rs`), `getplayerkey*`, `serverkey*`, `registercommand`, world traces/pointcontents, and client sounds. Tested end-to-end with synthetic `progs.dat` bytecode in `src/csqc/tests.rs`.
 
 ### qclient
 - `ClientState`: protocol/flags, signon, precache name lists, `model_flags` (MF_*, which the host fills in after loading models), `entities` (with baselines, `msg_origins`/`msg_angles` [0]=new [1]=old, interpolated `origin`/`angles`), statics, stats/items, scores, lightstyles, viewangles/punch/velocity, intermission/centerprint, fog/skybox. Effects live in qpool containers: `beams`, `dlights` (`Pool`) and `particles` (`ParticlePool`, PT_* kinds).

@@ -4168,3 +4168,9 @@ mr पोस्ट-प्रोसेसिंग
 
 @ World
 mr जग
+
+@ Mod HUD
+mr मॉड HUD
+
+@ Custom HUD provided by the current mod or map pack
+mr सध्याच्या मॉड किंवा मॅप पॅकद्वारे प्रदान केलेले सानुकूल HUD

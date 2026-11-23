@@ -60,6 +60,8 @@ pub struct Ctx<'a> {
     /// Player history and whether to draw sample values in the editor.
     pub training: Option<(&'a super::Training, bool)>,
     pub glyph_override: f32,
+    /// True when the active mod provides a Simple CSQC HUD (`Kind::ModHud`).
+    pub has_mod_hud: bool,
 }
 
 /// What an element's size depends on besides its settings.
@@ -160,7 +162,7 @@ pub fn draw_text(c: &mut Canvas, pf: &mut PicFn, font: Font, size: f32, (x, y): 
 }
 
 /// Multiplies the opacity of `list`'s draws by `a`.
-fn fade_list(list: &mut [Draw2D], a: f32) {
+pub(crate) fn fade_list(list: &mut [Draw2D], a: f32) {
     for d in list {
         if let Draw2D::Pic { color, .. } | Draw2D::Char { color, .. } | Draw2D::Fill { color, .. } | Draw2D::Line { color, .. } = d {
             color[3] *= a;
@@ -342,6 +344,7 @@ pub fn size(c: &Canvas, e: &Elem, room: &Room) -> (f32, f32) {
         Kind::Strafe => super::strafe::SIZE,
         Kind::InputSequence => super::input_sequence::SIZE,
         Kind::StatusBar => (320.0, if e.a == 1 { 48.0 } else { 24.0 }),
+        Kind::ModHud => (240.0, 36.0),
         Kind::Weapons => {
             let (n, cols) = (weapon_slots(room), usize::from(e.a.clamp(1, 10)));
             (n.min(cols) as f32 * 20.0 - 2.0, n.div_ceil(cols) as f32 * 14.0 - 2.0)
@@ -454,6 +457,13 @@ fn draw_local(c: &mut Canvas, pf: &mut PicFn, e: &Elem, (w, h): (f32, f32), ctx:
             sb.inventory = e.a == 1;
             sb.teamplay = ctx.teamplay;
             sb.draw(ctx.cl, ctx.show_scores, ctx.face_anim);
+        }
+        Kind::ModHud => {
+            if ctx.preview && !ctx.has_mod_hud {
+                c.fill(0.0, 0.0, w, h, BACKING);
+                let tw = c.text_w(Kind::ModHud.label(), 8.0);
+                c.text(((w - tw) / 2.0).floor(), ((h - 8.0) / 2.0).floor(), Kind::ModHud.label(), 8.0, [0.7, 0.7, 0.7, 0.85]);
+            }
         }
         Kind::Weapons => super::draw_more::weapons(c, pf, e, w, ctx),
         Kind::Items | Kind::Keys | Kind::Powerups | Kind::Sigils => super::draw_more::items(c, pf, e, w, ctx),

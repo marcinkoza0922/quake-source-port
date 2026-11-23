@@ -4168,3 +4168,9 @@ zh-TW 後製處理
 
 @ World
 zh-TW 世界
+
+@ Mod HUD
+zh-TW 模組 HUD
+
+@ Custom HUD provided by the current mod or map pack
+zh-TW 由目前模組或地圖包提供的自訂 HUD

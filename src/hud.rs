@@ -153,14 +153,16 @@ pub struct Hud {
     pub preset_name: Option<String>,
     /// The loaded layout was checked against its preset.
     pub preset_checked: bool,
+    /// True when the active game ships a Simple CSQC HUD (`csprogs.dat` with `CSQC_DrawHud`).
+    pub has_mod_hud: bool,
 }
 
 impl Hud {
     /// Re-reads the layout when the cvar text changed. Returns false when
-    /// it is empty, "default" or "classic", which the host turns into a
+    /// it is empty, "default", "classic" or "mod", which the host turns into a
     /// layout first.
     pub fn sync(&mut self, text: &str) -> bool {
-        if matches!(text, "" | "default" | "classic") {
+        if matches!(text, "" | "default" | "classic" | "mod") {
             return false;
         }
         if text != self.src {
@@ -271,6 +273,10 @@ pub fn draw_layout(c: &mut Canvas, pf: &mut PicFn, l: &Layout, rects: &[Rect], c
         }
         if e.kind == Kind::StatusBar {
             if !e.hidden || ctx.preview {
+                status_bar = true;
+            }
+        } else if e.kind == Kind::ModHud {
+            if ctx.has_mod_hud && (!e.hidden || ctx.preview) {
                 status_bar = true;
             }
         } else if (e.kind.is_player() && hide_player) || (ctx.show_scores && !e.kind.is_player() && !e.kind.is_metric()) {

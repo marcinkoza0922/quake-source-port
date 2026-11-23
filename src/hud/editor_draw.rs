@@ -360,22 +360,28 @@ impl Editor {
                 }
                 let preset_num = cv.value_of(PRESET) as i32;
                 let preset_name = cv.by_name(PRESET_NAME).map_or("", |c| c.string.trim());
-                for (i, label) in ["modern", "classic"].into_iter().enumerate() {
-                    let ry = Self::preset_row_y(y, i);
+                let builtins: &[(&str, i32)] = if self.has_mod_hud {
+                    &[("Mod HUD", 3), ("modern", 0), ("classic", 1)]
+                } else {
+                    &[("modern", 0), ("classic", 1)]
+                };
+                for (i, &(label, num)) in builtins.iter().enumerate() {
+                    let ry = self.preset_row_y(y, i);
                     if i == *cursor || hover == Some(i) {
                         c.fill(x + 2.0, ry, PRESETS_W - 4.0, ROW, HILITE);
                     }
-                    let active = preset_num == i as i32 && self.editing_preset.is_none();
+                    let active = preset_num == num && self.editing_preset.is_none();
                     c.text(x + 8.0, ry + 1.5, label, SIZE, if active { GOLD_FG } else { FG });
                 }
+                let nb = builtins.len();
                 if !self.presets.is_empty() {
-                    let sep_y = Self::preset_row_y(y, 2) - 2.0;
+                    let sep_y = self.preset_row_y(y, nb) - 2.0;
                     c.fill(x + 4.0, sep_y, PRESETS_W - 8.0, 1.0, BORDER);
                 }
                 for (k, p) in self.presets.iter().enumerate() {
-                    let i = k + 2;
-                    let ry = Self::preset_row_y(y, i);
-                    let dr = Self::preset_del_rect(x, y, i);
+                    let i = k + nb;
+                    let ry = self.preset_row_y(y, i);
+                    let dr = self.preset_del_rect(x, y, i);
                     let del_hover = self.mouse.is_some_and(|m| dr.contains(m));
                     if i == *cursor || (hover == Some(i) && !del_hover) {
                         c.fill(x + 2.0, ry, PRESETS_W - 4.0, ROW, HILITE);

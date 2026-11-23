@@ -4168,3 +4168,9 @@ eu Postprozesatzea
 
 @ World
 eu Mundua
+
+@ Mod HUD
+eu Mod-aren HUD
+
+@ Custom HUD provided by the current mod or map pack
+eu Uneko modak edo mapa-paketeak emandako HUD pertsonalizatua

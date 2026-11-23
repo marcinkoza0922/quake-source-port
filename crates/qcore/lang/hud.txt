@@ -702,3 +702,10 @@ de Schadensschädel
 it Teschio dei danni
 es Calavera de daño
 ru Череп урона
+
+@ Mod HUD
+fr ATH du mod
+de Mod-HUD
+it HUD della mod
+es HUD del mod
+ru HUD мода

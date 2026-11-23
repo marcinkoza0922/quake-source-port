@@ -4168,3 +4168,9 @@ ko 후처리
 
 @ World
 ko 월드
+
+@ Mod HUD
+ko 모드 HUD
+
+@ Custom HUD provided by the current mod or map pack
+ko 현재 모드 또는 맵 팩에서 제공하는 사용자 지정 HUD

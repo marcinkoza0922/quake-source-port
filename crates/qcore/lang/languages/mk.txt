@@ -4168,3 +4168,9 @@ mk Дополнителна обработка
 
 @ World
 mk Свет
+
+@ Mod HUD
+mk HUD на модот
+
+@ Custom HUD provided by the current mod or map pack
+mk Прилагоден HUD обезбеден од тековниот мод или пакет мапи

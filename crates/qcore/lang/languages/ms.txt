@@ -4168,3 +4168,9 @@ ms Pascapemprosesan
 
 @ World
 ms Dunia
+
+@ Mod HUD
+ms HUD Mod
+
+@ Custom HUD provided by the current mod or map pack
+ms HUD tersuai yang disediakan oleh mod atau pek peta semasa

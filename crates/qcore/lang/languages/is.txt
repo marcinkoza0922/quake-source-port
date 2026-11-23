@@ -4168,3 +4168,9 @@ is Eftirvinnsla
 
 @ World
 is Heimur
+
+@ Mod HUD
+is HUD mods
+
+@ Custom HUD provided by the current mod or map pack
+is Sérsniðið HUD frá núverandi modi eða kortapakka

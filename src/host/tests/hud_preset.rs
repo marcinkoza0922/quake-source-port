@@ -90,3 +90,23 @@ fn old_classic_style_becomes_the_classic_preset() {
     frames(&mut h);
     assert_eq!(h.cv("hud_preset"), 1.0);
 }
+
+#[test]
+fn mod_hud_preset_and_widget_roundtrip() {
+    let Some(mut h) = host(&["hud_layout \"\"", "hud_preset 0"]) else { return };
+    h.hud.has_mod_hud = true;
+    h.exec_line("hud_preset 3");
+    frames(&mut h);
+    assert_eq!(h.cv("hud_preset"), 3.0);
+    assert_eq!(kinds(&h), [Kind::ModHud, Kind::Center, Kind::Notify, Kind::Captions]);
+    assert_eq!(h.hud_reserve(), 0.0, "Mod HUD assumes fullscreen 3D view");
+    // Custom layout combining ModHud with other widgets marks preset custom and lets hud_preset 0 switch back
+    h.exec_line("hud_layout \"modhud@bc kills@tr center@mc notify@tl captions@bc\"");
+    frames(&mut h);
+    assert_eq!(h.cv("hud_preset"), 2.0);
+    assert!(kinds(&h).contains(&Kind::ModHud) && kinds(&h).contains(&Kind::Kills));
+    h.exec_line("hud_preset 0");
+    frames(&mut h);
+    assert_eq!(h.cv("hud_preset"), 0.0);
+    assert!(!kinds(&h).contains(&Kind::ModHud) && kinds(&h)[0] == Kind::Health);
+}

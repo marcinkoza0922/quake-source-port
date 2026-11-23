@@ -4168,3 +4168,9 @@ bn পোস্ট-প্রসেসিং
 
 @ World
 bn বিশ্ব
+
+@ Mod HUD
+bn মড HUD
+
+@ Custom HUD provided by the current mod or map pack
+bn বর্তমান মড বা ম্যাপ প্যাক দ্বারা প্রদত্ত কাস্টম HUD

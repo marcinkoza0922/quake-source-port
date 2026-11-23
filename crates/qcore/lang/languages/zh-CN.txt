@@ -4168,3 +4168,9 @@ zh-CN 后期处理
 
 @ World
 zh-CN 世界
+
+@ Mod HUD
+zh-CN 模组 HUD
+
+@ Custom HUD provided by the current mod or map pack
+zh-CN 由当前模组或地图包提供的自定义 HUD

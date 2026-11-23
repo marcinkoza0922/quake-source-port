@@ -4168,3 +4168,9 @@ el Μετεπεξεργασία
 
 @ World
 el Κόσμος
+
+@ Mod HUD
+el HUD του mod
+
+@ Custom HUD provided by the current mod or map pack
+el Προσαρμοσμένο HUD που παρέχεται από το τρέχον mod ή πακέτο χαρτών
