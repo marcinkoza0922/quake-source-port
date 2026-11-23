@@ -60,7 +60,7 @@ impl Presentation {
         let age = (time-shot).max(0.0) as f32;
         let recoil = (-age*18.0).exp();
         let bob = (time as f32 * 2.5).sin()*0.15;
-        let (origin, angles) = crate::view::weapon::portal_pose(view, bob, recoil);
+        let (origin, angles) = crate::view::weapon::portal_gun_pose(view, bob, recoil);
         Some(RenderEntity { model: model.id, origin, angles,
             skin: ((owner%4)*2+slot) as u32, viewmodel: true, ..Default::default() })
     }
