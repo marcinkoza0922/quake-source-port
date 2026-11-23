@@ -107,25 +107,34 @@ impl ClientState {
         }
         let num = if bits & U_LONGENTITY != 0 { m.short() as u16 as i32 } else { m.byte() };
         let (pf, protocol, mtime, nmodels) = (self.protocolflags, self.protocol, self.mtime, self.model_precache.len());
-        let ent = self.entity_num(num)?;
+        let ent = if num >= 0 && (num as usize) < self.entities.len() {
+            &mut self.entities[num as usize]
+        } else {
+            self.entity_num(num)?
+        };
         let mut forcelink = ent.msgtime != mtime[1];
         if ent.msgtime + 0.2 < mtime[0] {
             ent.lerpflags |= LERP_RESETANIM;
         }
         ent.msgtime = mtime[0];
-        let b = ent.baseline;
-        let mut modnum = if bits & U_MODEL != 0 { m.byte() as u8 as usize } else { b.modelindex };
+        let mut modnum = if bits & U_MODEL != 0 { m.byte() as u8 as usize } else { ent.baseline.modelindex };
         let prevframe = ent.frame;
-        ent.frame = if bits & U_FRAME != 0 { m.byte() } else { b.frame };
-        ent.colormap = if bits & U_COLORMAP != 0 { m.byte() } else { b.colormap };
-        ent.skin = if bits & U_SKIN != 0 { m.byte() } else { b.skin };
-        ent.effects = if bits & U_EFFECTS != 0 { m.byte() } else { b.effects };
+        ent.frame = if bits & U_FRAME != 0 { m.byte() } else { ent.baseline.frame };
+        ent.colormap = if bits & U_COLORMAP != 0 { m.byte() } else { ent.baseline.colormap };
+        ent.skin = if bits & U_SKIN != 0 { m.byte() } else { ent.baseline.skin };
+        ent.effects = if bits & U_EFFECTS != 0 { m.byte() } else { ent.baseline.effects };
         ent.msg_origins[1] = ent.msg_origins[0];
         ent.msg_angles[1] = ent.msg_angles[0];
-        let (o1, a1, o2, a2, o3, a3) = (U_ORIGIN1, U_ANGLE1, U_ORIGIN2, U_ANGLE2, U_ORIGIN3, U_ANGLE3);
-        for (i, (ob, ab)) in [(o1, a1), (o2, a2), (o3, a3)].into_iter().enumerate() {
-            ent.msg_origins[0][i] = if bits & ob != 0 { m.coord(pf) } else { b.origin[i] };
-            ent.msg_angles[0][i] = if bits & ab != 0 { m.angle(pf) } else { b.angles[i] };
+        if bits & (U_ORIGIN1 | U_ANGLE1 | U_ORIGIN2 | U_ANGLE2 | U_ORIGIN3 | U_ANGLE3) == 0 {
+            ent.msg_origins[0] = ent.baseline.origin;
+            ent.msg_angles[0] = ent.baseline.angles;
+        } else {
+            ent.msg_origins[0][0] = if bits & U_ORIGIN1 != 0 { m.coord(pf) } else { ent.baseline.origin[0] };
+            ent.msg_angles[0][0] = if bits & U_ANGLE1 != 0 { m.angle(pf) } else { ent.baseline.angles[0] };
+            ent.msg_origins[0][1] = if bits & U_ORIGIN2 != 0 { m.coord(pf) } else { ent.baseline.origin[1] };
+            ent.msg_angles[0][1] = if bits & U_ANGLE2 != 0 { m.angle(pf) } else { ent.baseline.angles[1] };
+            ent.msg_origins[0][2] = if bits & U_ORIGIN3 != 0 { m.coord(pf) } else { ent.baseline.origin[2] };
+            ent.msg_angles[0][2] = if bits & U_ANGLE3 != 0 { m.angle(pf) } else { ent.baseline.angles[2] };
         }
         if bits & U_STEP != 0 {
             ent.lerpflags |= LERP_MOVESTEP;
@@ -134,8 +143,8 @@ impl ClientState {
             ent.lerpflags &= !LERP_MOVESTEP;
         }
         if fitz {
-            ent.alpha = if bits & U_ALPHA != 0 { m.byte() as u8 } else { b.alpha };
-            ent.scale = if bits & U_SCALE != 0 { m.byte() as u8 } else { b.scale };
+            ent.alpha = if bits & U_ALPHA != 0 { m.byte() as u8 } else { ent.baseline.alpha };
+            ent.scale = if bits & U_SCALE != 0 { m.byte() as u8 } else { ent.baseline.scale };
             if bits & U_FRAME2 != 0 {
                 ent.frame = (ent.frame & 0xff) | ((m.byte() & 0xff) << 8);
             }
@@ -158,9 +167,9 @@ impl ClientState {
                 }
                 ent.alpha = entalpha_encode(alpha);
             } else {
-                ent.alpha = b.alpha;
+                ent.alpha = ent.baseline.alpha;
             }
-            ent.scale = b.scale;
+            ent.scale = ent.baseline.scale;
         }
         if modnum >= MAX_MODELS {
             return err("CL_ParseModel: bad modnum");

@@ -37,6 +37,18 @@ float ao_at(vec2 ao_pos, float zc) {
                 sum += t.r * w;
                 wsum += w;
             }
+    } else if (pc.quality >= 2u) {
+        // Quality 2 runs AO at full scene resolution, so a centred 3x3 bilateral
+        // blur covers the full symmetric neighbourhood with 44% fewer fetches than 4x4.
+        ivec2 base = ivec2(floor(ao_pos)) - ivec2(1);
+        for (int y = 0; y < 3; y++)
+            for (int x = 0; x < 3; x++) {
+                ivec2 q = clamp(base + ivec2(x, y), ivec2(0), pc.ao_max);
+                vec2 t = texelFetch(textures[nonuniformEXT(pc.ao_tex)], q, 0).rg;
+                float w = 1.0 / (0.001 + abs(t.g - zc) / max(zc, 1.0) * 50.0);
+                sum += t.r * w;
+                wsum += w;
+            }
     } else {
         ivec2 base = ivec2(floor(ao_pos - 1.5));
         for (int y = 0; y < 4; y++)

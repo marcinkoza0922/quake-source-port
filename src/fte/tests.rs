@@ -33,13 +33,47 @@ fn box_model() -> CollisionModel {
     }
 }
 
-fn ent(yaw: f32) -> BrushEnt {
-    let origin = Vec3::new(100.0, 0.0, 0.0);
+fn ent_at(entity: i32, origin: Vec3, half: f32, yaw: f32) -> BrushEnt {
     let axis = (yaw != 0.0).then(|| {
         let (f, r, u) = qcore::math::angle_vectors(Vec3::new(0.0, yaw, 0.0));
         [f, r, u]
     });
-    BrushEnt { entity: 7, submodel: 1, origin, axis, mins: origin - Vec3::splat(17.0), maxs: origin + Vec3::splat(17.0) }
+    let mins = origin - Vec3::splat(half);
+    let maxs = origin + Vec3::splat(half);
+    BrushEnt { entity, submodel: 1, origin, axis, mins, maxs, prefix_max_x: maxs.x }
+}
+
+fn ent(yaw: f32) -> BrushEnt {
+    ent_at(7, Vec3::new(100.0, 0.0, 0.0), 17.0, yaw)
+}
+
+#[test]
+fn trace_line_prefix_max_x_pruning_hits_overlapping_earlier_brush() {
+    let cm = box_model();
+    let bsp = Bsp::default();
+    // Entity 1 starts earlier in X (mins.x = -50) with wide maxs.x = 150;
+    // entity 2 starts later (mins.x = 83, maxs.x = 117) and is sorted after it.
+    let mut ents = [
+        ent_at(1, Vec3::new(50.0, 40.0, 0.0), 100.0, 0.0),
+        ent_at(2, Vec3::new(100.0, 0.0, 0.0), 17.0, 0.0),
+        ent_at(3, Vec3::new(300.0, 0.0, 0.0), 17.0, 0.0),
+    ];
+    ents.sort_unstable_by(|a, b| a.mins.x.total_cmp(&b.mins.x));
+    let mut mx = f32::NEG_INFINITY;
+    for b in &mut ents {
+        mx = mx.max(b.maxs.x);
+        b.prefix_max_x = mx;
+    }
+    let w = BspWorld { bsp: &bsp, cm: &cm, ents: &ents };
+    // Ray at x in [60, 140], y = 0 hits entity 2 (at x=84), skips entity 3 cleanly.
+    let t = w.trace_line(Vec3::new(60.0, 0.0, 0.0), Vec3::new(140.0, 0.0, 0.0));
+    assert_eq!(t.entity, 2);
+    // Ray at x in [250, 350], y = 0 hits entity 3.
+    let t = w.trace_line(Vec3::new(250.0, 0.0, 0.0), Vec3::new(350.0, 0.0, 0.0));
+    assert_eq!(t.entity, 3);
+    // Ray far left stops immediately via `prefix_max_x < lo.x`.
+    let t = w.trace_line(Vec3::new(-200.0, 0.0, 0.0), Vec3::new(-100.0, 0.0, 0.0));
+    assert_eq!((t.frac, t.entity), (1.0, 0));
 }
 
 #[test]

@@ -89,17 +89,22 @@ fn view_pos(px: vec2<i32>) -> vec4<f32> {
     }
     var occ = 0.0;
     let r2 = radius * radius;
+    let inv_r2 = 1.0 / r2;
+    let inv_count = 1.0 / f32(count);
+    let bias = 0.1 + 0.0005 * p.z;
+    // Rotate the unit direction by the golden angle via a 2x2 matrix instead of per-tap trig.
+    var dir = vec2<f32>(cos(spin), sin(spin));
+    let ga = mat2x2<f32>(-0.73736888, 0.67549029, -0.67549029, -0.73736888);
     for (var i = 0; i < count; i++) {
-        let a = (f32(i) + 0.5) / f32(count);
-        let ang = spin + f32(i) * 2.3999632; // golden-angle spiral
-        let h = a * rpx;
-        let q = px + vec2<i32>(round(vec2<f32>(cos(ang), sin(ang)) * h));
+        let h = (f32(i) + 0.5) * inv_count * rpx;
+        let q = px + vec2<i32>(round(dir * h));
+        dir = ga * dir;
         let v = view_pos(q).xyz - p;
         let vv = dot(v, v);
         let vn = dot(v, n);
         // cosine to the sample (minus a depth-scaled bias), fading to 0 at the radius
-        let falloff = max(1.0 - vv / r2, 0.0);
-        occ += falloff * max(vn * inverseSqrt(vv + 1e-4) - 0.1 - 0.0005 * p.z, 0.0);
+        let falloff = max(1.0 - vv * inv_r2, 0.0);
+        occ += falloff * max(vn * inverseSqrt(vv + 1e-4) - bias, 0.0);
     }
     var vis = clamp(1.0 - 1.5 * u.proj.w * occ / f32(count), 0.0, 1.0);
     // scene alpha masks AO (0 on sky); fade out with fog so fogged distance
@@ -114,8 +119,8 @@ fn view_pos(px: vec2<i32>) -> vec4<f32> {
 // Depth-aware blur/upsample of the AO target (tex1) around AO coordinate
 // ao_pos using exact full-resolution linear depth zc so silhouettes stay sharp.
 fn ao_at(ao_pos: vec2<f32>, zc: f32) -> f32 {
-    let taps = select(4, 2, u.ix.x == 0u);
-    let base = vec2<i32>(floor(ao_pos - f32(taps / 2) + 0.5));
+    let taps = select(select(3, 4, u.ix.x == 1u), 2, u.ix.x == 0u);
+    let base = select(vec2<i32>(floor(ao_pos - f32(taps / 2) + 0.5)), vec2<i32>(round(ao_pos)) - 1, taps == 3);
     let amax = vec2<i32>(u.ao_rect.zw) - 1;
     var sum = 0.0;
     var wsum = 0.0;

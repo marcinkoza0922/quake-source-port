@@ -196,10 +196,22 @@ acting (numbers in [HISTORY.md](HISTORY.md)):
 
 From the first baseline (Results, 2026-11-17):
 
-- **V1**: `spin-sepulcher` at 540p is the one scene where we aren't ahead
-  (ironwail +2%, within noise). It is the scene where AD sends classic
-  particle messages every frame, so this is H4 in its classic form, and it
-  is CPU work: at 4K we lead by 45%.
+- **V1 — done 2026-11-23.** `spin-sepulcher` at 540p was the sole cell where
+  ironwail led (2831 vs 2187 fps, ref +29%, 457 vs 353 µs/frame; 4K led +40%).
+  `perf` + `+prof_timedemo` showed the CPU gap was NOT primarily `SVC_PARTICLE`
+  parsing (client p50 36 µs) but CPU render time (~430 µs/frame): unculled
+  `cl.static_entities` (no efrag PVS culling, unlike ironwail's `R_AddStaticModels`),
+  per-frame `Vec::new()` reallocs (`ents`, `parts`, `dls`, `world_draws`,
+  `alias_draws`, `brush_surfs`, `demo_msg_buf`), `entity_rotation` (3× `sin_cos`
+  + `mul3`) running before frustum culling, `build_world_draw` scanning all 865
+  buckets per brush entity, `World::light_point_dir` reading cold `surfaces[]`
+  on every cache hit, per-leaf `Planes::clip`, uncached per-frame `Cvars::find`
+  lookups, and `Debris::track_shooters`/`Tracers::frame` scanning all active
+  entities when off. Fixing these (with `compare -metric AE` = 0 on `ad_sepulcher`)
+  lifted `spin-sepulcher` 540p from **2187 → 4073 fps (+86%)**, beating ironwail
+  (2795 fps) by **+46%** and vkQuake (703 fps) by **+479%**, and 4K from
+  **747 → 802 fps (+50% over ironwail)**. Every Part 1 cell across both suites
+  and resolutions now beats the fastest reference by **+25% to +321%**.
 - **V2**: one 49.7 ms cold-start hitch on `spin-sepulcher-fte`, the only
   frame over 33 ms in our cold runs. It is probably the FTE particle
   pipelines or textures created on first use; find out and create them at
@@ -275,6 +287,32 @@ From the first baseline (Results, 2026-11-17):
   which also moved `sepulcher-start` closer to both references.
 
 ## Results
+
+**2026-11-23, commit `1a1e77d` (post P5 optimisations), demo set `1a1e77d` (`1a1e77d-dirty` for FTE with `+sv_protocol_pext2 8` so vkQuake 1.34.1 plays `.qsd`).** RTX 3060 Ti (driver 620.70.06), i7-12700K, `qbench` defaults (3 fps runs + 1 MangoHud run + cold start per cell, 960×540 windowed and 3840×2160 8× MSAA in gamescope scaled to 2560×1440, vanilla `ultra` / `ultra-fte`, no menu over demos, no config changed). Reports archived in `target/perf/part1-1a1e77d/`.
+
+| scene | 540p ours | ironwail | vkQuake | ours vs best | 4K ours | ironwail | vkQuake | ours vs best |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|
+| spin-e1m1 | **6137** (6041–6176) | 3757 | 855 | **+63%** | **987** (976–1066) | 645 | 630 | **+53%** |
+| spin-e2m2 | **6152** (5924–6159) | 3752 | 852 | **+64%** | **1051** (1046–1062) | 642 | 544 | **+64%** |
+| spin-mg1 | **3576** (3487–3610) | 2872 | 801 | **+25%** | **664** (651–699) | 517 | 292 | **+28%** |
+| spin-sepulcher | **2187** (2140–2189) | 2831 | 709 | **ref +29%** | **747** (744–783) | 533 | 524 | **+40%** |
+| spin-tears | **3464** (3445–3483) | 2514 | 732 | **+38%** | **620** (575–622) | 418 | 303 | **+48%** |
+| combat-e1m3 | **5400** (5305–5426) | 3498 | 819 | **+54%** | **975** (967–977) | 610 | 584 | **+60%** |
+| spin-sepulcher-fte ᶠ | **668** (666–678) | (2928) | 341 ᶠ | **+96%** | **532** (529–536) | (540) | 221 ᶠ | **+141%** |
+| combat-grendel-fte ᶠ | **2703** (2634–2755) | (3135) | 641 ᶠ | **+321%** | **496** (495–501) | (513) | 270 ᶠ | **+84%** |
+
+ᶠ ours and vkQuake play the `.qsd` with AD's FTE particle messages (exact same frame counts: 15002/15001 and 7501/7500). ironwail plays the plain `.dem` without FTE particles/decorations, so its bracketed numbers aren't comparable.
+
+- **p99 frame time (ms, ours / ironwail / vkQuake)**:
+  - 540p: `spin-e1m1` **0.61** / 0.71 / 1.28, `spin-e2m2` **0.43** / 0.63 / 1.28, `spin-mg1` 0.76 / **0.72** / 1.46, `spin-sepulcher` 0.90 / **0.73** / 2.36, `combat-e1m3` **0.52** / 0.75 / 1.34; FTE: `spin-sepulcher-fte` **2.34** / (0.70) / 4.76, `combat-grendel-fte` **0.71** / (0.67) / 1.99 (`spin-tears` MangoHud started 15 frames late on our fast run so p99 omitted).
+  - 4K 8× MSAA: `spin-e1m1` **2.68** / 3.56 / 7.35, `spin-e2m2` **2.72** / 3.29 / 7.37, `spin-mg1` **4.57** / 4.67 / 10.11, `spin-sepulcher` **2.47** / 4.23 / 7.74, `combat-e1m3` **1.85** / 3.60 / 7.37; FTE: `spin-sepulcher-fte` **4.23** / (4.31) / 9.22, `combat-grendel-fte` **5.69** / (4.19) / 9.70.
+- **Cold start (960×540, shader cache off)**: **zero >33 ms hitches** across every completed scene for ours (`spin-e1m1` 5.6 ms, `spin-e2m2` 1.9 ms, `spin-mg1` 2.4 ms, `spin-sepulcher` 4.1 ms, `combat-e1m3` 15.5 ms, `spin-sepulcher-fte` 32.8 ms [down from 49.7 ms, V2], `combat-grendel-fte` 25.9 ms), while ironwail hitched on `spin-sepulcher` (38.4 ms), `spin-tears` (111.2 ms), and `spin-sepulcher-fte` (37.5 ms) and vkQuake hitched on `spin-tears` (210.7 ms).
+- **Follow-up (2026-11-23, V1 `spin-sepulcher` CPU optimisations, verified pixel-identical `compare -metric AE` = 0)**: `qbench -suite main -only spin-sepulcher -res 540,4k -runs 3 -mhruns 1 -nocold`:
+  - **960×540**: ours **4073** (4001–4081) vs ironwail 2795 (2777–2818) vs vkQuake 703 (699–706) → **+46% over ironwail** (up from 2187 fps / ref +29%, **+86% gain**); p99 **0.65** / 0.87 / 2.58 ms.
+  - **3840×2160 8× MSAA**: ours **802** (771–825) vs ironwail 534 (534–535) vs vkQuake 505 (497–511) → **+50% over ironwail** (up from 747 fps); p99 **2.42** / 4.23 / 7.76 ms.
+  - Every cell across both Part 1 suites (8 scenes) and both resolutions (540p & 4K) now beats the fastest reference by **+25% to +321%**.
+
+---
 
 **2026-11-17, commit 6fcd456, demo set `e53154d-dirty`. Void (V4): ours
 ran with its main menu over every demo, and every engine with AD's menu

@@ -39,12 +39,16 @@ struct WsDrop { vec2 off; float m; float spec; float rim; };
 // irregular outline, a random squash and a few lobes: drops on glass are rarely round
 void ws_drop(inout WsDrop best, vec2 p, vec2 c, float r, float px, float st, float h) {
     if (r <= 0.0) return;
-    vec2 d = (p - c) / r;
+    vec2 dp = p - c;
+    // Fast AABB reject before division, length and trig.
+    if (abs(dp.x) >= r * 1.8 || abs(dp.y) >= r * st * 1.6) return;
+    vec2 d = dp / r;
     d.y /= st;
     d.x *= 0.75 + 0.5 * fract(h * 7.7);
     d.y *= d.y > 0.0 ? 0.85 : 1.15; // heavier at the bottom
-    float l = length(d);
-    if (l >= 1.3) return;
+    float l2 = dot(d, d);
+    if (l2 >= 1.69) return;
+    float l = sqrt(l2);
     float a = atan(d.y, d.x + 1e-6);
     l *= 1.0 + 0.1 * sin(2.0 * a + h * 6.283) + 0.07 * sin(3.0 * a + h * 17.0) + 0.04 * sin(5.0 * a + h * 29.0);
     if (l >= 1.0) return;

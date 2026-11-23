@@ -288,7 +288,7 @@ impl FteBlend {
     ];
 }
 
-pub use qcore::vertex::ParticleVertex as FteVertex;
+pub use qcore::vertex::{ParticleQuad as FteQuad, ParticleVertex as FteVertex};
 
 /// Indexed draw of FTE particle geometry; drawn in slice order.
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -395,6 +395,9 @@ pub struct RenderFrame<'a> {
     pub fte_vertices: &'a [FteVertex],
     pub fte_indices: &'a [u32],
     pub fte_batches: &'a [FteBatch],
+    /// Instanced normal FTE billboards (`FteBatch::first_index` = first instance, `num_indices` = count).
+    pub fte_quads: &'a [FteQuad],
+    pub fte_quad_batches: &'a [FteBatch],
     pub dlights: &'a [DLight],
     /// d_lightstylevalue-style values (256 = normal, 'm' = 264); missing = 256.
     pub lightstyles: &'a [i32],
@@ -431,6 +434,8 @@ impl Default for RenderFrame<'_> {
             fte_vertices: &[],
             fte_indices: &[],
             fte_batches: &[],
+            fte_quads: &[],
+            fte_quad_batches: &[],
             dlights: &[],
             lightstyles: &[],
             fog: Fog::default(),

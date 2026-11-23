@@ -2,14 +2,20 @@ use super::*;
 pub(super) struct PortalDraw {
     pub portal: crate::portals::Portal,
     pub world: WorldDraw,
+    /// Optional GPU cull + indirect lightmap dispatch for this destination view.
+    pub cull: Option<CullFrame>,
     pub ubo: u32,
     pub scissor: vk::Rect2D,
+    /// Aperture-narrowed destination frustum planes (`None` when scissor is empty).
+    pub frustum: Option<[[f32; 4]; 4]>,
     /// The view this portal is seen in (`None`: the main view).
     pub parent: Option<usize>,
     /// Nesting depth (`0`: directly visible from the main view).
     pub depth: u32,
     /// FTE batches drawn in this view (particles, gun portal ovals).
     pub fte: Vec<(usize, u32, crate::FteBatch, f32)>,
+    /// Instanced normal FTE billboard batches drawn in this view.
+    pub fte_quads: Vec<(usize, u32, crate::FteBatch, f32)>,
 }
 
 /// Portal viewport extent inside the portal render target for a scene region.
@@ -95,8 +101,8 @@ impl Renderer {
         time: f64,
         alphas: [f32; 4],
         lm: &mut LightmapRequests,
-        worlds: &mut PortalWorldCache,
         teleport_ripples: bool,
+        fi: usize,
     ) -> Vec<PortalDraw> {
         let planar_reflections = self.reflection_mode(set) == 1;
         let (Some(v), Some(w)) = (view, self.world.as_mut()) else {
@@ -169,27 +175,88 @@ impl Renderer {
             }
             k += 1;
         }
+        let mut culled: Vec<u32> = Vec::new();
         views
             .into_iter()
             .filter_map(|(portal, parent, depth)| {
                 let ubo = dynw.push(&[0u8; 2048], 256)? as u32;
-                let surfs = w.cpu.portal_surfaces(portal.pvs);
-                let world = worlds.get_or_build(&surfs, || build_world_draw(
-                    w,
-                    &mut self.buckets,
-                    dynw,
-                    &surfs,
-                    false,
-                    time,
-                    alphas,
-                    1.0,
-                    ident(),
-                    lm,
-                ));
                 let scissor = super::portal_scissor::aperture(
                     &v.vp, &portal, portal_extent, texture_extent, teleport_ripples,
                 );
-                Some(PortalDraw { portal, world, ubo, scissor, parent, depth, fte: Vec::new() })
+                let dest_vp = mul(&v.vp, &portal.to_source());
+                let frustum = super::portal_scissor::frustum_planes(&dest_vp, scissor, portal_extent);
+                let (world, cull) = if let Some(f) = frustum {
+                    let dest_eye = portal.to_destination(v.eye);
+                    let clip = portal.clip();
+                    if w.cpu.hidden_surfaces.is_empty()
+                        && let Some((wd, cf)) = gpu_world_draw_ex(
+                            w,
+                            dynw,
+                            w.cpu.point_leaf(portal.pvs),
+                            dest_eye,
+                            &f,
+                            clip,
+                            time,
+                            alphas,
+                            fi,
+                        )
+                    {
+                        (wd, Some(cf))
+                    } else {
+                        let surfs = w.cpu.portal_surfaces(portal.pvs);
+                        culled.clear();
+                        for &si in surfs.iter() {
+                            let Some(s) = w.cpu.surfaces.get(si as usize) else { continue };
+                            if s.num_indices == 0 || (portal.reflect && s.kind == TextureKind::Liquid) {
+                                continue;
+                            }
+                            if s.kind != TextureKind::Sky {
+                                let dd = dot(dest_eye, s.normal) - s.dist;
+                                if (dd < 0.0) != s.flipped {
+                                    continue;
+                                }
+                            }
+                            if !super::portal_scissor::box_in_plane(clip, s.mins, s.maxs)
+                                || !box_in_frustum(&f, s.mins, s.maxs)
+                            {
+                                continue;
+                            }
+                            culled.push(si);
+                        }
+                        let wd = build_world_draw(
+                            w,
+                            &mut self.buckets,
+                            &mut self.world_draw_scratch,
+                            dynw,
+                            &culled,
+                            false,
+                            time,
+                            alphas,
+                            1.0,
+                            ident(),
+                            lm,
+                        );
+                        (wd, None)
+                    }
+                } else {
+                    (WorldDraw {
+                        model: ident(),
+                        zfix: false,
+                        main_visible: false,
+                        alpha: 1.0,
+                        opaque: Range::default(),
+                        opaque_fb: Range::default(),
+                        sky: Range::default(),
+                        water: [Range::default(); 4],
+                        water_alpha: [Range::default(); 4],
+                        ibuf: None,
+                        cbuf: None,
+                        bounds: [0.0; 4],
+                        polys: 0,
+                        triangles: 0,
+                    }, None)
+                };
+                Some(PortalDraw { portal, world, cull, ubo, scissor, frustum, parent, depth, fte: Vec::new(), fte_quads: Vec::new() })
             })
             .collect()
     }
@@ -202,6 +269,7 @@ impl Renderer {
         portals: &[PortalDraw],
         particles: Range,
         fte: Option<(u64, u64)>,
+        fte_quads: Option<u64>,
         brushes: &[WorldDraw],
         aliases: &[AliasDraw],
         fi: usize,
@@ -242,6 +310,64 @@ impl Renderer {
                     }
                 };
                 timestamp(0);
+                if let Some(c) = &portal.cull {
+                    let cs = vk::PipelineBindPoint::COMPUTE;
+                    d.cmd_copy_buffer(
+                        cmd,
+                        f.dynbuf.buf,
+                        c.cmdbuf,
+                        &[vk::BufferCopy { src_offset: c.stage_ofs, dst_offset: 0, size: c.stage_len }],
+                    );
+                    let tb = [vk::MemoryBarrier::default()
+                        .src_access_mask(vk::AccessFlags::TRANSFER_WRITE)
+                        .dst_access_mask(vk::AccessFlags::SHADER_READ | vk::AccessFlags::SHADER_WRITE)];
+                    d.cmd_pipeline_barrier(
+                        cmd,
+                        vk::PipelineStageFlags::TRANSFER,
+                        vk::PipelineStageFlags::COMPUTE_SHADER,
+                        vk::DependencyFlags::empty(),
+                        &tb,
+                        &[],
+                        &[],
+                    );
+                    d.cmd_bind_pipeline(cmd, cs, p.cull);
+                    d.cmd_bind_descriptor_sets(cmd, cs, p.cull_layout, 0, &[f.cull_set], &[]);
+                    d.cmd_push_constants(cmd, p.cull_layout, vk::ShaderStageFlags::COMPUTE, 0, bytes_of(&[c.push]));
+                    d.cmd_dispatch(cmd, c.groups, 1, 1);
+                    let mb = [vk::MemoryBarrier::default()
+                        .src_access_mask(vk::AccessFlags::SHADER_WRITE)
+                        .dst_access_mask(
+                            vk::AccessFlags::INDIRECT_COMMAND_READ
+                                | vk::AccessFlags::INDEX_READ
+                                | vk::AccessFlags::SHADER_READ,
+                        )];
+                    d.cmd_pipeline_barrier(
+                        cmd,
+                        vk::PipelineStageFlags::COMPUTE_SHADER,
+                        vk::PipelineStageFlags::DRAW_INDIRECT
+                            | vk::PipelineStageFlags::VERTEX_INPUT
+                            | vk::PipelineStageFlags::COMPUTE_SHADER,
+                        vk::DependencyFlags::empty(),
+                        &mb,
+                        &[],
+                        &[],
+                    );
+                    if let Some(lm) = &self.lightmap {
+                        let lm_rng = gpu::range(vk::ImageAspectFlags::COLOR, 1, lm.layers);
+                        gpu::barrier(d, cmd, lm.image, lm_rng, vk::ImageLayout::GENERAL, vk::ImageLayout::GENERAL);
+                        d.cmd_bind_pipeline(cmd, cs, p.lightmap);
+                        d.cmd_bind_descriptor_sets(cmd, cs, p.comp_layout, 0, &[f.comp_set], &[]);
+                        d.cmd_push_constants(
+                            cmd,
+                            p.comp_layout,
+                            vk::ShaderStageFlags::COMPUTE,
+                            0,
+                            bytes_of(&[(OFS_VIS / 4) as u32, MAX_VIS as u32]),
+                        );
+                        d.cmd_dispatch_indirect(cmd, c.cmdbuf, c.disp_ofs);
+                        gpu::barrier(d, cmd, lm.image, lm_rng, vk::ImageLayout::GENERAL, vk::ImageLayout::GENERAL);
+                    }
+                }
                 let img = &t.portals[i].0;
                 gpu::barrier(
                     d,
@@ -304,7 +430,17 @@ impl Renderer {
                 d.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
                 d.cmd_bind_vertex_buffers(cmd, 0, &[w.vbuf.buf], &[0]);
                 timestamp(1);
-                for wd in std::iter::once(&portal.world).chain(brushes.iter().skip(1)) {
+                let clip = portal.portal.clip();
+                if let Some(frustum) = portal.frustum {
+                for (bi, wd) in std::iter::once(&portal.world).chain(brushes.iter().skip(1)).enumerate() {
+                    if bi > 0 {
+                        let [cx, cy, cz, r] = wd.bounds;
+                        if dot([clip[0], clip[1], clip[2]], [cx, cy, cz]) + clip[3] + r < 0.0
+                            || !sphere_in_frustum(&frustum, [cx, cy, cz], r)
+                        {
+                            continue;
+                        }
+                    }
                     d.cmd_bind_index_buffer(
                         cmd,
                         wd.ibuf.unwrap_or(f.dynbuf.buf),
@@ -344,23 +480,19 @@ impl Renderer {
                     }
                 }
                 timestamp(2);
-                let clip = portal.portal.clip();
                 let skip_extras = skip_portal_extras(portal_quality, portal.depth);
                 for a in aliases.iter().filter(|a| !a.viewmodel) {
-                    if dot([clip[0], clip[1], clip[2]], a.origin) + clip[3] + a.radius < 0.0 {
+                    if dot([clip[0], clip[1], clip[2]], a.origin) + clip[3] + a.radius < 0.0
+                        || !sphere_in_frustum(&frustum, a.origin, a.radius)
+                    {
                         continue;
                     }
-                    if let Some(vs) = view {
+                    if skip_extras && let Some(vs) = view {
                         let cull_pos = portal.portal.from_destination(a.origin);
-                        if !sphere_in_frustum(&vs.frustum, cull_pos, a.radius) {
+                        let dist = sub(cull_pos, vs.eye);
+                        let dist2 = dot(dist, dist);
+                        if dist2 > 256.0 * 256.0 && a.radius * a.radius < dist2 * (0.012 * 0.012) {
                             continue;
-                        }
-                        if skip_extras {
-                            let dist = sub(cull_pos, vs.eye);
-                            let dist2 = dot(dist, dist);
-                            if dist2 > 256.0 * 256.0 && a.radius * a.radius < dist2 * (0.012 * 0.012) {
-                                continue;
-                            }
                         }
                     }
                     let Some(Model::Alias(am)) = self.models.get(a.model) else {
@@ -387,20 +519,58 @@ impl Renderer {
                 if let Some((vofs, iofs)) = fte.filter(|_| !portal.fte.is_empty()) {
                     d.cmd_bind_vertex_buffers(cmd, 0, &[f.dynbuf.buf], &[vofs]);
                     d.cmd_bind_index_buffer(cmd, f.dynbuf.buf, iofs, vk::IndexType::UINT32);
+                    let mut last_fte_pipe = usize::MAX;
                     for (pipe, slot, b, mode) in &portal.fte {
-                        d.cmd_bind_pipeline(cmd, gfx, pp.fte[*pipe]);
+                        if *pipe != last_fte_pipe {
+                            d.cmd_bind_pipeline(cmd, gfx, pp.fte[*pipe]);
+                            last_fte_pipe = *pipe;
+                        }
                         let fogmix = if matches!(b.blend, crate::FteBlend::Blend | crate::FteBlend::BlendColour) { 1.0 } else { 0.0 };
                         d.cmd_push_constants(
                             cmd,
                             p.layout,
                             vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT,
                             0,
-                            bytes_of(&[PolyPush { color: [fogmix, 0.0, 1.0, *mode], tex: *slot }]),
+                            bytes_of(&[FtePush {
+                                fogmix: [fogmix, 0.0, 1.0, *mode],
+                                tex: *slot,
+                                depth_tex: 0,
+                                depth_uv: [0.0; 2],
+                            }]),
                         );
                         d.cmd_draw_indexed(cmd, b.num_indices, 1, b.first_index, 0, 0);
                     }
                 }
+                if let Some(qofs) = fte_quads.filter(|_| !portal.fte_quads.is_empty()) {
+                    d.cmd_bind_vertex_buffers(cmd, 0, &[f.dynbuf.buf], &[qofs]);
+                    let mut last_q_pipe = usize::MAX;
+                    for (pipe, slot, b, mode) in &portal.fte_quads {
+                        if *pipe != last_q_pipe {
+                            d.cmd_bind_pipeline(cmd, gfx, pp.fte_quad[*pipe]);
+                            last_q_pipe = *pipe;
+                        }
+                        let fogmix = if matches!(b.blend, crate::FteBlend::Blend | crate::FteBlend::BlendColour) { 1.0 } else { 0.0 };
+                        d.cmd_push_constants(
+                            cmd,
+                            p.layout,
+                            vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT,
+                            0,
+                            bytes_of(&[FtePush {
+                                fogmix: [fogmix, 0.0, 1.0, *mode],
+                                tex: *slot,
+                                depth_tex: 0,
+                                depth_uv: [0.0; 2],
+                            }]),
+                        );
+                        d.cmd_draw(cmd, 6, b.num_indices, 0, b.first_index);
+                    }
+                }
                 timestamp(4);
+                } else {
+                    timestamp(2);
+                    timestamp(3);
+                    timestamp(4);
+                }
                 d.cmd_end_rendering(cmd);
                 gpu::barrier(
                     d,
@@ -413,18 +583,26 @@ impl Renderer {
                 let mb = [vk::MemoryBarrier::default()
                     .src_access_mask(
                         vk::AccessFlags::COLOR_ATTACHMENT_WRITE
-                            | vk::AccessFlags::DEPTH_STENCIL_ATTACHMENT_WRITE,
+                            | vk::AccessFlags::DEPTH_STENCIL_ATTACHMENT_WRITE
+                            | vk::AccessFlags::INDIRECT_COMMAND_READ
+                            | vk::AccessFlags::INDEX_READ,
                     )
                     .dst_access_mask(
                         vk::AccessFlags::COLOR_ATTACHMENT_WRITE
-                            | vk::AccessFlags::DEPTH_STENCIL_ATTACHMENT_WRITE,
+                            | vk::AccessFlags::DEPTH_STENCIL_ATTACHMENT_WRITE
+                            | vk::AccessFlags::TRANSFER_WRITE
+                            | vk::AccessFlags::SHADER_WRITE,
                     )];
                 d.cmd_pipeline_barrier(
                     cmd,
                     vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT
-                        | vk::PipelineStageFlags::LATE_FRAGMENT_TESTS,
+                        | vk::PipelineStageFlags::LATE_FRAGMENT_TESTS
+                        | vk::PipelineStageFlags::DRAW_INDIRECT
+                        | vk::PipelineStageFlags::VERTEX_INPUT,
                     vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT
-                        | vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS,
+                        | vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS
+                        | vk::PipelineStageFlags::TRANSFER
+                        | vk::PipelineStageFlags::COMPUTE_SHADER,
                     vk::DependencyFlags::empty(),
                     &mb,
                     &[],
@@ -442,6 +620,8 @@ impl Renderer {
 pub(super) fn gun_portal_quad(
     g: &crate::GunPortal,
     slot: u32,
+    v_base: u32,
+    i_base: u32,
     v: &mut Vec<crate::FteVertex>,
     i: &mut Vec<u32>,
 ) -> (usize, u32, crate::FteBatch, f32) {
@@ -449,8 +629,8 @@ pub(super) fn gun_portal_quad(
     let r = [u[1] * n[2] - u[2] * n[1], u[2] * n[0] - u[0] * n[2], u[0] * n[1] - u[1] * n[0]];
     let [hw, hh] = g.half;
     let [cr, cg, cb] = g.color;
-    let base = v.len() as u32;
-    let first = i.len() as u32;
+    let base = v_base + v.len() as u32;
+    let first = i_base + i.len() as u32;
     for (s, t) in [(0.0, 0.0), (1.0, 0.0), (1.0, 1.0), (0.0, 1.0)] {
         let (a, b) = (s * 2.0 - 1.0, 1.0 - t * 2.0);
         let pos = std::array::from_fn(|k| g.origin[k] + n[k] * 0.6 + r[k] * a * hw + u[k] * b * hh);

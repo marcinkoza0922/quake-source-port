@@ -52,6 +52,10 @@ impl Tracers {
 
     #[allow(clippy::too_many_arguments)]
     pub fn frame(&mut self, hitscan: bool, cl: &ClientState, debris: &crate::debris::Debris, view: &View, r: &mut Renderer, out: &mut Geometry) {
+        if !hitscan && !cl.has_pellets && self.shots.is_empty() {
+            self.pellets.clear();
+            return;
+        }
         let time = cl.time;
         self.shots.retain(|s| s.start <= time);
         let eye = Vec3::from(view.origin);

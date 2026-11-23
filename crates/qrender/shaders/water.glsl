@@ -144,6 +144,22 @@ void main() {
     // slot kind 2), Fresnel-weighted and wobbled by the warp and ripples.
     // Its image is fogged along the reflected path already.
     if (fr.refl.x > 0.0 && kind != 2u && kind != 4u && fr.portal_clip == vec4(0.0)) {
+        uint rt_slot = floatBitsToUint(fr.refl.z);
+        if (rt_slot != 0u) {
+            vec3 nf = normalize(cross(dFdx(i_wpos), dFdy(i_wpos)));
+            vec3 v = normalize(fr.eye.xyz - i_wpos);
+            float cosv = clamp(abs(dot(v, nf)), 0.0, 1.0);
+            float fres = 0.2 + 0.8 * pow(1.0 - cosv, 5.0);
+            vec2 rt_scale = unpackUnorm2x16(floatBitsToUint(fr.refl.w));
+            vec2 inv_sz = 1.0 / vec2(textureSize(textures[nonuniformEXT(rt_slot)], 0));
+            vec2 uv = clamp((gl_FragCoord.xy / (fr.vel_uv.zw + 1.0)) * rt_scale, 0.5 * inv_sz, max(rt_scale - 0.5 * inv_sz, 0.5 * inv_sz));
+            vec4 r = texture(textures[nonuniformEXT(rt_slot)], uv);
+            if (r.a > 0.01) {
+                float f = min(fres * fr.refl.x, 0.9) * smoothstep(0.01, 0.25, r.a);
+                col = mix(col, r.rgb / r.a, f);
+                alpha = max(alpha, f);
+            }
+        } else {
         for (int i = 0; i < 4; i++) {
             if (fr.portal_max[i].w != 2.0) continue;
             if (abs(dot(fr.portal_plane[i].xyz, i_wpos) + fr.portal_plane[i].w) > 0.25) continue;
@@ -159,6 +175,7 @@ void main() {
             col = mix(col, refl, f);
             alpha = max(alpha, f);
             break;
+        }
         }
     }
 #endif

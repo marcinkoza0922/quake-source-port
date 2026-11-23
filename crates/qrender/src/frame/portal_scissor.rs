@@ -55,6 +55,53 @@ pub(super) fn aperture(
     }
 }
 
+/// Extracts four unit-normal side frustum planes (left, right, top, bottom) for
+/// `dest_vp` narrowed to `scissor` inside `extent`. Returns `None` if `scissor`
+/// is empty.
+pub(super) fn frustum_planes(
+    dest_vp: &Mat4,
+    scissor: vk::Rect2D,
+    extent: [u32; 2],
+) -> Option<[[f32; 4]; 4]> {
+    if scissor.extent.width == 0 || scissor.extent.height == 0 || extent[0] == 0 || extent[1] == 0 {
+        return None;
+    }
+    let w = extent[0] as f32;
+    let h = extent[1] as f32;
+    let x0 = scissor.offset.x.max(0) as f32;
+    let y0 = scissor.offset.y.max(0) as f32;
+    let x1 = (scissor.offset.x.max(0) as u32 + scissor.extent.width).min(extent[0]) as f32;
+    let y1 = (scissor.offset.y.max(0) as u32 + scissor.extent.height).min(extent[1]) as f32;
+    if x1 <= x0 || y1 <= y0 {
+        return None;
+    }
+    let lx = 2.0 * (x0 / w) - 1.0;
+    let rx = 2.0 * (x1 / w) - 1.0;
+    let ty = 2.0 * (y0 / h) - 1.0;
+    let by = 2.0 * (y1 / h) - 1.0;
+    let row = |r: usize| [dest_vp[r], dest_vp[4 + r], dest_vp[8 + r], dest_vp[12 + r]];
+    let (r0, r1, r3) = (row(0), row(1), row(3));
+    let norm_plane = |p: [f32; 4]| {
+        let len = (p[0] * p[0] + p[1] * p[1] + p[2] * p[2]).sqrt().max(1e-6);
+        [p[0] / len, p[1] / len, p[2] / len, p[3] / len]
+    };
+    Some([
+        norm_plane([r0[0] - lx * r3[0], r0[1] - lx * r3[1], r0[2] - lx * r3[2], r0[3] - lx * r3[3]]),
+        norm_plane([rx * r3[0] - r0[0], rx * r3[1] - r0[1], rx * r3[2] - r0[2], rx * r3[3] - r0[3]]),
+        norm_plane([r1[0] - ty * r3[0], r1[1] - ty * r3[1], r1[2] - ty * r3[2], r1[3] - ty * r3[3]]),
+        norm_plane([by * r3[0] - r1[0], by * r3[1] - r1[1], by * r3[2] - r1[2], by * r3[3] - r1[3]]),
+    ])
+}
+
+/// True when any corner of `[mins, maxs]` lies on the positive side of `plane`.
+#[inline]
+pub(super) fn box_in_plane(plane: [f32; 4], mins: [f32; 3], maxs: [f32; 3]) -> bool {
+    let px = if plane[0] >= 0.0 { maxs[0] } else { mins[0] };
+    let py = if plane[1] >= 0.0 { maxs[1] } else { mins[1] };
+    let pz = if plane[2] >= 0.0 { maxs[2] } else { mins[2] };
+    plane[0] * px + plane[1] * py + plane[2] * pz + plane[3] >= 0.0
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -137,5 +184,41 @@ mod tests {
                 } } }
             }
         }
+    }
+
+    #[test]
+    fn narrowed_destination_frustum_covers_aperture_and_rejects_outside() {
+        use crate::frame::math::{mul, sphere_in_frustum};
+        let view = crate::View { origin: [0.0, 0.0, 48.0], angles: [0.0; 3], fov_x: 90.0, ..Default::default() };
+        let extent = [1280, 720];
+        let vs = setup_view(&view, extent[0], extent[1]);
+        // Teleporter window in front of the camera, shifted right and rotated 90 deg at destination.
+        let tele = crate::portals::Portal {
+            mins: [196.0, -48.0, 16.0],
+            maxs: [204.0, 48.0, 80.0],
+            normal: [-1.0, 0.0, 0.0],
+            center: [200.0, 0.0, 48.0],
+            destination: [1000.0, 500.0, 48.0],
+            rot: crate::portals::yaw_rot(std::f32::consts::FRAC_PI_2),
+            pvs: [1000.0, 500.0, 48.0],
+            gun: None,
+            reflect: false,
+        };
+        let rect = aperture(&vs.vp, &tele, extent, extent, false);
+        let dest_vp = mul(&vs.vp, &tele.to_source());
+        let f = frustum_planes(&dest_vp, rect, extent).expect("non-empty scissor");
+        // Point directly beyond the destination exit (+Y in destination space) is inside.
+        let visible = tele.to_destination([400.0, 0.0, 48.0]);
+        assert!(sphere_in_frustum(&f, visible, 8.0));
+        // Point far outside the narrowed aperture (would be inside a 90 deg full FOV, outside aperture).
+        let side = tele.to_destination([220.0, 180.0, 48.0]);
+        assert!(!sphere_in_frustum(&f, side, 4.0));
+        // Planar reflection (det = -1) also keeps points visible in the reflected water sheet.
+        let refl = crate::portals::reflection([0.0, 0.0, 1.0], 0.0, [100.0, -100.0, 0.0], [300.0, 100.0, 0.0], view.origin);
+        let r_rect = aperture(&vs.vp, &refl, extent, extent, false);
+        let r_vp = mul(&vs.vp, &refl.to_source());
+        let rf = frustum_planes(&r_vp, r_rect, extent).expect("non-empty reflection scissor");
+        assert!(sphere_in_frustum(&rf, [200.0, 0.0, 48.0], 16.0));
+        assert!(!sphere_in_frustum(&rf, [-200.0, 0.0, 48.0], 8.0));
     }
 }

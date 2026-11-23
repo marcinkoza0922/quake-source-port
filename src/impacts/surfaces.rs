@@ -52,7 +52,50 @@ pub(super) fn wooden(world: &BspWorld<'_>, tr: &qpart::Trace) -> bool {
     texture_at(world, tr).is_some_and(|t| wood(&t.name))
 }
 
+/// Check whether point `p` with hit normal `n` lies on face `f`, returning its miptex.
+fn face_texture<'b>(world: &BspWorld<'b>, f: &qformats::bsp::Face, p: Vec3, n: Vec3) -> Option<&'b qformats::bsp::MipTex> {
+    let pl = world.bsp.planes.get(f.plane as usize)?;
+    let pn = Vec3::from(pl.normal);
+    let fn_ = if f.side != 0 { -pn } else { pn };
+    if fn_.dot(n) < 0.5 || (p.dot(pn) - pl.dist).abs() > 0.15 {
+        return None;
+    }
+    let count = f.num_edges as usize;
+    if count < 3 {
+        return None;
+    }
+    // Stack buffer avoids a per-face Vec allocation for almost all Quake polygons.
+    let mut stack = [Vec3::ZERO; 64];
+    let mut heap = Vec::new();
+    let poly: &[Vec3] = if count <= stack.len() {
+        for (dst, i) in stack[..count].iter_mut().zip(f.first_edge..f.first_edge + f.num_edges) {
+            let se = world.bsp.surfedges[i as usize];
+            let edge = world.bsp.edges[se.unsigned_abs() as usize];
+            *dst = Vec3::from(world.bsp.vertexes[edge[usize::from(se < 0)] as usize]);
+        }
+        &stack[..count]
+    } else {
+        heap.reserve(count);
+        for i in f.first_edge..f.first_edge + f.num_edges {
+            let se = world.bsp.surfedges[i as usize];
+            let edge = world.bsp.edges[se.unsigned_abs() as usize];
+            heap.push(Vec3::from(world.bsp.vertexes[edge[usize::from(se < 0)] as usize]));
+        }
+        &heap
+    };
+    if !(1..poly.len() - 1).any(|i| mesh::ray(p + n, p - n, [poly[0], poly[i], poly[i + 1]]).is_some()) {
+        return None;
+    }
+    world
+        .bsp
+        .texinfo
+        .get(f.texinfo as usize)
+        .and_then(|t| world.bsp.textures.get(t.miptex.max(0) as usize))
+        .and_then(|t| t.as_ref())
+}
+
 /// The miptex of the face `tr` hit, on the world or an inline brush entity.
+/// Walks the model's BSP tree so lookups are O(depth) instead of scanning every face.
 pub(crate) fn texture_at<'b>(world: &BspWorld<'b>, tr: &qpart::Trace) -> Option<&'b qformats::bsp::MipTex> {
     let (sub, p, n) = if tr.entity == 0 {
         (0, tr.endpos, tr.normal)
@@ -63,36 +106,52 @@ pub(crate) fn texture_at<'b>(world: &BspWorld<'b>, tr: &qpart::Trace) -> Option<
         (e.submodel, p, n)
     };
     let model = world.bsp.models.get(sub)?;
+    let head = model.headnode[0];
+    if head >= 0 && (head as usize) < world.bsp.nodes.len() {
+        const EPS: f32 = 0.15;
+        let mut stack = [0i32; 64];
+        let mut top = 0usize;
+        stack[0] = head;
+        top += 1;
+        while top > 0 {
+            top -= 1;
+            let ni = stack[top];
+            if ni < 0 {
+                continue;
+            }
+            let Some(node) = world.bsp.nodes.get(ni as usize) else {
+                continue;
+            };
+            let Some(pl) = world.bsp.planes.get(node.plane as usize) else {
+                continue;
+            };
+            let dist = p.dot(Vec3::from(pl.normal)) - pl.dist;
+            if dist.abs() <= EPS {
+                let first = node.first_face as usize;
+                let end = (first + node.num_faces as usize).min(world.bsp.faces.len());
+                for f in &world.bsp.faces[first..end] {
+                    if let Some(tex) = face_texture(world, f, p, n) {
+                        return Some(tex);
+                    }
+                }
+            }
+            if dist >= -EPS && node.children[0] >= 0 && top < stack.len() {
+                stack[top] = node.children[0];
+                top += 1;
+            }
+            if dist <= EPS && node.children[1] >= 0 && top < stack.len() {
+                stack[top] = node.children[1];
+                top += 1;
+            }
+        }
+        return None;
+    }
     for f in
         &world.bsp.faces[model.first_face as usize..(model.first_face + model.num_faces) as usize]
     {
-        let Some(pl) = world.bsp.planes.get(f.plane as usize) else {
-            continue;
-        };
-        let fn_ = if f.side != 0 { -Vec3::from(pl.normal) } else { Vec3::from(pl.normal) };
-        if fn_.dot(n) < 0.5 || (p.dot(Vec3::from(pl.normal)) - pl.dist).abs() > 0.15 {
-            continue;
+        if let Some(tex) = face_texture(world, f, p, n) {
+            return Some(tex);
         }
-        let mut poly = Vec::new();
-        for i in f.first_edge..f.first_edge + f.num_edges {
-            let se = world.bsp.surfedges[i as usize];
-            let edge = world.bsp.edges[se.unsigned_abs() as usize];
-            poly.push(Vec3::from(
-                world.bsp.vertexes[edge[usize::from(se < 0)] as usize],
-            ));
-        }
-        if poly.len() < 3
-            || !(1..poly.len() - 1)
-                .any(|i| mesh::ray(p + n, p - n, [poly[0], poly[i], poly[i + 1]]).is_some())
-        {
-            continue;
-        }
-        return world
-            .bsp
-            .texinfo
-            .get(f.texinfo as usize)
-            .and_then(|t| world.bsp.textures.get(t.miptex.max(0) as usize))
-            .and_then(|t| t.as_ref());
     }
     None
 }

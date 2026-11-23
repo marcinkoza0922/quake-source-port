@@ -39,10 +39,9 @@ fn tap(uv0: vec2<f32>) -> vec3<f32> {
     let t = du.model[2].xy;
     var c: vec3<f32>;
     if (du.model[2].z > 1.5) {
-        c = tap(uv) * 4.0;
-        c += (tap(uv + vec2<f32>(t.x, 0.0)) + tap(uv - vec2<f32>(t.x, 0.0)) + tap(uv + vec2<f32>(0.0, t.y)) + tap(uv - vec2<f32>(0.0, t.y))) * 2.0;
-        c += tap(uv + t) + tap(uv - t) + tap(uv + vec2<f32>(t.x, -t.y)) + tap(uv + vec2<f32>(-t.x, t.y));
-        c *= du.model[3].x / 16.0;
+        // 4-tap bilinear tent filter (matching Vulkan bloom.frag).
+        let h = t * 0.5;
+        c = (tap(uv + h) + tap(uv - h) + tap(uv + vec2<f32>(h.x, -h.y)) + tap(uv + vec2<f32>(-h.x, h.y))) * (du.model[3].x * 0.25);
     } else {
         let e = tap(uv);
         let a = tap(uv + vec2<f32>(-2.0, 2.0) * t);

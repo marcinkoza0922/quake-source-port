@@ -58,6 +58,8 @@ pub struct Renderer {
     water_fx: water::WaterFx,
     textures: Vec<Option<Tex>>,
     palette: Palette,
+    /// Prepacked opaque RGBA8 palette (`r | g<<8 | b<<16 | 0xff<<24`) for classic particle uploads.
+    palette_rgba: [u32; 256],
     palette_buf: Buffer,
     lightmap: Option<Image>,
     /// Reused CPU lightmap union across all scene/destination views.
@@ -84,6 +86,13 @@ pub struct Renderer {
     sky_layers: [u32; 2],
     skybox: Option<[u32; 6]>,
     buckets: Vec<Vec<u32>>,
+    /// Reused per-draw indirect command scratch for `build_world_draw`.
+    world_draw_scratch: frame::WorldDrawScratch,
+    /// Reused per-frame draw lists for view 0 (zero steady-state heap reallocs).
+    frame_scratch: frame::FrameScratch,
+    /// Reused per-frame 2D UI buffers (zero heap allocations in steady state).
+    ui_verts: Vec<frame::UiVert>,
+    ui_ranges: Vec<(Option<[f32; 4]>, u32, u32)>,
     needs_resize: bool,
     frame_count: u64,
     /// Windowed screenshot: copy the next presented image to a buffer.
@@ -281,6 +290,42 @@ impl Renderer {
             .as_ref()
             .and_then(|w| w.cpu.light_point(p, lightstyles))
             .unwrap_or([0.0; 3])
+    }
+
+    /// True once a world BSP is loaded.
+    pub fn has_world(&self) -> bool {
+        self.world.is_some()
+    }
+
+    /// Conservative local-space `(mins, maxs)` for a loaded model (rotation-safe
+    /// sphere box for alias/sprite models, submodel AABB for brush models).
+    pub fn model_bounds(&self, id: ModelId) -> Option<([f32; 3], [f32; 3])> {
+        match self.models.get(id.0 as usize)? {
+            Model::Brush(sm) => {
+                let sub = self.world.as_ref()?.cpu.submodels.get(*sm as usize)?;
+                Some((sub.mins, sub.maxs))
+            }
+            Model::Alias(am) => {
+                let r = am.radius.max(16.0);
+                Some(([-r; 3], [r; 3]))
+            }
+            Model::Sprite(sm) => {
+                let r = sm.radius.max(16.0);
+                Some(([-r; 3], [r; 3]))
+            }
+        }
+    }
+
+    /// Appends the 1-based non-solid BSP leaves touched by `[mins, maxs]`.
+    pub fn world_box_leaves(&self, mins: [f32; 3], maxs: [f32; 3], out: &mut Vec<u32>) {
+        if let Some(w) = &self.world {
+            w.cpu.box_leaves(mins, maxs, out);
+        }
+    }
+
+    /// Flat PVS leaf bitset for `eye`'s view leaf, or `None` when PVS is off.
+    pub fn world_pvs_bits(&mut self, eye: Vec3) -> Option<&[u32]> {
+        self.world.as_mut()?.cpu.pvs_bits(eye)
     }
 }
 

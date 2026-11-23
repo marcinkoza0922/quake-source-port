@@ -186,7 +186,7 @@ the comparison runs on the same inputs.
 - **P4. First full run**, saved as the baseline
   (`-save-baseline`). Each feature gets a budget from it (for example,
   default tier at most X% of the 4K frame). Run 2026-11-21 (Results); budgets still to be agreed.
-- **P5. Optimise**, items in order of measured cost. Open items carried
+- **P5. Optimise**, items in order of measured cost (candidates with causes checked in the code: [OPPORTUNITIES.md](OPPORTUNITIES.md)). Open items carried
   over: V1/V2/V7/V9/V10 (VANILLA.md), H5/H7/H11 (ADDITIONS.md). Vanilla
   optimisations stay pixel-identical (AE = 0).
 - **P6. Parity** (step 4), then update DESIGN.md Tooling and the

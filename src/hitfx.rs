@@ -82,6 +82,10 @@ pub struct HitFx {
 }
 
 impl HitFx {
+    pub fn is_active(&self) -> bool {
+        !self.parts.is_empty()
+    }
+
     pub fn clear(&mut self) {
         let (pic, palette) = (self.pic, self.palette.take());
         *self = Self::default();

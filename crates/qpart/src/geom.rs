@@ -110,7 +110,7 @@ impl Registry {
     }
 }
 
-pub use qcore::vertex::ParticleVertex as Vertex;
+pub use qcore::vertex::{ParticleQuad as Quad, ParticleVertex as Vertex};
 
 /// A run of indices drawn with one texture and blend mode.
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -154,6 +154,9 @@ pub struct Geometry<'a> {
     pub vertical_tan: Option<f32>,
     /// Optional tangent of the horizontal half-FOV; only used with cull_behind.
     pub horizontal_tan: Option<f32>,
+    /// Emit `RenderType::Normal` billboards into compact instanced `quads`/`quad_batches`
+    /// (40 bytes/particle, expanded on GPU) instead of CPU-expanded 4-vertex/6-index quads.
+    pub use_instanced_quads: bool,
     reg: &'a Registry,
     view: ViewInfo,
     particletime: f32,
@@ -162,6 +165,8 @@ pub struct Geometry<'a> {
     pub vertices: Vec<Vertex>,
     pub indices: Vec<u32>,
     pub batches: Vec<Batch>,
+    pub quads: Vec<Quad>,
+    pub quad_batches: Vec<Batch>,
 }
 
 fn to_color(c: [f32; 4]) -> [u8; 4] {
@@ -183,6 +188,7 @@ impl<'a> Geometry<'a> {
             cull_behind: false,
             vertical_tan: None,
             horizontal_tan: None,
+            use_instanced_quads: false,
             reg,
             view,
             particletime,
@@ -190,6 +196,8 @@ impl<'a> Geometry<'a> {
             vertices: Vec::new(),
             indices: Vec::new(),
             batches: Vec::new(),
+            quads: Vec::new(),
+            quad_batches: Vec::new(),
         }
     }
 
@@ -201,6 +209,14 @@ impl<'a> Geometry<'a> {
         self.vertices = vertices;
         self.indices = indices;
         self.batches = batches;
+    }
+
+    /// Reuse previous frame's instanced billboard storage.
+    pub fn reuse_quad_buffers(&mut self, mut quads: Vec<Quad>, mut quad_batches: Vec<Batch>) {
+        quads.clear();
+        quad_batches.clear();
+        self.quads = quads;
+        self.quad_batches = quad_batches;
     }
 
     /// Batches sorted into draw order (stable within each pass).
@@ -260,6 +276,30 @@ impl Sink for Geometry<'_> {
         let lines = l.kind == RenderType::Spark;
         let tex = if lines { self.reg.white_texture() } else { t.tex };
         let Some(tex) = tex else { return };
+        if l.kind == RenderType::Normal && self.use_instanced_quads {
+            let first = self.quads.len() as u32;
+            self.emit_normal_quads(l, particles);
+            let count = self.quads.len() as u32 - first;
+            if count > 0 {
+                if let Some(last) = self.quad_batches.last_mut()
+                    && last.tex == tex
+                    && last.blend == l.blendmode
+                    && last.first_index + last.num_indices == first
+                {
+                    last.num_indices += count;
+                } else {
+                    self.quad_batches.push(Batch {
+                        tex,
+                        blend: l.blendmode,
+                        lines: false,
+                        first_index: first,
+                        num_indices: count,
+                        soft: true,
+                    });
+                }
+            }
+            return;
+        }
         let first = self.indices.len() as u32;
         match l.kind {
             RenderType::Normal => self.emit_normal_particles(l, particles),

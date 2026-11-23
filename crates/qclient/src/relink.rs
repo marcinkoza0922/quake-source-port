@@ -74,6 +74,7 @@ impl ClientState {
     pub fn relink_entities(&mut self) {
         let frac = self.lerp_point();
         self.visedicts.clear();
+        self.has_pellets = false;
         for i in 0..3 {
             self.velocity[i] = self.mvelocity[1][i] + frac * (self.mvelocity[0][i] - self.mvelocity[1][i]);
         }
@@ -137,103 +138,121 @@ impl ClientState {
             }
             let (effects, origin, angles) = (e.effects, e.origin, e.angles);
             let key = i as i32;
-            if effects & EF_BRIGHTFIELD != 0 {
-                self.entity_particles(origin);
-            }
-            if effects & EF_MUZZLEFLASH != 0 {
-                let (fv, _, _) = angle_vectors(Vec3::from_array(angles));
-                let r = (self.rng.rand() & 31) as f32;
-                let dl = self.alloc_dlight(key);
-                dl.origin = [origin[0] + 18.0 * fv.x, origin[1] + 18.0 * fv.y, origin[2] + 16.0 + 18.0 * fv.z];
-                dl.radius = 200.0 + r;
-                dl.minlight = 32.0;
-                dl.die = t + 0.1;
-                if i == self.viewentity {
-                    self.viewent.lerpflags |= LERP_RESETANIM | LERP_RESETANIM2;
-                } else {
-                    self.entities[i].lerpflags |= LERP_RESETANIM | LERP_RESETANIM2;
+            if effects != 0 {
+                if effects & EF_BRIGHTFIELD != 0 {
+                    self.entity_particles(origin);
                 }
-            }
-            for (bit, rad, dz, color) in [
-                (EF_BRIGHTLIGHT, 400.0, 16.0, [1.0; 3]),
-                (EF_DIMLIGHT, 200.0, 0.0, [1.0; 3]),
-                (EF_QEX_QUADLIGHT, 200.0, 0.0, [0.25, 0.25, 1.0]),
-                (EF_QEX_PENTALIGHT, 200.0, 0.0, [1.0, 0.25, 0.25]),
-            ] {
-                if effects & bit != 0 {
+                if effects & EF_MUZZLEFLASH != 0 {
+                    let (fv, _, _) = angle_vectors(Vec3::from_array(angles));
                     let r = (self.rng.rand() & 31) as f32;
                     let dl = self.alloc_dlight(key);
-                    dl.origin = [origin[0], origin[1], origin[2] + dz];
-                    dl.radius = rad + r;
-                    dl.die = t + 0.001;
-                    dl.color = color;
+                    dl.origin = [origin[0] + 18.0 * fv.x, origin[1] + 18.0 * fv.y, origin[2] + 16.0 + 18.0 * fv.z];
+                    dl.radius = 200.0 + r;
+                    dl.minlight = 32.0;
+                    dl.die = t + 0.1;
+                    if i == self.viewentity {
+                        self.viewent.lerpflags |= LERP_RESETANIM | LERP_RESETANIM2;
+                    } else {
+                        self.entities[i].lerpflags |= LERP_RESETANIM | LERP_RESETANIM2;
+                    }
+                }
+                if effects & (EF_BRIGHTLIGHT | EF_DIMLIGHT | EF_QEX_QUADLIGHT | EF_QEX_PENTALIGHT) != 0 {
+                    for (bit, rad, dz, color) in [
+                        (EF_BRIGHTLIGHT, 400.0, 16.0, [1.0; 3]),
+                        (EF_DIMLIGHT, 200.0, 0.0, [1.0; 3]),
+                        (EF_QEX_QUADLIGHT, 200.0, 0.0, [0.25, 0.25, 1.0]),
+                        (EF_QEX_PENTALIGHT, 200.0, 0.0, [1.0, 0.25, 0.25]),
+                    ] {
+                        if effects & bit != 0 {
+                            let r = (self.rng.rand() & 31) as f32;
+                            let dl = self.alloc_dlight(key);
+                            dl.origin = [origin[0], origin[1], origin[2] + dz];
+                            dl.radius = rad + r;
+                            dl.die = t + 0.001;
+                            dl.color = color;
+                        }
+                    }
                 }
             }
-            // FTE trails run every frame from the previous origin
-            // (PScript_EntParticleTrail); classic ones are rate limited.
-            let fte_trail = [
-                (MF_GIB, "TR_BLOOD"),
-                (MF_ZOMGIB, "TR_SLIGHTBLOOD"),
-                (MF_TRACER, "TR_WIZSPIKE"),
-                (MF_TRACER2, "TR_KNIGHTSPIKE"),
-                (MF_ROCKET, "TR_ROCKET"),
-                (MF_GRENADE, "TR_GRENADE"),
-                (MF_TRACER3, "TR_VORESPIKE"),
-            ]
-            .into_iter()
-            .find(|(f, _)| mflags & f != 0)
-            .map(|(_, n)| n);
-            let relinked = self.entities[i].forcelink || self.entities[i].lerpflags & LERP_RESETMOVE != 0;
-            let owned = self.debris_owned.get(i).copied().unwrap_or(false);
-            // .traileffectnum (replacement deltas) replaces the model's trail.
+            const MF_TRAIL_MASK: u32 = MF_GIB | MF_ZOMGIB | MF_TRACER | MF_TRACER2 | MF_ROCKET | MF_GRENADE | MF_TRACER3;
             let net_trail = self.entities[i].traileffect;
-            if net_trail > 0
-                && let Some(name) = self.precached(net_trail as i32)
-            {
-                if !relinked {
-                    let r = FteRequest::Trail { name, start: oldorg, end: origin, entity: key, interval: None };
-                    self.fte_queue.push(r);
-                }
+            if net_trail == 0 && (mflags & MF_TRAIL_MASK) == 0 {
                 Self::reset_trail(&mut self.entities[i]);
-            } else if let Some(name) = fte_trail.filter(|_| !owned)
-                && self.fte_names.has(name)
-            {
-                // A teleported entity draws no trail this frame.
-                if !relinked {
-                    self.fte_trail(name, oldorg, origin, key);
-                }
-                Self::reset_trail(&mut self.entities[i]);
-                if mflags & MF_ROCKET != 0 {
+            } else {
+                // FTE trails run every frame from the previous origin
+                // (PScript_EntParticleTrail); classic ones are rate limited.
+                let fte_trail = if mflags & MF_GIB != 0 {
+                    Some("TR_BLOOD")
+                } else if mflags & MF_ZOMGIB != 0 {
+                    Some("TR_SLIGHTBLOOD")
+                } else if mflags & MF_TRACER != 0 {
+                    Some("TR_WIZSPIKE")
+                } else if mflags & MF_TRACER2 != 0 {
+                    Some("TR_KNIGHTSPIKE")
+                } else if mflags & MF_ROCKET != 0 {
+                    Some("TR_ROCKET")
+                } else if mflags & MF_GRENADE != 0 {
+                    Some("TR_GRENADE")
+                } else if mflags & MF_TRACER3 != 0 {
+                    Some("TR_VORESPIKE")
+                } else {
+                    None
+                };
+                let relinked = self.entities[i].forcelink || self.entities[i].lerpflags & LERP_RESETMOVE != 0;
+                let owned = self.debris_owned.get(i).copied().unwrap_or(false);
+                // .traileffectnum (replacement deltas) replaces the model's trail.
+                if net_trail > 0
+                    && let Some(name) = self.precached(net_trail as i32)
+                {
+                    if !relinked {
+                        let r = FteRequest::Trail { name, start: oldorg, end: origin, entity: key, interval: None };
+                        self.fte_queue.push(r);
+                    }
+                    Self::reset_trail(&mut self.entities[i]);
+                } else if let Some(name) = fte_trail.filter(|_| !owned)
+                    && self.fte_names.has(name)
+                {
+                    // A teleported entity draws no trail this frame.
+                    if !relinked {
+                        self.fte_trail(name, oldorg, origin, key);
+                    }
+                    Self::reset_trail(&mut self.entities[i]);
+                    if mflags & MF_ROCKET != 0 {
+                        let dl = self.alloc_dlight(key);
+                        dl.origin = origin;
+                        dl.radius = 200.0;
+                        dl.die = t + 0.01;
+                    }
+                } else if owned {
+                    Self::reset_trail(&mut self.entities[i]);
+                } else if mflags & MF_GIB != 0 {
+                    self.ent_trail(i, 2);
+                } else if mflags & MF_ZOMGIB != 0 {
+                    self.ent_trail(i, 4);
+                } else if mflags & MF_TRACER != 0 {
+                    self.ent_trail(i, 3);
+                } else if mflags & MF_TRACER2 != 0 {
+                    self.ent_trail(i, 5);
+                } else if mflags & MF_ROCKET != 0 {
+                    self.ent_trail(i, 0);
                     let dl = self.alloc_dlight(key);
                     dl.origin = origin;
                     dl.radius = 200.0;
                     dl.die = t + 0.01;
+                } else if mflags & MF_GRENADE != 0 {
+                    self.ent_trail(i, 1);
+                } else if mflags & MF_TRACER3 != 0 {
+                    self.ent_trail(i, 6);
+                } else {
+                    Self::reset_trail(&mut self.entities[i]);
                 }
-            } else if owned {
-                Self::reset_trail(&mut self.entities[i]);
-            } else if mflags & MF_GIB != 0 {
-                self.ent_trail(i, 2);
-            } else if mflags & MF_ZOMGIB != 0 {
-                self.ent_trail(i, 4);
-            } else if mflags & MF_TRACER != 0 {
-                self.ent_trail(i, 3);
-            } else if mflags & MF_TRACER2 != 0 {
-                self.ent_trail(i, 5);
-            } else if mflags & MF_ROCKET != 0 {
-                self.ent_trail(i, 0);
-                let dl = self.alloc_dlight(key);
-                dl.origin = origin;
-                dl.radius = 200.0;
-                dl.die = t + 0.01;
-            } else if mflags & MF_GRENADE != 0 {
-                self.ent_trail(i, 1);
-            } else if mflags & MF_TRACER3 != 0 {
-                self.ent_trail(i, 6);
-            } else {
-                Self::reset_trail(&mut self.entities[i]);
             }
             self.entities[i].forcelink = false;
-            if i == self.viewentity || effects & crate::EF_QSP_PELLET != 0 {
+            if effects & crate::EF_QSP_PELLET != 0 {
+                self.has_pellets = true;
+                continue;
+            }
+            if i == self.viewentity {
                 continue;
             }
             self.visedicts.push(i);

@@ -115,6 +115,7 @@ impl<'a> MsgReader<'a> {
     pub fn at_end(&self) -> bool {
         self.pos >= self.data.len()
     }
+    #[inline(always)]
     fn take<const N: usize>(&mut self) -> Option<[u8; N]> {
         if self.pos + N > self.data.len() {
             self.badread = true;
@@ -127,19 +128,24 @@ impl<'a> MsgReader<'a> {
         Some(a)
     }
     /// Unsigned byte, or -1 on overrun.
+    #[inline(always)]
     pub fn byte(&mut self) -> i32 {
         self.take::<1>().map_or(-1, |b| b[0] as i32)
     }
+    #[inline(always)]
     pub fn char(&mut self) -> i32 {
         self.take::<1>().map_or(-1, |b| b[0] as i8 as i32)
     }
     /// Signed short.
+    #[inline(always)]
     pub fn short(&mut self) -> i32 {
         self.take::<2>().map_or(-1, |b| i16::from_le_bytes(b) as i32)
     }
+    #[inline(always)]
     pub fn long(&mut self) -> i32 {
         self.take::<4>().map_or(-1, i32::from_le_bytes)
     }
+    #[inline(always)]
     pub fn float(&mut self) -> f32 {
         self.take::<4>().map_or(-1.0, f32::from_le_bytes)
     }
@@ -162,6 +168,7 @@ impl<'a> MsgReader<'a> {
     pub fn string_lossy(&mut self) -> String {
         String::from_utf8_lossy(self.string()).into_owned()
     }
+    #[inline(always)]
     pub fn coord(&mut self, flags: u32) -> f32 {
         if flags & PRFL_FLOATCOORD != 0 {
             self.float()
@@ -173,6 +180,7 @@ impl<'a> MsgReader<'a> {
             self.short() as f32 * (1.0 / 8.0)
         }
     }
+    #[inline(always)]
     pub fn angle(&mut self, flags: u32) -> f32 {
         if flags & PRFL_FLOATANGLE != 0 {
             self.float()
@@ -182,6 +190,7 @@ impl<'a> MsgReader<'a> {
             self.char() as f32 * (360.0 / 256.0)
         }
     }
+    #[inline(always)]
     pub fn angle16(&mut self, flags: u32) -> f32 {
         if flags & PRFL_FLOATANGLE != 0 {
             self.float()
@@ -189,6 +198,7 @@ impl<'a> MsgReader<'a> {
             self.short() as f32 * (360.0 / 65536.0)
         }
     }
+    #[inline(always)]
     pub fn vec3_coord(&mut self, flags: u32) -> [f32; 3] {
         [self.coord(flags), self.coord(flags), self.coord(flags)]
     }

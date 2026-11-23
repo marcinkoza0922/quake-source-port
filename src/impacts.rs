@@ -128,6 +128,10 @@ pub struct Impacts {
     time: f64,
 }
 impl Impacts {
+    pub fn is_active(&self) -> bool {
+        !self.marks.is_empty() || !self.nails.is_empty() || !self.flights.is_empty() || !self.intercepted.is_empty()
+    }
+
     pub fn clear(&mut self) {
         let pic = self.pic;
         *self = Self::default();

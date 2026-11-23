@@ -283,6 +283,10 @@ fn run_argv(spec: &RunSpec, argv: &[String], control: &str, mode: Mode) -> Resul
 /// Console lines meaning the demo won't play: a missing file, a host error
 /// or a protocol the engine can't parse.
 fn is_fatal(line: &str) -> bool {
+    // Non-fatal ironwail startup notice when Steam KEX manifest isn't present.
+    if line.contains("Couldn't read Steam manifest") {
+        return false;
+    }
     const PATTERNS: [&str; 6] =
         ["couldn't open", "Host_Error", "ERROR:", "Illegible server message", "Bad server message", "CL_ParseServerMessage"];
     PATTERNS.iter().any(|p| line.contains(p))

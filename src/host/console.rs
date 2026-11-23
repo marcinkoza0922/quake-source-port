@@ -23,10 +23,16 @@ impl Host {
     }
 
     pub(super) fn sync_shell_env(&mut self) {
-        self.con.shell_env.basedir = self.fs().basedir().to_path_buf();
-        self.con.shell_env.gamedir = self.game_name().to_string();
-        self.con.shell_env.userdir = self.user_dir();
-        self.con.shell_env.mapname.clone_from(&self.level.mapname);
+        let env_changed = self.con.shell_env.basedir != self.fs().basedir()
+            || self.con.shell_env.gamedir != self.game_name();
+        if env_changed {
+            self.con.shell_env.basedir = self.fs().basedir().to_path_buf();
+            self.con.shell_env.gamedir = self.game_name().to_string();
+            self.con.shell_env.userdir = self.user_dir();
+        }
+        if self.con.shell_env.mapname != self.level.mapname {
+            self.con.shell_env.mapname.clone_from(&self.level.mapname);
+        }
     }
 
     /// Refresh the full console completion catalog (commands, cvars, maps, cfgs, demos, mods).

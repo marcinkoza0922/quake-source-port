@@ -3,8 +3,14 @@ layout(location = 0) in vec2 i_uv;
 layout(location = 1) in vec4 i_color;
 layout(location = 2) in vec3 i_wpos;
 // fogmix: x fog mode, y soft inverse fade distance (0 = hard),
-// z scene MSAA samples, w blend mode (FteBlend order).
-layout(push_constant) uniform P { vec4 fogmix; uint tex; } pc;
+// z depth mode (<0: ao_source linear depth, 0: single, 1: msaa sample 0, >1: msaa 2-sample min),
+// w blend mode (FteBlend order).
+layout(push_constant) uniform P {
+    vec4 fogmix;
+    uint tex;
+    uint depth_tex;
+    vec2 depth_uv;
+} pc;
 layout(location = 0) out vec4 o_color;
 
 // View-space depth of a [0,1] depth value (setup_view: near 4, far 65536).
@@ -88,21 +94,27 @@ void main() {
     }
     if (pc.fogmix.y > 0.0) {
         // Soft particles: fade as the particle nears the scene behind it.
-        // Low mode reads sample 0 under MSAA; high takes the nearest covered
-        // sample (vkQuake fte_particles.inc).
-        ivec2 px = ivec2(gl_FragCoord.xy);
-        int ns = int(pc.fogmix.z);
-        float d;
-        if (ns > 1) {
-            d = 1.0;
-            for (int s = 0; s < ns; s++) d = min(d, texelFetch(scene_depth_ms, px, s).r);
-        } else if (ns == 1) {
-            d = texelFetch(scene_depth_ms, px, 0).r;
-        } else {
-            d = texelFetch(scene_depth, px, 0).r;
-        }
+        // When SSAO already produced linear depth (fogmix.z < 0), sample that
+        // directly to avoid breaking the MSAA render pass; otherwise sample
+        // scene depth (1 tap on low, 2 taps on high MSAA).
         float pz = dot(i_wpos - fr.eye.xyz, fr.vfwd.xyz);
-        float fade = d < 1.0 ? clamp((linear_depth(d) - pz) * pc.fogmix.y, 0.0, 1.0) : 1.0;
+        float fade;
+        if (pc.fogmix.z < 0.0) {
+            float dz = textureLod(textures[nonuniformEXT(pc.depth_tex)], gl_FragCoord.xy * pc.depth_uv, 0.0).r;
+            fade = dz < 65000.0 ? clamp((dz - pz) * pc.fogmix.y, 0.0, 1.0) : 1.0;
+        } else {
+            ivec2 px = ivec2(gl_FragCoord.xy);
+            int ns = int(pc.fogmix.z);
+            float d;
+            if (ns > 1) {
+                d = min(texelFetch(scene_depth_ms, px, 0).r, texelFetch(scene_depth_ms, px, ns >> 1).r);
+            } else if (ns == 1) {
+                d = texelFetch(scene_depth_ms, px, 0).r;
+            } else {
+                d = texelFetch(scene_depth, px, 0).r;
+            }
+            fade = d < 1.0 ? clamp((linear_depth(d) - pz) * pc.fogmix.y, 0.0, 1.0) : 1.0;
+        }
         int bm = int(pc.fogmix.w);
         // Colour-based and premultiplied blends fade their RGB too.
         if (bm == 1 || bm == 3 || bm == 4 || bm == 6 || bm == 7) c.rgb *= fade;

@@ -142,3 +142,86 @@ fn locked_pvs_retains_its_leaf_with_live_camera_frustum() {
     w.leaf_bits(west, &all, &mut bits);
     assert_eq!(bits, [1 << 2]);
 }
+
+#[test]
+fn box_leaves_and_pvs_bits_match_bsp_and_novis() {
+    let mut w = world();
+    let mut leaves = Vec::new();
+    // Box purely on the east (+X) side of split plane x=0 -> leaf 1.
+    w.box_leaves([1.0, -1.0, -1.0], [3.0, 1.0, 1.0], &mut leaves);
+    assert_eq!(leaves, [1]);
+    // Box straddling x=0 -> both leaf 1 and leaf 2.
+    leaves.clear();
+    w.box_leaves([-2.0, -1.0, -1.0], [2.0, 1.0, 1.0], &mut leaves);
+    leaves.sort_unstable();
+    assert_eq!(leaves, [1, 2]);
+    // PVS bits from east eye include leaf 1, exclude leaf 2.
+    let bits = w.pvs_bits([1.0, 0.0, 0.0]).expect("PVS active");
+    assert_ne!(bits[0] & (1 << 1), 0);
+    assert_eq!(bits[0] & (1 << 2), 0);
+    // Transparent-liquid novis returns None (all static entities visible).
+    w.set_transparent_liquids(true);
+    assert!(w.pvs_bits([1.0, 0.0, 0.0]).is_none());
+}
+
+#[test]
+fn block_frustum_culling_matches_leaf_culling_across_multiple_blocks() {
+    let mut w = world();
+    w.leafs.clear();
+    w.leafs.push(Leaf {
+        contents: -2, visofs: -1, mins: [0.0; 3], maxs: [0.0; 3],
+        first_marksurface: 0, num_marksurfaces: 0, ambient_level: [0; 4],
+    });
+    // 40 leaves spanning x = -20..+20 (3 blocks of 16/16/8: outside, straddling, inside).
+    for i in 0..40 {
+        let x = i as f32 - 20.0;
+        w.leafs.push(Leaf {
+            contents: -1, visofs: -1, mins: [x, -1.0, -1.0], maxs: [x + 0.5, 1.0, 1.0],
+            first_marksurface: 0, num_marksurfaces: 1, ambient_level: [0; 4],
+        });
+    }
+    w.numleafs = 40;
+    w.visdata.clear();
+    // Keep only leaves touching x >= 0.
+    let frustum = [[1.0, 0.0, 0.0, 0.0]; 4];
+    let mut bits = Vec::new();
+    w.leaf_bits_for_leaf(1, &frustum, &mut bits);
+    for i in 0..40usize {
+        let li = i + 1;
+        let expected = (i as f32 - 20.0 + 0.5) >= 0.0;
+        let got = (bits[li >> 5] & (1 << (li & 31))) != 0;
+        assert_eq!(got, expected, "leaf {li}");
+    }
+}
+
+#[test]
+fn begin_light_frame_validates_cached_lightstyles() {
+    let mut w = world();
+    w.has_light = true;
+    w.surfaces[0].lm = 0;
+    w.surfaces[0].lm_size = [1, 1];
+    w.surfaces[0].lm_vecs = [[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0]];
+    w.surfaces[0].normal = [0.0, 0.0, 1.0];
+    w.surfaces[0].dist = 0.0;
+    w.surfaces[0].samples = 0;
+    w.surfaces[0].styles = [0, 255, 255, 255];
+    w.samples = vec![0x0080_8080];
+    w.planes = vec![Plane { normal: [0.0, 0.0, 1.0], dist: 0.0, kind: 2 }];
+    w.bsp_nodes = vec![Node {
+        plane: 0, children: [-1, -2], mins: [-16.0; 3], maxs: [16.0; 3],
+        first_face: 0, num_faces: 1,
+    }];
+    let mut styles = [256i32; 64];
+    w.begin_light_frame(&styles);
+    let c1 = w.light_point([0.0, 0.0, 8.0], &styles).expect("hit");
+    assert!((c1[0] - 128.0).abs() < 1.0);
+    // Unchanged frame hits validated_gen fast path.
+    w.begin_light_frame(&styles);
+    let c2 = w.light_point([0.0, 0.0, 8.0], &styles).expect("hit");
+    assert_eq!(c1, c2);
+    // Changed style bumps styles_gen and re-evaluates.
+    styles[0] = 128;
+    w.begin_light_frame(&styles);
+    let c3 = w.light_point([0.0, 0.0, 8.0], &styles).expect("hit");
+    assert!((c3[0] - 64.0).abs() < 1.0);
+}

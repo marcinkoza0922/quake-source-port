@@ -19,9 +19,10 @@ pub struct RtPipes {
     pub comp_layout: vk::PipelineLayout,
     /// rt_pose.comp: alias models posed into world space.
     pub pose: vk::Pipeline,
-    /// water_rt.frag / water_rt_glow.frag.
+    /// water_rt.frag, half-res water_rt_half.frag, and rt_depth.frag.
     pub(super) water_fs: vk::ShaderModule,
-    pub(super) water_glow_fs: vk::ShaderModule,
+    pub(super) water_half_fs: vk::ShaderModule,
+    pub(super) depth_fs: vk::ShaderModule,
 }
 
 impl RtPipes {
@@ -73,7 +74,8 @@ impl RtPipes {
         };
         let pose_cs = m(spv!("rt_pose.comp"))?;
         let water_fs = m(spv!("water_rt.frag"))?;
-        let water_glow_fs = m(spv!("water_rt_glow.frag"))?;
+        let water_half_fs = m(spv!("water_rt_half.frag"))?;
+        let depth_fs = m(spv!("rt_depth.frag"))?;
         let stage = vk::PipelineShaderStageCreateInfo::default()
             .stage(vk::ShaderStageFlags::COMPUTE)
             .module(pose_cs)
@@ -82,7 +84,7 @@ impl RtPipes {
         // SAFETY: valid module/layout.
         let pose = unsafe { dev.create_compute_pipelines(vk::PipelineCache::null(), &cpci, None) }
             .map_err(|(_, e)| e)?[0];
-        Ok(RtPipes { set_layout, comp_set_layout, comp_layout, pose, water_fs, water_glow_fs })
+        Ok(RtPipes { set_layout, comp_set_layout, comp_layout, pose, water_fs, water_half_fs, depth_fs })
     }
 
     pub(super) fn destroy(&self, dev: &ash::Device) {

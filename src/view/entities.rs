@@ -110,8 +110,19 @@ impl ViewState {
         (o, ang)
     }
 
-    /// Render entities: visedicts, statics, temp entities (beams).
-    pub fn entities(&mut self, cl: &mut ClientState, cv: &ViewCvars, lv: &mut Level, fs: &qcore::fs::Fs, r: &mut qrender::Renderer, out: &mut Vec<RenderEntity>) {
+    /// Render entities: visedicts, statics (PVS-culled via efrags when `pvs_eye`
+    /// is provided), temp entities (beams).
+    #[allow(clippy::too_many_arguments)]
+    pub fn entities(
+        &mut self,
+        cl: &mut ClientState,
+        cv: &ViewCvars,
+        lv: &mut Level,
+        fs: &qcore::fs::Fs,
+        r: &mut qrender::Renderer,
+        pvs_eye: Option<[f32; 3]>,
+        out: &mut Vec<RenderEntity>,
+    ) {
         let time = cl.time;
         if self.anims.len() < cl.entities.len() {
             self.anims.resize(cl.entities.len(), Anim::default());
@@ -181,7 +192,47 @@ impl ViewState {
         if self.static_anims.len() < cl.static_entities.len() {
             self.static_anims.resize(cl.static_entities.len(), Anim::default());
         }
+        if r.has_world() && self.static_ranges.len() < cl.static_entities.len() {
+            for e in &cl.static_entities[self.static_ranges.len()..] {
+                let start = self.static_efrags.len() as u32;
+                if let Some(m) = lv.models.get(e.model).copied().flatten()
+                    && let Some((mut lo, mut hi)) = r.model_bounds(m.id)
+                {
+                    let scale = if e.scale == 0 || e.scale == qnet::protocol::ENTSCALE_DEFAULT {
+                        1.0
+                    } else {
+                        e.scale as f32 / 16.0
+                    };
+                    if scale != 1.0 {
+                        lo = lo.map(|v| v * scale);
+                        hi = hi.map(|v| v * scale);
+                    }
+                    if m.kind == Kind::Brush && (e.angles[0] != 0.0 || e.angles[1] != 0.0 || e.angles[2] != 0.0) {
+                        let rx = lo[0].abs().max(hi[0].abs());
+                        let ry = lo[1].abs().max(hi[1].abs());
+                        let rz = lo[2].abs().max(hi[2].abs());
+                        let rad = (rx * rx + ry * ry + rz * rz).sqrt();
+                        lo = [-rad; 3];
+                        hi = [rad; 3];
+                    }
+                    let mins = [e.origin[0] + lo[0], e.origin[1] + lo[1], e.origin[2] + lo[2]];
+                    let maxs = [e.origin[0] + hi[0], e.origin[1] + hi[1], e.origin[2] + hi[2]];
+                    r.world_box_leaves(mins, maxs, &mut self.static_efrags);
+                }
+                let len = self.static_efrags.len() as u32 - start;
+                self.static_ranges.push((start, len));
+            }
+        }
+        let pvs = pvs_eye.and_then(|eye| r.world_pvs_bits(eye));
         for i in 0..cl.static_entities.len() {
+            if let Some(bits) = pvs
+                && let Some(&(start, len)) = self.static_ranges.get(i)
+            {
+                let leaves = &self.static_efrags[start as usize..(start + len) as usize];
+                if !leaves.iter().any(|&l| bits.get((l >> 5) as usize).is_some_and(|&w| w & (1 << (l & 31)) != 0)) {
+                    continue;
+                }
+            }
             let Some(m) = lv.models.get(cl.static_entities[i].model).copied().flatten() else { continue };
             let e = &mut cl.static_entities[i];
             let f = if m.kind == Kind::Brush { (e.frame.max(0) as u32, 0, 1.0) } else { Self::anim_lerp(&mut self.static_anims[i], e, time, cv.lerp_models) };

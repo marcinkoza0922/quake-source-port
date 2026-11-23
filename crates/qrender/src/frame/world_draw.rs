@@ -1,27 +1,18 @@
 use super::*;
-use std::sync::Arc;
 
-/// Destination world ranges are camera-independent. Share their immutable
-/// dynbuf uploads across portals/players for this frame only: texture
-/// animation, liquid alpha and hidden surfaces may change next frame.
+/// Reused scratch buffers for [`build_world_draw`] to avoid per-entity/portal `Vec` allocations.
 #[derive(Default)]
-pub(super) struct PortalWorldCache(Vec<(Arc<[u32]>, WorldDraw)>);
-
-impl PortalWorldCache {
-    pub(super) fn get_or_build(&mut self, surfaces: &Arc<[u32]>, build: impl FnOnce() -> WorldDraw) -> WorldDraw {
-        if let Some((_, draw)) = self.0.iter().find(|(key, _)| Arc::ptr_eq(key, surfaces)) {
-            return *draw;
-        }
-        let draw = build();
-        self.0.push((surfaces.clone(), draw));
-        draw
-    }
+pub(crate) struct WorldDrawScratch {
+    cats: [Vec<vk::DrawIndexedIndirectCommand>; 4],
+    opaque_nofb: Vec<vk::DrawIndexedIndirectCommand>,
+    used_buckets: Vec<usize>,
 }
 
 #[allow(clippy::too_many_arguments)]
 pub(super) fn build_world_draw(
     w: &WorldGpu,
     buckets: &mut [Vec<u32>],
+    scratch: &mut WorldDrawScratch,
     dynw: &mut Dyn,
     surfs: &[u32],
     alt: bool,
@@ -31,22 +22,32 @@ pub(super) fn build_world_draw(
     model: Mat4,
     lm_vis: &mut LightmapRequests,
 ) -> WorldDraw {
+    scratch.used_buckets.clear();
+    let max_t = buckets.len() - 1;
+    let has_hidden = !w.cpu.hidden_surfaces.is_empty();
     for &si in surfs {
-        if w.cpu.hidden_surfaces.contains(&si) { continue; }
+        if has_hidden && w.cpu.hidden_surfaces.contains(&si) {
+            continue;
+        }
         let s = &w.draw_surfaces[si as usize];
-        let t = (w.cpu.resolve_texture(s.texture, alt, time, si) as usize).min(buckets.len() - 1);
+        let t = (w.cpu.resolve_texture(s.texture, alt, time, si) as usize).min(max_t);
+        if buckets[t].is_empty() {
+            scratch.used_buckets.push(t);
+        }
         buckets[t].push(si);
         if s.lm != NO_LM {
             lm_vis.push(s.lm);
         }
     }
+    scratch.used_buckets.sort_unstable();
     let mut polys = 0;
     let mut triangles = 0;
-    let mut cats: [Vec<vk::DrawIndexedIndirectCommand>; 4] = Default::default();
-    for (t, b) in buckets.iter_mut().enumerate() {
-        if b.is_empty() {
-            continue;
-        }
+    for c in &mut scratch.cats {
+        c.clear();
+    }
+    scratch.opaque_nofb.clear();
+    for &t in &scratch.used_buckets {
+        let b = &mut buckets[t];
         let mut first = None;
         let mut count = 0u32;
         for &si in b.iter() {
@@ -74,14 +75,21 @@ pub(super) fn build_world_draw(
             _ => 0,
         };
         triangles += count / 3;
-        cats[cat].push(vk::DrawIndexedIndirectCommand {
+        let cmd = vk::DrawIndexedIndirectCommand {
             index_count: count,
             instance_count: 1,
             first_index: (first / 4) as u32,
             vertex_offset: 0,
             first_instance: t as u32,
-        });
+        };
+        if cat == 0 && !w.tex_has_fb.get(t).copied().unwrap_or(false) {
+            scratch.opaque_nofb.push(cmd);
+        } else {
+            scratch.cats[cat].push(cmd);
+        }
     }
+    let fb_count = scratch.cats[0].len() as u32;
+    scratch.cats[0].extend_from_slice(&scratch.opaque_nofb);
     let mut put = |c: &Vec<vk::DrawIndexedIndirectCommand>| match dynw.push(c, 16) {
         Some(ofs) if !c.is_empty() => Range {
             ofs,
@@ -89,14 +97,18 @@ pub(super) fn build_world_draw(
         },
         _ => Range::default(),
     };
+    let opaque = put(&scratch.cats[0]);
+    let opaque_fb = Range { ofs: opaque.ofs, count: fb_count.min(opaque.count) };
     WorldDraw {
         model,
         zfix: false,
+        main_visible: true,
         alpha: ent_alpha,
-        opaque: put(&cats[0]),
-        sky: put(&cats[1]),
-        water: [put(&cats[2]), Range::default(), Range::default(), Range::default()],
-        water_alpha: [put(&cats[3]), Range::default(), Range::default(), Range::default()],
+        opaque,
+        opaque_fb,
+        sky: put(&scratch.cats[1]),
+        water: [put(&scratch.cats[2]), Range::default(), Range::default(), Range::default()],
+        water_alpha: [put(&scratch.cats[3]), Range::default(), Range::default(), Range::default()],
         ibuf: None,
         cbuf: None,
         bounds: [0.0; 4],
@@ -116,8 +128,26 @@ pub(super) fn gpu_world_draw(
     alphas: [f32; 4],
     fi: usize,
 ) -> Option<(WorldDraw, CullFrame)> {
+    let leaf = wg.cpu.view_leaf(vs.eye);
+    gpu_world_draw_ex(wg, dynw, leaf, vs.eye, &vs.frustum, [0.0, 0.0, 0.0, 1.0], time, alphas, fi)
+}
+
+/// Generalised GPU world cull for any view (main or destination portal) with an
+/// explicit PVS leaf, eye position (backface test), frustum and optional clip plane.
+#[allow(clippy::too_many_arguments)]
+pub(super) fn gpu_world_draw_ex(
+    wg: &mut WorldGpu,
+    dynw: &mut Dyn,
+    leaf: usize,
+    eye: [f32; 3],
+    frustum: &[[f32; 4]; 4],
+    clip: [f32; 4],
+    time: f64,
+    alphas: [f32; 4],
+    fi: usize,
+) -> Option<(WorldDraw, CullFrame)> {
     let mut bits = std::mem::take(&mut wg.scratch_bits);
-    wg.cpu.leaf_bits(vs.eye, &vs.frustum, &mut bits);
+    wg.cpu.leaf_bits_for_leaf(leaf, frustum, &mut bits);
     let ntex = wg.tex_info.len().max(1) as u32;
     let c = &mut wg.cull;
     c.framecount = c.framecount.wrapping_add(1).max(1);
@@ -158,8 +188,10 @@ pub(super) fn gpu_world_draw(
     let wd = WorldDraw {
         model: ident(),
         zfix: false,
+        main_visible: true,
         alpha: 1.0,
         opaque: range(&c.cats[0]),
+        opaque_fb: range(&c.opaque_fb),
         sky: range(&c.cats[1]),
         water,
         water_alpha,
@@ -170,8 +202,9 @@ pub(super) fn gpu_world_draw(
         triangles: 0,
     };
     let push = CullPush {
-        frustum: vs.frustum,
-        eye: [vs.eye[0], vs.eye[1], vs.eye[2], 0.0],
+        frustum: *frustum,
+        clip,
+        eye: [eye[0], eye[1], eye[2], 0.0],
         framecount: c.framecount,
         nmarks: c.nmarks,
         ncmds: cmds.len() as u32,
@@ -191,38 +224,4 @@ pub(super) fn gpu_world_draw(
     wg.scratch_bits = bits;
     wg.scratch_cmds = cmds;
     Some((wd, cf))
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn destinations_share_ranges_and_lightmap_requests_only_within_the_frame() {
-        let surfaces: Arc<[u32]> = vec![2, 7, 11].into();
-        let other_leaf: Arc<[u32]> = vec![2, 7, 11].into();
-        let mut requests = Vec::new();
-        let build = |requests: &mut Vec<u32>| {
-            requests.push(7);
-            WorldDraw {
-                model: ident(), zfix: false, alpha: 1.0,
-                opaque: Range { ofs: requests.len() as u64 * 16, count: 1 },
-                sky: Range::default(), water: [Range::default(); 4],
-                water_alpha: [Range::default(); 4], ibuf: None, cbuf: None, bounds: [0.0; 4],
-        polys: 0,
-        triangles: 0,
-            }
-        };
-        let mut frame = PortalWorldCache::default();
-        let first = frame.get_or_build(&surfaces, || build(&mut requests));
-        let shared = frame.get_or_build(&surfaces.clone(), || build(&mut requests));
-        assert_eq!(first.opaque.ofs, shared.opaque.ofs, "same allocation must share uploaded ranges");
-        assert_eq!(requests, [7], "lightmap union already contains the cached destination");
-        let separate = frame.get_or_build(&other_leaf, || build(&mut requests));
-        assert_ne!(first.opaque.ofs, separate.opaque.ofs, "distinct lists must build independently");
-        let mut next_frame = PortalWorldCache::default();
-        let rebuilt = next_frame.get_or_build(&surfaces, || build(&mut requests));
-        assert_ne!(first.opaque.ofs, rebuilt.opaque.ofs, "next frame must not reuse stale dynbuf ranges");
-        assert_eq!(requests, [7, 7, 7]);
-    }
 }

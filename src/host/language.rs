@@ -14,6 +14,11 @@ impl Host {
     /// Applies `language` (`auto` follows the system) and `con_translate`,
     /// reloading the re-release strings when the language changes.
     pub(super) fn sync_language(&mut self) {
+        let cvar_gen = self.server.core.cvars.generation();
+        if self.lang_cvar_gen == Some(cvar_gen) && self.server.core.loc.lang.is_some() {
+            return;
+        }
+        self.lang_cvar_gen = Some(cvar_gen);
         let lang = qcore::lang::resolve(self.cvs("language"), system_languages());
         qcore::lang::set_console(self.cv("con_translate") != 0.0);
         qcore::lang::set(lang);

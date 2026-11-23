@@ -20,13 +20,17 @@ pub(super) struct Desc<'a> {
     /// Draw only where the fragment is behind the scene depth (thermal
     /// goggles' through-wall silhouettes) instead of LESS_OR_EQUAL.
     pub(super) behind: bool,
-    /// Second colour attachment ([`GLOW_FORMAT`]) blended like the first.
-    pub(super) glow: bool,
+    /// Depth only into a [`DEPTH_FORMAT`] target with CompareOp::ALWAYS (no colour).
+    pub(super) depth_only: bool,
+    /// Disable colour writes (depth prepass inside a render pass with a colour attachment).
+    pub(super) no_color_write: bool,
     /// Depth only into a [`SHADOW_FORMAT`] shadow map face (no colour).
     pub(super) shadow: bool,
     /// Mirrored view (planar reflections): front faces wind the other way.
     pub(super) mirror: bool,
     pub(super) wire: bool,
+    /// Optional single `bool` fragment specialization constant (`constant_id = 0`).
+    pub(super) frag_spec_bool: Option<bool>,
 }
 
 pub(super) fn attr(
@@ -56,15 +60,25 @@ pub(super) fn bind(binding: u32, stride: u32, instance: bool) -> vk::VertexInput
 }
 
 pub(super) fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Result<vk::Pipeline> {
+    let spec_val: u32 = u32::from(d.frag_spec_bool.unwrap_or(false));
+    let spec_bytes = spec_val.to_ne_bytes();
+    let spec_map = [vk::SpecializationMapEntry { constant_id: 0, offset: 0, size: 4 }];
+    let spec_info = vk::SpecializationInfo::default()
+        .map_entries(&spec_map)
+        .data(&spec_bytes);
+    let mut fs_stage = vk::PipelineShaderStageCreateInfo::default()
+        .stage(vk::ShaderStageFlags::FRAGMENT)
+        .module(d.fs)
+        .name(c"main");
+    if d.frag_spec_bool.is_some() {
+        fs_stage = fs_stage.specialization_info(&spec_info);
+    }
     let stages = [
         vk::PipelineShaderStageCreateInfo::default()
             .stage(vk::ShaderStageFlags::VERTEX)
             .module(d.vs)
             .name(c"main"),
-        vk::PipelineShaderStageCreateInfo::default()
-            .stage(vk::ShaderStageFlags::FRAGMENT)
-            .module(d.fs)
-            .name(c"main"),
+        fs_stage,
     ];
     let vi = vk::PipelineVertexInputStateCreateInfo::default()
         .vertex_binding_descriptions(d.bindings)
@@ -87,7 +101,13 @@ pub(super) fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Resul
     let ds = vk::PipelineDepthStencilStateCreateInfo::default()
         .depth_test_enable(d.depth_test)
         .depth_write_enable(d.depth_write)
-        .depth_compare_op(if d.behind { vk::CompareOp::GREATER } else { vk::CompareOp::LESS_OR_EQUAL });
+        .depth_compare_op(if d.depth_only {
+            vk::CompareOp::ALWAYS
+        } else if d.behind {
+            vk::CompareOp::GREATER
+        } else {
+            vk::CompareOp::LESS_OR_EQUAL
+        });
     let (src, dst, src_a, dst_a) = match d.blend {
         Blend::Factors(s, t) => (s, t, vk::BlendFactor::ZERO, vk::BlendFactor::ONE),
         _ => (
@@ -105,15 +125,15 @@ pub(super) fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Resul
         src_alpha_blend_factor: src_a,
         dst_alpha_blend_factor: dst_a,
         alpha_blend_op: vk::BlendOp::ADD,
-        color_write_mask: vk::ColorComponentFlags::RGBA,
-    }; 2];
-    let natt = if d.shadow { 0 } else if d.glow { 2 } else { 1 };
+        color_write_mask: if d.no_color_write { vk::ColorComponentFlags::empty() } else { vk::ColorComponentFlags::RGBA },
+    }];
+    let natt = if d.shadow || d.depth_only { 0 } else { 1 };
     let cb = vk::PipelineColorBlendStateCreateInfo::default().attachments(&att[..natt]);
     // scene pipelines take a dynamic depth bias (gl_zfix for brush entities)
     let dyn_states = [vk::DynamicState::VIEWPORT, vk::DynamicState::SCISSOR, vk::DynamicState::DEPTH_BIAS];
     let n = if d.depth { 3 } else { 2 };
     let dy = vk::PipelineDynamicStateCreateInfo::default().dynamic_states(&dyn_states[..n]);
-    let formats = [d.color, GLOW_FORMAT];
+    let formats = [d.color];
     let mut ri = vk::PipelineRenderingCreateInfo::default().color_attachment_formats(&formats[..natt]);
     if d.depth {
         ri = ri.depth_attachment_format(if d.shadow { SHADOW_FORMAT } else { DEPTH_FORMAT });

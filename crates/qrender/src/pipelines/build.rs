@@ -3,7 +3,7 @@ use super::*;
 impl Pipelines {
     /// Pipelines to use for single-sampled portal/teleporter views.
     pub fn portal_pipes(&self) -> ScenePipes {
-        if self.samples > 1 || self.glow {
+        if self.samples > 1 {
             self.portal
         } else {
             ScenePipes {
@@ -16,6 +16,7 @@ impl Pipelines {
                 alias_alpha: self.alias_alpha,
                 particle: self.particle,
                 fte: self.fte,
+                fte_quad: self.fte_quad,
             }
         }
     }
@@ -34,9 +35,12 @@ impl Pipelines {
             self.particle,
             self.ui,
             self.post,
+            self.post_fast,
             self.ao,
             self.ao_source,
+            self.ao_down,
             self.ao_apply,
+            self.droplets,
             self.vel_alias,
             self.vel_world,
             self.bloom_down,
@@ -46,12 +50,16 @@ impl Pipelines {
             self.portal_alias_mirror,
             self.water_rt,
             self.water_rt_alpha,
+            self.rt_depth_world,
+            self.water_rt_half,
         ];
         v.extend(self.fte);
+        v.extend(self.fte_quad);
         v.extend(self.wire_world);
         v.extend(self.wire_alias);
         v.extend(self.wire_sprite);
         v.extend(self.portal.all().filter(|&p| p != vk::Pipeline::null()));
+        v.extend(self.bloom_glow.all().filter(|&p| p != vk::Pipeline::null()));
         v
     }
 
@@ -77,6 +85,7 @@ impl Pipelines {
             part_vs,
             part_fs,
             fte_vs,
+            fte_quad_vs,
             fte_fs,
             ui_vs,
             ui_fs,
@@ -84,14 +93,16 @@ impl Pipelines {
             post_fs,
             ao_fs,
             ao_source_fs,
+            ao_down_fs,
             ao_apply_fs,
+            droplets_fs,
             vel_alias_vs,
             vel_world_vs,
             vel_fs,
             bloom_fs,
             shadow_world_fs,
             shadow_alias_fs,
-            glow: glow_fs,
+            bloom: bloom_sh,
         } = self.sh;
         let layout = self.layout;
         let f32x3 = vk::Format::R32G32B32_SFLOAT;
@@ -135,10 +146,12 @@ impl Pipelines {
             sample_shading: supersample,
             topology: vk::PrimitiveTopology::TRIANGLE_LIST,
             behind: false,
-            glow: false,
+            depth_only: false,
+            no_color_write: false,
             shadow: false,
             mirror: false,
             wire: false,
+            frag_spec_bool: None,
         };
         let g = |d: Desc| graphics(gpu, layout, &d);
         let fb = [bind(0, 24, false)];
@@ -147,18 +160,19 @@ impl Pipelines {
             attr(1, 0, f32x2, 12),
             attr(2, 0, vk::Format::R8G8B8A8_UNORM, 20),
         ];
+        let fqb = [bind(0, std::mem::size_of::<crate::FteQuad>() as u32, true)];
+        let fqa = [
+            attr(0, 0, f32x3, 0),
+            attr(1, 0, vk::Format::R32_SFLOAT, 12),
+            attr(2, 0, vk::Format::R32_SFLOAT, 16),
+            attr(3, 0, vk::Format::R8G8B8A8_UNORM, 20),
+            attr(4, 0, vk::Format::R32G32B32A32_SFLOAT, 24),
+        ];
         let fte_supersample = self.fte_supersample;
-        let glow = self.glow;
-        let build_scene = |pipe_samples, pipe_ss, pipe_glow: bool| -> Result<ScenePipes> {
-            let (world_fs, water_fs, sky_fs, alias_fs, part_fs, fte_fs) = if pipe_glow {
-                (glow_fs.world, glow_fs.water, glow_fs.sky, glow_fs.alias, glow_fs.part, glow_fs.fte)
-            } else {
-                (world_fs, water_fs, sky_fs, alias_fs, part_fs, fte_fs)
-            };
+        let build_scene = |pipe_samples, pipe_ss| -> Result<ScenePipes> {
             let sd = |vs, fs, bindings, attrs, blend, dt, dw| Desc {
                 samples: pipe_samples,
                 sample_shading: pipe_ss,
-                glow: pipe_glow,
                 ..d(vs, fs, bindings, attrs, blend, dt, dw)
             };
             let sg = |desc: Desc| graphics(gpu, layout, &desc);
@@ -173,6 +187,14 @@ impl Pipelines {
                     ..sd(fte_vs, fte_fs, &fb, &fa, Blend::Factors(src, dst), !overlay, false)
                 })?;
             }
+            let mut fte_quad = [vk::Pipeline::null(); 8];
+            for (i, slot) in fte_quad.iter_mut().enumerate() {
+                let (src, dst) = fte_factors(crate::FteBlend::ALL[i]);
+                *slot = sg(Desc {
+                    sample_shading: pipe_ss && fte_supersample,
+                    ..sd(fte_quad_vs, fte_fs, &fqb, &fqa, Blend::Factors(src, dst), true, false)
+                })?;
+            }
             Ok(ScenePipes {
                 world: sg(sd(world_vs, world_fs, &wb, &wa, Blend::None, true, true))?,
                 world_alpha: sg(sd(world_vs, world_fs, &wb, &wa, Blend::Alpha, true, false))?,
@@ -183,38 +205,47 @@ impl Pipelines {
                 alias_alpha: sg(Desc { cull: true, ..sd(alias_vs, alias_fs, &ab, &aa, Blend::Alpha, true, false) })?,
                 particle: sg(sd(part_vs, part_fs, &qb, &qa, Blend::Alpha, true, false))?,
                 fte,
+                fte_quad,
             })
         };
-        let scene = build_scene(samples, supersample, glow)?;
-        // ray-traced reflections: main-view water only
+        let scene = build_scene(samples, supersample)?;
+        // ray-traced reflections: main-view water and half-res single-sampled trace pass
         if let Some(rt) = &self.rt {
-            let fs = if glow { rt.water_glow_fs } else { rt.water_fs };
-            self.water_rt = g(Desc { glow, ..d(world_vs, fs, &wb, &wa, Blend::None, true, true) })?;
-            self.water_rt_alpha = g(Desc { glow, ..d(world_vs, fs, &wb, &wa, Blend::Alpha, true, false) })?;
+            self.water_rt = g(d(world_vs, rt.water_fs, &wb, &wa, Blend::None, true, true))?;
+            self.water_rt_alpha = g(d(world_vs, rt.water_fs, &wb, &wa, Blend::Alpha, true, false))?;
+            self.rt_depth_world = g(Desc {
+                samples: 1,
+                sample_shading: false,
+                no_color_write: true,
+                ..d(world_vs, rt.depth_fs, &wb, &wa, Blend::None, true, true)
+            })?;
+            self.water_rt_half = g(Desc {
+                samples: 1,
+                sample_shading: false,
+                ..d(world_vs, rt.water_half_fs, &wb, &wa, Blend::None, true, true)
+            })?;
         }
         // reflection views: single-sampled alias models with mirrored winding
         self.portal_alias_mirror = g(Desc { cull: true, samples: 1, sample_shading: false, mirror: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::None, true, true) })?;
-        // portal views are single-sampled and have no glow attachment
-        self.portal = if samples > 1 || glow { build_scene(1, false, false)? } else { ScenePipes::null() };
+        // portal views are single-sampled
+        self.portal = if samples > 1 { build_scene(1, false)? } else { ScenePipes::null() };
         // thermal goggles: hot bodies behind walls, added on top
         let one = vk::BlendFactor::ONE;
-        let (alias_main_fs, poly_main_fs) = if glow { (glow_fs.alias, glow_fs.poly) } else { (alias_fs, poly_fs) };
-        self.alias_xray = g(Desc { cull: true, behind: true, glow, ..d(alias_vs, alias_main_fs, &ab, &aa, Blend::Factors(one, one), true, false) })?;
+        self.alias_xray = g(Desc { cull: true, behind: true, ..d(alias_vs, alias_fs, &ab, &aa, Blend::Factors(one, one), true, false) })?;
         if self.wire_enabled {
-            let world_main_fs = if glow { glow_fs.world } else { world_fs };
             for (i, depth) in [true, false].into_iter().enumerate() {
                 self.wire_world[i] = g(Desc {
-                    wire: true, glow, ..d(world_vs, world_main_fs, &wb, &wa, Blend::Alpha, depth, false)
+                    wire: true, ..d(world_vs, world_fs, &wb, &wa, Blend::Alpha, depth, false)
                 })?;
                 self.wire_alias[i] = g(Desc {
-                    wire: true, cull: depth, glow, ..d(alias_vs, alias_main_fs, &ab, &aa, Blend::Alpha, depth, false)
+                    wire: true, cull: depth, ..d(alias_vs, alias_fs, &ab, &aa, Blend::Alpha, depth, false)
                 })?;
                 self.wire_sprite[i] = g(Desc {
-                    wire: true, glow, ..d(poly_vs, poly_main_fs, &pb, &pa, Blend::Alpha, depth, false)
+                    wire: true, ..d(poly_vs, poly_fs, &pb, &pa, Blend::Alpha, depth, false)
                 })?;
             }
         }
-        let poly = g(Desc { glow, ..d(poly_vs, poly_main_fs, &pb, &pa, Blend::Alpha, true, true) })?;
+        let poly = g(d(poly_vs, poly_fs, &pb, &pa, Blend::Alpha, true, true))?;
         // UI is drawn in the output pass, after post-processing
         let ui = graphics(
             gpu,
@@ -226,30 +257,30 @@ impl Pipelines {
                 ..d(ui_vs, ui_fs, &ub, &ua, Blend::Alpha, false, false)
             },
         )?;
-        let post = graphics(
-            gpu,
-            layout,
-            &Desc {
-                vs: post_vs,
-                fs: post_fs,
-                bindings: &[],
-                attrs: &[],
-                blend: Blend::None,
-                depth_test: false,
-                depth_write: false,
-                color: post_format,
-                depth: false,
-                samples: 1,
-                cull: false,
-                sample_shading: false,
-                topology: vk::PrimitiveTopology::TRIANGLE_LIST,
-                behind: false,
-                glow: false,
-                shadow: false,
-                mirror: false,
-                wire: false,
-            },
-        )?;
+        let post_desc = Desc {
+            vs: post_vs,
+            fs: post_fs,
+            bindings: &[],
+            attrs: &[],
+            blend: Blend::None,
+            depth_test: false,
+            depth_write: false,
+            color: post_format,
+            depth: false,
+            samples: 1,
+            cull: false,
+            sample_shading: false,
+            topology: vk::PrimitiveTopology::TRIANGLE_LIST,
+            behind: false,
+            depth_only: false,
+            no_color_write: false,
+            shadow: false,
+            mirror: false,
+            wire: false,
+            frag_spec_bool: Some(false),
+        };
+        let post = graphics(gpu, layout, &post_desc)?;
+        self.post_fast = graphics(gpu, layout, &Desc { frag_spec_bool: Some(true), ..post_desc })?;
         // post-effect passes: single-sampled, no depth attachment
         let fx = |vs, fs, bindings, attrs, color, cull| Desc {
             color,
@@ -260,6 +291,7 @@ impl Pipelines {
             ..d(vs, fs, bindings, attrs, Blend::None, false, false)
         };
         self.ao_source = graphics(gpu, layout, &fx(post_vs, ao_source_fs, &[], &[], AO_SOURCE_FORMAT, false))?;
+        self.ao_down = graphics(gpu, layout, &fx(post_vs, ao_down_fs, &[], &[], AO_SOURCE_FORMAT, false))?;
         self.ao = graphics(gpu, layout, &fx(post_vs, ao_fs, &[], &[], AO_FORMAT, false))?;
         self.ao_apply = graphics(
             gpu,
@@ -270,6 +302,7 @@ impl Pipelines {
                 ..d(post_vs, ao_apply_fs, &[], &[], Blend::Factors(vk::BlendFactor::ZERO, vk::BlendFactor::SRC_COLOR), false, false)
             },
         )?;
+        self.droplets = graphics(gpu, layout, &fx(post_vs, droplets_fs, &[], &[], DROPLET_FORMAT, false))?;
         self.vel_alias = graphics(gpu, layout, &fx(vel_alias_vs, vel_fs, &ab, &aa, VEL_FORMAT, true))?;
         self.vel_world = graphics(gpu, layout, &fx(vel_world_vs, vel_fs, &wb, &wa, VEL_FORMAT, false))?;
         // r_shadow_realtime_dlight: two-sided casters, single-sampled
@@ -281,6 +314,49 @@ impl Pipelines {
         };
         self.shadow_world = graphics(gpu, layout, &shadow(world_vs, shadow_world_fs, &wb, &wa))?;
         self.shadow_alias = graphics(gpu, layout, &shadow(alias_vs, shadow_alias_fs, &ab, &aa))?;
+        // narrow single-sampled half/quarter-res bloom glow pass into level 0
+        let bg = |vs, fs, bindings, attrs, blend, cull| Desc {
+            color: BLOOM_FORMAT,
+            samples: 1,
+            sample_shading: false,
+            cull,
+            ..d(vs, fs, bindings, attrs, blend, true, false)
+        };
+        let mut bloom_fte = [vk::Pipeline::null(); 9];
+        let glow_blends = [crate::FteBlend::Blend, crate::FteBlend::AddA, crate::FteBlend::AddC, crate::FteBlend::Premul];
+        for (i, slot) in bloom_fte.iter_mut().enumerate() {
+            let overlay = i == 8;
+            let b = if overlay { crate::FteBlend::Overlay } else { glow_blends[i % 4] };
+            let (src, dst) = fte_factors(b);
+            *slot = g(Desc {
+                depth_test: !overlay,
+                topology: if (4..8).contains(&i) { vk::PrimitiveTopology::LINE_LIST } else { vk::PrimitiveTopology::TRIANGLE_LIST },
+                ..bg(fte_vs, bloom_sh.fte, &fb, &fa, Blend::Factors(src, dst), false)
+            })?;
+        }
+        let mut bloom_fte_quad = [vk::Pipeline::null(); 4];
+        for (i, slot) in bloom_fte_quad.iter_mut().enumerate() {
+            let (src, dst) = fte_factors(glow_blends[i]);
+            *slot = g(bg(fte_quad_vs, bloom_sh.fte, &fqb, &fqa, Blend::Factors(src, dst), false))?;
+        }
+        self.bloom_glow = BloomPipes {
+            depth: g(Desc {
+                depth_only: true,
+                samples: 1,
+                sample_shading: false,
+                ..d(post_vs, bloom_sh.depth, &[], &[], Blend::None, true, true)
+            })?,
+            world: g(bg(world_vs, bloom_sh.world, &wb, &wa, Blend::None, false))?,
+            world_alpha: g(bg(world_vs, bloom_sh.world, &wb, &wa, Blend::Alpha, false))?,
+            water: g(bg(world_vs, bloom_sh.water, &wb, &wa, Blend::None, false))?,
+            water_alpha: g(bg(world_vs, bloom_sh.water, &wb, &wa, Blend::Alpha, false))?,
+            alias: g(bg(alias_vs, bloom_sh.alias, &ab, &aa, Blend::None, true))?,
+            alias_alpha: g(bg(alias_vs, bloom_sh.alias, &ab, &aa, Blend::Alpha, true))?,
+            poly: g(bg(poly_vs, bloom_sh.poly, &pb, &pa, Blend::Alpha, false))?,
+            particle: g(bg(part_vs, bloom_sh.part, &qb, &qa, Blend::Alpha, false))?,
+            fte: bloom_fte,
+            fte_quad: bloom_fte_quad,
+        };
         self.bloom_down = graphics(gpu, layout, &fx(post_vs, bloom_fs, &[], &[], BLOOM_FORMAT, false))?;
         self.bloom_up = graphics(gpu, layout, &Desc { blend: Blend::Factors(one, one), ..fx(post_vs, bloom_fs, &[], &[], BLOOM_FORMAT, false) })?;
         (
@@ -309,6 +385,7 @@ impl Pipelines {
             post,
         );
         self.fte = scene.fte;
+        self.fte_quad = scene.fte_quad;
         self.post_format = post_format;
         self.samples = samples;
         Ok(())

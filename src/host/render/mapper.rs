@@ -3,7 +3,7 @@ use crate::blood::Geometry;
 use qrender::{MapperSettings, Particle, View};
 
 impl Host {
-    fn mapper_allowed(&self) -> bool {
+    pub(super) fn mapper_allowed(&self) -> bool {
         !self.remote() && self.cl.maxclients <= 1
     }
 

@@ -27,6 +27,7 @@ layout(set = 0, binding = 5) buffer Frame { uint surf_frame[]; };
 
 layout(push_constant) uniform Push {
     vec4 frustum[4];
+    vec4 clip;       // extra portal clip plane: visible when box touches dot(xyz, p) + w >= 0
     vec4 eye;
     uint framecount;
     uint nmarks;
@@ -45,6 +46,7 @@ void main() {
     CullSurf s = surfs[m.y];
     if (dot(s.plane.xyz, eye.xyz) - s.plane.w < 0.0) return;
     vec3 c = s.center.xyz, e = s.extent.xyz;
+    if (dot(clip.xyz, c) + clip.w + dot(abs(clip.xyz), e) < 0.0) return;
     for (uint i = 0u; i < 4u; i++) {
         vec4 p = frustum[i];
         if (dot(p.xyz, c) + p.w + dot(abs(p.xyz), e) < 0.0) return;

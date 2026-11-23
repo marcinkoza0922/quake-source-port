@@ -48,7 +48,7 @@ impl Renderer {
                     .collect();
                 // shadow casters need no lightmaps
                 scratch.begin(wg.cpu.lm_surfs.len());
-                build_world_draw(wg, &mut self.buckets, dynw, &near, false, time, alphas, 1.0, ident(), &mut scratch)
+                build_world_draw(wg, &mut self.buckets, &mut self.world_draw_scratch, dynw, &near, false, time, alphas, 1.0, ident(), &mut scratch)
             });
             out.push(ShadowLight {
                 origin: o,

@@ -367,6 +367,68 @@ impl Renderer {
                 }
             }
         }
+        if !fr.fte_quad_batches.is_empty() && !fr.fte_quads.is_empty() {
+            let pr = [vs.right[0] * 1.5, vs.right[1] * 1.5, vs.right[2] * 1.5];
+            let pu = [vs.up[0] * 1.5, vs.up[1] * 1.5, vs.up[2] * 1.5];
+            for (k, bt) in fr.fte_quad_batches.iter().enumerate() {
+                let Some(p) = self.pics.get(bt.pic.0 as usize) else { continue };
+                let end = bt.first_index.saturating_add(bt.num_indices) as usize;
+                if end > fr.fte_quads.len() {
+                    continue;
+                }
+                let base = lists.poly_v.len() as u32;
+                let first = lists.poly_i.len() as u32;
+                for q in &fr.fte_quads[bt.first_index as usize..end] {
+                    let s = q.scale;
+                    let offs = if q.angle != 0.0 {
+                        let (sa, ca) = q.angle.sin_cos();
+                        let (x, y) = (sa * s, ca * s);
+                        [
+                            [0, 1, 2].map(|i| q.pos[i] - pr[i] * x - pu[i] * y),
+                            [0, 1, 2].map(|i| q.pos[i] - pr[i] * y + pu[i] * x),
+                            [0, 1, 2].map(|i| q.pos[i] + pr[i] * x + pu[i] * y),
+                            [0, 1, 2].map(|i| q.pos[i] + pr[i] * y - pu[i] * x),
+                        ]
+                    } else {
+                        [
+                            [0, 1, 2].map(|i| q.pos[i] - pu[i] * s),
+                            [0, 1, 2].map(|i| q.pos[i] - pr[i] * s),
+                            [0, 1, 2].map(|i| q.pos[i] + pu[i] * s),
+                            [0, 1, 2].map(|i| q.pos[i] + pr[i] * s),
+                        ]
+                    };
+                    let v0 = lists.poly_v.len() as u32 - base;
+                    lists.poly_v.extend_from_slice(&[
+                        crate::FteVertex { pos: offs[0], uv: [q.uv[0], q.uv[1]], color: q.color },
+                        crate::FteVertex { pos: offs[1], uv: [q.uv[0], q.uv[3]], color: q.color },
+                        crate::FteVertex { pos: offs[2], uv: [q.uv[2], q.uv[3]], color: q.color },
+                        crate::FteVertex { pos: offs[3], uv: [q.uv[2], q.uv[1]], color: q.color },
+                    ]);
+                    lists.poly_i.extend_from_slice(&[v0, v0 + 1, v0 + 2, v0, v0 + 2, v0 + 3]);
+                }
+                let count = lists.poly_i.len() as u32 - first;
+                let soft = bt.soft.then(|| self.soft_particles(&fr.settings)).flatten();
+                let du = lists.draw(poly_params(bt.blend, soft));
+                let cmd = Cmd {
+                    pipe: match soft {
+                        Some(_) => Pipe::SoftPoly(bt.blend as usize),
+                        None => Pipe::Poly(poly_index(bt.blend, false)),
+                    },
+                    src: Src::Poly,
+                    mat: [p.slot, NO_TEX, NO_TEX],
+                    first,
+                    count,
+                    base_vertex: base as i32,
+                    du,
+                    viewmodel: false,
+                };
+                if soft.is_some() {
+                    b.soft.push(cmd);
+                } else {
+                    b.trans.push((-2.5 - k as f32 * 1e-3, cmd));
+                }
+            }
+        }
     }
 }
 

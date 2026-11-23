@@ -11,11 +11,13 @@ const GEL_MODE: f32 = 9.0;
 const GEL_FAST_MODE: f32 = 10.0;
 mod types;
 use types::*;
+pub(super) use types::{FrameScratch, UiVert};
 mod math;
 pub use math::*;
 mod world_draw;
 mod mapper;
 use world_draw::*;
+pub(super) use world_draw::WorldDrawScratch;
 mod lightmaps;
 mod bloom;
 mod dlights;
@@ -42,8 +44,8 @@ impl Renderer {
         self.apply_settings(&fr.settings)?;
         // r_water_reflections: 1 planar (portal views), 2 ray traced
         let refl_mode = self.reflection_mode(&fr.settings);
-        let rt_on = refl_mode == 2 && (fr.view.is_some() || !fr.splits.is_empty());
-        if rt_on {
+        let rt_enabled = refl_mode == 2 && fr.settings.goggles.mode != 2 && (fr.view.is_some() || !fr.splits.is_empty());
+        if rt_enabled {
             self.ensure_rt()?;
         }
         self.gun_targets |= fr.gun_portals.iter().any(|g| g.live && g.exit.is_some()) || refl_mode == 1;
@@ -58,8 +60,16 @@ impl Renderer {
         if self.width == 0 || self.height == 0 {
             return Ok(());
         }
+        if rt_enabled {
+            self.ensure_rt_refl()?;
+        }
         if fr.settings.ssao > 0.0 && (fr.view.is_some() || !fr.splits.is_empty()) {
             self.ensure_ao_source()?;
+        }
+        let droplets_active = fr.view.is_some_and(|v| v.water_screen.drops_age() >= 0.0)
+            || fr.splits.iter().any(|s| s.view.water_screen.drops_age() >= 0.0);
+        if droplets_active {
+            self.ensure_droplets()?;
         }
         self.prepare_shader(fr.settings.shader_scale != 0)?;
         let dev = self.gpu.device.clone();
@@ -125,10 +135,14 @@ impl Renderer {
         }
         let time = fr.time;
         let mut styles = [256.0f32; 256];
-        for (i, v) in fr.lightstyles.iter().take(256).enumerate() {
-            styles[i] = *v as f32;
+        let mut style_ints = [256i32; 256];
+        for (i, &v) in fr.lightstyles.iter().take(256).enumerate() {
+            styles[i] = v as f32;
+            style_ints[i] = v;
         }
-        let style_ints: Vec<i32> = styles.iter().map(|&v| v as i32).collect();
+        if let Some(wg) = self.world.as_mut() {
+            wg.cpu.begin_light_frame(&style_ints);
+        }
 
         // views: split-screen cells, or the one view over the whole output
         let views_in: Vec<(Option<View>, [u32; 4], [f32; 4])> = if fr.splits.is_empty() {
@@ -226,18 +240,32 @@ impl Renderer {
         let mut particle_range: Option<Range> = None;
         let fog = fr.fog;
         let mut passes: Vec<ViewPass> = Vec::with_capacity(views_in.len());
-        let mut portal_worlds = PortalWorldCache::default();
+        let mut primary_water_bounds: Option<([f32; 3], [f32; 3])> = None;
+        let mut primary_eye_z = 0.0f32;
+        let mut frame_scratch = std::mem::take(&mut self.frame_scratch);
         for (vi, &(view_in, rect, blend)) in views_in.iter().enumerate() {
         let vbit = 1u8 << vi.min(7);
-        let mut world_draws: Vec<WorldDraw> = Vec::new();
-        let mut vel_draws: Vec<VelDraw> = Vec::new();
-        let mut alias_draws: Vec<AliasDraw> = Vec::new();
-        let mut sprite_draws: Vec<SpriteDraw> = Vec::new();
-        let mut trans: Vec<(f32, Trans)> = Vec::new();
+        let (mut world_draws, mut vel_draws, mut alias_draws, mut sprite_draws, mut trans) = if vi == 0 {
+            frame_scratch.world_draws.clear();
+            frame_scratch.vel_draws.clear();
+            frame_scratch.alias_draws.clear();
+            frame_scratch.sprite_draws.clear();
+            frame_scratch.trans.clear();
+            (
+                std::mem::take(&mut frame_scratch.world_draws),
+                std::mem::take(&mut frame_scratch.vel_draws),
+                std::mem::take(&mut frame_scratch.alias_draws),
+                std::mem::take(&mut frame_scratch.sprite_draws),
+                std::mem::take(&mut frame_scratch.trans),
+            )
+        } else {
+            (Vec::new(), Vec::new(), Vec::new(), Vec::new(), Vec::new())
+        };
         let mut cull: Option<CullFrame> = None;
         let mut particles = Range::default();
         // FTE particles: (vertex offset, index offset, batches with texture slots)
         let mut fte: Option<FteDraw> = None;
+        let mut fte_quads: Option<FteQuadDraw> = None;
         // this view's scene region (top-left of the target) and its 3D height
         let (scene_w, scene_h) = crate::projection::view_extent(
             rect, view_in.map_or(0, |v| v.reserve_bottom), (w, h), (sw, sh),
@@ -258,7 +286,7 @@ impl Renderer {
             h.max(1) as f32 * (scene_h as f32 / sh.max(1) as f32),
         ];
         let mut portal_draws = if fr.settings.teleport_windows || !fr.gun_portals.is_empty() || refl_mode == 1 {
-            self.prepare_portals(view.as_ref(), [scene_w, scene_h], fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis, &mut portal_worlds, ripple_count > 0)
+            self.prepare_portals(view.as_ref(), [scene_w, scene_h], fr.gun_portals, &fr.settings, &mut dynw, time, alphas, &mut lm_vis, ripple_count > 0, fi)
         } else {
             Vec::new()
         };
@@ -270,17 +298,6 @@ impl Renderer {
         let mut leaves = 0;
         if let Some(vs) = &view {
             if let Some(wg) = self.world.as_mut() {
-                // ray-traced reflections reach surfaces outside the view:
-                // keep the lightmaps of the eye's PVS current (planar
-                // reflection views request the same set by drawing it)
-                if rt_on && vi == 0 {
-                    for &si in wg.cpu.portal_surfaces(vs.eye).iter() {
-                        let lm = wg.draw_surfaces[si as usize].lm;
-                        if lm != NO_LM {
-                            lm_vis.push(lm);
-                        }
-                    }
-                }
                 if let Some(index) = self.isolated_portal.filter(|_| !multi) {
                     let p = &wg.portals[index];
                     let surfs: Vec<_> = wg.cpu.surfaces.iter().enumerate().filter_map(|(i, s)| {
@@ -289,14 +306,14 @@ impl Renderer {
                             .then_some(i as u32)
                     }).collect();
                     world_draws.push(build_world_draw(
-                        wg, &mut self.buckets, &mut dynw, &surfs, false, time,
+                        wg, &mut self.buckets, &mut self.world_draw_scratch, &mut dynw, &surfs, false, time,
                         alphas, 1.0, ident(), &mut lm_vis,
                     ));
                 } else if measure {
                     let (surfs, count) = wg.cpu.view_surfaces(vs.eye, &vs.frustum);
                     leaves = count;
                     world_draws.push(build_world_draw(
-                        wg, &mut self.buckets, &mut dynw, &surfs, false, time,
+                        wg, &mut self.buckets, &mut self.world_draw_scratch, &mut dynw, &surfs, false, time,
                         alphas, 1.0, ident(), &mut lm_vis,
                     ));
                 } else if wg.cpu.hidden_surfaces.is_empty() {
@@ -307,21 +324,91 @@ impl Renderer {
                 } else {
                     let surfs = wg.cpu.surfaces_for_leaf(wg.cpu.view_leaf(vs.eye));
                     world_draws.push(build_world_draw(
-                        wg, &mut self.buckets, &mut dynw, &surfs, false, time,
+                        wg, &mut self.buckets, &mut self.world_draw_scratch, &mut dynw, &surfs, false, time,
                         alphas, 1.0, ident(), &mut lm_vis,
                     ));
                 }
             }
+            // Only activate ray-traced reflections when at least one reflecting
+            // liquid (water/slime) surface is visible in this view's PVS & frustum.
+            let mut water_bounds: Option<([f32; 3], [f32; 3])> = None;
+            if rt_enabled && self.isolated_portal.is_none()
+                && let Some(wg) = self.world.as_ref()
+            {
+                let use_bits = cull.is_some();
+                for &(li, si) in &wg.water_marks {
+                    if use_bits && wg.scratch_bits.get((li >> 5) as usize).is_none_or(|&w| w & (1 << (li & 31)) == 0) {
+                        continue;
+                    }
+                    let s = &wg.cpu.surfaces[si as usize];
+                    if wg.cpu.hidden_surfaces.contains(&si) {
+                        continue;
+                    }
+                    let dd = dot(vs.eye, s.normal) - s.dist;
+                    if (dd < 0.0) != s.flipped {
+                        continue;
+                    }
+                    if !box_in_frustum(&vs.frustum, s.mins, s.maxs) {
+                        continue;
+                    }
+                    water_bounds = Some(match water_bounds {
+                        Some((mn, mx)) => (
+                            [mn[0].min(s.mins[0]), mn[1].min(s.mins[1]), mn[2].min(s.mins[2])],
+                            [mx[0].max(s.maxs[0]), mx[1].max(s.maxs[1]), mx[2].max(s.maxs[2])],
+                        ),
+                        None => (s.mins, s.maxs),
+                    });
+                }
+                if wg.has_brush_water {
+                    for e in fr.entities {
+                        if let Some(Model::Brush(sm)) = self.models.get(e.model.0 as usize)
+                            && wg.brush_has_water.get(*sm as usize).copied().unwrap_or(false)
+                            && let Some(sub_) = wg.cpu.submodels.get(*sm as usize)
+                        {
+                            let mn = [0, 1, 2].map(|i| sub_.mins[i] + e.origin[i]);
+                            let mx = [0, 1, 2].map(|i| sub_.maxs[i] + e.origin[i]);
+                            if box_in_frustum(&vs.frustum, mn, mx) {
+                                water_bounds = Some(match water_bounds {
+                                    Some((a, b)) => (
+                                        [a[0].min(mn[0]), a[1].min(mn[1]), a[2].min(mn[2])],
+                                        [b[0].max(mx[0]), b[1].max(mx[1]), b[2].max(mx[2])],
+                                    ),
+                                    None => (mn, mx),
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            if vi == 0 {
+                primary_water_bounds = water_bounds;
+                primary_eye_z = vs.eye[2];
+            }
+            let rt_on = water_bounds.is_some();
+            if rt_on && vi == 0 && let Some(wg) = self.world.as_mut() {
+                // ray-traced reflections reach surfaces outside the view:
+                // keep the lightmaps of the eye's PVS current
+                for &si in wg.cpu.portal_surfaces(vs.eye).iter() {
+                    let lm = wg.draw_surfaces[si as usize].lm;
+                    if lm != NO_LM {
+                        lm_vis.push(lm);
+                    }
+                }
+            }
+            let brush_surfs = &mut frame_scratch.brush_surfs;
+            let has_hidden_ents = !self.hidden_entities.is_empty();
             for e in fr.entities {
-                if self.hidden_entities.contains(&e.key) || (e.views != 0 && e.views & vbit == 0) { continue; }
+                if (has_hidden_ents && self.hidden_entities.contains(&e.key))
+                    || (e.views != 0 && e.views & vbit == 0)
+                {
+                    continue;
+                }
                 let Some(m) = self.models.get(e.model.0 as usize) else {
                     continue;
                 };
                 if st.mapper.lightmap && !matches!(m, Model::Brush(_)) {
                     continue;
                 }
-                let rot = entity_rotation(e.angles);
-                let dist = dot(sub(e.origin, vs.eye), vs.fwd);
                 match m {
                     Model::Brush(sm) => {
                         let Some(wg) = self.world.as_ref() else {
@@ -330,48 +417,102 @@ impl Renderer {
                         let Some(sub_) = wg.cpu.submodels.get(*sm as usize) else {
                             continue;
                         };
-                        let rotated = e.angles.iter().any(|&a| a != 0.0);
-                        if rotated {
-                            let r = [0, 1, 2]
-                                .map(|i| sub_.mins[i].abs().max(sub_.maxs[i].abs()))
-                                .iter()
-                                .map(|x| x * x)
-                                .sum::<f32>()
-                                .sqrt();
-                            if portal_draws.is_empty() && !rt_on && !sphere_in_frustum(&vs.frustum, e.origin, r) {
-                                continue;
-                            }
+                        let rotated = e.angles[0] != 0.0 || e.angles[1] != 0.0 || e.angles[2] != 0.0;
+                        let main_visible = if rotated {
+                            let rx = sub_.mins[0].abs().max(sub_.maxs[0].abs());
+                            let ry = sub_.mins[1].abs().max(sub_.maxs[1].abs());
+                            let rz = sub_.mins[2].abs().max(sub_.maxs[2].abs());
+                            let r = (rx * rx + ry * ry + rz * rz).sqrt();
+                            sphere_in_frustum(&vs.frustum, e.origin, r)
                         } else {
-                            let mn = [0, 1, 2].map(|i| sub_.mins[i] + e.origin[i]);
-                            let mx = [0, 1, 2].map(|i| sub_.maxs[i] + e.origin[i]);
-                            if portal_draws.is_empty() && !rt_on && !box_in_frustum(&vs.frustum, mn, mx) {
-                                continue;
+                            let mn = [sub_.mins[0] + e.origin[0], sub_.mins[1] + e.origin[1], sub_.mins[2] + e.origin[2]];
+                            let mx = [sub_.maxs[0] + e.origin[0], sub_.maxs[1] + e.origin[1], sub_.maxs[2] + e.origin[2]];
+                            box_in_frustum(&vs.frustum, mn, mx)
+                        };
+                        let has_portals = !portal_draws.is_empty();
+                        if !main_visible && !has_portals {
+                            // Offscreen brush entities still participate in ray-traced reflections
+                            // via `fr.entities`, so keep their lightmaps current when RT is on.
+                            if rt_on && vi == 0 {
+                                for si in sub_.first_surface..sub_.first_surface + sub_.num_surfaces {
+                                    if let Some(ds) = wg.draw_surfaces.get(si as usize)
+                                        && ds.lm != NO_LM
+                                    {
+                                        lm_vis.push(ds.lm);
+                                    }
+                                }
                             }
+                            continue;
+                        }
+                        let rot = if rotated { entity_rotation(e.angles) } else { IDENT3 };
+                        let local_mid = [
+                            0.5 * (sub_.mins[0] + sub_.maxs[0]),
+                            0.5 * (sub_.mins[1] + sub_.maxs[1]),
+                            0.5 * (sub_.mins[2] + sub_.maxs[2]),
+                        ];
+                        let half = [
+                            0.5 * (sub_.maxs[0] - sub_.mins[0]),
+                            0.5 * (sub_.maxs[1] - sub_.mins[1]),
+                            0.5 * (sub_.maxs[2] - sub_.mins[2]),
+                        ];
+                        let radius = dot(half, half).sqrt();
+                        let center = if rotated { add(e.origin, rotate3(&rot, local_mid)) } else { add(e.origin, local_mid) };
+                        let portal_visible = has_portals
+                            && portal_draws.iter().any(|pd| {
+                                pd.frustum.is_some_and(|f| {
+                                    let c = pd.portal.clip();
+                                    dot([c[0], c[1], c[2]], center) + c[3] + radius >= 0.0
+                                        && sphere_in_frustum(&f, center, radius)
+                                })
+                            });
+                        if !main_visible && !portal_visible {
+                            if rt_on && vi == 0 {
+                                for si in sub_.first_surface..sub_.first_surface + sub_.num_surfaces {
+                                    if let Some(ds) = wg.draw_surfaces.get(si as usize)
+                                        && ds.lm != NO_LM
+                                    {
+                                        lm_vis.push(ds.lm);
+                                    }
+                                }
+                            }
+                            continue;
                         }
                         // eye in model space (R^T * (eye - origin))
                         let d = sub(vs.eye, e.origin);
-                        let le = [0, 1, 2]
-                            .map(|c| rot[0][c] * d[0] + rot[1][c] * d[1] + rot[2][c] * d[2]);
-                        let mut surfs = Vec::new();
-                        for si in sub_.first_surface..sub_.first_surface + sub_.num_surfaces {
-                            let Some(s) = wg.cpu.surfaces.get(si as usize) else {
-                                break;
-                            };
+                        let le = if rotated {
+                            [
+                                rot[0][0] * d[0] + rot[1][0] * d[1] + rot[2][0] * d[2],
+                                rot[0][1] * d[0] + rot[1][1] * d[1] + rot[2][1] * d[2],
+                                rot[0][2] * d[0] + rot[1][2] * d[1] + rot[2][2] * d[2],
+                            ]
+                        } else {
+                            d
+                        };
+                        brush_surfs.clear();
+                        let end = (sub_.first_surface + sub_.num_surfaces) as usize;
+                        let surfs = wg.cpu.surfaces.get(sub_.first_surface as usize..end.min(wg.cpu.surfaces.len())).unwrap_or(&[]);
+                        for (off, s) in surfs.iter().enumerate() {
                             if s.num_indices == 0 {
                                 continue;
                             }
-                            let dd = dot(le, s.normal) - s.dist;
-                            if (dd < 0.0) != s.flipped {
-                                continue;
+                            if !portal_visible {
+                                let dd = dot(le, s.normal) - s.dist;
+                                if (dd < 0.0) != s.flipped {
+                                    continue;
+                                }
                             }
-                            surfs.push(si);
+                            brush_surfs.push(sub_.first_surface + off as u32);
+                        }
+                        if brush_surfs.is_empty() {
+                            continue;
                         }
                         let alpha = e.alpha.clamp(0.0, 1.0);
                         let mut wd = build_world_draw(
                             wg,
                             &mut self.buckets,
+                            &mut self.world_draw_scratch,
                             &mut dynw,
-                            &surfs,
+                            brush_surfs,
                             e.frame != 0,
                             time,
                             alphas,
@@ -380,20 +521,15 @@ impl Renderer {
                             &mut lm_vis,
                         );
                         wd.zfix = true;
-                        {
-                            let mid = [0, 1, 2].map(|i| 0.5 * (sub_.mins[i] + sub_.maxs[i]));
-                            let half = [0, 1, 2].map(|i| 0.5 * (sub_.maxs[i] - sub_.mins[i]));
-                            let c = add(e.origin, rotate3(&rot, mid));
-                            wd.bounds = [c[0], c[1], c[2], dot(half, half).sqrt()];
-                        }
-                        if alpha < 1.0 {
-                            trans.push((dist, Trans::World(world_draws.len())));
-                        } else if !e.portal_only {
-                            let local_mid = [0, 1, 2].map(|i| 0.5 * (sub_.mins[i] + sub_.maxs[i]));
-                            let half = [0, 1, 2].map(|i| 0.5 * (sub_.maxs[i] - sub_.mins[i]));
-                            let r = dot(half, half).sqrt();
-                            let center = add(e.origin, rotate3(&rot, local_mid));
-                            if let Some(r) = prev_rows(vs, view_px, e, center, local_mid, r, None) {
+                        wd.main_visible = main_visible;
+                        wd.bounds = [center[0], center[1], center[2], radius];
+                        if main_visible {
+                            if alpha < 1.0 {
+                                let dist = dot(sub(e.origin, vs.eye), vs.fwd);
+                                trans.push((dist, Trans::World(world_draws.len())));
+                            } else if !e.portal_only
+                                && let Some(r) = prev_rows(vs, view_px, e, center, local_mid, radius, None)
+                            {
                                 vel_draws.push(VelDraw::World(world_draws.len(), r));
                             }
                         }
@@ -416,10 +552,23 @@ impl Renderer {
                         };
                         let radius = dynp.map_or(am.radius, |(_, d)| d.radius);
                         let main_visible = e.viewmodel || sphere_in_frustum(&vs.frustum, e.origin, radius);
-                        // ray-traced reflections see every model (first view's list)
-                        if portal_draws.is_empty() && !main_visible && !(rt_on && vi == 0) {
-                            continue;
+                        // Keep offscreen models only when visible in a portal or relevant to visible RT water.
+                        if !main_visible {
+                            let for_rt = rt_on && vi == 0 && rt::rt_alias_relevant(e.origin, radius, water_bounds, vs.eye[2]);
+                            let in_portal = !for_rt
+                                && !portal_draws.is_empty()
+                                && portal_draws.iter().any(|pd| {
+                                    pd.frustum.is_some_and(|f| {
+                                        let c = pd.portal.clip();
+                                        dot([c[0], c[1], c[2]], e.origin) + c[3] + radius >= 0.0
+                                            && sphere_in_frustum(&f, e.origin, radius)
+                                    })
+                                });
+                            if !for_rt && !in_portal {
+                                continue;
+                            }
                         }
+                        let rot = entity_rotation(e.angles);
                         let t = time + e.syncbase as f64;
                         let pose = |f: u32| {
                             let (first, n, iv) = &am.frames[(f as usize).min(am.frames.len() - 1)];
@@ -427,25 +576,19 @@ impl Renderer {
                         };
                         let pf1 = pose(e.prev_frame);
                         let pf2 = pose(e.frame);
-                        let local = affine(
-                            [
-                                [am.scale[0], 0.0, 0.0],
-                                [0.0, am.scale[1], 0.0],
-                                [0.0, 0.0, am.scale[2]],
-                            ],
-                            am.scale_origin,
-                        );
                         let model = match dynp {
                             Some((_, d)) => affine(
                                 [[d.scale[0], 0.0, 0.0], [0.0, d.scale[1], 0.0], [0.0, 0.0, d.scale[2]]],
                                 d.origin,
                             ),
-                            None => mul(&affine(rot, e.origin), &local),
+                            None => alias_model_matrix(rot, e.origin, am.scale, am.scale_origin),
                         };
                         // R_SetupAliasLighting
                         let wl = self.world.as_ref().map(|w| &w.cpu);
-                        let (mut lc, ldir) = wl
-                            .and_then(|w| {
+                        let (mut lc, ldir) = if st.fullbright {
+                            ([100.0; 3], None) // ironwail: lightcolor 0.5 (x200)
+                        } else {
+                            wl.and_then(|w| {
                                 w.light_point_dir(e.origin, &style_ints).or_else(|| {
                                     w.light_point_dir(
                                         [e.origin[0], e.origin[1], e.origin[2] + am.maxs_z * 0.5],
@@ -453,12 +596,10 @@ impl Renderer {
                                     )
                                 })
                             })
-                            .unwrap_or(([128.0; 3], None));
-                        if st.fullbright {
-                            lc = [100.0; 3]; // ironwail: lightcolor 0.5 (x200)
-                        }
+                            .unwrap_or(([128.0; 3], None))
+                        };
                         // real-time dynamic lights shade models per pixel instead
-                        if st.dynamic && !st.fullbright && !st.rt_dlights {
+                        if st.dynamic && !st.fullbright && !st.rt_dlights && !fr.dlights.is_empty() {
                             for dl in fr.dlights {
                                 let d = sub(e.origin, dl.origin);
                                 let add = dl.radius - dot(d, d).sqrt();
@@ -495,12 +636,14 @@ impl Renderer {
                             && let Some(wd) = ldir
                         {
                             // Transform world-space baked light direction into model space (R^T * wd).
-                            let local_d = [0, 1, 2].map(|c| rot[0][c] * wd[0] + rot[1][c] * wd[1] + rot[2][c] * wd[2]);
+                            let local_d = [
+                                rot[0][0] * wd[0] + rot[1][0] * wd[1] + rot[2][0] * wd[2],
+                                rot[0][1] * wd[0] + rot[1][1] * wd[1] + rot[2][1] * wd[2],
+                                rot[0][2] * wd[0] + rot[1][2] * wd[1] + rot[2][2] * wd[2],
+                            ];
                             norm(local_d)
                         } else {
-                            let q = ((e.angles[1] * (16.0 / 360.0)) as i32 & 15) as f32;
-                            let ang = q / 16.0 * std::f32::consts::TAU;
-                            norm([(-ang).cos(), (-ang).sin(), 1.0])
+                            shade_vec(e.angles[1])
                         };
                         let alpha = e.alpha.clamp(0.0, 1.0);
                         let mut base_flags = 0u32;
@@ -522,10 +665,23 @@ impl Renderer {
                         }
                         base_flags |= (e.heat.min(3) as u32) << 8;
                         let stride = if am.md3 { 2 } else { 1 };
-                        let prev_r = if main_visible && !e.portal_only && (alpha >= 1.0 || e.viewmodel) {
+                        let prev_r = if prev_ok && main_visible && !e.portal_only && (alpha >= 1.0 || e.viewmodel) {
+                            let local = affine(
+                                [
+                                    [am.scale[0], 0.0, 0.0],
+                                    [0.0, am.scale[1], 0.0],
+                                    [0.0, 0.0, am.scale[2]],
+                                ],
+                                am.scale_origin,
+                            );
                             prev_rows(vs, view_px, e, e.origin, [0.0; 3], radius, Some(&local))
                         } else {
                             None
+                        };
+                        let dist = if alpha < 1.0 && !e.viewmodel && main_visible && !e.portal_only {
+                            dot(sub(e.origin, vs.eye), vs.fwd)
+                        } else {
+                            0.0
                         };
                         for surf in &am.surfaces {
                             if surf.num_indices == 0 {
@@ -627,6 +783,7 @@ impl Renderer {
                             continue;
                         };
                         let alpha = e.alpha.clamp(0.0, 1.0);
+                        let dist = dot(sub(e.origin, vs.eye), vs.fwd);
                         trans.push((dist, Trans::Sprite(sprite_draws.len())));
                         sprite_draws.push(SpriteDraw {
                             vofs,
@@ -639,22 +796,22 @@ impl Renderer {
             if let Some(r) = particle_range {
                 particles = r;
             } else if !fr.particles.is_empty() {
-                let data: Vec<([f32; 3], u32)> = fr
-                    .particles
-                    .iter()
-                    .map(|p| {
-                        let c = self.palette[p.color as usize];
-                        let a = (p.alpha.clamp(0.0, 1.0) * 255.0) as u32;
-                        (
-                            p.origin,
-                            c[0] as u32 | (c[1] as u32) << 8 | (c[2] as u32) << 16 | a << 24,
-                        )
-                    })
-                    .collect();
-                if let Some(ofs) = dynw.push(&data, 16) {
+                if let Some((ofs, ptr)) = dynw.alloc_uninit::<([f32; 3], u32)>(fr.particles.len(), 16) {
+                    let pal = &self.palette_rgba;
+                    for (idx, p) in fr.particles.iter().enumerate() {
+                        let base = pal[p.color as usize];
+                        let col = if p.alpha >= 1.0 {
+                            base
+                        } else {
+                            let a = (p.alpha.max(0.0) * 255.0) as u32;
+                            (base & 0x00ff_ffff) | (a << 24)
+                        };
+                        // SAFETY: `alloc_uninit` reserved `fr.particles.len()` aligned elements.
+                        unsafe { ptr.add(idx).write((p.origin, col)) };
+                    }
                     particles = Range {
                         ofs,
-                        count: data.len() as u32,
+                        count: fr.particles.len() as u32,
                     };
                 }
                 particle_range = Some(particles);
@@ -702,15 +859,8 @@ impl Renderer {
                     });
                 }
             }
-            let (mut fte_v, mut fte_i, fte_b);
-            let (mut fte_vertices, mut fte_indices, fte_batches) = if spray_b.is_empty() {
-                (fr.fte_vertices, fr.fte_indices, fr.fte_batches)
-            } else {
-                fte_v = [fr.fte_vertices, &spray_v].concat();
-                fte_i = [fr.fte_indices, &spray_i].concat();
-                fte_b = [fr.fte_batches, &spray_b].concat();
-                (&fte_v[..], &fte_i[..], &fte_b[..])
-            };
+            let mut gun_v: Vec<FteVertex> = Vec::new();
+            let mut gun_i: Vec<u32> = Vec::new();
             let mut gun_batches = Vec::new();
             // the view texture of gun portal `gi` as seen in view `parent`
             let slot_in = |parent: Option<usize>, gi: usize| {
@@ -721,22 +871,38 @@ impl Renderer {
                     .unwrap_or(NO_TEX)
             };
             if !fr.gun_portals.is_empty() {
-                let (mut v, mut i) = (fte_vertices.to_vec(), fte_indices.to_vec());
+                let v_base = (fr.fte_vertices.len() + spray_v.len()) as u32;
+                let i_base = (fr.fte_indices.len() + spray_i.len()) as u32;
+                gun_v.reserve(fr.gun_portals.len() * 4);
+                gun_i.reserve(fr.gun_portals.len() * 6);
                 for (gi, g) in fr.gun_portals.iter().enumerate() {
-                    gun_batches.push((gi, gun_portal_quad(g, slot_in(None, gi), &mut v, &mut i)));
+                    gun_batches.push((gi, gun_portal_quad(g, slot_in(None, gi), v_base, i_base, &mut gun_v, &mut gun_i)));
                 }
-                (fte_v, fte_i) = (v, i);
-                (fte_vertices, fte_indices) = (&fte_v[..], &fte_i[..]);
             }
-            if !(fte_batches.is_empty() && gun_batches.is_empty()) && !fte_indices.is_empty() {
+            let total_indices = fr.fte_indices.len() + spray_i.len() + gun_i.len();
+            if !(fr.fte_batches.is_empty() && spray_b.is_empty() && gun_batches.is_empty()) && total_indices > 0 {
                 let gel_mode = if st.gel_quality == 0 { GEL_FAST_MODE } else { GEL_MODE };
-                let parts: Vec<_> = fte_batches
-                    .iter()
-                    .filter_map(|b| {
-                        let slot = self.pics.get(b.pic.0 as usize)?.slot;
-                        Some((crate::pipelines::fte_index(b.blend, b.lines), slot, *b, if b.gel { gel_mode } else { b.blend.shader_mode() }))
-                    })
-                    .collect();
+                let mut parts: Vec<(usize, u32, crate::FteBatch, f32)> =
+                    Vec::with_capacity(fr.fte_batches.len() + spray_b.len());
+                for b in fr.fte_batches.iter().chain(&spray_b) {
+                    let Some(pic) = self.pics.get(b.pic.0 as usize) else { continue };
+                    let pipe = crate::pipelines::fte_index(b.blend, b.lines);
+                    let slot = pic.slot;
+                    let mode = if b.gel { gel_mode } else { b.blend.shader_mode() };
+                    // Merge adjacent batches with identical state and contiguous indices.
+                    if let Some((lp, ls, lb, lm)) = parts.last_mut()
+                        && *lp == pipe
+                        && *ls == slot
+                        && *lm == mode
+                        && lb.soft == b.soft
+                        && lb.blend == b.blend
+                        && lb.first_index + lb.num_indices == b.first_index
+                    {
+                        lb.num_indices += b.num_indices;
+                    } else {
+                        parts.push((pipe, slot, *b, mode));
+                    }
+                }
                 // portal views: the same particles (unless gated by portal quality) and
                 // every gun portal but the one they look out of, with nested views
                 let per_view: Vec<Vec<_>> = portal_draws
@@ -761,14 +927,55 @@ impl Renderer {
                     d.fte = b;
                 }
                 let batches: Vec<_> = parts.into_iter().chain(gun_batches.into_iter().map(|(_, b)| b)).collect();
-                if let (Some(v), Some(i)) = (dynw.push(fte_vertices, 16), dynw.push(fte_indices, 4)) {
+                if let (Some(v), Some(i)) = (
+                    dynw.push_slices(&[fr.fte_vertices, &spray_v, &gun_v], 16),
+                    dynw.push_slices(&[fr.fte_indices, &spray_i, &gun_i], 4),
+                ) {
                     fte = Some((v, i, batches));
+                }
+            }
+            if !fr.fte_quad_batches.is_empty() && !fr.fte_quads.is_empty() {
+                let mut qbatches: Vec<(usize, u32, crate::FteBatch, f32)> =
+                    Vec::with_capacity(fr.fte_quad_batches.len());
+                for b in fr.fte_quad_batches {
+                    let Some(pic) = self.pics.get(b.pic.0 as usize) else { continue };
+                    let pipe = crate::pipelines::fte_index(b.blend, false).min(7);
+                    let slot = pic.slot;
+                    let mode = b.blend.shader_mode();
+                    if let Some((lp, ls, lb, lm)) = qbatches.last_mut()
+                        && *lp == pipe
+                        && *ls == slot
+                        && *lm == mode
+                        && lb.soft == b.soft
+                        && lb.blend == b.blend
+                        && lb.first_index + lb.num_indices == b.first_index
+                    {
+                        lb.num_indices += b.num_indices;
+                    } else {
+                        qbatches.push((pipe, slot, *b, mode));
+                    }
+                }
+                if !qbatches.is_empty()
+                    && let Some(qofs) = dynw.push(fr.fte_quads, 16)
+                {
+                    for pd in &mut portal_draws {
+                        if !portals::skip_portal_extras(st.portal_quality.min(2), pd.depth) {
+                            pd.fte_quads = qbatches
+                                .iter()
+                                .map(|&(p, s, mut b, m)| {
+                                    b.soft = false;
+                                    (p, s, b, m)
+                                })
+                                .collect();
+                        }
+                    }
+                    fte_quads = Some((qofs, qbatches));
                 }
             }
             trans.sort_by(|a, b| b.0.total_cmp(&a.0));
         }
         if measure {
-            self.mapper_stats = mapper::stats(&world_draws, &alias_draws, &sprite_draws, particles, fte.as_ref(), leaves);
+            self.mapper_stats = mapper::stats(&world_draws, &alias_draws, &sprite_draws, particles, fte.as_ref(), fte_quads.as_ref(), leaves);
         }
         passes.push(ViewPass {
             speed_blur: view_in.map_or(0.0, |v| v.speed_blur.clamp(0.0, 1.0)),
@@ -791,19 +998,27 @@ impl Renderer {
             cull,
             particles,
             fte,
+            fte_quads,
             portal_draws,
         });
         }
 
-        let rt_build = if rt_on { passes.first().and_then(|p| self.prepare_rt(fi, fr, &p.alias_draws, time)) } else { None };
-        let (water_pipe, water_alpha_pipe) = match rt_build {
-            Some(_) => (self.pipes.water_rt, self.pipes.water_rt_alpha),
-            None => (self.pipes.water, self.pipes.water_alpha),
+        let rt_build = if primary_water_bounds.is_some() {
+            passes.first().and_then(|p| self.prepare_rt(fi, fr, &p.alias_draws, time, primary_water_bounds, primary_eye_z))
+        } else {
+            None
+        };
+        let rt_half_on = rt_build.is_some() && self.targets.as_ref().is_some_and(|t| t.rt_refl.is_some());
+        let (water_pipe, water_alpha_pipe) = match (rt_build.is_some(), rt_half_on) {
+            (true, false) => (self.pipes.water_rt, self.pipes.water_rt_alpha),
+            _ => (self.pipes.water, self.pipes.water_alpha),
         };
 
         // UI vertices (split into scissor ranges whenever Draw2D::Clip appears)
-        let mut ui: Vec<UiVert> = Vec::with_capacity(fr.draw2d.len() * 6);
-        let mut ui_ranges: Vec<(Option<[f32; 4]>, u32, u32)> = Vec::new();
+        let mut ui = std::mem::take(&mut self.ui_verts);
+        let mut ui_ranges = std::mem::take(&mut self.ui_ranges);
+        ui.clear();
+        ui_ranges.clear();
         let mut cur_clip: Option<[f32; 4]> = None;
         let mut cur_start: u32 = 0;
         let quad = |ui: &mut Vec<UiVert>,
@@ -1007,7 +1222,22 @@ impl Renderer {
                     }
                     a
                 },
-                refl: [if st.water_reflections > 0 { st.water_reflection_amount.clamp(0.0, 1.5) } else { 0.0 }, 0.0, 0.0, 0.0],
+                refl: {
+                    let amount = if st.water_reflections > 0 { st.water_reflection_amount.clamp(0.0, 1.5) } else { 0.0 };
+                    let opaque_bits = rt_build.map_or(0, |b| b.opaque_tris);
+                    let (slot_bits, scale_bits) = if rt_half_on
+                        && let Some(rt_t) = self.targets.as_ref().and_then(|t| t.rt_refl.as_ref())
+                    {
+                        let [rw, rh] = rt::rt_refl_viewport(rt_t, [pass.scene_w, pass.scene_h], [sw, sh]);
+                        (
+                            rt_t.slot,
+                            rt::pack_unorm2x16(rw as f32 / rt_t.width.max(1) as f32, rh as f32 / rt_t.height.max(1) as f32),
+                        )
+                    } else {
+                        (0, 0)
+                    };
+                    [amount, f32::from_bits(opaque_bits), f32::from_bits(slot_bits), f32::from_bits(scale_bits)]
+                },
                 teleport_fx: [ripple_count as u32, 0, 0, 0],
                 teleport_ripples,
                 hdr_deluxe: match &self.world {
@@ -1223,12 +1453,15 @@ impl Renderer {
             let vel_draws = &mut pass.vel_draws;
             let mut particles = pass.particles;
             let mut fte = pass.fte.take();
+            let mut fte_quads = pass.fte_quads.take();
             let ao_on = st.ssao > 0.0 && view.is_some();
-            // the AO and velocity passes read scene depth after the scene passes
+            let bloom_on = t.bloom.is_some() && view.is_some() && st.goggles.mode != 2;
+            // the velocity and narrow bloom glow passes read scene depth after the scene pass
             // (SSAO runs inside the scene, between opaque and translucent draws)
-            let keep_depth = !vel_draws.is_empty();
+            let keep_depth = !vel_draws.is_empty() || bloom_on;
             let lm_rng = gpu::range(vk::ImageAspectFlags::COLOR, 1, lightmap.layers);
-            if let Some(c) = &cull {
+            let portal_gpu_cull = portal_draws.iter().any(|pd| pd.cull.is_some());
+            let run_cull = |c: &CullFrame| {
                 let cs = vk::PipelineBindPoint::COMPUTE;
                 dev.cmd_copy_buffer(
                     cmd,
@@ -1270,10 +1503,14 @@ impl Renderer {
                     &[],
                     &[],
                 );
+            };
+            if !portal_gpu_cull && let Some(c) = &cull {
+                run_cull(c);
             }
             ts(1);
             let lm_cpu = pi == 0 && lm_cpu_range.is_some();
-            if (lm_cpu || cull.is_some()) && self.world.is_some() {
+            let lm_indirect_now = !portal_gpu_cull && cull.is_some();
+            if (lm_cpu || lm_indirect_now) && self.world.is_some() {
                 gpu::barrier(
                     &dev,
                     cmd,
@@ -1301,7 +1538,7 @@ impl Renderer {
                         dev.cmd_dispatch(cmd, n, 1, 1);
                     }
                 }
-                if let Some(c) = &cull {
+                if lm_indirect_now && let Some(c) = &cull {
                     if lm_cpu {
                         // Portal and world lists can contain the same surface.
                         gpu::barrier(&dev, cmd, lightmap.image, lm_rng,
@@ -1352,11 +1589,6 @@ impl Renderer {
                     vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL,
                 );
             }
-            if let Some(b) = &t.bloom {
-                for img in std::iter::once(&b.glow).chain(&b.glow_ms) {
-                    gpu::barrier(&dev, cmd, img.image, crng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
-                }
-            }
             let area = vk::Rect2D {
                 offset: vk::Offset2D::default(),
                 extent: vk::Extent2D {
@@ -1377,13 +1609,15 @@ impl Renderer {
                     float32: [0.0, 0.0, 0.0, 1.0],
                 },
             };
-            // Soft particles sample scene depth, so the FTE particles get a
-            // pass of their own with the depth attachment read-only; the
-            // viewmodel then resumes with depth writes.
+            // Soft particles sample scene depth. When SSAO already extracted
+            // linear depth into `ao_source`, sample that directly so we avoid
+            // splitting the MSAA render pass for soft particles and the viewmodel.
             let soft_dist = st.soft_particle_distance;
-            let split = self.isolated_portal.is_none() && soft_dist > 0.0
-                && view.is_some()
-                && fte.as_ref().is_some_and(|(_, _, b)| b.iter().any(|(_, _, b, _)| b.soft && !b.lines));
+            let has_soft = fte.as_ref().is_some_and(|(_, _, b)| b.iter().any(|(_, _, b, _)| b.soft && !b.lines))
+                || fte_quads.as_ref().is_some_and(|(_, b)| b.iter().any(|(_, _, b, _)| b.soft));
+            let soft_active = self.isolated_portal.is_none() && soft_dist > 0.0 && view.is_some() && has_soft;
+            let use_ao_depth = ao_on && t.ao_source.is_some();
+            let split = soft_active && !use_ao_depth;
             // load: keep earlier contents; last: the final scene pass (MSAA
             // resolves only there); ro: depth attachment read-only.
             let begin = |load: bool, last: bool, ro: bool| {
@@ -1411,12 +1645,7 @@ impl Renderer {
                         .store_op(vk::AttachmentStoreOp::STORE)
                         .clear_value(clear),
                 };
-                // r_bloom: the glow attachment follows the colour's MSAA/resolve
-                let catt = [
-                    att(t.color_ms.as_ref(), &t.color),
-                    t.bloom.as_ref().map_or(vk::RenderingAttachmentInfo::default(), |b| att(b.glow_ms.as_ref(), &b.glow)),
-                ];
-                let catt = &catt[..if t.bloom.is_some() { 2 } else { 1 }];
+                let catt = [att(t.color_ms.as_ref(), &t.color)];
                 let datt = vk::RenderingAttachmentInfo::default()
                     .image_view(t.depth.view)
                     .image_layout(if ro {
@@ -1435,7 +1664,7 @@ impl Renderer {
                 let ri = vk::RenderingInfo::default()
                     .render_area(area_target)
                     .layer_count(1)
-                    .color_attachments(catt)
+                    .color_attachments(&catt)
                     .depth_attachment(&datt);
                 dev.cmd_begin_rendering(cmd, &ri);
             };
@@ -1448,6 +1677,7 @@ impl Renderer {
                 portal_draws,
                 particles,
                 fte.as_ref().map(|f| (f.0, f.1)),
+                fte_quads.as_ref().map(|q| q.0),
                 world_draws,
                 alias_draws,
                 fi,
@@ -1456,6 +1686,42 @@ impl Renderer {
                 view,
                 st.portal_quality.min(2),
             );
+            if portal_gpu_cull && let Some(c) = &cull {
+                run_cull(c);
+                if self.world.is_some() {
+                    gpu::barrier(
+                        &dev,
+                        cmd,
+                        lightmap.image,
+                        lm_rng,
+                        vk::ImageLayout::GENERAL,
+                        vk::ImageLayout::GENERAL,
+                    );
+                    dev.cmd_bind_pipeline(cmd, vk::PipelineBindPoint::COMPUTE, p.lightmap);
+                    dev.cmd_bind_descriptor_sets(
+                        cmd,
+                        vk::PipelineBindPoint::COMPUTE,
+                        p.comp_layout,
+                        0,
+                        &comp_set,
+                        &[],
+                    );
+                    dev.cmd_push_constants(cmd, p.comp_layout, vk::ShaderStageFlags::COMPUTE,
+                        0, bytes_of(&[(OFS_VIS / 4) as u32, MAX_VIS as u32]));
+                    dev.cmd_dispatch_indirect(cmd, c.cmdbuf, c.disp_ofs);
+                    gpu::barrier(
+                        &dev,
+                        cmd,
+                        lightmap.image,
+                        lm_rng,
+                        vk::ImageLayout::GENERAL,
+                        vk::ImageLayout::GENERAL,
+                    );
+                }
+            }
+            if rt_half_on && view.is_some() {
+                self.record_rt_refl(cmd, fi, ubo_ofs, [scene_w, scene_h], [sw, sh], world_draws);
+            }
             ts(4);
             if self.isolated_portal.is_some() && !multi {
                 // Destination draws above retain their scenery and entities. Only
@@ -1467,6 +1733,7 @@ impl Renderer {
                 vel_draws.clear();
                 particles = Range::default();
                 fte = None;
+                fte_quads = None;
             }
             begin(false, !split && !ao_on, false);
             let vp_full = vk::Viewport {
@@ -1524,6 +1791,9 @@ impl Renderer {
                 dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[ubo_ofs]);
                 dev.cmd_set_depth_bias(cmd, 0.0, 0.0, 0.0);
                 let draw_world = |wd: &WorldDraw, cats: &[(Range, vk::Pipeline)]| {
+                    if cats.iter().all(|(r, _)| r.count == 0) {
+                        return;
+                    }
                     dev.cmd_bind_index_buffer(cmd, wd.ibuf.unwrap_or(dynbuf), 0, vk::IndexType::UINT32);
                     push(bytes_of(&[WorldPush {
                         model: wd.model,
@@ -1546,7 +1816,7 @@ impl Renderer {
                 if let Some(wg) = &self.world {
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[wg.vbuf.buf], &[0]);
                     dev.cmd_bind_index_buffer(cmd, dynbuf, 0, vk::IndexType::UINT32);
-                    for wd in world_draws.iter().filter(|wd| wd.alpha >= 1.0) {
+                    for wd in world_draws.iter().filter(|wd| wd.main_visible && wd.alpha >= 1.0) {
                         draw_world(
                             wd,
                             &[
@@ -1571,14 +1841,27 @@ impl Renderer {
                     push(bytes_of(&[a.push]));
                     dev.cmd_draw_indexed(cmd, a.num_indices, 1, a.first_index, 0, 0);
                 };
+                let mut bound_alias_pipe = false;
+                let mut last_alias_model: Option<usize> = None;
                 for a in alias_draws
                     .iter()
-                    .filter(|a| a.push.light[3] >= 1.0 && !a.viewmodel)
+                    .filter(|a| a.push.light[3] >= 1.0 && !a.viewmodel && !a.portal_only && a.main_visible)
                 {
-                    draw_alias(a, p.alias);
+                    let Some(Model::Alias(am)) = self.models.get(a.model) else { continue };
+                    if !bound_alias_pipe {
+                        dev.cmd_bind_pipeline(cmd, gfx, p.alias);
+                        bound_alias_pipe = true;
+                    }
+                    if last_alias_model != Some(a.model) {
+                        dev.cmd_bind_vertex_buffers(cmd, 0, &[am.vbuf.buf], &[0]);
+                        dev.cmd_bind_index_buffer(cmd, am.ibuf.buf, 0, vk::IndexType::UINT32);
+                        last_alias_model = Some(a.model);
+                    }
+                    push(bytes_of(&[a.push]));
+                    dev.cmd_draw_indexed(cmd, a.num_indices, 1, a.first_index, 0, 0);
                 }
                 ts(6);
-                if ao_on && let Some(vs) = &view {
+                if ao_on && let Some(vs) = &view && let Some(ao_src) = &t.ao_source {
                     // SSAO between the opaque and translucent draws, so water,
                     // particles and the viewmodel are not darkened
                     dev.cmd_end_rendering(cmd);
@@ -1593,24 +1876,53 @@ impl Renderer {
                     let scene_per_ao = [scene_w as f32 / ao_vw as f32, scene_h as f32 / ao_vh as f32];
                     let scene_max = [scene_w.max(1) as i32 - 1, scene_h.max(1) as i32 - 1];
                     let quality = st.ssao_quality.min(2);
-                    let ao_slot = if let Some((source, slot)) = &t.ao_source {
-                        fx_pass(source, area_ao_rt, vp_ao, area_ao, [0.0; 4], &|| {
+                    // Build SAO linear-depth mip chain: mip 0 from scene depth, then rotated-grid downsamples.
+                    let mips = ao_src.mip_views.len() as u32;
+                    for m in 0..mips {
+                        let mw = (t.ao_w >> m).max(1);
+                        let mh = (t.ao_h >> m).max(1);
+                        let vw = (ao_vw >> m).max(1);
+                        let vh = (ao_vh >> m).max(1);
+                        let mrng = gpu::range_mip(vk::ImageAspectFlags::COLOR, m, 1, 1);
+                        gpu::barrier(&dev, cmd, ao_src.img.image, mrng, vk::ImageLayout::UNDEFINED, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
+                        let att = [vk::RenderingAttachmentInfo::default()
+                            .image_view(ao_src.mip_views[m as usize])
+                            .image_layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL)
+                            .load_op(vk::AttachmentLoadOp::DONT_CARE)
+                            .store_op(vk::AttachmentStoreOp::STORE)];
+                        let ri = vk::RenderingInfo::default()
+                            .render_area(vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: mw, height: mh } })
+                            .layer_count(1)
+                            .color_attachments(&att);
+                        dev.cmd_begin_rendering(cmd, &ri);
+                        dev.cmd_set_viewport(cmd, 0, &[vk::Viewport { width: vw as f32, height: vh as f32, ..vp_full }]);
+                        dev.cmd_set_scissor(cmd, 0, &[vk::Rect2D { offset: vk::Offset2D::default(), extent: vk::Extent2D { width: vw, height: vh } }]);
+                        dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[ubo_ofs]);
+                        if m == 0 {
                             dev.cmd_bind_pipeline(cmd, gfx, p.ao_source);
-                            push(bytes_of(&[AoSourcePush { scene_per_ao, scene_max }]));
-                            dev.cmd_draw(cmd, 3, 1, 0, 0);
-                        });
-                        *slot
-                    } else { t.color_slot };
+                            push(bytes_of(&[AoSourcePush { scene_per_ao, scene_max, msaa: samples }]));
+                        } else {
+                            let pmw = (ao_vw >> (m - 1)).max(1) as i32 - 1;
+                            let pmh = (ao_vh >> (m - 1)).max(1) as i32 - 1;
+                            dev.cmd_bind_pipeline(cmd, gfx, p.ao_down);
+                            push(bytes_of(&[AoDownPush { src: ao_src.slot, src_mip: (m - 1) as i32, src_max: [pmw, pmh] }]));
+                        }
+                        dev.cmd_draw(cmd, 3, 1, 0, 0);
+                        dev.cmd_end_rendering(cmd);
+                        gpu::barrier(&dev, cmd, ao_src.img.image, mrng, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
+                    }
                     fx_pass(&t.ao, area_ao_rt, vp_ao, area_ao, [1.0, 0.0, 0.0, 0.0], &|| {
-                        ts(7); // transitions, optional sample-0 snapshot and AO target setup complete
+                        ts(7); // transitions, linear-depth mip chain and AO target setup complete
                         dev.cmd_bind_pipeline(cmd, gfx, p.ao);
                         push(bytes_of(&[AoPush {
                             proj: [vs.tan[0], vs.tan[1], samples as f32, st.ssao_radius.clamp(4.0, 256.0)],
-                            size: [ao_vw as f32, ao_vh as f32, st.ssao.min(4.0), ao_slot as f32],
+                            size: [ao_vw as f32, ao_vh as f32, st.ssao.min(4.0), ao_src.slot as f32],
                             scene_per_ao,
                             scene_max,
                             quality,
-                            _pad: [0; 3],
+                            color_slot: t.color_slot,
+                            max_mip: (mips - 1) as i32,
+                            _pad: 0,
                         }]));
                         dev.cmd_draw(cmd, 3, 1, 0, 0);
                         ts(8); // AO generation, before its target becomes shader-readable
@@ -1654,7 +1966,7 @@ impl Renderer {
                 if let Some(wg) = &self.world {
                     dev.cmd_bind_vertex_buffers(cmd, 0, &[wg.vbuf.buf], &[0]);
                     dev.cmd_bind_index_buffer(cmd, dynbuf, 0, vk::IndexType::UINT32);
-                    for wd in world_draws.iter().filter(|wd| wd.alpha >= 1.0) {
+                    for wd in world_draws.iter().filter(|wd| wd.main_visible && wd.alpha >= 1.0) {
                         let wa = wd.water_alpha.map(|r| (r, water_alpha_pipe));
                         draw_world(wd, &wa);
                     }
@@ -1727,7 +2039,7 @@ impl Renderer {
                     }
                 }
                 let vm: Vec<&AliasDraw> = alias_draws.iter().filter(|a| a.viewmodel).collect();
-                if let Some((vofs, iofs, batches)) = &fte {
+                if fte.is_some() || fte_quads.is_some() {
                     let restore = |vp| {
                         dev.cmd_set_viewport(cmd, 0, &[vp]);
                         dev.cmd_set_scissor(cmd, 0, &[area_scene]);
@@ -1744,22 +2056,67 @@ impl Renderer {
                         restore(vp_scene);
                     }
                     let samples = t.color_ms.as_ref().map_or(1, |_| self.msaa);
-                    let depth_samples = if samples <= 1 {
-                        0
-                    } else if st.soft_particle_quality > 0 {
-                        samples
+                    let (depth_mode, depth_tex, depth_uv) = if use_ao_depth
+                        && let Some(ao_src) = &t.ao_source
+                    {
+                        let ao_vw = ((scene_w as f32 * t.ao_w as f32 / sw.max(1) as f32).round() as u32).clamp(1, t.ao_w);
+                        let ao_vh = ((scene_h as f32 * t.ao_h as f32 / sh.max(1) as f32).round() as u32).clamp(1, t.ao_h);
+                        (
+                            -1.0f32,
+                            ao_src.slot,
+                            [
+                                ao_vw as f32 / (scene_w.max(1) as f32 * t.ao_w.max(1) as f32),
+                                ao_vh as f32 / (scene_h.max(1) as f32 * t.ao_h.max(1) as f32),
+                            ],
+                        )
                     } else {
-                        1
+                        let ds = if samples <= 1 {
+                            0
+                        } else if st.soft_particle_quality > 0 {
+                            samples
+                        } else {
+                            1
+                        };
+                        (ds as f32, 0, [0.0; 2])
                     };
-                    dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[*vofs]);
-                    dev.cmd_bind_index_buffer(cmd, dynbuf, *iofs, vk::IndexType::UINT32);
-                    for (pipe, slot, b, mode) in batches {
-                        dev.cmd_bind_pipeline(cmd, gfx, p.fte[*pipe]);
-                        let fogmix = if matches!(b.blend, crate::FteBlend::Blend | crate::FteBlend::BlendColour) { 1.0 } else { 0.0 };
-                        let soft = if split && b.soft { 1.0 / soft_dist } else { 0.0 };
-                        let color = [fogmix, soft, depth_samples as f32, *mode];
-                        push(bytes_of(&[PolyPush { color, tex: *slot }]));
-                        dev.cmd_draw_indexed(cmd, b.num_indices, 1, b.first_index, 0, 0);
+                    if let Some((vofs, iofs, batches)) = &fte {
+                        dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[*vofs]);
+                        dev.cmd_bind_index_buffer(cmd, dynbuf, *iofs, vk::IndexType::UINT32);
+                        let mut last_fte_pipe = usize::MAX;
+                        for (pipe, slot, b, mode) in batches {
+                            if *pipe != last_fte_pipe {
+                                dev.cmd_bind_pipeline(cmd, gfx, p.fte[*pipe]);
+                                last_fte_pipe = *pipe;
+                            }
+                            let fogmix = if matches!(b.blend, crate::FteBlend::Blend | crate::FteBlend::BlendColour) { 1.0 } else { 0.0 };
+                            let soft = if soft_active && b.soft && !b.lines { 1.0 / soft_dist } else { 0.0 };
+                            push(bytes_of(&[FtePush {
+                                fogmix: [fogmix, soft, depth_mode, *mode],
+                                tex: *slot,
+                                depth_tex,
+                                depth_uv,
+                            }]));
+                            dev.cmd_draw_indexed(cmd, b.num_indices, 1, b.first_index, 0, 0);
+                        }
+                    }
+                    if let Some((qofs, batches)) = &fte_quads {
+                        dev.cmd_bind_vertex_buffers(cmd, 0, &[dynbuf], &[*qofs]);
+                        let mut last_q_pipe = usize::MAX;
+                        for (pipe, slot, b, mode) in batches {
+                            if *pipe != last_q_pipe {
+                                dev.cmd_bind_pipeline(cmd, gfx, p.fte_quad[*pipe]);
+                                last_q_pipe = *pipe;
+                            }
+                            let fogmix = if matches!(b.blend, crate::FteBlend::Blend | crate::FteBlend::BlendColour) { 1.0 } else { 0.0 };
+                            let soft = if soft_active && b.soft { 1.0 / soft_dist } else { 0.0 };
+                            push(bytes_of(&[FtePush {
+                                fogmix: [fogmix, soft, depth_mode, *mode],
+                                tex: *slot,
+                                depth_tex,
+                                depth_uv,
+                            }]));
+                            dev.cmd_draw(cmd, 6, b.num_indices, 0, b.first_index);
+                        }
                     }
                     if split && !vm.is_empty() {
                         dev.cmd_end_rendering(cmd);
@@ -1877,15 +2234,54 @@ impl Renderer {
                 vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
             );
 
-            let bloom = match (&t.bloom, view.is_some()) {
-                (Some(b), true) => {
-                    gpu::barrier(&dev, cmd, b.glow.image, crng, vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
-                    let r = bloom::record(&dev, cmd, p, set[0], b, [scene_w, scene_h], [sw, sh], st);
+            let bloom = match (&t.bloom, &t.half_depth, bloom_on) {
+                (Some(b), Some(half_depth), true) => {
+                    let gs = bloom::GlowScene {
+                        world: self.world.as_ref(),
+                        models: &self.models,
+                        dynbuf,
+                        world_draws,
+                        alias_draws,
+                        sprite_draws,
+                        trans,
+                        particles,
+                        fte: fte.as_ref(),
+                        fte_quads: fte_quads.as_ref(),
+                        soft_enabled: soft_active,
+                        samples,
+                    };
+                    let r = bloom::record(&dev, cmd, p, set[0], ubo_ofs, b, half_depth, [scene_w, scene_h], [sw, sh], st, &gs);
                     dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
                     Some(r)
                 }
                 _ => None,
             };
+            let water_packed = pass.water.packed(st.water_quality > 0);
+            let drops_age = pass.water.drops_age();
+            let mut post_water = water_packed;
+            if drops_age >= 0.0 && ((water_packed >> 2) & 3) != 0 && let Some((dimg, dslot)) = &t.droplets {
+                let uvs = [rect[2] as f32 / w.max(1) as f32, rect[3] as f32 / h.max(1) as f32];
+                let view_h = (h.max(1) as f32 * uvs[1]).max(1.0);
+                let aspect = (w.max(1) as f32 * uvs[0]) / view_h;
+                let area_drop = vk::Rect2D {
+                    offset: vk::Offset2D::default(),
+                    extent: vk::Extent2D { width: dimg.width, height: dimg.height },
+                };
+                let vp_drop = vk::Viewport { width: dimg.width as f32, height: dimg.height as f32, ..vp_full };
+                fx_pass(dimg, area_drop, vp_drop, area_drop, [0.0; 4], &|| {
+                    dev.cmd_bind_pipeline(cmd, gfx, p.droplets);
+                    push(bytes_of(&[DropletsPush {
+                        age: drops_age,
+                        seed: water_packed >> 8,
+                        high: u32::from(st.water_quality > 0),
+                        aspect,
+                        px: 1.0 / view_h,
+                    }]));
+                    dev.cmd_draw(cmd, 3, 1, 0, 0);
+                });
+                // Pass droplet field texture slot in bits 8..31 (seed is no longer needed in post.frag).
+                post_water = (water_packed & 0xff) | (*dslot << 8);
+            }
             let (fx, fy) = (pw as f32 / w.max(1) as f32, ph as f32 / h.max(1) as f32);
             let vp_cell = vk::Viewport {
                 x: rect[0] as f32 * fx,
@@ -1926,31 +2322,42 @@ impl Renderer {
             dev.cmd_set_viewport(cmd, 0, &[vp_cell]);
             dev.cmd_set_scissor(cmd, 0, &[cell_area]);
             dev.cmd_bind_descriptor_sets(cmd, gfx, p.layout, 0, &set, &[0]);
-            dev.cmd_bind_pipeline(cmd, gfx, p.post);
             let mb = if vel_draws.is_empty() { 0.0 } else { st.motion_blur.min(4.0) / (60.0 * mb_dt as f32) };
+            let post_mode = crate::softemu::post_mode(st);
+            let post_cb = st.colorblind.min(3);
+            let post_goggles = st.goggles.mode.min(2);
+            let post_speed_blur = pass.speed_blur.max(st.edge_blur.clamp(0.0, 1.0));
+            let post_fast = post_mode == 0
+                && post_cb == 0
+                && post_goggles == 0
+                && mb == 0.0
+                && post_speed_blur == 0.0
+                && pass.warp < 0.0
+                && (post_water & 0xf) == 0;
+            dev.cmd_bind_pipeline(cmd, gfx, if post_fast { p.post_fast } else { p.post });
             push(bytes_of(&[PostPush {
                 blend,
                 gamma: st.gamma.clamp(0.1, 4.0),
                 contrast: st.contrast.clamp(0.1, 4.0),
                 scene: t.color_slot,
                 dither: crate::softemu::post_dither(st),
-                mode: crate::softemu::post_mode(st),
+                mode: post_mode,
                 scale: if let Some((_, _, pw, _)) = slang_src {
                     sw.max(1) as f32 / pw.max(1) as f32
                 } else {
                     self.render_scale
                 },
-                colorblind: st.colorblind.min(3),
+                colorblind: post_cb,
                 vel_tex: t.vel_slot,
                 // blur length: r_motionblur × the motion over 1/60 s
                 mbx: mb * scene_w as f32 / sw as f32,
                 mby: mb * scene_h as f32 / sh as f32,
                 uvs: [rect[2] as f32 / w.max(1) as f32, rect[3] as f32 / h.max(1) as f32],
-                goggles: st.goggles.mode.min(2),
+                goggles: post_goggles,
                 g_gain: st.goggles.intensity.clamp(0.25, 3.0),
                 g_noise: st.goggles.noise.clamp(0.0, 2.0),
                 g_time: (fr.time % 1000.0) as f32,
-                speed_blur: pass.speed_blur.max(st.edge_blur.clamp(0.0, 1.0)),
+                speed_blur: post_speed_blur,
                 mb_quality: st.motion_blur_quality.min(1),
                 mb_w: w.max(1) as f32,
                 mb_h: h.max(1) as f32,
@@ -1959,8 +2366,8 @@ impl Renderer {
                 bloom_tex: bloom.as_ref().map_or(0, |b| b.slot),
                 bloom: bloom.as_ref().map_or(0.0, |b| b.amount),
                 bloom_uv: bloom.as_ref().map_or([0.0; 2], |b| b.uv),
-                water: pass.water.packed(st.water_quality > 0),
-                drops: pass.water.drops_age(),
+                water: post_water,
+                drops: drops_age,
             }]));
             dev.cmd_draw(cmd, 3, 1, 0, 0);
             if pi + 1 < npasses {
@@ -2171,6 +2578,16 @@ impl Renderer {
                 dev.queue_submit(self.gpu.queue, &si, fence)?;
             }
         }
+        if let Some(p0) = passes.into_iter().next() {
+            frame_scratch.world_draws = p0.world_draws;
+            frame_scratch.vel_draws = p0.vel_draws;
+            frame_scratch.alias_draws = p0.alias_draws;
+            frame_scratch.sprite_draws = p0.sprite_draws;
+            frame_scratch.trans = p0.trans;
+        }
+        self.frame_scratch = frame_scratch;
+        self.ui_verts = ui;
+        self.ui_ranges = ui_ranges;
         for up in pic_uploads {
             if let Some(b) = up.staging {
                 self.frames[fi].staging.push(b);

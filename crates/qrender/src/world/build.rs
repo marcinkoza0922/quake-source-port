@@ -36,12 +36,16 @@ impl World {
                 .map(|t| t.as_ref().map_or_else(String::new, |t| t.name.clone()))
                 .collect(),
             light_cache: Default::default(),
-            vertices: Vec::new(),
-            indices: Vec::new(),
+            lightgrid_cache: Default::default(),
+            last_styles: [i32::MIN; 64],
+            styles_gen: 0,
+            lightgrid_style_hash: 0,
+            vertices: Vec::with_capacity(bsp.surfedges.len()),
+            indices: Vec::with_capacity(bsp.surfedges.len().saturating_mul(3)),
             surfaces: Vec::with_capacity(bsp.faces.len()),
-            lm_surfs: Vec::new(),
-            samples: Vec::new(),
-            deluxe_samples: Vec::new(),
+            lm_surfs: Vec::with_capacity(bsp.faces.len()),
+            samples: Vec::with_capacity(num_samples),
+            deluxe_samples: if has_deluxe { Vec::with_capacity(num_samples) } else { Vec::new() },
             atlas_layers: 1,
             lit: has_lit,
             has_hdr,
@@ -55,6 +59,8 @@ impl World {
             visdata: bsp.visdata.clone(),
             numleafs,
             vis_leaves: Vec::new(),
+            vis_blocks: Vec::new(),
+            vis_pvs_bits: Vec::new(),
             vis_leaf: usize::MAX,
             locked_pvs: None,
             portal_cache: Vec::new(),
@@ -135,6 +141,11 @@ impl World {
         let lm_offsets = bsp.lm_offset.as_deref();
         let lm_styles = bsp.lm_style.as_deref();
         let face_normals = bsp.face_normals.as_ref();
+        w.vertices.reserve(bsp.surfedges.len());
+        w.indices.reserve(bsp.surfedges.len().saturating_mul(3));
+        w.surfaces.reserve(bsp.faces.len());
+        w.lm_surfs.reserve(bsp.faces.len());
+        let mut verts: Vec<[f32; 3]> = Vec::with_capacity(32);
 
         for (face_idx, f) in bsp.faces.iter().enumerate() {
             let styles = lm_styles.and_then(|s| s.get(face_idx).copied()).unwrap_or(f.styles);
@@ -174,7 +185,7 @@ impl World {
             s.texture = ltex as u32 + tex_base;
             let tex = bsp.textures.get(ltex).and_then(|t| t.as_ref());
             s.kind = tex.map_or(TextureKind::Normal, |t| t.kind);
-            let mut verts = Vec::with_capacity(f.num_edges as usize);
+            verts.clear();
             for e in 0..f.num_edges {
                 let Some(&se) = bsp.surfedges.get((f.first_edge + e) as usize) else {
                     break;
@@ -287,31 +298,28 @@ impl World {
                             s.hdr_samples = true;
                             lm_flags |= LM_FLAG_HDR;
                             w.samples.extend_from_slice(&h[base..base + n * nstyles]);
+                        } else if let Some(l) = lit {
+                            let count = n * nstyles;
+                            w.samples.reserve(count);
+                            for c in l[base * 3..(base + count) * 3].as_chunks::<3>().0 {
+                                w.samples.push(c[0] as u32 | (c[1] as u32) << 8 | (c[2] as u32) << 16);
+                            }
                         } else {
-                            for i in 0..n * nstyles {
-                                let (r, g, b) = match lit {
-                                    Some(l) => (
-                                        l[(base + i) * 3],
-                                        l[(base + i) * 3 + 1],
-                                        l[(base + i) * 3 + 2],
-                                    ),
-                                    None => {
-                                        let v = bsp.lighting[base + i];
-                                        (v, v, v)
-                                    }
-                                };
-                                w.samples.push(r as u32 | (g as u32) << 8 | (b as u32) << 16);
+                            let count = n * nstyles;
+                            w.samples.reserve(count);
+                            for &v in &bsp.lighting[base..base + count] {
+                                let u = v as u32;
+                                w.samples.push(u | (u << 8) | (u << 16));
                             }
                         }
                         if let Some(d) = dlx {
                             s.has_deluxe = true;
                             lm_flags |= LM_FLAG_DELUXE;
                             w.deluxe_samples.resize(sample_ofs as usize, 0x0080_8080);
-                            for i in 0..n * nstyles {
-                                let dx = d[(base + i) * 3] as u32;
-                                let dy = d[(base + i) * 3 + 1] as u32;
-                                let dz = d[(base + i) * 3 + 2] as u32;
-                                w.deluxe_samples.push(dx | (dy << 8) | (dz << 16));
+                            let count = n * nstyles;
+                            w.deluxe_samples.reserve(count);
+                            for c in d[base * 3..(base + count) * 3].as_chunks::<3>().0 {
+                                w.deluxe_samples.push(c[0] as u32 | (c[1] as u32) << 8 | (c[2] as u32) << 16);
                             }
                         } else if w.has_deluxe {
                             w.deluxe_samples.resize(w.samples.len(), 0x0080_8080);

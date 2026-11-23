@@ -16,9 +16,24 @@ impl Renderer {
             self.textures[t.color_slot as usize] = None;
             self.textures[t.ao_slot as usize] = None;
             self.textures[t.vel_slot as usize] = None;
-            if let Some((img, slot)) = t.ao_source {
+            if let Some(src) = t.ao_source {
+                self.textures[src.slot as usize] = None;
+                for v in src.mip_views {
+                    // SAFETY: device idle (destroy_targets); view belongs to src.img.
+                    unsafe { self.gpu.device.destroy_image_view(v, None) };
+                }
+                self.gpu.free_image(src.img);
+            }
+            if let Some((img, slot)) = t.droplets {
                 self.textures[slot as usize] = None;
                 self.gpu.free_image(img);
+            }
+            if let Some(rt) = t.rt_refl {
+                self.textures[rt.slot as usize] = None;
+                self.gpu.free_image(rt.color);
+            }
+            if let Some(d) = t.half_depth {
+                self.gpu.free_image(d);
             }
             self.gpu.free_image(t.ao);
             self.gpu.free_image(t.vel);
@@ -28,13 +43,7 @@ impl Renderer {
                 self.gpu.free_image(m);
             }
             if let Some(b) = t.bloom {
-                for slot in [b.glow_slot, b.scene_slot] {
-                    self.textures[slot as usize] = None;
-                }
-                self.gpu.free_image(b.glow);
-                if let Some(m) = b.glow_ms {
-                    self.gpu.free_image(m);
-                }
+                self.textures[b.scene_slot as usize] = None;
                 for (img, slot, _, _) in b.levels {
                     self.textures[slot as usize] = None;
                     self.gpu.free_image(img);
@@ -202,8 +211,21 @@ impl Renderer {
             )?);
         }
         let bloom = match self.bloom {
-            Some(quality) => Some(self.create_bloom_targets(sw, shh, (base_w, base_h), quality, color.view)?),
+            Some(quality) => Some(self.create_bloom_targets((base_w, base_h), quality, color.view)?),
             None => None,
+        };
+        let half_depth = if bloom.is_some() {
+            Some(self.gpu.image(
+                (base_w / 2).max(1),
+                (base_h / 2).max(1),
+                1,
+                1,
+                DEPTH_FORMAT,
+                vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
+                vk::ImageAspectFlags::DEPTH,
+            )?)
+        } else {
+            None
         };
         self.targets = Some(Targets {
             portals,
@@ -217,6 +239,9 @@ impl Renderer {
             scene_h: shh,
             color_slot: slot,
             ao_source: None,
+            droplets: None,
+            rt_refl: None,
+            half_depth,
             ao,
             ao_w,
             ao_h,
@@ -231,27 +256,17 @@ impl Renderer {
         Ok(())
     }
 
-    /// Glow attachment at scene size (`sw`×`sh`) and the bloom chain, from
-    /// half (`quality` 1) or a quarter (0) of the output-capped `base` down
-    /// to about 8 pixels.
-    fn create_bloom_targets(&mut self, sw: u32, sh: u32, base: (u32, u32), quality: u32, color_view: vk::ImageView) -> Result<BloomTargets> {
+    /// Reduced-resolution bloom depth target and blur chain, from half
+    /// (`quality` 1) or a quarter (0) of the output-capped `base` down to
+    /// about 8 pixels.
+    fn create_bloom_targets(&mut self, base: (u32, u32), quality: u32, color_view: vk::ImageView) -> Result<BloomTargets> {
         let usage = vk::ImageUsageFlags::COLOR_ATTACHMENT | vk::ImageUsageFlags::SAMPLED;
-        let glow = self.gpu.image(sw, sh, 1, 1, pipelines::GLOW_FORMAT, usage, vk::ImageAspectFlags::COLOR)?;
-        let glow_ms = if self.msaa > 1 {
-            Some(self.gpu.image_ms(
-                sw, sh, 1, 1, pipelines::GLOW_FORMAT,
-                vk::ImageUsageFlags::COLOR_ATTACHMENT, vk::ImageAspectFlags::COLOR, self.msaa,
-            )?)
-        } else {
-            None
-        };
         let slot = |r: &mut Self, view, sampler| -> Result<u32> {
             let s = r.alloc_slot()?;
             r.write_texture_descriptor(s, view, sampler);
             r.textures[s as usize] = Some(Tex { image: None, level: false, sampling: Sampling::Clamp });
             Ok(s)
         };
-        let glow_slot = slot(self, glow.view, self.sampler_linear)?;
         let scene_slot = slot(self, color_view, self.sampler_linear)?;
         let div = if quality == 0 { 4 } else { 2 };
         let (mut lw, mut lh) = ((base.0 / div).max(1), (base.1 / div).max(1));
@@ -265,26 +280,110 @@ impl Renderer {
             }
             (lw, lh) = ((lw / 2).max(1), (lh / 2).max(1));
         }
-        Ok(BloomTargets { glow, glow_ms, glow_slot, scene_slot, levels })
+        Ok(BloomTargets { scene_slot, levels })
     }
 
-    /// Allocate on the first MSAA AO frame, after scene targets exist. Keep
-    /// the snapshot until a resize/sample/AO-quality change destroys those targets.
+    /// Allocate the SAO linear-depth mip chain on the first SSAO frame. Keep
+    /// it until a resize/sample/AO-quality change destroys scene targets.
     pub(super) fn ensure_ao_source(&mut self) -> Result<()> {
-        if self.msaa <= 1 || !self.targets.as_ref().is_some_and(|t| t.ao_source.is_none()) {
+        if !self.targets.as_ref().is_some_and(|t| t.ao_source.is_none()) {
             return Ok(());
         }
         self.idle();
-        let t = self.targets.as_ref().unwrap();
+        let (ao_w, ao_h) = {
+            let t = self.targets.as_ref().unwrap();
+            (t.ao_w, t.ao_h)
+        };
+        let mips = (1 + ao_w.min(ao_h).max(1).ilog2()).min(5);
         let img = self.gpu.image(
-            t.ao_w, t.ao_h, 1, 1, pipelines::AO_SOURCE_FORMAT,
+            ao_w,
+            ao_h,
+            1,
+            mips,
+            pipelines::AO_SOURCE_FORMAT,
+            vk::ImageUsageFlags::COLOR_ATTACHMENT | vk::ImageUsageFlags::SAMPLED,
+            vk::ImageAspectFlags::COLOR,
+        )?;
+        let mut mip_views = Vec::with_capacity(mips as usize);
+        for m in 0..mips {
+            let vci = vk::ImageViewCreateInfo::default()
+                .image(img.image)
+                .view_type(vk::ImageViewType::TYPE_2D)
+                .format(pipelines::AO_SOURCE_FORMAT)
+                .subresource_range(gpu::range_mip(vk::ImageAspectFlags::COLOR, m, 1, 1));
+            // SAFETY: valid image and mip level `m < mips`.
+            mip_views.push(unsafe { self.gpu.device.create_image_view(&vci, None)? });
+        }
+        let slot = self.alloc_slot()?;
+        self.write_texture_descriptor(slot, img.view, self.sampler_clamp);
+        self.textures[slot as usize] = Some(Tex { image: None, level: false, sampling: Sampling::Clamp });
+        self.targets.as_mut().unwrap().ao_source = Some(AoSource { img, slot, mip_views });
+        Ok(())
+    }
+
+    /// Allocate the reduced-resolution droplet field target on the first frame
+    /// with active screen droplets (capped at 960×540 so 4K does 1/16 the work).
+    pub(super) fn ensure_droplets(&mut self) -> Result<()> {
+        if !self.targets.as_ref().is_some_and(|t| t.droplets.is_none()) {
+            return Ok(());
+        }
+        self.idle();
+        let dw = (self.width / 2).clamp(1, 960);
+        let dh = (self.height / 2).clamp(1, 540);
+        let img = self.gpu.image(
+            dw,
+            dh,
+            1,
+            1,
+            pipelines::DROPLET_FORMAT,
             vk::ImageUsageFlags::COLOR_ATTACHMENT | vk::ImageUsageFlags::SAMPLED,
             vk::ImageAspectFlags::COLOR,
         )?;
         let slot = self.alloc_slot()?;
-        self.write_texture_descriptor(slot, img.view, self.sampler_clamp);
-        self.textures[slot as usize] = Some(Tex { image: None, level: false, sampling: Sampling::Clamp });
-        self.targets.as_mut().unwrap().ao_source = Some((img, slot));
+        self.write_texture_descriptor(slot, img.view, self.sampler_linear);
+        self.textures[slot as usize] = Some(Tex { image: None, level: false, sampling: Sampling::Linear });
+        self.targets.as_mut().unwrap().droplets = Some((img, slot));
+        Ok(())
+    }
+
+    /// Allocate the half-resolution single-sampled ray-traced water reflection
+    /// targets on the first RT frame (sharing `Targets::half_depth` with bloom).
+    pub(super) fn ensure_rt_refl(&mut self) -> Result<()> {
+        if !self.targets.as_ref().is_some_and(|t| t.rt_refl.is_none()) {
+            return Ok(());
+        }
+        self.idle();
+        let (sw, sh, need_depth) = {
+            let t = self.targets.as_ref().unwrap();
+            (t.scene_w.min(self.width.max(1)), t.scene_h.min(self.height.max(1)), t.half_depth.is_none())
+        };
+        let rw = (sw / 2).max(1);
+        let rh = (sh / 2).max(1);
+        let color = self.gpu.image(
+            rw,
+            rh,
+            1,
+            1,
+            COLOR_FORMAT,
+            vk::ImageUsageFlags::COLOR_ATTACHMENT | vk::ImageUsageFlags::SAMPLED,
+            vk::ImageAspectFlags::COLOR,
+        )?;
+        if need_depth {
+            let depth = self.gpu.image(
+                rw,
+                rh,
+                1,
+                1,
+                DEPTH_FORMAT,
+                vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
+                vk::ImageAspectFlags::DEPTH,
+            )?;
+            self.targets.as_mut().unwrap().half_depth = Some(depth);
+        }
+        let slot = self.alloc_slot()?;
+        self.write_texture_descriptor(slot, color.view, self.sampler_linear);
+        self.textures[slot as usize] = Some(Tex { image: None, level: false, sampling: Sampling::Linear });
+        self.targets.as_mut().unwrap().rt_refl = Some(RtReflTargets { color, slot, width: rw, height: rh });
         Ok(())
     }
 

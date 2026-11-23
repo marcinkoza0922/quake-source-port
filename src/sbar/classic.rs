@@ -13,28 +13,58 @@ impl<'a, 'b> Sbar<'a, 'b> {
     }
 
     pub(super) fn draw_num(&mut self, x: f32, y: f32, num: i32, digits: usize, red: bool) {
-        let s = num.to_string();
-        let s = if s.len() > digits { &s[s.len() - digits..] } else { &s[..] };
+        const NUM: [&str; 10] = ["num_0", "num_1", "num_2", "num_3", "num_4", "num_5", "num_6", "num_7", "num_8", "num_9"];
+        const ANUM: [&str; 10] = ["anum_0", "anum_1", "anum_2", "anum_3", "anum_4", "anum_5", "anum_6", "anum_7", "anum_8", "anum_9"];
+        let mut buf = [0u8; 16];
+        let mut len = 0usize;
+        let neg = num < 0;
+        let mut v = num.unsigned_abs();
+        if v == 0 {
+            buf[0] = b'0';
+            len = 1;
+        } else {
+            while v > 0 {
+                buf[len] = b'0' + (v % 10) as u8;
+                v /= 10;
+                len += 1;
+            }
+            if neg {
+                buf[len] = b'-';
+                len += 1;
+            }
+            buf[..len].reverse();
+        }
+        let s = if len > digits { &buf[len - digits..len] } else { &buf[..len] };
         let mut x = x + (digits - s.len()) as f32 * 24.0;
-        let pre = if red { "anum_" } else { "num_" };
-        for b in s.bytes() {
-            let name = if b == b'-' { format!("{pre}minus") } else { format!("{pre}{}", b as char) };
-            self.draw_pic(x, y, &name);
+        let table = if red { &ANUM } else { &NUM };
+        let minus = if red { "anum_minus" } else { "num_minus" };
+        for &b in s {
+            let name = if b == b'-' { minus } else { table[(b - b'0') as usize] };
+            self.draw_pic(x, y, name);
             x += 24.0;
         }
     }
 
     /// The inventory strip above the bar: weapons, ammo counts, items.
     fn draw_inventory(&mut self, cl: &ClientState) {
+        const SIGILS: [&str; 4] = ["sb_sigil1", "sb_sigil2", "sb_sigil3", "sb_sigil4"];
         let st = &cl.stats;
         let items = cl.items;
         self.draw_pic(0.0, -24.0, self.pack.ibar(st[STAT_ACTIVEWEAPON]));
+        let mut name_buf = [0u8; 24];
         for (i, wname) in WEAPONS.iter().enumerate() {
             if items & (IT_SHOTGUN << i) == 0 {
                 continue;
             }
             let fl = flash(cl, i, st[STAT_ACTIVEWEAPON] == IT_SHOTGUN << i);
-            self.draw_pic(i as f32 * 24.0, -16.0, &format!("{}{wname}", weapon_prefix(fl)));
+            let pre = weapon_prefix(fl).as_bytes();
+            let wb = wname.as_bytes();
+            let n = pre.len() + wb.len();
+            name_buf[..pre.len()].copy_from_slice(pre);
+            name_buf[pre.len()..n].copy_from_slice(wb);
+            if let Ok(s) = std::str::from_utf8(&name_buf[..n]) {
+                self.draw_pic(i as f32 * 24.0, -16.0, s);
+            }
         }
         match self.pack {
             Pack::Hipnotic => {
@@ -53,8 +83,19 @@ impl<'a, 'b> Sbar<'a, 'b> {
             _ => {}
         }
         for i in 0..4 {
-            let s = format!("{:3}", st[STAT_SHELLS + i]);
-            for (k, b) in s.bytes().enumerate() {
+            let v = st[STAT_SHELLS + i];
+            let mut s = [b' '; 3];
+            let mut n = v.clamp(0, 999) as u32;
+            s[2] = b'0' + (n % 10) as u8;
+            n /= 10;
+            if n > 0 {
+                s[1] = b'0' + (n % 10) as u8;
+                n /= 10;
+                if n > 0 {
+                    s[0] = b'0' + (n % 10) as u8;
+                }
+            }
+            for (k, &b) in s.iter().enumerate() {
                 if b != b' ' {
                     self.draw_char(((6 * i + 1 + k) * 8) as f32 - 2.0, -24.0, 18 + b - b'0');
                 }
@@ -72,9 +113,9 @@ impl<'a, 'b> Sbar<'a, 'b> {
             }
         }
         let sigils = if self.pack == Pack::Rogue { 0 } else { 4 };
-        for i in 0..sigils {
+        for (i, &sigil) in SIGILS.iter().enumerate().take(sigils) {
             if items & (1 << (28 + i)) != 0 {
-                self.draw_pic(320.0 - 32.0 + i as f32 * 8.0, -16.0, &format!("sb_sigil{}", i + 1));
+                self.draw_pic(320.0 - 32.0 + i as f32 * 8.0, -16.0, sigil);
             }
         }
 
@@ -113,7 +154,7 @@ impl<'a, 'b> Sbar<'a, 'b> {
         // face (rogue CTF: team colour swatch with frags instead)
         if !self.rogue_team_face(cl) {
             let face = Self::face_name(cl, face_anim);
-            self.draw_pic(112.0, 0.0, &face);
+            self.draw_pic(112.0, 0.0, face);
         }
         self.draw_num(136.0, 0.0, st[STAT_HEALTH], 3, st[STAT_HEALTH] <= 25);
         if let Some(n) = self.pack.ammo_pic(items) {

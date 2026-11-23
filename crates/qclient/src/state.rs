@@ -205,6 +205,8 @@ pub struct ClientState {
     pub static_sounds: Vec<StaticSound>,
     /// Entity indices to draw this frame (CL_RelinkEntities).
     pub visedicts: Vec<usize>,
+    /// True if any active entity this frame had `EF_QSP_PELLET`.
+    pub has_pellets: bool,
     /// Entities the host's debris physics draws itself (ragdolls, gibs):
     /// skipped when drawing and get no model trail. Empty when unused.
     pub debris_owned: Vec<bool>,
@@ -345,6 +347,7 @@ impl ClientState {
             static_entities: Vec::new(),
             static_sounds: Vec::new(),
             visedicts: Vec::new(),
+            has_pellets: false,
             debris_owned: Vec::new(),
             temp_entities: Vec::new(),
             viewentity: 0,

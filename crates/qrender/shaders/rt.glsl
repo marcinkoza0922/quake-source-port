@@ -69,11 +69,12 @@ float rt_alias_lod(uint skin, float foot) {
     return log2(max(foot * float(textureSize(textures[nonuniformEXT(skin)], 0).x) / 192.0, 1e-4));
 }
 
-// Alpha-tested candidates: fence textures and holey alias skins.
+// Alpha-tested candidates: fence textures and holey alias skins (geometry 1).
 bool rt_opaque_at(uint custom, uint geom, uint prim, vec3 b, float foot) {
     if (custom == RT_ALIAS) {
+        uint alias_prim = (geom == 1u ? floatBitsToUint(fr.refl.y) : 0u) + prim;
         uint di;
-        vec3 sts = rt_alias_st_shade(prim, b, di);
+        vec3 sts = rt_alias_st_shade(alias_prim, b, di);
         RtDraw d = rt_draws[di];
         if ((d.texs.w & 1u) == 0u) return true;
         return textureLod(textures[nonuniformEXT(d.texs.x)], sts.xy, rt_alias_lod(d.texs.x, foot)).a >= 0.666;
@@ -167,13 +168,14 @@ vec3 rt_reflect(vec3 o, vec3 dir, float dist0, float cone) {
     float t = rayQueryGetIntersectionTEXT(rq, true);
     float foot = (dist0 + t) * cone;
     uint custom = rayQueryGetIntersectionInstanceCustomIndexEXT(rq, true);
+    uint geom = uint(rayQueryGetIntersectionGeometryIndexEXT(rq, true));
     uint prim = uint(rayQueryGetIntersectionPrimitiveIndexEXT(rq, true));
     vec3 b = rt_bary(rayQueryGetIntersectionBarycentricsEXT(rq, true));
     vec3 c;
     if (custom == RT_ALIAS) {
-        c = rt_shade_alias(prim, b, foot);
+        uint alias_prim = (geom == 1u ? floatBitsToUint(fr.refl.y) : 0u) + prim;
+        c = rt_shade_alias(alias_prim, b, foot);
     } else {
-        uint geom = uint(rayQueryGetIntersectionGeometryIndexEXT(rq, true));
         uvec4 tri = rt_brush_tri(custom, geom, prim);
         if ((tri.w & RT_SKY) != 0u) return rt_shade_brush(tri, custom, b, o, vec3(0.0), dir, foot);
         mat4x3 o2w = rayQueryGetIntersectionObjectToWorldEXT(rq, true);
