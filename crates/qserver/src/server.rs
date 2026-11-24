@@ -204,6 +204,7 @@ impl Server {
                 started: qcore::time::SystemTime::now(),
                 queued_drops: Vec::new(),
                 linked_portals: Vec::new(),
+                portal_bolts: Default::default(),
                 portal_crossed: Vec::new(),
             },
             level: None,

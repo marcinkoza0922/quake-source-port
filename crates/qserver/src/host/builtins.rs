@@ -1,4 +1,5 @@
 use super::*;
+use crate::addons::portal_bolt::Put;
 
 impl Host for Ctx<'_> {
     fn before_damage(&mut self, vm: &mut Vm) -> Result<bool> {
@@ -220,6 +221,7 @@ impl Host for Ctx<'_> {
             B::WriteByte => {
                 let v = crate::addons::shotgun::temp_entity(vm, self.c, vm.g_f(p(1)) as i32);
                 self.with_dest(vm, |m, _| m.byte(v))?;
+                self.bolt_write(vm, Put::Byte(v))?;
             }
             B::WriteChar => {
                 let v = vm.g_f(p(1)) as i32;
@@ -228,6 +230,7 @@ impl Host for Ctx<'_> {
             B::WriteShort => {
                 let v = vm.g_f(p(1)) as i32;
                 self.with_dest(vm, |m, _| m.short(v))?;
+                self.bolt_write(vm, Put::Entity(v))?;
             }
             B::WriteLong => {
                 let v = vm.g_f(p(1)) as i32;
@@ -236,6 +239,7 @@ impl Host for Ctx<'_> {
             B::WriteCoord => {
                 let v = vm.g_f(p(1));
                 self.with_dest(vm, |m, pf| m.coord(v, pf))?;
+                self.bolt_write(vm, Put::Coord(v))?;
             }
             B::WriteAngle => {
                 let v = vm.g_f(p(1));
@@ -248,6 +252,7 @@ impl Host for Ctx<'_> {
             B::WriteEntity => {
                 let v = vm.g_i(p(1));
                 self.with_dest(vm, |m, _| m.short(v))?;
+                self.bolt_write(vm, Put::Entity(v))?;
             }
             B::Movetogoal => {
                 let me = vm.self_ent();

@@ -78,6 +78,15 @@ otherwise. Toys only run with no deathmatch and no remote client
   position/velocity/angles (up to 4 hops per frame). Only traces/movers that
   actually enter a portal do extra work; otherwise the check is a few dot
   products (or skipped when `linked_portals` is empty).
+- Lightning bolts (`addons/portal_bolt.rs`, `qclient::beams`): QC sends a
+  straight beam to `trace_endpos` and traces that same line for damage, both
+  wrong once the bolt went through a portal. `Core::portal_bolts` keeps this
+  frame's portal-crossing traces; a QC beam (`Write*` or `te_lightning*`)
+  matching one is followed in the same buffer by `//qsp_beam entity ux uy uz
+  (ox oy oz)..` (the end unfolded into the shooter's space, centres of the
+  portals entered), and the same shooter's damage traces to that end are
+  moved onto the bolt's path. The client draws one leg per portal, following
+  the viewer. With nothing linked these are empty-list checks.
 - Monster fall damage (`addons/fall.rs`, gun on): landing >650 u/s calls
   QC `T_Damage` (world attacker) for 5 + (speed − 650)/10.
 - Sync: `//qsp_portal owner slot [origin normal up]` stufftext, full state

@@ -13,6 +13,10 @@ impl Ctx<'_> {
             self.set_trace_globals(vm, &qworld::Trace { allsolid: false, inopen: true, ..qworld::Trace::new(v2) });
             return Ok(());
         }
+        // a bolt's damage is traced along the bolt, not straight to its end
+        let redirect = self.c.portal_bolts.damage_line(vm.time, pass, v1, v2);
+        let (v1, v2) = redirect.unwrap_or((v1, v2));
+        let mut entered = Vec::new();
         let tr = {
             let (ents, w) = self.ents(vm);
             let mt = MoveType::from(nomonsters);
@@ -33,6 +37,7 @@ impl Ctx<'_> {
                     to = hit.exit_pt + hit.rem;
                     pass_ent = None;
                     hops += 1;
+                    entered.push(hit.a);
                     continue;
                 }
                 if hops > 0 {
@@ -41,6 +46,17 @@ impl Ctx<'_> {
                 break tr;
             }
         };
+        if !entered.is_empty() && redirect.is_none() {
+            self.c.portal_bolts.record(crate::addons::portal_bolt::Crossing {
+                time: vm.time,
+                pass,
+                start: v1,
+                unfolded: v1 + (v2 - v1) * tr.fraction,
+                end: tr.endpos,
+                entered,
+                bolt: false,
+            });
+        }
         self.set_trace_globals(vm, &tr);
         Ok(())
     }

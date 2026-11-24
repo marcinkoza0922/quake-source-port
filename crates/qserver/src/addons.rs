@@ -22,6 +22,7 @@ pub mod gel_phys;
 pub mod hook_surface;
 pub mod hookshot;
 pub mod portal;
+pub(crate) mod portal_bolt;
 pub mod portal_move;
 pub mod railgun;
 pub mod save;
@@ -411,6 +412,7 @@ pub(crate) fn shut_down(l: &mut Level, c: &mut Core) {
     st.send(&mut c.clients);
     *st = Default::default();
     c.linked_portals.clear();
+    c.portal_bolts.clear();
     c.portal_crossed.clear();
     l.boomerangs.clear(&mut c.clients);
     l.stickies.clear(&mut c.clients);

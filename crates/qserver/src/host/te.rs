@@ -42,6 +42,12 @@ impl Core {
                 m.coord(v, pf);
             }
         }
+        if beam && !self.portal_bolts.is_empty() {
+            let (start, end) = (Vec3::from_array(vm.g_v(p(1))), Vec3::from_array(vm.g_v(p(2))));
+            if let Some(line) = self.portal_bolts.beam(vm.time, owner as i32, start, end) {
+                crate::addons::portal_bolt::send(m, &line);
+            }
+        }
         if ty == TE_EXPLOSION2 {
             m.byte(vm.g_f(p(1)) as i32);
             m.byte(vm.g_f(p(2)) as i32);

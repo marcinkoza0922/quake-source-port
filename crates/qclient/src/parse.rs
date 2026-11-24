@@ -5,7 +5,7 @@ use std::fmt;
 use qnet::MsgReader;
 use qnet::protocol::*;
 
-use crate::effects::Beam;
+use crate::beams::Beam;
 use crate::state::*;
 mod server;
 mod effects;
@@ -387,6 +387,10 @@ impl ClientState {
             }
             if let Some(args) = line.strip_prefix(b"//qsp_boom ") {
                 self.events.push(ClientEvent::Boomerang(String::from_utf8_lossy(args).trim_end().to_owned()));
+                continue;
+            }
+            if let Some(args) = line.strip_prefix(b"//qsp_beam ") {
+                self.parse_portal_beam(&String::from_utf8_lossy(args));
                 continue;
             }
             if let Some(args) = line.strip_prefix(b"//qsp_portal ") {
