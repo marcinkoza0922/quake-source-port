@@ -17,7 +17,8 @@ pub fn parse(mdl_zlib: &[u8], rgb_zlib: &[u8], palette: &[u8]) -> Mdl {
 
 /// True-colour glow layer for saturated blue and orange texels (the gel
 /// canisters: the Quake palette has no bright blue, so they would quantise
-/// to purple).
+/// to purple), drawn unlit in exactly the painted colour
+/// (`tools/paint_gel_texture.py`).
 pub fn gel_glow(rgb_zlib: &[u8]) -> Vec<u8> {
     let rgb = miniz_oxide::inflate::decompress_to_vec_zlib(rgb_zlib).expect("bundled toy texture");
     rgb.as_chunks::<3>()
@@ -28,10 +29,7 @@ pub fn gel_glow(rgb_zlib: &[u8]) -> Vec<u8> {
             let blue = b > 90 && b > r + 50 && b > g + 10;
             let orange = r > 110 && r > b + 70 && r > g + 25 && g > b;
             if blue || orange {
-                // up to ×2, scaled together so a bright texel keeps its hue
-                let s = (255.0 / r.max(g).max(b) as f32).min(2.0);
-                let k = |v: i32| (v as f32 * s).round().min(255.0) as u8;
-                [k(r), k(g), k(b), 255]
+                [r as u8, g as u8, b as u8, 255]
             } else {
                 [0; 4]
             }
