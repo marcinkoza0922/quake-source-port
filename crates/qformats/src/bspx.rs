@@ -4,7 +4,8 @@
 //! - `DECOUPLED_LM`: arbitrary per-face lightmap size, offset and projection.
 //! - `LMSHIFT` (+ optional `LMOFFSET`, `LMSTYLE`): per-face power-of-two luxel scale.
 //! - `LIGHTGRID_OCTREE`: volumetric 3D lighting octree for alias models.
-//! - `BRUSHLIST`: per-model convex brushes for arbitrary hull collision.
+//! - `BRUSHLIST`: per-model convex brushes (only drawn by the collision hull view;
+//!   like ironwail and vkQuake, collision uses the hulls alone).
 //! - `FACENORMALS`: per-face, per-vertex smooth Phong normals/tangents/bitangents.
 
 use crate::bsp::{Face, HEADER_LUMPS};

@@ -211,7 +211,6 @@ mod tests {
                 origin: Vec3::ZERO,
                 headnode: [0; 4],
             }],
-            brushes: None,
         }
     }
 
