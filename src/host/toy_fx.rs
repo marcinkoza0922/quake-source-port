@@ -13,6 +13,11 @@ impl Host {
                 let choice = self.cv("addon_rail_color").max(0.0) as usize;
                 self.rail_fx.receive(fx, self.cl.time, choice, self.snd.as_ref());
             }
+            ClientEvent::Gun(e) => match qserver::addons::Toy::from_id(e.toy) {
+                Some(qserver::addons::Toy::Akimbo) => self.akimbo_fx.receive(&e, self.cl.time, self.snd.as_ref()),
+                Some(qserver::addons::Toy::Rifle) => self.rifle_fx.receive(&e, self.cl.time, self.snd.as_ref()),
+                _ => {}
+            },
             ClientEvent::Hook(h) => self.hook_fx.receive(h, self.cl.time, self.snd.as_ref()),
             ClientEvent::Cable(c) => self.cable_fx.receive(&c, self.snd.as_ref()),
             ClientEvent::Gel(line) => self.gel_fx.receive(&line, self.cl.time, self.snd.as_ref()),
@@ -26,6 +31,8 @@ impl Host {
     pub(super) fn clear_toy_fx(&mut self) {
         self.portal_fx.clear();
         self.rail_fx.clear();
+        self.akimbo_fx.clear();
+        self.rifle_fx.clear();
         self.hook_fx.clear();
         self.cable_fx.clear();
         self.boomerang_fx.clear();
@@ -90,6 +97,13 @@ impl Host {
         if let Some(mut g) = toy_gun {
             g.origin = (Vec3::from(g.origin) + cv.viewmodel.offset(v.angles)).to_array();
             ents.push(g);
+        }
+        if held(qserver::addons::Toy::Akimbo) {
+            // two-handed: no left/right view model alignment
+            ents.extend(self.akimbo_fx.weapons(me, &self.cl, self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r));
+        }
+        if held(qserver::addons::Toy::Rifle) {
+            ents.extend(self.rifle_fx.weapons(me, &self.cl, self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r));
         }
         cable_held
     }

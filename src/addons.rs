@@ -9,7 +9,10 @@ mod hook_model;
 pub mod boomerang_fx;
 mod boomerang_model;
 pub mod equip_wheel;
+pub mod akimbo_fx;
 pub mod gel_coat;
+pub mod mag_hud;
+pub mod rifle_fx;
 pub mod gel_fx;
 mod toy_model;
 pub mod water_fx;
@@ -23,7 +26,7 @@ mod rail_model;
 pub mod sticky_draw;
 pub mod sticky_model;
 
-use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, Toy};
+use qserver::addons::{BUTTON_TOY_ALT, BUTTON_TOY_FIRE, BUTTON_TOY_RELOAD, Toy};
 use crate::wheel::{Entry, Weapon};
 
 /// One local player's weapon selection.
@@ -139,7 +142,7 @@ impl WeaponSelection {
     }
 
     /// Usercmd buttons: QC's attack bit is withheld while a toy is held.
-    pub fn buttons(&self, attack: bool, attack2: bool, jump: bool) -> u16 {
+    pub fn buttons(&self, attack: bool, attack2: bool, reload: bool, jump: bool) -> u16 {
         let jump = (jump as u16) << 1;
         match self.held {
             None => attack as u16 | jump,
@@ -147,6 +150,7 @@ impl WeaponSelection {
                 jump | t.bits()
                     | if attack { BUTTON_TOY_FIRE } else { 0 }
                     | if attack2 { BUTTON_TOY_ALT } else { 0 }
+                    | if reload { BUTTON_TOY_RELOAD } else { 0 }
             }
         }
     }
@@ -362,10 +366,10 @@ mod tests {
     #[test]
     fn disabled_weapons_are_put_away_and_buttons_follow_selection() {
         let mut s = WeaponSelection { held: Some(Toy::Sticky), ..Default::default() };
-        assert_eq!(s.buttons(true, false, false), Toy::Sticky.bits() | BUTTON_TOY_FIRE);
+        assert_eq!(s.buttons(true, false, true, false), Toy::Sticky.bits() | BUTTON_TOY_FIRE | BUTTON_TOY_RELOAD);
         let mut impulse = 0;
         s.update_slots(&slot_cvars(), &[], (0, &mut impulse), &inventory(1, 4097));
         assert_eq!(s.held, None);
-        assert_eq!(s.buttons(true, true, true), 0b11);
+        assert_eq!(s.buttons(true, true, true, true), 0b11);
     }
 }

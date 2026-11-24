@@ -536,6 +536,18 @@ the entity) both work.
   unplug, the floor refuses); `cable_rope` (wrap round a pillar and unwrap
   coming back), `cable_rope_fx` (slack rope lies on the floor, taut one
   stays straight), `hook_surface` electronics names, `qclient::cable`.
+### Guns with magazines (`addons/guns.rs`, `qclient::guns`, `src/addons/mag_hud.rs`)
+Shared by the akimbo pistols and the assault rifle. `Magazine` holds the
+rounds and a running reload; `bullet` is a hitscan shot from the eye (through
+linked portals) that hurts the first entity via QC `T_Damage` and sends the
+stock blood particles or TE_GUNSHOT. `//qsp_gun` lines report shots, dry
+clicks and reload start/cancel/finish (`ClientEvent::Gun`); `//qsp_mag` lines
+(`MagSync`, on change) fill `ClientState::mags`, drawn by `mag_hud` above the
+status bar with a bar while reloading.
+- Reload action: `+reload` (qinput button, usercmd bit 9
+  `BUTTON_TOY_RELOAD`, only while a toy is held) is shared by every add-on
+  with `Addon::reload`; the add-on browser and Controls list it. R by default
+  (`cl_reloadbind` merges it once into configs whose R is free).
 ### Equipment wheel and goggles (`src/addons/goggles.rs`, `equip_wheel.rs`, `src/host/goggles.rs`)
 Equipment is switched on and off rather than held, so it does not use the
 toy slot. `Equip` lists it in wheel order; items of one group exclude each

@@ -38,6 +38,8 @@ pub struct InputState {
     pub jump: bool,
     /// Add-on secondary fire (`+attack2`), held.
     pub attack2: bool,
+    /// Add-on reload (`+reload`), held.
+    pub reload: bool,
     pub impulse: u8,
     /// Local weapon-slot selection, 1–10 (10 is slot 0); never serialized.
     pub weapon_slot: u8,

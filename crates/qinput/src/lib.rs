@@ -161,11 +161,13 @@ pub mod btn {
     pub const EQUIPWHEEL: usize = 21;
     pub const BULLET_TIME: usize = 22;
     pub const DODGE: usize = 23;
-    pub const COUNT: usize = 24;
+    /// Add-ons: reload the held gun.
+    pub const RELOAD: usize = 24;
+    pub const COUNT: usize = 25;
     pub const NAMES: [&str; COUNT] = [
         "forward", "back", "moveleft", "moveright", "moveup", "movedown", "left", "right", "lookup", "lookdown",
         "speed", "strafe", "attack", "jump", "mlook", "klook", "use", "gyroaction", "weaponwheel", "lockon",
-        "attack2", "equipwheel", "bullettime", "dodge",
+        "attack2", "equipwheel", "bullettime", "dodge", "reload",
     ];
 }
 

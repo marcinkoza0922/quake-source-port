@@ -46,7 +46,8 @@ impl Entry {
             Weapon::Addon(Toy::PortalGun) => "PG", Weapon::Addon(Toy::Boomerang) => "BM",
             Weapon::Addon(Toy::Sticky) => "SB", Weapon::Addon(Toy::Hookshot) => "HK",
             Weapon::Addon(Toy::Railgun) => "RG", Weapon::Addon(Toy::GelSprayer) => "GS",
-            Weapon::Addon(Toy::Washer) => "PW", Weapon::Addon(Toy::Cable) => "MM", _ => "AX",
+            Weapon::Addon(Toy::Washer) => "PW", Weapon::Addon(Toy::Cable) => "MM",
+            Weapon::Addon(Toy::Akimbo) => "AK", Weapon::Addon(Toy::Rifle) => "AR", _ => "AX",
         }
     }
     pub fn icon(self) -> Option<&'static str> { self.stock().and_then(|s| s.icon) }
@@ -55,6 +56,7 @@ impl Entry {
         match self.weapon {
             Weapon::Addon(Toy::Sticky) => Some(STAT_ROCKETS),
             Weapon::Addon(Toy::Railgun) => Some(STAT_CELLS),
+            Weapon::Addon(Toy::Rifle) => Some(STAT_NAILS),
             Weapon::Addon(_) => None, _ => self.stock().and_then(|s| s.ammo),
         }
     }
@@ -63,6 +65,10 @@ impl Entry {
         let needed = if self.weapon == Weapon::Addon(qserver::addons::Toy::Railgun) {
             qserver::addons::railgun::AMMO as i32
         } else { 1 };
+        // a rifle with no spare nails still fires what its magazine holds
+        if self.weapon == Weapon::Addon(qserver::addons::Toy::Rifle) {
+            return true;
+        }
         self.owned(cl) && self.ammo().is_none_or(|a| cl.stats[a] >= needed)
     }
     pub fn active(self, cl: &ClientState, held: Option<qserver::addons::Toy>) -> bool {

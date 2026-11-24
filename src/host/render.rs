@@ -124,6 +124,8 @@ impl Host {
             );
             self.portal_fx.frame(self.cl.time, v, &mut self.r, self.snd.as_ref(), &mut fte);
             self.rail_fx.frame(self.cl.time, v, &mut self.r, &mut fte);
+            self.akimbo_fx.frame(self.cl.time, v, &mut self.r, &mut fte);
+            self.rifle_fx.frame(self.cl.time, v, &mut self.r, &mut fte);
             self.grenade_arc_frame(v, &mut fte);
             self.hook_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, &mut self.r, &mut fte);
             self.cable_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), cable_held, rc.cable_metal, &self.level, v, &mut self.r, &mut fte);
@@ -318,6 +320,8 @@ impl Host {
                                 cp.draw_center(&mut cc, usize::MAX);
                             }
                             let (wheel, wcl) = if i == 0 { (&self.wheel, &self.cl) } else { (&self.guests[live[i - 1]].wheel, &self.guests[live[i - 1]].cl) };
+                            let vh = cc.vh() - cell_reserve;
+                            crate::addons::mag_hud::draw(&mut cc, vh, wcl, wcl.viewentity.saturating_sub(1), held_addon);
                             self.bullet_time.draw(&mut cc, bullet_meter);
                             wheel.draw(&mut cc, &mut pf, &glyphs, wcl, pad_ui, wheel_key);
                             crate::draw::translate(&mut cc.list, x as f32, y as f32);
@@ -352,6 +356,8 @@ impl Host {
                         if self.show_scores && self.cl.gametype == 1 && !self.csqc.has_draw_scores() {
                             crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
                         }
+                        let vh = c.vh() - reserve;
+                        crate::addons::mag_hud::draw(&mut c, vh, &self.cl, self.cl.viewentity.saturating_sub(1), self.toy.held);
                         self.bullet_time.draw(&mut c, bullet_meter);
                         self.wheel.draw(&mut c, &mut pf, &glyphs, &self.cl, pad_ui, wheel_key);
                         self.goggles.wheel.draw(&mut c, &glyphs, &self.goggles.equip, pad_ui, equip_key);

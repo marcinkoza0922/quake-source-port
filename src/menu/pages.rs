@@ -127,6 +127,7 @@ macro_rules! controls_list {
 pub(super) const CONTROLS: &[Item] = controls_list!();
 pub(super) const CONTROLS_ALL: &[Item] = controls_list!(
     bind("Alt Fire (Add-ons)", "+attack2"),
+    bind("Reload (Add-ons)", "+reload"),
     bind("Equipment Wheel (Add-ons)", "+equipwheel"),
     bind("Dodge / Dive (Add-ons)", "+dodge"),
     bind("Bullet Time (Add-ons)", "+bullettime"),
@@ -175,6 +176,10 @@ pub(super) const CABLE: &[Item] = &[
     toggle("Plug Into Metal", "addon_cable_metal"),
     slider("Bolt Damage", "addon_cable_damage", 5.0, 100.0, 5.0),
 ];
+/// Reached from the Add-ons pages: akimbo pistols.
+pub(super) const AKIMBO: &[Item] = &[slider("Damage", "addon_akimbo_damage", 5.0, 100.0, 1.0)];
+/// Reached from the Add-ons pages: assault rifle.
+pub(super) const RIFLE: &[Item] = &[slider("Damage", "addon_rifle_damage", 5.0, 100.0, 1.0)];
 pub(super) const PORTAL_DEPTH: &[(&str, f32)] =
     &[("Off", 0.0), ("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0)];
 pub(super) const PORTAL_MAX: &[(&str, f32)] = &[("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0)];

@@ -23,6 +23,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("cl_addonslotdefaults", "0", CVAR_ARCHIVE),
     ("cl_automapbind", "0", CVAR_ARCHIVE),
     ("cl_recordbind", "0", CVAR_ARCHIVE),
+    ("cl_reloadbind", "0", CVAR_ARCHIVE),
     ("cl_automap", "0", CVAR_ARCHIVE),
     ("cl_automap_view", "0", CVAR_ARCHIVE),
     ("cl_automap_display", "0", CVAR_ARCHIVE),

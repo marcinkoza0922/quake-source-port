@@ -24,6 +24,8 @@ struct Addon {
     page: Option<Page>,
     description: &'static str,
     alt: bool,
+    /// Uses the shared reload action.
+    reload: bool,
 }
 // Checklist ends before the dedicated help rows below it.
 const LIST_TOP: f32 = 58.0;
@@ -59,6 +61,9 @@ pub(super) fn addon_info(i: usize) -> AddonInfo {
         if a.alt {
             binds.push((qcore::t!("Alt Fire"), "+attack2"));
         }
+        if a.reload {
+            binds.push((qcore::t!("Reload"), "+reload"));
+        }
     }
     AddonInfo {
         name: a.name,
@@ -84,6 +89,7 @@ const ADDON: &[Addon] = &[
         weapons: &[Weapon { name: qcore::t!("Portal Gun"), slot: "addon_portalgun_slot" }],
         page: Some(Page::PortalGun),
         alt: true,
+        reload: false,
         description: qcore::t!("Create two linked portals on flat walls. Fire places the first portal; Alt Fire places the second. Walk through either portal to emerge from the other. Your momentum carries through. Assign a weapon slot below: pressing that slot repeatedly cycles its ordinary weapon and every enabled add-on assigned there. Portal view quality is configurable below."),
     },
     Addon {
@@ -93,6 +99,7 @@ const ADDON: &[Addon] = &[
         weapons: &[Weapon { name: qcore::t!("Boomerang"), slot: "addon_boomerang_slot" }],
         page: Some(Page::Boomerang),
         alt: true,
+        reload: false,
         description: qcore::t!("Hold Fire and sweep the crosshair over monsters to queue targets. Release Fire to throw: the boomerang visits each target, stuns it and returns to you. Alt Fire clears the queue. The weapon slot selects a group, not a separate hotkey: press it again to cycle through the weapons in that slot. Configure stun duration and flight speed below."),
     },
     Addon {
@@ -102,6 +109,7 @@ const ADDON: &[Addon] = &[
         weapons: &[Weapon { name: qcore::t!("Stickybomb Launcher"), slot: "addon_sticky_slot" }],
         page: Some(Page::Sticky),
         alt: true,
+        reload: false,
         description: qcore::t!("Hold Fire to charge a sticky bomb using rocket ammunition; release to launch. A longer charge throws it faster. Bombs cling to walls, doors and monsters. Alt Fire detonates your planted bombs together. Place a trap, retreat, then detonate it when enemies approach. Assign any weapon slot below; repeated presses cycle through the ordinary weapon and add-ons in that slot."),
     },
     Addon {
@@ -111,6 +119,7 @@ const ADDON: &[Addon] = &[
         weapons: &[Weapon { name: qcore::t!("Hookshot"), slot: "addon_hookshot_slot" }],
         page: Some(Page::Hookshot),
         alt: true,
+        reload: false,
         description: qcore::t!("Fire launches a chain hook. It latches onto a permitted surface or enemy and reels you toward the anchor. Fire again or use Alt Fire to let go. Choose which materials and enemies can be hooked in Configure Parameters. Assign it to any weapon slot; repeated presses of the slot's existing binding cycle through its weapons."),
     },
     Addon {
@@ -120,6 +129,7 @@ const ADDON: &[Addon] = &[
         weapons: &[Weapon { name: qcore::t!("Railgun"), slot: "addon_railgun_slot" }],
         page: Some(Page::Railgun),
         alt: false,
+        reload: false,
         description: qcore::t!("A piercing railgun inspired by Quake III. Fire sends a slug through every enemy along its line. Each shot consumes two cells, with a 1.5 second refire interval. Damage and the spiral trail colour are configurable below. Choose a weapon slot: the slot's current binding selects and cycles the weapons assigned to it."),
     },
     Addon {
@@ -129,6 +139,7 @@ const ADDON: &[Addon] = &[
         weapons: &[Weapon { name: qcore::t!("Gel Sprayer"), slot: "addon_gel_slot" }],
         page: Some(Page::Gel),
         alt: true,
+        reload: false,
         description: qcore::t!("A Portal-style gel sprayer. Fire sprays blue Repulsion gel: land, jump or run into it to bounce, and landings on it never hurt. Alt Fire sprays orange Propulsion gel: run across it to go much faster. Gel coats floors and walls until washed off with the Powerwasher. Assign a weapon slot below; repeated presses cycle the weapons in that slot."),
     },
     Addon {
@@ -138,6 +149,7 @@ const ADDON: &[Addon] = &[
         weapons: &[Weapon { name: qcore::t!("Powerwasher"), slot: "addon_washer_slot" }],
         page: Some(Page::Washer),
         alt: true,
+        reload: false,
         description: qcore::t!("A water cannon. Fire shoots a straight jet with limited reach; Alt Fire a wide, shorter fan. The water pushes enemies back, turns projectiles aside and washes away gel and blood. Push strength is configurable below. Assign a weapon slot below; repeated presses cycle the weapons in that slot."),
     },
     Addon {
@@ -147,7 +159,28 @@ const ADDON: &[Addon] = &[
         weapons: &[Weapon { name: qcore::t!("Male-to-Male Cable"), slot: "addon_cable_slot" }],
         page: Some(Page::Cable),
         alt: true,
+        reload: false,
         description: qcore::t!("Alt Fire on a glowing electronics panel within reach plugs one end in; the other end then shoots lightning with unlimited ammunition. The cable tethers you to the socket and catches on corners. Alt Fire or switching weapons yanks it out."),
+    },
+    Addon {
+        name: qcore::t!("Akimbo Pistols"),
+        id: "akimbo",
+        cvar: "addon_akimbo",
+        weapons: &[Weapon { name: qcore::t!("Akimbo Pistols"), slot: "addon_akimbo_slot" }],
+        page: Some(Page::Akimbo),
+        alt: true,
+        reload: true,
+        description: qcore::t!("A pistol in each hand. Fire shoots the left pistol, Alt Fire the right one, each with its own magazine. Ammunition is endless, but the pistols must be reloaded: press Reload, or fire an empty one. Assign a weapon slot below; repeated presses cycle the weapons in that slot."),
+    },
+    Addon {
+        name: qcore::t!("Assault Rifle"),
+        id: "rifle",
+        cvar: "addon_rifle",
+        weapons: &[Weapon { name: qcore::t!("Assault Rifle"), slot: "addon_rifle_slot" }],
+        page: Some(Page::Rifle),
+        alt: true,
+        reload: true,
+        description: qcore::t!("A full-auto assault rifle with a red dot sight. Hold Fire to shoot; hold Alt Fire to aim down the sight for a tighter spread and a closer view. Reload fills the magazine from your nails. Assign a weapon slot below; repeated presses cycle the weapons in that slot."),
     },
     Addon {
         name: qcore::t!("Goggles"),
@@ -156,26 +189,31 @@ const ADDON: &[Addon] = &[
         weapons: &[],
         page: Some(Page::Goggles),
         alt: false,
+        reload: false,
         description: qcore::t!("One equipment add-on includes both night vision and thermal vision. The Change Goggles action cycles Normal, Night Vision, Thermal, then Normal again. Night vision brightens dark rooms; thermal vision highlights living enemies. Goggles do not occupy a weapon slot. Configure intensity and sensor noise below. The binding affects only this add-on."),
     },
     Addon {
         name: qcore::t!("Dodge / Dive"), id: "dodge", cvar: "addon_dodge",
         weapons: &[], page: None, alt: false,
+        reload: false,
         description: qcore::t!("Press Dodge with a movement direction on the ground or in midair: dive forward or leap backward and sideways. Diagonals are supported. Each press launches once, with a short recovery. The player body animates in third person. Assign the Dodge action below or in Controls."),
     },
     Addon {
         name: qcore::t!("Bullet Time"), id: "bullettime", cvar: "addon_bullet_time",
         weapons: &[], page: Some(Page::BulletTime), alt: false,
+        reload: false,
         description: qcore::t!("Use the dedicated Bullet Time action to slow the whole local game to 20% speed. Hold is the default; Toggle switches on each press. The optional meter limits use in real seconds and regenerates while inactive. Disable the meter for unlimited use. Remap the action and configure duration and regeneration below."),
     },
     Addon {
         name: qcore::t!("Projectile Shotguns"), id: "projectileshotguns", cvar: "addon_projectile_shotguns",
         weapons: &[], page: Some(Page::ProjectileShotguns), alt: false,
+        reload: false,
         description: qcore::t!("Both shotguns and enemy grunts fire physical pellets with their original spread and damage. Fast default projectiles feel immediate; lower their speed to dodge incoming fire during bullet time. Configure projectile speed below, or reset it to the default of 10000 units per second."),
     },
     Addon {
         name: qcore::t!("Hitstop"), id: "hitstop", cvar: "addon_hitstop",
         weapons: &[], page: Some(Page::Hitstop), alt: false,
+        reload: false,
         description: qcore::t!("Freezes the game for a split second when you damage an enemy, so hits feel heavier. Single player only. Choose which weapons trigger it (all, melee, ranged or explosives), how long it lasts and how much more a kill freezes. Advanced settings cover enemy toughness, damage scaling, cooldown and the longest freeze."),
     },
 
@@ -192,13 +230,14 @@ impl Addon {
     }
     fn row_count(&self) -> usize {
         if self.weapons.is_empty() { 1 + usize::from(self.equipment_action().is_some()) }
-        else { self.weapons.len() + 2 + usize::from(self.alt) }
+        else { self.weapons.len() + 2 + usize::from(self.alt) + usize::from(self.reload) }
     }
     fn command(&self, row: usize) -> Option<&'static str> {
         match row.checked_sub(self.weapons.len())? {
             _ if self.weapons.is_empty() => (row == 0).then(|| self.equipment_action().map(|a| a.1)).flatten(),
             0 => Some("+attack"),
-            1 if !self.weapons.is_empty() && self.alt => Some("+attack2"),
+            1 if self.alt => Some("+attack2"),
+            n if self.reload && n == 1 + usize::from(self.alt) => Some("+reload"),
             _ => None,
         }
     }

@@ -286,6 +286,7 @@ impl Host {
         let flying = self.freecam.cam.is_some();
         self.pend_attack |= inp.attack;
         self.pend_attack2 |= inp.attack2;
+        self.pend_reload |= inp.reload;
         self.pend_jump |= inp.jump;
         self.pend_dodge |= self.input.dodge_pressed() && !flying;
         let mut impulse = inp.impulse;
@@ -336,6 +337,7 @@ impl Host {
             self.accum = self.accum.max(tic);
             self.pend_attack = false;
             self.pend_attack2 = false;
+            self.pend_reload = false;
             self.pend_jump = false;
             self.pend_dodge = false;
             self.pend_impulse = 0;
@@ -355,7 +357,7 @@ impl Host {
                 let mut cmd = self.last_cmd;
                 let auto_attack = autofire && !self.pend_attack && self.pend_impulse == 0 && self.toy.held.is_none()
                     && aim_vis::autofire_target(ctx.as_ref(), &self.cl);
-                cmd.buttons = self.toy.buttons(self.pend_attack || auto_attack, self.pend_attack2, self.pend_jump)
+                cmd.buttons = self.toy.buttons(self.pend_attack || auto_attack, self.pend_attack2, self.pend_reload, self.pend_jump)
                     | if self.pend_dodge { qserver::addons::BUTTON_DODGE } else { 0 };
                 cmd.impulse = self.pend_impulse;
                 // The server acks the lossless local client's frames itself;
@@ -376,6 +378,7 @@ impl Host {
                     });
                     self.pend_attack = false;
                     self.pend_attack2 = false;
+                    self.pend_reload = false;
                     self.pend_jump = false;
                     self.pend_dodge = false;
                     self.pend_impulse = 0;

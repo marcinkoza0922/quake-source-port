@@ -35,6 +35,8 @@ impl Input {
         b[btn::JUMP].state &= !2;
         s.attack2 = b[btn::ATTACK2].state & 3 != 0;
         b[btn::ATTACK2].state &= !2;
+        s.reload = b[btn::RELOAD].state & 3 != 0;
+        b[btn::RELOAD].state &= !2;
         s.impulse = std::mem::take(&mut self.impulse);
         s.weapon_slot = std::mem::take(&mut self.weapon_slot);
         let gyro_btn = b[btn::GYRO].is_down();

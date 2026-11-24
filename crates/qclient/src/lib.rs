@@ -31,6 +31,7 @@ pub use fte::{FteNames, FteRequest};
 pub use input::{InputState, MoveSpeeds, UserCmd};
 pub use parse::ParseError;
 pub use rail::RailEffect;
+pub mod guns;
 pub use state::*;
 pub use addon_msgs::{PortalEffect, PortalView};
 pub use cable::CableView;

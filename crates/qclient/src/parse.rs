@@ -365,6 +365,14 @@ impl ClientState {
                 }
                 continue;
             }
+            if let Some(args) = line.strip_prefix(b"//qsp_gun ") {
+                self.parse_gun(&String::from_utf8_lossy(args));
+                continue;
+            }
+            if let Some(args) = line.strip_prefix(b"//qsp_mag ") {
+                self.parse_mag(&String::from_utf8_lossy(args));
+                continue;
+            }
             if let Some(args) = line.strip_prefix(b"//qsp_cable ") {
                 self.parse_cable(&String::from_utf8_lossy(args));
                 continue;

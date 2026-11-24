@@ -184,6 +184,14 @@ impl Host {
                     weapon.origin = (Vec3::from(weapon.origin) + cv.viewmodel.offset(v.angles)).to_array();
                     ents.push(RenderEntity { views: bit, ..weapon });
                 }
+                let guns = if held(qserver::addons::Toy::Akimbo) {
+                    self.akimbo_fx.weapons(me, &g.cl, self.cl.time, v, &mut self.level, &self.server.core.fs, &mut self.r)
+                } else if held(qserver::addons::Toy::Rifle) {
+                    self.rifle_fx.weapons(me, &g.cl, self.cl.time, v, &mut self.level, &self.server.core.fs, &mut self.r)
+                } else {
+                    Vec::new()
+                };
+                ents.extend(guns.into_iter().map(|e| RenderEntity { views: bit, ..e }));
                 if let Some(gun) = gun {
                     ents.push(RenderEntity { views: bit, ..gun });
                 }

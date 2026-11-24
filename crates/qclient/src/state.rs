@@ -162,6 +162,8 @@ pub enum ClientEvent {
     /// A cable was plugged in, yanked out, missed a socket or started firing
     /// (`cables` holds the plugged ones).
     Cable(crate::cable::CableView),
+    /// An add-on gun fired, clicked dry or reloaded (`mags` holds magazines).
+    Gun(crate::guns::GunEvent),
     /// Add-on boomerang line (`//qsp_boom ...` without the prefix).
     Boomerang(String),
     /// Add-on gel line (`//qsp_gel ...` without the prefix).
@@ -314,6 +316,8 @@ pub struct ClientState {
     pub hooks: Vec<crate::hook::HookView>,
     /// Add-on cables plugged in, from `//qsp_cable` stufftext.
     pub cables: Vec<crate::cable::CableView>,
+    /// Add-on gun magazines from `//qsp_mag` stufftext.
+    pub mags: Vec<crate::guns::MagView>,
     /// Add-on stickybombs (id, origin) from `//qsp_sticky` stufftext.
     pub stickies: Vec<(u32, [f32; 3])>,
     /// Reliable clc_* bytes to send (signon replies, string commands).
@@ -421,6 +425,7 @@ impl ClientState {
             portals: Vec::new(),
             hooks: Vec::new(),
             cables: Vec::new(),
+            mags: Vec::new(),
             stickies: Vec::new(),
             out_reliable: SizeBuf::new(MAX_MSGLEN),
             movemessages: 0,

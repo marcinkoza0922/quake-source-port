@@ -170,6 +170,8 @@ pub struct Level {
     pub(crate) washers: crate::addons::washer::Washers,
     /// Monster fall damage while the portal gun is on.
     pub(crate) falls: crate::addons::fall::Falls,
+    pub(crate) akimbo: crate::addons::akimbo::Akimbo,
+    pub(crate) rifle: crate::addons::rifle::Rifle,
     /// Railgun refire timers.
     pub(crate) rails: crate::addons::railgun::Rails,
     /// Hookshot state and the map's surface materials.
