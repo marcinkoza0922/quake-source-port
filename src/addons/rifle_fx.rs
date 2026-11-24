@@ -297,10 +297,11 @@ fn brass(g: &mut Geometry, s: &Shot, age: f32, eye: Vec3) {
         return;
     }
     let side = side.normalize();
-    // two layers of the soft picture: a solid little case with a bright line
-    quad(g, at, axis * 0.95, side * 0.42, [96, 66, 22], 1.0);
-    quad(g, at, axis * 0.95, side * 0.42, [96, 66, 22], 1.0);
-    quad(g, at, axis * 0.6, side * 0.18, [214, 168, 84], 0.9);
+    // layers of the soft picture: a solid little case with a bright line
+    for _ in 0..3 {
+        quad(g, at, axis * 0.62, side * 0.24, [84, 58, 22], 1.0);
+    }
+    quad(g, at, axis * 0.4, side * 0.09, [176, 134, 66], 0.8);
 }
 
 /// A quad spanned by two half axes.
