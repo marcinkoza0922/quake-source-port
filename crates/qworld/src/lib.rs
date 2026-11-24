@@ -1,7 +1,6 @@
 //! qworld: collision hulls, traces, the entity area tree and server physics
 //! (port of world.c, sv_move.c, sv_phys.c, sv_user.c). See docs/DESIGN.md.
 
-pub mod brush;
 pub mod ents;
 pub mod hull;
 pub mod monster;
@@ -20,8 +19,7 @@ pub const DIST_EPSILON: f32 = 0.031_25;
 pub const STEPSIZE: f32 = 18.0;
 
 pub use qformats::bsp::{
-    CONTENTS_CLIP, CONTENTS_EMPTY, CONTENTS_LADDER, CONTENTS_LAVA, CONTENTS_SKY, CONTENTS_SLIME,
-    CONTENTS_SOLID, CONTENTS_WATER,
+    CONTENTS_EMPTY, CONTENTS_LAVA, CONTENTS_SKY, CONTENTS_SLIME, CONTENTS_SOLID, CONTENTS_WATER,
 };
 pub const CONTENTS_CURRENT_0: i32 = -9;
 pub const CONTENTS_CURRENT_DOWN: i32 = -14;

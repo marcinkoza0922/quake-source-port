@@ -128,7 +128,7 @@ impl Level {
         let mut brush_names = Vec::new();
         let mut brushes = Vec::new();
         for name in cl.model_precache.iter().skip(2) {
-            if name.starts_with('*') || !name.ends_with(".bsp") {
+            if name.starts_with('*') || !name.trim_end_matches(' ').ends_with(".bsp") {
                 continue;
             }
             let Some(d) = fs.open(name) else { continue };
@@ -205,7 +205,7 @@ impl Level {
                 Some(Model { id, kind: Kind::Brush, flags: 0, md3: false })
             } else {
                 let m = load_model(fs, r, name, enhanced_models);
-                if m.is_none() && !name.ends_with(".bsp") {
+                if m.is_none() && !name.trim_end_matches(' ').ends_with(".bsp") {
                     print(&format!("couldn't load model {name}\n"));
                 }
                 m

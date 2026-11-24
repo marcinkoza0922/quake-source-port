@@ -92,7 +92,8 @@ impl ClientState {
         va[0] += speed * sp.pitch * inp.lookdown;
         va[1] += inp.look_delta[0];
         va[0] += inp.look_delta[1];
-        va[0] = va[0].clamp(sp.minpitch, sp.maxpitch);
+        // two ifs in C: cl_minpitch above cl_maxpitch must not panic
+        va[0] = va[0].min(sp.maxpitch).max(sp.minpitch);
         va[2] = va[2].clamp(-50.0, 50.0);
 
         let mut cmd = UserCmd { viewangles: *va, ..Default::default() };

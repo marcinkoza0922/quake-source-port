@@ -180,6 +180,23 @@ impl Server {
         }
         self.core.cvars.set_value("skill", skill.floor().clamp(0.0, 3.0));
         self.spawn_server(&mapname)?;
+        // A save from other progs fails part way through its edicts: Host_Error
+        // in C. Never leave the half-restored level running (it could be saved).
+        let restored = self.restore(parms, time, styles, blocks, addons);
+        if restored.is_err() {
+            self.level = None;
+        }
+        restored
+    }
+
+    fn restore(
+        &mut self,
+        parms: [f32; NUM_SPAWN_PARMS],
+        time: f64,
+        styles: Vec<Vec<u8>>,
+        blocks: Vec<Vec<(String, String)>>,
+        addons: Option<crate::addons::save::Header>,
+    ) -> Result<(), String> {
         let Some(l) = &mut self.level else { return Err("no level".into()) };
         let c = &mut self.core;
         c.sv.paused = true;
@@ -247,6 +264,24 @@ mod tests {
             .map(PathBuf::from)
             .unwrap_or_else(|| Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"));
         d.join("id1").is_dir().then_some(d)
+    }
+
+    /// A save whose edicts don't fit the progs (ironwail: Host_Error) must not
+    /// leave a half-restored level running.
+    #[test]
+    fn failed_restore_shuts_the_level_down() {
+        let Some(base) = basedir() else { return };
+        let mut fs = Fs::new(base);
+        fs.add_game_dir("id1");
+        let mut sv = Server::new(fs, Cvars::new(), 1);
+        sv.spawn_server("e1m1").unwrap();
+        sv.connect_local().unwrap();
+        sv.spawn_server("e1m1").unwrap();
+        let text = sv.save_game().replacen("\"classname\" \"light\"", "\"think\" \"no_such_function\"", 1);
+        assert!(text.contains("no_such_function"));
+        assert!(sv.load_game(&text).is_err());
+        assert!(sv.level.is_none());
+        assert!(sv.save_game().is_empty());
     }
 
     #[test]

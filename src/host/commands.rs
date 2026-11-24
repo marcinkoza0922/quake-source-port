@@ -142,6 +142,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         }
     });
     c.add("menu_main", |h, _| h.menu.open(Screen::Main));
+    // the 2021 re-release progs stuff it after the finale; empty in both references
+    c.add("menu_credits", |_, _| {});
     // scripted menu input for headless screenshots: key names as `bind`
     // takes them (`menu_keys DOWNARROW TAB ENTER`), or typed text
     c.add("menu_keys", |h, a| {

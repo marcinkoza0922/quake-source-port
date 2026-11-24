@@ -272,14 +272,20 @@ impl Host {
             b.string(ls.as_bytes());
         }
         for (i, &v) in self.cl.stats.iter().enumerate() {
-            if v == 0 {
+            let f = self.cl.statsf[i];
+            if v == 0 && f == 0.0 {
                 continue;
             }
             if b.len() > 4096 {
                 res = res.and_then(|_| w.write(ang, &b.data));
                 b.clear();
             }
-            if i < 32 {
+            // a fraction only survives as text (ironwail: unless it's so big
+            // that the float itself is truncated)
+            if f64::from(f) != f64::from(v) && f.fract() != 0.0 {
+                b.byte(SVC_STUFFTEXT as i32);
+                b.string(format!("//st {i} {f}\n").as_bytes());
+            } else if i < 32 {
                 b.byte(SVC_UPDATESTAT as i32);
                 b.byte(i as i32);
                 b.long(v);

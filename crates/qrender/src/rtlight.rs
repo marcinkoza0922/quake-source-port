@@ -142,7 +142,9 @@ pub(crate) fn face_vps(o: [f32; 3], radius: f32) -> [Mat4; 6] {
 
 /// Does the box `mins`..`maxs` touch the sphere?
 pub(crate) fn box_touches_sphere(mins: [f32; 3], maxs: [f32; 3], c: [f32; 3], r: f32) -> bool {
-    let d: f32 = (0..3).map(|i| (c[i] - c[i].clamp(mins[i], maxs[i])).powi(2)).sum();
+    // max/min, not clamp: a face with under 3 edges (28 shipped maps have some)
+    // keeps inverted bounds, which clamp panics on and here touch nothing.
+    let d: f32 = (0..3).map(|i| (c[i] - c[i].max(mins[i]).min(maxs[i])).powi(2)).sum();
     d <= r * r
 }
 
@@ -199,6 +201,14 @@ mod tests {
         let a = project(&faces[0], [o[0] + 50.0, o[1], o[2]])[2];
         let b = project(&faces[0], [o[0] + 200.0, o[1], o[2]])[2];
         assert!(a < b);
+    }
+
+    #[test]
+    fn inverted_bounds_touch_nothing_and_do_not_panic() {
+        // faces with under 3 edges (func_mapjam5/jam5_warren, mjolnir/start2)
+        assert!(!box_touches_sphere([f32::MAX; 3], [f32::MIN; 3], [0.0; 3], 300.0));
+        assert!(box_touches_sphere([-1.0; 3], [1.0; 3], [100.0, 0.0, 0.0], 99.0));
+        assert!(!box_touches_sphere([-1.0; 3], [1.0; 3], [101.0, 0.0, 0.0], 99.0));
     }
 
     #[test]

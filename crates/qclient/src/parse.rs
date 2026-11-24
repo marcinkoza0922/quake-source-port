@@ -393,6 +393,10 @@ impl ClientState {
                 self.parse_portal(&String::from_utf8_lossy(args));
                 continue;
             }
+            if let Some(args) = line.strip_prefix(b"//st ").or_else(|| line.strip_prefix(b"//sts ")) {
+                self.parse_stat_text(&qcore::text::decode(args), line.starts_with(b"//sts"));
+                continue;
+            }
             let line = line.strip_prefix(b"//").unwrap_or(&line);
             self.events.push(ClientEvent::StuffText(String::from_utf8_lossy(line).into_owned()));
         }
@@ -463,6 +467,21 @@ mod damage_tests {
         assert!(!cl.took_damage);
         cl.parse_server_message(&[SVC_DAMAGE, 0, 1, 0, 0, 0, 0, 0, 0]).unwrap();
         assert!(cl.took_damage);
+    }
+
+    #[test]
+    fn st_and_sts_stufftext_set_stats_without_reaching_the_console() {
+        let mut cl = ClientState::new();
+        cl.items = 5;
+        let mut m = vec![SVC_STUFFTEXT];
+        m.extend_from_slice(b"//st 15 0\n//st 40 256 41 1.5\n//sts 50 \"two words\"\n//st 999 1\nbf\n\0");
+        cl.parse_server_message(&m).unwrap();
+        assert_eq!((cl.stats[40], cl.statsf[40]), (256, 256.0));
+        assert_eq!((cl.stats[41], cl.statsf[41]), (1, 1.5));
+        assert_eq!(cl.statss[50], "two words");
+        assert_eq!(cl.items, 5, "CL_SetStat_f leaves the items alone");
+        let stuffed: Vec<_> = cl.take_events().into_iter().filter(|e| matches!(e, ClientEvent::StuffText(_))).collect();
+        assert_eq!(stuffed, [ClientEvent::StuffText("bf\n".into())]);
     }
 
     #[test]

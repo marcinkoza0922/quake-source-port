@@ -190,3 +190,38 @@ fn advertised_extensions_and_getsurface_frik_file() {
         assert!(qvm::EXTENSIONS.contains(&ext) || ext == "DP_QC_GETSURFACE");
     }
 }
+
+fn spawn_in(game: &str, map: &str, custom: bool) -> Option<Server> {
+    let base = basedir()?;
+    if !base.join(game).is_dir() {
+        return None;
+    }
+    let mut fs = Fs::new(&base);
+    fs.add_game_dir("id1");
+    fs.add_game_dir(game);
+    let mut sv = Server::new(fs, Cvars::new(), 1);
+    sv.core.set_custom(custom);
+    sv.spawn_server(map).unwrap();
+    Some(sv)
+}
+
+#[test]
+fn the_brushlist_lump_does_not_change_collision() {
+    // qbj3_annihilazor ships BSPX BRUSHLIST, which ironwail and vkQuake ignore.
+    // Both settle these two monsters on others (FL_ONGROUND), and
+    // customized games must not differ either.
+    for custom in [false, true] {
+        let Some(sv) = spawn_in("qbj3", "qbj3_annihilazor", custom) else { return };
+        let (vm, f) = (&sv.level.as_ref().unwrap().vm, sv.core.sv.fields.flags);
+        for e in [477, 478] {
+            assert_eq!(vm.ent_f(e, f) as i32, 32 | 512, "edict {e}, customized {custom}");
+        }
+    }
+}
+
+#[test]
+fn model_names_with_a_trailing_space_load_like_on_windows() {
+    let Some(sv) = spawn_in("hwjam2", "hwjam2_thulsa", false) else { return };
+    let m = sv.core.sv.models.iter().flatten().find(|m| m.name == "progs/pumpkin.mdl ").expect("precached");
+    assert!(m.maxs.x - m.mins.x > 1.0 && m.mins.to_array() != [-16.0; 3]);
+}

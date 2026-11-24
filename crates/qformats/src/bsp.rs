@@ -193,7 +193,7 @@ pub struct Bsp {
     pub lm_style: Option<Vec<[u8; 4]>>,
     /// BSPX `LIGHTGRID_OCTREE`: volumetric 3D lighting octree for alias models.
     pub lightgrid: Option<crate::bspx::LightGridOctree>,
-    /// BSPX `BRUSHLIST`: per-submodel convex brushes for exact collision.
+    /// BSPX `BRUSHLIST`: per-submodel convex brushes (not used for collision).
     pub brushlist: Option<Vec<crate::bspx::BspxModelBrushes>>,
     /// BSPX `FACENORMALS`: per-face, per-vertex smooth Phong normals.
     pub face_normals: Option<crate::bspx::FaceNormals>,
