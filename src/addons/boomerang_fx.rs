@@ -9,6 +9,9 @@ use qsound::boomerang::{CATCH, STUN, SWISH, THROW};
 use qsound::{Sfx, SoundEvent, SoundSystem};
 use std::sync::Arc;
 
+/// Turn of the held boomerang in its own plane, in degrees.
+const HELD_TURN: f32 = -50.0;
+
 type Geometry = (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>);
 
 #[derive(Clone, Copy, Debug)]
@@ -187,13 +190,17 @@ impl Presentation {
         let model = Self::load("@boomerang_view", bm::view_model, lv, fs, r)?;
         let (fwd, right, up) = angle_vectors(view.angles.into());
         let bob = (time as f32 * 2.0).sin() * 0.2;
-        let origin = Vec3::from(view.origin) + fwd * 26.0 + right * 7.0 - up * (11.0 + bob);
-        let a = view.angles;
+        let origin = Vec3::from(view.origin) + fwd * 25.0 + right * 8.8 - up * (8.6 + bob);
+        // top face towards the screen centre, handle (+X arm) down in the
+        // hand, blade reaching forward and left
+        let face = (up * 0.25 - fwd * 0.75 - right * 0.6).normalize();
+        let level = face.cross(up).normalize() * -1.0;
+        let (s, c) = HELD_TURN.to_radians().sin_cos();
+        let handle = level * c + face.cross(level) * s;
         Some(RenderEntity {
             model: model.id,
             origin: origin.to_array(),
-            // flat face to the camera, one arm raised: reads as a V in the hand
-            angles: [-a[0] - 40.0, a[1] + 70.0, a[2] + 80.0],
+            angles: super::cable_fx::angles_basis(handle, face),
             viewmodel: true,
             ..Default::default()
         })

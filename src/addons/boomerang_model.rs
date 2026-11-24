@@ -1,56 +1,21 @@
-//! The Meshy boomerang, converted offline to native alias geometry
-//! (`tools/import_toy_model.py`), and the procedural sprite atlas for its
+//! The boomerang's alias geometry and skin (built offline by
+//! `tools/build_boomerang.py`), and the procedural sprite atlas for its
 //! target markers, queue numbers and stun stars.
-use qformats::mdl::{Mdl, Skin};
+use qformats::mdl::Mdl;
 
 pub fn model(palette: &[u8]) -> Mdl {
-    let bytes = miniz_oxide::inflate::decompress_to_vec_zlib(include_bytes!(
-        "../../assets/boomerang/boomerang.mdl.zlib"
-    ))
-    .expect("bundled boomerang geometry");
-    let mut model = Mdl::parse(&bytes).expect("bundled boomerang MDL");
-    let rgb = miniz_oxide::inflate::decompress_to_vec_zlib(include_bytes!(
-        "../../assets/boomerang/texture.rgb.zlib"
-    ))
-    .expect("bundled boomerang texture");
-    let mut cache = std::collections::HashMap::new();
-    let pixels = rgb
-        .as_chunks::<3>()
-        .0
-        .iter()
-        .map(|&p| *cache.entry(p).or_insert_with(|| nearest(palette, super::portal_skin::shade(p, SHADE))))
-        .collect();
-    model.skins = vec![Skin {
-        intervals: vec![],
-        images: vec![pixels],
-    }];
-    model
+    super::toy_model::parse(
+        include_bytes!("../../assets/boomerang/boomerang.mdl.zlib"),
+        include_bytes!("../../assets/boomerang/texture.rgb.zlib"),
+        palette,
+    )
 }
-
-/// Skin brightness: the Meshy atlas is pastel; Quake wood is dark.
-const SHADE: f32 = 0.6;
 
 /// The held boomerang: the same mesh at view-model size.
 pub fn view_model(palette: &[u8]) -> Mdl {
     let mut m = model(palette);
     super::portal_skin::rescale(&mut m, [0.6; 3]);
     m
-}
-
-/// Nearest non-fullbright palette index.
-fn nearest(palette: &[u8], rgb: [u8; 3]) -> u8 {
-    palette
-        .as_chunks::<3>()
-        .0
-        .iter()
-        .take(224)
-        .enumerate()
-        .min_by_key(|(_, p)| {
-            (0..3)
-                .map(|k| (i32::from(p[k]) - i32::from(rgb[k])).pow(2))
-                .sum::<i32>()
-        })
-        .map_or(0, |(i, _)| i as u8)
 }
 
 /// Atlas cell size and grid (4×4 cells of 16×16 texels).
@@ -144,7 +109,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn imported_boomerang_is_valid_and_flat() {
+    fn bundled_boomerang_is_valid_and_flat() {
         let palette: Vec<u8> = (0..256).flat_map(|i| [i as u8; 3]).collect();
         let m = model(&palette);
         assert!(m.triangles.len() > 300 && m.triangles.len() <= 4000);
@@ -158,6 +123,8 @@ mod tests {
         // centred, 28 units long, thinnest along Z
         assert!((hi[0] - lo[0] - 28.0).abs() < 0.5);
         assert!(hi[2] - lo[2] < hi[1] - lo[1]);
+        // a real V, thin enough to be a blade
+        assert!(hi[1] - lo[1] > 10.0 && hi[2] - lo[2] < 4.0);
         assert!(m.skins[0].images[0].iter().all(|&p| p < 224));
     }
 

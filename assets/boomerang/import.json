@@ -1,23 +1,20 @@
 {
-  "source": "model.fbx",
-  "source_triangles": 990,
-  "triangles": 990,
-  "vertices": 1306,
+  "build": "python3 tools/build_boomerang.py --seed 1",
+  "triangles": 2508,
+  "vertices": 1836,
   "texture_size": 256,
-  "removed_packed_degenerates": 0,
+  "texels_per_unit": 7.1,
   "bounds": [
     [
-      -14.0,
-      -4.107193946838379,
-      -2.4570415019989014
+      -14.912,
+      -7.079,
+      -1.168
     ],
     [
-      14.0,
-      4.107193946838379,
-      2.4570415019989014
+      13.088,
+      6.737,
+      1.63
     ]
   ],
-  "length": 28.0,
-  "flat": true,
-  "gain": 0.75
+  "length": 28.0
 }
