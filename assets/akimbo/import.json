@@ -1,0 +1,33 @@
+{
+  "source": "gun.glb (tools/prep_akimbo.py from ~/Assets/Meshy/akimbo/model.glb)",
+  "source_triangles": 3915,
+  "triangles": 3862,
+  "vertices": 4083,
+  "texture_size": 512,
+  "removed_packed_degenerates": 53,
+  "bounds": [
+    [
+      -11.0,
+      -2.257697582244873,
+      -6.396753311157227
+    ],
+    [
+      11.0,
+      2.257697582244873,
+      6.396753311157227
+    ]
+  ],
+  "glow_texels": 0,
+  "length": 22.0,
+  "anchor": "bbox",
+  "flip": true,
+  "flat": false,
+  "gain": 1.0,
+  "cleanup": [
+    "blender -b --factory-startup --python-exit-code 1 --python tools/prep_akimbo.py -- ~/Assets/Meshy/akimbo/model.glb WORK",
+    "blender -b --factory-startup --python-exit-code 1 --python tools/import_toy_model.py -- WORK/gun.glb --out assets/akimbo --length 22 --flip --gain 1.0 --keep-uv",
+    "cp assets/akimbo/model.mdl.zlib OLD.mdl.zlib",
+    "blender -b --factory-startup --python tools/relayout_toy_uv.py -- OLD.mdl.zlib assets/akimbo/model.mdl.zlib",
+    "python3 tools/paint_akimbo_texture.py"
+  ]
+}

@@ -107,9 +107,15 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_cable_length", "512", CVAR_ARCHIVE),
     ("addon_cable_metal", "0", CVAR_ARCHIVE),
     ("addon_cable_damage", "30", CVAR_ARCHIVE),
-    ("addon_akimbo_damage", "14", CVAR_ARCHIVE),
     ("addon_rifle_damage", "10", CVAR_ARCHIVE),
-    // akimbo pistols: on/off, slot
+    // akimbo pistols: damage, spread (degrees), magazine, reload seconds,
+    // reload when empty, swap hands, on/off, slot
+    ("addon_akimbo_damage", "14", CVAR_ARCHIVE),
+    ("addon_akimbo_spread", "1.5", CVAR_ARCHIVE),
+    ("addon_akimbo_mag", "12", CVAR_ARCHIVE),
+    ("addon_akimbo_reload", "1.6", CVAR_ARCHIVE),
+    ("addon_akimbo_autoreload", "1", CVAR_ARCHIVE),
+    ("addon_akimbo_swap", "0", CVAR_ARCHIVE),
     ("addon_akimbo", "0", CVAR_ARCHIVE),
     ("addon_akimbo_slot", "2", CVAR_ARCHIVE),
     // assault rifle: on/off, slot

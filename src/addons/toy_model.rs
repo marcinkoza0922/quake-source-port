@@ -51,7 +51,7 @@ pub fn get(key: &str, mdl_zlib: &[u8], rgb_zlib: &[u8], glow: bool, lv: &mut cra
 }
 
 /// Nearest non-fullbright palette index (black when the palette is missing).
-fn nearest(palette: &[u8], rgb: [u8; 3]) -> u8 {
+pub(super) fn nearest(palette: &[u8], rgb: [u8; 3]) -> u8 {
     palette
         .as_chunks::<3>()
         .0

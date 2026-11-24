@@ -99,6 +99,7 @@ impl Host {
             }
             let cable_held = self.toy_view_models(v, &cv, &mut ents);
             crate::addons::sticky_draw::bombs(&self.cl, &mut self.level, &self.server.core.fs, &mut self.r, &mut ents, &mut dls);
+            self.akimbo_fx.lights(self.cl.time, &self.cl, self.snd.as_ref(), &mut dls);
             self.boomerang_fx.entities(self.cl.time, &mut self.level, &self.server.core.fs, &mut self.r, self.snd.as_ref(), &mut ents);
             self.cable_fx.entities(&self.cl, self.cl.viewentity.saturating_sub(1), cable_held, self.cl.time, rc.gravity, &mut self.level, &self.server.core.fs, &mut self.r, &mut ents);
             if let Some(g) = gun {

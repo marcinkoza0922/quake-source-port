@@ -177,7 +177,14 @@ pub(super) const CABLE: &[Item] = &[
     slider("Bolt Damage", "addon_cable_damage", 5.0, 100.0, 5.0),
 ];
 /// Reached from the Add-ons pages: akimbo pistols.
-pub(super) const AKIMBO: &[Item] = &[slider("Damage", "addon_akimbo_damage", 5.0, 100.0, 1.0)];
+pub(super) const AKIMBO: &[Item] = &[
+    slider("Damage", "addon_akimbo_damage", 5.0, 100.0, 1.0),
+    slider("Spread", "addon_akimbo_spread", 0.0, 10.0, 0.5),
+    slider("Magazine Size", "addon_akimbo_mag", 2.0, 40.0, 1.0),
+    slider("Reload Time", "addon_akimbo_reload", 0.4, 4.0, 0.1),
+    toggle("Reload When Empty", "addon_akimbo_autoreload"),
+    toggle("Swap Pistols", "addon_akimbo_swap"),
+];
 /// Reached from the Add-ons pages: assault rifle.
 pub(super) const RIFLE: &[Item] = &[slider("Damage", "addon_rifle_damage", 5.0, 100.0, 1.0)];
 pub(super) const PORTAL_DEPTH: &[(&str, f32)] =

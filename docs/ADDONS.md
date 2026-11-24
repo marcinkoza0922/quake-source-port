@@ -548,6 +548,45 @@ status bar with a bar while reloading.
   `BUTTON_TOY_RELOAD`, only while a toy is held) is shared by every add-on
   with `Addon::reload`; the add-on browser and Controls list it. R by default
   (`cl_reloadbind` merges it once into configs whose R is free).
+### Akimbo pistols (`addons/akimbo.rs`; `src/addons/akimbo_fx.rs`, `akimbo_model.rs`)
+A pistol in each hand: fire shoots the left one, alt-fire the right one
+(`addon_akimbo_swap` exchanges them). Each has its own magazine
+(`addon_akimbo_mag`, 12) and timers. A press shoots at once (at most every
+0.11 s), a held trigger repeats every 0.22 s. Bullets are `guns::bullet`
+with `addon_akimbo_damage` (14) inside a cone of `addon_akimbo_spread` (1.5)
+degrees, denser in the middle; shots set `show_hostile` and a small
+`punchangle`. The reserve is endless.
+- Reload: `+reload` reloads every pistol that isn't full, the second one
+  0.35 s later (`STAGGER`) than `addon_akimbo_reload` (1.6 s); a pistol not
+  being reloaded can still shoot. Pulling the trigger of an empty one clicks
+  and, with `addon_akimbo_autoreload` (1), reloads it. Putting the pistols
+  away or dying interrupts reloads.
+- Saves: `akimbo client left right` header lines (rounds loaded); a new level
+  starts with full magazines.
+- Model: `assets/akimbo/` from Meshy (concept nano-banana-pro
+  `01a20ef1-53eb-706d-a574-5b6e1261ff60`, mesh meshy-t2.5 + meshy-n1
+  `01a20ef1-c6a5-779d-a2af-235080de3ec6`, 24 credits), archived in
+  `~/Assets/Meshy/akimbo`. `tools/prep_akimbo.py` (Blender) widens it, closes
+  the slide's back and adds the octagonal muzzle brake, recoil weight and
+  fins; `tools/paint_akimbo_texture.py` ignores Meshy's colours and paints a
+  material per connected part (gunmetal slide, bronze frame, walnut grip with
+  leather strips, hazard band). All commands are in `import.json`
+  (`cleanup`). The right pistol is the source; `akimbo_model` mirrors it for
+  the left hand and makes poses at load: slide back, magazine out, both
+  (parts found by connectivity and bounds). The loose magazine is a box
+  built in code.
+- View: one pistol in each lower corner (`pose`, camera basis, so it stays
+  put at any pitch; no left/right view model alignment), muzzles slightly
+  inwards. Shots kick that pistol and its slide; an empty one keeps its slide
+  back. A reload raises the pistol, turns the grip to the middle, drops the
+  magazine, pushes a new one in and works the slide, timed by the event's
+  `secs`. Flash and light follow the view model's muzzle; a tracer, smoke and
+  a brass casing per shot (other players': from the server's muzzle point).
+- Sound: `qsound::akimbo`, synthesised (two shots, dry, magazine out and in,
+  slide), on the owner's channels 6 and 7.
+- Menu: `Page::Akimbo` (`menu_options akimbo`). Default slot 2, label "AK".
+- Tests: `crates/qserver/tests/akimbo.rs` (e1m1), `akimbo`, `akimbo_model`
+  and `akimbo_fx` unit tests.
 ### Equipment wheel and goggles (`src/addons/goggles.rs`, `equip_wheel.rs`, `src/host/goggles.rs`)
 Equipment is switched on and off rather than held, so it does not use the
 toy slot. `Equip` lists it in wheel order; items of one group exclude each
@@ -623,7 +662,7 @@ and the other device's existing glyphs remain visible. Capture accepts any devic
 `QUAKE_MENU_SHOTS=target/shots` writes navigation, capture and conflict screenshots
 (skips without game data/Vulkan).
 
-`tools/capture_addon_previews.py` records all six add-ons on e1m1 using the
+`tools/capture_addon_previews.py` records the add-ons with a preview on e1m1 using the
 headless renderer and installed game data (`--basedir` or normal discovery).
 It needs a release executable (`--engine` to override) and Python Pillow.
 The 48-frame, 12 fps, 320×92 silent loops in `assets/addon-previews/*.qav`

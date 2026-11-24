@@ -10,6 +10,7 @@ pub mod boomerang_fx;
 mod boomerang_model;
 pub mod equip_wheel;
 pub mod akimbo_fx;
+mod akimbo_model;
 pub mod gel_coat;
 pub mod mag_hud;
 pub mod rifle_fx;

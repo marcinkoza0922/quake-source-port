@@ -462,7 +462,7 @@ macro_rules! button_cmds {
 
 /// Register bind/unbind/unbindall/bindlist, +/- buttons and impulse.
 pub fn register_commands<C: InputHost>(c: &mut Commands<C>) {
-    button_cmds!(c, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
+    button_cmds!(c, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24);
     toggle_button_cmds!(c, btn::ATTACK, in_toggleattack);
     toggle_button_cmds!(c, btn::SPEED, in_togglerun);
     c.add("impulse", |ctx, a| ctx.input().impulse = a.argv(1).parse().unwrap_or(0));

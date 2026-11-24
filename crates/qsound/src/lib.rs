@@ -16,6 +16,7 @@ pub mod cable;
 pub mod hookshot;
 pub mod boomerang;
 pub mod portal;
+pub mod akimbo;
 pub mod rail;
 
 use std::collections::HashMap;
