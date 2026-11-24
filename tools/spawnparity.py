@@ -27,6 +27,7 @@ import concurrent.futures as cf
 import json
 import os
 import re
+import socket
 import subprocess
 import sys
 
@@ -103,6 +104,18 @@ def game_args(game):
     return [] if game.lower() == "id1" else ["-game", game]
 
 
+# AD-family globals for checkextension() results: we advertise these like vkQuake,
+# ironwail doesn't, so they always differ (nothing else may follow from them).
+EXT_GLOBALS = {"ext_dpsurf", "ext_frikfile", "ext_ftestrings", "ext_sprintf"}
+
+
+def free_port():
+    """A UDP port nothing is bound to (other sweeps and Steam use 27000-28000)."""
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+        s.bind(("", 0))
+        return s.getsockname()[1]
+
+
 ERR = re.compile(r"host_error|server error|object error|sys_error|panicked|segmentation|couldn't spawn|cannot find map|bad version", re.I)
 
 
@@ -138,7 +151,7 @@ def one(a, sandbox, userdata, game, mapname, slot=0):
     for f in (ours_sav, iw_sav):
         if os.path.exists(f):
             os.remove(f)
-    port = ["-port", str(27600 + slot % 64)]  # parallel dedicated servers each need a UDP port
+    port = ["-port", str(free_port())]  # parallel dedicated servers each need a UDP port
     # sv_fteparticles 0: advertise the same extensions as ironwail, so mods
     # that detect the engine (AD) take the same path in both
     rc1, out1 = run([a.ours, "-basedir", sandbox] + port + ga + ["+sv_fteparticles", "0"] + common_ours, env, sandbox)
@@ -156,7 +169,8 @@ def one(a, sandbox, userdata, game, mapname, slot=0):
     rep = savediff.compare(ours_sav, iw_sav, a.tol)
     res["counts"] = rep["counts"]
     res["header"] = rep["header"]
-    res["globals"] = rep["globals"]
+    res["ext_globals"] = sorted(g[0] for g in rep["globals"] if g[0] in EXT_GLOBALS)
+    res["globals"] = rep["globals"] = [g for g in rep["globals"] if g[0] not in EXT_GLOBALS]
     res["edicts"] = rep["edicts"][:60]
     res["n_edicts_diff"] = len(rep["edicts"])
     res["status"] = "same" if not (rep["header"] or rep["globals"] or rep["edicts"]) else "differ"

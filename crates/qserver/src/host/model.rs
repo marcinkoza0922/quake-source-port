@@ -9,7 +9,7 @@ impl Ctx<'_> {
         // Mod_LoadModel dispatches on the file magic, not the extension
         // (some mods ship alias models named b_*.bsp).
         let cached = self.c.sv.brush_cache.get(name).cloned();
-        let bsp_ext = name.to_ascii_lowercase().ends_with(".bsp");
+        let bsp_ext = name.trim_end_matches(' ').to_ascii_lowercase().ends_with(".bsp");
         let data = if cached.is_some() || !bsp_ext { None } else { self.c.fs.open(name) };
         let is_brush = cached.is_some()
             || data.as_deref().is_some_and(|d| {

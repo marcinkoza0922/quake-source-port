@@ -66,6 +66,30 @@ impl ClientState {
         self.sync_stat(idx);
     }
 
+    /// `//st N V ...` / `//sts N "text" ...` (CL_SetStat_f, CL_SetStatString_f):
+    /// how ironwail servers and demos, and our own demos, send stats past 31
+    /// and float and string stats. Like C it only sets the stat: no view or
+    /// item fields follow (ironwail demos open with `//st 15 0`).
+    pub(crate) fn parse_stat_text(&mut self, args: &str, string: bool) {
+        let t = qcore::cmd::Args::tokenize(args);
+        let mut i = 0;
+        while i + 1 < t.argc() {
+            let (n, v) = (t.argv(i).parse::<usize>(), t.argv(i + 1));
+            i += 2;
+            let Ok(n) = n else { continue };
+            if n >= MAX_CL_STATS {
+                continue;
+            }
+            if string {
+                self.statss[n] = v.to_string();
+            } else {
+                let f = v.parse::<f64>().unwrap_or(0.0);
+                self.statsf[n] = f as f32;
+                self.stats[n] = f as i32;
+            }
+        }
+    }
+
     fn sync_stat(&mut self, idx: usize) {
         use qnet::protocol::*;
         match idx {

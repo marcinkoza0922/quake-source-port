@@ -217,4 +217,88 @@ and Q64 are in `perfkit stills`) wait for the reset as well.
 
 ## qbot
 
-(filled in below)
+Never filled in for 2026-11-17; see the second audit below.
+
+# Second audit (2026-11-23)
+
+HEAD `2515e22`, about 80 commits after the first audit (CSQC, HDR lighting,
+BSPX, IQM, PEXT2_PREDINFO, bloom/dlight shadows/RT, the perf rewrites).
+1555 playable maps in 113 game dirs. References: ironwail `qsp-diag`, vkQuake
+source. KEX and vkQuake were not run. The ironwail half of the demo sweep was
+not run either: `demosweep.py` SIGKILLs the references, which once cost a GPU
+reset.
+
+| Check | Result |
+|---|---|
+| `qsmoke`, 1555 maps, skill 3 | 4 maps with errors: 2 renderer aborts and `swjam_nolcoz` (both ours, fixed); `hwjam2_thulsa` (map bug, fails in ironwail and vkQuake too; below) |
+| `spawnparity`, skill 1 | 1527 identical, 24 ironwail file-name-case failures, 1 fails in both, 3 explained below |
+| `spawnparity --frames 216`, skill 3 | 1525 identical (HEAD, before the fixes); 25 ironwail file-name-case failures; `swjam_nolcoz`, the 2 `BRUSHLIST` maps (all 3 fixed, now identical); `hwjam2_thulsa`; `modjam_adaya/test` (`transwater`: dedicated ironwail has no `r_wateralpha` cvar for its QC to probe) |
+| `savecompat`, 27 saves | ours and ironwail read every save both can load identically |
+| Demos, ours only, 53 | 47 play at full length; dm4jam and smej2 stop at 0 frames (known: `demos` in their quake.rc) |
+| `qbot`, 6 games with baselines | no engine or QC error, every exit reached; baselines stale (below) |
+| `cargo nextest run` | 929 passed (with the fixes below) |
+
+## Fixed (2026-11-23)
+
+- **Crash with dynamic-light shadows on.** A face with fewer than 3 edges keeps
+  inverted bounds, and `f32::clamp` panics on them (`box_touches_sphere`, in
+  both renderers; since 8849bd9). 28 installed maps have such faces, among
+  them five of mjolnir's `mj4*` and its hub `start2`.
+- **`swjam_nolcoz` couldn't start.** Its QC precaches `/progs/smoke1.spr`; C
+  joins `dir/` + path, ours refused a leading slash.
+- **`//st` and `//sts` stufftext** (ironwail's extended, float and string
+  stats, in its demos and from its servers, and in our own demos recorded
+  mid-game) reached the console as an unknown command and the stats were
+  lost. The recorder now keeps fractions.
+- **A failed `load` left the half-restored level running** (ironwail:
+  Host_Error). On a dedicated server it could be saved. `retrojam6/a0`.
+- `menu_credits` (stuffed by 9 games' progs; a no-op in both references) was
+  an unknown command. `cl_minpitch` above `cl_maxpitch` no longer panics.
+- **`BRUSHLIST` collision removed.** Added in a976286, it traced against the
+  lump's brushes for odd-sized boxes, so monsters settled differently on the
+  two installed maps with the lump (qbj3_annihilazor, mc_hj26_dh). Neither
+  ironwail nor vkQuake reads it and both maps have complete clip hulls. It was
+  dropped from customized games too: those change only what the player picks.
+  The parser stays for the collision hull view.
+- **Trailing spaces in file names** are dropped when the name as written is
+  nowhere, for loose files only (`hwjam2_thulsa` now loads, below).
+- `spawnparity.py`: free UDP ports (fixed ports clashed and looked like
+  failures) and the `ext_*` globals no longer count as differences.
+
+## hwjam2_thulsa
+
+The map names its model `"progs/pumpkin.mdl "`, with a trailing space;
+`progs/pumpkin.mdl` is installed. On Linux ironwail's server stops at the
+precache. vkQuake 1.34.1's server carries on (a missing model is fatal only
+for the world), but its client then stops with `Host_Error: Model
+progs/pumpkin.mdl  not found` (real client run in headless gamescope; control
+map hwjam2_burnham ran). The author presumably never saw it because Windows
+drops trailing spaces in file names (not tested here). It loads in ours now.
+Over all installed data this is the only model, sound or texture reference
+with edge whitespace, and no file name has any, so nothing else resolves
+differently.
+
+## Open (2026-11-23)
+
+1. **`-dedicated` needs a Vulkan driver** and exits without one ("Quake
+   graphics initialization failed"); both references run without a GPU.
+2. `qbot` baselines date from 2026-11-13. They already fail at 6405023 and
+   3dca905, and the failing set shifted since, so a real regression can't be
+   told from drift. Re-save after reviewing the dropped maps.
+3. `ambient_level` and `ambient_fade` are constants, not cvars; srj1 sets
+   `ambient_fade` from QC.
+4. `//` stufftext from other servers (vkQuake `//paknames`, `//svi`, `//ui`,
+   ...) still reaches the console as unknown commands. Our server does not
+   send custom stats to clients without our PEXT2 (ironwail sends `//st`).
+5. Reference commands and cvars ours lacks. Shipped configs, demos and QC
+   print "Unknown command" for `scr_conbrightness`, `scr_menubgalpha` (rotj),
+   `scr_conwidth`, `scr_crosshairscale` (jam8) and `serverinfo` (rmj1); the
+   rest that qsmoke logs (DarkPlaces `sv_gameplayfix_*`, `gl_flashblend`,
+   `r_oldwater`, `r_maxedges`) are unknown to the references too. Not seen in
+   shipped configs, but used by people's own: `inc`, `cycle`, `reset`,
+   `resetall`, `condump`, `randmap`, `unaliasall`, `music_*`, `viewframe`,
+   `skies`, `games`, `mods`. Copper-based progs hold `cycle`, `inc` and
+   `reset` as bare strings; whether they run as commands was not traced.
+6. 67 of vkQuake's server builtins are missing; progs call only one,
+   `te_explosion2` (#427, 10 AD-based games). What reaches that call was not
+   traced; ironwail lacks it too.
