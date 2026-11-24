@@ -59,6 +59,8 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("scr_printspeed", "8", 0),
     ("volume", "0.7", CVAR_ARCHIVE),
     ("bgmvolume", "1", CVAR_ARCHIVE),
+    ("ambient_level", "0.3", 0),
+    ("ambient_fade", "100", 0),
     ("snd_waterfx", "1", CVAR_ARCHIVE),
     ("s_reverb", "0", CVAR_ARCHIVE),
     ("s_reverb_amount", "1", CVAR_ARCHIVE),
@@ -294,6 +296,13 @@ pub(super) const COMPAT_CVARS: &[(&str, &str, u32)] = &[
     ("savedgamecfg", "0", CVAR_ARCHIVE),
     ("scr_usekfont", "0", 0),
     ("cl_beams_polygons", "1", 0),
+    // now modifier_autoswitch; old configs still set it
+    ("cl_autoswitch", "0", 0),
+    // set by rotj's and jam8's configs
+    ("scr_conbrightness", "1", 0),
+    ("scr_conwidth", "0", 0),
+    ("scr_crosshairscale", "1", 0),
+    ("scr_menubgalpha", "0.7", 0),
     ("r_noshadow_list", "", 0),
     // Folded into r_particle_quality; old configs still set them.
     ("r_softparticles", "1", 0),

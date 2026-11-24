@@ -5,7 +5,8 @@ use qcore::cmd::Cbuf;
 use qcore::cvar::Cvars;
 use qcore::fs::Fs;
 use qnet::protocol::STAT_HEALTH;
-use qrender::{Draw2D, Renderer};
+use crate::gfx::Renderer;
+use qrender::Draw2D;
 use qvm::ofs_parm;
 
 use super::{Csqc, CsqcEnv};

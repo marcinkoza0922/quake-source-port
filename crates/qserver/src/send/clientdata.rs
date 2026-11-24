@@ -114,6 +114,37 @@ pub(crate) fn calc_stats(
     (si, sf, ss)
 }
 
+/// SV_WriteStats (ironwail): custom QC stats as reliable `//st N V` and
+/// `//sts N "text"` stufftext for a client without replacement deltas.
+/// ironwail's client reads them; to older ones they are comments.
+pub(crate) fn write_stat_text(vm: &Vm, c: &mut Core, i: usize) {
+    let (si, sf, ss) = calc_stats(vm, c, i as u32 + 1, false);
+    let cl = &mut c.clients[i];
+    for n in 32..qnet::protocol::MAX_CL_STATS {
+        let text = match &ss[n] {
+            Some(t) => {
+                // nothing that could end the quoted string or the line
+                let t: String = t.iter().map(|&b| b as char).filter(|ch| !matches!(ch, '"' | '\n' | '\0')).collect();
+                format!("//sts {n} \"{t}\"\n")
+            }
+            None if si[n] != 0 => format!("//st {n} {}\n", si[n]),
+            None => format!("//st {n} {}\n", sf[n]),
+        };
+        let unsent = || ss[n].is_none() && si[n] == 0 && sf[n] == 0.0;
+        match cl.stat_text.get(&n) {
+            Some(old) if *old == text => continue,
+            None if unsent() => continue,
+            _ => {}
+        }
+        if cl.message.len() + text.len() + 2 > cl.message.maxsize / 2 {
+            break; // the rest goes next frame
+        }
+        cl.message.byte(SVC_STUFFTEXT);
+        cl.message.string(&qcore::text::encode(&text));
+        cl.stat_text.insert(n, text);
+    }
+}
+
 /// SV_WriteClientdataToMessage.
 pub(crate) fn write_clientdata(vm: &mut Vm, c: &mut Core, w: &mut World, e: u32, msg: &mut SizeBuf) {
     let f = c.sv.fields.clone();
@@ -250,5 +281,50 @@ pub(crate) fn write_clientdata(vm: &mut Vm, c: &mut Core, w: &mut World, e: u32,
         msg.byte(SVC_UPDATESTAT);
         msg.byte(STAT_ACTIVEWEAPON);
         msg.long(weapon);
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use qcore::cvar::Cvars;
+    use qcore::fs::Fs;
+
+    use crate::Server;
+
+    #[test]
+    fn clients_without_deltas_get_custom_stats_as_stufftext() {
+        let base = std::env::var_os("QUAKE_BASEDIR").map(std::path::PathBuf::from).unwrap_or_else(|| {
+            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps")
+        });
+        if !base.join("id1").is_dir() {
+            return;
+        }
+        let mut fs = Fs::new(base);
+        fs.add_game_dir("id1");
+        let mut sv = Server::new(fs, Cvars::new(), 2);
+        sv.spawn_server("e1m1").unwrap();
+        sv.connect_client(0);
+        for cmd in ["prespawn", "spawn", "begin"] {
+            sv.frame(0.1);
+            sv.client_command(0, cmd);
+        }
+        sv.frame(0.1);
+        assert!(sv.core.clients[0].spawned && sv.core.clients[0].delta.is_none());
+        let (health, netname) = (sv.core.sv.fields.health, sv.level.as_ref().unwrap().vm.field_ofs("netname").unwrap());
+        for (idx, ty, field) in [(40, 2, health), (41, 1, netname)] {
+            sv.core.sv.custom_stats.push(crate::server::CustomStat { idx, ty, field: Some(field), global: None });
+        }
+        let sent = |sv: &mut Server| {
+            sv.take_reliable(0);
+            sv.frame(0.1);
+            let all: Vec<u8> = sv.take_reliable(0).concat();
+            String::from_utf8_lossy(&all).into_owned()
+        };
+        let t = sent(&mut sv);
+        assert!(t.contains("//st 40 100\n"), "{t:?}");
+        assert!(t.contains("//sts 41 \""), "{t:?}");
+        assert!(!sent(&mut sv).contains("//st"), "unchanged stats aren't repeated");
+        sv.level.as_mut().unwrap().vm.set_ent_f(1, health, 62.5);
+        assert!(sent(&mut sv).contains("//st 40 62.5\n"));
     }
 }

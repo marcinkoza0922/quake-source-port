@@ -380,3 +380,28 @@ fn music_crossfade_blends_outgoing_track() {
     let after: i64 = out.iter().map(|&x| i64::from(x.abs())).sum();
     assert_eq!(after, 0, "expected silence after crossfade finishes, got {after}");
 }
+
+#[test]
+fn ambient_level_and_fade_are_the_listeners() {
+    let Some(fs) = pak_fs() else { return };
+    let (s, mut m) = SoundSystem::new(48000, move |p| fs.open(p));
+    let mut energy = |level: f32, fade: f32| {
+        s.update(Listener {
+            view_entity: 1,
+            ambient_levels: Some([255, 0, 0, 0]),
+            frametime: 1.0,
+            ambient_level: level,
+            ambient_fade: fade,
+            ..Default::default()
+        });
+        let mut out = vec![0i16; 9600];
+        m.paint(&mut out);
+        out.iter().map(|&x| i64::from(x).abs()).sum::<i64>()
+    };
+    let _ = energy(0.3, 0.0);
+    assert_eq!(energy(0.3, 0.0), 0, "ambient_fade 0 never fades in");
+    let full = energy(0.3, 1000.0);
+    assert!(full > 0);
+    assert_eq!(energy(0.0, 100.0), 0, "ambient_level 0 is silent at once");
+    assert!(energy(0.3, 10.0) < full, "a slow fade starts quiet");
+}

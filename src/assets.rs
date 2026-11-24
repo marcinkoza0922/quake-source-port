@@ -7,7 +7,8 @@ use std::sync::Arc;
 use qclient::ClientState;
 use qcore::fs::Fs;
 use qformats::{Bsp, Mdl, Spr, parse_entities};
-use qrender::{Fog, LevelBsp, ModelId, Renderer};
+use crate::gfx::Renderer;
+use qrender::{Fog, LevelBsp, ModelId};
 use qsound::{Sfx, SoundSystem};
 
 mod external_textures;

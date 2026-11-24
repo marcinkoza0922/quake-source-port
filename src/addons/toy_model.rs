@@ -2,7 +2,8 @@
 //! skin quantised to the active mod's palette (no fullbrights), uploaded
 //! once per level under a `@key`.
 use qformats::mdl::{Mdl, Skin};
-use qrender::{ModelId, Renderer};
+use crate::gfx::Renderer;
+use qrender::ModelId;
 
 pub fn parse(mdl_zlib: &[u8], rgb_zlib: &[u8], palette: &[u8]) -> Mdl {
     let bytes = miniz_oxide::inflate::decompress_to_vec_zlib(mdl_zlib).expect("bundled toy geometry");

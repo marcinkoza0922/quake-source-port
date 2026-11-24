@@ -237,6 +237,11 @@ impl Server {
         self.core.sv.error.as_ref()
     }
 
+    /// The pending Host_Error (already printed), once.
+    pub fn take_error(&mut self) -> Option<VmError> {
+        self.core.sv.error.take()
+    }
+
     pub fn active(&self) -> bool {
         self.level.is_some() && self.core.sv.active
     }

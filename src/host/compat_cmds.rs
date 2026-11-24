@@ -7,6 +7,7 @@ use super::*;
 
 pub(super) fn register(c: &mut Commands<Host>) {
     super::quaddicted_cli::register(c);
+    super::ref_cmds::register(c);
     // Sky_SkyCommand_f: QC stuffs `sky <name>` to change the skybox (AD,
     // Alkaline, sewerjam2); lasts until the next map loads its own.
     c.add("sky", |h, a| match a.argc() {

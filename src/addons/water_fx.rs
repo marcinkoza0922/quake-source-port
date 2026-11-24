@@ -8,7 +8,8 @@
 //! washes blood marks off around [`WaterFx::wash_points`].
 use super::gel_fx::{DOME, atlas, tile_uv};
 use qcore::math::{Vec3, angle_vectors};
-use qrender::{FteBatch, FteBlend, FteVertex, PicId, RenderEntity, Renderer, View};
+use crate::gfx::Renderer;
+use qrender::{FteBatch, FteBlend, FteVertex, PicId, RenderEntity, View};
 use qsound::{Sfx, SoundEvent, SoundSystem};
 use std::sync::Arc;
 

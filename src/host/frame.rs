@@ -315,12 +315,6 @@ impl Host {
         }
         if impulse != 0 {
             self.pend_impulse = impulse;
-            self.remote_wswitch.note_impulse(impulse, self.realtime);
-        }
-        if self.local.is_none() && self.demo.is_none() && self.pend_impulse == 0
-            && let Some(imp) = self.remote_wswitch.check(&self.cl, &self.server.core.cvars, self.realtime)
-        {
-            self.pend_impulse = imp;
         }
         self.guest_moves(ft);
         self.bullet_time_frame(dt, in_game && alive);
@@ -445,11 +439,12 @@ impl Host {
             // Ironwail: single player only advances while not in the menu or fullscreen automap.
             let hold = (self.server.core.maxclients() == 1 && (self.menu.active() || self.automap.fullscreen)) || self.hitstop_hold();
             self.server.frame_held(sdt, hold);
-            if let Some(e) = self.server.error() {
-                let msg = format!("Host_Error: {e}\n");
-                self.con.print(&msg);
-                self.server.level = None;
-                self.server.core.sv.active = false;
+            if self.server.error().is_some() {
+                // Host_Error: the server printed it; shut down and disconnect
+                self.drain_server_log();
+                self.demonum = -1;
+                self.stop_game();
+                self.server.take_error();
             }
             if !hold && !self.server.core.sv.paused {
                 self.sample_strafe_hud();
@@ -539,7 +534,7 @@ impl Host {
         }
         if let Some(p) = &mut self.prof {
             p.mark(5);
-            p.end(self.r.fence_wait_ns, [
+            p.end(self.r.fence_wait_ns(), [
                 self.fte.sys.num_particles(), self.fte.sys.num_beams(), self.fte.sys.num_decals(),
                 self.fte.profile_geometry[0], self.fte.profile_geometry[1],
             ]);
@@ -557,6 +552,7 @@ impl Host {
             return;
         }
         let mut l = Listener { view_entity: self.cl.viewentity as i32, frametime: ft, ..Default::default() };
+        (l.ambient_level, l.ambient_fade) = (self.cv("ambient_level"), self.cv("ambient_fade"));
         if let Some(v) = view {
             l.origin = v.origin;
             let (f, r, u) = angle_vectors(Vec3::from_array(v.angles));

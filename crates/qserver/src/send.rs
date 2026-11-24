@@ -125,6 +125,9 @@ impl Server {
                     msg.write(&c.sv.datagram.data);
                 }
                 push_datagram(c, i, msg.data);
+                if !c.sv.custom_stats.is_empty() {
+                    write_stat_text(&l.vm, c, i);
+                }
             }
             if flush(c, i) {
                 drop.push(i);

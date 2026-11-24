@@ -11,7 +11,8 @@ use qinput::aim::{AimContext, AimTarget, TargetKind, aim_assist_allowed};
 use qinput::keys::{K_ESCAPE, KeyDest};
 use qinput::{Device, Input, InputEvent, InputHost, Routed};
 use qnet::protocol::{CLC_STRINGCMD, STAT_ACTIVEWEAPON, STAT_AMMO, STAT_HEALTH, STAT_WEAPONFRAME};
-use qrender::{Renderer, Settings};
+use crate::gfx::Renderer;
+use qrender::Settings;
 use qserver::{ClientMove, Server};
 use qsound::{Listener, SoundEvent, SoundSystem};
 
@@ -25,6 +26,7 @@ mod commands;
 mod render_commands;
 mod compat_cmds;
 mod quaddicted_cli;
+mod ref_cmds;
 mod bugreport;
 mod global_cfg;
 use commands::*;
@@ -72,7 +74,6 @@ use crate::reticle::{self, draw_crosshair, hitmarker};
 mod video;
 mod touch;
 mod training_hud;
-mod weaponswitch;
 
 /// Server tic rate when rendering faster (ironwail-style decoupling).
 const SERVER_TIC: f64 = 1.0 / 72.0;
@@ -161,7 +162,6 @@ pub struct Host {
     tracers: crate::tracers::Tracers,
     bboxes: crate::bboxes::BBoxes,
     automap: crate::automap::Automap,
-    remote_wswitch: weaponswitch::RemoteSwitch,
     /// `r_testlight`: fixed dynamic lights for checking real-time lighting.
     test_lights: Vec<qrender::DLight>,
     /// scr_showspeed: (peak this interval, shown value, interval start).
@@ -355,7 +355,6 @@ impl Host {
             tracers: Default::default(),
             bboxes: Default::default(),
             automap: Default::default(),
-            remote_wswitch: Default::default(),
             test_lights: Vec::new(),
             speed: (0.0, -1.0, 0.0),
             realtime: 0.0,

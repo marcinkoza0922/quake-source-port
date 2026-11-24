@@ -150,7 +150,7 @@ impl Impacts {
         lv: &crate::assets::Level,
         brushes: &mut Option<Vec<BrushEnt>>,
         fs: &qcore::fs::Fs,
-        r: &mut qrender::Renderer,
+        r: &mut crate::gfx::Renderer,
         ents: &mut Vec<RenderEntity>,
         dynverts: &[u32],
         view: Vec3,

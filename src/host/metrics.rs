@@ -73,7 +73,7 @@ impl Host {
             return;
         }
         if shown.gpu {
-            self.r.gpu_times_wanted = true;
+            self.r.want_gpu_times(true);
         }
         let m = &mut self.metrics;
         m.acc += f64::from(ft);
