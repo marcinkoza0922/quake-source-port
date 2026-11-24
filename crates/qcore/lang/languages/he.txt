@@ -4246,3 +4246,6 @@ he אקדח בכל יד: ירי יורה בשמאלי, ירי משני בימנ�
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 he רובה אוטומטי מלא שנטען מהמסמרים שלכם. ירי משני מכוון דרך כוונת הנקודה האדומה ליריות מדויקות יותר ולמבט קרוב יותר.
+
+@ None
+he ללא

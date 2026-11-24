@@ -32,6 +32,33 @@ impl Host {
         }
     }
 
+    /// The add-on guns player bodies hold.
+    pub(super) fn body_toys(&self) -> Vec<Option<crate::vwep::toys::ToyState>> {
+        use qserver::addons::Toy;
+        let state = |(slot, toy): (usize, Option<Toy>)| {
+            let (age, shot) = match toy? {
+                Toy::Akimbo => self.akimbo_fx.last_shot(slot, self.cl.time),
+                Toy::Rifle => self.rifle_fx.last_shot(slot, self.cl.time),
+                _ => return None,
+            };
+            Some(crate::vwep::toys::ToyState { toy: toy?, age, shot })
+        };
+        self.server.held_toys().into_iter().enumerate().map(state).collect()
+    }
+
+    /// Shots without a view model on screen start at the bodies' muzzles.
+    pub(super) fn body_muzzles(&mut self) {
+        use qserver::addons::Toy;
+        let time = self.cl.time;
+        for (slot, part, at) in std::mem::take(&mut self.view.vwep.muzzles) {
+            match self.view.vwep.toys.get(slot).copied().flatten().map(|s| s.toy) {
+                Some(Toy::Akimbo) => self.akimbo_fx.body_muzzle(slot, part, at, time),
+                Some(Toy::Rifle) => self.rifle_fx.body_muzzle(slot, at, time),
+                _ => {}
+            }
+        }
+    }
+
     /// A rifle shot kicks its local shooter's view.
     fn rifle_kick(&mut self, owner: usize) {
         if self.demo.is_some() {

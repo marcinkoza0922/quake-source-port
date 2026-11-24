@@ -230,7 +230,7 @@ pub(super) const GAMEPLAY: &[Item] = &[
     Item::Heading("View"),
     slider("Field of View", "fov", 60.0, 130.0, 5.0),
     Item::Choice { label: "Camera", cvar: "cl_camera", choices: &[("First person", 0.0), ("Third person", 1.0), ("Shoulder right", 2.0), ("Shoulder left", 3.0)] },
-    Item::Choice { label: "Viewmodels", cvar: "r_drawviewmodel", choices: &[("Center", 1.0), ("Right", 2.0), ("Left", 3.0), ("Off", 0.0)] },
+    Item::Choice { label: "Viewmodels", cvar: "r_drawviewmodel", choices: &[("Center", 1.0), ("Right", 2.0), ("Left", 3.0), ("None", 0.0)] },
     toggle("Visible Weapons", "cl_vwep"),
     slider("View Bob", "cl_bob", 0.0, 0.02, 0.002),
     toggle("Gun Kick", "v_gunkick"),

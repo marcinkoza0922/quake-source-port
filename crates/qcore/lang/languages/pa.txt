@@ -4246,3 +4246,6 @@ pa ਹਰ ਹੱਥ ਵਿੱਚ ਇੱਕ ਪਿਸਤੌਲ: ਫ਼ਾਇਰ �
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 pa ਪੂਰੀ ਆਟੋਮੈਟਿਕ ਰਾਈਫ਼ਲ ਜੋ ਤੁਹਾਡੀਆਂ ਕਿੱਲਾਂ ਨਾਲ ਰੀਲੋਡ ਹੁੰਦੀ ਹੈ। ਦੂਜਾ ਫ਼ਾਇਰ ਰੈੱਡ ਡੌਟ ਸਾਈਟ ਰਾਹੀਂ ਨਿਸ਼ਾਨਾ ਸਾਧਦਾ ਹੈ, ਜਿਸ ਨਾਲ ਗੋਲੀਆਂ ਵਧੇਰੇ ਸਟੀਕ ਲੱਗਦੀਆਂ ਹਨ ਅਤੇ ਦ੍ਰਿਸ਼ ਨੇੜੇ ਆਉਂਦਾ ਹੈ।
+
+@ None
+pa ਕੋਈ ਨਹੀਂ

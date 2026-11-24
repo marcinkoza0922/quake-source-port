@@ -4246,3 +4246,6 @@ gl Unha pistola en cada man: o disparo usa a esquerda e o secundario a dereita. 
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 gl Un fusil automático que se recarga cos teus cravos. O disparo secundario apunta coa mira de punto vermello para tiros máis precisos e unha vista máis próxima.
+
+@ None
+gl Ningún

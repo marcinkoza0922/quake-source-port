@@ -13,6 +13,17 @@ pub const TUBE: f32 = 3.4;
 pub const MUZZLE: Vec3 = Vec3::new(26.4, -0.1, 5.6);
 pub const PORT: Vec3 = Vec3::new(-1.6, -1.9, 4.6);
 
+/// Body, sight and magazine as models (for player bodies).
+pub fn meshes(palette: &[u8]) -> [qformats::Mdl; 3] {
+    use super::toy_model::parse;
+    let skin: &[u8] = include_bytes!("../../assets/rifle/texture.rgb.zlib");
+    [
+        parse(include_bytes!("../../assets/rifle/model.mdl.zlib"), skin, palette),
+        parse(include_bytes!("../../assets/rifle/sight.mdl.zlib"), include_bytes!("../../assets/rifle/sight.rgb.zlib"), palette),
+        parse(include_bytes!("../../assets/rifle/mag.mdl.zlib"), skin, palette),
+    ]
+}
+
 /// Body, sight and magazine.
 pub fn models(lv: &mut crate::assets::Level, fs: &qcore::fs::Fs, r: &mut Renderer) -> Option<[ModelId; 3]> {
     const SKIN: &[u8] = include_bytes!("../../assets/rifle/texture.rgb.zlib");

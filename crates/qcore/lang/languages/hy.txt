@@ -4246,3 +4246,6 @@ hy Մեկական ատրճանակ ամեն ձեռքում. կրակը կրակ�
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 hy Լիովին ավտոմատ հրացան, որը լիցքավորվում է ձեր մեխերով։ Այլընտրանքային կրակը նշան է բռնում կարմիր կետով նշանոցով՝ ավելի ճշգրիտ կրակոցների և ավելի մոտ տեսքի համար։
+
+@ None
+hy Ոչ մեկը

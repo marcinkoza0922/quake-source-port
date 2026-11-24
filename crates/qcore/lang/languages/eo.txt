@@ -4246,3 +4246,6 @@ eo Pistolo en ĉiu mano: pafo uzas la maldekstran, alt-pafo la dekstran. La muni
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 eo Plene aŭtomata fusilo, kiu reŝargiĝas el viaj najloj. Alt-pafo celas tra ĝia ruĝpunkta celilo por pli precizaj pafoj kaj pli proksima vido.
+
+@ None
+eo Neniu

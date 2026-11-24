@@ -15,7 +15,8 @@ pub fn draw(c: &mut Canvas, vh: f32, cl: &qclient::ClientState, owner: usize, he
     let Some(m) = held.and_then(|t| cl.mags.iter().find(|m| m.owner as usize == owner && m.toy == t.id())) else { return };
     let n = m.parts.len();
     for (i, p) in m.parts.iter().enumerate() {
-        let x = c.vw() / 2.0 + (i as f32 - (n as f32 - 1.0) / 2.0) * GAP * 2.0;
+        // a lone gun's goes beside the middle, where a centred view model is
+        let x = c.vw() / 2.0 + if n == 1 { GAP * 2.0 } else { (i as f32 - (n as f32 - 1.0) / 2.0) * GAP * 2.0 };
         let y = vh - 44.0;
         let low = p.rounds * 4 <= m.cap;
         let color = if p.rounds == 0 { [1.0, 0.25, 0.2, 1.0] } else if low { [1.0, 0.8, 0.3, 1.0] } else { [0.95, 0.95, 0.95, 1.0] };

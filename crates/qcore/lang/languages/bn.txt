@@ -4246,3 +4246,6 @@ bn দুই হাতে দুটি পিস্তল: ফায়ারে
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 bn ফুল-অটো রাইফেল, যা আপনার নেইল দিয়ে রিলোড হয়। বিকল্প ফায়ার রেড ডট সাইট দিয়ে নিশানা করে, এতে গুলি আরও নিখুঁত হয় ও দৃশ্য কাছে আসে।
+
+@ None
+bn কোনোটি না

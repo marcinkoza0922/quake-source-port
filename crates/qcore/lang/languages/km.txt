@@ -4246,3 +4246,6 @@ km កាំភ្លើង​ខ្លី​មួយ​ក្នុង​ដ�
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 km កាំភ្លើង​ស្វ័យ​ប្រវត្តិ​ដែល​បញ្ចូល​គ្រាប់​ពី​ដែក​គោល​របស់​អ្នក។ បាញ់​ជំនួស​តម្រង់​តាម​ឧបករណ៍​តម្រង់​ចំណុច​ក្រហម ដើម្បី​បាញ់​បាន​ត្រង់​ជាង​និង​មើល​ឃើញ​ជិត​ជាង។
+
+@ None
+km គ្មាន

@@ -4246,3 +4246,6 @@ hi हर हाथ में एक पिस्तौल: फ़ायर ब�
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 hi फ़ुल-ऑटो राइफ़ल जो आपकी कीलों से रीलोड होती है। ऑल्ट फ़ायर रेड डॉट साइट से निशाना साधता है: ज़्यादा सटीक गोलियाँ और ज़्यादा पास का दृश्य।
+
+@ None
+hi कोई नहीं

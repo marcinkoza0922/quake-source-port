@@ -4246,3 +4246,6 @@ ta ஒவ்வொரு கையிலும் ஒரு கைத்து�
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 ta உங்கள் ஆணிகளால் ரீலோடு ஆகும் முழுத் தானியங்கித் துப்பாக்கி. மாற்றுச் சுடுதல் சிவப்புப் புள்ளி சைட்டில் குறிபார்த்து, துல்லியமான சுடுதலும் நெருங்கிய பார்வையும் தரும்.
+
+@ None
+ta ஏதுமில்லை

@@ -4246,3 +4246,6 @@ tr Her elde bir tabanca: Ateş soldakini, Alternatif Ateş sağdakini kullanır.
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 tr Çivilerinizle doldurulan tam otomatik tüfek. Alternatif Ateş, daha isabetli atışlar ve daha yakın görüş için kırmızı noktalı nişangahtan nişan alır.
+
+@ None
+tr Hiçbiri

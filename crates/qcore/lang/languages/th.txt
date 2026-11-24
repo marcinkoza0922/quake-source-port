@@ -4246,3 +4246,6 @@ th ปืนพก​ใน​มือ​แต่ละ​ข้าง: ยิ
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 th ปืน​ไรเฟิล​อัตโนมัติ​ที่​รีโหลด​จาก​ตะปู​ของ​คุณ ยิง​รอง​เล็ง​ผ่าน​ศูนย์​จุด​แดง​เพื่อ​ยิง​แม่น​ขึ้น​และ​มอง​ใกล้​ขึ้น
+
+@ None
+th ไม่มี

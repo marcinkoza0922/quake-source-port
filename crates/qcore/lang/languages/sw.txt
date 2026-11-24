@@ -4246,3 +4246,6 @@ sw Bastola katika kila mkono: Fyatua hutumia ya kushoto, Mlipuo Mbadala ya kulia
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 sw Bunduki ya kufyatua mfululizo inayojazwa kwa misumari yako. Mlipuo Mbadala hulenga kwa kilengeo cha nukta nyekundu kwa risasi sahihi zaidi na mwonekano wa karibu.
+
+@ None
+sw Hakuna

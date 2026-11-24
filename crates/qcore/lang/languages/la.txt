@@ -4246,3 +4246,6 @@ la Pistola in utraque manu: Ictus sinistram, Ictus alter dextram emittit. Glande
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 la Sclopetum automatum quod clavis tuis repletur. Ictus alter per collineatorium puncti rubri collineat, ut ictus densiores et visus propior sint.
+
+@ None
+la Nullum

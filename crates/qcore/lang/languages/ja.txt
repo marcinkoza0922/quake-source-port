@@ -4246,3 +4246,6 @@ ja 両手にピストルを1丁ずつ持ちます。射撃で左、サブ射撃�
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 ja 手持ちのネイルでリロードするフルオートライフル。サブ射撃でレッドドットサイトを覗くと、弾がまとまり視界が拡大します。
+
+@ None
+ja なし

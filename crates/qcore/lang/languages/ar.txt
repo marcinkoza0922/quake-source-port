@@ -4246,3 +4246,6 @@ ar مسدس في كل يد: الإطلاق للأيسر والإطلاق الب�
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 ar بندقية آلية بالكامل تُلقَّم من مساميرك. الإطلاق البديل يصوّب عبر منظار النقطة الحمراء لطلقات أدق ورؤية أقرب.
+
+@ None
+ar لا شيء

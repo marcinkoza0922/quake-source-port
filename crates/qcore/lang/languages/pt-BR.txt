@@ -4246,3 +4246,6 @@ pt-BR Uma pistola em cada mão: Disparo usa a esquerda, Disparo alternativo a di
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 pt-BR Um fuzil automático que recarrega com seus pregos. Disparo alternativo mira pela mira de ponto vermelho para tiros mais precisos e uma visão mais próxima.
+
+@ None
+pt-BR Nenhum

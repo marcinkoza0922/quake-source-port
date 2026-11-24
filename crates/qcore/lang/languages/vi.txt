@@ -4246,3 +4246,6 @@ vi Mỗi tay một khẩu súng lục: Bắn dùng khẩu bên trái, Bắn ph�
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 vi Súng trường tự động nạp bằng đinh của bạn. Bắn phụ ngắm qua kính ngắm chấm đỏ để bắn chụm hơn và nhìn gần hơn.
+
+@ None
+vi Không có

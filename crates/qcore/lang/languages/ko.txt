@@ -4246,3 +4246,6 @@ ko 양손에 권총을 한 자루씩 듭니다. 사격은 왼쪽, 보조 사격�
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 ko 가진 못으로 재장전하는 전자동 소총입니다. 보조 사격으로 레드 도트 조준경을 들여다보면 탄이 더 모이고 시야가 가까워집니다.
+
+@ None
+ko 없음

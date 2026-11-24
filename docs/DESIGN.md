@@ -526,14 +526,14 @@ Binding conflicts use device-specific glyphs; ADDONS.md covers navigation and ca
 playback and capture instructions are in [ADDONS.md](ADDONS.md).
 
 Gameplay → Viewmodels archives `r_drawviewmodel`: 0 Off, 1 Center (default),
-2 Right, 3 Left. `view::weapon::Alignment` translates every stock/mod/add-on
+2 Right, 3 Left (0 is None). `view::weapon::Alignment` translates every stock/mod/add-on
 weapon eight camera-right units for side placement, independently per split view
 (the two-handed cable view model ignores it).
 Gameplay → Camera archives `cl_camera` (0 first person, 1 centered third person, 2/3 right/left
 shoulder); `view::camera` traces the offset against the world hull, draws the own body and
 hides viewmodels (row disabled) in third person. The camera turns toward where the eye's aim ray
 lands (≥128u away, distance eased over ~0.12s, no bob) so the crosshair is true; the body is `follows_camera` (no object blur).
-Gameplay → Visible Weapons archives `cl_vwep` (default 0): player bodies (own body in third
+Gameplay → Visible Weapons archives `cl_vwep` (default 0; only with a third-person `cl_camera`, else dimmed and without effect; add-on guns are always shown, see below): player bodies (own body in third
 person or portals, split-screen partners, other players) hold the weapon in use instead of
 player.mdl's generic gun (`src/vwep*`, client-side only, so vanilla saves and demos are unaffected).
 `vwep::rig::Rig` fits, for every player frame, the rigid transform of the model's gun piece
@@ -550,12 +550,20 @@ without the gun (the axe is the model's own). Weapons: stock and rogue's map to 
 pickups (rogue's lava/multi weapons share the base ones), the shotgun and rogue's plasma gun to
 their view model minus the pieces behind the eye, hipnotic's laser cannon and proximity gun to
 theirs, unknown `v_X` to `g_X` when present; Mjolnir (hipnotic swaps in `playham.mdl`), the
-grapple and add-on toys keep the stock look, as do other player models (Arcane Dimensions').
+grapple and the other add-on toys keep the stock look, as do other player models (Arcane Dimensions').
 Who holds what: each slot's `weaponmodel` on a local server (`Server::weapon_models`); without
 one, the weapon stat for the own player and, for others, the last fire sound (`table::from_sound`)
 when it agrees with the animation (axe or gun frames), else the stock model. Death frames keep
 the last weapon (QC clears `weaponmodel`) and forget a guess. Rigs and baked models are cached
-per level (`assets::Level::vwep`), built on first sight. Tests: `vwep::tests` (rig fit, both
+per level (`assets::Level::vwep`), built on first sight. The akimbo pistols and the assault rifle (`vwep::toys`) are
+always in their holder's hands on a local server (`Server::held_toys`), whatever `cl_vwep` is:
+frames of QC's weapon that don't fit are replaced (`stand_in`: no axe frames for the rifle, the
+free-armed axe frames for the pistols), `vwep::arms` reposes both arms with a two-bone solve so
+the hands reach forwards (classic: vertex lists for the 149-vertex mesh; enhanced: its arm
+joints), death frames keep the model's arms with the pistols in the hands, the stock muzzle flash
+is dropped, and the guns are full models moved rigidly with the hands (`attached_key` tells them
+apart). Shooting shows the `nailatt` frames; `body_muzzles` starts flashes and tracers at the
+bodies' muzzles when no view model is on screen. Demos show the stock look. Tests: `vwep::tests` (rig fit, both
 formats, baking, weapon choice), `vwep::table` tests.
 The portal gun uses negated alias pitch and a camera-relative origin with no yaw
 cant (`view::weapon::portal_gun_pose`: 30 forward, 21 down, muzzle raised by

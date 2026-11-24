@@ -4246,3 +4246,6 @@ mk Пиштол во секоја рака: Пукање пука со леви�
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 mk Целосно автоматска пушка што се полни со твоите клинци. Алт. пукање нишани низ нишанот со црвена точка за попрецизни истрели и поблизок поглед.
+
+@ None
+mk Нема

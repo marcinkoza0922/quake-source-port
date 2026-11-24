@@ -156,7 +156,7 @@ FBX, original PNGs and extracted Blender files are not bundled. Generated game
 assets are embedded, so installed binaries need neither Blender nor Downloads.
 Each split-screen camera gets its own weapon, skin, and visibility mask;
 death, invisibility and intermission hide it like the normal weapon.
-Gameplay → Viewmodels controls all weapons: Center (default), Right, Left, Off
+Gameplay → Viewmodels controls all weapons: Center (default), Right, Left, None
 (`r_drawviewmodel` 1, 2, 3, 0 respectively, archived). Side placement translates
 eight units along each camera's right axis without changing aim or mirroring
 meshes (except the two-handed cable, which stays centred). The portal gun follows the camera basis with negated alias pitch,
@@ -616,13 +616,14 @@ starts with a full magazine; `.qsa` saves keep `rifle <client> <rounds>`.
   stops, less what the player pulled down. No kick in demos.
 - The sight: the models share one space (`tools/build_rifle.py`), where the
   tube's axis is exactly known (`rifle_model::LENS`, `APERTURE`, `TUBE`; a test
-  checks no triangle crosses it). `rifle_pose` blends from the hip to the tube
+  checks no triangle crosses it). `rifle_pose` holds the rifle in the
+  middle, right or left as Viewmodels says and blends from there to the tube
   centred on the view at 14 units (10.5 to 17 by FOV, so the sight keeps about
   the same size on screen and its rear never reaches the near plane). The dot
   (`rifle_dot`) is 2D, drawn after the scene where `viewangles` falls in the
   view, so it stays on the aim point whatever the rifle does, and only while
   that spot is seen through both ends of the tube (`Pose::through`). The
-  crosshair is hidden meanwhile (it stays with Viewmodels off).
+  crosshair is hidden meanwhile (it stays with Viewmodels at None).
   `addon_rifle_dot`: 0 red, 1 green, 2 yellow.
 - Presentation (`rifle_fx`): muzzle flash (halved when aimed; the server also
   sets `EF_MUZZLEFLASH`), smoke, tracers at 9000 u/s, tumbling brass from the

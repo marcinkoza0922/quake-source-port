@@ -4246,3 +4246,6 @@ sl Pištola v vsaki roki: Strel sproži levo, Alternativni strel desno. Streliva
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 sl Samodejna puška, ki se polni iz vaših žebljev. Alternativni strel meri skozi merilnik z rdečo piko za natančnejše strele in bližji pogled.
+
+@ None
+sl Brez

@@ -4246,3 +4246,6 @@ be Па пісталеце ў кожнай руцэ: агонь страляе �
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 be Аўтаматычная вінтоўка, якая зараджаецца вашымі цвікамі. Альт. агонь цэліцца праз каліматарны прыцэл з чырвонай кропкай: стрэлы кучнейшыя, а выгляд бліжэйшы.
+
+@ None
+be Няма

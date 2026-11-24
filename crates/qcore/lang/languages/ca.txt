@@ -4246,3 +4246,6 @@ ca Una pistola a cada mà: el tret dispara l'esquerra i el tret secundari la dre
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 ca Un fusell automàtic que es recarrega amb els teus claus. El tret secundari apunta amb la mira de punt vermell per a trets més precisos i una vista més propera.
+
+@ None
+ca Cap

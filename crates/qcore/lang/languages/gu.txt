@@ -4246,3 +4246,6 @@ gu દરેક હાથમાં એક પિસ્તોલ: ફાયર �
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 gu તમારા ખીલાથી રીલોડ થતી ફુલ-ઑટો રાઇફલ. વૈકલ્પિક ફાયર રેડ ડૉટ સાઇટથી નિશાન લે છે: વધુ સચોટ ગોળીઓ અને વધુ નજીકનું દૃશ્ય.
+
+@ None
+gu કંઈ નહીં

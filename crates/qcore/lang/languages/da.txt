@@ -4246,3 +4246,6 @@ da En pistol i hver hånd: Skyd affyrer den venstre, Alternativ skyd den højre.
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 da Et fuldautomatisk gevær, der genlades med dine søm. Alternativ skyd sigter gennem rødpunktssigtet og giver mere præcise skud og et tættere synsfelt.
+
+@ None
+da Ingen

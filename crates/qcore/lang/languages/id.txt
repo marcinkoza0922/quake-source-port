@@ -4246,3 +4246,6 @@ id Satu pistol di tiap tangan: Tembak memakai yang kiri, Tembakan Alt yang kanan
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 id Senapan otomatis penuh yang diisi ulang dari paku Anda. Tembakan Alt membidik lewat alat bidik titik merah untuk tembakan lebih rapat dan pandangan lebih dekat.
+
+@ None
+id Tidak ada

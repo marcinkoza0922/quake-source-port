@@ -4246,3 +4246,6 @@ uk По пістолету в кожній руці: «Вогонь» стріл
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 uk Автоматична гвинтівка, що заряджається вашими цвяхами. «Альт. вогонь» прицілює через коліматор із червоною точкою: влучніші постріли й ближчий огляд.
+
+@ None
+uk Немає

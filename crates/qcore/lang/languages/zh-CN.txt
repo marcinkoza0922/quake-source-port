@@ -4246,3 +4246,6 @@ zh-CN 双手各持一把手枪：开火使用左手枪，副开火使用右手�
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 zh-CN 使用你的钉子换弹的全自动步枪。副开火通过红点瞄具瞄准，射击更精准，视角更近。
+
+@ None
+zh-CN 无

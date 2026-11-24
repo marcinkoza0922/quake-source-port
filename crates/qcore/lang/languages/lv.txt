@@ -4246,3 +4246,6 @@ lv Pa pistolei katrā rokā: Šaut šauj ar kreiso, Alt. šāviens – ar labo. 
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 lv Pilnībā automātiska šautene, ko pārlādē ar tavām naglām. Alt. šāviens tēmē caur sarkanā punkta tēmekli: šāvieni ir precīzāki un skats tuvāks.
+
+@ None
+lv Nav

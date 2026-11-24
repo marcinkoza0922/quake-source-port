@@ -4246,3 +4246,6 @@ bg По един пистолет във всяка ръка: стрелбата
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 bg Автоматична пушка, която се зарежда с твоите гвоздеи. Алт. стрелбата прицелва през мерник с червена точка за по-точни изстрели и по-близък изглед.
+
+@ None
+bg Няма

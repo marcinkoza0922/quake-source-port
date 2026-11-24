@@ -4246,3 +4246,6 @@ fa یک تپانچه در هر دست: شلیک با تپانچه چپ و شلی
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 fa تفنگی تمام‌خودکار که با میخ‌های شما پر می‌شود. شلیک دوم با دوربین نقطه قرمز نشانه می‌گیرد تا تیرها دقیق‌تر و دید نزدیک‌تر شود.
+
+@ None
+fa هیچ

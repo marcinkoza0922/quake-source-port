@@ -4246,3 +4246,6 @@ nb En pistol i hver hånd: Ild skyter med den venstre, Alternativ ild med den h�
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 nb Et helautomatisk gevær som lades med spikrene dine. Alternativ ild sikter gjennom rødpunktsiktet for tettere skudd og nærmere syn.
+
+@ None
+nb Ingen

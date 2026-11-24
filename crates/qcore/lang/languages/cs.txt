@@ -4246,3 +4246,6 @@ cs Pistole v každé ruce: střelba vypálí z levé, alternativní střelba z p
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 cs Plně automatická puška, která se přebíjí vašimi hřebíky. Alternativní střelba míří přes kolimátor s červenou tečkou: střely jsou přesnější a pohled bližší.
+
+@ None
+cs Žádný

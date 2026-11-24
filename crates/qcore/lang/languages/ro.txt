@@ -4246,3 +4246,6 @@ ro Câte un pistol în fiecare mână: Foc trage cu cel stâng, Foc secundar cu 
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 ro O pușcă automată care se reîncarcă cu cuiele tale. Foc secundar ochește prin vizorul cu punct roșu, pentru trageri mai precise și o vedere mai apropiată.
+
+@ None
+ro Niciunul

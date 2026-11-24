@@ -4246,3 +4246,6 @@ hr Pištolj u svakoj ruci: paljba puca lijevim, alternativna paljba desnim. Stre
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 hr Automatska puška koja se puni vašim čavlima. Alternativna paljba cilja kroz ciljnik s crvenom točkom za preciznije hice i bliži pogled.
+
+@ None
+hr Ništa

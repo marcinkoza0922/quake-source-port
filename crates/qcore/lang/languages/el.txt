@@ -4246,3 +4246,6 @@ el Ένα πιστόλι σε κάθε χέρι: η βολή ρίχνει με �
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 el Ένα πλήρως αυτόματο τουφέκι που γεμίζει από τα καρφιά σου. Η εναλλακτική βολή σκοπεύει με το σκοπευτικό κόκκινης κουκκίδας για πιο ακριβείς βολές και κοντινότερη όψη.
+
+@ None
+el Κανένα

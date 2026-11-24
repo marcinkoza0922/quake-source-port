@@ -4246,3 +4246,6 @@ sq Një pistoletë në secilën dorë: Qit shtie me të majtën, Zjarr alternati
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 sq Pushkë plotësisht automatike që rimbushet nga gozhdët e tua. Zjarr alternativ shënjestron me pikën e kuqe për të shtëna më të sakta dhe pamje më të afërt.
+
+@ None
+sq Asnjë

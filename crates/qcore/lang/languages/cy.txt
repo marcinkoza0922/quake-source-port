@@ -4246,3 +4246,6 @@ cy Pistol ym mhob llaw: mae Tanio'n saethu'r un chwith a Thanio amgen yr un dde.
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 cy Reiffl cwbl awtomatig sy'n ail-lwytho o'ch hoelion. Mae Tanio amgen yn anelu drwy'r annel dot coch am ergydion tynnach a golwg agosach.
+
+@ None
+cy Dim

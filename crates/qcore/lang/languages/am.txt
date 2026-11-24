@@ -4246,3 +4246,6 @@ am በእያንዳንዱ እጅ አንድ ሽጉጥ፦ ተኩስ የግራውን
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 am ከሚስማሮችዎ የሚሞላ ሙሉ አውቶማቲክ ጠመንጃ። ተለዋጭ ተኩስ ለተሻለ ትክክለኛነትና ለቀረበ እይታ በቀይ ነጥብ ማነጣጠሪያው ያነጣጥራል።
+
+@ None
+am ምንም

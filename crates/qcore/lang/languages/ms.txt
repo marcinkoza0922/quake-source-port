@@ -4246,3 +4246,6 @@ ms Sepucuk pistol di setiap tangan: Tembak melepaskan yang kiri, Tembakan Alt ya
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 ms Raifal automatik penuh yang diisi semula dengan paku anda. Tembakan Alt membidik melalui pembidik titik merah untuk tembakan lebih jitu dan pandangan lebih dekat.
+
+@ None
+ms Tiada

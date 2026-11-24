@@ -4246,3 +4246,6 @@ eu Pistola bat esku bakoitzean: tiroak ezkerrekoa erabiltzen du, tiro alternatib
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 eu Zure iltzeekin birkargatzen den fusil guztiz automatikoa. Tiro alternatiboak puntu gorriko miratik apuntatzen du, tiro zehatzagoak eta ikuspegi hurbilagoa lortzeko.
+
+@ None
+eu Bat ere ez

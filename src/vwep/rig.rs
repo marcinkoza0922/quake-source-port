@@ -76,6 +76,20 @@ fn fit(a: &[Vec3], ca: Vec3, b: &[Vec3], q: Quat) -> (Quat, Vec3) {
     (q, cb - apply(&q.to_mat(), ca))
 }
 
+/// Best rigid transform from points `a` to `b`.
+pub fn rigid(a: &[Vec3], b: &[Vec3]) -> (Mat3, Vec3) {
+    // the solver can stall half a turn away from its start
+    let starts = [Quat::IDENTITY, Quat::axis_angle(Vec3::new(1.0, 0.0, 0.0), 2.1), Quat::axis_angle(Vec3::new(0.0, 1.0, 0.0), 2.1), Quat::axis_angle(Vec3::new(0.0, 0.0, 1.0), 2.1)];
+    let ca = centroid(a);
+    let tries = starts.map(|q| {
+        let (q, t) = fit(a, ca, b, q);
+        let r = q.to_mat();
+        (a.iter().zip(b).map(|(&p, &q)| (apply(&r, p) + t - q).length_sq()).sum::<f32>(), r, t)
+    });
+    let best = tries.into_iter().min_by(|x, y| x.0.total_cmp(&y.0)).expect("four tries");
+    (best.1, best.2)
+}
+
 /// Vertex sets of the triangles' connected components, largest first.
 pub fn components(num_verts: usize, tris: impl IntoIterator<Item = [usize; 3]>) -> Vec<Vec<usize>> {
     let mut parent: Vec<usize> = (0..num_verts).collect();
@@ -141,6 +155,16 @@ impl Rig {
 
     pub fn axe_frame(&self, frame: u32) -> bool {
         self.axe_frame.get(frame as usize).copied().unwrap_or(false)
+    }
+
+    /// The gun's transform from the reference pose in frame `f`.
+    pub fn gun(&self, f: usize) -> (Mat3, Vec3) {
+        self.frames.get(f).and_then(|f| f.poses.first()).map_or((Quat::IDENTITY.to_mat(), Vec3::ZERO), |p| (p.r, p.t))
+    }
+
+    /// The gun's middle in the reference pose.
+    pub fn grip(&self) -> Vec3 {
+        self.grip
     }
 
     pub fn death_frame(&self, frame: u32) -> bool {

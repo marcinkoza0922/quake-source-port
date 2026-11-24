@@ -4246,3 +4246,6 @@ sk Pištoľ v každej ruke: Streľba strieľa z ľavej, Alternatívna streľba z
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 sk Plne automatická puška, ktorá sa prebíja vašimi klincami. Alternatívna streľba mieri cez kolimátor s červenou bodkou, takže výstrely sú presnejšie a pohľad bližší.
+
+@ None
+sk Žiadne

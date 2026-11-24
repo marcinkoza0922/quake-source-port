@@ -115,6 +115,8 @@ impl Host {
                     .unwrap_or_default();
                 g.view.vwep.enabled = self.view.vwep.enabled;
                 g.view.vwep.server = self.view.vwep.server.clone();
+                g.view.vwep.toys.clone_from(&self.view.vwep.toys);
+                g.view.vwep.muzzles.clear();
                 g.view.entities(&mut g.cl, &cv, &mut self.level, &self.server.core.fs, &mut self.r, None, &mut gents);
                 // this guest's own body, for its portal views only
                 ents.extend(gents.iter().filter(|e| e.portal_only).map(|e| RenderEntity { views: bit, ..*e }));

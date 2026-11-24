@@ -4428,3 +4428,10 @@ de Pistolen tauschen
 it Scambia le pistole
 es Intercambiar pistolas
 ru Поменять пистолеты
+
+@ None
+fr Aucun
+de Keins
+it Nessuno
+es Ninguno
+ru Нет

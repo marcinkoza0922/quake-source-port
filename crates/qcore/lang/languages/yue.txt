@@ -4246,3 +4246,6 @@ yue 一手一支手槍：射擊用左手嗰支，副射擊用右手嗰支。彈�
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 yue 用你嘅鐵釘上彈嘅全自動步槍。副射擊會用紅點瞄準鏡瞄準，射得更準，視角亦更近。
+
+@ None
+yue 冇

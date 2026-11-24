@@ -55,6 +55,8 @@ struct Owner {
     /// When the view model was last placed, and its pose.
     placed: f64,
     pose: Option<Pose>,
+    /// The muzzle on the player's body and when it was set.
+    body: Option<(Vec3, f64)>,
     /// Rounds were left when the reload began.
     dry: bool,
 }
@@ -100,7 +102,8 @@ impl Presentation {
                 o.shots = o.shots.wrapping_add(1);
                 o.last = time;
                 let pose = o.pose.filter(|_| time - o.placed < 0.2);
-                let start = pose.map_or(Vec3::from(e.start), |p| p.at(MUZZLE));
+                let body = o.body.filter(|b| (time - b.1).abs() < 0.1).map(|b| b.0);
+                let start = pose.map(|p| p.at(MUZZLE)).or(body).unwrap_or(e.start.into());
                 let port = pose.map(|p| (p.at(PORT), p.axes[1] * -1.0, p.axes[2]));
                 if self.shots.len() >= MAX_SHOTS {
                     self.shots.remove(0);
@@ -165,6 +168,17 @@ impl Presentation {
             Some(p) if o.aim > 0.4 && (time - o.placed).abs() < 0.1 => p.through(eye, dir),
             _ => 0.0,
         }
+    }
+
+    /// Seconds since `owner`'s last shot and its number.
+    pub fn last_shot(&self, owner: usize, time: f64) -> (f32, u32) {
+        let o = &self.owners[owner.min(MAX_PLAYERS - 1)];
+        ((time - o.last) as f32, o.shots)
+    }
+
+    /// Where `owner`'s rifle ends on the player's body this frame.
+    pub fn body_muzzle(&mut self, owner: usize, at: Vec3, time: f64) {
+        self.owners[owner.min(MAX_PLAYERS - 1)].body = Some((at, time));
     }
 
     /// `owner`'s view model was placed this frame.

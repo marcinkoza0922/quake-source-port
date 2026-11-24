@@ -6,9 +6,12 @@ use qrender::View;
 
 use super::rifle_model::{APERTURE, LENS, TUBE};
 
-/// The sight's middle in camera space (forward, right, up) at the hip.
+/// The sight's middle in camera space (forward, right, up) at the hip, with
+/// the Viewmodels setting at Center and at Right (Left mirrors it).
+const CENTER: Vec3 = Vec3::new(20.0, 0.0, -8.8);
 const HIP: Vec3 = Vec3::new(18.5, 6.2, -6.2);
 /// Hip rotation: nose up, towards the middle of the screen, and roll.
+const CENTER_TILT: [f32; 3] = [6.0, 0.0, 0.0];
 const HIP_TILT: [f32; 3] = [2.0, 6.5, -6.0];
 /// Aimed: distance of the sight at a 90 degree view zoomed 1.3 times, and
 /// the range it is kept in at others so it looks much the same size.
@@ -92,6 +95,15 @@ pub const BOLT: f32 = 0.78;
 pub fn pose(view: &View, m: &Motion) -> Pose {
     let (f, r, u) = angle_vectors(view.angles.into());
     let (k, hip) = (m.aim, 1.0 - m.aim);
+    // -1 left, 0 centre, 1 right
+    let side = (m.side / 8.0).clamp(-1.0, 1.0);
+    let off = side.abs();
+    let rest = CENTER * (1.0 - off) + Vec3::new(HIP.x, HIP.y * side.signum(), HIP.z) * off;
+    let tilt0 = [
+        CENTER_TILT[0] + (HIP_TILT[0] - CENTER_TILT[0]) * off,
+        HIP_TILT[1] * side,
+        HIP_TILT[2] * side,
+    ];
     // idle sway and walking bob, almost still when aimed
     let calm = 1.0 - 0.9 * k;
     let walk = (m.speed / 320.0).clamp(0.0, 1.0) * calm;
@@ -104,12 +116,12 @@ pub fn pose(view: &View, m: &Motion) -> Pose {
     // recoil: back and a little up, recovering between shots
     let kick = (-m.shot * 17.0).exp();
     let back = kick * (1.5 * hip + 0.55 * k);
-    let mut pitch = HIP_TILT[0] * hip + kick * (1.6 * hip + 0.35 * k) + sway.z * 0.8;
-    let mut yaw = HIP_TILT[1] * hip + sway.y * 0.6;
-    let mut roll = HIP_TILT[2] * hip + kick * 0.6 * hip;
+    let mut pitch = tilt0[0] * hip + kick * (1.6 * hip + 0.35 * k) + sway.z * 0.8;
+    let mut yaw = tilt0[1] * hip + sway.y * 0.6;
+    let mut roll = tilt0[2] * hip + kick * 0.6 * hip;
     let half = (view.fov_x.clamp(1.0, 179.0).to_radians() * 0.5).tan() * 0.75;
     let dist = (AIM_DIST * AIM_TAN / half).clamp(AIM_RANGE.0, AIM_RANGE.1);
-    let mut at = (HIP + Vec3::new(0.0, m.side, 0.0)) * hip + Vec3::new(dist, 0.0, 0.0) * k + sway - Vec3::new(back, 0.0, 0.0);
+    let mut at = rest * hip + Vec3::new(dist, 0.0, 0.0) * k + sway - Vec3::new(back, 0.0, 0.0);
     // the sight swings up in a shallow arc
     at.z -= (k * hip) * 2.0;
     if let Some((x, chamber)) = m.reload {

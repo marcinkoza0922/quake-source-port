@@ -52,11 +52,13 @@ impl Host {
                 .and_then(|l| l.dodges.get(self.cl.viewentity.saturating_sub(1)).map(|d| d.pose(l.vm.time)))
                 .unwrap_or_default();
             self.view.third_person = rc.third_person;
-            self.view.vwep.enabled = rc.vwep_enabled;
+            self.view.vwep.enabled = rc.vwep_enabled && rc.third_person;
+            self.view.vwep.toys = if self.demo.is_none() { self.body_toys() } else { Vec::new() };
             self.view.vwep.server = if self.view.vwep.enabled { self.server.weapon_models() } else { None };
             let single_cam = self.single_camera(rc.teleport_windows);
             let pvs_eye = (single_cam && !rc.reflections_on).then_some(v.origin);
             self.view.entities(&mut self.cl, &cv, &mut self.level, fs, &mut self.r, pvs_eye, &mut ents);
+            self.body_muzzles();
             // player 1's own body belongs to player 1's portal views only
             if self.view.with_self && !rc.third_person {
                 for e in ents.iter_mut().filter(|e| e.portal_only) {

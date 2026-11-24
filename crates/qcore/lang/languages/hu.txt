@@ -4246,3 +4246,6 @@ hu Mindkét kézben egy pisztoly: a Tüzelés a ballal, a Másodlagos tűz a job
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 hu Teljesen automata puska, amely a szögeidből tölt újra. A Másodlagos tűz a vörös pontos irányzékon át céloz: pontosabb lövések és közelebbi nézet.
+
+@ None
+hu Nincs

@@ -4246,3 +4246,6 @@ ga Piostal i ngach lámh: scaoileann Lámhach an ceann clé, Lámhach Malartach 
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 ga Raidhfil lánuathoibríoch a athlódálann ó do chuid tairní. Aimsíonn Lámhach Malartach tríd an treorán ponc dearg le haghaidh urchar níos cruinne agus amharc níos gaire.
+
+@ None
+ga Dada

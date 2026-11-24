@@ -38,11 +38,13 @@ struct Gun {
     muzzle: Vec3,
     port: Vec3,
     seen: f64,
+    /// The muzzle on the player's body and when it was set.
+    body: (Vec3, f64),
 }
 
 impl Default for Gun {
     fn default() -> Self {
-        Self { fired: -100.0, reload: None, cues: 0, muzzle: Vec3::ZERO, port: Vec3::ZERO, seen: -100.0 }
+        Self { fired: -100.0, reload: None, cues: 0, muzzle: Vec3::ZERO, port: Vec3::ZERO, seen: -100.0, body: (Vec3::ZERO, -100.0) }
     }
 }
 
@@ -131,7 +133,27 @@ fn pose(view: View, part: usize, bob: f32, recoil: f32, tip: f32) -> Pose {
     Pose { origin, x, z }
 }
 
+impl Gun {
+    /// The muzzle on screen: the view model's, else the body's.
+    fn shown(&self, time: f64) -> Option<Vec3> {
+        let recent = |t: f64| (time - t).abs() < 0.1;
+        if recent(self.seen) { Some(self.muzzle) } else { recent(self.body.1).then_some(self.body.0) }
+    }
+}
+
 impl Presentation {
+    /// Seconds since `owner`'s last shot and which pistol fired it.
+    pub fn last_shot(&self, owner: usize, time: f64) -> (f32, u32) {
+        let Some(g) = self.guns.get(owner) else { return (100.0, 0) };
+        let part = usize::from(g[1].fired > g[0].fired);
+        ((time - g[part].fired) as f32, part as u32)
+    }
+
+    /// Where `owner`'s pistol `part` ends on the player's body this frame.
+    pub fn body_muzzle(&mut self, owner: usize, part: usize, at: Vec3, time: f64) {
+        self.gun(owner, part.min(1)).body = (at, time);
+    }
+
     /// Drops every effect in flight (new map).
     pub fn clear(&mut self) {
         self.guns.clear();
@@ -192,13 +214,13 @@ impl Presentation {
         let shown = (time - g.seen).abs() < 0.1;
         let dir = (end - start).normalize();
         let side = dir.cross(Vec3::new(0.0, 0.0, 1.0)).normalize() * if part == 0 { -1.0 } else { 1.0 };
-        let port = if shown { g.port } else { start - dir * 10.0 };
+        let port = if shown { g.port } else { g.shown(time).unwrap_or(start) - dir * 10.0 };
         let vel = side * (70.0 + 40.0 * rnd(1)) + Vec3::new(0.0, 0.0, 110.0 + 40.0 * rnd(2)) - dir * (20.0 * rnd(3));
         if self.shots.len() >= MAX_FX {
             self.shots.remove(0);
         }
         let seed = rnd(4) * std::f32::consts::TAU;
-        self.shots.push(Shot { time, owner, part, start: if shown { g.muzzle } else { start }, end, port, vel, seed });
+        self.shots.push(Shot { time, owner, part, start: g.shown(time).unwrap_or(start), end, port, vel, seed });
     }
 
     /// Muzzle light and the reload cues that are due.
@@ -208,8 +230,8 @@ impl Presentation {
             let age = (time - s.time) as f32;
             if age < FLASH * 1.5 {
                 // the flash stays at the muzzle as the view moves
-                if let Some(g) = self.guns.get(s.owner).map(|g| g[s.part]).filter(|g| (time - g.seen).abs() < 0.1) {
-                    s.start = g.muzzle;
+                if let Some(at) = self.guns.get(s.owner).and_then(|g| g[s.part].shown(time)) {
+                    s.start = at;
                 }
                 let k = 1.0 - age / (FLASH * 1.5);
                 dls.push(DLight { origin: s.start.to_array(), radius: 80.0 + 120.0 * k, minlight: 0.0, color: [1.0, 0.8, 0.45], key: 0 });

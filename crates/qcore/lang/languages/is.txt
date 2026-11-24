@@ -4246,3 +4246,6 @@ is Skammbyssa í hvorri hendi: Skot hleypir af þeirri vinstri, Aukaskot af þei
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 is Alsjálfvirkur riffill sem er endurhlaðinn með nöglunum þínum. Aukaskot miðar gegnum rauðpunktssigtið: þéttari skot og nærri sýn.
+
+@ None
+is Ekkert

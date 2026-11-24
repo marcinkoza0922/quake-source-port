@@ -4246,3 +4246,6 @@ ur ہر ہاتھ میں ایک پستول: فائر بایاں چلاتا ہے،
 
 @ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
 ur فل آٹو رائفل جو آپ کی کیلوں سے ری لوڈ ہوتی ہے۔ متبادل فائر ریڈ ڈاٹ سائٹ سے نشانہ لیتا ہے، جس سے گولیاں کم پھیلتی ہیں اور منظر قریب آتا ہے۔
+
+@ None
+ur کوئی نہیں
