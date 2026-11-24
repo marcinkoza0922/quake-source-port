@@ -321,3 +321,35 @@ fn gel_sprays_through_portal() {
     assert!(splats.iter().any(|s| (s.origin.y - far.origin.y).abs() < 300.0 && s.origin.y > 300.0),
         "expected gel splats on far side near {:?}, got {splats:?}", far.origin);
 }
+
+/// Thunderbolt: the beam carries its portal path, the damage follows it.
+#[test]
+fn lightning_bolt_goes_through_portal() {
+    let Some((mut sv, c)) = start(&["custom_enable 1"]) else { return };
+    run(&mut sv, c, 20, ClientMove::default());
+    sv.command("give 8");
+    sv.command("give c 50");
+    // in through the portal ahead, out of one facing across the corridor
+    sv.command("portal_set 0 480 330 48 0 -1 0 0 0 1");
+    sv.command("portal_set 1 530 180 48 -1 0 0 0 0 1");
+    sv.command("setpos 480 250 40 0 90 0");
+    let ahead = ClientMove { angles: [0.0, 90.0, 0.0], ..Default::default() };
+    run(&mut sv, c, 5, ahead);
+    // right by the exit: far off the straight line to the bolt's end
+    let m = grab_monster(&mut sv, [500.0, 180.0, 40.0], false);
+    let health = |sv: &Server| sv.level.as_ref().unwrap().vm.ent_f(m, sv.core.sv.fields.health);
+    let before = health(&sv);
+    run(&mut sv, c, 1, ClientMove { impulse: 8, ..ahead });
+    let mut sent = Vec::new();
+    for _ in 0..8 {
+        sv.set_move(c, ClientMove { buttons: 1, ..ahead });
+        sv.frame(1.0 / 72.0);
+        let _ = sv.take_reliable(c);
+        sent.extend(sv.take_datagrams(c).into_iter().flatten());
+    }
+    let sent = String::from_utf8_lossy(&sent).into_owned();
+    let line = sent.split("//qsp_beam ").nth(1).unwrap_or_else(|| panic!("no path sent"));
+    let line = line.split('\n').next().unwrap();
+    assert!(line.starts_with("1 ") && line.contains(" 480 330 48"), "{line}");
+    assert!(health(&sv) < before, "bolt damage through the portal: {before} -> {}", health(&sv));
+}

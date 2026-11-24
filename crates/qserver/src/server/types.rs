@@ -150,6 +150,8 @@ pub struct Core {
     pub(crate) queued_drops: Vec<usize>,
     /// Active linked portal pairs `(in, out)` for fast trace/projectile checks.
     pub(crate) linked_portals: Vec<(crate::addons::portal::Portal, crate::addons::portal::Portal)>,
+    /// This frame's traces through portals, for lightning bolts.
+    pub(crate) portal_bolts: crate::addons::portal_bolt::Bolts,
     /// Entities that already crossed a portal during `physics_toss` this frame.
     pub(crate) portal_crossed: Vec<qworld::Ent>,
 }

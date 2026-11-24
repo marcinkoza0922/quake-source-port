@@ -11,6 +11,7 @@ use qcore::anorms;
 pub mod delta;
 pub mod pred;
 mod addon_msgs;
+mod beams;
 mod effects;
 mod fte;
 mod cable;
@@ -24,7 +25,8 @@ mod relink;
 mod snapshot;
 mod state;
 
-pub use effects::{Beam, Dlight, PT_BLOB, PT_BLOB2, PT_EXPLODE, PT_EXPLODE2, PT_FIRE, PT_GRAV, PT_SLOWGRAV, PT_STATIC, QRand, TempEntity};
+pub use beams::Beam;
+pub use effects::{Dlight, PT_BLOB, PT_BLOB2, PT_EXPLODE, PT_EXPLODE2, PT_FIRE, PT_GRAV, PT_SLOWGRAV, PT_STATIC, QRand, TempEntity};
 pub use fte::{FteNames, FteRequest};
 pub use input::{InputState, MoveSpeeds, UserCmd};
 pub use parse::ParseError;

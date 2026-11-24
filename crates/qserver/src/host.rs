@@ -148,6 +148,18 @@ impl Ctx<'_> {
         Ok(())
     }
 
+    /// After a QC `Write*`: a beam that went through gun portals is followed
+    /// by its path.
+    fn bolt_write(&mut self, vm: &Vm, v: crate::addons::portal_bolt::Put) -> Result<()> {
+        if self.c.portal_bolts.is_empty() {
+            return Ok(());
+        }
+        if let Some(line) = self.c.portal_bolts.put(vm.time, vm.g_f(p(0)) as i32, v) {
+            self.with_dest(vm, |m, _| crate::addons::portal_bolt::send(m, &line))?;
+        }
+        Ok(())
+    }
+
     fn client_msg(&mut self, i: usize, svc: i32, s: &[u8]) {
         let m = &mut self.c.clients[i].message;
         m.char(svc);

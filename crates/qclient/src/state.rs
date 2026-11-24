@@ -4,7 +4,8 @@ use qpool::{ParticlePool, Pool};
 use qnet::SizeBuf;
 use qnet::protocol::*;
 
-use crate::effects::{Beam, Dlight, QRand, TempEntity};
+use crate::beams::Beam;
+use crate::effects::{Dlight, QRand, TempEntity};
 use crate::{PortalEffect, PortalView};
 
 pub const MAX_EDICTS: usize = 32000;

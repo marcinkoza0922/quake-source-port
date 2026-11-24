@@ -15,6 +15,7 @@ first; this skill is the practical map and the recipes.
 | Master switch, toy ids, cvars (`addon_portal_*`), `.qsa` save header (`addons/save.rs`) text | `crates/qserver/src/addons.rs` |
 | Placement (trace, 9-sample rectangle check, nudging), `Portals` state, stufftext outbox | `crates/qserver/src/addons/portal.rs` |
 | Crossing: pre-physics snapshot, `carry` (rotation), exit placement | `crates/qserver/src/addons/portal_move.rs` |
+| Lightning bolts through portals (`//qsp_beam`) | `crates/qserver/src/addons/portal_bolt.rs`, `crates/qclient/src/beams.rs` |
 | `portal_set` debug command | `crates/qserver/src/commands.rs` |
 | Toy slot / `+toy` / usercmd bits | `src/addons.rs`, `src/host/frame.rs`, `src/host/split_input.rs` |
 | Client state → `qrender::GunPortal` (colours, linked exit) | `src/addons/portal_draw.rs` |

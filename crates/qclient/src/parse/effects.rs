@@ -53,7 +53,7 @@ impl ClientState {
         let entity = m.short();
         let start = m.vec3_coord(pf);
         let end = m.vec3_coord(pf);
-        let b = Beam { entity, model, start, end, starttime: self.time - 0.001, endtime: self.time + 0.2 };
+        let b = Beam { entity, model, start, end, starttime: self.time - 0.001, endtime: self.time + 0.2, path: None };
         let t = self.time;
         let slice = self.beams.as_mut_slice();
         if let Some(x) = slice.iter_mut().find(|x| x.entity == entity) {

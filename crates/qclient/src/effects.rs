@@ -4,7 +4,7 @@
 use qpool::ParticleSpawn;
 
 use crate::anorms::{AVERTEXNORMALS, NUMVERTEXNORMALS};
-use crate::state::{ClientState, MAX_PARTICLES, MAX_TEMP_ENTITIES};
+use crate::state::{ClientState, MAX_PARTICLES};
 
 pub const PT_STATIC: u8 = 0;
 pub const PT_GRAV: u8 = 1;
@@ -40,17 +40,6 @@ impl QRand {
     }
 }
 
-/// beam_t.
-#[derive(Debug, Clone, Copy, PartialEq)]
-pub struct Beam {
-    pub entity: i32,
-    pub model: &'static str,
-    pub start: [f32; 3],
-    pub end: [f32; 3],
-    pub starttime: f64,
-    pub endtime: f64,
-}
-
 /// dlight_t.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Dlight {
@@ -77,7 +66,7 @@ pub struct TempEntity {
     pub angles: [f32; 3],
 }
 
-fn normalize(v: [f32; 3]) -> ([f32; 3], f32) {
+pub(crate) fn normalize(v: [f32; 3]) -> ([f32; 3], f32) {
     let l = (v[0] * v[0] + v[1] * v[1] + v[2] * v[2]).sqrt();
     if l == 0.0 { (v, 0.0) } else { ([v[0] / l, v[1] / l, v[2] / l], l) }
 }
@@ -399,53 +388,6 @@ impl ClientState {
                 i += 1;
             }
         }
-    }
-
-    /// CL_UpdateTEnts: beam segments into [`ClientState::temp_entities`].
-    pub fn update_tents(&mut self) {
-        self.temp_entities.clear();
-        self.rng.srand((self.time * 1000.0) as i32 as u32);
-        let t = self.time;
-        let view = self.viewentity as i32;
-        let view_origin = self.entities.get(self.viewentity).map(|e| e.origin);
-        let mut out = std::mem::take(&mut self.temp_entities);
-        let beams: Vec<_> = self.beams.as_mut_slice().iter_mut().filter(|b| b.starttime <= t && b.endtime >= t).map(|b| {
-            if b.entity == view && let Some(o) = view_origin {
-                b.start = o;
-            }
-            *b
-        }).collect();
-        'outer: for b in beams {
-            let dist = [b.end[0] - b.start[0], b.end[1] - b.start[1], b.end[2] - b.start[2]];
-            let (yaw, pitch) = if dist[0] == 0.0 && dist[1] == 0.0 {
-                (0.0, if dist[2] > 0.0 { 90.0 } else { 270.0 })
-            } else {
-                let mut yaw = (dist[1].atan2(dist[0]).to_degrees()) as i32 as f32;
-                if yaw < 0.0 {
-                    yaw += 360.0;
-                }
-                let fwd = (dist[0] * dist[0] + dist[1] * dist[1]).sqrt();
-                let mut pitch = (dist[2].atan2(fwd).to_degrees()) as i32 as f32;
-                if pitch < 0.0 {
-                    pitch += 360.0;
-                }
-                (yaw, pitch)
-            };
-            let (dir, mut d) = normalize(dist);
-            let mut org = b.start;
-            while d > 0.0 {
-                if out.len() >= MAX_TEMP_ENTITIES {
-                    break 'outer;
-                }
-                let roll = (self.rng.rand() % 360) as f32;
-                out.push(TempEntity { model: b.model, origin: org, angles: [pitch, yaw, roll] });
-                for j in 0..3 {
-                    org[j] += dir[j] * 30.0;
-                }
-                d -= 30.0;
-            }
-        }
-        self.temp_entities = out;
     }
 }
 
