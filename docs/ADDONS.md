@@ -420,15 +420,18 @@ over each other. `MAX_SPLATS` 1024, oldest out. No ammo.
   out with the canisters swapped). Drawn level, 18.5 u ahead and 11.5 u
   below the eye, so the view looks down past the canisters along the barrel.
   Saturated blue/orange texels (the canisters) become a true-colour glow
-  layer (`toy_model::gel_glow`, up to ×2 with all channels scaled together
-  so orange keeps its hue), since the palette has no bright blue.
+  layer (`toy_model::gel_glow`, drawn unlit in exactly the painted colour),
+  since the palette has no bright blue.
   Re-unwrapped by `tools/relayout_toy_uv.py` (Meshy's own layout varied
-  a lot in texel density), then `tools/clean_toy_texture.py --from
-  --keep-glow` (command in `assets/gel/import.json`) keeps the canisters and
-  turns the rest into worn grey steel, removing the glowing blue/orange flecks
-  Meshy left on the barrel; cleaned texels are kept out of the glow test, and
-  its rust uses the muted ramp 10 (the gel's bright lighting makes copper
-  rust look orange).
+  a lot in texel density). Skin (2026-11-24): painted from scratch by
+  `tools/paint_gel_texture.py` (command in `assets/gel/import.json`), which
+  ignores Meshy's colours (pale blotches once lit, black cracks and stray
+  colour on the canisters): steel barrel and drum, warm iron receiver, bronze
+  canister caps and fittings, rubber hoses, walnut stock and grip, with panel
+  lines, rivets, cap bolts, vents, gel currents, and a gel sight glass in each
+  rear hub that faces the player. Metal is kept low in the ramps because view
+  models are lit brightly, and the gel colours allow for contrast and bloom.
+  Metal texels never pass the glow test and gel texels all do (asserted).
 - Tests: `crates/qserver/tests/gel.rs` (e1m1: spray, save, wash, bounce,
   no fall damage on blue, orange speed); `gel_coat` unit tests (seams
   between splats are filled, walls and floors stay separate).
