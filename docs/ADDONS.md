@@ -684,7 +684,7 @@ locked like the toy cvars). It is not saved: goggles start off after a load.
 
 ### Browser and gameplay preview tooling
 
-`src/menu/addon_browser.rs` owns selection, description scrolling and contextual
+`src/menu/addon_browser.rs` (add-on table in `addon_browser/list.rs`) owns selection, description scrolling and contextual
 rows. The browser must list a separate, weapon-labelled slot setting for every
 weapon supplied by the selected add-on, above the input remapping header. An
 add-on may supply multiple weapons even though each current weapon add-on

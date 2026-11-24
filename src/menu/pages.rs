@@ -176,26 +176,6 @@ pub(super) const CABLE: &[Item] = &[
     toggle("Plug Into Metal", "addon_cable_metal"),
     slider("Bolt Damage", "addon_cable_damage", 5.0, 100.0, 5.0),
 ];
-/// Reached from the Add-ons pages: akimbo pistols.
-pub(super) const AKIMBO: &[Item] = &[
-    slider("Damage", "addon_akimbo_damage", 5.0, 100.0, 1.0),
-    slider("Spread", "addon_akimbo_spread", 0.0, 10.0, 0.5),
-    slider("Magazine Size", "addon_akimbo_mag", 2.0, 40.0, 1.0),
-    slider("Reload Time", "addon_akimbo_reload", 0.4, 4.0, 0.1),
-    toggle("Reload When Empty", "addon_akimbo_autoreload"),
-    toggle("Swap Pistols", "addon_akimbo_swap"),
-];
-/// Reached from the Add-ons pages: assault rifle.
-pub(super) const RIFLE: &[Item] = &[
-    slider("Damage", "addon_rifle_damage", 5.0, 100.0, 1.0),
-    slider("Magazine Size", "addon_rifle_mag", 10.0, 100.0, 5.0),
-    slider("Reload Time", "addon_rifle_reload", 0.5, 5.0, 0.1),
-    toggle("Reload When Empty", "addon_rifle_autoreload"),
-    Item::Choice { label: "Aim Button", cvar: "addon_rifle_aim", choices: &[("Hold", 0.0), ("Toggle", 1.0)] },
-    slider("Sight Zoom", "addon_rifle_zoom", 1.0, 2.5, 0.1),
-    Item::Choice { label: "Dot Colour", cvar: "addon_rifle_dot", choices: &[("Red", 0.0), ("Green", 1.0), ("Yellow", 2.0)] },
-    slider("Recoil", "addon_rifle_recoil", 0.0, 2.0, 0.1),
-];
 pub(super) const PORTAL_DEPTH: &[(&str, f32)] =
     &[("Off", 0.0), ("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0), ("6", 6.0)];
 pub(super) const PORTAL_MAX: &[(&str, f32)] = &[("1", 1.0), ("2", 2.0), ("3", 3.0), ("4", 4.0)];
