@@ -19,7 +19,7 @@ const TRACER_LEN: f32 = 110.0;
 const BRASS: f32 = 0.7;
 const SMOKE: f32 = 0.45;
 /// Sound channels on the owner (QC uses 0..=4): shots alternate on two.
-const SHOT_CHANNELS: [i32; 2] = [6, 7];
+const SHOT_CHANNELS: [i32; cue::SHOTS] = [6, 7, 8];
 const WORK_CHANNEL: i32 = 5;
 const MAX_SHOTS: usize = 64;
 const MAX_PLAYERS: usize = 16;
@@ -84,8 +84,10 @@ impl Presentation {
             self.rate = snd.rate();
             self.cues = (0..cue::CUES).map(|k| Arc::new(cue::render(k, snd.rate()))).collect();
         }
-        let channel = if k == cue::SHOT { SHOT_CHANNELS[self.owners[owner].shots as usize % 2] } else { WORK_CHANNEL };
-        let volume = if k == cue::SHOT { 0.9 } else { 0.7 };
+        // shots take turns on channels and takes: none cuts the last one
+        // short, and full auto doesn't sound looped
+        let take = self.owners[owner].shots as usize % cue::SHOTS;
+        let (k, channel, volume) = if k == cue::SHOT { (cue::SHOT + take, SHOT_CHANNELS[take], 0.75) } else { (k, WORK_CHANNEL, 0.8) };
         snd.event(SoundEvent::Start { entity: owner as i32 + 1, channel, sfx: self.cues[k].clone(), origin, volume, attenuation: 0.8 });
     }
 

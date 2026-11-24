@@ -65,8 +65,9 @@ fn moving_parts(m: &Mdl) -> (Vec<bool>, Vec<bool>) {
     let mut pick = |f: &dyn Fn(&Part) -> bool| -> Vec<bool> {
         (0..verts.len()).map(|i| parts.get(&find(&mut root, i)).is_some_and(f)).collect()
     };
-    // everything of the top but the frame, the barrel and the muzzle brake
-    let slide = pick(&|p| p.lo.z > 2.3 && p.hi.z > 5.0 && p.hi.x < 8.3 && (p.hi.x - p.lo.x < 8.0 || p.tris > 500));
+    // everything of the top but the frame and the barrel in the port; the
+    // muzzle brake is as wide as the slide, so it travels with it
+    let slide = pick(&|p| p.lo.z > 2.3 && p.hi.z > 5.0 && (p.hi.x - p.lo.x < 8.0 || p.tris > 500));
     let base = pick(&|p| p.hi.z < -5.0 && p.hi.y - p.lo.y > 2.5);
     (slide, base)
 }
@@ -222,8 +223,8 @@ mod tests {
             assert!((d.x - TRAVEL).abs() < 0.1 && d.y == 0.0 && d.z == 0.0, "{d:?}");
             assert!(pos(0, i).z > 2.0);
         }
-        // the muzzle brake and the barrel stay
-        assert!(slide.iter().all(|&i| pos(0, i).x < 8.3));
+        // the muzzle brake goes with it, all of it
+        assert!((0..m.num_verts).filter(|&i| pos(0, i).x > 8.3).all(|i| slide.contains(&i)));
         let base = moved(MAG_OUT as usize);
         assert!(!base.is_empty() && base.iter().all(|&i| pos(0, i).z < -5.0));
         assert_eq!(moved(3).len(), slide.len() + base.len());

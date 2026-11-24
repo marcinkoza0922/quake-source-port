@@ -123,11 +123,11 @@ fn pose(view: View, part: usize, bob: f32, recoil: f32, tip: f32) -> Pose {
     // the muzzle points at the crosshair's far end, tops lean inwards; a reload shows the grip
     let x = (f - out * 0.10 + u * 0.06).normalize();
     let y = (u - x * u.dot(x)).normalize();
-    let (x, z) = turn(x, y, recoil * 5.0 + tip * 30.0);
+    let (x, z) = turn(x, y, recoil * 9.0 + tip * 30.0);
     let lean = out - x * out.dot(x) - z * out.dot(z);
     let (z, _) = turn(z, lean.normalize(), -8.0 + tip * 52.0);
-    let origin = Vec3::from(view.origin) + f * (25.0 - recoil * 1.2 + tip * 7.0) + out * (9.5 + tip * 3.0)
-        - u * (11.5 + bob + recoil * 0.2 - tip * 7.5);
+    let origin = Vec3::from(view.origin) + f * (25.0 - recoil * 0.8 + tip * 7.0) + out * (9.5 + tip * 3.0)
+        - u * (11.5 + bob - recoil * 0.7 - tip * 7.5);
     Pose { origin, x, z }
 }
 

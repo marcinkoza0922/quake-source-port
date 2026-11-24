@@ -582,8 +582,9 @@ degrees, denser in the middle; shots set `show_hostile` and a small
   magazine, pushes a new one in and works the slide, timed by the event's
   `secs`. Flash and light follow the view model's muzzle; a tracer, smoke and
   a brass casing per shot (other players': from the server's muzzle point).
-- Sound: `qsound::akimbo`, synthesised (two shots, dry, magazine out and in,
-  slide), on the owner's channels 6 and 7.
+- Sound: `qsound::akimbo` (two shots, dry, magazine out and in, slide), on
+  the owner's channels 6 and 7; recorded, see "Gun sounds" below. The slide
+  and the muzzle brake move together.
 - Menu: `Page::Akimbo` (`menu_options akimbo`). Default slot 2, label "AK".
 - Tests: `crates/qserver/tests/akimbo.rs` (e1m1), `akimbo`, `akimbo_model`
   and `akimbo_fx` unit tests.
@@ -627,7 +628,9 @@ starts with a full magazine; `.qsa` saves keep `rifle <client> <rounds>`.
   sets `EF_MUZZLEFLASH`), smoke, tracers at 9000 u/s, tumbling brass from the
   ejection port; the magazine is its own model that drops out and comes back
   during a reload (`rifle_pose::magazine`), with cues at `MAG_OUT`, `MAG_IN`
-  and `BOLT` (only after running dry). Sounds: `qsound::rifle`, synthesised.
+  and `BOLT` (only after running dry). Sounds:
+  `qsound::rifle`, recorded ("Gun sounds" below; three shot takes in turn on
+  channels 6–8) except the sight's synthesised rustle.
 - Model: `assets/rifle/`. Meshy: nano-banana-pro concept
   `01a20ef1-534f-724b-848f-aae0c2ae9c26`, meshy-t2.5 (3,946 tris) + meshy-n1
   task `01a20ef1-cd19-75c4-b93f-4fe57e001aba`, asked for without any optic. The
@@ -642,6 +645,14 @@ starts with a full magazine; `.qsa` saves keep `rifle <client> <rounds>`.
 - Tests: `crates/qserver/tests/rifle.rs` (e1m1: rate, reload, nails, dry
   click, cancel, save, 20 fps, aiming speed), `rifle` unit tests in qserver,
   `rifle_ads`, `rifle_pose`, `rifle_dot`, `rifle_model`, `qsound::rifle`.
+### Gun sounds (`assets/gun-sounds/`, `tools/gun_sounds.py`)
+The pistols' and the rifle's sounds are CC0 recordings (sources and licences
+in `assets/gun-sounds/README.md`; raw files in `~/Assets/Sounds/guns/`). The
+tool levels a shot's spike and body, gives it a smooth decay (the echo must
+not read as a second shot), adds a low thump, dulls the top and soft-clips,
+aiming at stock weapons as measured in id1 (full-scale peak, RMS 0.5–0.65
+over the first 0.1 s); handling noises are cut, compressed and darkened.
+Output is 22050 Hz 16 bit mono, loaded like any WAV (`load_sfx`).
 ### Equipment wheel and goggles (`src/addons/goggles.rs`, `equip_wheel.rs`, `src/host/goggles.rs`)
 Equipment is switched on and off rather than held, so it does not use the
 toy slot. `Equip` lists it in wheel order; items of one group exclude each
