@@ -4337,3 +4337,94 @@ de Welt
 it Mondo
 es Mundo
 ru Мир
+
+@ Akimbo Pistols
+fr Pistolets akimbo
+de Akimbo-Pistolen
+it Pistole akimbo
+es Pistolas akimbo
+ru Парные пистолеты
+
+@ Assault Rifle
+fr Fusil d’assaut
+de Sturmgewehr
+it Fucile d’assalto
+es Fusil de asalto
+ru Штурмовая винтовка
+
+@ Aim Button
+fr Bouton de visée
+de Zieltaste
+it Tasto di mira
+es Botón de apuntar
+ru Кнопка прицеливания
+
+@ Dot Colour
+fr Couleur du point
+de Punktfarbe
+it Colore del punto
+es Color del punto
+ru Цвет точки
+
+@ Magazine Size
+fr Taille du chargeur
+de Magazingröße
+it Capienza caricatore
+es Tamaño del cargador
+ru Размер магазина
+
+@ Recoil
+fr Recul
+de Rückstoß
+it Rinculo
+es Retroceso
+ru Отдача
+
+@ Reload
+fr Recharger
+de Nachladen
+it Ricarica
+es Recargar
+ru Перезарядка
+
+@ Reload (Add-ons)
+fr Recharger (extensions)
+de Nachladen (Add-ons)
+it Ricarica (add-on)
+es Recargar (complementos)
+ru Перезарядка (дополнения)
+
+@ Reload Time
+fr Durée de rechargement
+de Nachladezeit
+it Tempo di ricarica
+es Tiempo de recarga
+ru Время перезарядки
+
+@ Reload When Empty
+fr Recharger à vide
+de Nachladen wenn leer
+it Ricarica a vuoto
+es Recargar al vaciarse
+ru Перезарядка при пустом
+
+@ Sight Zoom
+fr Zoom du viseur
+de Visierzoom
+it Zoom del mirino
+es Zum de la mira
+ru Увеличение прицела
+
+@ Spread
+fr Dispersion
+de Streuung
+it Dispersione
+es Dispersión
+ru Разброс
+
+@ Swap Pistols
+fr Inverser les pistolets
+de Pistolen tauschen
+it Scambia le pistole
+es Intercambiar pistolas
+ru Поменять пистолеты

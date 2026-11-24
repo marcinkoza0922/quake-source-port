@@ -170,7 +170,7 @@ const ADDON: &[Addon] = &[
         page: Some(Page::Akimbo),
         alt: true,
         reload: true,
-        description: qcore::t!("A pistol in each hand. Fire shoots the left pistol, Alt Fire the right one, each with its own magazine. Ammunition is endless, but the pistols must be reloaded: press Reload, or fire an empty one. Assign a weapon slot below; repeated presses cycle the weapons in that slot."),
+        description: qcore::t!("A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded."),
     },
     Addon {
         name: qcore::t!("Assault Rifle"),
@@ -180,7 +180,7 @@ const ADDON: &[Addon] = &[
         page: Some(Page::Rifle),
         alt: true,
         reload: true,
-        description: qcore::t!("A full-auto assault rifle with a red dot sight. Hold Fire to shoot; hold Alt Fire to aim down the sight for a tighter spread and a closer view. Reload fills the magazine from your nails. Assign a weapon slot below; repeated presses cycle the weapons in that slot."),
+        description: qcore::t!("A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view."),
     },
     Addon {
         name: qcore::t!("Goggles"),
