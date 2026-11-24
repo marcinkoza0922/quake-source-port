@@ -329,11 +329,24 @@ Full `qsmoke` on merged master (5bbd6c0): 1555 maps, 0 errors.
   entities) warps the view and muffles sound, as in ironwail.
 - `music_loop`, `music_jump`, `viewmodel`, `viewframe`, `viewnext`, `viewprev`.
 - **qbot over every mod that has flagged an issue**: `-game flagged`,
-  `tools/qbot/flagged.txt` (66 game dirs, 1101 maps, about 7 minutes), a
-  baseline each. A second run matched the first exactly. Two maps keep QC
-  errors that both references raise too (`assignment to world entity`):
-  alkjam_plaw and jam5_mfx. 17 maps hit `-maxwall 90` and aren't compared. A
-  `-game all` run (1555 maps) found those two and hwjam3_shades.
+  `tools/qbot/flagged.txt` (66 game dirs, 1101 maps, about 8 minutes), a
+  baseline each. Two maps keep QC errors that both references raise too
+  (`assignment to world entity`): alkjam_plaw and jam5_mfx. 2026-11-24: the bot
+  now walks for one frame where the progs ignore noclip players (Copper and
+  everything built on it, qbj, smej2, rmj1, ttj, dwellv2p2; `bot/walk.rs`).
+  Before, items were refused and triggers counted on overlap alone, so those
+  maps were hardly tested: over the 1101 maps kills rose from 87350 to
+  108293 (of about 115000), secrets from 3536 to 4766, pickups from 53196 to
+  78511, exits from 813 to 1055; 23 maps lost a kill, event or exit, none
+  by more than 16 kills. Nine maps hit `-maxwall 90` (16 jobs) and aren't
+  compared at that limit: dwellv2p2 d2m8, mjolnir mj4m1-4, qbj3_colossus,
+  qbj3_hcm, qbjr_hcm, qbjr_hcm2. All but qbj3_hcm finish within 720 s and
+  have baselines; qbj3_hcm is at 1704 of 2069 kills then. Also fixed: the
+  bot walking into a Copper pit and restarting the level for ever
+  (qbj3_fhk), an exit switched on by a script that the bot disabled again,
+  and an unbounded wait for a door that never stops (mj4m1). A
+  `-game all` run (1555 maps, before this) found those two errors and
+  hwjam3_shades.
 - **ironwail against our server.** A real ironwail client played qbj3 on our
   GPU-less dedicated server (1004 datagrams) and was sent `//st 33 17`.
 - **Demos in ironwail.** 11, one per game up to 3600 frames: played to the end
