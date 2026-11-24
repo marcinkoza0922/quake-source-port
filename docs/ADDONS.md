@@ -287,22 +287,19 @@ A player leaving detonates theirs; the toy switched off removes all.
 - Look (`src/addons/sticky_model.rs`, `sticky_draw.rs`): the bomb is a
   40-triangle studded ball built in code (16×16 skin, dark red; skin 1
   lights its band in fullbright red) that blinks ~twice a second with a
-  48-unit red dlight. The launcher is a Meshy import (concept sheet cleaned of
-  text/emblem by nano-banana-2 `01a1d6cc-a3a8-7160-ad84-b28d1f25b92c`,
-  meshy-t2 1800-tri + meshy-n1 task `01a1d6cd-0a07-778f-a874-78596809cbac`,
-  21 credits; GLB re-exported as FBX in Blender) converted by
-  `blender -b --factory-startup --python tools/import_toy_model.py --
-  DIR_OR_ZIP --out assets/stickybomb --back 12 --gain 0.6` (no mask), then
-  `python3 tools/retint_toy_texture.py assets/stickybomb/texture.rgb.zlib`
-  (dark warm iron with rust specks, grained wood, no Meshy blue fill), then
-  re-unwrapped by `tools/relayout_toy_uv.py` (the import used 7% of the atlas)
-  and cleaned by `tools/clean_toy_texture.py --from` (commands in
-  `assets/stickybomb/import.json`): dark steel sides, rust-brown body,
-  chipped edges, rust and scratches, skin
-  quantized to the active palette's non-fullbright colours. The imported
-  mesh's muzzle is at −X, so `sticky_draw::weapon` turns it 180° (taking the
-  view pitch un-inverted and the opposite roll), scales it ×1.05, holds it
-  centred and low (`PULL`/`DROP`) and tips the muzzle up.
+  48-unit red dlight. The launcher (2026-11-24) has no source asset;
+  `python3 tools/build_stickybomb.py` (numpy/scipy, id1 palette) computes
+  `assets/stickybomb/`: 3887 triangles, muzzle at +X, barrel axis at z = 0,
+  512² atlas at 7.3 texels per unit. An original design made for the view
+  from behind: an open carousel with six studded bombs between bronze star
+  plates, a short barrel with hazard paint and a toothed crown, a skeleton
+  frame, and on the left a detonator box whose sloped panel (gauge, lamp,
+  toggles) faces the player, with an aerial and a cable. Each texel is
+  painted from its model-space position (ray-cast occlusion on a voxel grid,
+  worn edges, rivets, panel lines) in exact non-fullbright palette colours;
+  `toy_model::parse` quantises them to the mod's palette at load.
+  `sticky_draw::weapon` poses it centred like the portal gun, pushed out and
+  tipped up (`PUSH`/`DROP`/`TILT`) so bombs and panel show at any pitch.
 ### Boomerang (`addons/boomerang.rs`, `src/addons/boomerang_fx.rs`)
 Zelda-style homing boomerang (`addon_boomerang`, default 1). Holding fire
 marks monsters: each server frame the monster nearest along the aim (centre

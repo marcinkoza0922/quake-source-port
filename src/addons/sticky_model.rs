@@ -1,5 +1,5 @@
-//! Stickybomb models: the launcher (Meshy import, `assets/stickybomb`) and
-//! the bomb itself, built here as a tiny Quake-style alias model (a
+//! Stickybomb models: the launcher (`assets/stickybomb`, built offline by
+//! `tools/build_stickybomb.py`) and the bomb itself, built here as a tiny Quake-style alias model (a
 //! 40-triangle studded ball with a light band; skin 1 lights the band).
 use qcore::anorms::AVERTEXNORMALS;
 use qcore::math::Vec3;
@@ -13,22 +13,14 @@ fn nearest(palette: &[u8], rgb: [u8; 3], glow: bool) -> u8 {
         .unwrap_or(0) as u8
 }
 
-/// The launcher view model with its texture quantized to `palette`.
+/// The launcher view model, muzzle at +X, its skin quantised to `palette`.
 pub fn launcher(palette: &[u8]) -> Mdl {
-    let bytes = miniz_oxide::inflate::decompress_to_vec_zlib(include_bytes!("../../assets/stickybomb/model.mdl.zlib"))
-        .expect("bundled stickybomb launcher");
-    let mut m = Mdl::parse(&bytes).expect("bundled stickybomb MDL");
-    let rgb = miniz_oxide::inflate::decompress_to_vec_zlib(include_bytes!("../../assets/stickybomb/texture.rgb.zlib"))
-        .expect("bundled stickybomb texture");
-    let mut cache = std::collections::HashMap::new();
-    let px = rgb.as_chunks::<3>().0.iter().map(|p| *cache.entry(*p).or_insert_with(|| nearest(palette, *p, false))).collect();
-    m.skins = vec![Skin { intervals: vec![], images: vec![px] }];
-    super::portal_skin::rescale(&mut m, [LAUNCHER_SCALE; 3]);
-    m
+    super::toy_model::parse(
+        include_bytes!("../../assets/stickybomb/model.mdl.zlib"),
+        include_bytes!("../../assets/stickybomb/texture.rgb.zlib"),
+        palette,
+    )
 }
-
-/// The imported launcher read small beside the other toys.
-const LAUNCHER_SCALE: f32 = 1.05;
 
 const SKIN: usize = 16;
 const SEG: usize = 8;
@@ -132,5 +124,10 @@ mod tests {
         assert!(m.triangles.len() > 300 && m.triangles.len() <= 4000);
         assert_eq!(m.skins[0].images[0].len(), (m.skin_width * m.skin_height) as usize);
         assert!(m.skins[0].images[0].iter().all(|&p| p < 224));
+        // muzzle at +X, barrel axis at z = 0, the bomb carousel below it
+        let pose = &m.frames[0].poses[0];
+        let (lo, hi) = (m.decode(pose.bboxmin), m.decode(pose.bboxmax));
+        assert!((18.0..22.0).contains(&hi[0]) && (-24.0..-20.0).contains(&lo[0]));
+        assert!(lo[2] < -10.0 && hi[1] < 8.0 && lo[1] > -8.0);
     }
 }

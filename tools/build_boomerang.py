@@ -334,7 +334,7 @@ def paint(p, n, part, s, v, seed):
     return mat, L
 
 
-def write_mdl(path, pos, nrm, st, tris):
+def write_mdl(path, pos, nrm, st, tris, size=SIZE, name=b'boomerang'):
     text = (ROOT / 'crates/qcore/src/anorms.rs').read_text()
     table = np.array([[float(f) for f in m] for m in re.findall(
         r'\[\s*(-?\d+\.\d+),\s*(-?\d+\.\d+),\s*(-?\d+\.\d+)\s*\]', text)])
@@ -349,12 +349,12 @@ def write_mdl(path, pos, nrm, st, tris):
     tris = tris[area > 0]
     verts = rows[:, :4].astype(np.uint8)
     data = b'IDPO' + struct.pack('<i3f3ff3f8if', 6, *scale, *lo, np.linalg.norm(pos, axis=1).max(), 0, 0, 0,
-                                 1, SIZE, SIZE, len(verts), len(tris), 1, 0, 0, 1.0)
-    data += struct.pack('<i', 0) + bytes(SIZE * SIZE)
+                                 1, size, size, len(verts), len(tris), 1, 0, 0, 1.0)
+    data += struct.pack('<i', 0) + bytes(size * size)
     data += b''.join(struct.pack('<3i', 0, *map(int, r[4:])) for r in rows)
     # native aliases use clockwise winding
     data += b''.join(struct.pack('<4i', 1, t[0], t[2], t[1]) for t in tris.tolist())
-    data += struct.pack('<i', 0) + bytes(4) + bytes((255, 255, 255, 0)) + b'boomerang'.ljust(16, b'\0') + verts.tobytes()
+    data += struct.pack('<i', 0) + bytes(4) + bytes((255, 255, 255, 0)) + name.ljust(16, b'\0') + verts.tobytes()
     path.write_bytes(zlib.compress(data, 9))
     return len(verts), len(tris), [lo.round(3).tolist(), hi.round(3).tolist()]
 
