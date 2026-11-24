@@ -77,8 +77,28 @@ pub(super) fn pf_vectoyaw(vm: &mut Vm, _: &mut dyn Host) -> Result<()> {
     Ok(())
 }
 
+/// VectorAngles with an up vector (DP_QC_VECTOANGLES_WITH_ROLL); the pitch is
+/// the model's, like the one-argument builtin's.
+fn angles_with_roll(f: [f32; 3], up: [f32; 3]) -> [f32; 3] {
+    const DEG: f32 = 180.0 / std::f32::consts::PI;
+    if f[0] == 0.0 && f[1] == 0.0 {
+        return if f[2] > 0.0 { [90.0, (-up[1]).atan2(-up[0]) * DEG, 0.0] } else { [-90.0, up[1].atan2(up[0]) * DEG, 0.0] };
+    }
+    let pitch = -f[2].atan2((f[0] * f[0] + f[1] * f[1]).sqrt());
+    let yaw = f[1].atan2(f[0]);
+    let ((sp, cp), (sy, cy)) = (pitch.sin_cos(), yaw.sin_cos());
+    let dot = |a: [f32; 3]| a[0] * up[0] + a[1] * up[1] + a[2] * up[2];
+    let roll = -dot([-sy, cy, 0.0]).atan2(dot([sp * cy, sp * sy, cp]));
+    [-pitch * DEG, yaw * DEG, roll * DEG]
+}
+
 pub(super) fn pf_vectoangles(vm: &mut Vm, _: &mut dyn Host) -> Result<()> {
     let v = vm.g_v(ofs_parm(0));
+    if vm.argc >= 2 {
+        let a = angles_with_roll(v, vm.g_v(ofs_parm(1)));
+        vm.ret_v(a);
+        return Ok(());
+    }
     let (pitch, yaw);
     if v[1] == 0.0 && v[0] == 0.0 {
         yaw = 0.0;

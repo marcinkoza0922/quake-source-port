@@ -6,6 +6,7 @@ use std::rc::Rc;
 use crate::edict::fmt_g;
 use crate::progs::Progs;
 use crate::{Host, Result, Vm, ofs_parm};
+pub(crate) mod dp;
 mod ext;
 mod pf;
 pub use pf::*;
@@ -143,6 +144,28 @@ const HOST_EXT_NUMS: &[(&str, i32)] = &[
     ("readentitynum", 368),
     ("te_particlerain", 409),
     ("te_particlesnow", 410),
+    ("tracetoss", 64),
+    ("multicast", 82),
+    ("tracebox", 90),
+    ("forceinfokey", 213),
+    ("te_lightningblood", 219),
+    ("isbackbuffered", 234),
+    ("te_bloodqw", 239),
+    ("checkpvs", 240),
+    ("touchtriggers", 279),
+    ("WriteFloat", 280),
+    ("te_blood", 405),
+    ("setattachment", 443),
+    ("dropclient", 453),
+    ("spawnclient", 454),
+    ("clienttype", 455),
+    ("WriteUnterminatedString", 456),
+    ("cvar_defstring", 482),
+    ("cvar_type", 495),
+    ("whichpack", 503),
+    ("buf_cvarlist", 517),
+    ("cvar_description", 518),
+    ("digest_hex", 639),
     ("te_gunshot", 418),
     ("te_spike", 419),
     ("te_superspike", 420),
@@ -196,16 +219,33 @@ pub const EXTENSIONS: &[&str] = &[
     "DP_QC_ASINACOSATANATAN2TAN",
     "DP_QC_TOKENIZE_CONSOLE",
     "DP_QC_SPRINTF",
+    "DP_QC_CRC16",
+    "DP_QC_ENTITYDATA",
+    "DP_QC_FINDCHAIN",
+    "DP_QC_FINDCHAINFLAGS",
+    "DP_QC_FINDCHAINFLOAT",
+    "DP_QC_RANDOMVEC",
+    "DP_QC_STRFTIME",
+    "DP_QC_STRINGBUFFERS",
+    "DP_QC_STRINGCOLORFUNCTIONS",
+    "DP_QC_TOKENIZEBYSEPARATOR",
+    "DP_QC_URI_ESCAPE",
+    "DP_QC_VECTOANGLES_WITH_ROLL",
+    "ZQ_QC_STRINGS",
 ];
 
 pub(crate) fn lookup_builtin_num(name: &str) -> Option<i32> {
-    if let Some(&(_, n, _)) = INTERNAL.iter().find(|i| i.0 == name && i.1 != 0) {
+    if let Some(&(_, n, _)) = internal().find(|i| i.0 == name && i.1 != 0) {
         return Some(n);
     }
     if let Some(b) = Builtin::from_name(name) {
         return Some(b as i32);
     }
     HOST_EXT_NUMS.iter().find(|i| i.0 == name).map(|i| i.1)
+}
+
+fn internal() -> impl Iterator<Item = &'static (&'static str, i32, InternalFn)> {
+    INTERNAL.iter().chain(dp::TABLE)
 }
 
 const INTERNAL: &[(&str, i32, InternalFn)] = &[
@@ -396,10 +436,14 @@ const INTERNAL: &[(&str, i32, InternalFn)] = &[
     ("tokenize", 441, |vm, _| {
         let s = String::from_utf8_lossy(vm.g_str(ofs_parm(0))?).into_owned();
         vm.tokens.clear();
+        vm.token_spans.clear();
         let mut rest = s.as_str();
         while vm.tokens.len() < 64 {
             let Some((t, r)) = qcore::cmd::com_parse(rest) else { break };
             vm.tokens.push(t.as_bytes().to_vec());
+            // where the token starts (its opening quote) and ends
+            let begin = s.len() - rest.trim_start_matches(|c: char| c <= ' ').len();
+            vm.token_spans.push((begin, s.len() - r.len()));
             rest = r;
         }
         vm.ret_f(vm.tokens.len() as f32);
@@ -457,7 +501,7 @@ const INTERNAL: &[(&str, i32, InternalFn)] = &[
 /// PR_FillBuiltinTable + PR_PatchRereleaseBuiltins: decide per function how calls dispatch.
 pub(crate) fn resolve(p: &Progs) -> Vec<Dispatch> {
     let by_num = |n: i32| -> Dispatch {
-        if let Some(&(_, _, f)) = INTERNAL.iter().find(|i| i.1 == n) {
+        if let Some(&(_, _, f)) = internal().find(|i| i.1 == n) {
             return Dispatch::Internal(f);
         }
         if let Some(b) = Builtin::from_num(n) {
@@ -481,6 +525,8 @@ pub(crate) fn resolve(p: &Progs) -> Vec<Dispatch> {
                     ("centerprint", 90) => 73,
                     ("bprint", 91) => 23,
                     ("sprint", 92) => 24,
+                    // #80 is localsound in the 2021 re-release's progs
+                    ("infokey", 80) => return Dispatch::HostExt("infokey".into()),
                     (_, n) => n,
                 };
                 return by_num(n);
@@ -488,7 +534,7 @@ pub(crate) fn resolve(p: &Progs) -> Vec<Dispatch> {
             if i == 0 || f.parm_start != 0 || f.locals != 0 {
                 return Dispatch::Missing(0);
             }
-            if let Some(&(_, _, f)) = INTERNAL.iter().find(|x| x.0 == name) {
+            if let Some(&(_, _, f)) = internal().find(|x| x.0 == name) {
                 return Dispatch::Internal(f);
             }
             if let Some(b) = Builtin::from_name(&name) {

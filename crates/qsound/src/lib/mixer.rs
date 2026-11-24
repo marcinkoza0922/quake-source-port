@@ -229,6 +229,11 @@ impl Mixer {
                     m.paused = p;
                 }
             }
+            Cmd::MusicLoop(on) => {
+                if let Some(m) = &mut self.music {
+                    m.set_looping(on);
+                }
+            }
             Cmd::MusicCrossfade(secs) => self.music_crossfade = secs,
         }
     }

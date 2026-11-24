@@ -10,6 +10,7 @@ pub(super) fn visible_entities(vm: &Vm, c: &mut Core, clent: u32, pvs: &mut Vec<
         c.sv.vis.add_fat_pvs(Vec3::from_array(o), pvs);
     }
     let protocol = c.sv.protocol;
+    let (nodraw, drawonly) = (f.nodrawtoclient, f.drawonlytoclient);
     let mut list = vec![clent];
     for e in 1..vm.num_edicts() as u32 {
         if e == clent || vm.is_free(e) {
@@ -24,6 +25,11 @@ pub(super) fn visible_entities(vm: &Vm, c: &mut Core, clent: u32, pvs: &mut Vec<
         }
         let x = c.ext(e);
         if x.leafs.len() < qworld::world::MAX_ENT_LEAFS && !leafs_in_pvs(&x.leafs, pvs) {
+            continue;
+        }
+        // DP_SV_NODRAWTOCLIENT, DP_SV_DRAWONLYTOCLIENT
+        let only = drawonly.map_or(0, |o| vm.ent_i(e, o));
+        if nodraw.is_some_and(|o| vm.ent_i(e, o) == clent as i32) || (only != 0 && only != clent as i32) {
             continue;
         }
         list.push(e);

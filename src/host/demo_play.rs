@@ -266,6 +266,8 @@ impl Host {
         !matches!(
             e,
             ClientEvent::StuffText(_)
+                | ClientEvent::ModelPrecache(_)
+                | ClientEvent::SoundPrecache(_)
                 | ClientEvent::StaticSound(_)
                 | ClientEvent::CdTrack { .. }
                 | ClientEvent::Skybox(_)

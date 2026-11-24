@@ -201,6 +201,8 @@ impl Server {
                 cmd_client: None,
                 cmd_names: Vec::new(),
                 queued_client_cmds: Vec::new(),
+                started: qcore::time::SystemTime::now(),
+                queued_drops: Vec::new(),
                 linked_portals: Vec::new(),
                 portal_crossed: Vec::new(),
             },
@@ -362,6 +364,9 @@ impl Server {
     }
 
     pub(crate) fn process_queued_client_cmds(&mut self) {
+        for i in std::mem::take(&mut self.core.queued_drops) {
+            self.drop_client(i, false);
+        }
         while !self.core.queued_client_cmds.is_empty() {
             let q = std::mem::take(&mut self.core.queued_client_cmds);
             for (i, s) in q {

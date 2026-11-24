@@ -615,7 +615,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     });
     c.add("music", |h, a| {
         if let Some(s) = &mut h.snd
-            && !s.play_music(a.argv(1), true)
+            && !s.play_music(a.argv(1), !h.cd.music_once)
         {
             h.con.print(&qcore::ctr!("Couldn't handle music file {}\n", a.argv(1)));
         }

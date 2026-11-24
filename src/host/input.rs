@@ -438,6 +438,7 @@ impl Host {
             return false;
         }
         let track = self.cd.map(track);
+        let looping = looping && !self.cd.music_once;
         self.cd.playing = Some((track, looping));
         self.cd.paused = false;
         let st = self

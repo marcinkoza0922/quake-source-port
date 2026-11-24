@@ -154,6 +154,8 @@ pub fn discover(fs: &Fs, user_root: &Path) -> Vec<SoundtrackPack> {
 
 /// `cd` console command state (vkQuake `cd_sdl.c` / `CD_f`).
 pub struct CdState {
+    /// `music_loop 0`.
+    pub music_once: bool,
     pub enabled: bool,
     pub paused: bool,
     pub playing: Option<(u8, bool)>,
@@ -168,7 +170,7 @@ impl Default for CdState {
 
 impl CdState {
     pub fn new() -> Self {
-        Self { enabled: true, paused: false, playing: None, remap: std::array::from_fn(|i| i as u8) }
+        Self { music_once: false, enabled: true, paused: false, playing: None, remap: std::array::from_fn(|i| i as u8) }
     }
 
     pub fn map(&self, track: u8) -> u8 {

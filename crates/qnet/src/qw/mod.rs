@@ -5,7 +5,7 @@
 mod md4;
 mod tables;
 
-pub use md4::block_checksum;
+pub use md4::{block_checksum, md4};
 
 use crate::{MsgReader, SizeBuf};
 mod consts;

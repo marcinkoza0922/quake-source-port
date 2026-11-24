@@ -397,6 +397,10 @@ impl ClientState {
                 self.parse_stat_text(&qcore::text::decode(args), line.starts_with(b"//sts"));
                 continue;
             }
+            if let Some(args) = line.strip_prefix(b"//v_water ") {
+                self.force_underwater = String::from_utf8_lossy(args).trim().parse::<f32>().is_ok_and(|v| v != 0.0);
+                continue;
+            }
             // Server extension commands. The references run only the ones they
             // know (vkQuake ignores `//paknames`, `//svi`, ...); the rest are
             // comments, never console commands.

@@ -208,20 +208,7 @@ impl Host for Ctx<'_> {
             }
             B::Particle => {
                 let (org, dir) = (vm.g_v(p(0)), vm.g_v(p(1)));
-                let (color, count) = (vm.g_f(p(2)) as i32, vm.g_f(p(3)) as i32);
-                let pf = self.c.sv.protocolflags;
-                let m = &mut self.c.sv.datagram;
-                if m.len() <= MAX_DATAGRAM - 18 {
-                    m.byte(SVC_PARTICLE);
-                    for x in org {
-                        m.coord(x, pf);
-                    }
-                    for x in dir {
-                        m.char(((x * 16.0) as i32).clamp(-128, 127));
-                    }
-                    m.byte(count);
-                    m.byte(color);
-                }
+                self.start_particle(org, dir, vm.g_f(p(2)) as i32, vm.g_f(p(3)) as i32);
             }
             B::ChangeYaw => {
                 let me = vm.self_ent();
@@ -543,7 +530,7 @@ impl Host for Ctx<'_> {
             "te_particlerain" => self.c.pf_te_weather(vm, false)?,
             "te_particlesnow" => self.c.pf_te_weather(vm, true)?,
             "ex_CheckPlayerEXFlags" | "ex_walkpathtogoal" => vm.ret_f(0.0),
-            _ if self.c.pf_te_effect(vm, name)? => {}
+            _ if self.c.pf_te_effect(vm, name)? || self.dp_builtin(vm, name)? => {}
             _ => return Err(vm.run_error(format!("unimplemented builtin {name}"))),
         }
         Ok(())
@@ -577,7 +564,7 @@ impl Host for Ctx<'_> {
             "DP_VIEWZOOM",
             "EXT_CSQC",
         ];
-        if SERVER_EXTENSIONS.contains(&name) {
+        if SERVER_EXTENSIONS.contains(&name) || super::dp::EXTENSIONS.contains(&name) {
             return true;
         }
         let pext2 = self.c.cvars.value_of("sv_protocol_pext2") as u32 & qnet::delta::PEXT2_SUPPORTED;

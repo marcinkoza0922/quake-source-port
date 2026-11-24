@@ -244,6 +244,23 @@ impl Level {
             .unwrap_or_default()
     }
 
+    /// A model precached after the level loaded (svcdp_precache). Brush models
+    /// load with the world only.
+    pub fn late_model(&mut self, fs: &Fs, r: &mut Renderer, cl: &mut ClientState, index: usize) {
+        if self.mapname.is_empty() {
+            return; // `load` takes it
+        }
+        let Some(name) = cl.model_precache.get(index).cloned() else { return };
+        let m = self.named(fs, r, &name);
+        if self.models.len() <= index {
+            self.models.resize(index + 1, None);
+        }
+        self.models[index] = m;
+        if let (Some(m), Some(f)) = (m, cl.model_flags.get_mut(index)) {
+            *f = m.flags;
+        }
+    }
+
     /// Model by name, loading on first use (temp entity models).
     pub fn named(&mut self, fs: &Fs, r: &mut Renderer, name: &str) -> Option<Model> {
         if let Some(m) = self.by_name.get(name) {

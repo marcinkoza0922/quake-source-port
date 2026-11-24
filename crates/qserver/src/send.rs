@@ -19,6 +19,12 @@ pub(crate) use clientdata::*;
 
 /// SV_StartSound into the server datagram.
 pub(crate) fn start_sound(vm: &Vm, c: &mut Core, e: u32, channel: i32, sample: &[u8], volume: i32, att: f32) {
+    start_sound_at(vm, c, e, channel, sample, volume, att, None);
+}
+
+/// SV_StartSound, at `origin` instead of the entity's centre (pointsound).
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn start_sound_at(vm: &Vm, c: &mut Core, e: u32, channel: i32, sample: &[u8], volume: i32, att: f32, origin: Option<[f32; 3]>) {
     if !(0..=255).contains(&volume) || !(0.0..=4.0).contains(&att) || !(0..=7).contains(&channel) {
         c.print(&format!("SV_StartSound: bad volume/attenuation/channel {volume} {att} {channel}\n"));
         return;
@@ -78,7 +84,7 @@ pub(crate) fn start_sound(vm: &Vm, c: &mut Core, e: u32, channel: i32, sample: &
         m.byte(snum as i32);
     }
     for i in 0..3 {
-        m.coord(o[i] + 0.5 * (mn[i] + mx[i]), pf);
+        m.coord(origin.map_or(o[i] + 0.5 * (mn[i] + mx[i]), |p| p[i]), pf);
     }
 }
 

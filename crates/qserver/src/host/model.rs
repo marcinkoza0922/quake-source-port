@@ -88,10 +88,48 @@ impl Ctx<'_> {
         }
     }
 
-    pub(super) fn precache_model(&mut self, vm: &mut Vm) -> Result<()> {
-        if !self.c.sv.loading {
+    /// A precache outside spawn functions: an error in ironwail, a warning
+    /// with extensions on (vkQuake), where clients are told of the new name.
+    fn late_precache_ok(&mut self, vm: &Vm, what: &str, name: &str) -> Result<()> {
+        if !self.extensions_enabled() {
             return Err(vm.run_error("PF_Precache_*: Precache can only be done in spawn functions"));
         }
+        self.c.print(&format!("PF_precache_{what}(\"{name}\"): Precache should only be done in spawn functions\n"));
+        Ok(())
+    }
+
+    /// svcdp_precache to the clients that know it.
+    fn announce_precache(&mut self, code: usize, name: &str) {
+        for cl in self.c.clients.iter_mut().filter(|c| c.active && (c.local || c.delta.is_some())) {
+            cl.message.byte(crate::particles::SVCDP_PRECACHE);
+            cl.message.short(code as i32);
+            cl.message.string(name.as_bytes());
+        }
+    }
+
+    /// SV_Precache_Model (vkQuake): adds a model after loading, or one QC sets
+    /// without a precache. A missing file leaves an empty model.
+    fn late_precache_model(&mut self, vm: &Vm, name: String) -> Result<usize> {
+        let n = self.c.sv.model_precache.len();
+        if n >= MAX_MODELS {
+            return Err(vm.run_error("PF_precache_model: overflow"));
+        }
+        let info = match self.load_model(vm, &name, n) {
+            Ok(info) => info,
+            Err(_) => {
+                self.c.print(&format!("Mod_LoadModel: {name} not found\n"));
+                None
+            }
+        };
+        if !self.c.sv.loading {
+            self.announce_precache(n, &name);
+        }
+        self.c.sv.model_precache.push(name);
+        self.c.sv.models.push(info);
+        Ok(n)
+    }
+
+    pub(super) fn precache_model(&mut self, vm: &mut Vm) -> Result<()> {
         let h = vm.g_i(p(0));
         vm.ret_i(h);
         let s = str_arg(vm, 0)?;
@@ -106,6 +144,10 @@ impl Ctx<'_> {
         if n >= MAX_MODELS {
             return Err(vm.run_error("PF_precache_model: overflow"));
         }
+        if !self.c.sv.loading {
+            self.late_precache_ok(vm, "model", &s)?;
+            return self.late_precache_model(vm, s).map(|_| ());
+        }
         let info = self.load_model(vm, &s, n)?;
         self.c.sv.model_precache.push(s);
         self.c.sv.models.push(info);
@@ -113,9 +155,6 @@ impl Ctx<'_> {
     }
 
     pub(super) fn precache_sound(&mut self, vm: &mut Vm) -> Result<()> {
-        if !self.c.sv.loading {
-            return Err(vm.run_error("PF_Precache_*: Precache can only be done in spawn functions"));
-        }
         let h = vm.g_i(p(0));
         vm.ret_i(h);
         let s = str_arg(vm, 0)?;
@@ -129,6 +168,10 @@ impl Ctx<'_> {
         if self.c.sv.sound_precache.len() >= MAX_SOUNDS {
             return Err(vm.run_error("PF_precache_sound: overflow"));
         }
+        if !self.c.sv.loading {
+            self.late_precache_ok(vm, "sound", &s)?;
+            self.announce_precache(self.c.sv.sound_precache.len() | 0x8000, &s);
+        }
         self.c.sv.sound_precache.push(s);
         Ok(())
     }
@@ -136,8 +179,14 @@ impl Ctx<'_> {
     pub(super) fn setmodel(&mut self, vm: &mut Vm) -> Result<()> {
         let e = ent_arg(vm, 0)?;
         let m = str_arg(vm, 1)?;
-        let Some(i) = self.c.sv.model_precache.iter().position(|s| s.as_bytes() == m.as_slice()) else {
-            return Err(vm.run_error(format!("no precache: {}", lossy(&m))));
+        let i = match self.c.sv.model_precache.iter().position(|s| s.as_bytes() == m.as_slice()) {
+            Some(i) => i,
+            None if self.extensions_enabled() => {
+                let name = lossy(&m);
+                self.c.print(&format!("PF_setmodel(\"{name}\"): Model was not precached\n"));
+                self.late_precache_model(vm, name)?
+            }
+            None => return Err(vm.run_error(format!("no precache: {}", lossy(&m)))),
         };
         let h = vm.strings.engine(&m);
         let f = &self.c.sv.fields;
