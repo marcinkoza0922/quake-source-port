@@ -1,0 +1,13 @@
+{
+  "breakable": {"kills": 1, "secrets": 0, "events": 94, "exited": true, "log": ["======OBJECT ERROR:", "No model set, use info_rubble to generate rubble without a model", "\"r_item\" is not a field"]},
+  "e1m1quoth": {"kills": 52, "secrets": 7, "events": 76, "exited": true, "log": ["monster 'monster_army' can't find target at '-576.0 160.0  24.0'", "The recorded time was 53.64999"]},
+  "e1m2quoth": {"kills": 55, "secrets": 3, "events": 75, "exited": true, "log": ["walkmonster 'monster_drole' in wall at '1952.0 1312.0 -40.0'", "walkmonster 'monster_ogre' in wall at '608.0 1472.0 -40.0'", "The recorded time was 76.25000"]},
+  "kellbase1": {"kills": 46, "secrets": 1, "events": 83, "exited": true, "log": ["trigger_ladder with angle 0, please set the outwards facing", "(use 360 if the ladder faces north)", "removed entity of class \"func_wall\", SOLID_BSP with no model.", "Check for entities with no brush associated.", "The recorded time was 58.69999"]},
+  "kelltest1": {"kills": 20, "secrets": 1, "events": 42, "exited": true, "log": ["The recorded time was 48.94999"]},
+  "kelltest2": {"kills": 0, "secrets": 1, "events": 28, "exited": true, "log": ["The recorded time was 10.85000"]},
+  "kelltest3": {"kills": 6, "secrets": 0, "events": 18, "exited": true, "log": ["This map required reversion to precise waypoints (Quoth 2.1 default)", "The recorded time was 22.55000"]},
+  "kelltest4": {"kills": 3, "secrets": 0, "events": 20, "exited": true, "log": ["The recorded time was 20.95000"]},
+  "kelltest5": {"kills": 8, "secrets": 0, "events": 19, "exited": true, "log": ["The recorded time was 18.85000"]},
+  "ne_basetest": {"kills": 41, "secrets": 0, "events": 63, "exited": true, "log": ["bonus item 'weapon_supershotgun' fell out of level at ' 96.0  96.0   6.0'", "The recorded time was 43.04999"]},
+  "start": {"kills": 0, "secrets": 0, "events": 21, "exited": true, "log": []}
+}

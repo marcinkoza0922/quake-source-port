@@ -143,6 +143,9 @@ pub enum ClientEvent {
     CenterPrint(String),
     /// One complete stufftext line (with trailing '\n'), for the command buffer.
     StuffText(String),
+    /// svcdp_precache: this model or sound slot was filled mid-level.
+    ModelPrecache(usize),
+    SoundPrecache(usize),
     Sound { ent: i32, channel: i32, sound: usize, origin: [f32; 3], volume: f32, attenuation: f32 },
     /// Engine sound by name from a temp entity (ent -1, channel 0).
     TempSound { name: &'static str, origin: [f32; 3] },
@@ -235,6 +238,8 @@ pub struct ClientState {
     pub statsf: [f32; MAX_CL_STATS],
     /// String stats (`svcfte_updatestatstring` / CSQC `getstats`).
     pub statss: Vec<String>,
+    /// `//v_water`: under water whatever the leaf at the eye says.
+    pub force_underwater: bool,
     pub items: i32,
     pub item_gettime: [f64; 32],
     /// standard_quake: false for hipnotic/rogue (STAT_ACTIVEWEAPON is a bit index).
@@ -364,6 +369,7 @@ impl ClientState {
             took_damage: false,
             statsf: [0.0; MAX_CL_STATS],
             statss: vec![String::new(); MAX_CL_STATS],
+            force_underwater: false,
             items: 0,
             item_gettime: [0.0; 32],
             standard_quake: true,

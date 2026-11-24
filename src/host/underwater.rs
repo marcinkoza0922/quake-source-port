@@ -11,7 +11,7 @@ impl Host {
         let t = (time % 1000.0) as f32;
         let mode = self.cv("r_waterwarp").round() as i32;
         // Enhanced Water draws its own underwater effects instead.
-        if mode == 0 || self.cv("r_enhancedwater") != 0.0 || !(-5..=-3).contains(&self.contents(eye)) {
+        if mode == 0 || self.cv("r_enhancedwater") != 0.0 || !(self.cl.force_underwater || (-5..=-3).contains(&self.contents(eye))) {
             return qrender::WaterWarp::None;
         }
         if mode == 2 { qrender::WaterWarp::Fov(t) } else { qrender::WaterWarp::Screen(t) }
@@ -22,6 +22,8 @@ impl Host {
     pub(super) fn water_screen_input(&self, eye: [f32; 3]) -> (Liquid, [bool; 2]) {
         let on = self.cv("r_enhancedwater") != 0.0;
         let fx = [on && self.cv("r_water_refraction") != 0.0, on && self.cv("r_water_droplets") != 0.0];
-        (Liquid::from_contents(self.contents(eye)), fx)
+        let contents = self.contents(eye);
+        let wet = self.cl.force_underwater && !(-5..=-3).contains(&contents);
+        (Liquid::from_contents(if wet { crate::view::CONTENTS_WATER } else { contents }), fx)
     }
 }

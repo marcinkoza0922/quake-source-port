@@ -180,7 +180,17 @@ impl Server {
                 if ok {
                     vm.set_g_f(g.time, vm.time as f32);
                     vm.set_self(e);
+                    let under = |vm: &Vm| vm.ent_f(e, f.waterlevel) >= 3.0;
+                    let was_under = under(vm);
                     exec(vm, c, w, vm.g_i(g.f_player_post_think));
+                    // SV_WriteUnderwaterOverride (ironwail): the engine's own
+                    // water check said dry, the progs (liquid entities) say wet
+                    let force = !was_under && under(vm);
+                    if std::mem::replace(&mut c.clients[ci].force_water, force) != force {
+                        let m = &mut c.clients[ci].message;
+                        m.byte(SVC_STUFFTEXT);
+                        m.string(format!("//v_water {}\n", u8::from(force)).as_bytes());
+                    }
                     if switching && !vm.is_free(e) {
                         post_think_weapons.push((e, crate::weaponswitch::WeaponSnapshot::capture(vm, &f, e)));
                     }

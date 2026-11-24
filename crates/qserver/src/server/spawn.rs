@@ -71,6 +71,7 @@ impl Server {
             particle_precache: vec![String::new()],
             lightstyles: vec![Vec::new(); MAX_LIGHTSTYLES],
             datagram: SizeBuf::new(MAX_DATAGRAM),
+            multicast: SizeBuf::new(MAX_DATAGRAM),
             reliable_datagram: SizeBuf::new(MAX_DATAGRAM),
             signon: vec![SizeBuf::new(SIGNON_SIZE)],
             fields,

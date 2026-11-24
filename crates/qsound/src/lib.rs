@@ -196,6 +196,7 @@ enum Cmd {
     Music(Option<Box<MusicStream>>),
     MusicPause(bool),
     MusicCrossfade(f32),
+    MusicLoop(bool),
 }
 
 type Loader = Box<dyn FnMut(&str) -> Option<Vec<u8>> + Send>;
@@ -332,6 +333,10 @@ impl SoundSystem {
     }
     pub fn stop_music(&self) {
         self.push(Cmd::Music(None));
+    }
+    /// `music_loop`: whether the playing track starts over at its end.
+    pub fn set_music_loop(&self, on: bool) {
+        self.push(Cmd::MusicLoop(on));
     }
     pub fn pause_music(&self, paused: bool) {
         self.push(Cmd::MusicPause(paused));

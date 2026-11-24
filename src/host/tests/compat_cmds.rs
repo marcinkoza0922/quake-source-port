@@ -194,3 +194,66 @@ fn host_error_is_reported_once_and_disconnects() {
     }
     assert!(h.server.active(), "the next map starts");
 }
+
+#[test]
+fn music_loop_and_viewthing_commands() {
+    let mut fs = qcore::fs::Fs::new(qcore::fs::Fs::default_basedir());
+    if !fs.add_game_dir("id1") || !fs.exists("maps/e1m1.bsp") {
+        return;
+    }
+    let mut h = Host::new(fs, Renderer::none(), None, Vec::new());
+    h.headless = true;
+    h.exec_line("music_loop off");
+    assert!(h.cd.music_once);
+    h.exec_line("music_loop toggle");
+    assert!(!h.cd.music_once);
+    h.exec_line("sv_autosave 0");
+    h.exec_line("map e1m1");
+    for _ in 0..8 {
+        h.frame(1.0 / 72.0, Vec::new());
+    }
+    let said = |h: &Host, what: &[u8]| h.con.lines.iter().any(|l| l.windows(what.len()).any(|w| w == what));
+    h.exec_line("viewnext");
+    assert!(said(&h, b"No viewthing on map"));
+    // a soldier stands in for the viewthing
+    let f = h.server.core.sv.fields.clone();
+    let l = h.server.level.as_mut().unwrap();
+    let e = (1..l.vm.num_edicts() as u32).find(|&e| l.vm.classname(e) == "monster_army").unwrap();
+    let name = l.vm.strings.engine(b"viewthing");
+    l.vm.set_ent_i(e, f.classname, name);
+    for (cmd, frame) in [("viewframe 2", 2.0), ("viewnext", 3.0), ("viewprev", 2.0), ("viewframe -4", 0.0)] {
+        h.exec_line(cmd);
+        assert_eq!(h.server.level.as_ref().unwrap().vm.ent_f(e, f.frame), frame, "{cmd}");
+    }
+    h.exec_line("viewframe 9999");
+    let last = h.server.level.as_ref().unwrap().vm.ent_f(e, f.frame);
+    assert!((50.0..9999.0).contains(&last), "the last frame, got {last}");
+    assert!(said(&h, b"frame 2: stand3"));
+}
+
+#[test]
+fn a_late_model_precache_becomes_drawable() {
+    let mut fs = qcore::fs::Fs::new(qcore::fs::Fs::default_basedir());
+    if !fs.add_game_dir("id1") || !fs.exists("maps/e1m1.bsp") {
+        return;
+    }
+    let Ok(r) = Renderer::headless(320, 240, &[[0; 3]; 256]) else { return };
+    let mut h = Host::new(fs, r, None, Vec::new());
+    h.headless = true;
+    h.exec_line("sv_autosave 0");
+    h.exec_line("map e1m1");
+    for _ in 0..8 {
+        h.frame(1.0 / 72.0, Vec::new());
+    }
+    let index = h.server.core.sv.model_precache.len();
+    assert!(!h.cl.model_precache.iter().any(|n| n == "progs/shalrath.mdl"));
+    let m = &mut h.server.core.clients[0].message;
+    m.byte(54); // svcdp_precache
+    m.short(index as i32);
+    m.string(b"progs/shalrath.mdl");
+    for _ in 0..4 {
+        h.frame(1.0 / 72.0, Vec::new());
+    }
+    assert_eq!(h.cl.model_precache[index], "progs/shalrath.mdl");
+    assert!(h.level.models[index].is_some());
+}

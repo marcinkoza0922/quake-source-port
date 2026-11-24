@@ -81,6 +81,11 @@ impl Vm {
         true
     }
 
+    /// ED_ParseEpair into one entity field (putentityfieldstring).
+    pub(crate) fn set_field_string(&mut self, ent: u32, def: Def, value: &str) -> bool {
+        self.parse_epair(Base::Edict(ent), def, value)
+    }
+
     /// ED_ParseEdict on already-tokenised pairs (from `qformats::parse_entities`).
     /// String values carry Quake bytes as scalars using `qcore::text`.
     pub fn parse_edict(&mut self, host: &mut dyn Host, ent: u32, pairs: &[(String, String)]) -> Result<ParsedEdict> {
@@ -179,7 +184,9 @@ impl Vm {
                 st.inhibited += 1;
                 continue;
             }
-            let Some(func) = self.progs.find_function(&classname) else {
+            // DP_SV_SPAWNFUNC_PREFIX first, as vkQuake
+            let prefixed = self.progs.find_function(&format!("spawnfunc_{classname}"));
+            let Some(func) = prefixed.or_else(|| self.progs.find_function(&classname)) else {
                 host.print(&format!("No spawn function for:{}", self.ed_print(ent)));
                 self.ed_free(ent);
                 st.no_spawn_fn += 1;

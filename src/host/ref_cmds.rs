@@ -1,6 +1,6 @@
 //! Console commands ironwail and vkQuake have that people's own configs and
 //! binds use: `condump`, `randmap`, `skies`, `mods`/`games`, `music_pause`,
-//! `music_resume`. (`inc`, `cycle`, `reset`, `unaliasall` are `qcore::cmd` builtins.)
+//! `music_resume`, `music_loop`, and the mapper's `viewthing` commands. (`inc`, `cycle`, `reset`, `unaliasall` are `qcore::cmd` builtins.)
 
 use super::*;
 
@@ -45,6 +45,46 @@ pub(super) fn register(c: &mut Commands<Host>) {
             s.pause_music(false);
         }
     });
+    // BGM_Loop_f; the references loop unless told not to
+    c.add("music_loop", |h, a| {
+        match a.argv(1).to_ascii_lowercase().as_str() {
+            "0" | "off" => h.cd.music_once = true,
+            "1" | "on" => h.cd.music_once = false,
+            "toggle" => h.cd.music_once = !h.cd.music_once,
+            _ => {}
+        }
+        let looping = !h.cd.music_once;
+        if let Some(s) = &h.snd {
+            s.set_music_loop(looping);
+        }
+        h.print(if looping { "Music will be looped\n" } else { "Music will not be looped\n" });
+    });
+    // order numbers belong to tracker music, which we don't play
+    c.add("music_jump", |h, a| {
+        if a.argc() != 2 {
+            h.print("music_jump <ordernum>\n");
+        }
+    });
+    c.add("viewmodel", |h, a| {
+        let Some((_, index)) = viewthing(h) else { return };
+        let fs = &h.server.core.fs;
+        match h.level.named(fs, &mut h.r, a.argv(1)) {
+            Some(m) if index < h.level.models.len() => {
+                h.level.models[index] = Some(m);
+                if let Some(n) = h.cl.model_precache.get_mut(index) {
+                    *n = a.argv(1).to_string();
+                }
+                set_view_frame(h, |_, _| 0);
+            }
+            _ => h.print(&format!("Can't load {}\n", a.argv(1))),
+        }
+    });
+    c.add("viewframe", |h, a| {
+        let want = a.argv(1).parse::<i32>().unwrap_or(0);
+        set_view_frame(h, move |_, n| want.min(n - 1));
+    });
+    c.add("viewnext", |h, _| set_view_frame(h, |f, n| (f + 1).min(n - 1)));
+    c.add("viewprev", |h, _| set_view_frame(h, |f, _| (f - 1).max(0)));
     // vkQuake and FTE server info keys; rmj1's quake.rc sets pitch limits,
     // which our server doesn't have
     c.add("serverinfo", |_, _| {});
@@ -66,6 +106,35 @@ impl Host {
     fn clock_pick(&self, n: usize) -> usize {
         let t = qcore::time::SystemTime::now().duration_since(qcore::time::UNIX_EPOCH).map_or(0, |d| d.as_nanos() as u64);
         (t.wrapping_mul(0x9e37_79b9_7f4a_7c15) >> 33) as usize % n.max(1)
+    }
+}
+
+/// FindViewthing: the `viewthing` edict and its model index.
+fn viewthing(h: &mut Host) -> Option<(u32, usize)> {
+    let f = h.server.core.sv.fields.modelindex;
+    let found = h.server.level.as_ref().and_then(|l| {
+        let vm = &l.vm;
+        (0..vm.num_edicts() as u32).find(|&e| !vm.is_free(e) && vm.classname(e) == "viewthing").map(|e| (e, vm.ent_f(e, f) as usize))
+    });
+    if found.is_none() {
+        h.print("No viewthing on map\n");
+    }
+    found
+}
+
+/// Sets the viewthing's frame to `pick(current, count)` and names it.
+fn set_view_frame(h: &mut Host, pick: impl Fn(i32, i32) -> i32) {
+    let Some((e, index)) = viewthing(h) else { return };
+    let f = h.server.core.sv.fields.frame;
+    let names: Vec<String> = h.cl.model_precache.get(index).and_then(|n| h.server.core.fs.open(n))
+        .and_then(|d| qformats::Mdl::parse(&d).ok())
+        .map(|m| m.frames.iter().map(|f| f.poses.first().map_or(String::new(), |p| p.name.clone())).collect())
+        .unwrap_or_default();
+    let Some(l) = h.server.level.as_mut() else { return };
+    let frame = pick(l.vm.ent_f(e, f) as i32, names.len() as i32).max(0);
+    l.vm.set_ent_f(e, f, frame as f32);
+    if let Some(n) = names.get(frame as usize) {
+        h.print(&format!("frame {frame}: {n}\n"));
     }
 }
 

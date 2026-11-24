@@ -50,3 +50,17 @@ fn killed_monster_and_found_secret_update_float_stats() {
     assert_eq!(cl.stats[STAT_SECRETS], 1);
     assert_eq!(cl.statsf[STAT_SECRETS], 1.0);
 }
+
+#[test]
+fn v_water_forces_underwater_until_told_otherwise() {
+    let mut cl = ClientState::new();
+    let stuff = |s: &str| [&[SVC_STUFFTEXT][..], s.as_bytes(), &[0]].concat();
+    cl.parse_server_message(&stuff("//v_water 1\n")).unwrap();
+    assert!(cl.force_underwater);
+    cl.parse_server_message(&stuff("//v_water 0\n")).unwrap();
+    assert!(!cl.force_underwater);
+    cl.force_underwater = true;
+    cl.clear_state();
+    assert!(!cl.force_underwater);
+    assert!(!cl.take_events().iter().any(|e| matches!(e, ClientEvent::StuffText(_))));
+}

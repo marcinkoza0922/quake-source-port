@@ -187,6 +187,7 @@ impl Server {
         let cl = &mut c.clients[i];
         cl.message = m;
         cl.stat_text.clear();
+        cl.force_water = false;
         cl.sendsignon = Signon::Flush;
     }
 

@@ -59,6 +59,10 @@ pub struct Vm {
     pub(crate) reserved: usize,
     pub(crate) rng: u32,
     pub(crate) tokens: Vec<Vec<u8>>,
+    /// Byte ranges of `tokens` in the tokenized string.
+    pub(crate) token_spans: Vec<(usize, usize)>,
+    /// DP_QC_STRINGBUFFERS
+    pub(crate) strbufs: Vec<Option<crate::builtins::dp::StrBuf>>,
     stack: Vec<Frame>,
     localstack: Vec<u32>,
     xfunction: usize,
@@ -100,6 +104,8 @@ impl Vm {
             reserved: maxclients + 1,
             rng: 1,
             tokens: Vec::new(),
+            token_spans: Vec::new(),
+            strbufs: Vec::new(),
             stack: Vec::with_capacity(64),
             localstack: Vec::with_capacity(LOCALSTACK_SIZE),
             xfunction: 0,
@@ -144,6 +150,8 @@ impl Vm {
             reserved: 1,
             rng: 1,
             tokens: Vec::new(),
+            token_spans: Vec::new(),
+            strbufs: Vec::new(),
             stack: Vec::with_capacity(64),
             localstack: Vec::with_capacity(LOCALSTACK_SIZE),
             xfunction: 0,

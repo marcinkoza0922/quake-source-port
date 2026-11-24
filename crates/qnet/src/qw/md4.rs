@@ -1,6 +1,7 @@
 //! MD4 (RFC 1320) and Com_BlockChecksum.
 
-fn md4(data: &[u8]) -> [u32; 4] {
+/// The digest as four words (little endian bytes).
+pub fn md4(data: &[u8]) -> [u32; 4] {
     let mut s = [0x6745_2301u32, 0xefcd_ab89, 0x98ba_dcfe, 0x1032_5476];
     let mut msg = data.to_vec();
     let bits = (data.len() as u64).wrapping_mul(8);

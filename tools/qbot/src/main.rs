@@ -1,10 +1,12 @@
 //! qbot: automated level-breaking test.
 //!
-//! Usage: qbot [-basedir <dir>] [-game <dir>|a,b,..|all] [-skill N] [-time <sim s>]
+//! Usage: qbot [-basedir <dir>] [-game <dir>|a,b,..|flagged|all] [-skill N] [-time <sim s>]
 //!             [-maxwall <wall s>] [-j N] [-out <dir>] [-baseline <file>]
 //!             [-save-baseline] [-v] [map ...]
 //!
-//! `-game all` runs every installed game dir (each with the mission-pack
+//! `-game flagged` runs every mod that has ever flagged an issue
+//! (`tools/qbot/flagged.txt`; those not installed are skipped) against its
+//! baseline. `-game all` runs every installed game dir (each with the mission-pack
 //! base the mod menu would mount), all maps sharing the worker threads;
 //! results go to `<out>/<game>/report.json` plus `<out>/summary.txt`, which
 //! lists engine and QC errors first. Baselines stay per game. While it runs,
@@ -42,7 +44,7 @@ struct Opts {
     maps: Vec<String>,
 }
 
-const USAGE: &str = "qbot [-basedir D] [-game G|a,b|all] [-skill N] [-time S] [-maxwall S] [-j N] [-out DIR] [-baseline F] [-save-baseline] [-v] [map ...]";
+const USAGE: &str = "qbot [-basedir D] [-game G|a,b|flagged|all] [-skill N] [-time S] [-maxwall S] [-j N] [-out DIR] [-baseline F] [-save-baseline] [-v] [map ...]";
 
 fn parse_args() -> Opts {
     let basedir = std::env::var_os("QUAKE_BASEDIR").map_or_else(|| PathBuf::from("vkQuake directory with maps"), PathBuf::from);
@@ -104,8 +106,18 @@ fn mount(basedir: &Path, game: &str) -> Fs {
     fs
 }
 
-/// Game dirs for `-game`: one, a comma list, or `all` installed.
+/// Mods that have flagged an issue: `dir  reason` lines.
+const FLAGGED: &str = include_str!("../flagged.txt");
+
+fn flagged() -> impl Iterator<Item = &'static str> {
+    FLAGGED.lines().filter(|l| !l.starts_with('#')).filter_map(|l| l.split_whitespace().next())
+}
+
+/// Game dirs for `-game`: one, a comma list, `flagged`, or `all` installed.
 fn games_of(basedir: &Path, arg: &str) -> Vec<String> {
+    if arg.eq_ignore_ascii_case("flagged") {
+        return flagged().filter(|g| basedir.join(g).is_dir()).map(str::to_string).collect();
+    }
     if arg.eq_ignore_ascii_case("all") {
         return qui::mods::scan(basedir).into_iter().map(|m| m.dir).collect();
     }
@@ -253,17 +265,33 @@ fn run_jobs(o: &Opts, maps: &[(String, String)]) -> Vec<(String, String, bot::Re
     v
 }
 
-fn baseline_entry(kills: f64, secrets: f64, events: f64, exited: bool, log: &[String]) -> String {
-    let log = log.iter().map(|s| json_str(s)).collect::<Vec<_>>().join(", ");
-    format!("{{\"kills\": {kills}, \"secrets\": {secrets}, \"events\": {events}, \"exited\": {exited}, \"log\": [{log}]}}")
+/// Developer-log lines kept per map. A map that prints more has them left out
+/// of its baseline (`null`), and new ones aren't looked for.
+const MAX_LOG: usize = 400;
+
+fn baseline_entry(kills: f64, secrets: f64, events: f64, exited: bool, errors: &[String], log: Option<&[String]>) -> String {
+    let list = |v: &[String]| format!("[{}]", v.iter().map(|s| json_str(s)).collect::<Vec<_>>().join(", "));
+    let errors = if errors.is_empty() { String::new() } else { format!("\"errors\": {}, ", list(errors)) };
+    let log = log.map_or("null".to_string(), list);
+    format!("{{\"kills\": {kills}, \"secrets\": {secrets}, \"events\": {events}, \"exited\": {exited}, {errors}\"log\": {log}}}")
 }
 
-/// The developer-log lines a baseline entry already knows about.
-fn baseline_log(e: &qui::json::Value) -> Vec<String> {
-    match e.get("log") {
-        Some(qui::json::Value::Arr(a)) => a.iter().filter_map(|x| if let qui::json::Value::Str(s) = x { Some(s.clone()) } else { None }).collect(),
-        _ => Vec::new(),
+fn strings(e: &qui::json::Value, key: &str) -> Option<Vec<String>> {
+    match e.get(key) {
+        Some(qui::json::Value::Arr(a)) => Some(a.iter().filter_map(|x| if let qui::json::Value::Str(s) = x { Some(s.clone()) } else { None }).collect()),
+        _ => None,
     }
+}
+
+/// The developer-log lines a baseline entry already knows about; `None` when
+/// the map prints too many to keep.
+fn baseline_log(e: &qui::json::Value) -> Option<Vec<String>> {
+    strings(e, "log").or_else(|| e.get("log").is_none().then(Vec::new))
+}
+
+/// Errors a baseline entry knows (the mod's own QC or missing files).
+fn baseline_errors(e: &qui::json::Value) -> Vec<String> {
+    strings(e, "errors").unwrap_or_default()
 }
 
 fn main() {
@@ -373,8 +401,16 @@ fn report_game(o: &Opts, game: &str, multi: bool, out_dir: &Path, baseline: &Pat
         }
     }
 
-    let mut regressions: Vec<String> = results.iter().filter(|(_, r)| !r.errors.is_empty()).map(|(m, _)| format!("{m}: errors")).collect();
     let old = std::fs::read_to_string(baseline).ok().and_then(|t| qui::json::parse(&t));
+    let known = |m: &str| old.as_ref().and_then(|b| b.get(m)).map(baseline_errors).unwrap_or_default();
+    let mut regressions: Vec<String> = results
+        .iter()
+        .filter(|(m, r)| { let k = known(m); r.errors.iter().any(|e| !k.contains(e)) })
+        .map(|(m, _)| format!("{m}: errors"))
+        .collect();
+    // how far a map stopped by -maxwall got depends on the machine
+    let all = results;
+    let results: Vec<&(String, &bot::Report)> = results.iter().filter(|(_, r)| !r.wall_capped).collect();
     if o.save_baseline {
         // Merge, so partial runs keep the other maps.
         let mut entries: Vec<(String, String)> = Vec::new();
@@ -382,18 +418,20 @@ fn report_game(o: &Opts, game: &str, multi: bool, out_dir: &Path, baseline: &Pat
             if !results.iter().any(|(m, _)| m == k) {
                 let n = |f: &str| e.get(f).and_then(|x| x.num()).unwrap_or(0.0);
                 let exited = e.get("exited").and_then(|x| x.bool()).unwrap_or(false);
-                entries.push((k.clone(), baseline_entry(n("kills"), n("secrets"), n("events"), exited, &baseline_log(e))));
+                entries.push((k.clone(), baseline_entry(n("kills"), n("secrets"), n("events"), exited, &baseline_errors(e), baseline_log(e).as_deref())));
             }
         }
-        for (m, r) in results {
-            entries.push((m.clone(), baseline_entry(r.kills as f64, r.secrets as f64, r.events() as f64, r.exited, &log_texts(r))));
+        for (m, r) in &results {
+            let log = log_texts(r);
+            let log = (log.len() <= MAX_LOG).then_some(log.as_slice());
+            entries.push((m.clone(), baseline_entry(r.kills as f64, r.secrets as f64, r.events() as f64, r.exited, &r.errors, log)));
         }
         entries.sort();
         let body: Vec<String> = entries.iter().map(|(k, v)| format!("  {}: {v}", json_str(k))).collect();
         let _ = std::fs::write(baseline, format!("{{\n{}\n}}\n", body.join(",\n")));
         eprintln!("qbot: baseline written to {}", baseline.display());
     } else if let Some(b) = old {
-        for (m, r) in results {
+        for (m, r) in &results {
             let Some(e) = b.get(m) else { continue };
             let n = |f: &str| e.get(f).and_then(|x| x.num()).unwrap_or(0.0) as i64;
             let (kills, secrets, events) = (n("kills"), n("secrets"), n("events"));
@@ -408,15 +446,15 @@ fn report_game(o: &Opts, game: &str, multi: bool, out_dir: &Path, baseline: &Pat
             if e.get("exited").and_then(|x| x.bool()) == Some(true) && !r.exited {
                 regressions.push(format!("{m}: no longer reaches the exit"));
             }
-            let known = baseline_log(e);
+            let Some(known) = baseline_log(e) else { continue };
             for l in log_texts(r).into_iter().filter(|l| !known.contains(l)) {
                 eprintln!("NEW-LOG {m}: {l}");
                 regressions.push(format!("{m}: new developer log line"));
             }
         }
     }
-    let failed: usize = results.iter().map(|(_, r)| r.failed.len()).sum();
-    eprintln!("qbot: {} maps, {failed} goals failed, report {}", results.len(), out.display());
+    let failed: usize = all.iter().map(|(_, r)| r.failed.len()).sum();
+    eprintln!("qbot: {} maps, {failed} goals failed, report {}", all.len(), out.display());
     for r in &regressions {
         eprintln!("REGRESSION {}{r}", if multi { format!("{game}/") } else { String::new() });
     }
@@ -424,39 +462,4 @@ fn report_game(o: &Opts, game: &str, multi: bool, out_dir: &Path, baseline: &Pat
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-
-    fn base() -> PathBuf {
-        std::env::var_os("QUAKE_BASEDIR")
-            .map_or_else(|| Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"), PathBuf::from)
-    }
-
-    #[test]
-    fn report_json_escapes_strings() {
-        let r = bot::Report { failed: vec!["Button custom\"button\n".into()], ..Default::default() };
-        let j = qui::json::parse(&report_json(&r)).unwrap();
-        let Some(qui::json::Value::Arr(f)) = j.get("failed") else { panic!("expected failed array") };
-        assert_eq!(f[0], qui::json::Value::Str("Button custom\"button\n".into()));
-    }
-
-    /// e1m1 and e1m3 at skill 3: everything killed, found and triggered, and
-    /// the exit taken.
-    #[test]
-    fn breaks_episode_one_maps() {
-        let base = base();
-        let fs = mount(&base, "id1");
-        if fs.open("progs.dat").is_none() {
-            eprintln!("no game data; skipping");
-            return;
-        }
-        let opt = bot::Options { skill: 3, max_time: None, max_wall: None, verbose: false };
-        for map in ["e1m1", "e1m3"] {
-            let r = bot::run(mount(&base, "id1"), map, &opt);
-            assert!(r.errors.is_empty(), "{map}: {:?}", r.errors);
-            assert_eq!(r.kills, r.total_monsters, "{map}: kills; failed {:?}", r.failed);
-            assert_eq!(r.secrets, r.total_secrets, "{map}: secrets; failed {:?}", r.failed);
-            assert!(r.exited, "{map}: never reached the exit");
-        }
-    }
-}
+mod tests;

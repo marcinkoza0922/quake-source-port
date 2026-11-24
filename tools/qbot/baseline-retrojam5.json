@@ -1,0 +1,9 @@
+{
+  "retrojam5_breezeep": {"kills": 35, "secrets": 0, "events": 66, "exited": true, "log": []},
+  "retrojam5_mjb": {"kills": 55, "secrets": 7, "events": 161, "exited": true, "log": []},
+  "retrojam5_newhouse": {"kills": 39, "secrets": 3, "events": 58, "exited": true, "log": ["\"locksounds\" is not a field"]},
+  "retrojam5_qmaster": {"kills": 42, "secrets": 2, "events": 60, "exited": true, "log": ["\"no_item_offset\" is not a field", "\"mapversion\" is not a field", "Bonus item fell out of level at '352.0 -112.0 342.0'", "Bonus item fell out of level at '352.0 -72.0 342.0'"]},
+  "retrojam5_shambler": {"kills": 91, "secrets": 5, "events": 137, "exited": true, "log": ["\"corpse_time\" is not a field", "walkmonster in wall at: '-268.0 -2700.0 1549.0'", "walkmonster in wall at: '-268.0 -2636.0 1549.0'", "walkmonster in wall at: '-268.0 -2572.0 1549.0'", "walkmonster in wall at: '-172.0 -3020.0 1549.0'", "walkmonster in wall at: '-172.0 -2956.0 1549.0'", "walkmonster in wall at: '-172.0 -2892.0 1549.0'", "walkmonster in wall at: '-744.0 -1088.0 692.0'"]},
+  "retrojam5_shamblernaut": {"kills": 30, "secrets": 0, "events": 61, "exited": true, "log": ["\"mapversion\" is not a field", "walkmonster in wall at: '-364.0 -140.0  88.0'", "Bonus item fell out of level at '472.0 -108.0 742.0'"]},
+  "retrojam5_tens": {"kills": 36, "secrets": 2, "events": 107, "exited": true, "log": ["\"mapversion\" is not a field"]}
+}

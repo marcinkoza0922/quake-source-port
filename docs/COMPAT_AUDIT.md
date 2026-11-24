@@ -315,8 +315,35 @@ Its open list, in order, plus what turned up on the way:
 
 Full `qsmoke` on merged master (5bbd6c0): 1555 maps, 0 errors.
 
+## Last of the second audit (2026-11-23)
+
+- **vkQuake's server builtins.** The missing ones had been counted by number;
+  against what the server implements there were 92, `tracebox`, `randomvec`
+  and `pointsound` among them. Ported (`qvm` `builtins/dp.rs`, `qserver`
+  `host/dp.rs`) with their extensions, the `spawnfunc_` prefix,
+  `drawonlytoclient` / `nodrawtoclient` and `vectoangles` with an up vector.
+- **Late precaches.** hwjam3_shades sets a model it never precached: Host_Error
+  in ironwail, a warning in vkQuake. Now as vkQuake (`svcdp_precache`, to
+  clients with deltas); brush models still load with the map only.
+- **`v_water`**: a mod's PlayerPostThink putting the player under water (liquid
+  entities) warps the view and muffles sound, as in ironwail.
+- `music_loop`, `music_jump`, `viewmodel`, `viewframe`, `viewnext`, `viewprev`.
+- **qbot over every mod that has flagged an issue**: `-game flagged`,
+  `tools/qbot/flagged.txt` (66 game dirs, 1101 maps, about 7 minutes), a
+  baseline each. A second run matched the first exactly. Two maps keep QC
+  errors that both references raise too (`assignment to world entity`):
+  alkjam_plaw and jam5_mfx. 17 maps hit `-maxwall 90` and aren't compared. A
+  `-game all` run (1555 maps) found those two and hwjam3_shades.
+- **ironwail against our server.** A real ironwail client played qbj3 on our
+  GPU-less dedicated server (1004 datagrams) and was sent `//st 33 17`.
+- **Demos in ironwail.** 11, one per game up to 3600 frames: played to the end
+  without errors. Its frame count is one lower than ours in each.
+- Full `qsmoke`: 1555 maps, 0 errors, on acdfe2c and again with all of this.
+
 ## Open (2026-11-23)
 
-1. 53 vkQuake server builtins are missing; no installed progs calls one.
-   Not ported: `music_loop`, `music_jump`, `view*` mapper commands,
-   `v_water` and the other renderer and menu cvars.
+1. Not ported from vkQuake: `getlight` (the server has no lightmaps), bot
+   clients (`spawnclient` finds no slot), 64-bit writes, `pointerstat`,
+   `misc_model` without a spawn function, user info keys beyond name and
+   colours. `strftime`'s local time is UTC.
+2. Not run: vkQuake demo playback, KEX.

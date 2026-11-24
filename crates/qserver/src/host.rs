@@ -10,6 +10,7 @@ use crate::ents::Ents;
 use crate::msg::*;
 use crate::server::{Core, ModelInfo, ed_free};
 use crate::vis::leafs_in_pvs;
+mod dp;
 mod model;
 mod te;
 mod trace;
@@ -22,6 +23,7 @@ const MSG_BROADCAST: i32 = 0;
 const MSG_ONE: i32 = 1;
 const MSG_ALL: i32 = 2;
 const MSG_INIT: i32 = 3;
+const MSG_MULTICAST: i32 = 4;
 
 pub(crate) struct Ctx<'a> {
     pub c: &'a mut Core,
@@ -60,6 +62,7 @@ enum Dest {
     Client(usize),
     Reliable,
     Signon,
+    Multicast,
 }
 
 mod builtins;
@@ -126,6 +129,7 @@ impl Ctx<'_> {
             }
             MSG_ALL => Dest::Reliable,
             MSG_INIT => Dest::Signon,
+            MSG_MULTICAST => Dest::Multicast,
             _ => return Err(vm.run_error("WriteDest: bad destination")),
         })
     }
@@ -138,6 +142,7 @@ impl Ctx<'_> {
             Dest::Client(i) => &mut self.c.clients[i].message,
             Dest::Reliable => &mut self.c.sv.reliable_datagram,
             Dest::Signon => self.c.signon(64),
+            Dest::Multicast => &mut self.c.sv.multicast,
         };
         f(buf, pf);
         Ok(())

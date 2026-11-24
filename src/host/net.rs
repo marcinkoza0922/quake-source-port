@@ -530,6 +530,20 @@ impl Host {
                         self.con.center_print(&s, t, cols);
                     }
                 }
+                ClientEvent::ModelPrecache(i) => {
+                    let fs = &self.server.core.fs;
+                    self.level.late_model(fs, &mut self.r, &mut self.cl, i);
+                }
+                ClientEvent::SoundPrecache(i) => {
+                    if let (Some(s), Some(n)) = (&mut self.snd, self.cl.sound_precache.get(i))
+                        && !self.level.mapname.is_empty()
+                    {
+                        if self.level.sounds.len() <= i {
+                            self.level.sounds.resize(i + 1, None);
+                        }
+                        self.level.sounds[i] = s.precache(n);
+                    }
+                }
                 ClientEvent::StuffText(s) => {
                     if !self.csqc_parse_stuffcmd(&s) {
                         self.cbuf.add_text(&s);

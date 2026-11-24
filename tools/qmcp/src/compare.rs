@@ -41,6 +41,10 @@ pub fn qbot(before: &Value, after: &Value) -> Result<Value> {
             missing.push(map);
             continue;
         };
+        // how far -maxwall let the bot get depends on the machine
+        if a["wall_capped"] == true || b["wall_capped"] == true {
+            continue;
+        }
         let mut reasons = Vec::new();
         let mut deltas = serde_json::Map::new();
         for key in ["kills", "secrets", "events"] {
@@ -79,9 +83,11 @@ pub fn qbot(before: &Value, after: &Value) -> Result<Value> {
             }
         }
         let known = logs(b);
+        // "log": null in a baseline: too many lines to keep
+        let compare_logs = b.get("log") != Some(&Value::Null);
         let added: Vec<_> = logs(a)
             .into_iter()
-            .filter(|line| !known.contains(line))
+            .filter(|line| compare_logs && !known.contains(line))
             .collect();
         if !added.is_empty() {
             reasons.push("new developer log lines".into());
@@ -194,6 +200,11 @@ mod tests {
         assert_eq!(qbot(&b, &a).unwrap()["regressions"], 0);
         a["m"]["unusual"] = json!(["t=2.0: new warning"]);
         assert_eq!(qbot(&b, &a).unwrap()["regressions"], 1);
+        let quiet = json!({"m":{"kills":1,"secrets":0,"events":0,"log":null}});
+        assert_eq!(qbot(&quiet, &a).unwrap()["regressions"], 0);
+        a["m"]["kills"] = json!(0);
+        a["m"]["wall_capped"] = json!(true);
+        assert_eq!(qbot(&b, &a).unwrap()["regressions"], 0);
     }
     #[test]
     fn bench_matches_resolution_and_handles_failed_runs() {

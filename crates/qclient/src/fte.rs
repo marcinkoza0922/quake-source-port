@@ -4,8 +4,9 @@
 //! [`ClientState::fte_queue`].
 use std::collections::HashSet;
 
-use crate::state::ClientState;
+use crate::state::{ClientEvent, ClientState};
 use qnet::MsgReader;
+use qnet::protocol::{MAX_MODELS, MAX_SOUNDS};
 
 /// An effect for the FTE particle system to run.
 #[derive(Clone, Debug, PartialEq)]
@@ -141,6 +142,19 @@ impl ClientState {
                 self.particle_precache.resize(index + 1, String::new());
             }
             self.particle_precache[index] = name;
+        } else if code >> 14 == 0 && (2..MAX_MODELS).contains(&index) {
+            if self.model_precache.len() <= index {
+                self.model_precache.resize(index + 1, String::new());
+                self.model_flags.resize(index + 1, 0);
+            }
+            self.model_precache[index] = name;
+            self.events.push(ClientEvent::ModelPrecache(index));
+        } else if code >> 14 == 2 && (1..MAX_SOUNDS).contains(&index) {
+            if self.sound_precache.len() <= index {
+                self.sound_precache.resize(index + 1, String::new());
+            }
+            self.sound_precache[index] = name;
+            self.events.push(ClientEvent::SoundPrecache(index));
         }
     }
 
@@ -247,5 +261,23 @@ mod tests {
         assert!(cl.fte_effect("TE_GUNSHOT", [0.0; 3], 20.0));
         assert!(!cl.fte_effect("TE_SPIKE", [0.0; 3], 1.0));
         assert_eq!(cl.fte_queue.len(), 1);
+    }
+
+    #[test]
+    fn late_precaches_fill_model_and_sound_slots() {
+        let mut cl = ClientState::new();
+        let mut m = SizeBuf::new(1024);
+        for (code, name) in [(5, "progs/mon_gaunt.mdl"), (0x8000 | 3, "misc/late.wav"), (1, "maps/other.bsp")] {
+            m.byte(SVCDP_PRECACHE as i32);
+            m.short(code);
+            m.string(name.as_bytes());
+        }
+        cl.parse_server_message(&m.data).unwrap();
+        assert_eq!(cl.model_precache[5], "progs/mon_gaunt.mdl");
+        assert_eq!(cl.model_flags.len(), 6);
+        assert_eq!(cl.sound_precache[3], "misc/late.wav");
+        assert_ne!(cl.model_precache[1], "maps/other.bsp", "the world model stays");
+        let ev = cl.take_events();
+        assert_eq!(ev, [ClientEvent::ModelPrecache(5), ClientEvent::SoundPrecache(3)]);
     }
 }

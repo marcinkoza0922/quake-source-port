@@ -66,6 +66,10 @@ fn open(bytes: &Arc<[u8]>, ext: &str) -> Option<Opened> {
 
 impl MusicStream {
     /// Build a stream from file bytes; `ext` is the file extension (format hint).
+    pub(crate) fn set_looping(&mut self, on: bool) {
+        self.looping = on;
+    }
+
     pub fn new(bytes: Vec<u8>, ext: &str, looping: bool, out_rate: u32) -> Option<Self> {
         let bytes: Arc<[u8]> = bytes.into();
         let (format, decoder, track_id, in_rate) = open(&bytes, ext)?;

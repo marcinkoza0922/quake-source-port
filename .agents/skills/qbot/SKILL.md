@@ -21,7 +21,7 @@ client driven by `set_move`. Runs are deterministic. A release build has
 ```sh
 cargo build --release -p qbot
 target/release/qbot                       # every playable id1 map, all cores
-target/release/qbot -game hipnotic        # baselines: id1, hipnotic, rogue, dopa, mg1, mg3
+target/release/qbot -game hipnotic        # baselines: every mod in flagged.txt
 target/release/qbot e1m3 e2m5 -v          # specific maps, verbose log
 target/release/qbot -game ad ad_sepulcher -time 1200
 ```
@@ -36,12 +36,28 @@ pos: why`), sim/wall time, `errors`, `unusual` (developer-log lines, see
 below). `cargo nextest run -p qbot` checks e1m1
 and e1m3 (every monster, every secret, exit); skips without data.
 
+## Flagged mods
+
+`tools/qbot/flagged.txt` lists every mod that has flagged an issue, with the
+reason; each has a baseline. Add a line (and `-save-baseline`) when a new one
+turns up. After a change that could affect mods:
+
+```sh
+target/release/qbot -game flagged -maxwall 90 -out target/qbot-flagged   # ~10 min
+```
+
+`-game all` is every installed mod. With several games, results go to
+`<out>/<game>/report.json` and `<out>/summary.txt` (errors first).
+
 ## Baselines
 
 `tools/qbot/baseline-<game>.json`: `{kills, secrets, events, exited}` per map
 (`events` = triggers + buttons + pickups). Fewer of anything, a lost exit, or
-any engine error prints `REGRESSION` and exits 1. Each entry also has
-`log`: the map's known developer-log lines (qbot runs `developer 1`;
+any engine error prints `REGRESSION` and exits 1, unless the entry lists that
+very message under `errors` (a map's own QC bug that ironwail and vkQuake
+raise too). Maps stopped by `-maxwall` aren't compared or saved: how far they
+get depends on the machine. Each entry also has
+`log`: `null` for maps that print more than 400 lines (not compared), else the map's known developer-log lines (qbot runs `developer 1`;
 `bot/devlog.rs` drops lines every level prints). A line not in `log` prints
 `NEW-LOG map: text` and is a regression: read it before re-saving. Most
 known lines are vanilla spawn complaints (`"property 1" is not a field`,

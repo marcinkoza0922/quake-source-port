@@ -67,6 +67,8 @@ pub struct Client {
     pub last_move_seq: u32,
     /// Custom QC stats last sent as `//st` / `//sts` (clients without deltas).
     pub(crate) stat_text: std::collections::BTreeMap<usize, String>,
+    /// The progs put the player under water after its move (`//v_water`).
+    pub(crate) force_water: bool,
     /// Replacement-delta state while PEXT2_REPLACEMENTDELTAS is active.
     pub delta: Option<Box<crate::delta::DeltaState>>,
     /// A second point whose PVS is added to this client's (the local free
@@ -111,6 +113,7 @@ impl Default for Client {
             pext2: 0,
             last_move_seq: 0,
             stat_text: Default::default(),
+            force_water: false,
             delta: None,
             extra_view: None,
         }

@@ -1,0 +1,6 @@
+{
+  "rub2m1": {"kills": 99, "secrets": 7, "events": 88, "exited": true, "log": ["intermission_running: 0", "nextmap:", "walkmonster in wall at: '816.0 1856.0 536.0'", "walkmonster in wall at: '1072.0 1856.0 536.0'"]},
+  "rub2m2": {"kills": 130, "secrets": 7, "events": 83, "exited": true, "log": ["walkmonster in wall at: '2528.0  80.0  25.0'", "walkmonster in wall at: '2240.0 208.0  25.0'", "intermission_running: 0", "nextmap:"]},
+  "rub2m3": {"kills": 163, "secrets": 7, "events": 151, "exited": true, "log": ["No spawn function for:", "EDICT 483:", "origin          '-2842.0 -2312.0 2962.0'", "classname       dynamiclight", "target          ir_fan_04", "origin          '-2842.0 -2504.0 2962.0'", "target          ir_fan_05", "EDICT 494:", "origin          '-1200.0 -1472.0 576.0'", "walkmonster in wall at: '584.0 -1048.0 409.0'", "intermission_running: 0", "nextmap:", "walkmonster in wall at: '-1088.0 -1760.0 289.0'", "walkmonster in wall at: '-1104.0 -1704.0 289.0'", "walkmonster in wall at: '-1088.0 -1904.0 289.0'"]},
+  "start": {"kills": 0, "secrets": 1, "events": 18, "exited": true, "log": ["intermission_running: 0", "nextmap:"]}
+}

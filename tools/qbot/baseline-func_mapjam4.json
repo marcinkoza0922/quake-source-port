@@ -1,0 +1,4 @@
+{
+  "jam4_fifth": {"kills": 56, "secrets": 6, "events": 86, "exited": true, "log": ["walkmonster in wall at: '2144.0 2528.0 3608.0'", "walkmonster in wall at: '2352.0 2256.0 3608.0'", "walkmonster in wall at: '2352.0 2336.0 3608.0'", "walkmonster in wall at: '2368.0 2544.0 3608.0'", "walkmonster in wall at: '2368.0 2432.0 3608.0'", "walkmonster in wall at: '2160.0 2160.0 3608.0'", "walkmonster in wall at: '2256.0 2160.0 3608.0'", "Bonus item fell out of level at '608.0 -1040.0 422.0'", "Bonus item fell out of level at '640.0 -976.0 422.0'"]},
+  "jam4_rapowke": {"kills": 33, "secrets": 1, "events": 30, "exited": true, "log": ["\"mapversion\" is not a field", "\"color\" is not a field", "walkmonster in wall at: '803.1  25.6 -2792.0'"]}
+}

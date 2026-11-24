@@ -563,7 +563,7 @@ impl Host {
                 let leaf = bsp_leaf(bsp, v.origin);
                 l.ambient_levels = bsp.leafs.get(leaf).map(|lf| lf.ambient_level);
             }
-            l.underwater = self.contents(v.origin) <= crate::view::CONTENTS_WATER;
+            l.underwater = self.cl.force_underwater || self.contents(v.origin) <= crate::view::CONTENTS_WATER;
         }
         // Split-screen: every other local player is a listener too.
         for g in self.guests.iter().filter(|g| g.cl.signon == 4).take(qsound::MAX_OTHER_LISTENERS) {

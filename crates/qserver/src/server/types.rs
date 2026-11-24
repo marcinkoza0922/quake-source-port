@@ -83,6 +83,10 @@ pub struct Sv {
     pub particle_precache: Vec<String>,
     pub lightstyles: Vec<Vec<u8>>,
     pub datagram: SizeBuf,
+    /// What QC wrote to MSG_MULTICAST, until `multicast` sends it.
+    pub(crate) multicast: SizeBuf,
+    /// Alias frame (name, seconds) by precache slot (`frameforname`).
+    pub(crate) frame_names: HashMap<usize, Vec<(String, f32)>>,
     pub reliable_datagram: SizeBuf,
     pub signon: Vec<SizeBuf>,
     pub fields: Fields,
@@ -140,6 +144,10 @@ pub struct Core {
     pub cmd_client: Option<usize>,
     pub(crate) cmd_names: Vec<String>,
     pub(crate) queued_client_cmds: Vec<(usize, String)>,
+    /// When the server object was made (`gettime`).
+    pub(crate) started: qcore::time::SystemTime,
+    /// Clients QC `dropclient`ed this frame.
+    pub(crate) queued_drops: Vec<usize>,
     /// Active linked portal pairs `(in, out)` for fast trace/projectile checks.
     pub(crate) linked_portals: Vec<(crate::addons::portal::Portal, crate::addons::portal::Portal)>,
     /// Entities that already crossed a portal during `physics_toss` this frame.
