@@ -17,7 +17,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent.parent
 WIDTH, HEIGHT, FRAMES, FPS = 320, 92, 48, 12
 # the add-on browser's ids; toys by their index in `Toy::ALL`
-IDS = {"portalgun": 0, "boomerang": 1, "sticky": 2, "hookshot": 3, "railgun": 4, "goggles": None, "akimbo": 8}
+IDS = {"portalgun": 0, "boomerang": 1, "sticky": 2, "hookshot": 3, "railgun": 4, "goggles": None, "akimbo": 8, "rifle": 9}
 
 
 def capture(engine, basedir, addon):
@@ -64,6 +64,17 @@ def capture(engine, basedir, addon):
             at(3.08 + shot * 0.17, f"-{button}")
         at(4.5, "+reload")
         at(4.6, "-reload")
+    elif addon == "rifle":
+        at(1.0, "give n 100")
+        at(1.0, "setpos 480 -100 40 0 90 0")
+        at(2.9, "+attack")
+        at(3.5, "-attack")
+        at(3.6, "+attack2")
+        at(4.0, "+attack")
+        at(4.8, "-attack")
+        at(5.0, "-attack2")
+        at(5.2, "+reload")
+        at(5.3, "-reload")
     else:
         at(3.1, "+attack")
         at(4.0 if addon == "boomerang" else 3.5, "-attack")

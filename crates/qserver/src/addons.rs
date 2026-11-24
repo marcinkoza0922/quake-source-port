@@ -118,7 +118,15 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_akimbo_swap", "0", CVAR_ARCHIVE),
     ("addon_akimbo", "0", CVAR_ARCHIVE),
     ("addon_akimbo_slot", "2", CVAR_ARCHIVE),
-    // assault rifle: on/off, slot
+    // assault rifle: on/off, slot, magazine size, reload seconds, reload when
+    // empty, aim (0 hold, 1 toggle), sight magnification, recoil, dot colour
+    ("addon_rifle_mag", "30", CVAR_ARCHIVE),
+    ("addon_rifle_reload", "2.2", CVAR_ARCHIVE),
+    ("addon_rifle_autoreload", "1", CVAR_ARCHIVE),
+    ("addon_rifle_aim", "0", CVAR_ARCHIVE),
+    ("addon_rifle_zoom", "1.3", CVAR_ARCHIVE),
+    ("addon_rifle_recoil", "1", CVAR_ARCHIVE),
+    ("addon_rifle_dot", "0", CVAR_ARCHIVE),
     ("addon_rifle", "0", CVAR_ARCHIVE),
     ("addon_rifle_slot", "4", CVAR_ARCHIVE),
 ];

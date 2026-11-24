@@ -297,6 +297,8 @@ pub struct Input {
     /// Last aim assist result (for HUD/debug).
     pub last_aim: AimResult,
     pub lockon: lockon::LockOn,
+    /// Scales mouse, stick, gyro and touch look (aiming down a sight).
+    pub look_scale: f32,
     /// Host permits auto-aim only in local play.
     pub autoaim_allowed: bool,
     pub autoaim_fov: [f32; 2],
@@ -339,6 +341,7 @@ impl Input {
             flick: FlickStick::default(),
             last_aim: AimResult::NONE,
             lockon: lockon::LockOn::default(),
+            look_scale: 1.0,
             autoaim_allowed: false,
             autoaim_fov: [90.0, 73.74],
             autoaim_players: false,

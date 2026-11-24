@@ -179,12 +179,14 @@ impl Host {
             .collect();
         let toys = self.allowed_toys();
         let autoaim_allowed = self.local_autoaim_allowed() && !demo && in_game;
-        let autoaim_fov = self.autoaim_fov();
+        let (zoom, sight) = (self.zoom_fov(), self.cv("addon_rifle_zoom"));
+        let toggle_aim = self.cv("addon_rifle_aim") != 0.0;
+        let autoaim_fov: Vec<_> = self.guests.iter().map(|g| self.autoaim_fov(g.ads.fov(zoom, sight))).collect();
         let autoaim_players = self.cv("deathmatch") != 0.0;
         let autofire_allowed = !autoaim_players && !self.server.core.sv.paused;
         let cvars = &self.server.core.cvars;
         let entries = crate::wheel::inventory(cvars, &toys);
-        for (g, targets) in self.guests.iter_mut().zip(&targets) {
+        for ((g, targets), autoaim_fov) in self.guests.iter_mut().zip(&targets).zip(autoaim_fov) {
             if g.cl.signon != 4 {
                 continue;
             }
@@ -193,6 +195,7 @@ impl Host {
             let ctx = vis.as_ref().map(|v| AimContext { eye, player_velocity: g.cl.velocity, targets, vis: v, allowed });
             g.input.autoaim_allowed = autoaim_allowed && g.cl.intermission == 0 && g.cl.stats[qnet::protocol::STAT_HEALTH] > 0;
             g.input.autoaim_fov = autoaim_fov;
+            g.input.look_scale = g.ads.look_scale(sight);
             g.input.autoaim_players = autoaim_players;
             g.input.dest = if in_game { KeyDest::Game } else { KeyDest::Menu };
             let autofire = autofire_allowed && g.pad.is_some() && g.input.autofire_enabled(cvars);
@@ -213,8 +216,17 @@ impl Host {
             if let Some(weapon) = choice {
                 g.toy.select(weapon, &g.cl, &mut fresh);
             }
+            g.ads.update(ft, crate::addons::rifle_ads::Frame {
+                held: g.toy.held == Some(qserver::addons::Toy::Rifle),
+                active: allowed,
+                alt: inp.attack2,
+                toggle: toggle_aim,
+                reloading: crate::addons::rifle_ads::reloading(&g.cl),
+            });
+            g.ads.apply(ft, &mut g.cl.viewangles, inp.look_delta[1]);
+            let alt = g.ads.alt(g.toy.held, inp.attack2);
             let dodge = g.input.dodge_pressed();
-            let buttons = g.cmd.buttons | g.toy.buttons(inp.attack, inp.attack2, inp.reload, inp.jump)
+            let buttons = g.cmd.buttons | g.toy.buttons(inp.attack, alt, inp.reload, inp.jump)
                 | if dodge && allowed { qserver::addons::BUTTON_DODGE } else { 0 };
             let impulse = if fresh != 0 { fresh } else { g.cmd.impulse };
             g.cmd = g.cl.base_move(&InputState { attack: false, jump: false, impulse: 0, ..inp }, &sp, ft);

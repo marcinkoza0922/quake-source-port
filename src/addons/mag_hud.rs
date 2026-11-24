@@ -20,6 +20,9 @@ pub fn draw(c: &mut Canvas, vh: f32, cl: &qclient::ClientState, owner: usize, he
         let low = p.rounds * 4 <= m.cap;
         let color = if p.rounds == 0 { [1.0, 0.25, 0.2, 1.0] } else if low { [1.0, 0.8, 0.3, 1.0] } else { [0.95, 0.95, 0.95, 1.0] };
         let text = format!("{} / {}", p.rounds, m.cap);
+        // a plate behind, as guns reach this far up
+        let h = if p.reload_end.is_some() { 18.0 } else { 13.0 };
+        c.round_box(x - 24.0, y - 2.0, 48.0, h, 3.0, [0.0, 0.0, 0.0, 0.55], None);
         c.text_raw(x - c.text_w_raw(&text, 8.0) / 2.0, y, &text, 8.0, color);
         if let Some(left) = p.reload_end.map(|t| t - cl.time).filter(|&l| l > 0.0) {
             let k = (left as f32 / p.reload_secs.max(0.1)).clamp(0.0, 1.0);

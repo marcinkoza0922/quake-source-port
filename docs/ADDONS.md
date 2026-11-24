@@ -587,6 +587,61 @@ degrees, denser in the middle; shots set `show_hostile` and a small
 - Menu: `Page::Akimbo` (`menu_options akimbo`). Default slot 2, label "AK".
 - Tests: `crates/qserver/tests/akimbo.rs` (e1m1), `akimbo`, `akimbo_model`
   and `akimbo_fx` unit tests.
+### Assault rifle (`addon_rifle`, `addons/rifle.rs`; `src/addons/rifle_*.rs`)
+A full-auto carbine with a tube red dot sight. Fire shoots 750 rounds a minute
+(`INTERVAL` 0.08 s; the remainder carries over frames, so the rate is the same
+at any tic rate) from a magazine (`addon_rifle_mag`, default 30) of bullets of
+`addon_rifle_damage` (10). Reload (2.2 s, `addon_rifle_reload`, +0.35 s to
+chamber a round after running dry) takes what is missing from the nails when
+it finishes (`currentammo` follows while it shows nails); it starts by itself
+0.3 s after the last round (`addon_rifle_autoreload`). With no nails an empty
+rifle clicks. Putting it away or dying cancels a reload; nothing is lost. The
+cone (`CONE`, `BLOOM`, `RUN`, `AIR`) widens with sustained fire, speed and in
+the air, and is about a twentieth when aimed. Aiming walks at 0.6 speed
+(`rifle::tune`, on the move's parameters only, like orange gel). Each level
+starts with a full magazine; `.qsa` saves keep `rifle <client> <rounds>`.
+- Aiming (`rifle_ads::Ads`, one on `Host` and one per split-screen guest):
+  turns hold or toggle (`addon_rifle_aim`) into a held `BUTTON_TOY_ALT`, the
+  only thing the server sees (its own 0.2 s ramp, `AIM_TIME`, sets the cone).
+  A menu, death, another weapon or a reload lowers the sight and drops the
+  toggle; a held button raises it again after a reload. The eased amount
+  drives the pose, the FOV (`Ads::fov`: magnification `addon_rifle_zoom`,
+  default 1.3, on top of `zoom_fov`, the `+zoom` FOV; per view in
+  split-screen) and `qinput::Input::look_scale` (mouse, sticks, gyro and touch
+  slow by the same factor; keys, flick turns and aim assist do not).
+- Recoil (`addon_rifle_recoil`) moves the real view angles, so bullets always
+  go where the view and the dot point: each shot climbs 0.46 degrees and
+  wanders, 55% of that when aimed; 70% of the climb settles back once firing
+  stops, less what the player pulled down. No kick in demos.
+- The sight: the models share one space (`tools/build_rifle.py`), where the
+  tube's axis is exactly known (`rifle_model::LENS`, `APERTURE`, `TUBE`; a test
+  checks no triangle crosses it). `rifle_pose` blends from the hip to the tube
+  centred on the view at 14 units (10.5 to 17 by FOV, so the sight keeps about
+  the same size on screen and its rear never reaches the near plane). The dot
+  (`rifle_dot`) is 2D, drawn after the scene where `viewangles` falls in the
+  view, so it stays on the aim point whatever the rifle does, and only while
+  that spot is seen through both ends of the tube (`Pose::through`). The
+  crosshair is hidden meanwhile (it stays with Viewmodels off).
+  `addon_rifle_dot`: 0 red, 1 green, 2 yellow.
+- Presentation (`rifle_fx`): muzzle flash (halved when aimed; the server also
+  sets `EF_MUZZLEFLASH`), smoke, tracers at 9000 u/s, tumbling brass from the
+  ejection port; the magazine is its own model that drops out and comes back
+  during a reload (`rifle_pose::magazine`), with cues at `MAG_OUT`, `MAG_IN`
+  and `BOLT` (only after running dry). Sounds: `qsound::rifle`, synthesised.
+- Model: `assets/rifle/`. Meshy: nano-banana-pro concept
+  `01a20ef1-534f-724b-848f-aae0c2ae9c26`, meshy-t2.5 (3,946 tris) + meshy-n1
+  task `01a20ef1-cd19-75c4-b93f-4fe57e001aba`, asked for without any optic. The
+  commands are in `assets/rifle/import.json`: `tools/import_toy_model.py
+  --keep-uv` (Meshy's UVs are even; `relayout_toy_uv.py` would stretch them,
+  it unwraps the MDL's per-axis packed grid), then `tools/build_rifle.py`,
+  which scales it to 52 units, splits off the magazine, builds the sight and a
+  crisp receiver rail, and paints both skins (material per connected part,
+  ray-cast occlusion, worn edges, single-texel grain, exact palette colours).
+- Menu: Add-ons → Assault Rifle (`Page::Rifle`, `menu_options rifle`). Default
+  weapon slot 4, wheel label "AR"; always selectable.
+- Tests: `crates/qserver/tests/rifle.rs` (e1m1: rate, reload, nails, dry
+  click, cancel, save, 20 fps, aiming speed), `rifle` unit tests in qserver,
+  `rifle_ads`, `rifle_pose`, `rifle_dot`, `rifle_model`, `qsound::rifle`.
 ### Equipment wheel and goggles (`src/addons/goggles.rs`, `equip_wheel.rs`, `src/host/goggles.rs`)
 Equipment is switched on and off rather than held, so it does not use the
 toy slot. `Equip` lists it in wheel order; items of one group exclude each

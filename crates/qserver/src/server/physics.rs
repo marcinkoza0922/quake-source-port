@@ -112,6 +112,9 @@ impl Server {
             if toys {
                 crate::addons::gel_phys::tune(&l.gel, &ents, e, &mut p, &mut cmd);
             }
+            if l.rifle.aiming(i) && crate::addons::active(ents.c) {
+                crate::addons::rifle::tune(&l.rifle, i, &mut p, &mut cmd);
+            }
             qworld::user::client_think(&l.world, &mut ents, &p, e, &cmd);
             crate::addons::dodge::apply(&mut l.dodges, &mut l.vm, c, i, mv);
         }

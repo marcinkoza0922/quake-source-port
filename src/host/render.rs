@@ -126,7 +126,7 @@ impl Host {
             self.portal_fx.frame(self.cl.time, v, &mut self.r, self.snd.as_ref(), &mut fte);
             self.rail_fx.frame(self.cl.time, v, &mut self.r, &mut fte);
             self.akimbo_fx.frame(self.cl.time, v, &mut self.r, &mut fte);
-            self.rifle_fx.frame(self.cl.time, v, &mut self.r, &mut fte);
+            self.rifle_fx.frame(self.cl.time, v, &mut self.r, self.snd.as_ref(), &mut fte);
             self.grenade_arc_frame(v, &mut fte);
             self.hook_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, &mut self.r, &mut fte);
             self.cable_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), cable_held, rc.cable_metal, &self.level, v, &mut self.r, &mut fte);
@@ -213,6 +213,14 @@ impl Host {
         } else {
             Vec::new()
         };
+        // raised rifle sights, per view
+        let sights: Vec<_> = if splits.is_empty() {
+            view.iter().map(|v| self.rifle_sight(None, v)).collect()
+        } else {
+            let live = (0..self.guests.len()).filter(|&k| self.guests[k].cl.signon == 4);
+            std::iter::once(None).chain(live.map(Some)).zip(&splits).map(|(k, s)| self.rifle_sight(k, &s.view)).collect()
+        };
+        let sight = |i: usize| sights.get(i).copied().flatten();
         let hud = self.hud_frame(&c, &addon_entries, cur_speed);
         self.hud.fade.update(&self.hud.layout, &self.cl, (&addon_entries, self.toy.held), self.realtime);
         let teamplay = rc.teamplay;
@@ -240,7 +248,10 @@ impl Host {
                 self.view.draw_damage(&mut c, scene_h, rc.damage_indicator, rc.flash_scale);
                 if viewsize < 130.0 && csqc_crosshair {
                     let color = reticle::color(&self.server.core.cvars, p1_target, self.feedback.kill && self.feedback.remaining(self.realtime) > 0.0);
-                    draw_crosshair(&mut c, scene_h, &self.server.core.cvars, self.input.lockon.target.is_some(), self.input.lockon.active, color);
+                    match sight(0) {
+                        Some(s) => s.draw(&mut c, scene_h),
+                        None => draw_crosshair(&mut c, scene_h, &self.server.core.cvars, self.input.lockon.target.is_some(), self.input.lockon.active, color),
+                    }
                     hitmarker::draw_hitmarker(&mut c, scene_h, &self.server.core.cvars, self.feedback.remaining(self.realtime), color);
                 }
                 normal_hud_start = c.list.len();
@@ -299,7 +310,10 @@ impl Host {
                             if cl.intermission == 0 {
                                 let vh = cc.vh() - cell_reserve;
                                 let color = reticle::color(&self.server.core.cvars, target_colors[i], marker.1 && marker.0 > 0.0);
-                                draw_crosshair(&mut cc, vh, &self.server.core.cvars, locked, active, color);
+                                match sight(i) {
+                                    Some(s) => s.draw(&mut cc, vh),
+                                    None => draw_crosshair(&mut cc, vh, &self.server.core.cvars, locked, active, color),
+                                }
                                 hitmarker::draw_hitmarker(&mut cc, vh, &self.server.core.cvars, marker.0, color);
                             }
                             if !hud.edit {
