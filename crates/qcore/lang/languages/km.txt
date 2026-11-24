@@ -4171,3 +4171,81 @@ km HUD របស់ម៉ូដ
 
 @ Custom HUD provided by the current mod or map pack
 km HUD ផ្ទាល់​ខ្លួន​ដែល​ផ្តល់​ដោយ​ម៉ូដ ឬ​កញ្ចប់​ផែនទី​បច្ចុប្បន្ន
+
+@ Akimbo Pistols
+km កាំភ្លើង​ខ្លី​ពីរ​ដៃ
+
+@ Assault Rifle
+km កាំភ្លើង​វាយ​ប្រហារ
+
+@ Aim Button
+km ប៊ូតុង​តម្រង់
+
+@ Dot Colour
+km ពណ៌​ចំណុច
+
+@ Magazine Size
+km ទំហំ​បង់​គ្រាប់
+
+@ Recoil
+km កម្លាំង​ធាក់
+
+@ Reload
+km បញ្ចូល​គ្រាប់
+
+@ Reload (Add-ons)
+km បញ្ចូល​គ្រាប់ (គ្រឿង​បន្ថែម)
+
+@ Reload Time
+km រយៈពេល​បញ្ចូល​គ្រាប់
+
+@ Reload When Empty
+km បញ្ចូល​គ្រាប់​ពេល​អស់
+
+@ Sight Zoom
+km ពង្រីក​ឧបករណ៍​តម្រង់
+
+@ Spread
+km ការ​សាយភាយ
+
+@ Swap Pistols
+km ប្ដូរ​កាំភ្លើង​ខ្លី
+
+@ Alt-fire aims while held, or with each press
+km បាញ់​ជំនួស​តម្រង់​ពេល​សង្កត់ ឬ​រាល់​ពេល​ចុច
+
+@ Colour of the dot in the sight
+km ពណ៌​ចំណុច​ក្នុង​ឧបករណ៍​តម្រង់
+
+@ Damage of each bullet
+km ការ​ខូចខាត​នៃ​គ្រាប់​នីមួយៗ
+
+@ Fire shoots the right pistol and alt-fire the left one
+km បាញ់​ប្រើ​កាំភ្លើង​ខ្លី​ស្ដាំ ហើយ​បាញ់​ជំនួស​ប្រើ​កាំភ្លើង​ឆ្វេង
+
+@ How far shots may stray from the crosshair, in degrees
+km កម្រិត​ដែល​គ្រាប់​អាច​ងាក​ចេញ​ពី​សញ្ញា​តម្រង់ (ដឺក្រេ)
+
+@ How hard firing kicks the view up
+km កម្លាំង​ដែល​ការ​បាញ់​ធាក់​ទិដ្ឋភាព​ឡើង​លើ
+
+@ How much closer the view gets while aiming
+km កម្រិត​ដែល​ទិដ្ឋភាព​ខិត​ជិត​ពេល​តម្រង់
+
+@ An empty gun reloads without pressing Reload
+km កាំភ្លើង​អស់​គ្រាប់​បញ្ចូល​គ្រាប់​ដោយ​មិន​ចាំបាច់​ចុច បញ្ចូល​គ្រាប់
+
+@ Rounds in a full magazine
+km ចំនួន​គ្រាប់​ក្នុង​បង់​ពេញ
+
+@ Seconds a reload takes
+km ចំនួន​វិនាទី​ដែល​ត្រូវ​ការ​ដើម្បី​បញ្ចូល​គ្រាប់
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+km កាំភ្លើង​ខ្លី​មួយ​ក្នុង​ដៃ​នីមួយៗ: បាញ់​ប្រើ​ដៃ​ឆ្វេង បាញ់​ជំនួស​ប្រើ​ដៃ​ស្ដាំ។ គ្រាប់​គ្មាន​ដែន​កំណត់ ប៉ុន្តែ​ត្រូវ​បញ្ចូល​គ្រាប់​កាំភ្លើង​នីមួយៗ។
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+km កាំភ្លើង​ស្វ័យ​ប្រវត្តិ​ដែល​បញ្ចូល​គ្រាប់​ពី​ដែក​គោល​របស់​អ្នក។ បាញ់​ជំនួស​តម្រង់​តាម​ឧបករណ៍​តម្រង់​ចំណុច​ក្រហម ដើម្បី​បាញ់​បាន​ត្រង់​ជាង​និង​មើល​ឃើញ​ជិត​ជាង។
+
+@ None
+km គ្មាន

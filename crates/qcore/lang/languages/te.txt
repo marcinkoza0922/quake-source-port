@@ -4171,3 +4171,81 @@ te మాడ్ HUD
 
 @ Custom HUD provided by the current mod or map pack
 te ప్రస్తుత మాడ్ లేదా మ్యాప్ ప్యాక్ అందించే అనుకూల HUD
+
+@ Akimbo Pistols
+te జంట పిస్టళ్లు
+
+@ Assault Rifle
+te అసాల్ట్ రైఫిల్
+
+@ Aim Button
+te గురి బటన్
+
+@ Dot Colour
+te చుక్క రంగు
+
+@ Magazine Size
+te మ్యాగజైన్ పరిమాణం
+
+@ Recoil
+te రీకాయిల్
+
+@ Reload
+te రీలోడ్
+
+@ Reload (Add-ons)
+te రీలోడ్ (యాడ్-ఆన్‌లు)
+
+@ Reload Time
+te రీలోడ్ సమయం
+
+@ Reload When Empty
+te ఖాళీ అయితే రీలోడ్
+
+@ Sight Zoom
+te సైట్ జూమ్
+
+@ Spread
+te చెదురు
+
+@ Swap Pistols
+te పిస్టళ్లు మార్చు
+
+@ Alt-fire aims while held, or with each press
+te ప్రత్యామ్నాయ ఫైర్ పట్టుకున్నంత సేపు గురి పెడుతుంది, లేదా ప్రతి నొక్కుకు మారుతుంది
+
+@ Colour of the dot in the sight
+te సైట్‌లోని చుక్క రంగు
+
+@ Damage of each bullet
+te ప్రతి బుల్లెట్ చేసే నష్టం
+
+@ Fire shoots the right pistol and alt-fire the left one
+te ఫైర్ కుడి పిస్టల్‌ను, ప్రత్యామ్నాయ ఫైర్ ఎడమ పిస్టల్‌ను పేలుస్తుంది
+
+@ How far shots may stray from the crosshair, in degrees
+te షాట్‌లు క్రాస్‌హెయిర్ నుండి ఎన్ని డిగ్రీలు పక్కకు పోవచ్చు
+
+@ How hard firing kicks the view up
+te కాల్చినప్పుడు వీక్షణ ఎంత బలంగా పైకి లేస్తుంది
+
+@ How much closer the view gets while aiming
+te గురి పెట్టినప్పుడు వీక్షణ ఎంత దగ్గరవుతుంది
+
+@ An empty gun reloads without pressing Reload
+te ఖాళీ గన్ రీలోడ్ నొక్కకుండానే రీలోడ్ అవుతుంది
+
+@ Rounds in a full magazine
+te నిండు మ్యాగజైన్‌లోని బుల్లెట్ల సంఖ్య
+
+@ Seconds a reload takes
+te రీలోడ్‌కు పట్టే సెకన్లు
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+te ప్రతి చేతిలో ఒక పిస్టల్: ఫైర్ ఎడమదాన్ని, ప్రత్యామ్నాయ ఫైర్ కుడిదాన్ని పేలుస్తుంది. మందుగుండు అయిపోదు, కానీ ప్రతి పిస్టల్‌ను రీలోడ్ చేయాలి.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+te మీ మేకులతో రీలోడ్ అయ్యే ఫుల్-ఆటో రైఫిల్. ప్రత్యామ్నాయ ఫైర్ రెడ్ డాట్ సైట్‌తో గురి పెట్టి, మరింత కచ్చితమైన షాట్‌లు, దగ్గరి వీక్షణ ఇస్తుంది.
+
+@ None
+te ఏదీ లేదు

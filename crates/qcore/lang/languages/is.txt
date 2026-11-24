@@ -4171,3 +4171,81 @@ is HUD mods
 
 @ Custom HUD provided by the current mod or map pack
 is Sérsniðið HUD frá núverandi modi eða kortapakka
+
+@ Akimbo Pistols
+is Tvær skammbyssur
+
+@ Assault Rifle
+is Árásarriffill
+
+@ Aim Button
+is Miðunarhnappur
+
+@ Dot Colour
+is Litur punkts
+
+@ Magazine Size
+is Stærð magasíns
+
+@ Recoil
+is Bakslag
+
+@ Reload
+is Endurhlaða
+
+@ Reload (Add-ons)
+is Endurhlaða (Viðbætur)
+
+@ Reload Time
+is Hleðslutími
+
+@ Reload When Empty
+is Endurhlaða þegar tómt
+
+@ Sight Zoom
+is Aðdráttur sigtis
+
+@ Spread
+is Dreifing
+
+@ Swap Pistols
+is Víxla skammbyssum
+
+@ Alt-fire aims while held, or with each press
+is Aukaskot miðar meðan því er haldið inni, eða við hverja ýtingu
+
+@ Colour of the dot in the sight
+is Litur punktsins í sigtinu
+
+@ Damage of each bullet
+is Skaði hverrar kúlu
+
+@ Fire shoots the right pistol and alt-fire the left one
+is Skot hleypir af hægri skammbyssunni og aukaskot af þeirri vinstri
+
+@ How far shots may stray from the crosshair, in degrees
+is Hversu langt skot geta vikið frá miðkrossinum (gráður)
+
+@ How hard firing kicks the view up
+is Hversu fast skothríð kippir sýninni upp
+
+@ How much closer the view gets while aiming
+is Hversu miklu nær sýnin færist við miðun
+
+@ An empty gun reloads without pressing Reload
+is Tóm byssa endurhleðst án þess að ýtt sé á Endurhlaða
+
+@ Rounds in a full magazine
+is Fjöldi skota í fullu magasíni
+
+@ Seconds a reload takes
+is Sekúndur sem endurhleðsla tekur
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+is Skammbyssa í hvorri hendi: Skot hleypir af þeirri vinstri, Aukaskot af þeirri hægri. Skotfæri eru óendanleg en endurhlaða þarf hvora skammbyssu.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+is Alsjálfvirkur riffill sem er endurhlaðinn með nöglunum þínum. Aukaskot miðar gegnum rauðpunktssigtið: þéttari skot og nærri sýn.
+
+@ None
+is Ekkert

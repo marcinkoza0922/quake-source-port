@@ -27,12 +27,16 @@ impl Alignment {
 
     pub fn offset(self, angles: [f32; 3]) -> Vec3 {
         let (_, right, _) = angle_vectors(angles.into());
-        right
-            * match self {
-                Self::Right => 8.0,
-                Self::Left => -8.0,
-                _ => 0.0,
-            }
+        right * self.side()
+    }
+
+    /// The side offset along the camera's right axis.
+    pub fn side(self) -> f32 {
+        match self {
+            Self::Right => 8.0,
+            Self::Left => -8.0,
+            _ => 0.0,
+        }
     }
 }
 

@@ -4171,3 +4171,81 @@ eu Mod-aren HUD
 
 @ Custom HUD provided by the current mod or map pack
 eu Uneko modak edo mapa-paketeak emandako HUD pertsonalizatua
+
+@ Akimbo Pistols
+eu Pistola bikoitzak
+
+@ Assault Rifle
+eu Eraso-fusila
+
+@ Aim Button
+eu Apuntatzeko botoia
+
+@ Dot Colour
+eu Puntuaren kolorea
+
+@ Magazine Size
+eu Kargagailuaren tamaina
+
+@ Recoil
+eu Atzerakada
+
+@ Reload
+eu Birkargatu
+
+@ Reload (Add-ons)
+eu Birkargatu (gehigarriak)
+
+@ Reload Time
+eu Birkargatze-denbora
+
+@ Reload When Empty
+eu Birkargatu hustean
+
+@ Sight Zoom
+eu Miraren zooma
+
+@ Spread
+eu Sakabanaketa
+
+@ Swap Pistols
+eu Trukatu pistolak
+
+@ Alt-fire aims while held, or with each press
+eu Tiro alternatiboak sakatuta dagoen bitartean apuntatzen du, edo sakaldi bakoitzean
+
+@ Colour of the dot in the sight
+eu Mirako puntuaren kolorea
+
+@ Damage of each bullet
+eu Bala bakoitzaren kaltea
+
+@ Fire shoots the right pistol and alt-fire the left one
+eu Tiroak eskuineko pistola erabiltzen du eta tiro alternatiboak ezkerrekoa
+
+@ How far shots may stray from the crosshair, in degrees
+eu Tiroak miratik zenbat desbidera daitezkeen, gradutan
+
+@ How hard firing kicks the view up
+eu Tiro egiteak ikuspegia zein indarrez jasotzen duen
+
+@ How much closer the view gets while aiming
+eu Apuntatzean ikuspegia zenbat hurbiltzen den
+
+@ An empty gun reloads without pressing Reload
+eu Hutsik dagoen arma Birkargatu sakatu gabe birkargatzen da
+
+@ Rounds in a full magazine
+eu Kargagailu bete bateko balak
+
+@ Seconds a reload takes
+eu Birkargatzeak irauten dituen segundoak
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+eu Pistola bat esku bakoitzean: tiroak ezkerrekoa erabiltzen du, tiro alternatiboak eskuinekoa. Munizioa amaigabea da, baina pistola bakoitza birkargatu behar da.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+eu Zure iltzeekin birkargatzen den fusil guztiz automatikoa. Tiro alternatiboak puntu gorriko miratik apuntatzen du, tiro zehatzagoak eta ikuspegi hurbilagoa lortzeko.
+
+@ None
+eu Bat ere ez

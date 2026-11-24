@@ -52,11 +52,13 @@ impl Host {
                 .and_then(|l| l.dodges.get(self.cl.viewentity.saturating_sub(1)).map(|d| d.pose(l.vm.time)))
                 .unwrap_or_default();
             self.view.third_person = rc.third_person;
-            self.view.vwep.enabled = rc.vwep_enabled;
+            self.view.vwep.enabled = rc.vwep_enabled && rc.third_person;
+            self.view.vwep.toys = if self.demo.is_none() { self.body_toys() } else { Vec::new() };
             self.view.vwep.server = if self.view.vwep.enabled { self.server.weapon_models() } else { None };
             let single_cam = self.single_camera(rc.teleport_windows);
             let pvs_eye = (single_cam && !rc.reflections_on).then_some(v.origin);
             self.view.entities(&mut self.cl, &cv, &mut self.level, fs, &mut self.r, pvs_eye, &mut ents);
+            self.body_muzzles();
             // player 1's own body belongs to player 1's portal views only
             if self.view.with_self && !rc.third_person {
                 for e in ents.iter_mut().filter(|e| e.portal_only) {
@@ -99,6 +101,7 @@ impl Host {
             }
             let cable_held = self.toy_view_models(v, &cv, &mut ents);
             crate::addons::sticky_draw::bombs(&self.cl, &mut self.level, &self.server.core.fs, &mut self.r, &mut ents, &mut dls);
+            self.akimbo_fx.lights(self.cl.time, &self.cl, self.snd.as_ref(), &mut dls);
             self.boomerang_fx.entities(self.cl.time, &mut self.level, &self.server.core.fs, &mut self.r, self.snd.as_ref(), &mut ents);
             self.cable_fx.entities(&self.cl, self.cl.viewentity.saturating_sub(1), cable_held, self.cl.time, rc.gravity, &mut self.level, &self.server.core.fs, &mut self.r, &mut ents);
             if let Some(g) = gun {
@@ -124,6 +127,8 @@ impl Host {
             );
             self.portal_fx.frame(self.cl.time, v, &mut self.r, self.snd.as_ref(), &mut fte);
             self.rail_fx.frame(self.cl.time, v, &mut self.r, &mut fte);
+            self.akimbo_fx.frame(self.cl.time, v, &mut self.r, &mut fte);
+            self.rifle_fx.frame(self.cl.time, v, &mut self.r, self.snd.as_ref(), &mut fte);
             self.grenade_arc_frame(v, &mut fte);
             self.hook_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, &mut self.r, &mut fte);
             self.cable_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), cable_held, rc.cable_metal, &self.level, v, &mut self.r, &mut fte);
@@ -210,6 +215,14 @@ impl Host {
         } else {
             Vec::new()
         };
+        // raised rifle sights, per view
+        let sights: Vec<_> = if splits.is_empty() {
+            view.iter().map(|v| self.rifle_sight(None, v)).collect()
+        } else {
+            let live = (0..self.guests.len()).filter(|&k| self.guests[k].cl.signon == 4);
+            std::iter::once(None).chain(live.map(Some)).zip(&splits).map(|(k, s)| self.rifle_sight(k, &s.view)).collect()
+        };
+        let sight = |i: usize| sights.get(i).copied().flatten();
         let hud = self.hud_frame(&c, &addon_entries, cur_speed);
         self.hud.fade.update(&self.hud.layout, &self.cl, (&addon_entries, self.toy.held), self.realtime);
         let teamplay = rc.teamplay;
@@ -237,7 +250,10 @@ impl Host {
                 self.view.draw_damage(&mut c, scene_h, rc.damage_indicator, rc.flash_scale);
                 if viewsize < 130.0 && csqc_crosshair {
                     let color = reticle::color(&self.server.core.cvars, p1_target, self.feedback.kill && self.feedback.remaining(self.realtime) > 0.0);
-                    draw_crosshair(&mut c, scene_h, &self.server.core.cvars, self.input.lockon.target.is_some(), self.input.lockon.active, color);
+                    match sight(0) {
+                        Some(s) => s.draw(&mut c, scene_h),
+                        None => draw_crosshair(&mut c, scene_h, &self.server.core.cvars, self.input.lockon.target.is_some(), self.input.lockon.active, color),
+                    }
                     hitmarker::draw_hitmarker(&mut c, scene_h, &self.server.core.cvars, self.feedback.remaining(self.realtime), color);
                 }
                 normal_hud_start = c.list.len();
@@ -296,7 +312,10 @@ impl Host {
                             if cl.intermission == 0 {
                                 let vh = cc.vh() - cell_reserve;
                                 let color = reticle::color(&self.server.core.cvars, target_colors[i], marker.1 && marker.0 > 0.0);
-                                draw_crosshair(&mut cc, vh, &self.server.core.cvars, locked, active, color);
+                                match sight(i) {
+                                    Some(s) => s.draw(&mut cc, vh),
+                                    None => draw_crosshair(&mut cc, vh, &self.server.core.cvars, locked, active, color),
+                                }
                                 hitmarker::draw_hitmarker(&mut cc, vh, &self.server.core.cvars, marker.0, color);
                             }
                             if !hud.edit {
@@ -318,6 +337,8 @@ impl Host {
                                 cp.draw_center(&mut cc, usize::MAX);
                             }
                             let (wheel, wcl) = if i == 0 { (&self.wheel, &self.cl) } else { (&self.guests[live[i - 1]].wheel, &self.guests[live[i - 1]].cl) };
+                            let vh = cc.vh() - cell_reserve;
+                            crate::addons::mag_hud::draw(&mut cc, vh, wcl, wcl.viewentity.saturating_sub(1), held_addon);
                             self.bullet_time.draw(&mut cc, bullet_meter);
                             wheel.draw(&mut cc, &mut pf, &glyphs, wcl, pad_ui, wheel_key);
                             crate::draw::translate(&mut cc.list, x as f32, y as f32);
@@ -352,6 +373,8 @@ impl Host {
                         if self.show_scores && self.cl.gametype == 1 && !self.csqc.has_draw_scores() {
                             crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
                         }
+                        let vh = c.vh() - reserve;
+                        crate::addons::mag_hud::draw(&mut c, vh, &self.cl, self.cl.viewentity.saturating_sub(1), self.toy.held);
                         self.bullet_time.draw(&mut c, bullet_meter);
                         self.wheel.draw(&mut c, &mut pf, &glyphs, &self.cl, pad_ui, wheel_key);
                         self.goggles.wheel.draw(&mut c, &glyphs, &self.goggles.equip, pad_ui, equip_key);

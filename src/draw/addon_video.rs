@@ -11,7 +11,9 @@ fn clip(id: &str) -> Option<&'static [u8]> {
         "sticky" => include_bytes!("../../assets/addon-previews/sticky.qav"),
         "hookshot" => include_bytes!("../../assets/addon-previews/hookshot.qav"),
         "railgun" => include_bytes!("../../assets/addon-previews/railgun.qav"),
+        "akimbo" => include_bytes!("../../assets/addon-previews/akimbo.qav"),
         "goggles" => include_bytes!("../../assets/addon-previews/goggles.qav"),
+        "rifle" => include_bytes!("../../assets/addon-previews/rifle.qav"),
         _ => return None,
     })
 }
@@ -59,7 +61,7 @@ mod tests {
 
     #[test]
     fn all_clips_decode_and_show_motion() {
-        for id in ["portalgun", "boomerang", "sticky", "hookshot", "railgun", "goggles"] {
+        for id in ["portalgun", "boomerang", "sticky", "hookshot", "railgun", "goggles", "akimbo", "rifle"] {
             let data = clip(id).unwrap();
             let first = decode(data, 0).unwrap();
             let mut motion = false;

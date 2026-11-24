@@ -4171,3 +4171,81 @@ ko 모드 HUD
 
 @ Custom HUD provided by the current mod or map pack
 ko 현재 모드 또는 맵 팩에서 제공하는 사용자 지정 HUD
+
+@ Akimbo Pistols
+ko 아킴보 권총
+
+@ Assault Rifle
+ko 돌격소총
+
+@ Aim Button
+ko 조준 버튼
+
+@ Dot Colour
+ko 도트 색상
+
+@ Magazine Size
+ko 탄창 크기
+
+@ Recoil
+ko 반동
+
+@ Reload
+ko 재장전
+
+@ Reload (Add-ons)
+ko 재장전 (애드온)
+
+@ Reload Time
+ko 재장전 시간
+
+@ Reload When Empty
+ko 탄창이 비면 재장전
+
+@ Sight Zoom
+ko 조준경 배율
+
+@ Spread
+ko 탄 퍼짐
+
+@ Swap Pistols
+ko 권총 좌우 바꾸기
+
+@ Alt-fire aims while held, or with each press
+ko 보조 사격을 누르고 있는 동안 조준하거나, 누를 때마다 조준을 전환합니다
+
+@ Colour of the dot in the sight
+ko 조준경 도트의 색상
+
+@ Damage of each bullet
+ko 총알 한 발의 피해
+
+@ Fire shoots the right pistol and alt-fire the left one
+ko 사격은 오른쪽 권총을, 보조 사격은 왼쪽 권총을 쏩니다
+
+@ How far shots may stray from the crosshair, in degrees
+ko 총알이 조준점에서 벗어날 수 있는 정도 (도)
+
+@ How hard firing kicks the view up
+ko 사격할 때 시야가 위로 튀는 정도
+
+@ How much closer the view gets while aiming
+ko 조준할 때 시야가 가까워지는 정도
+
+@ An empty gun reloads without pressing Reload
+ko 빈 총은 재장전을 누르지 않아도 재장전됩니다
+
+@ Rounds in a full magazine
+ko 가득 찬 탄창의 탄 수
+
+@ Seconds a reload takes
+ko 재장전에 걸리는 시간(초)
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+ko 양손에 권총을 한 자루씩 듭니다. 사격은 왼쪽, 보조 사격은 오른쪽 권총을 쏩니다. 탄약은 무한이지만 권총마다 재장전해야 합니다.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+ko 가진 못으로 재장전하는 전자동 소총입니다. 보조 사격으로 레드 도트 조준경을 들여다보면 탄이 더 모이고 시야가 가까워집니다.
+
+@ None
+ko 없음

@@ -4171,3 +4171,81 @@ sv Mod-HUD
 
 @ Custom HUD provided by the current mod or map pack
 sv Anpassad HUD från aktuell mod eller kartpaket
+
+@ Akimbo Pistols
+sv Dubbla pistoler
+
+@ Assault Rifle
+sv Automatkarbin
+
+@ Aim Button
+sv Siktesknapp
+
+@ Dot Colour
+sv Punktens färg
+
+@ Magazine Size
+sv Magasinstorlek
+
+@ Recoil
+sv Rekyl
+
+@ Reload
+sv Ladda om
+
+@ Reload (Add-ons)
+sv Ladda om (tillägg)
+
+@ Reload Time
+sv Omladdningstid
+
+@ Reload When Empty
+sv Ladda om när tomt
+
+@ Sight Zoom
+sv Siktets zoom
+
+@ Spread
+sv Spridning
+
+@ Swap Pistols
+sv Byt plats på pistolerna
+
+@ Alt-fire aims while held, or with each press
+sv Alternativ eld siktar medan den hålls in, eller växlar vid varje tryck
+
+@ Colour of the dot in the sight
+sv Färgen på punkten i siktet
+
+@ Damage of each bullet
+sv Skada per kula
+
+@ Fire shoots the right pistol and alt-fire the left one
+sv Eld avfyrar höger pistol och alternativ eld den vänstra
+
+@ How far shots may stray from the crosshair, in degrees
+sv Hur många grader skotten får avvika från hårkorset
+
+@ How hard firing kicks the view up
+sv Hur hårt skotten rycker upp vyn
+
+@ How much closer the view gets while aiming
+sv Hur mycket närmare vyn kommer när du siktar
+
+@ An empty gun reloads without pressing Reload
+sv Ett tomt vapen laddas om utan att du trycker på Ladda om
+
+@ Rounds in a full magazine
+sv Antal skott i ett fullt magasin
+
+@ Seconds a reload takes
+sv Sekunder som en omladdning tar
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+sv En pistol i varje hand: Eld avfyrar den vänstra, Alternativ eld den högra. Ammunitionen tar aldrig slut, men varje pistol måste laddas om.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+sv En helautomatisk karbin som laddas med dina spikar. Alternativ eld siktar genom rödpunktssiktet för tätare skott och en närmare vy.
+
+@ None
+sv Ingen

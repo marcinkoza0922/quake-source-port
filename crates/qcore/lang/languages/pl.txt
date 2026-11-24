@@ -4171,3 +4171,81 @@ pl HUD moda
 
 @ Custom HUD provided by the current mod or map pack
 pl Niestandardowy HUD dostarczany przez bieżący mod lub pakiet map
+
+@ Akimbo Pistols
+pl Dwa pistolety
+
+@ Assault Rifle
+pl Karabin szturmowy
+
+@ Aim Button
+pl Przycisk celowania
+
+@ Dot Colour
+pl Kolor kropki
+
+@ Magazine Size
+pl Pojemność magazynka
+
+@ Recoil
+pl Odrzut
+
+@ Reload
+pl Przeładuj
+
+@ Reload (Add-ons)
+pl Przeładuj (Dodatki)
+
+@ Reload Time
+pl Czas przeładowania
+
+@ Reload When Empty
+pl Przeładuj, gdy pusty
+
+@ Sight Zoom
+pl Powiększenie celownika
+
+@ Spread
+pl Rozrzut
+
+@ Swap Pistols
+pl Zamień pistolety
+
+@ Alt-fire aims while held, or with each press
+pl Ogień alternatywny celuje, gdy jest przytrzymany, lub po każdym naciśnięciu
+
+@ Colour of the dot in the sight
+pl Kolor kropki w celowniku
+
+@ Damage of each bullet
+pl Obrażenia każdego pocisku
+
+@ Fire shoots the right pistol and alt-fire the left one
+pl Strzał używa prawego pistoletu, a ogień alternatywny lewego
+
+@ How far shots may stray from the crosshair, in degrees
+pl O ile stopni strzały mogą odbiegać od celownika
+
+@ How hard firing kicks the view up
+pl Jak mocno strzelanie podbija widok
+
+@ How much closer the view gets while aiming
+pl Jak bardzo widok przybliża się podczas celowania
+
+@ An empty gun reloads without pressing Reload
+pl Pusta broń przeładowuje się bez naciskania Przeładuj
+
+@ Rounds in a full magazine
+pl Liczba nabojów w pełnym magazynku
+
+@ Seconds a reload takes
+pl Ile sekund trwa przeładowanie
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+pl Pistolet w każdej ręce: Strzał używa lewego, Ogień alternatywny prawego. Amunicja jest nieskończona, ale każdy pistolet trzeba przeładowywać.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+pl W pełni automatyczny karabin ładowany twoimi gwoździami. Ogień alternatywny celuje przez kolimator z czerwoną kropką, co daje celniejsze strzały i bliższy widok.
+
+@ None
+pl Brak

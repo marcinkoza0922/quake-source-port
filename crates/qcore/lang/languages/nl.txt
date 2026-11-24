@@ -4171,3 +4171,81 @@ nl Mod-HUD
 
 @ Custom HUD provided by the current mod or map pack
 nl Aangepaste HUD van de huidige mod of mappack
+
+@ Akimbo Pistols
+nl Dubbele pistolen
+
+@ Assault Rifle
+nl Aanvalsgeweer
+
+@ Aim Button
+nl Richtknop
+
+@ Dot Colour
+nl Puntkleur
+
+@ Magazine Size
+nl Magazijngrootte
+
+@ Recoil
+nl Terugslag
+
+@ Reload
+nl Herladen
+
+@ Reload (Add-ons)
+nl Herladen (add-ons)
+
+@ Reload Time
+nl Herlaadtijd
+
+@ Reload When Empty
+nl Herladen indien leeg
+
+@ Sight Zoom
+nl Richtzoom
+
+@ Spread
+nl Spreiding
+
+@ Swap Pistols
+nl Pistolen omwisselen
+
+@ Alt-fire aims while held, or with each press
+nl Alt. vuur richt zolang je het ingedrukt houdt, of bij elke druk
+
+@ Colour of the dot in the sight
+nl Kleur van de punt in het richtmiddel
+
+@ Damage of each bullet
+nl Schade van elke kogel
+
+@ Fire shoots the right pistol and alt-fire the left one
+nl Vuren schiet met het rechterpistool en alt. vuur met het linker
+
+@ How far shots may stray from the crosshair, in degrees
+nl Hoever schoten van het vizier mogen afwijken, in graden
+
+@ How hard firing kicks the view up
+nl Hoe hard schieten het beeld omhoog stoot
+
+@ How much closer the view gets while aiming
+nl Hoeveel dichterbij het beeld komt tijdens het richten
+
+@ An empty gun reloads without pressing Reload
+nl Een leeg wapen herlaadt zonder op Herladen te drukken
+
+@ Rounds in a full magazine
+nl Aantal kogels in een vol magazijn
+
+@ Seconds a reload takes
+nl Aantal seconden dat herladen duurt
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+nl Een pistool in elke hand: Vuren schiet met het linker, Alt. vuur met het rechter. De munitie is eindeloos, maar elk pistool moet worden herladen.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+nl Een volautomatisch geweer dat herlaadt met je spijkers. Alt. vuur richt door het rodepuntvizier voor nauwkeurigere schoten en een dichter beeld.
+
+@ None
+nl Geen

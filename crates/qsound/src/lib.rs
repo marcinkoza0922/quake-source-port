@@ -16,7 +16,9 @@ pub mod cable;
 pub mod hookshot;
 pub mod boomerang;
 pub mod portal;
+pub mod akimbo;
 pub mod rail;
+pub mod rifle;
 
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};

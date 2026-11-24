@@ -73,6 +73,9 @@ impl Menu {
             if a.alt {
                 rows.push((qcore::t!("Alt Fire"), Some("+attack2"), None));
             }
+            if a.reload {
+                rows.push((qcore::t!("Reload"), Some("+reload"), None));
+            }
         }
         rows.push((qcore::t!("Configure Parameters >"), None, None));
         for (i, (label, cmd, slot)) in rows.iter().enumerate() {

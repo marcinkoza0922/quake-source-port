@@ -2432,3 +2432,17 @@ de Zum Waffenwechsel nach links oder rechts wischen.
 it Scorri a sinistra o a destra per cambiare arma.
 es Desliza a izquierda o derecha para cambiar de arma.
 ru Проведите влево или вправо для смены оружия.
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+fr Un pistolet dans chaque main : Tir utilise le gauche, Tir secondaire le droit. Les munitions sont illimitées, mais chaque pistolet doit être rechargé.
+de Eine Pistole in jeder Hand: Feuer schießt mit der linken, Sekundärfeuer mit der rechten. Munition ist endlos, aber jede Pistole muss nachgeladen werden.
+it Una pistola per mano: Fuoco usa la sinistra, Fuoco secondario la destra. Le munizioni sono infinite, ma ogni pistola va ricaricata.
+es Una pistola en cada mano: Disparo usa la izquierda y Disparo secundario la derecha. La munición es infinita, pero hay que recargar cada pistola.
+ru По пистолету в каждой руке: огонь стреляет из левого, альтернативный огонь — из правого. Патроны бесконечны, но каждый пистолет нужно перезаряжать.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+fr Un fusil automatique qui se recharge avec vos clous. Tir secondaire vise avec le point rouge pour des tirs plus précis et une vue rapprochée.
+de Ein vollautomatisches Gewehr, das mit deinen Nägeln nachlädt. Sekundärfeuer zielt durch das Rotpunktvisier: genauere Schüsse und nähere Sicht.
+it Un fucile automatico che si ricarica con i tuoi chiodi. Fuoco secondario mira con il punto rosso per colpi più precisi e una visuale ravvicinata.
+es Un fusil automático que se recarga con tus clavos. Disparo secundario apunta con el punto rojo para tiros más precisos y una vista más cercana.
+ru Автоматическая винтовка, заряжаемая вашими гвоздями. Альтернативный огонь — прицеливание через красную точку: кучнее стрельба и ближе обзор.

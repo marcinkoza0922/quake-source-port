@@ -4171,3 +4171,81 @@ fi Modin HUD
 
 @ Custom HUD provided by the current mod or map pack
 fi Nykyisen modin tai karttapaketin tarjoama mukautettu HUD
+
+@ Akimbo Pistols
+fi Akimbo-pistoolit
+
+@ Assault Rifle
+fi Rynnäkkökivääri
+
+@ Aim Button
+fi Tähtäyspainike
+
+@ Dot Colour
+fi Pisteen väri
+
+@ Magazine Size
+fi Lippaan koko
+
+@ Recoil
+fi Rekyyli
+
+@ Reload
+fi Lataa
+
+@ Reload (Add-ons)
+fi Lataa (lisäosat)
+
+@ Reload Time
+fi Latausaika
+
+@ Reload When Empty
+fi Lataa tyhjänä
+
+@ Sight Zoom
+fi Tähtäimen zoomaus
+
+@ Spread
+fi Hajonta
+
+@ Swap Pistols
+fi Vaihda pistoolit
+
+@ Alt-fire aims while held, or with each press
+fi Toissijainen tuli tähtää pohjassa pidettäessä tai joka painalluksella
+
+@ Colour of the dot in the sight
+fi Tähtäimen pisteen väri
+
+@ Damage of each bullet
+fi Kunkin luodin vahinko
+
+@ Fire shoots the right pistol and alt-fire the left one
+fi Tuli ampuu oikealla pistoolilla ja toissijainen tuli vasemmalla
+
+@ How far shots may stray from the crosshair, in degrees
+fi Kuinka paljon laukaukset voivat poiketa tähtäimestä (astetta)
+
+@ How hard firing kicks the view up
+fi Kuinka voimakkaasti ampuminen nostaa näkymää
+
+@ How much closer the view gets while aiming
+fi Kuinka paljon näkymä lähenee tähdätessä
+
+@ An empty gun reloads without pressing Reload
+fi Tyhjä ase latautuu painamatta Lataa-painiketta
+
+@ Rounds in a full magazine
+fi Luotien määrä täydessä lippaassa
+
+@ Seconds a reload takes
+fi Lataamisen kesto sekunteina
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+fi Pistooli kummassakin kädessä: Tuli ampuu vasemmalla, Toissijainen tuli oikealla. Ammukset eivät lopu, mutta kumpikin pistooli on ladattava.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+fi Täysautomaattinen kivääri, joka ladataan nauloillasi. Toissijainen tuli tähtää punapistetähtäimellä: tarkemmat laukaukset ja lähempi näkymä.
+
+@ None
+fi Ei mitään

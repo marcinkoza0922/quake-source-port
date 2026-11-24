@@ -4171,3 +4171,81 @@ et Modi HUD
 
 @ Custom HUD provided by the current mod or map pack
 et Praeguse modi või kaardipaki kohandatud HUD
+
+@ Akimbo Pistols
+et Paarispüstolid
+
+@ Assault Rifle
+et Automaat
+
+@ Aim Button
+et Sihtimisnupp
+
+@ Dot Colour
+et Täpi värv
+
+@ Magazine Size
+et Salve suurus
+
+@ Recoil
+et Tagasilöök
+
+@ Reload
+et Laadimine
+
+@ Reload (Add-ons)
+et Laadimine (lisad)
+
+@ Reload Time
+et Laadimisaeg
+
+@ Reload When Empty
+et Lae tühjenemisel
+
+@ Sight Zoom
+et Sihiku suurendus
+
+@ Spread
+et Hajuvus
+
+@ Swap Pistols
+et Vaheta püstolid
+
+@ Alt-fire aims while held, or with each press
+et Alt-tuli sihib all hoides või iga vajutusega
+
+@ Colour of the dot in the sight
+et Täpi värv sihikus
+
+@ Damage of each bullet
+et Iga kuuli kahju
+
+@ Fire shoots the right pistol and alt-fire the left one
+et Tuli laseb parema püstoliga ja alt-tuli vasakuga
+
+@ How far shots may stray from the crosshair, in degrees
+et Kui palju lasud võivad sihikust kõrvale kalduda, kraadides
+
+@ How hard firing kicks the view up
+et Kui tugevalt tulistamine vaadet üles lööb
+
+@ How much closer the view gets while aiming
+et Kui palju vaade sihtides lähemale tuleb
+
+@ An empty gun reloads without pressing Reload
+et Tühi relv laeb end ilma laadimisnuppu vajutamata
+
+@ Rounds in a full magazine
+et Padrunite arv täis salves
+
+@ Seconds a reload takes
+et Mitu sekundit laadimine kestab
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+et Püstol kummaski käes: tuli laseb vasakuga, alt-tuli paremaga. Laskemoon on lõputu, kuid kumbagi püstolit tuleb laadida.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+et Täisautomaatne relv, mida laetakse sinu naeltega. Alt-tuli sihib läbi punatäppsihiku, andes täpsemad lasud ja lähema vaate.
+
+@ None
+et Puudub

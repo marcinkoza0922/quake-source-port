@@ -110,8 +110,13 @@ impl Host {
             && !self.server.core.clients.iter().any(|c| c.active && !c.local)
     }
 
-    /// Effective FOV after `togglezoom` / `+zoom` smoothstep (ironwail `SCR_CalcRefdef`).
+    /// Player 1's FOV: the zoom's, then the rifle sight's.
     pub(super) fn effective_fov(&self) -> f32 {
+        self.ads.fov(self.zoom_fov(), self.cv("addon_rifle_zoom"))
+    }
+
+    /// FOV after `togglezoom` / `+zoom` smoothstep (ironwail `SCR_CalcRefdef`).
+    pub(super) fn zoom_fov(&self) -> f32 {
         let base = self.cv("fov").clamp(10.0, 170.0);
         let z = self.zoom.0;
         if z <= 0.0 {
@@ -140,12 +145,12 @@ impl Host {
     }
 
     /// Match the renderer's 4:3-adapted FOV for each local player's viewport.
-    pub(super) fn autoaim_fov(&self) -> [f32; 2] {
+    pub(super) fn autoaim_fov(&self, fov: f32) -> [f32; 2] {
         let (w, h) = self.r.size();
         let n = 1 + self.guests.iter().filter(|g| g.cl.signon == 4).count();
         let rect = crate::splitscreen::layout(n, w, h, self.cv("r_splitscreen_layout") != 0.0)[0];
         let aspect = rect[2].max(1) as f32 / rect[3].max(1) as f32;
-        let ty = (self.effective_fov().to_radians() * 0.5).tan() * 0.75;
+        let ty = (fov.to_radians() * 0.5).tan() * 0.75;
         [(ty * aspect).atan().to_degrees() * 2.0, ty.atan().to_degrees() * 2.0]
     }
 
@@ -267,7 +272,8 @@ impl Host {
             || (self.input.autoaim_allowed && self.cv("assist_autoaim") != 0.0)
             || self.input.touch_aim_active(&self.server.core.cvars) || autofire;
         let targets = if in_game && self.cl.stats[STAT_HEALTH] > 0 && needs_targets { self.aim_targets(&self.cl) } else { Vec::new() };
-        self.input.autoaim_fov = self.autoaim_fov();
+        self.input.autoaim_fov = self.autoaim_fov(self.effective_fov());
+        self.input.look_scale = self.ads.look_scale(self.cv("addon_rifle_zoom"));
         self.input.autoaim_players = self.cv("deathmatch") != 0.0;
         let eye = self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| {
             let mut o = e.origin;
@@ -286,6 +292,7 @@ impl Host {
         let flying = self.freecam.cam.is_some();
         self.pend_attack |= inp.attack;
         self.pend_attack2 |= inp.attack2;
+        self.pend_reload |= inp.reload;
         self.pend_jump |= inp.jump;
         self.pend_dodge |= self.input.dodge_pressed() && !flying;
         let mut impulse = inp.impulse;
@@ -316,6 +323,16 @@ impl Host {
         if impulse != 0 {
             self.pend_impulse = impulse;
         }
+        self.ads.update(ft, crate::addons::rifle_ads::Frame {
+            held: self.toy.held == Some(qserver::addons::Toy::Rifle),
+            active: wheel_allowed && self.cl.intermission == 0,
+            alt: inp.attack2,
+            toggle: self.cv("addon_rifle_aim") != 0.0,
+            reloading: crate::addons::rifle_ads::reloading(&self.cl),
+        });
+        if self.demo.is_none() {
+            self.ads.apply(ft, &mut self.cl.viewangles, inp.look_delta[1]);
+        }
         self.guest_moves(ft);
         self.bullet_time_frame(dt, in_game && alive);
         let timescale = (self.wheel_timescale() * if self.bullet_time.active { 0.2 } else { 1.0 }) as f64;
@@ -336,6 +353,7 @@ impl Host {
             self.accum = self.accum.max(tic);
             self.pend_attack = false;
             self.pend_attack2 = false;
+            self.pend_reload = false;
             self.pend_jump = false;
             self.pend_dodge = false;
             self.pend_impulse = 0;
@@ -355,7 +373,7 @@ impl Host {
                 let mut cmd = self.last_cmd;
                 let auto_attack = autofire && !self.pend_attack && self.pend_impulse == 0 && self.toy.held.is_none()
                     && aim_vis::autofire_target(ctx.as_ref(), &self.cl);
-                cmd.buttons = self.toy.buttons(self.pend_attack || auto_attack, self.pend_attack2, self.pend_jump)
+                cmd.buttons = self.toy.buttons(self.pend_attack || auto_attack, self.ads.alt(self.toy.held, self.pend_attack2), self.pend_reload, self.pend_jump)
                     | if self.pend_dodge { qserver::addons::BUTTON_DODGE } else { 0 };
                 cmd.impulse = self.pend_impulse;
                 // The server acks the lossless local client's frames itself;
@@ -376,6 +394,7 @@ impl Host {
                     });
                     self.pend_attack = false;
                     self.pend_attack2 = false;
+                    self.pend_reload = false;
                     self.pend_jump = false;
                     self.pend_dodge = false;
                     self.pend_impulse = 0;

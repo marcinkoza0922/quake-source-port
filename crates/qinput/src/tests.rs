@@ -447,11 +447,34 @@ fn bullet_time_preserves_taps_and_releases_held_buttons() {
 }
 
 #[test]
+fn every_button_has_commands() {
+    let mut h = host();
+    for (i, name) in btn::NAMES.iter().enumerate() {
+        run(&mut h, &format!("+{name} 42\n"));
+        assert!(h.input.buttons[i].is_down(), "+{name}");
+        run(&mut h, &format!("-{name} 42\n"));
+        assert!(!h.input.buttons[i].is_down(), "-{name}");
+    }
+}
+
+#[test]
 fn dodge_action_registers_and_preserves_brief_presses() {
     let mut h = host();
     run(&mut h, "+dodge 42\n-dodge 42\n");
     assert!(h.input.dodge_pressed());
     assert!(!h.input.dodge_pressed());
+}
+
+#[test]
+fn look_scale_slows_the_mouse() {
+    let mut h = host();
+    let mut turn = |scale: f32| {
+        h.input.look_scale = scale;
+        h.input.mouse = [100.0, 0.0];
+        h.input.frame(&h.cvars, [0.0; 3], 0.01, None).look_delta[0]
+    };
+    let full = turn(1.0);
+    assert!(full != 0.0 && (turn(0.5) - full * 0.5).abs() < 1e-4);
 }
 
 #[test]

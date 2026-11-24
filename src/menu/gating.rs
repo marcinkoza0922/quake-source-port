@@ -79,6 +79,7 @@ impl Menu {
             // classic styles replaced by an enhanced one
             || (matches!(item, Item::Choice { cvar: "r_waterwarp", .. }) && cv.value_of("r_enhancedwater") != 0.0)
             || (matches!(item, Item::Choice { cvar: "r_particles", .. }) && cv.value_of("r_enhancedparticles") != 0.0)
+            || (matches!(item, Item::Toggle { cvar: "cl_vwep", .. }) && cv.value_of("cl_camera") == 0.0)
             || (matches!(item, Item::Choice { cvar: "r_drawviewmodel", .. }) && cv.value_of("cl_camera") != 0.0)
     }
 

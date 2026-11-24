@@ -506,7 +506,7 @@ impl Host {
             }
             match e {
                 ClientEvent::PortalEffect(_) | ClientEvent::RailEffect(_) | ClientEvent::Hook(_) | ClientEvent::Cable(_) | ClientEvent::Boomerang(_)
-                | ClientEvent::Gel(_) | ClientEvent::Water(_) => {
+                | ClientEvent::Gel(_) | ClientEvent::Water(_) | ClientEvent::Gun(_) => {
                     self.toy_event(e);
                 }
                 ClientEvent::HitStop { kill, damage, class, health } => {
@@ -657,6 +657,7 @@ impl Host {
                     self.hitstop = Default::default();
                     self.pend_attack = false;
                     self.pend_attack2 = false;
+                    self.pend_reload = false;
                     self.pend_jump = false;
                     self.pend_dodge = false;
                     self.pend_impulse = 0;

@@ -4171,3 +4171,81 @@ ta மாட் HUD
 
 @ Custom HUD provided by the current mod or map pack
 ta தற்போதைய மாட் அல்லது வரைபட தொகுப்பு வழங்கும் தனிப்பயன் HUD
+
+@ Akimbo Pistols
+ta இரட்டைக் கைத்துப்பாக்கிகள்
+
+@ Assault Rifle
+ta தாக்குதல் துப்பாக்கி
+
+@ Aim Button
+ta குறிபார்க்கும் பொத்தான்
+
+@ Dot Colour
+ta புள்ளியின் நிறம்
+
+@ Magazine Size
+ta மேகசின் அளவு
+
+@ Recoil
+ta பின்னுதைப்பு
+
+@ Reload
+ta ரீலோடு
+
+@ Reload (Add-ons)
+ta ரீலோடு (ஆட்-ஆன்கள்)
+
+@ Reload Time
+ta ரீலோடு நேரம்
+
+@ Reload When Empty
+ta காலியானதும் ரீலோடு
+
+@ Sight Zoom
+ta சைட் பெரிதாக்கம்
+
+@ Spread
+ta சிதறல்
+
+@ Swap Pistols
+ta துப்பாக்கிகளை மாற்று
+
+@ Alt-fire aims while held, or with each press
+ta மாற்றுச் சுடுதல் பிடித்திருக்கும்போது குறிபார்க்கும், அல்லது ஒவ்வொரு அழுத்தத்திலும் மாறும்
+
+@ Colour of the dot in the sight
+ta சைட்டில் உள்ள புள்ளியின் நிறம்
+
+@ Damage of each bullet
+ta ஒவ்வொரு தோட்டாவின் சேதம்
+
+@ Fire shoots the right pistol and alt-fire the left one
+ta சுடுதல் வலது துப்பாக்கியையும் மாற்றுச் சுடுதல் இடதையும் சுடும்
+
+@ How far shots may stray from the crosshair, in degrees
+ta குண்டுகள் கிராஸ்ஹேரிலிருந்து விலகக்கூடிய அளவு, டிகிரியில்
+
+@ How hard firing kicks the view up
+ta சுடும்போது பார்வை எவ்வளவு வலுவாக மேலே உதைக்கும்
+
+@ How much closer the view gets while aiming
+ta குறிபார்க்கும்போது பார்வை எவ்வளவு நெருங்கும்
+
+@ An empty gun reloads without pressing Reload
+ta காலியான துப்பாக்கி ரீலோடு அழுத்தாமலே நிரம்பும்
+
+@ Rounds in a full magazine
+ta முழு மேகசினில் உள்ள தோட்டாக்கள்
+
+@ Seconds a reload takes
+ta ரீலோடு செய்ய ஆகும் வினாடிகள்
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+ta ஒவ்வொரு கையிலும் ஒரு கைத்துப்பாக்கி: சுடு இடதையும், மாற்றுச் சுடுதல் வலதையும் சுடும். வெடிமருந்து தீராது, ஆனால் ஒவ்வொன்றையும் ரீலோடு செய்ய வேண்டும்.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+ta உங்கள் ஆணிகளால் ரீலோடு ஆகும் முழுத் தானியங்கித் துப்பாக்கி. மாற்றுச் சுடுதல் சிவப்புப் புள்ளி சைட்டில் குறிபார்த்து, துல்லியமான சுடுதலும் நெருங்கிய பார்வையும் தரும்.
+
+@ None
+ta ஏதுமில்லை

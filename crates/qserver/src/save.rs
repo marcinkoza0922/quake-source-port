@@ -245,6 +245,8 @@ impl Server {
             l.portals.sync_links(&mut c.linked_portals);
             l.stickies.load_text(&h.extra);
             l.gel.load_text(&h.extra);
+            l.akimbo.load_text(&h.extra);
+            l.rifle.load_text(&h.extra);
         }
         Ok(())
     }

@@ -8,7 +8,9 @@ use qcore::math::Vec3;
 use qformats::Mdl;
 use qformats::md3::{Md3, Md3Frame, Md3Surface, Md3Vert, XYZ_SCALE};
 use qformats::md5::Md5;
+use crate::debris::math::apply;
 
+use super::arms::{Arms, Part, Posed};
 use super::rig::{GunFrame, Rig, Spec, bbox};
 
 fn position(s: &Md3Surface, frame: usize, v: usize) -> Vec3 {
@@ -66,6 +68,68 @@ pub fn rig(md5: &Md5, mdl: &Mdl) -> Option<(Rig, Md3, Md3)> {
         })
         .collect();
     Some((Rig::fit(frames)?, without(md5, &[gun_joint, axe_joint]), without(md5, &[gun_joint])))
+}
+
+/// The arms of a model [`rig`] accepts, by its joints.
+pub fn arms(md5: &Md5) -> Option<Arms> {
+    let part = |j: u16| match md5.joints.get(j as usize).map(String::as_str) {
+        Some("UpperArm_L") => Part::Upper(0),
+        Some("UpperArm_R") => Part::Upper(1),
+        Some("LowerArm_L") => Part::Fore(0),
+        Some("LowerArm_R") => Part::Fore(1),
+        Some("Hand_L") => Part::Hand(0),
+        Some("Hand_R") => Part::Hand(1),
+        _ => Part::Body,
+    };
+    let parts: Vec<Part> = md5.vert_joints.iter().flatten().map(|&j| part(j)).collect();
+    let mut base = 0;
+    let mut tris = Vec::new();
+    for s in &md5.md3.surfaces {
+        tris.extend(s.triangles.iter().map(|t| t.map(|v| base + v as usize)));
+        base += s.num_verts;
+    }
+    Arms::new(&parts, &positions(&md5.md3, 0), tris)
+}
+
+/// Removes the stock gun's muzzle flash from a body of `md5`.
+pub fn drop_flash(md5: &Md5, body: &mut Md3) {
+    let flame = |j: u16| md5.joints.get(j as usize).is_some_and(|n| n.ends_with("_flame"));
+    for (s, joints) in body.surfaces.iter_mut().zip(&md5.vert_joints) {
+        s.triangles.retain(|t| !t.iter().any(|&v| flame(joints[v as usize])));
+    }
+}
+
+/// Frame `f`'s vertex positions, surface by surface.
+pub fn positions(m: &Md3, f: usize) -> Vec<Vec3> {
+    m.surfaces.iter().flat_map(|s| (0..s.num_verts).map(move |v| position(s, f, v))).collect()
+}
+
+/// Replaces each frame by frame `src[i]`, then by the reposed vertices.
+pub fn set_frames(m: &mut Md3, src: &[usize], posed: Option<&[Posed]>) {
+    let mut base = 0;
+    for s in &mut m.surfaces {
+        let n = s.num_verts;
+        let old = s.verts.clone();
+        for (i, &from) in src.iter().enumerate() {
+            for v in 0..n {
+                let mut vert = old[from * n + v];
+                if let Some(p) = posed.map(|p| &p[i]) {
+                    vert = Md3Vert {
+                        xyz: p.pos[base + v].to_array().map(|c| (c / XYZ_SCALE).round().clamp(-32768.0, 32767.0) as i16),
+                        normal: encode_normal(apply(&p.rot[base + v], decode_normal(vert.normal)).normalize()),
+                    };
+                }
+                s.verts[i * n + v] = vert;
+            }
+        }
+        base += n;
+    }
+    for (i, &from) in src.iter().enumerate() {
+        let (lo, hi) = bbox(positions(m, i));
+        let f = &mut m.frames[i];
+        (f.bounds, f.radius) = ([lo.to_array(), hi.to_array()], lo.length().max(hi.length()));
+        debug_assert!(from < src.len());
+    }
 }
 
 /// `src`'s first frame fitted into the hand per `spec`, as an MD3 with the

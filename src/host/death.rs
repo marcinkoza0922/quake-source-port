@@ -23,6 +23,7 @@ impl Host {
         self.death_handled = true;
         self.pend_attack = false;
         self.pend_attack2 = false;
+        self.pend_reload = false;
         self.pend_jump = false;
         self.pend_impulse = 0;
         self.con.open = false;

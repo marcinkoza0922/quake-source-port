@@ -73,6 +73,12 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             }
             h.server.core.cvars.set("cl_automapbind", "1");
         }
+        if h.cv("cl_reloadbind") < 1.0 {
+            if h.input.binding(b'r' as i32).is_none() {
+                h.input.set_binding(b'r' as i32, Some("+reload"));
+            }
+            h.server.core.cvars.set("cl_reloadbind", "1");
+        }
         if h.cv("cl_recordbind") < 1.0 {
             if h.input.binding(qinput::keys::K_F1 + 7).is_none() {
                 h.input.set_binding(qinput::keys::K_F1 + 7, Some("record_toggle"));
@@ -315,6 +321,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             "washer" => Some(Page::Washer),
             "hookshot" => Some(Page::Hookshot),
             "cable" => Some(Page::Cable),
+            "akimbo" => Some(Page::Akimbo),
+            "rifle" => Some(Page::Rifle),
             "boomerang" => Some(Page::Boomerang),
             "goggles" => Some(Page::Goggles),
             "projectileshotguns" => Some(Page::ProjectileShotguns),

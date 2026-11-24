@@ -79,6 +79,7 @@ impl Host {
         let tkey = |t: &qclient::TempEntity| (t.model, t.origin.map(|c| c.round() as i32));
         let p1_temps: std::collections::HashSet<_> = self.cl.temp_entities.iter().map(tkey).collect();
         let cv = self.view_cvars();
+        let (zoom_fov, sight_zoom) = (self.zoom_fov(), self.cv("addon_rifle_zoom"));
         let draw_ents = self.cv("r_drawentities") != 0.0;
         let reflections = self.reflections_on();
         for (vi, &k) in live.iter().enumerate() {
@@ -92,6 +93,7 @@ impl Host {
                 }
             }
             let mut gcv = cv;
+            gcv.fov = g.ads.fov(zoom_fov, sight_zoom);
             if g.toy.held.is_some() { gcv.viewmodel = crate::view::weapon::Alignment::Hidden; }
             let (mut v, gun) = g.view.calc_refdef(&mut g.cl, &gcv, &self.level, ft);
             let third = self.camera().third_person();
@@ -113,6 +115,8 @@ impl Host {
                     .unwrap_or_default();
                 g.view.vwep.enabled = self.view.vwep.enabled;
                 g.view.vwep.server = self.view.vwep.server.clone();
+                g.view.vwep.toys.clone_from(&self.view.vwep.toys);
+                g.view.vwep.muzzles.clear();
                 g.view.entities(&mut g.cl, &cv, &mut self.level, &self.server.core.fs, &mut self.r, None, &mut gents);
                 // this guest's own body, for its portal views only
                 ents.extend(gents.iter().filter(|e| e.portal_only).map(|e| RenderEntity { views: bit, ..*e }));
@@ -184,6 +188,15 @@ impl Host {
                     weapon.origin = (Vec3::from(weapon.origin) + cv.viewmodel.offset(v.angles)).to_array();
                     ents.push(RenderEntity { views: bit, ..weapon });
                 }
+                let guns = if held(qserver::addons::Toy::Akimbo) {
+                    self.akimbo_fx.weapons(me, &g.cl, self.cl.time, v, &mut self.level, &self.server.core.fs, &mut self.r)
+                } else if held(qserver::addons::Toy::Rifle) {
+                    let hold = crate::addons::rifle_fx::Hold { aim: g.ads.amount(), side: cv.viewmodel.side() };
+                    self.rifle_fx.weapons(me, hold, &g.cl, self.cl.time, v, &mut self.level, &self.server.core.fs, &mut self.r)
+                } else {
+                    Vec::new()
+                };
+                ents.extend(guns.into_iter().map(|e| RenderEntity { views: bit, ..e }));
                 if let Some(gun) = gun {
                     ents.push(RenderEntity { views: bit, ..gun });
                 }

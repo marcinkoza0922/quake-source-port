@@ -156,7 +156,7 @@ FBX, original PNGs and extracted Blender files are not bundled. Generated game
 assets are embedded, so installed binaries need neither Blender nor Downloads.
 Each split-screen camera gets its own weapon, skin, and visibility mask;
 death, invisibility and intermission hide it like the normal weapon.
-Gameplay → Viewmodels controls all weapons: Center (default), Right, Left, Off
+Gameplay → Viewmodels controls all weapons: Center (default), Right, Left, None
 (`r_drawviewmodel` 1, 2, 3, 0 respectively, archived). Side placement translates
 eight units along each camera's right axis without changing aim or mirroring
 meshes (except the two-handed cable, which stays centred). The portal gun follows the camera basis with negated alias pitch,
@@ -536,6 +536,124 @@ the entity) both work.
   unplug, the floor refuses); `cable_rope` (wrap round a pillar and unwrap
   coming back), `cable_rope_fx` (slack rope lies on the floor, taut one
   stays straight), `hook_surface` electronics names, `qclient::cable`.
+### Guns with magazines (`addons/guns.rs`, `qclient::guns`, `src/addons/mag_hud.rs`)
+Shared by the akimbo pistols and the assault rifle. `Magazine` holds the
+rounds and a running reload; `bullet` is a hitscan shot from the eye (through
+linked portals) that hurts the first entity via QC `T_Damage` and sends the
+stock blood particles or TE_GUNSHOT. `//qsp_gun` lines report shots, dry
+clicks and reload start/cancel/finish (`ClientEvent::Gun`); `//qsp_mag` lines
+(`MagSync`, on change) fill `ClientState::mags`, drawn by `mag_hud` above the
+status bar with a bar while reloading.
+- Reload action: `+reload` (qinput button, usercmd bit 9
+  `BUTTON_TOY_RELOAD`, only while a toy is held) is shared by every add-on
+  with `Addon::reload`; the add-on browser and Controls list it. R by default
+  (`cl_reloadbind` merges it once into configs whose R is free).
+### Akimbo pistols (`addons/akimbo.rs`; `src/addons/akimbo_fx.rs`, `akimbo_model.rs`)
+A pistol in each hand: fire shoots the left one, alt-fire the right one
+(`addon_akimbo_swap` exchanges them). Each has its own magazine
+(`addon_akimbo_mag`, 12) and timers. A press shoots at once (at most every
+0.11 s), a held trigger repeats every 0.22 s. Bullets are `guns::bullet`
+with `addon_akimbo_damage` (14) inside a cone of `addon_akimbo_spread` (1.5)
+degrees, denser in the middle; shots set `show_hostile` and a small
+`punchangle`. The reserve is endless.
+- Reload: `+reload` reloads every pistol that isn't full, the second one
+  0.35 s later (`STAGGER`) than `addon_akimbo_reload` (1.6 s); a pistol not
+  being reloaded can still shoot. Pulling the trigger of an empty one clicks
+  and, with `addon_akimbo_autoreload` (1), reloads it. Putting the pistols
+  away or dying interrupts reloads.
+- Saves: `akimbo client left right` header lines (rounds loaded); a new level
+  starts with full magazines.
+- Model: `assets/akimbo/` from Meshy (concept nano-banana-pro
+  `01a20ef1-53eb-706d-a574-5b6e1261ff60`, mesh meshy-t2.5 + meshy-n1
+  `01a20ef1-c6a5-779d-a2af-235080de3ec6`, 24 credits), archived in
+  `~/Assets/Meshy/akimbo`. `tools/prep_akimbo.py` (Blender) widens it, closes
+  the slide's back and adds the octagonal muzzle brake, recoil weight and
+  fins; `tools/paint_akimbo_texture.py` ignores Meshy's colours and paints a
+  material per connected part (gunmetal slide, bronze frame, walnut grip with
+  leather strips, hazard band). All commands are in `import.json`
+  (`cleanup`). The right pistol is the source; `akimbo_model` mirrors it for
+  the left hand and makes poses at load: slide back, magazine out, both
+  (parts found by connectivity and bounds). The loose magazine is a box
+  built in code.
+- View: one pistol in each lower corner (`pose`, camera basis, so it stays
+  put at any pitch; no left/right view model alignment), muzzles slightly
+  inwards. Shots kick that pistol and its slide; an empty one keeps its slide
+  back. A reload raises the pistol, turns the grip to the middle, drops the
+  magazine, pushes a new one in and works the slide, timed by the event's
+  `secs`. Flash and light follow the view model's muzzle; a tracer, smoke and
+  a brass casing per shot (other players': from the server's muzzle point).
+- Sound: `qsound::akimbo` (two shots, dry, magazine out and in, slide), on
+  the owner's channels 6 and 7; recorded, see "Gun sounds" below. The slide
+  and the muzzle brake move together.
+- Menu: `Page::Akimbo` (`menu_options akimbo`). Default slot 2, label "AK".
+- Tests: `crates/qserver/tests/akimbo.rs` (e1m1), `akimbo`, `akimbo_model`
+  and `akimbo_fx` unit tests.
+### Assault rifle (`addon_rifle`, `addons/rifle.rs`; `src/addons/rifle_*.rs`)
+A full-auto carbine with a tube red dot sight. Fire shoots 750 rounds a minute
+(`INTERVAL` 0.08 s; the remainder carries over frames, so the rate is the same
+at any tic rate) from a magazine (`addon_rifle_mag`, default 30) of bullets of
+`addon_rifle_damage` (10). Reload (2.2 s, `addon_rifle_reload`, +0.35 s to
+chamber a round after running dry) takes what is missing from the nails when
+it finishes (`currentammo` follows while it shows nails); it starts by itself
+0.3 s after the last round (`addon_rifle_autoreload`). With no nails an empty
+rifle clicks. Putting it away or dying cancels a reload; nothing is lost. The
+cone (`CONE`, `BLOOM`, `RUN`, `AIR`) widens with sustained fire, speed and in
+the air, and is about a twentieth when aimed. Aiming walks at 0.6 speed
+(`rifle::tune`, on the move's parameters only, like orange gel). Each level
+starts with a full magazine; `.qsa` saves keep `rifle <client> <rounds>`.
+- Aiming (`rifle_ads::Ads`, one on `Host` and one per split-screen guest):
+  turns hold or toggle (`addon_rifle_aim`) into a held `BUTTON_TOY_ALT`, the
+  only thing the server sees (its own 0.2 s ramp, `AIM_TIME`, sets the cone).
+  A menu, death, another weapon or a reload lowers the sight and drops the
+  toggle; a held button raises it again after a reload. The eased amount
+  drives the pose, the FOV (`Ads::fov`: magnification `addon_rifle_zoom`,
+  default 1.3, on top of `zoom_fov`, the `+zoom` FOV; per view in
+  split-screen) and `qinput::Input::look_scale` (mouse, sticks, gyro and touch
+  slow by the same factor; keys, flick turns and aim assist do not).
+- Recoil (`addon_rifle_recoil`) moves the real view angles, so bullets always
+  go where the view and the dot point: each shot climbs 0.46 degrees and
+  wanders, 55% of that when aimed; 70% of the climb settles back once firing
+  stops, less what the player pulled down. No kick in demos.
+- The sight: the models share one space (`tools/build_rifle.py`), where the
+  tube's axis is exactly known (`rifle_model::LENS`, `APERTURE`, `TUBE`; a test
+  checks no triangle crosses it). `rifle_pose` holds the rifle in the
+  middle, right or left as Viewmodels says and blends from there to the tube
+  centred on the view at 14 units (10.5 to 17 by FOV, so the sight keeps about
+  the same size on screen and its rear never reaches the near plane). The dot
+  (`rifle_dot`) is 2D, drawn after the scene where `viewangles` falls in the
+  view, so it stays on the aim point whatever the rifle does, and only while
+  that spot is seen through both ends of the tube (`Pose::through`). The
+  crosshair is hidden meanwhile (it stays with Viewmodels at None).
+  `addon_rifle_dot`: 0 red, 1 green, 2 yellow.
+- Presentation (`rifle_fx`): muzzle flash (halved when aimed; the server also
+  sets `EF_MUZZLEFLASH`), smoke, tracers at 9000 u/s, tumbling brass from the
+  ejection port; the magazine is its own model that drops out and comes back
+  during a reload (`rifle_pose::magazine`), with cues at `MAG_OUT`, `MAG_IN`
+  and `BOLT` (only after running dry). Sounds:
+  `qsound::rifle`, recorded ("Gun sounds" below; three shot takes in turn on
+  channels 6–8) except the sight's synthesised rustle.
+- Model: `assets/rifle/`. Meshy: nano-banana-pro concept
+  `01a20ef1-534f-724b-848f-aae0c2ae9c26`, meshy-t2.5 (3,946 tris) + meshy-n1
+  task `01a20ef1-cd19-75c4-b93f-4fe57e001aba`, asked for without any optic. The
+  commands are in `assets/rifle/import.json`: `tools/import_toy_model.py
+  --keep-uv` (Meshy's UVs are even; `relayout_toy_uv.py` would stretch them,
+  it unwraps the MDL's per-axis packed grid), then `tools/build_rifle.py`,
+  which scales it to 52 units, splits off the magazine, builds the sight and a
+  crisp receiver rail, and paints both skins (material per connected part,
+  ray-cast occlusion, worn edges, single-texel grain, exact palette colours).
+- Menu: Add-ons → Assault Rifle (`Page::Rifle`, `menu_options rifle`). Default
+  weapon slot 4, wheel label "AR"; always selectable.
+- Tests: `crates/qserver/tests/rifle.rs` (e1m1: rate, reload, nails, dry
+  click, cancel, save, 20 fps, aiming speed), `rifle` unit tests in qserver,
+  `rifle_ads`, `rifle_pose`, `rifle_dot`, `rifle_model`, `qsound::rifle`.
+### Gun sounds (`assets/gun-sounds/`, `tools/gun_sounds.py`)
+The pistols' and the rifle's sounds are CC0 recordings (sources and licences
+in `assets/gun-sounds/README.md`; raw files in `~/Assets/Sounds/guns/`). The
+tool levels a shot's spike and body, gives it a smooth decay (the echo must
+not read as a second shot), adds a low thump, dulls the top and soft-clips,
+aiming at stock weapons as measured in id1 (full-scale peak, RMS 0.5–0.65
+over the first 0.1 s); handling noises are cut, compressed and darkened.
+Output is 22050 Hz 16 bit mono, loaded like any WAV (`load_sfx`).
 ### Equipment wheel and goggles (`src/addons/goggles.rs`, `equip_wheel.rs`, `src/host/goggles.rs`)
 Equipment is switched on and off rather than held, so it does not use the
 toy slot. `Equip` lists it in wheel order; items of one group exclude each
@@ -578,7 +696,7 @@ locked like the toy cvars). It is not saved: goggles start off after a load.
 
 ### Browser and gameplay preview tooling
 
-`src/menu/addon_browser.rs` owns selection, description scrolling and contextual
+`src/menu/addon_browser.rs` (add-on table in `addon_browser/list.rs`) owns selection, description scrolling and contextual
 rows. The browser must list a separate, weapon-labelled slot setting for every
 weapon supplied by the selected add-on, above the input remapping header. An
 add-on may supply multiple weapons even though each current weapon add-on
@@ -611,7 +729,7 @@ and the other device's existing glyphs remain visible. Capture accepts any devic
 `QUAKE_MENU_SHOTS=target/shots` writes navigation, capture and conflict screenshots
 (skips without game data/Vulkan).
 
-`tools/capture_addon_previews.py` records all six add-ons on e1m1 using the
+`tools/capture_addon_previews.py` records the add-ons with a preview on e1m1 using the
 headless renderer and installed game data (`--basedir` or normal discovery).
 It needs a release executable (`--engine` to override) and Python Pillow.
 The 48-frame, 12 fps, 320×92 silent loops in `assets/addon-previews/*.qav`

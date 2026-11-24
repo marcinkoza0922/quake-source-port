@@ -4171,3 +4171,81 @@ fil Mod HUD
 
 @ Custom HUD provided by the current mod or map pack
 fil Custom na HUD na ibinibigay ng kasalukuyang mod o map pack
+
+@ Akimbo Pistols
+fil Dalawang Pistola
+
+@ Assault Rifle
+fil Assault Rifle
+
+@ Aim Button
+fil Button sa Pag-asinta
+
+@ Dot Colour
+fil Kulay ng Tuldok
+
+@ Magazine Size
+fil Laki ng Magasin
+
+@ Recoil
+fil Sipa ng Baril
+
+@ Reload
+fil Mag-reload
+
+@ Reload (Add-ons)
+fil Mag-reload (Mga Add-on)
+
+@ Reload Time
+fil Tagal ng Pag-reload
+
+@ Reload When Empty
+fil Mag-reload Kapag Ubos
+
+@ Sight Zoom
+fil Zoom ng Sight
+
+@ Spread
+fil Kalat ng Bala
+
+@ Swap Pistols
+fil Pagpalitin ang Pistola
+
+@ Alt-fire aims while held, or with each press
+fil Umaasinta ang alt-fire habang nakapindot, o sa bawat pindot
+
+@ Colour of the dot in the sight
+fil Kulay ng tuldok sa sight
+
+@ Damage of each bullet
+fil Pinsala ng bawat bala
+
+@ Fire shoots the right pistol and alt-fire the left one
+fil Putok para sa kanang pistola at alt-fire para sa kaliwa
+
+@ How far shots may stray from the crosshair, in degrees
+fil Gaano kalayo maaaring lumihis ang mga tira sa crosshair, sa degree
+
+@ How hard firing kicks the view up
+fil Gaano kalakas itinutulak pataas ng pagputok ang tanaw
+
+@ How much closer the view gets while aiming
+fil Gaano lumalapit ang tanaw habang umaasinta
+
+@ An empty gun reloads without pressing Reload
+fil Nagre-reload ang baril na walang bala kahit hindi pindutin ang Mag-reload
+
+@ Rounds in a full magazine
+fil Bilang ng bala sa punong magasin
+
+@ Seconds a reload takes
+fil Ilang segundo ang pag-reload
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+fil Isang pistola sa bawat kamay: Putok para sa kaliwa, Alt Fire para sa kanan. Walang katapusan ang bala, pero kailangang i-reload ang bawat pistola.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+fil Full-auto na rifle na nagre-reload mula sa iyong nails. Umaasinta ang Alt Fire gamit ang red dot sight para sa mas tumpak na tira at mas malapit na tanaw.
+
+@ None
+fil Wala

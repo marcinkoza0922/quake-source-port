@@ -258,6 +258,15 @@ impl Server {
         self.core.clients.iter().enumerate().any(|(i, c)| c.active && l.vm.ent_f(i as u32 + 1, health) <= 0.0)
     }
 
+    /// The add-on weapon each client slot holds; empty when add-ons can't run.
+    pub fn held_toys(&self) -> Vec<Option<crate::addons::Toy>> {
+        if !self.active() || !crate::addons::active(&self.core) {
+            return Vec::new();
+        }
+        let on = |t: &crate::addons::Toy| self.core.cvars.value_of(t.cvar()) != 0.0;
+        self.core.clients.iter().map(|c| crate::addons::Toy::from_buttons(c.cmd.buttons).filter(on)).collect()
+    }
+
     /// Every client edict's `weaponmodel` (visible weapons on a local
     /// server); None without an active level.
     pub fn weapon_models(&self) -> Option<Vec<String>> {

@@ -28,6 +28,7 @@ mod pad_default_tests {
         assert!(b.contains(&(b'9' as i32, "weapon_slot 9".into())));
         assert!(b.contains(&(b'0' as i32, "weapon_slot 0".into())));
         assert!(b.contains(&(K_F1 + 7, "record_toggle".into())));
-        assert_eq!(b.len(), 14);
+        assert!(b.contains(&(b'r' as i32, "+reload".into())));
+        assert_eq!(b.len(), 15);
     }
 }

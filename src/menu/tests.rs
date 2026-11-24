@@ -692,6 +692,21 @@ fn viewmodel_position_is_locked_in_third_person() {
 }
 
 #[test]
+fn visible_weapons_need_a_third_person_camera() {
+    let mut cv = Cvars::default();
+    cv.register("cl_camera", "0", 0);
+    cv.register("cl_vwep", "0", 0);
+    let item = GAMEPLAY.iter().copied().find(|i| matches!(i, Item::Toggle { cvar: "cl_vwep", .. })).unwrap();
+    let mut menu = Menu::new();
+    let mut out = Vec::new();
+    assert!(!menu.adjust(item, 1, false, &mut cv, &mut out));
+    assert_eq!(cv.value_of("cl_vwep"), 0.0);
+    cv.set("cl_camera", "3");
+    assert!(menu.adjust(item, 1, false, &mut cv, &mut out));
+    assert_eq!(cv.value_of("cl_vwep"), 1.0);
+}
+
+#[test]
 fn portal_view_quality_is_gated_independently_on_enhancements_and_portalgun() {
     let mut cv = Cvars::default();
     cv.register("r_teleportwindows", "0", 0);

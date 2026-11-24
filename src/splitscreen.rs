@@ -39,6 +39,8 @@ pub struct Guest {
     pub wheel: crate::wheel::Wheel,
     /// This guest's weapon selection.
     pub toy: crate::addons::WeaponSelection,
+    /// This guest's rifle sight.
+    pub ads: crate::addons::rifle_ads::Ads,
 }
 
 impl Guest {
@@ -68,6 +70,7 @@ impl Guest {
             center: crate::console::Console::new(),
             wheel: Default::default(),
             toy: Default::default(),
+            ads: Default::default(),
         };
         g.feed(sv);
         Some(g)

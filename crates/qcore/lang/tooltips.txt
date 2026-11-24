@@ -1547,3 +1547,73 @@ de Benutzerdefiniertes HUD der aktuellen Mod oder Kartenpakets
 it HUD personalizzato fornito dalla mod o dal pacchetto di mappe attivo
 es HUD personalizado proporcionado por el mod o paquete de mapas activo
 ru Пользовательский HUD текущего мода или набора карт
+
+@ Alt-fire aims while held, or with each press
+fr Le tir secondaire vise tant qu’il est maintenu, ou à chaque pression
+de Sekundärfeuer zielt, solange es gehalten wird, oder mit jedem Druck
+it Il fuoco secondario mira finché è premuto, o a ogni pressione
+es El disparo secundario apunta mientras se mantiene, o con cada pulsación
+ru Альтернативный огонь целится при удержании или по нажатию
+
+@ Colour of the dot in the sight
+fr Couleur du point dans le viseur
+de Farbe des Punkts im Visier
+it Colore del punto nel mirino
+es Color del punto de la mira
+ru Цвет точки в прицеле
+
+@ Damage of each bullet
+fr Dégâts de chaque balle
+de Schaden jeder Kugel
+it Danni di ogni proiettile
+es Daño de cada bala
+ru Урон каждой пули
+
+@ Fire shoots the right pistol and alt-fire the left one
+fr Le tir utilise le pistolet droit et le tir secondaire le gauche
+de Feuer schießt mit der rechten Pistole, Sekundärfeuer mit der linken
+it Il fuoco usa la pistola destra e il fuoco secondario la sinistra
+es El disparo usa la pistola derecha y el secundario la izquierda
+ru Огонь стреляет из правого пистолета, альтернативный — из левого
+
+@ How far shots may stray from the crosshair, in degrees
+fr Écart maximal des tirs par rapport au viseur, en degrés
+de Wie weit Schüsse vom Fadenkreuz abweichen können, in Grad
+it Quanto i colpi possono deviare dal mirino, in gradi
+es Cuánto pueden desviarse los disparos de la mira, en grados
+ru Насколько пули отклоняются от прицела, в градусах
+
+@ How hard firing kicks the view up
+fr Force avec laquelle le tir relève la vue
+de Wie stark das Feuern die Sicht nach oben reißt
+it Quanto gli spari spingono la visuale in alto
+es Cuánto levanta la vista el disparo
+ru Насколько сильно стрельба подбрасывает обзор
+
+@ How much closer the view gets while aiming
+fr À quel point la vue se rapproche en visant
+de Wie viel näher die Sicht beim Zielen rückt
+it Quanto si avvicina la visuale mirando
+es Cuánto se acerca la vista al apuntar
+ru Насколько приближается обзор при прицеливании
+
+@ An empty gun reloads without pressing Reload
+fr Une arme vide se recharge sans appuyer sur Recharger
+de Eine leere Waffe lädt ohne Nachladetaste nach
+it Un’arma scarica si ricarica senza premere Ricarica
+es Un arma vacía se recarga sin pulsar Recargar
+ru Пустое оружие перезаряжается без нажатия кнопки
+
+@ Rounds in a full magazine
+fr Balles dans un chargeur plein
+de Patronen in einem vollen Magazin
+it Colpi in un caricatore pieno
+es Balas en un cargador lleno
+ru Патронов в полном магазине
+
+@ Seconds a reload takes
+fr Durée d’un rechargement en secondes
+de Sekunden pro Nachladen
+it Secondi per ricaricare
+es Segundos que dura una recarga
+ru Длительность перезарядки в секундах

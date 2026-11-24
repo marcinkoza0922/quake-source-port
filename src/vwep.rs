@@ -22,10 +22,12 @@ use qrender::{ModelId, RenderEntity};
 
 use crate::assets::{Level, md3};
 
+mod arms;
 mod classic;
 mod enhanced;
 pub mod rig;
 pub mod table;
+pub mod toys;
 #[cfg(test)]
 mod tests;
 
@@ -46,6 +48,8 @@ struct Loaded {
 pub struct Cache {
     rigs: HashMap<bool, Option<Loaded>>,
     guns: HashMap<(bool, String), Option<ModelId>>,
+    /// Bodies with add-on guns, by the toy's id.
+    toys: HashMap<(bool, u8), Option<toys::ToyBody>>,
 }
 
 impl Cache {
@@ -95,6 +99,10 @@ impl Cache {
 /// Per-view state: what each player slot holds.
 #[derive(Default)]
 pub struct VWep {
+    /// Each player slot's add-on gun on the local server (empty: none).
+    pub toys: Vec<Option<toys::ToyState>>,
+    /// Where the add-on guns on bodies end this frame: slot, gun, point.
+    pub muzzles: Vec<(usize, usize, qcore::math::Vec3)>,
     /// `cl_vwep`.
     pub enabled: bool,
     /// Each player slot's `weaponmodel` on the local server (None: not
@@ -162,7 +170,22 @@ impl VWep {
     /// Player `idx`'s body was just pushed onto `out`: give it the weapon
     /// it holds.
     pub fn attach(&mut self, idx: usize, cl: &ClientState, lv: &mut Level, fs: &Fs, r: &mut Renderer, out: &mut Vec<RenderEntity>) {
-        if !self.enabled || idx == 0 || idx > cl.maxclients {
+        if idx == 0 || idx > cl.maxclients {
+            return;
+        }
+        if let Some(state) = self.toys.get(idx - 1).copied().flatten()
+            && let Some(e) = cl.entities.get(idx)
+            && cl.model_name(e.model).is_some_and(|n| n.eq_ignore_ascii_case(PLAYER))
+            && let Some(enhanced) = lv.models.get(e.model).copied().flatten().map(|m| m.md3)
+        {
+            let body = lv.vwep.toys.entry((enhanced, state.toy.id())).or_insert_with(|| toys::ToyBody::load(state.toy, enhanced, fs, r));
+            if let Some(body) = body {
+                let muzzles = body.attach(state, out);
+                self.muzzles.extend(muzzles.into_iter().map(|(part, p)| (idx - 1, part, p)));
+                return;
+            }
+        }
+        if !self.enabled {
             return;
         }
         let Some(e) = cl.entities.get(idx) else { return };
@@ -190,7 +213,7 @@ impl VWep {
                 model,
                 skin: 0,
                 colormap: None,
-                key: if body.key == 0 { 0 } else { body.key | qrender::ATTACHED_KEY },
+                key: qrender::attached_key(body.key, 0),
                 ..body
             });
         }

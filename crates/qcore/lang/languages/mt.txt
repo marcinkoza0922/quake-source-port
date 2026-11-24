@@ -4171,3 +4171,81 @@ mt HUD tal-mod
 
 @ Custom HUD provided by the current mod or map pack
 mt HUD personalizzat ipprovdut mill-mod jew pakkett ta mapep attwali
+
+@ Akimbo Pistols
+mt Żewġ pistoli
+
+@ Assault Rifle
+mt Xkubetta tal-assalt
+
+@ Aim Button
+mt Buttuna tal-mira
+
+@ Dot Colour
+mt Kulur tat-tikka
+
+@ Magazine Size
+mt Daqs tal-magażin
+
+@ Recoil
+mt Rikulu
+
+@ Reload
+mt Erġa' għabbi
+
+@ Reload (Add-ons)
+mt Erġa' għabbi (Add-ons)
+
+@ Reload Time
+mt Ħin tat-tagħbija
+
+@ Reload When Empty
+mt Għabbi meta tkun vojta
+
+@ Sight Zoom
+mt Zoom tal-mira
+
+@ Spread
+mt Tixrid
+
+@ Swap Pistols
+mt Aqleb il-pistoli
+
+@ Alt-fire aims while held, or with each press
+mt L-isparar alternattiv jimmira waqt li żżommu, jew b'kull għafsa
+
+@ Colour of the dot in the sight
+mt Kulur tat-tikka fil-mira
+
+@ Damage of each bullet
+mt Ħsara ta' kull balla
+
+@ Fire shoots the right pistol and alt-fire the left one
+mt Spara juża l-pistola tal-lemin u l-isparar alternattiv dik tax-xellug
+
+@ How far shots may stray from the crosshair, in degrees
+mt Kemm jistgħu jvarjaw it-tiri mill-crosshair, fi gradi
+
+@ How hard firing kicks the view up
+mt Kemm l-isparar jagħti daqqa 'l fuq lill-veduta
+
+@ How much closer the view gets while aiming
+mt Kemm toqrob il-veduta waqt li timmira
+
+@ An empty gun reloads without pressing Reload
+mt Arma vojta terġa' tgħabba mingħajr ma tagħfas Erġa' għabbi
+
+@ Rounds in a full magazine
+mt Balal f'magażin mimli
+
+@ Seconds a reload takes
+mt Sekondi li tieħu t-tagħbija
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+mt Pistola f'kull id: Spara juża tax-xellug, Sparar alternattiv tal-lemin. Il-munizzjon ma jispiċċax, iżda kull pistola trid terġa' tgħabbiha.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+mt Xkubetta kompletament awtomatika li terġa' tgħabba bl-imsiemer tiegħek. Sparar alternattiv jimmira minn ġol-mira bit-tikka ħamra għal tiri aktar preċiżi u veduta eqreb.
+
+@ None
+mt Xejn

@@ -4171,3 +4171,81 @@ ka მოდის HUD
 
 @ Custom HUD provided by the current mod or map pack
 ka მიმდინარე მოდის ან რუკების პაკეტის მიერ მოწოდებული HUD
+
+@ Akimbo Pistols
+ka წყვილი პისტოლეტი
+
+@ Assault Rifle
+ka საიერიშო შაშხანა
+
+@ Aim Button
+ka დამიზნების ღილაკი
+
+@ Dot Colour
+ka წერტილის ფერი
+
+@ Magazine Size
+ka მჭიდის ზომა
+
+@ Recoil
+ka უკუცემა
+
+@ Reload
+ka გადატენა
+
+@ Reload (Add-ons)
+ka გადატენა (დამატებები)
+
+@ Reload Time
+ka გადატენის დრო
+
+@ Reload When Empty
+ka გადატენა დაცლისას
+
+@ Sight Zoom
+ka სამიზნის მასშტაბი
+
+@ Spread
+ka გაბნევა
+
+@ Swap Pistols
+ka პისტოლეტების გაცვლა
+
+@ Alt-fire aims while held, or with each press
+ka ალტ. სროლა უმიზნებს, სანამ დაჭერილია, ან ყოველ დაჭერაზე
+
+@ Colour of the dot in the sight
+ka სამიზნის წერტილის ფერი
+
+@ Damage of each bullet
+ka თითოეული ტყვიის დაზიანება
+
+@ Fire shoots the right pistol and alt-fire the left one
+ka სროლა მარჯვენა პისტოლეტიდან ისვრის, ალტ. სროლა — მარცხენიდან
+
+@ How far shots may stray from the crosshair, in degrees
+ka რამდენად შეიძლება აცდეს გასროლა სამიზნეს (გრადუსი)
+
+@ How hard firing kicks the view up
+ka რამდენად ძლიერად აგდებს სროლა ხედს ზემოთ
+
+@ How much closer the view gets while aiming
+ka რამდენად ახლოვდება ხედი დამიზნებისას
+
+@ An empty gun reloads without pressing Reload
+ka ცარიელი იარაღი იტენება „გადატენაზე“ დაჭერის გარეშე
+
+@ Rounds in a full magazine
+ka ვაზნების რაოდენობა სავსე მჭიდში
+
+@ Seconds a reload takes
+ka რამდენი წამი სჭირდება გადატენას
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+ka თითო პისტოლეტი ორივე ხელში: სროლა მარცხენიდან ისვრის, ალტ. სროლა — მარჯვენიდან. ვაზნები უსასრულოა, მაგრამ თითოეული პისტოლეტი უნდა გადაიტენოს.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+ka სრულად ავტომატური შაშხანა, რომელიც თქვენი ლურსმნებით იტენება. ალტ. სროლა უმიზნებს წითელწერტილიანი სამიზნით: უფრო ზუსტი გასროლები და უფრო ახლო ხედი.
+
+@ None
+ka Არცერთი

@@ -12,6 +12,7 @@ use qcore::cvar::{CVAR_ARCHIVE, CVAR_ROM, Cvars};
 use crate::ents::Ents;
 use crate::server::{Core, Level};
 
+pub mod akimbo;
 pub mod boomerang;
 pub mod cable;
 pub mod cable_rope;
@@ -19,12 +20,14 @@ pub mod fall;
 pub mod dodge;
 pub mod gel;
 pub mod gel_phys;
+pub mod guns;
 pub mod hook_surface;
 pub mod hookshot;
 pub mod portal;
 pub(crate) mod portal_bolt;
 pub mod portal_move;
 pub mod railgun;
+pub mod rifle;
 pub mod save;
 pub mod sticky;
 pub mod shotgun;
@@ -104,6 +107,28 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_cable_length", "512", CVAR_ARCHIVE),
     ("addon_cable_metal", "0", CVAR_ARCHIVE),
     ("addon_cable_damage", "30", CVAR_ARCHIVE),
+    ("addon_rifle_damage", "10", CVAR_ARCHIVE),
+    // akimbo pistols: damage, spread (degrees), magazine, reload seconds,
+    // reload when empty, swap hands, on/off, slot
+    ("addon_akimbo_damage", "14", CVAR_ARCHIVE),
+    ("addon_akimbo_spread", "1.5", CVAR_ARCHIVE),
+    ("addon_akimbo_mag", "12", CVAR_ARCHIVE),
+    ("addon_akimbo_reload", "1.6", CVAR_ARCHIVE),
+    ("addon_akimbo_autoreload", "1", CVAR_ARCHIVE),
+    ("addon_akimbo_swap", "0", CVAR_ARCHIVE),
+    ("addon_akimbo", "0", CVAR_ARCHIVE),
+    ("addon_akimbo_slot", "2", CVAR_ARCHIVE),
+    // assault rifle: on/off, slot, magazine size, reload seconds, reload when
+    // empty, aim (0 hold, 1 toggle), sight magnification, recoil, dot colour
+    ("addon_rifle_mag", "30", CVAR_ARCHIVE),
+    ("addon_rifle_reload", "2.2", CVAR_ARCHIVE),
+    ("addon_rifle_autoreload", "1", CVAR_ARCHIVE),
+    ("addon_rifle_aim", "0", CVAR_ARCHIVE),
+    ("addon_rifle_zoom", "1.3", CVAR_ARCHIVE),
+    ("addon_rifle_recoil", "1", CVAR_ARCHIVE),
+    ("addon_rifle_dot", "0", CVAR_ARCHIVE),
+    ("addon_rifle", "0", CVAR_ARCHIVE),
+    ("addon_rifle_slot", "4", CVAR_ARCHIVE),
 ];
 
 /// Switches every add-on on (they all default to off); for tests and tools.
@@ -124,6 +149,8 @@ pub const TOY_SHIFT: u16 = 4;
 const TOY_MASK: u16 = 0xf << TOY_SHIFT;
 /// Directional dodge press, independent of weapon buttons.
 pub const BUTTON_DODGE: u16 = 1 << 8;
+/// Shared reload action (`+reload`), for the held toy.
+pub const BUTTON_TOY_RELOAD: u16 = 1 << 9;
 
 /// Add-on weapons, in stable order within a shared weapon slot.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -136,10 +163,12 @@ pub enum Toy {
     GelSprayer,
     Washer,
     Cable,
+    Akimbo,
+    Rifle,
 }
 
 impl Toy {
-    pub const ALL: [Toy; 8] = [Toy::PortalGun, Toy::Boomerang, Toy::Sticky, Toy::Hookshot, Toy::Railgun, Toy::GelSprayer, Toy::Washer, Toy::Cable];
+    pub const ALL: [Toy; 10] = [Toy::PortalGun, Toy::Boomerang, Toy::Sticky, Toy::Hookshot, Toy::Railgun, Toy::GelSprayer, Toy::Washer, Toy::Cable, Toy::Akimbo, Toy::Rifle];
 
     /// Wire id (1..=15).
     pub fn id(self) -> u8 {
@@ -162,6 +191,8 @@ impl Toy {
             Toy::GelSprayer => qcore::t!("Gel Sprayer"),
             Toy::Washer => qcore::t!("Powerwasher"),
             Toy::Cable => qcore::t!("Male-to-Male Cable"),
+            Toy::Akimbo => qcore::t!("Akimbo Pistols"),
+            Toy::Rifle => qcore::t!("Assault Rifle"),
         }
     }
     /// Name in savegame headers.
@@ -175,6 +206,8 @@ impl Toy {
             Toy::GelSprayer => "gel",
             Toy::Washer => "washer",
             Toy::Cable => "cable",
+            Toy::Akimbo => "akimbo",
+            Toy::Rifle => "rifle",
         }
     }
     pub fn from_key(key: &str) -> Option<Toy> {
@@ -191,6 +224,8 @@ impl Toy {
             Toy::GelSprayer => "addon_gel",
             Toy::Washer => "addon_washer",
             Toy::Cable => "addon_cable",
+            Toy::Akimbo => "addon_akimbo",
+            Toy::Rifle => "addon_rifle",
         }
     }
     /// Archived weapon slot assignment (10 is displayed as 0).
@@ -204,6 +239,8 @@ impl Toy {
             Toy::GelSprayer => "addon_gel_slot",
             Toy::Washer => "addon_washer_slot",
             Toy::Cable => "addon_cable_slot",
+            Toy::Akimbo => "addon_akimbo_slot",
+            Toy::Rifle => "addon_rifle_slot",
         }
     }
     /// The toys switched on in the menu.
@@ -282,6 +319,12 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
         railgun::frame(&mut rails, l, c);
         l.rails = rails;
     }
+    let mut akimbo = std::mem::take(&mut l.akimbo);
+    akimbo::frame(&mut akimbo, l, c);
+    l.akimbo = akimbo;
+    let mut rifle = std::mem::take(&mut l.rifle);
+    rifle::frame(&mut rifle, l, c);
+    l.rifle = rifle;
     let hook = c.cvars.value_of(Toy::Hookshot.cvar()) != 0.0;
     let rules = hookshot::Rules::read(&c.cvars);
     let time = l.vm.time;
@@ -332,7 +375,7 @@ impl crate::Server {
         if c.custom {
             toys = Toy::enabled(&c.cvars).collect();
             portals = l.and_then(|l| l.portals.save_text());
-            extra += &l.map(|l| l.stickies.save_text() + &l.gel.save_text()).unwrap_or_default();
+            extra += &l.map(|l| l.stickies.save_text() + &l.gel.save_text() + &l.akimbo.save_text() + &l.rifle.save_text()).unwrap_or_default();
             extra += &settings::save(&c.cvars);
             extra += &crate::modifiers::save_text(&c.cvars);
         } else {
@@ -420,6 +463,8 @@ pub(crate) fn shut_down(l: &mut Level, c: &mut Core) {
     l.washers.reset();
     l.hooks.reset();
     l.cables.reset();
+    l.akimbo.reset();
+    l.rifle.reset();
 }
 
 /// No remote client is connected.
@@ -434,7 +479,7 @@ mod tests {
     #[test]
     fn toy_ids_round_trip_through_buttons() {
         for t in Toy::ALL {
-            let b = t.bits() | BUTTON_TOY_FIRE | BUTTON_DODGE | 1;
+            let b = t.bits() | BUTTON_TOY_FIRE | BUTTON_DODGE | BUTTON_TOY_RELOAD | 1;
             assert_eq!(Toy::from_buttons(b), Some(t));
         }
         assert_eq!(Toy::from_buttons(0b11 | BUTTON_DODGE), None);
