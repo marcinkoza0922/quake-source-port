@@ -2391,9 +2391,6 @@ ar اضبط وضع العرض والشكل والكشف والتكبير وال�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 ar اللوحة المؤطرة تتوسط الخريطة داخل صندوق داكن في شاشة الإحصاءات؛ التراكب الأوسط يعرض شبكة سلكية شفافة فوق العرض
 
-@ Disabled while Weapon Auto-Switch is set to Never
-ar معطّل عندما يكون التبديل التلقائي للسلاح مضبوطًا على أبدًا
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 ar المستكشف فقط يكشف الغرف عند زيارتها؛ الخريطة الكاملة تُظهر هندسة المستوى بالكامل
 

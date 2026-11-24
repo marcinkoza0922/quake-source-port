@@ -2391,9 +2391,6 @@ vi Thiết lập chế độ xem, hiển thị, kiểu hiển lộ, thu phóng v
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 vi Khung bản đồ đặt bản đồ ở giữa trong hộp tối trên màn hình thống kê; lớp phủ giữa hiển thị khung dây trong suốt trên góc nhìn
 
-@ Disabled while Weapon Auto-Switch is set to Never
-vi Bị vô hiệu hóa khi Tự động đổi vũ khí đặt là Không bao giờ
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 vi Chỉ vùng đã khám phá chỉ hiện các phòng khi bạn đi qua; Toàn bộ bản đồ hiện toàn bộ hình học màn chơi
 

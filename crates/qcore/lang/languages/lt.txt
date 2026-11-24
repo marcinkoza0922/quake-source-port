@@ -2391,9 +2391,6 @@ lt Konfigūruokite 3D karkaso autožemėlapio vaizdą, rodymą, atidengimo reži
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 lt Įrėmintas skydelis centruoja žemėlapį tamsiame lange statistikos ekrane; centrinė perdanga rodo permatomą karkasą virš vaizdo
 
-@ Disabled while Weapon Auto-Switch is set to Never
-lt Išjungta, kai Automatinis ginklo keitimas nustatytas į Niekada
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 lt Tik ištyrinėta atidengia kambarius juos aplankius; Visas žemėlapis rodo visą lygio geometriją
 

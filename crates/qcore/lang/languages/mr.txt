@@ -2391,9 +2391,6 @@ mr 3D वायरफ्रेम ऑटोमॅप दृश्य, प्र�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 mr फ्रेम केलेले पॅनेल आकडेवारी स्क्रीनवर नकाशा गडद चौकटीत मध्यभागी ठेवते; मध्य ओव्हरले दृश्यावर पारदर्शक वायरफ्रेम दाखवते
 
-@ Disabled while Weapon Auto-Switch is set to Never
-mr शस्त्र ऑटो-स्विच 'कधीही नाही' वर असताना अक्षम राहते
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 mr फक्त शोधलेले तुम्ही जाताना खोल्या दाखवते; संपूर्ण मॅप संपूर्ण पातळीची रचना दाखवतो
 

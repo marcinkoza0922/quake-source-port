@@ -2391,9 +2391,6 @@ cy Ffurfweddu golwg, arddangos, modd datgelu, chwyddo a marcwyr yr awtomap ffrâ
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 cy Mae panel â ffrâm yn canoli'r map mewn blwch tywyll ar y sgrin ystadegau; mae troshaen canol yn arnofio ffrâm wifren dryloyw dros y golygfa
 
-@ Disabled while Weapon Auto-Switch is set to Never
-cy Analluogwyd tra bod Awtonewid Arf wedi'i osod i Byth
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 cy Mae Archwiliwyd yn unig yn datgelu ystafelloedd wrth i chi ymweld â nhw; mae Map llawn yn dangos geometreg gyfan y lefel
 

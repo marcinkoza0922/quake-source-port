@@ -2391,9 +2391,6 @@ hu A 3D drótvázas autotérkép nézetének, megjelenítésének, felfedéséne
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 hu A keretezett panel a statisztikai képernyő közepén, sötét keretben jeleníti meg a térképet; a középső átfedés áttetsző drótvázat vetít a kép fölé
 
-@ Disabled while Weapon Auto-Switch is set to Never
-hu Letiltva, amíg az Automatikus fegyverváltás Soha értékre van állítva
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 hu A Csak felderített csak a bejárt termeket fedi fel; a Teljes térkép az egész pálya geometriáját mutatja
 

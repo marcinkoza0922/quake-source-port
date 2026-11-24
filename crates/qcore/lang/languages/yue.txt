@@ -2391,9 +2391,6 @@ yue 設定3D線框自動地圖嘅檢視模式、顯示位置、顯示範圍、�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 yue 帶框面板喺統計畫面中間用深色框顯示地圖；中央疊加會喺畫面上面浮現半透明線框
 
-@ Disabled while Weapon Auto-Switch is set to Never
-yue 當自動換武器設為「永不」嗰陣會停用
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 yue 只顯示已探索會喺你行過房間嗰陣先顯露；完整地圖會顯示成個關卡嘅幾何結構
 

@@ -16,12 +16,13 @@ fn basedir() -> Option<PathBuf> {
     d.join("id1").is_dir().then_some(d)
 }
 
-fn spawn_e1m1(autoswitch: &str, priority: &str) -> Option<(Server, usize)> {
+fn spawn_e1m1(custom: bool, autoswitch: &str, priority: &str) -> Option<(Server, usize)> {
     let base = basedir()?;
     let mut fs = Fs::new(&base);
     fs.add_game_dir("id1");
     let mut sv = Server::new(fs, Cvars::new(), 1);
-    sv.core.cvars.set("cl_autoswitch", autoswitch);
+    sv.core.set_custom(custom);
+    sv.core.cvars.set("modifier_autoswitch", autoswitch);
     sv.core.cvars.set("cl_weaponpriority", priority);
     sv.spawn_server("e1m1").ok()?;
     let c = sv.connect_local()?;
@@ -43,8 +44,8 @@ fn find_edict_by_classname(sv: &Server, target: &str) -> Option<u32> {
 
 /// Gives the player SSG + shells, selects SSG, then places the player directly on
 /// `weapon_classname` while holding attack (`button0 = 1`) and steps several frames.
-fn pickup_while_firing(autoswitch: &str, priority: &str, weapon_classname: &str) -> Option<(i32, i32, f32)> {
-    let (mut sv, c) = spawn_e1m1(autoswitch, priority)?;
+fn pickup_while_firing(custom: bool, autoswitch: &str, priority: &str, weapon_classname: &str) -> Option<(i32, i32, f32)> {
+    let (mut sv, c) = spawn_e1m1(custom, autoswitch, priority)?;
     let target_ent = find_edict_by_classname(&sv, weapon_classname)?;
     let target_pos = {
         let l = sv.level.as_mut().unwrap();
@@ -83,7 +84,7 @@ fn pickup_while_firing(autoswitch: &str, priority: &str, weapon_classname: &str)
 
 #[test]
 fn never_mode_keeps_current_weapon_on_pickup_while_collecting_item() {
-    let Some((weapon, items, nails)) = pickup_while_firing("0", "8 7 5 6 3 4 2 1", "weapon_nailgun") else {
+    let Some((weapon, items, nails)) = pickup_while_firing(true, "2", "8 7 5 6 3 4 2 1", "weapon_nailgun") else {
         return;
     };
     assert_eq!(weapon, IT_SUPER_SHOTGUN, "Never mode must not switch away from SSG");
@@ -94,14 +95,14 @@ fn never_mode_keeps_current_weapon_on_pickup_while_collecting_item() {
 #[test]
 fn better_weapon_mode_respects_custom_priority_order() {
     // SSG (3) ranked higher than Nailgun (4): should NOT switch.
-    let Some((weapon, items, _)) = pickup_while_firing("1", "8 7 5 6 3 4 2 1", "weapon_nailgun") else {
+    let Some((weapon, items, _)) = pickup_while_firing(true, "1", "8 7 5 6 3 4 2 1", "weapon_nailgun") else {
         return;
     };
     assert_eq!(weapon, IT_SUPER_SHOTGUN);
     assert_ne!(items & IT_NAILGUN, 0);
 
     // Nailgun (4) ranked higher than SSG (3): SHOULD switch to Nailgun!
-    let Some((weapon, items, _)) = pickup_while_firing("1", "4 8 7 5 6 3 2 1", "weapon_nailgun") else {
+    let Some((weapon, items, _)) = pickup_while_firing(true, "1", "4 8 7 5 6 3 2 1", "weapon_nailgun") else {
         return;
     };
     assert_eq!(weapon, IT_NAILGUN);
@@ -114,7 +115,8 @@ fn custom_priority_prevents_accidental_rocket_pickup_switch_and_self_fire() {
     let mut fs = Fs::new(&base);
     fs.add_game_dir("id1");
     let mut sv = Server::new(fs, Cvars::new(), 1);
-    sv.core.cvars.set("cl_autoswitch", "1");
+    sv.core.set_custom(true);
+    sv.core.cvars.set("modifier_autoswitch", "1");
     // Put SSG (3) above Rocket Launcher (7).
     sv.core.cvars.set("cl_weaponpriority", "3 5 4 2 6 7 8 1");
     if sv.spawn_server("e1m3").is_err() {
@@ -153,4 +155,15 @@ fn custom_priority_prevents_accidental_rocket_pickup_switch_and_self_fire() {
     assert_eq!(l.vm.ent_f(1, f.weapon) as i32, IT_SUPER_SHOTGUN, "must stay on SSG when RL has lower priority");
     assert_ne!(l.vm.ent_f(1, f.items) as i32 & IT_ROCKET_LAUNCHER, 0, "must still pick up RL");
     assert_eq!(l.vm.ent_f(1, f.ammo_rockets), 5.0, "must not fire any rocket on pickup!");
+}
+
+#[test]
+fn default_and_vanilla_games_leave_pickups_to_the_progs() {
+    // id1's weapon_touch always switches in single player. "Default" keeps
+    // that, and a vanilla game ignores the modifier whatever its value.
+    for (custom, value) in [(true, "0"), (false, "0"), (false, "1"), (false, "2")] {
+        let Some((weapon, items, _)) = pickup_while_firing(custom, value, "3 8 7 5 6 4 2 1", "weapon_nailgun") else { return };
+        assert_eq!(weapon, IT_NAILGUN, "customized {custom}, modifier_autoswitch {value}");
+        assert_ne!(items & IT_NAILGUN, 0);
+    }
 }

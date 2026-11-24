@@ -2391,9 +2391,6 @@ am የ3D ሽቦ-ፍሬም ራስ-ሰር ካርታ እይታን፣ አቀራረ�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 am ክፈፍ ያለው ፓነል ካርታውን በስታቲስቲክስ ማያ ላይ በጥቁር ሳጥን ውስጥ ያማክላል፤ መካከለኛ ተደራቢ ግልጽ ሽቦ-ክፈፍ በእይታው ላይ ያሳያል
 
-@ Disabled while Weapon Auto-Switch is set to Never
-am የመሳሪያ ራስ-ሰር ቅየራ ወደ በጭራሽ ሲቀናበር ይቦዝናል
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 am የተዳሰሱ ብቻ ክፍሎችን ሲጎበኙ ይገልጣል፤ ሙሉ ካርታ የደረጃውን ሙሉ ቅርጽ ያሳያል
 

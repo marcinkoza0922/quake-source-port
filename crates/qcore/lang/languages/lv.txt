@@ -2391,9 +2391,6 @@ lv Konfigurējiet 3D karkasa autokartes skatu, attēlojumu, atklāšanas režīm
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 lv Ierāmēts panelis centrē karti tumšā rāmī statistikas ekrānā; centra pārklājums parāda caurspīdīgu karkasu pāri skatam
 
-@ Disabled while Weapon Auto-Switch is set to Never
-lv Atspējots, kamēr Automātiska ieroču maiņa ir iestatīta uz Nekad
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 lv Tikai izpētītais atklāj telpas, kad tās apmeklējat; Visa karte rāda visu līmeņa ģeometriju
 

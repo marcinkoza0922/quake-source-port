@@ -2391,9 +2391,6 @@ mt Ikkonfigura l-veduta, il-wiri, il-modalità tal-kixif, iż-zoom u l-markaturi
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 mt Il-pannell b'qafas iċċentra l-mappa f'kaxxa skura fuq l-iskrin tal-istatistika; is-saff tan-nofs juri wireframe trasparenti fuq il-veduta
 
-@ Disabled while Weapon Auto-Switch is set to Never
-mt Diżattivat waqt li Bidla Awtomatika tal-Arma tkun issettjata fuq Qatt
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 mt Esplorat biss jikxef il-kmamar hekk kif iżżurhom; Mappa sħiħa turi l-ġeometrija kollha tal-livell
 

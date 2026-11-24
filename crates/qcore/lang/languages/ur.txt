@@ -2391,9 +2391,6 @@ ur 3D وائر فریم آٹو میپ کا منظر، ڈسپلے، ظاہر کر
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 ur فریم والا پینل اعداد و شمار کی اسکرین پر نقشے کو گہرے باکس میں درمیان میں رکھتا ہے؛ مرکزی اوورلے منظر کے اوپر شفاف وائر فریم دکھاتا ہے
 
-@ Disabled while Weapon Auto-Switch is set to Never
-ur جب ہتھیار خودکار تبدیلی کبھی نہیں پر ہو تو یہ غیر فعال ہوتا ہے
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 ur صرف دریافت شدہ آپ کے جانے پر کمرے دکھاتا ہے؛ مکمل نقشہ پورے لیول کی ساخت دکھاتا ہے
 

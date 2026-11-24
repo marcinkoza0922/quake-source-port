@@ -15,6 +15,7 @@ pub(super) const AMMO_MULT: &[(&str, f32)] =
     &[("50%", 0.5), ("75%", 0.75), ("100%", 1.0), ("150%", 1.5), ("200%", 2.0), ("300%", 3.0), ("400%", 4.0)];
 pub(super) const HEALTH_MULT: &[(&str, f32)] = &[("50%", 0.5), ("75%", 0.75), ("100%", 1.0), ("150%", 1.5), ("200%", 2.0)];
 pub(super) const JUMPS: &[(&str, f32)] = &[("single", 1.0), ("double", 2.0), ("triple", 3.0)];
+pub(super) const AUTOSWITCH: &[(&str, f32)] = &[("Default", 0.0), ("Better weapon", 1.0), ("Never", 2.0)];
 pub(super) const HORDE: &[(&str, f32)] = &[("off", 0.0), ("2x monsters", 1.0), ("3x monsters", 2.0), ("4x monsters", 3.0)];
 
 /// Customize → Gameplay Modifiers: harder rules first, then easier ones.
@@ -32,6 +33,8 @@ pub(super) const MODIFIERS: &[Item] = &[
     toggle("No Drowning", "modifier_nodrown"),
     toggle("No Self Damage", "modifier_noselfdamage"),
     Item::Choice { label: "Jumps", cvar: "modifier_jumps", choices: JUMPS },
+    Item::Choice { label: "Weapon Auto-Switch", cvar: "modifier_autoswitch", choices: AUTOSWITCH },
+    Item::Sub { label: "Weapon Priority", page: Page::WeaponPriority },
     Item::Run { label: "Reset to Defaults", run: Run::ResetModifiers },
 ];
 

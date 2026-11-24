@@ -2391,9 +2391,6 @@ is Stilla sýn, birtingu, afhjúpunarham, aðdrátt og merki fyrir 3D-vírnetsko
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 is Innrammað spjald miðjar kortið í dökkum ramma á tölfræðiskjánum; miðjuyfirlag sýnir gegnsæja vírgrind yfir myndina
 
-@ Disabled while Weapon Auto-Switch is set to Never
-is Óvirkt meðan Sjálfvirk vopnaskipti eru stillt á Aldrei
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 is Aðeins kannað afhjúpar herbergi þegar þú heimsækir þau; Fullt kort sýnir alla rúmfræði borðsins
 

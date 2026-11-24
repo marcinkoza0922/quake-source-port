@@ -2391,9 +2391,6 @@ uk Налаштовує вигляд 3D-каркасної автокарти, �
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 uk Панель у рамці центрує карту в темному вікні на екрані статистики; накладання по центру показує прозорий каркас поверх огляду
 
-@ Disabled while Weapon Auto-Switch is set to Never
-uk Вимкнено, доки Автозміна зброї має значення Ніколи
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 uk Лише досліджене відкриває кімнати під час відвідування; Уся карта показує всю геометрію рівня
 

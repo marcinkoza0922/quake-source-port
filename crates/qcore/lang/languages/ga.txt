@@ -2391,9 +2391,6 @@ ga Cumraigh amharc, taispeáint, mód nochta, zúmáil agus marcálaithe na huat
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 ga Láraíonn an painéal frámaithe an léarscáil i mbosca dorcha ar scáileán na staitisticí; taispeánann forleagan láir fráma sreinge trédhearcach thar an radharc
 
-@ Disabled while Weapon Auto-Switch is set to Never
-ga Díchumasaithe fad atá Uathathrú Airm socraithe ar Riamh
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 ga Ní nochtann Taiscéalta amháin seomraí ach nuair a thugann tú cuairt orthu; taispeánann Léarscáil iomlán céimseata iomlán an leibhéil
 

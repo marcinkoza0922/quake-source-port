@@ -2391,9 +2391,6 @@ bg Настройва изгледа на 3D телената автокарта
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 bg Панелът в рамка центрира картата в тъмна кутия на екрана със статистика; централното наслагване показва прозрачна мрежа върху изгледа
 
-@ Disabled while Weapon Auto-Switch is set to Never
-bg Изключено, докато Автосмяна на оръжие е зададено на Никога
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 bg Само изследваното разкрива стаите при посещение; Цяла карта показва цялата геометрия на нивото
 

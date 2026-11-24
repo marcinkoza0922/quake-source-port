@@ -2391,9 +2391,6 @@ id Atur tampilan peta otomatis rangka kawat 3D, letak, mode penyingkapan, perbes
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 id Panel berbingkai memusatkan peta dalam kotak gelap di layar statistik; hamparan tengah menampilkan wireframe transparan di atas pandangan
 
-@ Disabled while Weapon Auto-Switch is set to Never
-id Dinonaktifkan saat Ganti Senjata Otomatis disetel ke Tidak pernah
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 id Hanya yang dijelajahi membuka ruangan saat Anda mengunjunginya; Peta penuh menampilkan seluruh geometri level
 

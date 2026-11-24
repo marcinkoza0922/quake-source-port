@@ -2391,9 +2391,6 @@ sk Nastaví pohľad 3D drôtenej automapy, zobrazenie, odhalenie, priblíženie 
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 sk Orámovaný panel vycentruje mapu v tmavom poli na obrazovke štatistík; stredové prekrytie zobrazí priehľadný drôtený model cez pohľad
 
-@ Disabled while Weapon Auto-Switch is set to Never
-sk Vypnuté, kým je Auto-prepnutie zbrane nastavené na Nikdy
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 sk Len preskúmané odhaľuje miestnosti pri prechádzaní; Celá mapa zobrazuje celú geometriu úrovne
 

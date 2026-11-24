@@ -10,7 +10,7 @@ fn sub_masters(page: Page) -> &'static [&'static str] {
         Page::AutoAim => &["assist_autoaim"],
         Page::GrenadeArc => &["assist_grenadearc"],
         Page::Autosave => &["sv_autosave"],
-        Page::WeaponPriority => &["cl_autoswitch"],
+        Page::WeaponPriority => &["modifier_autoswitch"],
         Page::Automap => &["cl_automap"],
         Page::Water => &["r_enhancedwater"],
         Page::Bloom => &["r_bloom"],
@@ -30,7 +30,8 @@ fn any_off(masters: &[&str], cv: &Cvars) -> bool {
 
 /// Sub-pages that are switched off by their parent setting.
 pub(super) fn sub_disabled(page: Page, cv: &Cvars) -> bool {
-    any_off(sub_masters(page), cv)
+    // the order only matters to Better weapon
+    any_off(sub_masters(page), cv) || (page == Page::WeaponPriority && cv.value_of("modifier_autoswitch") != 1.0)
 }
 
 /// The cvar a row sets, for rows that set one directly.

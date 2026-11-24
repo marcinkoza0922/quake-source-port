@@ -2391,9 +2391,6 @@ gu 3D વાયરફ્રેમ ઑટોમેપ દૃશ્ય, ડિસ�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 gu ફ્રેમવાળી પેનલ આંકડાકીય સ્ક્રીન પર નકશાને ઘેરા બોક્સમાં કેન્દ્રિત કરે છે; સેન્ટર ઓવરલે દૃશ્ય પર પારદર્શક વાયરફ્રેમ બતાવે છે
 
-@ Disabled while Weapon Auto-Switch is set to Never
-gu જ્યારે હથિયાર ઑટો-સ્વિચ 'ક્યારેય નહીં' પર હોય ત્યારે બંધ રહે છે
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 gu ફક્ત શોધેલું તમે જાઓ તેમ ઓરડા બતાવે છે; સંપૂર્ણ મેપ આખા સ્તરની રચના બતાવે છે
 

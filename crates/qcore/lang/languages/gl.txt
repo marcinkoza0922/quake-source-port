@@ -2391,9 +2391,6 @@ gl Configura a vista, visualización, modo de revelación, zoom e marcadores do 
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 gl O panel enmarcado centra o mapa nun recadro escuro na pantalla de estatísticas; a superposición central mostra un aramado transparente sobre a vista
 
-@ Disabled while Weapon Auto-Switch is set to Never
-gl Desactivado mentres Cambio automático de arma estea en Nunca
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 gl Só o explorado revela as salas ao visitalas; Mapa completo mostra toda a xeometría do nivel
 

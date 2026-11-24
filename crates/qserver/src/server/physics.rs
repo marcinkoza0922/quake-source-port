@@ -165,11 +165,11 @@ impl Server {
                 if !c.clients[ci].active {
                     continue;
                 }
-                let local_client = c.clients[ci].local;
+                let switching = c.clients[ci].local && crate::weaponswitch::active(c);
                 vm.set_g_f(g.time, vm.time as f32);
                 vm.set_self(e);
                 exec(vm, c, w, vm.g_i(g.f_player_pre_think));
-                let pre_move_weapon = local_client.then(|| crate::weaponswitch::WeaponSnapshot::capture(vm, &f, e));
+                let pre_move_weapon = switching.then(|| crate::weaponswitch::WeaponSnapshot::capture(vm, &f, e));
                 let ok = qworld::phys::physics_client_move(w, &mut Ents { vm: &mut *vm, c: &mut *c }, &p, e);
                 if ok && let Some(snap) = pre_move_weapon {
                     snap.apply(vm, &f, &c.cvars, e);
@@ -181,7 +181,7 @@ impl Server {
                     vm.set_g_f(g.time, vm.time as f32);
                     vm.set_self(e);
                     exec(vm, c, w, vm.g_i(g.f_player_post_think));
-                    if local_client && !vm.is_free(e) {
+                    if switching && !vm.is_free(e) {
                         post_think_weapons.push((e, crate::weaponswitch::WeaponSnapshot::capture(vm, &f, e)));
                     }
                 }

@@ -2391,9 +2391,6 @@ sw Sanidi mwonekano wa ramani ya waya ya 3D, uonyeshaji, ufichuaji, ukuzaji na a
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 sw Paneli yenye fremu huweka ramani katikati kwenye kisanduku cheusi kwenye skrini ya takwimu; mfuniko wa kati huonyesha waya wazi juu ya mwonekano
 
-@ Disabled while Weapon Auto-Switch is set to Never
-sw Huzimwa wakati Kubadili Silaha Kiotomatiki kumewekwa kuwa Kamwe
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 sw Zilizochunguzwa pekee hufichua vyumba unavyovitembelea; Ramani kamili huonyesha umbo lote la kiwango
 

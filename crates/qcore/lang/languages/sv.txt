@@ -2391,9 +2391,6 @@ sv Anpassa 3D-trådramskartans vy, visning, avslöjandeläge, zoom och markörer
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 sv Inramad panel centrerar kartan i en mörk ruta på statistikskärmen; centeröverlägg svävar en genomskinlig trådram över vyn
 
-@ Disabled while Weapon Auto-Switch is set to Never
-sv Inaktiverad medan Automatiskt vapenbyte är inställt på Aldrig
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 sv Endast utforskat visar rum vartefter du besöker dem; Hela kartan visar hela banans geometri
 

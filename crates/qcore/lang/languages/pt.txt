@@ -2391,9 +2391,6 @@ pt Configura a vista em estrutura 3D do automapa, exibição, revelação, zoom 
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 pt O painel emoldurado centra o mapa numa caixa escura no ecrã de estatísticas; a sobreposição central mostra um modelo de arame transparente sobre a vista
 
-@ Disabled while Weapon Auto-Switch is set to Never
-pt Desativado enquanto Troca automática de arma estiver em Nunca
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 pt Apenas explorado revela as salas à medida que as visitas; Mapa completo mostra toda a geometria do nível
 

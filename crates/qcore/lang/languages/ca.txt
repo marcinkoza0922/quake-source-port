@@ -2391,9 +2391,6 @@ ca Configura la vista, visualització, mode de revelació, zoom i marcadors de l
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 ca El panell emmarcat centra el mapa en un quadre fosc a la pantalla d'estadístiques; la superposició central mostra un filferro transparent sobre la vista
 
-@ Disabled while Weapon Auto-Switch is set to Never
-ca Desactivat mentre Canvi automàtic d'arma estigui en Mai
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 ca Només explorat revela les sales a mesura que les visites; Mapa complet mostra tota la geometria del nivell
 

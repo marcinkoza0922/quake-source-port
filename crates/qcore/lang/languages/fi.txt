@@ -2391,9 +2391,6 @@ fi Määritä 3D-rautalankakartan näkymä, esitys, paljastustila, zoomaus ja me
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 fi Kehystetty paneeli keskittää kartan tummaan laatikkoon tilastoruudussa; keskipäällyste piirtää läpinäkyvän rautalankakartan näkymän päälle
 
-@ Disabled while Weapon Auto-Switch is set to Never
-fi Pois käytöstä, kun Automaattinen aseen vaihto on asetettu tilaan Ei koskaan
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 fi Vain tutkitut paljastaa huoneet sitä mukaa kun käyt niissä; Koko kartta näyttää koko kentän geometrian
 

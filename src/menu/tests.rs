@@ -580,27 +580,30 @@ fn autoaim_submenu_is_guarded_and_returns_to_accessibility() {
 }
 
 #[test]
-fn gameplay_weapon_priority_drag_drop_and_controller_reordering() {
+fn modifiers_weapon_priority_drag_drop_and_controller_reordering() {
     let mut cv = Cvars::default();
-    cv.register("cl_autoswitch", "0", 0);
+    cv.register("modifier_autoswitch", "0", 0);
     cv.register("cl_weaponpriority", qserver::weaponswitch::DEFAULT_PRIORITY, 0);
     cv.register("cl_automap", "0", 0);
     let mut m = Menu::new();
-    m.open(Screen::OptionsPage(Page::Gameplay));
+    m.open(Screen::OptionsPage(Page::Modifiers));
 
-    // Weapon Auto-Switch has exactly two choices: Never and Better weapon.
-    let sw_row = GAMEPLAY.iter().position(|i| matches!(i, Item::Choice { cvar: "cl_autoswitch", .. })).unwrap();
-    let Item::Choice { choices, .. } = GAMEPLAY[sw_row] else { unreachable!() };
-    assert_eq!(choices, &[("Never", 0.0), ("Better weapon", 1.0)]);
+    // Auto-switch is a per-game modifier, off ("Default") unless picked.
+    let rows = page_items(Page::Modifiers);
+    let sw_row = rows.iter().position(|i| matches!(i, Item::Choice { cvar: "modifier_autoswitch", .. })).unwrap();
+    let Item::Choice { choices, .. } = rows[sw_row] else { unreachable!() };
+    assert_eq!(choices, &[("Default", 0.0), ("Better weapon", 1.0), ("Never", 2.0)]);
+    assert!(!GAMEPLAY.iter().any(|i| matches!(i, Item::Sub { page: Page::WeaponPriority, .. })));
 
-    // Weapon Priority sub-page is guarded while Never is selected.
-    let wp_row = GAMEPLAY.iter().position(|i| matches!(i, Item::Sub { page: Page::WeaponPriority, .. })).unwrap();
+    // Weapon Priority only opens for Better weapon.
+    let wp_row = rows.iter().position(|i| matches!(i, Item::Sub { page: Page::WeaponPriority, .. })).unwrap();
     m.opt_cursor = wp_row;
-    m.key(K_ENTER, &mut cv, false);
-    assert_eq!(m.screen, Screen::OptionsPage(Page::Gameplay));
-
-    // Switch to Better weapon -> Weapon Priority opens.
-    cv.set("cl_autoswitch", "1");
+    for off in ["0", "2"] {
+        cv.set("modifier_autoswitch", off);
+        m.key(K_ENTER, &mut cv, false);
+        assert_eq!(m.screen, Screen::OptionsPage(Page::Modifiers));
+    }
+    cv.set("modifier_autoswitch", "1");
     m.key(K_ENTER, &mut cv, false);
     assert_eq!(m.screen, Screen::OptionsPage(Page::WeaponPriority));
 
@@ -632,12 +635,13 @@ fn gameplay_weapon_priority_drag_drop_and_controller_reordering() {
     m.key(K_YBUTTON, &mut cv, false);
     assert_eq!(cv.by_name("cl_weaponpriority").unwrap().string, qserver::weaponswitch::DEFAULT_PRIORITY);
 
-    // B returns to Gameplay at the Weapon Priority row.
+    // B returns to the modifiers at the Weapon Priority row.
     m.key(K_BBUTTON, &mut cv, false);
-    assert_eq!(m.screen, Screen::OptionsPage(Page::Gameplay));
+    assert_eq!(m.screen, Screen::OptionsPage(Page::Modifiers));
     assert_eq!(m.opt_cursor, wp_row);
 
     // Automap sub-page is guarded while Automap is off, opens when on, and returns to Gameplay.
+    m.open(Screen::OptionsPage(Page::Gameplay));
     let am_row = GAMEPLAY.iter().position(|i| matches!(i, Item::Sub { page: Page::Automap, .. })).unwrap();
     m.opt_cursor = am_row;
     m.key(K_ENTER, &mut cv, false);

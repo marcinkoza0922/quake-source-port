@@ -2391,9 +2391,6 @@ nl Stel de weergave, plaatsing, onthulling, zoom en markeringen van de 3D-autoka
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 nl Omkaderd paneel centreert de kaart in een donker vak op het statistiekenscherm; Middenoverlay zweeft een transparant draadmodel over het beeld
 
-@ Disabled while Weapon Auto-Switch is set to Never
-nl Uitgeschakeld zolang Automatisch wapen wisselen op Nooit staat
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 nl Alleen verkend toont ruimtes zodra je ze bezoekt; Volledige kaart toont de hele levelgeometrie
 
