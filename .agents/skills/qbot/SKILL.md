@@ -46,6 +46,10 @@ turns up. After a change that could affect mods:
 target/release/qbot -game flagged -maxwall 90 -out target/qbot-flagged   # ~10 min
 ```
 
+Eight of the largest maps have baselines but need a longer `-maxwall` to be
+compared (d2m8, mj4m3, qbjr_hcm2 at 180 s; mj4m2, qbjr_hcm at 360 s;
+mj4m1, mj4m4, qbj3_colossus at 720 s). qbj3_hcm doesn't finish in 720 s.
+
 `-game all` is every installed mod. With several games, results go to
 `<out>/<game>/report.json` and `<out>/summary.txt` (errors first).
 
@@ -82,6 +86,17 @@ never just to make a regression go away.
   for 1 s (teleporter whose destination is inside itself) counts the triggers
   there and `setpos`es out. `impulse 9` every 5 s; fire is held while
   impulses are queued (QC ignores them until `attack_finished`).
+- `bot/walk.rs`: some progs (Copper, qbj, dwellv2p2, rmj1, smej2, ttj, ...)
+  ignore noclip players: their touch code tests `other.movetype`. Detected
+  from the bytecode (`ignores_noclip`); there the bot walks for one frame
+  (standing still) when it first overlaps a touch goal, and a trigger or
+  secret counts only after that. With other progs it walks only on a secret
+  that kept its touch, or an item or exit it's been inside for 1 s. Never
+  over a Copper pit (`func_void`, `trigger_void`, `trigger_plunge`).
+- `bot/step.rs`: one server frame, teleports, pins.
+- A bot that dies restarts the level (time jumps back): after 4 restarts the
+  run ends. Before the exit it waits 15 s of sim time for delayed scripts while
+  monsters are missing.
 - `bot/fly.rs`: classic noclip flight (`sv_altnoclip 0`, `sv_maxspeed
   1000`); touch goals fly to a point in the box clear of other triggers;
   after 5 s it `setpos`es there. Shootables: nearest open firing spot with a

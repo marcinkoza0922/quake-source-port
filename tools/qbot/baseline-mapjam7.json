@@ -1,8 +1,8 @@
 {
-  "jam7_ionous": {"kills": 35, "secrets": 1, "events": 40, "exited": true, "log": ["\"mapversion\" is not a field", "trigger_ladder with angle 0, please set the outwards facing", "(use 360 if the ladder faces north)", "bonus item 'weapon_supernailgun' fell out of level at '-1038.0 1440.0 166.0'", "The recorded time was 70.25000"]},
+  "jam7_ionous": {"kills": 35, "secrets": 1, "events": 40, "exited": true, "log": ["\"mapversion\" is not a field", "trigger_ladder with angle 0, please set the outwards facing", "(use 360 if the ladder faces north)", "bonus item 'weapon_supernailgun' fell out of level at '-1038.0 1440.0 166.0'", "The recorded time was 83.94999"]},
   "jam7_khreathor": {"kills": 57, "secrets": 1, "events": 105, "exited": true, "log": ["\"lose_items\" is not a field", "\"mapversion\" is not a field", "trigger_ladder with angle 0, please set the outwards facing", "(use 360 if the ladder faces north)", "walkmonster 'monster_army' in wall at '655.0 -514.0  46.0'", "The recorded time was 164.40000"]},
-  "jam7_mjb": {"kills": 113, "secrets": 10, "events": 194, "exited": false, "log": ["\"first_down\" is not a field", "Quoth path_corner 'gr2pth3' detected: all path_corner converted to path_corner_precise"]},
-  "jam7_newhouse": {"kills": 87, "secrets": 7, "events": 110, "exited": true, "log": ["The recorded time was 134.45001"]},
+  "jam7_mjb": {"kills": 113, "secrets": 10, "events": 194, "exited": true, "log": ["\"first_down\" is not a field", "Quoth path_corner 'gr2pth3' detected: all path_corner converted to path_corner_precise", "The recorded time was 158.60000"]},
+  "jam7_newhouse": {"kills": 87, "secrets": 7, "events": 110, "exited": true, "log": ["The recorded time was 150.95001"]},
   "jam7_start": {"kills": 0, "secrets": 0, "events": 16, "exited": true, "log": ["\"no_item_rotate\" is not a field", "\"no_item_offset\" is not a field", "\"mapversion\" is not a field"]},
   "jam7_tens": {"kills": 26, "secrets": 2, "events": 39, "exited": true, "log": ["\"lose_items\" is not a field", "\"mapversion\" is not a field", "\"onlymonster\" is not a field", "bonus item 'item_health' fell out of level at ' 96.0 400.0 -58.0'", "The recorded time was 46.25000"]}
 }

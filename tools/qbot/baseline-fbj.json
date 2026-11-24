@@ -5,10 +5,10 @@
   "fbj_cc2": {"kills": 53, "secrets": 0, "events": 45, "exited": true, "log": ["\"mapversion\" is not a field", "Spawned a waiting trigger_multiple", " with targetname slimedone", " and target finaldoor"]},
   "fbj_chuma": {"kills": 48, "secrets": 8, "events": 57, "exited": true, "log": ["\"mapversion\" is not a field"]},
   "fbj_ict": {"kills": 111, "secrets": 3, "events": 97, "exited": true, "log": ["\"lavaalpha\" is not a field", "\"mapversion\" is not a field", "\"telealpha\" is not a field", "Spawned a waiting trigger_once", " with targetname 2_key_pickup", " and target 2_btn_panel", " and target 2_pickup_doors", " with targetname 1_ng_pickup", " and target 1_upper_closet", " and target 2_exittrap1", " and target 2_exittrap2", " and target 0_pillar_2_trap"]},
-  "fbj_ishv3": {"kills": 35, "secrets": 4, "events": 48, "exited": true, "log": ["\"mapversion\" is not a field"]},
+  "fbj_ishv3": {"kills": 35, "secrets": 4, "events": 50, "exited": true, "log": ["\"mapversion\" is not a field"]},
   "fbj_konig": {"kills": 665, "secrets": 0, "events": 58, "exited": true, "log": ["\"mapversion\" is not a field", "Bonus item fell out of level at '-96.0 -80.0  54.0'"]},
   "fbj_recycledoj": {"kills": 52, "secrets": 4, "events": 82, "exited": true, "log": ["\"mapversion\" is not a field", "Spawned a waiting trigger_once", " with targetname agro1t", " and target agro1"]},
   "fbj_shades": {"kills": 87, "secrets": 2, "events": 54, "exited": true, "log": ["\"wateralpha\" is not a field", "Bonus item fell out of level at '-112.0 -752.0 -122.0'"]},
-  "fbj_zigi": {"kills": 37, "secrets": 3, "events": 73, "exited": true, "log": ["\"mapversion\" is not a field", "\"speed2\" is not a field"]},
+  "fbj_zigi": {"kills": 37, "secrets": 3, "events": 71, "exited": true, "log": ["\"mapversion\" is not a field", "\"speed2\" is not a field"]},
   "start": {"kills": 0, "secrets": 4, "events": 74, "exited": true, "log": ["\"mapversion\" is not a field"]}
 }

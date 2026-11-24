@@ -21,6 +21,8 @@ pub mod devlog;
 mod fly;
 mod goals;
 pub mod trace;
+mod step;
+mod walk;
 
 /// Server tick: 20 Hz like a dedicated server (sys_ticrate 0.05).
 const DT: f64 = 1.0 / 20.0;
@@ -118,6 +120,9 @@ struct Goal {
     again: bool,
     /// Pickups that fire targets: taken last (see `pick`).
     late: bool,
+    /// Touched by the bot walking (see `walk`), and when last.
+    walked: bool,
+    walked_at: f64,
 }
 
 struct Ofs {
@@ -185,6 +190,9 @@ struct Bot<'a> {
     known: HashSet<u32>,
     cur: Option<usize>,
     goal_start: f64,
+    /// When the current goal was chosen (`goal_start` is pushed back while
+    /// the bot waits for doors).
+    chosen_at: f64,
     /// Where to stand for the current goal, and when it was worked out.
     spot: Option<Vec3>,
     spot_at: f64,
@@ -210,8 +218,12 @@ struct Bot<'a> {
     /// No pickup that fires targets before this: the last one's script
     /// (a boss rising) gets time to run first.
     late_until: f64,
+    /// When the last goal was done.
+    last_done: f64,
     /// IT_KEY1/IT_KEY2 bits held at the last update (see `reopen_locks`).
     keys_held: i32,
+    /// The progs ignore players in noclip (see `walk`).
+    walks: bool,
     intermission: Option<usize>,
 }
 
@@ -242,7 +254,9 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         return rep;
     };
     let cm = l.world.worldmodel.clone();
-    let intermission = l.vm.global_ofs("intermission_running");
+    // Copper progs call it `intermission`.
+    let walks = walk::ignores_noclip(&l.vm.progs);
+    let intermission = l.vm.global_ofs("intermission_running").or_else(|| l.vm.global_ofs("intermission"));
     let mut bot = Bot {
         sv,
         c,
@@ -255,6 +269,7 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         known: HashSet::new(),
         cur: None,
         goal_start: 0.0,
+        chosen_at: 0.0,
         spot: None,
         spot_at: -100.0,
         aim_point: Vec3::ZERO,
@@ -270,7 +285,9 @@ pub fn run(fs: Fs, map: &str, opt: &Options) -> Report {
         repressed: 0,
         impulses: Vec::new(),
         late_until: 0.0,
+        last_done: 0.0,
         keys_held: 0,
+        walks,
         intermission,
     };
     bot.drain_log();
@@ -356,8 +373,22 @@ impl Bot<'_> {
         let mut last_refill = -100.0;
         let mut last_scan = 0.0;
         let mut intermission_since: Option<f64> = None;
+        let (mut last_t, mut restarts) = (0.0, 0);
         loop {
             let t = self.sv.time();
+            if t < last_t {
+                // The player died and the level started over: `max_time`
+                // alone would never end the run.
+                restarts += 1;
+                (last_refill, last_scan) = (-100.0, 0.0);
+                self.pushing_until = -1.0;
+                self.set_noclip(true);
+                if restarts > 3 {
+                    self.rep.failed.push("the level restarted 4 times (the bot died)".into());
+                    break;
+                }
+            }
+            last_t = t;
             if t > max_time {
                 break;
             }
@@ -400,6 +431,7 @@ impl Bot<'_> {
                 if self.cur.is_none() {
                     self.cur = self.pick();
                     self.goal_start = t;
+                    self.chosen_at = t;
                     self.spot = None;
                     self.pushes = 0;
                     if let Some(i) = self.cur {
@@ -436,75 +468,5 @@ impl Bot<'_> {
             }
             self.step(mv);
         }
-    }
-
-    /// Escape a spot QC keeps putting the bot back to (see `step`).
-    fn unpin(&mut self, at: Vec3) {
-        for i in 0..self.goals.len() {
-            let g = &self.goals[i];
-            if g.kind == Kind::Trigger && !g.done && !self.vm().is_free(g.ent) {
-                let (a, b) = self.bounds(g.ent);
-                if (at.max(a).min(b) - at).length() < 64.0 {
-                    self.goals[i].done = true;
-                    if self.cur == Some(i) {
-                        self.cur = None;
-                    }
-                }
-            }
-        }
-        let to = self.cur.map_or(at + Vec3::new(0.0, 0.0, 128.0), |i| self.center(self.goals[i].ent));
-        self.note(&format!("pinned at {at:?}, setpos to {to:?}"));
-        self.sv.command(&format!("setpos {} {} {}", to.x, to.y, to.z));
-    }
-
-    fn step(&mut self, mv: ClientMove) {
-        // impulse 9 also hands out every key in id1: strip the keys it
-        // added, so key doors stay locked until the key is picked up.
-        let keys_before = (mv.impulse == 9).then(|| self.o.items.map(|it| (it, self.vm().ent_f(self.me, it) as i32))).flatten();
-        let before = self.me_origin();
-        self.sv.set_move(self.c, mv);
-        self.sv.frame(DT);
-        self.drain_log();
-        if self.sv.level.is_none() {
-            return;
-        }
-        // A teleporter moves the bot away before it is ever seen inside:
-        // a jump further than flight goes counts for triggers it was at.
-        let reach = SPEED * DT as f32 + 32.0;
-        let moved = (self.me_origin() - before).length();
-        // A teleporter whose destination lies inside it puts the bot back
-        // every frame: count its triggers and jump out to the goal.
-        let flying = self.vm().ent_f(self.me, self.o.movetype) as i32 == MOVETYPE_NOCLIP;
-        self.pinned = if flying && moved < 1.0 && (mv.forward != 0.0 || mv.side != 0.0 || mv.up != 0.0) { self.pinned + 1 } else { 0 };
-        if self.pinned > 20 {
-            self.pinned = 0;
-            self.unpin(before);
-        }
-        if moved > reach {
-            for i in 0..self.goals.len() {
-                let g = &self.goals[i];
-                if g.kind == Kind::Trigger && !g.done && !self.vm().is_free(g.ent) {
-                    let (a, b) = self.bounds(g.ent);
-                    let p = before.max(a).min(b);
-                    if (p - before).length() < reach {
-                        self.goals[i].done = true;
-                        if self.cur == Some(i) {
-                            self.cur = None;
-                        }
-                    }
-                }
-            }
-        }
-        if let Some((it, before)) = keys_before
-            && let Some(l) = self.sv.level.as_mut()
-        {
-            let now = l.vm.ent_f(self.me, it) as i32;
-            let added = now & (IT_KEY1 | IT_KEY2) & !before;
-            if added != 0 {
-                l.vm.set_ent_f(self.me, it, (now & !added) as f32);
-            }
-        }
-        let _ = self.sv.take_reliable(self.c);
-        let _ = self.sv.take_datagrams(self.c);
     }
 }

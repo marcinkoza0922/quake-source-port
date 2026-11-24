@@ -3,6 +3,10 @@
 
 use super::*;
 
+/// Longest wait (sim s) for doors to stop before a button is re-pressed:
+/// some never do (mjolnir's mj4m1).
+const MOVER_WAIT: f64 = 120.0;
+
 /// Yaw/pitch (Quake view convention: positive pitch looks down) towards `d`.
 fn look_angles(d: Vec3) -> [f32; 3] {
     let yaw = d.y.atan2(d.x).to_degrees();
@@ -266,6 +270,10 @@ impl Bot<'_> {
         let ent = self.goals[i].ent;
         let c = self.center(ent);
         let here = self.me_origin();
+        if t < self.pushing_until && self.falling_into_pit() {
+            self.set_noclip(true);
+            self.pushing_until = t;
+        }
         if t < self.pushing_until {
             // Look straight at it: underwater, swimming follows the pitch.
             mv.angles = look_angles(c - self.eye());
@@ -276,7 +284,7 @@ impl Bot<'_> {
         if self.pushes >= 3 {
             return false;
         }
-        if self.goals[i].again && !self.fires_mover(ent) && self.movers_moving() {
+        if self.goals[i].again && t - self.chosen_at < MOVER_WAIT && !self.fires_mover(ent) && self.movers_moving() {
             // Stay put until the doors the other buttons moved have arrived.
             self.goal_start = t;
             return true;

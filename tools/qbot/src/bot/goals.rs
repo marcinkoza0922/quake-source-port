@@ -18,6 +18,10 @@ fn crucified(vm: &Vm, o: &Ofs, e: u32, cls: &str) -> bool {
     cls == "monster_zombie" && vm.ent_f(e, o.spawnflags) as i32 & 1 != 0 && vm.ent_f(e, o.takedamage) == 0.0
 }
 
+/// Sim seconds without progress before the bot takes the exit while
+/// monsters are still missing.
+const SCRIPT_WAIT: f64 = 15.0;
+
 impl Bot<'_> {
     /// Add goals for edicts not seen yet: run at the start and every couple
     /// of seconds, since triggers spawn monsters and items as the level runs.
@@ -71,6 +75,8 @@ impl Bot<'_> {
                 touch: vm.ent_i(e, o.touch),
                 again: false,
                 late: kind == Kind::Pickup && self.has_str(e, o.target),
+                walked: false,
+                walked_at: 0.0,
             });
         }
         for g in new {
@@ -135,7 +141,10 @@ impl Bot<'_> {
             Kind::Monster => {
                 vm.ent_f(e, o.health) <= 0.0 || vm.ent_f(e, o.flags) as i32 & FL_MONSTER == 0 && !vm.classname(e).starts_with("monster_")
             }
-            Kind::Secret | Kind::Trigger => vm.ent_f(e, o.solid) as i32 != SOLID_TRIGGER || self.inside(e),
+            // A secret that fired drops its touch function at once.
+            Kind::Secret if vm.ent_i(e, o.touch) != g.touch => true,
+            Kind::Secret => vm.ent_f(e, o.solid) as i32 != SOLID_TRIGGER || g.walked && self.inside(e),
+            Kind::Trigger => vm.ent_f(e, o.solid) as i32 != SOLID_TRIGGER || (g.walked || !self.walks) && self.inside(e),
             // Keys spawn SOLID_NOT until PlaceItem runs: taken once placed
             // and not solid again.
             Kind::Pickup => g.armed && vm.ent_f(e, o.solid) as i32 == SOLID_NOT,
@@ -208,6 +217,7 @@ impl Bot<'_> {
                 let g = &self.goals[i];
                 let msg = format!("done {:?} {} #{}", g.kind, g.class, g.ent);
                 self.note(&msg);
+                self.last_done = self.sv.time();
                 let g = &mut self.goals[i];
                 g.done = true;
                 if freed {
@@ -323,11 +333,22 @@ impl Bot<'_> {
             }
             return self.pick();
         }
-        // Dormant monsters may still wake up; give scripts a moment first.
+        // Dormant monsters may still wake up: give delayed scripts a moment
+        // after the last goal (sewerjam2's start: 6.8 s and 10 s).
         let i = best(true)?;
+        let st = self.sv.stats();
+        let asleep = self.goals.iter().any(|g| !g.done && self.dormant(g));
+        if (asleep || st.killed_monsters < st.total_monsters) && self.sv.time() < self.last_done + SCRIPT_WAIT {
+            self.late_until = self.last_done + SCRIPT_WAIT;
+            return None;
+        }
         for g in self.goals.iter().filter(|g| g.kind == Kind::Exit) {
             let (e, t) = (g.ent, g.touch);
-            self.sv.level.as_mut().unwrap().vm.set_ent_i(e, self.o.touch, t);
+            // A script may have switched the exit on since it was found.
+            let vm = &mut self.sv.level.as_mut().unwrap().vm;
+            if vm.ent_i(e, self.o.touch) == 0 {
+                vm.set_ent_i(e, self.o.touch, t);
+            }
         }
         Some(i)
     }
