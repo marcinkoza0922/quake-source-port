@@ -1,0 +1,70 @@
+# Mods that have flagged an issue: `dir  reason` (docs/COMPAT_AUDIT.md,
+# docs/DESIGN.md). `qbot -game flagged` runs them; add a line when one turns up.
+ad  engine-detection paths (FTE particles, strings, surfaces), te_explosion2, v_cshift, sky
+mjolnir  dlight-shadow crash (degenerate faces), v_cshift, chase cvars, large maps
+qbj3  misc_model scale, hudstyle, BRUSHLIST collision, CSQC HUD stats
+id1  base game; KEX saves
+hipnotic  mission pack builtins; "" model handles
+rogue  mission pack builtins
+dopa  2021 re-release; menu_credits
+mg1  fog command, grate mips
+mg3  md5mesh parents, ex_* builtins
+q64  Quake64 BSP, .lit priority
+qbj  truncated miptex, file-name case
+qbj2  sky wind
+dmd  sky wind
+alk1.2  v_cshift, sky, degenerate faces
+alkjam  v_cshift; QC error on alkjam_plaw (qbot)
+jjj2  v_cshift; objerror on jjj2_dfl
+rubicon2  v_cshift
+sewerjam2  sky, sys_ticrate, degenerate faces
+xmasjam2018  v_cshift; custom-key saves
+xmasjam2019  v_cshift; custom-key saves
+xmasjam2020  v_cshift, te_explosion2, degenerate faces
+xmasjam2021  v_cshift, te_explosion2
+func_xmasjam2017_v2  custom-key saves, degenerate faces
+func_mapjam1  r_oldwater
+func_mapjam3  upper-case PAK0.PAK, play, degenerate faces
+func_mapjam4  degenerate faces
+func_mapjam5  dlight-shadow crash (jam5_warren); QC error on jam5_mfx (qbot)
+hwjam2  trailing space in a model name (hwjam2_thulsa)
+hwjam3  setmodel without a precache (hwjam3_shades), te_explosion2
+hwjam4  te_explosion2
+swjam  leading slash in a model name (swjam_nolcoz)
+uwjam  missing .way files
+mc_hj26  BRUSHLIST collision
+mc_trapsjam  te_explosion2
+mc_xmasjam_2025  te_explosion2
+mc_retrojam1  BSPX lightgrid and decoupled lightmaps
+tcj  te_explosion2
+rotj  te_explosion2, menu cvars, degenerate faces
+explorejam3_v1.15  te_explosion2, degenerate faces
+limjam  file-name case
+modjam_redfield  file-name case
+modjam_adaya  water cvar probe
+modjam_snaut  degenerate faces
+modjam2_asaki  DP_SV_CUSTOMIZEENTITYFORCLIENT check
+retrojam2  truncated miptex
+retrojam5  degenerate faces
+retrojam6  save from other progs left a half-loaded level
+srj1  ambient_fade
+jam8  console cvars
+rmj1  serverinfo
+bluemonday  Quoth base, DarkPlaces cvars, degenerate faces
+quoth  base pack install, DarkPlaces cvars
+dtintin  Zip64 release
+dtintin_fixed  Zip64 release
+dwellv2p2  inventory art, degenerate faces
+copper  degenerate faces
+dm4jam  demos in quake.rc, degenerate faces
+smej2_1.1  demos in quake.rc
+fbj  //st stats in demos
+mjam  //st stats in demos
+ttj  //st stats in demos
+mapjam6  degenerate faces
+mapjam7  degenerate faces
+quoffee  degenerate faces
+honey  KEX saves
+bbelief  menu_credits
+contract  menu_credits
+Oxyblack_Fortress_by_Heresy  runs on AD (base from its readme)

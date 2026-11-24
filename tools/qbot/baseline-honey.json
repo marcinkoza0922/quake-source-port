@@ -1,0 +1,9 @@
+{
+  "credits": {"kills": 2, "secrets": 0, "events": 4, "exited": false, "log": ["No spawn function for:", "EDICT 98:", "origin          ' 48.0 768.0 188.0'", "classname       dynamiclight", "origin          '208.0 768.0 188.0'", "origin          '208.0 -1024.0 188.0'", "origin          ' 48.0 -1024.0 188.0'"]},
+  "h_end": {"kills": 0, "secrets": 0, "events": 7, "exited": true, "log": []},
+  "h_hub1": {"kills": 0, "secrets": 0, "events": 12, "exited": true, "log": []},
+  "h_hub2": {"kills": 0, "secrets": 0, "events": 12, "exited": true, "log": []},
+  "honey": {"kills": 123, "secrets": 4, "events": 139, "exited": true, "log": []},
+  "saint": {"kills": 66, "secrets": 7, "events": 127, "exited": true, "log": ["func_refwall using model \"maps/bm_chain2.bsp\"", "func_refwall using model \"maps/bm_chain.bsp\"", "func_refwall using model \"maps/bm_brkceil.bsp\"", "func_refwall using model \"maps/bm_brkceil2.bsp\"", "void: removing"]},
+  "start": {"kills": 1, "secrets": 1, "events": 31, "exited": true, "log": []}
+}

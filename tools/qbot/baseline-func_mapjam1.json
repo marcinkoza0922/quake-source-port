@@ -1,0 +1,14 @@
+{
+  "jam1_arrrcee": {"kills": 25, "secrets": 3, "events": 25, "exited": true, "log": ["Bonus item fell out of level at '-3033.0 -545.0 561.0'"]},
+  "jam1_digs": {"kills": 85, "secrets": 0, "events": 65, "exited": true, "log": []},
+  "jam1_doomer": {"kills": 40, "secrets": 4, "events": 63, "exited": true, "log": ["\"radius\" is not a field"]},
+  "jam1_ericw": {"kills": 23, "secrets": 1, "events": 28, "exited": true, "log": ["walkmonster in wall at: '1584.0 -304.0 804.0'"]},
+  "jam1_fifth": {"kills": 72, "secrets": 4, "events": 92, "exited": true, "log": ["walkmonster in wall at: '1072.0   0.0 -216.0'", "walkmonster in wall at: '976.0   0.0 -216.0'", "walkmonster in wall at: '-848.0 -552.0 840.0'", "Bonus item fell out of level at '-16.0 -1424.0 566.0'"]},
+  "jam1_ionous": {"kills": 59, "secrets": 4, "events": 74, "exited": true, "log": ["\"color\" is not a field", "Bonus item fell out of level at '512.0 1264.0 134.0'"]},
+  "jam1_mechtech": {"kills": 22, "secrets": 0, "events": 23, "exited": true, "log": ["\"mapversion\" is not a field", "Bonus item fell out of level at '-976.0 272.0  54.0'"]},
+  "jam1_otp": {"kills": 29, "secrets": 2, "events": 63, "exited": true, "log": ["\"speeds\" is not a field"]},
+  "jam1_rickyt23": {"kills": 88, "secrets": 1, "events": 81, "exited": true, "log": ["\"gravity\" is not a field", "\"mapversion\" is not a field", "walkmonster in wall at: '-1122.0 -1581.0 -1560.0'", "walkmonster in wall at: '-1936.0 -1929.0 -400.0'", "walkmonster in wall at: '156.0 488.0 -240.0'"]},
+  "jam1_scampie": {"kills": 122, "secrets": 9, "events": 169, "exited": true, "log": []},
+  "jam1_skacky": {"kills": 151, "secrets": 8, "events": 262, "exited": true, "log": ["\"lose_items\" is not a field", "\"corpse_time\" is not a field", "\"target2\" is not a field", "walkmonster in wall at: '608.0 600.0 400.0'", "walkmonster in wall at: '940.0 1680.0 168.0'", "walkmonster in wall at: '940.0 1584.0 168.0'", "walkmonster in wall at: '508.0 616.0 -216.0'"]},
+  "jam1_sock": {"kills": 120, "secrets": 10, "events": 191, "exited": true, "log": []}
+}

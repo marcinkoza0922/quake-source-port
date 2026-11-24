@@ -1,0 +1,5 @@
+{
+  "retrojam2_rickyt23": {"kills": 74, "secrets": 4, "events": 112, "exited": true, "log": ["\"mapversion\" is not a field", "Bonus item fell out of level at '-1660.0 -580.0 -1709.0'"]},
+  "retrojam2_skacky": {"kills": 66, "secrets": 3, "events": 95, "exited": true, "log": ["\"corpse_time\" is not a field", "\"color\" is not a field"]},
+  "retrojam2_sock": {"kills": 75, "secrets": 6, "events": 116, "exited": true, "log": []}
+}
