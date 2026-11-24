@@ -41,6 +41,7 @@ impl Input {
         s.weapon_slot = std::mem::take(&mut self.weapon_slot);
         let gyro_btn = b[btn::GYRO].is_down();
         let firing = b[btn::ATTACK].is_down() || b[btn::ATTACK2].is_down();
+        let look = self.look_scale;
         let mlook = b[btn::MLOOK].is_down() || v(c.freelook) != 0.0;
 
         if self.dest != KeyDest::Game {
@@ -64,8 +65,8 @@ impl Input {
         let gyro_delta = |[pitch, yaw, roll]: [f32; 3]| {
             let filter = |rate: f32| gamepad::gyro_filter(rate.to_degrees(), v(c.gyro_noise_thresh));
             [
-                (filter(yaw) * v(c.gyro_yawsensitivity) + filter(roll) * v(c.gyro_rollsensitivity)) * ft,
-                -filter(pitch) * v(c.gyro_pitchsensitivity) * ft,
+                (filter(yaw) * v(c.gyro_yawsensitivity) + filter(roll) * v(c.gyro_rollsensitivity)) * ft * look,
+                -filter(pitch) * v(c.gyro_pitchsensitivity) * ft * look,
             ]
         };
         let phone_on = !wheel && !touch_wheel && match phone_mode {
@@ -136,8 +137,8 @@ impl Input {
                     ft,
                 );
                 let inv = if v(c.joy_invert) != 0.0 { -1.0 } else { 1.0 };
-                pad_look[0] = -lke[0] * v(c.joy_sensitivity_yaw) * acc * ft;
-                pad_look[1] = lke[1] * v(c.joy_sensitivity_pitch) * inv * ft;
+                pad_look[0] = -lke[0] * v(c.joy_sensitivity_yaw) * acc * ft * look;
+                pad_look[1] = lke[1] * v(c.joy_sensitivity_pitch) * inv * ft * look;
             }
             if gyro_on {
                 let [yaw, pitch] = gyro_delta(self.gyro);
@@ -193,8 +194,8 @@ impl Input {
                     AimResult::NONE
                 };
                 let inv = if v(c.touch_invert) != 0.0 { -1.0 } else { 1.0 };
-                s.look_delta[0] += result.delta[0] - lk[0] * v(c.touch_yaw_sensitivity).clamp(7.0, 84.0) * result.scale;
-                s.look_delta[1] += result.delta[1] + lk[1] * v(c.touch_pitch_sensitivity).clamp(7.0, 84.0) * result.scale * inv;
+                s.look_delta[0] += result.delta[0] - lk[0] * v(c.touch_yaw_sensitivity).clamp(7.0, 84.0) * result.scale * look;
+                s.look_delta[1] += result.delta[1] + lk[1] * v(c.touch_pitch_sensitivity).clamp(7.0, 84.0) * result.scale * inv * look;
             }
         }
 
@@ -225,11 +226,11 @@ impl Input {
             let side = v(c.m_side) * dx / fwd_speed;
             if side > 0.0 { s.moveright += side } else { s.moveleft -= side }
         } else {
-            s.look_delta[0] -= v(c.m_yaw) * dx;
+            s.look_delta[0] -= v(c.m_yaw) * dx * look;
         }
         if mlook && !s.strafe {
             let inv = if v(c.m_invert) != 0.0 { -1.0 } else { 1.0 };
-            s.look_delta[1] += v(c.m_pitch) * dy * inv;
+            s.look_delta[1] += v(c.m_pitch) * dy * inv * look;
         } else {
             let f = v(c.m_forward) * dy / fwd_speed;
             if f > 0.0 { s.back += f } else { s.forward -= f }

@@ -16,7 +16,8 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 WIDTH, HEIGHT, FRAMES, FPS = 320, 92, 48, 12
-IDS = ["portalgun", "boomerang", "sticky", "hookshot", "railgun", "goggles"]
+# the add-on browser's ids; toys by their index in `Toy::ALL`
+IDS = {"portalgun": 0, "boomerang": 1, "sticky": 2, "hookshot": 3, "railgun": 4, "goggles": None, "rifle": 9}
 
 
 def capture(engine, basedir, addon):
@@ -42,8 +43,8 @@ def capture(engine, basedir, addon):
 
     for cmd in ["god", "notarget", "impulse 9", "setpos 440 72 40 4 0 0"]:
         at(1.0, cmd)
-    if addon != "goggles":
-        at(1.2, f"toy {IDS.index(addon)}")
+    if IDS[addon] is not None:
+        at(1.2, f"toy {IDS[addon]}")
     if addon == "portalgun":
         at(2.5, "setpos 470 160 40 0 80 0")
         at(3.1, "+attack")
@@ -55,6 +56,17 @@ def capture(engine, basedir, addon):
     elif addon == "goggles":
         at(3.9, "goggles nv")
         at(5.2, "goggles thermal")
+    elif addon == "rifle":
+        at(1.0, "give n 100")
+        at(1.0, "setpos 480 -100 40 0 90 0")
+        at(2.9, "+attack")
+        at(3.5, "-attack")
+        at(3.6, "+attack2")
+        at(4.0, "+attack")
+        at(4.8, "-attack")
+        at(5.0, "-attack2")
+        at(5.2, "+reload")
+        at(5.3, "-reload")
     else:
         at(3.1, "+attack")
         at(4.0 if addon == "boomerang" else 3.5, "-attack")

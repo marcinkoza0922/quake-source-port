@@ -15,7 +15,12 @@ impl Host {
             }
             ClientEvent::Gun(e) => match qserver::addons::Toy::from_id(e.toy) {
                 Some(qserver::addons::Toy::Akimbo) => self.akimbo_fx.receive(&e, self.cl.time, self.snd.as_ref()),
-                Some(qserver::addons::Toy::Rifle) => self.rifle_fx.receive(&e, self.cl.time, self.snd.as_ref()),
+                Some(qserver::addons::Toy::Rifle) => {
+                    self.rifle_fx.receive(&e, self.cl.time, self.snd.as_ref());
+                    if e.kind == qclient::guns::FIRE {
+                        self.rifle_kick(e.owner as usize);
+                    }
+                }
                 _ => {}
             },
             ClientEvent::Hook(h) => self.hook_fx.receive(h, self.cl.time, self.snd.as_ref()),
@@ -25,6 +30,40 @@ impl Host {
             ClientEvent::Boomerang(line) => self.boomerang_fx.receive(&line, self.cl.time, &self.cl, self.snd.as_ref()),
             _ => {}
         }
+    }
+
+    /// A rifle shot kicks its local shooter's view.
+    fn rifle_kick(&mut self, owner: usize) {
+        if self.demo.is_some() {
+            return;
+        }
+        let recoil = self.cv("addon_rifle_recoil");
+        if owner + 1 == self.cl.viewentity {
+            self.ads.kick(recoil);
+        } else if let Some(g) = self.guests.iter_mut().find(|g| g.cl.viewentity == owner + 1) {
+            g.ads.kick(recoil);
+        }
+    }
+
+    /// The raised rifle sight of player 1 or a guest in their `view`.
+    pub(super) fn rifle_sight(&self, guest: Option<usize>, view: &qrender::View) -> Option<crate::addons::rifle_dot::Sight> {
+        let (cl, ads, held) = match guest {
+            Some(k) => (&self.guests[k].cl, &self.guests[k].ads, self.guests[k].toy.held),
+            None => (&self.cl, &self.ads, self.toy.held),
+        };
+        let me = cl.viewentity.saturating_sub(1);
+        // with the view model hidden there is no sight
+        if held != Some(qserver::addons::Toy::Rifle) || ads.amount() <= 0.3 || !self.rifle_fx.placed(me, self.cl.time) {
+            return None;
+        }
+        let dir = qcore::math::angle_vectors(cl.viewangles.into()).0;
+        Some(crate::addons::rifle_dot::Sight {
+            view: *view,
+            angles: cl.viewangles,
+            alpha: self.rifle_fx.dot(me, self.cl.time, view.origin.into(), dir),
+            colour: self.cv("addon_rifle_dot").max(0.0) as usize,
+            pic: self.rifle_fx.pic(),
+        })
     }
 
     /// Drops every toy effect in flight (new map).
@@ -103,7 +142,8 @@ impl Host {
             ents.extend(self.akimbo_fx.weapons(me, &self.cl, self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r));
         }
         if held(qserver::addons::Toy::Rifle) {
-            ents.extend(self.rifle_fx.weapons(me, &self.cl, self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r));
+            let hold = crate::addons::rifle_fx::Hold { aim: self.ads.amount(), side: cv.viewmodel.side() };
+            ents.extend(self.rifle_fx.weapons(me, hold, &self.cl, self.cl.time, *v, &mut self.level, &self.server.core.fs, &mut self.r));
         }
         cable_held
     }

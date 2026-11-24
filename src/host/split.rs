@@ -79,6 +79,7 @@ impl Host {
         let tkey = |t: &qclient::TempEntity| (t.model, t.origin.map(|c| c.round() as i32));
         let p1_temps: std::collections::HashSet<_> = self.cl.temp_entities.iter().map(tkey).collect();
         let cv = self.view_cvars();
+        let (zoom_fov, sight_zoom) = (self.zoom_fov(), self.cv("addon_rifle_zoom"));
         let draw_ents = self.cv("r_drawentities") != 0.0;
         let reflections = self.reflections_on();
         for (vi, &k) in live.iter().enumerate() {
@@ -92,6 +93,7 @@ impl Host {
                 }
             }
             let mut gcv = cv;
+            gcv.fov = g.ads.fov(zoom_fov, sight_zoom);
             if g.toy.held.is_some() { gcv.viewmodel = crate::view::weapon::Alignment::Hidden; }
             let (mut v, gun) = g.view.calc_refdef(&mut g.cl, &gcv, &self.level, ft);
             let third = self.camera().third_person();
@@ -187,7 +189,8 @@ impl Host {
                 let guns = if held(qserver::addons::Toy::Akimbo) {
                     self.akimbo_fx.weapons(me, &g.cl, self.cl.time, v, &mut self.level, &self.server.core.fs, &mut self.r)
                 } else if held(qserver::addons::Toy::Rifle) {
-                    self.rifle_fx.weapons(me, &g.cl, self.cl.time, v, &mut self.level, &self.server.core.fs, &mut self.r)
+                    let hold = crate::addons::rifle_fx::Hold { aim: g.ads.amount(), side: cv.viewmodel.side() };
+                    self.rifle_fx.weapons(me, hold, &g.cl, self.cl.time, v, &mut self.level, &self.server.core.fs, &mut self.r)
                 } else {
                     Vec::new()
                 };

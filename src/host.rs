@@ -186,6 +186,8 @@ pub struct Host {
     rail_fx: crate::addons::rail_fx::Presentation,
     akimbo_fx: crate::addons::akimbo_fx::Presentation,
     rifle_fx: crate::addons::rifle_fx::Presentation,
+    /// Player 1's rifle sight.
+    ads: crate::addons::rifle_ads::Ads,
     hook_fx: crate::addons::hook_fx::HookFx,
     cable_fx: crate::addons::cable_fx::CableFx,
     grenade_arc: grenade_arc::GrenadeArc,
@@ -379,6 +381,7 @@ impl Host {
             rail_fx: Default::default(),
             akimbo_fx: Default::default(),
             rifle_fx: Default::default(),
+            ads: Default::default(),
             hook_fx: Default::default(),
             cable_fx: Default::default(),
             grenade_arc: Default::default(),

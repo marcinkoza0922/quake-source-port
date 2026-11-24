@@ -298,6 +298,8 @@ pub struct Input {
     pub last_aim: AimResult,
     pub lockon: lockon::LockOn,
     /// Host permits auto-aim only in local play.
+    /// Scales mouse, stick, gyro and touch look (aiming down a sight).
+    pub look_scale: f32,
     pub autoaim_allowed: bool,
     pub autoaim_fov: [f32; 2],
     pub autoaim_players: bool,
@@ -339,6 +341,7 @@ impl Input {
             flick: FlickStick::default(),
             last_aim: AimResult::NONE,
             lockon: lockon::LockOn::default(),
+            look_scale: 1.0,
             autoaim_allowed: false,
             autoaim_fov: [90.0, 73.74],
             autoaim_players: false,
@@ -462,7 +465,7 @@ macro_rules! button_cmds {
 
 /// Register bind/unbind/unbindall/bindlist, +/- buttons and impulse.
 pub fn register_commands<C: InputHost>(c: &mut Commands<C>) {
-    button_cmds!(c, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
+    button_cmds!(c, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24);
     toggle_button_cmds!(c, btn::ATTACK, in_toggleattack);
     toggle_button_cmds!(c, btn::SPEED, in_togglerun);
     c.add("impulse", |ctx, a| ctx.input().impulse = a.argv(1).parse().unwrap_or(0));

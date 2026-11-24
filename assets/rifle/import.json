@@ -1,0 +1,66 @@
+{
+  "source": "Meshy meshy-t2.5 + meshy-n1, image-to-3d task 01a20ef1-cd19-75c4-b93f-4fe57e001aba",
+  "build": [
+    "blender -b --factory-startup --python tools/import_toy_model.py -- ~/Assets/Meshy/rifle/model.glb --out TMP --length 40 --anchor origin --flip --back 20 --gain 1.0 --keep-uv",
+    "python3 tools/build_rifle.py TMP/model.mdl.zlib assets/rifle --seed 1"
+  ],
+  "models": {
+    "model": {
+      "vertices": 3312,
+      "triangles": 3705,
+      "bounds": [
+        [
+          -26.0,
+          -2.347,
+          -5.555
+        ],
+        [
+          26.0,
+          2.161,
+          8.127
+        ]
+      ]
+    },
+    "mag": {
+      "vertices": 194,
+      "triangles": 228,
+      "bounds": [
+        [
+          -2.957,
+          -1.127,
+          -8.101
+        ],
+        [
+          3.365,
+          0.959,
+          0.745
+        ]
+      ]
+    },
+    "sight": {
+      "vertices": 2197,
+      "triangles": 1564,
+      "bounds": [
+        [
+          -7.2,
+          -2.93,
+          7.11
+        ],
+        [
+          2.58,
+          2.55,
+          14.23
+        ]
+      ]
+    }
+  },
+  "lens": {
+    "centre": [
+      0.4,
+      0.0,
+      11.3
+    ],
+    "aperture": 1.75,
+    "tube": 3.4
+  }
+}
