@@ -4171,3 +4171,78 @@ mk HUD на модот
 
 @ Custom HUD provided by the current mod or map pack
 mk Прилагоден HUD обезбеден од тековниот мод или пакет мапи
+
+@ Akimbo Pistols
+mk Два пиштола
+
+@ Assault Rifle
+mk Јуришна пушка
+
+@ Aim Button
+mk Копче за нишанење
+
+@ Dot Colour
+mk Боја на точката
+
+@ Magazine Size
+mk Големина на шаржерот
+
+@ Recoil
+mk Трзај
+
+@ Reload
+mk Полнење
+
+@ Reload (Add-ons)
+mk Полнење (додатоци)
+
+@ Reload Time
+mk Време на полнење
+
+@ Reload When Empty
+mk Полнење кога е празно
+
+@ Sight Zoom
+mk Зум на нишанот
+
+@ Spread
+mk Растур
+
+@ Swap Pistols
+mk Замени ги пиштолите
+
+@ Alt-fire aims while held, or with each press
+mk Алт. пукање нишани додека се држи или со секое притискање
+
+@ Colour of the dot in the sight
+mk Боја на точката во нишанот
+
+@ Damage of each bullet
+mk Штета од секој куршум
+
+@ Fire shoots the right pistol and alt-fire the left one
+mk Пукање пука со десниот пиштол, а алт. пукање со левиот
+
+@ How far shots may stray from the crosshair, in degrees
+mk Колку степени истрелите може да отстапат од нишанот
+
+@ How hard firing kicks the view up
+mk Колку силно пукањето го крева погледот
+
+@ How much closer the view gets while aiming
+mk Колку се приближува погледот при нишанење
+
+@ An empty gun reloads without pressing Reload
+mk Празно оружје се полни без притискање на Полнење
+
+@ Rounds in a full magazine
+mk Куршуми во полн шаржер
+
+@ Seconds a reload takes
+mk Колку секунди трае полнењето
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+mk Пиштол во секоја рака: Пукање пука со левиот, Алт. пукање со десниот. Муницијата е бескрајна, но секој пиштол мора да се полни.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+mk Целосно автоматска пушка што се полни со твоите клинци. Алт. пукање нишани низ нишанот со црвена точка за попрецизни истрели и поблизок поглед.

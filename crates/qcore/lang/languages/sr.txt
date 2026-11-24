@@ -4171,3 +4171,78 @@ sr HUD мода
 
 @ Custom HUD provided by the current mod or map pack
 sr Прилагођени HUD који пружа тренутни мод или пакет мапа
+
+@ Akimbo Pistols
+sr Два пиштоља
+
+@ Assault Rifle
+sr Јуришна пушка
+
+@ Aim Button
+sr Тастер за нишањење
+
+@ Dot Colour
+sr Боја тачке
+
+@ Magazine Size
+sr Величина оквира
+
+@ Recoil
+sr Трзај
+
+@ Reload
+sr Пуњење
+
+@ Reload (Add-ons)
+sr Пуњење (додаци)
+
+@ Reload Time
+sr Време пуњења
+
+@ Reload When Empty
+sr Пуни кад се испразни
+
+@ Sight Zoom
+sr Зум нишана
+
+@ Spread
+sr Расипање
+
+@ Swap Pistols
+sr Замени пиштоље
+
+@ Alt-fire aims while held, or with each press
+sr Алтернативна паљба нишани док се држи или се укључује и искључује сваким притиском
+
+@ Colour of the dot in the sight
+sr Боја тачке у нишану
+
+@ Damage of each bullet
+sr Штета сваког метка
+
+@ Fire shoots the right pistol and alt-fire the left one
+sr Паљба пуца из десног пиштоља, а алтернативна паљба из левог
+
+@ How far shots may stray from the crosshair, in degrees
+sr Колико степени хици могу да одступе од нишана
+
+@ How hard firing kicks the view up
+sr Колико јако пуцање трза поглед нагоре
+
+@ How much closer the view gets while aiming
+sr Колико се поглед приближи док нишаните
+
+@ An empty gun reloads without pressing Reload
+sr Празно оружје се пуни без притиска на Пуњење
+
+@ Rounds in a full magazine
+sr Број метака у пуном оквиру
+
+@ Seconds a reload takes
+sr Колико секунди траје пуњење
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+sr По пиштољ у свакој руци: Паљба пуца из левог, Алтернативна паљба из десног. Муниција је бесконачна, али сваки пиштољ мора да се пуни.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+sr Аутоматска пушка која се пуни вашим ексерима. Алтернативна паљба нишани кроз нишан са црвеном тачком за прецизније хице и ближи поглед.

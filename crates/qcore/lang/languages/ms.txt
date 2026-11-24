@@ -4171,3 +4171,78 @@ ms HUD Mod
 
 @ Custom HUD provided by the current mod or map pack
 ms HUD tersuai yang disediakan oleh mod atau pek peta semasa
+
+@ Akimbo Pistols
+ms Pistol Berkembar
+
+@ Assault Rifle
+ms Raifal Serbu
+
+@ Aim Button
+ms Butang Bidik
+
+@ Dot Colour
+ms Warna Titik
+
+@ Magazine Size
+ms Saiz Kelopak
+
+@ Recoil
+ms Sentakan
+
+@ Reload
+ms Isi Semula
+
+@ Reload (Add-ons)
+ms Isi Semula (Tambahan)
+
+@ Reload Time
+ms Masa Isi Semula
+
+@ Reload When Empty
+ms Isi Semula Bila Kosong
+
+@ Sight Zoom
+ms Zum Pembidik
+
+@ Spread
+ms Serakan
+
+@ Swap Pistols
+ms Tukar Pistol
+
+@ Alt-fire aims while held, or with each press
+ms Tembakan alt membidik semasa ditahan, atau dengan setiap tekanan
+
+@ Colour of the dot in the sight
+ms Warna titik pada pembidik
+
+@ Damage of each bullet
+ms Kerosakan setiap peluru
+
+@ Fire shoots the right pistol and alt-fire the left one
+ms Tembak melepaskan pistol kanan dan tembakan alt pistol kiri
+
+@ How far shots may stray from the crosshair, in degrees
+ms Sejauh mana tembakan boleh tersasar daripada rerambut silang, dalam darjah
+
+@ How hard firing kicks the view up
+ms Sekuat mana tembakan menyentak pandangan ke atas
+
+@ How much closer the view gets while aiming
+ms Sedekat mana pandangan semasa membidik
+
+@ An empty gun reloads without pressing Reload
+ms Senjata kosong diisi semula tanpa menekan Isi Semula
+
+@ Rounds in a full magazine
+ms Bilangan peluru dalam kelopak penuh
+
+@ Seconds a reload takes
+ms Tempoh isi semula dalam saat
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+ms Sepucuk pistol di setiap tangan: Tembak melepaskan yang kiri, Tembakan Alt yang kanan. Peluru tidak terhad, tetapi setiap pistol mesti diisi semula.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+ms Raifal automatik penuh yang diisi semula dengan paku anda. Tembakan Alt membidik melalui pembidik titik merah untuk tembakan lebih jitu dan pandangan lebih dekat.

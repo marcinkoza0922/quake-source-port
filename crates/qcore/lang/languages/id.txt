@@ -4171,3 +4171,78 @@ id HUD Mod
 
 @ Custom HUD provided by the current mod or map pack
 id HUD khusus yang disediakan oleh mod atau paket peta saat ini
+
+@ Akimbo Pistols
+id Pistol Akimbo
+
+@ Assault Rifle
+id Senapan Serbu
+
+@ Aim Button
+id Tombol Bidik
+
+@ Dot Colour
+id Warna Titik
+
+@ Magazine Size
+id Ukuran Magasin
+
+@ Recoil
+id Hentakan
+
+@ Reload
+id Isi Ulang
+
+@ Reload (Add-ons)
+id Isi Ulang (Add-on)
+
+@ Reload Time
+id Waktu Isi Ulang
+
+@ Reload When Empty
+id Isi Ulang Saat Kosong
+
+@ Sight Zoom
+id Perbesaran Bidikan
+
+@ Spread
+id Sebaran
+
+@ Swap Pistols
+id Tukar Pistol
+
+@ Alt-fire aims while held, or with each press
+id Tembakan alt membidik selama ditahan, atau setiap kali ditekan
+
+@ Colour of the dot in the sight
+id Warna titik pada alat bidik
+
+@ Damage of each bullet
+id Kerusakan setiap peluru
+
+@ Fire shoots the right pistol and alt-fire the left one
+id Tembak memakai pistol kanan dan tembakan alt memakai yang kiri
+
+@ How far shots may stray from the crosshair, in degrees
+id Seberapa jauh tembakan bisa melenceng dari crosshair (derajat)
+
+@ How hard firing kicks the view up
+id Seberapa kuat tembakan menyentak pandangan ke atas
+
+@ How much closer the view gets while aiming
+id Seberapa dekat pandangan saat membidik
+
+@ An empty gun reloads without pressing Reload
+id Senjata kosong terisi ulang tanpa menekan Isi Ulang
+
+@ Rounds in a full magazine
+id Jumlah peluru dalam magasin penuh
+
+@ Seconds a reload takes
+id Lama isi ulang (detik)
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+id Satu pistol di tiap tangan: Tembak memakai yang kiri, Tembakan Alt yang kanan. Amunisi tak terbatas, tetapi tiap pistol harus diisi ulang.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+id Senapan otomatis penuh yang diisi ulang dari paku Anda. Tembakan Alt membidik lewat alat bidik titik merah untuk tembakan lebih rapat dan pandangan lebih dekat.

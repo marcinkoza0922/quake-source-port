@@ -4171,3 +4171,78 @@ ca HUD del mod
 
 @ Custom HUD provided by the current mod or map pack
 ca HUD personalitzat proporcionat pel mod o paquet de mapes actual
+
+@ Akimbo Pistols
+ca Pistoles dobles
+
+@ Assault Rifle
+ca Fusell d'assalt
+
+@ Aim Button
+ca Botó d'apuntar
+
+@ Dot Colour
+ca Color del punt
+
+@ Magazine Size
+ca Mida del carregador
+
+@ Recoil
+ca Retrocés
+
+@ Reload
+ca Recarrega
+
+@ Reload (Add-ons)
+ca Recarrega (complements)
+
+@ Reload Time
+ca Temps de recàrrega
+
+@ Reload When Empty
+ca Recarrega en buidar-se
+
+@ Sight Zoom
+ca Zoom de la mira
+
+@ Spread
+ca Dispersió
+
+@ Swap Pistols
+ca Intercanvia pistoles
+
+@ Alt-fire aims while held, or with each press
+ca El tret secundari apunta mentre es manté premut, o amb cada pulsació
+
+@ Colour of the dot in the sight
+ca Color del punt de la mira
+
+@ Damage of each bullet
+ca Dany de cada bala
+
+@ Fire shoots the right pistol and alt-fire the left one
+ca El tret dispara la pistola dreta i el tret secundari l'esquerra
+
+@ How far shots may stray from the crosshair, in degrees
+ca Quant es poden desviar els trets del punt de mira, en graus
+
+@ How hard firing kicks the view up
+ca Amb quina força els trets aixequen la vista
+
+@ How much closer the view gets while aiming
+ca Quant s'acosta la vista en apuntar
+
+@ An empty gun reloads without pressing Reload
+ca Una arma buida es recarrega sense prémer Recarrega
+
+@ Rounds in a full magazine
+ca Bales en un carregador ple
+
+@ Seconds a reload takes
+ca Segons que dura una recàrrega
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+ca Una pistola a cada mà: el tret dispara l'esquerra i el tret secundari la dreta. La munició és infinita, però cal recarregar cada pistola.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+ca Un fusell automàtic que es recarrega amb els teus claus. El tret secundari apunta amb la mira de punt vermell per a trets més precisos i una vista més propera.

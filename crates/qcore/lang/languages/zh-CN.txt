@@ -4171,3 +4171,78 @@ zh-CN 模组 HUD
 
 @ Custom HUD provided by the current mod or map pack
 zh-CN 由当前模组或地图包提供的自定义 HUD
+
+@ Akimbo Pistols
+zh-CN 双持手枪
+
+@ Assault Rifle
+zh-CN 突击步枪
+
+@ Aim Button
+zh-CN 瞄准键
+
+@ Dot Colour
+zh-CN 光点颜色
+
+@ Magazine Size
+zh-CN 弹匣容量
+
+@ Recoil
+zh-CN 后坐力
+
+@ Reload
+zh-CN 换弹
+
+@ Reload (Add-ons)
+zh-CN 换弹（附加功能）
+
+@ Reload Time
+zh-CN 换弹时间
+
+@ Reload When Empty
+zh-CN 打空自动换弹
+
+@ Sight Zoom
+zh-CN 瞄具缩放
+
+@ Spread
+zh-CN 散布
+
+@ Swap Pistols
+zh-CN 对调手枪
+
+@ Alt-fire aims while held, or with each press
+zh-CN 副开火按住时瞄准，或每按一次切换瞄准
+
+@ Colour of the dot in the sight
+zh-CN 瞄具中光点的颜色
+
+@ Damage of each bullet
+zh-CN 每发子弹的伤害
+
+@ Fire shoots the right pistol and alt-fire the left one
+zh-CN 开火使用右手手枪，副开火使用左手手枪
+
+@ How far shots may stray from the crosshair, in degrees
+zh-CN 子弹偏离准星的最大角度（度）
+
+@ How hard firing kicks the view up
+zh-CN 开火时视角上跳的力度
+
+@ How much closer the view gets while aiming
+zh-CN 瞄准时视角拉近的程度
+
+@ An empty gun reloads without pressing Reload
+zh-CN 枪打空后无需按换弹即自动换弹
+
+@ Rounds in a full magazine
+zh-CN 满弹匣的子弹数
+
+@ Seconds a reload takes
+zh-CN 换弹所需的秒数
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+zh-CN 双手各持一把手枪：开火使用左手枪，副开火使用右手枪。弹药无限，但每把手枪都需要换弹。
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+zh-CN 使用你的钉子换弹的全自动步枪。副开火通过红点瞄具瞄准，射击更精准，视角更近。

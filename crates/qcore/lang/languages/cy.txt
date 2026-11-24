@@ -4171,3 +4171,78 @@ cy HUD y mod
 
 @ Custom HUD provided by the current mod or map pack
 cy HUD wedi ei addasu a ddarperir gan y mod neu becyn mapiau cyfredol
+
+@ Akimbo Pistols
+cy Pâr o bistolau
+
+@ Assault Rifle
+cy Reiffl ymosod
+
+@ Aim Button
+cy Botwm anelu
+
+@ Dot Colour
+cy Lliw'r dot
+
+@ Magazine Size
+cy Maint y magasîn
+
+@ Recoil
+cy Adlam
+
+@ Reload
+cy Ail-lwytho
+
+@ Reload (Add-ons)
+cy Ail-lwytho (Ychwanegion)
+
+@ Reload Time
+cy Amser ail-lwytho
+
+@ Reload When Empty
+cy Ail-lwytho pan yn wag
+
+@ Sight Zoom
+cy Chwyddo'r annel
+
+@ Spread
+cy Gwasgariad
+
+@ Swap Pistols
+cy Cyfnewid pistolau
+
+@ Alt-fire aims while held, or with each press
+cy Mae tanio amgen yn anelu wrth ei ddal, neu gyda phob gwasgiad
+
+@ Colour of the dot in the sight
+cy Lliw'r dot yn yr annel
+
+@ Damage of each bullet
+cy Difrod pob bwled
+
+@ Fire shoots the right pistol and alt-fire the left one
+cy Mae tanio'n saethu'r pistol de a thanio amgen yr un chwith
+
+@ How far shots may stray from the crosshair, in degrees
+cy Pa mor bell y gall ergydion grwydro o'r croesflew, mewn graddau
+
+@ How hard firing kicks the view up
+cy Pa mor galed mae tanio'n cicio'r olwg i fyny
+
+@ How much closer the view gets while aiming
+cy Faint yn nes mae'r olwg yn dod wrth anelu
+
+@ An empty gun reloads without pressing Reload
+cy Mae gwn gwag yn ail-lwytho heb wasgu Ail-lwytho
+
+@ Rounds in a full magazine
+cy Nifer y bwledi mewn magasîn llawn
+
+@ Seconds a reload takes
+cy Eiliadau mae ail-lwytho'n eu cymryd
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+cy Pistol ym mhob llaw: mae Tanio'n saethu'r un chwith a Thanio amgen yr un dde. Mae'r bwledi'n ddiddiwedd, ond rhaid ail-lwytho pob pistol.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+cy Reiffl cwbl awtomatig sy'n ail-lwytho o'ch hoelion. Mae Tanio amgen yn anelu drwy'r annel dot coch am ergydion tynnach a golwg agosach.

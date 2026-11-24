@@ -4171,3 +4171,78 @@ hu Mod HUD
 
 @ Custom HUD provided by the current mod or map pack
 hu Az aktuális mod vagy pályacsomag által biztosított egyéni HUD
+
+@ Akimbo Pistols
+hu Akimbo pisztolyok
+
+@ Assault Rifle
+hu Gépkarabély
+
+@ Aim Button
+hu Célzás gomb
+
+@ Dot Colour
+hu Pont színe
+
+@ Magazine Size
+hu Tár mérete
+
+@ Recoil
+hu Hátrarúgás
+
+@ Reload
+hu Újratöltés
+
+@ Reload (Add-ons)
+hu Újratöltés (kiegészítők)
+
+@ Reload Time
+hu Újratöltési idő
+
+@ Reload When Empty
+hu Újratöltés üres tárnál
+
+@ Sight Zoom
+hu Irányzék nagyítása
+
+@ Spread
+hu Szórás
+
+@ Swap Pistols
+hu Pisztolyok felcserélése
+
+@ Alt-fire aims while held, or with each press
+hu A másodlagos tűz lenyomva tartva vagy minden megnyomásra céloz
+
+@ Colour of the dot in the sight
+hu Az irányzékban lévő pont színe
+
+@ Damage of each bullet
+hu Az egyes lövedékek sebzése
+
+@ Fire shoots the right pistol and alt-fire the left one
+hu A tüzelés a jobb, a másodlagos tűz a bal pisztollyal lő
+
+@ How far shots may stray from the crosshair, in degrees
+hu Mennyire térhetnek el a lövések a célkereszttől (fok)
+
+@ How hard firing kicks the view up
+hu Mennyire rántja fel a nézetet a lövés
+
+@ How much closer the view gets while aiming
+hu Mennyivel kerül közelebb a nézet célzáskor
+
+@ An empty gun reloads without pressing Reload
+hu Az üres fegyver az Újratöltés megnyomása nélkül is újratölt
+
+@ Rounds in a full magazine
+hu Lőszerek száma egy teli tárban
+
+@ Seconds a reload takes
+hu Az újratöltés ideje másodpercben
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+hu Mindkét kézben egy pisztoly: a Tüzelés a ballal, a Másodlagos tűz a jobbal lő. A lőszer végtelen, de mindkét pisztolyt újra kell tölteni.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+hu Teljesen automata puska, amely a szögeidből tölt újra. A Másodlagos tűz a vörös pontos irányzékon át céloz: pontosabb lövések és közelebbi nézet.

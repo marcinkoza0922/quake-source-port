@@ -353,3 +353,15 @@ fn checklist_navigation_reveals_selection_and_page_keys_reach_both_ends() {
         assert_eq!(menu.list_offset(), ADDON.len() - LIST_VISIBLE);
     }
 }
+
+#[test]
+fn guns_list_the_shared_reload_action_after_alt_fire() {
+    for id in ["akimbo", "rifle"] {
+        let i = ADDON.iter().position(|a| a.id == id).unwrap();
+        let rows: Vec<_> = (0..ADDON[i].row_count()).map(|r| ADDON[i].command(r)).collect();
+        assert_eq!(rows, [None, Some("+attack"), Some("+attack2"), Some("+reload"), None], "{id}");
+        assert!(addon_info(i).binds.iter().any(|b| b.1 == "+reload"));
+    }
+    let railgun = ADDON.iter().find(|a| a.id == "railgun").unwrap();
+    assert_eq!((0..railgun.row_count()).map(|r| railgun.command(r)).collect::<Vec<_>>(), [None, Some("+attack"), None]);
+}

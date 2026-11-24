@@ -4171,3 +4171,78 @@ hr HUD moda
 
 @ Custom HUD provided by the current mod or map pack
 hr Prilagođeni HUD koji pruža trenutni mod ili paket mapa
+
+@ Akimbo Pistols
+hr Akimbo pištolji
+
+@ Assault Rifle
+hr Jurišna puška
+
+@ Aim Button
+hr Tipka za ciljanje
+
+@ Dot Colour
+hr Boja točke
+
+@ Magazine Size
+hr Veličina spremnika
+
+@ Recoil
+hr Trzaj
+
+@ Reload
+hr Ponovno punjenje
+
+@ Reload (Add-ons)
+hr Ponovno punjenje (dodaci)
+
+@ Reload Time
+hr Vrijeme punjenja
+
+@ Reload When Empty
+hr Punjenje kad je prazno
+
+@ Sight Zoom
+hr Zumiranje ciljnika
+
+@ Spread
+hr Rasipanje
+
+@ Swap Pistols
+hr Zamijeni pištolje
+
+@ Alt-fire aims while held, or with each press
+hr Alternativna paljba cilja dok se drži ili svakim pritiskom
+
+@ Colour of the dot in the sight
+hr Boja točke u ciljniku
+
+@ Damage of each bullet
+hr Šteta svakog metka
+
+@ Fire shoots the right pistol and alt-fire the left one
+hr Paljba puca desnim pištoljem, a alternativna paljba lijevim
+
+@ How far shots may stray from the crosshair, in degrees
+hr Koliko hici mogu odstupati od nišana, u stupnjevima
+
+@ How hard firing kicks the view up
+hr Koliko jako pucanje trza pogled uvis
+
+@ How much closer the view gets while aiming
+hr Koliko se pogled približi pri ciljanju
+
+@ An empty gun reloads without pressing Reload
+hr Prazno oružje puni se bez pritiska na Ponovno punjenje
+
+@ Rounds in a full magazine
+hr Broj metaka u punom spremniku
+
+@ Seconds a reload takes
+hr Trajanje punjenja u sekundama
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+hr Pištolj u svakoj ruci: paljba puca lijevim, alternativna paljba desnim. Streljivo je beskonačno, ali svaki se pištolj mora ponovno puniti.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+hr Automatska puška koja se puni vašim čavlima. Alternativna paljba cilja kroz ciljnik s crvenom točkom za preciznije hice i bliži pogled.

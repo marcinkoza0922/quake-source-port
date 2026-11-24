@@ -4171,3 +4171,78 @@ pt-BR HUD do mod
 
 @ Custom HUD provided by the current mod or map pack
 pt-BR HUD personalizado fornecido pelo mod ou pacote de mapas atual
+
+@ Akimbo Pistols
+pt-BR Pistolas duplas
+
+@ Assault Rifle
+pt-BR Fuzil de assalto
+
+@ Aim Button
+pt-BR Botão de mirar
+
+@ Dot Colour
+pt-BR Cor do ponto
+
+@ Magazine Size
+pt-BR Tamanho do carregador
+
+@ Recoil
+pt-BR Recuo
+
+@ Reload
+pt-BR Recarregar
+
+@ Reload (Add-ons)
+pt-BR Recarregar (complementos)
+
+@ Reload Time
+pt-BR Tempo de recarga
+
+@ Reload When Empty
+pt-BR Recarregar ao esvaziar
+
+@ Sight Zoom
+pt-BR Zoom da mira
+
+@ Spread
+pt-BR Dispersão
+
+@ Swap Pistols
+pt-BR Trocar pistolas
+
+@ Alt-fire aims while held, or with each press
+pt-BR O disparo alternativo mira enquanto segurado ou a cada toque
+
+@ Colour of the dot in the sight
+pt-BR Cor do ponto na mira
+
+@ Damage of each bullet
+pt-BR Dano de cada bala
+
+@ Fire shoots the right pistol and alt-fire the left one
+pt-BR O disparo usa a pistola direita e o disparo alternativo, a esquerda
+
+@ How far shots may stray from the crosshair, in degrees
+pt-BR Quanto os tiros podem se desviar da mira, em graus
+
+@ How hard firing kicks the view up
+pt-BR Com que força os tiros empurram a visão para cima
+
+@ How much closer the view gets while aiming
+pt-BR Quanto a visão se aproxima ao mirar
+
+@ An empty gun reloads without pressing Reload
+pt-BR Uma arma vazia recarrega sem apertar Recarregar
+
+@ Rounds in a full magazine
+pt-BR Balas em um carregador cheio
+
+@ Seconds a reload takes
+pt-BR Segundos que uma recarga leva
+
+@ A pistol in each hand: Fire shoots the left one, Alt Fire the right one. Ammunition is endless, but each pistol must be reloaded.
+pt-BR Uma pistola em cada mão: Disparo usa a esquerda, Disparo alternativo a direita. A munição é infinita, mas cada pistola precisa ser recarregada.
+
+@ A full-auto rifle that reloads from your nails. Alt Fire aims down its red dot sight for tighter shots and a closer view.
+pt-BR Um fuzil automático que recarrega com seus pregos. Disparo alternativo mira pela mira de ponto vermelho para tiros mais precisos e uma visão mais próxima.
