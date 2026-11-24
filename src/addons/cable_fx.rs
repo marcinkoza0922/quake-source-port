@@ -75,7 +75,7 @@ pub struct CableFx {
 
 /// Entity angles (pitch, yaw, roll as R_RotateForEntity applies them)
 /// that turn the model's +X to `x` and its +Z as near `z` as possible.
-fn angles_basis(x: Vec3, z: Vec3) -> [f32; 3] {
+pub(super) fn angles_basis(x: Vec3, z: Vec3) -> [f32; 3] {
     let [pitch, yaw, _] = angles_of(x);
     let (s, c) = yaw.to_radians().sin_cos();
     let left = Vec3::new(-s, c, 0.0);

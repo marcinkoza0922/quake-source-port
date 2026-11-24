@@ -337,15 +337,17 @@ nothing until it is caught.
   over the head. `qsound::boomerang` synthesises throw whoosh, stun (wooden
   bonk + three warbling "tweety bird" chirp voices), catch clack and a swish
   repeated every 0.2 s in flight.
-- Model: Meshy nano-banana concept → meshy-t2 Smart Topology (target 1000,
-  990 tris) + meshy-n1 texture, task `01a1d66c-46a1-72b3-a95b-549075c70824`
-  (18 credits). Imported with `blender -b --factory-startup --python-exit-code 1
-  --python tools/import_toy_model.py -- model.fbx assets/boomerang boomerang
-  --flat --length 28 --size 256 --gain 0.75` (28 u long, thinnest axis Z, 256² atlas darkened ×0.75, converted to
-  the mod palette at load, no fullbrights). The FBX stays external. At load
-  the atlas is shaded ×0.6 more (`boomerang_model::SHADE`); the held copy
-  (`view_model`, key `@boomerang_view`) is scaled ×0.6 and posed flat face
-  to the camera, low right, so it reads as a V in the hand.
+- Model: no source asset; `python3 tools/build_boomerang.py` (numpy/scipy, id1
+  palette) computes `assets/boomerang/` byte for byte: 2508 triangles, 28 u
+  long, thinnest axis Z, balance point at the origin, 256² atlas at 7 texels
+  per unit. A bent-wood airfoil blade carries steel caps with a thin rim,
+  bronze straps and boss at the elbow, and a leather-wrapped handle (+X arm).
+  The skin is painted per texel in surface coordinates with exact
+  non-fullbright palette colours (`toy_model::parse` quantises them to the
+  mod's palette at load). The held copy (`view_model`, key `@boomerang_view`)
+  is scaled ×0.6 and posed from the view axes (`cable_fx::angles_basis`), so
+  it keeps its place at any pitch: handle down in the right hand, decorated
+  top face towards the screen centre, blade reaching forward and left.
 - Audition: `rustc --edition=2024 tools/boomerang_cues.rs -o target/boomerang-cues && target/boomerang-cues target/boomerang-audio` writes the four cues as 48 kHz WAVs.
 ### Gel sprayer (`addon_gel`, `addons/gel.rs`, `gel_phys.rs`; `src/addons/gel_fx.rs`)
 Portal 2 homage. Holding fire sprays blue Repulsion gel, alt-fire orange
