@@ -2391,9 +2391,6 @@ ms Tetapkan paparan peta auto rangka dawai 3D, lokasi paparan, mod dedahan, zum 
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 ms Panel berbingkai memusatkan peta dalam kotak gelap pada skrin statistik; tindanan tengah memaparkan rangka dawai lut sinar di atas paparan
 
-@ Disabled while Weapon Auto-Switch is set to Never
-ms Dinyahdayakan semasa Tukar Senjata Auto ditetapkan kepada Jangan sekali
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 ms Yang diterokai sahaja mendedahkan bilik semasa anda melawatinya; Peta penuh memaparkan keseluruhan geometri aras
 

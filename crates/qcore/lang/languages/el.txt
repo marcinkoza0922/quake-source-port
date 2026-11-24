@@ -2391,9 +2391,6 @@ el Ρυθμίζει την προβολή, την εμφάνιση, την απ�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 el Το πλαίσιο κεντράρει τον χάρτη σε σκούρο κουτί στην οθόνη στατιστικών· η κεντρική επικάλυψη προβάλλει διαφανές συρμάτινο πλέγμα πάνω από την προβολή
 
-@ Disabled while Weapon Auto-Switch is set to Never
-el Απενεργοποιημένο όσο η Αυτόματη αλλαγή όπλου είναι ρυθμισμένη στο Ποτέ
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 el Το Μόνο εξερευνημένα αποκαλύπτει χώρους καθώς τους επισκέπτεστε· ο Πλήρης χάρτης δείχνει όλη τη γεωμετρία του επιπέδου
 

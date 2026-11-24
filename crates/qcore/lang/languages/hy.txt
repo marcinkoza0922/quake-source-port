@@ -2391,9 +2391,6 @@ hy Կարգավորեք 3D կարկասային ինքնաքարտեզի տես�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 hy Շրջանակված վահանակը քարտեզը կենտրոնացնում է մուգ տուփում վիճակագրության էկրանին․ կենտրոնական վերադրումը թափանցիկ կարկաս է ցույց տալիս տեսարանի վրա
 
-@ Disabled while Weapon Auto-Switch is set to Never
-hy Անջատված է, քանի դեռ Զենքի ինքնափոխումը դրված է Երբեք
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 hy Միայն ուսումնասիրվածը բացում է սենյակները դրանց այցելելիս, իսկ Ամբողջ քարտեզը ցույց է տալիս մակարդակի ամբողջ երկրաչափությունը
 

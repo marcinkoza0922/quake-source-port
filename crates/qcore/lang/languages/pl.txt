@@ -2391,9 +2391,6 @@ pl Konfiguruj widok szkieletowej automapy 3D, wyświetlanie, odkrywanie, powięk
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 pl Panel w ramce wyśrodkowuje mapę w ciemnym oknie na ekranie statystyk; Nakładka na środku wyświetla półprzezroczysty szkielet na widoku
 
-@ Disabled while Weapon Auto-Switch is set to Never
-pl Wyłączone, gdy Auto-zmiana broni jest ustawiona na Nigdy
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 pl Tylko odkryte odsłania pomieszczenia podczas zwiedzania; Cała mapa pokazuje całą geometrię poziomu
 

@@ -2391,9 +2391,6 @@ bn 3D ওয়্যারফ্রেম অটোম্যাপের দৃ
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 bn ফ্রেমযুক্ত প্যানেল পরিসংখ্যান স্ক্রিনে একটি গাঢ় বাক্সে মানচিত্রটি কেন্দ্রে রাখে; কেন্দ্র ওভারলে দৃশ্যের উপর স্বচ্ছ ওয়্যারফ্রেম দেখায়
 
-@ Disabled while Weapon Auto-Switch is set to Never
-bn অস্ত্র অটো-সুইচ 'কখনোই নয়' সেট থাকলে নিষ্ক্রিয় থাকে
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 bn শুধু অন্বেষিত আপনি ঘোরার সাথে সাথে ঘর দেখায়; সম্পূর্ণ ম্যাপ পুরো লেভেলের গঠন দেখায়
 

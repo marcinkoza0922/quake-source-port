@@ -2391,9 +2391,6 @@ hr Prilagodi prikaz 3D žičane automape, način prikaza, otkrivanje, zumiranje 
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 hr Uokvirena ploča centrira kartu u tamnom okviru na zaslonu statistike; središnji sloj prikazuje prozirni žičani prikaz preko slike
 
-@ Disabled while Weapon Auto-Switch is set to Never
-hr Onemogućeno dok je Auto-promjena oružja postavljena na Nikad
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 hr Samo istraženo otkriva prostorije dok ih posjećujete; Cijela mapa prikazuje svu geometriju razine
 

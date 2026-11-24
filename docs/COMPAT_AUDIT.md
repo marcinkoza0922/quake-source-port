@@ -278,27 +278,45 @@ Over all installed data this is the only model, sound or texture reference
 with edge whitespace, and no file name has any, so nothing else resolves
 differently.
 
+## Fixed after the second audit (2026-11-23)
+
+Its open list, in order, plus what turned up on the way:
+
+1. **`-dedicated` needs no GPU.** The host draws through `src/gfx.rs`, which
+   forwards to `qrender` or, on a dedicated server, to nothing.
+2. **qbot drift explained**, baselines re-saved (9). They held
+   until c3facad and moved at 6405023, the first audit's parity commit. Since
+   then only two things move them: PEXT2_PREDINFO (3f73e71; vkQuake also skips
+   the spawn clientdata with deltas, so `fixangle` stays set for one frame) and
+   `cl_autoswitch` (8b3a164). With both off, HEAD is identical to 3dca905 on
+   id1, hipnotic and rogue.
+3. `ambient_level` and `ambient_fade` are cvars (srj1's QC sets one).
+4. Unknown `//` stufftext is dropped, as in the references; clients without
+   deltas get custom stats as `//st` / `//sts`.
+5. `inc`, `cycle`, `cycleback`, `reset`, `resetall`, `resetcfg`, `unaliasall`,
+   `condump`, `randmap`, `skies`, `mods`, `games`, `music_pause`,
+   `music_resume`; `serverinfo` and the four `scr_*` cvars load quietly.
+6. DP_TE_STANDARDEFFECTBUILTINS (#418-431). AD calls `te_explosion2` where it
+   sees scripted particles, which we advertise; unimplemented, it was a
+   Host_Error that vkQuake doesn't have. Not reachable with installed data:
+   only `monster_mammoth` calls it and AD 1.7 doesn't ship its model.
+7. **A Host_Error was printed every frame, forever,** and left the client
+   attached. It now prints once, shuts the server down and disconnects.
+8. **Weapon auto-switch is a modifier.** `cl_autoswitch` (default 1) undid
+   pickup switches server-side in vanilla games; no value left them to the
+   progs. Now `modifier_autoswitch` in customized games only, off by default.
+9. **qbot baselines re-saved** after looking at each map that dropped (id1,
+   hipnotic, rogue, mg1, mg3). Eight of fifteen finish everything that exists
+   and boss2 kills all 312: the totals moved (monsters spawned in play; hip2m3's fifth secret had been
+   counted twice). The rest are goals the bot misses depending on order: two
+   zombies on e1m7, a button on e3m4 and r1m6, horde6, boss and map8. No
+   engine or QC error, every exit reached. mg1 and mg3 also held at c3facad
+   and moved at 6405023.
+
+Full `qsmoke` on merged master (5bbd6c0): 1555 maps, 0 errors.
+
 ## Open (2026-11-23)
 
-1. **`-dedicated` needs a Vulkan driver** and exits without one ("Quake
-   graphics initialization failed"); both references run without a GPU.
-2. `qbot` baselines date from 2026-11-13. They already fail at 6405023 and
-   3dca905, and the failing set shifted since, so a real regression can't be
-   told from drift. Re-save after reviewing the dropped maps.
-3. `ambient_level` and `ambient_fade` are constants, not cvars; srj1 sets
-   `ambient_fade` from QC.
-4. `//` stufftext from other servers (vkQuake `//paknames`, `//svi`, `//ui`,
-   ...) still reaches the console as unknown commands. Our server does not
-   send custom stats to clients without our PEXT2 (ironwail sends `//st`).
-5. Reference commands and cvars ours lacks. Shipped configs, demos and QC
-   print "Unknown command" for `scr_conbrightness`, `scr_menubgalpha` (rotj),
-   `scr_conwidth`, `scr_crosshairscale` (jam8) and `serverinfo` (rmj1); the
-   rest that qsmoke logs (DarkPlaces `sv_gameplayfix_*`, `gl_flashblend`,
-   `r_oldwater`, `r_maxedges`) are unknown to the references too. Not seen in
-   shipped configs, but used by people's own: `inc`, `cycle`, `reset`,
-   `resetall`, `condump`, `randmap`, `unaliasall`, `music_*`, `viewframe`,
-   `skies`, `games`, `mods`. Copper-based progs hold `cycle`, `inc` and
-   `reset` as bare strings; whether they run as commands was not traced.
-6. 67 of vkQuake's server builtins are missing; progs call only one,
-   `te_explosion2` (#427, 10 AD-based games). What reaches that call was not
-   traced; ironwail lacks it too.
+1. 53 vkQuake server builtins are missing; no installed progs calls one.
+   Not ported: `music_loop`, `music_jump`, `view*` mapper commands,
+   `v_water` and the other renderer and menu cvars.

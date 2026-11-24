@@ -2391,9 +2391,6 @@ cs Nastaví pohled 3D drátové automapy, zobrazení, odhalení, přiblížení 
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 cs Zarámovaný panel vycentruje mapu v tmavém poli na obrazovce statistik; středové překrytí zobrazí průhledný drátěný model přes pohled
 
-@ Disabled while Weapon Auto-Switch is set to Never
-cs Vypnuto, pokud je Auto-přepnutí zbraně nastaveno na Nikdy
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 cs Jen prozkoumané odhaluje místnosti při průchodu; Celá mapa zobrazuje celou geometrii úrovně
 

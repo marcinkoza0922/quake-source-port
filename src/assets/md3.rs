@@ -5,7 +5,8 @@ use qformats::image::{parse_pcx, parse_pic, parse_tga};
 use qformats::md3::{Md3, parse_skin};
 use qformats::mdl::MF_HOLEY;
 use qformats::Mdl;
-use qrender::{Md3SkinImage, Md3SurfaceSkins, ModelId, Renderer};
+use crate::gfx::Renderer;
+use qrender::{Md3SkinImage, Md3SurfaceSkins, ModelId};
 
 const MAX_SKINS: usize = 32;
 const MAX_SKIN_FRAMES: usize = 4;

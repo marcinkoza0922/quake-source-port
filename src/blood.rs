@@ -236,7 +236,7 @@ impl Blood {
         lv: &crate::assets::Level,
         brushes: &mut Option<Vec<BrushEnt>>,
         fs: &qcore::fs::Fs,
-        r: &mut qrender::Renderer,
+        r: &mut crate::gfx::Renderer,
         ents: &[RenderEntity],
         dynverts: &[u32],
         view: Vec3,

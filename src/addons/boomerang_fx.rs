@@ -3,7 +3,8 @@
 //! target markers, circling stun stars, and plays the synthesised cues.
 use super::boomerang_model::{self as bm, RING, STAR};
 use qcore::math::{Vec3, angle_vectors};
-use qrender::{FteBatch, FteBlend, FteVertex, PicId, RenderEntity, Renderer, View};
+use crate::gfx::Renderer;
+use qrender::{FteBatch, FteBlend, FteVertex, PicId, RenderEntity, View};
 use qsound::boomerang::{CATCH, STUN, SWISH, THROW};
 use qsound::{Sfx, SoundEvent, SoundSystem};
 use std::sync::Arc;

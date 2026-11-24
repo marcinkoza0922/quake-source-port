@@ -2391,9 +2391,6 @@ da Tilpas visning, placering, afsløringstilstand, zoom og markører for 3D-trå
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 da Indrammet panel centrerer kortet i en mørk boks på statistikskærmen; centeroverlejring viser en gennemsigtig trådmodel over visningen
 
-@ Disabled while Weapon Auto-Switch is set to Never
-da Deaktiveret mens Auto-våbenskift er sat til Aldrig
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 da Kun udforsket afslører rum, efterhånden som du besøger dem; Fuldt kort viser hele banens geometri
 

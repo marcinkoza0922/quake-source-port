@@ -2391,9 +2391,6 @@ he הגדר את מצב התצוגה, החשיפה, התקריב והסמנים 
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 he חלונית ממוסגרת ממרכזת את המפה בתיבה כהה במסך הסטטיסטיקה; שכבת מרכז מציגה תיל שקוף מעל התצוגה
 
-@ Disabled while Weapon Auto-Switch is set to Never
-he מושבת כאשר החלפת נשק אוטומטית מוגדרת ללעולם לא
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 he נחקר בלבד חושף חדרים בעת הביקור; מפה מלאה מציגה את כל גאומטריית השלב
 

@@ -100,7 +100,7 @@ pub fn load_sfx(name: &str, bytes: &[u8], out_rate: u32) -> Option<Sfx> {
 }
 
 /// Listener state, sent once per frame (S_Update).
-#[derive(Clone, Copy, Debug, Default)]
+#[derive(Clone, Copy, Debug)]
 pub struct Listener {
     pub origin: Vec3,
     pub forward: Vec3,
@@ -113,6 +113,10 @@ pub struct Listener {
     pub underwater: bool,
     /// Host frame time in seconds (ambient fade).
     pub frametime: f32,
+    /// `ambient_level` (share of the leaf's level, 0 = off) and `ambient_fade`
+    /// (volume units per second), cvars that QC may set (srj1).
+    pub ambient_level: f32,
+    pub ambient_fade: f32,
     /// Split-screen: the other local players' ears and view entities. A
     /// sound plays as loud as the nearest player hears it (mono for these).
     pub others: [(Vec3, i32); MAX_OTHER_LISTENERS],
@@ -120,6 +124,25 @@ pub struct Listener {
 }
 
 pub const MAX_OTHER_LISTENERS: usize = 5;
+
+impl Default for Listener {
+    fn default() -> Self {
+        Self {
+            origin: Vec3::default(),
+            forward: Vec3::default(),
+            right: Vec3::default(),
+            up: Vec3::default(),
+            view_entity: 0,
+            ambient_levels: None,
+            underwater: false,
+            frametime: 0.0,
+            ambient_level: 0.3,
+            ambient_fade: 100.0,
+            others: Default::default(),
+            num_others: 0,
+        }
+    }
+}
 
 /// Events mirrored from the client (the binary converts `ClientEvent`s).
 #[derive(Clone, Debug)]

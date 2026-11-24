@@ -26,6 +26,9 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("modifier_jumps", "1", CVAR_ARCHIVE),
     // extra copies of every monster at map load (like `sv_horde`)
     ("modifier_horde", "0", CVAR_ARCHIVE),
+    // weapon pickups: 0 the game decides, 1 better weapon, 2 never switch
+    // (`weaponswitch`, by `cl_weaponpriority`)
+    ("modifier_autoswitch", "0", CVAR_ARCHIVE),
     // changelevel resets each player's items (QC SetNewParms)
     ("modifier_pistolstart", "0", CVAR_ARCHIVE),
     // only autosaves; the host refuses `save`

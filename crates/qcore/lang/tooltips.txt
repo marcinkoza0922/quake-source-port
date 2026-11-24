@@ -1359,13 +1359,6 @@ it Il pannello incorniciato centra la mappa in un riquadro scuro nella schermata
 es Panel enmarcado centra el mapa en un recuadro oscuro en la pantalla de estadísticas; Superposición central flota un alámbrico transparente
 ru Панель в рамке центрирует карту в тёмном окне на экране статистики; наложение по центру рисует полупрозрачный каркас поверх обзора
 
-@ Disabled while Weapon Auto-Switch is set to Never
-fr Désactivé lorsque le changement auto d'arme est réglé sur Jamais
-de Deaktiviert, solange Auto-Waffenwechsel auf Nie steht
-it Disattivato quando il cambio arma automatico è impostato su Mai
-es Desactivado mientras el cambio automático de arma esté en Nunca
-ru Отключено, пока автосмена оружия установлена на «Никогда»
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 fr Zones explorées révèle les salles au fil de votre visite ; Carte complète affiche toute la géométrie du niveau
 de Nur erkundet deckt Räume beim Betreten auf; Ganze Karte zeigt die gesamte Levelgeometrie

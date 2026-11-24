@@ -121,7 +121,7 @@ impl Profiler {
 
 impl super::Host {
     pub(super) fn start_profile(&mut self) {
-        self.r.gpu_times_wanted = true;
+        self.r.want_gpu_times(true);
         let _ = self.r.take_gpu_times();
         self.prof = Some(Profiler::new());
     }

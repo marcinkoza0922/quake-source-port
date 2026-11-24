@@ -55,7 +55,7 @@ pub async fn start(args: Vec<String>) -> Result<(), JsValue> {
     let win = p.create_window("Quake", 1280, 720, false).map_err(err)?;
     let renderer = qrender::Renderer::new_web(win.canvas(), &pal).await.map_err(|e| err(format!("{e:?}")))?;
     let (audio, snd, _) = if o.has("-nosound") { (None, None, None) } else { open_sound(&p, &basedir, &fs) };
-    let mut host = host::Host::new(fs, renderer, snd, o.args.clone());
+    let mut host = host::Host::new(fs, renderer.into(), snd, o.args.clone());
     let _ = win.set_text_input(true);
     host.window = Some(win);
 

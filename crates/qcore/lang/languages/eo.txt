@@ -2391,9 +2391,6 @@ eo Agordu vidon, vidigon, malkaŝreĝimon, zomon kaj markilojn de la 3D-dratmode
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 eo Enkadrigita panelo centras la mapon en malhela skatolo sur la statistika ekrano; centra supermeto ŝvebigas travideblan dratkadron super la vido
 
-@ Disabled while Weapon Auto-Switch is set to Never
-eo Malŝaltita dum Aŭtomata armilŝanĝo estas agordita al Neniam
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 eo Nur esplorita malkaŝas ĉambrojn dum vi vizitas ilin; Plena mapo montras la tutan nivelgeometrion
 

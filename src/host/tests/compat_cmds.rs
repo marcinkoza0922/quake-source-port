@@ -153,3 +153,44 @@ fn cd_subcommands_manage_track_state_and_remap() {
     h.exec_line("cd stop");
     assert_eq!(h.cd.playing, None);
 }
+
+#[test]
+fn a_dedicated_server_needs_no_renderer() {
+    let fs = qcore::fs::Fs::new(std::path::Path::new("."));
+    let mut h = Host::new(fs, Renderer::none(), None, Vec::new());
+    h.headless = true;
+    h.make_dedicated();
+    for line in ["sky foo", "r_visibility list", "vid_restart", "menu_main", "r_shader_preset x", "skies"] {
+        h.exec_line(line);
+        h.frame(1.0 / 72.0, Vec::new());
+    }
+    assert!(!h.r.has_world());
+}
+
+#[test]
+fn host_error_is_reported_once_and_disconnects() {
+    let mut fs = qcore::fs::Fs::new(qcore::fs::Fs::default_basedir());
+    if !fs.add_game_dir("id1") || !fs.exists("maps/e1m1.bsp") {
+        return;
+    }
+    let mut h = Host::new(fs, Renderer::none(), None, Vec::new());
+    h.headless = true;
+    h.exec_line("sv_autosave 0");
+    h.exec_line("map e1m1");
+    for _ in 0..8 {
+        h.frame(1.0 / 72.0, Vec::new());
+    }
+    assert!(h.server.active());
+    h.server.core.host_error(qvm::VmError::new("boom"));
+    for _ in 0..8 {
+        h.frame(1.0 / 72.0, Vec::new());
+    }
+    assert!(!h.server.active() && h.server.level.is_none() && h.local.is_none());
+    let shown = h.con.lines.iter().filter(|l| l.windows(4).any(|w| w == b"boom")).count();
+    assert_eq!(shown, 1);
+    h.exec_line("map e1m1");
+    for _ in 0..8 {
+        h.frame(1.0 / 72.0, Vec::new());
+    }
+    assert!(h.server.active(), "the next map starts");
+}

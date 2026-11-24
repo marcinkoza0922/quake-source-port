@@ -17,7 +17,8 @@ use qclient::ClientState;
 use qcore::fs::Fs;
 use qformats::Mdl;
 use qnet::protocol::STAT_WEAPON;
-use qrender::{ModelId, RenderEntity, Renderer};
+use crate::gfx::Renderer;
+use qrender::{ModelId, RenderEntity};
 
 use crate::assets::{Level, md3};
 

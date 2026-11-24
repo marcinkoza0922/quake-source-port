@@ -2391,9 +2391,6 @@ eu Konfiguratu 3D alanbre-sareko automaparen ikuspegia, bistaratzea, azaleratze-
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 eu Markodun panelak mapa lauki ilun batean zentratzen du estatistiken pantailan; erdiko gainjartzeak hari-egitura gardena erakusten du ikuspegiaren gainean
 
-@ Disabled while Weapon Auto-Switch is set to Never
-eu Desgaituta Armen aldaketa automatikoa Inoiz ez aukeran dagoen bitartean
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 eu Arakatutakoa soilik aukerak gelak bisitatu ahala erakusten ditu; Mapa osoak mailaren geometria osoa erakusten du
 

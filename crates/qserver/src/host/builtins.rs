@@ -543,6 +543,7 @@ impl Host for Ctx<'_> {
             "te_particlerain" => self.c.pf_te_weather(vm, false)?,
             "te_particlesnow" => self.c.pf_te_weather(vm, true)?,
             "ex_CheckPlayerEXFlags" | "ex_walkpathtogoal" => vm.ret_f(0.0),
+            _ if self.c.pf_te_effect(vm, name)? => {}
             _ => return Err(vm.run_error(format!("unimplemented builtin {name}"))),
         }
         Ok(())
@@ -572,6 +573,7 @@ impl Host for Ctx<'_> {
             "DP_QC_GETSURFACETRIANGLE",
             "DP_QC_GETSURFACEPOINTATTRIBUTE",
             "DP_SV_PRINT",
+            "DP_TE_STANDARDEFFECTBUILTINS",
             "DP_VIEWZOOM",
             "EXT_CSQC",
         ];

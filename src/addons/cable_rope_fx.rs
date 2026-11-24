@@ -3,7 +3,8 @@
 //! hand) that sags, swings and lies on the floor (point traces against the
 //! world), drawn as a camera-facing ribbon of dark rubber.
 use qcore::math::Vec3;
-use qrender::{FteBatch, FteBlend, FteVertex, PicId, Renderer};
+use crate::gfx::Renderer;
+use qrender::{FteBatch, FteBlend, FteVertex, PicId};
 
 pub type Geometry = (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>);
 

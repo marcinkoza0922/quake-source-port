@@ -7,7 +7,8 @@ use std::collections::HashMap;
 use qcore::fs::Fs;
 use qformats::Wad;
 use qformats::image::{parse_pcx, parse_pic, parse_tga};
-use qrender::{Draw2D, PicId, Renderer};
+use crate::gfx::Renderer;
+use qrender::{Draw2D, PicId};
 
 use super::markup;
 

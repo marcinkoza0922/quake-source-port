@@ -11,7 +11,8 @@ use qcore::cmd::Cbuf;
 use qcore::cvar::Cvars;
 use qcore::fs::Fs;
 use qcore::math::{Vec3, angle_vectors};
-use qrender::{Renderer, View};
+use crate::gfx::Renderer;
+use qrender::View;
 use qsound::SoundSystem;
 use qvm::{Progs, Vm, ofs_parm};
 

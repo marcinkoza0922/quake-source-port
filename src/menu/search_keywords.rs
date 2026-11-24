@@ -96,7 +96,7 @@ fn cvar_keywords(cvar: &str) -> &'static str {
         "cl_bob" => "head bob motion sickness",
         "v_gunkick" => "recoil",
         "cl_alwaysrun" => "sprint walk",
-        "cl_autoswitch" => "weapon switch pickup priority rocket thunderbolt",
+        "modifier_autoswitch" => "weapon switch pickup priority rocket thunderbolt",
         "cl_automap" | "cl_automap_view" | "cl_automap_display" | "cl_automap_rotate"
         | "cl_automap_reveal" | "cl_automap_zoom" | "cl_automap_alpha" | "cl_automap_markers" => "map minimap wireframe 3d radar",
         "cl_deathaction" => "die respawn",

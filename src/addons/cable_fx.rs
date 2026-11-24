@@ -4,7 +4,8 @@
 //! stock lightning bolt from the free plug's pins, the socket highlight
 //! ([`super::cable_glow`]) and the synthesised plug/yank/miss cues.
 use qcore::math::{Vec3, angle_vectors};
-use qrender::{PicId, RenderEntity, Renderer, View};
+use crate::gfx::Renderer;
+use qrender::{PicId, RenderEntity, View};
 use qsound::{Sfx, SoundEvent, SoundSystem};
 use std::sync::Arc;
 

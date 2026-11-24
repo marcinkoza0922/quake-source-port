@@ -65,6 +65,8 @@ pub struct Client {
     pub pext2: u32,
     /// Last client `clc_move` sequence received (PEXT2_PREDINFO).
     pub last_move_seq: u32,
+    /// Custom QC stats last sent as `//st` / `//sts` (clients without deltas).
+    pub(crate) stat_text: std::collections::BTreeMap<usize, String>,
     /// Replacement-delta state while PEXT2_REPLACEMENTDELTAS is active.
     pub delta: Option<Box<crate::delta::DeltaState>>,
     /// A second point whose PVS is added to this client's (the local free
@@ -108,6 +110,7 @@ impl Default for Client {
             pext1: 0,
             pext2: 0,
             last_move_seq: 0,
+            stat_text: Default::default(),
             delta: None,
             extra_view: None,
         }

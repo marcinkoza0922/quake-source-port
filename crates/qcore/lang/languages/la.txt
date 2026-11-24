@@ -2391,9 +2391,6 @@ la Configura aspectum, ostentationem, modum revelationis, magnificationem et sig
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 la Tabula inclusa chartam in capsa obscura in scrinio statisticorum collocat; superpositio media filum pellucidum super aspectum monstrat
 
-@ Disabled while Weapon Auto-Switch is set to Never
-la Inactivum dum Mutatio automatica teli ad Numquam posita est
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 la Explorata tantum conclavia cum ea invisis aperit; Tota tabula omnem geometriam gradus ostendit
 

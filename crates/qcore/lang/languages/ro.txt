@@ -2391,9 +2391,6 @@ ro Configurează vederea 3D, afișarea, modul de dezvăluire, zoomul și marcato
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 ro Panoul încadrat centrează harta într-o casetă întunecată pe ecranul de statistici; suprapunerea centrală afișează o plasă transparentă peste imagine
 
-@ Disabled while Weapon Auto-Switch is set to Never
-ro Dezactivat cât timp Schimbare automată armă este setată la Niciodată
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 ro Doar explorat dezvăluie camerele pe măsură ce le vizitezi; Hartă completă arată toată geometria nivelului
 

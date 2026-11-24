@@ -2391,9 +2391,6 @@ pa 3D ਵਾਇਰਫ੍ਰੇਮ ਆਟੋਮੈਪ ਦ੍ਰਿਸ਼, ਦਿ�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 pa ਫਰੇਮ ਵਾਲਾ ਪੈਨਲ ਅੰਕੜਾ ਸਕ੍ਰੀਨ ਉੱਤੇ ਨਕਸ਼ੇ ਨੂੰ ਗੂੜ੍ਹੇ ਬਕਸੇ ਵਿੱਚ ਵਿਚਕਾਰ ਰੱਖਦਾ ਹੈ; ਸੈਂਟਰ ਓਵਰਲੇ ਦ੍ਰਿਸ਼ ਉੱਤੇ ਪਾਰਦਰਸ਼ੀ ਵਾਇਰਫਰੇਮ ਦਿਖਾਉਂਦਾ ਹੈ
 
-@ Disabled while Weapon Auto-Switch is set to Never
-pa ਜਦੋਂ ਹਥਿਆਰ ਆਟੋ-ਸਵਿੱਚ 'ਕਦੇ ਨਹੀਂ' ਉੱਤੇ ਹੋਵੇ ਤਾਂ ਬੰਦ ਰਹਿੰਦਾ ਹੈ
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 pa ਸਿਰਫ਼ ਖੋਜਿਆ ਹੋਇਆ ਤੁਹਾਡੇ ਜਾਣ 'ਤੇ ਕਮਰੇ ਦਿਖਾਉਂਦਾ ਹੈ; ਪੂਰਾ ਮੈਪ ਪੂਰੇ ਪੱਧਰ ਦੀ ਬਣਤਰ ਦਿਖਾਉਂਦਾ ਹੈ
 

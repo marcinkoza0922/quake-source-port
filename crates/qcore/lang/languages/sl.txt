@@ -2391,9 +2391,6 @@ sl Nastavite pogled, prikaz, način razkritja, povečavo in oznake 3D žičnega 
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 sl Okvirjena plošča centrira zemljevid v temnem okviru na zaslonu statistike; sredinski sloj prikaže prosojno žično mrežo čez pogled
 
-@ Disabled while Weapon Auto-Switch is set to Never
-sl Onemogočeno, dokler je Samodejna menjava orožja nastavljena na Nikoli
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 sl Samo raziskano razkriva prostore sproti ob obisku; Celoten zemljevid prikaže celotno geometrijo ravni
 

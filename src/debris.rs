@@ -15,7 +15,8 @@ use std::rc::Rc;
 
 use qclient::ClientState;
 use qcore::math::Vec3;
-use qrender::{DynPose, ModelId, RenderEntity, Renderer};
+use crate::gfx::Renderer;
+use qrender::{DynPose, ModelId, RenderEntity};
 use qworld::CollisionModel;
 
 use crate::assets::{Kind, Level};

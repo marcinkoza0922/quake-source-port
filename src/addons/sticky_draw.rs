@@ -1,6 +1,7 @@
 //! Stickybomb presentation: the launcher view model and every bomb from
 //! `ClientState::stickies`, blinking with a small red glow.
-use qrender::{DLight, ModelId, RenderEntity, Renderer, View};
+use crate::gfx::Renderer;
+use qrender::{DLight, ModelId, RenderEntity, View};
 
 use super::sticky_model;
 

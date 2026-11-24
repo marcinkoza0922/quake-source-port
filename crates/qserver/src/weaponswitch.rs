@@ -1,4 +1,6 @@
-//! Smart weapon auto-switch and custom weapon priority (`cl_autoswitch`, `cl_weaponpriority`).
+//! Smart weapon auto-switch and custom weapon priority (`modifier_autoswitch`,
+//! `cl_weaponpriority`). A gameplay modifier: customized games only, so a
+//! vanilla game's pickups are the progs' alone.
 //!
 //! Vanilla Quake's `weapon_touch` unconditionally switches to picked-up weapons
 //! in single player (even mid-fire, before `PlayerPostThink` calls `W_Attack`).
@@ -18,10 +20,16 @@ use crate::fields::Fields;
 pub const DEFAULT_ORDER: [u8; 8] = [8, 7, 5, 6, 3, 4, 2, 1];
 pub const DEFAULT_PRIORITY: &str = "8 7 5 6 3 4 2 1";
 
+/// `modifier_autoswitch`: keep the weapon in hand.
+const NEVER: i32 = 2;
+
+/// Whether pickups are intercepted at all in this game.
+pub(crate) fn active(c: &crate::server::Core) -> bool {
+    crate::modifiers::value(c, "modifier_autoswitch") != 0.0
+}
+
 /// Cvars registered on the shared server/host registry.
 pub const CVARS: &[(&str, &str, u32)] = &[
-    // 0 = Never, 1 = Better weapon (uses cl_weaponpriority)
-    ("cl_autoswitch", "1", CVAR_ARCHIVE),
     ("cl_weaponpriority", DEFAULT_PRIORITY, CVAR_ARCHIVE),
 ];
 
@@ -118,12 +126,12 @@ pub fn rank(order: &[u8; 8], impulse: u8) -> Option<usize> {
 
 /// Whether picking up `new_weapon` while holding `old_weapon` should switch.
 ///
-/// - `mode == 0` ("Never"): always `false`.
-/// - `mode != 0` ("Better weapon"): switches only when `new_weapon` has strictly
+/// - not `better` ("Never"): always `false`.
+/// - `better` ("Better weapon"): switches only when `new_weapon` has strictly
 ///   higher priority than `old_weapon` in `order`. For unknown mod-only weapon
 ///   bits, switches only when the weapon is newly acquired (`old_items & new_weapon == 0`).
-pub fn should_switch(mode: i32, order: &[u8; 8], old_weapon: i32, new_weapon: i32, is_new_pickup: bool, new_is_mod: bool, old_is_mod: bool) -> bool {
-    if mode == 0 {
+pub fn should_switch(better: bool, order: &[u8; 8], old_weapon: i32, new_weapon: i32, is_new_pickup: bool, new_is_mod: bool, old_is_mod: bool) -> bool {
+    if !better {
         return false;
     }
     let old_imp = (!old_is_mod).then(|| item_to_impulse(old_weapon)).flatten();
@@ -202,9 +210,9 @@ impl WeaponSnapshot {
         } else {
             self.items & new_weapon == 0
         };
-        let mode = (cv.value_of("cl_autoswitch").round() as i32).clamp(0, 1);
+        let better = cv.value_of("modifier_autoswitch").round() as i32 != NEVER;
         let order = read_priority(cv);
-        if should_switch(mode, &order, self.weapon, new_weapon, is_new_pickup, new_is_mod, old_is_mod) {
+        if should_switch(better, &order, self.weapon, new_weapon, is_new_pickup, new_is_mod, old_is_mod) {
             return;
         }
         // Restore weapon state without interrupting firing animation or losing picked-up items/ammo.
@@ -245,17 +253,17 @@ mod tests {
     #[test]
     fn never_mode_never_switches() {
         let order = DEFAULT_ORDER;
-        assert!(!should_switch(0, &order, IT_AXE, IT_ROCKET_LAUNCHER, true, false, false));
-        assert!(!should_switch(0, &order, IT_SHOTGUN, IT_LIGHTNING, true, false, false));
+        assert!(!should_switch(false, &order, IT_AXE, IT_ROCKET_LAUNCHER, true, false, false));
+        assert!(!should_switch(false, &order, IT_SHOTGUN, IT_LIGHTNING, true, false, false));
     }
 
     #[test]
     fn better_weapon_respects_custom_priority() {
         // Put SSG (#3) and SNG (#5) above RL (#7) and LG (#8) to prevent self-damage!
         let order = parse_priority("5 3 4 2 6 7 8 1");
-        assert!(!should_switch(1, &order, IT_SUPER_SHOTGUN, IT_ROCKET_LAUNCHER, true, false, false));
-        assert!(!should_switch(1, &order, IT_SUPER_SHOTGUN, IT_LIGHTNING, true, false, false));
-        assert!(should_switch(1, &order, IT_SUPER_SHOTGUN, IT_SUPER_NAILGUN, true, false, false));
-        assert!(should_switch(1, &order, IT_AXE, IT_ROCKET_LAUNCHER, true, false, false));
+        assert!(!should_switch(true, &order, IT_SUPER_SHOTGUN, IT_ROCKET_LAUNCHER, true, false, false));
+        assert!(!should_switch(true, &order, IT_SUPER_SHOTGUN, IT_LIGHTNING, true, false, false));
+        assert!(should_switch(true, &order, IT_SUPER_SHOTGUN, IT_SUPER_NAILGUN, true, false, false));
+        assert!(should_switch(true, &order, IT_AXE, IT_ROCKET_LAUNCHER, true, false, false));
     }
 }

@@ -2391,9 +2391,6 @@ te 3D వైర్‌ఫ్రేమ్ ఆటోమ్యాప్ వీక్
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 te ఫ్రేమ్ చేసిన ప్యానెల్ గణాంకాల స్క్రీన్‌పై మ్యాప్‌ను ముదురు పెట్టెలో మధ్యలో ఉంచుతుంది; సెంటర్ ఓవర్‌లే వీక్షణపై పారదర్శక వైర్‌ఫ్రేమ్‌ను చూపుతుంది
 
-@ Disabled while Weapon Auto-Switch is set to Never
-te ఆయుధం ఆటో-స్విచ్ 'ఎప్పుడూ వద్దు'గా ఉన్నప్పుడు నిష్క్రియంగా ఉంటుంది
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 te అన్వేషించినవి మాత్రమే మీరు వెళ్లిన గదులను చూపుతుంది; పూర్తి మ్యాప్ మొత్తం స్థాయి నిర్మాణాన్ని చూపుతుంది
 

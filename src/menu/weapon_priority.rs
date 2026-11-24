@@ -213,7 +213,7 @@ impl Menu {
             .filter(|&(_, child, _)| child == Page::WeaponPriority)
             .map(|(par, _, row)| (par, row))
             .or_else(|| parent_page(Page::WeaponPriority))
-            .unwrap_or((Page::Gameplay, 0));
+            .unwrap_or((Page::Modifiers, 0));
         self.screen = Screen::OptionsPage(parent);
         self.opt_cursor = row;
         out.push(Action::Sound("misc/menu3.wav"));

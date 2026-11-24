@@ -2391,9 +2391,6 @@ zh-CN 配置 3D 线框自动地图的视图、显示位置、显示范围、缩�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 zh-CN 带框面板在统计画面中央以深色方框显示地图；居中叠加会在画面上方浮现半透明线框
 
-@ Disabled while Weapon Auto-Switch is set to Never
-zh-CN 当武器自动切换设为“从不”时禁用
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 zh-CN 仅已探索会在你经过房间时逐步显示；完整地图显示整个关卡的几何结构
 

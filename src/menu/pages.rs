@@ -215,7 +215,6 @@ pub(super) const fn toggle(label: &'static str, cvar: &'static str) -> Item {
     Item::Toggle { label, cvar }
 }
 
-pub(super) const WEAPON_SWITCH: &[(&str, f32)] = &[("Never", 0.0), ("Better weapon", 1.0)];
 pub(super) const AUTOMAP_VIEW: &[(&str, f32)] = &[("3D wireframe", 0.0), ("Top-down", 1.0)];
 pub(super) const AUTOMAP_DISPLAY: &[(&str, f32)] = &[("Framed panel", 0.0), ("Center overlay", 1.0)];
 pub(super) const AUTOMAP_REVEAL: &[(&str, f32)] = &[("Explored only", 0.0), ("Full map", 1.0)];
@@ -234,9 +233,6 @@ pub(super) const GAMEPLAY: &[Item] = &[
     toggle("Visible Weapons", "cl_vwep"),
     slider("View Bob", "cl_bob", 0.0, 0.02, 0.002),
     toggle("Gun Kick", "v_gunkick"),
-    Item::Heading("Weapons"),
-    Item::Choice { label: "Weapon Auto-Switch", cvar: "cl_autoswitch", choices: WEAPON_SWITCH },
-    Item::Sub { label: "Weapon Priority", page: Page::WeaponPriority },
     Item::Heading("Saving"),
     Item::Choice { label: "On Death", cvar: "cl_deathaction", choices: &[("Ask", 0.0), ("Most recent save", 1.0), ("Select save", 2.0), ("Restart level", 3.0)] },
     toggle("Autosave", "sv_autosave"),

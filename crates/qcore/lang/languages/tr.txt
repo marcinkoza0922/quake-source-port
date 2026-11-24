@@ -2391,9 +2391,6 @@ tr 3D tel kafes oto-haritanın görünümünü, yerleşimini, açma modunu, yak�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 tr Çerçeveli panel istatistik ekranında haritayı koyu bir kutuda ortalar; Orta katman görüntünün üzerinde saydam bir tel kafes gösterir
 
-@ Disabled while Weapon Auto-Switch is set to Never
-tr Otomatik Silah Değiştirme Asla ayarlıyken devre dışıdır
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 tr Yalnızca keşfedilen odaları gezdikçe açar; Tam harita tüm bölüm geometrisini gösterir
 

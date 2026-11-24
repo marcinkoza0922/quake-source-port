@@ -2391,9 +2391,6 @@ fa حالت نمایش، آشکارسازی، بزرگ‌نمایی و نشان�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 fa پنل قاب‌دار نقشه را در یک کادر تیره وسط صفحه آمار قرار می‌دهد؛ هم‌پوشانی میانی یک شبکه سیمی شفاف روی تصویر نمایش می‌دهد
 
-@ Disabled while Weapon Auto-Switch is set to Never
-fa وقتی تعویض خودکار سلاح روی هرگز باشد غیرفعال است
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 fa فقط کاوش‌شده اتاق‌ها را هنگام بازدید نمایان می‌کند؛ نقشه کامل کل هندسه مرحله را نشان می‌دهد
 

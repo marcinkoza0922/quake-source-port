@@ -5,7 +5,8 @@
 use qcore::math::{Vec3, angle_vectors};
 use qnet::protocol::{STAT_HEALTH, STAT_WEAPON};
 use super::arc_learn::Profile;
-use qrender::{FteBatch, FteBlend, FteVertex, PicId, Renderer, View};
+use crate::gfx::Renderer;
+use qrender::{FteBatch, FteBlend, FteVertex, PicId, View};
 
 type Geometry = (Vec<FteVertex>, Vec<u32>, Vec<FteBatch>);
 

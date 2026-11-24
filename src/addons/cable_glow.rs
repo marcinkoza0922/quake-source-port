@@ -4,7 +4,8 @@
 //! brighter outline and fill. Uses the client's own BSP (so demos show it
 //! too) with the server's texture rules (`hook_surface`, `cable::Rules`).
 use qcore::math::Vec3;
-use qrender::{FteBatch, FteBlend, FteVertex, PicId, Renderer};
+use crate::gfx::Renderer;
+use qrender::{FteBatch, FteBlend, FteVertex, PicId};
 use qserver::addons::cable::REACH;
 use qserver::addons::hook_surface::{Material, Surfaces, inside};
 

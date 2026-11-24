@@ -2391,9 +2391,6 @@ nb Tilpass visning, plassering, avdekking, zoom og markører for 3D-trådrammeka
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 nb Innrammet panel sentrerer kartet i en mørk boks på statistikkskjermen; midtoverlegg viser en gjennomsiktig trådmodell over visningen
 
-@ Disabled while Weapon Auto-Switch is set to Never
-nb Deaktivert mens Auto-våpenbytte står på Aldri
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 nb Kun utforsket avdekker rom etter hvert som du besøker dem; Fullt kart viser hele brettets geometri
 

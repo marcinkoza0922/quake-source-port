@@ -32,7 +32,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "capture_gpu" => "Encodes on the graphics card (NVIDIA NVENC, AMD or Intel through VA-API, AMF or Quick Sync, Apple VideoToolbox) when ffmpeg can use it, leaving the processor free; otherwise the processor encodes",
         "capture_audio" => "Records game sound and music into the video",
         "con_translate" => "Also translates the engine's console messages; off keeps them in English",
-        "cl_autoswitch" => "When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority",
+        "modifier_autoswitch" => "When picking up a weapon: Never keeps your current weapon; Better weapon switches only if it ranks higher in Weapon Priority",
         "cl_automap" => "Shows a 3D wireframe or top-down automap on the statistics screen (Tab/Select); add Automap in Edit HUD to keep it on screen, or press M for the full-screen map (single player and co-op only)",
         "cl_automap_view" => "3D wireframe tilts the map in perspective to show verticality; Top-down draws a flat overhead view",
         "cl_automap_display" => "Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view",
@@ -363,7 +363,7 @@ pub(super) fn page_name(p: Page) -> &'static str {
 
 /// The page an `Item::Sub` page returns to, with that row's index.
 pub(super) fn parent_page(p: Page) -> Option<(Page, usize)> {
-    [Page::Customize, Page::NewGameCustomize, Page::Gameplay, Page::Input, Page::Controller, Page::Hud, Page::Crosshair, Page::Accessibility, Page::Enhancements, Page::Impacts, Page::Addons, Page::NewGameAddons, Page::Audio, Page::Demos].into_iter().find_map(|parent| {
+    [Page::Customize, Page::NewGameCustomize, Page::Modifiers, Page::Gameplay, Page::Input, Page::Controller, Page::Hud, Page::Crosshair, Page::Accessibility, Page::Enhancements, Page::Impacts, Page::Addons, Page::NewGameAddons, Page::Audio, Page::Demos].into_iter().find_map(|parent| {
         page_items(parent).iter().position(|i| matches!(i, Item::Sub { page, .. } if *page == p)).map(|i| (parent, i))
     })
 }
@@ -377,9 +377,6 @@ pub(super) fn disabled_reason(item: Item) -> Option<&'static str> {
         Item::Run { run: Run::ExportClip, .. } => Some("No clip highlighted: while the demo plays, drag across the timeline, or press I and O (LT and RT on a controller)"),
         Item::Choice { cvar: "r_particles", .. } => {
             Some("Disabled while Enhanced Particles is on: its particles replace the GLQuake and Classic styles")
-        }
-        Item::Sub { page: Page::WeaponPriority, .. } => {
-            Some("Disabled while Weapon Auto-Switch is set to Never")
         }
         _ => None,
     }

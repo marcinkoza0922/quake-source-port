@@ -2391,9 +2391,6 @@ be Наладзьце выгляд, адлюстраванне, рэжым ад�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 be Панэль у рамцы размяшчае карту па цэнтры ў цёмным акне на экране статыстыкі; накладанне па цэнтры паказвае празрысты каркас паверх агляду
 
-@ Disabled while Weapon Auto-Switch is set to Never
-be Адключана, пакуль Аўтазамена зброі ўсталявана на Ніколі
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 be Толькі даследаванае адкрывае пакоі па меры іх наведвання; Уся карта паказвае ўсю геаметрыю ўзроўню
 

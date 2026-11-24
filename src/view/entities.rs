@@ -119,7 +119,7 @@ impl ViewState {
         cv: &ViewCvars,
         lv: &mut Level,
         fs: &qcore::fs::Fs,
-        r: &mut qrender::Renderer,
+        r: &mut crate::gfx::Renderer,
         pvs_eye: Option<[f32; 3]>,
         out: &mut Vec<RenderEntity>,
     ) {

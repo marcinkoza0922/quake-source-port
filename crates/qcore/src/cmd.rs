@@ -199,6 +199,22 @@ impl<C: CmdContext> Commands<C> {
         c.add("unalias", |ctx, a| {
             ctx.commands().aliases.remove(&a.argv(1).to_ascii_lowercase());
         });
+        c.add("unaliasall", |ctx, _| ctx.commands().aliases.clear());
+        c.add("inc", cmd_inc);
+        c.add("cycle", cmd_cycle);
+        c.add("cycleback", cmd_cycle);
+        c.add("reset", |ctx, a| {
+            if a.argc() != 2 {
+                ctx.print("reset <cvar> : reset cvar to default\n");
+            } else if ctx.cvars().find(a.argv(1)).is_none() {
+                let s = format!("variable \"{}\" not found\n", a.argv(1));
+                ctx.print(&s);
+            } else {
+                reset_cvars(ctx, |c| c.name.eq_ignore_ascii_case(a.argv(1)));
+            }
+        });
+        c.add("resetall", |ctx, _| reset_cvars(ctx, |_| true));
+        c.add("resetcfg", |ctx, _| reset_cvars(ctx, |c| c.flags & crate::cvar::CVAR_ARCHIVE != 0));
         c.add("set", |ctx, a| cmd_set(ctx, a, 0));
         c.add("seta", |ctx, a| cmd_set(ctx, a, crate::cvar::CVAR_ARCHIVE));
         c.add("toggle", |ctx, a| {
@@ -269,6 +285,60 @@ fn cmd_alias<C: CmdContext>(ctx: &mut C, a: &Args) {
         _ => {
             let value = a.all()[2..].join(" ") + "\n";
             ctx.commands().set_alias(a.argv(1), &value);
+        }
+    }
+}
+
+/// Cvar_Inc_f
+fn cmd_inc<C: CmdContext>(ctx: &mut C, a: &Args) {
+    let by = match a.argc() {
+        2 => 1.0,
+        3 => crate::cvar::q_atof(a.argv(2)),
+        _ => {
+            ctx.print("inc <cvar> [amount] : increment cvar\n");
+            return;
+        }
+    };
+    let v = ctx.cvars().value_of(a.argv(1)) + by;
+    if let Some(r) = ctx.cvars().set_value(a.argv(1), v) {
+        ctx.cvar_changed(r);
+    }
+}
+
+/// Cvar_Cycle_f: the value after (before, for `cycleback`) the current one.
+fn cmd_cycle<C: CmdContext>(ctx: &mut C, a: &Args) {
+    let (name, n) = (a.argv(1), a.argc());
+    if n < 3 {
+        let s = format!("{} <cvar> <value list>: cycle cvar through a list of values\n", a.argv(0));
+        ctx.print(&s);
+        return;
+    }
+    let Some(var) = ctx.cvars().by_name(name).map(|c| (c.string.clone(), c.value)) else {
+        let s = format!("Cvar \"{name}\" not found\n");
+        ctx.print(&s);
+        return;
+    };
+    // Cvar_HasValue: by value when it starts like a number
+    let has = |v: &str| {
+        let numeric = v.trim_start_matches(['-', '+', '.']).starts_with(|c: char| c.is_ascii_digit());
+        if numeric { crate::cvar::q_atof(v) == var.1 } else { v == var.0 }
+    };
+    let i = if a.argv(0).eq_ignore_ascii_case("cycle") {
+        (2..n).find(|&i| has(a.argv(i))).map_or(2, |i| if i + 1 < n { i + 1 } else { 2 })
+    } else {
+        (2..n).rev().find(|&i| has(a.argv(i))).map_or(n - 1, |i| if i > 2 { i - 1 } else { n - 1 })
+    };
+    if let Some(r) = ctx.cvars().set(name, a.argv(i)) {
+        ctx.cvar_changed(r);
+    }
+}
+
+/// Cvar_Reset for every cvar `which` picks.
+fn reset_cvars<C: CmdContext>(ctx: &mut C, which: impl Fn(&crate::cvar::Cvar) -> bool) {
+    let v: Vec<_> = ctx.cvars().iter().filter(|c| which(c)).map(|c| (c.name.clone(), c.default.clone())).collect();
+    for (name, default) in v {
+        if let Some(r) = ctx.cvars().set(&name, &default) {
+            ctx.cvar_changed(r);
         }
     }
 }
@@ -376,6 +446,31 @@ mod tests {
         assert_eq!(c.next_line().unwrap(), " b \"x;y\"");
         assert_eq!(c.next_line().unwrap(), "c // d;e");
         assert_eq!(c.next_line(), None);
+    }
+
+    #[test]
+    fn inc_cycle_reset_and_unaliasall() {
+        let mut ctx = Ctx { cmds: Commands::with_builtins(), ..Default::default() };
+        ctx.cvars.register("v", "2", crate::cvar::CVAR_ARCHIVE);
+        ctx.cvars.register("w", "a", 0);
+        let mut run = |line: &str| {
+            ctx.cbuf.add_text(&format!("{line}\n"));
+            execute(&mut ctx);
+            (ctx.cvars.by_name("v").unwrap().string.clone(), ctx.cvars.by_name("w").unwrap().string.clone())
+        };
+        assert_eq!(run("inc v").0, "3");
+        assert_eq!(run("inc v -1.5").0, "1.5");
+        assert_eq!(run("cycle v 1 1.50 2").0, "2"); // numbers compare by value
+        assert_eq!(run("cycle v 1 1.5 2").0, "1");
+        assert_eq!(run("cycleback v 1 1.5 2").0, "2");
+        assert_eq!(run("cycle v 7 8").0, "7"); // not in the list: the first
+        assert_eq!(run("cycleback v 8 9").0, "9"); // ... or the last
+        assert_eq!(run("cycle w a b").1, "b");
+        assert_eq!(run("resetcfg"), ("2".into(), "b".into()));
+        assert_eq!(run("reset w").1, "a");
+        assert_eq!(run("inc v; cycle w a b; resetall"), ("2".into(), "a".into()));
+        run("alias go inc v; unaliasall; go");
+        assert!(ctx.out.contains("Unknown command \"go\""));
     }
 
     #[test]

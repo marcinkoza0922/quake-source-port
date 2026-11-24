@@ -16,7 +16,8 @@
 use crate::blood::Geometry;
 use qcore::cvar::Cvars;
 use qcore::math::Vec3;
-use qrender::{FteBatch, FteBlend, FteVertex, PicId, Renderer};
+use crate::gfx::Renderer;
+use qrender::{FteBatch, FteBlend, FteVertex, PicId};
 use qserver::{BoxModel, EdictBox};
 
 mod hull;

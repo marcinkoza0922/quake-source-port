@@ -2391,9 +2391,6 @@ et Seadista 3D-traatvõrgu autokaardi vaadet, kuva, avamisrežiimi, suurendust j
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 et Raamitud paneel joondab kaardi statistikakuval tumedasse kasti; keskne ülekate kuvab vaate peal läbipaistva traatraami
 
-@ Disabled while Weapon Auto-Switch is set to Never
-et Keelatud, kui Automaatne relvavahetus on seatud väärtusele Mitte kunagi
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 et Ainult uuritud avab ruumid nende külastamisel; Terve kaart näitab kogu taseme geomeetriat
 

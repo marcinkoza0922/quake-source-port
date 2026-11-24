@@ -3,7 +3,8 @@
 //! sparks and glow ring, sounds, the idle hum and the view model.
 use qclient::RailEffect;
 use qcore::math::{Vec3, angle_vectors};
-use qrender::{FteBatch, FteBlend, FteVertex, PicId, RenderEntity, Renderer, View};
+use crate::gfx::Renderer;
+use qrender::{FteBatch, FteBlend, FteVertex, PicId, RenderEntity, View};
 use qsound::{Sfx, SoundEvent, SoundSystem};
 use std::sync::Arc;
 

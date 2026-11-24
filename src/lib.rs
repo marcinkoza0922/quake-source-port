@@ -28,6 +28,7 @@ mod draw;
 mod lang_tests;
 mod font;
 mod fte;
+mod gfx;
 mod glyphs;
 mod host;
 mod menu;
@@ -225,8 +226,10 @@ fn run_engine(o: &Opts, fixed_step: Option<f64>) -> Result<(), (&'static str, St
 
     let mut platform = None;
     let mut window = None;
-    let renderer = if headless {
-        qrender::Renderer::headless(w, h, &pal)
+    let renderer = if dedicated {
+        Ok(gfx::Renderer::none())
+    } else if headless {
+        gfx::Renderer::headless(w, h, &pal)
     } else {
         #[cfg(target_os = "android")]
         let platform_init = qplatform::Platform::init_with_hints(&[("SDL_ORIENTATIONS", "LandscapeLeft LandscapeRight")]);
@@ -245,10 +248,12 @@ fn run_engine(o: &Opts, fixed_step: Option<f64>) -> Result<(), (&'static str, St
             });
         platform = Some(p);
         window = Some(win);
-        r
+        r.map(gfx::Renderer::from)
     };
     let renderer = renderer.map_err(|e| ("Quake graphics initialization failed", e.to_string()))?;
-    eprintln!("renderer: {}", renderer.device_name());
+    if !dedicated {
+        eprintln!("renderer: {}", renderer.device_name());
+    }
     #[cfg(target_os = "android")]
     qplatform::android_log(&format!("renderer: {}", renderer.device_name()));
 
@@ -348,7 +353,9 @@ fn run_engine(o: &Opts, fixed_step: Option<f64>) -> Result<(), (&'static str, St
             if let Some(native) = win.android_window() {
                 let id = native.id();
                 let (w, h) = win.drawable_size();
-                host.r.sync_android_window(native, id, (w, h))
+                host.r.windowed()
+                    .ok_or(("Quake graphics surface failed", String::from("no renderer")))?
+                    .sync_android_window(native, id, (w, h))
                     .map_err(|e| ("Quake graphics surface failed", e.to_string()))?;
                 host.r.resize(w, h);
             } else {

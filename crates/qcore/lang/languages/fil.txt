@@ -2391,9 +2391,6 @@ fil I-configure ang tanaw ng 3D wireframe automap, pagpapakita, mode ng pagpapak
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 fil Inilalagay ng naka-frame na panel ang mapa sa gitna sa madilim na kahon sa screen ng estadistika; ang gitnang overlay ay nagpapakita ng malinaw na wireframe sa ibabaw ng tanawin
 
-@ Disabled while Weapon Auto-Switch is set to Never
-fil Naka-disable habang nakatakda sa Huwag kailanman ang Auto-Palit ng Armas
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 fil Ipinapakita ng Mga nalibot lang ang mga silid habang binibisita mo; ipinapakita ng Buong mapa ang buong heometriya ng antas
 

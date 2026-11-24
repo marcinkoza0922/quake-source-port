@@ -2391,9 +2391,6 @@ sr Подеси поглед, приказ, режим откривања, зу�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 sr Уоквирени панел центрира мапу у тамном оквиру на екрану статистике; средишњи преклоп приказује провидну жичану мрежу преко погледа
 
-@ Disabled while Weapon Auto-Switch is set to Never
-sr Онемогућено док је Аутоматска промена оружја подешена на Никада
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 sr Само истражено открива просторије како их обилазите; Цела мапа приказује читаву геометрију нивоа
 

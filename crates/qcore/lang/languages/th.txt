@@ -2391,9 +2391,6 @@ th ตั้งค่า​มุม​มอง การ​แสดงผล 
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 th แผง​มี​กรอบ​จัด​แผนที่​ไว้​กลาง​หน้า​จอ​สถิติ​ใน​กรอบ​มืด ส่วน​ซ้อน​ทับ​กลาง​จอ​จะ​ลอย​โครง​ลวด​โปร่งใส​เหนือ​ภาพ
 
-@ Disabled while Weapon Auto-Switch is set to Never
-th ปิด​ใช้​งาน​เมื่อ​ตั้ง​สลับ​อาวุธ​อัตโนมัติ​เป็น​ไม่​เปลี่ยน
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 th เฉพาะ​ที่​สำรวจ​จะ​เปิด​ห้อง​เมื่อ​คุณ​เดิน​ผ่าน ส่วน​ทั้ง​แผนที่​จะ​แสดง​โครง​สร้าง​ทั้ง​ด่าน
 

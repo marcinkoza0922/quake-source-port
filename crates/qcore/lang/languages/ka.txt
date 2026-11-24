@@ -2391,9 +2391,6 @@ ka მოარგეთ 3D კარკასული ავტორუკი
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 ka ჩარჩოიანი პანელი რუკას სტატისტიკის ეკრანზე მუქ ჩარჩოში ათავსებს; ცენტრალური გადაფარვა გამჭვირვალე მავთულბადეს აჩვენებს ხედზე
 
-@ Disabled while Weapon Auto-Switch is set to Never
-ka გამორთულია, სანამ იარაღის ავტოშეცვლა დაყენებულია მნიშვნელობაზე არასოდეს
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 ka მხოლოდ შესწავლილი ხსნის ოთახებს მათი მონახულებისას; სრული რუკა აჩვენებს დონის მთელ გეომეტრიას
 

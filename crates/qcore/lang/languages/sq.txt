@@ -2391,9 +2391,6 @@ sq Konfiguro pamjen, shfaqjen, mënyrën e zbulimit, zmadhimin dhe shënjuesit e
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 sq Paneli me kornizë e vendos hartën në qendër në një kuti të errët në ekranin e statistikave; mbivendosja qendrore shfaq një rrjetë transparente mbi pamjen
 
-@ Disabled while Weapon Auto-Switch is set to Never
-sq Çaktivizuar kur Ndërrim automatik i armës është vendosur në Kurrë
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 sq Vetëm e eksploruara zbulon dhomat ndërsa i vizitoni; Harta e plotë tregon gjithë gjeometrinë e nivelit
 

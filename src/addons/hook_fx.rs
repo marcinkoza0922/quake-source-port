@@ -2,7 +2,8 @@
 //! from the server-sent head positions), synthesised rattles and clanks,
 //! and the imported launcher view model.
 use qcore::math::{Vec3, angle_vectors};
-use qrender::{FteBatch, FteBlend, FteVertex, PicId, RenderEntity, Renderer, View};
+use crate::gfx::Renderer;
+use qrender::{FteBatch, FteBlend, FteVertex, PicId, RenderEntity, View};
 use qsound::{Sfx, SoundEvent, SoundSystem};
 use std::sync::Arc;
 

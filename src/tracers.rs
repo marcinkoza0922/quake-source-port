@@ -7,7 +7,8 @@
 use crate::blood::Geometry;
 use qclient::{ClientState, EF_QSP_PELLET};
 use qcore::math::{Vec3, angle_vectors};
-use qrender::{FteBatch, FteBlend, FteVertex, PicId, Renderer, View};
+use crate::gfx::Renderer;
+use qrender::{FteBatch, FteBlend, FteVertex, PicId, View};
 
 /// Hitscan streak speed (units/s).
 const SPEED: f32 = 4500.0;

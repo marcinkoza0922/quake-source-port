@@ -8,7 +8,8 @@ use crate::blood::mesh;
 use crate::fte::world::{BspWorld, brush_ents};
 use qcore::math::{Vec3, angle_vectors};
 use qpart::World;
-use qrender::{FteBatch, FteBlend, FteVertex, PicId, RenderEntity, Renderer, View};
+use crate::gfx::Renderer;
+use qrender::{FteBatch, FteBlend, FteVertex, PicId, RenderEntity, View};
 use qsound::{Sfx, SoundEvent, SoundSystem};
 use std::sync::Arc;
 

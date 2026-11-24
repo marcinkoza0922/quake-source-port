@@ -126,27 +126,25 @@ impl Mixer {
         }
     }
 
-    /// S_UpdateAmbientSounds (ambient_level 0.3, ambient_fade 100).
+    /// S_UpdateAmbientSounds.
     pub(super) fn update_ambients(&mut self) {
-        const LEVEL: f32 = 0.3;
-        const FADE: f32 = 100.0;
         let l = self.listener;
         for a in 0..NUM_AMBIENTS {
             let ch = &mut self.channels[a];
             ch.category = SoundCategory::Ambient;
-            let Some(levels) = l.ambient_levels else {
+            let Some(levels) = l.ambient_levels.filter(|_| l.ambient_level != 0.0) else {
                 ch.sfx = None;
                 self.ambient_vol[a] = 0.0;
                 continue;
             };
             ch.sfx.clone_from(&self.ambient_sfx[a]);
             ch.force_loop = true;
-            let mut target = LEVEL * f32::from(levels[a]);
+            let mut target = (l.ambient_level * f32::from(levels[a])).trunc().min(255.0);
             if target < 8.0 {
                 target = 0.0;
             }
             let v = &mut self.ambient_vol[a];
-            let step = l.frametime * FADE;
+            let step = l.frametime * l.ambient_fade;
             if *v < target {
                 *v = (*v + step).min(target);
             } else if *v > target {

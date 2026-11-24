@@ -2391,9 +2391,6 @@ ja 3Dワイヤーフレーム・オートマップの表示モード、位置、
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 ja 枠付きパネルは統計画面の中央に暗い枠でマップを表示し、中央オーバーレイは画面上に半透明のワイヤーフレームを重ねます
 
-@ Disabled while Weapon Auto-Switch is set to Never
-ja 武器の自動切り替えが「切り替えない」のときは無効です
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 ja 探索済みのみは訪れた部屋だけを表示し、全体マップはレベル全体の構造を表示します
 

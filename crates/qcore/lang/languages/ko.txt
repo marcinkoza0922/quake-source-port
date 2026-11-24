@@ -2391,9 +2391,6 @@ ko 3D 와이어프레임 오토맵의 보기, 표시 방식, 공개 범위, 확�
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 ko 프레임 패널은 통계 화면 중앙의 어두운 상자에 지도를 표시하며, 중앙 오버레이는 화면 위에 반투명 와이어프레임을 띄웁니다
 
-@ Disabled while Weapon Auto-Switch is set to Never
-ko 무기 자동 전환이 '사용 안 함'일 때는 비활성화됩니다
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 ko 탐험한 구역만은 방문한 방만 보여주고, 전체 맵은 레벨 전체 구조를 표시합니다
 

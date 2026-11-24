@@ -11,6 +11,7 @@ use crate::msg::*;
 use crate::server::{Core, ModelInfo, ed_free};
 use crate::vis::leafs_in_pvs;
 mod model;
+mod te;
 mod trace;
 mod entities;
 mod feedback;

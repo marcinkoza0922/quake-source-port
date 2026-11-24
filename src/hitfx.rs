@@ -101,7 +101,7 @@ impl HitFx {
         lv: &crate::assets::Level,
         brushes: &mut Option<Vec<BrushEnt>>,
         fs: &qcore::fs::Fs,
-        r: &mut qrender::Renderer,
+        r: &mut crate::gfx::Renderer,
         view: &View,
         debris: &crate::debris::Debris,
         frustum: Option<&qrender::ViewFrustum>,

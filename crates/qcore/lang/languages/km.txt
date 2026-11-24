@@ -2391,9 +2391,6 @@ km កំណត់​ទិដ្ឋភាព ការ​បង្ហាញ ក
 @ Framed panel centers the map in a dark box on the statistics screen; Center overlay floats a transparent wireframe over the view
 km ផ្ទាំង​មាន​ស៊ុម​ដាក់​ផែនទី​នៅ​កណ្ដាល​ក្នុង​ប្រអប់​ងងឹត​លើ​អេក្រង់​ស្ថិតិ; បង្ហាញ​ត្រួត​កណ្ដាល​បង្ហាញ​គ្រោង​ខ្សែ​ថ្លា​លើ​ទិដ្ឋភាព
 
-@ Disabled while Weapon Auto-Switch is set to Never
-km ត្រូវ​បាន​បិទ​នៅ​ពេល​ប្ដូរ​អាវុធ​ស្វ័យប្រវត្តិ​ត្រូវ​បាន​កំណត់​ជា មិន​ប្ដូរ​ឡើយ
-
 @ Explored only reveals rooms as you visit them; Full map shows the entire level geometry
 km តែ​កន្លែង​រុករក​រួច​បង្ហាញ​បន្ទប់​ពេល​អ្នក​ចូល​ទៅ; ផែនទី​ពេញ​បង្ហាញ​រចនាសម្ព័ន្ធ​វគ្គ​ទាំង​មូល
 
