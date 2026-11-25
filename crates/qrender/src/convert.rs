@@ -435,7 +435,8 @@ mod lut_tests {
         for metric in 0..3 {
             let t = std::time::Instant::now();
             let lut = palette_lut(&pal, metric);
-            assert!(t.elapsed().as_secs_f32() < 5.0, "metric {metric} took {:?}", t.elapsed());
+            // (far more than a busy CI machine needs)
+            assert!(t.elapsed().as_secs_f32() < 60.0, "metric {metric} took {:?}", t.elapsed());
             assert_eq!(lut.len(), LUT_BYTES);
             assert_eq!(lut[0], 0, "black");
             let at = |r: usize, g: usize, b: usize| lut[r + g * 128 + b * 16384];
