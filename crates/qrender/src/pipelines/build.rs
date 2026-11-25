@@ -21,7 +21,7 @@ impl Pipelines {
         }
     }
 
-    pub(super) fn graphics_pipes(&self) -> Vec<vk::Pipeline> {
+    pub(crate) fn graphics_pipes(&self) -> Vec<vk::Pipeline> {
         let mut v = vec![
             self.world,
             self.world_alpha,
@@ -63,15 +63,75 @@ impl Pipelines {
         v
     }
 
+    /// Sets every graphics pipeline to null (destroyed by the caller).
+    pub(super) fn forget_graphics(&mut self) {
+        let null = vk::Pipeline::null();
+        for p in [
+            &mut self.world,
+            &mut self.world_alpha,
+            &mut self.water,
+            &mut self.water_alpha,
+            &mut self.sky,
+            &mut self.alias,
+            &mut self.alias_alpha,
+            &mut self.alias_xray,
+            &mut self.poly,
+            &mut self.particle,
+            &mut self.ui,
+            &mut self.post,
+            &mut self.post_fast,
+            &mut self.ao,
+            &mut self.ao_source,
+            &mut self.ao_down,
+            &mut self.ao_apply,
+            &mut self.droplets,
+            &mut self.vel_alias,
+            &mut self.vel_world,
+            &mut self.bloom_down,
+            &mut self.bloom_up,
+            &mut self.shadow_world,
+            &mut self.shadow_alias,
+            &mut self.portal_alias_mirror,
+            &mut self.water_rt,
+            &mut self.water_rt_alpha,
+            &mut self.rt_depth_world,
+            &mut self.water_rt_half,
+        ] {
+            *p = null;
+        }
+        self.fte = [null; 17];
+        self.fte_quad = [null; 8];
+        self.wire_world = [null; 2];
+        self.wire_alias = [null; 2];
+        self.wire_sprite = [null; 2];
+        self.portal = ScenePipes::null();
+        self.bloom_glow = BloomPipes::null();
+    }
+
     /// (Re)creates the graphics pipelines for an output format and scene
-    /// sample count. The device must be idle.
+    /// sample count. The device must be idle. After an error there are none
+    /// and `samples` is 0.
     pub fn build(&mut self, gpu: &Gpu, post_format: vk::Format, samples: u32) -> Result<()> {
         for p in self.graphics_pipes() {
-            if p != vk::Pipeline::null() {
-                // SAFETY: device idle (caller contract).
+            // SAFETY: device idle (caller contract); null is allowed.
+            unsafe { gpu.device.destroy_pipeline(p, None) };
+        }
+        self.forget_graphics();
+        self.samples = 0;
+        gpu.journal.pipelines.borrow_mut().clear();
+        let r = self.build_all(gpu, post_format, samples);
+        let made = gpu.journal.pipelines.take();
+        if r.is_err() {
+            for p in made {
+                // SAFETY: made just now, never used.
                 unsafe { gpu.device.destroy_pipeline(p, None) };
             }
+            self.forget_graphics();
         }
+        r
+    }
+
+    fn build_all(&mut self, gpu: &Gpu, post_format: vk::Format, samples: u32) -> Result<()> {
         let supersample = self.supersample && gpu.sample_shading;
         let Shaders {
             world_vs,

@@ -155,12 +155,12 @@ impl Renderer {
         let mut dirty = false;
         if self.rt.is_none() {
             self.idle();
-            self.rt = Some(self.create_rt()?);
+            self.rt = Some(self.all_or_nothing(Self::create_rt)?);
             dirty = true;
         }
         if self.world.is_some() && self.rt.as_ref().is_some_and(|r| r.world.is_none()) {
             self.idle();
-            let w = self.build_rt_world()?;
+            let w = self.all_or_nothing(Self::build_rt_world)?;
             if let Some(rt) = &mut self.rt {
                 rt.world = Some(w);
             }
@@ -187,10 +187,7 @@ impl Renderer {
             },
         ];
         let dev = self.gpu.device.clone();
-        // SAFETY: valid device and create info.
-        let pool = unsafe {
-            dev.create_descriptor_pool(&vk::DescriptorPoolCreateInfo::default().max_sets(2 * n).pool_sizes(&sizes), None)?
-        };
+        let pool = self.gpu.descriptor_pool(&vk::DescriptorPoolCreateInfo::default().max_sets(2 * n).pool_sizes(&sizes))?;
         let build_input = vk::BufferUsageFlags::ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_KHR
             | vk::BufferUsageFlags::STORAGE_BUFFER;
         let mut frames = Vec::new();

@@ -7,6 +7,10 @@ use std::ffi::{CStr, CString, c_char};
 mod alloc;
 pub use alloc::*;
 mod upload;
+mod journal;
+use journal::Made;
+pub use journal::Journal;
+mod resources;
 mod rt;
 pub use rt::{Accel, RtFns};
 
@@ -51,6 +55,7 @@ pub struct Gpu {
     pub swapchain_fn: Option<ash::khr::swapchain::Device>,
     pub surface: vk::SurfaceKHR,
     pub alloc: Allocator,
+    pub journal: Journal,
     pub upload_pool: vk::CommandPool,
     /// Highest MSAA sample count usable for colour+depth targets.
     pub max_samples: u32,
@@ -59,6 +64,7 @@ pub struct Gpu {
     pub max_layers: u32,
     /// Max sampler anisotropy (1 = unsupported).
     pub max_anisotropy: f32,
+    pub max_lod_bias: f32,
     /// sampleRateShading is enabled (supersampling).
     pub sample_shading: bool,
     pub wireframe: bool,
@@ -251,11 +257,13 @@ impl Gpu {
             swapchain_fn,
             surface,
             alloc: Allocator { device_address: rt_ok, ..Allocator::default() },
+            journal: Journal::default(),
             upload_pool,
             max_samples,
             max_texture: lim.max_image_dimension2_d,
             max_layers: lim.max_image_array_layers,
             max_anisotropy,
+            max_lod_bias: lim.max_sampler_lod_bias,
             timestamp_period: lim.timestamp_period,
             sample_shading,
             wireframe,
@@ -282,137 +290,6 @@ impl Gpu {
         let used = local.iter().map(|&i| budget.heap_usage[i]).sum();
         let total = local.iter().map(|&i| budget.heap_budget[i]).sum();
         Some((used, total))
-    }
-
-    pub fn buffer(&mut self, size: u64, mut usage: vk::BufferUsageFlags, host: bool) -> Result<Buffer> {
-        let size = size.max(16);
-        if self.rt.is_some() {
-            // ray tracing reads geometry and model buffers by address
-            usage |= vk::BufferUsageFlags::SHADER_DEVICE_ADDRESS;
-        }
-        let ci = vk::BufferCreateInfo::default().size(size).usage(usage);
-        // SAFETY: valid device/create info.
-        let buf = unsafe { self.device.create_buffer(&ci, None)? };
-        // SAFETY: buf just created.
-        let req = unsafe { self.device.get_buffer_memory_requirements(buf) };
-        let flags = if host {
-            vk::MemoryPropertyFlags::HOST_VISIBLE | vk::MemoryPropertyFlags::HOST_COHERENT
-        } else {
-            vk::MemoryPropertyFlags::DEVICE_LOCAL
-        };
-        let mem = self
-            .alloc
-            .alloc(&self.device, &self.mem_props, req, flags, true)?;
-        // SAFETY: memory satisfies requirements.
-        unsafe {
-            self.device
-                .bind_buffer_memory(buf, mem.memory, mem.offset)?
-        };
-        Ok(Buffer { buf, mem, size })
-    }
-
-    /// Frees a buffer that lives as long as the renderer (teardown only;
-    /// `b` must not be used afterwards).
-    pub fn free_buffer_ref(&mut self, b: &Buffer) {
-        // SAFETY: caller guarantees the GPU no longer uses it.
-        unsafe { self.device.destroy_buffer(b.buf, None) };
-        self.alloc.free(&b.mem);
-    }
-
-    pub fn free_buffer(&mut self, b: Buffer) {
-        // SAFETY: caller guarantees the GPU no longer uses it.
-        unsafe { self.device.destroy_buffer(b.buf, None) };
-        self.alloc.free(&b.mem);
-    }
-
-    #[allow(clippy::too_many_arguments)]
-    pub fn image(
-        &mut self,
-        w: u32,
-        h: u32,
-        layers: u32,
-        mips: u32,
-        format: vk::Format,
-        usage: vk::ImageUsageFlags,
-        aspect: vk::ImageAspectFlags,
-    ) -> Result<Image> {
-        self.image_ms(w, h, layers, mips, format, usage, aspect, 1)
-    }
-
-    /// [`Gpu::image`] with a sample count (1 = single-sampled).
-    #[allow(clippy::too_many_arguments)]
-    pub fn image_ms(
-        &mut self,
-        w: u32,
-        h: u32,
-        layers: u32,
-        mips: u32,
-        format: vk::Format,
-        usage: vk::ImageUsageFlags,
-        aspect: vk::ImageAspectFlags,
-        samples: u32,
-    ) -> Result<Image> {
-        let ci = vk::ImageCreateInfo::default()
-            .image_type(vk::ImageType::TYPE_2D)
-            .format(format)
-            .extent(vk::Extent3D {
-                width: w,
-                height: h,
-                depth: 1,
-            })
-            .mip_levels(mips)
-            .array_layers(layers)
-            .samples(vk::SampleCountFlags::from_raw(samples.max(1)))
-            .tiling(vk::ImageTiling::OPTIMAL)
-            .usage(usage)
-            .initial_layout(vk::ImageLayout::UNDEFINED);
-        // SAFETY: valid device/create info.
-        let image = unsafe { self.device.create_image(&ci, None)? };
-        // SAFETY: image just created.
-        let req = unsafe { self.device.get_image_memory_requirements(image) };
-        let mem = self.alloc.alloc(
-            &self.device,
-            &self.mem_props,
-            req,
-            vk::MemoryPropertyFlags::DEVICE_LOCAL,
-            false,
-        )?;
-        // SAFETY: memory satisfies requirements.
-        unsafe {
-            self.device
-                .bind_image_memory(image, mem.memory, mem.offset)?
-        };
-        let vci = vk::ImageViewCreateInfo::default()
-            .image(image)
-            .view_type(
-                if layers > 1 || usage.contains(vk::ImageUsageFlags::STORAGE) {
-                    vk::ImageViewType::TYPE_2D_ARRAY
-                } else {
-                    vk::ImageViewType::TYPE_2D
-                },
-            )
-            .format(format)
-            .subresource_range(range(aspect, mips, layers));
-        // SAFETY: image bound to memory.
-        let view = unsafe { self.device.create_image_view(&vci, None)? };
-        Ok(Image {
-            image,
-            view,
-            mem,
-            width: w,
-            height: h,
-            layers,
-            mips,
-        })
-    }
-
-    pub fn free_image(&mut self, i: Image) {
-        // SAFETY: caller guarantees the GPU no longer uses it.
-        unsafe {
-            self.device.destroy_image_view(i.view, None);
-            self.device.destroy_image(i.image, None);
-        }
-        self.alloc.free(&i.mem);
     }
 
     pub fn shader(&self, spv: &[u8]) -> Result<vk::ShaderModule> {

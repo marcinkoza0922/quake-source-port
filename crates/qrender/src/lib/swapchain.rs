@@ -116,7 +116,7 @@ impl Renderer {
         }
         self.width = extent.width;
         self.height = extent.height;
-        self.create_targets()?;
+        self.destroy_targets(); // (`prepare` makes the new ones)
         self.needs_resize = false;
         Ok(true)
     }

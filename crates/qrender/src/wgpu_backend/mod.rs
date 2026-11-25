@@ -341,7 +341,8 @@ impl Renderer {
 
     /// Call when the window drawable size changes.
     pub fn resize(&mut self, width: u32, height: u32) {
-        let (width, height) = (width.max(1), height.max(1));
+        let max = self.dev.limits().max_texture_dimension_2d;
+        let (width, height) = (width.clamp(1, max), height.clamp(1, max));
         if (width, height) != (self.width, self.height) {
             self.width = width;
             self.height = height;

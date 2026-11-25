@@ -138,7 +138,7 @@ fn ui_quads(r: &Renderer, fr: &RenderFrame) -> (Vec<UiV>, Vec<(u32, u32, u32)>) 
 impl Renderer {
     fn create_targets(&mut self) {
         let (w, h) = (self.width, self.height);
-        let scene = crate::projection::scene_extent((w, h), self.render_scale);
+        let scene = crate::projection::scene_extent_within((w, h), self.render_scale, self.dev.limits().max_texture_dimension_2d);
         let tex = |(width, height), samples, format, usage| {
             self.dev.create_texture(&wgpu::TextureDescriptor {
                 label: None,

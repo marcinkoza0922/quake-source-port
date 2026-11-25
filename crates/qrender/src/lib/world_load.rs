@@ -110,9 +110,37 @@ impl Renderer {
     /// replacement textures. Returns (world submodel ids `*1..`, one id per
     /// entry of `brushes`).
     pub fn load_level(&mut self, level: LevelBsp, brushes: &[LevelBsp]) -> Result<(Vec<ModelId>, Vec<ModelId>)> {
-        let bsp = level.bsp;
+        // Its memory goes to the new one. Menus and the console still draw
+        // with this one should the level not load.
+        let placeholder = self.all_or_nothing(|r| Self::make_lightmap(&mut r.gpu, 16, 1))?;
         self.free_level();
+        self.reduced_for = None;
         self.water_fx.reset();
+        if let Some(old) = self.lightmap.replace(placeholder) {
+            self.gpu.free_image(old);
+        }
+        self.write_static_descriptors();
+        let made = self.all_or_nothing(|r| r.new_level(level, brushes));
+        match made {
+            Ok((world, lightmap, brush_ids)) => {
+                let ids = world.submodel_ids.clone();
+                self.buckets = vec![Vec::new(); world.tex_info.len()];
+                if let Some(old) = self.lightmap.replace(lightmap) {
+                    self.gpu.free_image(old);
+                }
+                self.world = Some(world);
+                self.write_static_descriptors();
+                Ok((ids, brush_ids))
+            }
+            Err(e) => {
+                self.sky_layers = [NO_TEX; 2];
+                Err(e)
+            }
+        }
+    }
+
+    fn new_level(&mut self, level: LevelBsp, brushes: &[LevelBsp]) -> Result<(WorldGpu, Image, Vec<ModelId>)> {
+        let bsp = level.bsp;
         let mut cpu = world::World::build_ext(bsp, level.lit, level.hdr_lit, level.deluxe);
         let world_subs = cpu.submodels.len();
         let mut up = self.gpu.begin_upload()?;
@@ -196,31 +224,17 @@ impl Renderer {
             .collect();
         let has_brush_water = brush_has_water.iter().any(|&b| b);
         self.gpu.end_upload(up)?;
-        if let Some(old) = self.lightmap.take() {
-            self.gpu.free_image(old);
-        }
         let lm_layers = cpu.atlas_layers * if cpu.has_deluxe { 2 } else { 1 };
-        let made = if lm_layers > self.gpu.max_layers {
-            Err(Error::new(format!("{lm_layers} lightmap layers, the GPU has {}", self.gpu.max_layers)))
-        } else {
-            Self::make_lightmap(&mut self.gpu, world::ATLAS, lm_layers)
-        };
-        match made {
-            Ok(img) => self.lightmap = Some(img),
-            Err(e) => {
-                // no world, but menus and the console still draw
-                self.lightmap = Some(Self::make_lightmap(&mut self.gpu, world::ATLAS, 1)?);
-                self.write_static_descriptors();
-                return Err(e);
-            }
+        if lm_layers > self.gpu.max_layers {
+            return Err(Error::new(format!("{lm_layers} lightmap layers, the GPU has {}", self.gpu.max_layers)));
         }
+        let lightmap = Self::make_lightmap(&mut self.gpu, world::ATLAS, lm_layers)?;
         let mut ids = Vec::new();
         for i in 1..world_subs {
             self.models.push(Model::Brush(i as u32));
             ids.push(ModelId(self.models.len() as u32 - 1));
         }
-        self.buckets = vec![Vec::new(); tex_info.len()];
-        self.world = Some(WorldGpu {
+        let world = WorldGpu {
             portals: crate::portals::discover(bsp, &cpu),
             draw_surfaces: cpu.surfaces.iter().map(DrawSurface::from).collect(),
             cpu,
@@ -234,13 +248,12 @@ impl Renderer {
             water_marks,
             brush_has_water,
             has_brush_water,
-            submodel_ids: ids.clone(),
+            submodel_ids: ids,
             cull,
             scratch_bits: Vec::new(),
             scratch_cmds: Vec::new(),
-        });
-        self.write_static_descriptors();
-        Ok((ids, brush_ids))
+        };
+        Ok((world, lightmap, brush_ids))
     }
 
     /// Uploads cull.comp's static inputs. Draw commands are one per batch

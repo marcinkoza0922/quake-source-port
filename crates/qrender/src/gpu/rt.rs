@@ -96,7 +96,14 @@ impl Gpu {
             .size(size)
             .ty(ty);
         // SAFETY: buffer bound to memory and big enough.
-        let handle = unsafe { rt.accel.create_acceleration_structure(&ci, None)? };
+        let handle = match unsafe { rt.accel.create_acceleration_structure(&ci, None) } {
+            Ok(h) => h,
+            Err(e) => {
+                self.free_buffer(buf);
+                return Err(e.into());
+            }
+        };
+        self.journal.add(Made::Accel(handle));
         // SAFETY: handle just created.
         let addr = unsafe {
             rt.accel.get_acceleration_structure_device_address(
@@ -108,6 +115,7 @@ impl Gpu {
 
     /// Frees a structure the GPU no longer uses.
     pub fn free_accel(&mut self, a: Accel) {
+        self.journal.forget_accel(a.handle);
         if let Some(rt) = &self.rt {
             // SAFETY: caller guarantees the GPU is done with it.
             unsafe { rt.accel.destroy_acceleration_structure(a.handle, None) };

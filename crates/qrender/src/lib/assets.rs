@@ -22,13 +22,15 @@ impl Renderer {
             }
         }
         let Some(faces) = faces else { return Ok(()) };
-        let mut up = self.gpu.begin_upload()?;
-        let mut slots = [NO_TEX; 6];
-        for (i, f) in faces.iter().enumerate() {
-            slots[i] = self.add_texture(&mut up, f.width, f.height, &[&f.pixels], TexUse::Sky, Sampling::Clamp)?;
-        }
-        self.gpu.end_upload(up)?;
-        self.skybox = Some(slots);
+        self.skybox = Some(self.all_or_nothing(|r| {
+            let mut up = r.gpu.begin_upload()?;
+            let mut slots = [NO_TEX; 6];
+            for (slot, f) in slots.iter_mut().zip(faces) {
+                *slot = r.add_texture(&mut up, f.width, f.height, &[&f.pixels], TexUse::Sky, Sampling::Clamp)?;
+            }
+            r.gpu.end_upload(up)?;
+            Ok(slots)
+        })?);
         Ok(())
     }
 
@@ -70,8 +72,8 @@ impl Renderer {
                 )?;
                 self.gpu
                     .upload_buffer(&mut up, nb.buf, 0, bytes_of(&self.alias_cpu))?;
-                let old = std::mem::replace(&mut self.alias_buf, nb);
                 self.gpu.end_upload(up)?;
+                let old = std::mem::replace(&mut self.alias_buf, nb);
                 self.gpu.free_buffer(old);
                 self.write_static_descriptors();
                 return Ok((vbuf, ibuf, base));
@@ -95,6 +97,10 @@ impl Renderer {
     /// so add-on models can glow in colours Quake's palette lacks (green).
     pub fn load_alias_glow(&mut self, mdl: &Mdl, glow: &[Vec<u8>]) -> Result<ModelId> {
         self.idle();
+        self.all_or_nothing(|r| r.new_alias(mdl, glow))
+    }
+
+    fn new_alias(&mut self, mdl: &Mdl, glow: &[Vec<u8>]) -> Result<ModelId> {
         let (verts, idx) = convert::alias_mesh(mdl);
         let (poses, frames) = convert::alias_poses(mdl);
         let holey = mdl.flags & qformats::mdl::MF_HOLEY != 0;
@@ -184,6 +190,10 @@ impl Renderer {
     /// Loads a sprite (SPR v1 palette or SPR32).
     pub fn load_sprite(&mut self, spr: &Spr) -> Result<ModelId> {
         self.idle();
+        self.all_or_nothing(|r| r.new_sprite(spr))
+    }
+
+    fn new_sprite(&mut self, spr: &Spr) -> Result<ModelId> {
         let mut up = self.gpu.begin_upload()?;
         let pal = self.palette;
         let mut frames = Vec::new();
@@ -235,6 +245,10 @@ impl Renderer {
 
     pub(super) fn register_pic_sampled(&mut self, width: u32, height: u32, rgba: &[u8], sampling: Sampling) -> Result<PicId> {
         self.idle();
+        self.all_or_nothing(|r| r.new_pic(width, height, rgba, sampling))
+    }
+
+    fn new_pic(&mut self, width: u32, height: u32, rgba: &[u8], sampling: Sampling) -> Result<PicId> {
         let mut up = self.gpu.begin_upload()?;
         let slot = self.add_texture(&mut up, width, height, &[rgba], TexUse::Pic, sampling)?;
         self.gpu.end_upload(up)?;
@@ -333,7 +347,18 @@ impl Renderer {
             }
         }
         let usage = vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST;
-        let img = match self.gpu.image(width, height, 1, 1, vk::Format::R8G8B8A8_UNORM, usage, vk::ImageAspectFlags::COLOR) {
+        let made = self.all_or_nothing(|r| {
+            let img = r.gpu.image(width, height, 1, 1, vk::Format::R8G8B8A8_UNORM, usage, vk::ImageAspectFlags::COLOR)?;
+            let mut up = r.gpu.begin_upload()?;
+            if rows >= height {
+                r.gpu.upload_image(&mut up, &img, &[rgba])?;
+            } else {
+                r.gpu.upload_image_rows(&mut up, &img, rgba, rows)?;
+            }
+            r.gpu.end_upload(up)?;
+            Ok(img)
+        });
+        let img = match made {
             Ok(img) => img,
             Err(e) => {
                 if let Some(t) = self.textures[slot as usize].as_mut() {
@@ -343,13 +368,10 @@ impl Renderer {
             }
         };
         self.write_texture_descriptor(slot, img.view, self.sampler_for(sampling));
-        let mut up = self.gpu.begin_upload()?;
-        let r = if rows >= height { self.gpu.upload_image(&mut up, &img, &[rgba]) } else { self.gpu.upload_image_rows(&mut up, &img, rgba, rows) };
-        let r = r.and_then(|_| self.gpu.end_upload(up));
         self.textures[slot as usize] = Some(Tex { image: Some(img), level: false, sampling });
         if let Some(img) = old {
             self.gpu.free_image(img);
         }
-        r
+        Ok(())
     }
 }

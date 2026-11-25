@@ -47,6 +47,9 @@ mod targets;
 #[path = "lib/swapchain.rs"]
 mod swapchain;
 #[cfg(qvk)]
+#[path = "lib/recover.rs"]
+mod recover;
+#[cfg(qvk)]
 #[path = "lib/assets.rs"]
 mod assets;
 #[cfg(qvk)]
@@ -77,6 +80,9 @@ use timing::{GpuTimes, GPU_STAGES};
 #[cfg(all(test, qvk))]
 #[path = "lib/frame_tests.rs"]
 mod frame_tests;
+#[cfg(all(test, qvk))]
+#[path = "lib/recover_tests.rs"]
+mod recover_tests;
 #[cfg(qvk)]
 #[path = "lib/resources.rs"]
 mod resources;

@@ -56,12 +56,18 @@ impl Renderer {
         }
     }
 
+    /// (Re)creates the scene targets; there are none after an error.
     pub(super) fn create_targets(&mut self) -> Result<()> {
         self.idle();
         self.destroy_targets();
+        self.targets = Some(self.all_or_nothing(Self::new_targets)?);
+        Ok(())
+    }
+
+    fn new_targets(&mut self) -> Result<Targets> {
         let (w, h) = (self.width.max(1), self.height.max(1));
         let scale = self.render_scale;
-        let (sw, shh) = crate::projection::scene_extent((w, h), scale);
+        let (sw, shh) = crate::projection::scene_extent_within((w, h), scale, self.gpu.max_texture);
         let color = self.gpu.image(
             sw,
             shh,
@@ -227,7 +233,7 @@ impl Renderer {
         } else {
             None
         };
-        self.targets = Some(Targets {
+        Ok(Targets {
             portals,
             portal_depth,
             portal_w,
@@ -252,8 +258,7 @@ impl Renderer {
             vel_slot,
             bloom,
             out,
-        });
-        Ok(())
+        })
     }
 
     /// Reduced-resolution bloom depth target and blur chain, from half
@@ -290,6 +295,10 @@ impl Renderer {
             return Ok(());
         }
         self.idle();
+        self.all_or_nothing(Self::new_ao_source)
+    }
+
+    fn new_ao_source(&mut self) -> Result<()> {
         let (ao_w, ao_h) = {
             let t = self.targets.as_ref().unwrap();
             (t.ao_w, t.ao_h)
@@ -311,8 +320,7 @@ impl Renderer {
                 .view_type(vk::ImageViewType::TYPE_2D)
                 .format(pipelines::AO_SOURCE_FORMAT)
                 .subresource_range(gpu::range_mip(vk::ImageAspectFlags::COLOR, m, 1, 1));
-            // SAFETY: valid image and mip level `m < mips`.
-            mip_views.push(unsafe { self.gpu.device.create_image_view(&vci, None)? });
+            mip_views.push(self.gpu.image_view(&vci)?);
         }
         let slot = self.alloc_slot()?;
         self.write_texture_descriptor(slot, img.view, self.sampler_clamp);
@@ -328,6 +336,10 @@ impl Renderer {
             return Ok(());
         }
         self.idle();
+        self.all_or_nothing(Self::new_droplets)
+    }
+
+    fn new_droplets(&mut self) -> Result<()> {
         let dw = (self.width / 2).clamp(1, 960);
         let dh = (self.height / 2).clamp(1, 540);
         let img = self.gpu.image(
@@ -353,6 +365,10 @@ impl Renderer {
             return Ok(());
         }
         self.idle();
+        self.all_or_nothing(Self::new_rt_refl)
+    }
+
+    fn new_rt_refl(&mut self) -> Result<()> {
         let (sw, sh, need_depth) = {
             let t = self.targets.as_ref().unwrap();
             (t.scene_w.min(self.width.max(1)), t.scene_h.min(self.height.max(1)), t.half_depth.is_none())
@@ -368,8 +384,8 @@ impl Renderer {
             vk::ImageUsageFlags::COLOR_ATTACHMENT | vk::ImageUsageFlags::SAMPLED,
             vk::ImageAspectFlags::COLOR,
         )?;
-        if need_depth {
-            let depth = self.gpu.image(
+        let depth = if need_depth {
+            Some(self.gpu.image(
                 rw,
                 rh,
                 1,
@@ -377,13 +393,18 @@ impl Renderer {
                 DEPTH_FORMAT,
                 vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
                 vk::ImageAspectFlags::DEPTH,
-            )?;
-            self.targets.as_mut().unwrap().half_depth = Some(depth);
-        }
+            )?)
+        } else {
+            None
+        };
         let slot = self.alloc_slot()?;
         self.write_texture_descriptor(slot, color.view, self.sampler_linear);
         self.textures[slot as usize] = Some(Tex { image: None, level: false, sampling: Sampling::Linear });
-        self.targets.as_mut().unwrap().rt_refl = Some(RtReflTargets { color, slot, width: rw, height: rh });
+        let t = self.targets.as_mut().unwrap();
+        t.rt_refl = Some(RtReflTargets { color, slot, width: rw, height: rh });
+        if depth.is_some() {
+            t.half_depth = depth;
+        }
         Ok(())
     }
 }
