@@ -8,6 +8,7 @@ impl Gpu {
             .command_buffer_count(1);
         // SAFETY: valid pool.
         let cmd = unsafe { self.device.allocate_command_buffers(&ai)? }[0];
+        self.journal.add(Made::Cmd(cmd));
         let bi = vk::CommandBufferBeginInfo::default()
             .flags(vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT);
         // SAFETY: fresh command buffer.
@@ -28,11 +29,18 @@ impl Gpu {
             let fence = self
                 .device
                 .create_fence(&vk::FenceCreateInfo::default(), None)?;
-            self.device.queue_submit(self.queue, &si, fence)?;
-            self.device.wait_for_fences(&[fence], true, u64::MAX)?;
+            let done = self
+                .device
+                .queue_submit(self.queue, &si, fence)
+                .and_then(|()| self.device.wait_for_fences(&[fence], true, u64::MAX));
+            if done.is_err() {
+                let _ = self.device.device_wait_idle();
+            }
             self.device.destroy_fence(fence, None);
+            done?;
             self.device.free_command_buffers(self.upload_pool, &cmds);
         }
+        self.journal.forget_cmd(up.cmd);
         for b in up.staging {
             self.free_buffer(b);
         }

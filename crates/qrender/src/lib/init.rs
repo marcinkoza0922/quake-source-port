@@ -200,6 +200,8 @@ impl Renderer {
             ui_ranges: Vec::new(),
             needs_resize: false,
             minimised: false,
+            reduced_for: None,
+            notice: None,
             frame_open: false,
             frame_count: 0,
             capture_requested: false,

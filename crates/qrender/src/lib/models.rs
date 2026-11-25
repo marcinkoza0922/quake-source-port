@@ -36,6 +36,10 @@ impl Renderer {
     /// Loads an MD3 model with pre-decoded per-surface skins.
     pub fn load_md3(&mut self, md3: &Md3, surface_skins: &[Md3SurfaceSkins]) -> Result<ModelId> {
         self.idle();
+        self.all_or_nothing(|r| r.new_md3(md3, surface_skins))
+    }
+
+    fn new_md3(&mut self, md3: &Md3, surface_skins: &[Md3SurfaceSkins]) -> Result<ModelId> {
         let num_frames = md3.frames.len();
         let mut all_verts = Vec::new();
         let mut all_idx = Vec::new();
@@ -111,6 +115,10 @@ impl Renderer {
     /// Loads an IQM v2 skeletal model with GPU matrix-palette skinning.
     pub fn load_iqm(&mut self, iqm: &qformats::Iqm, surface_skins: &[Md3SurfaceSkins]) -> Result<ModelId> {
         self.idle();
+        self.all_or_nothing(|r| r.new_iqm(iqm, surface_skins))
+    }
+
+    fn new_iqm(&mut self, iqm: &qformats::Iqm, surface_skins: &[Md3SurfaceSkins]) -> Result<ModelId> {
         let num_frames = iqm.num_frames_effective();
         let num_bones = iqm.num_bones();
         let matrices = iqm.compute_frame_matrices();

@@ -2,8 +2,15 @@
 use crate::View;
 
 pub(crate) fn scene_extent(output: (u32, u32), scale: f32) -> (u32, u32) {
-    let scale = scale.clamp(0.25, 2.0);
-    let dim = |n: u32| ((n.max(1) as f32 * scale).round() as u32).clamp(1, 16384);
+    scene_extent_within(output, scale, 16384)
+}
+
+/// [`scene_extent`] on a GPU with images up to `max`; keeps the aspect.
+pub(crate) fn scene_extent_within(output: (u32, u32), scale: f32, max: u32) -> (u32, u32) {
+    let max = max.clamp(1, 16384);
+    let fits = max as f32 / output.0.max(output.1).max(1) as f32;
+    let scale = scale.clamp(0.25, 2.0).min(fits);
+    let dim = |n: u32| ((n.max(1) as f32 * scale).round() as u32).clamp(1, max);
     (dim(output.0), dim(output.1))
 }
 
@@ -101,6 +108,8 @@ mod tests {
             }
         }
         assert_eq!(scene_extent((0, 0), 0.0), (1, 1));
+        assert_eq!(scene_extent_within((5120, 1440), 2.0, 8192), (8192, 2304), "fits, same aspect");
+        assert_eq!(scene_extent_within((1280, 720), 2.0, 8192), (2560, 1440));
     }
 
     #[test]

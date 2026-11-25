@@ -1,7 +1,7 @@
 use super::*;
 
 /// Sub-allocation from a [`Block`].
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Mem {
     pub memory: vk::DeviceMemory,
     pub offset: u64,
@@ -79,9 +79,14 @@ impl Allocator {
         let memory = unsafe { dev.allocate_memory(&info, None)? };
         let ptr = if host {
             // SAFETY: memory is host visible and not mapped yet.
-            let p =
-                unsafe { dev.map_memory(memory, 0, vk::WHOLE_SIZE, vk::MemoryMapFlags::empty())? };
-            p as *mut u8
+            match unsafe { dev.map_memory(memory, 0, vk::WHOLE_SIZE, vk::MemoryMapFlags::empty()) } {
+                Ok(p) => p as *mut u8,
+                Err(e) => {
+                    // SAFETY: just allocated, never used.
+                    unsafe { dev.free_memory(memory, None) };
+                    return Err(e.into());
+                }
+            }
         } else {
             std::ptr::null_mut()
         };
@@ -123,6 +128,13 @@ impl Allocator {
             b.free[i - 1].1 += b.free[i].1;
             b.free.remove(i);
         }
+    }
+
+    /// Bytes handed out.
+    #[cfg(test)]
+    pub fn used(&self) -> u64 {
+        let blocks = self.pools.values().flatten();
+        blocks.map(|b| b.size - b.free.iter().map(|f| f.1).sum::<u64>()).sum()
     }
 
     pub(super) fn destroy(&mut self, dev: &ash::Device) {

@@ -549,7 +549,7 @@ impl Host {
                 texture_mode: qrender::parse_texture_mode(self.cvs("gl_texturemode")),
                 lod_bias: {
                     let s = self.cvs("gl_lodbias");
-                    if s.eq_ignore_ascii_case("auto") { None } else { s.trim().parse().ok() }
+                    if s.eq_ignore_ascii_case("auto") { None } else { s.trim().parse().ok().filter(|b: &f32| b.is_finite()) }
                 },
                 supersample: v("vid_fsaamode") != 0.0,
                 dither: v("r_dither").max(0.0),

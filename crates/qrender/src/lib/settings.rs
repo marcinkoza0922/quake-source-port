@@ -27,20 +27,21 @@ impl Renderer {
         let scale = st.render_scale.clamp(0.25, 2.0);
         let supersample = st.supersample && self.gpu.sample_shading;
         let fte_supersample = supersample && st.soft_particle_quality > 0;
-        let samples_changed = msaa != self.msaa || supersample != self.pipes.supersample
+        // (no pipelines: the last build failed)
+        let samples_changed = msaa != self.msaa || self.pipes.samples != msaa || supersample != self.pipes.supersample
             || fte_supersample != self.pipes.fte_supersample;
         let first_wireframe = st.mapper.wire != 0 && self.gpu.wireframe && !self.pipes.wire_enabled;
         if samples_changed || first_wireframe {
             self.idle();
             self.pipes.wire_enabled |= first_wireframe;
-            self.msaa = msaa;
             self.pipes.supersample = supersample;
             self.pipes.fte_supersample = fte_supersample;
             let fmt = self.pipes.post_format;
-            self.pipes.build(&self.gpu, fmt, msaa)?;
             if samples_changed {
                 self.destroy_targets();
             }
+            self.pipes.build(&self.gpu, fmt, msaa)?;
+            self.msaa = msaa;
         }
         if scale != self.render_scale {
             self.render_scale = scale;
@@ -85,7 +86,8 @@ impl Renderer {
             aniso = aniso.max(8.0);
         }
         let aniso = aniso.clamp(1.0, self.gpu.max_anisotropy);
-        let bias = st.lod_bias.unwrap_or(if supersample && msaa > 1 { -(msaa as f32).log2() / 2.0 } else { 0.0 });
+        let bias = st.lod_bias.filter(|b| b.is_finite()).unwrap_or(if supersample && msaa > 1 { -(msaa as f32).log2() / 2.0 } else { 0.0 });
+        let bias = bias.clamp(-self.gpu.max_lod_bias, self.gpu.max_lod_bias);
         let filter = (mode, aniso, bias);
         if filter != self.world_filter {
             self.idle();

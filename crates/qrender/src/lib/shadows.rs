@@ -21,6 +21,11 @@ impl Renderer {
     pub(super) fn create_shadow_maps(&mut self, lights: usize, size: u32) -> Result<()> {
         self.idle();
         self.destroy_shadow_maps();
+        self.shadow_maps = Some(self.all_or_nothing(|r| r.new_shadow_maps(lights, size))?);
+        Ok(())
+    }
+
+    fn new_shadow_maps(&mut self, lights: usize, size: u32) -> Result<ShadowMaps> {
         let n = (lights.max(1) * 6) as u32;
         let image = self.gpu.image(
             size,
@@ -44,8 +49,7 @@ impl Renderer {
                     base_array_layer: l,
                     layer_count: 1,
                 });
-            // SAFETY: image bound to memory; valid create info.
-            layers.push(unsafe { self.gpu.device.create_image_view(&vci, None)? });
+            layers.push(self.gpu.image_view(&vci)?);
         }
         let info = [vk::DescriptorImageInfo {
             sampler: self.sampler_shadow,
@@ -61,8 +65,7 @@ impl Renderer {
             // SAFETY: device idle; handles valid.
             unsafe { self.gpu.device.update_descriptor_sets(&w, &[]) };
         }
-        self.shadow_maps = Some(ShadowMaps { image, layers, size, lights });
-        Ok(())
+        Ok(ShadowMaps { image, layers, size, lights })
     }
 
     pub(super) fn destroy_shadow_maps(&mut self) {

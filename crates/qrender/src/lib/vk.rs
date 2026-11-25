@@ -98,6 +98,10 @@ pub struct Renderer {
     needs_resize: bool,
     /// The window has no area to present to; `needs_resize` stays set.
     minimised: bool,
+    /// Settings that didn't fit in memory: drawn with `recover::reduced`.
+    reduced_for: Option<recover::MemoryKey>,
+    /// Told by the next `render` once its frame is drawn.
+    notice: Option<Error>,
     /// Image acquired and fence reset, not submitted yet (`render`).
     frame_open: bool,
     frame_count: u64,

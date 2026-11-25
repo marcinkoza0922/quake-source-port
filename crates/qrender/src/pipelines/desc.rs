@@ -150,11 +150,13 @@ pub(super) fn graphics(gpu: &Gpu, layout: vk::PipelineLayout, d: &Desc) -> Resul
         .dynamic_state(&dy)
         .layout(layout)
         .push_next(&mut ri)];
+    gpu.journal.injected()?;
     // SAFETY: all referenced state lives until the call returns.
     let p = unsafe {
         gpu.device
             .create_graphics_pipelines(vk::PipelineCache::null(), &ci, None)
     }
     .map_err(|(_, e)| e)?;
+    gpu.journal.pipelines.borrow_mut().push(p[0]);
     Ok(p[0])
 }

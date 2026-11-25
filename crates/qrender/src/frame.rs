@@ -41,7 +41,7 @@ impl Renderer {
         if std::mem::take(&mut self.frame_open) {
             self.abandon_frame();
         }
-        r
+        r.and(self.notice.take().map_or(Ok(()), Err))
     }
 
     /// The frame's fence was reset and its image acquired, but nothing was
@@ -74,37 +74,12 @@ impl Renderer {
                 return Ok(());
             }
         }
-        self.apply_settings(&fr.settings)?;
-        // r_water_reflections: 1 planar (portal views), 2 ray traced
-        let refl_mode = self.reflection_mode(&fr.settings);
-        let rt_enabled = refl_mode == 2 && fr.settings.goggles.mode != 2 && (fr.view.is_some() || !fr.splits.is_empty());
-        if rt_enabled {
-            self.ensure_rt()?;
-        }
-        self.gun_targets |= fr.gun_portals.iter().any(|g| g.live && g.exit.is_some()) || refl_mode == 1;
-        if self.targets.as_ref().is_some_and(|t| t.portals.is_empty())
-            && (self.gun_targets || self.world.as_ref().is_some_and(|w| !w.portals.is_empty()))
-        {
-            self.create_targets()?;
-        }
-        if self.targets.is_none() && (self.swap.is_some() || self.width > 0) {
-            self.create_targets()?;
-        }
         if self.width == 0 || self.height == 0 {
             return Ok(());
         }
-        if rt_enabled {
-            self.ensure_rt_refl()?;
-        }
-        if fr.settings.ssao > 0.0 && (fr.view.is_some() || !fr.splits.is_empty()) {
-            self.ensure_ao_source()?;
-        }
-        let droplets_active = fr.view.is_some_and(|v| v.water_screen.drops_age() >= 0.0)
-            || fr.splits.iter().any(|s| s.view.water_screen.drops_age() >= 0.0);
-        if droplets_active {
-            self.ensure_droplets()?;
-        }
-        self.prepare_shader(fr.settings.shader_scale != 0)?;
+        let fr = &self.prepare(fr)?;
+        let rt_enabled = self.ray_traced(fr);
+        let refl_mode = self.reflection_mode(&fr.settings);
         let dev = self.gpu.device.clone();
         let fi = self.cur;
         let (fence, acquire, cmd) = (
