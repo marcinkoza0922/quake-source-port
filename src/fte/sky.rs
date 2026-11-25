@@ -15,9 +15,12 @@ pub(super) fn sky_tris(bsp: &Bsp, reg: &mut Registry, f: &mut dyn qpart::FileSou
             let Some((v, rest)) = qcore::cmd::com_parse(rest) else { break };
             s = rest;
             let key = k.strip_prefix('_').unwrap_or(k).trim_end();
-            if key.len() > 8 && key[..8].eq_ignore_ascii_case("texpart_") {
+            if let Some((pre, texname)) = key.split_at_checked(8)
+                && !texname.is_empty()
+                && pre.eq_ignore_ascii_case("texpart_")
+            {
                 for (t, tex) in bsp.textures.iter().enumerate() {
-                    if tex.as_ref().is_some_and(|m| m.name.eq_ignore_ascii_case(&key[8..]))
+                    if tex.as_ref().is_some_and(|m| m.name.eq_ignore_ascii_case(texname))
                         && let Some(ty) = reg.find(v, f)
                     {
                         remap.insert(t, ty);

@@ -118,9 +118,8 @@ pub(crate) fn discover(bsp: &Bsp, world: &world::World) -> Vec<Portal> {
         let Some(wm) = world.submodels.first() else {
             continue;
         };
-        for s in &world.surfaces
-            [wm.first_surface as usize..(wm.first_surface + wm.num_surfaces) as usize]
-        {
+        let first = wm.first_surface as usize;
+        for s in world.surfaces.get(first..first + wm.num_surfaces as usize).unwrap_or_default() {
             let Some(Some(tex)) = bsp.textures.get(s.texture as usize) else {
                 continue;
             };

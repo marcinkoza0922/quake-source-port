@@ -29,6 +29,9 @@ const IQM_DOUBLE: u32 = 8;
 
 pub const IQM_LOOP: u32 = 1;
 
+/// Bone matrices of all frames together (MD5 too).
+pub(crate) const MAX_POSE_BONES: usize = 1 << 22;
+
 #[derive(Debug, Clone)]
 pub struct IqmMesh {
     pub name: String,
@@ -445,6 +448,11 @@ impl Iqm {
                 framerate: ar.f32()?,
                 flags: ar.u32()?,
             });
+        }
+
+        // animations without channels need no frame data, so check the frames
+        if (num_frames as usize).saturating_mul(num_joints.max(num_poses).max(1)) > MAX_POSE_BONES {
+            return Err(Error::new(FMT, "too many joints for its frames"));
         }
 
         // Frame data (num_frames * num_framechannels * 2 bytes)

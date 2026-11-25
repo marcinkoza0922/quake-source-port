@@ -67,6 +67,20 @@ pub(super) fn check(l: &Lumps) -> Result<()> {
     Ok(())
 }
 
+/// An empty range may start anywhere in the file, but slices at it panic: put
+/// them all at 0.
+pub(super) fn clear_empty(nodes: &mut [Node], leafs: &mut [Leaf], models: &mut [Model]) {
+    for n in nodes.iter_mut().filter(|n| n.num_faces == 0) {
+        n.first_face = 0;
+    }
+    for l in leafs.iter_mut().filter(|l| l.num_marksurfaces == 0) {
+        l.first_marksurface = 0;
+    }
+    for m in models.iter_mut().filter(|m| m.num_faces <= 0) {
+        (m.first_face, m.num_faces) = (0, 0);
+    }
+}
+
 /// Released maps have the odd bad edge (`zer1m2`, `zerend`), so these are
 /// pointed at vertex 0 instead of failing the map.
 pub(super) fn repair_edges(edges: &mut [[u32; 2]], vertexes: &[Vec3]) -> Result<()> {
@@ -89,6 +103,19 @@ mod tests {
         Leaf { contents: -1, visofs: -1, mins: [0.0; 3], maxs: [0.0; 3], first_marksurface: 0, num_marksurfaces: 1, ambient_level: [0; 4] };
     const MODEL: Model =
         Model { mins: [0.0; 3], maxs: [0.0; 3], origin: [0.0; 3], headnode: [0; 4], visleafs: 1, first_face: 0, num_faces: 1 };
+
+    #[test]
+    fn empty_ranges_start_at_zero() {
+        let (mut n, mut l, mut m) = ([NODE; 2], [LEAF; 2], [MODEL; 3]);
+        (n[0].first_face, n[0].num_faces) = (99, 0);
+        (l[0].first_marksurface, l[0].num_marksurfaces) = (99, 0);
+        (m[0].first_face, m[0].num_faces) = (99, 0);
+        (m[1].first_face, m[1].num_faces) = (-5, -1);
+        m[2].first_face = 7;
+        clear_empty(&mut n, &mut l, &mut m);
+        assert_eq!((n[0].first_face, l[0].first_marksurface), (0, 0));
+        assert_eq!((m[0].first_face, m[1].first_face, m[1].num_faces, m[2].first_face), (0, 0, 0, 7));
+    }
 
     /// Checks a one-face map after `f` changed its records.
     fn map(f: impl Fn(&mut Node, &mut Leaf, &mut Face, &mut Model, &mut Vec<u32>, &mut Vec<i32>)) -> bool {

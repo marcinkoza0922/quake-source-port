@@ -102,6 +102,10 @@ impl GelFx {
                 self.dirty = true;
             }
             ("b", &[o, k, x, y, z, vx, vy, vz]) => {
+                // any server or demo can send this
+                if !(0.0..256.0).contains(&o) {
+                    return;
+                }
                 let o = o as usize;
                 if self.spraying.len() <= o {
                     self.spraying.resize(o + 1, -1.0);
@@ -362,6 +366,16 @@ mod tests {
             assert!((0..TILE).all(|k| at(k, 0) == 0 && at(0, k) == 0), "tile {tile} edge");
             assert!(at(TILE / 2, TILE / 2) > 200);
         }
+    }
+
+    /// Any server or demo can send these.
+    #[test]
+    fn blob_owners_are_bounded() {
+        let mut g = GelFx::default();
+        for o in ["1e30", "1e15", "256", "-1", "inf", "NaN", "0", "255"] {
+            g.receive(&format!("b {o} 0 0 0 0 0 0 0"), 0.0, None);
+        }
+        assert_eq!(g.spraying.len(), 256);
     }
 
     #[test]

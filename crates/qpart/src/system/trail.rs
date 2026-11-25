@@ -1,5 +1,9 @@
 use super::*;
 
+/// Longest chain of `assoc` trails; `inwater` and retinted effects can make it
+/// a cycle.
+const MAX_ASSOC: usize = 64;
+
 impl System {
     /// PScript_ParticleTrail: spawns a trail between two points.
     /// `dlkey` keys any dynamic light (usually the entity number).
@@ -15,6 +19,22 @@ impl System {
         dlkey: i32,
         tsk: Option<&mut Option<TrailHandle>>,
     ) -> bool {
+        self.trail_at(reg, world, start, end, ty, timeinterval, dlkey, tsk, 0)
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    fn trail_at(
+        &mut self,
+        reg: &Registry,
+        world: &dyn World,
+        start: Vec3,
+        end: Vec3,
+        ty: TypeId,
+        timeinterval: f32,
+        dlkey: i32,
+        tsk: Option<&mut Option<TrailHandle>>,
+        depth: usize,
+    ) -> bool {
         let Some(t) = reg.types.get(ty) else { return false };
         if !t.is_loaded() {
             return false;
@@ -28,7 +48,7 @@ impl System {
         {
             ty = iw;
         }
-        self.trail_spawn(reg, world, start, end, ty, timeinterval, dlkey, tsk, 0);
+        self.trail_spawn(reg, world, start, end, ty, timeinterval, dlkey, tsk, depth);
         true
     }
 
@@ -52,16 +72,16 @@ impl System {
         self.effect_spawned(t, start0, dlkey);
 
         if let Some(a) = t.assoc
-            && depth < reg.types.len()
+            && depth < MAX_ASSOC
         {
             match ts {
                 Some(cur) => {
                     let mut slot = self.trails[cur].assoc;
-                    self.trail(reg, world, start0, end, a, timeinterval, dlkey, Some(&mut slot));
+                    self.trail_at(reg, world, start0, end, a, timeinterval, dlkey, Some(&mut slot), depth + 1);
                     self.trails[cur].assoc = slot;
                 }
                 None => {
-                    self.trail(reg, world, start0, end, a, timeinterval, dlkey, None);
+                    self.trail_at(reg, world, start0, end, a, timeinterval, dlkey, None, depth + 1);
                 }
             }
         }

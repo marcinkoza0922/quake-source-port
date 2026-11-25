@@ -36,6 +36,16 @@ impl TexUse {
     }
 }
 
+/// Whether every level of the RGBA chain has its pixels. An image file may
+/// claim any size, also 0 wide, and the copy reads what the size says.
+pub(crate) fn complete(w: u32, h: u32, mips: &[&[u8]]) -> bool {
+    let len = |l: usize| (w as usize >> l).max(1) * (h as usize >> l).max(1) * 4;
+    w > 0 && h > 0 && !mips.is_empty() && mips.len() <= 32 && mips.iter().enumerate().all(|(l, m)| m.len() >= len(l))
+}
+
+/// Stands in for an image that isn't [`complete`]: one clear texel.
+pub(crate) const EMPTY: (u32, u32, &[&[u8]]) = (1, 1, &[&[0; 4]]);
+
 /// Size and mip levels of a texture that fits its limit.
 pub(crate) type Fitted<'a> = (u32, u32, Vec<Cow<'a, [u8]>>);
 
@@ -162,5 +172,19 @@ mod tests {
         assert_eq!(TexUse::Base.limit(8192, 4096), 4096);
         assert_eq!(TexUse::Pic.limit(256, 4096), 4096);
         assert_eq!(TexUse::Sprite.limit(256, 4096), 4096);
+    }
+}
+
+#[cfg(test)]
+mod complete_tests {
+    use super::*;
+
+    #[test]
+    fn sizes_need_their_pixels() {
+        assert!(complete(2, 2, &[&[0; 16], &[0; 4]]));
+        for (w, h, m) in [(0, 8, &[&[][..]][..]), (8, 0, &[&[]]), (0, 65535, &[&[]]), (2, 2, &[]), (2, 2, &[&[0; 15]]), (2, 2, &[&[0; 16], &[0; 3]])] {
+            assert!(!complete(w, h, m), "{w}x{h}");
+        }
+        assert!(complete(EMPTY.0, EMPTY.1, EMPTY.2));
     }
 }

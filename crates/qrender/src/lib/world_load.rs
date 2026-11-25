@@ -200,11 +200,20 @@ impl Renderer {
             self.gpu.free_image(old);
         }
         let lm_layers = cpu.atlas_layers * if cpu.has_deluxe { 2 } else { 1 };
-        self.lightmap = Some(Self::make_lightmap(
-            &mut self.gpu,
-            world::ATLAS,
-            lm_layers,
-        )?);
+        let made = if lm_layers > self.gpu.max_layers {
+            Err(Error::new(format!("{lm_layers} lightmap layers, the GPU has {}", self.gpu.max_layers)))
+        } else {
+            Self::make_lightmap(&mut self.gpu, world::ATLAS, lm_layers)
+        };
+        match made {
+            Ok(img) => self.lightmap = Some(img),
+            Err(e) => {
+                // no world, but menus and the console still draw
+                self.lightmap = Some(Self::make_lightmap(&mut self.gpu, world::ATLAS, 1)?);
+                self.write_static_descriptors();
+                return Err(e);
+            }
+        }
         let mut ids = Vec::new();
         for i in 1..world_subs {
             self.models.push(Model::Brush(i as u32));

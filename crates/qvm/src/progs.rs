@@ -100,6 +100,9 @@ pub struct Progs {
     func_map: HashMap<Vec<u8>, usize>,
 }
 
+/// OFS_NULL, the return value and eight parms.
+const MIN_GLOBALS: usize = 28;
+
 /// CRC-CCITT as in crc.c (init 0xffff, poly 0x1021, no final xor).
 pub fn crc_block(data: &[u8]) -> u16 {
     let mut crc: u16 = 0xffff;
@@ -215,6 +218,11 @@ impl Progs {
         };
         p.validate()?;
         p.merge_engine_fields();
+        // The engine finds fields and globals by name and reads what it expects
+        // there: three floats for a vector (a hostile progs may declare it a
+        // float in the last slot), sixteen parms, every OFS_PARM.
+        p.entityfields += 2;
+        p.globals.resize(p.globals.len().max(MIN_GLOBALS) + 15, 0);
         for (i, d) in p.fielddefs.iter().enumerate() {
             p.field_map.entry(cstr(&p.strings, d.name).to_vec()).or_insert(i);
         }

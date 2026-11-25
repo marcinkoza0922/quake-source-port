@@ -96,6 +96,8 @@ pub struct Renderer {
     ui_verts: Vec<frame::UiVert>,
     ui_ranges: Vec<(Option<[f32; 4]>, u32, u32)>,
     needs_resize: bool,
+    /// Image acquired and fence reset, not submitted yet (`render`).
+    frame_open: bool,
     frame_count: u64,
     /// Windowed screenshot: copy the next presented image to a buffer.
     capture_requested: bool,
@@ -172,6 +174,7 @@ impl Renderer {
         usage: TexUse,
         sampling: Sampling,
     ) -> Result<u32> {
+        let (w, h, mips) = if convert::complete(w, h, mips) { (w, h, mips) } else { convert::EMPTY };
         let fitted = convert::fit(w, h, mips, usage.limit(self.max_texture_size, self.gpu.max_texture), usage);
         let refs: Vec<&[u8]>;
         let (w, h, mips) = match &fitted {

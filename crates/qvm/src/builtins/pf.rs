@@ -242,6 +242,9 @@ pub(super) fn pad(s: String, width: usize, left: bool, zero: bool) -> String {
     }
 }
 
+/// Widest field and most decimals of one conversion: all a temp string holds.
+const MAX_FIELD: usize = crate::STRINGTEMP_LENGTH - 1;
+
 pub(super) fn pf_sprintf(vm: &mut Vm, _: &mut dyn Host) -> Result<()> {
     let fmt = vm.g_str(ofs_parm(0))?.to_vec();
     let mut out: Vec<u8> = Vec::new();
@@ -274,13 +277,13 @@ pub(super) fn pf_sprintf(vm: &mut Vm, _: &mut dyn Host) -> Result<()> {
                 *i += 1;
                 let v = if *arg < vm.argc { vm.g_f(ofs_parm(*arg)) as i32 } else { 0 };
                 *arg += 1;
-                return Some(v.max(0) as usize);
+                return Some((v.max(0) as usize).min(MAX_FIELD));
             }
             let st = *i;
             while *i < fmt.len() && fmt[*i].is_ascii_digit() {
                 *i += 1;
             }
-            std::str::from_utf8(&fmt[st..*i]).ok()?.parse().ok()
+            std::str::from_utf8(&fmt[st..*i]).ok()?.parse().ok().map(|n: usize| n.min(MAX_FIELD))
         };
         let width = num(&mut i, &mut arg).unwrap_or(0);
         let prec = if i < fmt.len() && fmt[i] == b'.' {

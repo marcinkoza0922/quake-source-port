@@ -138,7 +138,7 @@ pub(crate) fn before_damage(vm: &mut Vm, c: &Core) -> Result<bool> {
             && vm.ent_f(targ, f.watertype) == CONTENTS_WATER;
         if attacker as u32 == targ && cv("modifier_noselfdamage") != 0.0 {
             // keep rocket jumping: id1 T_Damage knockback without the damage
-            let inflictor = vm.g_i(OFS_PARM0 + 3).max(0) as u32;
+            let inflictor = u32::try_from(vm.g_i(OFS_PARM0 + 3)).ok().filter(|&e| (e as usize) < vm.num_edicts()).unwrap_or(0);
             let (mn, mx) = (vm.ent_v(inflictor, f.absmin), vm.ent_v(inflictor, f.absmax));
             let o = vm.ent_v(targ, f.origin);
             let d = [0, 1, 2].map(|k| o[k] - (mn[k] + mx[k]) * 0.5);

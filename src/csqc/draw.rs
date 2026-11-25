@@ -2,7 +2,7 @@
 //! `drawstring`, `drawrawstring`, `drawcharacter`, `drawline`, `drawsetcliparea`,
 //! `precache_pic`, `drawgetimagesize`, `freepic`).
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 use qcore::fs::Fs;
 use qformats::Wad;
@@ -18,7 +18,11 @@ use super::markup;
 pub struct CsqcPics {
     wad: Option<Wad>,
     wad_loaded: bool,
+    /// Every picture registered so far: the renderer never frees one, so these
+    /// outlive `freepic` and the VM (each map load starts a new one).
     cache: HashMap<String, Option<(PicId, u32, u32)>>,
+    /// What the running VM has precached.
+    live: HashSet<String>,
 }
 
 impl CsqcPics {
@@ -30,11 +34,17 @@ impl CsqcPics {
     }
 
     pub fn is_cached(&self, name: &str) -> bool {
-        self.cache.get(name).is_some_and(Option::is_some)
+        self.live.contains(name) && self.cache.get(name).is_some_and(Option::is_some)
+    }
+
+    /// A new VM has precached nothing; missing files get another look.
+    pub fn new_vm(&mut self) {
+        self.live.clear();
+        self.cache.retain(|_, p| p.is_some());
     }
 
     pub fn free(&mut self, name: &str) {
-        self.cache.remove(name);
+        self.live.remove(name);
     }
 
     /// Loads or retrieves a CSQC picture by name (supports WAD lumps, `.lmp`,
@@ -43,6 +53,7 @@ impl CsqcPics {
         if raw.is_empty() {
             return None;
         }
+        self.live.insert(raw.to_string());
         if let Some(&entry) = self.cache.get(raw) {
             return entry;
         }
@@ -273,4 +284,35 @@ pub fn set_clip(list: &mut Vec<Draw2D>, sp: DrawSpace, x: f32, y: f32, w: f32, h
 
 pub fn reset_clip(list: &mut Vec<Draw2D>) {
     list.push(Draw2D::Clip(None));
+}
+
+#[cfg(test)]
+mod pic_tests {
+    use super::*;
+
+    /// The renderer never frees pictures: a map load or `freepic` must not
+    /// register them again.
+    #[test]
+    fn pictures_outlive_the_vm() {
+        let Ok(mut r) = Renderer::headless(64, 64, &[[0; 3]; 256]) else { return };
+        let dir = std::env::temp_dir().join(format!("qsp-csqcpics-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("id1/gfx")).unwrap();
+        // a 1x1 qpic
+        std::fs::write(dir.join("id1/gfx/x.lmp"), [1, 0, 0, 0, 1, 0, 0, 0, 7]).unwrap();
+        let mut fs = Fs::new(&dir);
+        fs.add_game_dir("id1");
+        let mut p = CsqcPics::default();
+        let first = p.precache(&fs, &mut r, "gfx/x.lmp").expect("loads");
+        assert!(p.is_cached("gfx/x.lmp"));
+        p.free("gfx/x.lmp");
+        assert!(!p.is_cached("gfx/x.lmp"));
+        assert_eq!(p.precache(&fs, &mut r, "gfx/x.lmp"), Some(first));
+        assert!(p.precache(&fs, &mut r, "gfx/none.lmp").is_none());
+        p.new_vm();
+        assert!(!p.is_cached("gfx/x.lmp"));
+        assert_eq!(p.precache(&fs, &mut r, "gfx/x.lmp"), Some(first));
+        std::fs::write(dir.join("id1/gfx/none.lmp"), [1, 0, 0, 0, 1, 0, 0, 0, 7]).unwrap();
+        assert!(p.precache(&fs, &mut r, "gfx/none.lmp").is_some(), "a missing file is looked for again");
+        let _ = std::fs::remove_dir_all(&dir);
+    }
 }

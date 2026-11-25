@@ -314,7 +314,9 @@ impl Host for Ctx<'_> {
                 let idx = vm.g_f(p(0)) as i32;
                 let ty = vm.g_f(p(1)) as i32;
                 let fld = vm.g_i(p(2)) as usize;
-                if (32..qnet::protocol::MAX_CL_STATS as i32).contains(&idx) {
+                // (a negative offset is huge here)
+                let fits = fld.checked_add(if ty == 3 { 3 } else { 1 }).is_some_and(|end| end <= vm.entityfields());
+                if fits && (32..qnet::protocol::MAX_CL_STATS as i32).contains(&idx) {
                     let idx = idx as usize;
                     self.c.sv.custom_stats.retain(|s| s.idx != idx);
                     self.c.sv.custom_stats.push(crate::server::CustomStat {

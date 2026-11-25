@@ -36,6 +36,9 @@ pub(super) fn parse_anim(text: Option<&[u8]>, joints: &[Joint]) -> Result<Vec<Ve
     if num_frames == 0 {
         return Err(err("animation has no frames"));
     }
+    if num_frames.saturating_mul(joints.len()) > crate::iqm::MAX_POSE_BONES {
+        return Err(err("too many joints for its frames"));
+    }
     t.expect("hierarchy")?;
     t.expect("{")?;
     // (mesh joint, flags, offset, animation parent)

@@ -101,3 +101,28 @@ fn forward_parent_to_undriven_joint() {
     let bad = mesh.replace("\"Armature\" -1", "\"Armature\" 2");
     assert!(Md5::parse(bad.as_bytes(), Some(ANIM.as_bytes())).is_err());
 }
+
+/// Declared but empty lists, and counts the file has no room for.
+#[test]
+fn bad_counts_are_errors() {
+    let ok = |m: &str| Md5::parse(m.as_bytes(), None).is_ok();
+    assert!(ok(MESH));
+    let cut = |from: &str, to: &str| {
+        let (a, b) = (MESH.find(from).unwrap(), MESH.find(to).unwrap());
+        format!("{}{}", &MESH[..a], &MESH[b..])
+    };
+    for (from, to) in [
+        ("numverts 3", "numverts 0"),
+        ("numtris 1", "numtris 0"),
+        ("numweights 4", "numweights 0"),
+        ("numverts 3", "numverts 1000000"),
+        ("numtris 1", "numtris 2000000"),
+        ("numweights 4", "numweights 16000000"),
+    ] {
+        assert!(!ok(&MESH.replace(from, to)), "{to}");
+    }
+    // no vert lines, but triangles of them; no joints, but weights on them
+    assert!(!ok(&cut("vert 0", "numtris").replace("numverts 3", "numverts 0").replace("  tri 0 0 1 2\n", "")));
+    let joints = cut("\"Root\"", "}\nmesh").replace("numJoints 2", "numJoints 0");
+    assert!(!ok(&joints));
+}

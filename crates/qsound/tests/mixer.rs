@@ -405,3 +405,44 @@ fn ambient_level_and_fade_are_the_listeners() {
     assert_eq!(energy(0.0, 100.0), 0, "ambient_level 0 is silent at once");
     assert!(energy(0.3, 10.0) < full, "a slow fade starts quiet");
 }
+
+fn wav(rate: u32, frames: usize) -> Vec<u8> {
+    let mut d = Vec::new();
+    d.extend(b"RIFF");
+    d.extend((36 + frames as u32).to_le_bytes());
+    d.extend(b"WAVEfmt ");
+    d.extend(16u32.to_le_bytes());
+    d.extend([1, 0, 1, 0]);
+    d.extend(rate.to_le_bytes());
+    d.extend(rate.to_le_bytes());
+    d.extend([1, 0, 8, 0]);
+    d.extend(b"data");
+    d.extend((frames as u32).to_le_bytes());
+    d.resize(d.len() + frames, 128);
+    d
+}
+
+#[test]
+fn absurd_sample_rates_are_rejected() {
+    assert_eq!(load_sfx("x", &wav(11025, 100), 44100).unwrap().data.len(), 400);
+    assert!(load_sfx("x", &wav(0, 100), 44100).is_none());
+    assert!(load_sfx("x", &wav(1, 100_000), 48000).is_none());
+    // a huge rate leaves nothing, which is fine
+    assert!(load_sfx("x", &wav(u32::MAX, 100), 44100).unwrap().data.is_empty());
+}
+
+/// A looping file with next to nothing in it must end, not be reopened forever
+/// on the audio thread.
+#[test]
+fn tiny_looping_music_ends() {
+    let mut m = MusicStream::new(wav(11025, 2), "wav", true, 48000).unwrap();
+    let mut out = vec![[0i32; 2]; 48000];
+    m.mix(&mut out, 1.0);
+    assert!(m.finished);
+    let mut m = MusicStream::new(wav(11025, 11025), "wav", true, 48000).unwrap();
+    for _ in 0..3 {
+        m.mix(&mut out, 1.0);
+    }
+    assert!(!m.finished, "a second of music loops");
+    assert!(MusicStream::new(wav(1, 4000), "wav", true, 48000).is_none());
+}

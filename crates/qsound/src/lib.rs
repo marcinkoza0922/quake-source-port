@@ -68,6 +68,9 @@ pub struct Sfx {
     pub loop_start: Option<usize>,
 }
 
+/// Output samples of the longest sound effect (over ten minutes).
+const MAX_SFX: usize = 1 << 25;
+
 /// Load a WAV and resample it to `out_rate` (ResampleSfx, nearest sample).
 /// Stereo files are downmixed (qformats counts frames, not samples).
 pub fn load_sfx(name: &str, bytes: &[u8], out_rate: u32) -> Option<Sfx> {
@@ -89,6 +92,10 @@ pub fn load_sfx(name: &str, bytes: &[u8], out_rate: u32) -> Option<Sfx> {
     };
     let step = f64::from(wav.rate) / f64::from(out_rate);
     let out_len = (frames as f64 / step) as usize;
+    // rate 0 would be endless, a tiny one stretches a few bytes to gigabytes
+    if wav.rate == 0 || out_len > MAX_SFX {
+        return None;
+    }
     let data = (0..out_len)
         .map(|i| sample(((i as f64 * step) as usize).min(frames.saturating_sub(1))) as i16)
         .collect();

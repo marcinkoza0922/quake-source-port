@@ -67,7 +67,7 @@ impl Vm {
             EType::Entity => set(self, 0, atof(s.as_bytes()) as i32 as u32),
             EType::Field => match self.progs.find_field(s) {
                 Some(d) => {
-                    let v = self.globals[d.ofs as usize];
+                    let Some(&v) = self.globals.get(d.ofs as usize) else { return false };
                     set(self, 0, v);
                 }
                 None => return false,

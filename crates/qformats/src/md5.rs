@@ -95,6 +95,19 @@ impl<'a> Tokens<'a> {
         }
         Ok(n as usize)
     }
+    /// A count of records that follow: the rest of the file must have room
+    /// for them.
+    fn records(&mut self, max: usize) -> Result<usize> {
+        let n = self.count(max)?;
+        if n > (self.s.len() - self.i) / 8 {
+            return Err(err(format!("{n} records don't fit the file")));
+        }
+        Ok(n)
+    }
+    /// An index into `len` elements.
+    fn index(&mut self, len: usize) -> Result<usize> {
+        self.count(len.checked_sub(1).ok_or_else(|| err("index into an empty list"))?)
+    }
     fn vec3(&mut self) -> Result<[f32; 3]> {
         self.expect("(")?;
         let v = [self.float()?, self.float()?, self.float()?];
@@ -224,34 +237,38 @@ fn parse_mesh(text: &[u8]) -> Result<(Vec<Joint>, Vec<Mesh>)> {
         t.expect("shader")?;
         let shader = t.word()?.to_string();
         t.expect("numverts")?;
-        let mut verts = vec![([0.0; 2], 0, 0); t.count(1 << 20)?];
+        let mut verts = vec![([0.0; 2], 0, 0); t.records(1 << 20)?];
         while t.peek() == Some("vert") {
             t.next();
-            let i = t.count(verts.len().saturating_sub(1))?;
+            let i = t.index(verts.len())?;
             t.expect("(")?;
             let st = [t.float()?, t.float()?];
             t.expect(")")?;
             verts[i] = (st, t.count(1 << 24)?, t.count(64)?);
         }
         t.expect("numtris")?;
-        let mut tris = vec![[0; 3]; t.count(1 << 21)?];
+        let mut tris = vec![[0; 3]; t.records(1 << 21)?];
         while t.peek() == Some("tri") {
             t.next();
-            let i = t.count(tris.len().saturating_sub(1))?;
-            let last = verts.len().saturating_sub(1);
-            tris[i] = [t.count(last)? as u32, t.count(last)? as u32, t.count(last)? as u32];
+            let i = t.index(tris.len())?;
+            let n = verts.len();
+            tris[i] = [t.index(n)? as u32, t.index(n)? as u32, t.index(n)? as u32];
         }
         t.expect("numweights")?;
-        let mut weights = vec![(0, 0.0, [0.0; 3]); t.count(1 << 24)?];
+        let mut weights = vec![(0, 0.0, [0.0; 3]); t.records(1 << 24)?];
         while t.peek() == Some("weight") {
             t.next();
-            let i = t.count(weights.len().saturating_sub(1))?;
-            let joint = t.count(num_joints.saturating_sub(1))?;
+            let i = t.index(weights.len())?;
+            let joint = t.index(num_joints)?;
             let bias = t.float()?;
             let p = t.vec3()?;
             weights[i] = (joint, bias, p.map(|x| x * bias));
         }
         t.expect("}")?;
+        // declared, but with nothing to refer to
+        if (verts.is_empty() && !tris.is_empty()) || (num_joints == 0 && !weights.is_empty()) {
+            return Err(err("mesh refers to an empty list"));
+        }
         if verts.iter().any(|v| v.1 + v.2 > weights.len()) {
             return Err(err("vertex weight out of range"));
         }
@@ -268,6 +285,9 @@ fn encode_normal(n: [f32; 3]) -> [u8; 2] {
     [lat.round().clamp(0.0, 255.0) as u8, (lng.round() as u32 % 255) as u8]
 }
 
+/// Vertices of all frames together.
+const MAX_POSE_VERTS: usize = 1 << 25;
+
 impl Md5 {
     /// Parse `mesh` (.md5mesh text) with its optional `anim` (.md5anim).
     pub fn parse(mesh: &[u8], anim: Option<&[u8]>) -> Result<Md5> {
@@ -276,6 +296,10 @@ impl Md5 {
             return Err(err("model has no meshes"));
         }
         let poses = anim::parse_anim(anim, &joints)?;
+        let verts: usize = meshes.iter().map(|m| m.verts.len()).sum();
+        if verts.saturating_mul(poses.len()) > MAX_POSE_VERTS {
+            return Err(err("too many vertices for its frames"));
+        }
         let mut bounds = vec![[Vec3::splat(f32::MAX), Vec3::splat(f32::MIN)]; poses.len()];
         let mut surfaces = Vec::with_capacity(meshes.len());
         for m in &meshes {

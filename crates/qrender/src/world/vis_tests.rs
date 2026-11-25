@@ -225,3 +225,23 @@ fn begin_light_frame_validates_cached_lightstyles() {
     let c3 = w.light_point([0.0, 0.0, 8.0], &styles).expect("hit");
     assert!((c3[0] - 64.0).abs() < 1.0);
 }
+
+/// An empty leaf may point anywhere, and a point may be anything.
+#[test]
+fn bad_leaves_and_points_are_harmless() {
+    let mut w = world();
+    w.leafs[1].contents = qformats::bsp::CONTENTS_WATER;
+    w.leafs[1].first_marksurface = 99;
+    w.leafs[1].num_marksurfaces = 0;
+    w.check_water_vis();
+    for p in [[f32::NAN; 3], [0.0, 0.0, f32::INFINITY], [f32::NEG_INFINITY, 0.0, 0.0]] {
+        assert_eq!(w.liquid_surface(p), None);
+    }
+    // water all the way up, and a height where +16 changes nothing
+    for l in &mut w.leafs {
+        l.contents = qformats::bsp::CONTENTS_WATER;
+    }
+    assert!(w.liquid_surface([1.0, 0.0, 0.0]).is_some_and(|(h, _)| h >= 4096.0));
+    assert!(w.liquid_surface([1.0, 0.0, 1e20]).is_some());
+    assert_eq!(w.liquid_surface([f32::NAN; 3]), None);
+}

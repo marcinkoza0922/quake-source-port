@@ -266,7 +266,11 @@ impl Bsp {
                 kind: r.i32()?,
             })
         })?;
-        let vertexes = lump_records(lumps[LUMP_VERTEXES], "vertexes", 12, |r| r.vec3())?;
+        let mut vertexes = lump_records(lumps[LUMP_VERTEXES], "vertexes", 12, |r| r.vec3())?;
+        // NaN and inf compare false with everything, which loops rely on
+        for v in vertexes.iter_mut().filter(|v| !v.iter().all(|c| c.is_finite())) {
+            *v = Vec3::default();
+        }
         let texinfo = lump_records(lumps[LUMP_TEXINFO], "texinfo", 40, |r| {
             let mut vecs = [[0.0; 4]; 2];
             for v in vecs.iter_mut().flatten() {
@@ -306,7 +310,7 @@ impl Bsp {
         let num_nodes = lumps[LUMP_NODES].len() / node_size;
         let num_clip = lumps[LUMP_CLIPNODES].len() / clip_size;
 
-        let nodes = lump_records(lumps[LUMP_NODES], "nodes", node_size, |r| {
+        let mut nodes = lump_records(lumps[LUMP_NODES], "nodes", node_size, |r| {
             let plane = r.i32()?;
             let children = if wide {
                 [r.i32()?, r.i32()?]
@@ -339,7 +343,7 @@ impl Bsp {
                 num_faces,
             })
         })?;
-        let leafs = lump_records(lumps[LUMP_LEAFS], "leafs", leaf_size, |r| {
+        let mut leafs = lump_records(lumps[LUMP_LEAFS], "leafs", leaf_size, |r| {
             let contents = r.i32()?;
             let visofs = r.i32()?;
             let (mins, maxs) = if fbounds {
@@ -427,6 +431,7 @@ impl Bsp {
             edges: &edges,
             models: &models,
         })?;
+        refs::clear_empty(&mut nodes, &mut leafs, &mut models);
         for m in &mut models {
             m.visleafs = m.visleafs.min(leafs.len() as i32);
         }

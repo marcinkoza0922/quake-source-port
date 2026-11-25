@@ -146,7 +146,7 @@ impl ClientState {
         }
         let newtime = m.float() as f64;
         // A snapshot split over several datagrams shares one time.
-        if newtime != self.mtime[0] {
+        if newtime.is_finite() && newtime != self.mtime[0] {
             self.mtime[1] = self.mtime[0];
             self.mtime[0] = newtime;
             self.fixangle = false;

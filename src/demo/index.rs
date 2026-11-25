@@ -39,7 +39,7 @@ impl DemoIndex {
 
     /// The map and server time at running time `clock`.
     pub fn locate(&self, clock: f64) -> Option<(usize, f64)> {
-        let clock = clock.clamp(0.0, self.duration);
+        let clock = clock.max(0.0).min(self.duration);
         let ord = self.maps.iter().rposition(|m| m.base <= clock)?;
         let m = &self.maps[ord];
         Some((ord, m.t0 + (clock - m.base).min(m.t1 - m.t0)))
@@ -115,6 +115,17 @@ mod tests {
 
     fn span(name: &str, t0: f64, t1: f64, base: f64) -> MapSpan {
         MapSpan { name: name.into(), start_pos: 0, t0, t1, base }
+    }
+
+    /// A damaged demo has any times.
+    #[test]
+    fn locate_takes_any_duration() {
+        for d in [f64::NAN, f64::NEG_INFINITY, -1.0, f64::INFINITY] {
+            let idx = DemoIndex { maps: vec![span("e1m1", 1.0, 11.0, 0.0)], duration: d };
+            for t in [0.0, 5.0, f64::NAN] {
+                let _ = idx.locate(t);
+            }
+        }
     }
 
     #[test]

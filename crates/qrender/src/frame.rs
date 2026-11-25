@@ -36,6 +36,34 @@ fn vel_viewport(t: &Targets, [scene_w, scene_h]: [u32; 2]) -> [u32; 2] {
 impl Renderer {
     /// Draws and presents one frame.
     pub fn render(&mut self, fr: &RenderFrame) -> Result<()> {
+        self.frame_open = false;
+        let r = self.render_frame(fr);
+        if std::mem::take(&mut self.frame_open) {
+            self.abandon_frame();
+        }
+        r
+    }
+
+    /// The frame's fence was reset and its image acquired, but nothing was
+    /// submitted: waiting for that fence would never end. Makes both fresh.
+    pub(super) fn abandon_frame(&mut self) {
+        self.idle();
+        let dev = self.gpu.device.clone();
+        let f = &mut self.frames[self.cur];
+        // SAFETY: the device is idle and nothing was submitted with either.
+        unsafe {
+            if let Ok(fence) = dev.create_fence(&vk::FenceCreateInfo::default().flags(vk::FenceCreateFlags::SIGNALED), None) {
+                dev.destroy_fence(std::mem::replace(&mut f.fence, fence), None);
+            }
+            if let Ok(sem) = dev.create_semaphore(&vk::SemaphoreCreateInfo::default(), None) {
+                dev.destroy_semaphore(std::mem::replace(&mut f.acquire, sem), None);
+            }
+        }
+        // gives the acquired image back
+        self.needs_resize = true;
+    }
+
+    fn render_frame(&mut self, fr: &RenderFrame) -> Result<()> {
         if let Some(s) = &self.swap
             && (self.needs_resize || s.vsync != fr.settings.vsync)
         {
@@ -90,6 +118,10 @@ impl Renderer {
         self.collect_gpu_times(fi);
         let mut img_idx = 0u32;
         let present = self.presenting();
+        let has_output = present || self.targets.as_ref().is_some_and(|t| t.out.is_some());
+        if self.targets.is_none() || self.lightmap.is_none() || !has_output {
+            return Ok(());
+        }
         if present && let (Some(s), Some(f)) = (&self.swap, &self.gpu.swapchain_fn) {
             // SAFETY: valid swapchain/semaphore.
             match unsafe { f.acquire_next_image(s.sc, u64::MAX, acquire, vk::Fence::null()) } {
@@ -103,6 +135,7 @@ impl Renderer {
         }
         // SAFETY: fence not in use (waited).
         unsafe { dev.reset_fences(&[fence])? };
+        self.frame_open = true;
 
         let (w, h) = (self.width, self.height);
         let mut dynw = Dyn {
@@ -1363,10 +1396,6 @@ impl Renderer {
                 dev.cmd_write_timestamp(cmd, vk::PipelineStageFlags::BOTTOM_OF_PIPE, q, ts_base + k);
             }
         };
-        let has_output = present || self.targets.as_ref().is_some_and(|t| t.out.is_some());
-        if self.targets.is_none() || self.lightmap.is_none() || !has_output {
-            return Ok(());
-        }
         let pic_uploads = std::mem::take(&mut self.pending_pic_uploads);
         let f = &self.frames[fi];
         let dynbuf = f.dynbuf.buf;
@@ -2562,6 +2591,7 @@ impl Renderer {
                     .command_buffers(&cmds)
                     .signal_semaphores(&sig)];
                 dev.queue_submit(self.gpu.queue, &si, fence)?;
+                self.frame_open = false;
                 let scs = [s.sc];
                 let idx = [img_idx];
                 let pi = vk::PresentInfoKHR::default()
@@ -2576,6 +2606,7 @@ impl Renderer {
             } else {
                 let si = [vk::SubmitInfo::default().command_buffers(&cmds)];
                 dev.queue_submit(self.gpu.queue, &si, fence)?;
+                self.frame_open = false;
             }
         }
         if let Some(p0) = passes.into_iter().next() {

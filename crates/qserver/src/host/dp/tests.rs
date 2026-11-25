@@ -119,3 +119,29 @@ fn multicast_reaches_one_client_and_dropclient_drops() {
     sv.frame(0.05);
     assert!(!sv.core.clients[0].active);
 }
+
+/// A field offset from a mod: only one inside the edict is sent as a stat.
+#[test]
+fn clientstat_offsets_are_checked() {
+    let Some(mut sv) = server() else { return };
+    let n = vm(&sv).entityfields() as i32;
+    let add = |sv: &mut Server, ty: i32, ofs: i32| {
+        let l = sv.level.as_mut().unwrap();
+        l.vm.set_g_f(p(0), 40.0);
+        l.vm.set_g_f(p(1), ty as f32);
+        l.vm.set_g_i(p(2), ofs);
+        l.vm.argc = 3;
+        Ctx::new(&mut sv.core, &mut l.world).ext_builtin(&mut l.vm, "clientstat").unwrap();
+        sv.core.sv.custom_stats.len()
+    };
+    for (ty, ofs) in [(2, 8_000_000), (2, -1), (2, i32::MIN), (2, n), (3, n - 2), (1, n), (4, n)] {
+        assert_eq!(add(&mut sv, ty, ofs), 0, "type {ty} at {ofs} of {n}");
+    }
+    for (ty, ofs) in [(2, n - 1), (3, n - 3)] {
+        assert_eq!(add(&mut sv, ty, ofs), 1, "type {ty} at {ofs}");
+        for _ in 0..3 {
+            sv.frame(0.05);
+        }
+        assert!(sv.error().is_none());
+    }
+}
