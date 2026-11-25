@@ -149,14 +149,17 @@ impl WaterFx {
     /// Droplet streams and splashes. `me` is the local player (0-based),
     /// whose jets leave the view model's muzzle.
     #[allow(clippy::too_many_arguments)]
-    pub fn frame(&mut self, cl: &qclient::ClientState, me: usize, view: &View, gravity: f32, quality: u32, r: &mut Renderer, geom: &mut Geometry) {
+    pub fn frame(&mut self, cl: &qclient::ClientState, me: usize, view: &View, gravity: f32, quality: u32, snd: Option<&SoundSystem>, r: &mut Renderer, geom: &mut Geometry) {
         let dt = (cl.time - self.time).clamp(0.0, 0.1) as f32;
         self.time = cl.time;
         let now = cl.time;
-        for j in &mut self.jets {
+        for (o, j) in self.jets.iter_mut().enumerate() {
             // the server stops sending when a player leaves mid-spray
             if j.mode != 0 && now - j.seen > 0.5 {
                 j.mode = 0;
+                if let Some(snd) = snd {
+                    snd.event(SoundEvent::Stop { entity: o as i32 + 1, channel: LOOP_CHANNEL });
+                }
             }
         }
         self.splashes.retain_mut(|s| {

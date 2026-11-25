@@ -27,7 +27,7 @@ fn messages_preserve_quake_font_indices() {
 fn qbj3_door_label_survives_entity_load_and_save_restore() {
     use qcore::{cvar::Cvars, fs::Fs};
     use qserver::Server;
-    let base = Fs::default_basedir();
+    let base = Fs::test_basedir();
     if !base.join("qbj3/progs.dat").is_file() {
         return;
     }

@@ -71,6 +71,10 @@ impl ClientState {
     pub(crate) fn parse_mag(&mut self, args: &str) {
         let w: Vec<f32> = args.split_whitespace().filter_map(|w| w.parse().ok()).collect();
         let (Some(&owner), Some(&toy)) = (w.first(), w.get(1)) else { return };
+        // (a toy has at most two guns, a level at most 16 players)
+        if w.len() > 7 || !(0.0..16.0).contains(&owner) || !w.iter().all(|v| v.is_finite()) {
+            return;
+        }
         let (owner, toy) = (owner as u8, toy as u8);
         self.mags.retain(|m| (m.owner, m.toy) != (owner, toy));
         if w.len() < 5 || w.len().is_multiple_of(2) {

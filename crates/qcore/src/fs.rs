@@ -86,6 +86,15 @@ impl Fs {
             })
     }
 
+    /// [`Self::default_basedir`] for tests: they run in their crate's directory,
+    /// from where the checkout's game data isn't discovered.
+    #[doc(hidden)]
+    pub fn test_basedir() -> PathBuf {
+        std::env::var_os("QUAKE_BASEDIR")
+            .map(PathBuf::from)
+            .unwrap_or_else(|| Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps"))
+    }
+
     pub fn basedir(&self) -> &Path {
         &self.basedir
     }

@@ -93,7 +93,7 @@ mod tests {
 
     #[test]
     fn actual_qc_damage_reports_only_live_enemies_and_actual_health_loss() {
-        let base = Fs::default_basedir();
+        let base = Fs::test_basedir();
         if !base.join("id1").is_dir() { return; }
         let mut fs = Fs::new(base);
         fs.add_game_dir("id1");

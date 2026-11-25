@@ -224,6 +224,9 @@ pub struct ClientState {
     pub mtime: [f64; 2],
     /// cls.demoplayback: view angles come from the demo (`mviewangles`).
     pub demoplayback: bool,
+    /// The server is another machine's: its add-on lines are ignored (add-ons
+    /// are for local games).
+    pub foreign: bool,
     /// Demo view angles for the last two messages (cl.mviewangles).
     pub mviewangles: [[f32; 3]; 2],
     pub time: f64,
@@ -320,6 +323,8 @@ pub struct ClientState {
     pub mags: Vec<crate::guns::MagView>,
     /// Add-on stickybombs (id, origin) from `//qsp_sticky` stufftext.
     pub stickies: Vec<(u32, [f32; 3])>,
+    /// Add-on gel splats as `//qsp_gel a` lines by id, for demo seeks.
+    pub gel: Vec<(u32, std::sync::Arc<str>)>,
     /// Reliable clc_* bytes to send (signon replies, string commands).
     pub out_reliable: SizeBuf,
     pub movemessages: u32,
@@ -364,6 +369,7 @@ impl ClientState {
             viewent: ClientEntity::default(),
             mtime: [0.0; 2],
             demoplayback: false,
+            foreign: false,
             mviewangles: [[0.0; 3]; 2],
             time: 0.0,
             oldtime: 0.0,
@@ -427,6 +433,7 @@ impl ClientState {
             cables: Vec::new(),
             mags: Vec::new(),
             stickies: Vec::new(),
+            gel: Vec::new(),
             out_reliable: SizeBuf::new(MAX_MSGLEN),
             movemessages: 0,
             movecmds: [crate::pred::PredMove::default(); crate::pred::MOVECMDS_SIZE],
@@ -440,7 +447,7 @@ impl ClientState {
 
     /// CL_ClearState (keeps connection-level settings).
     pub fn clear_state(&mut self) {
-        let keep = (self.standard_quake, self.nolerp, self.name.clone(), self.color, self.sv_gravity, self.signon, self.demoplayback);
+        let keep = (self.standard_quake, self.nolerp, self.name.clone(), self.color, self.sv_gravity, self.signon, self.demoplayback, self.foreign);
         let out = std::mem::take(&mut self.out_reliable);
         let events = std::mem::take(&mut self.events);
         let fte_names = std::mem::take(&mut self.fte_names);
@@ -448,7 +455,7 @@ impl ClientState {
         *self = Self::new();
         self.fte_names = fte_names;
         self.defer_impact_effects = defer_impact_effects;
-        (self.standard_quake, self.nolerp, self.name, self.color, self.sv_gravity, self.signon, self.demoplayback) = keep;
+        (self.standard_quake, self.nolerp, self.name, self.color, self.sv_gravity, self.signon, self.demoplayback, self.foreign) = keep;
         self.out_reliable = out;
         self.events = events;
     }

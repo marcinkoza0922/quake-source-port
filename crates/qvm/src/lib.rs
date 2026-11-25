@@ -16,6 +16,7 @@ mod exec;
 mod progs;
 mod spawn;
 mod strings;
+mod usual;
 
 use std::fmt;
 

@@ -64,6 +64,7 @@ impl Host {
             self.con.print(&qcore::ctr!("game: can't find the engine executable\n"));
             return;
         };
+        self.shutdown();
         self.con.print(&qcore::ctr!("Switching to {}...\n", info.title));
         let mut cmd = std::process::Command::new(exe);
         cmd.args(&args);

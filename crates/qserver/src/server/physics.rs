@@ -243,7 +243,9 @@ impl Server {
                 crate::addons::frame(l, c);
             } else {
                 l.falls.clear();
-                l.hooks.reset();
+                l.hooks.clear(&mut c.clients);
+                l.cables.clear(&mut c.clients);
+                l.washers.clear(&mut c.clients);
                 if !l.portals.pairs.is_empty() || !l.stickies.bombs.is_empty() || !l.boomerangs.is_empty() {
                     crate::addons::shut_down(l, c);
                 }

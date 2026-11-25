@@ -186,3 +186,43 @@ fn the_automap_passes_releases_on() {
     run(&mut h, 1, || vec![key(b'm' as i32, false)]);
     assert!(h.automap.fullscreen);
 }
+
+#[test]
+fn a_guests_binds_and_stufftext_are_the_guests() {
+    let Some(mut h) = host() else { return };
+    h.menu.open(Screen::None);
+    h.sync_key_dest();
+    // (a guest takes the binds when it joins)
+    h.exec_line("bind RTHUMB centerview");
+    h.exec_line("bind ABUTTON kill");
+    h.exec_line("bind BBUTTON togglezoom");
+    run(&mut h, 1, || vec![button(7, GamepadButton::West, true)]);
+    run(&mut h, 1, || vec![button(7, GamepadButton::West, false)]);
+    run(&mut h, 1, || vec![button(9, GamepadButton::Start, true)]);
+    run(&mut h, 30, || vec![button(9, GamepadButton::Start, false)]);
+    assert_eq!(h.guests.len(), 1);
+    (h.cl.viewangles[0], h.guests[0].cl.viewangles[0]) = (30.0, 40.0);
+    let press = |h: &mut Host, b| {
+        h.handle_event(button(9, b, true));
+        h.handle_event(button(9, b, false));
+    };
+    press(&mut h, GamepadButton::RightStick);
+    assert_eq!((h.cl.viewangles[0], h.guests[0].cl.viewangles[0]), (30.0, 0.0));
+    press(&mut h, GamepadButton::East);
+    assert_eq!(h.zoom.1, 0.0, "player 1's zoom");
+    press(&mut h, GamepadButton::South);
+    run(&mut h, 5, Vec::new);
+    // (id1's ClientKill takes two frags and respawns)
+    let frags: Vec<i32> = [h.local.unwrap(), h.guests[0].slot].map(|s| h.cl.scores[s].frags).to_vec();
+    assert_eq!(frags, [0, -2], "the guest killed itself");
+
+    // QC stuffs the item flash to the player who took it
+    let slot = h.guests[0].slot;
+    h.server.core.clients[slot].message.byte(i32::from(qnet::protocol::SVC_STUFFTEXT));
+    h.server.core.clients[slot].message.string(b"bf\n");
+    h.guests[0].view_events.clear();
+    h.server.frame(1.0 / 72.0);
+    let mut g = h.guests.remove(0);
+    g.feed(&mut h.server);
+    assert!(g.view_events.iter().any(|e| matches!(e, ClientEvent::BonusFlash)));
+}

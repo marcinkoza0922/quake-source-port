@@ -201,6 +201,9 @@ impl Host {
         if self.csqc.has_command(&name) && self.csqc_console_command(line) {
             return;
         }
+        if self.guest_player_command(&name, line) {
+            return;
+        }
         let known = self.cmds.exists(&name) || self.cmds.alias(&name).is_some() || self.server.core.cvars.find(&name).is_some();
         if known {
             qcore::cmd::execute_string(self, line);

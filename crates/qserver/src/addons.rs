@@ -16,6 +16,7 @@ pub mod akimbo;
 pub mod boomerang;
 pub mod cable;
 pub mod cable_rope;
+mod damage;
 pub mod fall;
 pub mod dodge;
 pub mod gel;
@@ -431,6 +432,8 @@ fn gel_frame(l: &mut Level, c: &mut Core) {
         let mut ents = Ents { vm: &mut l.vm, c: &mut *c };
         l.washers.frame(&mut l.world, &mut ents, &mut clients, &mut l.gel, scale, dt);
         c.clients = clients;
+    } else {
+        l.washers.clear(&mut c.clients);
     }
     l.gel.send(&mut c.clients);
 }
@@ -471,11 +474,22 @@ pub(crate) fn shut_down(l: &mut Level, c: &mut Core) {
     l.boomerangs.clear(&mut c.clients);
     l.stickies.clear(&mut c.clients);
     l.gel.clear(&mut c.clients);
-    l.washers.reset();
-    l.hooks.reset();
-    l.cables.reset();
+    l.washers.clear(&mut c.clients);
+    l.hooks.clear(&mut c.clients);
+    l.cables.clear(&mut c.clients);
     l.akimbo.reset();
     l.rifle.reset();
+}
+
+/// Sends stufftext lines to everybody who plays.
+pub(crate) fn stuff_all(clients: &mut [crate::client::Client], lines: &str) {
+    if lines.is_empty() {
+        return;
+    }
+    for cl in clients.iter_mut().filter(|c| c.spawned) {
+        cl.message.byte(crate::msg::SVC_STUFFTEXT);
+        cl.message.string(lines.as_bytes());
+    }
 }
 
 /// No remote client is connected.

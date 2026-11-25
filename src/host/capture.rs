@@ -370,16 +370,16 @@ impl Host {
         self.start_export(req, start, end, out);
     }
 
-    /// On quit: close the level's auto-demo and a running capture, and
-    /// wait for video files to be written.
-    pub fn shutdown_recordings(&mut self) {
-        self.autodemo_finish();
+    /// On quit: finish a running capture, leave the game (CL_Disconnect: demos
+    /// end, servers and clients are told) and wait for files to be written.
+    pub fn shutdown(&mut self) {
         // quitting cancels an export (and deletes it); a live capture is kept
         if self.exporting() {
             self.cancel_export();
         } else if self.capture.is_some() {
             self.capture_stop();
         }
+        self.stop_game();
         for rx in std::mem::take(&mut self.demo_jobs) {
             if let Ok(msg) = rx.recv_timeout(std::time::Duration::from_secs(120)) {
                 let _ = std::io::Write::write_all(&mut std::io::stderr(), msg.as_bytes());

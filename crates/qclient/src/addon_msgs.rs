@@ -13,18 +13,47 @@ pub struct PortalView {
     pub up: [f32; 3],
 }
 
+/// Most stickybombs, portal owners and gel splats a level has.
+const MAX_STICKIES: usize = 64;
+const MAX_OWNERS: f32 = 16.0;
+const MAX_GEL: usize = 4096;
+
+/// Numbers no bigger than any map; `None` when one isn't.
+fn numbers(args: &str) -> Option<Vec<f32>> {
+    let n: Vec<f32> = args.split_whitespace().filter_map(|w| w.parse().ok()).collect();
+    n.iter().all(|v| v.is_finite() && v.abs() <= 1_000_000.0).then_some(n)
+}
+
 impl ClientState {
+    /// Keeps `qsp_gel` splats: `a id ...` adds one, `d id` removes it, `c` all.
+    pub(crate) fn parse_gel(&mut self, line: &str) {
+        let (op, rest) = line.split_once(' ').unwrap_or((line, ""));
+        let id = rest.split_whitespace().next().and_then(|w| w.parse::<f32>().ok()).map(|v| v as u32);
+        match (op, id) {
+            ("c", _) => self.gel.clear(),
+            ("a" | "d", Some(id)) => {
+                self.gel.retain(|g| g.0 != id);
+                if op == "a" && self.gel.len() < MAX_GEL {
+                    self.gel.push((id, line.into()));
+                }
+            }
+            _ => {}
+        }
+    }
+
     /// `qsp_sticky id [x y z]` (no position removes it), `qsp_sticky clear`.
     pub(crate) fn parse_sticky(&mut self, args: &str) {
         if args.trim() == "clear" {
             self.stickies.clear();
             return;
         }
-        let n: Vec<f32> = args.split_whitespace().filter_map(|w| w.parse().ok()).collect();
+        let Some(n) = numbers(args) else { return };
         let Some(&id) = n.first() else { return };
         let id = id as u32;
         self.stickies.retain(|s| s.0 != id);
-        if let [_, x, y, z] = n[..] {
+        if let [_, x, y, z] = n[..]
+            && self.stickies.len() < MAX_STICKIES
+        {
             self.stickies.push((id, [x, y, z]));
         }
     }
@@ -32,8 +61,11 @@ impl ClientState {
     /// `qsp_portal owner slot [ox oy oz nx ny nz ux uy uz]` (no args after
     /// the slot removes it).
     pub(crate) fn parse_portal(&mut self, args: &str) {
-        let n: Vec<f32> = args.split_whitespace().filter_map(|w| w.parse().ok()).collect();
+        let Some(n) = numbers(args) else { return };
         let (Some(&o), Some(&s)) = (n.first(), n.get(1)) else { return };
+        if !(0.0..MAX_OWNERS).contains(&o) || !(0.0..2.0).contains(&s) {
+            return;
+        }
         let (owner, slot) = (o as u8, s as u8);
         self.portals.retain(|p| (p.owner, p.slot) != (owner, slot));
         if let [_, _, ox, oy, oz, nx, ny, nz, ux, uy, uz] = n[..] {
@@ -71,7 +103,37 @@ impl PortalEffect {
 
 #[cfg(test)]
 mod portal_effect_tests {
-    use super::PortalEffect;
+    use super::*;
+
+    #[test]
+    fn states_are_limited() {
+        let mut cl = ClientState::new();
+        for bad in ["0 0 nan inf 1 0 0 0 0 0 0", "0 2 1 2 3 0 0 1 1 0 0", "16 0 1 2 3 0 0 1 1 0 0", "-1 0 1 2 3 0 0 1 1 0 0", "0 0 2e6 2 3 0 0 1 1 0 0"] {
+            cl.parse_portal(bad);
+        }
+        assert!(cl.portals.is_empty(), "{:?}", cl.portals);
+        for i in 0..500 {
+            cl.parse_portal(&format!("{} {} 1 2 3 0 0 1 1 0 0", i % 20, i / 20 % 5));
+            cl.parse_sticky(&format!("{i} 1 2 3"));
+            cl.parse_mag(&format!("{} {} 5 1 0 1 0 1 0 1 0", i % 300, i));
+        }
+        cl.parse_sticky("5 nan nan nan");
+        assert_eq!((cl.portals.len(), cl.stickies.len()), (32, 64));
+        assert!(cl.stickies.iter().all(|s| s.1.iter().all(|v| v.is_finite())));
+        assert!(cl.mags.is_empty(), "more parts than any gun has");
+    }
+
+    #[test]
+    fn gel_is_kept_by_id() {
+        let mut cl = ClientState::new();
+        for l in ["a 1 0 1 2 3 0 0 1 20", "b 0 0 1 2 3 4 5 6", "a 2 1 1 2 3 0 0 1 20", "a 1 1 9 9 9 0 0 1 20", "d 2"] {
+            cl.parse_gel(l);
+        }
+        assert_eq!(cl.gel, [(1, "a 1 1 9 9 9 0 0 1 20".into())]);
+        cl.parse_gel("c");
+        assert!(cl.gel.is_empty());
+    }
+
     #[test]
     fn rejects_malformed_presentation_messages() {
         assert!(PortalEffect::parse("1 1 0 0 0 0 10 20 30").is_some());

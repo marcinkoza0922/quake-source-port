@@ -112,6 +112,19 @@ impl Guest {
                 ClientEvent::Damage { .. } | ClientEvent::BonusFlash => self.view_events.push(e),
                 ClientEvent::Sound { .. } | ClientEvent::TempSound { .. } => self.sounds.push(e),
                 ClientEvent::CenterPrint(s) => self.center_prints.push(s),
+                // QC flashes the screen of the player it stuffs these to
+                ClientEvent::StuffText(s) => {
+                    let mut w = s.split_whitespace();
+                    match w.next() {
+                        Some("bf") => self.view_events.push(ClientEvent::BonusFlash),
+                        Some("v_cshift") => {
+                            let mut n = || qcore::cvar::q_atof(w.next().unwrap_or("")) as i32;
+                            let (r, g, b, percent) = (n(), n(), n(), n());
+                            self.view.set_empty_shift(r, g, b, percent);
+                        }
+                        _ => {}
+                    }
+                }
                 _ => {}
             }
         }

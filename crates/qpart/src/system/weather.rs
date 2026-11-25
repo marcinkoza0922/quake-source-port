@@ -57,8 +57,8 @@ impl System {
         let pc = reg.types[t].count;
         let invcount = 1.0 / pc;
         let count = count * pc;
-        let mut i = 0.0;
-        while i < count {
+        // (a float counter stops counting at 2^24)
+        for _ in 0..count.max(0.0).ceil() as u32 {
             if !self.has_free_particle() {
                 return;
             }
@@ -68,7 +68,6 @@ impl System {
                 org[j] = minb[j] + num * (maxb[j] - minb[j]);
             }
             self.run_effect(reg, world, org, Some(dir), invcount, t, None);
-            i += 1.0;
         }
     }
 

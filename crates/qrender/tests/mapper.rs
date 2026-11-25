@@ -4,7 +4,7 @@ use qrender::{MapperSettings, RenderFrame, Renderer, Settings, View};
 
 #[test]
 fn mapper_debug_modes_render_distinct_frames() {
-    let mut fs = qcore::fs::Fs::new(qcore::fs::Fs::default_basedir());
+    let mut fs = qcore::fs::Fs::new(qcore::fs::Fs::test_basedir());
     fs.add_game_dir("id1");
     let (Some(palette), Some(map)) = (fs.open("gfx/palette.lmp"), fs.open("maps/e1m1.bsp")) else {
         eprintln!("skip: no e1m1 or palletized game data");

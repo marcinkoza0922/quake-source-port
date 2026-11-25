@@ -1,4 +1,3 @@
-use std::path::Path;
 
 use qcore::fs::Fs;
 use qvm::{Builtin, Host, Result, SpawnFilter, Vm, ofs_parm};
@@ -35,11 +34,7 @@ impl Host for Stub {
 }
 
 fn basedir() -> Option<std::path::PathBuf> {
-    let mut base = Fs::default_basedir();
-    if base.is_relative() && !base.exists() {
-        base = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..").join(base);
-    }
-    base.join("id1").is_dir().then_some(base)
+    Some(Fs::test_basedir()).filter(|b| b.join("id1").is_dir())
 }
 
 fn load(game: &str) -> Option<(Fs, Vm)> {
@@ -134,4 +129,29 @@ fn disassemble_every_function() {
     assert!(army.contains("CALL1      precache_model #20"), "{army}");
     assert!(army.contains("\"progs/soldier.mdl\" -> PARM0"), "{army}");
     assert!(army.contains("&self.health"), "{army}");
+}
+
+/// Arguments mods gave `T_Damage` after the fourth: what their own calls pass.
+#[test]
+fn late_arguments_are_what_the_progs_usually_passes() {
+    let usual = |game: &str, name: &str| {
+        let (_, mut vm) = load(game)?;
+        let f = vm.progs.find_function(name)?;
+        Some(vm.usual_late_args(f).map(f32::from_bits))
+    };
+    if let Some(a) = usual("id1", "T_Damage") {
+        assert_eq!(a, [0.0; 4], "four parameters");
+    }
+    // Arcane Dimensions: check armour
+    for game in ["ad", "mjolnir"] {
+        if let Some(a) = usual(game, "T_Damage") {
+            assert_eq!(a, [1.0, 0.0, 0.0, 0.0], "{game}");
+        }
+    }
+    // damage types, none of them usual: none is
+    for game in ["alk1.2", "qbj3"] {
+        if let Some(a) = usual(game, "T_Damage") {
+            assert_eq!(a, [0.0; 4], "{game}");
+        }
+    }
 }

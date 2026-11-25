@@ -103,8 +103,11 @@ impl Washers {
         }
     }
 
-    pub(crate) fn reset(&mut self) {
-        self.mode.clear();
+    /// Stops every jet (toy off, add-ons shut down), on the clients too.
+    pub(crate) fn clear(&mut self, clients: &mut [Client]) {
+        let on = std::mem::take(&mut self.mode);
+        let lines: String = on.iter().enumerate().filter(|(_, m)| **m != 0).map(|(i, _)| format!("//qsp_water {i} 0\n")).collect();
+        crate::addons::stuff_all(clients, &lines);
     }
 }
 

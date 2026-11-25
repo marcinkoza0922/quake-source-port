@@ -89,3 +89,16 @@ fn unhookable_materials_retract() {
     let after = origin(&sv);
     assert!((after[0] - before[0]).abs() < 8.0);
 }
+
+#[test]
+fn the_chain_goes_when_add_ons_do() {
+    let Some((mut sv, c)) = start(&[]) else { return };
+    run(&mut sv, c, 30, ClientMove::default());
+    sv.command("setpos 480 200 24");
+    run(&mut sv, c, 10, hook([0.0; 3], 0));
+    let (_, text) = run(&mut sv, c, 3, hook([0.0; 3], BUTTON_TOY_FIRE));
+    assert!(text.contains("//qsp_hook 0 1 "), "{text}");
+    sv.core.set_custom(false);
+    let (_, text) = run(&mut sv, c, 3, ClientMove::default());
+    assert_eq!(text.matches("//qsp_hook 0 0 0 0 0").count(), 1, "told once: {text}");
+}

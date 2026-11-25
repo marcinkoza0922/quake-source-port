@@ -208,10 +208,7 @@ fn mod_roots_and_replace_user_dir() {
 
 #[test]
 fn real_data() {
-    let mut base = Fs::default_basedir();
-    if base.is_relative() && !base.exists() {
-        base = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..").join(base);
-    }
+    let base = Fs::test_basedir();
     if !base.join("id1").is_dir() {
         eprintln!("skip: no game data");
         return;

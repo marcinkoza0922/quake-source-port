@@ -129,6 +129,26 @@ impl Host {
         }
     }
 
+    /// centerview of the player whose bind runs.
+    pub(super) fn centre_view(&mut self) {
+        match self.input_target.and_then(|k| self.guests.get_mut(k)) {
+            Some(g) => g.cl.viewangles[0] = 0.0,
+            None => self.cl.viewangles[0] = 0.0,
+        }
+    }
+
+    /// A guest's bind with a command about its player: true when it was run.
+    pub(super) fn guest_player_command(&mut self, name: &str, line: &str) -> bool {
+        const PLAYER: &[&str] = &["kill", "god", "notarget", "fly", "noclip", "give", "setpos", "say", "say_team", "tell"];
+        let Some(slot) = self.input_target.and_then(|k| self.guests.get(k)).map(|g| g.slot) else { return false };
+        if !PLAYER.contains(&name) {
+            return false;
+        }
+        self.server.client_command(slot, &qcore::lang::quake_encode(line));
+        self.drain_server_log();
+        true
+    }
+
     /// Play guests' sounds that started out of player 1's hearing range
     /// (player 1's client got the nearer ones already; the mixer pans and
     /// attenuates for the nearest player).

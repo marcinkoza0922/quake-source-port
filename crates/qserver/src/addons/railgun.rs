@@ -10,12 +10,11 @@
 //! were pierced). Other engines skip `//` lines, so demos still play.
 
 use qcore::math::{Vec3, angle_vectors};
-use qvm::OFS_PARM0;
 use qworld::{Edicts, Ent, MoveType, V};
 
 use crate::client::Client;
 use crate::ents::Ents;
-use crate::server::{Core, Level, exec};
+use crate::server::{Core, Level};
 
 /// Seconds between shots (Quake III: 1.5).
 pub const REFIRE: f64 = 1.5;
@@ -123,20 +122,11 @@ pub(crate) fn frame(st: &mut Rails, l: &mut Level, c: &mut Core) {
             l.vm.set_ent_f(e, f.currentammo, cells - AMMO);
         }
         send_all(&mut c.clients, &line(i, 1, muzzle, &slug));
-        let td = l.vm.progs.find_function("T_Damage").unwrap_or(0) as i32;
-        if td <= 0 {
-            continue;
-        }
         for &(t, _) in &slug.hits {
             if qworld::Edicts::is_free(&Ents { vm: &mut l.vm, c: &mut *c }, t) || l.vm.ent_f(t, f.takedamage) == 0.0 {
                 continue;
             }
-            // T_Damage(targ, inflictor, attacker, damage)
-            l.vm.set_g_i(OFS_PARM0, t as i32);
-            l.vm.set_g_i(OFS_PARM0 + 3, e as i32);
-            l.vm.set_g_i(OFS_PARM0 + 6, e as i32);
-            l.vm.set_g_f(OFS_PARM0 + 9, damage);
-            exec(&mut l.vm, c, &mut l.world, td);
+            super::damage::damage(&mut l.vm, c, &mut l.world, t, e, e, damage);
         }
     }
 }

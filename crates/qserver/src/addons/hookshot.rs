@@ -106,9 +106,15 @@ impl Hooks {
             self.sent.resize(n, 0);
         }
     }
-    /// Drop every hook (toy off, add-ons shut down, level change).
-    pub fn reset(&mut self) {
+    /// Drops every hook (add-ons shut down), on the clients too.
+    pub(crate) fn clear(&mut self, clients: &mut [Client]) {
         self.state.iter_mut().for_each(|s| *s = State::Idle);
+        let mut lines = String::new();
+        for (i, sent) in self.sent.iter_mut().enumerate().filter(|(_, s)| **s != 0) {
+            *sent = 0;
+            lines += &format!("//qsp_hook {i} 0 0 0 0\n");
+        }
+        crate::addons::stuff_all(clients, &lines);
     }
 }
 

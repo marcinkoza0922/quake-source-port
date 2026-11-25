@@ -519,8 +519,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("vid_apply", |h, _| h.vid_apply());
     c.add("vid_restart", |h, _| h.vid_apply());
     c.add("_vid_menu", |h, _| h.vid_menu());
-    c.add("force_centerview", |h, _| h.cl.viewangles[0] = 0.0);
-    c.add("centerview", |h, _| h.cl.viewangles[0] = 0.0);
+    c.add("force_centerview", |h, _| h.centre_view());
+    c.add("centerview", |h, _| h.centre_view());
     super::saves::register(c);
     // Host_Pause_f: a playing demo pauses itself (ericw); otherwise the
     // server decides (`pausable`) and answers with svc_setpause.

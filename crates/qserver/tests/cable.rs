@@ -142,3 +142,16 @@ fn switching_weapons_unplugs_and_dead_surfaces_refuse() {
     assert!(!plugged(&sv));
     assert!(text.contains("//qsp_cable 0 2 "), "{text}");
 }
+
+#[test]
+fn the_plug_goes_when_add_ons_do() {
+    let Some((mut sv, c)) = start(&[]) else { return };
+    let (_, a) = face_panel(&mut sv, c).expect("an electronics panel within reach in e1m1");
+    run(&mut sv, c, 2, cable(a, 0));
+    run(&mut sv, c, 1, cable(a, BUTTON_TOY_ALT));
+    assert!(plugged(&sv));
+    sv.core.set_custom(false);
+    let text = run(&mut sv, c, 3, cable(a, 0));
+    assert!(!plugged(&sv));
+    assert_eq!(text.matches("//qsp_cable 0 0 ").count(), 1, "told once: {text}");
+}

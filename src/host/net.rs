@@ -339,6 +339,7 @@ impl Host {
         // CL_EstablishConnection: no demo loop while connected.
         self.demonum = -1;
         self.cl = ClientState::new();
+        self.cl.foreign = true;
         self.cl.name = self.cvs("_cl_name").to_string();
         self.cl.color = self.cv("_cl_color") as i32;
         self.con.print(&qcore::ctr!("Connecting to {}...\n", a));
@@ -366,6 +367,7 @@ impl Host {
         self.stop_game();
         self.demonum = -1;
         self.cl = ClientState::new();
+        self.cl.foreign = true;
         self.cl.name = self.cvs("_cl_name").to_string();
         self.cl.color = self.cv("_cl_color") as i32;
         let mut ui = String::new();
