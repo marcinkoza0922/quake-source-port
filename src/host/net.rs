@@ -619,6 +619,9 @@ impl Host {
                 }
                 ClientEvent::StaticSound(s) => {
                     if let (Some(snd), Some(Some(sfx))) = (&self.snd, self.level.sounds.get(s.sound)) {
+                        if sfx.loop_start.is_none() {
+                            self.con.print(&format!("Sound {} not looped\n", sfx.name));
+                        }
                         snd.event(SoundEvent::Static {
                             sfx: sfx.clone(),
                             origin: s.origin,

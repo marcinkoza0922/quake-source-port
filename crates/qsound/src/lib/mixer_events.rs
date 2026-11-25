@@ -90,8 +90,12 @@ impl Mixer {
                 if self.total >= MAX_CHANNELS {
                     return;
                 }
+                // (the channel is taken either way: occlusion counts them)
                 let i = self.total;
                 self.total += 1;
+                if sfx.loop_start.is_none() {
+                    return; // S_StaticSound: "not looped"
+                }
                 self.channels[i] = Channel {
                     sfx: Some(sfx),
                     category: SoundCategory::Ambient,
@@ -99,7 +103,6 @@ impl Mixer {
                     origin,
                     dist_mult: attenuation / SOUND_NOMINAL_CLIP_DIST,
                     master_vol: (volume * 255.0) as i32,
-                    force_loop: true,
                     ..Default::default()
                 };
                 self.spatialize(i);

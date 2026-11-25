@@ -1,14 +1,21 @@
 use super::*;
 
+/// What holds a latched button (a typed `+attack` is -1).
+const LATCH: i32 = -2;
+
 pub(super) fn toggle_press(b: &mut KButton, key: i32, toggle: bool) {
     if !toggle {
+        // the toggle was switched off meanwhile: this press takes over
+        if b.down[0] == LATCH {
+            b.down[0] = 0;
+        }
         b.press(key);
     } else if b.is_down() {
         b.release(-1);
     } else {
         b.press(key);
         // Latch: forget the key so its release doesn't let go.
-        b.down = [-1, 0];
+        b.down = [LATCH, 0];
     }
 }
 

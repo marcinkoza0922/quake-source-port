@@ -472,7 +472,13 @@ impl Host {
             .by_name("s_soundtrack")
             .map_or("", |c| c.string.as_str())
             .to_owned();
+        let extmusic = self.cv("bgm_extmusic") != 0.0;
         let Some(snd) = &mut self.snd else { return false };
+        if !extmusic {
+            self.audio_fx.soundtracks.clear_track();
+            snd.stop_music();
+            return false;
+        }
         self.audio_fx
             .soundtracks
             .play_cd_track(track, looping, &st, &self.server.core.fs, snd)

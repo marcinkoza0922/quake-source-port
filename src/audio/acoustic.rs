@@ -168,7 +168,9 @@ impl AcousticState {
         }
 
         let mut static_out = Vec::new();
-        for (idx, st) in cl.static_sounds.iter().enumerate() {
+        // (the mixer has channels for the sounds that loaded)
+        let loaded = cl.static_sounds.iter().filter(|s| matches!(level.sounds.get(s.sound), Some(Some(_))));
+        for (idx, st) in loaded.enumerate() {
             let pos = Vec3::from_array(st.origin);
             let d = pos - eye;
             if d.dot(d) <= 1050.0 * 1050.0 {

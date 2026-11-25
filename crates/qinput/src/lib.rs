@@ -527,4 +527,22 @@ mod toggle_tests {
         b.release(10);
         assert!(!b.is_down());
     }
+
+    #[test]
+    fn a_latch_ends_once_the_toggle_is_off() {
+        let mut b = KButton::default();
+        toggle_press(&mut b, 10, true);
+        b.release(10);
+        toggle_press(&mut b, 10, false);
+        assert!(b.is_down());
+        b.release(10);
+        assert!(!b.is_down());
+        // a typed +attack stays, as in C
+        toggle_press(&mut b, -1, false);
+        toggle_press(&mut b, 10, false);
+        b.release(10);
+        assert!(b.is_down());
+        b.release(-1);
+        assert!(!b.is_down());
+    }
 }
