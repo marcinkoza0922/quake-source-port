@@ -64,16 +64,17 @@ pub(super) fn disable_all(cv: &mut Cvars) {
 
 impl Menu {
     /// Shows the launch pop-up over the current screen.
-    pub(super) fn open_launch(&mut self, cmd: String, skill: bool, title: Option<String>) {
+    pub(super) fn open_launch(&mut self, cmd: String, skill: bool, title: Option<String>, cv: &mut Cvars) {
+        self.begin_setup(cv);
         self.launch = Some(Launch { cmd, skill, from: self.screen, title });
         self.prompt = Some(Prompt::Launch { cursor: 0 });
     }
 
     /// `menu_newgame`: Single Player with the New Game pop-up open.
-    pub fn open_new_game(&mut self) {
+    pub fn open_new_game(&mut self, cv: &mut Cvars) {
         self.open(Screen::SinglePlayer);
         self.sp_cursor = 0;
-        self.open_launch(NEW_GAME_CMD.into(), false, None);
+        self.open_launch(NEW_GAME_CMD.into(), false, None, cv);
     }
 
     /// Back from the New Game Customize hub: the pop-up again, on Customize.
@@ -92,6 +93,7 @@ impl Menu {
     /// or confirming the end of a running game when needed).
     pub(super) fn launch_play(&mut self, cv: &mut Cvars, out: &mut Vec<Action>) {
         let l = self.launch.take().unwrap_or_else(|| Launch { cmd: NEW_GAME_CMD.into(), skill: false, from: Screen::SinglePlayer, title: None });
+        self.play_setup();
         cv.set("custom_enable", if customized(cv) { "1" } else { "0" });
         self.new_game_setup = false;
         self.prompt = None;

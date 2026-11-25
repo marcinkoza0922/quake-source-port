@@ -418,6 +418,10 @@ impl Input {
             && cvars.value(self.cv.touch_aim_assist) >= 0.5
             && self.touch.has_look()
     }
+    /// A gamepad axis as last reported.
+    pub fn axis(&self, a: GamepadAxis) -> f32 {
+        self.axes[a as usize]
+    }
     pub fn key_down(&self, key: i32) -> bool {
         self.keydown.get(key as usize).copied().unwrap_or(false)
     }

@@ -63,6 +63,8 @@ impl WaterFx {
     pub fn clear(&mut self) {
         self.jets.clear();
         self.splashes.clear();
+        // client time starts over
+        self.last_splash_sound = 0.0;
     }
 
     fn random(&mut self) -> f32 {

@@ -45,6 +45,10 @@ impl Host {
         let mut args = relaunch_args(&self.cmdline);
         args.extend(info.launch_args());
         if let Some(m) = map {
+            // the config doesn't hold the new game's add-ons and modifiers
+            if self.menu.setup_playing() {
+                args.extend(setup_args(&self.server.core.cvars));
+            }
             args.extend(["+map".to_string(), m.to_string()]);
         }
         self.write_config();
@@ -145,6 +149,16 @@ impl Host {
     }
 }
 
+/// `+cvar value` for what the new game has changed.
+fn setup_args(cv: &Cvars) -> Vec<String> {
+    qserver::addons::settings::per_game()
+        .chain(["custom_enable"])
+        .filter_map(|n| cv.by_name(n))
+        .filter(|c| c.string != c.default)
+        .flat_map(|c| [format!("+{}", c.name), qcore::cvar::format_float(c.value)])
+        .collect()
+}
+
 /// A value that stays one argument of its command on a command line
 /// (`Host::stuff_cmds`): it can't start a `+command` or a switch, or split a line.
 pub(super) fn plain_launch_value(v: &str) -> bool {
@@ -224,7 +238,21 @@ fn max_texture_size(limits: [f32; 2]) -> u32 {
 
 #[cfg(test)]
 mod tests {
-    use super::{max_texture_size, plain_launch_value};
+    use super::{max_texture_size, plain_launch_value, setup_args};
+
+    #[test]
+    fn another_mods_game_gets_the_choices() {
+        let mut cv = qcore::cvar::Cvars::new();
+        for &(n, d, f) in qserver::addons::CVARS.iter().chain(qserver::modifiers::CVARS) {
+            cv.register(n, d, f);
+        }
+        assert!(setup_args(&cv).is_empty());
+        cv.set("addon_portalgun", "1");
+        cv.set("modifier_damagetaken", "0.5");
+        cv.set("custom_enable", "1");
+        cv.set("addon_portalgun_slot", "3"); // archived
+        assert_eq!(setup_args(&cv), ["+addon_portalgun", "1", "+modifier_damagetaken", "0.5", "+custom_enable", "1"]);
+    }
 
     #[test]
     fn launch_values_cannot_smuggle_commands() {

@@ -353,3 +353,45 @@ fn lightning_bolt_goes_through_portal() {
     assert!(line.starts_with("1 ") && line.contains(" 480 330 48"), "{line}");
     assert!(health(&sv) < before, "bolt damage through the portal: {before} -> {}", health(&sv));
 }
+
+/// Switching only the portal gun off takes its portals with it.
+#[test]
+fn switching_the_gun_off_removes_its_portals() {
+    let Some((mut sv, c)) = start(&["custom_enable 1"]) else { return };
+    place_pair(&mut sv, c);
+    let up = |sv: &Server| sv.level.as_ref().unwrap().portals.any_linked();
+    assert!(up(&sv));
+    sv.set_move(c, ClientMove::default());
+    sv.command("addon_portalgun 0");
+    sv.frame(1.0 / 72.0);
+    assert!(!up(&sv));
+    let told = sv.take_reliable(c).concat();
+    let told = String::from_utf8_lossy(&told).into_owned();
+    let lines: Vec<&str> = told.lines().flat_map(|l| l.split_once("//qsp_portal ")).map(|l| l.1).collect();
+    assert_eq!(lines, ["0 0", "0 1"], "the client drops both");
+    assert!(!sv.save_game().contains("\nportal "));
+    // only then: nothing more to say, and the gun works again
+    sv.frame(1.0 / 72.0);
+    assert!(!String::from_utf8_lossy(&sv.take_reliable(c).concat()).contains("//qsp_portal "));
+    sv.command("addon_portalgun 1");
+    place_pair(&mut sv, c);
+    assert!(up(&sv));
+}
+
+/// Held frames (menu, console, hitstop) don't bleed off speed.
+#[test]
+fn held_frames_keep_the_players_speed() {
+    let Some((mut sv, c)) = start(&[]) else { return };
+    run(&mut sv, c, 30, ClientMove::default());
+    sv.command("setpos 480 200 24");
+    run(&mut sv, c, 10, ClientMove::default());
+    run(&mut sv, c, 40, ClientMove { angles: [0.0, 90.0, 0.0], forward: 400.0, ..Default::default() });
+    let vel = |sv: &Server| sv.level.as_ref().unwrap().vm.ent_v(1, sv.core.sv.fields.velocity);
+    let (v, o, t) = (vel(&sv), origin(&sv), sv.time());
+    assert!(v[1] > 200.0, "{v:?}");
+    for _ in 0..36 {
+        sv.set_move(c, ClientMove::default());
+        sv.frame_held(1.0 / 72.0, true);
+    }
+    assert_eq!((vel(&sv), origin(&sv), sv.time()), (v, o, t));
+}

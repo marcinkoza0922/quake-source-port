@@ -79,12 +79,12 @@ impl Host {
 
     /// Level exit (intermission or finale): merge kills/secrets/time and
     /// the personal bests into the mod's qsp_stats.json. Not for
-    /// deathmatch, customized games (modifiers and add-ons change the run)
+    /// deathmatch, other people's servers, customized games (modifiers and add-ons change the run)
     /// or headless tool runs.
     pub(super) fn record_level_stats(&mut self) {
         use qnet::protocol::{STAT_MONSTERS, STAT_SECRETS, STAT_TOTALMONSTERS, STAT_TOTALSECRETS};
         if self.headless || self.demo.is_some() || self.cv("deathmatch") != 0.0 || self.level.mapname.is_empty()
-            || self.server.core.custom {
+            || self.server.core.custom || self.local.is_none() || self.cl.gametype == 1 {
             return;
         }
         let st = |i: usize| self.cl.stats[i].max(0) as u32;

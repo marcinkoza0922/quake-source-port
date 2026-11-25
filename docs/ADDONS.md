@@ -281,7 +281,7 @@ rides doors, plats and monsters). Sky hits fizzle. When the host monster
 dies (health ≤ 0 or `SOLID_NOT`) or is freed, the bomb falls and sticks to
 whatever is below. Alt-fire (`+attack2`) edge detonates all the player's
 bombs: a temporary edict calls QC `T_RadiusDamage(tmp, player, damage,
-world)` (`addon_sticky_damage`, archived, default 120, clamped 25–300), then TE_EXPLOSION and `weapons/r_exp3.wav` (only if precached).
+world)` (`addon_sticky_damage`, saved with the game, default 120, clamped 25–300), then TE_EXPLOSION and `weapons/r_exp3.wav` (only if precached).
 A player leaving detonates theirs; the toy switched off removes all.
 - Sync: `//qsp_sticky id x y z` when a bomb moves, `//qsp_sticky id` when
   it is gone, `//qsp_sticky clear` + full state on spawn →

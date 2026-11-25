@@ -44,3 +44,38 @@ fn breaks_episode_one_maps() {
         assert!(r.exited, "{map}: never reached the exit");
     }
 }
+
+/// A baseline that can't be read, or maps that weren't run, are not a pass.
+#[test]
+fn missing_maps_and_broken_baselines_are_noticed() {
+    let dir = std::env::temp_dir().join(format!("qbot-baseline-{}", std::process::id()));
+    std::fs::create_dir_all(&dir).unwrap();
+    let path = dir.join("b.json");
+    assert!(load_baseline(&path).is_err());
+    std::fs::write(&path, "{ not json").unwrap();
+    assert!(load_baseline(&path).is_err());
+    let entry = baseline_entry(0.0, 0.0, 0.0, false, &[], Some(&[]));
+    std::fs::write(&path, format!("{{\"e1m1\": {entry}, \"e1m2\": {entry}}}")).unwrap();
+    let o = |maps: &[&str]| Opts {
+        basedir: PathBuf::new(),
+        game: "id1".into(),
+        skill: 3,
+        time: None,
+        max_wall: None,
+        jobs: 1,
+        out: dir.clone(),
+        baseline: PathBuf::new(),
+        save_baseline: false,
+        verbose: false,
+        maps: maps.iter().map(|m| m.to_string()).collect(),
+    };
+    let r = bot::Report::default();
+    let run = |o: &Opts, maps: &[&str]| {
+        let res: Vec<(String, &bot::Report)> = maps.iter().map(|m| (m.to_string(), &r)).collect();
+        report_game(o, "id1", false, &dir, &path, &res)
+    };
+    assert!(!run(&o(&[]), &["e1m1", "e1m2"]));
+    assert!(run(&o(&[]), &["e1m1"]), "e1m2 disappeared");
+    assert!(!run(&o(&["e1m1"]), &["e1m1"]), "asked for one map");
+    let _ = std::fs::remove_dir_all(&dir);
+}

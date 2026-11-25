@@ -363,7 +363,7 @@ impl Server {
             l.vm.set_g_f(self.core.sv.globals.frametime, ft as f32);
         }
         self.core.sv.datagram.clear();
-        self.run_clients(ft);
+        self.run_clients(ft, hold);
         if !self.core.sv.paused && !hold {
             self.physics(ft);
         }

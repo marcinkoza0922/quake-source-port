@@ -19,9 +19,9 @@ impl Menu {
     }
 
     /// Single Player row `i`: New Game, Load, Save or Level Select.
-    pub(super) fn sp_select(&mut self, i: usize, cv: &Cvars, server_active: bool, out: &mut Vec<Action>) {
+    pub(super) fn sp_select(&mut self, i: usize, cv: &mut Cvars, server_active: bool, out: &mut Vec<Action>) {
         match i {
-            0 => self.open_launch(launch::NEW_GAME_CMD.into(), false, None),
+            0 => self.open_launch(launch::NEW_GAME_CMD.into(), false, None, cv),
             1 => {
                 out.push(Action::Command("_scansaves\n".into()));
                 self.autosaves = false;

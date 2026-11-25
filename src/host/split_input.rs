@@ -72,22 +72,48 @@ impl Host {
             g.training.sequence.reset_sticks();
             g.input.buttons = Default::default();
         }
-        if self.p1_pad == Some(id) {
+        let p1 = self.p1_pad == Some(id);
+        if p1 {
             self.p1_pad = None;
             self.training.sequence.reset_sticks();
             self.pad_gestures.reset_all();
+        }
+        // player 1 keeps its sticks when another pad goes
+        let left = self.pad_families.keys().any(|k| !self.guests.iter().any(|g| g.pad == Some(*k)));
+        if p1 || !left {
+            let _ = qinput::handle_event(self, InputEvent::GamepadConnected(false));
+            if left {
+                let _ = qinput::handle_event(self, InputEvent::GamepadConnected(true));
+            }
         }
     }
 
     /// Run a guest's pad event against that guest's own input. Its binds
     /// execute at once so `+forward` and `impulse` land on the guest. Menu
-    /// and console navigation stays shared: presses go to player 1's path
-    /// while either is open (releases still reach the guest).
+    /// and console navigation stays shared: presses (with their releases) and
+    /// sticks go to player 1's path while either is open, and the guest's own
+    /// sticks and held buttons still follow the pad.
     fn guest_event(&mut self, k: usize, ie: InputEvent) {
-        let pressed = matches!(ie, InputEvent::GamepadButton { down: true, .. });
-        if self.key_dest() != KeyDest::Game && (pressed || matches!(ie, InputEvent::GamepadAxis { .. })) {
-            self.handle_event(HostEvent::Input(ie));
-            return;
+        let shared = self.key_dest() != KeyDest::Game;
+        match ie {
+            InputEvent::GamepadButton { button, down: true } if shared => {
+                self.menu_presses.push((k, button));
+                return self.handle_event(HostEvent::Input(ie));
+            }
+            InputEvent::GamepadButton { button, down: false } if self.menu_presses.contains(&(k, button)) => {
+                self.menu_presses.retain(|p| *p != (k, button));
+                return self.handle_event(HostEvent::Input(ie));
+            }
+            InputEvent::GamepadAxis { axis, value } if shared => {
+                self.menu_axes = true;
+                self.handle_event(HostEvent::Input(ie));
+                let trigger = matches!(axis, qinput::GamepadAxis::LeftTrigger | qinput::GamepadAxis::RightTrigger);
+                // a trigger pulled in the menu isn't the guest's to fire with
+                if trigger && value > self.cv("joy_deadzone_trigger") {
+                    return;
+                }
+            }
+            _ => {}
         }
         self.record_hud_input(Some(k), ie);
         self.input_target = Some(k);

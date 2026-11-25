@@ -323,7 +323,7 @@ fn dialogs_take_taps_over_classic_screens() {
     assert!(m.prompt.is_none() && !out.iter().any(|a| matches!(a, Action::Command(_))));
     // the New Game pop-up: Cancel is its last button
     phone(&mut m, Screen::Main);
-    m.open_launch("map start\n".into(), false, None);
+    m.open_launch("map start\n".into(), false, None, &mut cv);
     let ask = m.tv_ask().unwrap();
     let n = m.tv_dialog(ask, &cv).buttons.len();
     let pos = dialog_button(&m, &cv, n - 1);

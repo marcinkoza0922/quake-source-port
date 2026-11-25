@@ -86,7 +86,7 @@ fn the_hub_and_addon_picker_play_the_pending_game() {
     let mut cv = cvars();
     let mut m = Menu::new();
     m.open(Screen::ModMaps);
-    m.open_launch("game \"id1\" \"e1m3\"\n".into(), true, Some("The Necropolis".into()));
+    m.open_launch("game \"id1\" \"e1m3\"\n".into(), true, Some("The Necropolis".into()), &mut cv);
     m.key(K_DOWNARROW, &mut cv, false);
     m.key(K_ENTER, &mut cv, false);
     // Add-ons: turn the portal gun on, then Play from the picker (Y)
@@ -105,7 +105,7 @@ fn the_hub_and_addon_picker_play_the_pending_game() {
 
     // the hub's Play row does the same
     m.open(Screen::ModMaps);
-    m.open_launch("game \"id1\" \"e1m3\"\n".into(), true, None);
+    m.open_launch("game \"id1\" \"e1m3\"\n".into(), true, None, &mut cv);
     m.key(K_DOWNARROW, &mut cv, false);
     m.key(K_ENTER, &mut cv, false);
     m.opt_cursor = NEW_GAME_CUSTOMIZE.len() - 1;
@@ -146,15 +146,15 @@ fn disable_all_works_from_every_input() {
     };
     let mut cv = cvars();
     for key in [K_DEL, K_BACKSPACE, K_XBUTTON] {
-        modify(&mut cv);
         let mut m = popup(&mut cv);
+        modify(&mut cv);
         assert!(commands(&m.key(key, &mut cv, false)).is_empty());
         check(&cv, &m, &format!("key {key}"));
     }
     // arrows + Enter (and the d-pad + A)
     for (down, select) in [(K_DOWNARROW, K_ENTER), (K_DPAD_DOWN, K_ABUTTON)] {
-        modify(&mut cv);
         let mut m = popup(&mut cv);
+        modify(&mut cv);
         m.key(down, &mut cv, false);
         m.key(down, &mut cv, false);
         assert_eq!(cursor(&m), Some(2));
@@ -162,8 +162,8 @@ fn disable_all_works_from_every_input() {
         check(&cv, &m, "navigate");
     }
     // mouse: hover highlights, click disables
-    modify(&mut cv);
     let mut m = popup(&mut cv);
+    modify(&mut cv);
     assert!(m.mouse_move(button_center(2), &mut cv).is_some());
     assert_eq!(cursor(&m), Some(2));
     m.key(K_MOUSE1, &mut cv, false);

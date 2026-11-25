@@ -299,6 +299,12 @@ impl Host {
         if self.input.dest != d {
             if d != KeyDest::Menu { self.cancel_menu_touch(); }
             qinput::set_key_dest(self, d);
+            if d == KeyDest::Game && std::mem::take(&mut self.menu_axes) {
+                use qinput::GamepadAxis::*;
+                for axis in [LeftX, LeftY, RightX, RightY, LeftTrigger, RightTrigger] {
+                    let _ = qinput::handle_event(self, InputEvent::GamepadAxis { axis, value: 0.0 });
+                }
+            }
         }
         if d != KeyDest::Console {
             self.touch_console_keyboard = false;

@@ -29,6 +29,7 @@ impl Host {
             if self.demo.take().is_some() {
                 self.demonum = -1;
             }
+            self.finish_timedemo();
             // CL_Disconnect stops a recording; `record <name> <map>` starts here.
             self.stop_recording();
             self.demo_head.clear();

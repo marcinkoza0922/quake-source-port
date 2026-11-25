@@ -31,41 +31,42 @@ pub mod rifle;
 pub mod save;
 pub mod sticky;
 pub mod shotgun;
-pub(crate) mod settings;
+pub mod settings;
 pub mod washer;
 
-/// (name, default, flags) of the add-on cvars.
+/// (name, default, flags) of the add-on cvars. Archived ones are preferences;
+/// the rest belong to a game and its saves (`settings::per_game`).
 pub const CVARS: &[(&str, &str, u32)] = &[
     // New Game "Customize" checkbox: start the next new game customized
     // (modifiers and add-ons); fixed at a game's start, see `Core::custom`
-    ("custom_enable", "0", CVAR_ARCHIVE),
+    ("custom_enable", "0", 0),
     // read-only mirror of `Core::custom` for the menu
     ("custom_active", "0", CVAR_ROM),
-    ("addon_projectile_shotguns", "0", CVAR_ARCHIVE),
-    ("addon_shotgun_speed", "10000", CVAR_ARCHIVE),
-    ("addon_dodge", "0", CVAR_ARCHIVE),
-    ("addon_bullet_time", "0", CVAR_ARCHIVE),
-    ("addon_bullet_time_toggle", "0", CVAR_ARCHIVE),
-    ("addon_bullet_time_meter", "1", CVAR_ARCHIVE),
-    ("addon_bullet_time_duration", "5", CVAR_ARCHIVE),
-    ("addon_bullet_time_regen", "1", CVAR_ARCHIVE),
+    ("addon_projectile_shotguns", "0", 0),
+    ("addon_shotgun_speed", "10000", 0),
+    ("addon_dodge", "0", 0),
+    ("addon_bullet_time", "0", 0),
+    ("addon_bullet_time_toggle", "0", 0),
+    ("addon_bullet_time_meter", "1", 0),
+    ("addon_bullet_time_duration", "5", 0),
+    ("addon_bullet_time_regen", "1", 0),
     // hitstop (client side): master, weapons (0 all, 1 melee, 2 ranged, 3
     // explosives), targets (0 all, 1 tough), freeze ms, per-damage ms, kill
     // multiplier, cooldown ms, cap ms, minimum damage, tough health, shake
-    ("addon_hitstop", "0", CVAR_ARCHIVE),
-    ("addon_hitstop_weapons", "0", CVAR_ARCHIVE),
-    ("addon_hitstop_targets", "0", CVAR_ARCHIVE),
-    ("addon_hitstop_duration", "60", CVAR_ARCHIVE),
-    ("addon_hitstop_scale_damage", "3", CVAR_ARCHIVE),
-    ("addon_hitstop_kill_bonus", "2", CVAR_ARCHIVE),
-    ("addon_hitstop_cooldown", "150", CVAR_ARCHIVE),
-    ("addon_hitstop_max", "250", CVAR_ARCHIVE),
-    ("addon_hitstop_min_damage", "10", CVAR_ARCHIVE),
-    ("addon_hitstop_tough", "100", CVAR_ARCHIVE),
+    ("addon_hitstop", "0", 0),
+    ("addon_hitstop_weapons", "0", 0),
+    ("addon_hitstop_targets", "0", 0),
+    ("addon_hitstop_duration", "60", 0),
+    ("addon_hitstop_scale_damage", "3", 0),
+    ("addon_hitstop_kill_bonus", "2", 0),
+    ("addon_hitstop_cooldown", "150", 0),
+    ("addon_hitstop_max", "250", 0),
+    ("addon_hitstop_min_damage", "10", 0),
+    ("addon_hitstop_tough", "100", 0),
     ("addon_hitstop_shake", "0", CVAR_ARCHIVE),
-    ("addon_portalgun", "0", CVAR_ARCHIVE),
-    ("addon_sticky", "0", CVAR_ARCHIVE),
-    ("addon_sticky_damage", "120", CVAR_ARCHIVE),
+    ("addon_portalgun", "0", 0),
+    ("addon_sticky", "0", 0),
+    ("addon_sticky_damage", "120", 0),
     // Weapon slot numbers; 10 is the slot labelled 0.
     ("addon_portalgun_slot", "9", CVAR_ARCHIVE),
     ("addon_boomerang_slot", "1", CVAR_ARCHIVE),
@@ -80,54 +81,54 @@ pub const CVARS: &[(&str, &str, u32)] = &[
     ("addon_portal_dist", "4096", CVAR_ARCHIVE),
     ("addon_portal_depth", "3", CVAR_ARCHIVE),
     // boomerang: on/off, stun seconds, flight speed (units/s)
-    ("addon_boomerang", "0", CVAR_ARCHIVE),
-    ("addon_boomerang_stun", "4", CVAR_ARCHIVE),
-    ("addon_boomerang_speed", "700", CVAR_ARCHIVE),
-    ("addon_railgun", "0", CVAR_ARCHIVE),
+    ("addon_boomerang", "0", 0),
+    ("addon_boomerang_stun", "4", 0),
+    ("addon_boomerang_speed", "700", 0),
+    ("addon_railgun", "0", 0),
     // railgun damage per entity pierced (Quake III: 100)
-    ("addon_rail_damage", "100", CVAR_ARCHIVE),
+    ("addon_rail_damage", "100", 0),
     // trail colour: 0 blue, 1 green, 2 red, 3 yellow, 4 purple, 5 white
     ("addon_rail_color", "0", CVAR_ARCHIVE),
     // hookshot: range and which targets latch
-    ("addon_hookshot", "0", CVAR_ARCHIVE),
-    ("addon_hook_range", "1024", CVAR_ARCHIVE),
-    ("addon_hook_wood", "1", CVAR_ARCHIVE),
-    ("addon_hook_metal", "1", CVAR_ARCHIVE),
-    ("addon_hook_stone", "1", CVAR_ARCHIVE),
-    ("addon_hook_enemies", "1", CVAR_ARCHIVE),
-    ("addon_gel", "0", CVAR_ARCHIVE),
+    ("addon_hookshot", "0", 0),
+    ("addon_hook_range", "1024", 0),
+    ("addon_hook_wood", "1", 0),
+    ("addon_hook_metal", "1", 0),
+    ("addon_hook_stone", "1", 0),
+    ("addon_hook_enemies", "1", 0),
+    ("addon_gel", "0", 0),
     ("addon_gel_quality", "1", CVAR_ARCHIVE),
     // powerwasher: on/off, push strength multiplier, jet geometry/shading quality
-    ("addon_washer", "0", CVAR_ARCHIVE),
-    ("addon_washer_push", "1", CVAR_ARCHIVE),
+    ("addon_washer", "0", 0),
+    ("addon_washer_push", "1", 0),
     ("addon_washer_quality", "1", CVAR_ARCHIVE),
     // male-to-male cable: on/off, slot, rope length, metal sockets, bolt damage per 0.1 s
-    ("addon_cable", "0", CVAR_ARCHIVE),
+    ("addon_cable", "0", 0),
     ("addon_cable_slot", "8", CVAR_ARCHIVE),
-    ("addon_cable_length", "512", CVAR_ARCHIVE),
-    ("addon_cable_metal", "0", CVAR_ARCHIVE),
-    ("addon_cable_damage", "30", CVAR_ARCHIVE),
-    ("addon_rifle_damage", "10", CVAR_ARCHIVE),
+    ("addon_cable_length", "512", 0),
+    ("addon_cable_metal", "0", 0),
+    ("addon_cable_damage", "30", 0),
+    ("addon_rifle_damage", "10", 0),
     // akimbo pistols: damage, spread (degrees), magazine, reload seconds,
     // reload when empty, swap hands, on/off, slot
-    ("addon_akimbo_damage", "14", CVAR_ARCHIVE),
-    ("addon_akimbo_spread", "1.5", CVAR_ARCHIVE),
-    ("addon_akimbo_mag", "12", CVAR_ARCHIVE),
-    ("addon_akimbo_reload", "1.6", CVAR_ARCHIVE),
+    ("addon_akimbo_damage", "14", 0),
+    ("addon_akimbo_spread", "1.5", 0),
+    ("addon_akimbo_mag", "12", 0),
+    ("addon_akimbo_reload", "1.6", 0),
     ("addon_akimbo_autoreload", "1", CVAR_ARCHIVE),
     ("addon_akimbo_swap", "0", CVAR_ARCHIVE),
-    ("addon_akimbo", "0", CVAR_ARCHIVE),
+    ("addon_akimbo", "0", 0),
     ("addon_akimbo_slot", "2", CVAR_ARCHIVE),
     // assault rifle: on/off, slot, magazine size, reload seconds, reload when
     // empty, aim (0 hold, 1 toggle), sight magnification, recoil, dot colour
-    ("addon_rifle_mag", "30", CVAR_ARCHIVE),
-    ("addon_rifle_reload", "2.2", CVAR_ARCHIVE),
+    ("addon_rifle_mag", "30", 0),
+    ("addon_rifle_reload", "2.2", 0),
     ("addon_rifle_autoreload", "1", CVAR_ARCHIVE),
     ("addon_rifle_aim", "0", CVAR_ARCHIVE),
     ("addon_rifle_zoom", "1.3", CVAR_ARCHIVE),
-    ("addon_rifle_recoil", "1", CVAR_ARCHIVE),
+    ("addon_rifle_recoil", "1", 0),
     ("addon_rifle_dot", "0", CVAR_ARCHIVE),
-    ("addon_rifle", "0", CVAR_ARCHIVE),
+    ("addon_rifle", "0", 0),
     ("addon_rifle_slot", "4", CVAR_ARCHIVE),
 ];
 
@@ -283,6 +284,16 @@ pub(crate) fn frame(l: &mut Level, c: &mut Core) {
     let mut ents = Ents { vm: &mut l.vm, c: &mut *c };
     portal_move::cross(st, &mut l.world, &mut ents, &idle, &crossed);
     let gun = c.cvars.value_of(Toy::PortalGun.cvar()) != 0.0;
+    if !gun {
+        // switched off: the player couldn't remove them any more
+        for o in 0..st.pairs.len() {
+            for slot in 0..2 {
+                if st.pairs[o][slot].is_some() {
+                    st.set(o, slot, None);
+                }
+            }
+        }
+    }
     for (i, slot) in st.presses(&c.clients) {
         if !gun {
             continue;
