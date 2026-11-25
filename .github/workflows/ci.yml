@@ -40,7 +40,7 @@ jobs:
             libdbus-1-dev libdrm-dev libgbm-dev libgl-dev libegl-dev libibus-1.0-dev libsndio-dev
       - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
         with: { key: ci-linux }
-      - uses: taiki-e/install-action@5dfd6082b2f8f3491e9b9e884aa8d13172f580de # nextest
+      - uses: taiki-e/install-action@893d6ee8d714b6c7dfe2bcd94e5759e9a7958a7e # v2.90.10
         with: { tool: nextest }
       - name: Clippy
         run: cargo clippy --workspace --all-targets --locked --features quake-source-port/bundled-sdl --message-format=short -- -D warnings
