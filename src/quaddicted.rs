@@ -14,7 +14,7 @@
 mod worker;
 
 use std::collections::HashMap;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
 use qui::json::Value;
 
@@ -262,11 +262,45 @@ fn verify(r: &Release, zip: &Path) -> Result<(), String> {
     Ok(())
 }
 
+/// Most an archive may unpack to (the largest mods are a few GB).
+const MAX_UNPACKED: u64 = 8 << 30;
+
+/// Files a release may not bring into a game dir that isn't its own.
+fn takes_over(rest: &str) -> bool {
+    let file = rest.rsplit('/').next().unwrap_or(rest);
+    let ext = file.rsplit_once('.').map_or("", |(_, e)| e);
+    matches!(file, "progs.dat" | "csprogs.dat" | "modinfo.txt") || matches!(ext, "cfg" | "rc")
+}
+
+/// Why the plan can't be installed, if it would change somebody else's game
+/// dir: `ours` are the dirs the archive installed earlier. Maps and the like
+/// may be added to any mod, but never over a different file.
+fn conflict(planned: &[(String, String)], pack: &qcore::fs::Pack, install_root: &Path, basedir: &Path, ours: &[String]) -> Option<String> {
+    planned.iter().find_map(|(dest, name)| {
+        let (dir, rest) = dest.split_once('/')?;
+        // (`id1` content goes to the release's own dir, see `plan`)
+        if dir == "id1" {
+            return Some(dest.clone());
+        }
+        let mine = ours.iter().any(|o| o.eq_ignore_ascii_case(dir));
+        let foreign = basedir.join(dir).is_dir() || (install_root.join(dir).is_dir() && !mine);
+        if !foreign {
+            return None;
+        }
+        let differs = [install_root, basedir].iter().any(|r| {
+            let p = r.join(dest);
+            p.is_file() && std::fs::read(p).ok() != pack.read(name)
+        });
+        (differs || takes_over(rest)).then(|| dest.clone())
+    })
+}
+
 /// Unpacks `zip` into `install_root` (the user data `mods/` folder), checking
-/// `basedir` and `install_root` for already-installed dependencies; returns the
+/// `basedir` and `install_root` for already-installed dependencies; `ours` are
+/// the game dirs installed this way before. All or nothing. Returns the
 /// game dir to show the release under. A `modinfo.txt` names the own dir (and
 /// its base).
-pub fn install(r: &Release, zip: &Path, install_root: &Path, basedir: &Path) -> Result<String, String> {
+pub fn install(r: &Release, zip: &Path, install_root: &Path, basedir: &Path, ours: &[String]) -> Result<String, String> {
     verify(r, zip)?;
     let pack = qcore::fs::Pack::load_pk3(zip).ok_or(qcore::t!("the download is not a valid zip"))?;
     let own = r.stem.clone();
@@ -290,14 +324,13 @@ pub fn install(r: &Release, zip: &Path, install_root: &Path, basedir: &Path) -> 
     let installed: Vec<String> = qui::mods::scan_roots(&roots).into_iter().map(|m| m.dir).collect();
     let dep_base = dep_base(&r.deps, &installed, &own);
     let base = base.map(str::to_string).or_else(|| dep_base.clone());
-    for (dest, name) in &planned {
-        let data = pack.read(name).ok_or_else(|| qcore::tr!("couldn't unpack {}", name))?;
-        let path: PathBuf = install_root.join(dest);
-        if let Some(p) = path.parent() {
-            std::fs::create_dir_all(p).map_err(|e| format!("{}: {e}", p.display()))?;
-        }
-        std::fs::write(&path, data).map_err(|e| format!("{}: {e}", path.display()))?;
+    if planned.iter().filter_map(|(_, n)| pack.size(n)).sum::<u64>() > MAX_UNPACKED {
+        return Err("the archive unpacks to too much".into());
     }
+    if let Some(dest) = conflict(&planned, &pack, install_root, basedir, ours) {
+        return Err(format!("it would replace {dest}, which is already installed"));
+    }
+    unpack(&planned, &pack, install_root, &r.sha)?;
     let mut counts: HashMap<&str, usize> = HashMap::new();
     for (d, _) in &planned {
         *counts.entry(d.split('/').next().unwrap_or("")).or_default() += 1;
@@ -330,6 +363,34 @@ pub fn install(r: &Release, zip: &Path, install_root: &Path, basedir: &Path) -> 
         std::fs::write(install_root.join(&shown).join("modinfo.txt"), info).map_err(|e| e.to_string())?;
     }
     Ok(shown)
+}
+
+/// Everything is unpacked beside its place first, so an archive that fails
+/// halfway (or a full disk) leaves nothing behind.
+fn unpack(planned: &[(String, String)], pack: &qcore::fs::Pack, install_root: &Path, sha: &str) -> Result<(), String> {
+    let staging = install_root.join(format!(".unpacking-{}", &sha[..12]));
+    let _ = std::fs::remove_dir_all(&staging);
+    let put = || {
+        let mkdir = |p: &Path| p.parent().map_or(Ok(()), |d| std::fs::create_dir_all(d).map_err(|e| format!("{}: {e}", d.display())));
+        for (dest, name) in planned {
+            let data = pack.read(name).ok_or_else(|| qcore::tr!("couldn't unpack {}", name))?;
+            let path = staging.join(dest);
+            mkdir(&path)?;
+            std::fs::write(&path, data).map_err(|e| format!("{}: {e}", path.display()))?;
+        }
+        for (dest, _) in planned {
+            let (from, to) = (staging.join(dest), install_root.join(dest));
+            mkdir(&to)?;
+            // (two entries may map to one file)
+            if from.is_file() {
+                std::fs::rename(&from, &to).map_err(|e| format!("{}: {e}", to.display()))?;
+            }
+        }
+        Ok(())
+    };
+    let r = put();
+    let _ = std::fs::remove_dir_all(&staging);
+    r
 }
 
 /// `installed.txt`: one `sha256 dir` line per installed release.

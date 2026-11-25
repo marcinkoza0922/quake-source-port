@@ -140,7 +140,8 @@ impl Online {
             let zip = cache.join(format!("{}.zip", r.sha));
             let res = fetch(&r.url, &zip, r.bytes, &|f| set(Some(Job::Downloading(f)))).and_then(|()| {
                 set(Some(Job::Installing));
-                super::install(&r, &zip, &install_root, &basedir)
+                let ours: Vec<String> = super::load_installed(&cache.join("installed.txt")).into_values().collect();
+                super::install(&r, &zip, &install_root, &basedir, &ours)
             });
             let _ = std::fs::remove_file(&zip);
             match res {

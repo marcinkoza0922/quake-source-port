@@ -6,20 +6,26 @@ name: release
 on:
   push:
     tags: ["v*"]
-    branches: ["feature/gyro-menu-releases"]
   workflow_dispatch:
 
+# Only the job that publishes may write; the builds run other people's code.
 permissions:
-  contents: write
+  contents: read
 
 env:
   CARGO_TERM_COLOR: never
+  # As in ci.yml, so a release is built with what was tested.
+  RUST_VERSION: "1.100.0"
 
 jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+
   shaders:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
       - run: sudo apt-get update && sudo apt-get install -y glslc
       - name: Compile shaders to SPIR-V (platform independent)
         run: |
@@ -28,7 +34,7 @@ jobs:
             [ -f "$f" ] && glslc --target-env=vulkan1.3 -O -Werror "$f" -o "spv/$(basename "$f").spv"
           done
           ls spv
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with: { name: spirv, path: spv }
 
   build:
@@ -45,12 +51,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with: { name: spirv, path: spv }
       - name: Rust toolchain
         shell: bash
-        run: rustup toolchain install stable --profile minimal && rustup default stable
+        run: rustup toolchain install "$RUST_VERSION" --profile minimal && rustup default "$RUST_VERSION"
       - name: Linux packages
         if: startsWith(matrix.name, 'linux')
         run: |
@@ -62,7 +69,7 @@ jobs:
       - name: macOS packages
         if: startsWith(matrix.name, 'macos')
         run: brew install cmake ninja molten-vk
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
         with: { key: "${{ matrix.name }}" }
       - name: Build
         shell: bash
@@ -87,7 +94,7 @@ jobs:
           mkdir "$d/docs" && cp docs/MANUAL.md "$d/docs/"
           if [ "${{ matrix.ext }}" = zip ]; then 7z a "$d.zip" "$d" >/dev/null; else tar czf "$d.tar.gz" "$d"; fi
           echo "ASSET=$d.${{ matrix.ext }}" >> "$GITHUB_ENV"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with: { name: "${{ matrix.name }}", path: "${{ env.ASSET }}" }
 
   # musl Linux (Alpine, Void musl, Chimera...). Built in an Alpine container with musl
@@ -105,8 +112,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with: { name: spirv, path: spv }
       - name: Build in Alpine
         run: |
@@ -116,7 +124,7 @@ jobs:
         run: |
           sudo chown -R "$(id -u)" target
           echo "ASSET=$(sh tools/release_package.sh ${{ matrix.name }} target/release/quake-source-port)" >> "$GITHUB_ENV"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with: { name: "${{ matrix.name }}", path: "${{ env.ASSET }}" }
 
   # The BSDs build natively in a QEMU VM and link the system SDL3 package, which users
@@ -150,13 +158,14 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with: { name: spirv, path: spv }
       - name: Build in VM
         # 1.4.0 and up hide the runner's AMX from the guest; with it, whether NetBSD 10.1
         # booted depended on which runner the job got.
-        uses: cross-platform-actions/action@v1.8.0
+        uses: cross-platform-actions/action@30cde56b87a128507bebea9531205087890ee360 # v1.8.0
         with:
           operating_system: ${{ matrix.os }}
           version: ${{ matrix.version }}
@@ -176,23 +185,24 @@ jobs:
           CARGO_TARGET_DIR: /tmp/qsp-target
       - name: Package
         run: echo "ASSET=$(sh tools/release_package.sh ${{ matrix.name }} out/quake-source-port)" >> "$GITHUB_ENV"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with: { name: "${{ matrix.name }}", path: "${{ env.ASSET }}" }
 
   android:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - run: rustup toolchain install stable --profile minimal --target aarch64-linux-android && rustup default stable
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - run: rustup toolchain install "$RUST_VERSION" --profile minimal --target aarch64-linux-android && rustup default "$RUST_VERSION"
       - run: sudo apt-get update && sudo apt-get install -y cmake ninja-build
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
         with: { distribution: temurin, java-version: "17" }
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
         with: { gradle-version: "8.9" }
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
         with: { key: android }
       - name: Install cargo-ndk
-        run: cargo install cargo-ndk --locked
+        run: cargo install cargo-ndk --locked --version 4.1.2
       - name: Build and stage Android native libraries
         run: |
           export ANDROID_NDK_HOME="${ANDROID_NDK_LATEST_HOME:-$ANDROID_NDK_ROOT}"
@@ -244,15 +254,16 @@ jobs:
           ref="${GITHUB_REF_NAME//\//-}"
           cp "$apk" "quake-source-port-$ref-android-arm64.apk"
           echo "ASSET=quake-source-port-$ref-android-arm64.apk" >> "$GITHUB_ENV"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with: { name: android-arm64, path: "${{ env.ASSET }}" }
 
   web:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - run: rustup toolchain install stable --profile minimal --target wasm32-unknown-unknown && rustup default stable
-      - uses: Swatinem/rust-cache@v2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - run: rustup toolchain install "$RUST_VERSION" --profile minimal --target wasm32-unknown-unknown && rustup default "$RUST_VERSION"
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
         with: { key: web }
       - name: Build WebGPU package
         run: |
@@ -266,17 +277,19 @@ jobs:
           cp README.md LICENSE "$d/"
           tar czf "$d.tar.gz" "$d"
           echo "ASSET=$d.tar.gz" >> "$GITHUB_ENV"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with: { name: web, path: "${{ env.ASSET }}", if-no-files-found: error }
 
   release:
     if: >-
-      !cancelled() && startsWith(github.ref, 'refs/tags/v') && needs.build.result == 'success' &&
+      !cancelled() && startsWith(github.ref, 'refs/tags/v') && needs.ci.result == 'success' && needs.build.result == 'success' &&
       needs.musl.result == 'success' && needs.android.result == 'success' && needs.web.result == 'success'
-    needs: [build, musl, bsd, android, web]
+    needs: [ci, build, musl, bsd, android, web]
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with: { path: dist, pattern: "{linux-*,windows-*,macos-*,android-*,freebsd-*,openbsd-*,netbsd-*,web}", merge-multiple: true }
       - name: Publish
         env: { GH_TOKEN: "${{ github.token }}", RELEASE_TAG: "${{ github.ref_name }}" }
@@ -298,6 +311,8 @@ jobs:
             echo "::warning::Releasing without:$missing"
             notes="$notes Not built this time:$missing."
           fi
+          (cd dist && sha256sum "${assets[@]#dist/}" > SHA256SUMS)
+          assets+=(dist/SHA256SUMS)
           gh release create "$RELEASE_TAG" "${assets[@]}" --repo "$GITHUB_REPOSITORY" \
             --title "$RELEASE_TAG" --verify-tag --prerelease \
             --notes "$notes"

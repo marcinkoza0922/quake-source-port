@@ -2,6 +2,7 @@
 # Fuzz targets in parallel: tools/fuzz/run.sh SECONDS [target ...]
 # Build first: cargo +nightly fuzz build -O --fuzz-dir tools/fuzz --target-dir target/fuzz
 # Crashing inputs land in target/fuzz/artifacts/<target>/, logs in target/fuzz/logs/.
+# Exits 1 when a target has any (older ones too), or didn't run.
 cd "$(dirname "$0")/../.." || exit 1
 secs=$1; shift
 [ $# -gt 0 ] || set -- bsp formats progs packs nq_client qw_client netchan text server savegame
@@ -17,6 +18,11 @@ for t in "$@"; do
         >"$out/logs/$t.log" 2>&1 &
 done
 wait
+bad=0
 for t in "$@"; do
-    printf '%-10s artifacts %4s  %s\n' "$t" "$(find "$out/artifacts/$t" -type f | wc -l)" "$(grep -E '^#[0-9]+: cov' "$out/logs/$t.log" | tail -1)"
+    n=$(find "$out/artifacts/$t" -type f | wc -l)
+    cov=$(grep -E '^#[0-9]+: cov' "$out/logs/$t.log" | tail -1)
+    printf '%-10s artifacts %4s  %s\n' "$t" "$n" "${cov:-did not run}"
+    if [ "$n" -gt 0 ] || [ -z "$cov" ]; then bad=1; fi
 done
+exit $bad

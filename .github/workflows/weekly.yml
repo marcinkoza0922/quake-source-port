@@ -1,0 +1,43 @@
+# Checks that depend on time rather than on a change: advisories about our
+# dependencies, and some fuzzing of what reads files and network data.
+name: weekly
+
+on:
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: never
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: taiki-e/install-action@6bb3c8aea019e815aea67546369e4cf742de6750 # cargo-audit
+        with: { tool: cargo-audit }
+      - run: cargo audit
+
+  fuzz:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - run: rustup toolchain install nightly-2026-11-12 --profile minimal
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
+        with: { key: fuzz, workspaces: "tools/fuzz -> ../../target/fuzz" }
+      - run: cargo install cargo-fuzz --locked
+      - run: cargo +nightly-2026-11-12 fuzz build -O --fuzz-dir tools/fuzz --target-dir target/fuzz
+      # (the other targets need game data)
+      - name: Fuzz
+        run: tools/fuzz/run.sh 300 bsp formats progs packs nq_client qw_client netchan text
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: failure()
+        with: { name: fuzz-artifacts, path: target/fuzz/artifacts }

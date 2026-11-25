@@ -7,12 +7,14 @@ on:
     branches: [master]
   pull_request:
   workflow_dispatch:
+  # the release workflow runs these checks first
+  workflow_call:
 
 permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 env:
@@ -25,7 +27,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
       - name: Rust toolchain
         run: rustup toolchain install "$RUST_VERSION" --profile minimal --component clippy && rustup default "$RUST_VERSION"
       - name: Packages
@@ -35,15 +38,24 @@ jobs:
             libxi-dev libxfixes-dev libxrandr-dev libxss-dev libxtst-dev libxkbcommon-dev \
             libwayland-dev wayland-protocols libdecor-0-dev libasound2-dev libpulse-dev libudev-dev \
             libdbus-1-dev libdrm-dev libgbm-dev libgl-dev libegl-dev libibus-1.0-dev libsndio-dev
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
         with: { key: ci-linux }
-      - uses: taiki-e/install-action@nextest
+      - uses: taiki-e/install-action@5dfd6082b2f8f3491e9b9e884aa8d13172f580de # nextest
+        with: { tool: nextest }
       - name: Clippy
         run: cargo clippy --workspace --all-targets --locked --features quake-source-port/bundled-sdl --message-format=short -- -D warnings
       - name: Tests
         run: cargo nextest run --workspace --locked --features quake-source-port/bundled-sdl
-      - name: wgpu backend compiles
-        run: cargo check --locked -p quake-source-port --features wgpu,bundled-sdl
+      - name: wgpu backend
+        run: cargo clippy --locked -p quake-source-port --features wgpu,bundled-sdl --message-format=short -- -D warnings
+      - name: Shaders for the other systems
+        run: |
+          mkdir spv
+          for f in crates/qrender/shaders/*.vert crates/qrender/shaders/*.frag crates/qrender/shaders/*.comp; do
+            [ -f "$f" ] && glslc --target-env=vulkan1.3 -O -Werror "$f" -o "spv/$(basename "$f").spv"
+          done
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with: { name: ci-spirv, path: spv, retention-days: 1 }
       - name: Translations
         run: |
           python3 tools/lang_check.py check $(basename -s .txt crates/qcore/lang/languages/*.txt)
@@ -52,10 +64,56 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
       - name: Rust toolchain
         run: rustup toolchain install "$RUST_VERSION" --profile minimal --target wasm32-unknown-unknown && rustup default "$RUST_VERSION"
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
         with: { key: ci-wasm }
       - name: Web build compiles
         run: cargo check --locked --lib --target wasm32-unknown-unknown -p quake-source-port
+
+  # What the releases are built for must at least compile before a tag.
+  systems:
+    needs: linux
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with: { name: ci-spirv, path: spv }
+      - name: Rust toolchain
+        shell: bash
+        run: rustup toolchain install "$RUST_VERSION" --profile minimal && rustup default "$RUST_VERSION"
+      - name: macOS packages
+        if: runner.os == 'macOS'
+        run: brew install cmake ninja
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
+        with: { key: "ci-${{ matrix.os }}" }
+      - name: Compiles
+        shell: bash
+        run: |
+          export QSP_SPIRV_DIR="$GITHUB_WORKSPACE/spv"
+          cargo check --locked -p quake-source-port --features bundled-sdl
+
+  android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with: { persist-credentials: false }
+      - name: Rust toolchain
+        run: rustup toolchain install "$RUST_VERSION" --profile minimal --target aarch64-linux-android && rustup default "$RUST_VERSION"
+      - run: sudo apt-get update && sudo apt-get install -y cmake ninja-build glslc
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
+        with: { key: ci-android }
+      - run: cargo install cargo-ndk --locked --version 4.1.2
+      - name: Compiles
+        run: |
+          export ANDROID_NDK_HOME="${ANDROID_NDK_LATEST_HOME:-$ANDROID_NDK_ROOT}"
+          tools/android_build.sh check
