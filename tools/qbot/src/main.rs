@@ -312,12 +312,27 @@ fn main() {
         work.extend(maps.into_iter().map(|m| (g.clone(), m)));
     }
     eprintln!("qbot: {} maps in {} game dir(s)", work.len(), games.len());
+    if work.is_empty() {
+        eprintln!("qbot: nothing to run (check -game)");
+        std::process::exit(2);
+    }
     let all = run_jobs(&o, &work);
     let mut any_regression = false;
     for g in &games {
         let results: Vec<(String, &bot::Report)> = all.iter().filter(|(gg, _, _)| gg == g).map(|(_, m, r)| (m.clone(), r)).collect();
         let out_dir = if multi { o.out.join(g) } else { o.out.clone() };
         let baseline = if o.baseline.as_os_str().is_empty() || multi { PathBuf::from(format!("tools/qbot/baseline-{g}.json")) } else { o.baseline.clone() };
+        if !o.save_baseline || baseline.exists() {
+            match load_baseline(&baseline) {
+                Ok(_) => {}
+                // a named baseline, or one that is there but broken, can't be skipped
+                Err(e) if baseline.exists() || !o.baseline.as_os_str().is_empty() => {
+                    eprintln!("qbot: baseline {}: {e}", baseline.display());
+                    std::process::exit(2);
+                }
+                Err(_) => eprintln!("qbot: {g} has no baseline ({}): nothing to compare with", baseline.display()),
+            }
+        }
         any_regression |= report_game(&o, g, multi, &out_dir, &baseline, &results);
     }
     if multi {
@@ -380,6 +395,16 @@ fn write_summary(out: &Path, all: &[(String, String, bot::Report)]) {
 
 /// Writes `<out_dir>/report.json` and traces, compares with (or saves) the
 /// baseline; true when something regressed.
+fn load_baseline(path: &Path) -> Result<qui::json::Value, String> {
+    let text = std::fs::read_to_string(path).map_err(|e| e.to_string())?;
+    qui::json::parse(&text).filter(|b| b.as_obj().is_some()).ok_or_else(|| "not a baseline".into())
+}
+
+/// The maps a baseline knows.
+fn old_maps(path: &Path) -> Option<Vec<String>> {
+    load_baseline(path).ok()?.as_obj().map(|o| o.iter().map(|(k, _)| k.clone()).collect())
+}
+
 fn report_game(o: &Opts, game: &str, multi: bool, out_dir: &Path, baseline: &Path, results: &[(String, &bot::Report)]) -> bool {
     let mut j = String::from("{\n");
     for (i, (m, r)) in results.iter().enumerate() {
@@ -401,7 +426,7 @@ fn report_game(o: &Opts, game: &str, multi: bool, out_dir: &Path, baseline: &Pat
         }
     }
 
-    let old = std::fs::read_to_string(baseline).ok().and_then(|t| qui::json::parse(&t));
+    let old = load_baseline(baseline).ok();
     let known = |m: &str| old.as_ref().and_then(|b| b.get(m)).map(baseline_errors).unwrap_or_default();
     let mut regressions: Vec<String> = results
         .iter()
@@ -452,6 +477,9 @@ fn report_game(o: &Opts, game: &str, multi: bool, out_dir: &Path, baseline: &Pat
                 regressions.push(format!("{m}: new developer log line"));
             }
         }
+    }
+    if let Some(b) = old_maps(baseline).filter(|_| !o.save_baseline && o.maps.is_empty()) {
+        regressions.extend(b.into_iter().filter(|m| !all.iter().any(|(a, _)| a == m)).map(|m| format!("{m}: not run")));
     }
     let failed: usize = all.iter().map(|(_, r)| r.failed.len()).sum();
     eprintln!("qbot: {} maps, {failed} goals failed, report {}", all.len(), out.display());

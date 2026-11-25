@@ -75,6 +75,9 @@ impl GelFx {
         self.coat.clear();
         self.dirty = false;
         self.cm = None;
+        // client time starts over
+        self.spraying.clear();
+        self.last_splat_sound = 0.0;
     }
 
     fn cue(&mut self, snd: &SoundSystem, k: usize) -> Arc<Sfx> {

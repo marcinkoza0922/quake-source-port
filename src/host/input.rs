@@ -94,6 +94,10 @@ impl Host {
                 if self.key_dest() == KeyDest::Game && self.automap.fullscreen {
                     let is_console_key = matches!(ie, InputEvent::Key { key, down: true } if key == b'`' as i32);
                     if !is_console_key {
+                        // what was held when the map opened can be let go
+                        if matches!(ie, InputEvent::Key { down: false, .. } | InputEvent::MouseButton { down: false, .. } | InputEvent::GamepadButton { down: false, .. }) {
+                            let _ = qinput::handle_event(self, ie);
+                        }
                         match ie {
                             InputEvent::MouseButton { button, down } => {
                                 self.automap.mouse_button(button, down);

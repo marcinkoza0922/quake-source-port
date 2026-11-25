@@ -204,6 +204,10 @@ pub struct Host {
     hitstop: hitstop::HitStop,
     /// Split-screen players 2..6 (`cl_splitscreen`); player 1 is `cl`.
     pub guests: Vec<crate::splitscreen::Guest>,
+    /// Guest buttons pressed into the shared menu, not released yet.
+    menu_presses: Vec<(usize, qinput::GamepadButton)>,
+    /// A guest's sticks moved player 1's in the menu.
+    menu_axes: bool,
     /// Player 1's gamepad (the first pad used); other pads can join.
     p1_pad: Option<u32>,
     /// While a guest pad's event runs: binds act on that guest's input.
@@ -401,6 +405,8 @@ impl Host {
             freecam: Default::default(),
             hitstop: Default::default(),
             guests: Vec::new(),
+            menu_presses: Vec::new(),
+            menu_axes: false,
             p1_pad: None,
             input_target: None,
             guest_cbuf: Cbuf::new(),

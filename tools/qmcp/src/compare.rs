@@ -36,17 +36,34 @@ pub fn qbot(before: &Value, after: &Value) -> Result<Value> {
     let new = after.as_object().ok_or("after must be a qbot map object")?;
     let mut changes = Vec::new();
     let mut missing = Vec::new();
+    let mut capped = Vec::new();
     for (map, b) in old {
         let Some(a) = new.get(map) else {
             missing.push(map);
             continue;
         };
         // how far -maxwall let the bot get depends on the machine
-        if a["wall_capped"] == true || b["wall_capped"] == true {
-            continue;
-        }
+        let wall_capped = a["wall_capped"] == true || b["wall_capped"] == true;
         let mut reasons = Vec::new();
         let mut deltas = serde_json::Map::new();
+        if wall_capped {
+            capped.push(map);
+            // ... but not whether it errors, or is stopped at all
+            let added: Vec<_> = a["errors"]
+                .as_array()
+                .into_iter()
+                .flatten()
+                .filter(|v| !b["errors"].as_array().is_some_and(|items| items.contains(v)))
+                .cloned()
+                .collect();
+            let mut new_items = serde_json::Map::new();
+            if !added.is_empty() {
+                reasons.push("new errors".to_string());
+                new_items.insert("errors".into(), json!(added));
+            }
+            changes.push(json!({"map":map,"deltas":deltas,"regression":!reasons.is_empty(),"reasons":reasons,"new_items":new_items,"wall_capped":true}));
+            continue;
+        }
         for key in ["kills", "secrets", "events"] {
             let (bv, av) = if key == "events" {
                 (events(b), events(a))
@@ -97,7 +114,7 @@ pub fn qbot(before: &Value, after: &Value) -> Result<Value> {
     }
     let regressions = changes.iter().filter(|v| v["regression"] == true).count();
     Ok(
-        json!({"regressions":regressions,"missing_maps":missing,"added_maps":new.keys().filter(|k|!old.contains_key(*k)).collect::<Vec<_>>(),"maps":changes,"comparable":missing.is_empty(),"has_regressions":regressions>0 || !missing.is_empty()}),
+        json!({"regressions":regressions,"missing_maps":missing,"wall_capped_maps":capped,"added_maps":new.keys().filter(|k|!old.contains_key(*k)).collect::<Vec<_>>(),"maps":changes,"comparable":missing.is_empty(),"has_regressions":regressions>0 || !missing.is_empty()}),
     )
 }
 
@@ -204,7 +221,11 @@ mod tests {
         assert_eq!(qbot(&quiet, &a).unwrap()["regressions"], 0);
         a["m"]["kills"] = json!(0);
         a["m"]["wall_capped"] = json!(true);
-        assert_eq!(qbot(&b, &a).unwrap()["regressions"], 0);
+        let r = qbot(&b, &a).unwrap();
+        assert_eq!((&r["regressions"], &r["wall_capped_maps"]), (&json!(0), &json!(["m"])));
+        a["m"]["errors"] = json!(["it broke"]);
+        let r = qbot(&b, &a).unwrap();
+        assert_eq!((&r["regressions"], &r["has_regressions"]), (&json!(1), &json!(true)));
     }
     #[test]
     fn bench_matches_resolution_and_handles_failed_runs() {

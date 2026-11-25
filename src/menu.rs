@@ -40,6 +40,7 @@ mod actions;
 mod customize;
 use customize::{CUSTOMIZE, MODIFIERS, NEW_GAME_CUSTOMIZE};
 mod launch;
+mod setup;
 mod preset;
 mod addon_settings;
 use addon_settings::{ADDONS, NEW_GAME_ADDONS};
@@ -299,6 +300,7 @@ pub struct Menu {
     /// Editing the Customize pages for the next new game, so per-game rows
     /// stay editable even while a vanilla game runs.
     new_game_setup: bool,
+    setup: setup::Setup,
     /// The new game behind the launch pop-up (kept while its Customize
     /// pages are open).
     launch: Option<launch::Launch>,
@@ -444,6 +446,7 @@ impl Menu {
             game_running: false,
             custom_running: false,
             new_game_setup: false,
+            setup: Default::default(),
             launch: None,
             preset_pending: false,
             pad_ui: false,

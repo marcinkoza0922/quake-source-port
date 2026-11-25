@@ -642,7 +642,7 @@ impl Menu {
                     out.retain(|a| !matches!(a, Action::Close | Action::Command(_)));
                     if page == modmenu::Page::Maps {
                         let title = launch::map_of(&cmd).and_then(|m| self.mods.map_title(m));
-                        self.open_launch(cmd, true, title);
+                        self.open_launch(cmd, true, title, cv);
                     } else {
                         self.confirm(vec![qcore::tr!("End the current game?"), qcore::tr!("Unsaved progress will be lost.")], qcore::t!("End game"), cmd, true);
                     }

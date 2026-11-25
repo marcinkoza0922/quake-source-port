@@ -179,7 +179,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("menu_help", |h, a| h.menu.open_help(a.argv(1)));
     c.add("help", |h, a| h.menu.open_help(a.argv(1)));
     c.add("menu_singleplayer", |h, _| h.menu.open(Screen::SinglePlayer));
-    c.add("menu_newgame", |h, _| h.menu.open_new_game());
+    c.add("menu_newgame", |h, _| h.menu.open_new_game(&mut h.server.core.cvars));
     c.add("menu_quit", |h, _| h.menu.open(Screen::Quit));
     c.add("menu_hudedit", |h, _| {
         h.menu.open(Screen::HudEditor);

@@ -160,7 +160,7 @@ fn run_map(o: &Opts, game: &str, map: &str) -> MapResult {
     cmd.args(["-headless", "-nosound", "-width", "320", "-height", "240", "-autoquit"])
         .arg(o.time.to_string())
         // Never rotate the user's real autosaves out.
-        .args(["+sv_autosave", "0", "+skill", "3", "+map", map])
+        .args(["+sv_autosave", "0", "+con_translate", "0", "+skill", "3", "+map", map])
         .env("RUST_BACKTRACE", "0")
         .stdin(Stdio::null())
         .stdout(Stdio::piped())
@@ -169,7 +169,8 @@ fn run_map(o: &Opts, game: &str, map: &str) -> MapResult {
     let mut child = match cmd.spawn() {
         Ok(c) => c,
         Err(e) => {
-            res.status = format!("spawn failed: {e}");
+            res.status = "spawn failed".into();
+            res.issues.push(Issue { level: Level::Error, kind: "spawn", msg: format!("spawn failed: {e}") });
             return res;
         }
     };
@@ -200,6 +201,9 @@ fn run_map(o: &Opts, game: &str, map: &str) -> MapResult {
     };
     res.secs = start.elapsed().as_secs_f64();
     let text = out_t.join().unwrap_or_default() + &err_t.join().unwrap_or_default();
+    if !entered(&text, map) {
+        res.issues.push(Issue { level: Level::Error, kind: "not_loaded", msg: "the map was never loaded".into() });
+    }
     let mut lines = text.lines().peekable();
     while let Some(line) = lines.next() {
         let Some((level, kind)) = classify(line) else { continue };
@@ -226,6 +230,13 @@ fn run_map(o: &Opts, game: &str, map: &str) -> MapResult {
         }
     };
     res
+}
+
+/// The client loaded the map (`Host::new_map`): an exit status of 0 alone
+/// proves nothing.
+fn entered(text: &str, map: &str) -> bool {
+    let mark = format!("loaded {} in ", map.to_ascii_lowercase());
+    text.lines().any(|l| l.to_ascii_lowercase().contains(&mark))
 }
 
 fn json_str(s: &str) -> String {
@@ -316,6 +327,10 @@ fn main() {
         }
     }
     let total = work.len();
+    if total == 0 {
+        eprintln!("qsmoke: no maps to run{}", if o.filters.is_empty() { "" } else { " (check the names)" });
+        std::process::exit(2);
+    }
     eprintln!("qsmoke: {total} maps, {} jobs", o.jobs);
     let queue = Mutex::new(work.into_iter().enumerate());
     let results = Mutex::new(Vec::new());
@@ -342,8 +357,31 @@ fn main() {
     results.sort_by(|a, b| (&a.game, &a.map).cmp(&(&b.game, &b.map)));
     if let Err(e) = write_reports(&o.out, &results) {
         eprintln!("qsmoke: writing report: {e}");
+        std::process::exit(2);
     }
     let bad = results.iter().filter(|r| r.issues.iter().any(|x| x.level == Level::Error)).count();
     eprintln!("qsmoke: {bad}/{} maps with errors; see {}/summary.txt", results.len(), o.out.display());
     std::process::exit(i32::from(bad > 0));
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn a_map_counts_only_when_it_was_loaded() {
+        assert!(entered("x\nloaded E1M1 in 0.14s\n", "e1m1") && !entered("loaded e1m10 in 1s", "e1m1") && !entered("", "e1m1"));
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn nothing_run_is_an_error() {
+        let o = |bin: &str| Opts {
+            basedir: "/nonexistent".into(), bin: bin.into(), jobs: 1, time: 1.0, timeout: 10.0, out: PathBuf::new(), filters: Vec::new(),
+        };
+        for bin in ["/bin/true", "/nonexistent/engine"] {
+            let r = run_map(&o(bin), "id1", "e1m1");
+            assert!(r.issues.iter().any(|i| i.level == Level::Error), "{bin}: {}", r.status);
+        }
+    }
 }

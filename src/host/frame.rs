@@ -1,6 +1,17 @@
 use super::*;
 
 impl Host {
+    /// Host_ServerFrame "always pause in single player if in console or menus"
+    /// (id, ironwail, vkQuake: unless `key_dest == key_game`), and in the
+    /// fullscreen automap. The console that only covers a connection
+    /// (`forced`) doesn't count: `key_dest` stays `key_game` for it. Local
+    /// games also wait while the launch pop-up has borrowed their cvars.
+    pub(super) fn hold_server(&self) -> bool {
+        let away = self.menu.active() || self.con.open || self.con.chat_active || self.automap.fullscreen;
+        let local = qserver::addons::all_local(&self.server.core.clients);
+        (self.server.core.maxclients() == 1 && away) || (local && self.menu.setup_active())
+    }
+
     /// Toys usable this frame: this game has add-ons, a local non-deathmatch game and
     /// no remote clients. Empty (no allocation) when add-ons are off.
     pub(super) fn allowed_toys(&self) -> Vec<qserver::addons::Toy> {
@@ -215,6 +226,8 @@ impl Host {
         let waited = self.exec_cbuf();
         // (a config that waits every frame never drains: `_config_done`)
         self.config_ready |= !self.quit && self.cbuf.is_empty();
+        let idle = self.cbuf.is_empty();
+        self.menu.sync_setup(&mut self.server.core.cvars, self.server.core.spawns, idle);
         self.qd_cli_frame();
         if self.startup < 2 {
             self.startup += 1;
@@ -457,8 +470,7 @@ impl Host {
             // Keep QC localcmd text for the shared host Cbuf (see exec_cbuf).
             let t = self.server.take_text();
             self.cbuf.add_text(&t);
-            // Ironwail: single player only advances while not in the menu or fullscreen automap.
-            let hold = (self.server.core.maxclients() == 1 && (self.menu.active() || self.automap.fullscreen)) || self.hitstop_hold();
+            let hold = self.hold_server() || self.hitstop_hold();
             self.server.frame_held(sdt, hold);
             if self.server.error().is_some() {
                 // Host_Error: the server printed it; shut down and disconnect

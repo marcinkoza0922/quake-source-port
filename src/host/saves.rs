@@ -275,6 +275,7 @@ impl Host {
     }
 
     fn write_autosave(&mut self, reason: &str, keep: usize, thumbnail: bool) {
+        self.menu.end_setup(&mut self.server.core.cvars);
         let text = self.save_text();
         // The v5 description is ignored by the loader; preserve the trigger in the save itself.
         let text = qserver::addons::save::set_comment(&text, &format!("AUTOSAVE_{}", reason.replace(' ', "_")));
@@ -470,6 +471,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
             h.print(&qcore::ctr!("This game only autosaves (No Manual Saves modifier).\n"));
             return;
         }
+        h.menu.end_setup(&mut h.server.core.cvars);
         let text = h.save_text();
         let Some(p) = h.savegame_path(a.argv(1)) else {
             h.print(&qcore::ctr!("Relative pathnames are not allowed.\n"));
@@ -504,6 +506,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
         let text = qcore::text::decode(&bytes);
         h.print(&qcore::ctr!("Loading {}...\n", save_stem(a.argv(1))));
         // before anything of the running game goes away
+        h.menu.end_setup(&mut h.server.core.cvars);
         let save = match h.server.parse_save(&text) {
             Ok(s) => s,
             Err(e) => return h.print(&qcore::ctr!("load failed: {}\n", e)),

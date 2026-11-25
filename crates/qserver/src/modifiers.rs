@@ -6,33 +6,33 @@
 //! customized game (`Core::custom`, saved as `.qsa`), never in deathmatch,
 //! so a vanilla game plays exactly like other ports.
 
-use qcore::cvar::{CVAR_ARCHIVE, Cvars};
+use qcore::cvar::Cvars;
 use qvm::{OFS_PARM0, Result, Vm};
 
 use crate::server::{Core, Level};
 
 /// (name, default, flags) of the modifier cvars. Their values are saved
-/// in the `.qsa` header of a customized game ([`save_text`]).
+/// in the `.qsa` header of a customized game ([`save_text`]), not the config.
 pub const CVARS: &[(&str, &str, u32)] = &[
-    ("modifier_damagetaken", "1", CVAR_ARCHIVE),
-    ("modifier_enemyhealth", "1", CVAR_ARCHIVE),
-    ("modifier_ammo", "1", CVAR_ARCHIVE),
-    ("modifier_health", "1", CVAR_ARCHIVE),
-    ("modifier_infiniteammo", "0", CVAR_ARCHIVE),
-    ("modifier_nofalldamage", "0", CVAR_ARCHIVE),
-    ("modifier_nodrown", "0", CVAR_ARCHIVE),
-    ("modifier_noselfdamage", "0", CVAR_ARCHIVE),
-    ("modifier_regen", "0", CVAR_ARCHIVE),
-    ("modifier_jumps", "1", CVAR_ARCHIVE),
+    ("modifier_damagetaken", "1", 0),
+    ("modifier_enemyhealth", "1", 0),
+    ("modifier_ammo", "1", 0),
+    ("modifier_health", "1", 0),
+    ("modifier_infiniteammo", "0", 0),
+    ("modifier_nofalldamage", "0", 0),
+    ("modifier_nodrown", "0", 0),
+    ("modifier_noselfdamage", "0", 0),
+    ("modifier_regen", "0", 0),
+    ("modifier_jumps", "1", 0),
     // extra copies of every monster at map load (like `sv_horde`)
-    ("modifier_horde", "0", CVAR_ARCHIVE),
+    ("modifier_horde", "0", 0),
     // weapon pickups: 0 the game decides, 1 better weapon, 2 never switch
     // (`weaponswitch`, by `cl_weaponpriority`)
-    ("modifier_autoswitch", "0", CVAR_ARCHIVE),
+    ("modifier_autoswitch", "0", 0),
     // changelevel resets each player's items (QC SetNewParms)
-    ("modifier_pistolstart", "0", CVAR_ARCHIVE),
+    ("modifier_pistolstart", "0", 0),
     // only autosaves; the host refuses `save`
-    ("modifier_nosaves", "0", CVAR_ARCHIVE),
+    ("modifier_nosaves", "0", 0),
 ];
 
 /// Modifiers apply: a customized game, not deathmatch.

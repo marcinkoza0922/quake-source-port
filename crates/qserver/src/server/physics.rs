@@ -69,8 +69,9 @@ impl Server {
         }
     }
 
-    /// SV_RunClients.
-    pub(super) fn run_clients(&mut self, ft: f64) {
+    /// SV_RunClients. While held (single player in the console or menus,
+    /// hitstop) messages are read but nobody moves.
+    pub(super) fn run_clients(&mut self, ft: f64, hold: bool) {
         for i in 0..self.core.maxclients() {
             if !self.core.clients[i].active {
                 continue;
@@ -102,7 +103,7 @@ impl Server {
                 cl.cmd = ClientMove::default();
                 continue;
             }
-            if c.sv.paused {
+            if c.sv.paused || hold {
                 continue;
             }
             let mut cmd = qworld::user::UserCmd { forwardmove: mv.forward, sidemove: mv.side, upmove: mv.up };
