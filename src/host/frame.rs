@@ -206,11 +206,11 @@ impl Host {
         self.poll_pad_gestures();
         let spawns = self.server.core.spawns;
         let now = self.realtime;
-        let (due, rest): (Vec<_>, Vec<_>) = std::mem::take(&mut self.delayed).into_iter().partition(|(t, _)| *t <= now);
+        let (due, rest): (Vec<_>, Vec<_>) = std::mem::take(&mut self.delayed).into_iter().partition(|(t, ..)| *t <= now);
         self.delayed = rest;
-        for (_, c) in due {
-            self.cbuf.add_text(&c);
-            self.cbuf.add_text("\n");
+        for (_, c, origin) in due {
+            self.cbuf.add_text_from(&c, origin);
+            self.cbuf.add_text_from("\n", origin);
         }
         let waited = self.exec_cbuf();
         self.qd_cli_frame();

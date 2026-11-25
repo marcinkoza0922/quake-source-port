@@ -261,7 +261,7 @@ mod save_menu_tests {
         m.key(K_DEL, &mut cv, true);
         m.key(K_LEFTARROW, &mut cv, true);
         let actions = m.key(K_ENTER, &mut cv, true);
-        assert_eq!(commands(&actions), ["_deletesave \"s1\"\n"]);
+        assert!(actions.iter().any(|a| matches!(a, Action::Run(w) if *w == ["_deletesave", "s1"])));
         assert_eq!(m.screen, Screen::Save);
     }
 

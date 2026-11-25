@@ -7,6 +7,8 @@ pub mod lang;
 pub mod math;
 pub mod procstat;
 pub mod reader;
+pub mod safe_path;
+pub mod sha256;
 pub mod vertex;
 pub mod text;
 pub mod time;

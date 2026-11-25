@@ -235,7 +235,7 @@ impl Ctx<'_> {
     /// used, since profiling costs a little.
     fn go(&self, k: &Key, demo: Option<&str>, res: Res, label: &str, attrib: bool) -> Result<Sample, String> {
         let (w, h) = res.size();
-        let (mut args, mut cfg) = split(&k.pins);
+        let (mut args, cfg) = split(&k.pins);
         let dir = self.out.join("runs").join(format!("{}-{w}x{h}-{label}", k.label));
         let json = dir.join("profile.json");
         let _ = std::fs::remove_file(&json);
@@ -244,8 +244,9 @@ impl Ctx<'_> {
             if !l.realtime {
                 args.extend(["-fixedstep".into(), live::STEP_HZ.to_string()]);
             }
+            args.push(live::profile_arg(&json.display().to_string()));
         } else if attrib {
-            cfg.push(format!("prof_timedemo \"{}\"", json.display()));
+            args.extend(["+prof_timedemo".into(), json.display().to_string()]);
         }
         let spec = RunSpec {
             engine: Engine::Ours, bin: self.bin, base: &self.sb.dir, user_data: Some(&self.sb.userdata), game: k.src.game(),
@@ -263,7 +264,7 @@ impl Ctx<'_> {
             }),
             Src::Demo(_) => runner::run(&spec).map(|r| Sample::of(r.fps, r.frame_ms.as_deref())),
             Src::Live(_, l) => {
-                runner::live(&spec, &live::script(&l, &json.display().to_string()), live::DONE)?;
+                runner::live(&spec, &live::script(&l), live::DONE)?;
                 profile().map(|p| Sample::live(&p))
             }
         }

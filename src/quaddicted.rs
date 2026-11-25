@@ -61,10 +61,10 @@ fn arr(v: Option<&Value>) -> &[Value] {
 /// Parses one release JSON; `None` for files without a download.
 pub fn parse_release(v: &Value) -> Option<Release> {
     let mut r = Release {
-        sha: s(v.get("sha256")?)?.to_string(),
+        sha: s(v.get("sha256")?).filter(|h| h.len() == 64 && h.bytes().all(|b| b.is_ascii_hexdigit()))?.to_ascii_lowercase(),
         description: strip_html(v.get("description").and_then(s).unwrap_or("")),
         bytes: v.get("bytes").and_then(Value::num).unwrap_or(0.0) as u64,
-        url: arr(v.get("urls")).iter().filter_map(s).next()?.to_string(),
+        url: arr(v.get("urls")).iter().filter_map(s).find(|u| u.starts_with("https://") || u.starts_with("http://"))?.to_string(),
         ..Default::default()
     };
     let mut filename = String::new();
@@ -89,7 +89,7 @@ pub fn parse_release(v: &Value) -> Option<Release> {
     }
     r.stem = sanitize(filename.rsplit_once('.').map_or(filename.as_str(), |(a, _)| a));
     if r.stem.is_empty() {
-        r.stem = r.sha[..r.sha.len().min(12)].to_string();
+        r.stem = r.sha[..12].to_string();
     }
     if r.title.is_empty() {
         r.title = r.stem.clone();
@@ -167,8 +167,7 @@ pub fn map_entry(install: &Install, name: &str) -> Option<String> {
         None => format!("{}/{name}", install.extract.as_deref()?),
     };
     let dest = clean(&dest);
-    let bad = dest.is_empty() || dest.split('/').any(|c| c == ".." || c.contains(':'));
-    (!bad).then_some(dest)
+    qcore::safe_path::safe_rel(&dest).map(|_| dest)
 }
 
 /// Engine subdirs: a path starting with one of these is `id1` content.
@@ -252,11 +251,23 @@ pub fn missing_mods(planned: &[(String, String)], roots: &[&Path], own: &str) ->
     v
 }
 
+/// The download is the file the index names: mirrors and plain `http://` urls
+/// aren't trusted, its SHA-256 is.
+fn verify(r: &Release, zip: &Path) -> Result<(), String> {
+    let mut f = std::fs::File::open(zip).map_err(|e| format!("{}: {e}", zip.display()))?;
+    let got = qcore::sha256::hex(&mut f).map_err(|e| format!("{}: {e}", zip.display()))?;
+    if got != r.sha {
+        return Err("the download does not match its checksum".into());
+    }
+    Ok(())
+}
+
 /// Unpacks `zip` into `install_root` (the user data `mods/` folder), checking
 /// `basedir` and `install_root` for already-installed dependencies; returns the
 /// game dir to show the release under. A `modinfo.txt` names the own dir (and
 /// its base).
 pub fn install(r: &Release, zip: &Path, install_root: &Path, basedir: &Path) -> Result<String, String> {
+    verify(r, zip)?;
     let pack = qcore::fs::Pack::load_pk3(zip).ok_or(qcore::t!("the download is not a valid zip"))?;
     let own = r.stem.clone();
     let (planned, base) = plan(&r.install, pack.names(), &own);

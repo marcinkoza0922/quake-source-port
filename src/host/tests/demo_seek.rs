@@ -119,7 +119,7 @@ fn seeking_back_matches_straight_playback() {
     assert!(h.demo_peek().is_some());
     // QSP_DEMO_SHOTS=<dir>: a picture of the strip
     if let Some(dir) = std::env::var_os("QSP_DEMO_SHOTS") {
-        h.exec_line(&format!("screenshot {}", std::path::Path::new(&dir).join("peek").display()));
+        h.exec_line_from(&format!("screenshot {}", std::path::Path::new(&dir).join("peek").display()), Origin::User);
         run(&mut h, 0.1);
     }
     click(&mut h, (size.0 / 2.0, size.1 - 4.0));
@@ -149,11 +149,11 @@ fn cancelled_export_leaves_no_files() {
     h.exec_line(&format!("playdemo {}", path.display()));
     run(&mut h, 0.3);
     h.exec_line("menu_export");
-    h.exec_line(&format!("_export_dest \"{}\"", out.display()));
+    h.exec_line_from(&format!("_export_dest \"{}\"", out.display()), Origin::User);
     // the name field shows the demo's name; the extension isn't part of it
     assert_eq!(h.cvs("_export_name"), "c");
-    h.exec_line("_export_name x");
-    h.exec_line("_export_go whole");
+    h.exec_line_from("_export_name x", Origin::User);
+    h.exec_line_from("_export_go whole", Origin::User);
     run(&mut h, 0.5);
     assert!(h.exporting());
     assert!(std::fs::read_dir(&out).is_ok_and(|d| d.count() > 0), "the export wrote nothing");

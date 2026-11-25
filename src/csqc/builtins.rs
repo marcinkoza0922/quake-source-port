@@ -258,7 +258,7 @@ impl VmHost for CsqcHost<'_, '_> {
             }
             Builtin::CvarSet => {
                 let (name, val) = (s_arg(vm, 0)?, s_arg(vm, 1)?);
-                self.env.cvars.set(&name, &val);
+                self.env.cvars.set_script(&name, &val);
             }
             Builtin::Localcmd => {
                 let s = s_arg(vm, 0)?;

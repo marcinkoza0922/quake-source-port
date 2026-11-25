@@ -42,6 +42,32 @@ enum Conn {
     Connected(Netchan),
 }
 
+/// Largest file a server may send.
+const MAX_DOWNLOAD: usize = 256 << 20;
+
+/// A server's gamedir as a directory name: one component, as id's client
+/// requires; it picks where downloads are written.
+fn safe_gamedir(game: &str) -> Option<String> {
+    let game = if game.is_empty() { "qw" } else { game };
+    qcore::safe_path::safe_component(game).then(|| game.to_ascii_lowercase())
+}
+
+/// Where a file the server asks for may be written: game content in its own
+/// folder, never configs, progs, paks or a path outside the game dir.
+fn safe_download(name: &str) -> Option<PathBuf> {
+    let rel = qcore::safe_path::safe_rel(name)?;
+    let (dir, file) = name.split_once('/')?;
+    let ext = file.rsplit_once('.')?.1.to_ascii_lowercase();
+    let exts: &[&str] = match dir.to_ascii_lowercase().as_str() {
+        "maps" => &["bsp", "lit", "loc", "ent"],
+        "progs" | "models" | "sprites" => &["mdl", "spr", "bsp", "md3"],
+        "sound" => &["wav", "ogg"],
+        "skins" => &["pcx"],
+        _ => &[],
+    };
+    exts.contains(&ext.as_str()).then_some(rel)
+}
+
 struct Download {
     name: String,
     data: Vec<u8>,
@@ -254,7 +280,7 @@ impl QwClient {
         match a {
             QwAction::Cmd(c) => self.stringcmd(&c),
             QwAction::Precache => {
-                self.mount_download_dir(fs);
+                self.mount_download_dir(fs)?;
                 self.precache = Some(self.qw.needed_files().into_iter().rev().collect());
                 self.next_precache(fs, nq, prints)?;
             }
@@ -265,14 +291,17 @@ impl QwClient {
                     self.download = None;
                     return self.next_precache(fs, nq, prints);
                 }
+                if dl.data.len() + data.len() > MAX_DOWNLOAD {
+                    return Err(format!("The server sent too much data for {}\n", dl.name));
+                }
                 dl.data.extend_from_slice(&data);
                 if percent != 100 {
                     self.stringcmd("nextdl");
                     return Ok(());
                 }
                 let dl = self.download.take().unwrap();
-                if let Some(dir) = &self.dl_dir {
-                    let path = dir.join(&dl.name);
+                if let (Some(dir), Some(rel)) = (&self.dl_dir, safe_download(&dl.name)) {
+                    let path = dir.join(rel);
                     let tmp = path.with_extension("tmp");
                     let ok = qcore::vfs::write(&tmp, &dl.data).is_ok()
                         && qcore::vfs::rename(&tmp, &path).is_ok();
@@ -298,16 +327,17 @@ impl QwClient {
     }
 
     /// Downloads go to the user data dir of the server's gamedir.
-    fn mount_download_dir(&mut self, fs: &mut Fs) {
-        let game = if self.qw.gamedir.is_empty() { "qw" } else { self.qw.gamedir.as_str() };
+    fn mount_download_dir(&mut self, fs: &mut Fs) -> Result<(), String> {
+        let game = safe_gamedir(&self.qw.gamedir).ok_or("The server sent a bad game directory\n")?;
         let dir = match &self.download_root {
-            Some(r) => r.join(game.to_ascii_lowercase()),
-            None => crate::user_dir(game),
+            Some(r) => r.join(game),
+            None => crate::user_dir(&game),
         };
         if self.dl_dir.as_ref() != Some(&dir) {
             fs.add_user_dir(&dir);
             self.dl_dir = Some(dir);
         }
+        Ok(())
     }
 
     /// Model_NextDownload / Sound_NextDownload: request the next missing
@@ -315,7 +345,11 @@ impl QwClient {
     fn next_precache(&mut self, fs: &mut Fs, nq: &mut Vec<Vec<u8>>, prints: &mut Vec<String>) -> Result<(), String> {
         let Some(queue) = &mut self.precache else { return Ok(()) };
         while let Some(f) = queue.pop() {
-            if f.contains("..") || fs.exists(&f) {
+            if fs.exists(&f) {
+                continue;
+            }
+            if safe_download(&f).is_none() {
+                prints.push(format!("Not downloading {}\n", f.escape_debug()));
                 continue;
             }
             prints.push(format!("Downloading {f}...\n"));

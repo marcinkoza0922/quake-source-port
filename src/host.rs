@@ -4,8 +4,8 @@
 use std::path::PathBuf;
 
 use qclient::{ClientEvent, ClientState, InputState, MoveSpeeds, UserCmd};
-use qcore::cmd::{Args, Cbuf, CmdContext, Commands};
-use qcore::cvar::{CVAR_ARCHIVE, CVAR_SERVERINFO, Cvars};
+use qcore::cmd::{Args, Cbuf, CmdContext, Commands, Origin};
+use qcore::cvar::{CVAR_ARCHIVE, CVAR_SERVERINFO, CVAR_USER, Cvars};
 use qcore::math::{Vec3, angle_vectors};
 use qinput::aim::{AimContext, AimTarget, TargetKind, aim_assist_allowed};
 use qinput::keys::{K_ESCAPE, KeyDest};
@@ -238,7 +238,9 @@ pub struct Host {
     clean_shot: bool,
     /// Frame profiler while `prof_start` is recording (tools/qprof).
     prof: Option<prof::Profiler>,
-    delayed: Vec<(f64, String)>,
+    delayed: Vec<(f64, String, Origin)>,
+    /// Origin of the command being executed; the shell is for `User` only.
+    cmd_origin: Origin,
     pub headless: bool,
     show_scores: bool,
     startup: u32,
@@ -418,6 +420,7 @@ impl Host {
             clean_shot: false,
             prof: None,
             delayed: Vec::new(),
+            cmd_origin: Origin::Script,
             headless: false,
             show_scores: false,
             startup: 0,

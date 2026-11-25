@@ -6,6 +6,8 @@ mod hud_preset;
 mod pb_ghost;
 mod pad_gestures_and_controls;
 mod compat_cmds;
+mod shell_origin;
+mod origin_files;
 
 mod relaunch_tests {
     #[test]

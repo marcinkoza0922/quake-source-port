@@ -1,14 +1,38 @@
 use super::*;
 
+const SHA: &str = "0057e131aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
+/// `"sha256":"x"` and `u/...` urls are filled in.
+fn try_release(json: &str) -> Option<Release> {
+    let json = json.replace("\"sha256\":\"x\"", &format!("\"sha256\":\"{SHA}\"")).replace("[\"u/", "[\"https://u/");
+    parse_release(&qui::json::parse(&json).unwrap())
+}
+
 fn release(json: &str) -> Release {
-    parse_release(&qui::json::parse(json).unwrap()).unwrap()
+    try_release(json).unwrap()
+}
+
+#[test]
+fn rejects_bad_index_fields() {
+    let with = |sha: &str, url: &str| try_release(&format!(r#"{{"sha256":"{sha}","urls":["{url}"],"tags":[]}}"#));
+    assert!(with(SHA, "https://x/a.zip").is_some() && with(SHA, "http://x/a.zip").is_some());
+    for sha in ["", "../../x", "/home/u/x", "0057e131", &"é".repeat(32), &"g".repeat(64)] {
+        assert!(with(sha, "https://x/a.zip").is_none(), "{sha}");
+    }
+    for url in ["-K/tmp/rc", "file:///etc/passwd", "ftp://x/a.zip", ""] {
+        assert!(with(SHA, url).is_none(), "{url}");
+    }
+    let i = release(r#"{"sha256":"x","urls":["u/c.zip"],"tags":[],"install":{"extract":"{base}/"}}"#).install;
+    for n in ["../x", "a/../../x", "C:/x", "maps/con.bsp", "maps/nul"] {
+        assert_eq!(map_entry(&i, n), None, "{n}");
+    }
 }
 
 const COTD: &str = r#"{
  "bytes": 1558519,
  "description": "Medium-sized cathedral.<br /><br />The map source is <i>included</i> &amp; more.",
  "install": {"extract": "{base}/id1/maps/"},
- "sha256": "0057e131",
+ "sha256": "0057e131aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
  "tags": ["author=Rastrelly", "filename=cotdq1sp.zip", "game_mode=singleplayer",
           "release_date=2021-07-12", "startmap=cotdq1sp", "title=Cathedral of the Doubt", "type=map"],
  "urls": ["https://www.quaddicted.com/filebase/cotdq1sp.zip"]
@@ -134,10 +158,14 @@ fn a_mod_that_needs_quoth_gets_it_as_base() {
     // a zip with a mod dir of its own (bluemonday/progs.dat)
     let zip = dir.join("bm.zip");
     std::fs::write(&zip, stored_zip("bluemonday/progs.dat", b"progs")).unwrap();
-    let r = release(r#"{"sha256":"x","urls":["u/bluemonday_v2.zip"],"tags":["title=Blue Monday Jam","dependency=quoth2pt2full_2"],"install":{"extract":"{base}/"}}"#);
+    let mut r = release(r#"{"sha256":"x","urls":["u/bluemonday_v2.zip"],"tags":["title=Blue Monday Jam","dependency=quoth2pt2full_2"],"install":{"extract":"{base}/"}}"#);
     let base = dir.join("base");
     let mods = dir.join("mods");
     std::fs::create_dir_all(base.join("quoth")).unwrap();
+    // not the file the index names: nothing is installed
+    assert!(install(&r, &zip, &mods, &base).unwrap_err().contains("checksum"));
+    assert!(!mods.exists());
+    r.sha = qcore::sha256::hex(&mut std::fs::File::open(&zip).unwrap()).unwrap();
     assert_eq!(install(&r, &zip, &mods, &base).unwrap(), "bluemonday");
     // Installs into the user mods root, leaving basedir untouched.
     assert!(!base.join("bluemonday").exists());

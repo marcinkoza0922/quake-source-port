@@ -3,6 +3,9 @@
 use crate::cvar::{CVAR_ROM, Cvars};
 use std::collections::HashMap;
 
+mod cbuf;
+pub use cbuf::{Cbuf, Origin};
+
 pub const MAX_ARGS: usize = 80;
 
 /// COM_Parse: returns (token, rest) or None at end of data.
@@ -67,6 +70,10 @@ impl Args {
         }
         a
     }
+    /// Ready-made words, not parsed: a name in them can't become syntax.
+    pub fn from_words(words: &[&str]) -> Args {
+        Args { argv: words.iter().map(|w| w.to_string()).collect(), args: words.get(1..).unwrap_or_default().join(" ") }
+    }
     pub fn argc(&self) -> usize {
         self.argv.len()
     }
@@ -79,67 +86,6 @@ impl Args {
     }
     pub fn all(&self) -> &[String] {
         &self.argv
-    }
-}
-
-/// Command buffer.
-#[derive(Debug, Default)]
-pub struct Cbuf {
-    text: String,
-    wait: bool,
-}
-
-impl Cbuf {
-    pub fn new() -> Self {
-        Self::default()
-    }
-    /// Cbuf_AddText (append).
-    pub fn add_text(&mut self, text: &str) {
-        self.text.push_str(text);
-    }
-    /// Cbuf_InsertText (prepend, followed by newline).
-    pub fn insert_text(&mut self, text: &str) {
-        self.text.insert(0, '\n');
-        self.text.insert_str(0, text);
-    }
-    /// Pause execution until the next `execute` call (the `wait` command).
-    pub fn set_wait(&mut self) {
-        self.wait = true;
-    }
-    /// Consume a pending `wait` (true if one was set).
-    pub fn take_wait(&mut self) -> bool {
-        std::mem::take(&mut self.wait)
-    }
-    /// Remove and return all queued text.
-    pub fn take_text(&mut self) -> String {
-        std::mem::take(&mut self.text)
-    }
-    pub fn is_empty(&self) -> bool {
-        self.text.is_empty()
-    }
-    /// Pop one command: split at newline, or `;` outside quotes, comments and shell pipes.
-    pub fn next_line(&mut self) -> Option<String> {
-        if self.text.is_empty() {
-            return None;
-        }
-        let b = self.text.as_bytes();
-        let shell_line = self.text.trim_start_matches([' ', '\t']).starts_with('!');
-        let (mut quotes, mut comment, mut piped) = (false, false, shell_line);
-        let mut i = 0;
-        while i < b.len() {
-            match b[i] {
-                b'\n' => break,
-                b'"' if !comment => quotes = !quotes,
-                b'/' if !quotes && b.get(i + 1) == Some(&b'/') => comment = true,
-                b'|' | b'!' if !quotes && !comment => piped = true,
-                b';' if !quotes && !comment && !piped => break,
-                _ => {}
-            }
-            i += 1;
-        }
-        let line = self.text[..i].to_string();
-        self.text.drain(..(i + 1).min(self.text.len()));
-        Some(line)
     }
 }
 
@@ -352,6 +298,16 @@ fn cmd_set<C: CmdContext>(ctx: &mut C, a: &Args, flags: u32) {
     ctx.cvar_changed(r);
 }
 
+/// Run the registered command `words[0]`; false when there is none.
+pub fn execute_words<C: CmdContext>(ctx: &mut C, words: &[&str]) -> bool {
+    let args = Args::from_words(words);
+    let f = ctx.commands().cmds.get(&args.argv(0).to_ascii_lowercase()).map(|&(_, f)| f);
+    if let Some(f) = f {
+        f(ctx, &args);
+    }
+    f.is_some()
+}
+
 /// Cmd_ExecuteString: command, then alias, then cvar.
 pub fn execute_string<C: CmdContext>(ctx: &mut C, text: &str) -> Exec {
     let args = Args::tokenize(text);
@@ -390,7 +346,7 @@ pub fn execute_string<C: CmdContext>(ctx: &mut C, text: &str) -> Exec {
 /// Cbuf_Execute: run buffered commands until empty or `wait`.
 pub fn execute<C: CmdContext>(ctx: &mut C) {
     loop {
-        if std::mem::take(&mut ctx.cbuf().wait) {
+        if ctx.cbuf().take_wait() {
             break;
         }
         let Some(line) = ctx.cbuf().next_line() else { break };

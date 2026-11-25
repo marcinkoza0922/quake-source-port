@@ -13,7 +13,7 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("host_maxfps", "250", CVAR_ARCHIVE),
     // tools/perfkit: a timedemo profiles itself and writes the report here
     // when it ends (host/prof.rs; empty = off).
-    ("prof_timedemo", "", 0),
+    ("prof_timedemo", "", CVAR_USER),
     ("fov", "90", CVAR_ARCHIVE),
     ("zoom_fov", "30", CVAR_ARCHIVE),
     ("zoom_speed", "8", CVAR_ARCHIVE),
@@ -188,14 +188,13 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("capture_size", "0", CVAR_ARCHIVE),
     ("capture_gpu", "1", CVAR_ARCHIVE),
     // export dialog state (menu_export)
-    ("_export_dest", "", 0),
-    ("_export_name", "", 0),
+    ("_export_dest", "", CVAR_USER),
+    ("_export_name", "", CVAR_USER),
     // Demos > Rename dialog
     ("_demo_rename", "", 0),
     ("_export_hasclip", "0", 0),
     ("capture_quality", "0", CVAR_ARCHIVE),
     ("capture_audio", "1", CVAR_ARCHIVE),
-    ("capture_ffmpeg", "ffmpeg", CVAR_ARCHIVE),
     ("capture_encoder", "", CVAR_ARCHIVE),
     ("scr_showspeed_ofs", "0", CVAR_ARCHIVE),
     // Mapper aid: server bounding boxes (see src/bboxes.rs).

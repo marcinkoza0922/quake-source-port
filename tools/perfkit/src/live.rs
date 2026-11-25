@@ -84,10 +84,16 @@ impl Live {
     }
 }
 
+/// The engine argument that ends the profile and writes it to `json`
+/// (absolute: the engine runs in the sandbox). Not in [`script`]: a config
+/// may not name output files.
+pub fn profile_arg(json: &str) -> String {
+    // one argument: the engine quotes a separate one that holds spaces
+    format!("+delay {} prof_stop {json}", MEASURE_AT + MEASURE_SECS)
+}
+
 /// The console lines after the pins: map, setup, camera, profiler, marker.
-/// `json` is where `prof_stop` writes the profile (absolute: the engine
-/// runs in the sandbox).
-pub fn script(l: &Live, json: &str) -> Vec<String> {
+pub fn script(l: &Live) -> Vec<String> {
     let end = MEASURE_AT + MEASURE_SECS;
     let mut v = vec!["host_maxfps 10000".to_string(), "deathmatch 0".into()];
     if l.players > 1 {
@@ -123,7 +129,6 @@ pub fn script(l: &Live, json: &str) -> Vec<String> {
         }
     }
     v.push(format!("delay {MEASURE_AT} prof_start"));
-    v.push(format!("delay {end} prof_stop {json}"));
     v.push(format!("delay {} echo {DONE}", end + 0.2));
     v
 }
@@ -171,22 +176,23 @@ mod tests {
     #[test]
     fn script_places_camera_dips_and_measures() {
         let l = Live { alt: Some(([1.0, 2.0, -3.0, 0.0, 90.0], 3.0, 0.5)), ..Live::cam("id1", "e2m2", [1.0, 2.0, 3.0, 0.0, 90.0]) };
-        let s = script(&l, "/x/p.json");
+        let s = script(&l);
         assert_eq!(s[3], "map e2m2");
         assert!(s.contains(&"delay 2 notarget".to_string()));
         assert!(s.contains(&"delay 2.5 freecam 1 2 3 0 90".to_string()), "{s:?}");
         assert!(s.contains(&"delay 3.00 freecam 1 2 -3 0 90".to_string()) && s.contains(&"delay 3.50 freecam 1 2 3 0 90".to_string()));
         // Dips keep going through the whole measurement.
         assert!(s.iter().any(|l| l.starts_with("delay 18.00 freecam 1 2 -3")));
-        assert_eq!(s[s.len() - 3..], ["delay 5 prof_start", "delay 20 prof_stop /x/p.json", "delay 20.2 echo perfkit-live-done"]);
-        let plain = script(&Live { alt: None, ..l }, "/p");
+        assert_eq!(s[s.len() - 2..], ["delay 5 prof_start", "delay 20.2 echo perfkit-live-done"]);
+        assert_eq!(profile_arg("/x/p.json"), "+delay 20 prof_stop /x/p.json");
+        let plain = script(&Live { alt: None, ..l });
         assert_eq!(plain.iter().filter(|l| l.contains("freecam")).count(), 1);
         const SETUP: &[Cmd] = &[at(3.0, "toy 5"), every(3.2, 2.0, "+attack")];
-        let p = script(&Live::player("id1", "e1m1", [4.0, 5.0, 6.0, 25.0, 90.0], SETUP), "/p");
+        let p = script(&Live::player("id1", "e1m1", [4.0, 5.0, 6.0, 25.0, 90.0], SETUP));
         assert!(p.contains(&"delay 2.5 setpos 4 5 6 25 90 0".to_string()) && !p.iter().any(|l| l.contains("freecam")), "{p:?}");
         assert!(p.contains(&"delay 3.00 toy 5".to_string()));
         assert_eq!(p.iter().filter(|l| l.ends_with("+attack")).count(), 9, "3.2, 5.2, ... 19.2");
-        let coop = script(&Live { players: 4, fight: true, ..Live::player("ad", "ad_sepulcher", [0.0; 5], &[]) }, "/p");
+        let coop = script(&Live { players: 4, fight: true, ..Live::player("ad", "ad_sepulcher", [0.0; 5], &[]) });
         assert_eq!(coop[..7], ["host_maxfps 10000", "deathmatch 0", "coop 1", "maxplayers 4", "cl_splitscreen 4", "skill 3", "map ad_sepulcher"]);
         assert!(!coop.iter().any(|l| l.contains("notarget")));
     }

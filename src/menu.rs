@@ -170,10 +170,26 @@ pub fn option_cvars() -> impl Iterator<Item = &'static str> {
     })
 }
 
+#[derive(Clone, Debug)]
 pub enum Action {
     Command(String),
+    /// A command and its arguments, run at once on the user's behalf
+    /// (`Origin::Menu`); the words aren't parsed, so names need no quoting.
+    Run(Vec<String>),
     Sound(&'static str),
     Close,
+}
+
+impl From<String> for Action {
+    fn from(cmd: String) -> Self {
+        Action::Command(cmd)
+    }
+}
+
+impl Action {
+    pub(crate) fn run(words: &[&str]) -> Self {
+        Action::Run(words.iter().map(|w| w.to_string()).collect())
+    }
 }
 
 pub struct Menu {

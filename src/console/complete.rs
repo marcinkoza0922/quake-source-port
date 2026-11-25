@@ -89,6 +89,12 @@ impl CompletionState {
     }
 }
 
+/// Whether a name or value may go into the line the user is about to run:
+/// servers, mods and archives choose them, and the line reaches the shell.
+pub fn insertable(text: &str) -> bool {
+    !text.starts_with('!') && !text.contains(|c: char| c.is_control() || matches!(c, '|' | ';' | '"'))
+}
+
 /// Recompute completions for `input[..cursor]`.
 pub fn compute(input: &str, cursor: usize, cat: &Catalog) -> CompletionState {
     let cursor = cursor.min(input.len());
@@ -164,6 +170,7 @@ pub fn compute(input: &str, cursor: usize, cat: &Catalog) -> CompletionState {
         }
     }
 
+    items.retain(|c| insertable(&c.text));
     items.sort_by(|a, b| b.score.cmp(&a.score).then_with(|| a.text.cmp(&b.text)));
     items.dedup_by(|a, b| a.text.eq_ignore_ascii_case(&b.text));
     items.truncate(12);
@@ -204,6 +211,7 @@ fn complete_arg(cmd: &str, partial: &str, cat: &Catalog) -> Vec<Candidate> {
                         score: 90,
                     });
                 }
+                v.retain(|c| insertable(&c.text));
                 return v;
             }
             return Vec::new();
@@ -226,6 +234,7 @@ fn complete_arg(cmd: &str, partial: &str, cat: &Catalog) -> Vec<Candidate> {
             });
         }
     }
+    out.retain(|c| insertable(&c.text));
     out.sort_by(|a, b| b.score.cmp(&a.score).then_with(|| a.text.cmp(&b.text)));
     out.truncate(12);
     out
