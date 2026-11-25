@@ -36,13 +36,9 @@ impl BulletTime {
         self.fraction = (*remaining / duration) as f32;
     }
 
-    pub(super) fn draw(&self, c: &mut Canvas, meter: bool) {
-        if !self.visible || !meter { return; }
-        let x = c.vw() / 2.0 - 60.0;
-        c.fill(x, 22.0, 120.0, 6.0, [0.0, 0.0, 0.0, 0.7]);
-        c.fill(x + 1.0, 23.0, 118.0 * self.fraction, 4.0,
-            if self.active { [0.4, 0.8, 1.0, 0.9] } else { [0.8, 0.7, 0.4, 0.8] });
-        c.text_center(c.vw() / 2.0, 10.0, "BULLET TIME", 8.0, [0.9, 0.9, 0.9, 1.0]);
+    /// The charge (0..1) and whether it is on, for the HUD element.
+    pub(super) fn meter(&self) -> Option<(f32, bool)> {
+        self.visible.then_some((self.fraction, self.active))
     }
 }
 

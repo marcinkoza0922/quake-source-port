@@ -2913,12 +2913,6 @@ hy Փոխարկել
 @ Details
 hy Մանրամասներ
 
-@ Enter or click the box: toggle
-hy Enter կամ սեղմել վանդակը: միացնել/անջատել
-
-@ Right / Tab / click: details
-hy Աջ / Tab / սեղմում: մանրամասներ
-
 @ Input Remapping
 hy Կոճակների վերանշանակում
 
@@ -4258,3 +4252,18 @@ hy Լիովին ավտոմատ հրացան, որը լիցքավորվում է 
 
 @ None
 hy Ոչ մեկը
+
+@ Magazine
+hy Պահունակ
+
+@ Adjust HUD
+hy Հարմարեցնել HUD-ը
+
+@ {} overlaps {}. Move it with Adjust HUD.
+hy {}ը ծածկում է {}ը։ Տեղափոխեք «Հարմարեցնել HUD-ը»-ով։
+
+@ Arranges the HUD for this add-on and the others that are on
+hy Դասավորում է HUD-ը այս և մյուս միացված հավելումների համար
+
+@ Shared by the add-ons that use it; shown only while one does
+hy Ընդհանուր է այն օգտագործող հավելումների համար. երևում է միայն օգտագործման ժամանակ

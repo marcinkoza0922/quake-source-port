@@ -5,7 +5,7 @@
 use qcore::cvar::Cvars;
 use qinput::keys::*;
 
-use super::editor::{CVAR, Drag, Editor, Out, PRESET, Row, TITLE_H, W, layout, save, sound};
+use super::editor::{CVAR, Drag, Editor, Out, PRESET, Row, TITLE_H, W, sound};
 use super::editor_rows::Prop;
 use super::layout::Layout;
 use super::place::{self, Rect};
@@ -66,12 +66,12 @@ impl Editor {
             let (ox, oy) = place::offset_for(e, moved, self.geo.vw, self.geo.vh);
             if (ox, oy) != (e.x, e.y) {
                 (e.x, e.y) = (ox, oy);
-                save(cv, l);
+                self.save(cv, l);
             }
         } else {
             e.x = (e.x + dx).round();
             e.y = (e.y + dy).round();
-            save(cv, l);
+            self.save(cv, l);
         }
     }
 
@@ -90,6 +90,7 @@ impl Editor {
                 self.snap_guides.1.clear();
                 if let Some(Drag::Pad { before, .. }) = self.drag.take() {
                     cv.set(CVAR, &before.layout);
+                    cv.set(super::addons::CVAR, &before.addons);
                     cv.set(PRESET, &before.preset);
                     cv.set(super::presets::PRESET_NAME, &before.preset_name);
                 }
@@ -99,7 +100,7 @@ impl Editor {
                 if let Some(drag) = self.drag.take() {
                     self.commit_drag(drag, cv);
                 }
-                let updated = layout(cv);
+                let updated = self.layout(cv);
                 self.focus_props(&updated)
             }
             K_RSHOULDER => self.toggle_collapse(),
@@ -133,7 +134,7 @@ impl Editor {
                 if let Some(drag) = self.drag.take() {
                     self.commit_drag(drag, cv);
                 }
-                let mut updated = layout(cv);
+                let mut updated = self.layout(cv);
                 self.click(&mut updated, cv)
             }
             _ => Out::default(),
@@ -156,7 +157,7 @@ impl Editor {
         if self.moving() {
             let (lx, ly) = stick_vec(ls);
             if lx != 0.0 || ly != 0.0 {
-                let mut l = layout(cv);
+                let mut l = self.layout(cv);
                 self.move_elem_by(lx * ELEM_SPEED * dt, ly * ELEM_SPEED * dt, &mut l, cv);
             }
         }

@@ -240,6 +240,8 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     // and anchors, Time & Stats, scr_show* metrics, message placement and
     // text size) are read once for that and no longer saved.
     ("hud_layout", "", CVAR_ARCHIVE),
+    // its changes per combination of add-on HUD elements (crate::hud::addons)
+    ("hud_addon_layouts", "", CVAR_ARCHIVE),
     // HUD > HUD Preset: 0 modern, 1 classic (picking either rebuilds
     // hud_layout), 2 custom (or a saved user preset named by hud_preset_name).
     ("hud_preset", "0", CVAR_ARCHIVE),

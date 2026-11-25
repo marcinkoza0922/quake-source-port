@@ -98,7 +98,7 @@ e.g. `health@bl,a0 clock@tr,a3,fm`. Unknown kinds and fields are skipped (`layou
   top/middle anchors and above them at bottom anchors. The result is cached per layout,
   sizes and screen. A full-width status bar touching the bottom makes the 3D view end
   above it (`reserve_bottom` → `View::reserve_bottom`).
-- **Editor** (`editor.rs`, `editor_mouse.rs`, `editor_pad.rs`, `editor_rows.rs`, `editor_popup.rs`, `editor_draw.rs`, `editor_undo.rs`): a
+- **Editor** (`editor.rs`, `editor_mouse.rs`, `editor_pad.rs`, `editor_rows.rs`, `editor_popup.rs`, `editor_draw.rs`, `editor_undo.rs`, `editor_store.rs`): a
   dialog that can be dragged by its title bar and collapsed to a single title bar via the
   hamburger button in the top-right corner (or RB on a controller), with title-bar buttons
   for Undo and Preview state (`Sample`, `Alert` low-health/low-ammo, `Live`). On open no
@@ -149,6 +149,25 @@ e.g. `health@bl,a0 clock@tr,a3,fm`. Unknown kinds and fields are skipped (`layou
   against its preset whenever it changes: a different one makes it custom (layouts saved before presets
   existed or edited via console). ironwail's `hudstyle 0` picks classic, and `hudstyle 1`/`2` picks modern only
   from classic, so a custom HUD stays.
+- **Add-on elements** (`src/hud/addons.rs`): **Magazine** (akimbo pistols, assault rifle;
+  `src/addons/mag_hud.rs`) and **Bullet Time** (its meter) are elements like any other, listed
+  under Add-ons in the Add tree, and shown only while an add-on uses them. They are shared: only
+  the held gun's magazine shows, so every gun uses the one element, and a new add-on joins one by
+  adding its toggle to `ELEMENTS`. The elements of the add-ons that are on form a `Combo`.
+  In a customized game the HUD is `hud_layout` plus the combination's elements, at places chosen to be
+  clear of the built-in presets (`predefined`, above a bottom status bar) unless the layout has
+  them already. **Adjust HUD** (`Run::AdjustHud`; in those add-ons' browser details and settings
+  pages) opens the editor for the add-ons that are on plus that one, named under the title, and
+  returns where it was opened (also in a new game being set up). Changes there go to the archived
+  `hud_addon_layouts` as a patch per combination (`magazine: magazine@br,y-40 -clock`: elements
+  that differ, `-kind` for removed), so later edits of the layout still reach every combination;
+  a combination without its own patch takes those of its parts. Reset to Defaults drops only
+  that combination's patch. Saved presets carry the patches as further lines of their `.hud` file;
+  picking a built-in preset clears them. Edit HUD itself edits the plain layout.
+  An add-on element whose place another element (not a message) has taken still shows, at the
+  nearest free spot, but counts as a conflict (`conflicts`): the Add-ons browser marks the add-on
+  with `!` and says which elements overlap, and the game prints it once. Opening Adjust HUD
+  settles the positions on screen.
 - **First run**: an empty `hud_layout` becomes the layout the old settings describe
   (`Layout::from_legacy`: `scr_hudstyle`, `hud_<elem>` modes and `_pos` anchors,
   `hud_face`, Time & Stats, `scr_show*` metrics, `scr_centerpos`, `con_notifypos`,

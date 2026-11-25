@@ -2913,12 +2913,6 @@ nb Av/på
 @ Details
 nb Detaljer
 
-@ Enter or click the box: toggle
-nb Enter eller klikk på boksen: av/på
-
-@ Right / Tab / click: details
-nb Høyre / Tab / klikk: detaljer
-
 @ Input Remapping
 nb Tilordning av inndata
 
@@ -4258,3 +4252,18 @@ nb Et helautomatisk gevær som lades med spikrene dine. Alternativ ild sikter gj
 
 @ None
 nb Ingen
+
+@ Magazine
+nb Magasin
+
+@ Adjust HUD
+nb Tilpass HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+nb {} overlapper {}. Flytt med «Tilpass HUD».
+
+@ Arranges the HUD for this add-on and the others that are on
+nb Ordner HUD-en for dette tillegget og de andre som er på
+
+@ Shared by the add-ons that use it; shown only while one does
+nb Deles av tilleggene som bruker det; vises bare mens ett gjør det

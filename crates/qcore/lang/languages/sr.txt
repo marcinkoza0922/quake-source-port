@@ -2913,12 +2913,6 @@ sr Прекидач
 @ Details
 sr Детаљи
 
-@ Enter or click the box: toggle
-sr Enter или клик на поље: укључи/искључи
-
-@ Right / Tab / click: details
-sr Десно / Tab / клик: детаљи
-
 @ Input Remapping
 sr Додела тастера
 
@@ -4258,3 +4252,18 @@ sr Аутоматска пушка која се пуни вашим ексер�
 
 @ None
 sr Ништа
+
+@ Magazine
+sr Оквир
+
+@ Adjust HUD
+sr Прилагоди HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+sr {} преклапа {}. Померите помоћу „Прилагоди HUD“.
+
+@ Arranges the HUD for this add-on and the others that are on
+sr Распоређује HUD за овај додатак и остале укључене
+
+@ Shared by the add-ons that use it; shown only while one does
+sr Деле га додаци који га користе; приказан само док га неки користи

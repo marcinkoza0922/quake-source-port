@@ -2913,12 +2913,6 @@ el Εναλλαγή
 @ Details
 el Λεπτομέρειες
 
-@ Enter or click the box: toggle
-el Enter ή κλικ στο πλαίσιο: εναλλαγή
-
-@ Right / Tab / click: details
-el Δεξιά / Tab / κλικ: λεπτομέρειες
-
 @ Input Remapping
 el Αντιστοίχιση χειρισμού
 
@@ -4258,3 +4252,18 @@ el Ένα πλήρως αυτόματο τουφέκι που γεμίζει α�
 
 @ None
 el Κανένα
+
+@ Magazine
+el Γεμιστήρας
+
+@ Adjust HUD
+el Προσαρμογή HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+el {} επικαλύπτει {}. Μετακίνηση με «Προσαρμογή HUD».
+
+@ Arranges the HUD for this add-on and the others that are on
+el Διατάσσει το HUD για αυτό το πρόσθετο και τα άλλα ενεργά
+
+@ Shared by the add-ons that use it; shown only while one does
+el Κοινό για τα πρόσθετα που το χρησιμοποιούν· φαίνεται μόνο όσο κάποιο το χρησιμοποιεί

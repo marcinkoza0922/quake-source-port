@@ -342,9 +342,7 @@ impl Menu {
             }
             k if k >= 2 && k - 2 < self.hud_edit.presets.len() => {
                 let p = &self.hud_edit.presets[k - 2];
-                cv.set(crate::hud::editor::CVAR, &p.layout);
-                cv.set("hud_preset", "2");
-                cv.set(crate::hud::presets::PRESET_NAME, &p.name);
+                p.load(cv);
             }
             _ => {
                 cv.set("hud_preset", "2");

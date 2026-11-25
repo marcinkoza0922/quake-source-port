@@ -2913,12 +2913,6 @@ hu Kapcsolás
 @ Details
 hu Részletek
 
-@ Enter or click the box: toggle
-hu Enter vagy kattintás a négyzetre: kapcsolás
-
-@ Right / Tab / click: details
-hu Jobbra / Tab / kattintás: részletek
-
 @ Input Remapping
 hu Bemenet-átállítás
 
@@ -4258,3 +4252,18 @@ hu Teljesen automata puska, amely a szögeidből tölt újra. A Másodlagos tűz
 
 @ None
 hu Nincs
+
+@ Magazine
+hu Tár
+
+@ Adjust HUD
+hu HUD igazítása
+
+@ {} overlaps {}. Move it with Adjust HUD.
+hu {} átfedi ezt: {}. Áthelyezés: HUD igazítása.
+
+@ Arranges the HUD for this add-on and the others that are on
+hu Elrendezi a HUD-ot ehhez és a többi bekapcsolt kiegészítőhöz
+
+@ Shared by the add-ons that use it; shown only while one does
+hu Az ezt használó kiegészítők közös eleme; csak akkor látszik, ha valamelyik használja

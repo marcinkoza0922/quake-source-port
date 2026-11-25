@@ -2,7 +2,7 @@
 
 use qcore::cvar::Cvars;
 
-use super::editor::{BUTTONS, Drag, Editor, LIST_ROWS, Out, ROW, Row, TITLE_H, W, button_row_col, layout, save, sound};
+use super::editor::{BUTTONS, Drag, Editor, LIST_ROWS, Out, ROW, Row, TITLE_H, W, button_row_col, sound};
 use super::editor_rows;
 use super::layout::Layout;
 use super::place::{self, Rect};
@@ -141,7 +141,7 @@ impl Editor {
                     moved = true;
                     self.drag = Some(Drag::Elem { elem: i, grab: (gx, gy), start, moved, origin, before });
                 }
-                let mut l = layout(cv);
+                let mut l = self.layout(cv);
                 let (Some(e), Some(r)) = (l.elems.get_mut(i), self.rects.get(i).copied()) else { return };
                 let want = Rect { x: hx - gx, y: hy - gy, ..r };
                 let others: Vec<Rect> = self.rects.iter().enumerate().filter(|&(j, _)| j != i).map(|(_, &o)| o).collect();
@@ -151,7 +151,7 @@ impl Editor {
                 let (x, y) = place::offset_for(e, snapped.rect, self.geo.vw, self.geo.vh);
                 if (x, y) != (e.x, e.y) {
                     (e.x, e.y) = (x, y);
-                    save(cv, &l);
+                    self.save(cv, &l);
                 }
             }
             Some(Drag::Pad { .. }) | None => {}

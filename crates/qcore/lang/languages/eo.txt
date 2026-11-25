@@ -2913,12 +2913,6 @@ eo Baskuli
 @ Details
 eo Detaloj
 
-@ Enter or click the box: toggle
-eo Enter aŭ klako sur la skatolo: baskuli
-
-@ Right / Tab / click: details
-eo Dekstren / Tab / klako: detaloj
-
 @ Input Remapping
 eo Reasigno de enigo
 
@@ -4258,3 +4252,18 @@ eo Plene aŭtomata fusilo, kiu reŝargiĝas el viaj najloj. Alt-pafo celas tra �
 
 @ None
 eo Neniu
+
+@ Magazine
+eo Magazeno
+
+@ Adjust HUD
+eo Agordi HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+eo {} kovras {}. Movu per Agordi HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+eo Aranĝas la HUD por ĉi tiu aldonaĵo kaj la aliaj ŝaltitaj
+
+@ Shared by the add-ons that use it; shown only while one does
+eo Komuna al la aldonaĵoj, kiuj uzas ĝin; montrata nur dum uzo

@@ -2913,12 +2913,6 @@ pt-BR Alternar
 @ Details
 pt-BR Detalhes
 
-@ Enter or click the box: toggle
-pt-BR Enter ou clique na caixa: alternar
-
-@ Right / Tab / click: details
-pt-BR Direita / Tab / clique: detalhes
-
 @ Input Remapping
 pt-BR Remapeamento de controles
 
@@ -4258,3 +4252,18 @@ pt-BR Um fuzil automático que recarrega com seus pregos. Disparo alternativo mi
 
 @ None
 pt-BR Nenhum
+
+@ Magazine
+pt-BR Carregador
+
+@ Adjust HUD
+pt-BR Ajustar HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+pt-BR {} se sobrepõe a {}. Mova com Ajustar HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+pt-BR Organiza o HUD para este complemento e os outros ativados
+
+@ Shared by the add-ons that use it; shown only while one does
+pt-BR Compartilhado pelos complementos que o usam; só aparece enquanto um o usa

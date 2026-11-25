@@ -2913,12 +2913,6 @@ ja 切り替え
 @ Details
 ja 詳細
 
-@ Enter or click the box: toggle
-ja Enterまたはボックスをクリック：切り替え
-
-@ Right / Tab / click: details
-ja 右／Tab／クリック：詳細
-
 @ Input Remapping
 ja 入力の再割り当て
 
@@ -4258,3 +4252,18 @@ ja 手持ちのネイルでリロードするフルオートライフル。サ�
 
 @ None
 ja なし
+
+@ Magazine
+ja マガジン
+
+@ Adjust HUD
+ja HUDを調整
+
+@ {} overlaps {}. Move it with Adjust HUD.
+ja {}が{}と重なっています。「HUDを調整」で移動できます。
+
+@ Arranges the HUD for this add-on and the others that are on
+ja このアドオンと他の有効なアドオンに合わせてHUDを配置します
+
+@ Shared by the add-ons that use it; shown only while one does
+ja 使用するアドオンで共有。使用中のみ表示されます

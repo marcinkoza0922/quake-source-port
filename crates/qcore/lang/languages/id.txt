@@ -2913,12 +2913,6 @@ id Alihkan
 @ Details
 id Detail
 
-@ Enter or click the box: toggle
-id Enter atau klik kotak: alihkan
-
-@ Right / Tab / click: details
-id Kanan / Tab / klik: detail
-
 @ Input Remapping
 id Pengaturan Ulang Input
 
@@ -4258,3 +4252,18 @@ id Senapan otomatis penuh yang diisi ulang dari paku Anda. Tembakan Alt membidik
 
 @ None
 id Tidak ada
+
+@ Magazine
+id Magasin
+
+@ Adjust HUD
+id Sesuaikan HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+id {} menimpa {}. Pindahkan dengan Sesuaikan HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+id Menata HUD untuk add-on ini dan yang lain yang aktif
+
+@ Shared by the add-ons that use it; shown only while one does
+id Dipakai bersama oleh add-on yang menggunakannya; tampil hanya saat digunakan

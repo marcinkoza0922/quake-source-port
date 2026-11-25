@@ -2913,12 +2913,6 @@ mk Префрли
 @ Details
 mk Детали
 
-@ Enter or click the box: toggle
-mk Enter или клик на полето: префрли
-
-@ Right / Tab / click: details
-mk Десно / Tab / клик: детали
-
 @ Input Remapping
 mk Пренасочување на влезот
 
@@ -4258,3 +4252,18 @@ mk Целосно автоматска пушка што се полни со т
 
 @ None
 mk Нема
+
+@ Magazine
+mk Шаржер
+
+@ Adjust HUD
+mk Прилагоди HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+mk {} преклопува {}. Поместете со „Прилагоди HUD“.
+
+@ Arranges the HUD for this add-on and the others that are on
+mk Го распоредува HUD за овој додаток и другите вклучени
+
+@ Shared by the add-ons that use it; shown only while one does
+mk Заеднички за додатоците што го користат; се прикажува само додека некој го користи

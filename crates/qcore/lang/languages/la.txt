@@ -2913,12 +2913,6 @@ la Alternare
 @ Details
 la Singula
 
-@ Enter or click the box: toggle
-la Enter vel capsam preme: alternare
-
-@ Right / Tab / click: details
-la Dextra / Tab / preme: singula
-
 @ Input Remapping
 la Reassignatio initus
 
@@ -4258,3 +4252,18 @@ la Sclopetum automatum quod clavis tuis repletur. Ictus alter per collineatorium
 
 @ None
 la Nullum
+
+@ Magazine
+la Receptaculum
+
+@ Adjust HUD
+la HUD accommoda
+
+@ {} overlaps {}. Move it with Adjust HUD.
+la {} super {} iacet. Move per HUD accommoda.
+
+@ Arranges the HUD for this add-on and the others that are on
+la HUD huic additamento ceterisque accensis disponit
+
+@ Shared by the add-ons that use it; shown only while one does
+la Commune additamentis quae eo utuntur; tantum dum adhibetur ostenditur

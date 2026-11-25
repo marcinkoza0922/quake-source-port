@@ -2913,12 +2913,6 @@ is Af/á
 @ Details
 is Nánar
 
-@ Enter or click the box: toggle
-is Enter eða smellur á reitinn: af/á
-
-@ Right / Tab / click: details
-is Hægri / Tab / smellur: nánar
-
 @ Input Remapping
 is Endurúthlutun inntaks
 
@@ -4258,3 +4252,18 @@ is Alsjálfvirkur riffill sem er endurhlaðinn með nöglunum þínum. Aukaskot 
 
 @ None
 is Ekkert
+
+@ Magazine
+is Magasín
+
+@ Adjust HUD
+is Stilla HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+is {} skarast við {}. Færðu með Stilla HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+is Raðar HUD fyrir þessa viðbót og aðrar sem kveikt er á
+
+@ Shared by the add-ons that use it; shown only while one does
+is Sameiginlegt viðbótum sem nota það; sést aðeins á meðan einhver notar það

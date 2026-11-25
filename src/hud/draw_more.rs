@@ -4,7 +4,7 @@
 use qnet::protocol::*;
 
 use super::draw::{Ctx, align, value_color, ammo_names, draw_text, pic_at, pic_box, text_w};
-use super::kind::Kind;
+use super::kind::{Font, Kind};
 use super::layout::Elem;
 use crate::draw::Canvas;
 use crate::sbar::{PicFn, Sbar};
@@ -43,6 +43,39 @@ pub(super) fn weapons(c: &mut Canvas, pf: &mut PicFn, e: &Elem, width: f32, ctx:
             }
         }
     }
+}
+
+fn bullet_time_label(e: &Elem) -> String {
+    let s = qcore::lang::tr("BULLET TIME");
+    if e.font == Font::Quake { qcore::lang::quake_encode(&s).to_string() } else { s.into_owned() }
+}
+
+/// The bar's length and top (under the label).
+fn bullet_time_bar(e: &Elem) -> (f32, f32) {
+    (e.len, if e.a != 0 { (e.size * 1.5).round() } else { 0.0 })
+}
+
+const BULLET_TIME_BAR_H: f32 = 6.0;
+
+pub(super) fn bullet_time_size(c: &Canvas, e: &Elem) -> (f32, f32) {
+    let (len, top) = bullet_time_bar(e);
+    let label = if e.a != 0 { text_w(c, e.font, e.size, &bullet_time_label(e)) } else { 0.0 };
+    (len.max(label), top + BULLET_TIME_BAR_H)
+}
+
+/// Bullet time's charge (the editor: a sample).
+pub(super) fn bullet_time(c: &mut Canvas, pf: &mut PicFn, e: &Elem, w: f32, ctx: &Ctx) {
+    let Some((charge, on)) = ctx.bullet_time.or(ctx.preview.then_some((0.7, true))) else { return };
+    let (len, top) = bullet_time_bar(e);
+    if e.a != 0 {
+        let s = bullet_time_label(e);
+        let x = align(e.anchor.col(), w, text_w(c, e.font, e.size, &s));
+        draw_text(c, pf, e.font, e.size, (x, 0.0), &s, value_color(e), false);
+    }
+    let x = align(e.anchor.col(), w, len);
+    c.fill(x, top, len, BULLET_TIME_BAR_H, [0.0, 0.0, 0.0, 0.7]);
+    let color = if on { [0.4, 0.8, 1.0, 0.9] } else { [0.8, 0.7, 0.4, 0.8] };
+    c.fill(x + 1.0, top + 1.0, (len - 2.0) * charge, BULLET_TIME_BAR_H - 2.0, color);
 }
 
 /// Keys, powerups and sigils (all of them, or one group), in a row.

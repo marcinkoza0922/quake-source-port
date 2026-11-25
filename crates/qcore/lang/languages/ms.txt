@@ -2913,12 +2913,6 @@ ms Togol
 @ Details
 ms Butiran
 
-@ Enter or click the box: toggle
-ms Enter atau klik kotak: togol
-
-@ Right / Tab / click: details
-ms Kanan / Tab / klik: butiran
-
 @ Input Remapping
 ms Peta Semula Input
 
@@ -4258,3 +4252,18 @@ ms Raifal automatik penuh yang diisi semula dengan paku anda. Tembakan Alt membi
 
 @ None
 ms Tiada
+
+@ Magazine
+ms Kelopak
+
+@ Adjust HUD
+ms Laraskan HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+ms {} bertindih dengan {}. Alihkan dengan Laraskan HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+ms Menyusun HUD untuk tambahan ini dan yang lain yang dihidupkan
+
+@ Shared by the add-ons that use it; shown only while one does
+ms Dikongsi oleh tambahan yang menggunakannya; dipaparkan hanya semasa digunakan

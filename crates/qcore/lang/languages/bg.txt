@@ -2913,12 +2913,6 @@ bg Превключи
 @ Details
 bg Подробности
 
-@ Enter or click the box: toggle
-bg Enter или щракване в квадратчето: превключва
-
-@ Right / Tab / click: details
-bg Дясно / Tab / щракване: подробности
-
 @ Input Remapping
 bg Пренастройка на управлението
 
@@ -4258,3 +4252,18 @@ bg Автоматична пушка, която се зарежда с твои
 
 @ None
 bg Няма
+
+@ Magazine
+bg Пълнител
+
+@ Adjust HUD
+bg Настройка на HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+bg {} застъпва {}. Преместете чрез „Настройка на HUD“.
+
+@ Arranges the HUD for this add-on and the others that are on
+bg Подрежда HUD за тази добавка и другите включени
+
+@ Shared by the add-ons that use it; shown only while one does
+bg Споделен от добавките, които го използват; показва се само докато някоя го използва

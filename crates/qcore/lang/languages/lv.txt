@@ -2913,12 +2913,6 @@ lv Pārslēgt
 @ Details
 lv Detaļas
 
-@ Enter or click the box: toggle
-lv Enter vai klikšķis uz rūtiņas: pārslēgt
-
-@ Right / Tab / click: details
-lv Pa labi / Tab / klikšķis: detaļas
-
 @ Input Remapping
 lv Ievades pārpiesaiste
 
@@ -4258,3 +4252,18 @@ lv Pilnībā automātiska šautene, ko pārlādē ar tavām naglām. Alt. šāvi
 
 @ None
 lv Nav
+
+@ Magazine
+lv Aptvere
+
+@ Adjust HUD
+lv Pielāgot HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+lv {} pārklāj {}. Pārvietojiet ar „Pielāgot HUD”.
+
+@ Arranges the HUD for this add-on and the others that are on
+lv Izkārto HUD šim papildinājumam un citiem ieslēgtajiem
+
+@ Shared by the add-ons that use it; shown only while one does
+lv Kopīgs papildinājumiem, kas to izmanto; redzams tikai tad, kad kāds to izmanto

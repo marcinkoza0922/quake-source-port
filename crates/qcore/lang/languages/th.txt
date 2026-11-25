@@ -2913,12 +2913,6 @@ th สลับ
 @ Details
 th รายละเอียด
 
-@ Enter or click the box: toggle
-th Enter หรือ​คลิก​กล่อง: สลับ
-
-@ Right / Tab / click: details
-th ขวา / Tab / คลิก: รายละเอียด
-
 @ Input Remapping
 th ตั้ง​ปุ่ม​ใหม่
 
@@ -4258,3 +4252,18 @@ th ปืน​ไรเฟิล​อัตโนมัติ​ที่​�
 
 @ None
 th ไม่มี
+
+@ Magazine
+th แม็กกาซีน
+
+@ Adjust HUD
+th ปรับ​ HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+th {} ซ้อน​ทับ​ {} ย้าย​ด้วย​ ปรับ​ HUD
+
+@ Arranges the HUD for this add-on and the others that are on
+th จัด​ HUD สำหรับ​ส่วน​เสริม​นี้​และ​ส่วน​เสริม​อื่น​ที่​เปิด​อยู่
+
+@ Shared by the add-ons that use it; shown only while one does
+th ใช้​ร่วม​กัน​ใน​ส่วน​เสริม​ที่​ใช้​มัน​ แสดง​เฉพาะ​เมื่อ​ถูก​ใช้

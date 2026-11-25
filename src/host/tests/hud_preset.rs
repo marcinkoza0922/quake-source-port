@@ -60,6 +60,7 @@ fn presets_rebuild_the_layout_and_editing_makes_it_custom() {
     h.menu.hud_edit.presets.push(crate::hud::presets::SavedPreset {
         name: "Minimal".into(),
         layout: "health@bl,i fps@tr center@mc notify@tl captions@bc".into(),
+        ..Default::default()
     });
     h.exec_line("hud_preset_load Minimal");
     frames(&mut h);
@@ -109,4 +110,45 @@ fn mod_hud_preset_and_widget_roundtrip() {
     frames(&mut h);
     assert_eq!(h.cv("hud_preset"), 0.0);
     assert!(!kinds(&h).contains(&Kind::ModHud) && kinds(&h)[0] == Kind::Health);
+}
+
+#[test]
+fn add_on_elements_join_the_hud_of_customized_games() {
+    let Some(mut h) = host(&["hud_layout \"\"", "hud_addon_layouts \"\"", "hud_preset 0", "sv_autosave 0"]) else { return };
+    qserver::addons::enable_all(&mut h.server.core.cvars);
+    h.exec_line("map e1m1");
+    for _ in 0..30 {
+        h.frame(1.0 / 72.0, Vec::new());
+    }
+    h.menu.open(Screen::None);
+    frames(&mut h);
+    for preset in ["0", "1", "3"] {
+        h.exec_line(&format!("hud_preset {preset}"));
+        frames(&mut h);
+        assert!(kinds(&h).contains(&Kind::Magazine) && kinds(&h).contains(&Kind::BulletTime), "{preset}");
+        assert!(h.hud.conflicts.is_empty(), "preset {preset}: {:?}", h.hud.conflicts);
+    }
+    // a HUD with something at their place
+    h.exec_line("hud_layout \"clock@tc,y2\"");
+    frames(&mut h);
+    assert_eq!(h.menu.hud_conflicts, [(Kind::BulletTime, Kind::Clock)]);
+    assert_eq!(h.hud.warned, h.hud.conflict_key);
+    // Edit HUD shows the plain layout; adjusting the combination settles it
+    h.exec_line("menu_hudedit");
+    frames(&mut h);
+    assert!(!kinds(&h).contains(&Kind::Magazine));
+    assert_eq!(h.cvs("hud_addon_layouts"), "");
+    let combo = crate::hud::addons::Combo::enabled(&h.server.core.cvars);
+    let cv = &h.server.core.cvars;
+    h.menu.hud_edit.open_combo(cv, combo);
+    frames(&mut h);
+    assert!(h.cvs("hud_addon_layouts").contains("bullettime+magazine: "), "{}", h.cvs("hud_addon_layouts"));
+    h.exec_line("menu_keys ESCAPE");
+    h.menu.open(Screen::None);
+    frames(&mut h);
+    assert!(h.hud.conflicts.is_empty() && kinds(&h).contains(&Kind::BulletTime));
+    // a built-in preset starts over
+    h.exec_line("hud_preset 0");
+    frames(&mut h);
+    assert_eq!(h.cvs("hud_addon_layouts"), "");
 }

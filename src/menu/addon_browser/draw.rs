@@ -1,6 +1,8 @@
 //! Browser panels; the checklist viewport leaves dedicated space for prompts.
 use super::*;
 
+const WARN_FG: [f32; 4] = [1.0, 0.55, 0.25, 1.0];
+
 impl Menu {
     pub(in crate::menu) fn draw_addon_browser(&self, c: &mut Canvas, pic: &mut PicFn, cv: &Cvars, time: f64, page: Page) {
         c.text(24.0, 25.0, page_name(page), 14.0, GOLD_FG);
@@ -14,6 +16,9 @@ impl Menu {
             if cv.value_of(a.cvar) != 0.0 {
                 c.fill(30.0, y + 8.0, 5.0, 5.0, GOLD_FG);
             }
+            if a.hud_conflict(self, cv) {
+                c.text_raw(186.0, y + 6.0, "!", TXT, WARN_FG);
+            }
             c.text(44.0, y + 6.0, a.name, TXT, if self.toys_locked(cv) { MUTED } else { FG });
         }
         if ADDON.len() > LIST_VISIBLE {
@@ -26,8 +31,8 @@ impl Menu {
         if self.pad_ui {
             self.glyphs.hints(c, 28.0, 224.0, &[(K_ABUTTON, "Toggle"), (K_RSHOULDER, "Details")], true);
         } else {
-            c.text(28.0, 224.0, "Enter or click the box: toggle", 8.0, MUTED);
-            c.text(28.0, 238.0, "Right / Tab / click: details", 8.0, MUTED);
+            self.glyphs.hints(c, 28.0, 222.0, &[(K_ENTER, "Toggle")], true);
+            self.glyphs.hints(c, 28.0, 238.0, &[(K_TAB, "Details")], true);
         }
         if page == Page::NewGameAddons {
             c.round_box(24.0, 264.0, 172.0, 22.0, 2.0, HILITE, Some(BORDER));
@@ -77,12 +82,18 @@ impl Menu {
                 rows.push((qcore::t!("Reload"), Some("+reload"), None));
             }
         }
+        if a.has_hud() {
+            rows.push((qcore::t!("Adjust HUD"), None, None));
+        }
         rows.push((qcore::t!("Configure Parameters >"), None, None));
         for (i, (label, cmd, slot)) in rows.iter().enumerate() {
             let y = self.browser_row_y(i);
             if y < 236.0 || y + 16.0 > 322.0 { continue; }
             if self.addon_ui.focus == i + 2 {
                 c.fill(216.0, y, 404.0, 16.0, HILITE);
+            }
+            if i + 2 == rows.len() && a.hud_conflict(self, cv) {
+                c.text_raw(425.0, y + 3.0, "!", TXT, WARN_FG);
             }
             let submenu = cmd.is_none() && slot.is_none();
             c.text(224.0, y + 3.0, label, TXT, if submenu { GOLD_FG } else { FG });
@@ -102,10 +113,22 @@ impl Menu {
             _ => ([24.0, 264.0, 172.0, 22.0], 2.0),
         };
         c.round_frame(rect, radius, 2.0, GOLD_FG);
-        c.text_center(320.0, 327.0, self.addon_note(cv, page), 8.0, MUTED);
+        match self.hud_conflict_note(cv) {
+            Some(s) => {
+                c.text_raw((320.0 - c.text_w_raw(&s, 8.0) / 2.0).floor(), 327.0, &s, 8.0, WARN_FG);
+            }
+            None => c.text_center(320.0, 327.0, self.addon_note(cv, page), 8.0, MUTED),
+        }
         if self.pad_ui {
             self.draw_addon_hints(c);
         }
+    }
+
+    /// The HUD conflict of the selected add-on, else of any that is on.
+    pub(in crate::menu) fn hud_conflict_note(&self, cv: &Cvars) -> Option<String> {
+        let hud = crate::hud::addons::Combo::of(self.selected_addon().cvar);
+        let found = self.hud_conflicts.iter().find(|(k, _)| hud.has(*k)).or(self.hud_conflicts.first());
+        found.filter(|_| !self.toys_locked(cv)).map(|&(k, by)| crate::hud::addons::conflict_text(k, by))
     }
 
     /// What changing add-ons here does.

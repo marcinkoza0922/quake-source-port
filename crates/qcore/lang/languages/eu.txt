@@ -2913,12 +2913,6 @@ eu Txandakatu
 @ Details
 eu Xehetasunak
 
-@ Enter or click the box: toggle
-eu Enter edo klik laukian: txandakatu
-
-@ Right / Tab / click: details
-eu Eskuinera / Tab / klik: xehetasunak
-
 @ Input Remapping
 eu Sarrerak berresleitzea
 
@@ -4258,3 +4252,18 @@ eu Zure iltzeekin birkargatzen den fusil guztiz automatikoa. Tiro alternatiboak 
 
 @ None
 eu Bat ere ez
+
+@ Magazine
+eu Kargagailua
+
+@ Adjust HUD
+eu Doitu HUDa
+
+@ {} overlaps {}. Move it with Adjust HUD.
+eu {} eta {} gainjarrita daude. Mugitu hemen: Doitu HUDa.
+
+@ Arranges the HUD for this add-on and the others that are on
+eu HUDa antolatzen du gehigarri honentzat eta piztutako besteentzat
+
+@ Shared by the add-ons that use it; shown only while one does
+eu Erabiltzen duten gehigarriek partekatua; bakarrik erabiltzean agertzen da

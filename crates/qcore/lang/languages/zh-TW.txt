@@ -2913,12 +2913,6 @@ zh-TW 切換
 @ Details
 zh-TW 詳細資訊
 
-@ Enter or click the box: toggle
-zh-TW Enter或點擊方框：切換
-
-@ Right / Tab / click: details
-zh-TW 右／Tab／點擊：詳細資訊
-
 @ Input Remapping
 zh-TW 重新設定按鍵
 
@@ -4258,3 +4252,18 @@ zh-TW 使用你的鐵釘裝填的全自動步槍。次要射擊透過紅點瞄�
 
 @ None
 zh-TW 無
+
+@ Magazine
+zh-TW 彈匣
+
+@ Adjust HUD
+zh-TW 調整 HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+zh-TW {}與{}重疊。請用「調整 HUD」移動。
+
+@ Arranges the HUD for this add-on and the others that are on
+zh-TW 為此附加功能和其他已啟用的附加功能配置 HUD
+
+@ Shared by the add-ons that use it; shown only while one does
+zh-TW 由使用它的附加功能共用；僅在使用時顯示

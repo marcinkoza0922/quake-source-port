@@ -2913,12 +2913,6 @@ fa روشن/خاموش
 @ Details
 fa جزئیات
 
-@ Enter or click the box: toggle
-fa Enter یا کلیک روی جعبه: روشن/خاموش
-
-@ Right / Tab / click: details
-fa راست / Tab / کلیک: جزئیات
-
 @ Input Remapping
 fa تخصیص دوباره‌ی ورودی
 
@@ -4258,3 +4252,18 @@ fa تفنگی تمام‌خودکار که با میخ‌های شما پر می
 
 @ None
 fa هیچ
+
+@ Magazine
+fa خشاب
+
+@ Adjust HUD
+fa تنظیم HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+fa {} روی {} افتاده است. با تنظیم HUD جابه‌جا کنید.
+
+@ Arranges the HUD for this add-on and the others that are on
+fa HUD را برای این افزونه و دیگر افزونه‌های روشن می‌چیند
+
+@ Shared by the add-ons that use it; shown only while one does
+fa میان افزونه‌هایی که از آن استفاده می‌کنند مشترک است؛ فقط هنگام استفاده دیده می‌شود

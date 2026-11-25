@@ -78,6 +78,8 @@ pub(super) enum Run {
     RenameDemo,
     /// HUD → Edit HUD: the HUD editor (`crate::hud::editor`).
     EditHud,
+    /// The HUD editor for the add-ons that are on and the one with this toggle.
+    AdjustHud(&'static str),
 }
 
 pub use crate::net::browser::ServerEntry;

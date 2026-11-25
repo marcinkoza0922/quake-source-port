@@ -18,7 +18,10 @@ use crate::sbar::{Pack, PicFn, Sbar};
 pub(super) const LABEL: [f32; 4] = [0.85, 0.7, 0.35, 1.0];
 pub(super) const VALUE: [f32; 4] = crate::draw::WHITE;
 const ALERT: [f32; 4] = [1.0, 0.35, 0.3, 1.0];
-pub(super) const BACKING: [f32; 4] = [0.0, 0.0, 0.0, 0.45];
+pub(crate) const BACKING: [f32; 4] = [0.0, 0.0, 0.0, 0.45];
+/// The status bar's height without and with the inventory strip.
+pub(super) const STATUS_BAR_H: [f32; 2] = [24.0, 48.0];
+pub(super) const MOD_HUD_SIZE: (f32, f32) = (240.0, 36.0);
 /// Metric labels and the widest values they reserve room for.
 const METRICS: [(&str, &str); 6] = [
     ("FPS", "8888"),
@@ -60,6 +63,8 @@ pub struct Ctx<'a> {
     /// Player history and whether to draw sample values in the editor.
     pub training: Option<(&'a super::Training, bool)>,
     pub glyph_override: f32,
+    /// Bullet time's charge (0..1) and whether it is on, while it can be used.
+    pub bullet_time: Option<(f32, bool)>,
     /// True when the active mod provides a Simple CSQC HUD (`Kind::ModHud`).
     pub has_mod_hud: bool,
 }
@@ -343,8 +348,10 @@ pub fn size(c: &Canvas, e: &Elem, room: &Room) -> (f32, f32) {
         Kind::Automap => (120.0, 88.0),
         Kind::Strafe => super::strafe::SIZE,
         Kind::InputSequence => super::input_sequence::SIZE,
-        Kind::StatusBar => (320.0, if e.a == 1 { 48.0 } else { 24.0 }),
-        Kind::ModHud => (240.0, 36.0),
+        Kind::StatusBar => (320.0, STATUS_BAR_H[usize::from(e.a == 1)]),
+        Kind::ModHud => MOD_HUD_SIZE,
+        Kind::Magazine => crate::addons::mag_hud::size(c, e),
+        Kind::BulletTime => super::draw_more::bullet_time_size(c, e),
         Kind::Weapons => {
             let (n, cols) = (weapon_slots(room), usize::from(e.a.clamp(1, 10)));
             (n.min(cols) as f32 * 20.0 - 2.0, n.div_ceil(cols) as f32 * 14.0 - 2.0)
@@ -465,6 +472,8 @@ fn draw_local(c: &mut Canvas, pf: &mut PicFn, e: &Elem, (w, h): (f32, f32), ctx:
                 c.text(((w - tw) / 2.0).floor(), ((h - 8.0) / 2.0).floor(), Kind::ModHud.label(), 8.0, [0.7, 0.7, 0.7, 0.85]);
             }
         }
+        Kind::Magazine => crate::addons::mag_hud::draw(c, pf, e, ctx),
+        Kind::BulletTime => super::draw_more::bullet_time(c, pf, e, w, ctx),
         Kind::Weapons => super::draw_more::weapons(c, pf, e, w, ctx),
         Kind::Items | Kind::Keys | Kind::Powerups | Kind::Sigils => super::draw_more::items(c, pf, e, w, ctx),
         Kind::AmmoList => super::draw_more::ammo_list(c, pf, e, w, ctx),

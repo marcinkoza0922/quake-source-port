@@ -58,7 +58,7 @@ pub fn offset_for(e: &Elem, r: Rect, vw: f32, vh: f32) -> (f32, f32) {
     ((r.x - ax + frac(e.anchor.col()) * r.w).round(), (r.y - ay + frac(e.anchor.row()) * r.h).round())
 }
 
-fn clamp_on_screen(r: Rect, vw: f32, vh: f32) -> Rect {
+pub(super) fn clamp_on_screen(r: Rect, vw: f32, vh: f32) -> Rect {
     Rect { x: r.x.clamp(0.0, (vw - r.w).max(0.0)), y: r.y.clamp(0.0, (vh - r.h).max(0.0)), ..r }
 }
 

@@ -2913,12 +2913,6 @@ ca Alterna
 @ Details
 ca Detalls
 
-@ Enter or click the box: toggle
-ca Retorn o clic a la casella: alterna
-
-@ Right / Tab / click: details
-ca Dreta / Tab / clic: detalls
-
 @ Input Remapping
 ca Reassignació de controls
 
@@ -4258,3 +4252,18 @@ ca Un fusell automàtic que es recarrega amb els teus claus. El tret secundari a
 
 @ None
 ca Cap
+
+@ Magazine
+ca Carregador
+
+@ Adjust HUD
+ca Ajusta la interfície
+
+@ {} overlaps {}. Move it with Adjust HUD.
+ca {} se superposa a {}. Mou-ho amb Ajusta la interfície.
+
+@ Arranges the HUD for this add-on and the others that are on
+ca Organitza la interfície per a aquest complement i els altres activats
+
+@ Shared by the add-ons that use it; shown only while one does
+ca Compartit pels complements que l'usen; només es mostra mentre un l'usa

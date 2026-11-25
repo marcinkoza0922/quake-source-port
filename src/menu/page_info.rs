@@ -13,6 +13,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         Item::HudPreset => return Some(qcore::t!("Modern: compact elements at the screen edges; classic: the original status bar. Picking one resets the HUD; changes in Edit HUD make it custom")),
         Item::Text { cvar: "_export_name", .. } => return Some(qcore::t!("Name of the video file; the extension follows the video format, and a file of the same name is replaced")),
         Item::Run { run: Run::EditHud, .. } => return Some(qcore::t!("Move, resize, add and remove HUD elements: health, ammo, weapons, timers, messages and more")),
+        Item::Run { run: Run::AdjustHud(_), .. } => return Some(qcore::t!("Arranges the HUD for this add-on and the others that are on")),
         Item::Sub { page: Page::WeaponPriority, .. } => return Some(qcore::t!("Arrange weapon priority order for Better weapon auto-switching")),
         Item::Sub { page: Page::Automap, .. } => return Some(qcore::t!("Configure the 3D wireframe automap view, display, reveal mode, zoom and markers")),
         Item::Text { cvar: "_demo_rename", .. } => return Some(qcore::t!("New name of the demo; if another demo has it, a number is added")),

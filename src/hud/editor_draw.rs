@@ -4,7 +4,7 @@
 use qcore::cvar::Cvars;
 use qinput::keys::*;
 
-use super::editor::{ADD_W, AddRow, BTN_H, BUTTONS, CELL, Editor, LIST_ROWS, PRESET, Popup, ROW, Row, TITLE_H, W, button_row_col, button_row_cols, layout};
+use super::editor::{ADD_W, AddRow, BTN_H, BUTTONS, CELL, Editor, LIST_ROWS, PRESET, Popup, ROW, Row, TITLE_H, W, button_row_col, button_row_cols};
 use super::editor_popup::{ADD_PLACE_H, ADD_PLACE_W, GRID_H, GRID_W, PRESETS_W, SAVE_H, SAVE_W, add_rows, grid_cells_origin, save_popup_buttons};
 use super::editor_rows::{self, Prop};
 use super::kind::{CATEGORIES, IMMERSIVE_TIP, Kind, opt_tip};
@@ -29,7 +29,8 @@ pub(super) struct Dims {
 impl Editor {
     pub(super) fn dims(&self, nprops: usize, has_sel: bool) -> Dims {
         let (x, y) = self.pos.unwrap_or((8.0, 8.0));
-        let list_y = y + TITLE_H + 2.0;
+        // the combination of add-on elements goes under the title
+        let list_y = y + TITLE_H + 2.0 + if self.combo.is_empty() { 0.0 } else { ROW };
         let btn_y = list_y + LIST_ROWS as f32 * ROW + 4.0;
         let btns_bottom = btn_y + 3.0 * BTN_H + 6.0;
         let hdr_y = btns_bottom + 6.0;
@@ -106,7 +107,7 @@ fn draw_btn(c: &mut Canvas, r: Rect, label: &str, fg: [f32; 4], hover: bool, acc
 
 impl Editor {
     pub fn draw(&self, c: &mut Canvas, cv: &Cvars, pad_ui: bool, glyphs: &Glyphs) {
-        let l = layout(cv);
+        let l = self.layout(cv);
         let saved = c.scale;
         c.reset_origin();
         c.scale = self.geo.hud;
@@ -194,6 +195,11 @@ impl Editor {
             let list_h = (d.btn_y - 2.0) - (d.y + TITLE_H);
             c.fill(d.x + 1.0, d.y + TITLE_H, W - 2.0, list_h, LIST_BG);
             c.fill(d.x + 1.0, d.btn_y - 2.0, W - 2.0, 1.0, BORDER);
+            if !self.combo.is_empty() {
+                let names: Vec<_> = self.combo.kinds().map(|k| qcore::lang::tr(k.label())).collect();
+                let s = format!("{}: {}", qcore::lang::tr("Add-ons"), names.join(" + "));
+                c.text_raw(d.x + 6.0, d.y + TITLE_H + 2.5, &s, SIZE, GOLD_FG);
+            }
             self.draw_list(c, l, &d, cur);
             self.draw_buttons(c, cv, l, &d, cur, pad_ui, glyphs);
             if let Some(e) = sel_elem {
@@ -203,7 +209,7 @@ impl Editor {
                 let kind = sel_elem.map(|e| e.kind);
                 let tip = match cur {
                     Some(Row::Prop(Prop::Show)) => Some(IMMERSIVE_TIP),
-                    Some(Row::Prop(Prop::Opt(i))) => kind.and_then(|k| opt_tip(k.opts()[i].label)).or(kind.and_then(Kind::tip)),
+                    Some(Row::Prop(Prop::Opt(i))) => kind.and_then(|k| opt_tip(k, k.opts()[i].label)).or(kind.and_then(Kind::tip)),
                     Some(Row::Elem(_) | Row::Prop(_)) => kind.and_then(Kind::tip),
                     _ => None,
                 };

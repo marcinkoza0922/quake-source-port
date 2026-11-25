@@ -2913,12 +2913,6 @@ he מיתוג
 @ Details
 he פרטים
 
-@ Enter or click the box: toggle
-he Enter או לחיצה על התיבה: מיתוג
-
-@ Right / Tab / click: details
-he ימינה / Tab / לחיצה: פרטים
-
 @ Input Remapping
 he מיפוי קלט מחדש
 
@@ -4258,3 +4252,18 @@ he רובה אוטומטי מלא שנטען מהמסמרים שלכם. ירי �
 
 @ None
 he ללא
+
+@ Magazine
+he מחסנית
+
+@ Adjust HUD
+he התאמת HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+he {} חופף את {}. הזיזו דרך התאמת HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+he מסדר את ה-HUD לתוסף זה ולתוספים האחרים הפעילים
+
+@ Shared by the add-ons that use it; shown only while one does
+he משותף לתוספים שמשתמשים בו; מוצג רק בזמן שימוש

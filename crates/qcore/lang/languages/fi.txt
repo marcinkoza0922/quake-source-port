@@ -2913,12 +2913,6 @@ fi Päälle/pois
 @ Details
 fi Tiedot
 
-@ Enter or click the box: toggle
-fi Enter tai klikkaa ruutua: päälle/pois
-
-@ Right / Tab / click: details
-fi Oikea / Tab / klikkaus: tiedot
-
 @ Input Remapping
 fi Ohjainten uudelleenmääritys
 
@@ -4258,3 +4252,18 @@ fi Täysautomaattinen kivääri, joka ladataan nauloillasi. Toissijainen tuli t�
 
 @ None
 fi Ei mitään
+
+@ Magazine
+fi Lipas
+
+@ Adjust HUD
+fi Säädä HUDia
+
+@ {} overlaps {}. Move it with Adjust HUD.
+fi {} peittää kohteen {}. Siirrä: Säädä HUDia.
+
+@ Arranges the HUD for this add-on and the others that are on
+fi Järjestää HUDin tälle lisäosalle ja muille käytössä oleville
+
+@ Shared by the add-ons that use it; shown only while one does
+fi Yhteinen sitä käyttäville lisäosille; näkyy vain, kun jokin käyttää sitä

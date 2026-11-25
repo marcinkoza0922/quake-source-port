@@ -2913,12 +2913,6 @@ cy Toglo
 @ Details
 cy Manylion
 
-@ Enter or click the box: toggle
-cy Enter neu glicio'r blwch: toglo
-
-@ Right / Tab / click: details
-cy De / Tab / clicio: manylion
-
 @ Input Remapping
 cy Ail-neilltuo mewnbwn
 
@@ -4258,3 +4252,18 @@ cy Reiffl cwbl awtomatig sy'n ail-lwytho o'ch hoelion. Mae Tanio amgen yn anelu 
 
 @ None
 cy Dim
+
+@ Magazine
+cy Magasîn
+
+@ Adjust HUD
+cy Addasu'r HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+cy Mae {} yn gorgyffwrdd â {}. Symudwch gyda Addasu'r HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+cy Yn trefnu'r HUD ar gyfer yr ychwanegyn hwn a'r lleill sydd ymlaen
+
+@ Shared by the add-ons that use it; shown only while one does
+cy Wedi'i rannu gan yr ychwanegion sy'n ei ddefnyddio; i'w weld dim ond wrth ei ddefnyddio

@@ -2913,12 +2913,6 @@ ta மாற்று
 @ Details
 ta விவரங்கள்
 
-@ Enter or click the box: toggle
-ta Enter அல்லது பெட்டியைக் கிளிக்: மாற்று
-
-@ Right / Tab / click: details
-ta வலது / Tab / கிளிக்: விவரங்கள்
-
 @ Input Remapping
 ta உள்ளீட்டு மறுஒதுக்கல்
 
@@ -4258,3 +4252,18 @@ ta உங்கள் ஆணிகளால் ரீலோடு ஆகும�
 
 @ None
 ta ஏதுமில்லை
+
+@ Magazine
+ta மேகசின்
+
+@ Adjust HUD
+ta HUD-ஐச் சரிசெய்
+
+@ {} overlaps {}. Move it with Adjust HUD.
+ta {}, {} ஒன்றன்மேல் ஒன்று உள்ளன. HUD-ஐச் சரிசெய் மூலம் நகர்த்தவும்.
+
+@ Arranges the HUD for this add-on and the others that are on
+ta இந்த ஆட்-ஆனுக்கும் இயக்கப்பட்ட மற்றவற்றுக்கும் HUD-ஐ அமைக்கிறது
+
+@ Shared by the add-ons that use it; shown only while one does
+ta பயன்படுத்தும் ஆட்-ஆன்களுக்குப் பொதுவானது; பயன்பாட்டின்போது மட்டும் தெரியும்

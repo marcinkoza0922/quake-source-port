@@ -11,10 +11,22 @@ pub const MAX_NAME_LEN: usize = 24;
 
 const EXT: &str = "hud";
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
 pub struct SavedPreset {
     pub name: String,
     pub layout: String,
+    /// Its `hud_addon_layouts`: further lines of the file.
+    pub addons: String,
+}
+
+impl SavedPreset {
+    /// Makes this preset the HUD.
+    pub fn load(&self, cv: &mut qcore::cvar::Cvars) {
+        cv.set(super::editor::CVAR, &self.layout);
+        cv.set(super::addons::CVAR, &self.addons);
+        cv.set(super::editor::PRESET, "2");
+        cv.set(PRESET_NAME, &self.name);
+    }
 }
 
 /// Directory for user-saved HUD presets (`<user data>/hud_presets`).
@@ -47,11 +59,11 @@ fn file_path(dir: &Path, name: &str) -> PathBuf {
     dir.join(format!("{name}.{EXT}"))
 }
 
-fn parse_layout(text: &str) -> Option<String> {
-    text.lines()
-        .map(str::trim)
-        .find(|l| !l.is_empty() && !l.starts_with('#') && !l.starts_with("//"))
-        .map(String::from)
+/// The layout (the first line that isn't a comment) and the add-on patches after it.
+fn parse_layout(text: &str) -> Option<(String, String)> {
+    let mut lines = text.lines().map(str::trim).filter(|l| !l.is_empty() && !l.starts_with('#') && !l.starts_with("//"));
+    let layout = lines.next()?.to_string();
+    Some((layout, lines.collect::<Vec<_>>().join(" ")))
 }
 
 /// Loads all saved `*.hud` presets from `dir`, sorted by name.
@@ -78,14 +90,15 @@ pub fn load_from(dir: &Path) -> Vec<SavedPreset> {
         let Ok(text) = qcore::vfs::read_to_string(&entry.path) else {
             continue;
         };
-        let Some(layout) = parse_layout(&text) else {
+        let Some((layout, addons)) = parse_layout(&text) else {
             continue;
         };
         if let Some(existing) = out.iter_mut().find(|p: &&mut SavedPreset| p.name.eq_ignore_ascii_case(&name)) {
             existing.name = name;
             existing.layout = layout;
+            existing.addons = addons;
         } else {
-            out.push(SavedPreset { name, layout });
+            out.push(SavedPreset { name, layout, addons });
         }
     }
     out.sort_by_key(|p| p.name.to_ascii_lowercase());
@@ -115,7 +128,11 @@ pub fn write_one_to(dir: &Path, preset: &SavedPreset) -> std::io::Result<()> {
             }
         }
     }
-    let body = format!("{}\n", preset.layout.trim());
+    let mut body = format!("{}\n", preset.layout.trim());
+    for line in super::addons::Patches::parse(&preset.addons).lines() {
+        body += &line;
+        body.push('\n');
+    }
     qcore::vfs::write(&file_path(dir, &name), body.as_bytes())
 }
 
@@ -144,7 +161,7 @@ pub fn delete_one(name: &str) -> std::io::Result<()> {
 }
 
 /// Inserts or overwrites a preset (case-insensitive name match). Returns `None` if invalid/reserved.
-pub fn upsert(presets: &mut Vec<SavedPreset>, raw_name: &str, layout: &str) -> Option<usize> {
+pub fn upsert(presets: &mut Vec<SavedPreset>, raw_name: &str, layout: &str, addons: &str) -> Option<usize> {
     let name = clean_name(raw_name);
     let layout = layout.trim();
     if name.is_empty() || is_reserved(&name) || layout.is_empty() {
@@ -153,9 +170,10 @@ pub fn upsert(presets: &mut Vec<SavedPreset>, raw_name: &str, layout: &str) -> O
     if let Some(i) = presets.iter().position(|p| p.name.eq_ignore_ascii_case(&name)) {
         presets[i].name = name;
         presets[i].layout = layout.to_string();
+        presets[i].addons = addons.to_string();
         Some(i)
     } else {
-        presets.push(SavedPreset { name, layout: layout.to_string() });
+        presets.push(SavedPreset { name, layout: layout.to_string(), addons: addons.to_string() });
         presets.sort_by_key(|p| p.name.to_ascii_lowercase());
         presets.iter().position(|p| p.name.eq_ignore_ascii_case(&clean_name(raw_name)))
     }
@@ -208,17 +226,17 @@ mod tests {
     #[test]
     fn clean_name_and_upsert_reject_reserved_and_path_chars() {
         let mut list = Vec::new();
-        assert_eq!(upsert(&mut list, "modern", "health@bl"), None);
-        assert_eq!(upsert(&mut list, "Classic", "health@bl"), None);
-        assert_eq!(upsert(&mut list, "  ", "health@bl"), None);
+        assert_eq!(upsert(&mut list, "modern", "health@bl", ""), None);
+        assert_eq!(upsert(&mut list, "Classic", "health@bl", ""), None);
+        assert_eq!(upsert(&mut list, "  ", "health@bl", ""), None);
         assert_eq!(clean_name("../evil:name?"), "evilname");
-        assert_eq!(upsert(&mut list, "Speedrun", "timer@tr pb@tr,y16"), Some(0));
-        assert_eq!(upsert(&mut list, "Minimal", "health@bl,i ammo@br,i"), Some(0));
+        assert_eq!(upsert(&mut list, "Speedrun", "timer@tr pb@tr,y16", ""), Some(0));
+        assert_eq!(upsert(&mut list, "Minimal", "health@bl,i ammo@br,i", ""), Some(0));
         // Sorted alphabetically: Minimal, Speedrun
         assert_eq!(list[0].name, "Minimal");
         assert_eq!(list[1].name, "Speedrun");
         // Case-insensitive overwrite keeps slot
-        assert_eq!(upsert(&mut list, "minimal", "health@bl,i"), Some(0));
+        assert_eq!(upsert(&mut list, "minimal", "health@bl,i", ""), Some(0));
         assert_eq!(list.len(), 2);
         assert_eq!(list[0].name, "minimal");
         assert!(remove(&mut list, "MINIMAL"));
@@ -230,9 +248,9 @@ mod tests {
     fn next_default_name_skips_taken_slots() {
         let mut list = Vec::new();
         assert_eq!(next_default_name(&list), "Preset 1");
-        upsert(&mut list, "Preset 1", "health@bl");
+        upsert(&mut list, "Preset 1", "health@bl", "");
         assert_eq!(next_default_name(&list), "Preset 2");
-        upsert(&mut list, "preset 2", "health@bl");
+        upsert(&mut list, "preset 2", "health@bl", "");
         assert_eq!(next_default_name(&list), "Preset 3");
     }
 
@@ -240,8 +258,8 @@ mod tests {
     fn named_hud_files_round_trip_in_directory() {
         let dir = std::env::temp_dir().join(format!("qsp_hud_presets_dir_test_{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&dir);
-        let p1 = SavedPreset { name: "Immersive".into(), layout: "health@bl,i armor@bl,y-28,i".into() };
-        let p2 = SavedPreset { name: "Speedrun HUD".into(), layout: "timer@tr pb@tr,y16".into() };
+        let p1 = SavedPreset { name: "Immersive".into(), layout: "health@bl,i armor@bl,y-28,i".into(), addons: "bullettime+magazine: -armor magazine: magazine@br".into() };
+        let p2 = SavedPreset { name: "Speedrun HUD".into(), layout: "timer@tr pb@tr,y16".into(), ..Default::default() };
         write_one_to(&dir, &p1).unwrap();
         write_one_to(&dir, &p2).unwrap();
         assert!(dir.join("Immersive.hud").is_file());

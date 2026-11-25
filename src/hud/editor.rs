@@ -11,6 +11,7 @@ use qcore::cvar::Cvars;
 use qinput::keys::*;
 
 use super::PreviewState;
+use super::addons::{self, Combo, Patches};
 use super::editor_rows::{self, Prop};
 use super::editor_undo::Snapshot;
 use super::kind::{CATEGORIES, Kind};
@@ -154,17 +155,8 @@ pub struct Editor {
     pub editing_preset: Option<String>,
     /// True when the active mod provides a Simple CSQC HUD (`Mod HUD` preset available).
     pub has_mod_hud: bool,
-}
-
-pub(super) fn layout(cv: &Cvars) -> Layout {
-    Layout::parse(cv.by_name(CVAR).map_or("", |c| c.string.as_str()))
-}
-
-/// Writes the edited layout; it is now an unsaved custom layout.
-pub(super) fn save(cv: &mut Cvars, l: &Layout) {
-    cv.set(CVAR, &l.to_text());
-    cv.set(PRESET, "2");
-    cv.set(PRESET_NAME, "");
+    /// The add-on elements being adjusted; empty edits `hud_layout` itself.
+    pub combo: Combo,
 }
 
 impl Editor {
@@ -299,12 +291,12 @@ impl Editor {
         self.push_undo_now(cv);
         e.x = (e.x + dx).round();
         e.y = (e.y + dy).round();
-        save(cv, l);
+        self.save(cv, l);
         sound("misc/menu1.wav")
     }
 
     pub fn key(&mut self, key: i32, cv: &mut Cvars) -> Out {
-        let mut l = layout(cv);
+        let mut l = self.layout(cv);
         self.clamp(&l);
         if let Some(t) = self.typing.take() {
             return self.type_key(key, t, &mut l, cv);
@@ -443,7 +435,7 @@ impl Editor {
                 }
                 self.push_undo_now(cv);
                 l.elems.remove(sel);
-                save(cv, l);
+                self.save(cv, l);
                 let row = self.cursor;
                 self.clamp(l);
                 if row < l.elems.len()
@@ -457,7 +449,7 @@ impl Editor {
                 self.popup = Some(Popup::Presets { cursor: 0, confirm_delete: None });
                 sound("misc/menu2.wav")
             }
-            3 => self.save_current_preset(l, cv),
+            3 => self.save_current_preset(cv),
             4 => {
                 let name = presets::next_variant_name(&self.presets, self.editing_preset.as_deref());
                 self.popup = Some(Popup::SaveAs { name, confirm_overwrite: false });
@@ -466,15 +458,22 @@ impl Editor {
             5 => {
                 if self.confirm_reset {
                     self.push_undo_now(cv);
-                    if self.has_mod_hud {
+                    if !self.combo.is_empty() {
+                        // back to the predefined places, on the HUD as it is
+                        let mut p = Patches::of(cv);
+                        p.set(self.combo, String::new());
+                        cv.set(addons::CVAR, &p.to_text());
+                    } else if self.has_mod_hud {
                         cv.set(CVAR, "mod");
                         cv.set(PRESET, "3");
                     } else {
                         cv.set(CVAR, "default");
                         cv.set(PRESET, "0");
                     }
-                    cv.set(PRESET_NAME, "");
-                    self.editing_preset = None;
+                    if self.combo.is_empty() {
+                        cv.set(PRESET_NAME, "");
+                        self.editing_preset = None;
+                    }
                     self.confirm_reset = false;
                     self.sel = None;
                     self.cursor = 0;

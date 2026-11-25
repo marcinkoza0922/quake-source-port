@@ -137,7 +137,10 @@ impl Menu {
             }
             let r = self.hud_edit.key(key, cv);
             out.extend(r.sound.map(Action::Sound));
-            if r.exit {
+            if r.exit && let Some((screen, row, sub)) = self.hud_return.take() {
+                self.screen = screen;
+                (self.opt_cursor, self.sub_return) = (row, sub);
+            } else if r.exit {
                 self.open(Screen::OptionsPage(Page::Hud));
                 // back on the Edit HUD row
                 self.opt_cursor = HUD.iter().position(|i| matches!(i, Item::Run { run: Run::EditHud, .. })).unwrap_or(0);

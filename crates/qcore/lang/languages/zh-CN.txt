@@ -2913,12 +2913,6 @@ zh-CN 切换
 @ Details
 zh-CN 详情
 
-@ Enter or click the box: toggle
-zh-CN Enter 或点击方框：切换
-
-@ Right / Tab / click: details
-zh-CN 右 / Tab / 点击：详情
-
 @ Input Remapping
 zh-CN 输入重新映射
 
@@ -4258,3 +4252,18 @@ zh-CN 使用你的钉子换弹的全自动步枪。副开火通过红点瞄具�
 
 @ None
 zh-CN 无
+
+@ Magazine
+zh-CN 弹匣
+
+@ Adjust HUD
+zh-CN 调整 HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+zh-CN {}与{}重叠。请用“调整 HUD”移动。
+
+@ Arranges the HUD for this add-on and the others that are on
+zh-CN 为此附加功能和其他已启用的附加功能布置 HUD
+
+@ Shared by the add-ons that use it; shown only while one does
+zh-CN 由使用它的附加功能共用；仅在使用时显示

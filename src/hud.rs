@@ -7,6 +7,7 @@
 //! notify lines and sound captions are permanent elements: they can be
 //! moved but not removed.
 
+pub mod addons;
 pub mod draw;
 mod draw_more;
 pub mod editor;
@@ -15,6 +16,7 @@ mod editor_mouse;
 mod editor_pad;
 mod editor_popup;
 mod editor_rows;
+mod editor_store;
 mod editor_undo;
 pub mod input_sequence;
 pub mod kind;
@@ -133,15 +135,31 @@ impl PreviewState {
     }
 }
 
-/// Layout text, element sizes, screen size and the element that gives way.
-type PlaceKey = (String, Vec<(f32, f32)>, (f32, f32), Option<usize>);
+/// Element sizes, screen size and the element that gives way.
+type PlaceKey = (Vec<(f32, f32)>, (f32, f32), Option<usize>);
+
+/// What add-on element conflicts depend on: `hud_layout`, its patches, the
+/// combination, the add-on weapons and the screen.
+pub type ConflictKey = (String, String, addons::Combo, usize, (f32, f32));
 
 /// The parsed `hud_layout` and where its elements went last frame.
 #[derive(Default)]
 pub struct Hud {
-    /// The cvar text `layout` was read from.
+    /// The cvar text `base` was read from.
     pub src: String,
+    /// `hud_layout` as saved.
+    base: Layout,
+    /// `hud_layout` with the add-on elements in use.
     pub layout: Layout,
+    /// What `layout` was made from besides `base`: `hud_addon_layouts` and the combination.
+    addons: (String, addons::Combo),
+    /// `layout` changed: place it again.
+    stale: bool,
+    /// Add-on elements displaced by another, and what that was found for.
+    pub conflicts: Vec<(Kind, Kind)>,
+    pub conflict_key: Option<ConflictKey>,
+    /// The player was told about these conflicts in play.
+    pub warned: Option<ConflictKey>,
     pub fade: Fade,
     /// Placement inputs of the main view's `rects`.
     key: Option<PlaceKey>,
@@ -161,23 +179,40 @@ impl Hud {
     /// Re-reads the layout when the cvar text changed. Returns false when
     /// it is empty, "default", "classic" or "mod", which the host turns into a
     /// layout first.
-    pub fn sync(&mut self, text: &str) -> bool {
+    pub fn sync(&mut self, text: &str, patches: &str, combo: addons::Combo) -> bool {
         if matches!(text, "" | "default" | "classic" | "mod") {
             return false;
         }
-        if text != self.src {
-            self.layout = Layout::parse(text);
+        if text != self.src || self.addons.1 != combo || self.addons.0 != patches {
+            self.base = Layout::parse(text);
             self.src = text.to_string();
+            self.addons = (patches.to_string(), combo);
+            self.layout = addons::compose(&self.base, &addons::Patches::parse(patches), combo);
+            self.stale = true;
         }
         true
     }
 
+    /// Looks again for add-on elements of `combo` (whether or not it is in
+    /// use) that don't get their place, when something they depend on changed.
+    pub fn find_conflicts(&mut self, c: &Canvas, room: &draw::Room, combo: addons::Combo) {
+        let screen = (c.vw(), c.vh());
+        let same = |k: &ConflictKey| k.0 == self.src && k.1 == self.addons.0 && (k.2, k.3, k.4) == (combo, room.addons, screen);
+        if self.conflict_key.as_ref().is_some_and(same) {
+            return;
+        }
+        let l = addons::compose(&self.base, &addons::Patches::parse(&self.addons.0), combo);
+        let sizes: Vec<_> = l.elems.iter().map(|e| draw::size(c, e, room)).collect();
+        self.conflicts = addons::conflicts(&l, &sizes, combo, screen.0, screen.1);
+        self.conflict_key = Some((self.src.clone(), self.addons.0.clone(), combo, room.addons, screen));
+    }
+
     /// Places the elements (cached); `last` gives way to the others.
     pub fn place(&mut self, sizes: Vec<(f32, f32)>, vw: f32, vh: f32, last: Option<usize>) -> &[Rect] {
-        let key = (self.src.clone(), sizes, (vw, vh), last);
-        if self.key.as_ref() != Some(&key) {
-            self.rects = place::place_all(&self.layout.elems, &key.1, vw, vh, last);
-            self.sizes.clone_from(&key.1);
+        let key = (sizes, (vw, vh), last);
+        if std::mem::take(&mut self.stale) || self.key.as_ref() != Some(&key) {
+            self.rects = place::place_all(&self.layout.elems, &key.0, vw, vh, last);
+            self.sizes.clone_from(&key.0);
             self.key = Some(key);
         }
         &self.rects

@@ -2913,12 +2913,6 @@ am ቀያይር
 @ Details
 am ዝርዝሮች
 
-@ Enter or click the box: toggle
-am Enter ወይም ሳጥኑን ጠቅ ያድርጉ፦ ቀያይር
-
-@ Right / Tab / click: details
-am Right / Tab / ጠቅታ፦ ዝርዝሮች
-
 @ Input Remapping
 am የግቤት ዳግም ምደባ
 
@@ -4258,3 +4252,18 @@ am ከሚስማሮችዎ የሚሞላ ሙሉ አውቶማቲክ ጠመንጃ። 
 
 @ None
 am ምንም
+
+@ Magazine
+am ካዝና
+
+@ Adjust HUD
+am HUD አስተካክል
+
+@ {} overlaps {}. Move it with Adjust HUD.
+am {} እና {} ተደራርበዋል። በHUD አስተካክል ያንቀሳቅሱ።
+
+@ Arranges the HUD for this add-on and the others that are on
+am ለዚህ ተጨማሪ እና ለሌሎች የበሩ ተጨማሪዎች HUD ያደራጃል
+
+@ Shared by the add-ons that use it; shown only while one does
+am በሚጠቀሙት ተጨማሪዎች የጋራ ነው፤ ሲጠቀሙበት ብቻ ይታያል

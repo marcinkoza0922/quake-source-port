@@ -2913,12 +2913,6 @@ hr Prekidač
 @ Details
 hr Pojedinosti
 
-@ Enter or click the box: toggle
-hr Enter ili klik na kućicu: uključi/isključi
-
-@ Right / Tab / click: details
-hr Desno / Tab / klik: pojedinosti
-
 @ Input Remapping
 hr Dodjela tipki
 
@@ -4258,3 +4252,18 @@ hr Automatska puška koja se puni vašim čavlima. Alternativna paljba cilja kro
 
 @ None
 hr Ništa
+
+@ Magazine
+hr Spremnik
+
+@ Adjust HUD
+hr Prilagodi HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+hr {} preklapa {}. Premjestite pomoću „Prilagodi HUD”.
+
+@ Arranges the HUD for this add-on and the others that are on
+hr Raspoređuje HUD za ovaj dodatak i ostale uključene
+
+@ Shared by the add-ons that use it; shown only while one does
+hr Dijele ga dodaci koji ga koriste; prikazan samo dok ga neki koristi

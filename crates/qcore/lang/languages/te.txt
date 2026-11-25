@@ -2913,12 +2913,6 @@ te టోగుల్
 @ Details
 te వివరాలు
 
-@ Enter or click the box: toggle
-te Enter లేదా పెట్టెను క్లిక్ చేయండి: టోగుల్
-
-@ Right / Tab / click: details
-te కుడి / Tab / క్లిక్: వివరాలు
-
 @ Input Remapping
 te ఇన్‌పుట్ రీమ్యాపింగ్
 
@@ -4258,3 +4252,18 @@ te మీ మేకులతో రీలోడ్ అయ్యే ఫుల్-
 
 @ None
 te ఏదీ లేదు
+
+@ Magazine
+te మ్యాగజైన్
+
+@ Adjust HUD
+te HUD సర్దుబాటు
+
+@ {} overlaps {}. Move it with Adjust HUD.
+te {}, {} ఒకదానిపై ఒకటి ఉన్నాయి. HUD సర్దుబాటు తో కదపండి.
+
+@ Arranges the HUD for this add-on and the others that are on
+te ఈ యాడ్-ఆన్‌కు, ఆన్‌లో ఉన్న ఇతరాలకు HUDను అమరుస్తుంది
+
+@ Shared by the add-ons that use it; shown only while one does
+te ఉపయోగించే యాడ్-ఆన్‌లకు ఉమ్మడి; వాడేటప్పుడు మాత్రమే కనిపిస్తుంది

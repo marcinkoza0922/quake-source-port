@@ -187,7 +187,8 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         } else {
             layout
         };
-        if let Some(i) = crate::hud::presets::upsert(&mut h.menu.hud_edit.presets, name, &layout) {
+        let addons = h.cvs(crate::hud::addons::CVAR).to_string();
+        if let Some(i) = crate::hud::presets::upsert(&mut h.menu.hud_edit.presets, name, &layout, &addons) {
             let saved = h.menu.hud_edit.presets[i].clone();
             if let Err(e) = crate::hud::presets::write_one(&saved) {
                 h.print(&format!("couldn't save HUD preset: {e}\n"));
@@ -215,9 +216,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             h.server.core.cvars.set(crate::hud::editor::PRESET, "1");
             h.server.core.cvars.set(crate::hud::presets::PRESET_NAME, "");
         } else if let Some(p) = crate::hud::presets::find(&h.menu.hud_edit.presets, name).cloned() {
-            h.server.core.cvars.set(crate::hud::editor::CVAR, &p.layout);
-            h.server.core.cvars.set(crate::hud::editor::PRESET, "2");
-            h.server.core.cvars.set(crate::hud::presets::PRESET_NAME, &p.name);
+            p.load(&mut h.server.core.cvars);
         } else {
             h.print(&format!("Unknown HUD preset \"{name}\"\n"));
         }

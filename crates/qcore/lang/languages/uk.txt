@@ -2913,12 +2913,6 @@ uk Перемкнути
 @ Details
 uk Докладніше
 
-@ Enter or click the box: toggle
-uk Enter або клацання по прапорцю: перемкнути
-
-@ Right / Tab / click: details
-uk Праворуч / Tab / клацання: докладніше
-
 @ Input Remapping
 uk Перепризначення керування
 
@@ -4258,3 +4252,18 @@ uk Автоматична гвинтівка, що заряджається ва
 
 @ None
 uk Немає
+
+@ Magazine
+uk Магазин
+
+@ Adjust HUD
+uk Налаштувати інтерфейс
+
+@ {} overlaps {}. Move it with Adjust HUD.
+uk {} перекриває {}. Перемістіть через «Налаштувати інтерфейс».
+
+@ Arranges the HUD for this add-on and the others that are on
+uk Розміщує інтерфейс для цього доповнення та інших увімкнених
+
+@ Shared by the add-ons that use it; shown only while one does
+uk Спільний для доповнень, що його використовують; видимий, лише коли він потрібен одному з них

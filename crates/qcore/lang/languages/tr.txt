@@ -2913,12 +2913,6 @@ tr Aç/Kapat
 @ Details
 tr Ayrıntılar
 
-@ Enter or click the box: toggle
-tr Enter veya kutuya tıkla: aç/kapat
-
-@ Right / Tab / click: details
-tr Sağ / Tab / tıkla: ayrıntılar
-
 @ Input Remapping
 tr Giriş Yeniden Atama
 
@@ -4258,3 +4252,18 @@ tr Çivilerinizle doldurulan tam otomatik tüfek. Alternatif Ateş, daha isabetl
 
 @ None
 tr Hiçbiri
+
+@ Magazine
+tr Şarjör
+
+@ Adjust HUD
+tr HUD'yi Ayarla
+
+@ {} overlaps {}. Move it with Adjust HUD.
+tr {}, {} ile çakışıyor. HUD'yi Ayarla ile taşıyın.
+
+@ Arranges the HUD for this add-on and the others that are on
+tr HUD'yi bu eklenti ve açık olan diğerleri için düzenler
+
+@ Shared by the add-ons that use it; shown only while one does
+tr Onu kullanan eklentilerce paylaşılır; yalnızca biri kullanırken görünür

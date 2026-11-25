@@ -2913,12 +2913,6 @@ sq Ndërro
 @ Details
 sq Detajet
 
-@ Enter or click the box: toggle
-sq Enter ose kliko kutinë: ndërro
-
-@ Right / Tab / click: details
-sq Djathtas / Tab / klik: detajet
-
 @ Input Remapping
 sq Ricaktimi i hyrjes
 
@@ -4258,3 +4252,18 @@ sq Pushkë plotësisht automatike që rimbushet nga gozhdët e tua. Zjarr altern
 
 @ None
 sq Asnjë
+
+@ Magazine
+sq Karikatori
+
+@ Adjust HUD
+sq Përshtat HUD-in
+
+@ {} overlaps {}. Move it with Adjust HUD.
+sq {} mbivendoset me {}. Zhvendose me Përshtat HUD-in.
+
+@ Arranges the HUD for this add-on and the others that are on
+sq Rregullon HUD-in për këtë shtesë dhe të tjerat e ndezura
+
+@ Shared by the add-ons that use it; shown only while one does
+sq I përbashkët për shtesat që e përdorin; shfaqet vetëm kur njëra e përdor

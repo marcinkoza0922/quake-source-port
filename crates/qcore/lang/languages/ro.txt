@@ -2913,12 +2913,6 @@ ro Comută
 @ Details
 ro Detalii
 
-@ Enter or click the box: toggle
-ro Enter sau clic pe căsuță: comută
-
-@ Right / Tab / click: details
-ro Dreapta / Tab / clic: detalii
-
 @ Input Remapping
 ro Reatribuire comenzi
 
@@ -4258,3 +4252,18 @@ ro O pușcă automată care se reîncarcă cu cuiele tale. Foc secundar ochește
 
 @ None
 ro Niciunul
+
+@ Magazine
+ro Încărcător
+
+@ Adjust HUD
+ro Ajustează HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+ro {} se suprapune cu {}. Mută cu Ajustează HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+ro Aranjează HUD-ul pentru această extensie și celelalte activate
+
+@ Shared by the add-ons that use it; shown only while one does
+ro Comun extensiilor care îl folosesc; afișat doar cât una îl folosește

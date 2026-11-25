@@ -2913,12 +2913,6 @@ mr टॉगल
 @ Details
 mr तपशील
 
-@ Enter or click the box: toggle
-mr Enter किंवा बॉक्सवर क्लिक: टॉगल
-
-@ Right / Tab / click: details
-mr उजवीकडे / Tab / क्लिक: तपशील
-
 @ Input Remapping
 mr इनपुट रीमॅपिंग
 
@@ -4258,3 +4252,18 @@ mr तुमच्या खिळ्यांनी रीलोड होण�
 
 @ None
 mr काहीही नाही
+
+@ Magazine
+mr मॅगझिन
+
+@ Adjust HUD
+mr HUD समायोजित करा
+
+@ {} overlaps {}. Move it with Adjust HUD.
+mr {} आणि {} एकमेकांवर आहेत. HUD समायोजित करा ने हलवा.
+
+@ Arranges the HUD for this add-on and the others that are on
+mr या आणि इतर चालू अॅड-ऑन्ससाठी HUD मांडतो
+
+@ Shared by the add-ons that use it; shown only while one does
+mr वापरणाऱ्या अॅड-ऑन्समध्ये सामायिक; फक्त वापरताना दिसते

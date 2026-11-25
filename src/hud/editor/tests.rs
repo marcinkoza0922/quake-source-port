@@ -1,5 +1,6 @@
 use super::*;
 use crate::hud::layout::Anchor;
+use crate::hud::editor_store::base_layout;
 use crate::hud::place;
 
 fn setup() -> (Editor, Cvars) {
@@ -24,13 +25,13 @@ fn setup() -> (Editor, Cvars) {
 }
 
 fn kinds(cv: &Cvars) -> Vec<Kind> {
-    layout(cv).elems.iter().map(|e| e.kind).collect()
+    base_layout(cv).elems.iter().map(|e| e.kind).collect()
 }
 
 #[test]
 fn config_is_hidden_until_an_element_is_actively_selected() {
     let (mut ed, mut cv) = setup();
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     // Freshly opened: no element selected, no property rows in the dialog
     assert_eq!(ed.sel, None);
     assert!(!ed.rows(&l).iter().any(|r| matches!(r, Row::Prop(_))));
@@ -67,7 +68,7 @@ fn add_prompts_grid_with_sane_defaults_stacks_and_deletes() {
     ed.key(K_ENTER, &mut cv);
     assert!(ed.popup.is_none());
     assert_eq!(kinds(&cv).len(), n + 1);
-    let added = layout(&cv).elems.last().unwrap().clone();
+    let added = base_layout(&cv).elems.last().unwrap().clone();
     assert_eq!((added.kind, added.anchor), (Kind::Clock, Anchor::TopRight));
     assert_eq!(ed.sel, Some(n));
 
@@ -81,7 +82,7 @@ fn add_prompts_grid_with_sane_defaults_stacks_and_deletes() {
     ed.key(K_ENTER, &mut cv);
     assert_eq!(ed.popup, Some(Popup::AddPlace { kind: Kind::Fps, cursor: Anchor::TopRight as usize }));
     ed.key(K_ENTER, &mut cv);
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     let fps = l.elems.last().unwrap();
     assert_eq!((fps.kind, fps.anchor), (Kind::Fps, Anchor::TopRight));
     assert!(fps.y > added.y, "second TopRight element should stack below first: {fps:?} vs {added:?}");
@@ -92,7 +93,7 @@ fn add_prompts_grid_with_sane_defaults_stacks_and_deletes() {
     assert_eq!(kinds(&cv).len(), n);
     // messages stay
     let center = kinds(&cv).iter().position(|&k| k == Kind::Center).unwrap();
-    ed.select(center, &layout(&cv));
+    ed.select(center, &base_layout(&cv));
     ed.key(K_DEL, &mut cv);
     assert!(kinds(&cv).contains(&Kind::Center));
 }
@@ -100,7 +101,7 @@ fn add_prompts_grid_with_sane_defaults_stacks_and_deletes() {
 #[test]
 fn properties_change_the_selected_element() {
     let (mut ed, mut cv) = setup();
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     ed.select(0, &l);
     assert_eq!(l.elems[0].kind, Kind::Health);
     // Enter jumps to the first property (font), right steps it
@@ -108,7 +109,7 @@ fn properties_change_the_selected_element() {
     assert_eq!(ed.rows(&l)[ed.cursor], Row::Prop(Prop::Font));
     assert_eq!(cv.value_of(PRESET), 0.0);
     ed.key(K_RIGHTARROW, &mut cv);
-    assert_eq!(layout(&cv).elems[0].font, crate::hud::kind::Font::Quake);
+    assert_eq!(base_layout(&cv).elems[0].font, crate::hud::kind::Font::Quake);
     // any change makes the HUD custom
     assert_eq!(cv.value_of(PRESET), 2.0);
     // the position grid snaps to an anchor with no offset
@@ -119,7 +120,7 @@ fn properties_change_the_selected_element() {
     ed.key(K_UPARROW, &mut cv);
     ed.key(K_RIGHTARROW, &mut cv);
     ed.key(K_ENTER, &mut cv);
-    let e = &layout(&cv).elems[0];
+    let e = &base_layout(&cv).elems[0];
     assert_eq!((e.anchor, e.x, e.y), (Anchor::TopCenter, 0.0, 0.0));
     // typed coordinates
     ed.cursor_to(Row::Prop(Prop::X), &l);
@@ -128,7 +129,7 @@ fn properties_change_the_selected_element() {
         ed.text(ch);
     }
     ed.key(K_ENTER, &mut cv);
-    assert_eq!(layout(&cv).elems[0].x, -12.0);
+    assert_eq!(base_layout(&cv).elems[0].x, -12.0);
     // Escape leaves the editor
     assert!(ed.key(K_ESCAPE, &mut cv).exit);
 }
@@ -136,7 +137,7 @@ fn properties_change_the_selected_element() {
 #[test]
 fn dragging_moves_elements_reflows_siblings_and_moves_dialog() {
     let (mut ed, mut cv) = setup();
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     // HUD 640×360 units at 3×, menu 640×360 at 3×: the units match
     let rects: Vec<Rect> = (0..l.elems.len()).map(|i| Rect { x: 20.0 + i as f32 * 30.0, y: 300.0, w: 20.0, h: 20.0 }).collect();
     ed.set_frame(&rects, 3.0, (1920, 1080));
@@ -146,7 +147,7 @@ fn dragging_moves_elements_reflows_siblings_and_moves_dialog() {
     assert_eq!((ed.sel, ed.dragging()), (Some(0), None));
     ed.mouse_move((35.0, 205.0), &mut cv);
     assert_eq!(ed.dragging(), Some(0));
-    let e = &layout(&cv).elems[0];
+    let e = &base_layout(&cv).elems[0];
     let r = place::wanted(e, (20.0, 20.0), 640.0, 360.0);
     assert_eq!((r.x, r.y), (30.0, 200.0));
     ed.mouse_up(&mut cv);
@@ -166,7 +167,7 @@ fn dragging_moves_elements_reflows_siblings_and_moves_dialog() {
 fn undo_and_redo_work_with_keyboard_and_right_stick_click() {
     let (mut ed, mut cv) = setup();
     let orig_text = cv.by_name(CVAR).unwrap().string.clone();
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     ed.select(0, &l);
     // Step font
     ed.key(K_ENTER, &mut cv);
@@ -199,7 +200,7 @@ fn undo_and_redo_work_with_keyboard_and_right_stick_click() {
 fn reset_asks_first_and_is_undoable() {
     let (mut ed, mut cv) = setup();
     let before = cv.by_name(CVAR).unwrap().string.clone();
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     ed.select(0, &l);
     ed.cursor_to(Row::Buttons(2), &l);
     ed.button = 0;
@@ -223,7 +224,7 @@ fn save_as_save_edits_protect_builtins_and_delete_presets() {
     assert!(!ed.can_save_current(&cv));
 
     // Customize the layout slightly (make Health appear-on-change)
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     ed.select(0, &l);
     ed.cursor_to(Row::Prop(Prop::Show), &l);
     ed.key(K_RIGHTARROW, &mut cv);
@@ -233,7 +234,7 @@ fn save_as_save_edits_protect_builtins_and_delete_presets() {
     assert!(!ed.can_save_current(&cv));
 
     // Open Save As (Row::Buttons(1), col 2 -> button 4)
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     ed.cursor_to(Row::Buttons(1), &l);
     ed.button = 2;
     ed.key(K_ENTER, &mut cv);
@@ -268,7 +269,7 @@ fn save_as_save_edits_protect_builtins_and_delete_presets() {
     assert!(!ed.can_save_current(&cv));
 
     // Edit Armor while on Minimal -> now Save IS enabled for saving edits to Minimal!
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     ed.select(1, &l);
     ed.cursor_to(Row::Prop(Prop::Show), &l);
     ed.key(K_RIGHTARROW, &mut cv);
@@ -276,7 +277,7 @@ fn save_as_save_edits_protect_builtins_and_delete_presets() {
     assert_ne!(edited_minimal, custom_layout);
     assert!(ed.can_save_current(&cv));
     // Press Save (Row::Buttons(1), col 1 -> button 3) to update Minimal in-place
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     ed.cursor_to(Row::Buttons(1), &l);
     ed.button = 1;
     ed.key(K_ENTER, &mut cv);
@@ -285,7 +286,7 @@ fn save_as_save_edits_protect_builtins_and_delete_presets() {
     assert!(!ed.can_save_current(&cv));
 
     // Save As while editing Minimal suggests a fresh variant name ("Minimal 2") to create a new preset
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     ed.cursor_to(Row::Buttons(1), &l);
     ed.button = 2;
     ed.key(K_ENTER, &mut cv);
@@ -295,7 +296,7 @@ fn save_as_save_edits_protect_builtins_and_delete_presets() {
     assert_eq!(ed.editing_preset.as_deref(), Some("Minimal 2"));
 
     // Save As with an existing user preset's name requires overwrite confirmation
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     ed.cursor_to(Row::Buttons(1), &l);
     ed.button = 2;
     ed.key(K_ENTER, &mut cv);
@@ -311,7 +312,7 @@ fn save_as_save_edits_protect_builtins_and_delete_presets() {
     assert!(ed.popup.is_none());
 
     // Open Presets (Row::Buttons(1), col 0 -> button 2): built-ins cannot be deleted, user presets can
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     ed.cursor_to(Row::Buttons(1), &l);
     ed.button = 0;
     ed.key(K_ENTER, &mut cv);
@@ -328,7 +329,7 @@ fn save_as_save_edits_protect_builtins_and_delete_presets() {
     assert!(!ed.can_save_current(&cv));
 
     // Delete "Minimal" (row 2) via two-step confirmation
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     ed.cursor_to(Row::Buttons(1), &l);
     ed.button = 0;
     ed.key(K_ENTER, &mut cv);
@@ -370,7 +371,7 @@ fn hamburger_collapses_and_expands_the_dialog() {
 fn controller_navigates_moves_and_configures_elements() {
     let (mut ed, mut cv) = setup();
     ed.pad_ui = true;
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     let rects: Vec<Rect> = l.elems.iter().map(|e| place::wanted(e, (20.0, 20.0), 640.0, 360.0)).collect();
     ed.set_frame(&rects, 3.0, (1920, 1080));
 
@@ -383,31 +384,31 @@ fn controller_navigates_moves_and_configures_elements() {
     assert_eq!(ed.sel, Some(0));
 
     // A starts moving the selected element; left stick & D-pad move it
-    let orig = (layout(&cv).elems[0].x, layout(&cv).elems[0].y);
+    let orig = (base_layout(&cv).elems[0].x, base_layout(&cv).elems[0].y);
     ed.key(K_ABUTTON, &mut cv);
     assert!(ed.moving());
     assert_eq!(ed.dragging(), Some(0));
     ed.pad_stick([1.0, 0.0], [0.0, 0.0], 0.1, &mut cv);
-    let after_stick = (layout(&cv).elems[0].x, layout(&cv).elems[0].y);
+    let after_stick = (base_layout(&cv).elems[0].x, base_layout(&cv).elems[0].y);
     assert!(after_stick.0 > orig.0);
     ed.key(K_DPAD_DOWN, &mut cv);
-    let after_nudge = (layout(&cv).elems[0].x, layout(&cv).elems[0].y);
+    let after_nudge = (base_layout(&cv).elems[0].x, base_layout(&cv).elems[0].y);
     assert_eq!(after_nudge.1, after_stick.1 + 1.0);
     // B cancels and restores original coordinates
     ed.key(K_BBUTTON, &mut cv);
     assert!(!ed.moving());
-    assert_eq!((layout(&cv).elems[0].x, layout(&cv).elems[0].y), orig);
+    assert_eq!((base_layout(&cv).elems[0].x, base_layout(&cv).elems[0].y), orig);
 
     // A again, nudge, A confirms
     ed.key(K_ABUTTON, &mut cv);
     ed.key(K_DPAD_RIGHT, &mut cv);
     ed.key(K_ABUTTON, &mut cv);
     assert!(!ed.moving());
-    assert_eq!(layout(&cv).elems[0].x, orig.0 + 1.0);
+    assert_eq!(base_layout(&cv).elems[0].x, orig.0 + 1.0);
 
     // R-stick click undoes the confirmed move
     ed.key(K_RTHUMB, &mut cv);
-    assert_eq!((layout(&cv).elems[0].x, layout(&cv).elems[0].y), orig);
+    assert_eq!((base_layout(&cv).elems[0].x, base_layout(&cv).elems[0].y), orig);
 
     // L-stick click cycles preview state
     assert_eq!(ed.preview, crate::hud::PreviewState::Sample);
@@ -418,11 +419,11 @@ fn controller_navigates_moves_and_configures_elements() {
 
     // X jumps to config options; D-pad adjusts; B returns to element list
     ed.key(K_XBUTTON, &mut cv);
-    assert!(matches!(ed.rows(&layout(&cv))[ed.cursor], Row::Prop(_)));
+    assert!(matches!(ed.rows(&base_layout(&cv))[ed.cursor], Row::Prop(_)));
     ed.key(K_DPAD_RIGHT, &mut cv);
-    assert_eq!(layout(&cv).elems[0].font, crate::hud::kind::Font::Quake);
+    assert_eq!(base_layout(&cv).elems[0].font, crate::hud::kind::Font::Quake);
     assert!(!ed.key(K_BBUTTON, &mut cv).exit);
-    assert_eq!(ed.rows(&layout(&cv))[ed.cursor], Row::Elem(0));
+    assert_eq!(ed.rows(&base_layout(&cv))[ed.cursor], Row::Elem(0));
 
     // Right stick moves the HUD editor panel
     let p0 = ed.pos.unwrap();
@@ -436,15 +437,15 @@ fn controller_navigates_moves_and_configures_elements() {
     ed.key(K_RSHOULDER, &mut cv);
     assert!(!ed.collapsed);
 
-    let s0 = layout(&cv).elems[0].scale;
+    let s0 = base_layout(&cv).elems[0].scale;
     ed.key(K_RTRIGGER, &mut cv);
-    assert!(layout(&cv).elems[0].scale > s0);
+    assert!(base_layout(&cv).elems[0].scale > s0);
     ed.key(K_LTRIGGER, &mut cv);
-    assert_eq!(layout(&cv).elems[0].scale, s0);
+    assert_eq!(base_layout(&cv).elems[0].scale, s0);
 
-    let count_before = layout(&cv).elems.len();
+    let count_before = base_layout(&cv).elems.len();
     ed.key(K_LSHOULDER, &mut cv);
-    assert_eq!(layout(&cv).elems.len(), count_before - 1);
+    assert_eq!(base_layout(&cv).elems.len(), count_before - 1);
 
     ed.key(K_BACK, &mut cv);
     assert!(ed.confirm_reset);
@@ -479,7 +480,7 @@ fn add_automap_element_from_tree_and_edit_options() {
     assert_eq!(ed.popup, Some(Popup::AddPlace { kind: Kind::Automap, cursor: Anchor::TopRight as usize }));
     ed.key(K_ENTER, &mut cv);
     assert!(ed.popup.is_none());
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     assert_eq!(l.elems.len(), n + 1);
     let am = l.elems.last().unwrap();
     assert_eq!(am.kind, Kind::Automap);
@@ -489,7 +490,7 @@ fn add_automap_element_from_tree_and_edit_options() {
     // Background toggles cleanly and View Mode updates cl_automap_view.
     ed.cursor_to(Row::Prop(Prop::Background), &l);
     ed.key(K_RIGHTARROW, &mut cv);
-    assert!(!layout(&cv).elems.last().unwrap().bg);
+    assert!(!base_layout(&cv).elems.last().unwrap().bg);
     ed.cursor_to(Row::Prop(Prop::Opt(0)), &l);
     ed.key(K_RIGHTARROW, &mut cv);
     assert_eq!(cv.value_of("cl_automap_view"), 1.0);
@@ -512,7 +513,7 @@ fn add_speedometer_element_from_time_and_stats() {
     assert_eq!(ed.popup, Some(Popup::AddPlace { kind: Kind::Speed, cursor: Anchor::TopRight as usize }));
     ed.key(K_ENTER, &mut cv);
     assert!(ed.popup.is_none());
-    let l = layout(&cv);
+    let l = base_layout(&cv);
     assert_eq!(l.elems.len(), n + 1);
     let spd = l.elems.last().unwrap();
     assert_eq!((spd.kind, spd.anchor, spd.a), (Kind::Speed, Anchor::TopRight, 1));
@@ -521,5 +522,46 @@ fn add_speedometer_element_from_time_and_stats() {
     // Toggle Show Label off (a: 1 -> 0) and verify hud_layout round-trips it.
     ed.cursor_to(Row::Prop(Prop::Opt(0)), &l);
     ed.key(K_RIGHTARROW, &mut cv);
-    assert_eq!(layout(&cv).elems.last().unwrap().a, 0);
+    assert_eq!(base_layout(&cv).elems.last().unwrap().a, 0);
+}
+
+#[test]
+fn adjusting_a_combination_leaves_the_plain_hud_alone() {
+    let (mut ed, mut cv) = setup();
+    cv.register(addons::CVAR, "", 0);
+    let base = base_layout(&cv);
+    let mag = Combo::of("addon_rifle");
+    ed.open_combo(&cv, mag);
+    ed.set_frame(&[], 3.0, (1920, 1080));
+    let l = ed.layout(&cv);
+    let i = l.elems.iter().position(|e| e.kind == Kind::Magazine).unwrap();
+    ed.select(i, &l);
+    ed.shift = true;
+    ed.key(K_UPARROW, &mut cv);
+    ed.shift = false;
+    assert_eq!(base_layout(&cv), base);
+    assert_eq!(ed.layout(&cv).elems[i].y, l.elems[i].y - 4.0);
+    assert_eq!(cv.value_of(PRESET), 2.0);
+    // its own changes undo, and are saved with a preset
+    ed.key(K_RTHUMB, &mut cv);
+    assert_eq!(ed.layout(&cv), l);
+    ed.ctrl = true;
+    ed.key(b'y' as i32, &mut cv);
+    ed.ctrl = false;
+    ed.commit_save_as("Guns", false, &mut cv);
+    let saved = ed.presets[0].clone();
+    assert!(saved.addons.starts_with("magazine: magazine@bc"), "{}", saved.addons);
+    assert_eq!(Layout::parse(&saved.layout), base);
+    // Reset takes back this combination's changes only
+    assert!(!ed.can_save_current(&cv));
+    let mut l2 = ed.layout(&cv);
+    ed.press(5, &mut l2, &mut cv);
+    ed.press(5, &mut l2, &mut cv);
+    assert_eq!((ed.layout(&cv), base_layout(&cv)), (l, base.clone()));
+    assert!(ed.can_save_current(&cv));
+    saved.load(&mut cv);
+    assert_eq!(cv.by_name(addons::CVAR).unwrap().string, saved.addons);
+    // Edit HUD itself has no add-on elements
+    ed.open(&cv);
+    assert_eq!(ed.layout(&cv), base);
 }

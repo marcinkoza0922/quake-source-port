@@ -2913,12 +2913,6 @@ ga Scoránaigh
 @ Details
 ga Sonraí
 
-@ Enter or click the box: toggle
-ga Enter nó cliceáil an bosca: scoránaigh
-
-@ Right / Tab / click: details
-ga Deas / Tab / cliceáil: sonraí
-
 @ Input Remapping
 ga Athmhapáil Ionchuir
 
@@ -4258,3 +4252,18 @@ ga Raidhfil lánuathoibríoch a athlódálann ó do chuid tairní. Aimsíonn Lá
 
 @ None
 ga Dada
+
+@ Magazine
+ga Philéarlann
+
+@ Adjust HUD
+ga Coigeartaigh an HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+ga Tá {} ag forluí ar {}. Bog é le Coigeartaigh an HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+ga Socraíonn an HUD don bhreiseán seo agus do na cinn eile atá ar siúl
+
+@ Shared by the add-ons that use it; shown only while one does
+ga Roinnte ag na breiseáin a úsáideann é; ní thaispeántar é ach agus ceann á úsáid

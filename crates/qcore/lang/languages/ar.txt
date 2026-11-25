@@ -2913,12 +2913,6 @@ ar تبديل
 @ Details
 ar التفاصيل
 
-@ Enter or click the box: toggle
-ar Enter أو انقر المربع: تبديل
-
-@ Right / Tab / click: details
-ar يمين / Tab / نقر: التفاصيل
-
 @ Input Remapping
 ar إعادة تعيين الإدخال
 
@@ -4258,3 +4252,18 @@ ar بندقية آلية بالكامل تُلقَّم من مساميرك. ال
 
 @ None
 ar لا شيء
+
+@ Magazine
+ar المخزن
+
+@ Adjust HUD
+ar ضبط HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+ar {} يتداخل مع {}. انقله عبر ضبط HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+ar يرتب HUD لهذه الإضافة والإضافات الأخرى المفعلة
+
+@ Shared by the add-ons that use it; shown only while one does
+ar مشترك بين الإضافات التي تستخدمه؛ يظهر فقط أثناء استخدامه

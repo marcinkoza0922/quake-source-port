@@ -1624,3 +1624,10 @@ de Sekunden pro Nachladen
 it Secondi per ricaricare
 es Segundos que dura una recarga
 ru Длительность перезарядки в секундах
+
+@ Arranges the HUD for this add-on and the others that are on
+fr Dispose l'ATH pour cette extension et les autres activées
+de Ordnet das HUD für dieses Add-on und die anderen aktiven an
+it Dispone l'interfaccia per questo add-on e gli altri attivi
+es Organiza la interfaz para este complemento y los demás activados
+ru Размещает интерфейс для этого дополнения и других включённых

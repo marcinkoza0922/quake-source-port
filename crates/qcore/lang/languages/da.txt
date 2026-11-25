@@ -2913,12 +2913,6 @@ da Slå til/fra
 @ Details
 da Detaljer
 
-@ Enter or click the box: toggle
-da Enter eller klik på feltet: slå til/fra
-
-@ Right / Tab / click: details
-da Højre / Tab / klik: detaljer
-
 @ Input Remapping
 da Omtildeling af input
 
@@ -4258,3 +4252,18 @@ da Et fuldautomatisk gevær, der genlades med dine søm. Alternativ skyd sigter 
 
 @ None
 da Ingen
+
+@ Magazine
+da Magasin
+
+@ Adjust HUD
+da Tilpas HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+da {} overlapper {}. Flyt med "Tilpas HUD".
+
+@ Arranges the HUD for this add-on and the others that are on
+da Arrangerer HUD'en for dette add-on og de andre, der er slået til
+
+@ Shared by the add-ons that use it; shown only while one does
+da Deles af de add-ons, der bruger det; vises kun, mens et gør det

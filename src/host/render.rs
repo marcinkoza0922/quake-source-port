@@ -180,7 +180,6 @@ impl Host {
             .find(|&k| crate::glyphs::is_pad_key(k))
             .unwrap_or(qinput::keys::K_XBUTTON);
         let equip_key = self.equip_wheel_key();
-        let bullet_meter = rc.bullet_meter;
         self.update_metrics(ft);
         let mut metrics_drawn = false;
         let cur_speed = self.update_speed();
@@ -337,9 +336,6 @@ impl Host {
                                 cp.draw_center(&mut cc, usize::MAX);
                             }
                             let (wheel, wcl) = if i == 0 { (&self.wheel, &self.cl) } else { (&self.guests[live[i - 1]].wheel, &self.guests[live[i - 1]].cl) };
-                            let vh = cc.vh() - cell_reserve;
-                            crate::addons::mag_hud::draw(&mut cc, vh, wcl, wcl.viewentity.saturating_sub(1), held_addon);
-                            self.bullet_time.draw(&mut cc, bullet_meter);
                             wheel.draw(&mut cc, &mut pf, &glyphs, wcl, pad_ui, wheel_key);
                             crate::draw::translate(&mut cc.list, x as f32, y as f32);
                             c.list.append(&mut cc.list);
@@ -350,7 +346,7 @@ impl Host {
                         let face = self.view.face_anim_time > self.cl.time;
                         let player_pos = Vec3::from_array(self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| e.origin));
                         let automap_allowed = self.cl.gametype != 1 && !rc.deathmatch;
-                        if !hud.edit && viewsize < 120.0 && csqc_sbar {
+                        if !hud.edit && viewsize < 120.0 {
                             let am = crate::hud::draw::AutomapCtx {
                                 map: &self.automap,
                                 settings: crate::automap::Automap::settings(&self.server.core.cvars),
@@ -362,8 +358,8 @@ impl Host {
                             if self.demo.is_none() {
                                 ctx.training = Some((&self.training, false));
                             }
-                            crate::hud::draw_layout(&mut c, &mut pf, &self.hud.layout, &self.hud.rects, &ctx, Some(&self.hud.fade), self.realtime, |_| true);
-                            metrics_drawn = true;
+                            crate::hud::draw_layout(&mut c, &mut pf, &self.hud.layout, &self.hud.rects, &ctx, Some(&self.hud.fade), self.realtime, |k| csqc_sbar || k.is_addon());
+                            metrics_drawn = csqc_sbar;
                         }
                         // the demo bar takes the bottom of the screen: lift the HUD over it
                         if let Some(b) = &demo_bar {
@@ -373,9 +369,6 @@ impl Host {
                         if self.show_scores && self.cl.gametype == 1 && !self.csqc.has_draw_scores() {
                             crate::sbar::deathmatch_overlay(&mut c, &mut pf, &self.cl);
                         }
-                        let vh = c.vh() - reserve;
-                        crate::addons::mag_hud::draw(&mut c, vh, &self.cl, self.cl.viewentity.saturating_sub(1), self.toy.held);
-                        self.bullet_time.draw(&mut c, bullet_meter);
                         self.wheel.draw(&mut c, &mut pf, &glyphs, &self.cl, pad_ui, wheel_key);
                         self.goggles.wheel.draw(&mut c, &glyphs, &self.goggles.equip, pad_ui, equip_key);
                         if let Some((at, ts, color)) = captions {
