@@ -1,0 +1,61 @@
+# Tests and lints for pushes to master and pull requests. The runner has no game data,
+# reference engines or GPU, so the tests that need them skip themselves.
+name: ci
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: never
+  # Pinned so a new stable's lints don't fail unrelated changes.
+  RUST_VERSION: "1.100.0"
+
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rust toolchain
+        run: rustup toolchain install "$RUST_VERSION" --profile minimal --component clippy && rustup default "$RUST_VERSION"
+      - name: Packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y glslc cmake ninja-build pkg-config libx11-dev libxext-dev libxcursor-dev \
+            libxi-dev libxfixes-dev libxrandr-dev libxss-dev libxtst-dev libxkbcommon-dev \
+            libwayland-dev wayland-protocols libdecor-0-dev libasound2-dev libpulse-dev libudev-dev \
+            libdbus-1-dev libdrm-dev libgbm-dev libgl-dev libegl-dev libibus-1.0-dev libsndio-dev
+      - uses: Swatinem/rust-cache@v2
+        with: { key: ci-linux }
+      - uses: taiki-e/install-action@nextest
+      - name: Clippy
+        run: cargo clippy --workspace --all-targets --locked --features quake-source-port/bundled-sdl --message-format=short -- -D warnings
+      - name: Tests
+        run: cargo nextest run --workspace --locked --features quake-source-port/bundled-sdl
+      - name: wgpu backend compiles
+        run: cargo check --locked -p quake-source-port --features wgpu,bundled-sdl
+      - name: Translations
+        run: |
+          python3 tools/lang_check.py check $(basename -s .txt crates/qcore/lang/languages/*.txt)
+
+  wasm:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rust toolchain
+        run: rustup toolchain install "$RUST_VERSION" --profile minimal --target wasm32-unknown-unknown && rustup default "$RUST_VERSION"
+      - uses: Swatinem/rust-cache@v2
+        with: { key: ci-wasm }
+      - name: Web build compiles
+        run: cargo check --locked --lib --target wasm32-unknown-unknown -p quake-source-port
