@@ -377,6 +377,28 @@ mod save_menu_tests {
     }
 
     #[test]
+    fn names_stay_in_their_quotes() {
+        let Action::Command(c) = Action::command("game", &["my mod", "e1\"; quit; \"m1\n"]) else { panic!() };
+        assert_eq!(c, "game \"my mod\" \"e1; quit; m1\"\n");
+    }
+
+    #[test]
+    fn locked_water_opacity_can_be_put_back() {
+        let mut m = Menu::new();
+        let mut cv = Cvars::default();
+        for (n, v) in [("r_enhancedwater", "0"), ("r_watertranslucency", "0"), ("r_wateralpha", "1")] {
+            cv.register(n, v, 0);
+        }
+        let item = Item::Slider { label: "", cvar: "r_wateralpha", min: 0.0, max: 1.0, step: 0.1, invert: false };
+        cv.set("r_wateralpha", "0.5");
+        let mut out = Vec::new();
+        assert!(m.item_disabled(item, &cv) && !m.adjust(item, 1, false, &mut cv, &mut out));
+        assert!(m.reset_row(item, &mut cv, &mut out));
+        assert_eq!(cv.value_of("r_wateralpha"), 1.0);
+        assert!(!m.reset_row(item, &mut cv, &mut out), "nothing to put back");
+    }
+
+    #[test]
     fn a_drag_does_not_follow_to_another_page() {
         let mut m = Menu::new();
         let mut cv = Cvars::default();

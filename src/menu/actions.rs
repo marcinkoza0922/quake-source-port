@@ -113,6 +113,8 @@ impl Menu {
                 }
                 self.screen = Screen::None;
                 out.push(Action::Close);
+                // (`connect` takes its text as it stands, without quotes)
+                let a: String = a.chars().filter(|c| !c.is_whitespace() && !"\";".contains(*c)).collect();
                 out.push(Action::Command(format!("connect {a}\n")));
             }
             Run::BrowseServers => {
@@ -142,7 +144,7 @@ impl Menu {
                     n("_mp_skill"),
                     n("_mp_fraglimit"),
                     n("_mp_timelimit"),
-                    map.replace(['"', '\n'], ""),
+                    qcore::cvar::config_value(&map),
                 );
                 cv.set("_mp_map", &map);
                 self.screen = Screen::None;

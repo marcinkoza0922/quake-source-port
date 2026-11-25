@@ -456,7 +456,7 @@ impl Menu {
                             let name = sv.name.clone();
                             self.screen = Screen::None;
                             out.push(Action::Close);
-                            out.push(Action::Command(format!("load \"{name}\"\n")));
+                            out.push(Action::command("load", &[&name]));
                         }
                     } else if let Some(sv) = self.save_at(i) {
                         let title = qcore::tr!("Overwrite \"{}\"?", clean_title(&sv.info.level, 40));

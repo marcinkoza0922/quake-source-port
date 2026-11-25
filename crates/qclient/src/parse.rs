@@ -403,7 +403,9 @@ impl ClientState {
                 continue;
             }
             if let Some(args) = line.strip_prefix(b"//qsp_boom ") {
-                self.events.push(ClientEvent::Boomerang(String::from_utf8_lossy(args).trim_end().to_owned()));
+                let line = String::from_utf8_lossy(args).trim_end().to_owned();
+                self.parse_boom(&line);
+                self.events.push(ClientEvent::Boomerang(line));
                 continue;
             }
             if let Some(args) = line.strip_prefix(b"//qsp_beam ") {

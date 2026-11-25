@@ -345,7 +345,7 @@ impl Menu {
 
     fn favorite_selected(&self, out: &mut Vec<Action>) {
         if let Some(address) = self.selected_server_address() {
-            out.push(Action::Command(format!("server_fav \"{address}\"\n")));
+            out.push(Action::command("server_fav", &[&address]));
             out.push(Action::Sound("misc/menu2.wav"));
         }
     }

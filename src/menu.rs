@@ -188,6 +188,15 @@ impl From<String> for Action {
 }
 
 impl Action {
+    /// `name "arg"...`: names of files and mods, as they can stand in quotes.
+    pub(crate) fn command(name: &str, args: &[&str]) -> Self {
+        let mut s = name.to_string();
+        for a in args {
+            s += &format!(" \"{}\"", qcore::cvar::config_value(a));
+        }
+        Action::Command(s + "\n")
+    }
+
     pub(crate) fn run(words: &[&str]) -> Self {
         Action::Run(words.iter().map(|w| w.to_string()).collect())
     }

@@ -109,6 +109,9 @@ mod wgpu_backend;
 #[cfg(not(qvk))]
 pub use wgpu_backend::Renderer;
 
+/// The wgpu backend (Android, web) lacks what `menu::gating` dims.
+pub const REDUCED_BACKEND: bool = cfg!(not(qvk));
+
 /// What drawing can't go on without.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Lost {

@@ -18,6 +18,8 @@ pub struct Demo {
     pub paused: bool,
     /// Speed, seeking, marks and the timeline (`playback`).
     pub play: playback::Playback,
+    /// A QuakeWorld demo too long to play whole (`qw::MAX_OUT`).
+    pub cut: bool,
     /// Present when playing a QuakeWorld Multi-View Demo (`.mvd`).
     pub mvd: Option<qw::MvdInfo>,
 }
@@ -53,7 +55,8 @@ const MAX_MSGLEN: usize = 96_000;
 impl Demo {
     pub fn new(data: Vec<u8>) -> Self {
         let mut mvd = None;
-        let data = match qw::detect_format(&data) {
+        let format = qw::detect_format(&data);
+        let data = match format {
             Some(qw::QwDemoFormat::Qwd) => qw::transcode_qwd(&data).unwrap_or(data),
             Some(qw::QwDemoFormat::Mvd) => {
                 let raw: std::sync::Arc<[u8]> = data.into();
@@ -70,7 +73,8 @@ impl Demo {
         // The header (cls.forcetrack, unused: svc_cdtrack follows) is an
         // optional '-' and digits ending in '\n'.
         let pos = data.iter().take(16).position(|&b| b == b'\n').map_or(0, |e| e + 1);
-        Demo { data: data.into(), pos, start: pos, paused: false, play: playback::Playback::default(), mvd }
+        let cut = format.is_some() && data.len() >= qw::MAX_OUT;
+        Demo { data: data.into(), pos, start: pos, paused: false, cut, play: playback::Playback::default(), mvd }
     }
 
     pub fn is_mvd(&self) -> bool {

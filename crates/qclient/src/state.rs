@@ -323,6 +323,9 @@ pub struct ClientState {
     pub mags: Vec<crate::guns::MagView>,
     /// Add-on stickybombs (id, origin) from `//qsp_sticky` stufftext.
     pub stickies: Vec<(u32, [f32; 3])>,
+    /// Add-on boomerangs, for demo seeks: each owner's last `//qsp_boom` marks
+    /// and flight lines.
+    pub boom: Vec<(u8, [Option<std::sync::Arc<str>>; 2])>,
     /// Add-on gel splats as `//qsp_gel a` lines by id, for demo seeks.
     pub gel: Vec<(u32, std::sync::Arc<str>)>,
     /// Reliable clc_* bytes to send (signon replies, string commands).
@@ -434,6 +437,7 @@ impl ClientState {
             mags: Vec::new(),
             stickies: Vec::new(),
             gel: Vec::new(),
+            boom: Vec::new(),
             out_reliable: SizeBuf::new(MAX_MSGLEN),
             movemessages: 0,
             movecmds: [crate::pred::PredMove::default(); crate::pred::MOVECMDS_SIZE],

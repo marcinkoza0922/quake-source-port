@@ -169,7 +169,7 @@ fn push_dem_block(out: &mut Vec<u8>, angles: [f32; 3], msg: &[u8]) {
 
 /// Most a demo may grow to: every packet becomes a whole frame, so a crafted
 /// or very long one would take gigabytes. The rest of it isn't played.
-const MAX_OUT: usize = if cfg!(target_arch = "wasm32") { 64 << 20 } else { 256 << 20 };
+pub const MAX_OUT: usize = if cfg!(target_arch = "wasm32") { 64 << 20 } else { 256 << 20 };
 
 /// Transcodes a `.qwd` file into an in-memory `.dem` byte stream.
 pub fn transcode_qwd(data: &[u8]) -> Option<Vec<u8>> {
