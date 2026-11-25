@@ -42,6 +42,16 @@ fn row_cvar(item: Item) -> Option<&'static str> {
     }
 }
 
+/// View rows that work in only one of the Camera row's perspectives: whether
+/// `item` does, and if it is the first-person one.
+fn camera_child(item: Item) -> Option<bool> {
+    match row_cvar(item)? {
+        "r_drawviewmodel" | "cl_bob" => Some(true),
+        "cl_vwep" => Some(false),
+        _ => None,
+    }
+}
+
 impl Menu {
     /// Toggles that must all be on for the row to work.
     pub(super) fn masters(&self, item: Item) -> &'static [&'static str] {
@@ -79,13 +89,14 @@ impl Menu {
             // classic styles replaced by an enhanced one
             || (matches!(item, Item::Choice { cvar: "r_waterwarp", .. }) && cv.value_of("r_enhancedwater") != 0.0)
             || (matches!(item, Item::Choice { cvar: "r_particles", .. }) && cv.value_of("r_enhancedparticles") != 0.0)
-            || (matches!(item, Item::Toggle { cvar: "cl_vwep", .. }) && cv.value_of("cl_camera") == 0.0)
-            || (matches!(item, Item::Choice { cvar: "r_drawviewmodel", .. }) && cv.value_of("cl_camera") != 0.0)
+            || camera_child(item).is_some_and(|first| first != (cv.value_of("cl_camera") == 0.0))
     }
 
-    /// Whether row `i` of `page` hangs off a master toggle shown on the same page.
+    /// Whether row `i` of `page` hangs off a master toggle, or the Camera
+    /// row, shown on the same page.
     pub(super) fn is_dependent(&self, page: Page, i: usize) -> bool {
-        let masters = self.masters(self.page_item(page, i));
+        let item = self.page_item(page, i);
+        let masters = if camera_child(item).is_some() { &["cl_camera"] } else { self.masters(item) };
         !masters.is_empty()
             && (0..self.page_len(page)).any(|k| row_cvar(self.page_item(page, k)).is_some_and(|c| masters.contains(&c)))
     }
@@ -121,6 +132,13 @@ mod tests {
         // the whole Hitstop page needs addon_hitstop, which is not a row on it
         m.open(Screen::OptionsPage(Page::Hitstop));
         assert!(!m.is_dependent(Page::Hitstop, row(&m, Page::Hitstop, "Advanced Settings")));
+        // the perspective's own rows hang off Camera; Gun Kick also tilts the third-person camera
+        m.open(Screen::OptionsPage(Page::Gameplay));
+        let g = Page::Gameplay;
+        for dep in ["Viewmodels", "View Bob", "Visible Weapons"] {
+            assert!(m.is_dependent(g, row(&m, g, dep)), "{dep} should be dependent");
+        }
+        assert!(!m.is_dependent(g, row(&m, g, "Gun Kick")) && !m.is_dependent(g, row(&m, g, "Camera")));
         // the classic particle style is replaced, not unlocked, by Enhanced Particles
         m.open(Screen::OptionsPage(Page::Graphics));
         assert!(!m.is_dependent(Page::Graphics, row(&m, Page::Graphics, "Particles")));

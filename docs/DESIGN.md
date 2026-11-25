@@ -533,6 +533,8 @@ Gameplay → Camera archives `cl_camera` (0 first person, 1 centered third perso
 shoulder); `view::camera` traces the offset against the world hull, draws the own body and
 hides viewmodels (row disabled) in third person. The camera turns toward where the eye's aim ray
 lands (≥128u away, distance eased over ~0.12s, no bob) so the crosshair is true; the body is `follows_camera` (no object blur).
+Gameplay → Camera has the rows of one perspective as dependents (`gating::camera_child`): Viewmodels and View Bob work in first person, Visible Weapons in third. Gun Kick stays its own row, as it tilts the third-person camera too.
+
 Gameplay → Visible Weapons archives `cl_vwep` (default 0; only with a third-person `cl_camera`, else dimmed and without effect; add-on guns are always shown, see below): player bodies (own body in third
 person or portals, split-screen partners, other players) hold the weapon in use instead of
 player.mdl's generic gun (`src/vwep*`, client-side only, so vanilla saves and demos are unaffected).
