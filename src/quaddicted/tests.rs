@@ -131,7 +131,7 @@ fn live_install() {
         std::fs::create_dir_all(&base).unwrap();
         let ok = std::process::Command::new("curl").args(["-fsSL", "-o"]).arg(&zip).arg(&r.url).status().unwrap();
         assert!(ok.success());
-        let res = install(r, &zip, &base, &base);
+        let res = install(r, &zip, &base, &base, &[]);
         eprintln!("{stem}: {res:?}");
     }
     assert!(qui::mods::is_game_dir(&base.join("002blue")));
@@ -163,10 +163,10 @@ fn a_mod_that_needs_quoth_gets_it_as_base() {
     let mods = dir.join("mods");
     std::fs::create_dir_all(base.join("quoth")).unwrap();
     // not the file the index names: nothing is installed
-    assert!(install(&r, &zip, &mods, &base).unwrap_err().contains("checksum"));
+    assert!(install(&r, &zip, &mods, &base, &[]).unwrap_err().contains("checksum"));
     assert!(!mods.exists());
     r.sha = qcore::sha256::hex(&mut std::fs::File::open(&zip).unwrap()).unwrap();
-    assert_eq!(install(&r, &zip, &mods, &base).unwrap(), "bluemonday");
+    assert_eq!(install(&r, &zip, &mods, &base, &[]).unwrap(), "bluemonday");
     // Installs into the user mods root, leaving basedir untouched.
     assert!(!base.join("bluemonday").exists());
     let info = std::fs::read_to_string(mods.join("bluemonday/modinfo.txt")).unwrap();
@@ -233,4 +233,67 @@ fn dependency_names_installed_base() {
     assert_eq!(dep_base(&d(&["ad_xmas_v2"]), &inst, "mymap").as_deref(), Some("ad_xmas"));
     assert_eq!(dep_base(&d(&["adamantine"]), &inst, "mymap"), None);
     assert_eq!(dep_base(&d(&["mymap_v2"]), &inst, "mymap"), None);
+}
+
+/// A release can add maps to a mod, but not take one over, nor id1.
+#[test]
+fn a_release_leaves_other_game_dirs_alone() {
+    let dir = std::env::temp_dir().join(format!("qsp-qd-conflict-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&dir);
+    let (base, mods) = (dir.join("base"), dir.join("mods"));
+    std::fs::create_dir_all(base.join("ad/maps")).unwrap();
+    std::fs::create_dir_all(base.join("id1")).unwrap();
+    std::fs::write(base.join("ad/progs.dat"), b"ad").unwrap();
+    std::fs::write(base.join("ad/maps/old.bsp"), b"old").unwrap();
+    let zip = dir.join("x.zip");
+    let go = |file: &str, data: &[u8], stem: &str, ours: &[&str]| {
+        std::fs::write(&zip, stored_zip(file, data)).unwrap();
+        let mut r = release(&format!(r#"{{"sha256":"x","urls":["u/{stem}.zip"],"tags":[],"install":{{"extract":"{{base}}/"}}}}"#));
+        r.sha = qcore::sha256::hex(&mut std::fs::File::open(&zip).unwrap()).unwrap();
+        install(&r, &zip, &mods, &base, &names(ours))
+    };
+    for (file, stem) in [
+        ("ad/progs.dat", "evil"),
+        ("ad/autoexec.cfg", "evil"),
+        ("ad/quake.rc", "evil"),
+        ("ad/maps/old.bsp", "evil"),
+        ("id1/autoexec.cfg", "id1"),
+        ("maps/start.bsp", "id1"),
+    ] {
+        let r = go(file, b"evil", stem, &["ad", "id1"]);
+        assert!(r.as_ref().is_err_and(|e| e.contains("already installed")), "{file}: {r:?}");
+        assert!(!mods.join(file).exists(), "{file}");
+    }
+    assert!(!mods.join("id1").exists() && !mods.join("ad").exists());
+    // a new map, and the same one again
+    for _ in 0..2 {
+        go("ad/maps/new.bsp", b"new", "newmap", &[]).unwrap();
+        assert_eq!(std::fs::read(mods.join("ad/maps/new.bsp")).unwrap(), b"new");
+    }
+    // its own mod can be updated, one put there by hand can't
+    go("fresh/progs.dat", b"1", "fresh_v1", &[]).unwrap();
+    assert!(go("fresh/progs.dat", b"2", "fresh_v2", &[]).is_err());
+    go("fresh/progs.dat", b"2", "fresh_v2", &["fresh"]).unwrap();
+    assert_eq!(std::fs::read(mods.join("fresh/progs.dat")).unwrap(), b"2");
+    let left: Vec<_> = std::fs::read_dir(&mods).unwrap().flatten().filter(|e| e.file_name().to_string_lossy().starts_with('.')).collect();
+    assert!(left.is_empty(), "{left:?}");
+    let _ = std::fs::remove_dir_all(&dir);
+}
+
+#[test]
+fn a_failed_unpack_leaves_nothing() {
+    let dir = std::env::temp_dir().join(format!("qsp-qd-partial-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&dir);
+    std::fs::create_dir_all(&dir).unwrap();
+    let zip = dir.join("x.zip");
+    std::fs::write(&zip, stored_zip("m/maps/a.bsp", b"a")).unwrap();
+    let pack = qcore::fs::Pack::load_pk3(&zip).unwrap();
+    assert_eq!(pack.size("m/maps/a.bsp"), Some(1));
+    let mods = dir.join("mods");
+    let plan = [("m/maps/a.bsp".to_string(), "m/maps/a.bsp".to_string()), ("m/b".into(), "missing".into())];
+    assert!(unpack(&plan, &pack, &mods, SHA).is_err());
+    assert!(std::fs::read_dir(&mods).map_or(0, |d| d.count()) == 0);
+    unpack(&plan[..1], &pack, &mods, SHA).unwrap();
+    assert!(mods.join("m/maps/a.bsp").is_file());
+    let _ = std::fs::remove_dir_all(&dir);
 }

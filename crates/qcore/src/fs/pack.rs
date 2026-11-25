@@ -127,6 +127,11 @@ impl Pack {
         self.entries.contains_key(&norm(name))
     }
 
+    /// Unpacked size of a file, as the archive says ([`Self::read`] gives no more).
+    pub fn size(&self, name: &str) -> Option<u64> {
+        self.entries.get(&norm(name)).map(|e| u64::from(e.size))
+    }
+
     /// Lowercased file names in archive order.
     pub fn names(&self) -> &[String] {
         &self.names
