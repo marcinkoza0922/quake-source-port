@@ -20,7 +20,7 @@ mod strings;
 use std::fmt;
 
 pub use builtins::{Builtin, EXTENSIONS};
-pub use exec::{MAX_STACK_DEPTH, LOCALSTACK_SIZE, RUNAWAY_LIMIT};
+pub use exec::{MAX_NESTED, MAX_STACK_DEPTH, LOCALSTACK_SIZE, RUNAWAY_LIMIT};
 pub use progs::{Def, EType, Function, PROGHEADER_CRC, PROG_VERSION, Progs, Statement, crc_block};
 pub use spawn::{ParsedEdict, SpawnFilter, SpawnStats};
 pub use builtins::{angle_vectors, atof, ftos};
@@ -67,6 +67,8 @@ pub trait Host {
     /// `vm.g_*(ofs_parm(i))`, `vm.argc` holds the argument count; write the
     /// result with `vm.ret_*`.
     fn builtin(&mut self, vm: &mut Vm, b: Builtin) -> Result<()>;
+    /// `copyentity` copied the fields of `src` to `dst`: the rest is the host's.
+    fn copied_entity(&mut self, _vm: &mut Vm, _src: u32, _dst: u32) {}
     /// Extension builtin resolved by name (`#0` or a known extension number).
     fn ext_builtin(&mut self, vm: &mut Vm, name: &str) -> Result<()> {
         Err(vm.run_error(format!("unimplemented builtin {name}")))

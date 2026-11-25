@@ -228,7 +228,7 @@ pub fn add_gravity<D: Edicts + ?Sized>(ents: &mut D, p: &PhysParams, e: Ent) {
     let g = ents.f(e, F::Gravity);
     let g = if g != 0.0 { g } else { 1.0 };
     let mut v = ents.v(e, V::Velocity);
-    v.z = (v.z as f64 - g as f64 * p.gravity as f64 * p.frametime) as f32;
+    v.z = (f64::from(v.z) - f64::from(g * p.gravity) * p.frametime) as f32;
     ents.set_v(e, V::Velocity, v);
 }
 

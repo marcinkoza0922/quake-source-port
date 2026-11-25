@@ -9,6 +9,9 @@ use crate::{Host, OFS_PARM0, OFS_RETURN, Result, VmError};
 mod frames;
 
 pub const MAX_STACK_DEPTH: usize = 1024;
+/// Executions inside each other's builtins (a touch that touches): each takes
+/// native stack, of which Windows and the web have 1 MiB.
+pub const MAX_NESTED: usize = 64;
 pub const LOCALSTACK_SIZE: usize = 16384;
 /// Statements per [`Vm::execute`] before "runaway loop error".
 pub const RUNAWAY_LIMIT: u32 = 0x100_0000;
@@ -64,6 +67,7 @@ pub struct Vm {
     /// DP_QC_STRINGBUFFERS
     pub(crate) strbufs: Vec<Option<crate::builtins::dp::StrBuf>>,
     stack: Vec<Frame>,
+    nested: usize,
     localstack: Vec<u32>,
     xfunction: usize,
     xstatement: usize,
@@ -107,6 +111,7 @@ impl Vm {
             token_spans: Vec::new(),
             strbufs: Vec::new(),
             stack: Vec::with_capacity(64),
+            nested: 0,
             localstack: Vec::with_capacity(LOCALSTACK_SIZE),
             xfunction: 0,
             xstatement: 0,
@@ -153,6 +158,7 @@ impl Vm {
             token_spans: Vec::new(),
             strbufs: Vec::new(),
             stack: Vec::with_capacity(64),
+            nested: 0,
             localstack: Vec::with_capacity(LOCALSTACK_SIZE),
             xfunction: 0,
             xstatement: 0,
@@ -269,9 +275,15 @@ impl Vm {
                 Err(e) => return Err(self.fail(e)),
             }
         }
+        if self.nested >= MAX_NESTED {
+            let e = self.run_error("stack overflow");
+            return Err(self.fail(e));
+        }
         self.trace = false;
         let exitdepth = self.stack.len();
+        self.nested += 1;
         let r = self.run(host, fnum, exitdepth);
+        self.nested -= 1;
         r.map_err(|e| self.fail(e))
     }
 

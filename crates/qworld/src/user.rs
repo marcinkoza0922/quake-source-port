@@ -57,7 +57,7 @@ pub fn air_accelerate(vel: &mut Vec3, p: &PhysParams, wishspeed: f32, wishveloc:
     if addspeed <= 0.0 {
         return;
     }
-    let accelspeed = ((p.accelerate as f64 * wishspeed as f64 * p.frametime) as f32).min(addspeed);
+    let accelspeed = ((f64::from(p.accelerate * wishspeed) * p.frametime) as f32).min(addspeed);
     *vel += n * accelspeed;
 }
 
@@ -82,7 +82,7 @@ pub fn water_move<D: Edicts + ?Sized>(ents: &mut D, p: &PhysParams, e: Ent, cmd:
         wishvel *= p.maxspeed / wishspeed;
         wishspeed = p.maxspeed;
     }
-    wishspeed *= 0.7;
+    wishspeed = (f64::from(wishspeed) * 0.7) as f32;
     let mut vel = ents.v(e, V::Velocity);
     let speed = vel.length();
     let newspeed = if speed != 0.0 {
@@ -101,7 +101,7 @@ pub fn water_move<D: Edicts + ?Sized>(ents: &mut D, p: &PhysParams, e: Ent, cmd:
         return;
     }
     let wishvel = wishvel.normalize();
-    let accelspeed = ((p.accelerate as f64 * wishspeed as f64 * p.frametime) as f32).min(addspeed);
+    let accelspeed = ((f64::from(p.accelerate * wishspeed) * p.frametime) as f32).min(addspeed);
     ents.set_v(e, V::Velocity, vel + wishvel * accelspeed);
 }
 

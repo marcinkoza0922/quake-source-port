@@ -164,3 +164,19 @@ fn lossy_demos_keep_the_original_as_qsd() {
     assert_eq!(convert_file(&path2), "", "already plain: nothing to do");
     let _ = std::fs::remove_dir_all(&dir);
 }
+
+#[test]
+fn entities_that_overflow_a_message_are_an_error() {
+    let mut cl = ClientState::new();
+    cl.protocol = 999;
+    cl.entities.resize_with(12000, Default::default);
+    for e in &mut cl.entities {
+        e.delta_live = true;
+        e.netstate.origin = [1.0, 2.0, 3.0];
+        e.netstate.modelindex = 300;
+    }
+    let mut lost = Lost::default();
+    assert!(entity_updates(&cl, &mut lost).is_err());
+    cl.entities.truncate(100);
+    assert!(entity_updates(&cl, &mut lost).is_ok_and(|b| b.len() > 100));
+}

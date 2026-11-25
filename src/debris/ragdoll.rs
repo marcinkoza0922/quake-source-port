@@ -149,7 +149,7 @@ impl Ragdoll {
         let (dir, len) = (b - a).normalize_len();
         (0..self.pos.len())
             .map(|i| {
-                let t = (self.pos[i] - a).dot(dir).clamp(0.0, len);
+                let t = (self.pos[i] - a).dot(dir).clamp(0.0, len.max(0.0));
                 ((a + dir * t - self.pos[i]).length() - self.radius(i) - 6.0, i)
             })
             .min_by(|x, y| x.0.total_cmp(&y.0))
