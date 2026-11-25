@@ -101,6 +101,8 @@ A port úgy készült, hogy kontrollerrel is jól játszható legyen.
   Nintendo), és automatikusan felismerődnek.
 - Mindent átállíthatsz az Options → Irányítás alatt, akár a kontrollerről
   is.
+- **Select / View ×2**: Képernyőkép; **Start ×2**: Gyorsmentés; **Start**
+  (Nyomva tartás): Gyorsbetöltés.
 - Érintőképernyős irányítás állítható mérettel, átlátszatlansággal és
   nézési sebességgel.
 
@@ -215,7 +217,7 @@ bármelyik moddal és online is működnek.
 - **Becsapódási effektek**: sörétnyomok, fába és ellenségekbe álló szögek,
   robbanási égésnyomok.
 - **Továbbfejlesztett víz**: áttetszőség, hullámzás, csobbanások és
-  kausztika.
+  kausztika; **Víz alatti fénytörés**, **Cseppek a képernyőn**.
 - **Átlátszó teleporterek**, amelyek parallaxissal mutatják a
   célállomásukat.
 - Környezeti takarás, objektumonkénti és sebességi mozgási elmosódás, lágy
@@ -262,6 +264,9 @@ HUD-on. A tüzelés és a másodlagos tűz a szokásos támadógombjaid.
 | **Bumeráng** | Nyomva tartva megjelöli az ellenségeket, elengedve eldobod; sorra elkábítja őket | Jelölések törlése | Nincs |
 | **Zselészóró** | Kék taszító zselé (pattanós) | Narancssárga gyorsító zselé (gyors) | Nincs |
 | **Nagynyomású mosó** | Hosszú vízsugár, amely hátralöki az ellenségeket és lemossa a zselét | Széles sugárlegyező | Nincs |
+| **Apa-apa kábel** | A másodlagos tűz egy elérhető, világító elektronikus panelre bedugja az egyik végét; a másik ezután korlátlan lőszerrel villámokat lő | A másodlagos tűz vagy fegyverváltás kirántja | Nincs |
+| **Akimbo pisztolyok** | Bal | Jobb | Nincs (Újratöltés: R) |
+| **Gépkarabély** | Teljesen automata puska, amely a szögeidből tölt újra | A Másodlagos tűz a vörös pontos irányzékon át céloz: pontosabb lövések és közelebbi nézet | Szögek (Újratöltés: R) |
 
 A portálok sík világfelületekre kerülnek, és lendületükkel együtt
 átviszik rajtuk téged, a szörnyeket és az eldobott tárgyakat is. Bekapcsolt

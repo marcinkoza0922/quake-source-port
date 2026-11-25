@@ -101,6 +101,8 @@ O port foi pensado para ser jogado com comando.
 - Os **ícones dos botões** correspondem ao teu comando (Xbox, PlayStation,
   Nintendo) e são detetados automaticamente.
 - Reatribui tudo em Options → Controlos, inclusive a partir do comando.
+- **Select / View ×2**: Captura de ecrã; **Start ×2**: Gravação rápida;
+  **Start** (Manter): Carregamento rápido.
 - Controlos táteis com tamanho, opacidade e velocidade da vista ajustáveis.
 
 ## Gravar
@@ -213,7 +215,8 @@ por isso funciona com qualquer mod e online.
   corpos, gotas no ar que se espalham onde caem.
 - **Efeitos de impacto**: marcas de chumbos, pregos que se espetam na
   madeira e nos inimigos, marcas de queimadura de explosões.
-- **Água melhorada**: transparência, ondulações, salpicos e cáusticas.
+- **Água melhorada**: transparência, ondulações, salpicos e cáusticas;
+  **Refração subaquática**, **Gotas no ecrã**.
 - **Teletransportadores transparentes** que mostram o destino com paralaxe.
 - Oclusão ambiente, desfoque de movimento por objeto e de velocidade,
   partículas suaves.
@@ -261,6 +264,9 @@ HUD. O disparo e o tiro secundário são os teus botões de ataque habituais.
 | **Bumerangue** | Mantém para marcar inimigos, larga para lançar; atordoa cada um à vez | Limpar marcas | Nenhuma |
 | **Pulverizador de gel** | Gel azul de repulsão (saltitante) | Gel laranja de propulsão (rápido) | Nenhuma |
 | **Lavadora de pressão** | Jato de água longo que empurra inimigos e lava o gel | Leque largo de jatos | Nenhuma |
+| **Cabo macho-macho** | O disparo secundário num painel eletrónico iluminado ao alcance liga uma ponta; a outra dispara então relâmpagos com munição ilimitada | O disparo secundário ou trocar de arma arranca-o | Nenhuma |
+| **Pistolas duplas** | Esquerda | Direita | Nenhuma (Recarregar: R) |
+| **Espingarda de assalto** | Uma espingarda automática que recarrega com os teus pregos | Tiro secundário aponta pela mira de ponto vermelho para tiros mais precisos e uma vista mais próxima | Pregos (Recarregar: R) |
 
 Os portais ficam em superfícies planas do mapa e fazem-te passar a ti, aos
 monstros e aos objetos lançados, mantendo o impulso. Com **Ver através dos

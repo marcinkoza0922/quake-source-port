@@ -105,8 +105,8 @@ impl Server {
             }
             l.vm.set_self(i as u32 + 1);
             { let fnum = l.vm.g_i(parms_fn); exec(&mut l.vm, c, &mut l.world, fnum); }
-            for k in 0..NUM_SPAWN_PARMS {
-                c.clients[i].spawn_parms[k] = l.vm.g_f(g.parm1 + k);
+            for (k, v) in c.clients[i].spawn_parms.iter_mut().enumerate() {
+                *v = l.vm.g_f(g.parm1 + k);
             }
         }
     }
@@ -131,8 +131,8 @@ impl Server {
             vm.set_ent_f(e, f.team, ((c.clients[i].colors & 15) + 1) as f32);
             let h = vm.strings.engine(c.clients[i].name.as_bytes());
             vm.set_ent_i(e, f.netname, h);
-            for k in 0..NUM_SPAWN_PARMS {
-                vm.set_g_f(g.parm1 + k, c.clients[i].spawn_parms[k]);
+            for (k, &v) in c.clients[i].spawn_parms.iter().enumerate() {
+                vm.set_g_f(g.parm1 + k, v);
             }
             vm.set_g_f(g.time, vm.time as f32);
             vm.set_self(e);

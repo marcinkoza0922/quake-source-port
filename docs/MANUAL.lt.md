@@ -102,6 +102,8 @@ Portas sukurtas žaisti su pulteliu.
 - **Mygtukų simboliai** atitinka jūsų pultelį (Xbox, PlayStation, Nintendo)
   ir nustatomi automatiškai.
 - Viską perskirkite per Options → Valdymas, taip pat ir valdikliu.
+- **Select / View ×2**: Ekrano nuotrauka; **Start ×2**: Greitas
+  išsaugojimas; **Start** (Laikyti): Greitas įkėlimas.
 - Jutikliniai valdikliai su reguliuojamu dydžiu, neskaidrumu ir žvilgsnio
   greičiu.
 
@@ -217,8 +219,8 @@ išjungti, todėl veikia su bet kuria modifikacija ir internete.
   ore skriejantys lašai, kurie ištykšta ten, kur nukrenta.
 - **Smūgių efektai**: šratų pėdsakai, į medį ir priešus įsmingančios vinys,
   sprogimų nudegimai.
-- **Patobulintas vanduo**: permatomumas, raibuliavimas, purslai ir
-  kaustika.
+- **Patobulintas vanduo**: permatomumas, raibuliavimas, purslai ir kaustika;
+  **Povandeninė refrakcija**, **Lašai ekrane**.
 - **Permatomi teleportai**, rodantys savo tikslą su paralaksu.
 - Aplinkos užtamsinimas, objektų ir greičio judesio suliejimas, minkštos
   dalelės.
@@ -265,6 +267,9 @@ yra jūsų įprasti puolimo mygtukai.
 | **Bumerangas** | Laikykite pažymėti priešus, atleiskite mesti; paeiliui apsvaigina kiekvieną | Išvalyti žymes | Nėra |
 | **Gelio purkštuvas** | Mėlynas atstūmimo gelis (atšokti) | Oranžinis pagreičio gelis (greitis) | Nėra |
 | **Plovimo aparatas** | Ilga vandens srovė, atstumianti priešus ir nuplaunanti gelį | Plati srovių vėduoklė | Nėra |
+| **Kištukas-kištukas kabelis** | Antrinė ugnis į šviečiantį pasiekiamą elektronikos skydelį įjungia vieną galą; kitas tada šaudo žaibais su neribota amunicija | Antrinė ugnis ar ginklo keitimas jį ištraukia | Nėra |
+| **Du pistoletai** | Kairėje | Dešinėje | Nėra (Užtaisyti: R) |
+| **Automatinis šautuvas** | Automatinis šautuvas, užtaisomas jūsų vinimis | Alternatyvus šūvis taiko pro raudono taško taikiklį: šūviai tikslesni, o vaizdas artimesnis | Vinys (Užtaisyti: R) |
 
 Portalai dedami ant plokščių pasaulio paviršių ir perneša jus, monstrus bei
 mestus daiktus išlaikydami jų inerciją. Įjungus **Matyti pro portalus**,

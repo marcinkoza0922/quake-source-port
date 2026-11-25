@@ -96,6 +96,8 @@ Port je osmišljen za igranje na kontroleru.
 - **Simboli tipki** odgovaraju vašem kontroleru (Xbox, PlayStation,
   Nintendo) i prepoznaju se automatski.
 - Sve tipke možete ponovno dodijeliti u Options → Kontrole, i s kontrolera.
+- **Select / View ×2**: Snimka zaslona; **Start ×2**: Brzo spremanje;
+  **Start** (Drži): Brzo učitavanje.
 - Dodirne kontrole s podesivom veličinom, neprozirnošću i brzinom pogleda.
 
 ## Spremanje
@@ -200,7 +202,8 @@ pa radi sa svakim modom i na mreži.
   kapljice u zraku koje se razliju gdje padnu.
 - **Efekti udaraca**: tragovi sačme, čavli koji se zabijaju u drvo i
   neprijatelje, garež od eksplozija.
-- **Poboljšana voda**: prozirnost, valovi, prskanje i kaustika.
+- **Poboljšana voda**: prozirnost, valovi, prskanje i kaustika; **Podvodni
+  lom svjetlosti**, **Kapljice na zaslonu**.
 - **Prozirni teleporteri** koji prikazuju svoje odredište s paralaksom.
 - Ambijentalno zasjenjenje, zamućenje pokreta po objektu i pri brzini,
   meke čestice.
@@ -245,6 +248,9 @@ paljba su vaše uobičajene tipke za napad.
 | **Bumerang** | Držite za označavanje neprijatelja, otpustite za bacanje; omamljuje jednog po jednog | Brisanje oznaka | Nema |
 | **Prskalica gela** | Plavi odbojni gel (odskočni) | Narančasti pogonski gel (brzi) | Nema |
 | **Visokotlačni perač** | Dugi mlaz vode koji odguruje neprijatelje i ispire gel | Široka lepeza mlazova | Nema |
+| **Kabel muški-muški** | Alternativna paljba na svijetleću elektroničku ploču nadohvat ukopča jedan kraj; drugi tada ispaljuje munje s neograničenim streljivom | Alternativna paljba ili promjena oružja ga iščupa | Nema |
+| **Akimbo pištolji** | Lijevo | Desno | Nema (Ponovno punjenje: R) |
+| **Jurišna puška** | Automatska puška koja se puni vašim čavlima | Alternativna paljba cilja kroz ciljnik s crvenom točkom za preciznije hice i bliži pogled | Čavli (Ponovno punjenje: R) |
 
 Portali se postavljaju na ravne površine svijeta i prenose vas, čudovišta i
 bačene predmete kroz sebe s njihovim zamahom. Uz uključeno **Pogled kroz

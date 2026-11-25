@@ -287,8 +287,7 @@ impl Mixer {
         let view = self.listener.view_entity;
         let mut best = None;
         let mut life_left = usize::MAX;
-        for i in NUM_AMBIENTS..NUM_AMBIENTS + MAX_DYNAMIC_CHANNELS {
-            let ch = &self.channels[i];
+        for (i, ch) in self.channels.iter().enumerate().skip(NUM_AMBIENTS).take(MAX_DYNAMIC_CHANNELS) {
             // channel 0 never overrides
             if entchannel != 0
                 && ch.entity == entity

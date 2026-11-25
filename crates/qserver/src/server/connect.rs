@@ -133,8 +133,8 @@ impl Server {
             c.clients[i].spawn_parms = c.sv.loadgame_parms;
         } else {
             { let fnum = l.vm.g_i(g.f_set_new_parms); exec(&mut l.vm, c, &mut l.world, fnum); }
-            for k in 0..NUM_SPAWN_PARMS {
-                c.clients[i].spawn_parms[k] = l.vm.g_f(g.parm1 + k);
+            for (k, v) in c.clients[i].spawn_parms.iter_mut().enumerate() {
+                *v = l.vm.g_f(g.parm1 + k);
             }
         }
         self.send_serverinfo(i);

@@ -78,8 +78,10 @@ fn sepulcher_gate_lighting_does_not_depend_on_camera_history() {
     r.render(&frame).unwrap();
     let after = r.read_pixels().unwrap();
     let changed = before
-        .chunks_exact(4)
-        .zip(after.chunks_exact(4))
+        .as_chunks::<4>()
+        .0
+        .iter()
+        .zip(after.as_chunks::<4>().0)
         .filter(|(a, b)| a != b)
         .count();
     assert_eq!(changed, 0, "camera history changed lighting");

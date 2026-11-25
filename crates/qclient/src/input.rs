@@ -124,11 +124,11 @@ impl ClientState {
             b.short((self.movemessages & 0xffff) as i32);
         }
         b.float(self.mtime[0] as f32);
-        for i in 0..3 {
+        for a in cmd.viewangles {
             if self.protocol == PROTOCOL_NETQUAKE && !predinfo {
-                b.angle(cmd.viewangles[i], self.protocolflags);
+                b.angle(a, self.protocolflags);
             } else {
-                b.angle16(cmd.viewangles[i], self.protocolflags);
+                b.angle16(a, self.protocolflags);
             }
         }
         b.short(cmd.forwardmove as i32);

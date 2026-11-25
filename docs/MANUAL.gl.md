@@ -100,6 +100,8 @@ O port está pensado para xogarse con mando.
 - As **iconas dos botóns** coinciden co teu mando (Xbox, PlayStation,
   Nintendo) e detéctanse automaticamente.
 - Todo se reasigna en Options → Controis, tamén desde o mando.
+- **Select / View ×2**: Captura de pantalla; **Start ×2**: Gardado rápido;
+  **Start** (Manter): Carga rápida.
 - Controis táctiles con tamaño, opacidade e velocidade da vista
   axustables.
 
@@ -214,7 +216,8 @@ defecto, así que vale para calquera mod e en liña.
   corpos, pingas no aire que estoupan onde caen.
 - **Efectos de impacto**: marcas de perdigóns, cravos que se cravan na
   madeira e nos inimigos, marcas de queimadura das explosións.
-- **Auga mellorada**: transparencia, ondas, salpicaduras e cáusticas.
+- **Auga mellorada**: transparencia, ondas, salpicaduras e cáusticas;
+  **Refracción baixo a auga**, **Pingas na pantalla**.
 - **Teletransportadores transparentes** que mostran o seu destino con
   paralaxe.
 - Oclusión ambiental, desenfoque de movemento por obxecto e de velocidade,
@@ -264,6 +267,9 @@ O disparo e o disparo secundario son os teus botóns de ataque habituais.
 | **Bumerán** | Mantén para marcar inimigos, solta para lanzar; atorda cada un por quendas | Borrar marcas | Ningunha |
 | **Pulverizador de xel** | Xel azul de repulsión (elástico) | Xel laranxa de propulsión (rápido) | Ningunha |
 | **Hidrolimpadora** | Chorro de auga longo que empurra os inimigos e limpa o xel | Abano ancho de chorros | Ningunha |
+| **Cable macho-macho** | O disparo secundario sobre un panel electrónico iluminado ao teu alcance enchufa un extremo; o outro dispara raios con munición ilimitada | O secundario ou cambiar de arma arríncao | Ningunha |
+| **Pistolas akimbo** | Esquerda | Dereita | Ningunha (Recargar: R) |
+| **Fusil de asalto** | Un fusil automático que se recarga cos teus cravos | O disparo secundario apunta coa mira de punto vermello para tiros máis precisos e unha vista máis próxima | Cravos (Recargar: R) |
 
 Os portais colócanse en superficies planas do mundo e levan a través
 deles a ti, aos monstros e aos obxectos lanzados, conservando o seu

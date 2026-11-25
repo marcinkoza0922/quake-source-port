@@ -97,6 +97,8 @@ Porten är gjord för att spelas med handkontroll.
   och identifieras automatiskt.
 - Ändra alla tilldelningar under Options → Kontroller, även från
   handkontrollen.
+- **Select / View ×2**: Skärmdump; **Start ×2**: Snabbspara; **Start**
+  (Håll): Snabbladda.
 - Pekskärmskontroller med justerbar storlek, opacitet och tittkänslighet.
 
 ## Spara
@@ -205,7 +207,8 @@ så det fungerar med alla moddar och online.
   luften som stänker där de landar.
 - **Nedslagseffekter**: hagelmärken, spikar som fastnar i trä och fiender,
   brännmärken från explosioner.
-- **Förbättrat vatten**: genomskinlighet, krusningar, stänk och kaustik.
+- **Förbättrat vatten**: genomskinlighet, krusningar, stänk och kaustik;
+  **Ljusbrytning under vatten**, **Droppar på skärmen**.
 - **Genomskinliga teleportrar** som visar sitt mål med parallax.
 - Ambient ocklusion, rörelseoskärpa per objekt och vid hög fart, mjuka
   partiklar.
@@ -251,6 +254,9 @@ eld är dina vanliga attackknappar.
 | **Bumerang** | Håll för att markera fiender, släpp för att kasta; bedövar var och en i tur | Rensa markeringar | Ingen |
 | **Gelspruta** | Blå studsgel (studsig) | Orange fartgel (snabb) | Ingen |
 | **Högtryckstvätt** | Lång vattenstråle som knuffar fiender och tvättar bort gel | Bred solfjäder av strålar | Ingen |
+| **Hane-hane-kabel** | Alternativ eld mot en lysande elektronikpanel inom räckhåll kopplar in ena änden; den andra skjuter då blixtar med obegränsad ammunition | Alternativ eld eller vapenbyte sliter loss den | Ingen |
+| **Dubbla pistoler** | Vänster | Höger | Ingen (Ladda om: R) |
+| **Automatkarbin** | En helautomatisk karbin som laddas med dina spikar | Alternativ eld siktar genom rödpunktssiktet för tätare skott och en närmare vy | Spikar (Ladda om: R) |
 
 Portaler placeras på plana ytor i världen och för dig, monster och kastade
 föremål igenom med bibehållen rörelsemängd. Med **Se genom portaler** på

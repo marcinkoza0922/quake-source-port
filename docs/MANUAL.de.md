@@ -105,6 +105,8 @@ Der Port ist dafür gemacht, mit einem Gamepad gespielt zu werden.
   und werden automatisch erkannt.
 - Alles lässt sich unter Options → Steuerung neu belegen, auch vom
   Controller aus.
+- **Select / View ×2**: Bildschirmfoto; **Start ×2**: Schnellspeichern;
+  **Start** (Halten): Schnellladen.
 - Touch-Steuerung mit einstellbarer Größe, Deckkraft und
   Blickgeschwindigkeit.
 
@@ -222,8 +224,8 @@ aus, funktioniert also mit jedem Mod und online.
   folgen, Tropfen in der Luft, die dort aufklatschen, wo sie landen.
 - **Einschlageffekte**: Schrotkugel-Einschüsse, Nägel, die in Holz und
   Gegnern stecken bleiben, Explosions-Brandspuren.
-- **Verbessertes Wasser**: Durchsichtigkeit, Wellen, Spritzer und
-  Kaustiken.
+- **Verbessertes Wasser**: Durchsichtigkeit, Wellen, Spritzer und Kaustiken;
+  **Unterwasser-Lichtbrechung**, **Tropfen auf dem Bildschirm**.
 - **Durchsichtige Teleporter**, die ihr Ziel mit Parallaxe zeigen.
 - Umgebungsverdeckung, Bewegungsunschärfe pro Objekt und bei
   Geschwindigkeit, weiche Partikel.
@@ -272,6 +274,9 @@ sind deine üblichen Angriffstasten.
 | **Bumerang** | Halten, um Gegner zu markieren, loslassen zum Werfen; betäubt jeden nacheinander | Markierungen löschen | Keine |
 | **Gelsprüher** | Blaues Abstoßungsgel (federnd) | Oranges Antriebsgel (schnell) | Keine |
 | **Hochdruckreiniger** | Langer Wasserstrahl, der Gegner wegdrückt und Gel abwäscht | Breiter Strahlenfächer | Keine |
+| **Stecker-Stecker-Kabel** | Alternativfeuer auf ein leuchtendes Elektronikpaneel in Reichweite steckt ein Ende ein; das andere Ende schießt dann Blitze mit unbegrenzter Munition | Alternativfeuer oder ein Waffenwechsel reißt es heraus | Keine |
+| **Akimbo-Pistolen** | Links | Rechts | Keine (Nachladen: R) |
+| **Sturmgewehr** | Ein vollautomatisches Gewehr, das mit deinen Nägeln nachlädt | Sekundärfeuer zielt durch das Rotpunktvisier: genauere Schüsse und nähere Sicht | Nägel (Nachladen: R) |
 
 Portale haften an flachen Oberflächen der Welt und befördern dich, Monster
 und geworfene Gegenstände mit ihrem Schwung hindurch. Mit **Durch Portale

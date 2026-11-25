@@ -221,8 +221,8 @@ impl ViewState {
         }
         let bob = Self::calc_bob(cl, cv);
         view.origin[2] += cl.viewheight + bob;
-        for k in 0..3 {
-            view.origin[k] += 1.0 / 32.0;
+        for o in &mut view.origin {
+            *o += 1.0 / 32.0;
         }
         view.angles[2] += Self::calc_roll(ent.angles, cl.velocity, cv);
         if self.dmg_time > 0.0 {

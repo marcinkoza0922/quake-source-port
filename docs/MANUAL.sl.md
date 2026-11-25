@@ -97,6 +97,8 @@ Port je zasnovan za igranje s krmilnikom.
 - **Simboli gumbov** se ujemajo z vašim krmilnikom (Xbox, PlayStation,
   Nintendo) in se zaznajo samodejno.
 - Vse lahko znova dodelite v Options → Kontrolniki, tudi s krmilnikom.
+- **Select / View ×2**: Zajem zaslona; **Start ×2**: Hitro shranjevanje;
+  **Start** (Drži): Hitro nalaganje.
 - Kontrolniki na zaslonu na dotik z nastavljivo velikostjo, prekrivnostjo
   in hitrostjo pogleda.
 
@@ -207,7 +209,8 @@ izklopljeno, zato deluje s katerimkoli modom in prek spleta.
   kapljice v zraku, ki se razpršijo tam, kjer pristanejo.
 - **Učinki udarcev**: sledi šiber, žeblji, ki se zapičijo v les in
   sovražnike, ožganine eksplozij.
-- **Izboljšana voda**: prosojnost, valovi, pljuski in kavstika.
+- **Izboljšana voda**: prosojnost, valovi, pljuski in kavstika; **Podvodni
+  lom svetlobe**, **Kapljice na zaslonu**.
 - **Prozorni teleporterji**, ki s paralakso pokažejo svoj cilj.
 - Senčenje okolice, zameglitev gibanja posameznih predmetov in hitrosti,
   mehki delci.
@@ -254,6 +257,9 @@ in alternativni strel sta vaša običajna gumba za napad.
 | **Bumerang** | Držite za označevanje sovražnikov, spustite za met; omami enega za drugim | Počisti oznake | Brez |
 | **Brizgalnik gela** | Modri odbojni gel (prožen) | Oranžni pospeševalni gel (hiter) | Brez |
 | **Visokotlačni čistilnik** | Dolg vodni curek, ki odriva sovražnike in spira gel | Široka pahljača curkov | Brez |
+| **Kabel moški-moški** | Alternativni strel na svetleč elektronski panel na dosegu priklopi en konec; drugi nato strelja strele z neomejenim strelivom | Alternativni strel ali menjava orožja ga iztrga | Brez |
+| **Dvojni pištoli** | Levo | Desno | Brez (Polnjenje: R) |
+| **Jurišna puška** | Samodejna puška, ki se polni iz vaših žebljev | Alternativni strel meri skozi merilnik z rdečo piko za natančnejše strele in bližji pogled | Žeblji (Polnjenje: R) |
 
 Portali se postavijo na ravne površine sveta in vas, pošasti ter vržene
 predmete prenesejo skozi z ohranjenim zagonom. Z vklopljenim **Pogled skozi

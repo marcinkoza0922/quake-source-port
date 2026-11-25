@@ -98,6 +98,8 @@ Porti është projektuar për t'u luajtur me kontrollues.
 - **Simbolet e butonave** i përshtaten kontrolluesit tënd (Xbox,
   PlayStation, Nintendo) dhe zbulohen automatikisht.
 - Ricakto gjithçka te Options → Kontrollet, edhe nga kontrolluesi.
+- **Select / View ×2**: Pamje e ekranit; **Start ×2**: Ruajtje e shpejtë;
+  **Start** (Mbaj): Ngarkim i shpejtë.
 - Kontrolle me prekje me madhësi, opacitet dhe shpejtësi shikimi të
   rregullueshme.
 
@@ -210,7 +212,8 @@ joaktive si parazgjedhje, ndaj punojnë me çdo mod dhe në internet.
   pika në ajër që shpërndahen aty ku bien.
 - **Efekte goditjeje**: gjurmë saçmash, gozhdë që ngecin në dru dhe armiq,
   gjurmë djegieje nga shpërthimet.
-- **Ujë i përmirësuar**: tejdukshmëri, valëzime, spërkatje dhe kaustikë.
+- **Ujë i përmirësuar**: tejdukshmëri, valëzime, spërkatje dhe kaustikë;
+  **Përthyerje nën ujë**, **Pika në ekran**.
 - **Teleportues të tejdukshëm** që tregojnë destinacionin me paralaksë.
 - Okluzion ambiental, turbullim lëvizjeje për çdo objekt dhe nga
   shpejtësia, grimca të buta.
@@ -258,6 +261,9 @@ Qitja dhe zjarri alternativ janë butonat e tu të zakonshëm të sulmit.
 | **Bumerang** | Mbaj për të shënuar armiqtë, lësho për të hedhur; i shtang me radhë | Pastro shenjat | Asnjë |
 | **Spërkatës xheli** | Xhel blu zmbrapsës (kërcyes) | Xhel portokalli shtytës (i shpejtë) | Asnjë |
 | **Pastrues me presion** | Rrymë e gjatë uji që shtyn armiqtë dhe lan xhelin | Ventilator i gjerë rrymash | Asnjë |
+| **Kabllo mashkull-mashkull** | Zjarri dytësor mbi një panel elektronik që shkëlqen brenda mundësisë fut njërin skaj; tjetri pastaj qëllon rrufe me municion të pakufizuar | Zjarri dytësor ose ndërrimi i armës e shkul | Asnjë |
+| **Dy pistoleta** | Majtas | Djathtas | Asnjë (Rimbush: R) |
+| **Pushkë sulmi** | Pushkë plotësisht automatike që rimbushet nga gozhdët e tua | Zjarr alternativ shënjestron me pikën e kuqe për të shtëna më të sakta dhe pamje më të afërt | Gozhdë (Rimbush: R) |
 
 Portalet vendosen në sipërfaqe të sheshta të botës dhe të kalojnë ty,
 përbindëshat dhe objektet e hedhura me gjithë vrullin e tyre. Me **Shiko

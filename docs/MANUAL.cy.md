@@ -102,6 +102,8 @@ Mae'r injan wedi'i chynllunio i'w chwarae gyda phad gêm.
 - Mae **Symbolau botymau** yn cyfateb i'ch pad (Xbox, PlayStation,
   Nintendo) ac yn cael eu canfod yn awtomatig.
 - Ail-neilltuwch bopeth yn Options → Rheolyddion, gan gynnwys o'r rheolydd.
+- **Select / View ×2**: Sgrinlun; **Start ×2**: Cadw cyflym; **Start**
+  (Dal): Llwytho cyflym.
 - Rheolyddion sgrin gyffwrdd gyda maint, didreiddedd a chyflymder edrych
   addasadwy.
 
@@ -215,7 +217,8 @@ ddiofyn, felly maent yn gweithio gydag unrhyw fod ac ar-lein.
   diferion yn yr awyr sy'n tasgu lle maent yn glanio.
 - **Effeithiau trawiad**: olion haels dryll, hoelion sy'n glynu mewn pren a
   gelynion, olion llosg ffrwydradau.
-- **Dŵr gwell**: tryleuedd, crychdonnau, tasgiadau a chostigau.
+- **Dŵr gwell**: tryleuedd, crychdonnau, tasgiadau a chostigau; **Plygiant
+  tanddwr**, **Diferion ar y sgrin**.
 - **Teleportwyr tryloyw** sy'n dangos pen eu taith gyda pharalacs.
 - Occlwsiwn amgylchol, aneglurder symud fesul gwrthrych ac aneglurder
   cyflymder, gronynnau meddal.
@@ -262,6 +265,9 @@ Tanio a thanio amgen yw eich botymau ymosod arferol.
 | **Bwmerang** | Daliwch i farcio gelynion, gollyngwch i daflu; mae'n syfrdanu pob un yn ei dro | Clirio'r marciau | Dim |
 | **Chwistrellwr gel** | Gel gwrthyrru glas (sboncio) | Gel gyrru oren (cyflym) | Dim |
 | **Golchwr pŵer** | Jet dŵr hir sy'n gwthio gelynion ac yn golchi gel i ffwrdd | Gwyntyll lydan o jetiau | Dim |
+| **Cebl gwryw-gwryw** | Mae tân eilaidd ar banel electronig disglair o fewn cyrraedd yn plygio un pen i mewn; mae'r pen arall wedyn yn saethu mellt gydag ammo diderfyn | Mae tân eilaidd neu newid arf yn ei rwygo allan | Dim |
+| **Pâr o bistolau** | Chwith | De | Dim (Ail-lwytho: R) |
+| **Reiffl ymosod** | Reiffl cwbl awtomatig sy'n ail-lwytho o'ch hoelion | Mae Tanio amgen yn anelu drwy'r annel dot coch am ergydion tynnach a golwg agosach | Hoelion (Ail-lwytho: R) |
 
 Mae pyrth yn mynd ar arwynebau gwastad y byd ac yn eich cario chi,
 angenfilod a gwrthrychau a deflir drwyddynt gyda'u momentwm. Gyda **Gweld

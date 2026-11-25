@@ -11,6 +11,7 @@ fn host() -> Option<Host> {
     let r = Renderer::headless(640, 360, &pal).ok()?;
     let mut h = Host::new(fs, r, None, Vec::new());
     h.headless = true;
+    h.exec_line("sv_autosave 0");
     Some(h)
 }
 
@@ -20,8 +21,11 @@ fn run(h: &mut Host, secs: f64) {
     }
 }
 
+/// Server time, entities (origin, model, frame) and stats.
+type State = (u64, Vec<([u32; 3], usize, i32)>, Vec<i32>);
+
 /// What a seek must reproduce exactly.
-fn state(h: &Host) -> (u64, Vec<([u32; 3], usize, i32)>, Vec<i32>) {
+fn state(h: &Host) -> State {
     let ents = h.cl.entities.iter().map(|e| (e.msg_origins[0].map(f32::to_bits), e.model, e.frame)).collect();
     (h.cl.mtime[0].to_bits(), ents, h.cl.stats.to_vec())
 }

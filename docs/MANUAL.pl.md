@@ -103,6 +103,8 @@ Port został zaprojektowany z myślą o grze na padzie.
   Nintendo) i są wykrywane automatycznie.
 - Wszystko można przypisać na nowo w Options → Sterowanie, także z
   poziomu kontrolera.
+- **Select / View ×2**: Zrzut ekranu; **Start ×2**: Szybki zapis; **Start**
+  (Przytrzymaj): Szybkie wczytanie.
 - Sterowanie dotykowe z regulacją rozmiaru, krycia i szybkości patrzenia.
 
 ## Zapisywanie
@@ -213,7 +215,8 @@ wyłączone, więc współpracuje z każdym modem i w grze online.
   krople w powietrzu, które rozpryskują się tam, gdzie spadną.
 - **Efekty trafień**: ślady śrutu, gwoździe wbijające się w drewno i
   wrogów, ślady wybuchów.
-- **Lepsza woda**: przezroczystość, fale, rozbryzgi i kaustyka.
+- **Lepsza woda**: przezroczystość, fale, rozbryzgi i kaustyka; **Załamanie
+  światła pod wodą**, **Krople na ekranie**.
 - **Przezroczyste teleportery**, które pokazują swój cel z paralaksą.
 - Okluzja otoczenia, rozmycie ruchu obiektów i prędkości, miękkie
   cząsteczki.
@@ -260,6 +263,9 @@ HUD-zie. Strzał i ogień alternatywny to twoje zwykłe przyciski ataku.
 | **Bumerang** | Przytrzymaj, by oznaczyć wrogów, puść, by rzucić; ogłusza każdego po kolei | Czyści oznaczenia | Brak |
 | **Miotacz żelu** | Niebieski żel odpychający (sprężysty) | Pomarańczowy żel przyspieszający (szybki) | Brak |
 | **Myjka ciśnieniowa** | Długi strumień wody, który odpycha wrogów i zmywa żel | Szeroki wachlarz strumieni | Brak |
+| **Kabel męsko-męski** | Ogień alternatywny na świecącym panelu elektronicznym w zasięgu wpina jeden koniec; drugi strzela błyskawicami bez limitu amunicji | Ogień alternatywny lub zmiana broni go wyrywa | Brak |
+| **Dwa pistolety** | Lewo | Prawo | Brak (Przeładuj: R) |
+| **Karabin szturmowy** | W pełni automatyczny karabin ładowany twoimi gwoździami | Ogień alternatywny celuje przez kolimator z czerwoną kropką, co daje celniejsze strzały i bliższy widok | Gwoździe (Przeładuj: R) |
 
 Portale umieszcza się na płaskich powierzchniach świata; przenoszą ciebie,
 potwory i rzucone przedmioty, zachowując ich pęd. Gdy opcja **Widok przez

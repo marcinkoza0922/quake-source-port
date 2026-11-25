@@ -104,6 +104,8 @@ Portti on suunniteltu pelattavaksi peliohjaimella.
   ja tunnistetaan automaattisesti.
 - Kaikki näppäimet voi määrittää uudelleen kohdassa Options → Ohjaus, myös
   peliohjaimella.
+- **Select / View ×2**: Kuvakaappaus; **Start ×2**: Pikatallennus; **Start**
+  (Pidä): Pikalataus.
 - Kosketusohjaus, jonka koon, peittävyyden ja katseen nopeuden voi säätää.
 
 ## Tallentaminen
@@ -218,7 +220,8 @@ päältä, joten ne toimivat minkä tahansa modin kanssa ja verkkopelissä.
   ilmassa lentävät pisarat, jotka läiskähtävät laskeutumiskohtaansa.
 - **Osumatehosteet**: haulien osumajäljet, puuhun ja vihollisiin
   uppoavat naulat, räjähdysten nokijäljet.
-- **Parempi vesi**: läpikuultavuus, väreily, roiskeet ja kaustiikka.
+- **Parempi vesi**: läpikuultavuus, väreily, roiskeet ja kaustiikka;
+  **Vedenalainen taittuminen**, **Pisarat ruudulla**.
 - **Läpinäkyvät teleportit**, jotka näyttävät määränpäänsä parallaksilla.
 - Ympäristön varjostus, objektikohtainen ja vauhtiin perustuva
   liike-epäterävyys, pehmeät partikkelit.
@@ -266,6 +269,9 @@ tuli ovat tavalliset hyökkäysnäppäimesi.
 | **Bumerangi** | Pidä merkitäksesi vihollisia, päästä irti heittääksesi; tainnuttaa ne vuorotellen | Poista merkinnät | Ei mitään |
 | **Geeliruisku** | Sininen hylkimisgeeli (pomppiva) | Oranssi vauhtigeeli (nopea) | Ei mitään |
 | **Painepesuri** | Pitkä vesisuihku, joka työntää vihollisia ja pesee geelin pois | Leveä suihkuviuhka | Ei mitään |
+| **Uros-uros-kaapeli** | Vaihtoehtoinen tuli hehkuvaan elektroniikkapaneeliin ulottuvilla kytkee toisen pään; toinen pää ampuu sitten salamoita rajattomilla ammuksilla | Vaihtoehtoinen tuli tai aseen vaihto repäisee sen irti | Ei mitään |
+| **Akimbo-pistoolit** | Vasen | Oikea | Ei mitään (Lataa: R) |
+| **Rynnäkkökivääri** | Täysautomaattinen kivääri, joka ladataan nauloillasi | Toissijainen tuli tähtää punapistetähtäimellä: tarkemmat laukaukset ja lähempi näkymä | Naulat (Lataa: R) |
 
 Portaalit kiinnittyvät maailman tasaisille pinnoille ja kuljettavat sinut,
 hirviöt ja heitetyt esineet läpi vauhti säilyttäen. Kun **Näe portaalien

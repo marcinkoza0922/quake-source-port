@@ -105,6 +105,8 @@ Port hii imeundwa kuchezwa kwa kidhibiti cha mchezo.
   Nintendo) na hutambuliwa kiotomatiki.
 - Panga upya kila kitu katika Options → Vidhibiti, hata kutoka kwenye
   kidhibiti.
+- **Select / View ×2**: Picha ya Skrini; **Start ×2**: Hifadhi Haraka;
+  **Start** (Shikilia): Pakia Haraka.
 - Vidhibiti vya skrini ya mguso vyenye ukubwa, uangavu na kasi ya kuangalia
   vinavyorekebishika.
 
@@ -220,7 +222,8 @@ chaguo-msingi, kwa hivyo yanafanya kazi na mod yoyote na mtandaoni.
   matone hewani yanayotapakaa yanapotua.
 - **Athari za Kugonga Nyuso**: alama za risasi za shotgun, misumari
   inayokwama kwenye mbao na maadui, alama za kuungua za milipuko.
-- **Maji Bora**: uangavu, mawimbi, mirushiko na caustics.
+- **Maji Bora**: uangavu, mawimbi, mirushiko na caustics; **Mpindo wa Mwanga
+  Chini ya Maji**, **Matone Kwenye Skrini**.
 - **Teleporta za Kuona Kupitia** zinazoonyesha zinakoelekea kwa parallax.
 - Kivuli cha mazingira, ukungu wa mwendo kwa kila kitu na kwa kasi,
   chembechembe laini.
@@ -267,6 +270,9 @@ Fyatua na mlipuo mbadala ni vitufe vyako vya kawaida vya shambulio.
 | **Bumerangi** | Shikilia kuwawekea maadui alama, achilia kurusha; humduwaza kila mmoja kwa zamu | Futa alama | Hakuna |
 | **Kinyunyizi cha Jeli** | Jeli ya bluu ya kurudisha (ya kudunda) | Jeli ya machungwa ya kusukuma (ya kasi) | Hakuna |
 | **Powerwasher** | Mkondo mrefu wa maji unaosukuma maadui na kuosha jeli | Mikondo mipana | Hakuna |
+| **Kebo dume-dume** | Risasi mbadala kwenye paneli ya kielektroniki inayong'aa iliyo karibu huchomeka ncha moja; ncha nyingine kisha hurusha radi kwa risasi zisizo na kikomo | Risasi mbadala au kubadili silaha huichomoa | Hakuna |
+| **Bastola Mbili** | Kushoto | Kulia | Hakuna (Jaza Risasi: R) |
+| **Bunduki ya Shambulio** | Bunduki ya kufyatua mfululizo inayojazwa kwa misumari yako | Mlipuo Mbadala hulenga kwa kilengeo cha nukta nyekundu kwa risasi sahihi zaidi na mwonekano wa karibu | Misumari (Jaza Risasi: R) |
 
 Malango huwekwa kwenye nyuso bapa za ulimwengu na hukupitisha wewe, mazimwi
 na vitu vilivyorushwa pamoja na kasi yao. **Ona Kupitia Malango**

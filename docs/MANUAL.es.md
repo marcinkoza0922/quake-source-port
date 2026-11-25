@@ -102,6 +102,8 @@ El port está pensado para jugarse con mando.
 - Los **iconos de botones** coinciden con tu mando (Xbox, PlayStation,
   Nintendo) y se detectan automáticamente.
 - Todo se reasigna en Options → Controles, también desde el mando.
+- **Select / View ×2**: Captura de pantalla; **Start ×2**: Guardado rápido;
+  **Start** (Mantener): Carga rápida.
 - Controles táctiles con tamaño, opacidad y velocidad de vista ajustables.
 
 ## Guardar
@@ -216,7 +218,8 @@ defecto, así que vale para cualquier mod y en línea.
   cuerpos, gotas en el aire que se estrellan donde caen.
 - **Efectos de impacto**: marcas de perdigones, clavos que se clavan en la
   madera y en los enemigos, marcas de quemadura de explosiones.
-- **Agua mejorada**: transparencia, ondas, salpicaduras y cáusticas.
+- **Agua mejorada**: transparencia, ondas, salpicaduras y cáusticas;
+  **Refracción bajo el agua**, **Gotas en pantalla**.
 - **Teletransportadores transparentes** que muestran su destino con
   paralaje.
 - Oclusión ambiental, desenfoque de movimiento por objeto y de velocidad,
@@ -267,6 +270,9 @@ habituales.
 | **Bumerán** | Mantén para marcar enemigos, suelta para lanzar; aturde a cada uno por turnos | Borrar marcas | Ninguna |
 | **Pulverizador de gel** | Gel azul de repulsión (elástico) | Gel naranja de propulsión (rápido) | Ninguna |
 | **Hidrolimpiadora** | Chorro de agua largo que empuja a los enemigos y limpia el gel | Abanico ancho de chorros | Ninguna |
+| **Cable macho-macho** | El disparo secundario sobre un panel electrónico iluminado a tu alcance enchufa un extremo; el otro dispara rayos con munición ilimitada | El secundario o cambiar de arma lo arranca | Ninguna |
+| **Pistolas akimbo** | Izquierda | Derecha | Ninguna (Recargar: R) |
+| **Fusil de asalto** | Un fusil automático que se recarga con tus clavos | Disparo secundario apunta con el punto rojo para tiros más precisos y una vista más cercana | Clavos (Recargar: R) |
 
 Los portales se colocan en superficies planas del mundo y llevan a través
 de ellos a ti, a los monstruos y a los objetos lanzados, conservando su

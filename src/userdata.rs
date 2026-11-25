@@ -20,7 +20,12 @@ static CLI_OVERRIDE: RwLock<Option<PathBuf>> = RwLock::new(None);
 static CONFIGURED: RwLock<Option<PathBuf>> = RwLock::new(None);
 
 /// Default parent folder (`$XDG_DATA_HOME`, else `$HOME/.local/share`, else `.`).
+/// Unit tests get a folder of their own, so they never rotate the user's
+/// autosaves and automatic demos.
 pub fn default_parent() -> PathBuf {
+    if cfg!(test) {
+        return std::env::temp_dir().join(format!("qsp-test-userdata-{}", std::process::id()));
+    }
     if cfg!(target_arch = "wasm32") {
         return PathBuf::from(qcore::fs::WEB_USER_ROOT);
     }
@@ -258,6 +263,12 @@ mod tests {
         let _ = std::fs::remove_dir_all(&d);
         std::fs::create_dir_all(&d).unwrap();
         d
+    }
+
+    #[test]
+    fn tests_never_use_the_real_user_data() {
+        assert!(default_root().starts_with(std::env::temp_dir()));
+        assert!(game_dir("id1").starts_with(std::env::temp_dir()));
     }
 
     #[test]

@@ -102,8 +102,8 @@ impl World {
         self.numnodes = 0;
         self.links.clear();
         self.links.resize(HEADS, UNLINKED);
-        for h in 0..HEADS {
-            self.links[h] = Link { prev: h as u32, next: h as u32 };
+        for (h, l) in self.links.iter_mut().enumerate() {
+            *l = Link { prev: h as u32, next: h as u32 };
         }
         let (mins, maxs) =
             self.worldmodel.submodels.first().map_or((Vec3::ZERO, Vec3::ZERO), |m| (m.mins, m.maxs));

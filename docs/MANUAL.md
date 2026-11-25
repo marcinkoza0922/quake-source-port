@@ -244,6 +244,8 @@ your usual attack buttons.
 | **Gel sprayer** | Blue repulsion gel (bouncy) | Orange propulsion gel (fast) | None |
 | **Powerwasher** | Long water jet that pushes enemies and washes gel off | Wide fan of jets | None |
 | **Male-to-male cable** | Lightning bolt from the free plug, once the other end is plugged in | Plug into a glowing electronics surface within reach, or yank the plug out | None (you stay tethered to the socket) |
+| **Akimbo pistols** | Shoot the left pistol | Shoot the right pistol | None (Reload: R) |
+| **Assault rifle** | Full-auto fire | Aim down the red dot sight | Nails (Reload: R) |
 
 Portals go on flat world surfaces and carry you, monsters and thrown objects
 through with their momentum. With **See Through Portals** on you see the

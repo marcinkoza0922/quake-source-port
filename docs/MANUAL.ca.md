@@ -104,6 +104,8 @@ El port està pensat per jugar-hi amb comandament.
 - Les **icones dels botons** coincideixen amb el comandament (Xbox,
   PlayStation, Nintendo) i es detecten automàticament.
 - Tot es pot reassignar a Options → Controls, també des del comandament.
+- **Select / View ×2**: Captura de pantalla; **Start ×2**: Desament ràpid;
+  **Start** (Mantén): Càrrega ràpida.
 - Controls tàctils amb mida, opacitat i velocitat de la vista ajustables.
 
 ## Desar
@@ -218,7 +220,8 @@ així que funciona amb qualsevol mod i en línia.
   que segueixen els cossos, gotes a l'aire que s'esclafen on cauen.
 - **Efectes d'impacte a les superfícies**: marques de perdigons, claus que
   es claven a la fusta i als enemics, marques de cremades d'explosions.
-- **Aigua millorada**: transparència, ones, esquitxades i càustiques.
+- **Aigua millorada**: transparència, ones, esquitxades i càustiques;
+  **Refracció sota l'aigua**, **Gotes a la pantalla**.
 - **Teletransportadors transparents** que mostren la seva destinació amb
   paral·laxi.
 - Oclusió ambiental, desenfocament de moviment per objecte i de velocitat,
@@ -268,6 +271,9 @@ El tret i el tret secundari són els teus botons d'atac habituals.
 | **Bumerang** | Mantén per marcar enemics, deixa anar per llançar; els atordeix per torns | Esborra les marques | Cap |
 | **Polvoritzador de gel** | Gel blau de repulsió (elàstic) | Gel taronja de propulsió (ràpid) | Cap |
 | **Hidronetejadora** | Raig d'aigua llarg que empeny els enemics i neteja el gel | Ventall ample de raigs | Cap |
+| **Cable mascle-mascle** | El tret secundari sobre un panell electrònic il·luminat a l'abast hi endolla un extrem; l'altre dispara llamps amb munició il·limitada | El tret secundari o canviar d'arma l'arrenca | Cap |
+| **Pistoles dobles** | Esquerra | Dreta | Cap (Recarrega: R) |
+| **Fusell d'assalt** | Un fusell automàtic que es recarrega amb els teus claus | El tret secundari apunta amb la mira de punt vermell per a trets més precisos i una vista més propera | Claus (munició) (Recarrega: R) |
 
 Els portals es col·loquen en superfícies planes del món i et fan passar a
 tu, als monstres i als objectes llançats conservant-ne l'impuls. Amb

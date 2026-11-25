@@ -24,11 +24,14 @@ const OP_CALL4: u16 = 55;
 const OP_CALL5: u16 = 56;
 const OP_RETURN: u16 = 43;
 
+/// `dfunction_t`: first statement, first parm, locals, profile, name, file, parm count, parm sizes.
+type Function = (i32, i32, i32, i32, u32, u32, i32, [u8; 8]);
+
 /// Tiny v6 `progs.dat` assembler for unit-testing CSQC entry points and builtins.
 struct ProgsAsm {
     strings: Vec<u8>,
     statements: Vec<[u16; 4]>,
-    functions: Vec<(i32, i32, i32, i32, u32, u32, i32, [u8; 8])>,
+    functions: Vec<Function>,
     globals: Vec<u32>,
     globaldefs: Vec<(u16, u16, u32)>,
 }

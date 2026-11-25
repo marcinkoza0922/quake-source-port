@@ -96,6 +96,8 @@ Port je navržený pro hraní na gamepadu.
 - **Symboly tlačítek** odpovídají vašemu ovladači (Xbox, PlayStation,
   Nintendo) a rozpoznají se automaticky.
 - Vše lze přemapovat v Options → Ovládání, i přímo z ovladače.
+- **Select / View ×2**: Snímek obrazovky; **Start ×2**: Rychlé uložení;
+  **Start** (Držet): Rychlé načtení.
 - Dotykové ovládání s nastavitelnou velikostí, krytím a rychlostí
   rozhlížení.
 
@@ -201,7 +203,8 @@ vypnuté, takže to funguje s každým modem i online.
   těla, kapky ve vzduchu, které se rozprsknou tam, kam dopadnou.
 - **Efekty zásahů**: stopy broků, hřebíky, které se zabodávají do dřeva
   a nepřátel, spáleniny po výbuších.
-- **Vylepšená voda**: průsvitnost, vlnky, šplouchání a kaustika.
+- **Vylepšená voda**: průsvitnost, vlnky, šplouchání a kaustika; **Podvodní
+  lom světla**, **Kapky na obrazovce**.
 - **Průhledné teleporty**, které ukazují svůj cíl s paralaxou.
 - Okolní zastínění, rozmazání pohybem u objektů i při rychlosti, měkké
   částice.
@@ -246,6 +249,9 @@ a alternativní střelba jsou vaše obvyklá tlačítka útoku.
 | **Bumerang** | Podržením označíte nepřátele, puštěním hodíte; postupně je omráčí | Zrušit označení | Žádná |
 | **Rozprašovač gelu** | Modrý odpudivý gel (pružný) | Oranžový zrychlující gel (rychlý) | Žádná |
 | **Tlakový čistič** | Dlouhý proud vody, který odtlačuje nepřátele a smývá gel | Široký vějíř proudů | Žádná |
+| **Kabel samec-samec** | Alternativní střelba na svítící elektronický panel na dosah zapojí jeden konec; druhý pak střílí blesky s neomezenou municí | Alternativní střelba nebo změna zbraně ho vytrhne | Žádná |
+| **Dvojice pistolí** | Vlevo | Vpravo | Žádná (Přebití: R) |
+| **Útočná puška** | Plně automatická puška, která se přebíjí vašimi hřebíky | Alternativní střelba míří přes kolimátor s červenou tečkou: střely jsou přesnější a pohled bližší | Hřebíky (Přebití: R) |
 
 Portály se umisťují na rovné povrchy světa a přenášejí vás, monstra
 i hozené předměty i s jejich hybností. Se zapnutým **Vidět skrz portály**

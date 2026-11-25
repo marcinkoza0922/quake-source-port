@@ -232,8 +232,8 @@ fn hrtf_produces_binaural_output_with_head_shadow() {
     start(&s, 2, 1, &hi, [0.0, -100.0, 0.0]);
     let mut out = vec![0i16; 2048];
     m.paint(&mut out);
-    let left_e: i64 = out.chunks_exact(2).skip(64).map(|f| i64::from(f[0].abs())).sum();
-    let right_e: i64 = out.chunks_exact(2).skip(64).map(|f| i64::from(f[1].abs())).sum();
+    let left_e: i64 = out.as_chunks::<2>().0.iter().skip(64).map(|f| i64::from(f[0].abs())).sum();
+    let right_e: i64 = out.as_chunks::<2>().0.iter().skip(64).map(|f| i64::from(f[1].abs())).sum();
     assert!(right_e > left_e * 2, "expected strong right bias: l={left_e} r={right_e}");
     assert!(left_e > 0, "HRTF keeps shadowed contralateral ear audible");
 }

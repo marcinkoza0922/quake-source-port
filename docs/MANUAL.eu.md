@@ -107,6 +107,8 @@ Porta gamepad batekin jokatzeko diseinatuta dago.
   Nintendo) eta automatikoki detektatzen dira.
 - Esleitu berriro dena Options → Kontrolak atalean, baita kontrolagailutik
   ere.
+- **Select / View ×2**: Pantaila-argazkia; **Start ×2**: Gordetze azkarra;
+  **Start** (Eutsi): Karga azkarra.
 - Ukipen-pantailako kontrolak, tamaina, opakutasuna eta begiratzeko
   abiadura doigarriekin.
 
@@ -227,7 +229,8 @@ desaktibatuta, beraz edozein modekin eta sarean funtzionatzen dute.
   zauriak, eta erortzen diren lekuan zapaltzen diren tanta hegalariak.
 - **Talka-efektuak**: perdigoi-markak, egurrean eta etsaietan iltzatzen
   diren iltzeak, leherketen erre-markak.
-- **Ur hobetua**: gardentasuna, uhinak, zipriztinak eta kaustikoak.
+- **Ur hobetua**: gardentasuna, uhinak, zipriztinak eta kaustikoak; **Urpeko
+  errefrakzioa**, **Tantak pantailan**.
 - **Teleportagailu gardenak**, helmuga paralaxearekin erakusten dutenak.
 - Giro-oklusioa, objektuko eta abiadurako mugimendu-lausotzea, partikula
   leunak.
@@ -276,6 +279,9 @@ arruntak dira.
 | **Bumerana** | Eutsi etsaiak markatzeko, askatu jaurtitzeko; bakoitza txandaka zorabiatzen du | Garbitu markak | Bat ere ez |
 | **Gel-ihinztagailua** | Errepultsio-gel urdina (erreboteka) | Propultsio-gel laranja (azkarra) | Bat ere ez |
 | **Presio-garbigailua** | Etsaiak bultzatu eta gela garbitzen duen ur-zorrotada luzea | Zorrotaden haizemaile zabala | Bat ere ez |
+| **Ar-ar kablea** | Su sekundarioak irismenean dagoen panel elektroniko distiratsu batean mutur bat konektatzen du; beste muturrak orduan tximistak jaurtitzen ditu munizio mugagabearekin | Su sekundarioak edo arma aldatzeak ateratzen du | Bat ere ez |
+| **Pistola bikoitzak** | Ezkerrean | Eskuinean | Bat ere ez (Birkargatu: R) |
+| **Eraso-fusila** | Zure iltzeekin birkargatzen den fusil guztiz automatikoa | Tiro alternatiboak puntu gorriko miratik apuntatzen du, tiro zehatzagoak eta ikuspegi hurbilagoa lortzeko | Iltzeak (Birkargatu: R) |
 
 Atariak munduko gainazal lauetan jartzen dira eta zu, munstroak eta
 jaurtitako objektuak beren abiadurarekin eramaten dituzte alde batetik

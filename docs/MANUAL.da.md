@@ -98,6 +98,8 @@ Porten er designet til at blive spillet med en gamepad.
 - **Knapsymboler** matcher din controller (Xbox, PlayStation, Nintendo) og
   registreres automatisk.
 - Tildel alt på ny under Options → Styring, også fra controlleren.
+- **Select / View ×2**: Skærmbillede; **Start ×2**: Hurtig gemning;
+  **Start** (Hold): Hurtig indlæsning.
 - Berøringsstyring med justerbar størrelse, opacitet og
   kighastighed.
 
@@ -207,7 +209,8 @@ standard, så det virker med ethvert mod og online.
   dråber i luften der klasker, hvor de lander.
 - **Nedslagseffekter**: hagl-skudhuller, søm der sætter sig fast i træ og
   fjender, brændemærker fra eksplosioner.
-- **Forbedret vand**: gennemsigtighed, bølger, plask og kaustik.
+- **Forbedret vand**: gennemsigtighed, bølger, plask og kaustik;
+  **Lysbrydning under vand**, **Dråber på skærmen**.
 - **Gennemsigtige teleportere**, der viser deres destination med
   parallakse.
 - Ambient occlusion, bevægelsessløring pr. objekt og ved fart, bløde
@@ -254,6 +257,9 @@ alternativ skyd er dine sædvanlige angrebsknapper.
 | **Boomerang** | Hold for at markere fjender, slip for at kaste; den lammer hver enkelt efter tur | Ryd markeringer | Ingen |
 | **Gelsprøjte** | Blå frastødningsgel (hoppende) | Orange fremdriftsgel (hurtig) | Ingen |
 | **Højtryksrenser** | Lang vandstråle, der skubber fjender og skyller gel af | Bred vifte af stråler | Ingen |
+| **Han-han-kabel** | Sekundær ild på et lysende elektronikpanel inden for rækkevidde sætter den ene ende i; den anden skyder så lyn med ubegrænset ammunition | Sekundær ild eller våbenskift river det ud | Ingen |
+| **Dobbeltpistoler** | Venstre | Højre | Ingen (Genlad: R) |
+| **Stormgevær** | Et fuldautomatisk gevær, der genlades med dine søm | Alternativ skyd sigter gennem rødpunktssigtet og giver mere præcise skud og et tættere synsfelt | Søm (Genlad: R) |
 
 Portaler placeres på flade overflader i verden og fører dig, monstre og
 kastede genstande igennem med deres fart. Med **Se gennem portaler** slået
