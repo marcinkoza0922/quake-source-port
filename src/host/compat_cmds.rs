@@ -204,7 +204,11 @@ pub(super) fn register(c: &mut Commands<Host>) {
     c.add("sizeup", |h, _| adjust_viewsize(h, 10.0));
     c.add("sizedown", |h, _| adjust_viewsize(h, -10.0));
     // SCR_ToggleZoom_f / SCR_ZoomDown_f / SCR_ZoomUp_f (ironwail gl_screen.c).
+    // (there is one zoom: player 1's)
     c.add("togglezoom", |h, _| {
+        if h.input_target.is_some() {
+            return;
+        }
         h.zoom.1 = if h.zoom.1 != 0.0 {
             -h.zoom.1
         } else if h.zoom.0 > 0.5 {
@@ -213,13 +217,19 @@ pub(super) fn register(c: &mut Commands<Host>) {
             1.0
         };
     });
-    c.add("+zoom", |h, _| h.zoom.1 = 1.0);
-    c.add("-zoom", |h, _| h.zoom.1 = -1.0);
+    c.add("+zoom", |h, _| zoom(h, 1.0));
+    c.add("-zoom", |h, _| zoom(h, -1.0));
     // Con_MessageMode_f / Con_MessageMode2_f (ironwail console.c).
     c.add("messagemode", |h, _| start_message_mode(h, false));
     c.add("messagemode2", |h, _| start_message_mode(h, true));
     // CD_f (vkQuake cd_sdl.c): routes to soundtrack/CD music playback.
     c.add("cd", cmd_cd);
+}
+
+fn zoom(h: &mut Host, dir: f32) {
+    if h.input_target.is_none() {
+        h.zoom.1 = dir;
+    }
 }
 
 fn adjust_viewsize(h: &mut Host, delta: f32) {

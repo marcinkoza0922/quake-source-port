@@ -4,7 +4,7 @@ use qworld::MoveType;
 use crate::{Server, host::Ctx};
 
 fn server() -> Option<Server> {
-    let base = Fs::default_basedir();
+    let base = Fs::test_basedir();
     if !base.join("id1").is_dir() { return None; }
     let mut fs = Fs::new(base);
     fs.add_game_dir("id1");

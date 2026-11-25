@@ -189,3 +189,20 @@ fn a_level_full_of_gel_reaches_the_client() {
     assert!(changed && want.len() == n);
     assert_eq!(got, want);
 }
+
+#[test]
+fn the_jet_stops_when_the_powerwasher_is_switched_off() {
+    let Some((mut sv, c)) = start() else { return };
+    run(&mut sv, c, 30, ClientMove::default());
+    sv.set_move(c, held(Toy::Washer, BUTTON_TOY_FIRE, 60.0));
+    let text = |sv: &mut Server| {
+        sv.frame(1.0 / 72.0);
+        let t = String::from_utf8_lossy(&sv.take_reliable(c).concat()).into_owned();
+        let _ = sv.take_datagrams(c);
+        t
+    };
+    assert!(text(&mut sv).contains("//qsp_water 0 1 "));
+    sv.command(&format!("{} 0", Toy::Washer.cvar()));
+    let all = text(&mut sv) + &text(&mut sv);
+    assert_eq!(all.matches("//qsp_water 0 0\n").count(), 1, "{all}");
+}

@@ -347,6 +347,9 @@ impl ClientState {
                 }
                 _ => {}
             }
+            if self.foreign && line.starts_with(b"//qsp_") {
+                continue;
+            }
             if let Some(args) = line.strip_prefix(b"//qsp_hitstop ") {
                 let args = String::from_utf8_lossy(args);
                 let mut w = args.split_whitespace();
@@ -390,7 +393,9 @@ impl ClientState {
                 continue;
             }
             if let Some(args) = line.strip_prefix(b"//qsp_gel ") {
-                self.events.push(ClientEvent::Gel(String::from_utf8_lossy(args).trim_end().to_owned()));
+                let line = String::from_utf8_lossy(args).trim_end().to_owned();
+                self.parse_gel(&line);
+                self.events.push(ClientEvent::Gel(line));
                 continue;
             }
             if let Some(args) = line.strip_prefix(b"//qsp_water ") {

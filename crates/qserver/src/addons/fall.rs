@@ -3,11 +3,11 @@
 //! Damage goes through the progs' own `T_Damage`, so kills count, pain
 //! and death animations play and mods keep their rules.
 
-use qvm::{OFS_PARM0, Vm};
+use qvm::Vm;
 use qworld::{Ent, V, World};
 
 use crate::ents::Ents;
-use crate::server::{Core, exec};
+use crate::server::Core;
 
 const FL_ONGROUND: i32 = 512;
 const FL_MONSTER: i32 = 32;
@@ -46,17 +46,12 @@ pub(crate) fn frame(st: &mut Falls, vm: &mut Vm, c: &mut Core, w: &mut World) {
             .map(|&(e, vz)| (e, damage(-vz)))
             .collect()
     };
-    let f = vm.progs.find_function("T_Damage").unwrap_or(0) as i32;
     for (e, dmg) in landed {
-        if f <= 0 || vm.ent_f(e, c.sv.fields.health) <= 0.0 {
+        if vm.ent_f(e, c.sv.fields.health) <= 0.0 {
             continue;
         }
-        // T_Damage(targ, inflictor, attacker, damage): the world did it
-        vm.set_g_i(OFS_PARM0, e as i32);
-        vm.set_g_i(OFS_PARM0 + 3, 0);
-        vm.set_g_i(OFS_PARM0 + 6, 0);
-        vm.set_g_f(OFS_PARM0 + 9, dmg);
-        exec(vm, c, w, f);
+        // the world did it
+        super::damage::damage(vm, c, w, e, 0, 0, dmg);
     }
     st.air.clear();
     let ents = Ents { vm: &mut *vm, c: &mut *c };

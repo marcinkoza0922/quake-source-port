@@ -87,3 +87,35 @@ fn a_damaged_save_does_not_end_the_game() {
     }
     assert!(h.server.core.spawns > spawns && h.cl.signon == 4);
 }
+
+#[test]
+fn quitting_ends_demos_and_the_game() {
+    let mut fs = qcore::fs::Fs::new(qcore::fs::Fs::default_basedir());
+    if !fs.add_game_dir("id1") || fs.open("maps/e1m1.bsp").is_none() {
+        return;
+    }
+    let pal = fs.open("gfx/palette.lmp").and_then(|d| qformats::image::parse_palette(&d).ok()).unwrap();
+    let Ok(r) = Renderer::headless(64, 64, &pal) else { return };
+    let mut h = Host::new(fs, r, None, Vec::new());
+    h.headless = true;
+    let tmp = std::env::temp_dir().join(format!("qsp-quit-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&tmp);
+    crate::userdata::set_parent(&tmp, false).unwrap();
+    for c in ["exec default.cfg", "cl_startdemos 0", "cl_autodemo 0", "sv_autosave 0", "record quitting e1m1"] {
+        h.exec_line(c);
+    }
+    for _ in 0..40 {
+        h.frame(1.0 / 72.0, Vec::new());
+    }
+    assert!(h.recording.is_some());
+    h.shutdown();
+    assert!(h.recording.is_none() && !h.server.active());
+    let data = std::fs::read(h.user_dir().join("quitting.dem")).unwrap();
+    let mut demo = crate::demo::Demo::new(data);
+    let mut last = Vec::new();
+    while let Some(m) = demo.next_message() {
+        last = m.data.to_vec();
+    }
+    assert_eq!(last, [qnet::protocol::SVC_DISCONNECT]);
+    let _ = std::fs::remove_dir_all(&tmp);
+}

@@ -78,7 +78,7 @@ mod integration {
     #[test]
     fn launch_is_gated_and_consumed_once_on_ground_and_in_air() {
         use qcore::{cvar::Cvars, fs::Fs};
-        let base = Fs::default_basedir();
+        let base = Fs::test_basedir();
         if !base.join("id1").is_dir() { return; }
         let mut fs = Fs::new(base);
         fs.add_game_dir("id1");

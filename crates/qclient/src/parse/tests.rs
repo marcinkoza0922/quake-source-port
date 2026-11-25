@@ -84,3 +84,18 @@ fn names_and_titles_keep_their_bytes() {
     assert_eq!(qcore::text::wire(&cl.levelname), b"\xd4itle");
     assert_eq!(qcore::text::wire(&cl.scores[1].name), b"\xc3\xef\xec");
 }
+
+#[test]
+fn another_machines_server_has_no_add_ons() {
+    let lines = b"//qsp_portal 0 0 1 2 3 0 0 1 1 0 0\n//qsp_gun 0 10 0 1 0 0 1 2 3 4 5 6 0 0 1\nbf\n\0";
+    let m = [&[SVC_STUFFTEXT][..], lines].concat();
+    for foreign in [false, true] {
+        let mut cl = ClientState::new();
+        cl.foreign = foreign;
+        cl.clear_state(); // as serverinfo does
+        cl.parse_server_message(&m).unwrap();
+        assert_eq!(cl.portals.is_empty(), foreign);
+        let gun = cl.take_events().iter().any(|e| matches!(e, ClientEvent::Gun(_)));
+        assert_eq!(gun, !foreign);
+    }
+}

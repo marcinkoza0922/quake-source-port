@@ -217,6 +217,9 @@ impl Host {
         self.cl.time = t.min(self.cl.mtime[0]);
         self.cl.oldtime = self.cl.time;
         self.clear_seek_fx();
+        for (_, line) in self.cl.gel.clone() {
+            self.gel_fx.receive(&line, self.cl.time, None);
+        }
         if ended {
             self.demo_reached_end();
         }

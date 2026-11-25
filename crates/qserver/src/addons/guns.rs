@@ -11,12 +11,11 @@
 //! Other engines skip `//` lines, so demos still play.
 
 use qcore::math::{Vec3, angle_vectors};
-use qvm::OFS_PARM0;
 use qworld::{CONTENTS_SKY, Ent, MoveType, V};
 
 use crate::client::Client;
 use crate::ents::Ents;
-use crate::server::{Core, Level, exec};
+use crate::server::{Core, Level};
 
 const RANGE: f32 = 8192.0;
 
@@ -148,14 +147,8 @@ pub(crate) fn bullet(l: &mut Level, c: &mut Core, e: Ent, eye: Vec3, dir: Vec3, 
             }
         }
     }
-    let td = l.vm.progs.find_function("T_Damage").unwrap_or(0) as i32;
-    if let Some(t) = hit.filter(|_| flesh && td > 0) {
-        // T_Damage(targ, inflictor, attacker, damage)
-        l.vm.set_g_i(OFS_PARM0, t as i32);
-        l.vm.set_g_i(OFS_PARM0 + 3, e as i32);
-        l.vm.set_g_i(OFS_PARM0 + 6, e as i32);
-        l.vm.set_g_f(OFS_PARM0 + 9, damage);
-        exec(&mut l.vm, c, &mut l.world, td);
+    if let Some(t) = hit.filter(|_| flesh) {
+        super::damage::damage(&mut l.vm, c, &mut l.world, t, e, e, damage);
     }
     shot
 }

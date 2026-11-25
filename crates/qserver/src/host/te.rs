@@ -64,11 +64,7 @@ mod tests {
 
     #[test]
     fn standard_effects_write_their_temp_entity() {
-        let mut fs = Fs::new(Fs::default_basedir());
-        let base = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../vkQuake directory with maps");
-        if !fs.basedir().join("id1").is_dir() {
-            fs = Fs::new(base);
-        }
+        let mut fs = Fs::new(Fs::test_basedir());
         if !fs.add_game_dir("id1") || !fs.exists("maps/e1m1.bsp") {
             return;
         }

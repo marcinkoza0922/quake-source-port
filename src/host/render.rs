@@ -134,7 +134,7 @@ impl Host {
             self.cable_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), cable_held, rc.cable_metal, &self.level, v, &mut self.r, &mut fte);
             self.boomerang_fx.frame(self.cl.time, &self.cl, v, &mut self.r, &mut fte);
             self.gel_fx.frame(&self.cl, &self.level, &mut self.r, v, rc.gravity, self.snd.as_ref(), rc.gel_quality, &mut fte);
-            self.water_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, rc.gravity, rc.washer_quality, &mut self.r, &mut fte);
+            self.water_fx.frame(&self.cl, self.cl.viewentity.saturating_sub(1), v, rc.gravity, rc.washer_quality, self.snd.as_ref(), &mut self.r, &mut fte);
             for p in self.water_fx.wash_points(self.cl.time) {
                 self.blood.wash(p, crate::addons::water_fx::WASH_RADIUS);
             }

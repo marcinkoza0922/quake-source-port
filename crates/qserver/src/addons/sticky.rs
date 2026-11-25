@@ -11,12 +11,12 @@
 //! (no position = gone); saves keep them as `sticky ...` header lines.
 
 use qcore::math::{Vec3, angle_vectors};
-use qvm::{OFS_PARM0, Vm};
+use qvm::Vm;
 use qworld::{CONTENTS_SKY, Edicts, Ent, F, MoveType, V, World};
 
 use crate::client::Client;
 use crate::ents::Ents;
-use crate::server::{Core, exec};
+use crate::server::Core;
 
 /// Bombs out at once, all players together.
 pub const MAX_BOMBS: usize = 64;
@@ -296,14 +296,8 @@ fn explode(vm: &mut Vm, c: &mut Core, w: &mut World, b: Bomb) {
     let f = c.sv.fields.clone();
     vm.set_ent_v(tmp, f.origin, b.origin.to_array());
     vm.set_ent_i(tmp, f.owner, b.owner as i32 + 1);
-    let rd = vm.progs.find_function("T_RadiusDamage").unwrap_or(0) as i32;
-    if rd > 0 {
-        vm.set_g_i(OFS_PARM0, tmp as i32);
-        vm.set_g_i(OFS_PARM0 + 3, b.owner as i32 + 1);
-        vm.set_g_f(OFS_PARM0 + 6, c.cvars.value_of("addon_sticky_damage").clamp(25.0, 300.0));
-        vm.set_g_i(OFS_PARM0 + 9, 0);
-        exec(vm, c, w, rd);
-    }
+    let damage = c.cvars.value_of("addon_sticky_damage").clamp(25.0, 300.0);
+    super::damage::radius(vm, c, w, tmp, b.owner as u32 + 1, damage, 0);
     let pf = c.sv.protocolflags;
     let m = &mut c.sv.datagram;
     if m.len() < crate::msg::MAX_DATAGRAM - 16 {

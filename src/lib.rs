@@ -391,7 +391,7 @@ fn run_engine(o: &Opts, fixed_step: Option<f64>) -> Result<(), (&'static str, St
         }
     }
     host.write_config();
-    host.shutdown_recordings();
+    host.shutdown();
     drop(audio);
     host.fatal.take().map_or(Ok(()), Err)
 }

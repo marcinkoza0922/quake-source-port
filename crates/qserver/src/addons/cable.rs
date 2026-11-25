@@ -17,13 +17,13 @@
 //! skip `//` lines. Cables are transient: saves keep only `toy cable`.
 
 use qcore::math::{Vec3, angle_vectors};
-use qvm::OFS_PARM0;
 use qworld::{Edicts, Ent, MoveType, SOLID_BSP, V};
 
 use super::cable_rope::Rope;
 use super::hook_surface::{Material, Surfaces};
 use crate::ents::Ents;
-use crate::server::{Core, Level, exec};
+use crate::client::Client;
+use crate::server::{Core, Level};
 
 /// How far from the eye a socket may be (arm's reach).
 pub const REACH: f32 = 112.0;
@@ -101,9 +101,15 @@ impl Cables {
         }
     }
     /// Unplug every cable (toy off, add-ons shut down, level change).
-    pub fn reset(&mut self) {
+    /// Drops every cable (add-ons shut down), on the clients too.
+    pub(crate) fn clear(&mut self, clients: &mut [Client]) {
+        let mut lines = std::mem::take(&mut self.events);
+        for (i, sent) in self.sent.iter_mut().enumerate().filter(|(_, s)| **s) {
+            *sent = false;
+            lines += &line(i, 0, false, Vec3::ZERO, Vec3::ZERO, Vec3::ZERO, 0.0, &[]);
+        }
         self.state.iter_mut().for_each(|s| *s = State::Idle);
-        self.events.clear();
+        crate::addons::stuff_all(clients, &lines);
     }
 }
 
@@ -264,16 +270,7 @@ fn zap(l: &mut Level, c: &mut Core, f: &crate::fields::Fields, e: Ent, t: Ent, a
         m.byte((damage * 4.0).min(255.0) as i32);
         m.byte(225);
     }
-    let td = l.vm.progs.find_function("T_Damage").unwrap_or(0) as i32;
-    if td <= 0 {
-        return;
-    }
-    // T_Damage(targ, inflictor, attacker, damage)
-    l.vm.set_g_i(OFS_PARM0, t as i32);
-    l.vm.set_g_i(OFS_PARM0 + 3, e as i32);
-    l.vm.set_g_i(OFS_PARM0 + 6, e as i32);
-    l.vm.set_g_f(OFS_PARM0 + 9, damage);
-    exec(&mut l.vm, c, &mut l.world, td);
+    super::damage::damage(&mut l.vm, c, &mut l.world, t, e, e, damage);
 }
 
 /// The stufftext line clients parse (`qclient::CableView`).

@@ -752,3 +752,18 @@ is needed; playback follows menu time and preserves the footage's aspect ratio.
 Mods can override individual frames at `addons/previews/<id>/000.tga` through
 `047.tga` using the normal filesystem priority. All bundled clips are tested
 for complete decoding, dimensions and motion without needing installed game data.
+
+## Damage, shut-down and other machines' servers
+
+Toys hurt through the progs' `T_Damage` and `T_RadiusDamage`
+(`qserver::addons::damage`). Arguments mods added after the fourth get the
+constant that more than half of the progs' own calls pass, else 0
+(`Vm::usual_late_args`): Arcane Dimensions' "check armour" is 1, Alkaline's
+damage types have no usual value.
+
+When add-ons go inactive (deathmatch, a remote client, a toy switched off) the
+hook, cable and powerwasher send their idle lines once. The client ignores
+`//qsp_*` lines of a server on another machine (`ClientState::foreign`) and
+limits their state: 16 owners, 64 stickybombs, two magazines a toy, finite
+coordinates. Gel splats are kept in `ClientState::gel` so that a demo seek
+puts them back.
