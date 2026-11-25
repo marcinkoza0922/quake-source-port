@@ -64,7 +64,9 @@ impl Host {
     /// The fixed step while capturing and whether to keep real-time pace.
     pub fn capture_step(&self) -> Option<(f64, bool)> {
         let c = self.capture.as_ref()?;
-        Some((1.0 / self.capture_settings().fps as f64, c.export.is_none()))
+        // (a recording keeps the rate it started with)
+        let fps = c.rec.as_ref().map_or_else(|| self.capture_settings().fps, |r| r.fps);
+        Some((1.0 / f64::from(fps), c.export.is_none()))
     }
 
     fn start_recorder(&mut self) -> bool {
@@ -94,6 +96,10 @@ impl Host {
             }
             Err(e) => {
                 self.con.print(&format!("capture failed: {e}\n"));
+                // an export leaves its screen too
+                if self.exporting() {
+                    self.cancel_export();
+                }
                 self.capture = None;
                 false
             }
@@ -171,7 +177,6 @@ impl Host {
     /// After a render: hand the frame (read back by the caller) and one
     /// frame of audio to the encoder.
     pub(super) fn capture_frame(&mut self, frame: Option<(u32, u32, &[u8])>) {
-        let fps = self.capture_settings().fps;
         let freeze = self.capture.as_ref().is_some_and(|c| c.rec.is_some() && c.export.as_ref().is_some_and(|e| !e.frozen));
         if freeze && let Some((w, h, px)) = frame {
             self.freeze_export_frame(w, h, px);
@@ -182,16 +187,16 @@ impl Host {
         }
         let Some(c) = &mut self.capture else { return };
         let Some(rec) = &mut c.rec else { return };
-        if let Some((w, h, px)) = frame
-            && let Err(e) = rec.frame(w, h, px)
-        {
+        // no picture, no sound: both have the same length
+        let Some((w, h, px)) = frame else { return };
+        if let Err(e) = rec.frame(w, h, px) {
             self.con.print(&format!("capture failed: {e}\n"));
             return self.capture_stop();
         }
         if rec.has_audio()
             && let Some(m) = &self.mixer
         {
-            c.audio_frac += f64::from(m.rate()) / f64::from(fps);
+            c.audio_frac += f64::from(m.rate()) / f64::from(rec.fps);
             let n = c.audio_frac.floor();
             c.audio_frac -= n;
             rec.audio(&m.capture_paint(n as usize));

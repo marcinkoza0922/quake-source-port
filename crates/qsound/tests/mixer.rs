@@ -103,12 +103,13 @@ fn entity_channel_override() {
 fn static_and_ambient_loop() {
     let (s, mut m) = sys();
     listener(&s);
-    s.event(SoundEvent::Static {
-        sfx: tone("s", 100),
-        origin: [50.0, 0.0, 0.0],
-        volume: 1.0,
-        attenuation: 1.0,
-    });
+    let looped = std::sync::Arc::new(qsound::Sfx { name: "s".into(), data: tone("s", 100).data.clone(), loop_start: Some(0) });
+    // S_StaticSound: one without a loop point isn't heard
+    for sfx in [tone("once", 100), looped] {
+        s.event(SoundEvent::Static { sfx, origin: [50.0, 0.0, 0.0], volume: 1.0, attenuation: 1.0 });
+    }
+    m.paint(&mut [0i16; 20]);
+    assert_eq!(m.active_channels(), 1, "the looped one");
     let mut out = vec![0i16; 2000];
     m.paint(&mut out);
     m.paint(&mut out);
@@ -356,11 +357,32 @@ fn wav_bytes(freq: f32, rate: u32, frames: usize) -> Vec<u8> {
 }
 
 #[test]
+fn looping_music_resumes_and_missing_music_stops() {
+    let (mut s, mut m) = sys();
+    let tune = wav_bytes(300.0, 44100, 44100);
+    let mut out = vec![0i16; 2048];
+    assert!(!s.resume_music("a"));
+    assert!(s.play_music_bytes("a", tune.clone(), "wav", true));
+    m.paint(&mut out);
+    s.pause_music(true);
+    assert!(s.resume_music("a") && !s.resume_music("b"));
+    m.paint(&mut out);
+    assert!(m.music_playing());
+    // it may have ended when it doesn't loop
+    assert!(s.play_music_bytes("a", tune.clone(), "wav", false));
+    assert!(!s.resume_music("a"));
+    assert!(s.play_music_bytes("a", tune, "wav", true));
+    assert!(!s.play_music("no-such-track", true));
+    m.paint(&mut out);
+    assert!(!m.music_playing() && !s.resume_music("a"));
+}
+
+#[test]
 fn music_crossfade_blends_outgoing_track() {
     let (s, mut m) = sys();
     s.set_music_crossfade(0.5);
     let track_a = wav_bytes(300.0, 44100, 44100);
-    assert!(s.play_music_bytes(track_a, "wav", true));
+    assert!(s.play_music_bytes("a", track_a, "wav", true));
     let mut out = vec![0i16; 2048];
     // Let track A play and ramp in.
     for _ in 0..25 {

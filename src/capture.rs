@@ -9,7 +9,7 @@ mod ffmpeg;
 mod wav;
 
 use std::path::{Path, PathBuf};
-use std::sync::mpsc::{Receiver, SyncSender, sync_channel};
+use std::sync::mpsc::{Receiver, SyncSender, TrySendError, sync_channel};
 use std::thread::JoinHandle;
 
 pub use ffmpeg::Codec;
@@ -47,9 +47,24 @@ pub fn size_from_cvar(v: f32) -> Option<(u32, u32)> {
 
 enum Sink {
     /// Writes raw frames to ffmpeg's stdin; the thread returns its result.
-    Ffmpeg { tx: Option<SyncSender<Vec<u8>>>, thread: Option<JoinHandle<Result<(), String>>>, video: PathBuf },
+    Ffmpeg { tx: Option<SyncSender<Vec<u8>>>, thread: Option<JoinHandle<Result<(), String>>>, video: PathBuf, child: ffmpeg::Shared },
     /// Numbered PNGs in a folder.
     Png { tx: Option<SyncSender<Vec<u8>>>, thread: Option<JoinHandle<Result<(), String>>>, dir: PathBuf },
+}
+
+/// How long the game waits for an encoder to take a frame, and to finish.
+const STALLED: qcore::time::Duration = qcore::time::Duration::from_secs(30);
+const FINISHING: qcore::time::Duration = qcore::time::Duration::from_secs(120);
+
+fn send_within(tx: &SyncSender<Vec<u8>>, mut frame: Vec<u8>, limit: qcore::time::Duration) -> Result<(), TrySendError<Vec<u8>>> {
+    let since = qcore::time::Instant::now();
+    loop {
+        match tx.try_send(frame) {
+            Err(TrySendError::Full(f)) if since.elapsed() < limit => frame = f,
+            r => return r,
+        }
+        std::thread::sleep(qcore::time::Duration::from_millis(1));
+    }
 }
 
 pub struct Recorder {
@@ -106,8 +121,10 @@ impl Recorder {
             encoder = plan.encoder.clone();
             let child = ffmpeg::spawn_encoder(settings, &plan, w, h, fps, &video)?;
             let (tx, rx) = sync_channel::<Vec<u8>>(QUEUE);
-            let thread = std::thread::spawn(move || ffmpeg::feed(child, rx));
-            (Sink::Ffmpeg { tx: Some(tx), thread: Some(thread), video }, out)
+            let child = ffmpeg::share(child);
+            let fed = child.clone();
+            let thread = std::thread::spawn(move || ffmpeg::feed(&fed, rx));
+            (Sink::Ffmpeg { tx: Some(tx), thread: Some(thread), video, child }, out)
         } else {
             let dir = unique(dir, &format!("{name}_frames"), "");
             std::fs::create_dir_all(&dir).map_err(|e| format!("{}: {e}", dir.display()))?;
@@ -142,8 +159,14 @@ impl Recorder {
             Sink::Ffmpeg { tx, .. } | Sink::Png { tx, .. } => tx.as_ref(),
         };
         let tx = tx.ok_or("encoder closed")?;
-        if tx.send(frame).is_err() {
-            return Err(self.join().err().unwrap_or_else(|| "encoder stopped".into()));
+        match send_within(tx, frame, STALLED) {
+            Ok(()) => {}
+            Err(TrySendError::Full(_)) => {
+                self.kill();
+                let _ = self.join();
+                return Err("the encoder stopped taking frames".into());
+            }
+            Err(TrySendError::Disconnected(_)) => return Err(self.join().err().unwrap_or_else(|| "encoder stopped".into())),
         }
         self.frames += 1;
         Ok(())
@@ -161,12 +184,27 @@ impl Recorder {
         self.wav.is_some()
     }
 
-    /// Closes the encoder and waits for it.
+    /// Ends an encoder that hangs.
+    fn kill(&self) {
+        if let Sink::Ffmpeg { child, .. } = &self.sink {
+            ffmpeg::kill(child);
+        }
+    }
+
+    /// Closes the encoder and waits for it, but not for ever.
     fn join(&mut self) -> Result<(), String> {
         let (tx, thread) = match &mut self.sink {
             Sink::Ffmpeg { tx, thread, .. } | Sink::Png { tx, thread, .. } => (tx, thread),
         };
         drop(tx.take());
+        let since = qcore::time::Instant::now();
+        while thread.as_ref().is_some_and(|t| !t.is_finished()) && since.elapsed() < FINISHING {
+            std::thread::sleep(qcore::time::Duration::from_millis(2));
+        }
+        if thread.as_ref().is_some_and(|t| !t.is_finished()) {
+            self.kill();
+        }
+        let (Sink::Ffmpeg { thread, .. } | Sink::Png { thread, .. }) = &mut self.sink;
         thread.take().map_or(Ok(()), |t| t.join().unwrap_or_else(|_| Err("encoder thread panicked".into())))
     }
 
@@ -260,6 +298,43 @@ mod tests {
         assert_eq!(&out[8..12], &[12, 13, 14, 255]);
         assert_eq!(&out[16..], &[0, 0, 0, 255, 0, 0, 0, 255]);
         assert_eq!(fit(3, 2, &px, 3, 2), px);
+    }
+
+    #[cfg(unix)]
+    fn script(sh: &str) -> ffmpeg::Shared {
+        use std::process::{Command, Stdio};
+        ffmpeg::share(Command::new("sh").args(["-c", sh]).stdin(Stdio::piped()).stdout(Stdio::null()).stderr(Stdio::piped()).spawn().unwrap())
+    }
+
+    /// An encoder that prints an error per frame filled its stderr pipe and
+    /// waited for a reader, while the game waited for it.
+    #[cfg(unix)]
+    #[test]
+    fn an_encoder_with_much_to_say_is_read() {
+        let child = script("i=0; while [ $i -lt 20000 ]; do echo 'error: something about this frame is wrong' >&2; i=$((i+1)); done; cat >/dev/null; echo last words >&2; exit 3");
+        let (tx, rx) = sync_channel(1);
+        let fed = child.clone();
+        let t = std::thread::spawn(move || ffmpeg::feed(&fed, rx));
+        for _ in 0..4 {
+            send_within(&tx, vec![0; 1 << 20], qcore::time::Duration::from_secs(20)).unwrap();
+        }
+        drop(tx);
+        assert_eq!(t.join().unwrap(), Err("last words".into()));
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn a_hung_encoder_is_ended() {
+        let child = script("exec sleep 600");
+        let (tx, rx) = sync_channel(1);
+        let fed = child.clone();
+        let t = std::thread::spawn(move || ffmpeg::feed(&fed, rx));
+        let limit = qcore::time::Duration::from_millis(300);
+        let full = (0..8).any(|_| matches!(send_within(&tx, vec![0; 1 << 20], limit), Err(TrySendError::Full(_))));
+        assert!(full, "it takes nothing");
+        ffmpeg::kill(&child);
+        drop(tx);
+        assert!(t.join().unwrap().is_err());
     }
 
     #[test]

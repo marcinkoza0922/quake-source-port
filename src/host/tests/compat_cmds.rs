@@ -257,3 +257,21 @@ fn a_late_model_precache_becomes_drawable() {
     assert_eq!(h.cl.model_precache[index], "progs/shalrath.mdl");
     assert!(h.level.models[index].is_some());
 }
+
+#[test]
+fn a_recording_keeps_its_frame_rate() {
+    let Some(mut h) = host() else { return };
+    let tmp = std::env::temp_dir().join(format!("qsp-fps-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&tmp);
+    crate::userdata::set_parent(&tmp, false).unwrap();
+    h.server.core.cvars.set("capture_ffmpeg", "qsp-no-such-ffmpeg");
+    h.server.core.cvars.set("capture_audio", "0");
+    h.server.core.cvars.set("capture_fps", "60");
+    h.capture_start("clip");
+    let step = h.capture_step().expect("recording").0;
+    assert_eq!(step, 1.0 / 60.0);
+    h.server.core.cvars.set("capture_fps", "30");
+    assert_eq!(h.capture_step().unwrap().0, step);
+    h.capture_stop();
+    let _ = std::fs::remove_dir_all(&tmp);
+}

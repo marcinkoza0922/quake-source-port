@@ -218,6 +218,8 @@ pub struct SoundSystem {
     cache: HashMap<String, Option<Arc<Sfx>>>,
     queue: Queue,
     ambients: [Option<Arc<Sfx>>; NUM_AMBIENTS],
+    /// The looping music that plays.
+    music: std::cell::RefCell<Option<String>>,
 }
 
 impl SoundSystem {
@@ -231,6 +233,7 @@ impl SoundSystem {
             rate,
             loader: Box::new(loader),
             cache: HashMap::new(),
+            music: Default::default(),
             queue: queue.clone(),
             ambients: Default::default(),
         };
@@ -308,15 +311,27 @@ impl SoundSystem {
     pub fn set_music_crossfade(&self, secs: f32) {
         self.push(Cmd::MusicCrossfade(secs.clamp(0.0, 5.0)));
     }
-    /// Play decoded music from raw file bytes (used by the soundtrack switcher).
-    pub fn play_music_bytes(&self, bytes: Vec<u8>, ext: &str, looping: bool) -> bool {
+    /// Play decoded music from raw file bytes (used by the soundtrack
+    /// switcher). `name` is what [`Self::resume_music`] knows it by.
+    pub fn play_music_bytes(&self, name: &str, bytes: Vec<u8>, ext: &str, looping: bool) -> bool {
         if let Some(m) = MusicStream::new(bytes, ext, looping, self.rate) {
             self.push(Cmd::Music(Some(Box::new(m))));
+            *self.music.borrow_mut() = looping.then(|| name.to_string());
             return true;
         }
         false
     }
+    /// BGM_PlayCDtrack for the track that plays already: it goes on instead of
+    /// starting again. (One that doesn't loop may have ended: false.)
+    pub fn resume_music(&self, name: &str) -> bool {
+        let same = self.music.borrow().as_deref() == Some(name);
+        if same {
+            self.pause_music(false);
+        }
+        same
+    }
     /// Play `music/<name>.(ogg|mp3|flac|wav)` (or `name` with an extension).
+    /// What played stops, also when there is no such music (BGM_Play).
     pub fn play_music(&mut self, name: &str, looping: bool) -> bool {
         let base = name.strip_prefix("music/").unwrap_or(name);
         let candidates: Vec<(String, &str)> = match base.rsplit_once('.') {
@@ -328,12 +343,12 @@ impl SoundSystem {
         };
         for (path, ext) in candidates {
             if let Some(b) = (self.loader)(&path)
-                && let Some(m) = MusicStream::new(b, ext, looping, self.rate)
+                && self.play_music_bytes(&path, b, ext, looping)
             {
-                self.push(Cmd::Music(Some(Box::new(m))));
                 return true;
             }
         }
+        self.stop_music();
         false
     }
     /// CD track mapping (`cd play N`, svc_cdtrack): `music/trackNN`.
@@ -341,10 +356,14 @@ impl SoundSystem {
         self.play_music(&format!("track{track:02}"), looping)
     }
     pub fn stop_music(&self) {
+        *self.music.borrow_mut() = None;
         self.push(Cmd::Music(None));
     }
     /// `music_loop`: whether the playing track starts over at its end.
     pub fn set_music_loop(&self, on: bool) {
+        if !on {
+            *self.music.borrow_mut() = None; // it may end
+        }
         self.push(Cmd::MusicLoop(on));
     }
     pub fn pause_music(&self, paused: bool) {

@@ -4,11 +4,11 @@
 //! two cores left free, so the game keeps running smoothly while it encodes.
 
 use std::collections::HashMap;
-use std::io::Write;
+use std::io::{Read, Write};
 use std::path::Path;
 use std::process::{Child, Command, Stdio};
 use std::sync::mpsc::Receiver;
-use std::sync::{Mutex, OnceLock};
+use std::sync::{Arc, Mutex, OnceLock};
 
 use super::Settings;
 
@@ -190,9 +190,42 @@ pub fn spawn_encoder(s: &Settings, plan: &Plan, w: u32, h: u32, fps: u32, video:
     c.spawn().map_err(|e| format!("couldn't start {}: {e}", s.ffmpeg))
 }
 
+/// The encoder, for the thread that feeds it and whoever must end it.
+pub type Shared = Arc<Mutex<Child>>;
+
+pub fn share(child: Child) -> Shared {
+    Arc::new(Mutex::new(child))
+}
+
+pub fn kill(child: &Shared) {
+    let _ = child.lock().unwrap_or_else(|e| e.into_inner()).kill();
+}
+
+/// Reads all of it, so that the encoder never waits; gives the end.
+fn tail(r: Option<impl Read>) -> String {
+    const KEEP: usize = 16 << 10;
+    let mut kept = Vec::new();
+    let mut buf = [0u8; 4096];
+    if let Some(mut r) = r {
+        while let Ok(n @ 1..) = r.read(&mut buf) {
+            kept.extend_from_slice(&buf[..n]);
+            if kept.len() > 2 * KEEP {
+                kept.drain(..kept.len() - KEEP);
+            }
+        }
+    }
+    String::from_utf8_lossy(&kept).into_owned()
+}
+
 /// Writes frames to the encoder until the channel closes.
-pub fn feed(mut child: Child, rx: Receiver<Vec<u8>>) -> Result<(), String> {
-    let mut stdin = child.stdin.take().ok_or("no ffmpeg stdin")?;
+pub fn feed(child: &Shared, rx: Receiver<Vec<u8>>) -> Result<(), String> {
+    let lock = || child.lock().unwrap_or_else(|e| e.into_inner());
+    let (stdin, stderr) = {
+        let mut c = lock();
+        (c.stdin.take(), c.stderr.take())
+    };
+    let mut stdin = stdin.ok_or("no ffmpeg stdin")?;
+    let errors = std::thread::spawn(move || tail(stderr));
     let mut err = None;
     for f in rx {
         if let Err(e) = stdin.write_all(&f) {
@@ -201,10 +234,17 @@ pub fn feed(mut child: Child, rx: Receiver<Vec<u8>>) -> Result<(), String> {
         }
     }
     drop(stdin);
-    let out = child.wait_with_output().map_err(|e| e.to_string())?;
-    if !out.status.success() || err.is_some() {
-        let msg = String::from_utf8_lossy(&out.stderr).lines().last().unwrap_or_default().to_string();
-        return Err(if msg.is_empty() { err.unwrap_or_else(|| format!("ffmpeg exited with {}", out.status)) } else { msg });
+    // (polled: `kill` needs the lock while it hangs)
+    let status = loop {
+        if let Some(s) = lock().try_wait().map_err(|e| e.to_string())? {
+            break s;
+        }
+        std::thread::sleep(qcore::time::Duration::from_millis(5));
+    };
+    let stderr = errors.join().unwrap_or_default();
+    if !status.success() || err.is_some() {
+        let msg = stderr.lines().last().unwrap_or_default().to_string();
+        return Err(if msg.is_empty() { err.unwrap_or_else(|| format!("ffmpeg exited with {status}")) } else { msg });
     }
     Ok(())
 }

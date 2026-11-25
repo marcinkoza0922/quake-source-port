@@ -224,7 +224,23 @@ impl SoundtrackManager {
         {
             return true;
         }
-        snd.play_cd_track(track, looping)
+        // BGM_PlayCDtrack: the highest search path wins, then the order of types
+        let mut best: Option<(usize, String)> = None;
+        for ext in MUSIC_EXTS {
+            let name = format!("music/track{track:02}.{ext}");
+            if let Some(p) = fs.priority(&name)
+                && best.as_ref().is_none_or(|b| p > b.0)
+            {
+                best = Some((p, name));
+            }
+        }
+        match best {
+            Some((_, name)) => (looping && snd.resume_music(&name)) || snd.play_music(&name, looping),
+            None => {
+                snd.stop_music();
+                false
+            }
+        }
     }
 
     /// Re-play the current CD track when the user changes `s_soundtrack` live.
@@ -252,8 +268,9 @@ fn play_from_pack(
             // Try exact `music/trackNN.<ext>` first.
             for ext in MUSIC_EXTS {
                 let path = format!("music/track{track:02}.{ext}");
-                if let Some(bytes) = pfs.open(&path)
-                    && snd.play_music_bytes(bytes, ext, looping)
+                let key = format!("{}:{path}", pack.id);
+                if (looping && snd.resume_music(&key))
+                    || pfs.open(&path).is_some_and(|b| snd.play_music_bytes(&key, b, ext, looping))
                 {
                     return true;
                 }
@@ -271,15 +288,16 @@ fn play_from_pack(
             }
             let idx = (track.saturating_sub(2) as usize) % all.len();
             let (ref path, ext) = all[idx];
-            pfs.open(path)
-                .is_some_and(|b| snd.play_music_bytes(b, ext, looping))
+            let key = format!("{}:{path}", pack.id);
+            (looping && snd.resume_music(&key)) || pfs.open(path).is_some_and(|b| snd.play_music_bytes(&key, b, ext, looping))
         }
         PackSource::UserFolder(dir) => {
             // Try exact `trackNN.<ext>` first.
             for ext in MUSIC_EXTS {
                 let p = dir.join(format!("track{track:02}.{ext}"));
-                if let Ok(bytes) = vfs::read(&p)
-                    && snd.play_music_bytes(bytes, ext, looping)
+                let key = p.to_string_lossy();
+                if (looping && snd.resume_music(&key))
+                    || vfs::read(&p).is_ok_and(|b| snd.play_music_bytes(&key, b, ext, looping))
                 {
                     return true;
                 }
@@ -291,9 +309,8 @@ fn play_from_pack(
             }
             let idx = (track.saturating_sub(2) as usize) % all.len();
             let (ref path, ext) = all[idx];
-            vfs::read(path)
-                .ok()
-                .is_some_and(|b| snd.play_music_bytes(b, ext, looping))
+            let key = path.to_string_lossy();
+            (looping && snd.resume_music(&key)) || vfs::read(path).is_ok_and(|b| snd.play_music_bytes(&key, b, ext, looping))
         }
     }
 }
@@ -301,6 +318,57 @@ fn play_from_pack(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Half a second of a WAV, silent but for its length.
+    fn wav() -> Vec<u8> {
+        let mut b = b"RIFF".to_vec();
+        b.extend(44136u32.to_le_bytes());
+        b.extend(b"WAVEfmt ");
+        b.extend(16u32.to_le_bytes());
+        for v in [1u16, 1] {
+            b.extend(v.to_le_bytes());
+        }
+        for v in [44100u32, 88200] {
+            b.extend(v.to_le_bytes());
+        }
+        for v in [2u16, 16] {
+            b.extend(v.to_le_bytes());
+        }
+        b.extend(b"data");
+        b.extend(44100u32.to_le_bytes());
+        b.resize(44 + 44100, 1);
+        b
+    }
+
+    #[test]
+    fn a_mods_track_beats_the_base_games_of_another_type() {
+        let tmp = std::env::temp_dir().join(format!("qsp_st_prio_{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&tmp);
+        for d in ["id1/music", "mod/music"] {
+            std::fs::create_dir_all(tmp.join(d)).unwrap();
+        }
+        // ogg comes before wav, but id1 after the mod
+        std::fs::write(tmp.join("id1/music/track02.ogg"), b"not an ogg").unwrap();
+        std::fs::write(tmp.join("mod/music/track02.wav"), wav()).unwrap();
+        let mut fs = Fs::new(&tmp);
+        fs.add_game_dir("id1");
+        fs.add_game_dir("mod");
+        let mut sfs = Fs::new(&tmp);
+        sfs.add_game_dir("id1");
+        sfs.add_game_dir("mod");
+        let (mut snd, mut mixer) = SoundSystem::new(48000, move |p| sfs.open(p));
+        let mut st = SoundtrackManager::default();
+        let mut out = vec![0i16; 256];
+        assert!(st.play_cd_track(2, true, "", &fs, &mut snd));
+        mixer.paint(&mut out);
+        assert!(mixer.music_playing());
+        assert!(snd.resume_music("music/track02.wav"));
+        // no such track: silence, not the last one
+        assert!(!st.play_cd_track(9, true, "", &fs, &mut snd));
+        mixer.paint(&mut out);
+        assert!(!mixer.music_playing());
+        let _ = std::fs::remove_dir_all(&tmp);
+    }
 
     #[test]
     fn discovers_gamedir_and_user_soundtracks() {
