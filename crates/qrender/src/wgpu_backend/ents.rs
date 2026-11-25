@@ -98,14 +98,17 @@ impl Renderer {
     /// R_SetupAliasLighting: (light colour / 200).
     fn alias_light(&self, fr: &RenderFrame, e: &RenderEntity, am: &AliasModel, styles: &[i32]) -> [f32; 3] {
         let wl = self.world.as_ref().map(|w| &w.cpu);
-        let mut lc = wl
-            .and_then(|w| {
+        let mut lc = if fr.settings.fullbright {
+            [100.0; 3] // ironwail: lightcolor 0.5 (x200)
+        } else {
+            wl.and_then(|w| {
                 w.light_point(e.origin, styles)
                     .or_else(|| w.light_point([e.origin[0], e.origin[1], e.origin[2] + am.maxs_z * 0.5], styles))
             })
-            .unwrap_or([128.0; 3]);
+            .unwrap_or([128.0; 3])
+        };
         // real-time dynamic lights shade models per pixel instead
-        if fr.settings.dynamic && !fr.settings.rt_dlights {
+        if fr.settings.dynamic && !fr.settings.fullbright && !fr.settings.rt_dlights {
             for dl in fr.dlights {
                 let d = sub(e.origin, dl.origin);
                 let add = dl.radius - dot(d, d).sqrt();

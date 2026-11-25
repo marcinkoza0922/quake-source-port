@@ -25,6 +25,29 @@ fn numbers(args: &str) -> Option<Vec<f32>> {
 }
 
 impl ClientState {
+    /// Keeps `qsp_boom` marks (`m owner ...`) and flights (`t`, `f owner x y z`,
+    /// over with `c owner`).
+    pub(crate) fn parse_boom(&mut self, line: &str) {
+        let mut w = line.split_whitespace();
+        let (Some(kind), Some(o)) = (w.next(), w.next().and_then(|w| w.parse::<f32>().ok())) else { return };
+        if !(0.0..MAX_OWNERS).contains(&o) || line.len() > 512 {
+            return;
+        }
+        let owner = o as u8;
+        let i = self.boom.iter().position(|b| b.0 == owner).unwrap_or_else(|| {
+            self.boom.push((owner, [None, None]));
+            self.boom.len() - 1
+        });
+        let [marks, flight] = &mut self.boom[i].1;
+        match kind {
+            "m" => *marks = w.next().is_some().then(|| line.into()),
+            // (without the throwing sound)
+            "t" | "f" => *flight = Some(format!("f {}", line.split_whitespace().skip(1).collect::<Vec<_>>().join(" ")).into()),
+            "c" => *flight = None,
+            _ => {}
+        }
+    }
+
     /// Keeps `qsp_gel` splats: `a id ...` adds one, `d id` removes it, `c` all.
     pub(crate) fn parse_gel(&mut self, line: &str) {
         let (op, rest) = line.split_once(' ').unwrap_or((line, ""));
@@ -121,6 +144,18 @@ mod portal_effect_tests {
         assert_eq!((cl.portals.len(), cl.stickies.len()), (32, 64));
         assert!(cl.stickies.iter().all(|s| s.1.iter().all(|v| v.is_finite())));
         assert!(cl.mags.is_empty(), "more parts than any gun has");
+    }
+
+    #[test]
+    fn boomerangs_are_kept_by_owner() {
+        let mut cl = ClientState::new();
+        for l in ["m 0 5 1.5 7 2", "t 0 1 2 3", "f 0 4 5 6", "t 1 9 9 9", "c 1", "m 99 1 1", "s 5 2 0", "\u{3000}t 2 1 2 3"] {
+            cl.parse_boom(l);
+        }
+        assert_eq!(cl.boom[0], (0, [Some("m 0 5 1.5 7 2".into()), Some("f 0 4 5 6".into())]));
+        assert_eq!(cl.boom[1], (1, [None, None]));
+        cl.parse_boom("m 0");
+        assert_eq!(cl.boom[0].1[0], None);
     }
 
     #[test]

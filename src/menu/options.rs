@@ -19,7 +19,10 @@ impl Menu {
     /// Puts a changed row back to its default (Backspace/Del, pad X, or a
     /// click on its marker). Returns true if something changed.
     pub(super) fn reset_row(&mut self, item: Item, cv: &mut Cvars, out: &mut Vec<Action>) -> bool {
-        if self.item_disabled(item, cv) || !self.changed(item, cv) {
+        // Water Opacity is locked while Enhanced Water is off, yet its value
+        // still applies to maps that allow it: it can be put back
+        let stuck = matches!(item, Item::Slider { cvar: "r_wateralpha", .. }) && !self.game_locked(item, cv);
+        if (self.item_disabled(item, cv) && !stuck) || !self.changed(item, cv) {
             return false;
         }
         let Some(name) = Self::resettable(item) else { return false };

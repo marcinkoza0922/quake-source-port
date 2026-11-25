@@ -220,6 +220,9 @@ impl Host {
         for (_, line) in self.cl.gel.clone() {
             self.gel_fx.receive(&line, self.cl.time, None);
         }
+        for line in self.cl.boom.clone().into_iter().flat_map(|(_, lines)| lines).flatten() {
+            self.boomerang_fx.receive(&line, self.cl.time, &self.cl, None);
+        }
         if ended {
             self.demo_reached_end();
         }

@@ -24,6 +24,19 @@ fn sub_masters(page: Page) -> &'static [&'static str] {
     }
 }
 
+/// Settings the wgpu backend ignores (DESIGN, wgpu backend).
+const NOT_IN_WGPU: &[&str] = &[
+    "r_water_reflections",
+    "r_water_reflections_amount",
+    "r_teleportwindows",
+    "addon_portal_view",
+    "r_anisotropy",
+    "vid_fsaamode",
+    "vid_vsync",
+    "r_deluxemapping",
+    "r_deluxemapping_specular",
+];
+
 fn any_off(masters: &[&str], cv: &Cvars) -> bool {
     masters.iter().any(|m| cv.value_of(m) == 0.0)
 }
@@ -84,6 +97,7 @@ impl Menu {
     /// are gated by `sub_disabled` instead.
     pub(super) fn item_disabled(&self, item: Item, cv: &Cvars) -> bool {
         self.game_locked(item, cv)
+            || (qrender::REDUCED_BACKEND && row_cvar(item).is_some_and(|c| NOT_IN_WGPU.contains(&c)))
             || (matches!(item, Item::Run { run: Run::ExportClip, .. }) && cv.value_of("_export_hasclip") == 0.0)
             || (!matches!(item, Item::Sub { .. }) && any_off(self.masters(item), cv))
             // classic styles replaced by an enhanced one

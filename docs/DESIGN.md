@@ -1128,6 +1128,11 @@ entity key). The shadow passes bind `shadow_frame_group`, whose binding 8 is
 a 1×1 placeholder, since WebGPU forbids sampling a texture in the pass that
 renders it. The CPU lightmaps and `alias_light` leave dynamic lights out
 while it is on. Shadow passes write no GPU timestamps.
+Not in this backend: portals and teleporter windows, water reflections, slang
+presets, video export, anisotropic filtering, texture modes, LOD bias,
+supersampling, deluxemapping, vsync off, gel's shader mode, and HDR lightmaps
+above twice the normal brightness. The menu dims the rows among them
+(`qrender::REDUCED_BACKEND`, `menu/gating.rs`).
 `encode.rs`. Bloom (`wgpu_backend/bloom.rs`, `shaders/bloom.wgsl`, r_bloom): the
 scene fragment shaders return a `Frag` (colour, glow) and have `*_glow` entry
 points; `Pipes::set_scene` rebuilds the scene pipelines (`scene_pipes.rs`,

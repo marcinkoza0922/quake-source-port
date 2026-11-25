@@ -61,10 +61,31 @@ pub(super) struct Buffers {
     lists: Lists,
 }
 
-fn ui_quads(r: &Renderer, fr: &RenderFrame) -> (Vec<UiV>, Vec<(u32, u32, u32)>) {
+/// 2D vertices drawn with one texture and scissor.
+pub(super) struct UiBatch {
+    pub(super) slot: u32,
+    pub(super) first: u32,
+    pub(super) count: u32,
+    /// x, y, width and height in pixels.
+    pub(super) clip: [u32; 4],
+}
+
+/// `[x, y, w, h]` on an output of `w`×`h` pixels.
+fn clip_px(rect: Option<[f32; 4]>, [w, h]: [u32; 2]) -> [u32; 4] {
+    let Some([x, y, rw, rh]) = rect else { return [0, 0, w, h] };
+    // (a float that is NaN or huge becomes 0 or the edge)
+    let edge = |v: f32, max: u32| (v.max(0.0) as u32).min(max);
+    let (x0, y0) = (edge(x.floor(), w), edge(y.floor(), h));
+    let (x1, y1) = (edge((x + rw).ceil(), w).max(x0), edge((y + rh).ceil(), h).max(y0));
+    [x0, y0, x1 - x0, y1 - y0]
+}
+
+fn ui_quads(r: &Renderer, fr: &RenderFrame) -> (Vec<UiV>, Vec<UiBatch>) {
+    let size = [r.width, r.height];
+    let clip = std::cell::Cell::new(clip_px(None, size));
     let mut v: Vec<UiV> = Vec::with_capacity(fr.draw2d.len() * 6);
-    let mut batches: Vec<(u32, u32, u32)> = Vec::new();
-    let quad = |v: &mut Vec<UiV>, batches: &mut Vec<(u32, u32, u32)>, x: f32, y: f32, w: f32, h: f32, uv: [f32; 4], color: [f32; 4], tex: u32| {
+    let mut batches: Vec<UiBatch> = Vec::new();
+    let quad = |v: &mut Vec<UiV>, batches: &mut Vec<UiBatch>, x: f32, y: f32, w: f32, h: f32, uv: [f32; 4], color: [f32; 4], tex: u32| {
         let c = color.map(|c| (c.clamp(0.0, 1.0) * 255.0 + 0.5) as u8);
         let p = |px: f32, py: f32, u: f32, vv: f32| UiV { pos: [px, py], uv: [u, vv], color: c };
         let first = v.len() as u32;
@@ -77,8 +98,8 @@ fn ui_quads(r: &Renderer, fr: &RenderFrame) -> (Vec<UiV>, Vec<(u32, u32, u32)>) 
             p(x, y + h, uv[0], uv[3]),
         ]);
         match batches.last_mut() {
-            Some(b) if b.0 == tex => b.2 += 6,
-            _ => batches.push((tex, first, 6)),
+            Some(b) if b.slot == tex && b.clip == clip.get() => b.count += 6,
+            _ => batches.push(UiBatch { slot: tex, first, count: 6, clip: clip.get() }),
         }
     };
     for d in fr.draw2d {
@@ -124,12 +145,12 @@ fn ui_quads(r: &Renderer, fr: &RenderFrame) -> (Vec<UiV>, Vec<(u32, u32, u32)>) 
                         p(x1 - nx, y1 - ny),
                     ]);
                     match batches.last_mut() {
-                        Some(b) if b.0 == NO_TEX => b.2 += 6,
-                        _ => batches.push((NO_TEX, first, 6)),
+                        Some(b) if b.slot == NO_TEX && b.clip == clip.get() => b.count += 6,
+                        _ => batches.push(UiBatch { slot: NO_TEX, first, count: 6, clip: clip.get() }),
                     }
                 }
             }
-            Draw2D::Clip(_) => {}
+            Draw2D::Clip(rect) => clip.set(clip_px(rect, size)),
         }
     }
     (v, batches)
@@ -333,7 +354,7 @@ impl Renderer {
                 }
             }
         }
-        for &(slot, _, _) in &ui_batches {
+        for &UiBatch { slot, .. } in &ui_batches {
             self.ensure_material([slot, NO_TEX, NO_TEX]);
         }
         if need_sky {
@@ -408,5 +429,35 @@ impl Renderer {
             self.bufs.frame_group = Some(g);
             self.bufs.shadow_frame_group = Some(sg);
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn clips_stay_on_the_output() {
+        let c = |r| clip_px(Some(r), [100, 50]);
+        assert_eq!(clip_px(None, [100, 50]), [0, 0, 100, 50]);
+        assert_eq!(c([10.5, 5.0, 20.2, 10.0]), [10, 5, 21, 10]);
+        assert_eq!(c([-10.0, -10.0, 1000.0, 20.0]), [0, 0, 100, 10]);
+        for r in [[200.0, 80.0, 10.0, 10.0], [5.0, 5.0, -50.0, -50.0], [f32::NAN, 0.0, f32::NAN, 1.0], [1e30, 1e30, 1e30, 1e30]] {
+            let [x, y, w, h] = c(r);
+            assert!(x + w <= 100 && y + h <= 50, "{r:?}");
+        }
+    }
+
+    #[test]
+    fn clipped_2d_stays_inside_its_rectangle() {
+        let Ok(mut r) = Renderer::headless(64, 32, &[[0; 3]; 256]) else { return };
+        let fill = Draw2D::Fill { x: 0.0, y: 0.0, w: 64.0, h: 32.0, color: [1.0; 4] };
+        let list = [Draw2D::Clip(Some([8.0, 4.0, 16.0, 8.0])), fill, Draw2D::Clip(None)];
+        r.render(&RenderFrame { draw2d: &list, ..Default::default() }).unwrap();
+        let px = r.read_pixels().unwrap();
+        let lit = |x: usize, y: usize| px[(y * 64 + x) * 4] > 128;
+        let count = (0..32).flat_map(|y| (0..64).map(move |x| (x, y))).filter(|&(x, y)| lit(x, y)).count();
+        assert_eq!(count, 16 * 8);
+        assert!(lit(8, 4) && lit(23, 11) && !lit(7, 4) && !lit(24, 11));
     }
 }

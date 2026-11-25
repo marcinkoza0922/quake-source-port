@@ -23,7 +23,7 @@ pub(super) enum Part {
 
 impl Renderer {
     #[allow(clippy::too_many_arguments)]
-    pub(super) fn encode(&mut self, l: &Lists, post_du: &[u32], ao_views: &[AoView], bloom: &[BloomPass], shadows: &[ShadowPass], ui_du: u32, ui_batches: &[(u32, u32, u32)]) -> Result<()> {
+    pub(super) fn encode(&mut self, l: &Lists, post_du: &[u32], ao_views: &[AoView], bloom: &[BloomPass], shadows: &[ShadowPass], ui_du: u32, ui_batches: &[super::frame::UiBatch]) -> Result<()> {
         let frame_tex = match &self.surface {
             Some((s, cfg)) => match s.get_current_texture() {
                 wgpu::CurrentSurfaceTexture::Success(t) | wgpu::CurrentSurfaceTexture::Suboptimal(t) => Some(t),
@@ -96,10 +96,12 @@ impl Renderer {
                 pass.set_pipeline(&self.pipes.ui);
                 pass.set_bind_group(0, draw_group, &[ui_du * UNIFORM_STRIDE as u32]);
                 pass.set_vertex_buffer(0, b.ui_v.get().slice(..));
-                for &(slot, first, count) in ui_batches {
-                    let Some(mat) = self.bind_groups.get(&[slot, NO_TEX, NO_TEX]) else { continue };
+                for b in ui_batches {
+                    let [x, y, w, h] = b.clip;
+                    let Some(mat) = self.bind_groups.get(&[b.slot, NO_TEX, NO_TEX]).filter(|_| w > 0 && h > 0) else { continue };
+                    pass.set_scissor_rect(x, y, w, h);
                     pass.set_bind_group(1, mat, &[]);
-                    pass.draw(first..first + count, 0..1);
+                    pass.draw(b.first..b.first + b.count, 0..1);
                 }
             }
         }

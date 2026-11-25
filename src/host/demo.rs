@@ -54,6 +54,9 @@ impl Host {
         self.cl = ClientState::new();
         self.cl.demoplayback = true;
         let mut demo = crate::demo::Demo::new(data);
+        if demo.cut {
+            self.con.print("This demo is too long to play whole; it ends early.\n");
+        }
         demo.play.name = file.clone();
         demo.play.auto = file.starts_with(&format!("{}/", crate::demo::library::AUTO_DIR));
         // The timeline scan replays the file once more without effects.

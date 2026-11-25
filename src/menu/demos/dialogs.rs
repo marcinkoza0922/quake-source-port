@@ -62,13 +62,13 @@ impl crate::menu::Menu {
             }
             DemoAction::Play(n) => {
                 out.push(Action::Sound("misc/menu2.wav"));
-                out.push(Action::Command(format!("playdemo \"{n}\"\n")));
+                out.push(Action::command("playdemo", &[&n]));
                 out.push(Action::Close);
                 self.screen = Screen::None;
             }
             DemoAction::Export(n) => {
                 out.push(Action::Sound("misc/menu2.wav"));
-                out.push(Action::Command(format!("menu_export \"{n}\"\n")));
+                out.push(Action::command("menu_export", &[&n]));
             }
             DemoAction::Keep(n) => {
                 out.push(Action::Sound("misc/menu2.wav"));

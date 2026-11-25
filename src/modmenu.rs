@@ -496,19 +496,19 @@ impl ModMenu {
                 out.push(Action::Close);
                 // the running mod is already loaded: just return to it
                 if !m.dir.eq_ignore_ascii_case(&self.current) {
-                    out.push(Action::Command(format!("game \"{}\"\n", m.dir)));
+                    out.push(Action::command("game", &[&m.dir]));
                 }
                 None
             }
             Page::List if matches!(key, K_RIGHTARROW | K_DPAD_RIGHT) => {
                 let Some((idx, m)) = self.mod_at_row(self.cursor) else { return Some(page) };
-                let cmd = format!("_modmaps \"{}\"\n", m.dir);
+                let cmd = Action::command("_modmaps", &[&m.dir]);
                 self.sel = idx;
                 self.maps.clear();
                 self.map_view.clear();
                 self.map_filter.clear();
                 out.push(Action::Sound("misc/menu2.wav"));
-                out.push(Action::Command(cmd));
+                out.push(cmd);
                 Some(Page::Maps)
             }
             Page::Maps if back || matches!(key, K_LEFTARROW | K_DPAD_LEFT) => Some(Page::List),
@@ -519,20 +519,20 @@ impl ModMenu {
                     // Start: another mod boots through its own quake.rc; the
                     // mounted one starts its first map.
                     if !current {
-                        format!("game \"{}\"\n", m.dir)
+                        Action::command("game", &[&m.dir])
                     } else {
                         match self.map_view.first().and_then(|&i| self.maps.get(i)) {
-                            Some(f) => format!("game \"{}\" \"{}\"\n", m.dir, f.name),
+                            Some(f) => Action::command("game", &[&m.dir, &f.name]),
                             None => return Some(page),
                         }
                     }
                 } else {
                     let Some(map) = self.map_at_row(self.map_cursor) else { return Some(page) };
-                    format!("game \"{}\" \"{}\"\n", m.dir, map.name)
+                    Action::command("game", &[&m.dir, &map.name])
                 };
                 out.push(Action::Sound("misc/menu2.wav"));
                 out.push(Action::Close);
-                out.push(Action::Command(cmd));
+                out.push(cmd);
                 None
             }
             _ => Some(page),

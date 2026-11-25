@@ -312,7 +312,9 @@ impl Renderer {
                 let c = self.palette[p.color as usize];
                 let color = [c[0], c[1], c[2], (p.alpha.clamp(0.0, 1.0) * 255.0) as u8];
                 let d = dot(sub(p.origin, vs.eye), vs.fwd);
-                let scale = if d < 20.0 { 1.0 } else { 1.0 + d * 0.004 } * 0.75;
+                // squares: the round dot is drawn larger for its missing corners
+                let size = if fr.settings.particle_style == 2 { 0.75 / 1.27 } else { 0.75 };
+                let scale = if d < 20.0 { 1.0 } else { 1.0 + d * 0.004 } * size;
                 let n = lists.poly_v.len() as u32 - base;
                 for (sr, su, uv) in [(-1.0, -1.0, [0.0, 1.0]), (1.0, -1.0, [1.0, 1.0]), (1.0, 1.0, [1.0, 0.0]), (-1.0, 1.0, [0.0, 0.0])] {
                     let pos = std::array::from_fn(|k| p.origin[k] + (vs.right[k] * sr + vs.up[k] * su) * scale);
@@ -325,7 +327,7 @@ impl Renderer {
                 Cmd {
                     pipe: Pipe::Poly(poly_index(FteBlend::Blend, false)),
                     src: Src::Poly,
-                    mat: [self.dot_tex, NO_TEX, NO_TEX],
+                    mat: [if fr.settings.particle_style == 2 { NO_TEX } else { self.dot_tex }, NO_TEX, NO_TEX],
                     first,
                     count: lists.poly_i.len() as u32 - first,
                     base_vertex: base as i32,
