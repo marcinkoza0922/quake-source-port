@@ -8,6 +8,7 @@ mod pad_gestures_and_controls;
 mod compat_cmds;
 mod shell_origin;
 mod origin_files;
+mod user_data;
 
 mod relaunch_tests {
     #[test]

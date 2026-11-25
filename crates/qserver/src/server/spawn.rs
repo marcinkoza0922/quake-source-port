@@ -62,6 +62,8 @@ impl Server {
         c.sv = Sv {
             name: mapname.to_string(),
             modelname: modelname.clone(),
+            skill,
+            nomonsters: c.cvars.value_of("nomonsters") != 0.0,
             loading: true,
             protocol,
             protocolflags: if protocol == PROTOCOL_RMQ { PRFL_INT32COORD | PRFL_SHORTANGLE } else { 0 },
@@ -137,7 +139,7 @@ impl Server {
         let filter = SpawnFilter {
             deathmatch: c.cvars.value_of("deathmatch") != 0.0,
             skill,
-            nomonsters: c.cvars.value_of("nomonsters") != 0.0,
+            nomonsters: c.sv.nomonsters,
         };
         let r = {
             let mut h = Ctx::new(&mut *c, &mut world);

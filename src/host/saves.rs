@@ -71,7 +71,9 @@ impl Host {
     /// Writes config.cfg (bindings + archived cvars) in the active gamedir.
     pub fn write_config(&mut self) {
         // Headless runs are tests/tools; never clobber the user's config.
-        if self.headless {
+        // Quitting while still starting up must not replace a config that
+        // hasn't been read yet.
+        if self.headless || !self.config_ready {
             return;
         }
         self.write_global_config();
@@ -85,7 +87,7 @@ impl Host {
             s += &l;
             s.push('\n');
         }
-        if let Err(e) = qcore::vfs::write(&dir.join("config.cfg"), s.as_bytes()) {
+        if let Err(e) = qcore::vfs::write_atomic(&dir.join("config.cfg"), s.as_bytes()) {
             eprintln!("couldn't write config.cfg: {e}");
         }
         self.con.save_history(&crate::user_dir("id1"));
@@ -241,7 +243,7 @@ impl Host {
     }
 
     fn can_autosave(&self) -> bool {
-        self.local_single_player() && self.cl.signon == 4 && self.cl.intermission == 0
+        self.local_single_player() && self.cl.signon == 4 && self.cl.intermission == 0 && !self.server.core.sv.nomonsters
             && self.cl.stats[STAT_HEALTH] > 0
     }
 
@@ -460,6 +462,10 @@ pub(super) fn register(c: &mut Commands<Host>) {
             h.print(&qcore::ctr!("Can't save now.\n"));
             return;
         }
+        if h.server.core.sv.nomonsters {
+            h.print("Can't save when using \"nomonsters\".\n");
+            return;
+        }
         if qserver::modifiers::value(&h.server.core, "modifier_nosaves") != 0.0 {
             h.print(&qcore::ctr!("This game only autosaves (No Manual Saves modifier).\n"));
             return;
@@ -469,7 +475,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
             h.print(&qcore::ctr!("Relative pathnames are not allowed.\n"));
             return;
         };
-        match qcore::vfs::write(&p, &qcore::text::encode(&text)) {
+        match qcore::vfs::write_atomic(&p, &qcore::text::encode(&text)) {
             Ok(()) => {
                 // the slot is one save: drop a same-named file of the other format
                 if let (Some(d), Some(stem)) = (p.parent(), p.file_stem().and_then(|s| s.to_str())) {
@@ -497,11 +503,16 @@ pub(super) fn register(c: &mut Commands<Host>) {
         };
         let text = qcore::text::decode(&bytes);
         h.print(&qcore::ctr!("Loading {}...\n", save_stem(a.argv(1))));
+        // before anything of the running game goes away
+        let save = match h.server.parse_save(&text) {
+            Ok(s) => s,
+            Err(e) => return h.print(&qcore::ctr!("load failed: {}\n", e)),
+        };
         if let Some(i) = h.local.take() {
             h.server.drop_client(i, false);
         }
         h.disconnect_client();
-        if let Err(e) = h.server.load_game(&text) {
+        if let Err(e) = h.server.load_parsed(save) {
             h.print(&qcore::ctr!("load failed: {}\n", e));
         } else {
             h.pb.saved_damage = match text.lines().next_back() {

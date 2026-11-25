@@ -213,6 +213,8 @@ impl Host {
             self.cbuf.add_text_from("\n", origin);
         }
         let waited = self.exec_cbuf();
+        // (a config that waits every frame never drains: `_config_done`)
+        self.config_ready |= !self.quit && self.cbuf.is_empty();
         self.qd_cli_frame();
         if self.startup < 2 {
             self.startup += 1;

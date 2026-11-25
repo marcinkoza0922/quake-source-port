@@ -68,6 +68,10 @@ pub struct CustomStat {
 pub struct Sv {
     pub name: String,
     pub modelname: String,
+    /// The skill and `nomonsters` the level was spawned with (the cvars may
+    /// change for the next one).
+    pub skill: i32,
+    pub nomonsters: bool,
     pub active: bool,
     pub loading: bool,
     pub paused: bool,

@@ -47,7 +47,7 @@ impl Host {
         if !any && !qcore::vfs::exists(&path) {
             return;
         }
-        if let Err(e) = qcore::vfs::write(&path, s.as_bytes()) {
+        if let Err(e) = qcore::vfs::write_atomic(&path, s.as_bytes()) {
             eprintln!("couldn't write global.cfg: {e}");
         }
     }

@@ -239,6 +239,9 @@ pub struct Host {
     /// Frame profiler while `prof_start` is recording (tools/qprof).
     prof: Option<prof::Profiler>,
     delayed: Vec<(f64, String, Origin)>,
+    /// The startup configs ran: from here on `write_config` saves settings
+    /// rather than defaults over the user's.
+    config_ready: bool,
     /// Origin of the command being executed; the shell is for `User` only.
     cmd_origin: Origin,
     pub headless: bool,
@@ -421,6 +424,7 @@ impl Host {
             prof: None,
             delayed: Vec::new(),
             cmd_origin: Origin::Script,
+            config_ready: false,
             headless: false,
             show_scores: false,
             startup: 0,

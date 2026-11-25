@@ -217,10 +217,27 @@ jobs:
           cp -r /tmp/SDL/android-project/app/src/main/java/org/libsdl/app android/app/src/main/java/org/libsdl/
       - name: Build APK
         working-directory: android
-        run: gradle --no-daemon assembleDebug
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+          QSP_ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          QSP_ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          if [ -n "$KEYSTORE_B64" ]; then
+            export QSP_ANDROID_KEYSTORE="$RUNNER_TEMP/release.keystore"
+            trap 'rm -f "$QSP_ANDROID_KEYSTORE"' EXIT
+            printf %s "$KEYSTORE_B64" | base64 -d > "$QSP_ANDROID_KEYSTORE"
+            gradle --no-daemon assembleRelease
+            apk=app/build/outputs/apk/release/app-release.apk
+          else
+            echo "::warning::No ANDROID_KEYSTORE_B64 secret: this APK has a throwaway key, so players must uninstall (and lose their saves) to update. See android/README.md."
+            gradle --no-daemon assembleDebug
+            apk=app/build/outputs/apk/debug/app-debug.apk
+          fi
+          "$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -n 1)/apksigner" verify --print-certs "$apk"
+          cp "$apk" app.apk
       - name: Package
         run: |
-          apk=android/app/build/outputs/apk/debug/app-debug.apk
+          apk=android/app.apk
           for lib in libmain.so libSDL3.so libc++_shared.so; do
             unzip -tq "$apk" "lib/arm64-v8a/$lib"
           done

@@ -78,7 +78,7 @@ impl Server {
         for k in 0..NUM_SPAWN_PARMS {
             f += &format!("{:.6}\n", c.clients.first().map_or(0.0, |cl| cl.spawn_parms[k]));
         }
-        f += &format!("{}\n{}\n{:.6}\n", c.cvars.value_of("skill") as i32, c.sv.name, vm.time);
+        f += &format!("{}\n{}\n{:.6}\n", c.sv.skill, c.sv.name, vm.time);
         for i in 0..MAX_LIGHTSTYLES {
             match c.sv.lightstyles.get(i).filter(|s| !s.is_empty()) {
                 Some(s) => f += &format!("{}\n", String::from_utf8_lossy(s)),
@@ -122,10 +122,9 @@ impl Server {
         self.wrap_save(f)
     }
 
-    /// Host_Loadgame_f: spawns the saved map and restores globals/edicts.
-    /// Decode disk bytes with `qcore::text::decode` first. The local client
-    /// must be (re)connected afterwards.
-    pub fn load_game(&mut self, text: &str) -> Result<(), String> {
+    /// Reads a save without touching the running game, so a damaged or foreign
+    /// file costs nothing. Decode disk bytes with `qcore::text::decode` first.
+    pub fn parse_save(&self, text: &str) -> Result<ParsedSave, String> {
         let (addons, text) = crate::addons::save::split(text)?;
         let mut lines = text.split_inclusive('\n');
         let mut next = || lines.next().map(|l| l.trim_end_matches(['\n', '\r']).to_string()).ok_or("unexpected end of savegame");
@@ -156,7 +155,22 @@ impl Server {
         let header = 5 + NUM_SPAWN_PARMS + MAX_LIGHTSTYLES + usize::from(version == SAVEGAME_VERSION_KEX);
         let consumed: usize = text.split_inclusive('\n').take(header).map(str::len).sum();
         let blocks = parse_blocks(&text[consumed..])?;
+        if !self.core.fs.exists(&format!("maps/{mapname}.bsp")) {
+            return Err(format!("maps/{mapname}.bsp not found"));
+        }
+        Ok(ParsedSave { addons, parms, skill, mapname, time, styles, blocks })
+    }
 
+    /// [`Self::parse_save`] and [`Self::load_parsed`].
+    pub fn load_game(&mut self, text: &str) -> Result<(), String> {
+        let save = self.parse_save(text)?;
+        self.load_parsed(save)
+    }
+
+    /// Host_Loadgame_f: spawns the saved map and restores globals/edicts. The
+    /// local client must be (re)connected afterwards.
+    pub fn load_parsed(&mut self, save: ParsedSave) -> Result<(), String> {
+        let ParsedSave { addons, parms, skill, mapname, time, styles, blocks } = save;
         for i in 0..self.core.maxclients() {
             self.drop_client(i, true);
         }
@@ -178,6 +192,8 @@ impl Server {
             cv.set_value("coop", 0.0);
             cv.set_value("deathmatch", 0.0);
         }
+        // the saved models and entities are those of a map with monsters
+        self.core.cvars.set("nomonsters", "0");
         self.core.cvars.set_value("skill", skill.floor().clamp(0.0, 3.0));
         self.spawn_server(&mapname)?;
         // A save from other progs fails part way through its edicts: Host_Error
@@ -252,6 +268,17 @@ impl Server {
     }
 }
 
+/// A save file's contents ([`Server::parse_save`]).
+pub struct ParsedSave {
+    addons: Option<crate::addons::save::Header>,
+    parms: [f32; NUM_SPAWN_PARMS],
+    skill: f32,
+    mapname: String,
+    time: f64,
+    styles: Vec<Vec<u8>>,
+    blocks: Vec<Vec<(String, String)>>,
+}
+
 #[cfg(test)]
 mod tests {
     use std::path::{Path, PathBuf};
@@ -284,6 +311,58 @@ mod tests {
         assert!(sv.load_game(&text).is_err());
         assert!(sv.level.is_none());
         assert!(sv.save_game().is_empty());
+    }
+
+    /// The level's skill is saved, not the cvar the next level will use: the
+    /// model indices in the save only fit the entities of that skill.
+    #[test]
+    fn skill_changed_during_the_level() {
+        let Some(base) = basedir() else { return };
+        for nomonsters in ["0", "1"] {
+            let mut fs = Fs::new(base.clone());
+            fs.add_game_dir("id1");
+            let mut sv = Server::new(fs, Cvars::new(), 1);
+            sv.core.cvars.set("skill", "0");
+            sv.spawn_server("e1m1").unwrap();
+            sv.connect_local().unwrap();
+            sv.frame(1.0 / 72.0);
+            sv.core.cvars.set("skill", "3");
+            let text = sv.save_game();
+            sv.core.cvars.set("nomonsters", nomonsters);
+            sv.load_game(&text).unwrap();
+            assert_eq!(sv.core.sv.skill, 0);
+            let (model, index) = (sv.core.sv.fields.model, sv.core.sv.fields.modelindex);
+            let vm = &sv.level.as_ref().unwrap().vm;
+            let mut seen = 0;
+            for e in (2..vm.num_edicts() as u32).filter(|&e| !vm.is_free(e)) {
+                let name = String::from_utf8_lossy(vm.ent_str(e, model).unwrap()).into_owned();
+                let i = vm.ent_f(e, index) as usize;
+                if i != 0 {
+                    assert_eq!(sv.core.sv.model_precache[i], name, "edict {e}");
+                    seen += 1;
+                }
+            }
+            assert!(seen > 50);
+        }
+    }
+
+    #[test]
+    fn a_damaged_save_leaves_the_game_running() {
+        let Some(base) = basedir() else { return };
+        let mut fs = Fs::new(base);
+        fs.add_game_dir("id1");
+        let mut sv = Server::new(fs, Cvars::new(), 1);
+        sv.spawn_server("e1m1").unwrap();
+        let p = sv.connect_local().unwrap();
+        for _ in 0..20 {
+            sv.frame(1.0 / 72.0);
+        }
+        let text = sv.save_game();
+        let spawns = sv.core.spawns;
+        for bad in [&text[..text.len() / 2], "6\nnotthisgame\n", "4\n", "", &text.replacen("e1m1", "nosuchmap", 1)] {
+            assert!(sv.load_game(bad).is_err());
+            assert!(sv.active() && sv.core.spawns == spawns && sv.core.clients[p].spawned);
+        }
     }
 
     #[test]

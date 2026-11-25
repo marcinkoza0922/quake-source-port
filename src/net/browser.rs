@@ -262,7 +262,7 @@ impl SavedServers {
     }
 
     pub fn save(&self, path: &Path) {
-        let _ = qcore::vfs::write(path, self.serialize().as_bytes());
+        let _ = qcore::vfs::write_atomic(path, self.serialize().as_bytes());
     }
 
     pub fn parse(text: &str) -> Self {

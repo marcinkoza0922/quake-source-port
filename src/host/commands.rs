@@ -7,6 +7,9 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
             return;
         }
         let name = a.argv(1);
+        if name.eq_ignore_ascii_case("config.cfg") {
+            h.cbuf.insert_text("_config_done\n"); // after the text inserted below
+        }
         // A mod without its own user config starts from the base game's
         // (nearest pack below it first, then id1); runs after any config.cfg
         // the mod ships in its data, and is saved as the mod's own on quit.
@@ -54,6 +57,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("hitmarker_test", |h, a| {
         h.feedback.trigger(h.realtime, a.argv(1) == "kill");
     });
+    c.add("_config_done", |h, _| h.config_ready = true);
     c.add("stuffcmds", |h, _| h.stuff_cmds());
     // Once per config (cl_paddefaults): fill in default pad binds whose key
     // is still unbound, so configs saved before the pad

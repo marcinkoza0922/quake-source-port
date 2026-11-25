@@ -248,7 +248,7 @@ pub fn set_parent(selected: &Path, persist: bool) -> Result<PathBuf, String> {
             let _ = std::fs::remove_file(&ptr);
         } else {
             let text = format!("{}\n", norm.to_string_lossy());
-            qcore::vfs::write(&ptr, text.as_bytes()).map_err(|e| format!("{}: {e}", ptr.display()))?;
+            qcore::vfs::write_atomic(&ptr, text.as_bytes()).map_err(|e| format!("{}: {e}", ptr.display()))?;
         }
     }
     Ok(target_root)
