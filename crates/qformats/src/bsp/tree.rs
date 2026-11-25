@@ -8,7 +8,9 @@ use crate::{Error, Result};
 const MAX_DEPTH: u32 = 4096;
 
 pub(super) fn check(nodes: &[Node], clipnodes: &[ClipNode], num_planes: usize) -> Result<()> {
-    check_tree("nodes", &nodes.iter().map(|n| n.children).collect::<Vec<_>>())?;
+    let children: Vec<_> = nodes.iter().map(|n| n.children).collect();
+    check_tree("nodes", &children)?;
+    check_unshared("nodes", &children)?;
     check_tree("clipnodes", &clipnodes.iter().map(|n| n.children).collect::<Vec<_>>())?;
     match nodes.iter().find(|n| usize::try_from(n.plane).map_or(true, |p| p >= num_planes)) {
         Some(n) => Err(Error::new(FMT, format!("bad node plane {}", n.plane))),
@@ -55,6 +57,20 @@ pub(super) fn check_tree(what: &str, children: &[[i32; 2]]) -> Result<()> {
     Ok(())
 }
 
+/// Errors if two nodes have the same child: box walks visit every path down,
+/// of which shared subtrees make 2^depth. (Clip nodes are only traced.)
+fn check_unshared(what: &str, children: &[[i32; 2]]) -> Result<()> {
+    let mut seen = vec![false; children.len()];
+    for &c in children.iter().flatten() {
+        if let Some(s) = usize::try_from(c).ok().and_then(|c| seen.get_mut(c))
+            && std::mem::replace(s, true)
+        {
+            return Err(Error::new(FMT, format!("shared {what} at {c}")));
+        }
+    }
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -64,6 +80,13 @@ mod tests {
         assert!(check_tree("nodes", &[]).is_ok());
         assert!(check_tree("nodes", &[[1, 2], [2, -1], [-1, -2]]).is_ok());
         assert!(check_tree("nodes", &[[99, -1]]).is_ok());
+    }
+
+    #[test]
+    fn drawn_nodes_have_one_parent() {
+        assert!(check_unshared("nodes", &[[1, 2], [-1, -1], [99, 99]]).is_ok());
+        assert!(check_unshared("nodes", &[[1, 2], [2, -1], [-1, -2]]).is_err());
+        assert!(check_unshared("nodes", &[[1, 1], [-1, -2]]).is_err());
     }
 
     #[test]

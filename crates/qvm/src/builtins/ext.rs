@@ -276,12 +276,13 @@ pub(super) fn pf_findflags(vm: &mut Vm, _: &mut dyn Host) -> Result<()> {
     Ok(())
 }
 
-pub(super) fn pf_copyentity(vm: &mut Vm, _: &mut dyn Host) -> Result<()> {
+pub(super) fn pf_copyentity(vm: &mut Vm, host: &mut dyn Host) -> Result<()> {
     let src = vm.g_i(ofs_parm(0));
     let dst = if vm.argc >= 2 { vm.g_i(ofs_parm(1)) } else { vm.ed_alloc()? as i32 };
     if src >= 0 && dst >= 0 && (src as usize) < vm.num_edicts() && (dst as usize) < vm.num_edicts() {
         let data = vm.edict(src as u32).to_vec();
         vm.edict_mut(dst as u32).copy_from_slice(&data);
+        host.copied_entity(vm, src as u32, dst as u32);
     }
     vm.ret_e(dst.max(0) as u32);
     Ok(())

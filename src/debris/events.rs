@@ -22,7 +22,7 @@ fn inside(p: Vec3, lo: Vec3, hi: Vec3, pad: f32) -> bool {
 
 fn segment_dist(a: Vec3, b: Vec3, p: Vec3) -> f32 {
     let (dir, len) = (b - a).normalize_len();
-    let t = (p - a).dot(dir).clamp(0.0, len);
+    let t = (p - a).dot(dir).clamp(0.0, len.max(0.0));
     (a + dir * t - p).length()
 }
 

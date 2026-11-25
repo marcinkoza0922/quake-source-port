@@ -305,6 +305,21 @@ impl Host for Ctx<'_> {
         Ok(())
     }
 
+    /// vkQuake's PF_copyentity
+    fn copied_entity(&mut self, vm: &mut Vm, src: u32, dst: u32) {
+        if vm.is_free(src) || vm.is_free(dst) {
+            self.c.print("PF_copyentity: entity is free\n");
+            return;
+        }
+        let (alpha, sendinterval) = {
+            let x = self.c.ext(src);
+            (x.alpha, x.sendinterval)
+        };
+        let x = self.c.ext(dst);
+        (x.alpha, x.sendinterval) = (alpha, sendinterval);
+        self.link(vm, dst, false);
+    }
+
     fn ext_builtin(&mut self, vm: &mut Vm, name: &str) -> Result<()> {
         if let Some(e) = &self.c.sv.error {
             return Err(e.clone());

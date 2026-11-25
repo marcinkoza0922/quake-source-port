@@ -284,6 +284,10 @@ fn cmd_changelevel(s: &mut Server, a: &Args) {
         return;
     }
     s.save_spawn_parms();
+    // Host_Error in SetChangeParms: the next level would start from half of it
+    if s.error().is_some() {
+        return;
+    }
     let _ = s.spawn_server(&level);
 }
 

@@ -27,6 +27,8 @@ mod physics;
 pub use physics::{Thrown, ThrownEnt};
 mod connect;
 mod clients;
+#[cfg(test)]
+mod progs_tests;
 
 const MAX_LOG: usize = 4096;
 

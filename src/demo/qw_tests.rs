@@ -138,6 +138,14 @@ fn mvd_playback_and_pov_switching() {
     push_mvd(&mut mvd, 0, DEM_ALL, &sb.data);
 
     assert_eq!(detect_format(&mvd), Some(QwDemoFormat::Mvd));
+    // one that grows too much ends early
+    let mut long = mvd.clone();
+    for _ in 0..2000 {
+        push_mvd(&mut long, 10, DEM_ALL, &sb.data);
+    }
+    let all = transcode_mvd(long.clone().into(), None).unwrap().0.len();
+    let capped = transcode_mvd_within(long.into(), None, 20_000).unwrap().0.len();
+    assert!(all > 50_000 && (20_000..30_000).contains(&capped), "{all} {capped}");
     let mut demo = crate::demo::Demo::new(mvd);
     assert!(demo.is_mvd());
     assert_eq!(demo.mvd_pov_name(), Some("Milton"));

@@ -312,7 +312,7 @@ impl<'a> Hull<'a> {
             tr.plane_dist = -plane.dist;
         }
         while self.point_contents(self.first, mid) == CONTENTS_SOLID {
-            frac -= 0.1;
+            frac = (f64::from(frac) - 0.1) as f32;
             // a NaN move (NaN view angles) must end here too; C loops forever
             if frac < 0.0 || frac.is_nan() {
                 tr.fraction = midf;

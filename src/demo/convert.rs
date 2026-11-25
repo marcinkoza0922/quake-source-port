@@ -110,7 +110,7 @@ fn convert_block(cl: &ClientState, data: &[u8], spans: &[(u8, usize, usize)], lo
             SVC_SERVERINFO => out.extend(strip_pext(span, extended)),
             SVCFTE_UPDATEENTITIES if deltas => {
                 *extended = true;
-                out.extend(entity_updates(cl, lost));
+                out.extend(entity_updates(cl, lost)?);
             }
             SVCDP_PRECACHE | SVCDP_TRAILPARTICLES | SVCDP_POINTPARTICLES | SVCDP_POINTPARTICLES1 => {
                 *extended = true;
@@ -297,14 +297,15 @@ fn synthesize_clientdata(cl: &ClientState) -> Vec<u8> {
 }
 
 /// SV_WriteEntitiesToClient for the snapshot the client holds.
-fn entity_updates(cl: &ClientState, lost: &mut Lost) -> Vec<u8> {
+fn entity_updates(cl: &ClientState, lost: &mut Lost) -> Result<Vec<u8>, String> {
     let (protocol, pf) = (cl.protocol, cl.protocolflags);
     let mut msg = SizeBuf::new(MAX_BLOCK);
     for (n, e) in cl.entities.iter().enumerate().skip(1).filter(|(_, e)| e.delta_live) {
         lost.entity_effects |= e.netstate.traileffect != 0 || e.netstate.emiteffect != 0;
         write_update(&mut msg, n as u32, &e.netstate, &e.baseline, protocol, pf);
     }
-    msg.data
+    // (an overflowing buffer starts again from nothing)
+    if msg.overflowed { Err("too many entities for one message".into()) } else { Ok(msg.data) }
 }
 
 fn write_update(msg: &mut SizeBuf, e: u32, s: &EntState, b: &qclient::EntityState, protocol: u32, pf: u32) {

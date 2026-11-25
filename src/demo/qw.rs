@@ -167,8 +167,16 @@ fn push_dem_block(out: &mut Vec<u8>, angles: [f32; 3], msg: &[u8]) {
     out.extend_from_slice(msg);
 }
 
+/// Most a demo may grow to: every packet becomes a whole frame, so a crafted
+/// or very long one would take gigabytes. The rest of it isn't played.
+const MAX_OUT: usize = if cfg!(target_arch = "wasm32") { 64 << 20 } else { 256 << 20 };
+
 /// Transcodes a `.qwd` file into an in-memory `.dem` byte stream.
 pub fn transcode_qwd(data: &[u8]) -> Option<Vec<u8>> {
+    transcode_qwd_within(data, MAX_OUT)
+}
+
+fn transcode_qwd_within(data: &[u8], max: usize) -> Option<Vec<u8>> {
     let mut qw = QwState::new();
     qw.demo_mode = true;
     let mut out = b"-1\n".to_vec();
@@ -177,7 +185,7 @@ pub fn transcode_qwd(data: &[u8]) -> Option<Vec<u8>> {
     let mut last_time = 0.01f64;
     let mut cur_angles = [0.0f32; 3];
 
-    while pos + 5 <= data.len() {
+    while pos + 5 <= data.len() && out.len() < max {
         let raw_t = f32::from_le_bytes(data[pos..pos + 4].try_into().unwrap());
         let cmd = data[pos + 4];
         pos += 5;
@@ -255,6 +263,10 @@ pub fn transcode_qwd(data: &[u8]) -> Option<Vec<u8>> {
 /// Transcodes an `.mvd` file into an in-memory `.dem` byte stream for `pov`
 /// (or auto-selects the first active player when `pov` is `None`).
 pub fn transcode_mvd(raw: Arc<[u8]>, pov: Option<usize>) -> Option<(Vec<u8>, MvdInfo)> {
+    transcode_mvd_within(raw, pov, MAX_OUT)
+}
+
+fn transcode_mvd_within(raw: Arc<[u8]>, pov: Option<usize>, max: usize) -> Option<(Vec<u8>, MvdInfo)> {
     let data = &raw[..];
     let mut qw = QwState::new();
     qw.demo_mode = true;
@@ -269,7 +281,7 @@ pub fn transcode_mvd(raw: Arc<[u8]>, pov: Option<usize>) -> Option<(Vec<u8>, Mvd
     let mut demotime = 0.01f64;
     let mut seq = 1u32;
 
-    while pos + 2 <= data.len() {
+    while pos + 2 <= data.len() && out.len() < max {
         let msec = data[pos];
         let cmd_byte = data[pos + 1];
         pos += 2;

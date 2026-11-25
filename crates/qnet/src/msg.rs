@@ -175,7 +175,8 @@ impl<'a> MsgReader<'a> {
     #[inline(always)]
     pub fn coord(&mut self, flags: u32) -> f32 {
         if flags & PRFL_FLOATCOORD != 0 {
-            self.float()
+            // (nothing is anywhere near NaN; the clamps of effects would panic)
+            Some(self.float()).filter(|f| f.is_finite()).unwrap_or(0.0)
         } else if flags & PRFL_INT32COORD != 0 {
             self.long() as f32 * (1.0 / 16.0)
         } else if flags & PRFL_24BITCOORD != 0 {
@@ -211,6 +212,15 @@ impl<'a> MsgReader<'a> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn coordinates_are_finite() {
+        for f in [f32::NAN, f32::INFINITY, f32::NEG_INFINITY] {
+            let mut b = SizeBuf::new(16);
+            b.float(f);
+            assert_eq!(MsgReader::new(&b.data).coord(PRFL_FLOATCOORD), 0.0);
+        }
+    }
 
     #[test]
     fn roundtrip() {
