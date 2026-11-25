@@ -991,6 +991,9 @@ hr Timska igra
 @ Texture Filter
 hr Filtriranje tekstura
 
+@ Texture Size
+hr Veličina tekstura
+
 @ Third person
 hr Treće lice
 
@@ -1249,6 +1252,9 @@ hr ništa
 
 @ normal
 hr normalno
+
+@ full size
+hr puna veličina
 
 @ off
 hr isključeno
@@ -2224,6 +2230,9 @@ hr Otključava stranicu Postavke efekata: poboljšane čestice, efekte udaraca i
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 hr Koristi glađe MD5 modele iz reizdanja iz 2021. (i MD3 zamjene iz modova) umjesto klasičnih. Primjenjuje se pri sljedećem učitavanju mape
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+hr Smanjuje velike teksture radi uštede memorije. Primjenjuje se pri sljedećem učitavanju mape
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 hr Koristi obojeno svjetlo mape (.lit datoteka ili BSPX blok); isključeno daje izvorno bijelo svjetlo. Primjenjuje se pri sljedećem učitavanju mape

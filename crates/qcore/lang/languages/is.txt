@@ -991,6 +991,9 @@ is Liðsspil
 @ Texture Filter
 is Áferðarsía
 
+@ Texture Size
+is Áferðarstærð
+
 @ Third person
 is Þriðju persónu
 
@@ -1249,6 +1252,9 @@ is ekkert
 
 @ normal
 is venjulegt
+
+@ full size
+is full stærð
 
 @ off
 is af
@@ -2224,6 +2230,9 @@ is Opnar síðuna Stillingar brellna: bættar agnir, höggbrellur og blóðslett
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 is Notar mýkri MD5-líkön endurútgáfunnar frá 2021 (og MD3-staðgengla úr mod) í stað þeirra klassísku. Tekur gildi við næstu hleðslu borðs
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+is Minnkar stórar áferðir til að spara minni. Tekur gildi við næstu hleðslu borðs
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 is Notar litaða lýsingu borðsins (.lit-skrá eða BSPX-hluta); af gefur upprunalegt hvítt ljós. Tekur gildi við næstu hleðslu borðs

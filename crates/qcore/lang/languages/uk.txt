@@ -991,6 +991,9 @@ uk Командна гра
 @ Texture Filter
 uk Фільтрація текстур
 
+@ Texture Size
+uk Розмір текстур
+
 @ Third person
 uk від третьої особи
 
@@ -1249,6 +1252,9 @@ uk немає
 
 @ normal
 uk звичайний
+
+@ full size
+uk повний розмір
 
 @ off
 uk вимк.
@@ -2224,6 +2230,9 @@ uk Відкриває сторінку «Налаштування ефектів
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 uk Використовує плавніші моделі MD5 із перевидання 2021 року (і заміни MD3 з модів) замість класичних. Застосовується під час наступного завантаження карти
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+uk Зменшує великі текстури, щоб заощадити пам'ять. Застосовується під час наступного завантаження карти
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 uk Використовує кольорове освітлення карти (файл .lit або блок BSPX); вимк. — оригінальне біле світло. Застосовується під час наступного завантаження карти

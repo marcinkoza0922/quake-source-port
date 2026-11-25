@@ -991,6 +991,9 @@ sw Mchezo wa Timu
 @ Texture Filter
 sw Kichujio cha Tekstua
 
+@ Texture Size
+sw Ukubwa wa Tekstua
+
 @ Third person
 sw Mtu wa tatu
 
@@ -1249,6 +1252,9 @@ sw hakuna
 
 @ normal
 sw kawaida
+
+@ full size
+sw ukubwa kamili
 
 @ off
 sw zima
@@ -2224,6 +2230,9 @@ sw Hufungua ukurasa wa Mipangilio ya Athari: chembechembe bora, athari za kugong
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 sw Hutumia modeli laini za MD5 za toleo jipya la 2021 (na mbadala za MD3 kutoka mods) badala ya za asili. Hutumika ramani inayofuata ikipakiwa
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+sw Hupunguza tekstua kubwa ili kuokoa kumbukumbu. Hutumika ramani inayofuata ikipakiwa
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 sw Hutumia mwanga wa rangi wa ramani (faili .lit au BSPX lump); ukizima, mwanga ni mweupe wa asili. Hutumika ramani inayofuata ikipakiwa

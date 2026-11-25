@@ -991,6 +991,9 @@ mr टीमप्ले
 @ Texture Filter
 mr टेक्सचर फिल्टर
 
+@ Texture Size
+mr टेक्सचरचा आकार
+
 @ Third person
 mr तृतीय पुरुष
 
@@ -1249,6 +1252,9 @@ mr काहीही नाही
 
 @ normal
 mr सामान्य
+
+@ full size
+mr पूर्ण आकार
 
 @ off
 mr बंद
@@ -2224,6 +2230,9 @@ mr FX सेटिंग्ज पान अनलॉक करते: सुध
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 mr क्लासिक मॉडेल्सऐवजी 2021 री-रिलीझचे अधिक गुळगुळीत MD5 मॉडेल्स (आणि मॉड्समधील MD3 बदल) वापरते. पुढच्या मॅप लोडवर लागू होते
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+mr मेमरी वाचवण्यासाठी मोठे टेक्सचर्स लहान करते. पुढच्या मॅप लोडवर लागू होते
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 mr मॅपचा रंगीत प्रकाश वापरते (.lit फाइल किंवा BSPX lump); बंद केल्यास मूळ पांढरा प्रकाश. पुढच्या मॅप लोडवर लागू होते

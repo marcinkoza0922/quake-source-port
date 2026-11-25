@@ -991,6 +991,9 @@ tr Takım Oyunu
 @ Texture Filter
 tr Doku Filtresi
 
+@ Texture Size
+tr Doku Boyutu
+
 @ Third person
 tr Üçüncü şahıs
 
@@ -1249,6 +1252,9 @@ tr hiçbiri
 
 @ normal
 tr normal
+
+@ full size
+tr tam boyut
 
 @ off
 tr kapalı
@@ -2224,6 +2230,9 @@ tr Efekt Ayarları sayfasını açar: gelişmiş parçacıklar, isabet efektleri
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 tr Klasik modeller yerine 2021 yeniden sürümünün daha pürüzsüz MD5 modellerini (ve modlardaki MD3 yedeklerini) kullanır. Sonraki harita yüklemesinde uygulanır
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+tr Bellekten tasarruf etmek için büyük dokuları küçültür. Sonraki harita yüklemesinde uygulanır
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 tr Haritanın renkli ışığını kullanır (.lit dosyası veya BSPX bloğu); kapalıyken orijinal beyaz ışık. Sonraki harita yüklemesinde uygulanır

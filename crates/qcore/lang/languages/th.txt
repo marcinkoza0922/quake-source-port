@@ -991,6 +991,9 @@ th เล่น​เป็น​ทีม
 @ Texture Filter
 th ฟิลเตอร์​เท็กซ์เจอร์
 
+@ Texture Size
+th ขนาด​เท็กซ์เจอร์
+
 @ Third person
 th บุคคล​ที่​สาม
 
@@ -1249,6 +1252,9 @@ th ไม่มี
 
 @ normal
 th ปกติ
+
+@ full size
+th ขนาด​เต็ม
 
 @ off
 th ปิด
@@ -2224,6 +2230,9 @@ th ปลด​ล็อก​หน้า​ตั้งค่า FX: อนุ
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 th ใช้​โมเดล MD5 ที่​ลื่น​กว่า​จาก​ฉบับ​รีรีลีส 2021 (และ​โมเดล MD3 แทน​จาก​ม็อด) แทน​โมเดล​คลาสสิก มี​ผล​เมื่อ​โหลด​แผนที่​ครั้ง​ถัด​ไป
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+th ย่อ​เท็กซ์เจอร์​ขนาด​ใหญ่​เพื่อ​ประหยัด​หน่วย​ความ​จำ มี​ผล​เมื่อ​โหลด​แผนที่​ครั้ง​ถัด​ไป
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 th ใช้​แสง​สี​ของ​แผนที่ (ไฟล์ .lit หรือ BSPX lump); ปิด​จะ​ได้​แสง​ขาว​ดั้งเดิม มี​ผล​เมื่อ​โหลด​แผนที่​ครั้ง​ถัด​ไป

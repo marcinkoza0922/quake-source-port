@@ -25,7 +25,7 @@ impl Renderer {
         let mut up = self.gpu.begin_upload()?;
         let mut slots = [NO_TEX; 6];
         for (i, f) in faces.iter().enumerate() {
-            slots[i] = self.add_texture(&mut up, f.width, f.height, &[&f.pixels], true, Sampling::Clamp)?;
+            slots[i] = self.add_texture(&mut up, f.width, f.height, &[&f.pixels], TexUse::Sky, Sampling::Clamp)?;
         }
         self.gpu.end_upload(up)?;
         self.skybox = Some(slots);
@@ -114,13 +114,13 @@ impl Renderer {
                     fb = Some(g.clone());
                 }
                 let (w, h) = (mdl.skin_width, mdl.skin_height);
-                let bs = self.add_texture(&mut up, w, h, &[&b], true, Sampling::World)?;
+                let bs = self.add_texture(&mut up, w, h, &[&b], TexUse::Base, Sampling::World)?;
                 let fs = match fb {
-                    Some(fb) => self.add_texture(&mut up, w, h, &[&fb], true, Sampling::World)?,
+                    Some(fb) => self.add_texture(&mut up, w, h, &[&fb], TexUse::Glow, Sampling::World)?,
                     None => NO_TEX,
                 };
                 let cs = match cm {
-                    Some(cm) => self.add_texture(&mut up, w, h, &[&cm], true, Sampling::Nearest)?,
+                    Some(cm) => self.add_texture(&mut up, w, h, &[&cm], TexUse::Index, Sampling::Nearest)?,
                     None => NO_TEX,
                 };
                 imgs.push([bs, fs, cs]);
@@ -195,7 +195,7 @@ impl Renderer {
                 } else {
                     convert::to_rgba(&pal, &im.pixels, Some(255))
                 };
-                let slot = self.add_texture(&mut up, im.width, im.height, &[&rgba], true, Sampling::Clamp)?;
+                let slot = self.add_texture(&mut up, im.width, im.height, &[&rgba], TexUse::Sprite, Sampling::Clamp)?;
                 let left = im.origin[0] as f32;
                 let up_ = im.origin[1] as f32;
                 images.push((
@@ -236,7 +236,7 @@ impl Renderer {
     pub(super) fn register_pic_sampled(&mut self, width: u32, height: u32, rgba: &[u8], sampling: Sampling) -> Result<PicId> {
         self.idle();
         let mut up = self.gpu.begin_upload()?;
-        let slot = self.add_texture(&mut up, width, height, &[rgba], false, sampling)?;
+        let slot = self.add_texture(&mut up, width, height, &[rgba], TexUse::Pic, sampling)?;
         self.gpu.end_upload(up)?;
         self.pics.push(PicInfo {
             slot,
@@ -280,6 +280,9 @@ impl Renderer {
         let Some(&PicInfo { slot, width, height }) = self.pics.get(pic.0 as usize) else {
             return Err(Error::new("no such picture"));
         };
+        if width.max(height) > self.gpu.max_texture {
+            return Err(Error::new("picture larger than the GPU supports"));
+        }
         if let Some(Tex { image: Some(img), .. }) = self.textures.get(slot as usize).and_then(|t| t.as_ref())
             && img.width == width && img.height == height && img.mips == 1 && img.layers == 1
         {

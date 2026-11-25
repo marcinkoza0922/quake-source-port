@@ -991,6 +991,9 @@ ka გუნდური თამაში
 @ Texture Filter
 ka ტექსტურის ფილტრი
 
+@ Texture Size
+ka ტექსტურის ზომა
+
 @ Third person
 ka მესამე პირიდან
 
@@ -1249,6 +1252,9 @@ ka არცერთი
 
 @ normal
 ka ნორმალური
+
+@ full size
+ka სრული ზომა
 
 @ off
 ka გამორთ.
@@ -2224,6 +2230,9 @@ ka ხსნის ეფექტების პარამეტრები
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 ka იყენებს 2021 წლის ხელახალი გამოშვების უფრო გლუვ MD5 მოდელებს (და მოდების MD3 შემცვლელებს) კლასიკურის ნაცვლად. მოქმედებს შემდეგი რუკის ჩატვირთვისას
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+ka ამცირებს დიდ ტექსტურებს მეხსიერების დასაზოგად. მოქმედებს შემდეგი რუკის ჩატვირთვისას
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ka იყენებს რუკის ფერად განათებას (.lit ფაილი ან BSPX ბლოკი); გამორთვისას ორიგინალური თეთრი სინათლეა. მოქმედებს შემდეგი რუკის ჩატვირთვისას

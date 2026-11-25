@@ -991,6 +991,9 @@ fil Teamplay
 @ Texture Filter
 fil Filter ng Texture
 
+@ Texture Size
+fil Laki ng Texture
+
 @ Third person
 fil third person
 
@@ -1249,6 +1252,9 @@ fil wala
 
 @ normal
 fil normal
+
+@ full size
+fil buong laki
 
 @ off
 fil naka-off
@@ -2224,6 +2230,9 @@ fil Binubuksan ang pahinang Mga Setting ng FX: pinahusay na particle, epekto ng 
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 fil Ginagamit ang mas makinis na MD5 model ng 2021 re-release (at MD3 na kapalit mula sa mod) sa halip na klasiko. Ilalapat sa susunod na pag-load ng mapa
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+fil Pinaliliit ang malalaking texture para makatipid sa memory. Ilalapat sa susunod na pag-load ng mapa
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 fil Ginagamit ang may kulay na ilaw ng mapa (.lit file o BSPX lump); kapag naka-off, puting ilaw gaya ng orihinal. Ilalapat sa susunod na pag-load ng mapa

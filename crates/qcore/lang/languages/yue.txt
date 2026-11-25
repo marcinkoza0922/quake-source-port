@@ -991,6 +991,9 @@ yue 團隊模式
 @ Texture Filter
 yue 材質過濾
 
+@ Texture Size
+yue 材質大細
+
 @ Third person
 yue 第三身
 
@@ -1249,6 +1252,9 @@ yue 冇
 
 @ normal
 yue 普通
+
+@ full size
+yue 完整大細
 
 @ off
 yue 關閉
@@ -2224,6 +2230,9 @@ yue 解鎖特效設定頁：強化粒子、命中效果同血跡飛濺
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 yue 用2021年重製版較順滑嘅MD5模型（同埋模組嘅MD3替換模型）取代經典模型。下次載入地圖時生效
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+yue 縮細大材質以慳記憶體。下次載入地圖時生效
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 yue 用地圖嘅彩色光照（.lit檔案或者BSPX區塊）；關閉就係原版白光。下次載入地圖時生效

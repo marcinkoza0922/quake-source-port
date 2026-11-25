@@ -991,6 +991,9 @@ id Main Tim
 @ Texture Filter
 id Filter Tekstur
 
+@ Texture Size
+id Ukuran Tekstur
+
 @ Third person
 id orang ketiga
 
@@ -1249,6 +1252,9 @@ id tidak ada
 
 @ normal
 id normal
+
+@ full size
+id ukuran penuh
 
 @ off
 id nonaktif
@@ -2224,6 +2230,9 @@ id Membuka halaman Pengaturan Efek: partikel ditingkatkan, efek hantaman, dan ci
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 id Memakai model MD5 yang lebih halus dari rilis ulang 2021 (dan pengganti MD3 dari mod) alih-alih model klasik. Berlaku saat peta berikutnya dimuat
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+id Memperkecil tekstur besar untuk menghemat memori. Berlaku saat peta berikutnya dimuat
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 id Memakai cahaya berwarna peta (berkas .lit atau lump BSPX); nonaktif memberi cahaya putih vanilla. Berlaku saat peta berikutnya dimuat

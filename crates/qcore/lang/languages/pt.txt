@@ -991,6 +991,9 @@ pt Jogo em equipa
 @ Texture Filter
 pt Filtro de texturas
 
+@ Texture Size
+pt Tamanho das texturas
+
 @ Third person
 pt terceira pessoa
 
@@ -1249,6 +1252,9 @@ pt nenhum
 
 @ normal
 pt normal
+
+@ full size
+pt tamanho original
 
 @ off
 pt desligado
@@ -2224,6 +2230,9 @@ pt Desbloqueia a página Definições de efeitos: partículas melhoradas, efeito
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 pt Usa os modelos MD5 mais suaves da reedição de 2021 (e substitutos MD3 de mods) em vez dos clássicos. Aplica-se ao carregar o mapa seguinte
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+pt Reduz texturas grandes para poupar memória. Aplica-se ao carregar o mapa seguinte
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 pt Usa a luz colorida do mapa (ficheiro .lit ou bloco BSPX); desligado dá a luz branca original. Aplica-se ao carregar o mapa seguinte

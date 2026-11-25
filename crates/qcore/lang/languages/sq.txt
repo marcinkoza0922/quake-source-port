@@ -991,6 +991,9 @@ sq Lojë në ekip
 @ Texture Filter
 sq Filtri i teksturave
 
+@ Texture Size
+sq Madhësia e teksturave
+
 @ Third person
 sq Vetë i treti
 
@@ -1249,6 +1252,9 @@ sq asnjë
 
 @ normal
 sq normal
+
+@ full size
+sq madhësi e plotë
 
 @ off
 sq joaktiv
@@ -2224,6 +2230,9 @@ sq Zhbllokon faqen Cilësimet e efekteve: grimca të përmirësuara, efekte godi
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 sq Përdor modelet MD5 më të lëmuara të ribotimit të 2021 (dhe zëvendësimet MD3 nga modet) në vend të atyre klasike. Zbatohet në ngarkimin e hartës tjetër
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+sq Zvogëlon teksturat e mëdha për të kursyer memorie. Zbatohet në ngarkimin e hartës tjetër
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 sq Përdor dritën me ngjyra të hartës (skedar .lit ose bllok BSPX); joaktiv jep dritën e bardhë origjinale. Zbatohet në ngarkimin e hartës tjetër

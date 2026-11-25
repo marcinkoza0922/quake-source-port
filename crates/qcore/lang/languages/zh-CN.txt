@@ -991,6 +991,9 @@ zh-CN 团队模式
 @ Texture Filter
 zh-CN 纹理过滤
 
+@ Texture Size
+zh-CN 纹理大小
+
 @ Third person
 zh-CN 第三人称
 
@@ -1249,6 +1252,9 @@ zh-CN 无
 
 @ normal
 zh-CN 普通
+
+@ full size
+zh-CN 完整大小
 
 @ off
 zh-CN 关
@@ -2224,6 +2230,9 @@ zh-CN 解锁“特效设置”页面：增强粒子、命中效果和血液飞�
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 zh-CN 使用 2021 重制版更平滑的 MD5 模型（以及模组提供的 MD3 替换模型）代替经典模型。下次载入地图时生效
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+zh-CN 缩小较大的纹理以节省内存。下次载入地图时生效
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 zh-CN 使用地图的彩色光照（.lit 文件或 BSPX 数据块）；关闭则为原版白光。下次载入地图时生效

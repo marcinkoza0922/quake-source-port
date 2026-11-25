@@ -991,6 +991,9 @@ lt Komandinis žaidimas
 @ Texture Filter
 lt Tekstūrų filtras
 
+@ Texture Size
+lt Tekstūrų dydis
+
 @ Third person
 lt Trečiasis asmuo
 
@@ -1249,6 +1252,9 @@ lt nėra
 
 @ normal
 lt normalus
+
+@ full size
+lt visas dydis
 
 @ off
 lt išjungta
@@ -2224,6 +2230,9 @@ lt Atrakina efektų nustatymų puslapį: patobulintos dalelės, smūgių efektai
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 lt Naudoja glotnesnius 2021 m. pakartotinio leidimo MD5 modelius (ir MD3 pakaitalus iš modifikacijų) vietoj klasikinių. Galioja įkėlus kitą žemėlapį
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+lt Sumažina dideles tekstūras, kad taupytų atmintį. Galioja įkėlus kitą žemėlapį
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 lt Naudoja spalvotą žemėlapio apšvietimą (.lit failas arba BSPX blokas); išjungus – originali balta šviesa. Galioja įkėlus kitą žemėlapį

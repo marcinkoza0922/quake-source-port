@@ -991,6 +991,9 @@ nl Teamspel
 @ Texture Filter
 nl Texturefilter
 
+@ Texture Size
+nl Textuurgrootte
+
 @ Third person
 nl Derde persoon
 
@@ -1249,6 +1252,9 @@ nl geen
 
 @ normal
 nl normaal
+
+@ full size
+nl volledige grootte
 
 @ off
 nl uit
@@ -2224,6 +2230,9 @@ nl Ontgrendelt de pagina Effectinstellingen: verbeterde deeltjes, inslageffecten
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 nl Gebruikt de vloeiendere MD5-modellen van de heruitgave uit 2021 (en MD3-vervangingen uit mods) in plaats van de klassieke. Geldt vanaf het laden van de volgende map
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+nl Verkleint grote textures om geheugen te besparen. Geldt vanaf het laden van de volgende map
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 nl Gebruikt het gekleurde licht van de map (.lit-bestand of BSPX-lump); uit geeft het originele witte licht. Geldt vanaf het laden van de volgende map

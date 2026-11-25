@@ -17,13 +17,13 @@ impl Renderer {
         for (frames, intervals) in &ss.skins {
             let mut imgs = Vec::with_capacity(frames.len());
             for img in frames {
-                let bs = self.add_texture(up, img.width, img.height, &[&img.base], true, Sampling::World)?;
+                let bs = self.add_texture(up, img.width, img.height, &[&img.base], TexUse::Base, Sampling::World)?;
                 let fs = match &img.fb {
-                    Some((w, h, data)) => self.add_texture(up, *w, *h, &[data], true, Sampling::World)?,
+                    Some((w, h, data)) => self.add_texture(up, *w, *h, &[data], TexUse::Glow, Sampling::World)?,
                     None => NO_TEX,
                 };
                 let cs = match &img.cmap {
-                    Some((w, h, data)) => self.add_texture(up, *w, *h, &[data], true, Sampling::Nearest)?,
+                    Some((w, h, data)) => self.add_texture(up, *w, *h, &[data], TexUse::Index, Sampling::Nearest)?,
                     None => NO_TEX,
                 };
                 imgs.push([bs, fs, cs]);

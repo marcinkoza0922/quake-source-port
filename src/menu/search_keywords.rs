@@ -120,6 +120,7 @@ fn cvar_keywords(cvar: &str) -> &'static str {
         "vid_fsaamode" => "ssaa antialiasing aa downsampling",
         "r_renderscale" => "resolution scaling performance",
         "r_texfilter" => "pixelated nearest linear smooth textures",
+        "r_texturesize" => "texture resolution quality memory vram picmip low end",
         "r_anisotropy" => "anisotropic af texture filtering",
         "r_softemu" => "palette software retro",
         "r_dither" => "banding noise",

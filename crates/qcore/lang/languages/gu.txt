@@ -991,6 +991,9 @@ gu ટીમપ્લે
 @ Texture Filter
 gu ટેક્સચર ફિલ્ટર
 
+@ Texture Size
+gu ટેક્સચરનું કદ
+
 @ Third person
 gu ત્રીજો પુરુષ
 
@@ -1249,6 +1252,9 @@ gu કંઈ નહીં
 
 @ normal
 gu સામાન્ય
+
+@ full size
+gu પૂર્ણ કદ
 
 @ off
 gu બંધ
@@ -2224,6 +2230,9 @@ gu FX સેટિંગ્સ પાનું ખોલે છે: ઉન્ન
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 gu ક્લાસિક મૉડેલ્સને બદલે 2021 રી-રિલીઝનાં વધુ સરળ MD5 મૉડેલ્સ (અને મોડનાં MD3 વિકલ્પો) વાપરે છે. આગલો મેપ લોડ થાય ત્યારે લાગુ થાય છે
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+gu મેમરી બચાવવા મોટા ટેક્સચર નાના કરે છે. આગલો મેપ લોડ થાય ત્યારે લાગુ થાય છે
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 gu મેપનો રંગીન પ્રકાશ (.lit ફાઇલ કે BSPX લમ્પ) વાપરે છે; બંધ હોય તો મૂળ સફેદ પ્રકાશ. આગલો મેપ લોડ થાય ત્યારે લાગુ થાય છે

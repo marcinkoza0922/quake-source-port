@@ -170,6 +170,7 @@ impl Renderer {
                 w
             },
             textures: Vec::new(),
+            max_texture_size: 0,
             palette: *palette,
             palette_rgba: pal,
             palette_buf,
@@ -211,7 +212,7 @@ impl Renderer {
         r.splash_pic = r.register_pic_rgba_linear(32, 32, &water::spray_blob(32)).ok();
         let caustic_rgba = water::caustic_texture(128);
         let mut up = r.gpu.begin_upload()?;
-        let slot = r.add_texture(&mut up, 128, 128, &[&caustic_rgba], false, Sampling::LinearRepeat)?;
+        let slot = r.add_texture(&mut up, 128, 128, &[&caustic_rgba], TexUse::Pic, Sampling::LinearRepeat)?;
         r.gpu.end_upload(up)?;
         r.caustic_tex = slot;
         Ok(r)

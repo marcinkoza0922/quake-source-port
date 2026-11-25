@@ -991,6 +991,9 @@ ja チームプレイ
 @ Texture Filter
 ja テクスチャフィルター
 
+@ Texture Size
+ja テクスチャサイズ
+
 @ Third person
 ja 三人称
 
@@ -1249,6 +1252,9 @@ ja なし
 
 @ normal
 ja ノーマル
+
+@ full size
+ja フルサイズ
 
 @ off
 ja オフ
@@ -2224,6 +2230,9 @@ ja 「エフェクト設定」ページを開放します：強化パーティ�
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 ja クラシックなモデルの代わりに2021年リマスター版の滑らかなMD5モデル（およびMODのMD3代替モデル）を使います。次のマップ読み込みから適用されます
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+ja 大きなテクスチャを縮小してメモリを節約します。次のマップ読み込みから適用されます
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ja マップの色付きライト（.litファイルまたはBSPXランプ）を使います。オフでオリジナルの白い光になります。次のマップ読み込みから適用されます

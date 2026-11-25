@@ -991,6 +991,9 @@ la Lusus turmarum
 @ Texture Filter
 la Filtrum texturarum
 
+@ Texture Size
+la Magnitudo texturarum
+
 @ Third person
 la Tertia persona
 
@@ -1249,6 +1252,9 @@ la nullum
 
 @ normal
 la solitum
+
+@ full size
+la magnitudo plena
 
 @ off
 la inactivum
@@ -2224,6 +2230,9 @@ la Paginam Optiones effectuum reserat: particulae auctae, effectus ictuum et asp
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 la Exemplaria MD5 leniora editionis anni 2021 (et substituta MD3 ex modis) pro classicis adhibet. Valet cum tabula proxima oneratur
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+la Texturas magnas minuit ut memoriae parcat. Valet cum tabula proxima oneratur
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 la Lumen coloratum tabulae adhibet (plica .lit vel frustum BSPX); inactivum lumen album originale praebet. Valet cum tabula proxima oneratur

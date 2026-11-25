@@ -28,7 +28,7 @@ mod textures;
 mod timing;
 mod water;
 
-use crate::convert::Palette;
+use crate::convert::{Palette, TexUse};
 use crate::{Error, PicId, Result, ShaderParam, SurfaceProvider, Vec3};
 use std::collections::HashMap;
 use std::path::Path;
@@ -84,6 +84,8 @@ pub struct Renderer {
     pipes: pipes::Pipes,
     samplers: textures::Samplers,
     textures: Vec<Option<textures::Tex>>,
+    /// Player's limit on a level texture's larger side (0 = the GPU's).
+    max_texture_size: u32,
     /// 1x1 white (missing base) and transparent black (missing extra layers).
     white: wgpu::TextureView,
     black: wgpu::TextureView,
@@ -264,6 +266,7 @@ impl Renderer {
             pipes,
             samplers,
             textures: Vec::new(),
+            max_texture_size: 0,
             white,
             mapper_stats: crate::MapperStats::default(),
             black,
@@ -302,7 +305,7 @@ impl Renderer {
         };
         r.init_water();
         let dot = textures::particle_dot();
-        r.dot_tex = r.add_texture(8, 8, &[&dot], false, textures::Sampling::Linear)?;
+        r.dot_tex = r.add_texture(8, 8, &[&dot], TexUse::Pic, textures::Sampling::Linear)?;
         #[cfg(target_os = "android")]
         {
             let validation = validation.pop().await;
@@ -376,6 +379,12 @@ impl Renderer {
 
     pub fn max_anisotropy(&self) -> f32 {
         1.0
+    }
+
+    /// Limits the larger side of world, skin and skybox textures loaded from
+    /// now on (0 = only what the GPU takes).
+    pub fn set_max_texture_size(&mut self, size: u32) {
+        self.max_texture_size = size;
     }
 
     /// Portal isolation (the only camera override) is Vulkan-only.

@@ -991,6 +991,9 @@ eo Teamludo
 @ Texture Filter
 eo Teksturfiltrilo
 
+@ Texture Size
+eo Tekstura grandeco
+
 @ Third person
 eo Tria persono
 
@@ -1249,6 +1252,9 @@ eo neniu
 
 @ normal
 eo normala
+
+@ full size
+eo plena grandeco
 
 @ off
 eo malŝaltita
@@ -2224,6 +2230,9 @@ eo Malŝlosas la paĝon Agordoj de efektoj: plibonigitaj partikloj, trafefektoj 
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 eo Uzas la pli glatajn MD5-modelojn de la reeldono de 2021 (kaj MD3-anstataŭaĵojn el modoj) anstataŭ la klasikajn. Efektiviĝas ĉe la sekva ŝargo de mapo
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+eo Malgrandigas grandajn teksturojn por ŝpari memoron. Efektiviĝas ĉe la sekva ŝargo de mapo
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 eo Uzas la koloran lumon de la mapo (dosiero .lit aŭ BSPX-ero); malŝaltite donas la originalan blankan lumon. Efektiviĝas ĉe la sekva ŝargo de mapo

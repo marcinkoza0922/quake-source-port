@@ -320,6 +320,7 @@ pub(super) const WHEEL_TIME: &[(&str, f32)] = &[("off", 1.0), ("half speed", 0.5
 
 pub(super) const MSAA: &[(&str, f32)] = &[("off", 1.0), ("2x", 2.0), ("4x", 4.0), ("8x", 8.0)];
 pub(super) const SCALE: &[(&str, f32)] = &[("50%", 0.5), ("75%", 0.75), ("100%", 1.0), ("125%", 1.25), ("150%", 1.5), ("200%", 2.0)];
+pub(super) const TEXTURE_SIZE: &[(&str, f32)] = &[("full size", 0.0), ("1024", 1024.0), ("512", 512.0), ("256", 256.0), ("128", 128.0)];
 pub(super) const FILTER: &[(&str, f32)] = &[("nearest", 0.0), ("linear", 1.0)];
 pub(super) const ANISO: &[(&str, f32)] = &[("off", 1.0), ("2x", 2.0), ("4x", 4.0), ("8x", 8.0), ("16x", 16.0)];
 pub(super) const SOFTEMU: &[(&str, f32)] = &[("off", 0.0), ("fine", 1.0), ("coarse", 2.0), ("banded", 3.0)];
@@ -347,6 +348,7 @@ macro_rules! graphics_rows {
             Item::Choice { label: "Anti-aliasing", cvar: "r_msaa", choices: MSAA },
             toggle("Supersampling", "vid_fsaamode"),
             Item::Choice { label: "Render Scale", cvar: "r_renderscale", choices: SCALE },
+            Item::Choice { label: "Texture Size", cvar: "r_texturesize", choices: TEXTURE_SIZE },
             Item::Choice { label: "Texture Filter", cvar: "r_texfilter", choices: FILTER },
             Item::Choice { label: "Anisotropic", cvar: "r_anisotropy", choices: ANISO },
             Item::Choice { label: "8-bit Color", cvar: "r_softemu", choices: SOFTEMU },

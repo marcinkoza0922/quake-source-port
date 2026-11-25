@@ -5,6 +5,8 @@ use qformats::md3::Md3Surface;
 use qformats::mdl::Mdl;
 
 mod external;
+mod fit;
+pub(crate) use fit::{TexUse, fit};
 pub use external::{ExternalTexture, LevelBsp, packed_size, world_texture_images};
 
 pub type Palette = [[u8; 3]; 256];

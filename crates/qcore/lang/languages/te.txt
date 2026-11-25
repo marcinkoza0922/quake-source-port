@@ -991,6 +991,9 @@ te టీమ్‌ప్లే
 @ Texture Filter
 te టెక్స్చర్ ఫిల్టర్
 
+@ Texture Size
+te టెక్స్చర్ పరిమాణం
+
 @ Third person
 te థర్డ్ పర్సన్
 
@@ -1249,6 +1252,9 @@ te ఏదీ లేదు
 
 @ normal
 te సాధారణం
+
+@ full size
+te పూర్తి పరిమాణం
 
 @ off
 te ఆఫ్
@@ -2224,6 +2230,9 @@ te FX సెట్టింగ్‌ల పేజీని తెరుస్త
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 te క్లాసిక్ మోడల్‌లకు బదులు 2021 రీ-రిలీజ్ యొక్క మృదువైన MD5 మోడల్‌లను (మోడ్‌ల నుండి MD3 ప్రత్యామ్నాయాలను కూడా) వాడుతుంది. తదుపరి మ్యాప్ లోడ్‌లో వర్తిస్తుంది
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+te మెమరీ ఆదా కోసం పెద్ద టెక్స్చర్‌లను చిన్నవి చేస్తుంది. తదుపరి మ్యాప్ లోడ్‌లో వర్తిస్తుంది
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 te మ్యాప్ రంగుల కాంతిని వాడుతుంది (.lit ఫైల్ లేదా BSPX lump); ఆఫ్ అయితే సాధారణ తెల్లని కాంతి. తదుపరి మ్యాప్ లోడ్‌లో వర్తిస్తుంది

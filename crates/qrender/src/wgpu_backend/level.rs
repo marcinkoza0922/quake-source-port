@@ -2,6 +2,7 @@
 
 use super::models::Model;
 use super::textures::Sampling;
+use crate::convert::TexUse;
 use super::{NO_TEX, Renderer};
 use crate::{Bsp, LevelBsp, ModelId, Result, TextureKind, convert, world};
 
@@ -61,14 +62,14 @@ impl Renderer {
                 && let Some((w, h, solid, alpha)) =
                     convert::sky_layers(&pal, &t, bsp.version == Some(qformats::bsp::BspVersion::Quake64))
             {
-                let s = self.add_texture(w, h, &[&solid], true, Sampling::World)?;
-                let a = self.add_texture(w, h, &[&alpha], true, Sampling::World)?;
+                let s = self.add_texture(w, h, &[&solid], TexUse::Base, Sampling::World)?;
+                let a = self.add_texture(w, h, &[&alpha], TexUse::Base, Sampling::World)?;
                 self.sky_layers = [s, a];
             }
             let (base, fb) = convert::world_texture_images(&pal, &t, lb.external(ti));
-            let b = self.add_texture(base.width, base.height, &base.mip_refs(), true, Sampling::World)?;
+            let b = self.add_texture(base.width, base.height, &base.mip_refs(), TexUse::Base, Sampling::World)?;
             let f = match &fb {
-                Some(fb) => self.add_texture(fb.width, fb.height, &fb.mip_refs(), true, Sampling::World)?,
+                Some(fb) => self.add_texture(fb.width, fb.height, &fb.mip_refs(), TexUse::Glow, Sampling::World)?,
                 None => NO_TEX,
             };
             materials.push([b, f, flags, convert::packed_size(&t)]);

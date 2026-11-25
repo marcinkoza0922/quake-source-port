@@ -11,6 +11,12 @@ impl Renderer {
         self.gpu.max_anisotropy
     }
 
+    /// Limits the larger side of world, skin and skybox textures loaded from
+    /// now on (0 = only what the GPU takes).
+    pub fn set_max_texture_size(&mut self, size: u32) {
+        self.max_texture_size = size;
+    }
+
     /// Applies MSAA / render scale / texture filtering from `st`, rebuilding
     /// targets, pipelines or samplers when they changed.
     pub(super) fn apply_settings(&mut self, st: &Settings) -> Result<()> {

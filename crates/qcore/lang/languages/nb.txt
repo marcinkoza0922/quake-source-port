@@ -991,6 +991,9 @@ nb Lagspill
 @ Texture Filter
 nb Teksturfilter
 
+@ Texture Size
+nb Teksturstørrelse
+
 @ Third person
 nb Tredjeperson
 
@@ -1249,6 +1252,9 @@ nb ingen
 
 @ normal
 nb normal
+
+@ full size
+nb full størrelse
 
 @ off
 nb av
@@ -2224,6 +2230,9 @@ nb Låser opp siden Effektinnstillinger: forbedrede partikler, treffeffekter og 
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 nb Bruker de jevnere MD5-modellene fra 2021-utgaven (og MD3-erstatninger fra moder) i stedet for de klassiske. Trer i kraft ved neste banelasting
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+nb Forminsker store teksturer for å spare minne. Trer i kraft ved neste banelasting
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 nb Bruker banens fargede lys (.lit-fil eller BSPX-lump); av gir vanlig hvitt lys. Trer i kraft ved neste banelasting

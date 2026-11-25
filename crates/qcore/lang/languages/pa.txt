@@ -991,6 +991,9 @@ pa ਟੀਮ ਖੇਡ
 @ Texture Filter
 pa ਟੈਕਸਚਰ ਫ਼ਿਲਟਰ
 
+@ Texture Size
+pa ਟੈਕਸਚਰ ਦਾ ਆਕਾਰ
+
 @ Third person
 pa ਤੀਜਾ ਪੁਰਖ
 
@@ -1249,6 +1252,9 @@ pa ਕੋਈ ਨਹੀਂ
 
 @ normal
 pa ਆਮ
+
+@ full size
+pa ਪੂਰਾ ਆਕਾਰ
 
 @ off
 pa ਬੰਦ
@@ -2224,6 +2230,9 @@ pa FX ਸੈਟਿੰਗਾਂ ਸਫ਼ਾ ਖੋਲ੍ਹਦਾ ਹੈ: ਸੁ
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 pa ਕਲਾਸਿਕ ਮਾਡਲਾਂ ਦੀ ਥਾਂ 2021 ਰੀ-ਰਿਲੀਜ਼ ਦੇ ਵੱਧ ਸੁਚਾਰੂ MD5 ਮਾਡਲ (ਅਤੇ ਮੌਡਾਂ ਦੇ MD3 ਬਦਲ) ਵਰਤਦਾ ਹੈ। ਅਗਲਾ ਮੈਪ ਲੋਡ ਹੋਣ 'ਤੇ ਲਾਗੂ ਹੁੰਦਾ ਹੈ
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+pa ਮੈਮੋਰੀ ਬਚਾਉਣ ਲਈ ਵੱਡੇ ਟੈਕਸਚਰ ਛੋਟੇ ਕਰਦਾ ਹੈ। ਅਗਲਾ ਮੈਪ ਲੋਡ ਹੋਣ 'ਤੇ ਲਾਗੂ ਹੁੰਦਾ ਹੈ
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 pa ਮੈਪ ਦੀ ਰੰਗੀਨ ਰੋਸ਼ਨੀ (.lit ਫ਼ਾਈਲ ਜਾਂ BSPX lump) ਵਰਤਦਾ ਹੈ; ਬੰਦ ਹੋਣ 'ਤੇ ਅਸਲ ਚਿੱਟੀ ਰੋਸ਼ਨੀ। ਅਗਲਾ ਮੈਪ ਲੋਡ ਹੋਣ 'ਤੇ ਲਾਗੂ ਹੁੰਦਾ ਹੈ

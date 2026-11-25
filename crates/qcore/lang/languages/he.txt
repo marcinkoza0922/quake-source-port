@@ -991,6 +991,9 @@ he משחק קבוצתי
 @ Texture Filter
 he סינון טקסטורות
 
+@ Texture Size
+he גודל טקסטורות
+
 @ Third person
 he גוף שלישי
 
@@ -1249,6 +1252,9 @@ he ללא
 
 @ normal
 he רגיל
+
+@ full size
+he גודל מלא
 
 @ off
 he כבוי
@@ -2224,6 +2230,9 @@ he פותח את עמוד הגדרות אפקטים: חלקיקים משופרי
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 he משתמש במודלי MD5 החלקים יותר של המהדורה המחודשת מ-2021 (ובתחליפי MD3 ממודים) במקום הקלאסיים. חל בטעינת המפה הבאה
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+he מקטין טקסטורות גדולות כדי לחסוך בזיכרון. חל בטעינת המפה הבאה
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 he משתמש בתאורה הצבעונית של המפה (קובץ .lit או BSPX lump); כבוי נותן אור לבן מקורי. חל בטעינת המפה הבאה

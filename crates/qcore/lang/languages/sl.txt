@@ -991,6 +991,9 @@ sl Ekipna igra
 @ Texture Filter
 sl Filter tekstur
 
+@ Texture Size
+sl Velikost tekstur
+
 @ Third person
 sl Tretjeosebno
 
@@ -1249,6 +1252,9 @@ sl brez
 
 @ normal
 sl normalno
+
+@ full size
+sl polna velikost
 
 @ off
 sl izklopljeno
@@ -2224,6 +2230,9 @@ sl Odklene stran Nastavitve učinkov: izboljšani delci, učinki udarcev in briz
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 sl Namesto klasičnih uporablja bolj gladke modele MD5 iz izdaje 2021 (in nadomestke MD3 iz modov). Velja ob naslednjem nalaganju zemljevida
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+sl Pomanjša velike teksture, da prihrani pomnilnik. Velja ob naslednjem nalaganju zemljevida
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 sl Uporablja barvno svetlobo zemljevida (datoteka .lit ali blok BSPX); izklopljeno da izvirno belo svetlobo. Velja ob naslednjem nalaganju zemljevida

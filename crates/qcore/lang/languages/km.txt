@@ -991,6 +991,9 @@ km លេង​ជា​ក្រុម
 @ Texture Filter
 km តម្រង​វាយនភាព
 
+@ Texture Size
+km ទំហំ​វាយនភាព
+
 @ Third person
 km មនុស្ស​ទី​បី
 
@@ -1249,6 +1252,9 @@ km គ្មាន
 
 @ normal
 km ធម្មតា
+
+@ full size
+km ទំហំ​ពេញ
 
 @ off
 km បិទ
@@ -2224,6 +2230,9 @@ km ដោះ​សោ​ទំព័រ ការ​កំណត់​ឥទ្�
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 km ប្រើ​ម៉ូដែល MD5 រលូន​ជាង​របស់​កំណែ​ចេញ​ឡើង​វិញ​ឆ្នាំ 2021 (និង​ម៉ូដែល​ជំនួស MD3 ពី mod) ជំនួស​ឱ្យ​ម៉ូដែល​បុរាណ។ មាន​ប្រសិទ្ធភាព​នៅ​ពេល​ផ្ទុក​ផែនទី​បន្ទាប់
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+km បង្រួម​វាយនភាព​ធំៗ​ដើម្បី​សន្សំ​អង្គចងចាំ។ មាន​ប្រសិទ្ធភាព​នៅ​ពេល​ផ្ទុក​ផែនទី​បន្ទាប់
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 km ប្រើ​ពន្លឺ​ពណ៌​របស់​ផែនទី (ឯកសារ .lit ឬ BSPX lump); បិទ​ផ្ដល់​ពន្លឺ​ស​ដើម។ មាន​ប្រសិទ្ធភាព​នៅ​ពេល​ផ្ទុក​ផែនទី​បន្ទាប់

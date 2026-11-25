@@ -119,6 +119,10 @@ pub(super) const HOST_CVARS: &[(&str, &str, u32)] = &[
     ("r_renderscale", "1", CVAR_ARCHIVE),
     ("r_texfilter", "0", CVAR_ARCHIVE),
     ("r_anisotropy", "16", CVAR_ARCHIVE),
+    // Larger sides of textures shrink to this (0 = no limit). gl_max_size is
+    // the references' name; map configs set it, so the menu has its own.
+    ("r_texturesize", "0", CVAR_ARCHIVE),
+    ("gl_max_size", "0", 0),
     ("gl_lodbias", "auto", CVAR_ARCHIVE),
     ("vid_fsaamode", "0", CVAR_ARCHIVE),
     ("r_dither", "1", CVAR_ARCHIVE),

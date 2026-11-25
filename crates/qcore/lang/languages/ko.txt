@@ -991,6 +991,9 @@ ko 팀플레이
 @ Texture Filter
 ko 텍스처 필터
 
+@ Texture Size
+ko 텍스처 크기
+
 @ Third person
 ko 3인칭
 
@@ -1249,6 +1252,9 @@ ko 없음
 
 @ normal
 ko 보통
+
+@ full size
+ko 전체 크기
 
 @ off
 ko 끔
@@ -2224,6 +2230,9 @@ ko 효과 설정 페이지를 엽니다: 향상된 파티클, 타격 효과, 피
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 ko 클래식 모델 대신 2021 리마스터의 더 매끄러운 MD5 모델(및 모드의 MD3 대체 모델)을 씁니다. 다음 맵을 불러올 때 적용됩니다
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+ko 큰 텍스처를 줄여 메모리를 절약합니다. 다음 맵을 불러올 때 적용됩니다
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ko 맵의 컬러 조명(.lit 파일 또는 BSPX 럼프)을 씁니다. 끄면 원작의 흰 조명이 됩니다. 다음 맵을 불러올 때 적용됩니다
