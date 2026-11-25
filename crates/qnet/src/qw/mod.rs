@@ -155,7 +155,7 @@ pub fn map_checksum2(bsp: &[u8]) -> Option<u32> {
         }
         let ofs = rd(4 + i * 8)? as usize;
         let len = rd(8 + i * 8)? as usize;
-        sum ^= block_checksum(bsp.get(ofs..ofs + len)?);
+        sum ^= block_checksum(bsp.get(ofs..ofs.checked_add(len)?)?);
     }
     Some(sum)
 }

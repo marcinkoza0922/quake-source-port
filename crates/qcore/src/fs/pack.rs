@@ -35,6 +35,9 @@ impl Pack {
         if ofs < 0 || len < 0 || len % 64 != 0 {
             return None;
         }
+        if len as u64 > f.seek(SeekFrom::End(0)).ok()? {
+            return None;
+        }
         let mut dir = vec![0u8; len as usize];
         f.seek(SeekFrom::Start(ofs as u64)).ok()?;
         f.read_exact(&mut dir).ok()?;
@@ -64,6 +67,9 @@ impl Pack {
         let count = r.u16().ok()? as usize;
         let cd_size = r.u32().ok()? as usize;
         let cd_ofs = r.u32().ok()? as u64;
+        if cd_size as u64 > flen {
+            return None;
+        }
         let mut cd = vec![0u8; cd_size];
         f.seek(SeekFrom::Start(cd_ofs)).ok()?;
         f.read_exact(&mut cd).ok()?;
@@ -146,6 +152,9 @@ impl Pack {
             let n = u16::from_le_bytes([lh[26], lh[27]]) as u64;
             let x = u16::from_le_bytes([lh[28], lh[29]]) as u64;
             offset += 30 + n + x;
+        }
+        if u64::from(e.csize) > f.seek(SeekFrom::End(0)).ok()? {
+            return None;
         }
         let mut raw = vec![0u8; e.csize as usize];
         f.seek(SeekFrom::Start(offset)).ok()?;
@@ -232,6 +241,24 @@ mod tests {
         std::fs::write(&p, zip64_entry("gfx/poster.png", b"hello zip64")).unwrap();
         let pack = Pack::load_pk3(&p).expect("zip64 central directory");
         assert_eq!(pack.read("gfx/poster.png").as_deref(), Some(&b"hello zip64"[..]));
+        let _ = std::fs::remove_file(p);
+    }
+
+    /// Found by tools/fuzz: sizes past the end of the file were allocated
+    /// before the read failed.
+    #[test]
+    fn rejects_directories_larger_than_the_file() {
+        let p = std::env::temp_dir().join(format!("qcore-bigdir-{}.zip", std::process::id()));
+        let mut zip = zip64_entry("a", b"x");
+        let n = zip.len();
+        zip[n - 10..n - 6].copy_from_slice(&u32::MAX.to_le_bytes());
+        std::fs::write(&p, zip).unwrap();
+        assert!(Pack::load_pk3(&p).is_none());
+        let mut pak = b"PACK".to_vec();
+        pak.extend(12i32.to_le_bytes());
+        pak.extend((i32::MAX / 64 * 64).to_le_bytes());
+        std::fs::write(&p, pak).unwrap();
+        assert!(Pack::load_pak(&p).is_none());
         let _ = std::fs::remove_file(p);
     }
 }

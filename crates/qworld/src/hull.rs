@@ -66,7 +66,8 @@ impl CollisionModel {
             .iter()
             .map(|p| HPlane { normal: p.normal.into(), dist: p.dist, kind: p.kind })
             .collect();
-        let leaf_c = |c: i32| b.leafs.get((-(c + 1)) as usize).map_or(CONTENTS_SOLID, |l| l.contents);
+        // contents >= 0 in a bad file would read as a node number, maybe its own
+        let leaf_c = |c: i32| b.leafs.get((-(c + 1)) as usize).map_or(CONTENTS_SOLID, |l| if l.contents < 0 { l.contents } else { CONTENTS_SOLID });
         let hull0 = b
             .nodes
             .iter()
@@ -137,7 +138,8 @@ impl CollisionModel {
             return;
         }
         let Some(ch) = self.node_children.get(num as usize) else { return };
-        let sides = box_on_plane_side(mins, maxs, &self.planes[self.hull0[num as usize].plane as usize]);
+        let Some(plane) = self.planes.get(self.hull0[num as usize].plane as usize) else { return };
+        let sides = box_on_plane_side(mins, maxs, plane);
         if sides & 1 != 0 {
             self.leafs_r(ch[0], mins, maxs, out, max);
         }
@@ -161,7 +163,8 @@ impl CollisionModel {
             return pvs.get(l >> 3).is_some_and(|b| b & (1 << (l & 7)) != 0);
         }
         let Some(ch) = self.node_children.get(num as usize) else { return false };
-        let sides = box_on_plane_side(mins, maxs, &self.planes[self.hull0[num as usize].plane as usize]);
+        let Some(plane) = self.planes.get(self.hull0[num as usize].plane as usize) else { return false };
+        let sides = box_on_plane_side(mins, maxs, plane);
         (sides & 1 != 0 && self.pvs_r(ch[0], mins, maxs, pvs))
             || (sides & 2 != 0 && self.pvs_r(ch[1], mins, maxs, pvs))
     }
@@ -310,7 +313,8 @@ impl<'a> Hull<'a> {
         }
         while self.point_contents(self.first, mid) == CONTENTS_SOLID {
             frac -= 0.1;
-            if frac < 0.0 {
+            // a NaN move (NaN view angles) must end here too; C loops forever
+            if frac < 0.0 || frac.is_nan() {
                 tr.fraction = midf;
                 tr.endpos = mid;
                 return false;

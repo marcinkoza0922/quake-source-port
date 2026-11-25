@@ -7,7 +7,7 @@ default-run = "quake-source-port"
 
 [workspace]
 members = ["crates/*", "tools/*"]
-exclude = ["tools/webbuild"]
+exclude = ["tools/webbuild", "tools/fuzz"]
 default-members = [".", "crates/*", "tools/*"]
 
 [workspace.package]

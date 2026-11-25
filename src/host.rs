@@ -28,6 +28,7 @@ mod compat_cmds;
 mod quaddicted_cli;
 mod ref_cmds;
 mod bugreport;
+mod foreign_cvars;
 mod global_cfg;
 use commands::*;
 mod net;
@@ -318,7 +319,7 @@ pub struct Host {
 impl Host {
     pub fn new(fs: qcore::fs::Fs, mut r: Renderer, snd: Option<SoundSystem>, cmdline: Vec<String>) -> Self {
         let mut cvars = Cvars::new();
-        for &(n, d, f) in HOST_CVARS.iter().chain(COMPAT_CVARS).chain(goggles::CVARS) {
+        for &(n, d, f) in HOST_CVARS.iter().chain(COMPAT_CVARS).chain(foreign_cvars::FOREIGN_CVARS).chain(goggles::CVARS) {
             cvars.register(n, d, f);
         }
         global_cfg::load(&mut cvars);

@@ -36,7 +36,7 @@ fn base_name(s: &str) -> String {
         // a trailing version: [_.-]v?digits[.digits...][letter] or _r<n>
         if let Some(i) = s.rfind(['_', '.', '-']) {
             let tail = s[i + 1..].trim_start_matches('v').trim_start_matches('r');
-            if !tail.is_empty() && tail.chars().next().is_some_and(|c| c.is_ascii_digit()) && tail.chars().all(|c| c.is_ascii_digit() || c == '.' || c == '-' || c.is_ascii_lowercase() && c != 'v') && tail.len() <= 8 && i > 0 {
+            if !tail.is_empty() && tail.chars().next().is_some_and(|c| c.is_ascii_digit()) && tail.chars().all(|c| c.is_ascii_digit() || c == '.' || c == '-' || c.is_ascii_lowercase() && c != 'v') && tail.len() <= 9 && i > 0 {
                 s.truncate(i);
             }
         }
@@ -178,7 +178,7 @@ mod tests {
     fn version_suffixes_are_dropped() {
         for (a, b) in [("qbj_1.05", "qbj"), ("sewerjam2_v1.2.1", "sewerjam2"), ("two_tone_jam.v2", "two_tone_jam"), ("tcj_r3", "tcj"),
             ("dtintin_fixed", "dtintin"), ("func_xmasjam2017_v2", "func_xmasjam2017"), ("mc_retrojam2.1", "mc_retrojam2"),
-            ("sm224_1-0-3", "sm224"), ("func_mapjam3", "func_mapjam3"), ("xmasjam2018", "xmasjam2018"), ("hwjam2", "hwjam2")]
+            ("sm224_1-0-3", "sm224"), ("ad_v1_80p1final", "ad"), ("ad_v1_70final", "ad"), ("ad_v1_70patch1", "ad"), ("func_mapjam3", "func_mapjam3"), ("xmasjam2018", "xmasjam2018"), ("hwjam2", "hwjam2")]
         {
             assert_eq!(base_name(a), b, "{a}");
         }

@@ -1,0 +1,98 @@
+[package]
+name = "qfuzz"
+version = "0.0.0"
+edition = "2024"
+publish = false
+license = "GPL-2.0-or-later"
+
+[package.metadata]
+cargo-fuzz = true
+
+# Nightly-only (libFuzzer): its own workspace, outside the main one.
+[workspace]
+
+[dependencies]
+libfuzzer-sys = "0.4"
+qcore = { path = "../../crates/qcore" }
+qformats = { path = "../../crates/qformats" }
+qclient = { path = "../../crates/qclient" }
+qserver = { path = "../../crates/qserver" }
+qworld = { path = "../../crates/qworld" }
+qvm = { path = "../../crates/qvm" }
+qnet = { path = "../../crates/qnet" }
+qpart = { path = "../../crates/qpart" }
+qsound = { path = "../../crates/qsound" }
+qui = { path = "../../crates/qui" }
+
+[profile.release]
+debug = 1
+
+[[bin]]
+name = "bsp"
+path = "fuzz_targets/bsp.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "formats"
+path = "fuzz_targets/formats.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "progs"
+path = "fuzz_targets/progs.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "packs"
+path = "fuzz_targets/packs.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "nq_client"
+path = "fuzz_targets/nq_client.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "qw_client"
+path = "fuzz_targets/qw_client.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "netchan"
+path = "fuzz_targets/netchan.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "text"
+path = "fuzz_targets/text.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "server"
+path = "fuzz_targets/server.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "savegame"
+path = "fuzz_targets/savegame.rs"
+test = false
+doc = false
+bench = false

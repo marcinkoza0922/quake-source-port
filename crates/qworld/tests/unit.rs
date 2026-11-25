@@ -90,3 +90,38 @@ fn clip_velocity_floor() {
     let (v, b) = phys::clip_velocity(Vec3::new(100.0, 0.0, -100.0), Vec3::new(0.0, 0.0, 1.0), 1.0);
     assert_eq!((v, b), (Vec3::new(100.0, 0.0, 0.0), 1));
 }
+
+/// Found by tools/fuzz: leaf contents >= 0 read as a node number, so a node
+/// could be its own child (stack overflow, endless `point_contents`).
+#[test]
+fn leaf_contents_are_not_node_numbers() {
+    use qformats::bsp::{Bsp, Leaf, Node, Plane};
+    let leaf = Leaf { contents: 0, visofs: -1, mins: [0.0; 3], maxs: [0.0; 3], first_marksurface: 0, num_marksurfaces: 0, ambient_level: [0; 4] };
+    let cm = CollisionModel::from_bsp(&Bsp {
+        planes: vec![Plane { normal: [0.0, 0.0, 1.0], dist: 0.0, kind: 2 }],
+        nodes: vec![Node { plane: 0, children: [-1, -1], mins: [0.0; 3], maxs: [0.0; 3], first_face: 0, num_faces: 0 }],
+        leafs: vec![leaf],
+        ..Default::default()
+    });
+    assert_eq!(cm.hull0[0].children, [CONTENTS_SOLID; 2]);
+}
+
+/// Found by tools/fuzz: a NaN end point (NaN view angles into `aim`) backed
+/// off from the impact forever.
+#[test]
+fn nan_trace_ends() {
+    let cm = CollisionModel {
+        planes: vec![
+            hull::HPlane { normal: Vec3::new(0.0, 0.0, 1.0), dist: 0.0, kind: 2 },
+            hull::HPlane { normal: Vec3::new(1.0, 0.0, 0.0), dist: 0.0, kind: 0 },
+        ],
+        hull0: vec![
+            hull::CNode { plane: 0, children: [1, CONTENTS_SOLID] },
+            hull::CNode { plane: 1, children: [CONTENTS_SOLID, CONTENTS_EMPTY] },
+        ],
+        submodels: vec![SubModel { mins: Vec3::ZERO, maxs: Vec3::ZERO, origin: Vec3::ZERO, headnode: [0; 4] }],
+        ..Default::default()
+    };
+    let t = cm.hull(0, 0).trace(Vec3::new(-10.0, 0.0, 50.0), Vec3::splat(f32::NAN));
+    assert!(!t.allsolid);
+}
