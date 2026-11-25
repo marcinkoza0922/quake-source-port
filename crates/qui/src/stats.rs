@@ -158,10 +158,13 @@ impl Stats {
     }
 
     pub fn parse(text: &str) -> Stats {
+        Self::try_parse(text).unwrap_or_default()
+    }
+
+    /// `None` when `text` isn't a stats file.
+    fn try_parse(text: &str) -> Option<Stats> {
         let mut out = Stats::default();
-        let Some(maps) = json::parse(text).and_then(|v| v.get("maps").and_then(|m| m.as_obj().map(<[_]>::to_vec))) else {
-            return out;
-        };
+        let maps = json::parse(text)?.get("maps").and_then(|m| m.as_obj().map(<[_]>::to_vec))?;
         for (name, v) in maps {
             let n = |k: &str| v.get(k).and_then(Value::num).unwrap_or(0.0);
             let times = |k: &str| {
@@ -191,7 +194,7 @@ impl Stats {
         }
         out.maps.sort_by(|a, b| a.0.cmp(&b.0));
         out.maps.dedup_by(|a, b| a.0 == b.0);
-        out
+        Some(out)
     }
 
     pub fn to_json(&self) -> String {
@@ -228,6 +231,27 @@ impl Stats {
         qcore::vfs::read_to_string(&dir.join(FILE_NAME)).map(|t| Stats::parse(&t)).unwrap_or_default()
     }
 
+    /// [`Self::load`] to add to and save again: an unreadable file is an error,
+    /// and one that isn't a stats file any more is moved aside (its new name is
+    /// returned), so that saving loses neither.
+    pub fn load_to_update(dir: &Path) -> std::io::Result<(Stats, Option<String>)> {
+        let path = dir.join(FILE_NAME);
+        let bytes = match qcore::vfs::read(&path) {
+            Ok(b) => b,
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => return Ok(Default::default()),
+            Err(e) => return Err(e),
+        };
+        if let Some(s) = Self::try_parse(&String::from_utf8_lossy(&bytes)) {
+            return Ok((s, None));
+        }
+        let name = (1..)
+            .map(|i| if i == 1 { format!("{FILE_NAME}.bad") } else { format!("{FILE_NAME}.bad{i}") })
+            .find(|n| !qcore::vfs::exists(&dir.join(n)))
+            .unwrap_or_default();
+        qcore::vfs::rename(&path, &dir.join(&name))?;
+        Ok((Stats::default(), Some(name)))
+    }
+
     /// Writes via a temp file + rename so a crash never truncates it.
     pub fn save(&self, dir: &Path) -> std::io::Result<()> {
         qcore::vfs::create_dir_all(dir)?;
@@ -255,6 +279,28 @@ mod tests {
         assert_eq!(back, s);
         assert_eq!(back.maps[0].0, "e1m1");
         assert_eq!(Stats::parse("garbage"), Stats::default());
+    }
+
+    #[test]
+    fn a_damaged_file_is_kept() {
+        let dir = std::env::temp_dir().join(format!("qsp-stats-bad-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        assert_eq!(Stats::load_to_update(&dir).unwrap(), (Stats::default(), None));
+        for (text, name) in [(r#"{"maps":{"e1m1":{},}}"#, "qsp_stats.json.bad"), ("", "qsp_stats.json.bad2")] {
+            std::fs::write(dir.join(FILE_NAME), text).unwrap();
+            let (mut s, moved) = Stats::load_to_update(&dir).unwrap();
+            assert_eq!(moved.as_deref(), Some(name));
+            s.record("e1m2", MapStats { best_time: 9.0, ..Default::default() });
+            s.save(&dir).unwrap();
+            assert_eq!(std::fs::read_to_string(dir.join(name)).unwrap(), text);
+            assert_eq!(Stats::load_to_update(&dir).unwrap(), (s, None));
+        }
+        // unreadable: not replaced
+        std::fs::remove_file(dir.join(FILE_NAME)).unwrap();
+        std::fs::create_dir(dir.join(FILE_NAME)).unwrap();
+        assert!(Stats::load_to_update(&dir).is_err());
+        let _ = std::fs::remove_dir_all(&dir);
     }
 
     #[test]

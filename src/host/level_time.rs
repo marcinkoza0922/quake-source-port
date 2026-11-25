@@ -106,7 +106,17 @@ impl Host {
             }
         }
         let dir = self.user_dir();
-        let mut stats = Stats::load(&dir);
+        let mut stats = match Stats::load_to_update(&dir) {
+            Ok((s, None)) => s,
+            Ok((s, Some(moved))) => {
+                self.con.print(&format!("{} is damaged; it was kept as {moved}\n", qui::stats::FILE_NAME));
+                s
+            }
+            Err(e) => {
+                self.con.print(&format!("couldn't read {}: {e}\n", qui::stats::FILE_NAME));
+                return;
+            }
+        };
         let old = stats.get(&self.level.mapname).copied().unwrap_or_default();
         stats.record(&self.level.mapname, run);
         if let Err(e) = stats.save(&dir) {

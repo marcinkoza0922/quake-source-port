@@ -193,9 +193,12 @@ pub struct Layout {
     pub elems: Vec<Elem>,
 }
 
+/// Most elements of a layout: placing them takes far longer than linear time.
+pub const MAX_ELEMS: usize = 128;
+
 impl Layout {
     pub fn parse(s: &str) -> Self {
-        let mut l = Layout { elems: s.split_whitespace().filter_map(Elem::parse).collect() };
+        let mut l = Layout { elems: s.split_whitespace().filter_map(Elem::parse).take(MAX_ELEMS).collect() };
         l.ensure_permanent();
         l
     }
@@ -376,6 +379,12 @@ mod tests {
         assert_eq!(back.elems.last().unwrap().a, 3);
         // fonts the kind can't use are refused
         assert_eq!(Layout::parse("face@tl,fm").elems[0].font, Elem::new(Kind::Face, Anchor::TopLeft).font);
+    }
+
+    #[test]
+    fn a_layout_has_so_many_elements() {
+        let l = Layout::parse(&"fps@tl ".repeat(5000));
+        assert_eq!(l.elems.iter().filter(|e| e.kind == Kind::from_id("fps").unwrap()).count(), MAX_ELEMS);
     }
 
     #[test]

@@ -184,8 +184,8 @@ pub fn strip_ansi(text: &str) -> String {
     out
 }
 
-/// Parse a chunk of text (with optional Quake bronze `\x01`/`\x02` or ANSI SGR)
-/// into wrapped [`StyledCell`] lines.
+/// Parse a chunk of text (with optional Quake bronze `\x01`/`\x02` and, with
+/// `ansi`, SGR) into wrapped [`StyledCell`] lines. In game text ESC is a glyph.
 pub fn append_styled(
     text: &str,
     cur: &mut Vec<StyledCell>,
@@ -193,6 +193,7 @@ pub fn append_styled(
     style: &mut CellStyle,
     width: usize,
     max_lines: usize,
+    ansi: bool,
 ) {
     let width = width.max(10);
     let mut s = text;
@@ -210,7 +211,7 @@ pub fn append_styled(
     let s = view.as_deref().unwrap_or(s);
     let mut chars = s.chars().peekable();
     while let Some(c) = chars.next() {
-        if c == '\x1b' {
+        if ansi && c == '\x1b' {
             match chars.peek().copied() {
                 Some('[') => {
                     chars.next();

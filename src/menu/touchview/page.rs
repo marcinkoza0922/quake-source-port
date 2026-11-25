@@ -54,7 +54,7 @@ impl Menu {
                         out.push(Action::Sound("misc/menu3.wav"));
                     }
                 } else if kind == Kind::Slider && inside(Self::tv_track(ctrl), pos) {
-                    self.slider_drag = Some(i);
+                    self.slider_drag = Some((p, i));
                     self.tv_set_slider(p, i, pos.0, cv);
                     out.push(Action::Sound("misc/menu3.wav"));
                 }

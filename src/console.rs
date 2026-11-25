@@ -100,22 +100,36 @@ impl Console {
         }
     }
 
-    /// Con_Print: appends text, wrapping at `width`.
+    /// Con_Print: appends game text, wrapping at `width`.
     pub fn print(&mut self, text: &str) {
+        self.print_text(text, false);
+    }
+
+    /// [`Self::print`] of the shell's output or the engine's own coloured
+    /// text, whose escape sequences are followed.
+    pub fn print_ansi(&mut self, text: &str) {
+        self.print_text(text, true);
+    }
+
+    fn print_text(&mut self, text: &str, with_ansi: bool) {
+        use std::io::Write;
+        let plain = if with_ansi { ansi::strip_ansi(text).into() } else { std::borrow::Cow::Borrowed(text) };
         if let Some(cap) = &mut self.capture {
-            cap.push_str(&ansi::strip_ansi(text));
+            cap.push_str(&plain);
             return;
         }
+        let mut game_style = ansi::CellStyle::default();
         ansi::append_styled(
             text,
             &mut self.modern_cur,
             &mut self.modern_lines,
-            &mut self.style,
+            if with_ansi { &mut self.style } else { &mut game_style },
             self.width,
             MAX_LINES,
+            with_ansi,
         );
-        let plain = ansi::strip_ansi(text);
-        eprint!("{}", plain.replace(|c: char| (c as u32) < 32 && c != '\n', ""));
+        // (the terminal may be gone; conchars' high codes aren't for it either)
+        let _ = write!(std::io::stderr(), "{}", plain.replace(|c: char| c.is_control() && c != '\n', ""));
         let mut bytes: Vec<u8> = plain.chars().map(|c| if (c as u32) < 256 { c as u32 as u8 } else { b'?' }).collect();
         // \x01 / \x02: coloured line (Con_Print mask)
         let mut mask = 0u8;
@@ -183,7 +197,7 @@ impl Console {
             K_TAB => self.complete(complete),
             K_BACKSPACE => {
                 if self.cursor > 0 {
-                    self.cursor -= 1;
+                    self.cursor = self.prev_char();
                     self.input.remove(self.cursor);
                 }
             }
@@ -192,8 +206,8 @@ impl Console {
                     self.input.remove(self.cursor);
                 }
             }
-            K_LEFTARROW => self.cursor = self.cursor.saturating_sub(1),
-            K_RIGHTARROW => self.cursor = (self.cursor + 1).min(self.input.len()),
+            K_LEFTARROW => self.cursor = self.prev_char(),
+            K_RIGHTARROW => self.cursor += self.input[self.cursor..].chars().next().map_or(0, char::len_utf8),
             K_HOME => self.cursor = 0,
             K_END => self.cursor = self.input.len(),
             K_UPARROW => {
@@ -215,6 +229,11 @@ impl Console {
             _ => {}
         }
         None
+    }
+
+    /// Where the character before the cursor starts.
+    fn prev_char(&self) -> usize {
+        self.input[..self.cursor].char_indices().next_back().map_or(0, |(i, _)| i)
     }
 
     pub fn text(&mut self, ch: char) {
@@ -293,7 +312,7 @@ impl Console {
             let mut p = m[0].clone();
             for s in &m[1..] {
                 let n = p.bytes().zip(s.bytes()).take_while(|(a, b)| a.eq_ignore_ascii_case(b)).count();
-                p.truncate(n);
+                p.truncate(p.floor_char_boundary(n));
             }
             p
         };

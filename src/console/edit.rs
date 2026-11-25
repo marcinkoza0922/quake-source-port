@@ -217,7 +217,7 @@ impl Console {
                 self.selection.active = false;
                 let line = std::mem::take(&mut self.input);
                 self.cursor = 0;
-                self.print(&format!("\x1b[1;33m]\x1b[0m{line}\n"));
+                self.print_ansi(&format!("\x1b[1;33m]\x1b[0m{line}\n"));
                 if !line.trim().is_empty() && self.history.last() != Some(&line) {
                     self.history.push(line.clone());
                 }
@@ -390,7 +390,7 @@ impl Console {
                 self.search.active = false;
                 let line = std::mem::take(&mut self.input);
                 self.cursor = 0;
-                self.print(&format!("\x1b[1;33m]\x1b[0m{line}\n"));
+                self.print_ansi(&format!("\x1b[1;33m]\x1b[0m{line}\n"));
                 if !line.trim().is_empty() && self.history.last() != Some(&line) {
                     self.history.push(line.clone());
                 }

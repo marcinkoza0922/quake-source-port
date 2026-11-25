@@ -48,7 +48,7 @@ impl Host {
             return;
         }
         if let Err(e) = qcore::vfs::write_atomic(&path, s.as_bytes()) {
-            eprintln!("couldn't write global.cfg: {e}");
+            qcore::warnln!("couldn't write global.cfg: {e}");
         }
     }
 }

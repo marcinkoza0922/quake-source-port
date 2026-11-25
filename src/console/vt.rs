@@ -4,6 +4,10 @@ use std::collections::VecDeque;
 
 use super::ansi::{CellStyle, StyledCell, parse_csi_params};
 
+const SCROLLBACK: usize = 2048;
+/// Longest escape sequence waited for.
+const MAX_ESCAPE: usize = 4096;
+
 pub struct VtGrid {
     pub cols: usize,
     pub rows: usize,
@@ -59,34 +63,62 @@ impl VtGrid {
         if cols == self.cols && rows == self.rows {
             return;
         }
-        for row in &mut self.cells {
-            row.resize(cols, StyledCell::default());
-        }
-        self.cells.resize_with(rows, || vec![StyledCell::default(); cols]);
-        if let Some(alt) = &mut self.alt_cells {
-            for row in alt.iter_mut() {
-                row.resize(cols, StyledCell::default());
+        // the rows that don't fit any more go off the top, so that the cursor's
+        // row (the prompt) stays
+        let gone = (self.cursor_row + 1).saturating_sub(rows);
+        let off: Vec<_> = self.cells.drain(..gone).collect();
+        self.cursor_row -= gone;
+        self.saved_cursor.0 = self.saved_cursor.0.saturating_sub(gone);
+        fit(&mut self.cells, cols, rows);
+        match &mut self.alt_cells {
+            None => self.push_scrollback(off),
+            // the screen under a full-screen program
+            Some(main) => {
+                let gone = (self.alt_saved_cursor.0 + 1).saturating_sub(rows);
+                let off: Vec<_> = main.drain(..gone).collect();
+                self.alt_saved_cursor.0 -= gone;
+                fit(main, cols, rows);
+                self.push_scrollback(off);
             }
-            alt.resize_with(rows, || vec![StyledCell::default(); cols]);
         }
         self.cols = cols;
         self.rows = rows;
         self.scroll_top = 0;
         self.scroll_bot = rows - 1;
-        self.cursor_row = self.cursor_row.min(rows - 1);
-        self.cursor_col = self.cursor_col.min(cols - 1);
+        for c in [&mut self.saved_cursor, &mut self.alt_saved_cursor] {
+            *c = (c.0.min(rows - 1), c.1.min(cols - 1));
+        }
+        self.move_to((self.cursor_row, self.cursor_col));
+    }
+
+    fn push_scrollback(&mut self, rows: Vec<Vec<StyledCell>>) {
+        self.scrollback.extend(rows);
+        while self.scrollback.len() > SCROLLBACK {
+            self.scrollback.pop_front();
+        }
+    }
+
+    fn move_to(&mut self, (row, col): (usize, usize)) {
+        self.cursor_row = row.min(self.rows - 1);
+        self.cursor_col = col.min(self.cols - 1);
     }
 
     pub fn feed(&mut self, bytes: &[u8]) {
         let mut buf = std::mem::take(&mut self.partial_esc);
         buf.extend_from_slice(bytes);
-        let s = String::from_utf8_lossy(&buf);
-        let mut chars = s.chars().peekable();
+        let tail = partial_char(&buf);
+        let s = String::from_utf8_lossy(&buf[..buf.len() - tail]);
+        self.partial_esc = buf[buf.len() - tail..].to_vec();
+        let mut chars = s.chars();
         while let Some(c) = chars.next() {
             if c == '\x1b' {
-                let rem: String = std::iter::once(c).chain(chars.clone()).collect();
-                if !is_complete_escape(&rem) {
-                    self.partial_esc = rem.into_bytes();
+                if !is_complete_escape(chars.as_str()) {
+                    // one that never ends isn't kept for ever
+                    if chars.as_str().len() < MAX_ESCAPE {
+                        let mut rest = format!("\x1b{}", chars.as_str()).into_bytes();
+                        rest.append(&mut self.partial_esc);
+                        self.partial_esc = rest;
+                    }
                     return;
                 }
                 match chars.next() {
@@ -108,7 +140,7 @@ impl VtGrid {
                             if ch == '\x07' {
                                 break;
                             }
-                            if ch == '\x1b' && chars.peek() == Some(&'\\') {
+                            if ch == '\x1b' && chars.as_str().starts_with('\\') {
                                 chars.next();
                                 break;
                             }
@@ -119,7 +151,7 @@ impl VtGrid {
                         }
                     }
                     Some('7') => self.saved_cursor = (self.cursor_row, self.cursor_col),
-                    Some('8') => (self.cursor_row, self.cursor_col) = self.saved_cursor,
+                    Some('8') => self.move_to(self.saved_cursor),
                     Some('M') => self.reverse_index(),
                     Some('c') => *self = Self::new(self.cols, self.rows),
                     _ => {}
@@ -172,10 +204,7 @@ impl VtGrid {
         for _ in 0..count {
             let removed = self.cells.remove(top);
             if top == 0 && self.alt_cells.is_none() {
-                self.scrollback.push_back(removed);
-                while self.scrollback.len() > 2048 {
-                    self.scrollback.pop_front();
-                }
+                self.push_scrollback(vec![removed]);
             }
             self.cells.insert(bot, vec![StyledCell::default(); self.cols]);
         }
@@ -196,6 +225,8 @@ impl VtGrid {
         let p0 = params.first().copied().unwrap_or(0) as usize;
         let p1 = params.get(1).copied().unwrap_or(0) as usize;
         let n1 = p0.max(1);
+        // lines inserted, deleted or scrolled: more than the screen has is all
+        let lines = n1.min(self.rows);
         match final_ch {
             'm' => self.style.apply_sgr(&params),
             'A' => self.cursor_row = self.cursor_row.saturating_sub(n1),
@@ -263,7 +294,7 @@ impl VtGrid {
                 }
             }
             'L' => {
-                for _ in 0..n1 {
+                for _ in 0..lines {
                     if self.cursor_row <= self.scroll_bot {
                         self.cells.remove(self.scroll_bot);
                         self.cells.insert(self.cursor_row, vec![StyledCell::default(); self.cols]);
@@ -271,7 +302,7 @@ impl VtGrid {
                 }
             }
             'M' => {
-                for _ in 0..n1 {
+                for _ in 0..lines {
                     if self.cursor_row <= self.scroll_bot {
                         self.cells.remove(self.cursor_row);
                         self.cells.insert(self.scroll_bot, vec![StyledCell::default(); self.cols]);
@@ -301,8 +332,8 @@ impl VtGrid {
                     *cell = StyledCell::default();
                 }
             }
-            'S' => self.scroll_up(n1),
-            'T' => self.scroll_down(n1),
+            'S' => self.scroll_up(lines),
+            'T' => self.scroll_down(lines),
             'r' => {
                 let top = p0.max(1).saturating_sub(1);
                 let bot = if p1 == 0 { self.rows - 1 } else { p1.saturating_sub(1).min(self.rows - 1) };
@@ -314,7 +345,7 @@ impl VtGrid {
                 }
             }
             's' => self.saved_cursor = (self.cursor_row, self.cursor_col),
-            'u' => (self.cursor_row, self.cursor_col) = self.saved_cursor,
+            'u' => self.move_to(self.saved_cursor),
             'h' | 'l' if private => {
                 let set = final_ch == 'h';
                 for &p in &params {
@@ -334,7 +365,7 @@ impl VtGrid {
                             } else if !set && let Some(old) = self.alt_cells.take() {
                                 self.cells = old;
                                 self.resize(self.cols, self.rows);
-                                (self.cursor_row, self.cursor_col) = self.alt_saved_cursor;
+                                self.move_to(self.alt_saved_cursor);
                             }
                         }
                         2004 => self.bracketed_paste = set,
@@ -347,16 +378,35 @@ impl VtGrid {
     }
 }
 
+/// Whether the escape sequence whose ESC came before `s` ends in it.
 fn is_complete_escape(s: &str) -> bool {
     let mut chars = s.chars();
-    let Some('\x1b') = chars.next() else { return true };
     match chars.next() {
         None => false,
         Some('[') => chars.any(|c| ('@'..='~').contains(&c)),
         Some(']') => {
-            let rest: String = chars.collect();
+            let rest = chars.as_str();
             rest.contains('\x07') || rest.contains("\x1b\\")
         }
         Some(_) => true,
     }
+}
+
+/// Bytes of a character cut off at the end of `buf` (0 to 3).
+pub(super) fn partial_char(buf: &[u8]) -> usize {
+    let mut at = buf.len().saturating_sub(3);
+    loop {
+        match std::str::from_utf8(&buf[at..]) {
+            Ok(_) => return 0,
+            Err(e) if e.error_len().is_none() => return buf.len() - at - e.valid_up_to(),
+            Err(e) => at += e.valid_up_to() + e.error_len().unwrap_or(1),
+        }
+    }
+}
+
+fn fit(cells: &mut Vec<Vec<StyledCell>>, cols: usize, rows: usize) {
+    for row in cells.iter_mut() {
+        row.resize(cols, StyledCell::default());
+    }
+    cells.resize_with(rows, || vec![StyledCell::default(); cols]);
 }

@@ -265,7 +265,9 @@ impl Menu {
     /// Pointer motion while a finger is down (slider drags).
     pub(super) fn tv_mouse_move(&mut self, pos: (f32, f32), cv: &mut Cvars) -> Option<&'static str> {
         self.tv_sync();
-        if let (Some(i), Screen::OptionsPage(p)) = (self.slider_drag, self.screen) {
+        if let Some((p, i)) = self.slider_drag
+            && self.screen == Screen::OptionsPage(p)
+        {
             self.tv_set_slider(p, i, pos.0, cv);
         }
         None

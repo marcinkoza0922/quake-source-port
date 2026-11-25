@@ -16,3 +16,12 @@ pub mod vfs;
 
 pub use math::{Plane, Vec3};
 pub use reader::{ReadError, Reader};
+
+/// `eprintln!` that doesn't mind when nobody reads stderr any more.
+#[macro_export]
+macro_rules! warnln {
+    ($($arg:tt)*) => {{
+        use std::io::Write as _;
+        let _ = writeln!(std::io::stderr(), $($arg)*);
+    }};
+}

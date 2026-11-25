@@ -125,7 +125,7 @@ fn open_game(o: &Opts) -> Result<(Fs, PathBuf, [[u8; 3]; 256]), String> {
     // ironwail and vkQuake (`-game ad -game mymap` for an AD map pack).
     for g in o.vals("-game") {
         if !g.eq_ignore_ascii_case("id1") && !fs.game_dirs().iter().any(|d| d.eq_ignore_ascii_case(g)) && !fs.add_game_dir(g) {
-            eprintln!("game dir {g} not found");
+            qcore::warnln!("game dir {g} not found");
         }
     }
     // User config/saves live outside the game data and override it.
@@ -159,7 +159,7 @@ fn open_sound(p: &qplatform::Platform, basedir: &std::path::Path, fs: &Fs) -> So
             (Some(a), Some(sys), Some(shared))
         }
         Err(e) => {
-            eprintln!("audio: {e:?}");
+            qcore::warnln!("audio: {e:?}");
             (None, None, None)
         }
     }
@@ -195,12 +195,12 @@ fn run_native() -> i32 {
     let fixed_step = match o.fixed_step() {
         Ok(step) => step,
         Err(e) => {
-            eprintln!("{e}");
+            qcore::warnln!("{e}");
             return 2;
         }
     };
     if let Err((title, message)) = run_engine(&o, fixed_step) {
-        eprintln!("{title}: {message}");
+        qcore::warnln!("{title}: {message}");
         #[cfg(target_os = "android")]
         qplatform::android_log(&format!("{title}: {message}"));
         if !o.has("-headless") && !o.has("-dedicated") {
@@ -252,7 +252,7 @@ fn run_engine(o: &Opts, fixed_step: Option<f64>) -> Result<(), (&'static str, St
     };
     let renderer = renderer.map_err(|e| ("Quake graphics initialization failed", e.to_string()))?;
     if !dedicated {
-        eprintln!("renderer: {}", renderer.device_name());
+        qcore::warnln!("renderer: {}", renderer.device_name());
     }
     #[cfg(target_os = "android")]
     qplatform::android_log(&format!("renderer: {}", renderer.device_name()));

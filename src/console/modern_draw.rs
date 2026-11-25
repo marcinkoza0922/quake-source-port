@@ -85,8 +85,10 @@ impl Console {
         self.last_body_top = body_top;
         self.last_panel_h = panel_h;
 
+        // sized for the open console: sliding it doesn't resize the terminal
+        let open_rows = ((full - bottom_reserve - body_top).max(0.0) / ROW_H).floor().max(1.0) as usize;
         if let Some(pty) = &mut self.pty {
-            pty.resize(cols, rows);
+            pty.resize(cols, open_rows);
         }
 
         // Clip everything in the console panel

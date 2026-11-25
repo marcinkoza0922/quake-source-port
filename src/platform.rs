@@ -112,6 +112,7 @@ pub enum HostEvent {
     WillEnterBackground,
     DidEnterForeground,
     Back,
+    PointerUnlocked,
     /// Absolute cursor position in window points (menus).
     MousePos { x: f32, y: f32 },
     /// Button-label family of a newly connected gamepad (`qplatform::family`).
@@ -175,5 +176,6 @@ pub fn convert(e: Event) -> Vec<HostEvent> {
         Event::WillEnterBackground => vec![HostEvent::WillEnterBackground],
         Event::DidEnterForeground => vec![HostEvent::DidEnterForeground],
         Event::Back => vec![HostEvent::Back],
+        Event::PointerUnlocked => vec![HostEvent::PointerUnlocked],
     }
 }

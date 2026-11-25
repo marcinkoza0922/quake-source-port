@@ -44,6 +44,12 @@ impl Host {
                 }
                 self.sync_key_dest();
             }
+            HostEvent::PointerUnlocked => {
+                if self.key_dest() == KeyDest::Game {
+                    self.menu.open(Screen::Main);
+                    self.sync_key_dest();
+                }
+            }
             HostEvent::PadFamily(id, family) => {
                 let family = crate::glyphs::Family::from_platform(family);
                 self.pad_families.insert(id, family);

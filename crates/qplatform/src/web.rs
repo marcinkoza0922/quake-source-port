@@ -124,6 +124,7 @@ impl Platform {
         canvas.set_tab_index(0);
         let _ = canvas.focus();
         self.listeners.borrow_mut().extend(input::mouse_listeners(&canvas, &self.shared)?);
+        self.listeners.borrow_mut().push(input::lock_listener(&self.shared)?);
         self.listeners.borrow_mut().extend(touch::touch_listeners(&canvas, &self.shared)?);
         *self.shared.canvas.borrow_mut() = Some(canvas.clone());
         let win = Window { canvas, shared: self.shared.clone() };
