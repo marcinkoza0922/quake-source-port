@@ -2913,12 +2913,6 @@ et Lülita
 @ Details
 et Üksikasjad
 
-@ Enter or click the box: toggle
-et Enter või klõps kastil: lülita
-
-@ Right / Tab / click: details
-et Paremale / Tab / klõps: üksikasjad
-
 @ Input Remapping
 et Sisendi ümbermääramine
 
@@ -4258,3 +4252,18 @@ et Täisautomaatne relv, mida laetakse sinu naeltega. Alt-tuli sihib läbi punat
 
 @ None
 et Puudub
+
+@ Magazine
+et Salv
+
+@ Adjust HUD
+et Kohanda HUD-i
+
+@ {} overlaps {}. Move it with Adjust HUD.
+et {} katab: {}. Liiguta: Kohanda HUD-i.
+
+@ Arranges the HUD for this add-on and the others that are on
+et Paigutab HUD-i selle lisa ja teiste sisselülitatute jaoks
+
+@ Shared by the add-ons that use it; shown only while one does
+et Ühine seda kasutavatele lisadele; nähtav ainult siis, kui mõni seda kasutab

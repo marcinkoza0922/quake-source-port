@@ -2913,12 +2913,6 @@ ko 전환
 @ Details
 ko 세부 정보
 
-@ Enter or click the box: toggle
-ko Enter 또는 상자 클릭: 켜기/끄기
-
-@ Right / Tab / click: details
-ko 오른쪽 / Tab / 클릭: 세부 정보
-
 @ Input Remapping
 ko 입력 재지정
 
@@ -4258,3 +4252,18 @@ ko 가진 못으로 재장전하는 전자동 소총입니다. 보조 사격으�
 
 @ None
 ko 없음
+
+@ Magazine
+ko 탄창
+
+@ Adjust HUD
+ko HUD 조정
+
+@ {} overlaps {}. Move it with Adjust HUD.
+ko {} 및 {} 겹침. HUD 조정에서 옮기세요.
+
+@ Arranges the HUD for this add-on and the others that are on
+ko 이 애드온과 켜져 있는 다른 애드온에 맞게 HUD를 배치합니다
+
+@ Shared by the add-ons that use it; shown only while one does
+ko 사용하는 애드온끼리 공유하며 사용 중에만 표시됩니다

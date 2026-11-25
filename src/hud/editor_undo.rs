@@ -2,7 +2,8 @@
 
 use qcore::cvar::Cvars;
 
-use super::editor::{CVAR, Drag, Editor, Out, PRESET, layout, save, sound};
+use super::editor::{CVAR, Drag, Editor, Out, PRESET, sound};
+use super::addons;
 use super::place;
 use super::presets::PRESET_NAME;
 
@@ -13,6 +14,7 @@ const MAX_UNDO: usize = 64;
 #[derive(Clone, Debug, PartialEq)]
 pub(super) struct Snapshot {
     pub layout: String,
+    pub addons: String,
     pub preset: String,
     pub preset_name: String,
     pub editing_preset: Option<String>,
@@ -28,6 +30,7 @@ impl Editor {
     pub(super) fn snapshot(&self, cv: &Cvars) -> Snapshot {
         Snapshot {
             layout: cv.by_name(CVAR).map_or_else(String::new, |c| c.string.clone()),
+            addons: cv.by_name(addons::CVAR).map_or_else(String::new, |c| c.string.clone()),
             preset: cv.by_name(PRESET).map_or_else(|| "0".into(), |c| c.string.clone()),
             preset_name: cv.by_name(PRESET_NAME).map_or_else(String::new, |c| c.string.clone()),
             editing_preset: self.editing_preset.clone(),
@@ -53,6 +56,7 @@ impl Editor {
 
     fn apply_snapshot(&mut self, snap: Snapshot, cv: &mut Cvars) {
         cv.set(CVAR, &snap.layout);
+        cv.set(addons::CVAR, &snap.addons);
         cv.set(PRESET, &snap.preset);
         cv.set(PRESET_NAME, &snap.preset_name);
         self.editing_preset = snap.editing_preset;
@@ -62,7 +66,7 @@ impl Editor {
         self.drag = None;
         self.snap_guides.0.clear();
         self.snap_guides.1.clear();
-        let l = layout(cv);
+        let l = self.layout(cv);
         if let Some(i) = snap.sel.filter(|&i| i < l.elems.len()) {
             self.select(i, &l);
         } else {
@@ -100,7 +104,7 @@ impl Editor {
             Drag::Elem { elem, moved: true, origin, before, .. } | Drag::Pad { elem, origin, before, .. } => (elem, origin, before),
             Drag::Elem { moved: false, .. } | Drag::Dialog(_) => return,
         };
-        let mut l = layout(cv);
+        let mut l = self.layout(cv);
         if elem < l.elems.len() && self.rects.len() == l.elems.len() && self.geo.vw > 0.0 && self.geo.vh > 0.0 {
             let sizes: Vec<(f32, f32)> = self.rects.iter().map(|r| (r.w, r.h)).collect();
             let final_rects = place::place_drag(&l.elems, &sizes, self.geo.vw, self.geo.vh, elem, origin);
@@ -113,12 +117,12 @@ impl Editor {
                 }
             }
             if changed {
-                save(cv, &l);
+                self.save(cv, &l);
             }
             self.rects = final_rects;
         }
-        let after = cv.by_name(CVAR).map_or("", |c| c.string.as_str());
-        if after != before.layout {
+        let after = self.snapshot(cv);
+        if (&after.layout, &after.addons) != (&before.layout, &before.addons) {
             self.push_undo(before);
         }
     }

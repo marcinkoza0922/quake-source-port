@@ -2913,12 +2913,6 @@ yue 切換
 @ Details
 yue 詳細資料
 
-@ Enter or click the box: toggle
-yue Enter或者撳方框：切換
-
-@ Right / Tab / click: details
-yue 右／Tab／撳：詳細資料
-
 @ Input Remapping
 yue 重新設定按鍵
 
@@ -4258,3 +4252,18 @@ yue 用你嘅鐵釘上彈嘅全自動步槍。副射擊會用紅點瞄準鏡瞄�
 
 @ None
 yue 冇
+
+@ Magazine
+yue 彈匣
+
+@ Adjust HUD
+yue 調整 HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+yue {}同{}重疊。請用「調整 HUD」移動。
+
+@ Arranges the HUD for this add-on and the others that are on
+yue 為呢個附加功能同其他已啟用嘅附加功能配置 HUD
+
+@ Shared by the add-ons that use it; shown only while one does
+yue 由用到佢嘅附加功能共用；只會喺使用時顯示

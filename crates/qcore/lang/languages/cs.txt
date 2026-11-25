@@ -2913,12 +2913,6 @@ cs Přepnout
 @ Details
 cs Podrobnosti
 
-@ Enter or click the box: toggle
-cs Enter nebo klik na políčko: přepnout
-
-@ Right / Tab / click: details
-cs Vpravo / Tab / klik: podrobnosti
-
 @ Input Remapping
 cs Přemapování vstupu
 
@@ -4258,3 +4252,18 @@ cs Plně automatická puška, která se přebíjí vašimi hřebíky. Alternativ
 
 @ None
 cs Žádný
+
+@ Magazine
+cs Zásobník
+
+@ Adjust HUD
+cs Přizpůsobit HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+cs {} překrývá {}. Přesuňte pomocí „Přizpůsobit HUD“.
+
+@ Arranges the HUD for this add-on and the others that are on
+cs Uspořádá HUD pro tento doplněk a ostatní zapnuté
+
+@ Shared by the add-ons that use it; shown only while one does
+cs Sdílený doplňky, které ho používají; zobrazen, jen když ho některý používá

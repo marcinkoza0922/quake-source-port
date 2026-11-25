@@ -23,6 +23,7 @@ pub(super) fn keywords(item: Item) -> &'static str {
         Item::ResetBinds => "keys bindings defaults",
         Item::ResetShaderParams => "crt defaults",
         Item::Color { .. } => "colour team",
+        Item::Run { run: Run::AdjustHud(_), .. } => "interface layout magazine ammo meter position",
         // the HUD editor holds the elements that had their own rows
         Item::Run { run: Run::EditHud, .. } => {
             "layout interface move position health armor ammo weapons keys clock timer personal best kills secrets speedometer speed velocity ups fps \

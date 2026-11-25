@@ -5,12 +5,14 @@
 use qcore::cvar::Cvars;
 use qinput::keys::*;
 
-use super::editor::{ADD_W, AddRow, BTN_H, CELL, CVAR, Editor, Out, PRESET, Popup, ROW, W, save, sound};
+use super::editor::{ADD_W, AddRow, BTN_H, CELL, CVAR, Editor, Out, PRESET, Popup, ROW, W, sound};
 use super::editor_draw::Dims;
 use super::editor_rows;
+use super::editor_store::base_layout;
 use super::kind::{CATEGORIES, Kind};
 use super::layout::{Anchor, Elem, Layout};
 use super::place::{self, Rect};
+use super::addons;
 use super::presets::{self, PRESET_NAME};
 
 /// Dimensions of the grid, presets and save-preset popups (in menu units).
@@ -104,26 +106,21 @@ impl Editor {
         let Some(saved) = presets::find(&self.presets, name) else {
             return false;
         };
-        super::editor::layout(cv).to_text() != Layout::parse(&saved.layout).to_text()
+        base_layout(cv).to_text() != Layout::parse(&saved.layout).to_text()
+            || addons::Patches::of(cv) != addons::Patches::parse(&saved.addons)
     }
 
     /// Saves edits directly to the active user-saved preset (disabled for built-in presets).
-    pub(super) fn save_current_preset(&mut self, l: &Layout, cv: &mut Cvars) -> Out {
+    pub(super) fn save_current_preset(&mut self, cv: &mut Cvars) -> Out {
         let Some(name) = self.editing_preset.clone() else {
             return sound("misc/menu3.wav");
         };
         if presets::find(&self.presets, &name).is_none() {
             return sound("misc/menu3.wav");
         }
-        let text = l.to_text();
-        let Some(idx) = presets::upsert(&mut self.presets, &name, &text) else {
+        if self.store_preset(&name, cv).is_none() {
             return sound("misc/menu3.wav");
-        };
-        let saved = self.presets[idx].clone();
-        self.persist_saved_preset(&saved);
-        cv.set(CVAR, &text);
-        cv.set(PRESET, "2");
-        cv.set(PRESET_NAME, &saved.name);
+        }
         sound("misc/menu2.wav")
     }
 
@@ -183,7 +180,7 @@ impl Editor {
         let mut e = Elem::new(k, anchor);
         place::stack_new(&mut e, &l.elems, &self.rects, self.geo.vw, self.geo.vh);
         l.elems.push(e);
-        save(cv, l);
+        self.save(cv, l);
         self.popup = None;
         self.select(l.elems.len() - 1, l);
         sound("misc/menu2.wav")
@@ -199,7 +196,7 @@ impl Editor {
             if (e.anchor, e.x, e.y) != (fresh.anchor, fresh.x, fresh.y) {
                 self.push_undo_now(cv);
                 (e.anchor, e.x, e.y) = (fresh.anchor, fresh.x, fresh.y);
-                save(cv, l);
+                self.save(cv, l);
             }
         }
         self.popup = None;
@@ -208,7 +205,7 @@ impl Editor {
 
     /// Creates a new preset under `raw_name` (confirms first if overwriting an existing user preset;
     /// built-in names are always rejected).
-    pub(super) fn commit_save_as(&mut self, raw_name: &str, confirm_overwrite: bool, l: &Layout, cv: &mut Cvars) -> Out {
+    pub(super) fn commit_save_as(&mut self, raw_name: &str, confirm_overwrite: bool, cv: &mut Cvars) -> Out {
         let clean = presets::clean_name(raw_name);
         if clean.is_empty() || presets::is_reserved(&clean) {
             return sound("misc/menu3.wav");
@@ -217,15 +214,9 @@ impl Editor {
             self.popup = Some(Popup::SaveAs { name: raw_name.to_string(), confirm_overwrite: true });
             return sound("misc/menu2.wav");
         }
-        let text = l.to_text();
-        let Some(idx) = presets::upsert(&mut self.presets, &clean, &text) else {
+        let Some(saved) = self.store_preset(&clean, cv) else {
             return sound("misc/menu3.wav");
         };
-        let saved = self.presets[idx].clone();
-        self.persist_saved_preset(&saved);
-        cv.set(CVAR, &text);
-        cv.set(PRESET, "2");
-        cv.set(PRESET_NAME, &saved.name);
         self.editing_preset = Some(saved.name);
         self.popup = None;
         sound("misc/menu2.wav")
@@ -259,9 +250,7 @@ impl Editor {
                     let Some(p) = self.presets.get(row.saturating_sub(n)).cloned() else {
                         return sound("misc/menu3.wav");
                     };
-                    cv.set(CVAR, &p.layout);
-                    cv.set(PRESET, "2");
-                    cv.set(PRESET_NAME, &p.name);
+                    p.load(cv);
                     self.editing_preset = Some(p.name);
                 }
             }
@@ -306,7 +295,7 @@ impl Editor {
                     self.popup = Some(Popup::SaveAs { name, confirm_overwrite: false });
                     return Out::default();
                 }
-                K_ENTER | K_KP_ENTER | K_ABUTTON => return self.commit_save_as(&name, confirm_overwrite, l, cv),
+                K_ENTER | K_KP_ENTER | K_ABUTTON => return self.commit_save_as(&name, confirm_overwrite, cv),
                 _ => return Out::default(),
             }
         }
@@ -443,7 +432,7 @@ impl Editor {
             let (x, y) = self.popup_at(&d, 0);
             let (save_r, cancel_r) = save_popup_buttons(x, y);
             if save_r.contains(m) {
-                return self.commit_save_as(&name, confirm_overwrite, l, cv);
+                return self.commit_save_as(&name, confirm_overwrite, cv);
             }
             if cancel_r.contains(m) || !(x..x + SAVE_W).contains(&m.0) || !(y..y + SAVE_H).contains(&m.1) {
                 self.popup = None;

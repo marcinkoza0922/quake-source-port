@@ -1057,20 +1057,6 @@ it Dettagli
 es Detalles
 ru Подробности
 
-@ Enter or click the box: toggle
-fr Entrée ou clic sur la case : basculer
-de Eingabe oder Klick auf das Kästchen: umschalten
-it Invio o clic sulla casella: attiva/disattiva
-es Intro o clic en la casilla: alternar
-ru Enter или щелчок по флажку: переключить
-
-@ Right / Tab / click: details
-fr Droite / Tab / clic : détails
-de Rechts / Tab / Klick: Details
-it Destra / Tab / clic: dettagli
-es Derecha / Tab / clic: detalles
-ru Вправо / Tab / щелчок: подробности
-
 @ Input Remapping
 fr Réassignation des commandes
 de Eingabe neu belegen
@@ -2446,3 +2432,10 @@ de Ein vollautomatisches Gewehr, das mit deinen Nägeln nachlädt. Sekundärfeue
 it Un fucile automatico che si ricarica con i tuoi chiodi. Fuoco secondario mira con il punto rosso per colpi più precisi e una visuale ravvicinata.
 es Un fusil automático que se recarga con tus clavos. Disparo secundario apunta con el punto rojo para tiros más precisos y una vista más cercana.
 ru Автоматическая винтовка, заряжаемая вашими гвоздями. Альтернативный огонь — прицеливание через красную точку: кучнее стрельба и ближе обзор.
+
+@ {} overlaps {}. Move it with Adjust HUD.
+fr {} chevauche {}. Déplacez-le avec Ajuster l'ATH.
+de {} überlappt {}. Mit „HUD anpassen“ verschieben.
+it {} si sovrappone a {}. Spostalo con Regola interfaccia.
+es {} se superpone a {}. Muévelo con Ajustar interfaz.
+ru {} перекрывает {}. Переместите через «Настроить интерфейс».

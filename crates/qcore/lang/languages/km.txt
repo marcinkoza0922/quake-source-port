@@ -2913,12 +2913,6 @@ km បិទ/បើក
 @ Details
 km ព័ត៌មាន​លម្អិត
 
-@ Enter or click the box: toggle
-km Enter ឬ​ចុច​ប្រអប់: បិទ/បើក
-
-@ Right / Tab / click: details
-km ស្ដាំ / Tab / ចុច: ព័ត៌មាន​លម្អិត
-
 @ Input Remapping
 km ការ​កំណត់​បញ្ជា​ឡើង​វិញ
 
@@ -4258,3 +4252,18 @@ km កាំភ្លើង​ស្វ័យ​ប្រវត្តិ​ដ�
 
 @ None
 km គ្មាន
+
+@ Magazine
+km បង់​គ្រាប់
+
+@ Adjust HUD
+km សម្រួល​ HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+km {} ត្រួត​លើ​ {}។ ផ្លាស់ទី​ដោយ​ សម្រួល​ HUD។
+
+@ Arranges the HUD for this add-on and the others that are on
+km រៀបចំ​ HUD សម្រាប់​គ្រឿង​បន្ថែម​នេះ​និង​គ្រឿង​ផ្សេង​ទៀត​ដែល​បើក
+
+@ Shared by the add-ons that use it; shown only while one does
+km រួម​គ្នា​ដោយ​គ្រឿង​បន្ថែម​ដែល​ប្រើ​វា​ បង្ហាញ​តែ​ពេល​ប្រើ

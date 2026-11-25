@@ -42,6 +42,9 @@ pub enum Kind {
     Notify,
     Captions,
     DamageSkull,
+    /// Shared by add-ons (`hud::addons`).
+    BulletTime,
+    Magazine,
 }
 
 /// Text style of an element.
@@ -140,6 +143,8 @@ const PB_OPTS: &[Opt] = &[
 ];
 const COUNT_OPTS: &[Opt] = &[opt("Show As", Field::A, Values::Choice(COUNT))];
 const SPEED_OPTS: &[Opt] = &[opt("Show Label", Field::A, Values::Choice(ON_OFF))];
+const BULLET_TIME_OPTS: &[Opt] =
+    &[opt("Length", Field::Len, Values::Range(24.0, 320.0, 8.0)), opt("Show Label", Field::A, Values::Choice(ON_OFF))];
 const CENTER_OPTS: &[Opt] = &[opt("Center Message Time", Field::Cvar("scr_centertime"), Values::Range(1.0, 10.0, 1.0))];
 const NOTIFY_OPTS: &[Opt] = &[opt("Notify Message Time", Field::Cvar("con_notifytime"), Values::Range(1.0, 10.0, 1.0))];
 const CAPTION_OPTS: &[Opt] = &[opt("Sound Captions", Field::Cvar("cl_captions"), Values::Choice(ON_OFF))];
@@ -163,15 +168,17 @@ pub const CATEGORIES: &[(&str, &[Kind])] = &[
     ("Performance Metrics", &[Kind::Fps, Kind::FrameTime, Kind::Cpu, Kind::Ram, Kind::Gpu, Kind::Vram]),
     ("Automap", &[Kind::Automap]),
     ("Movement & Input", &[Kind::Strafe, Kind::InputSequence]),
+    ("Add-ons", &[Kind::BulletTime, Kind::Magazine]),
 ];
 
 impl Kind {
-    pub const ALL: [Kind; 38] = [
+    pub const ALL: [Kind; 40] = [
         Kind::Health, Kind::Armor, Kind::Face, Kind::HealthBar, Kind::ArmorBar, Kind::Ammo, Kind::AmmoBar,
         Kind::AmmoList, Kind::Shells, Kind::Nails, Kind::Rockets, Kind::Cells, Kind::Weapons, Kind::Items,
         Kind::Keys, Kind::Powerups, Kind::Sigils, Kind::StatusBar, Kind::ModHud, Kind::Clock, Kind::Timer, Kind::Pb,
         Kind::Kills, Kind::Secrets, Kind::Speed, Kind::Fps, Kind::FrameTime, Kind::Cpu, Kind::Ram, Kind::Gpu, Kind::Vram,
         Kind::Automap, Kind::Strafe, Kind::InputSequence, Kind::Center, Kind::Notify, Kind::Captions, Kind::DamageSkull,
+        Kind::BulletTime, Kind::Magazine,
     ];
     /// Always in the layout: they can be moved but not removed.
     pub const PERMANENT: [Kind; 3] = [Kind::Center, Kind::Notify, Kind::Captions];
@@ -217,6 +224,8 @@ impl Kind {
             Notify => "notify",
             Captions => "captions",
             DamageSkull => "damageskull",
+            BulletTime => "bullettime",
+            Magazine => "magazine",
         }
     }
 
@@ -266,6 +275,8 @@ impl Kind {
             Notify => "Notify Messages",
             Captions => "Sound Captions",
             DamageSkull => "Damage Skull",
+            BulletTime => "Bullet Time",
+            Magazine => "Magazine",
         }
     }
 
@@ -278,6 +289,11 @@ impl Kind {
     pub fn is_player(self) -> bool {
         use Kind::*;
         !matches!(self, Clock | Timer | Pb | Kills | Secrets | Speed | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Automap | Center | Notify | Captions | DamageSkull)
+    }
+
+    /// Comes with add-ons, and shows only while one of them uses it.
+    pub fn is_addon(self) -> bool {
+        matches!(self, Kind::BulletTime | Kind::Magazine)
     }
 
     pub fn is_metric(self) -> bool {
@@ -303,6 +319,8 @@ impl Kind {
         use Kind::*;
         if self.is_number() {
             &[Font::Big, Font::Quake, Font::Modern]
+        } else if self.is_addon() {
+            &[Font::Modern, Font::Quake]
         } else if matches!(self, Face | Weapons | Items | Keys | Powerups | Sigils | StatusBar | ModHud | Automap | Strafe | InputSequence | DamageSkull) || self.is_message() {
             &[]
         } else {
@@ -327,7 +345,7 @@ impl Kind {
 
     /// Immersive mode (shown briefly after a change) makes sense.
     pub fn can_fade(self) -> bool {
-        self.is_player() && !matches!(self, Kind::StatusBar | Kind::ModHud | Kind::Strafe | Kind::InputSequence)
+        self.is_player() && !self.is_addon() && !matches!(self, Kind::StatusBar | Kind::ModHud | Kind::Strafe | Kind::InputSequence)
     }
 
     /// Whether the element exposes a Visibility row in the editor.
@@ -342,8 +360,8 @@ impl Kind {
         match self {
             Health | Armor | Face | HealthBar | ArmorBar => Anchor::BottomLeft,
             Ammo | AmmoBar | AmmoList | Shells | Nails | Rockets | Cells | Weapons | Items | Keys | Powerups | Sigils => Anchor::BottomRight,
-            StatusBar | ModHud | Captions | InputSequence => Anchor::BottomCenter,
-            Strafe | DamageSkull => Anchor::TopCenter,
+            StatusBar | ModHud | Captions | InputSequence | Magazine => Anchor::BottomCenter,
+            Strafe | DamageSkull | BulletTime => Anchor::TopCenter,
             Clock | Timer | Pb | Kills | Secrets | Speed | Fps | FrameTime | Cpu | Ram | Gpu | Vram | Automap => Anchor::TopRight,
             Notify => Anchor::TopLeft,
             Center => Anchor::Center,
@@ -362,7 +380,7 @@ impl Kind {
     }
 
     pub fn has_background(self) -> bool {
-        !self.fonts().is_empty() && !self.is_number() || matches!(self, Kind::Center | Kind::Notify | Kind::Automap | Kind::Strafe | Kind::InputSequence)
+        !self.fonts().is_empty() && !self.is_number() && self != Kind::BulletTime || matches!(self, Kind::Center | Kind::Notify | Kind::Automap | Kind::Strafe | Kind::InputSequence)
     }
 
     pub fn opts(self) -> &'static [Opt] {
@@ -378,6 +396,7 @@ impl Kind {
             Pb => PB_OPTS,
             Kills | Secrets => COUNT_OPTS,
             Speed => SPEED_OPTS,
+            BulletTime => BULLET_TIME_OPTS,
             Automap => AUTOMAP_OPTS,
             Center => CENTER_OPTS,
             Notify => NOTIFY_OPTS,
@@ -404,17 +423,21 @@ impl Kind {
             Kind::Automap => "Shows a live 3D wireframe or top-down automap on the HUD at all times (single player and co-op only)",
             Kind::Strafe => "Local games. Align white with gold. Jump timing: − early, + late.",
             Kind::InputSequence => "Shows the eight most recent gameplay inputs",
+            Kind::BulletTime | Kind::Magazine => ADDON_TIP,
             Kind::Captions => "Shows text for important sounds: doors, alerted enemies, secrets, pickups",
             _ => return None,
         })
     }
 }
 
+/// Help for the add-ons' elements.
+const ADDON_TIP: &str = "Shared by the add-ons that use it; shown only while one does";
+
 /// Help for an option row, by its label.
-pub fn opt_tip(label: &str) -> Option<&'static str> {
+pub fn opt_tip(kind: Kind, label: &str) -> Option<&'static str> {
     Some(match label {
         "Show Face" => "Shows the player face next to the health number",
-        "Show Label" => "Shows the SPD label before the speed number",
+        "Show Label" if kind == Kind::Speed => "Shows the SPD label before the speed number",
         "Personal Best Type" => "any%: any finish; 100%: every kill and secret. Save cards show this one first",
         "Personal Best Color" => "Color of the personal best on the HUD and save cards",
         "Show As" => "Shown as a count or as a percentage of the level's total",
@@ -436,7 +459,7 @@ pub fn lang_keys() -> Vec<&'static str> {
     for k in Kind::ALL {
         for o in k.opts() {
             out.push(o.label);
-            out.extend(opt_tip(o.label));
+            out.extend(opt_tip(k, o.label));
             if let Values::Choice(ch) = o.values {
                 out.extend(ch.iter().map(|c| c.0));
             }

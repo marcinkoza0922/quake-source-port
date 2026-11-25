@@ -2913,12 +2913,6 @@ pl Przełącz
 @ Details
 pl Szczegóły
 
-@ Enter or click the box: toggle
-pl Enter lub kliknięcie pola: przełącz
-
-@ Right / Tab / click: details
-pl Prawo / Tab / kliknięcie: szczegóły
-
 @ Input Remapping
 pl Przypisanie sterowania
 
@@ -4258,3 +4252,18 @@ pl W pełni automatyczny karabin ładowany twoimi gwoździami. Ogień alternatyw
 
 @ None
 pl Brak
+
+@ Magazine
+pl Magazynek
+
+@ Adjust HUD
+pl Dostosuj HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+pl {} nachodzi na {}. Przesuń w „Dostosuj HUD”.
+
+@ Arranges the HUD for this add-on and the others that are on
+pl Układa HUD dla tego dodatku i innych włączonych
+
+@ Shared by the add-ons that use it; shown only while one does
+pl Wspólny dla dodatków, które go używają; widoczny tylko, gdy któryś go używa

@@ -2913,12 +2913,6 @@ ka გადართვა
 @ Details
 ka დეტალები
 
-@ Enter or click the box: toggle
-ka Enter ან ველზე დაწკაპუნება: გადართვა
-
-@ Right / Tab / click: details
-ka მარჯვნივ / Tab / დაწკაპუნება: დეტალები
-
 @ Input Remapping
 ka შეყვანის გადანიშვნა
 
@@ -4258,3 +4252,18 @@ ka სრულად ავტომატური შაშხანა, რ�
 
 @ None
 ka Არცერთი
+
+@ Magazine
+ka მჭიდი
+
+@ Adjust HUD
+ka HUD-ის მორგება
+
+@ {} overlaps {}. Move it with Adjust HUD.
+ka {} ფარავს: {}. გადაიტანეთ „HUD-ის მორგება“-ით.
+
+@ Arranges the HUD for this add-on and the others that are on
+ka განალაგებს HUD-ს ამ და სხვა ჩართული დამატებებისთვის
+
+@ Shared by the add-ons that use it; shown only while one does
+ka საერთოა მისი გამომყენებელი დამატებებისთვის; ჩანს მხოლოდ გამოყენებისას

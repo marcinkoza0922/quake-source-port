@@ -2913,12 +2913,6 @@ vi Bật/tắt
 @ Details
 vi Chi tiết
 
-@ Enter or click the box: toggle
-vi Enter hoặc nhấp vào ô: bật/tắt
-
-@ Right / Tab / click: details
-vi Phải / Tab / nhấp: chi tiết
-
 @ Input Remapping
 vi Gán lại điều khiển
 
@@ -4258,3 +4252,18 @@ vi Súng trường tự động nạp bằng đinh của bạn. Bắn phụ ng�
 
 @ None
 vi Không có
+
+@ Magazine
+vi Băng đạn
+
+@ Adjust HUD
+vi Chỉnh HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+vi {} chồng lên {}. Di chuyển bằng Chỉnh HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+vi Sắp xếp HUD cho tiện ích này và các tiện ích khác đang bật
+
+@ Shared by the add-ons that use it; shown only while one does
+vi Dùng chung bởi các tiện ích cần nó; chỉ hiện khi đang được dùng

@@ -35,8 +35,6 @@ const LIST_TOP: f32 = 58.0;
 const LIST_ROW: f32 = 20.0;
 const LIST_VISIBLE: usize = 8;
 const LIST_BOTTOM: f32 = LIST_TOP + LIST_ROW * LIST_VISIBLE as f32;
-/// Clicks or taps left of this (the checkbox column) toggle an add-on.
-const CHECK_RIGHT: f32 = 42.0;
 
 /// One add-on as the touch browser shows it.
 pub(super) struct AddonInfo {
@@ -93,9 +91,19 @@ impl Addon {
             _ => None,
         }
     }
+    /// Brings HUD elements: the row before the last adjusts them.
+    fn has_hud(&self) -> bool {
+        !crate::hud::addons::Combo::of(self.cvar).is_empty()
+    }
+    /// One of its HUD elements is in the way of another.
+    fn hud_conflict(&self, menu: &Menu, cv: &Cvars) -> bool {
+        let hud = crate::hud::addons::Combo::of(self.cvar);
+        cv.value_of(self.cvar) != 0.0 && menu.hud_conflicts.iter().any(|&(k, _)| hud.has(k))
+    }
     fn row_count(&self) -> usize {
-        if self.weapons.is_empty() { 1 + usize::from(self.equipment_action().is_some()) }
-        else { self.weapons.len() + 2 + usize::from(self.alt) + usize::from(self.reload) }
+        let hud = usize::from(self.has_hud());
+        if self.weapons.is_empty() { 1 + hud + usize::from(self.equipment_action().is_some()) }
+        else { self.weapons.len() + 2 + hud + usize::from(self.alt) + usize::from(self.reload) }
     }
     fn command(&self, row: usize) -> Option<&'static str> {
         match row.checked_sub(self.weapons.len())? {
@@ -255,10 +263,6 @@ impl Menu {
             }
             self.addon_ui.selected = selected;
             self.addon_ui.focus = focus;
-            // a name only selects (so its details can be read); the box toggles
-            if focus == 0 && x >= CHECK_RIGHT {
-                return true;
-            }
         }
         if self.screen == Screen::OptionsPage(Page::NewGameAddons) && (key == K_YBUTTON || key == K_F1 + 9) {
             self.launch_play(cv, out);
@@ -359,6 +363,10 @@ impl Menu {
             {
                 let v = cv.value_of(slot).round().clamp(1.0, 10.0) as i32;
                 set_num(cv, slot, ((v - 1 + if left { -1 } else { 1 }).rem_euclid(10) + 1) as f32);
+            } else if self.addon_ui.focus + 1 == self.browser_rows() && a.has_hud() && (enter || right) {
+                self.adjust_hud(a.cvar, cv);
+                out.push(Action::Sound("misc/menu2.wav"));
+                return true;
             } else if self.addon_ui.focus == self.browser_rows()
                 && (enter || right)
                 && let Some(page) = a.page

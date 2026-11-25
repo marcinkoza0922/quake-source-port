@@ -2913,12 +2913,6 @@ fil Toggle
 @ Details
 fil Detalye
 
-@ Enter or click the box: toggle
-fil Enter o i-click ang kahon: toggle
-
-@ Right / Tab / click: details
-fil Kanan / Tab / click: detalye
-
 @ Input Remapping
 fil Pag-remap ng Input
 
@@ -4258,3 +4252,18 @@ fil Full-auto na rifle na nagre-reload mula sa iyong nails. Umaasinta ang Alt Fi
 
 @ None
 fil Wala
+
+@ Magazine
+fil Magasin
+
+@ Adjust HUD
+fil Ayusin ang HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+fil Natatakpan ng {} ang {}. Ilipat gamit ang Ayusin ang HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+fil Inaayos ang HUD para sa add-on na ito at sa iba pang naka-on
+
+@ Shared by the add-ons that use it; shown only while one does
+fil Pinaghahatian ng mga add-on na gumagamit nito; lumalabas lang habang ginagamit

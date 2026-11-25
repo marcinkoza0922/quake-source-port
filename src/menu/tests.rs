@@ -692,6 +692,21 @@ fn viewmodel_position_is_locked_in_third_person() {
 }
 
 #[test]
+fn view_bob_is_locked_in_third_person() {
+    let mut cv = Cvars::default();
+    cv.register("cl_camera", "1", 0);
+    cv.register("cl_bob", "0.01", 0);
+    let item = GAMEPLAY.iter().copied().find(|i| matches!(i, Item::Slider { cvar: "cl_bob", .. })).unwrap();
+    let mut menu = Menu::new();
+    let mut out = Vec::new();
+    assert!(!menu.adjust(item, 1, false, &mut cv, &mut out));
+    menu.set_slider(item, SLIDER_X.1, &mut cv);
+    assert_eq!(cv.value_of("cl_bob"), 0.01_f32);
+    cv.set("cl_camera", "0");
+    assert!(menu.adjust(item, 1, false, &mut cv, &mut out));
+}
+
+#[test]
 fn visible_weapons_need_a_third_person_camera() {
     let mut cv = Cvars::default();
     cv.register("cl_camera", "0", 0);

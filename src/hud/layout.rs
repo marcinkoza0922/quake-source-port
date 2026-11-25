@@ -98,7 +98,7 @@ impl Elem {
         let font = kind.fonts().first().copied().unwrap_or(Font::Quake);
         let size = if kind.is_number() { 24.0 } else { 8.0 };
         let a = match kind {
-            Health | Armor | Ammo | Shells | Nails | Rockets | Cells | HealthBar | ArmorBar | AmmoBar | Speed => 1,
+            Health | Armor | Ammo | Shells | Nails | Rockets | Cells | HealthBar | ArmorBar | AmmoBar | Speed | BulletTime => 1,
             Weapons => 4,
             StatusBar | Clock => 1,
             Timer | Pb => 2,
@@ -108,7 +108,7 @@ impl Elem {
         // a bottom status bar or mod HUD sits on the screen edge
         let y = if matches!(kind, StatusBar | ModHud) && anchor.row() == 2 { super::place::MARGIN } else { 0.0 };
         let bg = kind.has_background() && !kind.is_message();
-        Elem { kind, anchor, x: 0.0, y, scale: 1.0, opacity: 1.0, font, size, fade: false, hidden: false, bg, color: NORMAL, label: NORMAL, a, b, len: 96.0 }
+        Elem { kind, anchor, x: 0.0, y, scale: 1.0, opacity: 1.0, font, size, fade: false, hidden: false, bg, color: NORMAL, label: NORMAL, a, b, len: if kind == BulletTime { 120.0 } else { 96.0 } }
     }
 
     fn write(&self, out: &mut String) {
@@ -146,7 +146,13 @@ impl Elem {
         }
     }
 
-    fn parse(s: &str) -> Option<Self> {
+    pub(super) fn to_text(&self) -> String {
+        let mut s = String::new();
+        self.write(&mut s);
+        s
+    }
+
+    pub(super) fn parse(s: &str) -> Option<Self> {
         let mut fields = s.split(',');
         let (kind, anchor) = fields.next()?.trim().split_once('@')?;
         let mut e = Elem::new(Kind::from_id(kind)?, Anchor::from_id(anchor)?);

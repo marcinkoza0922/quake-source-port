@@ -150,26 +150,25 @@ fn mouse_hover_and_click_share_the_start_buttons_focus() {
 #[test]
 fn clicking_selects_and_toggles_but_locked_games_keep_remapping() {
     let (mut menu, mut cv) = setup(Page::Addons);
-    // a name only selects, so its details can be read
+    // hovering selects; a locked (vanilla) game doesn't toggle
     menu.mouse_move((70.0, 90.0), &mut cv);
-    menu.key(K_MOUSE1, &mut cv, true);
     assert_eq!(menu.addon_ui.selected, 1);
-    assert_eq!(cv.value_of("addon_boomerang"), 1.0);
-    // the checkbox of a locked (vanilla) game doesn't toggle
-    menu.mouse_move((30.0, 90.0), &mut cv);
-    menu.key(K_MOUSE1, &mut cv, true);
-    assert_eq!(cv.value_of("addon_boomerang"), 1.0);
+    for x in [30.0, 70.0] {
+        menu.mouse_move((x, 90.0), &mut cv);
+        menu.key(K_MOUSE1, &mut cv, true);
+        assert_eq!(cv.value_of("addon_boomerang"), 1.0);
+    }
     menu.mouse_move((450.0, menu.browser_row_y(2) + 1.0), &mut cv); // Alt Fire
     menu.key(K_MOUSE1, &mut cv, true);
     menu.key(b'q' as i32, &mut cv, true);
     assert_eq!(menu.bindings[b'q' as usize].as_deref(), Some("+attack2"));
     cv.set("custom_active", "1");
-    menu.mouse_move((70.0, 90.0), &mut cv);
-    menu.key(K_MOUSE1, &mut cv, true);
-    assert_eq!(cv.value_of("addon_boomerang"), 1.0);
-    menu.mouse_move((30.0, 90.0), &mut cv);
-    menu.key(K_MOUSE1, &mut cv, true);
-    assert_eq!(cv.value_of("addon_boomerang"), 0.0);
+    // anywhere on the row toggles: the name, the box, the far end
+    for (x, on) in [(70.0, 0.0), (30.0, 1.0), (195.0, 0.0)] {
+        menu.mouse_move((x, 90.0), &mut cv);
+        menu.key(K_MOUSE1, &mut cv, true);
+        assert_eq!(cv.value_of("addon_boomerang"), on);
+    }
 }
 
 #[test]
@@ -359,9 +358,40 @@ fn guns_list_the_shared_reload_action_after_alt_fire() {
     for id in ["akimbo", "rifle"] {
         let i = ADDON.iter().position(|a| a.id == id).unwrap();
         let rows: Vec<_> = (0..ADDON[i].row_count()).map(|r| ADDON[i].command(r)).collect();
-        assert_eq!(rows, [None, Some("+attack"), Some("+attack2"), Some("+reload"), None], "{id}");
+        assert_eq!(rows, [None, Some("+attack"), Some("+attack2"), Some("+reload"), None, None], "{id}");
         assert!(addon_info(i).binds.iter().any(|b| b.1 == "+reload"));
     }
     let railgun = ADDON.iter().find(|a| a.id == "railgun").unwrap();
     assert_eq!((0..railgun.row_count()).map(|r| railgun.command(r)).collect::<Vec<_>>(), [None, Some("+attack"), None]);
+}
+
+#[test]
+fn adjust_hud_edits_the_combination_and_returns_to_the_new_game() {
+    let (mut menu, mut cv) = setup(Page::NewGameAddons);
+    cv.set("addon_bullet_time", "1");
+    cv.set("addon_bullet_time_meter", "1");
+    menu.hud_edit = Default::default();
+    menu.addon_ui.selected = ADDON.iter().position(|a| a.id == "rifle").unwrap();
+    // the row above Configure Parameters, though the rifle is still off
+    menu.addon_ui.focus = menu.browser_rows() - 1;
+    menu.key(K_ENTER, &mut cv, false);
+    assert_eq!(menu.screen, Screen::HudEditor);
+    let both: Vec<_> = menu.hud_edit.combo.kinds().collect();
+    assert_eq!(both, [crate::hud::kind::Kind::BulletTime, crate::hud::kind::Kind::Magazine]);
+    menu.key(K_ESCAPE, &mut cv, false);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameAddons));
+    assert!(menu.new_game_setup);
+    // the same from its settings page
+    menu.addon_ui.focus = menu.browser_rows();
+    menu.key(K_ENTER, &mut cv, false);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::Rifle));
+    menu.opt_cursor = menu.page_len(Page::Rifle) - 1;
+    menu.key(K_ENTER, &mut cv, false);
+    assert_eq!(menu.screen, Screen::HudEditor);
+    menu.key(K_ESCAPE, &mut cv, false);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::Rifle));
+    menu.key(K_ESCAPE, &mut cv, false);
+    assert_eq!(menu.screen, Screen::OptionsPage(Page::NewGameAddons));
+    // an add-on without HUD elements has no such row
+    assert!(!ADDON[0].has_hud());
 }

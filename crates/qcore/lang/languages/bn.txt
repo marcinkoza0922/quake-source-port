@@ -2913,12 +2913,6 @@ bn টগল
 @ Details
 bn বিস্তারিত
 
-@ Enter or click the box: toggle
-bn Enter বা বাক্সে ক্লিক: টগল
-
-@ Right / Tab / click: details
-bn ডান / Tab / ক্লিক: বিস্তারিত
-
 @ Input Remapping
 bn ইনপুট রিম্যাপিং
 
@@ -4258,3 +4252,18 @@ bn ফুল-অটো রাইফেল, যা আপনার নেইল �
 
 @ None
 bn কোনোটি না
+
+@ Magazine
+bn ম্যাগাজিন
+
+@ Adjust HUD
+bn HUD সাজান
+
+@ {} overlaps {}. Move it with Adjust HUD.
+bn {} এবং {} একে অপরের উপর। HUD সাজান দিয়ে সরান।
+
+@ Arranges the HUD for this add-on and the others that are on
+bn এই অ্যাড-অন ও চালু অন্যগুলির জন্য HUD সাজায়
+
+@ Shared by the add-ons that use it; shown only while one does
+bn যে অ্যাড-অনগুলি ব্যবহার করে তাদের মধ্যে ভাগ করা; শুধু ব্যবহারের সময় দেখা যায়

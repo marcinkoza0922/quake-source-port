@@ -10,6 +10,7 @@ pub(super) const BULLET_TIME: &[Item] = &[
     toggle("Use Bullet Time Meter", "addon_bullet_time_meter"),
     slider("Meter Duration (real seconds)", "addon_bullet_time_duration", 1.0, 60.0, 1.0),
     slider("Regen (seconds per second)", "addon_bullet_time_regen", 0.1, 10.0, 0.1),
+    Item::Run { label: "Adjust HUD", run: Run::AdjustHud("addon_bullet_time") },
     Item::Run { label: "Reset to Defaults", run: Run::ResetBulletTime },
 ];
 
@@ -39,6 +40,7 @@ pub(super) const AKIMBO: &[Item] = &[
     slider("Reload Time", "addon_akimbo_reload", 0.4, 4.0, 0.1),
     toggle("Reload When Empty", "addon_akimbo_autoreload"),
     toggle("Swap Pistols", "addon_akimbo_swap"),
+    Item::Run { label: "Adjust HUD", run: Run::AdjustHud("addon_akimbo") },
 ];
 /// Reached from the Add-ons pages: assault rifle.
 pub(super) const RIFLE: &[Item] = &[
@@ -50,6 +52,7 @@ pub(super) const RIFLE: &[Item] = &[
     slider("Sight Zoom", "addon_rifle_zoom", 1.0, 2.5, 0.1),
     Item::Choice { label: "Dot Colour", cvar: "addon_rifle_dot", choices: &[("Red", 0.0), ("Green", 1.0), ("Yellow", 2.0)] },
     slider("Recoil", "addon_rifle_recoil", 0.0, 2.0, 0.1),
+    Item::Run { label: "Adjust HUD", run: Run::AdjustHud("addon_rifle") },
 ];
 
 /// Customize → Add-ons: which toys the running customized game (or the next new
@@ -120,7 +123,7 @@ mod tests {
         cv.set("addon_bullet_time_regen", "3");
         menu.open(Screen::OptionsPage(Page::BulletTime));
         menu.opt_cursor = 0;
-        for _ in 0..4 { menu.key(K_DOWNARROW, &mut cv, false); }
+        for _ in 0..5 { menu.key(K_DOWNARROW, &mut cv, false); }
         menu.key(K_ENTER, &mut cv, false);
         assert_eq!(cv.value_of("addon_bullet_time_toggle"), 0.0);
         assert_eq!(cv.value_of("addon_bullet_time_meter"), 1.0);

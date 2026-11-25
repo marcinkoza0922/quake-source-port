@@ -6,6 +6,7 @@
 
 use super::*;
 use crate::hud::draw::{Ctx, Room};
+use crate::hud::addons::{CVAR as ADDONS, Combo};
 use crate::hud::editor::{CVAR, PRESET};
 use crate::hud::kind::Kind;
 use crate::hud::layout::Layout;
@@ -19,6 +20,7 @@ pub(super) struct HudFrame {
     pub metrics: [String; 6],
     pub pb_color: [f32; 4],
     pub glyph_override: f32,
+    pub bullet_time: Option<(f32, bool)>,
     pub has_mod_hud: bool,
     /// The editor's sample player.
     pub sample: Option<qclient::ClientState>,
@@ -53,6 +55,7 @@ impl HudFrame {
             automap,
             training: None,
             glyph_override: self.glyph_override,
+            bullet_time: self.bullet_time,
             has_mod_hud: self.has_mod_hud,
         }
     }
@@ -101,8 +104,8 @@ impl Host {
             && !name.is_empty()
             && let Some(saved) = crate::hud::presets::find(&self.menu.hud_edit.presets, &name)
         {
-            let layout = saved.layout.clone();
-            self.server.core.cvars.set(CVAR, &layout);
+            let saved = saved.clone();
+            saved.load(&mut self.server.core.cvars);
         }
         self.hud.preset = Some(p);
         self.hud.preset_name = Some(self.cvs(crate::hud::presets::PRESET_NAME).trim().to_string());
@@ -110,8 +113,9 @@ impl Host {
 
     /// Reads `hud_layout`; empty (first run), "default" or "classic" (the
     /// presets) becomes a layout here, where elements can be measured.
-    fn hud_sync(&mut self, c: &Canvas, room: &Room) {
+    fn hud_sync(&mut self, c: &Canvas, room: &Room, combo: Combo) {
         let text = self.cvs(CVAR).to_string();
+        let patches = self.cvs(ADDONS).to_string();
         // configs still being read could hold the old settings
         if text.is_empty() && !self.cbuf.is_empty() {
             return;
@@ -126,7 +130,7 @@ impl Host {
             "default" => stacked(Layout::default_layout()),
             "classic" => stacked(Layout::classic_layout()),
             "mod" => stacked(Layout::mod_layout()),
-            _ if self.hud.sync(&text) => {
+            _ if self.hud.sync(&text, &patches, combo) => {
                 if changed {
                     self.hud.preset_checked = false;
                 }
@@ -173,18 +177,57 @@ impl Host {
             }
         };
         self.server.core.cvars.set(CVAR, &t);
-        self.hud.sync(&t);
+        // a built-in preset starts without changes for add-ons
+        let patches = if text.is_empty() { patches } else { String::new() };
+        self.server.core.cvars.set(ADDONS, &patches);
+        self.hud.sync(&t, &patches, combo);
+    }
+
+    /// The add-on HUD elements in use in the running game.
+    fn hud_combo(&self) -> Combo {
+        let local = self.demo.is_none() && self.server.active() && self.server.core.custom;
+        if local && qserver::addons::allowed(true, self.cv("deathmatch") != 0.0, qserver::addons::all_local(&self.server.core.clients)) {
+            Combo::enabled(&self.server.core.cvars)
+        } else {
+            Combo::default()
+        }
+    }
+
+    /// Finds add-on elements in conflict with the HUD, for the Add-ons
+    /// browser, and tells the player once when such a game is on.
+    fn hud_conflicts(&mut self, c: &Canvas, room: &Room, running: Combo) {
+        let cv = &self.server.core.cvars;
+        let room = Room { addons: room.addons.max(qserver::addons::Toy::enabled(cv).count()), ..*room };
+        self.hud.find_conflicts(c, &room, Combo::enabled(cv));
+        self.menu.hud_conflicts.clone_from(&self.hud.conflicts);
+        let playing = !running.is_empty() && self.cl.signon == 4 && !self.menu.active() && self.cl.intermission == 0;
+        if playing && self.hud.warned != self.hud.conflict_key {
+            self.hud.warned.clone_from(&self.hud.conflict_key);
+            for &(k, by) in &self.hud.conflicts {
+                let s = crate::hud::addons::conflict_text(k, by);
+                self.con.print(&format!("{}\n", qcore::lang::quake_encode(&s)));
+            }
+        }
     }
 
     /// Lays the HUD out on `c` (the whole screen) for this frame.
     pub(super) fn hud_frame(&mut self, c: &Canvas, addons: &[crate::wheel::Entry], cur_speed: Option<f32>) -> HudFrame {
         let pack = crate::sbar::Pack::from_game_dirs(self.server.core.fs.game_dirs().iter().map(String::as_str));
         let pb_category = qui::stats::PbCategory::hud_mode(self.cv("hud_pb_100"));
-        let room = Room { pack, addons: addons.len(), vw: c.vw(), pb_category };
+        let mut room = Room { pack, addons: addons.len(), vw: c.vw(), pb_category };
         self.menu.hud_edit.has_mod_hud = self.hud.has_mod_hud;
-        self.hud_preset();
-        self.hud_sync(c, &room);
         let edit = self.menu.screen == crate::menu::Screen::HudEditor;
+        let running = self.hud_combo();
+        let combo = if edit { self.menu.hud_edit.combo } else { running };
+        if edit && !combo.is_empty() {
+            // also before a game is started with them
+            room.addons = room.addons.max(qserver::addons::Toy::enabled(&self.server.core.cvars).count());
+        }
+        self.hud_preset();
+        self.hud_sync(c, &room, combo);
+        if !edit {
+            self.hud_conflicts(c, &room, running);
+        }
         let (vw, vh) = (c.vw(), c.vh());
         let s = sizes(c, &self.hud.layout, &room);
         let drag_info = edit.then(|| self.menu.hud_edit.drag_info()).flatten();
@@ -198,9 +241,10 @@ impl Host {
             if drag_info.is_none()
                 && let Some(l) = self.hud.settled(vw, vh)
             {
-                let t = l.to_text();
-                self.server.core.cvars.set(CVAR, &t);
-                self.hud.sync(&t);
+                let cv = &mut self.server.core.cvars;
+                self.menu.hud_edit.write(cv, &l);
+                let (t, p) = (self.cvs(CVAR).to_string(), self.cvs(ADDONS).to_string());
+                self.hud.sync(&t, &p, combo);
             }
             let (w, h) = self.r.size();
             self.menu.hud_edit.set_frame(&self.hud.rects, c.scale, (w, h));
@@ -229,6 +273,7 @@ impl Host {
         };
         HudFrame {
             glyph_override: self.cv("joy_glyphs"),
+            bullet_time: self.bullet_time.meter().filter(|_| self.cv("addon_bullet_time_meter") != 0.0),
             has_mod_hud: self.hud.has_mod_hud,
             room,
             edit,

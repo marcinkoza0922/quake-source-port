@@ -2913,12 +2913,6 @@ nl Aan/uit
 @ Details
 nl Details
 
-@ Enter or click the box: toggle
-nl Enter of klik op het vakje: aan/uit
-
-@ Right / Tab / click: details
-nl Rechts / Tab / klik: details
-
 @ Input Remapping
 nl Invoer opnieuw toewijzen
 
@@ -4258,3 +4252,18 @@ nl Een volautomatisch geweer dat herlaadt met je spijkers. Alt. vuur richt door 
 
 @ None
 nl Geen
+
+@ Magazine
+nl Magazijn
+
+@ Adjust HUD
+nl HUD aanpassen
+
+@ {} overlaps {}. Move it with Adjust HUD.
+nl {} overlapt {}. Verplaats via HUD aanpassen.
+
+@ Arranges the HUD for this add-on and the others that are on
+nl Schikt de HUD voor deze add-on en de andere die aan staan
+
+@ Shared by the add-ons that use it; shown only while one does
+nl Gedeeld door de add-ons die het gebruiken; alleen zichtbaar zolang er een dat doet

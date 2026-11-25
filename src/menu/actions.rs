@@ -42,6 +42,15 @@ impl Menu {
         }
     }
 
+    /// Opens the HUD editor for the add-ons that are on and `addon`, keeping
+    /// this screen (and a new game being set up) to return to.
+    pub(super) fn adjust_hud(&mut self, addon: &str, cv: &Cvars) {
+        use crate::hud::addons::Combo;
+        self.hud_return = Some((self.screen, self.opt_cursor, self.sub_return));
+        self.screen = Screen::HudEditor;
+        self.hud_edit.open_combo(cv, Combo::enabled(cv).union(Combo::of(addon)));
+    }
+
     pub(super) fn run(&mut self, run: Run, cv: &mut Cvars, out: &mut Vec<Action>) {
         match run {
             Run::EditTouch => {
@@ -84,6 +93,11 @@ impl Menu {
             Run::EditHud => {
                 self.open(Screen::HudEditor);
                 self.hud_edit.open(cv);
+                out.push(Action::Sound("misc/menu2.wav"));
+                return;
+            }
+            Run::AdjustHud(addon) => {
+                self.adjust_hud(addon, cv);
                 out.push(Action::Sound("misc/menu2.wav"));
                 return;
             }

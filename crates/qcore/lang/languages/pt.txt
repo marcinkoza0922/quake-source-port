@@ -2913,12 +2913,6 @@ pt Alternar
 @ Details
 pt Detalhes
 
-@ Enter or click the box: toggle
-pt Enter ou clique na caixa: alternar
-
-@ Right / Tab / click: details
-pt Direita / Tab / clique: detalhes
-
 @ Input Remapping
 pt Reatribuição de controlos
 
@@ -4258,3 +4252,18 @@ pt Uma espingarda automática que recarrega com os teus pregos. Tiro secundário
 
 @ None
 pt Nenhum
+
+@ Magazine
+pt Carregador
+
+@ Adjust HUD
+pt Ajustar HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+pt {} sobrepõe-se a {}. Mova com Ajustar HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+pt Organiza o HUD para este complemento e os outros ativados
+
+@ Shared by the add-ons that use it; shown only while one does
+pt Partilhado pelos complementos que o usam; só aparece enquanto um o usa

@@ -2913,12 +2913,6 @@ sw Washa/Zima
 @ Details
 sw Maelezo
 
-@ Enter or click the box: toggle
-sw Enter au bofya kisanduku: washa/zima
-
-@ Right / Tab / click: details
-sw Kulia / Tab / bofya: maelezo
-
 @ Input Remapping
 sw Kupanga Upya Ingizo
 
@@ -4258,3 +4252,18 @@ sw Bunduki ya kufyatua mfululizo inayojazwa kwa misumari yako. Mlipuo Mbadala hu
 
 @ None
 sw Hakuna
+
+@ Magazine
+sw Magazini
+
+@ Adjust HUD
+sw Rekebisha HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+sw {} inafunika {}. Sogeza kwa Rekebisha HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+sw Hupanga HUD kwa kiongezi hiki na vingine vilivyowashwa
+
+@ Shared by the add-ons that use it; shown only while one does
+sw Hushirikiwa na viongezi vinavyoitumia; huonekana tu inapotumika

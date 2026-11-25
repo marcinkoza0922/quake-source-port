@@ -2913,12 +2913,6 @@ sv Växla
 @ Details
 sv Detaljer
 
-@ Enter or click the box: toggle
-sv Enter eller klick på rutan: växla
-
-@ Right / Tab / click: details
-sv Höger / Tab / klick: detaljer
-
 @ Input Remapping
 sv Ändra inmatning
 
@@ -4258,3 +4252,18 @@ sv En helautomatisk karbin som laddas med dina spikar. Alternativ eld siktar gen
 
 @ None
 sv Ingen
+
+@ Magazine
+sv Magasin
+
+@ Adjust HUD
+sv Anpassa HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+sv {} överlappar {}. Flytta med ”Anpassa HUD”.
+
+@ Arranges the HUD for this add-on and the others that are on
+sv Ordnar HUD:en för detta tillägg och de andra som är på
+
+@ Shared by the add-ons that use it; shown only while one does
+sv Delas av tilläggen som använder det; visas bara medan något gör det

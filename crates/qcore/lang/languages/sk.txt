@@ -2913,12 +2913,6 @@ sk Prepnúť
 @ Details
 sk Podrobnosti
 
-@ Enter or click the box: toggle
-sk Enter alebo klik na políčko: prepnúť
-
-@ Right / Tab / click: details
-sk Vpravo / Tab / klik: podrobnosti
-
 @ Input Remapping
 sk Zmena priradenia vstupu
 
@@ -4258,3 +4252,18 @@ sk Plne automatická puška, ktorá sa prebíja vašimi klincami. Alternatívna 
 
 @ None
 sk Žiadne
+
+@ Magazine
+sk Zásobník
+
+@ Adjust HUD
+sk Prispôsobiť HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+sk {} prekrýva {}. Presuňte cez „Prispôsobiť HUD“.
+
+@ Arranges the HUD for this add-on and the others that are on
+sk Usporiada HUD pre tento doplnok a ostatné zapnuté
+
+@ Shared by the add-ons that use it; shown only while one does
+sk Zdieľaný doplnkami, ktoré ho používajú; zobrazený, len keď ho niektorý používa

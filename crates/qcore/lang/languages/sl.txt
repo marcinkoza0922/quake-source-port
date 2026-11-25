@@ -2913,12 +2913,6 @@ sl Preklop
 @ Details
 sl Podrobnosti
 
-@ Enter or click the box: toggle
-sl Enter ali klik na polje: preklop
-
-@ Right / Tab / click: details
-sl Desno / Tab / klik: podrobnosti
-
 @ Input Remapping
 sl Preslikava vnosa
 
@@ -4258,3 +4252,18 @@ sl Samodejna puška, ki se polni iz vaših žebljev. Alternativni strel meri sko
 
 @ None
 sl Brez
+
+@ Magazine
+sl Nabojnik
+
+@ Adjust HUD
+sl Prilagodi HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+sl {} prekriva {}. Premaknite z »Prilagodi HUD«.
+
+@ Arranges the HUD for this add-on and the others that are on
+sl Razporedi HUD za ta dodatek in druge vklopljene
+
+@ Shared by the add-ons that use it; shown only while one does
+sl Skupen dodatkom, ki ga uporabljajo; viden le, ko ga kateri uporablja

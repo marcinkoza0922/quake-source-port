@@ -4449,3 +4449,24 @@ de Keins
 it Nessuno
 es Ninguno
 ru Нет
+
+@ Magazine
+fr Chargeur
+de Magazin
+it Caricatore
+es Cargador
+ru Магазин
+
+@ Adjust HUD
+fr Ajuster l'ATH
+de HUD anpassen
+it Regola interfaccia
+es Ajustar interfaz
+ru Настроить интерфейс
+
+@ Shared by the add-ons that use it; shown only while one does
+fr Partagé par les extensions qui l'utilisent ; affiché seulement quand l'une s'en sert
+de Von den Add-ons, die es nutzen, geteilt; nur sichtbar, solange eines es nutzt
+it Condiviso dagli add-on che lo usano; visibile solo mentre uno lo usa
+es Compartido por los complementos que lo usan; solo se muestra mientras uno lo usa
+ru Общий для дополнений, которые его используют; виден, только пока он нужен одному из них

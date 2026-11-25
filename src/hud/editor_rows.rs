@@ -234,7 +234,7 @@ impl super::editor::Editor {
                     if old != v {
                         self.push_undo_now(cv);
                         if p == Prop::X { e.x = v } else { e.y = v }
-                        super::editor::save(cv, l);
+                        self.save(cv, l);
                     }
                 }
                 if key == K_MOUSE1 {
@@ -255,7 +255,7 @@ impl super::editor::Editor {
         let Some(e) = l.elems.get_mut(i) else { return super::editor::Out::default() };
         if step(p, e, cv, dir) {
             self.push_undo(snap);
-            super::editor::save(cv, l);
+            self.save(cv, l);
         }
         super::editor::sound("misc/menu3.wav")
     }

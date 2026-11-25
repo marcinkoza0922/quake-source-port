@@ -2913,12 +2913,6 @@ pa ਟੌਗਲ
 @ Details
 pa ਵੇਰਵੇ
 
-@ Enter or click the box: toggle
-pa Enter ਜਾਂ ਡੱਬੇ 'ਤੇ ਕਲਿੱਕ: ਟੌਗਲ
-
-@ Right / Tab / click: details
-pa ਸੱਜੇ / Tab / ਕਲਿੱਕ: ਵੇਰਵੇ
-
 @ Input Remapping
 pa ਇਨਪੁਟ ਮੁੜ ਮੈਪਿੰਗ
 
@@ -4258,3 +4252,18 @@ pa ਪੂਰੀ ਆਟੋਮੈਟਿਕ ਰਾਈਫ਼ਲ ਜੋ ਤੁਹਾ�
 
 @ None
 pa ਕੋਈ ਨਹੀਂ
+
+@ Magazine
+pa ਮੈਗਜ਼ੀਨ
+
+@ Adjust HUD
+pa HUD ਵਿਵਸਥਿਤ ਕਰੋ
+
+@ {} overlaps {}. Move it with Adjust HUD.
+pa {} ਅਤੇ {} ਇੱਕ ਦੂਜੇ ਉੱਤੇ ਹਨ। HUD ਵਿਵਸਥਿਤ ਕਰੋ ਨਾਲ ਹਟਾਓ।
+
+@ Arranges the HUD for this add-on and the others that are on
+pa ਇਸ ਐਡ-ਆਨ ਅਤੇ ਹੋਰ ਚਾਲੂ ਐਡ-ਆਨ ਲਈ HUD ਵਿਵਸਥਿਤ ਕਰਦਾ ਹੈ
+
+@ Shared by the add-ons that use it; shown only while one does
+pa ਇਸਨੂੰ ਵਰਤਣ ਵਾਲੇ ਐਡ-ਆਨ ਵਿੱਚ ਸਾਂਝਾ; ਸਿਰਫ਼ ਵਰਤੋਂ ਵੇਲੇ ਦਿਸਦਾ ਹੈ

@@ -2913,12 +2913,6 @@ mt Aqleb
 @ Details
 mt Dettalji
 
-@ Enter or click the box: toggle
-mt Enter jew ikklikkja l-kaxxa: aqleb
-
-@ Right / Tab / click: details
-mt Lemin / Tab / klikk: dettalji
-
 @ Input Remapping
 mt Assenjazzjoni tal-kontrolli
 
@@ -4258,3 +4252,18 @@ mt Xkubetta kompletament awtomatika li terġa' tgħabba bl-imsiemer tiegħek. Sp
 
 @ None
 mt Xejn
+
+@ Magazine
+mt Magażin
+
+@ Adjust HUD
+mt Aġġusta l-HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+mt {} jidħol fuq {}. Mexxih b'Aġġusta l-HUD.
+
+@ Arranges the HUD for this add-on and the others that are on
+mt Jirranġa l-HUD għal dan l-add-on u l-oħrajn mixgħula
+
+@ Shared by the add-ons that use it; shown only while one does
+mt Maqsum bejn l-add-ons li jużawh; jidher biss waqt li wieħed jużah

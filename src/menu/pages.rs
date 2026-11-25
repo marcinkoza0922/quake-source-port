@@ -78,6 +78,8 @@ pub(super) enum Run {
     RenameDemo,
     /// HUD → Edit HUD: the HUD editor (`crate::hud::editor`).
     EditHud,
+    /// The HUD editor for the add-ons that are on and the one with this toggle.
+    AdjustHud(&'static str),
 }
 
 pub use crate::net::browser::ServerEntry;
@@ -231,8 +233,8 @@ pub(super) const GAMEPLAY: &[Item] = &[
     slider("Field of View", "fov", 60.0, 130.0, 5.0),
     Item::Choice { label: "Camera", cvar: "cl_camera", choices: &[("First person", 0.0), ("Third person", 1.0), ("Shoulder right", 2.0), ("Shoulder left", 3.0)] },
     Item::Choice { label: "Viewmodels", cvar: "r_drawviewmodel", choices: &[("Center", 1.0), ("Right", 2.0), ("Left", 3.0), ("None", 0.0)] },
-    toggle("Visible Weapons", "cl_vwep"),
     slider("View Bob", "cl_bob", 0.0, 0.02, 0.002),
+    toggle("Visible Weapons", "cl_vwep"),
     toggle("Gun Kick", "v_gunkick"),
     Item::Heading("Saving"),
     Item::Choice { label: "On Death", cvar: "cl_deathaction", choices: &[("Ask", 0.0), ("Most recent save", 1.0), ("Select save", 2.0), ("Restart level", 3.0)] },

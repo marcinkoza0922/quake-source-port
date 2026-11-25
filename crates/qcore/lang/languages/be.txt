@@ -2913,12 +2913,6 @@ be Пераключыць
 @ Details
 be Падрабязней
 
-@ Enter or click the box: toggle
-be Enter або пстрычка па сцяжку: пераключыць
-
-@ Right / Tab / click: details
-be Управа / Tab / пстрычка: падрабязней
-
 @ Input Remapping
 be Перапрызначэнне кіравання
 
@@ -4258,3 +4252,18 @@ be Аўтаматычная вінтоўка, якая зараджаецца в
 
 @ None
 be Няма
+
+@ Magazine
+be Магазін
+
+@ Adjust HUD
+be Наладзіць інтэрфейс
+
+@ {} overlaps {}. Move it with Adjust HUD.
+be {} перакрывае {}. Перамясціце праз «Наладзіць інтэрфейс».
+
+@ Arranges the HUD for this add-on and the others that are on
+be Размяшчае інтэрфейс для гэтага дапаўнення і іншых уключаных
+
+@ Shared by the add-ons that use it; shown only while one does
+be Агульны для дапаўненняў, якія яго выкарыстоўваюць; бачны, толькі пакуль выкарыстоўваецца

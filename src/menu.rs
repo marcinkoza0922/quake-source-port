@@ -58,6 +58,9 @@ mod touch;
 mod touch_editor;
 mod touchview;
 pub use touchview::ListRow;
+
+/// A screen, its row and its `sub_return`.
+type HudReturn = (Screen, usize, Option<(Page, Page, usize)>);
 pub(crate) use server_browser::SearchStatus;
 pub mod demos;
 
@@ -218,6 +221,10 @@ pub struct Menu {
     /// Page and row an open sub-page was entered from (sub-pages reachable
     /// from several pages return there; otherwise `parent_page`).
     sub_return: Option<(Page, Page, usize)>,
+    /// Where Adjust HUD was opened: the screen, its row and `sub_return`.
+    hud_return: Option<HudReturn>,
+    /// Add-on HUD elements in the way of another, as the add-ons are set.
+    pub hud_conflicts: Vec<(crate::hud::kind::Kind, crate::hud::kind::Kind)>,
     touch_shortcut: bool,
     /// Touch layout state (`touchview.rs`).
     tv: touchview::TouchView,
@@ -383,6 +390,8 @@ impl Menu {
             slider_drag: None,
             drop: None,
             sub_return: None,
+            hud_return: None,
+            hud_conflicts: Vec::new(),
             touch_shortcut: false,
             tv: Default::default(),
             display_scale: 1.0,
@@ -512,6 +521,7 @@ impl Menu {
     pub fn open(&mut self, s: Screen) {
         self.prev = self.screen;
         self.screen = s;
+        self.hud_return = None;
         self.touch_scroll = None;
         self.touch_from_main = false;
         self.new_game_setup = matches!(s, Screen::OptionsPage(Page::NewGameAddons | Page::NewGameCustomize));

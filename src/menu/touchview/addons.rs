@@ -95,7 +95,10 @@ impl Menu {
             tv_button(c, r, qcore::t!("Play"), if self.tv_pressed(r) { Look::Pressed } else { Look::Primary });
             y = r[1] + r[3] + 14.0;
         }
-        self.tv_note(c, y, self.addon_note(cv, page));
+        match self.hud_conflict_note(cv) {
+            Some(s) => self.tv_note(c, y, &s),
+            None => self.tv_note(c, y, self.addon_note(cv, page)),
+        }
         c.clip_rows(None);
     }
 

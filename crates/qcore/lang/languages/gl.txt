@@ -2913,12 +2913,6 @@ gl Alternar
 @ Details
 gl Detalles
 
-@ Enter or click the box: toggle
-gl Intro ou clic na caixa: alternar
-
-@ Right / Tab / click: details
-gl Dereita / Tab / clic: detalles
-
 @ Input Remapping
 gl Reasignación de controis
 
@@ -4258,3 +4252,18 @@ gl Un fusil automático que se recarga cos teus cravos. O disparo secundario apu
 
 @ None
 gl Ningún
+
+@ Magazine
+gl Cargador
+
+@ Adjust HUD
+gl Axustar a interface
+
+@ {} overlaps {}. Move it with Adjust HUD.
+gl {} superponse a {}. Móveo con Axustar a interface.
+
+@ Arranges the HUD for this add-on and the others that are on
+gl Organiza a interface para este complemento e os demais activados
+
+@ Shared by the add-ons that use it; shown only while one does
+gl Compartido polos complementos que o usan; só se mostra mentres un o usa

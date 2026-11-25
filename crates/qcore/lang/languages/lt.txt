@@ -2913,12 +2913,6 @@ lt Perjungti
 @ Details
 lt Išsamiau
 
-@ Enter or click the box: toggle
-lt Enter arba spustelėkite langelį: perjungti
-
-@ Right / Tab / click: details
-lt Dešinėn / Tab / spustelėjimas: išsamiau
-
 @ Input Remapping
 lt Įvesties perskyrimas
 
@@ -4258,3 +4252,18 @@ lt Automatinis šautuvas, užtaisomas jūsų vinimis. Alternatyvus šūvis taiko
 
 @ None
 lt Nėra
+
+@ Magazine
+lt Dėtuvė
+
+@ Adjust HUD
+lt Derinti HUD
+
+@ {} overlaps {}. Move it with Adjust HUD.
+lt {} dengia {}. Perkelkite per „Derinti HUD“.
+
+@ Arranges the HUD for this add-on and the others that are on
+lt Išdėsto HUD šiam priedui ir kitiems įjungtiems
+
+@ Shared by the add-ons that use it; shown only while one does
+lt Bendras jį naudojantiems priedams; rodomas tik kol kuris nors jį naudoja

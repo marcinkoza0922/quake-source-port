@@ -2913,12 +2913,6 @@ hi टॉगल
 @ Details
 hi विवरण
 
-@ Enter or click the box: toggle
-hi Enter या बॉक्स पर क्लिक: टॉगल
-
-@ Right / Tab / click: details
-hi दायाँ / Tab / क्लिक: विवरण
-
 @ Input Remapping
 hi इनपुट रीमैपिंग
 
@@ -4258,3 +4252,18 @@ hi फ़ुल-ऑटो राइफ़ल जो आपकी कीलों
 
 @ None
 hi कोई नहीं
+
+@ Magazine
+hi मैगज़ीन
+
+@ Adjust HUD
+hi HUD समायोजित करें
+
+@ {} overlaps {}. Move it with Adjust HUD.
+hi {} और {} एक-दूसरे पर हैं। HUD समायोजित करें से हटाएँ।
+
+@ Arranges the HUD for this add-on and the others that are on
+hi इस ऐड-ऑन और चालू अन्य ऐड-ऑन के लिए HUD व्यवस्थित करता है
+
+@ Shared by the add-ons that use it; shown only while one does
+hi इसे उपयोग करने वाले ऐड-ऑन में साझा; केवल उपयोग के समय दिखता है

@@ -23,8 +23,12 @@ otherwise. Toys only run with no deathmatch and no remote client
   (`SaveInfo::addons`). A plain `.sav` load makes the game vanilla.
 - Browser: both add-on pickers use a narrow checklist and a detail panel with
   a looping action preview, scrollable instructions, bindings and a parameter
-  submenu. Selection and enablement are independent. The running game's
-  add-on lock still applies to the checklist.
+  submenu. Pointing at a row selects it; a click anywhere on the row (or Enter)
+  toggles it. On the touch layout a tap opens the details and the switch
+  toggles. The running game's add-on lock still applies to the checklist.
+- HUD: elements add-ons bring (Magazine, Bullet Time) are shared HUD elements,
+  adjusted per combination with Adjust HUD; see DESIGN.md, "HUD layout and
+  editor".
 - Input: each weapon has an archived `addon_<name>_slot` assignment (1–10,
   where 10 is slot 0). Repeated selection of a stock weapon slot cycles its
   QC weapon and enabled assigned add-ons. Slots 9 and 0 have default keys 9
@@ -542,8 +546,9 @@ rounds and a running reload; `bullet` is a hitscan shot from the eye (through
 linked portals) that hurts the first entity via QC `T_Damage` and sends the
 stock blood particles or TE_GUNSHOT. `//qsp_gun` lines report shots, dry
 clicks and reload start/cancel/finish (`ClientEvent::Gun`); `//qsp_mag` lines
-(`MagSync`, on change) fill `ClientState::mags`, drawn by `mag_hud` above the
-status bar with a bar while reloading.
+(`MagSync`, on change) fill `ClientState::mags`, drawn by the shared
+Magazine HUD element (`mag_hud`) with a bar while reloading; a lone gun's
+readout takes the right-hand place, beside a centred gun.
 - Reload action: `+reload` (qinput button, usercmd bit 9
   `BUTTON_TOY_RELOAD`, only while a toy is held) is shared by every add-on
   with `Addon::reload`; the add-on browser and Controls list it. R by default

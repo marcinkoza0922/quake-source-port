@@ -2913,12 +2913,6 @@ gu ટૉગલ
 @ Details
 gu વિગતો
 
-@ Enter or click the box: toggle
-gu Enter અથવા બૉક્સ પર ક્લિક: ટૉગલ
-
-@ Right / Tab / click: details
-gu Right / Tab / ક્લિક: વિગતો
-
 @ Input Remapping
 gu ઇનપુટ ફરી સોંપણી
 
@@ -4258,3 +4252,18 @@ gu તમારા ખીલાથી રીલોડ થતી ફુલ-ઑટ
 
 @ None
 gu કંઈ નહીં
+
+@ Magazine
+gu મૅગેઝિન
+
+@ Adjust HUD
+gu HUD ગોઠવો
+
+@ {} overlaps {}. Move it with Adjust HUD.
+gu {} અને {} એકબીજા પર છે. HUD ગોઠવો થી ખસેડો.
+
+@ Arranges the HUD for this add-on and the others that are on
+gu આ અને અન્ય ચાલુ ઍડ-ઑન્સ માટે HUD ગોઠવે છે
+
+@ Shared by the add-ons that use it; shown only while one does
+gu તેનો ઉપયોગ કરતા ઍડ-ઑન્સ વચ્ચે સહિયારું; ફક્ત ઉપયોગ વખતે દેખાય છે

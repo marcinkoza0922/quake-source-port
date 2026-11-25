@@ -2913,12 +2913,6 @@ ur ٹوگل
 @ Details
 ur تفصیلات
 
-@ Enter or click the box: toggle
-ur Enter یا خانے پر کلک: ٹوگل
-
-@ Right / Tab / click: details
-ur دائیں / Tab / کلک: تفصیلات
-
 @ Input Remapping
 ur ان پٹ کی دوبارہ تفویض
 
@@ -4258,3 +4252,18 @@ ur فل آٹو رائفل جو آپ کی کیلوں سے ری لوڈ ہوتی ہ
 
 @ None
 ur کوئی نہیں
+
+@ Magazine
+ur میگزین
+
+@ Adjust HUD
+ur HUD ترتیب دیں
+
+@ {} overlaps {}. Move it with Adjust HUD.
+ur {} اور {} ایک دوسرے پر ہیں۔ HUD ترتیب دیں سے ہٹائیں۔
+
+@ Arranges the HUD for this add-on and the others that are on
+ur اس ایڈ آن اور دیگر چالو ایڈ آنز کے لیے HUD ترتیب دیتا ہے
+
+@ Shared by the add-ons that use it; shown only while one does
+ur اسے استعمال کرنے والے ایڈ آنز میں مشترک؛ صرف استعمال کے وقت دکھتا ہے
