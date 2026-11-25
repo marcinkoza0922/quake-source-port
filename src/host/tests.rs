@@ -10,6 +10,7 @@ mod shell_origin;
 mod origin_files;
 mod user_data;
 mod render_errors;
+mod page_hidden;
 mod game_choices;
 
 mod relaunch_tests {

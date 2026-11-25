@@ -131,6 +131,14 @@ impl Fs {
         self.paths.push(SearchPath { game, is_user_dir: true, source: Source::Dir(dir.into()) });
     }
 
+    /// Where the active game's user files go.
+    pub fn user_dir(&self) -> Option<&Path> {
+        self.paths.iter().rev().find_map(|p| match &p.source {
+            Source::Dir(d) if p.is_user_dir => Some(d.as_path()),
+            _ => None,
+        })
+    }
+
     /// Takes back the last [`Self::add_user_dir`] of `dir`.
     pub fn remove_user_dir(&mut self, dir: &Path) {
         if let Some(i) = self.paths.iter().rposition(|p| p.is_user_dir && matches!(&p.source, Source::Dir(d) if d == dir)) {

@@ -12,10 +12,37 @@ use wasm_bindgen::prelude::*;
 
 use crate::{Opts, apply_rumble, host, open_game, open_sound, platform};
 
-/// Inserts a game or user file into the virtual file system (not marked dirty).
+/// Inserts a game or user file into the virtual file system (not marked dirty);
+/// `modified_ms` is when it was written, as `Date.now()`.
 #[wasm_bindgen]
-pub fn vfs_mount(path: &str, bytes: Vec<u8>) {
-    qcore::vfs::mount_file(Path::new(path), bytes);
+pub fn vfs_mount(path: &str, bytes: Vec<u8>, modified_ms: Option<f64>) {
+    let modified = modified_ms.filter(|ms| (0.0..1e15).contains(ms));
+    let modified = modified.map(|ms| qcore::time::UNIX_EPOCH + std::time::Duration::from_secs_f64(ms / 1000.0));
+    qcore::vfs::mount_file(Path::new(path), bytes, modified);
+}
+
+/// When a file was written (as `Date.now()`), or `undefined` if there is none.
+#[wasm_bindgen]
+pub fn vfs_modified(path: &str) -> Option<f64> {
+    let t = qcore::vfs::modified(Path::new(path)).ok()?;
+    t.duration_since(qcore::time::UNIX_EPOCH).ok().map(|d| d.as_secs_f64() * 1000.0)
+}
+
+thread_local! {
+    static HOST: RefCell<Option<Rc<RefCell<host::Host>>>> = const { RefCell::new(None) };
+}
+
+/// The page is hidden or closing: writes the settings and an autosave to the
+/// virtual file system, for JS to store.
+#[wasm_bindgen]
+pub fn page_hidden() {
+    let host = HOST.with_borrow(Clone::clone);
+    // (not while a frame runs, e.g. under an alert)
+    if let Some(h) = host
+        && let Ok(mut h) = h.try_borrow_mut()
+    {
+        h.page_hidden();
+    }
 }
 
 /// Paths written since the last call. JS reads each with [`vfs_read`] and
@@ -58,6 +85,8 @@ pub async fn start(args: Vec<String>) -> Result<(), JsValue> {
     let mut host = host::Host::new(fs, renderer.into(), snd, o.args.clone());
     let _ = win.set_text_input(true);
     host.window = Some(win);
+    let host = Rc::new(RefCell::new(host));
+    HOST.set(Some(host.clone()));
 
     let mut audio = audio;
     let mut last = qplatform::ticks_ns();
@@ -66,6 +95,7 @@ pub async fn start(args: Vec<String>) -> Result<(), JsValue> {
     *cb.borrow_mut() = Some(Closure::new(move |_ts: f64| {
         let now = qplatform::ticks_ns();
         let el = now.saturating_sub(last) as f64 * 1e-9;
+        let mut host = host.borrow_mut();
         // host_maxfps below the display rate: skip this animation frame
         let maxfps = if host.timedemo_active() { 0.0 } else { host.server.core.cvars.value_of("host_maxfps") };
         if maxfps > 0.0 && el + 0.002 < 1.0 / maxfps as f64 {
@@ -80,11 +110,15 @@ pub async fn start(args: Vec<String>) -> Result<(), JsValue> {
             // the page stays; persist config and stop the loop
             host.write_config();
             audio.take();
-            if let Some((title, message)) = host.fatal.take() {
+            HOST.set(None);
+            let fatal = host.fatal.take();
+            drop(host);
+            if let Some((title, message)) = fatal {
                 qplatform::error_box(title, &message);
             }
             return; // no further frames (the closure cannot drop itself while running)
         }
+        drop(host);
         request_frame(&next);
     }));
     request_frame(&cb);

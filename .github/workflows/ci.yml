@@ -72,6 +72,8 @@ jobs:
         with: { key: ci-wasm }
       - name: Web build compiles
         run: cargo check --locked --lib --target wasm32-unknown-unknown -p quake-source-port
+      - name: Web page
+        run: node --test tools/webbuild/main.test.mjs
 
   # What the releases are built for must at least compile before a tag.
   systems:

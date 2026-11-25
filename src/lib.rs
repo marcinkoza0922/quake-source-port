@@ -286,6 +286,8 @@ fn run_engine(o: &Opts, fixed_step: Option<f64>) -> Result<(), (&'static str, St
     }
 
     let mut last = Instant::now();
+    #[cfg(target_os = "android")]
+    let mut surface_failing: Option<Instant> = None;
     loop {
         // Host_FilterTime: timedemo runs uncapped.
         let maxfps = if dedicated { 72.0 } else if host.timedemo_active() { 0.0 } else { host.server.core.cvars.value_of("host_maxfps") };
@@ -344,6 +346,7 @@ fn run_engine(o: &Opts, fixed_step: Option<f64>) -> Result<(), (&'static str, St
                 host.input.phone_gyro = p.phone_gyro(win, host.wants_phone_gyro());
             }
             if host.backgrounded {
+                std::thread::sleep(Duration::from_millis(50));
                 continue;
             }
             Vec::new()
@@ -353,10 +356,23 @@ fn run_engine(o: &Opts, fixed_step: Option<f64>) -> Result<(), (&'static str, St
             if let Some(native) = win.android_window() {
                 let id = native.id();
                 let (w, h) = win.drawable_size();
-                host.r.windowed()
+                let synced = host.r.windowed()
                     .ok_or(("Quake graphics surface failed", String::from("no renderer")))?
-                    .sync_android_window(native, id, (w, h))
-                    .map_err(|e| ("Quake graphics surface failed", e.to_string()))?;
+                    .sync_android_window(native, id, (w, h));
+                match synced {
+                    Ok(()) => surface_failing = None,
+                    // Android may be about to replace the window
+                    Err(e) => {
+                        let since = *surface_failing.get_or_insert_with(Instant::now);
+                        if since.elapsed() > Duration::from_secs(5) {
+                            host.background_autosave();
+                            host.write_config();
+                            return Err(("Quake graphics surface failed", e.to_string()));
+                        }
+                        std::thread::sleep(Duration::from_millis(50));
+                        continue;
+                    }
+                }
                 host.r.resize(w, h);
             } else {
                 std::thread::sleep(Duration::from_millis(10));
