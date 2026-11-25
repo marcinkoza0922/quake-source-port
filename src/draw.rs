@@ -97,19 +97,6 @@ pub fn player_color(c: i32) -> [f32; 4] {
     [r, g, b, 1.0]
 }
 
-#[cfg(test)]
-mod translate_tests {
-    #[test]
-    fn rows_map_like_the_original() {
-        let mut px = [16u8, 31, 96, 111, 5, 255];
-        super::translate_player(&mut px, 2, 9);
-        assert_eq!(px, [32, 47, 159, 144, 5, 255]);
-        let mut px = [16u8, 96];
-        super::translate_player(&mut px, 1, 6);
-        assert_eq!(px, [16, 96]);
-    }
-}
-
 /// A 2D draw list in virtual units: `scale` pixels per unit, offset `ox,oy`.
 pub struct Canvas {
     pub list: Vec<Draw2D>,
@@ -473,5 +460,18 @@ impl Canvas {
     /// Whole-screen fade (Draw_FadeScreen).
     pub fn fade_screen(&mut self) {
         self.list.push(Draw2D::Fill { x: 0.0, y: 0.0, w: self.w, h: self.h, color: [0.0, 0.0, 0.0, 0.5] });
+    }
+}
+
+#[cfg(test)]
+mod translate_tests {
+    #[test]
+    fn rows_map_like_the_original() {
+        let mut px = [16u8, 31, 96, 111, 5, 255];
+        super::translate_player(&mut px, 2, 9);
+        assert_eq!(px, [32, 47, 159, 144, 5, 255]);
+        let mut px = [16u8, 96];
+        super::translate_player(&mut px, 1, 6);
+        assert_eq!(px, [16, 96]);
     }
 }

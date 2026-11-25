@@ -64,9 +64,8 @@ impl NetServer {
 
     /// Drop every remote client (server shutdown); sends svc_disconnect.
     pub fn shutdown(&mut self, sv: &mut Server, now: f64) {
-        for i in 0..self.remotes.len() {
-            let slot = self.remotes[i].slot;
-            sv.drop_client(slot, false);
+        for r in &self.remotes {
+            sv.drop_client(r.slot, false);
         }
         self.send(sv, now);
         self.remotes.clear();

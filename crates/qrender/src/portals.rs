@@ -242,6 +242,11 @@ impl Portal {
     }
 }
 
+/// Enumerate the exact teleporter windows used by the renderer, without a GPU.
+pub fn inspect(bsp: &Bsp) -> Vec<Portal> {
+    discover(bsp, &world::World::build(bsp, None))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -401,9 +406,4 @@ mod tests {
         assert!(side([5.0, 5.0, 12.0]) > 0.0);
         assert!(side([5.0, 5.0, 0.0]) < 0.0);
     }
-}
-
-/// Enumerate the exact teleporter windows used by the renderer, without a GPU.
-pub fn inspect(bsp: &Bsp) -> Vec<Portal> {
-    discover(bsp, &world::World::build(bsp, None))
 }

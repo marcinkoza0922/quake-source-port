@@ -174,7 +174,7 @@ fn start_bsp_renders_non_black() {
     ];
     let portal_single = RenderFrame { splits: &portal_splits[..1], ..portal_frame };
     let portal_double = RenderFrame { splits: &portal_splits, ..portal_frame };
-    let cell = |pixels: &[u8], x: usize| pixels.chunks_exact(320 * 4)
+    let cell = |pixels: &[u8], x: usize| pixels.as_chunks::<{ 320 * 4 }>().0.iter()
         .flat_map(|row| row[x * 4..(x + 160) * 4].iter().copied()).collect::<Vec<_>>();
     r.render(&portal_single).unwrap();
     let cell_expected = cell(&r.read_pixels().unwrap(), 0);

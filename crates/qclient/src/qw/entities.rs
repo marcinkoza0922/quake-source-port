@@ -80,14 +80,14 @@ impl QwState {
             if !prev.present && st.modelindex == 0 {
                 st.modelindex = self.playerindex;
             }
-            for i in 0..3 {
+            for (i, o) in st.origin.iter_mut().enumerate() {
                 if flags & (DF_ORIGIN << i) != 0 {
-                    st.origin[i] = read_coord(m);
+                    *o = read_coord(m);
                 }
             }
-            for i in 0..3 {
+            for (i, a) in st.viewangles.iter_mut().enumerate() {
                 if flags & (DF_ANGLES << i) != 0 {
-                    st.viewangles[i] = read_angle16(m);
+                    *a = read_angle16(m);
                 }
             }
             if flags & DF_MODEL != 0 {
@@ -129,8 +129,8 @@ impl QwState {
         if flags & PF_COMMAND != 0 {
             st.command = read_delta_usercmd(m, &UserCmd::default());
         }
-        for i in 0..3 {
-            st.velocity[i] = if flags & (PF_VELOCITY1 << i) != 0 { m.short() as f32 } else { 0.0 };
+        for (i, v) in st.velocity.iter_mut().enumerate() {
+            *v = if flags & (PF_VELOCITY1 << i) != 0 { m.short() as f32 } else { 0.0 };
         }
         st.modelindex = if flags & PF_MODEL != 0 { m.byte().max(0) as usize } else { playerindex };
         st.skinnum = if flags & PF_SKINNUM != 0 { m.byte() } else { 0 };

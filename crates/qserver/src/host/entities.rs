@@ -221,8 +221,8 @@ impl Ctx<'_> {
         let e = vm.g_i(p(0));
         let Some(i) = self.client_of(e) else { return Err(vm.run_error("Entity is not a client")) };
         let g = self.c.sv.globals.parm1;
-        for k in 0..NUM_SPAWN_PARMS {
-            vm.set_g_f(g + k, self.c.clients[i].spawn_parms[k]);
+        for (k, &v) in self.c.clients[i].spawn_parms.iter().enumerate() {
+            vm.set_g_f(g + k, v);
         }
         Ok(())
     }

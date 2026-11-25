@@ -109,8 +109,8 @@ impl ClientState {
                 }
                 SVC_SERVERINFO => self.parse_serverinfo(&mut m)?,
                 SVC_SETANGLE => {
-                    for i in 0..3 {
-                        self.viewangles[i] = m.angle(pf);
+                    for a in &mut self.viewangles {
+                        *a = m.angle(pf);
                     }
                     self.fixangle = true;
                 }
