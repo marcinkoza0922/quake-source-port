@@ -34,7 +34,7 @@ jobs:
             [ -f "$f" ] && glslc --target-env=vulkan1.3 -O -Werror "$f" -o "spv/$(basename "$f").spv"
           done
           ls spv
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with: { name: spirv, path: spv }
 
   build:
@@ -94,7 +94,7 @@ jobs:
           mkdir "$d/docs" && cp docs/MANUAL.md "$d/docs/"
           if [ "${{ matrix.ext }}" = zip ]; then 7z a "$d.zip" "$d" >/dev/null; else tar czf "$d.tar.gz" "$d"; fi
           echo "ASSET=$d.${{ matrix.ext }}" >> "$GITHUB_ENV"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with: { name: "${{ matrix.name }}", path: "${{ env.ASSET }}" }
 
   # musl Linux (Alpine, Void musl, Chimera...). Built in an Alpine container with musl
@@ -124,7 +124,7 @@ jobs:
         run: |
           sudo chown -R "$(id -u)" target
           echo "ASSET=$(sh tools/release_package.sh ${{ matrix.name }} target/release/quake-source-port)" >> "$GITHUB_ENV"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with: { name: "${{ matrix.name }}", path: "${{ env.ASSET }}" }
 
   # The BSDs build natively in a QEMU VM and link the system SDL3 package, which users
@@ -185,7 +185,7 @@ jobs:
           CARGO_TARGET_DIR: /tmp/qsp-target
       - name: Package
         run: echo "ASSET=$(sh tools/release_package.sh ${{ matrix.name }} out/quake-source-port)" >> "$GITHUB_ENV"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with: { name: "${{ matrix.name }}", path: "${{ env.ASSET }}" }
 
   android:
@@ -254,7 +254,7 @@ jobs:
           ref="${GITHUB_REF_NAME//\//-}"
           cp "$apk" "quake-source-port-$ref-android-arm64.apk"
           echo "ASSET=quake-source-port-$ref-android-arm64.apk" >> "$GITHUB_ENV"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with: { name: android-arm64, path: "${{ env.ASSET }}" }
 
   web:
@@ -277,7 +277,7 @@ jobs:
           cp README.md LICENSE "$d/"
           tar czf "$d.tar.gz" "$d"
           echo "ASSET=$d.tar.gz" >> "$GITHUB_ENV"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with: { name: web, path: "${{ env.ASSET }}", if-no-files-found: error }
 
   release:
