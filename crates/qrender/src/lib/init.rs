@@ -199,6 +199,7 @@ impl Renderer {
             ui_verts: Vec::new(),
             ui_ranges: Vec::new(),
             needs_resize: false,
+            minimised: false,
             frame_open: false,
             frame_count: 0,
             capture_requested: false,

@@ -562,6 +562,11 @@ pub fn barrier(
 
 impl From<vk::Result> for Error {
     fn from(r: vk::Result) -> Self {
-        Error::new(format!("vulkan: {r}"))
+        let lost = match r {
+            vk::Result::ERROR_DEVICE_LOST => Some(crate::Lost::Device),
+            vk::Result::ERROR_SURFACE_LOST_KHR => Some(crate::Lost::Surface),
+            _ => None,
+        };
+        Error { message: format!("vulkan: {r}"), lost }
     }
 }

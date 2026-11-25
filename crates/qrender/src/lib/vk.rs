@@ -96,6 +96,8 @@ pub struct Renderer {
     ui_verts: Vec<frame::UiVert>,
     ui_ranges: Vec<(Option<[f32; 4]>, u32, u32)>,
     needs_resize: bool,
+    /// The window has no area to present to; `needs_resize` stays set.
+    minimised: bool,
     /// Image acquired and fence reset, not submitted yet (`render`).
     frame_open: bool,
     frame_count: u64,
@@ -124,6 +126,17 @@ impl Renderer {
         let mut r = Self::init(gpu, palette, w, h)?;
         r.create_swapchain(true)?;
         Ok(r)
+    }
+
+    /// Makes a new window surface after [`Lost::Surface`]; the next `render`
+    /// makes its swapchain.
+    pub fn recreate_surface(&mut self, surface: &dyn SurfaceProvider) -> Result<()> {
+        self.idle();
+        if let Some(s) = self.swap.take() {
+            self.destroy_swapchain(s);
+        }
+        self.needs_resize = true;
+        self.gpu.recreate_surface(&|inst| surface.create_surface(inst))
     }
 
     /// Offscreen renderer (no surface); read results with [`Renderer::read_pixels`].
@@ -248,9 +261,13 @@ impl Renderer {
         self.swap.is_some() && !self.skip_present
     }
 
-    /// The captured frame as (width, height, RGBA8). Never pending here (the
-    /// wgpu backend may return `Ok(None)` until the read-back completes).
+    /// The captured frame as (width, height, RGBA8). Only pending (`Ok(None)`)
+    /// while the window is minimised (the wgpu backend's are until the
+    /// read-back completes).
     pub fn take_capture(&mut self) -> Result<Option<(u32, u32, Vec<u8>)>> {
+        if self.minimised && !self.skip_present && self.capture.is_none() {
+            return Ok(None);
+        }
         let (w, h) = match &self.swap {
             Some(_) if !self.skip_present => self.capture.as_ref().map_or((self.width, self.height), |c| (c.1, c.2)),
             _ => (self.width, self.height),

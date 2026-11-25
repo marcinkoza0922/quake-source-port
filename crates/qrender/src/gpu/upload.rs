@@ -173,6 +173,23 @@ impl Gpu {
         Ok(())
     }
 
+    /// Replaces a lost window surface (its swapchain is already destroyed).
+    pub fn recreate_surface(&mut self, make: &dyn Fn(u64) -> u64) -> Result<()> {
+        let Some(sf) = &self.surface_fn else { return Ok(()) };
+        let old = std::mem::replace(&mut self.surface, vk::SurfaceKHR::null());
+        // SAFETY: nothing uses the old surface any more.
+        unsafe { sf.destroy_surface(old, None) };
+        self.surface = <vk::SurfaceKHR as vk::Handle>::from_raw(make(vk::Handle::as_raw(self.instance.handle())));
+        if self.surface == vk::SurfaceKHR::null() {
+            return Err(Error::new("surface creation failed"));
+        }
+        // SAFETY: valid pdev/surface; qfam is one of its families.
+        if !unsafe { sf.get_physical_device_surface_support(self.pdev, self.qfam, self.surface)? } {
+            return Err(Error::new("the new surface can't be presented to"));
+        }
+        Ok(())
+    }
+
     pub fn destroy(&mut self) {
         // SAFETY: device idle; all resources freed by the caller.
         unsafe {

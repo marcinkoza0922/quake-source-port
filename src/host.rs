@@ -42,6 +42,7 @@ mod ghost;
 mod capture;
 mod mapswitch;
 mod render;
+mod render_errors;
 mod speed;
 mod level_time;
 mod metrics;
@@ -170,6 +171,9 @@ pub struct Host {
     pub realtime: f64,
     accum: f64,
     pub quit: bool,
+    /// Why the game has to end (title and message), with `quit`.
+    pub fatal: Option<(&'static str, String)>,
+    render_errors: render_errors::RenderErrors,
     pend_attack: bool,
     pend_attack2: bool,
     pend_reload: bool,
@@ -375,6 +379,8 @@ impl Host {
             realtime: 0.0,
             accum: 0.0,
             quit: false,
+            fatal: None,
+            render_errors: Default::default(),
             pend_attack: false,
             pend_attack2: false,
             pend_reload: false,
