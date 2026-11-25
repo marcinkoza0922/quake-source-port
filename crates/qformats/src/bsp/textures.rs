@@ -21,6 +21,8 @@ pub(super) fn parse_textures(lump: &[u8], q64: bool) -> Result<Vec<Option<MipTex
     let mut r = Reader::new(lump, FMT);
     let n = r.count("miptex", 4)?;
     let mut out = Vec::with_capacity(n);
+    // Padding and shared texel data are tolerated (below), within reason.
+    let mut budget = lump.len().saturating_mul(4) + (64 << 20);
     for i in 0..n {
         let ofs = r.i32()?;
         if ofs < 0 {
@@ -50,6 +52,9 @@ pub(super) fn parse_textures(lump: &[u8], q64: bool) -> Result<Vec<Option<MipTex
             for (lvl, &o) in offsets.iter().enumerate() {
                 let (w, h) = ((width >> lvl) as usize, (height >> lvl) as usize);
                 let sz = w * h;
+                budget = budget
+                    .checked_sub(sz)
+                    .ok_or_else(|| Error::new(FMT, format!("miptex {name} exceeds the texture data")))?;
                 let start = ofs as usize + o as usize;
                 // Quake64 stores only mip 0 (every offset points at it).
                 let own = lvl == 0 || !q64;

@@ -75,6 +75,10 @@ pub fn parse_pcx(data: &[u8]) -> Result<(Pic, [[u8; 3]; 256])> {
         return Err(r.err("missing palette"));
     }
     let pal = parse_palette(&data[data.len() - 768..])?;
+    // two RLE bytes make at most 63 pixels
+    if u64::from(w) * u64::from(h) > data.len() as u64 * 32 {
+        return Err(r.err("dimensions exceed data size"));
+    }
     let mut pixels = Vec::with_capacity(w as usize * h as usize);
     let mut row = Vec::with_capacity(bpl);
     for _ in 0..h {

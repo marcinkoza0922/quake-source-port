@@ -2,9 +2,13 @@
 
 use crate::{Error, Reader, Result, Vec3};
 mod lighting;
+mod refs;
 mod textures;
+mod tree;
+mod vis;
 pub use lighting::*;
 use textures::*;
+pub use vis::decompress_vis;
 
 const FMT: &str = "bsp";
 
@@ -275,7 +279,7 @@ impl Bsp {
             })
         })?;
         let surfedges = lump_records(lumps[LUMP_SURFEDGES], "surfedges", 4, |r| r.i32())?;
-        let models = lump_records(lumps[LUMP_MODELS], "models", 64, |r| {
+        let mut models = lump_records(lumps[LUMP_MODELS], "models", 64, |r| {
             let mins = r.vec3()?;
             let maxs = r.vec3()?;
             let origin = r.vec3()?;
@@ -402,13 +406,30 @@ impl Bsp {
             lump_records(lumps[LUMP_MARKSURFACES], "marksurfaces", mark_size, |r| {
                 if wide { r.u32() } else { Ok(r.u16()? as u32) }
             })?;
-        let edges = lump_records(lumps[LUMP_EDGES], "edges", edge_size, |r| {
+        let mut edges = lump_records(lumps[LUMP_EDGES], "edges", edge_size, |r| {
             if wide {
                 Ok([r.u32()?, r.u32()?])
             } else {
                 Ok([r.u16()? as u32, r.u16()? as u32])
             }
         })?;
+
+        tree::check(&nodes, &clipnodes, planes.len())?;
+        refs::repair_edges(&mut edges, &vertexes)?;
+        refs::check(&refs::Lumps {
+            planes: planes.len(),
+            nodes: &nodes,
+            leafs: &leafs,
+            marksurfaces: &marksurfaces,
+            faces: &faces,
+            texinfo: &texinfo,
+            surfedges: &surfedges,
+            edges: &edges,
+            models: &models,
+        })?;
+        for m in &mut models {
+            m.visleafs = m.visleafs.min(leafs.len() as i32);
+        }
 
         let (lighting, rgb_lighting) = if q64 {
             let (mono, rgb) = q64_lighting(lumps[LUMP_LIGHTING]);
@@ -470,29 +491,4 @@ impl Bsp {
         let visofs = self.leafs.get(leaf).map_or(-1, |l| l.visofs);
         decompress_vis(&self.visdata, visofs, numleafs)
     }
-}
-
-/// Decompress a run-length encoded PVS row. Returns `(numleafs + 7) / 8` bytes;
-/// if `visofs < 0` or out of range, all leafs are visible (0xff).
-pub fn decompress_vis(visdata: &[u8], visofs: i32, numleafs: usize) -> Vec<u8> {
-    let row = numleafs.div_ceil(8);
-    if visofs < 0 || visofs as usize >= visdata.len() {
-        return vec![0xff; row];
-    }
-    let mut out = Vec::with_capacity(row);
-    let mut i = visofs as usize;
-    while out.len() < row {
-        let Some(&b) = visdata.get(i) else { break };
-        i += 1;
-        if b != 0 {
-            out.push(b);
-            continue;
-        }
-        let Some(&c) = visdata.get(i) else { break };
-        i += 1;
-        let c = (c as usize).min(row - out.len());
-        out.resize(out.len() + c, 0);
-    }
-    out.resize(row, 0);
-    out
 }

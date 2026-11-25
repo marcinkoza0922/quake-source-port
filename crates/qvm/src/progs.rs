@@ -193,6 +193,10 @@ impl Progs {
         strings.push(0);
         let globals = words(lump(12, 4)?);
         let entityfields = h[14].max(0) as usize;
+        // defs address fields with 16 bits
+        if entityfields > 0x10000 {
+            return Err(err(format!("bad entityfields {entityfields}")));
+        }
 
         let mut p = Progs {
             version,

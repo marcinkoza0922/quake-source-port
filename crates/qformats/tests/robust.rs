@@ -381,3 +381,57 @@ fn bspx_lumps_fuzz_robust() {
     assert!(parsed.face_normals.is_some());
     fuzz(&d);
 }
+
+/// Found by tools/fuzz: the pixel buffer was sized from the header alone.
+#[test]
+fn pcx_larger_than_its_data_is_rejected() {
+    let mut d = vec![0u8; 128 + 769];
+    (d[0], d[2], d[3]) = (0x0a, 1, 8);
+    d[8..12].fill(0xff);
+    assert!(qformats::image::parse_pcx(&d).is_err());
+}
+
+/// A BSP29 with only the given lumps.
+fn bsp29(lumps: &[(usize, &[u8])]) -> Vec<u8> {
+    let mut d = 29i32.to_le_bytes().to_vec();
+    d.resize(4 + 15 * 8, 0);
+    for &(i, l) in lumps {
+        let (ofs, len) = (d.len() as i32, l.len() as i32);
+        d[4 + i * 8..8 + i * 8].copy_from_slice(&ofs.to_le_bytes());
+        d[8 + i * 8..12 + i * 8].copy_from_slice(&len.to_le_bytes());
+        d.extend_from_slice(l);
+    }
+    d
+}
+
+/// Found by tools/fuzz: texels missing from the file were zero-filled without limit.
+#[test]
+fn bsp_texture_padding_is_limited() {
+    let tex = |size: u32| {
+        let mut t = [1i32, 8].map(i32::to_le_bytes).concat();
+        t.extend([b'a'; 16]);
+        for v in [size, size, 40, 40, 40, 40] {
+            t.extend(v.to_le_bytes());
+        }
+        bsp29(&[(2, &t)])
+    };
+    assert!(Bsp::parse(&tex(64)).is_ok());
+    assert!(Bsp::parse(&tex(16384)).is_err());
+}
+
+/// Found by tools/fuzz: a node that is its own child overflowed the stack.
+#[test]
+fn bsp_node_cycles_are_rejected() {
+    let plane = [0u8; 20];
+    let node = |child: u16| {
+        let mut n = [0u8; 24];
+        n[4..6].copy_from_slice(&child.to_le_bytes());
+        n[6..8].copy_from_slice(&0xffffu16.to_le_bytes());
+        n
+    };
+    let leaf = [0u8; 28];
+    assert!(Bsp::parse(&bsp29(&[(1, &plane), (5, &node(0xffff)), (10, &leaf)])).is_ok());
+    assert!(Bsp::parse(&bsp29(&[(1, &plane), (5, &node(0)), (10, &leaf)])).is_err());
+    assert!(Bsp::parse(&bsp29(&[(1, &plane), (5, &node(0xffff))])).is_err(), "leaf out of range");
+    assert!(Bsp::parse(&bsp29(&[(5, &node(0xffff)), (10, &leaf)])).is_err(), "plane out of range");
+}
