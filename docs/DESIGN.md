@@ -747,7 +747,7 @@ All parsers take `&[u8]` and return `qformats::Result<T>`; bad input gives an `E
 - `stats() -> LevelStats { total/found secrets, total/killed monsters }`, used by qbot.
 - qworld `CollisionModel::submodels` mins/maxs are spread by ±1 as in Mod_LoadSubmodels; precache dispatches on file magic (alias models named `.bsp` load as alias).
 - Localization (`loc.rs`, `Core::loc`): `localization/loc_<language>*.txt` over English, loaded in `Server::new` and reloaded by the host when `language` changes (see Localization). bprint/sprint/centerprint use PF_VarString with LOC_GetString + LOC_Format (`{}`/`{N}` filled from the following args, each translated), WriteString translates `$key` as ironwail. `Localization::translate` is the client-side LOC_GetString for whole print strings.
-- Extensions advertised to `checkextension` (when `pr_checkextension` is on) include `DP_QC_GETSURFACE` (+ triangle/pointattribute, `surface.rs`), sandboxed `FRIK_FILE` (`qcfile.rs`: `data/` only, no `..`), `FTE_STRINGS` and `DP_QC_SPRINTF`. `clientstat`/`globalstat` custom stats reach PEXT2_PREDINFO clients as stat deltas.
+- Extensions advertised to `checkextension` (when `pr_checkextension` is on) include `DP_QC_GETSURFACE` (+ triangle/pointattribute, `surface.rs`), sandboxed `FRIK_FILE` (`qcfile.rs`: `data/` in the user dir, read from the gamedir's too, no `..`), `FTE_STRINGS` and `DP_QC_SPRINTF`. `clientstat`/`globalstat` custom stats reach PEXT2_PREDINFO clients as stat deltas.
 - Differences from ironwail: alias and sprite models get ±16 bounds, no `sv_netsort`, and the `alpha` key is kept only when progs define an `alpha` field.
 - Smoke tests: `smoke_fast` runs by default. `cargo nextest run --release -p qserver --run-ignored only smoke_all` loads every installed map; the summary goes to `target/qserver-smoke-all.txt`.
 
@@ -1209,7 +1209,7 @@ DOM events, pointer lock, Gamepad API polling, WebAudio ScriptProcessor,
 `js Date` for `local_time`, `window.alert` for `error_box`); natively it uses
 SDL3 (`src/sdl*`). `src/lib.rs` shares `open_game`/`open_sound`/
 `apply_rumble` between native `run()` and `src/web.rs`, which exports
-`vfs_mount`, `vfs_take_dirty`, `vfs_read` and `async start(args)`;
+`vfs_mount`, `vfs_modified`, `vfs_take_dirty`, `vfs_read`, `page_hidden` and `async start(args)`;
 `start` builds the host on `<canvas id="quake">` and drives `Host::frame`
 from requestAnimationFrame (`host_maxfps` skips animation frames).
 `tools/webbuild/build.sh` builds the root library as a `cdylib`
@@ -1220,8 +1220,16 @@ next to it. Serve with `python3 -m http.server -d target/web`. The page asks
 for the user's Quake folder or .pak files, caches them in IndexedDB (store
 `game`), mounts them under `/quake` via `vfs_mount`, restores user files
 (store `user`) under `/quake-user`, calls `start(args)` (`?args=` in the URL,
-space separated) and saves `vfs_take_dirty()` paths back to IndexedDB every
-2 s and when the page is hidden. Checked in headless Firefox (WebDriver BiDi,
+space separated) and saves `vfs_take_dirty()` paths back to IndexedDB (`{data,
+modified}`, so saves keep their order) every 2 s and when the page is hidden or
+left. Then `page_hidden` first writes the config and, at most every 30 s of
+level time, an autosave. Small files share a transaction, so renames stay whole;
+files over 4 MB (demos) go alone and while they grow only every 30 s. What fails
+stays pending, is retried after 10 s and shown over the game. Only
+`/quake-user/` is stored and mounted again. `node --test
+tools/webbuild/main.test.mjs` runs main.js against a stub engine and IndexedDB
+(CI's wasm job). `game <dir>` refuses on the web and Android, which can't start
+themselves again. Checked in headless Firefox (WebDriver BiDi,
 WebGPU enabled): e1m1, the demo loop with the main menu, and a save persisted
 to IndexedDB.
 

@@ -174,6 +174,9 @@ pub struct Host {
     /// Why the game has to end (title and message), with `quit`.
     pub fatal: Option<(&'static str, String)>,
     render_errors: render_errors::RenderErrors,
+    /// Level time of the last autosave for a hidden page (web).
+    #[cfg(any(target_arch = "wasm32", test))]
+    hidden_save: f64,
     pend_attack: bool,
     pend_attack2: bool,
     pend_reload: bool,
@@ -381,6 +384,8 @@ impl Host {
             quit: false,
             fatal: None,
             render_errors: Default::default(),
+            #[cfg(any(target_arch = "wasm32", test))]
+            hidden_save: f64::NEG_INFINITY,
             pend_attack: false,
             pend_attack2: false,
             pend_reload: false,

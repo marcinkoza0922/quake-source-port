@@ -252,7 +252,21 @@ impl Host {
         self.cv("sv_autosave_keep").clamp(0.0, crate::autosave::MAX as f32) as usize
     }
 
-    pub(super) fn background_autosave(&mut self) {
+    /// The page is hidden, maybe for good: browsers don't say when it closes.
+    /// People also just look at another tab, so the autosaves kept aren't all
+    /// spent on that.
+    #[cfg(any(target_arch = "wasm32", test))]
+    pub(crate) fn page_hidden(&mut self) {
+        const APART: f64 = 30.0;
+        let now = self.server.time();
+        if !(0.0..APART).contains(&(now - self.hidden_save)) {
+            self.hidden_save = now;
+            self.background_autosave();
+        }
+        self.write_config();
+    }
+
+    pub(crate) fn background_autosave(&mut self) {
         let keep = self.autosave_keep();
         if keep > 0 && self.can_autosave() {
             // The game surface may already be gone. The save is self-contained.

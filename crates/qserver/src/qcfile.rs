@@ -1,9 +1,10 @@
 //! `FRIK_FILE` file I/O builtins (`fopen`, `fclose`, `fgets`, `fputs`, `fseek`).
 //!
-//! Reads from the mounted Quake filesystem (`Fs`) or the gamedir's `data/`
-//! directory; writes are sandboxed under `<basedir>/<gamedir>/data/` (or
-//! in-memory when the filesystem root is unavailable) and never allow path
-//! traversal (`..`, absolute paths, drive prefixes).
+//! Files are written to `data/` in the game's user directory (the game data
+//! itself is never written to), and read from there first, then from the
+//! gamedir's `data/` (where they used to be written) and the mounted Quake
+//! filesystem (`Fs`). Paths never leave it (`..`, absolute paths, drive
+//! prefixes).
 
 use std::path::{Component, Path, PathBuf};
 
@@ -58,19 +59,25 @@ impl QcFiles {
     fn flush(f: &OpenFile) {
         if f.writable && f.dirty
             && let Some(p) = &f.path
+            && let Err(e) = qcore::vfs::write_atomic(p, &f.buf)
         {
-            if let Some(parent) = p.parent() {
-                let _ = std::fs::create_dir_all(parent);
-            }
-            let _ = std::fs::write(p, &f.buf);
+            eprintln!("couldn't write {}: {e}", p.display());
         }
     }
 
-    fn write_path(fs: &Fs, rel: &str) -> Option<PathBuf> {
-        let base = fs.basedir();
-        let game = fs.game_dir().unwrap_or("id1");
+    fn game_path(fs: &Fs, rel: &str) -> PathBuf {
         let rel = rel.strip_prefix("data/").unwrap_or(rel);
-        Some(base.join(game).join("data").join(rel))
+        fs.basedir().join(fs.game_dir().unwrap_or("id1")).join("data").join(rel)
+    }
+
+    fn write_path(fs: &Fs, rel: &str) -> PathBuf {
+        let name = rel.strip_prefix("data/").unwrap_or(rel);
+        fs.user_dir().map_or_else(|| Self::game_path(fs, rel), |d| d.join("data").join(name))
+    }
+
+    /// What was written before, here or (by older versions) in the gamedir.
+    fn written(fs: &Fs, rel: &str) -> Option<Vec<u8>> {
+        [Self::write_path(fs, rel), Self::game_path(fs, rel)].iter().find_map(|p| qcore::vfs::read(p).ok())
     }
 
     pub fn open(&mut self, fs: &Fs, name: &str, mode: i32) -> i32 {
@@ -85,22 +92,21 @@ impl QcFiles {
         };
         let entry = match mode {
             FILE_READ => {
-                let disk = Self::write_path(fs, &rel).and_then(|p| std::fs::read(p).ok());
-                let data = disk
+                let data = Self::written(fs, &rel)
                     .or_else(|| fs.open(&rel))
                     .or_else(|| fs.open(&format!("data/{rel}")));
                 let Some(buf) = data else { return -1 };
                 OpenFile { writable: false, path: None, buf, pos: 0, dirty: false }
             }
             FILE_APPEND => {
-                let path = Self::write_path(fs, &rel);
-                let mut buf = path.as_ref().and_then(|p| std::fs::read(p).ok()).unwrap_or_default();
+                let path = Some(Self::write_path(fs, &rel));
+                let mut buf = Self::written(fs, &rel).unwrap_or_default();
                 let pos = buf.len();
                 buf.reserve(64);
                 OpenFile { writable: true, path, buf, pos, dirty: false }
             }
             FILE_WRITE => {
-                let path = Self::write_path(fs, &rel);
+                let path = Some(Self::write_path(fs, &rel));
                 OpenFile { writable: true, path, buf: Vec::new(), pos: 0, dirty: true }
             }
             _ => return -1,
@@ -174,5 +180,46 @@ impl QcFiles {
 impl Drop for QcFiles {
     fn drop(&mut self) {
         self.close_all();
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn files_go_to_the_user_dir_and_old_ones_are_still_read() {
+        let dir = std::env::temp_dir().join(format!("qsp-qcfile-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let (base, user) = (dir.join("quake"), dir.join("user/id1"));
+        std::fs::create_dir_all(base.join("id1/data")).unwrap();
+        std::fs::write(base.join("id1/data/old.txt"), "old\n").unwrap();
+        let mut fs = Fs::new(&base);
+        fs.add_game_dir("id1");
+        fs.add_user_dir(&user);
+        let mut q = QcFiles::default();
+        let first_line = |q: &mut QcFiles, name: &str| {
+            let h = q.open(&fs, name, FILE_READ);
+            let line = q.gets(h);
+            q.close(h);
+            line.map(|l| String::from_utf8(l).unwrap())
+        };
+        assert_eq!(first_line(&mut q, "old.txt").as_deref(), Some("old"));
+
+        let h = q.open(&fs, "data/new.txt", FILE_WRITE);
+        q.puts(h, b"new\n");
+        q.close(h);
+        assert_eq!(std::fs::read(user.join("data/new.txt")).unwrap(), b"new\n");
+        assert_eq!(first_line(&mut q, "new.txt").as_deref(), Some("new"));
+
+        // appending carries the old file over and leaves it as it was
+        let h = q.open(&fs, "old.txt", FILE_APPEND);
+        q.puts(h, b"more\n");
+        q.close(h);
+        assert_eq!(std::fs::read(user.join("data/old.txt")).unwrap(), b"old\nmore\n");
+        assert_eq!(std::fs::read(base.join("id1/data/old.txt")).unwrap(), b"old\n");
+        assert!(q.open(&fs, "../up.txt", FILE_WRITE) < 0);
+        drop(q);
+        let _ = std::fs::remove_dir_all(&dir);
     }
 }

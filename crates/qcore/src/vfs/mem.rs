@@ -13,8 +13,12 @@ use std::sync::Mutex;
 #[cfg(target_arch = "wasm32")]
 pub(super) static GLOBAL: Mutex<MemFs> = Mutex::new(MemFs::new());
 
+#[derive(Clone, Default)]
+struct Bytes(Vec<u8>);
+
 struct File {
-    data: Arc<[u8]>,
+    /// Shared with open readers; appending copies only while there are any.
+    data: Arc<Bytes>,
     modified: SystemTime,
 }
 
@@ -38,6 +42,15 @@ fn norm(path: &Path) -> PathBuf {
     out
 }
 
+/// A file's bytes as they were when it was opened.
+struct Shared(Arc<Bytes>);
+
+impl AsRef<[u8]> for Shared {
+    fn as_ref(&self) -> &[u8] {
+        &self.0.0
+    }
+}
+
 fn not_found(path: &Path) -> io::Error {
     io::Error::new(io::ErrorKind::NotFound, format!("{}: not found", path.display()))
 }
@@ -56,7 +69,7 @@ impl MemFs {
     }
 
     pub(super) fn read(&self, path: &Path) -> io::Result<Vec<u8>> {
-        self.files.get(&norm(path)).map(|f| f.data.to_vec()).ok_or_else(|| not_found(path))
+        self.files.get(&norm(path)).map(|f| f.data.0.clone()).ok_or_else(|| not_found(path))
     }
 
     pub(super) fn write(&mut self, path: &Path, data: &[u8], append: bool) -> io::Result<()> {
@@ -66,18 +79,21 @@ impl MemFs {
         }
         self.add_parents(&p);
         let modified = SystemTime::now();
-        let entry = self.files.entry(p.clone()).or_insert_with(|| File { data: Arc::from([]), modified });
-        let mut bytes = if append { entry.data.to_vec() } else { Vec::new() };
-        bytes.extend_from_slice(data);
-        *entry = File { data: Arc::from(bytes), modified };
+        let entry = self.files.entry(p.clone()).or_insert_with(|| File { data: Default::default(), modified });
+        if append {
+            Arc::make_mut(&mut entry.data).0.extend_from_slice(data);
+        } else {
+            entry.data = Arc::new(Bytes(data.to_vec()));
+        }
+        entry.modified = modified;
         self.dirty.insert(p);
         Ok(())
     }
 
-    pub(super) fn mount(&mut self, path: &Path, data: Vec<u8>) {
+    pub(super) fn mount(&mut self, path: &Path, data: Vec<u8>, modified: Option<SystemTime>) {
         let p = norm(path);
         self.add_parents(&p);
-        self.files.insert(p, File { data: Arc::from(data), modified: SystemTime::now() });
+        self.files.insert(p, File { data: Arc::new(Bytes(data)), modified: modified.unwrap_or_else(SystemTime::now) });
     }
 
     pub(super) fn exists(&self, path: &Path) -> bool { self.is_file(path) || self.is_dir(path) }
@@ -119,7 +135,7 @@ impl MemFs {
             .collect();
         out.extend(self.files.iter()
             .filter(|(f, _)| f.parent() == Some(p.as_path()))
-            .map(|(f, file)| DirEntry { path: f.clone(), is_dir: false, len: file.data.len() as u64 }));
+            .map(|(f, file)| DirEntry { path: f.clone(), is_dir: false, len: file.data.0.len() as u64 }));
         Ok(out)
     }
 
@@ -129,7 +145,7 @@ impl MemFs {
 
     pub(super) fn open_read(&self, path: &Path) -> io::Result<Box<dyn ReadSeek>> {
         let f = self.files.get(&norm(path)).ok_or_else(|| not_found(path))?;
-        Ok(Box::new(Cursor::new(f.data.clone())))
+        Ok(Box::new(Cursor::new(Shared(f.data.clone()))))
     }
 
     /// Written or removed paths since the last call (removed ones no longer exist).
@@ -146,7 +162,7 @@ mod tests {
     #[test]
     fn tree_and_dirty_tracking() {
         let mut fs = MemFs::new();
-        fs.mount(Path::new("/quake/id1/pak0.pak"), b"PACK".to_vec());
+        fs.mount(Path::new("/quake/id1/pak0.pak"), b"PACK".to_vec(), None);
         assert!(fs.is_dir(Path::new("/quake")) && fs.is_dir(Path::new("/quake/id1")));
         assert!(fs.take_dirty().is_empty(), "mounts are not dirty");
         fs.write(Path::new("/quake-user/id1/./config.cfg"), b"bind", false).unwrap();
@@ -164,5 +180,33 @@ mod tests {
         assert!(!fs.is_file(Path::new("/quake-user/id1/config.cfg")));
         assert_eq!(fs.take_dirty().len(), 2);
         assert!(fs.remove_file(Path::new("/nope")).is_err());
+    }
+
+    #[test]
+    fn kept_files_keep_their_times() {
+        let mut fs = MemFs::new();
+        let at = |s| crate::time::UNIX_EPOCH + std::time::Duration::from_secs(s);
+        let path = Path::new("/quake-user/id1/a.sav");
+        fs.mount(path, b"old".to_vec(), Some(at(1000)));
+        fs.mount(Path::new("/quake-user/id1/b.sav"), b"older".to_vec(), Some(at(500)));
+        assert_eq!(fs.modified(path).unwrap(), at(1000));
+        // moved, as autosaves are
+        fs.rename(path, Path::new("/quake-user/id1/c.sav")).unwrap();
+        assert_eq!(fs.modified(Path::new("/quake-user/id1/c.sav")).unwrap(), at(1000));
+        fs.write(Path::new("/quake-user/id1/b.sav"), b"new", false).unwrap();
+        assert!(fs.modified(Path::new("/quake-user/id1/b.sav")).unwrap() > at(1000));
+    }
+
+    #[test]
+    fn an_open_file_stays_as_it_was_while_appended_to() {
+        let mut fs = MemFs::new();
+        let path = Path::new("/quake-user/id1/a.dem");
+        fs.write(path, b"one", false).unwrap();
+        let mut r = fs.open_read(path).unwrap();
+        fs.write(path, b"two", true).unwrap();
+        let mut s = String::new();
+        r.read_to_string(&mut s).unwrap();
+        assert_eq!(s, "one");
+        assert_eq!(fs.read(path).unwrap(), b"onetwo");
     }
 }

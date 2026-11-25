@@ -51,6 +51,14 @@ impl Host {
             }
             args.extend(["+map".to_string(), m.to_string()]);
         }
+        // An Android app and a web page can't start themselves again.
+        if cfg!(any(target_os = "android", target_arch = "wasm32")) {
+            self.con.print(&format!("game: {} can't be started from here\n", info.title));
+            if self.key_dest() != KeyDest::Console {
+                self.cbuf.add_text("toggleconsole\n"); // where it says so
+            }
+            return;
+        }
         self.write_config();
         let Ok(exe) = std::env::current_exe() else {
             self.con.print(&qcore::ctr!("game: can't find the engine executable\n"));

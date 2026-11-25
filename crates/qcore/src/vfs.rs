@@ -83,7 +83,7 @@ mod imp {
     pub fn open_read(path: &Path) -> io::Result<Box<dyn ReadSeek>> {
         Ok(Box::new(fs::File::open(path)?))
     }
-    pub fn mount_file(path: &Path, data: Vec<u8>) { let _ = write(path, &data); }
+    pub fn mount_file(path: &Path, data: Vec<u8>, _modified: Option<SystemTime>) { let _ = write(path, &data); }
     pub fn take_dirty() -> Vec<PathBuf> { Vec::new() }
 }
 
@@ -105,7 +105,8 @@ mod imp {
     pub fn read_dir(path: &Path) -> io::Result<Vec<DirEntry>> { GLOBAL.lock().unwrap().read_dir(path) }
     pub fn modified(path: &Path) -> io::Result<SystemTime> { GLOBAL.lock().unwrap().modified(path) }
     pub fn open_read(path: &Path) -> io::Result<Box<dyn ReadSeek>> { GLOBAL.lock().unwrap().open_read(path) }
-    pub fn mount_file(path: &Path, data: Vec<u8>) { GLOBAL.lock().unwrap().mount(path, data) }
+    /// `modified`: when it was written, for a file kept from an earlier visit.
+    pub fn mount_file(path: &Path, data: Vec<u8>, modified: Option<SystemTime>) { GLOBAL.lock().unwrap().mount(path, data, modified) }
     pub fn take_dirty() -> Vec<PathBuf> { GLOBAL.lock().unwrap().take_dirty() }
 }
 

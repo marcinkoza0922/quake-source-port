@@ -4,6 +4,8 @@ pub(super) struct Presentation {
     instance: wgpu::Instance,
     window_id: usize,
     pub(super) lost: bool,
+    /// The surface's configuration while there is none.
+    cfg: Option<wgpu::SurfaceConfiguration>,
 }
 
 impl Renderer {
@@ -28,7 +30,7 @@ impl Renderer {
             });
             match result {
                 Ok(mut renderer) => {
-                    renderer.android_surface = Some(Presentation { instance, window_id, lost: false });
+                    renderer.android_surface = Some(Presentation { instance, window_id, lost: false, cfg: None });
                     return Ok(renderer);
                 }
                 Err(e) => errors.push(format!("{backend:?}: {e}")),
@@ -47,15 +49,17 @@ impl Renderer {
         window_id: usize,
         (width, height): (u32, u32),
     ) -> Result<()> {
-        let (Some(state), Some((_, cfg))) = (&mut self.android_surface, &self.surface) else {
-            return Ok(());
-        };
+        let Some(state) = &mut self.android_surface else { return Ok(()) };
         if state.window_id == window_id && !state.lost {
             return Ok(());
         }
-        let cfg = cfg.clone();
         // Drop the old EGL or Vulkan surface before creating a new one for the same window.
-        self.surface = None;
+        // Its configuration outlives a creation that fails, to try again.
+        if let Some((_, cfg)) = self.surface.take() {
+            state.cfg = Some(cfg);
+        }
+        let Some(cfg) = state.cfg.clone() else { return Ok(()) };
+        state.lost = true;
         let surface = create_surface(&state.instance, window)?;
         self.surface = Some((surface, cfg));
         state.window_id = window_id;
