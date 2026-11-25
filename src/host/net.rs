@@ -54,6 +54,7 @@ impl Host {
             n.disconnect(self.realtime);
         }
         if let Some(mut q) = self.qw_client.take() {
+            q.unmount(&mut self.server.core.fs);
             q.disconnect();
         }
         if self.demo.take().is_some() {
@@ -488,7 +489,7 @@ impl Host {
                 break;
             }
             let end = out[p + 1..].iter().position(|&b| b == 0).map_or(out.len(), |e| p + 1 + e);
-            let s = String::from_utf8_lossy(&out[p + 1..end]).into_owned();
+            let s = qcore::text::decode(&out[p + 1..end]);
             p = end + 1;
             let low = s.trim_start().to_ascii_lowercase();
             if ["prespawn", "spawn", "begin", "name", "color"].iter().any(|p| low.starts_with(p)) {

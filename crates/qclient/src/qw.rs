@@ -254,7 +254,7 @@ impl Nq {
         }
     }
     fn string(&mut self, s: &str) {
-        self.0.string(s.as_bytes());
+        self.0.string(&qcore::text::wire(s));
     }
 }
 

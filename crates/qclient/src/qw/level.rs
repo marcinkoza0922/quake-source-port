@@ -31,7 +31,7 @@ impl QwState {
                 return err(format!("bad playernum {}", self.playernum));
             }
         }
-        self.levelname = m.string_lossy();
+        self.levelname = m.string_text();
         let mv = &mut self.movevars;
         for f in [
             &mut mv.gravity,

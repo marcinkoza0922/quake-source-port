@@ -131,6 +131,13 @@ impl Fs {
         self.paths.push(SearchPath { game, is_user_dir: true, source: Source::Dir(dir.into()) });
     }
 
+    /// Takes back the last [`Self::add_user_dir`] of `dir`.
+    pub fn remove_user_dir(&mut self, dir: &Path) {
+        if let Some(i) = self.paths.iter().rposition(|p| p.is_user_dir && matches!(&p.source, Source::Dir(d) if d == dir)) {
+            self.paths.remove(i);
+        }
+    }
+
     /// Replaces any previously added user dirs with `dir` at top priority.
     pub fn replace_user_dir(&mut self, dir: impl Into<PathBuf>) {
         self.paths.retain(|p| !p.is_user_dir);

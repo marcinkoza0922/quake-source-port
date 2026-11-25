@@ -436,7 +436,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         };
         let slot = g.slot;
         let rest = a.args().split_once(char::is_whitespace).map_or("", |(_, r)| r).trim().to_string();
-        h.server.client_command(slot, &rest);
+        h.server.client_command(slot, &qcore::lang::quake_encode(&rest));
         h.drain_server_log();
     });
     // Debug/headless: hand split-screen player 2..6 a toy (index into

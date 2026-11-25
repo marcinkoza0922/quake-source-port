@@ -326,6 +326,13 @@ impl QwClient {
         Ok(())
     }
 
+    /// The server's files stop overriding the game's own.
+    pub fn unmount(&mut self, fs: &mut Fs) {
+        if let Some(dir) = self.dl_dir.take() {
+            fs.remove_user_dir(&dir);
+        }
+    }
+
     /// Downloads go to the user data dir of the server's gamedir.
     fn mount_download_dir(&mut self, fs: &mut Fs) -> Result<(), String> {
         let game = safe_gamedir(&self.qw.gamedir).ok_or("The server sent a bad game directory\n")?;
@@ -334,6 +341,7 @@ impl QwClient {
             None => crate::user_dir(&game),
         };
         if self.dl_dir.as_ref() != Some(&dir) {
+            self.unmount(fs);
             fs.add_user_dir(&dir);
             self.dl_dir = Some(dir);
         }

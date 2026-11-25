@@ -106,6 +106,17 @@ fn connects_downloads_and_plays() {
     let ahead = ((sim[0] - s[0]).powi(2) + (sim[1] - s[1]).powi(2)).sqrt();
     assert!(ahead >= moved - 0.5 && ahead < moved + 40.0, "server {p:?} predicted {sim:?}");
     assert!((sim[2] - p[2]).abs() < 1.0);
+    // what it downloaded doesn't stay over the game's own files
+    let other = std::env::temp_dir().join(format!("qsp-qwtest2-{}", std::process::id()));
+    std::fs::create_dir_all(other.join("progs")).unwrap();
+    std::fs::write(other.join("progs/qsp_mount.mdl"), b"x").unwrap();
+    qc.unmount(&mut fs);
+    fs.add_user_dir(&other);
+    qc.dl_dir = Some(other.clone());
+    assert!(fs.exists("progs/qsp_mount.mdl"));
+    qc.unmount(&mut fs);
+    assert!(!fs.exists("progs/qsp_mount.mdl") && fs.exists("maps/e1m1.bsp"));
+    let _ = std::fs::remove_dir_all(&other);
     qc.disconnect();
 }
 

@@ -413,7 +413,7 @@ impl Host {
             {
                 let player_pos = Vec3::from_array(self.cl.entities.get(self.cl.viewentity).map_or([0.0; 3], |e| e.origin));
                 let header = crate::automap::HeaderInfo {
-                    title: &self.cl.levelname,
+                    title: &qcore::text::plain(&self.cl.levelname),
                     kills: self.cl.stats[qnet::protocol::STAT_MONSTERS],
                     total_kills: self.cl.stats[qnet::protocol::STAT_TOTALMONSTERS],
                     secrets: self.cl.stats[qnet::protocol::STAT_SECRETS],

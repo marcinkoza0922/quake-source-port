@@ -129,7 +129,7 @@ impl Server {
         let l = self.level.as_mut().unwrap();
         let c = &mut self.core;
         let g = c.sv.globals.clone();
-        if c.sv.loadgame {
+        if c.sv.in_save(i) {
             c.clients[i].spawn_parms = c.sv.loadgame_parms;
         } else {
             { let fnum = l.vm.g_i(g.f_set_new_parms); exec(&mut l.vm, c, &mut l.world, fnum); }
@@ -154,7 +154,7 @@ impl Server {
         if !self.core.clients[i].active {
             return None;
         }
-        self.core.clients[i].name = name.into();
+        self.core.clients[i].name = qcore::lang::quake_encode(name).into_owned();
         self.core.clients[i].colors = colors;
         self.local_signon(i);
         Some(i)
@@ -190,6 +190,12 @@ impl Server {
     /// one network message (never merged, so demos stay under MAX_MSGLEN).
     pub fn take_reliable(&mut self, i: usize) -> Vec<Vec<u8>> {
         self.core.clients.get_mut(i).map(|c| std::mem::take(&mut c.reliable_out)).unwrap_or_default()
+    }
+
+    /// The oldest delivered reliable message of client `i`.
+    pub fn take_one_reliable(&mut self, i: usize) -> Option<Vec<u8>> {
+        let c = self.core.clients.get_mut(i)?;
+        (!c.reliable_out.is_empty()).then(|| c.reliable_out.remove(0))
     }
 
     /// Drain the delivered unreliable datagrams of client `i`.

@@ -40,7 +40,7 @@ impl ClientState {
         self.maxclients = mc as usize;
         self.scores = vec![Score::default(); self.maxclients];
         self.gametype = m.byte() as u8;
-        self.levelname = m.string_lossy();
+        self.levelname = m.string_text();
         for (list, max, what) in [(&mut self.model_precache, MAX_MODELS, "model"), (&mut self.sound_precache, MAX_SOUNDS, "sound")] {
             list.truncate(1);
             loop {

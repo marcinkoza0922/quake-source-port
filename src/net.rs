@@ -122,7 +122,13 @@ impl NetServer {
             }
             if r.closing.is_none() {
                 // drop_client leaves svc_disconnect in reliable_out.
-                for m in sv.take_reliable(slot) {
+                if !active {
+                    for m in sv.take_reliable(slot) {
+                        let _ = r.conn.send_reliable(&m, now);
+                    }
+                } else if r.conn.idle()
+                    && let Some(m) = sv.take_one_reliable(slot)
+                {
                     let _ = r.conn.send_reliable(&m, now);
                 }
                 let dg = sv.take_datagrams(slot);
@@ -171,7 +177,7 @@ fn read_client_message(sv: &mut Server, slot: usize, m: &[u8]) -> bool {
             CLC_NOP => {}
             CLC_DISCONNECT => return false,
             CLC_STRINGCMD => {
-                let s = r.string_lossy();
+                let s = r.string_text();
                 sv.queue_client_command(slot, s.trim_end_matches('\n'));
             }
             qnet::delta::CLCDP_ACKFRAME => {

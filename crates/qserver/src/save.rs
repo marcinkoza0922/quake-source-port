@@ -55,6 +55,23 @@ fn parse_blocks(mut data: &str) -> Result<Vec<Vec<(String, String)>>, String> {
     Ok(out)
 }
 
+/// The precache lines of a vkQuake-style extended save ([`Server::precache_text`]).
+fn parse_precaches(text: &str) -> Vec<(bool, usize, String)> {
+    let Some(at) = text.find("\n/*\n").or_else(|| text.find("\n/*\r\n")) else { return Vec::new() };
+    let line = |l: &str| {
+        let (key, rest) = com_parse(l)?;
+        let model = match key {
+            "sv.model_precache" => true,
+            "sv.sound_precache" => false,
+            _ => return None,
+        };
+        let (i, rest) = com_parse(rest)?;
+        let (name, _) = com_parse(rest)?;
+        Some((model, i.parse().ok()?, name.to_string()))
+    };
+    text[at + 3..].lines().take_while(|l| !l.starts_with("*/")).filter_map(line).collect()
+}
+
 impl Server {
     /// Savegame comment: level name padded to 22 chars + kill count, spaces as '_'.
     fn savegame_comment(&self) -> String {
@@ -119,7 +136,24 @@ impl Server {
             }
             f += "}\n";
         }
+        f += &self.precache_text();
         self.wrap_save(f)
+    }
+
+    /// Models and sounds precached during play, as vkQuake saves them: a
+    /// comment to engines that don't read it. Saved model indices refer to them.
+    fn precache_text(&self) -> String {
+        let sv = &self.core.sv;
+        let [models, sounds] = sv.spawn_precaches;
+        let mut t = String::new();
+        for (key, list, from) in [("sv.model_precache", &sv.model_precache, models), ("sv.sound_precache", &sv.sound_precache, sounds)] {
+            for (i, n) in list.iter().enumerate().skip(from) {
+                // (a name that would end the line or the comment is lost)
+                let ok = !n.contains(['"', '\n', '\r']) && !n.contains("*/");
+                t += &format!("{key} {i} \"{}\"\n", if ok { n } else { "" });
+            }
+        }
+        if t.is_empty() { t } else { format!("/*\n// QuakeSpasm extended savegame\n{t}*/\n") }
     }
 
     /// Reads a save without touching the running game, so a damaged or foreign
@@ -155,10 +189,11 @@ impl Server {
         let header = 5 + NUM_SPAWN_PARMS + MAX_LIGHTSTYLES + usize::from(version == SAVEGAME_VERSION_KEX);
         let consumed: usize = text.split_inclusive('\n').take(header).map(str::len).sum();
         let blocks = parse_blocks(&text[consumed..])?;
+        let precaches = parse_precaches(&text[consumed..]);
         if !self.core.fs.exists(&format!("maps/{mapname}.bsp")) {
             return Err(format!("maps/{mapname}.bsp not found"));
         }
-        Ok(ParsedSave { addons, parms, skill, mapname, time, styles, blocks })
+        Ok(ParsedSave { addons, parms, skill, mapname, time, styles, blocks, precaches })
     }
 
     /// [`Self::parse_save`] and [`Self::load_parsed`].
@@ -170,7 +205,7 @@ impl Server {
     /// Host_Loadgame_f: spawns the saved map and restores globals/edicts. The
     /// local client must be (re)connected afterwards.
     pub fn load_parsed(&mut self, save: ParsedSave) -> Result<(), String> {
-        let ParsedSave { addons, parms, skill, mapname, time, styles, blocks } = save;
+        let ParsedSave { addons, parms, skill, mapname, time, styles, blocks, precaches } = save;
         for i in 0..self.core.maxclients() {
             self.drop_client(i, true);
         }
@@ -198,11 +233,30 @@ impl Server {
         self.spawn_server(&mapname)?;
         // A save from other progs fails part way through its edicts: Host_Error
         // in C. Never leave the half-restored level running (it could be saved).
+        self.restore_precaches(&precaches);
         let restored = self.restore(parms, time, styles, blocks, addons);
         if restored.is_err() {
             self.level = None;
         }
         restored
+    }
+
+    /// Late precaches of a save, at the indices they had.
+    fn restore_precaches(&mut self, list: &[(bool, usize, String)]) {
+        let Some(l) = &mut self.level else { return };
+        let mut h = crate::host::Ctx::new(&mut self.core, &mut l.world);
+        for (model, i, name) in list {
+            let len = if *model { h.c.sv.model_precache.len() } else { h.c.sv.sound_precache.len() };
+            // earlier ones are the level's own (vkQuake lists them all)
+            if *i != len {
+                continue;
+            }
+            if *model {
+                let _ = h.late_precache_model(&l.vm, name.clone());
+            } else {
+                h.c.sv.sound_precache.push(name.clone());
+            }
+        }
     }
 
     fn restore(
@@ -233,6 +287,7 @@ impl Server {
             l.vm.parse_globals(&mut h, &g).map_err(|e| e.to_string())?;
         }
         let mut live = Vec::new();
+        c.sv.loadgame_players = vec![false; c.clients.len()];
         for (e, pairs) in it.enumerate() {
             let e = e as u32;
             l.vm.ed_alloc_at(e).map_err(|e| e.to_string())?;
@@ -240,6 +295,11 @@ impl Server {
             let p = l.vm.parse_edict(&mut h, e, &pairs).map_err(|e| e.to_string())?;
             if p.init {
                 live.push(e);
+                // an unused slot's edict has the odd field too, but was never
+                // put in the game
+                if let Some(slot) = (e as usize).checked_sub(1).and_then(|i| c.sv.loadgame_players.get_mut(i)) {
+                    *slot = !l.vm.classname(e).is_empty();
+                }
             }
         }
         l.vm.time = time;
@@ -277,6 +337,8 @@ pub struct ParsedSave {
     time: f64,
     styles: Vec<Vec<u8>>,
     blocks: Vec<Vec<(String, String)>>,
+    /// (model else sound, index, name)
+    precaches: Vec<(bool, usize, String)>,
 }
 
 #[cfg(test)]
@@ -344,6 +406,68 @@ mod tests {
             }
             assert!(seen > 50);
         }
+    }
+
+    /// A model set during play is there again after a load.
+    #[test]
+    fn late_precaches_survive_a_load() {
+        let Some(base) = basedir() else { return };
+        let mut fs = Fs::new(base);
+        fs.add_game_dir("id1");
+        let mut sv = Server::new(fs, Cvars::new(), 1);
+        sv.spawn_server("e1m1").unwrap();
+        sv.connect_local().unwrap();
+        assert!(!sv.save_game().contains("/*"), "vanilla saves stay as they are");
+        let (n, sounds) = (sv.core.sv.model_precache.len(), sv.core.sv.sound_precache.len());
+        sv.restore_precaches(&[(true, n, "progs/shambler.mdl".into()), (false, sounds, "shambler/sattck1.wav".into())]);
+        let l = sv.level.as_mut().unwrap();
+        l.vm.set_ent_f(1, sv.core.sv.fields.modelindex, n as f32);
+        let text = sv.save_game();
+        assert!(text.contains(&format!("sv.model_precache {n} \"progs/shambler.mdl\"\n")));
+        let text = format!("{text}// qsp_level_damage 0\n");
+        sv.load_game(&text).unwrap();
+        sv.connect_local().unwrap();
+        sv.frame(1.0 / 72.0);
+        assert!(sv.error().is_none());
+        assert_eq!(sv.core.sv.model_precache[n], "progs/shambler.mdl");
+        assert!(sv.core.sv.models[n].is_some());
+        assert_eq!(sv.core.sv.sound_precache[sounds], "shambler/sattck1.wav");
+        // and again: saved from the loaded game
+        assert!(sv.save_game().contains("progs/shambler.mdl\"\n"));
+        // a vkQuake list names everything; only what is missing is added
+        let all: String = sv.core.sv.model_precache.iter().enumerate().skip(1).map(|(i, m)| format!("sv.model_precache {i} \"{m}\"\n")).collect();
+        let body = &text[..text.find("/*").unwrap()];
+        sv.load_game(&format!("{body}/*\n{all}sv.model_precache 9999 \"x\"\n*/\n")).unwrap();
+        assert_eq!(sv.core.sv.model_precache.len(), n + 1);
+    }
+
+    /// Co-op: who wasn't in the save starts like in a new game.
+    #[test]
+    fn a_player_who_joins_a_loaded_game_spawns() {
+        let Some(base) = basedir() else { return };
+        let mut fs = Fs::new(base);
+        fs.add_game_dir("id1");
+        let mut sv = Server::new(fs, Cvars::new(), 4);
+        sv.core.cvars.set("coop", "1");
+        sv.spawn_server("e1m1").unwrap();
+        sv.connect_local().unwrap();
+        for _ in 0..10 {
+            sv.frame(1.0 / 72.0);
+        }
+        let health = |sv: &Server, e: u32| sv.level.as_ref().unwrap().vm.ent_f(e, sv.core.sv.fields.health);
+        let l = sv.level.as_mut().unwrap();
+        l.vm.set_ent_f(1, sv.core.sv.fields.health, 57.0);
+        let text = sv.save_game();
+        sv.load_game(&text).unwrap();
+        let (a, b) = (sv.connect_local().unwrap(), sv.connect_local().unwrap());
+        for _ in 0..10 {
+            sv.frame(1.0 / 72.0);
+        }
+        assert!(sv.error().is_none());
+        assert_eq!((a, b), (0, 1));
+        assert_eq!((health(&sv, 1), health(&sv, 2)), (57.0, 100.0));
+        assert_eq!(sv.level.as_ref().unwrap().vm.classname(2), "player");
+        assert!(!sv.any_client_dead());
     }
 
     #[test]

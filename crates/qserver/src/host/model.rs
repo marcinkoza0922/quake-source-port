@@ -109,7 +109,7 @@ impl Ctx<'_> {
 
     /// SV_Precache_Model (vkQuake): adds a model after loading, or one QC sets
     /// without a precache. A missing file leaves an empty model.
-    fn late_precache_model(&mut self, vm: &Vm, name: String) -> Result<usize> {
+    pub(crate) fn late_precache_model(&mut self, vm: &Vm, name: String) -> Result<usize> {
         let n = self.c.sv.model_precache.len();
         if n >= MAX_MODELS {
             return Err(vm.run_error("PF_precache_model: overflow"));

@@ -322,7 +322,7 @@ impl VmHost for CsqcHost<'_, '_> {
             // ---- Player / Server Keys & Cvars / Commands ----
             "getplayerkeyvalue" => {
                 let val = self.player_key(vm.g_f(p(0)) as i32, &s_arg(vm, 1)?);
-                vm.ret_temp(val.as_bytes());
+                vm.ret_temp(&qcore::text::wire(&val));
             }
             "getplayerkeyfloat" => {
                 let val = self.player_key(vm.g_f(p(0)) as i32, &s_arg(vm, 1)?);
@@ -330,7 +330,7 @@ impl VmHost for CsqcHost<'_, '_> {
             }
             "serverkey" => {
                 let val = self.server_key(&s_arg(vm, 0)?);
-                vm.ret_temp(val.as_bytes());
+                vm.ret_temp(&qcore::text::wire(&val));
             }
             "serverkeyfloat" => {
                 let val = self.server_key(&s_arg(vm, 0)?);

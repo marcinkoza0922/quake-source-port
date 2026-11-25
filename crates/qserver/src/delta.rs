@@ -52,7 +52,7 @@ pub struct DeltaState {
     /// Per-client last-sent stat values (PEXT2_PREDINFO).
     old_stats_i: [i32; MAX_CL_STATS],
     old_stats_f: [f32; MAX_CL_STATS],
-    old_stats_s: Vec<String>,
+    old_stats_s: Vec<Vec<u8>>,
     resend_stats_num: [u32; STAT_WORDS],
     resend_stats_str: [u32; STAT_WORDS],
 }
@@ -71,7 +71,7 @@ impl Default for DeltaState {
             next_sequence: 0,
             old_stats_i: [0; MAX_CL_STATS],
             old_stats_f: [0.0; MAX_CL_STATS],
-            old_stats_s: vec![String::new(); MAX_CL_STATS],
+            old_stats_s: vec![Vec::new(); MAX_CL_STATS],
             resend_stats_num: [0; STAT_WORDS],
             resend_stats_str: [0; STAT_WORDS],
         }
@@ -175,9 +175,9 @@ impl DeltaState {
                 self.resend_stats_num[word] |= bit;
             }
             let ns = stats_s.get(i).and_then(|o| o.as_deref()).unwrap_or(b"");
-            if ns != self.old_stats_s[i].as_bytes() {
+            if ns != self.old_stats_s[i] {
                 self.resend_stats_str[word] |= bit;
-                self.old_stats_s[i] = String::from_utf8_lossy(ns).into_owned();
+                self.old_stats_s[i] = ns.to_vec();
             }
             if self.resend_stats_num[word] & bit != 0 {
                 self.resend_stats_num[word] &= !bit;
@@ -201,7 +201,7 @@ impl DeltaState {
                 frame_str[word] |= bit;
                 msg.byte(SVCFTE_UPDATESTATSTRING as i32);
                 msg.byte(i as i32);
-                msg.string(self.old_stats_s[i].as_bytes());
+                msg.string(&self.old_stats_s[i]);
             }
         }
         let f = self.frame_mut(seq);
@@ -381,6 +381,25 @@ mod tests {
                 return out;
             }
         }
+    }
+
+    /// Quake-charset strings go out once, byte for byte.
+    #[test]
+    fn string_stats_keep_their_bytes() {
+        let mut d = DeltaState::default();
+        let (si, sf) = ([0; MAX_CL_STATS], [0.0; MAX_CL_STATS]);
+        let mut ss: Vec<Option<Vec<u8>>> = vec![None; MAX_CL_STATS];
+        ss[40] = Some(b"\xe1\xe2".to_vec());
+        let write = |d: &mut DeltaState, ss: &[Option<Vec<u8>>]| {
+            let mut m = qnet::SizeBuf::new(4096);
+            d.write_stats(&mut m, &si, &sf, ss);
+            d.next_sequence += 1;
+            m.data
+        };
+        assert_eq!(write(&mut d, &ss), [SVCFTE_UPDATESTATSTRING, 40, 0xe1, 0xe2, 0]);
+        assert!(write(&mut d, &ss).is_empty(), "unchanged");
+        ss[40] = None;
+        assert_eq!(write(&mut d, &ss), [SVCFTE_UPDATESTATSTRING, 40, 0]);
     }
 
     #[test]

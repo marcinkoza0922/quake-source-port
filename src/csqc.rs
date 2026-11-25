@@ -210,7 +210,7 @@ impl Csqc {
             if slot.1 == 0 || slot.0 != val {
                 slot.0.clear();
                 slot.0.push_str(val);
-                slot.1 = vm.strings.engine(val.as_bytes());
+                slot.1 = vm.strings.engine(&qcore::text::wire(val));
             }
             slot.1
         };
