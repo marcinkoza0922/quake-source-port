@@ -171,7 +171,8 @@ impl Recorder {
     }
 
     /// Stops and deletes everything written: the temporary video and WAV,
-    /// a PNG frame folder, and the output if it got that far.
+    /// a PNG frame folder. The output isn't written before [`Self::finish`],
+    /// so a file of that name is somebody's earlier video.
     pub fn abort(mut self) {
         let _ = self.join();
         let wav = self.wav.take().map(|w| w.finish());
@@ -181,7 +182,6 @@ impl Recorder {
         match &self.sink {
             Sink::Ffmpeg { video, .. } => {
                 let _ = std::fs::remove_file(video);
-                let _ = std::fs::remove_file(&self.out);
             }
             Sink::Png { dir, .. } => {
                 let _ = std::fs::remove_dir_all(dir);

@@ -31,6 +31,34 @@ mod imp {
         }
         fs::write(path, data)
     }
+    /// Replaces `path` whole or not at all: a crash, a full disk or a power
+    /// cut leaves the old file.
+    pub fn write_atomic(path: &Path, data: &[u8]) -> io::Result<()> {
+        // through a symlink: a linked config stays a link
+        let path = &fs::canonicalize(path).unwrap_or_else(|_| path.to_path_buf());
+        let Some(name) = path.file_name() else { return Err(io::ErrorKind::InvalidInput.into()) };
+        if let Some(parent) = path.parent().filter(|p| !p.as_os_str().is_empty()) {
+            fs::create_dir_all(parent)?;
+        }
+        let mut tmp = name.to_os_string();
+        tmp.push(format!(".{}.tmp", std::process::id()));
+        let tmp = path.with_file_name(tmp);
+        let put = || {
+            let mut f = fs::File::create(&tmp)?;
+            f.write_all(data)?;
+            if let Ok(md) = fs::metadata(path) {
+                let _ = f.set_permissions(md.permissions());
+            }
+            f.sync_all()?;
+            drop(f);
+            fs::rename(&tmp, path)
+        };
+        let r = put();
+        if r.is_err() {
+            let _ = fs::remove_file(&tmp);
+        }
+        r
+    }
     pub fn append(path: &Path, data: &[u8]) -> io::Result<()> {
         if let Some(parent) = path.parent().filter(|p| !p.as_os_str().is_empty()) {
             fs::create_dir_all(parent)?;
@@ -66,6 +94,7 @@ mod imp {
 
     pub fn read(path: &Path) -> io::Result<Vec<u8>> { GLOBAL.lock().unwrap().read(path) }
     pub fn write(path: &Path, data: &[u8]) -> io::Result<()> { GLOBAL.lock().unwrap().write(path, data, false) }
+    pub fn write_atomic(path: &Path, data: &[u8]) -> io::Result<()> { write(path, data) }
     pub fn append(path: &Path, data: &[u8]) -> io::Result<()> { GLOBAL.lock().unwrap().write(path, data, true) }
     pub fn exists(path: &Path) -> bool { GLOBAL.lock().unwrap().exists(path) }
     pub fn is_dir(path: &Path) -> bool { GLOBAL.lock().unwrap().is_dir(path) }
@@ -85,4 +114,35 @@ pub use imp::*;
 /// `read` as UTF-8 text (lossy).
 pub fn read_to_string(path: &Path) -> io::Result<String> {
     read(path).map(|b| String::from_utf8_lossy(&b).into_owned())
+}
+
+#[cfg(all(test, not(target_arch = "wasm32")))]
+mod atomic_tests {
+    use super::*;
+
+    #[test]
+    fn replaces_whole_or_not_at_all() {
+        let dir = std::env::temp_dir().join(format!("qsp-atomic-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let p = dir.join("sub/config.cfg");
+        write_atomic(&p, b"one").unwrap();
+        write_atomic(&p, b"two").unwrap();
+        assert_eq!(read(&p).unwrap(), b"two");
+        // the temporary file can't be made: the old file stays
+        let tmp = dir.join(format!("sub/config.cfg.{}.tmp", std::process::id()));
+        std::fs::create_dir(&tmp).unwrap();
+        assert!(write_atomic(&p, b"three").is_err());
+        assert_eq!(read(&p).unwrap(), b"two");
+        std::fs::remove_dir(&tmp).unwrap();
+        #[cfg(unix)]
+        {
+            let link = dir.join("link.cfg");
+            std::os::unix::fs::symlink(&p, &link).unwrap();
+            write_atomic(&link, b"four").unwrap();
+            assert!(link.is_symlink());
+            assert_eq!(read(&p).unwrap(), b"four");
+        }
+        assert_eq!(read_dir(&dir.join("sub")).unwrap().len(), 1, "no temporary files left");
+        let _ = std::fs::remove_dir_all(&dir);
+    }
 }

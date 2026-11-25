@@ -16,5 +16,6 @@ android/app/src/main/jniLibs/
 android/app/src/main/java/org/libsdl/
 android/app/build/
 android/build/
+android/app.apk
 android/.gradle/
 android/local.properties

@@ -134,3 +134,58 @@ fn blue_gel_cancels_fall_damage() {
     assert!(health_after_drop(false) < 100.0, "plain floor should hurt");
     assert_eq!(health_after_drop(true), 100.0);
 }
+
+/// A full level of gel is more than one reliable message: it goes out over
+/// several frames, with changes meanwhile, and nobody is dropped.
+#[test]
+fn a_level_full_of_gel_reaches_the_client() {
+    let Some((mut sv, c)) = start() else { return };
+    run(&mut sv, c, 10, ClientMove::default());
+    let n = qserver::addons::gel::MAX_SPLATS;
+    let gel = &mut sv.level.as_mut().unwrap().gel;
+    for i in 0..n {
+        let p = Vec3::new((i % 32) as f32 * 100.0 + 0.123, (i / 32) as f32 * 100.0 + 0.456, 24.789);
+        gel.add(BLUE, p, Vec3::new(0.0, 0.0, 1.0), 30.0);
+    }
+    assert_eq!(gel.splats.len(), n);
+    let text = sv.save_game();
+    let (mut other, _) = start().unwrap();
+    other.load_game(&text).unwrap();
+    let c = other.connect_local().unwrap();
+    let mut got = std::collections::BTreeSet::new();
+    let mut frames = 0;
+    let read = |sv: &mut Server, got: &mut std::collections::BTreeSet<u32>| {
+        let _ = sv.take_datagrams(c);
+        for m in sv.take_reliable(c) {
+            let text = String::from_utf8_lossy(&m).into_owned();
+            for l in text.split("//qsp_gel ").skip(1) {
+                let w: Vec<&str> = l.split([' ', '\n']).collect();
+                match w[0] {
+                    "c" => got.clear(),
+                    "a" => assert!(got.insert(w[1].parse().unwrap()), "sent twice: {l:.20}"),
+                    "d" => {
+                        got.remove(&w[1].parse().unwrap());
+                    }
+                    _ => {}
+                }
+            }
+        }
+    };
+    let mut changed = false;
+    while frames < 400 {
+        other.frame(1.0 / 72.0);
+        read(&mut other, &mut got);
+        frames += 1;
+        assert!(other.core.clients[c].active, "dropped in frame {frames}");
+        if !got.is_empty() && !changed {
+            changed = true;
+            assert!(got.len() < n, "all in one frame");
+            // pushes out the oldest, which may be sent or not
+            let gel = &mut other.level.as_mut().unwrap().gel;
+            gel.add(ORANGE, Vec3::new(-500.0, -500.0, 0.0), Vec3::new(0.0, 0.0, 1.0), 30.0);
+        }
+    }
+    let want: std::collections::BTreeSet<u32> = other.level.as_ref().unwrap().gel.splats.iter().map(|s| s.id).collect();
+    assert!(changed && want.len() == n);
+    assert_eq!(got, want);
+}

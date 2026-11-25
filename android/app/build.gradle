@@ -16,5 +16,25 @@ android {
         // SDL's Java glue is copied to src/main/java/org/libsdl/app.
         jniLibs.srcDirs = ["src/main/jniLibs"]
     }
-    buildTypes { release { minifyEnabled false } }
+    // Updates install only over an APK with the same signature, and uninstalling
+    // deletes the player's saves: releases need one lasting key (android/README.md).
+    def keystore = System.getenv("QSP_ANDROID_KEYSTORE")
+    if (keystore) {
+        signingConfigs {
+            release {
+                storeFile file(keystore)
+                storePassword System.getenv("QSP_ANDROID_KEYSTORE_PASSWORD")
+                keyAlias System.getenv("QSP_ANDROID_KEY_ALIAS")
+                keyPassword System.getenv("QSP_ANDROID_KEYSTORE_PASSWORD")
+            }
+        }
+    }
+    // as for the debug builds so far (most of the Java is SDL's)
+    lint { checkReleaseBuilds false }
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (keystore) signingConfig signingConfigs.release
+        }
+    }
 }

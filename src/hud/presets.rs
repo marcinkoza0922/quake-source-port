@@ -133,7 +133,7 @@ pub fn write_one_to(dir: &Path, preset: &SavedPreset) -> std::io::Result<()> {
         body += &line;
         body.push('\n');
     }
-    qcore::vfs::write(&file_path(dir, &name), body.as_bytes())
+    qcore::vfs::write_atomic(&file_path(dir, &name), body.as_bytes())
 }
 
 pub fn write_one(preset: &SavedPreset) -> std::io::Result<()> {

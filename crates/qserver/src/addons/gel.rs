@@ -51,13 +51,28 @@ struct Blob {
     pass_owner: bool,
 }
 
+/// How much of the level's gel a client has been told about.
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+enum Sync {
+    #[default]
+    New,
+    /// Splats with lower ids are sent.
+    UpTo(u32),
+    Done,
+}
+
+/// Reliable bytes the first full state may fill per frame: all of it is more
+/// than one message holds.
+const SYNC_BYTES: usize = 16000;
+
 #[derive(Clone, Debug, Default)]
 pub struct Gel {
     pub splats: Vec<Splat>,
     blobs: Vec<Blob>,
     next_id: u32,
     next_blob: Vec<f64>,
-    synced: Vec<bool>,
+    /// Per client: splats up to this id are sent; None once it has them all.
+    syncing: Vec<Sync>,
     outbox: Vec<String>,
     seed: u32,
     /// Movers before physics: (entity, origin, velocity, on ground).
@@ -68,8 +83,8 @@ pub struct Gel {
 
 impl Gel {
     fn ensure(&mut self, n: usize) {
-        if self.synced.len() < n {
-            self.synced.resize(n, false);
+        if self.syncing.len() < n {
+            self.syncing.resize(n, Sync::New);
             self.next_blob.resize(n, 0.0);
             self.next_step.resize(n, 0.0);
         }
@@ -163,24 +178,42 @@ impl Gel {
         self.outbox.clear();
     }
 
-    /// Full state for newly spawned clients, then the news to everyone.
+    /// Full state for newly spawned clients (over several frames), then the
+    /// news to everyone.
     pub(crate) fn send(&mut self, clients: &mut [Client]) {
         self.ensure(clients.len());
         for (i, cl) in clients.iter_mut().enumerate() {
             if !cl.spawned {
-                self.synced[i] = false;
+                self.syncing[i] = Sync::New;
                 continue;
             }
-            if !self.synced[i] {
-                self.synced[i] = true;
-                write_stuff(cl, "//qsp_gel c\n");
-                for s in &self.splats {
-                    write_stuff(cl, &add_line(s));
+            let from = match self.syncing[i] {
+                Sync::Done => {
+                    for s in &self.outbox {
+                        write_stuff(cl, s);
+                    }
+                    continue;
                 }
-            } else {
-                for s in &self.outbox {
-                    write_stuff(cl, s);
+                Sync::New => {
+                    write_stuff(cl, "//qsp_gel c\n");
+                    0
                 }
+                Sync::UpTo(id) => {
+                    // new splats are in the list and come with it
+                    for s in self.outbox.iter().filter(|s| !s.starts_with("//qsp_gel a ")) {
+                        write_stuff(cl, s);
+                    }
+                    id
+                }
+            };
+            self.syncing[i] = Sync::Done;
+            // ids only grow, in list order
+            for s in self.splats.iter().filter(|s| s.id >= from) {
+                if cl.message.len() > SYNC_BYTES {
+                    self.syncing[i] = Sync::UpTo(s.id);
+                    break;
+                }
+                write_stuff(cl, &add_line(s));
             }
         }
         self.outbox.clear();

@@ -210,7 +210,19 @@ pub fn feed(mut child: Child, rx: Receiver<Vec<u8>>) -> Result<(), String> {
 }
 
 /// Copies the video into `out`, adding the WAV as AAC (Opus in WebM).
+/// `out` is only replaced by a finished file.
 pub fn mux(s: &Settings, video: &Path, wav: Option<&Path>, out: &Path) -> Result<(), String> {
+    // same extension: ffmpeg picks the container by it
+    let ext = out.extension().map_or_else(String::new, |e| e.to_string_lossy().into_owned());
+    let part = out.with_extension(format!("part.{ext}"));
+    let r = mux_to(s, video, wav, &part).and_then(|()| std::fs::rename(&part, out).map_err(|e| format!("{}: {e}", out.display())));
+    if r.is_err() {
+        let _ = std::fs::remove_file(&part);
+    }
+    r
+}
+
+fn mux_to(s: &Settings, video: &Path, wav: Option<&Path>, out: &Path) -> Result<(), String> {
     let mut c = low_priority(s.ffmpeg.trim());
     c.args(["-hide_banner", "-loglevel", "error", "-y", "-i"]).arg(video);
     if let Some(w) = wav {
@@ -272,11 +284,35 @@ mod tests {
             r.audio(&vec![0; 800 * 2]);
         }
         let out = r.out.clone();
+        std::fs::write(&out, b"old video").unwrap();
         let msg = r.finish().recv().unwrap();
-        let ok = out.exists();
+        let ok = std::fs::read(&out).is_ok_and(|d| d != b"old video");
+        let left = std::fs::read_dir(&dir).unwrap().count();
+        assert!(!ok || left == 1, "only the video stays");
         let _ = std::fs::remove_dir_all(&dir);
         // an ffmpeg without the encoder fails cleanly; one with it must succeed
         assert!(ok || msg.contains("failed"), "{msg}");
+    }
+
+    /// A cancelled export to the name of an earlier video leaves that alone,
+    /// and so does one that can't be muxed.
+    #[test]
+    fn an_earlier_video_survives() {
+        let s = settings(Codec::H264, 2, "", false);
+        let dir = std::env::temp_dir().join(format!("qsp-ffmpeg-keep-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let out = dir.join("holiday.mp4");
+        std::fs::write(&out, b"holiday").unwrap();
+        assert!(mux(&s, &dir.join("missing.mkv"), None, &out).is_err());
+        if available(&s.ffmpeg) {
+            let mut r = super::super::Recorder::start_at(&out, 64, 48, &s, None).unwrap();
+            r.frame(64, 48, &[9; 64 * 48 * 4]).unwrap();
+            r.abort();
+        }
+        let kept = std::fs::read(&out).unwrap();
+        let left = std::fs::read_dir(&dir).unwrap().count();
+        let _ = std::fs::remove_dir_all(&dir);
+        assert_eq!((kept.as_slice(), left), (&b"holiday"[..], 1));
     }
 
     #[test]

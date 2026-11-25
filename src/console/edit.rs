@@ -53,7 +53,7 @@ impl Console {
         }
         let start = self.history.len().saturating_sub(MAX_HISTORY);
         let out: String = self.history[start..].iter().map(|l| format!("{l}\n")).collect();
-        let _ = qcore::vfs::write(&dir.join("console_history.txt"), out.as_bytes());
+        let _ = qcore::vfs::write_atomic(&dir.join("console_history.txt"), out.as_bytes());
     }
 
     /// Modern key handler with modifiers and optional clipboard callbacks.
