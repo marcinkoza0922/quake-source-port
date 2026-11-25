@@ -64,3 +64,23 @@ fn v_water_forces_underwater_until_told_otherwise() {
     assert!(!cl.force_underwater);
     assert!(!cl.take_events().iter().any(|e| matches!(e, ClientEvent::StuffText(_))));
 }
+
+#[test]
+fn names_and_titles_keep_their_bytes() {
+    let mut cl = ClientState::new();
+    let mut m = qnet::msg::SizeBuf::new(256);
+    m.byte(SVC_SERVERINFO.into());
+    m.long(PROTOCOL_NETQUAKE as i32);
+    m.byte(2);
+    m.byte(0);
+    m.string(b"\xd4itle");
+    m.string(b"maps/e1m1.bsp");
+    m.string(b"");
+    m.string(b"");
+    m.byte(SVC_UPDATENAME.into());
+    m.byte(1);
+    m.string(b"\xc3\xef\xec");
+    cl.parse_server_message(&m.data).unwrap();
+    assert_eq!(qcore::text::wire(&cl.levelname), b"\xd4itle");
+    assert_eq!(qcore::text::wire(&cl.scores[1].name), b"\xc3\xef\xec");
+}

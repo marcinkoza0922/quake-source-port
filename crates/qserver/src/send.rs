@@ -187,7 +187,10 @@ fn flush(c: &mut Core, i: usize) -> bool {
         cl.message.clear();
         return true;
     }
-    if !cl.message.is_empty() {
+    // NET_CanSendMessage: a remote client that doesn't acknowledge keeps its
+    // messages here until they overflow, which drops it
+    let backlog = !cl.local && cl.reliable_out.len() >= 2;
+    if !cl.message.is_empty() && !backlog {
         let d = std::mem::take(&mut cl.message.data);
         cl.reliable_out.push(d);
         if cl.sendsignon == Signon::Flush {

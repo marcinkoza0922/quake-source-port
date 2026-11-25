@@ -125,11 +125,16 @@ impl Server {
         let vm = &mut l.vm;
         if c.sv.loadgame {
             c.sv.paused = false;
-        } else {
+        }
+        // (a slot the save had no player in starts like in a new game)
+        if !c.sv.in_save(i) {
+            if vm.is_free(e) && vm.ed_alloc_at(e).is_err() {
+                return;
+            }
             vm.edict_mut(e).fill(0);
             vm.set_ent_f(e, f.colormap, e as f32);
             vm.set_ent_f(e, f.team, ((c.clients[i].colors & 15) + 1) as f32);
-            let h = vm.strings.engine(c.clients[i].name.as_bytes());
+            let h = vm.strings.engine(&qcore::text::wire(&c.clients[i].name));
             vm.set_ent_i(e, f.netname, h);
             for (k, &v) in c.clients[i].spawn_parms.iter().enumerate() {
                 vm.set_g_f(g.parm1 + k, v);
@@ -151,7 +156,7 @@ impl Server {
         for (k, cl) in c.clients.iter().enumerate() {
             m.byte(SVC_UPDATENAME);
             m.byte(k as i32);
-            m.string(cl.name.as_bytes());
+            m.string(&qcore::text::wire(&cl.name));
             m.byte(SVC_UPDATEFRAGS);
             m.byte(k as i32);
             m.short(cl.old_frags);
@@ -206,7 +211,7 @@ impl Server {
             && let (Some(fnum), Some(l)) = (self.core.sv.parse_client_command, &mut self.level)
         {
             let c = &mut self.core;
-            let h = l.vm.strings.temp(s.as_bytes());
+            let h = l.vm.strings.temp(&qcore::text::wire(s));
             l.vm.set_g_i(ofs_parm(0), h);
             l.vm.set_g_f(c.sv.globals.time, l.vm.time as f32);
             l.vm.set_self(i as u32 + 1);

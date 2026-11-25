@@ -549,7 +549,7 @@ impl Host {
             return;
         }
         if let Some(i) = self.local.filter(|_| self.server.active()) {
-            self.server.client_command(i, cmd);
+            self.server.client_command(i, &qcore::lang::quake_encode(cmd));
             self.drain_server_log();
         }
     }

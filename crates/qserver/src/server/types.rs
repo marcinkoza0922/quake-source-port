@@ -113,11 +113,22 @@ pub struct Sv {
     /// Effective external entity text for local client map assets.
     pub external_entities: Option<String>,
     pub(crate) loadgame_parms: [f32; 16],
+    /// Player edicts (by slot) the loaded save brought back.
+    pub(crate) loadgame_players: Vec<bool>,
+    /// Precaches of the level's own spawn; later ones are saved with a game.
+    pub(crate) spawn_precaches: [usize; 2],
     pub(crate) brush_cache: HashMap<String, Arc<CollisionModel>>,
     pub(crate) parse_client_command: Option<usize>,
     pub(crate) custom_stats: Vec<CustomStat>,
     pub qc_files: crate::qcfile::QcFiles,
     pub(super) reload_players: Vec<Option<super::reload::PlayerState>>,
+}
+
+impl Sv {
+    /// Slot `i`'s player comes from the loaded save.
+    pub(crate) fn in_save(&self, i: usize) -> bool {
+        self.loadgame && self.loadgame_players.get(i).copied().unwrap_or(false)
+    }
 }
 
 /// Everything QC builtins can reach besides the VM and the world.

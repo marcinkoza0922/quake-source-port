@@ -85,6 +85,12 @@ fn say_text(a: &Args) -> String {
     t.to_string()
 }
 
+/// Command text as Quake text (one char per byte): a client's command is
+/// already, one typed at the server's console is Unicode.
+fn carried(s: &Server, text: &str) -> String {
+    if s.core.cmd_client.is_some() { text.to_string() } else { qcore::lang::quake_encode(text).into_owned() }
+}
+
 /// Name of the sender: the client, the listen server's local player, or
 /// `<hostname>` from a dedicated console.
 fn sender(s: &Server) -> (Option<usize>, String) {
@@ -101,7 +107,7 @@ fn cmd_say(s: &mut Server, a: &Args, team: bool) {
         return;
     }
     let (from, name) = sender(s);
-    let text = say_text(a);
+    let text = carried(s, &say_text(a));
     let msg = if from.is_some() { format!("\x01{name}: {text}\n") } else { format!("\x01{name} {text}\n") };
     let teamplay = team && s.core.cvars.value_of("teamplay") != 0.0;
     let my_team = from.and_then(|i| s.level.as_ref().map(|l| l.vm.ent_f(i as u32 + 1, s.core.sv.fields.team)));
@@ -118,7 +124,7 @@ fn cmd_say(s: &mut Server, a: &Args, team: bool) {
         }
         let m = &mut s.core.clients[j].message;
         m.byte(crate::msg::SVC_PRINT);
-        m.string(msg.as_bytes());
+        m.string(&qcore::text::wire(&msg));
     }
     if !s.core.clients.iter().any(|c| c.active && c.local) {
         s.core.print(&msg.replace('\x01', ""));
@@ -134,14 +140,14 @@ fn cmd_tell(s: &mut Server, a: &Args) {
     let rest = a.args();
     let text = rest.split_once(char::is_whitespace).map_or("", |(_, t)| t).trim();
     let text = text.strip_prefix('"').and_then(|t| t.strip_suffix('"')).unwrap_or(text);
-    let msg = format!("{name}: {text}\n");
-    let to = a.argv(1).to_string();
+    let msg = format!("{name}: {}\n", carried(s, text));
+    let to = carried(s, a.argv(1));
     for j in 0..s.core.maxclients() {
         let c = &s.core.clients[j];
         if c.active && c.spawned && c.name.eq_ignore_ascii_case(&to) {
             let m = &mut s.core.clients[j].message;
             m.byte(crate::msg::SVC_PRINT);
-            m.string(msg.as_bytes());
+            m.string(&qcore::text::wire(&msg));
             break;
         }
     }
@@ -155,7 +161,7 @@ fn reply(s: &mut Server, text: &str) {
         Some(i) => {
             let m = &mut s.core.clients[i].message;
             m.byte(crate::msg::SVC_PRINT);
-            m.string(text.as_bytes());
+            m.string(&qcore::text::wire(text));
         }
         None => s.core.print(text),
     }
@@ -190,7 +196,7 @@ fn cmd_kick(s: &mut Server, a: &Args) {
         let n = q_atof(a.argv(2)) as usize;
         (n.checked_sub(1).filter(|&i| i < s.core.maxclients() && s.core.clients[i].active), 3)
     } else {
-        (s.core.clients.iter().position(|c| c.active && c.name.eq_ignore_ascii_case(a.argv(1))), 2)
+        (s.core.clients.iter().position(|c| c.active && c.name.eq_ignore_ascii_case(&carried(s, a.argv(1)))), 2)
     };
     let Some(i) = target else { return };
     if s.core.clients[i].local {
@@ -207,7 +213,7 @@ fn cmd_kick(s: &mut Server, a: &Args) {
     text.push('\n');
     let m = &mut s.core.clients[i].message;
     m.byte(crate::msg::SVC_PRINT);
-    m.string(text.as_bytes());
+    m.string(&qcore::text::wire(&text));
     s.drop_client(i, false);
 }
 
@@ -231,7 +237,7 @@ impl Server {
     fn client_print(&mut self, i: usize, s: &str) {
         let m = &mut self.core.clients[i].message;
         m.byte(crate::msg::SVC_PRINT);
-        m.string(s.as_bytes());
+        m.string(&qcore::text::wire(s));
         self.core.print(s);
     }
 
@@ -338,7 +344,7 @@ fn cmd_name(s: &mut Server, a: &Args) {
         return;
     }
     let raw = if a.argc() == 2 { a.argv(1) } else { a.args() };
-    let name: String = raw.chars().take(15).collect();
+    let name: String = carried(s, raw).chars().take(15).collect();
     let old = std::mem::replace(&mut s.core.clients[i].name, name.clone());
     if !old.is_empty() && old != name {
         s.core.print(&qcore::ctr!("{} renamed to {}\n", old, name));
@@ -346,13 +352,13 @@ fn cmd_name(s: &mut Server, a: &Args) {
     if let Some(l) = s.level.as_mut()
         && s.core.clients[i].spawned
     {
-        let h = l.vm.strings.engine(name.as_bytes());
+        let h = l.vm.strings.engine(&qcore::text::wire(&name));
         l.vm.set_ent_i(i as u32 + 1, s.core.sv.fields.netname, h);
     }
     let m = &mut s.core.sv.reliable_datagram;
     m.byte(crate::msg::SVC_UPDATENAME);
     m.byte(i as i32);
-    m.string(name.as_bytes());
+    m.string(&qcore::text::wire(&name));
 }
 
 fn cmd_prespawn(s: &mut Server, _: &Args) {

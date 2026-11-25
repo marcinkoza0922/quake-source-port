@@ -259,3 +259,21 @@ fn nails_unpack() {
     qw.parse_nails(&mut MsgReader::new(&b.data), false);
     assert_eq!(qw.nails, [([100.0, -50.0, 8.0], [90.0, 90.0, 0.0])]);
 }
+
+/// Gold and other Quake characters arrive as they were sent.
+#[test]
+fn text_keeps_its_bytes() {
+    let mut h = Harness::new();
+    let mut b = SizeBuf::new(4096);
+    serverdata(&mut b, 2);
+    b.byte(SVC_PRINT as i32);
+    b.byte(2); // PRINT_HIGH
+    b.string(b"\xc8\xe9 there\n");
+    b.byte(SVC_PRINT as i32);
+    b.byte(2); // PRINT_HIGH
+    b.string("żółw\n".as_bytes());
+    h.feed(&b, 0.0);
+    let prints: Vec<Vec<u8>> = h.cl.take_events().into_iter().filter_map(|e| if let ClientEvent::Print(s) = e { Some(qcore::text::wire(&s)) } else { None }).collect();
+    assert!(prints.contains(&b"\xc8\xe9 there\n".to_vec()), "{prints:?}");
+    assert!(prints.contains(&"żółw\n".as_bytes().to_vec()), "{prints:?}");
+}

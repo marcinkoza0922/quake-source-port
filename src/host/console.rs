@@ -214,7 +214,7 @@ impl Host {
         } else if self.server.has_command(&name) {
             self.server.command(line);
         } else if let Some(i) = self.local.filter(|_| self.server.active()) {
-            self.server.client_command(i, line);
+            self.server.client_command(i, &qcore::lang::quake_encode(line));
         } else {
             self.con.print(&qcore::ctr!("Unknown command \"{}\"\n", args.argv(0)));
         }

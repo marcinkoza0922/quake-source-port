@@ -239,11 +239,11 @@ impl Host {
         } else {
             qcore::tr!("Play {}x", trim(speed))
         };
-        let mut map = if self.cl.levelname.trim().is_empty() { self.level.mapname.clone() } else { format!("{} ({})", self.cl.levelname.trim(), self.level.mapname) };
+        let mut map = if self.cl.levelname.trim().is_empty() { self.level.mapname.clone() } else { format!("{} ({})", qcore::text::plain(self.cl.levelname.trim()), self.level.mapname) };
         if self.freecam.cam.is_some() {
             map = format!("{map} [Free Cam]");
         } else if let Some(pov) = d.mvd_pov_name() {
-            map = format!("{map} [POV: {pov}]");
+            map = format!("{map} [POV: {}]", qcore::text::plain(pov));
         }
         let mut marks = d.play.marks;
         // a drag in progress shows the segment it would mark

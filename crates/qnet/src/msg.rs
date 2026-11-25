@@ -164,7 +164,11 @@ impl<'a> MsgReader<'a> {
             }
         }
     }
-    /// String as lossy UTF-8 (Quake text is byte-oriented).
+    /// String as Quake text, one char per byte (`qcore::text`).
+    pub fn string_text(&mut self) -> String {
+        self.string().iter().map(|&b| char::from(b)).collect()
+    }
+    /// String as lossy UTF-8, for names that are ASCII anyway (files, keys).
     pub fn string_lossy(&mut self) -> String {
         String::from_utf8_lossy(self.string()).into_owned()
     }

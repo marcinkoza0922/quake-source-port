@@ -34,7 +34,7 @@ impl QwState {
                 }
                 SVC_PRINT => {
                     let level = m.byte();
-                    let s = m.string_lossy();
+                    let s = m.string_text();
                     if for_pov || self.target_mask == u32::MAX || level == PRINT_CHAT {
                         body.byte(nq::SVC_PRINT);
                         // \x01 marks chat (talk sound, coloured) as in NQ.
@@ -43,14 +43,14 @@ impl QwState {
                     }
                 }
                 SVC_CENTERPRINT => {
-                    let s = m.string_lossy();
+                    let s = m.string_text();
                     if for_pov {
                         body.byte(nq::SVC_CENTERPRINT);
                         body.string(&s);
                     }
                 }
                 SVC_STUFFTEXT => {
-                    let s = m.string_lossy();
+                    let s = m.string_text();
                     let prev_signon = self.nq_signon;
                     self.stuff_text(&s, &mut body, &mut out);
                     if self.mvd && prev_signon < 3 && self.nq_signon >= 3 && self.mvd_players.iter().any(|p| p.present) {
@@ -91,7 +91,7 @@ impl QwState {
                 }
                 SVC_LIGHTSTYLE => {
                     let i = m.byte();
-                    let s = m.string_lossy();
+                    let s = m.string_text();
                     if let Some(slot) = self.lightstyles.get_mut(i.max(0) as usize) {
                         *slot = s.clone();
                     }
@@ -209,7 +209,7 @@ impl QwState {
                     body.byte(nq::SVC_INTERMISSION);
                 }
                 SVC_FINALE => {
-                    let s = m.string_lossy();
+                    let s = m.string_text();
                     body.byte(nq::SVC_FINALE);
                     body.string(&s);
                 }
@@ -233,21 +233,21 @@ impl QwState {
                 SVC_UPDATEUSERINFO => {
                     let i = self.slot(m.byte())?;
                     self.players[i].userid = m.long();
-                    self.players[i].userinfo = m.string_lossy();
+                    self.players[i].userinfo = m.string_text();
                     self.process_userinfo(i, &mut body);
                     self.auto_select_mvd_pov(&mut body);
                 }
                 SVC_SETINFO => {
                     let i = self.slot(m.byte())?;
-                    let k = m.string_lossy();
-                    let v = m.string_lossy();
+                    let k = m.string_text();
+                    let v = m.string_text();
                     info_set(&mut self.players[i].userinfo, &k, &v);
                     self.process_userinfo(i, &mut body);
                     self.auto_select_mvd_pov(&mut body);
                 }
                 SVC_SERVERINFO => {
-                    let k = m.string_lossy();
-                    let v = m.string_lossy();
+                    let k = m.string_text();
+                    let v = m.string_text();
                     info_set(&mut self.serverinfo, &k, &v);
                 }
                 SVC_DOWNLOAD => {

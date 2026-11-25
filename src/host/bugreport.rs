@@ -111,7 +111,7 @@ impl Host {
         f("timestamp_utc", js(iso));
         f("version", js(env!("CARGO_PKG_VERSION")));
         f("map", js(&self.level.mapname));
-        f("level_name", js(&cl.levelname));
+        f("level_name", js(&qcore::text::plain(&cl.levelname)));
         f("game", js(self.game_name()));
         f("gamedirs", format!("[{}]", self.fs_snapshot.1.iter().map(|g| js(g)).collect::<Vec<_>>().join(", ")));
         f("cmdline", format!("[{}]", self.cmdline.iter().map(|g| js(g)).collect::<Vec<_>>().join(", ")));

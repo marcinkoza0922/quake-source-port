@@ -14,6 +14,30 @@ pub fn encode(text: &str) -> Vec<u8> {
     glyphs(text).collect()
 }
 
+/// Quake text as the bytes of a message or a QC string. Unlike [`encode`] a
+/// character no byte stands for keeps its UTF-8 bytes.
+pub fn wire(text: &str) -> Vec<u8> {
+    let mut out = Vec::with_capacity(text.len());
+    for c in text.chars() {
+        match u8::try_from(c as u32) {
+            Ok(b) => out.push(b),
+            Err(_) => out.extend(c.encode_utf8(&mut [0; 4]).bytes()),
+        }
+    }
+    out
+}
+
+/// Quake text for ordinary (Unicode) text drawing and files: UTF-8 runs
+/// decoded, gold letters plain.
+pub fn plain(text: &str) -> String {
+    glyphs_utf8(&wire(text), true)
+        .map(|g| match g {
+            Glyph::Char(c) => c,
+            Glyph::Quake(b) => char::from(b & 127),
+        })
+        .collect()
+}
+
 /// One drawable unit of Quake text.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Glyph {
@@ -90,6 +114,18 @@ pub fn pua_byte(c: char) -> Option<u8> {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn text_keeps_its_bytes() {
+        let gold: Vec<u8> = b"color".iter().map(|b| b | 128).collect();
+        let all: Vec<u8> = (1..=255).collect();
+        for bytes in [gold.as_slice(), "żółw".as_bytes(), &all] {
+            assert_eq!(super::wire(&super::decode(bytes)), bytes);
+        }
+        assert_eq!(super::wire("ż"), "ż".as_bytes());
+        assert_eq!(super::plain(&super::decode(&gold)), "color");
+        assert_eq!(super::plain(&super::decode("żółw".as_bytes())), "żółw");
+    }
+
     #[test]
     fn utf8_sequences_decode_only_when_enabled() {
         use super::Glyph::*;

@@ -121,7 +121,7 @@ impl ClientState {
                 SVC_SETVIEW => self.viewentity = m.short().max(0) as usize,
                 SVC_LIGHTSTYLE => {
                     let i = m.byte();
-                    let s = m.string_lossy();
+                    let s = m.string_text();
                     if !(0..MAX_LIGHTSTYLES as i32).contains(&i) {
                         return err("svc_lightstyle > MAX_LIGHTSTYLES");
                     }
@@ -135,7 +135,7 @@ impl ClientState {
                 }
                 SVC_UPDATENAME => {
                     let i = self.score_slot(m.byte())?;
-                    self.scores[i].name = m.string_lossy();
+                    self.scores[i].name = m.string_text();
                 }
                 SVC_UPDATEFRAGS => {
                     let i = self.score_slot(m.byte())?;

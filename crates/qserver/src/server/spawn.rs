@@ -156,6 +156,7 @@ impl Server {
         }
         c.sv.active = true;
         c.sv.loading = false;
+        c.sv.spawn_precaches = [c.sv.model_precache.len(), c.sv.sound_precache.len()];
         vm.protect_world = true;
         self.level = Some(Level {
             dodges: Vec::new(), vm, world, modifiers: Vec::new(), portals: Default::default(), stickies: Default::default(), falls: Default::default(),

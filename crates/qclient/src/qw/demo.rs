@@ -66,10 +66,10 @@ impl QwState {
         buf.byte(SVC_SERVERDATA as i32);
         buf.long(PROTOCOL_VERSION);
         buf.long(self.servercount);
-        buf.string(self.gamedir.as_bytes());
+        buf.string(&qcore::text::wire(&self.gamedir));
         let pn = (self.playernum as u8 & 127) | ((self.spectator as u8) << 7);
         buf.byte(pn as i32);
-        buf.string(self.levelname.as_bytes());
+        buf.string(&qcore::text::wire(&self.levelname));
         for f in [
             self.movevars.gravity,
             self.movevars.stopspeed,
@@ -88,7 +88,7 @@ impl QwState {
         buf.byte(self.cdtrack as i32);
         buf.byte(SVC_STUFFTEXT as i32);
         let fsi = format!("fullserverinfo \"{}\"\n", self.serverinfo);
-        buf.string(fsi.as_bytes());
+        buf.string(&qcore::text::wire(&fsi));
         write_qwd_record_msg(&mut out, realtime, &mut seq, &buf.data);
 
         // 2. soundlist chunks
@@ -144,7 +144,7 @@ impl QwState {
             buf.byte(SVC_UPDATEUSERINFO as i32);
             buf.byte(i as i32);
             buf.long(p.userid);
-            buf.string(p.userinfo.as_bytes());
+            buf.string(&qcore::text::wire(&p.userinfo));
         }
         if !buf.is_empty() {
             write_qwd_record_msg(&mut out, realtime, &mut seq, &buf.data);
@@ -159,7 +159,7 @@ impl QwState {
             }
             buf.byte(SVC_LIGHTSTYLE as i32);
             buf.byte(i as i32);
-            buf.string(ls.as_bytes());
+            buf.string(&qcore::text::wire(ls));
         }
         if !buf.is_empty() {
             write_qwd_record_msg(&mut out, realtime, &mut seq, &buf.data);
@@ -205,7 +205,7 @@ fn write_qwd_precache_list(out: &mut Vec<u8>, time: f32, seq: &mut u32, svc: u8,
         if s.is_empty() {
             break;
         }
-        buf.string(s.as_bytes());
+        buf.string(&qcore::text::wire(s));
         n += 1;
         if buf.data.len() > MAX_MSGLEN / 2 {
             buf.byte(0);
