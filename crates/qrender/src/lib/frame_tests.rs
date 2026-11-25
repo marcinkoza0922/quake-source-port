@@ -66,3 +66,31 @@ fn images_without_pixels_become_one_texel() {
     r.set_skybox(Some(&std::array::from_fn(|_| face.clone()))).unwrap();
     r.render(&RenderFrame::default()).unwrap();
 }
+
+#[test]
+fn losses_are_told_apart_from_other_errors() {
+    for (r, lost) in [
+        (vk::Result::ERROR_DEVICE_LOST, Some(Lost::Device)),
+        (vk::Result::ERROR_SURFACE_LOST_KHR, Some(Lost::Surface)),
+        (vk::Result::ERROR_OUT_OF_DEVICE_MEMORY, None),
+    ] {
+        assert_eq!(Error::from(r).lost, lost, "{r}");
+    }
+}
+
+#[test]
+fn a_minimised_window_has_no_swapchain_size() {
+    let e = |width, height| vk::Extent2D { width, height };
+    let caps = |current| vk::SurfaceCapabilitiesKHR { current_extent: current, min_image_extent: e(1, 1), max_image_extent: e(4096, 4096), ..Default::default() };
+    let any = caps(e(u32::MAX, u32::MAX));
+    for (c, window, size) in [
+        (caps(e(0, 0)), (1280, 720), None), // Windows
+        (caps(e(1280, 0)), (1280, 720), None),
+        (caps(e(800, 600)), (0, 0), Some(e(800, 600))),
+        (any, (0, 0), None),
+        (any, (1280, 720), Some(e(1280, 720))),
+        (any, (9000, 720), Some(e(4096, 720))),
+    ] {
+        assert_eq!(swapchain::swap_extent(&c, window), size, "{window:?}");
+    }
+}

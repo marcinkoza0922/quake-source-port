@@ -44,6 +44,9 @@ mod slang;
 #[path = "lib/targets.rs"]
 mod targets;
 #[cfg(qvk)]
+#[path = "lib/swapchain.rs"]
+mod swapchain;
+#[cfg(qvk)]
 #[path = "lib/assets.rs"]
 mod assets;
 #[cfg(qvk)]
@@ -100,17 +103,33 @@ mod wgpu_backend;
 #[cfg(not(qvk))]
 pub use wgpu_backend::Renderer;
 
+/// What drawing can't go on without.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Lost {
+    /// The GPU was reset, hung or removed: this renderer draws nothing more.
+    Device,
+    /// The window's surface: [`Renderer::recreate_surface`].
+    Surface,
+}
+
 #[derive(Debug, Clone)]
-pub struct Error(pub String);
+pub struct Error {
+    pub message: String,
+    pub lost: Option<Lost>,
+}
 
 impl Error {
     pub fn new(s: impl Into<String>) -> Self {
-        Error(s.into())
+        Error { message: s.into(), lost: None }
+    }
+
+    pub fn lost(lost: Lost, s: impl Into<String>) -> Self {
+        Error { message: s.into(), lost: Some(lost) }
     }
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_str(&self.0)
+        f.write_str(&self.message)
     }
 }
 impl std::error::Error for Error {}

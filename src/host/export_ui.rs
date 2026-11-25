@@ -118,9 +118,8 @@ impl Host {
             player: None,
         };
         self.r.present_next(true);
-        if let Err(e) = self.r.render(&frame) {
-            self.con.print(&format!("render error: {e:?}\n"));
-        }
+        let drawn = self.r.render(&frame);
+        self.after_render(drawn);
     }
 
     /// Input while exporting: Cancel by click, Enter or A; everything else

@@ -9,6 +9,7 @@ mod android;
 mod bloom;
 mod capture;
 mod encode;
+mod errors;
 mod ents;
 mod frame;
 mod fx_pipes;
@@ -74,6 +75,7 @@ pub struct Renderer {
     /// CPU time spent waiting for the GPU last frame (ns).
     pub fence_wait_ns: u64,
     dev: wgpu::Device,
+    errors: errors::DeviceErrors,
     queue: wgpu::Queue,
     name: String,
     surface: Option<(wgpu::Surface<'static>, wgpu::SurfaceConfiguration)>,
@@ -148,6 +150,11 @@ impl Renderer {
         Err(Error::new("the wgpu renderer has no native window support; run with -headless"))
     }
 
+    /// Likewise for a new surface.
+    pub fn recreate_surface(&mut self, _surface: &dyn SurfaceProvider) -> Result<()> {
+        Err(Error::new("the wgpu renderer has no native window support"))
+    }
+
     /// Offscreen renderer (no surface); read results with [`Renderer::read_pixels`].
     #[cfg(not(target_arch = "wasm32"))]
     pub fn headless(width: u32, height: u32, palette: &Palette) -> Result<Renderer> {
@@ -207,6 +214,7 @@ impl Renderer {
             })
             .await
             .map_err(|e| Error::new(format!("wgpu device: {e}")))?;
+        let errors = errors::DeviceErrors::watch(&dev);
         #[cfg(target_os = "android")]
         let internal = dev.push_error_scope(wgpu::ErrorFilter::Internal);
         #[cfg(target_os = "android")]
@@ -256,6 +264,7 @@ impl Renderer {
             gpu_times_wanted: false,
             fence_wait_ns: 0,
             dev,
+            errors,
             queue,
             name,
             surface,

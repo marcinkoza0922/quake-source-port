@@ -80,6 +80,9 @@ pub async fn start(args: Vec<String>) -> Result<(), JsValue> {
             // the page stays; persist config and stop the loop
             host.write_config();
             audio.take();
+            if let Some((title, message)) = host.fatal.take() {
+                qplatform::error_box(title, &message);
+            }
             return; // no further frames (the closure cannot drop itself while running)
         }
         request_frame(&next);

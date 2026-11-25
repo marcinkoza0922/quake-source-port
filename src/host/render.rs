@@ -634,9 +634,8 @@ impl Host {
             splits: &splits,
             player: self.cl.entities.get(self.cl.viewentity).filter(|_| self.cl.viewentity > 0).map(|e| e.origin),
         };
-        if let Err(e) = self.r.render(&frame) {
-            self.con.print(&format!("render error: {e:?}\n"));
-        }
+        let drawn = self.r.render(&frame);
+        self.after_render(drawn);
         if view.is_some() {
             self.fte.recycle_geometry(fte);
         }

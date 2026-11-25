@@ -64,10 +64,15 @@ impl Renderer {
     }
 
     fn render_frame(&mut self, fr: &RenderFrame) -> Result<()> {
-        if let Some(s) = &self.swap
-            && (self.needs_resize || s.vsync != fr.settings.vsync)
+        if self.gpu.surface_fn.is_some()
+            && self.swap.as_ref().is_none_or(|s| self.needs_resize || s.vsync != fr.settings.vsync)
         {
-            self.create_swapchain(fr.settings.vsync)?;
+            self.minimised = !self.create_swapchain(fr.settings.vsync)?;
+            if self.minimised && !self.skip_present {
+                // Nothing to draw on until it is restored, and no vsync to wait for.
+                std::thread::sleep(std::time::Duration::from_millis(10));
+                return Ok(());
+            }
         }
         self.apply_settings(&fr.settings)?;
         // r_water_reflections: 1 planar (portal views), 2 ray traced
@@ -117,6 +122,7 @@ impl Renderer {
         self.init_gpu_times(fr.splits.len().max(1))?;
         self.collect_gpu_times(fi);
         let mut img_idx = 0u32;
+        let mut present_result = Ok(());
         let present = self.presenting();
         let has_output = present || self.targets.as_ref().is_some_and(|t| t.out.is_some());
         if self.targets.is_none() || self.lightmap.is_none() || !has_output {
@@ -698,7 +704,8 @@ impl Renderer {
                         }
                         base_flags |= (e.heat.min(3) as u32) << 8;
                         let stride = if am.md3 { 2 } else { 1 };
-                        let prev_r = if prev_ok && main_visible && !e.portal_only && (alpha >= 1.0 || e.viewmodel) {
+                        // (a ragdoll has no previous pose: its poses are in this frame's buffer)
+                        let prev_r = if prev_ok && dynp.is_none() && main_visible && !e.portal_only && (alpha >= 1.0 || e.viewmodel) {
                             let local = affine(
                                 [
                                     [am.scale[0], 0.0, 0.0],
@@ -2601,7 +2608,8 @@ impl Renderer {
                 match scf.queue_present(self.gpu.queue, &pi) {
                     Ok(false) => {}
                     Ok(true) | Err(vk::Result::ERROR_OUT_OF_DATE_KHR) => self.needs_resize = true,
-                    Err(e) => return Err(e.into()),
+                    // (after the frame's own clean-up)
+                    Err(e) => present_result = Err(e.into()),
                 }
             } else {
                 let si = [vk::SubmitInfo::default().command_buffers(&cmds)];
@@ -2626,6 +2634,6 @@ impl Renderer {
         }
         self.cur = (self.cur + 1) % FRAMES;
         self.frame_count += 1;
-        Ok(())
+        present_result
     }
 }

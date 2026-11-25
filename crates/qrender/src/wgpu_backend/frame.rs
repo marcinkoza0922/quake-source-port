@@ -203,6 +203,17 @@ impl Renderer {
 
     /// Draws one frame (and presents it when windowed).
     pub fn render(&mut self, fr: &RenderFrame) -> Result<()> {
+        // what loading something reported since the last frame
+        let before = self.errors.take();
+        if before.as_ref().is_err_and(|e| e.lost.is_some()) {
+            return before;
+        }
+        let drawn = self.render_frame(fr);
+        // the cause before what followed from it
+        before.and(self.errors.take()).and(drawn)
+    }
+
+    fn render_frame(&mut self, fr: &RenderFrame) -> Result<()> {
         self.mapper_stats = crate::MapperStats::default();
         self.set_world_filter(fr.settings.texture_linear && !crate::softemu::forces_nearest(&fr.settings));
         self.update_lut(&fr.settings);

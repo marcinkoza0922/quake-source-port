@@ -48,6 +48,15 @@ impl Renderer {
         self.0.as_mut()
     }
 
+    /// Makes a new surface for the window ([`qrender::Lost::Surface`]).
+    #[cfg(not(any(target_arch = "wasm32", target_os = "android")))]
+    pub fn recreate_surface(&mut self, window: &qplatform::Window) -> Result<()> {
+        match &mut self.0 {
+            Some(r) => r.recreate_surface(&crate::platform::Surface(window)),
+            None => none(),
+        }
+    }
+
     /// CPU time spent waiting on the frame-in-flight fence last frame (ns).
     pub fn fence_wait_ns(&self) -> u64 {
         self.0.as_ref().map_or(0, |r| r.fence_wait_ns)
