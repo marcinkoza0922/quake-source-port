@@ -43,6 +43,7 @@ jobs:
           - { name: windows-arm64, os: windows-11-arm, ext: zip }
           - { name: macos-arm64, os: macos-latest, ext: tar.gz }
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -102,6 +103,7 @@ jobs:
           - { name: linux-musl-x64, os: ubuntu-24.04 }
           - { name: linux-musl-arm64, os: ubuntu-24.04-arm }
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -120,7 +122,8 @@ jobs:
   # The BSDs build natively in a QEMU VM and link the system SDL3 package, which users
   # install anyway alongside the Vulkan loader. FreeBSD and NetBSD get Rust from rustup;
   # OpenBSD has no rustup, so it uses the release's packaged Rust, and its binaries only
-  # run on the OpenBSD release they were built for.
+  # run on the OpenBSD release they were built for. A release goes out without the BSD
+  # packages that failed.
   bsd:
     needs: shaders
     strategy:
@@ -145,12 +148,15 @@ jobs:
               sudo pkgin -y install curl cmake ninja-build pkgconf SDL3 &&
               curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
     runs-on: ubuntu-24.04
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with: { name: spirv, path: spv }
       - name: Build in VM
-        uses: cross-platform-actions/action@v1.3.0
+        # 1.4.0 and up hide the runner's AMX from the guest; with it, whether NetBSD 10.1
+        # booted depended on which runner the job got.
+        uses: cross-platform-actions/action@v1.8.0
         with:
           operating_system: ${{ matrix.os }}
           version: ${{ matrix.version }}
@@ -247,7 +253,9 @@ jobs:
         with: { name: web, path: "${{ env.ASSET }}", if-no-files-found: error }
 
   release:
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: >-
+      !cancelled() && startsWith(github.ref, 'refs/tags/v') && needs.build.result == 'success' &&
+      needs.musl.result == 'success' && needs.android.result == 'success' && needs.web.result == 'success'
     needs: [build, musl, bsd, android, web]
     runs-on: ubuntu-24.04
     steps:
@@ -258,11 +266,21 @@ jobs:
         run: |
           assets=()
           for target in linux-{x64,arm64,musl-x64,musl-arm64}.tar.gz windows-{x64,arm64}.zip \
-                        macos-arm64.tar.gz {freebsd,openbsd,netbsd}-x64.tar.gz android-arm64.apk web.tar.gz; do
+                        macos-arm64.tar.gz android-arm64.apk web.tar.gz; do
             asset="dist/quake-source-port-$RELEASE_TAG-$target"
             test -s "$asset" || { echo "Missing release package: $asset" >&2; exit 1; }
             assets+=("$asset")
           done
+          missing=""
+          for target in {freebsd,openbsd,netbsd}-x64; do
+            asset="dist/quake-source-port-$RELEASE_TAG-$target.tar.gz"
+            if [ -s "$asset" ]; then assets+=("$asset"); else missing="$missing $target"; fi
+          done
+          notes="Release builds. **Only Linux x64 has been tested so far**; every other build is untested. You need your own Quake game data. See the README."
+          if [ -n "$missing" ]; then
+            echo "::warning::Releasing without:$missing"
+            notes="$notes Not built this time:$missing."
+          fi
           gh release create "$RELEASE_TAG" "${assets[@]}" --repo "$GITHUB_REPOSITORY" \
             --title "$RELEASE_TAG" --verify-tag --prerelease \
-            --notes "Release builds. **Only Linux x64 has been tested so far**; every other build is untested. You need your own Quake game data. See the README."
+            --notes "$notes"
