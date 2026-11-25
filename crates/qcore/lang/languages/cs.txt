@@ -991,6 +991,9 @@ cs Týmová hra
 @ Texture Filter
 cs Filtrování textur
 
+@ Texture Size
+cs Velikost textur
+
 @ Third person
 cs Z pohledu třetí osoby
 
@@ -1249,6 +1252,9 @@ cs žádný
 
 @ normal
 cs normální
+
+@ full size
+cs plná velikost
 
 @ off
 cs vypnuto
@@ -2224,6 +2230,9 @@ cs Zpřístupní stránku Nastavení efektů: vylepšené částice, efekty zás
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 cs Použije hladší modely MD5 z remasteru z roku 2021 (a náhrady MD3 z modů) místo klasických. Projeví se při příštím načtení mapy
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+cs Zmenší velké textury, aby se ušetřila paměť. Projeví se při příštím načtení mapy
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 cs Použije barevné světlo mapy (soubor .lit nebo blok BSPX); vypnuto dává původní bílé světlo. Projeví se při příštím načtení mapy

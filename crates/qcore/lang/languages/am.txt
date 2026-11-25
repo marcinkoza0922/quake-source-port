@@ -991,6 +991,9 @@ am የቡድን ጨዋታ
 @ Texture Filter
 am የቴክስቸር ማጣሪያ
 
+@ Texture Size
+am የቴክስቸር መጠን
+
 @ Third person
 am ሶስተኛ ሰው
 
@@ -1249,6 +1252,9 @@ am ምንም
 
 @ normal
 am መደበኛ
+
+@ full size
+am ሙሉ መጠን
 
 @ off
 am ጠፍቷል
@@ -2224,6 +2230,9 @@ am የFX ቅንብሮች ገጽን ይከፍታል፦ የተሻሻሉ ቅንጣ�
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 am ከክላሲኮቹ ይልቅ የ2021 ዳግም እትም ለስላሳ MD5 ሞዴሎችን (እና ከሞዶች የሚመጡ MD3 ተተኪዎችን) ይጠቀማል። በቀጣዩ ካርታ ሲጫን ይተገበራል
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+am ማህደረ ትውስታን ለመቆጠብ ትላልቅ ቴክስቸሮችን ያሳንሳል። በቀጣዩ ካርታ ሲጫን ይተገበራል
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 am የካርታውን ባለቀለም ብርሃን (.lit ፋይል ወይም BSPX lump) ይጠቀማል፤ ጠፍቶ ሲሆን መደበኛ ነጭ ብርሃን ይሰጣል። በቀጣዩ ካርታ ሲጫን ይተገበራል

@@ -991,6 +991,9 @@ pl Gra drużynowa
 @ Texture Filter
 pl Filtr tekstur
 
+@ Texture Size
+pl Rozmiar tekstur
+
 @ Third person
 pl Trzecia osoba
 
@@ -1249,6 +1252,9 @@ pl brak
 
 @ normal
 pl normalny
+
+@ full size
+pl pełny rozmiar
 
 @ off
 pl wył.
@@ -2224,6 +2230,9 @@ pl Odblokowuje stronę Ustawienia efektów: lepsze cząsteczki, efekty trafień 
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 pl Używa gładszych modeli MD5 z wydania z 2021 roku (i zamienników MD3 z modów) zamiast klasycznych. Działa od następnego wczytania mapy
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+pl Zmniejsza duże tekstury, aby oszczędzać pamięć. Działa od następnego wczytania mapy
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 pl Używa kolorowego światła mapy (plik .lit lub blok BSPX); wyłączone daje oryginalne białe światło. Działa od następnego wczytania mapy

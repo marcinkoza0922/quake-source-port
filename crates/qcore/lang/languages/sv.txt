@@ -991,6 +991,9 @@ sv Lagspel
 @ Texture Filter
 sv Texturfilter
 
+@ Texture Size
+sv Texturstorlek
+
 @ Third person
 sv Tredjeperson
 
@@ -1249,6 +1252,9 @@ sv ingen
 
 @ normal
 sv normal
+
+@ full size
+sv full storlek
 
 @ off
 sv av
@@ -2224,6 +2230,9 @@ sv Låser upp sidan Effektinställningar: förbättrade partiklar, nedslagseffek
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 sv Använder de mjukare MD5-modellerna från 2021 års nyutgåva (och MD3-ersättningar från moddar) i stället för de klassiska. Gäller från nästa banladdning
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+sv Förminskar stora texturer för att spara minne. Gäller från nästa banladdning
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 sv Använder banans färgade ljus (.lit-fil eller BSPX-block); av ger det ursprungliga vita ljuset. Gäller från nästa banladdning

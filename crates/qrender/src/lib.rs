@@ -26,7 +26,7 @@ pub const MAX_PORTAL_VIEWS: usize = 8;
 
 pub use types::*;
 
-use convert::Palette;
+use convert::{Palette, TexUse};
 use qformats::bsp::{Bsp, TextureKind};
 
 mod debug_visibility;

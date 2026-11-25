@@ -108,6 +108,7 @@ impl Host {
         let t0 = qcore::time::Instant::now();
         let colored = self.cv("r_coloredlight") != 0.0;
         let enhanced = self.cv("r_enhancedmodels") != 0.0;
+        self.r.set_max_texture_size(max_texture_size([self.cv("r_texturesize"), self.cv("gl_max_size")]));
         let local = self.server.active() && self.cl.model_precache.get(1) == Some(&self.server.core.sv.modelname);
         let sv = &mut self.server.core.sv;
         let reloaded = local && sv.reloaded;
@@ -202,4 +203,23 @@ pub(super) fn register(c: &mut Commands<Host>) {
         let map = (a.argc() > 2).then(|| a.argv(2).to_string());
         h.switch_game(a.argv(1), map.as_deref());
     });
+}
+
+/// The smallest of the texture size limits that are on (above 0); 0 = none.
+fn max_texture_size(limits: [f32; 2]) -> u32 {
+    limits.into_iter().filter(|&l| l > 0.0).map(|l| (l as u32).max(1)).min().unwrap_or(0)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::max_texture_size;
+
+    #[test]
+    fn the_smaller_texture_limit_wins() {
+        assert_eq!(max_texture_size([0.0, 0.0]), 0);
+        assert_eq!(max_texture_size([256.0, 2048.0]), 256);
+        assert_eq!(max_texture_size([0.0, 2048.0]), 2048);
+        assert_eq!(max_texture_size([-1.0, f32::NAN]), 0);
+        assert_eq!(max_texture_size([0.5, 0.0]), 1);
+    }
 }

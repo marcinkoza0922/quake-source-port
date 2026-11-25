@@ -79,14 +79,14 @@ impl Renderer {
                 && self.sky_layers[0] == NO_TEX
                 && let Some((w, h, solid, alpha)) = convert::sky_layers(&pal, &t, bsp.version == Some(qformats::bsp::BspVersion::Quake64))
             {
-                let s = self.add_texture(up, w, h, &[&solid], true, Sampling::World)?;
-                let a = self.add_texture(up, w, h, &[&alpha], true, Sampling::World)?;
+                let s = self.add_texture(up, w, h, &[&solid], TexUse::Base, Sampling::World)?;
+                let a = self.add_texture(up, w, h, &[&alpha], TexUse::Base, Sampling::World)?;
                 self.sky_layers = [s, a];
             }
             let (base, fb) = convert::world_texture_images(&pal, &t, lb.external(ti));
-            let b = self.add_texture(up, base.width, base.height, &base.mip_refs(), true, Sampling::World)?;
+            let b = self.add_texture(up, base.width, base.height, &base.mip_refs(), TexUse::Base, Sampling::World)?;
             let f = match &fb {
-                Some(fb) => self.add_texture(up, fb.width, fb.height, &fb.mip_refs(), true, Sampling::World)?,
+                Some(fb) => self.add_texture(up, fb.width, fb.height, &fb.mip_refs(), TexUse::Glow, Sampling::World)?,
                 None => NO_TEX,
             };
             materials.push([b, f, flags, convert::packed_size(&t)]);

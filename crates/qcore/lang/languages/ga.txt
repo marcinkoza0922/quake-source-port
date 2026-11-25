@@ -991,6 +991,9 @@ ga Imirt Foirne
 @ Texture Filter
 ga Scagaire Uigeachta
 
+@ Texture Size
+ga Méid Uigeachta
+
 @ Third person
 ga An tríú pearsa
 
@@ -1249,6 +1252,9 @@ ga dada
 
 @ normal
 ga gnáth
+
+@ full size
+ga lánmhéid
 
 @ off
 ga as
@@ -2224,6 +2230,9 @@ ga Díghlasálann sé an leathanach Socruithe Maisíochtaí: cáithníní feabhs
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 ga Úsáideann sé samhlacha MD5 níos míne an atheisiúna 2021 (agus samhlacha MD3 ó mhodanna) in ionad na samhlacha clasaiceacha. Cuirtear i bhfeidhm é ag an gcéad lódáil léarscáile eile
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+ga Laghdaíonn sé uigeachtaí móra chun cuimhne a shábháil. Cuirtear i bhfeidhm é ag an gcéad lódáil léarscáile eile
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ga Úsáideann sé solas daite na léarscáile (comhad .lit nó cnap BSPX); má tá sé as, faightear an solas bán bunaidh. Cuirtear i bhfeidhm é ag an gcéad lódáil léarscáile eile

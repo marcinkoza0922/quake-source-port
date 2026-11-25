@@ -991,6 +991,9 @@ ur ٹیم پلے
 @ Texture Filter
 ur ٹیکسچر فلٹر
 
+@ Texture Size
+ur ٹیکسچر کا سائز
+
 @ Third person
 ur تھرڈ پرسن
 
@@ -1249,6 +1252,9 @@ ur کوئی نہیں
 
 @ normal
 ur عام
+
+@ full size
+ur پورا سائز
 
 @ off
 ur بند
@@ -2224,6 +2230,9 @@ ur اثرات کی ترتیبات کا صفحہ کھولتا ہے: بہتر ذر
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 ur کلاسک ماڈلز کی جگہ 2021 کی دوبارہ ریلیز کے ہموار MD5 ماڈل (اور موڈز کے MD3 متبادل) استعمال کرتا ہے۔ اگلے نقشہ لوڈ پر لاگو ہوتا ہے
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+ur میموری بچانے کے لیے بڑے ٹیکسچر چھوٹے کرتا ہے۔ اگلے نقشہ لوڈ پر لاگو ہوتا ہے
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ur نقشے کی رنگین روشنی (.lit فائل یا BSPX lump) استعمال کرتا ہے؛ بند ہو تو اصل سفید روشنی۔ اگلے نقشہ لوڈ پر لاگو ہوتا ہے

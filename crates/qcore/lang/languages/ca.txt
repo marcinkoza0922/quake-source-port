@@ -991,6 +991,9 @@ ca Joc en equip
 @ Texture Filter
 ca Filtre de textures
 
+@ Texture Size
+ca Mida de textures
+
 @ Third person
 ca tercera persona
 
@@ -1249,6 +1252,9 @@ ca cap
 
 @ normal
 ca normal
+
+@ full size
+ca mida completa
 
 @ off
 ca desactivat
@@ -2224,6 +2230,9 @@ ca Desbloqueja la pàgina Configuració dels efectes: partícules millorades, ef
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 ca Fa servir els models MD5 més suaus de la reedició del 2021 (i els reemplaçaments MD3 dels mods) en lloc dels clàssics. S'aplica en carregar el mapa següent
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+ca Redueix les textures grans per estalviar memòria. S'aplica en carregar el mapa següent
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ca Fa servir la llum de color del mapa (fitxer .lit o bloc BSPX); desactivat dona la llum blanca original. S'aplica en carregar el mapa següent

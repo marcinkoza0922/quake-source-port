@@ -991,6 +991,9 @@ fi Joukkuepeli
 @ Texture Filter
 fi Tekstuurisuodatus
 
+@ Texture Size
+fi Tekstuurikoko
+
 @ Third person
 fi Kolmas persoona
 
@@ -1249,6 +1252,9 @@ fi ei mitään
 
 @ normal
 fi normaali
+
+@ full size
+fi täysi koko
 
 @ off
 fi pois
@@ -2224,6 +2230,9 @@ fi Avaa Tehosteasetukset-sivun: paremmat partikkelit, osumatehosteet ja verirois
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 fi Käyttää vuoden 2021 uusintajulkaisun pehmeämpiä MD5-malleja (ja modien MD3-korvaajia) klassisten sijaan. Tulee voimaan seuraavan kentän latauksessa
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+fi Pienentää suuria tekstuureja muistin säästämiseksi. Tulee voimaan seuraavan kentän latauksessa
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 fi Käyttää kentän värillistä valoa (.lit-tiedosto tai BSPX-lohko); pois antaa alkuperäisen valkoisen valon. Tulee voimaan seuraavan kentän latauksessa

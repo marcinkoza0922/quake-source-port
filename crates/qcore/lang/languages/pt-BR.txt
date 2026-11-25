@@ -991,6 +991,9 @@ pt-BR Jogo em equipe
 @ Texture Filter
 pt-BR Filtro de texturas
 
+@ Texture Size
+pt-BR Tamanho das texturas
+
 @ Third person
 pt-BR terceira pessoa
 
@@ -1249,6 +1252,9 @@ pt-BR nenhum
 
 @ normal
 pt-BR normal
+
+@ full size
+pt-BR tamanho original
 
 @ off
 pt-BR desativado
@@ -2224,6 +2230,9 @@ pt-BR Desbloqueia a página Configurações de efeitos: partículas aprimoradas,
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 pt-BR Usa os modelos MD5 mais suaves do relançamento de 2021 (e substitutos MD3 de mods) em vez dos clássicos. Aplica-se ao carregar o próximo mapa
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+pt-BR Reduz texturas grandes para economizar memória. Aplica-se ao carregar o próximo mapa
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 pt-BR Usa a luz colorida do mapa (arquivo .lit ou lump BSPX); desativado dá a luz branca original. Aplica-se ao carregar o próximo mapa

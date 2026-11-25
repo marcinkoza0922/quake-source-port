@@ -1,7 +1,7 @@
 //! Texture slots, samplers, pictures and material bind groups.
 
 use super::{NO_TEX, Renderer};
-use crate::convert::{self, Palette};
+use crate::convert::{self, Palette, TexUse};
 use crate::{Error, PicId, Result};
 use qformats::image::Pic;
 
@@ -160,11 +160,22 @@ impl Renderer {
         self.textures.len() as u32 - 1
     }
 
-    /// Creates an RGBA8 texture from a mip chain in a new slot.
-    pub(super) fn add_texture(&mut self, w: u32, h: u32, mips: &[&[u8]], level: bool, sampling: Sampling) -> Result<u32> {
+    /// Creates an RGBA8 texture from a mip chain in a new slot, shrunk when
+    /// it's over the size limit.
+    pub(super) fn add_texture(&mut self, w: u32, h: u32, mips: &[&[u8]], usage: TexUse, sampling: Sampling) -> Result<u32> {
+        let limit = usage.limit(self.max_texture_size, self.dev.limits().max_texture_dimension_2d);
+        let fitted = convert::fit(w, h, mips, limit, usage);
+        let refs: Vec<&[u8]>;
+        let (w, h, mips) = match &fitted {
+            Some((w, h, m)) => {
+                refs = m.iter().map(|m| &**m).collect();
+                (*w, *h, &refs[..])
+            }
+            None => (w, h, mips),
+        };
         let slot = self.alloc_slot();
         let (tex, view) = make_texture(&self.dev, &self.queue, w, h, mips);
-        self.textures[slot as usize] = Some(Tex { tex, view, sampling, level });
+        self.textures[slot as usize] = Some(Tex { tex, view, sampling, level: usage.level() });
         Ok(slot)
     }
 
@@ -261,7 +272,7 @@ impl Renderer {
     }
 
     fn register_pic_sampled(&mut self, width: u32, height: u32, rgba: &[u8], sampling: Sampling) -> Result<PicId> {
-        let slot = self.add_texture(width, height, &[rgba], false, sampling)?;
+        let slot = self.add_texture(width, height, &[rgba], TexUse::Pic, sampling)?;
         self.pics.push(PicInfo { slot, width, height });
         Ok(PicId(self.pics.len() as u32 - 1))
     }
@@ -292,6 +303,9 @@ impl Renderer {
     /// are uploaded and the rest of the picture becomes transparent black.
     pub fn update_pic_rows(&mut self, pic: PicId, rgba: &[u8], rows: u32) -> Result<()> {
         let &PicInfo { slot, width, height } = self.pics.get(pic.0 as usize).ok_or_else(|| Error::new("no such picture"))?;
+        if width.max(height) > self.dev.limits().max_texture_dimension_2d {
+            return Err(Error::new("picture larger than the GPU supports"));
+        }
         let rows = rows.min(height);
         let mut data = rgba[..((width * rows * 4) as usize).min(rgba.len())].to_vec();
         data.resize((width * height * 4) as usize, 0);

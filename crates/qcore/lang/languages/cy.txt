@@ -991,6 +991,9 @@ cy Chwarae tîm
 @ Texture Filter
 cy Hidlydd gweadau
 
+@ Texture Size
+cy Maint gweadau
+
 @ Third person
 cy trydydd person
 
@@ -1249,6 +1252,9 @@ cy dim
 
 @ normal
 cy arferol
+
+@ full size
+cy maint llawn
 
 @ off
 cy i ffwrdd
@@ -2224,6 +2230,9 @@ cy Datgloi tudalen Gosodiadau effeithiau: gronynnau gwell, effeithiau trawiad a 
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 cy Defnyddio modelau MD5 llyfnach ail-ryddhad 2021 (ac amnewidion MD3 o fodiau) yn lle'r rhai clasurol. Yn berthnasol pan lwythir y map nesaf
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+cy Yn lleihau gweadau mawr i arbed cof. Yn berthnasol pan lwythir y map nesaf
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 cy Defnyddio golau lliw y map (ffeil .lit neu lwmp BSPX); mae i ffwrdd yn rhoi golau gwyn gwreiddiol. Yn berthnasol pan lwythir y map nesaf

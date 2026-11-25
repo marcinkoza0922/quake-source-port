@@ -77,6 +77,7 @@ impl Renderer {
         fn model_bounds(&, id: ModelId) -> Option<([f32; 3], [f32; 3])> = None;
         fn world_box_leaves(&, mins: [f32; 3], maxs: [f32; 3], out: &mut Vec<u32>) = ();
         fn world_pvs_bits(&mut, eye: [f32; 3]) -> Option<&[u32]> = None;
+        fn set_max_texture_size(&mut, size: u32) = ();
         fn load_level(&mut, level: LevelBsp, brushes: &[LevelBsp]) -> Result<(Vec<ModelId>, Vec<ModelId>)> = none();
         fn load_alias(&mut, mdl: &Mdl) -> Result<ModelId> = none();
         fn load_alias_glow(&mut, mdl: &Mdl, glow: &[Vec<u8>]) -> Result<ModelId> = none();

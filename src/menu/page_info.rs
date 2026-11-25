@@ -65,6 +65,7 @@ pub(super) fn tooltip(item: Item) -> Option<&'static str> {
         "touch_menu_scale" => "Size of the menus and their buttons while you use the touchscreen",
         "cl_wheel_timescale" => "Slows the game down while the weapon wheel is open",
         "r_texfilter" => "Nearest keeps crisp classic pixels; linear smooths textures",
+        "r_texturesize" => "Shrinks larger textures to save memory. Applies on the next map load",
         "r_anisotropy" => "Keeps textures sharp on floors and walls seen at steep angles",
         "r_dynamic" => "Lights from rockets, muzzle flashes and explosions brighten nearby walls",
         "r_enhancedmodels" => "Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load",

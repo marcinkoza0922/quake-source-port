@@ -991,6 +991,9 @@ ta அணி ஆட்டம்
 @ Texture Filter
 ta டெக்ஸ்சர் வடிகட்டி
 
+@ Texture Size
+ta டெக்ஸ்சர் அளவு
+
 @ Third person
 ta மூன்றாம் நபர்
 
@@ -1249,6 +1252,9 @@ ta ஏதுமில்லை
 
 @ normal
 ta இயல்பு
+
+@ full size
+ta முழு அளவு
 
 @ off
 ta ஆஃப்
@@ -2224,6 +2230,9 @@ ta FX அமைப்புகள் பக்கத்தைத் திறக
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 ta பழைய மாடல்களுக்குப் பதிலாக 2021 மறுவெளியீட்டின் மென்மையான MD5 மாடல்களை (மாட்களின் MD3 மாற்றுகளையும்) பயன்படுத்தும். அடுத்த மேப் ஏற்றத்தில் பொருந்தும்
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+ta நினைவகத்தைச் சேமிக்கப் பெரிய டெக்ஸ்சர்களைச் சிறிதாக்கும். அடுத்த மேப் ஏற்றத்தில் பொருந்தும்
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ta மேப்பின் வண்ண ஒளியைப் (.lit கோப்பு அல்லது BSPX lump) பயன்படுத்தும்; ஆஃப் எனில் அசல் வெள்ளை ஒளி. அடுத்த மேப் ஏற்றத்தில் பொருந்தும்

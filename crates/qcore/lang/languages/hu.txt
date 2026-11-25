@@ -991,6 +991,9 @@ hu Csapatjáték
 @ Texture Filter
 hu Textúraszűrés
 
+@ Texture Size
+hu Textúraméret
+
 @ Third person
 hu Külső nézet
 
@@ -1249,6 +1252,9 @@ hu nincs
 
 @ normal
 hu normál
+
+@ full size
+hu teljes méret
 
 @ off
 hu ki
@@ -2224,6 +2230,9 @@ hu Feloldja az Effektbeállítások oldalt: továbbfejlesztett részecskék, bec
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 hu A 2021-es újrakiadás simább MD5 modelljeit (és a modok MD3 cseréit) használja a klasszikusak helyett. A következő pályabetöltéskor lép életbe
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+hu Lekicsinyíti a nagy textúrákat, hogy memóriát takarítson meg. A következő pályabetöltéskor lép életbe
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 hu A pálya színes fényét használja (.lit fájl vagy BSPX lump); kikapcsolva az eredeti fehér fény marad. A következő pályabetöltéskor lép életbe

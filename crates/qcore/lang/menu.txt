@@ -2304,6 +2304,13 @@ it Filtro delle texture
 es Filtro de texturas
 ru Фильтрация текстур
 
+@ Texture Size
+fr Taille des textures
+de Texturgröße
+it Dimensione texture
+es Tamaño de texturas
+ru Размер текстур
+
 @ Third person
 fr troisième personne
 de Verfolgerperspektive
@@ -2906,6 +2913,13 @@ de normal
 it normale
 es normal
 ru обычный
+
+@ full size
+fr taille complète
+de volle Größe
+it dimensione intera
+es tamaño completo
+ru полный размер
 
 @ off
 fr désactivé

@@ -991,6 +991,9 @@ fa بازی تیمی
 @ Texture Filter
 fa فیلتر بافت
 
+@ Texture Size
+fa اندازهٔ بافت
+
 @ Third person
 fa سوم‌شخص
 
@@ -1249,6 +1252,9 @@ fa هیچ
 
 @ normal
 fa عادی
+
+@ full size
+fa اندازهٔ کامل
 
 @ off
 fa خاموش
@@ -2224,6 +2230,9 @@ fa صفحه‌ی تنظیمات جلوه‌ها را باز می‌کند: ذر�
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 fa به جای مدل‌های کلاسیک، مدل‌های MD5 نرم‌تر نسخه‌ی بازانتشار 2021 (و جایگزین‌های MD3 مادها) را به کار می‌برد. در بارگذاری نقشه‌ی بعدی اعمال می‌شود
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+fa بافت‌های بزرگ را برای صرفه‌جویی در حافظه کوچک می‌کند. در بارگذاری نقشه‌ی بعدی اعمال می‌شود
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 fa نور رنگی نقشه را به کار می‌برد (فایل .lit یا بخش BSPX)؛ خاموش نور سفید اصلی می‌دهد. در بارگذاری نقشه‌ی بعدی اعمال می‌شود

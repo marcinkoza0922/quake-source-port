@@ -991,6 +991,9 @@ hy Թիմային խաղ
 @ Texture Filter
 hy Տեքստուրաների ֆիլտր
 
+@ Texture Size
+hy Տեքստուրաների չափ
+
 @ Third person
 hy երրորդ դեմքից
 
@@ -1249,6 +1252,9 @@ hy ոչ մեկը
 
 @ normal
 hy սովորական
+
+@ full size
+hy լրիվ չափ
 
 @ off
 hy անջ.
@@ -2224,6 +2230,9 @@ hy Բացում է «Էֆեկտների կարգավորումներ» էջը: �
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 hy Դասական մոդելների փոխարեն օգտագործում է 2021 թ. վերաթողարկման ավելի հարթ MD5 մոդելները (և մոդերի MD3 փոխարինումները)։ Կիրառվում է հաջորդ քարտեզը բեռնելիս
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+hy Փոքրացնում է մեծ տեքստուրաները՝ հիշողությունը խնայելու համար։ Կիրառվում է հաջորդ քարտեզը բեռնելիս
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 hy Օգտագործում է քարտեզի գունավոր լույսը (.lit ֆայլ կամ BSPX բլոկ), անջատվածը տալիս է սովորական սպիտակ լույս։ Կիրառվում է հաջորդ քարտեզը բեռնելիս

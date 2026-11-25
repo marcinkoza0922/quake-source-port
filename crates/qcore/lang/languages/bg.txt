@@ -991,6 +991,9 @@ bg Отборна игра
 @ Texture Filter
 bg Филтър на текстурите
 
+@ Texture Size
+bg Размер на текстурите
+
 @ Third person
 bg от трето лице
 
@@ -1249,6 +1252,9 @@ bg няма
 
 @ normal
 bg нормално
+
+@ full size
+bg пълен размер
 
 @ off
 bg изкл.
@@ -2224,6 +2230,9 @@ bg Отключва страницата „Настройки на ефекти
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 bg Използва по-гладките MD5 модели от преиздаването от 2021 г. (и заместители MD3 от модове) вместо класическите. Важи от следващото зареждане на карта
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+bg Смалява големите текстури, за да пести памет. Важи от следващото зареждане на карта
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 bg Използва цветното осветление на картата (.lit файл или BSPX блок); изкл. дава оригиналната бяла светлина. Важи от следващото зареждане на карта

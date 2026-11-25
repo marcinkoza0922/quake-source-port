@@ -1,6 +1,7 @@
 //! Alias (MDL/MD3) and sprite models, skyboxes.
 
 use super::textures::Sampling;
+use crate::convert::TexUse;
 use super::{NO_TEX, Renderer};
 use crate::convert::{self, AliasVertex, FrameInfo};
 use crate::{Md3SkinImage, Md3SurfaceSkins, ModelId, Result};
@@ -81,7 +82,7 @@ impl Renderer {
         let Some(faces) = faces else { return Ok(()) };
         let mut slots = [NO_TEX; 6];
         for (i, f) in faces.iter().enumerate() {
-            slots[i] = self.add_texture(f.width, f.height, &[&f.pixels], true, Sampling::Clamp)?;
+            slots[i] = self.add_texture(f.width, f.height, &[&f.pixels], TexUse::Sky, Sampling::Clamp)?;
         }
         self.skybox = Some(slots);
         Ok(())
@@ -113,13 +114,13 @@ impl Renderer {
                     fb = Some(g.clone());
                 }
                 let (w, h) = (mdl.skin_width, mdl.skin_height);
-                let bs = self.add_texture(w, h, &[&b], true, Sampling::World)?;
+                let bs = self.add_texture(w, h, &[&b], TexUse::Base, Sampling::World)?;
                 let fs = match fb {
-                    Some(fb) => self.add_texture(w, h, &[&fb], true, Sampling::World)?,
+                    Some(fb) => self.add_texture(w, h, &[&fb], TexUse::Glow, Sampling::World)?,
                     None => NO_TEX,
                 };
                 let cs = match cm {
-                    Some(cm) => self.add_texture(w, h, &[&cm], true, Sampling::Nearest)?,
+                    Some(cm) => self.add_texture(w, h, &[&cm], TexUse::Index, Sampling::Nearest)?,
                     None => NO_TEX,
                 };
                 imgs.push([bs, fs, cs]);
@@ -174,13 +175,13 @@ impl Renderer {
     }
 
     fn md3_skin(&mut self, img: &Md3SkinImage) -> Result<[u32; 3]> {
-        let b = self.add_texture(img.width, img.height, &[&img.base], true, Sampling::World)?;
+        let b = self.add_texture(img.width, img.height, &[&img.base], TexUse::Base, Sampling::World)?;
         let f = match &img.fb {
-            Some((w, h, d)) => self.add_texture(*w, *h, &[d], true, Sampling::World)?,
+            Some((w, h, d)) => self.add_texture(*w, *h, &[d], TexUse::Glow, Sampling::World)?,
             None => NO_TEX,
         };
         let c = match &img.cmap {
-            Some((w, h, d)) => self.add_texture(*w, *h, &[d], true, Sampling::Nearest)?,
+            Some((w, h, d)) => self.add_texture(*w, *h, &[d], TexUse::Index, Sampling::Nearest)?,
             None => NO_TEX,
         };
         Ok([b, f, c])
@@ -349,7 +350,7 @@ impl Renderer {
             let mut images = Vec::new();
             for im in &f.images {
                 let rgba = if spr.is_rgba() { im.pixels.clone() } else { convert::to_rgba(&pal, &im.pixels, Some(255)) };
-                let slot = self.add_texture(im.width, im.height, &[&rgba], true, Sampling::Clamp)?;
+                let slot = self.add_texture(im.width, im.height, &[&rgba], TexUse::Sprite, Sampling::Clamp)?;
                 let left = im.origin[0] as f32;
                 let up = im.origin[1] as f32;
                 images.push((slot, [left, left + im.width as f32, up - im.height as f32, up]));

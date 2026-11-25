@@ -991,6 +991,9 @@ bn দলগত খেলা
 @ Texture Filter
 bn টেক্সচার ফিল্টার
 
+@ Texture Size
+bn টেক্সচারের আকার
+
 @ Third person
 bn তৃতীয় ব্যক্তি
 
@@ -1249,6 +1252,9 @@ bn কোনোটি না
 
 @ normal
 bn সাধারণ
+
+@ full size
+bn পূর্ণ আকার
 
 @ off
 bn বন্ধ
@@ -2224,6 +2230,9 @@ bn FX সেটিংস পৃষ্ঠা খোলে: উন্নত কণ
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 bn ক্লাসিকের বদলে 2021 রি-রিলিজের মসৃণ MD5 মডেল (এবং মডের MD3 বিকল্প) ব্যবহার করে। পরের ম্যাপ লোডে প্রযোজ্য
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+bn মেমরি বাঁচাতে বড় টেক্সচার ছোট করে। পরের ম্যাপ লোডে প্রযোজ্য
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 bn ম্যাপের রঙিন আলো (.lit ফাইল বা BSPX লাম্প) ব্যবহার করে; বন্ধ থাকলে মূল সাদা আলো। পরের ম্যাপ লোডে প্রযোজ্য

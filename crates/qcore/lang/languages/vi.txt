@@ -991,6 +991,9 @@ vi Đấu đội
 @ Texture Filter
 vi Lọc texture
 
+@ Texture Size
+vi Kích thước texture
+
 @ Third person
 vi Ngôi thứ ba
 
@@ -1249,6 +1252,9 @@ vi không có
 
 @ normal
 vi thường
+
+@ full size
+vi kích thước đầy đủ
 
 @ off
 vi tắt
@@ -2224,6 +2230,9 @@ vi Mở khóa trang Cài đặt hiệu ứng: hạt nâng cao, hiệu ứng va c
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 vi Dùng mô hình MD5 mượt hơn của bản phát hành lại 2021 (và mô hình MD3 thay thế từ mod) thay cho mô hình cổ điển. Áp dụng khi tải bản đồ tiếp theo
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+vi Thu nhỏ texture lớn để tiết kiệm bộ nhớ. Áp dụng khi tải bản đồ tiếp theo
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 vi Dùng ánh sáng màu của bản đồ (tệp .lit hoặc khối BSPX); tắt thì dùng ánh sáng trắng gốc. Áp dụng khi tải bản đồ tiếp theo

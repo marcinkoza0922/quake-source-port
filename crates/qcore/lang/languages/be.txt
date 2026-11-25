@@ -991,6 +991,9 @@ be Камандная гульня
 @ Texture Filter
 be Фільтрацыя тэкстур
 
+@ Texture Size
+be Памер тэкстур
+
 @ Third person
 be ад трэцяй асобы
 
@@ -1249,6 +1252,9 @@ be няма
 
 @ normal
 be звычайны
+
+@ full size
+be поўны памер
 
 @ off
 be выкл.
@@ -2224,6 +2230,9 @@ be Адкрывае старонку «Налады эфектаў»: палеп
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 be Выкарыстоўвае больш плаўныя мадэлі MD5 з перавыдання 2021 года (і замены MD3 з модаў) замест класічных. Ужываецца пры наступнай загрузцы карты
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+be Памяншае вялікія тэкстуры, каб зэканоміць памяць. Ужываецца пры наступнай загрузцы карты
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 be Выкарыстоўвае каляровае асвятленне карты (файл .lit або блок BSPX); выкл. — арыгінальнае белае святло. Ужываецца пры наступнай загрузцы карты

@@ -974,6 +974,13 @@ it Usa i modelli MD5 più morbidi della riedizione 2021 (e i sostituti MD3 delle
 es Usa los modelos MD5 más suaves de la reedición de 2021 (y los reemplazos MD3 de los mods) en lugar de los clásicos. Se aplica al cargar el siguiente mapa
 ru Использует более гладкие модели MD5 из переиздания 2021 года (и замены MD3 из модов) вместо классических. Применяется при следующей загрузке карты
 
+@ Shrinks larger textures to save memory. Applies on the next map load
+fr Réduit les grandes textures pour économiser la mémoire. S'applique au prochain chargement de carte
+de Verkleinert große Texturen, um Speicher zu sparen. Gilt ab dem nächsten Kartenladen
+it Riduce le texture grandi per risparmiare memoria. Si applica al prossimo caricamento della mappa
+es Reduce las texturas grandes para ahorrar memoria. Se aplica al cargar el siguiente mapa
+ru Уменьшает большие текстуры, чтобы сэкономить память. Применяется при следующей загрузке карты
+
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 fr Utilise l'éclairage coloré de la carte (fichier .lit ou bloc BSPX) ; désactivé donne la lumière blanche d'origine. S'applique au prochain chargement de carte
 de Nutzt das farbige Licht der Karte (.lit-Datei oder BSPX-Block); aus ergibt das originale weiße Licht. Gilt ab dem nächsten Kartenladen

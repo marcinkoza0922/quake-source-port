@@ -991,6 +991,9 @@ lv Komandu spēle
 @ Texture Filter
 lv Tekstūru filtrs
 
+@ Texture Size
+lv Tekstūru izmērs
+
 @ Third person
 lv Trešā persona
 
@@ -1249,6 +1252,9 @@ lv nav
 
 @ normal
 lv normāls
+
+@ full size
+lv pilns izmērs
 
 @ off
 lv izslēgts
@@ -2224,6 +2230,9 @@ lv Atbloķē lapu Efektu iestatījumi: uzlabotas daļiņas, trieciena efekti un 
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 lv Izmanto 2021. gada atkārtotā izdevuma gludākos MD5 modeļus (un MD3 aizstājējus no modiem) klasisko vietā. Stājas spēkā nākamajā kartes ielādē
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+lv Samazina lielas tekstūras, lai taupītu atmiņu. Stājas spēkā nākamajā kartes ielādē
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 lv Izmanto kartes krāsaino gaismu (.lit fails vai BSPX bloks); izslēgts dod oriģinālo balto gaismu. Stājas spēkā nākamajā kartes ielādē

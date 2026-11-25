@@ -991,6 +991,9 @@ mt Logħob f'tim
 @ Texture Filter
 mt Filtru tat-tessituri
 
+@ Texture Size
+mt Daqs tat-tessituri
+
 @ Third person
 mt It-tielet persuna
 
@@ -1249,6 +1252,9 @@ mt xejn
 
 @ normal
 mt normali
+
+@ full size
+mt daqs sħiħ
 
 @ off
 mt mitfi
@@ -2224,6 +2230,9 @@ mt Jiftaħ il-paġna Issettjar tal-effetti: partiċelli mtejba, effetti tal-impa
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 mt Juża l-mudelli MD5 aktar lixxi tal-edizzjoni mill-ġdid tal-2021 (u sostituzzjonijiet MD3 mill-mods) minflok dawk klassiċi. Japplika meta tittella' l-mappa li jmiss
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+mt Iċekken it-tessituri l-kbar biex jiffranka l-memorja. Japplika meta tittella' l-mappa li jmiss
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 mt Juża d-dawl ikkulurit tal-mappa (fajl .lit jew lump BSPX); mitfi jagħti d-dawl abjad oriġinali. Japplika meta tittella' l-mappa li jmiss

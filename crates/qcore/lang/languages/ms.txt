@@ -991,6 +991,9 @@ ms Main Berpasukan
 @ Texture Filter
 ms Penapis Tekstur
 
+@ Texture Size
+ms Saiz Tekstur
+
 @ Third person
 ms Orang ketiga
 
@@ -1249,6 +1252,9 @@ ms tiada
 
 @ normal
 ms biasa
+
+@ full size
+ms saiz penuh
 
 @ off
 ms mati
@@ -2224,6 +2230,9 @@ ms Membuka halaman Tetapan Kesan: zarah dipertingkat, kesan hentaman dan percika
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 ms Menggunakan model MD5 yang lebih licin daripada keluaran semula 2021 (dan pengganti MD3 daripada mod) dan bukannya model klasik. Berkuat kuasa pada pemuatan peta seterusnya
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+ms Mengecilkan tekstur besar untuk menjimatkan memori. Berkuat kuasa pada pemuatan peta seterusnya
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ms Menggunakan cahaya berwarna peta (fail .lit atau lump BSPX); mati memberi cahaya putih asal. Berkuat kuasa pada pemuatan peta seterusnya

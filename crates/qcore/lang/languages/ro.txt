@@ -991,6 +991,9 @@ ro Joc în echipă
 @ Texture Filter
 ro Filtrare texturi
 
+@ Texture Size
+ro Dimensiune texturi
+
 @ Third person
 ro persoana a treia
 
@@ -1249,6 +1252,9 @@ ro niciunul
 
 @ normal
 ro normal
+
+@ full size
+ro dimensiune completă
 
 @ off
 ro oprit
@@ -2224,6 +2230,9 @@ ro Deblochează pagina Setări efecte: particule îmbunătățite, efecte de imp
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 ro Folosește modelele MD5 mai fine din reeditarea din 2021 (și înlocuirile MD3 din moduri) în locul celor clasice. Se aplică la următoarea încărcare a hărții
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+ro Micșorează texturile mari pentru a economisi memorie. Se aplică la următoarea încărcare a hărții
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 ro Folosește lumina colorată a hărții (fișier .lit sau bloc BSPX); oprit oferă lumina albă originală. Se aplică la următoarea încărcare a hărții

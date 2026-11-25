@@ -57,6 +57,8 @@ pub struct Renderer {
     /// Ripples, splashes and wakes on liquids (r_waterripples/r_watersplash).
     water_fx: water::WaterFx,
     textures: Vec<Option<Tex>>,
+    /// Player's limit on a level texture's larger side (0 = the GPU's).
+    max_texture_size: u32,
     palette: Palette,
     /// Prepacked opaque RGBA8 palette (`r | g<<8 | b<<16 | 0xff<<24`) for classic particle uploads.
     palette_rgba: [u32; 256],
@@ -159,16 +161,26 @@ impl Renderer {
         Ok(self.textures.len() as u32 - 1)
     }
 
-    /// Creates an RGBA8 texture from a mip chain (device must be idle).
+    /// Creates an RGBA8 texture from a mip chain (device must be idle),
+    /// shrunk when it's over the size limit.
     fn add_texture(
         &mut self,
         up: &mut gpu::Upload,
         w: u32,
         h: u32,
         mips: &[&[u8]],
-        level: bool,
+        usage: TexUse,
         sampling: Sampling,
     ) -> Result<u32> {
+        let fitted = convert::fit(w, h, mips, usage.limit(self.max_texture_size, self.gpu.max_texture), usage);
+        let refs: Vec<&[u8]>;
+        let (w, h, mips) = match &fitted {
+            Some((w, h, m)) => {
+                refs = m.iter().map(|m| &**m).collect();
+                (*w, *h, &refs[..])
+            }
+            None => (w, h, mips),
+        };
         let slot = self.alloc_slot()?;
         let img = self.gpu.image(
             w.max(1),
@@ -183,7 +195,7 @@ impl Renderer {
         self.write_texture_descriptor(slot, img.view, self.sampler_for(sampling));
         self.textures[slot as usize] = Some(Tex {
             image: Some(img),
-            level,
+            level: usage.level(),
             sampling,
         });
         Ok(slot)

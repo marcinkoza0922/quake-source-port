@@ -991,6 +991,9 @@ eu Talde-jokoa
 @ Texture Filter
 eu Testura-iragazkia
 
+@ Texture Size
+eu Testura-tamaina
+
 @ Third person
 eu Hirugarren pertsona
 
@@ -1249,6 +1252,9 @@ eu bat ere ez
 
 @ normal
 eu normala
+
+@ full size
+eu tamaina osoa
 
 @ off
 eu desaktibatuta
@@ -2224,6 +2230,9 @@ eu Efektuen ezarpenak orria desblokeatzen du: partikula hobetuak, talka-efektuak
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 eu 2021eko berrargitalpenaren MD5 eredu leunagoak (eta moden MD3 ordezkoak) erabiltzen ditu klasikoen ordez. Hurrengo mapa kargatzean aplikatzen da
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+eu Testura handiak txikitzen ditu memoria aurrezteko. Hurrengo mapa kargatzean aplikatzen da
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 eu Maparen argi koloreduna erabiltzen du (.lit fitxategia edo BSPX blokea); desaktibatuta jatorrizko argi zuria ematen du. Hurrengo mapa kargatzean aplikatzen da

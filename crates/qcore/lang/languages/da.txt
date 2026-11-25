@@ -991,6 +991,9 @@ da Holdspil
 @ Texture Filter
 da Teksturfilter
 
+@ Texture Size
+da Teksturstørrelse
+
 @ Third person
 da Tredjeperson
 
@@ -1249,6 +1252,9 @@ da ingen
 
 @ normal
 da normal
+
+@ full size
+da fuld størrelse
 
 @ off
 da fra
@@ -2224,6 +2230,9 @@ da Låser siden Indstillinger for effekter op: forbedrede partikler, nedslagseff
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 da Bruger genudgivelsen fra 2021's blødere MD5-modeller (og MD3-erstatninger fra mods) i stedet for de klassiske. Træder i kraft ved næste baneindlæsning
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+da Formindsker store teksturer for at spare hukommelse. Træder i kraft ved næste baneindlæsning
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 da Bruger banens farvede lys (.lit-fil eller BSPX-blok); fra giver det originale hvide lys. Træder i kraft ved næste baneindlæsning

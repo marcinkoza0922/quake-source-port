@@ -54,6 +54,8 @@ pub struct Gpu {
     pub upload_pool: vk::CommandPool,
     /// Highest MSAA sample count usable for colour+depth targets.
     pub max_samples: u32,
+    /// Largest side of a 2D texture.
+    pub max_texture: u32,
     /// Max sampler anisotropy (1 = unsupported).
     pub max_anisotropy: f32,
     /// sampleRateShading is enabled (supersampling).
@@ -250,6 +252,7 @@ impl Gpu {
             alloc: Allocator { device_address: rt_ok, ..Allocator::default() },
             upload_pool,
             max_samples,
+            max_texture: lim.max_image_dimension2_d,
             max_anisotropy,
             timestamp_period: lim.timestamp_period,
             sample_shading,

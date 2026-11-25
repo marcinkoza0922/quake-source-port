@@ -991,6 +991,9 @@ gl Xogo en equipo
 @ Texture Filter
 gl Filtro de texturas
 
+@ Texture Size
+gl Tamaño das texturas
+
 @ Third person
 gl terceira persoa
 
@@ -1249,6 +1252,9 @@ gl ningún
 
 @ normal
 gl normal
+
+@ full size
+gl tamaño completo
 
 @ off
 gl desactivado
@@ -2224,6 +2230,9 @@ gl Desbloquea a páxina Axustes de efectos: partículas melloradas, efectos de i
 
 @ Uses the 2021 re-release's smoother MD5 models (and MD3 replacements from mods) instead of the classic ones. Applies on the next map load
 gl Usa os modelos MD5 máis suaves da reedición de 2021 (e os substitutos MD3 dos mods) en lugar dos clásicos. Aplícase ao cargar o seguinte mapa
+
+@ Shrinks larger textures to save memory. Applies on the next map load
+gl Reduce as texturas grandes para aforrar memoria. Aplícase ao cargar o seguinte mapa
 
 @ Uses the map's coloured light (.lit file or BSPX lump); off gives vanilla white light. Applies on the next map load
 gl Usa a luz de cor do mapa (ficheiro .lit ou bloque BSPX); desactivado dá a luz branca orixinal. Aplícase ao cargar o seguinte mapa
