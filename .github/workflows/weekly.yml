@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with: { persist-credentials: false }
-      - uses: taiki-e/install-action@6bb3c8aea019e815aea67546369e4cf742de6750 # cargo-audit
+      - uses: taiki-e/install-action@5dfd6082b2f8f3491e9b9e884aa8d13172f580de # cargo-audit
         with: { tool: cargo-audit }
       - run: cargo audit
 
