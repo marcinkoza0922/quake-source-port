@@ -103,6 +103,8 @@ Haec versio facta est ut moderatro ludatur.
 - **Signa globulorum** moderatro tuo (Xbox, PlayStation, Nintendo)
   congruunt et sponte agnoscuntur.
 - Omnia in Options → Moderamina reassigna, etiam ex moderatro.
+- **Select / View ×2**: Imago quadri; **Start ×2**: Celeriter servare;
+  **Start** (Tenere): Celeriter onerare.
 - Moderamina tactilia cum magnitudine, opacitate et celeritate aspectus
   configurabilibus.
 
@@ -220,7 +222,8 @@ cum quovis modo et in rete valent.
   sequuntur, guttae volantes quae ubi cadunt maculant.
 - **Effectus ictuum**: vestigia glandium sclopeti, clavi qui ligno et
   hostibus infiguntur, vestigia ustionis explosionum.
-- **Aqua aucta**: translucentia, undulae, aspergines et caustica.
+- **Aqua aucta**: translucentia, undulae, aspergines et caustica;
+  **Refractio subaquatica**, **Guttae in quadro**.
 - **Teleportatores perspicui** qui metam suam cum parallaxi monstrant.
 - Occlusio ambiens, obscuritas motus per obiecta et celeritatis,
   particulae molles.
@@ -268,6 +271,9 @@ et Ictus alter globuli tui feriendi soliti sunt.
 | **Boomerang** | Tene ut hostes notes, dimitte ut iacias; singulos vicissim stupefacit | Notas purgare | Nulla |
 | **Aspersorium gelatinae** | Gelatina caerulea repulsionis (resiliens) | Gelatina aurantia propulsionis (celer) | Nulla |
 | **Lavator pressorius** | Iactus aquae longus qui hostes impellit et gelatinam abluit | Flabellum latum iactuum | Nulla |
+| **Funis mas-mas** | Ictus alter in tabulam electronicam lucentem intra manum unum caput inserit; alterum tum fulmina cum missilibus infinitis iacit | Ictus alter aut armorum mutatio eum evellit | Nulla |
+| **Pistolae geminae** | Sinistra | Dextra | Nulla (Replere: R) |
+| **Sclopetum impetus** | Sclopetum automatum quod clavis tuis repletur | Ictus alter per collineatorium puncti rubri collineat, ut ictus densiores et visus propior sint | Clavi (Replere: R) |
 
 Portae in superficiebus planis mundi ponuntur et te, monstra et res
 iactas cum impetu suo transferunt. Cum **Per portas videre** activum est,

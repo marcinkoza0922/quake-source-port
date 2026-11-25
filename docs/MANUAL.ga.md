@@ -107,6 +107,8 @@ Tá an calafort ceaptha le himirt ar cheap stiúrtha.
 - Meaitseálann **Siombailí Cnaipí** do cheap (Xbox, PlayStation, Nintendo)
   agus braitear go huathoibríoch iad.
 - Athcheangail gach rud in Options → Rialuithe, ón rialtán féin freisin.
+- **Select / View ×2**: Gabháil scáileáin; **Start ×2**: Mear-Shábháil;
+  **Start** (Coinnigh): Mear-Lódáil.
 - Rialuithe tadhaill le méid, teimhneacht agus luas amhairc inathraithe.
 
 ## Sábháil
@@ -224,7 +226,8 @@ réamhshocraithe, mar sin oibríonn siad le haon mhod agus ar líne.
   braonta san aer a phleascann san áit a dtuirlingíonn siad.
 - **Maisíochtaí tuairte**: rianta piléar gunna gráin, tairní a théann
   isteach in adhmad agus i naimhde, rianta dóite pléasctha.
-- **Uisce Feabhsaithe**: tréshoilseacht, cuilithíní, steallta agus cáistic.
+- **Uisce Feabhsaithe**: tréshoilseacht, cuilithíní, steallta agus cáistic;
+  **Athraonadh Faoi Uisce**, **Braonta ar an Scáileán**.
 - **Teileapórtálaithe tréshoilseacha** a thaispeánann a gceann scríbe le
   parallax.
 - Coimhthiú comhthimpeallach, maolú gluaisne in aghaidh an réada agus
@@ -271,6 +274,9 @@ iad Lámhach agus Lámhach Malartach do ghnáthchnaipí ionsaithe.
 | **Búmarang** | Coinnigh le naimhde a mharcáil, scaoil le caitheamh; cuireann sé néal ar gach ceann ina sheal | Glan marcanna | Dada |
 | **Spréire Glóthaigh** | Glóthach aisbhrú gorm (preabach) | Glóthach tiomána oráiste (tapa) | Dada |
 | **Glantóir Ardbhrú** | Scaird fhada uisce a bhrúnn naimhde agus a níonn glóthach | Gaothrán leathan scaird | Dada |
+| **Cábla fireann-fireann** | Plugálann an tine thánaisteach ar phainéal leictreonach lonrach laistigh d'achar foirceann amháin; scaoileann an foirceann eile tintreach ansin le hurchair gan teorainn | Stoitheann tine thánaisteach nó athrú airm amach é | Dada |
+| **Piostail Akimbo** | Clé | Deas | Dada (Athlódáil: R) |
+| **Raidhfil Ionsaithe** | Raidhfil lánuathoibríoch a athlódálann ó do chuid tairní | Aimsíonn Lámhach Malartach tríd an treorán ponc dearg le haghaidh urchar níos cruinne agus amharc níos gaire | Tairní (Athlódáil: R) |
 
 Téann tairseacha ar dhromchlaí cothroma an domhain agus iompraíonn siad thú,
 arrachtaí agus rudaí caite tríothu lena móiminteam. Le **Féach Trí

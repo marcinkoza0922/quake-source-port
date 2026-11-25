@@ -97,6 +97,8 @@ Port je navrhnutý na hranie s gamepadom.
 - **Symboly tlačidiel** zodpovedajú vášmu ovládaču (Xbox, PlayStation,
   Nintendo) a rozpoznajú sa automaticky.
 - Všetko preradíte v Options → Ovládanie, aj priamo z ovládača.
+- **Select / View ×2**: Snímka obrazovky; **Start ×2**: Rýchle uloženie;
+  **Start** (Držať): Rýchle načítanie.
 - Dotykové ovládanie s nastaviteľnou veľkosťou, nepriehľadnosťou a
   rýchlosťou pohľadu.
 
@@ -203,7 +205,8 @@ vypnuté, takže funguje s každým modom aj online.
   kvapky vo vzduchu, ktoré sa rozprsknú tam, kde dopadnú.
 - **Efekty zásahov**: stopy po brokoch, klince, ktoré uviaznu v dreve a v
   nepriateľoch, stopy po výbuchoch.
-- **Vylepšená voda**: priesvitnosť, vlnenie, špliechanie a kaustiky.
+- **Vylepšená voda**: priesvitnosť, vlnenie, špliechanie a kaustiky;
+  **Podvodný lom svetla**, **Kvapky na obrazovke**.
 - **Priehľadné teleporty**, ktoré ukazujú svoj cieľ s paralaxou.
 - Ambientná oklúzia, rozmazanie pohybu objektov a rýchlosťou, mäkké
   častice.
@@ -248,6 +251,9 @@ Streľba a alternatívna streľba sú vaše bežné tlačidlá útoku.
 | **Bumerang** | Podržaním označte nepriateľov, pustením hoďte; postupne ich omráči | Zrušiť označenie | Žiadna |
 | **Rozprašovač gélu** | Modrý odrazový gél (pruží) | Oranžový zrýchľovací gél (rýchly) | Žiadna |
 | **Tlakový čistič** | Dlhý prúd vody, ktorý odtláča nepriateľov a zmýva gél | Široký vejár prúdov | Žiadna |
+| **Kábel samec-samec** | Alternatívna streľba na svietiaci elektronický panel na dosah zapojí jeden koniec; druhý potom strieľa blesky s neobmedzenou muníciou | Alternatívna streľba alebo zmena zbrane ho vytrhne | Žiadna |
+| **Dvojica pištolí** | Vľavo | Vpravo | Žiadna (Prebiť: R) |
+| **Útočná puška** | Plne automatická puška, ktorá sa prebíja vašimi klincami | Alternatívna streľba mieri cez kolimátor s červenou bodkou, takže výstrely sú presnejšie a pohľad bližší | Klince (Prebiť: R) |
 
 Portály sa umiestňujú na rovné povrchy sveta a prenesú vás, monštrá aj
 hodené predmety aj s ich hybnosťou. So zapnutým **Vidieť cez portály**

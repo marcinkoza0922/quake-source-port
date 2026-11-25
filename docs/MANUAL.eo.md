@@ -98,6 +98,8 @@ La motoro estas desegnita por ludado per ludregilo.
 - **Butonaj simboloj** kongruas kun via ludregilo (Xbox, PlayStation,
   Nintendo) kaj estas detektataj aŭtomate.
 - Reasignu ĉion en Options → Regiloj, ankaŭ de la ludregilo.
+- **Select / View ×2**: Ekrankopio; **Start ×2**: Rapida konservo; **Start**
+  (Teni): Rapida ŝargo.
 - Tuŝekranaj regiloj kun agordebla grando, opakeco kaj rigardrapido.
 
 ## Konservado
@@ -208,7 +210,8 @@ malŝaltita, do ĝi funkcias kun ĉiu modo kaj enrete.
   flugantaj gutoj kiuj makulas kie ili falas.
 - **Trafefektoj**: kuglotruoj de ĉaspafilo, najloj kiuj enfiksiĝas en ligno
   kaj malamikoj, eksplodaj brulmakuloj.
-- **Plibonigita akvo**: travidebleco, ondetoj, plaŭdoj kaj kaŭstikoj.
+- **Plibonigita akvo**: travidebleco, ondetoj, plaŭdoj kaj kaŭstikoj;
+  **Subakva refrakto**, **Gutoj sur la ekrano**.
 - **Travideblaj teleportiloj**, kiuj montras sian celon kun paralakso.
 - Ĉirkaŭa ombrigo, movmalklarigo de objektoj kaj de rapido, molaj
   partikloj.
@@ -254,6 +257,9 @@ Pafo kaj alt. pafo estas viaj kutimaj atakbutonoj.
 | **Bumerango** | Tenu por marki malamikojn, malpremu por ĵeti; ĝi svenigas ĉiun laŭvice | Forigi markojn | Neniu |
 | **Ĝelŝprucigilo** | Blua repuŝa ĝelo (resaltiga) | Oranĝa propulsa ĝelo (rapida) | Neniu |
 | **Premlavilo** | Longa akvoŝpruco, kiu puŝas malamikojn kaj forlavas ĝelon | Larĝa ventumilo de ŝprucoj | Neniu |
+| **Kablo vira-vira** | Alterna pafo sur lumantan elektronikan panelon atingeblan ŝtopas unu finon; la alia fino tiam pafas fulmojn kun senlima municio | Alterna pafo aŭ armila ŝanĝo elŝiras ĝin | Neniu |
+| **Duopaj pistoloj** | Maldekstre | Dekstre | Neniu (Reŝargi: R) |
+| **Sturmfusilo** | Plene aŭtomata fusilo, kiu reŝargiĝas el viaj najloj | Alt-pafo celas tra ĝia ruĝpunkta celilo por pli precizaj pafoj kaj pli proksima vido | Najloj (Reŝargi: R) |
 
 Portaloj iras sur plataj surfacoj de la mondo kaj transportas vin, monstrojn
 kaj ĵetitajn objektojn kun ilia impeto. Kun **Vidi tra portaloj** ŝaltita vi

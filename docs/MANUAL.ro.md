@@ -101,6 +101,8 @@ Portul este gândit pentru a fi jucat cu un controler.
 - **Simbolurile butoanelor** se potrivesc controlerului tău (Xbox,
   PlayStation, Nintendo) și sunt detectate automat.
 - Reatribuie orice în Options → Controale, inclusiv de pe controler.
+- **Select / View ×2**: Captură de ecran; **Start ×2**: Salvare rapidă;
+  **Start** (Menținut): Încărcare rapidă.
 - Controale tactile cu mărime, opacitate și viteză de privire reglabile.
 
 ## Salvare
@@ -212,7 +214,8 @@ așa că funcționează cu orice mod și online.
   picături în aer care se împrăștie unde aterizează.
 - **Efecte de impact**: urme de alice, cuie care se înfig în lemn și în
   inamici, urme de arsură de la explozii.
-- **Apă îmbunătățită**: transparență, unduiri, stropi și caustice.
+- **Apă îmbunătățită**: transparență, unduiri, stropi și caustice;
+  **Refracție subacvatică**, **Picături pe ecran**.
 - **Teleportoare transparente** care își arată destinația cu paralaxă.
 - Ocluzie ambientală, motion blur per obiect și de viteză, particule fine.
 - **Shadere de ecran**: presetări RetroArch `.slangp` (CRT și altele).
@@ -257,6 +260,9 @@ focul secundar sunt butoanele tale obișnuite de atac.
 | **Bumerang** | Ține apăsat ca să marchezi inamici, eliberează ca să arunci; îi amețește pe rând | Șterge marcajele | Niciuna |
 | **Pulverizator de gel** | Gel albastru de respingere (elastic) | Gel portocaliu de propulsie (rapid) | Niciuna |
 | **Spălător cu presiune** | Jet lung de apă care împinge inamicii și spală gelul | Evantai larg de jeturi | Niciuna |
+| **Cablu tată-tată** | Focul secundar pe un panou electronic luminos la îndemână conectează un capăt; celălalt trage apoi fulgere cu muniție nelimitată | Focul secundar sau schimbarea armei îl smulge | Niciuna |
+| **Pistoale duble** | Stânga | Dreapta | Niciuna (Reîncărcare: R) |
+| **Pușcă de asalt** | O pușcă automată care se reîncarcă cu cuiele tale | Foc secundar ochește prin vizorul cu punct roșu, pentru trageri mai precise și o vedere mai apropiată | Cuie (Reîncărcare: R) |
 
 Portalurile se plasează pe suprafețele plate ale hărții și te transportă pe
 tine, monștrii și obiectele aruncate, păstrându-le impulsul. Cu **Vezi prin

@@ -97,6 +97,8 @@ Ports ir veidots spēlēšanai ar kontrolieri.
 - **Pogu simboli** atbilst tavam kontrolierim (Xbox, PlayStation, Nintendo)
   un tiek noteikti automātiski.
 - Visu var pārpiesaistīt sadaļā Options → Vadība, arī no kontroliera.
+- **Select / View ×2**: Ekrānuzņēmums; **Start ×2**: Ātrā saglabāšana;
+  **Start** (Turēt): Ātrā ielāde.
 - Skārienekrāna vadība ar regulējamu izmēru, necaurredzamību un skatīšanās
   ātrumu.
 
@@ -208,7 +210,8 @@ izslēgts, tāpēc darbojas ar jebkuru modu un tiešsaistē.
   pilieni gaisā, kas nokrītot izšļakstās.
 - **Trieciena efekti**: bises ložu pēdas, naglas, kas iestrēgst kokā un
   ienaidniekos, sprādzienu apdeguma pēdas.
-- **Uzlabots ūdens**: caurspīdīgums, viļņi, šļakatas un kaustika.
+- **Uzlabots ūdens**: caurspīdīgums, viļņi, šļakatas un kaustika; **Zemūdens
+  refrakcija**, **Pilieni uz ekrāna**.
 - **Caurredzami teleporti**, kas rāda savu galamērķi ar paralaksi.
 - Apkārtnes aizēnojums, objektu un ātruma kustības izplūdums, mīkstas
   daļiņas.
@@ -256,6 +259,9 @@ un alt. šāviens ir tavas parastās uzbrukuma pogas.
 | **Bumerangs** | Turi, lai atzīmētu ienaidniekus, atlaid, lai mestu; pēc kārtas apdullina katru | Notīrīt atzīmes | Nav |
 | **Gela smidzinātājs** | Zilais atgrūšanas gels (atsperīgs) | Oranžais paātrinājuma gels (ātrs) | Nav |
 | **Augstspiediena mazgātājs** | Gara ūdens strūkla, kas atgrūž ienaidniekus un nomazgā gelu | Plašs strūklu vēdeklis | Nav |
+| **Spraudnis-spraudnis kabelis** | Sekundārā uguns uz spīdoša elektronikas paneļa sniedzamības robežās iesprauž vienu galu; otrs tad šauj zibeņus ar neierobežotu munīciju | Sekundārā uguns vai ieroča maiņa to izrauj | Nav |
+| **Divas pistoles** | Pa kreisi | Pa labi | Nav (Pārlādēt: R) |
+| **Triecienšautene** | Pilnībā automātiska šautene, ko pārlādē ar tavām naglām | Alt. šāviens tēmē caur sarkanā punkta tēmekli: šāvieni ir precīzāki un skats tuvāks | Naglas (Pārlādēt: R) |
 
 Portāli tiek novietoti uz līdzenām pasaules virsmām un pārnes tevi,
 monstrus un mestus priekšmetus cauri, saglabājot impulsu. Ar ieslēgtu

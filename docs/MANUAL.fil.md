@@ -104,6 +104,8 @@ Ginawa ang port para laruin sa gamepad.
 - Tumutugma ang **Simbolo ng Button** sa pad mo (Xbox, PlayStation,
   Nintendo) at awtomatikong natutukoy.
 - I-rebind ang lahat sa Options → Mga Kontrol, kahit mula sa controller.
+- **Select / View ×2**: Screenshot; **Start ×2**: Quick Save; **Start**
+  (Hold): Quick Load.
 - Touchscreen na kontrol na may naaayos na laki, opacity at bilis ng tingin.
 
 ## Pag-save
@@ -221,7 +223,8 @@ default, kaya gumagana sila sa anumang mod at online.
   katawan, patak sa ere na tumitilamsik kung saan lumapag.
 - **Epekto ng tama**: marka ng bala ng shotgun, pakong bumabaon sa kahoy at
   kalaban, marka ng sunog sa pagsabog.
-- **Pinahusay na Tubig**: pagkalinaw, alon, talsik at caustics.
+- **Pinahusay na Tubig**: pagkalinaw, alon, talsik at caustics; **Repraksyon
+  sa Ilalim ng Tubig**, **Mga Patak sa Screen**.
 - **Nakikitang Teleporter** na nagpapakita ng destinasyon nila nang may
   parallax.
 - Ambient occlusion, motion blur kada bagay at sa bilis, malambot na
@@ -268,6 +271,9 @@ ay ang karaniwan mong attack button.
 | **Boomerang** | Pindutin nang matagal para markahan ang kalaban, bitawan para ihagis; isa-isa nitong ini-stun ang bawat isa | Burahin ang marka | Wala |
 | **Gel Sprayer** | Asul na repulsion gel (patalbog) | Orange na propulsion gel (pabilis) | Wala |
 | **Powerwasher** | Mahabang water jet na nagtutulak sa kalaban at naghuhugas ng gel | Malapad na pamaypay ng jet | Wala |
+| **Kable na lalaki-sa-lalaki** | Ang alt fire sa kumikinang na elektronikong panel na abot-kamay ay isinasaksak ang isang dulo; ang kabilang dulo ay nagpapaputok ng kidlat na walang hanggang bala | Hinuhugot ito ng alt fire o pagpapalit ng armas | Wala |
+| **Dalawang Pistola** | Kaliwa | Kanan | Wala (Mag-reload: R) |
+| **Assault Rifle** | Full-auto na rifle na nagre-reload mula sa iyong nails | Umaasinta ang Alt Fire gamit ang red dot sight para sa mas tumpak na tira at mas malapit na tanaw | Nails (Mag-reload: R) |
 
 Inilalagay ang mga portal sa patag na ibabaw ng mundo at dinadala ka nila,
 ang mga halimaw at ang mga inihagis na bagay kasama ang kanilang momentum.

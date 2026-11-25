@@ -103,6 +103,8 @@ Le port est conçu pour se jouer à la manette.
 - Les **symboles des boutons** correspondent à votre manette (Xbox,
   PlayStation, Nintendo) et sont détectés automatiquement.
 - Tout se réassigne dans Options → Commandes, y compris depuis la manette.
+- **Select / View ×2**: Capture d'écran; **Start ×2**: Sauvegarde rapide;
+  **Start** (Maintenir): Chargement rapide.
 - Commandes tactiles avec taille, opacité et vitesse de vue réglables.
 
 ## Sauvegardes
@@ -222,7 +224,7 @@ par défaut : cela fonctionne avec n'importe quel mod et en ligne.
 - **Effets d'impact** : impacts de plombs, clous qui se plantent dans le
   bois et les ennemis, traces de brûlure d'explosion.
 - **Eau améliorée** : transparence, ondulations, éclaboussures et
-  caustiques.
+  caustiques; **Réfraction sous l'eau**, **Gouttes sur l'écran**.
 - **Téléporteurs transparents** qui montrent leur destination avec
   parallaxe.
 - Occlusion ambiante, flou cinétique par objet et de vitesse, particules
@@ -272,6 +274,9 @@ touches d'attaque habituelles.
 | **Boomerang** | Maintenir pour marquer les ennemis, relâcher pour lancer ; il étourdit chacun tour à tour | Effacer les marques | Aucune |
 | **Pulvérisateur de gel** | Gel bleu de répulsion (rebondissant) | Gel orange de propulsion (rapide) | Aucune |
 | **Nettoyeur haute pression** | Long jet d'eau qui repousse les ennemis et lave le gel | Large éventail de jets | Aucune |
+| **Câble mâle-mâle** | Le tir secondaire sur un panneau électronique lumineux à portée y branche une extrémité ; l'autre lance alors des éclairs avec des munitions illimitées | Le tir secondaire ou un changement d'arme l'arrache | Aucune |
+| **Pistolets akimbo** | Gauche | Droite | Aucune (Recharger: R) |
+| **Fusil d’assaut** | Un fusil automatique qui se recharge avec vos clous | Tir secondaire vise avec le point rouge pour des tirs plus précis et une vue rapprochée | Clous (Recharger: R) |
 
 Les portails se posent sur les surfaces plates du décor et transportent
 vous, les monstres et les objets lancés en conservant leur élan. Avec **Voir

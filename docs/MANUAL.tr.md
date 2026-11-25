@@ -102,6 +102,8 @@ Port, kumandayla oynanmak üzere tasarlanmıştır.
   otomatik algılanır.
 - Her şeyi Options → Kontroller altında, kumandadan da olmak üzere
   yeniden atayın.
+- **Select / View ×2**: Ekran Görüntüsü; **Start ×2**: Hızlı Kaydet;
+  **Start** (Basılı Tut): Hızlı Yükle.
 - Boyutu, opaklığı ve bakış hızı ayarlanabilen dokunmatik kontroller.
 
 ## Kayıt
@@ -212,7 +214,8 @@ olarak kapalıdır, bu yüzden her modla ve çevrim içi çalışır.
   düştükleri yere yapışan havadaki damlalar.
 - **İsabet efektleri**: saçma izleri, ahşaba ve düşmanlara saplanan
   çiviler, patlama yanık izleri.
-- **Gelişmiş Su**: saydamlık, dalgalar, sıçramalar ve kostikler.
+- **Gelişmiş Su**: saydamlık, dalgalar, sıçramalar ve kostikler; **Su Altı
+  Kırılması**, **Ekranda Damlacıklar**.
 - Hedeflerini paralaksla gösteren **Saydam Işınlayıcılar**.
 - Ortam perdeleme, nesne başına ve hıza bağlı hareket bulanıklığı, yumuşak
   parçacıklar.
@@ -259,6 +262,9 @@ ateş her zamanki saldırı düğmelerinizdir.
 | **Bumerang** | Düşmanları işaretlemek için basılı tutun, fırlatmak için bırakın; sırayla her birini sersemletir | İşaretleri temizle | Yok |
 | **Jel Püskürtücü** | Mavi itme jeli (zıplatır) | Turuncu hız jeli (hızlandırır) | Yok |
 | **Basınçlı Yıkayıcı** | Düşmanları iten ve jeli yıkayan uzun su fışkırması | Geniş fışkırma yelpazesi | Yok |
+| **Erkek-erkek kablo** | Erişim mesafesindeki parlayan bir elektronik panele ikincil ateş, bir ucu takar; diğer uç sınırsız cephaneyle yıldırım atar | İkincil ateş ya da silah değiştirmek onu söker | Yok |
+| **Çift Tabanca** | Sol | Sağ | Yok (Şarjör Değiştir: R) |
+| **Saldırı Tüfeği** | Çivilerinizle doldurulan tam otomatik tüfek | Alternatif Ateş, daha isabetli atışlar ve daha yakın görüş için kırmızı noktalı nişangahtan nişan alır | Çivi (Şarjör Değiştir: R) |
 
 Portallar dünyanın düz yüzeylerine yerleşir ve sizi, canavarları ve atılan
 nesneleri hızlarıyla birlikte geçirir. **Portallardan Görme** açıkken

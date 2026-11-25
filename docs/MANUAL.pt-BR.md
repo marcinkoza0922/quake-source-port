@@ -103,6 +103,8 @@ O port foi feito para ser jogado com controle.
 - Os **ícones dos botões** correspondem ao seu controle (Xbox, PlayStation,
   Nintendo) e são detectados automaticamente.
 - Remapeie tudo em Options → Controles, inclusive pelo controle.
+- **Select / View ×2**: Captura de tela; **Start ×2**: Salvamento rápido;
+  **Start** (Segurar): Carregamento rápido.
 - Controles de toque com tamanho, opacidade e velocidade da visão
   ajustáveis.
 
@@ -216,7 +218,8 @@ com qualquer mod e online.
   acompanham os corpos, gotas no ar que se espalham onde caem.
 - **Efeitos de impacto**: marcas de chumbo, pregos que se fixam na madeira e
   nos inimigos, marcas de queimadura de explosões.
-- **Água aprimorada**: translucidez, ondulações, respingos e cáusticas.
+- **Água aprimorada**: translucidez, ondulações, respingos e cáusticas;
+  **Refração debaixo d'água**, **Gotas na tela**.
 - **Teletransportes transparentes** que mostram o destino com paralaxe.
 - Oclusão de ambiente, desfoque de movimento por objeto e de velocidade,
   partículas suaves.
@@ -264,6 +267,9 @@ disparo e o disparo alternativo são seus botões de ataque de sempre.
 | **Bumerangue** | Segure para marcar inimigos, solte para arremessar; atordoa cada um por vez | Limpar marcas | Nenhuma |
 | **Pulverizador de gel** | Gel azul de repulsão (quicante) | Gel laranja de propulsão (rápido) | Nenhuma |
 | **Lava-jato** | Jato de água longo que empurra inimigos e lava o gel | Leque largo de jatos | Nenhuma |
+| **Cabo macho-macho** | O tiro secundário em um painel eletrônico iluminado ao alcance conecta uma ponta; a outra dispara raios com munição ilimitada | O tiro secundário ou trocar de arma o arranca | Nenhuma |
+| **Pistolas duplas** | Esquerda | Direita | Nenhuma (Recarregar: R) |
+| **Fuzil de assalto** | Um fuzil automático que recarrega com seus pregos | Disparo alternativo mira pela mira de ponto vermelho para tiros mais precisos e uma visão mais próxima | Pregos (Recarregar: R) |
 
 Os portais são colocados em superfícies planas do mundo e levam você,
 monstros e objetos arremessados através deles, mantendo o impulso. Com

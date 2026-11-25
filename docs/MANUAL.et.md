@@ -97,6 +97,8 @@ Port on loodud mängimiseks mängupuldiga.
 - **Nupusümbolid** vastavad sinu puldile (Xbox, PlayStation, Nintendo) ja
   tuvastatakse automaatselt.
 - Kõike saab ümber määrata menüüs Options → Juhtimine, ka mängupuldilt.
+- **Select / View ×2**: Ekraanipilt; **Start ×2**: Kiirsalvestus; **Start**
+  (Hoia): Kiirlaadimine.
 - Puutejuhtimine reguleeritava suuruse, läbipaistmatuse ja vaate kiirusega.
 
 ## Salvestamine
@@ -206,7 +208,8 @@ nii et see töötab iga modiga ja võrgus.
   haavad, lendavad piisad, mis maandudes laiali pritsivad.
 - **Pinnatabamuse efektid**: haavlijäljed, puitu ja vaenlastesse kinni
   jäävad naelad, plahvatuste kõrbejäljed.
-- **Täiustatud vesi**: läbipaistvus, lainetus, pritsmed ja kaustika.
+- **Täiustatud vesi**: läbipaistvus, lainetus, pritsmed ja kaustika;
+  **Veealune murdumine**, **Piisad ekraanil**.
 - **Läbipaistvad teleportid**, mis näitavad sihtkohta parallaksiga.
 - Ümbritsev varjestus, objektipõhine ja kiirusähmastus, pehmed osakesed.
 - **Ekraanivarjutaja**: RetroArchi `.slangp`-eelseadistused (CRT ja muud).
@@ -250,6 +253,9 @@ tavalised rünnakunupud.
 | **Bumerang** | Hoia vaenlaste märkimiseks, vabasta viskamiseks; uimastab neid kordamööda | Kustuta märgid | Puudub |
 | **Geelipihusti** | Sinine tõukegeel (põrkav) | Oranž kiirendusgeel (kiire) | Puudub |
 | **Survepesur** | Pikk veejuga, mis lükkab vaenlasi ja peseb geeli maha | Lai joalehvik | Puudub |
+| **Isane-isane kaabel** | Teisene tuli käeulatuses helendavale elektroonikapaneelile ühendab ühe otsa; teine ots tulistab siis piiramatu laskemoonaga välke | Teisene tuli või relvavahetus tõmbab selle välja | Puudub |
+| **Paarispüstolid** | Vasak | Parem | Puudub (Laadimine: R) |
+| **Automaat** | Täisautomaatne relv, mida laetakse sinu naeltega | Alt-tuli sihib läbi punatäppsihiku, andes täpsemad lasud ja lähema vaate | Naelad (Laadimine: R) |
 
 Portaalid paigutatakse tasastele maailma pindadele ning need kannavad sind,
 koletisi ja visatud objekte läbi koos nende hooga. Kui **Vaata läbi

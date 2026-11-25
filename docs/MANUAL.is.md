@@ -98,6 +98,8 @@ Portið er hannað til að spilast með fjarstýringu.
 - **Hnappatákn** passa við fjarstýringuna þína (Xbox, PlayStation,
   Nintendo) og greinast sjálfkrafa.
 - Endurúthlutaðu öllu í Options → Stýringar, líka úr fjarstýringunni.
+- **Select / View ×2**: Skjámynd; **Start ×2**: Flýtivistun; **Start**
+  (Halda): Flýtihleðsla.
 - Snertistýringar með stillanlegri stærð, ógegnsæi og sjónhraða.
 
 ## Vistun
@@ -205,7 +207,8 @@ virkar með hvaða modi sem er og á netinu.
   lofti sem slettast þar sem þeir lenda.
 - **Höggáhrif á fleti**: kúluför haglabyssu, naglar sem festast í við og
   óvinum, brunaför eftir sprengingar.
-- **Bætt vatn**: gegnsæi, gárur, skvettur og ljósbrot.
+- **Bætt vatn**: gegnsæi, gárur, skvettur og ljósbrot; **Ljósbrot
+  neðansjávar**, **Dropar á skjánum**.
 - **Gegnsæir fjarflytjarar** sem sýna áfangastaðinn með hliðrun.
 - Umhverfisskygging, hreyfiþoka á hlutum og við hraða, mjúkar agnir.
 - **Skjáskyggir**: RetroArch `.slangp`-forstillingar (CRT og fleiri).
@@ -249,6 +252,9 @@ venjulegu árásarhnapparnir þínir.
 | **Búmerang** | Haltu inni til að merkja óvini, slepptu til að kasta; rotar hvern á fætur öðrum | Hreinsa merki | Engin |
 | **Hlaupúðari** | Blátt fráhrindihlaup (skoppandi) | Appelsínugult hröðunarhlaup (hratt) | Engin |
 | **Háþrýstidæla** | Löng vatnsbuna sem ýtir óvinum og skolar hlaupi af | Breið blævængsbuna | Engin |
+| **Karl-karl-kapall** | Aukaskot á glóandi rafeindaborð innan seilingar stingur öðrum endanum í; hinn endinn skýtur þá eldingum með ótakmörkuðum skotfærum | Aukaskot eða vopnaskipti rífa hann út | Engin |
+| **Tvær skammbyssur** | Vinstri | Hægri | Engin (Endurhlaða: R) |
+| **Árásarriffill** | Alsjálfvirkur riffill sem er endurhlaðinn með nöglunum þínum | Aukaskot miðar gegnum rauðpunktssigtið: þéttari skot og nærri sýn | Naglar (Endurhlaða: R) |
 
 Gáttir fara á slétta fleti heimsins og flytja þig, skrímsli og hluti sem
 er kastað í gegn með skriðþunga sínum. Með **Sjá í gegnum gáttir** á sérðu

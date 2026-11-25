@@ -94,6 +94,8 @@ Porten er laget for å spilles med håndkontroller.
 - **Knappesymboler** samsvarer med kontrolleren din (Xbox, PlayStation,
   Nintendo) og gjenkjennes automatisk.
 - Tilordne alt på nytt i Options → Kontroller, også fra kontrolleren.
+- **Select / View ×2**: Skjermbilde; **Start ×2**: Hurtiglagre; **Start**
+  (Hold): Hurtiglast.
 - Berøringskontroller med justerbar størrelse, dekkevne og blikkfart.
 
 ## Lagring
@@ -200,7 +202,8 @@ det virker med alle moder og på nett.
   i luften som skvetter der de lander.
 - **Treffeffekter**: hagleskuddmerker, spiker som setter seg fast i tre og
   fiender, svimerker fra eksplosjoner.
-- **Forbedret vann**: gjennomskinnelighet, bølger, sprut og kaustikk.
+- **Forbedret vann**: gjennomskinnelighet, bølger, sprut og kaustikk;
+  **Lysbrytning under vann**, **Dråper på skjermen**.
 - **Gjennomsiktige teleportere** som viser destinasjonen med parallakse.
 - Ambient okklusjon, bevegelsesuskarphet per objekt og ved fart, myke
   partikler.
@@ -246,6 +249,9 @@ de vanlige angrepsknappene dine.
 | **Bumerang** | Hold for å merke fiender, slipp for å kaste; den lammer hver av dem etter tur | Fjern merker | Ingen |
 | **Gelsprøyte** | Blå frastøtningsgel (sprettende) | Oransje fremdriftsgel (rask) | Ingen |
 | **Høytrykksspyler** | Lang vannstråle som dytter fiender og vasker bort gel | Bred vifte av stråler | Ingen |
+| **Han-han-kabel** | Sekundærild mot et lysende elektronikkpanel innen rekkevidde plugger inn den ene enden; den andre skyter da lyn med ubegrenset ammunisjon | Sekundærild eller våpenbytte river den ut | Ingen |
+| **Doble pistoler** | Venstre | Høyre | Ingen (Lad om: R) |
+| **Automatgevær** | Et helautomatisk gevær som lades med spikrene dine | Alternativ ild sikter gjennom rødpunktsiktet for tettere skudd og nærmere syn | Spiker (Lad om: R) |
 
 Portaler plasseres på flate flater i verdenen og fører deg, monstre og
 kastede gjenstander gjennom med farten i behold. Med **Se gjennom

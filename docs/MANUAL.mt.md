@@ -99,6 +99,8 @@ Il-port huwa ddisinjat biex jintlagħab b'gamepad.
 - **Simboli tal-buttuni** jaqblu mal-kontrollur tiegħek (Xbox, PlayStation,
   Nintendo) u jiġu skoperti awtomatikament.
 - Erġa' assenja kollox f'Options → Kontrolli, anki mill-kontrollur.
+- **Select / View ×2**: Screenshot; **Start ×2**: Salva malajr; **Start**
+  (Żomm): Tella' malajr.
 - Kontrolli tal-iskrin tal-mess b'daqs, opaċità u veloċità tal-ħarsa
   aġġustabbli.
 
@@ -211,7 +213,8 @@ allura jaħdem ma' kwalunkwe mod u online.
   fl-arja li jitfarrak fejn jinżel.
 - **Effetti tal-impatti**: marki taċ-ċomb tas-senter, imsiemer li jeħlu
   fl-injam u fl-għedewwa, ħruq mill-isplużjonijiet.
-- **Ilma mtejjeb**: trasluċidità, mewġ, tixrix u kawstiċi.
+- **Ilma mtejjeb**: trasluċidità, mewġ, tixrix u kawstiċi; **Rifrazzjoni
+  taħt l-ilma**, **Qtar fuq l-iskrin**.
 - **Teleporters trasparenti** li juru d-destinazzjoni tagħhom bil-parallax.
 - Okklużjoni ambjentali, ċajpra tal-moviment għal kull oġġett u
   tal-veloċità, partiċelli rotob.
@@ -256,6 +259,9 @@ sparar alternattiv huma l-buttuni tal-attakk tas-soltu tiegħek.
 | **Boomerang** | Żomm biex timmarka l-għedewwa, erħi biex titfa'; jisturdi lil kull wieħed wara xulxin | Ħassar il-marki | Xejn |
 | **Sprejer tal-ġell** | Ġell blu ta' repulsjoni (jaqbeż) | Ġell oranġjo ta' propulsjoni (veloċi) | Xejn |
 | **Powerwasher** | Ġett twil tal-ilma li jimbotta l-għedewwa u jaħsel il-ġell | Imrewħa wiesgħa ta' ġettijiet | Xejn |
+| **Kejbil maskil-maskil** | In-nar sekondarju fuq pannell elettroniku jixgħel fil-qrib idaħħal tarf wieħed; it-tarf l-ieħor imbagħad jispara sajjetti b'munizzjon bla limitu | In-nar sekondarju jew il-bdil tal-arma jaqilgħu | Xejn |
+| **Żewġ pistoli** | Xellug | Lemin | Xejn (Erġa' għabbi: R) |
+| **Xkubetta tal-assalt** | Xkubetta kompletament awtomatika li terġa' tgħabba bl-imsiemer tiegħek | Sparar alternattiv jimmira minn ġol-mira bit-tikka ħamra għal tiri aktar preċiżi u veduta eqreb | Imsiemer (Erġa' għabbi: R) |
 
 Il-portali jitqiegħdu fuq uċuħ ċatti tad-dinja u jgħadduk lilek, lill-mostri
 u lill-oġġetti mitfugħa mill-ġenb għall-ieħor bil-momentum tagħhom.

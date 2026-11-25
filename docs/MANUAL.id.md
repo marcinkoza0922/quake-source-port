@@ -99,6 +99,8 @@ Port ini dirancang untuk dimainkan dengan gamepad.
 - **Simbol Tombol** menyesuaikan kontroler Anda (Xbox, PlayStation,
   Nintendo) dan terdeteksi otomatis.
 - Atur ulang semua tombol di Options → Kontrol, termasuk dari kontroler.
+- **Select / View ×2**: Tangkapan Layar; **Start ×2**: Simpan Cepat;
+  **Start** (Tahan): Muat Cepat.
 - Kontrol layar sentuh dengan ukuran, opasitas, dan kecepatan pandangan yang
   bisa diatur.
 
@@ -209,7 +211,8 @@ bawaan, sehingga berfungsi dengan mod apa pun dan saat daring.
   tubuh, tetesan di udara yang memercik di tempat jatuhnya.
 - **Efek hantaman**: bekas peluru shotgun, paku yang menancap di kayu dan
   musuh, bekas hangus ledakan.
-- **Air Ditingkatkan**: tembus pandang, riak, cipratan, dan kaustik.
+- **Air Ditingkatkan**: tembus pandang, riak, cipratan, dan kaustik;
+  **Refraksi Bawah Air**, **Tetesan di Layar**.
 - **Teleporter Tembus Pandang** yang menampilkan tujuannya dengan paralaks.
 - Ambient occlusion, motion blur per objek dan saat bergerak cepat,
   partikel lembut.
@@ -255,6 +258,9 @@ serang Anda yang biasa.
 | **Bumerang** | Tahan untuk menandai musuh, lepas untuk melempar; membuat mereka pingsan bergiliran | Hapus tanda | Tidak ada |
 | **Penyemprot Gel** | Gel repulsi biru (memantul) | Gel propulsi oranye (cepat) | Tidak ada |
 | **Powerwasher** | Semburan air panjang yang mendorong musuh dan membersihkan gel | Semburan lebar menyebar | Tidak ada |
+| **Kabel jantan-jantan** | Tembakan alternatif ke panel elektronik yang menyala dalam jangkauan mencolokkan satu ujung; ujung lainnya lalu menembakkan petir dengan amunisi tak terbatas | Tembakan alternatif atau ganti senjata mencabutnya | Tidak ada |
+| **Pistol Akimbo** | Kiri | Kanan | Tidak ada (Isi Ulang: R) |
+| **Senapan Serbu** | Senapan otomatis penuh yang diisi ulang dari paku Anda | Tembakan Alt membidik lewat alat bidik titik merah untuk tembakan lebih rapat dan pandangan lebih dekat | Paku (Isi Ulang: R) |
 
 Portal dipasang di permukaan datar dunia dan membawa Anda, monster, serta
 benda yang dilempar melewatinya dengan momentumnya. Dengan **Lihat Tembus

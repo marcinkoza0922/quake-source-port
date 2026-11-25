@@ -94,6 +94,8 @@ Bản port được thiết kế để chơi bằng tay cầm.
 - **Biểu tượng nút** khớp với tay cầm của bạn (Xbox, PlayStation, Nintendo)
   và được nhận diện tự động.
 - Gán lại mọi thứ trong Options → Điều khiển, kể cả ngay từ tay cầm.
+- **Select / View ×2**: Ảnh chụp màn hình; **Start ×2**: Lưu nhanh;
+  **Start** (Giữ): Tải nhanh.
 - Điều khiển cảm ứng với kích cỡ, độ mờ đục và tốc độ nhìn có thể chỉnh.
 
 ## Lưu trò chơi
@@ -197,7 +199,8 @@ hoạt động với mọi mod và khi chơi trực tuyến.
   thể, giọt máu bay trong không khí và tóe ra nơi chúng rơi xuống.
 - **Hiệu ứng va chạm**: vết đạn súng săn, đinh cắm vào gỗ và kẻ địch, vết
   cháy do nổ.
-- **Nước nâng cao**: trong suốt, gợn sóng, bắn tóe và tụ quang.
+- **Nước nâng cao**: trong suốt, gợn sóng, bắn tóe và tụ quang; **Khúc xạ
+  dưới nước**, **Giọt nước trên màn hình**.
 - **Máy dịch chuyển nhìn xuyên** hiện điểm đến với hiệu ứng thị sai.
 - Che bóng môi trường, nhòe chuyển động theo vật thể và theo tốc độ, hạt
   mềm.
@@ -242,6 +245,9 @@ nút tấn công quen thuộc của bạn.
 | **Boomerang** | Giữ để đánh dấu kẻ địch, thả để ném; nó lần lượt làm choáng từng kẻ | Xóa dấu | Không |
 | **Súng phun gel** | Gel đẩy bật màu xanh (nảy) | Gel tăng tốc màu cam (nhanh) | Không |
 | **Máy xịt rửa** | Tia nước dài đẩy kẻ địch và rửa sạch gel | Hình quạt tia nước rộng | Không |
+| **Cáp đực-đực** | Bắn phụ vào một bảng điện tử phát sáng trong tầm tay sẽ cắm một đầu vào; đầu kia khi đó bắn sét với đạn không giới hạn | Bắn phụ hoặc đổi vũ khí sẽ giật nó ra | Không |
+| **Súng lục đôi** | Trái | Phải | Không (Nạp đạn: R) |
+| **Súng trường tấn công** | Súng trường tự động nạp bằng đinh của bạn | Bắn phụ ngắm qua kính ngắm chấm đỏ để bắn chụm hơn và nhìn gần hơn | Đinh (Nạp đạn: R) |
 
 Cổng được đặt trên bề mặt phẳng của thế giới và đưa bạn, quái vật và vật bị
 ném đi xuyên qua mà vẫn giữ nguyên đà. Khi bật **Nhìn xuyên cổng**, bạn

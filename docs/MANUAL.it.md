@@ -102,6 +102,8 @@ Il port è pensato per essere giocato con un controller.
 - I **simboli dei pulsanti** corrispondono al tuo controller (Xbox,
   PlayStation, Nintendo) e vengono rilevati automaticamente.
 - Tutto si riassegna in Options → Comandi, anche dal controller.
+- **Select / View ×2**: Schermata; **Start ×2**: Salvataggio rapido;
+  **Start** (Tieni premuto): Caricamento rapido.
 - Comandi touch con dimensione, opacità e velocità visuale regolabili.
 
 ## Salvataggi
@@ -217,7 +219,8 @@ impostazione predefinita, quindi funziona con qualsiasi mod e online.
   corpi, gocce in volo che si spiaccicano dove cadono.
 - **Effetti d'impatto**: fori dei pallini, chiodi che si conficcano nel
   legno e nei nemici, bruciature delle esplosioni.
-- **Acqua migliorata**: trasparenza, increspature, spruzzi e caustiche.
+- **Acqua migliorata**: trasparenza, increspature, spruzzi e caustiche;
+  **Rifrazione subacquea**, **Gocce sullo schermo**.
 - **Teletrasporti trasparenti** che mostrano la destinazione con
   parallasse.
 - Occlusione ambientale, motion blur per oggetto e da velocità, particelle
@@ -267,6 +270,9 @@ d'attacco.
 | **Boomerang** | Tieni premuto per marcare i nemici, rilascia per lanciare; li stordisce uno dopo l'altro | Cancella i marcatori | Nessuna |
 | **Spruzzagel** | Gel blu repulsivo (elastico) | Gel arancione propulsivo (veloce) | Nessuna |
 | **Idropulitrice** | Lungo getto d'acqua che respinge i nemici e lava via il gel | Ampio ventaglio di getti | Nessuna |
+| **Cavo maschio-maschio** | Il fuoco secondario su un pannello elettronico luminoso a portata inserisce un'estremità; l'altra spara fulmini con munizioni illimitate | Il fuoco secondario o il cambio d'arma lo strappa via | Nessuna |
+| **Pistole akimbo** | Sinistra | Destra | Nessuna (Ricarica: R) |
+| **Fucile d’assalto** | Un fucile automatico che si ricarica con i tuoi chiodi | Fuoco secondario mira con il punto rosso per colpi più precisi e una visuale ravvicinata | Chiodi (Ricarica: R) |
 
 I portali si piazzano sulle superfici piatte del mondo e trasportano te, i
 mostri e gli oggetti lanciati conservandone lo slancio. Con **Vedi

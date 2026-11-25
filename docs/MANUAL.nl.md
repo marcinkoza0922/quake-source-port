@@ -102,6 +102,8 @@ De port is ontworpen om met een gamepad te spelen.
 - **Knopsymbolen** passen bij je controller (Xbox, PlayStation, Nintendo)
   en worden automatisch herkend.
 - Wijs alles opnieuw toe in Options → Besturing, ook vanaf de controller.
+- **Select / View ×2**: Screenshot; **Start ×2**: Snel opslaan; **Start**
+  (Vasthouden): Snel laden.
 - Aanraakbediening met instelbare grootte, dekking en kijksnelheid.
 
 ## Opslaan
@@ -214,7 +216,7 @@ uit, zodat het met elke mod en online werkt.
 - **Inslageffecten**: hagelinslagen van de shotgun, spijkers die in hout en
   vijanden blijven steken, schroeiplekken van explosies.
 - **Verbeterd water**: doorschijnendheid, rimpelingen, spetters en
-  caustieken.
+  caustieken; **Onderwaterbreking**, **Druppels op het scherm**.
 - **Doorzichtige teleporters** die hun bestemming met parallax tonen.
 - Ambient occlusion, bewegingsonscherpte per object en bij snelheid,
   zachte deeltjes.
@@ -260,6 +262,9 @@ gewone aanvalsknoppen.
 | **Boemerang** | Vasthouden om vijanden te markeren, loslaten om te werpen; verdooft ze een voor een | Markeringen wissen | Geen |
 | **Gelspuit** | Blauwe afstotingsgel (verend) | Oranje voortstuwingsgel (snel) | Geen |
 | **Hogedrukspuit** | Lange waterstraal die vijanden wegduwt en gel wegspoelt | Brede waaier van stralen | Geen |
+| **Mannelijk-mannelijk-kabel** | Alternatief vuur op een oplichtend elektronicapaneel binnen bereik steekt één uiteinde in; het andere schiet dan bliksems met onbeperkte munitie | Alternatief vuur of van wapen wisselen trekt hem eruit | Geen |
+| **Dubbele pistolen** | Links | Rechts | Geen (Herladen: R) |
+| **Aanvalsgeweer** | Een volautomatisch geweer dat herlaadt met je spijkers | Alt. vuur richt door het rodepuntvizier voor nauwkeurigere schoten en een dichter beeld | Spijkers (Herladen: R) |
 
 Portalen komen op vlakke oppervlakken van de wereld en brengen jou,
 monsters en geworpen voorwerpen met hun vaart erdoorheen. Met **Door

@@ -100,6 +100,8 @@ Port ini direka untuk dimainkan dengan pad permainan.
 - **Simbol Butang** sepadan dengan pad anda (Xbox, PlayStation, Nintendo) dan
   dikesan secara automatik.
 - Ikat semula semuanya dalam Options → Kawalan, termasuk dari alat kawalan.
+- **Select / View ×2**: Tangkapan Skrin; **Start ×2**: Simpan Pantas;
+  **Start** (Tahan): Muat Pantas.
 - Kawalan skrin sentuh dengan saiz, kelegapan dan kelajuan pandangan yang
   boleh dilaraskan.
 
@@ -212,7 +214,8 @@ lalai, jadi ia berfungsi dengan sebarang mod dan dalam talian.
   titisan di udara yang memercik di tempat ia jatuh.
 - **Kesan hentaman**: kesan peluru senapang patah, paku yang tertancap pada
   kayu dan musuh, kesan hangus letupan.
-- **Air Dipertingkat**: lut cahaya, riak, percikan dan kaustik.
+- **Air Dipertingkat**: lut cahaya, riak, percikan dan kaustik; **Biasan
+  Bawah Air**, **Titisan pada Skrin**.
 - **Teleporter Lut Sinar** yang menunjukkan destinasinya dengan paralaks.
 - Oklusi ambien, kabur gerakan bagi setiap objek dan kelajuan, zarah lembut.
 - **Shader Skrin**: pratetap RetroArch `.slangp` (CRT dan lain-lain).
@@ -257,6 +260,9 @@ alt ialah butang serang biasa anda.
 | **Bumerang** | Tahan untuk menanda musuh, lepaskan untuk membaling; ia memengsankan setiap satu bergilir-gilir | Kosongkan tanda | Tiada |
 | **Penyembur Gel** | Gel tolakan biru (melantun) | Gel pecutan jingga (laju) | Tiada |
 | **Pencuci Tekanan** | Pancutan air panjang yang menolak musuh dan mencuci gel | Kipas pancutan lebar | Tiada |
+| **Kabel jantan-jantan** | Tembakan alternatif pada panel elektronik yang bercahaya dalam jangkauan memalamkan satu hujung; hujung satu lagi kemudian menembak kilat dengan peluru tanpa had | Tembakan alternatif atau tukar senjata mencabutnya | Tiada |
+| **Pistol Berkembar** | Kiri | Kanan | Tiada (Isi Semula: R) |
+| **Raifal Serbu** | Raifal automatik penuh yang diisi semula dengan paku anda | Tembakan Alt membidik melalui pembidik titik merah untuk tembakan lebih jitu dan pandangan lebih dekat | Paku (Isi Semula: R) |
 
 Portal diletakkan pada permukaan dunia yang rata dan membawa anda, raksasa
 dan objek yang dibaling melaluinya bersama momentumnya. Dengan **Lihat
