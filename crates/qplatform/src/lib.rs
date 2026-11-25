@@ -97,6 +97,8 @@ pub enum Event {
     WillEnterBackground,
     DidEnterForeground,
     Back,
+    /// The browser took the mouse back (Esc, which the page doesn't get).
+    PointerUnlocked,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

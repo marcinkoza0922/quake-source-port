@@ -307,7 +307,7 @@ impl Menu {
         }
         let locked = self.game_locked(item, cv);
         let off = self.item_disabled(item, cv) || locked || matches!(item, Item::Sub { page, .. } if sub_disabled(page, cv));
-        let slider_drag = self.slider_drag == Some(i);
+        let slider_drag = self.slider_drag.is_some_and(|(p, row)| row == i && self.screen == Screen::OptionsPage(p));
         if (self.tv_pressed(r) && kind != Kind::Slider) || slider_drag {
             c.fill(x + 1.0, y, w - 2.0, h, PRESS);
         } else if self.tv_footer() == Some(i) {

@@ -225,6 +225,8 @@ async function launch(db) {
       persistDirty(db, true).catch(console.error);
     };
     addEventListener('pagehide', leave);
+    // Ctrl+W can't be kept from the browser: ask while somebody plays
+    addEventListener('beforeunload', (e) => { if (document.pointerLockElement) e.preventDefault(); });
     document.addEventListener('visibilitychange', () => { if (document.hidden) leave(); });
     await start(args);
   } catch (e) {

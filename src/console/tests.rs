@@ -55,7 +55,7 @@ fn ansi_strip_and_sgr_colors() {
     let mut cur = Vec::new();
     let mut lines = VecDeque::new();
     let mut style = CellStyle::default();
-    ansi::append_styled(raw, &mut cur, &mut lines, &mut style, 80, 100);
+    ansi::append_styled(raw, &mut cur, &mut lines, &mut style, 80, 100, true);
     assert_eq!(lines.len(), 1);
     let row = &lines[0];
     let text: String = row.iter().map(|c| c.ch).collect();
@@ -260,4 +260,162 @@ fn console_capture_pipes_into_bash_job() {
         printed.contains("con_modern \"1\""),
         "expected piped output in console, got: {printed:?}"
     );
+}
+
+fn vt_row(vt: &VtGrid, r: usize) -> String {
+    vt.cells[r].iter().map(|c| c.ch).collect::<String>().trim_end().to_string()
+}
+
+#[test]
+fn vt_restored_cursors_stay_on_a_smaller_screen() {
+    for leave in ["\x1b[?1049lx", "\x1b[?1049l\x1b8x", "\x1b[?1049l\x1b[ux"] {
+        let mut vt = VtGrid::new(80, 40);
+        vt.feed(b"\x1b[38;70H\x1b7\x1b[s\x1b[?1049h\x1b[40;80H");
+        vt.resize(30, 20);
+        vt.feed(leave.as_bytes());
+        assert!(vt.cursor_row < 20 && vt.cells.len() == 20 && vt.cells.iter().all(|r| r.len() == 30), "{leave:?}");
+        vt.feed(b"\x1b[J\x1b[K\x1b[P\x1b[@\x1b[X");
+    }
+}
+
+#[test]
+fn vt_random_input_and_resizes_never_panic() {
+    let mut seed = 1u32;
+    let mut rnd = move |n: u32| {
+        seed ^= seed << 13;
+        seed ^= seed >> 17;
+        seed ^= seed << 5;
+        seed % n
+    };
+    for _ in 0..300 {
+        let mut vt = VtGrid::new(40, 12);
+        for _ in 0..60 {
+            let (a, b) = (rnd(60), rnd(60));
+            match rnd(9) {
+                0 => vt.resize(20 + rnd(60) as usize, 5 + rnd(40) as usize),
+                1 => vt.feed(format!("\x1b[{a};{b}H").as_bytes()),
+                2 => vt.feed(["\x1b7", "\x1b8", "\x1b[s", "\x1b[u", "\x1bM", "\x1b[?1049h", "\x1b[?1049l"][rnd(7) as usize].as_bytes()),
+                3 => vt.feed(format!("\x1b[{a}{}", ['L', 'M', 'S', 'T', 'P', '@', 'X', 'J', 'K'][rnd(9) as usize]).as_bytes()),
+                4 => vt.feed(format!("\x1b[{a};{b}r").as_bytes()),
+                5 => vt.feed(b"\r\n\r\n"),
+                6 => vt.feed(&(0..rnd(50)).map(|i| (i * 37 + a) as u8).collect::<Vec<_>>()),
+                _ => vt.feed("some text é €".as_bytes()),
+            }
+        }
+    }
+}
+
+#[test]
+fn vt_shrinking_keeps_the_prompt() {
+    let mut vt = VtGrid::new(40, 24);
+    for i in 0..23 {
+        vt.feed(format!("line {i}\r\n").as_bytes());
+    }
+    vt.feed(b"prompt$ ");
+    vt.resize(40, 5);
+    assert_eq!((vt_row(&vt, vt.cursor_row).as_str(), vt.cursor_row), ("prompt$", 4));
+    assert_eq!(vt.scrollback.len(), 19, "the rest is in the scrollback");
+    vt.resize(40, 24);
+    assert_eq!(vt_row(&vt, vt.cursor_row), "prompt$");
+    vt.feed(b"ls");
+    assert_eq!(vt_row(&vt, 4), "prompt$ ls");
+}
+
+#[test]
+fn vt_split_characters_and_endless_escapes() {
+    let mut vt = VtGrid::new(40, 5);
+    for b in "é€😀x".bytes() {
+        vt.feed(&[b]);
+    }
+    assert_eq!(vt_row(&vt, 0), "é€😀x");
+    vt.feed(b"\r\nbad \xff\xfe byte");
+    assert_eq!(vt_row(&vt, 1), "bad \u{fffd}\u{fffd} byte");
+    // counts are limited to the screen, unfinished sequences to a few KB
+    let t = Instant::now();
+    vt.feed("\x1b[65535S\x1b[65535T\x1b[65535L\x1b[65535M".repeat(100).as_bytes());
+    vt.feed(b"\x1b]0;");
+    for _ in 0..500 {
+        vt.feed(&[b'a'; 8192]);
+    }
+    assert!(t.elapsed() < Duration::from_secs(3), "{:?}", t.elapsed());
+    vt.feed(b"\x1b[2J\x1b[H\x1b]0;title\x07done");
+    assert_eq!((vt_row(&vt, 0).as_str(), vt.title.as_str()), ("done", "title"));
+}
+
+#[cfg(unix)]
+#[test]
+fn endless_output_gets_its_share_of_a_frame() {
+    let env = ShellEnv { basedir: std::env::temp_dir(), ..Default::default() };
+    let mut job = ShellJob::spawn("yes", None, &env).unwrap();
+    let t = Instant::now();
+    assert!(job.drain_with_budget(Duration::from_millis(30)).len() < 1 << 20);
+    for _ in 0..5 {
+        assert!(job.poll().len() < 1 << 20);
+    }
+    assert!(t.elapsed() < Duration::from_secs(1), "{:?}", t.elapsed());
+    drop(job); // `yes` ends with its pipe
+
+    let mut pty = PtySession::spawn(80, 24, &env).unwrap();
+    pty.write_bytes(b"yes\n");
+    std::thread::sleep(Duration::from_millis(300));
+    for _ in 0..20 {
+        let t = Instant::now();
+        assert!(pty.poll());
+        assert!(t.elapsed() < Duration::from_millis(250), "{:?}", t.elapsed());
+    }
+    // more input than the terminal holds at once is all sent
+    let mut pty = PtySession::spawn(80, 24, &env).unwrap();
+    pty.write_bytes(b"stty -echo; wc -c\n");
+    std::thread::sleep(Duration::from_millis(500));
+    pty.send_paste(&"0123456789012345678\n".repeat(4000));
+    pty.write_bytes(b"\x04");
+    let deadline = Instant::now() + Duration::from_secs(10);
+    let shown = |p: &PtySession| p.snapshot_lines().iter().any(|l| l.iter().map(|c| c.ch).collect::<String>().contains("80000"));
+    while !shown(&pty) && Instant::now() < deadline {
+        pty.poll();
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    assert!(shown(&pty), "every byte arrived");
+}
+
+#[test]
+fn classic_console_edits_non_ascii_input() {
+    let mut con = Console::new();
+    con.modern = false;
+    con.history = vec!["say zażółć".into()];
+    con.hist_pos = 1;
+    let none = |_: &str| Vec::new();
+    for key in [K_UPARROW, K_BACKSPACE, K_LEFTARROW, K_LEFTARROW, K_LEFTARROW, K_DEL, K_RIGHTARROW] {
+        con.key(key, &none);
+    }
+    con.text('x');
+    assert_eq!(con.input, "say zaóxł");
+    con.key(K_HOME, &none);
+    for _ in 0..20 {
+        con.key(K_RIGHTARROW, &none);
+    }
+    assert_eq!(con.cursor, con.input.len());
+    // the common prefix ends between two characters
+    con.input = "z".into();
+    con.cursor = 1;
+    con.key(K_TAB, &|_: &str| vec!["zé".into(), "zè".into()]);
+    assert_eq!(con.input, "z");
+}
+
+#[test]
+fn game_text_is_not_ansi() {
+    let mut con = Console::new();
+    let cells = |con: &Console| con.modern_lines.back().unwrap().clone();
+    con.print("ammo \x12\x1b\x13 left\n");
+    assert_eq!(con.lines.back().unwrap(), b"ammo \x12\x1b\x13 left");
+    assert_eq!(cells(&con).iter().map(|c| c.ch).collect::<String>(), "ammo 091 left");
+    con.print("\x1b[38;2;10;12;18mhidden\n");
+    con.print("error: shown\n");
+    assert!(cells(&con).iter().all(|c| c.style == CellStyle::default()));
+    // the shell's colours carry over its own lines only
+    con.print_ansi("\x1b[31mred\n");
+    con.print("game\n");
+    assert!(cells(&con).iter().all(|c| c.style == CellStyle::default()));
+    con.print_ansi("still red\n");
+    assert_ne!(cells(&con)[0].style.fg, DEFAULT_FG);
 }

@@ -382,7 +382,7 @@ impl Host {
         }
         for rx in std::mem::take(&mut self.demo_jobs) {
             if let Ok(msg) = rx.recv_timeout(std::time::Duration::from_secs(120)) {
-                eprint!("{msg}");
+                let _ = std::io::Write::write_all(&mut std::io::stderr(), msg.as_bytes());
             }
         }
     }

@@ -61,7 +61,7 @@ impl QcFiles {
             && let Some(p) = &f.path
             && let Err(e) = qcore::vfs::write_atomic(p, &f.buf)
         {
-            eprintln!("couldn't write {}: {e}", p.display());
+            qcore::warnln!("couldn't write {}: {e}", p.display());
         }
     }
 

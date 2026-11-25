@@ -23,7 +23,9 @@ impl Menu {
         if self.screen == Screen::OptionsPage(Page::WeaponPriority) {
             return self.wp_mouse_move(pos, cv);
         }
-        if let (Some(i), Screen::OptionsPage(p)) = (self.slider_drag, self.screen) {
+        if let Some((p, i)) = self.slider_drag
+            && self.screen == Screen::OptionsPage(p)
+        {
             self.set_slider(self.page_item(p, i), pos.0, cv);
             return None;
         }
@@ -307,7 +309,7 @@ impl Menu {
                 return out;
             }
             if let Screen::OptionsPage(p) = self.screen && let Some(row) = self.slider_at(pos, cv) {
-                self.slider_drag = Some(row);
+                self.slider_drag = Some((p, row));
                 self.set_slider(self.page_item(p, row), pos.0, cv);
                 out.push(Action::Sound("misc/menu3.wav"));
                 return out;

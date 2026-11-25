@@ -150,3 +150,11 @@ fn demo_buttons_emit_controller_glyphs_in_pad_mode() {
     b.draw(&mut pad, None, true, &glyphs);
     assert!(pad.list.len() > kb.list.len(), "Demos tabs, sort and action buttons should draw controller glyphs");
 }
+
+#[test]
+fn labels_of_names_that_only_look_like_dates() {
+    let label = |name: &str| auto_label(&file(name, true));
+    assert_eq!(label("20261125-123456_e1m1"), "2026-11-25 12:34  e1m1");
+    // 15 bytes with a `-` in the right place, cut inside é
+    assert_eq!(label("abcé123-456789_x"), "abcé123-456789_x");
+}

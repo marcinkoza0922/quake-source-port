@@ -249,6 +249,17 @@ test('leaving or hiding the page stores the settings', async () => {
   assert.equal(page.calls.hidden, 2);
 });
 
+test('closing the page asks only while somebody plays', async () => {
+  await play();
+  let asked = 0;
+  const close = () => page.window.beforeunload({ preventDefault() { asked++; } });
+  close();
+  assert.equal(asked, 0);
+  document.pointerLockElement = {};
+  close();
+  assert.equal(asked, 1);
+});
+
 test('only user files are kept and mounted', async () => {
   await play({ user: [['/quake/id1/pak0.pak', { data: bytes(66), modified: 1 }], ['/quake-user/id1/a.sav', { data: bytes(1), modified: 1 }]] });
   assert.deepEqual(page.files.get('/quake/id1/pak0.pak').data, bytes(1), 'the game data stored by the user');

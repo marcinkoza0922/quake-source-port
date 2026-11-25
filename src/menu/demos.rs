@@ -489,7 +489,7 @@ fn label(d: &DemoFile) -> String {
 fn auto_label(d: &DemoFile) -> String {
     let (stamp, map) = d.name.split_once('_').unwrap_or((&d.name, ""));
     let b = stamp.as_bytes();
-    if b.len() == 15 && b[8] == b'-' {
+    if b.len() == 15 && b[8] == b'-' && stamp.is_ascii() {
         format!("{}-{}-{} {}:{}  {map}", &stamp[..4], &stamp[4..6], &stamp[6..8], &stamp[9..11], &stamp[11..13])
     } else {
         d.name.clone()

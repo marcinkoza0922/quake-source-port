@@ -135,13 +135,14 @@ impl Menu {
                 let coop = n("_mp_coop");
                 let local = n("_mp_localplayers").clamp(1, 6);
                 let cmd = format!(
-                    "disconnect\nmaxplayers {}\ncl_splitscreen {local}\ncoop {coop}\ndeathmatch {}\nteamplay {}\nskill {}\nfraglimit {}\ntimelimit {}\nmap {map}\n",
+                    "disconnect\nmaxplayers {}\ncl_splitscreen {local}\ncoop {coop}\ndeathmatch {}\nteamplay {}\nskill {}\nfraglimit {}\ntimelimit {}\nmap \"{}\"\n",
                     n("_mp_maxplayers").max(2).max(local),
                     (coop == 0) as i32,
                     n("_mp_teamplay"),
                     n("_mp_skill"),
                     n("_mp_fraglimit"),
                     n("_mp_timelimit"),
+                    map.replace(['"', '\n'], ""),
                 );
                 cv.set("_mp_map", &map);
                 self.screen = Screen::None;

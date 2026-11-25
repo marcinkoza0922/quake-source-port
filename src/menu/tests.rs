@@ -139,7 +139,7 @@ mod multiplayer_tests {
         m.key(K_RIGHTARROW, &mut cv, false); // dm1 (default) -> dm2
         m.opt_cursor = 8;
         let c = commands(&m.key(K_ENTER, &mut cv, false));
-        assert_eq!(c, "disconnect\nmaxplayers 12\ncl_splitscreen 2\ncoop 0\ndeathmatch 1\nteamplay 0\nskill 1\nfraglimit 10\ntimelimit 0\nmap dm2\n");
+        assert_eq!(c, "disconnect\nmaxplayers 12\ncl_splitscreen 2\ncoop 0\ndeathmatch 1\nteamplay 0\nskill 1\nfraglimit 10\ntimelimit 0\nmap \"dm2\"\n");
         assert_eq!(cv.by_name("_mp_map").unwrap().string, "dm2");
     }
 
@@ -373,6 +373,35 @@ mod save_menu_tests {
         assert_eq!(cv.value_of("sensitivity"), 11.0);
         m.mouse_up();
         m.mouse_move((SLIDER_X.0, y), &mut cv);
+        assert_eq!(cv.value_of("sensitivity"), 11.0);
+    }
+
+    #[test]
+    fn a_drag_does_not_follow_to_another_page() {
+        let mut m = Menu::new();
+        let mut cv = Cvars::default();
+        let Some(row) = page_items(Page::Mouse).iter().position(|i| matches!(i, Item::Slider { cvar: "sensitivity", .. })) else { return };
+        cv.register("sensitivity", "3", 0);
+        for item in page_items(Page::Audio) {
+            if let Item::Slider { cvar, .. } = item {
+                cv.register(cvar, "0.5", 0);
+            }
+        }
+        let y = PAGE_ROW0 + row as f32 * ROW_H + 4.0;
+        m.open(Screen::OptionsPage(Page::Mouse));
+        m.mouse_move((SLIDER_X.0 + 4.0, y), &mut cv);
+        m.key(K_MOUSE1, &mut cv, false);
+        assert_eq!(m.slider_drag, Some((Page::Mouse, row)));
+        // as the Back key leaves a page: without `open`
+        for page in [Page::Audio, Page::Mouse] {
+            m.screen = Screen::OptionsPage(page);
+            let before: Vec<_> = page_items(Page::Audio).iter().filter_map(|i| match i {
+                Item::Slider { cvar, .. } => Some(cv.value_of(cvar)),
+                _ => None,
+            }).collect();
+            m.mouse_move((SLIDER_X.1, y), &mut cv);
+            assert!(before.iter().all(|&v| v == 0.5));
+        }
         assert_eq!(cv.value_of("sensitivity"), 11.0);
     }
 

@@ -379,7 +379,7 @@ pub fn parse_md5(fs: &Fs, mdl_name: &str) -> Option<qformats::md5::Md5> {
     match qformats::md5::Md5::parse(&mesh, anim.as_deref()) {
         Ok(m) => Some(m),
         Err(e) => {
-            eprintln!("{stem}.md5mesh: {e}; using the .mdl");
+            qcore::warnln!("{stem}.md5mesh: {e}; using the .mdl");
             None
         }
     }

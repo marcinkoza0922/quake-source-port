@@ -232,7 +232,7 @@ pub struct Menu {
     /// Options scrollbar being dragged: pointer offset from the thumb top.
     drag: Option<f32>,
     /// Row of the options slider being dragged with the mouse.
-    slider_drag: Option<usize>,
+    slider_drag: Option<(Page, usize)>,
     /// Open dropdown on an options page.
     drop: Option<Drop>,
     /// Page and row an open sub-page was entered from (sub-pages reachable

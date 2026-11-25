@@ -88,7 +88,7 @@ impl Host {
             s.push('\n');
         }
         if let Err(e) = qcore::vfs::write_atomic(&dir.join("config.cfg"), s.as_bytes()) {
-            eprintln!("couldn't write config.cfg: {e}");
+            qcore::warnln!("couldn't write config.cfg: {e}");
         }
         self.con.save_history(&crate::user_dir("id1"));
     }

@@ -50,3 +50,19 @@ fn a_hidden_page_saves_now_and_then() {
     assert_eq!(saves(), 2);
     let _ = std::fs::remove_dir_all(&tmp);
 }
+
+#[test]
+fn losing_the_mouse_opens_the_menu_once() {
+    let fs = qcore::fs::Fs::new(std::path::Path::new("."));
+    let Ok(r) = Renderer::headless(64, 64, &[[0u8; 3]; 256]) else { return };
+    let mut h = Host::new(fs, r, None, Vec::new());
+    h.menu.screen = Screen::None;
+    (h.con.forced, h.con.open) = (false, false);
+    h.sync_key_dest();
+    assert!(h.key_dest() == KeyDest::Game);
+    h.handle_event(HostEvent::PointerUnlocked);
+    assert_eq!(h.menu.screen, Screen::Main);
+    // with the menu open already (the window also lost the focus) it stays
+    h.handle_event(HostEvent::PointerUnlocked);
+    assert_eq!(h.menu.screen, Screen::Main);
+}

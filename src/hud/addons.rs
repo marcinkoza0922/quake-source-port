@@ -173,7 +173,7 @@ pub fn store(base: &Layout, patches: &mut Patches, c: Combo, edited: &Layout) {
 /// The kinds `patch` names get its elements, in place of their old ones.
 fn apply(l: &mut Layout, patch: &str) {
     let mut gone: Vec<Kind> = patch.split_whitespace().filter_map(|t| Kind::from_id(t.strip_prefix('-')?)).collect();
-    let mut new: Vec<Elem> = patch.split_whitespace().filter_map(Elem::parse).collect();
+    let mut new: Vec<Elem> = patch.split_whitespace().filter_map(Elem::parse).take(super::layout::MAX_ELEMS).collect();
     gone.extend(new.iter().map(|e| e.kind));
     let mut out = Vec::with_capacity(l.elems.len() + new.len());
     for e in l.elems.drain(..) {

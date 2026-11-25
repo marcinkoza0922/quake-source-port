@@ -60,7 +60,7 @@ const CLASSIC: &[(&str, &str)] = &[];
 /// Every enhancement on at its highest quality.
 const ENHANCED: &[(&str, &str)] = &[
     ("r_msaa", "8"),
-    ("r_ssao", "2"),
+    ("r_ssao", "3"),
     ("r_motionblur", "1"),
     ("r_speedblur", "1"),
     ("r_bloom", "1"),
@@ -140,6 +140,12 @@ pub(super) fn register_preset_commands(c: &mut Commands<Host>) {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn the_enhanced_preset_has_the_highest_ssao() {
+        let ssao = ENHANCED.iter().find(|c| c.0 == "r_ssao").unwrap().1;
+        assert_eq!(ssao, "3", "High in the menu");
+    }
 
     #[test]
     fn presets_only_set_registered_archived_cvars() {

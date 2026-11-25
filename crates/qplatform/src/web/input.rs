@@ -34,7 +34,9 @@ pub(super) fn keyboard_listeners(w: &EventTarget, shared: &Rc<Shared>) -> Result
             }
             let shortcut = k.ctrl_key() || k.meta_key();
             // keep browser reload / devtools / fullscreen and Ctrl/Cmd shortcuts working
-            if !shortcut && !matches!(code.as_str(), "F5" | "F11" | "F12") {
+            // (Ctrl fires in stock Quake: while playing, Ctrl+S isn't the browser's)
+            let playing = locked() && !k.meta_key();
+            if (!shortcut || playing) && !matches!(code.as_str(), "F5" | "F11" | "F12") {
                 k.prevent_default();
             }
             s.push(Event::Key { scancode, key: keycode, modifiers: keymap::modifiers(&k), down, repeat: k.repeat() });
@@ -47,6 +49,20 @@ pub(super) fn keyboard_listeners(w: &EventTarget, shared: &Rc<Shared>) -> Result
         })?);
     }
     Ok(out)
+}
+
+pub(super) fn locked() -> bool {
+    web_sys::window().and_then(|w| w.document()).is_some_and(|d| d.pointer_lock_element().is_some())
+}
+
+/// Tells when the browser ends the pointer lock the game wants.
+pub(super) fn lock_listener(shared: &Rc<Shared>) -> Result<Listener> {
+    let s = shared.clone();
+    Listener::new(super::document()?.as_ref(), "pointerlockchange", move |_| {
+        if s.want_lock.get() && !locked() {
+            s.push(Event::PointerUnlocked);
+        }
+    })
 }
 
 /// Canvas position of a mouse event in backing pixels.
@@ -66,7 +82,9 @@ pub(super) fn mouse_listeners(c: &HtmlCanvasElement, shared: &Rc<Shared>) -> Res
     out.push(Listener::new(t, "mousemove", move |e| {
         let Ok(m) = e.dyn_into::<MouseEvent>() else { return };
         let (x, y) = canvas_pos(&cv, &m);
-        s.push(Event::MouseMotion { x, y, dx: m.movement_x() as f32, dy: m.movement_y() as f32 });
+        // a free cursor doesn't turn the view
+        let (dx, dy) = if s.want_lock.get() && !locked() { (0, 0) } else { (m.movement_x(), m.movement_y()) };
+        s.push(Event::MouseMotion { x, y, dx: dx as f32, dy: dy as f32 });
     })?);
     for (name, down) in [("mousedown", true), ("mouseup", false)] {
         let (s, cv) = (shared.clone(), c.clone());
@@ -75,8 +93,7 @@ pub(super) fn mouse_listeners(c: &HtmlCanvasElement, shared: &Rc<Shared>) -> Res
             m.prevent_default();
             if down {
                 let _ = cv.focus();
-                let locked = web_sys::window().and_then(|w| w.document()).and_then(|d| d.pointer_lock_element());
-                if s.want_lock.get() && locked.is_none() {
+                if s.want_lock.get() && !locked() {
                     cv.request_pointer_lock();
                 }
             }
