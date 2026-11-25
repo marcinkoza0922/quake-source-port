@@ -180,3 +180,17 @@ fn vectoangles_with_an_up_vector_rolls() {
         assert!((a[2] - roll).abs() < 0.01 && a[0].abs() < 0.01 && a[1].abs() < 0.01, "{up:?}: {a:?}");
     }
 }
+
+/// Widths and precisions past what a temp string holds (or Rust formats).
+#[test]
+fn sprintf_fields_are_bounded() {
+    let Some(mut vm) = vm() else { return };
+    for f in ["%.70000f", "%99999999999999f", "%2000000000f", "%-2000000000d", "%02000000000x", "%.99999e", "%.70000v", "%.70000g"] {
+        call(&mut vm, "sprintf", &[A::S(f), A::F(1.5)]);
+        assert!(vm.g_str(RET).unwrap().len() < crate::STRINGTEMP_LENGTH, "{f}");
+    }
+    call(&mut vm, "sprintf", &[A::S("%.70000s|%2000000000s"), A::S("a"), A::S("b")]);
+    call(&mut vm, "sprintf", &[A::S("%*.*f"), A::F(1e30), A::F(1e30), A::F(1.5)]);
+    call(&mut vm, "sprintf", &[A::S("%6.2f|"), A::F(1.5)]);
+    assert_eq!(vm.g_str(RET).unwrap(), b"  1.50|");
+}

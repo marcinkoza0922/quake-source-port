@@ -56,6 +56,7 @@ pub struct Gpu {
     pub max_samples: u32,
     /// Largest side of a 2D texture.
     pub max_texture: u32,
+    pub max_layers: u32,
     /// Max sampler anisotropy (1 = unsupported).
     pub max_anisotropy: f32,
     /// sampleRateShading is enabled (supersampling).
@@ -253,6 +254,7 @@ impl Gpu {
             upload_pool,
             max_samples,
             max_texture: lim.max_image_dimension2_d,
+            max_layers: lim.max_image_array_layers,
             max_anisotropy,
             timestamp_period: lim.timestamp_period,
             sample_shading,

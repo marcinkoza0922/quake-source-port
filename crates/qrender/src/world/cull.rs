@@ -45,7 +45,7 @@ impl World {
                     let first = leaf.first_marksurface as usize;
                     let end = (first + leaf.num_marksurfaces as usize).min(self.marksurfaces.len());
                     let mut m = 0u8;
-                    for &si in &self.marksurfaces[first..end] {
+                    for &si in self.marksurfaces.get(first..end).unwrap_or_default() {
                         if let Some(s) = self.surfaces.get(si as usize)
                             && s.kind == TextureKind::Liquid
                             && let Some(name) = self.texture_names.get(s.texture as usize)

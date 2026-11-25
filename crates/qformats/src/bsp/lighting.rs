@@ -67,6 +67,7 @@ pub fn parse_lit_any(data: &[u8]) -> Result<LitData> {
     let magic = r.arr::<4>()?;
     let v = r.i32()?;
     match (&magic, v) {
+        (b"QLIT", 1) if !(data.len() - 8).is_multiple_of(3) => Err(r.err(format!("lit size {} not multiple of 3", data.len() - 8))),
         (b"QLIT", 1) => Ok(LitData::Rgb8(data[8..].to_vec())),
         // FTEQW / QuakeSpasm-Spiked / ericw-tools HDR E5BGR9 lightmap versions
         (b"QLIT", 0x0001_0001 | 2) | (b"LIT2", 1 | 2) => {
@@ -138,6 +139,17 @@ pub fn parse_deluxemap_lump(data: &[u8], expected_samples: usize) -> Option<Vec<
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn lit_holds_whole_samples() {
+        let lit = |n: usize| [b"QLIT\x01\0\0\0".to_vec(), vec![7; n]].concat();
+        for n in [0, 3, 12] {
+            assert!(parse_lit_any(&lit(n)).is_ok(), "{n}");
+        }
+        for n in [1, 2, 13] {
+            assert!(parse_lit_any(&lit(n)).is_err(), "{n}");
+        }
+    }
 
     #[test]
     fn e5bgr9_roundtrip_and_overbright() {

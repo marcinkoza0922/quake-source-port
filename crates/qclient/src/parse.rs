@@ -70,8 +70,12 @@ impl ClientState {
             match cmd {
                 SVC_NOP => {}
                 SVC_TIME => {
+                    let t = m.float() as f64;
                     self.mtime[1] = self.mtime[0];
-                    self.mtime[0] = m.float() as f64;
+                    // NaN or inf (a damaged demo): the time stands still
+                    if t.is_finite() {
+                        self.mtime[0] = t;
+                    }
                     self.fixangle = false;
                 }
                 SVC_CLIENTDATA => self.parse_clientdata(&mut m),

@@ -164,6 +164,7 @@ impl Renderer {
     /// it's over the size limit.
     pub(super) fn add_texture(&mut self, w: u32, h: u32, mips: &[&[u8]], usage: TexUse, sampling: Sampling) -> Result<u32> {
         let limit = usage.limit(self.max_texture_size, self.dev.limits().max_texture_dimension_2d);
+        let (w, h, mips) = if convert::complete(w, h, mips) { (w, h, mips) } else { convert::EMPTY };
         let fitted = convert::fit(w, h, mips, limit, usage);
         let refs: Vec<&[u8]>;
         let (w, h, mips) = match &fitted {

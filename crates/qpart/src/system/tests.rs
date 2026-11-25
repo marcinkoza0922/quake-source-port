@@ -416,3 +416,28 @@ fn classic_and_weather_fallbacks() {
     assert_eq!(s.particles_of(id(&r, "te_snow")).count(), 10);
 }
 
+
+/// `inwater` and a retinted effect's `assoc` make cycles the loader misses.
+#[test]
+fn trail_cycles_end() {
+    let r = reg("r_part a\n{\ntexture x\nscale 1\ncount 1\ndie 1\ninwater w\n}\nr_part w\n{\ntexture x\nscale 1\ncount 1\ndie 1\nassoc a\n}\n");
+    let mut s = sys();
+    let t = id(&r, "a");
+    for handle in [false, true] {
+        let mut ts = None;
+        s.trail(&r, &Floor, Vec3::new(2000.0, 0.0, 10.0), Vec3::new(2010.0, 0.0, 10.0), t, 0.1, 1, handle.then_some(&mut ts));
+    }
+    let mut r = reg("r_part te_explosion2\n{\ntexture x\nscale 1\ncount 1\ndie 1\nassoc te_explosion2_1_2\n}\n");
+    let t = r.find("te_explosion2_1_2", &mut |_: &str| None).unwrap();
+    let mut s = sys();
+    s.trail(&r, &Floor, Vec3::new(0.0, 0.0, 10.0), Vec3::new(10.0, 0.0, 10.0), t, 0.1, 1, None);
+}
+
+/// Byte 14 is inside a character.
+#[test]
+fn effect_names_need_not_be_ascii() {
+    let mut r = reg("");
+    for n in ["aaaaaaaaaaaaa\u{fffd}b", "te_explosion2", "te_explosion2_", "\u{fffd}", ""] {
+        assert!(r.find(n, &mut |_: &str| None).is_none(), "{n}");
+    }
+}

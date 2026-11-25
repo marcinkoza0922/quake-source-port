@@ -172,7 +172,9 @@ impl Portals {
         for line in text.lines() {
             let n: Vec<f32> = line.split_whitespace().filter_map(|w| w.parse().ok()).collect();
             if let [o, s, ox, oy, oz, nx, ny, nz, ux, uy, uz] = n[..]
-                && (s as usize) < 2
+                && n.iter().all(|v| v.is_finite())
+                && (0.0..2.0).contains(&s)
+                && (0.0..crate::server::MAX_SCOREBOARD as f32).contains(&o)
             {
                 let p = Portal::new(Vec3::new(ox, oy, oz), Vec3::new(nx, ny, nz), Vec3::new(ux, uy, uz));
                 self.set(o as usize, s as usize, Some(p));
@@ -306,6 +308,18 @@ fn overlaps(p: &Portal, others: &[Portal]) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn bad_saved_portals_are_skipped() {
+        let mut p = Portals::default();
+        for l in ["1e30 0", "1e15 0", "2e9 0", "16 0", "-1 0", "NaN 0", "0 2", "0 -1", "0 1e9"] {
+            p.load_text(&format!("{l} 1 2 3 0 0 1 1 0 0\n"));
+        }
+        p.load_text("0 0 NaN 2 3 0 0 1 1 0 0\n0 0 1 2 3 inf 0 1 1 0 0\n");
+        assert!(p.save_text().is_none());
+        p.load_text("15 1 1 2 3 0 0 1 1 0 0\n");
+        assert!(p.save_text().is_some());
+    }
 
     #[test]
     fn save_text_round_trips() {

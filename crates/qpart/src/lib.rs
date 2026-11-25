@@ -205,11 +205,14 @@ impl Registry {
         if depth > 8 {
             return None;
         }
-        if n.len() > 14 && n[..14].eq_ignore_ascii_case("te_explosion2_") {
+        if let Some((pre, codes)) = n.split_at_checked(14)
+            && !codes.is_empty()
+            && pre.eq_ignore_ascii_case("te_explosion2_")
+        {
             let from = self.find_depth(&format!("{cfg}.te_explosion2"), files, depth + 1);
             if let Some(from) = from {
                 let to = self.allocate(&cfg, &n);
-                self.retint(to, from, &n[14..]);
+                self.retint(to, from, codes);
                 return Some(to);
             }
         }

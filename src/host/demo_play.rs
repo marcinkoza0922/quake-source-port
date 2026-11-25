@@ -32,7 +32,7 @@ impl Host {
     /// Running demo time of the frame being shown, once the index is ready.
     pub(super) fn demo_clock(&self) -> Option<f64> {
         let d = self.demo.as_ref()?;
-        d.play.clock(self.cl.time.clamp(self.cl.mtime[1].min(self.cl.mtime[0]), self.cl.mtime[0]))
+        d.play.clock(self.cl.time.max(self.cl.mtime[1].min(self.cl.mtime[0])).min(self.cl.mtime[0]))
     }
 
     /// CL_GetMessage for demos: feed recorded messages until the client

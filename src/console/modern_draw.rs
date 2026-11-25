@@ -331,10 +331,7 @@ impl Console {
             if !item.detail.is_empty() {
                 let max_detail_w = pop_w - 115.0;
                 if max_detail_w > 30.0 {
-                    let mut det = item.detail.as_str();
-                    while det.len() > 4 && c.text_w(det, 5.0) > max_detail_w {
-                        det = &det[..det.len() - 1];
-                    }
+                    let det = clip_chars(&item.detail, |s| c.text_w(s, 5.0) <= max_detail_w);
                     c.text_right(pop_x + pop_w - 6.0, ry + 1.4, det, 5.0, TEXT_DIM);
                 }
             }
@@ -471,5 +468,29 @@ fn draw_cell_row(
                 color: cell.style.effective_fg(),
             });
         }
+    }
+}
+
+/// The longest start of `s` (cut between characters) that fits, or a few bytes
+/// when nothing does. Servers and mods write these texts.
+fn clip_chars(s: &str, fits: impl Fn(&str) -> bool) -> &str {
+    let mut s = s;
+    while s.len() > 4 && !fits(s) {
+        let mut c = s.chars();
+        c.next_back();
+        s = c.as_str();
+    }
+    s
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn clips_between_characters() {
+        let clip = |s: &str, n: usize| super::clip_chars(s, |s| s.chars().count() <= n).to_string();
+        assert_eq!(clip("abcdefgh", 6), "abcdef");
+        assert_eq!(clip(&"Á".repeat(60), 10), "Á".repeat(10));
+        assert_eq!(clip(&"Ż日".repeat(30), 0).chars().count(), 1);
+        assert_eq!(clip("", 0), "");
     }
 }

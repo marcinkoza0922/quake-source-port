@@ -35,6 +35,8 @@ pub struct MusicStream {
     buf: Vec<[f32; 2]>,
     /// Fractional read position into `buf` (input frames).
     pos: f64,
+    /// Frames decoded since the start of the file was last read.
+    decoded: usize,
     pub paused: bool,
     pub finished: bool,
 }
@@ -56,7 +58,7 @@ fn open(bytes: &Arc<[u8]>, ext: &str) -> Option<Opened> {
         .ok()?;
     let format = probed.format;
     let track = format.default_track()?;
-    let rate = track.codec_params.sample_rate?;
+    let rate = track.codec_params.sample_rate.filter(|r| (1000..=768_000).contains(r))?;
     let decoder = symphonia::default::get_codecs()
         .make(&track.codec_params, &DecoderOptions::default())
         .ok()?;
@@ -84,6 +86,7 @@ impl MusicStream {
             out_rate,
             buf: Vec::new(),
             pos: 0.0,
+            decoded: 0,
             paused: false,
             finished: false,
         })
@@ -110,6 +113,7 @@ impl MusicStream {
                 let l = f[0];
                 let r = if ch > 1 { f[1] } else { l };
                 self.buf.push([l, r]);
+                self.decoded += 1;
             }
             return true;
         }
@@ -122,6 +126,7 @@ impl MusicStream {
                 self.decoder = d;
                 self.track_id = t;
                 self.in_rate = r;
+                self.decoded = 0;
                 true
             }
             None => false,
@@ -142,7 +147,10 @@ impl MusicStream {
                 self.buf.drain(..keep);
                 self.pos -= keep as f64;
                 if !self.refill() {
-                    if self.looping && self.rewind() && self.refill() {
+                    // a file with (next to) nothing in it would be reopened
+                    // forever, here on the audio thread
+                    let worth_it = self.decoded > self.in_rate as usize / 100;
+                    if self.looping && worth_it && self.rewind() && self.refill() {
                         continue;
                     }
                     self.finished = true;

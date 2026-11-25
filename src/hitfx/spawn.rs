@@ -37,7 +37,7 @@ pub(crate) fn classify(name: &str) -> Material {
     if crate::impacts::surfaces::wood(&n) {
         return Material::Wood;
     }
-    let base = if n.starts_with('+') && n.len() > 2 { &n[2..] } else { n.as_str() };
+    let base = if n.starts_with('+') { n.get(2..).filter(|b| !b.is_empty()).unwrap_or(&n) } else { n.as_str() };
     let metal_prefix = ["cop", "ecop", "met1", "met2", "met3", "met4", "met5", "met6", "met7", "met8", "met9", "met_", "m5_"]
         .iter()
         .any(|p| base.starts_with(p));
@@ -227,6 +227,15 @@ pub(crate) fn blast(fx: &mut HitFx, (mat, tint): (Material, [u8; 3]), pos: Vec3,
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Texture names are any 16 bytes.
+    #[test]
+    fn texture_names_need_not_be_ascii() {
+        for name in ["+\u{e4}wall", "+", "+0", "+a\u{e4}", "\u{e4}", ""] {
+            classify(name);
+        }
+        assert_eq!(classify("+0metal1"), Material::Metal);
+    }
 
     #[test]
     fn texture_names_pick_materials() {

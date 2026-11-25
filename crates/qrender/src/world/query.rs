@@ -28,6 +28,9 @@ impl World {
     /// +4 if something solid caps the column instead of open air).
     pub fn liquid_surface(&self, p: [f32; 3]) -> Option<(f32, u32)> {
         use qformats::bsp::{CONTENTS_LAVA, CONTENTS_SLIME, CONTENTS_SOLID, CONTENTS_WATER};
+        if !p.iter().all(|c| c.is_finite()) {
+            return None;
+        }
         let c = self.point_contents(p);
         let kind = match c {
             CONTENTS_WATER => 1,
@@ -37,9 +40,11 @@ impl World {
         };
         let at = |z: f32| self.point_contents([p[0], p[1], z]);
         let (mut lo, mut hi) = (p[2], p[2]);
+        let mut steps = 0;
         loop {
             hi += 16.0;
-            if hi - p[2] > 4096.0 {
+            steps += 1;
+            if steps > 4096 / 16 {
                 return Some((hi, kind));
             }
             if at(hi) != c {

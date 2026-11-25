@@ -71,6 +71,9 @@ use shadows::ShadowMaps;
 mod timing;
 #[cfg(qvk)]
 use timing::{GpuTimes, GPU_STAGES};
+#[cfg(all(test, qvk))]
+#[path = "lib/frame_tests.rs"]
+mod frame_tests;
 #[cfg(qvk)]
 #[path = "lib/resources.rs"]
 mod resources;

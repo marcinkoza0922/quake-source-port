@@ -37,7 +37,12 @@ impl Players {
     fn parse(rest: &str) -> Option<Self> {
         let w: Vec<f32> = rest.split_whitespace().filter_map(|v| v.parse().ok()).collect();
         let [slots, local, coop, deathmatch, teamplay] = w[..] else { return None };
-        Some(Players { slots: slots as usize, local: local as usize, coop, deathmatch, teamplay })
+        let max = crate::server::MAX_SCOREBOARD as f32;
+        if !w.iter().all(|v| v.is_finite()) || !(1.0..=max).contains(&slots) {
+            return None;
+        }
+        let slots = slots as usize;
+        Some(Players { slots, local: (local as usize).clamp(1, slots), coop, deathmatch, teamplay })
     }
 }
 
@@ -154,6 +159,16 @@ mod tests {
         assert!(split("QSPADDONS 9 0\n5\n").is_err());
         assert!(split("QSPADDONS 1 3\ntoy portalgun\n").is_err());
         assert!(split("QSPADDONS\n5\n").is_err());
+    }
+
+    #[test]
+    fn bad_players_lines_are_not_used() {
+        for p in ["0 1 0 0 0", "-3 1 0 0 0", "0.5 1 0 0 0", "NaN 1 0 0 0", "inf 1 0 0 0", "17 1 0 0 0", "1e30 1 0 0 0", "2 NaN 0 0 0", "2 1 0 0"] {
+            assert_eq!(Players::parse(p), None, "{p}");
+        }
+        let p = Players::parse("2 9 1 0 0").unwrap();
+        assert_eq!((p.slots, p.local), (2, 2));
+        assert_eq!(Players::parse("4 -1 1 0 0").unwrap().local, 1);
     }
 
     #[test]

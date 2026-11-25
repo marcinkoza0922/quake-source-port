@@ -150,12 +150,7 @@ impl Csqc {
                 return false;
             }
         };
-        self.state = CsqcState {
-            entries,
-            globals,
-            fields,
-            ..Default::default()
-        };
+        self.state = CsqcState { entries, globals, fields, ..self.empty_state() };
         self.vm = Some(vm);
         self.sync_globals(env);
         if let Some(f) = self.state.entries.init {
@@ -170,6 +165,13 @@ impl Csqc {
         true
     }
 
+    /// State without a VM; the registered pictures stay (`CsqcPics`).
+    fn empty_state(&mut self) -> CsqcState {
+        let mut pics = std::mem::take(&mut self.state.pics);
+        pics.new_vm();
+        CsqcState { pics, ..Default::default() }
+    }
+
     /// Calls `CSQC_Shutdown` and tears down the CSQC VM and caches.
     pub fn shutdown(&mut self, env: &mut CsqcEnv<'_>) {
         if let Some(f) = self.state.entries.shutdown
@@ -178,13 +180,13 @@ impl Csqc {
             self.call(f, env);
         }
         self.vm = None;
-        self.state = CsqcState::default();
+        self.state = self.empty_state();
     }
 
     /// Unconditionally drops the CSQC VM (used on disconnect without needing a full env).
     pub fn clear(&mut self) {
         self.vm = None;
-        self.state = CsqcState::default();
+        self.state = self.empty_state();
     }
 
     fn sync_globals(&mut self, env: &CsqcEnv<'_>) {

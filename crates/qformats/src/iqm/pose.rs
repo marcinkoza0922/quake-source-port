@@ -201,6 +201,18 @@ fn resolve_hierarchy(local: &[[f32; 12]], parents: &[i32]) -> Vec<[f32; 12]> {
 mod tests {
     use super::super::*;
 
+    /// Frames without channels need no data in the file.
+    #[test]
+    fn frames_are_bounded() {
+        let mut d = synth_iqm();
+        assert!(Iqm::parse(&d).is_ok());
+        // header words 19 and 20: num_frames, num_framechannels
+        assert_eq!(d[92..100], [2, 0, 0, 0, 1, 0, 0, 0]);
+        d[92..96].copy_from_slice(&u32::MAX.to_le_bytes());
+        d[96..100].fill(0);
+        assert!(Iqm::parse(&d).is_err());
+    }
+
     /// Build a minimal valid 2-bone animated IQM v2 binary for testing.
     fn synth_iqm() -> Vec<u8> {
         let text = b"\0body\0progs/body.tga\0root\0child\0walk\0";
