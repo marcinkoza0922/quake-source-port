@@ -1,12 +1,13 @@
 //! `global.cfg`: settings shared by every game / map pack, stored next to the
 //! per-game user dirs (`<data dir>/quake-source-port/global.cfg`). Only the
 //! cvars listed in `GLOBAL_CVARS` live here; they are not archived into the
-//! per-game `config.cfg`.
+//! per-game `config.cfg`. They choose a program or a folder, so only the user
+//! may change them (`CVAR_USER`), and a mod's config can't.
 
 use super::*;
 
 /// Cvars saved in `global.cfg` instead of the per-game `config.cfg`.
-pub(super) const GLOBAL_CVARS: &[(&str, &str)] = &[("bugreport_dir", "")];
+pub(super) const GLOBAL_CVARS: &[(&str, &str)] = &[("bugreport_dir", ""), ("capture_ffmpeg", "ffmpeg")];
 
 /// `<data dir>/quake-source-port/` (parent of every per-game user dir).
 pub fn global_dir() -> PathBuf {
@@ -20,14 +21,14 @@ fn global_path() -> PathBuf {
 /// Registers the global cvars and applies `global.cfg` (lines `name "value"`).
 pub(super) fn load(cvars: &mut Cvars) {
     for &(n, d) in GLOBAL_CVARS {
-        cvars.register(n, d, 0);
+        cvars.register(n, d, CVAR_USER);
     }
     let Ok(text) = qcore::vfs::read_to_string(&global_path()) else { return };
     for line in text.lines() {
         let line = line.trim();
         let Some((name, rest)) = line.split_once(char::is_whitespace) else { continue };
         if GLOBAL_CVARS.iter().any(|&(n, _)| n.eq_ignore_ascii_case(name)) {
-            cvars.set(name, rest.trim().trim_matches('"'));
+            cvars.set_engine(name, rest.trim().trim_matches('"'));
         }
     }
 }
@@ -41,7 +42,7 @@ impl Host {
         for &(n, d) in GLOBAL_CVARS {
             let v = self.server.core.cvars.by_name(n).map_or(d.to_string(), |c| c.string.clone());
             any |= v != d;
-            s += &format!("{n} \"{v}\"\n");
+            s += &format!("{n} \"{}\"\n", qcore::cvar::config_value(&v));
         }
         if !any && !qcore::vfs::exists(&path) {
             return;
@@ -60,7 +61,7 @@ mod tests {
     fn global_cvar_not_archived() {
         let mut c = Cvars::new();
         load(&mut c);
-        c.set("bugreport_dir", "/x");
+        c.set_engine("bugreport_dir", "/x");
         assert!(c.archive_lines().iter().all(|l| !l.contains("bugreport_dir")));
     }
 }

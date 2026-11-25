@@ -1,7 +1,12 @@
 use super::*;
 
 impl Host {
+    /// The user's own input (commands it queues, such as binds, are `Script`).
     pub(crate) fn handle_event(&mut self, ev: HostEvent) {
+        self.with_origin(Origin::Menu, |h| h.handle_event_inner(ev));
+    }
+
+    fn handle_event_inner(&mut self, ev: HostEvent) {
         match ev {
             HostEvent::Quit => self.quit = true,
             #[cfg(target_os = "android")]
@@ -311,8 +316,7 @@ impl Host {
                 }
             };
             if let Some(line) = self.con.key_modern(key, mods, &clip_get, &clip_set) {
-                self.cbuf.add_text(&line);
-                self.cbuf.add_text("\n");
+                self.run_typed(&line);
             }
             return;
         }
@@ -333,10 +337,16 @@ impl Host {
                 v
             };
             if let Some(line) = self.con.key(key, &complete) {
-                self.cbuf.add_text(&line);
-                self.cbuf.add_text("\n");
+                self.run_typed(&line);
             }
         }
+    }
+
+    /// A line entered at the console: one line, whatever is in it.
+    pub(super) fn run_typed(&mut self, line: &str) {
+        let line = line.split(['\n', '\r']).next().unwrap_or_default();
+        self.cbuf.add_text_from(line, Origin::User);
+        self.cbuf.add_text_from("\n", Origin::User);
     }
 
     pub(super) fn menu_key(&mut self, key: i32) {
@@ -353,6 +363,10 @@ impl Host {
         for a in acts {
             match a {
                 Action::Command(c) => self.cbuf.add_text(&c),
+                Action::Run(words) => {
+                    let words: Vec<&str> = words.iter().map(String::as_str).collect();
+                    qcore::cmd::execute_words(self, &words);
+                }
                 Action::Sound(s) => self.local_sound(s),
                 Action::Close => {}
             }

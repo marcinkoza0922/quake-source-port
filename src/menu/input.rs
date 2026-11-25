@@ -197,7 +197,7 @@ impl Menu {
                     self.pending_user_data_dir = Some((parent, copy));
                     self.screen = Screen::OptionsPage(Page::Gameplay);
                     self.opt_cursor = GAMEPLAY.iter().position(|i| matches!(i, Item::UserDataDir)).unwrap_or(0);
-                    out.push(Action::Command("_apply_user_data_dir\n".into()));
+                    out.push(Action::run(&["_apply_user_data_dir"]));
                 }
             }
             return out;

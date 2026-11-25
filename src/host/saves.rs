@@ -29,6 +29,26 @@ impl Host {
         }
     }
 
+    /// `screenshot [file]`: the user may name any path (tools and headless
+    /// runs do); a server, mod or bind only a new PNG in the user dir.
+    pub(super) fn request_screenshot(&mut self, name: &str) {
+        let name = if name.is_empty() || self.cmd_origin == Origin::User {
+            name.to_string()
+        } else {
+            if !qcore::safe_path::safe_component(name) {
+                return self.print(&qcore::ctr!("Relative pathnames are not allowed.\n"));
+            }
+            let stem = name.strip_suffix(".png").unwrap_or(name);
+            let dir = self.user_dir();
+            let free = (1..10000)
+                .map(|i| dir.join(if i == 1 { format!("{stem}.png") } else { format!("{stem}_{i}.png") }))
+                .find(|p| !qcore::vfs::exists(p));
+            let Some(p) = free else { return };
+            p.to_string_lossy().into_owned()
+        };
+        self.screenshot = Some(name);
+    }
+
     fn write_screenshot(&mut self, name: &str, w: u32, h: u32, px: &[u8]) {
         {
             {
@@ -118,14 +138,17 @@ impl Host {
 
     /// Where a save called `name` is written: `.qsa` for a game with
     /// add-ons (no other port can load it), `.sav` otherwise.
-    pub(super) fn savegame_path(&self, name: &str) -> PathBuf {
-        self.user_dir().join(format!("{}.{}", save_stem(name), crate::autosave::ext(self.server.qsa_saves())))
+    /// None when the name would leave the user dir.
+    pub(super) fn savegame_path(&self, name: &str) -> Option<PathBuf> {
+        let rel = qcore::safe_path::safe_rel(save_stem(name))?;
+        Some(self.user_dir().join(format!("{}.{}", rel.display(), crate::autosave::ext(self.server.qsa_saves()))))
     }
 
     /// The existing save called `name`, in either format.
     /// Falls back to the 2021 re-release's save folder (like ironwail),
     /// taking only a KEX save made for the running game.
     pub(super) fn find_save(&self, name: &str) -> Option<PathBuf> {
+        qcore::safe_path::safe_rel(name)?;
         let dir = self.user_dir();
         let own = match name.rsplit_once('.') {
             Some((_, e)) if e == crate::autosave::SAVE_EXT || e == crate::autosave::ADDON_EXT => qcore::vfs::is_file(&dir.join(name)).then(|| dir.join(name)),
@@ -413,13 +436,15 @@ pub(super) fn register(c: &mut Commands<Host>) {
     c.add("_scansaves", |h, _| h.scan_saves());
     c.add("menu_dirbrowser", |h, _| h.menu.open_dir_browser());
     c.add("_apply_user_data_dir", |h, _| {
-        if let Some((parent, copy)) = h.menu.pending_user_data_dir.take() {
+        if h.user_only("_apply_user_data_dir")
+            && let Some((parent, copy)) = h.menu.pending_user_data_dir.take()
+        {
             h.apply_user_data_dir(parent, copy);
         }
     });
     c.add("_deletesave", |h, a| {
         let name = a.argv(1);
-        if !valid_save_name(name) { return; }
+        if !h.user_only("_deletesave") || !valid_save_name(name) { return; }
         let dir = h.user_dir();
         let _ = crate::autosave::remove_other_exts(&dir, name, None);
         let _ = qcore::vfs::remove_file(&dir.join(format!("{name}.{}", crate::autosave::THUMB_EXT)));
@@ -440,7 +465,10 @@ pub(super) fn register(c: &mut Commands<Host>) {
             return;
         }
         let text = h.save_text();
-        let p = h.savegame_path(a.argv(1));
+        let Some(p) = h.savegame_path(a.argv(1)) else {
+            h.print(&qcore::ctr!("Relative pathnames are not allowed.\n"));
+            return;
+        };
         match qcore::vfs::write(&p, &qcore::text::encode(&text)) {
             Ok(()) => {
                 // the slot is one save: drop a same-named file of the other format
@@ -460,7 +488,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
             return;
         }
         let Some(p) = h.find_save(a.argv(1)) else {
-            h.print(&qcore::ctr!("ERROR: couldn't open {}\n", h.savegame_path(a.argv(1)).display()));
+            h.print(&qcore::ctr!("ERROR: couldn't open {}\n", a.argv(1)));
             return;
         };
         let Ok(bytes) = qcore::vfs::read(&p) else {

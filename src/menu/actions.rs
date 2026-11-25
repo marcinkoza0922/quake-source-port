@@ -127,7 +127,7 @@ impl Menu {
                 }
                 self.screen = Screen::None;
                 out.push(Action::Close);
-                out.push(Action::Command(format!("_export_go {}\n", if run == Run::ExportClip { "clip" } else { "whole" })));
+                out.push(Action::run(&["_export_go", if run == Run::ExportClip { "clip" } else { "whole" }]));
             }
             Run::Start => {
                 let Some(map) = self.host_map(cv) else { return };

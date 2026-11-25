@@ -2,6 +2,7 @@
 //! downloads. The menu reads the shared state every frame.
 
 use std::collections::HashMap;
+use std::ffi::OsString;
 use std::path::{Path, PathBuf};
 use std::process::{Command, Stdio};
 use std::sync::{Arc, Mutex, MutexGuard};
@@ -167,6 +168,21 @@ fn load(cache: &Path, force: bool) -> Result<Vec<Release>, String> {
     }
 }
 
+/// No zip of the archive comes near this (curl stops the download there).
+const MAX_DOWNLOAD: &str = "4294967296";
+
+/// `url` comes from the index: only ever a web address, never an option, a
+/// local file or a glob.
+fn curl_args(url: &str, part: &Path) -> Vec<OsString> {
+    let mut a: Vec<OsString> = ["-fsSL", "--retry", "2", "--connect-timeout", "20", "--globoff", "--max-filesize", MAX_DOWNLOAD]
+        .map(OsString::from)
+        .into();
+    a.extend(["--proto", "=http,https", "--proto-redir", "=http,https", "-o"].map(OsString::from));
+    a.push(part.into());
+    a.extend(["--".into(), url.into()]);
+    a
+}
+
 /// Downloads `url` to `dest` with curl, reporting progress against `size`.
 fn fetch(url: &str, dest: &Path, size: u64, progress: &dyn Fn(f32)) -> Result<(), String> {
     if let Some(p) = dest.parent() {
@@ -174,9 +190,7 @@ fn fetch(url: &str, dest: &Path, size: u64, progress: &dyn Fn(f32)) -> Result<()
     }
     let part = dest.with_extension("part");
     let mut child = Command::new("curl")
-        .args(["-fsSL", "--retry", "2", "--connect-timeout", "20", "-o"])
-        .arg(&part)
-        .arg(url)
+        .args(curl_args(url, &part))
         .stdin(Stdio::null())
         .stdout(Stdio::null())
         .stderr(Stdio::piped())
@@ -202,4 +216,16 @@ fn fetch(url: &str, dest: &Path, size: u64, progress: &dyn Fn(f32)) -> Result<()
         return Err(if err.is_empty() { qcore::t!("download failed").into() } else { err });
     }
     std::fs::rename(&part, dest).map_err(|e| e.to_string())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn curl_takes_the_url_as_a_url() {
+        let a = curl_args("-K/tmp/rc", Path::new("/c/x.part"));
+        assert_eq!(a[a.len() - 4..], ["-o", "/c/x.part", "--", "-K/tmp/rc"].map(OsString::from));
+        assert!(a.windows(2).any(|w| w[0] == "--proto" && w[1] == "=http,https"));
+    }
 }

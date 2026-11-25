@@ -185,7 +185,7 @@ impl Host for Ctx<'_> {
             }
             B::CvarSet => {
                 let (n, v) = (lossy(&str_arg(vm, 0)?), lossy(&str_arg(vm, 1)?));
-                if self.c.cvars.set(&n, &v).is_none() {
+                if self.c.cvars.set_script(&n, &v).is_none() {
                     self.c.print(&format!("Cvar_Set: variable {n} not found\n"));
                 }
             }

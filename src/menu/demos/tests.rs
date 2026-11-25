@@ -132,7 +132,7 @@ fn menu_routes_wheel_typing_and_rename_dialog() {
     }
     assert_eq!(cv.by_name("_demo_rename").unwrap().string, "e1m1_20240101-120000x", "no path separators");
     let out = m.key(K_ENTER, &mut cv, false);
-    assert!(out.iter().any(|a| matches!(a, Action::Command(c) if c == "_demo_rename \"autodemos/20240101-120000_e1m1.dem\" \"e1m1_20240101-120000x\"\n")));
+    assert!(out.iter().any(|a| matches!(a, Action::Run(w) if *w == ["_demo_rename", "autodemos/20240101-120000_e1m1.dem", "e1m1_20240101-120000x"])));
     assert_eq!(m.screen, Screen::Demos);
 }
 

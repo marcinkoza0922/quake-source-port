@@ -103,8 +103,39 @@ impl Host {
         self.con.catalog.cvars = cvars;
     }
 
-    /// Cmd_ExecuteString with server-command forwarding, `!cmd` shell calls, and `quake | bash` pipes.
+    /// Run a line that nobody typed: it never reaches the shell.
     pub fn exec_line(&mut self, line: &str) {
+        self.exec_line_from(line, Origin::Script);
+    }
+
+    /// Cmd_ExecuteString with server-command forwarding and, for the user's own
+    /// lines only, `!cmd` shell calls and `quake | bash` pipes.
+    pub(super) fn exec_line_from(&mut self, line: &str, origin: Origin) {
+        self.with_origin(origin, |h| h.exec_line_inner(line));
+    }
+
+    /// Runs `f` with `origin` in control: commands check `cmd_origin`, and
+    /// `CVAR_USER` cvars only change above `Script`.
+    pub(super) fn with_origin<T>(&mut self, origin: Origin, f: impl FnOnce(&mut Self) -> T) -> T {
+        let outer = std::mem::replace(&mut self.cmd_origin, origin);
+        let trusted = self.server.core.cvars.set_trusted(origin > Origin::Script);
+        let r = f(self);
+        self.server.core.cvars.set_trusted(trusted);
+        self.cmd_origin = outer;
+        r
+    }
+
+    /// Whether the user (console, command line, menu) gave this command;
+    /// says so when it came from a server, mod, config or bind.
+    pub(super) fn user_only(&mut self, cmd: &str) -> bool {
+        let ok = self.cmd_origin > Origin::Script;
+        if !ok {
+            self.print(&format!("{cmd}: only available from the console or the menu\n"));
+        }
+        ok
+    }
+
+    fn exec_line_inner(&mut self, line: &str) {
         let trimmed = line.trim();
         if trimmed.is_empty() {
             return;
@@ -122,9 +153,14 @@ impl Host {
                 } else {
                     rest.to_string()
                 };
-                self.delayed.push((t, cmd));
+                self.delayed.push((t, cmd, self.cmd_origin));
                 return;
             }
+        }
+        // Servers, demos, QuakeC and configs all write to this buffer.
+        if self.cmd_origin != Origin::User {
+            self.exec_quake_single(line);
+            return;
         }
         // One-shot shell escape: `!<bash command>`
         if let Some(sh) = trimmed.strip_prefix('!') {
@@ -197,8 +233,8 @@ impl Host {
             if self.cbuf.take_wait() {
                 return true;
             }
-            let Some(line) = self.cbuf.next_line() else { break };
-            self.exec_line(&line);
+            let Some((line, origin)) = self.cbuf.next_line_from() else { break };
+            self.exec_line_from(&line, origin);
             // `language`/`con_translate` apply to the very next message
             self.sync_language();
             if self.quit {
@@ -241,7 +277,9 @@ impl Host {
             }
         }
         out.push('\n');
-        self.cbuf.insert_text(out.trim_start());
+        // on the web the "command line" comes with the link
+        let origin = if cfg!(target_arch = "wasm32") { Origin::Script } else { Origin::User };
+        self.cbuf.insert_text_from(out.trim_start(), origin);
     }
 
     pub(super) fn key_dest(&self) -> KeyDest {

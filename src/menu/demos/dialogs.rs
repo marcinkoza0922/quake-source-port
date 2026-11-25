@@ -34,7 +34,7 @@ impl crate::menu::Menu {
         }
         self.screen = Screen::Demos;
         out.push(Action::Sound("misc/menu2.wav"));
-        out.push(Action::Command(format!("_demo_rename \"{}\" \"{name}\"\n", self.rename_from)));
+        out.push(Action::run(&["_demo_rename", &self.rename_from, &name]));
     }
 
     /// Lines under the export and rename dialogs' rows.
@@ -72,14 +72,14 @@ impl crate::menu::Menu {
             }
             DemoAction::Keep(n) => {
                 out.push(Action::Sound("misc/menu2.wav"));
-                out.push(Action::Command(format!("_demo_keep_file \"{n}\"\n")));
+                out.push(Action::run(&["_demo_keep_file", &n]));
             }
             DemoAction::Rename { file, name, auto } => {
                 out.push(Action::Sound("misc/menu2.wav"));
                 self.open_rename(file, &name, auto, cv);
             }
             DemoAction::Delete(n, shown) => {
-                self.confirm(vec![qcore::tr!("Delete {}?", shown), qcore::tr!("This can't be undone.")], qcore::t!("Delete"), format!("_demo_delete \"{n}\"\n"), false);
+                self.confirm(vec![qcore::tr!("Delete {}?", shown), qcore::tr!("This can't be undone.")], qcore::t!("Delete"), Action::run(&["_demo_delete", &n]), false);
             }
         }
     }

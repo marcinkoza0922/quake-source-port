@@ -108,3 +108,53 @@ fn connects_downloads_and_plays() {
     assert!((sim[2] - p[2]).abs() < 1.0);
     qc.disconnect();
 }
+
+#[test]
+fn server_names_stay_in_the_download_dir() {
+    for g in ["", "qw", "Fortress", "my.mod"] {
+        assert!(safe_gamedir(g).is_some(), "{g}");
+    }
+    for g in ["..", "../../../.config/autostart", "/etc", "a/b", "a\\b", "C:", "nul", "a\nb"] {
+        assert!(safe_gamedir(g).is_none(), "{g:?}");
+    }
+    for n in ["maps/dm3.bsp", "progs/player.mdl", "sound/weapons/r_exp3.wav", "skins/base.pcx", "progs/Sub/x.MDL"] {
+        assert!(safe_download(n).is_some(), "{n}");
+    }
+    for n in [
+        "/home/u/.bashrc", "/tmp/maps/x.bsp", "maps//x.bsp", "maps/../x.bsp", "..", "autoexec.cfg", "progs.dat", "csprogs.dat", "pak0.pak", "evil.desktop",
+        "maps/x.cfg", "maps/x", "maps/con.bsp", "C:/maps/x.bsp", "maps/a\\b.bsp", "progs/x.dat", "sound/x.exe", "other/x.wav",
+    ] {
+        assert!(safe_download(n).is_none(), "{n}");
+    }
+}
+
+#[test]
+fn a_bad_model_name_is_not_downloaded() {
+    let Some(mut fs) = base_fs() else { return };
+    let map = fs.open("maps/e1m1.bsp").unwrap();
+    let sock = UdpTransport::bind((Ipv4Addr::LOCALHOST, 0).into()).unwrap();
+    let mut sv = qwfake::FakeServer::new(sock, "maps/e1m1.bsp", &map).unwrap();
+    let tmp = std::env::temp_dir().join(format!("qsp-qwbad-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&tmp);
+    let target = tmp.join("outside/maps/x.bsp");
+    sv.download = Some((target.to_string_lossy().into_owned(), b"evil".to_vec()));
+    let addr = SocketAddr::from((Ipv4Addr::LOCALHOST, sv.port()));
+    let mut qc = QwClient::connect(addr, "\\name\\tester".into(), 0.0).unwrap();
+    qc.download_root = Some(tmp.join("root"));
+    let mut cl = ClientState::new();
+    let (mut info, mut now) = (String::new(), 0.0);
+    while now < 10.0 && cl.signon != 4 {
+        now += 1.0 / 72.0;
+        match qc.poll(&mut fs, now) {
+            QwPoll::Messages(m, _) => m.iter().for_each(|m| cl.parse_server_message(m).unwrap()),
+            QwPoll::Failed(e) => panic!("failed: {e}"),
+        }
+        qc.send_cmd(UserCmd::default(), now);
+        sv.frame(&mut info);
+        std::thread::sleep(std::time::Duration::from_micros(300));
+    }
+    let wrote = target.exists();
+    let _ = std::fs::remove_dir_all(&tmp);
+    assert!(!wrote && !sv.log.iter().any(|l| l.starts_with("download")), "{:?}", sv.log);
+    assert_eq!(cl.signon, 4, "the rest of the connection goes on: {:?}", sv.log);
+}

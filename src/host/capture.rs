@@ -345,8 +345,8 @@ impl Host {
         let ext = self.capture_settings().codec.extension();
         let dir = self.videos_dir();
         let name = crate::capture::unique(&dir, &stem, ext).file_stem().map_or(stem.clone(), |s| s.to_string_lossy().into_owned());
-        self.server.core.cvars.set("_export_dest", &dir.to_string_lossy());
-        self.server.core.cvars.set("_export_name", &name);
+        self.server.core.cvars.set_engine("_export_dest", &dir.to_string_lossy());
+        self.server.core.cvars.set_engine("_export_name", &name);
         self.server.core.cvars.set("_export_hasclip", if req.clip.is_some() { "1" } else { "0" });
         let mut info = vec![qcore::tr!("Demo: {}", stem)];
         if let Some((x, y)) = req.clip {
@@ -438,7 +438,11 @@ pub(super) fn register(c: &mut Commands<Host>) {
     });
     c.add("demo_export", |h, a| h.demo_export(a));
     c.add("menu_export", |h, a| h.menu_export(a));
-    c.add("_export_go", |h, a| h.export_go(a.argv(1)));
+    c.add("_export_go", |h, a| {
+        if h.user_only("_export_go") {
+            h.export_go(a.argv(1));
+        }
+    });
     c.add("_export_cancel", |h, _| h.pending_export = None);
 }
 

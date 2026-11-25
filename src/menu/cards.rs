@@ -107,7 +107,7 @@ impl Menu {
     pub(super) fn ask_delete(&mut self, sv: SaveSlot) {
         let title = qcore::tr!("Delete \"{}\"?", clean_title(&sv.info.level, 40));
         let what = format!("{} - {}", kind_label(&sv), sv.info.when(qcore::time::SystemTime::now()));
-        self.confirm(vec![title, what, qcore::tr!("This cannot be undone.")], qcore::t!("Delete"), format!("_deletesave \"{}\"\n", sv.name), false);
+        self.confirm(vec![title, what, qcore::tr!("This cannot be undone.")], qcore::t!("Delete"), Action::run(&["_deletesave", &sv.name]), false);
     }
 
     /// Delete button of the selected card: (x, y, w, h), if it shows.

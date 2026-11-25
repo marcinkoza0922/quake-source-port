@@ -9,7 +9,7 @@ pub(super) const SKILLS: [&str; 4] = [qcore::t!("Easy"), qcore::t!("Normal"), qc
 #[derive(Clone, Debug)]
 pub(super) enum Prompt {
     /// `cmd` runs on yes; `close` also closes the menu.
-    Confirm { lines: Vec<String>, yes_label: &'static str, cmd: String, close: bool, yes: bool },
+    Confirm { lines: Vec<String>, yes_label: &'static str, cmd: Action, close: bool, yes: bool },
     /// `cmd` runs after `skill <cursor>`; `warn` says the running game ends.
     Skill { cmd: String, cursor: usize, warn: bool },
     /// Play / Customize Experience / Disable All before a new game
@@ -30,8 +30,8 @@ const SKILL_Y: f32 = BOX.1 + 36.0;
 const SKILL_H: f32 = 14.0;
 
 impl Menu {
-    pub(super) fn confirm(&mut self, lines: Vec<String>, yes_label: &'static str, cmd: String, close: bool) {
-        self.prompt = Some(Prompt::Confirm { lines, yes_label, cmd, close, yes: false });
+    pub(super) fn confirm(&mut self, lines: Vec<String>, yes_label: &'static str, cmd: impl Into<Action>, close: bool) {
+        self.prompt = Some(Prompt::Confirm { lines, yes_label, cmd: cmd.into(), close, yes: false });
     }
 
     pub(super) fn ask_skill(&mut self, cmd: String, cv: &Cvars) {
@@ -103,7 +103,7 @@ impl Menu {
                 }
                 let pick = shortcut.or(if enter { Some(*cursor) } else { hit });
                 let Some(s) = pick else { return };
-                run = (format!("skill {s}\n{cmd}"), true);
+                run = (Action::Command(format!("skill {s}\n{cmd}")), true);
             }
             Prompt::Launch { .. } | Prompt::Preset { .. } => return,
         }
@@ -114,7 +114,7 @@ impl Menu {
             self.screen = Screen::None;
             out.push(Action::Close);
         }
-        out.push(Action::Command(cmd));
+        out.push(cmd);
     }
 
     pub(super) fn draw_prompt(&self, c: &mut Canvas, cv: &Cvars) {

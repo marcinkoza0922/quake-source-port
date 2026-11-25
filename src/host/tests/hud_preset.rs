@@ -42,11 +42,11 @@ fn presets_rebuild_the_layout_and_editing_makes_it_custom() {
     assert!(h.hud_reserve() > 0.0, "the 3D view ends above the status bar");
     // a change in the editor: custom, and the layout stays (second ENTER confirms the grid position prompt)
     h.exec_line("menu_hudedit");
-    h.exec_line("menu_keys INS DOWNARROW DOWNARROW DOWNARROW DOWNARROW RIGHTARROW DOWNARROW ENTER ENTER");
+    h.exec_line_from("menu_keys INS DOWNARROW DOWNARROW DOWNARROW DOWNARROW RIGHTARROW DOWNARROW ENTER ENTER", Origin::User);
     frames(&mut h);
     assert_eq!(h.cv("hud_preset"), 2.0);
     assert!(kinds(&h).contains(&Kind::Clock) && kinds(&h).contains(&Kind::StatusBar));
-    h.exec_line("menu_keys ESCAPE");
+    h.exec_line_from("menu_keys ESCAPE", Origin::User);
     // back to modern
     h.exec_line("hud_preset 0");
     frames(&mut h);
@@ -143,7 +143,7 @@ fn add_on_elements_join_the_hud_of_customized_games() {
     h.menu.hud_edit.open_combo(cv, combo);
     frames(&mut h);
     assert!(h.cvs("hud_addon_layouts").contains("bullettime+magazine: "), "{}", h.cvs("hud_addon_layouts"));
-    h.exec_line("menu_keys ESCAPE");
+    h.exec_line_from("menu_keys ESCAPE", Origin::User);
     h.menu.open(Screen::None);
     frames(&mut h);
     assert!(h.hud.conflicts.is_empty() && kinds(&h).contains(&Kind::BulletTime));

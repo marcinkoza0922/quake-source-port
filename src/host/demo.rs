@@ -168,7 +168,7 @@ impl Host {
             return;
         }
         let name = a.argv(1);
-        if name.contains("..") {
+        if qcore::safe_path::safe_rel(name).is_none() {
             self.print(&qcore::ctr!("Relative pathnames are not allowed.\n"));
             return;
         }
@@ -333,7 +333,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
     c.add("record", |h, a| h.record(a));
     c.add("record_toggle", |h, _| h.record_toggle());
     c.add("demo_convert", |h, a| {
-        if a.argc() != 2 || a.argv(1).contains("..") {
+        if a.argc() != 2 || qcore::safe_path::safe_rel(a.argv(1)).is_none() {
             h.print("demo_convert <demoname> : rewrite a demo so other source ports can play it\n");
             return;
         }

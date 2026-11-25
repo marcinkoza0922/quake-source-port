@@ -158,7 +158,11 @@ impl Host {
 
 pub(super) fn register(c: &mut Commands<Host>) {
     c.add("quaddicted_list", |h, a| start(h, a, false));
-    c.add("quaddicted_install", |h, a| start(h, a, true));
+    c.add("quaddicted_install", |h, a| {
+        if h.user_only("quaddicted_install") {
+            start(h, a, true);
+        }
+    });
 }
 
 fn start(h: &mut Host, a: &qcore::cmd::Args, install: bool) {

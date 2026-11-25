@@ -28,6 +28,9 @@ pub const CVAR_SERVERINFO: u32 = 4;
 pub const CVAR_USERINFO: u32 = 8;
 /// Read-only from the console.
 pub const CVAR_ROM: u32 = 16;
+/// Names a program or an output file: only the user may change it
+/// ([`Cvars::set_trusted`]), never a server, mod or config.
+pub const CVAR_USER: u32 = 64;
 /// Created by `set`/config before (or without) engine registration.
 pub const CVAR_USERDEFINED: u32 = 32;
 
@@ -68,6 +71,8 @@ pub struct Cvars {
     by_name: HashMap<u64, Vec<CvarId>, BuildHasherDefault<IdentityHasher>>,
     /// Incremented whenever any cvar is registered or changes value.
     generation: u64,
+    /// The user is the one changing cvars now (see [`CVAR_USER`]).
+    trusted: bool,
 }
 
 /// Q_atof: decimal or 0x hex, optional sign, ignores trailing junk.
@@ -122,7 +127,10 @@ impl Cvars {
     pub fn register(&mut self, name: &str, default: &str, flags: u32) -> CvarId {
         if let Some(id) = self.find(name) {
             let v = &mut self.vars[id.0 as usize];
-            v.default = default.to_string();
+            // QC may "register" any name; a protected default stays the engine's
+            if v.flags & CVAR_USER == 0 {
+                v.default = default.to_string();
+            }
             v.flags = (v.flags & !CVAR_USERDEFINED) | flags;
             return id;
         }
@@ -160,8 +168,32 @@ impl Cvars {
         self.by_name(name).map_or(0.0, |c| c.value)
     }
 
+    /// Whether [`CVAR_USER`] cvars may change until the next call; returns
+    /// the previous state.
+    pub fn set_trusted(&mut self, on: bool) -> bool {
+        std::mem::replace(&mut self.trusted, on)
+    }
+
+    /// Cvar_Set by the engine itself, whoever is in control.
+    pub fn set_engine(&mut self, name: &str, value: &str) {
+        let was = self.set_trusted(true);
+        self.set(name, value);
+        self.trusted = was;
+    }
+
+    /// Cvar_Set by QuakeC, which may run inside a command the user typed.
+    pub fn set_script(&mut self, name: &str, value: &str) -> Option<SetResult> {
+        let was = self.set_trusted(false);
+        let r = self.set(name, value);
+        self.trusted = was;
+        r
+    }
+
     pub fn set_id(&mut self, id: CvarId, value: &str) -> SetResult {
         let v = &mut self.vars[id.0 as usize];
+        if v.flags & CVAR_USER != 0 && !self.trusted {
+            return SetResult { id, changed: false, flags: v.flags };
+        }
         let changed = v.string != value;
         if changed {
             v.string = value.to_string();
@@ -185,7 +217,10 @@ impl Cvars {
     pub fn set_or_create(&mut self, name: &str, value: &str, flags: u32) -> SetResult {
         match self.find(name) {
             Some(id) => {
-                self.vars[id.0 as usize].flags |= flags;
+                let v = &mut self.vars[id.0 as usize];
+                if v.flags & CVAR_USER == 0 {
+                    v.flags |= flags;
+                }
                 self.set_id(id, value)
             }
             None => {
@@ -213,9 +248,15 @@ impl Cvars {
         self.vars
             .iter()
             .filter(|c| c.flags & CVAR_ARCHIVE != 0)
-            .map(|c| format!("{} \"{}\"", c.name, c.string))
+            .map(|c| format!("{} \"{}\"", c.name, config_value(&c.string)))
             .collect()
     }
+}
+
+/// A value as it can stand between quotes on one config line: a quote or a
+/// newline in it would add commands to the config.
+pub fn config_value(s: &str) -> String {
+    s.chars().filter(|&c| c != '"' && c != '\n' && c != '\r').collect()
 }
 
 /// Format like Cvar_SetValue (integers without decimals, else trimmed).
@@ -243,9 +284,29 @@ mod tests {
         assert_eq!(c.string(id), "0.5");
         assert!(c.set("nope", "1").is_none());
         assert_eq!(c.archive_lines(), vec!["Foo \"0.5\""]);
+        c.set("foo", "a\"\n!b").unwrap();
+        assert_eq!(c.archive_lines(), vec!["Foo \"a!b\""]);
         assert_eq!(q_atof("0x10"), 16.0);
         assert_eq!(q_atof("-2.5abc"), -2.5);
         assert_eq!(q_atof("x"), 0.0);
         assert_eq!(format_float(2.0), "2");
+    }
+
+    #[test]
+    fn protected_cvars() {
+        let mut c = Cvars::new();
+        c.register("prog", "ffmpeg", CVAR_USER);
+        assert!(!c.set("prog", "evil").unwrap().changed);
+        assert!(!c.set_or_create("prog", "evil", CVAR_ARCHIVE).changed);
+        c.set_value("prog", 1.0);
+        c.register("prog", "evil", CVAR_ARCHIVE);
+        let v = c.by_name("prog").unwrap();
+        assert_eq!((v.string.as_str(), v.default.as_str()), ("ffmpeg", "ffmpeg"));
+        assert!(!c.set_trusted(true));
+        assert!(c.set("prog", "mine").unwrap().changed);
+        assert!(c.set_trusted(false));
+        c.set_engine("prog", "other");
+        assert_eq!(c.by_name("prog").unwrap().string, "other");
+        assert!(!c.set("prog", "evil").unwrap().changed);
     }
 }

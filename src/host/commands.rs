@@ -138,7 +138,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     });
     c.add("quit", |h, _| h.quit = true);
     super::render_commands::register(c);
-    c.add("screenshot", |h, a| h.screenshot = Some(a.argv(1).to_string()));
+    c.add("screenshot", |h, a| h.request_screenshot(a.argv(1)));
     c.add("toggleconsole", |h, _| h.toggle_console());
     c.add("togglemenu", |h, _| {
         if h.menu.active() {
@@ -153,6 +153,9 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     // scripted menu input for headless screenshots: key names as `bind`
     // takes them (`menu_keys DOWNARROW TAB ENTER`), or typed text
     c.add("menu_keys", |h, a| {
+        if !h.user_only("menu_keys") {
+            return;
+        }
         for i in 1..a.argc() {
             let k = qinput::keys::string_to_keynum(a.argv(i));
             if k >= 0 && h.menu.active() {
@@ -162,6 +165,9 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         h.sync_key_dest();
     });
     c.add("menu_text", |h, a| {
+        if !h.user_only("menu_text") {
+            return;
+        }
         for ch in a.args().trim_matches('"').chars() {
             h.menu.text(ch, &mut h.server.core.cvars);
         }
@@ -271,6 +277,9 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     });
     // Debug: a finger tap at normalized screen coordinates (headless menu checks).
     c.add("touch_tap", |h, a| {
+        if !h.user_only("touch_tap") {
+            return;
+        }
         let (x, y) = (a.argv(1).parse().unwrap_or(0.5f32), a.argv(2).parse().unwrap_or(0.5f32));
         let t = qplatform::ticks_ns();
         h.finger_event(9999, qplatform::FingerPhase::Down, x, y, t);
@@ -336,7 +345,11 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         h.menu.open(page.map_or(Screen::Options, Screen::OptionsPage));
     });
     c.add("clear", |h, _| h.con.clear_scrollback());
+    // Types into an open bash session too, so only the user may.
     c.add("con_type", |h, a| {
+        if h.cmd_origin != Origin::User {
+            return;
+        }
         h.sync_console_catalog();
         for ch in a.args().chars() {
             h.con.text(ch);
@@ -344,6 +357,10 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     });
     for sh_name in ["bash", "sh"] {
         c.add(sh_name, |h, a| {
+            if h.cmd_origin != Origin::User {
+                h.print("the shell is only available to commands typed at the console\n");
+                return;
+            }
             h.sync_shell_env();
             if a.argc() == 1 {
                 h.con.start_pty();
@@ -461,6 +478,9 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
     c.add("prof_stop", |h, a| {
         if h.prof.is_none() {
             return h.print("prof_stop: not recording\n");
+        }
+        if a.argc() > 1 && !h.user_only("prof_stop") {
+            return;
         }
         h.write_profile(a.argv(1));
     });
@@ -668,7 +688,7 @@ pub(super) fn register_commands(c: &mut Commands<Host>) {
         }
         let t = h.realtime + a.argv(1).parse::<f64>().unwrap_or(0.0);
         let cmd = a.all()[2..].iter().map(|s| if s.contains(' ') { format!("\"{s}\"") } else { s.clone() }).collect::<Vec<_>>().join(" ");
-        h.delayed.push((t, cmd));
+        h.delayed.push((t, cmd, h.cmd_origin));
     });
     c.add("version", |h, _| {
         h.print(concat!("quake-source-port ", env!("CARGO_PKG_VERSION"), "\n"));

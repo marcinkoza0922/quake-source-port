@@ -36,6 +36,12 @@ impl Host {
             self.con.print(&qcore::ctr!("game: no game dir \"{}\" in {}\n", dir, basedir.display()));
             return;
         };
+        // `game` may come from a server or a mod, and the new process trusts its
+        // command line with the shell (`Origin::User`).
+        if let Some(bad) = [Some(info.dir.as_str()), info.base.dir(), map].into_iter().flatten().find(|v| !plain_launch_value(v)) {
+            self.con.print(&format!("game: bad name \"{bad}\"\n"));
+            return;
+        }
         let mut args = relaunch_args(&self.cmdline);
         args.extend(info.launch_args());
         if let Some(m) = map {
@@ -139,6 +145,12 @@ impl Host {
     }
 }
 
+/// A value that stays one argument of its command on a command line
+/// (`Host::stuff_cmds`): it can't start a `+command` or a switch, or split a line.
+pub(super) fn plain_launch_value(v: &str) -> bool {
+    !v.is_empty() && !v.starts_with(['+', '-']) && !v.contains(|c: char| c.is_control() || matches!(c, ';' | '|' | '"'))
+}
+
 /// The original command line without the mod selection (`-game x`,
 /// `-hipnotic`/`-rogue`/`-quoth`) and without `+command` sequences, which
 /// belong to the first launch.
@@ -212,7 +224,17 @@ fn max_texture_size(limits: [f32; 2]) -> u32 {
 
 #[cfg(test)]
 mod tests {
-    use super::max_texture_size;
+    use super::{max_texture_size, plain_launch_value};
+
+    #[test]
+    fn launch_values_cannot_smuggle_commands() {
+        for v in ["e1m1", "ad_tears", "sub/dir map", "a!b", "jam-2+x"] {
+            assert!(plain_launch_value(v), "{v}");
+        }
+        for v in ["", "+!touch x", "-game", "e1m1;!touch x", "x | touch y", "a\n!b", "a\"; !b"] {
+            assert!(!plain_launch_value(v), "{v}");
+        }
+    }
 
     #[test]
     fn the_smaller_texture_limit_wins() {

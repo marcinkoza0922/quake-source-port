@@ -277,6 +277,7 @@ impl Console {
             return;
         }
         let mut m = complete(&partial);
+        m.retain(|s| complete::insertable(s));
         m.sort_unstable_by_key(|s| s.to_ascii_lowercase());
         m.dedup_by(|a, b| a.eq_ignore_ascii_case(b));
         if m.is_empty() {

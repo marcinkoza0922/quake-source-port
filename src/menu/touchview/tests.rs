@@ -318,7 +318,7 @@ fn dialogs_take_taps_over_classic_screens() {
     assert!(out.iter().any(|a| matches!(a, Action::Command(c) if c == "skill 3\nmap e1m1\n")));
     // a tap outside a confirmation cancels it
     m.open(Screen::Save);
-    m.confirm(vec!["Overwrite?".into()], qcore::t!("Overwrite"), "save s0\n".into(), true);
+    m.confirm(vec!["Overwrite?".into()], qcore::t!("Overwrite"), "save s0\n".to_string(), true);
     let out = tap(&mut m, &mut cv, (1.0, 1.0));
     assert!(m.prompt.is_none() && !out.iter().any(|a| matches!(a, Action::Command(_))));
     // the New Game pop-up: Cancel is its last button

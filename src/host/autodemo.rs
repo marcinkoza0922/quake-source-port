@@ -122,9 +122,12 @@ impl Host {
     /// `_demo_rename <file> <name>` (Demos → Rename): a saved demo gets the
     /// new name; an auto-demo is kept under it. The playing demo follows.
     fn demo_rename(&mut self, file: &str, name: &str) {
+        if !self.user_only("_demo_rename") {
+            return;
+        }
         let name = name.trim();
         let name = name.strip_suffix(".dem").unwrap_or(name).trim();
-        if name.is_empty() || name.contains(['/', '\\', '"']) || name.contains("..") {
+        if !qcore::safe_path::safe_component(name) {
             return self.print(&qcore::ctr!("Not a valid demo name.\n"));
         }
         let Some(src) = self.menu_demo_path(file) else { return };
@@ -229,7 +232,8 @@ impl Host {
 
     /// A user-dir relative demo name from the menu, or None if it escapes.
     fn menu_demo_path(&self, name: &str) -> Option<std::path::PathBuf> {
-        (!name.is_empty() && !name.contains("..")).then(|| self.user_dir().join(name))
+        let rel = qcore::safe_path::safe_rel(name)?;
+        rel.extension().is_some_and(|e| e.eq_ignore_ascii_case("dem")).then(|| self.user_dir().join(rel))
     }
 }
 
@@ -242,7 +246,9 @@ pub(super) fn register(c: &mut Commands<Host>) {
     });
     c.add("_scandemos", |h, _| h.scan_demos());
     c.add("_demo_keep_file", |h, a| {
-        if let Some(p) = h.menu_demo_path(a.argv(1)) {
+        if h.user_only("_demo_keep_file")
+            && let Some(p) = h.menu_demo_path(a.argv(1))
+        {
             let stem = p.file_stem().map_or_else(String::new, |s| s.to_string_lossy().into_owned());
             h.keep_autodemo(&p, &library::kept_name(&stem));
             h.scan_demos();
@@ -250,6 +256,9 @@ pub(super) fn register(c: &mut Commands<Host>) {
     });
     c.add("_demo_rename", |h, a| h.demo_rename(a.argv(1), a.argv(2)));
     c.add("_demo_delete", |h, a| {
+        if !h.user_only("_demo_delete") {
+            return;
+        }
         let Some(p) = h.menu_demo_path(a.argv(1)) else { return };
         // a converted demo and its full version go together
         for ext in ["dem", crate::demo::convert::QSD_EXT] {
@@ -261,7 +270,7 @@ pub(super) fn register(c: &mut Commands<Host>) {
         h.scan_demos();
     });
     c.add("demo_keep", |h, a| {
-        if a.argv(1).contains("..") || a.argv(1).contains('/') {
+        if a.argc() > 1 && !qcore::safe_path::safe_component(a.argv(1)) {
             return h.print(&qcore::ctr!("Relative pathnames are not allowed.\n"));
         }
         h.demo_keep(a.argv(1));
